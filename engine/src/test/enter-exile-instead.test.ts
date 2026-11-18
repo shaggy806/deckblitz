@@ -17,9 +17,11 @@ import type { Game } from "../game.js";
 import {
   A,
   B,
+  activate,
   cast,
   counters,
   lands,
+  nextTurn,
   pickFromZone,
   pickPermanents,
   ref,
@@ -149,5 +151,61 @@ describe("Containment Priest: a nontoken creature that wasn't cast is exiled ins
     pickFromZone(a, priestCard);
     cast(game, toHand(game, "Exhume"));
     expect(zone(game, priestCard)).toBe("battlefield");
+  });
+});
+
+describe("Mistcaller: the same replacement until end of turn, from a resolved ability (611.2c)", () => {
+  const sacrificed = (game: Game): ObjectId => {
+    const mistcaller = spawn(game, "Mistcaller", A);
+    activate(game, mistcaller);
+    expect(zone(game, mistcaller)).toBe("graveyard");
+    return mistcaller;
+  };
+
+  it("a creature card reanimated afterwards is exiled instead", () => {
+    const { game, a } = table();
+    lands(game, "Swamp", 2);
+    sacrificed(game);
+    const bears = toGraveyard(game, "Grizzly Bears", A);
+    pickFromZone(a, bears);
+    cast(game, toHand(game, "Exhume"));
+    expect(zone(game, bears)).toBe("exile");
+  });
+
+  it("reaches every player's creatures, its controller's too", () => {
+    const { game } = table();
+    sacrificed(game);
+    const theirs = spawn(game, "Grizzly Bears", B);
+    const mine = spawn(game, "Grizzly Bears", A);
+    expect(zone(game, theirs)).toBe("exile");
+    expect(zone(game, mine)).toBe("exile");
+  });
+
+  it("a creature cast enters, and tokens enter", () => {
+    const { game } = table();
+    lands(game, "Forest", 2);
+    sacrificed(game);
+    const bears = toHand(game, "Grizzly Bears");
+    cast(game, bears);
+    expect(zone(game, bears)).toBe("battlefield");
+    game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 2 }, []);
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
+  });
+
+  it("doesn't touch what's already on the battlefield", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", A);
+    sacrificed(game);
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+
+  it("ends with the turn", () => {
+    const { game } = table();
+    sacrificed(game);
+    expect(game.state.activeReplacements.some((r) => r.replacement.event === "others-enter-battlefield")).toBe(true);
+    nextTurn(game);
+    expect(game.state.activeReplacements.some((r) => r.replacement.event === "others-enter-battlefield")).toBe(false);
+    const bears = spawn(game, "Grizzly Bears", A);
+    expect(zone(game, bears)).toBe("battlefield");
   });
 });

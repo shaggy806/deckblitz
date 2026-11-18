@@ -7728,6 +7728,16 @@ export function parseSentence(sentence, ctx) {
       replacement: { event: "others-enter-battlefield", filter: { type: "creature", controlledBy: "you" }, counters: { kind: "+1/+1", amount: 1 } },
     };
   }
+  // "Until end of turn, if a nontoken creature would enter and it wasn't
+  // cast, exile it instead" (Mistcaller): Containment Priest's
+  // `exileInstead` for the turn (rule 611.2c).
+  if (/^until end of turn, if a nontoken creature would enter and it wasn't cast, exile it instead\.$/i.test(s)) {
+    return {
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: { event: "others-enter-battlefield", filter: { type: "creature", token: false, cast: false }, exileInstead: true },
+    };
+  }
 
   // Mana.
   if ((m = /^add ((?:\{[WUBRGC]\})+)\.$/i.exec(s))) {
@@ -23911,6 +23921,14 @@ function parseStatic(line, text) {
   // and what they control.
   if (line === "If a source would deal damage to the chosen player or a permanent they control, it deals double that damage instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", to: "chosen-player-side", instead: { modify: { times: 2 } } }, text };
+  }
+  // Containment Priest (rule 614.6, judged as it would exist — 614.12).
+  if (line === "If a nontoken creature would enter and it wasn't cast, exile it instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "others-enter-battlefield", filter: { type: "creature", token: false, cast: false }, exileInstead: true },
+      text,
+    };
   }
   const creaturesEnchanted = { affects: { scope: "filter", filter: { type: "creature", controlledBy: "enchanted-player" } } };
   if ((m = /^Creatures enchanted player controls get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {

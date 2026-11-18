@@ -70010,11 +70010,16 @@ controlledBy,
    * what the effect putting it there says it is, its mana cost not counted
    * toward a devotion — with the entry its move would record (`cast` only for
    * a spell that was cast resolving). Nothing is changed by the look.
+   *
+   * A resolved one counts too (a `replacement-effect`, rule 611.2c —
+   * Mistcaller's "until end of turn, if a nontoken creature would enter and
+   * it wasn't cast, exile it instead"): its filter read from its controller's
+   * side, its source named though it has left the battlefield.
    */
   private enterExilers(id: ObjectId, under: PlayerId, enter: EnterOptions = {}): ObjectId[] {
     const object = this.state.objects[id];
     if (object === undefined || object.zone === "battlefield") return [];
-    const candidates: { readonly source: ObjectId; readonly filter: CardFilter }[] = [];
+    const candidates: { readonly source: ObjectId; readonly filter: CardFilter; readonly you: PlayerId }[] = [];
     for (const sourceId of this.state.zones.shared.battlefield) {
       if (sourceId === id || this.enterBatch?.has(sourceId) === true) continue;
       const source = this.state.objects[sourceId];
@@ -70023,8 +70028,14 @@ controlledBy,
       for (const ability of this.staticsOfSource(source)) {
         const r = ability.replacement;
         if (r?.event !== "others-enter-battlefield" || r.exileInstead !== true || !this.staticActive(source, ability)) continue;
-        candidates.push({ source: sourceId, filter: r.filter });
+        candidates.push({ source: sourceId, filter: r.filter, you: source.controller });
       }
+    }
+    for (const active of this.state.activeReplacements) {
+      const r = active.replacement;
+      if (r.event !== "others-enter-battlefield" || r.exileInstead !== true) continue;
+      if (this.state.players[active.owner]?.hasLost === true || !this.activeReplacementStands(active)) continue;
+      candidates.push({ source: active.source, filter: r.filter, you: active.owner });
     }
     if (candidates.length === 0) return [];
     const resolving = object.zone === "stack" && enter.notResolving !== true;
@@ -70076,7 +70087,7 @@ controlledBy,
         candidates
           .filter((c) =>
             matchesFilter(this.state, this.registry, id, c.filter, {
-              you: this.state.objects[c.source].controller,
+              you: c.you,
               source: c.source,
             }),
           )

@@ -7878,7 +7878,11 @@ clause (section 9):
   devotion isn't a creature, a March of the Machines artifact is), `cast`
   true only for a cast spell resolving. Where the entering permanent has "as
   this enters" actions (Sin's counters, a devour), its controller orders the
-  two (a `replacement-order`). `enter-exile-instead.test.ts`.
+  two (a `replacement-order`). A resolved one works the same way (rule
+  611.2c): Mistcaller's "until end of turn, if a nontoken creature would enter
+  and it wasn't cast, exile it instead" is a `replacement-effect` with
+  `duration: "end-of-turn"` and that replacement, its filter read from the
+  effect's controller's side. `enter-exile-instead.test.ts`.
   Leave "other" out of the filter: rule 614.12 already keeps a permanent's
   replacement off itself, and off anything entering at the same time as it
   (a token batch, a mass reanimation, a flicker's return, a tutor's finds are

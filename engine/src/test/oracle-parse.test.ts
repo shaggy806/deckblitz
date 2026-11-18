@@ -23530,3 +23530,24 @@ describe("an opponent's creature type chosen as it enters (Callous Oppressor)", 
     expect(oppressor.chooseOnEnterBy).toBe("an-opponent");
   });
 });
+
+describe("a nontoken creature that wasn't cast exiled instead (effect:temporary-enter-exile-replacement)", () => {
+  const exiles = { event: "others-enter-battlefield", filter: { type: "creature", token: false, cast: false }, exileInstead: true };
+  const face = (oracle: string, type: string) =>
+    parseFace({ name: "Test Card", type_line: type, oracle_text: oracle, mana_cost: "{U}", colors: ["U"], cmc: 1 } as never) as unknown as {
+      complete: boolean;
+      static: readonly unknown[];
+      activated: readonly { effect: unknown }[];
+    };
+  it("reads Containment Priest's static and Mistcaller's until end of turn", () => {
+    const priest = face("If a nontoken creature would enter and it wasn't cast, exile it instead.", "Creature — Human Cleric");
+    expect(priest.complete).toBe(true);
+    expect(priest.static[0]).toMatchObject({ affects: { scope: "self" }, replacement: exiles });
+    const mistcaller = face(
+      "Sacrifice this creature: Until end of turn, if a nontoken creature would enter and it wasn't cast, exile it instead.",
+      "Creature — Merfolk Wizard",
+    );
+    expect(mistcaller.complete).toBe(true);
+    expect(mistcaller.activated[0].effect).toEqual({ kind: "replacement-effect", duration: "end-of-turn", replacement: exiles });
+  });
+});

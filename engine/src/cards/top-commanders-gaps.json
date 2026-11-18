@@ -3052,7 +3052,8 @@
   "amount:cards-exiled-with-delve",
   "cost:exile-from-graveyard-beside-sacrifice-several",
   "static:stations-using-toughness",
-  "amount:damage-dealt-capped"
+  "amount:damage-dealt-capped",
+  "effect:temporary-enter-exile-replacement"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
