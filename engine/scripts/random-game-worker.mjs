@@ -16,8 +16,12 @@ import { Game, RandomController, createRng, setComputedCacheCheck, setFreezeShar
 // every mutation inside a cache region invalidates (see characteristics.ts).
 if (process.env.MTG_CACHE_CHECK) setComputedCacheCheck(true);
 // MTG_FREEZE_SNAPSHOTS=1 freezes the snapshots a copy of the state shares
-// (`cloneGameState`), so a write into one throws.
-if (process.env.MTG_FREEZE_SNAPSHOTS) setFreezeSharedSnapshots(true);
+// (`cloneGameState`), so a write into one throws. The freeze happens only as
+// something copies the state, and random players never do — so with the
+// switch on, the loop below copies it every few ticks itself (until the
+// 2026-11-18 review the switch froze nothing here).
+const freezeSnapshots = Boolean(process.env.MTG_FREEZE_SNAPSHOTS);
+if (freezeSnapshots) setFreezeSharedSnapshots(true);
 // MTG_ORDER_TRIGGERS=1 has every seat order its own simultaneous triggers, so
 // the `order-triggers` decision is fuzzed too (off, the engine orders them and
 // nobody is asked). Changes every seed's trajectory, so it's opt-in.
@@ -67,7 +71,11 @@ parentPort.on("message", ({ seed, seats, maxTurns = null }) => {
     // to find out — batch 174 waited ten minutes on one that way. It only
     // reads the state, so the seed plays exactly as before.
     let beatAt = startedAt;
+    let ticks = 0;
     game.advanceUntil((state) => {
+      // A copy shares, and so freezes, the live game's snapshots; it draws
+      // nothing from the game's stream, so the seed plays as before.
+      if (freezeSnapshots && (ticks += 1) % 25 === 0) game.snapshot();
       const now = Date.now();
       if (now - beatAt >= 1000) {
         beatAt = now;

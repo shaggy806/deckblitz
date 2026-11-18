@@ -7798,7 +7798,9 @@ export function createPlayerState(id: PlayerId, rules: GameRules): PlayerState {
  * points at the same one can't see it change. On a turn-54 four-player board
  * they were 18% of everything copied (2026-10-14).
  * `setFreezeSharedSnapshots(true)` freezes each one it shares, so that a
- * write into one throws — the fuzzer's check that the rule holds.
+ * write into one throws — the fuzzer's check that the rule holds, for which
+ * its worker copies the state as it plays (`MTG_FREEZE_SNAPSHOTS=1`; random
+ * players make no copy of their own, so nothing was frozen before it did).
  */
 export function cloneGameState(state: GameState): GameState {
   return clonePlainTree(state) as GameState;

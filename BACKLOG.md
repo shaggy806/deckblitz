@@ -62,7 +62,12 @@ section keeps only what to do next.
   Enchantment Alteration, Lumbering Battlement, Oracle en-Vec, Vortex Elemental, and B335's Cragganwick
   Cremator, Lich and Widespread Panic; Swindler's Scheme needs more than Gandalf's key, and Mana Web and
   Search the City need re-keying first (`docs/card-blockers.md`, batches 333-335). Tallowisp, Rootwater
-  Shaman and Grimoire Thief were re-keyed in `B335.json`. The starter precons have no stand-ins left (Explosion of Riches landed in B334).
+  Shaman and Grimoire Thief were re-keyed in `B335.json`. **Ten more are in the queue since 2026-11-18**, each
+  recorded as waiting only on a key built on or before its triage day (too coarse for the card, or a
+  same-day build), which nothing would ever have freed: Blaster, Combat DJ; Canker Abomination; Exchange of
+  Words; Flaming Gambit; Grimoire Thief (its B335 key was already built); Lymph Sliver; Nova Pentacle;
+  Spelljack; Thranduil's Decree; Touch of Moonglove (its newest record is really B257's — `B154.json` is
+  dated by the merge it arrived in). Re-read each and author it or give it a narrower key. The starter precons have no stand-ins left (Explosion of Riches landed in B334).
   How the keys were worked down to here (the lanes runs, B310-B330, the freed-card batches)
   is in `COMPLETED.md`.
 - **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander

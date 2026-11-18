@@ -455,9 +455,15 @@ function main() {
     for (const r of newest.values()) {
       const keys = r.needs.map((raw) => vocab.canonical(raw) ?? raw).filter((k) => !vocab.isMeta(k));
       const built = keys.filter((k) => vocab.builtSince(k, r.date));
-      if (built.length === 0) continue;
       const open = keys.filter((k) => !vocab.isBuilt(k));
-      byCard.set(r.name, { ...r, built, open });
+      // Every need built on or before the day the card was triaged: a key too
+      // coarse for it, a same-day build, or a record's date read wrong.
+      // Nothing will ever be built to free such a card, so it is ready to
+      // re-read now. Ten sat in no queue until the 2026-11-18 review; only
+      // `--audit` named them.
+      const never = built.length === 0 && open.length === 0 && keys.length > 0;
+      if (built.length === 0 && !never) continue;
+      byCard.set(r.name, { ...r, built: never ? keys : built, open });
     }
     const all = [...byCard.values()].sort((a, b) => a.open.length - b.open.length || a.name.localeCompare(b.name));
     const ready = all.filter((r) => r.open.length === 0);
