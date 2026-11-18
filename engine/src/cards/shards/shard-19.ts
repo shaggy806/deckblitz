@@ -629,6 +629,7 @@ import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
 import _poolMirrorBox from "../pool/mirror-box.js";
+import _poolMirrorOfFate from "../pool/mirror-of-fate.js";
 import _poolMissionBriefing from "../pool/mission-briefing.js";
 import _poolMitoticManipulation from "../pool/mitotic-manipulation.js";
 import _poolMnemonicBetrayal from "../pool/mnemonic-betrayal.js";
@@ -1730,6 +1731,7 @@ const shard: CardShard = {
     _poolMiresGrasp,
     _poolMirozel,
     _poolMirrorBox,
+    _poolMirrorOfFate,
     _poolMissionBriefing,
     _poolMitoticManipulation,
     _poolMnemonicBetrayal,

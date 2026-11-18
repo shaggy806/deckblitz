@@ -17827,6 +17827,7 @@ import _poolMirrorMadPhantasm from "./pool/mirror-mad-phantasm.js";
 import _poolMirrorMarch from "./pool/mirror-march.js";
 import _poolMirrorMatch from "./pool/mirror-match.js";
 import _poolMirrorMockery from "./pool/mirror-mockery.js";
+import _poolMirrorOfFate from "./pool/mirror-of-fate.js";
 import _poolMirrorOfGaladriel from "./pool/mirror-of-galadriel.js";
 import _poolMirrorOfLifeTrapping from "./pool/mirror-of-life-trapping.js";
 import _poolMirrorOfTheForebears from "./pool/mirror-of-the-forebears.js";
@@ -24338,6 +24339,7 @@ import _poolSekkiSeasonsGuide from "./pool/sekki-seasons-guide.js";
 import _poolSekkuarDeathkeeper from "./pool/sekkuar-deathkeeper.js";
 import _poolSelaTalShiarParadox from "./pool/sela-tal-shiar-paradox.js";
 import _poolSelectForInspection from "./pool/select-for-inspection.js";
+import _poolSelectiveAdaptation from "./pool/selective-adaptation.js";
 import _poolSelectiveMemory from "./pool/selective-memory.js";
 import _poolSelectiveObliteration from "./pool/selective-obliteration.js";
 import _poolSeleniaDarkAngel from "./pool/selenia-dark-angel.js";
@@ -51483,6 +51485,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMirrorMarch,
   _poolMirrorMatch,
   _poolMirrorMockery,
+  _poolMirrorOfFate,
   _poolMirrorOfGaladriel,
   _poolMirrorOfLifeTrapping,
   _poolMirrorOfTheForebears,
@@ -57994,6 +57997,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSekkuarDeathkeeper,
   _poolSelaTalShiarParadox,
   _poolSelectForInspection,
+  _poolSelectiveAdaptation,
   _poolSelectiveMemory,
   _poolSelectiveObliteration,
   _poolSeleniaDarkAngel,
@@ -85152,6 +85156,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mirror-march": _poolMirrorMarch,
   "pool/mirror-match": _poolMirrorMatch,
   "pool/mirror-mockery": _poolMirrorMockery,
+  "pool/mirror-of-fate": _poolMirrorOfFate,
   "pool/mirror-of-galadriel": _poolMirrorOfGaladriel,
   "pool/mirror-of-life-trapping": _poolMirrorOfLifeTrapping,
   "pool/mirror-of-the-forebears": _poolMirrorOfTheForebears,
@@ -91663,6 +91668,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sekkuar-deathkeeper": _poolSekkuarDeathkeeper,
   "pool/sela-tal-shiar-paradox": _poolSelaTalShiarParadox,
   "pool/select-for-inspection": _poolSelectForInspection,
+  "pool/selective-adaptation": _poolSelectiveAdaptation,
   "pool/selective-memory": _poolSelectiveMemory,
   "pool/selective-obliteration": _poolSelectiveObliteration,
   "pool/selenia-dark-angel": _poolSeleniaDarkAngel,

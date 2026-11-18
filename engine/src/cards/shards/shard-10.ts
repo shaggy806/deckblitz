@@ -779,6 +779,7 @@ import _poolSeeker from "../pool/seeker.js";
 import _poolSeismicStrike from "../pool/seismic-strike.js";
 import _poolSeizeTheSpotlight from "../pool/seize-the-spotlight.js";
 import _poolSejiriSteppe from "../pool/sejiri-steppe.js";
+import _poolSelectiveAdaptation from "../pool/selective-adaptation.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolSerraAvenger from "../pool/serra-avenger.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
@@ -1835,6 +1836,7 @@ const shard: CardShard = {
     _poolSeismicStrike,
     _poolSeizeTheSpotlight,
     _poolSejiriSteppe,
+    _poolSelectiveAdaptation,
     _poolSepharaSkysBlade,
     _poolSerraAvenger,
     _poolServantOfNefarox,
