@@ -130,6 +130,7 @@ import _poolBranchloftPathway from "../pool/branchloft-pathway.js";
 import _poolBrightfieldMustang from "../pool/brightfield-mustang.js";
 import _poolBristlebaneOutrider from "../pool/bristlebane-outrider.js";
 import _poolBrokenWings from "../pool/broken-wings.js";
+import _poolBronzeCudgels from "../pool/bronze-cudgels.js";
 import _poolBuiltToLast from "../pool/built-to-last.js";
 import _poolBywayCourier from "../pool/byway-courier.js";
 import _poolCabalEvangel from "../pool/cabal-evangel.js";
@@ -1213,6 +1214,7 @@ const shard: CardShard = {
     _poolBrightfieldMustang,
     _poolBristlebaneOutrider,
     _poolBrokenWings,
+    _poolBronzeCudgels,
     _poolBuiltToLast,
     _poolBywayCourier,
     _poolCabalEvangel,

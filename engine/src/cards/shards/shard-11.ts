@@ -362,6 +362,7 @@ import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
 import _poolGiltLeafSeer from "../pool/gilt-leaf-seer.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
+import _poolGimliMournfulAvenger from "../pool/gimli-mournful-avenger.js";
 import _poolGlacialGrasp from "../pool/glacial-grasp.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGlaringSpotlight from "../pool/glaring-spotlight.js";
@@ -1419,6 +1420,7 @@ const shard: CardShard = {
     _poolGildedGoose,
     _poolGiltLeafSeer,
     _poolGimliCounterOfKills,
+    _poolGimliMournfulAvenger,
     _poolGlacialGrasp,
     _poolGlacialPlating,
     _poolGlaringSpotlight,

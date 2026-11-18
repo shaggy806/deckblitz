@@ -3578,6 +3578,7 @@ import _poolBrokersVeteran from "./pool/brokers-veteran.js";
 import _poolBrokkosApexOfForever from "./pool/brokkos-apex-of-forever.js";
 import _poolBrontotherium from "./pool/brontotherium.js";
 import _poolBronzeBombshell from "./pool/bronze-bombshell.js";
+import _poolBronzeCudgels from "./pool/bronze-cudgels.js";
 import _poolBronzeGuardian from "./pool/bronze-guardian.js";
 import _poolBronzeHorse from "./pool/bronze-horse.js";
 import _poolBronzeSable from "./pool/bronze-sable.js";
@@ -7099,6 +7100,7 @@ import _poolDisarm from "./pool/disarm.js";
 import _poolDisasterRadius from "./pool/disaster-radius.js";
 import _poolDiscerningFinancier from "./pool/discerning-financier.js";
 import _poolDiscerningPeddler from "./pool/discerning-peddler.js";
+import _poolDiscerningTaste from "./pool/discerning-taste.js";
 import _poolDiscipleOfBolas from "./pool/disciple-of-bolas.js";
 import _poolDiscipleOfDeceit from "./pool/disciple-of-deceit.js";
 import _poolDiscipleOfFreyalise from "./pool/disciple-of-freyalise.js";
@@ -11147,6 +11149,7 @@ import _poolGiltLeafsEmbrace from "./pool/gilt-leafs-embrace.js";
 import _poolGiltgroveStalker from "./pool/giltgrove-stalker.js";
 import _poolGiltspireAvenger from "./pool/giltspire-avenger.js";
 import _poolGimliCounterOfKills from "./pool/gimli-counter-of-kills.js";
+import _poolGimliMournfulAvenger from "./pool/gimli-mournful-avenger.js";
 import _poolGimliOfTheGlitteringCaves from "./pool/gimli-of-the-glittering-caves.js";
 import _poolGimlisAxe from "./pool/gimlis-axe.js";
 import _poolGimlisFury from "./pool/gimlis-fury.js";
@@ -11679,6 +11682,7 @@ import _poolGolgariSignet from "./pool/golgari-signet.js";
 import _poolGolgariThug from "./pool/golgari-thug.js";
 import _poolGoliathBeetle from "./pool/goliath-beetle.js";
 import _poolGoliathDaydreamer from "./pool/goliath-daydreamer.js";
+import _poolGoliathHatchery from "./pool/goliath-hatchery.js";
 import _poolGoliathMassManipulator from "./pool/goliath-mass-manipulator.js";
 import _poolGoliathPaladin from "./pool/goliath-paladin.js";
 import _poolGoliathSphinx from "./pool/goliath-sphinx.js";
@@ -18454,6 +18458,7 @@ import _poolMyrSire from "./pool/myr-sire.js";
 import _poolMyrSuperion from "./pool/myr-superion.js";
 import _poolMyrTurbine from "./pool/myr-turbine.js";
 import _poolMyrWelder from "./pool/myr-welder.js";
+import _poolMyraTheMagnificent from "./pool/myra-the-magnificent.js";
 import _poolMyrelShieldOfArgive from "./pool/myrel-shield-of-argive.js";
 import _poolMyriadConstruct from "./pool/myriad-construct.js";
 import _poolMyriadLandscape from "./pool/myriad-landscape.js";
@@ -32125,6 +32130,7 @@ import _poolWipeClean from "./pool/wipe-clean.js";
 import _poolWireSurgeons from "./pool/wire-surgeons.js";
 import _poolWirecat from "./pool/wirecat.js";
 import _poolWireflyHive from "./pool/wirefly-hive.js";
+import _poolWiretapping from "./pool/wiretapping.js";
 import _poolWirewoodChanneler from "./pool/wirewood-channeler.js";
 import _poolWirewoodElf from "./pool/wirewood-elf.js";
 import _poolWirewoodGuardian from "./pool/wirewood-guardian.js";
@@ -37151,6 +37157,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrokkosApexOfForever,
   _poolBrontotherium,
   _poolBronzeBombshell,
+  _poolBronzeCudgels,
   _poolBronzeGuardian,
   _poolBronzeHorse,
   _poolBronzeSable,
@@ -40672,6 +40679,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDisasterRadius,
   _poolDiscerningFinancier,
   _poolDiscerningPeddler,
+  _poolDiscerningTaste,
   _poolDiscipleOfBolas,
   _poolDiscipleOfDeceit,
   _poolDiscipleOfFreyalise,
@@ -44720,6 +44728,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGiltgroveStalker,
   _poolGiltspireAvenger,
   _poolGimliCounterOfKills,
+  _poolGimliMournfulAvenger,
   _poolGimliOfTheGlitteringCaves,
   _poolGimlisAxe,
   _poolGimlisFury,
@@ -45252,6 +45261,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGolgariThug,
   _poolGoliathBeetle,
   _poolGoliathDaydreamer,
+  _poolGoliathHatchery,
   _poolGoliathMassManipulator,
   _poolGoliathPaladin,
   _poolGoliathSphinx,
@@ -52027,6 +52037,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMyrSuperion,
   _poolMyrTurbine,
   _poolMyrWelder,
+  _poolMyraTheMagnificent,
   _poolMyrelShieldOfArgive,
   _poolMyriadConstruct,
   _poolMyriadLandscape,
@@ -65698,6 +65709,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWireSurgeons,
   _poolWirecat,
   _poolWireflyHive,
+  _poolWiretapping,
   _poolWirewoodChanneler,
   _poolWirewoodElf,
   _poolWirewoodGuardian,
@@ -70737,6 +70749,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brokkos-apex-of-forever": _poolBrokkosApexOfForever,
   "pool/brontotherium": _poolBrontotherium,
   "pool/bronze-bombshell": _poolBronzeBombshell,
+  "pool/bronze-cudgels": _poolBronzeCudgels,
   "pool/bronze-guardian": _poolBronzeGuardian,
   "pool/bronze-horse": _poolBronzeHorse,
   "pool/bronze-sable": _poolBronzeSable,
@@ -74258,6 +74271,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/disaster-radius": _poolDisasterRadius,
   "pool/discerning-financier": _poolDiscerningFinancier,
   "pool/discerning-peddler": _poolDiscerningPeddler,
+  "pool/discerning-taste": _poolDiscerningTaste,
   "pool/disciple-of-bolas": _poolDiscipleOfBolas,
   "pool/disciple-of-deceit": _poolDiscipleOfDeceit,
   "pool/disciple-of-freyalise": _poolDiscipleOfFreyalise,
@@ -78306,6 +78320,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/giltgrove-stalker": _poolGiltgroveStalker,
   "pool/giltspire-avenger": _poolGiltspireAvenger,
   "pool/gimli-counter-of-kills": _poolGimliCounterOfKills,
+  "pool/gimli-mournful-avenger": _poolGimliMournfulAvenger,
   "pool/gimli-of-the-glittering-caves": _poolGimliOfTheGlitteringCaves,
   "pool/gimlis-axe": _poolGimlisAxe,
   "pool/gimlis-fury": _poolGimlisFury,
@@ -78838,6 +78853,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/golgari-thug": _poolGolgariThug,
   "pool/goliath-beetle": _poolGoliathBeetle,
   "pool/goliath-daydreamer": _poolGoliathDaydreamer,
+  "pool/goliath-hatchery": _poolGoliathHatchery,
   "pool/goliath-mass-manipulator": _poolGoliathMassManipulator,
   "pool/goliath-paladin": _poolGoliathPaladin,
   "pool/goliath-sphinx": _poolGoliathSphinx,
@@ -85613,6 +85629,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/myr-superion": _poolMyrSuperion,
   "pool/myr-turbine": _poolMyrTurbine,
   "pool/myr-welder": _poolMyrWelder,
+  "pool/myra-the-magnificent": _poolMyraTheMagnificent,
   "pool/myrel-shield-of-argive": _poolMyrelShieldOfArgive,
   "pool/myriad-construct": _poolMyriadConstruct,
   "pool/myriad-landscape": _poolMyriadLandscape,
@@ -99284,6 +99301,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wire-surgeons": _poolWireSurgeons,
   "pool/wirecat": _poolWirecat,
   "pool/wirefly-hive": _poolWireflyHive,
+  "pool/wiretapping": _poolWiretapping,
   "pool/wirewood-channeler": _poolWirewoodChanneler,
   "pool/wirewood-elf": _poolWirewoodElf,
   "pool/wirewood-guardian": _poolWirewoodGuardian,

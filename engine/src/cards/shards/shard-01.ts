@@ -994,6 +994,7 @@ import _poolWildwoodMentor from "../pool/wildwood-mentor.js";
 import _poolWillForgedGolem from "../pool/will-forged-golem.js";
 import _poolWillOfTheAbzan from "../pool/will-of-the-abzan.js";
 import _poolWinterOrb from "../pool/winter-orb.js";
+import _poolWiretapping from "../pool/wiretapping.js";
 import _poolWispmare from "../pool/wispmare.js";
 import _poolWolfSkullShaman from "../pool/wolf-skull-shaman.js";
 import _poolWolfStrike from "../pool/wolf-strike.js";
@@ -2023,6 +2024,7 @@ const shard: CardShard = {
     _poolWillForgedGolem,
     _poolWillOfTheAbzan,
     _poolWinterOrb,
+    _poolWiretapping,
     _poolWispmare,
     _poolWolfSkullShaman,
     _poolWolfStrike,

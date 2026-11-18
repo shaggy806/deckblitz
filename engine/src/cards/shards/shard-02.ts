@@ -225,6 +225,7 @@ import _poolDiluvianPrimordial from "../pool/diluvian-primordial.js";
 import _poolDimirStrandcatcher from "../pool/dimir-strandcatcher.js";
 import _poolDireFleetHoarder from "../pool/dire-fleet-hoarder.js";
 import _poolDireTactics from "../pool/dire-tactics.js";
+import _poolDiscerningTaste from "../pool/discerning-taste.js";
 import _poolDiscordantPiper from "../pool/discordant-piper.js";
 import _poolDisdainfulStroke from "../pool/disdainful-stroke.js";
 import _poolDiseaseCarriers from "../pool/disease-carriers.js";
@@ -1280,6 +1281,7 @@ const shard: CardShard = {
     _poolDimirStrandcatcher,
     _poolDireFleetHoarder,
     _poolDireTactics,
+    _poolDiscerningTaste,
     _poolDiscordantPiper,
     _poolDisdainfulStroke,
     _poolDiseaseCarriers,
