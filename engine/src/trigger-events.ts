@@ -169,10 +169,19 @@ export const TRIGGER_EVENTS = {
    * Pass Holder): the value is the die's result. */
   "rolls-to-visit": row({ type: "rolled-to-visit", player: (e) => e.player, amount: (e) => e.result }),
   /** An Attraction was visited (rule 701.52a): the subject is the
-   * Attraction. Its own visit ability (702.159a) is `who: "self"` — the
-   * `visit()` helper in `cards/attractions.ts` — and so is Myra's "whenever
-   * you visit it". Journaled as `visited`. */
-  visited: row({ type: "attraction-visited", object: (e) => e.object, player: (e) => e.player, journaled: "visited" }),
+   * Attraction, `by` the player who visited it. Its own visit ability
+   * (702.159a) is `who: "self"` — the `visit()` helper in `cards/helpers.ts`.
+   * Myra the Magnificent's "whenever **you** visit it" is a delayed ability
+   * watching the Attraction, `who: "self"` with `by: "you"`: the watched
+   * permanent is read as its controller's, so only `by` tells who visited.
+   * Journaled as `visited`. */
+  visited: row({
+    type: "attraction-visited",
+    object: (e) => e.object,
+    player: (e) => e.player,
+    by: (e) => e.player,
+    journaled: "visited",
+  }),
   /** "Whenever you claim the prize of an Attraction" (rule 702.159b — The
    * Most Dangerous Gamer): the subject is the player who claimed it. */
   "claims-prize": row({ type: "prize-claimed", player: (e) => e.player }),

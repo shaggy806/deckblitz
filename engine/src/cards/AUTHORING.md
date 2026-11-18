@@ -2540,7 +2540,14 @@ Attractions" — Line Cutter; also the turn-based action every precombat main ph
 generic `{ on: "event" }`): `opens-attraction` (The Most Dangerous Gamer's "whenever you open an
 Attraction", `who: "you"`), `rolls-to-visit` (its value the result: "if you roll a 6" is `condition:
 { kind: "amounts", left: { triggerValue: true }, op: "eq", right: 6 }` — "Lifetime" Pass Holder),
-`visited` (an Attraction visited; `who: "self"` is a visit ability, what `visit()` writes),
+`visited` (an Attraction visited; `who: "self"` is a visit ability, what `visit()` writes; `by`
+the player who visited it — Myra the Magnificent's "choose an Attraction you control … For as long
+as that Attraction is on the battlefield, whenever you visit it, copy the exiled card" is a
+`choose-permanents` with `thenTogether` (so the pick is `{ thisWay: "chosen" }`) and a
+`delayed-trigger` with `about: "exiled"`, `at: { whenever: { on: "event", event: "visited", who:
+"self", by: "you" }, watching: { thisWay: "chosen" }, until: "while-exiled" }` and Surge to
+Victory's `cast-now` `from: "targets"`; a watched permanent is read as the watch's controller's, so
+only `by` tells who visited it),
 `claims-prize` ("whenever you claim the prize of an Attraction"). The roll to visit is a d6 roll, so
 "whenever you roll a 1" (`rolls-die` with `die: { atMost: 1 }`, Complaints Clerk) sees it. `rolls-die`
 takes the timing wrapper die by die: "whenever you roll your third die each turn" is `nthEachTurn: 3`
