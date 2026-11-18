@@ -2745,6 +2745,22 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly combatDamageByToughness?: "always" | "if-toughness-greater";
   /**
+   * The affected creatures **station** permanents using their toughness
+   * rather than their power (rule 702.184a's "equal to the tapped creature's
+   * power") — Tapestry Warden's "Each creature you control with toughness
+   * greater than its power stations permanents using its toughness rather
+   * than its power" is `"if-toughness-greater"` over `affects: { scope:
+   * "creatures-you-control" }`, the twin of `combatDamageByToughness`.
+   * Nothing's power changes, and crew doesn't read it (the rulings; a
+   * creature's own "crews Vehicles using its toughness" is `crewsAs`).
+   * Read as the station ability resolves (`Game.stationsByToughness`): this
+   * static must be there then (the ruling: gone, it's the power); a tapped
+   * creature that has left is read as it last existed — controlled by this
+   * static's controller, a creature, its toughness greater (the ruling) —
+   * for `creatures-you-control` and `all-creatures` scopes.
+   */
+  readonly stationsByToughness?: "always" | "if-toughness-greater";
+  /**
    * Lethal damage dealt to the affected creatures is determined by their
    * **power** rather than their toughness (Zilortha, Strength Incarnate:
    * "… to creatures you control …", `affects: { scope:

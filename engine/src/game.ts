@@ -44864,7 +44864,10 @@ controlledBy,
       stationPowerOf: (target) => {
         if (target.kind !== "object") return context.powerOf(target);
         const as = this.crewsAsOf(target.object, "station");
-        const base = as.byToughness ? context.toughnessOf(target) : context.powerOf(target);
+        // Or another permanent's "stations permanents using its toughness"
+        // (Tapestry Warden), read now, the creature as it last existed if gone.
+        const byToughness = as.byToughness || this.stationsByToughness(target.object, lastKnownOf(target));
+        const base = byToughness ? context.toughnessOf(target) : context.powerOf(target);
         return base * as.times + as.plus;
       },
       toughnessOf: (target) => {
@@ -51044,6 +51047,46 @@ controlledBy,
    * crew, saddle or station): read its toughness, multiply, add. Nothing
    * once it has lost its abilities (layer 6); off the battlefield, its
    * card's (as it last existed). */
+  /**
+   * Whether the creature tapped for a station ability stations using its
+   * toughness rather than its power under another permanent's
+   * `stationsByToughness` static (Tapestry Warden), read as the ability
+   * resolves: such a static there now and reaching it — live, or, gone, as it
+   * last existed (`was`: a creature its controller controlled, its toughness
+   * greater; the Warden's rulings). Its own power never changes.
+   */
+  private stationsByToughness(id: ObjectId, was: LastKnownInfo | undefined): boolean {
+    const creature = this.state.objects[id];
+    const live = creature !== undefined && creature.zone === "battlefield" && was === undefined;
+    for (const sourceId of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[sourceId];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const how = ability.stationsByToughness;
+        if (how === undefined || !this.staticActive(source, ability)) continue;
+        if (live) {
+          if (!staticAffects(this.state, this.registry, ability.affects, source, creature)) continue;
+          if (how === "always") return true;
+          const chars = computeCharacteristics(this.state, this.registry, id);
+          if (chars.toughness > chars.power) return true;
+          continue;
+        }
+        if (was === undefined || !was.types.includes("creature")) continue;
+        const affects = ability.affects;
+        // As it last existed: only a plain "creatures you control" or "all
+        // creatures" scope can be judged off the battlefield.
+        const plain =
+          (affects.scope === "creatures-you-control" || affects.scope === "all-creatures") &&
+          Object.keys(affects).every((key) => key === "scope" || key === "excludeSelf");
+        if (!plain) continue;
+        if (affects.scope === "creatures-you-control" && was.controller !== source.controller) continue;
+        if (affects.excludeSelf === true && id === sourceId) continue;
+        if (how === "always" || was.toughness > was.power) return true;
+      }
+    }
+    return false;
+  }
+
   private crewsAsOf(
     id: ObjectId,
     keyword: "crew" | "saddle" | "station",

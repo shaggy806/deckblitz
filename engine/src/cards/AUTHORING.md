@@ -6629,6 +6629,14 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   over, and the `assign-combat-damage` offer (`combatDamageOf` in
   `characteristics.ts`). A fight, "damage equal to its power" and a power
   condition all still read the real power.
+- `stationsByToughness: "always" | "if-toughness-greater"` — its twin for
+  station (rule 702.184a): the affected creatures station permanents using
+  their toughness rather than their power (Tapestry Warden over
+  `creatures-you-control`). Read as the station ability resolves
+  (`Game.stationsByToughness`): the static must be there then, and a tapped
+  creature that has left is read as it last existed (its rulings). Crew
+  doesn't read it; a creature's own "crews/stations using its toughness" is
+  `crewsAs`. `stations-using-toughness.test.ts`.
 - `lethalDamageByPower: true` — "Lethal damage dealt to creatures you control
   is determined by their power rather than their toughness" (Zilortha,
   Strength Incarnate, over `creatures-you-control`): a rule (613.11), not an
