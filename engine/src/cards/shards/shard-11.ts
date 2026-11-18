@@ -643,6 +643,7 @@ import _poolParadoxShaper from "../pool/paradox-shaper.js";
 import _poolParallaxDementia from "../pool/parallax-dementia.js";
 import _poolParameciaColoniex from "../pool/paramecia-coloniex.js";
 import _poolParanoidDelusions from "../pool/paranoid-delusions.js";
+import _poolPartInFriendship from "../pool/part-in-friendship.js";
 import _poolPathOfTheAnimist from "../pool/path-of-the-animist.js";
 import _poolPavelChekovFirstPosting from "../pool/pavel-chekov-first-posting.js";
 import _poolPearlEarImperialAdvisor from "../pool/pearl-ear-imperial-advisor.js";
@@ -1696,6 +1697,7 @@ const shard: CardShard = {
     _poolParallaxDementia,
     _poolParameciaColoniex,
     _poolParanoidDelusions,
+    _poolPartInFriendship,
     _poolPathOfTheAnimist,
     _poolPavelChekovFirstPosting,
     _poolPearlEarImperialAdvisor,

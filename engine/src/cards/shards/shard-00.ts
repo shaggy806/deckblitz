@@ -556,6 +556,7 @@ import _poolMonstrousOnslaught from "../pool/monstrous-onslaught.js";
 import _poolMoonCircuitHacker from "../pool/moon-circuit-hacker.js";
 import _poolMoonVigilAdherents from "../pool/moon-vigil-adherents.js";
 import _poolMoongloveExtract from "../pool/moonglove-extract.js";
+import _poolMoralityShift from "../pool/morality-shift.js";
 import _poolMorcantsLoyalist from "../pool/morcants-loyalist.js";
 import _poolMordorTrebuchet from "../pool/mordor-trebuchet.js";
 import _poolMortivore from "../pool/mortivore.js";
@@ -1607,6 +1608,7 @@ const shard: CardShard = {
     _poolMoonCircuitHacker,
     _poolMoonVigilAdherents,
     _poolMoongloveExtract,
+    _poolMoralityShift,
     _poolMorcantsLoyalist,
     _poolMordorTrebuchet,
     _poolMortivore,

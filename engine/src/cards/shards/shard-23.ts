@@ -952,6 +952,7 @@ import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
 import _poolTreacherousGreed from "../pool/treacherous-greed.js";
 import _poolTreetopAmbusher from "../pool/treetop-ambusher.js";
 import _poolTribbleCluster from "../pool/tribble-cluster.js";
+import _poolTriumphOfSaintKatherine from "../pool/triumph-of-saint-katherine.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTrollOfKhazadDum from "../pool/troll-of-khazad-dum.js";
 import _poolTrostanisJudgment from "../pool/trostanis-judgment.js";
@@ -2014,6 +2015,7 @@ const shard: CardShard = {
     _poolTreacherousGreed,
     _poolTreetopAmbusher,
     _poolTribbleCluster,
+    _poolTriumphOfSaintKatherine,
     _poolTrokinHighGuard,
     _poolTrollOfKhazadDum,
     _poolTrostanisJudgment,

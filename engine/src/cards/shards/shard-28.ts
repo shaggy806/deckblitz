@@ -243,6 +243,7 @@ import _poolDriftOfPhantasms from "../pool/drift-of-phantasms.js";
 import _poolDrossRipper from "../pool/dross-ripper.js";
 import _poolDrownInDreams from "../pool/drown-in-dreams.js";
 import _poolDrowned from "../pool/drowned.js";
+import _poolDruidOfTheEmeraldGrove from "../pool/druid-of-the-emerald-grove.js";
 import _poolDruidsFamiliar from "../pool/druids-familiar.js";
 import _poolDunedainBlade from "../pool/dunedain-blade.js";
 import _poolDuskMangler from "../pool/dusk-mangler.js";
@@ -1305,6 +1306,7 @@ const shard: CardShard = {
     _poolDrossRipper,
     _poolDrownInDreams,
     _poolDrowned,
+    _poolDruidOfTheEmeraldGrove,
     _poolDruidsFamiliar,
     _poolDunedainBlade,
     _poolDuskMangler,

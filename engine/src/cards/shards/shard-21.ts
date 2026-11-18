@@ -390,6 +390,7 @@ import _poolGutShot from "../pool/gut-shot.js";
 import _poolGutterbones from "../pool/gutterbones.js";
 import _poolHappyHoganDauntlessDriver from "../pool/happy-hogan-dauntless-driver.js";
 import _poolHardWonJitte from "../pool/hard-won-jitte.js";
+import _poolHarnessInfinity from "../pool/harness-infinity.js";
 import _poolHeadwaterSentries from "../pool/headwater-sentries.js";
 import _poolHeartbeatOfSpring from "../pool/heartbeat-of-spring.js";
 import _poolHeartsDesire from "../pool/hearts-desire.js";
@@ -1397,6 +1398,7 @@ const shard: CardShard = {
     _poolGutterbones,
     _poolHappyHoganDauntlessDriver,
     _poolHardWonJitte,
+    _poolHarnessInfinity,
     _poolHeadwaterSentries,
     _poolHeartbeatOfSpring,
     _poolHeartsDesire,

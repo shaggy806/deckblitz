@@ -7741,6 +7741,7 @@ import _poolDruidOfHorns from "./pool/druid-of-horns.js";
 import _poolDruidOfPurification from "./pool/druid-of-purification.js";
 import _poolDruidOfTheAnima from "./pool/druid-of-the-anima.js";
 import _poolDruidOfTheCowl from "./pool/druid-of-the-cowl.js";
+import _poolDruidOfTheEmeraldGrove from "./pool/druid-of-the-emerald-grove.js";
 import _poolDruidOfTheSpade from "./pool/druid-of-the-spade.js";
 import _poolDruidicRitual from "./pool/druidic-ritual.js";
 import _poolDruidicSatchel from "./pool/druidic-satchel.js";
@@ -12451,6 +12452,7 @@ import _poolHarmonizedCrescendo from "./pool/harmonized-crescendo.js";
 import _poolHarmonizedTrio from "./pool/harmonized-trio.js";
 import _poolHarmonyOfNature from "./pool/harmony-of-nature.js";
 import _poolHarnessByForce from "./pool/harness-by-force.js";
+import _poolHarnessInfinity from "./pool/harness-infinity.js";
 import _poolHarnessedLightning from "./pool/harnessed-lightning.js";
 import _poolHarnessedSnubhorn from "./pool/harnessed-snubhorn.js";
 import _poolHarnesserOfStorms from "./pool/harnesser-of-storms.js";
@@ -18113,6 +18115,7 @@ import _poolMoorlandHaunt from "./pool/moorland-haunt.js";
 import _poolMoorlandInquisitor from "./pool/moorland-inquisitor.js";
 import _poolMoorlandRescuer from "./pool/moorland-rescuer.js";
 import _poolMorale from "./pool/morale.js";
+import _poolMoralityShift from "./pool/morality-shift.js";
 import _poolMoratoriumStone from "./pool/moratorium-stone.js";
 import _poolMoraugFuryOfAkoum from "./pool/moraug-fury-of-akoum.js";
 import _poolMorbidBloom from "./pool/morbid-bloom.js";
@@ -20021,6 +20024,7 @@ import _poolParkHeightsPegasus from "./pool/park-heights-pegasus.js";
 import _poolParkerLuck from "./pool/parker-luck.js";
 import _poolParnesseTheSubtleBrush from "./pool/parnesse-the-subtle-brush.js";
 import _poolParoxysm from "./pool/paroxysm.js";
+import _poolPartInFriendship from "./pool/part-in-friendship.js";
 import _poolPartTheVeil from "./pool/part-the-veil.js";
 import _poolPartTheWaterveil from "./pool/part-the-waterveil.js";
 import _poolPartWater from "./pool/part-water.js";
@@ -29599,6 +29603,7 @@ import _poolTritonWaverider from "./pool/triton-waverider.js";
 import _poolTriumphOfCruelty from "./pool/triumph-of-cruelty.js";
 import _poolTriumphOfFerocity from "./pool/triumph-of-ferocity.js";
 import _poolTriumphOfGerrard from "./pool/triumph-of-gerrard.js";
+import _poolTriumphOfSaintKatherine from "./pool/triumph-of-saint-katherine.js";
 import _poolTriumphOfTheHordes from "./pool/triumph-of-the-hordes.js";
 import _poolTriumphantAdventurer from "./pool/triumphant-adventurer.js";
 import _poolTriumphantChomp from "./pool/triumphant-chomp.js";
@@ -41225,6 +41230,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDruidOfPurification,
   _poolDruidOfTheAnima,
   _poolDruidOfTheCowl,
+  _poolDruidOfTheEmeraldGrove,
   _poolDruidOfTheSpade,
   _poolDruidicRitual,
   _poolDruidicSatchel,
@@ -45935,6 +45941,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHarmonizedTrio,
   _poolHarmonyOfNature,
   _poolHarnessByForce,
+  _poolHarnessInfinity,
   _poolHarnessedLightning,
   _poolHarnessedSnubhorn,
   _poolHarnesserOfStorms,
@@ -51597,6 +51604,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMoorlandInquisitor,
   _poolMoorlandRescuer,
   _poolMorale,
+  _poolMoralityShift,
   _poolMoratoriumStone,
   _poolMoraugFuryOfAkoum,
   _poolMorbidBloom,
@@ -53505,6 +53513,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolParkerLuck,
   _poolParnesseTheSubtleBrush,
   _poolParoxysm,
+  _poolPartInFriendship,
   _poolPartTheVeil,
   _poolPartTheWaterveil,
   _poolPartWater,
@@ -63083,6 +63092,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTriumphOfCruelty,
   _poolTriumphOfFerocity,
   _poolTriumphOfGerrard,
+  _poolTriumphOfSaintKatherine,
   _poolTriumphOfTheHordes,
   _poolTriumphantAdventurer,
   _poolTriumphantChomp,
@@ -74722,6 +74732,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/druid-of-purification": _poolDruidOfPurification,
   "pool/druid-of-the-anima": _poolDruidOfTheAnima,
   "pool/druid-of-the-cowl": _poolDruidOfTheCowl,
+  "pool/druid-of-the-emerald-grove": _poolDruidOfTheEmeraldGrove,
   "pool/druid-of-the-spade": _poolDruidOfTheSpade,
   "pool/druidic-ritual": _poolDruidicRitual,
   "pool/druidic-satchel": _poolDruidicSatchel,
@@ -79432,6 +79443,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/harmonized-trio": _poolHarmonizedTrio,
   "pool/harmony-of-nature": _poolHarmonyOfNature,
   "pool/harness-by-force": _poolHarnessByForce,
+  "pool/harness-infinity": _poolHarnessInfinity,
   "pool/harnessed-lightning": _poolHarnessedLightning,
   "pool/harnessed-snubhorn": _poolHarnessedSnubhorn,
   "pool/harnesser-of-storms": _poolHarnesserOfStorms,
@@ -85094,6 +85106,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/moorland-inquisitor": _poolMoorlandInquisitor,
   "pool/moorland-rescuer": _poolMoorlandRescuer,
   "pool/morale": _poolMorale,
+  "pool/morality-shift": _poolMoralityShift,
   "pool/moratorium-stone": _poolMoratoriumStone,
   "pool/moraug-fury-of-akoum": _poolMoraugFuryOfAkoum,
   "pool/morbid-bloom": _poolMorbidBloom,
@@ -87002,6 +87015,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/parker-luck": _poolParkerLuck,
   "pool/parnesse-the-subtle-brush": _poolParnesseTheSubtleBrush,
   "pool/paroxysm": _poolParoxysm,
+  "pool/part-in-friendship": _poolPartInFriendship,
   "pool/part-the-veil": _poolPartTheVeil,
   "pool/part-the-waterveil": _poolPartTheWaterveil,
   "pool/part-water": _poolPartWater,
@@ -96580,6 +96594,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/triumph-of-cruelty": _poolTriumphOfCruelty,
   "pool/triumph-of-ferocity": _poolTriumphOfFerocity,
   "pool/triumph-of-gerrard": _poolTriumphOfGerrard,
+  "pool/triumph-of-saint-katherine": _poolTriumphOfSaintKatherine,
   "pool/triumph-of-the-hordes": _poolTriumphOfTheHordes,
   "pool/triumphant-adventurer": _poolTriumphantAdventurer,
   "pool/triumphant-chomp": _poolTriumphantChomp,
