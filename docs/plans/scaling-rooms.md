@@ -299,6 +299,10 @@ day, not built:
   engine than the table. The answer to all three is the user's "unless the host disagrees": the
   devices compare a hash of the state now and then, and one that differs takes the host's.
 
+**The design that came of it is `replicated-rooms.md`** (proposed the same day), with the check
+run over the whole pool by the fuzzer (`MTG_REPLICA=1`), the sorts fixed and a blank target slot
+kept through a sent state.
+
 ## Order and checks
 
 0 → 1 → 2 → 3 → 4; 5 only on need. Each phase re-runs the load harness and compares against the
