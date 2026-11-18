@@ -93,6 +93,29 @@ type Rule<K extends Kind> = (node: Of<K>, visit: Visit) => void;
 /** Touches no target slot, and holds no effect that does. */
 const none = (): void => {};
 
+/**
+ * What a sweep's filter says of the target it is written around, beyond a
+ * shared name, colour or type:
+ *
+ * - "Target nonland permanent and each other nonland permanent with the same
+ *   mana value as that permanent" (Mists of Lórien): a mana value equal to
+ *   the target's own is the target's, so it goes with the rest. (One above
+ *   or below it leaves the target out — Fell the Mighty only reads it.)
+ * - "All Auras attached to target land" (Street Sweeper, Strip Bare): the
+ *   target keeps or loses what's on it, and whose those are is the board's
+ *   call, as a `for-each-permanent`'s.
+ */
+function sweptWithTarget(filter: CardFilter, v: Visit): void {
+  const compare = filter.manaValue;
+  const n: unknown = compare?.n;
+  const amount: unknown = typeof n === "object" && n !== null && "amount" in n ? n.amount : undefined;
+  const slot: unknown = typeof amount === "object" && amount !== null && "manaValueOf" in amount ? amount.manaValueOf : undefined;
+  if (typeof slot === "number" && (compare?.op === "eq" || compare?.op === "lte" || compare?.op === "gte")) {
+    v.touch(slot, "harm", DECISIVE);
+  }
+  v.touch(filter.attachedToObject, "either", MINOR);
+}
+
 /** Counters that are bad to have. Everything else a targeted `add-counter`
  * puts in the pool is `+1/+1`, loyalty, a keyword counter or a resource. */
 export const HARMFUL_COUNTERS: ReadonlySet<string> = new Set(["-1/-1", "blight", "flood", "stun"]);
@@ -128,9 +151,13 @@ function amountSign(amount: EffectAmount): number {
 const RULES: { readonly [K in Kind]: Rule<K> } = {
   // A rummage or a loot — the same player discarding and drawing the same
   // number, one straight after the other — is card filtering, leaving that
-  // player's hand the size it was: it takes neither side, and what else the
-  // ability does decides the slot (Memory Worm's 2 damage, then "that player
-  // discards a card, then draws a card").
+  // player's hand the size it was: neither the draw's card nor the discard's
+  // loss, and whatever else the ability does outweighs it (Memory Worm's 2
+  // damage, then "that player discards a card, then draws a card"). Alone it
+  // is still that player's gain, a small one: the card thrown away is theirs
+  // to pick, so the hand is as large and better ("target player draws a
+  // card, then discards a card" — Cephalid Looter, Dack Fayden's +1). Not
+  // when the discard is at random, which picks nothing.
   sequence: (n, v) => {
     const filtering = new Set<number>();
     n.effects.forEach((e, i) => {
@@ -148,6 +175,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
         e.amount === next.amount
       ) {
         filtering.add(i).add(i + 1);
+        const thrown = e.kind === "discard" ? e : next.kind === "discard" ? next : undefined;
+        if (thrown !== undefined && thrown.random !== true) v.touch(e.target, "help", MINOR);
       }
     });
     n.effects.forEach((e, i) => {
@@ -264,6 +293,15 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.keepTargets === true) v.childAfterFound(n.then);
     // "Target opponent destroys four lands they control" (Burning of Xinye).
     if (typeof n.chooser === "object" && "target" in n.chooser) v.touch(n.chooser.target, "either", MINOR);
+    // Chosen among a targeted player's permanents ("return half the creatures
+    // they control to their owner's hand" — Split the Party): what's done to
+    // each chosen one (`then`'s slot 0) is done to that player, as a
+    // `for-each-permanent`'s is.
+    const whose = n.controlledByPlayer;
+    if (typeof whose === "object" && "target" in whose) {
+      const each = slotStrengths(n.then, 1)[0];
+      if (each !== null && each !== undefined) v.touch(whose.target, each.polarity, Math.min(each.weight, MAJOR));
+    }
   },
   // Its `then` reads the blighted creature as target 0. "Target opponent
   // blights 2" harms the player in that slot.
@@ -301,6 +339,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       if (n.then !== undefined) v.childOfGroup(0, n.then);
       return;
     }
+    // The card picked goes in a slot beside the ability's own (`slot`), which
+    // `then` still reads as they were: Cursed Scroll's 2 damage to its "any
+    // target", Friendly Fire's to the creature whose controller showed the
+    // card. (Without `slot` the card is `then`'s target 0, and its slots
+    // aren't the ability's.)
+    if (n.slot !== undefined && n.slot > 0) v.child(n.then);
     if (typeof n.whose !== "number") return;
     if (n.zone === "hand" || (n.then?.kind === "put-onto-battlefield" && n.then.underYourControl === true)) {
       v.touch(n.whose, "harm", MINOR);
@@ -350,6 +394,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.filter.sameNameWith, "harm", DECISIVE);
     v.touch(n.filter.sharesColorWith, "harm", DECISIVE);
     v.touch(n.filter.sharesCreatureTypeWith, "harm", DECISIVE);
+    sweptWithTarget(n.filter, v);
     // "All creatures that blocked or were blocked by it" (Venomous Breath):
     // the target's the creature whose opponents in combat die, so your own.
     v.touch(n.filter.blockedThisTurn?.of, "help", MAJOR);
@@ -397,6 +442,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameWith, "harm", DECISIVE);
     v.touch(n.filter.sharesColorWith, "harm", DECISIVE);
+    sweptWithTarget(n.filter, v);
   },
   // "Target opponent exiles a card from their hand or a permanent they
   // control": aimed at an opponent, as a discard or an edict is.
@@ -405,6 +451,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.controlledByTarget, "harm", MAJOR);
     v.touch(n.filter.sameNameWith, "harm", DECISIVE);
     v.touch(n.filter.sharesColorWith, "harm", DECISIVE);
+    sweptWithTarget(n.filter, v);
+    // "Choose up to one target creature, then airbend all other creatures"
+    // (Avatar's Wrath): the one the sweep spares.
+    v.touch(n.exceptTarget, "help", MAJOR);
   },
   exile: (n, v) => {
     v.touch(n.target, "harm", DECISIVE);
@@ -527,7 +577,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "delayed-trigger": (n, v) => {
     const at = n.at;
     if (typeof at === "object" && "leaves" in at && typeof at.leaves === "number") {
-      const back = n.effect.kind === "put-onto-battlefield" || n.effect.kind === "return-to-hand";
+      // Saffi Eriksdotter's return is under an "if it's yours": the same save.
+      const does = n.effect.kind === "conditional" && n.effect.else === undefined ? n.effect.then : n.effect;
+      const back = does.kind === "put-onto-battlefield" || does.kind === "return-to-hand";
       if (back) v.touch(at.leaves, "help", MAJOR);
     }
     // Watching a target ("whenever target creature deals damage this turn, you
@@ -707,6 +759,19 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     const instead = "instead" in n.replacement ? n.replacement.instead : undefined;
     const replaced = insteadEffect(instead);
     if (replaced !== undefined) v.child(replaced.effect);
+    const event: string = n.replacement.event;
+    // "If that creature would deal combat damage …, it deals triple that
+    // damage instead" (Jeska, Thrice Reborn): the creature whose damage grows.
+    // One whose damage is prevented for something else (Ria Ivor's Mites) is
+    // the board's call, and left.
+    const modify = typeof instead === "object" && instead !== null && "modify" in instead ? instead.modify : undefined;
+    const times = typeof modify === "object" && modify !== null && "times" in modify ? modify.times : undefined;
+    if (event === "would-deal-damage" && typeof times === "number" && times > 1) v.touch(n.fromObject, "help", MAJOR);
+    // "If target player would draw a card, instead that player skips that
+    // draw and you draw a card" (Plagiarize): the player whose draws go.
+    if (event === "would-draw" && replaced !== undefined && typeof n.players === "object") {
+      v.touch(slotOfPlayer(n.players), "harm", MAJOR);
+    }
   },
   // "You win" has no target; "target opponent loses the game" harms it.
   "win-game": none,
@@ -755,6 +820,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     for (const slot of n.restrictions.flatMap(combatRuleSlots)) v.touch(slot, "harm", MINOR);
     const side = helps && hurts ? "either" : helps ? "help" : "harm";
     v.touch(n.target, side, MINOR);
+    // Radiance's "target creature and each other creature that shares a
+    // color with it" (Incite Hysteria's "can't block"): the target is bound
+    // with them.
+    v.touch(n.filter?.sharesColorWith, side, MINOR);
     // "Creatures target player controls can't block this turn" (Headliner
     // Scarlett): the same lean, on the player whose creatures it binds.
     if (n.controlledByTarget !== undefined) v.touch(n.controlledByTarget, side, MINOR);
@@ -888,6 +957,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       // loss is the only way this aims at them.
       const small = typeof n.toughness === "number" && n.toughness <= 2;
       if (n.loseAbilities === true || small || n.loseKeywords !== undefined) v.touch(n.controlledByTarget, side, MINOR);
+      // A target player's permanents made creatures ("all lands target player
+      // controls become 3/3 creatures" — Jolrael) are an army for them or a
+      // board to sweep: the board's call.
+      else if ((n.addTypes ?? []).includes("creature")) v.touch(n.controlledByTarget, "either", MINOR);
       return;
     }
     if (n.target !== undefined) v.touch(n.target, side, weight);
@@ -988,20 +1061,32 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "help", MINOR);
     if (n.redirectTo !== undefined) v.touch(n.redirectTo, "harm", MINOR);
   },
+  // Where the damage goes instead takes the hit, as `prevent-damage`'s
+  // `redirectTo` (Kor Chant's "another target creature", General's Regalia's
+  // creature of yours), and what's done once it's prevented reads the same
+  // slots (Refraction Trap's "deals that much damage to any target").
   "prevent-damage-from-chosen-source": (n, v) => {
     if (typeof n.to === "number") v.touch(n.to, "help", MINOR);
+    if (typeof n.redirectTo === "number") v.touch(n.redirectTo, "harm", MINOR);
+    v.child(n.then);
   },
   "damage-cant-be-prevented": none,
   // Damage kept off a target helps it; damage a target would deal, stopped,
   // hurts it (Kor Haven's attacker); where a redirection sends it takes the
   // hit.
+  // Damage sent from a target to its redirector's own face is kept off the
+  // target as much as damage prevented is (Sivvi's Valor: "dealt to you
+  // instead"). And where every creature's damage but the target's is
+  // stopped (Terrifying Presence), the target is the one still dealing it.
   "damage-rule": (n, v) => {
     if (n.redirectTo !== undefined) {
       if (typeof n.redirectTo === "number") v.touch(n.redirectTo, "harm", MINOR);
+      else if (n.redirectTo === "you" && n.to?.target !== undefined) v.touch(n.to.target, "help", MINOR);
     } else if (n.to?.target !== undefined) {
       v.touch(n.to.target, "help", MINOR);
     }
     if (n.by?.target !== undefined) v.touch(n.by.target, "harm", MINOR);
+    if (n.by !== undefined && "exceptTarget" in n.by) v.touch(n.by.exceptTarget, "help", MINOR);
     v.child(n.then);
   },
   // A colour isn't good or bad by itself: what it's for (dodging a Circle of
@@ -1113,6 +1198,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (whose === undefined) v.touch(n.filter.sameNameWith, "help", MINOR);
     // Yavimaya Dryad's Forest under target player's control.
     if (typeof n.enterUnder === "object" && "target" in n.enterUnder) v.touch(n.enterUnder.target, "help", MINOR);
+    // "Search your library for a Curse card, put it onto the battlefield
+    // attached to target player" (Bitterheart Witch): a Curse enchants the
+    // player it punishes, as `auraPolarity` reads one cast. Any other Aura
+    // found is known only by its card, which this table doesn't see.
+    if (n.filter.subtype === "Curse") v.touch(n.attachedTo, "harm", MAJOR);
     if (typeof whose !== "object") return;
     v.touch(slotOfPlayer(whose), "harm", MINOR);
   },

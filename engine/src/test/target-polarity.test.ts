@@ -198,6 +198,56 @@ describe("slot polarity", () => {
     expect(cast("Necromantic Thirst")).toEqual(["help"]);
   });
 
+  // The ratchet's real misses, sorted and read on 2026-11-17 (99 unrated,
+  // 72 after): each is what the effect does to its target.
+  it("reads a loot as a small gift to the player who loots, under whatever else is done to them", () => {
+    expect(activated("Cephalid Looter", 0)).toEqual(["help"]);
+    expect(activated("Dack Fayden", 0)).toEqual(["help"]);
+    expect(activated("Lumengrid Augur", 0)).toEqual(["help"]);
+    // Memory Worm's "2 damage … that player discards a card, then draws a card".
+    expect(slotStrengths(registry.get("Cephalid Looter").activated[0].effect, 1)[0]?.weight).toBe(0);
+  });
+
+  it("reads the creature a sweep spares as helped, and the one it is written around as hit", () => {
+    expect(cast("Avatar's Wrath")).toEqual(["help"]);
+    expect(cast("Terrifying Presence")).toEqual(["help"]);
+    expect(cast("Mists of Lórien")).toEqual(["harm"]);
+    // A threshold above the target leaves it out: only read.
+    expect(slotStrengths(registry.get("Fell the Mighty").effect, 1)).toEqual([null]);
+    // Whose Auras come off it is the board's call.
+    expect(slotStrengths(registry.get("Strip Bare").effect, 1)[0]?.polarity).toBe("either");
+  });
+
+  it("reads where chosen-source damage is sent, and what a prevention then does", () => {
+    expect(cast("Kor Chant")).toEqual(["help", "harm"]);
+    expect(cast("Refraction Trap")).toEqual(["harm"]);
+    expect(cast("Sivvi's Valor")).toEqual(["help"]);
+    expect(activated("General's Regalia", 0)).toEqual(["harm"]);
+  });
+
+  it("reads past a card shown beside the targets, and a choice among a target player's permanents", () => {
+    expect(activated("Cursed Scroll", 0)).toEqual(["harm"]);
+    expect(cast("Friendly Fire")).toEqual(["harm"]);
+    expect(cast("Split the Party")).toEqual(["harm"]);
+  });
+
+  it("reads a Curse fetched onto a player, lost draws, tripled damage and a save under a condition", () => {
+    expect(triggered("Bitterheart Witch", 0)).toEqual(["harm"]);
+    expect(cast("Plagiarize")).toEqual(["harm"]);
+    expect(activated("Jeska, Thrice Reborn", 0)).toEqual(["help"]);
+    expect(activated("Saffi Eriksdotter", 0)).toEqual(["help"]);
+    expect(cast("Incite Hysteria")).toEqual(["harm"]);
+  });
+
+  it("leaves a player's lands made creatures to the board, and keeps the lean of what rides with a change of types", () => {
+    expect(slotStrengths(registry.get("Jolrael, Empress of Beasts").activated[0].effect, 1)[0]?.polarity).toBe("either");
+    // "Creatures target player controls get -2/-0 and lose all creature types".
+    expect(cast("Ego Erasure")).toEqual(["harm"]);
+    expect(cast("Shields of Velis Vel")).toEqual(["help"]);
+    // An untap beside a removal from combat still says whose (Reconnaissance).
+    expect(activated("Reconnaissance", 0)).toEqual(["help"]);
+  });
+
   it("rates nearly every targeted slot in the pool", () => {
     // A ratchet on slots no effect says anything about. "either" is a rating:
     // the table has looked and it's the board's call (a transform, a land's
@@ -233,9 +283,14 @@ describe("slot polarity", () => {
       for (const ability of def.triggered) read(def.name, ability.effect, ability.targets);
     }
     expect(slots).toBeGreaterThan(1500);
-    // 0.65% on 2026-11-09: 89 of 13,678, with the slots whose spec picked the side left out.
-    // The newest is Dack Fayden's "target player draws two, then discards two", either way.
-    expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.007);
+    // 0.50% on 2026-11-17: 72 of 14,304, with the slots whose spec picked the side left out
+    // (0.65% on 2026-11-09, 89 of 13,678; 99 before the real misses among them were read).
+    // What's left: about 20 that only read their target (Biomantic Mastery, Soul's Majesty,
+    // Fell the Mighty's threshold), about 30 Roles and other Auras put on a "you control" or
+    // "an opponent controls" slot, and a few a card's definition would have to say — an Aura
+    // token or a fetched Aura on any creature (Embereth Veteran, The Rani, Arachnus Spinner,
+    // Gryff's Boon), which this table reads no registry for.
+    expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.0052);
   });
 
   it("rates every member of a for-each-target, not just the slot it binds", () => {
