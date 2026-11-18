@@ -50,6 +50,15 @@ cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:ab -- --base origin/
 hour this said when 18 workers fit. Interrupted? Rerun the same command — it
 resumes from its NDJSON (`.scratch/ab-<bot>-<sha>-4p.ndjson`).
 
+**The games can be watched** (2026-11-17, the user asked for it): the run's
+second line is `watch the games at http://localhost:4020/` (the next free
+port if 4020 is taken; `--watch-port N`, `--no-watch`). Give the user that
+address when the bench starts. The page shows every game being played as a
+small tile (turn, each seat's deck and build, life, cards, permanents, the
+stack, the last plays), the finished games and the running share with its
+interval. A tile that goes dim has sent nothing for 20 seconds: one long
+decision, or a game on its way to the timeout. `scripts/watch.mjs`.
+
 **Watch it and stop when it's settled** (the user, 2026-11-16: "check it as it
 goes so we don't keep running it after the data is conclusive"). The check-in
 reads the NDJSON and prints the share with its interval; say beforehand what

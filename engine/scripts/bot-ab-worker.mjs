@@ -6,8 +6,9 @@ import { parentPort, workerData } from "node:worker_threads";
 
 import { importBuild } from "./baseline-build.mjs";
 import { tableFor } from "./bot-seating.mjs";
+import { watchGame } from "./watch.mjs";
 
-const { working, baseline, bot, players, budget } = workerData;
+const { working, baseline, bot, players, budget, watch } = workerData;
 const W = await importBuild(working);
 const B = await importBuild(baseline);
 const regW = W.createDefaultRegistry();
@@ -26,6 +27,17 @@ parentPort.on("message", (seed) => {
   const controllers = {};
   for (const seat of seats) {
     controllers[seat] = seat === measuredSeat ? make(W, regW, seat) : make(B, regB, seat);
+  }
+  // The game as it plays, for the watch page (`watch.mjs`).
+  if (watch) {
+    watchGame({
+      lib: W,
+      registry: regW,
+      seed,
+      controllers,
+      seats: seats.map((seat, i) => ({ seat, deck: decks[i].name, build: seat === measuredSeat ? "new" : "base" })),
+      post: (message) => parentPort.postMessage(message),
+    });
   }
   try {
     const game = W.Game.create({

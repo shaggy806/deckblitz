@@ -300,6 +300,8 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
+- **The watch page covers `bot:ab` alone** (2026-11-17, `engine/scripts/watch.mjs`): `bot:judge`, `bot:diff`, `bot:losses` and `bot:watch` play their games unseen; each needs `startWatch` in its main process and `watchGame` in its worker. The tiles show card names, not art, and the plays line is a few words an action, not the History's sentences (`client/src/format.ts`, which a script can't import). Full boards in miniature would go through rooms and the client's spectator view instead (the user chose the light page first).
+
 - **`exile-from-library.spec.ts` times out under load** — its 4-player peel tests (lines 181, 245) failed three times on 2026-11-14 while four agents ran, and passed each time alone; a load flake in the Playwright quick set.
 - **`bot:ab` runs out of worker memory** (2026-11-11): 39 of the first 40 games ended "JS heap
   out of memory" at 18 workers, with no change to the state's shape between the two builds

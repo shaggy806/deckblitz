@@ -21,6 +21,7 @@ import { join, dirname } from "node:path";
 
 import { ROOT, baselineDist, workingDist } from "./baseline-build.mjs";
 import { TWO_BUILD_LIMITS } from "./worker-limits.mjs";
+import { startWatch } from "./watch.mjs";
 import { runPool } from "./worker-pool.mjs";
 
 const args = process.argv.slice(2);
@@ -50,8 +51,32 @@ mkdirSync(dirname(out), { recursive: true });
 const working = workingDist();
 
 const done = new Set();
+const even = 1 / players;
+// The measured seat's share so far (a game not played out counts as even),
+// for the watch page's score line.
+const tally = { games: 0, share: 0 };
+const count = (row) => {
+  tally.games += 1;
+  tally.share += row.outcome === "win" ? 1 : row.outcome === "loss" ? 0 : even;
+};
+const earlier = [];
 if (existsSync(out)) {
-  for (const line of readFileSync(out, "utf8").split("\n")) if (line.trim()) done.add(JSON.parse(line).seed);
+  for (const line of readFileSync(out, "utf8").split("\n")) {
+    if (!line.trim()) continue;
+    const row = JSON.parse(line);
+    done.add(row.seed);
+    count(row);
+    earlier.push(row);
+  }
+}
+/** A share of `n` games with its 95% Wilson interval, in percent. */
+function interval(share, n) {
+  const p = share / n;
+  const z = 1.96;
+  const d = 1 + (z * z) / n;
+  const c = (p + (z * z) / (2 * n)) / d;
+  const h = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / d;
+  return { p: 100 * p, low: 100 * (c - h), high: 100 * (c + h) };
 }
 const queue = [];
 for (let seed = 1; seed <= games; seed += 1) if (!done.has(seed)) queue.push(seed);
@@ -62,20 +87,15 @@ console.log(
     (budget === null ? "" : `; budget ${budget}${budget === "live" ? "" : " ms"} a decision`),
 );
 
-const even = 1 / players;
 function summary() {
   const rows = readFileSync(out, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
   const n = rows.length;
   const bad = rows.filter((r) => r.outcome !== "win" && r.outcome !== "loss" && r.outcome !== "draw");
   const share = rows.reduce((a, r) => a + (r.outcome === "win" ? 1 : r.outcome === "loss" ? 0 : even), 0);
-  const p = share / n;
-  const z = 1.96;
-  const d = 1 + (z * z) / n;
-  const c = (p + (z * z) / (2 * n)) / d;
-  const h = (z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n))) / d;
+  const { p, low, high } = interval(share, n);
   console.log(
-    `${bot} working vs ${baseline.sha}: ${(100 * p).toFixed(1)}% [${(100 * (c - h)).toFixed(1)}, ` +
-      `${(100 * (c + h)).toFixed(1)}] over ${n} games (even ${(100 * even).toFixed(0)}%)`,
+    `${bot} working vs ${baseline.sha}: ${p.toFixed(1)}% [${low.toFixed(1)}, ` +
+      `${high.toFixed(1)}] over ${n} games (even ${(100 * even).toFixed(0)}%)`,
   );
   if (bad.length > 0) {
     console.log(`not finished (counted as even): ${bad.map((r) => `seed ${r.seed} ${r.outcome}${r.error ? `: ${r.error}` : ""}`).join("; ")}`);
@@ -83,20 +103,44 @@ function summary() {
   console.log(`results: ${out}`);
 }
 
+// The games as they play, on a localhost page (`watch.mjs`): --no-watch to go
+// without, --watch-port N for another port than 4020.
+const watch = args.includes("--no-watch")
+  ? null
+  : await startWatch({
+      title: `bot:ab: ${bot}, working build vs ${base} (${baseline.sha}), ${players} players`,
+      total: games,
+      port: Number(flag("watch-port", "4020")),
+      score: () => {
+        if (tally.games === 0) return "";
+        const { p, low, high } = interval(tally.share, tally.games);
+        return `new build ${p.toFixed(1)}% of ${tally.games} games, 95% ${low.toFixed(1)} to ${high.toFixed(1)} (even ${(100 * even).toFixed(0)}%)`;
+      },
+    });
+if (watch !== null) {
+  // A resumed run shows the games it had already played.
+  for (const row of earlier) watch.finish(row);
+  console.log(`watch the games at ${watch.url}`);
+}
+
 let finished = done.size;
 const record = (row) => {
   appendFileSync(out, JSON.stringify(row) + "\n");
+  count(row);
+  watch?.finish(row);
   finished += 1;
   if (finished % 20 === 0) process.stderr.write(`  ${finished}/${games}\n`);
 };
 runPool({
   url: new URL("./bot-ab-worker.mjs", import.meta.url),
-  workerData: { working: working.dist, baseline: baseline.dist, bot, players, budget },
+  workerData: { working: working.dist, baseline: baseline.dist, bot, players, budget, watch: watch !== null },
   jobs: queue,
   workers,
   timeoutMs,
   resourceLimits: TWO_BUILD_LIMITS,
-  onMessage: (row) => record(row),
+  // A game's snapshots for the watch page come between its results.
+  isFinal: (message) => message.watch === undefined,
+  onMessage: (message) => (message.watch === undefined ? record(message) : watch?.update(message.watch)),
   onLost: (seed, reason) =>
     record(reason === "timeout" ? { seed, outcome: "timeout" } : { seed, outcome: "error", error: reason }),
   onDone: () => {
