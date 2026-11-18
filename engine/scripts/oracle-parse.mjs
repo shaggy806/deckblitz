@@ -842,6 +842,13 @@ function aggregateSetOf(phrase) {
     if (filter === null) return null;
     return { filter: m[2] === "your" ? { ...filter, ownedBy: "you" } : filter, in: "graveyards" };
   }
+  // "Equipment attached to it" (Tetsuo, Imperial Champion's "the greatest
+  // mana value among Equipment attached to it"): what is attached to the
+  // source now — `attachedTo: { isSource }`, which a static reads too (an
+  // effect's `wasAttachedTo` is bound only as it resolves).
+  if ((m = /^(Equipment|Auras) attached to (?:it|~)$/.exec(phrase))) {
+    return { filter: { subtype: m[1] === "Auras" ? "Aura" : "Equipment", attachedTo: { isSource: true } } };
+  }
   return null;
 }
 
@@ -17831,6 +17838,14 @@ function copySourceOf(words) {
     const filter = { type: m[1], ...(m[2] !== undefined ? { putIntoGraveyardThisTurn: { from: ["battlefield"] } } : {}) };
     return { filter, from: "graveyards" };
   }
+  // "A Doctor card in your graveyard that was put there from your library
+  // this turn" (The Fourteenth Doctor), "a creature card in your graveyard
+  // that was put there from the battlefield this turn" (Ezri Dax).
+  if ((m = /^an? (creature|[A-Z][a-z]+) card in your graveyard that was put there from (the battlefield|your library) this turn$/.exec(words))) {
+    const kind = m[1] === "creature" ? { type: "creature" } : { subtype: m[1] };
+    const from = m[2] === "the battlefield" ? "battlefield" : "library";
+    return { filter: { ...kind, ownedBy: "you", putIntoGraveyardThisTurn: { from: [from] } }, from: "graveyards" };
+  }
   if ((m = /^a (creature) card in exile with an? ([a-z]+) counter on it$/.exec(words))) {
     return { filter: { type: m[1], counters: { kind: m[2], compare: { op: "gte", n: 1 } } }, from: "exile" };
   }
@@ -19400,9 +19415,10 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
     // "You may have ~ enter as a copy of …" (rule 707.9): what it may copy, in
     // play or a card in a graveyard or exile, its exceptions and any "when you
-    // do". An exception it can't say leaves the line to a person.
-    if ((m = /^(If you attacked this turn, y|Y)ou may have ~ enter (tapped )?as a copy of (.+?)(?:, except (.+?))?\.(?: When you do, (.+\.))?$/.exec(line))) {
-      const copy = copyOnEnterOf(m[3], m[4], m[5]);
+    // do". An exception it can't say leaves the line to a person. "If you do,
+    // it gains haste until end of turn" (The Fourteenth Doctor): `gainsHaste`.
+    if ((m = /^(If you attacked this turn, y|Y)ou may have ~ enter (tapped )?as a copy of (.+?)(?:, except (.+?))?\.( If you do, it gains haste until end of turn\.)?(?: When you do, (.+\.))?$/.exec(line))) {
+      const copy = copyOnEnterOf(m[3], m[4], m[6]);
       if (copy !== null) {
         out.copyOnEnter = {
           ...copy,
@@ -19410,6 +19426,7 @@ function parseFaceAsWritten(face, ctx = {}) {
           ...(copy.whenYouDo !== undefined ? { whenYouDo: { ...copy.whenYouDo, text: raw.slice(raw.indexOf("When you do, ")) } } : {}),
           ...(m[1].startsWith("If") ? { condition: { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 } } : {}),
           ...(m[2] !== undefined ? { tapped: true } : {}),
+          ...(m[5] !== undefined ? { gainsHaste: true } : {}),
         };
         continue;
       }

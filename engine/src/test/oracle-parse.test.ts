@@ -11865,6 +11865,25 @@ describe("entering as a copy, or as a choice of forms", () => {
       { tokenFor: () => null },
     );
     expect(land.copyOnEnter).toEqual({ filter: { type: "land" }, from: "graveyards", tapped: true, except: { addSubtypes: ["Cave"] } });
+    // Your graveyard, by where it came from this turn, and "if you do, it
+    // gains haste until end of turn" (The Fourteenth Doctor).
+    expect(
+      creature(
+        "You may have this creature enter as a copy of a Doctor card in your graveyard that was put there from your library this turn. If you do, it gains haste until end of turn.",
+      ).copyOnEnter,
+    ).toEqual({
+      filter: { subtype: "Doctor", ownedBy: "you", putIntoGraveyardThisTurn: { from: ["library"] } },
+      from: "graveyards",
+      gainsHaste: true,
+    });
+  });
+
+  it("reads the greatest mana value among Equipment attached to it (Tetsuo, Imperial Champion)", () => {
+    const face = creature("This creature gets +X/+0, where X is the greatest mana value among Equipment attached to it.");
+    expect(face.static[0]?.grantPtPerCount).toEqual({
+      aggregate: { aggregate: "max", of: "mana-value", filter: { subtype: "Equipment", attachedTo: { isSource: true } } },
+      pt: [1, 0],
+    });
   });
 
   it("reads raid, 'when you do', and an exception on what it copied", () => {
