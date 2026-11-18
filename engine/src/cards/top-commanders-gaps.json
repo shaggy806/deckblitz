@@ -2714,6 +2714,8 @@
   "trigger:pays-life-trigger",
   "trigger:investigate-trigger",
   "trigger:mana-ability-resolves-amount-produced",
+  "trigger:reflexive-on-nth-resolution",
+  "condition:creatures-died-this-turn-count-in-static",
   "trigger:untap-trigger",
   "trigger:saga-final-chapter-triggers",
   "trigger:phases-out",

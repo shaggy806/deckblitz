@@ -7633,7 +7633,11 @@ clause (section 9):
   The count is per ability of one object and restarts each turn; a permanent
   that leaves and returns is a new object with a fresh count, and an ability
   that fizzled never resolved, so it doesn't count. Only meaningful inside the
-  ability's own `conditional` effect (a `not` around it works too).
+  ability's own `conditional` effect (a `not` around it works too). "**When
+  this ability resolves for the third time this turn**, ~ fights up to one
+  target creature you don't control" (Gimli, Mournful Avenger) is a
+  `reflexive-trigger` inside that `conditional` (rule 603.12: its target is
+  chosen as it triggers, not as the ability did).
 - `{ kind: "activated-this-turn", atLeast }` — "if this ability has been
   **activated four or more times this turn**" (Dragon Whelp: `atLeast: 4`).
   Every activation counts as it's made, resolved or not, the resolving one
