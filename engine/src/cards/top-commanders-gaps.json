@@ -2972,7 +2972,8 @@
   "trigger:one-or-more-creatures-block",
   "filter:blocked-attacker",
   "trigger:exiled-by-your-spell-or-ability",
-  "trigger:opponent-shuffles-library"
+  "trigger:opponent-shuffles-library",
+  "trigger:delayed-source-becomes-untapped"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
