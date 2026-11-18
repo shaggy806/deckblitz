@@ -325,6 +325,18 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The greatest mana value among attached Equipment, and haste for a copy — built 2026-11-18
+
+Two of the last five top-1000 commanders. The key `amount:aggregate-over-attached-equipment`: Tetsuo, Imperial Champion
+(#951) is an aggregate `max` of `mana-value` over `{ subtype: "Equipment", wasAttachedTo: "source" }`, which a damage
+amount already read. The fix: a compare's `{ amount }` operand (`manaValue: { op: "lte", n: { amount } }`, its free
+cast's limit) was read by `bindDynamicCompares` before its own filter's references were bound, so `wasAttachedTo` in it
+matched nothing; the operand is now bound first, as an amount anywhere else in an effect is.
+`test/commanders-tetsuo.test.ts`. And The Fourteenth Doctor (#745), under `replacement:copy-on-enter-options`:
+`copyOnEnter.gainsHaste`, "If you do, it gains haste until end of turn", an additional effect of copying (707.9e) granted
+as it enters and only if it copied. Its cast trigger is a `look-and-choose` to the graveyard, the copy a `from:
+"graveyards"` filter with `putIntoGraveyardThisTurn: { from: ["library"] }`. `test/commanders-fourteenth-doctor.test.ts`.
+
 ### A CDA counting the cards you own in exile — found built 2026-11-18
 
 The key `bug:cda-cards-owned-in-exile` needed no engine code: `setBasePtFromCount` takes an `AggregateSpec`, and `{

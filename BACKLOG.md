@@ -16,21 +16,21 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**970 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
+**997 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
 doubled from 500 on 2026-11-14; re-mark with `npm run cmdrs:mark -w engine`). An imported decklist
 usually has its commander substituted, and that one card is the reason the deck exists. Live
 numbers for everything below come from `npm run cmdrs:gaps -w engine`.
 
-- **The 30 left** (`cmdrs:gaps` names them with today's ranks): 1 from the old top 500, below, and
-  29 from ranks 501-1000, each already triaged in the sweep records on one need key (Ranar the
-  Ever-Watchful on two) — `card:brief -- "Name"` shows a card's, `cards:needs -- --by-rank` ranks
-  the keys. Two of the 29 have every recorded need built and want a re-read (the `author-freed`
-  queue): Ian Malcolm, Chaotician and The Fourteenth Doctor.
-
-- **The 1 left of the old top 500, with its key** (when it lands, add it to
-  `engine/src/cards/top-commanders-gaps.json`'s `built` array and author its commander in the same
-  commit): Magar of the Magic Strings
-  `effect:noted-card-name-copy`.
+- **The 3 left**, all from ranks 501-1000 and triaged in the sweep records (`card:brief -- "Name"`):
+  - **The Celestial Toymaker** (#890), `amount:pile-or-guess-effects-this-turn`: engine-only, the
+    next to build. Its end-step trigger counts the spells and abilities that made a player guess
+    (the `guess` effect) or group cards or permanents into piles (`separate-into-piles`) this turn —
+    a journal kind recorded per resolving spell or ability, read as a turn stat; its attack trigger
+    is `separate-into-piles` with a face-down pile.
+  - **Clara Oswald** (#737), `mechanic:commander-chosen-color-pregame` — a major waiting on the user
+    (a colour chosen before the game, which changes colour identity).
+  - **Malik, Grim Manipulator** (#779), `mechanic:secret-choice` — a major waiting on the user (a
+    new kind of decision).
 
 ## Card backlog (by EDHREC rank, and the precons)
 

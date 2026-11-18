@@ -3044,7 +3044,8 @@
   "effect:face-down-linked-exile-source-controller-looks",
   "static:play-from-linked-exile-once-per-turn",
   "effect:look-and-choose-then-always",
-  "effect:look-one-each-then-one-onto-battlefield"
+  "effect:look-one-each-then-one-onto-battlefield",
+  "amount:aggregate-over-attached-equipment"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

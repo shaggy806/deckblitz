@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-995 already implemented / 5 missing
+997 already implemented / 3 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -748,7 +748,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  742  Firesong and Sunspeaker                         4432 decks  {4}{R}{W}        Legendary Creature — Minotaur Cleric
 [x]  743  Sovereign Okinec Ahau                           4421 decks  {2}{G}{W}        Legendary Creature — Cat Noble
 [x]  744  Agent of the Iron Throne                        4420 decks  {2}{B}           Legendary Enchantment — Background
-[ ]  745  The Fourteenth Doctor                           4417 decks  {R/G}{W}{U}      Legendary Creature — Time Lord Doctor
+[x]  745  The Fourteenth Doctor                           4417 decks  {R/G}{W}{U}      Legendary Creature — Time Lord Doctor
 [x]  746  Pippin, Warden of Isengard                      4403 decks  {B}{G}           Legendary Creature — Halfling Advisor
 [x]  747  Rev, Tithe Extractor                            4399 decks  {3}{B}           Legendary Creature — Human Rogue
 [x]  748  Teysa, Orzhov Scion                             4399 decks  {1}{W}{B}        Legendary Creature — Human Advisor
@@ -954,7 +954,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  948  Molecule Man                                    3110 decks  {6}              Legendary Creature — Human Villain
 [x]  949  Cecil, Dark Knight                              3107 decks  {B}              Legendary Creature — Human Knight // Legendary Creature — Human Knight
 [x]  950  Guild Artisan                                   3101 decks  {1}{R}           Legendary Enchantment — Background
-[ ]  951  Tetsuo, Imperial Champion                       3092 decks  {U}{B}{R}        Legendary Creature — Human Samurai
+[x]  951  Tetsuo, Imperial Champion                       3092 decks  {U}{B}{R}        Legendary Creature — Human Samurai
 [x]  952  Borborygmos Enraged                             3088 decks  {4}{R}{R}{G}{G}  Legendary Creature — Cyclops
 [x]  953  Omnath, Locus of the Void                       3087 decks  {7}              Legendary Creature — Elemental
 [x]  954  Iroas, God of Victory                           3086 decks  {2}{R}{W}        Legendary Enchantment Creature — God
