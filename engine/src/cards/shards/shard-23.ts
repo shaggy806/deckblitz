@@ -504,6 +504,7 @@ import _poolLeechingLicid from "../pool/leeching-licid.js";
 import _poolLegionsJudgment from "../pool/legions-judgment.js";
 import _poolLeopardSpottedJiao from "../pool/leopard-spotted-jiao.js";
 import _poolLeoriSparktouchedHunter from "../pool/leori-sparktouched-hunter.js";
+import _poolLethalThrowdown from "../pool/lethal-throwdown.js";
 import _poolLeylineInvocation from "../pool/leyline-invocation.js";
 import _poolLeylineOfSanctity from "../pool/leyline-of-sanctity.js";
 import _poolLeylineOfTheMeek from "../pool/leyline-of-the-meek.js";
@@ -1569,6 +1570,7 @@ const shard: CardShard = {
     _poolLegionsJudgment,
     _poolLeopardSpottedJiao,
     _poolLeoriSparktouchedHunter,
+    _poolLethalThrowdown,
     _poolLeylineInvocation,
     _poolLeylineOfSanctity,
     _poolLeylineOfTheMeek,

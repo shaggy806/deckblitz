@@ -862,6 +862,7 @@ import _poolTalusPaladin from "../pool/talus-paladin.js";
 import _poolTamiyoInquisitiveStudent from "../pool/tamiyo-inquisitive-student.js";
 import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTargWrangler from "../pool/targ-wrangler.js";
+import _poolTasterOfWares from "../pool/taster-of-wares.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
 import _poolTeferisCare from "../pool/teferis-care.js";
@@ -1904,6 +1905,7 @@ const shard: CardShard = {
     _poolTamiyoInquisitiveStudent,
     _poolTaranikaAkroanVeteran,
     _poolTargWrangler,
+    _poolTasterOfWares,
     _poolTatteredApparition,
     _poolTeethingWurmlet,
     _poolTeferisCare,

@@ -78,6 +78,7 @@ import _poolBarbedLightning from "../pool/barbed-lightning.js";
 import _poolBashfulBeastie from "../pool/bashful-beastie.js";
 import _poolBasicConjuration from "../pool/basic-conjuration.js";
 import _poolBatteringCraghorn from "../pool/battering-craghorn.js";
+import _poolBattletideAlchemist from "../pool/battletide-alchemist.js";
 import _poolBeanstalkGiant from "../pool/beanstalk-giant.js";
 import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
 import _poolBeastWalkers from "../pool/beast-walkers.js";
@@ -1190,6 +1191,7 @@ const shard: CardShard = {
     _poolBashfulBeastie,
     _poolBasicConjuration,
     _poolBatteringCraghorn,
+    _poolBattletideAlchemist,
     _poolBeanstalkGiant,
     _poolBeanstalkWurm,
     _poolBeastWalkers,

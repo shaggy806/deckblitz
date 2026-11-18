@@ -322,6 +322,7 @@ import _poolFesteringThicket from "../pool/festering-thicket.js";
 import _poolFieldResearch from "../pool/field-research.js";
 import _poolFieldsOfStrife from "../pool/fields-of-strife.js";
 import _poolFiftyFeetOfRope from "../pool/fifty-feet-of-rope.js";
+import _poolFightOrFlight from "../pool/fight-or-flight.js";
 import _poolFightRigging from "../pool/fight-rigging.js";
 import _poolFigureOfFable from "../pool/figure-of-fable.js";
 import _poolFireNationPalace from "../pool/fire-nation-palace.js";
@@ -1367,6 +1368,7 @@ const shard: CardShard = {
     _poolFieldResearch,
     _poolFieldsOfStrife,
     _poolFiftyFeetOfRope,
+    _poolFightOrFlight,
     _poolFightRigging,
     _poolFigureOfFable,
     _poolFireNationPalace,

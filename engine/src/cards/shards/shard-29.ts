@@ -677,6 +677,7 @@ import _poolRendingFlame from "../pool/rending-flame.js";
 import _poolRenegadeDemon from "../pool/renegade-demon.js";
 import _poolReprieve from "../pool/reprieve.js";
 import _poolRepurposingBay from "../pool/repurposing-bay.js";
+import _poolReroute from "../pool/reroute.js";
 import _poolRescueLeopard from "../pool/rescue-leopard.js";
 import _poolResilientKhenra from "../pool/resilient-khenra.js";
 import _poolRestlessVinestalk from "../pool/restless-vinestalk.js";
@@ -1721,6 +1722,7 @@ const shard: CardShard = {
     _poolRenegadeDemon,
     _poolReprieve,
     _poolRepurposingBay,
+    _poolReroute,
     _poolRescueLeopard,
     _poolResilientKhenra,
     _poolRestlessVinestalk,

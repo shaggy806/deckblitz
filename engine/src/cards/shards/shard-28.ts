@@ -678,6 +678,7 @@ import _poolRainbowEfreet from "../pool/rainbow-efreet.js";
 import _poolRakdosRagemutt from "../pool/rakdos-ragemutt.js";
 import _poolRakshaGoldenCub from "../pool/raksha-golden-cub.js";
 import _poolRamunapExcavator from "../pool/ramunap-excavator.js";
+import _poolRangersOfIthilien from "../pool/rangers-of-ithilien.js";
 import _poolRangersRefueler from "../pool/rangers-refueler.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRapierWit from "../pool/rapier-wit.js";
@@ -1744,6 +1745,7 @@ const shard: CardShard = {
     _poolRakdosRagemutt,
     _poolRakshaGoldenCub,
     _poolRamunapExcavator,
+    _poolRangersOfIthilien,
     _poolRangersRefueler,
     _poolRapaciousGuest,
     _poolRapierWit,

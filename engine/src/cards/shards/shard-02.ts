@@ -331,6 +331,7 @@ import _poolForbiddenLore from "../pool/forbidden-lore.js";
 import _poolForceBubble from "../pool/force-bubble.js";
 import _poolForceSpike from "../pool/force-spike.js";
 import _poolForcefulDenial from "../pool/forceful-denial.js";
+import _poolForebodingSteamboat from "../pool/foreboding-steamboat.js";
 import _poolForgeDevil from "../pool/forge-devil.js";
 import _poolFormOfTheDragon from "../pool/form-of-the-dragon.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
@@ -1387,6 +1388,7 @@ const shard: CardShard = {
     _poolForceBubble,
     _poolForceSpike,
     _poolForcefulDenial,
+    _poolForebodingSteamboat,
     _poolForgeDevil,
     _poolFormOfTheDragon,
     _poolFortressCyclops,
