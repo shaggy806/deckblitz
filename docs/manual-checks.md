@@ -8940,9 +8940,9 @@ Each board's die comes up 4.
 ## Cards put on the bottom of a library instead of a graveyard (2026-11-18)
 
 ### Wheel of Sun and Moon: you arrange your milled cards on the bottom of your library
-- **Do:** Cast Wheel of Sun and Moon on yourself, then cast Mind Sculpt at yourself.
-- **Expect:** Your graveyard stays empty. The banner asks "Arrange these cards on the bottom of your library in the order you pick: the first you pick goes nearest the top", showing the seven milled cards, Grizzly Bears, Hill Giant and Lightning Bolt among them. Pick all seven and confirm: your library count is what it was.
+- **Do:** Cast Wheel of Sun and Moon on yourself, then cast Thought Scour at yourself.
+- **Expect:** A popup asks "Arrange these cards on the bottom of your library in the order you pick: the first you pick goes nearest the top", showing Grizzly Bears and Hill Giant. Pick both and confirm: your graveyard is still empty, you drew a card, and your library is the 42 it was — Thought Scour went to its bottom too.
 
 ### Wheel of Sun and Moon: in a 4-player game, you arrange your milled cards
-- **Do:** Cast Wheel of Sun and Moon on yourself, then cast Mind Sculpt at yourself.
-- **Expect:** You, not a bot, are asked "Arrange these cards on the bottom of your library …" with the seven milled cards; your graveyard stays empty.
+- **Do:** Cast Wheel of Sun and Moon on yourself, then cast Thought Scour at yourself.
+- **Expect:** You, not a bot, are asked "Arrange these cards on the bottom of your library …" with Grizzly Bears and Hill Giant; once you confirm, your graveyard is still empty.
