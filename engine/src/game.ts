@@ -44822,6 +44822,7 @@ controlledBy,
         });
       },
       apnap: (players) => this.apnapOrder().filter((p) => players.includes(p)),
+      seating: () => seatingOf(this.state).filter((p) => this.state.players[p]?.hasLost === false),
       goadCreaturesOf: (player, forGame, duration) => {
         const lastingFor = duration === undefined ? undefined : lastingHere(duration);
         for (const id of this.state.zones.shared.battlefield) {

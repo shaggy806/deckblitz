@@ -10030,6 +10030,15 @@ export type EffectSpec =
        * the active player (Fortunate Few's "choose …, then each other player
        * chooses …", by its ruling). */
       readonly startingWith?: "you" | "active-player" | "next-opponent" | "you-then-active-player";
+      /** Round the table from whoever starts, rather than in turn order:
+       * `"left"` the way play first went (rule 101.4), `"right"` the other
+       * way, by the seating whichever way the turn order runs now — Order of
+       * Succession's "starting with you and **proceeding in the chosen
+       * direction**, each player chooses a creature controlled by the next
+       * player in that direction" (a `modal` of the two, each with its own
+       * `permanent` filter `controlledBy: "player-to-your-left"` / `-right`,
+       * `own`). Only with `choose`. */
+      readonly proceeding?: "left" | "right";
       /** Set by the engine on the copy it parks between one vote and the
        * next: the votes still to ask for, each with whether it's an
        * additional, optional one — `"taken"`, an additional one that isn't
@@ -11651,6 +11660,10 @@ export type EffectSpec =
        */
       readonly kind: "choose-one-of-each";
       readonly who: PlayerScope;
+      /** "**Starting with you**, each player chooses …" (Grenzo's Rebuttal):
+       * in turn order from the effect's controller rather than the active
+       * player (the ruling). */
+      readonly startingWithYou?: true;
       /** The categories: card types, or a word for the basic land types (in
        * Plains, Island, Swamp, Mountain, Forest order) or the five colors.
        * `"party"`: "chooses a party from among creatures they control" (Stick
@@ -14660,6 +14673,9 @@ export interface EffectApi {
   ): boolean;
   /** `players` in turn order from the active player (rule 101.4). */
   apnap(players: readonly PlayerId[]): readonly PlayerId[];
+  /** Every player still in the game round the table, the way play first
+   * went (`seatingOf`, rule 101.4), whichever way the turn order runs now. */
+  seating(): readonly PlayerId[];
   /** See the `"encore"` {@link EffectSpec}. */
   encore(copying?: ObjectId): void;
   /** The colour this effect's source named as it entered, or `undefined` —
@@ -16830,6 +16846,22 @@ function applyRedistributeLifeTotals(
  * additional votes straight after their first (701.38d). The rest is parked
  * as a copy carrying `toAsk` whenever a question waits for its answer.
  */
+/** `players` in order round the table from the first of them, by the seating
+ * (`ResolutionContext.seating`): `"left"` the way play first went (rule
+ * 101.4), `"right"` the other way — a `vote`'s `proceeding`. */
+function aroundTheTable(
+  players: readonly PlayerId[],
+  direction: "left" | "right",
+  ctx: ResolutionContext,
+): readonly PlayerId[] {
+  const first = players[0];
+  const seats = ctx.seating().filter((player) => players.includes(player));
+  const at = first === undefined ? -1 : seats.indexOf(first);
+  if (at < 0) return players;
+  const onward = [...seats.slice(at), ...seats.slice(0, at)];
+  return direction === "left" ? onward : [onward[0], ...onward.slice(1).reverse()];
+}
+
 function applyVote(whole: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionContext): void {
   const { castKept, ...spec } = whole;
   // A card in a graveyard, picked by a `choose-from-zone`: cast as the vote.
@@ -16853,7 +16885,10 @@ function applyVote(whole: Extract<EffectSpec, { kind: "vote" }>, ctx: Resolution
                 ...ctx.apnap(fromYou.filter((player) => player !== ctx.controller)),
               ]
             : ctx.apnap(fromYou);
-    toAsk = order.map((player) => ({ player, extra: false }));
+    toAsk = (spec.proceeding === undefined ? order : aroundTheTable(order, spec.proceeding, ctx)).map((player) => ({
+      player,
+      extra: false,
+    }));
     // "For each player, choose …": the one chooser, a question per player.
     const about = "options" in spec.for || "permanent" in spec.for ? spec.for.about : undefined;
     if (about !== undefined) {
@@ -25012,7 +25047,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // for them all, and it all happens at once.
       const below = ctx.parkedCount();
       const players = ctx.playersInScope(spec.who);
-      let toAsk = spec.progress?.toAsk ?? ctx.apnap(players);
+      let toAsk =
+        spec.progress?.toAsk ?? (spec.startingWithYou === true ? eachPlayerMayAsks(spec.who, ctx, true) : ctx.apnap(players));
       let kept = [...(spec.progress?.kept ?? []), ...ctx.takeKept()];
       while (toAsk.length > 0) {
         const player = toAsk[0];
