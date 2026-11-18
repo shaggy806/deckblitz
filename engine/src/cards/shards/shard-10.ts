@@ -169,6 +169,7 @@ import _poolCommanderLiaraPortyr from "../pool/commander-liara-portyr.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolConniveConcoct from "../pool/connive-concoct.js";
 import _poolContainmentConstruct from "../pool/containment-construct.js";
+import _poolConundrumSphinx from "../pool/conundrum-sphinx.js";
 import _poolCoordinatedAssault from "../pool/coordinated-assault.js";
 import _poolCoralhelmGuide from "../pool/coralhelm-guide.js";
 import _poolCorpseberryCultivator from "../pool/corpseberry-cultivator.js";
@@ -1224,6 +1225,7 @@ const shard: CardShard = {
     _poolCompellingArgument,
     _poolConniveConcoct,
     _poolContainmentConstruct,
+    _poolConundrumSphinx,
     _poolCoordinatedAssault,
     _poolCoralhelmGuide,
     _poolCorpseberryCultivator,

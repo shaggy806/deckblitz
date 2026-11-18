@@ -170,6 +170,7 @@ import _poolCloudpiercer from "../pool/cloudpiercer.js";
 import _poolCoastalBulwark from "../pool/coastal-bulwark.js";
 import _poolCollectiveNightmare from "../pool/collective-nightmare.js";
 import _poolCollisionCourse from "../pool/collision-course.js";
+import _poolCollisionOfRealms from "../pool/collision-of-realms.js";
 import _poolColossalGrowth from "../pool/colossal-growth.js";
 import _poolCommandersSphere from "../pool/commanders-sphere.js";
 import _poolCommonCrook from "../pool/common-crook.js";
@@ -1226,6 +1227,7 @@ const shard: CardShard = {
     _poolCoastalBulwark,
     _poolCollectiveNightmare,
     _poolCollisionCourse,
+    _poolCollisionOfRealms,
     _poolColossalGrowth,
     _poolCommandersSphere,
     _poolCommonCrook,

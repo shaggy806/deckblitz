@@ -97,6 +97,7 @@ import _poolBlightreaperThallid from "../pool/blightreaper-thallid.js";
 import _poolBlitzballStadium from "../pool/blitzball-stadium.js";
 import _poolBloatflySwarm from "../pool/bloatfly-swarm.js";
 import _poolBloodArtist from "../pool/blood-artist.js";
+import _poolBloodOfTheMartyr from "../pool/blood-of-the-martyr.js";
 import _poolBloodPet from "../pool/blood-pet.js";
 import _poolBloodbraidElf from "../pool/bloodbraid-elf.js";
 import _poolBloodshotCyclops from "../pool/bloodshot-cyclops.js";
@@ -916,6 +917,7 @@ import _poolTheMonumentalFacade from "../pool/the-monumental-facade.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
 import _poolTheRealityChip from "../pool/the-reality-chip.js";
 import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
+import _poolTheThreeSeasons from "../pool/the-three-seasons.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
 import _poolThoughtNibbler from "../pool/thought-nibbler.js";
@@ -1165,6 +1167,7 @@ const shard: CardShard = {
     _poolBlitzballStadium,
     _poolBloatflySwarm,
     _poolBloodArtist,
+    _poolBloodOfTheMartyr,
     _poolBloodPet,
     _poolBloodbraidElf,
     _poolBloodshotCyclops,
@@ -1984,6 +1987,7 @@ const shard: CardShard = {
     _poolThePrydwenSteelFlagship,
     _poolTheRealityChip,
     _poolTheRevelationsOfEzio,
+    _poolTheThreeSeasons,
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
     _poolThoughtNibbler,

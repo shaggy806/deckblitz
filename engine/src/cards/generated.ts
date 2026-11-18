@@ -2882,6 +2882,7 @@ import _poolBloodMist from "./pool/blood-mist.js";
 import _poolBloodMoney from "./pool/blood-money.js";
 import _poolBloodMoon from "./pool/blood-moon.js";
 import _poolBloodOath from "./pool/blood-oath.js";
+import _poolBloodOfTheMartyr from "./pool/blood-of-the-martyr.js";
 import _poolBloodOgre from "./pool/blood-ogre.js";
 import _poolBloodOnTheSnow from "./pool/blood-on-the-snow.js";
 import _poolBloodOperative from "./pool/blood-operative.js";
@@ -5103,6 +5104,7 @@ import _poolCollectorsVault from "./pool/collectors-vault.js";
 import _poolColleenWingStreetSamurai from "./pool/colleen-wing-street-samurai.js";
 import _poolCollisionColossus from "./pool/collision-colossus.js";
 import _poolCollisionCourse from "./pool/collision-course.js";
+import _poolCollisionOfRealms from "./pool/collision-of-realms.js";
 import _poolCollision from "./pool/collision.js";
 import _poolColonelAutumn from "./pool/colonel-autumn.js";
 import _poolColorfulFeiyiSparrow from "./pool/colorful-feiyi-sparrow.js";
@@ -5396,6 +5398,7 @@ import _poolControlMagic from "./pool/control-magic.js";
 import _poolControlOfTheCourt from "./pool/control-of-the-court.js";
 import _poolControlledInstincts from "./pool/controlled-instincts.js";
 import _poolControvert from "./pool/controvert.js";
+import _poolConundrumSphinx from "./pool/conundrum-sphinx.js";
 import _poolConvalescence from "./pool/convalescence.js";
 import _poolConvalescentCare from "./pool/convalescent-care.js";
 import _poolConvenientTarget from "./pool/convenient-target.js";
@@ -6377,6 +6380,7 @@ import _poolDaxossTorment from "./pool/daxoss-torment.js";
 import _poolDayOfBlackSun from "./pool/day-of-black-sun.js";
 import _poolDayOfDestiny from "./pool/day-of-destiny.js";
 import _poolDayOfJudgment from "./pool/day-of-judgment.js";
+import _poolDayOfTheDragons from "./pool/day-of-the-dragons.js";
 import _poolDayOfTheMoon from "./pool/day-of-the-moon.js";
 import _poolDay from "./pool/day.js";
 import _poolDaybreakChaplain from "./pool/daybreak-chaplain.js";
@@ -12005,6 +12009,7 @@ import _poolGrendelSpawnOfKnull from "./pool/grendel-spawn-of-knull.js";
 import _poolGrenzoDungeonWarden from "./pool/grenzo-dungeon-warden.js";
 import _poolGrenzoHavocRaiser from "./pool/grenzo-havoc-raiser.js";
 import _poolGrenzosCutthroat from "./pool/grenzos-cutthroat.js";
+import _poolGrenzosRebuttal from "./pool/grenzos-rebuttal.js";
 import _poolGrenzosRuffians from "./pool/grenzos-ruffians.js";
 import _poolGretaSweettoothScourge from "./pool/greta-sweettooth-scourge.js";
 import _poolGretchenTitchwillow from "./pool/gretchen-titchwillow.js";
@@ -13964,6 +13969,7 @@ import _poolInnerFlameAcolyte from "./pool/inner-flame-acolyte.js";
 import _poolInnerFlameIgniter from "./pool/inner-flame-igniter.js";
 import _poolInnerSanctum from "./pool/inner-sanctum.js";
 import _poolInnerStruggle from "./pool/inner-struggle.js";
+import _poolInniazTheGaleForce from "./pool/inniaz-the-gale-force.js";
 import _poolInnkeepersTalent from "./pool/innkeepers-talent.js";
 import _poolInnocenceKami from "./pool/innocence-kami.js";
 import _poolInnocentBlood from "./pool/innocent-blood.js";
@@ -19718,6 +19724,7 @@ import _poolOrderChaos from "./pool/order-chaos.js";
 import _poolOrderOfLeitbur from "./pool/order-of-leitbur.js";
 import _poolOrderOfMidnight from "./pool/order-of-midnight.js";
 import _poolOrderOfSacredDusk from "./pool/order-of-sacred-dusk.js";
+import _poolOrderOfSuccession from "./pool/order-of-succession.js";
 import _poolOrderOfTheAlabasterHost from "./pool/order-of-the-alabaster-host.js";
 import _poolOrderOfTheEbonHand from "./pool/order-of-the-ebon-hand.js";
 import _poolOrderOfTheGoldenCricket from "./pool/order-of-the-golden-cricket.js";
@@ -23097,6 +23104,7 @@ import _poolRootgrapple from "./pool/rootgrapple.js";
 import _poolRoothaMasteringTheMoment from "./pool/rootha-mastering-the-moment.js";
 import _poolRoothaMercurialArtist from "./pool/rootha-mercurial-artist.js";
 import _poolRootingKavu from "./pool/rooting-kavu.js";
+import _poolRootingMoloch from "./pool/rooting-moloch.js";
 import _poolRootlessYew from "./pool/rootless-yew.js";
 import _poolRootpathPurifier from "./pool/rootpath-purifier.js";
 import _poolRootriderFaun from "./pool/rootrider-faun.js";
@@ -28676,6 +28684,7 @@ import _poolTheThingBenGrimm from "./pool/the-thing-ben-grimm.js";
 import _poolTheThing from "./pool/the-thing.js";
 import _poolTheThirdDoctor from "./pool/the-third-doctor.js";
 import _poolTheThirteenthDoctor from "./pool/the-thirteenth-doctor.js";
+import _poolTheThreeSeasons from "./pool/the-three-seasons.js";
 import _poolTheTombOfAclazotz from "./pool/the-tomb-of-aclazotz.js";
 import _poolTheTormentOfGollum from "./pool/the-torment-of-gollum.js";
 import _poolTheTraveler from "./pool/the-traveler.js";
@@ -32857,6 +32866,7 @@ import _tokens32ShapeshifterToken from "./tokens/3-2-shapeshifter-token.js";
 import _tokens33GreenBoarToken from "./tokens/3-3-green-boar-token.js";
 import _tokens33WhiteBirdToken from "./tokens/3-3-white-bird-token.js";
 import _tokens44RedBirdToken from "./tokens/4-4-red-bird-token.js";
+import _tokens44RedOgreToken from "./tokens/4-4-red-ogre-token.js";
 import _tokens55DjinnArtifactToken from "./tokens/5-5-djinn-artifact-token.js";
 import _tokens55ElephantToken from "./tokens/5-5-elephant-token.js";
 import _tokensAetherbornToken from "./tokens/aetherborn-token.js";
@@ -36513,6 +36523,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBloodMoney,
   _poolBloodMoon,
   _poolBloodOath,
+  _poolBloodOfTheMartyr,
   _poolBloodOgre,
   _poolBloodOnTheSnow,
   _poolBloodOperative,
@@ -38734,6 +38745,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolColleenWingStreetSamurai,
   _poolCollisionColossus,
   _poolCollisionCourse,
+  _poolCollisionOfRealms,
   _poolCollision,
   _poolColonelAutumn,
   _poolColorfulFeiyiSparrow,
@@ -39027,6 +39039,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolControlOfTheCourt,
   _poolControlledInstincts,
   _poolControvert,
+  _poolConundrumSphinx,
   _poolConvalescence,
   _poolConvalescentCare,
   _poolConvenientTarget,
@@ -40008,6 +40021,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDayOfBlackSun,
   _poolDayOfDestiny,
   _poolDayOfJudgment,
+  _poolDayOfTheDragons,
   _poolDayOfTheMoon,
   _poolDay,
   _poolDaybreakChaplain,
@@ -45636,6 +45650,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrenzoDungeonWarden,
   _poolGrenzoHavocRaiser,
   _poolGrenzosCutthroat,
+  _poolGrenzosRebuttal,
   _poolGrenzosRuffians,
   _poolGretaSweettoothScourge,
   _poolGretchenTitchwillow,
@@ -47595,6 +47610,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInnerFlameIgniter,
   _poolInnerSanctum,
   _poolInnerStruggle,
+  _poolInniazTheGaleForce,
   _poolInnkeepersTalent,
   _poolInnocenceKami,
   _poolInnocentBlood,
@@ -53349,6 +53365,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOrderOfLeitbur,
   _poolOrderOfMidnight,
   _poolOrderOfSacredDusk,
+  _poolOrderOfSuccession,
   _poolOrderOfTheAlabasterHost,
   _poolOrderOfTheEbonHand,
   _poolOrderOfTheGoldenCricket,
@@ -56728,6 +56745,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRoothaMasteringTheMoment,
   _poolRoothaMercurialArtist,
   _poolRootingKavu,
+  _poolRootingMoloch,
   _poolRootlessYew,
   _poolRootpathPurifier,
   _poolRootriderFaun,
@@ -62307,6 +62325,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheThing,
   _poolTheThirdDoctor,
   _poolTheThirteenthDoctor,
+  _poolTheThreeSeasons,
   _poolTheTombOfAclazotz,
   _poolTheTormentOfGollum,
   _poolTheTraveler,
@@ -66494,6 +66513,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokens33GreenBoarToken,
   _tokens33WhiteBirdToken,
   _tokens44RedBirdToken,
+  _tokens44RedOgreToken,
   _tokens55DjinnArtifactToken,
   _tokens55ElephantToken,
   _tokensAetherbornToken,
@@ -70157,6 +70177,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blood-money": _poolBloodMoney,
   "pool/blood-moon": _poolBloodMoon,
   "pool/blood-oath": _poolBloodOath,
+  "pool/blood-of-the-martyr": _poolBloodOfTheMartyr,
   "pool/blood-ogre": _poolBloodOgre,
   "pool/blood-on-the-snow": _poolBloodOnTheSnow,
   "pool/blood-operative": _poolBloodOperative,
@@ -72378,6 +72399,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/colleen-wing-street-samurai": _poolColleenWingStreetSamurai,
   "pool/collision-colossus": _poolCollisionColossus,
   "pool/collision-course": _poolCollisionCourse,
+  "pool/collision-of-realms": _poolCollisionOfRealms,
   "pool/collision": _poolCollision,
   "pool/colonel-autumn": _poolColonelAutumn,
   "pool/colorful-feiyi-sparrow": _poolColorfulFeiyiSparrow,
@@ -72671,6 +72693,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/control-of-the-court": _poolControlOfTheCourt,
   "pool/controlled-instincts": _poolControlledInstincts,
   "pool/controvert": _poolControvert,
+  "pool/conundrum-sphinx": _poolConundrumSphinx,
   "pool/convalescence": _poolConvalescence,
   "pool/convalescent-care": _poolConvalescentCare,
   "pool/convenient-target": _poolConvenientTarget,
@@ -73652,6 +73675,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/day-of-black-sun": _poolDayOfBlackSun,
   "pool/day-of-destiny": _poolDayOfDestiny,
   "pool/day-of-judgment": _poolDayOfJudgment,
+  "pool/day-of-the-dragons": _poolDayOfTheDragons,
   "pool/day-of-the-moon": _poolDayOfTheMoon,
   "pool/day": _poolDay,
   "pool/daybreak-chaplain": _poolDaybreakChaplain,
@@ -79280,6 +79304,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grenzo-dungeon-warden": _poolGrenzoDungeonWarden,
   "pool/grenzo-havoc-raiser": _poolGrenzoHavocRaiser,
   "pool/grenzos-cutthroat": _poolGrenzosCutthroat,
+  "pool/grenzos-rebuttal": _poolGrenzosRebuttal,
   "pool/grenzos-ruffians": _poolGrenzosRuffians,
   "pool/greta-sweettooth-scourge": _poolGretaSweettoothScourge,
   "pool/gretchen-titchwillow": _poolGretchenTitchwillow,
@@ -81239,6 +81264,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/inner-flame-igniter": _poolInnerFlameIgniter,
   "pool/inner-sanctum": _poolInnerSanctum,
   "pool/inner-struggle": _poolInnerStruggle,
+  "pool/inniaz-the-gale-force": _poolInniazTheGaleForce,
   "pool/innkeepers-talent": _poolInnkeepersTalent,
   "pool/innocence-kami": _poolInnocenceKami,
   "pool/innocent-blood": _poolInnocentBlood,
@@ -86993,6 +87019,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/order-of-leitbur": _poolOrderOfLeitbur,
   "pool/order-of-midnight": _poolOrderOfMidnight,
   "pool/order-of-sacred-dusk": _poolOrderOfSacredDusk,
+  "pool/order-of-succession": _poolOrderOfSuccession,
   "pool/order-of-the-alabaster-host": _poolOrderOfTheAlabasterHost,
   "pool/order-of-the-ebon-hand": _poolOrderOfTheEbonHand,
   "pool/order-of-the-golden-cricket": _poolOrderOfTheGoldenCricket,
@@ -90372,6 +90399,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rootha-mastering-the-moment": _poolRoothaMasteringTheMoment,
   "pool/rootha-mercurial-artist": _poolRoothaMercurialArtist,
   "pool/rooting-kavu": _poolRootingKavu,
+  "pool/rooting-moloch": _poolRootingMoloch,
   "pool/rootless-yew": _poolRootlessYew,
   "pool/rootpath-purifier": _poolRootpathPurifier,
   "pool/rootrider-faun": _poolRootriderFaun,
@@ -95951,6 +95979,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-thing": _poolTheThing,
   "pool/the-third-doctor": _poolTheThirdDoctor,
   "pool/the-thirteenth-doctor": _poolTheThirteenthDoctor,
+  "pool/the-three-seasons": _poolTheThreeSeasons,
   "pool/the-tomb-of-aclazotz": _poolTheTombOfAclazotz,
   "pool/the-torment-of-gollum": _poolTheTormentOfGollum,
   "pool/the-traveler": _poolTheTraveler,
@@ -100132,6 +100161,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/3-3-green-boar-token": _tokens33GreenBoarToken,
   "tokens/3-3-white-bird-token": _tokens33WhiteBirdToken,
   "tokens/4-4-red-bird-token": _tokens44RedBirdToken,
+  "tokens/4-4-red-ogre-token": _tokens44RedOgreToken,
   "tokens/5-5-djinn-artifact-token": _tokens55DjinnArtifactToken,
   "tokens/5-5-elephant-token": _tokens55ElephantToken,
   "tokens/aetherborn-token": _tokensAetherbornToken,

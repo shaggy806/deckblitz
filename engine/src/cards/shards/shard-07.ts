@@ -374,6 +374,7 @@ import _poolGraywatersFixer from "../pool/graywaters-fixer.js";
 import _poolGreaterBasilisk from "../pool/greater-basilisk.js";
 import _poolGreenhouseRicketyGazebo from "../pool/greenhouse-rickety-gazebo.js";
 import _poolGregorShrewdMagistrate from "../pool/gregor-shrewd-magistrate.js";
+import _poolGrenzosRebuttal from "../pool/grenzos-rebuttal.js";
 import _poolGrimFlowering from "../pool/grim-flowering.js";
 import _poolGrimStrider from "../pool/grim-strider.js";
 import _poolGrindingStation from "../pool/grinding-station.js";
@@ -1451,6 +1452,7 @@ const shard: CardShard = {
     _poolGreaterBasilisk,
     _poolGreenhouseRicketyGazebo,
     _poolGregorShrewdMagistrate,
+    _poolGrenzosRebuttal,
     _poolGrimFlowering,
     _poolGrimStrider,
     _poolGrindingStation,

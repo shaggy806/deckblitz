@@ -604,6 +604,7 @@ import _poolOilGorgerTroll from "../pool/oil-gorger-troll.js";
 import _poolOlogHaiCrusher from "../pool/olog-hai-crusher.js";
 import _poolOmenOfTheSea from "../pool/omen-of-the-sea.js";
 import _poolOracleOfTheAlpha from "../pool/oracle-of-the-alpha.js";
+import _poolOrderOfSuccession from "../pool/order-of-succession.js";
 import _poolOrdinaryBear from "../pool/ordinary-bear.js";
 import _poolOrimsTouch from "../pool/orims-touch.js";
 import _poolOstrichHorse from "../pool/ostrich-horse.js";
@@ -1599,6 +1600,7 @@ const shard: CardShard = {
     _poolOlogHaiCrusher,
     _poolOmenOfTheSea,
     _poolOracleOfTheAlpha,
+    _poolOrderOfSuccession,
     _poolOrdinaryBear,
     _poolOrimsTouch,
     _poolOstrichHorse,

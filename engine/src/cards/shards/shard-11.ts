@@ -733,6 +733,7 @@ import _poolRockJockey from "../pool/rock-jockey.js";
 import _poolRockcasterPlatoon from "../pool/rockcaster-platoon.js";
 import _poolRofellossGift from "../pool/rofelloss-gift.js";
 import _poolRollingEarthquake from "../pool/rolling-earthquake.js";
+import _poolRootingMoloch from "../pool/rooting-moloch.js";
 import _poolRootriderFaun from "../pool/rootrider-faun.js";
 import _poolRuinCrab from "../pool/ruin-crab.js";
 import _poolRuinousPath from "../pool/ruinous-path.js";
@@ -1035,6 +1036,7 @@ import _poolZombieMaster from "../pool/zombie-master.js";
 import _poolZukoAvatarHunter from "../pool/zuko-avatar-hunter.js";
 import _poolZuriWarriorOfWakanda from "../pool/zuri-warrior-of-wakanda.js";
 import _tokens22BlackBirdToken from "../tokens/2-2-black-bird-token.js";
+import _tokens44RedOgreToken from "../tokens/4-4-red-ogre-token.js";
 import _tokensCentaurToken33 from "../tokens/centaur-token-3-3.js";
 import _tokensDragonTokenDragonbackAssault from "../tokens/dragon-token-dragonback-assault.js";
 import _tokensElementalShamanTokenHaste from "../tokens/elemental-shaman-token-haste.js";
@@ -1792,6 +1794,7 @@ const shard: CardShard = {
     _poolRockcasterPlatoon,
     _poolRofellossGift,
     _poolRollingEarthquake,
+    _poolRootingMoloch,
     _poolRootriderFaun,
     _poolRuinCrab,
     _poolRuinousPath,
@@ -2096,6 +2099,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens22BlackBirdToken,
+    _tokens44RedOgreToken,
     _tokensCentaurToken33,
     _tokensDragonTokenDragonbackAssault,
     _tokensElementalShamanTokenHaste,

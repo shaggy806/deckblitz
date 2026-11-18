@@ -185,6 +185,7 @@ import _poolDampenThought from "../pool/dampen-thought.js";
 import _poolDanceOfTheTumbleweeds from "../pool/dance-of-the-tumbleweeds.js";
 import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDawnglowInfusion from "../pool/dawnglow-infusion.js";
+import _poolDayOfTheDragons from "../pool/day-of-the-dragons.js";
 import _poolDeadBeforeSunrise from "../pool/dead-before-sunrise.js";
 import _poolDeathWind from "../pool/death-wind.js";
 import _poolDeathbellowRaider from "../pool/deathbellow-raider.js";
@@ -408,6 +409,7 @@ import _poolIncendiaryFlow from "../pool/incendiary-flow.js";
 import _poolIndulgentAristocrat from "../pool/indulgent-aristocrat.js";
 import _poolInfernoProject from "../pool/inferno-project.js";
 import _poolInfiltrate from "../pool/infiltrate.js";
+import _poolInniazTheGaleForce from "../pool/inniaz-the-gale-force.js";
 import _poolInnocenceKami from "../pool/innocence-kami.js";
 import _poolInsatiableHarpy from "../pool/insatiable-harpy.js";
 import _poolInspiringVeteran from "../pool/inspiring-veteran.js";
@@ -1217,6 +1219,7 @@ const shard: CardShard = {
     _poolDanceOfTheTumbleweeds,
     _poolDarkDeal,
     _poolDawnglowInfusion,
+    _poolDayOfTheDragons,
     _poolDeadBeforeSunrise,
     _poolDeathWind,
     _poolDeathbellowRaider,
@@ -1440,6 +1443,7 @@ const shard: CardShard = {
     _poolIndulgentAristocrat,
     _poolInfernoProject,
     _poolInfiltrate,
+    _poolInniazTheGaleForce,
     _poolInnocenceKami,
     _poolInsatiableHarpy,
     _poolInspiringVeteran,
