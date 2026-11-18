@@ -37881,6 +37881,7 @@ export class Game {
           event.type === "card-drawn" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           (spec.exceptFirstInDrawStep !== true || event.firstInDrawStep !== true) &&
+          (spec.firstInDrawStep !== true || event.firstInDrawStep === true) &&
           // The source too, for "a card with **the chosen name**" (Booby
           // Trap: `chosenName` reads this permanent's).
           (spec.filter === undefined ||

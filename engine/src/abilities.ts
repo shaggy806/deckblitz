@@ -1530,6 +1530,11 @@ export type TriggerKind =
        * Writhing Storm's "except the first one they draw in each of their
        * draw steps". A draw in someone else's draw step still counts. */
       readonly exceptFirstInDrawStep?: boolean;
+      /** Only the first card they draw in their own draw step — Wiretapping's
+       * "whenever you draw your first card during each of your draw steps":
+       * the turn-based draw (rule 504.1), or, if that was replaced and drew
+       * nothing, the first card an effect draws there. */
+      readonly firstInDrawStep?: true;
     }
   | {
       /**
