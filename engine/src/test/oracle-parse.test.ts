@@ -755,7 +755,7 @@ describe("what a spell costs: amounts, colours and targets", () => {
   const face = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{7}", colors: [], cmc: 7 } as never) as unknown as Record<string, unknown> & {
       static?: { costModification?: unknown; targetedBySpellsCost?: unknown }[];
-      activated?: { costReduction?: unknown }[];
+      activated?: { costReduction?: unknown; costIncrease?: unknown; effect?: unknown }[];
     };
   const self = (text: string): unknown => face("Sorcery", text).selfCostReduction;
 
@@ -931,6 +931,12 @@ describe("what a spell costs: amounts, colours and targets", () => {
     expect(logbook.activated?.[0].costReduction).toEqual({
       reduceGeneric: { countOf: { type: "artifact", controlledBy: "you" }, excludeSelf: true },
     });
+  });
+
+  it("reads an ability's own increase (Loreseeker's Stone)", () => {
+    const stone = face("Artifact", "{3}, {T}: Draw three cards. This ability costs {1} more to activate for each card in your hand.");
+    expect(stone.activated?.[0].costIncrease).toEqual({ increaseGeneric: { cardsInHand: "you" } });
+    expect(stone.activated?.[0].effect).toEqual({ kind: "draw", amount: 3 });
   });
 });
 

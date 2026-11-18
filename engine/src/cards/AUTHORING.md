@@ -5496,6 +5496,11 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   (Hylda's Crown of Winter), and from the graveyard (Razorlash Transmogrant).
   `reduceColored` is the coloured part: Flying Drone's "{1}{U} less" is
   `reduceGeneric: 1, reduceColored: "{U}"` (rule 118.7).
+- `costIncrease: { increaseGeneric }` — the same for "costs … **more**":
+  Loreseeker's Stone's "This ability costs {1} more to activate for each card
+  in your hand" is `{ increaseGeneric: { cardsInHand: "you" } }`, counted as
+  it's activated (before it draws — the ruling) and added before any
+  reduction (rule 601.2f). Any `EffectAmount`, read from the source's side.
 - `targetCostReduction: { filter, reduceGeneric, count? }` — "This ability
   costs {N} less to activate if it targets [`count`, default one, objects
   matching `filter`]" (the spell's `targetCostReduction`, for an ability):

@@ -3085,7 +3085,9 @@
   "replacement:graveyard-to-library-bottom-instead",
   "effect:search-library-to-exile-linked",
   "effect:exile-spell-with-delay-counters",
-  "amount:exiled-as-cost-spell-mana-value"
+  "amount:exiled-as-cost-spell-mana-value",
+  "amount:exiled-as-cost-spell-mana-value",
+  "cost:ability-cost-increase-per-count"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

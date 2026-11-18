@@ -1012,6 +1012,14 @@ export interface ActivatedAbility {
     readonly reduceColored?: string;
     readonly condition?: StaticCondition;
   };
+  /** A live cost increase printed on the ability itself — Loreseeker's
+   * Stone's "This ability costs {1} more to activate for each card in your
+   * hand" (`increaseGeneric: { cardsInHand: "you" }`), read from the
+   * source's side as `costReduction`'s is. An increase, so added before any
+   * reduction (rule 601.2f, via 602.2b). */
+  readonly costIncrease?: {
+    readonly increaseGeneric: EffectAmount;
+  };
   /**
    * "This ability costs {N} less to activate if it targets [`count` objects
    * matching `filter`]" — Wayta, Trainer Prodigy's "{2} less … if it targets

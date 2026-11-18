@@ -19934,6 +19934,14 @@ function parseFaceAsWritten(face, ctx = {}) {
         ability.costReduction = { reduceGeneric: amount };
         return "";
       });
+      // "This ability costs {1} more to activate for each card in your hand"
+      // (Loreseeker's Stone): the ability's `costIncrease`.
+      rest = rest.replace(/ This ability costs \{1\} more to activate for each (.+?)\.$/, (whole, each) => {
+        const amount = each === "card in your hand" ? { cardsInHand: "you" } : costEachAmount(each);
+        if (amount === null) return whole;
+        ability.costIncrease = { increaseGeneric: amount };
+        return "";
+      });
       const restrictions = [];
       rest = rest.replace(/ Activate only (as a sorcery|once each turn|during your turn)\.$/, (_x, r) => {
         restrictions.push(r);

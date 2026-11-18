@@ -27502,8 +27502,12 @@ export class Game {
     const hasX = parsed.x > 0 || costAnnouncesX(ability.cost) || ability.loyaltyCost === "-x";
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
     const mod = this.abilityCostModificationFor(sourceId, ability, player, targets);
+    // "This ability costs {1} more to activate for each card in your hand"
+    // (Loreseeker's Stone), read from its own source as `costReduction` is.
+    const ownIncrease =
+      ability.costIncrease === undefined ? 0 : this.costAmount(ability.costIncrease.increaseGeneric, player, sourceId);
     // Increases first, then the reductions (rule 601.2f).
-    let generic = parsed.generic + parsed.x * chosenX + mod.increaseGeneric;
+    let generic = parsed.generic + parsed.x * chosenX + mod.increaseGeneric + ownIncrease;
     // "This effect can't reduce the mana in that cost to less than one mana"
     // (Training Grounds): only down to one mana counting every symbol left,
     // and before any unlimited reduction — the order that leaves the least
