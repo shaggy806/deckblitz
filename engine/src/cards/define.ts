@@ -96,6 +96,25 @@ export interface PermanentOnEnter {
   readonly counter?: string;
 }
 
+/**
+ * "As this creature transforms into [this face], it becomes a copy of a
+ * creature card exiled with it, except its name is …, it's 4/4, and it's a
+ * legendary blue and black Zombie in addition to its other colors and types"
+ * (Olag, Ludevic's Hubris — rule 712.20): its controller chooses one of the
+ * cards exiled with it (rule 607.2a; 607.1b — by either face's ability)
+ * matching `filter` as it transforms, not after (the ruling), and it becomes a
+ * copy of that card's printed values (rule 707.2 — a copy effect without a
+ * duration, so it stays one whatever becomes of the card, the ruling) with
+ * `except` (707.9b). With none exiled, it's simply this face. Asked by the
+ * `transform` effect among the different names (a choose-modes; two cards of
+ * one name copy the same), applied in `Game.transformPermanent` before the
+ * face's `asTransformsInto` (Olag's counters).
+ */
+export interface CopyOnTransform {
+  readonly filter: CardFilter;
+  readonly except?: CopyExceptions;
+}
+
 /** One form of a {@link BecomesOnEnter}: what its controller's choice is
  * called, and what it makes the permanent — base P/T, abilities and types, as
  * a copy's exceptions say them, since these are copiable values too (rule
@@ -6327,6 +6346,11 @@ export interface CardDefinition {
    * Curse of Leeches' "attach it to a player", its `asTransformsInto`
    * attaching it to `"chosen-player"`. Unset for normal cards. */
   readonly choosePlayerOnTransform?: "player" | "opponent";
+  /** "As this creature transforms into [this face], it becomes a copy of a
+   * creature card exiled with it, except …" (rule 712.20 — Olag, Ludevic's
+   * Hubris), on the face named. See {@link CopyOnTransform}. Unset for
+   * normal cards. */
+  readonly copyOnTransform?: CopyOnTransform;
   /** A flip card (rule 710): `faces` is its normal half then its alternative
    * (upside-down) half, each its own `CardDefinition` with this flag. It is
    * cast and lives everywhere as its normal half (710.2); a `flip` effect
@@ -6577,6 +6601,7 @@ const PRINTED_ABILITY: {
   splitSecond: (def) => def.splitSecond !== false,
   asTransformsInto: (def) => def.asTransformsInto !== null,
   choosePlayerOnTransform: (def) => def.choosePlayerOnTransform !== undefined,
+  copyOnTransform: (def) => def.copyOnTransform !== undefined,
   copyOnEnter: (def) => def.copyOnEnter !== null,
   becomesOnEnter: (def) => def.becomesOnEnter !== null,
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
@@ -6909,6 +6934,7 @@ interface CardDraft {
   splitSecond?: boolean | StaticCondition;
   asTransformsInto?: EffectSpec;
   choosePlayerOnTransform?: "player" | "opponent";
+  copyOnTransform?: CopyOnTransform;
   copyOnEnter?: CopyOnEnter;
   becomesOnEnter?: BecomesOnEnter;
   exchangeTextOnEnter?: CardFilter;
@@ -7345,6 +7371,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.chooseTwoPlayersOnEnter === true ? { chooseTwoPlayersOnEnter: true as const } : {}),
     ...(draft.chooseOnEnterCount !== undefined && draft.chooseOnEnterCount > 1 ? { chooseOnEnterCount: draft.chooseOnEnterCount } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
+    ...(draft.copyOnTransform !== undefined ? { copyOnTransform: draft.copyOnTransform } : {}),
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),
     ...(draft.asBecomesAttached !== undefined ? { asBecomesAttached: draft.asBecomesAttached } : {}),

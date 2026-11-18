@@ -15562,7 +15562,12 @@
   },
   "replacement:as-transforms-choice": {
    "family": "replacement:as-transforms",
-   "description": "Choosing the exiled card to copy as it transforms.",
+   "description": "A player chosen as it transforms, by a transform effect or a day/night change.",
+   "example": "Curse of Leeches"
+  },
+  "replacement:as-transforms-copy-exiled-choice": {
+   "family": "replacement:as-transforms",
+   "description": "As it transforms, it becomes a copy of a card exiled with it, chosen then, with copy exceptions.",
    "example": "Ludevic, Necrogenius"
   },
   "effect:become-copy-of-card-moved-this-way": {

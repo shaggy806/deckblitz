@@ -28612,7 +28612,7 @@ export class Game {
       const graveyardExile = ability.cost.exileFromGraveyard;
       if (graveyardExile !== undefined) {
         this.withDecisionSource(sourceId, () =>
-          this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, graveyardExile, chosenX), player, undefined, manaAfter),
+          this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, graveyardExile, chosenX, sourceId), player, undefined, manaAfter),
         );
       }
       const evidence = ability.cost.collectEvidence;
@@ -28867,7 +28867,7 @@ export class Game {
     const costExile = ability.cost.exileFromGraveyard;
     if (costExile !== undefined) {
       this.withDecisionSource(sourceId, () =>
-        this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, costExile, chosenX), player, abilityId),
+        this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, costExile, chosenX, sourceId), player, abilityId),
       );
     }
     // "Exile a card from your hand", "exile a spell you control" likewise.
@@ -29495,13 +29495,24 @@ export class Game {
     player: PlayerId,
     cost: NonNullable<AbilityCost["exileFromGraveyard"]>,
     x: number,
-  ): { count: number; filter?: CardFilter; fromTop?: true; singleGraveyard?: true } {
+    /** The permanent whose ability this pays for: a `linked` cost exiles the
+     * cards with it, in the stint it's in now (rule 607.2a). */
+    source?: ObjectId,
+  ): {
+    count: number;
+    filter?: CardFilter;
+    fromTop?: true;
+    singleGraveyard?: true;
+    exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+  } {
+    const at = source === undefined ? undefined : this.state.objects[source];
     return {
       count: cost.count === "x" ? x : cost.count === "opponents" ? this.scopedPlayers(player, "each-opponent").length : cost.count,
       // "An artifact card with mana value X": the X announced (rule 107.3a).
       ...(cost.filter !== undefined ? { filter: filterAtX(cost.filter, x) } : {}),
       ...(cost.fromTop === true ? { fromTop: true as const } : {}),
       ...(cost.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
+      ...(cost.linked === true && at !== undefined ? { exileLink: { source: at.id, zoneChangeCount: at.zoneChangeCount ?? 0 } } : {}),
     };
   }
 
@@ -46379,17 +46390,21 @@ controlledBy,
         if (attachment.kind === "object") this.attachPermanent(attachment.object, target);
       },
       attachableHosts: (attachments, candidates, another) => this.attachableHosts(attachments, candidates, another),
-      transform: (target, chosenPlayer) => {
+      transform: (target, chosenPlayer, copyCard) => {
         const t = this.splitTargetRef(target);
         if (t.kind !== "object" || !this.effectCanTransform(t.object, source, opts.transformSince)) return false;
         const before = this.state.objects[t.object]?.transformedAtSeq;
-        this.transformPermanent(t.object, chosenPlayer);
+        this.transformPermanent(t.object, chosenPlayer, copyCard);
         const after = this.state.objects[t.object]?.transformedAtSeq;
         return after !== undefined && after !== before;
       },
       transformChoice: (target) => {
         if (target.kind !== "object" || !this.effectCanTransform(target.object, source, opts.transformSince)) return null;
         return this.transformPlayerChoice(target.object);
+      },
+      transformCopyChoice: (target) => {
+        if (target.kind !== "object" || !this.effectCanTransform(target.object, source, opts.transformSince)) return null;
+        return this.transformCopyChoice(target.object);
       },
       flip: (target) => {
         const t = this.splitTargetRef(target);
@@ -55337,11 +55352,15 @@ controlledBy,
    * transforms, so before anything can see it), `null` for nobody. Kept as
    * its `chosenPlayer`, replacing any earlier one.
    */
-  private transformPermanent(id: ObjectId, chosenPlayer?: PlayerId | null): void {
+  private transformPermanent(id: ObjectId, chosenPlayer?: PlayerId | null, copyCard?: ObjectId | null): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     if (!this.isTransformingDfc(id)) return;
     if (objectProhibited(this.state, this.registry, "transform", id)) return;
+    // Which card a face that copies one exiled with it copies, when no
+    // `transform` effect asked (a day/night change — no daybound card has
+    // such a face): the first.
+    const copyAsked = copyCard !== undefined ? copyCard : (this.transformCopyChoice(id)?.among[0]?.card ?? null);
     object.face = (object.face ?? 0) === 0 ? 1 : 0;
     object.timestamp = this.freshTimestamp();
     if (chosenPlayer !== undefined && this.registry.get(rulesTextName(object)).choosePlayerOnTransform !== undefined) {
@@ -55351,8 +55370,15 @@ controlledBy,
     invalidateComputedCache();
     // Rule 712.20: an "As this transforms …" ability the permanent has after
     // it transforms applies while it's transforming, so before anything can
-    // see the transform.
-    const asTransforms = this.registry.get(rulesTextName(object)).asTransformsInto;
+    // see the transform. Read off the face before any copy it becomes.
+    const into = this.registry.get(rulesTextName(object));
+    // "…it becomes a copy of a creature card exiled with it, except …"
+    // (Olag, Ludevic's Hubris): the card chosen, as its printed values (rule
+    // 707.2), for good — a copy effect without a duration (the ruling).
+    if (into.copyOnTransform !== undefined && copyAsked !== null && this.state.objects[copyAsked]?.zone === "exile") {
+      this.becomeCopy([id], copyAsked, true, into.copyOnTransform.except, () => undefined, undefined);
+    }
+    const asTransforms = into.asTransformsInto;
     if (asTransforms !== null) {
       applyEffectSpec(asTransforms, this.makeResolutionContext(id, object.controller, []));
     }
@@ -55468,6 +55494,36 @@ controlledBy,
         (!aura || this.canCreateAttached(def, { player: p }, chooser)),
     );
     return { chooser, among };
+  }
+
+  /**
+   * Who chooses, and among which cards, as the transforming DFC `id` turns
+   * over to a face that "becomes a copy of a creature card exiled with it"
+   * (`CardDefinition.copyOnTransform` — Olag, Ludevic's Hubris, rule 712.20),
+   * or `null` when its other face copies nothing: its controller, among the
+   * cards exiled with it in this stint (rule 607.2a, by either face's ability
+   * — 607.1b) matching the face's filter, one of each name — a copy is of a
+   * card's printed values (707.2), so two of a name copy the same.
+   */
+  private transformCopyChoice(id: ObjectId): { readonly chooser: PlayerId; readonly among: readonly { readonly card: ObjectId; readonly name: string }[] } | null {
+    const object = this.state.objects[id];
+    if (object?.faces === undefined || !this.isTransformingDfc(id)) return null;
+    const into = object.faces[(object.face ?? 0) === 0 ? 1 : 0];
+    if (into === undefined || !this.registry.has(into)) return null;
+    const copy = this.registry.get(into).copyOnTransform;
+    if (copy === undefined) return null;
+    const stint = object.zoneChangeCount ?? 0;
+    const names = new Set<string>();
+    const among: { readonly card: ObjectId; readonly name: string }[] = [];
+    for (const cardId of this.state.zones.shared.exile) {
+      const card = this.state.objects[cardId];
+      if (card === undefined || card.kind !== "card" || !this.linkedToStint(card, id, stint)) continue;
+      if (!matchesFilter(this.state, this.registry, cardId, copy.filter, { you: object.controller, source: id })) continue;
+      if (names.has(card.cardName)) continue;
+      names.add(card.cardName);
+      among.push({ card: cardId, name: card.cardName });
+    }
+    return { chooser: object.controller, among };
   }
 
   /**

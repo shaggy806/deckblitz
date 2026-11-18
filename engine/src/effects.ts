@@ -10192,12 +10192,19 @@ export type EffectSpec =
        * A face that says "as this transforms into [it], choose an opponent"
        * (`CardDefinition.choosePlayerOnTransform`, rule 712.20 — Shinryu,
        * Transcendent Rival) has its controller choose as this resolves, a
-       * `choose-modes` among the players, asked only among two or more. */
+       * `choose-modes` among the players, asked only among two or more. One
+       * that becomes "a copy of a creature card exiled with it" as it
+       * transforms (`CardDefinition.copyOnTransform` — Olag, Ludevic's
+       * Hubris) has them choose the card the same way, among its different
+       * names. */
       readonly kind: "transform";
       readonly target: ObjectRef;
       /** Set only by the engine: the player chosen for the face it turns
        * into, `null` for nobody — the choice above, made. */
       readonly chosenPlayer?: PlayerId | null;
+      /** Set only by the engine: the card exiled with it that the face it
+       * turns into copies (`copyOnTransform`), `null` for none. */
+      readonly copyCard?: ObjectId | null;
       /** "Transform ~. If you do, …" (Aang, Master of Elements): applied
        * only if it did transform — not one that has left, or transformed
        * since (701.28f). */
@@ -15150,14 +15157,24 @@ export interface EffectApi {
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
    * {@link EffectSpec}. `chosenPlayer`: the player chosen as it transforms
    * into a face with `choosePlayerOnTransform` (`null`: nobody could be). */
-  /** Whether it transformed (rule 701.28f's "if you do"). */
-  transform(target: TargetRef, chosenPlayer?: PlayerId | null): boolean;
+  /** Whether it transformed (rule 701.28f's "if you do"). `copyCard`: the
+   * card exiled with it the face it turns into copies (`copyOnTransform`,
+   * `null`: none). */
+  transform(target: TargetRef, chosenPlayer?: PlayerId | null, copyCard?: ObjectId | null): boolean;
   /** If `target` would transform now, and the face it would turn into says
    * "as this transforms into …, choose a player / an opponent"
    * (`CardDefinition.choosePlayerOnTransform`): who chooses, and among whom
    * (the players still in the game, opponents of the chooser for
    * `"opponent"`). `null` when it wouldn't transform or chooses nobody. */
   transformChoice(target: TargetRef): { readonly chooser: PlayerId; readonly among: readonly PlayerId[] } | null;
+  /** If `target` would transform now into a face that becomes a copy of a
+   * card exiled with it (`CardDefinition.copyOnTransform`): who chooses, and
+   * the cards they may choose among, one of each name (two of a name copy the
+   * same), each with its name. `null` when it wouldn't transform or the face
+   * copies nothing. */
+  transformCopyChoice(
+    target: TargetRef,
+  ): { readonly chooser: PlayerId; readonly among: readonly { readonly card: ObjectId; readonly name: string }[] } | null;
   /** Flip `target` — see the `"flip"` {@link EffectSpec}. */
   flip(target: TargetRef): void;
   /** The permanents `targets` become copies of `of` — see the
@@ -24043,6 +24060,35 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       };
       if (spec.chosenPlayer !== undefined) {
         after(ctx.transform(target, spec.chosenPlayer));
+        return;
+      }
+      if (spec.copyCard !== undefined) {
+        after(ctx.transform(target, undefined, spec.copyCard));
+        return;
+      }
+      // "As this transforms into [it], it becomes a copy of a creature card
+      // exiled with it" (rule 712.20 — Olag, Ludevic's Hubris): which one is
+      // chosen as it transforms (the ruling), asked among different names.
+      const copyChoice = ctx.transformCopyChoice(target);
+      if (copyChoice !== null) {
+        if (copyChoice.among.length <= 1) {
+          after(ctx.transform(target, undefined, copyChoice.among[0]?.card ?? null));
+          return;
+        }
+        ctx.asPlayer(copyChoice.chooser).chooseModes(
+          1,
+          1,
+          copyChoice.among.map(({ card, name }) => ({
+            text: `Copy ${name}`,
+            effect: {
+              kind: "transform",
+              target: spec.target,
+              copyCard: card,
+              ...(spec.then !== undefined ? { then: spec.then } : {}),
+              ...(spec.otherwise !== undefined ? { otherwise: spec.otherwise } : {}),
+            },
+          })),
+        );
         return;
       }
       // "As this transforms into [it], choose an opponent" (rule 712.20):

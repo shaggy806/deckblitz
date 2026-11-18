@@ -524,6 +524,11 @@ export interface AbilityCost {
      * "from **a** graveyard", any player's (Thelon of Havenwood's "Exile a
      * Fungus card from a graveyard"), with nothing to keep together. */
     readonly singleGraveyard?: true;
+    /** Exiled **with this source** (rule 607.2a; 607.1b: either face of a
+     * transforming card): what another of its abilities calls "cards exiled
+     * with it" — Ludevic, Necrogenius's "Exile X creature cards from your
+     * graveyard", copied by Olag, Ludevic's Hubris (`exiled-with-source`). */
+    readonly linked?: true;
   };
   /**
    * `sacrifice`'s one chosen permanent is **exiled** instead — "Exile a

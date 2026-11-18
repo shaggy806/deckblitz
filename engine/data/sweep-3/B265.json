@@ -767,7 +767,7 @@
   {
    "name": "Ludevic, Necrogenius",
    "needs": [
-    "replacement:as-transforms-choice"
+    "replacement:as-transforms-copy-exiled-choice"
    ],
    "why": "Choosing the exiled card to copy as it transforms."
   },

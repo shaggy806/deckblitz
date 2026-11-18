@@ -2784,6 +2784,7 @@
   "effect:return-with-counters-this-way",
   "replacement:pay-life-exile-library-instead",
   "static:aura-enchanted-is-copy-of-chosen",
+  "replacement:as-transforms-copy-exiled-choice",
   "replacement:as-transforms-choice",
   "replacement:reroll-dice",
   "effect:turn-face-up-or-exile-and-cast",
