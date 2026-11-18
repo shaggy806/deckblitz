@@ -52867,7 +52867,14 @@ controlledBy,
         this.mintTokenBatch(controller, cardName, copyOf, total, modifiers, exileAtEndStep, copied, tapped, sacrificeAtEndStep, goadedForGameBy, separate, attachTo, withCounters),
       );
     }
-    this.noteTokensCreated(controller);
+    // Created only if one enters (rule 701.7a): one exiled instead never was
+    // (Hallowed Moonlight).
+    let noted = false;
+    const noteCreated = (): void => {
+      if (noted) return;
+      noted = true;
+      this.noteTokensCreated(controller);
+    };
     const printedName = copyOf ?? cardName;
     const made: ObjectId[] = [];
     // The whole batch enters at once — one simultaneous entry, however many
@@ -52887,6 +52894,9 @@ controlledBy,
           1,
           withCounters,
         );
+        // Exiled instead of entering (`mintFreshTokenObject`).
+        if (this.state.objects[id]?.zone !== "battlefield") continue;
+        noteCreated();
         made.push(id);
         if (copied) this.emit({ type: "permanent-copied", object: id, copyOf: printedName });
         // Attached as it enters (a Role), so whatever sees it arrive sees it
@@ -52941,8 +52951,12 @@ controlledBy,
     const existing = this.mintingApart ? null : this.findMergeableStack(repId, controller);
     // The counters each new token enters with (Dragonstorm Globe's +1/+1).
     const entering = Object.entries(this.state.objects[repId].counters).filter(([, n]) => n > 0);
+    // One exiled instead (Hallowed Moonlight) is each of them: minted one by
+    // one, none of them entering.
+    const exiledInstead = this.enterExilers(repId, controller, {}, true).length > 0;
     delete this.state.objects[repId]; // the representative never really "exists" on its own
-    if (existing === null && total < Game.STACK_ORIGIN_THRESHOLD) return mintIndividually();
+    if (exiledInstead || (existing === null && total < Game.STACK_ORIGIN_THRESHOLD)) return mintIndividually();
+    noteCreated();
     let finalId: ObjectId;
     if (existing !== null) {
       const stack = this.state.objects[existing];
@@ -53076,6 +53090,20 @@ controlledBy,
         becameCopyOf = last.values.copyOf;
         this.noteEnterShieldsSpent(copiers.flatMap((c) => (c.shield !== undefined ? [c.shield] : [])));
       }
+    }
+    // "If a creature would enter and it wasn't cast, exile it instead"
+    // (Hallowed Moonlight — a token is never cast): "it's put into exile
+    // instead and then ceases to exist" (its ruling; rules 614.6, 111.7). It
+    // was never created (701.7a): no entry, nothing on its list, and the
+    // next state-based check ends it. `mintTokenBatch` leaves it out of what
+    // it made.
+    if (!skipBattlefield && this.enterExilers(id, under, {}, true).length > 0) {
+      const token = this.state.objects[id];
+      token.zone = "exile";
+      this.state.zones.shared.exile.push(id);
+      (this.state.tokensLeftBattlefield ??= []).push(id);
+      invalidateComputedCache();
+      return id;
     }
     // Either source of "enters tapped" is enough — the token's own replacement
     // (a Treasure-like) or the effect that created it ("create thirteen
@@ -70622,9 +70650,16 @@ controlledBy,
    * it wasn't cast, exile it instead"): its filter read from its controller's
    * side, its source named though it has left the battlefield.
    */
-  private enterExilers(id: ObjectId, under: PlayerId, enter: EnterOptions = {}): ObjectId[] {
+  private enterExilers(
+    id: ObjectId,
+    under: PlayerId,
+    enter: EnterOptions = {},
+    /** A token being minted straight onto the battlefield, not yet on its
+     * list (`mintFreshTokenObject`): judged where it is. */
+    minted = false,
+  ): ObjectId[] {
     const object = this.state.objects[id];
-    if (object === undefined || object.zone === "battlefield") return [];
+    if (object === undefined || (object.zone === "battlefield" && !minted)) return [];
     const candidates: { readonly source: ObjectId; readonly filter: CardFilter; readonly you: PlayerId }[] = [];
     for (const sourceId of this.state.zones.shared.battlefield) {
       if (sourceId === id || this.enterBatch?.has(sourceId) === true) continue;

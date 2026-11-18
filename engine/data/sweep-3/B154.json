@@ -680,7 +680,8 @@
     {
       "name": "Hallowed Moonlight",
       "needs": [
-        "effect:temporary-enter-exile-replacement"
+        "effect:temporary-enter-exile-replacement",
+        "replacement:token-enter-exile-instead"
       ],
       "why": "Until end of turn, a creature that would enter and wasn't cast is exiled instead — no temporary enters-exiled replacement."
     },

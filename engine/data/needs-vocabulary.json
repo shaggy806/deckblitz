@@ -13933,6 +13933,11 @@
    "description": "An others-enter replacement that exiles a nontoken creature entering without having been cast ('if a nontoken creature would enter and it wasn't cast, exile it instead'): others-enter-battlefield can tap or add counters, not send the permanent elsewhere, and its filter can't ask whether it was cast.",
    "example": "Containment Priest"
   },
+  "replacement:token-enter-exile-instead": {
+   "family": "replacement:exile-instead",
+   "description": "An others-enter exileInstead that also reaches tokens ('if a creature would enter and it wasn't cast, exile it instead'): token creation (mintTokenBatch, createTokens) never asks Game.enterExilers, so a creature token would enter. Its ruling: the token is put into exile instead and then ceases to exist (rule 111.7); never created (701.7a).",
+   "example": "Hallowed Moonlight"
+  },
   "replacement:turn-exile-instead-return-at-end-step": {
    "family": "replacement:exile-instead",
    "description": "A resolving spell installs, for the rest of the turn, 'if a permanent you control would be put into a graveyard from the battlefield, exile it instead' and returns each one so exiled at the beginning of the next end step (turn-exile-if-dies-filter without the return).",

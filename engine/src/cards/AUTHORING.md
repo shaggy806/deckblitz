@@ -7968,7 +7968,12 @@ clause (section 9):
   611.2c): Mistcaller's "until end of turn, if a nontoken creature would enter
   and it wasn't cast, exile it instead" is a `replacement-effect` with
   `duration: "end-of-turn"` and that replacement, its filter read from the
-  effect's controller's side. `enter-exile-instead.test.ts`.
+  effect's controller's side. `enter-exile-instead.test.ts`. A filter that
+  doesn't rule tokens out reaches them too: Hallowed Moonlight's "until end
+  of turn, if a creature would enter and it wasn't cast, exile it instead" is
+  `filter: { type: "creature", cast: false }`, and a creature token is put
+  into exile as it's minted, never created (701.7a), ceasing to exist (111.7
+  — its ruling). `token-enter-exile-instead.test.ts`.
   `underYou: true` is "it enters under your control instead" (rule 614.1a),
   resolved ones only: Gather Specimens' "if a creature would enter the
   battlefield under an opponent's control this turn, it enters under your

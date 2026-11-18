@@ -7791,11 +7791,17 @@ export function parseSentence(sentence, ctx) {
       replacement: { event: "others-enter-battlefield", filter: { type: "creature", controlledBy: "opponent" }, underYou: true },
     };
   }
-  if (/^until end of turn, if a nontoken creature would enter and it wasn't cast, exile it instead\.$/i.test(s)) {
+  // Without "nontoken", tokens too (Hallowed Moonlight — exiled as they're
+  // minted, rule 111.7).
+  if ((m = /^until end of turn, if a (nontoken )?creature would enter and it wasn't cast, exile it instead\.$/i.exec(s))) {
     return {
       kind: "replacement-effect",
       duration: "end-of-turn",
-      replacement: { event: "others-enter-battlefield", filter: { type: "creature", token: false, cast: false }, exileInstead: true },
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: m[1] !== undefined ? { type: "creature", token: false, cast: false } : { type: "creature", cast: false },
+        exileInstead: true,
+      },
     };
   }
 

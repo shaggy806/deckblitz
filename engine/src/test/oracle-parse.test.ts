@@ -6139,6 +6139,21 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(gather.complete).toBe(true);
   });
 
+  it("'until end of turn, if a creature would enter and it wasn't cast, exile it instead' reaches tokens (Hallowed Moonlight)", () => {
+    const moon = face("Until end of turn, if a creature would enter and it wasn't cast, exile it instead.\nDraw a card.", "Instant");
+    expect(moon.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "replacement-effect",
+          duration: "end-of-turn",
+          replacement: { event: "others-enter-battlefield", filter: { type: "creature", cast: false }, exileInstead: true },
+        },
+        { kind: "draw", amount: 1 },
+      ],
+    });
+  });
+
   it("'each time target permanent would deal damage … this turn, it deals double that damage' (Overblaze)", () => {
     const blaze = face(
       "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.",

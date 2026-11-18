@@ -414,6 +414,7 @@
     "effect:token-copies-of-attachments",
     "replacement:double-damage-from-target-this-turn",
     "replacement:enters-under-your-control-instead",
+    "replacement:token-enter-exile-instead",
     "bug:aura-enters-transformed-asks-enchant",
     "static:prohibit-cast-by-face",
     "effect:spell-color-change-carries-to-permanent",
