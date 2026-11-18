@@ -22578,3 +22578,34 @@ describe("counter target spell if its controller is poisoned (Corrupted Resolve)
     });
   });
 });
+
+describe("untap during each other player's untap step", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+
+  it("its own, all of a kind you control, and quoted on an enchanted land (Urban Burgeoning)", () => {
+    const own = read("Artifact", "Untap this artifact during each other player's untap step.");
+    expect(own.static[0]).toEqual({
+      affects: { scope: "self" },
+      untapsDuringOthersUntap: "self",
+      text: "Untap this artifact during each other player's untap step.",
+    });
+    expect(own.complete).toBe(true);
+    const all = read("Creature — Human", "Untap all artifacts you control during each other player's untap step.");
+    expect(all.static[0]).toMatchObject({ untapsDuringOthersUntap: { type: "artifact" } });
+    const aura = read(
+      "Enchantment — Aura",
+      "Enchant land\nEnchanted land has \"Untap this land during each other player's untap step.\"",
+    );
+    expect(aura.static[0]).toEqual({
+      affects: { scope: "attached" },
+      grantsStatic: [
+        { affects: { scope: "self" }, untapsDuringOthersUntap: "self", text: "Untap this land during each other player's untap step." },
+      ],
+      text: "Enchanted land has \"Untap this land during each other player's untap step.\"",
+    });
+    expect(aura.complete).toBe(true);
+    // Not every untap step but your own: "each opponent's" is left to a person.
+    expect(read("Artifact", "Untap this artifact during each opponent's untap step.").complete).toBe(false);
+  });
+});

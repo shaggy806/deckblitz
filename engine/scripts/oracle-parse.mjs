@@ -23447,6 +23447,17 @@ function parseStatic(line, text) {
   if (line === "Cards in graveyards can't be the targets of spells or abilities.") {
     return { affects: { scope: "self" }, prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" } }], text };
   }
+  // "Untap this artifact during each other player's untap step" (Bender's
+  // Waterskin, Endbringer), and quoted on a host (Urban Burgeoning's "Enchanted
+  // land has '…'"); "Untap all permanents / artifacts / creatures you control
+  // …" (Seedborn Muse, Unwinding Clock, Drumbellower): `untapsDuringOthersUntap`.
+  {
+    const m = /^Untap (this (?:artifact|creature|land|permanent)|~|all (permanents|artifacts|creatures) you control) during each other player's untap step\.$/.exec(line);
+    if (m !== null) {
+      const filter = m[2] === undefined ? "self" : { permanents: {}, artifacts: { type: "artifact" }, creatures: { type: "creature" } }[m[2]];
+      return { affects: { scope: "self" }, untapsDuringOthersUntap: filter, text };
+    }
+  }
   // What an Aura says of its host: Fall from Favor (its controller, read at each
   // untap step), Street Savvy (the blocker's side of rule 702.14), Power Artifact
   // (rule 602.2b, the host's abilities alone), Demonic Torment.
@@ -25429,10 +25440,12 @@ function parseStatic(line, text) {
   // get +2/+2'" (Inspiring Leader), "All Sliver creatures have 'This creature
   // gets +1/+1 as long as you control a Swamp'" (Sedge Sliver). The quoted
   // line is read as a static of the object that has it.
-  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Commander creatures you own|All Sliver creatures|All Slivers|Creatures you control|Creatures you control with flying|Creatures and enchantments you control|Planeswalkers you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
+  if ((m = new RegExp(`^(Equipped creature|Enchanted creature|Enchanted land|Commander creatures you own|All Sliver creatures|All Slivers|Creatures you control|Creatures you control with flying|Creatures and enchantments you control|Planeswalkers you control) (?:has|have) (?:${KW} and )?"([^"]+\\.)"$`).exec(line))) {
     const affects = {
       "Equipped creature": { scope: "attached" },
       "Enchanted creature": { scope: "attached" },
+      // Urban Burgeoning's "Enchanted land has 'Untap this land …'".
+      "Enchanted land": { scope: "attached" },
       "Commander creatures you own": { scope: "filter", filter: { type: "creature", isCommander: true, ownedBy: "you" } },
       "All Sliver creatures": { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
       // Sliver permanents of every type (Pulmonic Sliver).

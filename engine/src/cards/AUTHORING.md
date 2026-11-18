@@ -5894,7 +5894,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
 - `untapsDuringOthersUntap: "self" | CardFilter` — untap during each **other**
   player's untap step too: `"self"` is Bender's Waterskin, a filter is every
   permanent you control matching it (Seedborn Muse `{}`, Unwinding Clock
-  `{ type: "artifact" }`). The filter form is read off an emblem too.
+  `{ type: "artifact" }`). The filter form is read off an emblem too. Given
+  to another permanent, `"self"` goes in a `grantsStatic`: Urban
+  Burgeoning's "Enchanted land has 'Untap this land during each other
+  player's untap step'" is `{ affects: { scope: "attached" }, grantsStatic:
+  [{ affects: { scope: "self" }, untapsDuringOthersUntap: "self", text }] }`.
 - `drawsInOpponentsDrawStep: true` — "you draw a card during each opponent's
   draw step" (Teferi, Who Slows the Sunset's emblem, beside its
   `untapsDuringOthersUntap: {}`): no trigger, no stack; in an opponent's draw

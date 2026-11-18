@@ -2953,7 +2953,8 @@
   "effect:rechoose-direction-each-upkeep",
   "effect:protection-from-player-for-you-and-planeswalkers",
   "target:controlled-by-opponent-to-your-left",
-  "condition:target-controller-poisoned"
+  "condition:target-controller-poisoned",
+  "static:untaps-during-others-untap-attached"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
