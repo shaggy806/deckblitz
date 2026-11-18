@@ -631,6 +631,36 @@ describe("evaluateState features", () => {
     expect(delta({ graveyardCastable: 1 }, (g) => void g.debugSpawn("Grizzly Bears", A, "graveyard"))).toBe(0);
   });
 
+  it("counts graveyard cards a permanent of ours lets us play, as many as it lets us play in a turn", () => {
+    /** `permanent` under `controller`, and `cards` in alice's graveyard. */
+    const reach = (permanent: string | null, cards: readonly string[], controller: PlayerId = A): number =>
+      delta({ graveyardCastable: 1 }, (g) => {
+        if (permanent !== null) g.debugSpawn(permanent, controller);
+        for (const name of cards) g.debugSpawn(name, A, "graveyard");
+      });
+    // Gisa and Geralf: "once during each of your turns, you may cast a Zombie
+    // creature spell from your graveyard" — one card, however many Zombies.
+    expect(reach(null, ["Walking Corpse"])).toBe(0);
+    expect(reach("Gisa and Geralf", ["Walking Corpse"])).toBe(1);
+    expect(reach("Gisa and Geralf", ["Walking Corpse", "Diregraf Ghoul", "Grizzly Bears"])).toBe(1);
+    expect(reach("Gisa and Geralf", ["Grizzly Bears", "Lightning Bolt"])).toBe(0);
+    // An opponent's Gisa and Geralf reaches nothing of ours.
+    expect(reach("Gisa and Geralf", ["Walking Corpse"], B)).toBe(0);
+    // A card its own text already lets us cast is counted once (Gravecrawler),
+    // and leaves the permission for another.
+    expect(reach("Gisa and Geralf", ["Gravecrawler"])).toBe(1);
+    expect(reach("Gisa and Geralf", ["Gravecrawler", "Walking Corpse"])).toBe(2);
+    // Muldrotha: a land and one permanent spell of each permanent type.
+    expect(
+      reach("Muldrotha, the Gravetide", ["Grizzly Bears", "Walking Corpse", "Mind Stone", "Forest", "Forest", "Lightning Bolt"]),
+    ).toBe(3);
+    // Crucible of Worlds: lands, and a turn has one land drop.
+    expect(reach("Crucible of Worlds", ["Forest", "Forest", "Grizzly Bears"])).toBe(1);
+    // Lurrus: one permanent spell of mana value 2 or less each turn.
+    expect(reach("Lurrus of the Dream-Den", ["Grizzly Bears", "Mind Stone", "Craw Wurm"])).toBe(1);
+    expect(reach("Lurrus of the Dream-Den", ["Craw Wurm", "Lightning Bolt"])).toBe(0);
+  });
+
   it("counts energy, the monarchy and emblems", () => {
     expect(delta({ energy: 1 }, (g) => void (g.state.players[A].energy = 4))).toBe(4);
     expect(delta({ monarch: 1 }, (g) => void (g.state.monarch = A))).toBe(1);

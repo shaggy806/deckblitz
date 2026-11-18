@@ -108,7 +108,10 @@ export interface EvalWeights {
   readonly libraryDanger: number;
   readonly graveyard: number;
   /** Graveyard cards that can be cast or activated from there: flashback
-   * (printed or granted), escape, disturb, graveyard-zone abilities. */
+   * (printed or granted), escape, disturb, graveyard-zone abilities, and
+   * those a permanent of ours lets us play, as many as it lets us play in a
+   * turn (Gisa and Geralf's one Zombie, Muldrotha's one of each permanent
+   * type — `reachedFromGraveyard`, `bot/features.ts`). */
   readonly graveyardCastable: number;
   readonly energy: number;
   /** Being the monarch — a card every end step until someone takes it. */

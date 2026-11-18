@@ -40,13 +40,22 @@
 import { costLosesSource, isManaAbility } from "../abilities.js";
 import { journalTotal } from "../journal.js";
 import type { TriggeredAbility } from "../abilities.js";
-import { combatDamageOf, computeCharacteristics, lethalDamageOf, withComputedCache } from "../characteristics.js";
+import {
+  combatDamageOf,
+  computeCharacteristics,
+  hasLostAbilities,
+  lethalDamageOf,
+  staticConditionMet,
+  withComputedCache,
+} from "../characteristics.js";
 import type { Characteristics } from "../characteristics.js";
 import type { CardRegistry } from "../cards.js";
 import type { CardDefinition, Keyword } from "../cards/define.js";
 import { entersToCounter } from "../effect-worth.js";
 import type { EffectSpec } from "../effects.js";
+import { matchesFilter } from "../filter.js";
 import { manaValue, parseManaCost } from "../mana.js";
+import type { StaticPlay } from "../play-permission.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { POISON_LETHAL, printedCardName, rulesTextName, settledTally } from "../state.js";
 import { HARMFUL_COUNTERS } from "../target-polarity.js";
@@ -440,6 +449,113 @@ function castableFromGraveyard(registry: CardRegistry, object: GameObject): bool
     def.mayPlaySelf?.from.includes("graveyard") === true ||
     (def.activated ?? []).some((a) => a.zone === "graveyard")
   );
+}
+
+/** A permanent's static "you may play … from your graveyard"
+ * (`StaticAbility.mayPlay`, `play-permission.ts`). */
+interface GraveyardPlay {
+  readonly source: GameObject;
+  readonly play: StaticPlay;
+}
+
+const graveyardPlayMemo = new WeakMap<CardDefinition, readonly StaticPlay[]>();
+
+/** The permissions to play cards from a graveyard among `def`'s statics.
+ * Nearly always none, which is all the board's loop pays to know. */
+function graveyardPlaysOf(def: CardDefinition): readonly StaticPlay[] {
+  let found = graveyardPlayMemo.get(def);
+  if (found === undefined) {
+    found = def.static.flatMap((ability) => (ability.mayPlay?.from === "graveyard" ? [ability.mayPlay] : []));
+    graveyardPlayMemo.set(def, found);
+  }
+  return found;
+}
+
+/** `source`'s graveyard permissions in force: its statics not lost, each
+ * one's "as long as" met (rule 604.3). */
+function graveyardPlaysInForce(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  def: CardDefinition,
+  into: GraveyardPlay[],
+): void {
+  if (graveyardPlaysOf(def).length === 0 || hasLostAbilities(state, registry, source)) return;
+  for (const ability of def.static) {
+    const play = ability.mayPlay;
+    if (play === undefined || play.from !== "graveyard") continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    into.push({ source, play });
+  }
+}
+
+/**
+ * How many of `cards`, graveyard cards of `player`'s that nothing of their
+ * own makes castable, the permissions of `player`'s permanents reach
+ * (`plays`): Gisa and Geralf's Zombies, Muldrotha's permanents, the lands
+ * under a Crucible of Worlds. Before this they were plain graveyard cards,
+ * worth nothing, and a mill that filled the graveyard for them scored as one
+ * that didn't.
+ *
+ * Each permission counts as many cards as it lets its controller play in a
+ * turn, since that many are in reach as a hand's cards are: one for "once
+ * each turn" (`oncePerTurn`), one of each permanent type for Muldrotha
+ * (`perType`), a land and a spell for Coram (`landAndSpell`), every card for
+ * one with no limit (Yawgmoth's Agenda) — and one land among them all, the
+ * turn's land drop. Which cards: the permission's `filter` and `spell`, read
+ * from the card as it lies (the engine judges the face cast, with any
+ * `{ amount }` counted from the source — Arcade Gannon's fails closed here).
+ *
+ * Not read: whose turn it is and whether this turn's use is spent
+ * (`yourTurnOnly`, `GameObject.playUses`) — the count is what stays in reach
+ * from turn to turn, as a flashback card counts though it can't be cast
+ * now, and reading the use would price a cast from the graveyard as the
+ * loss of the permission. Nor what the play costs besides mana (`payLife`,
+ * `sacrifice`, `exileOthers`), nor another player's graveyard
+ * (`anyGraveyard`).
+ */
+function reachedFromGraveyard(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  plays: readonly GraveyardPlay[],
+  cards: readonly ObjectId[],
+): number {
+  const room = plays.map(({ play }) => ({
+    left: play.oncePerTurn === true ? 1 : (play.upTo ?? Infinity),
+    types: play.perType === undefined ? null : new Set<string>(play.perType),
+    land: play.landAndSpell === true ? 1 : Infinity,
+    spell: play.landAndSpell === true ? 1 : Infinity,
+  }));
+  let reached = 0;
+  let landReached = false;
+  for (const id of cards) {
+    const object = state.objects[id];
+    if (object === undefined || !registry.has(object.cardName)) continue;
+    const types: readonly string[] = registry.get(object.cardName).types;
+    const isLand = types.includes("land");
+    if (isLand && landReached) continue;
+    for (let i = 0; i < plays.length; i += 1) {
+      const { source, play } = plays[i];
+      const left = room[i];
+      if (left.left <= 0 || (isLand ? left.land : left.spell) <= 0) continue;
+      // "You may cast" leaves a land where it is (rule 305.9).
+      if (isLand && play.play !== true && play.perType?.includes("land") !== true) continue;
+      const slot = left.types === null ? undefined : types.find((type) => left.types?.has(type));
+      if (left.types !== null && slot === undefined) continue;
+      const context = { you: player, source: source.id };
+      if (play.filter !== undefined && !matchesFilter(state, registry, id, play.filter, context)) continue;
+      if (!isLand && play.spell !== undefined && !matchesFilter(state, registry, id, play.spell, context)) continue;
+      left.left -= 1;
+      if (isLand) left.land -= 1;
+      else left.spell -= 1;
+      if (slot !== undefined) left.types?.delete(slot);
+      if (isLand) landReached = true;
+      reached += 1;
+      break;
+    }
+  }
+  return reached;
 }
 
 const count = (c: Characteristics, keywords: readonly Keyword[]): number =>
@@ -1213,6 +1329,8 @@ function playerFeaturesUncached(
   /** Noncreature tokens by name — see `TOKEN_CAP` — and whether they're
    * one-shot resources (`isResourceToken`). */
   const tokenPiles = new Map<string, { count: number; resource: boolean }>();
+  /** Our permanents' "you may play … from your graveyard" in force. */
+  const graveyardPlays: GraveyardPlay[] = [];
   // Our own blockers count only where one would hold an attack off.
   const deterring = isMe ? deterringBlockers(state, registry, player) : null;
 
@@ -1275,6 +1393,7 @@ function playerFeaturesUncached(
       }
     }
     const name = rulesTextName(object);
+    if (registry.has(name)) graveyardPlaysInForce(state, registry, object, registry.get(name), graveyardPlays);
     if (!isLand && registry.has(name)) {
       const def = registry.get(name);
       nonlandMana += (manaPerTurn(def) + reductionPerTurn(def)) * n;
@@ -1402,10 +1521,16 @@ function playerFeaturesUncached(
   }
 
   let graveyardCastable = 0;
+  // The cards nothing of their own makes castable: a permanent of ours may
+  // (`reachedFromGraveyard`).
+  const plain: ObjectId[] = [];
   for (const id of zones.graveyard) {
     const object = state.objects[id];
-    if (object !== undefined && castableFromGraveyard(registry, object)) graveyardCastable += 1;
+    if (object === undefined) continue;
+    if (castableFromGraveyard(registry, object)) graveyardCastable += 1;
+    else if (graveyardPlays.length > 0) plain.push(id);
   }
+  if (plain.length > 0) graveyardCastable += reachedFromGraveyard(state, registry, player, graveyardPlays, plain);
   // And a card of ours waiting under a permanent that returns it.
   for (const id of state.zones.shared.exile) {
     const object = state.objects[id];
