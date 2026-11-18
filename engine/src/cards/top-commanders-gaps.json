@@ -3075,7 +3075,9 @@
   "condition:noncreature-permanent-destroyed-by-opponent-this-turn",
   "amount:life-lost-when-source-entered",
   "condition:face-down-dies-card-characteristics",
-  "effect:leaves-act-on-permanent-put-there-by-source"
+  "effect:leaves-act-on-permanent-put-there-by-source",
+  "effect:leaves-act-on-permanent-put-there-by-source",
+  "replacement:graveyard-to-library-bottom-instead"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

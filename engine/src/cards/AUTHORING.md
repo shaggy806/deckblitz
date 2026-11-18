@@ -8082,7 +8082,16 @@ The `prevent-damage` family makes the same record.
   move waits on the battlefield while its controller (rule 109.5) picks, as a
   `choose-from-zone`, which of theirs leaving in the same event go there and in
   what order; declined, any other replacement still applies (616.1).
-  `docs/plans/optional-graveyard-replacement.md`.
+  `docs/plans/optional-graveyard-replacement.md`. Without `self` it's another
+  permanent's, and without `from` it catches a card **from anywhere** — a
+  discard, a mill (the card moves within its library, no zone change), a spell
+  resolving or countered: Wheel of Sun and Moon's "if a card would be put into
+  enchanted player's graveyard from anywhere, instead that card is revealed and
+  put on the bottom of that player's library" is `instead: "library-bottom"`,
+  `filter: { ownedBy: "enchanted-player", token: false }`, **`reveal: true`**.
+  Two or more of one owner's put on one end at once are arranged by that owner
+  (rule 401.4), asked as the event ends (`arrangesLibrary`); a mill takes the
+  top cards as it begins, so none goes round twice.
 - `{ event: "would-be-put-into-graveyard", instead: "exile", filter?, from? }`
   — Rest in Peace / Anafenza. `from: "battlefield"` is the **dies-only** form
   ("if a creature an opponent controls would die, exile it instead"): it lets

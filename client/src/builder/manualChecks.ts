@@ -13531,4 +13531,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  preset(
+    'Wheel of Sun and Moon: you arrange your milled cards on the bottom of your library',
+    board({
+      you: {
+        bf: ['Forest', 'Plains', 'Island*2'],
+        hand: ['Wheel of Sun and Moon', 'Mind Sculpt'],
+        lib: ['Grizzly Bears', 'Hill Giant', 'Lightning Bolt'],
+      },
+    }),
+  ),
+  preset(
+    'Wheel of Sun and Moon: in a 4-player game, you arrange your milled cards',
+    board({
+      you: {
+        bf: ['Forest', 'Plains', 'Island*2'],
+        hand: ['Wheel of Sun and Moon', 'Mind Sculpt'],
+        lib: ['Grizzly Bears', 'Hill Giant', 'Lightning Bolt'],
+      },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Llanowar Elves'] }],
+    }),
+  ),
 ]

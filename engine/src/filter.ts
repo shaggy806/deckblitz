@@ -1063,8 +1063,12 @@ export interface CardFilter {
    * Portent Tracker's "if **an opponent protects** it". Nothing that has no
    * protector matches either. */
   readonly protectedBy?: "you" | "opponent";
-  /** Owned by the filtering player / anyone else (zone-agnostic, for graveyards). */
-  readonly ownedBy?: "you" | "opponent";
+  /** Owned by the filtering player / anyone else (zone-agnostic, for graveyards).
+   * `"enchanted-player"`: by the player the filter's source, an Aura, is
+   * attached to — Wheel of Sun and Moon's "a card would be put into
+   * **enchanted player's** graveyard" (a card goes to its owner's, rule
+   * 400.3); with no such source, nothing matches. */
+  readonly ownedBy?: "you" | "opponent" | "enchanted-player";
   /** Owned by the one player a {@link PlayerRef} names, whoever chooses —
    * Expropriate's "for each money vote, choose a permanent **owned by the
    * voter**" (`"that-player"` in a `for-each-vote`). Bound to `ownerIn` as an
@@ -3123,6 +3127,10 @@ export function matchesFilter(
   }
   if (filter.ownedBy === "you" && owner !== ctx.you) return false;
   if (filter.ownedBy === "opponent" && owner === ctx.you) return false;
+  if (filter.ownedBy === "enchanted-player") {
+    const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    if (aura?.attachedToPlayer === undefined || owner !== aura.attachedToPlayer) return false;
+  }
   if (filter.ownerIn !== undefined && !filter.ownerIn.includes(owner)) return false;
   if (filter.ownedByRef !== undefined) return false;
   if (filter.notOwnedByController === true && owner === controller) return false;

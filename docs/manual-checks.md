@@ -8937,3 +8937,12 @@ Each board's die comes up 4.
 ### Battletide Alchemist: in a 4-player game, Flame Rift asks once for each player
 - **Do:** Cast Flame Rift. Prevent the damage to you; don't prevent it for the others.
 - **Expect:** Four questions in the banner, one per player, each "Prevent 2 of the 4 damage Flame Rift would deal to …" (you, then Bob, Carol and Dave) beside "Don't prevent it". You end at 38, the others at 36.
+## Cards put on the bottom of a library instead of a graveyard (2026-11-18)
+
+### Wheel of Sun and Moon: you arrange your milled cards on the bottom of your library
+- **Do:** Cast Wheel of Sun and Moon on yourself, then cast Mind Sculpt at yourself.
+- **Expect:** Your graveyard stays empty. The banner asks "Arrange these cards on the bottom of your library in the order you pick: the first you pick goes nearest the top", showing the seven milled cards, Grizzly Bears, Hill Giant and Lightning Bolt among them. Pick all seven and confirm: your library count is what it was.
+
+### Wheel of Sun and Moon: in a 4-player game, you arrange your milled cards
+- **Do:** Cast Wheel of Sun and Moon on yourself, then cast Mind Sculpt at yourself.
+- **Expect:** You, not a bot, are asked "Arrange these cards on the bottom of your library …" with the seven milled cards; your graveyard stays empty.

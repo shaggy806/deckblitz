@@ -4128,6 +4128,11 @@ export type AwaitingDecision =
        * or Fossil Find's "reorder your graveyard as you choose". The first
        * picked goes on top (`Game.arrangeGraveyard`). */
       readonly arrangesGraveyard?: true;
+      /** An `order` over cards in `player`'s own library that stay there, in
+       * the places they hold: cards a graveyard replacement put on one end of
+       * it at once (rule 401.4 — Wheel of Sun and Moon). The first picked goes
+       * nearest the top (`Game.arrangeLibrary`). */
+      readonly arrangesLibrary?: true;
       /** Cards to ask the order of once this choice is carried out — a scry
        * that both keeps cards on top and puts cards on the bottom orders the
        * two groups one after the other (rule 701.22a). */
@@ -6977,10 +6982,14 @@ export interface GameState {
   /** Cards put into one player's graveyard at the same time, still to be
    * arranged by that player (rule 404.3) — queued only while something in the
    * game reads a graveyard's order (`Game.graveyardOrderIsRead`). Each is the
-   * card and the stint it arrived in. */
+   * card and the stint it arrived in. With `zone`, cards a graveyard
+   * replacement put on that end of their owner's library together instead
+   * (rule 401.4 — Wheel of Sun and Moon's mill or discard of several), always
+   * asked: the stint is the one they have there. */
   pendingGraveyardOrders?: {
     readonly player: PlayerId;
     readonly cards: readonly { readonly object: ObjectId; readonly stint: number }[];
+    readonly zone?: "library-top" | "library-bottom";
   }[];
   pendingEnterAttacking?: {
     readonly player: PlayerId;

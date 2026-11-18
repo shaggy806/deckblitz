@@ -2974,6 +2974,11 @@ export class Game {
   /** The same for cards put into libraries from another zone, collected
    * alongside (`cards-put-into-library`). */
   private libraryEnterBatch: { object: ObjectId; from: ZoneType; owner: PlayerId }[] | null = null;
+  /** The cards a graveyard replacement put on an end of their owner's
+   * library in the move under way (`noteLibraryEndArrival`), for their owner
+   * to arrange once it's done (rule 401.4). Transient, with
+   * `libraryEnterBatch`. */
+  private libraryEndBatch: { object: ObjectId; end: "library-top" | "library-bottom" }[] | null = null;
   /** While a `cards-left-graveyard` event is being announced, each of its
    * cards as it was in the graveyard — what a `leaves-graveyard` trigger's
    * filter is matched against (rule 603.10a). `null` the rest of the time. */
@@ -12448,6 +12453,13 @@ export class Game {
     // Rule 404.3 or Fossil Find: nothing moves, the pile is arranged.
     if (awaiting.arrangesGraveyard === true) {
       this.arrangeGraveyard(player, chosen);
+      this.state.awaiting = null;
+      this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
+      return;
+    }
+    // Rule 401.4: cards put on one end of a library at once, arranged there.
+    if (awaiting.arrangesLibrary === true) {
+      this.arrangeLibrary(player, chosen);
       this.state.awaiting = null;
       this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
       return;
@@ -64219,11 +64231,13 @@ controlledBy,
       }
     }
     const milled: ObjectId[] = [];
+    // The top `amount` cards as the mill begins (rule 701.17a): one a
+    // replacement keeps in the library (Wheel of Sun and Moon's bottom)
+    // isn't milled again on its way round.
+    const top = this.state.zones.perPlayer[player].library.slice(0, Math.max(0, amount));
     this.withGraveyardEnterBatch(() => {
-      for (let i = 0; i < amount; i += 1) {
-        const library = this.state.zones.perPlayer[player].library;
-        const id = library[0];
-        if (id === undefined) break;
+      for (const id of top) {
+        if (this.state.objects[id]?.zone !== "library") continue;
         this.moveObject(id, "graveyard");
         milled.push(id);
       }
@@ -71541,20 +71555,33 @@ controlledBy,
    * its abilities doesn't — not from how it was cast. "From anywhere": the
    * stack as well as the battlefield. */
   private ownDestinationInstead(object: GameObject): "library-top" | "library-bottom" | "hand" | undefined {
-    if (hasLostAbilities(this.state, this.registry, object)) return undefined;
+    return this.destinationInstead(object)?.instead;
+  }
+
+  /** {@link ownDestinationInstead}'s answer, with whether the replacement
+   * reveals the card as it goes (`GraveyardExileReplacement.reveal`). */
+  private destinationInstead(
+    object: GameObject,
+  ): { readonly instead: "library-top" | "library-bottom" | "hand"; readonly reveal?: true } | undefined {
     // Its own text: a static's `self` reaches the object it's on, from
     // whichever zone it has the ability in.
-    for (const ability of this.registry.get(rulesTextName(object)).static) {
-      const r = ability.replacement;
-      // An optional one ("you may …") is asked before the move
-      // (`optionalGraveyardInstead`), not taken here.
-      if (r?.event !== "would-be-put-into-graveyard" || r.self !== true || r.instead === "exile" || r.optional === true) continue;
-      if (r.from === "battlefield" && object.zone !== "battlefield") continue;
-      if (object.zone === "battlefield" || r.from === undefined) return r.instead;
+    if (!hasLostAbilities(this.state, this.registry, object)) {
+      for (const ability of this.registry.get(rulesTextName(object)).static) {
+        const r = ability.replacement;
+        // An optional one ("you may …") is asked before the move
+        // (`optionalGraveyardInstead`), not taken here.
+        if (r?.event !== "would-be-put-into-graveyard" || r.self !== true || r.instead === "exile" || r.optional === true) continue;
+        if (r.from === "battlefield" && object.zone !== "battlefield") continue;
+        if (object.zone === "battlefield" || r.from === undefined) return { instead: r.instead };
+      }
     }
     // Another permanent's: "if a creature you control that's enchanted would
-    // die, return it to its owner's hand instead" (Necromancer's Magemark).
-    if (object.zone !== "battlefield") return undefined;
+    // die, return it to its owner's hand instead" (Necromancer's Magemark),
+    // or, without `from`, a card from anywhere: "if a card would be put into
+    // enchanted player's graveyard from anywhere, instead that card is
+    // revealed and put on the bottom of that player's library" (Wheel of Sun
+    // and Moon) — a discard, a mill, a spell resolving. A card that has lost
+    // its own abilities is still caught by another's.
     for (const id of this.state.zones.shared.battlefield) {
       const by = this.state.objects[id];
       if (by === undefined || hasLostAbilities(this.state, this.registry, by)) continue;
@@ -71564,7 +71591,7 @@ controlledBy,
         if (r.from === "battlefield" && object.zone !== "battlefield") continue;
         if (!this.staticActive(by, ability)) continue;
         if (r.filter !== undefined && !matchesFilter(this.state, this.registry, object.id, r.filter, { you: by.controller, source: id })) continue;
-        return r.instead;
+        return { instead: r.instead, ...(r.reveal === true ? { reveal: true as const } : {}) };
       }
     }
     return undefined;
@@ -72654,11 +72681,28 @@ controlledBy,
     }
     // "If this creature would die, put it on top of its owner's library
     // instead" (Gravebane Zombie): the same, its owner's pick over an exile.
-    const owed = to === "graveyard" ? this.ownDestinationInstead(object) : undefined;
+    const instead = to === "graveyard" ? this.destinationInstead(object) : undefined;
+    const owed = instead?.instead;
     if (owed === "library-top" || owed === "library-bottom") {
       const place = owed === "library-top" ? "top" : "bottom";
+      // "Instead that card is revealed" (Wheel of Sun and Moon, rule 701.20a):
+      // one from a hand or a library is seen; a spell's was already.
+      const from = object.zone;
+      if (instead?.reveal === true && (from === "hand" || from === "library" || from === "battlefield" || from === "graveyard")) {
+        this.emit({ type: "cards-revealed", player: object.owner, objects: [id], from });
+      }
+      // A card milled is already in that library: it goes to the bottom of
+      // it, no zone change (rule 400.7) and nothing new arriving.
+      if (object.zone === "library") {
+        this.placeInLibrary(id, place);
+        this.noteLibraryEndArrival(id, owed);
+        return false;
+      }
       const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: place });
-      if (moved) this.placeInLibrary(id, place);
+      if (moved) {
+        this.placeInLibrary(id, place);
+        this.noteLibraryEndArrival(id, owed);
+      }
       return moved;
     }
     if (owed === "hand") return this.moveObjectUncached(id, "hand", enter);
@@ -73841,16 +73885,20 @@ controlledBy,
     const batch: { object: ObjectId; from: ZoneType }[] = [...(held?.seed?.graveyard ?? [])];
     const exiled: { object: ObjectId; from: ZoneType; owner: PlayerId; token?: true }[] = [...(held?.seed?.exile ?? [])];
     const library: { object: ObjectId; from: ZoneType; owner: PlayerId }[] = [...(held?.seed?.library ?? [])];
+    const ends: { object: ObjectId; end: "library-top" | "library-bottom" }[] = [];
     this.graveyardEnterBatch = batch;
     this.exileEnterBatch = exiled;
     this.libraryEnterBatch = library;
+    this.libraryEndBatch = ends;
     try {
       fn();
     } finally {
       this.graveyardEnterBatch = null;
       this.exileEnterBatch = null;
       this.libraryEnterBatch = null;
+      this.libraryEndBatch = null;
     }
+    if (ends.length > 1) this.queueLibraryEndOrders(ends);
     if (held?.hold() === true) {
       return batch.length + exiled.length + library.length > 0 ? { graveyard: batch, exile: exiled, library } : null;
     }
@@ -73907,6 +73955,34 @@ controlledBy,
     }
   }
 
+  /** Card `id`, which a graveyard replacement just put on `end` of its
+   * owner's library instead (`destinationInstead`): kept with the others of
+   * the move under way, for their owner to arrange (rule 401.4). Alone, it
+   * has no order. */
+  private noteLibraryEndArrival(id: ObjectId, end: "library-top" | "library-bottom"): void {
+    this.libraryEndBatch?.push({ object: id, end });
+  }
+
+  /** Cards a graveyard replacement put on one end of their owner's library
+   * in one event (Wheel of Sun and Moon's mill, a discarded hand, a wrath
+   * beside Nissa's Chosen): each owner of two or more on one end arranges
+   * them there (rule 401.4), asked before priority as a graveyard's order is
+   * (`promptNextGraveyardOrder`). Always asked — unlike a graveyard's, the
+   * order is what the next draws are. */
+  private queueLibraryEndOrders(ends: readonly { readonly object: ObjectId; readonly end: "library-top" | "library-bottom" }[]): void {
+    for (const player of this.state.turnOrder) {
+      for (const end of ["library-top", "library-bottom"] as const) {
+        const mine = ends.filter((e) => e.end === end && this.state.objects[e.object]?.owner === player).map((e) => e.object);
+        if (!this.libraryOrderMatters(mine)) continue;
+        (this.state.pendingGraveyardOrders ??= []).push({
+          player,
+          cards: mine.map((id) => ({ object: id, stint: this.state.objects[id].zoneChangeCount ?? 0 })),
+          zone: end,
+        });
+      }
+    }
+  }
+
   /** Whether the order of a graveyard can matter in this game: some card in
    * it, in any zone, says "the top card of a graveyard". */
   private graveyardOrderIsRead(): boolean {
@@ -73924,6 +74000,15 @@ controlledBy,
     const [first, ...rest] = this.state.pendingGraveyardOrders ?? [];
     this.state.pendingGraveyardOrders = rest;
     if (first === undefined || this.state.players[first.player]?.hasLost !== false) return;
+    if (first.zone !== undefined) {
+      const library = this.state.zones.perPlayer[first.player].library;
+      // A card milled onto the bottom never changed zones: its count may be unset.
+      const cards = first.cards
+        .filter((c) => library.includes(c.object) && (this.state.objects[c.object]?.zoneChangeCount ?? 0) === c.stint)
+        .map((c) => c.object);
+      this.askLibraryArrangement(first.player, cards, first.zone, priorityTo);
+      return;
+    }
     const pile = this.state.zones.perPlayer[first.player].graveyard;
     const cards = first.cards
       .filter((c) => pile.includes(c.object) && this.state.objects[c.object]?.zoneChangeCount === c.stint)
@@ -73950,6 +74035,45 @@ controlledBy,
       ...(priorityTo !== undefined ? { priorityTo } : {}),
     };
     return true;
+  }
+
+  /** Raise the `choose-from-zone` that arranges `cards`, on one end of
+   * `player`'s library, in the places they hold there, if it's a choice
+   * (rule 401.4). */
+  private askLibraryArrangement(
+    player: PlayerId,
+    cards: readonly ObjectId[],
+    end: "library-top" | "library-bottom",
+    priorityTo: PlayerId,
+  ): void {
+    if (!this.libraryOrderMatters(cards)) return;
+    this.state.awaiting = {
+      kind: "choose-from-zone",
+      player,
+      ids: [...cards],
+      eligible: [...cards],
+      min: cards.length,
+      max: cards.length,
+      destination: "stay",
+      leftover: "stay",
+      order: true,
+      arrangesLibrary: true,
+      prompt: `Arrange these cards on the ${end === "library-top" ? "top" : "bottom"} of your library in the order you pick: the first you pick goes nearest the top`,
+      priorityTo,
+    };
+  }
+
+  /** `chosen`, the first nearest the top, into the places they already hold
+   * in `player`'s library: everything else keeps its place (a card put on
+   * the bottom after them is still under them). */
+  private arrangeLibrary(player: PlayerId, chosen: readonly ObjectId[]): void {
+    const library = this.state.zones.perPlayer[player].library;
+    const moving = new Set(chosen);
+    // The list's start is the top of the library.
+    const places = library.flatMap((id, index) => (moving.has(id) ? [index] : []));
+    places.forEach((place, i) => {
+      library[place] = chosen[i];
+    });
   }
 
   /** `chosen`, top first, into the places they already hold in `player`'s

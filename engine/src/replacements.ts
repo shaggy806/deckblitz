@@ -1028,6 +1028,16 @@ export interface GraveyardExileReplacement {
    * going — another replacement (Rest in Peace) still applies to that move
    * (rule 616.1). See `docs/plans/optional-graveyard-replacement.md`. */
   readonly optional?: true;
+  /** "…, instead that card **is revealed** and put on the bottom of that
+   * player's library" (Wheel of Sun and Moon): shown to every player as it
+   * goes (rule 701.20a), from whatever zone — a card from a hand or a
+   * library too. With `instead` `"library-top"` / `"library-bottom"` on
+   * another permanent's replacement (not `self`), which without `from`
+   * catches a card from anywhere: a discard, a mill (the card moves within
+   * its library), a spell resolving or countered. Two or more put there in
+   * one event are arranged by their owner (rule 401.4), asked as the event
+   * ends (`GameState.pendingGraveyardOrders`' `zone`). */
+  readonly reveal?: true;
 }
 
 /** A discarded card its owner may put on top of their library instead of anywhere

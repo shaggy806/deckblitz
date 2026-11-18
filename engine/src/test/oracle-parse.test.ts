@@ -23706,3 +23706,24 @@ describe("the creature put onto the battlefield with this enchantment (Diabolic 
     expect(servitude.triggered[2].effect).toEqual({ kind: "exile", target: { putOntoBattlefieldWith: { triggered: 0 } } });
   });
 });
+
+describe("a card from anywhere onto the bottom of its owner's library instead (Wheel of Sun and Moon)", () => {
+  it("reads the replacement whole", () => {
+    const wheel = parseFace({
+      name: "Wheel of Sun and Moon",
+      type_line: "Enchantment — Aura",
+      oracle_text:
+        "Enchant player\nIf a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.",
+      mana_cost: "{G/W}{G/W}",
+      colors: ["G", "W"],
+      cmc: 2,
+    } as never) as unknown as { complete: boolean; static: { replacement?: unknown }[] };
+    expect(wheel.complete).toBe(true);
+    expect(wheel.static.at(-1)?.replacement).toEqual({
+      event: "would-be-put-into-graveyard",
+      instead: "library-bottom",
+      filter: { ownedBy: "enchanted-player", token: false },
+      reveal: true,
+    });
+  });
+});

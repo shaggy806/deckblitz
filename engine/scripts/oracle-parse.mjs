@@ -25143,6 +25143,24 @@ function parseStatic(line, text) {
       };
     }
   }
+  // "…, instead that card is revealed and put on the bottom of that player's
+  // library" (Wheel of Sun and Moon): another permanent's "instead" onto a
+  // library end, from anywhere.
+  if (
+    line ===
+    "If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library."
+  ) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-be-put-into-graveyard",
+        instead: "library-bottom",
+        filter: { ownedBy: "enchanted-player", token: false },
+        reveal: true,
+      },
+      text,
+    };
+  }
   if (line === "If a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.") {
     return {
       affects: { scope: "self" },
