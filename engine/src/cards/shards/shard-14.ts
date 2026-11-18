@@ -171,6 +171,7 @@ import _poolCoopedUp from "../pool/cooped-up.js";
 import _poolCorpseCobble from "../pool/corpse-cobble.js";
 import _poolCorpseExplosion from "../pool/corpse-explosion.js";
 import _poolCorpseHauler from "../pool/corpse-hauler.js";
+import _poolCosisTrickster from "../pool/cosis-trickster.js";
 import _poolCosmograndZenith from "../pool/cosmogrand-zenith.js";
 import _poolCouncilOfEchoes from "../pool/council-of-echoes.js";
 import _poolCouriersBriefcase from "../pool/couriers-briefcase.js";
@@ -1209,6 +1210,7 @@ const shard: CardShard = {
     _poolCorpseCobble,
     _poolCorpseExplosion,
     _poolCorpseHauler,
+    _poolCosisTrickster,
     _poolCosmograndZenith,
     _poolCouncilOfEchoes,
     _poolCouriersBriefcase,

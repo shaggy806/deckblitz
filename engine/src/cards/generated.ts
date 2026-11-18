@@ -5490,6 +5490,7 @@ import _poolCorsairsOfUmbar from "./pool/corsairs-of-umbar.js";
 import _poolCoruscationMage from "./pool/coruscation-mage.js";
 import _poolCosimaGodOfTheVoyage from "./pool/cosima-god-of-the-voyage.js";
 import _poolCosisRavager from "./pool/cosis-ravager.js";
+import _poolCosisTrickster from "./pool/cosis-trickster.js";
 import _poolCosmicCrucible from "./pool/cosmic-crucible.js";
 import _poolCosmicCube from "./pool/cosmic-cube.js";
 import _poolCosmicEpiphany from "./pool/cosmic-epiphany.js";
@@ -11353,6 +11354,7 @@ import _poolGlyphElemental from "./pool/glyph-elemental.js";
 import _poolGlyphKeeper from "./pool/glyph-keeper.js";
 import _poolGlyphOfDestruction from "./pool/glyph-of-destruction.js";
 import _poolGlyphOfDoom from "./pool/glyph-of-doom.js";
+import _poolGlyphOfLife from "./pool/glyph-of-life.js";
 import _poolGnarlbackRhino from "./pool/gnarlback-rhino.js";
 import _poolGnarlbarkElm from "./pool/gnarlbark-elm.js";
 import _poolGnarledEffigy from "./pool/gnarled-effigy.js";
@@ -12838,6 +12840,7 @@ import _poolHermiticHerbalist from "./pool/hermitic-herbalist.js";
 import _poolHermiticNautilus from "./pool/hermitic-nautilus.js";
 import _poolHeroInTraining from "./pool/hero-in-training.js";
 import _poolHeroOfBladehold from "./pool/hero-of-bladehold.js";
+import _poolHeroOfBretagard from "./pool/hero-of-bretagard.js";
 import _poolHeroOfGomaFada from "./pool/hero-of-goma-fada.js";
 import _poolHeroOfIroas from "./pool/hero-of-iroas.js";
 import _poolHeroOfLeinaTower from "./pool/hero-of-leina-tower.js";
@@ -17393,6 +17396,7 @@ import _poolMerfolkWindrobber from "./pool/merfolk-windrobber.js";
 import _poolMeriaScholarOfAntiquity from "./pool/meria-scholar-of-antiquity.js";
 import _poolMeriadocBrandybuck from "./pool/meriadoc-brandybuck.js";
 import _poolMeriasOutrider from "./pool/merias-outrider.js";
+import _poolMeriekeRiBerit from "./pool/merieke-ri-berit.js";
 import _poolMerrowBonegnawer from "./pool/merrow-bonegnawer.js";
 import _poolMerrowCommerce from "./pool/merrow-commerce.js";
 import _poolMerrowGrimeblotter from "./pool/merrow-grimeblotter.js";
@@ -21160,6 +21164,7 @@ import _poolPsychicPurge from "./pool/psychic-purge.js";
 import _poolPsychicSpear from "./pool/psychic-spear.js";
 import _poolPsychicSpiral from "./pool/psychic-spiral.js";
 import _poolPsychicStrike from "./pool/psychic-strike.js";
+import _poolPsychicSurgery from "./pool/psychic-surgery.js";
 import _poolPsychicSymbiont from "./pool/psychic-symbiont.js";
 import _poolPsychicTheft from "./pool/psychic-theft.js";
 import _poolPsychicTrance from "./pool/psychic-trance.js";
@@ -28984,6 +28989,7 @@ import _poolTidalVisionary from "./pool/tidal-visionary.js";
 import _poolTidalWarrior from "./pool/tidal-warrior.js";
 import _poolTidalWave from "./pool/tidal-wave.js";
 import _poolTideDrifter from "./pool/tide-drifter.js";
+import _poolTideOfWar from "./pool/tide-of-war.js";
 import _poolTideShaper from "./pool/tide-shaper.js";
 import _poolTideSkimmer from "./pool/tide-skimmer.js";
 import _poolTidebinderMage from "./pool/tidebinder-mage.js";
@@ -38995,6 +39001,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCoruscationMage,
   _poolCosimaGodOfTheVoyage,
   _poolCosisRavager,
+  _poolCosisTrickster,
   _poolCosmicCrucible,
   _poolCosmicCube,
   _poolCosmicEpiphany,
@@ -44858,6 +44865,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlyphKeeper,
   _poolGlyphOfDestruction,
   _poolGlyphOfDoom,
+  _poolGlyphOfLife,
   _poolGnarlbackRhino,
   _poolGnarlbarkElm,
   _poolGnarledEffigy,
@@ -46343,6 +46351,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHermiticNautilus,
   _poolHeroInTraining,
   _poolHeroOfBladehold,
+  _poolHeroOfBretagard,
   _poolHeroOfGomaFada,
   _poolHeroOfIroas,
   _poolHeroOfLeinaTower,
@@ -50898,6 +50907,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeriaScholarOfAntiquity,
   _poolMeriadocBrandybuck,
   _poolMeriasOutrider,
+  _poolMeriekeRiBerit,
   _poolMerrowBonegnawer,
   _poolMerrowCommerce,
   _poolMerrowGrimeblotter,
@@ -54665,6 +54675,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPsychicSpear,
   _poolPsychicSpiral,
   _poolPsychicStrike,
+  _poolPsychicSurgery,
   _poolPsychicSymbiont,
   _poolPsychicTheft,
   _poolPsychicTrance,
@@ -62489,6 +62500,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTidalWarrior,
   _poolTidalWave,
   _poolTideDrifter,
+  _poolTideOfWar,
   _poolTideShaper,
   _poolTideSkimmer,
   _poolTidebinderMage,
@@ -72513,6 +72525,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/coruscation-mage": _poolCoruscationMage,
   "pool/cosima-god-of-the-voyage": _poolCosimaGodOfTheVoyage,
   "pool/cosis-ravager": _poolCosisRavager,
+  "pool/cosis-trickster": _poolCosisTrickster,
   "pool/cosmic-crucible": _poolCosmicCrucible,
   "pool/cosmic-cube": _poolCosmicCube,
   "pool/cosmic-epiphany": _poolCosmicEpiphany,
@@ -78376,6 +78389,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glyph-keeper": _poolGlyphKeeper,
   "pool/glyph-of-destruction": _poolGlyphOfDestruction,
   "pool/glyph-of-doom": _poolGlyphOfDoom,
+  "pool/glyph-of-life": _poolGlyphOfLife,
   "pool/gnarlback-rhino": _poolGnarlbackRhino,
   "pool/gnarlbark-elm": _poolGnarlbarkElm,
   "pool/gnarled-effigy": _poolGnarledEffigy,
@@ -79861,6 +79875,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hermitic-nautilus": _poolHermiticNautilus,
   "pool/hero-in-training": _poolHeroInTraining,
   "pool/hero-of-bladehold": _poolHeroOfBladehold,
+  "pool/hero-of-bretagard": _poolHeroOfBretagard,
   "pool/hero-of-goma-fada": _poolHeroOfGomaFada,
   "pool/hero-of-iroas": _poolHeroOfIroas,
   "pool/hero-of-leina-tower": _poolHeroOfLeinaTower,
@@ -84416,6 +84431,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/meria-scholar-of-antiquity": _poolMeriaScholarOfAntiquity,
   "pool/meriadoc-brandybuck": _poolMeriadocBrandybuck,
   "pool/merias-outrider": _poolMeriasOutrider,
+  "pool/merieke-ri-berit": _poolMeriekeRiBerit,
   "pool/merrow-bonegnawer": _poolMerrowBonegnawer,
   "pool/merrow-commerce": _poolMerrowCommerce,
   "pool/merrow-grimeblotter": _poolMerrowGrimeblotter,
@@ -88183,6 +88199,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/psychic-spear": _poolPsychicSpear,
   "pool/psychic-spiral": _poolPsychicSpiral,
   "pool/psychic-strike": _poolPsychicStrike,
+  "pool/psychic-surgery": _poolPsychicSurgery,
   "pool/psychic-symbiont": _poolPsychicSymbiont,
   "pool/psychic-theft": _poolPsychicTheft,
   "pool/psychic-trance": _poolPsychicTrance,
@@ -96007,6 +96024,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tidal-warrior": _poolTidalWarrior,
   "pool/tidal-wave": _poolTidalWave,
   "pool/tide-drifter": _poolTideDrifter,
+  "pool/tide-of-war": _poolTideOfWar,
   "pool/tide-shaper": _poolTideShaper,
   "pool/tide-skimmer": _poolTideSkimmer,
   "pool/tidebinder-mage": _poolTidebinderMage,

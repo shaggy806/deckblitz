@@ -382,6 +382,7 @@ import _poolHellMongrel from "../pool/hell-mongrel.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHerdMigration from "../pool/herd-migration.js";
 import _poolHermiticHerbalist from "../pool/hermitic-herbalist.js";
+import _poolHeroOfBretagard from "../pool/hero-of-bretagard.js";
 import _poolHeroism from "../pool/heroism.js";
 import _poolHewedStoneRetainers from "../pool/hewed-stone-retainers.js";
 import _poolHighSocietyHunter from "../pool/high-society-hunter.js";
@@ -1445,6 +1446,7 @@ const shard: CardShard = {
     _poolHeraldOfFaith,
     _poolHerdMigration,
     _poolHermiticHerbalist,
+    _poolHeroOfBretagard,
     _poolHeroism,
     _poolHewedStoneRetainers,
     _poolHighSocietyHunter,

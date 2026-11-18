@@ -895,6 +895,7 @@ import _poolThunderwave from "../pool/thunderwave.js";
 import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTidalForce from "../pool/tidal-force.js";
+import _poolTideOfWar from "../pool/tide-of-war.js";
 import _poolTimeVault from "../pool/time-vault.js";
 import _poolTinybonesJoinsUp from "../pool/tinybones-joins-up.js";
 import _poolTobyBeastieBefriender from "../pool/toby-beastie-befriender.js";
@@ -1938,6 +1939,7 @@ const shard: CardShard = {
     _poolTianaShipsCaretaker,
     _poolTibaltsRager,
     _poolTidalForce,
+    _poolTideOfWar,
     _poolTimeVault,
     _poolTinybonesJoinsUp,
     _poolTobyBeastieBefriender,

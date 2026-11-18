@@ -588,6 +588,7 @@ import _poolProfaneMemento from "../pool/profane-memento.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
 import _poolProwlingSerpopard from "../pool/prowling-serpopard.js";
 import _poolPsionicPulse from "../pool/psionic-pulse.js";
+import _poolPsychicSurgery from "../pool/psychic-surgery.js";
 import _poolPure from "../pool/pure.js";
 import _poolPutridImp from "../pool/putrid-imp.js";
 import _poolPyreticCharge from "../pool/pyretic-charge.js";
@@ -1561,6 +1562,7 @@ const shard: CardShard = {
     _poolProsshSkyraiderOfKher,
     _poolProwlingSerpopard,
     _poolPsionicPulse,
+    _poolPsychicSurgery,
     _poolPure,
     _poolPutridImp,
     _poolPyreticCharge,

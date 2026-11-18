@@ -562,6 +562,7 @@ import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMeltTerrain from "../pool/melt-terrain.js";
 import _poolMercifulMandate from "../pool/merciful-mandate.js";
+import _poolMeriekeRiBerit from "../pool/merieke-ri-berit.js";
 import _poolMichikoKondaTruthSeeker from "../pool/michiko-konda-truth-seeker.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
@@ -1606,6 +1607,7 @@ const shard: CardShard = {
     _poolMeliraSylvokOutcast,
     _poolMeltTerrain,
     _poolMercifulMandate,
+    _poolMeriekeRiBerit,
     _poolMichikoKondaTruthSeeker,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,

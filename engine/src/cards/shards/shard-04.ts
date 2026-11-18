@@ -328,6 +328,7 @@ import _poolGlassOfTheGuildpact from "../pool/glass-of-the-guildpact.js";
 import _poolGlenElendraArchmage from "../pool/glen-elendra-archmage.js";
 import _poolGlintHawk from "../pool/glint-hawk.js";
 import _poolGlyphElemental from "../pool/glyph-elemental.js";
+import _poolGlyphOfLife from "../pool/glyph-of-life.js";
 import _poolGoForBlood from "../pool/go-for-blood.js";
 import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
 import _poolGoblinClearcutter from "../pool/goblin-clearcutter.js";
@@ -1357,6 +1358,7 @@ const shard: CardShard = {
     _poolGlenElendraArchmage,
     _poolGlintHawk,
     _poolGlyphElemental,
+    _poolGlyphOfLife,
     _poolGoForBlood,
     _poolGoblinAnarchomancer,
     _poolGoblinClearcutter,
