@@ -23435,3 +23435,30 @@ describe("creatures your opponents control, or played by them, enter tapped (Uph
     });
   });
 });
+
+describe("this creature gains each listed keyword a creature you control has (Majestic Myriarch)", () => {
+  const myriarch = parseFace({
+    name: "Majestic Myriarch",
+    type_line: "Creature — Chimera",
+    oracle_text:
+      "Majestic Myriarch's power and toughness are each equal to twice the number of creatures you control.\nAt the beginning of each combat, this creature gains flying until end of turn if you control a creature with flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.",
+    mana_cost: "{4}{G}",
+    colors: ["G"],
+    cmc: 5,
+  } as never) as unknown as { complete: boolean; static: { setBasePtFromCount?: unknown }[]; triggered: { effect: unknown }[] };
+
+  it("reads it whole: twice the creatures you control, and a become of itself sharing their keywords", () => {
+    const yours = { type: "creature", controlledBy: "you" };
+    expect(myriarch.complete).toBe(true);
+    expect(myriarch.static[0]?.setBasePtFromCount).toEqual({ countOf: { sum: [{ countOf: yours }, { countOf: yours }] }, plusPower: 0, plusToughness: 0 });
+    expect(myriarch.triggered[0]?.effect).toEqual({
+      kind: "become",
+      target: "source",
+      duration: "end-of-turn",
+      sharesKeywords: {
+        from: yours,
+        keywords: ["flying", "first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance"],
+      },
+    });
+  });
+});

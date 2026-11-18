@@ -3022,7 +3022,8 @@
   "keyword:conditional-flashback",
   "replacement:damage-replaced-not-prevented",
   "replacement:damage-replaced-not-prevented",
-  "replacement:enters-tapped-if-cast"
+  "replacement:enters-tapped-if-cast",
+  "effect:grant-keyword-variants"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -10476,8 +10476,13 @@ export function parseEffect(text, outer) {
   // `become` whose `sharesKeywords` reads the creatures you control as it
   // resolves — each landwalk and protection ability among them, and with
   // hexproof each "hexproof from" too.
+  // "~ gains flying until end of turn if you control a creature with flying.
+  // The same is true for …" (Majestic Myriarch): the same, for this creature
+  // alone.
   {
-    const w = /^Creatures you control gain ([a-z ]+) until end of turn if a creature you control has \1\. The same is true for (.+)\.$/.exec(text);
+    const w =
+      /^Creatures you control gain ([a-z ]+) until end of turn if a creature you control has \1\. The same is true for (.+)\.$/.exec(text) ??
+      /^~ gains ([a-z ]+) until end of turn if you control a creature with \1\. The same is true for (.+)\.$/.exec(text);
     const words = w === null ? [] : [w[1], ...w[2].split(/, and |, | and /)];
     const listed = words.filter((word) => word !== "protection" && word !== "landwalk").map((word) => KEYWORDS[word]);
     const known = new Set(["flying", "first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "skulk", "trample", "vigilance", "shroud", "fear"]);
@@ -10486,7 +10491,7 @@ export function parseEffect(text, outer) {
       return {
         effect: {
           kind: "become",
-          filter: yours,
+          ...(w[0].startsWith("~") ? { target: "source" } : { filter: yours }),
           duration: "end-of-turn",
           sharesKeywords: {
             from: yours,
@@ -25564,6 +25569,7 @@ function parseStatic(line, text) {
       "instant and sorcery cards in your graveyard": { countInGraveyard: { typesAnyOf: ["instant", "sorcery"], ownedBy: "you" } },
       "cards in your hand": "cards-in-your-hand",
       "basic land types among lands you control": { basicLandTypes: "you" },
+      "creatures you control": { countOf: { type: "creature", controlledBy: "you" } },
     }[m[1]];
     if (counted !== undefined) {
       return {
