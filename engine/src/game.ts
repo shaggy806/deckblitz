@@ -24753,6 +24753,17 @@ export class Game {
     // Exiled with a permanent, as it's cast (Prowl, Stoic Strategist).
     const exiledWith = this.exiledWithLink(cardId);
     this.moveObject(cardId, "stack", castDown !== undefined ? { faceDown: castDown } : {});
+    // What its own delve exiled is linked to the permanent this spell becomes
+    // (rule 607.2q — Murktide Regent's "exiled with it"): the stint after this
+    // one on the stack, which only resolving onto the battlefield reaches. A
+    // delve printed on it only: a granted one (Teval) is no ability of its.
+    if (delve !== undefined && delve.length > 0 && def.delve) {
+      const link = { source: cardId, zoneChangeCount: (this.state.objects[cardId]?.zoneChangeCount ?? 0) + 1 };
+      for (const id of delve) {
+        const card = this.state.objects[id];
+        if (card?.zone === "exile") card.exiledWith = link;
+      }
+    }
     // The player who casts a spell controls it (rule 601.2a) — a card cast
     // from an opponent's exile or library (Maralen) too.
     object.controller = player;
@@ -70611,9 +70622,15 @@ controlledBy,
       countMatching: (filter, except = [], you) => ctx.countMatching(filter, [...except, ...notYet], you),
       // A graveyard's half still has what is entering from it (rule 614.12,
       // as `countInGraveyard` above), and exile's too (Ulamog, the Defiler's
-      // ruling); the battlefield's leaves it out.
+      // ruling); the battlefield's leaves it out. The source's own sets are
+      // read too: Murktide Regent's "for each instant and sorcery card exiled
+      // with it" (607.2q — it's on the battlefield now, in the stint linked).
       aggregate: (spec, except = [], you = controller) =>
-        this.aggregateBattlefield(you, spec, [...except, ...notYet], { stillInGraveyard: fromGraveyard, stillInExile: fromExile }),
+        this.aggregateBattlefield(you, spec, [...except, ...notYet], {
+          stillInGraveyard: fromGraveyard,
+          stillInExile: fromExile,
+          source,
+        }),
       colorsAmong: (filter, except = []) => ctx.colorsAmong(filter, [...except, ...notYet]),
     });
     return Math.max(0, n);
