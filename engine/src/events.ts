@@ -30,7 +30,10 @@ export type VoteChoice =
     }
   | { readonly object: ObjectId; readonly zoneChangeCount: number }
   | { readonly player: PlayerId }
-  | { readonly number: number };
+  | { readonly number: number }
+  /** A card name (rule 201.4) — "each player chooses a card name"
+   * (Conundrum Sphinx). */
+  | { readonly name: string };
 
 /** One vote cast: who cast it, and for what. A player with more than one vote
  * (rule 701.38d) casts more than one of these. */
@@ -44,6 +47,7 @@ export function sameVoteChoice(a: VoteChoice, b: VoteChoice): boolean {
   if ("option" in a) return "option" in b && a.option === b.option && a.about === b.about;
   if ("object" in a) return "object" in b && a.object === b.object && a.zoneChangeCount === b.zoneChangeCount;
   if ("number" in a) return "number" in b && a.number === b.number;
+  if ("name" in a) return "name" in b && a.name === b.name;
   return "player" in b && a.player === b.player;
 }
 

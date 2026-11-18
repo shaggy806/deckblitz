@@ -324,6 +324,7 @@ import {
   substituteChosenCardName,
   wardCostText,
   CARD_TYPE_CHOICES,
+  CHOSEN_CARD_NAME,
   CHOSEN_CARD_TYPE,
   CHOSEN_COLOR,
   CHOSEN_COUNTER,
@@ -49466,6 +49467,19 @@ controlledBy,
         then: { kind: "cast-vote", voter: player, choice: "creature-type" },
         targets: [],
         x,
+      });
+      return;
+    }
+    if ("cardName" in what) {
+      // A card name (rule 201.4), cast as the name it names: the answer
+      // substitutes it into the vote's choice.
+      this.beginCardNameChoice({
+        player,
+        source,
+        ...(what.cardName.filter !== undefined ? { filter: what.cardName.filter } : {}),
+        aim: what.cardName.aim ?? "opponent-spells",
+        then: { kind: "cast-vote", voter: player, choice: { name: CHOSEN_CARD_NAME } },
+        resume: { controller, targets: [], x, triggerValue: 0, targetZones: [], refs: {} },
       });
       return;
     }

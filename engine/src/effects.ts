@@ -25,7 +25,7 @@ import type {
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes, TypeShareReference } from "./filter.js";
 import { typeShareParts } from "./filter.js";
-import type { CardNameAim, CardNameFilter } from "./card-names.js";
+import type { CardNameAim, CardNameChoice, CardNameFilter } from "./card-names.js";
 import { differentManaSplits, reduceGenericInCost, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { noteStateMutation } from "./characteristics.js";
@@ -2051,6 +2051,7 @@ export function substituteChosenThisWay(spec: EffectSpec, chosen: readonly strin
 function voteChoiceText(choice: VoteChoice): string {
   if ("option" in choice) return choice.text;
   if ("player" in choice) return choice.player;
+  if ("name" in choice) return choice.name;
   return "";
 }
 
@@ -9981,6 +9982,14 @@ export type EffectSpec =
          * Mercy's "each player chooses a creature type". The type is the
          * vote's `text`; `CHOSEN_THIS_WAY` reads it back. */
         | { readonly creatureType: true }
+        /** A card name (rule 201.4) — only with `choose`: Conundrum Sphinx's
+         * "each player chooses a card name. Then each player reveals the
+         * top card of their library" — every name in, from the active
+         * player round (the ruling), before anything is revealed. Asked as
+         * the `choose-card-name` decision (its `filter` and `aim` as that
+         * effect's); the name is the vote's, and `CHOSEN_THIS_WAY` reads it
+         * back in `for-each-vote` (`{ hasName: CHOSEN_THIS_WAY }`). */
+        | { readonly cardName: CardNameChoice }
         /** A whole number from `min` (default 0), up to `max` when the card
          * bounds it — only with `choose`, asked as the `choose-number`
          * decision. Wheel of Misfortune's "each player secretly chooses a

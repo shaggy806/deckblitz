@@ -3268,7 +3268,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `choose-number` decision. Later steps read them as the amount `{ votedNumber:
   "highest" | "lowest" | "that-player" | <target slot> }` and the condition `{
   kind: "voted-number", who: "you" | "that-player", is: "highest" | "lowest" }`.
-  `for` may also be `{ creatureType: true }` (Harsh Mercy), and a
+  `for` may also be `{ creatureType: true }` (Harsh Mercy), or `{ cardName:
+  { filter?, aim? } }` — "each player chooses a card name. Then each player
+  reveals …" (Conundrum Sphinx: every name in before anything is revealed,
+  asked as `choose-card-name`; `for-each-vote` hands each player their own
+  as `CHOSEN_THIS_WAY`, `{ hasName: CHOSEN_THIS_WAY }`), and a
   permanent's filter `own: true` reads it from the chooser's side (Agitator
   Ant's "a creature **they** control"; with `ownedBy: "you"`, "another
   creature **they own**" whoever controls it — This Is How It Ends, its

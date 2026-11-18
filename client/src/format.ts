@@ -184,7 +184,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
         ? who(choice.player)
         : 'number' in choice
           ? String(choice.number)
-          : name(choice.object)
+          : 'name' in choice
+            ? choice.name
+            : name(choice.object)
 
   switch (event.type) {
     case 'game-started':
