@@ -8882,6 +8882,8 @@ export class Game {
         source.enterChoice = { ...source.enterChoice, tributeFrom: creatureType as PlayerId };
       } else if (awaiting.lookAt === true) {
         source.enterChoice = { ...source.enterChoice, lookAt: creatureType as PlayerId };
+      } else if (awaiting.enterChooser === true) {
+        source.enterChoice = { ...source.enterChoice, chooserOf: creatureType as PlayerId };
       } else if (awaiting.choosePlayer === true && awaiting.secondPlayer === true) {
         source.enterChoice = { ...source.enterChoice, otherChosenPlayer: creatureType as PlayerId };
       } else if (awaiting.choosePlayer === true) {
@@ -16764,7 +16766,13 @@ export class Game {
     under?: PlayerId,
   ):
     | { readonly kind: "copy" }
-    | { readonly kind: "choose"; readonly options?: readonly string[]; readonly prompt?: string; readonly look?: true }
+    | {
+        readonly kind: "choose";
+        readonly options?: readonly string[];
+        readonly prompt?: string;
+        readonly look?: true;
+        readonly by?: "an-opponent";
+      }
     | { readonly kind: "number" }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
     | { readonly kind: "at-random"; readonly options: readonly string[] }
@@ -16838,9 +16846,11 @@ export class Game {
       }
     }
     if (answered?.chosen === undefined) {
+      // "An opponent chooses a creature type" (Callous Oppressor): theirs.
+      const by = becoming.chooseOnEnterBy !== undefined ? { by: becoming.chooseOnEnterBy } : {};
       if (becoming.chooseCreatureTypeOnEnter) {
         const menu = becoming.chooseCreatureTypeMenu;
-        return menu === null ? { kind: "choose" } : { kind: "choose", options: menu };
+        return menu === null ? { kind: "choose", ...by } : { kind: "choose", options: menu, ...by };
       }
       // "This creature escapes with your choice of …" (rule 702.138c), chosen
       // as it enters (Tizerus Charger's ruling), and only if it escaped.
@@ -16863,6 +16873,7 @@ export class Game {
         return {
           kind: "choose",
           options,
+          ...by,
           ...(count > 1 ? { prompt: chooseSeveralPrompt(count, 0) } : {}),
           ...(becoming.chooseOnEnterLook !== null ? { look: true as const } : {}),
           // "Choose a planeswalker type" (Deification): a long menu, named.
@@ -17084,6 +17095,34 @@ export class Game {
    * follows to show `chooser` alone. `undefined` with no opponent left to look
    * at (rule 609.3: as much as it can).
    */
+  /**
+   * The opponent who makes the card `id`'s "as this enters" choice
+   * (`CardDefinition.chooseOnEnterBy` — Callous Oppressor's "an opponent
+   * chooses a creature type"): with two or more, `chooser` (whom it enters
+   * under) picks which first, as "an opponent chooses" is asked of a resolving
+   * effect (Guided Passage's ruling); with one, them. With none left in the
+   * game, there's no opponent to choose, and its controller does.
+   */
+  private enterChooserOpponent(id: ObjectId, chooser: PlayerId): PlayerId | "asked" {
+    const opponents = this.state.turnOrder.filter((p) => p !== chooser && this.state.players[p]?.hasLost === false);
+    const object = this.state.objects[id];
+    const picked = object.enterChoice?.chooserOf;
+    if (picked !== undefined && opponents.includes(picked)) return picked;
+    if (opponents.length > 1) {
+      this.state.awaiting = {
+        kind: "choose-creature-type",
+        player: chooser,
+        source: id,
+        options: opponents,
+        catalog: false,
+        enterChooser: true,
+        prompt: "Choose an opponent to make its choice",
+      };
+      return "asked";
+    }
+    return opponents[0] ?? chooser;
+  }
+
   private lookAtOpponentHandOnEnter(id: ObjectId, chooser: PlayerId): readonly ObjectId[] | "asked" | undefined {
     const opponents = this.state.turnOrder.filter((p) => p !== chooser && this.state.players[p]?.hasLost === false);
     const object = this.state.objects[id];
@@ -17516,7 +17555,10 @@ export class Game {
       if (next.kind === "choose") {
         const looked = next.look === true ? this.lookAtOpponentHandOnEnter(id, chooser) : undefined;
         if (looked === "asked") return true;
-        this.beginCreatureTypeChoice(id, chooser, next.options);
+        // "An opponent chooses" (Callous Oppressor): which one first.
+        const answerer = next.by === "an-opponent" ? this.enterChooserOpponent(id, chooser) : chooser;
+        if (answerer === "asked") return true;
+        this.beginCreatureTypeChoice(id, answerer, next.options);
         const asked = this.state.awaiting as AwaitingDecision | null;
         if (asked?.kind === "choose-creature-type" && (next.prompt !== undefined || looked !== undefined)) {
           this.state.awaiting = {

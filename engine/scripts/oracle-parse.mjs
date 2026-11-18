@@ -19095,6 +19095,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.chooseCreatureTypeOnEnter = true;
       continue;
     }
+    // "As this creature enters, an opponent chooses a creature type" (Callous
+    // Oppressor): theirs, which opponent its controller's pick.
+    if (line === "As ~ enters, an opponent chooses a creature type.") {
+      out.chooseCreatureTypeOnEnter = true;
+      out.chooseOnEnterBy = "an-opponent";
+      continue;
+    }
     // "… ~ enters with a fellowship counter on it for each creature you
     // control of the chosen type" (Banner of Kinship): chosen, then counted.
     {

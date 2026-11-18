@@ -3275,7 +3275,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   The decision carries `catalog: true`, which the client renders as a search
   popup with the chooser's most common creature types as suggestions. A
   *permanent* that remembers its type is `chooseCreatureTypeOnEnter` instead
-  (Urza's Incubator), not this. `options` and `prompt` choose among a fixed
+  (Urza's Incubator), not this; "as this creature enters, **an opponent**
+  chooses a creature type" (Callous Oppressor) adds `chooseOnEnterBy:
+  "an-opponent"` (a `chooseOnEnter` menu takes it too): the opponent answers,
+  which one its controller's pick among two or more, asked first. `options` and `prompt` choose among a fixed
   list as buttons: "choose a planeswalker type" as it resolves is `options:
   PLANESWALKER_TYPES, prompt: "choose a planeswalker type"` (rule 205.3j —
   Leori, Sparktouched Hunter, whose `then` is a `delayed-trigger` watching

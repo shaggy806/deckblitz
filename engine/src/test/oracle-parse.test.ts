@@ -23514,3 +23514,19 @@ describe("the top X revealed, any number of a type put onto the battlefield, the
     expect(wave.effect).toMatchObject({ kind: "look-and-choose", leftover: "graveyard", count: "x" });
   });
 });
+
+describe("an opponent's creature type chosen as it enters (Callous Oppressor)", () => {
+  it("reads the choice as an opponent's", () => {
+    const oppressor = parseFace({
+      name: "Callous Oppressor",
+      type_line: "Creature — Octopus",
+      oracle_text: "As this creature enters, an opponent chooses a creature type.",
+      mana_cost: "{1}{U}{U}",
+      colors: ["U"],
+      cmc: 3,
+    } as never) as unknown as { complete: boolean; chooseCreatureTypeOnEnter?: boolean; chooseOnEnterBy?: string };
+    expect(oppressor.complete).toBe(true);
+    expect(oppressor.chooseCreatureTypeOnEnter).toBe(true);
+    expect(oppressor.chooseOnEnterBy).toBe("an-opponent");
+  });
+});

@@ -13452,4 +13452,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- An opponent makes a permanent's "as it enters" choice (2026-11-18) -------
+  preset(
+    'Callous Oppressor: Bob chooses the creature type as it enters',
+    board({
+      you: { bf: ['Island*3'], hand: ['Callous Oppressor'] },
+      opp: { human: true, bf: ['Hill Giant', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Callous Oppressor: in a 4-player game, you pick which opponent chooses',
+    board({
+      you: { bf: ['Island*3'], hand: ['Callous Oppressor'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Llanowar Elves'] }],
+    }),
+  ),
 ]

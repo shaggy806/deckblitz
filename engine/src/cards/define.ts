@@ -5787,6 +5787,16 @@ export interface CardDefinition {
    */
   readonly chooseOnEnterCount?: number;
   /**
+   * "As this creature enters, **an opponent** chooses a creature type"
+   * (Callous Oppressor), with `chooseCreatureTypeOnEnter` or a
+   * `chooseOnEnter` menu: the choice is that opponent's, made as it is about
+   * to enter (rule 614.12) and kept on it as its own would be. Which opponent
+   * is its controller's pick, asked first among two or more (as an "an
+   * opponent chooses" of a resolving effect is — Guided Passage's ruling).
+   * Absent for its controller's own choice.
+   */
+  readonly chooseOnEnterBy?: "an-opponent";
+  /**
    * "As this creature enters, choose 2, 3, or 4 **at random**" (Haktos the
    * Unscarred), with `chooseOnEnter` over the options: nobody is asked — one
    * is drawn from the game's seeded randomness, each equally likely, and
@@ -6648,6 +6658,7 @@ const PRINTED_ABILITY: {
   secretChoiceOnEnter: false,
   chooseTwoPlayersOnEnter: false,
   chooseOnEnterCount: false,
+  chooseOnEnterBy: false,
   chooseOnEnterAtRandom: false,
   chooseOnEnterSharedByExiled: false,
   entersUnderChosenPlayer: false,
@@ -6986,6 +6997,8 @@ interface CardDraft {
   secretChoiceOnEnter?: true;
   chooseTwoPlayersOnEnter?: true;
   chooseOnEnterCount?: number;
+  /** See {@link CardDefinition.chooseOnEnterBy}. */
+  chooseOnEnterBy?: "an-opponent";
   entersUnderChosenPlayer?: true;
   choosePermanentOnEnter?: PermanentOnEnter;
   loyalty?: number;
@@ -7400,6 +7413,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.chooseOnEnterSharedByExiled === true ? { chooseOnEnterSharedByExiled: true as const } : {}),
     ...(draft.chooseTwoPlayersOnEnter === true ? { chooseTwoPlayersOnEnter: true as const } : {}),
     ...(draft.chooseOnEnterCount !== undefined && draft.chooseOnEnterCount > 1 ? { chooseOnEnterCount: draft.chooseOnEnterCount } : {}),
+    ...(draft.chooseOnEnterBy !== undefined ? { chooseOnEnterBy: draft.chooseOnEnterBy } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
     ...(draft.copyOnTransform !== undefined ? { copyOnTransform: draft.copyOnTransform } : {}),
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),

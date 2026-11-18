@@ -3032,7 +3032,8 @@
   "bug:look-and-choose-offers-unattachable-aura",
   "decision:owner-orders-library-bottom",
   "effect:each-opponent-picks-from-shared-reveal",
-  "decision:choose-permanents-non-target"
+  "decision:choose-permanents-non-target",
+  "replacement:opponent-chooses-creature-type-as-enters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

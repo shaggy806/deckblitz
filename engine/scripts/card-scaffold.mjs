@@ -264,6 +264,7 @@ function faceSource(face, ctx) {
     copyOnEnter: parsed.copyOnEnter,
     becomesOnEnter: parsed.becomesOnEnter,
     chooseCreatureTypeOnEnter: parsed.chooseCreatureTypeOnEnter,
+    chooseOnEnterBy: parsed.chooseOnEnterBy,
     chooseCardNameOnEnter: parsed.chooseCardNameOnEnter,
     chooseOnEnter: parsed.chooseOnEnter,
     text: face.oracle_text ?? "",

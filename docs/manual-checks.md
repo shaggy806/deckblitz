@@ -8887,3 +8887,13 @@ Each board's die comes up 4.
 ### Manifold Insights: in a 4-player game, each opponent chooses a different card for your hand
 - **Do:** Cast Manifold Insights.
 - **Expect:** Bob, Carol and Dave choose in that order: the History has "Bob chooses …", "Carol chooses …" and "Dave chooses …", three different cards, then "Alice takes" those three. Your hand is three cards, and your library 47: the other seven went to its bottom.
+
+## An opponent makes a permanent's "as it enters" choice (2026-11-18)
+
+### Callous Oppressor: Bob chooses the creature type as it enters
+- **Do:** Cast Callous Oppressor. As Bob, choose Giant.
+- **Expect:** You aren't asked for a creature type: Bob is, "Callous Oppressor — choose a creature type", his Bear and Giant suggested first. The History has "Callous Oppressor chooses Giant", and Callous Oppressor is on your battlefield.
+
+### Callous Oppressor: in a 4-player game, you pick which opponent chooses
+- **Do:** Cast Callous Oppressor, then click Carol.
+- **Expect:** The banner reads "Callous Oppressor — Choose an opponent to make its choice", with Bob, Carol and Dave to click. Then the wait reads "Waiting for Carol to choose a creature type…" (Bob and Dave aren't asked), the History has "Callous Oppressor chooses Carol" and then the type she named, and Callous Oppressor is on your battlefield.

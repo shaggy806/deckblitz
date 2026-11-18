@@ -1001,6 +1001,11 @@ export interface GameObject {
      * (Sorcerous Spyglass's "look at an opponent's hand") — chosen first,
      * among two or more. */
     readonly lookAt?: PlayerId;
+    /** The opponent who makes its "as this enters" choice
+     * (`CardDefinition.chooseOnEnterBy` — Callous Oppressor's "an opponent
+     * chooses a creature type"): its controller's pick, first, among two or
+     * more. */
+    readonly chooserOf?: PlayerId;
     readonly enchant?: ObjectId | null;
     /** The player an "Enchant player" Aura enters attached to — its spell's
      * target, or its controller's choice (303.4f). Answers what `enchant`
@@ -4531,6 +4536,10 @@ export type AwaitingDecision =
        * naming a card as it enters (`CardNameOnEnter.look`) — `options` are
        * the opponents. */
       readonly lookAt?: true;
+      /** Which opponent makes `source`'s "as this enters" choice
+       * (`CardDefinition.chooseOnEnterBy`) — `options` are the opponents,
+       * the answer recorded as `enterChoice.chooserOf`. */
+      readonly enterChooser?: true;
       /** "As this enters, choose a player / an opponent"
        * (`CardDefinition.choosePlayerOnEnter`) — `options` are the players
        * who may be chosen, recorded as `enterChoice.chosenPlayer`. */
