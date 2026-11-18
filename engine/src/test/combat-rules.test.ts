@@ -368,7 +368,7 @@ describe("every definition speaks the one vocabulary", () => {
   ]);
   const FIELDS: Record<string, readonly string[]> = {
     "cant-attack": ["at", "unlessDefender", "ifDefender"],
-    "must-attack": ["at", "otherThan", "ifAttacks"],
+    "must-attack": ["at", "otherThan", "ifAttacks", "atLeastOne"],
     "cant-block": ["attacker", "attackers", "unlessAttacking"],
     "must-block": ["attacker"],
     "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock"],

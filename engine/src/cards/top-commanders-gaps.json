@@ -3012,7 +3012,8 @@
   "filter:shares-card-type-with-discarded",
   "effect:reselect-attack-target-chosen-player",
   "target:battle-or-opponent",
-  "static:must-be-blocked-by-two-or-more"
+  "static:must-be-blocked-by-two-or-more",
+  "static:player-must-attack-with-a-creature"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

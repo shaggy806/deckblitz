@@ -6813,7 +6813,23 @@ function Table({
                           : ''
                       }`,
                     ]
-                  : // Fewer than must attack: named above when it's a creature not yet sent.
+                  : v.kind === 'attack-with-one'
+                    ? // "Must attack [you] with at least one creature" (Seeker of
+                      // Slaanesh, Trove of Temptation): whom, its player first.
+                      [
+                        `at least one creature must attack${
+                          v.defenders === undefined
+                            ? ''
+                            : ` ${v.defenders
+                                .map((d) =>
+                                  game.seats.some((s) => s.player === d)
+                                    ? playerLabel(d as PlayerId, game.seats)
+                                    : game.nameOf(d as ObjectId),
+                                )
+                                .join(' or ')}`
+                        }`,
+                      ]
+                    : // Fewer than must attack: named above when it's a creature not yet sent.
                     unmetMusts.length > 0
                     ? []
                     : [`${v.possible - v.obeyed} more must attack`],

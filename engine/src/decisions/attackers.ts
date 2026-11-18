@@ -32,6 +32,7 @@ import { ableInCompany, attackCompanyOf } from "../combat/company.js";
 import { attackCaps } from "../combat/limits.js";
 import type { CombatCompany } from "../combat/company.js";
 import {
+  attackGroupRequirements,
   attackRequirementsForbid,
   attackRequirementsReason,
   attacksIfOthersAttack,
@@ -121,7 +122,14 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     }
   }
   const isAimed = Object.keys(aimed).length > 0;
-  const inCompany = Object.keys(limits).length > 0 || caps !== null;
+  // "Each opponent must attack [you] with at least one creature each combat
+  // if able" (rule 508.1d — Seeker of Slaanesh, Trove of Temptation): one
+  // requirement each, which only the whole declaration answers. Naming the
+  // group under Master Warcraft says no defender, so there it's any.
+  const groups = attackGroupRequirements(ctx.state, ctx.registry, player, Object.keys(defendersFor) as ObjectId[]).map(
+    (g) => (naming ? { members: g.members } : g),
+  );
+  const inCompany = Object.keys(limits).length > 0 || caps !== null || groups.length > 0;
   if (inCompany) {
     const units = (Object.keys(defendersFor) as ObjectId[]).map((id) => ({
       id,
@@ -190,7 +198,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
         };
       })
     : [];
-  const most = mostRequirementsObeyed(units, caps ?? undefined);
+  const most = mostRequirementsObeyed(units, caps ?? undefined, groups);
   // "If a creature you control attacks, this creature also attacks if able"
   // (rule 508.1d): only the whole declaration can say. Paying to obey it is
   // never obliged, so only one it costs nothing to send.
@@ -217,7 +225,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
     defendersFor: naming ? named : defendersFor,
     eligible,
     mustAttack: inCompany
-      ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id), caps ?? undefined) < most)
+      ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id), caps ?? undefined, groups) < most)
       : required,
     ...(attackIf.length > 0 ? { attackIf } : {}),
     ...(inCompany
@@ -228,6 +236,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
             required,
             ...(caps !== null ? { caps } : {}),
             ...(isAimed ? { aimed, aimedSeats } : {}),
+            ...(groups.length > 0 ? { groups } : {}),
           },
         }
       : {}),
@@ -323,13 +332,27 @@ export const attackers = defineDecision({
         (id) =>
           ctx.state.objects[id]?.controller === player &&
           attackCompanyOf(restrictionsOf(ctx.state, ctx.registry, id)) !== null,
-      );
+      ) ||
+      attackGroupRequirements(
+        ctx.state,
+        ctx.registry,
+        player,
+        ctx.state.zones.shared.battlefield.filter((id) => ctx.state.objects[id]?.controller === player),
+      ).length > 0;
     if (inCompany) {
       const offer = attackersOffer(ctx, player);
       const left = attackingViolations(action.attackers, offer)[0];
       if (left !== undefined) return `${nameOf(ctx, left.attacker)} must attack if able`;
       const broken = attackCompanyViolations(action.attackers, offer)[0];
       if (broken !== undefined) {
+        if (broken.kind === "attack-with-one") {
+          const named = (broken.defenders ?? []).map((d) =>
+            ctx.state.objects[d as ObjectId] !== undefined ? nameOf(ctx, d as ObjectId) : d,
+          );
+          return named.length === 0
+            ? "At least one creature must attack each combat if able"
+            : `At least one creature must attack ${named.join(" or ")} each combat if able`;
+        }
         if (broken.kind === "too-many") {
           const creatures = broken.most === 1 ? "one creature" : `${broken.most} creatures`;
           if (broken.defender === undefined) return `No more than ${creatures} can attack each combat`;
@@ -406,6 +429,8 @@ export const attackers = defineDecision({
     // With a restriction keyed to the others, who goes with a creature that
     // must attack is the seat's to say.
     if ((offer?.company?.required.length ?? 0) > 0) return null;
+    // And who attacks for "with at least one creature", while one can.
+    if (offer?.company?.groups !== undefined && attackCompanyViolations([], offer).length > 0) return null;
     if (offer === undefined || required.some((id) => (offer.defendersFor[id] ?? []).length !== 1)) {
       return required.length === 0 ? { type: "declare-attackers", player, attackers: [] } : null;
     }

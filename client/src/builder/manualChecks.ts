@@ -13404,4 +13404,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'begin-combat',
     }),
   ),
+  // --- Must attack with at least one creature (2026-11-18) -------------------------
+  preset(
+    'Seeker of Slaanesh: one of your creatures must attack',
+    board({
+      you: { bf: ['Grizzly Bears', 'Hill Giant'] },
+      opp: { bf: ['Seeker of Slaanesh'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Trove of Temptation: in a 4-player game, one creature must attack Bob or his planeswalker',
+    board({
+      you: { bf: ['Grizzly Bears', 'Hill Giant'] },
+      opp: [{ bf: ['Trove of Temptation', 'Jace Beleren'] }, {}, {}],
+      step: 'begin-combat',
+    }),
+  ),
 ]

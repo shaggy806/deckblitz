@@ -789,7 +789,7 @@ export function attacksIfOthersAttack(
   const out: { attacker: ObjectId; when: readonly ObjectId[] }[] = [];
   for (const attacker of able) {
     const when = new Set<ObjectId>();
-    for (const { rule, you, source } of recordsOfKind(state, registry, attacker, "must-attack")) {
+    for (const { rule, you, source } of creatureMustAttacks(state, registry, attacker)) {
       const filter = rule.ifAttacks;
       if (filter === undefined) continue;
       for (const id of eligible) {
@@ -808,7 +808,60 @@ export function attacksIfOthersAttack(
  * opponent with the most life". One requirement each, however many it names.
  */
 function aimedRequirements(state: GameState, registry: CardRegistry, attacker: ObjectId): readonly RuleInForce<MustAttack>[] {
-  return recordsOfKind(state, registry, attacker, "must-attack").filter(({ rule }) => rule.at !== undefined);
+  return creatureMustAttacks(state, registry, attacker).filter(({ rule }) => rule.at !== undefined);
+}
+
+/** The "attacks if able" records on `attacker` that are its own — not a
+ * player's "with at least one creature" (`atLeastOne`), which only the whole
+ * declaration answers ({@link attackGroupRequirements}). */
+function creatureMustAttacks(state: GameState, registry: CardRegistry, attacker: ObjectId): readonly RuleInForce<MustAttack>[] {
+  return recordsOfKind(state, registry, attacker, "must-attack").filter(({ rule }) => rule.atLeastOne !== true);
+}
+
+/** One "[a player] must attack [with] at least one creature each combat if
+ * able" (rule 508.1d — Seeker of Slaanesh; `MustAttack.atLeastOne`): the
+ * creatures of theirs it binds, and the defenders that obey it — every one
+ * they may attack, absent (Trove of Temptation's "you or a planeswalker you
+ * control" otherwise). One requirement each, however many creatures. */
+export interface AttackGroupRequirement {
+  readonly members: readonly ObjectId[];
+  readonly defenders?: readonly (PlayerId | ObjectId)[];
+}
+
+/**
+ * The "with at least one creature" requirements on `player`'s declaration,
+ * among `creatures` (theirs): one for each such rule a permanent's ability
+ * makes, binding the creatures it reaches. Empty almost always.
+ */
+export function attackGroupRequirements(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  creatures: readonly ObjectId[],
+): AttackGroupRequirement[] {
+  const groups = new Map<string, { members: ObjectId[]; defenders?: readonly (PlayerId | ObjectId)[] }>();
+  let defenders: readonly (PlayerId | ObjectId)[] | undefined;
+  for (const id of creatures) {
+    const object = state.objects[id];
+    if (object === undefined || object.controller !== player) continue;
+    for (const { rule, you, source } of recordsOfKind(state, registry, id, "must-attack")) {
+      if (rule.atLeastOne !== true) continue;
+      // One rule of one permanent: the same requirement on each creature.
+      const key = `${source.id}|${JSON.stringify(rule)}|${you}`;
+      let group = groups.get(key);
+      if (group === undefined) {
+        const at = rule.at;
+        defenders ??= legalDefenders(state, registry, player);
+        group = {
+          members: [],
+          ...(at === undefined ? {} : { defenders: defenders.filter((d) => aimNames(state, registry, at, you, object, d, source)) }),
+        };
+        groups.set(key, group);
+      }
+      group.members.push(id);
+    }
+  }
+  return [...groups.values()];
 }
 
 /**
@@ -820,7 +873,7 @@ function aimedRequirements(state: GameState, registry: CardRegistry, attacker: O
 function otherThanRequirements(state: GameState, registry: CardRegistry, attacker: ObjectId): PlayerId[] {
   return [
     ...goadersOf(state, registry, attacker),
-    ...recordsOfKind(state, registry, attacker, "must-attack")
+    ...creatureMustAttacks(state, registry, attacker)
       .filter(({ rule }) => rule.otherThan !== undefined)
       .map(({ you }) => you),
   ];
@@ -977,7 +1030,7 @@ function mustAttackUncached(state: GameState, registry: CardRegistry, attacker: 
   if (goadersOf(state, registry, attacker).length > 0 || restrictionsOf(state, registry, attacker).has("must-attack")) {
     return true;
   }
-  const records = recordsOfKind(state, registry, attacker, "must-attack");
+  const records = creatureMustAttacks(state, registry, attacker);
   if (records.length === 0) return false;
   // "Attacks a player other than you if able" carries "attacks if able"; the
   // conditional one binds only through the declaration's check.

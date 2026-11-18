@@ -8853,3 +8853,14 @@ Each board's die comes up 4.
 ### Gorm the Great: in a 4-player game, the player attacked blocks with two
 - **Do:** In this 4-player game, switch to Bob and attack you with Gorm the Great. Back as Alice, block it with Grizzly Bears and Llanowar Elves.
 - **Expect:** "Block (1)" stays off with one of them on Gorm; "Block (2)" works once both are. Carol and Dave aren't asked to block.
+
+## Must attack with at least one creature (2026-11-18)
+
+### Seeker of Slaanesh: one of your creatures must attack
+- **Do:** At your declare attackers step, try "No attacks". Then click Grizzly Bears and attack with it.
+- **Expect:** With no attacker chosen the banner adds "at least one creature must attack" and "No attacks" is off. With Grizzly Bears attacking Bob, "Attack with 1" works; Hill Giant may stay home.
+
+### Trove of Temptation: in a 4-player game, one creature must attack Bob or his planeswalker
+- **Do:** In this 4-player game, at your declare attackers step send Grizzly Bears at Carol, then Hill Giant at Bob's Jace Beleren.
+- **Expect:** With only Grizzly Bears at Carol the banner adds "at least one creature must attack Bob or Jace Beleren" and "Attack with 1" is off; once Hill Giant attacks Jace Beleren, "Attack with 2" works.
+- **Not a bug:** Grizzly Bears may still attack Carol: only one creature has to go Bob's way.

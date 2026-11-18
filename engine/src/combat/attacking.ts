@@ -106,7 +106,11 @@ export type AttackCompanyViolation =
   | { readonly kind: "fewer-requirements"; readonly obeyed: number; readonly possible: number }
   /** More attackers than "no more than `most` creatures can attack" allows
    * (`combat/limits.ts`), or, with `defender`, more on that defender. */
-  | { readonly kind: "too-many"; readonly most: number; readonly defender?: string };
+  | { readonly kind: "too-many"; readonly most: number; readonly defender?: string }
+  /** No creature attacks for a "with at least one creature" requirement
+   * (`company.groups` — Seeker of Slaanesh; at one of `defenders`, Trove of
+   * Temptation's player or their planeswalkers) though one could. */
+  | { readonly kind: "attack-with-one"; readonly defenders?: readonly (PlayerId | ObjectId)[] };
 
 /** One eligible attacker, as far as company, caps and requirements care.
  * `free`: it has a defender it needn't pay to attack (508.1d doesn't oblige
@@ -183,28 +187,144 @@ export function seatAttackers(
   return { seated, seats };
 }
 
-/** The most requirements (creatures that must attack, each token one) a
- * declaration of `size` can obey under `caps`, or `null` if none of that size is
- * legal. */
-function obeyedAtSize(units: readonly AttackUnit[], size: number, caps?: AttackCaps): number | null {
+/** The most requirements (creatures that must attack, each token one, and
+ * each of `groups` obeyed) a declaration of `size` can obey under `caps`, or
+ * `null` if none of that size is legal. */
+function obeyedAtSize(
+  units: readonly AttackUnit[],
+  size: number,
+  caps?: AttackCaps,
+  groups: readonly AttackGroup[] = [],
+): number | null {
   if (tokensFitting(units, size) < size || size > (caps?.most ?? Infinity)) return null;
   const fitting = units.filter((u) => fitsCompany(u.company, size));
   const perDefender = caps?.perDefender;
   if (perDefender !== undefined && seatAttackers(fitting, perDefender).seated < size) return null;
+  if (groups.length > 0) return groupPlanAtSize(fitting, size, perDefender, groups)?.value ?? null;
   const must = fitting.filter((u) => u.required);
   const required = perDefender !== undefined ? seatAttackers(must, perDefender).seated : must.reduce((n, u) => n + u.tokens, 0);
   return Math.min(size, required);
 }
 
 /** The most requirements any legal declaration of `units` obeys under `caps`,
- * paying nothing (rule 508.1d). */
-export function mostRequirementsObeyed(units: readonly AttackUnit[], caps?: AttackCaps): number {
-  const free = units.filter((u) => u.free).map((u) => ({ ...u, defenders: u.freeDefenders }));
+ * paying nothing (rule 508.1d) — `groups`' among them. */
+export function mostRequirementsObeyed(
+  units: readonly AttackUnit[],
+  caps?: AttackCaps,
+  groups: readonly AttackGroup[] = [],
+): number {
+  const free = freeUnits(units);
   const total = free.reduce((n, u) => n + u.tokens, 0);
   let best = 0;
   for (let size = 1; size <= Math.min(total, caps?.most ?? Infinity); size += 1) {
-    best = Math.max(best, obeyedAtSize(free, size, caps) ?? 0);
+    best = Math.max(best, obeyedAtSize(free, size, caps, groups) ?? 0);
   }
+  return best;
+}
+
+/** The units that can attack paying nothing, each at only the defenders it
+ * can (rule 508.1d never obliges a cost). */
+function freeUnits(units: readonly AttackUnit[]): AttackUnit[] {
+  return units.filter((u) => u.free).map((u) => ({ ...u, defenders: u.freeDefenders }));
+}
+
+/** One "with at least one creature" requirement, as the offer's `company`
+ * keeps it (Seeker of Slaanesh, Trove of Temptation). */
+export type AttackGroup = NonNullable<NonNullable<AttackOffer["company"]>["groups"]>[number];
+
+/** Whether `declared` obeys `group`: one of its members attacking one of its
+ * defenders. */
+function groupObeyed(declared: readonly AttackerDeclaration[], group: AttackGroup): boolean {
+  return declared.some(
+    (d) => group.members.includes(d.attacker) && (group.defenders === undefined || group.defenders.includes(d.defender)),
+  );
+}
+
+/** One token of a unit sent at a defender to obey "with at least one
+ * creature" requirements. */
+interface GroupRep {
+  readonly unit: number;
+  readonly defender: string;
+}
+
+/** Past this many steps, {@link groupPlanAtSize} keeps the best it has found:
+ * lenient, a requirement it didn't reach asking nothing. A real board takes a
+ * handful — a group or two, a few kinds of creature. */
+const GROUP_SEARCH_LIMIT = 20_000;
+
+/**
+ * The most requirements a declaration of `size` from `units` (all able to be
+ * that many together, each at its free `defenders`) obeys with `groups`
+ * counted — each obeyed by a creature sent at one of its defenders, the
+ * "representative" (`reps`) — and one set of them that does. The rest of the
+ * declaration is the creatures that must attack first (rule 508.1d), seated
+ * under `perDefender`. A search over the groups in order: each obeyed by a
+ * creature already sent, by a new one of each kind at each defender that
+ * obeys it, or left unobeyed. `null` when no declaration of `size` is legal.
+ */
+function groupPlanAtSize(
+  units: readonly AttackUnit[],
+  size: number,
+  perDefender: Readonly<Record<string, number>> | undefined,
+  groups: readonly AttackGroup[],
+): { readonly value: number; readonly reps: readonly GroupRep[] } | null {
+  const memberOf = groups.map((g) => new Set<string>(g.members));
+  const reps: GroupRep[] = [];
+  const used = new Map<number, number>();
+  const seats = perDefender === undefined ? undefined : new Map(Object.entries(perDefender));
+  let best: { value: number; reps: readonly GroupRep[] } | null = null;
+  let steps = 0;
+  /** The creature requirements the rest of the declaration obeys beside the
+   * reps, or `null` when the rest can't make up `size`. */
+  const restObeyed = (): number | null => {
+    const room = size - reps.length;
+    if (room < 0) return null;
+    const rest = units
+      .map((u, i) => ({ ...u, tokens: u.tokens - (used.get(i) ?? 0) }))
+      .filter((u) => u.tokens > 0);
+    const left = seats === undefined ? undefined : Object.fromEntries(seats);
+    const seated = left === undefined ? rest.reduce((n, u) => n + u.tokens, 0) : seatAttackers(rest, left).seated;
+    if (seated < room) return null;
+    const must = rest.filter((u) => u.required);
+    const required = left === undefined ? must.reduce((n, u) => n + u.tokens, 0) : seatAttackers(must, left).seated;
+    return Math.min(room, required) + reps.filter((rep) => units[rep.unit].required).length;
+  };
+  const covers = (rep: GroupRep, g: number): boolean =>
+    memberOf[g].has(units[rep.unit].id) && (groups[g].defenders === undefined || groups[g].defenders.includes(rep.defender as PlayerId | ObjectId));
+  const search = (g: number, obeyed: number): void => {
+    steps += 1;
+    if (steps > GROUP_SEARCH_LIMIT) return;
+    if (g === groups.length) {
+      const rest = restObeyed();
+      if (rest !== null && (best === null || rest + obeyed > best.value)) best = { value: rest + obeyed, reps: [...reps] };
+      return;
+    }
+    if (reps.some((rep) => covers(rep, g))) {
+      search(g + 1, obeyed + 1);
+      return;
+    }
+    // A creature of each kind once: alike, any of them would do as well.
+    const tried = new Set<string>();
+    units.forEach((u, i) => {
+      if (!memberOf[g].has(u.id) || (used.get(i) ?? 0) >= u.tokens) return;
+      for (const defender of u.defenders) {
+        if (groups[g].defenders !== undefined && !groups[g].defenders.includes(defender as PlayerId | ObjectId)) continue;
+        if (seats?.has(defender) === true && (seats.get(defender) ?? 0) <= 0) continue;
+        const kind = `${u.required}|${u.defenders.join()}|${memberOf.map((m) => m.has(u.id)).join()}|${defender}`;
+        if (tried.has(kind)) continue;
+        tried.add(kind);
+        used.set(i, (used.get(i) ?? 0) + 1);
+        if (seats?.has(defender) === true) seats.set(defender, (seats.get(defender) ?? 0) - 1);
+        reps.push({ unit: i, defender });
+        search(g + 1, obeyed + 1);
+        reps.pop();
+        if (seats?.has(defender) === true) seats.set(defender, (seats.get(defender) ?? 0) + 1);
+        used.set(i, (used.get(i) ?? 0) - 1);
+      }
+    });
+    search(g + 1, obeyed);
+  };
+  search(0, 0);
   return best;
 }
 
@@ -237,9 +357,25 @@ export function attackCompanyViolations(
     }
   }
   const required = declared.filter((d) => company.required.includes(d.attacker));
-  const obeyed = attackersDeclared(required, company.tokens);
-  const possible = mostRequirementsObeyed(attackUnits(offer), caps);
-  if (obeyed < possible) out.push({ kind: "fewer-requirements", obeyed, possible });
+  const groups = company.groups ?? [];
+  const byCreatures = attackersDeclared(required, company.tokens);
+  const obeyed = byCreatures + groups.filter((g) => groupObeyed(declared, g)).length;
+  const units = attackUnits(offer);
+  const possible = mostRequirementsObeyed(units, caps, groups);
+  if (obeyed < possible) {
+    // Name what's short: a group no member attacks for though one could, and
+    // creatures that must attack.
+    const free = freeUnits(units);
+    const unmet = groups.filter(
+      (g) =>
+        !groupObeyed(declared, g) &&
+        free.some((u) => g.members.includes(u.id) && u.defenders.some((d) => g.defenders === undefined || g.defenders.includes(d as PlayerId | ObjectId))),
+    );
+    for (const g of unmet) out.push({ kind: "attack-with-one", ...(g.defenders !== undefined ? { defenders: g.defenders } : {}) });
+    if (unmet.length === 0 || (groups.length > 0 && byCreatures < mostRequirementsObeyed(units, caps))) {
+      out.push({ kind: "fewer-requirements", obeyed, possible });
+    }
+  }
   // As many of them as there are seats on the defenders their requirement
   // aims them at (rule 508.1d, the goaded and a full Crawlspace).
   if (company.aimed !== undefined && company.aimedSeats !== undefined) {
@@ -316,10 +452,13 @@ export function withinAttackCompany(
   const units = attackUnits(offer).filter((u) => u.free || named.has(u.id));
   const total = units.reduce((n, u) => n + u.tokens, 0);
   const caps = company.caps;
-  const possible = mostRequirementsObeyed(attackUnits(offer), caps);
+  const groups = company.groups ?? [];
+  const possible = mostRequirementsObeyed(attackUnits(offer), caps, groups);
+  // "With at least one creature": who obeys it is sent at no cost.
+  const reckoned = groups.length > 0 ? freeUnits(units) : units;
   let best: { size: number; adding: number; kept: number } | null = possible === 0 ? { size: 0, adding: 0, kept: 0 } : null;
   for (let size = 1; size <= Math.min(total, caps?.most ?? Infinity); size += 1) {
-    if ((obeyedAtSize(units, size, caps) ?? -1) < possible) continue;
+    if ((obeyedAtSize(reckoned, size, caps, groups) ?? -1) < possible) continue;
     const fit = declared.filter((d) => fitsCompany(company.limits[d.attacker], size));
     const kept = Math.min(size, attackersDeclared(fit, company.tokens));
     const adding = size - kept;
@@ -349,25 +488,40 @@ export function withinAttackCompany(
     }
   };
   const fitting = units.filter((u) => fitsCompany(u.company, size));
+  // A creature for each "with at least one creature" requirement the most
+  // obedient plan obeys, sent first where it obeys it; the rest of each
+  // stack goes as any other creature.
+  const repTokens = new Map<ObjectId, number>();
+  if (groups.length > 0) {
+    const free = freeUnits(fitting);
+    for (const rep of groupPlanAtSize(free, size, perDefender, groups)?.reps ?? []) {
+      const u = free[rep.unit];
+      place(u.id, rep.defender as PlayerId | ObjectId, 1, u.tokens);
+      repTokens.set(u.id, (repTokens.get(u.id) ?? 0) + 1);
+    }
+  }
+  const unsent = (u: AttackUnit): number => u.tokens - (repTokens.get(u.id) ?? 0);
   // With caps, those that must attack go where a matching has room for the most
   // of them: their seats first, spoken for before anyone's declaration is read.
   if (perDefender !== undefined) {
-    const must = fitting.filter((u) => u.required).map((u) => ({ ...u, defenders: u.freeDefenders }));
-    const { seats } = seatAttackers(must, perDefender);
+    const must = fitting
+      .filter((u) => u.required && unsent(u) > 0)
+      .map((u) => ({ ...u, tokens: unsent(u), defenders: u.freeDefenders }));
+    const { seats } = seatAttackers(must, Object.fromEntries(left));
     const seatedTokens = new Map<ObjectId, number>();
     for (const [defender, here] of seats) {
       for (const index of new Set(here)) {
         const u = must[index];
         const n = here.filter((i) => i === index).length;
         seatedTokens.set(u.id, (seatedTokens.get(u.id) ?? 0) + n);
-        place(u.id, defender as PlayerId | ObjectId, n, u.tokens);
+        place(u.id, defender as PlayerId | ObjectId, n, u.tokens + (repTokens.get(u.id) ?? 0));
       }
     }
     // Who has an uncapped defender wasn't seated: there, every token of it.
     for (const u of must) {
       if (seatedTokens.has(u.id)) continue;
       const defender = u.defenders.find((d) => perDefender[d] === undefined);
-      if (defender !== undefined) place(u.id, defender as PlayerId | ObjectId, u.tokens, u.tokens);
+      if (defender !== undefined) place(u.id, defender as PlayerId | ObjectId, u.tokens, u.tokens + (repTokens.get(u.id) ?? 0));
     }
   }
   const placedAlready = new Set(perDefender !== undefined ? out.map((d) => d.attacker) : []);
@@ -379,17 +533,31 @@ export function withinAttackCompany(
   const freeDefender = (u: AttackUnit): PlayerId | ObjectId | undefined =>
     (offer.defendersFor[u.id] ?? []).find((d) => taxOn(offer, u.id, d) === 0 && (left.get(d) ?? Infinity) > 0) ??
     (offer.defendersFor[u.id] ?? []).find((d) => taxOn(offer, u.id, d) === 0);
+  // The rest of a creature sent for a group: anywhere it may go free.
+  const sendRest = (u: AttackUnit): void => {
+    const defender = freeDefender(u);
+    if (defender !== undefined && unsent(u) > 0) place(u.id, defender, unsent(u), u.tokens);
+  };
   // Those that must attack, first; then what was declared; then whoever can.
   for (const u of fitting.filter((v) => v.required && !placedAlready.has(v.id))) {
-    if (named.has(u.id)) {
+    if (repTokens.has(u.id)) {
+      sendRest(u);
+    } else if (named.has(u.id)) {
       sendAsDeclared(u);
     } else {
       const defender = freeDefender(u);
       if (defender !== undefined) place(u.id, defender, u.tokens, u.tokens);
     }
   }
-  for (const u of fitting.filter((v) => !v.required && named.has(v.id))) sendAsDeclared(u);
+  for (const u of fitting.filter((v) => !v.required && named.has(v.id))) {
+    if (repTokens.has(u.id)) sendRest(u);
+    else sendAsDeclared(u);
+  }
   for (const u of fitting.filter((v) => !v.required && !named.has(v.id))) {
+    if (repTokens.has(u.id)) {
+      sendRest(u);
+      continue;
+    }
     const defender = freeDefender(u);
     if (defender !== undefined) place(u.id, defender, u.tokens, u.tokens);
   }

@@ -161,6 +161,13 @@ export interface MustAttack {
   /** "If [a creature matching this] attacks, this attacks if able" (Viashino
    * Bey): read as the declaration is checked. */
   readonly ifAttacks?: CardFilter;
+  /** "Each opponent must attack [you or a planeswalker you control] **with at
+   * least one creature** each combat if able" (Seeker of Slaanesh, Trove of
+   * Temptation): a requirement on the player, not on each creature — one
+   * requirement for all the creatures it reaches that player controls
+   * (rule 508.1d), obeyed by any one of them attacking (at `at`). Not a
+   * "must attack" of any one creature. */
+  readonly atLeastOne?: true;
   readonly you?: PlayerId;
 }
 

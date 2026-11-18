@@ -1944,6 +1944,16 @@ export type LegalAction =
          * `defendersFor`), but as many as `aimedSeats` tokens must be seated. */
         readonly aimed?: Readonly<Record<ObjectId, readonly string[]>>;
         readonly aimedSeats?: number;
+        /** Rule 508.1d: "must attack [you or a planeswalker you control]
+         * with at least one creature each combat if able" (Seeker of
+         * Slaanesh, Trove of Temptation) — each one requirement, obeyed by
+         * any of `members` attacking one of `defenders` (anything it may,
+         * absent). They make `company` present; `attackCompanyViolations`
+         * counts them with `required`'s. */
+        readonly groups?: readonly {
+          readonly members: readonly ObjectId[];
+          readonly defenders?: readonly (PlayerId | ObjectId)[];
+        }[];
       };
     }
   | {
