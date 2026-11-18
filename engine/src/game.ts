@@ -45724,20 +45724,36 @@ controlledBy,
         }
       },
       manifestTop: (player, kind, library) => this.manifestTop(player, kind, library ?? player),
-      cloakExiledPile: (libraryTop, tapped, also) =>
+      cloakExiledPile: (libraryTop, tapped, also) => {
+        // "Exile it and …" (Jeskai Infiltrator): only while it's still the
+        // permanent the ability refers to (its ruling). Off a trigger on its
+        // leaving the battlefield, the card in the graveyard it went to, as
+        // that object (rule 400.7 — Triumph of Saint Katherine): one stint on
+        // from the battlefield stint it left, and not moved since the ability
+        // was put on the stack (`sourceLost`).
+        const sourceCard = this.state.objects[source];
+        const sourceInGraveyard =
+          also?.source === true &&
+          opts.sourceLost !== true &&
+          sourceCard?.zone === "graveyard" &&
+          refs.source !== undefined &&
+          (sourceCard.zoneChangeCount ?? 0) === refs.source + 1;
+        const sourceOn = also?.source === true && sourceStillOn();
+        // "If you do": the whole pile or none of it (Triumph's ruling).
+        if (also?.whole === true && also.source === true && !sourceOn && !sourceInGraveyard) return;
         this.cloakExiledPile(
           controller,
           [
             ...targets.flatMap((t) => (t === undefined || t === null ? [] : [t])),
-            // "Exile it and …" (Jeskai Infiltrator): only while it's still the
-            // permanent the ability refers to (its ruling).
-            ...(also?.source === true && sourceStillOn() ? [{ kind: "object" as const, object: source }] : []),
+            ...(sourceOn ? [{ kind: "object" as const, object: source }] : []),
           ],
           libraryTop,
           tapped,
-          also?.manifest === true ? "manifest" : "cloak",
+          also?.onto === "library-top" ? "library-top" : also?.manifest === true ? "manifest" : "cloak",
           also?.graveyard,
-        ),
+          { ...(sourceInGraveyard ? { graveyardCards: [source] } : {}), ...(also?.whole === true ? { whole: true } : {}) },
+        );
+      },
       turnFaceUp: (target) => {
         if (target.kind === "object") this.turnFaceUpByEffect(target.object);
       },
@@ -58775,27 +58791,44 @@ controlledBy,
    * `kind: "manifest"` manifests them instead (rule 701.40a); `graveyard`
    * adds each card in that player's graveyard matching its filter, leaving
    * the graveyard together (Ghastly Conscription), manifested under
-   * `controller` whoever owns it (701.40a, 110.2a).
+   * `controller` whoever owns it (701.40a, 110.2a). `"library-top"` puts the
+   * shuffled pile back on top of the library instead (Triumph of Saint
+   * Katherine), each card its owner's; `also.graveyardCards` are named cards
+   * in a graveyard that join the pile (the source a dies trigger refers to),
+   * and `also.whole` exiles the pile only if every part of it is there —
+   * else nothing at all (Triumph's ruling).
    */
   private cloakExiledPile(
     controller: PlayerId,
     targets: readonly TargetRef[],
     libraryTop: number,
     tapped: boolean,
-    kind: "manifest" | "cloak" = "cloak",
+    kind: "manifest" | "cloak" | "library-top" = "cloak",
     graveyard?: { readonly player: PlayerId; readonly filter: CardFilter },
+    also: { readonly graveyardCards?: readonly ObjectId[]; readonly whole?: boolean } = {},
   ): void {
     if (this.state.players[controller]?.hasLost !== false) return;
     const since = this.state.eventSeq;
     const pile: ObjectId[] = [];
     const objects = targets.flatMap((t) => (t.kind === "object" ? [t.object] : []));
+    const named = (also.graveyardCards ?? []).filter((id) => this.state.objects[id]?.zone === "graveyard");
+    if (
+      also.whole === true &&
+      (named.length < (also.graveyardCards ?? []).length ||
+        objects.some((id) => this.state.objects[id]?.zone !== "battlefield") ||
+        this.state.zones.perPlayer[controller].library.length < Math.max(0, libraryTop))
+    ) {
+      return;
+    }
     // Read before anything moves: `moveObject` edits the graveyard as it goes.
-    const fromGraveyard =
-      graveyard === undefined
+    const fromGraveyard = [
+      ...named,
+      ...(graveyard === undefined
         ? []
-        : (this.state.zones.perPlayer[graveyard.player]?.graveyard ?? []).filter((id) =>
-            matchesFilter(this.state, this.registry, id, graveyard.filter, { you: controller }),
-          );
+        : (this.state.zones.perPlayer[graveyard.player]?.graveyard ?? []).filter(
+            (id) => !named.includes(id) && matchesFilter(this.state, this.registry, id, graveyard.filter, { you: controller }),
+          )),
+    ];
     this.withLeaveBatch(() => {
       this.snapshotLeaving(objects);
       for (const named of objects) {
@@ -58827,6 +58860,14 @@ controlledBy,
     this.turnExiledFaceDown(pile, [], since);
     const shuffled = shuffle(pile, this.rng);
     this.state.rngState = this.rng.seed;
+    if (kind === "library-top") {
+      // "Shuffle that pile and put it back on top of your library": the
+      // pile's random order, each card on top of its owner's library.
+      for (const id of shuffled) {
+        if (this.state.objects[id]?.zone === "exile") this.putOnLibrary(id, "top");
+      }
+      return;
+    }
     for (const id of shuffled) this.putFaceDownAs(controller, id, kind, { tapped });
   }
 

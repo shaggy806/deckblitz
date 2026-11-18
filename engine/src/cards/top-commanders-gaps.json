@@ -2381,6 +2381,7 @@
   "condition:distinct-names-condition",
   "static:boast-twice",
   "effect:cloak-exiled-pile",
+  "effect:shuffle-self-into-library-top",
   "effect:look-and-choose-cloak",
   "effect:manifest-from-hand",
   "mechanic:face-down-piles-opponent-chooses",

@@ -9292,13 +9292,27 @@ export type EffectSpec =
       /** "Exile **it** and the top card of your library …" (Jeskai
        * Infiltrator): this source joins the pile, if it's still the permanent
        * the ability refers to as this resolves — else the rest go alone (its
-       * ruling). */
+       * ruling). Off a trigger on its leaving the battlefield, "it" is the
+       * card in the graveyard it went to, while it's still there as that
+       * object (rule 400.7 — Triumph of Saint Katherine's "when this creature
+       * is put into your graveyard from the battlefield, exile it and …"). */
       readonly source?: true;
       /** "Exile all creature cards from target player's graveyard in a
        * face-down pile" (Ghastly Conscription): every card in that player's
        * graveyard matching `filter` joins the pile, leaving the graveyard
        * together. `of` is the target slot holding the player. */
       readonly graveyard?: { readonly of: number; readonly filter: CardFilter };
+      /** "…shuffle that pile and **put it back on top of your library**"
+       * (Triumph of Saint Katherine): the shuffled pile goes on top of the
+       * library in its random order — each card its owner's — rather than
+       * being cloaked or manifested. `enterTapped` isn't read. */
+      readonly onto?: "library-top";
+      /** "Exile it and the top six cards of your library in a face-down
+       * pile. **If you do**, …": the pile is exiled whole or not at all —
+       * with `source` no longer there, or fewer than `libraryTop` cards in
+       * the library, nothing is exiled and nothing else happens (Triumph of
+       * Saint Katherine's ruling). */
+      readonly whole?: true;
     }
   | {
       /**
@@ -14727,7 +14741,8 @@ export interface EffectApi {
   /** See the `"cloak-exiled-pile"` {@link EffectSpec}: this resolution's
    * target permanents, the top `libraryTop` cards of the effect's
    * controller's library, and what `also` adds — the source, a player's
-   * graveyard cards — cloaked, or manifested (`also.manifest`). */
+   * graveyard cards — cloaked, manifested (`also.manifest`), or put back on
+   * top of the library (`also.onto`); `also.whole` exiles all or nothing. */
   cloakExiledPile(
     libraryTop: number,
     tapped: boolean,
@@ -14735,6 +14750,8 @@ export interface EffectApi {
       readonly manifest?: boolean;
       readonly source?: boolean;
       readonly graveyard?: { readonly player: PlayerId; readonly filter: CardFilter };
+      readonly onto?: "library-top";
+      readonly whole?: boolean;
     },
   ): void;
   /** Turn the permanent `target` face down — see the `"turn-face-down"`
@@ -20744,6 +20761,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.graveyard !== undefined && graveyardOf?.kind === "player"
             ? { graveyard: { player: graveyardOf.player, filter: spec.graveyard.filter } }
             : {}),
+          ...(spec.onto !== undefined ? { onto: spec.onto } : {}),
+          ...(spec.whole === true ? { whole: true } : {}),
         },
       );
       return;

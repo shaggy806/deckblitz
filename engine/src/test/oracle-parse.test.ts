@@ -22027,6 +22027,40 @@ describe("a cast trigger's count as counters to enter with", () => {
     expect(jeskai.triggered[0].effect).toEqual({ kind: "cloak-exiled-pile", manifest: true, source: true, libraryTop: 1 });
   });
 
+  it("a face-down pile put back on top of the library, off its own your-graveyard trigger (Triumph of Saint Katherine)", () => {
+    const triumph = parseFace(
+      {
+        name: "Triumph of Saint Katherine",
+        type_line: "Creature — Human Warrior",
+        mana_cost: "{4}{W}",
+        oracle_text:
+          "Lifelink\nPraesidium Protectiva — When this creature is put into your graveyard from the battlefield, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.\nMiracle {1}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(triumph.complete).toBe(true);
+    expect(triumph.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "self", to: ["graveyard"], filter: { ownedBy: "you" } });
+    expect(triumph.triggered[0].effect).toEqual({
+      kind: "cloak-exiled-pile",
+      source: true,
+      libraryTop: 6,
+      onto: "library-top",
+      whole: true,
+    });
+    // "Into a graveyard": any graveyard, so no owner filter (Chromatic Star).
+    const star = parseFace(
+      {
+        name: "Chromatic Star",
+        type_line: "Artifact",
+        mana_cost: "{1}",
+        oracle_text:
+          "{1}, {T}, Sacrifice this artifact: Add one mana of any color.\nWhen this artifact is put into a graveyard from the battlefield, draw a card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(star.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "self", to: ["graveyard"] });
+  });
+
   it("counters it enters with only if its mana cost contains {X} (The First Tyrannic War's chapter I)", () => {
     const r = parseEffect(
       "You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.",

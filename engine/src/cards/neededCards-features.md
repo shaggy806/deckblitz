@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A face-down pile put back on top of the library — built 2026-11-18
+
+The key `effect:shuffle-self-into-library-top`: `cloak-exiled-pile`'s `onto: "library-top"` (the shuffled pile goes
+back on top of the library, each card on its owner's, `Game.cloakExiledPile`), `source` read from the graveyard off
+a leaves-the-battlefield trigger (the card as the object the ability refers to, rule 400.7), and `whole` ("if you
+do": all of the pile or none — the ruling). Triumph of Saint Katherine (rank 13884); the scaffolder reads the line.
+`test/pile-onto-library-top.test.ts`.
+
 ### A freerunning cost that isn't mana — built 2026-11-17
 
 The key `cost:freerunning-non-mana`: `freerunning.also`, a `KickerAlsoCost` as blitz's, paid as the spell is cast

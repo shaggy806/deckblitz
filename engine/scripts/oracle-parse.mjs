@@ -2031,6 +2031,13 @@ export function parseTrigger(clause) {
   // dies" (Oathkeeper, Takeno's Daisho): what this is attached to.
   if (/^When(?:ever)? (?:enchanted|equipped) creature dies$/.test(c)) return [{ on: "dies", who: "attached" }];
   if (/^When(?:ever)? ~ leaves the battlefield$/.test(c)) return self("leaves-battlefield");
+  // "When this artifact is put into a graveyard from the battlefield"
+  // (Chromatic Star): an Aura or artifact too, not only a creature's "dies".
+  // "Into **your** graveyard" (Unquenchable Fury, Triumph of Saint
+  // Katherine): a card goes to its owner's, so one its controller owns.
+  if ((m = /^When(?:ever)? (?:~|this [a-z]+) is put into (a|your) graveyard from the battlefield$/.exec(c))) {
+    return [{ on: "leaves-battlefield", who: "self", to: ["graveyard"], ...(m[1] === "your" ? { filter: { ownedBy: "you" } } : {}) }];
+  }
   // Changes of control (rule 603.10d): Khârn the Betrayer, Risky Move, Zidane.
   if (/^When you lose control of ~$/.test(c)) return self("loses-control");
   if (/^When you gain control of ~ from another player$/.test(c)) return self("gains-control");
@@ -16778,6 +16785,23 @@ function pilesAt(sentences, i, ctx) {
     if (typeof top !== "number") return null;
     const manifest = sourcePile[2].toLowerCase() === "manifest" ? { manifest: true } : {};
     return { effect: { kind: "cloak-exiled-pile", ...manifest, source: true, libraryTop: top }, used: 1 };
+  }
+  // "Exile it and the top six cards of your library in a face-down pile. If
+  // you do, shuffle that pile and put it back on top of your library."
+  // (Triumph of Saint Katherine, off its own dies trigger: "it" is the card
+  // in the graveyard): back on top, the whole pile or none of it.
+  const backOnTop = new RegExp(
+    `^exile (?:it|~) and the top (?:card|${N} cards) of your library in a face-down pile\\.$`,
+    "i",
+  ).exec(s(0));
+  if (
+    backOnTop !== null &&
+    /^if you do, shuffle that pile and put it back on top of your library\.$/i.test(s(1)) &&
+    (ctx.departed === "source" || ctx.it === "source")
+  ) {
+    const top = backOnTop[1] === undefined ? 1 : numberOf(backOnTop[1]);
+    if (typeof top !== "number") return null;
+    return { effect: { kind: "cloak-exiled-pile", source: true, libraryTop: top, onto: "library-top", whole: true }, used: 2 };
   }
   // "Reveal the top N …. An opponent separates those cards into two piles.
   // Put one pile into your hand and the other into your graveyard."
