@@ -410,6 +410,7 @@
     "static:prohibit-spells-by-chosen-number",
     "mechanic:token-devour",
     "mechanic:devour-x",
+    "effect:then-counters-read-after-create",
     "bug:aura-enters-transformed-asks-enchant",
     "static:prohibit-cast-by-face",
     "effect:spell-color-change-carries-to-permanent",

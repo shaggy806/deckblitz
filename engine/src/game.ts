@@ -379,6 +379,7 @@ import type {
   GraveyardKeyword,
   GraveyardKeywordGrant,
   ZoneChoiceSplitCase,
+  TokenThenCounters,
 } from "./effects.js";
 import { EVERY_CARD_TYPE, largestDistinct, largestOneEach, oneOfEachSlots, type ZoneChoiceTogether } from "./zone-choice-together.js";
 import {
@@ -46859,7 +46860,7 @@ controlledBy,
             {
               source,
               effectController: controller,
-              ...(thenCounters !== undefined && thenCounters.amount > 0 ? { thenCounters } : {}),
+              ...(thenCounters !== undefined ? { thenCounters } : {}),
               ...(attacking !== undefined ? { attacking } : {}),
             },
             copiableTriggered,
@@ -51743,7 +51744,8 @@ controlledBy,
     followUp?: {
       readonly source: ObjectId;
       readonly effectController: PlayerId;
-      readonly thenCounters?: { readonly kind: string; readonly amount: number };
+      /** Read once the tokens are there (rule 608.2h). */
+      readonly thenCounters?: TokenThenCounters;
       readonly attacking?: ResolvedEnterAttacking;
     },
     /** Triggered abilities each token has as copiable values (rule 707.2) —
@@ -51871,7 +51873,11 @@ controlledBy,
               ...entering,
               source: followUp.source,
               effectController: followUp.effectController,
-              ...(followUp.thenCounters !== undefined ? { thenCounters: followUp.thenCounters } : {}),
+              // Read now, as it's about to enter: what waits on its choice
+              // is kept in state, where no reader can go.
+              ...(followUp.thenCounters !== undefined
+                ? { thenCounters: { kind: followUp.thenCounters.kind, amount: followUp.thenCounters.amount() } }
+                : {}),
               // "…tapped and attacking" (rule 508.4). One created under
               // another player's control instead is tapped, but not
               // attacking (Crafty Cutpurse's ruling).
@@ -51934,10 +51940,14 @@ controlledBy,
         return [...instead, ...added];
       }),
     ]);
-    if (followUp !== undefined && thenCounters !== undefined && thenCounters.amount > 0) {
+    // "…then put X counters on it": X read now the tokens are there (rules
+    // 608.2c, 608.2h), once for all of them — Gimbal's count of differently
+    // named artifact tokens counts its new Gremlin.
+    const thenAmount = followUp !== undefined && thenCounters !== undefined ? thenCounters.amount() : 0;
+    if (followUp !== undefined && thenCounters !== undefined && thenAmount > 0) {
       for (const id of tokens) {
         if (beside.includes(id)) continue;
-        this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenCounters.amount, false, followUp.effectController);
+        this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenAmount, false, followUp.effectController);
       }
     }
     return tokens;

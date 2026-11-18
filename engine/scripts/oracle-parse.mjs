@@ -9783,6 +9783,35 @@ function chosenNumbers(text, ctx) {
  * The reflexive ability's targets are its own, so they don't take a slot of
  * the creating ability's.
  */
+/**
+ * "Create a 0/0 … token. Put X +1/+1 counters on it, where X is …" (Gimbal,
+ * Gremlin Prodigy; Leyline Invocation; Emil, Vastlands Roamer): the token
+ * effect's `thenCounters`, X read once the token is there (rule 608.2h). X is
+ * a count or aggregate `dividedTotalOf` reads, or "the number of differently
+ * named … you control" (a `distinct` `name` aggregate, rule 111.4 naming a
+ * token). `null` when the pair isn't read whole.
+ */
+function thenCountersAt(sentences, i, ctx) {
+  const put = /^Put X \+1\/\+1 counters on it, where X is (.+)\.$/.exec(sentences[i + 1] ?? "");
+  if (put === null) return null;
+  const named = /^the number of differently named (.+?) you control$/.exec(put[1]);
+  const namedFilter = named === null ? null : parseTypePhrase(named[1]);
+  const amount =
+    named !== null
+      ? namedFilter === null || Object.keys(namedFilter).length === 0
+        ? null
+        : { aggregate: "distinct", of: "name", filter: { ...namedFilter, controlledBy: "you" } }
+      : dividedTotalOf(put[1]);
+  if (amount === null) return null;
+  const slots = ctx.targets.length;
+  const step = parseSentence(sentences[i], ctx);
+  if (step === null || step === undefined || step.kind !== "create-token" || step.count !== 1 || step.thenCounters !== undefined) {
+    ctx.targets.length = slots;
+    return null;
+  }
+  return { ...step, thenCounters: { kind: "+1/+1", amount } };
+}
+
 function reflexiveAboutAt(sentences, i, ctx) {
   const clause = /^When you do, (.+\.)$/.exec(sentences[i + 1] ?? "");
   if (clause === null) return null;
@@ -11908,6 +11937,15 @@ export function parseEffect(text, outer) {
       parsed.push(ownerPermission.effect);
       hints.push({ sentence, effect: ownerPermission.effect });
       skip = ownerPermission.used - 1;
+      continue;
+    }
+    // "Create a 0/0 … token. Put X +1/+1 counters on it, where X is …"
+    // (`thenCountersAt`).
+    const thenCounters = thenCountersAt(sentences, i, ctx);
+    if (thenCounters !== null) {
+      parsed.push(thenCounters);
+      hints.push({ sentence, effect: thenCounters });
+      skip = 1;
       continue;
     }
     // "Create a … token. When you do, attach it to target creature you

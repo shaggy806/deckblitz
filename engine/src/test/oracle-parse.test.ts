@@ -6109,6 +6109,23 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(thromok.complete).toBe(true);
   });
 
+  it("'create a 0/0 … token. Put X +1/+1 counters on it, where X is …' is thenCounters (Gimbal, Leyline Invocation)", () => {
+    const gimbal = face(
+      "At the beginning of your end step, create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, where X is the number of differently named artifact tokens you control.",
+      "Legendary Creature — Gremlin Artificer",
+    );
+    expect(gimbal.triggered[0].effect.thenCounters).toEqual({
+      kind: "+1/+1",
+      amount: { aggregate: "distinct", of: "name", filter: { token: true, type: "artifact", controlledBy: "you" } },
+    });
+    expect(gimbal.complete).toBe(true);
+    const leyline = face(
+      "Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it, where X is the number of lands you control.",
+      "Sorcery",
+    );
+    expect(leyline.effect.thenCounters).toEqual({ kind: "+1/+1", amount: { countOf: { type: "land", controlledBy: "you" } } });
+  });
+
   it("'any player may activate this ability' (rule 602.2) and 'unless any player pays' (Prophecy)", () => {
     const snake = face("{2}: This creature loses flying until end of turn. Any player may activate this ability.", "Creature — Snake");
     expect(snake.activated[0].anyPlayer).toBe(true);

@@ -9778,7 +9778,11 @@ export type EffectSpec =
        * the effect's controller puts them on each token this made, once it
        * has entered. It entered without them, and state-based actions don't
        * look at a 0/0 until the effect is done. Such tokens are always made
-       * as separate objects, never folded into a token stack as they're made. */
+       * as separate objects, never folded into a token stack as they're made.
+       * The amount is read once they're there (rules 608.2c, 608.2h), so
+       * it counts them: Gimbal, Gremlin Prodigy's "put X +1/+1 counters on
+       * it, where X is the number of differently named artifact tokens you
+       * control" counts the new Gremlin. */
       readonly thenCounters?: { readonly kind: string; readonly amount: EffectAmount };
       /** "Create a 0/0 green Ooze creature token with trample. **The token
        * enters with X +1/+1 counters on it**" (Printlifter Ooze): counters
@@ -15331,8 +15335,9 @@ export interface EffectApi {
     /** The new tokens are goaded by the effect's controller for the rest of
      * the game. */
     goadedForGame?: boolean,
-    /** Counters the effect's controller then puts on each new token. */
-    thenCounters?: { readonly kind: string; readonly amount: number },
+    /** Counters the effect's controller then puts on each new token, their
+     * number read once the tokens are there ({@link TokenThenCounters}). */
+    thenCounters?: TokenThenCounters,
     /** The new tokens' base power and toughness, for an X/X token. */
     basePt?: readonly [number, number],
     /** The new tokens enter attacking (rule 508.4). */
@@ -18206,6 +18211,29 @@ export function amountValue(
   each?: PlayerId,
 ): number {
   return Math.max(0, signedAmountValue(amount, ctx, each));
+}
+
+/**
+ * `create-token`'s "…then put X counters on it" as `Game` takes it: the
+ * amount is read when the counters go on, once the tokens are there (rules
+ * 608.2c, 608.2h) — Gimbal, Gremlin Prodigy's count of differently named
+ * artifact tokens counts the new Gremlin. `Game` reads it once, synchronously,
+ * while the effect is still resolving, and never keeps the reader in state: a
+ * token that stops to choose as it enters (riot, devour) has it read as it's
+ * about to enter instead.
+ */
+export interface TokenThenCounters {
+  readonly kind: string;
+  readonly amount: () => number;
+}
+
+function thenCountersRead(
+  then: { readonly kind: string; readonly amount: EffectAmount } | undefined,
+  ctx: ResolutionContext,
+  each?: PlayerId,
+): TokenThenCounters | undefined {
+  if (then === undefined) return undefined;
+  return { kind: then.kind, amount: () => amountValue(then.amount, ctx, each) };
 }
 
 /**
@@ -24114,9 +24142,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               spec.sacrificeAtEndStep === true,
               spec.gainUntilEndOfTurn,
               spec.goadedForGame === true,
-              spec.thenCounters === undefined
-                ? undefined
-                : { kind: spec.thenCounters.kind, amount: amountValue(spec.thenCounters.amount, ctx, player) },
+              thenCountersRead(spec.thenCounters, ctx, player),
               spec.basePt === undefined
                 ? undefined
                 : [signedAmountValue(spec.basePt.power, ctx, player), signedAmountValue(spec.basePt.toughness, ctx, player)],
@@ -24145,9 +24171,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.sacrificeAtEndStep === true,
         spec.gainUntilEndOfTurn,
         spec.goadedForGame === true,
-        spec.thenCounters === undefined
-          ? undefined
-          : { kind: spec.thenCounters.kind, amount: amountValue(spec.thenCounters.amount, ctx) },
+        thenCountersRead(spec.thenCounters, ctx),
         spec.basePt === undefined
           ? undefined
           : [ptSetValue(spec.basePt.power, ctx), ptSetValue(spec.basePt.toughness, ctx)],

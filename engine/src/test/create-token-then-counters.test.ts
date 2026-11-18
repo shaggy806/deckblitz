@@ -12,6 +12,8 @@ import { createDefaultRegistry } from "../cards/registry.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
+import type { ObjectId } from "../primitives.js";
+import { counters, keywords, named, nextTurn, pt, settle, spawn, table, toStep, zone } from "./harness.js";
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
@@ -73,5 +75,82 @@ describe("create-token, then put counters on it", () => {
     const made = soldiers(game);
     expect(made).toHaveLength(2);
     for (const o of made) expect(o.counters["+1/+1"]).toBe(3);
+  });
+});
+
+/**
+ * The amount is read once the tokens are there (rules 608.2c, 608.2h): Gimbal,
+ * Gremlin Prodigy's "create a 0/0 red Gremlin artifact creature token. Put X
+ * +1/+1 counters on it, where X is the number of differently named artifact
+ * tokens you control" counts the new Gremlin.
+ */
+describe("create-token's thenCounters, read after the tokens are made (Gimbal, Gremlin Prodigy)", () => {
+  const gremlins = (game: Game): ObjectId[] => named(game, "Gremlin Artifact Token (0/0)");
+
+  it("alone, the new Gremlin counts itself: one counter, and it lives", () => {
+    const { game } = table();
+    spawn(game, "Gimbal, Gremlin Prodigy");
+    toStep(game, "end");
+    settle(game);
+    const [gremlin] = gremlins(game);
+    expect(gremlin).toBeDefined();
+    expect(zone(game, gremlin)).toBe("battlefield");
+    expect(counters(game, gremlin)).toBe(1);
+    expect(pt(game, gremlin)).toEqual({ power: 1, toughness: 1 });
+  });
+
+  it("counts each differently named artifact token once: a Treasure, two Clues and the Gremlin are three", () => {
+    const { game } = table();
+    spawn(game, "Gimbal, Gremlin Prodigy");
+    game.debugApplyEffect(A, { kind: "create-token", token: "Treasure Token", count: 1 });
+    game.debugApplyEffect(A, { kind: "create-token", token: "Clue Token", count: 2 });
+    // Not an artifact: Release the Gremlins' 2/2 Gremlin isn't counted.
+    game.debugApplyEffect(A, { kind: "create-token", token: "2/2 Gremlin Token", count: 1 });
+    // An opponent's artifact token isn't either.
+    game.debugApplyEffect(B, { kind: "create-token", token: "Food Token", count: 1 });
+    toStep(game, "end");
+    settle(game);
+    const [gremlin] = gremlins(game);
+    expect(counters(game, gremlin)).toBe(3);
+  });
+
+  it("a second Gremlin has the first's name: still counted once", () => {
+    const { game } = table();
+    spawn(game, "Gimbal, Gremlin Prodigy");
+    toStep(game, "end");
+    settle(game);
+    nextTurn(game);
+    nextTurn(game);
+    toStep(game, "end");
+    settle(game);
+    const made = gremlins(game);
+    expect(made).toHaveLength(2);
+    expect(made.map((id) => counters(game, id)).sort()).toEqual([1, 1]);
+  });
+
+  it("with Parallel Lives, both Gremlins are made first, and each gets X", () => {
+    const { game } = table();
+    spawn(game, "Gimbal, Gremlin Prodigy");
+    spawn(game, "Parallel Lives");
+    game.debugApplyEffect(A, { kind: "create-token", token: "Treasure Token", count: 1 });
+    toStep(game, "end");
+    settle(game);
+    const made = gremlins(game);
+    expect(made).toHaveLength(2);
+    // The Treasures (two, one name) and the Gremlins (two, one name).
+    expect(made.map((id) => counters(game, id))).toEqual([2, 2]);
+  });
+
+  it("gives artifact creatures it controls trample, and no others", () => {
+    const { game } = table();
+    spawn(game, "Gimbal, Gremlin Prodigy");
+    toStep(game, "end");
+    settle(game);
+    const [gremlin] = gremlins(game);
+    const bears = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Ornithopter", B);
+    expect(keywords(game, gremlin).has("trample")).toBe(true);
+    expect(keywords(game, bears).has("trample")).toBe(false);
+    expect(keywords(game, theirs).has("trample")).toBe(false);
   });
 });
