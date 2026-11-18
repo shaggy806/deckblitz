@@ -550,7 +550,7 @@ import type {
   ManaSource,
 } from "./mana-payment.js";
 import type { ObjectId, PlayerId, Rng } from "./primitives.js";
-import { asObjectId, createRng, shuffle } from "./primitives.js";
+import { asObjectId, createRng, saltedOrder, shuffle } from "./primitives.js";
 import {
   DEFAULT_RULES,
   FACE_DOWN_CARDS,
@@ -795,6 +795,13 @@ export interface GameConfig {
   /** Two to four decks, one per seat. Seating order follows array order. */
   readonly decks: readonly DeckList[];
   readonly seed?: number;
+  /**
+   * What the decks' cards draw their object ids from (`Game.setup`): a secret
+   * of the host's, so nobody can tell from an id which card of a list it is.
+   * A room server passes fresh random text for every game. Left out, it is
+   * made from `seed`, which keeps a seeded game's ids the same on every run.
+   */
+  readonly idSalt?: string;
   /** Defaults to the first player in `decks`. */
   readonly startingPlayer?: PlayerId;
   /** Shuffle libraries at setup (default true). Set false for scripted setups. */
@@ -3182,7 +3189,13 @@ export class Game {
     if (Object.keys(pregame).length > 0) state.pregame = pregame;
 
     const game = new Game(state, registry, controllers, rng);
-    game.setup(config.decks, config.shuffle ?? true, config.mulligans ?? false, config.skipCompanionReveals === true);
+    game.setup(
+      config.decks,
+      config.shuffle ?? true,
+      config.mulligans ?? false,
+      config.skipCompanionReveals === true,
+      config.idSalt ?? `seed:${seed}`,
+    );
     return game;
   }
 
@@ -7832,6 +7845,7 @@ export class Game {
     shuffleLibrary: boolean,
     mulligans: boolean,
     skipCompanionReveals: boolean,
+    idSalt: string,
   ): void {
     for (const { player, cards, commanders, printings, sideboard, attractions, stickerSheets } of decks) {
       const commanderNames = commanders ?? [];
@@ -7854,10 +7868,19 @@ export class Game {
         graveyard: [],
       };
 
-      const ids: ObjectId[] = [];
-      for (const name of cards) {
-        ids.push(this.makeCardObject(name, player));
-      }
+      // An id must not say where its card sat in its owner's list: every
+      // viewer is sent the ids in every hand (`viewFor`), so ids that ran in
+      // list order named a hidden card to anyone who knew the list. The cards
+      // are still made in list order, and the game's own stream is untouched
+      // (a seed deals the same cards to the same places as before), but each
+      // takes its number from the deck's range in an order drawn from the
+      // host's salt.
+      const firstSeq = this.state.nextObjectSeq;
+      const order = saltedOrder(cards.length, `${idSalt}:${player}`);
+      const ids: ObjectId[] = cards.map((name, index) =>
+        this.makeCardObject(name, player, { seq: firstSeq + order[index] }),
+      );
+      this.state.nextObjectSeq = firstSeq + cards.length;
       this.state.zones.perPlayer[player].library = shuffleLibrary
         ? shuffle(ids, this.rng)
         : ids;
@@ -10131,10 +10154,11 @@ export class Game {
   private makeCardObject(
     name: string,
     player: PlayerId,
-    opts: { zone?: ZoneType; isCommander?: boolean } = {},
+    opts: { zone?: ZoneType; isCommander?: boolean; seq?: number } = {},
   ): ObjectId {
     const def = this.registry.get(name); // validates the name up front
-    const id = this.mintObjectId();
+    // `seq`: a number `Game.setup` picked from the deck's range itself.
+    const id = opts.seq === undefined ? this.mintObjectId() : asObjectId(`obj-${opts.seq}`);
     this.state.objects[id] = {
       id,
       cardName: name,

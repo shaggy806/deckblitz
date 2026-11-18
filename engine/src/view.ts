@@ -897,6 +897,9 @@ export interface ArtManifestEntry {
  * load quietly at the start of a game so no card's art waits on the network
  * the first time it's seen (the server's `artManifest`). Not redacted: it
  * names the cards in every deck, which is accepted for games among friends.
+ * What it must not say is which card is which: it is sorted by name, never
+ * in the objects' own order, which with the ids in a hand would name the
+ * cards in it (the 2026-11-18 review; `Game.setup` salts the ids too).
  * Tokens aren't anyone's deck, and are left out.
  */
 export function artManifest(state: GameState, registry: CardRegistry): ArtManifestEntry[] {
@@ -914,7 +917,8 @@ export function artManifest(state: GameState, registry: CardRegistry): ArtManife
     seen.add(key);
     out.push(art === undefined || art === null ? { name } : { name, art });
   }
-  return out;
+  const sortKey = (entry: ArtManifestEntry): string => `${entry.name}\n${entry.art ?? ""}`;
+  return out.sort((a, b) => (sortKey(a) < sortKey(b) ? -1 : sortKey(a) > sortKey(b) ? 1 : 0));
 }
 
 /** `VisibleObject.spellFace` for `object`, as a spread: its card's Adventure
