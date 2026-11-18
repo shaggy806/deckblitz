@@ -968,7 +968,12 @@ creatures", Vulpine Harvester's "their total power", Witch-king, Sky Scourge's
 with one or more Wraiths", an `attack-with` of `atLeast: 1` and `filter: {
 subtype: "Wraith" }`); a list is a union, and
 `plus: [{ filter, in? }]` adds a set with a filter of its own (Ambitious
-Dragonborn's "creatures you control and creature cards in your graveyard");
+Dragonborn's "creatures you control and creature cards in your graveyard";
+Happily Ever After's "six or more card types among permanents you control
+and/or cards in your graveyard", a `distinct` `"card-type"` over `{
+controlledBy: "you" }` with `plus: [{ filter: { ownedBy: "you" }, in:
+"graveyards" }]` — a permanent's card types as they are now, a card's
+printed);
 `aggregate: "greatest-shared-creature-type"` is how many of them share the type most
 of them have, a changeling in every group (Skemfar Shadowsage, Basalt Ravager, White
 Lotus Tile; a `kind: "aggregate"` condition of `{ op: "gte", n: 2 }` is Synchronized

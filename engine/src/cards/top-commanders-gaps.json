@@ -3006,7 +3006,8 @@
   "trigger:gives-gift",
   "condition:source-damage-to-player-this-turn",
   "trigger:mentors",
-  "trigger:dealt-damage-first-time-each-turn"
+  "trigger:dealt-damage-first-time-each-turn",
+  "condition:card-types-among-permanents-and-graveyard"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

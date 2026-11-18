@@ -4069,7 +4069,9 @@ export function aggregateMatches(
  * - `"card-type"`: every card type among its printed ones, permanent or not:
  *   Omnivorous Flytrap's "six or more card types among cards in your
  *   graveyard" (what delirium, rule 207.2c, asks for at four). Printed: layer
- *   effects don't reach a graveyard.
+ *   effects don't reach a graveyard. A permanent's are its card types now —
+ *   Happily Ever After's "six or more card types among permanents you control
+ *   and/or cards in your graveyard" (a `plus` of the graveyard's).
  * - `"counter-kind"`: each kind of counter on it (rule 122.1), however many:
  *   Hundred-Battle Veteran's "different kinds of counters among creatures you
  *   control".
@@ -4127,7 +4129,13 @@ function distinctValuesOf(
     const name = distinctNameOf(registry, object);
     return name === undefined ? [] : [name];
   }
-  if (of === "card-type") return registry.get(printedCardName(object)).types;
+  // A permanent's card types are its own now (an animated land is a
+  // creature, a face-down one a creature alone — Happily Ever After's "card
+  // types among permanents you control"); a card elsewhere has its printed
+  // ones, an adventurer's alone (rule 715.4).
+  if (of === "card-type") {
+    return object.zone === "battlefield" ? computeCharacteristics(state, registry, id).types : registry.get(printedCardName(object)).types;
+  }
   if (of === "counter-kind") return Object.keys(object.counters ?? {}).filter((kind) => (object.counters[kind] ?? 0) > 0);
   const c = computeCharacteristics(state, registry, id);
   if (of === "power") return [c.power];
