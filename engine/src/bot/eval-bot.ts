@@ -1206,6 +1206,10 @@ export class EvalBotController extends HeuristicBotController {
   /** What this seat has seen of the hidden cards (`seat-memory.ts`), taken
    * in at every decision the real game asks it (`fairView`). */
   private readonly memory = seatMemory();
+  /** How many answers the real game refused on a copy, so v1 answered
+   * (`act`): each one is a place the dealt state and the table disagreed
+   * that nothing caught earlier. Written, never read; zero is the aim. */
+  refusedAnswers = 0;
   /**
    * The rest of the line the last plan chose (`planLines`), replayed window
    * by window (`continueTurnPlan`) while each step's board is the one it was
@@ -1311,6 +1315,22 @@ export class EvalBotController extends HeuristicBotController {
    * `withTrackRecordEvidence`. */
   act(real: ControllerView): Action {
     const view = this.fairView(real);
+    const action = this.answer(view);
+    // The answer was reached on cards dealt for the seat (`fairView`), and
+    // is played at the real table: tried there first on a copy, so nothing
+    // the two disagree on is ever thrown mid-game. Refused, the plan goes
+    // and v1 answers, from what the real game offers.
+    if (view === real || action.type === "pass-priority" || real.legalActionsAfter === undefined) return action;
+    if (real.legalActionsAfter(action) !== null) return action;
+    this.turnPlan = null;
+    this.refusedAnswers += 1;
+    const instead = super.act(view);
+    if (real.legalActionsAfter(instead) !== null || real.state.awaiting !== null) return instead;
+    return { type: "pass-priority", player: this.playerId };
+  }
+
+  /** `act`'s answer, on the view the seat may plan on. */
+  private answer(view: ControllerView): Action {
     const action = this.onClock(() =>
       this.deferToPlan(view, withTrackRecordEvidence(view.state, () => this.actSearched(view))),
     );
@@ -4046,6 +4066,16 @@ export class EvalBotController extends HeuristicBotController {
             : false) && targetsStillOffered(step, l),
     );
     if (!offered) {
+      this.turnPlan = null;
+      return null;
+    }
+    // The line was played out over cards dealt for the plan (`fairView`): a
+    // step after a mill or a draw may name a card the game put somewhere
+    // else (a Treasure Cruise delving the Putrefy the plan's own mill turned
+    // up, `bot:ab` seed 18, 2026-11-17: thrown at the table). The offer above
+    // says the spell can be cast, not that this way of casting it can: the
+    // step is tried on a copy, and a refusal drops the plan.
+    if (view.legalActionsAfter !== undefined && view.legalActionsAfter(step) === null) {
       this.turnPlan = null;
       return null;
     }
