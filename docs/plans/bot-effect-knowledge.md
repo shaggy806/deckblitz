@@ -1282,6 +1282,27 @@ That is the plan's judgment against the one-move search's; the planner weighed t
 steps and put them later or left them out. Worth a `bot:judge`-style look if a deck is found
 that lives on answering its own spells.
 
+**The libraries' order is hidden from every decision (2026-11-17, the user's yes).** The second
+misplay of that game showed how much the order had been deciding: one board, three library
+orders, three different turns. Now `EvalBotController.act` answers on a view whose state has
+each library's unseen cards in an order made up for the turn (`withHiddenLibraryOrder`), keyed
+by a hash of the turn, the seat and each card's id, so the real order cannot reach a decision
+at all; a top card the seat can see stays; the rollouts' random numbers are a hash too. One
+order a turn, not a decision: with one a decision the pass memo never recognised a board again
+(its key is the whole state) and a plan read differently in each window. The planner's
+`unknownCards` rule is unchanged: a plan still may not *use* a card it would only have drawn.
+What this is not: sampling. One made-up order is one sample, and a decision can turn on it as
+it used to turn on the truth; the difference is that it can no longer be right for a reason the
+seat couldn't have.
+
+Benched because every decision with a draw in it could move (`bot:ab`, one seat on the new
+build against three on the old, bench decks, count budgets): 27 wins in 111 games, 24.3% where
+even is 25%, 95% interval 17.3 to 33.1. Level: seeing its own library's order was worth nothing
+measurable to the bot, so hiding it costs nothing and buys turns that don't change for no
+reason a player could see. (The first eighteen games read 50%; it was at 25.6% by game 82. Read
+a bench at a hundred games, not twenty.) The opponents' hands are the knowledge left, and
+likely the part that is worth something.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until
@@ -1343,6 +1364,13 @@ scenario that can decide it.
   games, `bot:diff`), where the old search cast Shiko. Bench level; worth a scenario from a live
   game before changing it. `payoffFirst` (2026-10-08) tries a spell-count payoff first, which
   may have settled it.
+- **The bot no longer knows how its library lies** (since `withHiddenLibraryOrder`,
+  2026-11-17): its rollouts used to draw the real next card, so it sometimes held a play for a
+  card it "knew" was coming, or made one because of it. It now plans on an order made up for
+  the turn, and will sometimes plan around a card that isn't on top. If a live game shows a
+  turn that only makes sense for a bot expecting a particular draw (a cantrip cast into
+  nothing, mana held for a card it doesn't have), capture it: the scenario says whether one
+  made-up order is too confident and several should be averaged.
 - **A plan kept while its own spell resolves** (since `planResolving`, 2026-11-17): with more
   of its turn plan to come, the bot no longer answers its own spell and its triggers (an
   instant cast over them, an activation). In the decision diff that meant Thrill of

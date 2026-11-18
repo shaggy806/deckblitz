@@ -38,6 +38,7 @@ import { manaValue, parseManaCost } from "../mana.js";
 import { computeCharacteristics, withComputedCache } from "../characteristics.js";
 import { whyCannotAttack } from "../combat/eligibility.js";
 import { Game } from "../game.js";
+import { libraryOrderMemo, withHiddenLibraryOrder } from "./determinize.js";
 import { phaseOfStep } from "../turn.js";
 import { polarityBias } from "../deck-bias.js";
 import { newColorsFirst } from "../land-colors.js";
@@ -145,6 +146,14 @@ export interface EvalBotOptions {
   /** Simulations one plan may spend (`TurnPlanLimits.simulations`); 48 by
    * default, and as many again for each next-turn look. */
   readonly planSimulations?: number;
+  /**
+   * What the bot's simulations know of the libraries' order. `"hidden"`, the
+   * default: an order made up for each decision (`withHiddenLibraryOrder`),
+   * which is all a player knows. `"real"`: the game's own order and random
+   * numbers, as every decision read them until 2026-11-17 — for measuring
+   * what the knowledge was worth.
+   */
+  readonly libraryOrder?: "hidden" | "real";
   /**
    * Ceiling on simulations per decision. The action space is small in
    * practice (median 2 concrete actions per window, 99th percentile around 9),
@@ -1186,6 +1195,9 @@ export class EvalBotController extends HeuristicBotController {
   lastFollowUp: { readonly action: Action; readonly score: number; readonly then: Action } | null = null;
   private readonly planMode: "turn" | "next-turn" | null;
   private readonly planSimulations: number;
+  private readonly libraryOrder: "hidden" | "real";
+  /** The orders `fairView` has made up this turn (`LibraryOrderMemo`). */
+  private readonly libraryOrders = libraryOrderMemo();
   /**
    * The rest of the line the last plan chose (`planLines`), replayed window
    * by window (`continueTurnPlan`) while each step's board is the one it was
@@ -1261,6 +1273,7 @@ export class EvalBotController extends HeuristicBotController {
     const plan = options.plan ?? "turn";
     this.planMode = plan === "off" ? null : plan;
     this.planSimulations = options.planSimulations ?? DEFAULT_PLAN_SIMULATIONS;
+    this.libraryOrder = options.libraryOrder ?? "hidden";
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.now = options.now ?? Date.now;
@@ -1287,7 +1300,8 @@ export class EvalBotController extends HeuristicBotController {
   /** Every decision reads a permanent's track record off the real board in
    * front of it, never off a position its own search only simulated — see
    * `withTrackRecordEvidence`. */
-  act(view: ControllerView): Action {
+  act(real: ControllerView): Action {
+    const view = this.fairView(real);
     const action = this.onClock(() =>
       this.deferToPlan(view, withTrackRecordEvidence(view.state, () => this.actSearched(view))),
     );
@@ -1302,6 +1316,48 @@ export class EvalBotController extends HeuristicBotController {
     // of what v1 proposed and the search turned down.
     this.noteActivation(view.state.turn.number, action.source, action.abilityIndex);
     return action;
+  }
+
+  /**
+   * `view` with nothing in it the seat can't know of a library's order
+   * (`withHiddenLibraryOrder`): the state every search of this decision reads
+   * and copies, and the looks ahead a view offers, taken from that state too.
+   * What is legal now is the real game's (the order of a library changes none
+   * of it; a top card the seat can see is left where it is). The view itself
+   * under `libraryOrder: "real"`, and wherever an order can't be made up.
+   */
+  private fairView(view: ControllerView): ControllerView {
+    if (this.libraryOrder === "real") return view;
+    const state = withHiddenLibraryOrder(view.state, this.cards, this.playerId, this.libraryOrders);
+    if (state === view.state) return view;
+    const registry = this.cards;
+    const player = view.player;
+    const after = (action: Action | readonly Action[], keepEvents: boolean): Game => {
+      const copy = Game.fromSnapshot(keepEvents ? state : { ...state, eventLog: [] }, { registry });
+      for (const each of Array.isArray(action) ? action : [action]) copy.dispatch(each as Action);
+      return copy;
+    };
+    const tried = <T>(look: () => T): T | null => {
+      try {
+        return look();
+      } catch {
+        // A refusal means "nothing learned", as the game's own looks say.
+        return null;
+      }
+    };
+    return {
+      ...view,
+      state,
+      ...(view.legalActionsAfter === undefined
+        ? {}
+        : { legalActionsAfter: (action) => tried(() => after(action, false).legalActions(player)) }),
+      ...(view.viewAfter === undefined
+        ? {}
+        : { viewAfter: (action) => tried(() => after(action, false).controllerView(player)) }),
+      ...(view.continueAfter === undefined
+        ? {}
+        : { continueAfter: (action) => tried(() => after(action, true).controllerView(player)) }),
+    };
   }
 
   /** Whether activating `action` again replaces what the last activation

@@ -6,7 +6,8 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-17 — Scourge of Valkas, then Atarka: Terror of the Peaks left in hand
 
-Status: open (two training scenarios).
+Status: half fixed 2026-11-17. The library's order no longer reaches a decision (its scenario
+gates); an engine's turns to come are still unpriced (its scenario is training).
 
 - **Seen:** the same live game and seat as the entry below, round seven (the user played the
   seat until about the Wrath, then let a bot take over). Fifteen mana in the first main phase:
@@ -48,15 +49,28 @@ Status: open (two training scenarios).
   game's"). Both on `urenisSeventhTurn`, the board rebuilt from the log. The exact hidden cards
   of that turn aren't in the log (eight of them went to the bottom unseen), so the reproduction
   is of the casts, not of every number the live bot weighed.
-- **Fix (outline), two separate pieces; neither built.**
-  1. *The library's order.* Before a decision's rollouts, lay the part of the seat's library it
-     hasn't seen in an order shuffled for the purpose, the same for every line of that decision,
-     so no line is told apart by a card's place. One shuffle a decision is the cheap version:
-     the bot stops reading the real order, though a choice can still turn on the sample.
-     Several, averaged, is the proper one and costs that many times the simulations. The
-     opponents' hands and libraries are the same question. `bot/determinize.ts` is left from v3
-     for this. Risk: every bench figure moves, today's bot drawing on knowledge it shouldn't
-     have; it wants `bot:ab` and the gate. A major change: ask first.
+- **Fix, two separate pieces; the first built.**
+  1. *The library's order (built, the user's yes, 2026-11-17).* Every decision of v2 now reads
+     and copies a state in which each library's unseen cards lie in an order made up for the
+     turn (`bot/determinize.ts`'s `withHiddenLibraryOrder`, through `EvalBotController.fairView`).
+     The order is made from the cards themselves, each keyed by a hash of the turn, the seat and
+     its id, so the real order has no say at all: the same cards lying two ways give the same
+     answer, which is what the scenario asks ("casts the same first spell whatever order its
+     library lies in", now gate: Fanatic of Rhonas one way up and Scourge of Valkas the other
+     for a bot that reads the real order, Scourge both ways now). A top card the seat can see
+     stays on top (Future Sight, Oracle of Mul Daya, an opponent's revealed top); the
+     opponents' libraries are hidden the same way; and a simulation's random numbers are no
+     longer the real game's, so a shuffle or a coin flip in a rollout isn't the one that will
+     happen. One order a turn rather than a decision: a plan made in one window reads the same
+     in the next, and the pass memo still knows a board it has searched. Left as it was where
+     an order can't be made up safely: while a resolution waits to go on, or the decision asked
+     names a library card (a scry, a search). Not done: the opponents' hands, which a rollout
+     still reads; what a player knows of a library beyond its top (a card they put there),
+     which the bot now forgets; several orders averaged, where one sample is still one sample.
+     `libraryOrder: "real"` keeps the old reading, for measuring what the knowledge was worth.
+     Measured (`bot:ab`, one seat new against three old): 27 wins in 111 four-player games,
+     24.3% where even is 25% (95% interval 17.3 to 33.1). Level: the knowledge was worth
+     nothing that shows in who wins.
   2. *An engine's turns to come.* A feature beside `drawEngines` and `tokenEngines` for a
      permanent whose trigger pays for every creature (or spell) that comes after it (Terror of
      the Peaks, Scourge of Valkas, Dragon Tempest, Garruk's Uprising, Warstorm Surge), worth

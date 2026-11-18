@@ -935,3 +935,9 @@ This is a deliberate, recorded decision rather than an oversight. The honest ver
 its simulation from `viewFor(seat)` plus a randomized plausible completion of the hidden
 zones, which is a substantial piece of extra work and also makes every evaluation noisier.
 Revisit if bot play ever feels uncannily well-informed.
+
+**Revisited in part, 2026-11-17.** It didn't feel well-informed; it felt erratic: a live game's
+turn changed with the hidden order of the bot's own library (`docs/bot-misplays.md`). The
+libraries' order and the game's random numbers no longer reach a v2 decision: each plays its
+rollouts on a state whose libraries lie in an order made up for the turn
+(`bot/determinize.ts`'s `withHiddenLibraryOrder`). The opponents' hands still do.

@@ -1060,6 +1060,34 @@ export function ownLibraryTopSeen(state: GameState, registry: CardRegistry, play
   return seenLibraryTop(state, registry, player, player, sightOf(state, registry, player));
 }
 
+/**
+ * The card on top of `owner`'s library when `viewer` can see it — revealed to
+ * everyone, or one `viewer` alone may look at (their own, or another
+ * player's: Xanathar) — else `null`. All a bot may know of a library's order
+ * (`bot/determinize.ts`'s `withHiddenLibraryOrder`).
+ */
+export function libraryTopSeenBy(
+  state: GameState,
+  registry: CardRegistry,
+  owner: PlayerId,
+  viewer: PlayerId,
+): ObjectId | null {
+  return seenLibraryTop(state, registry, viewer, owner, sightOf(state, registry, viewer));
+}
+
+/** `libraryTopSeenBy` for every player's library at once, the viewer's sight
+ * worked out a single time: a bot asks at every decision. */
+export function libraryTopsSeenBy(
+  state: GameState,
+  registry: CardRegistry,
+  viewer: PlayerId,
+): Record<PlayerId, ObjectId | null> {
+  const sight = sightOf(state, registry, viewer);
+  const tops: Record<PlayerId, ObjectId | null> = {};
+  for (const owner of state.turnOrder) tops[owner] = seenLibraryTop(state, registry, viewer, owner, sight);
+  return tops;
+}
+
 function sightOf(state: GameState, registry: CardRegistry, viewer: PlayerId): Sight {
   const hands = new Set<PlayerId>();
   const libraryTops = new Set<PlayerId>();

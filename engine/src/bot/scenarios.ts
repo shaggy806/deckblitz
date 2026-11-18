@@ -604,13 +604,15 @@ function handSizeAsked(
  * fifteen mana; Garruk's Uprising, Dragonhawk and both Urenis are out;
  * Terror of the Peaks, Atarka, Scourge of Valkas and four cheaper cards are
  * in hand. The opponents' boards are as the log has them. The library is
- * `top`, then `lands` of the deck's own Forests, then `under`, then the rest.
+ * `top`, then `lands` of the deck's own Forests, then `under`, then the rest
+ * — or, `upsideDown`, the same cards the other way up.
  */
 function urenisSeventhTurn(
   registry: CardRegistry,
   top: readonly string[],
   lands: number,
   under: readonly string[],
+  upsideDown = false,
 ): Game {
   const game = Game.create({
     seed: 3,
@@ -653,7 +655,8 @@ function urenisSeventhTurn(
   const above = top.map((name) => game.debugSpawn(name, A, "library"));
   const below = under.map((name) => game.debugSpawn(name, A, "library"));
   const forests = game.state.zones.perPlayer[A].library.filter((id) => !above.includes(id) && !below.includes(id));
-  game.state.zones.perPlayer[A].library = [...above, ...forests.slice(0, lands), ...below, ...forests.slice(lands)];
+  const library = [...above, ...forests.slice(0, lands), ...below, ...forests.slice(lands)];
+  game.state.zones.perPlayer[A].library = upsideDown ? library.reverse() : library;
   game.state.players[A].life = 36;
   game.state.players[B].life = 27;
   game.state.players[C].life = 34;
@@ -6802,42 +6805,43 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "casts the same first spell whatever order its library lies in (Scourge of Valkas, Atarka and Terror of the Peaks in hand)",
     rule: "A seat can't know the order of its library: a choice must not turn on which cards a simulation would draw or exile from it.",
-    kind: "training",
     run(weights, registry, makeBot) {
       // Found rebuilding the board above. Every rollout of a line draws for
       // Garruk's Uprising, exiles and plays for Dragonhawk's attack and looks
-      // at the top eight for Ureni, off the library in its real order, which
-      // the seat can't know. A plan may not *use* an unseen library card
-      // (`unknownCards`), but each line's value counts whatever its rollout
-      // turned up, and on this board the turn changes with that order alone.
-      // Over forty Forests: Scourge, Atarka, Fanatic, the live turn. With the
-      // log's cards under two draws and eight lands (Ureni's look found no
-      // Dragon in the game): Fanatic, Sakura-Tribe Elder, Heroic Intervention
-      // at the beginning of combat, and Blasphemous Act off Dragonhawk's
-      // exile after it. Open: play a decision's rollouts over a library
-      // shuffled for the purpose (BACKLOG, "Bots").
+      // at the top eight for Ureni, and used to do it off the library in its
+      // real order, which the seat can't know. A plan may not *use* an unseen
+      // library card (`unknownCards`), but each line's value counted whatever
+      // its rollout turned up, and on this board the turn changed with that
+      // order alone: Fanatic of Rhonas first with the library as the log has
+      // it, Scourge of Valkas first with the same cards the other way up.
+      // Fixed: every decision plays its rollouts over an order made up for
+      // it from the cards themselves (`withHiddenLibraryOrder`), so the real
+      // order has no say; under `libraryOrder: "real"` this reads as before.
       const first = (game: Game): string => {
         const action = makeBot(A, registry, weights).act(viewOf(game, A));
         return action.type === "cast-spell" ? cardOf(game, action.card) : describeAction(action);
       };
-      const overForests = first(urenisSeventhTurn(registry, [], 0, []));
-      const asItLay = first(
-        urenisSeventhTurn(registry, ["Hellkite Courser", "Mountain"], 8, [
-          "Rhythm of the Wild",
-          "Kessig Wolf Run",
-          "Mountain",
-          "Cinder Glade",
-          "Island",
-          "Frontier Bivouac",
-          "Old Gnawbone",
-          "Blasphemous Act",
-          "Hinterland Harbor",
-          "Goldspan Dragon",
-        ]),
-      );
+      // The same forty-odd cards both times, the same objects even: once as
+      // the log has them lying, once the other way up. (What a library holds
+      // is the player's to know, and may change the play; how it lies isn't.)
+      const top = ["Hellkite Courser", "Mountain"];
+      const under = [
+        "Rhythm of the Wild",
+        "Kessig Wolf Run",
+        "Mountain",
+        "Cinder Glade",
+        "Island",
+        "Frontier Bivouac",
+        "Old Gnawbone",
+        "Blasphemous Act",
+        "Hinterland Harbor",
+        "Goldspan Dragon",
+      ];
+      const asItLay = first(urenisSeventhTurn(registry, top, 8, under));
+      const upsideDown = first(urenisSeventhTurn(registry, top, 8, under, true));
       return {
-        passed: overForests === asItLay,
-        detail: `cast ${overForests} over a library of Forests, ${asItLay} over the game's`,
+        passed: asItLay === upsideDown,
+        detail: `cast ${asItLay} with the library as it lay, ${upsideDown} with it the other way up`,
       };
     },
   },
