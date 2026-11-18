@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import type { ObjectId, PlayerView, TargetRef, VisibleObject } from 'engine/client'
+import { seatingOf } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 import { decisionGhostOf } from '../game/decisionSource.ts'
 import { describeTarget, playerLabel, seatClassOf } from '../format.ts'
@@ -238,7 +239,7 @@ export function Stack({
                 {/* Whose it is, in their seat colour: the card alone doesn't
                     say, and in a four-player game it's the first question. */}
                 {!isGhost ? (
-                  <span className={`stack-entry-who ${seatClassOf(view.turnOrder, obj.controller)}`}>
+                  <span className={`stack-entry-who ${seatClassOf(seatingOf(view), obj.controller)}`}>
                     {playerLabel(obj.controller, seats)}
                   </span>
                 ) : null}

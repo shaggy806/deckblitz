@@ -52,6 +52,7 @@ import {
   targetCountAtX,
   targetsWithinTaxes,
   waterbendAt,
+  seatingOf,
 } from 'engine/client'
 import type { SeatStatus, TutorialInfo } from 'protocol'
 import { opensOnLanding, useNetworkGame } from './net/useNetworkGame.ts'
@@ -1318,7 +1319,7 @@ function GameResultPanel({
   useEscape(onDismiss)
   const { winner, reason } = view.result
   const headline = winner === null ? 'Draw' : winner === seat ? 'You win!' : `${playerLabel(winner, seats)} wins`
-  const seatClass = winner !== null && view.turnOrder.includes(winner) ? seatClassOf(view.turnOrder, winner) : ''
+  const seatClass = winner !== null && view.turnOrder.includes(winner) ? seatClassOf(seatingOf(view), winner) : ''
   const stats = useMemo(() => gameStats(view), [view])
   return (
     <div className="result-overlay" onClick={onDismiss}>
@@ -1347,7 +1348,7 @@ function GameResultPanel({
           <tbody>
             {stats.players.map((p) => (
               <tr key={p.player} className={p.player === winner ? 'is-winner' : undefined}>
-                <th scope="row" className={`result-player ${seatClassOf(view.turnOrder, p.player)}`}>
+                <th scope="row" className={`result-player ${seatClassOf(seatingOf(view), p.player)}`}>
                   {playerLabel(p.player, seats)}
                   {p.player === seat ? <span className="muted"> (you)</span> : null}
                 </th>
@@ -1584,7 +1585,8 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // players on it.
   const opponents = useMemo(() => {
     if (view === null || seat === null) return game.opponents
-    const order = view.turnOrder
+    // Round the table, which a reversed turn order (Aeon Engine) doesn't move.
+    const order = seatingOf(view)
     const i = order.indexOf(seat)
     return i < 0 ? game.opponents.filter((p) => order.includes(p)) : [...order.slice(i + 1), ...order.slice(0, i)]
   }, [view, seat, game.opponents])
@@ -1672,7 +1674,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
     return <CenteredScreen title="Loading…" />
   }
   const over = view.result.over
-  const activeSeatClass = seatClassOf(view.turnOrder, view.activePlayer)
+  const activeSeatClass = seatClassOf(seatingOf(view), view.activePlayer)
   const showHighroll = view.turn.number === 0 && !dismissedHighroll
 
   return (
@@ -4277,7 +4279,7 @@ function Table({
     const pid = pw ? (pw.protector ?? pw.controller) : (t as PlayerId)
     // Turn-order position, not table position — the same rule every other
     // seat colour in the client follows, so the outline matches the panel.
-    return view.turnOrder.includes(pid) ? seatClassOf(view.turnOrder, pid) : null
+    return view.turnOrder.includes(pid) ? seatClassOf(seatingOf(view), pid) : null
   }
 
   /** Label for an attack target — a player, or an opponent's planeswalker. */
@@ -4549,23 +4551,23 @@ function Table({
         : 0
     const goaders = obj.goadedBy
       .filter((p) => view.turnOrder.includes(p))
-      .map((p) => ({ seat: seatClassOf(view.turnOrder, p), name: playerLabel(p, game.seats) }))
+      .map((p) => ({ seat: seatClassOf(seatingOf(view), p), name: playerLabel(p, game.seats) }))
     const enchanting =
       obj.attachedToPlayer !== null && view.turnOrder.includes(obj.attachedToPlayer)
-        ? { seat: seatClassOf(view.turnOrder, obj.attachedToPlayer), name: playerLabel(obj.attachedToPlayer, game.seats) }
+        ? { seat: seatClassOf(seatingOf(view), obj.attachedToPlayer), name: playerLabel(obj.attachedToPlayer, game.seats) }
         : null
     // A battle's protector (rule 310.9), named on its tile.
     const protectedBy =
       obj.protector !== undefined && view.turnOrder.includes(obj.protector)
-        ? { seat: seatClassOf(view.turnOrder, obj.protector), name: playerLabel(obj.protector, game.seats) }
+        ? { seat: seatClassOf(seatingOf(view), obj.protector), name: playerLabel(obj.protector, game.seats) }
         : null
     // The player chosen for it (Black Vise's opponent), named on its tile.
     const chosenPlayer =
       obj.chosenPlayer !== undefined && view.turnOrder.includes(obj.chosenPlayer)
-        ? { seat: seatClassOf(view.turnOrder, obj.chosenPlayer), name: playerLabel(obj.chosenPlayer, game.seats) }
+        ? { seat: seatClassOf(seatingOf(view), obj.chosenPlayer), name: playerLabel(obj.chosenPlayer, game.seats) }
         : null
     // A face-down permanent wears its owner's card back.
-    const backSeat = view.turnOrder.includes(obj.owner) ? seatClassOf(view.turnOrder, obj.owner) : null
+    const backSeat = view.turnOrder.includes(obj.owner) ? seatClassOf(seatingOf(view), obj.owner) : null
     if (opts.mini) {
       return (
         <MiniTile
@@ -4719,7 +4721,7 @@ function Table({
     const fitted = boardFitWidths.get(pid)
     return (
       <div
-        className={`board ${isOpp ? 'opp' : 'you'} ${seatClassOf(view.turnOrder, pid)}`}
+        className={`board ${isOpp ? 'opp' : 'you'} ${seatClassOf(seatingOf(view), pid)}`}
         ref={registerBoardEl(pid)}
         style={fitted === undefined ? undefined : ({ '--mini-w-fit': `${fitted}px` } as CSSProperties)}
       >
@@ -4829,7 +4831,7 @@ function Table({
     const hasAttractions = attractionDeckSize > 0 || junkyard.length > 0
 
     return (
-      <div className={`side-zone ${seatClassOf(view.turnOrder, pid)}`}>
+      <div className={`side-zone ${seatClassOf(seatingOf(view), pid)}`}>
         <div className="side-zone-section">
           <div className="side-zone-label">
             Command{commandIds.length > 1 ? ` (${commandIds.length})` : ''}
@@ -7560,8 +7562,8 @@ function Table({
     <PlayerPanel
       key={pid}
       info={view.players[pid]}
-      seatClass={seatClassOf(view.turnOrder, pid)}
-      seatClassOf={(player) => seatClassOf(view.turnOrder, player)}
+      seatClass={seatClassOf(seatingOf(view), pid)}
+      seatClassOf={(player) => seatClassOf(seatingOf(view), player)}
       isActive={view.activePlayer === pid}
       hasPriority={view.priority.holder === pid}
       waiting={
@@ -7588,7 +7590,7 @@ function Table({
                 id,
                 name: o.cardName,
                 art: o.art,
-                controllerClass: seatClassOf(view.turnOrder, o.controller),
+                controllerClass: seatClassOf(seatingOf(view), o.controller),
                 controllerLabel: playerLabel(o.controller, game.seats),
               },
             ]
@@ -8196,7 +8198,7 @@ function Table({
         <div className={`quadrant-grid ${opponents.length === 1 ? 'two-player' : ''}`}>
           {quadrantCells.map((pid, i) => (
             <div
-              className={`quadrant-cell ${seatClassOf(view.turnOrder, pid)} ${
+              className={`quadrant-cell ${seatClassOf(seatingOf(view), pid)} ${
                 pid === seat ? 'self' : ''
               } ${
                 view.activePlayer === pid ? 'active-turn' : ''

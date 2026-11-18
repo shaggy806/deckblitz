@@ -1,5 +1,6 @@
 import { Fragment, useLayoutEffect, useState } from 'react'
 import type { ObjectId, PlayerView, TargetRef } from 'engine/client'
+import { seatingOf } from 'engine/client'
 import { seatClassOf } from '../format.ts'
 import type { SeatClass } from '../format.ts'
 import { useMotionPrefs } from '../game/motionPrefs.ts'
@@ -92,7 +93,7 @@ function arrowsFor(
         kind,
         from: stackSel(id),
         to: targetSel(view, t),
-        seat: seatClassOf(view.turnOrder, entry.controller),
+        seat: seatClassOf(seatingOf(view), entry.controller),
         ...(kind === 'resolve' && t.kind === 'object' ? { reach: STRIKE_REACH } : {}),
         ...(t.kind === 'object' && view.zones.stack.includes(t.object) ? { loop: true } : {}),
       })
@@ -117,7 +118,7 @@ function arrowsFor(
         kind: 'attack',
         from: objSel(id),
         to: player !== undefined ? playerSel(player) : objSel(defender as ObjectId),
-        seat: seatClassOf(view.turnOrder, obj.controller),
+        seat: seatClassOf(seatingOf(view), obj.controller),
       })
     }
     if (obj.blocking !== null) {
@@ -126,7 +127,7 @@ function arrowsFor(
         kind: 'block',
         from: objSel(id),
         to: objSel(obj.blocking),
-        seat: seatClassOf(view.turnOrder, obj.controller),
+        seat: seatClassOf(seatingOf(view), obj.controller),
       })
       // The rest of a band it blocks (rule 702.22h).
       for (const also of obj.blockingAlso ?? []) {
@@ -135,7 +136,7 @@ function arrowsFor(
           kind: 'block',
           from: objSel(id),
           to: objSel(also),
-          seat: seatClassOf(view.turnOrder, obj.controller),
+          seat: seatClassOf(seatingOf(view), obj.controller),
         })
       }
     }

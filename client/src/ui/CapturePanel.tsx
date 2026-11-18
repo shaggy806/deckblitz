@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import type { ClipboardEvent } from 'react'
 import type { PlayerId } from 'engine/client'
+import { seatingOf } from 'engine/client'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { playerLabel } from '../format.ts'
 import { useEscape } from './useEscape.ts'
@@ -91,7 +92,7 @@ export function CapturePanel({
   useEscape(close)
   const entries = capture.entries ?? []
   // The bots that have decisions kept, in seating order.
-  const seating = game.view?.turnOrder ?? []
+  const seating = game.view ? seatingOf(game.view) : []
   const bots = [...new Set(entries.map((e) => e.player))].sort(
     (a, b) => seating.indexOf(a) - seating.indexOf(b),
   )

@@ -6465,8 +6465,14 @@ export interface GameState {
   /** Current PRNG position; rebuild the stream with `createRng(rngState)`. */
   rngState: number;
   rules: GameRules;
-  /** Seating order, also the order priority passes. */
+  /** The turn order, also the order priority passes and every "in turn
+   * order" (rule 101.4); the seating order too, until `seating` is set. */
   turnOrder: PlayerId[];
+  /** The table's seating, in the direction play first went: set the first
+   * time the game's turn order is reversed (Aeon Engine), when `turnOrder`
+   * stops being it. "The player to your left" is the next one here,
+   * whichever way play goes now; read through {@link seatingOf}. */
+  seating?: PlayerId[];
   startingPlayer: PlayerId;
   players: Record<PlayerId, PlayerState>;
   objects: Record<ObjectId, GameObject>;
@@ -7943,6 +7949,12 @@ export function blockedAttackersOf(state: GameState, blockerId: ObjectId): Objec
 
 export const activePlayerOf = (state: GameState): PlayerId =>
   state.turnOrder[state.turn.activePlayerIndex];
+
+/** The table's seating, in the direction play first went — what "the player
+ * to your left" (onward) and "to your right" (back) read: the turn order,
+ * unless that has been reversed since (`GameState.seating`). */
+export const seatingOf = (state: { readonly turnOrder: readonly PlayerId[]; readonly seating?: readonly PlayerId[] }): readonly PlayerId[] =>
+  state.seating ?? state.turnOrder;
 
 /** Max speed (rule 702.179e): a player has it while their speed is 4. */
 export const MAX_SPEED = 4;

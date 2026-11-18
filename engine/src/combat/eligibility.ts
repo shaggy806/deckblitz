@@ -35,7 +35,7 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import { matchesFilter } from "../filter.js";
 import { goadersOf, sourceAmount } from "../goad.js";
 import { hasRingBearerDesignation } from "../ring.js";
-import { printedCardName, rulesTextName } from "../state.js";
+import { printedCardName, rulesTextName, seatingOf } from "../state.js";
 import type { GameObject, GameState } from "../state.js";
 import { LANDWALK } from "../subtypes.js";
 import { permanentSource, protectionBlocks } from "../targeting.js";
@@ -610,8 +610,9 @@ function whyThisCannotBlock(
 /**
  * The opponents `player` may attack under `attackOnlyNearestOpponent` statics
  * (Pramikon, Sky Rampart), or `null` when none is in force: the nearest one
- * in the direction chosen for each such permanent — left is onward in turn
- * order, right is back — skipping players who have lost. Every one applies
+ * in the direction chosen for each such permanent — left is onward round the
+ * table (`seatingOf`: the way play first went), right is back — skipping
+ * players who have lost. Every one applies
  * at once, so two that disagree, with three or more players left, leave
  * nobody to attack (the Pramikon ruling) and this is empty.
  */
@@ -647,7 +648,8 @@ export function nearestOpponentRule(
   }
   for (const direction of chosen.values()) directions.add(direction);
   if (directions.size === 0) return null;
-  const order = state.turnOrder;
+  // Round the table: the seating, whichever way the turn order runs now.
+  const order = seatingOf(state);
   const from = order.indexOf(player);
   const nearest = (step: number): PlayerId | null => {
     for (let i = 1; i < order.length; i += 1) {

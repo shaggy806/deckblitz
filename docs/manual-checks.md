@@ -8826,3 +8826,9 @@ Each board's die comes up 4.
 ### Whims of the Fates: in a 4-player game, everyone's piles are picked at random
 - **Do:** Cast Whims of the Fates and Confirm piles straight away (everything in Pile 3).
 - **Expect:** Bob, Carol and Dave each separate their own in turn. The History has four "… chooses …'s pile … at random" lines, Alice's first, then Bob, Carol and Dave; nobody is asked to choose a pile. Your permanents all stay or all go.
+## The game's turn order reversed (2026-11-18)
+
+### Aeon Engine: play goes the other way round the table, and the seats stay put
+- **Do:** In this 4-player game, activate Aeon Engine, then pass the turn.
+- **Expect:** The History reads "The turn order is reversed: Dave, Carol, Bob, Alice". Dave takes the next turn, not Bob. Every player keeps the same place at the table and the same seat colour.
+- **Not a bug:** "The player to your left" is still Bob.

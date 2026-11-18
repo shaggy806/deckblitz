@@ -734,6 +734,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // cards exiled this way.
   "give-suspend": none,
   "remove-time-counters-in-exile": none,
+  "reverse-turn-order": none,
   "grant-keyword": (n, v) =>
     n.keyword === "defender"
       ? v.touch(n.target, "harm", MINOR)

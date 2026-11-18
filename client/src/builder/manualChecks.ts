@@ -13362,4 +13362,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Serra Angel', 'Forest'] }, { bf: ['Craw Wurm', 'Island'] }, { bf: ['Hill Giant', 'Swamp'] }],
     }),
   ),
+  // --- The game's turn order reversed (2026-11-18) -----------------------------------
+  preset(
+    'Aeon Engine: play goes the other way round the table, and the seats stay put',
+    board({
+      you: { bf: ['Aeon Engine'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

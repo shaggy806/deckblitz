@@ -190,6 +190,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${event.round !== undefined ? `Round ${event.round}, turn ${event.turn}` : `Turn ${event.turn}`} — ${who(event.activePlayer)}${event.extra ? ' (extra turn)' : ''}`
     case 'extra-turn-queued':
       return `${who(event.player)} takes an extra turn after this one`
+    case 'turn-order-reversed':
+      return `The turn order is reversed: ${event.turnOrder.map((p) => who(p)).join(', ')}`
     case 'turn-skipped':
       return `${who(event.player)} skips a turn`
     case 'static-effect-ignored':

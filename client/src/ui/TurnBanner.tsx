@@ -1,4 +1,5 @@
 import type { PlayerView } from 'engine/client'
+import { seatingOf } from 'engine/client'
 import { STEP_LABEL, playerLabel, possessive, seatClassOf } from '../format.ts'
 import type { SeatStatus } from 'protocol'
 import { StableLabel } from './StableLabel.tsx'
@@ -17,7 +18,7 @@ export function TurnBanner({
   readonly view: PlayerView
   readonly seats?: readonly SeatStatus[]
 }) {
-  const seatClass = seatClassOf(view.turnOrder, view.activePlayer)
+  const seatClass = seatClassOf(seatingOf(view), view.activePlayer)
   return (
     <div className={`turn-banner ${seatClass}`}>
       {view.turn.round !== undefined ? (

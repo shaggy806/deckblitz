@@ -403,6 +403,11 @@ export interface VisibleObject {
 
 export interface PlayerView {
   readonly turnOrder: readonly PlayerId[];
+  /** The table's seating once the turn order has been reversed (Aeon Engine
+   * — `GameState.seating`): where each player sits and the colour their
+   * seat has don't move. Absent while it's the turn order; read with
+   * `seatingOf`. */
+  readonly seating?: readonly PlayerId[];
   /** Who the "highroll" (or a configured `startingPlayer`) chose to go
    * first — fixed for the life of the game, unlike `activePlayer`. */
   readonly startingPlayer: PlayerId;
@@ -1451,6 +1456,7 @@ function viewForUncached(
 
   return {
     turnOrder: [...state.turnOrder],
+    ...(state.seating !== undefined ? { seating: [...state.seating] } : {}),
     startingPlayer: state.startingPlayer,
     ...(state.restarts !== undefined ? { restarts: state.restarts } : {}),
     activePlayer: activePlayerOf(state),

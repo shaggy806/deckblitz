@@ -96,6 +96,12 @@ export type GameEvent =
       readonly player: PlayerId;
     })
   | (Base & {
+      /** The game's turn order was reversed (Aeon Engine): `turnOrder` is
+       * the new one. The seating stays (`GameState.seating`). */
+      readonly type: "turn-order-reversed";
+      readonly turnOrder: readonly PlayerId[];
+    })
+  | (Base & {
       /** `player`'s turn was skipped (rule 614.10): it never began. */
       readonly type: "turn-skipped";
       readonly player: PlayerId;

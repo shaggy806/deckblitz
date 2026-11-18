@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { PlayerId } from 'engine/client'
+import { seatingOf } from 'engine/client'
 import type { ScenarioSpec } from 'protocol'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { seatClassOf } from '../format.ts'
@@ -78,7 +79,7 @@ export function SeatFollow({
     return () => window.clearTimeout(t)
   }, [flash])
 
-  const turnOrder = game.view?.turnOrder ?? spec.seats.map((s) => s.player)
+  const turnOrder = game.view ? seatingOf(game.view) : spec.seats.map((s) => s.player)
   return (
     <>
       {flash !== null ? (
@@ -109,7 +110,7 @@ export function SeatStrip({
 }) {
   const seat = game.seat
   const due = building ? null : waitingOn(game.view)
-  const turnOrder = game.view?.turnOrder ?? spec.seats.map((s) => s.player)
+  const turnOrder = game.view ? seatingOf(game.view) : spec.seats.map((s) => s.player)
   const seats = humanSeats(spec)
   return (
     <div className="bp-seatstrip">

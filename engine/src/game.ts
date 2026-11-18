@@ -568,6 +568,7 @@ import {
   tokenFoldKey,
   speedOf,
   playerCountersHeld,
+  seatingOf,
 } from "./state.js";
 import type {
   AssistAsk,
@@ -44554,6 +44555,7 @@ controlledBy,
           amount,
           exceptExiledThisWay ? thisWayEntries(this.state, "exiled").map((entry) => entry.object) : [],
         ),
+      reverseTurnOrder: () => this.reverseTurnOrder(),
       timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount, controller),
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
         this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether, {
@@ -56202,6 +56204,30 @@ controlledBy,
     this.emit({ type: "card-suspended", player: object.owner, object: id, timeCounters: object.counters.time });
   }
 
+  /**
+   * "Reverse the game's turn order" (Aeon Engine): the turn order runs the
+   * other way from here on, so the next turn, priority and everything done
+   * "in turn order" (rule 101.4) follow it, and reversing it again restores
+   * the first (its rulings). The seating stays where it was (`seating`, kept
+   * from the first reversal), and the active player and the rotation's seat
+   * — the last turn that wasn't an extra one — are the same players, so an
+   * extra turn under way hands on from that seat; waiting extra turns aren't
+   * reordered (its rulings).
+   */
+  private reverseTurnOrder(): void {
+    const before = this.state.turnOrder;
+    const after = [...before].reverse();
+    const turn = this.state.turn;
+    const active = before[turn.activePlayerIndex];
+    const rotation = turn.rotationIndex === undefined ? undefined : before[turn.rotationIndex];
+    this.state.seating ??= [...before];
+    this.state.turnOrder = after;
+    turn.activePlayerIndex = after.indexOf(active);
+    if (rotation !== undefined) turn.rotationIndex = after.indexOf(rotation);
+    invalidateComputedCache();
+    this.emit({ type: "turn-order-reversed", turnOrder: [...after] });
+  }
+
   /** Each other card `owner` owns in exile: a time counter off each that has
    * one (Alaundo the Seer). */
   private removeTimeCountersInExile(owner: PlayerId, amount: number, except: readonly ObjectId[]): void {
@@ -62413,7 +62439,9 @@ controlledBy,
     direction: "left" | "right",
     except?: ObjectId,
   ): void {
-    const players = this.state.turnOrder.filter((p) => this.state.players[p]?.hasLost === false);
+    // Left and right are round the table (`seatingOf`), whichever way the
+    // turn order runs now.
+    const players = seatingOf(this.state).filter((p) => this.state.players[p]?.hasLost === false);
     if (players.length < 2) return;
     const matched = this.battlefieldMatching(you, filter).filter((id) => id !== except);
     const step = direction === "left" ? 1 : players.length - 1;
@@ -66197,10 +66225,12 @@ controlledBy,
     // Only a resolution knows a vote's votes, its source's chosen player and
     // any ref made of accessors (`makeResolutionContext`).
     if (onlyAResolutionReads(who)) return [];
-    // "The player to your left / right": the next player in turn order, or
-    // the one before, among those still in the game (rule 101.4).
+    // "The player to your left / right": the next player round the table in
+    // the direction play first went (rule 101.4), or the one before, among
+    // those still in the game — the seating, though the turn order may have
+    // been reversed since (Aeon Engine).
     if (who === "player-to-your-left" || who === "player-to-your-right") {
-      const players = this.state.turnOrder.filter((p) => p === controller || !this.state.players[p].hasLost);
+      const players = seatingOf(this.state).filter((p) => p === controller || !this.state.players[p].hasLost);
       const at = players.indexOf(controller);
       if (at < 0 || players.length < 2) return [];
       const step = who === "player-to-your-left" ? 1 : players.length - 1;

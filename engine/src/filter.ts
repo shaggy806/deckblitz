@@ -39,7 +39,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaOrigin, ManaSpentQuery, ManaType } from "./mana.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost, spentManaCount } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
+import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName, seatingOf } from "./state.js";
 import type { AttachmentRecord, GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
@@ -2289,12 +2289,13 @@ export function chosenColorsOf(state: GameState, source: ObjectId | undefined): 
 
 /** Is `value` of the quality `clause` asks for? A negative number has a parity
  * too: -1 is odd. */
-/** The player to `player`'s left (`step` 1: the next in turn order) or right
- * (-1: the one before), among those still in the game (rule 101.4) — the
- * `"player-to-your-left"` / `-right` refs' reading. `undefined` with nobody
- * else left. */
+/** The player to `player`'s left (`step` 1: the next round the table, the
+ * way play first went) or right (-1: the one before), among those still in
+ * the game (rule 101.4) — the `"player-to-your-left"` / `-right` refs'
+ * reading, by the seating (`seatingOf`) whichever way the turn order runs.
+ * `undefined` with nobody else left. */
 function neighbourOf(state: GameState, player: PlayerId, step: 1 | -1): PlayerId | undefined {
-  const players = state.turnOrder.filter((p) => p === player || state.players[p]?.hasLost === false);
+  const players = seatingOf(state).filter((p) => p === player || state.players[p]?.hasLost === false);
   const at = players.indexOf(player);
   if (at < 0 || players.length < 2) return undefined;
   return players[(at + step + players.length) % players.length];

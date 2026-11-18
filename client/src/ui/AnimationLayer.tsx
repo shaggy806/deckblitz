@@ -11,7 +11,7 @@ import type {
   TargetRef,
   VisibleObject,
 } from 'engine/client'
-import { publicNameAt } from 'engine/client'
+import { publicNameAt, seatingOf } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
 import { flyIntoHand, flyOutOfHand, liftFromHand, placeLiftedSpotlight } from './handMotion.ts'
 import { closeStackGap } from './stackDepth.ts'
@@ -2853,7 +2853,7 @@ export function AnimationLayer({
         // commander, an impulse draw are worth saying.
         const from = FROM_ZONE[ev.from] ?? ''
         const caption = forYou(`${who} ${verb}${from ? ` ${from}` : ''}`)
-        const seatClass = seatClassOf(view.turnOrder, ev.player)
+        const seatClass = seatClassOf(seatingOf(view), ev.player)
         const holds = cue.putDown === true
         setPlayedCards((cur) => [
           ...cur,
@@ -2909,7 +2909,7 @@ export function AnimationLayer({
           sides: ev.sides,
           results: ev.results,
           who: playerLabel(ev.player, seatsRef.current),
-          seatClass: seatClassOf(view.turnOrder, ev.player),
+          seatClass: seatClassOf(seatingOf(view), ev.player),
           from: flyOrigin(ev.player, seatRef.current),
           durationMs: scaled(DICE_STEP_MS),
           reduced: motionPrefs().reduced,
@@ -2942,7 +2942,7 @@ export function AnimationLayer({
           key: `turn-${ev.seq}`,
           kind: 'turn',
           text: `${possessive(playerLabel(ev.activePlayer, seatsRef.current))} Turn${ev.extra ? ' (extra)' : ''}`,
-          seatClass: seatClassOf(view.turnOrder, ev.activePlayer),
+          seatClass: seatClassOf(seatingOf(view), ev.activePlayer),
         })
       } else if (ev.type === 'step-began') {
         const text = PHASE_LABEL[ev.phase]

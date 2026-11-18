@@ -41,7 +41,7 @@ import { manaValueOfObject, matchesFilter, ownerOnly } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameObject, GameState } from "./state.js";
-import { activePlayerOf } from "./state.js";
+import { activePlayerOf, seatingOf } from "./state.js";
 import type { ResolvedTargets } from "./target.js";
 import { sideOf, slotStrengths } from "./target-polarity.js";
 import { permanentSource, protectionQualitiesMatch } from "./targeting.js";
@@ -203,7 +203,7 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       return [controller];
     case "player-to-your-left":
     case "player-to-your-right": {
-      const players = state.turnOrder.filter((p) => p === controller || !state.players[p].hasLost);
+      const players = seatingOf(state).filter((p) => p === controller || !state.players[p].hasLost);
       const at = players.indexOf(controller);
       if (at < 0 || players.length < 2) return [];
       return [players[(at + (scope === "player-to-your-left" ? 1 : players.length - 1)) % players.length]];

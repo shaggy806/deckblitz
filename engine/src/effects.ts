@@ -5416,9 +5416,10 @@ export type EffectSpec =
   | {
       /** "Each player gains control of all [`filter`] controlled by the next
        * player in the chosen direction" (Aminatou, the Fateshifter's −6).
-       * `"left"` is the next player in turn order (rule 101.4: turn order
-       * passes to the left) and `"right"` the one before, skipping anyone
-       * who has left the game. What each player gets is fixed first, then
+       * `"left"` is the next player round the table the way play first went
+       * (rule 101.4: turn order passes to the left; `seatingOf`, though the
+       * turn order has been reversed since) and `"right"` the one before,
+       * skipping anyone who has left the game. What each player gets is fixed first, then
        * every change happens at once, as one lasting effect with one
        * timestamp (rule 613.7b) — in a two-player game the boards simply
        * swap, whichever way was chosen. `exceptSource` spares the effect's
@@ -7346,6 +7347,19 @@ export type EffectSpec =
       readonly kind: "remove-time-counters-in-exile";
       readonly amount: EffectAmount;
       readonly exceptExiledThisWay?: true;
+    }
+  | {
+      /**
+       * "Reverse the game's turn order" (Aeon Engine): play goes the other
+       * way round the table from now on — the next turn, priority, and every
+       * choice or action made "in turn order" (rule 101.4) — until it's
+       * reversed again. The seating doesn't move, so "the player to your
+       * left" is who it was. During an extra turn, the next turn in the
+       * rotation goes on from the last player whose turn wasn't one; extra
+       * turns already waiting keep their order (its rulings). At two players
+       * it changes nothing.
+       */
+      readonly kind: "reverse-turn-order";
     }
   | {
       readonly kind: "grant-keyword";
@@ -14668,6 +14682,8 @@ export interface EffectApi {
   ): void;
   /** See the `"remove-time-counters-in-exile"` {@link EffectSpec}. */
   removeTimeCountersInExile(amount: number, exceptExiledThisWay: boolean): void;
+  /** See the `"reverse-turn-order"` {@link EffectSpec}. */
+  reverseTurnOrder(): void;
   /** `amount` time counters on (negative: off) each suspended card — an
    * `add-counter-all`'s or `remove-counter-all`'s `andSuspended`. */
   timeCountersOnSuspended(amount: number): void;
@@ -22768,6 +22784,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "remove-time-counters-in-exile":
       ctx.removeTimeCountersInExile(amountValue(spec.amount, ctx), spec.exceptExiledThisWay === true);
+      return;
+    case "reverse-turn-order":
+      ctx.reverseTurnOrder();
       return;
     case "proliferate":
       ctx.proliferate(spec.then ?? null);

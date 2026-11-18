@@ -14,7 +14,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { SAMPLE_DECKS } from 'engine/client'
+import { SAMPLE_DECKS, seatingOf } from 'engine/client'
 import type { Action, LegalAction, ObjectId, PlayerId, PlayerView } from 'engine/client'
 import type { Frame } from '../game/usePlayback.ts'
 import { realId } from '../game/stackMembers.ts'
@@ -1534,10 +1534,13 @@ export function useNetworkGame(): NetworkGame {
   // just "everyone else in the array" — so a seating layout (the quadrant
   // grid) can place the next player after you, then the next, etc. in a
   // consistent rotation regardless of where you sit in the raw turn order.
+  // Round the table (`seatingOf`): a reversed turn order (Aeon Engine)
+  // doesn't move anyone's seat.
   const opponents = (() => {
     if (!view || seat === null) return []
-    const i = view.turnOrder.indexOf(seat)
-    return [...view.turnOrder.slice(i + 1), ...view.turnOrder.slice(0, i)]
+    const order = seatingOf(view)
+    const i = order.indexOf(seat)
+    return [...order.slice(i + 1), ...order.slice(0, i)]
   })()
 
   return {
