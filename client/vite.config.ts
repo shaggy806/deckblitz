@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
 import { readFileSync, writeFileSync } from 'node:fs'
+import type { IncomingMessage } from 'node:http'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
@@ -109,6 +110,26 @@ const writeAsap = (cards: readonly AsapFlag[]): void => {
   const body = sorted.map((c) => JSON.stringify(c)).join(',\n')
   writeFileSync(BUILD_ASAP_FILE, `{"cards":[${sorted.length > 0 ? `\n${body}\n` : ''}]}\n`, 'utf8')
 }
+/**
+ * Whether a request to one of the dev-only endpoints came from a page other
+ * than this dev server's own. A page anywhere can POST to a port on this
+ * machine without asking (a "simple" request needs no preflight), so the
+ * endpoint that writes a file and the one that reaches dev-rooms' command
+ * port refuse a request whose Origin isn't the host it was sent to, or that
+ * the browser itself marks as from elsewhere (the 2026-11-18 review).
+ */
+function fromAnotherOrigin(req: IncomingMessage): boolean {
+  const site = req.headers['sec-fetch-site']
+  if (typeof site === 'string' && site !== 'same-origin' && site !== 'none') return true
+  const origin = req.headers.origin
+  if (typeof origin !== 'string') return false
+  try {
+    return new URL(origin).host !== req.headers.host
+  } catch {
+    return true
+  }
+}
+
 const buildAsap = (): Plugin => ({
   name: 'deckblitz:build-asap',
   apply: 'serve',
@@ -119,6 +140,7 @@ const buildAsap = (): Plugin => ({
         res.setHeader('Content-Type', 'application/json')
         res.end(JSON.stringify(body))
       }
+      if (fromAnotherOrigin(req)) return reply(403, { error: "this answers the dev server's own page only" })
       if (req.method === 'GET') return reply(200, { cards: readAsap() })
       if (req.method !== 'POST') return reply(405, { error: 'GET or POST' })
       let raw = ''
@@ -160,6 +182,16 @@ export default defineConfig({
       '/__dev-rooms': {
         target: `http://127.0.0.1:${process.env.CONTROL_PORT ?? 4099}`,
         rewrite: () => '/',
+        // This dev server's own page only (`fromAnotherOrigin`): anything
+        // else gets a 404. What passes goes on without the browser's own
+        // headers, since the command port answers nothing that carries them.
+        bypass: (req) => (fromAnotherOrigin(req) ? false : undefined),
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            proxyReq.removeHeader('origin')
+            proxyReq.removeHeader('sec-fetch-site')
+          })
+        },
       },
     },
   },

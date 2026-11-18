@@ -126,7 +126,22 @@ if (SHARDS === 0) {
 
 // ---- the control port --------------------------------------------------
 
+// Nothing a browser sends is answered here. A page anywhere can POST to a
+// loopback port without asking (a "simple" request has no preflight), and
+// `eval` runs what it is sent (the 2026-11-18 review). The dev page reaches
+// this port through Vite's proxy, which checks the page is its own and drops
+// these headers (`client/vite.config.ts`); scripts, curl and the tests send
+// neither.
+const fromBrowser = (req) => req.headers.origin !== undefined || req.headers["sec-fetch-site"] !== undefined;
+
 createServer((req, res) => {
+  if (fromBrowser(req)) {
+    req.resume();
+    res.statusCode = 403;
+    res.setHeader("Content-Type", "application/json");
+    res.end(`${JSON.stringify({ error: "the command port takes no requests from a browser" })}\n`);
+    return;
+  }
   let body = "";
   req.on("data", (chunk) => (body += chunk));
   req.on("end", async () => {
