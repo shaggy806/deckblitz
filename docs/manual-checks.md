@@ -8902,5 +8902,5 @@ Each board's die comes up 4.
 
 ### The Book of Vile Darkness: Vecna enters with the Eye's "enters" ability
 - **Do:** Activate The Book of Vile Darkness.
-- **Expect:** The Book, Eye of Vecna and Hand of Vecna go to exile together, and Vecna, an 8/8 indestructible token, enters. Its "When Eye of Vecna enters" ability triggers: you draw a card and lose 2 life (18).
+- **Expect:** The Book, Eye of Vecna and Hand of Vecna go to exile together, and Vecna, an 8/8 indestructible token, enters. Its "When Eye of Vecna enters" ability triggers: you draw a card and lose 2 life (40 to 38).
 - **Not a bug:** Vecna's abilities say "Eye of Vecna" and "Hand of Vecna": they're those cards' abilities, now its own.
