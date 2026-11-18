@@ -37,19 +37,18 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   now judges a bestow cast as cast (702.103d, B334); prototype and face-down casts probably still aren't. A
   `fromGraveyard` `grantsTriggered` isn't read from graveyards (Riftstone Portal's `grantsActivated` is). A
   static's `grantsActivated` with `onlyBy: "granter"` falls back to the permanent's controller (only a
-  resolving grant binds the granter; no card needs it yet). Bot cost estimates made outside the cast offer
-  don't see `SpellCastClause.via` (Catalyst Stone's flashback reduction). A copy of Lodestone Bauble's
+  resolving grant binds the granter; no card needs it yet). A copy of Lodestone Bauble's
   ability that chooses new targets keeps the named player and isn't held to that player's graveyard
-  (`ActivatedAbility.namesPlayer`). The bots answer a look-and-choose `destination: "stay"` pick blindly (in a
-  live check Dawnbreak Reclaimer's opponent handed back an arbitrary creature). The scaffolder can't read
+  (`ActivatedAbility.namesPlayer`). The scaffolder can't read
   "sacrifice any number of X", "look at the top N, put one into your hand and the rest …", Saga chapters, or
   Nightmare Shepherd's "you may exile it. If you do, create a token copy"; the scenario builder can't start a
   3-4 player board with `fill: 0` (the first player's turn-1 draw loses the table, rule 103.8a).
   Checked 2026-11-17 and closed: Bleeding Effect shares a graveyard card's "hexproof from" (`sharesKeywords`'
   `inGraveyard`); a Clone returned beside another card by a `simultaneous` `for-each-target` is offered only
   what was already on the battlefield, in either order (`simultaneous-return-clone.test.ts`; the report didn't
-  reproduce); and `counters-distributed` choosing no creatures is legal, "any number" being any positive
-  number or zero (rule 107.1c).
+  reproduce); `counters-distributed` choosing no creatures is legal, "any number" being any positive
+  number or zero (rule 107.1c); and the two bot reads are built (a reducer that reaches only a way of casting
+  is no mana rock; v1's pick of a card that stays where it lies for another player's effect).
 
 - **B294's small gaps** (2026-11-09, what the re-attempt's agents and reader reported while writing cards).
   Built since: `CardFilter.notThisWay`'s player scope (`thisWayBy: "you"`, 2026-11-12: Deadly Brew, Rise of the
