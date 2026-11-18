@@ -2941,7 +2941,8 @@
   "replacement:enters-with-counter-via-static-graveyard-permission",
   "trigger:played-card-exiled-this-way",
   "amount:this-way-total-power-of-cards",
-  "trigger:cards-put-into-library"
+  "trigger:cards-put-into-library",
+  "effect:delayed-trigger-on-targeted-creature-damage"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
