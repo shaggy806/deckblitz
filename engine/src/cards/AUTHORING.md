@@ -767,7 +767,10 @@ graveyard order (404.2). Condition `{ kind: "object-matches", object: ObjectRef,
 "if that object is ...", `{ paid: "sacrificed" }` among its objects — as it last existed (608.2h); with
 `now: true` the object where it is now, the one the ref acts on: Oathkeeper, Takeno's Daisho's "return that
 card to the battlefield under your control if it's a Samurai card" asks the card in the graveyard (the
-ruling), false once it has moved on.
+ruling), false once it has moved on. A face-down creature that died is this too: as it last existed it
+had no types (708.2), so Cryptic Pursuit's "whenever a face-down creature you control dies, exile it if
+it's an instant or sorcery card" asks `{ object: "trigger-object", filter: { typesAnyOf: ["instant",
+"sorcery"] }, now: true }` of the card it became (708.9), never a `trigger-object` condition.
 
 `EffectSpec` (`effects.ts`) is the declarative vocabulary for what a spell or
 ability does on resolution. A `target:` field is an **index into `targets[]`**
