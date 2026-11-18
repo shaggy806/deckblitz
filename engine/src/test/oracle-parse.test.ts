@@ -23476,3 +23476,41 @@ describe("this creature gains each listed keyword a creature you control has (Ma
     });
   });
 });
+
+describe("the top X revealed, any number of a type put onto the battlefield, the rest put away (Knickknack Ouphe)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{X}{G}", colors: ["G"], cmc: 1 } as never) as unknown as Record<string, unknown> & {
+      complete: boolean;
+      static: Record<string, unknown>[];
+      triggered: Record<string, unknown>[];
+    };
+
+  it("reads Knickknack Ouphe whole: X counters, then its Auras of mana value X or less, the rest on the bottom at random", () => {
+    const ouphe = face(
+      "Creature — Ouphe",
+      "This creature enters with X +1/+1 counters on it.\nWhen this creature enters, reveal the top X cards of your library. You may put any number of Aura cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield on the bottom of your library in a random order.",
+    );
+    expect(ouphe.complete).toBe(true);
+    expect(ouphe.static[0].replacement).toEqual({ event: "enters-battlefield", counters: { kind: "+1/+1", amount: "x" } });
+    expect(ouphe.triggered[0].effect).toEqual({
+      kind: "look-and-choose",
+      zone: "library",
+      count: "x",
+      reveal: true,
+      min: 0,
+      max: "x",
+      destination: "battlefield",
+      leftover: "bottom-random",
+      filter: { subtype: "Aura", manaValue: { op: "lte", n: { amount: "x" } } },
+    });
+  });
+
+  it("reads Genesis Wave's permanent cards, the rest into the graveyard", () => {
+    const wave = face(
+      "Sorcery",
+      "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard.",
+    );
+    expect(wave.complete).toBe(true);
+    expect(wave.effect).toMatchObject({ kind: "look-and-choose", leftover: "graveyard", count: "x" });
+  });
+});

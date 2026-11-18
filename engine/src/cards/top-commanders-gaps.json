@@ -3027,7 +3027,8 @@
   "effect:hexproof-from-counters",
   "replacement:extra-die-chosen-ignore",
   "replacement:gain-life-becomes-draw",
-  "replacement:damage-to-you-becomes-exile-graveyard"
+  "replacement:damage-to-you-becomes-exile-graveyard",
+  "bug:look-and-choose-offers-unattachable-aura"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

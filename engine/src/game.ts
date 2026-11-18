@@ -47333,7 +47333,7 @@ controlledBy,
     const linked = typeof zone === "object" && "exiled" in zone ? zone.exiled : undefined;
     if (zone === "exile" || linked !== undefined) {
       const chooser = picker ?? player;
-      const { eligible, faceDownGroups } = this.exileChoiceCandidates(
+      const candidates = this.exileChoiceCandidates(
         chooser,
         filter,
         picker !== undefined ? player : undefined,
@@ -47341,6 +47341,16 @@ controlledBy,
         linked,
         typeof zone === "object" && "looked" in zone,
       );
+      const { faceDownGroups } = candidates;
+      // An Aura card with nothing it could enchant can't be chosen to enter
+      // (rule 303.4g); a face-down card isn't known to be one.
+      const unknown = new Set(faceDownGroups.flat());
+      const eligible =
+        destination === "battlefield" && enterAttachedTo === undefined
+          ? candidates.eligible.filter(
+              (id) => unknown.has(id) || this.couldEnterBattlefield(id, underOwners ? undefined : (enterUnder ?? chooser)),
+            )
+          : candidates.eligible;
       if (eligible.length === 0 || (needsMin && eligible.length < min)) return;
       // One card going back on top has no order to ask about (rule 401.4).
       if (typeof zone === "object" && "looked" in zone && destination === "library-top" && eligible.length === 1 && min >= 1) {
@@ -47458,8 +47468,15 @@ controlledBy,
     // A card an earlier player has chosen while choices are held can't be
     // chosen again: Rejoin the Fight's "that hasn't been chosen".
     const chosenAlready = new Set((this.state.heldChoices?.entries ?? []).flatMap(({ objects }) => objects));
+    // Onto the battlefield with no host named, an Aura card with nothing it
+    // could enchant can't be chosen at all (rule 303.4g; Knickknack Ouphe's
+    // ruling), so it goes with the rest rather than staying put.
+    const mustEnter = destination === "battlefield" && split === undefined && enterAttachedTo === undefined;
     const filtered = ids.filter(
-      (id) => !chosenAlready.has(id) && this.matchesZoneChoiceFilter(id, filter, player, source),
+      (id) =>
+        !chosenAlready.has(id) &&
+        this.matchesZoneChoiceFilter(id, filter, player, source) &&
+        (!mustEnter || this.couldEnterBattlefield(id, underOwners ? undefined : (enterUnder ?? player))),
     );
     // "For each card type, you may put a card of that type" (Atraxa): a rule
     // over the chosen set, its tags read now (`zone-choice-together.ts`).

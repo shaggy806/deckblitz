@@ -12183,6 +12183,46 @@ export function parseEffect(text, outer) {
     // onto the battlefield." (Xenagos, the Reveler): exiled first, then a
     // choice over the cards exiled this way — all of them that match, or any
     // number — the rest staying exiled.
+    // "Reveal the top X cards of your library. You may put any number of
+    // permanent cards with mana value X or less from among them onto the
+    // battlefield. Then put all cards revealed this way that weren't put onto
+    // the battlefield into your graveyard." (Genesis Wave; Knickknack Ouphe's
+    // Aura cards, the rest on the bottom in a random order). An Aura with
+    // nothing to enchant isn't offered (rule 303.4g).
+    const revealTopM = /^reveal the top (\w+) cards of your library\.$/i.exec(sentence);
+    const revealPutM =
+      revealTopM === null
+        ? null
+        : /^you may put any number of (.+?) cards(?: with mana value (\w+) or less)? from among them onto the battlefield\.$/i.exec(sentences[i + 1] ?? "");
+    const revealRestM =
+      revealPutM === null
+        ? null
+        : /^then put all cards revealed this way that weren't put onto the battlefield (into your graveyard|into your hand|on the bottom of your library in a random order)\.$/i.exec(sentences[i + 2] ?? "");
+    if (revealRestM !== null) {
+      const count = numberOf(revealTopM[1]);
+      const filter = revealPutM[1].toLowerCase() === "permanent"
+        ? { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] }
+        : parseTypePhrase(revealPutM[1], { cards: true });
+      const mv = revealPutM[2] === undefined ? undefined : numberOf(revealPutM[2]);
+      if (count !== undefined && filter !== null && Object.keys(filter).length > 0 && (revealPutM[2] === undefined || mv !== undefined)) {
+        const rest = revealRestM[1].toLowerCase();
+        const look = {
+          kind: "look-and-choose",
+          zone: "library",
+          count,
+          reveal: true,
+          min: 0,
+          max: count,
+          destination: "battlefield",
+          leftover: rest === "into your graveyard" ? "graveyard" : rest === "into your hand" ? "hand" : "bottom-random",
+          filter: { ...filter, ...(mv !== undefined ? { manaValue: { op: "lte", n: mv === "x" ? { amount: "x" } : mv } } : {}) },
+        };
+        parsed.push(look);
+        hints.push({ sentence, effect: look });
+        skip = 2;
+        continue;
+      }
+    }
     const exileTopM = /^exile the top (\w+) cards of your library\.$/i.exec(sentence);
     const putAmongM =
       exileTopM === null
@@ -24770,9 +24810,9 @@ function parseStatic(line, text) {
   // "~ enters with two oil counters on it" (rule 614.1c), any named kind —
   // "on him" / "on her" for a character (Captain America's shield counter).
   {
-    const w = /^~ enters with (a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+) ([+-]\d+\/[+-]\d+|[a-z]+) counters? on (?:it|him|her)\.$/.exec(line);
+    const w = /^~ enters with (a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+|X) ([+-]\d+\/[+-]\d+|[a-z]+) counters? on (?:it|him|her)\.$/.exec(line);
     if (w !== null) {
-      const words = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+      const words = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, X: "x" };
       const amount = words[w[1]] ?? Number(w[1]);
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: w[2], amount } }, text };
     }
