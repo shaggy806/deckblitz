@@ -534,6 +534,7 @@ import _poolLivingTerrain from "../pool/living-terrain.js";
 import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
 import _poolLordOfTheUndead from "../pool/lord-of-the-undead.js";
+import _poolLoreseekersStone from "../pool/loreseekers-stone.js";
 import _poolLoyalSentry from "../pool/loyal-sentry.js";
 import _poolLumberingSatyr from "../pool/lumbering-satyr.js";
 import _poolLurrusOfTheDreamDen from "../pool/lurrus-of-the-dream-den.js";
@@ -1617,6 +1618,7 @@ const shard: CardShard = {
     _poolLivingTotem,
     _poolLocthwainLancer,
     _poolLordOfTheUndead,
+    _poolLoreseekersStone,
     _poolLoyalSentry,
     _poolLumberingSatyr,
     _poolLurrusOfTheDreamDen,

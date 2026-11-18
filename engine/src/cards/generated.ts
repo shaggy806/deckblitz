@@ -10177,6 +10177,7 @@ import _poolForTheAncestors from "./pool/for-the-ancestors.js";
 import _poolForTheCommonGood from "./pool/for-the-common-good.js";
 import _poolForTheEmperor from "./pool/for-the-emperor.js";
 import _poolForTheFamily from "./pool/for-the-family.js";
+import _poolForagingWickermaw from "./pool/foraging-wickermaw.js";
 import _poolForatog from "./pool/foratog.js";
 import _poolForayOfOrcs from "./pool/foray-of-orcs.js";
 import _poolForbid from "./pool/forbid.js";
@@ -16435,6 +16436,7 @@ import _poolLoreholdExcavation from "./pool/lorehold-excavation.js";
 import _poolLoreholdPledgemage from "./pool/lorehold-pledgemage.js";
 import _poolLoreholdTheHistorian from "./pool/lorehold-the-historian.js";
 import _poolLorescaleCoatl from "./pool/lorescale-coatl.js";
+import _poolLoreseekersStone from "./pool/loreseekers-stone.js";
 import _poolLorienRevealed from "./pool/lorien-revealed.js";
 import _poolLorthosTheTidemaker from "./pool/lorthos-the-tidemaker.js";
 import _poolLosDiablosMissileBase from "./pool/los-diablos-missile-base.js";
@@ -27702,6 +27704,7 @@ import _poolSynodArtificer from "./pool/synod-artificer.js";
 import _poolSynodCenturion from "./pool/synod-centurion.js";
 import _poolSynthEradicator from "./pool/synth-eradicator.js";
 import _poolSynthInfiltrator from "./pool/synth-infiltrator.js";
+import _poolSynthesisPod from "./pool/synthesis-pod.js";
 import _poolSynthesizerLabship from "./pool/synthesizer-labship.js";
 import _poolSyntheticDestiny from "./pool/synthetic-destiny.js";
 import _poolSyphonEssence from "./pool/syphon-essence.js";
@@ -43805,6 +43808,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForTheCommonGood,
   _poolForTheEmperor,
   _poolForTheFamily,
+  _poolForagingWickermaw,
   _poolForatog,
   _poolForayOfOrcs,
   _poolForbid,
@@ -50063,6 +50067,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLoreholdPledgemage,
   _poolLoreholdTheHistorian,
   _poolLorescaleCoatl,
+  _poolLoreseekersStone,
   _poolLorienRevealed,
   _poolLorthosTheTidemaker,
   _poolLosDiablosMissileBase,
@@ -61330,6 +61335,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSynodCenturion,
   _poolSynthEradicator,
   _poolSynthInfiltrator,
+  _poolSynthesisPod,
   _poolSynthesizerLabship,
   _poolSyntheticDestiny,
   _poolSyphonEssence,
@@ -77446,6 +77452,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/for-the-common-good": _poolForTheCommonGood,
   "pool/for-the-emperor": _poolForTheEmperor,
   "pool/for-the-family": _poolForTheFamily,
+  "pool/foraging-wickermaw": _poolForagingWickermaw,
   "pool/foratog": _poolForatog,
   "pool/foray-of-orcs": _poolForayOfOrcs,
   "pool/forbid": _poolForbid,
@@ -83704,6 +83711,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lorehold-pledgemage": _poolLoreholdPledgemage,
   "pool/lorehold-the-historian": _poolLoreholdTheHistorian,
   "pool/lorescale-coatl": _poolLorescaleCoatl,
+  "pool/loreseekers-stone": _poolLoreseekersStone,
   "pool/lorien-revealed": _poolLorienRevealed,
   "pool/lorthos-the-tidemaker": _poolLorthosTheTidemaker,
   "pool/los-diablos-missile-base": _poolLosDiablosMissileBase,
@@ -94971,6 +94979,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/synod-centurion": _poolSynodCenturion,
   "pool/synth-eradicator": _poolSynthEradicator,
   "pool/synth-infiltrator": _poolSynthInfiltrator,
+  "pool/synthesis-pod": _poolSynthesisPod,
   "pool/synthesizer-labship": _poolSynthesizerLabship,
   "pool/synthetic-destiny": _poolSyntheticDestiny,
   "pool/syphon-essence": _poolSyphonEssence,

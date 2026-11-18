@@ -857,6 +857,7 @@ import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
 import _poolSylvanHierophant from "../pool/sylvan-hierophant.js";
 import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
+import _poolSynthesisPod from "../pool/synthesis-pod.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
 import _poolTaigamSidisisHand from "../pool/taigam-sidisis-hand.js";
 import _poolTakeHeart from "../pool/take-heart.js";
@@ -1904,6 +1905,7 @@ const shard: CardShard = {
     _poolSwordOfLightAndShadow,
     _poolSylvanHierophant,
     _poolSyndicateMessenger,
+    _poolSynthesisPod,
     _poolTackleArtist,
     _poolTaigamSidisisHand,
     _poolTakeHeart,
