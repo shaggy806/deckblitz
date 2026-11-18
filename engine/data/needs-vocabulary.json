@@ -5116,6 +5116,10 @@
    "family": "trigger:cast-spell-clauses",
    "example": "Mizzix of the Izmagnus: no pool precedent for a spell-cast trigger filter comparing MV against experience counters"
   },
+  "trigger:dealt-damage-by-attacking-creature": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Glyph of Life: whenever that creature is dealt damage by an attacking creature this turn (a delayed dealt-damage watch narrowed by its source, settled once per damage event)"
+  },
   "trigger:combat-damage-to-you-trigger": {
    "family": "trigger:damage-trigger-extensions",
    "example": "The Cabbage Merchant: 'Whenever a creature deals combat damage to you': the per-creature combat damage trigger can't narrow the player dealt damage to you."

@@ -2645,9 +2645,12 @@ export class Game {
      * keyword (`allDamageAsThough`), as it stood before any of this event's
      * damage was dealt, by `keyword:player`. */
     readonly asThoughTo: Map<string, boolean>;
+    /** `dealt-damage` triggers owed, per ability and recipient (or for the
+     * whole event, `batched`); a delayed one's (`ability` null — Glyph of
+     * Life's watch) goes straight onto the pending list once settled. */
     readonly dealtDamage: Map<
       string,
-      { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+      { ability: TriggeredAbility | null; spec: TriggerSpec; trigger: PendingTrigger; multiplier: number }
     >;
     /** `deals-damage-batch` triggers owed, per watcher ability and — unless
      * it fires once per event — per player dealt damage. */
@@ -35143,6 +35146,21 @@ export class Game {
         }
         continue;
       }
+      // "Whenever that creature is dealt damage by an attacking creature this
+      // turn" (Glyph of Life): once per permanent for the simultaneous damage
+      // event, "that much" all the matching sources dealt it, as a printed
+      // `dealt-damage` is settled (rule 603.2c).
+      if (at.whenever.on === "dealt-damage" && event.type === "damage-dealt" && event.target.kind === "object" && this.damageBatch !== null) {
+        const key = `delayed:${trigger.id}${at.whenever.batched === true ? "" : `@${event.target.object}`}`;
+        const owed = this.damageBatch.dealtDamage.get(key);
+        const amount = triggerValue ?? 0;
+        if (owed === undefined) {
+          this.damageBatch.dealtDamage.set(key, { ability: null, spec: at.whenever, trigger: { ...pending, triggerValue: amount }, multiplier: 1 });
+        } else {
+          owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + amount };
+        }
+        continue;
+      }
       // A token stack in the event is a permanent per token (rule 603.2).
       const times =
         at.once === true ? 1 : Math.min(this.eventMultiplier(at.whenever, event, trigger.source), Game.MAX_EFFECT_INSTANCES);
@@ -36074,6 +36092,7 @@ export class Game {
             if (owed === undefined) {
               damageBatch.dealtDamage.set(key, {
                 ability,
+                spec: ability.trigger,
                 // One firing for several permanents names none of their controllers.
                 trigger: { ...(whole ? withoutTriggerPlayer(base) : base), triggerValue: amount },
                 multiplier,
@@ -37833,7 +37852,10 @@ export class Game {
           // Inside a damage batch the amount is settled with the whole event.
           (spec.atLeast === undefined || this.damageBatch !== null || event.amount >= spec.atLeast) &&
           this.matchesWho(spec.who, event.target.object, self) &&
-          this.triggerFilterOk(spec.filter, event.target.object, self)
+          this.triggerFilterOk(spec.filter, event.target.object, self) &&
+          // "…is dealt damage **by an attacking creature**" (Glyph of Life):
+          // the source, as it is when it deals the damage.
+          (spec.bySource === undefined || this.triggerFilterOk(spec.bySource, event.source, self))
         );
       case "deals-damage":
         return event.type === "damage-dealt" && this.dealsDamageMatches(spec, event, self);
@@ -65772,7 +65794,7 @@ controlledBy,
       asThoughTo: new Map<string, boolean>(),
       dealtDamage: new Map<
         string,
-        { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
+        { ability: TriggeredAbility | null; spec: TriggerSpec; trigger: PendingTrigger; multiplier: number }
       >(),
       damageTo: new Map<string, OwedDamageBatchTrigger>(),
       countersRemoved: new Map<
@@ -65818,8 +65840,10 @@ controlledBy,
         this.queueTrigger(ability, trigger, multiplier);
       }
     }
-    for (const { ability, trigger, multiplier } of batch.dealtDamage.values()) {
-      if (enough(ability, trigger)) this.queueTrigger(ability, trigger, multiplier);
+    for (const { ability, spec, trigger, multiplier } of batch.dealtDamage.values()) {
+      if (spec.on === "dealt-damage" && spec.atLeast !== undefined && (trigger.triggerValue ?? 0) < spec.atLeast) continue;
+      if (ability === null) this.state.pendingTriggers.push(trigger);
+      else this.queueTrigger(ability, trigger, multiplier);
     }
     for (const { ability, trigger, multiplier } of batch.countersRemoved.values()) {
       this.queueTrigger(ability, trigger, multiplier);

@@ -2507,6 +2507,11 @@ export type TriggerKind =
        * with `{ triggerValue: true }` the total. Its trigger object is the
        * first of them to match; don't read it. */
       readonly batched?: true;
+      /** "…is dealt damage **by an attacking creature**" (Glyph of Life): only
+       * damage from a source matching this, read as the damage is dealt (a
+       * source that has left, as it last existed); "that much" is what those
+       * sources dealt it in the event, never another's share. */
+      readonly bySource?: CardFilter;
     }
   | {
       /**

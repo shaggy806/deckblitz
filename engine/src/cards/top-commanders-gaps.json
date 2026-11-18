@@ -2973,7 +2973,8 @@
   "filter:blocked-attacker",
   "trigger:exiled-by-your-spell-or-ability",
   "trigger:opponent-shuffles-library",
-  "trigger:delayed-source-becomes-untapped"
+  "trigger:delayed-source-becomes-untapped",
+  "trigger:dealt-damage-by-attacking-creature"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
