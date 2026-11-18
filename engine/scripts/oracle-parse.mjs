@@ -24198,6 +24198,23 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Damage become counters on this permanent (rules 614.1a, 614.6 — not
+  // prevention, so damage that can't be prevented is replaced too): "if damage
+  // would be dealt to you, put that many delay counters on this enchantment
+  // instead" (Delaying Shield, Force Bubble); "… to this creature, put that
+  // many +1/+1 counters on it instead" (Phytohydra, Lichenthrope).
+  m = /^If damage would be dealt to (you|~), put that many (\S+) counters on (?:~|it) instead\.$/.exec(line);
+  if (m !== null) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-deal-damage",
+        to: m[1] === "you" ? "you" : "self",
+        instead: { effect: { kind: "add-counter", target: "source", counter: m[2], amount: "x" } },
+      },
+      text,
+    };
+  }
   // A static prevention (rule 615): "prevent all noncombat damage that would
   // be dealt to other creatures you control" (Crystal Barricade, Tajic).
   m = /^Prevent all (combat |noncombat )?damage that would be dealt to (other )?creatures you control\.$/.exec(line);

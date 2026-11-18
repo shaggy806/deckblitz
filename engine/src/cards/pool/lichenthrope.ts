@@ -6,12 +6,10 @@ import { defineCard } from "../define.js";
 //   [2004-10-04] This card's effect replaces damage with placement of -1/-1 counters, so
 //     side-effects of damage to it will not trigger.
 //
-// The damage replacement is the `would-deal-damage` replacement's `prevent` +
-// `then` (Anti-Venom, Horrifying Healer's shape): no damage is dealt, so
-// nothing that triggers on damage sees any (the ruling), and `perEvent` puts
-// one batch of counters for a simultaneous event — "that many" its total. The
-// engine has no "damage can't be prevented" effect, which is the one place a
-// prevention and a replacement would part.
+// The damage becomes the counters (`instead: { effect }`, rules 614.1a,
+// 614.6): no damage is dealt, so nothing that triggers on damage sees any (the
+// ruling), and none is prevented, so damage that can't be prevented (615.12)
+// is replaced all the same — not Anti-Venom's "prevent that damage and …".
 const DAMAGE_TEXT = "If damage would be dealt to this creature, put that many -1/-1 counters on it instead.";
 const UPKEEP_TEXT = "At the beginning of your upkeep, remove a -1/-1 counter from this creature.";
 
@@ -29,7 +27,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        instead: { prevent: true, then: { kind: "add-counter", target: "source", counter: "-1/-1", amount: "x" }, perEvent: true },
+        instead: { effect: { kind: "add-counter", target: "source", counter: "-1/-1", amount: "x" } },
         to: "self",
       },
       text: DAMAGE_TEXT,

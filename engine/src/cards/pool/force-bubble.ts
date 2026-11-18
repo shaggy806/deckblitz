@@ -2,11 +2,9 @@ import { defineCard } from "../define.js";
 
 // Scourge (SCG). EDHREC rank 25023.
 //
-// The replacement takes all of a simultaneous damage event at once (`perEvent`, rule 614.5): 6
-// combat damage from several attackers is 6 counters, one replacement (the rulings). The
-// engine's `prevent` + `then` is Lichenthrope's shape for "put that many counters on it
-// instead": the damage is neither dealt nor (since nothing reads a prevention event) observably
-// prevented.
+// The damage becomes the counters (`instead: { effect }`, rules 614.1a, 614.6): it is neither
+// dealt nor prevented (the first ruling), so damage that can't be prevented (615.12) is replaced
+// all the same. 6 combat damage from several attackers is 6 counters (the second ruling).
 const REPLACE_TEXT = "If damage would be dealt to you, put that many depletion counters on this enchantment instead.";
 
 export default defineCard({
@@ -20,9 +18,8 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        instead: { prevent: true, then: { kind: "add-counter", target: "source", counter: "depletion", amount: "x" }, perEvent: true },
+        instead: { effect: { kind: "add-counter", target: "source", counter: "depletion", amount: "x" } },
         to: "you",
-
       },
       text: REPLACE_TEXT,
     },

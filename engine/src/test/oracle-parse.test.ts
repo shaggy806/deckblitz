@@ -23387,3 +23387,28 @@ describe("a face-down pile searched out, and draws replaced by its top card", ()
     expect(unshuffled.complete).toBe(false);
   });
 });
+
+describe("damage replaced by counters on this permanent, not prevented (Delaying Shield)", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{3}", colors: [], cmc: 3 } as never) as unknown as {
+      static: { replacement?: unknown }[];
+    };
+
+  it("reads damage to you become delay counters, an effect and not a prevention", () => {
+    const shield = face("Enchantment", "If damage would be dealt to you, put that many delay counters on this enchantment instead.");
+    expect(shield.static[0]?.replacement).toEqual({
+      event: "would-deal-damage",
+      to: "you",
+      instead: { effect: { kind: "add-counter", target: "source", counter: "delay", amount: "x" } },
+    });
+  });
+
+  it("reads damage to this creature become +1/+1 counters on it", () => {
+    const hydra = face("Creature — Plant Hydra", "If damage would be dealt to this creature, put that many +1/+1 counters on it instead.");
+    expect(hydra.static[0]?.replacement).toEqual({
+      event: "would-deal-damage",
+      to: "self",
+      instead: { effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" } },
+    });
+  });
+});
