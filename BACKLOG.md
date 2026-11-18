@@ -308,6 +308,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The scenario builder can't hold the initiative or a dungeon position** — "Edit from here" drops both (`ScenarioSpec`), so a check of them has to reach them in play.
 - **Quality-of-life room options (house rules)**, opt-in per room.
 - **Server-side deck save and share** (decks live in `localStorage`).
+- **Save a game and load it later** (the user, 2026-11-18: "We will eventually want the ability to let players save and load gamestates so they can play one game across multiple sessions"): not started. `docs/plans/replicated-rooms.md`, "Saving a game to play on later", has the shape: a save is a state (`stateToJson`) with its seats, not a log, which only replays on the build that made it; loading is a table that starts from a state, which that plan's step 7 builds; and what nothing has yet — a format number on a saved state, a seat that outlives the tab, and a place to keep it (the device and a file, or the server under a code). A solo game's reload (`SavedLocalRoom`, IndexedDB) is already a save in all but name.
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 
 ## Tooling / docs

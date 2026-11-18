@@ -143,6 +143,51 @@ missed.
 table only if every seated person's browser can run a copy (module workers, the pool loaded, the
 same build of the page); otherwise it is promoted to a server `Room`, the path that exists.
 
+## Saving a game to play on later
+
+The user (2026-11-18): "We will eventually want the ability to let players save and load
+gamestates so they can play one game across multiple sessions." Not built, and not part of the
+rollout below until asked for, but it shapes three things now, so it is written down here.
+
+**A save is a state, not a log.** Replaying a log only works on the build that made it: any
+change to how a card or a rule behaves, to the order choices are offered in, or to the events
+emitted makes a replay part from the original at that action (today's change to how names are
+sorted would have). A game saved one week and loaded the next meets a newer engine, since the
+site deploys most days. A state is plain data: the game goes on from it under the new build, with
+that build's fixes. So a save is the game's state through `stateToJson` (11-23 KB gzipped) with
+the room around it — seats, names, decks, settings, which seats are bots — which is what
+`SavedLocalRoom` already holds for a solo game's reload.
+
+**Loading is a table that starts from a state.** A table's recipe is one of two things: a seed
+and decks, or a saved state and its seats. Every device builds its copy from it and the log
+carries on. It is the path a device takes when it is sent the host's state (step 7), so it has
+to stay a first-class way to open a table and not a repair used now and then. The fuzzer's copy
+check already restores a state at arbitrary decisions and plays on: 9,124 restores over 450
+games, every one identical, on one build.
+
+**What it needs that nothing has today:**
+
+- **A format number on a saved state.** A state's shape changes (the need-key themes of early
+  November 2026 reshaped it: a turn journal in place of per-turn fields, one duration type), and
+  today nothing says which shape a saved one has: a solo game's save
+  that won't load is dropped without a word (`LocalRoomHost.restore`). A save carries the state
+  format's number and the build that wrote it; a change that old states can't be read under bumps
+  the number, with a migration or an honest "this save is from an older version". A few saved
+  states kept in the repo as fixtures, loaded by a test, make breaking them a decision and not an
+  accident. Saved decks already work this way (`deck-builder/decks.ts`).
+- **A seat that outlives the tab.** A seat is reclaimed by a token the tab keeps in
+  `sessionStorage`, gone when the tab closes. Across sessions, a returning player either has a
+  token kept longer or simply picks their seat from the saved table (nobody is being kept out:
+  the user's call on cheating covers it).
+- **Somewhere to keep it.** On the device (IndexedDB, as a solo game's reload is, plus a file to
+  download and load, which also moves a game between devices), or on the server under a code the
+  players keep, as a room has. A multiplayer save wants the second: any of the players can open
+  the table again. There are no accounts, and a save is small enough that a code and an expiry
+  are all it needs.
+
+Bots start fresh from a loaded state, as after a reload. A save holds every hand and library,
+which is fine on the same grounds as the copies themselves.
+
 ## What has to change
 
 ### Engine
@@ -217,6 +262,11 @@ Each step ends in a check that can fail.
 
 Steps 1 and 2 decide whether the rest is worth building, and neither touches a live room.
 
+**Saving and loading a game** ("Saving a game to play on later") comes after step 7, which
+builds a table that starts from a state: then it is the save's envelope and format number, a
+place to keep it, and the screens. A solo game could have it sooner, since its reload is already
+a save in all but name.
+
 ## Open decisions (the user's)
 
 - **Tables of people too?** They cost the server little, but the same path makes their actions
@@ -230,6 +280,11 @@ Steps 1 and 2 decide whether the rest is worth building, and neither touches a l
   laptop). Proposed: accept it.
 - **A latecomer on a newer build** takes the host's state and is corrected by the digest check.
   The stricter choice is to refuse and ask the table to finish first.
+- **Saved games, when they come**: kept on the device and as a file, or on the server under a
+  code; and how old a save the site promises to load (every format change migrated, or "saves
+  last until the next change to the state's shape", said plainly to the player). Proposed: the
+  server under a code for a table, the device for a solo game, and migrations only where they
+  are cheap.
 
 ## Risks
 
