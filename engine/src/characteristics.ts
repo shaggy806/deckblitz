@@ -4387,7 +4387,22 @@ function foldLayerFourOnce(
       supertypes: supertypesSeen(),
       inFold: true,
     };
-    if (staticAffects(state, registry, ability.affects, source, object, later)) deferred.push(step.grant);
+    if (staticAffects(state, registry, ability.affects, source, object, later)) {
+      deferred.push(step.grant);
+      continue;
+    }
+    // The same question, less what this static adds itself. A scope that asks
+    // for what *lacks* a type it then gives (March of the Machines: "each
+    // noncreature artifact is an artifact creature") is hidden by its own
+    // work in the pass before: "creature" is among the types seen, so it
+    // dropped out on every other pass and a Mycosynth Lattice that arrived
+    // after it left the lands alone (rule 613.8a — the review of 2026-11-18).
+    // A deferred static is matched again against the real types once every
+    // step has applied, so a creature another effect made is still passed over.
+    const own = ability.addTypes;
+    if (own === undefined || !previous.types.some((t) => own.includes(t))) continue;
+    const lessOwn = { ...later, types: union(types, previous.types.filter((t) => !own.includes(t))) };
+    if (staticAffects(state, registry, ability.affects, source, object, lessOwn)) deferred.push(step.grant);
   }
   for (const grant of deferred) {
     const view = { types, subtypes, supertypes: supertypesSeen(), inFold: true };
@@ -6519,7 +6534,16 @@ function collectStaticEffects(
       cantHaveKeywords: ability.cantHaveKeywords ?? [],
       ownAt: source.id === target.id && timestamp === source.timestamp ? -Infinity : timestamp,
       toxic: ability.grantToxic ?? 0,
-      restrictions: ability.restrictions ?? [],
+      // "Enchanted creature can't be blocked", written as the `unblockable`
+      // keyword: on anything but its own source that is a restriction the
+      // static makes, not an ability the creature has (rule 113.10 — only
+      // "gains" or "has" adds one), so it holds through a later "loses all
+      // abilities". The keyword is still given, for every reader that asks
+      // for it, and goes with the loss; this word does not.
+      restrictions:
+        source.id !== target.id && ability.grantKeywords?.includes("unblockable") === true
+          ? [...(ability.restrictions ?? []), "cant-be-blocked"]
+          : (ability.restrictions ?? []),
       combatDamageByToughness: ability.combatDamageByToughness,
       lethalDamageByPower: ability.lethalDamageByPower === true,
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
@@ -6935,6 +6959,11 @@ function computeCharacteristicsUncached(
       }
     }
     for (const r of modifier.restrictions ?? []) if (typeof r === "string") restrictions.add(r);
+    // "Target creature can't be blocked this turn", written as a granted
+    // `unblockable`: what a resolved effect says about the creature, not an
+    // ability it gained (rule 113.10), so a later loss of all abilities
+    // leaves it — as it leaves the static form above.
+    if (modifier.keywords.includes("unblockable")) restrictions.add("cant-be-blocked");
     // A granted "This creature can't be sacrificed" is an ability, and goes
     // with a later loss like a granted keyword.
     if (granted && modifier.cantBeSacrificed === true) cantBeSacrificed = true;
