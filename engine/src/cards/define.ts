@@ -2084,8 +2084,8 @@ export type StaticCondition =
    *
    * With `sameObject`, only the object the ability came from counts. A
    * permanent that left and came back, or a commander cast from the command
-   * zone since, is a new object (rule 400.7), told apart by the timestamp the
-   * ability recorded (`GameObject.sourceTimestamp`). Only a triggered
+   * zone since, is a new object (rule 400.7), told apart by the stint the
+   * ability recorded (`GameObject.sourceStackedStint`). Only a triggered
    * ability's resolution check has one to compare; anywhere else the source
    * is that object by definition.
    */

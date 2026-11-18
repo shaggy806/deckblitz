@@ -261,6 +261,33 @@ describe("exiled with time counters", () => {
     expect(keywords(game, first).has("haste")).toBe(false);
   });
 
+  // Rule 702.62b: a card is suspended if it's in exile, has suspend and has a
+  // time counter on it — however it got there. Aeon Chronicler has suspend, so
+  // Alaundo's exile leaves it suspended and its "while it's exiled" ability
+  // hears each counter come off.
+  it("Alaundo's card that has suspend is suspended: its own triggers hear a counter come off", () => {
+    const { game, a } = table();
+    const alaundo = spawn(game, "Alaundo the Seer");
+    const chronicler = toHand(game, "Aeon Chronicler");
+    pickFromZone(a, chronicler);
+    activate(game, alaundo, 0);
+    expect(time(game, chronicler)).toBe(5);
+    expect(game.state.objects[chronicler].suspended).toBe(true);
+    // A second activation takes one off each other exiled card: draw a card
+    // for Alaundo, one for the Chronicler, less the card exiled.
+    const giant = toHand(game, "Hill Giant");
+    game.state.objects[alaundo].tapped = false;
+    const start = hand(game).length;
+    pickFromZone(a, giant);
+    activate(game, alaundo, 0);
+    expect(time(game, chronicler)).toBe(4);
+    expect(hand(game).length).toBe(start + 1);
+    // And its owner's upkeep takes one off it, as suspend says (702.62a).
+    nextTurn(game);
+    nextTurn(game);
+    expect(time(game, chronicler)).toBe(3);
+  });
+
   it("a mana value of 0 gets no counter and no ability", () => {
     const { game, a } = table();
     const alaundo = spawn(game, "Alaundo the Seer");

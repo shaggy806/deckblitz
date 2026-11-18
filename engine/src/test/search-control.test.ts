@@ -21,6 +21,7 @@ import {
   hand,
   lands,
   life,
+  loyalty,
   nextTurn,
   pickFromZone,
   pickModes,
@@ -354,6 +355,31 @@ describe("Opposition Agent's rulings", () => {
     expect(offered).toBe(false);
     expect(zone(game, bolt)).toBe("exile");
     expect(game.state.objects[bolt].playPermission?.player).toBe(A);
+  });
+
+  // One search of every library (Jace, Architect of Thought's −8): only the
+  // searcher's own library is "their library", so its find alone is the
+  // Agent's. Jace can't see that one in exile; the other is still his to cast.
+  it("a search of every library: the searcher's own find is the Agent's, another library's goes as the search said", () => {
+    const { game, a, b } = table();
+    spawn(game, "Opposition Agent");
+    const [bears] = bobsTurn(game, "Grizzly Bears");
+    const giant = toLibrary(game, "Hill Giant", A);
+    const jace = spawn(game, "Jace, Architect of Thought", B);
+    const seen = answerSearchAs(game, a, B, () => [bears, giant]);
+    const offers: string[][] = [];
+    b.chooseCastNowFn = (_view, offer) => {
+      offers.push(offer.casts.map((c) => c.cardName));
+      return null;
+    };
+    loyalty(game, jace, -8, { atLeast: 8, player: B });
+    expect(seen.answering).toBe(A);
+    expect(zone(game, bears)).toBe("exile");
+    expect(game.state.objects[bears].playPermission).toMatchObject({ player: A, expiry: "permanent", spendAs: "any-color" });
+    expect(zone(game, giant)).toBe("exile");
+    expect(game.state.objects[giant].playPermission).toBeUndefined();
+    // "You may cast those cards": the Giant, not the Bears the Agent took.
+    expect(offers).toEqual([["Hill Giant"]]);
   });
 
   it("you still pay for it, and may not cast it without the mana", () => {

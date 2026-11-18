@@ -2593,11 +2593,11 @@ export class Game {
    * replacement defers to announce when it's made (`PendingOptionalGraveyardMove
    * .announce`). Set around that one call only. */
   private announcingMove: readonly GameEventInput[] | null = null;
-  /** The `sourceTimestamp` of the ability resolving right now, if one is —
+  /** The `sourceStackedStint` of the ability resolving right now, if one is —
    * how a `flicker` of its own source tells the permanent that put the
    * ability on the stack from a new object with the same id (rule 400.7).
    * Not game state: it only spans that ability's resolution. */
-  private resolvingSourceTimestamp: number | null = null;
+  private resolvingSourceStint: number | null = null;
   /** The triggered ability resolving right now, if one is, and its
    * `triggerSignature` — what a "you may" it asks offers to answer for the
    * identical triggers under it. Not game state: it only spans that
@@ -9371,6 +9371,11 @@ export class Game {
     // its own source; the other is the replacement's effect.
     if (awaiting.replacedFor !== undefined) {
       const { source: from, controller: by, targets, x, copyHost, tokensInstead } = awaiting.replacedFor;
+      // The replaced effect's own refs: "that player" for a token made inside
+      // a `for-each-player` (a myriad copy "attacking that player").
+      const refs = awaiting.replacedFor.refs ?? {};
+      const asEffect = (slots: ResolvedTargets): ResolutionContext =>
+        this.makeResolutionContext(from, by, slots, x, 0, undefined, 1, 0, [], refs);
       const chosen = awaiting.modes[modeIndices[0] ?? 0];
       this.state.awaiting = null;
       const insteadToken = tokensInstead?.[modeIndices[0] ?? 0] ?? null;
@@ -9379,15 +9384,15 @@ export class Game {
         const outer = this.chosenTokensInstead;
         this.chosenTokensInstead = insteadToken;
         try {
-          applyEffectSpec(chosen.effect, this.makeResolutionContext(from, by, targets, x));
+          applyEffectSpec(chosen.effect, asEffect(targets));
         } finally {
           this.chosenTokensInstead = outer;
         }
       } else if (chosen !== undefined) {
         const ctx = (modeIndices[0] ?? 0) === 0
-          ? this.makeResolutionContext(from, by, targets, x)
+          ? asEffect(targets)
           : copyHost !== undefined
-            ? this.makeResolutionContext(from, by, [...targets, { kind: "object", object: copyHost }], x)
+            ? asEffect([...targets, { kind: "object", object: copyHost }])
             : this.makeResolutionContext(awaiting.source, by, [], awaiting.x);
         applyEffectSpec(chosen.effect, ctx);
       }
@@ -10191,7 +10196,7 @@ export class Game {
     delete this.state.namedOffSlot;
     const debugSource = opts.source === undefined ? undefined : this.state.objects[opts.source];
     if (debugSource !== undefined) {
-      this.state.resolvingSource = { source: debugSource.id, timestamp: debugSource.timestamp };
+      this.state.resolvingSource = { source: debugSource.id, stint: debugSource.zoneChangeCount ?? 0 };
     }
     // Applied at once, nothing to wait on a `replacement-order` answer: its
     // effect's own events take the best order.
@@ -12969,7 +12974,11 @@ export class Game {
         return;
       }
       const byKind = isRest ? undefined : this.zoneChoiceSplitCase(awaiting, id);
-      const to = isRest ? rest.destination : this.chosenFromZoneTo(awaiting, index, id);
+      // An Opposition Agent's: the searcher's own library's find is exiled,
+      // whatever the search said (`ownFindsOf`); the grant is its alone.
+      const agents = awaiting.ownFindsOf === undefined ? null : this.state.objects[id]?.owner === awaiting.ownFindsOf;
+      const playGrant = agents === false ? undefined : awaiting.playGrant;
+      const to = isRest ? rest.destination : agents === true ? "exile" : this.chosenFromZoneTo(awaiting, index, id);
       // A tutor-to-top's find is put on top *after* the search's shuffle
       // (below) — moving it now would only have it shuffled back in.
       if (to === "library-top" || to === "exile-playable") return;
@@ -13001,7 +13010,7 @@ export class Game {
           const object = this.state.objects[id];
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
           if (awaiting.exileUntil !== undefined) object.exiledUntil = awaiting.exileUntil;
-          if (awaiting.playGrant !== undefined) object.playPermission = { ...awaiting.playGrant };
+          if (playGrant !== undefined) object.playPermission = { ...playGrant };
           if (awaiting.costExileFor !== undefined) this.recordCostExile(awaiting.costExileFor, [id]);
           this.putCountersOnExiled(id, awaiting.exileWithCounters);
         }
@@ -13171,9 +13180,13 @@ export class Game {
     // Two players' Opposition Agents want these finds: which of them may play
     // each is the card's owner's to say (rule 616.1), and whoever is controlling
     // that owner says it (the ruling).
+    // Of an every-library search, only the searcher's own library's finds are
+    // an Agent's (`ownFindsOf`).
+    const agents = (id: ObjectId): boolean =>
+      awaiting.ownFindsOf === undefined || this.state.objects[id]?.owner === awaiting.ownFindsOf;
     const exileChoice = awaiting.searchExileChoice;
     if (exileChoice !== undefined) {
-      const inExile = chosen.filter((id) => this.state.objects[id]?.zone === "exile");
+      const inExile = chosen.filter((id) => this.state.objects[id]?.zone === "exile" && agents(id));
       if (inExile.length > 0) {
         const ctx = this.makeResolutionContext(
           exileChoice.source,
@@ -13211,7 +13224,8 @@ export class Game {
     // What an Opposition Agent exiled, the rest of the resolution can't see:
     // "this way" counts none of it.
     const unseen = awaiting.findsUnseen === true;
-    if (unseen) this.state.unseenFinds = { at: this.state.eventSeq, objects: [...chosen] };
+    if (unseen) this.state.unseenFinds = { at: this.state.eventSeq, objects: chosen.filter(agents) };
+    const seen = unseen ? chosen.filter((id) => !agents(id)) : chosen;
     // "…, then that creature gains haste" — applied with the chosen cards as
     // its targets, since they were never targets of the spell itself. Nothing
     // chosen means nothing to say it about. Unseen finds are nothing found, and
@@ -13223,7 +13237,7 @@ export class Game {
       const ctx = this.makeResolutionContext(
         awaiting.thenSource ?? asObjectId("choose-from-zone-source"),
         player,
-        unseen ? [] : chosen.map((id) => ({ kind: "object", object: id }) as const),
+        seen.map((id) => ({ kind: "object", object: id }) as const),
         awaiting.thenX ?? 0,
         0,
         undefined,
@@ -15299,13 +15313,14 @@ export class Game {
    * has to be written down before anything can change it — gaining first
    * strike in between doesn't stop a creature dealing damage in the second
    * step, and losing it doesn't let a first striker deal damage twice
-   * (702.7c). Keyed id → battlefield timestamp, so a creature that left and
+   * (702.7c). Keyed id → `zoneChangeCount`, so a creature that left and
    * came back attacking (a new object, rule 400.7) isn't mistaken for the one
-   * that struck. */
+   * that struck — and one that transformed between the steps, with a new
+   * timestamp (613.7g), still is. */
   private recordFirstStepStrikers(): Record<string, number> {
     const out: Record<string, number> = {};
     const note = (id: ObjectId): void => {
-      if (this.striker(id)) out[id] = this.state.objects[id].timestamp;
+      if (this.striker(id)) out[id] = this.state.objects[id].zoneChangeCount ?? 0;
     };
     for (const attackerId of this.currentAttackers()) {
       note(attackerId);
@@ -15316,7 +15331,8 @@ export class Game {
 
   private hadStrikeAsFirstStepBegan(id: ObjectId): boolean {
     const recorded = this.state.combatDamage?.firstStepStrikers[id];
-    return recorded !== undefined && recorded === this.state.objects[id]?.timestamp;
+    const object = this.state.objects[id];
+    return recorded !== undefined && object !== undefined && recorded === (object.zoneChangeCount ?? 0);
   }
 
   private striker(id: ObjectId): boolean {
@@ -29896,7 +29912,7 @@ export class Game {
       abilityKind,
       sourceObjectId: sourceId,
       abilityIndex,
-      sourceTimestamp: this.state.objects[sourceId]?.timestamp ?? 0,
+      sourceStackedStint: this.state.objects[sourceId]?.zoneChangeCount ?? 0,
       // Which object its source is as it goes on the stack: one that has
       // changed zones by the time this resolves is a new object (rule
       // 400.7), and "~" in the effect finds nothing (`sourceLost`).
@@ -32381,7 +32397,7 @@ export class Game {
           : undefined;
       this.state.resolvingSource = {
         source: top.sourceObjectId,
-        timestamp: top.sourceTimestamp ?? 0,
+        stint: top.sourceStackedStint ?? 0,
         ...(ability !== undefined ? { ability } : {}),
       };
     } else {
@@ -32571,8 +32587,8 @@ export class Game {
   /** `resumeSuspendedResolution`'s steps: `next`'s, as the same spell or
    * ability, with `parked` the count of suspended resolutions beneath them. */
   private resumeParkedSteps(next: ParkedSteps, parked: number): void {
-    const outerSourceTimestamp = this.resolvingSourceTimestamp;
-    this.resolvingSourceTimestamp = next.sourceTimestamp ?? null;
+    const outerSourceStint = this.resolvingSourceStint;
+    this.resolvingSourceStint = next.sourceStackedStint ?? null;
     this.state.decisionSource = next.decisionSource;
     const outerTrigger = this.resolvingTrigger;
     this.resolvingTrigger = next.resolvingTrigger ?? null;
@@ -32600,7 +32616,7 @@ export class Game {
         ),
       )));
     } finally {
-      this.resolvingSourceTimestamp = outerSourceTimestamp;
+      this.resolvingSourceStint = outerSourceStint;
       this.resolvingTrigger = outerTrigger;
       // As `withDecisionSource` leaves it: a queued prompt carries its own.
       if (this.state.awaiting === null) this.state.decisionSource = null;
@@ -34103,7 +34119,7 @@ export class Game {
         !this.interveningIfMet(
           condition,
           sourceObject,
-          object.sourceTimestamp,
+          object.sourceStackedStint,
           sourceLastKnown,
           object.triggerObject,
           // The X it snapshotted as it triggered (`triggerCastX`), or 0.
@@ -34226,8 +34242,8 @@ export class Game {
         ? { ward: (cost: WardCost | null) => this.beginWard(source, object.controller, targetedBy, cost) }
         : {}),
     };
-    const outerSourceTimestamp = this.resolvingSourceTimestamp;
-    this.resolvingSourceTimestamp = object.sourceTimestamp ?? null;
+    const outerSourceStint = this.resolvingSourceStint;
+    this.resolvingSourceStint = object.sourceStackedStint ?? null;
     const outerTrigger = this.resolvingTrigger;
     const signature = this.triggerSignature(object);
     this.resolvingTrigger = signature === null ? null : { object: id, signature };
@@ -34244,7 +34260,7 @@ export class Game {
         }
       });
     } finally {
-      this.resolvingSourceTimestamp = outerSourceTimestamp;
+      this.resolvingSourceStint = outerSourceStint;
       this.resolvingTrigger = outerTrigger;
       this.resolvingAbilities.pop();
     }
@@ -38011,13 +38027,13 @@ export class Game {
    * *static* ability's condition, the source counts toward its own board scan.
    * needed-cards P7.
    */
-  /** `sourceTimestamp` is the one the ability recorded when it triggered,
+  /** `sourceStint` is the one the ability recorded as it went on the stack,
    * given on resolution so "if ~ is still on the battlefield" can tell the
    * same permanent from one that left and came back (`source-zone`). */
   private interveningIfMet(
     condition: StaticCondition | undefined,
     source: GameObject,
-    sourceTimestamp?: number,
+    sourceStint?: number,
     /** The source as it last existed on the battlefield, when the ability
      * is about a permanent that has left (its own dies trigger). */
     sourceLastKnown?: LastKnownInfo,
@@ -38053,7 +38069,7 @@ export class Game {
       }),
       ...(thatPlayer !== undefined ? { thatPlayer } : {}),
       ...(abilityKey !== undefined ? { abilityKey } : {}),
-      ...(sourceTimestamp !== undefined ? { sourceTimestamp } : {}),
+      ...(sourceStint !== undefined ? { sourceStint } : {}),
       ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
       ...(triggerObject !== undefined ? { triggerObject } : {}),
       ...(x !== undefined ? { x } : {}),
@@ -40568,7 +40584,7 @@ export class Game {
       decisionPending: () => this.decisionOutstanding(),
       parkedCount: () => this.state.suspendedResolutions.length,
       resumeAfterDecisions: (rest, below) => {
-        const timestamp = this.resolvingSourceTimestamp;
+        const stackedStint = this.resolvingSourceStint;
         const parked = this.state.suspendedResolutions;
         parked.splice(below === undefined ? parked.length : Math.min(below, parked.length), 0, {
           effect: rest,
@@ -40587,7 +40603,7 @@ export class Game {
           ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
           ...(opts.transformSince !== undefined ? { transformSince: opts.transformSince } : {}),
           ...(opts.division !== undefined ? { division: [...opts.division] } : {}),
-          ...(timestamp !== null ? { sourceTimestamp: timestamp } : {}),
+          ...(stackedStint !== null ? { sourceStackedStint: stackedStint } : {}),
           decisionSource: this.state.decisionSource,
           ...(this.resolvingTrigger !== null ? { resolvingTrigger: this.resolvingTrigger } : {}),
           // The rest of a replacement's effect is still that replacement's
@@ -45642,8 +45658,17 @@ controlledBy,
         this.phaseOut([this.splitOneFromStack(target.object)], until, held);
       },
       become: (target, patch, duration) => this.become(target, patch, lastingHere(duration)),
-      sharedAbilities: (from, share) =>
-        sharedAbilitiesOnBattlefield(this.state, this.registry, this.battlefieldMatching(controller, from), share),
+      sharedAbilities: (from, share, inGraveyard) =>
+        sharedAbilitiesOnBattlefield(
+          this.state,
+          this.registry,
+          inGraveyard === true
+            ? this.state.zones.perPlayer[controller].graveyard.filter((id) =>
+                matchesFilter(this.state, this.registry, id, from, { you: controller }),
+              )
+            : this.battlefieldMatching(controller, from),
+          share,
+        ),
       becomeAll: (filter, patch, duration, { exceptSource, scopeTo }) => {
         // One effect, one timestamp, over what matches now (rules 613.7b,
         // 611.2c): every match is fixed before the first one changes, and a
@@ -45727,11 +45752,8 @@ controlledBy,
           if (sacrificeAtEndStep === true || exileAtEndStep === true) {
             this.endStepTokenRemoval(source, controller, made, sacrificeAtEndStep === true ? "sacrifice" : "exile");
           }
-          if (thenCounters !== undefined && thenCounters.amount > 0) {
-            for (const id of made) {
-              this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenCounters.amount, false, controller);
-            }
-          }
+          // Its `thenCounters` went on them as they were made (`createTokens`,
+          // which can tell the tokens it named from a replacement's extras).
           // "…that are tapped and attacking" (rule 508.4). One created under
           // another player's control instead is tapped, but not attacking
           // (Crafty Cutpurse's ruling).
@@ -46088,7 +46110,7 @@ controlledBy,
         object.damageMarked = 0;
         invalidateComputedCache();
       },
-      tokenEventReplaced: (spec, count, opts) => this.tokenEventReplaced(spec, count, controller, source, targets, x, opts),
+      tokenEventReplaced: (spec, count, opts) => this.tokenEventReplaced(spec, count, controller, source, targets, x, opts, refs),
       addReplacementEffect: ({ fromObject, ...record }) => {
         const object = record.target?.kind === "object" ? this.state.objects[record.target.object] : undefined;
         const from = fromObject === undefined ? undefined : this.state.objects[fromObject];
@@ -47349,6 +47371,10 @@ controlledBy,
     const eligible: ObjectId[] = [];
     const tags: Record<string, readonly string[]> = {};
     const shuffled: PlayerId[] = [];
+    // Opposition Agent: what the searcher finds in their own library is
+    // exiled for its controller to play, and the rest of the instruction
+    // can't see it (the rulings); the other libraries' finds go as said.
+    let exileFor: ReturnType<typeof searchExileFor> = [];
     for (const owner of owners) {
       if (this.state.players[owner]?.hasLost !== false) continue;
       shuffled.push(owner);
@@ -47356,6 +47382,7 @@ controlledBy,
       if (owner === player) {
         this.beginSearchControl(player);
         this.journal({ kind: "library-searched", player });
+        exileFor = searchExileFor(this.state, this.registry, player);
       }
       this.emit({ type: "library-searched", player, owner });
       const library = this.state.zones.perPlayer[owner].library;
@@ -47378,6 +47405,28 @@ controlledBy,
       destination,
       leftover: "shuffle",
       shufflesLibraries: shuffled,
+      ...(exileFor.length > 0
+        ? {
+            ownFindsOf: player,
+            findsUnseen: true as const,
+            playGrant: {
+              player: exileFor[0].player,
+              expiry: "permanent" as const,
+              play: true,
+              ...(exileFor[0].spendAs !== undefined ? { spendAs: exileFor[0].spendAs } : {}),
+            },
+          }
+        : {}),
+      ...(exileFor.length > 1
+        ? {
+            searchExileChoice: {
+              chooser: decidingPlayer(this.state, player),
+              source: exileFor[0].source,
+              players: exileFor.map((e) => e.player),
+              ...(exileFor[0].spendAs !== undefined ? { spendAs: exileFor[0].spendAs } : {}),
+            },
+          }
+        : {}),
       ...(then !== undefined
         ? {
             then,
@@ -50428,11 +50477,13 @@ controlledBy,
      * until end of turn, part of making them. */
     attacksThisTurn?: { readonly at?: PlayerId },
     /** What the effect making them still does with the tokens once they're
-     * there (the `create-token` effect's). Given, a token that has a choice
-     * to make as it enters stops to make it (riot a static will give it,
-     * rule 702.136a), nothing is returned, and these go with the tokens
-     * (`finishTokenCopies`). A caller that can't wait on an answer (amass,
-     * incubate) gives none, and such a token isn't asked. */
+     * there (the `create-token` effect's). Its `thenCounters` are put on
+     * here, on the tokens the effect named and what a replacement made in
+     * their place, not on what one made beside them. Given, a token that has
+     * a choice to make as it enters stops to make it (riot a static will
+     * give it, rule 702.136a), nothing is returned, and these go with the
+     * tokens (`finishTokenCopies`). A caller that can't wait on an answer
+     * (amass, incubate) gives none, and such a token isn't asked. */
     followUp?: {
       readonly source: ObjectId;
       readonly effectController: PlayerId;
@@ -50519,7 +50570,9 @@ controlledBy,
       copyName: tokenName,
       created: true,
       total,
-      replaced: plan.flatMap((t) => (t.name === null ? [] : [{ name: t.name, count: t.count }])),
+      replaced: plan.flatMap((t) =>
+        t.name === null ? [] : [{ name: t.name, count: t.count, ...(t.inPlace !== undefined ? { inPlace: t.inPlace } : {}) }],
+      ),
       modifiers,
       riders,
       tapped,
@@ -50556,7 +50609,14 @@ controlledBy,
       ]);
       return [];
     }
-    return this.withEnterBatch(() => [
+    // What the effect has its tokens enter with, and the counters it puts on
+    // them once they're there, still apply to what's made in a token's place
+    // (Divine Visitation's ruling), as a token copy's do — not to what's made
+    // beside them (Chatterfang's Squirrels).
+    const thenCounters = followUp?.thenCounters;
+    const tellsApart = withCounters !== undefined || thenCounters !== undefined;
+    const beside: ObjectId[] = [];
+    const tokens = this.withEnterBatch(() => [
       ...this.mintTokenBatch(
         controller,
         tokenName,
@@ -50572,28 +50632,40 @@ controlledBy,
         attachTo ?? undefined,
         withCounters,
       ),
-      ...plan.flatMap((t) =>
-        t.name === null
-          ? []
-          : this.mintTokenBatch(
-              controller,
-              splitChangedTokenName(t.name).base,
-              null,
-              t.count,
-              [...this.tokenNameModifier(t.name), ...riders.map((m) => ({ ...m }))],
-              exileAtEndStep,
-              false,
-              tapped,
-              sacrificeAtEndStep,
-              goadedForGameBy,
-              separate,
-              undefined,
-              // What it enters with still applies to what's made instead,
-              // as a token copy's does (Divine Visitation's ruling).
-              withCounters,
-            ),
-      ),
+      ...plan.flatMap((t) => {
+        const name = t.name;
+        if (name === null) return [];
+        const mint = (n: number, counters?: { readonly kind: string; readonly amount: number }): readonly ObjectId[] =>
+          this.mintTokenBatch(
+            controller,
+            splitChangedTokenName(name).base,
+            null,
+            n,
+            [...this.tokenNameModifier(name), ...riders.map((m) => ({ ...m }))],
+            exileAtEndStep,
+            false,
+            tapped,
+            sacrificeAtEndStep,
+            goadedForGameBy,
+            separate,
+            undefined,
+            counters,
+          );
+        if (!tellsApart) return mint(t.count);
+        const inPlace = Math.min(t.inPlace ?? 0, t.count);
+        const instead = mint(inPlace, withCounters);
+        const added = mint(t.count - inPlace);
+        beside.push(...added);
+        return [...instead, ...added];
+      }),
     ]);
+    if (followUp !== undefined && thenCounters !== undefined && thenCounters.amount > 0) {
+      for (const id of tokens) {
+        if (beside.includes(id)) continue;
+        this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenCounters.amount, false, followUp.effectController);
+      }
+    }
+    return tokens;
   }
 
   /**
@@ -50722,6 +50794,10 @@ controlledBy,
     targets: ResolvedTargets,
     x: number,
     opts: Parameters<ResolutionContext["tokenEventReplaced"]>[2] = {},
+    /** The resolution's refs, "that player" among them (a myriad copy inside
+     * its `for-each-player`): the effect run once the question is answered
+     * reads them as it would have. */
+    refs: LastKnownRefs = {},
   ): boolean {
     if (count <= 0) return false;
     const first = journalTotal(this.state, "token-created", controller, "count") === 0;
@@ -50747,7 +50823,7 @@ controlledBy,
             ],
             x: count,
             targets: [],
-            replacedFor: { source, controller, targets: [...targets], x, tokensInstead: [null, ...r.mayTokensInsteadOneOf.map((o) => o.token)] },
+            replacedFor: { source, controller, targets: [...targets], x, refs, tokensInstead: [null, ...r.mayTokensInsteadOneOf.map((o) => o.token)] },
           };
           return true;
         }
@@ -50794,7 +50870,7 @@ controlledBy,
           ],
           x: count,
           targets: [],
-          replacedFor: { source, controller, targets: [...targets], x, ...(copyHost !== undefined ? { copyHost } : {}) },
+          replacedFor: { source, controller, targets: [...targets], x, refs, ...(copyHost !== undefined ? { copyHost } : {}) },
         };
         return true;
       }
@@ -51163,6 +51239,7 @@ controlledBy,
         }
       }
     }
+    const beside: ObjectId[][] = entry.groups.map(() => []);
     const made = this.withEnterBatch(() =>
       entry.groups.map((group) => {
         const entered: ObjectId[] = [];
@@ -51185,15 +51262,16 @@ controlledBy,
           this.emit({ type: "permanent-entered-battlefield", object: id });
           entered.push(id);
         }
-        return [...entered, ...this.withTokenLink(group.createdWith, () => this.mintReplacedTokenCopies(group))];
+        return [...entered, ...this.withTokenLink(group.createdWith, () => this.mintReplacedTokenCopies(group, beside[entry.groups.indexOf(group)]))];
       }),
     );
-    entry.groups.forEach((group, i) => this.finishTokenCopies(group, made[i]));
+    entry.groups.forEach((group, i) => this.finishTokenCopies(group, made[i], beside[i]));
   }
 
   /** Mint token copies with nothing to settle as they enter: at once, as a
    * stack where they can be one. */
   private mintTokenCopies(planned: PlannedTokenCopies): void {
+    const beside: ObjectId[] = [];
     const made = this.withTokenLink(planned.createdWith, () => this.withEnterBatch(() => [
       ...this.mintTokenBatch(
         planned.controller,
@@ -51210,14 +51288,17 @@ controlledBy,
         undefined,
         planned.withCounters,
       ),
-      ...this.mintReplacedTokenCopies(planned),
+      ...this.mintReplacedTokenCopies(planned, beside),
     ]));
-    this.finishTokenCopies(planned, made);
+    this.finishTokenCopies(planned, made, beside);
   }
 
   /** Chatterfang's Squirrels and Divine Visitation's Angels: nothing of what
-   * was copied, only what the effect does to the tokens (the ruling). */
-  private mintReplacedTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies): readonly ObjectId[] {
+   * was copied, only what the effect does to the tokens (the ruling).
+   * `beside` collects the ones made in addition to the copies rather than in
+   * a copy's place: what the effect does to "the tokens it created" once
+   * they're there (`thenCounters`) isn't done to those. */
+  private mintReplacedTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies, beside: ObjectId[]): readonly ObjectId[] {
     const mint = (name: string, count: number, withCounters?: { readonly kind: string; readonly amount: number }) =>
       this.mintTokenBatch(
         group.controller,
@@ -51230,23 +51311,31 @@ controlledBy,
         group.tapped,
         group.sacrificeAtEndStep,
         group.goadedForGameBy,
-        group.exileAtEndStep || group.sacrificeAtEndStep,
+        // Each its own object where some get counters the others don't.
+        group.exileAtEndStep || group.sacrificeAtEndStep || group.thenCounters !== undefined,
         undefined,
         withCounters,
       );
     return group.replaced.flatMap((t) => {
       // The counters the copies enter with go on what's made in a copy's
       // place (an Angel), not on what's made beside them (a Squirrel).
-      const inPlace = group.withCounters === undefined ? 0 : Math.min(t.inPlace ?? 0, t.count);
-      return [...mint(t.name, inPlace, group.withCounters), ...mint(t.name, t.count - inPlace)];
+      // Likewise the counters put on them once they're there (`thenCounters`).
+      const tellsApart = group.withCounters !== undefined || group.thenCounters !== undefined;
+      const inPlace = tellsApart ? Math.min(t.inPlace ?? 0, t.count) : 0;
+      const instead = mint(t.name, inPlace, group.withCounters);
+      const added = mint(t.name, t.count - inPlace);
+      if (tellsApart) beside.push(...added);
+      return [...instead, ...added];
     });
   }
 
-  /** What an effect does with the token copies it made, once they're there. */
-  private finishTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies, made: readonly ObjectId[]): void {
+  /** What an effect does with the token copies it made, once they're there.
+   * `beside`: the tokens among `made` that a replacement made in addition. */
+  private finishTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies, made: readonly ObjectId[], beside: readonly ObjectId[]): void {
     const { controller, source, effectController, attacking, thenCounters } = group;
     if (thenCounters !== undefined && thenCounters.amount > 0) {
       for (const id of made) {
+        if (beside.includes(id)) continue;
         this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenCounters.amount, false, effectController ?? controller);
       }
     }
@@ -54641,8 +54730,11 @@ controlledBy,
 
   /**
    * Transform `id` (rule 701.27) — turn a transforming DFC permanent over to
-   * its other face. Same object, same timestamp, same counters / attachments
-   * (rule 712.10); characteristics recompute through `faceName`. A no-op for
+   * its other face. Same object, same counters / attachments (rule 712.10),
+   * a new timestamp (rule 613.7g: its own static abilities now apply after
+   * what was already there in the same layer); characteristics recompute
+   * through `faceName`. Anything that asks whether it is still the same
+   * permanent reads its `zoneChangeCount`, never the timestamp. A no-op for
    * anything that isn't a transforming DFC on the battlefield.
    *
    * `chosenPlayer`: the player chosen as it transforms into a face that says
@@ -54657,6 +54749,7 @@ controlledBy,
     if (!this.isTransformingDfc(id)) return;
     if (objectProhibited(this.state, this.registry, "transform", id)) return;
     object.face = (object.face ?? 0) === 0 ? 1 : 0;
+    object.timestamp = this.freshTimestamp();
     if (chosenPlayer !== undefined && this.registry.get(rulesTextName(object)).choosePlayerOnTransform !== undefined) {
       if (chosenPlayer === null) delete object.chosenPlayer;
       else object.chosenPlayer = chosenPlayer;
@@ -58713,6 +58806,8 @@ controlledBy,
       // What a text change made of the listed characteristics (rule 612).
       ...(as !== undefined && textChanges !== undefined ? { textChanges: [...textChanges] } : {}),
     };
+    // A new timestamp each time it turns face down (rule 613.7f).
+    turned.timestamp = this.freshTimestamp();
     // "Until this creature is turned face down, it becomes a copy …"
     // (Vesuvan Shapeshifter): it's itself again under its face-down status.
     this.endTemporaryCopies(turned, (ends) => ends === "turned-face-down");
@@ -59116,6 +59211,9 @@ controlledBy,
     }
     delete object.faceDown;
     object.turnedFaceUpOnTurn = this.state.turn.number;
+    // A new timestamp each time it turns face up (rule 613.7f): its own
+    // static abilities apply after what entered while it was face down.
+    object.timestamp = this.freshTimestamp();
     // Its copiable values revert to its own as it's turned face up (rule
     // 708.8); then what it chose to copy, if anything.
     const copied = copySpec !== null && copyAnswer !== undefined && copyAnswer !== null ? this.state.objects[copyAnswer] : undefined;
@@ -59425,8 +59523,8 @@ controlledBy,
         if (
           options.fromSource === true &&
           target.object === source &&
-          this.resolvingSourceTimestamp !== null &&
-          this.state.objects[source]?.timestamp !== this.resolvingSourceTimestamp
+          this.resolvingSourceStint !== null &&
+          (this.state.objects[source]?.zoneChangeCount ?? 0) !== this.resolvingSourceStint
         ) {
           continue;
         }
@@ -64278,7 +64376,7 @@ controlledBy,
     if (
       object === undefined ||
       object.zone !== "battlefield" ||
-      object.timestamp !== resolving.timestamp ||
+      (object.zoneChangeCount ?? 0) !== resolving.stint ||
       object.controller === player
     ) {
       return;
@@ -64303,7 +64401,7 @@ controlledBy,
 
   /** A card drawn while an ability resolves adds to its source's `tally`,
    * when its controller drew it and the source is still the permanent that
-   * put the ability on the stack (its timestamp, rule 400.7). A spell's
+   * put the ability on the stack (its stint, rule 400.7). A spell's
    * draws, and a draw step's, have no permanent to credit. */
   private tallyDraw(player: PlayerId): void {
     const resolving = this.state.resolvingSource;
@@ -64312,7 +64410,7 @@ controlledBy,
     if (
       object === undefined ||
       object.zone !== "battlefield" ||
-      object.timestamp !== resolving.timestamp ||
+      (object.zoneChangeCount ?? 0) !== resolving.stint ||
       object.controller !== player
     ) {
       return;
@@ -67435,6 +67533,11 @@ controlledBy,
         if (r?.event !== "would-draw" || r.instruction === undefined || n < r.instruction.atLeast) continue;
         if (!(r.who === "any-player" || (r.who === "you") === (player === source.controller))) continue;
         if (!this.staticActive(source, ability)) continue;
+        // "While you have no cards in hand", "while your library has no
+        // cards in it": the board as the instruction is about to be followed.
+        const zones = this.state.zones.perPlayer[player];
+        if (r.whileLibraryEmpty === true && zones.library.length !== 0) continue;
+        if (r.whileHandAtMost !== undefined && zones.hand.length > r.whileHandAtMost) continue;
         const key = `draw-instruction:${id}:${source.zoneChangeCount ?? 0}:${index}`;
         if (this.applyingReplacements.has(key)) continue;
         const becomes = insteadEffect(r.instead);

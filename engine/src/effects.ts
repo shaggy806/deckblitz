@@ -7385,9 +7385,14 @@ export type EffectSpec =
        * stays when the creature it came from leaves (its ruling). With
        * `"hexproof"` listed, each "hexproof from [quality]" among them is
        * shared as itself (702.11d-e — Odric, Lunarch Marshal).
+       * `inGraveyard`: `from` is read over the cards in your graveyard
+       * instead — "… if a creature card in your graveyard has flying"
+       * (Bleeding Effect; its ruling: the variants a card there has are the
+       * ones gained).
        */
       readonly sharesKeywords?: {
         readonly from: CardFilter;
+        readonly inGraveyard?: true;
         readonly keywords: readonly Keyword[];
         readonly protection?: true;
         readonly landwalk?: true;
@@ -14460,10 +14465,12 @@ export interface EffectApi {
   /** `target` becomes what `patch` says — see the `"become"` {@link EffectSpec}. */
   become(target: TargetRef, patch: ResolvedPatch, duration: PermanentDuration): void;
   /** What a `become`'s `sharesKeywords` gives: read now from the battlefield
-   * permanents matching `from`, from this effect's controller's side. */
+   * permanents matching `from`, from this effect's controller's side — or,
+   * `inGraveyard`, from the cards in that player's graveyard matching it. */
   sharedAbilities(
     from: CardFilter,
     share: { readonly keywords: readonly Keyword[]; readonly protection?: true; readonly landwalk?: true },
+    inGraveyard?: true,
   ): {
     readonly keywords: readonly Keyword[];
     readonly protection?: ResolvedPatch["protection"];
@@ -22062,8 +22069,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const { kind: _kind, target: on, filter, exceptSource, controlledByTarget, duration, sharesKeywords, ...patch } = spec;
       let read = readPatch(patch, ctx);
       if (sharesKeywords !== undefined) {
-        const { from, ...share } = sharesKeywords;
-        const shared = ctx.sharedAbilities(from, share);
+        const { from, inGraveyard, ...share } = sharesKeywords;
+        const shared = ctx.sharedAbilities(from, share, inGraveyard);
         const keywords = [...new Set([...(read.keywords ?? []), ...shared.keywords])];
         read = {
           ...read,

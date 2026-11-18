@@ -11,7 +11,7 @@
 import { describe, expect, it } from "vitest";
 
 import { computeCharacteristics } from "../characteristics.js";
-import { A, B, cast, destroy, keywords, lands, quiet, ref, registryOf, spawn, table, toHand, toStep, zone } from "./harness.js";
+import { A, B, cast, destroy, keywords, lands, quiet, ref, registryOf, spawn, table, toGraveyard, toHand, toStep, zone } from "./harness.js";
 
 const protectionOf = (game: ReturnType<typeof table>["game"], id: string) =>
   computeCharacteristics(game.state, registryOf(game), id as never).protectionFrom;
@@ -90,6 +90,24 @@ describe("Concerted Effort", () => {
     const c = computeCharacteristics(game.state, registryOf(game), bears);
     expect([...c.keywords]).toEqual(expect.arrayContaining(["first-strike", "skulk"]));
     expect(c.keywords.has("hexproof")).toBe(false);
+    expect([...c.hexproofFrom.colors]).toEqual(["B"]);
+  });
+
+  // Bleeding Effect reads the creature cards in your graveyard instead
+  // (`inGraveyard`); its 2024-07-05 ruling: a card there with "hexproof from
+  // white" gives that variant, not hexproof.
+  it("Bleeding Effect shares a graveyard creature card's 'hexproof from' as itself", () => {
+    const { game } = table();
+    spawn(game, "Bleeding Effect");
+    const bears = spawn(game, "Grizzly Bears");
+    toGraveyard(game, "Knight of Grace");
+    // An opponent's graveyard isn't yours.
+    toGraveyard(game, "Serra Angel", B);
+    game.advanceUntil((s) => s.turn.step === "begin-combat" && quiet(s));
+    const c = computeCharacteristics(game.state, registryOf(game), bears);
+    expect(c.keywords.has("first-strike")).toBe(true);
+    expect(c.keywords.has("hexproof")).toBe(false);
+    expect(c.keywords.has("flying")).toBe(false);
     expect([...c.hexproofFrom.colors]).toEqual(["B"]);
   });
 

@@ -15,11 +15,11 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: { kind: "hand-size", atMost: 0 },
       replacement: {
         event: "would-draw",
         who: "you",
         instruction: { atLeast: 1 },
+        whileHandAtMost: 0,
         instead: { modify: { plus: 1 } },
       },
       text: "If you would draw a card while you have no cards in hand, draw two cards instead.",

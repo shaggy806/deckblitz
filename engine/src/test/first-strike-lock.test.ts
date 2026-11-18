@@ -137,10 +137,30 @@ describe("rule 510.4 — who deals damage in the second combat-damage step", () 
     a.declareAttackersFn = () => [{ attacker: knight, defender: B }];
     game.advanceUntil(betweenSteps);
     expect(game.state.combatDamage?.firstStepStrikers).toEqual({
-      [knight]: game.state.objects[knight].timestamp,
+      [knight]: game.state.objects[knight].zoneChangeCount ?? 0,
     });
     game.advanceUntil(toPostcombat);
     expect(game.state.combatDamage).toBeNull();
+  });
+
+  // The record names the creature by its stint, not its timestamp: a
+  // double-faced first striker that transforms between the steps has a new
+  // timestamp (rule 613.7g) and is still the creature that struck.
+  it("a first striker that transforms between the steps doesn't deal damage again", () => {
+    const { game, a } = mkGame();
+    const docent = spawn(game, "Docent of Perfection", A);
+    modify(game, docent, { keywords: ["first-strike"] });
+    a.declareAttackersFn = () => [{ attacker: docent, defender: B }];
+
+    game.advanceUntil(betweenSteps);
+    expect(life(game, B)).toBe(15);
+    const before = game.state.objects[docent].timestamp;
+    game.debugApplyEffect(A, { kind: "transform", target: 0 }, [{ kind: "object", object: docent }]);
+    expect(game.state.objects[docent].face).toBe(1);
+    expect(game.state.objects[docent].timestamp).toBeGreaterThan(before);
+    game.advanceUntil(toPostcombat);
+
+    expect(life(game, B)).toBe(15);
   });
 });
 

@@ -1610,11 +1610,13 @@ export interface GameObject {
    * hexproof and protection don't stop them; resolution still checks that
    * the slot can hold what's in it. */
   autoTargetSlots?: number[];
-  /** For an ability object: its source's `timestamp` when the ability was put
-   * on the stack. A permanent that leaves and returns gets a new timestamp,
-   * which is how "the Nth time this ability has resolved this turn" tells the
-   * two objects apart (see `GameState.abilityResolutionsThisTurn`). */
-  sourceTimestamp?: number;
+  /** For an ability object: its source's `zoneChangeCount` when the ability
+   * was put on the stack. A permanent that leaves and returns is a new object
+   * (rule 400.7) with a new count, which is how "if ~ is still on the
+   * battlefield" tells the two apart. Not its timestamp, which becoming
+   * attached or transforming renews (rules 613.7e, g). Unlike
+   * `sourceZoneChangeCount` it is never the stint the trigger event saw. */
+  sourceStackedStint?: number;
   /** For an ability object: its source's `zoneChangeCount` as it went on
    * the stack (for a delayed trigger, as it was created). If the source has
    * moved since, it is a new object (rule 400.7), and the ability's
@@ -3879,6 +3881,12 @@ export type AwaitingDecision =
        * `eachLibrary` — Jace, Architect of Thought's −8): with `leftover:
        * "shuffle"`, each of these libraries is shuffled, not the chooser's. */
       readonly shufflesLibraries?: readonly PlayerId[];
+      /** In such a search by a player an Opposition Agent controls: only the
+       * finds from this player's library, the searcher's own, are the
+       * Agent's. `playGrant`, `searchExileChoice` and `findsUnseen` are about
+       * those alone, and they're exiled whatever `destination` says; a find
+       * from another library goes as the search said. */
+      readonly ownFindsOf?: PlayerId;
       /** A search whose finds an Opposition Agent exiles: the rest of the
        * instruction can't see them there, and goes on (`then` with nothing
        * found, `GameState.unseenFinds`). */
@@ -4994,6 +5002,9 @@ export type AwaitingDecision =
         readonly controller: PlayerId;
         readonly targets: readonly (TargetRef | undefined)[];
         readonly x: number;
+        /** The replaced effect's refs as it was asked — "that player" inside
+         * a `for-each-player` (a myriad copy attacking that player). */
+        readonly refs?: LastKnownRefs;
         /** What the replacement's tokens copy: the replacement's option runs
          * as the replaced effect, with this after its targets, so what that
          * effect says of its tokens still reads as it did. */
@@ -5680,7 +5691,8 @@ export interface DealtDamageRecord {
 
 /**
  * The ability resolving that puts a permanent onto the battlefield: its
- * source, the source's timestamp then, and which of the source's abilities
+ * source, the source's stint then (its `zoneChangeCount`: the same object,
+ * rule 400.7, whatever has renewed its timestamp since), and which of the source's abilities
  * it is — `kind` and `index` into that list of the face `face` (rule 607.1b:
  * both faces' abilities are the object's). What `putThereBySource` reads,
  * the ability for a linked pair (rule 607.2c — Havengul Mystery's "the
@@ -5689,7 +5701,7 @@ export interface DealtDamageRecord {
  */
 export interface EntrySource {
   readonly source: ObjectId;
-  readonly timestamp: number;
+  readonly stint: number;
   readonly ability?: { readonly kind: "activated" | "triggered" | "chapter"; readonly index: number; readonly face: number };
 }
 
@@ -5713,7 +5725,7 @@ export interface EntryRecord {
     readonly via?: CastVia;
   };
   /** The source of the ability that put it here, with that source's
-   * timestamp then — Kodama of the East Tree's "if it wasn't put onto the
+   * stint then — Kodama of the East Tree's "if it wasn't put onto the
    * battlefield with this ability". */
   readonly by?: EntrySource;
   /** It's a land that was played (rule 305.1) — Deep Gnome Terramancer's
@@ -5936,9 +5948,10 @@ export interface ParkedSteps {
   /** See `ResolutionContext.division`: the split chosen as it went on the
    * stack, so a divided amount after a decision still deals its shares. */
   readonly division?: readonly number[];
-  /** The timestamp the source had when the ability went on the stack, so
-   * "exile ~" still skips a source that has become a new object. */
-  readonly sourceTimestamp?: number;
+  /** The stint the source was in when the ability went on the stack
+   * (`GameObject.sourceStackedStint`), so "exile ~" still skips a source that
+   * has become a new object. */
+  readonly sourceStackedStint?: number;
   /** What the resolution's decisions are said to come from — restored while
    * the rest runs, so a decision it raises still names its card. */
   readonly decisionSource: DecisionSource | null;
@@ -6151,7 +6164,7 @@ export interface CombatDamageState {
    * next question about them is the division. */
   readonly unblockedDeclined?: readonly ObjectId[];
   /** The attackers and blockers that had first strike or double strike as the
-   * first-strike step began (rule 510.4), id → battlefield timestamp then —
+   * first-strike step began (rule 510.4), id → `zoneChangeCount` then —
    * the second step's roster is everyone *not* here plus whoever has double
    * strike by then. Empty for a `"single"` step. Lives and dies with this
    * record, so it's gone by end of combat. */
@@ -7123,7 +7136,7 @@ export interface GameState {
    * Absent outside a `repeat`. */
   repeatPass?: number;
   /** While an ability resolves (across the decisions it waits on, like
-   * `resolutionSince`): its source and that source's timestamp then — what
+   * `resolutionSince`): its source and that source's stint then — what
    * a permanent it puts onto the battlefield records as `entry.by`. Absent
    * while a spell resolves, and between resolutions. */
   resolvingSource?: EntrySource;

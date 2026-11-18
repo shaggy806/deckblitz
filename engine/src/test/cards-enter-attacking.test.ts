@@ -202,6 +202,54 @@ describe("myriad (rule 702.116a)", () => {
     expect(named(game, "Grizzly Bears")).toHaveLength(1);
   });
 
+  // A myriad copy is a token event like any other (rule 614.1a): Moonlit
+  // Meditation's "you may instead create that many tokens that are copies of
+  // enchanted permanent" is offered, and what myriad says of its token still
+  // applies to the one made instead (tapped, attacking that player, exiled
+  // at end of combat).
+  it("Moonlit Meditation is offered on a myriad copy, and the copy it makes still attacks and is exiled", () => {
+    const { game, c } = attackWith([A, B, C], "Goldlust Triad", B);
+    const bears = game.debugSpawn("Grizzly Bears", A, "battlefield");
+    const aura = game.debugSpawn("Moonlit Meditation", A, "battlefield");
+    game.state.objects[aura].attachedTo = bears;
+    let offered = 0;
+    c[A].chooseModesFn = (view) => {
+      const awaiting = view.state.awaiting;
+      if (awaiting?.kind !== "choose-modes") return [];
+      // Myriad's "you may" is about a player; the Meditation's isn't.
+      if (awaiting.about !== undefined) return [0];
+      offered += 1;
+      return [1];
+    };
+    game.advanceUntil(afterAttackTriggers);
+    expect(offered).toBe(1);
+    expect(named(game, "Goldlust Triad")).toHaveLength(1);
+    const copy = named(game, "Grizzly Bears").find((id) => game.state.objects[id].isToken === true)!;
+    expect(copy).toBeDefined();
+    expect(game.state.objects[copy].attacking).toBe(C);
+    expect(game.state.objects[copy].tapped).toBe(true);
+    game.advanceUntil(toPostcombat);
+    expect(game.state.players[C].life).toBe(38);
+    expect(named(game, "Grizzly Bears")).toHaveLength(1);
+  });
+
+  it("Moonlit Meditation declined: the myriad copy is made as myriad says, attacking that player", () => {
+    const { game, c } = attackWith([A, B, C], "Goldlust Triad", B);
+    const bears = game.debugSpawn("Grizzly Bears", A, "battlefield");
+    const aura = game.debugSpawn("Moonlit Meditation", A, "battlefield");
+    game.state.objects[aura].attachedTo = bears;
+    // Yes to myriad's own "you may" (the only mode it offers), and the
+    // first mode of the Meditation's: the tokens as the effect said.
+    c[A].chooseModesFn = () => [0];
+    game.advanceUntil(afterAttackTriggers);
+    const copy = named(game, "Goldlust Triad").find((id) => game.state.objects[id].isToken === true)!;
+    expect(copy).toBeDefined();
+    expect(game.state.objects[copy].attacking).toBe(C);
+    expect(game.state.objects[copy].tapped).toBe(true);
+    game.advanceUntil(toPostcombat);
+    expect(named(game, "Goldlust Triad")).toHaveLength(1);
+  });
+
   it("in a two-player game there's nobody else to copy it at", () => {
     const { game, c } = attackWith([A, B], "Goldlust Triad", B);
     const asked: PlayerId[] = [];

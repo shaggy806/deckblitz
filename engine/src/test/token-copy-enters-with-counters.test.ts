@@ -130,6 +130,61 @@ describe("Littjara Mirrorlake", () => {
   });
 });
 
+// Counters an effect puts on the tokens it made, once they're there
+// (`thenCounters`): on what a replacement made in a token's place (Divine
+// Visitation's ruling: what the creating effect specifies still applies), not
+// on what one made in addition (Chatterfang's Squirrels).
+describe("thenCounters and a would-create-token replacement", () => {
+  const made = (game: Game): ObjectId[] => game.battlefield.filter((id) => game.state.objects[id].isToken === true);
+
+  it("a token copy's go on the copy, not on Chatterfang's Squirrel beside it", () => {
+    const { game } = table();
+    spawn(game, "Chatterfang, Squirrel General");
+    const giant = spawn(game, "Hill Giant");
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, thenCounters: { kind: "+1/+1", amount: 2 } }, [ref(giant)]);
+    const [copy] = tokens(game, "Hill Giant");
+    expect(counters(game, copy)).toBe(2);
+    const squirrels = made(game).filter((id) => id !== copy);
+    expect(squirrels).toHaveLength(1);
+    expect(counters(game, squirrels[0])).toBe(0);
+  });
+
+  it("a token copy's go on the Angel made in its place; with Chatterfang too, only on that one", () => {
+    const { game } = table();
+    spawn(game, "Divine Visitation");
+    const bears = spawn(game, "Grizzly Bears");
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, thenCounters: { kind: "+1/+1", amount: 2 } }, [ref(bears)]);
+    expect(made(game).map((id) => counters(game, id))).toEqual([2]);
+
+    const both = table();
+    spawn(both.game, "Divine Visitation");
+    spawn(both.game, "Chatterfang, Squirrel General");
+    const giant = spawn(both.game, "Hill Giant");
+    both.game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, thenCounters: { kind: "+1/+1", amount: 2 } }, [ref(giant)]);
+    expect(made(both.game).map((id) => counters(both.game, id)).sort()).toEqual([0, 2]);
+  });
+
+  it("Fractal Summoning's go on the Fractal, not on Chatterfang's Squirrel", () => {
+    const { game } = table();
+    spawn(game, "Chatterfang, Squirrel General");
+    lands(game, "Forest", 5);
+    cast(game, toHand(game, "Fractal Summoning"), { x: 3 });
+    const [fractal] = tokens(game, "Fractal Token");
+    expect(counters(game, fractal)).toBe(3);
+    const squirrels = made(game).filter((id) => id !== fractal);
+    expect(squirrels).toHaveLength(1);
+    expect(counters(game, squirrels[0])).toBe(0);
+  });
+
+  it("Fractal Summoning's go on the Angel made in the Fractal's place", () => {
+    const { game } = table();
+    spawn(game, "Divine Visitation");
+    lands(game, "Forest", 5);
+    cast(game, toHand(game, "Fractal Summoning"), { x: 3 });
+    expect(made(game).map((id) => counters(game, id))).toEqual([3]);
+  });
+});
+
 describe("Ochre Jelly", () => {
   it("splits at the next end step into a copy with half its counters, rounded down, again and again", () => {
     const { game } = table();

@@ -3092,7 +3092,7 @@ export function matchesFilter(
     if (filter.putThereBySource !== undefined) {
       const by = entry?.by;
       const asker = ctx.source === undefined ? undefined : state.objects[ctx.source];
-      const byIt = by !== undefined && asker !== undefined && by.source === asker.id && by.timestamp === asker.timestamp;
+      const byIt = by !== undefined && asker !== undefined && by.source === asker.id && by.stint === (asker.zoneChangeCount ?? 0);
       const want = filter.putThereBySource;
       if (typeof want === "boolean") {
         if (byIt !== want) return false;

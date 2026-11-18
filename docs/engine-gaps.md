@@ -31,12 +31,9 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **B334's small gaps** (2026-11-17, what the overnight lane agents reported while building keys; none checked
   beyond the agent's own reading). `thisWay: "exiled"` also counts cards a spell cast *during* the resolution
   exiled as its cost, because `exileCause` sees `resolvingController` (game.ts ~70509): Invasion of Alara's hand
-  and library-bottom steps, and Gix's and Herald of Amity's shapes, would take them. `counters-distributed`
-  without `atLeastOne` still lets a player choose no creatures for a total above 0 (Blessing of Frost, Feast of
-  the Victorious Dead). A `for-each-target` `simultaneous` `put-onto-battlefield` (Moldgraf Millipede's shape)
-  puts one card onto the battlefield while a Clone among them is still choosing what to copy, so it could copy
-  that card. Bleeding Effect doesn't share a graveyard creature card's "hexproof from [quality]" (its
-  2024-07-05 ruling); `become.sharesKeywords` with a graveyard `from` would cover it. A permission's filter
+  and library-bottom steps, and Gix's and Herald of Amity's shapes, would take them (looked at 2026-11-17: the
+  event carries no mark of a cost, and costs are paid from a dozen places with no shared one, so it wants a
+  cost-payment marker first). A permission's filter
   now judges a bestow cast as cast (702.103d, B334); prototype and face-down casts probably still aren't. A
   `fromGraveyard` `grantsTriggered` isn't read from graveyards (Riftstone Portal's `grantsActivated` is). A
   static's `grantsActivated` with `onlyBy: "granter"` falls back to the permanent's controller (only a
@@ -48,16 +45,24 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   "sacrifice any number of X", "look at the top N, put one into your hand and the rest …", Saga chapters, or
   Nightmare Shepherd's "you may exile it. If you do, create a token copy"; the scenario builder can't start a
   3-4 player board with `fill: 0` (the first player's turn-1 draw loses the table, rule 103.8a).
+  Checked 2026-11-17 and closed: Bleeding Effect shares a graveyard card's "hexproof from" (`sharesKeywords`'
+  `inGraveyard`); a Clone returned beside another card by a `simultaneous` `for-each-target` is offered only
+  what was already on the battlefield, in either order (`simultaneous-return-clone.test.ts`; the report didn't
+  reproduce); and `counters-distributed` choosing no creatures is legal, "any number" being any positive
+  number or zero (rule 107.1c).
 
 - **B294's small gaps** (2026-11-09, what the re-attempt's agents and reader reported while writing cards).
   Built since: `CardFilter.notThisWay`'s player scope (`thisWayBy: "you"`, 2026-11-12: Deadly Brew, Rise of the
   Witch-king), and Firion is authored. Left, reported and never checked (audited 2026-11-15: every card named
   here is in the pool, so each either works or was written round it; check one before building anything): an
-  `amounts` condition or a dynamic `{ amount }` filter operand isn't evaluated in static or cost contexts
-  (`selfCostReduction`, `affects.filter`; Hagra Mauling, Thryx, Ensnaring Bridge, Lavinia); `would-draw` with `instruction: { atLeast }` doesn't honour `whileHandAtMost` (Phial of Galadriel
-  uses the static's `condition`); `of-player "that-player"` in `whileCondition` never holds on a `cast-spell`
-  trigger (The Council of Four uses a filter); `put-into-graveyard` on a set ref moves only one object
-  (Glimpse the Impossible and Mnemonic Betrayal use `for-each-target`).
+  `amounts` condition isn't evaluated in a cost context (`selfCostReduction`; Hagra Mauling and Thryx are
+  authored on `opponent-controls`; a dynamic `{ amount }` operand in a static's `affects.filter` works,
+  Ensnaring Bridge, `attack-restriction-hand-size.test.ts`); `of-player "that-player"` in `whileCondition`
+  never holds on a `cast-spell` trigger (The Council of Four uses a filter); `put-into-graveyard`'s `target`
+  is one object by its type, not a set (Glimpse the Impossible and Mnemonic Betrayal use `for-each-target`).
+  No pool card needs any of the three. Built 2026-11-17: a `would-draw` with `instruction: { atLeast }`
+  honours `whileHandAtMost` and `whileLibraryEmpty` (`drawInstructionReplaced`; Phial of Galadriel is back on
+  it).
 
 - **Mulligans are declared at once, and two opening-hand rules are loose** (found 2026-11-01, all older
   than the finding). Rule 103.5 has each player declare in turn order; `beginMulligans` (`game.ts`) asks in
@@ -154,7 +159,7 @@ shuffle them and cloak one, but an object keeps its id through the exile, so a c
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the
 leak. Needs a design call: a fresh id at the shuffle, or redaction in `view.ts`. Found 2026-11-04.
 
-**Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked at the two effects that make tokens as a resolution step, `create-token` and `create-token-copy` (a batch's copies aside). Tokens made inside another operation, amass (701.47), incubate, encore, myriad, populate and the like, go straight through `Game.createTokens`, which can't stop to ask: the replacement isn't offered for them, and only the tokens of a token doubler apply there (rule 614.1a). Moonlit Meditation's the only card with it so far. The same callers pass `createTokens` no `followUp`, so a token of theirs that a static gives riot (rule 702.136a) isn't asked and takes haste; a `create-token` effect's token is asked since 2026-11-16.
+**Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked where the effect's controller makes tokens as a resolution step: `create-token`, `create-token-copy` (a batch's copies aside; myriad's copy is one of these, and what's made instead keeps "attacking that player" since 2026-11-17), amass, incubate, populate and encore. It isn't offered for tokens another player creates: a `create-token` or amass with `who`, and a gift's Fish, Food, Treasure or Octopus (`Game.createTokens` called for the recipient) — that player's Moonlit Meditation is never asked, since the question is the effect's controller's and the players of a scope aren't asked in turn. Moonlit Meditation's the only card with it so far. The direct callers (amass's Army, incubate's Incubator, a gift's tokens) pass `createTokens` no `followUp`, so a token of theirs that a static gives riot (rule 702.136a) isn't asked and takes haste; a `create-token` effect's token is asked since 2026-11-16. Amass would need the rest of its instruction (the counters on the Army) to wait on the answer.
 
 **"Each player may" acts on each answer before asking the next.** Rule 101.4: players choosing
 at the same time decide in APNAP order, then the actions happen together. `each-player-may`
@@ -163,13 +168,9 @@ so a choice raised by one player's draw (dredge, a draw replacement) comes befor
 answers. The seven tempting offers (Tempt with Bunnies among them) and Kwain share the shape.
 Found 2026-11-06, building Tempt with Bunnies.
 
-**`thenCounters` reaches tokens a replacement adds.** `finishTokenCopies` (`game.ts`) puts a token copy's `thenCounters` on every token in `made`, which holds the copies and the tokens a would-create-token replacement added (Chatterfang's Squirrels) in one flat list. Tokens made *instead* should keep them (Divine Visitation's ruling: what the creating effect specifies still applies); tokens made *in addition* should not. `withCounters` already tells them apart through `PlannedTokens.inPlace` (2026-11-11, Littjara Mirrorlake); `thenCounters` needs `made` split the same way.
-
 **A door's unlock timestamp is read by some statics only.** `staticTimestamp` (`characteristics.ts`, Steaming Sauna's ruling, 2026-11-11) is read in `scanContributingStaticSources` and `Game.maxHandSizeOf`. A door static that grants a type (layer 4) or changes another rule would still take the Room's own timestamp; no Room in the pool has one. A Room whose text box was exchanged also falls back to the Room's timestamp.
 
 **A back face spawned by name isn't a working permanent.** `debugSpawn("The Myriad Pools")` could not tap for mana; spawning the front and transforming it worked. Seen only in a test (B297); not chased.
-
-**Opposition Agent and a search of every library.** Jace, Architect of Thought's −8 searches each player's library through one `choose-from-zone` (`search-library`'s `eachLibrary`, `Game.beginEachLibrarySearch`, 2026-11-13). If an opponent controls Opposition Agent, its search control begins when the searcher's own library is searched, but the Agent's "you may play those cards for as long as they remain exiled" isn't granted for a find from that library: the find is cast through `cast-now` as Jace says, never offered to the Agent's controller.
 
 
 
@@ -178,8 +179,6 @@ Found 2026-11-06, building Tempt with Bunnies.
 
 **An object's own "instead" against an exile replacement isn't asked.** Found in the third lanes run (2026-11-14, Quintorius, Loremaster): Blightsteel Colossus (`shufflesItselfInstead`) and Gravebane Zombie (`ownDestinationInstead`) apply their own replacement first when Rest in Peace or Leyline of the Void would also apply. Neither is a self-replacement effect (rule 614.15: they're static abilities, not part of a resolving spell's instructions), so the owner chooses which applies first (616.1, 616.1e). Quintorius's `bottomAfter` now asks (`askBottomAfterOrder`), except when the spell is countered by another spell's resolution, where nothing can be asked mid-resolution; the same question for those two, raised from `moveObjectUncached`, would need the move deferred as the commander's 903.9b move is. The same for life: Strong's radiation replacement goes ahead of Enduring Angel's `toZeroOrLess` unasked (`Game.lifeToZeroInstead`).
 
-**Transforming keeps a permanent's timestamp.** From the third lanes run (2026-11-14, Havengul Laboratory's agent): rule 613.7g gives a double-faced permanent a new timestamp each time it transforms or converts, but `game.ts` keeps the old one (the transform doc near `permanent-transformed`, "Same object, same timestamp"), so a transformed permanent's own continuous effects order wrongly against later ones in the same layer. And created tokens record no `EntrySource` (only `moveObject` sets the entry's `by`), so "created with [this ability]" (rule 607.2c) can't be read for a token.
-
-**A card exiled with time counters but not by suspend isn't heard as suspended.** From the night's key group two (2026-11-14, Watcher of Hours): rule 702.62b makes a card suspended if it has suspend, is in exile and has a time counter on it, however it got there (Alaundo the Seer exiles with time counters). The engine's `whileSuspended` trigger scan reaches only cards that were suspended by the suspend keyword, so Aeon Chronicler, Benalish Commander and the other "while suspended" abilities aren't heard on such a card.
+**A created token records no entry source.** Created tokens record no `EntrySource` (only `moveObject` sets the entry's `by`), so "created with [this ability]" (rule 607.2c) can't be read for a token. From the third lanes run (2026-11-14, Havengul Laboratory's agent); the other half of its line, a transformed permanent's timestamp, is built (2026-11-17, `COMPLETED.md`).
 
 **A Notion Thief redirect isn't keyed for rule 614.5.** Found 2026-11-16 (B333, Chains of Mephistopheles): a card that a would-draw effect replacement makes a player draw is a new draw event, which that replacement can't replace again but any other can (614.5, 616.2) — built for effect replacements (`ParkedSteps.replacing`). Notion Thief's redirect isn't keyed the same way, so with Chains and two Thieves of different controllers a redirect can apply again to the card Chains makes a player draw. Only 3+ players reach it. The fix: seed `drawCard`'s `applied` map from `applyingReplacements`, and carry it through the questions the draw asks later.

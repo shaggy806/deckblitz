@@ -415,11 +415,11 @@ export interface ConditionOptions {
    */
   readonly includeSelf?: boolean;
   /**
-   * The source's timestamp when the ability triggered
-   * (`GameObject.sourceTimestamp`), for a `source-zone` condition's
+   * The source's stint when the ability went on the stack
+   * (`GameObject.sourceStackedStint`), for a `source-zone` condition's
    * `sameObject`. Passed only by a triggered ability's resolution check.
    */
-  readonly sourceTimestamp?: number;
+  readonly sourceStint?: number;
   /**
    * The chosen targets of the ability resolving, for a `controls`
    * condition's `excludeTarget`. Passed only by a resolution context (a
@@ -834,7 +834,7 @@ function evalStaticCondition(
     case "increment": {
       const id = opts.triggerObject;
       if (id === undefined || source.zone !== "battlefield") return false;
-      if (opts.sourceTimestamp !== undefined && source.timestamp !== opts.sourceTimestamp) return false;
+      if (opts.sourceStint !== undefined && (source.zoneChangeCount ?? 0) !== opts.sourceStint) return false;
       const spell = state.objects[id];
       if (spell === undefined) return false;
       const stint = opts.triggerSpellStint;
@@ -1275,18 +1275,18 @@ function evalStaticCondition(
       return (
         condition.zones.includes(source.zone) &&
         (condition.sameObject !== true ||
-          opts.sourceTimestamp === undefined ||
-          source.timestamp === opts.sourceTimestamp)
+          opts.sourceStint === undefined ||
+          (source.zoneChangeCount ?? 0) === opts.sourceStint)
       );
     case "chosen-on-enter":
       // Which of its abilities the permanent has (a Siege's, Mirrodin
       // Besieged's), not an "if" of the ability's own. One that has triggered
       // exists independently of its source (rule 113.7a): asked again as it
-      // resolves (`sourceTimestamp`, given only then) once the source has
+      // resolves (`sourceStint`, given only then) once the source has
       // left the battlefield, or left and come back as a new object, it holds.
       if (
-        opts.sourceTimestamp !== undefined &&
-        (source.zone !== "battlefield" || source.timestamp !== opts.sourceTimestamp)
+        opts.sourceStint !== undefined &&
+        (source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== opts.sourceStint)
       ) {
         return true;
       }
@@ -2038,6 +2038,20 @@ export function sharedAbilitiesOnBattlefield(
       for (const color of c.hexproofFrom.colors) hexColors.add(color);
       for (const type of c.hexproofFrom.types) hexTypes.add(type);
       for (const filter of c.hexproofFrom.filters) hexFilters.set(JSON.stringify(filter), filter);
+      // A card that isn't on the battlefield still has its own "hexproof
+      // from [quality]" (rule 113.6: it doesn't function there, but "a
+      // creature card in your graveyard has" it — Bleeding Effect's ruling).
+      const card = state.objects[id];
+      if (card !== undefined && card.zone !== "battlefield") {
+        for (const own of registry.get(rulesTextName(card)).static) {
+          const h = own.hexproofFrom;
+          if (h === undefined || own.affects?.scope !== "self" || own.condition !== undefined || isQualifiedHexproof(h)) continue;
+          for (const color of h.colors ?? []) hexColors.add(color);
+          if (h.ownColors === true) for (const color of c.colors) hexColors.add(color);
+          for (const type of h.types ?? []) hexTypes.add(type);
+          if (h.filter !== undefined) hexFilters.set(JSON.stringify(h.filter), h.filter);
+        }
+      }
     }
     if (share.landwalk === true) {
       for (const [keyword] of LANDWALK) if (c.keywords.has(keyword)) keywords.add(keyword);
