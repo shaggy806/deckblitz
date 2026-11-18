@@ -14,6 +14,17 @@ import { HostRole } from "./host.js";
 import { allocateRoomCode } from "./room-code.js";
 import type { RoomKind } from "./room-host.js";
 
+/**
+ * Fresh random text for a game's `idSalt` (the engine's `GameConfig`): what
+ * its cards' object ids are drawn from, so that an id in a hand says nothing
+ * about which card of its owner's list it is. `getRandomValues`, not
+ * `randomUUID`: a solo game's worker may run on a page that isn't a secure
+ * context, where the second doesn't exist.
+ */
+export function freshIdSalt(): string {
+  return Array.from(crypto.getRandomValues(new Uint32Array(4)), (word) => word.toString(16)).join("-");
+}
+
 export class RoomManager {
   private readonly rooms = new Map<string, Room | PendingRoom>();
   /** Scenario builder rooms (`builder.ts`), by code — each also in `rooms`,
@@ -106,7 +117,7 @@ export class RoomManager {
    * build the `Game` and turn it into a real `Room`. */
   createPending(players: number, config: PendingGameConfig, hostToken?: string, roomId?: string): PendingRoom {
     const id = this.claimCode(roomId, "lobby");
-    const room = this.build(id, () => new PendingRoom(id, players, config, hostToken));
+    const room = this.build(id, () => new PendingRoom(id, players, { idSalt: freshIdSalt(), ...config }, hostToken));
     this.rooms.set(id, room);
     this.created += 1;
     this.added(id);
@@ -183,6 +194,7 @@ export class RoomManager {
       ...recipe.config,
       registry: cardRegistry(),
       seed: Math.floor(Math.random() * 0x100000000),
+      idSalt: freshIdSalt(),
       startingPlayer:
         recipe.firstPlayer === "random" ? players[Math.floor(Math.random() * players.length)] : recipe.firstPlayer,
     });

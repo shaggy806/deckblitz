@@ -105,3 +105,53 @@ describe("RoomService room events", () => {
     });
   });
 });
+
+describe("RoomService create-room", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("opens two to four seats whatever a client sends for players", () => {
+    const manager = new RoomManager({ pacing: "immediate" });
+    const { service, sent } = serviceWith(manager);
+    const seatsFor = (players: unknown): number => {
+      sent.length = 0;
+      service.handle(1, { type: "create-room", hostToken: "host", players } as never);
+      const created = sent.find((s) => s.message.type === "room-created")?.message;
+      if (created?.type !== "room-created") throw new Error("no room-created");
+      service.handle(1, { type: "join-room", roomId: created.roomId, hostToken: "host" });
+      const joined = sent.find((s) => s.message.type === "room-joined")?.message;
+      if (joined?.type !== "room-joined") throw new Error("no room-joined");
+      return joined.seats.length;
+    };
+    // Not a number at all (a string once made a room with no seats), or out of range.
+    expect(["lots", {}, null, Number.NaN, undefined, 0, -5, 1].map(seatsFor)).toEqual([2, 2, 2, 2, 2, 2, 2, 2]);
+    expect([3, 2.9, 4, 1e9].map(seatsFor)).toEqual([3, 2, 4, 4]);
+  });
+
+  it("takes no seed from the client, and salts every game's object ids", () => {
+    const manager = new RoomManager({ pacing: "immediate" });
+    const { service, sent } = serviceWith(manager);
+    const createPending = vi.spyOn(manager, "createPending");
+    const build = vi.spyOn(Game, "create");
+    for (const conn of [1, 2]) {
+      sent.length = 0;
+      service.handle(conn, { type: "create-room", hostToken: `host-${conn}`, seed: 1 } as never);
+      const created = sent.find((s) => s.message.type === "room-created")?.message;
+      if (created?.type !== "room-created") throw new Error("no room-created");
+      const roomId = created.roomId;
+      service.handle(conn, { type: "join-room", roomId, hostToken: `host-${conn}` });
+      service.handle(conn, { type: "claim-seat", roomId, seat: ALICE, clientToken: `token-${conn}`, ready: true });
+      service.handle(conn, { type: "add-bot", roomId, seat: BOB });
+      service.handle(conn, { type: "start-game", roomId });
+      expect(sent.filter((s) => s.message.type === "error")).toEqual([]);
+    }
+    const seeds = createPending.mock.calls.map(([, config]) => config.seed);
+    expect(seeds).toHaveLength(2);
+    expect(seeds.every((seed) => seed === 1)).toBe(false);
+
+    // Each game dealt from a lobby is given a salt of its own.
+    const salts = build.mock.calls.map(([config]) => config.idSalt);
+    expect(salts.length).toBeGreaterThanOrEqual(2);
+    expect(salts.every((salt) => typeof salt === "string" && salt.length >= 8)).toBe(true);
+    expect(new Set(salts).size).toBe(salts.length);
+  });
+});

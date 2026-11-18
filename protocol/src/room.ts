@@ -161,7 +161,6 @@ export interface RoomSettings {
 export type ClientMessage =
   | {
       readonly type: "create-room";
-      readonly seed?: number;
       /** How many seats the room should open with (2-4). Defaults to 2, which
        * is what the client sends — the table is sized on the seat board now
        * (`add-seat`/`remove-seat`), where you can see what a seat is. Kept as

@@ -485,13 +485,16 @@ export class RoomService {
     const manager = this.manager;
     switch (message.type) {
       case "create-room": {
-        const numPlayers = Math.min(4, Math.max(2, message.players ?? 2));
-        // A real room should shuffle freshly every time — only fall back
-        // to Game.create's fixed internal default (meant for scripts/tests
-        // that omit a seed on purpose) when nobody asked for a specific
-        // one. Without this, every "Create Room" click reused that same
-        // constant and every game opened with an identical shuffle.
-        const seed = message.seed ?? Math.floor(Math.random() * 0x100000000);
+        // Two to four seats whatever a client sends: anything that isn't a
+        // number counts as the default (`Math.max` made NaN of a string, and
+        // a room with no seats of that).
+        const asked = typeof message.players === "number" && Number.isFinite(message.players) ? message.players : 2;
+        const numPlayers = Math.min(4, Math.max(2, Math.floor(asked)));
+        // A real room shuffles freshly every time, and the seed is the
+        // server's alone. The message has no field for one: the engine is
+        // deterministic, so a client that named the seed could work out
+        // every shuffle before it happened.
+        const seed = Math.floor(Math.random() * 0x100000000);
         const room = manager.createPending(
           numPlayers,
           {
