@@ -22438,3 +22438,30 @@ describe("twice a count as a CDA, and the first instant or sorcery each turn che
     });
   });
 });
+
+describe("choose left or right on each upkeep, the last chosen direction read (Mystic Barrier)", () => {
+  it("two triggers noting the word, and Pramikon's static", () => {
+    const barrier = parseFace(
+      {
+        name: "Mystic Barrier",
+        type_line: "Enchantment",
+        mana_cost: "{4}{W}",
+        oracle_text:
+          "When this enchantment enters and at the beginning of your upkeep, choose left or right.\nEach player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(barrier.complete).toBe(true);
+    expect(barrier.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { on: "step-begins", step: "upkeep", who: "you" },
+    ]);
+    expect(barrier.triggered[1].effect).toMatchObject({
+      kind: "modal",
+      minModes: 1,
+      maxModes: 1,
+      modes: [{ effect: { kind: "note", word: "left" } }, { effect: { kind: "note", word: "right" } }],
+    });
+    expect(barrier.static[0]).toMatchObject({ affects: { scope: "self" }, attackOnlyNearestOpponent: true });
+  });
+});

@@ -2943,7 +2943,8 @@
   "amount:this-way-total-power-of-cards",
   "trigger:cards-put-into-library",
   "effect:delayed-trigger-on-targeted-creature-damage",
-  "trigger:dies-greatest-power-lki"
+  "trigger:dies-greatest-power-lki",
+  "effect:rechoose-direction-each-upkeep"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

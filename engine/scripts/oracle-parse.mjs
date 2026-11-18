@@ -2021,6 +2021,11 @@ export function parseTrigger(clause) {
   if (/^When(?:ever)? ~ (?:enters or attacks|enter or attack)$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
   // Two abilities, one for each event (Gulping Scraptrap, Chaos Defiler).
   if (/^When ~ enters or dies$/.test(c)) return [...self("enters-battlefield"), ...self("dies")];
+  // "When ~ enters and at the beginning of your upkeep" (Mystic Barrier,
+  // Gathering Stone): two abilities.
+  if (/^When ~ enters and at the beginning of your upkeep$/.test(c)) {
+    return [...self("enters-battlefield"), { on: "step-begins", step: "upkeep", who: "you" }];
+  }
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");
   // "When enchanted creature dies" (False Demise), "whenever equipped creature
   // dies" (Oathkeeper, Takeno's Daisho): what this is attached to.
@@ -10254,6 +10259,16 @@ export function parseEffect(text, outer) {
   if (massGrant !== null) return { effect: massGrant, todo: [], hints: [] };
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
+  // "Choose left or right" as it resolves (rule 608.2d), the answer noted on
+  // the source as its last chosen direction (Mystic Barrier).
+  if (/^choose left or right\.$/i.test(text)) {
+    const mode = (word, label, about) => ({ text: `${label} — the ${about} opponent in turn order`, effect: { kind: "note", word } });
+    return {
+      effect: { kind: "modal", minModes: 1, maxModes: 1, modes: [mode("left", "Left", "next"), mode("right", "Right", "previous")] },
+      todo: [],
+      hints: [],
+    };
+  }
   // Timesifter's three sentences: one contest, ties repeated.
   if (
     /^Each player exiles the top card of their library\. The player who exiled the card with the greatest mana value takes an extra turn after this one\. If two or more players' cards are tied for greatest, the tied players repeat this process until the tie is broken\.$/.test(
@@ -22521,6 +22536,14 @@ function parseStatic(line, text) {
     },
     "Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.": {
       prohibits: [{ act: "activate", who: "enchanted-player", except: ["mana", "loyalty"], anyZone: true }],
+    },
+    // The direction the source chose (Pramikon's as it entered, Mystic
+    // Barrier's last one): a rule for every player.
+    "Each player may attack only the nearest opponent in the chosen direction and planeswalkers controlled by that opponent.": {
+      attackOnlyNearestOpponent: true,
+    },
+    "Each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.": {
+      attackOnlyNearestOpponent: true,
     },
   }[line];
   if (fixed !== undefined) return { affects: { scope: "self" }, ...fixed, text };

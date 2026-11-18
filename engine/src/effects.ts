@@ -10111,10 +10111,19 @@ export type EffectSpec =
        * With `manaTypeSpent` instead of `amount`: "note the **type of mana**
        * spent to pay this activation cost" (Jeweled Amulet) — W, U, B, R, G
        * or C (rule 106.1b), kept in the same place, read back by `add-mana`'s
-       * `"chosen"` ("add one mana of this artifact's last noted type"). */
+       * `"chosen"` ("add one mana of this artifact's last noted type").
+       *
+       * With `word` instead: a fixed word the source keeps as **the last
+       * chosen** one, in the same place, replacing the one before — Mystic
+       * Barrier's "when this enchantment enters and at the beginning of your
+       * upkeep, choose left or right" is a two-mode `modal` (chosen as it
+       * resolves, rule 608.2d) whose modes note `"left"` and `"right"`, read
+       * by its `attackOnlyNearestOpponent` static as "the last chosen
+       * direction", as an "as this enters" `chooseOnEnter` answer is. */
       readonly kind: "note";
       readonly amount?: EffectAmount;
       readonly manaTypeSpent?: true;
+      readonly word?: string;
     }
   | {
       /**
@@ -23696,6 +23705,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.cumulativeUpkeepUnpaid();
       return;
     case "note": {
+      if (spec.word !== undefined) {
+        ctx.noteOnSource(spec.word);
+        return;
+      }
       if (spec.amount !== undefined) {
         ctx.noteOnSource(String(signedAmountValue(spec.amount, ctx)));
         return;
