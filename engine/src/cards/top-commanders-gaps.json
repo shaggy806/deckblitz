@@ -3042,7 +3042,8 @@
   "filter:has-awaken",
   "effect:prohibit-abilities-permanent",
   "effect:face-down-linked-exile-source-controller-looks",
-  "static:play-from-linked-exile-once-per-turn"
+  "static:play-from-linked-exile-once-per-turn",
+  "effect:look-and-choose-then-always"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
