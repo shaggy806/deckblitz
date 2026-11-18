@@ -3019,7 +3019,8 @@
   "effect:search-zones-chosen-by-target-player",
   "effect:grant-jump-start",
   "static:counters-remain-across-zones",
-  "keyword:conditional-flashback"
+  "keyword:conditional-flashback",
+  "replacement:damage-replaced-not-prevented"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
