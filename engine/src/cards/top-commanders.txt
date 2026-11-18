@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-985 already implemented / 15 missing
+987 already implemented / 13 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -656,7 +656,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  650  Vishgraz, the Doomhive                          5156 decks  {2}{W}{B}{G}     Legendary Creature — Phyrexian Insect
 [x]  651  Ukkima, Stalking Shadow                         5155 decks  {1}{U}{B}        Legendary Creature — Whale Wolf
 [x]  652  Herigast, Erupting Nullkite                     5144 decks  {9}              Legendary Creature — Eldrazi Dragon
-[ ]  653  Noctis, Heir Apparent                           5133 decks  {W}{U}{B}        Legendary Creature — Human Noble
+[x]  653  Noctis, Heir Apparent                           5133 decks  {W}{U}{B}        Legendary Creature — Human Noble
 [x]  654  Liberty Prime, Recharged                        5127 decks  {2}{U}{R}{W}     Legendary Artifact Creature — Robot
 [x]  655  Plagon, Lord of the Beach                       5123 decks  {2}{U}           Legendary Creature — Starfish Wizard
 [x]  656  T'Challa, the Black Panther                     5109 decks  {1}{G}{W}        Legendary Creature — Human Noble Hero
@@ -722,7 +722,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  716  Dionus, Elvish Archdruid                        4633 decks  {3}{G}           Legendary Creature — Elf Druid
 [x]  717  Rukarumel, Biologist                            4626 decks  {W}{U}{B}{R}{G}  Legendary Creature — Human Wizard
 [x]  718  Sliver Hivelord                                 4617 decks  {W}{U}{B}{R}{G}  Legendary Creature — Sliver
-[ ]  719  Zevlor, Elturel Exile                           4586 decks  {1}{U}{B}{R}     Legendary Creature — Tiefling Warrior
+[x]  719  Zevlor, Elturel Exile                           4586 decks  {1}{U}{B}{R}     Legendary Creature — Tiefling Warrior
 [ ]  720  Vazi, Keen Negotiator                           4578 decks  {2}{B}{R}{G}     Legendary Creature — Human Advisor
 [x]  721  Frodo, Sauron's Bane                            4567 decks  {W}              Legendary Creature — Halfling Citizen
 [x]  722  Carmen, Cruel Skymarcher                        4555 decks  {3}{W}{B}        Legendary Creature — Vampire Soldier
