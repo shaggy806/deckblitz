@@ -23131,9 +23131,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.additionalLandDrops(amountValue(spec.amount, ctx));
       return;
     case "exchange-hand-and-library": {
-      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
-        if (target.kind === "player") ctx.exchangeHandAndLibrary(target.player);
-      }
+      // One instruction: every player's exchange is one event (rule 603.2c).
+      ctx.simultaneously(() => {
+        for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
+          if (target.kind === "player") ctx.exchangeHandAndLibrary(target.player);
+        }
+      });
       return;
     }
     case "shuffle-library": {

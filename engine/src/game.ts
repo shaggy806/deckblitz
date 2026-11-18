@@ -2920,6 +2920,9 @@ export class Game {
   /** The same for cards put into exile, collected alongside — see
    * `withGraveyardEnterBatch`. */
   private exileEnterBatch: { object: ObjectId; from: ZoneType; owner: PlayerId; token?: true }[] | null = null;
+  /** The same for cards put into libraries from another zone, collected
+   * alongside (`cards-put-into-library`). */
+  private libraryEnterBatch: { object: ObjectId; from: ZoneType; owner: PlayerId }[] | null = null;
   /** While a `cards-left-graveyard` event is being announced, each of its
    * cards as it was in the graveyard — what a `leaves-graveyard` trigger's
    * filter is matched against (rule 603.10a). `null` the rest of the time. */
@@ -8168,7 +8171,9 @@ export class Game {
 
     if (!keep) {
       const hand = [...this.state.zones.perPlayer[player].hand];
-      for (const id of hand) this.moveObject(id, "library");
+      this.withLibraryEnterBatch(() => {
+        for (const id of hand) this.moveObject(id, "library");
+      });
       this.state.zones.perPlayer[player].library = shuffle(
         this.state.zones.perPlayer[player].library,
         this.rng,
@@ -8242,7 +8247,9 @@ export class Game {
       throw new Error("unreachable: whyCannotPutOnBottom should have caught this");
     }
 
-    for (const id of cards) this.moveObject(id, "library");
+    this.withLibraryEnterBatch(() => {
+      for (const id of cards) this.moveObject(id, "library");
+    });
     this.emit({ type: "cards-put-on-bottom", player, objects: [...cards] });
     const hands = { ...awaiting.hands };
     delete hands[player];
@@ -12849,7 +12856,11 @@ export class Game {
     thenOrder?: { readonly cards: readonly ObjectId[]; readonly position: "top" | "bottom" },
   ): boolean {
     if (!this.libraryOrderMatters(cards)) {
-      if (position === "bottom") for (const id of cards) this.putOnLibrary(id, "bottom");
+      if (position === "bottom") {
+        this.withLibraryEnterBatch(() => {
+          for (const id of cards) this.putOnLibrary(id, "bottom");
+        });
+      }
       return false;
     }
     this.state.awaiting = {
@@ -35168,7 +35179,8 @@ export class Game {
       isLeaveEvent(event) ||
       event.type === "permanents-died" ||
       event.type === "permanents-left" ||
-      event.type === "permanents-phased-out";
+      event.type === "permanents-phased-out" ||
+      event.type === "cards-put-into-library";
     for (const id of candidates) {
       const live = this.state.objects[id];
       if (live === undefined) continue;
@@ -35257,7 +35269,7 @@ export class Game {
         if (
           onlyLookBack &&
           !LOOK_BACK_TRIGGERS.has(ability.trigger.on) &&
-          !(ability.trigger.on === "event" && ability.trigger.event === "phases-out")
+          !(ability.trigger.on === "event" && (ability.trigger.event === "phases-out" || ability.trigger.event === "put-into-library"))
         ) {
           return;
         }
@@ -36394,6 +36406,19 @@ export class Game {
       return new Set(
         event.left.map(({ object }) => object).filter((id) => (this.state.objects[id]?.zone ?? "battlefield") !== "battlefield"),
       );
+    }
+    // "Whenever one or more cards are put into a library" looks back when one
+    // of them was seen by all as it went — anything but a card from a hand
+    // (rule 603.10a): what left the battlefield in that event, into a library
+    // or elsewhere with it, sees it. Wan Shi Tong, All-Knowing tucking itself
+    // makes its Spirits.
+    if (event.type === "cards-put-into-library") {
+      if (event.arrivals.every((a) => a.from === "hand")) return EMPTY_ID_SET;
+      const left = [
+        ...event.arrivals.filter((a) => a.from === "battlefield").map((a) => a.object),
+        ...(this.leaveBatch?.left ?? []),
+      ];
+      return new Set(left.filter((id) => (this.state.objects[id]?.zone ?? "battlefield") !== "battlefield"));
     }
     const batch = this.leaveBatch;
     if (batch === null || !isLeaveEvent(event) || !batch.left.includes(event.object)) {
@@ -42564,7 +42589,9 @@ export class Game {
         // order" (Herald of Amity): `moveObject` appends to a library's
         // array, whose index 0 is the top — each lands on its owner's
         // bottom, in shuffle order.
-        for (const id of shuffle(moving, this.rng)) this.moveObject(id, "library");
+        this.withLibraryEnterBatch(() => {
+          for (const id of shuffle(moving, this.rng)) this.moveObject(id, "library");
+        });
         this.state.rngState = this.rng.seed;
       },
       // Damage too: Chandra's Ignition's creature deals it to each other
@@ -43756,8 +43783,10 @@ controlledBy,
         if (zones === undefined || this.state.players[player]?.hasLost !== false) return;
         const fromHand = [...zones.hand];
         const fromLibrary = [...zones.library];
-        for (const id of fromHand) this.moveObject(id, "library");
-        for (const id of fromLibrary) this.moveObject(id, "hand");
+        this.withLibraryEnterBatch(() => {
+          for (const id of fromHand) this.moveObject(id, "library");
+          for (const id of fromLibrary) this.moveObject(id, "hand");
+        });
       },
       revealLibraryTop: (player, n) => {
         // A token shuffled in this way is still there until state-based
@@ -52874,9 +52903,11 @@ controlledBy,
    * order. A commander's owner answers rule 903.9b after the rest have moved,
    * so one who declines still lands at random among them, not last. */
   private exiledToBottomRandomly(cards: readonly ObjectId[]): void {
-    for (const id of shuffle(cards, this.rng)) {
-      this.moveObject(id, "library", { libraryPlacement: { randomlyAmong: cards } });
-    }
+    this.withLibraryEnterBatch(() => {
+      for (const id of shuffle(cards, this.rng)) {
+        this.moveObject(id, "library", { libraryPlacement: { randomlyAmong: cards } });
+      }
+    });
     this.state.rngState = this.rng.seed;
     // Announced per owner, in the order they were exiled, for the client to
     // fly back onto each pile (`cards-returned-to-library`).
@@ -53031,7 +53062,11 @@ controlledBy,
       case "bottom-any-order": {
         // Ripple's "on the bottom of your library in any order" (rule
         // 702.60a): the owner orders them (401.4), when that's a choice.
-        if (exiled) for (const id of still) this.moveObject(id, "library", { libraryPlacement: "bottom" });
+        if (exiled) {
+          this.withLibraryEnterBatch(() => {
+            for (const id of still) this.moveObject(id, "library", { libraryPlacement: "bottom" });
+          });
+        }
         const inLibrary = still.filter((id) => this.state.objects[id]?.zone === "library");
         this.beginLibraryOrder(owner, inLibrary, "bottom");
         return;
@@ -53056,7 +53091,11 @@ controlledBy,
         return;
       }
       case "shuffle":
-        if (exiled) for (const id of still) this.moveObject(id, "library", { libraryPlacement: "shuffle" });
+        if (exiled) {
+          this.withLibraryEnterBatch(() => {
+            for (const id of still) this.moveObject(id, "library", { libraryPlacement: "shuffle" });
+          });
+        }
         this.shuffleLibraryOf(owner);
         return;
     }
@@ -71748,6 +71787,11 @@ controlledBy,
     if (to === "exile" && previousZone !== "exile" && (!object.isToken || previousZone === "battlefield")) {
       this.noteExileArrival(id, previousZone);
     }
+    // …or into a library from another zone: a card moved within one (a
+    // scry, a shuffle) isn't put into it.
+    if (to === "library" && previousZone !== "library" && !object.isToken) {
+      this.noteLibraryArrival(id, previousZone);
+    }
     // …or into a hand: the `"put-into-hand"` this-way kind's record (a draw
     // clears it again — `drawCardRaw`).
     if (to === "hand" && previousZone !== "hand" && !object.isToken) {
@@ -71791,19 +71835,52 @@ controlledBy,
     }
     const batch: { object: ObjectId; from: ZoneType }[] = [...(held?.seed?.graveyard ?? [])];
     const exiled: { object: ObjectId; from: ZoneType; owner: PlayerId; token?: true }[] = [...(held?.seed?.exile ?? [])];
+    const library: { object: ObjectId; from: ZoneType; owner: PlayerId }[] = [...(held?.seed?.library ?? [])];
     this.graveyardEnterBatch = batch;
     this.exileEnterBatch = exiled;
+    this.libraryEnterBatch = library;
     try {
       fn();
     } finally {
       this.graveyardEnterBatch = null;
       this.exileEnterBatch = null;
+      this.libraryEnterBatch = null;
     }
-    if (held?.hold() === true) return batch.length + exiled.length > 0 ? { graveyard: batch, exile: exiled } : null;
+    if (held?.hold() === true) {
+      return batch.length + exiled.length + library.length > 0 ? { graveyard: batch, exile: exiled, library } : null;
+    }
     if (batch.length > 1) this.queueGraveyardOrders(batch.map((arrival) => arrival.object));
     if (batch.length > 0) this.emit({ type: "cards-put-into-graveyard", arrivals: batch });
     if (exiled.length > 0) this.emit({ type: "cards-put-into-exile", arrivals: exiled, ...this.exileCause() });
+    this.announceLibraryArrivals(library);
     return null;
+  }
+
+  /** Card `id` was put into a library from `from` — `noteGraveyardArrival`'s
+   * twin, announced with the rest of the move under way, or on its own. */
+  private noteLibraryArrival(id: ObjectId, from: ZoneType): void {
+    const arrival = { object: id, from, owner: this.state.objects[id].owner };
+    if (this.libraryEnterBatch !== null) this.libraryEnterBatch.push(arrival);
+    else this.announceLibraryArrivals([arrival]);
+  }
+
+  /** One `cards-put-into-library` for `arrivals`, if there are any. A
+   * commander its owner may yet send to the command zone instead (rule
+   * 903.9b) isn't among them: its move is noted once it's made. */
+  private announceLibraryArrivals(arrivals: readonly { object: ObjectId; from: ZoneType; owner: PlayerId }[]): void {
+    if (arrivals.length > 0) this.emit({ type: "cards-put-into-library", arrivals: [...arrivals] });
+  }
+
+  /**
+   * Carry out `fn` as one simultaneous move of cards into libraries (and
+   * graveyards and exile, `withGraveyardEnterBatch`): what one instruction
+   * puts there together — a hand put back, the rest of a look on the bottom
+   * — is one `cards-put-into-library`, so "whenever one or more cards are
+   * put into a library" triggers once for it. Nested calls join the outer
+   * move.
+   */
+  private withLibraryEnterBatch(fn: () => void): void {
+    this.withGraveyardEnterBatch(fn);
   }
 
   /**

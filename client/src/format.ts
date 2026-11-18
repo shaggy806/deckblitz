@@ -112,6 +112,7 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   // The dying, milling or discarding that put them there has its own line.
   'cards-put-into-graveyard',
   'cards-put-into-exile',
+  'cards-put-into-library',
   // Bookkeeping: identical tokens drawn as one stack again.
   'tokens-folded',
   // Bookkeeping for "whenever you pay life" — the life change has its own line.
@@ -750,6 +751,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} puts ${event.objects.length === 1 ? 'an exiled card' : `${event.objects.length} exiled cards`} on the bottom of their library`
     case 'cards-shuffled-into-library':
       return `${who(event.player)} shuffles ${event.objects.map(name).join(', ')} into their library`
+    case 'cards-put-into-library':
+      // Not named: a card from a hand stays hidden on its way there.
+      return `${event.arrivals.length === 1 ? 'A card is' : `${event.arrivals.length} cards are`} put into a library`
     case 'commander-zone-decision': {
       // A graveyard or exile it's already in (rule 903.9a); a hand or library
       // it hasn't reached (903.9b).

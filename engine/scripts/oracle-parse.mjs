@@ -2996,6 +2996,11 @@ export function parseTrigger(clause) {
   if (/^Whenever you choose to put one or more cards on the bottom of your library while scrying$/.test(c)) {
     return [{ on: "event", event: "scry-bottoms", who: "you" }];
   }
+  // Any move of cards into libraries from other zones, never a scry or a
+  // shuffle (Wan Shi Tong, All-Knowing; Dutiful Knowledge Seeker).
+  if (/^Whenever one or more cards are put into a library from anywhere$/.test(c)) {
+    return [{ on: "event", event: "put-into-library", batched: true }];
+  }
   // Rule 714.2e, as it triggers (Historian's Boon).
   if (/^Whenever the final chapter ability of a Saga you control triggers$/.test(c)) {
     return [{ on: "event", event: "final-chapter-triggers", who: "you-control" }];

@@ -20653,6 +20653,12 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ).toEqual([{ on: "event", event: "scry-bottoms", who: "you" }]);
   });
 
+  it("reads cards put into a library from anywhere (Wan Shi Tong, All-Knowing)", () => {
+    expect(parseTrigger("Whenever one or more cards are put into a library from anywhere")).toEqual([
+      { on: "event", event: "put-into-library", batched: true },
+    ]);
+  });
+
   it("reads a counter of each opponent's spell and ability unless paid for (Whirlwind Denial)", () => {
     const denial = parseFace({
       name: "Test Card",

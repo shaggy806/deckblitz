@@ -2895,7 +2895,8 @@ export interface LeftBattlefield {
 /** The cards a simultaneous event has put into graveyards and exile so far,
  * held unannounced while a move of it waits on an optional replacement's
  * answer: "whenever one or more cards are put into …" sees the whole event
- * once (`cards-put-into-graveyard`, `cards-put-into-exile`). */
+ * once (`cards-put-into-graveyard`, `cards-put-into-exile`,
+ * `cards-put-into-library`). */
 export interface HeldArrivals {
   readonly graveyard: readonly { readonly object: ObjectId; readonly from: ZoneType }[];
   readonly exile: readonly {
@@ -2904,6 +2905,7 @@ export interface HeldArrivals {
     readonly owner: PlayerId;
     readonly token?: true;
   }[];
+  readonly library?: readonly { readonly object: ObjectId; readonly from: ZoneType; readonly owner: PlayerId }[];
 }
 
 /** One permanent waiting on the battlefield for its controller's answer to an

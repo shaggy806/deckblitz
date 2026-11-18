@@ -181,6 +181,12 @@ export const TRIGGER_EVENTS = {
   /** "Whenever you search your library" (rule 701.23): their own library
    * only (the rulings). */
   "searches-library": row({ type: "library-searched", when: (e) => e.owner === e.player, player: (e) => e.player }),
+  /** "Whenever one or more cards are put into a library from anywhere" (Wan
+   * Shi Tong, All-Knowing; `batched`): once per simultaneous move of cards
+   * into libraries from other zones — never a scry, a surveil or a shuffle,
+   * which move nothing into one (its ruling). The subjects are the cards, in
+   * whichever library they went to; `{ triggerValue: true }` is how many. */
+  "put-into-library": row({ type: "cards-put-into-library", objects: (e) => e.arrivals.map((a) => a.object) }),
   /** "Whenever you collect evidence" (rule 701.59). */
   "collects-evidence": row({ type: "evidence-collected", player: (e) => e.player }),
   /** "Whenever you discover" (rule 701.57); the value is its N. */

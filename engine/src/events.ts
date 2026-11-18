@@ -1997,6 +1997,23 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
     })
   | (Base & {
+      /** Cards were put into libraries **at the same time** from another
+       * zone — the library-side twin of `cards-put-into-graveyard`: one per
+       * simultaneous move (a hand put back, a graveyard shuffled in, a wrath
+       * that tucks), each card with the zone it came from and its `owner`,
+       * whose library it went to. A card moved within a library (a scry, a
+       * surveil, a shuffle) isn't put into one (Wan Shi Tong, All-Knowing's
+       * ruling), and a token isn't a card (rule 111.1). Bookkeeping for
+       * "whenever one or more cards are put into a library": the move has its
+       * own line. */
+      readonly type: "cards-put-into-library";
+      readonly arrivals: readonly {
+        readonly object: ObjectId;
+        readonly from: ZoneType;
+        readonly owner: PlayerId;
+      }[];
+    })
+  | (Base & {
       /** Cards an effect shuffled into `player`'s library from a public zone
        * (rule 701.24a — `shuffle-graveyard-into-library`'s graveyard cards,
        * `put-on-libraries`' `"shuffle"`), logged once the library is
