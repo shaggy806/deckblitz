@@ -3056,7 +3056,8 @@
   "effect:temporary-enter-exile-replacement",
   "effect:temporary-enter-exile-replacement",
   "replacement:chosen-players-damage-doubling",
-  "replacement:as-enters-mill"
+  "replacement:as-enters-mill",
+  "amount:cda-aggregate-sum-excluding-self"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

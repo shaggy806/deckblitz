@@ -4,11 +4,12 @@
  * battlefield" — a `setBasePtFromCount` over an `aggregate: "count"` with
  * `excludeSelf`, which `countValue` now honours (its ruling: it doesn't count
  * itself). Anyone's Rats count, a changeling among them (rule 702.73a).
+ * Ancient Ooze's sum of the others' mana values is the same `excludeSelf`.
  */
 
 import { describe, expect, it } from "vitest";
 
-import { B, pt, spawn, table } from "./harness.js";
+import { A, B, pt, spawn, table, toStep, zone } from "./harness.js";
 
 describe("Pestilence Rats", () => {
   it("doesn't count itself", () => {
@@ -36,5 +37,37 @@ describe("Pestilence Rats", () => {
     const two = spawn(game, "Pestilence Rats", B);
     expect(pt(game, one)).toEqual({ power: 1, toughness: 3 });
     expect(pt(game, two)).toEqual({ power: 1, toughness: 3 });
+  });
+});
+
+// A sum over the others (`aggregate: "sum"` with `excludeSelf`): Ancient
+// Ooze's "the total mana value of other creatures you control".
+describe("Ancient Ooze", () => {
+  it("adds up the mana values of the other creatures you control, not an opponent's or a noncreature", () => {
+    const { game } = table();
+    spawn(game, "Grizzly Bears");
+    spawn(game, "Hill Giant");
+    spawn(game, "Hill Giant", B);
+    spawn(game, "Sol Ring");
+    const ooze = spawn(game, "Ancient Ooze");
+    expect(pt(game, ooze)).toEqual({ power: 6, toughness: 6 });
+  });
+
+  it("a token is 0 (the ruling), and two Oozes count each other's seven", () => {
+    const { game } = table();
+    spawn(game, "Grizzly Bears");
+    const one = spawn(game, "Ancient Ooze");
+    game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 3 }, []);
+    expect(pt(game, one)).toEqual({ power: 2, toughness: 2 });
+    const two = spawn(game, "Ancient Ooze");
+    expect(pt(game, one)).toEqual({ power: 9, toughness: 9 });
+    expect(pt(game, two)).toEqual({ power: 9, toughness: 9 });
+  });
+
+  it("alone it's 0/0 and dies (rule 704.5f)", () => {
+    const { game } = table();
+    const ooze = spawn(game, "Ancient Ooze");
+    toStep(game, "end");
+    expect(zone(game, ooze)).toBe("graveyard");
   });
 });

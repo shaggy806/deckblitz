@@ -1005,7 +1005,9 @@ Emissary Escort with the aggregate's `excludeSelf`), and a CDA's
 `setBasePtFromCount.countOf` takes one with `excludeSelf` too — Pestilence
 Rats' "the number of **other** Rats on the battlefield" is `{ aggregate:
 "count", filter: { subtype: "Rat" }, excludeSelf: true }`, a stack's other
-tokens still counted),
+tokens still counted; Ancient Ooze's "the total mana value of other
+creatures you control" is `{ aggregate: "sum", of: "mana-value", filter: {
+type: "creature", controlledBy: "you" }, excludeSelf: true }`),
 `{ countersOn: ref, counter? }` (how many counters of one kind are on it —
 every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died

@@ -23588,3 +23588,21 @@ describe("a mill as it enters (replacement:as-enters-mill)", () => {
     ]);
   });
 });
+
+describe("a CDA over the others (amount:cda-aggregate-sum-excluding-self)", () => {
+  const cda = (oracle: string) =>
+    (
+      parseFace({ name: "Test Ooze", type_line: "Creature — Ooze", oracle_text: oracle, mana_cost: "{5}{G}{G}", colors: ["G"], cmc: 7 } as never) as unknown as {
+        static: readonly { setBasePtFromCount?: unknown }[];
+      }
+    ).static[0]?.setBasePtFromCount;
+  it("reads Ancient Ooze's total mana value of other creatures you control", () => {
+    expect(cda("Test Ooze's power and toughness are each equal to the total mana value of other creatures you control.")).toEqual({
+      countOf: { aggregate: "sum", of: "mana-value", filter: { type: "creature", controlledBy: "you" }, excludeSelf: true },
+      plusPower: 0,
+      plusToughness: 0,
+    });
+    // A greatest is `greatestManaValueOf` (Karn, Legacy Reforged): not this template.
+    expect(cda("Test Ooze's power and toughness are each equal to the greatest mana value among artifacts you control.")).toBeUndefined();
+  });
+});

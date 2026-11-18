@@ -24648,6 +24648,17 @@ function parseStatic(line, text) {
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: agg } }, text };
     }
   }
+  // A total mana value as a whole CDA: Ancient Ooze's "~'s power and
+  // toughness are each equal to the total mana value of other creatures you
+  // control" (`excludeSelf`, rule 604.3). A greatest is Karn, Legacy
+  // Reforged's `greatestManaValueOf`.
+  {
+    const w = /^~'s power and toughness are each equal to (the total mana value of .+)\.$/.exec(line);
+    const agg = w === null ? null : aggregatePhraseOf(w[1]);
+    if (agg !== null && agg.aggregate === "sum") {
+      return { affects: { scope: "self" }, setBasePtFromCount: { countOf: agg, plusPower: 0, plusToughness: 0 }, text };
+    }
+  }
   {
     const w = /^~'s power is equal to (.+)\.$/.exec(line);
     const agg = w === null ? null : aggregatePhraseOf(w[1]);
