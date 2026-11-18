@@ -7120,6 +7120,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Attack Bob with Phantom Warrior. As Bob, in the declare blockers step, cast Fog Patch.
 - **Expect:** Bob takes no damage: Phantom Warrior is blocked with nothing blocking it.
+
+### Tahngarth, First Mate: Bob's for the combat, attacking whom you choose among those he attacks
+
+- **Do:** As Bob, attack Alice with Grizzly Bears and Carol with Hill Giant. As Alice, say yes to Tahngarth's trigger, then send Tahngarth at Carol.
+- **Expect:** The banner reads "Tahngarth, First Mate: choose what each attacks"; clicking Dave does nothing (nobody attacks him), clicking Carol sends it. The History has "Bob gains control of Tahngarth, First Mate until end of combat", and Carol takes 8 (Hill Giant and Tahngarth). After combat it's yours again, still tapped.
+- **Not a bug:** It may attack you, its owner.
+
+### Psychic Battle: the bigger revealed card lets you move Bob's target
+- **Do:** As Bob, cast Lightning Bolt at Alice. As Alice, when asked, click Bob.
+- **Expect:** Both players reveal their top card: your Hill Giant beats Bob's Forest. The banner asks you to choose new targets for Lightning Bolt; with Bob picked, Bob takes 3 and you take none. Your change doesn't set Psychic Battle off a second time.
 ### Extinction Event: choosing odd or even as it resolves
 
 - **Do:** Cast Extinction Event. When asked, click even.

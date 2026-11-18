@@ -9773,7 +9773,7 @@ export class Game {
     const retarget = this.state.pendingRetarget;
     if (retarget != null) {
       this.state.pendingRetarget = null;
-      this.retargetStackObject(retarget.object, retarget.slots, chosen);
+      this.retargetStackObject(retarget.object, retarget.slots, chosen, player, retarget.unseenBy);
     } else if (copy != null) {
       this.state.pendingCopyTargets = null;
       this.retargetCopy(copy.copy, copy.slots, chosen);
@@ -9967,11 +9967,13 @@ export class Game {
     const targets = [...(copy.targets ?? [])];
     const zones = copy.targetZones === undefined ? undefined : [...copy.targetZones];
     const stints = copy.targetStints === undefined ? undefined : [...copy.targetStints];
+    const changed: TargetRef[] = [];
     slots.forEach((slot, i) => {
       const next = chosen[i];
       const was = targets[slot];
       if (next === undefined || was === undefined || sameTargetRef(next, was)) return;
       targets[slot] = next;
+      changed.push(next);
       if (zones !== undefined) zones[slot] = this.zonesOfTargets([next])[0] ?? null;
       if (stints !== undefined) stints[slot] = this.stintsOfTargets([next])[0] ?? null;
     });
@@ -9979,6 +9981,8 @@ export class Game {
     if (zones !== undefined) copy.targetZones = zones;
     if (stints !== undefined) copy.targetStints = stints;
     this.announceCopyTargets(copyId);
+    // New targets chosen for it (rule 707.10c), as a change of targets is.
+    this.announceTargetsChosen(changed, copy.controller, copyId);
   }
 
   /**
@@ -25149,6 +25153,7 @@ export class Game {
     });
     if (exiledStint !== undefined) this.endUntilCastEffects(cardId, exiledStint);
     this.announceTargeted(chosen, player, cardId, true);
+    this.announceTargetsChosen(chosen, player, cardId);
     this.commitCrimeIfAny(chosen, player, cardId);
     if (sortedModes !== undefined) {
       // Chosen by the opponent its caster named (rule 700.2e), when one did.
@@ -29096,6 +29101,7 @@ export class Game {
       });
     }
     this.announceTargeted(chosen, player, sourceId, false, abilityId);
+    this.announceTargetsChosen(chosen, player, abilityId);
     this.commitCrimeIfAny(chosen, player, abilityId);
     // Rule 601.2h: in any order, but random parts and those moving a card from
     // a library after the rest — those wait in the queue until the parts below
@@ -30304,6 +30310,26 @@ export class Game {
       this.targetBatch = null;
     }
     for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);
+  }
+
+  /**
+   * `player` chose targets for the spell or ability `stackObject` — the
+   * `targets-chosen` event Psychic Battle watches, once for it: as it was
+   * cast, activated or put on the stack with at least one target chosen
+   * (rules 601.2c, 602.2b, 603.3d; a slot its rules filled isn't one,
+   * 115.1), or as targets of it were changed (115.7). `unseenBy`: the name of
+   * the source of the ability that changed them, for "changing targets this
+   * way doesn't trigger abilities of permanents named Psychic Battle".
+   */
+  private announceTargetsChosen(
+    targets: ResolvedTargets,
+    player: PlayerId,
+    stackObject: ObjectId,
+    autoSlots: readonly number[] = [],
+    unseenBy?: string,
+  ): void {
+    if (!targets.some((t, slot) => t !== undefined && t !== null && !autoSlots.includes(slot))) return;
+    this.emit({ type: "targets-chosen", player, object: stackObject, ...(unseenBy !== undefined ? { unseenBy } : {}) });
   }
 
   private announceEachTargeted(
@@ -37816,6 +37842,10 @@ export class Game {
   private eventTriggerMatches(spec: Extract<TriggerSpec, { on: "event" }>, event: GameEvent, self: GameObject): boolean {
     const subjects = triggerEventSubjects(spec.event, event);
     if (subjects === undefined) return false;
+    // "Changing targets this way doesn't trigger abilities of permanents
+    // named Psychic Battle."
+    const unseenBy = triggerEventRow(spec.event).unseenBy?.(event as never);
+    if (unseenBy !== undefined && nameOf(self) === unseenBy) return false;
     if (spec.by !== undefined) {
       const by = triggerEventRow(spec.event).by?.(event as never);
       if (by === undefined || !this.matchesWhoPlayer(spec.by, by, self)) return false;
@@ -40253,6 +40283,7 @@ export class Game {
       abilityId,
       autoTargetSlots,
     );
+    this.announceTargetsChosen(this.state.objects[abilityId].targets ?? [], controller, abilityId, autoTargetSlots);
     this.commitCrimeIfAny(this.state.objects[abilityId].targets ?? [], controller, abilityId, autoTargetSlots);
     return abilityId;
   }
@@ -46074,7 +46105,7 @@ controlledBy,
         if (this.resolvingAbilities.length === 0) resolving.push(source);
         return [...this.state.zones.shared.stack].reverse().filter((id) => !resolving.includes(id) && this.state.objects[id] !== undefined);
       },
-      changeTargets: (target, how, toSource, optional, byItsController, random) => {
+      changeTargets: (target, how, toSource, optional, byItsController, random, unseenByNamesake) => {
         if (how === "random") {
           if (target.kind !== "object") return;
           // "For the spell and the copy": the copies of it this resolution
@@ -46098,6 +46129,10 @@ controlledBy,
           how,
           toSource,
           optional,
+          // "Changing targets this way doesn't trigger abilities of
+          // permanents named Psychic Battle": its source's name, as it is or
+          // last was.
+          unseenByNamesake === true && this.state.objects[source] !== undefined ? nameOf(this.state.objects[source]) : undefined,
         );
       },
       gainControlOfSpell: (target) => this.gainControlOfSpell(controller, target),
@@ -53860,6 +53895,8 @@ controlledBy,
     how: "change" | "change-one" | "choose-new",
     toSource: boolean,
     optional: boolean,
+    /** See `announceTargetsChosen`. */
+    unseenBy?: string,
   ): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
@@ -53881,13 +53918,13 @@ controlledBy,
       const changing = others.map((o, i) => (o.length > 0 ? i : -1)).filter((i) => i >= 0);
       if (changing.length === 1 && others[changing[0]].length === 1 && (how === "change-one" || found.slots.length === 1)) {
         const answer = found.current.map((now, i) => (i === changing[0] ? others[i][0] : now));
-        this.retargetStackObject(target.object, found.slots, answer);
+        this.retargetStackObject(target.object, found.slots, answer, chooser, unseenBy);
         return;
       }
     }
     const what =
       how === "choose-new" ? "Choose new targets for" : how === "change-one" ? "Change a target of" : "Change the target of";
-    this.state.pendingRetarget = { object: target.object, slots: found.slots };
+    this.state.pendingRetarget = { object: target.object, slots: found.slots, ...(unseenBy !== undefined ? { unseenBy } : {}) };
     this.state.awaiting = {
       kind: "choose-targets",
       player: chooser,
@@ -53937,7 +53974,15 @@ controlledBy,
    * "becomes the target of" sees (ward, Phantasmal Image). Its division of
    * damage or counters stays with its slots (115.7f). Nothing if it has left
    * the stack. */
-  private retargetStackObject(id: ObjectId, slots: readonly number[], chosen: ResolvedTargets): void {
+  private retargetStackObject(
+    id: ObjectId,
+    slots: readonly number[],
+    chosen: ResolvedTargets,
+    /** Who chose the new targets — its controller when nobody did. */
+    chooser?: PlayerId,
+    /** See `announceTargetsChosen`. */
+    unseenBy?: string,
+  ): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "stack") return;
     const targets = [...(object.targets ?? [])];
@@ -53964,6 +54009,7 @@ controlledBy,
     } else {
       this.announceTargeted(changed, object.controller, id, true);
     }
+    this.announceTargetsChosen(changed, chooser ?? object.controller, id, [], unseenBy);
   }
 
   /** Storm (rule 702.40a): copy `sourceId` for each spell cast before it this
@@ -63240,6 +63286,7 @@ controlledBy,
       controller: player,
       previousController,
       untilEndOfTurn,
+      ...(opts.untilEndOfCombat === true ? { untilEndOfCombat: true as const } : {}),
     });
   }
 

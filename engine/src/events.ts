@@ -1009,6 +1009,24 @@ export type GameEvent =
       readonly bySpell: boolean;
     })
   | (Base & {
+      /**
+       * A player chose one or more targets for the spell or ability `object`
+       * on the stack — once for it, however many targets: as it was cast,
+       * activated or put on the stack with at least one target chosen
+       * (rules 601.2c, 602.2b, 603.3d; a slot its own rules filled isn't
+       * one, 115.1), or as its targets or a copy's were changed (115.7,
+       * 707.10c) — never a copy that simply keeps the original's
+       * (707.10). What Psychic Battle watches (`"chooses-targets"`).
+       */
+      readonly type: "targets-chosen";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+      /** A change made by an ability whose source has this name, which
+       * permanents of this name don't trigger on: "changing targets this way
+       * doesn't trigger abilities of permanents named Psychic Battle". */
+      readonly unseenBy?: string;
+    })
+  | (Base & {
       readonly type: "ability-resolved";
       readonly source: ObjectId;
       /** The ability on the stack that resolved — what a client finds its
@@ -1366,6 +1384,8 @@ export type GameEvent =
        * "… gains control of a permanent from you" (rule 603.10d). */
       readonly previousController: PlayerId;
       readonly untilEndOfTurn: boolean;
+      /** Only until end of combat (Tahngarth, First Mate). */
+      readonly untilEndOfCombat?: true;
     })
   | (Base & {
       /** `controller` gained control of a spell on the stack (Commandeer):

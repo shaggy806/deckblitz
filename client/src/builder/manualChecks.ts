@@ -10502,6 +10502,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Tahngarth, First Mate: Bob's for the combat, attacking whom you choose among those he attacks",
+    board({
+      turn: 0,
+      step: 'begin-combat',
+      you: { bf: [{ name: 'Tahngarth, First Mate', tapped: true }] },
+      opp: [{ human: true, bf: ['Grizzly Bears', 'Hill Giant'] }, { bf: ['Plains'] }, { bf: ['Plains'] }],
+    }),
+  ),
+  preset(
+    "Psychic Battle: the bigger revealed card lets you move Bob's target",
+    board({
+      turn: 0,
+      you: { bf: ['Psychic Battle'], lib: ['Hill Giant'] },
+      opp: { human: true, bf: ['Mountain'], hand: ['Lightning Bolt'], lib: ['Forest'] },
+    }),
+  ),
+  preset(
     "Capricopian: the player it's attacking pays and sends it on",
     board({
       you: { bf: [{ name: 'Capricopian', counters: { '+1/+1': 2 } }] },

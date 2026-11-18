@@ -9015,6 +9015,11 @@ export type EffectSpec =
        * (Sudden Substitution): whoever controls it as this is done chooses,
        * not this effect's controller. */
       readonly by?: "its-controller";
+      /** "Changing targets this way doesn't trigger abilities of permanents
+       * named Psychic Battle": the change's `targets-chosen` event isn't seen
+       * by permanents with this effect's source's name (its other events —
+       * "becomes the target", ward — are). */
+      readonly unseenByNamesake?: true;
     }
   | {
       /**
@@ -11367,9 +11372,17 @@ export type EffectSpec =
        * extra turn"). Only the tied players go again (its ruling). `then`
        * follows, the controller's, with the `"that-player"` scope naming the
        * one left — nothing when nobody exiled a card.
+       *
+       * `reveal`: "each player **reveals** the top card of their library. The
+       * player who reveals the card with the greatest mana value [`then`]. If
+       * two or more cards are tied for greatest, [nothing]" (Psychic Battle):
+       * one pass, the cards revealed and left where they are, and a tie for
+       * greatest does nothing. A player with an empty library reveals nothing
+       * and has nothing to compare (the ruling).
        */
       readonly kind: "exile-top-contest";
       readonly then: EffectSpec;
+      readonly reveal?: true;
     }
   | {
       /**
@@ -15019,6 +15032,8 @@ export interface EffectApi {
     optional: boolean,
     byItsController?: boolean,
     random?: { readonly exceptYou: boolean; readonly withCopies: boolean },
+    /** The `change-targets` {@link EffectSpec}'s `unseenByNamesake`. */
+    unseenByNamesake?: boolean,
   ): void;
   /** This effect's controller gains control of the spell at `TargetRef` — see
    * the `gain-control-spell` {@link EffectSpec}. */
@@ -17015,6 +17030,22 @@ const MAX_REPEATS = 200;
  */
 function applyExileTopContest(spec: Extract<EffectSpec, { kind: "exile-top-contest" }>, ctx: ResolutionContext): void {
   let contenders = ctx.apnap(ctx.playersInScope("each-player"));
+  if (spec.reveal === true) {
+    // One pass: each top card revealed where it is (rule 701.20a); only a
+    // single greatest wins.
+    const revealed: { readonly player: PlayerId; readonly value: number }[] = [];
+    for (const player of contenders) {
+      const [top] = ctx.libraryTop(player, 1);
+      if (top === undefined) continue;
+      ctx.revealTop(null, player);
+      revealed.push({ player, value: ctx.manaValueOf({ kind: "object", object: top }) });
+    }
+    if (revealed.length === 0) return;
+    const greatest = Math.max(...revealed.map((e) => e.value));
+    const winners = revealed.filter((e) => e.value === greatest);
+    if (winners.length === 1) applyEffectSpec(spec.then, ctx.aboutPlayer(winners[0].player));
+    return;
+  }
   for (let pass = 0; pass < MAX_REPEATS && contenders.length > 0; pass += 1) {
     const exiled: { readonly player: PlayerId; readonly value: number }[] = [];
     for (const player of contenders) {
@@ -23652,6 +23683,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.optional === true,
           spec.by === "its-controller",
           spec.how === "random" ? { exceptYou: spec.exceptYou === true, withCopies: spec.withCopies === true } : undefined,
+          spec.unseenByNamesake === true,
         );
       }
       return;

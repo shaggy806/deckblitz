@@ -56,6 +56,11 @@ export interface TriggerEventRow<T extends GameEvent["type"] = GameEvent["type"]
   recipient?(event: EventOf<T>): ObjectId | undefined;
   /** What `triggerValue` reads: "that much", "that many". */
   amount?(event: EventOf<T>): number;
+  /** The name of the permanents whose abilities this event doesn't
+   * trigger: "changing targets this way doesn't trigger abilities of
+   * permanents named Psychic Battle". Read in `Game.eventTriggerMatches`
+   * against the watching permanent's name. */
+  unseenBy?(event: EventOf<T>): string | undefined;
   /** The objects "them" means, each in its stint — the `"trigger-batch"`
    * set of a trigger on it, one occurrence for them all: the cards manifest
    * dread put into a graveyard. */
@@ -288,6 +293,18 @@ export const TRIGGER_EVENTS = {
   enlists: row({ type: "creature-tapped-for", when: (e) => e.as === "enlist", object: (e) => e.for }),
   /** "Whenever you proliferate" (rule 701.34) — even choosing nothing. */
   proliferates: row({ type: "proliferated", player: (e) => e.player }),
+  /** "Whenever a player chooses one or more targets" (Psychic Battle): once
+   * for the spell or ability they were chosen for — the subject, "that spell
+   * or ability" (`trigger-object`) — as it went on the stack or as its
+   * targets were changed; the chooser is "that player". A change Psychic
+   * Battle's own ability made doesn't trigger permanents of that name
+   * (`unseenBy`). */
+  "chooses-targets": row({
+    type: "targets-chosen",
+    object: (e) => e.object,
+    player: (e) => e.player,
+    unseenBy: (e) => e.unseenBy,
+  }),
   /** "Whenever you become the monarch" (rule 725): the new monarch. A
    * player who already is doesn't become it again (`Game.setMonarch`). */
   "becomes-monarch": row({ type: "monarch-changed", player: (e) => e.player }),

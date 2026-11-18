@@ -205,6 +205,7 @@
     "effect:put-into-combat-attacking-among-defenders",
     "target:power-less-than-source",
     "target:activated-ability-single-target",
+    "trigger:player-chooses-targets",
     "effect:extra-combat-after-this-main-only-chosen-attack",
     "filter:player-other-than-owner",
     "filter:attached-to-enchanted-player",

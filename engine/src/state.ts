@@ -6805,9 +6805,15 @@ export interface GameState {
    * A spell or ability on the stack whose targets an effect is changing (rule
    * 115.7 — the `change-targets` effect): the `choose-targets` on `awaiting`
    * carries `current`, and `slots` maps its answers back onto `object`'s
-   * target slots. Absent when none is.
+   * target slots. Absent when none is. `unseenBy`: the name of the
+   * permanents the change's `targets-chosen` event doesn't trigger (Psychic
+   * Battle's own changes).
    */
-  pendingRetarget?: { readonly object: ObjectId; readonly slots: readonly number[] } | null;
+  pendingRetarget?: {
+    readonly object: ObjectId;
+    readonly slots: readonly number[];
+    readonly unseenBy?: string;
+  } | null;
   /** Copies made while another decision was up — storm's several — waiting
    * to be asked about their new targets, oldest first. Drained one at a time
    * in the `prepareForPriority` fixpoint. Absent when empty. */

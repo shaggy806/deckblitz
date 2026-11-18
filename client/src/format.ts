@@ -95,6 +95,9 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   // names its targets.
   'object-targeted',
   'player-targeted',
+  // Once per spell or ability whose targets were chosen or changed — for
+  // Psychic Battle's "whenever a player chooses one or more targets".
+  'targets-chosen',
   // The whole-declaration summary, for "whenever you attack with N or more
   // creatures" — every attacker already has its own `attacker-declared` line.
   'attackers-declared',
@@ -452,7 +455,7 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} doesn't pay ward for ${name(event.object)}`
     case 'control-changed':
       return `${who(event.controller)} gains control of ${name(event.object)}${
-        event.untilEndOfTurn ? ' until EOT' : ''
+        event.untilEndOfCombat === true ? ' until end of combat' : event.untilEndOfTurn ? ' until EOT' : ''
       }`
     case 'spell-control-changed':
       return `${who(event.controller)} gains control of ${name(event.object)}`
@@ -532,6 +535,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${name(event.object)} becomes the target of ${name(event.source)} (${event.by})`
     case 'player-targeted':
       return `${who(event.player)} becomes the target of ${name(event.source)} (${event.by})`
+    case 'targets-chosen':
+      return `${who(event.player)} chooses targets for ${name(event.object)}`
     case 'ability-triggered':
       return `${name(event.source)}'s trigger goes on the stack (${who(event.controller)})`
     case 'tokens-folded':
