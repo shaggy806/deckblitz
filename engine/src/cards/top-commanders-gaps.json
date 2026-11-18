@@ -2731,6 +2731,7 @@
   "trigger:phases-out",
   "trigger:scry-bottom-count",
   "decision:two-any-number-groups",
+  "effect:each-player-chooses-permanents-exile-until-leaves",
   "target:any-number-group-before-targeting-mode",
   "effect:as-enters-remove-counters-from-any-number",
   "replacement:as-enters-turn-others-face-down",

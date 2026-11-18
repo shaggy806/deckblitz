@@ -3253,7 +3253,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `who: "that-player"` inside a villainous option). The steps after it read the choices
   as they read votes: `for-each-voted { which: "voted" }` for each permanent
   chosen (Eye of Doom's doom counters, Sadistic Shell Game's destroy —
-  `simultaneous: true`), `for-each-vote { option }` for each player who
+  `simultaneous: true`), a mass effect over `{ thisWay: "chosen" }` for all
+  of them in one event (Foreboding Steamboat's "each player chooses two
+  nontoken, non-Vehicle creatures they control. Exile them until this Vehicle
+  leaves the battlefield" is `count: 2`, `own`, then an `exile-all` of that
+  filter with `untilSourceLeaves`), `for-each-vote { option }` for each player who
   chose an option. **`with-choices { effect }`** substitutes what was chosen
   into `effect`: `CHOSEN_THIS_WAY` in a list is every option chosen, once
   each (Harsh Mercy's `notSubtypes: [CHOSEN_THIS_WAY]`, Patriarch's
