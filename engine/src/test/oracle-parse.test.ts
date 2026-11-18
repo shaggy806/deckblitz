@@ -1335,6 +1335,39 @@ describe("each player's draw exiled by them, and the cards they exiled theirs to
   });
 });
 
+describe("shuffled into its owner's library, then found again there (Mirror-Mad Phantasm)", () => {
+  it("'a card named ~' is the card's own printed name", () => {
+    const phantasm = parseFace(
+      {
+        name: "Mirror-Mad Phantasm",
+        type_line: "Creature — Spirit",
+        mana_cost: "{3}{U}{U}",
+        oracle_text:
+          "Flying\n{1}{U}: This creature's owner shuffles it into their library. If that player does, they reveal cards from the top of that library until a card named Mirror-Mad Phantasm is revealed. The player puts that card onto the battlefield and all other cards revealed this way into their graveyard.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(phantasm.complete).toBe(true);
+    expect(phantasm.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "shuffle-into-library", target: "source" },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "shuffled-into-library" },
+          then: {
+            kind: "reveal-until",
+            whose: { ownerOf: "source" },
+            filter: { name: "Mirror-Mad Phantasm" },
+            put: "battlefield",
+            rest: "graveyard",
+          },
+        },
+      ],
+    });
+  });
+});
+
 describe("an emblem's grants", () => {
   const ult = (line: string) =>
     parseFace(

@@ -2021,7 +2021,8 @@ export type GameEvent =
   | (Base & {
       /** Cards an effect shuffled into `player`'s library from a public zone
        * (rule 701.24a — `shuffle-graveyard-into-library`'s graveyard cards,
-       * `put-on-libraries`' `"shuffle"`), logged once the library is
+       * `put-on-libraries`' `"shuffle"`, `shuffle-into-library`'s one object,
+       * a token too), logged once the library is
        * shuffled: Elixir's "the number of cards shuffled into your library
        * this way". A hand's cards aren't named here. */
       readonly type: "cards-shuffled-into-library";

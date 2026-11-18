@@ -42886,6 +42886,13 @@ export class Game {
         const owner = object.owner;
         this.moveObject(target.object, "library", { libraryPlacement: "shuffle" });
         if (this.state.players[owner]?.hasLost === false) this.shuffleLibraryOf(owner);
+        // What "if that player does" asks (Mirror-Mad Phantasm's "its owner
+        // shuffles it into their library. If that player does, …"): a token
+        // is shuffled in too, there until the next state-based check (rule
+        // 111.7 — the card's ruling: a token finds no card of its name).
+        if (this.state.objects[target.object]?.zone === "library") {
+          this.emit({ type: "cards-shuffled-into-library", player: owner, objects: [target.object] });
+        }
       },
       ownerOf: (ref) =>
         ref.kind === "player"

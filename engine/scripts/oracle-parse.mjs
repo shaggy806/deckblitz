@@ -11042,6 +11042,30 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // Mirror-Mad Phantasm: shuffled into its owner's library, then found again
+  // there — "a card named ~" is the card's printed name, filled in below
+  // (`namePrompts`), not whatever has the ability (its ruling).
+  if (
+    /^~'s owner shuffles it into their library\. If that player does, they reveal cards from the top of that library until a card named ~ is revealed\. The player puts that card onto the battlefield and all other cards revealed this way into their graveyard\.$/.test(
+      text,
+    )
+  ) {
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "shuffle-into-library", target: "source" },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "shuffled-into-library" },
+            then: { kind: "reveal-until", whose: { ownerOf: "source" }, filter: { name: "~" }, put: "battlefield", rest: "graveyard" },
+          },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   const handDraw =
     /^Target opponent reveals their hand\. You draw a card for each (Plains|Island|Swamp|Mountain|Forest) and (white|blue|black|red|green) card in it\.$/.exec(
       text,
@@ -20193,11 +20217,13 @@ function parseFaceAsWritten(face, ctx = {}) {
     out.todo.length === 0 &&
     [...out.activated, ...out.triggered].every((a) => a.effect !== null && a.__todo === undefined);
   // A "you may" question is shown to the player: "~" in it is the card's name.
+  // So is a filter's "a card named ~" (Mirror-Mad Phantasm).
   const namePrompts = (node) => {
     if (Array.isArray(node)) node.forEach(namePrompts);
     else if (node !== null && typeof node === "object") {
       for (const [k, v] of Object.entries(node)) {
         if (k === "prompt" && typeof v === "string" && face.name !== undefined) node[k] = v.replaceAll("~", face.name);
+        else if (k === "name" && v === "~" && face.name !== undefined) node[k] = face.name;
         else namePrompts(v);
       }
     }

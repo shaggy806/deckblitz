@@ -325,6 +325,18 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Shuffled into its owner's library, then found again there — built 2026-11-18
+
+The key `effect:reveal-until-source-owners-library`: `reveal-until`'s `whose` already took `{ ownerOf: "source" }`;
+what was missing was "if that player does". `shuffle-into-library` now logs the object it shuffled in
+(`cards-shuffled-into-library`, a token too, there until the next state-based check), so a `this-way` of
+`"shuffled-into-library"` asks it. Mirror-Mad Phantasm (rank 14761): its owner's library whoever controls it, the card
+found entering under that player's control; a token finds no card of its name and the whole library goes to the
+graveyard (the rulings). That needed a fix: `reveal-until` and `reveal-until-count` revealed a token still in the
+library (rule 111.1: not a card) — found it by name, and an exiling one hung on it, unable to move it. Both now pass
+over tokens. The scaffolder reads it whole, "a card named ~" its printed name.
+`test/reveal-until-source-owners-library.test.ts`.
+
 ### Each player plays the cards they exiled with it — found built 2026-11-18
 
 The key `static:each-player-plays-cards-they-exiled-with-source` needed no new vocabulary: a static `mayPlay` with
