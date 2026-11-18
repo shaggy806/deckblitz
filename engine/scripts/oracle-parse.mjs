@@ -4597,6 +4597,14 @@ export function parseSentence(sentence, ctx) {
       ? { kind: "add-mana", mana: { eachColorAmong: { controlledBy: "you" } }, amount: 1 }
       : { kind: "add-mana", mana: { eachColorAmong: {}, zone: "exiled-with-source" }, amount: 1 };
   }
+  // "Copy it for each kind of counter among permanents you control" (Storm of
+  // Forms): as many copies as the count reads as the cast trigger resolves —
+  // the spell itself in "when you cast this spell".
+  if ((ctx?.castSpell === true || ctx?.thisCast === true) && (m = /^copy (?:it|that spell) for each (.+?)\.$/i.exec(s))) {
+    const count = costEachAmount(m[1]);
+    if (count === null || count === undefined) return null;
+    return { kind: "copy-spell", target: "trigger-spell", count };
+  }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
     !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s) &&
@@ -22073,11 +22081,15 @@ function gainControlSpellAt(sentences, i, ctx) {
  * `may` around it.
  */
 function copyNewTargetsAt(sentences, i, ctx) {
-  if (!/^you may choose new targets for the copy\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const next = /^you may choose new targets for the (copy|copies)\.$/i.exec(sentences[i + 1] ?? "");
+  if (next === null) return null;
   const before = ctx.targets.length;
   const effect = parseSentence(sentences[i], ctx);
   const withNew = (e) => {
-    if (e?.kind === "copy-spell" && e.newTargets === undefined) return { ...e, newTargets: true };
+    // "The copies" only after a counted copy ("copy it for each …").
+    if (e?.kind === "copy-spell" && e.newTargets === undefined && (next[1].toLowerCase() === "copy" || e.count !== undefined)) {
+      return { ...e, newTargets: true };
+    }
     if (e?.kind === "may") {
       const inner = withNew(e.effect);
       return inner === null ? null : { ...e, effect: inner };
@@ -22942,6 +22954,8 @@ function costEachAmount(phrase) {
   const fixed = {
     "color among permanents you control": { colorsAmong: { controlledBy: "you" } },
     "counter among players and permanents": { allCounters: true },
+    // Each kind once, however many of it (rule 122.1 — Storm of Forms).
+    "kind of counter among permanents you control": { aggregate: "distinct", of: "counter-kind", filter: { controlledBy: "you" } },
     "creature attacking you": { countOf: { type: "creature", attackingYou: true } },
     "creature that died this turn": { turnHistory: "died", who: "each-player", filter: { type: "creature" } },
     "permanent sacrificed this turn": { turnHistory: "sacrificed", who: "each-player" },

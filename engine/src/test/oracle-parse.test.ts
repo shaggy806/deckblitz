@@ -23869,4 +23869,24 @@ describe("a library search that exiles its finds (Kaho, Minamo Historian; Myr In
       ],
     });
   });
+
+  it("reads Storm of Forms' copy for each kind of counter among your permanents, with new targets for the copies", () => {
+    const storm = parseFace(
+      {
+        name: "Storm of Forms",
+        type_line: "Instant",
+        mana_cost: "{3}{U}",
+        oracle_text:
+          "When you cast this spell, copy it for each kind of counter among permanents you control. You may choose new targets for the copies.\nReturn target nonland permanent to its owner's hand.",
+      },
+      { tokenFor: () => null },
+    ) as unknown as { complete: boolean; triggered: { effect: unknown }[] };
+    expect(storm.complete).toBe(true);
+    expect(storm.triggered[0].effect).toEqual({
+      kind: "copy-spell",
+      target: "trigger-spell",
+      count: { aggregate: "distinct", of: "counter-kind", filter: { controlledBy: "you" } },
+      newTargets: true,
+    });
+  });
 });

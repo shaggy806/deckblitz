@@ -966,7 +966,10 @@ to craft it", `in: "exiled-with-source"`, colourless adding none): Lunar Insight
 "each different mana value among nonland permanents you control", Embodiment of
 Agonies' "each different mana cost among nonland cards in your graveyard" (the
 symbols, not their total; no mana cost adds nothing, rule 202.1b), Golden Ratio's "each
-different power", Awakened Amalgam's "differently named lands" (as a CDA's
+different power", Storm of Forms' "copy it for each kind of counter among
+permanents you control" (`of: "counter-kind"`, `filter: { controlledBy: "you"
+}`: each kind once however many, rule 122.1; Perrie, the Pulverizer's +X/+X
+the same), Awakened Amalgam's "differently named lands" (as a CDA's
 `setBasePtFromCount.countOf`), Tam's "planeswalker types among planeswalkers
 you control", a changeling every creature type; `in: "graveyards"` reads the
 cards in graveyards instead, `ownedBy: "you"` for yours — Aven Heartstabber's
