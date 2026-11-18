@@ -4783,6 +4783,15 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   way: Spare Dagger's "you may sacrifice Spare Dagger" is `sacrifice-target`
   of `"granter"`. The granter is fixed as the ability is activated or
   triggered, and acted on only while it's still that permanent (400.7).
+  An Aura moving itself is `attach` with `attachment: "granter"`: Shifting
+  Shadow's "Put that card onto the battlefield and attach Shifting Shadow to
+  it" is a `reveal-until`'s `then: { kind: "attach", attachment: "granter",
+  target: 0 }`, Nettlevine Blight's "attach Nettlevine Blight to a creature or
+  land you control" `target: { among, prompt }`. Heliod's Punishment's
+  "Remove a task counter from Heliod's Punishment. Then if it has no task
+  counters on it, destroy Heliod's Punishment" is `remove-counter` and
+  `destroy` of `"granter"`, the "if" an `amounts` condition on `{ countersOn:
+  "granter" }`.
 - `sacrifice: "self"` ("Sacrifice this: …"), `"creature-you-control"`, or
   `{ filter: CardFilter }` (Zuran Orb — "Sacrifice a land"). The last two make
   the player pick (a `sacrifice` choice on the `activate-ability` LegalAction).

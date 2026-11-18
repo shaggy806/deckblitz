@@ -3035,6 +3035,8 @@
   "replacement:extra-die-chosen-ignore",
   "replacement:gain-life-becomes-draw",
   "replacement:damage-to-you-becomes-exile-graveyard",
+  "effect:attach-granting-aura",
+  "static:aura-grants-ability-referencing-aura",
   "bug:look-and-choose-offers-unattachable-aura",
   "bug:look-and-choose-offers-unattachable-aura",
   "decision:owner-orders-library-bottom",

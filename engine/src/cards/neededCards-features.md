@@ -325,6 +325,19 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### An Aura's granted ability that moves or destroys the Aura — found built 2026-11-18
+
+The keys `effect:attach-granting-aura` and `static:aura-grants-ability-referencing-aura` needed no engine code: the
+`"granter"` `ObjectRef` (rule 201.5a) is an `attach`'s `attachment`, a `remove-counter`'s or `destroy`'s target and a
+`countersOn` like any other, fixed as the granted ability triggers or is activated and acted on only while it's still
+that permanent (400.7). Shifting Shadow (rank 15147): a `reveal-until`'s `then: { kind: "attach", attachment:
+"granter", target: 0 }` after the creature with the ability is destroyed; an Aura that can't follow is attached to
+nothing and goes to the graveyard (704.5m), as its rulings say. Nettlevine Blight: `target: { among, prompt }`, the
+enchanted permanent's controller choosing. Heliod's Punishment (rank 15451): one static with the restrictions,
+`loseAllAbilities` and the grant, the loss first (613.7), so under two the creature has only the newer one's ability
+(the ruling); "if it has no task counters" is an `amounts` condition. The lines don't recur, so the scaffolder isn't
+taught them. `test/attach-granting-aura.test.ts`.
+
 ### Shuffled into its owner's library, then found again there — built 2026-11-18
 
 The key `effect:reveal-until-source-owners-library`: `reveal-until`'s `whose` already took `{ ownerOf: "source" }`;
