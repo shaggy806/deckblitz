@@ -389,6 +389,17 @@ export interface AsEntersAction {
    */
   readonly turnFaceDown?: CardFilter;
   /**
+   * "As this creature enters, **mill three cards for each time it was
+   * kicked**" (Urborg Lhurgoyf, `{ product: [3, { timesKicked: "source" }]
+   * }`): its controller mills that many as it's about to enter (rule 614.12),
+   * part of the replacement (614.1c), so nobody can respond and a
+   * characteristic-defining ability reading the graveyard sees the milled
+   * cards as it enters (the ruling). The amount is read as an "enters with"
+   * count is (`enteringCounterAmount`); how many were milled is
+   * `"done-as-enters"`. Nothing is chosen.
+   */
+  readonly mill?: EffectAmount;
+  /**
    * "As this artifact enters, **pay any amount of life**" (Phyrexian
    * Processor): its controller chooses how much as it's about to enter (rule
    * 614.12, a `choose-number` from 0) and pays it then (614.1c) — no more than

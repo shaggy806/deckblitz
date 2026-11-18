@@ -7813,7 +7813,10 @@ clause (section 9):
   card has. `removeCounters: { filter }` is "remove all counters from any
   number of [filter]" (Sin, Unending Cataclysm: anyone's, chosen, counted by
   counters removed); `turnFaceDown: CardFilter` is "turn all other [filter]
-  face down" (Ixidron: anyone's, nothing chosen). `payLife: "any"` is "pay any
+  face down" (Ixidron: anyone's, nothing chosen). `mill: EffectAmount` is "mill
+  N cards" (Urborg Lhurgoyf's `{ product: [3, { timesKicked: "source" }] }`:
+  its controller's, nothing chosen, done before it moves so a CDA over the
+  graveyard enters seeing them). `payLife: "any"` is "pay any
   amount of life" (Phyrexian Processor: a `choose-number` from 0 to its
   controller's life total, paid then, and noted on it as `{ chosenNumber: true }`
   — "the life paid as this artifact entered"). Pair it with `counters: {

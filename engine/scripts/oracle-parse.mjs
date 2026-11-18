@@ -24539,6 +24539,35 @@ function parseStatic(line, text) {
   if (line === "~ enters prepared.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", prepared: true }, text };
   }
+  // "As ~ enters, mill three cards for each time it was kicked." (Urborg
+  // Lhurgoyf — `AsEntersAction.mill`, rule 614.1c).
+  {
+    const w = /^As ~ enters, mill (a|\w+) cards?( for each time it was kicked)?\.$/.exec(line);
+    const n = w === null ? undefined : w[1] === "a" ? 1 : numberOf(w[1]);
+    if (typeof n === "number" && n > 0) {
+      const mill = w[2] === undefined ? n : { product: [n, { timesKicked: "source" }] };
+      return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", asEnters: { mill } }, text };
+    }
+  }
+  // A Lhurgoyf's "~'s power is equal to the number of creature cards in all
+  // graveyards and its toughness is equal to that number plus 1" (a CDA,
+  // rule 604.3); "your graveyard" is the cards you own (Urborg Lhurgoyf).
+  {
+    const w = /^~'s power is equal to the number of (.+?) cards in (your graveyard|all graveyards) and its toughness is equal to that number plus (\w+)\.$/.exec(line);
+    const filter = w === null ? null : parseTypePhrase(w[1], { cards: true });
+    const plus = w === null ? undefined : numberOf(w[3]);
+    if (filter !== null && Object.keys(filter).length > 0 && typeof plus === "number") {
+      return {
+        affects: { scope: "self" },
+        setBasePtFromCount: {
+          countOf: { countInGraveyard: w[2] === "your graveyard" ? { ...filter, ownedBy: "you" } : filter },
+          plusPower: 0,
+          plusToughness: plus,
+        },
+        text,
+      };
+    }
+  }
   // An aggregate over a set (`AggregateSpec`): Carrion Grub's "~ gets +X/+0,
   // where X is the greatest power among creature cards in your graveyard",
   // Ambitious Dragonborn's "~ enters with X +1/+1 counters on it, where X is

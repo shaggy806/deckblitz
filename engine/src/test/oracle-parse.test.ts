@@ -23565,3 +23565,26 @@ describe("a nontoken creature that wasn't cast exiled instead (effect:temporary-
     expect(mistcaller.activated[0].effect).toEqual({ kind: "replacement-effect", duration: "end-of-turn", replacement: exiles });
   });
 });
+
+describe("a mill as it enters (replacement:as-enters-mill)", () => {
+  it("reads Urborg Lhurgoyf whole: three a kick, and its CDA over your graveyard", () => {
+    const lhurgoyf = parseFace({
+      name: "Urborg Lhurgoyf",
+      type_line: "Creature — Lhurgoyf",
+      oracle_text:
+        "Kicker {U} and/or {B} (You may pay an additional {U} and/or {B} as you cast this spell.)\nAs this creature enters, mill three cards for each time it was kicked.\nUrborg Lhurgoyf's power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1.",
+      mana_cost: "{1}{G}",
+      colors: ["G"],
+      cmc: 2,
+    } as never) as unknown as { complete: boolean; static: readonly unknown[] };
+    expect(lhurgoyf.complete).toBe(true);
+    expect(lhurgoyf.static).toEqual([
+      expect.objectContaining({
+        replacement: { event: "enters-battlefield", asEnters: { mill: { product: [3, { timesKicked: "source" }] } } },
+      }),
+      expect.objectContaining({
+        setBasePtFromCount: { countOf: { countInGraveyard: { type: "creature", ownedBy: "you" } }, plusPower: 0, plusToughness: 1 },
+      }),
+    ]);
+  });
+});

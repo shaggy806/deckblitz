@@ -17263,6 +17263,16 @@ export class Game {
       object.enterChoice = { ...answered, asEntersDone: turned };
       return false;
     }
+    // "Mill three cards for each time it was kicked" (Urborg Lhurgoyf):
+    // nothing to choose; done before it moves, so it enters seeing them.
+    if (spec.mill !== undefined) {
+      const amount = this.enteringCounterAmount(id, chooser, id, spec.mill);
+      const before = this.state.zones.perPlayer[chooser]?.library.length ?? 0;
+      if (amount > 0) this.millByEffect({ kind: "player", player: chooser }, amount);
+      const milled = before - (this.state.zones.perPlayer[chooser]?.library.length ?? 0);
+      object.enterChoice = { ...object.enterChoice, asEntersDone: Math.max(0, milled) };
+      return false;
+    }
     if (spec.putFromExile !== undefined) {
       const count = spec.putFromExile;
       const { eligible, faceDownGroups } = this.exileChoiceCandidates(chooser, { ownedBy: "opponent" }, undefined, id);
