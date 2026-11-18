@@ -1421,7 +1421,16 @@ creature … X is that creature's power") the power one after a `sacrifice` with
 `exceptSource`. `of: "mana-value"` adds up mana values — Combustible Gearhulk's
 "the total mana value of those cards" (`in: { thisWay: "milled" }`), each card
 read where it went if that's a public zone (rule 701.17c), a card in a library
-or hand only if it was shown. `aggregate: "max"` takes the greatest instead —
+or hand only if it was shown. `of: "power"` reads a card off the battlefield
+the same way (printed, or a characteristic-defining ability as it works there,
+rule 604.3): Stitcher Geralf's "exile up to two creature cards put into
+graveyards this way. Create an X/X … where X is the total power of the cards
+exiled this way" is a `look-and-choose` (`zone: "graveyards"`, `destination:
+"exile"`, `filter: { type: "creature", thisWay: "put-into-graveyard" }`) and
+`basePt` of `{ aggregate: "sum", of: "power", filter: { thisWay: "chosen" },
+in: { thisWay: "exiled" } }` — the `chosen` filter leaves out the cards a Rest
+in Peace exiled from the mill, which weren't exiled by that instruction (its
+ruling). `aggregate: "max"` takes the greatest instead —
 Heretic's Punishment's "the greatest mana value among the milled cards" — and
 `"min"` the least.
 

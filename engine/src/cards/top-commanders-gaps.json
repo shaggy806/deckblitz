@@ -2939,7 +2939,8 @@
   "filter:has-unearth",
   "replacement:enters-with-counter-via-static-graveyard-permission",
   "replacement:enters-with-counter-via-static-graveyard-permission",
-  "trigger:played-card-exiled-this-way"
+  "trigger:played-card-exiled-this-way",
+  "amount:this-way-total-power-of-cards"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
