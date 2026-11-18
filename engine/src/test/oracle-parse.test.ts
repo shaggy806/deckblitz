@@ -22677,3 +22677,75 @@ describe("a creature sharing a color with the mana a land produced", () => {
     expect(camp.complete).toBe(true);
   });
 });
+
+describe("mill, then a card from among them; reveal from hand for mana", () => {
+  it("Rosheen, Roaring Prophet's two abilities, and Sacellum Godspeaker's reveal", () => {
+    const rosheen = parseFace({
+      name: "Rosheen, Roaring Prophet",
+      type_line: "Legendary Creature — Giant Shaman",
+      mana_cost: "{2}{R}{G}",
+      colors: ["G", "R"],
+      power: "4",
+      toughness: "4",
+      oracle_text:
+        "When Rosheen enters, mill six cards. You may put a card with {X} in its mana cost from among them into your hand.\n{T}: Reveal any number of cards with {X} in their mana cost in your hand. Add {C}{C} for each card revealed this way. Spend this mana only on costs that contain {X}.",
+    });
+    expect(rosheen.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "mill", target: "you", amount: 6 },
+        {
+          kind: "look-and-choose",
+          zone: "graveyard",
+          min: 0,
+          max: 1,
+          destination: "hand",
+          leftover: "stay",
+          filter: { thisWay: "milled", xInManaCost: true },
+        },
+      ],
+    });
+    const reveal = {
+      kind: "look-and-choose",
+      zone: "hand",
+      min: 0,
+      max: { cardsInHand: "you" },
+      destination: "reveal",
+      leftover: "stay",
+    };
+    expect(rosheen.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "C",
+      amount: { product: [2, { thisWay: "revealed", who: "you" }] },
+      first: { ...reveal, filter: { xInManaCost: true } },
+      spendOnly: { purposes: ["cost-with-x"], text: "Spend this mana only on costs that contain {X}." },
+    });
+    expect(rosheen.complete).toBe(true);
+    const godspeaker = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Elf Druid",
+      mana_cost: "{2}{G}",
+      colors: ["G"],
+      power: "2",
+      toughness: "2",
+      oracle_text: "{T}: Reveal any number of creature cards with power 5 or greater from your hand. Add {G} for each card revealed this way.",
+    });
+    expect(godspeaker.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "G",
+      amount: { thisWay: "revealed", who: "you" },
+      first: { ...reveal, filter: { type: "creature", power: { op: "gte", n: 5 } } },
+    });
+    // A mixed list of mana isn't "that much of one type".
+    const mixed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Elf Druid",
+      mana_cost: "{2}{G}",
+      colors: ["G"],
+      power: "2",
+      toughness: "2",
+      oracle_text: "{T}: Reveal any number of creature cards from your hand. Add {G}{W} for each card revealed this way.",
+    });
+    expect(mixed.complete).toBe(false);
+  });
+});

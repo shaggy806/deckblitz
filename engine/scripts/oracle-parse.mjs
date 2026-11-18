@@ -11317,6 +11317,53 @@ export function parseEffect(text, outer) {
     }
     ctx.targets.length = slots;
   }
+  // "Reveal any number of creature cards with power 5 or greater from your
+  // hand. Add {G} for each card revealed this way." (Sacellum Godspeaker),
+  // "Reveal any number of cards with {X} in their mana cost in your hand. Add
+  // {C}{C} for each card revealed this way. Spend this mana only on costs that
+  // contain {X}." (Rosheen, Roaring Prophet): a mana ability that reveals
+  // first, as it's activated (rule 605.3b), `first`'s look-and-choose.
+  const revealFor =
+    /^Reveal any number of (?:(\w+) )?cards( with \{X\} in their mana costs?| with power (\d+) or greater)? (?:from|in) your hand\. Add ((?:\{([WUBRGC])\})+) for each card revealed this way\.(?: (Spend this mana only .+\.))?$/.exec(
+      text,
+    );
+  if (revealFor !== null) {
+    const typed = revealFor[1] === undefined ? {} : parseTypePhrase(revealFor[1]);
+    const units = revealFor[4].match(/[WUBRGC]/g) ?? [];
+    const spend = revealFor[6] === undefined ? undefined : MANA_SPEND_PURPOSE_LINES[revealFor[6]];
+    if (
+      typed !== null &&
+      (revealFor[1] === undefined || Object.keys(typed).length > 0) &&
+      units.every((u) => u === revealFor[5]) &&
+      (revealFor[6] === undefined || spend !== undefined)
+    ) {
+      const revealed = { thisWay: "revealed", who: "you" };
+      const filter = {
+        ...typed,
+        ...(revealFor[3] !== undefined ? { power: { op: "gte", n: Number(revealFor[3]) } } : {}),
+        ...(revealFor[2] !== undefined && revealFor[3] === undefined ? { xInManaCost: true } : {}),
+      };
+      return {
+        effect: {
+          kind: "add-mana",
+          mana: revealFor[5],
+          amount: units.length === 1 ? revealed : { product: [units.length, revealed] },
+          first: {
+            kind: "look-and-choose",
+            zone: "hand",
+            min: 0,
+            max: { cardsInHand: "you" },
+            filter,
+            destination: "reveal",
+            leftover: "stay",
+          },
+          ...(spend !== undefined ? { spendOnly: { ...spend, text: revealFor[6] } } : {}),
+        },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
   const spendOnly = /^(Add .+?\.) (Spend this mana only .+\.)$/.exec(text);
   const spendClause = spendOnly === null ? undefined : MANA_SPEND_PURPOSE_LINES[spendOnly[2]];
   if (spendClause !== undefined) {
@@ -11827,6 +11874,34 @@ export function parseEffect(text, outer) {
         };
         parsed.push(look);
         hints.push({ sentence, effect: look });
+        skip = 1;
+        continue;
+      }
+    }
+    // "Mill three cards. You may put a land card from among them into your
+    // hand." (Six), "… a card with {X} in its mana cost …" (Rosheen, Roaring
+    // Prophet): the milled cards, up to one into the hand.
+    const millM = /^mill (\w+) cards\.$/i.exec(sentence);
+    const milledTakeM =
+      millM === null
+        ? null
+        : /^you may put an? (?:(.+?) )?card( with \{X\} in its mana cost)? from among them into your hand\.$/i.exec(sentences[i + 1] ?? "");
+    if (millM !== null && milledTakeM !== null) {
+      const count = numberOf(millM[1]);
+      const typed = milledTakeM[1] === undefined ? {} : parseTypePhrase(milledTakeM[1]);
+      if (typeof count === "number" && typed !== null && (milledTakeM[1] === undefined || Object.keys(typed).length > 0)) {
+        const mill = { kind: "mill", target: "you", amount: count };
+        const take = {
+          kind: "look-and-choose",
+          zone: "graveyard",
+          min: 0,
+          max: 1,
+          destination: "hand",
+          leftover: "stay",
+          filter: { thisWay: "milled", ...typed, ...(milledTakeM[2] !== undefined ? { xInManaCost: true } : {}) },
+        };
+        parsed.push(mill, take);
+        hints.push({ sentence, effect: mill });
         skip = 1;
         continue;
       }

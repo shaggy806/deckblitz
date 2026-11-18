@@ -5110,7 +5110,12 @@ scaffolder reads "[sentence]. Add …" this way. A `first` that asks is a
 your hand. Add {C}{C} for each card revealed this way" (`amount: { product:
 [2, { thisWay: "revealed", who: "you" }] }`): asked as the ability is
 activated, the mana added once it's answered (`Game.manaRevealFirst`). No
-other `first` may stop to ask.
+other `first` may stop to ask. Rosheen, Roaring Prophet's "Reveal any number of
+cards with {X} in their mana cost in your hand. Add {C}{C} for each card
+revealed this way. Spend this mana only on costs that contain {X}" is the same
+with `filter: { xInManaCost: true }` and a `spendOnly` of `["cost-with-x"]`;
+the scaffolder reads both shapes (and Sacellum Godspeaker's "with power 5 or
+greater").
 
 `add-mana`'s `who` (a `PlayerScope`) is "**each player** adds {B}{R}{G}"
 (Yurlok of Scorch Thrash) — for mana with no choice in it. In a mana ability,

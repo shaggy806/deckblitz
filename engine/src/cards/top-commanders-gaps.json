@@ -2958,7 +2958,8 @@
   "static:untaps-during-others-untap-attached",
   "amount:colors-among-exiled-with-source",
   "effect:add-mana-each-color-among-exiled",
-  "condition:shares-color-with-produced-mana"
+  "condition:shares-color-with-produced-mana",
+  "cost:mana-ability-reveal-any-number"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
