@@ -575,6 +575,17 @@ export type GameEvent =
       readonly to: PlayerId;
     })
   | (Base & {
+      /** `player` gave a gift to `to` (rule 702.174c): an instant or sorcery
+       * whose gift was promised resolved, or a permanent's gift triggered
+       * ability did — `source` is that spell or permanent. Announced even
+       * when `to` got nothing (it has left the game, or a static stops it),
+       * as the rulings say "whenever you give a gift" still triggers. */
+      readonly type: "gift-given";
+      readonly source: ObjectId;
+      readonly player: PlayerId;
+      readonly to: PlayerId;
+    })
+  | (Base & {
       readonly type: "card-drawn";
       readonly player: PlayerId;
       readonly object: ObjectId;

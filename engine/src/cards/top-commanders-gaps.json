@@ -3001,7 +3001,8 @@
   "effect:that-player-returns-permanent",
   "effect:repeat-unless-paid",
   "decision:choose-color-on-attach",
-  "static:attacking-player-chooses-blocks"
+  "static:attacking-player-chooses-blocks",
+  "trigger:gives-gift"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

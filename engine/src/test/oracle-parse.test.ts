@@ -20836,6 +20836,10 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you shuffle your library")).toEqual([{ on: "event", event: "shuffles-library", who: "you" }]);
   });
 
+  it("reads giving a gift (Jolly Gerbils)", () => {
+    expect(parseTrigger("Whenever you give a gift")).toEqual([{ on: "event", event: "gives-gift", who: "you" }]);
+  });
+
   it("reads creatures blocking, once a combat (Tide of War)", () => {
     expect(parseTrigger("Whenever one or more creatures block")).toEqual([
       { on: "event", event: "creatures-block", batched: true },

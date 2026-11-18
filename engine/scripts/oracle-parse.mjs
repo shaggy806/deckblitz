@@ -2945,6 +2945,8 @@ export function parseTrigger(clause) {
   // Expend N (rule 700.14) and "whenever you forage" (701.61a).
   if ((m = /^Whenever you expend (\d+)$/.exec(c))) return [{ on: "expend", who: "you", amount: Number(m[1]) }];
   if (/^Whenever you forage$/.test(c)) return [{ on: "event", event: "forages", who: "you" }];
+  // A gift given: a promised spell or gift trigger resolving (rule 702.174c).
+  if (/^Whenever you give a gift$/.test(c)) return [{ on: "event", event: "gives-gift", who: "you" }];
   // Once the whole manifest dread is done, even if it couldn't be (701.62b).
   if (/^Whenever you manifest dread$/.test(c)) return [{ on: "event", event: "manifests-dread", who: "you" }];
   // Rule 706: once per die rolled; "your third die each turn" (Resolute

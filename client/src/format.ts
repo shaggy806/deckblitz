@@ -250,6 +250,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${event.objects.map(name).join(', ')} phase${event.objects.length === 1 ? 's' : ''} in`
     case 'gift-promised':
       return `${who(event.player)} promises ${name(event.spell)}'s gift to ${who(event.to)}`
+    case 'gift-given':
+      return `${who(event.player)} gives ${name(event.source)}'s gift to ${who(event.to)}`
     case 'day-night-changed':
       return `it becomes ${event.value}`
     case 'counter-failed':

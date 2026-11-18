@@ -101,6 +101,11 @@ export const TRIGGER_EVENTS = {
     when: (e) => e.byEntry === true,
     object: (e) => e.object,
   }),
+  /** "Whenever you give a gift" (rule 702.174c — Jolly Gerbils): an instant
+   * or sorcery of yours whose gift was promised resolves, or the gift
+   * triggered ability of a permanent of yours does. The player is the giver;
+   * the one it was promised to is the event's `to`. */
+  "gives-gift": row({ type: "gift-given", player: (e) => e.player }),
   /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
   forages: row({ type: "foraged", player: (e) => e.player }),
   /** "Whenever you manifest dread" (rule 701.62b — Paranormal Analyst): once

@@ -45178,31 +45178,38 @@ controlledBy,
               : live?.zone === "battlefield"
                 ? live.enteredGiftTo
                 : undefined;
-        if (to === undefined || this.state.players[to]?.hasLost !== false) return;
+        if (to === undefined) return;
         // The gifts themselves (rules 702.174d–i): the chosen player does it.
-        switch (gift) {
-          case "card":
-            this.drawCard(to);
-            return;
-          case "extra-turn":
-            this.state.extraTurns.push(to);
-            this.emit({ type: "extra-turn-queued", player: to });
-            return;
-          // A gift's token as its text says, a text change's words and all
-          // ("Gift a tapped Fish" made "Gift a tapped Vampire").
-          case "tapped-fish":
-            this.createTokens(to, tokenNameWithChanges("Fish Token", textChanges), 1, true);
-            return;
-          case "food":
-            this.createTokens(to, "Food Token", 1);
-            return;
-          case "treasure":
-            this.createTokens(to, "Treasure Token", 1);
-            return;
-          case "octopus":
-            this.createTokens(to, tokenNameWithChanges("Octopus Token", textChanges), 1);
-            return;
+        if (this.state.players[to]?.hasLost === false) {
+          switch (gift) {
+            case "card":
+              this.drawCard(to);
+              break;
+            case "extra-turn":
+              this.state.extraTurns.push(to);
+              this.emit({ type: "extra-turn-queued", player: to });
+              break;
+            // A gift's token as its text says, a text change's words and all
+            // ("Gift a tapped Fish" made "Gift a tapped Vampire").
+            case "tapped-fish":
+              this.createTokens(to, tokenNameWithChanges("Fish Token", textChanges), 1, true);
+              break;
+            case "food":
+              this.createTokens(to, "Food Token", 1);
+              break;
+            case "treasure":
+              this.createTokens(to, "Treasure Token", 1);
+              break;
+            case "octopus":
+              this.createTokens(to, tokenNameWithChanges("Octopus Token", textChanges), 1);
+              break;
+          }
         }
+        // "Whenever you give a gift" (rule 702.174c): the spell or the gift
+        // trigger resolving with its gift promised is the gift given, whatever
+        // became of it (Jolly Gerbils' ruling: a replacement or a static that
+        // stops the player receiving it doesn't matter).
+        this.emit({ type: "gift-given", source, player: controller, to });
       },
       winGame: (player) => this.winGame(player, `won the game with ${this.effectSourceName(source)}`),
       loseGame: (players) => this.loseGame(players, `lost the game to ${this.effectSourceName(source)}`),
