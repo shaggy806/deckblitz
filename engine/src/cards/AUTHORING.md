@@ -3681,7 +3681,7 @@ discardedThisTurn, drawnThisTurn, enteredThisTurn, turnedFaceUpThisTurn, control
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
-nameUnlike, sameNameWith, sameNameAsTriggerObject, sharesColorWith, ofChosenType, targets, greatestAmongItsController, greatestInZone, couldProduce }`,
+nameUnlike, sameNameWith, sameNameAsTriggerObject, sharesColorWith, ofChosenType, targets, greatestAmongItsController, greatestInZone, couldProduce, couldEnchant }`,
 every present clause ANDed. `colorCount: 2` is "exactly two colors", and "isn't exactly two
 colors" its `not` — colorless, one color, or three or more (Invasion of Ravnica // Guildpact
 Paragon). `couldProduce: "C"` is "a land that could produce {C}" (rule 106.7):
@@ -3690,7 +3690,12 @@ effects included and whether or not it could be activated, so a tapped land coun
 Charmaw's `countOf: { type: "land", controlledBy: "opponent", couldProduce: "C" }`, Break the
 Ice's "land that is snow or could produce {C}" (`anyOf: [{ supertype: "snow" }, { couldProduce:
 "C" }]`). The game answers it (`Game.couldProduce`): on the battlefield only, never inside the
-layer fold (a static's scope). `greatestInZone: { of, among }` is one comparison over
+layer fold (a static's scope). `couldEnchant: ObjectRef` is "an Aura card **that could
+enchant** it" (rule 303.4: its enchant ability allows it, protection doesn't stop it, it isn't
+a creature): Auratouched Mage's `{ subtype: "Aura", couldEnchant: "source" }`, bound as the
+effect resolves to that object and the stint it means, and answered by the game
+(`Game.couldEnchantFor`) as the object is or, once it has left, as it last existed (its
+ruling; the snapshot keeps no protection). Only inside a resolving effect. `greatestInZone: { of, among }` is one comparison over
 everything in the object's zone that matches `among`, ties all counted (`strictly`: none,
 Selvala, Heart of the Wilds' "greater than each other creature's power"): over every
 permanent, whoever controls it, on the battlefield — Topple's "target creature with the

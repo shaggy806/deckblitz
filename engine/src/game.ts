@@ -397,6 +397,7 @@ import {
   matchesFilter,
   ownerOnly,
   printedManaCost,
+  setCouldEnchantReader,
   setCouldProduceReader,
   stackObjectTargetsMatch,
   stackObjectTargetsMatching,
@@ -711,6 +712,7 @@ import type { TargetCopies, TargetCountRange, TargetTaxShare } from "./target-co
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import {
   cardSource,
+  enchantSlotAdmitsSnapshot,
   invalidTargetReason,
   isLegalTarget,
   legalTargets,
@@ -3008,6 +3010,8 @@ export class Game {
     this.rng = rng;
     // A `couldProduce` filter clause (rule 106.7) asks this game.
     setCouldProduceReader(this.state, (id) => this.couldProduce(id, new Set()));
+    // So does a `couldEnchant` one (rule 303.4).
+    setCouldEnchantReader(this.state, (aura, host, controller) => this.couldEnchantFor(aura, host, controller));
     // Built here rather than per call: `state` and `registry` are fixed for
     // the life of a `Game`, and `state` is mutated in place rather than
     // replaced, so one object stays current. `decisionHost` binds the very
@@ -18212,6 +18216,32 @@ export class Game {
     }
     const source = onBattlefield ? this.permanentSource(aura) : this.enteringSource(def, aura);
     return !protectionBlocks(this.state, this.registry, host, source, aura, controller);
+  }
+
+  /**
+   * A `couldEnchant` filter clause's question (`CardFilter.couldEnchantHost`):
+   * could the Aura card `aura`, controlled by `controller`, enchant `host`
+   * (rule 303.4)? While the host is still on the battlefield as the object
+   * the clause means (rule 400.7), `canEnchant` asks it as it is, protection
+   * included. Once it has left, its last-known snapshot of that stint is asked
+   * instead — "as it most recently existed on the battlefield" (the
+   * Auratouched Mage ruling) — by the Aura's enchant ability alone, the
+   * snapshot keeping no protection. A creature Aura enchants nothing (303.4d).
+   */
+  private couldEnchantFor(aura: ObjectId, host: { readonly object: ObjectId; readonly stint: number }, controller: PlayerId): boolean {
+    const object = this.state.objects[aura];
+    if (object === undefined || !this.registry.has(printedCardName(object))) return false;
+    const def = this.registry.get(printedCardName(object));
+    if (!def.subtypes.includes("Aura")) return false;
+    const live = this.state.objects[host.object];
+    if (live?.zone === "battlefield" && (live.zoneChangeCount ?? 0) === host.stint) {
+      return this.canEnchant(aura, host.object, controller, def);
+    }
+    const snapshot = live === undefined ? this.state.ceasedTokens?.[host.object] : live.lastKnown;
+    if (snapshot === undefined || snapshot.zoneChangeCount !== host.stint) return false;
+    if (this.enteringAuraTypes(aura, def).includes("creature")) return false;
+    const spec = def.targets[0];
+    return spec !== undefined && enchantSlotAdmitsSnapshot(this.state, this.registry, spec, host.object, snapshot, controller);
   }
 
   /** The card types of the Aura `aura`, as `def`: as they are on the

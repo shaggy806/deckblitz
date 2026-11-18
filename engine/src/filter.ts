@@ -1623,6 +1623,24 @@ export interface CardFilter {
    * inside the layer fold, where it fails closed.
    */
   readonly couldProduce?: ManaType;
+  /**
+   * An Aura card **that could enchant** the object this names (rule 303.4):
+   * its enchant ability allows it, protection doesn't stop it, and it isn't
+   * a creature (303.4d) — Auratouched Mage's "search your library for an Aura
+   * card that could enchant it". Bound as the effect resolves into
+   * {@link couldEnchantHost}; read by the game playing the state
+   * (`Game.couldEnchantFor`, through {@link setCouldEnchantReader}), and fails
+   * closed with no game.
+   */
+  readonly couldEnchant?: ObjectRef;
+  /**
+   * `couldEnchant` bound — never authored: the object and the stint on the
+   * battlefield the reference means (rule 400.7). The game reads it as it is
+   * while it's still there as that object, else as its last-known snapshot
+   * of that stint (the Auratouched Mage ruling: "as it most recently existed
+   * on the battlefield"). `null`: it names nothing, so nothing matches.
+   */
+  readonly couldEnchantHost?: { readonly object: ObjectId; readonly stint: number } | null;
 }
 
 /**
@@ -1638,6 +1656,22 @@ const couldProduceReaders = new WeakMap<GameState, (id: ObjectId) => readonly Ma
 /** Set the `couldProduce` reader for `state` — `Game`'s constructor. */
 export function setCouldProduceReader(state: GameState, read: (id: ObjectId) => readonly ManaType[]): void {
   couldProduceReaders.set(state, read);
+}
+
+/** Whether the Aura card `aura`, controlled by `controller`, could enchant
+ * `host` (see `CardFilter.couldEnchantHost`) — only the game can answer. */
+export type CouldEnchantReader = (
+  aura: ObjectId,
+  host: NonNullable<CardFilter["couldEnchantHost"]>,
+  controller: PlayerId,
+) => boolean;
+
+/** The `couldEnchant` reader of each `Game`'s state, as {@link couldProduceReaders}. */
+const couldEnchantReaders = new WeakMap<GameState, CouldEnchantReader>();
+
+/** Set the `couldEnchant` reader for `state` — `Game`'s constructor. */
+export function setCouldEnchantReader(state: GameState, read: CouldEnchantReader): void {
+  couldEnchantReaders.set(state, read);
 }
 
 /**
@@ -3742,6 +3776,16 @@ export function matchesFilter(
     if (layered !== undefined || live === undefined || live.zone !== "battlefield") return false;
     const read = couldProduceReaders.get(state);
     if (read === undefined || !read(id).includes(filter.couldProduce)) return false;
+  }
+
+  // "An Aura card that could enchant it" (rule 303.4): the game asks the
+  // Aura's enchant ability of the host. Unbound (`couldEnchant` alone, no
+  // resolution behind it) or naming nothing, nothing matches.
+  if (filter.couldEnchant !== undefined || filter.couldEnchantHost !== undefined) {
+    const host = filter.couldEnchantHost;
+    const read = couldEnchantReaders.get(state);
+    if (host === undefined || host === null || read === undefined || live === undefined) return false;
+    if (!read(id, host, ctx.you)) return false;
   }
 
   // "With the greatest power among creatures that player controls": none of

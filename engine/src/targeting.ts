@@ -591,6 +591,68 @@ export function isLegalTarget(...args: Parameters<typeof isLegalTargetUncached>)
   return withComputedCache(() => isLegalTargetUncached(...args));
 }
 
+/**
+ * Whether an Aura's enchant ability — `spec`, the slot its spell targets
+ * (rule 303.4a) — allows the permanent `id` as `snapshot`, its last-known
+ * information, describes it: an Aura card "that could enchant" a permanent
+ * that has left, read "as it most recently existed on the battlefield" (the
+ * Auratouched Mage ruling). Not targeting, so hexproof and shroud don't
+ * matter; the snapshot keeps no protection, so that isn't read. The
+ * battlefield shapes an enchant ability takes; any other (a player, a card in
+ * a graveyard, one asked of a trigger's player) allows nothing.
+ */
+export function enchantSlotAdmitsSnapshot(
+  state: GameState,
+  registry: CardRegistry,
+  spec: TargetSpec,
+  id: ObjectId,
+  snapshot: LastKnownInfo,
+  forPlayer: PlayerId,
+): boolean {
+  const has = (type: CardType): boolean => snapshot.types.includes(type);
+  const yours = snapshot.controller === forPlayer;
+  if (typeof spec === "object") {
+    if (spec.kind === "one-of") return spec.of.some((part) => enchantSlotAdmitsSnapshot(state, registry, part, id, snapshot, forPlayer));
+    if (spec.kind !== "permanent" || spec.attacking !== undefined || spec.protectedBy !== undefined) return false;
+    const whose = spec.whose ?? "any";
+    if (whose !== "any" && whose !== "you" && whose !== "opponent") return false;
+    if ((whose === "you" && !yours) || (whose === "opponent" && yours)) return false;
+    return matchesFilter(state, registry, id, spec.filter, { you: forPlayer, snapshot });
+  }
+  switch (spec) {
+    case "creature":
+      return has("creature");
+    case "nonblack-creature":
+      return has("creature") && !snapshot.colors.includes("B");
+    case "nonartifact-creature":
+      return has("creature") && !has("artifact");
+    case "creature-you-control":
+      return has("creature") && yours;
+    case "creature-an-opponent-controls":
+      return has("creature") && !yours;
+    case "permanent":
+      return true;
+    case "nonland-permanent":
+      return !has("land");
+    case "land":
+      return has("land");
+    case "land-you-control":
+      return has("land") && yours;
+    case "artifact":
+      return has("artifact");
+    case "enchantment":
+      return has("enchantment");
+    case "artifact-or-creature":
+      return has("artifact") || has("creature");
+    case "artifact-or-enchantment":
+      return has("artifact") || has("enchantment");
+    case "creature-or-enchantment":
+      return has("creature") || has("enchantment");
+    default:
+      return false;
+  }
+}
+
 /** How many targets a spell or ability on the stack had chosen as it went
  * there — "with a single target" (rule 115.9a): each instance counted (the
  * same object twice is two), however many are still legal, and a slot its

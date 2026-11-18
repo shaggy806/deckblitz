@@ -19412,6 +19412,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesColorWithMana" in value ||
       "attachedToObject" in value ||
       "notObject" in value ||
+      "couldEnchant" in value ||
       "attachedToPlayerRef" in value ||
       "controlledByRef" in value ||
       "ownedByRef" in value ||
@@ -19789,6 +19790,20 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         ref === "granter" ? ctx.granterLost : ref === "source" ? ctx.sourceLost : ref === "trigger-object" ? ctx.triggerObjectLost : false;
       const spared = read?.kind === "object" && gone !== true ? [read.object] : [];
       walked = { ...rest, notObjects: [...((rest["notObjects"] as readonly ObjectId[] | undefined) ?? []), ...spared] };
+    }
+    // "An Aura card that could enchant it" (Auratouched Mage): that object in
+    // the stint the reference means — the source's, the one its ability came
+    // from (rule 607.2a) — read later as it is, or as it last existed.
+    if (walked["couldEnchant"] !== undefined) {
+      const { couldEnchant: ref, ...rest } = walked;
+      const read = objectRefRead(ref as ObjectRef, ctx);
+      const stint =
+        read?.kind !== "object"
+          ? undefined
+          : ref === "source"
+            ? (ctx.sourceStintNow() ?? ctx.battlefieldStintOf(read.object))
+            : ctx.battlefieldStintOf(read.object);
+      walked = { ...rest, couldEnchantHost: read?.kind === "object" && stint !== undefined ? { object: read.object, stint } : null };
     }
     // "Curses attached to that player": the player the ref names as this
     // applies; nobody, nothing.
