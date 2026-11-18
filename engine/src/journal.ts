@@ -122,7 +122,8 @@ export type JournalKind =
   | "land-played"
   /** `player` drew a card (121.1). */
   | "card-drawn"
-  /** A card `player` owned left their graveyard, for anywhere. */
+  /** A card `player` owned left their graveyard, for anywhere; `was`: the
+   * card as it was there, `stint` the one it had there. */
   | "left-graveyard"
   /** A card `player` owned was put into exile, from any zone, by anyone. */
   | "put-into-exile"
@@ -384,6 +385,12 @@ export type JournalWhat =
   | "descended"
   | "discarded"
   | "to-graveyard"
+  /** A card left its owner's graveyard, for anywhere (`left-graveyard`
+   * entries); the list is the owner's, and a filter reads the card as it
+   * was in the graveyard — Syrix, Carrier of the Flame's "if a **creature
+   * card** left your graveyard this turn" (`filter: { type: "creature" }`),
+   * whatever it became where it went. */
+  | "left-graveyard"
   /** A card its owner surveilled into their graveyard (rule 701.25a), the
    * `to-graveyard` entries a surveil wrote (`how: "surveil"`): with a
    * `journaled` clause, "cards in your graveyard you've surveilled this
@@ -516,6 +523,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   descended: { kind: "to-graveyard", match: (e, read) => isPermanentCard(e, read) },
   discarded: { kind: "discarded" },
   "to-graveyard": { kind: "to-graveyard" },
+  "left-graveyard": { kind: "left-graveyard" },
   surveilled: { kind: "to-graveyard", match: (e) => e.how === "surveil" },
   "combat-damaged-by": {
     kind: "damage",

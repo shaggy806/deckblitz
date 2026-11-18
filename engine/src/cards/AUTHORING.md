@@ -7560,7 +7560,11 @@ clause (section 9):
   dealt it, though it has died or changed hands since: Rith, Liberated
   Primeval's "if a creature or planeswalker an opponent controlled was dealt
   excess damage this turn" (`who: "opponent"`, `filter: { typesAnyOf:
-  ["creature", "planeswalker"] }`). Per player under `of-player` `"that-player"` in a
+  ["creature", "planeswalker"] }`). `what: "left-graveyard"` is the cards that
+  left `who`'s graveyard, for anywhere, each read as it was there: Syrix,
+  Carrier of the Flame's "if a creature card left your graveyard this turn"
+  (`filter: { type: "creature" }`; unfiltered, the `cards-left-graveyard`
+  turn stat says the same). Per player under `of-player` `"that-player"` in a
   `countPlayers`' `where` (Estinien Varlineau). Ichor Shade's "if an artifact or creature was put into a
   graveyard from the battlefield this turn" `{ what: "to-graveyard", who:
   "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",

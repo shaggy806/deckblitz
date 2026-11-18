@@ -23889,4 +23889,21 @@ describe("a library search that exiles its finds (Kaho, Minamo Historian; Myr In
       newTargets: true,
     });
   });
+
+  it("reads Syrix's and Gau's intervening ifs: a (creature) card left your graveyard this turn", () => {
+    const read = (name: string, oracle_text: string) =>
+      parseFace({ name, type_line: "Legendary Creature — Phoenix", mana_cost: "{2}{B}{R}", oracle_text }, { tokenFor: () => null }) as unknown as {
+        triggered: { condition?: unknown }[];
+      };
+    const syrix = read(
+      "Syrix, Carrier of the Flame",
+      "At the beginning of each end step, if a creature card left your graveyard this turn, target Phoenix you control deals damage equal to its power to any target.",
+    );
+    expect(syrix.triggered[0].condition).toEqual({ kind: "turn-history", what: "left-graveyard", who: "you", filter: { type: "creature" } });
+    const gau = read(
+      "Gau, Feral Youth",
+      "At the beginning of each end step, if a card left your graveyard this turn, Gau deals damage equal to its power to each opponent.",
+    );
+    expect(gau.triggered[0].condition).toEqual({ kind: "turn-stat", stat: "cards-left-graveyard", who: "you", atLeast: 1 });
+  });
 });

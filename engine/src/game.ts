@@ -62541,9 +62541,19 @@ controlledBy,
         add({ kind: "mana-spent", player: event.player, amount: event.after - event.before });
         return;
       case "cards-left-graveyard":
+        // Each card as it was in the graveyard (`announceGraveyardDepartures`
+        // holds the snapshots while this is announced): "if a creature card
+        // left your graveyard this turn" asks what it was there (Syrix).
         for (const id of event.objects) {
-          const owner = this.state.objects[id]?.owner;
-          if (owner !== undefined) add({ kind: "left-graveyard", player: owner, object: id });
+          const was = this.graveyardDepartures?.get(id);
+          const owner = was?.owner ?? this.state.objects[id]?.owner;
+          if (owner === undefined) continue;
+          add({
+            kind: "left-graveyard",
+            player: owner,
+            object: id,
+            ...(was !== undefined ? { was, stint: was.zoneChangeCount } : {}),
+          });
         }
         return;
       case "cards-put-into-graveyard":

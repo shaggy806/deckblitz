@@ -21276,6 +21276,15 @@ const TURN_TALLY_IFS = {
   "if a permanent was returned to your hand from the battlefield this turn,": PUT_INTO_HAND_THIS_TURN,
   // Asked of the spell as it resolves (First Contact).
   "if ~ is the first spell you've cast this game,": { kind: "first-spell-this-game" },
+  // Cards that left your graveyard, for anywhere (Gau, Feral Youth); with a
+  // type, each read as it was there (Syrix, Carrier of the Flame).
+  "if a card left your graveyard this turn,": { kind: "turn-stat", stat: "cards-left-graveyard", who: "you", atLeast: 1 },
+  "if a creature card left your graveyard this turn,": {
+    kind: "turn-history",
+    what: "left-graveyard",
+    who: "you",
+    filter: { type: "creature" },
+  },
 };
 
 /** A meld card's whole instruction (rule 701.42): the counterpart's card
