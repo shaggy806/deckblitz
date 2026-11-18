@@ -2960,7 +2960,9 @@
   "effect:add-mana-each-color-among-exiled",
   "condition:shares-color-with-produced-mana",
   "cost:mana-ability-reveal-any-number",
-  "mechanic:piles"
+  "mechanic:piles",
+  "mechanic:piles",
+  "effect:opponent-chooses-permanents-to-bounce"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
