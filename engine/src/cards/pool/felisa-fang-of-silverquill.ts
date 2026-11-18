@@ -34,6 +34,7 @@ export default defineCard({
   text: `Flying\n${MENTOR_TEXT}\n${INKLING_TEXT}`,
   triggered: [
     {
+      keywordOf: "mentor",
       trigger: { on: "attacks", who: "self" },
       targets: [
         {

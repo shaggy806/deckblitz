@@ -22,6 +22,7 @@ export default defineCard({
   text: `${MENTOR_TEXT}\n${TOKEN_TEXT}`,
   triggered: [
     {
+      keywordOf: "mentor",
       trigger: { on: "attacks", who: "self" },
       targets: [
         {

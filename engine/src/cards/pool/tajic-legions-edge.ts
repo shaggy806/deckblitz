@@ -29,6 +29,7 @@ export default defineCard({
   ],
   triggered: [
     {
+      keywordOf: "mentor",
       trigger: { on: "attacks", who: "self" },
       targets: [
         {

@@ -48,6 +48,12 @@ export interface TriggerEventRow<T extends GameEvent["type"] = GameEvent["type"]
   objects?(event: EventOf<T>): readonly ObjectId[];
   /** Who did it, where that's neither the subject nor its controller. */
   by?(event: EventOf<T>): PlayerId | undefined;
+  /** What it was done to, where that's not the subject: the creature
+   * mentored ("put a shield counter on **that creature**" — Aegis of the
+   * Legion). The trigger's recipient (`LastKnownRefs.recipient`, the
+   * `"trigger-recipient"` reference), in the stint it was in as the ability
+   * triggered; its controller is "that player" where the row names none. */
+  recipient?(event: EventOf<T>): ObjectId | undefined;
   /** What `triggerValue` reads: "that much", "that many". */
   amount?(event: EventOf<T>): number;
   /** The objects "them" means, each in its stint — the `"trigger-batch"`
@@ -106,6 +112,13 @@ export const TRIGGER_EVENTS = {
    * triggered ability of a permanent of yours does. The player is the giver;
    * the one it was promised to is the event's `to`. */
   "gives-gift": row({ type: "gift-given", player: (e) => e.player }),
+  /** "Whenever equipped creature mentors a creature" (rule 702.134c — Aegis
+   * of the Legion): a mentor ability (`keywordOf: "mentor"`) whose source is
+   * the subject resolved, its target still legal; the creature mentored is
+   * the recipient ("that creature", `"trigger-recipient"`). The subject is
+   * matched as it last existed if it has left (the ruling: an Equipment
+   * moved off it before the ability resolves doesn't see it). */
+  mentors: row({ type: "mentored", object: (e) => e.object, recipient: (e) => e.target }),
   /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
   forages: row({ type: "foraged", player: (e) => e.player }),
   /** "Whenever you manifest dread" (rule 701.62b — Paranormal Analyst): once
@@ -376,6 +389,17 @@ export function triggerEventBatch(event: GameEvent): readonly { readonly object:
     if (r.when !== undefined && !r.when(event as never)) continue;
     const batch = r.batch?.(event as never);
     if (batch !== undefined) return batch;
+  }
+  return undefined;
+}
+
+/** The object `event` did something to, by the first row of its type that
+ * names one — a generic trigger's recipient (`"trigger-recipient"`). */
+export function triggerEventRecipient(event: GameEvent): ObjectId | undefined {
+  for (const r of TRIGGER_EVENTS_BY_TYPE.get(event.type) ?? []) {
+    if (r.when !== undefined && !r.when(event as never)) continue;
+    const recipient = r.recipient?.(event as never);
+    if (recipient !== undefined) return recipient;
   }
   return undefined;
 }

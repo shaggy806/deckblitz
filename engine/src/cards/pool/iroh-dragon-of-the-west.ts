@@ -35,6 +35,7 @@ export default defineCard({
   text: "Haste\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nAt the beginning of combat on your turn, each creature you control with a counter on it gains firebending 2 until end of turn. (Whenever it attacks, add {R}{R}. This mana lasts until end of combat.)",
   triggered: [
     {
+      keywordOf: "mentor",
       trigger: { on: "attacks", who: "self" },
       targets: [
         {

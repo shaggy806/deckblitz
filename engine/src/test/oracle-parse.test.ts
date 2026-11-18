@@ -20855,6 +20855,24 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you give a gift")).toEqual([{ on: "event", event: "gives-gift", who: "you" }]);
   });
 
+  it("reads equipped creature mentoring a creature, and mentor granted (Aegis of the Legion)", () => {
+    expect(parseTrigger("Whenever equipped creature mentors a creature")).toEqual([
+      { on: "event", event: "mentors", who: "attached" },
+    ]);
+    const aegis = parseFace(
+      {
+        name: "Aegis of the Legion",
+        type_line: "Artifact — Equipment",
+        oracle_text:
+          "Equipped creature gets +1/+1 and has mentor. (Whenever it attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nWhenever equipped creature mentors a creature, put a shield counter on that creature. (If that creature would be dealt damage or destroyed, remove a shield counter from it instead.)\nEquip {3}",
+      },
+      {},
+    );
+    expect(aegis.complete).toBe(true);
+    expect(aegis.static[0].grantsTriggered[0].keywordOf).toBe("mentor");
+    expect(aegis.triggered[0].effect).toEqual({ kind: "add-counter", target: "trigger-recipient", counter: "shield", amount: 1 });
+  });
+
   it("reads creatures blocking, once a combat (Tide of War)", () => {
     expect(parseTrigger("Whenever one or more creatures block")).toEqual([
       { on: "event", event: "creatures-block", batched: true },

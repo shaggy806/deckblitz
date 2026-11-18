@@ -72,6 +72,8 @@ const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
   // Bookkeeping for "whenever you … at random" (Chira, All In) — the discard,
   // flip, roll or pick has its own line.
   'acted-at-random',
+  // Bookkeeping for "whenever … mentors a creature" — the counter has its own line.
+  'mentored',
   // Bookkeeping for "whenever your untap step untaps …" — the permanents' own untaps say it.
   'untap-step-untapped',
   'permanent-tapped',
@@ -252,6 +254,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} promises ${name(event.spell)}'s gift to ${who(event.to)}`
     case 'gift-given':
       return `${who(event.player)} gives ${name(event.source)}'s gift to ${who(event.to)}`
+    case 'mentored':
+      return `${name(event.object)} mentors ${name(event.target)}`
     case 'day-night-changed':
       return `it becomes ${event.value}`
     case 'counter-failed':

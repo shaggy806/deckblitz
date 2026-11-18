@@ -14,6 +14,7 @@ export default defineCard({
   text: "First strike (This creature deals combat damage before creatures without first strike.)\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)",
   triggered: [
     {
+      keywordOf: "mentor",
       trigger: { on: "attacks", who: "self" },
       targets: [
         {

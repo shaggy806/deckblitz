@@ -35,6 +35,7 @@ export default defineCard({
   text: `${MENTOR_TEXT}\n${DIES_TEXT}`,
   triggered: [
     {
+      keywordOf: "mentor",
       trigger: { on: "attacks", who: "self" },
       targets: [
         {

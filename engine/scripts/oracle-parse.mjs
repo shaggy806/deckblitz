@@ -2947,6 +2947,8 @@ export function parseTrigger(clause) {
   if (/^Whenever you forage$/.test(c)) return [{ on: "event", event: "forages", who: "you" }];
   // A gift given: a promised spell or gift trigger resolving (rule 702.174c).
   if (/^Whenever you give a gift$/.test(c)) return [{ on: "event", event: "gives-gift", who: "you" }];
+  // A mentor ability of that creature resolving (rule 702.134c).
+  if (/^Whenever (?:equipped|enchanted) creature mentors a creature$/.test(c)) return [{ on: "event", event: "mentors", who: "attached" }];
   // Once the whole manifest dread is done, even if it couldn't be (701.62b).
   if (/^Whenever you manifest dread$/.test(c)) return [{ on: "event", event: "manifests-dread", who: "you" }];
   // Rule 706: once per die rolled; "your third die each turn" (Resolute
@@ -21720,6 +21722,8 @@ function itOf(triggers) {
   if (triggers.every((t) => t.on === "crews-or-saddles")) return "trigger-object";
   // "That creature": what the damage was dealt to.
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "creature")) return "trigger-recipient";
+  // "That creature": the one mentored (Aegis of the Legion, rule 702.134c).
+  if (triggers.every((t) => t.on === "event" && t.event === "mentors")) return "trigger-recipient";
   // "That creature": the one it blocks or that blocks it.
   if (triggers.every((t) => (t.on === "blocks" && t.object === "blocked") || t.on === "blocked-by")) return "trigger-object";
   // "That creature" this Equipment became attached to (Blade of Shared Souls).
@@ -25904,6 +25908,11 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^(?:Equipped|Enchanted) creature gets ([+-]\\d+)/([+-]\\d+)(?: and has ${KW}(?: and ${KW})?)?\\.$`, "i").exec(line))) {
     const kws = [m[3], m[4]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
     return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
+  }
+  // Mentor is a triggered ability (rule 702.134a), granted as one — Aegis of
+  // the Legion, Nyxborn Unicorn.
+  if ((m = /^(?:Equipped|Enchanted) creature gets ([+-]\d+)\/([+-]\d+) and has mentor\.$/.exec(line))) {
+    return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], grantsTriggered: [mentor()], text };
   }
   // "… and has protection from each color that's not in your commander's color
   // identity" (Commander's Plate): worked out as it applies.

@@ -586,6 +586,15 @@ export type GameEvent =
       readonly to: PlayerId;
     })
   | (Base & {
+      /** `object` mentored `target` (rule 702.134c): a mentor ability whose
+       * source is `object` and whose target is `target` resolved. `player`
+       * controlled the ability. */
+      readonly type: "mentored";
+      readonly object: ObjectId;
+      readonly target: ObjectId;
+      readonly player: PlayerId;
+    })
+  | (Base & {
       readonly type: "card-drawn";
       readonly player: PlayerId;
       readonly object: ObjectId;

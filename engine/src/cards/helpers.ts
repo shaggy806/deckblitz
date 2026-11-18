@@ -825,9 +825,11 @@ export const ripple = (n: number, name: string): TriggeredAbility => ({
  * Mentor (rule 702.134a): "Whenever this creature attacks, put a +1/+1
  * counter on target attacking creature with lesser power" — the power
  * compared as the target is chosen and again as it resolves (Legion
- * Warboss). Put "Mentor" in `text` as well.
+ * Warboss). Put "Mentor" in `text` as well. Stamped `keywordOf: "mentor"`:
+ * as it resolves, its source mentors its target (702.134c — `mentored`).
  */
 export const mentor = (): TriggeredAbility => ({
+  keywordOf: "mentor",
   trigger: { on: "attacks", who: "self" },
   targets: [
     {

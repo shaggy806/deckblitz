@@ -3004,7 +3004,8 @@
   "static:attacking-player-chooses-blocks",
   "trigger:gives-gift",
   "trigger:gives-gift",
-  "condition:source-damage-to-player-this-turn"
+  "condition:source-damage-to-player-this-turn",
+  "trigger:mentors"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

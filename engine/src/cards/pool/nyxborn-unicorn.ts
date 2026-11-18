@@ -7,6 +7,7 @@ const MENTOR_TEXT =
   "Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)";
 
 const MENTOR: TriggeredAbility = {
+  keywordOf: "mentor",
   trigger: { on: "attacks", who: "self" },
   targets: [
     {

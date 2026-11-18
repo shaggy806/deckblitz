@@ -449,7 +449,7 @@ import { delayedStep, delayedStepFires, isStepWatch, readDelayedAt, watchOutlast
 import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
 import { endsThisTurn, untilPointOf } from "./duration.js";
 import type { JournalEntry, SeatAsTurnBegan, TurnBegan } from "./journal.js";
-import { TRIGGER_EVENTS, timingCountable, triggerEventBatch, triggerEventObject, triggerEventPlayer, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
+import { TRIGGER_EVENTS, timingCountable, triggerEventBatch, triggerEventObject, triggerEventPlayer, triggerEventRecipient, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
 import {
   abilityCountThisTurn,
   appendJournal,
@@ -34599,6 +34599,15 @@ export class Game {
     if (object.abilityKind === "triggered" && (this.stackAbilityOf(object) as Partial<TriggeredAbility>).firebending === true) {
       this.emit({ type: "bent", player: object.controller, how: "fire" });
     }
+    // "Whenever [a creature] mentors a creature": whenever a mentor ability
+    // whose source is the first and whose target is the second resolves
+    // (rule 702.134c) — one whose target is gone never got here (608.2b).
+    if (object.abilityKind === "triggered" && (this.stackAbilityOf(object) as Partial<TriggeredAbility>).keywordOf === "mentor") {
+      const mentored = object.targets?.[0];
+      if (mentored?.kind === "object") {
+        this.emit({ type: "mentored", object: source, target: mentored.object, player: object.controller });
+      }
+    }
     // "Whenever this Vehicle becomes crewed": whenever its crew ability
     // resolves (rule 702.122e).
     if (object.crewedWith !== undefined && this.state.objects[source]?.zone === "battlefield") {
@@ -36618,6 +36627,18 @@ export class Game {
       // Whoever controls the spell or ability that caused the discard (Psychic
       // Purge: "… causes you to discard this card, that player loses 5 life").
       player = event.cause;
+    }
+    // What a generic trigger's row says was done to something — "that
+    // creature" of "whenever equipped creature mentors a creature" (Aegis
+    // of the Legion) — in the stint it's in as the ability triggers, and its
+    // controller "that player".
+    if (recipient === undefined) {
+      const done = triggerEventRecipient(event);
+      const hit = done === undefined ? undefined : this.state.objects[done];
+      if (done !== undefined && hit?.zone === "battlefield") {
+        recipient = { target: { kind: "object", object: done }, zoneChangeCount: hit.zoneChangeCount ?? 0 };
+        if (player === undefined) player = hit.controller;
+      }
     }
     // A Curse's trigger whose event names nobody: "that player" is the
     // enchanted player as it triggered (Trespasser's Curse: "whenever a
