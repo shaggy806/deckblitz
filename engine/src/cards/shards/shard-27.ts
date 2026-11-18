@@ -858,6 +858,7 @@ import _poolThalakosDrifters from "../pool/thalakos-drifters.js";
 import _poolThantisTheWarweaver from "../pool/thantis-the-warweaver.js";
 import _poolTheBalrogDurinsBane from "../pool/the-balrog-durins-bane.js";
 import _poolTheFlux from "../pool/the-flux.js";
+import _poolTheFourteenthDoctor from "../pool/the-fourteenth-doctor.js";
 import _poolTheKeyToTheVault from "../pool/the-key-to-the-vault.js";
 import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
 import _poolTheMasterTranscendent from "../pool/the-master-transcendent.js";
@@ -1880,6 +1881,7 @@ const shard: CardShard = {
     _poolThantisTheWarweaver,
     _poolTheBalrogDurinsBane,
     _poolTheFlux,
+    _poolTheFourteenthDoctor,
     _poolTheKeyToTheVault,
     _poolTheLionTurtle,
     _poolTheMasterTranscendent,

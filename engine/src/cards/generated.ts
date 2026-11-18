@@ -28305,6 +28305,7 @@ import _poolTethmosHighPriest from "./pool/tethmos-high-priest.js";
 import _poolTetravus from "./pool/tetravus.js";
 import _poolTetsukoUmezawaFugitive from "./pool/tetsuko-umezawa-fugitive.js";
 import _poolTetsukoUmezawaPursuer from "./pool/tetsuko-umezawa-pursuer.js";
+import _poolTetsuoImperialChampion from "./pool/tetsuo-imperial-champion.js";
 import _poolTetsuoUmezawa from "./pool/tetsuo-umezawa.js";
 import _poolTetzimocPrimalDeath from "./pool/tetzimoc-primal-death.js";
 import _poolTetzinGnomeChampion from "./pool/tetzin-gnome-champion.js";
@@ -28509,6 +28510,7 @@ import _poolTheFleshIsWeak from "./pool/the-flesh-is-weak.js";
 import _poolTheFloodOfMars from "./pool/the-flood-of-mars.js";
 import _poolTheFlux from "./pool/the-flux.js";
 import _poolTheForetoldSoldier from "./pool/the-foretold-soldier.js";
+import _poolTheFourteenthDoctor from "./pool/the-fourteenth-doctor.js";
 import _poolTheFourthDoctor from "./pool/the-fourth-doctor.js";
 import _poolTheFrightfulFour from "./pool/the-frightful-four.js";
 import _poolTheFugitiveDoctor from "./pool/the-fugitive-doctor.js";
@@ -61963,6 +61965,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTetravus,
   _poolTetsukoUmezawaFugitive,
   _poolTetsukoUmezawaPursuer,
+  _poolTetsuoImperialChampion,
   _poolTetsuoUmezawa,
   _poolTetzimocPrimalDeath,
   _poolTetzinGnomeChampion,
@@ -62167,6 +62170,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheFloodOfMars,
   _poolTheFlux,
   _poolTheForetoldSoldier,
+  _poolTheFourteenthDoctor,
   _poolTheFourthDoctor,
   _poolTheFrightfulFour,
   _poolTheFugitiveDoctor,
@@ -95634,6 +95638,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tetravus": _poolTetravus,
   "pool/tetsuko-umezawa-fugitive": _poolTetsukoUmezawaFugitive,
   "pool/tetsuko-umezawa-pursuer": _poolTetsukoUmezawaPursuer,
+  "pool/tetsuo-imperial-champion": _poolTetsuoImperialChampion,
   "pool/tetsuo-umezawa": _poolTetsuoUmezawa,
   "pool/tetzimoc-primal-death": _poolTetzimocPrimalDeath,
   "pool/tetzin-gnome-champion": _poolTetzinGnomeChampion,
@@ -95838,6 +95843,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-flood-of-mars": _poolTheFloodOfMars,
   "pool/the-flux": _poolTheFlux,
   "pool/the-foretold-soldier": _poolTheForetoldSoldier,
+  "pool/the-fourteenth-doctor": _poolTheFourteenthDoctor,
   "pool/the-fourth-doctor": _poolTheFourthDoctor,
   "pool/the-frightful-four": _poolTheFrightfulFour,
   "pool/the-fugitive-doctor": _poolTheFugitiveDoctor,
