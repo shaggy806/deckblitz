@@ -287,6 +287,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 
 
+- **The image fallback's type line leaves out supertypes** (2026-11-17, read in the code, not seen live): `CardImage.tsx`'s stand-in for a card whose image didn't load reads "Creature — Hamster" for Boo (`docs/client-gaps.md`).
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The Pass bar sits over the rightmost hand cards** (2026-11-11): at 1366x768 their lower edges and the lowered tray's last cards are under it, so the pointer reaching them leaves the hand and the raised tray drops.
 - **The scenario builder's damage cap ignores Zilortha** (2026-11-16, B333): `BuilderPanel.tsx`'s `selectedDamageMax` reads toughness, not lethal damage by power; the server refuses with the reason.

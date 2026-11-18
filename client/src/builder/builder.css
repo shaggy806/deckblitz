@@ -349,9 +349,6 @@
 .card-hover-preview .card-tile:disabled {
   opacity: 1;
 }
-.card-hover-preview .ct-type {
-  white-space: normal;
-}
 
 /* The "Manual checks" list (ManualChecksSection.tsx): an entry of
    docs/manual-checks.md, its boards to load, and its text. */

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import type { VisibleObject } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
@@ -20,6 +20,7 @@ import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
 import { roomLabel } from './rooms.ts'
 import { useCardArt } from './useCardArt.ts'
 import { AttractionLights } from './AttractionLights.tsx'
+import { textEmWidth, useFontEpoch } from './textWidth.ts'
 
 const TAP_ICON_URL = manaSymbolUrl('T')
 
@@ -139,6 +140,20 @@ export function MiniTile({
     }
   }, [wrapRef, pairedWith])
 
+  // The name on the strip, and its width in ems for the strip's CSS to fit
+  // a long one by (`.mt-banner-text`): measured once a name, on a canvas, so
+  // a board of a hundred tiles reads no layout for it.
+  const bannerName = faceDown ?? roomLabel(obj) ?? obj.name ?? face
+  const bannerRef = useRef<HTMLSpanElement>(null)
+  const fonts = useFontEpoch()
+  useLayoutEffect(() => {
+    const el = bannerRef.current
+    if (!el) return
+    const em = textEmWidth(bannerName, 'board-name', el)
+    if (em === null) el.style.removeProperty('--name-em')
+    else el.style.setProperty('--name-em', String(em))
+  }, [bannerName, fonts])
+
   const classes = [
     'mini-tile',
     // A gold name banner, as a legendary card's frame is marked (rule 205.4d).
@@ -177,8 +192,10 @@ export function MiniTile({
             .mt-body — which is what carries the 4:3 aspect ratio (and is
             the positioning context for those overlays) now that the tile
             itself is banner + art, not art alone. */}
-        <span className="mt-banner" title={faceDown ?? roomLabel(obj) ?? obj.name ?? face}>
-          {faceDown ?? roomLabel(obj) ?? obj.name ?? face}
+        <span className="mt-banner" title={bannerName}>
+          <span className="mt-banner-text" ref={bannerRef}>
+            {bannerName}
+          </span>
         </span>
         <span className="mt-body">
           <span className={faceDown !== null ? `mt-art ${faceDownArtClass(ownerSeat)}` : `mt-art tint-${tint}`}>

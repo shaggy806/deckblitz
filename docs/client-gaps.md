@@ -103,3 +103,11 @@ a Wrath took, asks "Choose targets for …" in the same words each time. The sta
 question is being asked, but nothing says "2 of 5". The engine knows how many of the same ability
 are still waiting (`GameState.pendingTriggers` beside `pendingTargetedTrigger`); the `choose-targets`
 decision could carry the count for the banner.
+
+**The image fallback's type line leaves out supertypes.** Found 2026-11-17 (the look at how long
+type lines render), read in the code and not seen live: `CardImage.tsx`'s `CardImageFallback`, the
+card-shaped stand-in the library and the deck builder draw when a card's image didn't load, builds
+its type line from `def.types` and `def.subtypes` alone, so Boo reads "Creature — Hamster" and a
+basic land "Land — Forest". `LibraryPage.tsx`'s `typeLineOf` and `CardTile.tsx`'s `typeLine` put
+`def.supertypes` first (rule 205.4); 47 token definitions and every legendary, basic or snow card
+have some. The fix is that one line, and a look at the fallback with an image blocked.

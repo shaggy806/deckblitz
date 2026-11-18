@@ -2725,9 +2725,20 @@
   cursor: default;
 }
 
+/* A card with a title bar is a card shown in order to be read -- the hover
+   card, the stack, a graveyard's list, a builder's preview -- and its box can
+   grow, so a long name wraps onto another line instead of being cut off
+   ("Chandra, Ac..."), and so does a long type line (.ct-type). Making the card
+   bigger doesn't fix that by itself: every font on a card scales with it
+   (--ct-scale), so a 1.5x card's name is cut at exactly the same letter. The
+   cost stays top-right, level with the first line. Only the hover card and
+   the stack wrapped until 2026-11-17, and only the name: a list cut both, and
+   one card in seven lost the end of its type line at 1366x768. A card in a
+   slot of a fixed size (art-first: the hand) keeps both on one line, shrunk
+   to fit (CardTile.tsx). */
 .ct-title {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: calc(3px * var(--ct-scale, 1));
   padding: calc(3px * var(--ct-scale, 1)) calc(5px * var(--ct-scale, 1));
   background: var(--card-bar);
@@ -2737,28 +2748,14 @@
   flex: 1;
   min-width: 0;
   font-weight: 600;
-  font-size: calc(10.5px * var(--ct-scale, 1));
-  line-height: 1.15;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-/* A card shown in order to be read -- the hover card, the stack -- wraps a
-   long name onto another line instead of cutting it off ("Chandra, Ac...").
-   Making the card bigger doesn't fix that by itself: every font on a card
-   scales with it (--ct-scale), so a 1.5x card's name is cut at exactly the
-   same letter. The cost stays top-right, level with the first line. */
-.mini-tile-popover .ct-title,
-.stack-entry .ct-title {
-  align-items: flex-start;
-}
-.mini-tile-popover .ct-name,
-.stack-entry .ct-name {
-  white-space: normal;
   /* A word too long for the row shrinks (--name-scale, CardTile.tsx) rather
      than breaking mid-word ("Enlightenmen / t"). */
   font-size: calc(10.5px * var(--name-scale, 1) * var(--ct-scale, 1));
+  line-height: 1.15;
+  color: var(--text);
+  /* still the fallback once even the shrink floor doesn't fully fit. */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .ct-cost {
   display: flex;
@@ -2817,10 +2814,11 @@
   padding: calc(3px * var(--ct-scale, 1)) calc(6px * var(--ct-scale, 1));
 }
 /* --name-scale: set by CardTile.tsx, as the type line's --type-scale is --
-   a long name shrinks to fit before it's cut short. */
+   a long name shrinks to fit its one line before it's cut short. */
 .card-tile.art-first .ct-name-row .ct-name {
   font-weight: 700;
   font-size: calc(11px * var(--name-scale, 1) * var(--ct-scale, 1));
+  white-space: nowrap;
 }
 .ct-copy {
   font-weight: 400;
@@ -3012,14 +3010,17 @@
   /* --type-scale: set by CardTile.tsx only for the hand's art-first layout,
      same idea as .ct-text's --text-scale -- a long type line (e.g.
      "Legendary Creature — Human Wizard") shrinks to fit this fixed-width
-     single line instead of just ellipsis-truncating. Unset (1) elsewhere. */
+     single line instead of just ellipsis-truncating. Unset (1) elsewhere:
+     a card with a title bar wraps it, as it wraps its name (.ct-title). */
   font-size: calc(8.5px * var(--type-scale, 1) * var(--ct-scale, 1));
   color: var(--muted);
   background: var(--card-bar);
-  white-space: nowrap;
   /* still the fallback once even the shrink floor doesn't fully fit. */
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.card-tile.art-first .ct-type {
+  white-space: nowrap;
 }
 .ct-text {
   flex: 1;
@@ -3089,9 +3090,10 @@
   pointer-events: none;
 }
 /* ArtCredit's `fit`: one line across the art, whatever the artist's name —
-   the font is the box's width over the text's length (about half an em a
-   character in this face), never past --credit-max. The ellipsis is only a
-   backstop. */
+   the font is the box's width over the text's own width in ems (--credit-em,
+   measured by ArtCredit: the line ends at the art's right edge), never past
+   --credit-max. Where nothing measured it, about half an em a character. The
+   ellipsis is only a backstop. */
 .art-credit-fit {
   container-type: inline-size;
   --credit-max: calc(8.5px * var(--ct-scale, 1));
@@ -3101,7 +3103,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: min(var(--credit-max), calc(100cqw / (var(--credit-chars, 40) * 0.5)));
+  font-size: min(var(--credit-max), calc(100cqw / var(--credit-em, calc(var(--credit-chars, 40) * 0.5))));
 }
 /* An Adventure or Omen half (`VisibleObject.spellFace`): its own small block
    at the top of the text box, set off from the creature's text below it. */
@@ -3401,7 +3403,23 @@
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
+  /* The name's box to fit (.mt-banner-text's cqw). */
+  container-type: inline-size;
+}
+/* The name itself: a long one shrinks to the strip's width rather than end
+   in "General Traag, Heart of S…" (2026-11-17), as a hand card's does. The
+   strip is one line of a fixed height in a row of tiles, so it can't wrap.
+   --name-em is the name's width in ems (MiniTile, `textWidth.ts`), so the
+   fit follows the tile as a crowded board shrinks it; down to 0.62 of its
+   size and never under the strip's own smallest text (--mt-banner-h's 11px
+   floor, times its 0.66), then the ellipsis: a crowded four-player board's
+   tiles at 1366x768 would otherwise carry names 6px high. Unmeasured, it
+   stays its size. */
+.mt-banner-text {
+  display: block;
+  overflow: hidden;
   text-overflow: ellipsis;
+  font-size: max(0.62em, min(1em, calc(11px * 0.66)), min(1em, calc(100cqw / var(--name-em, 1))));
 }
 /* A legendary permanent's name strip is gilded, as a legendary card's frame
    is marked in print (rule 205.4d) -- the board's mini tiles have no type

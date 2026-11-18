@@ -927,14 +927,9 @@
 .card-hover-preview .card-tile:disabled {
   opacity: 1;
 }
-/* A board tile truncates a long type line to one line because it sits in a
-   row of tiles whose heights have to agree; a preview is a lone box whose
-   whole job is to be read, and at preview text size "Artifact Creature —
-   Phyrexian Wurm" no longer fits on one. `.card-tile` is min-height, so the
-   second line just makes the box taller. */
-.card-hover-preview .ct-type {
-  white-space: normal;
-}
+/* A long name or type line wraps onto a second line here, as on every card
+   with a title bar (App.css's .ct-title): `.card-tile` is min-height, so the
+   line just makes the box taller. */
 
 /* --- right-click menu on a card row ------------------------------------ */
 
