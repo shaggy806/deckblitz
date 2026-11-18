@@ -52205,6 +52205,8 @@ controlledBy,
       asCard?: boolean;
       tapped?: boolean;
       attacking?: ResolvedEnterAttacking;
+      /** Each, once made, is blocking this attacker (rule 509.4). */
+      blocking?: ObjectId;
       exileAtEndOfCombat?: boolean;
       sacrificeAtEndOfCombat?: boolean;
       atYourNextEndStep?: boolean;
@@ -52337,6 +52339,7 @@ controlledBy,
       sacrificeAtEndOfCombat: opts.sacrificeAtEndOfCombat === true,
       ...(opts.goadedForGameBy !== undefined ? { goadedForGameBy: opts.goadedForGameBy } : {}),
       ...(opts.attacking !== undefined ? { attacking: opts.attacking } : {}),
+      ...(opts.blocking !== undefined ? { blocking: opts.blocking } : {}),
       ...(opts.source !== undefined ? { source: opts.source } : {}),
       ...(opts.effectController !== undefined ? { effectController: opts.effectController } : {}),
       ...(opts.createdWith !== undefined ? { createdWith: opts.createdWith } : {}),
@@ -52571,6 +52574,9 @@ controlledBy,
     }
     // "…that's tapped and attacking" (rule 508.4).
     if (attacking !== undefined) this.putIntoAttack(made, controller, attacking);
+    // "…and that's blocking that creature" (rule 509.4 — Mirror Match): each
+    // one made, a replacement's extra copies too (its ruling).
+    if (group.blocking !== undefined) for (const id of made) this.blockAttackerByEffect(id, group.blocking, true);
     // "Exile the tokens at end of combat": one delayed triggered ability over
     // every copy made (rule 603.7), which leaves alone any that has left the
     // battlefield by then (rule 400.7).

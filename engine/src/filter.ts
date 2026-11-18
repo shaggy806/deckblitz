@@ -458,8 +458,10 @@ export interface CardFilter {
   readonly attackingBattle?: boolean;
   /** Attacking the filtering player — the player, not a planeswalker or
    * battle of theirs (Blessed Reversal's "each creature **attacking you**").
-   * Off the battlefield nothing is attacking anyone. */
-  readonly attackingYou?: boolean;
+   * Off the battlefield nothing is attacking anyone. `"or-your-planeswalkers"`
+   * adds a planeswalker they control (rule 506.2), never a battle: Mirror
+   * Match's "each creature attacking you **or a planeswalker you control**". */
+  readonly attackingYou?: boolean | "or-your-planeswalkers";
   /** Attacking an opponent of the filtering player — the player, not a
    * planeswalker or battle of theirs: Blast-Furnace Hellkite's "creatures
    * **attacking your opponents** have double strike", whoever controls them.
@@ -2856,8 +2858,15 @@ export function matchesFilter(
     if (battle !== filter.attackingBattle) return false;
   }
   if (filter.attackingYou !== undefined) {
-    const attackingYou = live?.zone === "battlefield" && live.attacking === ctx.you;
-    if (attackingYou !== filter.attackingYou) return false;
+    const attacked = live?.zone === "battlefield" ? live.attacking : null;
+    let attackingYou = attacked !== null && attacked !== undefined && attacked === ctx.you;
+    if (!attackingYou && filter.attackingYou === "or-your-planeswalkers" && attacked !== null && attacked !== undefined) {
+      // A planeswalker or a battle (rule 506.2): only a battle has a
+      // protector (310.9), and a planeswalker is its controller's.
+      const permanent = state.players[attacked as PlayerId] === undefined ? state.objects[attacked as ObjectId] : undefined;
+      attackingYou = permanent !== undefined && permanent.protector === undefined && permanent.controller === ctx.you;
+    }
+    if (attackingYou !== (filter.attackingYou !== false)) return false;
   }
   if (filter.attackingOpponent !== undefined) {
     const attacked = live?.zone === "battlefield" ? live.attacking : null;

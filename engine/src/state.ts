@@ -6083,6 +6083,9 @@ export interface EnteringTokenCopies {
   readonly exileAtEndOfCombat: boolean;
   readonly sacrificeAtEndOfCombat: boolean;
   readonly attacking?: ResolvedEnterAttacking;
+  /** "…and that's blocking that creature" (rule 509.4 — Mirror Match): each
+   * one, once made, is blocking this attacker (`Game.blockAttackerByEffect`). */
+  readonly blocking?: ObjectId;
   readonly source?: ObjectId;
   readonly effectController?: PlayerId;
   /** Counters the effect's controller puts on each once they're made. */

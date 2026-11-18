@@ -10207,6 +10207,13 @@ export type EffectSpec =
       readonly tapped?: boolean;
       /** …and **attacking** (rule 508.4) — see {@link EnterAttacking}. */
       readonly attacking?: EnterAttacking;
+      /** "…a token that's a copy of that creature **and that's blocking that
+       * creature**" (rule 509.4 — Mirror Match, over `of: { each }`): each
+       * copy, once made, is blocking the attacker it copies, its ruling's
+       * restrictions aside; a replacement's extra copies too. One that isn't
+       * attacking, or not its new controller or what they defend, enters
+       * without blocking (509.4a). */
+      readonly blockingWhatItCopies?: true;
       /** *Sacrifice* them at the beginning of the next end step instead
        * (Kiki-Jiki, Mirror Breaker) — the difference is whether dies-triggers
        * see them go. */
@@ -15358,6 +15365,8 @@ export interface EffectApi {
       asCard?: boolean;
       tapped?: boolean;
       attacking?: ResolvedEnterAttacking;
+      /** Each, once made, is blocking this attacker (rule 509.4). */
+      blocking?: ObjectId;
       exileAtEndOfCombat?: boolean;
       sacrificeAtEndOfCombat?: boolean;
       atYourNextEndStep?: boolean;
@@ -24264,6 +24273,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.embalmed === true ? { embalmed: true } : {}),
           ...(spec.tapped === true ? { tapped: true } : {}),
           ...(spec.attacking !== undefined ? { attacking: resolveEnterAttacking(spec.attacking, ctx) } : {}),
+          ...(spec.blockingWhatItCopies === true ? { blocking: of } : {}),
           ...(spec.exileAtEndOfCombat === true ? { exileAtEndOfCombat: true } : {}),
           ...(spec.sacrificeAtEndOfCombat === true ? { sacrificeAtEndOfCombat: true } : {}),
           ...(spec.atYourNextEndStep === true ? { atYourNextEndStep: true } : {}),

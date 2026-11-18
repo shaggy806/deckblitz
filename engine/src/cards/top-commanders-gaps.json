@@ -2740,6 +2740,7 @@
   "effect:attack-requirement-player-only",
   "target:planeswalker-or-battle-of-that-player",
   "filter:aura-enchant-restriction",
+  "filter:attacking-you-or-your-planeswalker",
   "target:any-number-group-before-targeting-mode",
   "effect:as-enters-remove-counters-from-any-number",
   "replacement:as-enters-turn-others-face-down",
