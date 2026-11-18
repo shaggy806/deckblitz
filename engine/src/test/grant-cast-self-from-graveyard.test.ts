@@ -11,7 +11,7 @@ import { describe, expect, it } from "vitest";
 import type { LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, counters, lands, nextTurn, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
+import { A, B, cast, counters, enter, lands, nextTurn, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
 type Cast = Extract<LegalAction, { kind: "cast-spell" }>;
 
@@ -56,11 +56,13 @@ describe("cast this card from your graveyard this turn — Skyclave Shade", () =
     const shade = toGraveyard(game, "Skyclave Shade");
     nextTurn(game); // bob's turn
     game.advanceUntil((s) => s.priority.holder === B);
-    lands(game, "Swamp", 1, B);
-    // A land of alice's entering on bob's turn: "it's your turn" fails.
-    spawn(game, "Swamp", A);
-    settle(game);
+    // A land of alice's entering on bob's turn: "it's your turn" fails, so
+    // the landfall doesn't trigger (rule 603.4).
+    const stack = game.state.zones.shared.stack.length;
+    enter(game, "Swamp", A, { settle: false });
     expect(game.state.pendingTriggers).toHaveLength(0);
+    expect(game.state.zones.shared.stack).toHaveLength(stack);
+    settle(game);
     nextTurn(game); // alice's turn: no permission carried over, and the one
     // on the battlefield never gave one (it works only from the graveyard)
     expect(castOffers(game, shade)).toEqual([]);
