@@ -357,6 +357,7 @@ import _poolHanweirWatchkeep from "../pool/hanweir-watchkeep.js";
 import _poolHaraldUnitesTheElves from "../pool/harald-unites-the-elves.js";
 import _poolHarrierGriffin from "../pool/harrier-griffin.js";
 import _poolHashatonScarabsFist from "../pool/hashaton-scarabs-fist.js";
+import _poolHauntingImitation from "../pool/haunting-imitation.js";
 import _poolHawkeyesShot from "../pool/hawkeyes-shot.js";
 import _poolHaywireMite from "../pool/haywire-mite.js";
 import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
@@ -1387,6 +1388,7 @@ const shard: CardShard = {
     _poolHaraldUnitesTheElves,
     _poolHarrierGriffin,
     _poolHashatonScarabsFist,
+    _poolHauntingImitation,
     _poolHawkeyesShot,
     _poolHaywireMite,
     _poolHazoretGodseeker,

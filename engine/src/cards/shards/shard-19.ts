@@ -850,6 +850,7 @@ import _poolShangChiAndTheTenRings from "../pool/shang-chi-and-the-ten-rings.js"
 import _poolShatteredWings from "../pool/shattered-wings.js";
 import _poolSheerDrop from "../pool/sheer-drop.js";
 import _poolShefetDunes from "../pool/shefet-dunes.js";
+import _poolShiftingShadow from "../pool/shifting-shadow.js";
 import _poolShortcutToMushrooms from "../pool/shortcut-to-mushrooms.js";
 import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
 import _poolShuko from "../pool/shuko.js";
@@ -1950,6 +1951,7 @@ const shard: CardShard = {
     _poolShatteredWings,
     _poolSheerDrop,
     _poolShefetDunes,
+    _poolShiftingShadow,
     _poolShortcutToMushrooms,
     _poolShuEliteInfantry,
     _poolShuko,

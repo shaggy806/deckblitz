@@ -597,6 +597,7 @@ import _poolNefariousImp from "../pool/nefarious-imp.js";
 import _poolNemataGroveGuardian from "../pool/nemata-grove-guardian.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
 import _poolNerdRage from "../pool/nerd-rage.js";
+import _poolNettlevineBlight from "../pool/nettlevine-blight.js";
 import _poolNewsHelicopter from "../pool/news-helicopter.js";
 import _poolNexusMentality from "../pool/nexus-mentality.js";
 import _poolNeyaliSunsVanguard from "../pool/neyali-suns-vanguard.js";
@@ -1661,6 +1662,7 @@ const shard: CardShard = {
     _poolNemataGroveGuardian,
     _poolNeoExdeathDimensionsEnd,
     _poolNerdRage,
+    _poolNettlevineBlight,
     _poolNewsHelicopter,
     _poolNexusMentality,
     _poolNeyaliSunsVanguard,

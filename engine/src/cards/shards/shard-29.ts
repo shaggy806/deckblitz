@@ -248,6 +248,7 @@ import _poolEnigmaDrake from "../pool/enigma-drake.js";
 import _poolEntanglingTrap from "../pool/entangling-trap.js";
 import _poolEquestrianSkill from "../pool/equestrian-skill.js";
 import _poolErietteOfTheCharmedApple from "../pool/eriette-of-the-charmed-apple.js";
+import _poolErietteTheBeguiler from "../pool/eriette-the-beguiler.js";
 import _poolEscapeDetection from "../pool/escape-detection.js";
 import _poolEsperStormblade from "../pool/esper-stormblade.js";
 import _poolEssenceFracture from "../pool/essence-fracture.js";
@@ -377,6 +378,7 @@ import _poolHeadlongRush from "../pool/headlong-rush.js";
 import _poolHeartWolf from "../pool/heart-wolf.js";
 import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
+import _poolHeliodsPunishment from "../pool/heliods-punishment.js";
 import _poolHellcatUndyingVigilante from "../pool/hellcat-undying-vigilante.js";
 import _poolHellionCrucible from "../pool/hellion-crucible.js";
 import _poolHemmerFixingWhatIsBroken from "../pool/hemmer-fixing-what-is-broken.js";
@@ -1290,6 +1292,7 @@ const shard: CardShard = {
     _poolEntanglingTrap,
     _poolEquestrianSkill,
     _poolErietteOfTheCharmedApple,
+    _poolErietteTheBeguiler,
     _poolEscapeDetection,
     _poolEsperStormblade,
     _poolEssenceFracture,
@@ -1419,6 +1422,7 @@ const shard: CardShard = {
     _poolHeartWolf,
     _poolHedronRover,
     _poolHeliodTheWarpedEclipse,
+    _poolHeliodsPunishment,
     _poolHellcatUndyingVigilante,
     _poolHellionCrucible,
     _poolHemmerFixingWhatIsBroken,

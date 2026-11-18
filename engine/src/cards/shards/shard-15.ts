@@ -116,6 +116,7 @@ import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
 import _poolCausticWasps from "../pool/caustic-wasps.js";
 import _poolCentaursHerald from "../pool/centaurs-herald.js";
 import _poolCephalidSage from "../pool/cephalid-sage.js";
+import _poolCerebralEruption from "../pool/cerebral-eruption.js";
 import _poolChainOfSmog from "../pool/chain-of-smog.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
@@ -1107,6 +1108,7 @@ const shard: CardShard = {
     _poolCausticWasps,
     _poolCentaursHerald,
     _poolCephalidSage,
+    _poolCerebralEruption,
     _poolChainOfSmog,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,

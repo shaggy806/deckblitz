@@ -4355,6 +4355,7 @@ import _poolCephalidVandal from "./pool/cephalid-vandal.js";
 import _poolCephalopodSentry from "./pool/cephalopod-sentry.js";
 import _poolCerebralConfiscation from "./pool/cerebral-confiscation.js";
 import _poolCerebralDownload from "./pool/cerebral-download.js";
+import _poolCerebralEruption from "./pool/cerebral-eruption.js";
 import _poolCerebralVortex from "./pool/cerebral-vortex.js";
 import _poolCeremonialGroundbreaker from "./pool/ceremonial-groundbreaker.js";
 import _poolCeremonialGuard from "./pool/ceremonial-guard.js";
@@ -5513,6 +5514,7 @@ import _poolCosmiumBlast from "./pool/cosmium-blast.js";
 import _poolCosmiumCatalyst from "./pool/cosmium-catalyst.js";
 import _poolCosmiumConfluence from "./pool/cosmium-confluence.js";
 import _poolCosmiumKiln from "./pool/cosmium-kiln.js";
+import _poolCosmogoyf from "./pool/cosmogoyf.js";
 import _poolCosmograndZenith from "./pool/cosmogrand-zenith.js";
 import _poolCosmosCharger from "./pool/cosmos-charger.js";
 import _poolCosmosElixir from "./pool/cosmos-elixir.js";
@@ -8699,6 +8701,7 @@ import _poolErestorOfTheCouncil from "./pool/erestor-of-the-council.js";
 import _poolErhnamDjinn from "./pool/erhnam-djinn.js";
 import _poolEricaOrtegasPluckyPilot from "./pool/erica-ortegas-plucky-pilot.js";
 import _poolErietteOfTheCharmedApple from "./pool/eriette-of-the-charmed-apple.js";
+import _poolErietteTheBeguiler from "./pool/eriette-the-beguiler.js";
 import _poolEriettesLullaby from "./pool/eriettes-lullaby.js";
 import _poolEriettesTemptingApple from "./pool/eriettes-tempting-apple.js";
 import _poolEriettesWhisper from "./pool/eriettes-whisper.js";
@@ -12565,6 +12568,7 @@ import _poolHauntingApparition from "./pool/haunting-apparition.js";
 import _poolHauntingEchoes from "./pool/haunting-echoes.js";
 import _poolHauntingFigment from "./pool/haunting-figment.js";
 import _poolHauntingHymn from "./pool/haunting-hymn.js";
+import _poolHauntingImitation from "./pool/haunting-imitation.js";
 import _poolHauntingMisery from "./pool/haunting-misery.js";
 import _poolHauntingVoyage from "./pool/haunting-voyage.js";
 import _poolHauntwoodsShrieker from "./pool/hauntwoods-shrieker.js";
@@ -12760,6 +12764,7 @@ import _poolHeliodTheWarpedEclipse from "./pool/heliod-the-warped-eclipse.js";
 import _poolHeliodsEmissary from "./pool/heliods-emissary.js";
 import _poolHeliodsIntervention from "./pool/heliods-intervention.js";
 import _poolHeliodsPilgrim from "./pool/heliods-pilgrim.js";
+import _poolHeliodsPunishment from "./pool/heliods-punishment.js";
 import _poolHelionaut from "./pool/helionaut.js";
 import _poolHeliophial from "./pool/heliophial.js";
 import _poolHeliosOne from "./pool/helios-one.js";
@@ -18811,6 +18816,7 @@ import _poolNettleSentinel from "./pool/nettle-sentinel.js";
 import _poolNettleSwine from "./pool/nettle-swine.js";
 import _poolNettlecyst from "./pool/nettlecyst.js";
 import _poolNettletoothDjinn from "./pool/nettletooth-djinn.js";
+import _poolNettlevineBlight from "./pool/nettlevine-blight.js";
 import _poolNettlingCurse from "./pool/nettling-curse.js";
 import _poolNettlingImp from "./pool/nettling-imp.js";
 import _poolNettlingNuisance from "./pool/nettling-nuisance.js";
@@ -24742,6 +24748,7 @@ import _poolShiftingBorders from "./pool/shifting-borders.js";
 import _poolShiftingCeratops from "./pool/shifting-ceratops.js";
 import _poolShiftingGrift from "./pool/shifting-grift.js";
 import _poolShiftingLoyalties from "./pool/shifting-loyalties.js";
+import _poolShiftingShadow from "./pool/shifting-shadow.js";
 import _poolShiftingSky from "./pool/shifting-sky.js";
 import _poolShiftingSliver from "./pool/shifting-sliver.js";
 import _poolShiftingWall from "./pool/shifting-wall.js";
@@ -37934,6 +37941,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCephalopodSentry,
   _poolCerebralConfiscation,
   _poolCerebralDownload,
+  _poolCerebralEruption,
   _poolCerebralVortex,
   _poolCeremonialGroundbreaker,
   _poolCeremonialGuard,
@@ -39092,6 +39100,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCosmiumCatalyst,
   _poolCosmiumConfluence,
   _poolCosmiumKiln,
+  _poolCosmogoyf,
   _poolCosmograndZenith,
   _poolCosmosCharger,
   _poolCosmosElixir,
@@ -42278,6 +42287,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolErhnamDjinn,
   _poolEricaOrtegasPluckyPilot,
   _poolErietteOfTheCharmedApple,
+  _poolErietteTheBeguiler,
   _poolEriettesLullaby,
   _poolEriettesTemptingApple,
   _poolEriettesWhisper,
@@ -46144,6 +46154,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHauntingEchoes,
   _poolHauntingFigment,
   _poolHauntingHymn,
+  _poolHauntingImitation,
   _poolHauntingMisery,
   _poolHauntingVoyage,
   _poolHauntwoodsShrieker,
@@ -46339,6 +46350,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeliodsEmissary,
   _poolHeliodsIntervention,
   _poolHeliodsPilgrim,
+  _poolHeliodsPunishment,
   _poolHelionaut,
   _poolHeliophial,
   _poolHeliosOne,
@@ -52390,6 +52402,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNettleSwine,
   _poolNettlecyst,
   _poolNettletoothDjinn,
+  _poolNettlevineBlight,
   _poolNettlingCurse,
   _poolNettlingImp,
   _poolNettlingNuisance,
@@ -58321,6 +58334,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShiftingCeratops,
   _poolShiftingGrift,
   _poolShiftingLoyalties,
+  _poolShiftingShadow,
   _poolShiftingSky,
   _poolShiftingSliver,
   _poolShiftingWall,
@@ -71526,6 +71540,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cephalopod-sentry": _poolCephalopodSentry,
   "pool/cerebral-confiscation": _poolCerebralConfiscation,
   "pool/cerebral-download": _poolCerebralDownload,
+  "pool/cerebral-eruption": _poolCerebralEruption,
   "pool/cerebral-vortex": _poolCerebralVortex,
   "pool/ceremonial-groundbreaker": _poolCeremonialGroundbreaker,
   "pool/ceremonial-guard": _poolCeremonialGuard,
@@ -72684,6 +72699,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cosmium-catalyst": _poolCosmiumCatalyst,
   "pool/cosmium-confluence": _poolCosmiumConfluence,
   "pool/cosmium-kiln": _poolCosmiumKiln,
+  "pool/cosmogoyf": _poolCosmogoyf,
   "pool/cosmogrand-zenith": _poolCosmograndZenith,
   "pool/cosmos-charger": _poolCosmosCharger,
   "pool/cosmos-elixir": _poolCosmosElixir,
@@ -75870,6 +75886,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/erhnam-djinn": _poolErhnamDjinn,
   "pool/erica-ortegas-plucky-pilot": _poolEricaOrtegasPluckyPilot,
   "pool/eriette-of-the-charmed-apple": _poolErietteOfTheCharmedApple,
+  "pool/eriette-the-beguiler": _poolErietteTheBeguiler,
   "pool/eriettes-lullaby": _poolEriettesLullaby,
   "pool/eriettes-tempting-apple": _poolEriettesTemptingApple,
   "pool/eriettes-whisper": _poolEriettesWhisper,
@@ -79736,6 +79753,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/haunting-echoes": _poolHauntingEchoes,
   "pool/haunting-figment": _poolHauntingFigment,
   "pool/haunting-hymn": _poolHauntingHymn,
+  "pool/haunting-imitation": _poolHauntingImitation,
   "pool/haunting-misery": _poolHauntingMisery,
   "pool/haunting-voyage": _poolHauntingVoyage,
   "pool/hauntwoods-shrieker": _poolHauntwoodsShrieker,
@@ -79931,6 +79949,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heliods-emissary": _poolHeliodsEmissary,
   "pool/heliods-intervention": _poolHeliodsIntervention,
   "pool/heliods-pilgrim": _poolHeliodsPilgrim,
+  "pool/heliods-punishment": _poolHeliodsPunishment,
   "pool/helionaut": _poolHelionaut,
   "pool/heliophial": _poolHeliophial,
   "pool/helios-one": _poolHeliosOne,
@@ -85982,6 +86001,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nettle-swine": _poolNettleSwine,
   "pool/nettlecyst": _poolNettlecyst,
   "pool/nettletooth-djinn": _poolNettletoothDjinn,
+  "pool/nettlevine-blight": _poolNettlevineBlight,
   "pool/nettling-curse": _poolNettlingCurse,
   "pool/nettling-imp": _poolNettlingImp,
   "pool/nettling-nuisance": _poolNettlingNuisance,
@@ -91913,6 +91933,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shifting-ceratops": _poolShiftingCeratops,
   "pool/shifting-grift": _poolShiftingGrift,
   "pool/shifting-loyalties": _poolShiftingLoyalties,
+  "pool/shifting-shadow": _poolShiftingShadow,
   "pool/shifting-sky": _poolShiftingSky,
   "pool/shifting-sliver": _poolShiftingSliver,
   "pool/shifting-wall": _poolShiftingWall,

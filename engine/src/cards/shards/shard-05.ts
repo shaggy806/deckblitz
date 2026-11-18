@@ -201,6 +201,7 @@ import _poolConversion from "../pool/conversion.js";
 import _poolCorpsejackMenace from "../pool/corpsejack-menace.js";
 import _poolCorruptedShapeshifter from "../pool/corrupted-shapeshifter.js";
 import _poolCorsairsOfUmbar from "../pool/corsairs-of-umbar.js";
+import _poolCosmogoyf from "../pool/cosmogoyf.js";
 import _poolCourierOfComestibles from "../pool/courier-of-comestibles.js";
 import _poolCourtHomunculus from "../pool/court-homunculus.js";
 import _poolCoward from "../pool/coward.js";
@@ -1241,6 +1242,7 @@ const shard: CardShard = {
     _poolCorpsejackMenace,
     _poolCorruptedShapeshifter,
     _poolCorsairsOfUmbar,
+    _poolCosmogoyf,
     _poolCourierOfComestibles,
     _poolCourtHomunculus,
     _poolCoward,
