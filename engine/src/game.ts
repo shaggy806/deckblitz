@@ -478,6 +478,8 @@ import {
   rollOfEvent,
   rollShiftText,
   rollsSince,
+  settleRollIgnores,
+  withoutDie,
   type CoinSide,
   type FlipLanding,
   type RollInProgress,
@@ -9515,6 +9517,10 @@ export class Game {
       this.applyRollReroll(player, awaiting.rerollRoll, modeIndices);
       return;
     }
+    if (awaiting.ignoreRoll !== undefined) {
+      this.applyRollIgnore(awaiting.ignoreRoll, modeIndices[0]);
+      return;
+    }
     // Storage Matrix's question (rule 502.3): only that type goes on untapping
     // — a permanent with several, if any is it (the rulings) — and the step
     // carries on with no priority (502.4).
@@ -14475,16 +14481,58 @@ export class Game {
     // Each source adds its own die and ignores its own lowest (614.5).
     let ignoring = 0;
     let extra = 0;
+    // "…and you choose one of those rolls to ignore": whose choice, one each.
+    const choosers: { readonly player: PlayerId; readonly by: ObjectId }[] = [];
     for (const { by, replacement } of this.staticReplacementsFor(player, "would-roll-dice")) {
+      // A roll nothing can wait on (a token rolling as it enters) can't
+      // stop for the choice: such a replacement waits for a roll that can.
+      if (replacement.ignoreChosen === true && then === null) continue;
       const plus = replacement.instead.modify.plus;
       const added = plus === undefined ? 0 : this.replacementAmount(plus, by);
       extra += added;
       if (replacement.ignoreLowest === true) ignoring += added;
+      if (replacement.ignoreChosen === true) choosers.push({ player: by.controller, by: by.id });
+    }
+    // A resolved one — "the next time target player would roll one or more
+    // dice this turn" (Bamboozling Beeble): used up as it applies (rule
+    // 614.5), its amounts fixed as it resolved.
+    for (const record of [...this.state.activeReplacements]) {
+      const r = record.replacement;
+      if (r.event !== "would-roll-dice" || (r.ignoreChosen === true && then === null)) continue;
+      const reaches = record.onlyPlayers?.includes(player) ?? (r.who === "any-player" || (r.who === "you") === (player === record.owner));
+      if (!reaches || this.state.players[record.owner]?.hasLost !== false) continue;
+      if (record.next === true) this.state.activeReplacements = this.state.activeReplacements.filter((a) => a !== record);
+      const plus = r.instead.modify.plus;
+      const added = typeof plus === "number" ? plus : 0;
+      extra += added;
+      if (r.ignoreLowest === true) ignoring += added;
+      if (r.ignoreChosen === true) choosers.push({ player: record.owner, by: record.source });
     }
     // Each die has `sides` equally likely outcomes, 1 to N (rule 706.1a).
     const rolled: number[] = [];
     for (let i = 0; i < count + extra; i += 1) rolled.push(1 + Math.floor(this.rng.next() * sides));
     this.state.rngState = this.rng.seed;
+    if (choosers.length > 0 && then !== null) {
+      // The lowest go first, then each chooser picks one of the rest — the
+      // same dice can be kept either way round — and the instruction's own
+      // "keep the highest" once they have.
+      const lowest = keepHighest(rolled, count + extra - ignoring);
+      const roll = settleRollIgnores({
+        player,
+        ...(this.state.objects[source] !== undefined ? { source } : {}),
+        sides,
+        results: lowest.kept,
+        modifier,
+        ...(lowest.ignored.length > 0 ? { ignored: lowest.ignored } : {}),
+        shifts: lowest.kept.map(() => 0),
+        used: [],
+        ignoreBy: choosers,
+        ...(keep !== undefined ? { keepAfter: keep } : {}),
+        then,
+      });
+      if (this.askRollShift(roll)) return undefined;
+      return this.finishRoll(roll);
+    }
     // What's ignored never happened (706.6): nothing reads it.
     const kept = count + extra - ignoring;
     const { kept: results, ignored } = keepHighest(rolled, Math.min(keep ?? kept, kept));
@@ -14559,12 +14607,35 @@ export class Game {
    * asked too.
    */
   private askRollShift(roll: RollInProgress): boolean {
+    // A die to ignore is chosen as part of the roll (rule 706.6), before
+    // any reroll or shift of it.
+    const ignorer = roll.ignoreBy?.[0];
     // A reroll comes first (rule 706.2b).
-    const reroll = this.rollRerollOption(roll);
-    const options = reroll === undefined ? this.rollShiftOptions(roll) : [];
-    if (reroll === undefined && options.length === 0) return false;
+    const reroll = ignorer !== undefined ? undefined : this.rollRerollOption(roll);
+    const options = ignorer !== undefined || reroll !== undefined ? [] : this.rollShiftOptions(roll);
+    if (ignorer === undefined && reroll === undefined && options.length === 0) return false;
     if (this.manaPaymentDepth > 0 || this.state.awaiting !== null) {
       (this.state.pendingRollShifts ??= []).push(roll);
+      return true;
+    }
+    if (ignorer !== undefined) {
+      // One mode a different result: dice alike are the same choice.
+      // The banner names the source; each mode says the die.
+      const dice = [...new Set(roll.results)];
+      this.state.awaiting = {
+        kind: "choose-modes",
+        player: ignorer.player,
+        source: ignorer.by,
+        minModes: 1,
+        maxModes: 1,
+        modes: dice.map((result) => ({
+          text: `Ignore the ${result}${roll.player === ignorer.player ? "" : " they rolled"}`,
+          effect: { kind: "sequence", effects: [] },
+        })),
+        x: 0,
+        targets: [],
+        ignoreRoll: { roll, dice },
+      };
       return true;
     }
     const dice = dieResults({ ...roll, total: 0 });
@@ -14796,6 +14867,21 @@ export class Game {
     });
     on.storedResults = next;
     invalidateComputedCache();
+  }
+
+  /**
+   * The answer to which die of a roll to ignore (`askRollShift`, rule 706.6):
+   * a die that came up the chosen result never happened; then the next
+   * chooser, a reroll or shift is asked, or the roll is final and carries on.
+   */
+  private applyRollIgnore(asked: { readonly roll: RollInProgress; readonly dice: readonly number[] }, pick: number | undefined): void {
+    this.state.awaiting = null;
+    const roll = asked.roll;
+    const die = roll.results.indexOf(asked.dice[pick ?? 0] ?? roll.results[0]);
+    const next = settleRollIgnores({ ...withoutDie(roll, die), ignoreBy: (roll.ignoreBy ?? []).slice(1) });
+    if (this.askRollShift(next)) return;
+    this.carryOnFromRoll(next, this.finishRoll(next));
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
   /**

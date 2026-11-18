@@ -183,6 +183,13 @@ export interface DiceRollReplacement {
   readonly who: "you" | "opponent" | "any-player";
   readonly instead: ModifiedEvent;
   readonly ignoreLowest?: true;
+  /** "…and **you** choose one of those rolls to ignore" (Bamboozling
+   * Beeble's resolved one, `next` and `players` a target): this
+   * replacement's controller chooses one die of the roll to ignore once the
+   * dice are thrown, after any `ignoreLowest` (the same dice can be kept
+   * either way), and before a reroll or a shift is asked (706.2a-b). What's
+   * ignored never happened (rule 706.6). All the dice alike, nobody chooses. */
+  readonly ignoreChosen?: true;
 }
 
 /**

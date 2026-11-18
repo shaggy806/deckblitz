@@ -5105,6 +5105,14 @@ export type AwaitingDecision =
        * shift, or the roll is final. Answered by the engine itself; the
        * modes' effects are unused. */
       readonly rerollRoll?: { readonly roll: RollInProgress; readonly option: RollRerollOption };
+      /** Set when this asks which die of `roll` to ignore (rule 706.6 — a
+       * `would-roll-dice` replacement's `ignoreChosen`, Bamboozling Beeble's
+       * "you choose one of those rolls to ignore"), the first of its
+       * `ignoreBy`: mode i ignores a die that came up `dice[i]` (one mode a
+       * different result). Then the next chooser, a reroll or shift, or the
+       * roll is final. Answered by the engine itself; the modes' effects are
+       * unused. */
+      readonly ignoreRoll?: { readonly roll: RollInProgress; readonly dice: readonly number[] };
       /** Storage Matrix's question in the untap step (rule 502.3 —
        * `untapOnlyChosenType`): mode i keeps only `types[i]` among `untapping`,
        * the permanents about to untap, and the step carries on with `asked`

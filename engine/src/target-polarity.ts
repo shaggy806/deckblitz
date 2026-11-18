@@ -786,6 +786,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (event === "would-draw" && replaced !== undefined && typeof n.players === "object") {
       v.touch(slotOfPlayer(n.players), "harm", MAJOR);
     }
+    // "The next time target player would roll …, you choose one of those
+    // rolls to ignore" (Bamboozling Beeble): the controller picks which die
+    // goes, so it serves on anyone's roll, theirs to help, another's to spoil.
+    if (event === "would-roll-dice" && "ignoreChosen" in n.replacement && typeof n.players === "object") {
+      v.touch(slotOfPlayer(n.players), "either", MINOR);
+    }
   },
   // "You win" has no target; "target opponent loses the game" harms it.
   "win-game": none,

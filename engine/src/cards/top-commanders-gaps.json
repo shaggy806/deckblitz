@@ -3024,7 +3024,8 @@
   "replacement:damage-replaced-not-prevented",
   "replacement:enters-tapped-if-cast",
   "effect:grant-keyword-variants",
-  "effect:hexproof-from-counters"
+  "effect:hexproof-from-counters",
+  "replacement:extra-die-chosen-ignore"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

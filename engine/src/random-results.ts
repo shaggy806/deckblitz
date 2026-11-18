@@ -201,7 +201,44 @@ export interface RollInProgress {
   /** A reroll was declined: none is asked again (rule 706.2b's rerolls come
    * first, so none after a shift either). */
   readonly rerollsDone?: true;
+  /** The players still to choose a die of it to ignore (rule 706.6 — a
+   * `would-roll-dice` replacement's `ignoreChosen`), each with the
+   * permanent whose replacement it is, asked before any reroll or shift, and
+   * `keepAfter` the instruction's own "keep the highest N", applied once
+   * they have. */
+  readonly ignoreBy?: readonly { readonly player: PlayerId; readonly by: ObjectId }[];
+  readonly keepAfter?: number;
   readonly then: RollThen;
+}
+
+/**
+ * `roll` with what needs nobody's choice done: each chooser at the front of
+ * its `ignoreBy` with no dice to choose between (none, or all alike) ignores
+ * one, if any; once none is left to choose, its `keepAfter` keeps the
+ * highest (706.6).
+ */
+export function settleRollIgnores(roll: RollInProgress): RollInProgress {
+  let out = roll;
+  while ((out.ignoreBy ?? []).length > 0 && new Set(out.results).size <= 1) {
+    const [, ...rest] = out.ignoreBy ?? [];
+    out = { ...withoutDie(out, 0), ignoreBy: rest };
+  }
+  if ((out.ignoreBy ?? []).length > 0) return out;
+  const { ignoreBy: _ignoreBy, keepAfter, ...settled } = out;
+  if (keepAfter === undefined || keepAfter >= settled.results.length) return settled;
+  const { kept, ignored } = keepHighest(settled.results, keepAfter);
+  return { ...settled, results: kept, shifts: kept.map(() => 0), ignored: [...(settled.ignored ?? []), ...ignored] };
+}
+
+/** `roll` with die `die` ignored (706.6), if it has one. */
+export function withoutDie(roll: RollInProgress, die: number): RollInProgress {
+  if (die < 0 || die >= roll.results.length) return roll;
+  return {
+    ...roll,
+    results: roll.results.filter((_, i) => i !== die),
+    shifts: roll.shifts.filter((_, i) => i !== die),
+    ignored: [...(roll.ignored ?? []), roll.results[die]],
+  };
 }
 
 /** One die of a roll: "whenever you roll a 4 or higher", "a natural 20". */

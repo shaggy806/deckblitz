@@ -13421,4 +13421,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'begin-combat',
     }),
   ),
+  // --- A die you choose to ignore (2026-11-18) ---------------------------------------
+  preset(
+    'Bamboozling Beeble: you choose which of your two dice to ignore',
+    board({
+      you: { bf: ['Bamboozling Beeble', 'Island', 'Component Pouch'] },
+    }),
+  ),
+  preset(
+    'Bamboozling Beeble: in a 4-player game, the choice is yours',
+    board({
+      you: { bf: ['Bamboozling Beeble', 'Island', 'Component Pouch'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

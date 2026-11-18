@@ -8864,3 +8864,15 @@ Each board's die comes up 4.
 - **Do:** In this 4-player game, at your declare attackers step send Grizzly Bears at Carol, then Hill Giant at Bob's Jace Beleren.
 - **Expect:** With only Grizzly Bears at Carol the banner adds "at least one creature must attack Bob or Jace Beleren" and "Attack with 1" is off; once Hill Giant attacks Jace Beleren, "Attack with 2" works.
 - **Not a bug:** Grizzly Bears may still attack Carol: only one creature has to go Bob's way.
+
+## A die you choose to ignore (2026-11-18)
+
+### Bamboozling Beeble: you choose which of your two dice to ignore
+- **Do:** Activate Bamboozling Beeble aimed at yourself, then activate Component Pouch.
+- **Expect:** Before anything is rolled into the History, the banner "Bamboozling Beeble — choose one" offers one button per die, "Ignore the …". Pick one: the History shows one d20 roll, the other die's result, and Component Pouch gets one counter (1–9) or two (10–20) for it.
+- **Not a bug:** If both dice come up the same, nothing is asked.
+
+### Bamboozling Beeble: in a 4-player game, the choice is yours
+- **Do:** Activate Bamboozling Beeble aimed at yourself, then activate Component Pouch.
+- **Expect:** The banner "Bamboozling Beeble — choose one" asks you, not a bot, one "Ignore the …" button per die; the roll and Component Pouch's counters follow the die you keep.
+- **Not a bug:** If both dice come up the same, nothing is asked.
