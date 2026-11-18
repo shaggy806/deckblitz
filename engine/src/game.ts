@@ -195,6 +195,8 @@ import {
   grantOutlastsLoss,
   modifierGrantApplies,
   KEYWORD_COUNTERS,
+  HEXPROOF_FROM_COUNTER,
+  keywordCounterKindsAmong,
   hasManaAbility,
   extraIntrinsicManaColors,
   inactiveStandIn,
@@ -46206,6 +46208,17 @@ controlledBy,
         this.phaseOut([this.splitOneFromStack(target.object)], until, held);
       },
       become: (target, patch, duration) => this.become(target, patch, lastingHere(duration)),
+      keywordCountersAmong: (from, keywords, inGraveyard) =>
+        keywordCounterKindsAmong(
+          this.state,
+          this.registry,
+          inGraveyard === true
+            ? this.state.zones.perPlayer[controller].graveyard.filter((id) =>
+                matchesFilter(this.state, this.registry, id, from, { you: controller }),
+              )
+            : this.battlefieldMatching(controller, from),
+          keywords,
+        ),
       sharedAbilities: (from, share, inGraveyard) =>
         sharedAbilitiesOnBattlefield(
           this.state,
@@ -55792,7 +55805,7 @@ controlledBy,
     object.counters[counter] = before + total;
     // Every counter of a kind takes the newest one's timestamp (613.7c); a
     // keyword counter's is what orders its keyword in layer 6.
-    if (total > 0 && KEYWORD_COUNTERS.has(counter as Keyword)) {
+    if (total > 0 && (KEYWORD_COUNTERS.has(counter as Keyword) || counter.startsWith(HEXPROOF_FROM_COUNTER))) {
       object.counterTimestamps = { ...object.counterTimestamps, [counter]: this.freshTimestamp() };
     }
     this.emit({

@@ -3023,7 +3023,8 @@
   "replacement:damage-replaced-not-prevented",
   "replacement:damage-replaced-not-prevented",
   "replacement:enters-tapped-if-cast",
-  "effect:grant-keyword-variants"
+  "effect:grant-keyword-variants",
+  "effect:hexproof-from-counters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -293,6 +293,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "about-player": (n, v) => v.child(n.effect),
   "remember-chosen-permanent": none,
+  // Its counters go on permanents chosen as it resolves, never a target.
+  "keyword-counters": none,
   "offer-zone-choice": none,
   // `keepTargets`: `then` reads the chosen permanent at 0 and the targets from
   // slot 1 (Crush Underfoot).

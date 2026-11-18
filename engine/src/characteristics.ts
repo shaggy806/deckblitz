@@ -2142,6 +2142,139 @@ export function keywordCountersOn(object: GameObject): Keyword[] {
   return out;
 }
 
+/**
+ * A "hexproof from [quality]" counter's kind begins with this (rule 122.1b: a
+ * keyword counter may be any variant of its keyword — Kathril, Aspect
+ * Warper's "a counter of each variant kind"). The rest names the quality as
+ * the ability does: a colour ("hexproof from white"), card types ("hexproof
+ * from artifacts, creatures, and enchantments" — one ability, Nevinyrral's),
+ * a quality a filter names ("monocolored", "multicolored", "nongreen"), or,
+ * for one no word names, the filter itself as JSON. A permanent with one has
+ * that hexproof ability (layer 6), gone with a loss of hexproof (702.11e).
+ */
+export const HEXPROOF_FROM_COUNTER = "hexproof from ";
+
+const HEXPROOF_COLOR_WORDS: Readonly<Record<Color, string>> = { W: "white", U: "blue", B: "black", R: "red", G: "green" };
+const HEXPROOF_TYPE_WORDS: Readonly<Record<CardType, string>> = {
+  land: "lands",
+  creature: "creatures",
+  artifact: "artifacts",
+  enchantment: "enchantments",
+  instant: "instants",
+  sorcery: "sorceries",
+  planeswalker: "planeswalkers",
+  battle: "battles",
+  kindred: "kindred",
+};
+/** The qualities a filter names that have a word of their own. */
+const HEXPROOF_FILTER_WORDS: readonly (readonly [string, CardFilter])[] = [
+  ["monocolored", { multicolored: false, colorless: false }],
+  ["multicolored", { multicolored: true }],
+  ...(Object.entries(HEXPROOF_COLOR_WORDS) as [Color, string][]).map(([color, word]) => [`non${word}`, { notColors: [color] }] as const),
+];
+
+/** A filter as a key that doesn't depend on the order its fields were written. */
+function filterKey(filter: CardFilter): string {
+  return JSON.stringify(filter, (_key, value: unknown) =>
+    value !== null && typeof value === "object" && !Array.isArray(value)
+      ? Object.fromEntries(Object.entries(value as Record<string, unknown>).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))
+      : value,
+  );
+}
+
+/** "A, B, and C" — how a list of qualities is written. */
+function qualityList(words: readonly string[]): string {
+  return words.length <= 2 ? words.join(" and ") : `${words.slice(0, -1).join(", ")}, and ${words[words.length - 1]}`;
+}
+
+/**
+ * The keyword-counter kinds (rule 122.1b) of one "hexproof from" ability: one
+ * for each colour it names (each a separate ability, rule 702.11f-g — "each
+ * color" is five), one for its card types together, one for its filter's
+ * quality. `ownColors` ("each of its colors") is the colours `colors` gives,
+ * the card's own. Nothing for a printed "can't be the target of …" that
+ * isn't the keyword.
+ */
+export function hexproofFromCounterKinds(
+  h: NonNullable<StaticAbility["hexproofFrom"]>,
+  colors: Iterable<Color>,
+): string[] {
+  if (isQualifiedHexproof(h)) return [];
+  const kinds: string[] = [];
+  const ownColors = h.ownColors === true ? [...colors] : [];
+  for (const color of COLORS) {
+    if ((h.colors ?? []).includes(color) || ownColors.includes(color)) kinds.push(`${HEXPROOF_FROM_COUNTER}${HEXPROOF_COLOR_WORDS[color]}`);
+  }
+  if ((h.types ?? []).length > 0) kinds.push(`${HEXPROOF_FROM_COUNTER}${qualityList((h.types ?? []).map((t) => HEXPROOF_TYPE_WORDS[t]))}`);
+  if (h.filter !== undefined) {
+    const key = filterKey(h.filter);
+    const word = HEXPROOF_FILTER_WORDS.find(([, filter]) => filterKey(filter) === key)?.[0];
+    kinds.push(`${HEXPROOF_FROM_COUNTER}${word ?? key}`);
+  }
+  return kinds;
+}
+
+/** The hexproof ability a "hexproof from [quality]" counter gives — see
+ * {@link HEXPROOF_FROM_COUNTER} — or null for any other counter. */
+export function hexproofFromOfCounter(kind: string): NonNullable<PtModifier["hexproofFrom"]> | null {
+  if (!kind.startsWith(HEXPROOF_FROM_COUNTER)) return null;
+  const quality = kind.slice(HEXPROOF_FROM_COUNTER.length);
+  const color = (Object.entries(HEXPROOF_COLOR_WORDS) as [Color, string][]).find(([, word]) => word === quality)?.[0];
+  if (color !== undefined) return { colors: [color] };
+  const named = HEXPROOF_FILTER_WORDS.find(([word]) => word === quality)?.[1];
+  if (named !== undefined) return { filter: named };
+  if (quality.startsWith("{")) {
+    try {
+      return { filter: JSON.parse(quality) as CardFilter };
+    } catch {
+      return null;
+    }
+  }
+  const words = quality.split(/, and |, | and /);
+  const types = words.map((word) => (Object.entries(HEXPROOF_TYPE_WORDS) as [CardType, string][]).find(([, w]) => w === word)?.[0]);
+  return types.every((t) => t !== undefined) ? { types: types as CardType[] } : null;
+}
+
+/**
+ * The keyword counters (rule 122.1b) a set of cards earns, one of each listed
+ * keyword one of them has, in the listed order — however many have it (one
+ * check per keyword). With `"hexproof"` listed, each "hexproof from
+ * [quality]" ability among them is a counter of its own variant kind, after
+ * a plain hexproof counter if one has hexproof (Kathril, Aspect Warper's
+ * ruling): read from a permanent as it is now, and from a card elsewhere off
+ * its own text (rule 113.6: it doesn't function there, but the card has it).
+ */
+export function keywordCounterKindsAmong(
+  state: GameState,
+  registry: CardRegistry,
+  cards: readonly ObjectId[],
+  keywords: readonly Keyword[],
+): string[] {
+  const kinds: string[] = [];
+  const all = cards.map((id) => ({ id, c: computeCharacteristics(state, registry, id) }));
+  for (const keyword of keywords) {
+    if (all.some(({ c }) => c.keywords.has(keyword))) kinds.push(keyword);
+    if (keyword !== "hexproof") continue;
+    const variants = new Set<string>();
+    for (const { id, c } of all) {
+      const card = state.objects[id];
+      if (card === undefined) continue;
+      if (card.zone === "battlefield") {
+        const h = c.hexproofFrom;
+        for (const kind of hexproofFromCounterKinds({ colors: [...h.colors], types: [...h.types] }, c.colors)) variants.add(kind);
+        for (const filter of h.filters) for (const kind of hexproofFromCounterKinds({ filter }, c.colors)) variants.add(kind);
+        continue;
+      }
+      for (const own of registry.get(rulesTextName(card)).static) {
+        if (own.hexproofFrom === undefined || own.affects?.scope !== "self" || own.condition !== undefined) continue;
+        for (const kind of hexproofFromCounterKinds(own.hexproofFrom, c.colors)) variants.add(kind);
+      }
+    }
+    kinds.push(...variants);
+  }
+  return kinds;
+}
+
 /** Whether a speed (rule 702.179 — 0 for none) is within a `speed`
  * condition's bounds. */
 export function speedWithin(
@@ -6841,6 +6974,19 @@ function computeCharacteristicsUncached(
   for (const keyword of keywordCountersOn(object)) {
     const at = keywordCounterTimestamp(object, keyword);
     if (grantOutlastsLoss(lostAt, at) && !lostAfter(losses, keyword, at)) keywords.add(keyword);
+  }
+  // A "hexproof from [quality]" counter (rule 122.1b), the same way, gone
+  // with a later loss of hexproof (702.11e).
+  if (onBattlefield) {
+    for (const [kind, n] of Object.entries(object.counters)) {
+      if ((n ?? 0) <= 0 || !kind.startsWith(HEXPROOF_FROM_COUNTER)) continue;
+      const h = hexproofFromOfCounter(kind);
+      const at = object.counterTimestamps?.[kind] ?? object.timestamp;
+      if (h === null || !grantOutlastsLoss(lostAt, at) || lostAfter(losses, "hexproof", at)) continue;
+      for (const c of h.colors ?? []) hexColors.add(c);
+      for (const t of h.types ?? []) hexTypes.add(t);
+      if (h.filter !== undefined) hexFilters.push(h.filter);
+    }
   }
   // Rule 701.60c — a suspected permanent has menace and "This creature can't
   // block" for as long as it's suspected.

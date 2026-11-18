@@ -3026,6 +3026,31 @@ export type EffectSpec =
     }
   | {
       /**
+       * Keyword counters (rule 122.1b) for the keywords a set of cards has,
+       * each put on a permanent chosen for it — Kathril, Aspect Warper's "put
+       * a flying counter on any creature you control if a creature card in
+       * your graveyard has flying. Repeat this process for first strike, …,
+       * hexproof, …": `from` the creature cards, `inGraveyard`, `onto` the
+       * creatures you control. Read once as this begins
+       * (`keywordCounterKindsAmong`): one counter of each listed keyword some
+       * card has, in the listed order, however many have it; with hexproof
+       * listed, each "hexproof from [quality]" ability among them is a
+       * counter of its own variant kind (Kathril's ruling). For each, the
+       * controller chooses a permanent matching `onto` from their side (not
+       * a target — `choose-permanents`), and nothing goes on with none to
+       * choose. What went on is `thisWay: "counters-placed"`: "then put a
+       * +1/+1 counter on Kathril for each counter put on a creature this way".
+       */
+      readonly kind: "keyword-counters";
+      readonly from: CardFilter;
+      /** `from` is read over the cards in the controller's graveyard, not
+       * the battlefield. */
+      readonly inGraveyard?: true;
+      readonly keywords: readonly Keyword[];
+      readonly onto: CardFilter;
+    }
+  | {
+      /**
        * Bolster N (rule 701.39a): the effect's controller chooses a creature
        * they control with the least toughness, or tied for it, among
        * creatures they control, and puts `amount` +1/+1 counters on it. The
@@ -14819,6 +14844,11 @@ export interface EffectApi {
   /** What a `become`'s `sharesKeywords` gives: read now from the battlefield
    * permanents matching `from`, from this effect's controller's side — or,
    * `inGraveyard`, from the cards in that player's graveyard matching it. */
+  /** The keyword counters the cards matching `from` earn — see the
+   * `"keyword-counters"` {@link EffectSpec}: the battlefield's permanents from
+   * this effect's controller's side or, `inGraveyard`, the cards in that
+   * player's graveyard. */
+  keywordCountersAmong(from: CardFilter, keywords: readonly Keyword[], inGraveyard?: true): readonly string[];
   sharedAbilities(
     from: CardFilter,
     share: { readonly keywords: readonly Keyword[]; readonly protection?: true; readonly landwalk?: true },
@@ -20273,6 +20303,29 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "remember-chosen-permanent": {
       const chosen = ctx.targets[0];
       if (chosen?.kind === "object") ctx.rememberChosenPermanent(chosen.object);
+      return;
+    }
+    case "keyword-counters": {
+      // The kinds fixed as this begins, then one choice and one counter each,
+      // in order — as a `sequence`, so a choice waits for the one before.
+      const kinds = ctx.keywordCountersAmong(spec.from, spec.keywords, spec.inGraveyard);
+      if (kinds.length === 0) return;
+      applyEffectSpec(
+        {
+          kind: "sequence",
+          effects: kinds.map(
+            (counter): EffectSpec => ({
+              kind: "choose-permanents",
+              filter: spec.onto,
+              min: 1,
+              upTo: 1,
+              prompt: `Choose a permanent to put a ${counter} counter on`,
+              then: { kind: "add-counter", target: 0, counter, amount: 1 },
+            }),
+          ),
+        },
+        ctx,
+      );
       return;
     }
     case "about-player":
