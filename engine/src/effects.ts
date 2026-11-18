@@ -3606,6 +3606,16 @@ export type EffectSpec =
        */
       readonly who?: PlayerScope;
       readonly target?: number;
+      /**
+       * With choices held (`for-each-unless`): the cards are drawn when
+       * they're released, before anything else they hold happens (rule
+       * 101.4) — Decoy Gambit's "unless its controller **has you draw a
+       * card**" (an option's `doing`, `who: { controllerOf: "source" }`): "after
+       * all choices are made, you draw the appropriate number of cards. After
+       * you've drawn, the appropriate creatures are all simultaneously
+       * returned" (the ruling). With nothing held, drawn at once.
+       */
+      readonly atRelease?: true;
     }
   | {
       /**
@@ -10919,6 +10929,14 @@ export type EffectSpec =
        * each of those cards" — Sword-Point Diplomacy). */
       readonly of:
         | { readonly permanents: CardFilter }
+        /** The spell's own target permanents in these slots, each one still
+         * a legal target and on the battlefield as this begins (rule
+         * 608.2b) — Decoy Gambit's "for each opponent, choose up to one
+         * target creature that player controls, then return **that
+         * creature** to its owner's hand unless its controller has you draw
+         * a card": a slot left empty, or gone illegal, asks nobody (the
+         * ruling). */
+        | { readonly targets: readonly number[] }
         | { readonly inHandOf: number; readonly filter: CardFilter }
         | { readonly libraryTop: number }
         /** The spells and/or abilities on the stack, `whose` controls them —
@@ -14353,6 +14371,9 @@ export interface EffectApi {
   exileFoundCard(card: ObjectId): void;
   /** See `return-to-hand`'s `atRelease`. */
   returnToHandAtRelease(target: TargetRef): void;
+  /** See `draw`'s `atRelease`: `count` cards for `player`, drawn when the
+   * held choices are released (at once with none held). */
+  drawAtRelease(player: PlayerId, count: number): void;
   /** See `counter`'s `atRelease`. */
   counterAtRelease(target: TargetRef): void;
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
@@ -20273,7 +20294,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // of the Ancestors' "the difference" is fixed as it resolves, whatever a
       // replacement makes of the first player's draw).
       const drawn = drawers.map((player) => [player, amountValue(spec.amount, ctx, player)] as const);
-      for (const [player, count] of drawn) ctx.draw(player, count);
+      for (const [player, count] of drawn) {
+        if (spec.atRelease === true) ctx.drawAtRelease(player, count);
+        else ctx.draw(player, count);
+      }
       return;
     }
     case "discard-hand":

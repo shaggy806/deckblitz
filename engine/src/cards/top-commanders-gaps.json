@@ -2962,7 +2962,8 @@
   "cost:mana-ability-reveal-any-number",
   "mechanic:piles",
   "mechanic:piles",
-  "effect:opponent-chooses-permanents-to-bounce"
+  "effect:opponent-chooses-permanents-to-bounce",
+  "effect:unless-per-target-held"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

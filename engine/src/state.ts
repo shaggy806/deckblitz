@@ -6872,6 +6872,15 @@ export interface GameState {
     /** Permanents to go back to their owners' hands — `return-to-hand`'s
      * `atRelease`. */
     readonly returns?: readonly ObjectId[];
+    /** Cards to draw, before anything else held happens — `draw`'s
+     * `atRelease` (Decoy Gambit): `count` for `player`, as `source`'s effect
+     * controlled by `controller`. */
+    readonly draws?: readonly {
+      readonly player: PlayerId;
+      readonly count: number;
+      readonly source: ObjectId;
+      readonly controller: PlayerId;
+    }[];
     /** Spells and abilities to counter together — `counter`'s `atRelease`
      * (Whirlwind Denial): each with the player and source countering it. */
     readonly counters?: readonly { readonly object: ObjectId; readonly by: PlayerId; readonly source: ObjectId }[];

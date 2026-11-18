@@ -43944,6 +43944,17 @@ controlledBy,
           const it = this.state.objects[object];
           return { object, name: it.cardName, controller: it.controller, owner: it.owner, permanent };
         };
+        if ("targets" in of) {
+          // The spell's own target permanents still legal (rule 608.2b) and
+          // still on the battlefield, slot by slot; each already singled out
+          // of any stack as it was targeted.
+          const illegal = opts.illegalTargets ?? [];
+          return of.targets.flatMap((slot) => {
+            const ref = targets[slot];
+            if (ref?.kind !== "object" || illegal.includes(slot)) return [];
+            return this.state.objects[ref.object]?.zone === "battlefield" ? [facts(ref.object, true)] : [];
+          });
+        }
         if ("permanents" in of) {
           return this.battlefieldMatching(controller, of.permanents, x, source)
             // Each token of a stack is an object of its own (rule 700.3b).
@@ -44011,6 +44022,16 @@ controlledBy,
           return;
         }
         this.state.heldChoices = { ...held, returns: [...(held.returns ?? []), target.object] };
+      },
+      drawAtRelease: (player, count) => {
+        const held = this.state.heldChoices;
+        if (held === undefined) {
+          context.draw(player, count);
+          return;
+        }
+        if (count <= 0) return;
+        const entry = { player, count, source, controller };
+        this.state.heldChoices = { ...held, draws: [...(held.draws ?? []), entry] };
       },
       counterAtRelease: (target) => {
         if (target.kind !== "object" || this.state.objects[target.object]?.zone !== "stack") return;
@@ -63240,6 +63261,12 @@ controlledBy,
     const held = this.state.heldChoices;
     if (held === undefined) return;
     delete this.state.heldChoices;
+    // Decoy Gambit: "After all choices are made, you draw the appropriate
+    // number of cards. After you've drawn, the appropriate creatures are all
+    // simultaneously returned" (the ruling) — the draws first.
+    for (const { player, count, source, controller } of held.draws ?? []) {
+      this.makeResolutionContext(source, controller, []).draw(player, count);
+    }
     const discards = held.discards
       .map(({ player, objects, cause }) => ({
         player,
