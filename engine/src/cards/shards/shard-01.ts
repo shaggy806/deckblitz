@@ -274,6 +274,7 @@ import _poolFireOfOrthanc from "../pool/fire-of-orthanc.js";
 import _poolFirefrightMage from "../pool/firefright-mage.js";
 import _poolFiremindVessel from "../pool/firemind-vessel.js";
 import _poolFiresOfVictory from "../pool/fires-of-victory.js";
+import _poolFishingPole from "../pool/fishing-pole.js";
 import _poolFlailingManticore from "../pool/flailing-manticore.js";
 import _poolFlameWave from "../pool/flame-wave.js";
 import _poolFlameblastDragon from "../pool/flameblast-dragon.js";
@@ -1301,6 +1302,7 @@ const shard: CardShard = {
     _poolFirefrightMage,
     _poolFiremindVessel,
     _poolFiresOfVictory,
+    _poolFishingPole,
     _poolFlailingManticore,
     _poolFlameWave,
     _poolFlameblastDragon,

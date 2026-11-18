@@ -904,6 +904,7 @@ import _poolTheMeep from "../pool/the-meep.js";
 import _poolTheRedTerror from "../pool/the-red-terror.js";
 import _poolTheShire from "../pool/the-shire.js";
 import _poolTheWeaverKing from "../pool/the-weaver-king.js";
+import _poolThelonOfHavenwood from "../pool/thelon-of-havenwood.js";
 import _poolThemberchaud from "../pool/themberchaud.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
@@ -1975,6 +1976,7 @@ const shard: CardShard = {
     _poolTheRedTerror,
     _poolTheShire,
     _poolTheWeaverKing,
+    _poolThelonOfHavenwood,
     _poolThemberchaud,
     _poolThornMammoth,
     _poolThornglintBridge,

@@ -9802,6 +9802,7 @@ import _poolFirstTimeFlyer from "./pool/first-time-flyer.js";
 import _poolFirstVolley from "./pool/first-volley.js";
 import _poolFishersTalent from "./pool/fishers-talent.js";
 import _poolFishingGear from "./pool/fishing-gear.js";
+import _poolFishingPole from "./pool/fishing-pole.js";
 import _poolFishliverOil from "./pool/fishliver-oil.js";
 import _poolFiskTower from "./pool/fisk-tower.js";
 import _poolFissureVent from "./pool/fissure-vent.js";
@@ -12632,6 +12633,7 @@ import _poolHeapDoll from "./pool/heap-doll.js";
 import _poolHeapGate from "./pool/heap-gate.js";
 import _poolHeapedHarvest from "./pool/heaped-harvest.js";
 import _poolHeartOfBogardan from "./pool/heart-of-bogardan.js";
+import _poolHeartOfKiran from "./pool/heart-of-kiran.js";
 import _poolHeartOfLight from "./pool/heart-of-light.js";
 import _poolHeartOfRamos from "./pool/heart-of-ramos.js";
 import _poolHeartOfYavimaya from "./pool/heart-of-yavimaya.js";
@@ -21112,6 +21114,7 @@ import _poolProtectionRacket from "./pool/protection-racket.js";
 import _poolProtectiveBubble from "./pool/protective-bubble.js";
 import _poolProtectiveParents from "./pool/protective-parents.js";
 import _poolProtectiveResponse from "./pool/protective-response.js";
+import _poolProtectiveSphere from "./pool/protective-sphere.js";
 import _poolProtectorOfGondor from "./pool/protector-of-gondor.js";
 import _poolProtectorOfTheCrown from "./pool/protector-of-the-crown.js";
 import _poolProtectorOfTheWastes from "./pool/protector-of-the-wastes.js";
@@ -28629,6 +28632,7 @@ import _poolTheaterOfHorrors from "./pool/theater-of-horrors.js";
 import _poolTheftOfDreams from "./pool/theft-of-dreams.js";
 import _poolTheirNameIsDeath from "./pool/their-name-is-death.js";
 import _poolTheirNumberIsLegion from "./pool/their-number-is-legion.js";
+import _poolThelonOfHavenwood from "./pool/thelon-of-havenwood.js";
 import _poolTheloniteDruid from "./pool/thelonite-druid.js";
 import _poolTheloniteHermit from "./pool/thelonite-hermit.js";
 import _poolTheloniteMonk from "./pool/thelonite-monk.js";
@@ -30537,6 +30541,7 @@ import _poolVaultbornTyrant from "./pool/vaultborn-tyrant.js";
 import _poolVaultbreaker from "./pool/vaultbreaker.js";
 import _poolVaultguardTrooper from "./pool/vaultguard-trooper.js";
 import _poolVaynesTreachery from "./pool/vaynes-treachery.js";
+import _poolVaziKeenNegotiator from "./pool/vazi-keen-negotiator.js";
 import _poolVebulid from "./pool/vebulid.js";
 import _poolVecTownships from "./pool/vec-townships.js";
 import _poolVectisAgents from "./pool/vectis-agents.js";
@@ -43327,6 +43332,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFirstVolley,
   _poolFishersTalent,
   _poolFishingGear,
+  _poolFishingPole,
   _poolFishliverOil,
   _poolFiskTower,
   _poolFissureVent,
@@ -46157,6 +46163,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeapGate,
   _poolHeapedHarvest,
   _poolHeartOfBogardan,
+  _poolHeartOfKiran,
   _poolHeartOfLight,
   _poolHeartOfRamos,
   _poolHeartOfYavimaya,
@@ -54637,6 +54644,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProtectiveBubble,
   _poolProtectiveParents,
   _poolProtectiveResponse,
+  _poolProtectiveSphere,
   _poolProtectorOfGondor,
   _poolProtectorOfTheCrown,
   _poolProtectorOfTheWastes,
@@ -62154,6 +62162,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheftOfDreams,
   _poolTheirNameIsDeath,
   _poolTheirNumberIsLegion,
+  _poolThelonOfHavenwood,
   _poolTheloniteDruid,
   _poolTheloniteHermit,
   _poolTheloniteMonk,
@@ -64062,6 +64071,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVaultbreaker,
   _poolVaultguardTrooper,
   _poolVaynesTreachery,
+  _poolVaziKeenNegotiator,
   _poolVebulid,
   _poolVecTownships,
   _poolVectisAgents,
@@ -76865,6 +76875,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/first-volley": _poolFirstVolley,
   "pool/fishers-talent": _poolFishersTalent,
   "pool/fishing-gear": _poolFishingGear,
+  "pool/fishing-pole": _poolFishingPole,
   "pool/fishliver-oil": _poolFishliverOil,
   "pool/fisk-tower": _poolFiskTower,
   "pool/fissure-vent": _poolFissureVent,
@@ -79695,6 +79706,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heap-gate": _poolHeapGate,
   "pool/heaped-harvest": _poolHeapedHarvest,
   "pool/heart-of-bogardan": _poolHeartOfBogardan,
+  "pool/heart-of-kiran": _poolHeartOfKiran,
   "pool/heart-of-light": _poolHeartOfLight,
   "pool/heart-of-ramos": _poolHeartOfRamos,
   "pool/heart-of-yavimaya": _poolHeartOfYavimaya,
@@ -88175,6 +88187,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/protective-bubble": _poolProtectiveBubble,
   "pool/protective-parents": _poolProtectiveParents,
   "pool/protective-response": _poolProtectiveResponse,
+  "pool/protective-sphere": _poolProtectiveSphere,
   "pool/protector-of-gondor": _poolProtectorOfGondor,
   "pool/protector-of-the-crown": _poolProtectorOfTheCrown,
   "pool/protector-of-the-wastes": _poolProtectorOfTheWastes,
@@ -95692,6 +95705,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/theft-of-dreams": _poolTheftOfDreams,
   "pool/their-name-is-death": _poolTheirNameIsDeath,
   "pool/their-number-is-legion": _poolTheirNumberIsLegion,
+  "pool/thelon-of-havenwood": _poolThelonOfHavenwood,
   "pool/thelonite-druid": _poolTheloniteDruid,
   "pool/thelonite-hermit": _poolTheloniteHermit,
   "pool/thelonite-monk": _poolTheloniteMonk,
@@ -97600,6 +97614,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vaultbreaker": _poolVaultbreaker,
   "pool/vaultguard-trooper": _poolVaultguardTrooper,
   "pool/vaynes-treachery": _poolVaynesTreachery,
+  "pool/vazi-keen-negotiator": _poolVaziKeenNegotiator,
   "pool/vebulid": _poolVebulid,
   "pool/vec-townships": _poolVecTownships,
   "pool/vectis-agents": _poolVectisAgents,

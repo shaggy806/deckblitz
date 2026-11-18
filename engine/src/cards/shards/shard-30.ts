@@ -978,6 +978,7 @@ import _poolVarchildBetrayerOfKjeldor from "../pool/varchild-betrayer-of-kjeldor
 import _poolVastwoodHydra from "../pool/vastwood-hydra.js";
 import _poolVault75MiddleSchool from "../pool/vault-75-middle-school.js";
 import _poolVault87ForcedEvolution from "../pool/vault-87-forced-evolution.js";
+import _poolVaziKeenNegotiator from "../pool/vazi-keen-negotiator.js";
 import _poolVedalkenEngineer from "../pool/vedalken-engineer.js";
 import _poolVengefulAncestor from "../pool/vengeful-ancestor.js";
 import _poolVenomspoutBrackus from "../pool/venomspout-brackus.js";
@@ -2043,6 +2044,7 @@ const shard: CardShard = {
     _poolVastwoodHydra,
     _poolVault75MiddleSchool,
     _poolVault87ForcedEvolution,
+    _poolVaziKeenNegotiator,
     _poolVedalkenEngineer,
     _poolVengefulAncestor,
     _poolVenomspoutBrackus,

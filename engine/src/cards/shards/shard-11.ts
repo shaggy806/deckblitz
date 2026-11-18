@@ -678,6 +678,7 @@ import _poolPrimaryUnimatrixAdjunct from "../pool/primary-unimatrix-adjunct.js";
 import _poolPrimordialMist from "../pool/primordial-mist.js";
 import _poolPrismariCharm from "../pool/prismari-charm.js";
 import _poolProteanThaumaturge from "../pool/protean-thaumaturge.js";
+import _poolProtectiveSphere from "../pool/protective-sphere.js";
 import _poolProwlPursuitVehicle from "../pool/prowl-pursuit-vehicle.js";
 import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
 import _poolQuarrel from "../pool/quarrel.js";
@@ -1732,6 +1733,7 @@ const shard: CardShard = {
     _poolPrimordialMist,
     _poolPrismariCharm,
     _poolProteanThaumaturge,
+    _poolProtectiveSphere,
     _poolProwlPursuitVehicle,
     _poolPsemillaMeletianPoet,
     _poolQuarrel,
