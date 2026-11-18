@@ -44795,6 +44795,13 @@ controlledBy,
           ? 0
           : chars.basePower;
       },
+      // Its total toxic value (rule 702.164b), as it last existed once gone.
+      toxicOf: (target) => {
+        const lki = lastKnownOf(target);
+        if (lki !== undefined) return lki.toxic ?? 0;
+        if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
+        return computeCharacteristics(this.state, this.registry, target.object).toxic;
+      },
       countersOf: (target, counter) => {
         const lki = lastKnownOf(target);
         const counters =
@@ -71494,6 +71501,7 @@ controlledBy,
       supertypes: [...effectiveSupertypes(this.state, this.registry, object)],
       colors: [...c.colors],
       keywords: [...c.keywords],
+      ...(c.toxic > 0 ? { toxic: c.toxic } : {}),
       hasManaAbility: hasManaAbility(this.state, this.registry, object),
       hasAbilities: hasAnyAbility(this.state, this.registry, object),
       counters: { ...object.counters },

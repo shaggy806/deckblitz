@@ -957,6 +957,12 @@ export type EffectAmount =
    * it (rule 613.4b; the rulings). Read as it last existed on the battlefield
    * if it has left (608.2h); 0 for a noncreature permanent. */
   | { readonly basePowerOf: ObjectRef }
+  /** The **total toxic value** of whatever an {@link ObjectRef} points at
+   * (rule 702.164b — Goliath Hatchery's "draw cards equal to its total toxic
+   * value"): the N of every toxic ability it has, printed and granted, as
+   * the layer fold has it (`Characteristics.toxic`). Read as it last existed
+   * on the battlefield if it has left (608.2h); 0 for none. */
+  | { readonly toxicOf: ObjectRef }
   /** How many counters of one kind are on whatever an {@link ObjectRef}
    * points at — Black Market's "{B} for each charge counter on this
    * enchantment", Chasm Skulker's "X is the number of +1/+1 counters on this
@@ -13386,6 +13392,8 @@ export interface EffectApi {
   toughnessOf(target: TargetRef): number;
   /** See the `{ basePowerOf }` {@link EffectAmount}. */
   basePowerOf(target: TargetRef): number;
+  /** See the `{ toxicOf }` {@link EffectAmount}. */
+  toxicOf(target: TargetRef): number;
   /** See the `{ countersOn }` {@link EffectAmount}. */
   countersOf(target: TargetRef, counter: string | undefined): number;
   /** See the `"put-on-bottom-of-library"` {@link EffectSpec}. */
@@ -18355,6 +18363,10 @@ export function signedAmountValue(
   if ("basePowerOf" in amount) {
     const ref = objectRefRead(amount.basePowerOf, ctx);
     return ref === undefined ? 0 : ctx.basePowerOf(ref);
+  }
+  if ("toxicOf" in amount) {
+    const ref = objectRefRead(amount.toxicOf, ctx);
+    return ref === undefined ? 0 : ctx.toxicOf(ref);
   }
   if ("countersOn" in amount) {
     const ref = objectRefRead(amount.countersOn, ctx);

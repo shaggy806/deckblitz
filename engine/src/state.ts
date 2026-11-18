@@ -2340,6 +2340,9 @@ export interface LastKnownInfo {
   readonly supertypes: readonly Supertype[];
   readonly colors: readonly Color[];
   readonly keywords: readonly Keyword[];
+  /** Its total toxic value (rule 702.164b), when it had any — the `{ toxicOf }`
+   * amount of one that has left. */
+  readonly toxic?: number;
   /** Whether it had a mana ability (`characteristics.ts`'s `hasManaAbility`)
    * and any ability at all (`hasAnyAbility`), its granted ones included. */
   readonly hasManaAbility: boolean;

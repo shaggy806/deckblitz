@@ -2718,6 +2718,7 @@
   "condition:creatures-died-this-turn-count-in-static",
   "amount:greatest-power-this-way",
   "trigger:delayed-whenever-chosen-permanent",
+  "effect:amount-total-toxic-value",
   "trigger:untap-trigger",
   "trigger:saga-final-chapter-triggers",
   "trigger:phases-out",

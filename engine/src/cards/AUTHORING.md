@@ -1011,7 +1011,9 @@ every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died
 with, Chasm Skulker), `{ countInGraveyard }`, `{ manaValueOf }`, `{ powerOf }`, `{ toughnessOf }`,
 `{ basePowerOf }` (Curie, Emergent Intelligence's "draw cards equal to its base power": layer 7b and
-before, rule 613.4b)
+before, rule 613.4b), `{ toxicOf }` (its total toxic value, every toxic ability summed, printed and
+granted, rule 702.164b — Goliath Hatchery's "choose a creature you control, then draw cards equal to
+its total toxic value" is a `choose-permanents` whose `then` draws `{ toxicOf: 0 }`)
 (Condemn; each takes a target slot, `"source"`, `"trigger-object"`,
 `"sacrificed"`, `"tapped"` — the one permanent tapped to pay the ability's
 cost, station's — or `"discarded"`, the one card discarded to pay the
