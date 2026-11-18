@@ -336,6 +336,10 @@ export type TargetSpec =
       /** "From **another** … source" (The Peregrine Dynamo): not an ability
        * of the permanent whose ability is choosing this target. */
       readonly otherSource?: true;
+      /** "Target activated ability **with a single target**" (Reroute): as
+       * the `stack` spec's — exactly one target chosen as it went on the
+       * stack (rule 115.9a). */
+      readonly singleTarget?: true;
     }
   /**
    * A spell or an ability on the stack, in one slot — "target spell or
@@ -1929,7 +1933,7 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     const from = spec.sourceTypes === undefined ? "" : ` from ${spec.sourceTypes.join(" or ")} source`;
     const noun = spec.abilityKind === undefined ? "activated or triggered" : spec.abilityKind;
     const whose = spec.whose === "you" ? " you control" : spec.whose === "opponent" ? " an opponent controls" : "";
-    return `${noun} ability${whose}${from}`;
+    return `${noun} ability${whose}${from}${spec.singleTarget === true ? " with a single target" : ""}`;
   }
   if (spec.kind === "spell") {
     const colour = spec.filter.colors?.length === 1 ? `${COLOUR_WORD[spec.filter.colors[0]]} ` : "";

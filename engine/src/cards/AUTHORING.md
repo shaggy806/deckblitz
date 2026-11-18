@@ -4626,7 +4626,8 @@ stopped covering:
   the battlefield (rule 113.7a); an enchantment card's channel ability counts
   (Weaver's ruling). `sourceFilter` (a `CardFilter`, read the same way) for
   anything else: "from a **noncreature** source" (Emerald Dragon's Dissonant
-  Wave) is `sourceFilter: { notTypes: ["creature"] }`. `loyalty: true` is only a loyalty ability, one
+  Wave) is `sourceFilter: { notTypes: ["creature"] }`. `singleTarget: true` is "target activated ability
+  **with a single target**" (Reroute), counted as the `stack` spec's is (rule 115.9a). `loyalty: true` is only a loyalty ability, one
   activated for a loyalty cost (rule 606.2): "target loyalty ability of a
   planeswalker" (Verdant Command) is `{ kind: "ability", loyalty: true,
   sourceTypes: ["planeswalker"] }`. `copy-ability` copies one (§6).

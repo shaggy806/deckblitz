@@ -591,6 +591,15 @@ export function isLegalTarget(...args: Parameters<typeof isLegalTargetUncached>)
   return withComputedCache(() => isLegalTargetUncached(...args));
 }
 
+/** How many targets a spell or ability on the stack had chosen as it went
+ * there — "with a single target" (rule 115.9a): each instance counted (the
+ * same object twice is two), however many are still legal, and a slot its
+ * own rules filled not one (115.1). */
+function chosenTargetCount(object: GameObject): number {
+  const auto = new Set(object.autoTargetSlots ?? []);
+  return (object.targets ?? []).filter((t, i) => t !== undefined && t !== null && !auto.has(i)).length;
+}
+
 function isLegalTargetUncached(
   state: GameState,
   registry: CardRegistry,
@@ -755,14 +764,8 @@ function isLegalTargetUncached(
         if (!t.includes("instant") && !t.includes("sorcery")) return false;
       }
     }
-    // "With a single target" (rule 115.9a): the targets chosen as it went
-    // on the stack, each instance counted, a slot its rules filled not one.
-    if (spec.singleTarget === true || spec.withTargets === true) {
-      const auto = new Set(object.autoTargetSlots ?? []);
-      const chosen = (object.targets ?? []).filter((t, i) => t !== undefined && t !== null && !auto.has(i));
-      if (spec.singleTarget === true && chosen.length !== 1) return false;
-      if (spec.withTargets === true && chosen.length === 0) return false;
-    }
+    if (spec.singleTarget === true && chosenTargetCount(object) !== 1) return false;
+    if (spec.withTargets === true && chosenTargetCount(object) === 0) return false;
     if (spec.whose === "you" && object.controller !== forPlayer) return false;
     if (spec.whose === "opponent" && object.controller === forPlayer) return false;
     if (spec.targeting !== undefined && !stackObjectTargetsMatch(state, registry, object, spec.targeting, targetFilterContext(forPlayer, source))) {
@@ -802,7 +805,7 @@ function isLegalTargetUncached(
     if (spec.sourceFilter !== undefined && !abilitySourceMatches(state, registry, ability, spec.sourceFilter, forPlayer)) {
       return false;
     }
-    return true;
+    return spec.singleTarget !== true || chosenTargetCount(ability) === 1;
   }
   // A card in exile (rule 406): face down, it has no characteristics (406.3a).
   if (typeof spec === "object" && spec.kind === "card-in-exile") {
