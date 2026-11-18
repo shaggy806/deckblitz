@@ -1308,7 +1308,11 @@ covered everything but a top card in sight. `bot/seat-memory.ts` keeps, per seat
 cards it was shown and the library cards it can place, from what its decisions show it and
 how the libraries change between them; the engine's `publicStints` already says what everyone
 knows. It errs towards forgetting. The pieces are in `docs/architecture/engine.md` under
-`bot/`.
+`bot/`. Measured against the last build that read everything (`456b475c6`), one seat against
+three: 33 of 112 (29.5%, 95% 21.8 to 38.5), level. The bench also found that a plan made on
+dealt cards could name a card the game had put elsewhere, and throw at the table (a delve
+naming a milled card, in the build that first hid the libraries); a replayed step and every
+answer are now tried on a copy first.
 
 Benched because every decision with a draw in it could move (`bot:ab`, one seat on the new
 build against three on the old, bench decks, count budgets): 27 wins in 111 games, 24.3% where
