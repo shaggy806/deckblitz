@@ -8927,3 +8927,13 @@ Each board's die comes up 4.
 ### Fight or Flight: in a 4-player game, you separate Carol's creatures on her turn
 - **Do:** At Carol's beginning of combat, click Craw Wurm, then Confirm piles.
 - **Expect:** Only Carol's three creatures are badged "Pile 2" (Bob's and Dave's aren't), and Craw Wurm turns to "Pile 1". After Carol chooses, only creatures from her chosen pile attack.
+
+## A "you may prevent" damage prevention (2026-11-18)
+
+### Battletide Alchemist: you may let your own Lightning Bolt's damage to Bob through
+- **Do:** Cast Lightning Bolt at Bob, then click "Don't prevent it".
+- **Expect:** As it resolves, the banner reads "Battletide Alchemist — choose one" with "Prevent 1 of the 3 damage Lightning Bolt would deal to Bob" and "Don't prevent it". The History has "Battletide Alchemist — Alice declined", and Bob goes to 37.
+
+### Battletide Alchemist: in a 4-player game, Flame Rift asks once for each player
+- **Do:** Cast Flame Rift. Prevent the damage to you; don't prevent it for the others.
+- **Expect:** Four questions in the banner, one per player, each "Prevent 2 of the 4 damage Flame Rift would deal to …" (you, then Bob, Carol and Dave) beside "Don't prevent it". You end at 38, the others at 36.

@@ -498,7 +498,9 @@ describe("the vocabulary, pool-wide", () => {
   });
 
   it("a `may` sits only on events that can wait for an answer", () => {
-    const canWait = new Set(["would-draw", "would-create-token", "would-begin-turn"]);
+    // Damage waits for a "you may prevent" (Battletide Alchemist): asked
+    // before an effect deals it and before combat damage.
+    const canWait = new Set(["would-draw", "would-create-token", "would-begin-turn", "would-deal-damage"]);
     const offenders = replacements().flatMap(({ card, r }) => ("may" in r && r.may === true && !canWait.has(r.event) ? [`${card}: ${r.event}`] : []));
     expect(offenders).toEqual([]);
   });

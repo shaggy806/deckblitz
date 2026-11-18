@@ -1068,6 +1068,11 @@ type DamageStep = DamageStepKind & {
   /** Which effect this is, and what makes it: how a player's choice among
    * them names it (rule 616.1). */
   readonly made: { readonly key: string; readonly by: ObjectId };
+  /** A "you may prevent" not yet answered for this event (Battletide
+   * Alchemist): `controller` chooses, the answer kept under `answers` —
+   * `Game.mayPreventionAsked` asks, `Game.settledMaySteps` takes the
+   * default where nothing could. */
+  readonly may?: { readonly controller: PlayerId; readonly answers: string };
 };
 
 type DamageStepKind =
@@ -9455,6 +9460,21 @@ export class Game {
         applyEffectSpec(chosen.effect, ctx);
       }
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
+    // "You may prevent X of that damage" (Battletide Alchemist): the answer
+    // kept for that damage event, and the game goes on where it asked, as a
+    // `replacement-order` answer does.
+    if (awaiting.mayPreventFor !== undefined) {
+      this.state.awaiting = null;
+      const { answers, resume } = awaiting.mayPreventFor;
+      const prevents = (modeIndices[0] ?? 0) === 0;
+      this.state.replacementAnswers = { ...(this.state.replacementAnswers ?? {}), [answers]: [prevents ? "prevent" : "decline"] };
+      // "… declined" in the log when it doesn't.
+      this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: prevents ? [0] : [] });
+      if (resume.site === "combat-damage") this.promptNextDamageAssignment();
+      const next = this.state.awaiting as AwaitingDecision | null;
+      this.prepareForPriority(next?.player ?? this.activePlayer);
       return;
     }
     // Which replacement applies to a draw (rule 616.1 — the Words cycle).
@@ -65323,7 +65343,14 @@ controlledBy,
      * (rule 614.5) — a redirected event's. */
     applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): DamageStep[] {
-    const applying: { readonly by: DamageReplacer; readonly r: DamageMultiplierReplacement; readonly key: string; readonly spends?: ActiveReplacement; readonly record?: ActiveReplacement }[] = [];
+    const applying: {
+      readonly by: DamageReplacer;
+      readonly r: DamageMultiplierReplacement;
+      readonly key: string;
+      readonly spends?: ActiveReplacement;
+      readonly record?: ActiveReplacement;
+      readonly may?: { readonly controller: PlayerId; readonly answers: string };
+    }[] = [];
     for (const id of this.staticSourceIds()) {
       const object = this.state.objects[id];
       if (object === undefined) continue;
@@ -65341,6 +65368,15 @@ controlledBy,
         if (this.applyingReplacements.has(key)) return;
         if (!this.staticActive(object, ability)) return;
         if (!this.damageReplacementReaches(r, object, source, target, combat, sourceLastKnown)) return;
+        // "You may prevent …" (Battletide Alchemist): its controller's
+        // answer for this source's damage to this recipient, this event.
+        if (r.may === true) {
+          const answers = `may-prevent:${key}:${source}:${target.kind === "player" ? target.player : target.object}`;
+          const answer = this.state.replacementAnswers?.[answers]?.[0];
+          if (answer === "decline") return;
+          applying.push({ by: object, r, key, ...(answer === undefined ? { may: { controller: object.controller, answers } } : {}) });
+          return;
+        }
         applying.push({ by: object, r, key });
       });
     }
@@ -65407,12 +65443,20 @@ controlledBy,
         });
       }
     }
-    for (const { by, key, r, spends } of applying) {
+    for (const { by, key, r, spends, may } of applying) {
       if (!("prevent" in r.instead)) continue;
       const { prevent, then, perEvent, thenCountsUnprevented } = r.instead;
-      if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, spends, by.id, key) });
-      else if (prevent !== true && "allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, spends, by.id, key) });
-      else if (prevent !== true) steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, spends, by.id, key) });
+      // A "you may" not yet answered for this event: marked, for the
+      // question or its default (`settledMaySteps`).
+      const gated = { ...gate(r, spends, by.id, key), ...(may !== undefined ? { may } : {}) };
+      if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gated });
+      else if (prevent !== true && "count" in prevent) {
+        // "Prevent X of that damage", X counted as it would be dealt (the
+        // Battletide Alchemist ruling): nothing to prevent, nothing asked.
+        const n = this.replacementAmount(prevent.count, by);
+        if (n > 0) steps.push({ kind: "prevent-n", by: n, ...gated });
+      } else if (prevent !== true && "allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gated });
+      else if (prevent !== true) steps.push({ kind: "prevent-half", round: prevent.half, ...gated });
       else {
         steps.push({
           kind: "prevent-all",
@@ -65421,7 +65465,7 @@ controlledBy,
           ...(then !== undefined ? { then } : {}),
           ...(perEvent === true ? { perEvent: true as const } : {}),
           ...(thenCountsUnprevented === true ? { thenCountsUnprevented: true as const } : {}),
-          ...gate(r, spends, by.id, key),
+          ...gated,
         });
       }
     }
@@ -65446,7 +65490,10 @@ controlledBy,
       const prevent = r.instead.prevent;
       if (prevent === true) steps.push({ kind: "shield", shield, made: { key: shieldKey, by: shield.source } });
       else if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
-      else if ("allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
+      else if ("count" in prevent) {
+        const n = this.replacementAmount(prevent.count, by);
+        if (n > 0) steps.push({ kind: "prevent-n", by: n, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
+      } else if ("allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
       else steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
     }
     // Shield counters (rule 122.1c): not an ability, so one that lost its
@@ -65559,10 +65606,13 @@ controlledBy,
   ): boolean {
     const player = target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
     if (player === undefined) return false;
-    const steps = this.damageSteps(source, target, combat, sourceLastKnown);
+    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown);
+    const every = this.damageSteps(source, target, combat, sourceLastKnown);
+    // A "you may prevent" is answered first: whether it applies at all.
+    if (this.mayPreventionAsked(every, source, target, amount * sources, unpreventable, resume)) return true;
+    const steps = this.settledMaySteps(every, target);
     if (steps.length < 2 || steps.length > 6) return false;
     const answers = damageAnswersKey(player, steps);
-    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown);
     const first = this.answeredDamageSteps(steps, answers);
     const rest = steps.filter((s) => !first.includes(s));
     if (rest.length < 2) return false;
@@ -65615,6 +65665,59 @@ controlledBy,
     return true;
   }
 
+  /**
+   * A "you may prevent" damage replacement not yet answered for this event
+   * (Battletide Alchemist — `DamageMultiplierReplacement.may`), asked of its
+   * controller as a `choose-modes` of `mayPreventFor`: prevent, or not. Says
+   * whether it asked. Damage that can't be prevented asks nothing (rule
+   * 615.12: the prevention would do nothing).
+   */
+  private mayPreventionAsked(
+    steps: readonly DamageStep[],
+    source: ObjectId,
+    target: TargetRef,
+    amount: number,
+    unpreventable: boolean,
+    resume: ReplacementOrderResume,
+  ): boolean {
+    if (unpreventable) return false;
+    const step = steps.find((s) => s.may !== undefined && this.state.players[s.may.controller]?.hasLost === false);
+    if (step?.may === undefined) return false;
+    const recipient = target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
+    if (recipient === undefined) return false;
+    const asked = step.may.controller;
+    const sourceName = this.state.objects[source]?.cardName ?? "A source";
+    const victim =
+      target.kind === "player" ? (target.player === asked ? "you" : target.player) : this.state.objects[target.object].cardName;
+    const prevents = step.kind === "prevent-n" ? `${Math.min(step.by, amount)} of the ${amount}` : `the ${amount}`;
+    const none: EffectSpec = { kind: "sequence", effects: [] };
+    this.state.awaiting = {
+      kind: "choose-modes",
+      player: asked,
+      source: step.made.by,
+      minModes: 1,
+      maxModes: 1,
+      modes: [
+        { text: `Prevent ${prevents} damage ${sourceName} would deal to ${victim}`, effect: none },
+        { text: "Don't prevent it", effect: none },
+      ],
+      x: 0,
+      targets: [],
+      mayPreventFor: { answers: step.may.answers, resume, recipient },
+    };
+    return true;
+  }
+
+  /** `steps` with each "you may prevent" no question answered settled the
+   * way that player would want where nothing can ask them (damage a mana
+   * ability deals): taken for damage to them or theirs, declined for
+   * anyone else's — as `bestDamageOrder` answers an order no question
+   * asks. An answered one was already kept or dropped by `damageSteps`. */
+  private settledMaySteps(steps: readonly DamageStep[], target: TargetRef): DamageStep[] {
+    const recipient = target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
+    return steps.filter((s) => s.may === undefined || s.may.controller === recipient);
+  }
+
   /** The steps a player has already chosen for this event, in their order. */
   private answeredDamageSteps(steps: readonly DamageStep[], answers: string): readonly DamageStep[] {
     const chosen = this.state.replacementAnswers?.[answers] ?? [];
@@ -65659,7 +65762,7 @@ controlledBy,
         landings.push({ to, amount: moved });
         return;
       }
-      const steps = this.damageSteps(source, to, combat, sourceLastKnown, after);
+      const steps = this.settledMaySteps(this.damageSteps(source, to, combat, sourceLastKnown, after), to);
       const next = this.bestDamageOrder(moved, 1, steps, unpreventable);
       landings.push(...this.damageLandings(source, to, moved, 1, next, combat, sourceLastKnown, unpreventable, after, depth + 1));
     };
@@ -66238,7 +66341,7 @@ controlledBy,
     // the damage (616.1 — `bestDamageOrder`): a shield before a doubler
     // halves what gets through. Each identical source's damage is changed
     // alike; from here on it's their total.
-    const steps = this.damageSteps(source, target, combat, sourceLastKnown, applied);
+    const steps = this.settledMaySteps(this.damageSteps(source, target, combat, sourceLastKnown, applied), target);
     if (steps.length === 0) {
       amount *= sources;
     } else {

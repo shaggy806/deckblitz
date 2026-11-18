@@ -1346,6 +1346,20 @@ export interface DamageMultiplierReplacement {
    * creatures you control" is `{ type: "creature", attacking: true,
    * controlledBy: "you" }` with `prevent`. Never a player. */
   readonly toFilter?: CardFilter;
+  /**
+   * "You **may** prevent …" (Battletide Alchemist's "if a source would deal
+   * damage to a player, you may prevent X of that damage"): this permanent's
+   * controller chooses, each time, for each source and each recipient
+   * (its rulings: "the choice for each player is made separately", "each
+   * time"). Asked where the damage can wait for a question — before an
+   * effect deals it (the dry run that asks rule 616.1's order) and before
+   * combat damage — as a `choose-modes` of `mayPreventFor`, the answers kept
+   * in `GameState.replacementAnswers` for that event. Where nothing can be
+   * asked (damage a mana ability deals), it's taken for damage to its
+   * controller and declined for anyone else's, as `bestDamageOrder` answers
+   * an order no question asks. With `prevent` only.
+   */
+  readonly may?: true;
 }
 
 /**
@@ -1356,10 +1370,18 @@ export interface DamageMultiplierReplacement {
  * 615.10 — Guardian Seraph's 1, Shield of the Realm's 2), that much of each
  * damage event it applies to; `{ allBut }` "prevent all but N of that damage"
  * (Hyperion, Supreme Hero; Temple Altisaur); `{ half }` "prevent half that
- * damage, rounded up" (Gisela, Blade of Goldnight).
+ * damage, rounded up" (Gisela, Blade of Goldnight); `{ count }` "prevent X of
+ * that damage, where X is …", counted as the damage would be dealt from this
+ * permanent's controller's side (Battletide Alchemist's "the number of
+ * Clerics you control" — its ruling), nothing when it's 0.
  */
 export interface DamagePrevention {
-  readonly prevent: true | number | { readonly allBut: number } | { readonly half: "up" | "down" };
+  readonly prevent:
+    | true
+    | number
+    | { readonly allBut: number }
+    | { readonly half: "up" | "down" }
+    | { readonly count: EffectAmount };
   /** What happens right after (615.5), reading the damage as `"x"`. */
   readonly then?: EffectSpec;
   /** With `then`: "if damage **would be dealt to** this creature" — the

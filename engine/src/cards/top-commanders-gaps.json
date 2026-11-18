@@ -2735,6 +2735,7 @@
   "condition:additional-cost-option-paid",
   "effect:only-chosen-pile-can-attack",
   "effect:discard-chosen-reveals-exile-may-cast",
+  "decision:optional-prevention",
   "target:any-number-group-before-targeting-mode",
   "effect:as-enters-remove-counters-from-any-number",
   "replacement:as-enters-turn-others-face-down",

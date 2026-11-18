@@ -5119,6 +5119,14 @@ export type AwaitingDecision =
          * as the first is, with this one `tokensInstead` in its event. */
         readonly tokensInstead?: readonly (string | null)[];
       };
+      /** A "you may prevent" damage replacement's question (Battletide
+       * Alchemist — `DamageMultiplierReplacement.may`): mode 0 prevents, mode
+       * 1 doesn't, the answer kept under `answers` in `replacementAnswers`
+       * for that damage event, and the game going on at `resume`, as a
+       * `replacement-order` answer does. `recipient` is the player who'd be
+       * dealt the damage. Answered by the engine itself; the modes' effects
+       * are unused. */
+      readonly mayPreventFor?: { readonly answers: string; readonly resume: ReplacementOrderResume; readonly recipient: PlayerId };
       readonly nextDrawFor?: {
         readonly effects: readonly (number | null | "draw" | { readonly printed: ObjectId })[];
         readonly event: { readonly firstInDrawStep: boolean; readonly before: { readonly all: number; readonly exceptDrawStepFirst: number } };

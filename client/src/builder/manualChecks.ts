@@ -13517,4 +13517,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       turn: 1,
     }),
   ),
+  // --- A "you may prevent" damage prevention (2026-11-18) --------------------
+  preset(
+    "Battletide Alchemist: you may let your own Lightning Bolt's damage to Bob through",
+    board({
+      you: { bf: ['Battletide Alchemist', 'Mountain'], hand: ['Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    'Battletide Alchemist: in a 4-player game, Flame Rift asks once for each player',
+    board({
+      you: { bf: ['Battletide Alchemist', 'Soul Warden', 'Mountain*2'], hand: ['Flame Rift'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

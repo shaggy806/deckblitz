@@ -7917,10 +7917,14 @@ it ("instead that damage is dealt, but …"). Amounts are `EffectAmount`s, read 
 who it would have happened to; it's run by the replacement's controller, so "that player" draws is an `as-player` or a
 `who: "trigger-player"` (Undead Alchemist's combat damage become `{ kind: "mill", target: "trigger-player", amount: "x" }`,
 with `combat: true`, a `source` filter and `to: "player"`). It mustn't repeat its own event after a decision (rule 614.5): use `also`. Damage has its own
-`{ prevent, then?, perEvent?, thenCountsUnprevented? }` (`prevent`: `true`, a number, `{ allBut }` or `{ half }`) and
+`{ prevent, then?, perEvent?, thenCountsUnprevented? }` (`prevent`: `true`, a number, `{ allBut }`, `{ half }` or `{ count }`,
+an amount read as the damage would be dealt) and
 `{ redirect }`; the leave event takes a destination (`"exile"`, `"library-top"`, `"library-bottom"`, `"hand"`). `may: true`
-is "you may instead", only on events that can wait for the answer (draw, tokens, turn begin): `test/instead-replacements.test.ts`
-refuses it elsewhere. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
+is "you may instead", only on events that can wait for the answer (draw, tokens, turn begin, damage): `test/instead-replacements.test.ts`
+refuses it elsewhere. On `would-deal-damage` it's "you may prevent" (Battletide Alchemist's "if a source would deal damage to a
+player, you may prevent X of that damage, where X is the number of Clerics you control": `to: "player"`, `instead: { prevent: {
+count: { countOf: { subtype: "Cleric", controlledBy: "you" } } } }`, `may: true`), asked of its controller for each source and each
+recipient before an effect deals the damage and before combat damage; where nothing can ask, taken for its controller's own damage only. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
 `would-scry` (`{ who, instead }`). `would-draw` also takes `instruction: { atLeast }` (the whole draw: "one or more
 cards", "two or more", `"x"` the number) and `whileHandAtMost`; `would-create-token` takes `becomes: { effect, text? }` with
 `firstEachTurn` and `may` (Moonlit Meditation); `would-deal-damage` takes `ifAtLeast`.

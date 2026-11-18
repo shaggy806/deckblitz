@@ -4882,6 +4882,11 @@ export class HeuristicBotController extends AutomaticController {
     if (awaiting.guess !== undefined) {
       return [awaiting.guess.matching * 2 > awaiting.guess.unseen ? 0 : 1];
     }
+    // "You may prevent X of that damage" (Battletide Alchemist): for damage
+    // to us, prevent; to anyone else, let it through.
+    if (awaiting.mayPreventFor !== undefined) {
+      return [awaiting.mayPreventFor.recipient === view.player ? 0 : 1];
+    }
     // The colour of the mana another player's mana ability gives us (Spectral
     // Searchlight's "they choose"): the one our hand wants, as a split's units
     // go (`chooseManaSplit`). `effectWorth` prices every colour alike, so the
