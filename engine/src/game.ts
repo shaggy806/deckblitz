@@ -9371,6 +9371,13 @@ export class Game {
       return;
     }
 
+    // The player chosen as a day/night change transforms a permanent (rule
+    // 712.20 — Curse of Leeches).
+    if (awaiting.dayNightTransform !== undefined) {
+      this.applyDayNightTransformChoice(modeIndices, awaiting.dayNightTransform);
+      return;
+    }
+
     // Whether to pay a spell's conspire cost (rule 702.78a).
     if (awaiting.conspireAsk !== undefined) {
       this.applyConspireAsk(modeIndices.length > 0, awaiting.conspireAsk);
@@ -11041,6 +11048,9 @@ export class Game {
     if (step !== "cleanup") this.fireDelayedTriggers(step);
 
     this.performTurnBasedActions(step);
+    // The day/night check is the untap step's (rule 502.2): a transform it
+    // owed that asks a player is asked before the step ends.
+    if (step === "untap") this.raiseDayNightTransformsInUntapStep();
 
     // A turn-based action may have asked a player for a declaration; that
     // player gets priority so they can dispatch it.
@@ -11086,6 +11096,15 @@ export class Game {
         // And what one says happens "as this becomes attached" (Psychic
         // Paper's choice), the same way.
         if (this.applyNextAsBecomesAttached()) {
+          const asked = this.state.awaiting as GameState["awaiting"];
+          if (asked === null) continue;
+          this.grantPriority(asked.player);
+          return;
+        }
+        // And a day/night change's transform waiting on "as this transforms
+        // into [it], choose a player" (Curse of Leeches — an effect made it
+        // day), before anything sees it.
+        if (this.raiseNextDayNightTransform()) {
           const asked = this.state.awaiting as GameState["awaiting"];
           if (asked === null) continue;
           this.grantPriority(asked.player);
@@ -46055,21 +46074,7 @@ controlledBy,
       },
       transformChoice: (target) => {
         if (target.kind !== "object" || !this.effectCanTransform(target.object, source, opts.transformSince)) return null;
-        const object = this.state.objects[target.object];
-        if (object.faces === undefined || !this.isTransformingDfc(target.object)) return null;
-        const into = object.faces[(object.face ?? 0) === 0 ? 1 : 0];
-        const choose = this.registry.has(into) ? this.registry.get(into).choosePlayerOnTransform : undefined;
-        if (choose === undefined) return null;
-        // Its controller chooses (rule 712.20: "you" is whoever controls it),
-        // among those still in the game, opponents first in turn order from
-        // the next — as "as this enters, choose" asks.
-        const chooser = object.controller;
-        const at = this.state.turnOrder.indexOf(chooser);
-        const rotated = [...this.state.turnOrder.slice(at + 1), ...this.state.turnOrder.slice(0, at + 1)];
-        const among = rotated.filter(
-          (p) => this.state.players[p]?.hasLost === false && (choose === "player" || p !== chooser),
-        );
-        return { chooser, among };
+        return this.transformPlayerChoice(target.object);
       },
       flip: (target) => {
         const t = this.splitTargetRef(target);
@@ -55086,9 +55091,127 @@ controlledBy,
       if (object === undefined) continue;
       const front = this.frontFaceDef(id);
       if (!front.transform || !front.keywords.includes("daybound")) continue;
-      if (value === "night" && (object.face ?? 0) === 0) this.transformPermanent(id);
-      else if (value === "day" && (object.face ?? 0) === 1) this.transformPermanent(id);
+      const owed = (value === "night" && (object.face ?? 0) === 0) || (value === "day" && (object.face ?? 0) === 1);
+      if (!owed) continue;
+      // "As this transforms into [it], choose a player" (rule 712.20 —
+      // Curse of Leeches): among two or more, it waits for the answer,
+      // asked before anything can see it (`raiseNextDayNightTransform`).
+      const choice = this.transformPlayerChoice(id);
+      if (choice !== null && choice.among.length > 1) {
+        this.state.pendingDayNightTransforms = [
+          ...(this.state.pendingDayNightTransforms ?? []),
+          { object: id, stint: object.zoneChangeCount ?? 0 },
+        ];
+        continue;
+      }
+      this.transformPermanent(id, choice === null ? undefined : (choice.among[0] ?? null));
     }
+  }
+
+  /**
+   * Who chooses, and among whom, as the transforming DFC `id` turns over to a
+   * face that says "as this transforms into [it], choose a player" or "an
+   * opponent" (`CardDefinition.choosePlayerOnTransform`, rule 712.20), or
+   * `null` when its other face says neither. Its controller chooses ("you" is
+   * whoever controls it), among those still in the game, opponents first in
+   * turn order from the next — as "as this enters, choose" asks. A face that
+   * is an Aura is attached to the one chosen (Curse of Leeches' "attach it to
+   * a player"), so only a player it could enchant is offered (as rule 303.4f
+   * has an Aura put onto the battlefield enchant only what it legally can).
+   */
+  private transformPlayerChoice(id: ObjectId): { readonly chooser: PlayerId; readonly among: readonly PlayerId[] } | null {
+    const object = this.state.objects[id];
+    if (object?.faces === undefined || !this.isTransformingDfc(id)) return null;
+    const into = object.faces[(object.face ?? 0) === 0 ? 1 : 0];
+    if (into === undefined || !this.registry.has(into)) return null;
+    const def = this.registry.get(into);
+    const choose = def.choosePlayerOnTransform;
+    if (choose === undefined) return null;
+    const chooser = object.controller;
+    const at = this.state.turnOrder.indexOf(chooser);
+    const rotated = [...this.state.turnOrder.slice(at + 1), ...this.state.turnOrder.slice(0, at + 1)];
+    // An Aura face is judged as the face it's becoming (`canCreateAttached`
+    // asks `canEnchantPlayer`'s questions of a definition): what it shows now
+    // may be a creature, which enchants nothing.
+    const aura = def.subtypes.includes("Aura");
+    const among = rotated.filter(
+      (p) =>
+        this.state.players[p]?.hasLost === false &&
+        (choose === "player" || p !== chooser) &&
+        (!aura || this.canCreateAttached(def, { player: p }, chooser)),
+    );
+    return { chooser, among };
+  }
+
+  /**
+   * The next permanent in `pendingDayNightTransforms`: its controller asked
+   * which player it's transforming with (a `choose-modes` of `about-player`
+   * modes, `dayNightTransform`), or — the choice down to one or none, or no
+   * longer owed (it left, or the day/night change was undone) — turned over
+   * or dropped at once. `true` if one was waiting.
+   */
+  private raiseNextDayNightTransform(): boolean {
+    const [next, ...rest] = this.state.pendingDayNightTransforms ?? [];
+    if (next === undefined) return false;
+    if (rest.length > 0) this.state.pendingDayNightTransforms = rest;
+    else delete this.state.pendingDayNightTransforms;
+    const object = this.state.objects[next.object];
+    if (object?.zone !== "battlefield" || (object.zoneChangeCount ?? 0) !== next.stint) return true;
+    const face = object.face ?? 0;
+    if (!((this.state.dayNight === "night" && face === 0) || (this.state.dayNight === "day" && face === 1))) return true;
+    const choice = this.transformPlayerChoice(next.object);
+    if (choice === null || choice.among.length <= 1) {
+      this.transformPermanent(next.object, choice === null ? undefined : (choice.among[0] ?? null));
+      return true;
+    }
+    this.state.awaiting = {
+      kind: "choose-modes",
+      player: choice.chooser,
+      source: next.object,
+      minModes: 1,
+      maxModes: 1,
+      modes: choice.among.map((to) => ({
+        text: `Choose ${to}`,
+        effect: { kind: "about-player", player: to, effect: { kind: "sequence", effects: [] } },
+      })),
+      x: 0,
+      targets: [],
+      dayNightTransform: { ...next, among: choice.among },
+    };
+    return true;
+  }
+
+  /** Every owed day/night transform asked or done, until one is up — in the
+   * untap step, where no player gets priority (rule 502.4). */
+  private raiseDayNightTransformsInUntapStep(): void {
+    while (this.state.awaiting === null && this.raiseNextDayNightTransform()) {
+      // Each one asked, transformed or dropped in turn.
+    }
+  }
+
+  /** The player chosen as a day/night change turns `ask.object` over (rule
+   * 712.20): it transforms with them chosen, if it's still the permanent it
+   * was. In the untap step the next one is asked, and no one gets priority
+   * (rule 502.4); otherwise priority is looked at again. */
+  private applyDayNightTransformChoice(
+    chosen: readonly number[],
+    ask: NonNullable<Extract<AwaitingDecision, { kind: "choose-modes" }>["dayNightTransform"]>,
+  ): void {
+    this.state.awaiting = null;
+    const to = ask.among[chosen[0] ?? 0];
+    const object = this.state.objects[ask.object];
+    if (to !== undefined && object?.zone === "battlefield" && (object.zoneChangeCount ?? 0) === ask.stint) {
+      this.transformPermanent(ask.object, to);
+    }
+    if (this.state.turn.step === "untap") {
+      this.raiseDayNightTransformsInUntapStep();
+      if (this.state.awaiting === null) {
+        this.state.priority.active = false;
+        this.state.priority.holder = null;
+      }
+      return;
+    }
+    this.prepareForPriority(this.activePlayer);
   }
 
   /** Riot's "if you don't, it gains haste" (rule 702.136a): an effect, not
@@ -57000,6 +57123,8 @@ controlledBy,
       }
       this.state.priority.active = false;
       this.state.priority.holder = null;
+      // A day/night transform still owed this step is asked before it ends.
+      this.raiseDayNightTransformsInUntapStep();
       return;
     }
     // An entering Deadpool's exchange: asked before it moved
@@ -66717,6 +66842,14 @@ controlledBy,
           changed = true;
           continue;
         }
+        // Anything but an Aura attached to a player — a Curse transformed
+        // into a creature (Curse of Leeches' ruling) — becomes unattached
+        // and stays (704.5p). An Aura's is 704.5m's, below.
+        if (object.attachedToPlayer !== undefined && this.inGame(object) && this.attachmentKind(id) !== "aura") {
+          delete object.attachedToPlayer;
+          invalidateComputedCache();
+          changed = true;
+        }
         if (object.attachedTo === null || !this.inGame(object)) continue;
         // An Aura's check is 704.5m's, below. An Equipment or a Fortification
         // that can't stay, or anything that's stopped being one (Armed with
@@ -71964,6 +72097,16 @@ controlledBy,
           if (this.state.dayNight === "night") object.face = 1;
         } else if (entering.transformed) {
           object.face = 1;
+        }
+        // An Aura spell entering as a face that isn't an Aura is attached to
+        // nothing: Curse of Leeches cast at night "enters the battlefield
+        // transformed and is not attached to that player" (its ruling).
+        if (
+          (object.face ?? 0) === 1 &&
+          object.attachedToPlayer !== undefined &&
+          !this.registry.get(printedCardName(object)).subtypes.includes("Aura")
+        ) {
+          delete object.attachedToPlayer;
         }
       }
       // "If it's neither day nor night, it becomes day as this creature

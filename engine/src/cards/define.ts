@@ -6284,7 +6284,11 @@ export interface CardDefinition {
    * only among two or more, and the one chosen is kept as
    * `GameObject.chosenPlayer` — what a `"chosen-player"` trigger subject,
    * scope or filter reads. Not when it enters showing this face (it didn't
-   * transform). Unset for normal cards. */
+   * transform). A day/night change asks it of a daybound card too
+   * (`Game.raiseNextDayNightTransform`), the transform waiting for the
+   * answer; on an Aura face only players it could enchant are offered —
+   * Curse of Leeches' "attach it to a player", its `asTransformsInto`
+   * attaching it to `"chosen-player"`. Unset for normal cards. */
   readonly choosePlayerOnTransform?: "player" | "opponent";
   /** A flip card (rule 710): `faces` is its normal half then its alternative
    * (upside-down) half, each its own `CardDefinition` with this flag. It is

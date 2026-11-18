@@ -5178,6 +5178,18 @@ export type AwaitingDecision =
        * 702.78a — see {@link ConspireAsk}): its one mode pays it. The mode's
        * effect is unused. */
       readonly conspireAsk?: ConspireAsk;
+      /** Set when this asks the player chosen as a day/night change turns
+       * `object` (in `stint`) over to a face that says "as this transforms
+       * into [it], choose a player" (rule 712.20 — `CardDefinition.
+       * choosePlayerOnTransform`): mode i is `among[i]`, an `about-player`,
+       * and answering transforms it with that one chosen (see
+       * `GameState.pendingDayNightTransforms`). Its modes' effects are
+       * unused. */
+      readonly dayNightTransform?: {
+        readonly object: ObjectId;
+        readonly stint: number;
+        readonly among: readonly PlayerId[];
+      };
       /** The life and energy parts of a `may`'s cost — see `may.costLife`
        * and `may.costEnergy` — paid alongside `cost` as the choice is made. */
       readonly costLife?: number;
@@ -6982,6 +6994,19 @@ export interface GameState {
     readonly object: ObjectId;
     readonly stint: number;
     readonly asked?: true;
+  }[];
+  /**
+   * Daybound and nightbound permanents a day/night change owes a transform
+   * (rule 702.145) whose new face asks its controller to choose a player
+   * as it transforms (rule 712.20 — Curse of Leeches' "attach it to a
+   * player"), among two or more: each turns over once that's answered,
+   * asked straight away — in the untap step, before it ends (rule 502.2),
+   * or the next time priority is looked at, before the state-based
+   * actions. Until then it shows the face it had. Absent otherwise.
+   */
+  pendingDayNightTransforms?: readonly {
+    readonly object: ObjectId;
+    readonly stint: number;
   }[];
   /**
    * The commander whose owner is being asked whether to put it into the
