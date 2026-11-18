@@ -948,6 +948,7 @@ import _poolTemptingContract from "../pool/tempting-contract.js";
 import _poolTenaciousTosk from "../pool/tenacious-tosk.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
+import _poolTheDayOfTheDoctor from "../pool/the-day-of-the-doctor.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
 import _poolTheGreatAurora from "../pool/the-great-aurora.js";
 import _poolTheGrimCaptain from "../pool/the-grim-captain.js";
@@ -2047,6 +2048,7 @@ const shard: CardShard = {
     _poolTenaciousTosk,
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
+    _poolTheDayOfTheDoctor,
     _poolTheDestinedWhiteMage,
     _poolTheGreatAurora,
     _poolTheGrimCaptain,

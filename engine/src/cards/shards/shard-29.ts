@@ -103,6 +103,7 @@ import _poolCabalExecutioner from "../pool/cabal-executioner.js";
 import _poolCacklingSlasher from "../pool/cackling-slasher.js";
 import _poolCadaverImp from "../pool/cadaver-imp.js";
 import _poolCaldaiaStrongarm from "../pool/caldaia-strongarm.js";
+import _poolCallousOppressor from "../pool/callous-oppressor.js";
 import _poolCanyonCrawler from "../pool/canyon-crawler.js";
 import _poolCaretakersTalent from "../pool/caretakers-talent.js";
 import _poolCartographersSurvey from "../pool/cartographers-survey.js";
@@ -1144,6 +1145,7 @@ const shard: CardShard = {
     _poolCacklingSlasher,
     _poolCadaverImp,
     _poolCaldaiaStrongarm,
+    _poolCallousOppressor,
     _poolCanyonCrawler,
     _poolCaretakersTalent,
     _poolCartographersSurvey,

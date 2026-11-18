@@ -561,6 +561,7 @@ import _poolMalevolentNoble from "../pool/malevolent-noble.js";
 import _poolManaVortex from "../pool/mana-vortex.js";
 import _poolManascapeRefractor from "../pool/manascape-refractor.js";
 import _poolMandateOfPeace from "../pool/mandate-of-peace.js";
+import _poolManifoldInsights from "../pool/manifold-insights.js";
 import _poolManyPartings from "../pool/many-partings.js";
 import _poolMarchingDuodrone from "../pool/marching-duodrone.js";
 import _poolMarkovPatrician from "../pool/markov-patrician.js";
@@ -1627,6 +1628,7 @@ const shard: CardShard = {
     _poolManaVortex,
     _poolManascapeRefractor,
     _poolMandateOfPeace,
+    _poolManifoldInsights,
     _poolManyPartings,
     _poolMarchingDuodrone,
     _poolMarkovPatrician,

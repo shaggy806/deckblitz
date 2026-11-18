@@ -462,6 +462,7 @@ import _poolKirkEnterprisingCaptain from "../pool/kirk-enterprising-captain.js";
 import _poolKithkinHealer from "../pool/kithkin-healer.js";
 import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKlawSonicSubjugator from "../pool/klaw-sonic-subjugator.js";
+import _poolKnickknackOuphe from "../pool/knickknack-ouphe.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKnollspineInvocation from "../pool/knollspine-invocation.js";
 import _poolKolinahrPriest from "../pool/kolinahr-priest.js";
@@ -1535,6 +1536,7 @@ const shard: CardShard = {
     _poolKithkinHealer,
     _poolKlawMasterOfSound,
     _poolKlawSonicSubjugator,
+    _poolKnickknackOuphe,
     _poolKnightOfTheWhiteOrchid,
     _poolKnollspineInvocation,
     _poolKolinahrPriest,

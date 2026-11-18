@@ -922,6 +922,7 @@ import _poolUrsineFylgja from "../pool/ursine-fylgja.js";
 import _poolValiantChangeling from "../pool/valiant-changeling.js";
 import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
+import _poolVault13DwellersJourney from "../pool/vault-13-dwellers-journey.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
 import _poolVeilstoneAmulet from "../pool/veilstone-amulet.js";
 import _poolVengefulPharaoh from "../pool/vengeful-pharaoh.js";
@@ -1956,6 +1957,7 @@ const shard: CardShard = {
     _poolValiantChangeling,
     _poolValorOfTheWorthy,
     _poolVampireChampion,
+    _poolVault13DwellersJourney,
     _poolVaultSkirge,
     _poolVeilstoneAmulet,
     _poolVengefulPharaoh,

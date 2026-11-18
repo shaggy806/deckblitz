@@ -3915,6 +3915,7 @@ import _poolCallousDeceiver from "./pool/callous-deceiver.js";
 import _poolCallousDismissal from "./pool/callous-dismissal.js";
 import _poolCallousGiant from "./pool/callous-giant.js";
 import _poolCallousInspector from "./pool/callous-inspector.js";
+import _poolCallousOppressor from "./pool/callous-oppressor.js";
 import _poolCallousSellSword from "./pool/callous-sell-sword.js";
 import _poolCallowJushi from "./pool/callow-jushi.js";
 import _poolCalmingLicid from "./pool/calming-licid.js";
@@ -15278,6 +15279,7 @@ import _poolKlingonStrikeForce from "./pool/klingon-strike-force.js";
 import _poolKlothysGodOfDestiny from "./pool/klothys-god-of-destiny.js";
 import _poolKlothyssDesign from "./pool/klothyss-design.js";
 import _poolKnacksawClique from "./pool/knacksaw-clique.js";
+import _poolKnickknackOuphe from "./pool/knickknack-ouphe.js";
 import _poolKnife from "./pool/knife.js";
 import _poolKnightCaptainOfEos from "./pool/knight-captain-of-eos.js";
 import _poolKnightErrantOfEos from "./pool/knight-errant-of-eos.js";
@@ -16924,6 +16926,7 @@ import _poolManicScribe from "./pool/manic-scribe.js";
 import _poolManicVandal from "./pool/manic-vandal.js";
 import _poolManifestDread from "./pool/manifest-dread.js";
 import _poolManifestationSage from "./pool/manifestation-sage.js";
+import _poolManifoldInsights from "./pool/manifold-insights.js";
 import _poolManifoldKey from "./pool/manifold-key.js";
 import _poolManifoldMouse from "./pool/manifold-mouse.js";
 import _poolManipulateFate from "./pool/manipulate-fate.js";
@@ -28373,6 +28376,7 @@ import _poolTheDalekEmperor from "./pool/the-dalek-emperor.js";
 import _poolTheDarkhold from "./pool/the-darkhold.js";
 import _poolTheDarknessCrystal from "./pool/the-darkness-crystal.js";
 import _poolTheDawningArchaic from "./pool/the-dawning-archaic.js";
+import _poolTheDayOfTheDoctor from "./pool/the-day-of-the-doctor.js";
 import _poolTheDeathOfGwenStacy from "./pool/the-death-of-gwen-stacy.js";
 import _poolTheDeckOfManyThings from "./pool/the-deck-of-many-things.js";
 import _poolTheDestinedBlackMage from "./pool/the-destined-black-mage.js";
@@ -30560,6 +30564,7 @@ import _poolVault101BirthdayParty from "./pool/vault-101-birthday-party.js";
 import _poolVault11VotersDilemma from "./pool/vault-11-voters-dilemma.js";
 import _poolVault112SadisticSimulation from "./pool/vault-112-sadistic-simulation.js";
 import _poolVault12TheNecropolis from "./pool/vault-12-the-necropolis.js";
+import _poolVault13DwellersJourney from "./pool/vault-13-dwellers-journey.js";
 import _poolVault21HouseGambit from "./pool/vault-21-house-gambit.js";
 import _poolVault75MiddleSchool from "./pool/vault-75-middle-school.js";
 import _poolVault87ForcedEvolution from "./pool/vault-87-forced-evolution.js";
@@ -37483,6 +37488,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCallousDismissal,
   _poolCallousGiant,
   _poolCallousInspector,
+  _poolCallousOppressor,
   _poolCallousSellSword,
   _poolCallowJushi,
   _poolCalmingLicid,
@@ -48846,6 +48852,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKlothysGodOfDestiny,
   _poolKlothyssDesign,
   _poolKnacksawClique,
+  _poolKnickknackOuphe,
   _poolKnife,
   _poolKnightCaptainOfEos,
   _poolKnightErrantOfEos,
@@ -50492,6 +50499,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolManicVandal,
   _poolManifestDread,
   _poolManifestationSage,
+  _poolManifoldInsights,
   _poolManifoldKey,
   _poolManifoldMouse,
   _poolManipulateFate,
@@ -61941,6 +61949,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheDarkhold,
   _poolTheDarknessCrystal,
   _poolTheDawningArchaic,
+  _poolTheDayOfTheDoctor,
   _poolTheDeathOfGwenStacy,
   _poolTheDeckOfManyThings,
   _poolTheDestinedBlackMage,
@@ -64128,6 +64137,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVault11VotersDilemma,
   _poolVault112SadisticSimulation,
   _poolVault12TheNecropolis,
+  _poolVault13DwellersJourney,
   _poolVault21HouseGambit,
   _poolVault75MiddleSchool,
   _poolVault87ForcedEvolution,
@@ -71064,6 +71074,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/callous-dismissal": _poolCallousDismissal,
   "pool/callous-giant": _poolCallousGiant,
   "pool/callous-inspector": _poolCallousInspector,
+  "pool/callous-oppressor": _poolCallousOppressor,
   "pool/callous-sell-sword": _poolCallousSellSword,
   "pool/callow-jushi": _poolCallowJushi,
   "pool/calming-licid": _poolCalmingLicid,
@@ -82427,6 +82438,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/klothys-god-of-destiny": _poolKlothysGodOfDestiny,
   "pool/klothyss-design": _poolKlothyssDesign,
   "pool/knacksaw-clique": _poolKnacksawClique,
+  "pool/knickknack-ouphe": _poolKnickknackOuphe,
   "pool/knife": _poolKnife,
   "pool/knight-captain-of-eos": _poolKnightCaptainOfEos,
   "pool/knight-errant-of-eos": _poolKnightErrantOfEos,
@@ -84073,6 +84085,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/manic-vandal": _poolManicVandal,
   "pool/manifest-dread": _poolManifestDread,
   "pool/manifestation-sage": _poolManifestationSage,
+  "pool/manifold-insights": _poolManifoldInsights,
   "pool/manifold-key": _poolManifoldKey,
   "pool/manifold-mouse": _poolManifoldMouse,
   "pool/manipulate-fate": _poolManipulateFate,
@@ -95522,6 +95535,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-darkhold": _poolTheDarkhold,
   "pool/the-darkness-crystal": _poolTheDarknessCrystal,
   "pool/the-dawning-archaic": _poolTheDawningArchaic,
+  "pool/the-day-of-the-doctor": _poolTheDayOfTheDoctor,
   "pool/the-death-of-gwen-stacy": _poolTheDeathOfGwenStacy,
   "pool/the-deck-of-many-things": _poolTheDeckOfManyThings,
   "pool/the-destined-black-mage": _poolTheDestinedBlackMage,
@@ -97709,6 +97723,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vault-11-voters-dilemma": _poolVault11VotersDilemma,
   "pool/vault-112-sadistic-simulation": _poolVault112SadisticSimulation,
   "pool/vault-12-the-necropolis": _poolVault12TheNecropolis,
+  "pool/vault-13-dwellers-journey": _poolVault13DwellersJourney,
   "pool/vault-21-house-gambit": _poolVault21HouseGambit,
   "pool/vault-75-middle-school": _poolVault75MiddleSchool,
   "pool/vault-87-forced-evolution": _poolVault87ForcedEvolution,
