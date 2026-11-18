@@ -746,6 +746,11 @@ voter**", `"that-player"` in a `for-each-vote`, the caster choosing). All are bo
 chosen land**" (Canoptek Wraith) is a `choose-permanents` with `remember: true` and an empty `then`,
 followed by a `search-library` whose filter is `sameNameWith: { thisWay: "chosen" }`: the pick is
 this resolution's even after the source was sacrificed, and with nothing chosen nothing matches.
+"Each player discards a card. Each opponent who discarded a card that **shares a card type with the card
+you discarded** loses 3 life" (Creeping Dread) is a `discard` to `"each-player"` (one held, simultaneous
+discard) then a `for-each-player` over `"each-opponent"` of a `conditional` on `{ kind: "this-way", what:
+"discarded", who: "that-player", filter: { sharesCardTypeWith: { typesOf: { thisWay: "discarded", who:
+"you" } } } }`: the condition's filter is bound as it's asked, and with no card of yours nothing shares.
 `greatestInZone` and `greatestAmongItsController` take `least: true`. `hasKeyword: CardKeyword` is one
 row per printed keyword read off the text box (morph, madness, kicker, flashback, cycling, fading, ...;
 `"modular"` is "Modular N" or "Modular—Sunburst" — Arcbound Overseer's "each creature you control with modular");

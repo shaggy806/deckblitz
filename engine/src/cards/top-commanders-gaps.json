@@ -3007,7 +3007,8 @@
   "condition:source-damage-to-player-this-turn",
   "trigger:mentors",
   "trigger:dealt-damage-first-time-each-turn",
-  "condition:card-types-among-permanents-and-graveyard"
+  "condition:card-types-among-permanents-and-graveyard",
+  "filter:shares-card-type-with-discarded"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
