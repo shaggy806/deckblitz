@@ -5,6 +5,14 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
+- **B335's display gaps** (found 2026-11-18 by the overnight lane agents). A "hexproof from …" counter's chip
+  shows the letter "H" rather than hexproof's glyph (`glyphFor`, one line; wants a live check). Callous
+  Oppressor's log says "Callous Oppressor chooses Giant" without naming the opponent who chose. A keyed token is
+  logged as "Vecna Token" while its tile says "Vecna" (how keyed tokens already behave). A decision popup can sit
+  for a moment under the timed "Alice reveals" overlay (existing behaviour, seen with Manifold Insights). A card
+  revealed on its way into a library (Wheel of Sun and Moon's `arrangesLibrary` order) shows as "a card" in the
+  History, and Ertai's Meddling putting a card back onto the stack has no log line (it would want an event and a
+  `format.ts` case).
 - **B334's prompt and log wording** (found 2026-11-17 by the overnight lane agents). A `choose-modes` asked to
   pick an opponent or a life total logs as "Alice chose mode(s) 2" in the History (Verdant Mastery, Baleful
   Mastery, every `offerToAnOpponent`, Reverse the Sands): the log should name the choice. Gorex, the Tombshell's

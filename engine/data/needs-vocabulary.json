@@ -3779,6 +3779,10 @@
    "family": "condition:filter-card-property-clauses",
    "example": "Rootwater Shaman: \"Aura spells with enchant creature\" — no CardFilter field reads an Aura's enchant restriction"
   },
+  "filter:aura-with-enchant-words": {
+   "family": "condition:filter-card-property-clauses",
+   "example": "Tallowisp: \"Aura card with enchant creature\" — the Aura's own enchant wording, read off the card; filter:aura-enchant-restriction (built for Auratouched Mage, B335) asks whether an Aura could enchant a given host"
+  },
   "static:magnet-counter-attack-block-requirement": {
    "family": "static:combat-restriction-extensions",
    "example": "Magnetic Web: a creature with a magnet counter attacking forces each other magnet creature to block it if able"

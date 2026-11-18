@@ -343,7 +343,15 @@
   "cost:exile-from-any-graveyard": "costs-mana",
   "cost:crew-alternative-remove-loyalty": "costs-mana",
   "cost:tap-granter": "costs-mana",
-  "trigger:activates-ability-mana-from": "costs-mana"
+  "trigger:activates-ability-mana-from": "costs-mana",
+  "filter:aura-with-enchant-words": "combat-targeting",
+  "effect:force-mana-abilities-take-mana": "decisions",
+  "replacement:die-exile-with-counter": "replacements-copies",
+  "effect:delayed-return-then-discard-toughness": "casting-zones",
+  "effect:colors-among-permanents-and-spells-cast": "costs-mana",
+  "static:lose-all-abilities-except-mana": "replacements-copies",
+  "replacement:draw-replacement-return-from-graveyard-or-lose": "replacements-copies",
+  "amount:differently-named-dungeons-completed": "triggers-journal"
  },
  "groups": [
   {

@@ -1,0 +1,1468 @@
+{
+ "batch": 335,
+ "status": "done",
+ "ranks": "author-top-cards overnight, 2026-11-17/18 (23:55 to 10:00): the triaged cards past EDHREC rank 13,500 in rank order, Zevlor, Elturel Exile (13560) to Hedonist's Trove (17788), each with the small key it waited on, built by 34 worktree agents one lane at a time (build-family's overnight lanes loop), the concurrency varied by phase for the user's experiment (6, 4, 2, then 5 at once). 171 cards (178 definitions with the double-faced cards' backs), among them Zevlor, Wan Shi Tong, Kraven the Hunter, Aeon Engine, Invasion Plans, Ertai's Meddling, Murktide Regent, Gather Specimens, Hallowed Moonlight, Order of Succession and Battletide Alchemist; about a third needed no engine code. Re-keyed and built the same night: Glyph of Life (trigger:dealt-damage-by-attacking-creature), Ludevic, Necrogenius (replacement:as-transforms-copy-exiled-choice), Hallowed Moonlight (replacement:token-enter-exile-instead), Protective Sphere (effect:prevent-chosen-source-sharing-spent-mana-color). Bugs fixed on the way, each with a test: Force Bubble, Phytohydra and Lichenthrope let unpreventable damage through; entering-counter aggregates had no source; sacrificed tokens were offered to graveyard-exile costs; a reveal could hang on a token in a library; hasKeyword flashback matched jump-start; the card-type filter read printed types on the battlefield; SBAs ran before an as-attached choice; mills could take a put-back card twice; a declined commander went to the library bottom on a shuffle. Left: the majors and user calls from B334, and Drain Power (a forced mana-ability decision, major).",
+ "authored": [
+  {
+   "name": "Stitcher Geralf",
+   "files": [
+    "engine/src/cards/pool/stitcher-geralf.ts",
+    "engine/src/cards/tokens/zombie-token-stitcher-geralf.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/this-way-total-power-of-cards.test.ts"
+  },
+  {
+   "name": "Dutiful Knowledge Seeker",
+   "files": [
+    "engine/src/cards/pool/dutiful-knowledge-seeker.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/put-into-library-trigger.test.ts"
+  },
+  {
+   "name": "Wan Shi Tong, All-Knowing",
+   "files": [
+    "engine/src/cards/pool/wan-shi-tong-all-knowing.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/put-into-library-trigger.test.ts"
+  },
+  {
+   "name": "Niko Aris",
+   "files": [
+    "engine/src/cards/pool/niko-aris.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-trigger-on-targeted-creature-damage.test.ts"
+  },
+  {
+   "name": "Kraven the Hunter",
+   "files": [
+    "engine/src/cards/pool/kraven-the-hunter.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/dies-greatest-power-lki.test.ts"
+  },
+  {
+   "name": "Mystic Barrier",
+   "files": [
+    "engine/src/cards/pool/mystic-barrier.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/rechoose-direction.test.ts"
+  },
+  {
+   "name": "Eon Frolicker",
+   "files": [
+    "engine/src/cards/pool/eon-frolicker.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/protection-from-that-player.test.ts"
+  },
+  {
+   "name": "Barroom Brawl",
+   "files": [
+    "engine/src/cards/pool/barroom-brawl.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/opponent-to-your-left.test.ts"
+  },
+  {
+   "name": "Corrupted Resolve",
+   "files": [
+    "engine/src/cards/pool/corrupted-resolve.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/target-controller-poisoned.test.ts"
+  },
+  {
+   "name": "Triumph of Saint Katherine",
+   "files": [
+    "engine/src/cards/pool/triumph-of-saint-katherine.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/pile-onto-library-top.test.ts"
+  },
+  {
+   "name": "Harness Infinity",
+   "files": [
+    "engine/src/cards/pool/harness-infinity.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exchange-zones.test.ts"
+  },
+  {
+   "name": "Morality Shift",
+   "files": [
+    "engine/src/cards/pool/morality-shift.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exchange-zones.test.ts"
+  },
+  {
+   "name": "Part in Friendship",
+   "files": [
+    "engine/src/cards/pool/part-in-friendship.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-until-by-mana-value.test.ts"
+  },
+  {
+   "name": "Druid of the Emerald Grove",
+   "files": [
+    "engine/src/cards/pool/druid-of-the-emerald-grove.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/search-then-roll.test.ts"
+  },
+  {
+   "name": "Urban Burgeoning",
+   "files": [
+    "engine/src/cards/pool/urban-burgeoning.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/granted-untap-during-others.test.ts"
+  },
+  {
+   "name": "Sunbird Effigy",
+   "files": [
+    "engine/src/cards/pool/sunbird-effigy.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/colors-among-crafted.test.ts"
+  },
+  {
+   "name": "Sunbird Standard",
+   "files": [
+    "engine/src/cards/pool/sunbird-standard.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/colors-among-crafted.test.ts"
+  },
+  {
+   "name": "C.A.M.P.",
+   "files": [
+    "engine/src/cards/pool/c-a-m-p.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/shares-color-with-produced-mana.test.ts"
+  },
+  {
+   "name": "Rosheen, Roaring Prophet",
+   "files": [
+    "engine/src/cards/pool/rosheen-roaring-prophet.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/rosheen-roaring-prophet.test.ts"
+  },
+  {
+   "name": "Intrude on the Mind",
+   "files": [
+    "engine/src/cards/pool/intrude-on-the-mind.ts",
+    "engine/src/cards/tokens/thopter-token-intrude-on-the-mind.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/intrude-on-the-mind.test.ts"
+  },
+  {
+   "name": "Devastating Mastery",
+   "files": [
+    "engine/src/cards/pool/devastating-mastery.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/devastating-mastery.test.ts"
+  },
+  {
+   "name": "Decoy Gambit",
+   "files": [
+    "engine/src/cards/pool/decoy-gambit.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/unless-per-target-held.test.ts"
+  },
+  {
+   "name": "Whims of the Fates",
+   "files": [
+    "engine/src/cards/pool/whims-of-the-fates.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/separate-into-three-piles.test.ts"
+  },
+  {
+   "name": "Exterminator Magmarch",
+   "files": [
+    "engine/src/cards/pool/exterminator-magmarch.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/copy-spell-chosen-aim.test.ts"
+  },
+  {
+   "name": "Zevlor, Elturel Exile",
+   "files": [
+    "engine/src/cards/pool/zevlor-elturel-exile.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/copy-spell-chosen-aim.test.ts"
+  },
+  {
+   "name": "Noctis, Heir Apparent",
+   "files": [
+    "engine/src/cards/pool/noctis-heir-apparent.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/warp-strike-return-attacking.test.ts"
+  },
+  {
+   "name": "Curse of Leeches",
+   "files": [
+    "engine/src/cards/pool/curse-of-leeches.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-transforms-choice.test.ts"
+  },
+  {
+   "name": "Leeching Lurker",
+   "files": [
+    "engine/src/cards/pool/leeching-lurker.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-transforms-choice.test.ts"
+  },
+  {
+   "name": "Monitor Monitor",
+   "files": [
+    "engine/src/cards/pool/monitor-monitor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/roll-reroll.test.ts"
+  },
+  {
+   "name": "Tide of War",
+   "files": [
+    "engine/src/cards/pool/tide-of-war.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/creatures-block-trigger.test.ts"
+  },
+  {
+   "name": "Hero of Bretagard",
+   "files": [
+    "engine/src/cards/pool/hero-of-bretagard.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exiled-by-you-that-many.test.ts"
+  },
+  {
+   "name": "Cosi's Trickster",
+   "files": [
+    "engine/src/cards/pool/cosis-trickster.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/shuffles-library-trigger.test.ts"
+  },
+  {
+   "name": "Psychic Surgery",
+   "files": [
+    "engine/src/cards/pool/psychic-surgery.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/shuffles-library-trigger.test.ts"
+  },
+  {
+   "name": "Merieke Ri Berit",
+   "files": [
+    "engine/src/cards/pool/merieke-ri-berit.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-source-becomes-untapped.test.ts"
+  },
+  {
+   "name": "Glyph of Life",
+   "files": [
+    "engine/src/cards/pool/glyph-of-life.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/dealt-damage-by-attacking-creature.test.ts"
+  },
+  {
+   "name": "Tunnel Vision",
+   "files": [
+    "engine/src/cards/pool/tunnel-vision.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-until-else-shuffle.test.ts"
+  },
+  {
+   "name": "Head Games",
+   "files": [
+    "engine/src/cards/pool/head-games.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/this-way-put-into-library.test.ts"
+  },
+  {
+   "name": "Jester's Mask",
+   "files": [
+    "engine/src/cards/pool/jesters-mask.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/this-way-put-into-library.test.ts"
+  },
+  {
+   "name": "Skyclave Shade",
+   "files": [
+    "engine/src/cards/pool/skyclave-shade.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/grant-cast-self-from-graveyard.test.ts"
+  },
+  {
+   "name": "Shared Fate",
+   "files": [
+    "engine/src/cards/pool/shared-fate.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/each-player-plays-cards-they-exiled.test.ts"
+  },
+  {
+   "name": "Mirror-Mad Phantasm",
+   "files": [
+    "engine/src/cards/pool/mirror-mad-phantasm.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-until-source-owners-library.test.ts"
+  },
+  {
+   "name": "Dire Blunderbuss",
+   "files": [
+    "engine/src/cards/pool/dire-blunderbuss.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/not-the-granter.test.ts"
+  },
+  {
+   "name": "Dire Flail",
+   "files": [
+    "engine/src/cards/pool/dire-flail.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/not-the-granter.test.ts"
+  },
+  {
+   "name": "Cut Short",
+   "files": [
+    "engine/src/cards/pool/cut-short.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/planeswalker-activated-this-turn.test.ts"
+  },
+  {
+   "name": "Faith's Shield",
+   "files": [
+    "engine/src/cards/pool/faiths-shield.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/player-protection-from-color.test.ts"
+  },
+  {
+   "name": "Seht's Tiger",
+   "files": [
+    "engine/src/cards/pool/sehts-tiger.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/player-protection-from-color.test.ts"
+  },
+  {
+   "name": "Guildpact Paragon",
+   "files": [
+    "engine/src/cards/pool/guildpact-paragon.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exactly-two-colors.test.ts"
+  },
+  {
+   "name": "Invasion of Ravnica",
+   "files": [
+    "engine/src/cards/pool/invasion-of-ravnica.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exactly-two-colors.test.ts"
+  },
+  {
+   "name": "Aeon Engine",
+   "files": [
+    "engine/src/cards/pool/aeon-engine.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reverse-turn-order.test.ts"
+  },
+  {
+   "name": "Thelon of Havenwood",
+   "files": [
+    "engine/src/cards/pool/thelon-of-havenwood.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-from-any-graveyard.test.ts"
+  },
+  {
+   "name": "Heart of Kiran",
+   "files": [
+    "engine/src/cards/pool/heart-of-kiran.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/crew-alternative-cost.test.ts"
+  },
+  {
+   "name": "Fishing Pole",
+   "files": [
+    "engine/src/cards/pool/fishing-pole.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/tap-granter-cost.test.ts"
+  },
+  {
+   "name": "Vazi, Keen Negotiator",
+   "files": [
+    "engine/src/cards/pool/vazi-keen-negotiator.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/activates-ability-mana-from.test.ts"
+  },
+  {
+   "name": "Protective Sphere",
+   "files": [
+    "engine/src/cards/pool/protective-sphere.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/shares-color-with-spent-mana.test.ts"
+  },
+  {
+   "name": "Heart-Shaped Herb",
+   "files": [
+    "engine/src/cards/pool/heart-shaped-herb.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/return-sacrificed-card-with-counters.test.ts"
+  },
+  {
+   "name": "Lagrella, the Magpie",
+   "files": [
+    "engine/src/cards/pool/lagrella-the-magpie.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/return-with-counters-this-way.test.ts"
+  },
+  {
+   "name": "Ashiok, Wicked Manipulator",
+   "files": [
+    "engine/src/cards/pool/ashiok-wicked-manipulator.ts",
+    "engine/src/cards/tokens/nightmare-token-ashiok-wicked-manipulator.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/pay-life-exile-library-instead.test.ts"
+  },
+  {
+   "name": "Metamorphic Alteration",
+   "files": [
+    "engine/src/cards/pool/metamorphic-alteration.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/aura-enchanted-is-copy-of-chosen.test.ts"
+  },
+  {
+   "name": "Ludevic, Necrogenius",
+   "files": [
+    "engine/src/cards/pool/ludevic-necrogenius.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-transforms-copy-exiled-choice.test.ts"
+  },
+  {
+   "name": "Olag, Ludevic's Hubris",
+   "files": [
+    "engine/src/cards/pool/olag-ludevics-hubris.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-transforms-copy-exiled-choice.test.ts"
+  },
+  {
+   "name": "Mangara's Tome",
+   "files": [
+    "engine/src/cards/pool/mangaras-tome.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/face-down-pile-draws.test.ts"
+  },
+  {
+   "name": "Parallel Thoughts",
+   "files": [
+    "engine/src/cards/pool/parallel-thoughts.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/face-down-pile-draws.test.ts"
+  },
+  {
+   "name": "Blizzard Specter",
+   "files": [
+    "engine/src/cards/pool/blizzard-specter.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/damaged-player-returns-permanent.test.ts"
+  },
+  {
+   "name": "Crooked Scales",
+   "files": [
+    "engine/src/cards/pool/crooked-scales.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/repeat-unless-paid.test.ts"
+  },
+  {
+   "name": "Sanctuary Blade",
+   "files": [
+    "engine/src/cards/pool/sanctuary-blade.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/choose-color-on-attach.test.ts"
+  },
+  {
+   "name": "Invasion Plans",
+   "files": [
+    "engine/src/cards/pool/invasion-plans.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attacking-player-chooses-blocks.test.ts"
+  },
+  {
+   "name": "Jolly Gerbils",
+   "files": [
+    "engine/src/cards/pool/jolly-gerbils.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/gives-gift-trigger.test.ts"
+  },
+  {
+   "name": "Hidetsugu Consumes All",
+   "files": [
+    "engine/src/cards/pool/hidetsugu-consumes-all.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/source-damage-to-player-this-turn.test.ts"
+  },
+  {
+   "name": "Vessel of the All-Consuming",
+   "files": [
+    "engine/src/cards/pool/vessel-of-the-all-consuming.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/source-damage-to-player-this-turn.test.ts"
+  },
+  {
+   "name": "Aegis of the Legion",
+   "files": [
+    "engine/src/cards/pool/aegis-of-the-legion.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/mentors-trigger.test.ts"
+  },
+  {
+   "name": "Hercules, Olympian Hero",
+   "files": [
+    "engine/src/cards/pool/hercules-olympian-hero.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/dealt-damage-first-time-each-turn.test.ts"
+  },
+  {
+   "name": "Happily Ever After",
+   "files": [
+    "engine/src/cards/pool/happily-ever-after.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/card-types-among-permanents-and-graveyard.test.ts"
+  },
+  {
+   "name": "Creeping Dread",
+   "files": [
+    "engine/src/cards/pool/creeping-dread.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/shares-card-type-with-discarded.test.ts"
+  },
+  {
+   "name": "Portal Manipulator",
+   "files": [
+    "engine/src/cards/pool/portal-manipulator.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attack-target-chosen-player.test.ts"
+  },
+  {
+   "name": "Disciples of the Inferno",
+   "files": [
+    "engine/src/cards/pool/disciples-of-the-inferno.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/target-battle-or-opponent.test.ts"
+  },
+  {
+   "name": "Invasion of Regatha",
+   "files": [
+    "engine/src/cards/pool/invasion-of-regatha.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/target-battle-or-opponent.test.ts"
+  },
+  {
+   "name": "Gorm the Great",
+   "files": [
+    "engine/src/cards/pool/gorm-the-great.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/must-be-blocked-by-two.test.ts"
+  },
+  {
+   "name": "Seeker of Slaanesh",
+   "files": [
+    "engine/src/cards/pool/seeker-of-slaanesh.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attack-with-at-least-one.test.ts"
+  },
+  {
+   "name": "Trove of Temptation",
+   "files": [
+    "engine/src/cards/pool/trove-of-temptation.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attack-with-at-least-one.test.ts"
+  },
+  {
+   "name": "Amy Pond",
+   "files": [
+    "engine/src/cards/pool/amy-pond.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/two-pairing-abilities.test.ts"
+  },
+  {
+   "name": "Auditore Ambush",
+   "files": [
+    "engine/src/cards/pool/auditore-ambush.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/search-zones-chosen-by-target-player.test.ts"
+  },
+  {
+   "name": "Filigree Racer",
+   "files": [
+    "engine/src/cards/pool/filigree-racer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/grant-jump-start.test.ts"
+  },
+  {
+   "name": "Me, the Immortal",
+   "files": [
+    "engine/src/cards/pool/me-the-immortal.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/counters-remain-across-zones.test.ts"
+  },
+  {
+   "name": "Glimpse the Cosmos",
+   "files": [
+    "engine/src/cards/pool/glimpse-the-cosmos.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/conditional-flashback.test.ts"
+  },
+  {
+   "name": "Viral Spawning",
+   "files": [
+    "engine/src/cards/pool/viral-spawning.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/conditional-flashback.test.ts"
+  },
+  {
+   "name": "Delaying Shield",
+   "files": [
+    "engine/src/cards/pool/delaying-shield.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/damage-replaced-not-prevented.test.ts"
+  },
+  {
+   "name": "Uphill Battle",
+   "files": [
+    "engine/src/cards/pool/uphill-battle.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/enters-tapped-if-cast.test.ts"
+  },
+  {
+   "name": "Majestic Myriarch",
+   "files": [
+    "engine/src/cards/pool/majestic-myriarch.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/grant-keyword-variants.test.ts"
+  },
+  {
+   "name": "Kathril, Aspect Warper",
+   "files": [
+    "engine/src/cards/pool/kathril-aspect-warper.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/hexproof-from-counters.test.ts"
+  },
+  {
+   "name": "Bamboozling Beeble",
+   "files": [
+    "engine/src/cards/pool/bamboozling-beeble.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/extra-die-chosen-ignore.test.ts"
+  },
+  {
+   "name": "Nefarious Lich",
+   "files": [
+    "engine/src/cards/pool/nefarious-lich.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/gain-life-becomes-draw.test.ts"
+  },
+  {
+   "name": "Knickknack Ouphe",
+   "files": [
+    "engine/src/cards/pool/knickknack-ouphe.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/look-and-choose-unattachable-aura.test.ts"
+  },
+  {
+   "name": "Vault 13: Dweller's Journey",
+   "files": [
+    "engine/src/cards/pool/vault-13-dwellers-journey.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/owner-orders-library-bottom.test.ts"
+  },
+  {
+   "name": "Manifold Insights",
+   "files": [
+    "engine/src/cards/pool/manifold-insights.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/each-opponent-picks-from-shared-reveal.test.ts"
+  },
+  {
+   "name": "The Day of the Doctor",
+   "files": [
+    "engine/src/cards/pool/the-day-of-the-doctor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/choose-permanents-non-target.test.ts"
+  },
+  {
+   "name": "Callous Oppressor",
+   "files": [
+    "engine/src/cards/pool/callous-oppressor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/opponent-chooses-creature-type-as-enters.test.ts"
+  },
+  {
+   "name": "Gimli, Mournful Avenger",
+   "files": [
+    "engine/src/cards/pool/gimli-mournful-avenger.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reflexive-on-nth-resolution.test.ts"
+  },
+  {
+   "name": "Discerning Taste",
+   "files": [
+    "engine/src/cards/pool/discerning-taste.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/greatest-power-this-way.test.ts"
+  },
+  {
+   "name": "Myra the Magnificent",
+   "files": [
+    "engine/src/cards/pool/myra-the-magnificent.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-whenever-chosen-permanent.test.ts"
+  },
+  {
+   "name": "Goliath Hatchery",
+   "files": [
+    "engine/src/cards/pool/goliath-hatchery.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/amount-total-toxic-value.test.ts"
+  },
+  {
+   "name": "Wiretapping",
+   "files": [
+    "engine/src/cards/pool/wiretapping.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/first-draw-in-draw-step.test.ts"
+  },
+  {
+   "name": "Bronze Cudgels",
+   "files": [
+    "engine/src/cards/pool/bronze-cudgels.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reflexive-on-nth-resolution.test.ts"
+  },
+  {
+   "name": "Heliod's Punishment",
+   "files": [
+    "engine/src/cards/pool/heliods-punishment.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attach-granting-aura.test.ts"
+  },
+  {
+   "name": "Nettlevine Blight",
+   "files": [
+    "engine/src/cards/pool/nettlevine-blight.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attach-granting-aura.test.ts"
+  },
+  {
+   "name": "Shifting Shadow",
+   "files": [
+    "engine/src/cards/pool/shifting-shadow.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attach-granting-aura.test.ts"
+  },
+  {
+   "name": "Eriette, the Beguiler",
+   "files": [
+    "engine/src/cards/pool/eriette-the-beguiler.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/control-while-attached.test.ts"
+  },
+  {
+   "name": "Haunting Imitation",
+   "files": [
+    "engine/src/cards/pool/haunting-imitation.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/token-copy-of-revealed-cards.test.ts"
+  },
+  {
+   "name": "Cosmogoyf",
+   "files": [
+    "engine/src/cards/pool/cosmogoyf.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cda-cards-owned-in-exile.test.ts"
+  },
+  {
+   "name": "Cerebral Eruption",
+   "files": [
+    "engine/src/cards/pool/cerebral-eruption.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/token-copy-of-revealed-cards.test.ts"
+  },
+  {
+   "name": "The Book of Vile Darkness",
+   "files": [
+    "engine/src/cards/pool/the-book-of-vile-darkness.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/token-gains-exiled-triggers.test.ts"
+  },
+  {
+   "name": "Ethereal Forager",
+   "files": [
+    "engine/src/cards/pool/ethereal-forager.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delve-exiled-with.test.ts"
+  },
+  {
+   "name": "Murktide Regent",
+   "files": [
+    "engine/src/cards/pool/murktide-regent.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delve-exiled-with.test.ts"
+  },
+  {
+   "name": "Tawnos, Solemn Survivor",
+   "files": [
+    "engine/src/cards/pool/tawnos-solemn-survivor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-graveyard-beside-sacrifice-several.test.ts"
+  },
+  {
+   "name": "Tapestry Warden",
+   "files": [
+    "engine/src/cards/pool/tapestry-warden.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/stations-using-toughness.test.ts"
+  },
+  {
+   "name": "Drain Life",
+   "files": [
+    "engine/src/cards/pool/drain-life.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/damage-dealt-capped.test.ts"
+  },
+  {
+   "name": "Mistcaller",
+   "files": [
+    "engine/src/cards/pool/mistcaller.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/enter-exile-instead.test.ts"
+  },
+  {
+   "name": "Bitter Feud",
+   "files": [
+    "engine/src/cards/pool/bitter-feud.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/damage-double-chosen-player.test.ts"
+  },
+  {
+   "name": "Urborg Lhurgoyf",
+   "files": [
+    "engine/src/cards/pool/urborg-lhurgoyf.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-enters-mill.test.ts"
+  },
+  {
+   "name": "Ancient Ooze",
+   "files": [
+    "engine/src/cards/pool/ancient-ooze.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cda-count-excluding-self.test.ts"
+  },
+  {
+   "name": "Boneyard Mycodrax",
+   "files": [
+    "engine/src/cards/pool/boneyard-mycodrax.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cda-count-excluding-self.test.ts"
+  },
+  {
+   "name": "Monstrous War-Leech",
+   "files": [
+    "engine/src/cards/pool/monstrous-war-leech.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-enters-mill.test.ts"
+  },
+  {
+   "name": "Mercadia's Downfall",
+   "files": [
+    "engine/src/cards/pool/mercadias-downfall.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/defending-player-of-each-attacker.test.ts"
+  },
+  {
+   "name": "Tahngarth, First Mate",
+   "files": [
+    "engine/src/cards/pool/tahngarth-first-mate.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attacking-among-attacked.test.ts"
+  },
+  {
+   "name": "Rangers of Ithilien",
+   "files": [
+    "engine/src/cards/pool/rangers-of-ithilien.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/control-lesser-power.test.ts"
+  },
+  {
+   "name": "Reroute",
+   "files": [
+    "engine/src/cards/pool/reroute.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/activated-ability-single-target.test.ts"
+  },
+  {
+   "name": "Psychic Battle",
+   "files": [
+    "engine/src/cards/pool/psychic-battle.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/chooses-targets-trigger.test.ts"
+  },
+  {
+   "name": "Foreboding Steamboat",
+   "files": [
+    "engine/src/cards/pool/foreboding-steamboat.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/each-player-chooses-exile-until-leaves.test.ts"
+  },
+  {
+   "name": "Lethal Throwdown",
+   "files": [
+    "engine/src/cards/pool/lethal-throwdown.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/additional-cost-option-paid.test.ts"
+  },
+  {
+   "name": "Fight or Flight",
+   "files": [
+    "engine/src/cards/pool/fight-or-flight.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/only-chosen-pile-can-attack.test.ts"
+  },
+  {
+   "name": "Taster of Wares",
+   "files": [
+    "engine/src/cards/pool/taster-of-wares.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/revealed-exile-may-cast.test.ts"
+  },
+  {
+   "name": "Battletide Alchemist",
+   "files": [
+    "engine/src/cards/pool/battletide-alchemist.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/optional-prevention.test.ts"
+  },
+  {
+   "name": "Bold Plagiarist",
+   "files": [
+    "engine/src/cards/pool/bold-plagiarist.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/counters-put-by-its-controller.test.ts"
+  },
+  {
+   "name": "Cobra Trap",
+   "files": [
+    "engine/src/cards/pool/cobra-trap.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/destroyed-this-turn-by-opponent.test.ts"
+  },
+  {
+   "name": "Soulgorger Orgg",
+   "files": [
+    "engine/src/cards/pool/soulgorger-orgg.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/life-lost-noted-on-enter.test.ts"
+  },
+  {
+   "name": "Cryptic Pursuit",
+   "files": [
+    "engine/src/cards/pool/cryptic-pursuit.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/face-down-dies-card.test.ts"
+  },
+  {
+   "name": "Diabolic Servitude",
+   "files": [
+    "engine/src/cards/pool/diabolic-servitude.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/put-onto-battlefield-with.test.ts"
+  },
+  {
+   "name": "Wheel of Sun and Moon",
+   "files": [
+    "engine/src/cards/pool/wheel-of-sun-and-moon.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/graveyard-instead-to-library-end.test.ts"
+  },
+  {
+   "name": "Kaho, Minamo Historian",
+   "files": [
+    "engine/src/cards/pool/kaho-minamo-historian.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/search-library-to-exile-linked.test.ts"
+  },
+  {
+   "name": "Myr Incubator",
+   "files": [
+    "engine/src/cards/pool/myr-incubator.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/search-library-to-exile-linked.test.ts"
+  },
+  {
+   "name": "Ertai's Meddling",
+   "files": [
+    "engine/src/cards/pool/ertais-meddling.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-spell-with-delay-counters.test.ts"
+  },
+  {
+   "name": "Prophecy",
+   "files": [
+    "engine/src/cards/pool/prophecy.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-top-of-opponent.test.ts"
+  },
+  {
+   "name": "Judge Unworthy",
+   "files": [
+    "engine/src/cards/pool/judge-unworthy.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-top-of-opponent.test.ts"
+  },
+  {
+   "name": "Planeswalker's Favor",
+   "files": [
+    "engine/src/cards/pool/planeswalkers-favor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-top-of-opponent.test.ts"
+  },
+  {
+   "name": "Planeswalker's Scorn",
+   "files": [
+    "engine/src/cards/pool/planeswalkers-scorn.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-top-of-opponent.test.ts"
+  },
+  {
+   "name": "Riddle of Lightning",
+   "files": [
+    "engine/src/cards/pool/riddle-of-lightning.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-top-of-opponent.test.ts"
+  },
+  {
+   "name": "Become the Pilot",
+   "files": [
+    "engine/src/cards/pool/become-the-pilot.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/unblockable-unless-attacking-owner.test.ts"
+  },
+  {
+   "name": "Nahiri, the Unforgiving",
+   "files": [
+    "engine/src/cards/pool/nahiri-the-unforgiving.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attack-requirement-player-only.test.ts"
+  },
+  {
+   "name": "Rampaging Raptor",
+   "files": [
+    "engine/src/cards/pool/rampaging-raptor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/planeswalker-or-battle-of-that-player.test.ts"
+  },
+  {
+   "name": "Auratouched Mage",
+   "files": [
+    "engine/src/cards/pool/auratouched-mage.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/aura-could-enchant.test.ts"
+  },
+  {
+   "name": "Mirror Match",
+   "files": [
+    "engine/src/cards/pool/mirror-match.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/token-copy-blocking.test.ts"
+  },
+  {
+   "name": "Synthesis Pod",
+   "files": [
+    "engine/src/cards/pool/synthesis-pod.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exiled-spell-mana-value.test.ts"
+  },
+  {
+   "name": "Loreseeker's Stone",
+   "files": [
+    "engine/src/cards/pool/loreseekers-stone.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/ability-cost-increase-per-count.test.ts"
+  },
+  {
+   "name": "Foraging Wickermaw",
+   "files": [
+    "engine/src/cards/pool/foraging-wickermaw.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/becomes-color-of-mana-made.test.ts"
+  },
+  {
+   "name": "Conundrum Sphinx",
+   "files": [
+    "engine/src/cards/pool/conundrum-sphinx.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/each-player-names-a-card.test.ts"
+  },
+  {
+   "name": "Inniaz, the Gale Force",
+   "files": [
+    "engine/src/cards/pool/inniaz-the-gale-force.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/rotate-chosen-permanents.test.ts"
+  },
+  {
+   "name": "The Three Seasons",
+   "files": [
+    "engine/src/cards/pool/the-three-seasons.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/shuffle-chosen-graveyard-cards.test.ts"
+  },
+  {
+   "name": "Grenzo's Rebuttal",
+   "files": [
+    "engine/src/cards/pool/grenzos-rebuttal.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/choose-permanents-round-the-table.test.ts"
+  },
+  {
+   "name": "Order of Succession",
+   "files": [
+    "engine/src/cards/pool/order-of-succession.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/choose-permanents-round-the-table.test.ts"
+  },
+  {
+   "name": "Blood of the Martyr",
+   "files": [
+    "engine/src/cards/pool/blood-of-the-martyr.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/optional-redirect.test.ts"
+  },
+  {
+   "name": "Collision of Realms",
+   "files": [
+    "engine/src/cards/pool/collision-of-realms.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/mass-shuffle-reveal-until.test.ts"
+  },
+  {
+   "name": "Day of the Dragons",
+   "files": [
+    "engine/src/cards/pool/day-of-the-dragons.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/linked-exile-return-under-you.test.ts"
+  },
+  {
+   "name": "Rooting Moloch",
+   "files": [
+    "engine/src/cards/pool/rooting-moloch.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-graveyard-card-play-next-turn.test.ts"
+  },
+  {
+   "name": "Thromok the Insatiable",
+   "files": [
+    "engine/src/cards/pool/thromok-the-insatiable.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/devour.test.ts"
+  },
+  {
+   "name": "Gimbal, Gremlin Prodigy",
+   "files": [
+    "engine/src/cards/pool/gimbal-gremlin-prodigy.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/create-token-then-counters.test.ts"
+  },
+  {
+   "name": "Stangg, Echo Warrior",
+   "files": [
+    "engine/src/cards/pool/stangg-echo-warrior.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/token-copies-of-attachments.test.ts"
+  },
+  {
+   "name": "Overblaze",
+   "files": [
+    "engine/src/cards/pool/overblaze.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/double-damage-from-target-this-turn.test.ts"
+  },
+  {
+   "name": "Gather Specimens",
+   "files": [
+    "engine/src/cards/pool/gather-specimens.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/enters-under-your-control-instead.test.ts"
+  },
+  {
+   "name": "Hallowed Moonlight",
+   "files": [
+    "engine/src/cards/pool/hallowed-moonlight.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/token-enter-exile-instead.test.ts"
+  },
+  {
+   "name": "Perrie, the Pulverizer",
+   "files": [
+    "engine/src/cards/pool/perrie-the-pulverizer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/counter-kinds-among.test.ts"
+  },
+  {
+   "name": "Storm of Forms",
+   "files": [
+    "engine/src/cards/pool/storm-of-forms.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/counter-kinds-among.test.ts"
+  },
+  {
+   "name": "Syrix, Carrier of the Flame",
+   "files": [
+    "engine/src/cards/pool/syrix-carrier-of-the-flame.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/left-graveyard-this-turn.test.ts"
+  },
+  {
+   "name": "Whispering Snitch",
+   "files": [
+    "engine/src/cards/pool/whispering-snitch.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/surveils-first-time-each-turn.test.ts"
+  },
+  {
+   "name": "Halimar Tidecaller",
+   "files": [
+    "engine/src/cards/pool/halimar-tidecaller.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/awaken-card-filter.test.ts"
+  },
+  {
+   "name": "Xathrid Gorgon",
+   "files": [
+    "engine/src/cards/pool/xathrid-gorgon.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/prohibit-activations-for-good.test.ts"
+  },
+  {
+   "name": "Kheru Mind-Eater",
+   "files": [
+    "engine/src/cards/pool/kheru-mind-eater.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/face-down-linked-exile-source-controller-looks.test.ts"
+  },
+  {
+   "name": "Hedonist's Trove",
+   "files": [
+    "engine/src/cards/pool/hedonists-trove.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/play-from-linked-exile-once-per-turn.test.ts"
+  },
+  {
+   "name": "Mirror of Fate",
+   "files": [
+    "engine/src/cards/pool/mirror-of-fate.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/mirror-of-fate.test.ts"
+  },
+  {
+   "name": "Selective Adaptation",
+   "files": [
+    "engine/src/cards/pool/selective-adaptation.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/selective-adaptation.test.ts"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Drain Power",
+   "needs": [
+    "effect:force-mana-abilities-take-mana"
+   ],
+   "size": "major",
+   "why": "Each land of the target player must activate a mana ability the player picks (its ability, colour and order, which matters for filter lands), then the mana lost is added to yours: a new forced decision and loseUnspentMana returning the units it removes. Left for the user's call."
+  },
+  {
+   "name": "Tallowisp",
+   "needs": [
+    "filter:aura-with-enchant-words"
+   ],
+   "size": "small",
+   "why": "Re-keyed: \"Aura card with enchant creature\" reads the Aura's own enchant wording; filter:aura-enchant-restriction (built for Auratouched Mage) asks whether an Aura could enchant a given host."
+  },
+  {
+   "name": "Rootwater Shaman",
+   "needs": [
+    "filter:aura-with-enchant-words"
+   ],
+   "size": "small",
+   "why": "Re-keyed: \"Aura spells with enchant creature\" reads the Aura's enchant wording, not a host (as Tallowisp)."
+  },
+  {
+   "name": "Grimoire Thief",
+   "needs": [
+    "effect:counter-all-spells-named-linked-exile"
+   ],
+   "size": "small",
+   "why": "Re-keyed: faceDownLooks \"linked-controller\" (built for Kheru Mind-Eater) covers look-and-choose only; Grimoire Thief also wants exile-from-library's faceDown looked at by its controller, and \"counter all spells with those names\"."
+  }
+ ]
+}

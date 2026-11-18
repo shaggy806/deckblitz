@@ -44,21 +44,25 @@ section keeps only what to do next.
   nothing — the user approved all ten last cards' majors and they were built. **Past rank 10,000**
   the order is still EDHREC rank: the triaged cards' keys (`rank-goal.mjs --rank 20000 --keys`),
   through `author-top-cards` as B333 did (lead plus worktree agents, a group of four cards each)
-  or `build-family overnight lanes`. **B334 (2026-11-17, overnight, lane agents) reached 13755, and a few past it.**
-  **Next by rank:** Zevlor, Elturel Exile (13560, `effect:copy-spell-retarget-another-opponent`) and
-  Wan Shi Tong, All-Knowing (13881, `trigger:cards-put-into-library`), both researched with a plan
-  (`docs/card-blockers.md`, batch 334); Clara Oswald (13608, `mechanic:commander-chosen-color-pregame`
-  — a pregame choice, likely a major to ask about), Invasion Plans (13689, the attacking player
-  choosing blocks — likely a new decision), Mystic Barrier (13783), Stitcher Geralf (13868); then
-  13884 on (`rank-goal.mjs --rank 20000 --keys`). Soul Burn wants re-keying (hybrid pips on X). Each lane's
-  hand-off notes are in `engine/.cache/lanes/<lane>.md` (this PC only). Cryptic Spires (10790)
-  needs a deck-construction choice (circle two colours) — ask the user. New cards come through `author-top-cards` once a snapshot refresh brings untriaged ones
-  (`cards:needs -- --next 60`). Three decisions wait on the user: Starlight Spectacular's
-  ordering, Malik's secret choice and Exchange of Words (`B308.json`, `B309.json`). **The
-  freed-card queue holds eight** (`cards:needs -- --stale`: Crown of the Ages, Enchantment
-  Alteration, Lumbering Battlement, Oracle en-Vec, Vortex Elemental; Swindler's Scheme needs more
-  than Gandalf's key, and Mana Web and Search the City need re-keying first — `docs/card-blockers.md`,
-  batches 333-334; `author-freed`). The starter precons have no stand-ins left (Explosion of Riches landed in B334).
+  or `build-family overnight lanes`. **B334 (2026-11-17) reached 13755; B335 (2026-11-18, overnight,
+  34 lane agents, 171 cards) took every triaged card from 13560 to 17788 but those below.** **Five
+  agents at once looked best** (B335's experiment: five built as many cards an hour as six with fewer
+  failures; `docs/card-blockers.md`, batch 335; the build-family skill still says four). **Next by rank** (`rank-goal.mjs --rank 20000 --keys`):
+  Ellywick Tumblestrum (14843, `amount:differently-named-dungeons-completed`), Blood Sun (16071),
+  First Family (16094), Forbidden Crypt (16193), Darigaaz Reincarnated (16306), Vanish into Memory
+  (16309), then 16688 on (Qasali Ambusher, Elvish Refueler, Blossoming Calm, Squall). Waiting on the
+  user: **Drain Power** (16523, a forced mana-ability decision: B335 left it as a major), Clara Oswald
+  (13608, a pregame colour for a commander), Cryptic Spires (10790, a deck-construction choice: circle
+  two colours), Path of the Ghosthunter (16226, Planechase), and the majors and decisions B308, B309 and
+  B334 left (Starlight Spectacular's ordering, Malik's secret choice, Exchange of Words, The Toymaker's
+  Trap, Command Performance, Vedalken Squirrel-Whacker). Soul Burn wants re-keying (hybrid pips on X).
+  Each lane's hand-off notes are in `engine/.cache/lanes/<lane>.md` (this PC only). New cards come
+  through `author-top-cards` once a snapshot refresh brings untriaged ones (`cards:needs -- --next
+  60`). **The freed-card queue** (`cards:needs -- --stale`, `author-freed`): Crown of the Ages,
+  Enchantment Alteration, Lumbering Battlement, Oracle en-Vec, Vortex Elemental, and B335's Cragganwick
+  Cremator, Lich and Widespread Panic; Swindler's Scheme needs more than Gandalf's key, and Mana Web and
+  Search the City need re-keying first (`docs/card-blockers.md`, batches 333-335). Tallowisp, Rootwater
+  Shaman and Grimoire Thief were re-keyed in `B335.json`. The starter precons have no stand-ins left (Explosion of Riches landed in B334).
   How the keys were worked down to here (the lanes runs, B310-B330, the freed-card batches)
   is in `COMPLETED.md`.
 - **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander
@@ -101,6 +105,7 @@ section keeps only what to do next.
 - **The rules audit's next slices** (2026-11-17, `docs/plans/rules-audit-2026-11.md`): the first slice (players who leave, combat, skip rules) fixed 800.4e, 508.8 and 506.8f and recorded 603.6c below. The second slice (casting, resolving, multiplayer flow) found nothing more in the engine. Left: four uncited leads not yet probed (506.3d, 104.3f, 704.5r/t, 603.2g); more exported logs read by script, which is where both real finds came from; then keyword interactions (702), merged commanders (903) and two replacement effects on one event (616.1). `npm run rules:uncited -w engine` lists the leads.
 - **A departing player's permanents don't trigger "leaves the battlefield"** — rule 603.6c: another player's "whenever a creature leaves the battlefield" (Extractor Demon) should trigger for what a departing player owned; the engine leaves those permanents on the board inert and announces nothing. A design call (`docs/engine-gaps.md`).
 - **A player who loses while they owe a decision** — rules 800.4f-h (another player pays nothing or chooses for them) aren't modeled; a concession is refused until the decision is answered, so only a state-based loss with a choice open reaches it (`docs/engine-gaps.md`).
+- **B335's small gaps** — what the overnight lane agents reported and left: delayed triggers not ordered among a step's triggers or by which simultaneous event fires them (603.3b, 603.7b), Goad or encore against an "at least one attacks" requirement, a few cost combinations, two JSON string matches to replace, a reversed turn order lost by the builder's export (`docs/engine-gaps.md`).
 - **B334's small gaps** — what the overnight lane agents reported and left: cost exiles inside a resolution counted as "exiled this way", a few unread grants, a copied Lodestone Bauble, scaffolder lines, a 3-4 player scenario with empty libraries (`docs/engine-gaps.md`). (2026-11-17: Bleeding Effect's "hexproof from" built; the Clone beside a simultaneous reanimation didn't reproduce and is pinned; "distribute among any number" may be none, rule 107.1c.)
 - **An object's own "instead" against an exile replacement isn't asked** — Blightsteel Colossus's shuffle and Gravebane Zombie's library top are applied ahead of Rest in Peace or a finality counter without the owner choosing (rule 616.1e), and a Quintorius-cast spell countered by another spell's resolution goes to the library bottom unasked (`docs/engine-gaps.md`).
 - **A `trigger-value` condition reads false while triggering** — B327: it can't be an intervening "if" (rule 603.4); Atomwheel Acrobats waits on `trigger:rolls-at-most` (`docs/engine-gaps.md`).
@@ -272,6 +277,7 @@ and Shiko or the other spell; haste enablers in the crackback were measured and 
 - **The About page doesn't say how a creator can have a strong deck removed** (2026-11-11): the
   site has no contact route; the user's call what it should be
   (`docs/plans/strong-bot-decks.md`).
+- **B335's bot reads** (2026-11-18, from the overnight lane agents; none measured): for Head Games and Jester's Mask v2 picks which of an opponent's library cards go to their hand from candidates ordered best-first (`decisions/choose-from-zone.ts` ~155), so it may hand them their best; v1 names a creature type for Callous Oppressor by the whole board, not its own creatures; v2's attack search doesn't know it will choose the blocks under Invasion Plans; Mystic Barrier's left-or-right is worth nothing to the bots, so they pick it arbitrarily; the bots judge which side Rampaging Raptor's target is on by controller, so a battle the opponent protects but the Raptor's player controls reads as their own.
 - **v2 gives up a permanent to keep a hand card in `exile-from-zones` choices** (2026-11-16, B333): in the Lich's Mastery and Nicol Bolas checks Carol exiled her Hill Giant over an uncastable Shock and Bob his only Forest; v1 picks the hand card. The evaluation's price on a hand card against a permanent, not the feature — judge with `bot:judge --kind answers`.
 
 ## Client / UI
@@ -280,6 +286,7 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
+- **B335's display gaps** — a "hexproof from" counter chip shows "H", Callous Oppressor's log doesn't name who chose, "Vecna Token" in the log against "Vecna" on the tile (`docs/client-gaps.md`).
 - **B334's prompt and log wording** — a `choose-modes` answer logged as "chose mode(s) 2", Gorex's "choose X", the graveyard blitz offer, a few popup titles (`docs/client-gaps.md`).
 - **Read through a couple of games' history logs, and let a finished game's full log be downloaded** (the user, 2026-11-15): go through the history tab's log for a couple of games and make sure everything reads sensibly (`client/src/ui/EventLog.tsx`); the 27 event types that printed as JSON are worded (2026-11-17), the reading for sense is not done. And add an option on the end screen of a game to download a full log, with all information revealed, not just what your seat could see (so it comes from the room's whole game, not the seat's redacted view). The History panel's "Export log" (2026-11-17, `client/src/ui/logExport.ts`) saves the log as the seat saw it, and its text and file name are there to reuse; what's left is the server sending a finished game's unredacted events, and the end screen's button.
 
@@ -300,6 +307,8 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
+- **The scaffolder doesn't read a d20 results table** (2026-11-18, B335): `N—M | …` lines draft nothing (Djinni Windseer, Druid of the Emerald Grove); a template would recur across the dice cards.
+- **`exile-from-library.spec.ts` flakes at any load** (2026-11-18, B335): its tests at lines 181, 245 and 281 failed in four of the night's eleven Playwright quick runs, once with only two agents running, and passed alone each time; the 2026-11-13 run saw the same. Worth a look at what it waits on.
 - **The watch page covers `bot:ab` alone** (2026-11-17, `engine/scripts/watch.mjs`): `bot:judge`, `bot:diff`, `bot:losses` and `bot:watch` play their games unseen; each needs `startWatch` in its main process and `watchGame` in its worker. The tiles show card names, not art, and the plays line is a few words an action, not the History's sentences (`client/src/format.ts`, which a script can't import). Full boards in miniature would go through rooms and the client's spectator view instead (the user chose the light page first).
 
 - **`exile-from-library.spec.ts` times out under load** — its 4-player peel tests (lines 181, 245) failed three times on 2026-11-14 while four agents ran, and passed each time alone; a load flake in the Playwright quick set.

@@ -28,6 +28,48 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   resolution is waiting on a choice of theirs (a suspended resolution with their life at 0), or losing with a
   "may pay" of theirs still to come in the same resolution ("each opponent may pay"). Not reproduced; write the
   failing test first (`engine/src/test/player-left-audit.test.ts` has the setup).
+- **B335's small gaps** (2026-11-18, what the overnight lane agents reported while building keys; none checked
+  beyond the agent's own reading). **Trigger ordering:** a delayed step trigger is put on the stack directly, so
+  its controller can't order it among the step's other triggers (603.3b: Noctis's return comes after the attack
+  triggers); Zevlor's copies are made in turn order rather than in an order the player picks; a delayed
+  trigger's 603.7b choice of which simultaneous event triggers it is made as it resolves (Lagrella) or not at all
+  (a `once` watch takes the first), and a `once` delayed `dealt-damage` watch counts only the first source's
+  damage when several hit at once. (A delayed `whenever` that watches a permanent now ends as the next turn
+  begins once all it watches have left, `Game.watchOver` — fixed the same night.) **Look-back and visibility:** `lookBackSources` treats any
+  library arrival not from a hand as one all players could see, so a face-down exiled card counts (603.10a).
+  **Who shuffles:** the `shuffles-library` event names the library's owner, so "you shuffle target player's
+  library" counts as that player shuffling (Psychic Surgery). **Timing:** a held draw that a replacement turns
+  into a question (dredge) is asked after the held returns (`releaseHeldChoices`; only Decoy Gambit holds draws);
+  Metamorphic Alteration's copy starts at the next state-based-action check, not as the Aura attaches; a pending
+  "as this is turned face up" choice may have the early-SBA gap fixed for "as this becomes attached"; Wheel of Sun
+  and Moon's "instead" is applied ahead of Rest in Peace or Leyline of the Void without its affected player
+  choosing the order (616.1), as Gravebane Zombie's is. **Combat:**
+  goad's "a player other than the goader" and encore narrow a creature's defenders before a Trove of
+  Temptation-style "at least one creature attacks" requirement is counted, so in a 508.1d tie the engine forbids
+  sending it at the Trove player; `groupPlanAtSize` stops at 20,000 steps and keeps its best plan (it may then
+  ask less than the rules would, never more). **Costs:** a mana ability can't combine a sacrifice of several
+  with a graveyard exile; a Tawnos-shaped cost counts the graveyard as it was before the sacrifice (a card whose
+  only exile candidate is the permanent it sacrifices would be refused); which mana unit pays a cost Vazi or
+  Protective Sphere reads is the auto-payer's pick unless the player floats mana first (as for spells).
+  **Reads:** `thenTriggerValue` keeps a trigger's "that many" in a look-and-choose `then`, not a `search-library`
+  `then`; Indominus Rex, Alpha's `keywordCounters` gives nothing for a card with only "hexproof from X" (no ruling
+  says whether it should); a token rolling a die as it enters skips an `ignoreChosen` replacement and keeps the
+  shield for the next roll; Tapestry Warden's last-known read handles only plain creature scopes; a last-known snapshot records no
+  protection, so Auratouched Mage's "could enchant" over a Mage that has left ignores it; Drain Life caps
+  a creature planeswalker at the greater of toughness and loyalty and leaves a battle uncapped (its text names
+  neither). **String matches to replace:** `readsResolutionCount` finds `timesResolvedThisTurn` by matching the
+  ability's JSON (a false positive only journals more); the journal's `destroyed` kind reads `permanent-destroyed`
+  reasons through `DESTRUCTION_REASONS`, free text kept in step by hand with the reasons `game.ts` emits (rule
+  701.8b: zero toughness, the legend rule and an unattached Aura aren't destruction). **Silent shapes:** a static's `affects: { scope: "creatures-you-control", filter }` type-checks but ignores
+  the `filter` (use `scope: "filter"`; no pool card has the shape); a permanent's static `underYou` (Gather
+  Specimens' replacement as a static) isn't read, only a resolved one. **Rulings left open:** a token Hallowed
+  Moonlight exiles as it would enter isn't counted as created (701.7a; no ruling on "whenever you create");
+  a may-answer on a resolved damage replacement's modify or prevent is never asked, only its redirect; Collision
+  of Realms puts the other revealed cards on the bottom before the finds enter (its ruling says after), and an
+  immediate `"shuffle"` move (omen, a `reveal-until`'s shuffled rest) doesn't emit `cards-shuffled-into-library`.
+  **Tools:** the scenario builder's export loses a reversed
+  turn order (server `builder.ts` takes seats from the old spec); the tutorial anchors read `turnOrder` (no
+  tutorial reverses play).
 - **B334's small gaps** (2026-11-17, what the overnight lane agents reported while building keys; none checked
   beyond the agent's own reading). `thisWay: "exiled"` also counts cards a spell cast *during* the resolution
   exiled as its cost, because `exileCause` sees `resolvingController` (game.ts ~70509): Invasion of Alara's hand

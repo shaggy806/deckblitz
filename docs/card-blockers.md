@@ -666,6 +666,34 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 335 (2026-11-18, `author-top-cards overnight`, ranks 13560–17788)** — 171 cards (178
+  definitions), every triaged card from Zevlor, Elturel Exile (13560) on in rank order but those waiting on
+  the user, from 34 lane agents (`COMPLETED.md` lists the features). About a third of the keys needed no
+  engine code again. Left blocked: **Drain Power** (16523, `effect:force-mana-abilities-take-mana`, a
+  major: each of the target player's lands activates a mana ability that player picks, in an order that
+  matters for filter lands, then the lost mana is yours — a new forced decision; Pygmy Hippo's
+  `-lose-unspent` is beside it). Re-keyed (`B335.json`): **Tallowisp** and **Rootwater Shaman**
+  (`filter:aura-with-enchant-words`: an Aura's own "enchant creature" wording, not a host it could enchant),
+  **Grimoire Thief** (`effect:counter-all-spells-named-linked-exile`, plus `exile-from-library`'s face-down
+  looks by its controller). Freed and left for `author-freed`: Cragganwick Cremator, Lich, Widespread
+  Panic. Next by rank (`rank-goal.mjs --rank 20000 --keys`): Ellywick Tumblestrum (14843), Blood Sun
+  (16071), First Family (16094), Forbidden Crypt (16193), Darigaaz Reincarnated (16306), Vanish into Memory
+  (16309), then 16688 on; the user's calls still wait (Cryptic Spires, Exchange of Words, Starlight
+  Spectacular, Malik, The Toymaker's Trap, Command Performance, Clara Oswald's pregame colour, Vedalken
+  Squirrel-Whacker, Path of the Ghosthunter's Planechase).
+  **The concurrency experiment** (the user's question that night: do six agents at once cost more than
+  they gain?). Minutes of agent time per card, by how many ran at once: six 18.0 (6 agents), about five
+  while six wound down 15.5 (6), four 16.2 (5), two 8.2 (2), five 13.6 (10); as cards an hour (agents ×
+  60 ÷ minutes a card) about 20, 19, 15, 15 and 22. A sampler logged the machine each minute: at six the
+  CPU averaged 68% (90% at the 90th percentile), free memory touched 0 GB and sat under 4 GB for 29 of 126
+  minutes, 1.25 typechecks waited on the gate's four slots on average, two agents' tools crashed for
+  memory and one verify failed on a locked temp file; at four, 53% and 0.26 waiting (under 4 GB 18 of 141 minutes); at two,
+  40% and 0.05 (10 of 99); at five, 63% (84% p90) and 0.76 waiting, free memory also touching 0 GB and under
+  4 GB for 46 of 199 minutes — the same share as six, mostly while a verify ran beside the agents — but no
+  agent reported a crash. Read: per agent, two is twice as fast as six, yet five and six build the most an
+  hour, about a third more than two or four; five matched six with fewer failures, so **five at once is the
+  setting to use** on this PC, with verify's whole-machine turn the thing that pushes memory to the floor.
+  Not controlled (each phase's cards differ, two to ten agents a phase).
 - **Batch 334 (2026-11-17, `author-top-cards overnight`, ranks 11022–14017)** — 162
   cards, every triaged card to 13755 but those waiting on the user, then Vengeful Pharaoh, The
   Pandorica, Oath of Kaya, Meticulous Excavation, Leonardo and Fires of Mount Doom, from 38 lane
