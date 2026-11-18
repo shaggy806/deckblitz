@@ -8564,6 +8564,14 @@ export type EffectSpec =
        * {@link RevealedCardsGo}.
        */
       readonly rest: RevealedCardsGo;
+      /**
+       * Where the revealed cards go instead of `rest` when nothing matched —
+       * Tunnel Vision's "if it is, that player puts the rest of the revealed
+       * cards into their graveyard … **Otherwise, the player shuffles**"
+       * (`rest: "graveyard"`, `keepFound`, `ifNone: "shuffle"`): no card is
+       * put into the graveyard and the library is shuffled (its ruling).
+       */
+      readonly ifNone?: RevealedCardsGo;
       /** The card found isn't one of the rest, whatever became of it — Codie,
        * Vociferous Codex's "put each **other** card exiled this way on the
        * bottom", which leaves it in exile to be cast. */
@@ -17452,7 +17460,8 @@ function applyRevealUntil(
       }
     }
   }
-  ctx.placeRevealed(progress.owner, progress.revealed, spec.rest, spec.exile === true);
+  const rest = hit === null && spec.ifNone !== undefined ? spec.ifNone : spec.rest;
+  ctx.placeRevealed(progress.owner, progress.revealed, rest, spec.exile === true);
 }
 
 /**

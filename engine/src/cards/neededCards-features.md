@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Reveal until a name, else shuffle — built 2026-11-18
+
+The key `effect:reveal-until-else-shuffle`: `reveal-until`'s `ifNone`, where the revealed cards go instead of `rest`
+when nothing matched. Tunnel Vision (rank 14407): `rest: "graveyard"` with `keepFound` leaves the named card on top
+once the cards above it are gone, and `ifNone: "shuffle"` puts nothing in the graveyard (its ruling). The scaffolder
+reads it whole. `test/reveal-until-else-shuffle.test.ts`.
+
 ### Finds that wait on a die roll — built 2026-11-18
 
 The key `effect:search-then-roll-destination`: `search-library`'s `thenAlways` (its `then` applied with nothing

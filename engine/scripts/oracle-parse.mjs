@@ -11061,6 +11061,30 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // Tunnel Vision: found, the cards above the named one go to the graveyard
+  // and it's left on top; not found, the library is shuffled (`ifNone`).
+  if (
+    /^Choose a card name\. Target player reveals cards from the top of their library until a card with that name is revealed\. If it is, that player puts the rest of the revealed cards into their graveyard and puts the card with the chosen name on top of their library\. Otherwise, the player shuffles\.$/.test(
+      text,
+    )
+  ) {
+    const slot = ctx.target("player");
+    return {
+      effect: {
+        kind: "choose-card-name",
+        then: {
+          kind: "reveal-until",
+          whose: slot,
+          filter: { hasName: CHOSEN_CARD_NAME },
+          rest: "graveyard",
+          keepFound: true,
+          ifNone: "shuffle",
+        },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   // "You may pay …. If you do, choose a color, then that player reveals their
   // hand and ~ deals damage to the player equal to the number of cards of
   // that color revealed this way." (Darigaaz, the Igniter.)
