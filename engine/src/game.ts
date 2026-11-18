@@ -43789,17 +43789,26 @@ controlledBy,
         const cards = step.cards.filter((id) => library.includes(id));
         return this.beginLibraryOrder(step.player, cards, step.position);
       },
-      exchangeHandAndLibrary: (player) => {
+      exchangeZones: (player, [first, second]) => {
         // Rule 701.12d: one exchange — both lists read before anything
-        // moves, then each card to the other zone.
+        // moves, then each card to the other zone. A graveyard's cards leave
+        // it as one event and the others arrive as one, their owner arranging
+        // them where the order is read (rule 404.3 — Morality Shift's ruling).
         const zones = this.state.zones.perPlayer[player];
-        if (zones === undefined || this.state.players[player]?.hasLost !== false) return;
-        const fromHand = [...zones.hand];
-        const fromLibrary = [...zones.library];
-        this.withLibraryEnterBatch(() => {
-          for (const id of fromHand) this.moveObject(id, "library");
-          for (const id of fromLibrary) this.moveObject(id, "hand");
-        });
+        if (zones === undefined || this.state.players[player]?.hasLost !== false || first === second) return;
+        const fromFirst = [...zones[first]];
+        const fromSecond = [...zones[second]];
+        const exchange = (): void => {
+          for (const id of fromFirst) this.moveObject(id, second);
+          for (const id of fromSecond) this.moveObject(id, first);
+        };
+        // Cards put into a library together are one `cards-put-into-library`
+        // (withGraveyardEnterBatch collects library arrivals too).
+        if (first === "graveyard" || second === "graveyard") {
+          this.withGraveyardEnterBatch(() => this.withGraveyardLeaveBatch(exchange));
+        } else {
+          this.withLibraryEnterBatch(exchange);
+        }
       },
       revealLibraryTop: (player, n) => {
         // A token shuffled in this way is still there until state-based

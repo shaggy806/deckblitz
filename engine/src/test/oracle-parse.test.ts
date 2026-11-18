@@ -22061,6 +22061,35 @@ describe("a cast trigger's count as counters to enter with", () => {
     expect(star.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "self", to: ["graveyard"] });
   });
 
+  it("exchanging two of your zones (Morality Shift, Harness Infinity)", () => {
+    const shift = parseFace(
+      {
+        name: "Morality Shift",
+        type_line: "Sorcery",
+        mana_cost: "{5}{B}{B}",
+        oracle_text: "Exchange your graveyard and library. Then shuffle your library.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(shift.complete).toBe(true);
+    expect(shift.effect).toEqual({
+      kind: "sequence",
+      effects: [{ kind: "exchange-zones", zones: ["graveyard", "library"] }, { kind: "shuffle-library" }],
+    });
+    const harness = parseFace(
+      {
+        name: "Harness Infinity",
+        type_line: "Instant",
+        mana_cost: "{1}{B}{B}{B}{G}{G}{G}",
+        oracle_text: "Exchange your hand and graveyard.\nExile Harness Infinity.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(harness.complete).toBe(true);
+    expect(harness.effect).toEqual({ kind: "exchange-zones", zones: ["hand", "graveyard"] });
+    expect(harness.exileOnResolve).toBe(true);
+  });
+
   it("counters it enters with only if its mana cost contains {X} (The First Tyrannic War's chapter I)", () => {
     const r = parseEffect(
       "You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.",

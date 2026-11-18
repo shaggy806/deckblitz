@@ -2009,6 +2009,9 @@ export function substituteChosenCardName(spec: EffectSpec, name: string): Effect
  */
 export type RevealedCardsGo = "bottom-random" | "bottom-any-order" | "graveyard" | "hand" | "exile" | "shuffle" | "stay";
 
+/** A player's own zone an `exchange-zones` effect swaps with another. */
+export type ExchangedZone = "hand" | "library" | "graveyard";
+
 /** A `reveal-until` waiting on a decision — see its `progress`. */
 export interface RevealUntilProgress {
   readonly owner: PlayerId;
@@ -9039,14 +9042,19 @@ export type EffectSpec =
     }
   | {
       /** "**Exchange your hand and library**" (Mordenkainen's −10; "then
-       * shuffle" is a `shuffle-library` after it): every card in the
-       * player's hand goes into their library and every card that was in
-       * their library into their hand, at once (rule 701.12d — all owned by
-       * that player, a hand and a library holding only their owner's cards,
-       * rule 400.3) — exchanged even when one of them is empty (701.12f).
-       * Not a draw (its ruling). `who` is whose, the effect's controller's
-       * by default. */
-      readonly kind: "exchange-hand-and-library";
+       * shuffle" is a `shuffle-library` after it), "exchange your graveyard
+       * and library" (Morality Shift), "exchange your hand and graveyard"
+       * (Harness Infinity): every card in one of the player's two `zones`
+       * goes into the other and every card that was in the other into the
+       * first, at once (rule 701.12d — all owned by that player, a hand,
+       * library and graveyard holding only their owner's cards, rule 400.3)
+       * — exchanged even when one of them is empty (701.12f). A card put
+       * into a hand isn't drawn (Mordenkainen's ruling); a library's cards
+       * go into the graveyard in its order, top first, and a graveyard's
+       * leave it as one event. `who` is whose, the effect's controller's by
+       * default. */
+      readonly kind: "exchange-zones";
+      readonly zones: readonly [ExchangedZone, ExchangedZone];
       readonly who?: PlayerScope;
     }
   | {
@@ -14121,8 +14129,8 @@ export interface EffectApi {
   /** Ask `step.player` the order of `step.cards` on that end of their
    * library — those still there. `false` when there was nothing to ask. */
   askLibraryOrder(step: LibraryOrderStep): boolean;
-  /** See the `"exchange-hand-and-library"` {@link EffectSpec}. */
-  exchangeHandAndLibrary(player: PlayerId): void;
+  /** See the `"exchange-zones"` {@link EffectSpec}. */
+  exchangeZones(player: PlayerId, zones: readonly [ExchangedZone, ExchangedZone]): void;
   /** `player` reveals the top `n` cards of their library (rule 701.20a) —
    * fewer with fewer there — which stay where they are. Returns them, top
    * first. */
@@ -23162,11 +23170,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "additional-land-drop":
       ctx.additionalLandDrops(amountValue(spec.amount, ctx));
       return;
-    case "exchange-hand-and-library": {
+    case "exchange-zones": {
       // One instruction: every player's exchange is one event (rule 603.2c).
       ctx.simultaneously(() => {
         for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
-          if (target.kind === "player") ctx.exchangeHandAndLibrary(target.player);
+          if (target.kind === "player") ctx.exchangeZones(target.player, spec.zones);
         }
       });
       return;

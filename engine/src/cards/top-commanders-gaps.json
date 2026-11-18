@@ -2746,6 +2746,8 @@
   "mechanic:morph-land",
   "effect:return-random-cards-from-graveyard",
   "effect:exchange-hand-and-library",
+  "effect:exchange-graveyard-and-library",
+  "effect:exchange-hand-and-graveyard",
   "cost:cumulative-upkeep-opponent-gains-life",
   "cost:cumulative-upkeep-opponent-gains-life",
   "cost:cost-reduction-commander-casts",

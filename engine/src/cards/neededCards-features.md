@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Exchanging any two of a player's hand, library and graveyard — built 2026-11-18
+
+The keys `effect:exchange-graveyard-and-library` and `effect:exchange-hand-and-graveyard`: the
+`exchange-hand-and-library` effect became `exchange-zones` with `zones` (two of `"hand"`, `"library"`,
+`"graveyard"`; `ResolutionContext.exchangeZones`) — both lists read first, then each card to the other zone (rule
+701.12d), a graveyard's cards leaving as one event and the others arriving as one, arranged by their owner where the
+order is read (rule 404.3 — the ruling). Morality Shift (rank 13974) and Harness Infinity (19041, `exileOnResolve`);
+Mordenkainen moved to it. The scaffolder reads "exchange your X and Y" and "then shuffle your library".
+`test/exchange-zones.test.ts`.
+
 ### A face-down pile put back on top of the library — built 2026-11-18
 
 The key `effect:shuffle-self-into-library-top`: `cloak-exiled-pile`'s `onto: "library-top"` (the shuffled pile goes
@@ -7614,7 +7624,7 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Several cards at random from a graveyard (2026-11-13).** `effect:return-random-cards-from-graveyard`: `choose-random-card`'s `count` — that many different cards, each picked among those left, handed to `then` as targets 0, 1, … (a `simultaneous` `for-each-target` moves them together); scaffolder template for "return N [type] cards at random from your graveyard to your hand / the battlefield". Moldgraf Monstrosity, Reap the Past; Make a Wish moved onto it. `effect:random-cards-exiled-together` (2026-11-16) is the same `count` with an `exile` inside: Capricious Hellraiser, whose "choose a noncreature, nonland card from among them and copy it" is a `look-and-choose` over `exiled-this-way` (`destination: "stay"`) and a `cast-now` `from: "chosen-this-way"`, which now reaches a chosen card in exile as well as one in a hand.
 
-**Exchange a hand and a library (2026-11-13).** `effect:exchange-hand-and-library`: the `exchange-hand-and-library` effect (`ResolutionContext.exchangeHandAndLibrary`): both lists read first, then each card to the other zone (rule 701.12d; not a draw). Mordenkainen, with its Dog Illusion token (twice the hand, a `{ sum }` count).
+**Exchange a hand and a library (2026-11-13).** `effect:exchange-hand-and-library`: the `exchange-hand-and-library` effect (`ResolutionContext.exchangeHandAndLibrary`): both lists read first, then each card to the other zone (rule 701.12d; not a draw). Mordenkainen, with its Dog Illusion token (twice the hand, a `{ sum }` count). Since 2026-11-18 the general `exchange-zones` (below).
 **Cumulative upkeep paid by an act (2026-11-13).** `cost:cumulative-upkeep-opponent-gains-life`: `cumulativeUpkeep({ doing, text })`, the `unless` option's `doing` as a `repeat` of the act `times` the age counters, each pass with its own choices (rule 702.24a). Wall of Shards. `test/cumulative-upkeep-acts.test.ts`.
 
 **Behold two creatures of a chosen type (2026-11-13).** Part of `cost:choose-creature-type-as-cast`: `BeholdSpec.shareCreatureType` — the beheld share a creature type (`together` "share" over `Game.creatureTypesOf`), and the shared one, asked only when there are several (`choose-creature-type`'s `forCost`), is the spell's `chosenCreatureType`; a search's `instead.filter` now reads its source (`ofChosenType`). Celestial Reunion. Left of the key: a type chosen as it's cast before targets (Selective Snare, Aphetto Dredging) and Caller of the Hunt's. `test/behold-shared-type.test.ts`.

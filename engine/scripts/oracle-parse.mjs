@@ -3760,7 +3760,14 @@ export function parseSentence(sentence, ctx) {
   // the total mana value of the cards exiled this way is 13 or less, you may
   // cast any number of spells from among those cards without paying their
   // mana costs." — read over every card the repeat exiled.
-  if (/^shuffle your library\.$/i.test(s)) return { kind: "shuffle-library" };
+  if (/^(?:then )?shuffle your library\.$/i.test(s)) return { kind: "shuffle-library" };
+  // "Exchange your graveyard and library" (Morality Shift), "exchange your
+  // hand and graveyard" (Harness Infinity), "exchange your hand and library"
+  // (Mordenkainen): rule 701.12d.
+  const exchanged = /^exchange your (hand|graveyard|library) and (hand|graveyard|library)\.$/i.exec(s);
+  if (exchanged !== null && exchanged[1].toLowerCase() !== exchanged[2].toLowerCase()) {
+    return { kind: "exchange-zones", zones: [exchanged[1].toLowerCase(), exchanged[2].toLowerCase()] };
+  }
   if (/^as many times as you choose, you may exile the top card of your library\.$/i.test(s)) {
     return {
       kind: "may",

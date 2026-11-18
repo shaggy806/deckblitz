@@ -47,7 +47,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "exchange-hand-and-library" },
+          { kind: "exchange-zones", zones: ["hand", "library"] },
           { kind: "shuffle-library" },
           {
             kind: "create-emblem",
