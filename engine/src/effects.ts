@@ -19682,7 +19682,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (isAmountCompare(record)) {
       const operand = record["n"] as { readonly amount: EffectAmount };
       if (inReflexiveTargets && readsSourceItself(operand.amount)) return record;
-      return { ...record, n: amountValue(operand.amount, ctx) };
+      // The amount's own references bound first, as an amount anywhere else
+      // in the effect is: Tetsuo, Imperial Champion's "mana value less than
+      // or equal to the greatest mana value among Equipment attached to
+      // Tetsuo" is an aggregate over `wasAttachedTo: "source"`, which read
+      // unbound would match nothing.
+      return { ...record, n: amountValue(walk(operand.amount) as EffectAmount, ctx) };
     }
     if (isBareXCompare(record)) return { ...record, n: ctx.x };
     // A delayed ability binds as it resolves, when its source may be a new
