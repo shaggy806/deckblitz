@@ -374,7 +374,11 @@ describe("the pool", () => {
     for (const def of [...POOL_CARDS, ...TOKEN_CARDS]) {
       for (const st of def.static ?? []) {
         const scope = st.affects as { readonly filter?: Record<string, unknown> } | undefined;
-        const ref = scope?.filter?.["sharesColorWith"] ?? scope?.filter?.["sameNameWith"] ?? scope?.filter?.["attachedToObject"];
+        const ref =
+          scope?.filter?.["sharesColorWith"] ??
+          scope?.filter?.["sameNameWith"] ??
+          scope?.filter?.["attachedToObject"] ??
+          scope?.filter?.["notObject"];
         if (ref !== undefined && ref !== "source" && ref !== "attached") bad.push(`${def.name}: ${JSON.stringify(ref)}`);
       }
     }

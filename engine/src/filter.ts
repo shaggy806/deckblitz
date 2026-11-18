@@ -711,6 +711,16 @@ export interface CardFilter {
    * (Marooned — a `be-beamed-up` prohibition). */
   readonly notObjects?: readonly ObjectId[];
   /**
+   * It isn't the object an {@link ObjectRef} names as the effect applies —
+   * "sacrifice an artifact **other than Dire Blunderbuss**" in the trigger the
+   * Equipment grants is `notObject: "granter"` (rule 201.5a: the name means
+   * that object, so a second Dire Blunderbuss can still go). Bound into
+   * `notObjects` by `bindDynamicCompares`; once that object has left the
+   * battlefield it's gone (rule 400.7) and nothing is left out. Unbound, it
+   * leaves nothing out.
+   */
+  readonly notObject?: ObjectRef;
+  /**
    * With `sameNameAsTarget`: the namesakes must be tokens, the target itself
    * needn't be — Legions to Ashes' "exile target nonland permanent an opponent
    * controls **and all tokens** that player controls with the same name as

@@ -735,7 +735,8 @@ in the public zone it was expected in, and otherwise as it last existed (rules 6
 **Relational `CardFilter` clauses take refs too** (`filter.ts`): `sameNameWith` (a slot or
 trigger object also matches itself, as "that permanent and all others with the same name" needs),
 `sharesColorWith`, `sharesCardTypeWith` / `sharesPermanentTypeWith` / `sharesCreatureTypeWith` /
-`sharesLandTypeWith`, `attachedToObject`, and `controlledByRef: PlayerRef` ("all lands that player
+`sharesLandTypeWith`, `attachedToObject`, `notObject` ("an artifact **other than Dire Blunderbuss**" in
+the trigger it grants: `notObject: "granter"`, that one object, not a namesake), and `controlledByRef: PlayerRef` ("all lands that player
 controls"; `controlledByTarget` on an effect is the older form, for a slot, and reads the whole filter
 from that player's side), and `ownedByRef: PlayerRef` (Expropriate's "choose a permanent **owned by the
 voter**", `"that-player"` in a `for-each-vote`, the caster choosing). All are bound as the effect applies; only `"source"`, `"attached"` and

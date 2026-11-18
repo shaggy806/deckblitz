@@ -19041,6 +19041,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesColorWith" in value ||
       "sharesColorWithMana" in value ||
       "attachedToObject" in value ||
+      "notObject" in value ||
       "attachedToPlayerRef" in value ||
       "controlledByRef" in value ||
       "ownedByRef" in value ||
@@ -19405,6 +19406,16 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (walked["attachedToObject"] !== undefined) {
       const { attachedToObject: ref, ...rest } = walked;
       walked = { ...rest, attachedToRef: objectRefRead(ref as ObjectRef, ctx) ?? null };
+    }
+    // "An artifact other than Dire Blunderbuss": that object, while it's
+    // still the same one (rule 400.7) — one that left and came back is new.
+    if (walked["notObject"] !== undefined) {
+      const { notObject: ref, ...rest } = walked;
+      const read = objectRefRead(ref as ObjectRef, ctx);
+      const gone =
+        ref === "granter" ? ctx.granterLost : ref === "source" ? ctx.sourceLost : ref === "trigger-object" ? ctx.triggerObjectLost : false;
+      const spared = read?.kind === "object" && gone !== true ? [read.object] : [];
+      walked = { ...rest, notObjects: [...((rest["notObjects"] as readonly ObjectId[] | undefined) ?? []), ...spared] };
     }
     // "Curses attached to that player": the player the ref names as this
     // applies; nobody, nothing.
