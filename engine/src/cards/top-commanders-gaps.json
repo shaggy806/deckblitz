@@ -3040,7 +3040,8 @@
   "effect:return-exiled-under-your-control",
   "effect:exile-target-card-play-until-next-turn",
   "filter:has-awaken",
-  "effect:prohibit-abilities-permanent"
+  "effect:prohibit-abilities-permanent",
+  "effect:face-down-linked-exile-source-controller-looks"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

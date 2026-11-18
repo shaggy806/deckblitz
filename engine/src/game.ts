@@ -13193,7 +13193,9 @@ export class Game {
           object.exiledFaceDown =
             awaiting.faceDownLooks === undefined
               ? { lookers: [player], group: faceDownGroup }
-              : { lookers: awaiting.faceDownLooks === "chooser" ? [player] : [], group: faceDownGroup, lookersOnly: true };
+              : awaiting.faceDownLooks === "source-controller"
+                ? { lookers: this.linkedSourceController(awaiting.exileLink), group: faceDownGroup }
+                : { lookers: awaiting.faceDownLooks === "chooser" ? [player] : [], group: faceDownGroup, lookersOnly: true };
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
           // "You may play that card for as long as it remains exiled"
           // (Praetor's Grasp): a permission dies with any move, so after it.
@@ -47781,7 +47783,7 @@ controlledBy,
      * chooser's — see `look-and-choose`'s `under`. */
     underOwners = false,
     /** See `look-and-choose`'s `faceDownLooks`. */
-    faceDownLooks?: "chooser" | "nobody",
+    faceDownLooks?: "chooser" | "nobody" | "source-controller",
     /** See `look-and-choose`'s `prompt`. */
     authoredPrompt?: string,
     /** See `look-and-choose`'s `givesUp`. */
@@ -72779,6 +72781,19 @@ controlledBy,
         card.exiledFaceDown = { ...faceDown, lookers: [...faceDown.lookers, controller] };
       }
     }
+  }
+
+  /**
+   * Who controls the permanent a card is being exiled with, still in the
+   * stint the link names (rule 607.2a): Kheru Mind-Eater's "you may look at
+   * cards exiled with this creature" lets its controller look, not the player
+   * who exiled the card from their hand. Nobody, once it has left the
+   * battlefield: the static that let them look is gone with it.
+   */
+  private linkedSourceController(link: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined): PlayerId[] {
+    const source = link === undefined ? undefined : this.state.objects[link.source];
+    if (source === undefined || link === undefined || source.zone !== "battlefield") return [];
+    return (source.zoneChangeCount ?? 0) === link.zoneChangeCount ? [source.controller] : [];
   }
 
   /**

@@ -4188,7 +4188,7 @@ export type AwaitingDecision =
       readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
       /** For `destination: "exile-face-down"`: see `look-and-choose`'s
        * `faceDownLooks`. */
-      readonly faceDownLooks?: "chooser" | "nobody";
+      readonly faceDownLooks?: "chooser" | "nobody" | "source-controller";
       /** For `destination: "exile-face-down"`: the chosen cards go into exile
        * in a random order, a shuffled face-down pile (`search-library`'s
        * `shufflePile`). */

@@ -23996,3 +23996,30 @@ describe("a permanent petrified for good", () => {
     expect(trap.complete).toBe(false);
   });
 });
+
+describe("another player's face-down pick its source's controller looks at (Kheru Mind-Eater)", () => {
+  it("reads the trigger's look-and-choose with faceDownLooks: source-controller, and the play permission", () => {
+    const kheru = parseFace({
+      name: "Kheru Mind-Eater",
+      type_line: "Creature — Vampire",
+      oracle_text:
+        "Menace\nWhenever this creature deals combat damage to a player, that player exiles a card from their hand face down.\nYou may look at cards exiled with this creature, and you may play lands and cast spells from among those cards.",
+      mana_cost: "{2}{B}",
+      colors: ["B"],
+      power: "1",
+      toughness: "3",
+    }) as unknown as { complete: boolean; triggered: { effect: unknown }[]; static: { mayPlay?: unknown }[] };
+    expect(kheru.complete).toBe(true);
+    expect(kheru.triggered[0].effect).toEqual({
+      kind: "look-and-choose",
+      player: "that-player",
+      zone: "hand",
+      min: 1,
+      max: 1,
+      destination: "exile-face-down",
+      leftover: "stay",
+      faceDownLooks: "source-controller",
+    });
+    expect(kheru.static[0].mayPlay).toEqual({ from: "exile", play: true, filter: {}, linked: true });
+  });
+});

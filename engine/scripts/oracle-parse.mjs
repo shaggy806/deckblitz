@@ -8435,6 +8435,21 @@ export function parseSentence(sentence, ctx) {
       effect: { kind: "look-and-choose", player: "that-player", zone: "hand", min: n, max: n, destination: "exile", unlinked: true, leftover: "stay" },
     };
   }
+  // "That player exiles a card from their hand face down" (Kheru Mind-Eater,
+  // after a combat-damage trigger): their pick, linked to ~, whose controller
+  // may look at it (406.3) — "you may look at cards exiled with ~" beside it.
+  if (re(`that player exiles a card from their hand face down`).test(s)) {
+    return {
+      kind: "look-and-choose",
+      player: "that-player",
+      zone: "hand",
+      min: 1,
+      max: 1,
+      destination: "exile-face-down",
+      leftover: "stay",
+      faceDownLooks: "source-controller",
+    };
+  }
 
   // "+1/+1 if it has flying, +1/+1 if it has first strike, and so on for …"
   // (Akroma, Vision of Ixidor): the amount once a listed ability
@@ -20870,8 +20885,14 @@ function parseFaceAsWritten(face, ctx = {}) {
         if (node.kind === "exile" && typeof node.target === "number" && node.untilSourceLeaves !== true) node.linked = true;
         if (node.kind === "look-and-choose" && node.destination === "exile" && node.zone === "hand" && node.unlinked === true) delete node.unlinked;
         // "You may look at cards exiled with this creature" (Bane Alley
-        // Broker): the chooser and whoever comes to control it.
-        if (node.kind === "look-and-choose" && /\byou may look at cards exiled with\b/i.test(face.oracle_text ?? "")) delete node.faceDownLooks;
+        // Broker): the chooser and whoever comes to control it — but another
+        // player's pick (Kheru Mind-Eater's) keeps `"source-controller"`.
+        if (
+          node.kind === "look-and-choose" &&
+          node.faceDownLooks !== "source-controller" &&
+          /\byou may look at cards exiled with\b/i.test(face.oracle_text ?? "")
+        )
+          delete node.faceDownLooks;
         Object.values(node).forEach(linkedExile);
       }
     };
@@ -24150,6 +24171,16 @@ function parseStatic(line, text) {
       },
       text,
     };
+  }
+  // "You may look at cards exiled with ~, and you may play lands and cast
+  // spells from among those cards." (Kheru Mind-Eater): the look is the
+  // exiling effect's `faceDownLooks`; this is Nightveil Specter's permission.
+  if (
+    /^You may look at cards exiled with (?:~|this (?:enchantment|artifact|creature)), and you may play lands and cast spells from among those cards\.$/.test(
+      line,
+    )
+  ) {
+    return { affects: { scope: "self" }, mayPlay: { from: "exile", play: true, filter: {}, linked: true }, text };
   }
   // …and each player plays only the cards they exiled with it.
   if (
