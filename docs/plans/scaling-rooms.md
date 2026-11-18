@@ -257,6 +257,48 @@ A player reading hidden cards on their own device is not an objection to either 
 prototyped, and whether a browser freezes a hidden tab's worker while it hosts is unchecked.
 A table of people alone has nothing worth moving either way.
 
+### A copy of the room on every player's device (the user, 2026-11-18)
+
+**The direction is the whole room on the host's device** (the user), with a further idea: every
+player's device holds a copy of the room, the bots staying on the host, so the host's role can
+pass to someone else, and so a player's own action takes effect at once and is undone only if the
+host disagrees ("somewhat similarly to my understanding of rollback netcode"). Checked the same
+day, not built:
+
+- **A copy given only the actions stays identical.** Six four-player games played by v1 on the
+  starter decks (31-41 turns, 1,424-1,833 actions each): a second `Game` built from the same seed
+  and decks and fed each action as a room would (`dispatch`, then `advanceUntil(isSettled)`) was
+  byte-identical to the first at every check, one every 25 actions. A third, restored at turn 8
+  from the state sent as JSON, held the same content to the end (its objects' keys in another
+  order).
+- **The wire carries actions, not frames**: 43 bytes an action on average, against a 50-80 KB
+  frame a seat. Applying one takes 0.2-0.5 ms, so a device can replay a whole game's log in about
+  half a second, which is how a reconnecting player or a spectator would catch up without being
+  sent a state at all.
+- **A local action is almost never wrong**, because only one player is ever asked
+  (`askedPlayer`): nobody else's action can land in between. The exceptions are the opening hands
+  (`mulligan` is asked of everyone at once, and the shuffles share one random stream, so the
+  order matters: those wait for the order), and what a player may do out of turn: concede, hand
+  their seat to a bot, change a setting the engine reads (`setOrdersOwnTriggers`). Undoing costs
+  a state copy and a rebuilt `Game`, about 5 ms. So this is lockstep rather than rollback:
+  nothing is predicted, and a cancel is the rare case.
+- **What it makes of the design.** Something has to put racing inputs in one order, and the
+  server is already where every message passes: it stamps each action's place and keeps the log
+  (~65 KB a game), with no engine. The host is then only the device that runs the bots, so
+  passing the role on is another device starting to run them, with nothing to hand over. A
+  player's own click costs no network at all, where a host with thin guests would cost each
+  guest two trips a click (today's server room costs one).
+- **What it needs.** Every player's device loads the engine and the pool in a worker, as only a
+  solo player's does today (0.3 s on the dev PC, 2.7 s and ~250 MB on the test laptop:
+  `local-rooms.md`). `Room.settle` has to come apart into what every copy does and what only the
+  host does (the bots and their pacing). And the copies must agree across browsers and builds,
+  which is untested: five sorts in three files read the browser's locale (`localeCompare` in
+  `card-names.ts`, `decisions/choose-creature-type.ts` and `game.ts`'s named-card options, each
+  ordering the choices a decision offers), a blank target slot
+  doesn't survive JSON (`BACKLOG.md`), and a player who loads the page after a deploy has a newer
+  engine than the table. The answer to all three is the user's "unless the host disagrees": the
+  devices compare a hash of the state now and then, and one that differs takes the host's.
+
 ## Order and checks
 
 0 → 1 → 2 → 3 → 4; 5 only on need. Each phase re-runs the load harness and compares against the
