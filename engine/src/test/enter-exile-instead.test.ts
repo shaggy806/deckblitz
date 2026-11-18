@@ -199,6 +199,26 @@ describe("Mistcaller: the same replacement until end of turn, from a resolved ab
     expect(zone(game, bears)).toBe("battlefield");
   });
 
+  it("a token copy's, sacrificed and gone, is still ordered against an entering permanent's own actions", () => {
+    const { game, a } = table();
+    lands(game, "Swamp", 2);
+    const original = spawn(game, "Mistcaller", A);
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1 }, [ref(original)]);
+    const token = game.battlefield.find((id) => game.state.objects[id].isToken && game.state.objects[id].cardName === "Mistcaller");
+    expect(token).toBeDefined();
+    activate(game, token!);
+    expect(game.state.objects[token!]).toBeUndefined();
+    const theirs = spawn(game, "Grizzly Bears", B);
+    give(game, theirs, { "+1/+1": 2 });
+    const sin = toGraveyard(game, "Sin, Unending Cataclysm", A);
+    const asked = ordering(a, "exile");
+    pickFromZone(a, sin);
+    cast(game, toHand(game, "Exhume"));
+    // Named as `enterCopiersFor` names a gone source.
+    expect(asked).toEqual([["An effect", "Sin, Unending Cataclysm"]]);
+    expect(zone(game, sin)).toBe("exile");
+  });
+
   it("ends with the turn", () => {
     const { game } = table();
     sacrificed(game);

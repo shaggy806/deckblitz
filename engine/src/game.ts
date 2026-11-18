@@ -70155,7 +70155,11 @@ controlledBy,
       return false;
     }
     if (this.state.awaiting !== null) return false;
-    const exiler = this.state.objects[exilers[0]];
+    // A resolved one's source may be a token that has ceased to exist since
+    // (a sacrificed token copy of Mistcaller): named as `enterCopiersFor`
+    // names one.
+    const exiler = this.state.objects[exilers[0]] as GameObject | undefined;
+    const exilerName = exiler?.cardName ?? "An effect";
     this.state.awaiting = {
       kind: "replacement-order",
       player: chooser,
@@ -70163,10 +70167,10 @@ controlledBy,
       options: [
         {
           key: "exile",
-          name: exiler.cardName,
+          name: exilerName,
           text: "exiles it instead",
           result: `${object.cardName} is exiled and does nothing as it enters`,
-          object: exiler.id,
+          ...(exiler !== undefined ? { object: exiler.id } : {}),
         },
         {
           key: "own",
