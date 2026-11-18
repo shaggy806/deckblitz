@@ -3089,7 +3089,9 @@
   "amount:exiled-as-cost-spell-mana-value",
   "cost:ability-cost-increase-per-count",
   "effect:becomes-color-of-mana-produced",
-  "decision:each-player-names-before-reveals"
+  "decision:each-player-names-before-reveals",
+  "decision:each-player-names-before-reveals",
+  "effect:rotate-chosen-permanents"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
