@@ -23183,6 +23183,21 @@ describe("a face-down pile searched out, and draws replaced by its top card", ()
     });
   });
 
+  it("reads Sanctuary Blade whole: a color chosen as it becomes attached, protection from the last one", () => {
+    const blade = face(
+      "Artifact — Equipment",
+      "As this Equipment becomes attached to a creature, choose a color.\nEquipped creature gets +2/+0 and has protection from the last chosen color.\nEquip {3}",
+    );
+    expect(blade.complete).toBe(true);
+    expect(blade.asBecomesAttached).toEqual({
+      effect: { kind: "choose-value", value: "color", then: { kind: "note", word: "$chosenColor" } },
+    });
+    expect(blade.static.map((s) => [s.grantPt, s.condition, s.protection])).toEqual([
+      [[2, 0], undefined, undefined],
+      ...["W", "U", "B", "R", "G"].map((color) => [undefined, { kind: "chosen-on-enter", value: color }, { colors: [color] }]),
+    ]);
+  });
+
   it("leaves a pile not shuffled, or no shuffle of the library after, unread", () => {
     const unshuffled = face(
       "Enchantment",

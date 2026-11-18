@@ -32571,7 +32571,13 @@ export class Game {
     priority.passed = [];
     if (this.state.zones.shared.stack.length > 0) {
       this.resolveTopOfStack();
-      if (this.state.suspendedResolutions.length === 0) this.runStateBasedActions();
+      // Not ahead of an "as this becomes attached" choice the resolution
+      // left (Sanctuary Blade's color): `prepareForPriority` makes it, then
+      // checks them — they're checked only as a player would get priority
+      // (rule 704.3), and the choice is part of the attaching.
+      if (this.state.suspendedResolutions.length === 0 && this.state.pendingAsBecomesAttached === undefined) {
+        this.runStateBasedActions();
+      }
       if (this.state.result.over) {
         priority.active = false;
         priority.holder = null;

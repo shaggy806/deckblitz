@@ -19254,6 +19254,29 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.chooseOnEnter = ["W", "U", "B", "R", "G"];
       continue;
     }
+    // "As this Equipment becomes attached to a creature, choose a color"
+    // (Sanctuary Blade): Psychic Paper's `asBecomesAttached`, the color kept
+    // on it as the last chosen (`note`'s `word`), and "protection from the
+    // last chosen color" one static per color, live only for its own.
+    if (line === "As ~ becomes attached to a creature, choose a color.") {
+      out.asBecomesAttached = { effect: { kind: "choose-value", value: "color", then: { kind: "note", word: CHOSEN_COLOR } } };
+      continue;
+    }
+    if (
+      out.asBecomesAttached !== undefined &&
+      (m = /^Equipped creature gets \+(\d+)\/\+(\d+) and has protection from the last chosen color\.$/.exec(line))
+    ) {
+      out.static.push({ affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], text: printed(raw) });
+      for (const color of ["W", "U", "B", "R", "G"]) {
+        out.static.push({
+          affects: { scope: "attached" },
+          condition: { kind: "chosen-on-enter", value: color },
+          protection: { colors: [color] },
+          text: printed(raw),
+        });
+      }
+      continue;
+    }
     // "As ~ enters, choose odd or even" (Gollum, Riddle Master): read back by
     // a filter's `manaValueParity: "chosen"`.
     if (line === "As ~ enters, choose odd or even.") {

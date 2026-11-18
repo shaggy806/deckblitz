@@ -2999,7 +2999,8 @@
   "mechanic:face-down-pile",
   "replacement:next-draw-from-exiled-pile",
   "effect:that-player-returns-permanent",
-  "effect:repeat-unless-paid"
+  "effect:repeat-unless-paid",
+  "decision:choose-color-on-attach"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

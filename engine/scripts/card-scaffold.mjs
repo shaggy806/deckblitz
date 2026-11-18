@@ -252,6 +252,7 @@ function faceSource(face, ctx) {
     castWhileSearchingLibrary: parsed.castWhileSearchingLibrary,
     morph: parsed.morph,
     asTurnedFaceUp: parsed.asTurnedFaceUp,
+    asBecomesAttached: parsed.asBecomesAttached,
     disturb: parsed.disturb,
     suspend: parsed.suspend,
     selfCostReduction: parsed.selfCostReduction,
