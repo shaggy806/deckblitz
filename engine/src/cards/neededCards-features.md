@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A revealed card sent by its mana value — found built 2026-11-18
+
+The key `effect:reveal-until-found-destination-by-condition` needed no engine code: `reveal-until` with no `put`,
+its `then` a `conditional` on target 0 (the card found) — `put-onto-battlefield` of 0, else `return-to-hand` of 0
+`from: "library"`. Part in Friendship (rank 14165); the scaffolder reads "if its mana value is [compare] the number
+of [type] you control, put it onto the battlefield. Otherwise, put it into your hand."
+`test/reveal-until-by-mana-value.test.ts`.
+
 ### Exchanging any two of a player's hand, library and graveyard — built 2026-11-18
 
 The keys `effect:exchange-graveyard-and-library` and `effect:exchange-hand-and-graveyard`: the

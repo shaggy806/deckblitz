@@ -1291,6 +1291,7 @@
   "trigger:saga-final-chapter",
   "bug:saga-completion-sacrifice",
   "effect:reveal-until",
+  "effect:reveal-until-found-destination-by-condition",
   "cost:mana-ability-complex-costs",
   "keyword:exhaust",
   "zone:impulse-permission-options",

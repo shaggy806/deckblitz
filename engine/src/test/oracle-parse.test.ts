@@ -22090,6 +22090,36 @@ describe("a cast trigger's count as counters to enter with", () => {
     expect(harness.exileOnResolve).toBe(true);
   });
 
+  it("a revealed card's destination by its mana value (Part in Friendship)", () => {
+    const part = parseFace(
+      {
+        name: "Part in Friendship",
+        type_line: "Enchantment",
+        mana_cost: "{4}{G}",
+        oracle_text:
+          "Whenever a nontoken creature you control dies, reveal cards from the top of your library until you reveal a creature card. If its mana value is less than or equal to the number of lands you control, put it onto the battlefield. Otherwise, put it into your hand. Put the rest on the bottom of your library in a random order. This ability triggers only once each turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(part.complete).toBe(true);
+    expect(part.triggered[0].oncePerTurn).toBe(true);
+    expect(part.triggered[0].effect).toEqual({
+      kind: "reveal-until",
+      filter: { type: "creature" },
+      then: {
+        kind: "conditional",
+        condition: {
+          kind: "target",
+          index: 0,
+          filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "land", controlledBy: "you" } } } } },
+        },
+        then: { kind: "put-onto-battlefield", target: 0 },
+        else: { kind: "return-to-hand", target: 0, from: "library" },
+      },
+      rest: "bottom-random",
+    });
+  });
+
   it("counters it enters with only if its mana cost contains {X} (The First Tyrannic War's chapter I)", () => {
     const r = parseEffect(
       "You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.",

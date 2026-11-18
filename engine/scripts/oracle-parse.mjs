@@ -16347,6 +16347,46 @@ function revealUntilAt(sentences, i, ctx) {
   }
   if (then !== undefined) j += 1;
   else if (aimedAt !== null) return null;
+  // "If its mana value is less than or equal to the number of lands you
+  // control, put it onto the battlefield. Otherwise, put it into your hand.
+  // Put the rest on the bottom of your library in a random order." (Part in
+  // Friendship): where the card found goes, by a compare on it as it resolves.
+  const byValue =
+    then === undefined
+      ? /^if its mana value is (less than or equal to|greater than or equal to|less than|greater than|equal to) the number of (.+?) you control, put it onto the battlefield( tapped)?\.$/i.exec(
+          sentences[j] ?? "",
+        )
+      : null;
+  if (byValue !== null && /^otherwise, put it into your hand\.$/i.test(sentences[j + 1] ?? "")) {
+    const rested = sentenceRe(`put the rest ${REST}`).exec(sentences[j + 2] ?? "");
+    const counted = parseTypePhrase(byValue[2]);
+    if (rested === null || counted === null || Object.keys(counted).length === 0) return null;
+    const op = {
+      "less than or equal to": "lte",
+      "greater than or equal to": "gte",
+      "less than": "lt",
+      "greater than": "gt",
+      "equal to": "eq",
+    }[byValue[1].toLowerCase()];
+    return {
+      effect: {
+        kind: "reveal-until",
+        filter,
+        then: {
+          kind: "conditional",
+          condition: {
+            kind: "target",
+            index: 0,
+            filter: { manaValue: { op, n: { amount: { countOf: { ...counted, controlledBy: "you" } } } } },
+          },
+          then: { kind: "put-onto-battlefield", target: 0, ...(byValue[3] !== undefined ? { enterTapped: true } : {}) },
+          else: { kind: "return-to-hand", target: 0, from: "library" },
+        },
+        rest: restOf(rested[1]),
+      },
+      used: j + 3 - i,
+    };
+  }
   const close = sentences[j] ?? "";
   let puts = sentenceRe(`put that card (into your hand|onto the battlefield)( tapped)? and the rest ${REST}`).exec(close);
   let where = {};
