@@ -45442,10 +45442,12 @@ controlledBy,
           found.push(id);
           reached += measure === "mana-value" ? manaValueOfObject(this.registry, this.state.objects[id]) : 1;
         };
+        // A token shuffled in this resolution isn't a card (rule 111.1):
+        // nothing reveals or exiles it, as `revealUntil`.
+        const isCard = (id: ObjectId): boolean => this.state.objects[id]?.isToken !== true;
         if (exile === true) {
           // One at a time, face up: each is in exile before the next.
-          while (reached < count && library.length > 0) {
-            const top = library[0];
+          for (let top = library.find(isCard); reached < count && top !== undefined; top = library.find(isCard)) {
             this.moveObject(top, "exile");
             revealed.push(top);
             if (matches(top)) find(top);
@@ -45454,6 +45456,7 @@ controlledBy,
         }
         for (const id of library) {
           if (reached >= count) break;
+          if (!isCard(id)) continue;
           revealed.push(id);
           if (matches(id)) find(id);
         }
@@ -53377,14 +53380,18 @@ controlledBy,
     controller: PlayerId,
     spec: Extract<EffectSpec, { kind: "reveal-until" }>,
   ): { readonly revealed: readonly ObjectId[]; readonly hit: ObjectId | null } {
+    // A token shuffled in this resolution sits there until the next
+    // state-based check (rule 704.5d), but it isn't a card (rule 111.1):
+    // nothing reveals or exiles it — Mirror-Mad Phantasm's ruling, a token
+    // finding no card of its name.
     const library = this.state.zones.perPlayer[owner].library;
+    const isCard = (id: ObjectId): boolean => this.state.objects[id]?.isToken !== true;
     const revealed: ObjectId[] = [];
     let hit: ObjectId | null = null;
     const matches = (id: ObjectId): boolean =>
       matchesFilter(this.state, this.registry, id, spec.filter, { you: controller });
     if (spec.exile === true) {
-      while (library.length > 0) {
-        const top = library[0];
+      for (let top = library.find(isCard); top !== undefined; top = library.find(isCard)) {
         this.moveObject(top, "exile");
         revealed.push(top);
         if (matches(top)) {
@@ -53394,6 +53401,7 @@ controlledBy,
       }
     } else {
       for (const id of library) {
+        if (!isCard(id)) continue;
         revealed.push(id);
         if (matches(id)) {
           hit = id;
