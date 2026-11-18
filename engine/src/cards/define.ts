@@ -217,6 +217,12 @@ export interface CopyOnEnter {
   /** "Enter **tapped** as a copy" (Vesuva): an additional effect of copying
    * (rule 707.9e), so it enters tapped only if it copies something. */
   readonly tapped?: true;
+  /** "You may have The Fourteenth Doctor enter as a copy of … **If you do,
+   * it gains haste until end of turn**": an additional effect of copying
+   * (rule 707.9e), as `tapped` is — only if it copies something, and not a
+   * copiable value, so a later copy of it doesn't have haste. Granted as it
+   * enters, with a timestamp of then (rule 613.7). */
+  readonly gainsHaste?: true;
   /**
    * "…except it enters with an additional +1/+1 counter on it if it's a
    * creature" (Spark Double), "with X additional +1/+1 counters" (Altered

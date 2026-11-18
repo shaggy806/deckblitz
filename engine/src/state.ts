@@ -988,6 +988,9 @@ export interface GameObject {
      * each `ifType` judged once it's the copy. */
     readonly copyEnter?: {
       readonly tapped?: true;
+      /** It gains haste until end of turn as it enters
+       * (`CopyOnEnter.gainsHaste`). */
+      readonly gainsHaste?: true;
       readonly counters?: readonly { readonly kind: string; readonly amount: number; readonly ifType?: CardType }[];
       /** The copy lasts until end of turn (`CopyOnEnter.untilEndOfTurn`). */
       readonly untilEndOfTurn?: true;

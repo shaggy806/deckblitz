@@ -8679,6 +8679,7 @@ export class Game {
       ...(copied !== undefined &&
       spec !== null &&
       (spec.tapped === true ||
+        spec.gainsHaste === true ||
         spec.counters !== undefined ||
         spec.copiedCounters === true ||
         spec.untilEndOfTurn === true ||
@@ -8687,6 +8688,7 @@ export class Game {
         ? {
             copyEnter: {
               ...(spec.tapped === true ? { tapped: true as const } : {}),
+              ...(spec.gainsHaste === true ? { gainsHaste: true as const } : {}),
               ...(spec.untilEndOfTurn === true ? { untilEndOfTurn: true as const } : {}),
               ...(spec.untilTurnedFaceDown === true ? { untilTurnedFaceDown: true as const } : {}),
               ...(spec.counters !== undefined || spec.copiedCounters === true
@@ -74052,6 +74054,11 @@ controlledBy,
         object.counters[c.kind] = (object.counters[c.kind] ?? 0) + c.amount;
       }
       if (entering.riotHaste) this.gainRiotHaste(id);
+      // "If you do, it gains haste until end of turn" (The Fourteenth Doctor):
+      // copying's additional effect (rule 707.9e), only if it copied.
+      if (enterChoice?.copyOf !== undefined && enterChoice.copyOf !== null && enterChoice.copyEnter?.gainsHaste === true) {
+        this.grantKeyword({ kind: "object", object: id }, "haste", "end-of-turn", false);
+      }
       // "Instead it enters tapped and attacking" (rule 508.4), as it enters.
       if (entering.attacking === true) this.putIntoAttack([id], object.controller, "choose");
       if (entering.tributeUnpaid) object.tributeUnpaid = true;
