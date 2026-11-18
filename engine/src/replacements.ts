@@ -1367,7 +1367,12 @@ export interface DamageMultiplierReplacement {
    * in `GameState.replacementAnswers` for that event. Where nothing can be
    * asked (damage a mana ability deals), it's taken for damage to its
    * controller and declined for anyone else's, as `bestDamageOrder` answers
-   * an order no question asks. With `prevent` only.
+   * an order no question asks. With `prevent`, or `redirect` (rule 614.9):
+   * Blood of the Martyr's "until end of turn, if damage would be dealt to any
+   * creature, **you may** have that damage dealt to you instead", a
+   * `replacement-effect` whose controller is asked the same way — and asked
+   * even of damage that can't be prevented, since a redirection isn't
+   * prevention.
    */
   readonly may?: true;
 }
@@ -1413,12 +1418,14 @@ export interface DamagePrevention {
  * this permanent (`"self"` — Palisade Giant's "all damage that would be dealt
  * to you and other permanents you control is dealt to this creature instead"),
  * to the permanent it's attached to (`"attached"` — Pariah), or to the
- * recipient's controller (`"recipient-controller"` — Treacherous Link). Does
+ * recipient's controller (`"recipient-controller"` — Treacherous Link), or to
+ * the replacement's controller (`"you"` — Blood of the Martyr's "you may have
+ * that damage dealt to you instead", a `replacement-effect` with `may`). Does
  * nothing while that isn't a creature, planeswalker or battle on the
  * battlefield, or a player in the game, or is the recipient already; and
  * applies to a damage event once (614.5), so two Palisade Giants don't send it
  * back and forth.
  */
 export interface DamageRedirection {
-  readonly redirect: "self" | "attached" | "recipient-controller";
+  readonly redirect: "self" | "attached" | "recipient-controller" | "you";
 }

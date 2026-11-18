@@ -7987,7 +7987,10 @@ is "you may instead", only on events that can wait for the answer (draw, tokens,
 refuses it elsewhere. On `would-deal-damage` it's "you may prevent" (Battletide Alchemist's "if a source would deal damage to a
 player, you may prevent X of that damage, where X is the number of Clerics you control": `to: "player"`, `instead: { prevent: {
 count: { countOf: { subtype: "Cleric", controlledBy: "you" } } } }`, `may: true`), asked of its controller for each source and each
-recipient before an effect deals the damage and before combat damage; where nothing can ask, taken for its controller's own damage only. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
+recipient before an effect deals the damage and before combat damage; where nothing can ask, taken for its controller's own damage only.
+With `{ redirect }` it's "you may have that damage dealt to … instead", asked the same way, and of damage that can't be prevented too
+(a redirection isn't prevention): Blood of the Martyr is a `replacement-effect` for the turn of `{ event: "would-deal-damage", toFilter:
+{ type: "creature" }, instead: { redirect: "you" }, may: true }`. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
 `would-scry` (`{ who, instead }`). `would-draw` also takes `instruction: { atLeast }` (the whole draw: "one or more
 cards", "two or more", `"x"` the number) and `whileHandAtMost`; `would-create-token` takes `becomes: { effect, text? }` with
 `firstEachTurn` and `may` (Moonlit Meditation); `would-deal-damage` takes `ifAtLeast`.
@@ -8310,7 +8313,7 @@ The `prevent-damage` family makes the same record.
   `to: "attached"` / `fromAttached: true` the Aura's or Equipment's host (Inviolability; Muzzle), `toOther` "other permanents" (Palisade Giant);
   `to: "chosen-player-side"` the player chosen as it entered (`choosePlayerOnEnter`) or a permanent they control (Sawhorn Nemesis's doubling);
   `to: "between-chosen-players"` damage from a source one of the two chosen players controls (`chooseTwoPlayersOnEnter`) to the other or a permanent the other controls, either way (Bitter Feud);
-  `redirect: "self" | "attached" | "recipient-controller"` deals all of it there instead (Palisade Giant, Pariah, Treacherous Link — rule 614.9,
+  `redirect: "self" | "attached" | "recipient-controller" | "you"` deals all of it there instead (Palisade Giant, Pariah, Treacherous Link; `"you"` the replacement's controller — Blood of the Martyr — rule 614.9,
   once per event, 614.5); `instead: { prevent: 1 }` (Guardian Seraph, per source, 615.10), `{ prevent: { allBut: 1 } }` (Hyperion), `{ prevent: { half: "up" } }` (Gisela),
   `modify: { half: "down" }` (Ghosts of the Innocent — a replacement, so unpreventable damage is still halved), `ifAtMost: 3` with `prevent` (Callous Giant), `ifAtLeast: 3` with `modify: { set: 2 }` (Forethought Amulet).
   `then` runs with the damage's source as `"trigger-object"` (Swans of Bryn Argoll's "that source's controller") and the one it would have been dealt to as `"trigger-recipient"` (Vigor's "put a +1/+1 counter on that creature for each 1 damage prevented this way": `add-counter { target: "trigger-recipient", amount: "x" }`, `perEvent` for one follow-up per recipient over a simultaneous event); a player it would have been dealt to is `"trigger-player"` too, "that player" (Sokrates, Athenian Teacher's granted "…this creature's controller and that player each draw half that many cards": a `grant-static` of this replacement with `fromSelf`, `to: "player"`, then `draw { amount: { half: "x", round: "down" } }` and the same with `who: "trigger-player"`).

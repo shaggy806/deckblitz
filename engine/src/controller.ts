@@ -4885,7 +4885,19 @@ export class HeuristicBotController extends AutomaticController {
     // "You may prevent X of that damage" (Battletide Alchemist): for damage
     // to us, prevent; to anyone else, let it through.
     if (awaiting.mayPreventFor !== undefined) {
-      return [awaiting.mayPreventFor.recipient === view.player ? 0 : 1];
+      const redirect = awaiting.mayPreventFor.redirect;
+      if (redirect === undefined) return [awaiting.mayPreventFor.recipient === view.player ? 0 : 1];
+      // "You may have that damage dealt to you instead" (Blood of the
+      // Martyr): only to save a creature of ours it would kill, and only
+      // while it leaves us well alive — never for anyone else's.
+      const from = redirect.from;
+      const me = state.players[view.player];
+      if (from === undefined || state.objects[from]?.controller !== view.player) return [1];
+      if (redirect.to.kind !== "player" || redirect.to.player !== view.player) return [1];
+      const c = computeCharacteristics(state, this.registry, from);
+      const kills =
+        !c.keywords.has("indestructible") && redirect.amount >= lethalDamageLeft(c, state.objects[from]?.damageMarked ?? 0);
+      return [kills && me.life - redirect.amount >= 5 ? 0 : 1];
     }
     // The colour of the mana another player's mana ability gives us (Spectral
     // Searchlight's "they choose"): the one our hand wants, as a split's units

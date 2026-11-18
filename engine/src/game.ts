@@ -65650,7 +65650,24 @@ controlledBy,
       const by: DamageReplacer = { id: record.source, controller: record.owner, attachedTo: null };
       if (!this.damageReplacementReaches(r, by, source, target, combat, sourceLastKnown)) return;
       if (!this.shieldCovers(record, target, combat, source, sourceLastKnown)) return;
-      applying.push({ by, r, key, record, ...(record.next === true ? { spends: record } : {}) });
+      // "You may have that damage dealt to you instead" (Blood of the
+      // Martyr): its controller's answer for this source's damage to this
+      // recipient, this event, as a static's "you may" is.
+      let may: { readonly controller: PlayerId; readonly answers: string } | undefined;
+      if (r.may === true) {
+        const answers = `may-prevent:${key}:${source}:${target.kind === "player" ? target.player : target.object}`;
+        const answer = this.state.replacementAnswers?.[answers]?.[0];
+        if (answer === "decline") return;
+        if (answer === undefined) may = { controller: record.owner, answers };
+      }
+      applying.push({
+        by,
+        r,
+        key,
+        record,
+        ...(record.next === true ? { spends: record } : {}),
+        ...(may !== undefined ? { may } : {}),
+      });
     });
     const gate = (r: DamageMultiplierReplacement, spends: ActiveReplacement | undefined, by: ObjectId, key: string) => ({
       made: { key, by },
@@ -65731,11 +65748,11 @@ controlledBy,
     }
     // Static redirections (rule 614.9 — Palisade Giant, Pariah): to
     // somewhere legal that isn't where it's going already.
-    for (const { by, r, key } of applying) {
+    for (const { by, r, key, may } of applying) {
       if (!("redirect" in r.instead)) continue;
       const to = this.staticRedirectDestination(r.instead.redirect, by, target);
       if (to === undefined || sameTargetRef(to, target) || !this.redirectDestinationStands(to)) continue;
-      steps.push({ kind: "redirect", to, key, made: { key, by: by.id } });
+      steps.push({ kind: "redirect", to, key, made: { key, by: by.id }, ...(may !== undefined ? { may } : {}) });
     }
     // Prevention records (Healing Salve, Fog — rules 615.7, 615.8; 614.9).
     // Partial prevention by a "next time" one is `applying`'s, above.
@@ -65929,8 +65946,10 @@ controlledBy,
    * A "you may prevent" damage replacement not yet answered for this event
    * (Battletide Alchemist — `DamageMultiplierReplacement.may`), asked of its
    * controller as a `choose-modes` of `mayPreventFor`: prevent, or not. Says
-   * whether it asked. Damage that can't be prevented asks nothing (rule
-   * 615.12: the prevention would do nothing).
+   * whether it asked. Damage that can't be prevented asks nothing of a
+   * prevention (rule 615.12: it would do nothing), but still asks of a
+   * redirection, which isn't one (614.9 — Blood of the Martyr's "you may have
+   * that damage dealt to you instead").
    */
   private mayPreventionAsked(
     steps: readonly DamageStep[],
@@ -65940,30 +65959,61 @@ controlledBy,
     unpreventable: boolean,
     resume: ReplacementOrderResume,
   ): boolean {
-    if (unpreventable) return false;
-    const step = steps.find((s) => s.may !== undefined && this.state.players[s.may.controller]?.hasLost === false);
+    const step = steps.find(
+      (s) =>
+        s.may !== undefined &&
+        (!unpreventable || s.kind === "redirect") &&
+        this.state.players[s.may.controller]?.hasLost === false,
+    );
     if (step?.may === undefined) return false;
     const recipient = target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
     if (recipient === undefined) return false;
     const asked = step.may.controller;
     const sourceName = this.state.objects[source]?.cardName ?? "A source";
+    // A permanent is named with whose it is: two players' Grizzly Bears read
+    // alike otherwise.
     const victim =
-      target.kind === "player" ? (target.player === asked ? "you" : target.player) : this.state.objects[target.object].cardName;
+      target.kind === "player"
+        ? target.player === asked
+          ? "you"
+          : target.player
+        : `${recipient === asked ? "your" : `${recipient}'s`} ${this.state.objects[target.object].cardName}`;
     const prevents = step.kind === "prevent-n" ? `${Math.min(step.by, amount)} of the ${amount}` : `the ${amount}`;
     const none: EffectSpec = { kind: "sequence", effects: [] };
+    // A redirection: who'd be dealt it instead.
+    const to = step.kind === "redirect" ? step.to : undefined;
+    const instead =
+      to === undefined
+        ? undefined
+        : to.kind === "player"
+          ? to.player === asked
+            ? "you"
+            : to.player
+          : (this.state.objects[to.object]?.cardName ?? "it");
     this.state.awaiting = {
       kind: "choose-modes",
       player: asked,
       source: step.made.by,
       minModes: 1,
       maxModes: 1,
-      modes: [
-        { text: `Prevent ${prevents} damage ${sourceName} would deal to ${victim}`, effect: none },
-        { text: "Don't prevent it", effect: none },
-      ],
+      modes:
+        to === undefined
+          ? [
+              { text: `Prevent ${prevents} damage ${sourceName} would deal to ${victim}`, effect: none },
+              { text: "Don't prevent it", effect: none },
+            ]
+          : [
+              { text: `Have the ${amount} damage ${sourceName} would deal to ${victim} dealt to ${instead} instead`, effect: none },
+              { text: `Let it be dealt to ${victim}`, effect: none },
+            ],
       x: 0,
       targets: [],
-      mayPreventFor: { answers: step.may.answers, resume, recipient },
+      mayPreventFor: {
+        answers: step.may.answers,
+        resume,
+        recipient,
+        ...(to !== undefined ? { redirect: { to, amount, ...(target.kind === "object" ? { from: target.object } : {}) } } : {}),
+      },
     };
     return true;
   }
@@ -66140,6 +66190,8 @@ controlledBy,
         const controller = this.state.objects[target.object]?.controller;
         return controller === undefined ? undefined : { kind: "player", player: controller };
       }
+      case "you":
+        return { kind: "player", player: by.controller };
     }
   }
 

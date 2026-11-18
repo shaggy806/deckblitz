@@ -8946,3 +8946,13 @@ Each board's die comes up 4.
 ### Wheel of Sun and Moon: in a 4-player game, you arrange your milled cards
 - **Do:** Cast Wheel of Sun and Moon on yourself, then cast Thought Scour at yourself.
 - **Expect:** You, not a bot, are asked "Arrange these cards on the bottom of your library …" with Grizzly Bears and Hill Giant; once you confirm, your graveyard is still empty.
+
+## A "you may" damage redirection (2026-11-18)
+
+### Blood of the Martyr: you may take Lightning Bolt's damage to Bob's Grizzly Bears yourself
+- **Do:** Cast Blood of the Martyr, then Lightning Bolt at Bob's Grizzly Bears, then click "Have the 3 damage …".
+- **Expect:** As Lightning Bolt resolves, the banner reads "Blood of the Martyr — choose one" with "Have the 3 damage Lightning Bolt would deal to Bob's Grizzly Bears dealt to you instead" and "Let it be dealt to Bob's Grizzly Bears". You go to 37 and Bob's Grizzly Bears live, undamaged.
+
+### Blood of the Martyr: in a 4-player game, Pyroclasm asks once for each creature
+- **Do:** Cast Blood of the Martyr, then Pyroclasm. Take the damage for your own Grizzly Bears only.
+- **Expect:** Three questions, one for each creature, each naming whose it is ("Have the 2 damage Pyroclasm would deal to your Grizzly Bears dealt to you instead", then Bob's Grizzly Bears, then Carol's Hill Giant). You end at 38 with your Grizzly Bears alive; Bob's Grizzly Bears die and Carol's Hill Giant lives.

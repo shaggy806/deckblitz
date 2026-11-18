@@ -13552,4 +13552,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Llanowar Elves'] }],
     }),
   ),
+  // --- A "you may" damage redirection (2026-11-18) ---------------------------
+  preset(
+    "Blood of the Martyr: you may take Lightning Bolt's damage to Bob's Grizzly Bears yourself",
+    board({
+      you: { bf: ['Plains*3', 'Mountain'], hand: ['Blood of the Martyr', 'Lightning Bolt'] },
+      opp: [{ bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
+    'Blood of the Martyr: in a 4-player game, Pyroclasm asks once for each creature',
+    board({
+      you: { bf: ['Plains*3', 'Mountain*2', 'Grizzly Bears'], hand: ['Blood of the Martyr', 'Pyroclasm'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, {}],
+    }),
+  ),
 ]
