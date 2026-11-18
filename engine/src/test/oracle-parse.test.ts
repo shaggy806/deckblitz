@@ -23605,4 +23605,22 @@ describe("a CDA over the others (amount:cda-aggregate-sum-excluding-self)", () =
     // A greatest is `greatestManaValueOf` (Karn, Legacy Reforged): not this template.
     expect(cda("Test Ooze's power and toughness are each equal to the greatest mana value among artifacts you control.")).toBeUndefined();
   });
+
+  it("reads a graveyard count, and Boneyard Mycodrax's other ones (amount:cda-graveyard-count-excluding-self)", () => {
+    expect(cda("Test Ooze's power and toughness are each equal to the number of creature cards in your graveyard.")).toEqual({
+      countOf: { countInGraveyard: { type: "creature", ownedBy: "you" } },
+      plusPower: 0,
+      plusToughness: 0,
+    });
+    expect(cda("Test Ooze's power and toughness are each equal to the number of creature cards in all graveyards.")).toEqual({
+      countOf: { countInGraveyard: { type: "creature" } },
+      plusPower: 0,
+      plusToughness: 0,
+    });
+    expect(cda("Test Ooze's power and toughness are each equal to the number of other creature cards in your graveyard.")).toEqual({
+      countOf: { aggregate: "count", filter: { type: "creature", ownedBy: "you" }, in: "graveyards", excludeSelf: true },
+      plusPower: 0,
+      plusToughness: 0,
+    });
+  });
 });

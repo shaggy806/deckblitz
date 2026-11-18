@@ -24648,6 +24648,21 @@ function parseStatic(line, text) {
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: agg } }, text };
     }
   }
+  // A count of graveyard cards as a whole CDA (rule 604.3, every zone):
+  // Boneyard Wurm's "~'s power and toughness are each equal to the number of
+  // creature cards in your graveyard", Mortivore's "… in all graveyards";
+  // Boneyard Mycodrax's "**other** creature cards" leaves itself out
+  // (`excludeSelf`), which matters in the graveyard.
+  {
+    const w = /^~'s power and toughness are each equal to the number of (other )?(.+?) cards in (your graveyard|all graveyards)\.$/.exec(line);
+    const filter = w === null ? null : parseTypePhrase(w[2], { cards: true });
+    if (filter !== null && Object.keys(filter).length > 0) {
+      const cards = w[3] === "your graveyard" ? { ...filter, ownedBy: "you" } : filter;
+      const countOf =
+        w[1] === undefined ? { countInGraveyard: cards } : { aggregate: "count", filter: cards, in: "graveyards", excludeSelf: true };
+      return { affects: { scope: "self" }, setBasePtFromCount: { countOf, plusPower: 0, plusToughness: 0 }, text };
+    }
+  }
   // A total mana value as a whole CDA: Ancient Ooze's "~'s power and
   // toughness are each equal to the total mana value of other creatures you
   // control" (`excludeSelf`, rule 604.3). A greatest is Karn, Legacy

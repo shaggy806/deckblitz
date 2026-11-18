@@ -1007,7 +1007,11 @@ Rats' "the number of **other** Rats on the battlefield" is `{ aggregate:
 "count", filter: { subtype: "Rat" }, excludeSelf: true }`, a stack's other
 tokens still counted; Ancient Ooze's "the total mana value of other
 creatures you control" is `{ aggregate: "sum", of: "mana-value", filter: {
-type: "creature", controlledBy: "you" }, excludeSelf: true }`),
+type: "creature", controlledBy: "you" }, excludeSelf: true }`; Boneyard
+Mycodrax's "the number of other creature cards in your graveyard" a `count`
+`in: "graveyards"` with `filter: { type: "creature", ownedBy: "you" }` and
+`excludeSelf` — in the graveyard, where a CDA works too (rule 604.3), it
+doesn't count itself, and `scavenge()` reads that power as it was exiled),
 `{ countersOn: ref, counter? }` (how many counters of one kind are on it —
 every kind when `counter` is omitted, "the number of counters on it" —
 Black Market's charge counters; from a dies trigger, the counters it died

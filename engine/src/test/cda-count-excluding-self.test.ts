@@ -9,7 +9,21 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, pt, spawn, table, toStep, zone } from "./harness.js";
+import {
+  A,
+  B,
+  activate,
+  counters,
+  lands,
+  pickTargets,
+  pt,
+  ref,
+  spawn,
+  table,
+  toGraveyard,
+  toStep,
+  zone,
+} from "./harness.js";
 
 describe("Pestilence Rats", () => {
   it("doesn't count itself", () => {
@@ -69,5 +83,36 @@ describe("Ancient Ooze", () => {
     const ooze = spawn(game, "Ancient Ooze");
     toStep(game, "end");
     expect(zone(game, ooze)).toBe("graveyard");
+  });
+});
+
+// A count of the others in a graveyard (`aggregate: "count"`, `in:
+// "graveyards"`, `excludeSelf`), in every zone (rule 604.3): Boneyard
+// Mycodrax's "other creature cards in your graveyard", and scavenge reading it.
+describe("Boneyard Mycodrax", () => {
+  it("on the battlefield counts the creature cards in your graveyard only", () => {
+    const { game } = table();
+    toGraveyard(game, "Grizzly Bears", A);
+    toGraveyard(game, "Hill Giant", A);
+    toGraveyard(game, "Forest", A);
+    toGraveyard(game, "Grizzly Bears", B);
+    const fungus = spawn(game, "Boneyard Mycodrax");
+    expect(pt(game, fungus)).toEqual({ power: 2, toughness: 2 });
+  });
+
+  it("in the graveyard doesn't count itself, and scavenges for that many", () => {
+    const { game, a } = table();
+    lands(game, "Swamp", 5);
+    toGraveyard(game, "Grizzly Bears", A);
+    toGraveyard(game, "Hill Giant", A);
+    const fungus = toGraveyard(game, "Boneyard Mycodrax", A);
+    toGraveyard(game, "Boneyard Mycodrax", A);
+    // The other Mycodrax is another creature card.
+    expect(pt(game, fungus)).toEqual({ power: 3, toughness: 3 });
+    const bears = spawn(game, "Grizzly Bears");
+    pickTargets(a, bears);
+    activate(game, fungus, 0, { targets: [ref(bears)] });
+    expect(zone(game, fungus)).toBe("exile");
+    expect(counters(game, bears)).toBe(3);
   });
 });
