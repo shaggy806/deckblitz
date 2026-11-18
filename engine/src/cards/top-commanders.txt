@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-987 already implemented / 13 missing
+988 already implemented / 12 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -970,7 +970,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  964  Vrondiss, Rage of Ancients                      3038 decks  {3}{R}{G}        Legendary Creature — Dragon Barbarian
 [x]  965  Gisela, Blade of Goldnight                      3035 decks  {4}{R}{W}{W}     Legendary Creature — Angel
 [x]  966  Cynette, Jelly Drover                           3029 decks  {3}{U}           Legendary Creature — Human Wizard
-[ ]  967  Merieke Ri Berit                                3025 decks  {W}{U}{B}        Legendary Creature — Human
+[x]  967  Merieke Ri Berit                                3025 decks  {W}{U}{B}        Legendary Creature — Human
 [x]  968  Narset, Jeskai Waymaster                        3025 decks  {U}{R}{W}        Legendary Creature — Human Monk
 [x]  969  Mishra, Claimed by Gix                          3022 decks  {2}{B}{R}        Legendary Creature — Phyrexian Human Artificer
 [x]  970  Treebeard, Gracious Host                        3019 decks  {2}{G}{W}        Legendary Creature — Treefolk
