@@ -221,7 +221,10 @@ export interface JournalEntry {
   readonly flip?: FlipLanding;
   /** What came up (`rolled`). */
   readonly roll?: RollRecord;
-  /** The event's `seq` (`flipped`, `rolled`), for what's "this way". */
+  /** The event's `seq` (`flipped`, `rolled`), for what's "this way"; for
+   * `damage`, the simultaneous damage event it was part of (one id for every
+   * source dealing damage at once — `Game.withDamageBatch`), for "is dealt
+   * damage for the first time each turn". */
   readonly seq?: number;
 }
 

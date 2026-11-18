@@ -2636,6 +2636,10 @@ export class Game {
    * is dealt damage" triggers, once per permanent however many sources hit
    * it. Not game state: it only ever spans one synchronous call. */
   private damageBatch: {
+    /** Which simultaneous damage event this is: the `eventSeq` as it began,
+     * kept on its journal entries (`seq`) so they count as one event — "is
+     * dealt damage for the first time each turn" (`timingCount`). */
+    readonly id: number;
     readonly lifelink: Map<ObjectId, { controller: PlayerId; amount: number }>;
     /** "Next time" shields used in this event (rule 615.8): they cover the
      * whole of it — a creature's combat damage to two blockers, a sweeper's
@@ -37441,6 +37445,25 @@ export class Game {
         const stint = stintOf(event.object);
         return count("saddled", (e) => e.object === event.object && e.stint === stint) - 1;
       }
+      case "dealt-damage": {
+        // "Is dealt damage for the first time each turn" (Hercules, Olympian
+        // Hero): the damage events that dealt this permanent damage this turn,
+        // in this stint, this one included — sources dealing damage at once
+        // are one event (rules 510.2, 603.2c: the journal entries' `seq`), so
+        // this event's other sources aren't earlier ones.
+        if (event.type !== "damage-dealt" || event.target.kind !== "object") return undefined;
+        const hit = event.target.object;
+        const stint = stintOf(hit);
+        const events = new Set<string>();
+        let entry = 0;
+        for (const e of this.state.journal?.entries ?? []) {
+          entry += 1;
+          if (e.turn !== now || e.kind !== "damage" || e.target?.kind !== "object" || e.target.object !== hit) continue;
+          if (e.targetStint !== stint || (spec.combat !== undefined && (e.combat !== undefined) !== spec.combat)) continue;
+          events.add(e.seq !== undefined ? `event ${e.seq}` : `entry ${entry}`);
+        }
+        return events.size - 1;
+      }
       case "becomes-tapped": {
         if (event.type !== "permanent-tapped" || spec.batched === true) return undefined;
         const stint = stintOf(event.object);
@@ -61626,6 +61649,9 @@ controlledBy,
           ...(hit !== undefined ? { targetStint: hit.zoneChangeCount ?? 0 } : {}),
           ...(hitWas !== undefined ? { targetWas: hitWas } : {}),
           ...(event.combat ? { combat: this.state.turn.combatPhases ?? 1 } : {}),
+          // The simultaneous damage event it was part of: sources dealing
+          // damage at once are one event (rule 510.2, 603.2c).
+          ...(this.damageBatch !== null ? { seq: this.damageBatch.id } : {}),
         });
         // "Dealt combat damage this game by a creature named …": the whole
         // game's record, by the name it had as it dealt the damage.
@@ -66138,6 +66164,7 @@ controlledBy,
       return;
     }
     const batch = {
+      id: this.state.eventSeq,
       lifelink: new Map<ObjectId, { controller: PlayerId; amount: number }>(),
       nextTimeSpent: [] as ActiveReplacement[],
       shieldThens: new Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }[]>(),

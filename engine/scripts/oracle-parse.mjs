@@ -2292,6 +2292,10 @@ export function parseTrigger(clause) {
     return [{ on: "deals-damage", who: "self", to }];
   }
   if (c === "Whenever ~ is dealt damage") return [{ on: "dealt-damage", who: "self" }];
+  // The timing wrapper, counted by damage event (Hercules, Olympian Hero).
+  if (c === "Whenever ~ is dealt damage for the first time each turn") {
+    return [{ on: "dealt-damage", who: "self", firstTimeEachTurn: true }];
+  }
   // "N or more" dealt at once, on either side (`atLeast`).
   if ((m = /^Whenever ~ deals (\d+) or more damage(?: to (an opponent|a player))?$/.exec(c))) {
     const to = m[2] === undefined ? {} : { to: m[2] === "an opponent" ? "opponent" : "player" };

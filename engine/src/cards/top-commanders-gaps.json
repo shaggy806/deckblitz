@@ -3005,7 +3005,8 @@
   "trigger:gives-gift",
   "trigger:gives-gift",
   "condition:source-damage-to-player-this-turn",
-  "trigger:mentors"
+  "trigger:mentors",
+  "trigger:dealt-damage-first-time-each-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

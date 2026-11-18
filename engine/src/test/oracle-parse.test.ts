@@ -20855,6 +20855,12 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     expect(parseTrigger("Whenever you give a gift")).toEqual([{ on: "event", event: "gives-gift", who: "you" }]);
   });
 
+  it("reads being dealt damage for the first time each turn (Hercules, Olympian Hero)", () => {
+    expect(parseTrigger("Whenever ~ is dealt damage for the first time each turn")).toEqual([
+      { on: "dealt-damage", who: "self", firstTimeEachTurn: true },
+    ]);
+  });
+
   it("reads equipped creature mentoring a creature, and mentor granted (Aegis of the Legion)", () => {
     expect(parseTrigger("Whenever equipped creature mentors a creature")).toEqual([
       { on: "event", event: "mentors", who: "attached" },

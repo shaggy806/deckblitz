@@ -460,6 +460,11 @@ export function timingCountable(spec: TriggerSpec): boolean {
     case "becomes-tapped":
     case "counters-put":
       return spec.batched !== true;
+    case "dealt-damage":
+      // Counted by simultaneous damage event (the journal's `damage` entries'
+      // `seq`), combat or not: an amount, excess or source narrowing can't be
+      // asked again of earlier events, nor one firing for several permanents.
+      return spec.batched !== true && spec.atLeast === undefined && spec.excess !== true && spec.bySource === undefined;
     case "attack-with":
       return (
         spec.filter === undefined &&
