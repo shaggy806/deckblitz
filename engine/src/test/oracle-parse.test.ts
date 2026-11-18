@@ -23049,3 +23049,53 @@ describe("mana from a Treasure spent to cast or activate it (Vazi, Keen Negotiat
     expect(smaug.complete).toBe(true);
   });
 });
+
+describe("you may sacrifice a permanent; if you do, …", () => {
+  it("Heart-Shaped Herb: the sacrificed card returned with counters, and a prevent-1 static", () => {
+    const herb = parseFace({
+      name: "Heart-Shaped Herb",
+      type_line: "Artifact",
+      mana_cost: "{4}",
+      colors: [],
+      oracle_text:
+        "If a source an opponent controls would deal damage to you, prevent 1 of that damage.\n{2}, {T}, Sacrifice this artifact: You may sacrifice a creature. If you do, return that card to the battlefield under its owner's control with three +1/+1 counters on it and you become the monarch.",
+    });
+    expect(herb.static[0].replacement).toEqual({
+      event: "would-deal-damage",
+      to: "you",
+      source: { controlledBy: "opponent" },
+      instead: { prevent: 1 },
+    });
+    expect(herb.activated[0].effect).toEqual({
+      kind: "each-player-may",
+      who: "you",
+      options: [{ sacrifice: { type: "creature" }, text: "Sacrifice a creature" }],
+      ifDid: {
+        kind: "sequence",
+        effects: [
+          { kind: "put-onto-battlefield", target: { paid: "sacrificed" }, withCounters: { kind: "+1/+1", amount: 3 } },
+          { kind: "become-monarch" },
+        ],
+      },
+    });
+    expect(herb.complete).toBe(true);
+  });
+
+  it("another creature, and a follow-up read on its own", () => {
+    const echo = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Spirit",
+      mana_cost: "{3}{B}",
+      colors: ["B"],
+      power: "3",
+      toughness: "3",
+      oracle_text: "Whenever this creature attacks, you may sacrifice another creature. If you do, draw a card.",
+    });
+    expect(echo.triggered[0].effect).toEqual({
+      kind: "each-player-may",
+      who: "you",
+      options: [{ sacrifice: { type: "creature" }, exceptSource: true, text: "Sacrifice another creature" }],
+      ifDid: { kind: "draw", amount: 1 },
+    });
+  });
+});

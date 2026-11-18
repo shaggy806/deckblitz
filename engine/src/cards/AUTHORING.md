@@ -3123,6 +3123,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `reflexive-trigger` as the `ifDid`, so the follow-up goes on the stack and
   targets then (Ziatora, the Incinerator: `value: { powerOf: "sacrificed" }`
   carries the creature's last-known power; Felothar, Dawn of the Abzan).
+  It's `{ paid: "sacrificed" }` as an `ObjectRef` too, found in the
+  graveyard it was just put into (rule 400.7j): Heart-Shaped Herb's "if you
+  do, return **that card** to the battlefield under its owner's control with
+  three +1/+1 counters on it" is a `put-onto-battlefield` of that target with
+  `withCounters` (a token sacrificed can't come back, 111.8).
   `who: { controllerOf: n }` asks whoever controls what slot `n` points
   at, as it last existed if it has left (rule 608.2h): Chain of Vapor's "then
   that permanent's controller may sacrifice a land of their choice. If the

@@ -2780,6 +2780,7 @@
   "effect:copy-spell-retarget-created-token",
   "effect:copy-spell-retarget-another-opponent",
   "effect:warp-strike-return-attacking",
+  "effect:return-sacrificed-card-with-counters",
   "replacement:as-transforms-choice",
   "replacement:reroll-dice",
   "effect:turn-face-up-or-exile-and-cast",

@@ -30,6 +30,26 @@ function canon(v) {
     const { then, ...first } = v;
     v = { kind: "sequence", effects: [first, then] };
   }
+  // "you may sacrifice a [permanent]. If you do, …" as a may over the
+  // sacrifice and a this-way conditional (Entrust the Spark) is the
+  // `each-player-may` whose sacrifice option feeds its `ifDid`;
+  if (v.kind === "may" && v.effect?.kind === "sequence" && v.effect.simultaneous !== true && v.effect.effects?.length === 2) {
+    const [sac, then] = v.effect.effects;
+    if (
+      sac?.kind === "sacrifice" &&
+      sac.who === "you" &&
+      sac.count === 1 &&
+      Object.keys(sac).every((k) => ["kind", "who", "filter", "count"].includes(k)) &&
+      then?.kind === "conditional" &&
+      then.else === undefined &&
+      then.condition?.kind === "this-way" &&
+      Object.keys(then.condition).every((k) => ["kind", "what", "who"].includes(k)) &&
+      then.condition.what === "sacrificed" &&
+      (then.condition.who === undefined || then.condition.who === "you")
+    ) {
+      v = { kind: "each-player-may", who: "you", options: [{ sacrifice: sac.filter }], ifDid: then.then };
+    }
+  }
   // a plain sequence inside a plain sequence is one sequence;
   if (v.kind === "sequence" && v.simultaneous !== true && v.effects.some((e) => e?.kind === "sequence" && e.simultaneous !== true)) {
     v = { ...v, effects: v.effects.flatMap((e) => (e?.kind === "sequence" && e.simultaneous !== true ? e.effects : [e])) };

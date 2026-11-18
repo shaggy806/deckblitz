@@ -14702,6 +14702,53 @@ function exiledCardPickAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "You may sacrifice a creature. If you do, draw a card." (Thomil, the
+  // Destroyer; Buzzard-Wasp Colony's "an artifact or creature", Echo of
+  // Death's Wail's "another creature"): the sacrifice is the answer to an
+  // `each-player-may`, which hands what was sacrificed to its `ifDid` as `{
+  // paid: "sacrificed" }`. Heart-Shaped Herb's "return that card to the
+  // battlefield under its owner's control with three +1/+1 counters on it and
+  // you become the monarch" is that card, found in the graveyard (rule 400.7j).
+  // Not a token by its kind (a Blood token is an artifact too, which the type
+  // phrase doesn't say), nor a follow-up with targets of its own, read
+  // elsewhere.
+  const maySacrifice = /^you may sacrifice (an?|another) (.+?)\.$/i.exec(first);
+  if (maySacrifice !== null && done !== null && !/\btokens?\b/i.test(maySacrifice[2]) && !/\b(targets?|divided)\b/i.test(done[1])) {
+    const filter = parseTypePhrase(maySacrifice[2]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    const returned =
+      /^return that card to the battlefield under its owner's control(?: with (a|two|three|four|five) \+1\/\+1 counters? on it)?( and you become the monarch)?\.$/i.exec(done[1]);
+    let ifDid;
+    if (returned !== null) {
+      const count = returned[1] === undefined ? undefined : /^an?$/i.test(returned[1]) ? 1 : numberOf(returned[1]);
+      if (returned[1] !== undefined && typeof count !== "number") return null;
+      const put = {
+        kind: "put-onto-battlefield",
+        target: { paid: "sacrificed" },
+        ...(count !== undefined ? { withCounters: { kind: "+1/+1", amount: count } } : {}),
+      };
+      ifDid = returned[2] === undefined ? put : { kind: "sequence", effects: [put, { kind: "become-monarch" }] };
+    } else {
+      ifDid = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    }
+    if (ifDid === null || containsUndefined(ifDid)) return null;
+    const another = maySacrifice[1].toLowerCase() === "another";
+    return {
+      effect: {
+        kind: "each-player-may",
+        who: "you",
+        options: [
+          {
+            sacrifice: filter,
+            ...(another ? { exceptSource: true } : {}),
+            text: `Sacrifice ${maySacrifice[1].toLowerCase()} ${maySacrifice[2]}`,
+          },
+        ],
+        ifDid,
+      },
+      used: 2,
+    };
+  }
   // "You may pay {E}{E}{E}. If you do, put a +1/+1 counter on this creature."
   // (Overclocked Electromancer, Thriving Rhino): energy paid as it resolves.
   const payEnergy = /^you may pay ((?:\{E\})+)\.$/i.exec(first);
@@ -23915,6 +23962,22 @@ function parseStatic(line, text) {
         instead: { prevent: true },
         toFilter: { type: "creature", controlledBy: "you" },
         ...(m[2] !== undefined ? { toOther: true } : {}),
+      },
+      text,
+    };
+  }
+  // "If a source an opponent controls would deal damage to you [or a permanent
+  // you control], prevent 1 of that damage." (Guardian Seraph, Heart-Shaped
+  // Herb; Valkmira, Protector's Shield): each source's each hit, one less.
+  m = /^If a source an opponent controls would deal damage to you( or a permanent you control)?, prevent (\d+) of that damage\.$/.exec(line);
+  if (m !== null) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-deal-damage",
+        to: m[1] === undefined ? "you" : "your-side",
+        source: { controlledBy: "opponent" },
+        instead: { prevent: Number(m[2]) },
       },
       text,
     };
