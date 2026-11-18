@@ -368,7 +368,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Solo games in the player's browser: bug reports** (the user, 2026-10-13;
   `docs/plans/local-rooms.md`, built steps in `COMPLETED.md`): bug-report uploads from a local
   game (only a `--capture` dev server has the panel).
-- **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): `docs/plans/scaling-rooms.md`. **To explore** (the user, 2026-11-17): having the computation for games with two people done on the host's device rather than the server, to remove the limit to the number of games that can be played at once. A solo game already runs in the page (`client/src/local/room-worker.ts`); a second person would need the host's page to serve their seat, with the server only passing messages between the two.
+- **More rooms at once, and a bigger box that pays** (the user, 2026-10-13): `docs/plans/scaling-rooms.md`. **Games with people and bots on a player's device** (the user, 2026-11-17; explored 2026-11-18, that plan's "Rooms on a player's device"): a table of people costs the box almost nothing and the cap now weighs a room by its bots (`COMPLETED.md`), so what still fills it is games with both. To choose and build: the whole room on the host's device with the server passing messages and keeping a saved copy to take over from, or only the bots' searches there; hidden cards on a player's device aren't an objection (the user, 2026-11-18).
   Rooms run on worker threads now (`docs/plans/room-shards.md`, live with `SHARDS=1`), and the load
   harness (`npm run load-test -w server`) and event-loop numbers exist. Left: the same measurement
   on a bigger box, and that plan's status line, which still says nothing is built.
