@@ -3077,7 +3077,8 @@
   "condition:face-down-dies-card-characteristics",
   "effect:leaves-act-on-permanent-put-there-by-source",
   "effect:leaves-act-on-permanent-put-there-by-source",
-  "replacement:graveyard-to-library-bottom-instead"
+  "replacement:graveyard-to-library-bottom-instead",
+  "effect:search-library-to-exile-linked"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

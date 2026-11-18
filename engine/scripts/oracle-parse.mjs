@@ -5160,6 +5160,17 @@ export function parseSentence(sentence, ctx) {
   if (re(`you may cast (?:the exiled card|a card exiled with ~) without paying its mana cost`).test(s)) {
     return { kind: "cast-now", from: "exiled-with-source", free: true };
   }
+  // "You may cast a spell (with mana value X) from among cards exiled with ~
+  // without paying its mana cost" (Shell of the Last Kappa; Kaho, Minamo
+  // Historian): the spell as it would be cast, X the ability's.
+  if ((m = re(`you may cast a spell( with mana value x)? from among cards exiled with ~ without paying its mana cost`).exec(s))) {
+    return {
+      kind: "cast-now",
+      from: "exiled-with-source",
+      ...(m[1] !== undefined ? { spell: { manaValue: { op: "eq", n: "x" } } } : {}),
+      free: true,
+    };
+  }
   // "Each opponent exiles cards from the top of their library until they
   // exile a nonland card" (Krang & Shredder; Fevered Suspicion's first
   // sentence): each library in turn order, every card staying in exile —
@@ -7364,6 +7375,14 @@ export function parseSentence(sentence, ctx) {
     const filter = parseTypePhrase(m[1], { cards: true });
     if (filter === null) return null;
     return { kind: "search-library", filter, destination: "exile", min: 0, max: 1 };
+  }
+  // "Search your library for any number of Plains cards, exile them, then
+  // shuffle" (Endless Horizons, Skyship Weatherlight), "for up to three instant
+  // cards" (Kaho, Minamo Historian) — linked below where a later ability says
+  // "exiled with".
+  if ((m = /^search your library for (any number of|up to (?:two|three|four|five)) (.+?) cards, exile them, then shuffle\.$/i.exec(s))) {
+    const search = searchToExileOf(m[1], m[2]);
+    if (search !== null) return search;
   }
   // "That player" who owned what the trigger is about (Warped Devotion,
   // Liability — `thatPlayerOf`).
@@ -12448,7 +12467,8 @@ export function parseEffect(text, outer) {
       searchInsteadAt(sentences, i) ??
       searchZonesAt(sentences, i) ??
       searchFaceDownPileAt(sentences, i) ??
-      searchExileCastLaterAt(sentences, i);
+      searchExileCastLaterAt(sentences, i) ??
+      searchExileCreateThatManyAt(sentences, i, ctx);
     if (searched !== null) {
       parsed.push(searched.effect);
       hints.push({ sentence, effect: searched.effect });
@@ -14648,6 +14668,33 @@ function searchFaceDownPileAt(sentences, i) {
     effect: { kind: "search-library", filter: {}, destination: "exile-face-down", min: n, max: n, linked: true, faceDownLooks: "nobody", shufflePile: true },
     used: 2,
   };
+}
+
+/** "Search your library for any number of / up to N <type> cards, exile
+ * them": the search, its finds exiled, none required (rule 701.23d). */
+function searchToExileOf(howMany, what) {
+  const filter = parseTypePhrase(what, { cards: true });
+  if (filter === null || filter === undefined) return null;
+  const upTo = /^up to (\w+)$/i.exec(howMany);
+  const max = upTo === null ? { librarySize: "you" } : numberOf(upTo[1]);
+  if (max === undefined || max === null) return null;
+  return { kind: "search-library", filter, destination: "exile", min: 0, max };
+}
+
+/** "Search your library for any number of artifact cards, exile them, then
+ * create that many 1/1 colorless Myr artifact creature tokens. Then
+ * shuffle." (Myr Incubator): the tokens are as many as the cards exiled this
+ * way, and the closing shuffle is the search's own. */
+function searchExileCreateThatManyAt(sentences, i, ctx) {
+  const m = /^search your library for (any number of|up to (?:two|three|four|five)) (.+?) cards, exile them, then create that many (.+?)\.$/i.exec(
+    sentences[i] ?? "",
+  );
+  if (m === null || !/^then shuffle\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const search = searchToExileOf(m[1], m[2]);
+  if (search === null) return null;
+  const create = parseSentence(`Create two ${m[3]}.`, ctx);
+  if (create === null || create === undefined || create.kind !== "create-token") return null;
+  return { effect: { kind: "sequence", effects: [search, { ...create, count: { thisWay: "exiled" } }] }, used: 2 };
 }
 
 function searchExileCastLaterAt(sentences, i) {
@@ -20608,7 +20655,9 @@ function parseFaceAsWritten(face, ctx = {}) {
     /\bsame name as the exiled card\b/.test(oracleText) ||
     // Phyrexian Ingester's "+X/+Y, where X is the exiled creature card's power".
     /\bthe exiled creature card's\b/.test(oracleText) ||
-    (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`))
+    (face.name !== undefined && oracleText.includes(`exiled with ${face.name}`)) ||
+    // A legend's short name: "cards exiled with Kaho" (Kaho, Minamo Historian).
+    (face.name?.includes(", ") === true && oracleText.includes(`exiled with ${face.name.split(", ")[0]}`))
   ) {
     const linkExiles = (node) => {
       if (Array.isArray(node)) node.forEach(linkExiles);

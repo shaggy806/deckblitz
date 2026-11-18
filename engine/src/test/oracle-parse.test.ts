@@ -23727,3 +23727,56 @@ describe("a card from anywhere onto the bottom of its owner's library instead (W
     });
   });
 });
+
+describe("a library search that exiles its finds (Kaho, Minamo Historian; Myr Incubator)", () => {
+  it("reads Kaho whole: up to three instants exiled with it, and a spell of mana value X cast from them", () => {
+    const kaho = parseFace({
+      name: "Kaho, Minamo Historian",
+      type_line: "Legendary Creature — Human Wizard",
+      oracle_text:
+        "When Kaho enters, search your library for up to three instant cards, exile them, then shuffle.\n{X}, {T}: You may cast a spell with mana value X from among cards exiled with Kaho without paying its mana cost.",
+      mana_cost: "{2}{U}{U}",
+      colors: ["U"],
+      cmc: 4,
+      power: "2",
+      toughness: "2",
+    } as never) as unknown as { complete: boolean; triggered: { effect: unknown }[]; activated: { effect: unknown }[] };
+    expect(kaho.complete).toBe(true);
+    expect(kaho.triggered[0].effect).toEqual({
+      kind: "search-library",
+      filter: { type: "instant" },
+      destination: "exile",
+      min: 0,
+      max: 3,
+      linked: true,
+    });
+    expect(kaho.activated[0].effect).toEqual({
+      kind: "cast-now",
+      from: "exiled-with-source",
+      spell: { manaValue: { op: "eq", n: "x" } },
+      free: true,
+    });
+  });
+
+  it("reads Myr Incubator's that many tokens off the cards exiled", () => {
+    const incubator = parseFace(
+      {
+        name: "Myr Incubator",
+        type_line: "Artifact",
+        oracle_text:
+          "{6}, {T}, Sacrifice this artifact: Search your library for any number of artifact cards, exile them, then create that many 1/1 colorless Myr artifact creature tokens. Then shuffle.",
+        mana_cost: "{6}",
+        colors: [],
+      },
+      { tokenFor: () => "Myr Token" },
+    ) as unknown as { complete: boolean; activated: { effect: unknown }[] };
+    expect(incubator.complete).toBe(true);
+    expect(incubator.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "search-library", filter: { type: "artifact" }, destination: "exile", min: 0, max: { librarySize: "you" } },
+        { kind: "create-token", token: "Myr Token", count: { thisWay: "exiled" } },
+      ],
+    });
+  });
+});
