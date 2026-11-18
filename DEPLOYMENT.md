@@ -48,8 +48,9 @@ plus a reverse-proxy and certificate setup.
 
 - AWS Lightsail, **2 GB memory / 2 vCPUs** (about $12/month), Ubuntu 24.04 LTS, x86_64,
   dual-stack networking (an IPv6-only plan can't reach GitHub, which has no IPv6).
-- **Static IP `52.25.80.98`**, attached to the instance (free while attached). The `deckblitz`
-  host in the dev PC's `~/.ssh/config` points at it.
+- **A static IP**, attached to the instance (free while attached). Its address isn't written
+  here, since this repo is public: it is the `deckblitz` host in the dev PC's `~/.ssh/config`,
+  and on the instance's Networking tab.
 - **Firewall** (Lightsail's, on the instance's Networking tab, IPv4 and IPv6 alike): SSH (22)
   only. Nothing for HTTP or HTTPS — the tunnel needs no inbound ports.
 - **2 GB of swap** at `/swapfile` (in `/etc/fstab`). The full build (card codegen, a large

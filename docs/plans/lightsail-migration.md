@@ -78,7 +78,7 @@ so there's no `/ws` route to split on without proxy rewrites, and the client bui
   bleeding-edge `resolute`), so Caddy's and cloudflared's normal apt repos should work.
 - **Node 22**, to match CI. The home box shows v24 on its status page.
 - **Login user:** Lightsail's default is `ubuntu`. Either use it, changing the systemd `User=`
-  and the sudoers line to match, or create `shaggy5405` again so those stay as they are.
+  and the sudoers line to match, or create the old box's login again so those stay as they are.
 - **AWS chores in place of home-box ones:** a billing alert, automatic daily snapshots, and a
   manual snapshot before a risky deploy. These replace the router's DHCP reservation, the BIOS
   power-loss setting and the Wi-Fi upload limit (~25 KB/s, the site's bottleneck).
@@ -129,7 +129,7 @@ saved decks to be worth carrying over, so the switch doesn't wait on any client 
 
 | | Now (home box) | Lightsail |
 |---|---|---|
-| Where you can deploy from | Only the home network (`shaggy5405@192.168.0.137`) | Anywhere: SSH to the static IP with your key |
+| Where you can deploy from | Only the home network (the old box's login, at its LAN address) | Anywhere: SSH to the static IP with your key |
 | Deploy script | `deploy.sh`: pull, install, build, restart | The same script. Only the default `VITE_SERVER_URL` changes |
 | Build time | Several minutes on a 2014 i3 | Likely similar or faster while CPU credits last |
 | Rolling back | Check out an old commit and rebuild | The same, or restore a pre-deploy snapshot |

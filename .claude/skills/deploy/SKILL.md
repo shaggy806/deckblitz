@@ -5,8 +5,8 @@ description: Deploy what's pushed to origin/main to the live site (deckblitz.net
 
 # Deploy to the live site
 
-The live site runs on an AWS Lightsail instance (`ubuntu@52.25.80.98`, the `deckblitz` host in
-this PC's `~/.ssh/config`, reached with this PC's key). `DEPLOYMENT.md` is the runbook; this does
+The live site runs on an AWS Lightsail instance (user `ubuntu` at the `deckblitz` host in
+this PC's `~/.ssh/config`, reached with this PC's key; the address itself stays out of this public repo). `DEPLOYMENT.md` is the runbook; this does
 its "Updating the deployed code" from here. Deploying restarts the room server, which **ends
 every game in progress**, so it only happens when the user asked for it this time.
 
