@@ -1120,6 +1120,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Lasting Fayth": "https://cards.scryfall.io/art_crop/back/8/8/881e4c00-3b9a-47a1-bf66-1badda994c88.jpg",
   "Lavaglide Pathway": "https://cards.scryfall.io/art_crop/back/2/6/2668ac91-6cda-4f81-a08d-4fc5f9cb35b2.jpg",
   "Lazotep Convert": "https://cards.scryfall.io/art_crop/back/9/8/981f091a-17f8-412e-9752-69070ebed4ea.jpg",
+  "Leeching Lurker": "https://cards.scryfall.io/art_crop/back/0/a/0a3c8532-92f5-41db-92b4-a871aa05e0c7.jpg",
   "Legion Stronghold": "https://cards.scryfall.io/art_crop/back/7/6/7676abd9-0a3d-4721-b17b-778d2e3c2e25.jpg",
   "Leonardo da Vinci": "https://scryfall.com/card/acr/20",
   "Leyline Surge": "https://cards.scryfall.io/art_crop/back/5/f/5f80764e-8fa2-44e2-84c6-3b55f1c40ee7.jpg",

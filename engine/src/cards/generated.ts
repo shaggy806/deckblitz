@@ -5964,6 +5964,7 @@ import _poolCurseOfExhaustion from "./pool/curse-of-exhaustion.js";
 import _poolCurseOfFoolsWisdom from "./pool/curse-of-fools-wisdom.js";
 import _poolCurseOfHospitality from "./pool/curse-of-hospitality.js";
 import _poolCurseOfInertia from "./pool/curse-of-inertia.js";
+import _poolCurseOfLeeches from "./pool/curse-of-leeches.js";
 import _poolCurseOfMaritLage from "./pool/curse-of-marit-lage.js";
 import _poolCurseOfMisfortunes from "./pool/curse-of-misfortunes.js";
 import _poolCurseOfOblivion from "./pool/curse-of-oblivion.js";
@@ -9029,6 +9030,7 @@ import _poolExsanguinate from "./pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "./pool/exsanguinator-cavalry.js";
 import _poolExtendedAbsence from "./pool/extended-absence.js";
 import _poolExterminate from "./pool/exterminate.js";
+import _poolExterminatorMagmarch from "./pool/exterminator-magmarch.js";
 import _poolExterminatus from "./pool/exterminatus.js";
 import _poolExtinctionEvent from "./pool/extinction-event.js";
 import _poolExtinction from "./pool/extinction.js";
@@ -15815,6 +15817,7 @@ import _poolLeechGauntlet from "./pool/leech-gauntlet.js";
 import _poolLeeches from "./pool/leeches.js";
 import _poolLeechingBite from "./pool/leeching-bite.js";
 import _poolLeechingLicid from "./pool/leeching-licid.js";
+import _poolLeechingLurker from "./pool/leeching-lurker.js";
 import _poolLeechingSliver from "./pool/leeching-sliver.js";
 import _poolLeechriddenSwamp from "./pool/leechridden-swamp.js";
 import _poolLeelaSevateemWarrior from "./pool/leela-sevateem-warrior.js";
@@ -18031,6 +18034,7 @@ import _poolMondronenShaman from "./pool/mondronen-shaman.js";
 import _poolMongooseLizard from "./pool/mongoose-lizard.js";
 import _poolMongrelPack from "./pool/mongrel-pack.js";
 import _poolMonicaRambeau from "./pool/monica-rambeau.js";
+import _poolMonitorMonitor from "./pool/monitor-monitor.js";
 import _poolMonkClass from "./pool/monk-class.js";
 import _poolMonkGyatso from "./pool/monk-gyatso.js";
 import _poolMonkIdealist from "./pool/monk-idealist.js";
@@ -19027,6 +19031,7 @@ import _poolNobleTemplar from "./pool/noble-templar.js";
 import _poolNobleVestige from "./pool/noble-vestige.js";
 import _poolNoblesPurse from "./pool/nobles-purse.js";
 import _poolNobody from "./pool/nobody.js";
+import _poolNoctisHeirApparent from "./pool/noctis-heir-apparent.js";
 import _poolNoctisPrinceOfLucis from "./pool/noctis-prince-of-lucis.js";
 import _poolNocturnalFeeder from "./pool/nocturnal-feeder.js";
 import _poolNocturnalHunger from "./pool/nocturnal-hunger.js";
@@ -32597,6 +32602,7 @@ import _poolZeroIncorporealSensate from "./pool/zero-incorporeal-sensate.js";
 import _poolZeroPointBallad from "./pool/zero-point-ballad.js";
 import _poolZetalpaPrimalDawn from "./pool/zetalpa-primal-dawn.js";
 import _poolZethiArcaneBlademaster from "./pool/zethi-arcane-blademaster.js";
+import _poolZevlorElturelExile from "./pool/zevlor-elturel-exile.js";
 import _poolZhalfirinCommander from "./pool/zhalfirin-commander.js";
 import _poolZhalfirinCrusader from "./pool/zhalfirin-crusader.js";
 import _poolZhalfirinDecoy from "./pool/zhalfirin-decoy.js";
@@ -39463,6 +39469,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfFoolsWisdom,
   _poolCurseOfHospitality,
   _poolCurseOfInertia,
+  _poolCurseOfLeeches,
   _poolCurseOfMaritLage,
   _poolCurseOfMisfortunes,
   _poolCurseOfOblivion,
@@ -42528,6 +42535,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExsanguinatorCavalry,
   _poolExtendedAbsence,
   _poolExterminate,
+  _poolExterminatorMagmarch,
   _poolExterminatus,
   _poolExtinctionEvent,
   _poolExtinction,
@@ -49314,6 +49322,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeeches,
   _poolLeechingBite,
   _poolLeechingLicid,
+  _poolLeechingLurker,
   _poolLeechingSliver,
   _poolLeechriddenSwamp,
   _poolLeelaSevateemWarrior,
@@ -51530,6 +51539,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMongooseLizard,
   _poolMongrelPack,
   _poolMonicaRambeau,
+  _poolMonitorMonitor,
   _poolMonkClass,
   _poolMonkGyatso,
   _poolMonkIdealist,
@@ -52526,6 +52536,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNobleVestige,
   _poolNoblesPurse,
   _poolNobody,
+  _poolNoctisHeirApparent,
   _poolNoctisPrinceOfLucis,
   _poolNocturnalFeeder,
   _poolNocturnalHunger,
@@ -66096,6 +66107,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZeroPointBallad,
   _poolZetalpaPrimalDawn,
   _poolZethiArcaneBlademaster,
+  _poolZevlorElturelExile,
   _poolZhalfirinCommander,
   _poolZhalfirinCrusader,
   _poolZhalfirinDecoy,
@@ -72975,6 +72987,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-fools-wisdom": _poolCurseOfFoolsWisdom,
   "pool/curse-of-hospitality": _poolCurseOfHospitality,
   "pool/curse-of-inertia": _poolCurseOfInertia,
+  "pool/curse-of-leeches": _poolCurseOfLeeches,
   "pool/curse-of-marit-lage": _poolCurseOfMaritLage,
   "pool/curse-of-misfortunes": _poolCurseOfMisfortunes,
   "pool/curse-of-oblivion": _poolCurseOfOblivion,
@@ -76040,6 +76053,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/exsanguinator-cavalry": _poolExsanguinatorCavalry,
   "pool/extended-absence": _poolExtendedAbsence,
   "pool/exterminate": _poolExterminate,
+  "pool/exterminator-magmarch": _poolExterminatorMagmarch,
   "pool/exterminatus": _poolExterminatus,
   "pool/extinction-event": _poolExtinctionEvent,
   "pool/extinction": _poolExtinction,
@@ -82826,6 +82840,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leeches": _poolLeeches,
   "pool/leeching-bite": _poolLeechingBite,
   "pool/leeching-licid": _poolLeechingLicid,
+  "pool/leeching-lurker": _poolLeechingLurker,
   "pool/leeching-sliver": _poolLeechingSliver,
   "pool/leechridden-swamp": _poolLeechriddenSwamp,
   "pool/leela-sevateem-warrior": _poolLeelaSevateemWarrior,
@@ -85042,6 +85057,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mongoose-lizard": _poolMongooseLizard,
   "pool/mongrel-pack": _poolMongrelPack,
   "pool/monica-rambeau": _poolMonicaRambeau,
+  "pool/monitor-monitor": _poolMonitorMonitor,
   "pool/monk-class": _poolMonkClass,
   "pool/monk-gyatso": _poolMonkGyatso,
   "pool/monk-idealist": _poolMonkIdealist,
@@ -86038,6 +86054,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/noble-vestige": _poolNobleVestige,
   "pool/nobles-purse": _poolNoblesPurse,
   "pool/nobody": _poolNobody,
+  "pool/noctis-heir-apparent": _poolNoctisHeirApparent,
   "pool/noctis-prince-of-lucis": _poolNoctisPrinceOfLucis,
   "pool/nocturnal-feeder": _poolNocturnalFeeder,
   "pool/nocturnal-hunger": _poolNocturnalHunger,
@@ -99608,6 +99625,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zero-point-ballad": _poolZeroPointBallad,
   "pool/zetalpa-primal-dawn": _poolZetalpaPrimalDawn,
   "pool/zethi-arcane-blademaster": _poolZethiArcaneBlademaster,
+  "pool/zevlor-elturel-exile": _poolZevlorElturelExile,
   "pool/zhalfirin-commander": _poolZhalfirinCommander,
   "pool/zhalfirin-crusader": _poolZhalfirinCrusader,
   "pool/zhalfirin-decoy": _poolZhalfirinDecoy,

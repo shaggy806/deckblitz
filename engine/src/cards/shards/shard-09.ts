@@ -515,6 +515,7 @@ import _poolLashOut from "../pool/lash-out.js";
 import _poolLaurineTheDiversion from "../pool/laurine-the-diversion.js";
 import _poolLazotepPlating from "../pool/lazotep-plating.js";
 import _poolLedgerShredder from "../pool/ledger-shredder.js";
+import _poolLeechingLurker from "../pool/leeching-lurker.js";
 import _poolLeosGuidance from "../pool/leos-guidance.js";
 import _poolLeviathan from "../pool/leviathan.js";
 import _poolLeylineOfAnticipation from "../pool/leyline-of-anticipation.js";
@@ -1591,6 +1592,7 @@ const shard: CardShard = {
     _poolLaurineTheDiversion,
     _poolLazotepPlating,
     _poolLedgerShredder,
+    _poolLeechingLurker,
     _poolLeosGuidance,
     _poolLeviathan,
     _poolLeylineOfAnticipation,

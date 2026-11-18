@@ -525,6 +525,7 @@ import _poolMnemonicDeluge from "../pool/mnemonic-deluge.js";
 import _poolMockingDoppelganger from "../pool/mocking-doppelganger.js";
 import _poolMoltenGatekeeper from "../pool/molten-gatekeeper.js";
 import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
+import _poolMonitorMonitor from "../pool/monitor-monitor.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMonstrousHound from "../pool/monstrous-hound.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
@@ -1542,6 +1543,7 @@ const shard: CardShard = {
     _poolMockingDoppelganger,
     _poolMoltenGatekeeper,
     _poolMomoPlayfulPet,
+    _poolMonitorMonitor,
     _poolMonstrosityOfTheLake,
     _poolMonstrousHound,
     _poolMoonlitWake,

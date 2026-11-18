@@ -580,6 +580,7 @@ import _poolNezumiGraverobber from "../pool/nezumi-graverobber.js";
 import _poolNineLivesFamiliar from "../pool/nine-lives-familiar.js";
 import _poolNineLives from "../pool/nine-lives.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
+import _poolNoctisHeirApparent from "../pool/noctis-heir-apparent.js";
 import _poolNornsAnnex from "../pool/norns-annex.js";
 import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
@@ -1618,6 +1619,7 @@ const shard: CardShard = {
     _poolNineLivesFamiliar,
     _poolNineLives,
     _poolNineTailWhiteFox,
+    _poolNoctisHeirApparent,
     _poolNornsAnnex,
     _poolNovelNunchaku,
     _poolNykthosShrineToNyx,
