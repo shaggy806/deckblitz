@@ -231,6 +231,7 @@ import _poolDeathknellKami from "../pool/deathknell-kami.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDecimatorWeb from "../pool/decimator-web.js";
 import _poolDeclarationInStone from "../pool/declaration-in-stone.js";
+import _poolDecoyGambit from "../pool/decoy-gambit.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
 import _poolDemonicTaskmaster from "../pool/demonic-taskmaster.js";
@@ -1325,6 +1326,7 @@ const shard: CardShard = {
     _poolDecanterOfEndlessWater,
     _poolDecimatorWeb,
     _poolDeclarationInStone,
+    _poolDecoyGambit,
     _poolDeepForestHermit,
     _poolDelversTorch,
     _poolDemonicTaskmaster,

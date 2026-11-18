@@ -6551,6 +6551,7 @@ import _poolDeconstructionHammer from "./pool/deconstruction-hammer.js";
 import _poolDecoratedChampion from "./pool/decorated-champion.js";
 import _poolDecoratedGriffin from "./pool/decorated-griffin.js";
 import _poolDecorumDissertation from "./pool/decorum-dissertation.js";
+import _poolDecoyGambit from "./pool/decoy-gambit.js";
 import _poolDecoyPloy from "./pool/decoy-ploy.js";
 import _poolDecreeOfAnnihilation from "./pool/decree-of-annihilation.js";
 import _poolDecreeOfJustice from "./pool/decree-of-justice.js";
@@ -6902,6 +6903,7 @@ import _poolDetritivore from "./pool/detritivore.js";
 import _poolDeusOfCalamity from "./pool/deus-of-calamity.js";
 import _poolDevastate from "./pool/devastate.js";
 import _poolDevastatingDreams from "./pool/devastating-dreams.js";
+import _poolDevastatingMastery from "./pool/devastating-mastery.js";
 import _poolDevastatingOnslaught from "./pool/devastating-onslaught.js";
 import _poolDevastatingSummons from "./pool/devastating-summons.js";
 import _poolDevastationTide from "./pool/devastation-tide.js";
@@ -14051,6 +14053,7 @@ import _poolIntrepidTenderfoot from "./pool/intrepid-tenderfoot.js";
 import _poolIntrepidTrufflesnout from "./pool/intrepid-trufflesnout.js";
 import _poolIntroductionToAnnihilation from "./pool/introduction-to-annihilation.js";
 import _poolIntroductionToProphecy from "./pool/introduction-to-prophecy.js";
+import _poolIntrudeOnTheMind from "./pool/intrude-on-the-mind.js";
 import _poolIntruderAlarm from "./pool/intruder-alarm.js";
 import _poolIntrudingSoulrager from "./pool/intruding-soulrager.js";
 import _poolIntrusivePackbeast from "./pool/intrusive-packbeast.js";
@@ -31728,6 +31731,7 @@ import _poolWhereAncientsTread from "./pool/where-ancients-tread.js";
 import _poolWhetstone from "./pool/whetstone.js";
 import _poolWhetwheel from "./pool/whetwheel.js";
 import _poolWhimOfVolrath from "./pool/whim-of-volrath.js";
+import _poolWhimsOfTheFates from "./pool/whims-of-the-fates.js";
 import _poolWhimwader from "./pool/whimwader.js";
 import _poolWhipOfErebos from "./pool/whip-of-erebos.js";
 import _poolWhipSergeant from "./pool/whip-sergeant.js";
@@ -33377,6 +33381,7 @@ import _tokensTheBlackjack from "./tokens/the-blackjack.js";
 import _tokensTheHollowSentinelToken from "./tokens/the-hollow-sentinel-token.js";
 import _tokensTheTigerGod from "./tokens/the-tiger-god.js";
 import _tokensTheVoid from "./tokens/the-void.js";
+import _tokensThopterTokenIntrudeOnTheMind from "./tokens/thopter-token-intrude-on-the-mind.js";
 import _tokensThopterToken from "./tokens/thopter-token.js";
 import _tokensThrullToken from "./tokens/thrull-token.js";
 import _tokensTiny from "./tokens/tiny.js";
@@ -40045,6 +40050,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDecoratedChampion,
   _poolDecoratedGriffin,
   _poolDecorumDissertation,
+  _poolDecoyGambit,
   _poolDecoyPloy,
   _poolDecreeOfAnnihilation,
   _poolDecreeOfJustice,
@@ -40396,6 +40402,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeusOfCalamity,
   _poolDevastate,
   _poolDevastatingDreams,
+  _poolDevastatingMastery,
   _poolDevastatingOnslaught,
   _poolDevastatingSummons,
   _poolDevastationTide,
@@ -47545,6 +47552,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIntrepidTrufflesnout,
   _poolIntroductionToAnnihilation,
   _poolIntroductionToProphecy,
+  _poolIntrudeOnTheMind,
   _poolIntruderAlarm,
   _poolIntrudingSoulrager,
   _poolIntrusivePackbeast,
@@ -65222,6 +65230,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhetstone,
   _poolWhetwheel,
   _poolWhimOfVolrath,
+  _poolWhimsOfTheFates,
   _poolWhimwader,
   _poolWhipOfErebos,
   _poolWhipSergeant,
@@ -66877,6 +66886,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensTheHollowSentinelToken,
   _tokensTheTigerGod,
   _tokensTheVoid,
+  _tokensThopterTokenIntrudeOnTheMind,
   _tokensThopterToken,
   _tokensThrullToken,
   _tokensTiny,
@@ -73552,6 +73562,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/decorated-champion": _poolDecoratedChampion,
   "pool/decorated-griffin": _poolDecoratedGriffin,
   "pool/decorum-dissertation": _poolDecorumDissertation,
+  "pool/decoy-gambit": _poolDecoyGambit,
   "pool/decoy-ploy": _poolDecoyPloy,
   "pool/decree-of-annihilation": _poolDecreeOfAnnihilation,
   "pool/decree-of-justice": _poolDecreeOfJustice,
@@ -73903,6 +73914,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deus-of-calamity": _poolDeusOfCalamity,
   "pool/devastate": _poolDevastate,
   "pool/devastating-dreams": _poolDevastatingDreams,
+  "pool/devastating-mastery": _poolDevastatingMastery,
   "pool/devastating-onslaught": _poolDevastatingOnslaught,
   "pool/devastating-summons": _poolDevastatingSummons,
   "pool/devastation-tide": _poolDevastationTide,
@@ -81052,6 +81064,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/intrepid-trufflesnout": _poolIntrepidTrufflesnout,
   "pool/introduction-to-annihilation": _poolIntroductionToAnnihilation,
   "pool/introduction-to-prophecy": _poolIntroductionToProphecy,
+  "pool/intrude-on-the-mind": _poolIntrudeOnTheMind,
   "pool/intruder-alarm": _poolIntruderAlarm,
   "pool/intruding-soulrager": _poolIntrudingSoulrager,
   "pool/intrusive-packbeast": _poolIntrusivePackbeast,
@@ -98729,6 +98742,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/whetstone": _poolWhetstone,
   "pool/whetwheel": _poolWhetwheel,
   "pool/whim-of-volrath": _poolWhimOfVolrath,
+  "pool/whims-of-the-fates": _poolWhimsOfTheFates,
   "pool/whimwader": _poolWhimwader,
   "pool/whip-of-erebos": _poolWhipOfErebos,
   "pool/whip-sergeant": _poolWhipSergeant,
@@ -100378,6 +100392,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/the-hollow-sentinel-token": _tokensTheHollowSentinelToken,
   "tokens/the-tiger-god": _tokensTheTigerGod,
   "tokens/the-void": _tokensTheVoid,
+  "tokens/thopter-token-intrude-on-the-mind": _tokensThopterTokenIntrudeOnTheMind,
   "tokens/thopter-token": _tokensThopterToken,
   "tokens/thrull-token": _tokensThrullToken,
   "tokens/tiny": _tokensTiny,

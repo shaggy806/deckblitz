@@ -684,6 +684,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "The Tiger God",
   "The Void",
   "Thopter Token",
+  "Thopter Token (Intrude on the Mind)",
   "Thrull Token",
   "Tiny",
   "Tombspawn",

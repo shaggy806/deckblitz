@@ -216,6 +216,7 @@ import _poolDeliverFromChaos from "../pool/deliver-from-chaos.js";
 import _poolDenProtector from "../pool/den-protector.js";
 import _poolDesertOfTheTrue from "../pool/desert-of-the-true.js";
 import _poolDesertersQuarters from "../pool/deserters-quarters.js";
+import _poolDevastatingMastery from "../pool/devastating-mastery.js";
 import _poolDevotedHero from "../pool/devoted-hero.js";
 import _poolDghorBloodletter from "../pool/dghor-bloodletter.js";
 import _poolDiamondCity from "../pool/diamond-city.js";
@@ -1268,6 +1269,7 @@ const shard: CardShard = {
     _poolDenProtector,
     _poolDesertOfTheTrue,
     _poolDesertersQuarters,
+    _poolDevastatingMastery,
     _poolDevotedHero,
     _poolDghorBloodletter,
     _poolDiamondCity,

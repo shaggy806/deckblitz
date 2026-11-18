@@ -465,6 +465,7 @@ import _poolInsatiableSkittermaw from "../pool/insatiable-skittermaw.js";
 import _poolInsidiousWill from "../pool/insidious-will.js";
 import _poolIntoTheNight from "../pool/into-the-night.js";
 import _poolIntrepidOutlander from "../pool/intrepid-outlander.js";
+import _poolIntrudeOnTheMind from "../pool/intrude-on-the-mind.js";
 import _poolInvadeTheCity from "../pool/invade-the-city.js";
 import _poolInvasionOfIkoria from "../pool/invasion-of-ikoria.js";
 import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
@@ -1502,6 +1503,7 @@ const shard: CardShard = {
     _poolInsidiousWill,
     _poolIntoTheNight,
     _poolIntrepidOutlander,
+    _poolIntrudeOnTheMind,
     _poolInvadeTheCity,
     _poolInvasionOfIkoria,
     _poolInvasionOfIxalan,

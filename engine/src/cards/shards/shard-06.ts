@@ -984,6 +984,7 @@ import _poolWeiEliteCompanions from "../pool/wei-elite-companions.js";
 import _poolWeightOfSpires from "../pool/weight-of-spires.js";
 import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
+import _poolWhimsOfTheFates from "../pool/whims-of-the-fates.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
 import _poolWildResearch from "../pool/wild-research.js";
 import _poolWildWurm from "../pool/wild-wurm.js";
@@ -2027,6 +2028,7 @@ const shard: CardShard = {
     _poolWeightOfSpires,
     _poolWelcomeTheDead,
     _poolWesternPaladin,
+    _poolWhimsOfTheFates,
     _poolWhipSergeant,
     _poolWildResearch,
     _poolWildWurm,

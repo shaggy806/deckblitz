@@ -1024,6 +1024,7 @@ import _tokensSoldierToken from "../tokens/soldier-token.js";
 import _tokensSpawnTokenSpawningPit from "../tokens/spawn-token-spawning-pit.js";
 import _tokensSpikeToken from "../tokens/spike-token.js";
 import _tokensSpiritTokenSaintTraftAndRemKarolus from "../tokens/spirit-token-saint-traft-and-rem-karolus.js";
+import _tokensThopterTokenIntrudeOnTheMind from "../tokens/thopter-token-intrude-on-the-mind.js";
 import _tokensTreefolkWarriorToken from "../tokens/treefolk-warrior-token.js";
 import _tokensWallToken13 from "../tokens/wall-token-1-3.js";
 import _tokensZombieRogueToken from "../tokens/zombie-rogue-token.js";
@@ -2054,6 +2055,7 @@ const shard: CardShard = {
     _tokensSpawnTokenSpawningPit,
     _tokensSpikeToken,
     _tokensSpiritTokenSaintTraftAndRemKarolus,
+    _tokensThopterTokenIntrudeOnTheMind,
     _tokensTreefolkWarriorToken,
     _tokensWallToken13,
     _tokensZombieRogueToken,
