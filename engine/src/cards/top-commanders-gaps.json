@@ -411,6 +411,7 @@
     "mechanic:token-devour",
     "mechanic:devour-x",
     "effect:then-counters-read-after-create",
+    "effect:token-copies-of-attachments",
     "bug:aura-enters-transformed-asks-enchant",
     "static:prohibit-cast-by-face",
     "effect:spell-color-change-carries-to-permanent",
