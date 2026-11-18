@@ -2025,6 +2025,7 @@ import _poolBalustradeSpy from "./pool/balustrade-spy.js";
 import _poolBalustradeWurm from "./pool/balustrade-wurm.js";
 import _poolBambooGroveArcher from "./pool/bamboo-grove-archer.js";
 import _poolBamboozle from "./pool/bamboozle.js";
+import _poolBamboozlingBeeble from "./pool/bamboozling-beeble.js";
 import _poolBandTogether from "./pool/band-together.js";
 import _poolBandage from "./pool/bandage.js";
 import _poolBanditsHaul from "./pool/bandits-haul.js";
@@ -6685,6 +6686,7 @@ import _poolDeityOfScars from "./pool/deity-of-scars.js";
 import _poolDejaVu from "./pool/deja-vu.js";
 import _poolDelay from "./pool/delay.js";
 import _poolDelayedBlastFireball from "./pool/delayed-blast-fireball.js";
+import _poolDelayingShield from "./pool/delaying-shield.js";
 import _poolDelete from "./pool/delete.js";
 import _poolDeliberate from "./pool/deliberate.js";
 import _poolDelifsCone from "./pool/delifs-cone.js";
@@ -14902,6 +14904,7 @@ import _poolKateStewart from "./pool/kate-stewart.js";
 import _poolKathariBomber from "./pool/kathari-bomber.js";
 import _poolKathariRemnant from "./pool/kathari-remnant.js";
 import _poolKathariScreecher from "./pool/kathari-screecher.js";
+import _poolKathrilAspectWarper from "./pool/kathril-aspect-warper.js";
 import _poolKatildaAndLier from "./pool/katilda-and-lier.js";
 import _poolKatildaDawnhartMartyr from "./pool/katilda-dawnhart-martyr.js";
 import _poolKatildaDawnhartPrime from "./pool/katilda-dawnhart-prime.js";
@@ -16786,6 +16789,7 @@ import _poolMajesticAuricorn from "./pool/majestic-auricorn.js";
 import _poolMajesticGenesis from "./pool/majestic-genesis.js";
 import _poolMajesticHeliopterus from "./pool/majestic-heliopterus.js";
 import _poolMajesticMetamorphosis from "./pool/majestic-metamorphosis.js";
+import _poolMajesticMyriarch from "./pool/majestic-myriarch.js";
 import _poolMajorTeroh from "./pool/major-teroh.js";
 import _poolMakeAStand from "./pool/make-a-stand.js";
 import _poolMakeAWish from "./pool/make-a-wish.js";
@@ -18728,6 +18732,7 @@ import _poolNeeraWildMage from "./pool/neera-wild-mage.js";
 import _poolNeerdivDeviousDiver from "./pool/neerdiv-devious-diver.js";
 import _poolNefCropEntangler from "./pool/nef-crop-entangler.js";
 import _poolNefariousImp from "./pool/nefarious-imp.js";
+import _poolNefariousLich from "./pool/nefarious-lich.js";
 import _poolNefaroxOverlordOfGrixis from "./pool/nefarox-overlord-of-grixis.js";
 import _poolNefashu from "./pool/nefashu.js";
 import _poolNegate from "./pool/negate.js";
@@ -30296,6 +30301,7 @@ import _poolUpTheBeanstalk from "./pool/up-the-beanstalk.js";
 import _poolUpdraftElemental from "./pool/updraft-elemental.js";
 import _poolUpdraft from "./pool/updraft.js";
 import _poolUpheaval from "./pool/upheaval.js";
+import _poolUphillBattle from "./pool/uphill-battle.js";
 import _poolUpriserRenegade from "./pool/upriser-renegade.js";
 import _poolUproot from "./pool/uproot.js";
 import _poolUpwelling from "./pool/upwelling.js";
@@ -35587,6 +35593,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBalustradeWurm,
   _poolBambooGroveArcher,
   _poolBamboozle,
+  _poolBamboozlingBeeble,
   _poolBandTogether,
   _poolBandage,
   _poolBanditsHaul,
@@ -40247,6 +40254,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDejaVu,
   _poolDelay,
   _poolDelayedBlastFireball,
+  _poolDelayingShield,
   _poolDelete,
   _poolDeliberate,
   _poolDelifsCone,
@@ -48464,6 +48472,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKathariBomber,
   _poolKathariRemnant,
   _poolKathariScreecher,
+  _poolKathrilAspectWarper,
   _poolKatildaAndLier,
   _poolKatildaDawnhartMartyr,
   _poolKatildaDawnhartPrime,
@@ -50348,6 +50357,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMajesticGenesis,
   _poolMajesticHeliopterus,
   _poolMajesticMetamorphosis,
+  _poolMajesticMyriarch,
   _poolMajorTeroh,
   _poolMakeAStand,
   _poolMakeAWish,
@@ -52290,6 +52300,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNeerdivDeviousDiver,
   _poolNefCropEntangler,
   _poolNefariousImp,
+  _poolNefariousLich,
   _poolNefaroxOverlordOfGrixis,
   _poolNefashu,
   _poolNegate,
@@ -63858,6 +63869,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUpdraftElemental,
   _poolUpdraft,
   _poolUpheaval,
+  _poolUphillBattle,
   _poolUpriserRenegade,
   _poolUproot,
   _poolUpwelling,
@@ -69162,6 +69174,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/balustrade-wurm": _poolBalustradeWurm,
   "pool/bamboo-grove-archer": _poolBambooGroveArcher,
   "pool/bamboozle": _poolBamboozle,
+  "pool/bamboozling-beeble": _poolBamboozlingBeeble,
   "pool/band-together": _poolBandTogether,
   "pool/bandage": _poolBandage,
   "pool/bandits-haul": _poolBanditsHaul,
@@ -73822,6 +73835,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deja-vu": _poolDejaVu,
   "pool/delay": _poolDelay,
   "pool/delayed-blast-fireball": _poolDelayedBlastFireball,
+  "pool/delaying-shield": _poolDelayingShield,
   "pool/delete": _poolDelete,
   "pool/deliberate": _poolDeliberate,
   "pool/delifs-cone": _poolDelifsCone,
@@ -82039,6 +82053,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kathari-bomber": _poolKathariBomber,
   "pool/kathari-remnant": _poolKathariRemnant,
   "pool/kathari-screecher": _poolKathariScreecher,
+  "pool/kathril-aspect-warper": _poolKathrilAspectWarper,
   "pool/katilda-and-lier": _poolKatildaAndLier,
   "pool/katilda-dawnhart-martyr": _poolKatildaDawnhartMartyr,
   "pool/katilda-dawnhart-prime": _poolKatildaDawnhartPrime,
@@ -83923,6 +83938,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/majestic-genesis": _poolMajesticGenesis,
   "pool/majestic-heliopterus": _poolMajesticHeliopterus,
   "pool/majestic-metamorphosis": _poolMajesticMetamorphosis,
+  "pool/majestic-myriarch": _poolMajesticMyriarch,
   "pool/major-teroh": _poolMajorTeroh,
   "pool/make-a-stand": _poolMakeAStand,
   "pool/make-a-wish": _poolMakeAWish,
@@ -85865,6 +85881,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/neerdiv-devious-diver": _poolNeerdivDeviousDiver,
   "pool/nef-crop-entangler": _poolNefCropEntangler,
   "pool/nefarious-imp": _poolNefariousImp,
+  "pool/nefarious-lich": _poolNefariousLich,
   "pool/nefarox-overlord-of-grixis": _poolNefaroxOverlordOfGrixis,
   "pool/nefashu": _poolNefashu,
   "pool/negate": _poolNegate,
@@ -97433,6 +97450,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/updraft-elemental": _poolUpdraftElemental,
   "pool/updraft": _poolUpdraft,
   "pool/upheaval": _poolUpheaval,
+  "pool/uphill-battle": _poolUphillBattle,
   "pool/upriser-renegade": _poolUpriserRenegade,
   "pool/uproot": _poolUproot,
   "pool/upwelling": _poolUpwelling,

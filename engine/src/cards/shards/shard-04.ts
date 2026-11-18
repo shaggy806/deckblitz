@@ -503,6 +503,7 @@ import _poolLuxiorGiadasGift from "../pool/luxior-giadas-gift.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagebaneArmor from "../pool/magebane-armor.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
+import _poolMajesticMyriarch from "../pool/majestic-myriarch.js";
 import _poolMakeAnExample from "../pool/make-an-example.js";
 import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.js";
 import _poolMaliciousAffliction from "../pool/malicious-affliction.js";
@@ -1536,6 +1537,7 @@ const shard: CardShard = {
     _poolMacabreWaltz,
     _poolMagebaneArmor,
     _poolMagnifyingGlass,
+    _poolMajesticMyriarch,
     _poolMakeAnExample,
     _poolMalcolmKeenEyedNavigator,
     _poolMaliciousAffliction,

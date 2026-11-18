@@ -67,6 +67,7 @@ import _poolBalduvianBears from "../pool/balduvian-bears.js";
 import _poolBalefireDragon from "../pool/balefire-dragon.js";
 import _poolBalefulEidolon from "../pool/baleful-eidolon.js";
 import _poolBalmorBattlemageCaptain from "../pool/balmor-battlemage-captain.js";
+import _poolBamboozlingBeeble from "../pool/bamboozling-beeble.js";
 import _poolBaneLordOfDarkness from "../pool/bane-lord-of-darkness.js";
 import _poolBanishIntoFable from "../pool/banish-into-fable.js";
 import _poolBanishingCoils from "../pool/banishing-coils.js";
@@ -1121,6 +1122,7 @@ const shard: CardShard = {
     _poolBalefireDragon,
     _poolBalefulEidolon,
     _poolBalmorBattlemageCaptain,
+    _poolBamboozlingBeeble,
     _poolBaneLordOfDarkness,
     _poolBanishIntoFable,
     _poolBanishingCoils,

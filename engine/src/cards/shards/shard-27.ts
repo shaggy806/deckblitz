@@ -914,6 +914,7 @@ import _poolUniversalSolvent from "../pool/universal-solvent.js";
 import _poolUniversalSurveillance from "../pool/universal-surveillance.js";
 import _poolUnlicensedDisintegration from "../pool/unlicensed-disintegration.js";
 import _poolUntetheredExpress from "../pool/untethered-express.js";
+import _poolUphillBattle from "../pool/uphill-battle.js";
 import _poolUrborgScavengers from "../pool/urborg-scavengers.js";
 import _poolUrborgTombOfYawgmoth from "../pool/urborg-tomb-of-yawgmoth.js";
 import _poolUthrosPsionicist from "../pool/uthros-psionicist.js";
@@ -1933,6 +1934,7 @@ const shard: CardShard = {
     _poolUniversalSurveillance,
     _poolUnlicensedDisintegration,
     _poolUntetheredExpress,
+    _poolUphillBattle,
     _poolUrborgScavengers,
     _poolUrborgTombOfYawgmoth,
     _poolUthrosPsionicist,

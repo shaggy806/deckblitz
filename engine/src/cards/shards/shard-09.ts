@@ -213,6 +213,7 @@ import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
 import _poolDecoratedGriffin from "../pool/decorated-griffin.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
 import _poolDefiantThundermaw from "../pool/defiant-thundermaw.js";
+import _poolDelayingShield from "../pool/delaying-shield.js";
 import _poolDescentOfTheDragons from "../pool/descent-of-the-dragons.js";
 import _poolDesecrateReality from "../pool/desecrate-reality.js";
 import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
@@ -1294,6 +1295,7 @@ const shard: CardShard = {
     _poolDecoratedGriffin,
     _poolDefiantKhenra,
     _poolDefiantThundermaw,
+    _poolDelayingShield,
     _poolDescentOfTheDragons,
     _poolDesecrateReality,
     _poolDesiccatedNaga,

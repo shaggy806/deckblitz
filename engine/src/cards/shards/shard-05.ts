@@ -510,6 +510,7 @@ import _poolJushiApprentice from "../pool/jushi-apprentice.js";
 import _poolKaaliaZenithSeeker from "../pool/kaalia-zenith-seeker.js";
 import _poolKamberThePlunderer from "../pool/kamber-the-plunderer.js";
 import _poolKaslaTheBrokenHalo from "../pool/kasla-the-broken-halo.js";
+import _poolKathrilAspectWarper from "../pool/kathril-aspect-warper.js";
 import _poolKatsumasaTheAnimator from "../pool/katsumasa-the-animator.js";
 import _poolKavaronMemorialWorld from "../pool/kavaron-memorial-world.js";
 import _poolKederektParasite from "../pool/kederekt-parasite.js";
@@ -1549,6 +1550,7 @@ const shard: CardShard = {
     _poolKaaliaZenithSeeker,
     _poolKamberThePlunderer,
     _poolKaslaTheBrokenHalo,
+    _poolKathrilAspectWarper,
     _poolKatsumasaTheAnimator,
     _poolKavaronMemorialWorld,
     _poolKederektParasite,
