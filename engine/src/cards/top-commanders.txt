@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-993 already implemented / 7 missing
+995 already implemented / 5 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -913,7 +913,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  907  Cloud, Planet's Champion                        3304 decks  {3}{R}{W}        Legendary Creature — Human Soldier Mercenary
 [x]  908  Jared Carthalion, True Heir                     3292 decks  {R}{G}{W}        Legendary Creature — Human Warrior
 [x]  909  Aegar, the Freezing Flame                       3289 decks  {1}{U}{R}        Legendary Creature — Giant Wizard
-[ ]  910  Gimbal, Gremlin Prodigy                         3289 decks  {2}{G}{U}{R}     Legendary Creature — Gremlin Artificer
+[x]  910  Gimbal, Gremlin Prodigy                         3289 decks  {2}{G}{U}{R}     Legendary Creature — Gremlin Artificer
 [x]  911  Etrata, Deadly Fugitive                         3272 decks  {1}{U}{B}        Legendary Creature — Vampire Assassin
 [x]  912  Licia, Sanguine Tribune                         3266 decks  {5}{R}{W}{B}     Legendary Creature — Vampire Soldier
 [x]  913  Chief of the Wilds                              3264 decks  {2}{B}{G}        Legendary Creature — Wolf
@@ -992,7 +992,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  986  Captain Sisay                                   2975 decks  {2}{G}{W}        Legendary Creature — Human Soldier
 [x]  987  Alphinaud Leveilleur                            2973 decks  {3}{U}           Legendary Creature — Elf Wizard
 [x]  988  Miles "Tails" Prower                            2969 decks  {1}{W}{U}        Legendary Creature — Fox Artificer
-[ ]  989  Thromok the Insatiable                          2966 decks  {3}{R}{G}        Legendary Creature — Hellion
+[x]  989  Thromok the Insatiable                          2966 decks  {3}{R}{G}        Legendary Creature — Hellion
 [x]  990  Olivia Voldaren                                 2959 decks  {2}{B}{R}        Legendary Creature — Vampire
 [x]  991  Dark Leo & Shredder                             2926 decks  {W}{B}           Legendary Creature — Mutant Ninja Turtle Human
 [x]  992  Aatchik, Emerald Radian                         2925 decks  {3}{B}{B}{G}     Legendary Creature — Insect Druid
