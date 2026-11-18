@@ -3,11 +3,29 @@
  * ability (rule 603.12) set off inside the resolution of the Nth one (the
  * `resolved-this-turn` condition around a `reflexive-trigger`), and a static
  * "as long as two or more creatures died under your control this turn" (a
- * `turn-history` condition on a static): Gimli, Mournful Avenger.
+ * `turn-history` condition on a static): Gimli, Mournful Avenger. And the
+ * same count as an amount, `{ timesResolvedThisTurn }`: Bronze Cudgels' "+X/+0,
+ * where X is the number of times this ability has resolved this turn".
  */
 import { describe, expect, it } from "vitest";
 
-import { B, counters, destroy, keywords, nextTurn, pickTargets, pt, settle, spawn, table, zone } from "./harness.js";
+import {
+  B,
+  activate,
+  counters,
+  destroy,
+  keywords,
+  lands,
+  nextTurn,
+  pickTargets,
+  pt,
+  ref,
+  settle,
+  spawn,
+  table,
+  toStep,
+  zone,
+} from "./harness.js";
 
 describe("Gimli, Mournful Avenger", () => {
   it("has indestructible once two creatures died under your control this turn — and not for an opponent's", () => {
@@ -86,5 +104,37 @@ describe("Gimli, Mournful Avenger", () => {
     settle(game);
     expect(counters(game, gimli)).toBe(3);
     expect(zone(game, gimli)).toBe("battlefield");
+  });
+});
+
+describe("Bronze Cudgels", () => {
+  it("gives +1/+0, then +2/+0, then +3/+0: each resolution counted, this one included (its ruling)", () => {
+    const { game } = table();
+    lands(game, "Wastes", 7);
+    const bears = spawn(game, "Grizzly Bears");
+    const cudgels = spawn(game, "Bronze Cudgels");
+    activate(game, cudgels, 1, { targets: [ref(bears)] });
+    activate(game, cudgels, 0);
+    expect(pt(game, bears)).toEqual({ power: 3, toughness: 2 });
+    activate(game, cudgels, 0);
+    expect(pt(game, bears)).toEqual({ power: 5, toughness: 2 });
+    activate(game, cudgels, 0);
+    expect(pt(game, bears)).toEqual({ power: 8, toughness: 2 });
+  });
+
+  it("counts a resolution while unattached, and starts again next turn", () => {
+    const { game } = table();
+    lands(game, "Wastes", 5);
+    const bears = spawn(game, "Grizzly Bears");
+    const cudgels = spawn(game, "Bronze Cudgels");
+    activate(game, cudgels, 0);
+    expect(pt(game, bears)).toEqual({ power: 2, toughness: 2 });
+    activate(game, cudgels, 1, { targets: [ref(bears)] });
+    activate(game, cudgels, 0);
+    expect(pt(game, bears)).toEqual({ power: 4, toughness: 2 });
+    toStep(game, "precombat-main");
+    expect(pt(game, bears)).toEqual({ power: 2, toughness: 2 });
+    activate(game, cudgels, 0);
+    expect(pt(game, bears)).toEqual({ power: 3, toughness: 2 });
   });
 });

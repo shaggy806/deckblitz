@@ -2720,6 +2720,7 @@
   "trigger:delayed-whenever-chosen-permanent",
   "effect:amount-total-toxic-value",
   "trigger:first-draw-in-your-draw-step",
+  "effect:amount-times-resolved-this-turn",
   "trigger:untap-trigger",
   "trigger:saga-final-chapter-triggers",
   "trigger:phases-out",

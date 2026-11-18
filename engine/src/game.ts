@@ -34914,7 +34914,8 @@ export class Game {
     if (ability === undefined) return true;
     let known = this.resolutionCountReaders.get(ability);
     if (known === undefined) {
-      known = JSON.stringify(ability).includes('"kind":"resolved-this-turn"');
+      const text = JSON.stringify(ability);
+      known = text.includes('"kind":"resolved-this-turn"') || text.includes('"timesResolvedThisTurn"');
       this.resolutionCountReaders.set(ability, known);
     }
     return known;
@@ -46599,6 +46600,9 @@ controlledBy,
           undefined,
           controller,
         ),
+      // Which resolution this turn this is, the one in progress counted
+      // (`recordAbilityResolution`, for an ability that reads it).
+      timesResolvedThisTurn: () => resolutionCount,
       // A copy of something that has left the zone this refers to it in —
       // "a copy of that creature" of one that died — copies it as it last
       // existed there (rule 608.2h): its source, triggering object or a

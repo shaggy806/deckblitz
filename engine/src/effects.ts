@@ -1032,6 +1032,11 @@ export type EffectAmount =
    * `anyController`: every creature that died this turn, whoever controlled
    * it (Spymaster's Vault). */
   | { readonly creaturesDiedThisTurn: true; readonly anyController?: true }
+  /** "Where X is **the number of times this ability has resolved this
+   * turn**" (Bronze Cudgels): the resolution in progress included, so the
+   * first is 1 (its ruling) — the count the `resolved-this-turn` condition
+   * reads, per ability of one object (rule 400.7), restarting each turn. */
+  | { readonly timesResolvedThisTurn: true }
   /** The product of several amounts — Gray Merchant of Asphodel gains "life
    * equal to the life lost this way", which is its devotion to black times
    * the number of opponents who lost that much. Composes, so it stays out of
@@ -13383,6 +13388,8 @@ export interface EffectApi {
   opponentsControllingFewer(filter: CardFilter): number;
   /** See the `{ creaturesDiedThisTurn }` {@link EffectAmount}. */
   creaturesDiedThisTurn(anyController?: boolean): number;
+  /** See the `{ timesResolvedThisTurn }` {@link EffectAmount}. */
+  timesResolvedThisTurn(): number;
   /** See the `{ powerOf }` / `{ toughnessOf }` {@link EffectAmount}s — a
    * permanent that has left the battlefield since the spell or ability
    * referred to it reads as it last existed there. */
@@ -18351,6 +18358,7 @@ export function signedAmountValue(
     return object === undefined ? 0 : ctx.creaturesBlocking(object);
   }
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
+  if ("timesResolvedThisTurn" in amount) return ctx.timesResolvedThisTurn();
   if ("powerOf" in amount) {
     const ref = objectRefRead(amount.powerOf, ctx);
     if (ref === undefined) return 0;

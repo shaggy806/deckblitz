@@ -7649,7 +7649,9 @@ clause (section 9):
   this ability resolves for the third time this turn**, ~ fights up to one
   target creature you don't control" (Gimli, Mournful Avenger) is a
   `reflexive-trigger` inside that `conditional` (rule 603.12: its target is
-  chosen as it triggers, not as the ability did).
+  chosen as it triggers, not as the ability did). The count as an amount is
+  `{ timesResolvedThisTurn: true }` — Bronze Cudgels' "+X/+0, where X is the
+  number of times this ability has resolved this turn" (this one included).
 - `{ kind: "activated-this-turn", atLeast }` — "if this ability has been
   **activated four or more times this turn**" (Dragon Whelp: `atLeast: 4`).
   Every activation counts as it's made, resolved or not, the resolving one
