@@ -887,6 +887,7 @@ import _poolStunSniper from "../pool/stun-sniper.js";
 import _poolSulfurousMire from "../pool/sulfurous-mire.js";
 import _poolSumalaWoodshaper from "../pool/sumala-woodshaper.js";
 import _poolSummonChocoMog from "../pool/summon-choco-mog.js";
+import _poolSunbirdEffigy from "../pool/sunbird-effigy.js";
 import _poolSunbladeElf from "../pool/sunblade-elf.js";
 import _poolSuturedGhoul from "../pool/sutured-ghoul.js";
 import _poolSvogthosTheRestlessTomb from "../pool/svogthos-the-restless-tomb.js";
@@ -1966,6 +1967,7 @@ const shard: CardShard = {
     _poolSulfurousMire,
     _poolSumalaWoodshaper,
     _poolSummonChocoMog,
+    _poolSunbirdEffigy,
     _poolSunbladeElf,
     _poolSuturedGhoul,
     _poolSvogthosTheRestlessTomb,

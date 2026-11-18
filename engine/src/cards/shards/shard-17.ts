@@ -933,6 +933,7 @@ import _poolUnearthlyBlizzard from "../pool/unearthly-blizzard.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
 import _poolUnsummon from "../pool/unsummon.js";
+import _poolUrbanBurgeoning from "../pool/urban-burgeoning.js";
 import _poolUrzaLordHighArtificer from "../pool/urza-lord-high-artificer.js";
 import _poolVadrikAstralArchmage from "../pool/vadrik-astral-archmage.js";
 import _poolVanguardOfBrimaz from "../pool/vanguard-of-brimaz.js";
@@ -1970,6 +1971,7 @@ const shard: CardShard = {
     _poolUnholyOfficiant,
     _poolUnknownShores,
     _poolUnsummon,
+    _poolUrbanBurgeoning,
     _poolUrzaLordHighArtificer,
     _poolVadrikAstralArchmage,
     _poolVanguardOfBrimaz,

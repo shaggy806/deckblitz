@@ -3782,6 +3782,7 @@ import _poolBygoneMarvels from "./pool/bygone-marvels.js";
 import _poolByrkeLongEarOfTheLaw from "./pool/byrke-long-ear-of-the-law.js";
 import _poolBywayBarterer from "./pool/byway-barterer.js";
 import _poolBywayCourier from "./pool/byway-courier.js";
+import _poolCAMP from "./pool/c-a-m-p.js";
 import _poolCabalArchon from "./pool/cabal-archon.js";
 import _poolCabalCoffers from "./pool/cabal-coffers.js";
 import _poolCabalConditioning from "./pool/cabal-conditioning.js";
@@ -23023,6 +23024,7 @@ import _poolRosethornAcolyte from "./pool/rosethorn-acolyte.js";
 import _poolRosethornHalberd from "./pool/rosethorn-halberd.js";
 import _poolRoshanHiddenMagister from "./pool/roshan-hidden-magister.js";
 import _poolRosheenMeanderer from "./pool/rosheen-meanderer.js";
+import _poolRosheenRoaringProphet from "./pool/rosheen-roaring-prophet.js";
 import _poolRosieCottonOfSouthLane from "./pool/rosie-cotton-of-south-lane.js";
 import _poolRosnakhtHeirOfRohgahh from "./pool/rosnakht-heir-of-rohgahh.js";
 import _poolRotCurseRakshasa from "./pool/rot-curse-rakshasa.js";
@@ -27208,6 +27210,8 @@ import _poolSunbakedCanyon from "./pool/sunbaked-canyon.js";
 import _poolSunbathingRootwalla from "./pool/sunbathing-rootwalla.js";
 import _poolSunbeamSpellbomb from "./pool/sunbeam-spellbomb.js";
 import _poolSunbillowVerge from "./pool/sunbillow-verge.js";
+import _poolSunbirdEffigy from "./pool/sunbird-effigy.js";
+import _poolSunbirdStandard from "./pool/sunbird-standard.js";
 import _poolSunbirdsInvocation from "./pool/sunbirds-invocation.js";
 import _poolSunbladeAngel from "./pool/sunblade-angel.js";
 import _poolSunbladeElf from "./pool/sunblade-elf.js";
@@ -30241,6 +30245,7 @@ import _poolUrabraskTheHidden from "./pool/urabrask-the-hidden.js";
 import _poolUrabrask from "./pool/urabrask.js";
 import _poolUrabrasksAnointer from "./pool/urabrasks-anointer.js";
 import _poolUrabrasksForge from "./pool/urabrasks-forge.js";
+import _poolUrbanBurgeoning from "./pool/urban-burgeoning.js";
 import _poolUrbanDaggertooth from "./pool/urban-daggertooth.js";
 import _poolUrbanEvolution from "./pool/urban-evolution.js";
 import _poolUrbanRetreat from "./pool/urban-retreat.js";
@@ -37271,6 +37276,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolByrkeLongEarOfTheLaw,
   _poolBywayBarterer,
   _poolBywayCourier,
+  _poolCAMP,
   _poolCabalArchon,
   _poolCabalCoffers,
   _poolCabalConditioning,
@@ -56512,6 +56518,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRosethornHalberd,
   _poolRoshanHiddenMagister,
   _poolRosheenMeanderer,
+  _poolRosheenRoaringProphet,
   _poolRosieCottonOfSouthLane,
   _poolRosnakhtHeirOfRohgahh,
   _poolRotCurseRakshasa,
@@ -60697,6 +60704,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSunbathingRootwalla,
   _poolSunbeamSpellbomb,
   _poolSunbillowVerge,
+  _poolSunbirdEffigy,
+  _poolSunbirdStandard,
   _poolSunbirdsInvocation,
   _poolSunbladeAngel,
   _poolSunbladeElf,
@@ -63730,6 +63739,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrabrask,
   _poolUrabrasksAnointer,
   _poolUrabrasksForge,
+  _poolUrbanBurgeoning,
   _poolUrbanDaggertooth,
   _poolUrbanEvolution,
   _poolUrbanRetreat,
@@ -70773,6 +70783,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/byrke-long-ear-of-the-law": _poolByrkeLongEarOfTheLaw,
   "pool/byway-barterer": _poolBywayBarterer,
   "pool/byway-courier": _poolBywayCourier,
+  "pool/c-a-m-p": _poolCAMP,
   "pool/cabal-archon": _poolCabalArchon,
   "pool/cabal-coffers": _poolCabalCoffers,
   "pool/cabal-conditioning": _poolCabalConditioning,
@@ -90014,6 +90025,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rosethorn-halberd": _poolRosethornHalberd,
   "pool/roshan-hidden-magister": _poolRoshanHiddenMagister,
   "pool/rosheen-meanderer": _poolRosheenMeanderer,
+  "pool/rosheen-roaring-prophet": _poolRosheenRoaringProphet,
   "pool/rosie-cotton-of-south-lane": _poolRosieCottonOfSouthLane,
   "pool/rosnakht-heir-of-rohgahh": _poolRosnakhtHeirOfRohgahh,
   "pool/rot-curse-rakshasa": _poolRotCurseRakshasa,
@@ -94199,6 +94211,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sunbathing-rootwalla": _poolSunbathingRootwalla,
   "pool/sunbeam-spellbomb": _poolSunbeamSpellbomb,
   "pool/sunbillow-verge": _poolSunbillowVerge,
+  "pool/sunbird-effigy": _poolSunbirdEffigy,
+  "pool/sunbird-standard": _poolSunbirdStandard,
   "pool/sunbirds-invocation": _poolSunbirdsInvocation,
   "pool/sunblade-angel": _poolSunbladeAngel,
   "pool/sunblade-elf": _poolSunbladeElf,
@@ -97232,6 +97246,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/urabrask": _poolUrabrask,
   "pool/urabrasks-anointer": _poolUrabrasksAnointer,
   "pool/urabrasks-forge": _poolUrabrasksForge,
+  "pool/urban-burgeoning": _poolUrbanBurgeoning,
   "pool/urban-daggertooth": _poolUrbanDaggertooth,
   "pool/urban-evolution": _poolUrbanEvolution,
   "pool/urban-retreat": _poolUrbanRetreat,

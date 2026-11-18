@@ -744,6 +744,7 @@ import _poolRootCage from "../pool/root-cage.js";
 import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
 import _poolRootcastApprenticeship from "../pool/rootcast-apprenticeship.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
+import _poolRosheenRoaringProphet from "../pool/rosheen-roaring-prophet.js";
 import _poolRottingGiant from "../pool/rotting-giant.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
 import _poolRuneOfMortality from "../pool/rune-of-mortality.js";
@@ -1813,6 +1814,7 @@ const shard: CardShard = {
     _poolRootbornDefenses,
     _poolRootcastApprenticeship,
     _poolRosemaneCentaur,
+    _poolRosheenRoaringProphet,
     _poolRottingGiant,
     _poolRoyalTrooper,
     _poolRuneOfMortality,

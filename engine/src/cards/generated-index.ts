@@ -1314,6 +1314,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Stream of Life": "341aa1b2-e600-4580-b0cd-e1582b75dc81",
   "Summon: Alexander": "https://cards.scryfall.io/art_crop/back/5/f/5f51c853-949d-44e9-a3a2-02e1ce69a147.jpg",
   "Summon: Esper Maduin": "https://cards.scryfall.io/art_crop/back/0/f/0f503360-216a-4629-89b2-d32072850aef.jpg",
+  "Sunbird Effigy": "https://cards.scryfall.io/art_crop/back/e/0/e0b6d40a-fded-4625-b03c-765c88d75766.jpg",
   "Sweeping Cleave": "https://cards.scryfall.io/art_crop/back/2/1/21e34888-f57c-4f5d-bb5c-b82be980d145.jpg",
   "Swift Spiral": "https://cards.scryfall.io/art_crop/back/0/4/043718ea-59f6-4d1a-94c5-271704c1a38a.jpg",
   "Sword of the Realms": "https://cards.scryfall.io/art_crop/back/9/7/97502411-5c93-434c-b77b-ceb2c32feae7.jpg",
