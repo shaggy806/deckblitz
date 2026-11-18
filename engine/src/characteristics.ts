@@ -7419,8 +7419,7 @@ export function playerEffectCovers(
   const object = state.objects[id];
   if (object === undefined || object.zone !== "battlefield") return false;
   if (combat.controlledBy !== undefined && object.controller !== combat.controlledBy) return false;
-  const except = combat.except;
-  if (except !== undefined && except.object === id && (object.zoneChangeCount ?? 0) === except.zoneChangeCount) return false;
+  if (combat.except?.some((e) => e.object === id && (object.zoneChangeCount ?? 0) === e.zoneChangeCount) === true) return false;
   return matchesFilter(state, registry, id, combat.filter, { you: combat.side });
 }
 

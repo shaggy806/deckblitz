@@ -6490,13 +6490,14 @@ export interface PlayerEffect {
    * `filter` is read from `side`'s side, usually the owner's; "creatures
    * **target player** controls" is that player's, `controlledBy` the
    * "controlled by" a filter can't say as it's read from one side. `except`
-   * is the one permanent left out, by its stint (rule 400.7). */
+   * is the permanents left out, each by its stint (rule 400.7): Mark for
+   * Death's one, Fight or Flight's chosen pile. */
   readonly combat?: {
     readonly rules: readonly CombatRule[];
     readonly filter: CardFilter;
     readonly side: PlayerId;
     readonly controlledBy?: PlayerId;
-    readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+    readonly except?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   };
 }
 

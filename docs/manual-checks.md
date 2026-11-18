@@ -8914,3 +8914,16 @@ Each board's die comes up 4.
 - **Do:** Activate The Book of Vile Darkness.
 - **Expect:** The Book, Eye of Vecna and Hand of Vecna go to exile together, and Vecna, an 8/8 indestructible token, enters. Its "When Eye of Vecna enters" ability triggers: you draw a card and lose 2 life (40 to 38).
 - **Not a bug:** Vecna's abilities say "Eye of Vecna" and "Hand of Vecna": they're those cards' abilities, now its own.
+## Only the chosen pile can attack (2026-11-18)
+
+### Fight or Flight: you separate Bob's creatures, and only his chosen pile can attack
+- **Do:** At Bob's beginning of combat, click Craw Wurm, then Confirm piles.
+- **Expect:** The banner reads "Fight or Flight: separate into two piles — Bob chooses one; the chosen pile can attack this turn, and no other creature of theirs can", Bob's three creatures badged "Pile 2" and Craw Wurm turning to "Pile 1". After Bob chooses, only creatures from his chosen pile attack you.
+
+### Fight or Flight: Bob chooses which pile can attack
+- **Do:** At Bob's beginning of combat, click Craw Wurm, then Confirm piles. As Bob, click Pile 2, then All attack.
+- **Expect:** Bob's banner reads "Fight or Flight: choose a pile — the chosen pile can attack this turn, and no other creature of theirs can", with Pile 1 (1) and Pile 2 (2). Declaring attackers, All attack takes Hill Giant and Grizzly Bears only: Craw Wurm can't attack.
+
+### Fight or Flight: in a 4-player game, you separate Carol's creatures on her turn
+- **Do:** At Carol's beginning of combat, click Craw Wurm, then Confirm piles.
+- **Expect:** Only Carol's three creatures are badged "Pile 2" (Bob's and Dave's aren't), and Craw Wurm turns to "Pile 1". After Carol chooses, only creatures from her chosen pile attack.

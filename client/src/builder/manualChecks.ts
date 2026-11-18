@@ -13491,4 +13491,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  // --- Only the chosen pile can attack (2026-11-18) ---------------------------
+  preset(
+    "Fight or Flight: you separate Bob's creatures, and only his chosen pile can attack",
+    // Bob's turn, before combat: the trigger asks you at his beginning of combat.
+    board({
+      you: { bf: ['Fight or Flight'] },
+      opp: { bf: ['Craw Wurm', 'Hill Giant', 'Grizzly Bears'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    'Fight or Flight: Bob chooses which pile can attack',
+    board({
+      you: { bf: ['Fight or Flight'] },
+      opp: { human: true, bf: ['Craw Wurm', 'Hill Giant', 'Grizzly Bears'] },
+      turn: 0,
+    }),
+  ),
+  preset(
+    "Fight or Flight: in a 4-player game, you separate Carol's creatures on her turn",
+    board({
+      you: { bf: ['Fight or Flight'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Craw Wurm', 'Hill Giant', 'Llanowar Elves'] }, { bf: ['Savannah Lions'] }],
+      turn: 1,
+    }),
+  ),
 ]

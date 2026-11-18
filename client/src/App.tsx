@@ -973,6 +973,7 @@ const PILE_FATE_TEXT: Record<SeparatePilesAction['fates']['chosen'], string> = {
   'turned-face-up': 'is turned face up',
   'cast-or-hand': 'lets a spell from it be cast free, and the rest go into the hand',
   'play-free': 'lets its lands be played and its spells be cast free',
+  'can-attack': 'can attack this turn, and no other creature of theirs can',
 }
 
 /** "The chosen pile goes into the hand, the other into the graveyard" — "the

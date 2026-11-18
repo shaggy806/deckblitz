@@ -74,7 +74,7 @@ export function whyNotTwoPiles(
 
 /** What one pile's fate is worth to `who` (positive is good for them). A
  * card going to its owner's hand or onto the battlefield is a gain for that
- * player; a permanent lost is a loss; a card from a library or graveyard put
+ * player, as is a creature left free to attack (`"can-attack"`); a permanent lost is a loss; a card from a library or graveyard put
  * into a graveyard or exile is roughly nothing. Another player's gain is
  * `who`'s loss. Objects missing from `worth` (a face-down card `who` can't
  * see) count `unseen` each. */
@@ -88,7 +88,7 @@ export function pileFateValue(
 ): number {
   if (fate === undefined) return 0;
   const sign =
-    fate === "hand" || fate === "battlefield" || fate === "cast-or-hand" || fate === "play-free"
+    fate === "hand" || fate === "battlefield" || fate === "cast-or-hand" || fate === "play-free" || fate === "can-attack"
       ? 1
       : fate === "lose"
         ? -1

@@ -8170,6 +8170,13 @@ export type EffectSpec =
        * Mark for Death's "**other** creatures that player controls" (the
        * object it is as this resolves, rule 400.7). */
       readonly exceptTarget?: number;
+      /** With `filter` and not `asItResolves`: every permanent in every
+       * target slot is left out — Fight or Flight's "**only creatures in the
+       * pile of their choice** can attack this turn", a pile fate's
+       * `together` putting the pile in the slots: everything else that
+       * player controls can't attack, a creature arriving later too (its
+       * ruling). Each the object it is as this resolves (rule 400.7). */
+      readonly exceptTargets?: true;
       /** With `filter`: the permanents matching it **as this resolves**, each
        * given the restrictions as a modifier for `duration`, rather than a
        * rule binding later arrivals — where the sentence also changes their
@@ -12875,7 +12882,12 @@ export type PileObjects =
  * free: true, repeat: true }, word: "play-free" }`. `"library-bottom"` is "the
  * other on the bottom of your library **in any order**" (Jace, Architect of
  * Thought): each owner arranges their own cards (rule 401.4), asked only when
- * the order is a choice.
+ * the order is a choice. A `together` with `always` applies with an empty
+ * pile too (and with nothing at all to separate, rule 700.3d — two empty
+ * piles): Fight or Flight's "only creatures in the pile of their choice can
+ * attack this turn" is `{ together: { kind: "restrict", …, exceptTargets:
+ * true }, word: "can-attack", always: true }`, which binds every creature that
+ * player controls, later arrivals included, but the chosen pile's.
  */
 export type PileFate =
   | "hand"
@@ -12884,7 +12896,7 @@ export type PileFate =
   | "battlefield"
   | "library-bottom"
   | { readonly effect: EffectSpec }
-  | { readonly together: EffectSpec; readonly word: PileFateWord };
+  | { readonly together: EffectSpec; readonly word: PileFateWord; readonly always?: true };
 
 /** One pile of an `exile-into-piles`: the top `libraryTop` cards, face down
  * unless `faceUp`. */
@@ -12901,7 +12913,8 @@ export interface ExilePileSpec {
  * up". `"cast-or-hand"`: one spell from it may be cast free, the rest go to the
  * hand (Abstract Performance). `"play-free"`: its lands may be played and its
  * spells cast without paying their mana costs, the rest staying where they are
- * (Brilliant Ultimatum).
+ * (Brilliant Ultimatum). `"can-attack"`: its creatures can attack this turn and
+ * no other creature of their controller's can (Fight or Flight).
  */
 export type PileFateWord =
   | "hand"
@@ -12913,7 +12926,8 @@ export type PileFateWord =
   | "other"
   | "turned-face-up"
   | "cast-or-hand"
-  | "play-free";
+  | "play-free"
+  | "can-attack";
 
 /**
  * A keyword ability given to a card in a graveyard (rule 604.1 — a static's
@@ -12953,6 +12967,11 @@ export type GraveyardKeyword =
   | "escape"
   | "scavenge"
   | "jump-start";
+
+/** A `together` fate with `always`: applied to an empty pile too. */
+export function pileFateAlways(fate: PileFate): boolean {
+  return typeof fate === "object" && "together" in fate && fate.always === true;
+}
 
 /** See {@link PileFateWord}. */
 export function pileFateWord(fate: PileFate): PileFateWord {
@@ -23302,14 +23321,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           durationHere(ctx),
         );
         if (lasts === undefined) return;
+        // The permanents left out, each by its stint (rule 400.7): one slot's,
+        // or every slot's (`exceptTargets`).
+        const except = (spec.exceptTargets === true ? ctx.targets : spared === undefined ? [] : [spared]).flatMap((t) =>
+          t?.kind === "object" ? [{ object: t.object, zoneChangeCount: ctx.zoneChangeCountOf(t.object) ?? 0 }] : [],
+        );
         ctx.restrictOverGame(
           {
             rules,
             filter: spec.filter,
             side: scopeTo ?? ctx.controller,
-            ...(spared?.kind === "object"
-              ? { except: { object: spared.object, zoneChangeCount: ctx.zoneChangeCountOf(spared.object) ?? 0 } }
-              : {}),
+            ...(except.length > 0 ? { except } : {}),
           },
           "expires" in lasts ? lasts.expires : "end-of-turn",
           "during" in lasts ? lasts.during : undefined,
@@ -25057,8 +25079,15 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                 : { graveyard: what.graveyard },
           separator,
         );
-        // Nothing to separate: two empty piles, and nothing to do to either.
-        if (begun.objects.length === 0) return;
+        // Nothing to separate: two empty piles (rule 700.3d), and nothing to
+        // do to either — but a fate that applies to an empty pile too
+        // (Fight or Flight's "only creatures in the chosen pile can attack").
+        if (begun.objects.length === 0) {
+          if (pileFateAlways(spec.chosen) || (spec.rest !== undefined && pileFateAlways(spec.rest))) {
+            ctx.finishPiles([], [], spec.chosen, spec.rest);
+          }
+          return;
+        }
         applyEffectSpec({ ...spec, progress: { objects: begun.objects, lookers: begun.lookers } }, ctx);
         return;
       }

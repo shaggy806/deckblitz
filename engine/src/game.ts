@@ -317,6 +317,7 @@ import {
   linksToSource,
   mayBeDone,
   opponentsVoting,
+  pileFateAlways,
   protectionLabel,
   substituteChosen,
   substituteChosenCreatureType,
@@ -7236,6 +7237,11 @@ export class Game {
       if (shield.byFilter?.except !== undefined) pinned.add(shield.byFilter.except.object);
       if (shield.from !== undefined) pinned.add(shield.from.object);
       if (shield.redirect?.to.kind === "object") pinned.add(shield.redirect.to.object);
+    }
+    // A token a combat rule leaves out (Mark for Death's target, Fight or
+    // Flight's chosen pile): folded back, the exception would name a stack.
+    for (const effect of this.state.playerEffects ?? []) {
+      for (const spared of effect.combat?.except ?? []) pinned.add(spared.object);
     }
     // A spell or ability on the stack whose target was locked in to one token
     // (`lockInTargets`): a new batch folded into that token would make the
@@ -44104,7 +44110,9 @@ controlledBy,
         const carryOut = (pile: readonly ObjectId[], fate: PileFate | undefined): void => {
           if (fate === undefined) return;
           const still = pile.filter((id) => this.state.objects[id]?.zone === zones.get(id));
-          if (still.length === 0) return;
+          // An empty pile has no fate — unless it's one over the rest of the
+          // pile's side as well (Fight or Flight's `always`).
+          if (still.length === 0 && !pileFateAlways(fate)) return;
           // One effect over the whole pile (Abstract Performance's cast).
           if (typeof fate === "object" && "together" in fate) {
             applyEffectSpec(
