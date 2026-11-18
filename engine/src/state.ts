@@ -7075,6 +7075,19 @@ export interface GameState {
      * Book of Vile Darkness): what can't be sacrificed still pays, nothing sees
      * a sacrifice, and they're recorded as `{ paid: "exiled" }`. */
     readonly exile?: true;
+    /** An "Exile a card from your graveyard" in the same cost (Tawnos, Solemn
+     * Survivor's "Sacrifice two artifact tokens, Exile an artifact or creature
+     * card from your graveyard"), paid once these are sacrificed: one cost
+     * asks one thing at a time, and a cost's parts are paid in any order
+     * (rule 601.2h). What `Game.graveyardExileCostAt` made of it; the cards
+     * go on `onto` as `{ paid: "exiled" }`. */
+    readonly thenGraveyardExile?: {
+      readonly count: number;
+      readonly filter?: CardFilter;
+      readonly fromTop?: true;
+      readonly singleGraveyard?: true;
+      readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+    };
     /** Who gets priority once it's paid: the player who activated it. */
     readonly priorityTo: PlayerId;
     /** The cost is a mana ability's (Springjack Pasture's "Sacrifice X

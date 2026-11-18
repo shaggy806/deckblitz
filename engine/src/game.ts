@@ -28110,8 +28110,14 @@ export class Game {
     }
     if (ability.cost.exileFromGraveyard !== undefined) {
       // Paid with a decision (a mana ability's waiting for it, rule 605.3b);
-      // and one cost asks one thing at a time.
-      if (ability.cost.discard !== undefined || ability.cost.returnToHand !== undefined || sacrificeParts !== null) {
+      // and one cost asks one thing at a time. Beside a sacrifice of several
+      // it's asked once those are sacrificed (`thenGraveyardExile`), but not
+      // for a mana ability, whose mana waits on the one answer.
+      if (
+        ability.cost.discard !== undefined ||
+        ability.cost.returnToHand !== undefined ||
+        (sacrificeParts !== null && isManaAbility(ability))
+      ) {
         return `${def.name}'s ability can't ask for two cost choices at once yet`;
       }
       const { count, filter: written, singleGraveyard } = ability.cost.exileFromGraveyard;
@@ -29113,9 +29119,15 @@ export class Game {
     // chosen).
     const costExile = ability.cost.exileFromGraveyard;
     if (costExile !== undefined) {
-      this.withDecisionSource(sourceId, () =>
-        this.payGraveyardExileCost(player, sourceId, this.graveyardExileCostAt(player, costExile, chosenX, sourceId), player, abilityId),
-      );
+      const exileCost = this.graveyardExileCostAt(player, costExile, chosenX, sourceId);
+      const sacrificing = this.state.pendingCostSacrifice;
+      if (sacrificeParts !== null && sacrificing !== undefined) {
+        // Still choosing what to sacrifice (Tawnos, Solemn Survivor): asked
+        // once that's paid, one thing at a time (rule 601.2h).
+        this.state.pendingCostSacrifice = { ...sacrificing, thenGraveyardExile: exileCost };
+      } else {
+        this.withDecisionSource(sourceId, () => this.payGraveyardExileCost(player, sourceId, exileCost, player, abilityId));
+      }
     }
     // "Exile a card from your hand", "exile a spell you control" likewise.
     const costHandExile = ability.cost.exileFromHand;
@@ -29728,9 +29740,13 @@ export class Game {
   }
 
   private graveyardCostCandidates(player: PlayerId, filter: CardFilter | undefined, except: ObjectId): ObjectId[] {
+    // A token isn't a card (rule 108.2b): one sacrificed for the same cost is
+    // still there until state-based actions are next checked (111.8, 704.3 —
+    // Tawnos, Solemn Survivor's two artifact tokens), and can't pay.
     return this.state.zones.perPlayer[player].graveyard.filter(
       (id) =>
         id !== except &&
+        this.state.objects[id]?.isToken !== true &&
         (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: player })),
     );
   }
@@ -29897,7 +29913,10 @@ export class Game {
   ): ObjectId[] {
     return this.state.turnOrder.flatMap((owner) => {
       const cards = this.state.zones.perPlayer[owner].graveyard.filter(
-        (id) => id !== source && (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: player })),
+        (id) =>
+          id !== source &&
+          this.state.objects[id]?.isToken !== true &&
+          (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: player })),
       );
       return cards.length >= count ? cards : [];
     });
@@ -59578,6 +59597,14 @@ controlledBy,
       });
       // The sacrificed set, for "the total power of the sacrificed creatures".
       if (pending.onto !== undefined) this.recordPaid(pending.onto, "sacrificed", victims, leftFrom);
+    }
+    // "…, Exile an artifact or creature card from your graveyard" in the same
+    // cost (Tawnos, Solemn Survivor): asked now, the sacrifice paid.
+    const thenExile = pending.thenGraveyardExile;
+    if (thenExile !== undefined) {
+      this.withDecisionSource(pending.source, () =>
+        this.payGraveyardExileCost(pending.player, pending.source, thenExile, pending.priorityTo, pending.onto),
+      );
     }
     if (manaAbility !== undefined && ability !== undefined) {
       this.resolveManaAbility(

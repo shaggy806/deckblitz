@@ -4987,8 +4987,12 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   turn it is; no more matching cards than that are exiled without asking.
   Either way they leave the graveyard as one move. Gates activation on having
   `count` such cards besides the source. Not beside a
-  `discard`, a `returnToHand` or a sacrifice of several (each asks; one at a
-  time isn't built). `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X
+  `discard` or a `returnToHand` (each asks; one at a time isn't built). Beside
+  a sacrifice of several it's asked once those are sacrificed (Tawnos, Solemn
+  Survivor's "Sacrifice two artifact tokens, Exile an artifact or creature card
+  from your graveyard"; not on a mana ability), and a token sacrificed for it
+  is no card to exile (`exile-graveyard-beside-sacrifice-several.test.ts`).
+  `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X
   cards from your graveyard": the same X as the mana's, capped by the cards
   there (`xCost.maxX`). `graveyard-exile-cost.test.ts`.
 - `putFromExile: N` — a processor's "Put a card an opponent owns from exile

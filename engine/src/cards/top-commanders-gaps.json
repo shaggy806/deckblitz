@@ -3049,7 +3049,8 @@
   "replacement:opponent-chooses-creature-type-as-enters",
   "cost:exile-named-artifacts",
   "effect:token-gains-exiled-triggers",
-  "amount:cards-exiled-with-delve"
+  "amount:cards-exiled-with-delve",
+  "cost:exile-from-graveyard-beside-sacrifice-several"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

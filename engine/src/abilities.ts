@@ -505,7 +505,12 @@ export interface AbilityCost {
    * source never counts, wherever it is. Gates activation on having enough
    * such cards. A mana ability's (Molt Tender) waits for the answer and adds
    * its mana then (rule 605.3b), as `exileFromHand`'s does. Not beside a
-   * `discard`, a `returnToHand` or a sacrifice of several, which ask too. `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X cards from your
+   * `discard` or a `returnToHand`, which ask too. Beside a sacrifice of
+   * several it's asked once those are sacrificed (Tawnos, Solemn Survivor's
+   * "Sacrifice two artifact tokens, Exile an artifact or creature card from
+   * your graveyard" — rule 601.2h: in any order), except on a mana ability.
+   * A token is never a card (rule 108.2b), so a token sacrificed for the
+   * same cost, still in the graveyard, doesn't pay. `count: "x"` is Necropolis Fiend's "{X}, {T}, Exile X cards from your
    * graveyard": the same X as the mana's, capped at the cards there.
    *
    * `fromTop` is "exile **the top** [creature] card of your graveyard" (Alms,
