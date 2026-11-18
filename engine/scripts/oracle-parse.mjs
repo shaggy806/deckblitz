@@ -11180,13 +11180,14 @@ export function parseEffect(text, outer) {
           then: {
             kind: "for-each-target",
             from: 0,
+            choicesHeld: true,
             effect: {
               kind: "may",
               prompt: `Pay ${atStake[3]} life? If you don't, put this card on top of your library`,
               aboutTarget: 0,
               costLife: Number(atStake[3]),
               effect: { kind: "sequence", effects: [] },
-              else: { kind: "put-on-library", target: 0, position: "top" },
+              else: { kind: "put-on-library", target: 0, position: "top", atRelease: true },
             },
           },
         },

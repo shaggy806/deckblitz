@@ -2,7 +2,9 @@
 // additional cards. If you do, choose two cards in your hand drawn this turn.
 // For each of those cards, pay 4 life or put the card on top of your library."
 // What's new: `GameObject.drawnOnTurn` / `CardFilter.drawnThisTurn`, the `may`'s
-// `aboutTarget` and the `look-and-choose`'s `prompt` and `givesUp`.
+// `aboutTarget` and the `look-and-choose`'s `prompt` and `givesUp`; the
+// cards not paid for go back as one move (`for-each-target`'s `choicesHeld`,
+// `put-on-library`'s `atRelease`).
 
 import { describe, expect, it } from "vitest";
 
@@ -11,7 +13,7 @@ import { HeuristicBotController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import type { GameState } from "../state.js";
-import { A, B, enter, hand, life, settle, table, toGraveyard, toHand, toLibrary, toStep } from "./harness.js";
+import { A, B, enter, hand, life, settle, spawn, table, toGraveyard, toHand, toLibrary, tokensNamed, toStep } from "./harness.js";
 
 const drawQuestion = (s: GameState): boolean =>
   s.turn.step === "draw" && s.awaiting?.kind === "choose-modes" && s.awaiting.player === A && s.awaiting.dredgeFor === undefined;
@@ -109,6 +111,23 @@ describe("Sylvan Library", () => {
     answer(game, false);
     expect(top(game, 2)).toEqual([second, first]);
     expect(game.state.objects[first].drawnOnTurn).toBeUndefined();
+  });
+
+  it("two put back are one move: the first waits in hand for the second answer, and Wan Shi Tong triggers once", () => {
+    const { game } = atDrawStep(["Forest", "Island", "Swamp"]);
+    spawn(game, "Wan Shi Tong, All-Knowing", A);
+    answer(game, true);
+    const [first, second] = zoneChoice(game).eligible;
+    game.dispatch({ type: "choose-from-zone", player: A, chosen: [first, second] });
+    answer(game, false);
+    expect(game.state.objects[first].zone).toBe("hand");
+    answer(game, false);
+    expect(top(game, 2)).toEqual([second, first]);
+    const moves = game.eventsOfType("cards-put-into-library");
+    expect(moves).toHaveLength(1);
+    expect(moves[0].arrivals.map((arrival) => arrival.object)).toEqual([first, second]);
+    settle(game);
+    expect(tokensNamed(game, "Spirit Token (Colorless, Evasive)", A)).toBe(2);
   });
 
   it("at 7 life one can be paid for, and then the other has no question: it goes on top (rule 119.4)", () => {

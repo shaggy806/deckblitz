@@ -44183,6 +44183,17 @@ controlledBy,
         const entry = { object: target.object, by: controller, source };
         this.state.heldChoices = { ...held, counters: [...(held.counters ?? []), entry] };
       },
+      putOnLibraryAtRelease: (target, position) => {
+        if (target.kind !== "object") return;
+        const held = this.state.heldChoices;
+        const object = this.state.objects[target.object];
+        if (held === undefined || object === undefined || object.zone === "library" || object.zone === "stack") {
+          this.putOnLibrary(target.object, position);
+          return;
+        }
+        const entry = { object: target.object, stint: object.zoneChangeCount ?? 0, position };
+        this.state.heldChoices = { ...held, libraryPuts: [...(held.libraryPuts ?? []), entry] };
+      },
       manaCostToPay: (ref) => {
         const object = ref.kind === "object" ? this.state.objects[ref.object] : undefined;
         if (object === undefined || object.faceDown !== undefined) return null;
@@ -63694,6 +63705,18 @@ controlledBy,
     for (const { object, by, source } of held.counters ?? []) {
       if (this.state.objects[object]?.zone !== "stack") continue;
       this.counterSpellByEffect({ kind: "object", object }, undefined, false, by, undefined, source);
+    }
+    // Sylvan Library's put-backs: one move into libraries, in the order held,
+    // each card still the one held (rule 400.7).
+    if (held.libraryPuts !== undefined) {
+      const puts = held.libraryPuts;
+      this.withLibraryEnterBatch(() => {
+        for (const { object, stint, position } of puts) {
+          const now = this.state.objects[object];
+          if (now === undefined || (now.zoneChangeCount ?? 0) !== stint) continue;
+          this.putOnLibrary(object, position);
+        }
+      });
     }
     // Cut the Tethers: one event (rule 603.10a).
     if (held.returns !== undefined) {

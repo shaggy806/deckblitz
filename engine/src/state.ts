@@ -33,6 +33,7 @@ import type {
   ZoneChoiceSplitCase,
   ZoneSecondPick,
   GraveyardKeyword,
+  LibraryPosition,
   ModesGuess,
 } from "./effects.js";
 import type { CardFilter } from "./filter.js";
@@ -6912,6 +6913,10 @@ export interface GameState {
     /** The libraries of those who searched together (an `each-player-may`'s
      * search): shuffled once what they found has entered. */
     readonly shuffles?: readonly PlayerId[];
+    /** Cards to put into their owners' libraries together, in this order —
+     * `put-on-library`'s `atRelease` (Sylvan Library's put-backs): each with
+     * its stint when it was held. */
+    readonly libraryPuts?: readonly { readonly object: ObjectId; readonly stint: number; readonly position: LibraryPosition }[];
   };
   /**
    * The players a `search-library`'s `shufflesLater` left owing their library

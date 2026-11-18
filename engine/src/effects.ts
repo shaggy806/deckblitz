@@ -2820,6 +2820,16 @@ export type EffectSpec =
        */
       readonly eachObjectOnce?: true;
       /**
+       * Each member's question is answered in turn, and what the answers owe
+       * — a `put-on-library` with `atRelease` — happens at once when the
+       * last is answered (`GameState.heldChoices`, as `for-each-unless`
+       * holds its declines): Sylvan Library's "for each of those cards, pay 4
+       * life or put the card on top of your library" puts the cards not paid
+       * for back as one move, so "whenever one or more cards are put into a
+       * library" sees it once. Not with `simultaneous`.
+       */
+      readonly choicesHeld?: true;
+      /**
        * Each member's turn is its own "this way" (as a `repeat`'s pass is):
        * "for each of them, exile the top card of your library, then … deals
        * damage equal to **that card's** mana value" (Soulfire Eruption) reads
@@ -6253,6 +6263,15 @@ export type EffectSpec =
         | LibraryPosition
         | { readonly ownerChooses: readonly LibraryPosition[] }
         | { readonly beneathTop: EffectAmount };
+      /** With choices held (a `for-each-target`'s `choicesHeld`): it goes
+       * when they're released, with every other card held this way, as one
+       * move — one `cards-put-into-library` — in the order they were held
+       * (Sylvan Library's "for each of those cards, pay 4 life or put the
+       * card on top of your library": the cards not paid for go back
+       * together once the last is answered). A card that has left the zone
+       * it was in by then stays where it is (rule 400.7). Put at once with
+       * nothing held. Not with `ownerChooses` or `beneathTop`. */
+      readonly atRelease?: true;
     }
   | {
       /**
@@ -14499,6 +14518,8 @@ export interface EffectApi {
   drawAtRelease(player: PlayerId, count: number): void;
   /** See `counter`'s `atRelease`. */
   counterAtRelease(target: TargetRef): void;
+  /** See `put-on-library`'s `atRelease`. */
+  putOnLibraryAtRelease(target: TargetRef, position: LibraryPosition): void;
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
@@ -16137,6 +16158,8 @@ function applyForEachTargetInTurn(spec: Extract<EffectSpec, { kind: "for-each-ta
     groups = groups.filter((group) => group.length > 0);
     if (groups.length === 0) return;
     progress = { groups, outer: ctx.thisWaySince() };
+    // `choicesHeld`: what the answers owe waits for the last of them.
+    if (spec.choicesHeld === true) ctx.holdChoices();
   }
   for (;;) {
     const groups: readonly (readonly number[])[] = progress.groups;
@@ -16144,6 +16167,7 @@ function applyForEachTargetInTurn(spec: Extract<EffectSpec, { kind: "for-each-ta
     if (group === undefined) {
       // Done: what follows reads everything the members did (`ownThisWay`).
       if (spec.ownThisWay === true) ctx.scopeThisWay(progress.outer);
+      if (spec.choicesHeld === true) ctx.releaseHeldChoices();
       return;
     }
     let next: number | undefined;
@@ -19880,7 +19904,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "for-each-target": {
-      if (spec.turnOrder === true || spec.ownThisWay === true || spec.progress !== undefined) {
+      if (spec.turnOrder === true || spec.ownThisWay === true || spec.choicesHeld === true || spec.progress !== undefined) {
         applyForEachTargetInTurn(spec, ctx);
         return;
       }
@@ -21802,12 +21826,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       const target = movedRefAct(spec.target, ctx);
       if (target === undefined) return;
-      ctx.putOnLibrary(
-        target,
+      const at: LibraryPosition =
         typeof position === "object" && "beneathTop" in position
           ? { fromTop: amountValue(position.beneathTop, ctx) + 1 }
-          : position,
-      );
+          : position;
+      if (spec.atRelease === true) ctx.putOnLibraryAtRelease(target, at);
+      else ctx.putOnLibrary(target, at);
       return;
     }
     case "put-on-libraries": {

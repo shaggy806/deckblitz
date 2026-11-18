@@ -21,6 +21,8 @@ import { defineCard } from "../define.js";
 //
 // "For each of those cards" goes in the order they were picked: the second one
 // put back ends up on top of the first, so the pick is the order (rule 401.4).
+// The cards not paid for go back together once the last is answered, one move
+// into the library (`choicesHeld`, `atRelease`).
 
 const TEXT =
   "At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.";
@@ -52,13 +54,14 @@ export default defineCard({
           then: {
             kind: "for-each-target",
             from: 0,
+            choicesHeld: true,
             effect: {
               kind: "may",
               prompt: "Pay 4 life? If you don't, put this card on top of your library",
               aboutTarget: 0,
               costLife: 4,
               effect: { kind: "sequence", effects: [] },
-              else: { kind: "put-on-library", target: 0, position: "top" },
+              else: { kind: "put-on-library", target: 0, position: "top", atRelease: true },
             },
           },
         },

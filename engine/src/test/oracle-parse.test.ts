@@ -2133,7 +2133,11 @@ describe("costs and triggers", () => {
         filter: { drawnThisTurn: true },
         destination: "stay",
         givesUp: true,
-        then: { kind: "for-each-target", effect: { kind: "may", costLife: 4, aboutTarget: 0 } },
+        then: {
+          kind: "for-each-target",
+          choicesHeld: true,
+          effect: { kind: "may", costLife: 4, aboutTarget: 0, else: { kind: "put-on-library", atRelease: true } },
+        },
       },
     });
     expect(library.complete).toBe(true);
