@@ -3040,6 +3040,7 @@
   "effect:control-while-attached",
   "effect:reveal-top-any-library",
   "effect:token-copy-of-revealed-cards",
+  "bug:cda-cards-owned-in-exile",
   "bug:look-and-choose-offers-unattachable-aura",
   "bug:look-and-choose-offers-unattachable-aura",
   "decision:owner-orders-library-bottom",

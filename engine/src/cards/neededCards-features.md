@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A CDA counting the cards you own in exile — found built 2026-11-18
+
+The key `bug:cda-cards-owned-in-exile` needed no engine code: `setBasePtFromCount` takes an `AggregateSpec`, and `{
+aggregate: "count", filter: { ownedBy: "you" }, in: "exile" }` (Crackling Drake's `in`) reads in every zone (604.3),
+"you" its owner off the battlefield, a face-down card counted since its owner isn't a characteristic (109.3, 406.3a).
+Cosmogoyf (rank 15341), counting itself in exile (the ruling). `test/cda-cards-owned-in-exile.test.ts`.
+
 ### A token copy of each creature card revealed — built 2026-11-18
 
 The keys `effect:reveal-top-any-library` and `effect:token-copy-of-revealed-cards`. "Each player reveals the top card
