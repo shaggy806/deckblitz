@@ -1,9 +1,12 @@
 # Replicated rooms: a multiplayer game on every player's device
 
-Status: **proposed** (2026-11-18), for the user to approve. Built so far, as the groundwork and
-the evidence: the fuzzer's copy check (`MTG_REPLICA=1`), a state's exact form as text
-(`engine/src/state-wire.ts`) and names ordered the same on every machine (`compareNames`). None
-of the rooms themselves.
+Status: **in progress** (2026-11-18; the user: "Start step 1"). Built: the groundwork — the
+fuzzer's copy check (`MTG_REPLICA=1`), a state's exact form as text (`engine/src/state-wire.ts`),
+names ordered the same on every machine (`compareNames`) — and of step 1, the state digest
+(`stateDigest`) and the check across browsers (`npm run play:browsers -w engine`). **Step 1 is
+done but for the test laptop**: 30 recorded games came out identical in Node, in three builds of
+Chrome's engine, in Firefox's and in Safari's. Step 2, the room as a copy, is next. None of the
+rooms themselves are built.
 
 ## Why
 
@@ -89,8 +92,24 @@ input first, and applies its own again if it is still legal. Measured, a state c
   applying one takes 0.2-0.5 ms, so a whole game's log replays in about half a second; the whole
   state is 220-420 KB as JSON, 11-23 KB gzipped.
 
-**Not checked**: other browsers (the e2e suite and Node are both V8; Firefox and Safari run other
-engines), two different builds of the engine, and the test laptop.
+- **Step 1: one digest, in every browser tried.** `stateDigest` is 16 hex characters for a
+  state, the same however the state was built. The copy check holds it to its own whole-state
+  comparison: 45,076 states over 120 more four-player games, the digest agreeing wherever the
+  states did, a restored copy's (its keys in another order) included; about 3 ms a state on the
+  dev PC, 6-8 ms with the event log. `play:browsers` then records games in Node and replays them
+  in a browser, the digests compared every 100 actions: six games (three at four players, three
+  at two; 14,224 actions, 152 checkpoints) came out identical in Node 24, Playwright's Chromium
+  141, and the Chrome 157 and Edge 157 installed on the dev PC — four builds of V8 sixteen
+  versions apart. Then, with Playwright's Firefox 142 and WebKit 26 builds installed, those six
+  and 24 more (seeds 4-15 at both table sizes; 30 games, 80,066 actions, 849 checkpoints in all)
+  in all five browsers: **identical in every one**. SpiderMonkey and JavaScriptCore reach the
+  same state as V8 to the last digest. An action costs 0.34 ms in Chrome, 0.59 in Firefox and
+  0.63 in WebKit on the dev PC, and the pool loads in 0.4-1.2 s.
+
+**Not checked**: two different builds of the engine itself; Safari on a Mac (Playwright's WebKit
+is the same engine, built for Windows); and the test laptop (its Chrome wasn't connected when
+step 1 ran: `play:browsers -- --serve` leaves a page up that any machine's browser can open, and
+prints what it reports).
 
 ## Shape
 
@@ -192,13 +211,14 @@ which is fine on the same grounds as the copies themselves.
 
 ### Engine
 
-- **Done**: the copy check, `state-wire.ts`, `compareNames`, the locale guard.
-- **A state digest**: one function over a state that gives the same answer however the state was
-  built (a restored copy's objects have their keys in another order), cheap enough to run each
-  turn in the worker.
-- **The check in the other engines**: one recorded log replayed in Chromium, Firefox and WebKit
-  (Playwright has all three) and on the test laptop, the digests compared with Node's. Whatever
-  differs is fixed, and what can't be is the digest check's job.
+- **Done**: the copy check, `state-wire.ts`, `compareNames`, the locale guard, and the state
+  digest (`state-digest.ts`: one function over a state that gives the same answer however the
+  state was built, cheap enough to run each turn in the worker).
+- **The check in the other engines** (`play:browsers`, built): recorded games replayed in
+  Chromium, Firefox and WebKit through Playwright (which supports all three; only Chromium's
+  build comes with the e2e suite, the others are its `install`) and on the test laptop, the
+  digests compared with Node's. Whatever differs is fixed, and what can't be is the digest
+  check's job.
 - **The copy check in `verify`** once tables exist: a new card must keep copies identical, so
   the new-card fuzzers run with it on.
 
@@ -241,7 +261,9 @@ Each step ends in a check that can fail.
 
 0. **Done**: the groundwork above. *Check*: `MTG_REPLICA=1` on the fuzzer.
 1. **The digest, and the other browsers.** *Check*: one log, the same digest in Node, Chromium,
-   Firefox, WebKit and on the laptop.
+   Firefox, WebKit and on the laptop. **Done 2026-11-18, but for the laptop**: 30 games
+   identical in Node 24, Chromium 141, Chrome 157, Edge 157, Firefox 142 and WebKit 26
+   ("What was checked").
 2. **The room as a copy, in Node.** Seats a room answers for, inputs out and in, replace-the-game.
    *Check*: several rooms in one process, wired through an in-memory order, play whole games
    (random players, bots on one, auto-pass, pass-the-turn, resolve-the-stack, a concession with
@@ -288,9 +310,12 @@ a save in all but name.
 
 ## Risks
 
-- **Copies that disagree across browsers or builds.** Untested, and the one thing that could make
-  the whole shape wrong: if they disagree often, a guest's game keeps jumping to the host's.
-  Step 1 answers it before anything else is built.
+- **Copies that disagree across browsers or builds.** The one thing that could make the whole
+  shape wrong: if they disagreed often, a guest's game would keep jumping to the host's. Across
+  browsers step 1 found no disagreement at all (30 games, three engines). Across two builds of
+  our own engine it is still untested, and there a difference is expected whenever a deploy
+  changes behaviour: the digest check and the host's state are the answer, and a table started
+  on one build should stay on it where it can.
 - **`Room.settle`.** Every pacing and auto-pass fix of the last two months lives in it. Step 2's
   fuzzed many-rooms test is the guard, and the server's own room must keep passing its suite
   unchanged at every commit.
