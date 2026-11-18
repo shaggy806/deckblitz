@@ -416,6 +416,12 @@ export type JournalWhat =
   | "regenerated"
   | "counters-put"
   | "tapped"
+  /** `activated` entries for any ability of a permanent, mana and loyalty
+   * abilities included (`how: "ability"`): with a `journaled` clause, Cut
+   * Short's "target planeswalker **that was activated this turn**" — one of
+   * its abilities was, whether or not it has that ability now, or the ability
+   * resolved (its rulings). */
+  | "abilities-activated"
   /** `activated` entries for loyalty abilities. */
   | "loyalty-activated"
   /** `activated` entries for equip abilities. */
@@ -517,6 +523,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   regenerated: { kind: "regenerated" },
   "counters-put": { kind: "counters-put" },
   tapped: { kind: "tapped" },
+  "abilities-activated": { kind: "activated", match: (e) => e.how === "ability" },
   "loyalty-activated": { kind: "activated", match: (e) => e.how === "loyalty" },
   "equip-activated": { kind: "activated", match: (e) => e.how === "equip" },
   "life-lost": { kind: "life-lost" },
