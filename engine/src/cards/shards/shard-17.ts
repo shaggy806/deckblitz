@@ -185,6 +185,7 @@ import _poolCrystalGolem from "../pool/crystal-golem.js";
 import _poolCurioVendor from "../pool/curio-vendor.js";
 import _poolCurseOfThePiercedHeart from "../pool/curse-of-the-pierced-heart.js";
 import _poolCursedFlesh from "../pool/cursed-flesh.js";
+import _poolCutShort from "../pool/cut-short.js";
 import _poolCutYourLosses from "../pool/cut-your-losses.js";
 import _poolDampingField from "../pool/damping-field.js";
 import _poolDarba from "../pool/darba.js";
@@ -1223,6 +1224,7 @@ const shard: CardShard = {
     _poolCurioVendor,
     _poolCurseOfThePiercedHeart,
     _poolCursedFlesh,
+    _poolCutShort,
     _poolCutYourLosses,
     _poolDampingField,
     _poolDarba,

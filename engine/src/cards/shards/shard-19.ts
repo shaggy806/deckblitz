@@ -252,6 +252,7 @@ import _poolDeviousCoverUp from "../pool/devious-cover-up.js";
 import _poolDevouringRage from "../pool/devouring-rage.js";
 import _poolDimensionX from "../pool/dimension-x.js";
 import _poolDimensionalBreach from "../pool/dimensional-breach.js";
+import _poolDireFlail from "../pool/dire-flail.js";
 import _poolDiregrafRebirth from "../pool/diregraf-rebirth.js";
 import _poolDisharmony from "../pool/disharmony.js";
 import _poolDismiss from "../pool/dismiss.js";
@@ -1348,6 +1349,7 @@ const shard: CardShard = {
     _poolDevouringRage,
     _poolDimensionX,
     _poolDimensionalBreach,
+    _poolDireFlail,
     _poolDiregrafRebirth,
     _poolDisharmony,
     _poolDismiss,

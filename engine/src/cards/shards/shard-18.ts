@@ -270,6 +270,7 @@ import _poolExperimentalConfectioner from "../pool/experimental-confectioner.js"
 import _poolExplodingBorders from "../pool/exploding-borders.js";
 import _poolExterminate from "../pool/exterminate.js";
 import _poolExtinction from "../pool/extinction.js";
+import _poolFaithsShield from "../pool/faiths-shield.js";
 import _poolFalseProphet from "../pool/false-prophet.js";
 import _poolFangsOfKalonia from "../pool/fangs-of-kalonia.js";
 import _poolFarmsteadGleaner from "../pool/farmstead-gleaner.js";
@@ -1309,6 +1310,7 @@ const shard: CardShard = {
     _poolExplodingBorders,
     _poolExterminate,
     _poolExtinction,
+    _poolFaithsShield,
     _poolFalseProphet,
     _poolFangsOfKalonia,
     _poolFarmsteadGleaner,

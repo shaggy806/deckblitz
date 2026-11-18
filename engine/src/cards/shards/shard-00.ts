@@ -234,6 +234,7 @@ import _poolDesolationAngel from "../pool/desolation-angel.js";
 import _poolDesperateGambit from "../pool/desperate-gambit.js";
 import _poolDinaSoulSteeper from "../pool/dina-soul-steeper.js";
 import _poolDingusEgg from "../pool/dingus-egg.js";
+import _poolDireBlunderbuss from "../pool/dire-blunderbuss.js";
 import _poolDireDowndraft from "../pool/dire-downdraft.js";
 import _poolDiresight from "../pool/diresight.js";
 import _poolDisallow from "../pool/disallow.js";
@@ -1287,6 +1288,7 @@ const shard: CardShard = {
     _poolDesperateGambit,
     _poolDinaSoulSteeper,
     _poolDingusEgg,
+    _poolDireBlunderbuss,
     _poolDireDowndraft,
     _poolDiresight,
     _poolDisallow,

@@ -399,6 +399,7 @@ import _poolGruulRagebeast from "../pool/gruul-ragebeast.js";
 import _poolGruulSignet from "../pool/gruul-signet.js";
 import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
 import _poolGuardianOfTheGateless from "../pool/guardian-of-the-gateless.js";
+import _poolGuildpactParagon from "../pool/guildpact-paragon.js";
 import _poolGumato from "../pool/gumato.js";
 import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
@@ -1453,6 +1454,7 @@ const shard: CardShard = {
     _poolGruulSignet,
     _poolGuardianOfTheForgotten,
     _poolGuardianOfTheGateless,
+    _poolGuildpactParagon,
     _poolGumato,
     _poolGwendlynDiCorci,
     _poolHalvarGodOfBattle,

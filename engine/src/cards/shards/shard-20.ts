@@ -798,6 +798,7 @@ import _poolSearchForDagger from "../pool/search-for-dagger.js";
 import _poolSearingFlesh from "../pool/searing-flesh.js";
 import _poolSecondHarvest from "../pool/second-harvest.js";
 import _poolSegmentedWurm from "../pool/segmented-wurm.js";
+import _poolSehtsTiger from "../pool/sehts-tiger.js";
 import _poolSeismicShift from "../pool/seismic-shift.js";
 import _poolSelectForInspection from "../pool/select-for-inspection.js";
 import _poolSelhoffOccultist from "../pool/selhoff-occultist.js";
@@ -1903,6 +1904,7 @@ const shard: CardShard = {
     _poolSearingFlesh,
     _poolSecondHarvest,
     _poolSegmentedWurm,
+    _poolSehtsTiger,
     _poolSeismicShift,
     _poolSelectForInspection,
     _poolSelhoffOccultist,

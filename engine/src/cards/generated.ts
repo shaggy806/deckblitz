@@ -262,6 +262,7 @@ import _poolAegisSculptor from "./pool/aegis-sculptor.js";
 import _poolAegisTurtle from "./pool/aegis-turtle.js";
 import _poolAeolipile from "./pool/aeolipile.js";
 import _poolAeonChronicler from "./pool/aeon-chronicler.js";
+import _poolAeonEngine from "./pool/aeon-engine.js";
 import _poolAerathiBerserker from "./pool/aerathi-berserker.js";
 import _poolAerialAssault from "./pool/aerial-assault.js";
 import _poolAerialBoost from "./pool/aerial-boost.js";
@@ -6024,6 +6025,7 @@ import _poolCutIn from "./pool/cut-in.js";
 import _poolCutOfTheProfits from "./pool/cut-of-the-profits.js";
 import _poolCutPropulsion from "./pool/cut-propulsion.js";
 import _poolCutRibbons from "./pool/cut-ribbons.js";
+import _poolCutShort from "./pool/cut-short.js";
 import _poolCutTheEarthlyBond from "./pool/cut-the-earthly-bond.js";
 import _poolCutTheTethers from "./pool/cut-the-tethers.js";
 import _poolCutYourLosses from "./pool/cut-your-losses.js";
@@ -7039,7 +7041,9 @@ import _poolDiplomacyOfTheWastes from "./pool/diplomacy-of-the-wastes.js";
 import _poolDiplomaticEscort from "./pool/diplomatic-escort.js";
 import _poolDiplomaticImmunity from "./pool/diplomatic-immunity.js";
 import _poolDiplomaticRelations from "./pool/diplomatic-relations.js";
+import _poolDireBlunderbuss from "./pool/dire-blunderbuss.js";
 import _poolDireDowndraft from "./pool/dire-downdraft.js";
+import _poolDireFlail from "./pool/dire-flail.js";
 import _poolDireFleetCaptain from "./pool/dire-fleet-captain.js";
 import _poolDireFleetDaredevil from "./pool/dire-fleet-daredevil.js";
 import _poolDireFleetHoarder from "./pool/dire-fleet-hoarder.js";
@@ -9181,6 +9185,7 @@ import _poolFaithlessLooting from "./pool/faithless-looting.js";
 import _poolFaithlessSalvaging from "./pool/faithless-salvaging.js";
 import _poolFaithsFetters from "./pool/faiths-fetters.js";
 import _poolFaithsReward from "./pool/faiths-reward.js";
+import _poolFaithsShield from "./pool/faiths-shield.js";
 import _poolFakeYourOwnDeath from "./pool/fake-your-own-death.js";
 import _poolFalcoSparaPactweaver from "./pool/falco-spara-pactweaver.js";
 import _poolFalconAbomination from "./pool/falcon-abomination.js";
@@ -12210,6 +12215,7 @@ import _poolGuildThief from "./pool/guild-thief.js";
 import _poolGuildlessCommons from "./pool/guildless-commons.js";
 import _poolGuildmagesForum from "./pool/guildmages-forum.js";
 import _poolGuildpactInformant from "./pool/guildpact-informant.js";
+import _poolGuildpactParagon from "./pool/guildpact-paragon.js";
 import _poolGuildscornWard from "./pool/guildscorn-ward.js";
 import _poolGuildswornProwler from "./pool/guildsworn-prowler.js";
 import _poolGuile from "./pool/guile.js";
@@ -14093,6 +14099,7 @@ import _poolInvasionOfMoag from "./pool/invasion-of-moag.js";
 import _poolInvasionOfMuraganda from "./pool/invasion-of-muraganda.js";
 import _poolInvasionOfNewCapenna from "./pool/invasion-of-new-capenna.js";
 import _poolInvasionOfNewPhyrexia from "./pool/invasion-of-new-phyrexia.js";
+import _poolInvasionOfRavnica from "./pool/invasion-of-ravnica.js";
 import _poolInvasionOfSegovia from "./pool/invasion-of-segovia.js";
 import _poolInvasionOfShandalar from "./pool/invasion-of-shandalar.js";
 import _poolInvasionOfTarkir from "./pool/invasion-of-tarkir.js";
@@ -24194,6 +24201,7 @@ import _poolSegmentedKrotiq from "./pool/segmented-krotiq.js";
 import _poolSegmentedWurm from "./pool/segmented-wurm.js";
 import _poolSegovianAngel from "./pool/segovian-angel.js";
 import _poolSegovianLeviathan from "./pool/segovian-leviathan.js";
+import _poolSehtsTiger from "./pool/sehts-tiger.js";
 import _poolSeiferAlmasy from "./pool/seifer-almasy.js";
 import _poolSeiferBalambRival from "./pool/seifer-balamb-rival.js";
 import _poolSeismicAssault from "./pool/seismic-assault.js";
@@ -33779,6 +33787,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAegisTurtle,
   _poolAeolipile,
   _poolAeonChronicler,
+  _poolAeonEngine,
   _poolAerathiBerserker,
   _poolAerialAssault,
   _poolAerialBoost,
@@ -39541,6 +39550,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCutOfTheProfits,
   _poolCutPropulsion,
   _poolCutRibbons,
+  _poolCutShort,
   _poolCutTheEarthlyBond,
   _poolCutTheTethers,
   _poolCutYourLosses,
@@ -40556,7 +40566,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiplomaticEscort,
   _poolDiplomaticImmunity,
   _poolDiplomaticRelations,
+  _poolDireBlunderbuss,
   _poolDireDowndraft,
+  _poolDireFlail,
   _poolDireFleetCaptain,
   _poolDireFleetDaredevil,
   _poolDireFleetHoarder,
@@ -42698,6 +42710,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFaithlessSalvaging,
   _poolFaithsFetters,
   _poolFaithsReward,
+  _poolFaithsShield,
   _poolFakeYourOwnDeath,
   _poolFalcoSparaPactweaver,
   _poolFalconAbomination,
@@ -45727,6 +45740,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGuildlessCommons,
   _poolGuildmagesForum,
   _poolGuildpactInformant,
+  _poolGuildpactParagon,
   _poolGuildscornWard,
   _poolGuildswornProwler,
   _poolGuile,
@@ -47610,6 +47624,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInvasionOfMuraganda,
   _poolInvasionOfNewCapenna,
   _poolInvasionOfNewPhyrexia,
+  _poolInvasionOfRavnica,
   _poolInvasionOfSegovia,
   _poolInvasionOfShandalar,
   _poolInvasionOfTarkir,
@@ -57711,6 +57726,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSegmentedWurm,
   _poolSegovianAngel,
   _poolSegovianLeviathan,
+  _poolSehtsTiger,
   _poolSeiferAlmasy,
   _poolSeiferBalambRival,
   _poolSeismicAssault,
@@ -67309,6 +67325,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aegis-turtle": _poolAegisTurtle,
   "pool/aeolipile": _poolAeolipile,
   "pool/aeon-chronicler": _poolAeonChronicler,
+  "pool/aeon-engine": _poolAeonEngine,
   "pool/aerathi-berserker": _poolAerathiBerserker,
   "pool/aerial-assault": _poolAerialAssault,
   "pool/aerial-boost": _poolAerialBoost,
@@ -73071,6 +73088,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cut-of-the-profits": _poolCutOfTheProfits,
   "pool/cut-propulsion": _poolCutPropulsion,
   "pool/cut-ribbons": _poolCutRibbons,
+  "pool/cut-short": _poolCutShort,
   "pool/cut-the-earthly-bond": _poolCutTheEarthlyBond,
   "pool/cut-the-tethers": _poolCutTheTethers,
   "pool/cut-your-losses": _poolCutYourLosses,
@@ -74086,7 +74104,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/diplomatic-escort": _poolDiplomaticEscort,
   "pool/diplomatic-immunity": _poolDiplomaticImmunity,
   "pool/diplomatic-relations": _poolDiplomaticRelations,
+  "pool/dire-blunderbuss": _poolDireBlunderbuss,
   "pool/dire-downdraft": _poolDireDowndraft,
+  "pool/dire-flail": _poolDireFlail,
   "pool/dire-fleet-captain": _poolDireFleetCaptain,
   "pool/dire-fleet-daredevil": _poolDireFleetDaredevil,
   "pool/dire-fleet-hoarder": _poolDireFleetHoarder,
@@ -76228,6 +76248,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/faithless-salvaging": _poolFaithlessSalvaging,
   "pool/faiths-fetters": _poolFaithsFetters,
   "pool/faiths-reward": _poolFaithsReward,
+  "pool/faiths-shield": _poolFaithsShield,
   "pool/fake-your-own-death": _poolFakeYourOwnDeath,
   "pool/falco-spara-pactweaver": _poolFalcoSparaPactweaver,
   "pool/falcon-abomination": _poolFalconAbomination,
@@ -79257,6 +79278,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/guildless-commons": _poolGuildlessCommons,
   "pool/guildmages-forum": _poolGuildmagesForum,
   "pool/guildpact-informant": _poolGuildpactInformant,
+  "pool/guildpact-paragon": _poolGuildpactParagon,
   "pool/guildscorn-ward": _poolGuildscornWard,
   "pool/guildsworn-prowler": _poolGuildswornProwler,
   "pool/guile": _poolGuile,
@@ -81140,6 +81162,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/invasion-of-muraganda": _poolInvasionOfMuraganda,
   "pool/invasion-of-new-capenna": _poolInvasionOfNewCapenna,
   "pool/invasion-of-new-phyrexia": _poolInvasionOfNewPhyrexia,
+  "pool/invasion-of-ravnica": _poolInvasionOfRavnica,
   "pool/invasion-of-segovia": _poolInvasionOfSegovia,
   "pool/invasion-of-shandalar": _poolInvasionOfShandalar,
   "pool/invasion-of-tarkir": _poolInvasionOfTarkir,
@@ -91241,6 +91264,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/segmented-wurm": _poolSegmentedWurm,
   "pool/segovian-angel": _poolSegovianAngel,
   "pool/segovian-leviathan": _poolSegovianLeviathan,
+  "pool/sehts-tiger": _poolSehtsTiger,
   "pool/seifer-almasy": _poolSeiferAlmasy,
   "pool/seifer-balamb-rival": _poolSeiferBalambRival,
   "pool/seismic-assault": _poolSeismicAssault,
