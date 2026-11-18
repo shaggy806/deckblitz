@@ -4901,7 +4901,9 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
 - `exileSpell: { filter? }` — "Exile an instant or sorcery spell you control" (Nivmagus Elemental):
   a spell or copy of yours off the stack, exiled and not countered. Not on a mana ability.
 - `exileFromGraveyard: { count, filter?, singleGraveyard: true }` — "Exile two creature cards from a
-  single graveyard" (Night Soil): any player's holding enough, all from one.
+  single graveyard" (Night Soil): any player's holding enough, all from one. At `count: 1` it's
+  "Exile a Fungus card from **a** graveyard" (Thelon of Havenwood): any player's, nothing to keep
+  together.
 - `exileFromGraveyard: { count: "opponents" }` — "Exile cards from your graveyard
   equal to the number of opponents you have" (Araumi of the Dead Tide): read as
   it's activated, opponents still in the game.

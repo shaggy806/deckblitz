@@ -2984,7 +2984,8 @@
   "trigger:exiled-by-your-spell-or-ability",
   "trigger:opponent-shuffles-library",
   "trigger:delayed-source-becomes-untapped",
-  "trigger:dealt-damage-by-attacking-creature"
+  "trigger:dealt-damage-by-attacking-creature",
+  "cost:exile-from-any-graveyard"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

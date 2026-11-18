@@ -29512,7 +29512,8 @@ export class Game {
     }
     if (cost.count <= 0) return;
     // "From a single graveyard" (Night Soil): any player's that has enough, all
-    // from one — a `share` rule, a card's one tag its owner.
+    // from one — a `share` rule, a card's one tag its owner. One card "from a
+    // graveyard" (Thelon of Havenwood) is the same, with nothing to share.
     if (cost.singleGraveyard === true) {
       const eligible = this.singleGraveyardCostCandidates(player, cost.count, cost.filter, source);
       if (eligible.length <= cost.count) {
@@ -29532,11 +29533,15 @@ export class Game {
         destination: "exile",
         leftover: "stay",
         priorityTo,
-        together: {
-          rule: "share",
-          tags: Object.fromEntries(eligible.map((id) => [id, [this.state.objects[id].owner]])),
-          text: "from a single graveyard",
-        },
+        ...(cost.count > 1
+          ? {
+              together: {
+                rule: "share" as const,
+                tags: Object.fromEntries(eligible.map((id) => [id, [this.state.objects[id].owner]])),
+                text: "from a single graveyard",
+              },
+            }
+          : {}),
         ...(forStackObject !== undefined ? { costExileFor: forStackObject } : {}),
         ...(manaAbility !== undefined ? { thenManaAbility: manaAbility } : {}),
       };

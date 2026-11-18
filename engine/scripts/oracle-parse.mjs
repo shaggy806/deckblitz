@@ -1883,6 +1883,12 @@ export function parseCost(text) {
       const filter = m[2] === undefined ? undefined : parseTypePhrase(m[2]);
       if (typeof count !== "number" || filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
       cost.exileFromGraveyard = { count, ...(filter !== undefined ? { filter } : {}), singleGraveyard: true };
+    } else if ((m = /^Exile an? (?:(.+?) )?card from a graveyard$/.exec(part))) {
+      // "Exile a Fungus card from a graveyard" (Thelon of Havenwood): any
+      // player's, one card — `singleGraveyard` at a count of one.
+      const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
+      if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
+      cost.exileFromGraveyard = { count: 1, ...(filter !== undefined ? { filter } : {}), singleGraveyard: true };
     }
     // "Exile the top card of your library" (Royal Herbalist), "the top two
     // cards" (Whirling Catapult).
@@ -5704,6 +5710,13 @@ export function parseSentence(sentence, ctx) {
       amount: amount(m[1]),
       controlledByTarget: ctx.target("player"),
     };
+  }
+  // "Put a spore counter on each Fungus on the battlefield" (Thelon of
+  // Havenwood): every player's.
+  if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on each (.+?) on the battlefield`).exec(s))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter === null || Object.keys(filter).length === 0 || "controlledBy" in filter) return null;
+    return { kind: "add-counter-all", filter, counter: m[2].toLowerCase(), amount: amount(m[1]) };
   }
   if (re("proliferate").test(s)) return { kind: "proliferate" };
   // Two whole proliferate actions, each with its own choice (Contagion Engine).
@@ -22164,6 +22177,15 @@ function perAmountStaticOf(line, text) {
     return {
       affects: { scope: "filter", filter: { type: "creature", subtype: m[1] } },
       grantPtPerCount: { filter: { subtype: m[1] }, relativeToAffected: true, excludeSelf: true, pt: pair(m[2], m[3]) },
+      text,
+    };
+  }
+  // "Each Fungus creature gets +1/+1 for each spore counter on it" (Thelon of
+  // Havenwood): every player's, each by its own counters.
+  if ((m = /^Each ([A-Z][a-z]+) creature gets ([+-]\d+)\/([+-]\d+) for each ([a-z]+|[+-]1\/[+-]1) counter on it\.$/.exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", subtype: m[1] } },
+      grantPtPerCount: { countersOnAffected: m[4], pt: pair(m[2], m[3]) },
       text,
     };
   }

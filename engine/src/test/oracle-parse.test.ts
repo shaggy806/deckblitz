@@ -22926,3 +22926,29 @@ describe("mill, then a card from among them; reveal from hand for mana", () => {
     expect(mixed.complete).toBe(false);
   });
 });
+
+describe("exiling a card from any graveyard as a cost (Thelon of Havenwood)", () => {
+  it("drafts the whole card: the per-counter bonus, the cost and the counters", () => {
+    const thelon = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Elf Druid",
+      mana_cost: "{G}{G}",
+      colors: ["G"],
+      power: "2",
+      toughness: "2",
+      oracle_text:
+        "Each Fungus creature gets +1/+1 for each spore counter on it.\n{B}{G}, Exile a Fungus card from a graveyard: Put a spore counter on each Fungus on the battlefield.",
+    });
+    expect(thelon.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", subtype: "Fungus" } },
+      grantPtPerCount: { countersOnAffected: "spore", pt: [1, 1] },
+    });
+    expect(thelon.activated[0].cost).toEqual({
+      mana: "{B}{G}",
+      tap: false,
+      exileFromGraveyard: { count: 1, filter: { subtype: "Fungus" }, singleGraveyard: true },
+    });
+    expect(thelon.activated[0].effect).toEqual({ kind: "add-counter-all", filter: { subtype: "Fungus" }, counter: "spore", amount: 1 });
+    expect(thelon.complete).toBe(true);
+  });
+});

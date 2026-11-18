@@ -520,7 +520,9 @@ export interface AbilityCost {
     readonly fromTop?: true;
     /** "From a single graveyard" (Night Soil's "Exile two creature cards from a
      * single graveyard"): any player's, all `count` from the same one (its
-     * ruling: payable only if some graveyard has them). */
+     * ruling: payable only if some graveyard has them). At `count: 1` it's
+     * "from **a** graveyard", any player's (Thelon of Havenwood's "Exile a
+     * Fungus card from a graveyard"), with nothing to keep together. */
     readonly singleGraveyard?: true;
   };
   /**
