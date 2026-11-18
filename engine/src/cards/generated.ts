@@ -3113,6 +3113,7 @@ import _poolBolassCitadel from "./pool/bolass-citadel.js";
 import _poolBoldBiochemist from "./pool/bold-biochemist.js";
 import _poolBoldDefense from "./pool/bold-defense.js";
 import _poolBoldImpaler from "./pool/bold-impaler.js";
+import _poolBoldPlagiarist from "./pool/bold-plagiarist.js";
 import _poolBoldwyrAggressor from "./pool/boldwyr-aggressor.js";
 import _poolBoldwyrHeavyweights from "./pool/boldwyr-heavyweights.js";
 import _poolBoldwyrIntimidator from "./pool/boldwyr-intimidator.js";
@@ -5029,6 +5030,7 @@ import _poolCobaltGolem from "./pool/cobalt-golem.js";
 import _poolCobblebrute from "./pool/cobblebrute.js";
 import _poolCobbledLancer from "./pool/cobbled-lancer.js";
 import _poolCobbledWings from "./pool/cobbled-wings.js";
+import _poolCobraTrap from "./pool/cobra-trap.js";
 import _poolCockatrice from "./pool/cockatrice.js";
 import _poolCocoon from "./pool/cocoon.js";
 import _poolCodeOfConstraint from "./pool/code-of-constraint.js";
@@ -5866,6 +5868,7 @@ import _poolCrypticCoat from "./pool/cryptic-coat.js";
 import _poolCrypticCommand from "./pool/cryptic-command.js";
 import _poolCrypticCruiser from "./pool/cryptic-cruiser.js";
 import _poolCrypticGateway from "./pool/cryptic-gateway.js";
+import _poolCrypticPursuit from "./pool/cryptic-pursuit.js";
 import _poolCrypticSerpent from "./pool/cryptic-serpent.js";
 import _poolCrypticTrilobite from "./pool/cryptic-trilobite.js";
 import _poolCryptidInspector from "./pool/cryptid-inspector.js";
@@ -25981,6 +25984,7 @@ import _poolSoulcoilViper from "./pool/soulcoil-viper.js";
 import _poolSouldrinker from "./pool/souldrinker.js";
 import _poolSoulfireEruption from "./pool/soulfire-eruption.js";
 import _poolSoulfireGrandMaster from "./pool/soulfire-grand-master.js";
+import _poolSoulgorgerOrgg from "./pool/soulgorger-orgg.js";
 import _poolSoulherder from "./pool/soulherder.js";
 import _poolSoulknifeSpy from "./pool/soulknife-spy.js";
 import _poolSoullessJailer from "./pool/soulless-jailer.js";
@@ -36722,6 +36726,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoldBiochemist,
   _poolBoldDefense,
   _poolBoldImpaler,
+  _poolBoldPlagiarist,
   _poolBoldwyrAggressor,
   _poolBoldwyrHeavyweights,
   _poolBoldwyrIntimidator,
@@ -38638,6 +38643,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCobblebrute,
   _poolCobbledLancer,
   _poolCobbledWings,
+  _poolCobraTrap,
   _poolCockatrice,
   _poolCocoon,
   _poolCodeOfConstraint,
@@ -39475,6 +39481,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrypticCommand,
   _poolCrypticCruiser,
   _poolCrypticGateway,
+  _poolCrypticPursuit,
   _poolCrypticSerpent,
   _poolCrypticTrilobite,
   _poolCryptidInspector,
@@ -59590,6 +59597,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSouldrinker,
   _poolSoulfireEruption,
   _poolSoulfireGrandMaster,
+  _poolSoulgorgerOrgg,
   _poolSoulherder,
   _poolSoulknifeSpy,
   _poolSoullessJailer,
@@ -70344,6 +70352,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bold-biochemist": _poolBoldBiochemist,
   "pool/bold-defense": _poolBoldDefense,
   "pool/bold-impaler": _poolBoldImpaler,
+  "pool/bold-plagiarist": _poolBoldPlagiarist,
   "pool/boldwyr-aggressor": _poolBoldwyrAggressor,
   "pool/boldwyr-heavyweights": _poolBoldwyrHeavyweights,
   "pool/boldwyr-intimidator": _poolBoldwyrIntimidator,
@@ -72260,6 +72269,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cobblebrute": _poolCobblebrute,
   "pool/cobbled-lancer": _poolCobbledLancer,
   "pool/cobbled-wings": _poolCobbledWings,
+  "pool/cobra-trap": _poolCobraTrap,
   "pool/cockatrice": _poolCockatrice,
   "pool/cocoon": _poolCocoon,
   "pool/code-of-constraint": _poolCodeOfConstraint,
@@ -73097,6 +73107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cryptic-command": _poolCrypticCommand,
   "pool/cryptic-cruiser": _poolCrypticCruiser,
   "pool/cryptic-gateway": _poolCrypticGateway,
+  "pool/cryptic-pursuit": _poolCrypticPursuit,
   "pool/cryptic-serpent": _poolCrypticSerpent,
   "pool/cryptic-trilobite": _poolCrypticTrilobite,
   "pool/cryptid-inspector": _poolCryptidInspector,
@@ -93212,6 +93223,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/souldrinker": _poolSouldrinker,
   "pool/soulfire-eruption": _poolSoulfireEruption,
   "pool/soulfire-grand-master": _poolSoulfireGrandMaster,
+  "pool/soulgorger-orgg": _poolSoulgorgerOrgg,
   "pool/soulherder": _poolSoulherder,
   "pool/soulknife-spy": _poolSoulknifeSpy,
   "pool/soulless-jailer": _poolSoullessJailer,

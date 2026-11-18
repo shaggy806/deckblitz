@@ -183,6 +183,7 @@ import _poolClifftopLookout from "../pool/clifftop-lookout.js";
 import _poolClingToDust from "../pool/cling-to-dust.js";
 import _poolClockworkFox from "../pool/clockwork-fox.js";
 import _poolCloudManta from "../pool/cloud-manta.js";
+import _poolCobraTrap from "../pool/cobra-trap.js";
 import _poolColdSnap from "../pool/cold-snap.js";
 import _poolCombadge from "../pool/combadge.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
@@ -1225,6 +1226,7 @@ const shard: CardShard = {
     _poolClingToDust,
     _poolClockworkFox,
     _poolCloudManta,
+    _poolCobraTrap,
     _poolColdSnap,
     _poolCombadge,
     _poolCombatTutorial,

@@ -100,6 +100,7 @@ import _poolBloodletterOfAclazotz from "../pool/bloodletter-of-aclazotz.js";
 import _poolBloodstokeHowler from "../pool/bloodstoke-howler.js";
 import _poolBloodthirstyConqueror from "../pool/bloodthirsty-conqueror.js";
 import _poolBlossomDryad from "../pool/blossom-dryad.js";
+import _poolBoldPlagiarist from "../pool/bold-plagiarist.js";
 import _poolBoltwingMarauder from "../pool/boltwing-marauder.js";
 import _poolBoneCairnButcher from "../pool/bone-cairn-butcher.js";
 import _poolBoneyardParley from "../pool/boneyard-parley.js";
@@ -1140,6 +1141,7 @@ const shard: CardShard = {
     _poolBloodstokeHowler,
     _poolBloodthirstyConqueror,
     _poolBlossomDryad,
+    _poolBoldPlagiarist,
     _poolBoltwingMarauder,
     _poolBoneCairnButcher,
     _poolBoneyardParley,

@@ -173,6 +173,7 @@ import _poolCrookedScales from "../pool/crooked-scales.js";
 import _poolCruelDeceiver from "../pool/cruel-deceiver.js";
 import _poolCryogenicStasis from "../pool/cryogenic-stasis.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
+import _poolCrypticPursuit from "../pool/cryptic-pursuit.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCurseArtifact from "../pool/curse-artifact.js";
 import _poolCurseOfSilence from "../pool/curse-of-silence.js";
@@ -1204,6 +1205,7 @@ const shard: CardShard = {
     _poolCruelDeceiver,
     _poolCryogenicStasis,
     _poolCryotheoryAdept,
+    _poolCrypticPursuit,
     _poolCryptothrall,
     _poolCurseArtifact,
     _poolCurseOfSilence,

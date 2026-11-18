@@ -830,6 +830,7 @@ import _poolSorinVengefulBloodlord from "../pool/sorin-vengeful-bloodlord.js";
 import _poolSoulGuideGryff from "../pool/soul-guide-gryff.js";
 import _poolSoulOfMigration from "../pool/soul-of-migration.js";
 import _poolSoulSnare from "../pool/soul-snare.js";
+import _poolSoulgorgerOrgg from "../pool/soulgorger-orgg.js";
 import _poolSoulsOfTheLost from "../pool/souls-of-the-lost.js";
 import _poolSouredSprings from "../pool/soured-springs.js";
 import _poolSpaceshift from "../pool/spaceshift.js";
@@ -1905,6 +1906,7 @@ const shard: CardShard = {
     _poolSoulGuideGryff,
     _poolSoulOfMigration,
     _poolSoulSnare,
+    _poolSoulgorgerOrgg,
     _poolSoulsOfTheLost,
     _poolSouredSprings,
     _poolSpaceshift,
