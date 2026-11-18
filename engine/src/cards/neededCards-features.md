@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Cards put into a library this way — built 2026-11-18
+
+The key `amount:cards-put-on-library-this-way`: the `"put-into-library"` this-way kind, read off the
+`cards-put-into-library` event (from any other zone, by the card's owner). Head Games (rank 14413) and Jester's Mask
+(20037): a `look-and-choose` of the opponent's whole hand to `library-top`, then a `search-library` of their library
+(`whose`) for `{ thisWay: "put-into-library" }` cards into their hand. The scaffolder reads both whole.
+`test/this-way-put-into-library.test.ts`.
+
 ### Reveal until a name, else shuffle — built 2026-11-18
 
 The key `effect:reveal-until-else-shuffle`: `reveal-until`'s `ifNone`, where the revealed cards go instead of `rest`

@@ -1243,6 +1243,42 @@ describe("reveal until a name, else shuffle (Tunnel Vision)", () => {
   });
 });
 
+describe("a hand put back and that many found (Head Games, Jester's Mask)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, mana_cost: "{1}", oracle_text }, { tokenFor: () => null });
+
+  it("that many is the cards put into the library this way", () => {
+    const all = { cardsInHand: { target: 0 } };
+    const many = { thisWay: "put-into-library" };
+    const effect = {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "for-each-player",
+          who: { target: 0 },
+          effect: { kind: "look-and-choose", zone: "hand", player: "that-player", min: all, max: all, destination: "library-top", leftover: "stay" },
+        },
+        { kind: "search-library", whose: { target: 0 }, filter: {}, destination: "hand", min: many, max: many },
+      ],
+    };
+    const games = face(
+      "Head Games",
+      "Sorcery",
+      "Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. The player puts those cards into their hand, then shuffles.",
+    );
+    expect(games.complete).toBe(true);
+    expect(games.targets).toEqual(["opponent"]);
+    expect(games.effect).toEqual(effect);
+    const mask = face(
+      "Jester's Mask",
+      "Artifact",
+      "{1}, {T}, Sacrifice this artifact: Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. That player puts those cards into their hand, then shuffles.",
+    );
+    expect(mask.complete).toBe(true);
+    expect(mask.activated[0]).toMatchObject({ targets: ["opponent"], effect });
+  });
+});
+
 describe("an emblem's grants", () => {
   const ult = (line: string) =>
     parseFace(

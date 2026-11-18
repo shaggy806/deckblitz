@@ -11046,6 +11046,32 @@ export function parseEffect(text, outer) {
     /^Target opponent reveals their hand\. You draw a card for each (Plains|Island|Swamp|Mountain|Forest) and (white|blue|black|red|green) card in it\.$/.exec(
       text,
     );
+  // Head Games, Jester's Mask: the hand put on the library, then a search
+  // for that many cards (the `"put-into-library"` this-way count) into it.
+  if (
+    /^Target opponent puts the cards from their hand on top of their library\. Search that player's library for that many cards\. (?:The|That) player puts those cards into their hand, then shuffles\.$/.test(
+      text,
+    )
+  ) {
+    const slot = ctx.target("opponent");
+    const all = { cardsInHand: { target: slot } };
+    const many = { thisWay: "put-into-library" };
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          {
+            kind: "for-each-player",
+            who: { target: slot },
+            effect: { kind: "look-and-choose", zone: "hand", player: "that-player", min: all, max: all, destination: "library-top", leftover: "stay" },
+          },
+          { kind: "search-library", whose: { target: slot }, filter: {}, destination: "hand", min: many, max: many },
+        ],
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   if (handDraw !== null) {
     const who = ctx.target("opponent");
     const filter = { anyOf: [{ subtype: handDraw[1] }, { colors: [COLOR_WORD[handDraw[2]]] }] };

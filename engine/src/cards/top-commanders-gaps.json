@@ -796,6 +796,7 @@
   "effect:this-way-gained-control",
   "amount:cards-revealed-this-way",
   "amount:cards-shuffled-this-way",
+  "amount:cards-put-on-library-this-way",
   "effect:surveil-kept-on-top-count",
   "amount:damage-prevented-this-way",
   "effect:prevent-all-damage-by-filter",

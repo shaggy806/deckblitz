@@ -344,6 +344,12 @@ export function thisWayEntries(
         // spell off the stack (Neera, Wild Mage's "if you do").
         if (event.type === "cards-put-on-bottom") for (const id of event.objects) add(id, event.player, false);
         break;
+      case "put-into-library":
+        // From another zone, by the library's owner (the card's).
+        if (event.type === "cards-put-into-library") {
+          for (const { object, owner, from } of event.arrivals) add(object, owner, from === "battlefield");
+        }
+        break;
       case "gained-control":
         // A stack changes hands whole.
         if (event.type === "control-changed" && !seen.has(event.object)) {

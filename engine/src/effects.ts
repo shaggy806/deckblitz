@@ -2219,6 +2219,14 @@ export type ThisWayKind =
    * Teferi's Puzzle Box's "then draws that many cards". Counted by the
    * player whose hand they left. */
   | "put-on-bottom"
+  /** Cards it put into a library from any other zone, on top, on the bottom
+   * or shuffled in (the `cards-put-into-library` event) — Head Games'
+   * "target opponent puts the cards from their hand on top of their library.
+   * Search that player's library for **that many** cards". A card moved
+   * within a library (a scry, a shuffle) isn't put into one, and a token
+   * isn't a card (rule 111.1). Counted by the card's owner, whose library it
+   * went to. */
+  | "put-into-library"
   /** Spells and abilities it countered — Swift Silence's "draw a card for each
    * spell countered this way", Glen Elendra's Answer's "for each spell and
    * ability countered this way". One that can't be countered wasn't (rule

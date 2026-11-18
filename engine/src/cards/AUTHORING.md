@@ -1356,7 +1356,10 @@ hand this way" the same with a Squirrel `filter`),
 (moved there from a zone — not a token created), `"created"` (tokens
 created, a compacted stack as each of its tokens), `"countered"` ("for each spell and ability countered this way" — Swift Silence, Glen Elendra's Answer), `"put-on-bottom"`
 (cards a `look-and-choose` put from a hand on the bottom of a library —
-Valakut Awakening's "draw that many cards plus one"), `"shuffled-into-library"`
+Valakut Awakening's "draw that many cards plus one"), `"put-into-library"`
+(cards put into a library from any other zone, by their owner — Head Games'
+"target opponent puts the cards from their hand on top of their library.
+Search that player's library for **that many** cards"), `"shuffled-into-library"`
 (cards a `shuffle-graveyard-into-library` or a `put-on-libraries` `"shuffle"`
 shuffled in — Elixir's "the number of cards shuffled into your library this
 way") and `"tapped"` (permanents
