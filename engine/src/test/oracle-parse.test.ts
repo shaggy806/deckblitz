@@ -23099,3 +23099,66 @@ describe("you may sacrifice a permanent; if you do, …", () => {
     });
   });
 });
+
+describe("a face-down pile searched out, and draws replaced by its top card", () => {
+  const face = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{5}", colors: [], cmc: 5 } as never) as unknown as Record<string, unknown> & {
+      complete: boolean;
+      static: Record<string, unknown>[];
+      triggered: Record<string, unknown>[];
+      activated: Record<string, unknown>[];
+    };
+  const search = (n: number) => ({
+    kind: "search-library",
+    filter: {},
+    destination: "exile-face-down",
+    min: n,
+    max: n,
+    linked: true,
+    faceDownLooks: "nobody",
+    shufflePile: true,
+  });
+  const top = { kind: "return-exiled-by-source", linked: "hand", top: 1 };
+
+  it("reads Parallel Thoughts whole: a may replacement taking the pile's top card", () => {
+    const thoughts = face(
+      "Enchantment",
+      "When this enchantment enters, search your library for seven cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.\nIf you would draw a card, you may instead put the top card of the pile you exiled into your hand.",
+    );
+    expect(thoughts.complete).toBe(true);
+    expect(thoughts.triggered[0].effect).toEqual(search(7));
+    expect(thoughts.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: { text: "put the top card of the pile you exiled into your hand", effect: top },
+      may: true,
+    });
+  });
+
+  it("reads Mangara's Tome whole: the next draw this turn, instead its top card", () => {
+    const tome = face(
+      "Artifact — Book",
+      "When this artifact enters, search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.\n{2}: The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand.",
+    );
+    expect(tome.complete).toBe(true);
+    expect(tome.triggered[0].effect).toEqual(search(5));
+    expect(tome.activated[0].effect).toEqual({
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      next: true,
+      replacement: {
+        event: "would-draw",
+        who: "you",
+        instead: { effect: top, text: "Put the top card of the exiled pile into its owner's hand instead." },
+      },
+    });
+  });
+
+  it("leaves a pile not shuffled, or no shuffle of the library after, unread", () => {
+    const unshuffled = face(
+      "Enchantment",
+      "When this enchantment enters, search your library for seven cards, exile them in a face-down pile. Then shuffle your library.",
+    );
+    expect(unshuffled.complete).toBe(false);
+  });
+});

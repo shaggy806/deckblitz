@@ -4119,6 +4119,10 @@ export type AwaitingDecision =
       /** For `destination: "exile-face-down"`: see `look-and-choose`'s
        * `faceDownLooks`. */
       readonly faceDownLooks?: "chooser" | "nobody";
+      /** For `destination: "exile-face-down"`: the chosen cards go into exile
+       * in a random order, a shuffled face-down pile (`search-library`'s
+       * `shufflePile`). */
+      readonly shufflePile?: true;
       /** A look they close at face-down permanents (`ids`, nothing to pick —
        * the `look-at-face-down` effect): the chooser is shown what they are
        * until they close it, and only then (rule 708.5; Smoke Teller's ruling:
@@ -6105,6 +6109,12 @@ export interface ActiveReplacement {
   readonly targetStints?: readonly (number | null | undefined)[];
   /** The ability's X, for its `instead`. */
   readonly x?: number;
+  /** The battlefield stint of its source the ability referred to as it
+   * resolved: what its `instead` reads as "the cards exiled with" the source
+   * (rule 607.2a), though the source has left since — Mangara's Tome's "the
+   * next time you would draw a card this turn, instead put the top card of
+   * the exiled pile into its owner's hand". */
+  readonly sourceStint?: number;
   /** Only these players' events ("if target player would draw a card", "…to
    * that player or a permanent that player controls"). */
   readonly onlyPlayers?: readonly PlayerId[];

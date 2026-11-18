@@ -162,6 +162,10 @@ export interface SearchMore {
   readonly mayPlay?: PlayGrant;
   /** Its `linked`. */
   readonly linked?: true;
+  /** Its `faceDownLooks`. */
+  readonly faceDownLooks?: "chooser" | "nobody";
+  /** Its `shufflePile`. */
+  readonly shufflePile?: true;
   readonly then?: EffectSpec;
   /** Its `thenAlways`. */
   readonly thenAlways?: true;
@@ -4651,6 +4655,13 @@ export type EffectSpec =
        * with this enchantment on the bottom of their library in a random
        * order", what its `exile` and `reveal-until` of `linked` put there. */
       readonly linked?: "hand" | "battlefield" | "graveyard" | "bottom-random";
+      /** With `linked: "hand"`: only **the top** this many of the linked
+       * cards — the first of them in exile, where a pile exiled in one move
+       * lies in the order it went (a `search-library`'s `shufflePile`, random).
+       * Parallel Thoughts' "put the top card of the pile you exiled into your
+       * hand", Mangara's Tome's "the top card of the exiled pile into its
+       * owner's hand": nothing, once the pile is empty. */
+      readonly top?: number;
       /** With `linked: "battlefield"`: "**put** all cards exiled with it
        * onto the battlefield" (Underworld Sentinel) — under the control of
        * the player putting them there, the effect's controller (rule
@@ -12179,6 +12190,17 @@ export type EffectSpec =
        * random that was exiled with Skyship Weatherlight" reads. Nothing is
        * linked when the source isn't a permanent. */
       readonly linked?: true;
+      /** With `destination: "exile-face-down"`: who may look at the finds once
+       * they're exiled (rule 406.3), as `look-and-choose`'s `faceDownLooks`.
+       * Left out, the searcher. `"nobody"`: Parallel Thoughts' "exile them in a
+       * face-down pile" (its ruling: "You can't look at the face down cards"). */
+      readonly faceDownLooks?: "chooser" | "nobody";
+      /** With `destination: "exile-face-down"`: "exile them in a face-down
+       * pile, **and shuffle that pile**" (Parallel Thoughts, Mangara's Tome):
+       * the finds go into exile in a random order (rule 701.24a), so "the top
+       * card of the pile" — `return-exiled-by-source`'s `top`, the first of
+       * them in exile — is one nobody chose. */
+      readonly shufflePile?: true;
       /** Applied once the finds have moved and the library is shuffled, with
        * **the finds as its targets** — `target: 0` is the first, as
        * `look-and-choose`'s `then` sees its chosen cards; `"that-player"` is
@@ -21202,8 +21224,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "return-exiled-by-source": {
       if (spec.linked === "hand") {
         const justExiled = spec.others === true ? ctx.cardsExiledThisWay() : [];
-        for (const card of ctx.cardsExiledWithSource()) {
-          if (justExiled.includes(card) || (spec.filter !== undefined && !ctx.cardMatches(card, spec.filter))) continue;
+        const cards = ctx
+          .cardsExiledWithSource()
+          .filter((card) => !justExiled.includes(card) && (spec.filter === undefined || ctx.cardMatches(card, spec.filter)));
+        for (const card of spec.top === undefined ? cards : cards.slice(0, spec.top)) {
           ctx.returnToHand({ kind: "object", object: card }, "exile");
         }
         return;
@@ -25280,6 +25304,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.all === true ? { all: true } : {}),
           ...(spec.mayPlay !== undefined ? { mayPlay: spec.mayPlay } : {}),
           ...(spec.linked === true ? { linked: true } : {}),
+          ...(spec.faceDownLooks !== undefined ? { faceDownLooks: spec.faceDownLooks } : {}),
+          ...(spec.shufflePile === true ? { shufflePile: true } : {}),
           ...(spec.then !== undefined ? { then: spec.then } : {}),
           ...(spec.thenAlways === true ? { thenAlways: true } : {}),
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),

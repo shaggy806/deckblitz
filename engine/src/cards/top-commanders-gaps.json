@@ -2995,7 +2995,9 @@
   "cost:crew-alternative-remove-loyalty",
   "cost:tap-granter",
   "trigger:activates-ability-mana-from",
-  "effect:prevent-chosen-source-sharing-spent-mana-color"
+  "effect:prevent-chosen-source-sharing-spent-mana-color",
+  "mechanic:face-down-pile",
+  "replacement:next-draw-from-exiled-pile"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -1518,7 +1518,14 @@ function viewForUncached(
       battlefield: [...state.zones.shared.battlefield],
       phasedOut: [...phasedOutIds(state)],
       stack: [...state.zones.shared.stack],
-      exile: [...state.zones.shared.exile],
+      // A face-down pile's order is as hidden as its cards (rule 406.3 —
+      // Parallel Thoughts' shuffled pile, whose top card is the next one
+      // taken): the cards this viewer can't see come after the rest, in id
+      // order, so the list can't say which is on top.
+      exile: [
+        ...state.zones.shared.exile.filter((id) => objects[id] !== undefined),
+        ...state.zones.shared.exile.filter((id) => objects[id] === undefined).sort(),
+      ],
       exileOwners: Object.fromEntries(
         state.zones.shared.exile.flatMap((id) => {
           const owner = state.objects[id]?.owner;

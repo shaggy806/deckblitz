@@ -13012,6 +13012,13 @@ export class Game {
     // (`searchRest`): the ones not picked go to the search's own destination
     // in the same move.
     const rest = awaiting.searchRest;
+    // "Exile them in a face-down pile, and shuffle that pile" (Parallel
+    // Thoughts): they go into exile in a random order (rule 701.24a), the
+    // first of them its top (`return-exiled-by-source`'s `top`).
+    if (awaiting.shufflePile === true && awaiting.destination === "exile-face-down" && chosen.length > 1) {
+      chosen = shuffle(chosen, this.rng);
+      this.state.rngState = this.rng.seed;
+    }
     const placed = rest === undefined ? chosen : [...chosen, ...leftover];
     // Several manifested or cloaked are done one at a time (rules 701.40e,
     // 701.58e), each entering before the next is turned face down.
@@ -46580,6 +46587,10 @@ controlledBy,
           targetStints: this.stintsOfTargets(targets),
           x,
           madeIn: since,
+          // The source's stint this ability refers to, for a linked "the
+          // exiled pile" read when it applies, the source gone or not (rule
+          // 607.2a — Mangara's Tome).
+          ...((stint) => (stint !== undefined ? { sourceStint: stint } : {}))(linkedExileStint()),
           ...(then !== undefined
             ? { then: { spec: then, by: source, controller, targets: targets.map((t) => t ?? null), ...(countsUnprevented ? { countsUnprevented: true as const } : {}) } }
             : {}),
@@ -47786,6 +47797,10 @@ controlledBy,
       // "Exile them" with this source (rule 607.2a), in the stint the
       // resolving ability refers to.
       ...(exiled && more?.linked === true ? this.searchExileLink(more.source, more.sourceStint) : {}),
+      // "Exile them in a face-down pile, and shuffle that pile" (Parallel
+      // Thoughts): who may look (rule 406.3), and the pile's random order.
+      ...(destination === "exile-face-down" && more?.faceDownLooks !== undefined ? { faceDownLooks: more.faceDownLooks } : {}),
+      ...(destination === "exile-face-down" && more?.shufflePile === true ? { shufflePile: true as const } : {}),
       // In exile, what's found can't be seen by the rest of the instruction, which
       // goes on all the same (Opposition Agent's ruling): `then` runs with nothing
       // found (`applyChooseFromZoneThen`).
@@ -65405,6 +65420,7 @@ controlledBy,
       {
         ...(facts.player !== undefined ? { player: facts.player } : {}),
         ...(facts.recipient !== undefined ? { recipient: facts.recipient } : {}),
+        ...(record?.sourceStint !== undefined ? { source: record.sourceStint } : {}),
       },
       { since },
     );

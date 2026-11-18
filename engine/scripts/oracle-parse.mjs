@@ -3635,6 +3635,13 @@ export function parseSentence(sentence, ctx) {
     const counted = { thisWay: castCounters[3].toLowerCase() };
     return { kind: "enters-with-counters", target: "source", counter: castCounters[2], amount: per === 1 ? counted : { product: [per, counted] } };
   }
+  // "Put the top card of the pile you exiled into your hand" (Parallel
+  // Thoughts), "…of the exiled pile into its owner's hand" (Mangara's Tome):
+  // the first card still exiled with this source (rule 607.2a), a shuffled
+  // face-down pile's top.
+  if (/^put the top card of (?:the pile you exiled|the exiled pile) into (?:your|its owner's) hand\.$/i.test(s)) {
+    return { kind: "return-exiled-by-source", linked: "hand", top: 1 };
+  }
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
@@ -12249,6 +12256,7 @@ export function parseEffect(text, outer) {
       searchOthersAt(sentences, i, ctx) ??
       searchInsteadAt(sentences, i) ??
       searchZonesAt(sentences, i) ??
+      searchFaceDownPileAt(sentences, i) ??
       searchExileCastLaterAt(sentences, i);
     if (searched !== null) {
       parsed.push(searched.effect);
@@ -13168,7 +13176,11 @@ export function parseEffect(text, outer) {
     // "The next time you would draw a card this turn, you gain 5 life instead."
     // (the Words cycle — a `replacement-effect` with `next`): whatever one
     // sentence the replacement does, its targets the ability's own (rule 115.1b).
-    const nextDrawM = /^the next time you would draw a card this turn, (.+) instead\.$/i.exec(sentence);
+    // "…, instead put the top card of the exiled pile into its owner's hand."
+    // (Mangara's Tome) is the same with "instead" first.
+    const nextDrawM =
+      /^the next time you would draw a card this turn, (.+) instead\.$/i.exec(sentence) ??
+      /^the next time you would draw a card this turn, instead (.+)\.$/i.exec(sentence);
     if (nextDrawM !== null) {
       const clause = `${nextDrawM[1].charAt(0).toUpperCase()}${nextDrawM[1].slice(1)}`;
       const slots = ctx.targets.length;
@@ -14432,6 +14444,21 @@ function searchZonesAt(sentences, i) {
  *   sorcery cards, exile them, then shuffle. You may cast them this turn."
  *   (Chandra, Heart of Fire): "any number" may be none in the graveyard too.
  */
+function searchFaceDownPileAt(sentences, i) {
+  // "Search your library for seven cards, exile them in a face-down pile, and
+  // shuffle that pile. Then shuffle your library." (Parallel Thoughts,
+  // Mangara's Tome): a quantity, no quality, so that many are found (rule
+  // 701.23d); nobody may look (rule 406.3); the pile's order random, linked
+  // for "the top card of the pile you exiled".
+  const m = /^search your library for (two|three|four|five|six|seven|eight|nine|ten) cards, exile them in a face-down pile, and shuffle that pile\.$/i.exec(sentences[i] ?? "");
+  if (m === null || !/^then shuffle your library\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const n = numberOf(m[1]);
+  return {
+    effect: { kind: "search-library", filter: {}, destination: "exile-face-down", min: n, max: n, linked: true, faceDownLooks: "nobody", shufflePile: true },
+    used: 2,
+  };
+}
+
 function searchExileCastLaterAt(sentences, i) {
   const m = /^search your (library|graveyard and library) for any number of (.+?) cards, exile them, then shuffle\.$/i.exec(sentences[i] ?? "");
   if (m === null) return null;
@@ -23525,11 +23552,15 @@ function parseStatic(line, text) {
   // "If you would draw a card, you may put a study counter on this
   // enchantment instead." (Pursuit of Knowledge): an optional replacement,
   // asked draw by draw (rule 616.1) — declined, the card is drawn.
-  if ((m = /^If you would draw a card, you may (.+?) instead\.$/.exec(line))) {
+  // "If you would draw a card, you may instead put the top card of the pile
+  // you exiled into your hand." (Parallel Thoughts) is the same with
+  // "instead" first.
+  if ((m = /^If you would draw a card, you may instead (.+?)\.$/.exec(line) ?? /^If you would draw a card, you may (.+?) instead\.$/.exec(line))) {
     const effect = parseEffect(`${m[1].charAt(0).toUpperCase()}${m[1].slice(1)}.`, { targets: [] });
     const parsed = "kind" in effect ? { effect, todo: [] } : effect;
     // The option's words as printed ("this enchantment", not "~").
-    const shown = /^If you would draw a card, you may (.+?) instead\.$/.exec(text)?.[1] ?? m[1];
+    const shown =
+      (/^If you would draw a card, you may instead (.+?)\.$/.exec(text) ?? /^If you would draw a card, you may (.+?) instead\.$/.exec(text))?.[1] ?? m[1];
     if (parsed.effect !== null && parsed.todo.length === 0) {
       return {
         affects: { scope: "self" },
