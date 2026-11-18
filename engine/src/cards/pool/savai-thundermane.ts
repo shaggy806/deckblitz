@@ -38,10 +38,10 @@ export default defineCard({
       trigger: { on: "cycles", who: "you" },
       targets: [],
       effect: {
-        kind: "each-player-may",
-        who: "you",
-        options: [{ pay: "{2}", text: "Pay {2}" }],
-        ifDid: {
+        kind: "may",
+        prompt: "Pay {2} to have this creature deal 2 damage to target creature and gain 2 life?",
+        cost: "{2}",
+        effect: {
           kind: "reflexive-trigger",
           targets: ["creature"],
           effect: {

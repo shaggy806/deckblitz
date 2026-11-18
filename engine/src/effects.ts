@@ -12816,6 +12816,11 @@ export type PileFateWord =
  * working exactly as a printed one does: unearth (rule 702.84), encore
  * (702.141) and embalm (702.128) as activated abilities of the card, harmonize
  * (702.180), retrace (702.81) and sneak (702.190) as ways to cast it.
+ * Jump-start (702.133a) is a way to cast it too, the flashback cast for its
+ * mana cost with a card discarded (`Game.flashbacksOf`): only a one-shot
+ * effect's ("target instant or sorcery card in your graveyard gains
+ * jump-start until end of turn" — Filigree Racer); a static gives it through
+ * `grantsToGraveyard.flashback`'s `keyword` (Niv-Mizzet, Supreme).
  *
  * `cost` is the keyword's own: a fixed one ("unearth {1}{B}{R}"), or
  * `"mana-cost"`, the default — the card's own mana cost ("the embalm cost is
@@ -12833,7 +12838,16 @@ export interface GraveyardKeywordGrant {
 }
 
 /** See {@link GraveyardKeywordGrant}. */
-export type GraveyardKeyword = "unearth" | "encore" | "embalm" | "harmonize" | "retrace" | "sneak" | "escape" | "scavenge";
+export type GraveyardKeyword =
+  | "unearth"
+  | "encore"
+  | "embalm"
+  | "harmonize"
+  | "retrace"
+  | "sneak"
+  | "escape"
+  | "scavenge"
+  | "jump-start";
 
 /** See {@link PileFateWord}. */
 export function pileFateWord(fate: PileFate): PileFateWord {

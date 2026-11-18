@@ -5671,6 +5671,21 @@ export function parseSentence(sentence, ctx) {
         amount: numberOf(m[1]),
       };
     }
+    // "Target instant or sorcery card in your graveyard gains jump-start
+    // until end of turn" in one sentence, where a reflexive ability reads it
+    // (Filigree Racer): a keyword with no cost of its own (rules 702.81a,
+    // 702.133a). Those with a cost are the sentence reader's, the cost's
+    // sentence after.
+    if ((m = re(`target ([a-z ]+?) card in your graveyard gains (retrace|jump-start) until end of turn`).exec(s))) {
+      const filter = parseTypePhrase(m[1], { cards: true });
+      if (filter !== null && filter !== undefined) {
+        return {
+          kind: "grant-graveyard-keyword",
+          target: ctx.target({ kind: "card-in-graveyard", whose: "you", filter }),
+          grant: { keyword: m[2].toLowerCase() },
+        };
+      }
+    }
     // "Choose a suspended card you own and remove that many time counters
     // from it" (Amy Pond): chosen as it resolves, not targeted.
     if ((m = re(`choose a suspended card you own and remove (${N}|that many) time counters? from it`).exec(s))) {
@@ -9776,6 +9791,32 @@ function discardWhenYouDoAt(sentences, i, ctx) {
 }
 
 /**
+ * "You may pay {2}{W}. When you do, tap target creature." (Thousand Moons
+ * Crackshot) and "You may pay {E}{E}. When you do, target instant or sorcery
+ * card in your graveyard gains jump-start until end of turn." (Filigree
+ * Racer): the `may` with its cost — mana, or energy — and a reflexive ability
+ * (rule 603.12) whose targets are its own, chosen as it's put on the stack.
+ * `null` when the clause isn't read whole.
+ */
+function payWhenYouDoAt(sentences, i, ctx) {
+  const pay = /^you may pay ((?:\{[^}]+\})+)\.$/i.exec(sentences[i] ?? "");
+  const clause = /^When you do, (.+\.)$/.exec(sentences[i + 1] ?? "");
+  if (pay === null || clause === null) return null;
+  const energy = /^(?:\{E\})+$/.test(pay[1]);
+  if (!energy && /\{E\}/.test(pay[1])) return null;
+  const targets = [];
+  const inner = { ...ctx, targets, target: (spec) => targets.push(spec) - 1 };
+  const effect = parseSentence(`${clause[1][0].toUpperCase()}${clause[1].slice(1)}`, inner);
+  if (effect === null || effect === undefined || containsUndefined(effect)) return null;
+  return {
+    kind: "may",
+    prompt: `Pay ${pay[1]}?`,
+    ...(energy ? { costEnergy: pay[1].length / 3 } : { cost: pay[1] }),
+    effect: { kind: "reflexive-trigger", targets, effect, text: sentences[i + 1].replaceAll("~", "this creature") },
+  };
+}
+
+/**
  * "You may pay {1}{W} any number of times. When you pay this cost one or more
  * times, put that many valor counters on this creature." (Intrepid Adversary;
  * "up to three times", `maxX`): a `may` whose `cost` is paid a chosen number of
@@ -11822,6 +11863,14 @@ export function parseEffect(text, outer) {
       skip = 1;
       continue;
     }
+    // "You may pay {2}{W}. When you do, …" (`payWhenYouDoAt`).
+    const payThen = payWhenYouDoAt(sentences, i, ctx);
+    if (payThen !== null) {
+      parsed.push(payThen);
+      hints.push({ sentence, effect: payThen });
+      skip = 1;
+      continue;
+    }
     // "You get {E}{E}{E}, then you may pay any amount of {E}." and what it
     // pays for (`energyAmountAt`).
     const energyPay = energyAmountAt(sentences, i, ctx);
@@ -11844,7 +11893,9 @@ export function parseEffect(text, outer) {
     if (gainsM !== null) {
       const filter = parseTypePhrase(gainsM[2], { cards: true });
       const sameAs = new RegExp(`^(?:the|its) ${gainsM[3]} cost is equal to its mana cost\\.$`, "i").test(sentences[i + 1] ?? "");
-      if (filter !== null && (gainsM[4] !== undefined || sameAs || gainsM[3] === "retrace")) {
+      // Retrace and jump-start have no cost of their own (rules 702.81a,
+      // 702.133a).
+      if (filter !== null && (gainsM[4] !== undefined || sameAs || /^(?:retrace|jump-start)$/i.test(gainsM[3]))) {
         const grant = { keyword: gainsM[3], ...(gainsM[4] !== undefined ? { cost: gainsM[4] } : {}) };
         const effect =
           gainsM[1].toLowerCase() === "target"
@@ -22213,7 +22264,7 @@ const OUTLAW_TYPES = ["Assassin", "Mercenary", "Pirate", "Rogue", "Warlock"];
 
 /** The keyword abilities a card in a graveyard can be given, with their cost
  * (`GraveyardKeywordGrant`). */
-const GRAVEYARD_KEYWORD = "unearth|encore|embalm|harmonize|retrace|sneak";
+const GRAVEYARD_KEYWORD = "unearth|encore|embalm|harmonize|retrace|sneak|jump-start";
 
 /**
  * "artifact creature", "Sliver creature", "outlaw creature", "Merfolk and

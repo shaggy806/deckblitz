@@ -25037,7 +25037,9 @@ export class Game {
       });
     }
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
-    const flashbackDiscards = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.discard : undefined;
+    // As read in the graveyard: a jump-start an effect gave it (Filigree
+    // Racer) ended as it moved to the stack.
+    const flashbackDiscards = flashback?.discard;
     const flashbackDiscard = flashbackDiscards === "x" ? chosenX : flashbackDiscards;
     if (flashbackDiscard !== undefined && flashbackDiscard > 0) {
       this.payCostDiscard(cardId, cardId, () => {
@@ -61904,6 +61906,13 @@ controlledBy,
     const granted = object.grantedFlashback;
     if (granted != null) {
       add({ cost: (granted.ownManaCost === true ? ownManaCost() : null) ?? granted.cost, ...(granted.by !== undefined ? { grantor: granted.by } : {}) });
+    }
+    // Jump-start a one-shot effect gave it (Filigree Racer): cast for the
+    // mana cost of the face being cast, discarding a card (rule 702.133a).
+    for (const jump of object.grantedGraveyardKeywords ?? []) {
+      if (jump.keyword !== "jump-start") continue;
+      const cost = jump.manaCost === true ? ownManaCost() : jump.cost;
+      if (cost !== null) add({ cost, keyword: "jump-start", discard: 1, grantor: jump.by });
     }
     // A static's grant reaches a card in the graveyard — and one being cast
     // from there, on the stack as its costs are worked out (rule 601.2a-h).

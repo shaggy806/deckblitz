@@ -3016,7 +3016,8 @@
   "static:player-must-attack-with-a-creature",
   "mechanic:two-pairing-abilities",
   "mechanic:two-pairing-abilities",
-  "effect:search-zones-chosen-by-target-player"
+  "effect:search-zones-chosen-by-target-player",
+  "effect:grant-jump-start"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

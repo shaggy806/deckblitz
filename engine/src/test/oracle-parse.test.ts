@@ -20344,6 +20344,36 @@ describe("a target player's own search, its zones theirs to choose", () => {
   });
 });
 
+describe("you may pay a cost; when you do, a reflexive ability with targets of its own", () => {
+  it("reads a mana payment (Thousand Moons Crackshot) and an energy one with a jump-start grant (Filigree Racer)", () => {
+    const crackshot = parseFace({
+      name: "Thousand Moons Crackshot",
+      type_line: "Creature — Human Soldier",
+      oracle_text: "Whenever this creature attacks, you may pay {2}{W}. When you do, tap target creature.",
+    } as never) as unknown as { triggered: Record<string, unknown>[] };
+    expect(crackshot.triggered[0].effect).toMatchObject({
+      kind: "may",
+      cost: "{2}{W}",
+      effect: { kind: "reflexive-trigger", targets: ["creature"], effect: { kind: "tap", target: 0 } },
+    });
+    const racer = parseFace({
+      name: "Filigree Racer",
+      type_line: "Artifact — Vehicle",
+      oracle_text:
+        "Whenever this Vehicle attacks, you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn. (You may cast that card from your graveyard by discarding a card in addition to paying its other costs. Then exile it.)",
+    } as never) as unknown as { triggered: Record<string, unknown>[] };
+    expect(racer.triggered[0].effect).toMatchObject({
+      kind: "may",
+      costEnergy: 2,
+      effect: {
+        kind: "reflexive-trigger",
+        targets: [{ kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } }],
+        effect: { kind: "grant-graveyard-keyword", target: 0, grant: { keyword: "jump-start" } },
+      },
+    });
+  });
+});
+
 describe("a delayed whenever about the defending player", () => {
   it("reads Nuka-Nuke Launcher's attack trigger", () => {
     const face = parseFace({
