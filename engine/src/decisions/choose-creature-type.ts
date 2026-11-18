@@ -16,7 +16,7 @@ import { CREATURE_TYPES } from "../creature-types.js";
 import type { PlayerId } from "../primitives.js";
 import { printedCardName } from "../state.js";
 import { isPlaneswalkerType } from "../subtypes.js";
-import type { GameState } from "../state.js";
+import type { AwaitingDecision, GameState } from "../state.js";
 import { defineDecision } from "./define.js";
 import { subsetOf } from "./shared/picks.js";
 
@@ -111,6 +111,41 @@ export function suggestedPlaneswalkerTypes(
     .map(([t]) => t);
 }
 
+/** The longest word menu of a permanent's own a bot searches as it enters
+ * (`entersWith: "word"`): two words, a Siege's, a colour's five. Past that
+ * (a card type among nine, a number up to ten) each answer is a rollout
+ * and the suggestions or v1's answer do. */
+const SEARCHED_ENTER_WORDS = 5;
+
+/**
+ * Whether `awaiting` is a permanent's own word menu, asked as it is about to
+ * enter (`CardDefinition.chooseOnEnter`: "choose odd or even", a colour, a
+ * Siege's "Khans or Dragons"; or the coin of two it keeps): a short fixed
+ * list with nothing to resume and none of the marks every other menu of this
+ * kind is raised with. Not one answered from a hand it looked at (Arachne,
+ * Psionic Weaver): what that word taxes is cast on later turns, where no
+ * rollout goes, and v1 reads the hand.
+ */
+function isEnterWordMenu(awaiting: Extract<AwaitingDecision, { kind: "choose-creature-type" }>): boolean {
+  return (
+    !awaiting.catalog &&
+    awaiting.then === undefined &&
+    awaiting.value === undefined &&
+    awaiting.looked === undefined &&
+    awaiting.riot !== true &&
+    awaiting.unleash !== true &&
+    awaiting.enterTapped !== true &&
+    awaiting.asEntersCounter !== true &&
+    awaiting.protector !== true &&
+    awaiting.tribute === undefined &&
+    awaiting.lookAt !== true &&
+    awaiting.choosePlayer !== true &&
+    awaiting.turnSkip === undefined &&
+    awaiting.forCost === undefined &&
+    awaiting.targetChooserFor !== true
+  );
+}
+
 export const chooseCreatureType = defineDecision({
   kind: "choose-creature-type",
 
@@ -129,7 +164,9 @@ export const chooseCreatureType = defineDecision({
         ? { entersWith: "riot" as const }
         : awaiting.unleash === true
           ? { entersWith: "unleash" as const }
-          : {}),
+          : isEnterWordMenu(awaiting)
+            ? { entersWith: "word" as const }
+            : {}),
       // Only a catalog choice needs suggestions; a short fixed list is
       // already its own menu. Never one it leaves out ("other than Wall" —
       // Imagecrafter): a bot answers with a suggestion.
@@ -195,19 +232,27 @@ export const chooseCreatureType = defineDecision({
     };
   },
 
-  // No candidates for a catalog choice or an "as this enters" one — no
-  // rollout sees the difference between one named creature type and
-  // another, so every candidate scores the same and searching only costs
-  // time. A resolving effect's short menu is different: Sudden Demise's
-  // colour is which creatures take the damage. So is riot's or unleash's
-  // (`entersWith`): haste is the attack this turn, the counter is size, and
-  // an unleashed creature can't block — the board says which, and a rollout
-  // sees it. Not a menu of every planeswalker type (Leori, Sparktouched
-  // Hunter's, as it resolves): eighty rollouts for one answer, which the
-  // suggestions already give — the type of the planeswalkers in play.
+  // No candidates for a catalog choice, or for a player, a protector or a
+  // counter kind named as a permanent enters — no rollout sees the
+  // difference between one named creature type and another, so every
+  // candidate scores the same and searching only costs time. A resolving
+  // effect's short menu is different: Sudden Demise's colour is which
+  // creatures take the damage. So is riot's or unleash's (`entersWith`):
+  // haste is the attack this turn, the counter is size, and an unleashed
+  // creature can't block — the board says which, and a rollout sees it. And
+  // so is a permanent's own short word menu (`entersWith: "word"`): Ashling's
+  // Prerogative's "odd or even" is which creatures have haste and which
+  // enter tapped, a Siege's word is what it does every turn. Where the
+  // rollouts tell no two words apart (a Thriving land's colour, on the turn
+  // it enters tapped) v1's answer stands, as for any tie. Not a menu of
+  // every planeswalker type (Leori, Sparktouched Hunter's, as it resolves):
+  // eighty rollouts for one answer, which the suggestions already give — the
+  // type of the planeswalkers in play. Nor an entering menu past
+  // `SEARCHED_ENTER_WORDS`.
   candidates: (legal, player): Action[] => {
     if (legal.kind !== "choose-creature-type" || (legal.resolving !== true && legal.entersWith === undefined)) return [];
     if (legal.options.length > SUGGESTED_CREATURE_TYPES && legal.options.every(isPlaneswalkerType)) return [];
+    if (legal.entersWith === "word" && legal.options.length > SEARCHED_ENTER_WORDS) return [];
     return legal.options.map((creatureType) => ({ type: "choose-creature-type", player, creatureType }));
   },
 

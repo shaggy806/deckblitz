@@ -2301,8 +2301,11 @@ export type LegalAction =
        * is about to enter (rules 702.136a, 702.98a). Which answer is right
        * is the board's to say (haste is an attack this turn; an unleashed
        * creature can't block), so a bot searches the two as it does a
-       * resolving choice's. */
-      readonly entersWith?: "riot" | "unleash";
+       * resolving choice's. `"word"` is the permanent's own short menu, asked
+       * the same way (`CardDefinition.chooseOnEnter`: Ashling's Prerogative's
+       * "odd or even", a colour, a Siege's two names), and searched for the
+       * same reason while it is short. */
+      readonly entersWith?: "riot" | "unleash" | "word";
       /**
        * The creature types most represented among the chooser's own cards
        * (hand, library, graveyard, command zone) and everything on the

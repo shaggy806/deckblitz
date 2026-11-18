@@ -5930,6 +5930,66 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "names even for Ashling's Prerogative when its two-drop's haste is lethal",
+    rule: "A word chosen as a permanent enters is the board's: the one whose effect wins, not the first on the menu.",
+    position(registry) {
+      // "As this enters, choose odd or even" was answered "odd", the first
+      // option, every time: no search weighed a permanent's own word menu
+      // (BACKLOG, 2026-11-16; riot's and unleash's were searched by then).
+      // Bob is at 2 with no blockers and Alice's Grizzly Bears came down this
+      // turn: creatures of the chosen parity have haste, so "even" kills him
+      // now and "odd" does nothing.
+      const game = table(registry, [A, B], A);
+      game.state.players[B].life = 2;
+      lands(game, "Mountain", A, 2);
+      game.debugSpawn("Grizzly Bears", A, "battlefield");
+      const prerogative = game.debugSpawn("Ashling's Prerogative", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: prerogative, targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type" || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-creature-type") {
+        return { passed: false, detail: "Ashling's Prerogative never asked odd or even" };
+      }
+      return {
+        game,
+        player: A,
+        judge(action) {
+          return {
+            passed: action.type === "choose-creature-type" && action.creatureType === "even",
+            detail: describeAction(action).slice(0, 120),
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "names odd for Ashling's Prerogative when its three-drop's haste is lethal",
+    rule: "A word chosen as a permanent enters is the board's: the one whose effect wins, not the first on the menu.",
+    position(registry) {
+      // The other half: a Trained Armodon (mana value 3) and Bob at 3. The
+      // search that now weighs the two words must not lean to "even".
+      const game = table(registry, [A, B], A);
+      game.state.players[B].life = 3;
+      lands(game, "Mountain", A, 2);
+      game.debugSpawn("Trained Armodon", A, "battlefield");
+      const prerogative = game.debugSpawn("Ashling's Prerogative", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: prerogative, targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-creature-type" || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-creature-type") {
+        return { passed: false, detail: "Ashling's Prerogative never asked odd or even" };
+      }
+      return {
+        game,
+        player: A,
+        judge(action) {
+          return {
+            passed: action.type === "choose-creature-type" && action.creatureType === "odd",
+            detail: describeAction(action).slice(0, 120),
+          };
+        },
+      };
+    },
+  }),
+  asked({
     name: "chumps with one token of a stack, not the stack",
     rule: "A chump block against lethal takes one token; the rest of a stack stays home.",
     position(registry) {
