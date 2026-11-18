@@ -758,6 +758,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // whoever's open. The board's call.
   "reselect-attack": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "either", MAJOR);
+    // "Now attacking that player" (Portal Manipulator): the attackers turned
+    // on them.
+    if (n.to !== undefined && typeof n.to === "object" && "target" in n.to) v.touch(n.to.target, "harm", MAJOR);
   },
   // "Spells target player casts cost {2} less" (Will Kenrith): theirs.
   "player-effect": (n, v) => v.touch(n.to, "help", MINOR),

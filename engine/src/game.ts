@@ -647,7 +647,7 @@ import {
   anyNumberSlot,
   concatModeSpecs,
   concreteTargetSpecs,
-  differentControllerOf,
+  differentControllerSlots,
   sameControllerOf,
   sharesOf,
   comparesOf,
@@ -40038,15 +40038,18 @@ export class Game {
       if (object === undefined) return undefined;
       return object.zone === "battlefield" ? object.controller : (object.lastKnown?.controller ?? object.controller);
     };
+    // "…their opponents control" (Portal Manipulator): a player target's is
+    // that player, and only the creature goes illegal.
     specs.forEach((spec, i) => {
-      if (!differentControllerOf(spec) || chosen[i] === undefined) return;
-      const than = otherThan(spec);
-      for (const slot of than === undefined ? [] : otherThanSlots(than)) {
-        if (chosen[slot] === undefined) continue;
+      if (chosen[i] === undefined) return;
+      for (const slot of differentControllerSlots(spec)) {
+        const theirs = chosen[slot];
+        if (theirs === undefined) continue;
         const mine = controllerNow(now[i] ?? chosen[i]);
-        if (mine !== undefined && mine === controllerNow(now[slot] ?? chosen[slot])) {
+        const other = theirs.kind === "player" ? theirs.player : controllerNow(now[slot] ?? theirs);
+        if (mine !== undefined && mine === other) {
           drop(i);
-          drop(slot);
+          if (theirs.kind !== "player") drop(slot);
         }
       }
     });
@@ -44852,14 +44855,15 @@ controlledBy,
             : this.battlefieldMatching(controller, on as CardFilter);
         for (const id of ids) this.becomeBlocked(id);
       },
-      reselectAttack: (on, onlyPlayers) => {
+      reselectAttack: (on, onlyPlayers, to) => {
         const ids =
           "kind" in on && (on.kind === "object" || on.kind === "player")
             ? on.kind === "object"
               ? [on.object]
               : []
             : this.battlefieldMatching(controller, on as CardFilter);
-        this.reselectAttack(ids, controller, onlyPlayers);
+        if (to !== undefined) this.attackNow(ids, to);
+        else this.reselectAttack(ids, controller, onlyPlayers);
       },
       restrict: (target, filter, rules, duration, scope) =>
         typeof duration === "object" && "laterAt" in duration
@@ -57346,6 +57350,26 @@ controlledBy,
       creatures: choosing,
       ...(source !== undefined ? { source } : {}),
     });
+  }
+
+  /**
+   * These attackers are now attacking `player` (rule 508.7 — Portal
+   * Manipulator's "those creatures are now attacking that player"), with no
+   * choice: each one whose controller could attack that player (508.7c, and
+   * 508.7d/e through `legalDefenders`), still in combat and never declared
+   * again (508.7a), requirements and restrictions aside (508.7b). One already
+   * attacking that player, or that can't, stays as it is.
+   */
+  private attackNow(ids: readonly ObjectId[], player: PlayerId): void {
+    for (const id of ids) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "battlefield" || object.attacking === null || object.attacking === player) continue;
+      if (!this.legalDefenders(object.controller).includes(player)) continue;
+      object.attacking = player;
+      delete object.attackingNothing;
+      invalidateComputedCache();
+      this.emit({ type: "attack-reselected", object: id, defender: player });
+    }
   }
 
   /** Ask the next player queued in `pendingEnterAttacking` what their

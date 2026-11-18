@@ -3008,7 +3008,9 @@
   "trigger:mentors",
   "trigger:dealt-damage-first-time-each-turn",
   "condition:card-types-among-permanents-and-graveyard",
-  "filter:shares-card-type-with-discarded"
+  "filter:shares-card-type-with-discarded",
+  "filter:shares-card-type-with-discarded",
+  "effect:reselect-attack-target-chosen-player"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

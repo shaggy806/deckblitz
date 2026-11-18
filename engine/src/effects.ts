@@ -7493,11 +7493,18 @@ export type EffectSpec =
        * creature, `filter` each permanent matching it as this resolves
        * (Windshaper Planetar's "for each attacking creature"). `onlyPlayers`:
        * "which player" and no permanent (Capricopian).
+       *
+       * `to`: no choice — "those creatures are now attacking **that player**"
+       * (Portal Manipulator's target player): each attacks that player, if
+       * its controller could attack them (508.7c — an opponent, within range
+       * of influence), else stays as it is; nobody there (an illegal player
+       * target, 608.2b), nothing changes.
        */
       readonly kind: "reselect-attack";
       readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly onlyPlayers?: true;
+      readonly to?: PlayerRef;
     }
   | ({
       /**
@@ -14761,8 +14768,9 @@ export interface EffectApi {
    * attacker matching `filter`. */
   becomeBlocked(on: TargetRef | CardFilter): void;
   /** See the `"reselect-attack"` {@link EffectSpec}: one creature, or every
-   * attacker matching `filter`. */
-  reselectAttack(on: TargetRef | CardFilter, onlyPlayers: boolean): void;
+   * attacker matching `filter` — the effect's controller choosing, or, with
+   * `to`, each now attacking that player. */
+  reselectAttack(on: TargetRef | CardFilter, onlyPlayers: boolean, to?: PlayerId): void;
   /** See the `"grant-triggered"` {@link EffectSpec}. */
   grantTriggered(
     target: TargetRef,
@@ -22510,12 +22518,15 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "reselect-attack": {
+      // "Now attacking that player": nobody there, nothing changes.
+      const to = spec.to === undefined ? undefined : resolvePlayerRef(spec.to, ctx);
+      if (spec.to !== undefined && to === undefined) return;
       if (spec.filter !== undefined) {
-        ctx.reselectAttack(spec.filter, spec.onlyPlayers === true);
+        ctx.reselectAttack(spec.filter, spec.onlyPlayers === true, to);
         return;
       }
       const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.reselectAttack(target, spec.onlyPlayers === true);
+      if (target !== undefined) ctx.reselectAttack(target, spec.onlyPlayers === true, to);
       return;
     }
     case "become": {

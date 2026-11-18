@@ -407,8 +407,19 @@ export type TargetSpec =
        * the spell or ability resolves, two such targets controlled by one
        * player are both illegal — one already illegal still lends its
        * controller, as it last existed, to that check (the Run Away Together
-       * rulings). Needs {@link TargetFacts}. */
-      readonly differentController?: true;
+       * rulings). Needs {@link TargetFacts}.
+       *
+       * A slot's player is the player itself for a player target, as for
+       * `sameController`: "target player and any number of target attacking
+       * creatures **their opponents control**" (Portal Manipulator) — with no
+       * teams every other player is an opponent (rule 102.3). There only this
+       * slot goes illegal as it resolves; the player is still targeted.
+       *
+       * `{ slots }` is set by the engine, never authored: the relation to
+       * those of `than`'s slots alone — a group's member past the first,
+       * whose `than` also names the earlier members only to differ from them
+       * ({@link concreteTargetSpecs}). */
+      readonly differentController?: true | { readonly slots: readonly number[] };
       /** "…**that player** controls" / "…controlled by **the same**
        * player": the slot's player is that of every slot `than` names —
        * Mutiny's "another target creature that player controls", Goblin
@@ -742,10 +753,20 @@ export function sharesHold(
 /** Is slot `spec` "…controlled by different players" from the slots its
  * relation names? Looked for through an `optional` wrapper. */
 export function differentControllerOf(spec: TargetSpec): boolean {
-  if (typeof spec !== "object") return false;
-  if (spec.kind === "other") return spec.differentController === true;
-  if (spec.kind === "optional") return differentControllerOf(spec.of);
-  return false;
+  return differentControllerSlots(spec).length > 0;
+}
+
+/** The earlier slots whose players slot `spec` must not share
+ * (`differentController`): every slot its relation names, or the `{ slots }`
+ * among them. None for a slot without it. Looked for through an `optional`
+ * wrapper. */
+export function differentControllerSlots(spec: TargetSpec): readonly number[] {
+  if (typeof spec !== "object") return [];
+  if (spec.kind === "optional") return differentControllerSlots(spec.of);
+  if (spec.kind !== "other" || spec.differentController === undefined || !isSlotRelation(spec.than)) return [];
+  const named = otherThanSlots(spec.than);
+  const which = spec.differentController;
+  return which === true ? named : named.filter((slot) => which.slots.includes(slot));
 }
 
 /** Must slot `spec` share its player with the slots its relation names
@@ -1079,7 +1100,16 @@ export function concreteTargetSpecs(
     const tied = isSlotRelation(tiedTo) ? otherThanSlots(tiedTo).map((s) => moved.get(s) ?? s) : [];
     for (let member = 0; member < span.members; member += 1) {
       const before = Array.from({ length: member }, (_unused, i) => span.start + i);
-      const than = [...anchor, ...(anchor.length + before.length > 0 ? tied : []), ...before];
+      const tiedIn = anchor.length + before.length > 0;
+      const than = [...anchor, ...(tiedIn ? tied : []), ...before];
+      // "With different controllers": none controlled by an earlier member's
+      // controller. "…their opponents control", tied to a player's slot
+      // (Portal Manipulator): none that slot's player controls, whoever
+      // controls the other members.
+      const differ = [
+        ...(tiedIn && differentControllerOf(spec.of) ? tied : []),
+        ...(spec.differentControllers === true ? before : []),
+      ];
       out.push(
         than.length === 0
           ? spec.of
@@ -1088,9 +1118,9 @@ export function concreteTargetSpecs(
               of: spec.of,
               than: { slots: than },
               ...(same !== undefined ? { sameController: true } : {}),
-              // "With different controllers": none controlled by an earlier
-              // member's controller.
-              ...(spec.differentControllers === true ? { differentController: true } : {}),
+              ...(differ.length === 0
+                ? {}
+                : { differentController: differ.length === than.length ? true : { slots: differ } }),
             },
       );
     }
@@ -1229,11 +1259,19 @@ export function renumberOtherSlots(spec: TargetSpec, kept: ReadonlyMap<number, n
   if (typeof spec !== "object") return spec;
   if (spec.kind === "optional") return { ...spec, of: renumberOtherSlots(spec.of, kept) };
   if (spec.kind !== "other" || !isSlotRelation(spec.than)) return spec;
-  const slots = otherThanSlots(spec.than).flatMap((slot) => {
-    const to = kept.get(slot);
-    return to === undefined ? [] : [to];
-  });
-  return slots.length === 0 ? spec.of : { ...spec, than: { slots } };
+  const renumber = (from: readonly number[]): number[] =>
+    from.flatMap((slot) => {
+      const to = kept.get(slot);
+      return to === undefined ? [] : [to];
+    });
+  const slots = renumber(otherThanSlots(spec.than));
+  if (slots.length === 0) return spec.of;
+  const differ = spec.differentController;
+  if (typeof differ !== "object") return { ...spec, than: { slots } };
+  // The relation to some of them only: to those still offered.
+  const { differentController: _differ, ...rest } = spec;
+  const apart = renumber(differ.slots);
+  return { ...rest, than: { slots }, ...(apart.length > 0 ? { differentController: { slots: apart } } : {}) };
 }
 
 /**
@@ -1259,7 +1297,13 @@ export function offsetSlotRelations(spec: TargetSpec, by: number): TargetSpec {
   const of = offsetSlotRelations(spec.of, by);
   const than = spec.than;
   if (!isSlotRelation(than)) return { ...spec, of };
-  return { ...spec, of, than: "slot" in than ? { slot: than.slot + by } : { slots: than.slots.map((s) => s + by) } };
+  const differ = spec.differentController;
+  return {
+    ...spec,
+    of,
+    than: "slot" in than ? { slot: than.slot + by } : { slots: than.slots.map((s) => s + by) },
+    ...(typeof differ === "object" ? { differentController: { slots: differ.slots.map((s) => s + by) } } : {}),
+  };
 }
 
 /** The slots of several modes (or a base list then modes) as one list, each
@@ -1566,10 +1610,14 @@ export function slotOptions(
       return player !== undefined && players.size === 1 && players.has(player);
     });
   }
-  // "…controlled by different players": none whose controller is taken.
-  if (!differentControllerOf(specs[i])) return distinct;
-  const controllers = new Set(earlier.map((e) => facts.controllerOf(e)));
-  return distinct.filter((ref) => !controllers.has(facts.controllerOf(ref)));
+  // "…controlled by different players": none whose controller is taken — a
+  // player target's being that player ("…their opponents control").
+  const apart = differentControllerSlots(specs[i])
+    .map((slot) => picked[slot])
+    .filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
+  if (apart.length === 0) return distinct;
+  const controllers = new Set(apart.map((e) => playerOfTarget(e, facts)));
+  return distinct.filter((ref) => !controllers.has(playerOfTarget(ref, facts)));
 }
 
 /**
@@ -1663,7 +1711,7 @@ export function otherSlotConflict(
     if (than === undefined) continue;
     const mine = chosen[i];
     if (mine === null || mine === undefined) continue;
-    const byController = facts !== undefined && differentControllerOf(specs[i]);
+    const apart = facts === undefined ? [] : differentControllerSlots(specs[i]);
     const sharing = facts !== undefined && sameControllerOf(specs[i]);
     const share = sharesOf(specs[i]);
     const compare = comparesOf(specs[i]);
@@ -1686,8 +1734,11 @@ export function otherSlotConflict(
       if (facts !== undefined && attachedToThanOf(specs[i]) && attachedHolds(mine, theirs, facts) === false) {
         return { slot: i, than: slot };
       }
-      // "…controlled by different players" (Protector of the Wastes).
-      if (byController && facts.controllerOf(mine) === facts.controllerOf(theirs)) return { slot: i, than: slot };
+      // "…controlled by different players" (Protector of the Wastes), "…their
+      // opponents control" (Portal Manipulator: a player target's is that player).
+      if (facts !== undefined && apart.includes(slot) && playerOfTarget(mine, facts) === playerOfTarget(theirs, facts)) {
+        return { slot: i, than: slot };
+      }
       // "…that player controls", "from a single graveyard" (Mutiny, Decompose).
       if (sharing) {
         const player = playerOfTarget(mine, facts);
