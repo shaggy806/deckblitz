@@ -24944,6 +24944,9 @@ export class Game {
     // 601.2c, 700.2e).
     if (this.otherChoice?.for === cardId) object.otherChooser = this.otherChoice.chooser;
     if (chosenDivision !== undefined) object.division = chosenDivision;
+    // Which branch of a choice of additional costs was paid (rule 601.2b):
+    // "if the modified creature was sacrificed" (Lethal Throwdown).
+    if (costOption !== undefined && def.additionalCost?.options?.[costOption] !== undefined) object.costOptionPaid = costOption;
     if (kicked) {
       object.kicked = true;
       // Multikicker: how many times (rule 702.33c), for "for each time it was
@@ -52943,6 +52946,7 @@ controlledBy,
       ...(object.kickedByControl === true ? { kickedByControl: true as const } : {}),
       ...(object.timesKicked !== undefined ? { timesKicked: object.timesKicked } : {}),
       ...(object.kickedWith !== undefined ? { kickedWith: object.kickedWith } : {}),
+      ...(object.costOptionPaid !== undefined ? { costOptionPaid: object.costOptionPaid } : {}),
       ...(object.spliced !== undefined ? { spliced: [...object.spliced] } : {}),
       ...(object.overloaded === true ? { overloaded: true } : {}),
       ...(object.bestowed === true ? { bestowed: true } : {}),
@@ -53038,6 +53042,8 @@ controlledBy,
       ...(spell.kicked === true && spell.kickedByControl !== true ? { kicked: true } : {}),
       ...(spell.timesKicked !== undefined ? { timesKicked: spell.timesKicked } : {}),
       ...(spell.kickedWith !== undefined ? { kickedWith: spell.kickedWith } : {}),
+      // And the additional cost paid for it (707.10).
+      ...(spell.costOptionPaid !== undefined ? { costOptionPaid: spell.costOptionPaid } : {}),
       // A copy has what was spliced onto the original (the splice rulings).
       ...(spell.spliced !== undefined ? { spliced: [...spell.spliced] } : {}),
       ...(spell.overloaded === true ? { overloaded: true } : {}),
@@ -73128,6 +73134,7 @@ controlledBy,
     object.kickedByControl = undefined;
     object.timesKicked = undefined;
     object.kickedWith = undefined;
+    object.costOptionPaid = undefined;
     object.asCastFacts = undefined;
     object.turnedFaceUpOnTurn = undefined;
     object.spliced = undefined;

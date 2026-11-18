@@ -1220,6 +1220,12 @@ export interface GameObject {
    * cast (rule 702.33b, f — `kicker.second`): 1 the first, 2 the second, 3
    * both. Set with `kicked`, cleared with it; `timesKicked` counts them. */
   kickedWith?: number;
+  /** Which of `CardDefinition.additionalCost.options` its caster paid as this
+   * spell was cast (rule 601.2b), by index — Lethal Throwdown's "sacrifice a
+   * creature **or** sacrifice a modified creature", read by the
+   * `self-cost-option-paid` condition ("if the modified creature was
+   * sacrificed"). A copy has it too (707.10); cleared on any zone change. */
+  costOptionPaid?: number;
   /** A granted offspring cost was paid as this spell was cast (Zinnia): the
    * permanent it becomes gets offspring's trigger as it enters. Cleared on
    * any zone change after that. */
@@ -1835,6 +1841,7 @@ export interface SpellSnapshot {
   readonly kickedByControl?: true;
   readonly timesKicked?: number;
   readonly kickedWith?: number;
+  readonly costOptionPaid?: number;
   readonly spliced?: readonly string[];
   readonly overloaded?: boolean;
   readonly bestowed?: boolean;

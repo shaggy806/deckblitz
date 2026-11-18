@@ -2168,6 +2168,13 @@ export type StaticCondition =
    * paid" (From Under the Floorboards, rule 702.35b). A copy has it too
    * (707.10). Read on the spell itself, so while it's on the stack. */
   | { readonly kind: "self-alternative-cost-paid"; readonly madness?: true }
+  /** Was this spell cast paying the additional cost `option` (an index into
+   * `additionalCost.options`, rule 601.2b)? Lethal Throwdown's "sacrifice a
+   * creature or sacrifice a modified creature. … **If the modified creature
+   * was sacrificed**, draw a card" is option 1: a modified creature
+   * sacrificed for the first option doesn't count. A copy has it too
+   * (707.10). Read on the spell itself, so while it's on the stack. */
+  | { readonly kind: "self-cost-option-paid"; readonly option: number }
   /**
    * Prowl's condition (rule 702.76a): a player was dealt combat damage this
    * turn by a source that, as it dealt it, was under your control and had

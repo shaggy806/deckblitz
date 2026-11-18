@@ -1322,6 +1322,8 @@ function evalStaticCondition(
       );
     case "self-alternative-cost-paid":
       return source.alternativeCostPaid === (condition.madness === true ? "madness" : "printed");
+    case "self-cost-option-paid":
+      return source.costOptionPaid === condition.option;
     case "prowl": {
       // Rule 702.76a: any of the source's creature types against those
       // recorded as each source dealt its combat damage. `hasSubtype` reads
