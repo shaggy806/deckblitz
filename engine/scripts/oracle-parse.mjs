@@ -8447,7 +8447,7 @@ export function parseSentence(sentence, ctx) {
       max: 1,
       destination: "exile-face-down",
       leftover: "stay",
-      faceDownLooks: "source-controller",
+      faceDownLooks: "linked-controller",
     };
   }
 
@@ -20886,10 +20886,10 @@ function parseFaceAsWritten(face, ctx = {}) {
         if (node.kind === "look-and-choose" && node.destination === "exile" && node.zone === "hand" && node.unlinked === true) delete node.unlinked;
         // "You may look at cards exiled with this creature" (Bane Alley
         // Broker): the chooser and whoever comes to control it — but another
-        // player's pick (Kheru Mind-Eater's) keeps `"source-controller"`.
+        // player's pick (Kheru Mind-Eater's) keeps `"linked-controller"`.
         if (
           node.kind === "look-and-choose" &&
-          node.faceDownLooks !== "source-controller" &&
+          node.faceDownLooks !== "linked-controller" &&
           /\byou may look at cards exiled with\b/i.test(face.oracle_text ?? "")
         )
           delete node.faceDownLooks;

@@ -13193,7 +13193,7 @@ export class Game {
           object.exiledFaceDown =
             awaiting.faceDownLooks === undefined
               ? { lookers: [player], group: faceDownGroup }
-              : awaiting.faceDownLooks === "source-controller"
+              : awaiting.faceDownLooks === "linked-controller"
                 ? { lookers: this.linkedSourceController(awaiting.exileLink), group: faceDownGroup }
                 : { lookers: awaiting.faceDownLooks === "chooser" ? [player] : [], group: faceDownGroup, lookersOnly: true };
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
@@ -47783,7 +47783,7 @@ controlledBy,
      * chooser's — see `look-and-choose`'s `under`. */
     underOwners = false,
     /** See `look-and-choose`'s `faceDownLooks`. */
-    faceDownLooks?: "chooser" | "nobody" | "source-controller",
+    faceDownLooks?: "chooser" | "nobody" | "linked-controller",
     /** See `look-and-choose`'s `prompt`. */
     authoredPrompt?: string,
     /** See `look-and-choose`'s `givesUp`. */

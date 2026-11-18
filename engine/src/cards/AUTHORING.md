@@ -2377,7 +2377,7 @@ a prompt can't when it's in a hand. Nothing eligible asks nothing.
 who may look at it (406.3). Left out, as hideaway: the chooser and whoever comes to control the source
 (Bane Alley Broker's "you may look at cards exiled with this creature"). `"chooser"`: the chooser
 alone (Gustha's Scepter's "you may look at it for as long as it remains exiled"). `"nobody"`: no more
-said (Summoner's Egg). `"source-controller"`: the source's controller and whoever comes to control it,
+said (Summoner's Egg). `"linked-controller"`: the source's controller and whoever comes to control it,
 not the chooser — another player's pick from their own hand (Kheru Mind-Eater's "that player exiles a
 card from their hand face down. You may look at cards exiled with this creature": `player:
 "that-player"`); nobody, if the source has left the battlefield. Getting one back is a `look-and-choose` from `zone: "exiled-with-source"`, or

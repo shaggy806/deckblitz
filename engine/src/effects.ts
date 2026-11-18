@@ -12682,13 +12682,13 @@ export type EffectSpec =
        * for as long as it remains exiled (Gustha's Scepter's "you may look at
        * it"). `"nobody"`: "exile a card from your hand face down", no more
        * said (Summoner's Egg's ruling: you can't look once it's imprinted).
-       * `"source-controller"`: the controller of the permanent it's exiled
+       * `"linked-controller"`: the controller of the permanent it's exiled
        * with, and whoever comes to control it — not the chooser, when that's
        * another player: Kheru Mind-Eater's "that player exiles a card from
        * their hand face down. You may look at cards exiled with this
        * creature" (`player: "that-player"`). Nobody, if the source has left
        * the battlefield by then. */
-      readonly faceDownLooks?: "chooser" | "nobody" | "source-controller";
+      readonly faceDownLooks?: "chooser" | "nobody" | "linked-controller";
       /** What the chooser is told, shown instead of what `destination` says:
        * Moonlight Bargain's price for each card kept; "choose two cards in your
        * hand drawn this turn" (Sylvan Library), where `"stay"` leaves `then` to
@@ -15808,7 +15808,7 @@ export interface EffectApi {
       readonly eachChooses?: readonly PlayerId[];
       readonly underYou?: true;
       readonly underOwners?: true;
-      readonly faceDownLooks?: "chooser" | "nobody" | "source-controller";
+      readonly faceDownLooks?: "chooser" | "nobody" | "linked-controller";
       readonly prompt?: string;
       readonly givesUp?: true;
       readonly leftoverCounters?: { readonly kind: string; readonly amount: number };

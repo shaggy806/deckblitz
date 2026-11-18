@@ -1,7 +1,7 @@
 /**
  * A card another player exiles face down from their own hand, linked to a
  * permanent whose controller may look at it (rule 406.3) and so play it
- * (406.3b): `look-and-choose`'s `faceDownLooks: "source-controller"` —
+ * (406.3b): `look-and-choose`'s `faceDownLooks: "linked-controller"` —
  * Kheru Mind-Eater's "that player exiles a card from their hand face down.
  * You may look at cards exiled with this creature".
  */

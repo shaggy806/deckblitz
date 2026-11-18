@@ -34,7 +34,7 @@ export default defineCard({
         max: 1,
         destination: "exile-face-down",
         leftover: "stay",
-        faceDownLooks: "source-controller",
+        faceDownLooks: "linked-controller",
       },
     },
   ],

@@ -24018,7 +24018,7 @@ describe("another player's face-down pick its source's controller looks at (Kher
       max: 1,
       destination: "exile-face-down",
       leftover: "stay",
-      faceDownLooks: "source-controller",
+      faceDownLooks: "linked-controller",
     });
     expect(kheru.static[0].mayPlay).toEqual({ from: "exile", play: true, filter: {}, linked: true });
   });
