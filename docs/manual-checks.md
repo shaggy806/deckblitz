@@ -8815,3 +8815,14 @@ Each board's die comes up 4.
 ### Lodestone Bauble: in a 4-player game, the lands go back on top of their owner's library
 - **Do:** In this 4-player game, activate Lodestone Bauble, pick Forest and Island in the popup (both Carol's) and click Confirm.
 - **Expect:** No question about a player. Carol's graveyard empties and her library goes from 1 to 3; at the start of Bob's turn Lodestone Bauble's trigger goes on the stack and Carol draws a card (the History: "Carol draws a card", then "Bob draws a card").
+
+## Three piles, one chosen at random (2026-11-18)
+
+### Whims of the Fates: separate your permanents into three piles
+- **Do:** Cast Whims of the Fates. Click Grizzly Bears, then click the banner's Pile 2 button and click Hill Giant, then Confirm piles.
+- **Expect:** The banner reads "Whims of the Fates: separate into three piles — one is chosen at random; the chosen pile is lost", with Pile 1 and Pile 2 buttons (Pile 1 pressed). Your permanents start badged "Pile 3"; Grizzly Bears turns to "Pile 1" and Hill Giant to "Pile 2". Bob then separates his. The History has "Whims of the Fates chooses Alice's pile … at random" and the same for Bob, and each chosen pile goes to its graveyard.
+- **Not a bug:** Your tapped Mountains are permanents too, so they're in the piles (in Pile 3 unless you move them).
+
+### Whims of the Fates: in a 4-player game, everyone's piles are picked at random
+- **Do:** Cast Whims of the Fates and Confirm piles straight away (everything in Pile 3).
+- **Expect:** Bob, Carol and Dave each separate their own in turn. The History has four "… chooses …'s pile … at random" lines, Alice's first, then Bob, Carol and Dave; nobody is asked to choose a pile. Your permanents all stay or all go.

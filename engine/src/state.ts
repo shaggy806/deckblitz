@@ -3859,6 +3859,12 @@ export type AwaitingDecision =
        * are made ("an opponent chooses one of those piles"). */
       readonly anOpponentChooses?: true;
       readonly faceDown?: true;
+      /** "Into **three** piles" (Whims of the Fates): how many. Two when
+       * absent. */
+      readonly pileCount?: number;
+      /** Nobody chooses: one of the piles is picked at random (Whims of the
+       * Fates), `chooser` the separator. */
+      readonly atRandom?: true;
       readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
     }
   | {

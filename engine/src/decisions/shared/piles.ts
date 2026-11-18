@@ -52,13 +52,15 @@ export function pileWhose(
   return whose;
 }
 
-/** Why `piles` isn't a separation of `objects` into two piles, or `null`. */
+/** Why `piles` isn't a separation of `objects` into `count` piles (two by
+ * default), or `null`. */
 export function whyNotTwoPiles(
   objects: readonly ObjectId[],
   piles: readonly (readonly ObjectId[])[],
   player: PlayerId,
+  count = 2,
 ): string | null {
-  if (piles.length !== 2) return `${player} must separate them into two piles, not ${piles.length}`;
+  if (piles.length !== count) return `${player} must separate them into ${count} piles, not ${piles.length}`;
   const offered = new Set(objects);
   const seen = new Set<ObjectId>();
   for (const id of piles.flat()) {
@@ -163,12 +165,48 @@ export function bestSplitFor(
     }
     return best;
   }
-  const piles: ObjectId[][] = [[], []];
-  const totals = [0, 0];
+  return balancedSplit(objects, worth, 2);
+}
+
+/** `objects` into `count` piles of as near equal worth as a greedy pass makes
+ * them: most worth first, each into the lightest pile (the first on a tie).
+ * Deterministic. */
+export function balancedSplit(
+  objects: readonly ObjectId[],
+  worth: Readonly<Record<ObjectId, number>>,
+  count: number,
+): ObjectId[][] {
+  const piles: ObjectId[][] = Array.from({ length: count }, () => []);
+  const totals = piles.map(() => 0);
   for (const id of [...objects].sort((a, b) => (worth[b] ?? 0) - (worth[a] ?? 0))) {
-    const lighter = totals[0] <= totals[1] ? 0 : 1;
+    const lighter = totals.indexOf(Math.min(...totals));
     piles[lighter].push(id);
     totals[lighter] += worth[id] ?? 0;
   }
   return piles;
+}
+
+/**
+ * A bot's separation for a `separate-piles` offer: two piles against a
+ * chooser, the split best for the separator (`bestSplitFor`); a pile chosen
+ * at random (Whims of the Fates), or more than two piles, an even split by
+ * worth — every split loses the same on average to a random pick, and the
+ * even one never loses everything at once (the ruling's one-in-three chance
+ * of sacrificing all of a single pile).
+ */
+export function bestSeparationFor(
+  offer: {
+    readonly objects: readonly ObjectId[];
+    readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
+    readonly worth: Readonly<Record<ObjectId, number>>;
+    readonly whose: Readonly<Record<ObjectId, PlayerId>>;
+    readonly chooser: PlayerId;
+    readonly pileCount?: number;
+    readonly atRandom?: true;
+  },
+  separator: PlayerId,
+): ObjectId[][] {
+  const count = offer.pileCount ?? 2;
+  if (offer.atRandom === true || count !== 2) return balancedSplit(offer.objects, offer.worth, count);
+  return bestSplitFor(offer.objects, offer.fates, offer.worth, offer.whose, separator, offer.chooser);
 }

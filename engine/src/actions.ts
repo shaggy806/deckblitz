@@ -902,8 +902,9 @@ export type Action =
     }
   | {
       /** Answers a pending `separate-piles` decision (rule 700.3): two
-       * piles, every offered object in exactly one of them (either may be
-       * empty). With a face-down pile, `piles[0]` is it. */
+       * piles (the offer's `pileCount`, with that), every offered object in
+       * exactly one of them (any may be empty). With a face-down pile,
+       * `piles[0]` is it. */
       readonly type: "separate-piles";
       readonly player: PlayerId;
       readonly piles: readonly (readonly ObjectId[])[];
@@ -2347,6 +2348,11 @@ export type LegalAction =
       readonly anOpponentChooses?: true;
       /** Pile 0 is face down, pile 1 face up. */
       readonly faceDown?: true;
+      /** How many piles to make: two when absent, three for Whims of the
+       * Fates. */
+      readonly pileCount?: number;
+      /** Nobody chooses: one pile is picked at random (Whims of the Fates). */
+      readonly atRandom?: true;
       /** What happens to the chosen pile and to the other. */
       readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
       /** How much each object is worth to its controller or owner, by the

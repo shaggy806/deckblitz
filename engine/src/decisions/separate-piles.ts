@@ -1,10 +1,11 @@
 /**
  * Separating objects into two piles (rule 700.3) — Fact or Fiction's
  * opponent, Liliana of the Veil's −6, Curator of Destinies' face-down and
- * face-up piles. The first half of a `separate-into-piles` effect: every
- * object goes into exactly one pile, either may be empty (700.3a, 700.3d),
- * and the objects stay where they are meanwhile (700.3c). The chooser then
- * chooses a pile (`choose-pile`).
+ * face-up piles — or three (`pileCount`: Whims of the Fates). The first half
+ * of a `separate-into-piles` effect: every object goes into exactly one pile,
+ * any may be empty (700.3a, 700.3d), and the objects stay where they are
+ * meanwhile (700.3c). The chooser then chooses a pile (`choose-pile`), or one
+ * is picked at random (`atRandom`).
  *
  * Raised by `Game`'s `askSeparatePiles`; the answer waits in
  * `GameState.pilesAnswer` for the effect to resume.
@@ -13,7 +14,7 @@
 import type { Action, LegalAction } from "../actions.js";
 import type { ObjectId } from "../primitives.js";
 import { defineDecision } from "./define.js";
-import { bestSplitFor, pileWhose, pileWorth, whyNotTwoPiles } from "./shared/piles.js";
+import { bestSeparationFor, pileWhose, pileWorth, whyNotTwoPiles } from "./shared/piles.js";
 
 type Offer = Extract<LegalAction, { kind: "separate-piles" }>;
 
@@ -30,6 +31,8 @@ export const separatePiles = defineDecision({
       chooser: awaiting.chooser,
       ...(awaiting.anOpponentChooses === true ? { anOpponentChooses: true } : {}),
       ...(awaiting.faceDown === true ? { faceDown: true } : {}),
+      ...(awaiting.pileCount !== undefined ? { pileCount: awaiting.pileCount } : {}),
+      ...(awaiting.atRandom === true ? { atRandom: true } : {}),
       fates: awaiting.fates,
       worth: pileWorth(ctx, awaiting.objects),
       whose: pileWhose(ctx, awaiting.objects, awaiting.fates, awaiting.source),
@@ -41,7 +44,7 @@ export const separatePiles = defineDecision({
     if (action.type !== "separate-piles") return asked;
     const awaiting = ctx.state.awaiting;
     if (awaiting === null || awaiting.kind !== "separate-piles" || awaiting.player !== player) return asked;
-    return whyNotTwoPiles(awaiting.objects, action.piles, player);
+    return whyNotTwoPiles(awaiting.objects, action.piles, player, awaiting.pileCount ?? 2);
   },
 
   apply: (host, action): void => {
@@ -56,14 +59,17 @@ export const separatePiles = defineDecision({
   },
 
   /**
-   * The split best against the chooser's best reply, then everything in one
-   * pile each way — the search weighs what the chooser actually does with
-   * each.
+   * The split best against the chooser's best reply (an even one, for a
+   * pile chosen at random), then everything in one pile each way — the
+   * search weighs what the chooser actually does with each.
    */
   candidates: (legal, player): Action[] => {
     if (legal.kind !== "separate-piles") return [];
-    const best = bestSplitFor(legal.objects, legal.fates, legal.worth, legal.whose, player, legal.chooser);
-    const answers = [best, [[], [...legal.objects]], [[...legal.objects], []]];
+    const best = bestSeparationFor(legal, player);
+    const count = legal.pileCount ?? 2;
+    const allIn = (k: number): ObjectId[][] =>
+      Array.from({ length: count }, (_, i) => (i === k ? [...legal.objects] : []));
+    const answers = [best, allIn(count - 1), allIn(0)];
     const seen = new Set<string>();
     return answers
       .filter((piles) => {
@@ -76,8 +82,14 @@ export const separatePiles = defineDecision({
   },
 
   randomAnswer: (legal, player, rng): Action => {
-    const piles: ObjectId[][] = [[], []];
-    for (const id of legal.objects) piles[rng.random() < 0.5 ? 0 : 1].push(id);
+    const count = legal.pileCount ?? 2;
+    if (count === 2) {
+      const piles: ObjectId[][] = [[], []];
+      for (const id of legal.objects) piles[rng.random() < 0.5 ? 0 : 1].push(id);
+      return { type: "separate-piles", player, piles };
+    }
+    const piles = Array.from({ length: count }, (): ObjectId[] => []);
+    for (const id of legal.objects) piles[rng.pickIndex(count)].push(id);
     return { type: "separate-piles", player, piles };
   },
 });

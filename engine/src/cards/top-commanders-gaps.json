@@ -2963,7 +2963,8 @@
   "mechanic:piles",
   "mechanic:piles",
   "effect:opponent-chooses-permanents-to-bounce",
-  "effect:unless-per-target-held"
+  "effect:unless-per-target-held",
+  "effect:separate-into-three-piles"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

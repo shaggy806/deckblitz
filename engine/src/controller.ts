@@ -29,7 +29,7 @@ import type { CardDefinition, Keyword } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
 import { keepMostPower } from "./decisions/choose-permanents.js";
 import { defaultVenture } from "./decisions/venture.js";
-import { bestPileFor, bestSplitFor } from "./decisions/shared/piles.js";
+import { bestPileFor, bestSeparationFor } from "./decisions/shared/piles.js";
 import { defaultCounterRemovals } from "./decisions/remove-counters.js";
 import type { CounterRemoval, CounterRemovalOffer } from "./decisions/remove-counters.js";
 import type { VentureAnswer, VentureOffer } from "./decisions/venture.js";
@@ -891,8 +891,8 @@ export class AutomaticController implements PlayerController {
 
   separatePiles(view: ControllerView, offer: SeparatePilesOffer): readonly (readonly ObjectId[])[] {
     // The split that leaves us best off once the chooser takes the pile best
-    // for them.
-    return bestSplitFor(offer.objects, offer.fates, offer.worth, offer.whose, view.player, offer.chooser);
+    // for them — or an even one, against a pick at random.
+    return bestSeparationFor(offer, view.player);
   }
 
   choosePile(view: ControllerView, offer: ChoosePileOffer): number {
@@ -1301,7 +1301,7 @@ export class ScriptedController implements PlayerController {
     suggested,
   ) => suggested[0] ?? options[0];
   separatePilesFn: (view: ControllerView, offer: SeparatePilesOffer) => readonly (readonly ObjectId[])[] = (view, offer) =>
-    bestSplitFor(offer.objects, offer.fates, offer.worth, offer.whose, view.player, offer.chooser);
+    bestSeparationFor(offer, view.player);
   choosePileFn: (view: ControllerView, offer: ChoosePileOffer) => number = (view, offer) =>
     bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
   chooseNumberFn: (view: ControllerView, offer: ChooseNumberOffer) => number = (_view, offer) => offer.min;

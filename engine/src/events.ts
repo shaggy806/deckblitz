@@ -1451,12 +1451,14 @@ export type GameEvent =
     })
   | (Base & {
       /** `player` chose pile `pile` of a `separate-into-piles` (rule 700.3)
-       * — `objects` are what was in it. */
+       * — `objects` are what was in it. `atRandom`: of their own piles, at
+       * random, nobody asked (Whims of the Fates). */
       readonly type: "pile-chosen";
       readonly player: PlayerId;
       readonly source: ObjectId;
       readonly pile: number;
       readonly objects: readonly ObjectId[];
+      readonly atRandom?: true;
     })
   | (Base & {
       /** `player` chose `chosen` — a permanent or a player — as `source`'s

@@ -11407,6 +11407,21 @@ export type EffectSpec =
        * asked, nor is a choice between them. `separator` is unused.
        */
       readonly each?: PlayerScope;
+      /** With `each`: "**Starting with you**, each player separates…" (Whims
+       * of the Fates) — the effect's controller separates first, then the
+       * others in turn order from them, instead of from the active player. */
+      readonly startingWithYou?: true;
+      /** How many piles: "separates all permanents they control into **three
+       * piles**" (Whims of the Fates). Two when absent. Every object goes into
+       * exactly one of them, any of them may be empty (rules 700.3a,
+       * 700.3d). */
+      readonly pileCount?: number;
+      /** "Each player chooses one of their piles **at random**" (Whims of the
+       * Fates): nobody is asked — the game picks among the piles, empty ones
+       * included, each equally likely, with its seeded randomness, and
+       * announces it (a `pile-chosen` event marked `atRandom`). The separator
+       * is who chooses; `chooser` isn't read. */
+      readonly atRandom?: true;
       /** Who separates: the effect's controller when absent. */
       readonly separator?: PlayerRef | "an-opponent";
       /** Who chooses one of the piles. */
@@ -12630,6 +12645,38 @@ export function pileFateWord(fate: PileFate): PileFateWord {
     default:
       return "other";
   }
+}
+
+/** A `separate-into-piles`'s `pileCount` and `atRandom`, as
+ * `ResolutionContext.askSeparatePiles` takes them. */
+function pileShape(
+  spec: Extract<EffectSpec, { kind: "separate-into-piles" }>,
+): { readonly pileCount?: number; readonly atRandom?: true } | undefined {
+  if (spec.pileCount === undefined && spec.atRandom !== true) return undefined;
+  return {
+    ...(spec.pileCount !== undefined ? { pileCount: spec.pileCount } : {}),
+    ...(spec.atRandom === true ? { atRandom: true as const } : {}),
+  };
+}
+
+/** `count` piles (two when absent), every object in the last and the rest
+ * empty (rule 700.3d) — a separation with nothing to separate, or nobody to
+ * answer. */
+function allInLastPile(count: number | undefined, objects: readonly ObjectId[]): ObjectId[][] {
+  const piles: ObjectId[][] = Array.from({ length: Math.max(2, count ?? 2) - 1 }, () => []);
+  return [...piles, [...objects]];
+}
+
+/** The order a `separate-into-piles`' `each` players separate in: turn order
+ * from the active player (rule 101.4), or from the effect's controller with
+ * `startingWithYou` ("starting with you, each player …"). */
+function separationOrder(scope: PlayerScope, startingWithYou: boolean, ctx: ResolutionContext): readonly PlayerId[] {
+  const players = ctx.playersInScope(scope);
+  if (!startingWithYou) return players;
+  const table = ctx.playersInScope("each-player");
+  const at = table.indexOf(ctx.controller);
+  const fromYou = at < 0 ? table : [...table.slice(at), ...table.slice(0, at)];
+  return fromYou.filter((player) => players.includes(player));
 }
 
 /** A `separate-into-piles`'s objects as `ResolutionContext.beginPiles` takes
@@ -14080,8 +14127,9 @@ export interface EffectApi {
     objects: ResolvedPileObjects,
     separator: PlayerId,
   ): { readonly objects: readonly ObjectId[]; readonly lookers: readonly PlayerId[] };
-  /** Ask `separator` to separate `objects` into two piles. `false` when
-   * they've left the game, and nothing was asked. */
+  /** Ask `separator` to separate `objects` into two piles (`shape.pileCount`
+   * of them, with that). `false` when they've left the game, and nothing was
+   * asked. */
   askSeparatePiles(
     separator: PlayerId,
     objects: readonly ObjectId[],
@@ -14091,7 +14139,13 @@ export interface EffectApi {
     /** `chooser` only stands in for an opponent to be named once the piles
      * are made. */
     anOpponentChooses?: boolean,
+    /** See the effect's `pileCount` and `atRandom`. */
+    shape?: { readonly pileCount?: number; readonly atRandom?: true },
   ): boolean;
+  /** `separator`'s piles of a `separate-into-piles` with `atRandom`: one of
+   * them picked with the game's seeded randomness, each equally likely, and
+   * announced as chosen by `separator` at random. Its index. */
+  choosePileAtRandom(separator: PlayerId, piles: readonly (readonly ObjectId[])[]): number;
   /** The piles the last `askSeparatePiles` answer made, taken (and cleared). */
   takePiles(): readonly (readonly ObjectId[])[] | undefined;
   /** Show the piles (a face-up pile revealed) and ask `chooser` to choose
@@ -24353,13 +24407,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         // separate, then a pile of each is chosen, then the fates at once.
         const what = spec.objects;
         if (typeof what !== "object" || !("permanents" in what)) return;
-        const chooser = chooserPlayer(spec.chooser, ctx);
-        if (chooser === undefined) return;
+        // At random, nobody is asked to choose: each separator's own piles
+        // are picked from for them.
+        const atRandom = spec.atRandom === true;
+        const chooser = atRandom ? undefined : chooserPlayer(spec.chooser, ctx);
+        if (!atRandom && chooser === undefined) return;
         const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
-        let { toSeparate, made, chosen } = progress?.each ?? { toSeparate: ctx.playersInScope(spec.each), made: [], chosen: [] };
+        const shape = pileShape(spec);
+        let { toSeparate, made, chosen } = progress?.each ?? { toSeparate: separationOrder(spec.each, spec.startingWithYou === true, ctx), made: [], chosen: [] };
         let lookers = progress?.lookers ?? [];
         if (progress?.each?.asked === "separate") {
-          made = [...made, { separator: toSeparate[0], piles: ctx.takePiles() ?? [[], [...progress.objects]] }];
+          made = [...made, { separator: toSeparate[0], piles: ctx.takePiles() ?? allInLastPile(spec.pileCount, progress.objects) }];
           toSeparate = toSeparate.slice(1);
         } else if (progress?.each?.asked === "choose") {
           const pile = ctx.takeChosenPile();
@@ -24370,22 +24428,26 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           const separator = toSeparate[0];
           const begun = ctx.beginPiles({ permanents: what.permanents, whose: separator }, separator);
           lookers = begun.lookers;
-          if (begun.objects.length > 0 && ctx.askSeparatePiles(separator, begun.objects, chooser, false, fates, false)) {
+          if (begun.objects.length > 0 && ctx.askSeparatePiles(separator, begun.objects, chooser ?? separator, false, fates, false, shape)) {
             ctx.resumeAfterDecisions(
               { ...spec, progress: { objects: begun.objects, lookers, each: { toSeparate, made, chosen, asked: "separate" } } },
               below,
             );
             return;
           }
-          // Nothing to separate: two empty piles (rule 700.3d).
-          made = [...made, { separator, piles: [[], [...begun.objects]] }];
+          // Nothing to separate: every pile empty (rule 700.3d).
+          made = [...made, { separator, piles: allInLastPile(spec.pileCount, begun.objects) }];
           toSeparate = toSeparate.slice(1);
         }
         while (chosen.length < made.length) {
           const { separator, piles } = made[chosen.length];
-          // Two empty piles: either is the same choice.
+          // Every pile empty: any is the same choice.
           if (piles.every((pile) => pile.length === 0)) {
             chosen = [...chosen, 0];
+            continue;
+          }
+          if (chooser === undefined) {
+            chosen = [...chosen, ctx.choosePileAtRandom(separator, piles)];
             continue;
           }
           if (!ctx.askChoosePile(chooser, separator, piles, false, lookers, fates)) return;
@@ -24437,18 +24499,34 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const separator = resolvePlayerRef(spec.separator ?? "you", ctx);
         if (separator === undefined) return;
         // One opponent is that opponent from the start. Of several, the first
-        // stands in on the offer until the piles are made.
-        const opponents = spec.chooser === "an-opponent" ? ctx.playersInScope("each-opponent") : [];
-        const chooser = spec.chooser === "an-opponent" ? opponents[0] : chooserPlayer(spec.chooser, ctx);
+        // stands in on the offer until the piles are made. At random, the
+        // separator is who chooses.
+        const atRandom = spec.atRandom === true;
+        const opponents = !atRandom && spec.chooser === "an-opponent" ? ctx.playersInScope("each-opponent") : [];
+        const chooser = atRandom
+          ? separator
+          : spec.chooser === "an-opponent"
+            ? opponents[0]
+            : chooserPlayer(spec.chooser, ctx);
         if (chooser === undefined) return;
         const named = opponents.length > 1 ? {} : { chooser };
-        if (ctx.askSeparatePiles(separator, progress.objects, chooser, faceDown, fates, opponents.length > 1)) {
+        if (ctx.askSeparatePiles(separator, progress.objects, chooser, faceDown, fates, opponents.length > 1, pileShape(spec))) {
           ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, separator, ...named } }, below);
         }
         return;
       }
       let piles = progress.piles;
-      if (piles === undefined) piles = ctx.takePiles() ?? [[], [...progress.objects]];
+      if (piles === undefined) piles = ctx.takePiles() ?? allInLastPile(spec.pileCount, progress.objects);
+      if (spec.atRandom === true) {
+        const chosen = piles.every((pile) => pile.length === 0) ? 0 : ctx.choosePileAtRandom(progress.separator, piles);
+        ctx.finishPiles(
+          piles[chosen] ?? [],
+          piles.flatMap((pile, i) => (i === chosen ? [] : pile)),
+          spec.chosen,
+          spec.rest,
+        );
+        return;
+      }
       if (progress.chooser === undefined) {
         if (spec.chooser === "an-opponent") {
           applyEffectSpec({ kind: "choose-opponent", then: { ...spec, chooser: "that-player", progress: { ...progress, piles } } }, ctx);

@@ -13347,4 +13347,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       fill: 1,
     }),
   ),
+  // --- Three piles, one chosen at random (2026-11-18) ----------------------------
+  preset(
+    'Whims of the Fates: separate your permanents into three piles',
+    board({
+      you: { bf: ['Mountain*6', 'Grizzly Bears', 'Hill Giant', 'Llanowar Elves'], hand: ['Whims of the Fates'] },
+      opp: { bf: ['Serra Angel', 'Craw Wurm', 'Forest*2'] },
+    }),
+  ),
+  preset(
+    "Whims of the Fates: in a 4-player game, everyone's piles are picked at random",
+    board({
+      you: { bf: ['Mountain*6', 'Grizzly Bears'], hand: ['Whims of the Fates'] },
+      opp: [{ bf: ['Serra Angel', 'Forest'] }, { bf: ['Craw Wurm', 'Island'] }, { bf: ['Hill Giant', 'Swamp'] }],
+    }),
+  ),
 ]

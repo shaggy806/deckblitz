@@ -43282,7 +43282,7 @@ controlledBy,
           lookers: everyone,
         };
       },
-      askSeparatePiles: (separator, objects, chooser, faceDown, fates, anOpponentChooses) => {
+      askSeparatePiles: (separator, objects, chooser, faceDown, fates, anOpponentChooses, shape) => {
         if (this.state.players[separator]?.hasLost !== false) return false;
         this.state.awaiting = {
           kind: "separate-piles",
@@ -43292,9 +43292,19 @@ controlledBy,
           chooser,
           ...(anOpponentChooses === true ? { anOpponentChooses: true } : {}),
           ...(faceDown ? { faceDown: true } : {}),
+          ...(shape?.pileCount !== undefined && shape.pileCount !== 2 ? { pileCount: shape.pileCount } : {}),
+          ...(shape?.atRandom === true ? { atRandom: true } : {}),
           fates,
         };
         return true;
+      },
+      choosePileAtRandom: (separator, piles) => {
+        // Each pile equally likely, empty ones included (Whims of the Fates'
+        // ruling: "each pile must have an equal chance of being chosen").
+        const pile = Math.min(piles.length - 1, Math.floor(this.rng.next() * piles.length));
+        this.state.rngState = this.rng.seed;
+        this.emit({ type: "pile-chosen", player: separator, source, pile, objects: [...(piles[pile] ?? [])], atRandom: true });
+        return pile;
       },
       takePiles: () => {
         const piles = this.state.pilesAnswer?.piles;

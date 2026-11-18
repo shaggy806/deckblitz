@@ -974,12 +974,16 @@ const PILE_FATE_TEXT: Record<SeparatePilesAction['fates']['chosen'], string> = {
   'play-free': 'lets its lands be played and its spells be cast free',
 }
 
-/** "The chosen pile goes into the hand, the other into the graveyard." */
-function pileFatesText(fates: SeparatePilesAction['fates']): string {
+/** "The chosen pile goes into the hand, the other into the graveyard" — "the
+ * other piles each", of more than two. */
+function pileFatesText(fates: SeparatePilesAction['fates'], piles = 2): string {
   return `the chosen pile ${PILE_FATE_TEXT[fates.chosen]}${
-    fates.rest !== undefined ? `; the other ${PILE_FATE_TEXT[fates.rest]}` : ''
+    fates.rest !== undefined ? `; the ${piles > 2 ? 'other piles each' : 'other'} ${PILE_FATE_TEXT[fates.rest]}` : ''
   }`
 }
+
+/** "Separate into **three** piles". */
+const PILE_COUNT_WORDS: Readonly<Record<number, string>> = { 2: 'two', 3: 'three', 4: 'four' }
 
 /** A colour named as a permanent enters ("As this Aura enters, choose a
  * color" — Flickering Ward, Utopia Sprawl) arrives as its letter. */
@@ -2162,8 +2166,12 @@ function Table({
   const [modesForAll, setModesForAll] = useState(false)
   const [sacrificePicks, setSacrificePicks] = useState<readonly ObjectId[]>([])
   const [permanentPicks, setPermanentPicks] = useState<readonly ObjectId[]>([])
-  // The permanents put into the first pile so far, separating on the board.
-  const [pilePicks, setPilePicks] = useState<readonly ObjectId[]>([])
+  // Separating permanents on the board: the pile each has been put into so
+  // far (one not listed is in the last pile), and the pile a click puts one
+  // into — always the first with two piles; chosen with three (Whims of the
+  // Fates).
+  const [pileOf, setPileOf] = useState<Readonly<Record<ObjectId, number>>>({})
+  const [pileBrush, setPileBrush] = useState(0)
   /** A cast or activation whose targets are in, waiting on which permanents
    * its "tap N untapped … you control" cost taps (rule 601.2h — costs are
    * paid last). `picks` names a stack once per token. */
@@ -2571,10 +2579,15 @@ function Table({
     const objects = separatePilesAction?.objects ?? choosePileAction?.piles.flat() ?? []
     return objects.length > 0 && objects.every((id) => view.objects[id]?.zone === 'battlefield')
   }, [separatePilesAction, choosePileAction, view.objects])
-  const pileLabels: readonly [string, string] =
+  // How many piles: two, or the offer's `pileCount` (three for Whims of the
+  // Fates); a permanent not yet moved is in the last.
+  const pileCount = Math.max(2, separatePilesAction?.pileCount ?? choosePileAction?.piles.length ?? 2)
+  const lastPile = pileCount - 1
+  const pileIndexOf = useCallback((id: ObjectId): number => pileOf[id] ?? lastPile, [pileOf, lastPile])
+  const pileLabels: readonly string[] =
     (separatePilesAction ?? choosePileAction)?.faceDown === true
       ? ['Pile 1 (face down)', 'Pile 2 (face up)']
-      : ['Pile 1', 'Pile 2']
+      : Array.from({ length: pileCount }, (_, i) => `Pile ${i + 1}`)
   const proliferateAction = actions.find(
     (a): a is ProliferateAction => a.kind === 'proliferate',
   )
@@ -3595,6 +3608,16 @@ function Table({
         const found = ids.find((i) => copyChoiceAction.options.includes(i))
         if (found) return found
       }
+      // A stack of tokens being separated: a member not yet in the pile a
+      // click fills — one still in the last pile first — or, once all are,
+      // the first, sent back to the last.
+      if (mode === 'separate-piles' && separatePilesAction) {
+        const members = ids.filter((i) => separatePilesAction.objects.includes(i))
+        const found =
+          members.find((i) => pileIndexOf(i) === lastPile && lastPile !== pileBrush) ??
+          members.find((i) => pileIndexOf(i) !== pileBrush)
+        if (found) return found
+      }
       if (mode === 'choose-permanent-or-player' && permanentOrPlayerAction) {
         const found = ids.find((i) => permanentOrPlayerAction.eligible.some((t) => t.kind === 'object' && t.object === i))
         if (found) return found
@@ -3611,18 +3634,16 @@ function Table({
               ? pendingWaterbend
             : mode === 'choose-permanents'
               ? { picks: permanentPicks }
-              : mode === 'separate-piles'
-                ? { picks: pilePicks }
-                : mode === 'proliferate'
-                  ? { picks: proliferatePicks.flatMap((t) => (t.kind === 'object' ? [t.object] : [])) }
-                  : null
+              : mode === 'proliferate'
+                ? { picks: proliferatePicks.flatMap((t) => (t.kind === 'object' ? [t.object] : [])) }
+                : null
       if (picking) {
         const fresh = ids.find((i) => !picking.picks.includes(i))
         if (fresh !== undefined) return fresh
       }
       return ids[0]
     },
-    [mode, activeTargeting, pendingSac, copyChoiceAction, permanentOrPlayerAction, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, pilePicks, proliferatePicks],
+    [mode, activeTargeting, pendingSac, copyChoiceAction, permanentOrPlayerAction, separatePilesAction, pileIndexOf, lastPile, pileBrush, pendingTap, pendingConvoke, pendingWaterbend, permanentPicks, proliferatePicks],
   )
 
   const clickPermanent = useCallback(
@@ -3848,10 +3869,16 @@ function Table({
         return
       }
       // Separating permanents (rule 700.3): a click moves one between the
-      // piles — into the first, or back out of it.
+      // piles — into the pile being filled (the first, with two), or back
+      // out of it to the last.
       if (mode === 'separate-piles' && separatePilesAction && pilesOnBoard) {
         if (!separatePilesAction.objects.includes(id)) return
-        setPilePicks((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]))
+        setPileOf((cur) => {
+          const rest = { ...cur }
+          delete rest[id]
+          const into = (cur[id] ?? lastPile) === pileBrush ? lastPile : pileBrush
+          return into === lastPile ? rest : { ...rest, [id]: into }
+        })
         return
       }
       if (mode === 'time-travel' && timeTravelAction) {
@@ -4026,6 +4053,8 @@ function Table({
       choosePermanentsAction,
       separatePilesAction,
       pilesOnBoard,
+      lastPile,
+      pileBrush,
       pendingSac,
       startCast,
       startAbility,
@@ -4432,25 +4461,25 @@ function Table({
       if (of > 1 && taken > 0) badge = `☠ ${taken}/${of}`
     } else if (mode === 'separate-piles' && separatePilesAction && pilesOnBoard) {
       const members = ids.filter((i) => separatePilesAction.objects.includes(i))
-      const first = members.filter((i) => pilePicks.includes(i)).length
-      highlight = members.length > first
-      selected = first > 0
+      const counts = Array.from({ length: pileCount }, (_, k) => members.filter((i) => pileIndexOf(i) === k).length)
+      // Lit while a click would still move one into the pile being filled;
+      // marked once any has left the last pile.
+      highlight = members.some((i) => pileIndexOf(i) !== pileBrush)
+      selected = members.some((i) => pileIndexOf(i) !== lastPile)
       if (members.length > 0) {
         badge =
           members.length === 1
-            ? first > 0
-              ? 'Pile 1'
-              : 'Pile 2'
-            : `Pile 1: ${first} · Pile 2: ${members.length - first}`
+            ? `Pile ${pileIndexOf(members[0]) + 1}`
+            : counts
+                .flatMap((n, k) => (pileCount === 2 || n > 0 ? [`Pile ${k + 1}: ${n}`] : []))
+                .join(' · ')
       }
     } else if (mode === 'choose-pile' && choosePileAction && pilesOnBoard) {
-      const inPile = (p: number) => ids.filter((i) => choosePileAction.piles[p]?.includes(i)).length
-      const one = inPile(0)
-      const two = inPile(1)
-      highlight = one + two > 0
-      if (one > 0 && two > 0) badge = `Pile 1: ${one} · Pile 2: ${two}`
-      else if (one > 0) badge = 'Pile 1'
-      else if (two > 0) badge = 'Pile 2'
+      const counts = choosePileAction.piles.map((pile) => ids.filter((i) => pile.includes(i)).length)
+      const shown = counts.flatMap((n, k) => (n > 0 ? [k] : []))
+      highlight = shown.length > 0
+      if (shown.length > 1) badge = shown.map((k) => `Pile ${k + 1}: ${counts[k]}`).join(' · ')
+      else if (shown.length === 1) badge = `Pile ${shown[0] + 1}`
     } else if (mode === 'choose-permanents' && choosePermanentsAction) {
       const taken = permanentPicks.filter((x) => x === id).length
       const of = choosePermanentsAction.copies?.[id] ?? 1
@@ -6062,33 +6091,47 @@ function Table({
     )
   } else if (mode === 'separate-piles' && separatePilesAction) {
     const source = view.decisionSource ? `${view.decisionSource.cardName}: ` : ''
-    const chooser = separatePilesAction.anOpponentChooses
-      ? 'an opponent chooses'
-      : separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
+    const choice = separatePilesAction.atRandom
+      ? 'one is chosen at random'
+      : `${separatePilesAction.anOpponentChooses
+          ? 'an opponent chooses'
+          : separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`} one`
+    const howMany = PILE_COUNT_WORDS[pileCount] ?? String(pileCount)
     if (pilesOnBoard) {
-      const first = pilePicks.length
-      const second = separatePilesAction.objects.length - first
+      const piles = Array.from({ length: pileCount }, (_, k) =>
+        separatePilesAction.objects.filter((id) => pileIndexOf(id) === k),
+      )
+      const moved = separatePilesAction.objects.length - piles[lastPile].length
       controls = (
         <div className="controls">
           <span>
-            {source}separate into two piles — {chooser} one; {pileFatesText(separatePilesAction.fates)}.
+            {source}separate into {howMany} piles — {choice}; {pileFatesText(separatePilesAction.fates, pileCount)}.
             <span className="muted">
               {' '}
-              Click a permanent to move it to pile 1 · pile 1: {first} · pile 2: {second}
+              {pileCount === 2
+                ? `Click a permanent to move it to pile 1 · pile 1: ${piles[0].length} · pile 2: ${piles[1].length}`
+                : `Pick a pile, then click permanents to move them into it · pile ${pileCount}: ${piles[lastPile].length}`}
             </span>
           </span>
-          <button type="button" disabled={first === 0} onClick={() => setPilePicks([])}>
+          {pileCount > 2
+            ? piles.slice(0, lastPile).map((pile, k) => (
+                <button
+                  key={k}
+                  type="button"
+                  className={pileBrush === k ? 'selected' : undefined}
+                  aria-pressed={pileBrush === k}
+                  onClick={() => setPileBrush(k)}
+                >
+                  Pile {k + 1} ({pile.length})
+                </button>
+              ))
+            : null}
+          <button type="button" disabled={moved === 0} onClick={() => setPileOf({})}>
             Clear
           </button>
           <button
             type="button"
-            onClick={() =>
-              game.dispatch({
-                type: 'separate-piles',
-                player: seat,
-                piles: [[...pilePicks], separatePilesAction.objects.filter((id) => !pilePicks.includes(id))],
-              })
-            }
+            onClick={() => game.dispatch({ type: 'separate-piles', player: seat, piles: piles.map((pile) => [...pile]) })}
           >
             Confirm piles
           </button>
@@ -6098,7 +6141,7 @@ function Table({
       controls = (
         <div className="controls">
           <span className="muted">
-            {decisionCollapsed ? `${source}separating cards into two piles` : 'Look at the popup to separate the cards'}
+            {decisionCollapsed ? `${source}separating cards into ${howMany} piles` : 'Look at the popup to separate the cards'}
           </span>
           {decisionCollapsed ? (
             <button type="button" onClick={() => setDecisionCollapsed(false)}>
@@ -8485,15 +8528,18 @@ function Table({
 
       {mode === 'separate-piles' && separatePilesAction && !pilesOnBoard ? (
         <PileViewer
-          title={`${view.decisionSource?.cardName ?? 'Piles'} — separate into two piles: ${
-            separatePilesAction.anOpponentChooses
-              ? 'an opponent chooses'
-              : separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
-          } one, and ${pileFatesText(separatePilesAction.fates)}`}
+          title={`${view.decisionSource?.cardName ?? 'Piles'} — separate into ${PILE_COUNT_WORDS[pileCount] ?? pileCount} piles: ${
+            separatePilesAction.atRandom
+              ? 'one is chosen at random'
+              : `${separatePilesAction.anOpponentChooses
+                  ? 'an opponent chooses'
+                  : separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`} one`
+          }, and ${pileFatesText(separatePilesAction.fates, pileCount)}`}
           resolve={(id) => view.objects[id]}
           labels={pileLabels}
           separate={{
             objects: separatePilesAction.objects,
+            count: pileCount,
             onConfirm: (piles) => game.dispatch({ type: 'separate-piles', player: seat, piles: piles.map((p) => [...p]) }),
           }}
           collapsed={decisionCollapsed}

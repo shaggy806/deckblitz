@@ -7,12 +7,15 @@ export interface PileViewerProps {
   /** Looks up each id's face — `undefined` for one hidden from this viewer
    * (a face-down pile it didn't look at), drawn as a card back. */
   readonly resolve: (id: ObjectId) => VisibleObject | undefined
-  /** The two piles' names ("Pile 1 (face down)"), in order. */
-  readonly labels: readonly [string, string]
-  /** Separating (rule 700.3): every card starts in the second pile, and a
-   * click moves it to the other; Confirm sends both. */
+  /** The piles' names ("Pile 1 (face down)"), in order. */
+  readonly labels: readonly string[]
+  /** Separating (rule 700.3): every card starts in the last pile, and a
+   * click moves it on to the next (from the last, back to the first) — with
+   * two piles, to the other; Confirm sends them all. `count` piles, two when
+   * absent. */
   readonly separate?: {
     readonly objects: readonly ObjectId[]
+    readonly count?: number
     readonly onConfirm: (piles: readonly (readonly ObjectId[])[]) => void
   }
   /** Choosing: a button under each pile. */
@@ -26,19 +29,27 @@ export interface PileViewerProps {
 }
 
 /**
- * Two piles of cards (rule 700.3) — Fact or Fiction's revealed cards being
+ * Piles of cards (rule 700.3) — Fact or Fiction's revealed cards being
  * separated, or the piles being chosen between. A forced decision, so no
  * close button, only "View board".
  */
 export function PileViewer({ title, resolve, labels, separate, choose, collapsed = false, onCollapse }: PileViewerProps) {
-  const [first, setFirst] = useState<readonly ObjectId[]>([])
+  // Each card's pile while separating; a card not in it is in the last.
+  const [pileOf, setPileOf] = useState<Readonly<Record<ObjectId, number>>>({})
   if (collapsed) return null
 
+  const count = Math.max(2, separate?.count ?? 2)
+  const last = count - 1
   const piles: readonly (readonly ObjectId[])[] = separate
-    ? [first, separate.objects.filter((id) => !first.includes(id))]
+    ? Array.from({ length: count }, (_, k) => separate.objects.filter((id) => (pileOf[id] ?? last) === k))
     : (choose?.piles ?? [[], []])
   const move = (id: ObjectId) =>
-    setFirst((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]))
+    setPileOf((cur) => {
+      const next = ((cur[id] ?? last) + 1) % count
+      const rest = { ...cur }
+      delete rest[id]
+      return next === last ? rest : { ...rest, [id]: next }
+    })
 
   return (
     <div className="zone-viewer-overlay">
@@ -46,7 +57,11 @@ export function PileViewer({ title, resolve, labels, separate, choose, collapsed
         <div className="zone-viewer-head">
           <h2>{title}</h2>
           <span className="zone-viewer-head-actions">
-            {separate ? <span className="muted">click a card to move it to the other pile</span> : null}
+            {separate ? (
+              <span className="muted">
+                click a card to move it to the {count === 2 ? 'other' : 'next'} pile
+              </span>
+            ) : null}
             {onCollapse ? (
               <button type="button" onClick={onCollapse}>
                 View board

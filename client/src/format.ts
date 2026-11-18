@@ -507,9 +507,13 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'replacement-order-chosen':
       return `${who(event.player)} applies ${event.effect} first`
     case 'pile-chosen':
-      return `${who(event.player)} chooses pile ${event.pile + 1} (${
-        event.objects.length === 1 ? '1 object' : `${event.objects.length} objects`
-      }) for ${name(event.source)}`
+      return event.atRandom === true
+        ? `${name(event.source)} chooses ${who(event.player)}'s pile ${event.pile + 1} at random (${
+            event.objects.length === 1 ? '1 object' : `${event.objects.length} objects`
+          })`
+        : `${who(event.player)} chooses pile ${event.pile + 1} (${
+            event.objects.length === 1 ? '1 object' : `${event.objects.length} objects`
+          }) for ${name(event.source)}`
     case 'ability-activated':
       return `${who(event.player)} activates ${name(event.source)}${
         event.onStack ? '' : ' (mana)'
