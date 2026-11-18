@@ -683,6 +683,19 @@ export interface OthersEnterReplacement {
    * first, and none of them happen.
    */
   readonly exileInstead?: true;
+  /**
+   * It enters under **your** control instead (rule 614.1a) — Gather
+   * Specimens' "if a creature would enter the battlefield under an opponent's
+   * control this turn, it enters under your control instead", `filter: {
+   * type: "creature", controlledBy: "opponent" }` judged under the player it
+   * would enter under. A resolved one (`replacement-effect`), read by
+   * `Game.enteringUnder` for every way a permanent enters — a spell
+   * resolving, an effect putting it there, a token being created — before
+   * any other replacement on how it enters (its ruling), each once (rule
+   * 614.5). A token's owner is still the player who created it (rule 111.2);
+   * a card's the card's (110.2): a control effect keeps it with you.
+   */
+  readonly underYou?: true;
 }
 
 /** "If one or more tokens would be created under your control, twice that many

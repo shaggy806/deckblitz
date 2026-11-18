@@ -224,6 +224,11 @@ export interface GameObject {
    * `self-devoured` condition. Gone with its next move; a copy of it devoured
    * nothing. */
   enteredDevoured?: readonly LastKnownInfo[];
+  /** The player it entered under instead of the one it would have this
+   * stint (Gather Specimens — `OthersEnterReplacement.underYou`, rule
+   * 614.1a): the control effect the effect putting it there would make for
+   * that other player never starts. Gone as it leaves the battlefield. */
+  enteredUnderInstead?: PlayerId;
   /** Which of its two kicker costs its spell was kicked with (`kickedWith`),
    * carried across the stack-to-battlefield move the way `enteredTimesKicked`
    * is — "if it was kicked with its {1}{U} kicker" (Anavolver). */

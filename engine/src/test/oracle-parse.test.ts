@@ -6126,6 +6126,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(leyline.effect.thenCounters).toEqual({ kind: "+1/+1", amount: { countOf: { type: "land", controlledBy: "you" } } });
   });
 
+  it("'if a creature would enter … under an opponent's control this turn, it enters under your control instead' (Gather Specimens)", () => {
+    const gather = face(
+      "If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead.",
+      "Instant",
+    );
+    expect(gather.effect).toEqual({
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: { event: "others-enter-battlefield", filter: { type: "creature", controlledBy: "opponent" }, underYou: true },
+    });
+    expect(gather.complete).toBe(true);
+  });
+
   it("'each time target permanent would deal damage … this turn, it deals double that damage' (Overblaze)", () => {
     const blaze = face(
       "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.",

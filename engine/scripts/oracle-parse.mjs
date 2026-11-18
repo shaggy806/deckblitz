@@ -7781,6 +7781,16 @@ export function parseSentence(sentence, ctx) {
   // "Until end of turn, if a nontoken creature would enter and it wasn't
   // cast, exile it instead" (Mistcaller): Containment Priest's
   // `exileInstead` for the turn (rule 611.2c).
+  // "If a creature would enter the battlefield under an opponent's control
+  // this turn, it enters under your control instead" (Gather Specimens):
+  // `underYou` for the turn (rule 614.1a).
+  if (/^if a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead\.$/i.test(s)) {
+    return {
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: { event: "others-enter-battlefield", filter: { type: "creature", controlledBy: "opponent" }, underYou: true },
+    };
+  }
   if (/^until end of turn, if a nontoken creature would enter and it wasn't cast, exile it instead\.$/i.test(s)) {
     return {
       kind: "replacement-effect",

@@ -7969,6 +7969,15 @@ clause (section 9):
   and it wasn't cast, exile it instead" is a `replacement-effect` with
   `duration: "end-of-turn"` and that replacement, its filter read from the
   effect's controller's side. `enter-exile-instead.test.ts`.
+  `underYou: true` is "it enters under your control instead" (rule 614.1a),
+  resolved ones only: Gather Specimens' "if a creature would enter the
+  battlefield under an opponent's control this turn, it enters under your
+  control instead" is a `replacement-effect` `duration: "end-of-turn"` with
+  `filter: { type: "creature", controlledBy: "opponent" }` — judged under the
+  player it would enter under, for a spell resolving, an effect putting it
+  there and a token being created alike, before its other replacements (its
+  as-enters choices are yours), each once (614.5), a control effect keeping
+  a card or token you don't own. `enters-under-your-control-instead.test.ts`.
   Leave "other" out of the filter: rule 614.12 already keeps a permanent's
   replacement off itself, and off anything entering at the same time as it
   (a token batch, a mass reanimation, a flicker's return, a tutor's finds are

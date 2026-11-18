@@ -17647,7 +17647,10 @@ export class Game {
     if (transformed && object.enterChoice?.transformed !== true) {
       object.enterChoice = { ...object.enterChoice, transformed: true };
     }
-    // Control, then copy, then the rest (the Mystic Reflection ruling).
+    // Control, then copy, then the rest (the Mystic Reflection ruling): one
+    // that enters under another player's control instead (Gather Specimens)
+    // has that player choose.
+    chooser = this.enteringUnder(id, chooser);
     if (this.enterAsCopyAsked(id, chooser)) return true;
     for (let next = this.nextEnterChoice(id, chooser); next !== null; next = this.nextEnterChoice(id, chooser)) {
       // Exiled instead (Containment Priest), once what it copies is chosen
@@ -33436,7 +33439,9 @@ export class Game {
     if (sneakAt !== undefined && this.state.objects[id]?.zone === "battlefield") {
       this.putIntoAttack([id], this.state.objects[id].controller, { defender: sneakAt });
     }
-    if (spellControl !== undefined && this.state.objects[id]?.zone === "battlefield") {
+    // Under another player's control instead (Gather Specimens), it's
+    // theirs: the spell's control effects end with the stack.
+    if (spellControl !== undefined && this.state.objects[id]?.zone === "battlefield" && this.state.objects[id].enteredUnderInstead === undefined) {
       this.keepSpellControl(id, spellControl, putOnStackBy);
     } else if (under !== undefined && this.state.objects[id]?.zone === "battlefield" && this.state.objects[id].controller !== under) {
       this.gainControlByEffect(under, { kind: "object", object: id }, false, true, { split: false });
@@ -52909,7 +52914,17 @@ controlledBy,
     // what the battlefield handles. Nor are tokens linked to their source:
     // "then exile all other tokens created with this" tells them from the
     // older ones by object.
-    if (separate || tapped || withCounters !== undefined || this.mintingLink !== null || !this.isStackableTokenName(printedName)) {
+    // Nor while one may enter under another player's control instead (Gather
+    // Specimens): each is judged as it's minted, never folded into the would-be
+    // controller's stack.
+    if (
+      separate ||
+      tapped ||
+      withCounters !== undefined ||
+      this.mintingLink !== null ||
+      !this.isStackableTokenName(printedName) ||
+      this.state.activeReplacements.some((a) => a.replacement.event === "others-enter-battlefield" && a.replacement.underYou === true)
+    ) {
       return mintIndividually();
     }
     const repId = this.mintFreshTokenObject(
@@ -53028,6 +53043,16 @@ controlledBy,
         ? { faces: tokenFaces(this.registry, cardName) as readonly string[], face: 0 }
         : {}),
     };
+    // "If a creature would enter the battlefield under an opponent's control
+    // this turn, it enters under your control instead" (Gather Specimens):
+    // first of the replacements on how it enters (its ruling). The player who
+    // created it still owns it (rule 111.2), so a control effect keeps it
+    // with the other once it's there.
+    const under = skipBattlefield ? controller : this.enteringUnder(id, controller);
+    if (under !== controller) {
+      this.state.objects[id].controller = under;
+      this.state.objects[id].enteredUnderInstead = under;
+    }
     // "Enter as a copy of …" (Mystic Reflection, Essence of the Wild — rule
     // 707.9): a token minted straight onto the battlefield is the copy before
     // its other replacements look at it, in place of what it was made as
@@ -53037,7 +53062,7 @@ controlledBy,
     // (`askEnterChoice`).
     let becameCopyOf: string | undefined;
     if (!this.mintingToEnter && this.enterAsCopyAround()) {
-      const copiers = this.enterCopiersFor(id, controller);
+      const copiers = this.enterCopiersFor(id, under);
       const last = copiers.at(-1);
       if (last !== undefined) {
         const token = this.state.objects[id];
@@ -53076,6 +53101,7 @@ controlledBy,
       this.state.objects[id].timestamp = this.state.timestampSeq;
       this.state.objects[id].controlSinceSeq = this.state.timestampSeq;
       this.state.zones.shared.battlefield.push(id);
+      if (under !== controller) this.gainControlByEffect(under, { kind: "object", object: id }, false, true, { split: false });
       if (becameCopyOf !== undefined) this.emit({ type: "permanent-copied", object: id, copyOf: becameCopyOf });
       // Entering with counters is putting them on it (rule 122.6).
       for (const c of entering.counters) {
@@ -53084,7 +53110,7 @@ controlledBy,
           object: id,
           counter: c.kind,
           amount: c.amount,
-          by: controller,
+          by: under,
           after: this.state.objects[id].counters[c.kind],
         });
       }
@@ -63526,6 +63552,9 @@ controlledBy,
     ) {
       return;
     }
+    // So with one that entered under another player's control instead
+    // (Gather Specimens, rule 614.1a): it's already theirs.
+    if (entered && object.enteredUnderInstead !== undefined && object.enteredUnderInstead !== player) return;
     let timestamp = opts.timestamp;
     if (timestamp === undefined) {
       this.state.timestampSeq += 1;
@@ -70615,6 +70644,83 @@ controlledBy,
       candidates.push({ source: active.source, filter: r.filter, you: active.owner });
     }
     if (candidates.length === 0) return [];
+    return this.judgedAsEntering(id, under, enter, () =>
+      candidates
+        .filter((c) =>
+          matchesFilter(this.state, this.registry, id, c.filter, {
+            you: c.you,
+            source: c.source,
+          }),
+        )
+        .map((c) => c.source),
+    );
+  }
+
+  /**
+   * Who `id` enters under once "if a creature would enter the battlefield
+   * under an opponent's control this turn, it enters under your control
+   * instead" (Gather Specimens — `OthersEnterReplacement.underYou`) has
+   * applied, `wouldBe` the player it would enter under otherwise. Applied
+   * before every other replacement on how it enters (its ruling: the devour
+   * it eats with, the color it names, what a Clone copies are the new
+   * controller's), each effect once (rule 614.5): the would-be controller
+   * then the next, so two opposing ones end where they began (the ruling).
+   * Which of two that both apply comes first is the would-be controller's
+   * choice (rule 616.1); it isn't asked — the one first in turn order after
+   * them goes first (AUTHORING §15, "Replacement ordering"), as
+   * `tokenCreatorAfterRedirects` does. Each is judged as the permanent would
+   * exist on the battlefield under the player it would then enter under
+   * (rule 614.12). A token already minted is judged where it is.
+   */
+  private enteringUnder(id: ObjectId, wouldBe: PlayerId, enter: EnterOptions = {}): PlayerId {
+    const candidates: { readonly key: number; readonly source: ObjectId; readonly filter: CardFilter; readonly you: PlayerId }[] = [];
+    this.state.activeReplacements.forEach((active, key) => {
+      const r = active.replacement;
+      if (r.event !== "others-enter-battlefield" || r.underYou !== true) return;
+      if (this.state.players[active.owner]?.hasLost === true || !this.activeReplacementStands(active)) return;
+      candidates.push({ key, source: active.source, filter: r.filter, you: active.owner });
+    });
+    if (candidates.length === 0) return wouldBe;
+    const object = this.state.objects[id];
+    if (object === undefined) return wouldBe;
+    const order = this.state.turnOrder;
+    const look = (): PlayerId => {
+      let under = wouldBe;
+      const left = [...candidates];
+      for (;;) {
+        object.controller = under;
+        invalidateComputedCache();
+        const after = (p: PlayerId): number => (order.indexOf(p) - order.indexOf(under) + order.length) % order.length;
+        const next = left
+          .filter((c) => c.you !== under && matchesFilter(this.state, this.registry, id, c.filter, { you: c.you, source: c.source }))
+          .reduce<(typeof candidates)[number] | undefined>((best, c) => (best === undefined || after(c.you) < after(best.you) ? c : best), undefined);
+        if (next === undefined) return under;
+        left.splice(left.indexOf(next), 1);
+        under = next.you;
+      }
+    };
+    if (object.zone === "battlefield") {
+      const saved = object.controller;
+      try {
+        return look();
+      } finally {
+        object.controller = saved;
+        invalidateComputedCache();
+      }
+    }
+    return this.judgedAsEntering(id, wouldBe, enter, look);
+  }
+
+  /**
+   * `look` run with `id` as it would exist on the battlefield under `under`
+   * (rule 614.12): for the length of the look it's there under that player —
+   * face down if it enters so, the copy it chose to enter as, what the effect
+   * putting it there says it is, its mana cost not counted toward a devotion —
+   * with the entry its move would record (`cast` only for a spell that was
+   * cast resolving). Nothing is changed by the look.
+   */
+  private judgedAsEntering<T>(id: ObjectId, under: PlayerId, enter: EnterOptions, look: () => T): T {
+    const object = this.state.objects[id];
     const resolving = object.zone === "stack" && enter.notResolving !== true;
     const entry: EntryRecord = {
       from: object.zone,
@@ -70660,16 +70766,7 @@ controlledBy,
         ];
       }
       invalidateComputedCache();
-      return withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () =>
-        candidates
-          .filter((c) =>
-            matchesFilter(this.state, this.registry, id, c.filter, {
-              you: c.you,
-              source: c.source,
-            }),
-          )
-          .map((c) => c.source),
-      );
+      return withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), look);
     } finally {
       const at = battlefield.lastIndexOf(id);
       if (at >= 0) battlefield.splice(at, 1);
@@ -72811,7 +72908,7 @@ controlledBy,
     if (
       to === "battlefield" &&
       object.zone !== "battlefield" &&
-      this.enterExilers(id, enter.under ?? object.controller, enter).length > 0
+      this.enterExilers(id, this.enteringUnder(id, enter.under ?? object.controller, enter), enter).length > 0
     ) {
       object.enterChoice = undefined;
       if (object.zone !== "exile") this.moveObjectUncached(id, "exile", {});
@@ -73410,6 +73507,7 @@ controlledBy,
     // to its owner, not the thief.
     object.controlEndsAtCleanup = false;
     delete object.controlEffects;
+    delete object.enteredUnderInstead;
     object.controller = object.owner;
     // A copy effect ends when the object changes zones (rule 707.2) — a Clone
     // that dies and returns is a Clone again.
@@ -73799,7 +73897,11 @@ controlledBy,
         this.state.players[enterChoice.chosenPlayer]?.hasLost === false
           ? enterChoice.chosenPlayer
           : undefined;
-      const enteringController = chosenUnder ?? enter.under ?? object.controller;
+      // "…it enters under your control instead" (Gather Specimens), first of
+      // the replacements on how it enters (its ruling).
+      const wouldEnterUnder = chosenUnder ?? enter.under ?? object.controller;
+      const enteringController = this.enteringUnder(id, wouldEnterUnder, enter);
+      const redirectedUnder = enteringController !== wouldEnterUnder ? enteringController : undefined;
       object.controller = enteringController;
       // "…When you do, …" (rules 603.11, 707.9g): it copied something, so the
       // linked ability triggers, and goes on the stack as a player would next
@@ -73989,7 +74091,17 @@ controlledBy,
         this.emit({ type: "door-unlocked", object: id, door, player: enteringController, fully: false });
       }
       object.controller = object.owner;
-      if (chosenUnder !== undefined) {
+      if (redirectedUnder !== undefined) {
+        // It entered under another player's control instead (Gather
+        // Specimens): kept there by a control effect if that isn't its owner,
+        // and the one the effect putting it there would make for the player
+        // it would have entered under never starts (`enteredUnderInstead`).
+        object.enteredUnderInstead = redirectedUnder;
+        object.controller = redirectedUnder;
+        if (redirectedUnder !== object.owner) {
+          this.gainControlByEffect(redirectedUnder, { kind: "object", object: id }, false, true, { split: false });
+        }
+      } else if (chosenUnder !== undefined) {
         // It entered theirs: nothing changed hands, so no `control-changed`.
         object.controller = chosenUnder;
         this.gainControlByEffect(chosenUnder, { kind: "object", object: id }, false, true, { split: false });
