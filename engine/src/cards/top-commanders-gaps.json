@@ -2774,6 +2774,7 @@
   "cost:collect-evidence-linked-exile",
   "effect:copy-spell-retarget-created-token",
   "effect:copy-spell-retarget-another-opponent",
+  "effect:warp-strike-return-attacking",
   "effect:turn-face-up-or-exile-and-cast",
   "static:grants-replacement-effect",
   "static:keywords-of-linked-exile",

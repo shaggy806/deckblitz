@@ -42634,7 +42634,7 @@ export class Game {
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
       meld: (self, partnerFilter, into, partner, entry) =>
         this.meldByEffect(controller, x, self, partnerFilter, into, partner, entry),
-      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under, attachTo, arms) =>
+      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under, attachTo, arms, attacking) =>
         this.returnFlickeredByEffect(
           link,
           thenCounters,
@@ -42643,6 +42643,7 @@ export class Game {
           tapped,
           attachTo,
           arms,
+          attacking,
         ),
       grantFlashback: (target, cost) => this.grantFlashbackByEffect(target, source, cost),
       grantFlashbackAll: (filter) => {
@@ -59863,6 +59864,7 @@ controlledBy,
           ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
           ...(options.transformed === true ? { transformed: true } : {}),
           ...(options.tapped === true ? { tapped: true } : {}),
+          ...(options.attacking !== undefined ? { attacking: options.attacking } : {}),
         };
       }
       this.completeFlickerReturn(
@@ -59872,6 +59874,7 @@ controlledBy,
         options.transformed === true,
         options.tapped === true,
         options.faceDown === true,
+        options.attacking,
       );
       return null;
     }
@@ -59889,6 +59892,7 @@ controlledBy,
         ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
         ...(options.transformed === true ? { transformed: true } : {}),
         ...(options.tapped === true ? { tapped: true } : {}),
+        ...(options.attacking !== undefined ? { attacking: options.attacking } : {}),
         ...(auraReturns.length > 0 ? { arms: auraReturns } : {}),
       };
       // Then, for each target that came back, its Auras attached to it.
@@ -59940,6 +59944,7 @@ controlledBy,
     tapped = false,
     attachTo?: ObjectId,
     arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[],
+    attacking?: ResolvedEnterAttacking,
   ): boolean {
     const linked = this.state.zones.shared.exile.filter(
       (id) => this.state.objects[id]?.flickerLink === link,
@@ -59964,7 +59969,7 @@ controlledBy,
       return true;
     }
     for (const id of linked) this.state.objects[id].flickerLink = undefined;
-    this.completeFlickerReturn(returning, counters, returnUnder, transformed, tapped);
+    this.completeFlickerReturn(returning, counters, returnUnder, transformed, tapped, false, attacking);
     // "If you do" (`arms`): a host that came back now arms its Auras' return;
     // one that didn't leaves them in exile, their link spent.
     for (const arm of arms ?? []) {
@@ -59981,7 +59986,9 @@ controlledBy,
    * having already confirmed that's where they are. Shared by the immediate
    * path, the delayed one, and the one that had to wait on a commander's
    * 903.9a choice. `returnUnder` is who controls them when it isn't their
-   * owners (`underYourControl`); `tapped`, that they enter tapped. */
+   * owners (`underYourControl`); `tapped`, that they enter tapped;
+   * `attacking`, that they're put onto the battlefield attacking (rule
+   * 508.4), each by its controller. */
   private completeFlickerReturn(
     ids: readonly ObjectId[],
     counters?: FlickerCounters,
@@ -59989,6 +59996,7 @@ controlledBy,
     transformed = false,
     tapped = false,
     faceDown = false,
+    attacking?: ResolvedEnterAttacking,
   ): void {
     const entered: ObjectId[] = [];
     this.withEnterBatch(() => {
@@ -60022,6 +60030,15 @@ controlledBy,
     // enters (rule 122.6), so its enter triggers see it. Essence Flux's
     // "put a counter on it" comes after the return.
     if (counters?.entering === true) this.putFlickerCounters(entered, counters);
+    // "…tapped and attacking" (rule 508.4): as they enter, before anything
+    // sees them arrive — each by its controller (`putIntoAttack` leaves one
+    // that isn't the attacking player's, or out of combat, where it is).
+    if (attacking !== undefined) {
+      for (const player of this.state.turnOrder) {
+        const theirs = entered.filter((id) => this.state.objects[id]?.controller === player);
+        if (theirs.length > 0) this.putIntoAttack(theirs, player, attacking);
+      }
+    }
     for (const id of entered) {
       this.emit({ type: "permanent-entered-battlefield", object: id });
     }

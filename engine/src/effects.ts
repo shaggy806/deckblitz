@@ -614,6 +614,8 @@ export interface FlickerOptions {
   readonly transformed?: boolean;
   /** It returns tapped (Nezahal, Primal Tide). */
   readonly tapped?: boolean;
+  /** It returns attacking — see `flicker`'s `attacking`. */
+  readonly attacking?: ResolvedEnterAttacking;
   /** It returns at once, face down (Shorecrasher Elemental). */
   readonly faceDown?: boolean;
   readonly returnAt?: DelayedStepWatch;
@@ -5023,6 +5025,14 @@ export type EffectSpec =
       /** "Return it to the battlefield **tapped**" (Nezahal, Primal Tide):
        * it enters tapped, as it enters (rule 614.1c). */
       readonly tapped?: boolean;
+      /** "Return it to the battlefield … tapped and **attacking** at the
+       * beginning of that player's next declare attackers step" (Noctis, Heir
+       * Apparent's Warp-Strike): put onto the battlefield attacking (rule
+       * 508.4) as it returns — only during combat, by the active player, as
+       * `put-onto-battlefield`'s `attacking` (see {@link EnterAttacking});
+       * `"choose"` asks its controller what it attacks. A player ref is read
+       * as the card is exiled. */
+      readonly attacking?: EnterAttacking;
       /** The delayed return's text, for the log and the stack. */
       readonly returnText?: string;
       /** With `returnAt`: what that delayed ability goes on to do as it returns
@@ -5087,6 +5097,8 @@ export type EffectSpec =
       readonly underPlayer?: PlayerId;
       readonly transformed?: boolean;
       readonly tapped?: boolean;
+      /** A `flicker`'s `attacking`, its player read as it exiled. */
+      readonly attacking?: ResolvedEnterAttacking;
       /** Each card returns attached to this permanent (a `flicker`'s
        * `withAuras`, its second step): an Aura that can't legally enchant it
        * stays in exile (rule 303.4i), anything else enters unattached. */
@@ -13886,6 +13898,7 @@ export interface EffectApi {
     under?: PlayerId,
     attachTo?: ObjectId,
     arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[],
+    attacking?: ResolvedEnterAttacking,
   ): boolean;
   /** See the `"meld"` {@link EffectSpec}: `partner` is the counterpart
    * already chosen (`null`: chosen, and gone since), else it's found (and
@@ -21312,6 +21325,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const returnUnder = spec.under === undefined ? undefined : resolvePlayerRef(spec.under, ctx);
       const returnAt = spec.returnAt === undefined ? undefined : readDelayedAt(spec.returnAt, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
       if (spec.returnAt !== undefined && returnAt === undefined) return;
+      const attacking = resolveEnterAttacking(spec.attacking, ctx);
       const returning = ctx.flicker(targets, {
         ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
         ...(spec.underYourControl === true ? { underYourControl: true } : {}),
@@ -21322,6 +21336,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.returnThen !== undefined ? { returnThen: spec.returnThen } : {}),
         ...(spec.transformed === true ? { transformed: true } : {}),
         ...(spec.tapped === true ? { tapped: true } : {}),
+        ...(attacking !== undefined ? { attacking } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
         ...(spec.withAuras === true ? { withAuras: true } : {}),
         ...(spec.target === "source" || (Array.isArray(spec.target) && spec.target.includes("source")) ? { fromSource: true } : {}),
@@ -21340,6 +21355,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.underPlayer,
         spec.attachTo,
         spec.arms,
+        spec.attacking,
       );
       if (asked) ctx.resumeAfterDecisions(spec, parked);
       return;

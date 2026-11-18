@@ -19,6 +19,10 @@ import type { Step } from "./turn.js";
  * A step a delayed ability can wait for: one in which a player gets priority,
  * so the ability can go on the stack as it begins. Never the untap step (rule
  * 502.4). `"main"` is either main phase, the first of them to begin.
+ * `"declare-attackers"` (Noctis, Heir Apparent's "at the beginning of that
+ * player's next declare attackers step"): it resolves once the attackers are
+ * declared, the step's turn-based action (rule 508.1), whether or not any
+ * were — the step comes in every combat phase.
  */
 export type DelayedStep =
   | Extract<
@@ -27,6 +31,7 @@ export type DelayedStep =
       | "draw"
       | "precombat-main"
       | "begin-combat"
+      | "declare-attackers"
       | "end-combat"
       | "postcombat-main"
       | "end"
