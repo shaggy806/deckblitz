@@ -751,6 +751,14 @@ export function mustBeBlockedByExactlyOne(state: GameState, registry: CardRegist
   return recordsOfKind(state, registry, attacker, "must-be-blocked-if-able").some(({ rule }) => rule.exactlyOne === true);
 }
 
+/** Each "must be blocked by N or more creatures if able" binding `attacker`
+ * (Gorm the Great's 2, rule 509.1c): its N, one requirement each. */
+export function mustBeBlockedByAtLeast(state: GameState, registry: CardRegistry, attacker: ObjectId): number[] {
+  return recordsOfKind(state, registry, attacker, "must-be-blocked-if-able").flatMap(({ rule }) =>
+    rule.byAtLeast === undefined ? [] : [rule.byAtLeast],
+  );
+}
+
 /** The creature each "blocks [this attacker] if able" on `blocker` names, or
  * `undefined` for a bare "blocks if able" with parameters elsewhere (rule
  * 509.1c), each the same object it was when the requirement was made (400.7). */

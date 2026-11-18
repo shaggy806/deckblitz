@@ -211,11 +211,15 @@ export interface MustBeBlockedByAll {
 }
 
 /** "Must be blocked if able" narrowed: by one of these (Slayer's Cleaver), or
- * by exactly one creature (Nacatl War-Pride). */
+ * by exactly one creature (Nacatl War-Pride), or "**by two or more creatures**
+ * if able" (`byAtLeast: 2` — Gorm the Great): a requirement of its own (rule
+ * 509.1c), obeyed only by that many blockers or more, beside Gorm's plain
+ * "must be blocked if able", which one blocker obeys. */
 export interface MustBeBlockedIfAble {
   readonly kind: "must-be-blocked-if-able";
   readonly by?: CardFilter;
   readonly exactlyOne?: true;
+  readonly byAtLeast?: number;
   readonly you?: PlayerId;
 }
 

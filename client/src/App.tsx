@@ -7050,8 +7050,15 @@ function Table({
             : ''}
           {unblockedMusts.length > 0
             ? ` · ${unblockedMusts
-                .map((id) => game.nameOf(id))
-                .join(', ')} must be blocked if able`
+                .map((id) => {
+                  // "Must be blocked by two or more creatures if able" (Gorm
+                  // the Great): how many, when that's the one still unmet.
+                  const least = Math.max(1, ...(blockAction.mustBeBlockedByAtLeast?.[id] ?? []))
+                  return least > 1
+                    ? `${game.nameOf(id)} must be blocked by ${least} or more creatures if able`
+                    : `${game.nameOf(id)} must be blocked if able`
+                })
+                .join(', ')}`
             : ''}
           {overBlocked.length > 0
             ? ` · ${overBlocked

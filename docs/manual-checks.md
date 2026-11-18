@@ -8843,3 +8843,13 @@ Each board's die comes up 4.
 - **Do:** Attack Bob with Grizzly Bears and Dave with Hill Giant. Block for Bob (click Savannah Lions, then Block (1)), then for Dave (Elite Vanguard, then Block (1)).
 - **Expect:** The block prompt comes to you twice, with "You choose for Bob" and then "You choose for Dave" in the top bar; Carol (not attacked) is never asked. Savannah Lions and the Bears trade, and Elite Vanguard dies blocking Hill Giant.
 - **Not a bug:** On a bot's turn, the bot chooses how your creatures block: you aren't asked.
+## Must be blocked by two or more creatures (2026-11-18)
+
+### Gorm the Great: two of your creatures must block it
+- **Do:** Switch to Bob and attack you with Gorm the Great. Back as Alice, block it with Grizzly Bears, then with Llanowar Elves too.
+- **Expect:** With only Grizzly Bears on it the prompt says "Gorm the Great must be blocked by 2 or more creatures if able" and "Block (1)" is off; with both on it, "Block (2)" works and the History has each blocking Gorm the Great.
+- **Not a bug:** With none blocking, the same words show: two can block it, so two must.
+
+### Gorm the Great: in a 4-player game, the player attacked blocks with two
+- **Do:** In this 4-player game, switch to Bob and attack you with Gorm the Great. Back as Alice, block it with Grizzly Bears and Llanowar Elves.
+- **Expect:** "Block (1)" stays off with one of them on Gorm; "Block (2)" works once both are. Carol and Dave aren't asked to block.

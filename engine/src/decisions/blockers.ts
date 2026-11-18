@@ -31,6 +31,7 @@ import {
   blockedByAtMostOne,
   blockedOnlyByAll,
   blockRequirementsOf,
+  mustBeBlockedByAtLeast,
   mustBeBlockedByExactlyOne,
   blockersRequiredBy,
   creatureDef,
@@ -153,12 +154,21 @@ function blockersOffer(
     const distinct = each.filter((by, i) => each.findIndex((other) => other.join() === by.join()) === i);
     if (distinct.length > 1) mustBeBlockedByEach[attacker] = distinct;
   }
+  const plainIfAble = (id: ObjectId): boolean =>
+    restrictionsOf(ctx.state, ctx.registry, id).has("must-be-blocked-if-able") ||
+    exactlyOne.includes(id) ||
+    (lured.includes(id) && singleBlockerAttackers.includes(id));
+  // "Must be blocked by two or more creatures if able" (Gorm the Great): one
+  // more requirement each, obeyed only by that many blockers (rule 509.1c),
+  // listed with a plain "must be blocked if able" beside it as 1.
+  const mustBeBlockedByAtLeastOf: Record<ObjectId, readonly number[]> = {};
+  for (const id of attacking) {
+    const more = mustBeBlockedByAtLeast(ctx.state, ctx.registry, id);
+    if (more.length === 0) continue;
+    mustBeBlockedByAtLeastOf[id] = [...(plainIfAble(id) && mustBeBlockedByOneOf[id] === undefined ? [1] : []), ...more];
+  }
   const mustBeBlockedIfAble = attacking.filter(
-    (id) =>
-      restrictionsOf(ctx.state, ctx.registry, id).has("must-be-blocked-if-able") ||
-      exactlyOne.includes(id) ||
-      mustBeBlockedByOneOf[id] !== undefined ||
-      (lured.includes(id) && singleBlockerAttackers.includes(id)),
+    (id) => plainIfAble(id) || mustBeBlockedByOneOf[id] !== undefined || mustBeBlockedByAtLeastOf[id] !== undefined,
   );
   // Creatures that have to block if able (provoke: that attacker), each the
   // same object it was when the requirement was made (rule 400.7), and only
@@ -215,6 +225,7 @@ function blockersOffer(
     ...(Object.keys(mustBeBlockedByOneOf).length > 0 ? { mustBeBlockedByOneOf } : {}),
     ...(Object.keys(mustBeBlockedByEach).length > 0 ? { mustBeBlockedByEach } : {}),
     ...(exactlyOne.length > 0 ? { mustBeBlockedByExactlyOne: exactlyOne } : {}),
+    ...(Object.keys(mustBeBlockedByAtLeastOf).length > 0 ? { mustBeBlockedByAtLeast: mustBeBlockedByAtLeastOf } : {}),
     ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
     ...(Object.keys(blockCompany).length > 0 ? { blockCompany } : {}),

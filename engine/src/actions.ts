@@ -2030,6 +2030,13 @@ export type LegalAction =
        * creature if able" (Nacatl War-Pride): two on it obey it no more than
        * none. Absent when there are none. */
       readonly mustBeBlockedByExactlyOne?: readonly ObjectId[];
+      /** Those of `mustBeBlockedIfAble` under "must be blocked by N or more
+       * creatures if able" (Gorm the Great's 2): each requirement on it no
+       * filter narrows, as the fewest blockers that obey it — 1 for a plain
+       * "must be blocked if able" beside it — each its own (rule 509.1c).
+       * Its `mustBeBlockedByOneOf`/`ByEach` requirements are beside these.
+       * Absent when there are none. */
+      readonly mustBeBlockedByAtLeast?: Readonly<Record<ObjectId, readonly number[]>>;
       /** Creatures of this defender's that have to block if able — any
        * attacker, or `attacker` (provoke, rule 702.39a) — from the
        * `block-if-able` effect (`GameState.blockRequirements`). Only the

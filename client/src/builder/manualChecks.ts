@@ -13385,4 +13385,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Savannah Lions'] }, { bf: ['Serra Angel'] }, { bf: ['Elite Vanguard'] }],
     }),
   ),
+  // --- Must be blocked by two or more creatures (2026-11-18) -----------------------
+  preset(
+    'Gorm the Great: two of your creatures must block it',
+    board({
+      you: { bf: ['Grizzly Bears', 'Llanowar Elves'] },
+      opp: { human: true, bf: ['Gorm the Great'] },
+      turn: 0,
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Gorm the Great: in a 4-player game, the player attacked blocks with two',
+    board({
+      you: { bf: ['Grizzly Bears', 'Llanowar Elves'] },
+      opp: [{ human: true, bf: ['Gorm the Great'] }, { bf: ['Hill Giant'] }, { bf: ['Llanowar Elves'] }],
+      turn: 0,
+      step: 'begin-combat',
+    }),
+  ),
 ]

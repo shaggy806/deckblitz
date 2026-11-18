@@ -373,7 +373,7 @@ describe("every definition speaks the one vocabulary", () => {
     "must-block": ["attacker"],
     "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock"],
     "must-be-blocked": ["by"],
-    "must-be-blocked-if-able": ["by", "exactlyOne"],
+    "must-be-blocked-if-able": ["by", "exactlyOne", "byAtLeast"],
     // `from` is the permanent that chose, set as the rule is bound.
     "attack-only-nearest": ["direction"],
   };
