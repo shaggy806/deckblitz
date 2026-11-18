@@ -67248,6 +67248,10 @@ controlledBy,
     /** A loss an effect caused: its spell's or ability's controller (rule 119.3). */
     byEffectOf?: PlayerId,
   ): void {
+    // An amount that was never set — a number never noted (`{ chosenNumber }`
+    // reads NaN) — changes nothing: Soulgorger Orgg gone before its enters
+    // ability noted the life lost gains none.
+    if (Number.isNaN(delta)) return;
     if (this.dryRunningEvents) {
       if (delta > 0 && this.state.awaiting === null && !playerGainLifeProhibited(this.state, this.registry, player)) {
         this.lifeOrderAsked(player, delta);
