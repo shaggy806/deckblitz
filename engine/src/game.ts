@@ -9488,6 +9488,7 @@ export class Game {
           wait.revealSince,
           wait.abilityIndex,
           true,
+          wait.manaSpent,
         );
       }
       this.prepareForPriority(wait.activator);
@@ -12540,6 +12541,9 @@ export class Game {
       undefined,
       undefined,
       waiting.revealSince,
+      undefined,
+      false,
+      waiting.manaSpent,
     );
   }
 
@@ -18203,7 +18207,7 @@ export class Game {
 
     const payment = this.payMana(player, this.cyclingCost(player, cardId));
     if (payment === null) throw new Error(`${player} cannot pay the cycling cost of ${def.name}`);
-    const cyclingManaSpent = this.executePayment(player, payment).length;
+    const cyclingManaSpent = this.executePayment(player, payment);
     // Cycling's cost discards the card (rule 702.29a: "[Cost], Discard this
     // card"), so it is a discard to everything watching for one — Archfiend
     // of Ifnir's "whenever you cycle or discard another card", Waste Not —
@@ -18230,7 +18234,7 @@ export class Game {
       ability: abilityId,
       fromZone: "hand",
       ...(payment.life > 0 ? { lifePaid: payment.life } : {}),
-      ...(cyclingManaSpent > 0 ? { manaSpent: cyclingManaSpent } : {}),
+      ...(cyclingManaSpent.length > 0 ? { manaSpent: cyclingManaSpent } : {}),
     });
     this.afterPlayerAction(player);
   }
@@ -28560,6 +28564,9 @@ export class Game {
       // Never on the stack (rule 605.3b): a mana rider its mana fired has no
       // ability to copy.
       this.bindManaRidersToAbility(undefined);
+      // The mana its own cost spent (605.3a), announced as it resolves — kept
+      // with whatever waits on a cost's answer.
+      const spentOn = manaSpentOnThis.length > 0 ? { manaSpent: manaSpentOnThis } : {};
       // "Sacrifice X Goats" (Springjack Pasture): which ones is the player's
       // choice, and nothing can resolve until it's made. The mana comes as
       // the last one is chosen (`finishCostSacrifice`), and nobody gets
@@ -28569,6 +28576,7 @@ export class Game {
           abilityIndex,
           x: chosenX,
           ...(manaColors !== undefined ? { manaColors } : {}),
+          ...spentOn,
         });
         this.afterPlayerAction(player);
         return;
@@ -28584,6 +28592,7 @@ export class Game {
             abilityIndex,
             x: chosenX,
             ...(manaColors !== undefined ? { manaColors } : {}),
+            ...spentOn,
           });
         });
         if (asked) {
@@ -28593,7 +28602,7 @@ export class Game {
       }
       // "Exile a card from your graveyard" (Molt Tender) and "Collect evidence
       // 3" (Cryptex) wait the same way, where there's a choice to make.
-      const manaAfter = { source: sourceId, abilityIndex, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}) };
+      const manaAfter = { source: sourceId, abilityIndex, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}), ...spentOn };
       const graveyardExile = ability.cost.exileFromGraveyard;
       if (graveyardExile !== undefined) {
         this.withDecisionSource(sourceId, () =>
@@ -28640,7 +28649,10 @@ export class Game {
       if (ability.cost.do !== undefined) {
         // Rule 605.3b: no stack. The mana waits on the answer to whatever the
         // cost asks, beneath anything the cost parks of its own.
-        this.state.suspendedResolutions.push({ effect: null, manaAbility: { source: sourceId, abilityIndex, player, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}) } });
+        this.state.suspendedResolutions.push({
+          effect: null,
+          manaAbility: { source: sourceId, abilityIndex, player, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}), ...spentOn },
+        });
         this.payCostAct(ability.cost.do, player, sourceId, null, chosenX, [], player);
         this.afterPlayerAction(player);
         return;
@@ -28670,7 +28682,7 @@ export class Game {
             destination: "reveal",
             leftover: "stay",
             priorityTo: player,
-            thenManaAbility: { source: sourceId, abilityIndex, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}), revealSince },
+            thenManaAbility: { source: sourceId, abilityIndex, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}), revealSince, ...spentOn },
           };
           const object = this.state.objects[sourceId];
           this.state.decisionSource = object === undefined ? null : { object: sourceId, cardName: printedCardName(object) };
@@ -28678,10 +28690,10 @@ export class Game {
           return;
         }
         // Nothing to reveal: the mana, none of it for a revealed card.
-        this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, revealSince, abilityIndex);
+        this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, revealSince, abilityIndex, false, manaSpentOnThis);
         return;
       }
-      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, undefined, abilityIndex);
+      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake, this.manaForChoice, undefined, abilityIndex, false, manaSpentOnThis);
       return;
     }
 
@@ -28785,7 +28797,7 @@ export class Game {
         ? { sacrificedToActivate: true as const }
         : {}),
       ...(lifePaidToActivate > 0 ? { lifePaid: lifePaidToActivate } : {}),
-      ...(manaSpentOnThis.length > 0 ? { manaSpent: manaSpentOnThis.length } : {}),
+      ...(manaSpentOnThis.length > 0 ? { manaSpent: manaSpentOnThis } : {}),
     });
     // What it was activated targeting, each permanent as it was: "the first
     // activated ability you activate … that targets a creature you control"
@@ -29040,6 +29052,9 @@ export class Game {
     /** `manaColors` are the picks of the player the mana goes to, who was
      * asked for them (`ManaAbilityPick`). */
     pickedByRecipient = false,
+    /** The mana its own cost spent (605.3a), for the `ability-activated` it
+     * announces — "if mana from a Treasure was spent to activate it" (Vazi). */
+    manaSpent?: readonly SpentMana[],
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
@@ -29096,6 +29111,7 @@ export class Game {
             ...(paidSets !== undefined ? { paidSets } : {}),
             ...(sacrificedCouldMake !== undefined ? { sacrificedCouldMake } : {}),
             ...(revealSince !== undefined ? { revealSince } : {}),
+            ...(manaSpent !== undefined && manaSpent.length > 0 ? { manaSpent } : {}),
           },
         };
         this.state.decisionSource =
@@ -29315,6 +29331,7 @@ export class Game {
       player,
       onStack: false,
       ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
+      ...(manaSpent !== undefined && manaSpent.length > 0 ? { manaSpent } : {}),
     });
     // Activated by hand, its player holding priority (`whyCannotAct`) —
     // one activated while paying a cost is `executePayment`'s, inside the
@@ -31259,8 +31276,9 @@ export class Game {
     }
     // A converter's own cost comes out of the pool before its output goes in
     // — the plan orders its funding sources ahead of it, and names the exact
-    // units they contributed.
-    for (const m of step.spends) this.removeMana(player, m);
+    // units they contributed. What it spent is announced with its activation
+    // (605.3a): "if mana from a Treasure was spent to activate it" (Vazi).
+    const spent = step.spends.map((m) => this.removeMana(player, m));
     // What the mana ability does before its mana (`add-mana`'s `first`):
     // the plan sized the mana as it is once that's done (`liveManaAmount`).
     if (step.first !== undefined) {
@@ -31328,7 +31346,14 @@ export class Game {
     // you activate an ability of a creature" (Elrond, Moon-Reader) — only
     // when something on the battlefield asks: this is every land tapped.
     if (this.manaActivationWatched()) {
-      this.emit({ type: "ability-activated", source: step.source, player, onStack: false, ofPermanent: true });
+      this.emit({
+        type: "ability-activated",
+        source: step.source,
+        player,
+        onStack: false,
+        ofPermanent: true,
+        ...(spent.length > 0 ? { manaSpent: spent } : {}),
+      });
     }
   }
 
@@ -31898,8 +31923,8 @@ export class Game {
    * half of `addMana`, used by a converter paying its own activation cost.
    * Takes an *unrestricted* unit: a converter's cost isn't the spell the
    * restriction was about, and `planManaPayment` funds converters from plain
-   * sources anyway. */
-  private removeMana(player: PlayerId, mana: ManaType): void {
+   * sources anyway. Returns the unit as spent mana, where it came from kept. */
+  private removeMana(player: PlayerId, mana: ManaType): SpentMana {
     const pool = this.state.players[player].manaPool;
     let index = pool.findIndex(
       (unit) => unit.type === mana && unit.restriction === undefined,
@@ -31911,7 +31936,8 @@ export class Game {
     if (index < 0) {
       throw new Error(`mana pool underflow paying a converter's own cost (${mana})`);
     }
-    pool.splice(index, 1);
+    const [unit] = pool.splice(index, 1);
+    return { type: unit.type, ...(unit.from !== undefined ? { from: unit.from } : {}) };
   }
 
   private addMana(
@@ -32745,10 +32771,24 @@ export class Game {
         this.holdResolutionOpen(parked);
       }
       if (next?.manaAbility !== undefined) {
-        const { source, abilityIndex, player, x, manaColors } = next.manaAbility;
+        const { source, abilityIndex, player, x, manaColors, manaSpent } = next.manaAbility;
         const ability = this.effectiveActivated(source)[abilityIndex];
         if (ability !== undefined) {
-          this.resolveManaAbility(source, player, ability, x, manaColors, this.activatedRefFor(source, abilityIndex), undefined);
+          this.resolveManaAbility(
+            source,
+            player,
+            ability,
+            x,
+            manaColors,
+            this.activatedRefFor(source, abilityIndex),
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            false,
+            manaSpent,
+          );
         }
       }
       if (next?.leaveStack !== undefined) {
@@ -38051,7 +38091,12 @@ export class Game {
         if (event.onStack ? event.ability === undefined : spec.orMana !== true) return false;
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
         if (spec.lifePaidToActivate === true && (event.lifePaid ?? 0) <= 0) return false;
-        if (spec.manaSpentAtLeast !== undefined && (event.manaSpent ?? 0) < spec.manaSpentAtLeast) return false;
+        if (spec.manaSpentAtLeast !== undefined && (event.manaSpent?.length ?? 0) < spec.manaSpentAtLeast) return false;
+        // "If mana from a Treasure was spent to activate it" (Vazi): the
+        // mana that paid its own cost, a mana ability's too (605.3a).
+        if (spec.manaSpent !== undefined && !spec.manaSpent.every((query) => spentManaCount(event.manaSpent ?? [], query) > 0)) {
+          return false;
+        }
         if (spec.who === "attached") {
           // "An ability of equipped creature", "a loyalty ability of
           // enchanted planeswalker": its host's, read as below.
@@ -58916,7 +58961,21 @@ controlledBy,
       if (pending.onto !== undefined) this.recordPaid(pending.onto, "sacrificed", victims, leftFrom);
     }
     if (manaAbility !== undefined && ability !== undefined) {
-      this.resolveManaAbility(pending.source, pending.player, ability, manaAbility.x, manaAbility.manaColors, grantedAbility, undefined);
+      this.resolveManaAbility(
+        pending.source,
+        pending.player,
+        ability,
+        manaAbility.x,
+        manaAbility.manaColors,
+        grantedAbility,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        false,
+        manaAbility.manaSpent,
+      );
     }
   }
 

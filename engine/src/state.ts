@@ -2249,6 +2249,8 @@ export interface ManaAbilityPick {
   readonly paidSets?: ObjectSets;
   readonly sacrificedCouldMake?: readonly ManaType[];
   readonly revealSince?: number;
+  /** The mana spent on its cost (rule 605.3a), announced as it resolves. */
+  readonly manaSpent?: readonly SpentMana[];
 }
 
 /** A permanent attached to another, in the stint (`zoneChangeCount`) it was
@@ -3840,6 +3842,7 @@ export type AwaitingDecision =
         readonly abilityIndex: number;
         readonly x: number;
         readonly manaColors?: readonly ManaType[];
+        readonly manaSpent?: readonly SpentMana[];
       };
     }
   | {
@@ -4093,6 +4096,9 @@ export type AwaitingDecision =
          * of artifact cards in your hand"), not a cost: the `eventSeq` it
          * was asked at, from which its mana reads "revealed this way". */
         readonly revealSince?: number;
+        /** The mana spent on its cost (rule 605.3a), paid before this was
+         * asked and announced as it resolves (Vazi, Keen Negotiator). */
+        readonly manaSpent?: readonly SpentMana[];
       };
       /** For `destination: "exile-face-down"` (hideaway — rule 702.75a) and
        * `"exile"` (imprint, face up): the permanent, in the stint it's in,
@@ -5800,6 +5806,7 @@ export type SuspendedResolution =
         readonly player: PlayerId;
         readonly x: number;
         readonly manaColors?: readonly ManaType[];
+        readonly manaSpent?: readonly SpentMana[];
       };
     };
 
@@ -6977,6 +6984,7 @@ export interface GameState {
       readonly abilityIndex: number;
       readonly x: number;
       readonly manaColors?: readonly ManaType[];
+      readonly manaSpent?: readonly SpentMana[];
     };
   };
   /**

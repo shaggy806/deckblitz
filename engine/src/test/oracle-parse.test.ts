@@ -23018,3 +23018,34 @@ describe("tapping the granter as a granted ability's cost (Fishing Pole)", () =>
     expect(pole.complete).toBe(true);
   });
 });
+
+describe("mana from a Treasure spent to cast or activate it (Vazi, Keen Negotiator)", () => {
+  const triggersOf = (oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line: "Creature — Human", mana_cost: "{2}{B}", colors: ["B"], power: "3", toughness: "3", oracle_text })
+      .triggered.map((t: { trigger: unknown }) => t.trigger);
+
+  it("reads the two events and the intervening if on each", () => {
+    expect(
+      triggersOf(
+        "Whenever an opponent casts a spell or activates an ability, if mana from a Treasure was spent to cast it or activate it, put a +1/+1 counter on target creature, then draw a card.",
+      ),
+    ).toEqual([
+      { on: "cast-spell", who: "opponent", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
+      { on: "activates-ability", who: "opponent", orMana: true, manaSpent: [{ from: { subtype: "Treasure" } }] },
+    ]);
+  });
+
+  it("reads a spell's alone (Smaug, Wicked Worm)", () => {
+    const smaug = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Dragon",
+      mana_cost: "{3}{B}{R}",
+      colors: ["B", "R"],
+      power: "5",
+      toughness: "5",
+      oracle_text: "Whenever you cast a spell, if mana from a Treasure was spent to cast it, you draw a card and lose 1 life.",
+    });
+    expect(smaug.triggered[0].trigger).toEqual({ on: "cast-spell", who: "you", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } });
+    expect(smaug.complete).toBe(true);
+  });
+});

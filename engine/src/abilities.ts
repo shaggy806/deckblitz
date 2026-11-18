@@ -23,7 +23,7 @@ import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import type { DieTest } from "./random-results.js";
 import type { TriggerEventName } from "./trigger-events.js";
-import type { Color } from "./mana.js";
+import type { Color, ManaSpentQuery } from "./mana.js";
 
 /** A non-mana, non-tap component of an ability cost that sacrifices a permanent. */
 export type SacrificeCost =
@@ -2825,6 +2825,13 @@ export type TriggerKind =
        * as it triggers, so asked once. An ability paid for with less neither
        * fires a `once` watch nor uses it up. */
       readonly manaSpentAtLeast?: number;
+      /** "If **mana from a Treasure** was spent to … activate it" (Vazi, Keen
+       * Negotiator): each query finds at least one unit among the mana that
+       * paid its own cost (rules 602.2b, 601.2h — the event's `manaSpent`,
+       * read through `spentManaCount` as a spell's `CardFilter.manaSpent` is).
+       * A mana ability's counts with `orMana` (605.3a): the mana spent on its
+       * cost, not the mana it made. Fixed as it triggers, so asked once. */
+      readonly manaSpent?: readonly ManaSpentQuery[];
       /** "An ability that **targets a creature or player**" (Ertha Jo,
        * Frontier Mentor): what the ability on the stack targets, as its
        * targets were chosen (rule 602.2b) — the same clause a spell's

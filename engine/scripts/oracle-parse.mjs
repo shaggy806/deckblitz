@@ -2559,6 +2559,15 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever (you activate|an opponent activates) an ability that isn't a mana ability$/.exec(c))) {
     return [{ on: "activates-ability", who: m[1] === "you activate" ? "you" : "opponent" }];
   }
+  // "Whenever an opponent casts a spell or activates an ability" (Vazi, Keen
+  // Negotiator): two events, a mana ability among the abilities (605.3a).
+  if ((m = /^Whenever (you cast a spell or activate|an opponent casts a spell or activates) an ability$/.exec(c))) {
+    const who = m[1].startsWith("you") ? "you" : "opponent";
+    return [
+      { on: "cast-spell", who },
+      { on: "activates-ability", who, orMana: true },
+    ];
+  }
   if ((m = /^Whenever (you activate|an opponent activates) an ability of an? (.+?)( they control)?( that isn't a mana ability)?$/.exec(c))) {
     const source = parseTypePhrase(m[2]);
     if (source !== null && Object.keys(source).length > 0) {
@@ -19917,7 +19926,15 @@ function parseFaceAsWritten(face, ctx = {}) {
           playerStateIf(clause, triggers) ??
           distinctNamesIf(clause) ??
           controlsGreatestIf(clause);
+        // "If mana from a Treasure was spent to cast it" (Smaug, Wicked Worm)
+        // and "… to cast it or activate it" (Vazi): the mana that paid the
+        // spell, or the ability's own cost.
+        const spentFrom = /^if mana from an? ([A-Z][a-z]+) was spent to (?:cast it|activate it|cast it or activate it),$/.exec(clause);
         if (condition !== undefined) base.condition = condition;
+        else if (spentFrom !== null && triggers.every((t) => t.on === "cast-spell" || t.on === "activates-ability")) {
+          const manaSpent = [{ from: { subtype: spentFrom[1] } }];
+          triggers = triggers.map((t) => (t.on === "cast-spell" ? { ...t, filter: { ...t.filter, manaSpent } } : { ...t, manaSpent }));
+        }
         else if (clause.toLowerCase() === "if it had counters on it," && departedOf(triggers) !== undefined) {
           // A permanent that left, read as it last existed: its own counters
           // (a self trigger), or each trigger's filter on what left (the

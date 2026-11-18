@@ -6,7 +6,7 @@
 
 import type { CastVia } from "./actions.js";
 import type { CardType, CombatWord } from "./cards.js";
-import type { Color, ManaType } from "./mana.js";
+import type { Color, ManaType, SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { LeftBattlefield, PlayerCounterKind, ZoneType } from "./state.js";
 import type { TargetRef } from "./target.js";
@@ -938,10 +938,13 @@ export type GameEvent =
        * Warped Sengir's "if life was paid to activate it, you may pay that
        * much life again". */
       readonly lifePaid?: number;
-      /** How much mana was spent to activate it (rules 602.2b, 601.2h): what
-       * paid its own cost, one for each mana. Absent for none. Dynaheir,
-       * Invoker Adept's "by spending four or more mana to activate it". */
-      readonly manaSpent?: number;
+      /** The mana spent to activate it (rules 602.2b, 601.2h): what paid its
+       * own cost, a unit for each mana with where it came from — a mana
+       * ability's too (605.3a), not another's that helped pay it. Absent for
+       * none. Dynaheir, Invoker Adept's "by spending four or more mana to
+       * activate it" counts it; Vazi, Keen Negotiator's "if mana from a
+       * Treasure was spent to … activate it" reads its origins. */
+      readonly manaSpent?: readonly SpentMana[];
     })
   | (Base & {
       /**
