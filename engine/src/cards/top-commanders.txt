@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-991 already implemented / 9 missing
+992 already implemented / 8 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -800,7 +800,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  794  Urabrask                                        4042 decks  {2}{R}{R}        Legendary Creature — Phyrexian Praetor // Enchantment — Saga
 [x]  795  Brallin, Skyshark Rider                         4038 decks  {3}{R}           Legendary Creature — Human Shaman
 [x]  796  The Master, Transcendent                        4032 decks  {1}{B}{G}{U}     Legendary Artifact Creature — Mutant
-[ ]  797  Myra the Magnificent                            4023 decks  {2}{U}{R}        Legendary Creature — Human Performer
+[x]  797  Myra the Magnificent                            4023 decks  {2}{U}{R}        Legendary Creature — Human Performer
 [x]  798  Neheb, the Eternal                              4018 decks  {3}{R}{R}        Legendary Creature — Zombie Minotaur Warrior
 [x]  799  Niv-Mizzet, Guildpact                           4015 decks  {W}{U}{B}{R}{G}  Legendary Creature — Dragon Avatar
 [x]  800  Keleth, Sunmane Familiar                        4004 decks  {1}{W}           Legendary Creature — Horse
