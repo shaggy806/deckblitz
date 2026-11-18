@@ -682,6 +682,7 @@ import _poolPrimevalLight from "../pool/primeval-light.js";
 import _poolPrimordialPachyderm from "../pool/primordial-pachyderm.js";
 import _poolPrizePig from "../pool/prize-pig.js";
 import _poolProfit from "../pool/profit.js";
+import _poolProphecy from "../pool/prophecy.js";
 import _poolProtectiveParents from "../pool/protective-parents.js";
 import _poolProvisionsMerchant from "../pool/provisions-merchant.js";
 import _poolPsychicPickpocket from "../pool/psychic-pickpocket.js";
@@ -1758,6 +1759,7 @@ const shard: CardShard = {
     _poolPrimordialPachyderm,
     _poolPrizePig,
     _poolProfit,
+    _poolProphecy,
     _poolProtectiveParents,
     _poolProvisionsMerchant,
     _poolPsychicPickpocket,

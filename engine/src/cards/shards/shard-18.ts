@@ -694,6 +694,7 @@ import _poolRepeatingBarrage from "../pool/repeating-barrage.js";
 import _poolResoluteRider from "../pool/resolute-rider.js";
 import _poolResoundingSilence from "../pool/resounding-silence.js";
 import _poolRevenantPatriarch from "../pool/revenant-patriarch.js";
+import _poolRiddleOfLightning from "../pool/riddle-of-lightning.js";
 import _poolRiftSower from "../pool/rift-sower.js";
 import _poolRingOfThune from "../pool/ring-of-thune.js";
 import _poolRipApart from "../pool/rip-apart.js";
@@ -1736,6 +1737,7 @@ const shard: CardShard = {
     _poolResoluteRider,
     _poolResoundingSilence,
     _poolRevenantPatriarch,
+    _poolRiddleOfLightning,
     _poolRiftSower,
     _poolRingOfThune,
     _poolRipApart,

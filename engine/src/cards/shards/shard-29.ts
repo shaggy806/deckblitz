@@ -201,6 +201,7 @@ import _poolDesolationTwin from "../pool/desolation-twin.js";
 import _poolDesperateSentry from "../pool/desperate-sentry.js";
 import _poolDestructorDragon from "../pool/destructor-dragon.js";
 import _poolDetectivesPhoenix from "../pool/detectives-phoenix.js";
+import _poolDiabolicServitude from "../pool/diabolic-servitude.js";
 import _poolDireFleetRavager from "../pool/dire-fleet-ravager.js";
 import _poolDispellingExhale from "../pool/dispelling-exhale.js";
 import _poolDissensionInTheRanks from "../pool/dissension-in-the-ranks.js";
@@ -618,6 +619,7 @@ import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPillarOfFlame from "../pool/pillar-of-flame.js";
 import _poolPirateHat from "../pool/pirate-hat.js";
 import _poolPlaneboundAccomplice from "../pool/planebound-accomplice.js";
+import _poolPlaneswalkersScorn from "../pool/planeswalkers-scorn.js";
 import _poolPlatedSlagwurm from "../pool/plated-slagwurm.js";
 import _poolPonder from "../pool/ponder.js";
 import _poolPortraitOfMichiko from "../pool/portrait-of-michiko.js";
@@ -1246,6 +1248,7 @@ const shard: CardShard = {
     _poolDesperateSentry,
     _poolDestructorDragon,
     _poolDetectivesPhoenix,
+    _poolDiabolicServitude,
     _poolDireFleetRavager,
     _poolDispellingExhale,
     _poolDissensionInTheRanks,
@@ -1663,6 +1666,7 @@ const shard: CardShard = {
     _poolPillarOfFlame,
     _poolPirateHat,
     _poolPlaneboundAccomplice,
+    _poolPlaneswalkersScorn,
     _poolPlatedSlagwurm,
     _poolPonder,
     _poolPortraitOfMichiko,

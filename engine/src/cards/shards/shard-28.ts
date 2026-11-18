@@ -570,6 +570,7 @@ import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
 import _poolMyojinOfCleansingFire from "../pool/myojin-of-cleansing-fire.js";
 import _poolMyojinOfLifesWeb from "../pool/myojin-of-lifes-web.js";
+import _poolMyrIncubator from "../pool/myr-incubator.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
 import _poolNahirisWarcrafting from "../pool/nahiris-warcrafting.js";
@@ -1637,6 +1638,7 @@ const shard: CardShard = {
     _poolMutantTownMusicians,
     _poolMyojinOfCleansingFire,
     _poolMyojinOfLifesWeb,
+    _poolMyrIncubator,
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
     _poolNahirisWarcrafting,

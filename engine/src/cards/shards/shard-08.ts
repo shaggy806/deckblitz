@@ -484,6 +484,7 @@ import _poolJenniferWalters from "../pool/jennifer-walters.js";
 import _poolJeskaiElder from "../pool/jeskai-elder.js";
 import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js";
 import _poolJoshuaPhoenixsDominant from "../pool/joshua-phoenixs-dominant.js";
+import _poolJudgeUnworthy from "../pool/judge-unworthy.js";
 import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
@@ -1568,6 +1569,7 @@ const shard: CardShard = {
     _poolJeskaiElder,
     _poolJonIrenicusShatteredOne,
     _poolJoshuaPhoenixsDominant,
+    _poolJudgeUnworthy,
     _poolJunkJet,
     _poolJwariScuttler,
     _poolKabiraTakedown,

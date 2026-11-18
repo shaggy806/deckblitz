@@ -292,6 +292,7 @@ import _poolErdwalIlluminator from "../pool/erdwal-illuminator.js";
 import _poolErebossEmissary from "../pool/ereboss-emissary.js";
 import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolErrantry from "../pool/errantry.js";
+import _poolErtaisMeddling from "../pool/ertais-meddling.js";
 import _poolEssenceSliver from "../pool/essence-sliver.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
 import _poolEvasiveManeuvers from "../pool/evasive-maneuvers.js";
@@ -1338,6 +1339,7 @@ const shard: CardShard = {
     _poolErebossEmissary,
     _poolErestorOfTheCouncil,
     _poolErrantry,
+    _poolErtaisMeddling,
     _poolEssenceSliver,
     _poolEtchedHostDoombringer,
     _poolEvasiveManeuvers,

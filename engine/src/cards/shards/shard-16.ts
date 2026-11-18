@@ -461,6 +461,7 @@ import _poolJoGrant from "../pool/jo-grant.js";
 import _poolJourneyToEternity from "../pool/journey-to-eternity.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
+import _poolKahoMinamoHistorian from "../pool/kaho-minamo-historian.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKangeeAerieKeeper from "../pool/kangee-aerie-keeper.js";
@@ -1569,6 +1570,7 @@ const shard: CardShard = {
     _poolJourneyToEternity,
     _poolJungleWeaver,
     _poolJwariShapeshifter,
+    _poolKahoMinamoHistorian,
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
     _poolKangeeAerieKeeper,
