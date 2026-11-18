@@ -64,6 +64,7 @@ import _poolAssureAssemble from "../pool/assure-assemble.js";
 import _poolAtog from "../pool/atog.js";
 import _poolAttunement from "../pool/attunement.js";
 import _poolAugmentingAutomaton from "../pool/augmenting-automaton.js";
+import _poolAuratouchedMage from "../pool/auratouched-mage.js";
 import _poolAuriokSunchaser from "../pool/auriok-sunchaser.js";
 import _poolAuthority from "../pool/authority.js";
 import _poolAvatarKuruk from "../pool/avatar-kuruk.js";
@@ -1110,6 +1111,7 @@ const shard: CardShard = {
     _poolAtog,
     _poolAttunement,
     _poolAugmentingAutomaton,
+    _poolAuratouchedMage,
     _poolAuriokSunchaser,
     _poolAuthority,
     _poolAvatarKuruk,

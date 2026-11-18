@@ -559,6 +559,7 @@ import _poolMysticRestraints from "../pool/mystic-restraints.js";
 import _poolNabanDeanOfIteration from "../pool/naban-dean-of-iteration.js";
 import _poolNacatlWarPride from "../pool/nacatl-war-pride.js";
 import _poolNagaEternal from "../pool/naga-eternal.js";
+import _poolNahiriTheUnforgiving from "../pool/nahiri-the-unforgiving.js";
 import _poolNarcolepsy from "../pool/narcolepsy.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
 import _poolNassariDeanOfExpression from "../pool/nassari-dean-of-expression.js";
@@ -1568,6 +1569,7 @@ const shard: CardShard = {
     _poolNabanDeanOfIteration,
     _poolNacatlWarPride,
     _poolNagaEternal,
+    _poolNahiriTheUnforgiving,
     _poolNarcolepsy,
     _poolNashiSearcherInTheDark,
     _poolNassariDeanOfExpression,

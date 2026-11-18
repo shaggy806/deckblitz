@@ -88,6 +88,7 @@ import _poolBattleDisplay from "../pool/battle-display.js";
 import _poolBattlefieldScavenger from "../pool/battlefield-scavenger.js";
 import _poolBattlegateMimic from "../pool/battlegate-mimic.js";
 import _poolBeatAPath from "../pool/beat-a-path.js";
+import _poolBecomeThePilot from "../pool/become-the-pilot.js";
 import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
 import _poolBenefactorsDraught from "../pool/benefactors-draught.js";
@@ -1131,6 +1132,7 @@ const shard: CardShard = {
     _poolBattlefieldScavenger,
     _poolBattlegateMimic,
     _poolBeatAPath,
+    _poolBecomeThePilot,
     _poolBeledrosWitherbloom,
     _poolBellowingCrier,
     _poolBenefactorsDraught,

@@ -1666,6 +1666,7 @@ import _poolAuraThief from "./pool/aura-thief.js";
 import _poolAuramancer from "./pool/auramancer.js";
 import _poolAuramancersGuise from "./pool/auramancers-guise.js";
 import _poolAuratog from "./pool/auratog.js";
+import _poolAuratouchedMage from "./pool/auratouched-mage.js";
 import _poolAureliaExemplarOfJustice from "./pool/aurelia-exemplar-of-justice.js";
 import _poolAureliaTheLawAbove from "./pool/aurelia-the-law-above.js";
 import _poolAureliaTheWarleader from "./pool/aurelia-the-warleader.js";
@@ -2352,6 +2353,7 @@ import _poolBecomeAnonymous from "./pool/become-anonymous.js";
 import _poolBecomeBrutes from "./pool/become-brutes.js";
 import _poolBecomeImmense from "./pool/become-immense.js";
 import _poolBecomeTheAvalanche from "./pool/become-the-avalanche.js";
+import _poolBecomeThePilot from "./pool/become-the-pilot.js";
 import _poolBedazzle from "./pool/bedazzle.js";
 import _poolBedeckBedazzle from "./pool/bedeck-bedazzle.js";
 import _poolBedeck from "./pool/bedeck.js";
@@ -17809,6 +17811,7 @@ import _poolMirrorGolem from "./pool/mirror-golem.js";
 import _poolMirrorImage from "./pool/mirror-image.js";
 import _poolMirrorMadPhantasm from "./pool/mirror-mad-phantasm.js";
 import _poolMirrorMarch from "./pool/mirror-march.js";
+import _poolMirrorMatch from "./pool/mirror-match.js";
 import _poolMirrorMockery from "./pool/mirror-mockery.js";
 import _poolMirrorOfGaladriel from "./pool/mirror-of-galadriel.js";
 import _poolMirrorOfLifeTrapping from "./pool/mirror-of-life-trapping.js";
@@ -18573,6 +18576,7 @@ import _poolNahiriHeirOfTheAncients from "./pool/nahiri-heir-of-the-ancients.js"
 import _poolNahiriStormOfStone from "./pool/nahiri-storm-of-stone.js";
 import _poolNahiriTheHarbinger from "./pool/nahiri-the-harbinger.js";
 import _poolNahiriTheLithomancer from "./pool/nahiri-the-lithomancer.js";
+import _poolNahiriTheUnforgiving from "./pool/nahiri-the-unforgiving.js";
 import _poolNahirisBinding from "./pool/nahiris-binding.js";
 import _poolNahirisLithoforming from "./pool/nahiris-lithoforming.js";
 import _poolNahirisMachinations from "./pool/nahiris-machinations.js";
@@ -21796,6 +21800,7 @@ import _poolRampagingGeoderm from "./pool/rampaging-geoderm.js";
 import _poolRampagingGrowth from "./pool/rampaging-growth.js";
 import _poolRampagingHippo from "./pool/rampaging-hippo.js";
 import _poolRampagingMonument from "./pool/rampaging-monument.js";
+import _poolRampagingRaptor from "./pool/rampaging-raptor.js";
 import _poolRampagingRendhorn from "./pool/rampaging-rendhorn.js";
 import _poolRampagingSoulrager from "./pool/rampaging-soulrager.js";
 import _poolRampagingSpiketail from "./pool/rampaging-spiketail.js";
@@ -35289,6 +35294,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAuramancer,
   _poolAuramancersGuise,
   _poolAuratog,
+  _poolAuratouchedMage,
   _poolAureliaExemplarOfJustice,
   _poolAureliaTheLawAbove,
   _poolAureliaTheWarleader,
@@ -35975,6 +35981,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBecomeBrutes,
   _poolBecomeImmense,
   _poolBecomeTheAvalanche,
+  _poolBecomeThePilot,
   _poolBedazzle,
   _poolBedeckBedazzle,
   _poolBedeck,
@@ -51432,6 +51439,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMirrorImage,
   _poolMirrorMadPhantasm,
   _poolMirrorMarch,
+  _poolMirrorMatch,
   _poolMirrorMockery,
   _poolMirrorOfGaladriel,
   _poolMirrorOfLifeTrapping,
@@ -52196,6 +52204,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNahiriStormOfStone,
   _poolNahiriTheHarbinger,
   _poolNahiriTheLithomancer,
+  _poolNahiriTheUnforgiving,
   _poolNahirisBinding,
   _poolNahirisLithoforming,
   _poolNahirisMachinations,
@@ -55419,6 +55428,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRampagingGrowth,
   _poolRampagingHippo,
   _poolRampagingMonument,
+  _poolRampagingRaptor,
   _poolRampagingRendhorn,
   _poolRampagingSoulrager,
   _poolRampagingSpiketail,
@@ -68925,6 +68935,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/auramancer": _poolAuramancer,
   "pool/auramancers-guise": _poolAuramancersGuise,
   "pool/auratog": _poolAuratog,
+  "pool/auratouched-mage": _poolAuratouchedMage,
   "pool/aurelia-exemplar-of-justice": _poolAureliaExemplarOfJustice,
   "pool/aurelia-the-law-above": _poolAureliaTheLawAbove,
   "pool/aurelia-the-warleader": _poolAureliaTheWarleader,
@@ -69611,6 +69622,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/become-brutes": _poolBecomeBrutes,
   "pool/become-immense": _poolBecomeImmense,
   "pool/become-the-avalanche": _poolBecomeTheAvalanche,
+  "pool/become-the-pilot": _poolBecomeThePilot,
   "pool/bedazzle": _poolBedazzle,
   "pool/bedeck-bedazzle": _poolBedeckBedazzle,
   "pool/bedeck": _poolBedeck,
@@ -85068,6 +85080,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mirror-image": _poolMirrorImage,
   "pool/mirror-mad-phantasm": _poolMirrorMadPhantasm,
   "pool/mirror-march": _poolMirrorMarch,
+  "pool/mirror-match": _poolMirrorMatch,
   "pool/mirror-mockery": _poolMirrorMockery,
   "pool/mirror-of-galadriel": _poolMirrorOfGaladriel,
   "pool/mirror-of-life-trapping": _poolMirrorOfLifeTrapping,
@@ -85832,6 +85845,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nahiri-storm-of-stone": _poolNahiriStormOfStone,
   "pool/nahiri-the-harbinger": _poolNahiriTheHarbinger,
   "pool/nahiri-the-lithomancer": _poolNahiriTheLithomancer,
+  "pool/nahiri-the-unforgiving": _poolNahiriTheUnforgiving,
   "pool/nahiris-binding": _poolNahirisBinding,
   "pool/nahiris-lithoforming": _poolNahirisLithoforming,
   "pool/nahiris-machinations": _poolNahirisMachinations,
@@ -89055,6 +89069,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rampaging-growth": _poolRampagingGrowth,
   "pool/rampaging-hippo": _poolRampagingHippo,
   "pool/rampaging-monument": _poolRampagingMonument,
+  "pool/rampaging-raptor": _poolRampagingRaptor,
   "pool/rampaging-rendhorn": _poolRampagingRendhorn,
   "pool/rampaging-soulrager": _poolRampagingSoulrager,
   "pool/rampaging-spiketail": _poolRampagingSpiketail,

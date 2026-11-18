@@ -544,6 +544,7 @@ import _poolMindculling from "../pool/mindculling.js";
 import _poolMineBearer from "../pool/mine-bearer.js";
 import _poolMineLayer from "../pool/mine-layer.js";
 import _poolMirari from "../pool/mirari.js";
+import _poolMirrorMatch from "../pool/mirror-match.js";
 import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMirrorwoodTreefolk from "../pool/mirrorwood-treefolk.js";
 import _poolMischievousChimera from "../pool/mischievous-chimera.js";
@@ -1538,6 +1539,7 @@ const shard: CardShard = {
     _poolMineBearer,
     _poolMineLayer,
     _poolMirari,
+    _poolMirrorMatch,
     _poolMirrormade,
     _poolMirrorwoodTreefolk,
     _poolMischievousChimera,
