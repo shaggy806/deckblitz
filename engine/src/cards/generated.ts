@@ -2831,6 +2831,7 @@ import _poolBlitzwingAdaptiveAssailant from "./pool/blitzwing-adaptive-assailant
 import _poolBlitzwingCruelTormentor from "./pool/blitzwing-cruel-tormentor.js";
 import _poolBlizzardBrawl from "./pool/blizzard-brawl.js";
 import _poolBlizzardElemental from "./pool/blizzard-elemental.js";
+import _poolBlizzardSpecter from "./pool/blizzard-specter.js";
 import _poolBlizzardStrix from "./pool/blizzard-strix.js";
 import _poolBlizzard from "./pool/blizzard.js";
 import _poolBloatedContaminator from "./pool/bloated-contaminator.js";
@@ -5732,6 +5733,7 @@ import _poolCrookOfCondemnation from "./pool/crook-of-condemnation.js";
 import _poolCrookclawElder from "./pool/crookclaw-elder.js";
 import _poolCrookclawTransmuter from "./pool/crookclaw-transmuter.js";
 import _poolCrookedCustodian from "./pool/crooked-custodian.js";
+import _poolCrookedScales from "./pool/crooked-scales.js";
 import _poolCrookshankKobolds from "./pool/crookshank-kobolds.js";
 import _poolCropRotation from "./pool/crop-rotation.js";
 import _poolCropSigil from "./pool/crop-sigil.js";
@@ -14114,6 +14116,7 @@ import _poolInvasionOfUlgrotha from "./pool/invasion-of-ulgrotha.js";
 import _poolInvasionOfVryn from "./pool/invasion-of-vryn.js";
 import _poolInvasionOfXerex from "./pool/invasion-of-xerex.js";
 import _poolInvasionOfZendikar from "./pool/invasion-of-zendikar.js";
+import _poolInvasionPlans from "./pool/invasion-plans.js";
 import _poolInvasionReinforcements from "./pool/invasion-reinforcements.js";
 import _poolInvasionSubmersible from "./pool/invasion-submersible.js";
 import _poolInvasionTactics from "./pool/invasion-tactics.js";
@@ -16895,6 +16898,7 @@ import _poolMangaraOfCorondor from "./pool/mangara-of-corondor.js";
 import _poolMangaraTheDiplomat from "./pool/mangara-the-diplomat.js";
 import _poolMangarasBlessing from "./pool/mangaras-blessing.js";
 import _poolMangarasEquity from "./pool/mangaras-equity.js";
+import _poolMangarasTome from "./pool/mangaras-tome.js";
 import _poolManglehorn from "./pool/manglehorn.js";
 import _poolManholeCover from "./pool/manhole-cover.js";
 import _poolManholeMissile from "./pool/manhole-missile.js";
@@ -20019,6 +20023,7 @@ import _poolParallaxWave from "./pool/parallax-wave.js";
 import _poolParallectricFeedback from "./pool/parallectric-feedback.js";
 import _poolParallelEvolution from "./pool/parallel-evolution.js";
 import _poolParallelLives from "./pool/parallel-lives.js";
+import _poolParallelThoughts from "./pool/parallel-thoughts.js";
 import _poolParalyze from "./pool/paralyze.js";
 import _poolParalyzingGrasp from "./pool/paralyzing-grasp.js";
 import _poolParameciaColoniex from "./pool/paramecia-coloniex.js";
@@ -23495,6 +23500,7 @@ import _poolSanctifierEnVec from "./pool/sanctifier-en-vec.js";
 import _poolSanctifierOfSouls from "./pool/sanctifier-of-souls.js";
 import _poolSanctify from "./pool/sanctify.js";
 import _poolSanctimony from "./pool/sanctimony.js";
+import _poolSanctuaryBlade from "./pool/sanctuary-blade.js";
 import _poolSanctuaryCat from "./pool/sanctuary-cat.js";
 import _poolSanctuaryLockdown from "./pool/sanctuary-lockdown.js";
 import _poolSanctuaryRaptor from "./pool/sanctuary-raptor.js";
@@ -36368,6 +36374,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlitzwingCruelTormentor,
   _poolBlizzardBrawl,
   _poolBlizzardElemental,
+  _poolBlizzardSpecter,
   _poolBlizzardStrix,
   _poolBlizzard,
   _poolBloatedContaminator,
@@ -39269,6 +39276,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrookclawElder,
   _poolCrookclawTransmuter,
   _poolCrookedCustodian,
+  _poolCrookedScales,
   _poolCrookshankKobolds,
   _poolCropRotation,
   _poolCropSigil,
@@ -47651,6 +47659,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInvasionOfVryn,
   _poolInvasionOfXerex,
   _poolInvasionOfZendikar,
+  _poolInvasionPlans,
   _poolInvasionReinforcements,
   _poolInvasionSubmersible,
   _poolInvasionTactics,
@@ -50432,6 +50441,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMangaraTheDiplomat,
   _poolMangarasBlessing,
   _poolMangarasEquity,
+  _poolMangarasTome,
   _poolManglehorn,
   _poolManholeCover,
   _poolManholeMissile,
@@ -53556,6 +53566,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolParallectricFeedback,
   _poolParallelEvolution,
   _poolParallelLives,
+  _poolParallelThoughts,
   _poolParalyze,
   _poolParalyzingGrasp,
   _poolParameciaColoniex,
@@ -57032,6 +57043,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSanctifierOfSouls,
   _poolSanctify,
   _poolSanctimony,
+  _poolSanctuaryBlade,
   _poolSanctuaryCat,
   _poolSanctuaryLockdown,
   _poolSanctuaryRaptor,
@@ -69918,6 +69930,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blitzwing-cruel-tormentor": _poolBlitzwingCruelTormentor,
   "pool/blizzard-brawl": _poolBlizzardBrawl,
   "pool/blizzard-elemental": _poolBlizzardElemental,
+  "pool/blizzard-specter": _poolBlizzardSpecter,
   "pool/blizzard-strix": _poolBlizzardStrix,
   "pool/blizzard": _poolBlizzard,
   "pool/bloated-contaminator": _poolBloatedContaminator,
@@ -72819,6 +72832,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crookclaw-elder": _poolCrookclawElder,
   "pool/crookclaw-transmuter": _poolCrookclawTransmuter,
   "pool/crooked-custodian": _poolCrookedCustodian,
+  "pool/crooked-scales": _poolCrookedScales,
   "pool/crookshank-kobolds": _poolCrookshankKobolds,
   "pool/crop-rotation": _poolCropRotation,
   "pool/crop-sigil": _poolCropSigil,
@@ -81201,6 +81215,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/invasion-of-vryn": _poolInvasionOfVryn,
   "pool/invasion-of-xerex": _poolInvasionOfXerex,
   "pool/invasion-of-zendikar": _poolInvasionOfZendikar,
+  "pool/invasion-plans": _poolInvasionPlans,
   "pool/invasion-reinforcements": _poolInvasionReinforcements,
   "pool/invasion-submersible": _poolInvasionSubmersible,
   "pool/invasion-tactics": _poolInvasionTactics,
@@ -83982,6 +83997,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mangara-the-diplomat": _poolMangaraTheDiplomat,
   "pool/mangaras-blessing": _poolMangarasBlessing,
   "pool/mangaras-equity": _poolMangarasEquity,
+  "pool/mangaras-tome": _poolMangarasTome,
   "pool/manglehorn": _poolManglehorn,
   "pool/manhole-cover": _poolManholeCover,
   "pool/manhole-missile": _poolManholeMissile,
@@ -87106,6 +87122,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/parallectric-feedback": _poolParallectricFeedback,
   "pool/parallel-evolution": _poolParallelEvolution,
   "pool/parallel-lives": _poolParallelLives,
+  "pool/parallel-thoughts": _poolParallelThoughts,
   "pool/paralyze": _poolParalyze,
   "pool/paralyzing-grasp": _poolParalyzingGrasp,
   "pool/paramecia-coloniex": _poolParameciaColoniex,
@@ -90582,6 +90599,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sanctifier-of-souls": _poolSanctifierOfSouls,
   "pool/sanctify": _poolSanctify,
   "pool/sanctimony": _poolSanctimony,
+  "pool/sanctuary-blade": _poolSanctuaryBlade,
   "pool/sanctuary-cat": _poolSanctuaryCat,
   "pool/sanctuary-lockdown": _poolSanctuaryLockdown,
   "pool/sanctuary-raptor": _poolSanctuaryRaptor,

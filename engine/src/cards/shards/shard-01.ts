@@ -169,6 +169,7 @@ import _poolCraterHellion from "../pool/crater-hellion.js";
 import _poolCripplingChill from "../pool/crippling-chill.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
 import _poolCroakingCurse from "../pool/croaking-curse.js";
+import _poolCrookedScales from "../pool/crooked-scales.js";
 import _poolCruelDeceiver from "../pool/cruel-deceiver.js";
 import _poolCryogenicStasis from "../pool/cryogenic-stasis.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
@@ -1197,6 +1198,7 @@ const shard: CardShard = {
     _poolCripplingChill,
     _poolCrisisOfConscience,
     _poolCroakingCurse,
+    _poolCrookedScales,
     _poolCruelDeceiver,
     _poolCryogenicStasis,
     _poolCryotheoryAdept,

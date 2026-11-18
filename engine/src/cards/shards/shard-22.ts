@@ -427,6 +427,7 @@ import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
 import _poolInvasionOfTarkir from "../pool/invasion-of-tarkir.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
+import _poolInvasionPlans from "../pool/invasion-plans.js";
 import _poolInverterOfTruth from "../pool/inverter-of-truth.js";
 import _poolInvigoratedRampage from "../pool/invigorated-rampage.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
@@ -1499,6 +1500,7 @@ const shard: CardShard = {
     _poolIntrusivePackbeast,
     _poolInvasionOfTarkir,
     _poolInvasionOfTolvada,
+    _poolInvasionPlans,
     _poolInverterOfTruth,
     _poolInvigoratedRampage,
     _poolIronwillForger,

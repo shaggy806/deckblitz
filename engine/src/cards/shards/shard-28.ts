@@ -622,6 +622,7 @@ import _poolPaladinEnVec from "../pool/paladin-en-vec.js";
 import _poolPanickedBystander from "../pool/panicked-bystander.js";
 import _poolParadoxEngine from "../pool/paradox-engine.js";
 import _poolParallectricFeedback from "../pool/parallectric-feedback.js";
+import _poolParallelThoughts from "../pool/parallel-thoughts.js";
 import _poolPardicFirecat from "../pool/pardic-firecat.js";
 import _poolPeregrinTook from "../pool/peregrin-took.js";
 import _poolPestRescuer from "../pool/pest-rescuer.js";
@@ -1686,6 +1687,7 @@ const shard: CardShard = {
     _poolPanickedBystander,
     _poolParadoxEngine,
     _poolParallectricFeedback,
+    _poolParallelThoughts,
     _poolPardicFirecat,
     _poolPeregrinTook,
     _poolPestRescuer,

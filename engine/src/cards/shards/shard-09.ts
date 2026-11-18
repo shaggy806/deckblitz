@@ -96,6 +96,7 @@ import _poolBlindingSpray from "../pool/blinding-spray.js";
 import _poolBlink from "../pool/blink.js";
 import _poolBlisteringBarrier from "../pool/blistering-barrier.js";
 import _poolBlitzball from "../pool/blitzball.js";
+import _poolBlizzardSpecter from "../pool/blizzard-specter.js";
 import _poolBloodBeckoning from "../pool/blood-beckoning.js";
 import _poolBloodOath from "../pool/blood-oath.js";
 import _poolBloodbriar from "../pool/bloodbriar.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolBlink,
     _poolBlisteringBarrier,
     _poolBlitzball,
+    _poolBlizzardSpecter,
     _poolBloodBeckoning,
     _poolBloodOath,
     _poolBloodbriar,

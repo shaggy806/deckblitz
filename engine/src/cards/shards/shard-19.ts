@@ -597,6 +597,7 @@ import _poolMakindiSliderunner from "../pool/makindi-sliderunner.js";
 import _poolMaliciousAdvice from "../pool/malicious-advice.js";
 import _poolMaliciousMalfunction from "../pool/malicious-malfunction.js";
 import _poolMandateOfAbaddon from "../pool/mandate-of-abaddon.js";
+import _poolMangarasTome from "../pool/mangaras-tome.js";
 import _poolManicVandal from "../pool/manic-vandal.js";
 import _poolMarcusMutantMayor from "../pool/marcus-mutant-mayor.js";
 import _poolMarduHeartPiercer from "../pool/mardu-heart-piercer.js";
@@ -1695,6 +1696,7 @@ const shard: CardShard = {
     _poolMaliciousAdvice,
     _poolMaliciousMalfunction,
     _poolMandateOfAbaddon,
+    _poolMangarasTome,
     _poolManicVandal,
     _poolMarcusMutantMayor,
     _poolMarduHeartPiercer,
