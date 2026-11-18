@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-988 already implemented / 12 missing
+989 already implemented / 11 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -723,7 +723,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  717  Rukarumel, Biologist                            4626 decks  {W}{U}{B}{R}{G}  Legendary Creature — Human Wizard
 [x]  718  Sliver Hivelord                                 4617 decks  {W}{U}{B}{R}{G}  Legendary Creature — Sliver
 [x]  719  Zevlor, Elturel Exile                           4586 decks  {1}{U}{B}{R}     Legendary Creature — Tiefling Warrior
-[ ]  720  Vazi, Keen Negotiator                           4578 decks  {2}{B}{R}{G}     Legendary Creature — Human Advisor
+[x]  720  Vazi, Keen Negotiator                           4578 decks  {2}{B}{R}{G}     Legendary Creature — Human Advisor
 [x]  721  Frodo, Sauron's Bane                            4567 decks  {W}              Legendary Creature — Halfling Citizen
 [x]  722  Carmen, Cruel Skymarcher                        4555 decks  {3}{W}{B}        Legendary Creature — Vampire Soldier
 [x]  723  Estrid, the Masked                              4555 decks  {1}{G}{W}{U}     Legendary Planeswalker — Estrid
