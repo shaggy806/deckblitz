@@ -3094,7 +3094,8 @@
   "effect:rotate-chosen-permanents",
   "effect:shuffle-chosen-graveyard-cards-into-libraries",
   "decision:each-player-chooses-permanents-of-left-player",
-  "decision:optional-redirect"
+  "decision:optional-redirect",
+  "effect:mass-shuffle-into-library-reveal-until"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -8409,6 +8409,12 @@ export class Game {
         this.completingCommanderMove = null;
       }
       if (destination === "library") this.placeInLibrary(commander, deferred.libraryPlacement ?? "bottom");
+      // Shuffled in after all, its owner declining (rule 701.24a): what "this
+      // way" reads as shuffled into their library (Collision of Realms' "each
+      // player who shuffled a nontoken creature into their library this way").
+      if (deferred.libraryPlacement === "shuffle" && this.state.objects[commander]?.zone === "library") {
+        this.emit({ type: "cards-shuffled-into-library", player: this.state.objects[commander].owner, objects: [commander] });
+      }
       this.state.deferredCommanderMove = null;
     }, leftWith, leftMoved, leftDied, leftArrivals);
     this.emit({
@@ -64322,13 +64328,14 @@ controlledBy,
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: the
    * player's whole graveyard — and hand, and the permanents they own, as
    * `zones` says — into their library as one move, then the library
-   * shuffled (rule 701.24a), the zones empty or not. `graveyardFilter`: only
-   * the graveyard's cards it takes ("all creature cards from your
-   * graveyard"). How many objects went in, a token stack each token in it. */
+   * shuffled (rule 701.24a), the zones empty or not. `filter`: only the
+   * graveyard's cards and the permanents it takes ("all creature cards from
+   * your graveyard", "all creatures they own"). How many objects went in, a
+   * token stack each token in it. */
   private shuffleZonesIntoLibraryByEffect(
     target: TargetRef,
     zones: readonly ("hand" | "graveyard" | "permanents")[],
-    graveyardFilter?: (id: ObjectId) => boolean,
+    filter?: (id: ObjectId) => boolean,
   ): number {
     if (target.kind !== "player" || this.state.players[target.player] === undefined) return 0;
     const player = target.player;
@@ -64336,7 +64343,9 @@ controlledBy,
     const went: ObjectId[] = [];
     const move = (id: ObjectId, permanent = false): void => {
       const count = this.state.objects[id]?.stackCount ?? 1;
-      if (this.moveObject(id, "library")) {
+      // A commander whose owner declines the command zone (rule 903.9b) goes
+      // in after the shuffle, so at a random place in it: shuffled in.
+      if (this.moveObject(id, "library", { libraryPlacement: "shuffle" })) {
         moved += count;
         went.push(id);
       } else if (permanent) {
@@ -64348,24 +64357,28 @@ controlledBy,
     };
     // Which cards, read before any moves.
     const fromGraveyard = zones.includes("graveyard")
-      ? this.state.zones.perPlayer[player].graveyard.filter((id) => graveyardFilter === undefined || graveyardFilter(id))
+      ? this.state.zones.perPlayer[player].graveyard.filter((id) => filter === undefined || filter(id))
+      : [];
+    const fromBattlefield = zones.includes("permanents")
+      ? this.state.zones.shared.battlefield.filter(
+          (id) => this.state.objects[id]?.owner === player && (filter === undefined || filter(id)),
+        )
       : [];
     this.withLeaveBatch(() => {
       this.withGraveyardLeaveBatch(() => {
         if (zones.includes("hand")) for (const id of [...this.state.zones.perPlayer[player].hand]) move(id);
         for (const id of fromGraveyard) move(id);
-        if (zones.includes("permanents")) {
-          for (const id of [...this.state.zones.shared.battlefield]) {
-            if (this.state.objects[id]?.owner === player) move(id, true);
-          }
-        }
+        for (const id of fromBattlefield) move(id, true);
       });
     });
     this.shuffleLibraryOf(player);
-    // The graveyard's cards, public as they went (a hand's stay hidden):
-    // what "the cards shuffled into your library this way" counts (Elixir).
-    const fromGraveyardSet = new Set(fromGraveyard);
-    const inLibrary = went.filter((id) => fromGraveyardSet.has(id) && this.state.objects[id]?.zone === "library");
+    // The graveyard's cards and the permanents, public as they went (a
+    // hand's stay hidden), a token too until the next state-based check
+    // (rule 111.7): what "the cards shuffled into your library this way"
+    // counts (Elixir), and "who shuffled a nontoken creature into their
+    // library this way" (Collision of Realms).
+    const publicSet = new Set([...fromGraveyard, ...fromBattlefield]);
+    const inLibrary = went.filter((id) => publicSet.has(id) && this.state.objects[id]?.zone === "library");
     if (inLibrary.length > 0) this.emit({ type: "cards-shuffled-into-library", player, objects: inLibrary });
     return moved;
   }

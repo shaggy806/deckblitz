@@ -12135,7 +12135,16 @@ export type EffectSpec =
        * Kavu), "all **nonland** cards" (Elixir), Repopulate's "all creature
        * cards from target player's graveyard into that player's library" —
        * read from the effect's controller's side; the library is shuffled
-       * whether any matched or not. With `zones` of the graveyard only. */
+       * whether any matched or not. With `"permanents"` in `zones`, only the
+       * permanents matching it too: Collision of Realms' "each player
+       * shuffles **all creatures** they own into their library" is `zones:
+       * ["permanents"], filter: { type: "creature" }` (a hand isn't
+       * filtered). The permanents that went, public as they go, are `{
+       * thisWay: "shuffled-into-library" }` beside the graveyard's — a token
+       * too, there until the next state-based check (rule 111.7) — so "each
+       * player who shuffled a **nontoken** creature into their library this
+       * way" is a `for-each-player` of `whoseAmount: { thisWay:
+       * "shuffled-into-library", who: "each", filter: { token: false } }`. */
       readonly filter?: CardFilter;
       /** "…then draws that many cards" (Winds of Change, The Great
        * Aurora): once every library is shuffled, each player draws as many
