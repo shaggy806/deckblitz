@@ -46799,6 +46799,12 @@ controlledBy,
             // Cards revealed this way are where they were revealed (Gift of
             // Perfection's, in libraries).
             if ("revealed" in zone && zone.revealed === true) return where === "library" || where === "hand";
+            // The resolution's own targets: in a graveyard (Sepulchral
+            // Primordial), or a search's or a reveal's finds handed to its
+            // `then`, still in the library they were found in (Druid of the
+            // Emerald Grove) — the only way a library card is among a
+            // resolution's targets.
+            if ("targets" in zone && zone.targets === true) return where === "graveyard" || where === "library";
             // A trigger's batch, found where each went: a public zone only
             // (rule 400.7e), face up — a card exiled face down has no
             // characteristics (406.3a), nor a face-down permanent but what
@@ -47405,6 +47411,9 @@ controlledBy,
             thenX: x,
             ...(more.sourceStint !== undefined ? { thenSourceStint: more.sourceStint } : {}),
             thenPlayer: owner,
+            // "…, then roll a d20" (Druid of the Emerald Grove): whatever
+            // was found.
+            ...(more.thenAlways === true ? { thenAlways: true as const } : {}),
           }
         : {}),
     };

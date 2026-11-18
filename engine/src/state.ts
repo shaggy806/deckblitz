@@ -4191,7 +4191,7 @@ export type AwaitingDecision =
        * "if this creature isn't saddled"). */
       readonly thenSourceStint?: number;
       /** `then` runs with nothing chosen too — see the `look-and-choose`
-       * effect's `thenAlways`. */
+       * and `search-library` effects' `thenAlways`. */
       readonly thenAlways?: true;
       /** Where every *chosen* card after the first goes, when a tutor splits
        * its finds across two zones (Cultivate: "put one onto the battlefield

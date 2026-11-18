@@ -2111,6 +2111,7 @@
   "effect:unattach-effect",
   "effect:damage-all-per-object",
   "effect:search-library-to-exile",
+  "effect:search-then-roll-destination",
   "effect:shuffle-library",
   "effect:delayed-life-gain-trigger",
   "effect:target-player-exiles-from-graveyard",

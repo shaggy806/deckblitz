@@ -123,9 +123,11 @@ export type LookAndChooseZone =
   | "exile"
   /** `revealed`: the cards a `"revealed-this-way"` names, in a library or a
    * hand; `found`: a `"trigger-batch"`'s, already narrowed to those found
-   * face up in a public zone, wherever that is; otherwise cards in a
-   * graveyard. */
-  | { readonly cards: readonly ObjectId[]; readonly revealed?: true; readonly found?: true }
+   * face up in a public zone, wherever that is; `targets`: the resolution's
+   * own target cards — in a graveyard, or a search's finds handed to its
+   * `then` still in the library they were found in (Druid of the Emerald
+   * Grove); otherwise cards in a graveyard. */
+  | { readonly cards: readonly ObjectId[]; readonly revealed?: true; readonly found?: true; readonly targets?: true }
   | {
       readonly exiled: readonly ObjectId[];
       /** Its `"exiled-this-way"`: the chooser was told to look at them, so a
@@ -161,6 +163,8 @@ export interface SearchMore {
   /** Its `linked`. */
   readonly linked?: true;
   readonly then?: EffectSpec;
+  /** Its `thenAlways`. */
+  readonly thenAlways?: true;
   readonly outside?: true | "only";
   readonly faceUpExile?: true;
   /** Its `exileRest`. */
@@ -11987,8 +11991,15 @@ export type EffectSpec =
        * equal to its mana value"; the extract family's "that player shuffles,
        * then draws a card for each card exiled from their hand this way"
        * (the `"exiled-from-hand"` this-way kind). Not applied when nothing
-       * was found. */
+       * was found — unless `thenAlways`. */
       readonly then?: EffectSpec;
+      /** `then` is applied with nothing found too, its targets none: the
+       * rest of the instruction happens whatever the search found —
+       * Druid of the Emerald Grove's "search your library for up to two basic
+       * land cards and reveal them, **then roll a d20**" (`destination:
+       * "stay"`, `shufflesLater`, its rows moving the finds and a
+       * `shuffle-library` of `searchers` after them). */
+      readonly thenAlways?: true;
       /** A rule over the finds as a set, which `filter` (one card at a
        * time) can't express — Myriad Landscape's "that share a land type",
        * Krosan Verge's "a Forest card and a Plains card". The search offers
@@ -24831,6 +24842,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.mayPlay !== undefined ? { mayPlay: spec.mayPlay } : {}),
           ...(spec.linked === true ? { linked: true } : {}),
           ...(spec.then !== undefined ? { then: spec.then } : {}),
+          ...(spec.thenAlways === true ? { thenAlways: true } : {}),
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
           ...(spec.faceUpExile === true ? { faceUpExile: true } : {}),
           ...(spec.exileRest === true ? { exileRest: true } : {}),
@@ -24892,7 +24904,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                     : [],
                 ),
               }
-            : { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])) }
+            : { cards: ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : [])), targets: true as const }
           : spec.zone === "exiled-with-source"
             ? // Rule 607.2a: only what the linked ability exiled.
               { exiled: ctx.cardsExiledWithSource(true) }

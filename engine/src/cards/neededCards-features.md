@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Finds that wait on a die roll — built 2026-11-18
+
+The key `effect:search-then-roll-destination`: `search-library`'s `thenAlways` (its `then` applied with nothing
+found too — the choose-from-zone's `thenAlways`, as `look-and-choose`'s). Druid of the Emerald Grove (rank 14379):
+the search reveals the finds and leaves them (`destination: "stay"`, `shufflesLater`), the d20's rows move them as
+targets (a `simultaneous` `for-each-target`, a `look-and-choose` of `zone: "targets"`), and a `shuffle-library` of
+`searchers` follows. The scaffolder reads no d20 table yet (Djinni Windseer's neither), so the card isn't scaffolded.
+`test/search-then-roll.test.ts`.
+
 ### A revealed card sent by its mana value — found built 2026-11-18
 
 The key `effect:reveal-until-found-destination-by-condition` needed no engine code: `reveal-until` with no `put`,
