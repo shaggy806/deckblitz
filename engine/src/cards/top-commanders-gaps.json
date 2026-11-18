@@ -3095,7 +3095,9 @@
   "effect:shuffle-chosen-graveyard-cards-into-libraries",
   "decision:each-player-chooses-permanents-of-left-player",
   "decision:optional-redirect",
-  "effect:mass-shuffle-into-library-reveal-until"
+  "effect:mass-shuffle-into-library-reveal-until",
+  "effect:mass-shuffle-into-library-reveal-until",
+  "effect:return-exiled-under-your-control"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
