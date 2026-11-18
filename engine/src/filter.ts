@@ -4031,6 +4031,10 @@ export function aggregateMatches(
  * - `"color-pair"`: Niv-Mizzet, Guildpact's "different color pairs among
  *   permanents you control that are exactly two colors" — only a permanent
  *   of exactly two colours has one.
+ * - `"color"`: each of its colours (rule 105.2) — "the number of colors
+ *   among the exiled cards used to craft it" (Sunbird Effigy), the colours as
+ *   they are now (a card's printed ones in exile). Colourless is no colour
+ *   and adds nothing (rule 105.2c).
  * - `"permanent-type"`: the permanent types among its card types (rule
  *   110.4 — artifact, battle, creature, enchantment, land, planeswalker):
  *   Korvold, Gleeful Glutton's "permanent types among cards in your
@@ -4053,6 +4057,7 @@ export type DistinctOf =
   | "power"
   | "name"
   | "color-pair"
+  | "color"
   | "permanent-type"
   | "card-type"
   | "counter-kind"
@@ -4100,6 +4105,7 @@ function distinctValuesOf(
   const c = computeCharacteristics(state, registry, id);
   if (of === "power") return [c.power];
   if (of === "color-pair") return c.colors.size === 2 ? [[...c.colors].sort().join("")] : [];
+  if (of === "color") return [...c.colors];
   if (of === "permanent-type") return c.types.filter((t) => PERMANENT_TYPES.includes(t));
   if (!c.types.includes(of.subtypesOf)) return [];
   if (of.subtypesOf === "creature") {

@@ -2954,7 +2954,10 @@
   "effect:protection-from-player-for-you-and-planeswalkers",
   "target:controlled-by-opponent-to-your-left",
   "condition:target-controller-poisoned",
-  "static:untaps-during-others-untap-attached"
+  "static:untaps-during-others-untap-attached",
+  "static:untaps-during-others-untap-attached",
+  "amount:colors-among-exiled-with-source",
+  "effect:add-mana-each-color-among-exiled"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

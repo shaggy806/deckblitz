@@ -33913,7 +33913,7 @@ export class Game {
     // "Any color among …" / "for each color among …": colourless is no
     // colour, so nothing of it is ever made.
     const filter = "colorAmong" in mana ? mana.colorAmong : mana.eachColorAmong;
-    const zone = "colorAmong" in mana ? mana.zone : undefined;
+    const zone = mana.zone;
     let ids: readonly ObjectId[];
     if (zone === "graveyard") {
       ids = (this.state.zones.perPlayer[player]?.graveyard ?? []).filter((id) =>

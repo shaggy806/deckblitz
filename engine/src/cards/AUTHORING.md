@@ -937,8 +937,10 @@ count; mana value off the printed cost with `{X}` as 0. A **sum counts a
 token stack once per token** — twenty 1/1 Goblins in one stack are 20 power.
 A max over no permanents is 0, and the amount is clamped at 0, rule 107.1b;
 `aggregate: "distinct"` counts the **different** values instead, each once —
-`of: "mana-value" | "mana-cost" | "power" | "name" | "color-pair" |
-"permanent-type" | "card-type" | "counter-kind" | { subtypesOf: "creature" | "planeswalker" }`: Lunar Insight's
+`of: "mana-value" | "mana-cost" | "power" | "name" | "color-pair" | "color" |
+"permanent-type" | "card-type" | "counter-kind" | { subtypesOf: "creature" | "planeswalker" }`
+(`"color"`: Sunbird Effigy's "the number of colors among the exiled cards used
+to craft it", `in: "exiled-with-source"`, colourless adding none): Lunar Insight's
 "each different mana value among nonland permanents you control", Embodiment of
 Agonies' "each different mana cost among nonland cards in your graveyard" (the
 symbols, not their total; no mana cost adds nothing, rule 202.1b), Golden Ratio's "each
@@ -5019,9 +5021,12 @@ ability can still be activated, for nothing):
   legendary creature cards in your graveyard" (The Grey Havens), "…of the
   exiled card's colors" (Chrome Mox — the cards linked to this permanent,
   rule 607.2a). Colours only, never {C}.
-- `{ eachColorAmong: CardFilter }` — "for each color among permanents you
-  control, add one mana of that color" (Bloom Tender, Faeburrow Elder): one
-  of each, at most five.
+- `{ eachColorAmong: CardFilter, zone?: "graveyard" | "exiled-with-source" }`
+  — "for each color among permanents you control, add one mana of that
+  color" (Bloom Tender, Faeburrow Elder): one of each, at most five. `zone`
+  as `colorAmong`'s: "for each color among the exiled cards used to craft
+  this creature" (Sunbird Effigy) is `{ eachColorAmong: {}, zone:
+  "exiled-with-source" }`.
 - `{ ifCondition: StaticCondition, thenOneOf: ManaType[], elseOneOf: ManaType[] }`
   — "Add {C}. If this has a luck counter on it, instead add one mana of any
   color" (Gemstone Caverns): a `oneOf` over the list the condition picks, read

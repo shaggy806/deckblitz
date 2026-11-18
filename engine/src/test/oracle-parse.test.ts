@@ -22609,3 +22609,41 @@ describe("untap during each other player's untap step", () => {
     expect(read("Artifact", "Untap this artifact during each opponent's untap step.").complete).toBe(false);
   });
 });
+
+describe("the colors among the exiled cards used to craft it", () => {
+  it("as power and toughness, and one mana of each (Sunbird Effigy); among your permanents (Bloom Tender)", () => {
+    const effigy = parseFace({
+      name: "Sunbird Effigy",
+      type_line: "Artifact Creature — Bird Construct",
+      oracle_text:
+        "Flying, vigilance, haste\nSunbird Effigy's power and toughness are each equal to the number of colors among the exiled cards used to craft it.\n{T}: For each color among the exiled cards used to craft this creature, add one mana of that color.",
+      colors: [],
+      power: "*",
+      toughness: "*",
+    });
+    expect(effigy.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      setBasePtFromCount: {
+        countOf: { aggregate: "distinct", of: "color", filter: {}, in: "exiled-with-source" },
+        plusPower: 0,
+        plusToughness: 0,
+      },
+    });
+    expect(effigy.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: { eachColorAmong: {}, zone: "exiled-with-source" },
+      amount: 1,
+    });
+    expect(effigy.complete).toBe(true);
+    const tender = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Elf Druid",
+      oracle_text: "{T}: For each color among permanents you control, add one mana of that color.",
+      mana_cost: "{1}{G}",
+      colors: ["G"],
+      power: "1",
+      toughness: "1",
+    });
+    expect(tender.activated[0].effect).toEqual({ kind: "add-mana", mana: { eachColorAmong: { controlledBy: "you" } }, amount: 1 });
+  });
+});

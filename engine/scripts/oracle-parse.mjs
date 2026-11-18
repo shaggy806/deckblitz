@@ -4502,6 +4502,14 @@ export function parseSentence(sentence, ctx) {
     const filter = m[2] === "attacking creature" ? { type: "creature", attacking: true } : { type: "creature", controlledBy: "you" };
     return { kind: "add-mana", mana: m[1], amount: { countOf: filter } };
   }
+  // "For each color among permanents you control, add one mana of that color"
+  // (Bloom Tender, Faeburrow Elder), "… among the exiled cards used to craft
+  // this creature …" (Sunbird Effigy, rule 702.167c): `eachColorAmong`.
+  if ((m = /^for each color among (permanents you control|the exiled cards used to craft ~), add one mana of that color\.$/i.exec(s))) {
+    return /^permanents/i.test(m[1])
+      ? { kind: "add-mana", mana: { eachColorAmong: { controlledBy: "you" } }, amount: 1 }
+      : { kind: "add-mana", mana: { eachColorAmong: {}, zone: "exiled-with-source" }, amount: 1 };
+  }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
     !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s) &&
@@ -23884,14 +23892,22 @@ function parseStatic(line, text) {
   }
   // "~'s power and toughness are each equal to the total power of the exiled
   // cards used to craft it" (Wretched Bonemass; Mastercraft Raptor's power
-  // alone): craft's materials, linked to what it became (rule 702.167c).
+  // alone), "… the number of colors among the exiled cards used to craft it"
+  // (Sunbird Effigy): craft's materials, linked to what it became (rule
+  // 702.167c).
   {
-    const w = /^~'s power (is|and toughness are each) equal to the total power of the exiled cards used to craft it\.$/.exec(line);
+    const w =
+      /^~'s power (is|and toughness are each) equal to the (total power of|number of colors among) the exiled cards used to craft it\.$/.exec(
+        line,
+      );
     if (w !== null) {
       return {
         affects: { scope: "self" },
         setBasePtFromCount: {
-          countOf: { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" },
+          countOf:
+            w[2] === "total power of"
+              ? { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" }
+              : { aggregate: "distinct", of: "color", filter: {}, in: "exiled-with-source" },
           plusPower: 0,
           plusToughness: 0,
           ...(w[1] === "is" ? { only: "power" } : {}),

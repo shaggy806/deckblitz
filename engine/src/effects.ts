@@ -2633,9 +2633,12 @@ export type BoardManaList =
    * "For each color among permanents you control, add one mana of that
    * color" (Bloom Tender, Faeburrow Elder): an `all` over the colours among
    * the battlefield permanents matching the filter, each colour once however
-   * many have it (the rulings) — `amount` times over.
+   * many have it (the rulings) — `amount` times over. `zone` reads other
+   * cards, as `colorAmong`'s does: `"exiled-with-source"` is Sunbird
+   * Effigy's "for each color among the exiled cards used to craft this
+   * creature, add one mana of that color" (rule 702.167c), `filter` `{}`.
    */
-  | { readonly eachColorAmong: CardFilter }
+  | { readonly eachColorAmong: CardFilter; readonly zone?: "graveyard" | "exiled-with-source" }
   /**
    * "Add {C}. If this has a luck counter on it, **instead** add one mana of
    * any color" (Gemstone Caverns): a `oneOf` over `thenOneOf` while the
