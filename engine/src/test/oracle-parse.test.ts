@@ -11160,6 +11160,24 @@ describe("impulse permissions with a window", () => {
       target: 0,
       mayPlay: { duration: "while-you-control-source", play: true },
     });
+
+    // Rooting Moloch: "a card with a cycling ability", typecycling too.
+    const moloch = parseFace(
+      {
+        name: "Test Window",
+        type_line: "Creature — Lizard",
+        oracle_text:
+          "When this creature enters, exile target card with a cycling ability from your graveyard. Until the end of your next turn, you may play that card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(moloch.complete).toBe(true);
+    expect(moloch.triggered[0].targets).toEqual([{ kind: "card-in-graveyard", whose: "you", filter: { hasKeyword: "cycling" } }]);
+    expect(moloch.triggered[0].effect).toEqual({
+      kind: "exile",
+      target: 0,
+      mayPlay: { duration: "until-end-of-your-next-turn", play: true },
+    });
   });
 });
 

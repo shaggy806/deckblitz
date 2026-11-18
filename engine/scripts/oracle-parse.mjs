@@ -9215,10 +9215,13 @@ function impulseWindowAt(sentences, i, ctx) {
   if (onBattlefield !== undefined) {
     return { kind: "exile", target: ctx.target(onBattlefield), mayPlay: { duration: when.duration, spendAs: when.spendAs } };
   }
-  const graveyard = /^exile (up to one )?target (?:(.+?) )?card from your graveyard\.$/i.exec(sentences[i]);
+  // "… target card **with a cycling ability** from your graveyard" (Rooting
+  // Moloch): any cycling, typecycling too (rule 702.29e).
+  const graveyard = /^exile (up to one )?target (?:(.+?) )?card( with a cycling ability)? from your graveyard\.$/i.exec(sentences[i]);
   if (graveyard === null) return null;
-  const filter = graveyard[2] === undefined ? {} : parseTypePhrase(graveyard[2], { cards: true });
-  if (filter === null) return null;
+  const typed = graveyard[2] === undefined ? {} : parseTypePhrase(graveyard[2], { cards: true });
+  if (typed === null) return null;
+  const filter = graveyard[3] === undefined ? typed : { ...typed, hasKeyword: "cycling" };
   const spec = { kind: "card-in-graveyard", whose: "you", ...(Object.keys(filter).length > 0 ? { filter } : {}) };
   return {
     kind: "exile",
