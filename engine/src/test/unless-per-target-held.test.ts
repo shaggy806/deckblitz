@@ -13,7 +13,8 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
-import { A, B, C, D, cast, hand, lands, ref, settle, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { slotPolarities } from "../target-polarity.js";
+import { A, B, C, D, cast, hand, registryOf, lands, ref, settle, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 
 /** Stop at the next choice, returning its question. */
 const question = (game: Game) => {
@@ -146,6 +147,12 @@ describe("Decoy Gambit", () => {
     expect(asked).toEqual([C]);
     expect(zone(game, carols)).toBe("battlefield");
     expect(hand(game).length).toBe(before + 1);
+  });
+
+  it("the bots read every per-opponent slot as one to aim at an opponent's creature", () => {
+    const { game } = table();
+    const def = registryOf(game).get("Decoy Gambit");
+    expect(slotPolarities(def.effect, 3)).toEqual(["harm", "harm", "harm"]);
   });
 
   it("a creature that changed controller is no longer a legal target: its new controller isn't asked", () => {

@@ -264,9 +264,16 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.as !== undefined) v.child(n.effect);
   },
   "for-permanent": none,
-  // Its objects aren't targets; a slot only names who answers (Sirocco).
+  // Its objects aren't targets, and a slot only names who answers (Sirocco) —
+  // unless they're the spell's own targets (Decoy Gambit): what a decline
+  // does to the object in slot `as`, it may do to each of them.
   "for-each-unless": (n, v) => {
     if (typeof n.asks === "object" && "target" in n.asks) v.touch(n.asks.target, "harm", MAJOR);
+    if ("targets" in n.of) {
+      const as = n.as ?? 0;
+      const each = slotStrengths(n.otherwise, as + 1)[as];
+      if (each !== null && each !== undefined) for (const slot of n.of.targets) v.touch(slot, each.polarity, each.weight);
+    }
   },
   "for-found": none,
   "discard-card": none,
