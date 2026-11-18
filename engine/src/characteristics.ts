@@ -1470,9 +1470,13 @@ function evalStaticCondition(
         (source.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source.lastKnown?.zoneChangeCount);
       // "Chandra has dealt": what this object dealt in the same stint.
       if (condition.bySelf === true && stint === undefined) return false;
+      // "To that player": the player only, who may have left the game since.
+      const toPlayer = condition.against === undefined ? undefined : conditionPlayerOf(state, condition.against, opts, source, true);
+      if (condition.against !== undefined && toPlayer === undefined) return false;
       return (
         damageDealtThisTurn(state, seats, condition.combat, condition.colors, {
           ...(condition.toSelf === true ? { to: { kind: "object", object: source.id }, toStint: stint } : {}),
+          ...(toPlayer !== undefined ? { to: { kind: "player", player: toPlayer } } : {}),
           ...(condition.bySelf === true && stint !== undefined ? { from: { object: source.id, stint } } : {}),
           ...(condition.oneSource === true ? { oneSource: true } : {}),
         }) >= condition.atLeast

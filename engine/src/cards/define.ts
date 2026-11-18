@@ -1570,6 +1570,12 @@ export type StaticCondition =
        * Kaladesh's "if Chandra has dealt 3 or more damage this turn" (`who:
        * "any-player"`, whoever controlled her as she dealt it). */
       readonly bySelf?: true;
+      /** Only what was dealt to this player (not a permanent of theirs) —
+       * Vessel of the All-Consuming's "if it has dealt 10 or more damage to
+       * **that player** this turn" (`bySelf`, `against: "that-player"`, the
+       * player its trigger's damage was dealt to). Nobody to name, it doesn't
+       * hold. */
+      readonly against?: ConditionPlayer;
       /** One source dealt it all: the most any one source dealt this turn —
        * all of it, though it was dealt at different times and to different
        * things — reaches `atLeast`, rather than the sum of every source's.

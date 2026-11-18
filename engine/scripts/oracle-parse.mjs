@@ -3647,6 +3647,11 @@ export function parseSentence(sentence, ctx) {
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
+  // "They lose the game": the trigger's "that player" — the player dealt
+  // damage (Vessel of the All-Consuming).
+  if (ctx?.thatPlayer === "trigger-player" && /^(?:they|that player) loses? the game\.$/i.test(s)) {
+    return { kind: "lose-game", who: "trigger-player" };
+  }
   // "Each player with exactly 13 life loses the game, then each player gains
   // 1 life" (Triskaidekaphobia): every one of them at once (rule 104.4a), each
   // asked about as "that player"; the rest after.
@@ -20791,6 +20796,12 @@ const TURN_TALLY_IFS = {
     [2, 3, 4, 5, 6, 7, 8, 9, 10].flatMap((n) => [
       [`if a source you controlled dealt ${n} or more damage this turn,`, { kind: "damage-dealt-this-turn", oneSource: true, atLeast: n }],
       [`if ~ has dealt ${n} or more damage this turn,`, { kind: "damage-dealt-this-turn", who: "any-player", bySelf: true, atLeast: n }],
+      // Vessel of the All-Consuming: to the player its trigger's damage was
+      // dealt to, by this object in its stint.
+      [
+        `if it has dealt ${n} or more damage to that player this turn,`,
+        { kind: "damage-dealt-this-turn", who: "any-player", bySelf: true, against: "that-player", atLeast: n },
+      ],
     ]),
   ),
   // Dragon Whelp's: activations of this ability so far this turn, resolved

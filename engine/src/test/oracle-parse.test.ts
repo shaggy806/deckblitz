@@ -9575,6 +9575,21 @@ describe("counters put or removed this way", () => {
         },
       ],
     });
+    // What it has dealt to that player, the one its trigger's damage was
+    // dealt to (Vessel of the All-Consuming).
+    const vessel = face(
+      "Vessel of the All-Consuming",
+      "Enchantment Creature — Ogre Shaman",
+      "Whenever this creature deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.",
+    );
+    expect(vessel.triggered[0].condition).toEqual({
+      kind: "damage-dealt-this-turn",
+      who: "any-player",
+      bySelf: true,
+      against: "that-player",
+      atLeast: 10,
+    });
+    expect(vessel.triggered[0].effect).toEqual({ kind: "lose-game", who: "trigger-player" });
   });
 
   it("reads what's exiled or returned as it enters, and the counters that come of it", () => {

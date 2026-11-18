@@ -7460,6 +7460,12 @@ clause (section 9):
   bySelf: true, atLeast: 3 }`, a `conditional` after the ability's own
   damage). Each object in each stint is its own source, and a token stack's
   tokens that dealt combat damage as one share it. The scaffolder reads both.
+  `against: ConditionPlayer` is only what was dealt to that player (not a
+  permanent of theirs): Vessel of the All-Consuming's "whenever this creature
+  deals damage to a player, if it has dealt 10 or more damage to that player
+  this turn, they lose the game" (`{ who: "any-player", bySelf: true, against:
+  "that-player", atLeast: 10 }`, the player its trigger's damage was dealt to;
+  scaffolded).
 - `{ kind: "cast-this-turn", who?, filter?, atLeast?, atMost? }` — how many of
   the spells `who` (`"you"` by default, `"opponent"`, `"any"`) cast this turn
   match `filter`, each read **as it was cast** (`PlayerState.spellsCastThisTurnAs`,
