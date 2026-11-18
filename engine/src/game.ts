@@ -43307,7 +43307,11 @@ controlledBy,
         // One effect, one timestamp (rule 613.7b): the target, then what
         // matches now (rule 611.2c).
         const timestamp = this.freshTimestamp();
-        const label = protectionLabel(from, on.asHexproof === true ? "hexproof" : "protection");
+        const label = protectionLabel(
+          from,
+          on.asHexproof === true ? "hexproof" : "protection",
+          from.fromPlayers === undefined ? undefined : this.scopedPlayers(controller, "each-opponent"),
+        );
         const grant = (id: ObjectId): void => {
           const object = this.state.objects[id];
           if (object?.zone !== "battlefield" || !durationBegins(object, lasting)) return;

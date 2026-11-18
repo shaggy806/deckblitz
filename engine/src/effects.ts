@@ -18649,16 +18649,34 @@ export function protectionChoiceOptions(
   return [...(choice.or ?? []), ...listed];
 }
 
-/** "protection from red and from artifacts" — the log's words for a grant. */
-export function protectionLabel(from: ProtectionQualities, ability: "protection" | "hexproof" = "protection"): string {
+/** "protection from red and from artifacts" — the log's words for a grant.
+ * Protection from players (rule 702.16k) names them ("protection from
+ * Carol": Eon Frolicker's target opponent, Guardian Archon's chosen player),
+ * except that players who are every one of `opponents` — the opponents
+ * still in the game of the effect's controller, or of the protected
+ * permanent's — read "each of your opponents" (Cliffside Rescuer, Figure of
+ * Fable, and Eon Frolicker at two players, where that is the same thing). */
+export function protectionLabel(
+  from: ProtectionQualities,
+  ability: "protection" | "hexproof" = "protection",
+  opponents?: readonly PlayerId[],
+): string {
   const words = [
     ...(from.colors ?? []).map((c) => PROTECTION_COLOR_WORDS[c]),
     ...(from.types ?? []).map((t) => `${t}s`),
     ...(from.filter === undefined ? [] : protectionFilterWords(from.filter)),
-    // Fixed to the players as it resolves, however few are left.
-    ...(from.fromPlayers === undefined ? [] : ["each of your opponents"]),
+    ...(from.fromPlayers === undefined ? [] : protectionPlayerWords(from.fromPlayers, opponents)),
   ];
   return `${ability} from ${words.length === 0 ? "nothing" : words.join(" and from ")}`;
+}
+
+/** The players a protection is from, in words: see {@link protectionLabel}. */
+function protectionPlayerWords(players: "opponents" | readonly PlayerId[], opponents: readonly PlayerId[] | undefined): readonly string[] {
+  if (players === "opponents") return ["each of your opponents"];
+  const everyOpponent =
+    opponents !== undefined && players.length > 0 && players.length === opponents.length && players.every((p) => opponents.includes(p));
+  if (everyOpponent) return ["each of your opponents"];
+  return players.map((p) => `${p.charAt(0).toUpperCase()}${p.slice(1)}`);
 }
 
 /** A protection filter in words, each `anyOf` its own ("instant spells",

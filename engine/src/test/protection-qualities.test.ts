@@ -495,7 +495,10 @@ describe("the words the client shows", () => {
   it("says what it is, not 'a quality'", () => {
     expect(protectionLabel({ filter: {} })).toBe("protection from everything");
     expect(protectionLabel({ fromPlayers: "opponents" })).toBe("protection from each of your opponents");
-    expect(protectionLabel({ fromPlayers: [B] })).toBe("protection from each of your opponents");
+    // Players fixed as it resolves are named, unless they're every opponent.
+    expect(protectionLabel({ fromPlayers: [B] })).toBe("protection from Bob");
+    expect(protectionLabel({ fromPlayers: [B, C] })).toBe("protection from Bob and from Carol");
+    expect(protectionLabel({ fromPlayers: [C, B] }, "protection", [B, C])).toBe("protection from each of your opponents");
     expect(protectionLabel({ filter: { subtype: "Zombie" } })).toBe("protection from Zombies");
     expect(protectionLabel({ filter: { colorless: true } })).toBe("protection from colorless");
     expect(protectionLabel({ colors: ["R"], types: ["artifact"] })).toBe("protection from red and from artifacts");

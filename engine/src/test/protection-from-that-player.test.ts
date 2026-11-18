@@ -86,6 +86,17 @@ describe("Eon Frolicker", () => {
     expect(canBolt(game, C, A)).toBe(true);
   });
 
+  it("the log names that player, not each of your opponents", () => {
+    const { game, a } = table({ players: 4 });
+    const walker = spawn(game, "Ajani, Caller of the Pride");
+    lands(game, "Island", 4);
+    pickTargets(a, C);
+    cast(game, toHand(game, FROLICKER));
+    const granted = game.eventsOfType("keyword-granted").filter((e) => e.object === walker);
+    expect(granted.map((e) => e.keyword)).toEqual(["protection from Carol"]);
+    expect(game.viewFor(A).objects[walker]?.text).toContain("Protection from Carol until your next turn");
+  });
+
   it("put onto the battlefield without being cast, it does nothing", () => {
     const { game } = table({ players: 3 });
     enter(game, FROLICKER);
@@ -109,5 +120,19 @@ describe("Guardian Archon's chosen player, through the same field", () => {
     );
     expect(canBolt(game, C, bears)).toBe(false);
     expect(canBolt(game, B, bears)).toBe(true);
+    const granted = game.eventsOfType("keyword-granted").filter((e) => e.object === bears);
+    expect(granted.map((e) => e.keyword)).toEqual(["protection from Carol"]);
+  });
+
+  it("each of your opponents still reads so at four players (Cliffside Rescuer)", () => {
+    const { game } = table({ players: 4 });
+    const bears = spawn(game, "Grizzly Bears");
+    game.debugApplyEffect(
+      A,
+      { kind: "grant-protection", target: 0, from: { fromPlayers: "opponents" }, duration: "end-of-turn" },
+      [ref(bears)],
+    );
+    const granted = game.eventsOfType("keyword-granted").filter((e) => e.object === bears);
+    expect(granted.map((e) => e.keyword)).toEqual(["protection from each of your opponents"]);
   });
 });

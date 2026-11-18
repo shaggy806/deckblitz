@@ -707,7 +707,11 @@ function visible(
       // Protection granted for a while (`grant-protection`), in words.
       const quality = m.protection ?? m.hexproofFrom;
       if (quality !== undefined) {
-        const label = protectionLabel(quality, m.protection !== undefined ? "protection" : "hexproof");
+        const label = protectionLabel(
+          quality,
+          m.protection !== undefined ? "protection" : "hexproof",
+          state.turnOrder.filter((p) => p !== object.controller && !state.players[p].hasLost),
+        );
         const until =
           m.untilPoint !== undefined
             ? {
