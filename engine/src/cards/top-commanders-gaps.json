@@ -2781,6 +2781,7 @@
   "effect:copy-spell-retarget-another-opponent",
   "effect:warp-strike-return-attacking",
   "effect:return-sacrificed-card-with-counters",
+  "effect:return-with-counters-this-way",
   "replacement:as-transforms-choice",
   "replacement:reroll-dice",
   "effect:turn-face-up-or-exile-and-cast",

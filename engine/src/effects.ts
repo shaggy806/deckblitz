@@ -482,6 +482,28 @@ export interface DelayedLosesControl {
   readonly thisTurn?: true;
 }
 
+/**
+ * "When an exiled card enters under your control **this way**" (Lagrella, the
+ * Magpie): a delayed trigger keyed to the cards exiled "until"
+ * `returnsUntilLeaves` leaves the battlefield coming back as it leaves (rules
+ * 610.3, 610.3c) — "this way" is that return and nothing else (the ruling).
+ * `returnsUntilLeaves` is a target slot or `"source"`, on the battlefield as
+ * this resolves (else nothing it exiled could come back, 610.3a, and no
+ * trigger is made); the watch ends as it leaves, whatever comes back.
+ * `underYourControl`: only a card that enters under this ability's
+ * controller's control (a card returns under its owner's, 610.3c).
+ *
+ * It triggers once (rule 603.7b), however many of the cards enter at once:
+ * they are its trigger batch (`"trigger-batch"`), and with one, that card is
+ * its trigger object too. The effect says which "it" is when there are
+ * several: Lagrella's is a `choose-permanents` of one `inSet:
+ * "trigger-batch"`, chosen as it resolves.
+ */
+export interface DelayedReturn {
+  readonly returnsUntilLeaves: ObjectRef;
+  readonly underYourControl?: true;
+}
+
 /** "When you next cast a [filter] spell this turn" (Yuna, Grand Summoner;
  * Codie, Vociferous Codex) — a delayed trigger keyed to its controller's next
  * spell matching `nextSpell` (`{}` for any), once, and this turn only. That
@@ -5622,7 +5644,8 @@ export type EffectSpec =
        * leaving the battlefield ("when it dies" — see {@link DelayedLeaves}),
        * the controller's next spell this turn ({@link DelayedNextSpell}), or
        * any event a trigger can name, until end of turn or until your next
-       * turn ({@link DelayedWhenever}).
+       * turn ({@link DelayedWhenever}), or what was exiled until a permanent
+       * leaves coming back as it does ({@link DelayedReturn}).
        * Whatever the creating ability's trigger object was ("return **that
        * card** to the battlefield at the beginning of the next end step" —
        * Shirei, Shizo's Caretaker) is the delayed ability's too, unless the
@@ -5633,7 +5656,8 @@ export type EffectSpec =
         | DelayedNextSpell
         | DelayedUnblocked
         | DelayedWhenever
-        | DelayedLosesControl;
+        | DelayedLosesControl
+        | DelayedReturn;
       readonly effect: EffectSpec;
       /** Text for the log and the stack. */
       readonly text: string;
@@ -13652,6 +13676,7 @@ export interface EffectApi {
       | { readonly attacksUnblocked: ObjectId }
       | DelayedWheneverAt
       | { readonly losesControl: ObjectId; readonly thisTurn?: true }
+      | { readonly returnsUntilLeaves: ObjectId; readonly underYourControl?: true }
       | { readonly thatCombat: number },
     effect: EffectSpec,
     text: string,
@@ -21673,6 +21698,22 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const watched = objectRefAct(spec.at.attacksUnblocked, ctx);
         if (watched?.kind !== "object") return;
         ctx.delayTrigger({ attacksUnblocked: watched.object }, spec.effect, spec.text, controller);
+        return;
+      }
+      if ("returnsUntilLeaves" in spec.at) {
+        // "When an exiled card enters … this way" (Lagrella): what was exiled
+        // until this permanent leaves, in the stint it's in now.
+        const watched = objectRefAct(spec.at.returnsUntilLeaves, ctx);
+        if (watched?.kind !== "object") return;
+        ctx.delayTrigger(
+          {
+            returnsUntilLeaves: watched.object,
+            ...(spec.at.underYourControl === true ? { underYourControl: true as const } : {}),
+          },
+          spec.effect,
+          spec.text,
+          controller,
+        );
         return;
       }
       if ("losesControl" in spec.at) {

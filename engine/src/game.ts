@@ -597,9 +597,11 @@ import type {
   DelayedCastWatch,
   DelayedLeaveWatch,
   DelayedLoseControlWatch,
+  DelayedReturnWatch,
   DelayedUnblockedWatch,
   DelayedWheneverWatch,
   DelayedTrigger,
+  ReturnFire,
   EnterAttackingChoice,
   EntryRecord,
   ExtraTurnRider,
@@ -7211,6 +7213,7 @@ export class Game {
       if ("leaves" in trigger.at) pinned.add(trigger.at.leaves);
       if ("losesControl" in trigger.at) pinned.add(trigger.at.losesControl);
       if ("attacksUnblocked" in trigger.at) pinned.add(trigger.at.attacksUnblocked);
+      if ("returnsUntilLeaves" in trigger.at) pinned.add(trigger.at.returnsUntilLeaves);
       if ("whenever" in trigger.at) {
         for (const watched of trigger.at.watching ?? []) pinned.add(watched.object);
         if (trigger.at.orLosesControl !== undefined) pinned.add(trigger.at.orLosesControl.object);
@@ -10504,6 +10507,8 @@ export class Game {
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => {
       if (isStepWatch(t.at)) return t.at.which !== "this-turn";
       if ("leaves" in t.at || "losesControl" in t.at) return t.at.thisTurn !== true;
+      // "When an exiled card enters this way" waits for its permanent to leave.
+      if ("returnsUntilLeaves" in t.at) return true;
       return "whenever" in t.at && watchOutlastsItsTurn(t.at.until) && t.at.inLastTurn !== true;
     });
     // Nothing has attacked this turn yet — whoever controls it. (The untap
@@ -33143,7 +33148,7 @@ export class Game {
   private finishEntry(entry: PendingEntry): void {
     if (entry.kind === "spell") this.enterPermanentSpell(entry.object);
     else if (entry.kind === "land") this.finishLandPlay(entry);
-    else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects);
+    else if (entry.kind === "exiled-return") this.returnExiledCards(entry.objects, entry.fires);
     else if (entry.kind === "held-entries") this.enterHeldEntries(entry.objects, entry.under, entry.withCounters, entry.enterAs, entry.tapped, entry.shuffles);
     else if (entry.kind === "token-copies") this.enterTokenCopies(entry);
     else if (entry.kind === "opening-hand") this.applyOpeningHand(entry.player, entry.objects, entry.next, entry.destination);
@@ -33158,23 +33163,57 @@ export class Game {
    * its "as this enters" choices (rule 614.12), asked one at a time before
    * any moves, parking the return (`PendingEntry`) while one is asked. The
    * effect-step twin of this is `returnExiledBySource`.
+   *
+   * `fires` are the "when an exiled card enters … this way" delayed triggers
+   * waiting on these cards (Lagrella — `DelayedReturnWatch`): each triggers
+   * once (rule 603.7b) if any of its cards entered, under its controller's
+   * control where it says so — those cards its trigger batch, the one card
+   * its trigger object.
    */
-  private returnExiledCards(ids: readonly ObjectId[]): void {
+  private returnExiledCards(ids: readonly ObjectId[], fires: readonly ReturnFire[] = []): void {
     const returning = ids.filter((id) => this.state.objects[id]?.zone === "exile");
     for (const id of returning) {
       if (this.askEnterChoice(id, this.state.objects[id].owner)) {
-        this.state.suspendedResolutions.push({ effect: null, enter: { kind: "exiled-return", objects: returning } });
+        this.state.suspendedResolutions.push({
+          effect: null,
+          enter: { kind: "exiled-return", objects: returning, ...(fires.length > 0 ? { fires } : {}) },
+        });
         return;
       }
     }
+    const entered: ObjectId[] = [];
     this.withEnterBatch(() => {
       for (const id of returning) {
         this.state.objects[id].exiledBy = undefined;
         if (this.moveObject(id, "battlefield")) {
+          entered.push(id);
           this.emit({ type: "permanent-entered-battlefield", object: id });
         }
       }
     });
+    for (const { trigger, cards } of fires) {
+      const at = trigger.at as DelayedReturnWatch;
+      const these = cards.filter((id) => {
+        const card = this.state.objects[id];
+        return entered.includes(id) && card?.zone === "battlefield" && (at.underYourControl !== true || card.controller === trigger.controller);
+      });
+      if (these.length === 0) continue;
+      const batch = these.map((id) => ({ object: id, stint: this.state.objects[id].zoneChangeCount ?? 0 }));
+      const one = these.length === 1 ? these[0] : undefined;
+      if (!this.delayedIfHolds(trigger, one, one === undefined ? undefined : { triggerObject: batch[0].stint })) continue;
+      this.state.pendingTriggers.push({
+        sourceObjectId: trigger.source,
+        cardName: trigger.sourceName,
+        abilityIndex: 0,
+        controller: trigger.controller,
+        ...(one !== undefined ? { triggerObject: one } : {}),
+        lastKnownRefs: {
+          ...(one !== undefined ? { triggerObject: batch[0].stint } : {}),
+          sets: { batch },
+        },
+        delayed: trigger,
+      });
+    }
   }
 
   /** The target specs a spell on the stack was cast with: a kicked spell's
@@ -58228,6 +58267,12 @@ controlledBy,
     return this.state.zones.shared.exile.some((id) => this.state.objects[id]?.exiledUntil !== undefined);
   }
 
+  /** Whether any delayed trigger waits on what's exiled until a permanent
+   * leaves coming back (`DelayedReturnWatch`). */
+  private anyReturnWatch(): boolean {
+    return this.state.delayedTriggers.some((t) => "returnsUntilLeaves" in t.at);
+  }
+
   /** The one-shot effects "until [this] leaves the battlefield" creates once
    * one of `left` has left (rules 610.3, 610.4): what phased out until then
    * phases in, and what was exiled until then returns. */
@@ -58248,6 +58293,24 @@ controlledBy,
       if (until === undefined || object.isToken) return false;
       return left.some((l) => l.source === until.source && l.zoneChangeCount === until.zoneChangeCount);
     });
+    // "When an exiled card enters … this way" (Lagrella): used up as its
+    // permanent leaves, each with the cards it waits on, firing as they enter.
+    const watching = this.state.delayedTriggers.filter((t) => {
+      const at = t.at;
+      return "returnsUntilLeaves" in at && left.some((l) => l.source === at.returnsUntilLeaves && l.zoneChangeCount === at.stint);
+    });
+    let fires: ReturnFire[] = [];
+    if (watching.length > 0) {
+      this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !watching.includes(t));
+      fires = watching.flatMap((trigger) => {
+        const at = trigger.at as DelayedReturnWatch;
+        const cards = returning.filter((id) => {
+          const until = this.state.objects[id].exiledUntil;
+          return until?.source === at.returnsUntilLeaves && until.zoneChangeCount === at.stint && until.returnTo === undefined;
+        });
+        return cards.length > 0 ? [{ trigger, cards }] : [];
+      });
+    }
     // Rule 610.3: "returns the object to its previous zone" — what came from
     // a hand goes back to its owner's (Kitesail Freebooter), and what came
     // from a graveyard to its owner's (Idol of Endurance).
@@ -58257,7 +58320,7 @@ controlledBy,
       this.moveObject(id, returnTo);
       return false;
     });
-    if (toBattlefield.length > 0) this.returnExiledCards(toBattlefield);
+    if (toBattlefield.length > 0) this.returnExiledCards(toBattlefield, fires);
   }
 
   /** `player` has just become the monarch: what was exiled "until an opponent
@@ -60649,6 +60712,7 @@ controlledBy,
       | { readonly attacksUnblocked: ObjectId }
       | DelayedWheneverAt
       | { readonly losesControl: ObjectId; readonly thisTurn?: true }
+      | { readonly returnsUntilLeaves: ObjectId; readonly underYourControl?: true }
       | { readonly thatCombat: number },
     effect: EffectSpec,
     text: string,
@@ -60673,12 +60737,19 @@ controlledBy,
       | DelayedUnblockedWatch
       | DelayedWheneverWatch
       | DelayedLoseControlWatch
+      | DelayedReturnWatch
       | { readonly thatCombat: number };
     if ("step" in at) {
       when = at;
     } else if ("losesControl" in at) {
       const watched = this.state.objects[at.losesControl];
       if (watched?.zone !== "battlefield") return;
+      when = { ...at, stint: watched.zoneChangeCount ?? 0 };
+    } else if ("returnsUntilLeaves" in at) {
+      // What was exiled until this stint of it leaves (610.3): one phased
+      // out hasn't left (702.26d). Gone already, nothing it exiled comes back.
+      const watched = this.state.objects[at.returnsUntilLeaves];
+      if (watched?.zone !== "battlefield" && watched?.zone !== "phased-out") return;
       when = { ...at, stint: watched.zoneChangeCount ?? 0 };
     } else if ("whenever" in at) {
       // Only what's on the battlefield now can be watched, each for this stint
@@ -72576,7 +72647,7 @@ controlledBy,
       // (rule 610.4), and what was exiled until then returns (610.3) —
       // right after the event it left in.
       const stint = object.lastKnown?.zoneChangeCount;
-      if (stint !== undefined && (phasedOutIds(this.state).length > 0 || this.anyExiledUntil())) {
+      if (stint !== undefined && (phasedOutIds(this.state).length > 0 || this.anyExiledUntil() || this.anyReturnWatch())) {
         const left = { source: id, zoneChangeCount: stint };
         if (this.leaveBatch !== null) this.leaveBatch.phaseInAfter.push(left);
         else this.afterUntilSourcesLeft([left]);

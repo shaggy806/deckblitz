@@ -5526,6 +5526,24 @@ export interface DelayedLoseControlWatch {
   readonly thisTurn?: true;
 }
 
+/** A delayed trigger waiting on what was exiled until one permanent leaves the
+ * battlefield coming back as it does — see `DelayedReturn`. Used up as that
+ * stint of it leaves (`Game.returnUntilLeft`), firing once (rule 603.7b) if
+ * anything it watched for entered then. */
+export interface DelayedReturnWatch {
+  readonly returnsUntilLeaves: ObjectId;
+  /** Which stint of it on the battlefield: the cards' `exiledUntil` link. */
+  readonly stint: number;
+  readonly underYourControl?: true;
+}
+
+/** One {@link DelayedReturnWatch} used up as its permanent left, with the
+ * cards it was waiting on that are coming back: it fires as they enter. */
+export interface ReturnFire {
+  readonly trigger: DelayedTrigger;
+  readonly cards: readonly ObjectId[];
+}
+
 export interface DelayedCastWatch {
   readonly nextSpell: CardFilter;
   /** Or the next ability its controller activates with {X} in its
@@ -5559,6 +5577,7 @@ export interface DelayedTrigger {
     | DelayedUnblockedWatch
     | DelayedWheneverWatch
     | DelayedLoseControlWatch
+    | DelayedReturnWatch
     /** "At the beginning of that combat" (`additional-combat`'s `atBeginning`):
      * the additional combat phase with this mark (`TurnState.addedCombat`),
      * this turn only. */
@@ -5874,6 +5893,9 @@ export type PendingEntry =
        * on one of them's "as this enters" choice. */
       readonly kind: "exiled-return";
       readonly objects: readonly ObjectId[];
+      /** The "when an exiled card enters this way" delayed triggers waiting on
+       * these cards — see `Game.returnExiledCards`. */
+      readonly fires?: readonly ReturnFire[];
     }
   | {
       /** The cards a restart left in exile, going onto the battlefield under
