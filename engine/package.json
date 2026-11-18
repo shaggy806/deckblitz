@@ -65,6 +65,7 @@
     "typecheck:tests": "tsc -p tsconfig.tests.json",
     "play:random": "node scripts/dist-complete.mjs && tsc && node scripts/random-demo.mjs",
     "play:situations": "node scripts/dist-complete.mjs && tsc && node scripts/situation-fuzz.mjs",
+    "play:browsers": "node scripts/dist-complete.mjs && tsc && node scripts/replica-browsers.mjs",
     "bot:bench": "node scripts/tune-bot.mjs bench",
     "bot:bench:last": "node scripts/bench-log.mjs",
     "bot:tune": "node scripts/tune-bot.mjs tune",

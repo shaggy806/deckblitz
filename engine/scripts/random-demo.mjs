@@ -233,6 +233,9 @@ if (copied.length > 0) {
   console.log(
     `copies: ${sum("actions")} actions given to two copies of each game, compared ${sum("compared")} times, ${sum("restores")} restores from a sent state — all identical`,
   );
+  const digests = copied.reduce((n, c) => n + c.digestMs.states, 0);
+  const each = (key) => (copied.reduce((n, c) => n + c.digestMs[key], 0) / Math.max(1, digests)).toFixed(1);
+  console.log(`digests: ${digests} states, each agreeing with its copies'; ${each("brief")} ms a state, ${each("whole")} ms with its event log`);
 }
 if (failures.length > 0) {
   console.log("");

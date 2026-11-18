@@ -16,7 +16,10 @@
 //
 // Every `compareEvery` actions, and at the end, each copy is compared with the
 // game, whole state against whole state, and a difference throws with where
-// it is.
+// it is. Where the states are the same their digests (`stateDigest`, what the
+// devices of a copied room send each other) must be too, with the event log
+// and without: a copy restored from a sent state has its objects' keys in
+// another order, which the digest may not see.
 //
 // Played as a room and not through `Game`'s own controller loop because the
 // two are not the same to the letter: the loop hands priority to whoever a
@@ -25,7 +28,7 @@
 // loop played by exactly those events. Every device of a copied room is fed
 // the room's way, so that is the way to check.
 
-import { Game, answeringPlayer, isSettled, standInFor, stateFromJson, stateToJson } from "../dist/index.js";
+import { Game, answeringPlayer, isSettled, standInFor, stateDigest, stateFromJson, stateToJson } from "../dist/index.js";
 
 /** `value` with every object's keys in order and its `undefined` properties
  * gone, so two states with the same content read the same however they were
@@ -74,6 +77,8 @@ function nextAction(game, controllers) {
  *   (the game itself and the first copy are both made with it).
  * - `controllers`: who answers for each player.
  * - `onDecision(game, actions)`: called before each decision, for a heartbeat.
+ * - `onAction(action, game, actions)`: called after each action is applied
+ *   everywhere, the game at its next decision (what a recorder keeps).
  * - `wire`: how a state travels to another device, `{ encode, decode }`
  *   (the engine's `stateToJson` / `stateFromJson` unless given).
  *
@@ -84,6 +89,7 @@ export function playWithReplicas({
   controllers,
   stopAt = () => false,
   onDecision = () => {},
+  onAction = () => {},
   compareEvery = 25,
   restoreEvery = 150,
   wire = { encode: stateToJson, decode: stateFromJson },
@@ -95,6 +101,7 @@ export function playWithReplicas({
   let actions = 0;
   let compared = 0;
   let restores = 0;
+  const digestMs = { whole: 0, brief: 0, states: 0 };
   const recent = [];
 
   const where = () => `turn ${game.state.turn.number} (${game.state.turn.step})`;
@@ -119,7 +126,19 @@ export function playWithReplicas({
   const compare = (copy, label) => {
     const ours = canonical(game.snapshot());
     const theirs = canonical(copy.snapshot());
-    if (JSON.stringify(ours) === JSON.stringify(theirs)) return;
+    if (JSON.stringify(ours) === JSON.stringify(theirs)) {
+      const started = performance.now();
+      const whole = stateDigest(game.state, { events: true });
+      const middle = performance.now();
+      const brief = stateDigest(game.state);
+      digestMs.whole += middle - started;
+      digestMs.brief += performance.now() - middle;
+      digestMs.states += 1;
+      if (whole !== stateDigest(copy.state, { events: true }) || brief !== stateDigest(copy.state)) {
+        throw new Error(`replica check: ${label} is the same as the game after ${actions} actions, ${where()}, and its digest is not`);
+      }
+      return;
+    }
     const lines = differences(ours, theirs).map((line) => `  ${line}`);
     // Where the two logs part, with what led up to it: usually the story.
     const a = ours.eventLog ?? [];
@@ -154,6 +173,7 @@ export function playWithReplicas({
     apply(seeded, "the copy built from the seed", action);
     if (restored !== null) apply(restored, restoredLabel(), action);
     actions += 1;
+    onAction(action, game, actions);
     recent.push(JSON.stringify(action).slice(0, 160));
     if (recent.length > 3) recent.shift();
     if (actions % compareEvery === 0) compareAll();
@@ -168,5 +188,5 @@ export function playWithReplicas({
     }
   }
   compareAll();
-  return { game, copied: { actions, compared, restores } };
+  return { game, copied: { actions, compared, restores, digestMs } };
 }

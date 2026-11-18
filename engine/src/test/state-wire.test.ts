@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 
+import { isSettled } from "../auto-settle.js";
+import { AutomaticController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
@@ -38,14 +40,20 @@ describe("a state sent as text", () => {
   it("carries a real game's state whole, and a game restored from it plays on the same", () => {
     const decks = [ALICE, BOB].map((player) => ({ player, cards: Array(40).fill("Forest") as string[] }));
     const game = Game.create({ seed: 5, decks });
+    // Sixty actions, played as a room plays them: on to the next decision
+    // each time, whoever it waits on passing or answering as little as they
+    // may (a discard at cleanup), so the game really moves on a few turns.
     const keep = (g: Game): void => {
-      for (let i = 0; i < 12 && !g.state.result.over; i += 1) {
-        const holder = g.state.priority.holder;
-        if (holder === null) break;
-        g.dispatch({ type: "pass-priority", player: holder });
+      for (let i = 0; i < 60; i += 1) {
+        g.advanceUntil(isSettled);
+        const asked = g.state.awaiting !== null ? g.state.awaiting.player : g.state.priority.holder;
+        if (g.state.result.over || asked === null) throw new Error("nobody to ask");
+        g.dispatch(new AutomaticController(asked).act(g.controllerView(asked)));
       }
+      g.advanceUntil(isSettled);
     };
     keep(game);
+    expect(game.state.turn.number).toBeGreaterThan(1);
     const text = stateToJson(game.snapshot());
     expect(stateFromJson(text)).toEqual(game.snapshot());
     // The same text again from what was read: nothing lost on the way.

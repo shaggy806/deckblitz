@@ -168,6 +168,10 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `play:situations -- --with "Card" [--scenarios N] [--seed S]`: the situation fuzzer — a card cast
   or activated in many small random boards, seconds a card; the per-card check `verify` runs, and
   each failure prints a one-line replay.
+- `play:browsers [-- --browsers chromium,firefox,webkit,chrome,msedge] [--seeds 1-3] [--serve 4321]`:
+  whole fuzzer games recorded in Node and replayed in each browser, the states' digests compared
+  (`stateDigest`): that a game copied onto another device's browser is the same game. `--serve`
+  leaves the page up for another machine's browser, which reports back.
 - `bot:bench`, `bot:scenarios`, `bot:benchmarks`, `bot:behaviour`, `bot:crackback`, `bot:ab`, `bot:diff`,
   `bot:replay`, `bot:anatomy` (where a decision's time goes, on `data/bot-positions/`), `bot:timings`
   (decision cost in bench games at the live budget): bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
