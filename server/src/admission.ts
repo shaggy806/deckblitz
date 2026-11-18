@@ -5,8 +5,9 @@
  * they know — the rooms they route, and each shard's state and last load —
  * and act on the answer. Main-side: no engine.
  *
- * Only a create is ever refused. A lobby already counts as the game it will
- * become, so joining, starting, a rematch and a tutorial's next step never
+ * Only a create is ever refused. A lobby already counts as the heaviest game
+ * it can still become — every seat a person hasn't taken as a bot — so
+ * joining, adding a bot, starting, a rematch and a tutorial's next step never
  * meet a limit.
  */
 
@@ -44,6 +45,8 @@ export interface RoomRecord {
   readonly shard: number;
   readonly kind: RoomKind;
   readonly stage: RoomStage;
+  /** The most bots it can have thinking (`RoomEvent.bots`). */
+  readonly bots: number;
   readonly ip: string | null;
 }
 
@@ -64,17 +67,33 @@ export const IMPORT_COST = 0.5;
  * isn't. */
 export const SLOW_DELAY_P99_MS = 250;
 
+/** The seats of a full table (`decks.ts`'s `SEATS`, which main can't import:
+ * `admission.test.ts` holds the two equal). */
+export const FULL_TABLE = 4;
+
+/** A game's own share of a room's weight — its rules and its seats' frames —
+ * and each bot's. Four bots and their game come to 1: the all-bot room the
+ * per-shard cap is measured in (`DEPLOYMENT.md`, the load test's knee). */
+export const GAME_WEIGHT = 0.2;
+export const BOT_WEIGHT = 0.2;
+
 /**
- * What a room costs its shard: a lobby counts as the game it will become, so
- * a start is never refused; a tutorial is one human against scripted bots,
- * far cheaper than four v2 bots; a finished game is only a seat board left
- * up. A scenario builder (a developer's tool) and a room built by hand
- * (dev-rooms) cost nothing here.
+ * What a room costs its shard. A game is weighed by its bots, which are
+ * nearly all of it: a bot searches up to a second a decision, where a table of
+ * people costs the engine's few milliseconds a move and 2-3 MB of heap
+ * (measured 2026-11-18: four people at a fifth of an all-bot room is on the
+ * safe side of both). A lobby counts as the heaviest game it can still
+ * become (`bots` is then every seat no person holds), so adding a bot and
+ * starting are never refused. A tutorial is one human against scripted bots,
+ * far cheaper than v2's; a finished game is only a seat board left up. A
+ * scenario builder (a developer's tool) and a room built by hand (dev-rooms)
+ * cost nothing here.
  */
-export function roomWeight(kind: RoomKind, stage: RoomStage): number {
+export function roomWeight(kind: RoomKind, stage: RoomStage, bots: number): number {
   if (kind === "builder" || kind === "adopted") return 0;
   if (stage === "finished") return 0.1;
-  return kind === "tutorial" ? 0.5 : 1;
+  if (kind === "tutorial") return 0.5;
+  return GAME_WEIGHT + BOT_WEIGHT * Math.min(Math.max(bots, 0), FULL_TABLE);
 }
 
 /** The messages that open a room — what admission is asked about — and the
@@ -90,13 +109,25 @@ export function initialStage(kind: RoomKind): RoomStage {
   return kind === "lobby" ? "waiting" : "playing";
 }
 
+/** The bots a create's route counts before its shard says: a lobby nobody has
+ * sat down at yet, so a full table of them. */
+export function initialBots(kind: RoomKind): number {
+  return kind === "lobby" ? FULL_TABLE : 0;
+}
+
 /** Each shard's rooms' weights. A create's route is recorded before it's
  * forwarded, so creates still in flight count too. */
 export function shardLoads(rooms: Iterable<RoomRecord>): Map<number, number> {
   const loads = new Map<number, number>();
-  for (const room of rooms) loads.set(room.shard, (loads.get(room.shard) ?? 0) + roomWeight(room.kind, room.stage));
+  for (const room of rooms) {
+    loads.set(room.shard, (loads.get(room.shard) ?? 0) + roomWeight(room.kind, room.stage, room.bots));
+  }
   return loads;
 }
+
+/** Weights are tenths, fifths and halves, summed as floats: a difference
+ * this small is none. */
+const EPSILON = 1e-9;
 
 /** The rooms `ip` created that are still waiting or playing. */
 export function openRoomsOf(rooms: Iterable<RoomRecord>, ip: string): number {
@@ -140,14 +171,14 @@ export function placeRoom(
 
   const loads = shardLoads(all);
   const perShard = limits.maxRoomsPerShard ?? Infinity;
-  const open = shards.filter((s) => s.up && (loads.get(s.index) ?? 0) < perShard);
+  // Thirty fifths don't sum to exactly 6: a shard within a rounding error of
+  // its cap is full.
+  const open = shards.filter((s) => s.up && perShard - (loads.get(s.index) ?? 0) > EPSILON);
   if (open.length === 0) return { refused: SERVER_FULL };
   const brisk = open.filter((s) => (s.delayP99Ms ?? 0) <= SLOW_DELAY_P99_MS);
   const pool = brisk.length > 0 ? brisk : open;
 
   const cost = (s: ShardCandidate): number => (loads.get(s.index) ?? 0) + (s.index === 0 ? IMPORT_COST : 0);
-  // Weights are tenths and halves: a difference this small is a tie.
-  const EPSILON = 1e-9;
   const better = (a: ShardCandidate, b: ShardCandidate): boolean => {
     const d = cost(a) - cost(b);
     if (Math.abs(d) > EPSILON) return d < 0;

@@ -137,8 +137,13 @@ the shard `up`.
   with more cores set it to the core count (`Environment=UV_THREADPOOL_SIZE=8`).
 - **Caps on opening rooms** (both modes): `MAX_ROOMS_PER_IP` (`--max-rooms-per-ip`, default 6)
   refuses one address its seventh open room; `MAX_ROOMS_PER_SHARD` (`--max-rooms-per-shard`,
-  unset = unlimited) refuses a create once every shard holds that many weighted rooms (a game or
-  lobby 1, a tutorial 0.5, a finished game 0.1). Set the latter from the load test's knee on the
+  unset = unlimited) refuses a create once every shard holds that many weighted rooms. The unit is
+  the load test's room, four bots and their game: a game weighs 0.2 plus 0.2 a bot (since
+  2026-11-18; before, every game and lobby was 1), so a table of four people is a fifth of a room
+  and two people with two bots 0.6; a lobby weighs as the heaviest game it can still become, every
+  seat no person holds counted as a bot (1 with nobody seated, 0.8 with the host alone); a tutorial
+  0.5, a finished game 0.1. A cap of 6 is therefore six all-bot rooms or thirty tables of people
+  (2.5 MB of heap each, measured). Set the latter from the load test's knee on the
   box (`npm run load-test -w server`, with `--status http://127.0.0.1:4010/status.json`, run
   on the box with nobody playing): the stage where the frame-gap median passes +20% over one
   room. **Set to 6 on the 2-vCPU box** (2026-10-18): its one shard passed that between 6 and 8

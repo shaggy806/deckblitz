@@ -782,4 +782,35 @@ describe("the caps on opening rooms (in-process)", () => {
     c.ws.send(JSON.stringify({ type: "join-room", roomId: created.roomId }));
     expect(await c.next()).toMatchObject({ type: "room-joined", roomId: created.roomId });
   });
+
+  it("weighs a game by its bots: two people playing leave room an empty table doesn't", async () => {
+    await serve({ maxRoomsPerShard: 1 });
+    const host = await from();
+    host.ws.send(JSON.stringify({ type: "create-room", hostToken: "h" }));
+    const created = await host.next();
+    if (created.type !== "room-created") throw new Error(`got ${created.type}`);
+    const roomId = created.roomId;
+    // Nobody has sat down: it may yet be a table of bots, a whole room.
+    const other = await from();
+    other.ws.send(JSON.stringify({ type: "create-room" }));
+    expect(await other.next()).toMatchObject({ type: "error", code: "server-full" });
+
+    host.ws.send(JSON.stringify({ type: "join-room", roomId, hostToken: "h" }));
+    host.ws.send(JSON.stringify({ type: "claim-seat", roomId, seat: ALICE, clientToken: "a", ready: true }));
+    const guest = await from();
+    guest.ws.send(JSON.stringify({ type: "join-room", roomId }));
+    guest.ws.send(JSON.stringify({ type: "claim-seat", roomId, seat: BOB, clientToken: "b", ready: true }));
+    let seated = await guest.next();
+    while (seated.type !== "room-joined" || !seated.seats.every((s) => s.claimed)) seated = await guest.next();
+    host.ws.send(JSON.stringify({ type: "start-game", roomId }));
+    let m = await host.next();
+    while (m.type !== "state") m = await host.next();
+
+    // A game with no bot in it is a fifth of a room: another table opens,
+    // and that one, empty, fills the thread again.
+    other.ws.send(JSON.stringify({ type: "create-room" }));
+    expect((await other.next()).type).toBe("room-created");
+    other.ws.send(JSON.stringify({ type: "create-room" }));
+    expect(await other.next()).toMatchObject({ type: "error", code: "server-full" });
+  }, 30_000);
 });

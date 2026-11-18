@@ -410,6 +410,33 @@ describe("rooms on two shards (loopback)", () => {
     expect(await c.next()).toMatchObject({ type: "room-joined", roomId: first });
   });
 
+  it("weighs a room by its bots as its shard reports them: a table of people leaves that shard room", async () => {
+    const h = await serve({ pacing: "immediate" }, { maxRoomsPerShard: 1 });
+    const host = await connect();
+    const guest = await connect();
+    const other = await connect();
+    // Two tables nobody sits at: each may yet be all bots, so both shards
+    // are full.
+    const table = await create(host, { type: "create-room", hostToken: "h" });
+    const idle = await create(other);
+    other.send({ type: "create-room" });
+    expect(await other.next((m) => m.type === "error")).toMatchObject({ code: "server-full" });
+
+    // Two people sit down at one and start: a game with no bot in it.
+    host.send({ type: "join-room", roomId: table, hostToken: "h" });
+    host.send({ type: "claim-seat", roomId: table, seat: ALICE, clientToken: "a", ready: true });
+    guest.send({ type: "join-room", roomId: table });
+    guest.send({ type: "claim-seat", roomId: table, seat: BOB, clientToken: "b", ready: true });
+    await guest.next((m) => m.type === "room-joined" && m.seats.every((s) => s.claimed));
+    host.send({ type: "start-game", roomId: table });
+    await nextState(host);
+
+    // Its shard takes another room; the idle table's is as full as it was.
+    const next = await create(other);
+    expect(h.shardOf(next)).toBe(h.shardOf(table));
+    expect(h.shardOf(next)).not.toBe(h.shardOf(idle));
+  }, 30_000);
+
   it("loads a setup module in each shard before ready, and runs its commands there", async () => {
     const h = await serve({ setup: new URL("./fixtures/shard-setup.ts", import.meta.url).href });
     // Each shard's rooms are routed from its `ready`.

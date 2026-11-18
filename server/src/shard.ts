@@ -244,6 +244,7 @@ export function createShard(
           id: room.id,
           kind: manager.kindOf(room.id) ?? "adopted",
           stage: room instanceof PendingRoom ? "waiting" : room.game.state.result.over ? "finished" : "playing",
+          bots: room instanceof PendingRoom ? room.botsPossible() : room.botsPlaying(),
         })),
       },
       [],

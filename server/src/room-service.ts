@@ -57,6 +57,12 @@ function stageOf(room: Room | PendingRoom): RoomStage {
   return room.game.state.result.over ? "finished" : "playing";
 }
 
+/** A room's bots, as `RoomEvent`s report them: the ones playing, or the most
+ * a waiting table could still seat. */
+function botsOf(room: Room | PendingRoom): number {
+  return room instanceof PendingRoom ? room.botsPossible() : room.botsPlaying();
+}
+
 /** Throws unless `connection` holds `room`'s host role — see `HostRole`. */
 function requireHost(room: Room | PendingRoom, connection: Connection, what: string): void {
   if (!room.isHost(connection)) throw new Error(`only the host can ${what}`);
@@ -127,8 +133,8 @@ export class RoomService {
   private readonly sentArtManifest = new WeakSet<Connection>();
   private readonly artManifests = new WeakMap<Room, readonly ArtManifestEntry[]>();
 
-  /** The stage each room was last reported at, by code. */
-  private readonly stages = new Map<string, RoomStage>();
+  /** The stage and bots each room was last reported with, by code. */
+  private readonly stages = new Map<string, { readonly stage: RoomStage; readonly bots: number }>();
   private readonly reaper: ReturnType<typeof setInterval> | null;
 
   constructor(manager: RoomManager, outbox: ServiceOutbox, options: RoomServerOptions = {}) {
@@ -145,7 +151,7 @@ export class RoomService {
     };
     manager.onRoomRemoved = (id, kind) => {
       this.stages.delete(id);
-      this.outbox.roomChanged?.({ id, kind, stage: "gone" });
+      this.outbox.roomChanged?.({ id, kind, stage: "gone", bots: 0 });
     };
     const { reapIdleMs, reapIntervalMs } = options;
     if (reapIdleMs !== undefined && reapIntervalMs !== undefined) {
@@ -164,12 +170,16 @@ export class RoomService {
     if (this.reaper !== null) clearInterval(this.reaper);
   }
 
-  /** Reports `room`'s stage if it's not the one last reported. */
+  /** Reports `room`'s stage and bots if either isn't what was last reported
+   * (a seat taken or left at a waiting table, a seat handed to a bot or
+   * taken back, a bot's seat out of the game). */
   private noteStage(room: Room | PendingRoom): void {
     const stage = stageOf(room);
-    if (this.stages.get(room.id) === stage) return;
-    this.stages.set(room.id, stage);
-    this.outbox.roomChanged?.({ id: room.id, kind: this.manager.kindOf(room.id) ?? "adopted", stage });
+    const bots = botsOf(room);
+    const last = this.stages.get(room.id);
+    if (last !== undefined && last.stage === stage && last.bots === bots) return;
+    this.stages.set(room.id, { stage, bots });
+    this.outbox.roomChanged?.({ id: room.id, kind: this.manager.kindOf(room.id) ?? "adopted", stage, bots });
   }
 
   /** The `Connection` standing for `conn` in every room it's in. */
@@ -195,7 +205,7 @@ export class RoomService {
     }
     if (roomId !== undefined && this.manager.get(roomId) === undefined) {
       const kind = message.type === "tutorial-create" ? "tutorial" : message.type === "builder-create" ? "builder" : "lobby";
-      this.outbox.roomChanged?.({ id: roomId, kind, stage: "gone" });
+      this.outbox.roomChanged?.({ id: roomId, kind, stage: "gone", bots: 0 });
     }
   }
 

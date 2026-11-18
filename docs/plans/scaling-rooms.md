@@ -211,6 +211,52 @@ the room code travels inside a message (`join-room`), not the socket URL, so not
 route by it: put the room code in the URL, give each box a room-code range, and route in Caddy or
 Cloudflare. Not worth designing further until a single big box is measured full.
 
+## Rooms on a player's device (explored 2026-11-18)
+
+The user's question: could the host's device run a game with other people in it, as it runs a
+solo game (`local-rooms.md`), to take that load off the server? Measured first, on the dev PC (the
+box runs v2 3-4x slower):
+
+- **A table of people costs almost nothing.** Three four-player games played out with no bot
+  search: the engine 7-11 ms and the four seats' frames 5-7 ms a real move, 13-18 ms together.
+  That is some 50-60 ms on the box, 1-2% of its room thread if a table makes a move every few
+  seconds (the pace is a guess). Heap: 2.5 MB a game (24 games at turns 17-29 held at once,
+  134 → 195 MB).
+- **The bots are the cost**: up to a second a decision; an all-bot room was 10% of the box's
+  shard at the old 300 ms budget (`room-shards.md`).
+- **The whole state is small**: 220-420 KB as JSON, 11-23 KB gzipped, 1-2 ms to write or to read.
+  Sending it with every bot decision, or after every move as a standby copy, is cheap.
+
+**Built: the cap weighs a room by its bots** (`admission.ts`'s `roomWeight`). Every game and
+lobby had counted 1 of the box's 6, so a table of four people took the place of four bots. Now a
+game is 0.2 plus 0.2 a bot — the load test's all-bot room still 1, a table of people a fifth of
+it, two people with two bots 0.6 — and a lobby is the heaviest game it can still become, so only
+a create is refused, as before. Thirty tables of people fit the box where six rooms of any kind
+did: 30-60% of its thread and ~75 MB by the numbers above.
+
+**Not built: moving a room's work to a device.** What still fills the box is games with people
+*and* bots. Two shapes:
+
+- **The whole room on the host's device**, the server passing messages between that page and the
+  other players. The room code is the same one a solo game runs, `RoomService` already serves
+  several connections, and the main-to-shard protocol (`shard-protocol.ts`) is already this relay
+  with a worker thread on the far end. Against it: the game stops for everyone when the host's
+  tab closes or their laptop sleeps, and every move takes a second trip through the host. The
+  first has an answer in what exists: the host's worker already saves the room once a second
+  (`SavedLocalRoom`), so sent to the server as well, the server can restore the room on a shard
+  and play on when the host has been gone too long.
+- **Only the bots' searches on a device**, the game staying on the server, which falls back on
+  its own search when the device doesn't answer. Against it: a bot answers 25-45 small decisions
+  between real moves (above), most of them without searching, and each would be a round trip
+  unless the quick answers stay on the server — a cut through `Room.settle` and the bot's own
+  memory.
+
+A player reading hidden cards on their own device is not an objection to either (the user,
+2026-11-18: "players cheating is not a concern in the grand scheme of things"); that was
+`local-rooms.md`'s reason for keeping any room with two people on the server. Neither is
+prototyped, and whether a browser freezes a hidden tab's worker while it hosts is unchecked.
+A table of people alone has nothing worth moving either way.
+
 ## Order and checks
 
 0 → 1 → 2 → 3 → 4; 5 only on need. Each phase re-runs the load harness and compares against the

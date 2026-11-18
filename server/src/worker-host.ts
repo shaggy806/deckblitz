@@ -16,7 +16,7 @@
 import { Worker } from "node:worker_threads";
 import type { ClientMessage } from "protocol";
 // Creates (`CREATES`): main allocates the code and places the room.
-import { CREATES, capKey, initialStage, placeRoom } from "./admission.js";
+import { CREATES, capKey, initialBots, initialStage, placeRoom } from "./admission.js";
 import type { AdmissionLimits, Placement } from "./admission.js";
 import type { ImportSink } from "./import-route.js";
 import { allocateRoomCode } from "./room-code.js";
@@ -113,6 +113,9 @@ interface Route {
   readonly shard: ShardIndex;
   readonly kind: RoomKind;
   stage: RoomStage;
+  /** The most bots it can have thinking (`RoomEvent.bots`), as its shard
+   * last said. */
+  bots: number;
   /** The address that created it, for the per-address cap; `null` if none
    * applies (loopback, a room the shard started with). */
   readonly ip: string | null;
@@ -279,7 +282,7 @@ export class WorkerRoomHost implements RoomHost {
       // Routed before it's forwarded, so whatever the client sends next
       // follows the create to the same shard — and placement counts it
       // while it's in flight.
-      this.routes.set(code, { shard, kind, stage: initialStage(kind), ip });
+      this.routes.set(code, { shard, kind, stage: initialStage(kind), bots: initialBots(kind), ip });
       this.forward(shard, conn, raw, code);
       return;
     }
@@ -513,8 +516,12 @@ export class WorkerRoomHost implements RoomHost {
       if (route?.shard === index) this.routes.delete(event.id);
       return;
     }
-    if (route === undefined) this.routes.set(event.id, { shard: index, kind: event.kind, stage: event.stage, ip: null });
-    else if (route.shard === index) route.stage = event.stage;
+    if (route === undefined) {
+      this.routes.set(event.id, { shard: index, kind: event.kind, stage: event.stage, bots: event.bots, ip: null });
+    } else if (route.shard === index) {
+      route.stage = event.stage;
+      route.bots = event.bots;
+    }
   }
 
   /** A shard ended. Its rooms are gone with it: their routes go, and every

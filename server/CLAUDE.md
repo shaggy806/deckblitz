@@ -33,8 +33,10 @@ that file.
   shard-side, behind `RoomService`. Keep per-connection state in the service, never a module.
 - **Only a create is ever refused** for load (`admission.ts`: `--max-rooms-per-shard`,
   `--max-rooms-per-ip`), and both hosts ask it the same way, so `--shards 0` keeps the same caps.
-  A lobby counts as the game it will become: joins, starts, rematches and tutorial steps never
-  meet a limit.
+  A room is weighed by its bots (`roomWeight`: a game 0.2 and each bot 0.2, so a table of people
+  is a fifth of an all-bot room), told to main in each `RoomEvent`'s `bots`. A lobby counts as the
+  heaviest game it can still become, every seat no person holds as a bot: joins, added seats and
+  bots, starts, rematches and tutorial steps never meet a limit.
 - **The room code runs in a browser too** (solo games, `docs/plans/local-rooms.md`): the rooms, lobbies,
   bots, builder and lessons import values only from `engine/local` and each other — no Node built-in,
   no `ws`, no `engine` barrel, no Node-side module (`test/room-core-imports.test.ts`). The card registry

@@ -778,6 +778,15 @@ export class Room {
       .map((s) => ({ player: s.player, displayName: s.displayName }));
   }
 
+  /** How many seats a bot is playing now — one a player handed over
+   * included, one that has left the game not. What the room is weighed by
+   * (`admission.ts`'s `roomWeight`). */
+  botsPlaying(): number {
+    let n = 0;
+    for (const seat of this.bots.keys()) if (this.game.state.players[seat]?.hasLost !== true) n += 1;
+    return n;
+  }
+
   /** Holds `player`'s seat for `clientToken` with nobody connected to it: a
    * rematch carrying over a player who had dropped. Their token reclaims it on
    * reconnect (`claimSeat`), as after any other disconnect. */

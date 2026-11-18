@@ -171,7 +171,9 @@ export type FromShard =
 ## Placement and admission (`admission.ts`, pure)
 
 - Weights: lobby and playing 1.0 (a lobby is a future game, so `start-game` is never refused),
-  tutorial 0.5, finished 0.1, builder and adopted 0. A shard's cost = its rooms' weights plus
+  tutorial 0.5, finished 0.1, builder and adopted 0. (Since 2026-11-18 a game is weighed by its
+  bots, 0.2 plus 0.2 each, and a lobby by the bots it could still seat: `scaling-rooms.md`, "Rooms
+  on a player's device".) A shard's cost = its rooms' weights plus
   creates in flight. Place on the lowest-cost up shard (ties: lower ELU, then index); skip a shard
   whose delay p99 > 250 ms unless all are; shard 0 carries +0.5 for imports.
 - `--max-rooms-per-shard M` (weighted): a create is refused only when every up shard is full —

@@ -12,7 +12,7 @@ import { RoomService } from "../room-service.js";
 import type { RoomEvent } from "../room-host.js";
 import { Room } from "../room.js";
 import { LEARN_COMMANDER } from "../tutorials/learn-commander.js";
-import { ALICE, BOB } from "../decks.js";
+import { ALICE, BOB, CAROL } from "../decks.js";
 
 function serviceWith(manager: RoomManager, options: ConstructorParameters<typeof RoomService>[2] = {}) {
   const events: RoomEvent[] = [];
@@ -33,27 +33,63 @@ describe("RoomService room events", () => {
     const created = sent.find((s) => s.message.type === "room-created")?.message;
     if (created?.type !== "room-created") throw new Error("no room-created");
     const id = created.roomId;
-    expect(events).toEqual([{ id, kind: "lobby", stage: "waiting" }]);
+    // Nobody seated yet: a full table of seats a bot could take.
+    expect(events).toEqual([{ id, kind: "lobby", stage: "waiting", bots: 4 }]);
 
     service.handle(1, { type: "join-room", roomId: id, hostToken: "host" });
     service.handle(1, { type: "claim-seat", roomId: id, seat: ALICE, clientToken: "a", ready: true });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "waiting", bots: 3 });
+    // A bot in a seat that could already have been one changes nothing.
     service.handle(1, { type: "add-bot", roomId: id, seat: BOB });
+    expect(events).toHaveLength(2);
     service.handle(1, { type: "start-game", roomId: id });
-    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "playing" });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "playing", bots: 1 });
 
     service.handle(1, { type: "dispatch", roomId: id, action: { type: "mulligan", player: ALICE, keep: true } });
     service.handle(1, { type: "concede", roomId: id });
     expect(sent.filter((s) => s.message.type === "error")).toEqual([]);
-    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "finished" });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "finished", bots: 1 });
 
     service.handle(1, { type: "rematch", roomId: id });
-    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "playing" });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "playing", bots: 1 });
 
     // Each change once, however many frames came between.
-    expect(events.map((e) => e.stage)).toEqual(["waiting", "playing", "finished", "playing"]);
+    expect(events.map((e) => e.stage)).toEqual(["waiting", "waiting", "playing", "finished", "playing"]);
 
     manager.remove(id);
-    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "gone" });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "gone", bots: 0 });
+  });
+
+  it("counts the bots a waiting table could seat, then the ones playing", () => {
+    const manager = new RoomManager({ pacing: "immediate" });
+    const { service, events, sent } = serviceWith(manager);
+    service.handle(1, { type: "create-room", hostToken: "host" });
+    const created = sent.find((s) => s.message.type === "room-created")?.message;
+    if (created?.type !== "room-created") throw new Error("no room-created");
+    const id = created.roomId;
+
+    service.handle(1, { type: "join-room", roomId: id, hostToken: "host" });
+    service.handle(1, { type: "claim-seat", roomId: id, seat: ALICE, clientToken: "a", ready: true });
+    expect(events.at(-1)?.bots).toBe(3);
+    // A second person: one fewer seat a bot could take. A seat added to the
+    // table is one the count already allowed for.
+    service.handle(2, { type: "join-room", roomId: id });
+    service.handle(2, { type: "claim-seat", roomId: id, seat: BOB, clientToken: "b", ready: true });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "waiting", bots: 2 });
+    service.handle(1, { type: "add-seat", roomId: id });
+    service.handle(1, { type: "remove-seat", roomId: id, seat: CAROL });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "waiting", bots: 2 });
+
+    // Two people and nobody else: a game with no bot in it.
+    service.handle(1, { type: "start-game", roomId: id });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "playing", bots: 0 });
+
+    // A seat handed to a bot is a bot playing; taken back, it isn't.
+    service.handle(2, { type: "bot-takeover", roomId: id, on: true });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "playing", bots: 1 });
+    service.handle(2, { type: "bot-takeover", roomId: id, on: false });
+    expect(events.at(-1)).toEqual({ id, kind: "lobby", stage: "playing", bots: 0 });
+    expect(sent.filter((s) => s.message.type === "error")).toEqual([]);
   });
 
   it("reports a tutorial, a builder and an adopted room by kind", () => {
@@ -71,9 +107,10 @@ describe("RoomService room events", () => {
     });
     manager.adopt(new Room("DEVRM", game, { pacing: "immediate" }));
     expect(events).toEqual([
-      { id: tutorial, kind: "tutorial", stage: "playing" },
-      { id: builder, kind: "builder", stage: "playing" },
-      { id: "DEVRM", kind: "adopted", stage: "playing" },
+      // The lesson's scripted opponent is the tutorial's one bot.
+      { id: tutorial, kind: "tutorial", stage: "playing", bots: 1 },
+      { id: builder, kind: "builder", stage: "playing", bots: 0 },
+      { id: "DEVRM", kind: "adopted", stage: "playing", bots: 0 },
     ]);
   });
 
@@ -87,7 +124,7 @@ describe("RoomService room events", () => {
       const first = manager.createPending(2, { seed: 1 });
       vi.advanceTimersByTime(1_000);
       expect(manager.get(first.id)).toBeUndefined();
-      expect(events.at(-1)).toEqual({ id: first.id, kind: "lobby", stage: "gone" });
+      expect(events.at(-1)).toEqual({ id: first.id, kind: "lobby", stage: "gone", bots: 0 });
 
       service.stop();
       const second = manager.createPending(2, { seed: 1 });

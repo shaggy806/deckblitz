@@ -27,12 +27,17 @@ export type RoomKind = "lobby" | "tutorial" | "builder" | "adopted";
  * game over. */
 export type RoomStage = "waiting" | "playing" | "finished";
 
-/** A room appearing, changing stage, or going (`gone`: reaped, removed, or a
- * create that was refused). */
+/** A room appearing, changing stage or bots, or going (`gone`: reaped,
+ * removed, or a create that was refused). */
 export interface RoomEvent {
   readonly id: string;
   readonly kind: RoomKind;
   readonly stage: RoomStage | "gone";
+  /** The most bots the room can have thinking, which is what it costs
+   * (`admission.ts`'s `roomWeight`): in a game, the seats a bot is playing; in
+   * a waiting room, a full table less the people seated, since any other seat
+   * may yet be given a bot. 0 for `gone`. */
+  readonly bots: number;
 }
 
 /** One client socket as a host sees it. */

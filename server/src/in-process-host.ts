@@ -8,7 +8,7 @@
 
 import { cardRegistry } from "./card-registry.js";
 import type { ClientMessage, ServerMessage } from "protocol";
-import { CREATES, capKey, initialStage, placeRoom } from "./admission.js";
+import { CREATES, capKey, initialBots, initialStage, placeRoom } from "./admission.js";
 import type { AdmissionLimits, RoomRecord, ShardCandidate } from "./admission.js";
 import type { ClientLink, ConnId, RoomEvent, RoomHost } from "./room-host.js";
 import { allocateRoomCode } from "./room-code.js";
@@ -101,7 +101,7 @@ export class InProcessRoomHost implements RoomHost {
     }
     const manager = this.service.manager;
     const code = allocateRoomCode((c) => this.rooms.has(c) || manager.get(c) !== undefined);
-    this.rooms.set(code, { shard: 0, kind, stage: initialStage(kind), ip });
+    this.rooms.set(code, { shard: 0, kind, stage: initialStage(kind), bots: initialBots(kind), ip });
     this.service.handle(link.id, message, code);
   }
 
@@ -111,7 +111,7 @@ export class InProcessRoomHost implements RoomHost {
       return;
     }
     const room = this.rooms.get(event.id);
-    this.rooms.set(event.id, { shard: 0, kind: event.kind, stage: event.stage, ip: room?.ip ?? null });
+    this.rooms.set(event.id, { shard: 0, kind: event.kind, stage: event.stage, bots: event.bots, ip: room?.ip ?? null });
   }
 
   close(link: ClientLink): void {

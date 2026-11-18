@@ -290,6 +290,18 @@ export class PendingRoom {
     return this.seats.filter((s) => !s.isBot);
   }
 
+  /**
+   * The most bots the game this table starts could seat: a full table less
+   * the people sitting at it. Every other seat — a bot's, an open one, one
+   * the host may yet add — can be a bot's by the time it starts. What the
+   * room is weighed by while it waits (`admission.ts`'s `roomWeight`), so
+   * that a seat or a bot added to a table never makes it heavier: only a
+   * person leaving their seat does.
+   */
+  botsPossible(): number {
+    return SEATS.length - this.seats.filter((s) => !s.isBot && s.clientToken !== null).length;
+  }
+
   private hostConnection(): Connection | null {
     return this.host.current(this.humanSeats());
   }
