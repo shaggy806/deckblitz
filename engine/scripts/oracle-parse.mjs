@@ -5671,6 +5671,20 @@ export function parseSentence(sentence, ctx) {
         amount: numberOf(m[1]),
       };
     }
+    // "Choose a suspended card you own and remove that many time counters
+    // from it" (Amy Pond): chosen as it resolves, not targeted.
+    if ((m = re(`choose a suspended card you own and remove (${N}|that many) time counters? from it`).exec(s))) {
+      return {
+        kind: "look-and-choose",
+        zone: "exile",
+        min: 1,
+        max: 1,
+        filter: { ownedBy: "you", suspended: true },
+        destination: "stay",
+        leftover: "stay",
+        then: { kind: "remove-counter", target: 0, counter: "time", amount: m[1] === "that many" ? { triggerValue: true } : numberOf(m[1]) },
+      };
+    }
     if ((m = re(`remove ${N} time counters? from each permanent and each suspended card`).exec(s))) {
       return { kind: "remove-counter-all", filter: {}, counter: "time", amount: numberOf(m[1]), andSuspended: true };
     }
@@ -17422,6 +17436,13 @@ const containsUndefined = (v) =>
 /** The printed (not normalized) sentence, for `text` and TODO comments. */
 const printed = (line) => stripReminder(line);
 
+/** A partner-family ability line read into `out.pairing`: one, or a list of
+ * a card that prints two (Amy Pond: "Partner with" and Doctor's companion,
+ * rule 702.124g). */
+function addPairing(out, pairing) {
+  out.pairing = out.pairing === undefined ? pairing : [...[out.pairing].flat(), pairing];
+}
+
 /**
  * A whole face. Returns plain definition data — `keywords`, `pairing`,
  * `targets`/`effect` (a spell's), `castModal`, `activated`, `triggered`,
@@ -17798,16 +17819,16 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
-    if (line === "Partner") { out.pairing = { kind: "partner" }; continue; }
+    if (line === "Partner") { addPairing(out, { kind: "partner" }); continue; }
     if ((m = /^Partner with (.+)$/.exec(line))) {
-      out.pairing = { kind: "partner-with", name: m[1] };
+      addPairing(out, { kind: "partner-with", name: m[1] });
       out.triggered.push(partnerWithAbility(m[1]));
       continue;
     }
-    if ((m = /^Partner—(.+)$/.exec(line))) { out.pairing = { kind: "partner-group", group: m[1] }; continue; }
-    if (line === "Friends forever") { out.pairing = { kind: "partner-group", group: "Friends forever" }; continue; }
-    if (line === "Choose a Background") { out.pairing = { kind: "choose-a-background" }; continue; }
-    if (line === "Doctor's companion") { out.pairing = { kind: "doctors-companion" }; continue; }
+    if ((m = /^Partner—(.+)$/.exec(line))) { addPairing(out, { kind: "partner-group", group: m[1] }); continue; }
+    if (line === "Friends forever") { addPairing(out, { kind: "partner-group", group: "Friends forever" }); continue; }
+    if (line === "Choose a Background") { addPairing(out, { kind: "choose-a-background" }); continue; }
+    if (line === "Doctor's companion") { addPairing(out, { kind: "doctors-companion" }); continue; }
     if ((m = /^Ward ((?:\{[0-9WUBRGC]+\})+)$/.exec(line))) { out.triggered.push(wardAbility({ mana: m[1] })); continue; }
     if ((m = /^Ward—Pay (\d+) life\.$/.exec(line))) { out.triggered.push(wardAbility({ payLife: Number(m[1]) })); continue; }
     // "Ward—Collect evidence 4" (Axebane Ferox): exiling cards with that much

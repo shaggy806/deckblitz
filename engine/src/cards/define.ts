@@ -6455,11 +6455,15 @@ export interface CardDefinition {
    * (`xCost.minXByTargetCount`: at least 1 each).
    */
   readonly divided: { readonly total: EffectAmount; readonly slot: number; readonly of?: string; readonly x?: true } | null;
-  /** The partner-family ability that lets this card be one of *two*
-   * commanders (rule 702.124), or `null` for a card that can only command
-   * alone. A deckbuilding rule, read by `deck-validation.ts`'s
-   * `canPairCommanders` and nothing in play. See {@link CommanderPairing}. */
-  readonly pairing: CommanderPairing | null;
+  /** The partner-family abilities that let this card be one of *two*
+   * commanders (rule 702.124), as printed, or none for a card that can only
+   * command alone. Nearly always one; Amy Pond has two ("Partner with Rory
+   * Williams" and Doctor's companion), of which a deck uses either (rule
+   * 702.124g: "you may choose which one to use … but you can't use both").
+   * A deckbuilding rule, read by `deck-validation.ts`'s `canPairCommanders`
+   * and nothing in play. Authored as `pairing`, one or a list. See
+   * {@link CommanderPairing}. */
+  readonly pairings: readonly CommanderPairing[];
   /** "[This card] can be your commander." (rule 903.3a) — what lets a
    * legendary card that is neither a creature, a Vehicle nor a Spacecraft
    * with power/toughness (a planeswalker, say) command a deck. A
@@ -6705,7 +6709,7 @@ const PRINTED_ABILITY: {
   prepareSpellOnly: false,
   split: false,
   divided: false,
-  pairing: (def) => def.pairing !== null,
+  pairings: (def) => def.pairings.length > 0,
   canBeCommander: (def) => def.canBeCommander,
   deckCopies: (def) => def.deckCopies !== null,
   rulebreaker: (def) => def.rulebreaker !== null,
@@ -7058,7 +7062,9 @@ interface CardDraft {
   omen?: boolean;
   prepareSpell?: string;
   prepareSpellOnly?: boolean;
-  pairing?: CommanderPairing;
+  /** Its partner-family ability, or both of a card that prints two (Amy
+   * Pond) — `CardDefinition.pairings`. */
+  pairing?: CommanderPairing | readonly CommanderPairing[];
   canBeCommander?: boolean;
   deckCopies?: "any" | number;
   rulebreaker?: Rulebreaker;
@@ -7359,7 +7365,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
     prepareSpellOnly: draft.prepareSpellOnly ?? false,
     split: draft.split ?? false,
     divided: draft.divided ?? null,
-    pairing: draft.pairing ?? null,
+    pairings: draft.pairing === undefined ? [] : "kind" in draft.pairing ? [draft.pairing] : draft.pairing,
     canBeCommander: draft.canBeCommander ?? false,
     deckCopies: draft.deckCopies ?? null,
     rulebreaker: draft.rulebreaker ?? null,

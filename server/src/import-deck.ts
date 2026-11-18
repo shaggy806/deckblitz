@@ -984,7 +984,8 @@ export function commanderCandidates(
       : c.found && /\blegendary\b/i.test(front(c)) && /\bcreature\b/i.test(front(c)),
   );
 
-  /** What a card brings to a pairing (rule 702.124), as far as is known. */
+  /** What a card brings to a pairing (rule 702.124), as far as is known: one
+   * of these per partner ability (Amy Pond has two), or one with no family. */
   interface Pairing {
     readonly name: string;
     readonly family: "partner" | "partner-with" | "partner-group" | "choose-a-background" | "doctors-companion" | null;
@@ -994,20 +995,23 @@ export function commanderCandidates(
     readonly background: boolean;
     readonly doctor: boolean;
   }
-  const pairingOf = (c: ImportedCardReport): Pairing => {
+  const pairingOf = (c: ImportedCardReport): readonly Pairing[] => {
     if (has(c.name)) {
       const def = registry.get(c.name);
-      const p = def.pairing;
-      return {
+      const known = {
         name: c.name,
-        family: p?.kind ?? null,
-        detail: p?.kind === "partner-with" ? p.name : p?.kind === "partner-group" ? p.group : undefined,
         background: isBackground(def),
         doctor: def.subtypes.includes("Time Lord") && def.subtypes.includes("Doctor"),
       };
+      if (def.pairings.length === 0) return [{ ...known, family: null, detail: undefined }];
+      return def.pairings.map((p) => ({
+        ...known,
+        family: p.kind,
+        detail: p.kind === "partner-with" ? p.name : p.kind === "partner-group" ? p.group : undefined,
+      }));
     }
     const keywords = keywordsOf(c.name).map((k) => k.toLowerCase());
-    return {
+    return [{
       name: c.name,
       family: keywords.includes("partner with")
         ? "partner-with"
@@ -1021,7 +1025,7 @@ export function commanderCandidates(
       detail: undefined,
       background: /\bbackground\b/i.test(front(c)),
       doctor: /\btime lord doctor\b/i.test(front(c)),
-    };
+    }];
   };
   /** Does `a`'s ability let `b` stand beside it, one of them unknown to the
    * pool? Scryfall files "Partner—[text]" and "Friends forever" under
@@ -1047,12 +1051,14 @@ export function commanderCandidates(
         return false;
     }
   };
-  const mayPair = (a: Pairing, b: Pairing): boolean =>
-    has(a.name) && has(b.name) ? canPairCommanders(registry, a.name, b.name) : lets(a, b) || lets(b, a);
+  const mayPair = (as: readonly Pairing[], bs: readonly Pairing[]): boolean =>
+    has(as[0].name) && has(bs[0].name)
+      ? canPairCommanders(registry, as[0].name, bs[0].name)
+      : as.some((a) => bs.some((b) => lets(a, b) || lets(b, a)));
 
   const pairings = new Map(cards.map((c) => [c, pairingOf(c)]));
   // What may stand beside a lead: another lead, or a Background.
-  const partners = cards.filter((c) => leads.includes(c) || (c.found && pairings.get(c)!.background));
+  const partners = cards.filter((c) => leads.includes(c) || (c.found && pairings.get(c)![0].background));
   return leads.map((c) => ({
     name: c.name,
     implemented: c.implemented,

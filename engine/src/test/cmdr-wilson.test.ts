@@ -47,7 +47,7 @@ describe("Wilson, Refined Grizzly", () => {
     expect([def.power, def.toughness]).toEqual([2, 2]);
     expect(def.cantBeCountered).toBe(true);
     expect(def.keywords).toEqual(["reach", "vigilance", "trample"]);
-    expect(def.pairing).toEqual({ kind: "choose-a-background" });
+    expect(def.pairings).toEqual([{ kind: "choose-a-background" }]);
     expect(def.triggered.map((t) => t.effect)).toEqual([{ kind: "ward", cost: { mana: "{2}" } }]);
     expect(identityString(colorIdentityOf(def))).toBe("G");
   });

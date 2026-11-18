@@ -1216,4 +1216,21 @@ describe("commanderCandidates", () => {
     expect(pairs["Zzyx Loner"]).toEqual([]);
     expect(pairs["Krenko, Mob Boss"]).toEqual([]);
   });
+
+  it("pairs a pool card with two partner abilities through either (rule 702.124g)", () => {
+    const candidates = commanderCandidates(
+      [
+        row("Amy Pond"),
+        row("Rory Williams"),
+        // Not in the pool: its type line says it's a Doctor.
+        row("Zzyx Doctor", { typeLine: "Legendary Creature — Time Lord Doctor" }),
+        row("Thrasios, Triton Hero"),
+      ],
+      registry,
+    );
+    const pairs = Object.fromEntries(candidates.map((c) => [c.name, c.pairsWith]));
+    expect(pairs["Amy Pond"]).toEqual(["Rory Williams", "Zzyx Doctor"]);
+    expect(pairs["Rory Williams"]).toEqual(["Amy Pond"]);
+    expect(pairs["Zzyx Doctor"]).toEqual(["Amy Pond"]);
+  });
 });

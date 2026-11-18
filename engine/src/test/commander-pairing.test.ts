@@ -92,7 +92,7 @@ const deckOf = (commanders: readonly string[]) =>
   );
 
 describe("pool Partner commanders (rule 702.124)", () => {
-  const partners = POOL_CARDS.filter((c) => c.pairing?.kind === "partner").map((c) => c.name);
+  const partners = POOL_CARDS.filter((c) => c.pairings.some((p) => p.kind === "partner")).map((c) => c.name);
 
   it("every one pairs with every other", () => {
     expect(partners.length).toBeGreaterThanOrEqual(8);
@@ -107,19 +107,17 @@ describe("pool Partner commanders (rule 702.124)", () => {
   // `pairing` replaced a scan of the rules text for "partner"; this keeps the
   // declared field and the printed line from drifting apart.
   it("declare exactly the pairing their rules text prints", () => {
+    // A card may print two (Amy Pond: "Partner with" and Doctor's companion).
+    const LINES = [
+      [/^Partner \(/m, "partner"],
+      [/^Partner with /m, "partner-with"],
+      [/^Partner—/m, "partner-group"],
+      [/^Choose a Background\b/m, "choose-a-background"],
+      [/^Doctor's companion\b/m, "doctors-companion"],
+    ] as const;
     for (const card of POOL_CARDS) {
-      const printed = /^Partner \(/m.test(card.text)
-        ? "partner"
-        : /^Partner with /m.test(card.text)
-          ? "partner-with"
-          : /^Partner—/m.test(card.text)
-            ? "partner-group"
-            : /^Choose a Background\b/m.test(card.text)
-              ? "choose-a-background"
-              : /^Doctor's companion\b/m.test(card.text)
-                ? "doctors-companion"
-                : undefined;
-      expect(card.pairing?.kind, card.name).toBe(printed);
+      const printed = LINES.filter(([line]) => line.test(card.text)).map(([, kind]) => kind);
+      expect(card.pairings.map((p) => p.kind).sort(), card.name).toEqual([...printed].sort());
     }
   });
 

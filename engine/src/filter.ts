@@ -2355,10 +2355,10 @@ const CARD_KEYWORD_READS = {
   // "Partner" or "partner with [name]", not the other partner abilities —
   // friends forever, choose a Background and the rest (rule 702.124f; Akroma,
   // Vision of Ixidor's ruling).
-  partner: (def) => def.pairing?.kind === "partner" || def.pairing?.kind === "partner-with",
+  partner: (def) => def.pairings.some((p) => p.kind === "partner" || p.kind === "partner-with"),
   // Doctor's companion (rule 702.124m), another partner ability — Rose
   // Noble's "a creature spell with doctor's companion".
-  "doctors-companion": (def) => def.pairing?.kind === "doctors-companion",
+  "doctors-companion": (def) => def.pairings.some((p) => p.kind === "doctors-companion"),
   // Devoid (rule 702.114a) is authored as its colours alone (`colors: []`), so
   // its printed line is what tells a spell with devoid from any other
   // colorless one (Corrupted Crossroads's ruling).

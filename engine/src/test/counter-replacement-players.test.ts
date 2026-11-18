@@ -328,6 +328,6 @@ describe("Lae'zel, Vlaakith's Champion", () => {
   it("is a commander that chooses a Background", () => {
     const { game } = table();
     const laezel = spawn(game, "Lae'zel, Vlaakith's Champion");
-    expect(game.registry.get(game.state.objects[laezel].cardName).pairing).toEqual({ kind: "choose-a-background" });
+    expect(game.registry.get(game.state.objects[laezel].cardName).pairings).toEqual([{ kind: "choose-a-background" }]);
   });
 });

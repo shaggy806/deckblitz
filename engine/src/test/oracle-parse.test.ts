@@ -20295,6 +20295,29 @@ describe("read ahead given to Sagas", () => {
   });
 });
 
+describe("two partner abilities, and time counters off a chosen suspended card", () => {
+  it("reads Amy Pond whole: Partner with, Doctor's companion and her combat damage", () => {
+    const face = parseFace({
+      name: "Amy Pond",
+      type_line: "Legendary Creature — Human",
+      oracle_text:
+        "Partner with Rory Williams (When this creature enters, target player may put Rory into their hand from their library, then shuffle.)\nWhenever Amy Pond deals combat damage to a player, choose a suspended card you own and remove that many time counters from it.\nDoctor's companion (You can have two commanders if the other is the Doctor.)",
+    } as never) as unknown as { triggered: Record<string, unknown>[]; pairing: unknown; complete: boolean };
+    expect(face.pairing).toEqual([{ kind: "partner-with", name: "Rory Williams" }, { kind: "doctors-companion" }]);
+    expect(face.triggered[1]).toMatchObject({
+      trigger: { on: "deals-combat-damage-to-player", who: "self" },
+      effect: {
+        kind: "look-and-choose",
+        zone: "exile",
+        filter: { ownedBy: "you", suspended: true },
+        destination: "stay",
+        then: { kind: "remove-counter", target: 0, counter: "time", amount: { triggerValue: true } },
+      },
+    });
+    expect(face.complete).toBe(true);
+  });
+});
+
 describe("a delayed whenever about the defending player", () => {
   it("reads Nuka-Nuke Launcher's attack trigger", () => {
     const face = parseFace({

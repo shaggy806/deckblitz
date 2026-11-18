@@ -12724,6 +12724,7 @@ export class Game {
       ...(awaiting.leftoverCounters !== undefined ? { leftoverCounters: awaiting.leftoverCounters } : {}),
       ...(awaiting.thenSource !== undefined ? { thenSource: awaiting.thenSource } : {}),
       ...(awaiting.thenX !== undefined ? { thenX: awaiting.thenX } : {}),
+      ...(awaiting.thenTriggerValue !== undefined ? { thenTriggerValue: awaiting.thenTriggerValue } : {}),
       ...(awaiting.thenSourceStint !== undefined ? { thenSourceStint: awaiting.thenSourceStint } : {}),
       // "May reveal a land card and/or an instant or sorcery card" (Explore
       // the Vastlands): what the second choice takes is shown too.
@@ -13318,7 +13319,7 @@ export class Game {
         player,
         seen.map((id) => ({ kind: "object", object: id }) as const),
         awaiting.thenX ?? 0,
-        0,
+        awaiting.thenTriggerValue ?? 0,
         undefined,
         1,
         0,
@@ -47096,6 +47097,8 @@ controlledBy,
                 effect: then,
                 source,
                 x,
+                // "Remove that many time counters from it" (Amy Pond).
+                ...(triggerValue !== 0 ? { triggerValue } : {}),
                 ...(refs.source !== undefined ? { sourceStint: refs.source } : {}),
                 // "That player" (a `for-each-player`'s) stays them in the `then`.
                 ...(refs.player !== undefined ? { player: refs.player } : {}),
@@ -47167,7 +47170,14 @@ controlledBy,
     leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
-    then?: { effect: EffectSpec | undefined; source: ObjectId; x: number; sourceStint?: number; player?: PlayerId },
+    then?: {
+      effect: EffectSpec | undefined;
+      source: ObjectId;
+      x: number;
+      sourceStint?: number;
+      player?: PlayerId;
+      triggerValue?: number;
+    },
     reveal: boolean | "chosen" = false,
     leftoverIf?: LookAndChooseLeftoverIf,
     secondPick?: ZoneSecondPick,
@@ -47268,6 +47278,7 @@ controlledBy,
         ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
         ...(then?.effect !== undefined ? { then: then.effect } : {}),
         ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
+        ...(then?.triggerValue !== undefined ? { thenTriggerValue: then.triggerValue } : {}),
         ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
         ...(thenAlways && then?.effect !== undefined ? { thenAlways: true as const } : {}),
       };
@@ -47435,6 +47446,7 @@ controlledBy,
       ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
       ...(then?.effect !== undefined ? { then: then.effect } : {}),
       ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
+      ...(then?.triggerValue !== undefined ? { thenTriggerValue: then.triggerValue } : {}),
       ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
       ...(then?.player !== undefined ? { thenPlayer: then.player } : {}),
       ...(thenAlways && then?.effect !== undefined ? { thenAlways: true as const } : {}),

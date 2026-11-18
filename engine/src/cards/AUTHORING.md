@@ -459,7 +459,7 @@ from the same link.
 | `countersPersistAcrossZones` | `boolean` | "Counters remain on ~ as it moves to any zone other than a player's hand or library" (Skullbriar, the Walking Grave). `moveObject` keeps `counters` on every other move (graveyard, exile, command zone, stack, and back onto the battlefield, where enters-with-counters adds to them); everything else rule 400.7 resets still resets. Read off the object as it leaves, so a copy of the card keeps them and a permanent that has lost its abilities doesn't. Counters apply to P/T in every zone (layer 7c), so a grown card is that size in the graveyard too. |
 | `revealsOwnLibraryTop` | `boolean` | play with your top card revealed (Oracle of Mul Daya) |
 | `looksAtOwnLibraryTop` | `boolean` | "You may look at the top card of your library any time" (Glarb, Calamity's Augur; rule 401.5): while this permanent is on the battlefield with its abilities, `viewFor` shows its controller their own top card — in their view only, where `revealsOwnLibraryTop` shows it to everyone. Goes with a `mayPlay` static (`from: "library-top"`, §6), which is what lets them do something with it. Held only sometimes, it's a static instead, `visibility: { looksAtOwnLibraryTop: true }` with a `condition`: Case of the Locked Hothouse's "Solved —", Ranger Class's level 3. |
-| `pairing` | `CommanderPairing` | the partner-family ability that lets this card be one of **two** commanders (rule 702.124) — §12. Never inferred from `text`. |
+| `pairing` | `CommanderPairing` or a list | the partner-family ability that lets this card be one of **two** commanders (rule 702.124), or both of a card printing two (Amy Pond) — §12. Read as the definition's `pairings`. Never inferred from `text`. |
 | `canBeCommander` | `boolean` | "~ can be your commander." (rule 903.3a) — how a legendary card that isn't a creature, Vehicle or Spacecraft with P/T (a planeswalker) commands a deck — §12. Never inferred from `text`; `pool.test.ts` checks the two agree. |
 | `deckCopies` | `"any" \| number` | "A deck can have any number of cards named ~." (`"any"`: Rat Colony) or "A deck can have up to seven cards named ~." (`7`: Seven Dwarves) — the card's own exception to the copy limit (rules 100.2a, 903.5b; the card wins, 101.1), read by `deck-validation.ts`'s `copiesAllowed`, and by nothing in play. |
 | `rulebreaker` | `Rulebreaker` | "Rulebreaker — A deck with this commander can have …" (Mystery Booster Commander Edition): `anyIdentity` lists the cards allowed of any colour identity, each a `RulebreakerCards` that must have every type, supertype and subtype given and at least `minManaValue` ("Angel cards": `{ subtypes: ["Angel"] }`; "any basic land cards": `{ supertypes: ["basic"], types: ["land"] }`); `extraColorFor: ["instant", "sorcery"]` is Tolabow's one extra colour of the deck's choice; `noMaximumSize: true` is Whtz's. Read by `deck-validation.ts` (`fitsDeckIdentity`, the deck builder's identity filter too), and by nothing in play. Singleton still holds. |
@@ -8315,6 +8315,11 @@ vocabulary before adding one back.
   - `{ kind: "doctors-companion" }` — "Doctor's companion": pairs with a
     legendary creature whose subtypes are exactly `Time Lord` and `Doctor`,
     which needs no `pairing` of its own.
+  - **Two of them** on one card: `pairing` takes a list, and the deck uses
+    whichever pairs, never both (rule 702.124g) — `amy-pond.ts`'s
+    `[{ kind: "partner-with", name: "Rory Williams" }, { kind:
+    "doctors-companion" }]`. The definition holds them as `pairings`, a list
+    every card has (empty for none).
 
 ---
 

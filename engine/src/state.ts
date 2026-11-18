@@ -4238,6 +4238,10 @@ export type AwaitingDecision =
       readonly then?: EffectSpec;
       readonly thenSource?: ObjectId;
       readonly thenX?: number;
+      /** The resolving trigger's "that many" (`{ triggerValue: true }`), for
+       * a `then` that reads it — Amy Pond's "choose a suspended card you own
+       * and remove that many time counters from it". */
+      readonly thenTriggerValue?: number;
       /** The battlefield stint of `thenSource` the resolution referred to
        * (`LastKnownRefs.source`), so a `then` reading the source after it has
        * left reads it as it last was there (rule 608.2h — Caustic Bronco's

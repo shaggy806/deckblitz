@@ -124,7 +124,7 @@ describe("the card catalog", () => {
   });
 
   it("pairs commanders as the definitions do", () => {
-    const partners = POOL_CARDS.filter((def) => def.pairing !== null || def.subtypes.includes("Background")).map((def) => def.name);
+    const partners = POOL_CARDS.filter((def) => def.pairings.length > 0 || def.subtypes.includes("Background")).map((def) => def.name);
     expect(partners.length).toBeGreaterThan(50);
     let pairs = 0;
     const wrong: string[] = [];

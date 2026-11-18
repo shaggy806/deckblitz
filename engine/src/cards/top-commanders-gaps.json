@@ -3013,7 +3013,8 @@
   "effect:reselect-attack-target-chosen-player",
   "target:battle-or-opponent",
   "static:must-be-blocked-by-two-or-more",
-  "static:player-must-attack-with-a-creature"
+  "static:player-must-attack-with-a-creature",
+  "mechanic:two-pairing-abilities"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

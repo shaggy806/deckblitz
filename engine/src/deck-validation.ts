@@ -18,7 +18,7 @@ import { manaValue, parseManaCost } from "./mana.js";
 import type { Color } from "./mana.js";
 import { hasSubtype, isCreatureType } from "./subtypes.js";
 import type { CardDefinition, CardRegistry } from "./cards.js";
-import type { Rulebreaker, RulebreakerCards } from "./cards/define.js";
+import type { CommanderPairing, Rulebreaker, RulebreakerCards } from "./cards/define.js";
 
 export interface DeckToValidate {
   /** One or two commander card names (two = Partner / Background). */
@@ -120,10 +120,8 @@ function isLoneDoctor(def: CardDefinition): boolean {
   );
 }
 
-/** How a pairing reads in a violation — the ability as printed. */
-function pairingName(def: CardDefinition): string {
-  const p = def.pairing;
-  if (p === null) return "no partner ability";
+/** How one pairing ability reads in a violation — as printed. */
+function abilityName(p: CommanderPairing): string {
   switch (p.kind) {
     case "partner":
       return "Partner";
@@ -138,24 +136,49 @@ function pairingName(def: CardDefinition): string {
   }
 }
 
-/** Does `a`'s pairing ability, on its own, let `b` be its partner? The
- * one-directional half of {@link pairingProblem}. */
-function pairsWith(a: CardDefinition, b: CardDefinition): boolean {
-  const p = a.pairing;
-  const q = b.pairing;
-  if (p === null) return false;
+/** How a card's pairing reads in a violation: its abilities as printed. */
+function pairingName(def: CardDefinition): string {
+  return def.pairings.length === 0 ? "no partner ability" : def.pairings.map(abilityName).join(" or ");
+}
+
+/** What the one card `p` pairs with is, when the ability names it — a "Partner
+ * with" card's partner, a Background, a Doctor — or `null` for one that
+ * pairs with any card sharing it (Partner, Partner—[text]). */
+function onlyPairsWith(p: CommanderPairing): string | null {
+  switch (p.kind) {
+    case "partner-with":
+      return `"${p.name}"`;
+    case "choose-a-background":
+      return "a Background";
+    case "doctors-companion":
+      return "a Time Lord Doctor";
+    case "partner":
+    case "partner-group":
+      return null;
+  }
+}
+
+/** Does `a`'s pairing ability `p`, on its own, let `b` be its partner? */
+function abilityPairsWith(p: CommanderPairing, a: CardDefinition, b: CardDefinition): boolean {
   switch (p.kind) {
     case "partner":
-      return q?.kind === "partner";
+      return b.pairings.some((q) => q.kind === "partner");
     case "partner-with":
-      return q?.kind === "partner-with" && p.name === b.name && q.name === a.name;
+      return p.name === b.name && b.pairings.some((q) => q.kind === "partner-with" && q.name === a.name);
     case "partner-group":
-      return q?.kind === "partner-group" && q.group === p.group;
+      return b.pairings.some((q) => q.kind === "partner-group" && q.group === p.group);
     case "choose-a-background":
       return isBackground(b);
     case "doctors-companion":
       return isLoneDoctor(b);
   }
+}
+
+/** Does one of `a`'s pairing abilities let `b` be its partner? The
+ * one-directional half of {@link pairingProblem}. A card with two uses
+ * whichever pairs (rule 702.124g), never both at once. */
+function pairsWith(a: CardDefinition, b: CardDefinition): boolean {
+  return a.pairings.some((p) => abilityPairsWith(p, a, b));
 }
 
 /**
@@ -174,25 +197,27 @@ export function pairingProblem(registry: CardRegistry, a: string, b: string): st
   const da = registry.get(a);
   const db = registry.get(b);
   if (pairsWith(da, db) || pairsWith(db, da)) return null;
-  const pa = da.pairing;
-  const pb = db.pairing;
-  for (const [self, other, p] of [
-    [a, b, pa],
-    [b, a, pb],
-  ] as const) {
-    if (p?.kind !== "partner-with") continue;
-    return p.name === other
-      ? `${cant}: "${other}" doesn't have "Partner with ${self}"`
-      : `${cant}: "${self}" can only be paired with "${p.name}"`;
+  const sides = [
+    [a, b, da],
+    [b, a, db],
+  ] as const;
+  for (const [self, other, def] of sides) {
+    if (def.pairings.some((p) => p.kind === "partner-with" && p.name === other)) {
+      return `${cant}: "${other}" doesn't have "Partner with ${self}"`;
+    }
   }
-  if (pa?.kind === "choose-a-background") return `${cant}: "${a}" can only be paired with a Background`;
-  if (pb?.kind === "choose-a-background") return `${cant}: "${b}" can only be paired with a Background`;
-  if (pa?.kind === "doctors-companion") return `${cant}: "${a}" can only be paired with a Time Lord Doctor`;
-  if (pb?.kind === "doctors-companion") return `${cant}: "${b}" can only be paired with a Time Lord Doctor`;
+  // A card whose every ability names what it pairs with: "Partner with
+  // [name]", "Choose a Background", Doctor's companion — or two of them.
+  for (const [self, , def] of sides) {
+    const only = def.pairings.map(onlyPairsWith);
+    if (only.length > 0 && only.every((what) => what !== null)) {
+      return `${cant}: "${self}" can only be paired with ${only.join(" or ")}`;
+    }
+  }
   if (isBackground(da) || isBackground(db)) {
     return `${cant}: a Background needs a commander with "Choose a Background"`;
   }
-  if (pa !== null && pb !== null) {
+  if (da.pairings.length > 0 && db.pairings.length > 0) {
     // Both have one, and not the same one (rule 702.124: different partner
     // abilities can't be combined).
     return `${cant}: ${pairingName(da)} and ${pairingName(db)} don't combine`;
@@ -209,7 +234,7 @@ export function canPairCommanders(registry: CardRegistry, a: string, b: string):
 /** Whether `name` has a partner-family ability — any of them — and so could
  * take a second commander, given the right one ({@link canPairCommanders}). */
 export function hasPartner(registry: CardRegistry, name: string): boolean {
-  return registry.has(name) && registry.get(name).pairing !== null;
+  return registry.has(name) && registry.get(name).pairings.length > 0;
 }
 
 /**
