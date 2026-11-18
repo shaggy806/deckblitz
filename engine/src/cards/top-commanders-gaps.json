@@ -2998,7 +2998,8 @@
   "effect:prevent-chosen-source-sharing-spent-mana-color",
   "mechanic:face-down-pile",
   "replacement:next-draw-from-exiled-pile",
-  "effect:that-player-returns-permanent"
+  "effect:that-player-returns-permanent",
+  "effect:repeat-unless-paid"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
