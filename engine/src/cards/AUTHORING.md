@@ -3605,7 +3605,9 @@ dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, cast
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameWith, sameNameAsTriggerObject, sharesColorWith, ofChosenType, targets, greatestAmongItsController, greatestInZone, couldProduce }`,
-every present clause ANDed. `couldProduce: "C"` is "a land that could produce {C}" (rule 106.7):
+every present clause ANDed. `colorCount: 2` is "exactly two colors", and "isn't exactly two
+colors" its `not` — colorless, one color, or three or more (Invasion of Ravnica // Guildpact
+Paragon). `couldProduce: "C"` is "a land that could produce {C}" (rule 106.7):
 one of the permanent's mana abilities would make that type if it resolved now, replacement
 effects included and whether or not it could be activated, so a tapped land counts — Obsidian
 Charmaw's `countOf: { type: "land", controlledBy: "opponent", couldProduce: "C" }`, Break the
