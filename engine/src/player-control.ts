@@ -74,6 +74,26 @@ export function blockChooser(state: GameState, player: PlayerId): PlayerId | nul
   return last === undefined || last.chooser === player ? null : last.chooser;
 }
 
+/** Who makes the declare-blockers decision `awaiting` puts to `player`: the
+ * player a static names on it (`chosenBy` — Invasion Plans' attacking
+ * player), unless a "you choose how those creatures block" effect covering
+ * `player` is later than that static (`chosenSince`); else `blockChooser`'s.
+ * The player themselves is no change, so `null`. */
+export function blockDeclarationChooser(
+  state: GameState,
+  player: PlayerId,
+  awaiting: { readonly chosenBy?: PlayerId; readonly chosenSince?: number },
+): PlayerId | null {
+  const chosenBy = awaiting.chosenBy;
+  if (chosenBy !== undefined && inGame(state, chosenBy)) {
+    const last = lastCombatChoice(state, (choice) => coversBlocks(choice, player));
+    if (last === undefined || (last.createdAt ?? 0) < (awaiting.chosenSince ?? 0)) {
+      return chosenBy === player ? null : chosenBy;
+    }
+  }
+  return blockChooser(state, player);
+}
+
 /** Who chooses how `player` votes this turn, if that's been given away
  * (Illusion of Choice): the last such effect to resolve, its chooser still in
  * the game (the card's ruling). */
@@ -145,7 +165,7 @@ export function answeringPlayer(state: GameState, asked: PlayerId): PlayerId {
       awaiting.kind === "attackers" && awaiting.group === undefined
         ? attackChooser(state, asked)
         : awaiting.kind === "blockers"
-          ? blockChooser(state, asked)
+          ? blockDeclarationChooser(state, asked, awaiting)
           : state.combatChoices !== undefined && isVoteQuestion(state)
             ? voteChooser(state, asked)
             : null;

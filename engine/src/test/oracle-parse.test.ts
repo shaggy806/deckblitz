@@ -23198,6 +23198,15 @@ describe("a face-down pile searched out, and draws replaced by its top card", ()
     ]);
   });
 
+  it("reads Invasion Plans whole: every creature must block, and the attacking player declares", () => {
+    const plans = face("Enchantment", "All creatures block each combat if able.\nThe attacking player chooses how each creature blocks each combat.");
+    expect(plans.complete).toBe(true);
+    expect(plans.static.map((s) => [s.restrictions, s.attackingPlayerChoosesBlocks])).toEqual([
+      [["must-block"], undefined],
+      [undefined, true],
+    ]);
+  });
+
   it("leaves a pile not shuffled, or no shuffle of the library after, unread", () => {
     const unshuffled = face(
       "Enchantment",

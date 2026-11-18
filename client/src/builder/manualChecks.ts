@@ -13370,4 +13370,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- The attacking player chooses how each creature blocks (2026-11-18) --------
+  preset(
+    "Invasion Plans: you choose how Bob's creatures block",
+    board({
+      you: { bf: ['Invasion Plans', 'Grizzly Bears', 'Hill Giant'] },
+      opp: { bf: ['Savannah Lions', 'Elite Vanguard'] },
+    }),
+  ),
+  preset(
+    'Invasion Plans: in a 4-player game, you choose each defending player\'s blocks',
+    board({
+      you: { bf: ['Invasion Plans', 'Grizzly Bears', 'Hill Giant'] },
+      opp: [{ bf: ['Savannah Lions'] }, { bf: ['Serra Angel'] }, { bf: ['Elite Vanguard'] }],
+    }),
+  ),
 ]

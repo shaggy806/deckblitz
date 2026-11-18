@@ -3754,6 +3754,11 @@ export interface CombatChoice {
    * casts it, and still decides whether to cast an additional one (the
    * Ballot Broker ruling). */
   readonly votes?: true;
+  /** Its timestamp (`Game.freshTimestamp`), for which works beside a static
+   * saying who chooses the blocks (Invasion Plans): the later one (rule
+   * 613.7a's static timestamp, the effect's own here). Absent on a state
+   * saved before it was recorded. */
+  readonly createdAt?: number;
 }
 
 /** One effect a player can apply first (rule 616.1): named by the card that
@@ -3811,7 +3816,20 @@ export type AwaitingDecision =
        * sends (its 2008 ruling; `player-control.ts`). Absent otherwise. */
       readonly group?: readonly ObjectId[];
     }
-  | { readonly kind: "blockers"; readonly player: PlayerId }
+  | {
+      readonly kind: "blockers";
+      readonly player: PlayerId;
+      /** Who makes this declaration for `player`, when a static says so:
+       * "the attacking player chooses how each creature blocks each combat"
+       * (Invasion Plans — `StaticAbility.attackingPlayerChoosesBlocks`). Read
+       * by `player-control.ts`'s `answeringPlayer`; the declaration is still
+       * `player`'s (rule 509.1a). */
+      readonly chosenBy?: PlayerId;
+      /** That static's timestamp (its permanent's — rule 613.7a): a "you
+       * choose how those creatures block" effect created later works
+       * instead (`CombatChoice.createdAt`). */
+      readonly chosenSince?: number;
+    }
   | {
       readonly kind: "discard";
       readonly player: PlayerId;

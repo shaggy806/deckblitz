@@ -1177,7 +1177,16 @@ export function viewFor(
   // visible object — cache them for the duration.
   return withComputedCache(() => {
     const own = viewForUncached(state, registry, viewer, options);
-    if (state.playerControl === undefined && state.combatChoices === undefined) return own;
+    // Nobody answers for anyone else: no control, no "you choose" effect, and
+    // no declaration of blockers a static has the attacking player make
+    // (Invasion Plans' `chosenBy`).
+    if (
+      state.playerControl === undefined &&
+      state.combatChoices === undefined &&
+      (state.awaiting?.kind !== "blockers" || state.awaiting.chosenBy === undefined)
+    ) {
+      return own;
+    }
     const controlled = playersControlledBy(state, viewer).map((player) => ({
       player,
       view: viewForUncached(state, registry, player, options),

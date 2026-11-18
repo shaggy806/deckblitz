@@ -25039,6 +25039,11 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, restrictions: ["must-attack", "must-block"], text };
   }
   if (line === "All creatures block each combat if able.") return { affects: { scope: "all-creatures" }, restrictions: ["must-block"], text };
+  // Who declares the blocks, not a requirement (Invasion Plans): each
+  // defending player's declaration is the attacking player's to make.
+  if (line === "The attacking player chooses how each creature blocks each combat.") {
+    return { affects: { scope: "self" }, attackingPlayerChoosesBlocks: true, text };
+  }
   // Requirements only the whole declaration can answer (rules 508.1d, 509.1c).
   if (line === "~ must be blocked by exactly one creature if able.") {
     return { affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked-if-able", exactlyOne: true }], text };

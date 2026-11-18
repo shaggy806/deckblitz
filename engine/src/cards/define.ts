@@ -3974,6 +3974,18 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * card's ruling). One draw for each such ability. `affects` is ignored.
    */
   readonly drawsInOpponentsDrawStep?: true;
+  /**
+   * "The attacking player chooses how each creature blocks each combat"
+   * (Invasion Plans): each defending player's declare-blockers decision is
+   * made by the attacking player — the active player (rule 506.2) — for as
+   * long as this is on the battlefield. Not who the decision is for (rule
+   * 509.1a's declaration stays the defending player's), only who answers it:
+   * `Game` names that player on the `blockers` decision (`chosenBy`), and
+   * `player-control.ts`'s `answeringPlayer` reads it. A "you choose how
+   * those creatures block" effect with a later timestamp (Master Warcraft,
+   * resolved after this entered) works instead. `affects` is ignored.
+   */
+  readonly attackingPlayerChoosesBlocks?: true;
   /** Combat restrictions imposed on the affected objects (Pacifism, Juggernaut). */
   readonly restrictions?: readonly CombatRule[];
   /**

@@ -13891,11 +13891,37 @@ export class Game {
         );
       if (hasEligibleBlocker) {
         this.wakeStacksBoundToBlock(defender, attackers);
-        this.state.awaiting = { kind: "blockers", player: defender };
+        const chosen = this.blocksChosenByAttacker();
+        this.state.awaiting = {
+          kind: "blockers",
+          player: defender,
+          ...(chosen !== undefined ? { chosenBy: this.activePlayer, chosenSince: chosen } : {}),
+        };
         return;
       }
       this.state.pendingBlockerDeclarations = this.state.pendingBlockerDeclarations.slice(1);
     }
+  }
+
+  /**
+   * "The attacking player chooses how each creature blocks each combat"
+   * (Invasion Plans — `StaticAbility.attackingPlayerChoosesBlocks`): the
+   * latest timestamp among such statics working now (each its permanent's —
+   * rule 613.7a), or `undefined` with none. The attacking player is the
+   * active one (rule 506.2); `player-control.ts` weighs this against a "you
+   * choose how those creatures block" effect.
+   */
+  private blocksChosenByAttacker(): number | undefined {
+    let latest: number | undefined;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.staticsOfSource(source)) {
+        if (ability.attackingPlayerChoosesBlocks !== true || !this.staticActive(source, ability)) continue;
+        latest = Math.max(latest ?? 0, source.timestamp ?? 0);
+      }
+    }
+    return latest;
   }
 
   /**
@@ -45134,7 +45160,10 @@ controlledBy,
         ];
       },
       chooseCombat: (choice) => {
-        this.state.combatChoices = [...(this.state.combatChoices ?? []), { chooser: controller, ...choice }];
+        this.state.combatChoices = [
+          ...(this.state.combatChoices ?? []),
+          { chooser: controller, ...choice, createdAt: this.freshTimestamp() },
+        ];
       },
       giveGift: (gift, textChanges) => {
         // Who it was promised to: the resolving spell's, or the permanent's

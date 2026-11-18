@@ -8832,3 +8832,14 @@ Each board's die comes up 4.
 - **Do:** In this 4-player game, activate Aeon Engine, then pass the turn.
 - **Expect:** The History reads "The turn order is reversed: Dave, Carol, Bob, Alice". Dave takes the next turn, not Bob. Every player keeps the same place at the table and the same seat colour.
 - **Not a bug:** "The player to your left" is still Bob.
+
+## The attacking player chooses how each creature blocks (2026-11-18)
+
+### Invasion Plans: you choose how Bob's creatures block
+- **Do:** Attack Bob with Grizzly Bears and Hill Giant. When the block prompt comes to you, put Savannah Lions and Elite Vanguard both in front of Hill Giant, click Block (2), then Confirm Hill Giant's damage.
+- **Expect:** The top bar says "You choose for Bob", the table turns to his seat, and the block prompt is yours, its No blocks greyed out: each of Bob's creatures must block. Hill Giant and both of Bob's creatures die, and Bob goes from 40 to 38 from the Bears.
+
+### Invasion Plans: in a 4-player game, you choose each defending player's blocks
+- **Do:** Attack Bob with Grizzly Bears and Dave with Hill Giant. Block for Bob (click Savannah Lions, then Block (1)), then for Dave (Elite Vanguard, then Block (1)).
+- **Expect:** The block prompt comes to you twice, with "You choose for Bob" and then "You choose for Dave" in the top bar; Carol (not attacked) is never asked. Savannah Lions and the Bears trade, and Elite Vanguard dies blocking Hill Giant.
+- **Not a bug:** On a bot's turn, the bot chooses how your creatures block: you aren't asked.

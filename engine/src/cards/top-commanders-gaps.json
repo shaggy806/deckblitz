@@ -3000,7 +3000,8 @@
   "replacement:next-draw-from-exiled-pile",
   "effect:that-player-returns-permanent",
   "effect:repeat-unless-paid",
-  "decision:choose-color-on-attach"
+  "decision:choose-color-on-attach",
+  "static:attacking-player-chooses-blocks"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
