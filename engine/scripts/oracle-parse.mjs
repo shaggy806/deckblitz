@@ -2624,6 +2624,11 @@ export function parseTrigger(clause) {
   if (c === "Whenever you put one or more counters on a creature you don't control") {
     return [{ on: "counters-put", who: "any", filter: { type: "creature", controlledBy: "opponent" }, byYou: true }];
   }
+  // "Whenever an opponent puts one or more counters on a creature they
+  // control" (Bold Plagiarist): only counters its own controller put there.
+  if (c === "Whenever an opponent puts one or more counters on a creature they control") {
+    return [{ on: "counters-put", who: "opponent", filter: { type: "creature" }, byItsController: true }];
+  }
   // "… on a permanent or player" (All Will Be One).
   if (c === "Whenever you put one or more counters on a permanent or player") {
     return [{ on: "counters-put", who: "any", byYou: true, orPlayer: true }];
@@ -5960,6 +5965,12 @@ export function parseSentence(sentence, ctx) {
     const target =
       m[1] === "~" ? "source" : /^up to one /i.test(m[1]) ? quantifiedSlots(m[1], ctx)?.slots[0] : slot(m[1]);
     return { kind: "put-counters-of", of: ctx.departed, target };
+  }
+  // "They put the same number and kind of counters on this creature" (Bold
+  // Plagiarist): the counters that fired a counters-put trigger, put by the
+  // player who put those (`"trigger-player"`).
+  if (ctx.thatPlayer === "trigger-player" && re(`they put the same number and kind of counters on ~`).test(s)) {
+    return { kind: "as-player", who: "trigger-player", effect: { kind: "put-counters-of", of: "trigger-placement", target: "source" } };
   }
 
   // Removal and movement.
@@ -21539,6 +21550,8 @@ function thatPlayerOf(triggers) {
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): who activated the mana ability.
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
+  // Who put the counters (Bold Plagiarist's "they put …").
+  if (triggers.every((t) => t.on === "counters-put" && t.byItsController === true)) return "trigger-player";
   // Who activated it (Avalanche of Sector 7, Immolation Shaman).
   if (triggers.every((t) => t.on === "activates-ability" && t.who === "opponent")) return "trigger-player";
   // Who searched (Ob Nixilis, Unshackled), or scried or surveilled too (River Song).

@@ -1470,6 +1470,13 @@ export type TriggerKind =
       readonly counter?: string;
       readonly filter?: CardFilter;
       readonly byYou?: boolean;
+      /** "… on a creature **they** control": only counters the permanent's
+       * own controller put on it — with `who: "opponent"`, Bold Plagiarist's
+       * "whenever an opponent puts one or more counters on a creature they
+       * control" (so an opponent's counters on another opponent's creature,
+       * or on yours, don't fire it). "They" (`"trigger-player"`) is whoever
+       * put them. */
+      readonly byItsController?: true;
       /** "When the Nth [`counter`] counter is put on this" (Midnight Clock,
        * the Plans): only the placement that takes that kind from fewer than
        * N to N or more — several at once past N count, and later ones don't

@@ -36945,6 +36945,10 @@ export class Game {
       // Whoever controls the spell or ability that destroyed it — "that
       // opponent" of Karmic Justice.
       player = event.by;
+    } else if (event.type === "counter-added" && event.by !== undefined) {
+      // Whoever put the counters there — "they" of Bold Plagiarist's "they
+      // put the same number and kind of counters on this creature".
+      player = event.by;
     } else if (event.type === "cards-discarded" && event.cause !== undefined) {
       // Whoever controls the spell or ability that caused the discard (Psychic
       // Purge: "… causes you to discard this card, that player loses 5 life").
@@ -37797,7 +37801,8 @@ export class Game {
               e.object === event.object &&
               e.stint === stint &&
               (spec.counter === undefined || e.counter === spec.counter) &&
-              (spec.byYou !== true || e.player === self.controller),
+              (spec.byYou !== true || e.player === self.controller) &&
+              (spec.byItsController !== true || e.player === e.was?.controller),
           ) - 1
         );
       }
@@ -37978,7 +37983,11 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           !(spec.otherOnly === true && event.object === self.id) &&
           this.triggerFilterOk(spec.filter, event.object, self) &&
-          (spec.byYou !== true || event.by === self.controller)
+          (spec.byYou !== true || event.by === self.controller) &&
+          // "… on a creature they control" (Bold Plagiarist): its own
+          // controller put them there.
+          (spec.byItsController !== true ||
+            (event.by !== undefined && event.by === this.state.objects[event.object]?.controller))
         );
       case "counters-removed":
         // A suspended card's own time counters coming off in exile, seen by

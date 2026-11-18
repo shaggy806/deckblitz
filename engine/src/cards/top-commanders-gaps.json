@@ -3069,7 +3069,9 @@
   "replacement:as-enters-mill",
   "amount:cda-aggregate-sum-excluding-self",
   "amount:cda-graveyard-count-excluding-self",
-  "bug:cda-greatest-mana-value-in-graveyard"
+  "bug:cda-greatest-mana-value-in-graveyard",
+  "trigger:counters-put-by-opponent",
+  "effect:put-same-counters-as-trigger"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

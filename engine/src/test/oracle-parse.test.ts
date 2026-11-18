@@ -23649,3 +23649,21 @@ describe("a CDA over the others (amount:cda-aggregate-sum-excluding-self)", () =
     });
   });
 });
+
+describe("counters an opponent puts on a creature they control (Bold Plagiarist)", () => {
+  it("reads the trigger's byItsController and 'they put' as the player who put them", () => {
+    const plagiarist = parseFace({
+      name: "Bold Plagiarist",
+      type_line: "Creature — Vampire Rogue",
+      oracle_text:
+        "Flash\nWhenever an opponent puts one or more counters on a creature they control, they put the same number and kind of counters on this creature.",
+    });
+    expect(plagiarist.complete).toBe(true);
+    expect(plagiarist.triggered[0].trigger).toEqual({ on: "counters-put", who: "opponent", filter: { type: "creature" }, byItsController: true });
+    expect(plagiarist.triggered[0].effect).toEqual({
+      kind: "as-player",
+      who: "trigger-player",
+      effect: { kind: "put-counters-of", of: "trigger-placement", target: "source" },
+    });
+  });
+});
