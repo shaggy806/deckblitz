@@ -671,6 +671,7 @@ import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
 import _poolPoliticalTrickery from "../pool/political-trickery.js";
 import _poolPolukranosReborn from "../pool/polukranos-reborn.js";
 import _poolPolymorphistsJest from "../pool/polymorphists-jest.js";
+import _poolPortalManipulator from "../pool/portal-manipulator.js";
 import _poolPraetorsCounsel from "../pool/praetors-counsel.js";
 import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
@@ -1727,6 +1728,7 @@ const shard: CardShard = {
     _poolPoliticalTrickery,
     _poolPolukranosReborn,
     _poolPolymorphistsJest,
+    _poolPortalManipulator,
     _poolPraetorsCounsel,
     _poolPridefulFeastling,
     _poolPriestOfIroas,

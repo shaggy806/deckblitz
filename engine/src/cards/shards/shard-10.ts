@@ -182,6 +182,7 @@ import _poolCovetousUrge from "../pool/covetous-urge.js";
 import _poolCrampedVentsAccessMaze from "../pool/cramped-vents-access-maze.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCreditVoucher from "../pool/credit-voucher.js";
+import _poolCreepingDread from "../pool/creeping-dread.js";
 import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
 import _poolCrookshankKobolds from "../pool/crookshank-kobolds.js";
 import _poolCrossroadsWatcher from "../pool/crossroads-watcher.js";
@@ -1235,6 +1236,7 @@ const shard: CardShard = {
     _poolCrampedVentsAccessMaze,
     _poolCrawlingChorus,
     _poolCreditVoucher,
+    _poolCreepingDread,
     _poolCrescendoOfWar,
     _poolCrookshankKobolds,
     _poolCrossroadsWatcher,

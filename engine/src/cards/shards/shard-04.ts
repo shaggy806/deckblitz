@@ -195,6 +195,7 @@ import _poolDiplomacyOfTheWastes from "../pool/diplomacy-of-the-wastes.js";
 import _poolDireStrainRampage from "../pool/dire-strain-rampage.js";
 import _poolDirectorNickFury from "../pool/director-nick-fury.js";
 import _poolDiscipleOfTeveshSzat from "../pool/disciple-of-tevesh-szat.js";
+import _poolDisciplesOfTheInferno from "../pool/disciples-of-the-inferno.js";
 import _poolDiscoveryDispersal from "../pool/discovery-dispersal.js";
 import _poolDistemperOfTheBlood from "../pool/distemper-of-the-blood.js";
 import _poolDistortedCuriosity from "../pool/distorted-curiosity.js";
@@ -1227,6 +1228,7 @@ const shard: CardShard = {
     _poolDireStrainRampage,
     _poolDirectorNickFury,
     _poolDiscipleOfTeveshSzat,
+    _poolDisciplesOfTheInferno,
     _poolDiscoveryDispersal,
     _poolDistemperOfTheBlood,
     _poolDistortedCuriosity,

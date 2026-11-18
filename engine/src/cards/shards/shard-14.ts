@@ -763,6 +763,7 @@ import _poolScrapyardRecombiner from "../pool/scrapyard-recombiner.js";
 import _poolScreamsFromWithin from "../pool/screams-from-within.js";
 import _poolScurryOfSquirrels from "../pool/scurry-of-squirrels.js";
 import _poolScytheTiger from "../pool/scythe-tiger.js";
+import _poolSeekerOfSlaanesh from "../pool/seeker-of-slaanesh.js";
 import _poolSerendibSorcerer from "../pool/serendib-sorcerer.js";
 import _poolSerpentOfYawningDepths from "../pool/serpent-of-yawning-depths.js";
 import _poolServantOfTheScale from "../pool/servant-of-the-scale.js";
@@ -1802,6 +1803,7 @@ const shard: CardShard = {
     _poolScreamsFromWithin,
     _poolScurryOfSquirrels,
     _poolScytheTiger,
+    _poolSeekerOfSlaanesh,
     _poolSerendibSorcerer,
     _poolSerpentOfYawningDepths,
     _poolServantOfTheScale,

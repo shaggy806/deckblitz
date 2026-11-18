@@ -5680,6 +5680,7 @@ import _poolCreepingBloodsucker from "./pool/creeping-bloodsucker.js";
 import _poolCreepingChill from "./pool/creeping-chill.js";
 import _poolCreepingCorrosion from "./pool/creeping-corrosion.js";
 import _poolCreepingCrystalCoating from "./pool/creeping-crystal-coating.js";
+import _poolCreepingDread from "./pool/creeping-dread.js";
 import _poolCreepingInn from "./pool/creeping-inn.js";
 import _poolCreepingMold from "./pool/creeping-mold.js";
 import _poolCreepingPeeper from "./pool/creeping-peeper.js";
@@ -7109,6 +7110,7 @@ import _poolDiscipleOfTheRing from "./pool/disciple-of-the-ring.js";
 import _poolDiscipleOfTheSun from "./pool/disciple-of-the-sun.js";
 import _poolDiscipleOfTheVault from "./pool/disciple-of-the-vault.js";
 import _poolDisciplesOfGix from "./pool/disciples-of-gix.js";
+import _poolDisciplesOfTheInferno from "./pool/disciples-of-the-inferno.js";
 import _poolDisciplinedDuelist from "./pool/disciplined-duelist.js";
 import _poolDiscombobulate from "./pool/discombobulate.js";
 import _poolDiscontinuity from "./pool/discontinuity.js";
@@ -11723,6 +11725,7 @@ import _poolGorillaWarrior from "./pool/gorilla-warrior.js";
 import _poolGoringCeratops from "./pool/goring-ceratops.js";
 import _poolGoringWarplow from "./pool/goring-warplow.js";
 import _poolGorionWiseMentor from "./pool/gorion-wise-mentor.js";
+import _poolGormTheGreat from "./pool/gorm-the-great.js";
 import _poolGormaTheGullet from "./pool/gorma-the-gullet.js";
 import _poolGornCaptain from "./pool/gorn-captain.js";
 import _poolGornogTheRedReaper from "./pool/gornog-the-red-reaper.js";
@@ -14110,6 +14113,7 @@ import _poolInvasionOfMuraganda from "./pool/invasion-of-muraganda.js";
 import _poolInvasionOfNewCapenna from "./pool/invasion-of-new-capenna.js";
 import _poolInvasionOfNewPhyrexia from "./pool/invasion-of-new-phyrexia.js";
 import _poolInvasionOfRavnica from "./pool/invasion-of-ravnica.js";
+import _poolInvasionOfRegatha from "./pool/invasion-of-regatha.js";
 import _poolInvasionOfSegovia from "./pool/invasion-of-segovia.js";
 import _poolInvasionOfShandalar from "./pool/invasion-of-shandalar.js";
 import _poolInvasionOfTarkir from "./pool/invasion-of-tarkir.js";
@@ -20775,6 +20779,7 @@ import _poolPortRazer from "./pool/port-razer.js";
 import _poolPortTown from "./pool/port-town.js";
 import _poolPortableHole from "./pool/portable-hole.js";
 import _poolPortalMage from "./pool/portal-mage.js";
+import _poolPortalManipulator from "./pool/portal-manipulator.js";
 import _poolPortalOfSanctuary from "./pool/portal-of-sanctuary.js";
 import _poolPortalToPhyrexia from "./pool/portal-to-phyrexia.js";
 import _poolPortcullisVine from "./pool/portcullis-vine.js";
@@ -24202,6 +24207,7 @@ import _poolSeekThrills from "./pool/seek-thrills.js";
 import _poolSeek from "./pool/seek.js";
 import _poolSeekerOfInsight from "./pool/seeker-of-insight.js";
 import _poolSeekerOfSkybreak from "./pool/seeker-of-skybreak.js";
+import _poolSeekerOfSlaanesh from "./pool/seeker-of-slaanesh.js";
 import _poolSeekerOfSunlight from "./pool/seeker-of-sunlight.js";
 import _poolSeekerOfTheWay from "./pool/seeker-of-the-way.js";
 import _poolSeeker from "./pool/seeker.js";
@@ -29689,6 +29695,7 @@ import _poolTroubledHealer from "./pool/troubled-healer.js";
 import _poolTroublemakerOuphe from "./pool/troublemaker-ouphe.js";
 import _poolTroublesomeSpirit from "./pool/troublesome-spirit.js";
 import _poolTroublingTribbles from "./pool/troubling-tribbles.js";
+import _poolTroveOfTemptation from "./pool/trove-of-temptation.js";
 import _poolTroveTracker from "./pool/trove-tracker.js";
 import _poolTroveWarden from "./pool/trove-warden.js";
 import _poolTroyanGutsyExplorer from "./pool/troyan-gutsy-explorer.js";
@@ -39229,6 +39236,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCreepingChill,
   _poolCreepingCorrosion,
   _poolCreepingCrystalCoating,
+  _poolCreepingDread,
   _poolCreepingInn,
   _poolCreepingMold,
   _poolCreepingPeeper,
@@ -40658,6 +40666,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiscipleOfTheSun,
   _poolDiscipleOfTheVault,
   _poolDisciplesOfGix,
+  _poolDisciplesOfTheInferno,
   _poolDisciplinedDuelist,
   _poolDiscombobulate,
   _poolDiscontinuity,
@@ -45272,6 +45281,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGoringCeratops,
   _poolGoringWarplow,
   _poolGorionWiseMentor,
+  _poolGormTheGreat,
   _poolGormaTheGullet,
   _poolGornCaptain,
   _poolGornogTheRedReaper,
@@ -47659,6 +47669,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInvasionOfNewCapenna,
   _poolInvasionOfNewPhyrexia,
   _poolInvasionOfRavnica,
+  _poolInvasionOfRegatha,
   _poolInvasionOfSegovia,
   _poolInvasionOfShandalar,
   _poolInvasionOfTarkir,
@@ -54324,6 +54335,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPortTown,
   _poolPortableHole,
   _poolPortalMage,
+  _poolPortalManipulator,
   _poolPortalOfSanctuary,
   _poolPortalToPhyrexia,
   _poolPortcullisVine,
@@ -57751,6 +57763,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSeek,
   _poolSeekerOfInsight,
   _poolSeekerOfSkybreak,
+  _poolSeekerOfSlaanesh,
   _poolSeekerOfSunlight,
   _poolSeekerOfTheWay,
   _poolSeeker,
@@ -63238,6 +63251,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTroublemakerOuphe,
   _poolTroublesomeSpirit,
   _poolTroublingTribbles,
+  _poolTroveOfTemptation,
   _poolTroveTracker,
   _poolTroveWarden,
   _poolTroyanGutsyExplorer,
@@ -72791,6 +72805,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/creeping-chill": _poolCreepingChill,
   "pool/creeping-corrosion": _poolCreepingCorrosion,
   "pool/creeping-crystal-coating": _poolCreepingCrystalCoating,
+  "pool/creeping-dread": _poolCreepingDread,
   "pool/creeping-inn": _poolCreepingInn,
   "pool/creeping-mold": _poolCreepingMold,
   "pool/creeping-peeper": _poolCreepingPeeper,
@@ -74220,6 +74235,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/disciple-of-the-sun": _poolDiscipleOfTheSun,
   "pool/disciple-of-the-vault": _poolDiscipleOfTheVault,
   "pool/disciples-of-gix": _poolDisciplesOfGix,
+  "pool/disciples-of-the-inferno": _poolDisciplesOfTheInferno,
   "pool/disciplined-duelist": _poolDisciplinedDuelist,
   "pool/discombobulate": _poolDiscombobulate,
   "pool/discontinuity": _poolDiscontinuity,
@@ -78834,6 +78850,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/goring-ceratops": _poolGoringCeratops,
   "pool/goring-warplow": _poolGoringWarplow,
   "pool/gorion-wise-mentor": _poolGorionWiseMentor,
+  "pool/gorm-the-great": _poolGormTheGreat,
   "pool/gorma-the-gullet": _poolGormaTheGullet,
   "pool/gorn-captain": _poolGornCaptain,
   "pool/gornog-the-red-reaper": _poolGornogTheRedReaper,
@@ -81221,6 +81238,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/invasion-of-new-capenna": _poolInvasionOfNewCapenna,
   "pool/invasion-of-new-phyrexia": _poolInvasionOfNewPhyrexia,
   "pool/invasion-of-ravnica": _poolInvasionOfRavnica,
+  "pool/invasion-of-regatha": _poolInvasionOfRegatha,
   "pool/invasion-of-segovia": _poolInvasionOfSegovia,
   "pool/invasion-of-shandalar": _poolInvasionOfShandalar,
   "pool/invasion-of-tarkir": _poolInvasionOfTarkir,
@@ -87886,6 +87904,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/port-town": _poolPortTown,
   "pool/portable-hole": _poolPortableHole,
   "pool/portal-mage": _poolPortalMage,
+  "pool/portal-manipulator": _poolPortalManipulator,
   "pool/portal-of-sanctuary": _poolPortalOfSanctuary,
   "pool/portal-to-phyrexia": _poolPortalToPhyrexia,
   "pool/portcullis-vine": _poolPortcullisVine,
@@ -91313,6 +91332,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/seek": _poolSeek,
   "pool/seeker-of-insight": _poolSeekerOfInsight,
   "pool/seeker-of-skybreak": _poolSeekerOfSkybreak,
+  "pool/seeker-of-slaanesh": _poolSeekerOfSlaanesh,
   "pool/seeker-of-sunlight": _poolSeekerOfSunlight,
   "pool/seeker-of-the-way": _poolSeekerOfTheWay,
   "pool/seeker": _poolSeeker,
@@ -96800,6 +96820,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/troublemaker-ouphe": _poolTroublemakerOuphe,
   "pool/troublesome-spirit": _poolTroublesomeSpirit,
   "pool/troubling-tribbles": _poolTroublingTribbles,
+  "pool/trove-of-temptation": _poolTroveOfTemptation,
   "pool/trove-tracker": _poolTroveTracker,
   "pool/trove-warden": _poolTroveWarden,
   "pool/troyan-gutsy-explorer": _poolTroyanGutsyExplorer,
