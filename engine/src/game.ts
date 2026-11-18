@@ -2868,6 +2868,10 @@ export class Game {
    * joined by `sameAbilityAs` sharing a key), each with the leave batch it
    * fired in (`moveAlreadyFired`). Transient, like `leaveBatch`. */
   private readonly moveBatchFired = new Map<string, object>();
+  /** Where in `pendingTriggers` each once-a-move firing above was queued
+   * from, so a sibling's share of the same move adds to its "that many"
+   * (`addToMoveTrigger`). Transient, like `leaveBatch`. */
+  private readonly moveBatchQueuedFrom = new Map<string, number>();
   private tapBatchHeld = false;
   private lastTapSeq = -2;
   /** Resolutions since a player last did anything but pass priority, and
@@ -35421,10 +35425,18 @@ export class Game {
         // A triggered mana ability (rule 605.1b) doesn't use the stack:
         // `tappedForManaExtras` made its mana with the rest.
         if (ability.trigger.on === "tapped-for-mana" && isTriggeredManaAbility(ability)) return;
+        // Fired already for this move (rule 603.2c): what else the move did
+        // that it counts is part of its "that many" (Hero of Bretagard).
+        const moveKey = `${id}#${sameAbilityIndex(ability.sameAbilityAs, index)}`;
+        if (this.moveAlreadyFired(ability, moveKey)) {
+          if (this.triggerMatches(ability.trigger, event, object)) {
+            this.addToMoveTrigger(moveKey, id, ability, index, this.triggerValueOf(ability.trigger, event, object));
+          }
+          return;
+        }
         if (
           this.triggerMatches(ability.trigger, event, object) &&
           !this.enterBatchAlreadyFired(ability.trigger, `${id}#${index}`) &&
-          !this.moveAlreadyFired(ability, `${id}#${sameAbilityIndex(ability.sameAbilityAs, index)}`) &&
           !(
             ability.oncePerTurn === true &&
             this.triggeredOnceThisTurn(live, this.onceWhich(ability, index, ref), lastSeen?.zoneChangeCount)
@@ -35765,7 +35777,8 @@ export class Game {
             else this.sacrificeBatchFired.set(`${id}#${index}`, this.leaveBatch);
           }
           if (this.leaveBatch !== null && firesOncePerMove(ability.trigger)) {
-            this.moveBatchFired.set(`${id}#${sameAbilityIndex(ability.sameAbilityAs, index)}`, this.leaveBatch);
+            this.moveBatchFired.set(moveKey, this.leaveBatch);
+            this.moveBatchQueuedFrom.set(moveKey, this.state.pendingTriggers.length);
           }
           // Each token of the watcher's own stack has the ability, and each
           // triggers (rule 603.2) — except for counters a batch entering
@@ -36946,6 +36959,32 @@ export class Game {
    */
   private moveAlreadyFired(ability: TriggeredAbility, key: string): boolean {
     return this.leaveBatch !== null && firesOncePerMove(ability.trigger) && this.moveBatchFired.get(key) === this.leaveBatch;
+  }
+
+  /**
+   * The rest of a move a once-a-move ability has already fired for (rule
+   * 603.2c): "whenever one or more cards are put into exile from your hand
+   * or a spell or ability you control exiles one or more permanents from
+   * the battlefield, put **that many** +1/+1 counters" (Hero of Bretagard) is
+   * one trigger for a move that does both, its value every card and
+   * permanent counted. `value` is this entry's count, added to the trigger
+   * queued for the move (each copy of it, where doublers made several).
+   */
+  private addToMoveTrigger(
+    key: string,
+    source: ObjectId,
+    ability: TriggeredAbility,
+    index: number,
+    value: number | undefined,
+  ): void {
+    const from = this.moveBatchQueuedFrom.get(key);
+    if (from === undefined || value === undefined || value === 0) return;
+    const entries = new Set([index, ability.sameAbilityAs ?? index]);
+    this.state.pendingTriggers = this.state.pendingTriggers.map((pending, i) =>
+      i >= from && pending.sourceObjectId === source && entries.has(pending.abilityIndex) && pending.triggerValue !== undefined
+        ? { ...pending, triggerValue: pending.triggerValue + value }
+        : pending,
+    );
   }
 
   private enterBatchAlreadyFired(spec: TriggerSpec, key: string): boolean {

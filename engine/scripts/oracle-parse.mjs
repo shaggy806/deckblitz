@@ -2189,6 +2189,18 @@ export function parseTrigger(clause) {
       { on: "event", event: "enters-attacking", who: "you-control", filter: { type: "creature" } },
     ];
   }
+  // Ranar the Ever-Watchful, Hero of Bretagard: cards exiled from your hand by
+  // anyone, and permanents your spells and abilities exile — one move doing
+  // both is one trigger (`sameAbilityAs`), its value the two counts together.
+  if (
+    c ===
+    "Whenever one or more cards are put into exile from your hand or a spell or ability you control exiles one or more permanents from the battlefield"
+  ) {
+    return [
+      { on: "put-into-exile", who: "you", from: ["hand"] },
+      { on: "leaves-battlefield", who: "any", to: ["exile"], batched: true, byEffectOf: "you" },
+    ];
+  }
   // "Whenever a player plays a card exiled with ~" (Prowl, Stoic Strategist),
   // "When you play a card exiled with this creature" (Voltaic Visionary): a
   // card in exile linked to it as it was played (rule 607.2a).
@@ -19873,8 +19885,18 @@ function parseFaceAsWritten(face, ctx = {}) {
       );
       // A triggered mana ability's other steps are all part of it (rule 605.4a).
       if (triggers.every((t) => t.on === "tapped-for-mana")) manaAbilityExtras(first);
+      const firstIndex = out.triggered.length;
       out.triggered.push(first);
-      for (const t of triggers.slice(1)) out.triggered.push({ ...first, trigger: t, targets: [...first.targets] });
+      for (const t of triggers.slice(1)) {
+        out.triggered.push({
+          ...first,
+          trigger: t,
+          targets: [...first.targets],
+          // Ranar's "cards exiled from your hand or permanents your effects
+          // exile": one move doing both is one trigger of one ability.
+          ...(t.byEffectOf !== undefined ? { sameAbilityAs: firstIndex } : {}),
+        });
+      }
       i = next;
       continue;
     }

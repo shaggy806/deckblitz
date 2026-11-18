@@ -2231,6 +2231,17 @@ describe("costs and triggers", () => {
     ]);
   });
 
+  it("cards exiled from your hand or permanents your effects exile (Ranar, Hero of Bretagard)", () => {
+    expect(
+      parseTrigger(
+        "Whenever one or more cards are put into exile from your hand or a spell or ability you control exiles one or more permanents from the battlefield",
+      ),
+    ).toEqual([
+      { on: "put-into-exile", who: "you", from: ["hand"] },
+      { on: "leaves-battlefield", who: "any", to: ["exile"], batched: true, byEffectOf: "you" },
+    ]);
+  });
+
   it("triggers", () => {
     expect(parseTrigger("When ~ enters")).toEqual([{ on: "enters-battlefield", who: "self" }]);
     expect(parseTrigger("Whenever ~ enters or attacks")).toHaveLength(2);

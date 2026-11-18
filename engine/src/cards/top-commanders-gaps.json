@@ -2970,7 +2970,8 @@
   "effect:unless-per-target-held",
   "effect:separate-into-three-piles",
   "trigger:one-or-more-creatures-block",
-  "filter:blocked-attacker"
+  "filter:blocked-attacker",
+  "trigger:exiled-by-your-spell-or-ability"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
