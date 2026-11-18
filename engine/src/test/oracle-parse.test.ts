@@ -23961,3 +23961,38 @@ describe("a graveyard card with awaken, and land creatures you control", () => {
     expect(line.complete).toBe(false);
   });
 });
+
+describe("a permanent petrified for good", () => {
+  it("reads Xathrid Gorgon's ability: a counter, a colorless artifact with defender, and no activations", () => {
+    const gorgon = parseFace(
+      {
+        name: "Xathrid Gorgon",
+        type_line: "Creature — Gorgon",
+        oracle_text:
+          "Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\n{2}{B}, {T}: Put a petrification counter on target creature. It gains defender and becomes a colorless artifact in addition to its other types. Its activated abilities can't be activated. (A creature with defender can't attack.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(gorgon.complete).toBe(true);
+    expect(gorgon.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: 0, counter: "petrification", amount: 1 },
+        { kind: "become", target: 0, keywords: ["defender"], setColors: [], addTypes: ["artifact"], duration: "permanent" },
+        { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }], duration: "permanent" },
+      ],
+    });
+  });
+
+  it("an end-of-turn version is not read as for good", () => {
+    const trap = parseFace(
+      {
+        name: "Test Card",
+        type_line: "Instant",
+        oracle_text: "Tap target creature. Its activated abilities can't be activated this turn and it becomes an artifact until end of turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(trap.complete).toBe(false);
+  });
+});

@@ -3108,7 +3108,8 @@
   "effect:mass-shuffle-into-library-reveal-until",
   "effect:return-exiled-under-your-control",
   "effect:exile-target-card-play-until-next-turn",
-  "filter:has-awaken"
+  "filter:has-awaken",
+  "effect:prohibit-abilities-permanent"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

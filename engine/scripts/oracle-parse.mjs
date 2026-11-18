@@ -13705,6 +13705,37 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: cant });
       continue;
     }
+    // "It gains defender and becomes a colorless artifact in addition to its
+    // other types." (Xathrid Gorgon), "That creature becomes an artifact in
+    // addition to its other types." (Ashnod's Transmogrant) after the one
+    // sentence that targeted: for good (rule 611.2a), no duration printed.
+    {
+      const becomes = new RegExp(
+        `^(?:it|that creature) (?:gains ${KW} and )?becomes an? (colorless )?(artifact|enchantment) in addition to its other types\\.$`,
+        "i",
+      ).exec(sentence);
+      if (becomes !== null && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+        const made = {
+          kind: "become",
+          target: 0,
+          ...(becomes[1] !== undefined ? { keywords: [KEYWORDS[becomes[1].toLowerCase()]] } : {}),
+          ...(becomes[2] !== undefined ? { setColors: [] } : {}),
+          addTypes: [becomes[3].toLowerCase()],
+          duration: "permanent",
+        };
+        parsed.push(made);
+        hints.push({ sentence, effect: made });
+        continue;
+      }
+    }
+    // "Its activated abilities can't be activated." after the one sentence
+    // that targeted (Xathrid Gorgon): by anyone, mana abilities too, for good.
+    if (/^its activated abilities can't be activated\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
+      const cant = { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }], duration: "permanent" };
+      parsed.push(cant);
+      hints.push({ sentence, effect: cant });
+      continue;
+    }
     // "A creature dealt damage this way can't be regenerated this turn." after
     // the damage (Incinerate, Flamebreak): whatever creature it damaged.
     if (/^(?:a creature|creatures) dealt damage this way can't be regenerated this turn\.$/i.test(sentence) && parsed.some(dealsDamage)) {
