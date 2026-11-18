@@ -402,6 +402,7 @@ import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
 import _poolHeadGames from "../pool/head-games.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
+import _poolHeartShapedHerb from "../pool/heart-shaped-herb.js";
 import _poolHeavyFog from "../pool/heavy-fog.js";
 import _poolHelldozer from "../pool/helldozer.js";
 import _poolHellkiteCourser from "../pool/hellkite-courser.js";
@@ -1456,6 +1457,7 @@ const shard: CardShard = {
     _poolHeadGames,
     _poolHeadlessSpecter,
     _poolHealingSalve,
+    _poolHeartShapedHerb,
     _poolHeavyFog,
     _poolHelldozer,
     _poolHellkiteCourser,

@@ -1482,6 +1482,7 @@ import _poolAshiokDreamRender from "./pool/ashiok-dream-render.js";
 import _poolAshiokNightmareMuse from "./pool/ashiok-nightmare-muse.js";
 import _poolAshiokNightmareWeaver from "./pool/ashiok-nightmare-weaver.js";
 import _poolAshiokSculptorOfFears from "./pool/ashiok-sculptor-of-fears.js";
+import _poolAshiokWickedManipulator from "./pool/ashiok-wicked-manipulator.js";
 import _poolAshioksAdept from "./pool/ashioks-adept.js";
 import _poolAshioksErasure from "./pool/ashioks-erasure.js";
 import _poolAshioksForerunner from "./pool/ashioks-forerunner.js";
@@ -12639,6 +12640,7 @@ import _poolHeartOfRamos from "./pool/heart-of-ramos.js";
 import _poolHeartOfYavimaya from "./pool/heart-of-yavimaya.js";
 import _poolHeartPiercerBow from "./pool/heart-piercer-bow.js";
 import _poolHeartPiercerManticore from "./pool/heart-piercer-manticore.js";
+import _poolHeartShapedHerb from "./pool/heart-shaped-herb.js";
 import _poolHeartSliver from "./pool/heart-sliver.js";
 import _poolHeartWarden from "./pool/heart-warden.js";
 import _poolHeartWolf from "./pool/heart-wolf.js";
@@ -15623,6 +15625,7 @@ import _poolLagonnaBandStoryteller from "./pool/lagonna-band-storyteller.js";
 import _poolLagonnaBandTrailblazer from "./pool/lagonna-band-trailblazer.js";
 import _poolLagoonBreach from "./pool/lagoon-breach.js";
 import _poolLagorinSoulOfAlacria from "./pool/lagorin-soul-of-alacria.js";
+import _poolLagrellaTheMagpie from "./pool/lagrella-the-magpie.js";
 import _poolLaidToRest from "./pool/laid-to-rest.js";
 import _poolLairDelve from "./pool/lair-delve.js";
 import _poolLairOfTheHydra from "./pool/lair-of-the-hydra.js";
@@ -16490,6 +16493,7 @@ import _poolLuckyOffering from "./pool/lucky-offering.js";
 import _poolLuckyThePizzaDog from "./pool/lucky-the-pizza-dog.js";
 import _poolLucyMacleanPositivelyArmed from "./pool/lucy-maclean-positively-armed.js";
 import _poolLudevicNecroAlchemist from "./pool/ludevic-necro-alchemist.js";
+import _poolLudevicNecrogenius from "./pool/ludevic-necrogenius.js";
 import _poolLudevicsAbomination from "./pool/ludevics-abomination.js";
 import _poolLudevicsTestSubject from "./pool/ludevics-test-subject.js";
 import _poolLukeCageHeroForHire from "./pool/luke-cage-hero-for-hire.js";
@@ -17449,6 +17453,7 @@ import _poolMetallurgicSummonings from "./pool/metallurgic-summonings.js";
 import _poolMetalspinnersPuzzleknot from "./pool/metalspinners-puzzleknot.js";
 import _poolMetalworkColossus from "./pool/metalwork-colossus.js";
 import _poolMetalworker from "./pool/metalworker.js";
+import _poolMetamorphicAlteration from "./pool/metamorphic-alteration.js";
 import _poolMetamorphicBlast from "./pool/metamorphic-blast.js";
 import _poolMetamorphicWurm from "./pool/metamorphic-wurm.js";
 import _poolMetamorphose from "./pool/metamorphose.js";
@@ -19410,6 +19415,7 @@ import _poolOkosHospitality from "./pool/okos-hospitality.js";
 import _poolOkoyeDoraMilajeLeader from "./pool/okoye-dora-milaje-leader.js";
 import _poolOkoyeMightyAndAdored from "./pool/okoye-mighty-and-adored.js";
 import _poolOlagAndMiauNewFriends from "./pool/olag-and-miau-new-friends.js";
+import _poolOlagLudevicsHubris from "./pool/olag-ludevics-hubris.js";
 import _poolOldFatSpiderCantSeeMe from "./pool/old-fat-spider-cant-see-me.js";
 import _poolOldFatSpider from "./pool/old-fat-spider.js";
 import _poolOldFlitterfang from "./pool/old-flitterfang.js";
@@ -33196,6 +33202,7 @@ import _tokensNecronWarriorToken from "./tokens/necron-warrior-token.js";
 import _tokensNeurofluxHeirloomToken from "./tokens/neuroflux-heirloom-token.js";
 import _tokensNewPlanetToken from "./tokens/new-planet-token.js";
 import _tokensNightmareHorrorToken from "./tokens/nightmare-horror-token.js";
+import _tokensNightmareTokenAshiokWickedManipulator from "./tokens/nightmare-token-ashiok-wicked-manipulator.js";
 import _tokensNightmareTokenAshiok from "./tokens/nightmare-token-ashiok.js";
 import _tokensNinjaTokenDarkLeoShredder from "./tokens/ninja-token-dark-leo-shredder.js";
 import _tokensNinjaTokenKaitoShizuki from "./tokens/ninja-token-kaito-shizuki.js";
@@ -35012,6 +35019,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAshiokNightmareMuse,
   _poolAshiokNightmareWeaver,
   _poolAshiokSculptorOfFears,
+  _poolAshiokWickedManipulator,
   _poolAshioksAdept,
   _poolAshioksErasure,
   _poolAshioksForerunner,
@@ -46169,6 +46177,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeartOfYavimaya,
   _poolHeartPiercerBow,
   _poolHeartPiercerManticore,
+  _poolHeartShapedHerb,
   _poolHeartSliver,
   _poolHeartWarden,
   _poolHeartWolf,
@@ -49153,6 +49162,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLagonnaBandTrailblazer,
   _poolLagoonBreach,
   _poolLagorinSoulOfAlacria,
+  _poolLagrellaTheMagpie,
   _poolLaidToRest,
   _poolLairDelve,
   _poolLairOfTheHydra,
@@ -50020,6 +50030,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLuckyThePizzaDog,
   _poolLucyMacleanPositivelyArmed,
   _poolLudevicNecroAlchemist,
+  _poolLudevicNecrogenius,
   _poolLudevicsAbomination,
   _poolLudevicsTestSubject,
   _poolLukeCageHeroForHire,
@@ -50979,6 +50990,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMetalspinnersPuzzleknot,
   _poolMetalworkColossus,
   _poolMetalworker,
+  _poolMetamorphicAlteration,
   _poolMetamorphicBlast,
   _poolMetamorphicWurm,
   _poolMetamorphose,
@@ -52940,6 +52952,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOkoyeDoraMilajeLeader,
   _poolOkoyeMightyAndAdored,
   _poolOlagAndMiauNewFriends,
+  _poolOlagLudevicsHubris,
   _poolOldFatSpiderCantSeeMe,
   _poolOldFatSpider,
   _poolOldFlitterfang,
@@ -66732,6 +66745,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensNeurofluxHeirloomToken,
   _tokensNewPlanetToken,
   _tokensNightmareHorrorToken,
+  _tokensNightmareTokenAshiokWickedManipulator,
   _tokensNightmareTokenAshiok,
   _tokensNinjaTokenDarkLeoShredder,
   _tokensNinjaTokenKaitoShizuki,
@@ -68555,6 +68569,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ashiok-nightmare-muse": _poolAshiokNightmareMuse,
   "pool/ashiok-nightmare-weaver": _poolAshiokNightmareWeaver,
   "pool/ashiok-sculptor-of-fears": _poolAshiokSculptorOfFears,
+  "pool/ashiok-wicked-manipulator": _poolAshiokWickedManipulator,
   "pool/ashioks-adept": _poolAshioksAdept,
   "pool/ashioks-erasure": _poolAshioksErasure,
   "pool/ashioks-forerunner": _poolAshioksForerunner,
@@ -79712,6 +79727,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heart-of-yavimaya": _poolHeartOfYavimaya,
   "pool/heart-piercer-bow": _poolHeartPiercerBow,
   "pool/heart-piercer-manticore": _poolHeartPiercerManticore,
+  "pool/heart-shaped-herb": _poolHeartShapedHerb,
   "pool/heart-sliver": _poolHeartSliver,
   "pool/heart-warden": _poolHeartWarden,
   "pool/heart-wolf": _poolHeartWolf,
@@ -82696,6 +82712,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lagonna-band-trailblazer": _poolLagonnaBandTrailblazer,
   "pool/lagoon-breach": _poolLagoonBreach,
   "pool/lagorin-soul-of-alacria": _poolLagorinSoulOfAlacria,
+  "pool/lagrella-the-magpie": _poolLagrellaTheMagpie,
   "pool/laid-to-rest": _poolLaidToRest,
   "pool/lair-delve": _poolLairDelve,
   "pool/lair-of-the-hydra": _poolLairOfTheHydra,
@@ -83563,6 +83580,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lucky-the-pizza-dog": _poolLuckyThePizzaDog,
   "pool/lucy-maclean-positively-armed": _poolLucyMacleanPositivelyArmed,
   "pool/ludevic-necro-alchemist": _poolLudevicNecroAlchemist,
+  "pool/ludevic-necrogenius": _poolLudevicNecrogenius,
   "pool/ludevics-abomination": _poolLudevicsAbomination,
   "pool/ludevics-test-subject": _poolLudevicsTestSubject,
   "pool/luke-cage-hero-for-hire": _poolLukeCageHeroForHire,
@@ -84522,6 +84540,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/metalspinners-puzzleknot": _poolMetalspinnersPuzzleknot,
   "pool/metalwork-colossus": _poolMetalworkColossus,
   "pool/metalworker": _poolMetalworker,
+  "pool/metamorphic-alteration": _poolMetamorphicAlteration,
   "pool/metamorphic-blast": _poolMetamorphicBlast,
   "pool/metamorphic-wurm": _poolMetamorphicWurm,
   "pool/metamorphose": _poolMetamorphose,
@@ -86483,6 +86502,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/okoye-dora-milaje-leader": _poolOkoyeDoraMilajeLeader,
   "pool/okoye-mighty-and-adored": _poolOkoyeMightyAndAdored,
   "pool/olag-and-miau-new-friends": _poolOlagAndMiauNewFriends,
+  "pool/olag-ludevics-hubris": _poolOlagLudevicsHubris,
   "pool/old-fat-spider-cant-see-me": _poolOldFatSpiderCantSeeMe,
   "pool/old-fat-spider": _poolOldFatSpider,
   "pool/old-flitterfang": _poolOldFlitterfang,
@@ -100269,6 +100289,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/neuroflux-heirloom-token": _tokensNeurofluxHeirloomToken,
   "tokens/new-planet-token": _tokensNewPlanetToken,
   "tokens/nightmare-horror-token": _tokensNightmareHorrorToken,
+  "tokens/nightmare-token-ashiok-wicked-manipulator": _tokensNightmareTokenAshiokWickedManipulator,
   "tokens/nightmare-token-ashiok": _tokensNightmareTokenAshiok,
   "tokens/ninja-token-dark-leo-shredder": _tokensNinjaTokenDarkLeoShredder,
   "tokens/ninja-token-kaito-shizuki": _tokensNinjaTokenKaitoShizuki,

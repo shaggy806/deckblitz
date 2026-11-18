@@ -1069,6 +1069,7 @@ import _tokensKlingonWarriorToken from "../tokens/klingon-warrior-token.js";
 import _tokensKnightTokenGuardedHeir from "../tokens/knight-token-guarded-heir.js";
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensMaskToken from "../tokens/mask-token.js";
+import _tokensNightmareTokenAshiokWickedManipulator from "../tokens/nightmare-token-ashiok-wicked-manipulator.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
 import _tokensPirateTokenCantBlockCreaturesAttack from "../tokens/pirate-token-cant-block-creatures-attack.js";
 import _tokensReflectionTokenWhite22 from "../tokens/reflection-token-white-2-2.js";
@@ -2152,6 +2153,7 @@ const shard: CardShard = {
     _tokensKnightTokenGuardedHeir,
     _tokensLeviathanToken,
     _tokensMaskToken,
+    _tokensNightmareTokenAshiokWickedManipulator,
     _tokensOtterToken,
     _tokensPirateTokenCantBlockCreaturesAttack,
     _tokensReflectionTokenWhite22,

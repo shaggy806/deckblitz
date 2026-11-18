@@ -620,6 +620,7 @@ import _poolObNixilisTheFallen from "../pool/ob-nixilis-the-fallen.js";
 import _poolOdricLunarchMarshal from "../pool/odric-lunarch-marshal.js";
 import _poolOfficiousInterrogation from "../pool/officious-interrogation.js";
 import _poolOgreArsonist from "../pool/ogre-arsonist.js";
+import _poolOlagLudevicsHubris from "../pool/olag-ludevics-hubris.js";
 import _poolOliphaunt from "../pool/oliphaunt.js";
 import _poolOliviasAttendants from "../pool/olivias-attendants.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
@@ -1697,6 +1698,7 @@ const shard: CardShard = {
     _poolOdricLunarchMarshal,
     _poolOfficiousInterrogation,
     _poolOgreArsonist,
+    _poolOlagLudevicsHubris,
     _poolOliphaunt,
     _poolOliviasAttendants,
     _poolOliviasWrath,

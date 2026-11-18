@@ -51,6 +51,7 @@ import _poolArmillarySphere from "../pool/armillary-sphere.js";
 import _poolArmyOfAllah from "../pool/army-of-allah.js";
 import _poolArnjlotsAscent from "../pool/arnjlots-ascent.js";
 import _poolArtilleryBlast from "../pool/artillery-blast.js";
+import _poolAshiokWickedManipulator from "../pool/ashiok-wicked-manipulator.js";
 import _poolAspirantsAscent from "../pool/aspirants-ascent.js";
 import _poolAssaultFormation from "../pool/assault-formation.js";
 import _poolAtrociousExperiment from "../pool/atrocious-experiment.js";
@@ -1148,6 +1149,7 @@ const shard: CardShard = {
     _poolArmyOfAllah,
     _poolArnjlotsAscent,
     _poolArtilleryBlast,
+    _poolAshiokWickedManipulator,
     _poolAspirantsAscent,
     _poolAssaultFormation,
     _poolAtrociousExperiment,

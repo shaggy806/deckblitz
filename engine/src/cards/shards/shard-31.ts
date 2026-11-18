@@ -572,6 +572,7 @@ import _poolLostJitte from "../pool/lost-jitte.js";
 import _poolLtCmdrGeordiLaForge from "../pool/lt-cmdr-geordi-la-forge.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
+import _poolLudevicNecrogenius from "../pool/ludevic-necrogenius.js";
 import _poolMageDuel from "../pool/mage-duel.js";
 import _poolMagetaTheLion from "../pool/mageta-the-lion.js";
 import _poolMagisterSphinx from "../pool/magister-sphinx.js";
@@ -595,6 +596,7 @@ import _poolMechanizedWarfare from "../pool/mechanized-warfare.js";
 import _poolMendTheWilds from "../pool/mend-the-wilds.js";
 import _poolMerchantOfTruth from "../pool/merchant-of-truth.js";
 import _poolMesaPegasus from "../pool/mesa-pegasus.js";
+import _poolMetamorphicAlteration from "../pool/metamorphic-alteration.js";
 import _poolMetamorphose from "../pool/metamorphose.js";
 import _poolMichelangelosTechnique from "../pool/michelangelos-technique.js";
 import _poolMidnightCovenant from "../pool/midnight-covenant.js";
@@ -1681,6 +1683,7 @@ const shard: CardShard = {
     _poolLtCmdrGeordiLaForge,
     _poolLuckyOffering,
     _poolLudevicNecroAlchemist,
+    _poolLudevicNecrogenius,
     _poolMageDuel,
     _poolMagetaTheLion,
     _poolMagisterSphinx,
@@ -1704,6 +1707,7 @@ const shard: CardShard = {
     _poolMendTheWilds,
     _poolMerchantOfTruth,
     _poolMesaPegasus,
+    _poolMetamorphicAlteration,
     _poolMetamorphose,
     _poolMichelangelosTechnique,
     _poolMidnightCovenant,

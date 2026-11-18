@@ -495,6 +495,7 @@ import _poolKuraTheBoundlessSky from "../pool/kura-the-boundless-sky.js";
 import _poolKyloxVisionaryInventor from "../pool/kylox-visionary-inventor.js";
 import _poolKyoshiBattleFan from "../pool/kyoshi-battle-fan.js";
 import _poolKyoshiWarriorExemplars from "../pool/kyoshi-warrior-exemplars.js";
+import _poolLagrellaTheMagpie from "../pool/lagrella-the-magpie.js";
 import _poolLarvalScoutlander from "../pool/larval-scoutlander.js";
 import _poolLavaAxe from "../pool/lava-axe.js";
 import _poolLavaRunner from "../pool/lava-runner.js";
@@ -1558,6 +1559,7 @@ const shard: CardShard = {
     _poolKyloxVisionaryInventor,
     _poolKyoshiBattleFan,
     _poolKyoshiWarriorExemplars,
+    _poolLagrellaTheMagpie,
     _poolLarvalScoutlander,
     _poolLavaAxe,
     _poolLavaRunner,
