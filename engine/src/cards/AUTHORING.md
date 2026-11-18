@@ -3580,7 +3580,15 @@ controller, read live of each permanent against its own controller's others
 matching `among` (ties all match, the controller choosing): Crackling Doom's
 and Will of the Abzan's edict, Soul Shatter's "greatest mana value among
 creatures and planeswalkers they control" (`of: "mana-value"`). Never inside
-the layer fold. `targets: { only?, single?, permanent?, source?, player? }`
+the layer fold. On a look-back trigger's `filter` (`dies`, `leaves-battlefield`,
+`sacrifice`, `destroyed`) it reads the permanent as it compared just before it
+left (rule 603.10a): Kraven the Hunter's "whenever a creature an opponent
+controls with the greatest power among creatures that player controls dies" is
+a `dies` trigger, `who: "any"`, `filter: { type: "creature", controlledBy:
+"opponent", greatestAmongItsController: { of: "power", among: { type:
+"creature" } } }` — in a wrath only the ones that were greatest, a lord that
+died not "greatest" because the creature it pumped shrank (the snapshot keeps
+the answer, for printed triggers on the battlefield as it left). `targets: { only?, single?, permanent?, source?, player? }`
 asks what a **spell** on the stack targets (anything else has no targets and never
 matches): a target that is a player (`player: "you" | "opponent" | "any"` — Dawn Charm's
 "counter target spell that targets you", Danitha, Spear of Agony's "a spell that targets an

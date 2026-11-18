@@ -794,10 +794,15 @@ export interface CardFilter {
    * `sacrifice` of `{ type: "creature", greatestAmongItsController: { of:
    * "power", among: { type: "creature" } } }`, the controller choosing among
    * the tied. A per-player maximum, so it's asked of each permanent against
-   * its own controller's, live; an object that isn't on the battlefield
-   * never matches.
+   * its own controller's, live. A permanent that has left is read as it
+   * compared just before (rule 603.10a) — Kraven the Hunter's "whenever a
+   * creature an opponent controls with the greatest power among creatures
+   * that player controls dies" on a dies trigger: its snapshot keeps the
+   * answer for each clause a look-back trigger on the battlefield asked
+   * (`LastKnownInfo.greatestAmongItsController`, `greatestClauseKey`). Any
+   * other object that isn't on the battlefield never matches.
    */
-  readonly greatestAmongItsController?: { readonly of: AggregateOf; readonly among: CardFilter; readonly least?: true };
+  readonly greatestAmongItsController?: GreatestAmongItsController;
   /**
    * It has the greatest `of` of everything in **its zone** that matches
    * `among`, ties all counted: no other has more. On the battlefield that's
@@ -3634,9 +3639,17 @@ export function matchesFilter(
   // "With the greatest power among creatures that player controls": none of
   // its controller's other matching permanents has more.
   const greatest = filter.greatestAmongItsController;
-  if (greatest !== undefined) {
+  if (greatest !== undefined && live === undefined) {
+    // One that has left, as it compared just before the event (rule
+    // 603.10a): its snapshot keeps the clauses a look-back trigger on the
+    // battlefield asks (`LastKnownInfo.greatestAmongItsController`), read
+    // against the board as it was — Kraven the Hunter's "a creature an
+    // opponent controls with the greatest power among creatures that player
+    // controls dies", its fellows dying with it or a lord gone with it.
+    if (layered !== undefined || lki?.greatestAmongItsController?.includes(greatestClauseKey(greatest)) !== true) return false;
+  } else if (greatest !== undefined && live !== undefined) {
     // Not inside the layer fold, which can't read other permanents' P/T.
-    if (layered !== undefined || live === undefined || live.zone !== "battlefield") return false;
+    if (layered !== undefined || live.zone !== "battlefield") return false;
     const mine = aggregateValueOf(state, registry, id, greatest.of);
     for (const other of state.zones.shared.battlefield) {
       if (other === id || state.objects[other]?.controller !== live.controller) continue;
@@ -3871,6 +3884,20 @@ export interface AggregateReads {
   /** Inside the layer fold: battlefield objects are matched by this
    * instead (the fold's own guard against reading itself). */
   readonly battlefieldMatch?: (id: ObjectId, filter: CardFilter) => boolean;
+}
+
+/** A {@link CardFilter}'s `greatestAmongItsController` clause. */
+export interface GreatestAmongItsController {
+  readonly of: AggregateOf;
+  readonly among: CardFilter;
+  readonly least?: true;
+}
+
+/** How a departed permanent's snapshot names a `greatestAmongItsController`
+ * clause it met just before it left (`LastKnownInfo`): the clause as
+ * written, so the trigger that asks it finds it again. */
+export function greatestClauseKey(clause: GreatestAmongItsController): string {
+  return JSON.stringify(clause);
 }
 
 /** Whether a filter asks about nothing but whose a card is, whether it's

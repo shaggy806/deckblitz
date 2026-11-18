@@ -2277,6 +2277,13 @@ export interface LastKnownInfo {
   readonly offBattlefield?: true;
   /** How many times it had mutated (`GameObject.merged.timesMutated`). */
   readonly timesMutated?: number;
+  /** The `greatestAmongItsController` filter clauses it met just before it
+   * left, each by `greatestClauseKey` — recorded for the clauses a look-back
+   * trigger on the battlefield asks then (Kraven the Hunter's "with the
+   * greatest power among creatures that player controls dies"), since the
+   * comparison is with the board as it was (rule 603.10a), its fellows that
+   * left with it and what shrank once it was gone included. */
+  readonly greatestAmongItsController?: readonly string[];
   /** A token's `GameObject.linkedExile`: what its leaves-the-battlefield
    * ability still means once it has ceased to exist. */
   readonly linkedExile?: GameObject["linkedExile"];

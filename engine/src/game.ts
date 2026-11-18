@@ -387,6 +387,7 @@ import {
   ownManaCostOf,
   filterAtX,
   filterReadsX,
+  greatestClauseKey,
   matchesFilter,
   ownerOnly,
   printedManaCost,
@@ -395,7 +396,14 @@ import {
   stackObjectTargetsMatching,
   weightedMatches,
 } from "./filter.js";
-import type { AggregateReads, AggregateSpec, CardFilter, SpellTargetsFilter, WeightedMatch } from "./filter.js";
+import type {
+  AggregateReads,
+  AggregateSpec,
+  CardFilter,
+  GreatestAmongItsController,
+  SpellTargetsFilter,
+  WeightedMatch,
+} from "./filter.js";
 import {
   addToSet,
   memberCount,
@@ -2934,6 +2942,11 @@ export class Game {
   private readonly graveyardTriggerNames = new Map<string, boolean>();
   /** The same for a triggered ability that works in exile (`fromExile`). */
   private readonly exileTriggerNames = new Map<string, boolean>();
+  /** The `greatestAmongItsController` clauses each printed card's look-back
+   * triggers ask of a permanent that leaves (`greatestClausesMet`), by name,
+   * filled in as cards are asked about. Not game state: it only caches the
+   * registry. */
+  private readonly lookBackGreatestClauses = new Map<string, readonly GreatestAmongItsController[]>();
 
   private constructor(
     state: GameState,
@@ -70066,6 +70079,48 @@ controlledBy,
     return out;
   }
 
+  /**
+   * The `greatestAmongItsController` clauses permanent `id` meets as the
+   * board is now, of those a printed look-back trigger of a permanent on the
+   * battlefield asks (`lookBackGreatestClauses`), each by `greatestClauseKey`
+   * — taken into its snapshot as it leaves, before anything has moved, so
+   * the trigger compares it with the board as it was (rule 603.10a): Kraven
+   * the Hunter's "a creature an opponent controls with the greatest power
+   * among creatures that player controls dies", whatever died with it or
+   * shrank once it was gone. With no such trigger about, nothing is asked.
+   */
+  private greatestClausesMet(id: ObjectId): readonly string[] {
+    const object = this.state.objects[id];
+    if (object?.zone !== "battlefield") return [];
+    let clauses: GreatestAmongItsController[] | undefined;
+    for (const other of this.state.zones.shared.battlefield) {
+      const watcher = this.state.objects[other];
+      if (watcher === undefined) continue;
+      const name = rulesTextName(watcher);
+      let asked = this.lookBackGreatestClauses.get(name);
+      if (asked === undefined) {
+        asked = this.registry.get(name).triggered.flatMap(({ trigger }) => {
+          if (!LOOK_BACK_TRIGGERS.has(trigger.on) || !("filter" in trigger)) return [];
+          const clause = trigger.filter?.greatestAmongItsController;
+          return clause === undefined ? [] : [clause];
+        });
+        this.lookBackGreatestClauses.set(name, asked);
+      }
+      if (asked.length > 0) (clauses ??= []).push(...asked);
+    }
+    if (clauses === undefined) return [];
+    const seen = new Set<string>();
+    const met: string[] = [];
+    for (const clause of clauses) {
+      const key = greatestClauseKey(clause);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const test: CardFilter = { greatestAmongItsController: clause };
+      if (matchesFilter(this.state, this.registry, id, test, { you: object.controller })) met.push(key);
+    }
+    return met;
+  }
+
   private takeLastKnown(id: ObjectId): LastKnownInfo {
     const object = this.state.objects[id];
     const name = printedCardName(object);
@@ -70088,8 +70143,10 @@ controlledBy,
     // its source is still here (a simultaneous event snapshots every victim
     // before the first moves).
     const goaders = goadersOf(this.state, this.registry, id);
+    const greatest = this.greatestClausesMet(id);
     return {
       zoneChangeCount: object.zoneChangeCount ?? 0,
+      ...(greatest.length > 0 ? { greatestAmongItsController: greatest } : {}),
       ...(object.classLevel !== undefined ? { classLevel: object.classLevel } : {}),
       ...(object.notedName !== undefined ? { notedName: object.notedName } : {}),
       ...(object.linkedExile !== undefined ? { linkedExile: object.linkedExile } : {}),
