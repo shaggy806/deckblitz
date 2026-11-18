@@ -91,7 +91,10 @@ describe("the land-drop invariant", () => {
     // nothing must still make the drop, because the search no longer weighs a
     // land against passing at all.
     const flat: EvalWeights = { ...DEFAULT_WEIGHTS, hand: 2, lands: 2, extraLands: 2 };
-    const [report] = runScenarios(flat, registry).filter((r) => r.name.startsWith("plays a land"));
+    // Only the land-drop scenarios: run under `flat`, the whole suite took 23 s
+    // of this test's 30 on a busy machine, and timed out there (2026-11-17).
+    const landDrops = BOT_SCENARIOS.filter((scenario) => scenario.name.startsWith("plays a land"));
+    const [report] = runScenarios(flat, registry, undefined, landDrops);
     expect(report.passed, report.detail).toBe(true);
   });
 });
