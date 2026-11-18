@@ -7305,6 +7305,40 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  asked({
+    name: "hands Dawnbreak Reclaimer's controller the worst creature card in their graveyard",
+    rule: "A card chosen for an opponent's effect to give them is the one that does them the least good.",
+    position(registry) {
+      // B334's live check: the Reclaimer's opponent handed back an arbitrary
+      // creature. v1 answered as a search of an opponent's zones is answered,
+      // with the card they'd miss most (the Dreadmaw); the search found the
+      // Bears wherever its rollouts made the return, and kept v1's answer
+      // where they didn't. Bob's Reclaimer, his end step: he has chosen
+      // Alice's Elves, and she chooses what he gets back.
+      const game = table(registry, [A, B], B);
+      lands(game, "Plains", B, 7);
+      lands(game, "Forest", A, 7);
+      onBoard(game, "Dawnbreak Reclaimer", B);
+      game.debugSpawn("Llanowar Elves", A, "graveyard");
+      game.debugSpawn("Trained Armodon", B, "graveyard");
+      const bears = game.debugSpawn("Grizzly Bears", B, "graveyard");
+      game.debugSpawn("Colossal Dreadmaw", B, "graveyard");
+      game.advanceUntil(
+        (s) => (s.awaiting?.kind === "choose-from-zone" && s.awaiting.player === A) || s.result.over || s.turn.step === "cleanup",
+      );
+      if (game.state.awaiting?.kind !== "choose-from-zone" || game.state.awaiting.player !== A) {
+        return { passed: false, detail: "alice was never asked to choose a creature card in bob's graveyard" };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-from-zone" && action.chosen.length === 1 && action.chosen[0] === bears,
+          detail: describeAction(action).slice(0, 120),
+        }),
+      };
+    },
+  }),
   // Opening hands (BACKLOG "More training scenarios": mulligans weren't
   // covered). The policy is one scoring function shared by every bot
   // (`bot/mulligan.ts`), pinned number by number in `mulligan-policy.test.ts`;

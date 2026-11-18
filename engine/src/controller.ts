@@ -4733,6 +4733,32 @@ export class HeuristicBotController extends AutomaticController {
     if (forPlayer !== undefined && forPlayer !== this.playerId && awaiting?.kind === "choose-from-zone" && awaiting.destination === "discard") {
       return this.mostUsefulTo(view.state, forPlayer, eligible, Math.max(min, Math.min(max, 1)));
     }
+    // A card of theirs another player's effect has us choose where it lies
+    // (`destination: "stay"` — Dawnbreak Reclaimer's "that player chooses a
+    // creature card in your graveyard", which its controller may then
+    // return): nothing is taken, and what's chosen is what they get, so the
+    // one that does them the least good. Unless the effect is for the cards
+    // *not* chosen (`exceptChosen` — Plargg and Nassari's "an opponent
+    // chooses a nonland card exiled this way", the one that can't be cast):
+    // then the one they'd want most. By what the card is worth wherever it
+    // ends up (`targetValue`, its mana value), not by what their lands could
+    // cast: it isn't going to their hand. Before 2026-11-17 this was answered
+    // as a search of their zones is, and handed back their best creature;
+    // v2's search finds the difference where its rollouts make the return,
+    // and keeps this answer where they don't.
+    if (
+      forPlayer !== undefined &&
+      forPlayer !== this.playerId &&
+      awaiting?.kind === "choose-from-zone" &&
+      awaiting.destination === "stay" &&
+      this.resolvingForAnother(view.state)
+    ) {
+      const withheld = this.resolvingEffectText(view.state).includes('"exceptChosen":true');
+      const worth = (id: ObjectId): number => targetValue(view.state, this.registry, { kind: "object", object: id });
+      // Ties keep the offer's order, either way.
+      const ranked = [...eligible].sort((a, b) => (withheld ? worth(b) - worth(a) : worth(a) - worth(b)));
+      return ranked.slice(0, Math.max(min, Math.min(max, 1)));
+    }
     // Searching an opponent's zones (Extract, Memoricide, Bribery): what we
     // take from them, exiled, milled or ours, is the most they'd miss, and as
     // much of it as allowed.
@@ -5170,6 +5196,21 @@ export class HeuristicBotController extends AutomaticController {
       ...eligible.filter((id) => id === source),
     ];
     return ordered.slice(0, count);
+  }
+
+  /** The spell or ability resolving now (the top of the stack), if another
+   * player controls it: a choice it asks of us is one we make against them. */
+  private resolvingForAnother(state: GameState): boolean {
+    const top = state.objects[state.zones.shared.stack[state.zones.shared.stack.length - 1]];
+    return top !== undefined && top.controller !== this.playerId;
+  }
+
+  /** The effect of the spell or ability resolving now, as text to look a
+   * field up in; empty when it can't be read off a card. */
+  private resolvingEffectText(state: GameState): string {
+    const top = state.objects[state.zones.shared.stack[state.zones.shared.stack.length - 1]];
+    const effect = top === undefined ? undefined : stackEffectOf(this.registry, top);
+    return effect === undefined ? "" : JSON.stringify(effect);
   }
 
   /** The `count` cards of `eligible` that would do `player` the least good in
