@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-992 already implemented / 8 missing
+993 already implemented / 7 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -713,7 +713,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  707  Will, Scion of Peace                            4715 decks  {1}{W}{U}        Legendary Creature — Human Wizard
 [x]  708  Breeches, Brazen Plunderer                      4708 decks  {3}{R}           Legendary Creature — Goblin Pirate
 [x]  709  Beledros Witherbloom                            4690 decks  {5}{B}{G}        Legendary Creature — Elder Dragon
-[ ]  710  Eriette, the Beguiler                           4689 decks  {1}{W}{U}{B}     Legendary Creature — Human Warlock
+[x]  710  Eriette, the Beguiler                           4689 decks  {1}{W}{U}{B}     Legendary Creature — Human Warlock
 [x]  711  The Master, Multiplied                          4685 decks  {4}{B}{R}        Legendary Creature — Time Lord Rogue
 [x]  712  Zenos yae Galvus                                4685 decks  {3}{B}{B}        Legendary Creature — Human Noble Warrior // Legendary Creature — Dragon
 [x]  713  Elmar, Ulvenwald Informant                      4661 decks  {1}{R}{G}        Legendary Creature — Human
