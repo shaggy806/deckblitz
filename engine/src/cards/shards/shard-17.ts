@@ -335,6 +335,7 @@ import _poolGaladrielsDismissal from "../pool/galadriels-dismissal.js";
 import _poolGallowsWarden from "../pool/gallows-warden.js";
 import _poolGarenbrigPaladin from "../pool/garenbrig-paladin.js";
 import _poolGarthOneEye from "../pool/garth-one-eye.js";
+import _poolGatherSpecimens from "../pool/gather-specimens.js";
 import _poolGavonyTrapper from "../pool/gavony-trapper.js";
 import _poolGeistcatchersRig from "../pool/geistcatchers-rig.js";
 import _poolGemOfBecoming from "../pool/gem-of-becoming.js";
@@ -637,6 +638,7 @@ import _poolOsgirTheReconstructor from "../pool/osgir-the-reconstructor.js";
 import _poolOstracize from "../pool/ostracize.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
+import _poolOverblaze from "../pool/overblaze.js";
 import _poolOvergrownZealot from "../pool/overgrown-zealot.js";
 import _poolOverrule from "../pool/overrule.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
@@ -1379,6 +1381,7 @@ const shard: CardShard = {
     _poolGallowsWarden,
     _poolGarenbrigPaladin,
     _poolGarthOneEye,
+    _poolGatherSpecimens,
     _poolGavonyTrapper,
     _poolGeistcatchersRig,
     _poolGemOfBecoming,
@@ -1681,6 +1684,7 @@ const shard: CardShard = {
     _poolOstracize,
     _poolOutlawsFury,
     _poolOutriderOfJhess,
+    _poolOverblaze,
     _poolOvergrownZealot,
     _poolOverrule,
     _poolPaladinOfPredation,

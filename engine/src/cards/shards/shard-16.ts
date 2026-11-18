@@ -869,6 +869,7 @@ import _poolStonybrookAngler from "../pool/stonybrook-angler.js";
 import _poolStormFleetAerialist from "../pool/storm-fleet-aerialist.js";
 import _poolStormFleetPyromancer from "../pool/storm-fleet-pyromancer.js";
 import _poolStormGodsOracle from "../pool/storm-gods-oracle.js";
+import _poolStormOfForms from "../pool/storm-of-forms.js";
 import _poolStormsWrath from "../pool/storms-wrath.js";
 import _poolStrataScythe from "../pool/strata-scythe.js";
 import _poolStreetRiot from "../pool/street-riot.js";
@@ -1978,6 +1979,7 @@ const shard: CardShard = {
     _poolStormFleetAerialist,
     _poolStormFleetPyromancer,
     _poolStormGodsOracle,
+    _poolStormOfForms,
     _poolStormsWrath,
     _poolStrataScythe,
     _poolStreetRiot,

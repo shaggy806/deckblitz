@@ -412,6 +412,7 @@ import _poolGuanYuSaintedWarrior from "../pool/guan-yu-sainted-warrior.js";
 import _poolGustcloakSentinel from "../pool/gustcloak-sentinel.js";
 import _poolGwyllionHedgeMage from "../pool/gwyllion-hedge-mage.js";
 import _poolHagraCrocodile from "../pool/hagra-crocodile.js";
+import _poolHalimarTidecaller from "../pool/halimar-tidecaller.js";
 import _poolHandOfVecna from "../pool/hand-of-vecna.js";
 import _poolHarshSustenance from "../pool/harsh-sustenance.js";
 import _poolHazardOfTheDunes from "../pool/hazard-of-the-dunes.js";
@@ -1453,6 +1454,7 @@ const shard: CardShard = {
     _poolGustcloakSentinel,
     _poolGwyllionHedgeMage,
     _poolHagraCrocodile,
+    _poolHalimarTidecaller,
     _poolHandOfVecna,
     _poolHarshSustenance,
     _poolHazardOfTheDunes,

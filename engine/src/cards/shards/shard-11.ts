@@ -361,6 +361,7 @@ import _poolGiftOfTheViper from "../pool/gift-of-the-viper.js";
 import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
 import _poolGiltLeafSeer from "../pool/gilt-leaf-seer.js";
+import _poolGimbalGremlinProdigy from "../pool/gimbal-gremlin-prodigy.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGimliMournfulAvenger from "../pool/gimli-mournful-avenger.js";
 import _poolGlacialGrasp from "../pool/glacial-grasp.js";
@@ -653,6 +654,7 @@ import _poolPearlEarImperialAdvisor from "../pool/pearl-ear-imperial-advisor.js"
 import _poolPelakkaWurm from "../pool/pelakka-wurm.js";
 import _poolPentarchPaladin from "../pool/pentarch-paladin.js";
 import _poolPerennialBehemoth from "../pool/perennial-behemoth.js";
+import _poolPerrieThePulverizer from "../pool/perrie-the-pulverizer.js";
 import _poolPestInfestation from "../pool/pest-infestation.js";
 import _poolPestilentKathari from "../pool/pestilent-kathari.js";
 import _poolPestsOfHonor from "../pool/pests-of-honor.js";
@@ -1422,6 +1424,7 @@ const shard: CardShard = {
     _poolGildedAssaultCart,
     _poolGildedGoose,
     _poolGiltLeafSeer,
+    _poolGimbalGremlinProdigy,
     _poolGimliCounterOfKills,
     _poolGimliMournfulAvenger,
     _poolGlacialGrasp,
@@ -1714,6 +1717,7 @@ const shard: CardShard = {
     _poolPelakkaWurm,
     _poolPentarchPaladin,
     _poolPerennialBehemoth,
+    _poolPerrieThePulverizer,
     _poolPestInfestation,
     _poolPestilentKathari,
     _poolPestsOfHonor,

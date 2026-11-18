@@ -990,6 +990,7 @@ import _poolWelcomeTheDead from "../pool/welcome-the-dead.js";
 import _poolWesternPaladin from "../pool/western-paladin.js";
 import _poolWhimsOfTheFates from "../pool/whims-of-the-fates.js";
 import _poolWhipSergeant from "../pool/whip-sergeant.js";
+import _poolWhisperingSnitch from "../pool/whispering-snitch.js";
 import _poolWildResearch from "../pool/wild-research.js";
 import _poolWildWurm from "../pool/wild-wurm.js";
 import _poolWilfredMott from "../pool/wilfred-mott.js";
@@ -2038,6 +2039,7 @@ const shard: CardShard = {
     _poolWesternPaladin,
     _poolWhimsOfTheFates,
     _poolWhipSergeant,
+    _poolWhisperingSnitch,
     _poolWildResearch,
     _poolWildWurm,
     _poolWilfredMott,

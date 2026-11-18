@@ -852,6 +852,7 @@ import _poolSylvanScavenging from "../pool/sylvan-scavenging.js";
 import _poolSynchronizedCharge from "../pool/synchronized-charge.js";
 import _poolSyndicateInfiltrator from "../pool/syndicate-infiltrator.js";
 import _poolSyrGwynHeroOfAshvale from "../pool/syr-gwyn-hero-of-ashvale.js";
+import _poolSyrixCarrierOfTheFlame from "../pool/syrix-carrier-of-the-flame.js";
 import _poolTakenosCavalry from "../pool/takenos-cavalry.js";
 import _poolTamiyosJournal from "../pool/tamiyos-journal.js";
 import _poolTarPitcher from "../pool/tar-pitcher.js";
@@ -1872,6 +1873,7 @@ const shard: CardShard = {
     _poolSynchronizedCharge,
     _poolSyndicateInfiltrator,
     _poolSyrGwynHeroOfAshvale,
+    _poolSyrixCarrierOfTheFlame,
     _poolTakenosCavalry,
     _poolTamiyosJournal,
     _poolTarPitcher,

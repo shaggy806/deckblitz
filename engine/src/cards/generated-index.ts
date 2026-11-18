@@ -343,6 +343,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Golem Vigilance Token",
   "Graveborn Token",
   "Green Sheep Token",
+  "Gremlin Artifact Token (0/0)",
   "Gremlin Token",
   "Griffin Token",
   "Guenhwyvar",

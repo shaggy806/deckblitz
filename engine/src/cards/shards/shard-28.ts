@@ -853,6 +853,7 @@ import _poolSporeBurst from "../pool/spore-burst.js";
 import _poolSporeFrog from "../pool/spore-frog.js";
 import _poolSporesowerThallid from "../pool/sporesower-thallid.js";
 import _poolSproutSwarm from "../pool/sprout-swarm.js";
+import _poolStanggEchoWarrior from "../pool/stangg-echo-warrior.js";
 import _poolStarWhale from "../pool/star-whale.js";
 import _poolSteelburrChampion from "../pool/steelburr-champion.js";
 import _poolSteelshaperApprentice from "../pool/steelshaper-apprentice.js";
@@ -1921,6 +1922,7 @@ const shard: CardShard = {
     _poolSporeFrog,
     _poolSporesowerThallid,
     _poolSproutSwarm,
+    _poolStanggEchoWarrior,
     _poolStarWhale,
     _poolSteelburrChampion,
     _poolSteelshaperApprentice,

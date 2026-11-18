@@ -971,6 +971,7 @@ import _poolThrabenMilitia from "../pool/thraben-militia.js";
 import _poolThranduilSindarinLiege from "../pool/thranduil-sindarin-liege.js";
 import _poolThrashingBrontodon from "../pool/thrashing-brontodon.js";
 import _poolThrivingHeath from "../pool/thriving-heath.js";
+import _poolThromokTheInsatiable from "../pool/thromok-the-insatiable.js";
 import _poolThunderTotem from "../pool/thunder-totem.js";
 import _poolTibaltTheFiendBlooded from "../pool/tibalt-the-fiend-blooded.js";
 import _poolTibaltsTrickery from "../pool/tibalts-trickery.js";
@@ -2080,6 +2081,7 @@ const shard: CardShard = {
     _poolThranduilSindarinLiege,
     _poolThrashingBrontodon,
     _poolThrivingHeath,
+    _poolThromokTheInsatiable,
     _poolThunderTotem,
     _poolTibaltTheFiendBlooded,
     _poolTibaltsTrickery,

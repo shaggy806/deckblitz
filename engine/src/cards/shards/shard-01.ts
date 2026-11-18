@@ -366,6 +366,7 @@ import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHazoretTheFervent from "../pool/hazoret-the-fervent.js";
 import _poolHeadhunter from "../pool/headhunter.js";
 import _poolHeatStroke from "../pool/heat-stroke.js";
+import _poolHedonistsTrove from "../pool/hedonists-trove.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeidarRimewindMaster from "../pool/heidar-rimewind-master.js";
@@ -1400,6 +1401,7 @@ const shard: CardShard = {
     _poolHazoretTheFervent,
     _poolHeadhunter,
     _poolHeatStroke,
+    _poolHedonistsTrove,
     _poolHedronCrab,
     _poolHedronDetonator,
     _poolHeidarRimewindMaster,

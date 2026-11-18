@@ -439,6 +439,7 @@ import _poolKeeperOfKeys from "../pool/keeper-of-keys.js";
 import _poolKeeperOfTheFlame from "../pool/keeper-of-the-flame.js";
 import _poolKefnetTheMindful from "../pool/kefnet-the-mindful.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
+import _poolKheruMindEater from "../pool/kheru-mind-eater.js";
 import _poolKidLoki from "../pool/kid-loki.js";
 import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
 import _poolKindredBoon from "../pool/kindred-boon.js";
@@ -1474,6 +1475,7 @@ const shard: CardShard = {
     _poolKeeperOfTheFlame,
     _poolKefnetTheMindful,
     _poolKheruGoldkeeper,
+    _poolKheruMindEater,
     _poolKidLoki,
     _poolKindleTheInnerFlame,
     _poolKindredBoon,

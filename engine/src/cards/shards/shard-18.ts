@@ -1022,6 +1022,7 @@ import _tokensFaerieRogueToken from "../tokens/faerie-rogue-token.js";
 import _tokensFishTokenReefWorm from "../tokens/fish-token-reef-worm.js";
 import _tokensFrogToken from "../tokens/frog-token.js";
 import _tokensGolemTokenMastersGuideMuralMastersManufactory from "../tokens/golem-token-masters-guide-mural-masters-manufactory.js";
+import _tokensGremlinArtifactToken00 from "../tokens/gremlin-artifact-token-0-0.js";
 import _tokensHumanKnightToken from "../tokens/human-knight-token.js";
 import _tokensInklingToken from "../tokens/inkling-token.js";
 import _tokensInsectWarriorToken from "../tokens/insect-warrior-token.js";
@@ -2067,6 +2068,7 @@ const shard: CardShard = {
     _tokensFishTokenReefWorm,
     _tokensFrogToken,
     _tokensGolemTokenMastersGuideMuralMastersManufactory,
+    _tokensGremlinArtifactToken00,
     _tokensHumanKnightToken,
     _tokensInklingToken,
     _tokensInsectWarriorToken,

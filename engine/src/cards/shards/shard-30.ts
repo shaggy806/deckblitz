@@ -405,6 +405,7 @@ import _poolGuidingVoice from "../pool/guiding-voice.js";
 import _poolGwennaEyesOfGaea from "../pool/gwenna-eyes-of-gaea.js";
 import _poolGyomeMasterChef from "../pool/gyome-master-chef.js";
 import _poolHagraSharpshooter from "../pool/hagra-sharpshooter.js";
+import _poolHallowedMoonlight from "../pool/hallowed-moonlight.js";
 import _poolHammerhand from "../pool/hammerhand.js";
 import _poolHardenedScaleArmor from "../pool/hardened-scale-armor.js";
 import _poolHarriedSpearguard from "../pool/harried-spearguard.js";
@@ -1475,6 +1476,7 @@ const shard: CardShard = {
     _poolGwennaEyesOfGaea,
     _poolGyomeMasterChef,
     _poolHagraSharpshooter,
+    _poolHallowedMoonlight,
     _poolHammerhand,
     _poolHardenedScaleArmor,
     _poolHarriedSpearguard,
