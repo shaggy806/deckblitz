@@ -702,6 +702,14 @@ export type EffectAmount =
    * a choice that was never made has no effect. */
   | { readonly chosenNumber: true }
   /**
+   * How many players and permanents a copy of the spell whose casting fired
+   * this could be aimed at by `copyAims` (see {@link CopyAimChoice}) — as the
+   * spell is on the stack, or as it last was there. Exterminator Magmarch's
+   * intervening "if another opponent controls one or more nonland permanents
+   * that spell could target" is this at least 1. 0 outside a cast trigger.
+   */
+  | { readonly copyAims: CopyAimChoice }
+  /**
    * The mana value of whatever a target slot (or `"source"` /
    * `"trigger-object"` / `"sacrificed"`) points at — Feed the Swarm's "you
    * lose life equal to that permanent's mana value", Hoard-Smelter Dragon,
@@ -1734,6 +1742,38 @@ export interface CopyForEach {
    * players among two or more, the order is asked a copy at a time (a
    * `choose-permanent-or-player` per copy, the last made unasked). */
   readonly players?: true;
+}
+
+/**
+ * What a `copy-spell`'s `retargetToChosen` chooses among for the copy to
+ * target (rule 707.10e: the copy's every target is the one chosen) — chosen
+ * as the effect resolves, not targeted. Exterminator Magmarch's "if another
+ * opponent controls one or more nonland permanents that spell could target,
+ * choose one of those permanents. Copy that spell. The copy targets the
+ * chosen permanent"; Zevlor, Elturel Exile's "for each other opponent, choose
+ * that player or a permanent they control, copy that spell, and the copy
+ * targets the chosen player or permanent".
+ */
+export interface CopyAimChoice {
+  /** Whose: the copier's opponents still in the game but the ones the spell
+   * targets and the controllers of the permanents it targets (as they last
+   * existed, once gone) — "another opponent", "each other opponent". */
+  readonly of: "other-opponents";
+  /** Their permanents to choose among, read from the copier's side: `{}` for
+   * "a permanent they control", Magmarch's `{ notTypes: ["land"] }`. */
+  readonly filter: CardFilter;
+  /** "That player or a permanent they control" (Zevlor): the player too. */
+  readonly players?: true;
+  /** "For each other opponent, choose …, copy that spell" (Zevlor): a choice
+   * and a copy for each of them, in turn order from the active player, each
+   * among that player's own. Otherwise one choice among them all, and one
+   * copy (Magmarch). */
+  readonly eachPlayer?: true;
+  /** "One of those permanents [that spell could target]" (Magmarch): only a
+   * legal target for each of the spell's targets, as its caster would choose
+   * it, is offered. Otherwise any is (Zevlor's ruling), and one that isn't
+   * legal makes no copy (707.10e). */
+  readonly couldTarget?: true;
 }
 
 /** An {@link UnlessOption} with any generic or life amount fixed — what the
@@ -8569,6 +8609,19 @@ export type EffectSpec =
        */
       readonly retargetTo?: "source" | "created" | number;
       /**
+       * "Choose one of those permanents. Copy that spell. The copy targets
+       * the chosen permanent" (Exterminator Magmarch); "for each other
+       * opponent, choose that player or a permanent they control, copy that
+       * spell, and the copy targets the chosen player or permanent" (Zevlor,
+       * Elturel Exile): the copy's every target is one the effect's
+       * controller chooses as it resolves (rule 707.10e) among what
+       * {@link CopyAimChoice} says, asked a `choose-permanent-or-player` at a
+       * time, each copy made as it's chosen — the first goes on the stack
+       * first. One that isn't a legal target for each of the spell's targets
+       * makes no copy. With `"trigger-spell"` only.
+       */
+      readonly retargetToChosen?: CopyAimChoice;
+      /**
        * "Copy that spell for each other creature you control that the spell
        * could target. Each copy targets a different one of those creatures"
        * (rule 707.10d — Zada, Hedron Grinder): one copy per battlefield
@@ -8617,13 +8670,16 @@ export type EffectSpec =
        * side "could target" is judged from. `payEach`: what this copy costs.
        * `left`: with players among the targets (a `choose-permanent-or-player`
        * per copy), every one still without a copy, this one included — once
-       * it's made, the next is asked about, or the last made. */
+       * it's made, the next is asked about, or the last made. `aimGroups`: a
+       * `retargetToChosen`'s choices still to ask after this copy, one copy
+       * each. */
       readonly spell?: {
         readonly snapshot: SpellSnapshot;
         readonly original: ObjectId;
         readonly caster?: PlayerId;
         readonly payEach?: string;
         readonly left?: readonly TargetRef[];
+        readonly aimGroups?: readonly (readonly TargetRef[])[];
       };
     }
   | {
@@ -14737,6 +14793,14 @@ export interface EffectApi {
     spell: NonNullable<Extract<EffectSpec, { kind: "copy-spell" }>["spell"]>,
     made: TargetRef,
   ): void;
+  /** See `copy-spell`'s `retargetToChosen`: ask what a copy of the trigger's
+   * `spell` targets (or make it, with one choice), a copy a choice. */
+  copyTriggerSpellToChosen(spell: SpellSnapshot, choice: CopyAimChoice, copier: PlayerId): void;
+  /** After a `retargetToChosen`'s copy, its next choice (`spell.aimGroups`). */
+  copyNextChosenAim(spell: NonNullable<Extract<EffectSpec, { kind: "copy-spell" }>["spell"]>): void;
+  /** The `copyAims` {@link EffectAmount}: how many `choice` offers for a
+   * copy of the spell whose casting fired this. */
+  copyAimCount(choice: CopyAimChoice): number;
   /** See the `exile-spell-as-it-resolves` {@link EffectSpec}: mark the
    * trigger's spell. */
   exileTriggerSpellAsItResolves(
@@ -17773,6 +17837,7 @@ export function signedAmountValue(
   if (typeof amount === "number") return amount;
   if ("triggerValue" in amount) return ctx.triggerValue;
   if ("chosenNumber" in amount) return ctx.chosenNumberOfSource() ?? Number.NaN;
+  if ("copyAims" in amount) return ctx.copyAimCount(amount.copyAims);
   if ("lifeTotal" in amount) {
     return ctx.lifeTotalOf(amount.lifeTotal === "each" ? (each ?? ctx.controller) : ctx.controller);
   }
@@ -23069,6 +23134,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             if (spec.forEachItCouldTarget !== undefined) {
               ctx.copyTriggerSpellForEach(spell, spec.forEachItCouldTarget, copier ?? ctx.controller);
               copied = true;
+            } else if (spec.retargetToChosen !== undefined && spec.spell === undefined) {
+              ctx.copyTriggerSpellToChosen(spell, spec.retargetToChosen, copier ?? ctx.controller);
+              copied = true;
             } else {
               const retargetTo = spec.retargetTo === undefined ? undefined : objectRefAct(spec.retargetTo, ctx);
               // A slot whose target has gone, or a source that has left, has
@@ -23090,6 +23158,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               // The rest of a "for each" with players among them: the next
               // asked about, or the last made.
               if (spec.spell?.left !== undefined && retargetTo !== undefined) ctx.copyNextSpellAimed(spec.spell, retargetTo);
+              // A `retargetToChosen`'s next choice.
+              if (spec.spell?.aimGroups !== undefined) ctx.copyNextChosenAim(spec.spell);
             }
           }
         } else {

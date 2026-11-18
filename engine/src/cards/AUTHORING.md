@@ -889,6 +889,11 @@ ability**: the entering / attacking creature's power (Terror of the Peaks:
 `chooseOnEnter` of numbers (Talion, the Kindly Lord's "the chosen number",
 compared in its trigger's filter as `n: { amount: { chosenNumber: true } }`).
 `NaN` when none was chosen, so a comparison with it never holds; or
+`{ copyAims: CopyAimChoice }` — how many players and permanents a `copy-spell`'s
+`retargetToChosen` would offer for a copy of the spell whose casting fired this,
+as it is on the stack or last was there (Exterminator Magmarch's intervening "if
+another opponent controls one or more nonland permanents that spell could
+target"); 0 outside a cast trigger; or
 `{ ifCondition: StaticCondition, then: EffectAmount, else: EffectAmount }` — one
 amount or the other by a condition asked as the amount is read, from the
 controller's side with the source counted (as a `conditional` effect's is):
@@ -2083,7 +2088,7 @@ play an additional land this turn"), `untap-all { filter, controlledByTarget?, e
 delayed trigger's "the next instant or sorcery spell you cast this turn has storm" — Storm, Force
 of Nature),
 `cascade`, `copy-spell { target, newTargets?, except?, gains?, ifTargets?, otherwise?, retargetTo?,
-forEachItCouldTarget?, count?, controller? }`, `copy-ability { target, newTargets?, forEachItCouldTarget? }`,
+retargetToChosen?, forEachItCouldTarget?, count?, controller? }`, `copy-ability { target, newTargets?, forEachItCouldTarget? }`,
 `change-targets { target, how, to?, optional? }`,
 `exile-spell-as-it-resolves { returnAtNextEndStep? }`,
 `shuffle-library` (the effect's controller shuffles — Ponder's "You may shuffle" inside a `may`). `exceptTop: n` shuffles all but the top `n`, those staying on top — Lim-Dûl's Vault's "then shuffle and put the last cards you looked at this way on top in any order" (its ruling: shuffle the rest, then a `look-and-choose` `top-any-order` of the five).
@@ -2156,6 +2161,23 @@ made, while it's still that spell on the stack (`spell-on-stack-gains-keyword.te
   does — the same `CopyForEach` on `copy-ability { target, forEachItCouldTarget }`, "could
   target" judged from the ability's source as its controller would choose
   (`copy-for-each-permanent-or-player.test.ts`).
+- `retargetToChosen: { of: "other-opponents", filter, players?, eachPlayer?, couldTarget? }` (a
+  `CopyAimChoice`) — the copy's every target is one its controller **chooses** as it resolves
+  (rule 707.10e; not a target, so hexproof doesn't stop the choice), among the copier's opponents
+  but the ones the spell targets and the controllers of what it targets: their permanents
+  matching `filter`, and with `players` the players. `eachPlayer` is "**for each other
+  opponent**, choose that player or a permanent they control, copy that spell, and the copy
+  targets the chosen player or permanent" (Zevlor, Elturel Exile: `{ filter: {}, players: true,
+  eachPlayer: true }` in a `nextSpell` delayed trigger whose filter is `targets: { only: true,
+  single: true, player: "opponent", permanent: { controlledBy: "opponent" } }`): a choice and a
+  copy per opponent, in turn order, each made as it's chosen. Without `couldTarget` any of theirs
+  may be chosen (Zevlor's ruling) and one that isn't a legal target makes no copy; with it only
+  legal ones are offered — Exterminator Magmarch's "choose one of those permanents [that spell
+  could target]" (`{ filter: { notTypes: ["land"] }, couldTarget: true }`, one choice among
+  them all). A group with one in it is made unasked. The `{ copyAims }` amount counts what it
+  would offer for the trigger's spell: Magmarch's intervening "if another opponent controls one
+  or more nonland permanents that spell could target" is `{ kind: "amounts", left: { copyAims },
+  op: "gte", right: 1 }` (`copy-spell-chosen-aim.test.ts`).
 - **Gravestorm** is `gravestorm()` (helpers.ts, rule 702.69a): a `this-cast` `copy-spell` with
   `newTargets` and a `count` of `{ turnHistory: "to-graveyard", who: "each-player", from:
   ["battlefield"] }`, tokens included, read as it resolves (Ominous Harvest).

@@ -352,6 +352,7 @@ import type {
   ModesGuess,
   BoundUnlessOption,
   CopyForEach,
+  CopyAimChoice,
   WardCost,
   ModeOption,
   ModesCostSacrifice,
@@ -45363,12 +45364,7 @@ controlledBy,
         // still on the stack and as it last was there if it has gone since
         // (608.2h — countered in response).
         if (triggerObject === undefined || refs.triggerSpell === undefined) return null;
-        const spell = this.state.objects[triggerObject];
-        if (spell === undefined) return null;
-        if (spell.zone === "stack" && (spell.zoneChangeCount ?? 0) === refs.triggerSpell) {
-          return this.spellSnapshot(spell);
-        }
-        return spell.lastOnStack?.zoneChangeCount === refs.triggerSpell ? spell.lastOnStack : null;
+        return this.triggerSpellOf(triggerObject, refs.triggerSpell);
       },
       doubleTriggerSpellX: () => {
         // Only that spell, still on the stack (rule 400.7): one countered or
@@ -45471,6 +45467,22 @@ controlledBy,
       },
       copyAbilityAimed: (original, to, left) => this.copyAbilityAimed(original, to, controller, source, left),
       copyNextSpellAimed: (spell, made) => this.copyNextSpellAimed(spell, made, controller, source),
+      copyTriggerSpellToChosen: (spell, choice, copier) => {
+        if (triggerObject === undefined) return;
+        // "Could target" is the spell's, as its caster cast it.
+        const caster = refs.triggerSpellController ?? this.state.objects[triggerObject]?.controller ?? copier;
+        const capture = { snapshot: spell, original: triggerObject, caster };
+        this.askNextChosenAim(capture, this.copyAimGroups(capture, copier, choice), copier, source);
+      },
+      copyNextChosenAim: (spell) => this.askNextChosenAim(spell, spell.aimGroups ?? [], controller, source),
+      copyAimCount: (choice) => {
+        if (triggerObject === undefined) return 0;
+        const spell = this.triggerSpellOf(triggerObject, refs.triggerSpell);
+        if (spell === null) return 0;
+        const caster = refs.triggerSpellController ?? spell.controller ?? controller;
+        const capture = { snapshot: spell, original: triggerObject, caster };
+        return this.copyAimGroups(capture, controller, choice).reduce((n, group) => n + group.length, 0);
+      },
       solveSource: () => {
         const object = this.state.objects[source];
         if (object?.zone !== "battlefield" || (refs.source !== undefined && (object.zoneChangeCount ?? 0) !== refs.source) || object.solved === true) return;
@@ -52477,6 +52489,131 @@ controlledBy,
       retargetTo: 0,
       spell: { ...spell, left: rest },
     });
+  }
+
+  /** The spell whose casting fired a trigger (rule 603.2): `id` in stint
+   * `stint` on the stack, as it is if it's still there and as it last was
+   * there if it has gone since (608.2h); with no stint (an intervening "if"
+   * asked as it triggers), as it is on the stack now. */
+  private triggerSpellOf(id: ObjectId, stint: number | undefined): SpellSnapshot | null {
+    const spell = this.state.objects[id];
+    if (spell === undefined) return null;
+    if (spell.zone === "stack" && spell.kind === "card" && (stint === undefined || (spell.zoneChangeCount ?? 0) === stint)) {
+      return this.spellSnapshot(spell);
+    }
+    return stint !== undefined && spell.lastOnStack?.zoneChangeCount === stint ? spell.lastOnStack : null;
+  }
+
+  /**
+   * What `choice` offers for a copy of `spell.snapshot` to target (rule
+   * 707.10e — `copy-spell`'s `retargetToChosen`): of `copier`'s opponents
+   * still in the game, each but the players the spell targets and the
+   * controllers of the permanents it targets (as they last existed, once
+   * gone), in turn order from the active player — that player with
+   * `players`, and each permanent they control matching `filter` from
+   * `copier`'s side. One group per player with `eachPlayer`, else one in
+   * all. With `couldTarget`, only a legal target for each of the spell's
+   * targets; a group where nothing is, choosing makes no copy, so it's left
+   * out.
+   */
+  private copyAimGroups(
+    spell: NonNullable<Extract<EffectSpec, { kind: "copy-spell" }>["spell"]>,
+    copier: PlayerId,
+    choice: CopyAimChoice,
+  ): TargetRef[][] {
+    const { snapshot, original } = spell;
+    const caster = spell.caster ?? copier;
+    const auto = new Set(snapshot.autoTargetSlots ?? []);
+    const aimedAt = new Set<PlayerId>();
+    (snapshot.targets ?? []).forEach((t, i) => {
+      if (t === undefined || auto.has(i)) return;
+      if (t.kind === "player") {
+        aimedAt.add(t.player);
+        return;
+      }
+      if (t.kind !== "object") return;
+      const stint = snapshot.targetStints?.[i];
+      const live = this.state.objects[t.object];
+      const gone = stint === undefined || stint === null ? undefined : this.lastKnownOfStint(t.object, stint);
+      if (gone !== undefined) aimedAt.add(gone.controller);
+      else if (live?.zone === "battlefield") aimedAt.add(live.controller);
+    });
+    const opponents = new Set(this.scopedPlayers(copier, "each-opponent"));
+    const others = this.apnapOrder().filter(
+      (p) => opponents.has(p) && !aimedAt.has(p) && this.state.players[p]?.hasLost !== true,
+    );
+    const couldAim = (to: TargetRef): boolean => this.retargetedSnapshot(snapshot, to, caster, original) !== null;
+    const permanents = this.battlefieldMatching(copier, choice.filter);
+    const groups = others.map((p): TargetRef[] => {
+      const group: TargetRef[] = [
+        ...(choice.players === true ? [{ kind: "player" as const, player: p }] : []),
+        ...permanents
+          .filter((id) => this.state.objects[id]?.controller === p)
+          .map((object) => ({ kind: "object" as const, object })),
+      ];
+      return choice.couldTarget === true ? group.filter(couldAim) : group;
+    });
+    const asked = choice.eachPlayer === true ? groups : [groups.flat()];
+    return asked.filter((group) => group.some(couldAim));
+  }
+
+  /**
+   * A `retargetToChosen`'s copies, a choice at a time (rule 707.10e): the
+   * next group's copy made at once when the group has one in it, or asked —
+   * a `choose-permanent-or-player` whose answer makes the copy aimed at the
+   * one chosen (none, if that isn't a legal target) and comes back here for
+   * the rest.
+   */
+  private askNextChosenAim(
+    spell: NonNullable<Extract<EffectSpec, { kind: "copy-spell" }>["spell"]>,
+    groups: readonly (readonly TargetRef[])[],
+    controller: PlayerId,
+    source: ObjectId,
+  ): void {
+    let rest = groups;
+    while (rest.length > 0) {
+      const [group, ...after] = rest;
+      rest = after;
+      const live = group.filter((to) =>
+        to.kind === "object"
+          ? this.state.objects[to.object]?.zone === "battlefield"
+          : to.kind === "player" && this.state.players[to.player]?.hasLost !== true,
+      );
+      if (live.length === 0) continue;
+      if (live.length === 1) {
+        // One of a token stack singled out to be the target (rule 111.1).
+        const only = live[0];
+        const to: TargetRef =
+          only.kind === "object" ? { kind: "object", object: this.splitOneFromStack(only.object) } : only;
+        const aimed = this.retargetedSnapshot(spell.snapshot, to, spell.caster ?? controller, spell.original);
+        if (aimed !== null) this.copySpellFrom(aimed, spell.original, controller, false, undefined, spell.snapshot);
+        continue;
+      }
+      const caster = spell.caster ?? controller;
+      const allLegal = live.every((to) => this.retargetedSnapshot(spell.snapshot, to, caster, spell.original) !== null);
+      this.state.awaiting = {
+        kind: "choose-permanent-or-player",
+        player: controller,
+        eligible: live,
+        prompt:
+          `Choose what a copy of ${spell.snapshot.cardName} targets` +
+          (allLegal ? "" : ` — one it can't target makes no copy`),
+        then: {
+          kind: "copy-spell",
+          target: "trigger-spell",
+          retargetTo: 0,
+          spell: {
+            snapshot: spell.snapshot,
+            original: spell.original,
+            caster,
+            ...(rest.length > 0 ? { aimGroups: rest } : {}),
+          },
+        },
+        source,
+        x: 0,
+      };
+      return;
+    }
   }
 
   /**
