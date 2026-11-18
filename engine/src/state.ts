@@ -6340,6 +6340,20 @@ export interface PlayerEffect {
    * can't be enchanted by Auras they control, and damage from sources they
    * control is prevented. See `playerProtectionBlocks`. */
   readonly protectionFromPlayers?: { readonly who: readonly PlayerId[]; readonly from: readonly PlayerId[] };
+  /** "**You** gain protection from the color of your choice until end of
+   * turn" (rule 702.16 — Seht's Tiger; Faith's Shield's "you and each
+   * permanent you control"): `who` can't be the target of a spell with one of
+   * these qualities or an ability from a source with one (702.16b), can't be
+   * enchanted by an Aura with one (702.16c), and damage a source with one
+   * would deal them is prevented (702.16e). Made by `grant-protection`'s
+   * `players`, the qualities fixed as it resolves. See
+   * `playerProtectionBlocks`. */
+  readonly protection?: {
+    readonly who: readonly PlayerId[];
+    readonly colors?: readonly Color[];
+    readonly types?: readonly CardType[];
+    readonly filter?: CardFilter;
+  };
   /** "Until your next turn, creatures can't attack you or planeswalkers you
    * control unless their controller pays {2} for each of those creatures"
    * (Forbidding Spirit): the `attackTax` static's cost to attack (rule

@@ -6707,6 +6707,17 @@ export type EffectSpec =
       readonly kind: "grant-protection";
       readonly target?: ObjectRef;
       readonly filter?: CardFilter;
+      /** Players gain the protection too (rule 702.16b, c, e — a player can't
+       * be targeted, enchanted or dealt damage by what has the quality):
+       * Seht's Tiger's "**you** gain protection from the color of your
+       * choice until end of turn", Faith's Shield's "**you and each permanent
+       * you control** gain …" — one quality for all of them, chosen once. A
+       * `PlayerEffect.protection`, fixed to these players as it resolves, for
+       * a duration a player effect can have (`"end-of-turn"`,
+       * `"until-your-next-turn"`, `"until-end-of-combat"`, `"permanent"`,
+       * `"while-source"`, `"while-you-control-source"`). Not with
+       * `asHexproof`. */
+      readonly players?: PlayerScope;
       readonly exceptSource?: boolean;
       readonly from: ProtectionQualities | ProtectionChoice;
       readonly duration: PermanentDuration;
@@ -18729,6 +18740,50 @@ function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): P
   return { ...fixed, filter: { ...rest, controllerIn: players } };
 }
 
+/** The durations a `grant-protection` can give its `players` for: those a
+ * permanent's grant and a player effect can both have. */
+const PLAYER_PROTECTION_DURATIONS: ReadonlySet<string> = new Set<string>([
+  "end-of-turn",
+  "until-your-next-turn",
+  "until-end-of-combat",
+  "permanent",
+  "while-source",
+  "while-you-control-source",
+]);
+
+/** `grant-protection`'s `players`: a player effect giving them protection
+ * from `from` (already fixed, `fixProtectionSide`) for `duration` (rule
+ * 702.16b, c, e — Seht's Tiger). */
+function grantPlayerProtection(
+  players: PlayerScope,
+  from: ProtectionQualities,
+  duration: PermanentDuration,
+  ctx: ResolutionContext,
+): void {
+  if (typeof duration !== "string" || !PLAYER_PROTECTION_DURATIONS.has(duration)) return;
+  const lasts = resolvePlayerDuration(
+    duration as PermanentDuration & PlayerDuration,
+    ctx.controller,
+    (ref) => resolvePlayerRef(ref, ctx),
+    durationHere(ctx),
+  );
+  if (lasts === undefined || !("expires" in lasts)) return;
+  const who = ctx.playersInScope(players);
+  if (who.length === 0) return;
+  const named = from.fromPlayers === undefined || from.fromPlayers === "opponents" ? [] : from.fromPlayers;
+  ctx.addPlayerEffect({
+    owner: ctx.controller,
+    expires: lasts.expires,
+    protection: {
+      who,
+      ...(from.colors !== undefined ? { colors: from.colors } : {}),
+      ...(from.types !== undefined ? { types: from.types } : {}),
+      ...(from.filter !== undefined ? { filter: from.filter } : {}),
+    },
+    ...(named.length > 0 ? { protectionFromPlayers: { who, from: named } } : {}),
+  });
+}
+
 /**
  * What an {@link ObjectRef} names to **act** on: only while it's the same
  * object still (rule 400.7), and an illegal slot names nothing (rule 608.2b —
@@ -22288,6 +22343,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         return;
       }
       const from = fixProtectionSide(spec.from, ctx);
+      if (spec.players !== undefined && spec.asHexproof !== true) grantPlayerProtection(spec.players, from, spec.duration, ctx);
+      if (spec.target === undefined && spec.filter === undefined) return;
       const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (spec.target !== undefined && target === undefined && spec.filter === undefined) return;
       ctx.grantProtection(

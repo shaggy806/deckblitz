@@ -318,13 +318,25 @@ export function playerProtectionBlocks(
   by?: PlayerId,
 ): boolean {
   if (state.players[player]?.hasLost !== false) return false;
-  // Protection from a player, gained by an effect (rule 702.16k — Guardian
-  // Archon's "you … gain protection from the chosen player").
   for (const effect of state.playerEffects ?? []) {
+    // Protection from a player, gained by an effect (rule 702.16k — Guardian
+    // Archon's "you … gain protection from the chosen player").
     const fromPlayers = effect.protectionFromPlayers;
-    if (fromPlayers === undefined || !fromPlayers.who.includes(player)) continue;
-    const prot = { colors: new Set<Color>(), types: new Set<CardType>(), filters: [], players: new Set(fromPlayers.from) };
-    if (qualityMatches(state, registry, player, prot, source, undefined, by)) return true;
+    if (fromPlayers !== undefined && fromPlayers.who.includes(player)) {
+      const prot = { colors: new Set<Color>(), types: new Set<CardType>(), filters: [], players: new Set(fromPlayers.from) };
+      if (qualityMatches(state, registry, player, prot, source, undefined, by)) return true;
+    }
+    // Protection from a quality, gained by an effect (Seht's Tiger's "you
+    // gain protection from the color of your choice until end of turn").
+    const gained = effect.protection;
+    if (gained !== undefined && gained.who.includes(player)) {
+      const prot = {
+        colors: new Set(gained.colors ?? []),
+        types: new Set(gained.types ?? []),
+        filters: gained.filter === undefined ? [] : [gained.filter],
+      };
+      if (qualityMatches(state, registry, player, prot, source, undefined, by)) return true;
+    }
   }
   for (const id of state.zones.shared.battlefield) {
     const holder = state.objects[id];

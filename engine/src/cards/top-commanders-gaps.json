@@ -2953,6 +2953,7 @@
   "filter:has-unearth",
   "filter:not-the-granter",
   "filter:planeswalker-activated-this-turn",
+  "effect:player-protection-from-color",
   "replacement:enters-with-counter-via-static-graveyard-permission",
   "replacement:enters-with-counter-via-static-graveyard-permission",
   "trigger:played-card-exiled-this-way",
