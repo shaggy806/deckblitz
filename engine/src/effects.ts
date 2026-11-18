@@ -576,7 +576,9 @@ export interface DelayedWhenever {
   readonly toPlayer?: number;
   /** "…**that player** gets two rad counters whenever **they** cast a spell"
    * (Nuka-Nuke Launcher): the one player whose doing fires it, read as this
-   * resolves — with a `cast-spell` trigger, only a spell that player casts.
+   * resolves — with a `cast-spell` trigger, only a spell that player casts;
+   * with a `step-begins` one, only a step of that player's turn ("at the
+   * beginning of each of that player's upkeeps", Ertai's Meddling).
    * The watch is still its controller's (rule 603.7e), who needn't be that
    * player; with no such player nothing is set up. */
   readonly byPlayer?: PlayerRef;
@@ -4416,6 +4418,22 @@ export type EffectSpec =
       readonly target: ObjectRef;
     }
   | {
+      /** "The player puts it onto the stack **as a copy of the original
+       * spell**" (Ertai's Meddling): a card exiled straight off the stack
+       * goes back onto it — not cast, so nothing is paid and nothing watching
+       * for a cast sees it — as the spell it last was there
+       * (`GameObject.lastOnStack`): the same face, and every choice made as it
+       * was cast (rule 707.10: modes, targets, {X}, the additional and
+       * alternative costs paid, how it was cast — a flashback card is exiled
+       * again as it leaves the stack, the ruling). Its targets are checked as
+       * it resolves (608.2b). `by` puts it there and controls it (default the
+       * effect's controller). Nothing for a card no longer in exile, or one
+       * that came to exile some other way. */
+      readonly kind: "put-on-stack-as-spell";
+      readonly target: ObjectRef;
+      readonly by?: PlayerRef;
+    }
+  | {
       /** "**It becomes foretold**" (rule 702.143d): a card an instruction just
        * exiled is a foretold card, face down, and its owner may look at it and
        * may cast it for any foretell cost it has after this turn has ended
@@ -4468,8 +4486,9 @@ export type EffectSpec =
        * **that creature**" (Pit Spawn). */
       readonly target: ObjectRef;
       /** "Exile it **with a croak counter on it**": counters the card gets
-       * as it's exiled, there. */
-      readonly withCounters?: { readonly kind: string; readonly amount: number };
+       * as it's exiled, there. An amount read as this resolves — "exiles it
+       * with **X** delay counters on it" (Ertai's Meddling), a spell's too. */
+      readonly withCounters?: { readonly kind: string; readonly amount: EffectAmount };
       /**
        * Haunt (rule 702.55a): "exile it **haunting target creature**" — the
        * creature in this target slot, which the exiled card then haunts
@@ -13829,6 +13848,9 @@ export interface EffectApi {
    * `creature` — in the battlefield stint it's in now. Nothing unless the
    * card is in exile. */
   markHaunting(card: ObjectId, creature: ObjectId): void;
+  /** See the `"put-on-stack-as-spell"` {@link EffectSpec}: `card`, in exile
+   * straight off the stack, back onto it as that spell under `player`. */
+  putOnStackAsSpell(card: ObjectId, player: PlayerId): void;
   /** See the `"return-exiled-by-source"` {@link EffectSpec}.
    * Returns `true` when it stopped to ask an "as this enters" choice first
    * (rule 614.12 — a Clone's copy): nothing has moved, and the step runs
@@ -21430,7 +21452,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         // illegal already: it doesn't move (Calix's ruling).
         const leaves = typeof spec.until === "object" ? ctx.targets[spec.until.targetLeaves] : undefined;
         if (typeof spec.until === "object" && leaves?.kind !== "object") return;
-        ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayPlay, spec.linked === true,
+        const withCounters =
+          spec.withCounters === undefined
+            ? undefined
+            : { kind: spec.withCounters.kind, amount: Math.max(0, Math.floor(amountValue(spec.withCounters.amount, ctx))) };
+        ctx.exileObject(target, spec.untilSourceLeaves === true, withCounters, spec.mayPlay, spec.linked === true,
           spec.airbend === true, leaves?.kind === "object" ? { leaves: leaves.object } : spec.until === "opponent-becomes-monarch" ? spec.until : undefined);
         const haunted = spec.haunting === undefined ? undefined : ctx.targets[spec.haunting];
         if (haunted?.kind === "object" && target.kind === "object") ctx.markHaunting(target.object, haunted.object);
@@ -21443,6 +21469,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "solve":
       ctx.solveSource();
       return;
+    case "put-on-stack-as-spell": {
+      const target = objectRefAct(spec.target, ctx);
+      const by = spec.by === undefined ? ctx.controller : resolvePlayerRef(spec.by, ctx);
+      if (target?.kind === "object" && by !== undefined) ctx.putOnStackAsSpell(target.object, by);
+      return;
+    }
     case "become-plotted": {
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined && target.kind === "object") ctx.becomePlotted(target.object);

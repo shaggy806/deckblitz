@@ -788,6 +788,12 @@ export interface GameObject {
    * `printedCardName`, which returns this when set. Cleared on any zone change
    * (a Clone that dies and returns is a Clone again). */
   copyOf: string | null;
+  /** A permanent spell's `copyOf` that an effect set on the stack, which goes
+   * on applying to the permanent it becomes (rule 400.7a): Ertai's Meddling
+   * putting a card back as a copy of a face-down spell — a face-up 2/2 with
+   * no name or text, there and on the battlefield (the ruling). Kept only by
+   * that resolution's move. */
+  copyKeptAsItResolves?: true;
   /** The card whose rules text this permanent has (layer 3, rule 612.5): an
    * exchange of text boxes (Deadpool, Trading Card) gave it another
    * permanent's text as it then was — every ability, keyword and static —
@@ -1867,6 +1873,11 @@ export interface SpellSnapshot {
   readonly modifiers: readonly PtModifier[];
   /** A copy without its epic ability (`GameObject.withoutEpic`). */
   readonly withoutEpic?: true;
+  /** The permission it was cast under (`GameObject.castVia`), which a copy
+   * never has, for the card itself put back onto the stack as a copy of the
+   * spell it was (Ertai's Meddling's flashback ruling: it's exiled again as
+   * it leaves the stack). */
+  readonly castVia?: CastVia;
 }
 
 /** A permanent's copiable values as a copy effect sets them (rule 707.2):

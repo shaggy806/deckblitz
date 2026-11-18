@@ -14671,7 +14671,7 @@ function searchFaceDownPileAt(sentences, i) {
 }
 
 /** "Search your library for any number of / up to N <type> cards, exile
- * them": the search, its finds exiled, none required (rule 701.23d). */
+ * them": the search, its finds exiled, none required (rule 701.23b). */
 function searchToExileOf(howMany, what) {
   const filter = parseTypePhrase(what, { cards: true });
   if (filter === null || filter === undefined) return null;

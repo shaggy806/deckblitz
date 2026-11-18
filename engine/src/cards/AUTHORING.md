@@ -2315,6 +2315,18 @@ card **with** the effect's source (rule 607.2a, Imprint), for `exiled-with-sourc
 effect's controller as the spell resolves, a `choose-modes` question; with `anyOwner` and `linked`,
 "into its owner's graveyard" and "cards exiled with this artifact".
 
+`put-on-stack-as-spell { target, by? }` is Ertai's Meddling's "the player puts it onto the stack
+**as a copy of the original spell**": a card exiled straight off the stack goes back onto it, not
+cast (no cost, no cast trigger), as the spell it last was there (`GameObject.lastOnStack`, which
+now keeps `castVia` too) — its face, modes, targets (checked as it resolves), {X}, the costs paid,
+and flashback (exiled again as it leaves the stack, the ruling); a face-down original comes back a
+face-up 2/2 with no name or text, and stays one on the battlefield (rule 400.7a, the morph ruling). Meddling itself is an `exile` of
+the spell slot inside an `as-player` of `{ controllerOf: 0 }` ("target spell's controller exiles
+it") with `withCounters: { kind: "delay", amount: "x" }` (an amount now), then a `delayed-trigger`
+with `about: "exiled"` watching `{ on: "step-begins", step: "upkeep", who: "any" }` with
+`byPlayer: { controllerOf: 0 }` (only that player's upkeeps) and `until: "while-exiled"`, whose
+effect removes a counter from its target 0 and, at none, puts it back `by: "active-player"`.
+
 `become-plotted { target }` is "if you do, it becomes plotted" after an instruction that
 exiled a card (rule 702.170c) — the `then` of an exiling `look-and-choose`, whose chosen card is
 its target 0: Kellan Joins Up's "you may exile a nonland card with mana value 3 or less from

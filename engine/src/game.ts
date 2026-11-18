@@ -35560,7 +35560,10 @@ export class Game {
         !(event.type === "damage-dealt" && event.target.kind === "player" && event.target.player === at.player) &&
         !(event.type === "spell-cast" && event.player === at.player) &&
         // "…when **they** lose the game" (Miss Highwater).
-        !(event.type === "player-lost" && event.player === at.player)
+        !(event.type === "player-lost" && event.player === at.player) &&
+        // "At the beginning of each of **that player's** upkeeps" (Ertai's
+        // Meddling): a step of their turn.
+        !(event.type === "step-began" && this.activePlayer === at.player)
       ) {
         continue;
       }
@@ -42738,6 +42741,7 @@ export class Game {
         }
         this.returnToHandByEffect(target, true, from ?? "battlefield", source);
       },
+      putOnStackAsSpell: (card, player) => this.putOnStackAsSpell(card, player),
       markHaunting: (card, creature) => {
         const exiled = this.state.objects[card];
         const haunted = this.state.objects[creature];
@@ -53075,6 +53079,7 @@ controlledBy,
       ...(object.lastKnownRefs?.sets?.paid !== undefined ? { paidCost: object.lastKnownRefs.sets.paid } : {}),
       modifiers: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })),
       ...(object.withoutEpic === true ? { withoutEpic: true } : {}),
+      ...(object.castVia !== undefined && object.castVia !== null ? { castVia: object.castVia } : {}),
     };
   }
 
@@ -60979,6 +60984,72 @@ controlledBy,
     // It will never resolve now, so it has nothing left to aim at.
     this.forgetSpellTargets(object);
     this.moveObject(id, "exile");
+  }
+
+  /**
+   * "The player puts it onto the stack as a copy of the original spell"
+   * (Ertai's Meddling): card `id`, exiled straight off the stack and still in
+   * exile, goes back onto it under `player` as the spell it last was there
+   * (`lastOnStack`) — that face, and every choice made as it was cast (rule
+   * 707.10): modes, targets with the stints they were chosen in (so one that
+   * has left since is illegal as it resolves, 608.2b), {X}, the additional
+   * and alternative costs paid, and how it was cast (a flashback card is
+   * exiled again as it leaves the stack — the card's ruling). It isn't cast:
+   * nothing is paid, and no cast trigger sees it (the ruling). Its targets
+   * become targets of a spell again, as a copy's do.
+   */
+  private putOnStackAsSpell(id: ObjectId, player: PlayerId): void {
+    const card = this.state.objects[id];
+    if (card === undefined || card.zone !== "exile" || card.kind !== "card" || card.isToken) return;
+    const was = card.lastOnStack;
+    // Exiled straight off the stack: the stint after the one it had there.
+    if (was === undefined || was.zoneChangeCount !== (card.zoneChangeCount ?? 0) - 1) return;
+    if (this.state.players[player]?.hasLost !== false) return;
+    const face = card.faces === undefined ? undefined : card.faces.indexOf(was.cardName);
+    if (face !== undefined && face >= 0) card.face = face;
+    if (!this.moveObject(id, "stack") || this.state.objects[id]?.zone !== "stack") return;
+    const spell = this.state.objects[id];
+    spell.controller = player;
+    spell.putOnStackBy = player;
+    spell.targets = was.targets ? [...was.targets] : null;
+    if (was.targetZones !== undefined) spell.targetZones = [...was.targetZones];
+    if (was.targetStints !== undefined) spell.targetStints = [...was.targetStints];
+    if (was.autoTargetSlots !== undefined) spell.autoTargetSlots = [...was.autoTargetSlots];
+    if (was.seatTargetWaiting !== undefined) spell.seatTargetWaiting = was.seatTargetWaiting;
+    if (was.chosenModes !== undefined) spell.chosenModes = [...was.chosenModes];
+    if (was.otherChooser !== undefined) spell.otherChooser = was.otherChooser;
+    if (was.division !== undefined) spell.division = [...was.division];
+    if (was.kicked === true) spell.kicked = true;
+    if (was.kickedByControl === true) spell.kickedByControl = true;
+    if (was.timesKicked !== undefined) spell.timesKicked = was.timesKicked;
+    if (was.kickedWith !== undefined) spell.kickedWith = was.kickedWith;
+    if (was.spliced !== undefined) spell.spliced = [...was.spliced];
+    if (was.overloaded === true) spell.overloaded = true;
+    if (was.bestowed === true) spell.bestowed = true;
+    if (was.evokePaid === true) spell.evokePaid = true;
+    if (was.spectaclePaid === true) spell.spectaclePaid = true;
+    if (was.surgePaid === true) spell.surgePaid = true;
+    if (was.prowlPaid === true) spell.prowlPaid = true;
+    if (was.alternativeCostPaid !== undefined) spell.alternativeCostPaid = was.alternativeCostPaid;
+    if (was.offspringGrantPaid === true) spell.offspringGrantPaid = true;
+    if (was.giftTo !== undefined) spell.giftTo = was.giftTo;
+    if (was.convokedBy !== undefined) spell.convokedBy = [...was.convokedBy];
+    if (was.paidCost !== undefined) spell.lastKnownRefs = { ...(spell.lastKnownRefs ?? {}), sets: { paid: was.paidCost } };
+    if (was.withoutEpic === true) spell.withoutEpic = true;
+    spell.xValue = was.xValue;
+    // A face-down cast comes back face up (below): that wasn't kept.
+    spell.castVia = was.castVia === undefined || was.castVia === "face-down" ? null : was.castVia;
+    // Its copiable values as the spell had them (a prototype's, 718.3c).
+    if (was.modifiers.length > 0) spell.modifiers.push(...was.modifiers.map((m) => ({ ...m })));
+    // A face-down spell's copiable values were its 2/2's (rule 708.2): it
+    // comes back a face-up 2/2 with no name or text, and the permanent it
+    // becomes is that too (400.7a — the card's morph ruling).
+    if (was.cardName !== card.cardName && !(card.faces ?? []).includes(was.cardName)) {
+      spell.copyOf = was.cardName;
+      spell.copyKeptAsItResolves = true;
+    }
+    invalidateComputedCache();
+    this.announceTargeted(spell.targets ?? [], player, id, true);
   }
 
   /**
@@ -73178,7 +73249,10 @@ controlledBy,
     object.controller = object.owner;
     // A copy effect ends when the object changes zones (rule 707.2) — a Clone
     // that dies and returns is a Clone again.
-    if (!enteringToken) object.copyOf = null;
+    // A copy effect a permanent spell got on the stack goes on applying to the
+    // permanent (rule 400.7a — `copyKeptAsItResolves`).
+    if (!enteringToken && !(resolving && object.copyKeptAsItResolves === true)) object.copyOf = null;
+    delete object.copyKeptAsItResolves;
     delete object.temporaryCopies;
     delete object.copyBase;
     // So does an exchange of text boxes (rule 612.5): a new object has its
