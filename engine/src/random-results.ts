@@ -102,6 +102,36 @@ export interface RollShift {
   readonly oncePerTurn?: true;
 }
 
+/**
+ * "Once each turn, you may pay {1} to reroll one or more dice you rolled"
+ * (Monitor Monitor) — a static ability's `rerollsRoll`: a modifier that
+ * modifies the result by rerolling (rule 706.2b: considered before any that
+ * increases or decreases it). After a roll its controller makes, seeing every
+ * die, they may pay to roll again any of its dice they choose — one payment
+ * for as many as they like (the ruling) — each new number that die's natural
+ * result; and then, if another permanent offers it, again. Decided at once,
+ * before any shift (the ruling: "you can't wait"). It modifies the roll, so
+ * the roll still happens once, with its final results (706.2). Asked as a
+ * `choose-modes` of the dice (`Game.askRollShift`).
+ */
+export interface RollReroll {
+  /** "You may pay {1}": a mana cost, paid as it's chosen (706.2a). */
+  readonly pay?: string;
+  /** "Once each turn": done, it's done for the turn — for this object (rule
+   * 400.7), journaled as the ability's `done`. Declining isn't doing it. */
+  readonly oncePerTurn?: true;
+}
+
+/** A reroll on offer: the permanent `by` (in `stint`) whose ability `key`
+ * rerolls, for `pay`. */
+export interface RollRerollOption {
+  readonly by: ObjectId;
+  readonly stint: number;
+  readonly key: string;
+  readonly pay?: string;
+  readonly oncePerTurn?: true;
+}
+
 /** One shift on offer: the permanent `by` (in `stint`) pays to move die
  * `die` by `delta`; `key` is the ability's, for its once each turn. */
 export interface RollShiftOption {
@@ -168,6 +198,9 @@ export interface RollInProgress {
   readonly ignored?: readonly number[];
   readonly shifts: readonly number[];
   readonly used: readonly string[];
+  /** A reroll was declined: none is asked again (rule 706.2b's rerolls come
+   * first, so none after a shift either). */
+  readonly rerollsDone?: true;
   readonly then: RollThen;
 }
 

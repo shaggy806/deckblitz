@@ -14,7 +14,7 @@
 
 import type { CastVia } from "../actions.js";
 import type { KeywordValue } from "../keyword-values.js";
-import type { DieTest, RollShift } from "../random-results.js";
+import type { DieTest, RollReroll, RollShift } from "../random-results.js";
 import type { TriggerEventName } from "../trigger-events.js";
 import type { ColorPatch, KeywordAbilityName, StaticPt, TypePatch } from "../characteristics-patch.js";
 import type { SelfPlay, StaticPlay } from "../play-permission.js";
@@ -2343,6 +2343,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * its controller may apply to each die they roll (rule 706.2a) — see
    * `random-results.ts`'s {@link RollShift}. `affects` is unused. */
   readonly shiftsRoll?: RollShift;
+  /** "Once each turn, you may pay {1} to reroll one or more dice you rolled"
+   * (Monitor Monitor): a modifier that rerolls (rule 706.2b), offered after
+   * each roll its controller makes, before any shift — see
+   * `random-results.ts`'s {@link RollReroll}. `affects` is unused. */
+  readonly rerollsRoll?: RollReroll;
   /** `[power, toughness]` bonus applied in layer 7d. */
   readonly grantPt?: readonly [number, number];
   /**

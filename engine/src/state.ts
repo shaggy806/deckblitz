@@ -41,7 +41,7 @@ import type { Color, ManaProductionRule, ManaType, ManaUnit, SpendAs, SpentMana 
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { DelayedStepWatch } from "./delayed-at.js";
 import type { Expiry, UntilCast, UntilPoint, WatchExpiry, WhileSource } from "./duration.js";
-import type { RollInProgress, RollRecord, RollShiftOption } from "./random-results.js";
+import type { RollInProgress, RollRecord, RollRerollOption, RollShiftOption } from "./random-results.js";
 import type { ReplacementSpec } from "./replacements.js";
 import type { CardPlayPermission, CastNowTerms, EffectPlay, PlayedUnder, PlayTerms } from "./play-permission.js";
 import type { Journal } from "./journal.js";
@@ -5053,6 +5053,13 @@ export type AwaitingDecision =
        * carries on (`Game.finishRoll`). Answered by the engine itself; the
        * modes' effects are unused. */
       readonly shiftRoll?: { readonly roll: RollInProgress; readonly options: readonly RollShiftOption[] };
+      /** Set when this offers a reroll of `roll` (rule 706.2b — Monitor
+       * Monitor's "you may pay {1} to reroll one or more dice you rolled",
+       * `RollReroll`): mode i rerolls die i, `option` the permanent paying;
+       * none chosen declines, and no reroll is asked of it again. Then a
+       * shift, or the roll is final. Answered by the engine itself; the
+       * modes' effects are unused. */
+      readonly rerollRoll?: { readonly roll: RollInProgress; readonly option: RollRerollOption };
       /** Storage Matrix's question in the untap step (rule 502.3 —
        * `untapOnlyChosenType`): mode i keeps only `types[i]` among `untapping`,
        * the permanents about to untap, and the step carries on with `asked`

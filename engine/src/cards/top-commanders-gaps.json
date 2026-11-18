@@ -2776,6 +2776,7 @@
   "effect:copy-spell-retarget-another-opponent",
   "effect:warp-strike-return-attacking",
   "replacement:as-transforms-choice",
+  "replacement:reroll-dice",
   "effect:turn-face-up-or-exile-and-cast",
   "static:grants-replacement-effect",
   "static:keywords-of-linked-exile",

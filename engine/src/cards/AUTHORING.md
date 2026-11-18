@@ -2443,6 +2443,19 @@ with its shift (`dieResults`), the natural result only where the card says
 "natural". Once each turn is per object (a new one after a zone change); declining
 isn't doing it. No bounds: a 1 decreased is 0.
 
+**Rerolling dice after the roll** (rule 706.2b) is a static's `rerollsRoll: {
+pay?, oncePerTurn? }`: Monitor Monitor's "Once each turn, you may pay {1} to
+reroll one or more dice you rolled" (`{ pay: "{1}", oncePerTurn: true }`). After
+each roll its controller makes, before any shift (rerolls come first, 706.2b) and
+before anything reads it, they're asked (a `choose-modes`, `rerollRoll`, a mode a
+die, `minModes: 0`): any dice chosen are rolled again for one payment of `pay`
+(mana, 706.2a), each new number that die's natural result; then another such
+permanent is offered the same roll, and declining ends the rerolls for it. It's
+offered only while it can be paid. A reroll modifies the roll's result, so the
+roll happens once, with the dice as rerolled — one `dice-rolled` event and one
+"whenever you roll" (`roll-reroll.test.ts`). Like a shift, a token rolling as it
+enters is asked nothing.
+
 **The Ring tempts you** (rule 701.54) is `{ kind: "the-ring-tempts-you" }`: the
 effect's controller gets the Ring emblem if they have none, chooses a creature
 they control as their Ring-bearer (asked, never declined), and is tempted — the

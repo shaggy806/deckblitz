@@ -477,6 +477,7 @@ import {
   type CoinSide,
   type FlipLanding,
   type RollInProgress,
+  type RollRerollOption,
   type RollShiftOption,
   type RollThen,
 } from "./random-results.js";
@@ -9490,6 +9491,10 @@ export class Game {
       this.applyRollShift(player, awaiting.shiftRoll, modeIndices[0]);
       return;
     }
+    if (awaiting.rerollRoll !== undefined) {
+      this.applyRollReroll(player, awaiting.rerollRoll, modeIndices);
+      return;
+    }
     // Storage Matrix's question (rule 502.3): only that type goes on untapping
     // — a permanent with several, if any is it (the rulings) — and the step
     // carries on with no priority (502.4).
@@ -14492,13 +14497,34 @@ export class Game {
    * asked too.
    */
   private askRollShift(roll: RollInProgress): boolean {
-    const options = this.rollShiftOptions(roll);
-    if (options.length === 0) return false;
+    // A reroll comes first (rule 706.2b).
+    const reroll = this.rollRerollOption(roll);
+    const options = reroll === undefined ? this.rollShiftOptions(roll) : [];
+    if (reroll === undefined && options.length === 0) return false;
     if (this.manaPaymentDepth > 0 || this.state.awaiting !== null) {
       (this.state.pendingRollShifts ??= []).push(roll);
       return true;
     }
     const dice = dieResults({ ...roll, total: 0 });
+    if (reroll !== undefined) {
+      const name = nameOf(this.state.objects[reroll.by]);
+      const cost = reroll.pay !== undefined ? `Pay ${reroll.pay} to reroll` : "Reroll";
+      this.state.awaiting = {
+        kind: "choose-modes",
+        player: roll.player,
+        source: reroll.by,
+        minModes: 0,
+        maxModes: dice.length,
+        modes: dice.map((result, die) => ({
+          text: `${name}: ${cost} ${dice.length > 1 ? `die ${die + 1} (${result})` : `the ${result}`}`,
+          effect: { kind: "sequence", effects: [] },
+        })),
+        x: 0,
+        targets: [],
+        rerollRoll: { roll, option: reroll },
+      };
+      return true;
+    }
     const sources = new Set(options.map((o) => o.by));
     this.state.awaiting = {
       kind: "choose-modes",
@@ -14584,6 +14610,89 @@ export class Game {
       });
     }
     return options;
+  }
+
+  /**
+   * The reroll on offer for `roll` (rule 706.2b — `RollReroll`), if any: the
+   * first of its roller's permanents with one, unused this turn when once each
+   * turn, whose cost can be paid — while none was declined for this roll and no
+   * shift has been made (rerolls come first). Two alike are the same offer, so
+   * one is asked at a time; once it's used, the next.
+   */
+  private rollRerollOption(roll: RollInProgress): RollRerollOption | undefined {
+    if (roll.results.length === 0 || roll.rerollsDone === true || roll.used.length > 0) return undefined;
+    if (this.state.players[roll.player]?.hasLost !== false) return undefined;
+    for (const id of this.staticSourceIds()) {
+      const by = this.state.objects[id];
+      if (by === undefined || by.controller !== roll.player || hasLostAbilities(this.state, this.registry, by)) continue;
+      const statics = this.staticsOfSource(by);
+      for (let index = 0; index < statics.length; index += 1) {
+        const ability = statics[index];
+        const reroll = ability.rerollsRoll;
+        if (reroll === undefined || !this.staticActive(by, ability)) continue;
+        const stint = by.zoneChangeCount ?? 0;
+        const key = `${by.id}~${stint}#rerolls-roll:${index}`;
+        if (reroll.oncePerTurn === true && abilityCountThisTurn(this.state, "done", key) > 0) continue;
+        const pay = reroll.pay;
+        if (
+          pay !== undefined &&
+          this.payMana(roll.player, parseManaCost(pay), undefined, undefined, otherCostPurpose(pay, false)) === null
+        ) {
+          continue;
+        }
+        return {
+          by: by.id,
+          stint,
+          key,
+          ...(pay !== undefined ? { pay } : {}),
+          ...(reroll.oncePerTurn === true ? { oncePerTurn: true as const } : {}),
+        };
+      }
+    }
+    return undefined;
+  }
+
+  /**
+   * The answer to a reroll of a roll (`askRollShift`, rule 706.2b): with dice
+   * chosen, the cost paid (mana, its abilities activated as it's paid — 706.2a)
+   * and each of them rolled again, one draw a die, the new number its natural
+   * result; then the next reroll or shift is asked, or the roll is final and
+   * carries on. None chosen, no reroll is asked of it again.
+   */
+  private applyRollReroll(
+    player: PlayerId,
+    asked: { readonly roll: RollInProgress; readonly option: RollRerollOption },
+    picks: readonly number[],
+  ): void {
+    this.state.awaiting = null;
+    let roll = asked.roll;
+    const { option } = asked;
+    const dice = [...new Set(picks)].filter((die) => die >= 0 && die < roll.results.length);
+    if (dice.length === 0) {
+      roll = { ...roll, rerollsDone: true };
+    } else {
+      const by = this.state.objects[option.by];
+      // "You may pay {1} to reroll": only a cost paid rerolls.
+      let paid = by !== undefined && (by.zoneChangeCount ?? 0) === option.stint;
+      if (paid && option.pay !== undefined) {
+        const payment = this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, false));
+        paid = payment !== null;
+        if (payment !== null) this.executePayment(player, payment);
+      }
+      if (paid) {
+        if (option.oncePerTurn === true) this.markDone(option.key, player);
+        const results = [...roll.results];
+        // Each die has `sides` equally likely outcomes (rule 706.1a).
+        for (const die of dice) results[die] = 1 + Math.floor(this.rng.next() * roll.sides);
+        this.state.rngState = this.rng.seed;
+        roll = { ...roll, results };
+      } else {
+        roll = { ...roll, rerollsDone: true };
+      }
+    }
+    if (this.askRollShift(roll)) return;
+    this.carryOnFromRoll(roll, this.finishRoll(roll));
+    if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
   /**
