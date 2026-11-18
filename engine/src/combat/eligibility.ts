@@ -964,6 +964,11 @@ export function attackRequirementsReason(state: GameState, registry: CardRegistr
   if (otherThanRequirements(state, registry, attacker).length > 0) {
     return `${name} must attack a player other than ${otherThanRequirements(state, registry, attacker).join(", ")} if able`;
   }
+  // "Attacks a player each combat if able" (Nahiri, the Unforgiving): players
+  // passing a test, never a planeswalker or battle.
+  if (aimedRequirements(state, registry, attacker).every(({ rule }) => typeof rule.at === "object" && "defender" in rule.at)) {
+    return `${name} must attack a player it was made to attack (not a planeswalker or battle) if able`;
+  }
   return `${name} must attack the player or planeswalker it was made to attack`;
 }
 
