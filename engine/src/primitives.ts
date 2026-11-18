@@ -103,3 +103,33 @@ export function shuffle<T>(items: readonly T[], rng: Rng): T[] {
   }
   return out;
 }
+
+/** A name with its case and accents folded away: what `compareNames` orders by. */
+function foldedName(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase();
+}
+
+/**
+ * Orders two names alphabetically, the same way on every machine: by their
+ * letters with case and accents folded away, then as written. Use it wherever
+ * an order ends up in the game's state (the choices a decision offers): a
+ * `localeCompare` reads the machine's language and its collation data, so two
+ * devices holding the same game could list them differently
+ * (`docs/plans/replicated-rooms.md`).
+ */
+export function compareNames(a: string, b: string): number {
+  const x = foldedName(a);
+  const y = foldedName(b);
+  return x < y ? -1 : x > y ? 1 : a < b ? -1 : a > b ? 1 : 0;
+}
+
+/** `names` in `compareNames`' order, each folded once: for a long list. */
+export function sortedNames(names: Iterable<string>): string[] {
+  return [...names]
+    .map((name) => ({ name, key: foldedName(name) }))
+    .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+    .map(({ name }) => name);
+}

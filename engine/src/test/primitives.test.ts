@@ -1,6 +1,31 @@
 import { describe, expect, it } from "vitest";
 
-import { createRng, shuffle } from "../primitives.js";
+import { compareNames, createRng, shuffle, sortedNames } from "../primitives.js";
+
+describe("compareNames", () => {
+  it("orders names by their letters, case and accents aside, then as written", () => {
+    const names = ["Zombie", "apple", "Séance", "Seance", "Sea Gate", "Lim-Dûl's Vault", "Limdul", "jötun", "Jotun Grunt", "Apple"];
+    const sorted = [...names].sort(compareNames);
+    expect(sorted).toEqual([
+      "Apple",
+      "apple",
+      "jötun",
+      "Jotun Grunt",
+      "Lim-Dûl's Vault",
+      "Limdul",
+      "Sea Gate",
+      "Seance",
+      "Séance",
+      "Zombie",
+    ]);
+    expect(compareNames("Forest", "Forest")).toBe(0);
+    expect(compareNames("forest", "Forest")).toBeGreaterThan(0);
+    // One order, whichever way round they came.
+    expect([...names].reverse().sort(compareNames)).toEqual(sorted);
+    expect(sortedNames(names)).toEqual(sorted);
+    expect(sortedNames(new Set(names))).toEqual(sorted);
+  });
+});
 
 describe("createRng", () => {
   it("produces a repeatable sequence for a given seed", () => {

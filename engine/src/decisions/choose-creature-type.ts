@@ -13,6 +13,7 @@ import type { Action, LegalAction } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
 import { computeCharacteristics } from "../characteristics.js";
 import { CREATURE_TYPES } from "../creature-types.js";
+import { compareNames } from "../primitives.js";
 import type { PlayerId } from "../primitives.js";
 import { printedCardName } from "../state.js";
 import { isPlaneswalkerType } from "../subtypes.js";
@@ -65,7 +66,7 @@ export function suggestedCreatureTypes(
     if (c.types.includes("creature")) tally(c.subtypes);
   }
   return [...counts.entries()]
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .sort((a, b) => b[1] - a[1] || compareNames(a[0], b[0]))
     .slice(0, SUGGESTED_CREATURE_TYPES)
     .map(([t]) => t);
 }
@@ -106,7 +107,7 @@ export function suggestedPlaneswalkerTypes(
     if (def.types.includes("planeswalker")) tally(def.subtypes, 1);
   }
   return [...counts.entries()]
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .sort((a, b) => b[1] - a[1] || compareNames(a[0], b[0]))
     .slice(0, SUGGESTED_CREATURE_TYPES)
     .map(([t]) => t);
 }

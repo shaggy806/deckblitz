@@ -11,6 +11,8 @@ import { parentPort } from "node:worker_threads";
 
 import { Game, RandomController, createRng, setComputedCacheCheck, setFreezeSharedSnapshots } from "../dist/index.js";
 
+import { playWithReplicas } from "./replica-check.mjs";
+
 // MTG_CACHE_CHECK=1 turns every computed-cache hit into a recompute +
 // deep-compare that throws on divergence — the empirical verification that
 // every mutation inside a cache region invalidates (see characteristics.ts).
@@ -26,6 +28,17 @@ if (freezeSnapshots) setFreezeSharedSnapshots(true);
 // the `order-triggers` decision is fuzzed too (off, the engine orders them and
 // nobody is asked). Changes every seed's trajectory, so it's opt-in.
 const orderTriggers = Boolean(process.env.MTG_ORDER_TRIGGERS);
+// MTG_REPLICA=1 plays every game the way a room plays one (no controllers in
+// the game: on to the next decision, the seat that owes it asked) and keeps
+// two copies of it that are given only its actions — one built from the seed,
+// one restored from the state as it is sent to another device — failing the
+// seed if either stops matching it (`replica-check.mjs`): what rooms copied
+// onto every player's device rest on (`docs/plans/replicated-rooms.md`).
+// A room's game has no `priority-received` where the controller loop hands
+// priority to a waiting decision's player, so a seed's events (and the
+// random picks after them) aren't the default mode's: it's opt-in, and about
+// three times slower.
+const replicas = Boolean(process.env.MTG_REPLICA);
 
 /** A short picture of a game in progress: its turn and step, the stack, and
  * the battlefield's size with the names most repeated on it (a token stack
@@ -56,38 +69,51 @@ parentPort.on("message", ({ seed, seats, maxTurns = null }) => {
   try {
     const rng = createRng(seed * 7919);
     const pick = () => rng.next();
-    const game = Game.create({
-      seed,
-      mulligans: true,
-      controllers: Object.fromEntries(
-        seats.map(({ player }) => [player, new RandomController(player, pick)]),
-      ),
-      decks: seats,
-    });
-    if (orderTriggers) for (const { player } of seats) game.setOrdersOwnTriggers(player, true);
+    const ordered = (g) => {
+      if (orderTriggers) for (const { player } of seats) g.setOrdersOwnTriggers(player, true);
+      return g;
+    };
+    const controllers = Object.fromEntries(seats.map(({ player }) => [player, new RandomController(player, pick)]));
     // A heartbeat every second: what the game looks like, so a game the
     // parent kills for its time is reported with where it was (a turn, a
     // stack, a battlefield filling up) rather than replayed at a longer limit
     // to find out — batch 174 waited ten minutes on one that way. It only
     // reads the state, so the seed plays exactly as before.
     let beatAt = startedAt;
-    let ticks = 0;
-    game.advanceUntil((state) => {
-      // A copy shares, and so freezes, the live game's snapshots; it draws
-      // nothing from the game's stream, so the seed plays as before.
-      if (freezeSnapshots && (ticks += 1) % 25 === 0) game.snapshot();
+    const beat = (state, events) => {
       const now = Date.now();
-      if (now - beatAt >= 1000) {
-        beatAt = now;
-        parentPort.postMessage({ seed, heartbeat: snapshot(state, game.events.length) });
-      }
-      // `--max-turns`: stop as the turn after the cap begins.
-      return maxTurns !== null && state.turn.number > maxTurns;
-    });
+      if (now - beatAt < 1000) return;
+      beatAt = now;
+      parentPort.postMessage({ seed, heartbeat: snapshot(state, events) });
+    };
+    // `--max-turns`: stop as the turn after the cap begins.
+    const pastCap = (state) => maxTurns !== null && state.turn.number > maxTurns;
+    let game;
+    let copied;
+    if (replicas) {
+      // Played as a room plays it, two copies beside it.
+      ({ game, copied } = playWithReplicas({
+        create: () => ordered(Game.create({ seed, mulligans: true, decks: seats })),
+        controllers,
+        stopAt: pastCap,
+        onDecision: (g) => beat(g.state, g.events.length),
+      }));
+    } else {
+      game = ordered(Game.create({ seed, mulligans: true, controllers, decks: seats }));
+      let ticks = 0;
+      game.advanceUntil((state) => {
+        // A copy shares, and so freezes, the live game's snapshots; it draws
+        // nothing from the game's stream, so the seed plays as before.
+        if (freezeSnapshots && (ticks += 1) % 25 === 0) game.snapshot();
+        beat(state, game.events.length);
+        return pastCap(state);
+      });
+    }
     const capped = !game.state.result.over;
     parentPort.postMessage({
       seed,
       ok: true,
+      ...(copied !== undefined ? { copied } : {}),
       winner: capped ? "draw" : (game.winner ?? "draw"),
       reason: capped ? `turn cap (${maxTurns})` : game.state.result.reason,
       capped,

@@ -550,7 +550,7 @@ import type {
   ManaSource,
 } from "./mana-payment.js";
 import type { ObjectId, PlayerId, Rng } from "./primitives.js";
-import { asObjectId, createRng, saltedOrder, shuffle } from "./primitives.js";
+import { asObjectId, createRng, saltedOrder, shuffle, sortedNames } from "./primitives.js";
 import {
   DEFAULT_RULES,
   FACE_DOWN_CARDS,
@@ -17186,7 +17186,7 @@ export class Game {
         player: chooser,
         source: id,
         ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
-        options: [...names].sort((a, b) => a.localeCompare(b)),
+        options: sortedNames(names),
         aim,
         onEnter: true,
       });
@@ -66528,9 +66528,7 @@ controlledBy,
     if (target.kind !== "player" || amount <= 0) return;
     const object = this.state.objects[source];
     if (object === undefined || object.zone !== "battlefield" || object.controller === target.player) return;
-    const tally = this.tallyOf(object);
-    tally.lifeTaken += amount;
-    tally.thisTurn.lifeTaken += amount;
+    this.addToTally(object, amount, 0);
   }
 
   /** An effect's life loss (not damage, which `tallyDamage` counts), added
@@ -66560,22 +66558,29 @@ controlledBy,
     ) {
       return;
     }
-    const tally = this.tallyOf(object);
-    tally.lifeTaken += lost;
-    tally.thisTurn.lifeTaken += lost;
+    this.addToTally(object, lost, 0);
   }
 
-  /** `object`'s `tally`, its `thisTurn` share started over if that was an
-   * earlier turn's. */
-  private tallyOf(object: GameObject): NonNullable<GameObject["tally"]> {
+  /**
+   * Adds to `object`'s `tally`, its `thisTurn` share started over if that was
+   * an earlier turn's. A new record each time, never a write into the old
+   * one: a token split off a stack shares every part of its stack that
+   * `splitOneFromStack` doesn't copy, which is safe only for what is replaced
+   * whole. Written in place, one token's hit was counted on the stack it came
+   * from too — two tokens attacking for 1 each read 2 apiece (found
+   * 2026-11-18 by the fuzzer's copy check: a copy restored from a sent state
+   * shares nothing, and counted 1).
+   */
+  private addToTally(object: GameObject, lifeTaken: number, cardsDrawn: number): void {
     const turn = this.state.turn.number;
-    const tally = (object.tally ??= {
-      lifeTaken: 0,
-      cardsDrawn: 0,
-      thisTurn: { turn, lifeTaken: 0, cardsDrawn: 0 },
-    });
-    if (tally.thisTurn.turn !== turn) tally.thisTurn = { turn, lifeTaken: 0, cardsDrawn: 0 };
-    return tally;
+    const prior = object.tally;
+    const thisTurn =
+      prior !== undefined && prior.thisTurn.turn === turn ? prior.thisTurn : { turn, lifeTaken: 0, cardsDrawn: 0 };
+    object.tally = {
+      lifeTaken: (prior?.lifeTaken ?? 0) + lifeTaken,
+      cardsDrawn: (prior?.cardsDrawn ?? 0) + cardsDrawn,
+      thisTurn: { turn, lifeTaken: thisTurn.lifeTaken + lifeTaken, cardsDrawn: thisTurn.cardsDrawn + cardsDrawn },
+    };
   }
 
   /** A card drawn while an ability resolves adds to its source's `tally`,
@@ -66594,9 +66599,7 @@ controlledBy,
     ) {
       return;
     }
-    const tally = this.tallyOf(object);
-    tally.cardsDrawn += 1;
-    tally.thisTurn.cardsDrawn += 1;
+    this.addToTally(object, 0, 1);
   }
 
   /** Whether damage from `source` can't be prevented (rule 615.12): a

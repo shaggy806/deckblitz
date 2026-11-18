@@ -26,6 +26,7 @@ import type { CardRegistry } from "./cards/card-registry.js";
 import { isTokenCard } from "./cards/classify.js";
 import type { CardDefinition, CardType } from "./cards/define.js";
 import { manaValue, parseManaCost } from "./mana.js";
+import { compareNames, sortedNames } from "./primitives.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { LOCKED_ROOM, nameOf, printedCardName } from "./state.js";
 import type { GameObject, GameState } from "./state.js";
@@ -130,11 +131,11 @@ export function nameableCardNames(registry: CardRegistry, filter?: CardNameFilte
   const key = JSON.stringify(filter ?? {});
   const known = byFilter.get(key);
   if (known !== undefined) return known;
-  const names: string[] = [];
+  const found: string[] = [];
   for (const def of registry.definitions()) {
-    if (isNameable(def) && nameMatchesFilter(def, filter)) names.push(def.name);
+    if (isNameable(def) && nameMatchesFilter(def, filter)) found.push(def.name);
   }
-  names.sort((a, b) => a.localeCompare(b));
+  const names = sortedNames(found);
   byFilter.set(key, names);
   return names;
 }
@@ -221,7 +222,7 @@ export function suggestedCardNames(
   const mostCommon = (list: readonly GameObject[]): string[] => {
     const counts = new Map<string, number>();
     for (const o of list) for (const n of namesOf(registry, o)) counts.set(n, (counts.get(n) ?? 0) + 1);
-    return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([n]) => n);
+    return [...counts.entries()].sort((a, b) => b[1] - a[1] || compareNames(a[0], b[0])).map(([n]) => n);
   };
   const commanders = objects(state.zones.shared.command).filter((o) => o.isCommander && opponents.includes(o.owner));
   const battlefield = objects(state.zones.shared.battlefield).filter(theirs);

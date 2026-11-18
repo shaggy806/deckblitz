@@ -226,6 +226,14 @@ console.log(`${results.length} games — ${tally}`);
 console.log(
   `avg turns ${(results.reduce((s, r) => s + r.turns, 0) / Math.max(1, results.length)).toFixed(1)}`,
 );
+// MTG_REPLICA=1: what the copies of each game were put through (`replica-check.mjs`).
+const copied = results.filter((r) => r.copied !== undefined).map((r) => r.copied);
+if (copied.length > 0) {
+  const sum = (key) => copied.reduce((n, c) => n + c[key], 0);
+  console.log(
+    `copies: ${sum("actions")} actions given to two copies of each game, compared ${sum("compared")} times, ${sum("restores")} restores from a sent state — all identical`,
+  );
+}
 if (failures.length > 0) {
   console.log("");
   console.log(`${failures.length} FAILED:`);

@@ -89,7 +89,12 @@ Read a file's entry before changing that file; you don't need the rest.
   helpers from their own modules (`cards/card-registry.ts`, `cards/default-registry.ts`), never the
   `cards.ts` barrel, in anything `local.ts` reaches (`test/local-entry.test.ts`).
 - **Determinism:** same seed + same controllers ⇒ identical replay. The fuzzer's `RandomSource`
-  draw order and bots' default-off `timeBudgetMs` exist to protect it.
+  draw order and bots' default-off `timeBudgetMs` exist to protect it. The same holds across
+  machines, which rooms copied onto each player's device will rest on
+  (`docs/plans/replicated-rooms.md`): nothing the engine computes may read the clock, the
+  machine's language or anything else of where it runs. Sort names with `primitives.ts`'s
+  `compareNames` / `sortedNames`, never `localeCompare` (`test/same-on-every-machine.test.ts`);
+  `MTG_REPLICA=1` on the fuzzer checks that a copy given only a game's actions stays identical.
 - **`game.ts` contains a literal NUL byte**, so git and grep treat it as binary: use `grep -a`,
   and don't remove the byte (see the root `CLAUDE.md`).
 
