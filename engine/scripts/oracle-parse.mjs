@@ -2039,6 +2039,13 @@ export function parseTrigger(clause) {
   // dies" (Oathkeeper, Takeno's Daisho): what this is attached to.
   if (/^When(?:ever)? (?:enchanted|equipped) creature dies$/.test(c)) return [{ on: "dies", who: "attached" }];
   if (/^When(?:ever)? ~ leaves the battlefield$/.test(c)) return self("leaves-battlefield");
+  // "When the creature put onto the battlefield with ~ dies / leaves the
+  // battlefield" (Diabolic Servitude, Havengul Mystery): the second of a
+  // linked pair (rule 607.2c), the first being the card's first triggered
+  // ability, the return it prints first.
+  if ((m = /^When the creature put onto the battlefield with ~ (dies|leaves the battlefield)$/.exec(c))) {
+    return [{ on: m[1] === "dies" ? "dies" : "leaves-battlefield", who: "any", filter: { putThereBySource: { triggered: 0 } } }];
+  }
   // "When this artifact is put into a graveyard from the battlefield"
   // (Chromatic Star): an Aura or artifact too, not only a creature's "dies".
   // "Into **your** graveyard" (Unquenchable Fury, Triumph of Saint
@@ -8659,6 +8666,25 @@ export function parseSentence(sentence, ctx) {
   // "Exile this card", ending a dies trigger (Moorland Rescuer): the card as
   // the trigger found it, not whatever it has become since (rule 400.7).
   if (/^exile ~\.$/i.test(s) && ctx?.departed === "source") return { kind: "exile", target: "trigger-object" };
+  // "When the creature put onto the battlefield with this enchantment dies,
+  // exile it and return this enchantment to its owner's hand" (Diabolic
+  // Servitude): the card the dies trigger is about, found in the graveyard it
+  // went to (rule 400.7e), then whatever the rest says. A lone "exile it" is
+  // left alone: on Koh and Shelob it's the first of a linked pair.
+  if (ctx?.departed === "trigger-object" && ctx.it === "trigger-object" && ctx.targets?.length === 0) {
+    const exileIt = /^exile it and (return ~ .+)\.$/i.exec(s);
+    if (exileIt !== null) {
+      const exile = { kind: "exile", target: "trigger-object" };
+      const rest = parseSentence(`${exileIt[1][0].toUpperCase()}${exileIt[1].slice(1)}.`, { ...ctx, it: undefined, departed: undefined });
+      return rest === null || rest === undefined ? null : { kind: "sequence", effects: [exile, rest] };
+    }
+  }
+  // "Exile the creature put onto the battlefield with this enchantment"
+  // (Diabolic Servitude's leaves trigger): what the card's first triggered
+  // ability put there, the return it prints first (rule 607.2c).
+  if (/^exile the creature put onto the battlefield with ~\.$/i.test(s)) {
+    return { kind: "exile", target: { putOntoBattlefieldWith: { triggered: 0 } } };
+  }
   // "Sacrifice it unless you sacrifice any number of creatures with total power
   // 12 or greater" (Phyrexian Dreadnought).
   if ((m = /^sacrifice (?:~|it) unless you sacrifice any number of (.+?) with total power (\d+) or greater\.$/i.exec(s))) {

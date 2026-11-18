@@ -2771,6 +2771,14 @@ export class Game {
     readonly entries: ReadonlyMap<ObjectId, readonly TriggeredEntry[]>;
   } | null = null;
 
+  /** The source the trigger scan is reading as it last existed on the
+   * battlefield (rule 603.10a), and that stint of it: what its trigger's
+   * filter means by "with this" (`FilterContext.sourceStint`) — Diabolic
+   * Servitude's "when the creature put onto the battlefield with this
+   * enchantment dies", the enchantment destroyed beside it. Transient: set
+   * per candidate within one scan, cleared at its end. */
+  private triggerLookBack: { readonly source: ObjectId; readonly stint: number } | null = null;
+
   /** Permanents changing hands at once (`withControlBatch`), each with who
    * controlled it just before: an ability looking back (rule 603.10d) reads
    * its source's controller from here, once its source has gone in the same
@@ -35885,6 +35893,7 @@ export class Game {
         lastSeen !== undefined && lastSeen.controller !== live.controller
           ? { ...live, controller: lastSeen.controller }
           : live;
+      this.triggerLookBack = lastSeen !== undefined ? { source: id, stint: lastSeen.zoneChangeCount } : null;
       // A command-zone source contributes *only* its `fromCommandZone`
       // abilities — Edgar Markov's attack trigger must not fire from there.
       const onlyEminence = eminenceOnly.has(id);
@@ -36657,6 +36666,7 @@ export class Game {
         }
       });
     }
+    this.triggerLookBack = null;
     // Delayed triggers waiting on this permanent leaving (earthbend's "when
     // it dies or is exiled") belong to no permanent, so the scan above can't
     // see them.
@@ -39052,6 +39062,7 @@ export class Game {
       matchesFilter(this.state, this.registry, subject, filter, {
         you: self.controller,
         source: self.id,
+        ...(this.triggerLookBack?.source === self.id ? { sourceStint: this.triggerLookBack.stint } : {}),
         ...(lastKnown ? { lastKnown } : {}),
         // "Whenever a creature with greater power enters": the subject is
         // the would-be trigger object, the source is this permanent.
@@ -41029,6 +41040,23 @@ export class Game {
         });
       }
       if (typeof ref !== "object") return [];
+      if ("putOntoBattlefieldWith" in ref) {
+        // Rule 607.2c: what an ability of this source put onto the
+        // battlefield, in the stint this ability refers to though the source
+        // has left since (Diabolic Servitude's leaves trigger). Only what is
+        // still there in that stint: one that left is a new object (400.7).
+        const stint = linkedExileStint();
+        if (stint === undefined) return [];
+        const want = ref.putOntoBattlefieldWith;
+        const filter: CardFilter = { putThereBySource: want === true ? true : want };
+        return this.state.zones.shared.battlefield.flatMap((id): SetMember[] => {
+          const held = this.state.objects[id];
+          return held !== undefined &&
+            matchesFilter(this.state, this.registry, id, filter, { you: controller, source, sourceStint: stint })
+            ? [{ object: id, stint: held.zoneChangeCount ?? 0, count: held.stackCount ?? 1 }]
+            : [];
+        });
+      }
       if ("turnHistory" in ref) {
         // A journal word's objects, each as its entry kept it (603.10a).
         return journalSetMembers(this.state, this.registry, scoped(ref.who ?? "you"), ref.turnHistory, controller, ref.window);

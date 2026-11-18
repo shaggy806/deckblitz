@@ -730,7 +730,14 @@ in the public zone it was expected in, and otherwise as it last existed (rules 6
   (Storm, Windrider's "those creatures"), beside the `ObjectSetRef`s of theme 1. `{ targetsOf: "trigger-object" }` on a
   cast trigger is what the spell targeted **as it triggered**, each as it last existed if it has left: Vesuvan
   Duplimancy's "create a token that's a copy of that artifact or creature" is `create-token-copy` with that `of`, and
-  copies the original target even if the spell is retargeted or countered first.
+  copies the original target even if the spell is retargeted or countered first. `{ putOntoBattlefieldWith: true |
+  { triggered: n } | { activated: n } }` is "the creature put onto the battlefield with this" (rule 607.2c) — the
+  permanents an ability of the source put there, in the source's stint the resolving ability refers to, so it still
+  names them after the source has left: Diabolic Servitude's "when this enchantment leaves the battlefield, exile the
+  creature put onto the battlefield with this enchantment" is `exile` of `{ putOntoBattlefieldWith: { triggered: 0 } }`
+  (one that left meanwhile is a new object, 400.7, and isn't in it). Its dies trigger is `putThereBySource: {
+  triggered: 0 }` on a `who: "any"` `dies`, which still fires when the enchantment is destroyed beside the creature
+  (603.10a: the filter is read against the stint it left, `FilterContext.sourceStint`).
 - **Attaching to a player**: `attach`'s `target` also takes `{ player: PlayerRef }` (Archnemesis).
 
 **Relational `CardFilter` clauses take refs too** (`filter.ts`): `sameNameWith` (a slot or

@@ -3074,7 +3074,8 @@
   "effect:put-same-counters-as-trigger",
   "condition:noncreature-permanent-destroyed-by-opponent-this-turn",
   "amount:life-lost-when-source-entered",
-  "condition:face-down-dies-card-characteristics"
+  "condition:face-down-dies-card-characteristics",
+  "effect:leaves-act-on-permanent-put-there-by-source"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

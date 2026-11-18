@@ -1837,6 +1837,13 @@ export interface FilterContext {
   /** The permanent whose trigger or ability is applying the filter — what
    * `putThereBySource` compares against. */
   readonly source?: ObjectId;
+  /** Which battlefield stint of `source` the filter is asked for, where
+   * that isn't the one it's in now: a source that has left, asked about as
+   * it was — its leaves-the-battlefield ability looking back (rule 603.10a),
+   * or resolving after it left ("exile the creature put onto the battlefield
+   * with this enchantment", Diabolic Servitude). What `putThereBySource`
+   * compares against; absent ⇒ the stint it's in. */
+  readonly sourceStint?: number;
   /** The object is a spell being cast, still in the zone it's cast from (a
    * targeting spell's `TargetSource.spell`): what `isSpell` reads then. */
   readonly asSpell?: true;
@@ -2394,6 +2401,19 @@ function countsAsNamed(
   if (ctx.spellName !== name || live === undefined || live.zone !== "graveyard") return false;
   if (!registry.has(rulesTextName(live))) return false;
   return registry.get(rulesTextName(live)).static.some((s) => s.fromGraveyard === true && s.countsAsNamedFor === name);
+}
+
+/** The face `source` showed in its battlefield stint `stint` (rule 607.1b:
+ * an ability is indexed into its face's list): the face it shows now while
+ * it's still in that stint, else the face its last known information names
+ * (a double-faced permanent that left is its front face again, rule 712.8a,
+ * but put the permanent there as the face it was). */
+function askerFaceInStint(registry: CardRegistry, source: GameObject, stint: number): number {
+  if ((source.zoneChangeCount ?? 0) === stint) return source.face ?? 0;
+  const last = source.lastKnown;
+  if (last === undefined || last.zoneChangeCount !== stint || !registry.has(source.cardName)) return 0;
+  const at = registry.get(source.cardName).faces?.indexOf(last.name) ?? -1;
+  return at < 0 ? 0 : at;
 }
 
 /** Does object `id` satisfy every clause of `filter`?
@@ -3174,14 +3194,17 @@ export function matchesFilter(
     if (filter.putThereBySource !== undefined) {
       const by = entry?.by;
       const asker = ctx.source === undefined ? undefined : state.objects[ctx.source];
-      const byIt = by !== undefined && asker !== undefined && by.source === asker.id && by.stint === (asker.zoneChangeCount ?? 0);
+      const askerStint = ctx.sourceStint ?? asker?.zoneChangeCount ?? 0;
+      const byIt = by !== undefined && asker !== undefined && by.source === asker.id && by.stint === askerStint;
       const want = filter.putThereBySource;
       if (typeof want === "boolean") {
         if (byIt !== want) return false;
       } else {
         const [kind, index] = "triggered" in want ? (["triggered", want.triggered] as const) : (["activated", want.activated] as const);
         const ability = by?.ability;
-        if (!byIt || ability?.kind !== kind || ability.index !== index || ability.face !== (asker!.face ?? 0)) return false;
+        if (!byIt || ability?.kind !== kind || ability.index !== index || ability.face !== askerFaceInStint(registry, asker!, askerStint)) {
+          return false;
+        }
       }
     }
   }

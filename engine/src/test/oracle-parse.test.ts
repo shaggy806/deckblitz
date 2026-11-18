@@ -23682,3 +23682,27 @@ describe("a permanent of yours destroyed this turn by an opponent's spell or abi
     });
   });
 });
+
+describe("the creature put onto the battlefield with this enchantment (Diabolic Servitude)", () => {
+  it("reads its dies and leaves triggers whole", () => {
+    const servitude = parseFace({
+      name: "Diabolic Servitude",
+      type_line: "Enchantment",
+      oracle_text:
+        "When this enchantment enters, return target creature card from your graveyard to the battlefield.\nWhen the creature put onto the battlefield with this enchantment dies, exile it and return this enchantment to its owner's hand.\nWhen this enchantment leaves the battlefield, exile the creature put onto the battlefield with this enchantment.",
+      mana_cost: "{3}{B}",
+      colors: ["B"],
+      cmc: 4,
+    } as never) as unknown as { complete: boolean; triggered: { trigger: unknown; effect: unknown }[] };
+    expect(servitude.complete).toBe(true);
+    expect(servitude.triggered[1].trigger).toEqual({ on: "dies", who: "any", filter: { putThereBySource: { triggered: 0 } } });
+    expect(servitude.triggered[1].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: "trigger-object" },
+        { kind: "return-to-hand", target: "source" },
+      ],
+    });
+    expect(servitude.triggered[2].effect).toEqual({ kind: "exile", target: { putOntoBattlefieldWith: { triggered: 0 } } });
+  });
+});
