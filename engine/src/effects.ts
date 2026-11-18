@@ -12647,9 +12647,13 @@ export interface ProtectionQualities {
    * opponents", fixed to those players as the effect resolves (Cliffside
    * Rescuer's ruling) — a new controller doesn't change them. */
   readonly fromPlayers?: "opponents" | readonly PlayerId[];
-  /** "Protection from **the chosen player**" (Guardian Archon): the effect's
-   * source's (`"chosen-player"`), fixed to that player as the effect resolves. */
-  readonly fromChosenPlayer?: true;
+  /** Protection from the one player a {@link PlayerRef} names, fixed to that
+   * player as the effect resolves (rule 702.16k): "from **the chosen
+   * player**" (Guardian Archon: `"chosen-player"`, the effect's source's),
+   * "planeswalkers you control gain protection from **that player**" (Eon
+   * Frolicker: `{ target: 0 }`, the target opponent). Naming nobody, it's
+   * protection from no player. */
+  readonly fromPlayer?: PlayerRef;
 }
 
 /** A protection quality chosen as the effect resolves (a `grant-protection`'s
@@ -18457,10 +18461,10 @@ function protectionFilterWords(filter: CardFilter): readonly string[] {
  * protected permanent's controller's side, which a later change of control
  * would move. Rewritten to the players themselves (`controllerIn`). */
 function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): ProtectionQualities {
-  const { fromChosenPlayer, ...named } = from;
+  const { fromPlayer, ...named } = from;
   const fixed =
-    fromChosenPlayer === true
-      ? { ...named, fromPlayers: ctx.playersInScope("chosen-player") }
+    fromPlayer !== undefined
+      ? { ...named, fromPlayers: ctx.playersInScope(fromPlayer) }
       : from.fromPlayers === "opponents"
         ? { ...named, fromPlayers: ctx.playersInScope("each-opponent") }
         : named;

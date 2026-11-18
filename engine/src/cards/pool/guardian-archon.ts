@@ -29,7 +29,7 @@ export default defineCard({
             duration: "end-of-turn",
             protectionFromPlayers: { who: "you", from: "chosen-player" },
           },
-          { kind: "grant-protection", target: 0, from: { fromChosenPlayer: true }, duration: "end-of-turn" },
+          { kind: "grant-protection", target: 0, from: { fromPlayer: "chosen-player" }, duration: "end-of-turn" },
         ],
       },
       resolve: null,

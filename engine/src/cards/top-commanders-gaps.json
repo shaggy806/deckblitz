@@ -2944,7 +2944,9 @@
   "trigger:cards-put-into-library",
   "effect:delayed-trigger-on-targeted-creature-damage",
   "trigger:dies-greatest-power-lki",
-  "effect:rechoose-direction-each-upkeep"
+  "effect:rechoose-direction-each-upkeep",
+  "effect:rechoose-direction-each-upkeep",
+  "effect:protection-from-player-for-you-and-planeswalkers"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
