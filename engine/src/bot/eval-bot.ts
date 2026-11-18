@@ -1083,25 +1083,63 @@ const BEFORE_BLOCKS: ReadonlySet<string> = new Set([
   "declare-attackers",
 ]);
 
+/** The casts and activations a bot has a player it controls make in one turn,
+ * at most: each must leave the board better for the bot than the one before
+ * (`EvalStandIn.play`), so they end by themselves, and this bounds an ability
+ * that could be paid for ever. */
+const STAND_IN_PLAYS = 20;
+
+/** How many fillings of one cast or activation (its targets, best first for
+ * the bot) a stand-in tries. */
+const STAND_IN_FILLINGS = 4;
+
 /**
- * A searching bot making another player's decisions: `StandInController`'s turn
- * of doing nothing, and each decision it's told to make the answer that leaves
- * the board best for the bot, read one step ahead. Which is the worst for the
- * player, near enough, and costs no search of a turn that isn't its own.
+ * A searching bot making another player's decisions (rule 723, Mindslaver),
+ * for the bot's good and from its seat's evaluation:
+ *
+ * - each decision the player is told to make gets the answer that leaves the
+ *   board best for the bot, read one step ahead. Which is the worst for the
+ *   player, near enough;
+ * - at each of the player's priority windows on an empty stack, the cast or
+ *   activation of theirs that leaves the board best for the bot once it has
+ *   resolved, where one beats passing (`play`): their removal at their own
+ *   best creature, their burn at their own face, a pump on the bot's. Until
+ *   2026-11-17 it passed every window, and a bot's Mindslaver turn was legal
+ *   and wasted;
+ * - their combat stays `StandInController`'s: no attack, and no block the
+ *   rules don't require. Sending their creatures at another opponent, or into
+ *   the bot's blockers, would need the attack search run from the bot's seat
+ *   on another player's creatures, which nothing here does yet.
+ *
+ * All of it on the view the bot's seat may plan on (`fair`,
+ * `EvalBotController.fairView`): the controlled player's hand, which a
+ * controller sees, and no library's order.
  */
 class EvalStandIn extends StandInController {
   private readonly forPlayer: PlayerId;
   private readonly cards: CardRegistry;
   private readonly weights: EvalWeights;
+  private readonly fair: (view: ControllerView) => ControllerView;
+  private readonly plays: { turn: number; made: number };
 
-  constructor(player: PlayerId, forPlayer: PlayerId, cards: CardRegistry, weights: EvalWeights) {
+  constructor(
+    player: PlayerId,
+    forPlayer: PlayerId,
+    cards: CardRegistry,
+    weights: EvalWeights,
+    fair: (view: ControllerView) => ControllerView,
+    plays: { turn: number; made: number },
+  ) {
     super(player);
     this.forPlayer = forPlayer;
     this.cards = cards;
     this.weights = weights;
+    this.fair = fair;
+    this.plays = plays;
   }
 
-  act(view: ControllerView): Action {
+  act(real: ControllerView): Action {
+    const view = this.fair(real);
     if (view.state.awaiting !== null && view.viewAfter !== undefined) {
       let best: Action | null = null;
       let bestScore = -Infinity;
@@ -1116,7 +1154,55 @@ class EvalStandIn extends StandInController {
       }
       if (best !== null) return best;
     }
-    return super.act(view);
+    if (view.state.awaiting === null) {
+      const play = this.play(view);
+      if (play !== null) return play;
+    }
+    return super.act(real);
+  }
+
+  /**
+   * The cast or activation of the controlled player's that leaves the board
+   * best for the bot, or `null` when none beats passing. Each offer's targets
+   * are aimed from the bot's seat (`aimOffer`: harm at anyone but the bot,
+   * the dearest first, which is the player's own as soon as theirs is the
+   * dearest; help at the bot's), each filling is played to the end of its
+   * resolution with every seat passing, and the board it leaves is scored as
+   * the bot scores its own (`evaluateState`, from the bot's seat). Passing is
+   * the board as it stands, so a spell that only helps its caster stays in
+   * their hand, and a turn's plays end once nothing more improves on it.
+   *
+   * Not a mana ability (mana empties with the step, and tapping their lands
+   * for nothing is worth nothing a later window can't still take), and not a
+   * land: a land drop is theirs to keep.
+   */
+  private play(view: ControllerView): Action | null {
+    const state = view.state;
+    const them = this.playerId;
+    if (state.zones.shared.stack.length > 0 || state.priority.holder !== them) return null;
+    if (this.plays.turn !== state.turn.number) {
+      this.plays.turn = state.turn.number;
+      this.plays.made = 0;
+    }
+    if (this.plays.made >= STAND_IN_PLAYS) return null;
+    let best: Action | null = null;
+    let bestScore = evaluateState(state, this.cards, this.forPlayer, this.weights);
+    for (const legal of view.legalActions()) {
+      if (legal.kind !== "cast-spell" && legal.kind !== "activate-ability") continue;
+      if (legal.kind === "activate-ability" && legal.manaAbility === true) continue;
+      const aimed = withComputedCache(() => aimOffer(state, this.cards, this.forPlayer, legal));
+      for (const action of candidateActions(aimed, them).slice(0, STAND_IN_FILLINGS)) {
+        const after = simulateAction(state, this.cards, action, "stack", "passive");
+        if (after === null) continue;
+        const score = evaluateState(after, this.cards, this.forPlayer, this.weights);
+        if (score > bestScore) {
+          best = action;
+          bestScore = score;
+        }
+      }
+    }
+    if (best !== null) this.plays.made += 1;
+    return best;
   }
 }
 
@@ -1305,9 +1391,17 @@ export class EvalBotController extends HeuristicBotController {
     return !this.isEndOfTurnBeforeOurs(state);
   }
 
-  /** Another player's decisions (rule 723) are answered for this bot's good. */
+  /** The casts and activations this bot has had each player it controls make,
+   * and in which turn (`STAND_IN_PLAYS`). */
+  private readonly standInPlays = new Map<PlayerId, { turn: number; made: number }>();
+
+  /** Another player's decisions (rule 723) are answered for this bot's good,
+   * on what this seat may know (`fairView`: that player's hand, which it
+   * sees, and no library's order). */
   standIn(player: PlayerId): PlayerController {
-    return new EvalStandIn(player, this.playerId, this.cards, this.weights);
+    let plays = this.standInPlays.get(player);
+    if (plays === undefined) this.standInPlays.set(player, (plays = { turn: -1, made: 0 }));
+    return new EvalStandIn(player, this.playerId, this.cards, this.weights, (view) => this.fairView(view), plays);
   }
 
   /** Every decision reads a permanent's track record off the real board in
