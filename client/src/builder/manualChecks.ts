@@ -13567,4 +13567,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, {}],
     }),
   ),
+  preset(
+    'Selective Adaptation: the first card you pick goes onto the battlefield, the others into your hand',
+    board({
+      you: {
+        bf: ['Forest*6'],
+        hand: ['Selective Adaptation'],
+        lib: ['Serra Angel', 'Grizzly Bears', 'Giant Spider', 'Hill Giant', 'Raging Goblin', 'Craw Wurm', 'Typhoid Rats'],
+      },
+    }),
+  ),
 ]

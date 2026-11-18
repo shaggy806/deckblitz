@@ -12603,6 +12603,7 @@ export class Game {
       held !== undefined &&
       awaiting.priorityTo === undefined &&
       awaiting.destination === "battlefield" &&
+      awaiting.restDestination === undefined &&
       (chosen.length > 0 || (searchFind && shuffles)) &&
       chosen.every((id) => {
         const from = this.state.objects[id]?.zone;
@@ -47704,6 +47705,7 @@ controlledBy,
           more?.leftoverCounters,
           more?.thenAlways === true,
           more?.eachChooses,
+          more?.restDestination,
         );
       },
     };
@@ -47794,6 +47796,8 @@ controlledBy,
     thenAlways = false,
     /** See `look-and-choose`'s `eachChooses`: these players, in order. */
     eachPicks?: readonly PlayerId[],
+    /** See `look-and-choose`'s `restDestination`. */
+    restDestination?: "hand" | "battlefield",
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -48042,6 +48046,10 @@ controlledBy,
       ...(leftoverIf !== undefined ? { leftoverIf } : {}),
       ...(leftoverCounters !== undefined && leftover === "exile" ? { leftoverCounters } : {}),
       ...(secondPick !== undefined ? { secondPick } : {}),
+      // "Put one of the chosen cards onto the battlefield, the other chosen
+      // cards into your hand" (Selective Adaptation): the first picked goes
+      // to `destination`, the others here, with the leftover in one move.
+      ...(restDestination !== undefined && split === undefined && secondPick === undefined ? { restDestination } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
       ...(faceDownLooks !== undefined ? { faceDownLooks } : {}),
       ...(authoredPrompt !== undefined ? { prompt: authoredPrompt } : {}),

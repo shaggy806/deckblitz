@@ -12850,6 +12850,17 @@ export type EffectSpec =
       /** The cards picked are what's at stake, not what's gained: `then` may
        * take them away (Sylvan Library), so a bot picks its worst. */
       readonly givesUp?: true;
+      /**
+       * "Put **one of the chosen cards** onto the battlefield, **the other
+       * chosen cards** into your hand, and the rest into your graveyard"
+       * (Selective Adaptation): the first card picked goes to `destination`,
+       * every other chosen card here — a split tutor's `restDestination`
+       * (Cultivate), the order of the picks saying which. All of them and
+       * the leftover move as one instruction, at once. With a `together`
+       * (`oneEach`), the set is chosen by its slots and the first pick is
+       * any of them. Not with `split` or `secondPick`.
+       */
+      readonly restDestination?: "hand" | "battlefield";
     };
 
 /** The types a `put-onto-battlefield` says the permanent has, in place as it
@@ -15813,6 +15824,7 @@ export interface EffectApi {
       readonly givesUp?: true;
       readonly leftoverCounters?: { readonly kind: string; readonly amount: number };
       readonly thenAlways?: true;
+      readonly restDestination?: "hand" | "battlefield";
     },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
@@ -25875,6 +25887,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.givesUp === true ? { givesUp: true as const } : {}),
           ...(spec.leftoverCounters !== undefined ? { leftoverCounters: spec.leftoverCounters } : {}),
           ...(spec.thenAlways === true ? { thenAlways: true as const } : {}),
+          ...(spec.restDestination !== undefined ? { restDestination: spec.restDestination } : {}),
         },
       );
       // Nothing to choose from, so nothing asked: the instruction's other

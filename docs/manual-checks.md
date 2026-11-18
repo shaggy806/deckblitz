@@ -8956,3 +8956,9 @@ Each board's die comes up 4.
 ### Blood of the Martyr: in a 4-player game, Pyroclasm asks once for each creature
 - **Do:** Cast Blood of the Martyr, then Pyroclasm. Take the damage for your own Grizzly Bears only.
 - **Expect:** Three questions, one for each creature, each naming whose it is ("Have the 2 damage Pyroclasm would deal to your Grizzly Bears dealt to you instead", then Bob's Grizzly Bears, then Carol's Hill Giant). You end at 38 with your Grizzly Bears alive; Bob's Grizzly Bears die and Carol's Hill Giant lives.
+
+## One of the chosen cards onto the battlefield, the others into your hand (2026-11-18)
+
+### Selective Adaptation: the first card you pick goes onto the battlefield, the others into your hand
+- **Do:** Cast Selective Adaptation. Click Giant Spider, then Serra Angel, Raging Goblin and Typhoid Rats, and confirm.
+- **Expect:** The popup's title reads "Choose a card for each keyword: the first you pick goes onto the battlefield, the rest into your hand", and Grizzly Bears, Hill Giant and Craw Wurm can't be picked. Giant Spider is on the battlefield; Serra Angel, Raging Goblin and Typhoid Rats are in your hand; the other three are in your graveyard.
