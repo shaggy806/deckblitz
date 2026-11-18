@@ -21791,7 +21791,14 @@ function fillEffect(ability, text, ctx, lines, i) {
     for (const b of bullets) {
       // Each mode brings its own targets (rule 700.2b): slots of its own.
       const targets = [];
-      const r = parseEffect(b, { targets, tokenFor: ctx.tokenFor, onStack: ctx.onStack });
+      // "That player" in a mode is the trigger's player, as in a plain
+      // effect (Blizzard Specter's "that player discards a card").
+      const r = parseEffect(b, {
+        targets,
+        tokenFor: ctx.tokenFor,
+        onStack: ctx.onStack,
+        ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
+      });
       if (r.effect === null) ok = false;
       else modes.push({ text: b, ...(targets.length > 0 ? { targets } : {}), effect: r.effect });
     }

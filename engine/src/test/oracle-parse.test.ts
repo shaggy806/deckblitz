@@ -23154,6 +23154,35 @@ describe("a face-down pile searched out, and draws replaced by its top card", ()
     });
   });
 
+  it("reads a modal trigger's \"that player\" as the trigger's player (Blizzard Specter)", () => {
+    const specter = face(
+      "Snow Creature — Specter",
+      "Flying\nWhenever this creature deals combat damage to a player, choose one —\n• That player returns a permanent they control to its owner's hand.\n• That player discards a card.",
+    );
+    expect(specter.complete).toBe(true);
+    expect(specter.triggered[0].effect).toEqual({
+      kind: "modal",
+      announced: true,
+      minModes: 1,
+      maxModes: 1,
+      modes: [
+        {
+          text: "That player returns a permanent they control to its owner's hand.",
+          effect: {
+            kind: "choose-permanents",
+            chooser: "trigger-player",
+            filter: { controlledBy: "you" },
+            min: 1,
+            upTo: 1,
+            then: { kind: "return-to-hand", target: 0 },
+            prompt: "Return a permanent you control to its owner's hand",
+          },
+        },
+        { text: "That player discards a card.", effect: { kind: "discard", target: "trigger-player", amount: 1 } },
+      ],
+    });
+  });
+
   it("leaves a pile not shuffled, or no shuffle of the library after, unread", () => {
     const unshuffled = face(
       "Enchantment",
