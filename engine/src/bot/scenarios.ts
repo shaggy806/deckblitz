@@ -696,6 +696,51 @@ function precombatCasts(game: Game, bot: PlayerController): string[] {
   return casts;
 }
 
+/**
+ * A game still in its opening hands, Alice (on the play) asked to keep or
+ * mulligan `hand` — her seven, replaced by these cards — after `taken`
+ * mulligans; `free` is the Commander rule's free first one
+ * (`GameRules.freeFirstMulligan`). The answer wanted is `keep`.
+ *
+ * A mulligan isn't searched (`decisions/mulligan.ts`: no rollout means
+ * anything before the game starts), so what's judged is the opening-hand
+ * policy every bot shares (`bot/mulligan.ts`), asked through the real
+ * decision as a game asks it. Its numbers are pinned shape by shape in
+ * `mulligan-policy.test.ts`; these are the hands a player would agree on.
+ */
+function openingHand(
+  registry: CardRegistry,
+  hand: readonly string[],
+  keep: boolean,
+  opts: { readonly taken?: number; readonly free?: boolean } = {},
+): ScenarioPosition | ScenarioResult {
+  const taken = opts.taken ?? 0;
+  const game = Game.create({
+    seed: 3,
+    registry,
+    decks: [forestDeck(A), forestDeck(B)],
+    mulligans: true,
+    startingPlayer: A,
+    rules: { freeFirstMulligan: opts.free === true },
+  });
+  for (let i = 0; i < taken; i += 1) game.dispatch({ type: "mulligan", player: A, keep: false });
+  game.state.zones.perPlayer[A].hand = [];
+  for (const name of hand) game.debugSpawn(name, A, "hand");
+  const awaiting = game.state.awaiting;
+  const mine = awaiting?.kind === "mulligan" ? awaiting.hands[A] : undefined;
+  if (mine === undefined || mine.step !== "decide" || mine.taken !== taken) {
+    return { passed: false, detail: `alice was never asked about her opening hand after ${taken} mulligan(s)` };
+  }
+  return {
+    game,
+    player: A,
+    judge: (action) => ({
+      passed: action.type === "mulligan" && action.keep === keep,
+      detail: action.type === "mulligan" ? (action.keep ? "kept" : "took a mulligan") : describeAction(action),
+    }),
+  };
+}
+
 function asked(
   spec: Omit<BotScenario, "run" | "position"> & Required<Pick<BotScenario, "position">>,
 ): BotScenario {
@@ -7259,6 +7304,113 @@ const SCENARIOS: readonly BotScenario[] = [
         }),
       };
     },
+  }),
+  // Opening hands (BACKLOG "More training scenarios": mulligans weren't
+  // covered). The policy is one scoring function shared by every bot
+  // (`bot/mulligan.ts`), pinned number by number in `mulligan-policy.test.ts`;
+  // these ask it through the real decision, for the keeps and mulligans a
+  // player would agree with.
+  asked({
+    name: "mulligans a seven with no lands",
+    rule: "A hand that can't make mana goes back, however good its spells.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Llanowar Elves", "Sol Ring", "Grizzly Bears", "Cultivate", "Lightning Bolt", "Craw Wurm", "Mind Stone"],
+        false,
+      ),
+  }),
+  asked({
+    name: "mulligans a one-land seven on the play",
+    rule: "One land, no mana rock and no draw step to find the second land is not a keep.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Forest", "Lightning Bolt", "Grizzly Bears", "Trained Armodon", "Night's Whisper", "Craw Wurm", "Colossal Dreadmaw"],
+        false,
+      ),
+  }),
+  asked({
+    name: "mulligans seven lands",
+    rule: "A hand with nothing to cast is as dead as one that can't cast anything.",
+    position: (registry) =>
+      openingHand(registry, ["Forest", "Forest", "Forest", "Forest", "Mountain", "Mountain", "Mountain"], false),
+  }),
+  asked({
+    name: "keeps three lands, a mana creature and a curve",
+    rule: "A seven that makes its land drops and has plays for its first turns is kept.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Forest", "Forest", "Mountain", "Llanowar Elves", "Grizzly Bears", "Trained Armodon", "Craw Wurm"],
+        true,
+      ),
+  }),
+  asked({
+    name: "keeps a good seven even when a mulligan is free",
+    rule: "The free first mulligan is for a mediocre hand, not a reason to throw back a good one.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Forest", "Forest", "Mountain", "Llanowar Elves", "Grizzly Bears", "Trained Armodon", "Craw Wurm"],
+        true,
+        { free: true },
+      ),
+  }),
+  asked({
+    name: "takes the free mulligan on three lands and one play",
+    rule: "A mulligan that costs no card is taken on a hand that is only fine.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Forest", "Forest", "Forest", "Grizzly Bears", "Craw Wurm", "Craw Wurm", "Colossal Dreadmaw"],
+        false,
+        { free: true },
+      ),
+  }),
+  asked({
+    name: "keeps three lands and one play once the free mulligan is spent",
+    rule: "The same hand is kept when throwing it back costs a card.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Forest", "Forest", "Forest", "Grizzly Bears", "Craw Wurm", "Craw Wurm", "Colossal Dreadmaw"],
+        true,
+        { free: true, taken: 1 },
+      ),
+  }),
+  asked({
+    name: "keeps two lands and a two-drop rather than go to five",
+    rule: "The bar falls as the hand shrinks: a hand not worth a seven is worth a six.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Forest", "Forest", "Grizzly Bears", "Craw Wurm", "Colossal Dreadmaw", "Craw Wurm", "Colossal Dreadmaw"],
+        true,
+        { taken: 1 },
+      ),
+  }),
+  asked({
+    name: "still mulligans a one-lander to five",
+    rule: "A hand that can't function is thrown back while five cards are left to find one that can.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Forest", "Craw Wurm", "Colossal Dreadmaw", "Craw Wurm", "Colossal Dreadmaw", "Craw Wurm", "Grizzly Bears"],
+        false,
+        { taken: 1 },
+      ),
+  }),
+  asked({
+    name: "keeps whatever it draws at four cards",
+    rule: "Below five the mulligan stops: a bad four is a better game than a three.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Craw Wurm", "Craw Wurm", "Craw Wurm", "Craw Wurm", "Craw Wurm", "Craw Wurm", "Craw Wurm"],
+        true,
+        { taken: 3 },
+      ),
   }),
 ];
 
