@@ -7536,6 +7536,7 @@ import _poolDragonstorm from "./pool/dragonstorm.js";
 import _poolDragonwingGlider from "./pool/dragonwing-glider.js";
 import _poolDragoonsLance from "./pool/dragoons-lance.js";
 import _poolDragoonsWyvern from "./pool/dragoons-wyvern.js";
+import _poolDrainLife from "./pool/drain-life.js";
 import _poolDrainTheWell from "./pool/drain-the-well.js";
 import _poolDrainingWhelk from "./pool/draining-whelk.js";
 import _poolDrainpipeVermin from "./pool/drainpipe-vermin.js";
@@ -8834,6 +8835,7 @@ import _poolEtherealAmbush from "./pool/ethereal-ambush.js";
 import _poolEtherealArmor from "./pool/ethereal-armor.js";
 import _poolEtherealChampion from "./pool/ethereal-champion.js";
 import _poolEtherealElk from "./pool/ethereal-elk.js";
+import _poolEtherealForager from "./pool/ethereal-forager.js";
 import _poolEtherealGuidance from "./pool/ethereal-guidance.js";
 import _poolEtherealHaze from "./pool/ethereal-haze.js";
 import _poolEtherealInvestigator from "./pool/ethereal-investigator.js";
@@ -18382,6 +18384,7 @@ import _poolMurdocksCrusade from "./pool/murdocks-crusade.js";
 import _poolMurkDwellers from "./pool/murk-dwellers.js";
 import _poolMurkStrider from "./pool/murk-strider.js";
 import _poolMurkfiendLiege from "./pool/murkfiend-liege.js";
+import _poolMurktideRegent from "./pool/murktide-regent.js";
 import _poolMurkwaterPathway from "./pool/murkwater-pathway.js";
 import _poolMurkySewer from "./pool/murky-sewer.js";
 import _poolMurmuration from "./pool/murmuration.js";
@@ -27869,6 +27872,7 @@ import _poolTanukiTransplanter from "./pool/tanuki-transplanter.js";
 import _poolTaoistHermit from "./pool/taoist-hermit.js";
 import _poolTaoistMystic from "./pool/taoist-mystic.js";
 import _poolTapestryOfTheAges from "./pool/tapestry-of-the-ages.js";
+import _poolTapestryWarden from "./pool/tapestry-warden.js";
 import _poolTappingAtTheWindow from "./pool/tapping-at-the-window.js";
 import _poolTarFiend from "./pool/tar-fiend.js";
 import _poolTarPitWarrior from "./pool/tar-pit-warrior.js";
@@ -27931,6 +27935,7 @@ import _poolTavernRuffian from "./pool/tavern-ruffian.js";
 import _poolTavernScoundrel from "./pool/tavern-scoundrel.js";
 import _poolTavernSmasher from "./pool/tavern-smasher.js";
 import _poolTavernSwindler from "./pool/tavern-swindler.js";
+import _poolTawnosSolemnSurvivor from "./pool/tawnos-solemn-survivor.js";
 import _poolTawnosTheToymaker from "./pool/tawnos-the-toymaker.js";
 import _poolTawnosUrzasApprentice from "./pool/tawnos-urzas-apprentice.js";
 import _poolTawnossTinkering from "./pool/tawnoss-tinkering.js";
@@ -28357,6 +28362,7 @@ import _poolTheBlackstaffOfWaterdeep from "./pool/the-blackstaff-of-waterdeep.js
 import _poolTheBloodskyMassacre from "./pool/the-bloodsky-massacre.js";
 import _poolTheBlueSpirit from "./pool/the-blue-spirit.js";
 import _poolTheBookOfExaltedDeeds from "./pool/the-book-of-exalted-deeds.js";
+import _poolTheBookOfVileDarkness from "./pool/the-book-of-vile-darkness.js";
 import _poolTheBorgQueen from "./pool/the-borg-queen.js";
 import _poolTheBoulderReadyToRumble from "./pool/the-boulder-ready-to-rumble.js";
 import _poolTheBrokenSky from "./pool/the-broken-sky.js";
@@ -33500,6 +33506,7 @@ import _tokensVampireTokenLifelink from "./tokens/vampire-token-lifelink.js";
 import _tokensVampireTokenSorinTheMirthless from "./tokens/vampire-token-sorin-the-mirthless.js";
 import _tokensVampireToken from "./tokens/vampire-token.js";
 import _tokensVarmintToken from "./tokens/varmint-token.js";
+import _tokensVecnaToken from "./tokens/vecna-token.js";
 import _tokensVehicleToken from "./tokens/vehicle-token.js";
 import _tokensVibraniumToken from "./tokens/vibranium-token.js";
 import _tokensVillainToken from "./tokens/villain-token.js";
@@ -41122,6 +41129,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDragonwingGlider,
   _poolDragoonsLance,
   _poolDragoonsWyvern,
+  _poolDrainLife,
   _poolDrainTheWell,
   _poolDrainingWhelk,
   _poolDrainpipeVermin,
@@ -42420,6 +42428,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEtherealArmor,
   _poolEtherealChampion,
   _poolEtherealElk,
+  _poolEtherealForager,
   _poolEtherealGuidance,
   _poolEtherealHaze,
   _poolEtherealInvestigator,
@@ -51968,6 +51977,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMurkDwellers,
   _poolMurkStrider,
   _poolMurkfiendLiege,
+  _poolMurktideRegent,
   _poolMurkwaterPathway,
   _poolMurkySewer,
   _poolMurmuration,
@@ -61455,6 +61465,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTaoistHermit,
   _poolTaoistMystic,
   _poolTapestryOfTheAges,
+  _poolTapestryWarden,
   _poolTappingAtTheWindow,
   _poolTarFiend,
   _poolTarPitWarrior,
@@ -61517,6 +61528,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTavernScoundrel,
   _poolTavernSmasher,
   _poolTavernSwindler,
+  _poolTawnosSolemnSurvivor,
   _poolTawnosTheToymaker,
   _poolTawnosUrzasApprentice,
   _poolTawnossTinkering,
@@ -61943,6 +61955,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheBloodskyMassacre,
   _poolTheBlueSpirit,
   _poolTheBookOfExaltedDeeds,
+  _poolTheBookOfVileDarkness,
   _poolTheBorgQueen,
   _poolTheBoulderReadyToRumble,
   _poolTheBrokenSky,
@@ -67092,6 +67105,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensVampireTokenSorinTheMirthless,
   _tokensVampireToken,
   _tokensVarmintToken,
+  _tokensVecnaToken,
   _tokensVehicleToken,
   _tokensVibraniumToken,
   _tokensVillainToken,
@@ -74721,6 +74735,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dragonwing-glider": _poolDragonwingGlider,
   "pool/dragoons-lance": _poolDragoonsLance,
   "pool/dragoons-wyvern": _poolDragoonsWyvern,
+  "pool/drain-life": _poolDrainLife,
   "pool/drain-the-well": _poolDrainTheWell,
   "pool/draining-whelk": _poolDrainingWhelk,
   "pool/drainpipe-vermin": _poolDrainpipeVermin,
@@ -76019,6 +76034,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ethereal-armor": _poolEtherealArmor,
   "pool/ethereal-champion": _poolEtherealChampion,
   "pool/ethereal-elk": _poolEtherealElk,
+  "pool/ethereal-forager": _poolEtherealForager,
   "pool/ethereal-guidance": _poolEtherealGuidance,
   "pool/ethereal-haze": _poolEtherealHaze,
   "pool/ethereal-investigator": _poolEtherealInvestigator,
@@ -85567,6 +85583,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/murk-dwellers": _poolMurkDwellers,
   "pool/murk-strider": _poolMurkStrider,
   "pool/murkfiend-liege": _poolMurkfiendLiege,
+  "pool/murktide-regent": _poolMurktideRegent,
   "pool/murkwater-pathway": _poolMurkwaterPathway,
   "pool/murky-sewer": _poolMurkySewer,
   "pool/murmuration": _poolMurmuration,
@@ -95054,6 +95071,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/taoist-hermit": _poolTaoistHermit,
   "pool/taoist-mystic": _poolTaoistMystic,
   "pool/tapestry-of-the-ages": _poolTapestryOfTheAges,
+  "pool/tapestry-warden": _poolTapestryWarden,
   "pool/tapping-at-the-window": _poolTappingAtTheWindow,
   "pool/tar-fiend": _poolTarFiend,
   "pool/tar-pit-warrior": _poolTarPitWarrior,
@@ -95116,6 +95134,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tavern-scoundrel": _poolTavernScoundrel,
   "pool/tavern-smasher": _poolTavernSmasher,
   "pool/tavern-swindler": _poolTavernSwindler,
+  "pool/tawnos-solemn-survivor": _poolTawnosSolemnSurvivor,
   "pool/tawnos-the-toymaker": _poolTawnosTheToymaker,
   "pool/tawnos-urzas-apprentice": _poolTawnosUrzasApprentice,
   "pool/tawnoss-tinkering": _poolTawnossTinkering,
@@ -95542,6 +95561,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-bloodsky-massacre": _poolTheBloodskyMassacre,
   "pool/the-blue-spirit": _poolTheBlueSpirit,
   "pool/the-book-of-exalted-deeds": _poolTheBookOfExaltedDeeds,
+  "pool/the-book-of-vile-darkness": _poolTheBookOfVileDarkness,
   "pool/the-borg-queen": _poolTheBorgQueen,
   "pool/the-boulder-ready-to-rumble": _poolTheBoulderReadyToRumble,
   "pool/the-broken-sky": _poolTheBrokenSky,
@@ -100685,6 +100705,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/vampire-token-sorin-the-mirthless": _tokensVampireTokenSorinTheMirthless,
   "tokens/vampire-token": _tokensVampireToken,
   "tokens/varmint-token": _tokensVarmintToken,
+  "tokens/vecna-token": _tokensVecnaToken,
   "tokens/vehicle-token": _tokensVehicleToken,
   "tokens/vibranium-token": _tokensVibraniumToken,
   "tokens/villain-token": _tokensVillainToken,

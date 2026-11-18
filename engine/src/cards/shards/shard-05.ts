@@ -1038,6 +1038,7 @@ import _tokensSorcererRoleToken from "../tokens/sorcerer-role-token.js";
 import _tokensSpiritTokenPhantomInterference from "../tokens/spirit-token-phantom-interference.js";
 import _tokensTuktukTheReturned from "../tokens/tuktuk-the-returned.js";
 import _tokensVampireTokenLifelink from "../tokens/vampire-token-lifelink.js";
+import _tokensVecnaToken from "../tokens/vecna-token.js";
 import _tokensWolfTokenKessigWolfrider from "../tokens/wolf-token-kessig-wolfrider.js";
 import _tokensZabu from "../tokens/zabu.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
@@ -2081,6 +2082,7 @@ const shard: CardShard = {
     _tokensSpiritTokenPhantomInterference,
     _tokensTuktukTheReturned,
     _tokensVampireTokenLifelink,
+    _tokensVecnaToken,
     _tokensWolfTokenKessigWolfrider,
     _tokensZabu,
     _tokensZombieTokenOnWingsOfGold,

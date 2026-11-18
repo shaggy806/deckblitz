@@ -596,6 +596,7 @@ import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
 import _poolMurderousSpoils from "../pool/murderous-spoils.js";
+import _poolMurktideRegent from "../pool/murktide-regent.js";
 import _poolMuseVessel from "../pool/muse-vessel.js";
 import _poolMycologist from "../pool/mycologist.js";
 import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
@@ -1670,6 +1671,7 @@ const shard: CardShard = {
     _poolMummyParamount,
     _poolMurderousRider,
     _poolMurderousSpoils,
+    _poolMurktideRegent,
     _poolMuseVessel,
     _poolMycologist,
     _poolMyojinOfInfiniteRage,

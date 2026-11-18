@@ -863,6 +863,7 @@ import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
 import _poolTajuruParagon from "../pool/tajuru-paragon.js";
 import _poolTalonTrooper from "../pool/talon-trooper.js";
 import _poolTaoistHermit from "../pool/taoist-hermit.js";
+import _poolTapestryWarden from "../pool/tapestry-warden.js";
 import _poolTardis from "../pool/tardis.js";
 import _poolTarielReckonerOfSouls from "../pool/tariel-reckoner-of-souls.js";
 import _poolTauntingChallenge from "../pool/taunting-challenge.js";
@@ -1918,6 +1919,7 @@ const shard: CardShard = {
     _poolTajuruParagon,
     _poolTalonTrooper,
     _poolTaoistHermit,
+    _poolTapestryWarden,
     _poolTardis,
     _poolTarielReckonerOfSouls,
     _poolTauntingChallenge,

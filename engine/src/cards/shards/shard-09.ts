@@ -239,6 +239,7 @@ import _poolDoomWhisperer from "../pool/doom-whisperer.js";
 import _poolDoomskar from "../pool/doomskar.js";
 import _poolDragDown from "../pool/drag-down.js";
 import _poolDragonRoost from "../pool/dragon-roost.js";
+import _poolDrainLife from "../pool/drain-life.js";
 import _poolDreadSpecter from "../pool/dread-specter.js";
 import _poolDreadedBatCloud from "../pool/dreaded-bat-cloud.js";
 import _poolDreadfeastDemon from "../pool/dreadfeast-demon.js";
@@ -1321,6 +1322,7 @@ const shard: CardShard = {
     _poolDoomskar,
     _poolDragDown,
     _poolDragonRoost,
+    _poolDrainLife,
     _poolDreadSpecter,
     _poolDreadedBatCloud,
     _poolDreadfeastDemon,

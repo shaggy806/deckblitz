@@ -826,6 +826,7 @@ import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTandemLookout from "../pool/tandem-lookout.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTattermungeDuo from "../pool/tattermunge-duo.js";
+import _poolTawnosSolemnSurvivor from "../pool/tawnos-solemn-survivor.js";
 import _poolTeaEarlGreyHot from "../pool/tea-earl-grey-hot.js";
 import _poolTegwyllsScouring from "../pool/tegwylls-scouring.js";
 import _poolTekuthalInquiryDominus from "../pool/tekuthal-inquiry-dominus.js";
@@ -1818,6 +1819,7 @@ const shard: CardShard = {
     _poolTandemLookout,
     _poolTangleSpider,
     _poolTattermungeDuo,
+    _poolTawnosSolemnSurvivor,
     _poolTeaEarlGreyHot,
     _poolTegwyllsScouring,
     _poolTekuthalInquiryDominus,

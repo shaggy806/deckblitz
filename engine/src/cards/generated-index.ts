@@ -713,6 +713,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Vampire Token (Hungry for More)",
   "Vampire Token (Sorin the Mirthless)",
   "Varmint Token",
+  "Vecna Token",
   "Vehicle Token",
   "Vibranium Token",
   "Villain Token",
