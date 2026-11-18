@@ -432,6 +432,17 @@ describe("evaluateState features", () => {
     expect(delta({ nonlandMana: 1 }, (g) => void g.debugSpawn("Forest", A))).toBe(0);
   });
 
+  it("counts a cost reducer as mana for the spells it reaches, not one that reaches only a way of casting", () => {
+    // {1} off every instant and sorcery we cast: a mana a turn.
+    expect(delta({ nonlandMana: 1 }, (g) => void g.debugSpawn("Goblin Electromancer", A))).toBe(1);
+    // "Flashback costs you pay cost {2} less" (`SpellCastClause.via`) takes
+    // nothing off a spell cast from hand: no mana rock, a standing effect.
+    expect(delta({ nonlandMana: 1 }, (g) => void g.debugSpawn("Catalyst Stone", A))).toBe(0);
+    expect(delta({ standingEffects: 1 }, (g) => void g.debugSpawn("Catalyst Stone", A))).toBeGreaterThan(
+      delta({ standingEffects: 1 }, (g) => void g.debugSpawn("Goblin Electromancer", A)),
+    );
+  });
+
   it("counts permanents that keep drawing cards, not ones that draw once", () => {
     expect(delta({ drawEngines: 1 }, (g) => void g.debugSpawn("Phyrexian Arena", A))).toBe(1);
     // Draws when it dies, once.

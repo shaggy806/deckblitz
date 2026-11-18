@@ -603,6 +603,14 @@ const reductionMemo = new WeakMap<CardDefinition, number>();
  * Incubator 2; 1 for a counted amount), once, as for one spell a turn.
  * Counted with {@link manaPerTurn} in `nonlandMana`, so a reducer is a mana
  * rock for the spells it reaches. The audit's Q4 ("cost reduction as mana").
+ *
+ * Not one that reaches only a way of casting (`SpellCastClause.via`:
+ * Catalyst Stone's "flashback costs you pay cost {2} less"): it takes
+ * nothing off a spell cast from the hand, so it is no mana rock, and is
+ * priced as the standing effect it is (`standingWorth`, which takes off only
+ * what this counted). The engine prices such a cast exactly in the offer
+ * (`Game.pricedVia`); this estimate, made off the board, read the clause's
+ * caster and nothing else, and counted the Stone as two mana a turn.
  */
 function reductionPerTurn(def: CardDefinition): number {
   let found = reductionMemo.get(def);
@@ -610,7 +618,7 @@ function reductionPerTurn(def: CardDefinition): number {
     found = 0;
     for (const ability of def.static) {
       const mod = ability.costModification;
-      if (mod?.reduceGeneric === undefined || mod.when?.caster === "opponent") continue;
+      if (mod?.reduceGeneric === undefined || mod.when?.caster === "opponent" || mod.when?.via !== undefined) continue;
       found = Math.max(found, typeof mod.reduceGeneric === "number" ? Math.max(0, mod.reduceGeneric) : 1);
     }
     reductionMemo.set(def, found);
