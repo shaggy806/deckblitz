@@ -3017,7 +3017,8 @@
   "mechanic:two-pairing-abilities",
   "mechanic:two-pairing-abilities",
   "effect:search-zones-chosen-by-target-player",
-  "effect:grant-jump-start"
+  "effect:grant-jump-start",
+  "static:counters-remain-across-zones"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

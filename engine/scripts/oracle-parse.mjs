@@ -120,7 +120,9 @@ export function normalize(line, faceName) {
   if (meldInto !== undefined) s = s.replace(`meld them into ${meldInto}.`, "meld them into \u0001.");
   s = s.split(faceName).join("~");
   const short = /^([A-Z][\w'-]+) the [A-Z]/.exec(faceName)?.[1] ?? faceName.split(",")[0];
-  if (short !== faceName && short.length >= 3) s = s.replace(new RegExp(`\\b${escapeRe(short)}\\b`, "g"), "~");
+  // Two letters is a name too ("Me" for "Me, the Immortal", "Ao" for "Ao, the
+  // Dawn Sky"): it's matched as capitalized, so the word "me" isn't it.
+  if (short !== faceName && short.length >= 2) s = s.replace(new RegExp(`\\b${escapeRe(short)}\\b`, "g"), "~");
   s = s.replace(/\bthis (creature|artifact|enchantment|land|permanent|Equipment|Vehicle|Aura|token|spell|card|Saga)\b/gi, "~");
   if (meldInto !== undefined) s = s.replace("\u0001", meldInto);
   return s.trim();
@@ -5683,6 +5685,25 @@ export function parseSentence(sentence, ctx) {
           kind: "grant-graveyard-keyword",
           target: ctx.target({ kind: "card-in-graveyard", whose: "you", filter }),
           grant: { keyword: m[2].toLowerCase() },
+        };
+      }
+    }
+    // "Put your choice of a +1/+1, first strike, vigilance, or menace counter
+    // on ~" (Me, the Immortal): one mode a kind, chosen as it resolves.
+    if ((m = re(`put your choice of an? ((?:[+-]\\d+/[+-]\\d+|[a-z]+(?: [a-z]+)?), )+(?:or )?([+-]\\d+/[+-]\\d+|[a-z]+(?: [a-z]+)?) counter on (~|target creature)`).exec(s))) {
+      const list = /^put your choice of an? (.+) counter on/i.exec(s)[1];
+      const kinds = list.split(/, (?:or )?/).map((k) => k.trim().toLowerCase());
+      const known = (k) => /^[+-]\d+\/[+-]\d+$/.test(k) || KEYWORD_COUNTER_WORDS.has(k);
+      if (kinds.length >= 2 && kinds.every(known)) {
+        const target = m[3] === "~" ? "source" : ctx.target("creature");
+        return {
+          kind: "modal",
+          minModes: 1,
+          maxModes: 1,
+          modes: kinds.map((k) => ({
+            text: `A ${k} counter`,
+            effect: { kind: "add-counter", target, counter: k.replace(/ /g, "-"), amount: 1 },
+          })),
         };
       }
     }
@@ -18599,6 +18620,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
     if ((m = /^Mayhem((?: (?:\{[^}]+\})+)?)$/.exec(line))) { out.mayhem = m[1] ? { cost: m[1].trim() } : {}; continue; }
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }
+    // A static that works in every zone (Skullbriar, Me, the Immortal):
+    // `moveObject` keeps the counters.
+    if (line === "Counters remain on ~ as it moves to any zone other than a player's hand or library.") {
+      out.countersPersistAcrossZones = true;
+      continue;
+    }
     // An Aura's control effect (rule 613.1b, layer 2): "You control enchanted
     // creature" (Mind Control), "The monarch controls enchanted creature"
     // (Fealty to the Realm — `controlEnchanted: "monarch"`).
@@ -22265,6 +22292,25 @@ const OUTLAW_TYPES = ["Assassin", "Mercenary", "Pirate", "Rogue", "Warlock"];
 /** The keyword abilities a card in a graveyard can be given, with their cost
  * (`GraveyardKeywordGrant`). */
 const GRAVEYARD_KEYWORD = "unearth|encore|embalm|harmonize|retrace|sneak|jump-start";
+
+/** The keyword counters (rule 122.1b), as printed — `KEYWORD_COUNTERS` in
+ * `characteristics.ts`. */
+const KEYWORD_COUNTER_WORDS = new Set([
+  "flying",
+  "first strike",
+  "double strike",
+  "deathtouch",
+  "decayed",
+  "haste",
+  "hexproof",
+  "indestructible",
+  "lifelink",
+  "menace",
+  "reach",
+  "shadow",
+  "trample",
+  "vigilance",
+]);
 
 /**
  * "artifact creature", "Sliver creature", "outlaw creature", "Merfolk and

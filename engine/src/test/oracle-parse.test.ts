@@ -20344,6 +20344,28 @@ describe("a target player's own search, its zones theirs to choose", () => {
   });
 });
 
+describe("counters that remain across zones, and a choice of counters", () => {
+  it("reads Me, the Immortal whole, its two-letter short name as ~", () => {
+    const face = parseFace({
+      name: "Me, the Immortal",
+      type_line: "Legendary Creature — Human Rogue",
+      oracle_text:
+        "At the beginning of combat on your turn, put your choice of a +1/+1, first strike, vigilance, or menace counter on Me.\nCounters remain on Me as it moves to any zone other than a player's hand or library.\nYou may cast this card from your graveyard by discarding two cards in addition to paying its other costs.",
+    } as never) as unknown as { triggered: Record<string, unknown>[]; countersPersistAcrossZones: unknown; complete: boolean };
+    expect(face.countersPersistAcrossZones).toBe(true);
+    expect(face.triggered[0].effect).toMatchObject({
+      kind: "modal",
+      modes: [
+        { text: "A +1/+1 counter", effect: { kind: "add-counter", target: "source", counter: "+1/+1" } },
+        { text: "A first strike counter", effect: { counter: "first-strike" } },
+        { text: "A vigilance counter", effect: { counter: "vigilance" } },
+        { text: "A menace counter", effect: { counter: "menace" } },
+      ],
+    });
+    expect(face.complete).toBe(true);
+  });
+});
+
 describe("you may pay a cost; when you do, a reflexive ability with targets of its own", () => {
   it("reads a mana payment (Thousand Moons Crackshot) and an energy one with a jump-start grant (Filigree Racer)", () => {
     const crackshot = parseFace({
