@@ -474,6 +474,7 @@ import _poolJadarGhoulcallerOfNephalia from "../pool/jadar-ghoulcaller-of-nephal
 import _poolJamuraanLion from "../pool/jamuraan-lion.js";
 import _poolJawsOfDefeat from "../pool/jaws-of-defeat.js";
 import _poolJeskaiBrushmaster from "../pool/jeskai-brushmaster.js";
+import _poolJestersMask from "../pool/jesters-mask.js";
 import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
 import _poolJourneyToTheLostCity from "../pool/journey-to-the-lost-city.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
@@ -1527,6 +1528,7 @@ const shard: CardShard = {
     _poolJamuraanLion,
     _poolJawsOfDefeat,
     _poolJeskaiBrushmaster,
+    _poolJestersMask,
     _poolJibbirikOmnivore,
     _poolJourneyToTheLostCity,
     _poolJundBattlemage,

@@ -398,6 +398,7 @@ import _poolHarmonizedCrescendo from "../pool/harmonized-crescendo.js";
 import _poolHarrowingJourney from "../pool/harrowing-journey.js";
 import _poolHarvestMage from "../pool/harvest-mage.js";
 import _poolHaughtyDjinn from "../pool/haughty-djinn.js";
+import _poolHeadGames from "../pool/head-games.js";
 import _poolHeadlessSpecter from "../pool/headless-specter.js";
 import _poolHealingSalve from "../pool/healing-salve.js";
 import _poolHeavyFog from "../pool/heavy-fog.js";
@@ -1450,6 +1451,7 @@ const shard: CardShard = {
     _poolHarrowingJourney,
     _poolHarvestMage,
     _poolHaughtyDjinn,
+    _poolHeadGames,
     _poolHeadlessSpecter,
     _poolHealingSalve,
     _poolHeavyFog,

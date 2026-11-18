@@ -604,6 +604,7 @@ import _poolMinorMisstep from "../pool/minor-misstep.js";
 import _poolMirkwoodElk from "../pool/mirkwood-elk.js";
 import _poolMirranBanesplitter from "../pool/mirran-banesplitter.js";
 import _poolMirranCrusader from "../pool/mirran-crusader.js";
+import _poolMirrorMadPhantasm from "../pool/mirror-mad-phantasm.js";
 import _poolMiscast from "../pool/miscast.js";
 import _poolMischievousMystic from "../pool/mischievous-mystic.js";
 import _poolMistmeadowVanisher from "../pool/mistmeadow-vanisher.js";
@@ -1711,6 +1712,7 @@ const shard: CardShard = {
     _poolMirkwoodElk,
     _poolMirranBanesplitter,
     _poolMirranCrusader,
+    _poolMirrorMadPhantasm,
     _poolMiscast,
     _poolMischievousMystic,
     _poolMistmeadowVanisher,

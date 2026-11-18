@@ -753,6 +753,7 @@ import _poolSkitteringSkirge from "../pool/skittering-skirge.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
 import _poolSkybladesBoon from "../pool/skyblades-boon.js";
 import _poolSkyblinderStaff from "../pool/skyblinder-staff.js";
+import _poolSkyclaveShade from "../pool/skyclave-shade.js";
 import _poolSkyserpentSeeker from "../pool/skyserpent-seeker.js";
 import _poolSkystinger from "../pool/skystinger.js";
 import _poolSlashOfTalons from "../pool/slash-of-talons.js";
@@ -1783,6 +1784,7 @@ const shard: CardShard = {
     _poolSkyTerror,
     _poolSkybladesBoon,
     _poolSkyblinderStaff,
+    _poolSkyclaveShade,
     _poolSkyserpentSeeker,
     _poolSkystinger,
     _poolSlashOfTalons,

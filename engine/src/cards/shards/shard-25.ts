@@ -907,6 +907,7 @@ import _poolTricorder from "../pool/tricorder.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTroiWingingIt from "../pool/troi-winging-it.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
+import _poolTunnelVision from "../pool/tunnel-vision.js";
 import _poolTurntimberSymbiosis from "../pool/turntimber-symbiosis.js";
 import _poolTurtleshellChangeling from "../pool/turtleshell-changeling.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
@@ -1924,6 +1925,7 @@ const shard: CardShard = {
     _poolTrigonOfInfestation,
     _poolTroiWingingIt,
     _poolTrygonPrime,
+    _poolTunnelVision,
     _poolTurntimberSymbiosis,
     _poolTurtleshellChangeling,
     _poolTuskguardCaptain,

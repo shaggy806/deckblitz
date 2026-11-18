@@ -12595,6 +12595,7 @@ import _poolHazoretsMonument from "./pool/hazorets-monument.js";
 import _poolHazoretsUndyingFury from "./pool/hazorets-undying-fury.js";
 import _poolHazyHomunculus from "./pool/hazy-homunculus.js";
 import _poolHeWhoHungers from "./pool/he-who-hungers.js";
+import _poolHeadGames from "./pool/head-games.js";
 import _poolHeadOfSecurity from "./pool/head-of-security.js";
 import _poolHeadOfTheHomestead from "./pool/head-of-the-homestead.js";
 import _poolHeadOfTheHunt from "./pool/head-of-the-hunt.js";
@@ -14493,6 +14494,7 @@ import _poolJeskaiWindscout from "./pool/jeskai-windscout.js";
 import _poolJeskasWill from "./pool/jeskas-will.js";
 import _poolJessicaJonesPrivateEye from "./pool/jessica-jones-private-eye.js";
 import _poolJestersCap from "./pool/jesters-cap.js";
+import _poolJestersMask from "./pool/jesters-mask.js";
 import _poolJetCollector from "./pool/jet-collector.js";
 import _poolJetFreedomFighter from "./pool/jet-freedom-fighter.js";
 import _poolJetMedallion from "./pool/jet-medallion.js";
@@ -17740,6 +17742,7 @@ import _poolMirrorEntity from "./pool/mirror-entity.js";
 import _poolMirrorGallery from "./pool/mirror-gallery.js";
 import _poolMirrorGolem from "./pool/mirror-golem.js";
 import _poolMirrorImage from "./pool/mirror-image.js";
+import _poolMirrorMadPhantasm from "./pool/mirror-mad-phantasm.js";
 import _poolMirrorMarch from "./pool/mirror-march.js";
 import _poolMirrorMockery from "./pool/mirror-mockery.js";
 import _poolMirrorOfGaladriel from "./pool/mirror-of-galadriel.js";
@@ -24566,6 +24569,7 @@ import _poolShardmagesRescue from "./pool/shardmages-rescue.js";
 import _poolShareTheSpoils from "./pool/share-the-spoils.js";
 import _poolSharedAnimosity from "./pool/shared-animosity.js";
 import _poolSharedDiscovery from "./pool/shared-discovery.js";
+import _poolSharedFate from "./pool/shared-fate.js";
 import _poolSharedRoots from "./pool/shared-roots.js";
 import _poolSharedSummons from "./pool/shared-summons.js";
 import _poolSharedTrauma from "./pool/shared-trauma.js";
@@ -25323,6 +25327,7 @@ import _poolSkyclavePickAxe from "./pool/skyclave-pick-axe.js";
 import _poolSkyclavePlunder from "./pool/skyclave-plunder.js";
 import _poolSkyclaveRelic from "./pool/skyclave-relic.js";
 import _poolSkyclaveSentinel from "./pool/skyclave-sentinel.js";
+import _poolSkyclaveShade from "./pool/skyclave-shade.js";
 import _poolSkyclaveShadowcat from "./pool/skyclave-shadowcat.js";
 import _poolSkyclaveSquid from "./pool/skyclave-squid.js";
 import _poolSkyclawThrash from "./pool/skyclaw-thrash.js";
@@ -29727,6 +29732,7 @@ import _poolTunnelOfHate from "./pool/tunnel-of-hate.js";
 import _poolTunnelRats from "./pool/tunnel-rats.js";
 import _poolTunnelSurveyor from "./pool/tunnel-surveyor.js";
 import _poolTunnelTipster from "./pool/tunnel-tipster.js";
+import _poolTunnelVision from "./pool/tunnel-vision.js";
 import _poolTunnel from "./pool/tunnel.js";
 import _poolTunnelerWurm from "./pool/tunneler-wurm.js";
 import _poolTunnelingGeopede from "./pool/tunneling-geopede.js";
@@ -46106,6 +46112,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHazoretsUndyingFury,
   _poolHazyHomunculus,
   _poolHeWhoHungers,
+  _poolHeadGames,
   _poolHeadOfSecurity,
   _poolHeadOfTheHomestead,
   _poolHeadOfTheHunt,
@@ -48004,6 +48011,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJeskasWill,
   _poolJessicaJonesPrivateEye,
   _poolJestersCap,
+  _poolJestersMask,
   _poolJetCollector,
   _poolJetFreedomFighter,
   _poolJetMedallion,
@@ -51251,6 +51259,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMirrorGallery,
   _poolMirrorGolem,
   _poolMirrorImage,
+  _poolMirrorMadPhantasm,
   _poolMirrorMarch,
   _poolMirrorMockery,
   _poolMirrorOfGaladriel,
@@ -58077,6 +58086,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShareTheSpoils,
   _poolSharedAnimosity,
   _poolSharedDiscovery,
+  _poolSharedFate,
   _poolSharedRoots,
   _poolSharedSummons,
   _poolSharedTrauma,
@@ -58834,6 +58844,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSkyclavePlunder,
   _poolSkyclaveRelic,
   _poolSkyclaveSentinel,
+  _poolSkyclaveShade,
   _poolSkyclaveShadowcat,
   _poolSkyclaveSquid,
   _poolSkyclawThrash,
@@ -63238,6 +63249,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTunnelRats,
   _poolTunnelSurveyor,
   _poolTunnelTipster,
+  _poolTunnelVision,
   _poolTunnel,
   _poolTunnelerWurm,
   _poolTunnelingGeopede,
@@ -79630,6 +79642,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hazorets-undying-fury": _poolHazoretsUndyingFury,
   "pool/hazy-homunculus": _poolHazyHomunculus,
   "pool/he-who-hungers": _poolHeWhoHungers,
+  "pool/head-games": _poolHeadGames,
   "pool/head-of-security": _poolHeadOfSecurity,
   "pool/head-of-the-homestead": _poolHeadOfTheHomestead,
   "pool/head-of-the-hunt": _poolHeadOfTheHunt,
@@ -81528,6 +81541,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jeskas-will": _poolJeskasWill,
   "pool/jessica-jones-private-eye": _poolJessicaJonesPrivateEye,
   "pool/jesters-cap": _poolJestersCap,
+  "pool/jesters-mask": _poolJestersMask,
   "pool/jet-collector": _poolJetCollector,
   "pool/jet-freedom-fighter": _poolJetFreedomFighter,
   "pool/jet-medallion": _poolJetMedallion,
@@ -84775,6 +84789,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mirror-gallery": _poolMirrorGallery,
   "pool/mirror-golem": _poolMirrorGolem,
   "pool/mirror-image": _poolMirrorImage,
+  "pool/mirror-mad-phantasm": _poolMirrorMadPhantasm,
   "pool/mirror-march": _poolMirrorMarch,
   "pool/mirror-mockery": _poolMirrorMockery,
   "pool/mirror-of-galadriel": _poolMirrorOfGaladriel,
@@ -91601,6 +91616,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/share-the-spoils": _poolShareTheSpoils,
   "pool/shared-animosity": _poolSharedAnimosity,
   "pool/shared-discovery": _poolSharedDiscovery,
+  "pool/shared-fate": _poolSharedFate,
   "pool/shared-roots": _poolSharedRoots,
   "pool/shared-summons": _poolSharedSummons,
   "pool/shared-trauma": _poolSharedTrauma,
@@ -92358,6 +92374,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/skyclave-plunder": _poolSkyclavePlunder,
   "pool/skyclave-relic": _poolSkyclaveRelic,
   "pool/skyclave-sentinel": _poolSkyclaveSentinel,
+  "pool/skyclave-shade": _poolSkyclaveShade,
   "pool/skyclave-shadowcat": _poolSkyclaveShadowcat,
   "pool/skyclave-squid": _poolSkyclaveSquid,
   "pool/skyclaw-thrash": _poolSkyclawThrash,
@@ -96762,6 +96779,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tunnel-rats": _poolTunnelRats,
   "pool/tunnel-surveyor": _poolTunnelSurveyor,
   "pool/tunnel-tipster": _poolTunnelTipster,
+  "pool/tunnel-vision": _poolTunnelVision,
   "pool/tunnel": _poolTunnel,
   "pool/tunneler-wurm": _poolTunnelerWurm,
   "pool/tunneling-geopede": _poolTunnelingGeopede,
