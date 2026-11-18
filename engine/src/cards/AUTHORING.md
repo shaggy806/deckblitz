@@ -3744,8 +3744,12 @@ for mana, put a +1/+1 counter on target creature you control. If that creature
 shares a color with the mana that land produced, create a Junk token" is a
 `tapped-for-mana` trigger (`who: "attached"`; a target makes it no mana
 ability) whose second step is a `conditional` on `{ kind: "target", index: 0,
-filter: { sharesColorWithMana: "produced" } }`. Bound as the effect applies;
-anywhere else it matches nothing.
+filter: { sharesColorWithMana: "produced" } }`. `"spent"` is the mana spent to
+activate the resolving ability: Protective Sphere's "a source of your choice
+that shares a color with the mana spent on this activation cost" is a
+`prevent-damage-from-chosen-source` with `filter: { sharesColorWithMana:
+"spent" }` (its shield rechecks the source, 609.7b). Bound as the effect
+applies; anywhere else it matches nothing.
 `goaded` is goaded by anyone, however (a one-shot
 goad, one for the rest of the game, a static one), `suspected` rule
 701.60's designation, `saddled` rule 702.171b's and `monstrous` rule 701.37b's ("as long as this

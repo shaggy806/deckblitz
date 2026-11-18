@@ -2989,7 +2989,8 @@
   "cost:exile-from-any-graveyard",
   "cost:crew-alternative-remove-loyalty",
   "cost:tap-granter",
-  "trigger:activates-ability-mana-from"
+  "trigger:activates-ability-mana-from",
+  "effect:prevent-chosen-source-sharing-spent-mana-color"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

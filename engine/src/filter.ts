@@ -800,12 +800,16 @@ export interface CardFilter {
    * Shares a color with mana rather than an object: `"produced"` is the mana
    * the permanent whose tapping for mana fired the resolving trigger produced
    * (rule 106.12a) — C.A.M.P.'s "if that creature shares a color with the
-   * mana that land produced" (a `target` condition). Colorless mana is no
+   * mana that land produced" (a `target` condition); `"spent"` is the mana
+   * spent to activate the resolving ability (rule 602.2b) — Protective
+   * Sphere's "a source of your choice that shares a color with the mana
+   * spent on this activation cost", a chosen source's `filter`, which its
+   * shield then rechecks against the source (609.7b). Colorless mana is no
    * color (rule 105.2c), so it shares none. A resolution binds it as it
    * applies (`sharesColorBound`, with no reference objects); unbound,
    * anywhere else, it matches nothing.
    */
-  readonly sharesColorWithMana?: "produced";
+  readonly sharesColorWithMana?: "produced" | "spent";
   /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each

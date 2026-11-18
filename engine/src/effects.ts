@@ -19465,10 +19465,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     }
     // "Shares a color with the mana that land produced" (C.A.M.P.): the
     // colors of the mana its tapping for mana made, colorless none (rule
-    // 105.2c), with no reference object to match itself.
+    // 105.2c), with no reference object to match itself. "… with the mana
+    // spent on this activation cost" (Protective Sphere): what paid the
+    // resolving ability's cost (602.2b).
     if (walked["sharesColorWithMana"] !== undefined) {
-      const { sharesColorWithMana: _mana, ...rest } = walked;
-      const colors = ctx.triggerManaProduced().filter((type): type is Color => type !== "C");
+      const { sharesColorWithMana: which, ...rest } = walked;
+      const mana = which === "spent" ? ctx.manaSpentOnThisAbility().map((unit) => unit.type) : ctx.triggerManaProduced();
+      const colors = mana.filter((type): type is Color => type !== "C");
       walked = { ...rest, sharesColorBound: { objects: [], colors: [...new Set(colors)] } };
     }
     // "All Auras attached to it", "all Equipment attached to that creature":
