@@ -509,6 +509,15 @@ function whyThisCannotBlock(
     }
   }
   for (const { rule, you, source } of recordsOfKind(state, registry, attackerId, "cant-be-blocked")) {
+    // "Can't be blocked unless it's attacking its owner or a permanent its
+    // owner controls" (Become the Pilot): what it's attacking now.
+    if (
+      rule.unlessAttacking !== undefined &&
+      !aimNames(state, registry, rule.unlessAttacking, you, attacker, attacker.attacking, source)
+    ) {
+      const attackerDef = registry.get(printedCardName(attacker));
+      return `${blockerDef.name} can't block ${attackerDef.name} (can't be blocked unless attacking what it names)`;
+    }
     if (rule.by === undefined) continue;
     if (matchesFilter(state, registry, blockerId, rule.by, { you, amount: sourceAmount(state, registry, source) })) {
       const attackerDef = registry.get(printedCardName(attacker));

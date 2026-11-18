@@ -99,6 +99,10 @@ export type CombatWord =
  * - `"you-and-planeswalkers"`: names no battle (rule 310.5).
  * - `"you-and-permanents"`: "you or permanents you control", a battle too.
  * - `"owner"`, `"owner-planeswalkers"`: the attacker's owner's.
+ * - `"owner-and-permanents"`: the attacker's owner or a permanent they
+ *   control, a battle too ("its owner or a permanent its owner controls" —
+ *   Become the Pilot; only planeswalkers and battles can be attacked, its
+ *   ruling).
  * - `"attacked-this-turn"`: a player this object has already attacked this
  *   turn (rule 400.7: a new object starts afresh).
  * - `"source"`: the permanent the rule comes from (Gideon Jura).
@@ -118,6 +122,7 @@ export type AttackAim =
   | "you-and-permanents"
   | "owner"
   | "owner-planeswalkers"
+  | "owner-and-permanents"
   | "attacked-this-turn"
   | "source"
   | PlayerRef
@@ -206,6 +211,11 @@ export interface CantBeBlocked {
   /** "Can't be blocked unless all creatures defending player controls block
    * it" (Tromokratis). */
   readonly unlessAllBlock?: true;
+  /** "Can't be blocked **unless it's attacking** [these]" (Become the
+   * Pilot's "its owner or a permanent its owner controls"): a restriction
+   * on every block of it while what it's attacking isn't named (rule
+   * 509.1b), read about the attacker as blocks are declared. */
+  readonly unlessAttacking?: AttackAim;
   readonly you?: PlayerId;
 }
 
@@ -314,6 +324,7 @@ function bindAim(aim: AttackAim, refs: CombatRuleRefs): AttackAim | undefined {
       case "you-and-permanents":
       case "owner":
       case "owner-planeswalkers":
+      case "owner-and-permanents":
       case "attacked-this-turn":
         return aim;
       case "source":
@@ -354,6 +365,11 @@ export function bindCombatRule(rule: CombatRule, refs: CombatRuleRefs): CombatRu
     if (rule.attacker === undefined) return { ...rule, you: refs.you };
     const attacker = bindAttacker(rule.attacker, refs);
     return attacker === undefined ? undefined : { ...rule, attacker, you: refs.you };
+  }
+  if (rule.kind === "cant-be-blocked" && rule.unlessAttacking !== undefined) {
+    const unlessAttacking = bindAim(rule.unlessAttacking, refs);
+    // Naming nothing, nothing it attacks lets it be blocked.
+    return unlessAttacking === undefined ? "cant-be-blocked" : { ...rule, unlessAttacking, you: refs.you };
   }
   if (rule.kind === "attack-only-nearest" && refs.source !== undefined) {
     return { ...rule, from: { object: refs.source, stint: refs.stint(refs.source) }, you: refs.you };
@@ -471,6 +487,8 @@ export function aimNames(
         return defender === object.owner;
       case "owner-planeswalkers":
         return asObject !== undefined && asObject.controller === object.owner && isPlaneswalkerObject(state, registry, asObject);
+      case "owner-and-permanents":
+        return attackCovers(state, registry, "you-and-permanents", object.owner, defender);
       case "attacked-this-turn":
         return object.attackedPlayersThisTurn?.includes(defender as PlayerId) === true;
       case "source":

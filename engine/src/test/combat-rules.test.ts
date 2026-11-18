@@ -371,7 +371,7 @@ describe("every definition speaks the one vocabulary", () => {
     "must-attack": ["at", "otherThan", "ifAttacks", "atLeastOne"],
     "cant-block": ["attacker", "attackers", "unlessAttacking"],
     "must-block": ["attacker"],
-    "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock"],
+    "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock", "unlessAttacking"],
     "must-be-blocked": ["by"],
     "must-be-blocked-if-able": ["by", "exactlyOne", "byAtLeast"],
     // `from` is the permanent that chose, set as the rule is bound.
@@ -387,7 +387,16 @@ describe("every definition speaks the one vocabulary", () => {
     "until-your-next-upkeep",
     "until-end-of-your-next-upkeep",
   ]);
-  const STATIC_AIMS = new Set(["you", "you-and-planeswalkers", "you-and-permanents", "owner", "owner-planeswalkers", "attacked-this-turn", "source"]);
+  const STATIC_AIMS = new Set([
+    "you",
+    "you-and-planeswalkers",
+    "you-and-permanents",
+    "owner",
+    "owner-planeswalkers",
+    "owner-and-permanents",
+    "attacked-this-turn",
+    "source",
+  ]);
 
   it("the removed fields and effects are gone, and every rule is well formed", () => {
     const bad: string[] = [];
@@ -442,16 +451,19 @@ describe("every definition speaks the one vocabulary", () => {
           }
           // Bound forms exist only once an effect resolved.
           if ("you" in record) bad.push(`${card.name}: authored "you"`);
-          const at = record.at;
-          if (typeof at === "object" && at !== null && ("player" in at || ("object" in at && "stint" in at))) {
-            bad.push(`${card.name}: bound aim`);
-          }
-          // A static's aim is read with no resolution behind it.
-          if (o.affects !== undefined && at !== undefined) {
-            const reads =
-              (typeof at === "string" && STATIC_AIMS.has(at)) ||
-              (typeof at === "object" && at !== null && ("defender" in at || "planeswalkers" in at || ("controllerOf" in at && (at as { controllerOf: unknown }).controllerOf === "attached")));
-            if (!reads) bad.push(`${card.name}: static aims ${JSON.stringify(at)}`);
+          // Each aim: where it's attacking, and "unless it's attacking" (a
+          // can't-block's `unlessAttacking` is a player test instead).
+          for (const at of [record.at, kind === "cant-be-blocked" ? record.unlessAttacking : undefined]) {
+            if (typeof at === "object" && at !== null && ("player" in at || ("object" in at && "stint" in at))) {
+              bad.push(`${card.name}: bound aim`);
+            }
+            // A static's aim is read with no resolution behind it.
+            if (o.affects !== undefined && at !== undefined) {
+              const reads =
+                (typeof at === "string" && STATIC_AIMS.has(at)) ||
+                (typeof at === "object" && at !== null && ("defender" in at || "planeswalkers" in at || ("controllerOf" in at && (at as { controllerOf: unknown }).controllerOf === "attached")));
+              if (!reads) bad.push(`${card.name}: static aims ${JSON.stringify(at)}`);
+            }
           }
         }
       }
