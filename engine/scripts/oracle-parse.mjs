@@ -22949,6 +22949,15 @@ function parseStatic(line, text) {
   if (line === "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.") {
     return { affects: { scope: "self" }, alternativeAbilityCost: { kind: "cycling", mana: "{0}", firstEachTurn: true }, text };
   }
+  // A Vehicle's own crew cost's alternative (Heart of Kiran's "remove a
+  // loyalty counter from a planeswalker you control"): any cost.
+  if ((m = /^You may (.+?) rather than pay ~'s crew cost\.$/.exec(line))) {
+    const costText = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+    const parsed = parseCost(costText);
+    if (parsed !== null && Object.keys(parsed.extra).length === 0) {
+      return { affects: { scope: "self" }, alternativeAbilityCost: { kind: "crew", cost: parsed.cost, costText }, text };
+    }
+  }
   if ((m = /^As long as you have (\w+) or more cards in hand, you may pay (\{\d+\}) rather than pay cycling costs\.$/.exec(line))) {
     const atLeast = NUMBERS[m[1].toLowerCase()];
     if (atLeast !== undefined) {

@@ -2985,7 +2985,9 @@
   "trigger:opponent-shuffles-library",
   "trigger:delayed-source-becomes-untapped",
   "trigger:dealt-damage-by-attacking-creature",
-  "cost:exile-from-any-graveyard"
+  "cost:exile-from-any-graveyard",
+  "cost:exile-from-any-graveyard",
+  "cost:crew-alternative-remove-loyalty"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

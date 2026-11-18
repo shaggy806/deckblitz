@@ -26649,6 +26649,8 @@ export class Game {
    * goes on the stack carries its ability, so nothing is lost once "the first"
    * has been used. A power-up copy stays the one ability it copies (`altCostOf`),
    * so activating either uses it up (606's "only once" is the ability's).
+   * A crew one (Heart of Kiran) reaches only its own permanent's crew
+   * abilities, at its whole `cost`.
    */
   private withAlternativeAbilityCosts(
     target: GameObject,
@@ -26658,12 +26660,28 @@ export class Game {
       ? []
       : this.registry.get(rulesTextName(target)).activated;
     const abilities = [...printed, ...granted.map((g) => g.ability)];
-    if (!abilities.some((a) => isEquipAbility(a) || a.powerUp === true)) return granted;
+    if (!abilities.some((a) => isEquipAbility(a) || a.powerUp === true || a.crew === true)) return granted;
     const out = [...granted];
     const seen = new Set<string>();
-    for (const { ability: grantor } of this.activeStaticsOf(target.controller, (a) => a.alternativeAbilityCost !== undefined)) {
+    for (const { source, ability: grantor } of this.activeStaticsOf(target.controller, (a) => a.alternativeAbilityCost !== undefined)) {
       const grant = grantor.alternativeAbilityCost!;
       if (grant.kind === "cycling") continue;
+      if (grant.kind === "crew") {
+        // "Rather than pay Heart of Kiran's crew cost": its own (702.122a).
+        if (source.id !== target.id) continue;
+        abilities.forEach((ability) => {
+          if (ability.crew !== true) return;
+          // "Crew 3 — Remove a loyalty counter …", its reminder text dropped.
+          const text = `${ability.text.replace(/\s*\(.*\)\s*$/, "")} — ${grant.costText}`;
+          // Two crew abilities at one alternative cost do the same thing.
+          const key = `crew|${JSON.stringify(ability.effect)}|${JSON.stringify(ability.targets)}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+          const instead: ActivatedAbility = { ...ability, cost: grant.cost, text };
+          out.push({ ability: instead, ref: { kind: "modifier-activated", ability: instead } });
+        });
+        continue;
+      }
       if (grant.firstEachTurn === true && this.activationsThisTurn(target.controller, grant.kind) > 0) continue;
       abilities.forEach((ability, index) => {
         if (grant.kind === "equip" ? !isEquipAbility(ability) : ability.powerUp !== true) return;
@@ -26783,6 +26801,7 @@ export class Game {
       const seen = new Set<string>();
       for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.alternativeAbilityCost?.kind === "cycling")) {
         const grant = ability.alternativeAbilityCost!;
+        if (grant.kind !== "cycling") continue;
         if (grant.firstEachTurn === true && cycled > 0) continue;
         for (const { search } of cyclings) {
           const key = `${grant.mana}|${JSON.stringify(search ?? null)}`;

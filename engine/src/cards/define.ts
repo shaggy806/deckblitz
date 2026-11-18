@@ -3318,12 +3318,30 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * first [kind] ability you activate each turn", counting every one this
    * player has activated this turn, before this arrived too (Gavi; the
    * static's `condition` says "during each of your turns").
+   *
+   * `"crew"` is Heart of Kiran's "You may remove a loyalty counter from a
+   * planeswalker you control rather than pay Heart of Kiran's crew cost":
+   * each crew ability of this permanent alone (702.122a) has a second one at
+   * `cost` — any cost, not only mana — `costText` naming it after the
+   * ability's own text. It's still a crew ability (`crew`), so it crews the
+   * Vehicle with none of its creatures (702.122c) and its resolving makes the
+   * Vehicle "become crewed" (702.122e); a counter removed for it is no
+   * loyalty ability (the ruling).
    */
-  readonly alternativeAbilityCost?: {
-    readonly kind: "cycling" | "equip" | "power-up";
-    readonly mana: string;
-    readonly firstEachTurn?: true;
-  };
+  readonly alternativeAbilityCost?:
+    | {
+        readonly kind: "cycling" | "equip" | "power-up";
+        readonly mana: string;
+        readonly firstEachTurn?: true;
+      }
+    | {
+        readonly kind: "crew";
+        /** The whole cost paid instead. */
+        readonly cost: AbilityCost;
+        /** How `cost` reads: "Remove a loyalty counter from a planeswalker
+         * you control". */
+        readonly costText: string;
+      };
   /**
    * "Damage can't be prevented" (rule 615.12 — Leyline of Punishment, `{}`):
    * prevention effects prevent none of the damage it covers (their other

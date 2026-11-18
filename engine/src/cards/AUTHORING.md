@@ -6098,6 +6098,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   each equip ability you control has a second one at `mana`, beside the first.
   "Equip—Pay {3} or discard a card" is two entries in `activated`, one per cost, each
   with a text starting `Equip` (Bloodthorn Flail, Gavel of the Righteous).
+- `alternativeAbilityCost: { kind: "crew", cost, costText }` — "You may remove a loyalty counter
+  from a planeswalker you control rather than pay Heart of Kiran's crew cost": this permanent's own
+  crew abilities alone have a second one at `cost` (any `AbilityCost`), offered as "Crew 3 —
+  `costText`". Still a crew ability: the Vehicle becomes crewed, by no creature.
 - `alternativeAbilityCost: { kind: "cycling", mana, firstEachTurn? }` — "you may pay `mana` rather
   than pay cycling costs" (rule 702.29f has a typecycling cost one too): the cards
   in your hand with any cycling ability, printed or granted, have a second one at

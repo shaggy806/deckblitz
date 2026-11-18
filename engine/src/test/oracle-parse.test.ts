@@ -22952,3 +22952,24 @@ describe("exiling a card from any graveyard as a cost (Thelon of Havenwood)", ()
     expect(thelon.complete).toBe(true);
   });
 });
+
+describe("an alternative cost for a Vehicle's own crew cost (Heart of Kiran)", () => {
+  it("drafts the line as a crew alternativeAbilityCost at the cost it names", () => {
+    const heart = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Artifact — Vehicle",
+      mana_cost: "{2}",
+      colors: [],
+      power: "4",
+      toughness: "4",
+      oracle_text:
+        "Flying, vigilance\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)\nYou may remove a loyalty counter from a planeswalker you control rather than pay Test Card's crew cost.",
+    });
+    expect(heart.static[0].alternativeAbilityCost).toEqual({
+      kind: "crew",
+      cost: { mana: null, tap: false, removeCounter: { kind: "loyalty", count: 1, from: { type: "planeswalker" } } },
+      costText: "Remove a loyalty counter from a planeswalker you control",
+    });
+    expect(heart.complete).toBe(true);
+  });
+});
