@@ -2052,6 +2052,22 @@ function votedNumberAmount(
   return (ref?.kind === "player" ? votedNumberOf(votes, ref.player) : undefined) ?? 0;
 }
 
+/**
+ * Does `spec` link the cards it moves to its own source anywhere (rule
+ * 607.2a — "exiled with this enchantment")? Any node of it with `linked:
+ * true`: an exile's, a `reveal-until`'s, a `search-library`'s, a play grant's.
+ * A walk of the structure, not of its JSON text.
+ */
+export function linksToSource(spec: EffectSpec): boolean {
+  const walk = (value: unknown): boolean => {
+    if (Array.isArray(value)) return value.some(walk);
+    if (value === null || typeof value !== "object") return false;
+    if ((value as { readonly linked?: unknown }).linked === true) return true;
+    return Object.values(value).some(walk);
+  };
+  return walk(spec);
+}
+
 /** Does `spec` read `CHOSEN_THIS_WAY` anywhere? */
 function readsChosenThisWay(spec: EffectSpec): boolean {
   return JSON.stringify(spec).includes(CHOSEN_THIS_WAY);

@@ -312,6 +312,7 @@ import {
   signedAmountValue,
   applyEffectSpec,
   isCountScalableEffect,
+  linksToSource,
   mayBeDone,
   opponentsVoting,
   protectionLabel,
@@ -69069,7 +69070,6 @@ controlledBy,
     // permanent's alone, so two of them are a choice: "if more than one
     // Shared Fate is on the battlefield, you choose which one replaces each
     // card draw" (its ruling), each said with the cards exiled with it so far.
-    const linksToSource = (effect: EffectSpec): boolean => JSON.stringify(effect).includes('"linked":true');
     const distinct = all
       .filter((r) => {
         // A resolved replacement's source may be gone from the game.
