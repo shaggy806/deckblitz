@@ -20318,6 +20318,32 @@ describe("two partner abilities, and time counters off a chosen suspended card",
   });
 });
 
+describe("a target player's own search, its zones theirs to choose", () => {
+  it("reads Auditore Ambush's second mode as an as-player around the zones' modal", () => {
+    const face = parseFace({
+      name: "Auditore Ambush",
+      type_line: "Sorcery",
+      oracle_text:
+        "Choose one or both —\n• Return target creature to its owner's hand.\n• Target player searches their library and/or graveyard for a card named Ezio, Blade of Vengeance, reveals it, and puts it into their hand. If they search their library this way, they shuffle.",
+    } as never) as unknown as { castModal: { modes: Record<string, unknown>[] }; complete: boolean };
+    const search = face.castModal.modes[1];
+    expect(search.targets).toEqual(["player"]);
+    expect(search.effect).toMatchObject({
+      kind: "as-player",
+      who: { target: 0 },
+      effect: {
+        kind: "modal",
+        modes: [
+          { text: "Search your library and graveyard", effect: { zones: "library-and-graveyard", filter: { name: "Ezio, Blade of Vengeance" } } },
+          { text: "Search your library", effect: { zones: "library" } },
+          { text: "Search your graveyard", effect: { zones: "graveyard" } },
+        ],
+      },
+    });
+    expect(face.complete).toBe(true);
+  });
+});
+
 describe("a delayed whenever about the defending player", () => {
   it("reads Nuka-Nuke Launcher's attack trigger", () => {
     const face = parseFace({

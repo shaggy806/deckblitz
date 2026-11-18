@@ -14514,6 +14514,27 @@ function searchExileCastLaterAt(sentences, i) {
 }
 
 function searchOthersAt(sentences, i, ctx) {
+  // "Target player searches their library and/or graveyard for a card named
+  // X, reveals it, and puts it into their hand. If they search their library
+  // this way, they shuffle." (Auditore Ambush): the target player searches,
+  // so which of their zones is theirs to choose — an `as-player` around the
+  // resolution modal of zones.
+  const own =
+    /^target player searches their (library and\/or graveyard|graveyard and\/or library) for a card named (.+?), reveals it, and puts it into their hand\.$/i.exec(
+      sentences[i] ?? "",
+    );
+  if (own !== null && /^if they search their library this way, they shuffle\.$/i.test(sentences[i + 1] ?? "")) {
+    const zones = own[1].toLowerCase().match(/graveyard|library/g);
+    const modal = searchZonesAndOr(zones, {
+      kind: "search-library",
+      filter: { name: own[2] },
+      destination: "hand",
+      reveal: true,
+      min: 0,
+      max: 1,
+    }).effects[0];
+    return { effect: { kind: "as-player", who: { target: ctx.target("player") }, effect: modal }, used: 2 };
+  }
   let at = i;
   let named = null;
   const nameM = /^choose (?:a|an) ((?:[\w-]+, )*[\w-]+ )?card name\.$/i.exec(sentences[at] ?? "");

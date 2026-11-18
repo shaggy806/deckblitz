@@ -3014,7 +3014,9 @@
   "target:battle-or-opponent",
   "static:must-be-blocked-by-two-or-more",
   "static:player-must-attack-with-a-creature",
-  "mechanic:two-pairing-abilities"
+  "mechanic:two-pairing-abilities",
+  "mechanic:two-pairing-abilities",
+  "effect:search-zones-chosen-by-target-player"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
