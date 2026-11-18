@@ -1453,8 +1453,11 @@ exiled this way" is a `look-and-choose` (`zone: "graveyards"`, `destination:
 in: { thisWay: "exiled" } }` — the `chosen` filter leaves out the cards a Rest
 in Peace exiled from the mill, which weren't exiled by that instruction (its
 ruling). `aggregate: "max"` takes the greatest instead —
-Heretic's Punishment's "the greatest mana value among the milled cards" — and
-`"min"` the least.
+Heretic's Punishment's "the greatest mana value among the milled cards", and
+Discerning Taste's "the greatest power among creature cards put into your
+graveyard this way" (`of: "power"`, `filter: { type: "creature" }`, `in: {
+thisWay: "put-into-graveyard", who: "you" }` after a `look-and-choose` with
+`leftover: "graveyard"`) — and `"min"` the least.
 
 **Object sets** (`engine/src/object-sets.ts`, 2026-11-08). One `ObjectSetRef`
 names any set a card refers to, and every consumer takes it: an aggregate's

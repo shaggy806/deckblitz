@@ -2716,6 +2716,7 @@
   "trigger:mana-ability-resolves-amount-produced",
   "trigger:reflexive-on-nth-resolution",
   "condition:creatures-died-this-turn-count-in-static",
+  "amount:greatest-power-this-way",
   "trigger:untap-trigger",
   "trigger:saga-final-chapter-triggers",
   "trigger:phases-out",
