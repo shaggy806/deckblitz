@@ -2518,6 +2518,10 @@ export type LegalAction =
        * accepted at all** — the game stalled there.
        */
       readonly copies?: Readonly<Record<ObjectId, number>>;
+      /** The cost **exiles** what's chosen rather than sacrificing it (The
+       * Book of Vile Darkness's "Exile … artifacts you control named …"):
+       * the prompt says "Exile". */
+      readonly exile?: true;
     }
   | {
       /** Proliferate (rule 701.27) — choose any number of `eligible`,

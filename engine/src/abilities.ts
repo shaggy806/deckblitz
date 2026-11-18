@@ -536,8 +536,17 @@ export interface AbilityCost {
    * the action just as a sacrifice is, and read back as `{ paid: "sacrificed" }` (its
    * mana value, "if it was a …") since the effect's "the exiled creature" is
    * the same last-known read. But it's no sacrifice: nothing stops or sees one
-   * (rule 701.21a), and it doesn't die. Not with `"self"`, `"granter"` or a
-   * cost of several.
+   * (rule 701.21a), and it doesn't die. Not with `"self"` or `"granter"`.
+   *
+   * With a cost of several (a `count`, `parts` or `each` — see
+   * {@link sacrificeCostParts}), each one is chosen as a sacrifice of several
+   * is (the `sacrifice` decision says `exile`), and all are exiled at once:
+   * The Book of Vile Darkness's "Exile The Book of Vile Darkness and
+   * artifacts you control named Eye of Vecna and Hand of Vecna" is an `each`
+   * of `{ isSource: true }` and the two names. What can't be sacrificed still
+   * pays. They're recorded as `{ paid: "exiled" }`, the **cards** in exile
+   * (each in its exile stint): "the exiled cards" are read there, not as the
+   * permanents were (the Book's ruling).
    */
   readonly exilesSacrifice?: true;
   /**

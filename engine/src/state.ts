@@ -4740,6 +4740,10 @@ export type AwaitingDecision =
       /** The creature whose exploit ability asked (rule 702.110b) — see
        * `pendingSacrifices`. */
       readonly exploitedBy?: ObjectId;
+      /** A cost that **exiles** them instead (`AbilityCost.exilesSacrifice`
+       * of several — The Book of Vile Darkness): chosen the same way, but no
+       * sacrifice (rule 701.21a). */
+      readonly exile?: true;
     }
   | {
       /**
@@ -7067,6 +7071,10 @@ export interface GameState {
     /** "Sacrifice two **other** creatures": the source can't pay. */
     readonly except?: ObjectId;
     readonly picked: readonly ObjectId[];
+    /** They're **exiled**, not sacrificed (`AbilityCost.exilesSacrifice` — The
+     * Book of Vile Darkness): what can't be sacrificed still pays, nothing sees
+     * a sacrifice, and they're recorded as `{ paid: "exiled" }`. */
+    readonly exile?: true;
     /** Who gets priority once it's paid: the player who activated it. */
     readonly priorityTo: PlayerId;
     /** The cost is a mana ability's (Springjack Pasture's "Sacrifice X

@@ -13467,4 +13467,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Llanowar Elves'] }],
     }),
   ),
+  preset(
+    'The Book of Vile Darkness: Vecna enters with the Eye\'s "enters" ability',
+    board({
+      you: { bf: ['The Book of Vile Darkness', 'Eye of Vecna', 'Hand of Vecna'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

@@ -26060,12 +26060,15 @@ export class Game {
    * 701.21a). `source` is what the cost is part of: a clause about it reads
    * it — Magus of the Order's "this creature and another green creature" is
    * an `each` of `{ isSource: true }` and a green creature, Doom Cannon's
-   * "a creature of the chosen type" its `ofChosenType`. */
+   * "a creature of the chosen type" its `ofChosenType`. `exile`: the cost
+   * exiles them (`AbilityCost.exilesSacrifice`), so what can't be sacrificed
+   * pays too (rule 701.21a). */
   private costSacrificeEligible(
     player: PlayerId,
     filter: CardFilter,
     except: ObjectId | undefined,
     source?: ObjectId,
+    exile = false,
   ): ObjectId[] {
     return this.state.zones.shared.battlefield.filter((id) => {
       const object = this.state.objects[id];
@@ -26077,7 +26080,7 @@ export class Game {
           you: player,
           ...(source !== undefined ? { source } : {}),
         }) &&
-        this.canBeSacrificed(id)
+        (exile || this.canBeSacrificed(id))
       );
     });
   }
@@ -26106,6 +26109,7 @@ export class Game {
       sacrificeCostFilters(sacrifice).map((filter) => ({ filter })),
       except,
       sourceId,
+      ability.cost.exilesSacrifice === true,
     );
     const plan = this.payMana(
       player,
@@ -26124,10 +26128,11 @@ export class Game {
     parts: readonly { readonly filter: CardFilter }[],
     except: ObjectId | undefined,
     source?: ObjectId,
+    exile = false,
   ): Set<ObjectId> {
     const candidates = new Set<ObjectId>();
     for (const { filter } of parts) {
-      for (const id of this.costSacrificeEligible(player, filter, except, source)) candidates.add(id);
+      for (const id of this.costSacrificeEligible(player, filter, except, source, exile)) candidates.add(id);
     }
     return candidates;
   }
@@ -26151,9 +26156,10 @@ export class Game {
     except: ObjectId | undefined,
     remaining: ReadonlyMap<ObjectId, number>,
     source?: ObjectId,
+    exile = false,
   ): boolean {
     const eligibleFor = (part: SacrificeCostPart): ObjectId[] =>
-      this.costSacrificeEligible(player, part.filter, except, source).filter((id) => remaining.has(id));
+      this.costSacrificeEligible(player, part.filter, except, source, exile).filter((id) => remaining.has(id));
     // "Three artifact tokens with different names": that many names to choose from.
     for (const part of parts) {
       if (part.differentNames !== true) continue;
@@ -26179,7 +26185,9 @@ export class Game {
     const remaining = this.costSacrificeRemaining(player, sourceId, ability, x);
     if (remaining === null) return null;
     const except = ability.otherOnly === true ? sourceId : undefined;
-    return this.costSacrificeFillable(player, parts, except, remaining, sourceId) ? remaining : null;
+    return this.costSacrificeFillable(player, parts, except, remaining, sourceId, ability.cost.exilesSacrifice === true)
+      ? remaining
+      : null;
   }
 
   /**
@@ -26252,7 +26260,9 @@ export class Game {
     const except = ability.otherOnly === true ? sourceId : undefined;
     for (let x = n; x > 0; x -= 1) {
       const parts = sacrificeCostParts(sacrifice, x);
-      if (parts !== null && this.costSacrificeFillable(player, parts, except, remaining, sourceId)) return x;
+      if (parts !== null && this.costSacrificeFillable(player, parts, except, remaining, sourceId, ability.cost.exilesSacrifice === true)) {
+        return x;
+      }
     }
     return 0;
   }
@@ -28521,7 +28531,9 @@ export class Game {
         const except = ability.otherOnly === true ? sourceId : undefined;
         const last = new Set<ObjectId>();
         for (const filter of sacrificeCostFilters(ability.cost.sacrifice)) {
-          for (const id of this.costSacrificeEligible(player, filter, except, sourceId)) last.add(id);
+          for (const id of this.costSacrificeEligible(player, filter, except, sourceId, ability.cost.exilesSacrifice === true)) {
+            last.add(id);
+          }
         }
         manaArrangement = { last };
       } else if (sacrificeVictim !== null) {
@@ -28784,12 +28796,21 @@ export class Game {
       // the last one is chosen (`finishCostSacrifice`), and nobody gets
       // priority meanwhile.
       if (sacrificeParts !== null) {
-        this.beginCostSacrifice(player, sourceId, sacrificeParts, ability.otherOnly === true ? sourceId : undefined, player, {
-          abilityIndex,
-          x: chosenX,
-          ...(manaColors !== undefined ? { manaColors } : {}),
-          ...spentOn,
-        });
+        this.beginCostSacrifice(
+          player,
+          sourceId,
+          sacrificeParts,
+          ability.otherOnly === true ? sourceId : undefined,
+          player,
+          {
+            abilityIndex,
+            x: chosenX,
+            ...(manaColors !== undefined ? { manaColors } : {}),
+            ...spentOn,
+          },
+          undefined,
+          ability.cost.exilesSacrifice === true,
+        );
         this.afterPlayerAction(player);
         return;
       }
@@ -29048,7 +29069,16 @@ export class Game {
     // (rules 602.2b, 601.2h) — the ability is on the stack and its mana paid,
     // and nobody gets priority until it's done.
     if (sacrificeParts !== null) {
-      this.beginCostSacrifice(player, sourceId, sacrificeParts, ability.otherOnly === true ? sourceId : undefined, player, undefined, abilityId);
+      this.beginCostSacrifice(
+        player,
+        sourceId,
+        sacrificeParts,
+        ability.otherOnly === true ? sourceId : undefined,
+        player,
+        undefined,
+        abilityId,
+        ability.cost.exilesSacrifice === true,
+      );
     }
     // "Discard a card" in the cost: asked now, as a spell's additional
     // discard is, before anyone gets priority (rule 602.2b).
@@ -46490,8 +46520,19 @@ controlledBy,
         this.noteWhileSource(id);
         return { id, zoneChangeCount: object.zoneChangeCount ?? 0, tapped: true };
       },
-      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges, withCounters, attacksThisTurn) => {
+      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges, withCounters, attacksThisTurn, triggeredOf) => {
         const link = linkedToSource === true ? tokenLinkToSource() : null;
+        // "With all triggered abilities of the exiled cards" (The Book of Vile
+        // Darkness): each card's printed ones, read where it is now, still the
+        // same card (rule 400.7) — copiable values of the token (707.2).
+        const copiableTriggered =
+          triggeredOf === undefined
+            ? undefined
+            : triggeredOf.flatMap((member) => {
+                const card = this.state.objects[member.object];
+                if (card === undefined || (card.zoneChangeCount ?? 0) !== member.stint) return [];
+                return this.registry.get(rulesTextName(card)).triggered;
+              });
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
         const goadedBy = goadedForGame === true ? controller : undefined;
@@ -46506,7 +46547,11 @@ controlledBy,
             sacrificeAtEndStep,
             gainUntilEndOfTurn,
             goadedBy,
-            thenCounters !== undefined || separate === true || sacrificeAtEndStep === true || exileAtEndStep === true,
+            thenCounters !== undefined ||
+              separate === true ||
+              sacrificeAtEndStep === true ||
+              exileAtEndStep === true ||
+              copiableTriggered !== undefined,
             basePt,
             exileAtEndStep === true,
             attacksThisCombat === true,
@@ -46523,6 +46568,7 @@ controlledBy,
               ...(thenCounters !== undefined && thenCounters.amount > 0 ? { thenCounters } : {}),
               ...(attacking !== undefined ? { attacking } : {}),
             },
+            copiableTriggered,
           ));
           // "Sacrifice / exile them at the beginning of the next end step":
           // a delayed triggered ability over these tokens (rule 603.7).
@@ -51328,6 +51374,10 @@ controlledBy,
       readonly thenCounters?: { readonly kind: string; readonly amount: number };
       readonly attacking?: ResolvedEnterAttacking;
     },
+    /** Triggered abilities each token has as copiable values (rule 707.2) —
+     * "with all triggered abilities of the exiled cards" (The Book of Vile
+     * Darkness): there as it enters, and copied with it. */
+    copiableTriggered?: readonly TriggeredAbility[],
   ): readonly ObjectId[] {
     if (withCounters !== undefined && withCounters.amount <= 0) withCounters = undefined;
     // A token a changed text names by a name that carries the change (a
@@ -51391,6 +51441,21 @@ controlledBy,
                   toughness: 0,
                   keywords: [],
                   setPt: [basePt[0], basePt[1]] as [number, number],
+                  untilEndOfTurn: false,
+                  copiable: true as const,
+                  timestamp: -1,
+                },
+              ]),
+          // "With all triggered abilities of the exiled cards": what it is
+          // too, so a copy of it has them (rule 707.2).
+          ...(copiableTriggered === undefined || copiableTriggered.length === 0
+            ? []
+            : [
+                {
+                  power: 0,
+                  toughness: 0,
+                  keywords: [],
+                  grantsTriggered: [...copiableTriggered],
                   untilEndOfTurn: false,
                   copiable: true as const,
                   timestamp: -1,
@@ -59381,6 +59446,8 @@ controlledBy,
     manaAbility?: NonNullable<GameState["pendingCostSacrifice"]>["manaAbility"],
     /** The stack object what's sacrificed is recorded on (`{ paid: "sacrificed" }`). */
     onto?: ObjectId,
+    /** They're exiled instead (`AbilityCost.exilesSacrifice`). */
+    exile = false,
   ): void {
     this.state.pendingCostSacrifice = {
       player,
@@ -59391,6 +59458,7 @@ controlledBy,
       picked: [],
       priorityTo,
       ...(manaAbility !== undefined ? { manaAbility } : {}),
+      ...(exile ? { exile: true as const } : {}),
     };
     this.continueCostSacrifice();
   }
@@ -59410,7 +59478,9 @@ controlledBy,
       const picked = new Set(pending.picked);
       const capacity = new Map<ObjectId, number>();
       const eligibleFor = (filter: CardFilter): ObjectId[] =>
-        this.costSacrificeEligible(pending.player, filter, pending.except, pending.source).filter((id) => !picked.has(id));
+        this.costSacrificeEligible(pending.player, filter, pending.except, pending.source, pending.exile === true).filter(
+          (id) => !picked.has(id),
+        );
       for (const filter of [part.filter, ...rest.map((p) => p.filter)]) {
         for (const id of eligibleFor(filter)) capacity.set(id, this.state.objects[id].stackCount ?? 1);
       }
@@ -59445,7 +59515,13 @@ controlledBy,
         };
         continue;
       }
-      this.state.awaiting = { kind: "sacrifice", player: pending.player, count: different ? 1 : part.count, eligible };
+      this.state.awaiting = {
+        kind: "sacrifice",
+        player: pending.player,
+        count: different ? 1 : part.count,
+        eligible,
+        ...(pending.exile === true ? { exile: true as const } : {}),
+      };
       const object = this.state.objects[pending.source];
       this.state.decisionSource =
         object === undefined ? null : { object: pending.source, cardName: printedCardName(object) };
@@ -59467,7 +59543,16 @@ controlledBy,
     const ability = manaAbility === undefined ? undefined : this.effectiveActivated(pending.source)[manaAbility.abilityIndex];
     const grantedAbility = manaAbility === undefined ? undefined : this.activatedRefFor(pending.source, manaAbility.abilityIndex);
     const victims = pending.picked.filter((id) => this.state.objects[id]?.zone === "battlefield");
-    if (victims.length > 0) {
+    if (victims.length > 0 && pending.exile === true) {
+      // "Exile The Book of Vile Darkness and artifacts you control named …":
+      // all at once, and no sacrifice (rule 701.21a). "The exiled cards" are
+      // the cards in exile, each in the stint it's in there (the Book's ruling).
+      this.withLeaveBatch(() => {
+        this.snapshotLeaving(victims);
+        for (const id of victims) this.moveObject(id, "exile");
+      });
+      if (pending.onto !== undefined) this.recordPaid(pending.onto, "exiled", victims);
+    } else if (victims.length > 0) {
       const leftFrom: Record<ObjectId, number> = {};
       this.withLeaveBatch(() => {
         this.snapshotLeaving(victims);

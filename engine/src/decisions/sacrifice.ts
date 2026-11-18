@@ -68,6 +68,7 @@ export const sacrifice = defineDecision({
         count: awaiting.count,
         eligible: [...awaiting.eligible],
         ...(entries > 0 ? { copies } : {}),
+        ...(awaiting.exile === true ? { exile: true as const } : {}),
       },
     ];
   },

@@ -8897,3 +8897,10 @@ Each board's die comes up 4.
 ### Callous Oppressor: in a 4-player game, you pick which opponent chooses
 - **Do:** Cast Callous Oppressor, then click Carol.
 - **Expect:** The banner reads "Callous Oppressor — Choose an opponent to make its choice", with Bob, Carol and Dave to click. Then the wait reads "Waiting for Carol to choose a creature type…" (Bob and Dave aren't asked), the History has "Callous Oppressor chooses Carol" and then the type she named, and Callous Oppressor is on your battlefield.
+
+## A token with the exiled cards' triggered abilities (2026-11-18)
+
+### The Book of Vile Darkness: Vecna enters with the Eye's "enters" ability
+- **Do:** Activate The Book of Vile Darkness.
+- **Expect:** The Book, Eye of Vecna and Hand of Vecna go to exile together, and Vecna, an 8/8 indestructible token, enters. Its "When Eye of Vecna enters" ability triggers: you draw a card and lose 2 life (18).
+- **Not a bug:** Vecna's abilities say "Eye of Vecna" and "Hand of Vecna": they're those cards' abilities, now its own.

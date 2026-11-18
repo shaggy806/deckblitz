@@ -6077,7 +6077,7 @@ function Table({
       <div className="controls">
         <span>
           {view.decisionSource ? `${view.decisionSource.cardName}: ` : ''}
-          Sacrifice {sacrificeAction.count} — {sacrificePicks.length}/
+          {sacrificeAction.exile ? 'Exile' : 'Sacrifice'} {sacrificeAction.count} — {sacrificePicks.length}/
           {sacrificeAction.count} chosen
         </span>
         <button

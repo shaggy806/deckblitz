@@ -9745,6 +9745,17 @@ export type EffectSpec =
        * Naming a player who has left, there's nothing to obey. Part of making
        * them, like `attacksThisCombat`. */
       readonly attacksThisTurn?: { readonly at?: PlayerRef };
+      /** "Create Vecna, a legendary 8/8 … token with indestructible **and all
+       * triggered abilities of the exiled cards**" (The Book of Vile
+       * Darkness): the triggered abilities printed on each card of this set
+       * still in the stint it names — read where it is, so a card that was a
+       * copy as it was exiled gives its own (the ruling) — are part of each
+       * token's copiable values (rule 707.2, the updated Oracle text's
+       * ruling), so they're there as it enters ("When Eye of Vecna enters"
+       * triggers for it) and a copy of it has them. Keyword triggered
+       * abilities (prowess and the like) aren't read: no card that can pay
+       * the Book has one. Each token is its own object. */
+      readonly withTriggeredOf?: ObjectSetRef;
     }
   | {
       /**
@@ -15203,6 +15214,9 @@ export interface EffectApi {
     /** They attack this turn if able, `at` that player — the effect's
      * `attacksThisTurn`, read ({@link boundAttacksThisTurn}). */
     attacksThisTurn?: { readonly at?: PlayerId },
+    /** The cards whose printed triggered abilities each new token has as
+     * copiable values — the effect's `withTriggeredOf`, its members. */
+    triggeredOf?: readonly SetMember[],
   ): void;
   /** Which stint on the battlefield the resolving ability means by its source
    * (rule 607.2a): the one it came from, though the source may have left since;
@@ -23898,6 +23912,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
                 ? undefined
                 : { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx, player) },
               boundAttacksThisTurn(spec.attacksThisTurn, ctx.aboutPlayer(player)),
+              spec.withTriggeredOf === undefined ? undefined : ctx.objectSet(spec.withTriggeredOf),
             );
         }
         return;
@@ -23937,6 +23952,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ? undefined
           : { kind: spec.withCounters.kind, amount: amountValue(spec.withCounters.amount, ctx) },
         boundAttacksThisTurn(spec.attacksThisTurn, ctx),
+        spec.withTriggeredOf === undefined ? undefined : ctx.objectSet(spec.withTriggeredOf),
       );
       return;
     case "vote":
