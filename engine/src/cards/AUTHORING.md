@@ -5282,7 +5282,10 @@ uses what it can pay by itself — `{T}`, a self-sacrifice, life, generic mana
 artifact: Add {R} or {G}. You gain 2 life.", is `{ kind: "add-mana", mana: {
 oneOf: ["R", "G"] }, amount: 1, also: { kind: "gain-life", amount: 2 } }`.
 Applied right after the mana, off the stack, whether it's activated by hand or
-the auto-payer uses it to pay a cost.
+the auto-payer uses it to pay a cost. "Add one mana of any color. This
+creature becomes **that color** until end of turn" (Foraging Wickermaw) is an
+`also` of `{ kind: "become", target: "source", setColorsToManaMade: true,
+duration: "end-of-turn" }`: the color picked, by hand or by the auto-payer.
 
 What it does **before** the mana goes on `add-mana`'s `first`, and the amount
 is read after it: Empowered Autogenerator's "{T}: Put a charge counter on this

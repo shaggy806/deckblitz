@@ -3087,7 +3087,8 @@
   "effect:exile-spell-with-delay-counters",
   "amount:exiled-as-cost-spell-mana-value",
   "amount:exiled-as-cost-spell-mana-value",
-  "cost:ability-cost-increase-per-count"
+  "cost:ability-cost-increase-per-count",
+  "effect:becomes-color-of-mana-produced"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

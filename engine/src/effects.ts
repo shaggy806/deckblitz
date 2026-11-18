@@ -7673,6 +7673,15 @@ export type EffectSpec =
         readonly protection?: true;
         readonly landwalk?: true;
       };
+      /**
+       * "Becomes **that color**" after "add one mana of any color", in an
+       * `add-mana`'s `also` (Foraging Wickermaw): its colors become exactly the
+       * color the mana ability made (`ResolutionContext.manaColor` — the
+       * activator's pick, by hand or by the auto-payer), read once as this
+       * applies and set as `setColors` would (layer 5, rule 613.1e). Colorless
+       * mana, or none made, changes no color.
+       */
+      readonly setColorsToManaMade?: true;
     } & CharacteristicsPatch<EffectAmount>)
   | {
       /**
@@ -22822,8 +22831,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "become": {
-      const { kind: _kind, target: on, filter, exceptSource, controlledByTarget, duration, sharesKeywords, ...patch } = spec;
+      const { kind: _kind, target: on, filter, exceptSource, controlledByTarget, duration, sharesKeywords, setColorsToManaMade, ...patch } =
+        spec;
       let read = readPatch(patch, ctx);
+      if (setColorsToManaMade === true) {
+        const made = ctx.manaColor;
+        if (made !== undefined && MANA_COLORS.includes(made)) read = { ...read, setColors: [made as Color] };
+        if (Object.keys(read).length === 0) return;
+      }
       if (sharesKeywords !== undefined) {
         const { from, inGraveyard, ...share } = sharesKeywords;
         const shared = ctx.sharedAbilities(from, share, inGraveyard);

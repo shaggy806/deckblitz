@@ -31787,9 +31787,12 @@ export class Game {
     if (step.pain > 0) {
       this.dealDamage(step.source, { kind: "player", player }, step.pain);
     }
-    // What else the mana ability does (`add-mana`'s `also`).
+    // What else the mana ability does (`add-mana`'s `also`), "that color"
+    // the first unit it made, as by hand (Foraging Wickermaw).
     if (step.rider !== undefined) {
-      applyEffectSpec(step.rider, this.makeResolutionContext(step.source, player, []));
+      const made = own > 0 ? step.mana[0] : undefined;
+      const ctx = this.makeResolutionContext(step.source, player, []);
+      applyEffectSpec(step.rider, made !== undefined ? { ...ctx, manaColor: made } : ctx);
     }
     this.applyManaExtraRiders(extraRiders, step.source, player);
     // What triggers on the tap and uses the stack, once this spell or ability
