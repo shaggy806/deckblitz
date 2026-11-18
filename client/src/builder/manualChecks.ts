@@ -173,6 +173,8 @@ const POWDER_NEXT_HAND = ['Grizzly Bears', 'Hill Giant', 'Island', 'Mountain', '
 const KARN_KEEPABLE = ['Plains*3', 'Forest', 'Grizzly Bears', 'Llanowar Elves', 'Hill Giant']
 /** A hand a bot keeps, with a Leyline it begins the game with. */
 const BOT_KEEPS_LEYLINE = ['Leyline of Sanctity', 'Plains*3', 'Grizzly Bears', 'Hill Giant', 'Shock']
+/** The top ten Manifold Insights reveals: four nonland cards and six Islands. */
+const MANIFOLD_TEN = ['Lightning Bolt', 'Island', 'Counterspell', 'Island', 'Grizzly Bears', 'Island', 'Hill Giant', 'Island*3']
 
 const preset = (title: string, spec: ScenarioSpec, variant?: string): ManualCheckPreset => ({
   title,
@@ -13432,6 +13434,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Bamboozling Beeble: in a 4-player game, the choice is yours',
     board({
       you: { bf: ['Bamboozling Beeble', 'Island', 'Component Pouch'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
+  // --- Each opponent in turn chooses a card from one reveal (2026-11-18) ---------
+  preset(
+    'Manifold Insights: Bob chooses the card that goes into your hand',
+    board({
+      you: { bf: ['Island*3'], hand: ['Manifold Insights'], lib: MANIFOLD_TEN },
+      opp: { human: true },
+    }),
+  ),
+  preset(
+    'Manifold Insights: in a 4-player game, each opponent chooses a different card for your hand',
+    board({
+      you: { bf: ['Island*3'], hand: ['Manifold Insights'], lib: MANIFOLD_TEN },
       opp: [{}, {}, {}],
     }),
   ),

@@ -3932,6 +3932,14 @@ export type AwaitingDecision =
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
       readonly forPlayer?: PlayerId;
+      /** "Starting with the next opponent in turn order, each opponent
+       * chooses a different nonland card from among them" (Manifold Insights
+       * — `look-and-choose`'s `eachChooses`): who picks after `player`, in
+       * order, each from what the picks before (`pickedBefore`) left. Once the
+       * last has chosen, or nothing is left to choose, every pick is carried
+       * out together, as one choice. */
+      readonly pickersAfter?: readonly PlayerId[];
+      readonly pickedBefore?: readonly ObjectId[];
       /** A search of several players' libraries at once (`search-library`'s
        * `eachLibrary` — Jace, Architect of Thought's −8): with `leftover:
        * "shuffle"`, each of these libraries is shuffled, not the chooser's. */

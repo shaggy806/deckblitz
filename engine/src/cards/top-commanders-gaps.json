@@ -3030,7 +3030,8 @@
   "replacement:damage-to-you-becomes-exile-graveyard",
   "bug:look-and-choose-offers-unattachable-aura",
   "bug:look-and-choose-offers-unattachable-aura",
-  "decision:owner-orders-library-bottom"
+  "decision:owner-orders-library-bottom",
+  "effect:each-opponent-picks-from-shared-reveal"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

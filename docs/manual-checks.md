@@ -8876,3 +8876,14 @@ Each board's die comes up 4.
 - **Do:** Activate Bamboozling Beeble aimed at yourself, then activate Component Pouch.
 - **Expect:** The banner "Bamboozling Beeble — choose one" asks you, not a bot, one "Ignore the …" button per die; the roll and Component Pouch's counters follow the die you keep.
 - **Not a bug:** If both dice come up the same, nothing is asked.
+
+## Each opponent in turn chooses a card from one reveal (2026-11-18)
+
+### Manifold Insights: Bob chooses the card that goes into your hand
+- **Do:** Cast Manifold Insights. As Bob, click Hill Giant, then Confirm.
+- **Expect:** Bob is asked to "Choose a card to put into Alice's hand" from your ten revealed cards, the Islands greyed out. The History has "Bob chooses Hill Giant", then Alice takes it: your hand is one card, and your library 49.
+- **Not a bug:** Bob first sees the ten as "Alice reveals from their library" for a moment; the choice is under it.
+
+### Manifold Insights: in a 4-player game, each opponent chooses a different card for your hand
+- **Do:** Cast Manifold Insights.
+- **Expect:** Bob, Carol and Dave choose in that order: the History has "Bob chooses …", "Carol chooses …" and "Dave chooses …", three different cards, then "Alice takes" those three. Your hand is three cards, and your library 47: the other seven went to its bottom.

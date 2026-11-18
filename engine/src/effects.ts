@@ -12323,6 +12323,18 @@ export type EffectSpec =
        * revealed (Plargg and Nassari's ruling), asked only among two or
        * more. */
       readonly chooser?: ChooserRef;
+      /** Several players choose from the one look, in turn, instead of
+       * `chooser`: `"each-opponent"` is "starting with the next opponent in
+       * turn order, **each opponent chooses a different** nonland card from
+       * among them" (Manifold Insights), `"each-player"` "starting with you,
+       * each player chooses …". Each picks `min` to `max` cards from what the
+       * ones before left (rule 101.4: in turn order, each seeing the choices
+       * before theirs), and once the last has chosen, or nothing is left that
+       * may be chosen, every pick goes to `destination` together and the rest
+       * to `leftover`, as one choice. A player who has left the game picks
+       * nothing; nobody is asked with nothing to choose. Not with `chooser`,
+       * `split`, `secondPick` or a zone in exile. */
+      readonly eachChooses?: "each-opponent" | "each-player";
       /** Chosen cards bound for the battlefield enter under the **effect's
        * controller's** control, whoever's zone or choice it was: Scrounge's
        * "target opponent chooses an artifact card in their graveyard. Put that
@@ -15589,9 +15601,11 @@ export interface EffectApi {
     together?: ResolvedSearchTogether,
     /** See `look-and-choose`'s `split`. */
     split?: readonly ZoneChoiceSplitCase[],
-    /** Its `chooser: "an-opponent"`, `under: "you"` and `faceDownLooks`. */
+    /** Its `chooser: "an-opponent"`, `under: "you"` and `faceDownLooks`;
+     * `eachChooses`' players, in the order they choose. */
     more?: {
       readonly anOpponent?: true;
+      readonly eachChooses?: readonly PlayerId[];
       readonly underYou?: true;
       readonly underOwners?: true;
       readonly faceDownLooks?: "chooser" | "nobody";
@@ -25531,6 +25545,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.split,
         {
           ...(spec.chooser === "an-opponent" ? { anOpponent: true as const } : {}),
+          // From the effect's controller round the table: "starting with the
+          // next opponent in turn order", or "starting with you".
+          ...(spec.eachChooses !== undefined ? { eachChooses: separationOrder(spec.eachChooses, true, ctx) } : {}),
           ...(spec.under === "you" ? { underYou: true as const } : {}),
           ...(spec.under === "owners" ? { underOwners: true as const } : {}),
           ...(spec.faceDownLooks !== undefined ? { faceDownLooks: spec.faceDownLooks } : {}),

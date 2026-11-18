@@ -12316,9 +12316,44 @@ export class Game {
     const why = this.whyCannotChooseFromZone(player, chosen);
     if (why !== null) throw new Error(why);
 
-    const awaiting = this.state.awaiting;
+    let awaiting = this.state.awaiting;
     if (awaiting === null || awaiting.kind !== "choose-from-zone") {
       throw new Error("unreachable: whyCannotChooseFromZone should have caught this");
+    }
+    // Each player in turn choosing from one look (`pickersAfter` — Manifold
+    // Insights' "each opponent chooses a different nonland card"): the next
+    // one picks from what's left, the players after seeing the picks before
+    // theirs (rule 101.4); once the last has chosen, or nothing is left that
+    // may be chosen, every pick is carried out together, as one choice.
+    if (awaiting.pickersAfter !== undefined) {
+      const before = awaiting.pickedBefore ?? [];
+      const picked = new Set<ObjectId>([...before, ...chosen]);
+      const left = awaiting.eligible.filter((id) => !picked.has(id));
+      const [next, ...after] = awaiting.pickersAfter.filter((p) => this.state.players[p]?.hasLost !== true);
+      this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen], chosenOnly: true });
+      // Whose the cards are: `forPlayer`, or the picker who is their owner.
+      const owner = awaiting.forPlayer ?? player;
+      if (next !== undefined && left.length > 0) {
+        const { forPlayer: _owner, ...asked } = awaiting;
+        this.state.awaiting = {
+          ...asked,
+          ...(next !== owner ? { forPlayer: owner } : {}),
+          player: next,
+          eligible: left,
+          min: Math.min(awaiting.min, left.length),
+          max: Math.min(awaiting.max, left.length),
+          pickersAfter: after,
+          pickedBefore: [...before, ...chosen],
+        };
+        return;
+      }
+      // Carried out as the zone's owner's: the picks are theirs, and so is
+      // anything the rest ask (an order) or enter under (rule 110.2).
+      const { pickersAfter: _done, pickedBefore: _before, forPlayer: _for, ...whole } = awaiting;
+      chosen = [...before, ...chosen];
+      player = owner;
+      awaiting = { ...whole, player, eligible: [...before, ...awaiting.eligible], min: chosen.length, max: chosen.length };
+      this.state.awaiting = awaiting;
     }
     // The search's choice made, the search is over (rule 723.2).
     if (this.state.playerControl !== undefined) this.endSearchControl(player);
@@ -47235,6 +47270,7 @@ controlledBy,
           more?.givesUp === true,
           more?.leftoverCounters,
           more?.thenAlways === true,
+          more?.eachChooses,
         );
       },
     };
@@ -47323,6 +47359,8 @@ controlledBy,
     leftoverCounters?: { readonly kind: string; readonly amount: number },
     /** See `look-and-choose`'s `thenAlways`. */
     thenAlways = false,
+    /** See `look-and-choose`'s `eachChooses`: these players, in order. */
+    eachPicks?: readonly PlayerId[],
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -47583,6 +47621,26 @@ controlledBy,
       // hand": only what's taken is shown, as it's taken.
       ...(reveal === "chosen" && (zone === "library" || zone === "hand") ? { reveal: true } : {}),
     };
+    // "Starting with the next opponent in turn order, each opponent chooses a
+    // different nonland card from among them" (Manifold Insights): the first
+    // picks now, the rest after (`pickersAfter`), each from what's left.
+    // Nobody who has left the game picks (rule 800.4a), and with nothing that
+    // may be chosen, or nobody to choose, nobody is asked: the rest go.
+    if (eachPicks !== undefined) {
+      const [first, ...after] = eachPicks.filter((p) => this.state.players[p]?.hasLost !== true);
+      if (first === undefined || decision.max <= 0) {
+        this.finishZoneChoice({ kind: "zone-choice", awaiting: decision, player, chosen: [] });
+        return;
+      }
+      this.state.awaiting = {
+        ...decision,
+        player: first,
+        ...(first !== player ? { forPlayer: player } : {}),
+        pickersAfter: after,
+        pickedBefore: [],
+      };
+      return;
+    }
     if (anOpponentPicks) {
       this.offerToAnOpponent(decision, player, source);
       return;
