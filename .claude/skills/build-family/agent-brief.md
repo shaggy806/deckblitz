@@ -2,7 +2,7 @@
 
 You build what a few real cards need. Your prompt names the cards and their keys in order, your E2E ports, and perhaps a time to report
 by. One commit a card. This is the user's order (2026-11-04): keys are built by the best-ranked card they unlock (`npm run -s cards:needs
--w engine -- --by-rank --top 40`). You are one of four agents building at once; nobody is watching, so never wait on a question.
+-w engine -- --by-rank --top 40`). You are one of five agents building at once; nobody is watching, so never wait on a question.
 
 **The card is your first proving card, and it must run its whole text.** Build each key as the general feature it is
 (`cards:needs -- --feature <key>` shows its other cards; author one or two more where they prove a branch), not a special case for the one

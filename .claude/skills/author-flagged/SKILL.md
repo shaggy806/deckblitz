@@ -1,6 +1,6 @@
 ---
 name: author-flagged
-description: Build the cards the user flagged "Build ASAP" in the card library's dev-only view (`engine/data/build-asap.json`), ahead of EDHREC rank — see where each stands (`cards:needs -- --asap`), author the ones the engine already runs, triage the untriaged, build the engine features the blocked ones need, test, record, verify, ship, and unflag what landed. Run as `/author-flagged overnight` (optionally `overnight until 8am`), it coordinates instead — four fresh agents at once in their own worktrees, as `build-family`'s overnight mode does, reviewed, picked, verified and pushed every few cards — so it works down the whole flagged list unattended. Use when the user says to author or build the flagged cards, the ASAP cards, the cards they picked in the library, to run the flagged cards overnight or with agents, or runs this skill with no other instructions.
+description: Build the cards the user flagged "Build ASAP" in the card library's dev-only view (`engine/data/build-asap.json`), ahead of EDHREC rank — see where each stands (`cards:needs -- --asap`), author the ones the engine already runs, triage the untriaged, build the engine features the blocked ones need, test, record, verify, ship, and unflag what landed. Run as `/author-flagged overnight` (optionally `overnight until 8am`), it coordinates instead — five fresh agents at once in their own worktrees, as `build-family`'s overnight mode does, reviewed, picked, verified and pushed every few cards — so it works down the whole flagged list unattended. Use when the user says to author or build the flagged cards, the ASAP cards, the cards they picked in the library, to run the flagged cards overnight or with agents, or runs this skill with no other instructions.
 ---
 
 # Author the flagged cards
@@ -130,7 +130,7 @@ overnight` runs the by-rank order — unattended, for hours, fresh agents doing
 the work so no context carries one card's code into the next. **Follow
 `build-family`'s *Overnight* section** (`.claude/skills/build-family/SKILL.md`,
 from "## Overnight" to the end) for everything it covers: auto mode, never
-asking a question, keep-awake, the budget and time checks, four agents at once
+asking a question, keep-awake, the budget and time checks, five agents at once
 in their own worktrees, the dispatch prompt and `agent-brief.md`, reviewing
 reports and their "unsure" sections as work, `pick.py`, verifying and pushing
 every 4-6 commits' worth (once at `--full`), Playwright only when the client

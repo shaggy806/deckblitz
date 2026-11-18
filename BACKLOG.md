@@ -46,8 +46,8 @@ section keeps only what to do next.
   through `author-top-cards` as B333 did (lead plus worktree agents, a group of four cards each)
   or `build-family overnight lanes`. **B334 (2026-11-17) reached 13755; B335 (2026-11-18, overnight,
   34 lane agents, 171 cards) took every triaged card from 13560 to 17788 but those below.** **Five
-  agents at once looked best** (B335's experiment: five built as many cards an hour as six with fewer
-  failures; `docs/card-blockers.md`, batch 335; the build-family skill still says four). **Next by rank** (`rank-goal.mjs --rank 20000 --keys`):
+  agents at once** (B335's experiment: five built as many cards an hour as six with fewer failures;
+  `docs/card-blockers.md`, batch 335; the build-family and author-flagged skills say five since). **Next by rank** (`rank-goal.mjs --rank 20000 --keys`):
   Ellywick Tumblestrum (14843, `amount:differently-named-dungeons-completed`), Blood Sun (16071),
   First Family (16094), Forbidden Crypt (16193), Darigaaz Reincarnated (16306), Vanish into Memory
   (16309), then 16688 on (Qasali Ambusher, Elvish Refueler, Blossoming Calm, Squall). Waiting on the

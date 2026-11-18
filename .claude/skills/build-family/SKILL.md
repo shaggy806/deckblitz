@@ -1,6 +1,6 @@
 ---
 name: build-family
-description: Build the missing engine features the most-played blocked cards need (Phase 2 of docs/plans/need-keys-after-the-walk.md), in order of the best EDHREC-ranked card each key unlocks — take the first cards `cards:needs -- --by-rank` lists, build what they need as general implementations, prove each with its own tests and the real cards that exercise it, mark the keys built, teach the scaffolder, verify, ship, and hand off. Features only: the other cards they free are authored later by the `author-freed` skill. Run as `/build-family overnight` (optionally `overnight until 8am`), it coordinates instead — four fresh agents at once in their own worktrees, reviewed, picked, verified and pushed every few cards — so it can run unattended for hours; `overnight lanes` hands keys out by the part of the engine they're built in (`engine/data/lanes.json`), one agent a lane. Use when the user says to build by rank, build the next keys or family, work down the need keys, do Phase 2, run families overnight or with agents, or runs this skill with no other instructions.
+description: Build the missing engine features the most-played blocked cards need (Phase 2 of docs/plans/need-keys-after-the-walk.md), in order of the best EDHREC-ranked card each key unlocks — take the first cards `cards:needs -- --by-rank` lists, build what they need as general implementations, prove each with its own tests and the real cards that exercise it, mark the keys built, teach the scaffolder, verify, ship, and hand off. Features only: the other cards they free are authored later by the `author-freed` skill. Run as `/build-family overnight` (optionally `overnight until 8am`), it coordinates instead — five fresh agents at once in their own worktrees, reviewed, picked, verified and pushed every few cards — so it can run unattended for hours; `overnight lanes` hands keys out by the part of the engine they're built in (`engine/data/lanes.json`), one agent a lane. Use when the user says to build by rank, build the next keys or family, work down the need keys, do Phase 2, run families overnight or with agents, or runs this skill with no other instructions.
 ---
 
 # Build the next feature families
@@ -56,7 +56,7 @@ as the work does, not sit on "Orient" for an hour.
 **Two ways to run it.** Interactively (the default) you build the cards'
 keys yourself, steps 0–4 below. **Overnight** — invoked as `/build-family
 overnight` or `/build-family overnight until 8am`, or when the user asks to run
-several with agents or leave it running — you coordinate instead: four fresh
+several with agents or leave it running — you coordinate instead: five fresh
 agents at once, while your own context stays small. See *Overnight* at the end;
 `agent-brief.md` beside this file is the agents' instructions.
 
@@ -215,14 +215,14 @@ A few lines:
 Offer the next, for a fresh session (`/clear`, then the skill): `author-freed`
 while `--stale`'s queue has cards, more keys once it's empty.
 
-## Overnight: four agents, by rank
+## Overnight: five agents, by rank
 
 The user's call, 2026-10-31: let a session run the order unattended, for hours, by handing the work to fresh agents. This overrides, for
 this mode only, "features by me, agents author" and the per-session budget in step 1.2: each agent starts from ~40K of orientation and ends
 with its cards, so no context carries one card's code into the next. You, the coordinator, never read engine code beyond reviewing diffs. Your
 context grows ~10K per agent's card group, so a night is about 12-20 agents.
 
-**The settings, as measured** (detail under *What the settings came from*): four agents at once, each in its own worktree, started as a slot
+**The settings, as measured** (detail under *What the settings came from*): five agents at once, each in its own worktree, started as a slot
 frees. Each takes three or four cards in rank order, one commit a card, and a near neighbour on the same key rides along. A four-card agent
 takes about 70 minutes, a two-card one 25. Verify alongside the agents every 4-6 commits' worth; Playwright only when `client/`, `protocol/` or
 `engine/src/view.ts` changed since its last pass. Local agents only, no cloud sessions.
@@ -281,7 +281,7 @@ Three cards blocked in a row also stops the run: something is wrong with the ord
 
 The user's call, 2026-11-13, for the rank goal's last ~140 small keys (`cards:goal`, to rank 10,000): hand work out by the part of the engine
 it's built in rather than strictly by rank, so an agent's orientation serves all its keys, related keys get one general implementation, and
-agents running at once edit different regions of `game.ts`. Everything else in this section's loop holds (four at once, review, pick,
+agents running at once edit different regions of `game.ts`. Everything else in this section's loop holds (five at once, review, pick,
 verify alongside, budget, skip list).
 
 - **The lanes** are `engine/data/lanes.json`: six, each with its files and `game.ts` landmarks, and every open small or unsized key's lane.
@@ -396,6 +396,12 @@ How each setting above was arrived at, oldest first. The user's calls still hold
   deadline in the brief ("report by 7:40") mostly worked: one of three cards ran out of time and was reverted to a patch. Nine of the 19 went
   back with `SendMessage` for a fix, so read "unsure" as work: two were
   rules bugs in existing code (life at exactly the amount, rule 119.4; a copied spell's delayed `whenever`).
+- **Measured on 2026-11-18 (B335, the user's question whether six at once cost more than they gain), five at once from then on:**
+  34 lane agents in phases of six, four, two and five at once, with a once-a-minute load sampler. Agent-minutes a card: six 18.0, four
+  16.2, two 8.2, five 13.6; as cards an hour about 20, 15, 15 and 22. At six free memory hit 0 GB, two agents' tools crashed for memory,
+  a typecheck waited on the gate's four slots 1.25 at a time and the engine suite ran ~270 s against ~140; five built as much with no
+  crash reported. Verify's whole-machine turn is what drives memory to the floor at five or six. Not controlled (each phase's cards
+  differ); the numbers are in `docs/card-blockers.md`, batch 335.
 
 ### Reviewing
 
