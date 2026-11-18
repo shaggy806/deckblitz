@@ -20663,6 +20663,15 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ]);
   });
 
+  it("reads creatures blocking, once a combat (Tide of War)", () => {
+    expect(parseTrigger("Whenever one or more creatures block")).toEqual([
+      { on: "event", event: "creatures-block", batched: true },
+    ]);
+    expect(parseTrigger("Whenever one or more creatures you control block")).toEqual([
+      { on: "event", event: "creatures-block", who: "you-control", batched: true },
+    ]);
+  });
+
   it("reads a counter of each opponent's spell and ability unless paid for (Whirlwind Denial)", () => {
     const denial = parseFace({
       name: "Test Card",

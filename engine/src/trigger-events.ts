@@ -187,6 +187,14 @@ export const TRIGGER_EVENTS = {
    * which move nothing into one (its ruling). The subjects are the cards, in
    * whichever library they went to; `{ triggerValue: true }` is how many. */
   "put-into-library": row({ type: "cards-put-into-library", objects: (e) => e.arrivals.map((a) => a.object) }),
+  /** "Whenever one or more creatures block" (Tide of War; `batched`): once
+   * each combat, as the last defending player's declaration completes, if
+   * any creature was declared as a blocker (the card's ruling: "only once
+   * each combat and only if at least one blocker is declared"). The
+   * subjects are the blockers, `who` and `filter` asking about each ("one or
+   * more creatures **you control** block"); one put onto the battlefield
+   * blocking never blocked (rule 509.4). */
+  "creatures-block": row({ type: "attackers-blocked", objects: (e) => e.blockers }),
   /** "Whenever you collect evidence" (rule 701.59). */
   "collects-evidence": row({ type: "evidence-collected", player: (e) => e.player }),
   /** "Whenever you discover" (rule 701.57); the value is its N. */

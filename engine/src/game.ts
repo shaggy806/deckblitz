@@ -13832,7 +13832,10 @@ export class Game {
         this.emit({ type: "player-attacked-unblocked", player: this.activePlayer, defender, attackers });
       }
     }
-    if (blocked.length > 0) this.emit({ type: "attackers-blocked", attackers: blocked });
+    if (blocked.length > 0) {
+      const blockers = [...new Set(blocked.flatMap((attacker) => this.state.objects[attacker]?.blockedBy ?? []))];
+      this.emit({ type: "attackers-blocked", attackers: blocked, blockers });
+    }
   }
 
   /**

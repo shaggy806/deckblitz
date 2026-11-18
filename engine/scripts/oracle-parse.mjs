@@ -3014,6 +3014,10 @@ export function parseTrigger(clause) {
   if (/^Whenever one or more cards are put into a library from anywhere$/.test(c)) {
     return [{ on: "event", event: "put-into-library", batched: true }];
   }
+  // Once each combat, as blockers are declared, if any are (Tide of War).
+  if ((m = /^Whenever one or more creatures (you control )?block$/.exec(c))) {
+    return [{ on: "event", event: "creatures-block", ...(m[1] === undefined ? {} : { who: "you-control" }), batched: true }];
+  }
   // Rule 714.2e, as it triggers (Historian's Boon).
   if (/^Whenever the final chapter ability of a Saga you control triggers$/.test(c)) {
     return [{ on: "event", event: "final-chapter-triggers", who: "you-control" }];

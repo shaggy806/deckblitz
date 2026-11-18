@@ -2968,7 +2968,9 @@
   "mechanic:piles",
   "effect:opponent-chooses-permanents-to-bounce",
   "effect:unless-per-target-held",
-  "effect:separate-into-three-piles"
+  "effect:separate-into-three-piles",
+  "trigger:one-or-more-creatures-block",
+  "filter:blocked-attacker"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

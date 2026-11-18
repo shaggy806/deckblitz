@@ -1258,9 +1258,12 @@ export type GameEvent =
       /** The attackers that became blocked this combat, all of them, as the
        * last defending player's declaration completes: "whenever one or more
        * creatures you control become blocked" (Hezrou). Not announced when
-       * nothing is blocked. */
+       * nothing is blocked. `blockers` are the creatures declared as their
+       * blockers, still blocking: "whenever one or more creatures block"
+       * (Tide of War — the `creatures-block` trigger event). */
       readonly type: "attackers-blocked";
       readonly attackers: readonly ObjectId[];
+      readonly blockers: readonly ObjectId[];
     })
   | (Base & {
       /** An attacking creature had no creatures declared as blockers for it
