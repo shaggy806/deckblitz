@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-989 already implemented / 11 missing
+991 already implemented / 9 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -742,7 +742,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  736  Archelos, Lagoon Mystic                         4482 decks  {1}{B}{G}{U}     Legendary Creature — Turtle Shaman
 [ ]  737  Clara Oswald                                    4480 decks  {6}              Legendary Creature — Human Advisor
 [x]  738  Gut, True Soul Zealot                           4475 decks  {2}{R}           Legendary Creature — Goblin Shaman
-[ ]  739  Kathril, Aspect Warper                          4465 decks  {2}{W}{B}{G}     Legendary Creature — Nightmare Insect
+[x]  739  Kathril, Aspect Warper                          4465 decks  {2}{W}{B}{G}     Legendary Creature — Nightmare Insect
 [x]  740  Kresh the Bloodbraided                          4461 decks  {2}{B}{R}{G}     Legendary Creature — Human Warrior
 [x]  741  River Song                                      4433 decks  {1}{U}{R}        Legendary Creature — Human Time Lord Rogue
 [x]  742  Firesong and Sunspeaker                         4432 decks  {4}{R}{W}        Legendary Creature — Minotaur Cleric
@@ -938,7 +938,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  932  Aziza, Mage Tower Captain                       3189 decks  {R}{W}           Legendary Creature — Djinn Sorcerer
 [x]  933  Cultist of the Absolute                         3182 decks  {B}              Legendary Enchantment — Background
 [x]  934  The Pride of Hull Clade                         3181 decks  {10}{G}          Legendary Creature — Crocodile Elk Turtle
-[ ]  935  Me, the Immortal                                3176 decks  {2}{G}{U}{R}     Legendary Creature — Human Rogue
+[x]  935  Me, the Immortal                                3176 decks  {2}{G}{U}{R}     Legendary Creature — Human Rogue
 [x]  936  Pir, Imaginative Rascal                         3173 decks  {2}{G}           Legendary Creature — Human
 [x]  937  Jenson Carthalion, Druid Exile                  3169 decks  {G}{W}           Legendary Creature — Human Druid
 [x]  938  Aerith, Last Ancient                            3162 decks  {2}{G}{W}        Legendary Creature — Human Cleric Druid
