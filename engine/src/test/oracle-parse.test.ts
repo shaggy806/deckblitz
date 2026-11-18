@@ -23413,6 +23413,20 @@ describe("damage replaced by counters on this permanent, not prevented (Delaying
   });
 });
 
+describe("a life gain become draws (Nefarious Lich)", () => {
+  it("reads the gain replaced by drawing that many", () => {
+    const lich = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text: "If you would gain life, draw that many cards instead.",
+      mana_cost: "{4}",
+      colors: [],
+      cmc: 4,
+    } as never) as unknown as { static: { replacement?: unknown }[] };
+    expect(lich.static[0]?.replacement).toEqual({ event: "would-gain-life", who: "you", instead: { effect: { kind: "draw", amount: "x" } } });
+  });
+});
+
 describe("creatures your opponents control, or played by them, enter tapped (Uphill Battle)", () => {
   const face = (oracle_text: string) =>
     parseFace({ name: "Test Card", type_line: "Enchantment", oracle_text, mana_cost: "{3}", colors: [], cmc: 3 } as never) as unknown as {

@@ -66541,20 +66541,25 @@ controlledBy,
     const replacements = this.playerEventReplacements(player).filter(
       (e): e is PlayerEventReplacement<LifeGainReplacement> => e.r.event === "would-gain-life",
     );
-    return replacements.map(({ r, by }, i) => {
+    return replacements.flatMap(({ r, by }, i): LifeGainStep[] => {
       const effect = insteadEffect(r.instead)?.effect;
       const key = `${by.id}:${i}`;
-      if (r.prevent === true) return { key, by, kind: "none" as const };
-      if (effect !== undefined) return { key, by, kind: "effect" as const, effect };
-      if (r.becomesLoss === true) return { key, by, kind: "loss" as const };
+      if (r.prevent === true) return [{ key, by, kind: "none" as const }];
+      // One whose effect is under way doesn't apply to a gain that effect
+      // brings about (rule 614.5 — Nefarious Lich's ruling: its draw made a
+      // gain by another replacement is gained).
+      if (effect !== undefined) return this.applyingReplacements.has(`life-gain:${key}`) ? [] : [{ key, by, kind: "effect" as const, effect }];
+      if (r.becomesLoss === true) return [{ key, by, kind: "loss" as const }];
       const modify = insteadModify(r.instead);
-      return {
-        key,
-        by,
-        kind: "change" as const,
-        plus: modify?.plus === undefined ? 0 : this.replacementAmount(modify.plus, by),
-        times: modify?.times ?? 1,
-      };
+      return [
+        {
+          key,
+          by,
+          kind: "change" as const,
+          plus: modify?.plus === undefined ? 0 : this.replacementAmount(modify.plus, by),
+          times: modify?.times ?? 1,
+        },
+      ];
     });
   }
 
@@ -66652,7 +66657,11 @@ controlledBy,
       // "If you would gain life, draw that many cards instead" (Lich): the
       // gain never happens (rule 614.6).
       if (outcome.kind === "effect") {
-        this.runReplacedBy(outcome.step.effect, outcome.step.by.id, outcome.step.by.controller, { x: outcome.amount, player });
+        this.runReplacedBy(outcome.step.effect, outcome.step.by.id, outcome.step.by.controller, {
+          x: outcome.amount,
+          player,
+          key: `life-gain:${outcome.step.key}`,
+        });
         return;
       }
       // "…loses that much life instead" (Tainted Remedy).

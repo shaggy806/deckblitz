@@ -24220,6 +24220,15 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // A life gain become draws (rules 614.1a, 614.6): "if you would gain life,
+  // draw that many cards instead" (Lich, Nefarious Lich).
+  if (line === "If you would gain life, draw that many cards instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-gain-life", who: "you", instead: { effect: { kind: "draw", amount: "x" } } },
+      text,
+    };
+  }
   // A static prevention (rule 615): "prevent all noncombat damage that would
   // be dealt to other creatures you control" (Crystal Barricade, Tajic).
   m = /^Prevent all (combat |noncombat )?damage that would be dealt to (other )?creatures you control\.$/.exec(line);

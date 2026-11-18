@@ -8143,7 +8143,10 @@ The `prevent-damage` family makes the same record.
   Celebrant's "if you would gain life, you gain that much life plus 1
   instead" (`who: "you"`, `modify: { plus: 1 }`), or "your opponents can't gain life"
   (The Lord of Pain — `who: "opponent"`, `prevent: true`). Applied to every
-  life gain, lifelink's included; one `prevent` beats every `plus`.
+  life gain, lifelink's included; one `prevent` beats every `plus`. `{ effect }` is the gain
+  made something else: Nefarious Lich's "if you would gain life, draw that many cards instead"
+  (`{ effect: { kind: "draw", amount: "x" } }`; a draw that becomes a gain again isn't made a
+  draw by it a second time, rule 614.5).
   `times: 2` is Rhox Faithmender's "you gain twice that much life
   instead", applied after every `plus` (the order the gaining player would
   pick, rule 616.1). `becomesLoss: true` is Tainted Remedy's "if an opponent

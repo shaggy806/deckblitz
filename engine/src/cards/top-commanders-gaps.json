@@ -3025,7 +3025,9 @@
   "replacement:enters-tapped-if-cast",
   "effect:grant-keyword-variants",
   "effect:hexproof-from-counters",
-  "replacement:extra-die-chosen-ignore"
+  "replacement:extra-die-chosen-ignore",
+  "replacement:gain-life-becomes-draw",
+  "replacement:damage-to-you-becomes-exile-graveyard"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
