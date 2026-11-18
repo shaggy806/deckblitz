@@ -52,7 +52,7 @@ gates); an engine's turns to come are still unpriced (its scenario is training).
 - **Fix, two separate pieces; the first built.**
   1. *The library's order (built, the user's yes, 2026-11-17).* Every decision of v2 now reads
      and copies a state in which each library's unseen cards lie in an order made up for the
-     turn (`bot/determinize.ts`'s `withHiddenLibraryOrder`, through `EvalBotController.fairView`).
+     turn (`bot/determinize.ts`'s `withHiddenCards`, as it's now named, through `EvalBotController.fairView`).
      The order is made from the cards themselves, each keyed by a hash of the turn, the seat and
      its id, so the real order has no say at all: the same cards lying two ways give the same
      answer, which is what the scenario asks ("casts the same first spell whatever order its

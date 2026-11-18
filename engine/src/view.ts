@@ -1064,7 +1064,7 @@ export function ownLibraryTopSeen(state: GameState, registry: CardRegistry, play
  * The card on top of `owner`'s library when `viewer` can see it — revealed to
  * everyone, or one `viewer` alone may look at (their own, or another
  * player's: Xanathar) — else `null`. All a bot may know of a library's order
- * (`bot/determinize.ts`'s `withHiddenLibraryOrder`).
+ * (`bot/determinize.ts`'s `withHiddenCards`).
  */
 export function libraryTopSeenBy(
   state: GameState,
@@ -1086,6 +1086,23 @@ export function libraryTopsSeenBy(
   const tops: Record<PlayerId, ObjectId | null> = {};
   for (const owner of state.turnOrder) tops[owner] = seenLibraryTop(state, registry, viewer, owner, sight);
   return tops;
+}
+
+/**
+ * What of the hidden zones the board itself shows `viewer`: each library's
+ * top card where they can see it (`libraryTopSeenBy`), and the players whose
+ * hands are played revealed (`handsPlayedRevealed`). Both at once, the
+ * viewer's sight worked out a single time: a bot asks at every decision.
+ */
+export function hiddenCardsInSight(
+  state: GameState,
+  registry: CardRegistry,
+  viewer: PlayerId,
+): { readonly tops: Record<PlayerId, ObjectId | null>; readonly hands: ReadonlySet<PlayerId> } {
+  const sight = sightOf(state, registry, viewer);
+  const tops: Record<PlayerId, ObjectId | null> = {};
+  for (const owner of state.turnOrder) tops[owner] = seenLibraryTop(state, registry, viewer, owner, sight);
+  return { tops, hands: sight.hands };
 }
 
 function sightOf(state: GameState, registry: CardRegistry, viewer: PlayerId): Sight {
@@ -1201,6 +1218,75 @@ function withControlledSight(
   };
 }
 
+/**
+ * The cards the decision being asked shows `viewer`, past what they see
+ * anyway: the cards of a look, a scry, a pile, a spell being cast for another
+ * player to finish. What `viewFor` adds to a seat's view while the decision
+ * waits, and what a bot may remember having seen (`bot/seat-memory.ts`).
+ */
+export function awaitedCardsShownTo(state: GameState, viewer: PlayerId): ObjectId[] {
+  const shown: ObjectId[] = [];
+  // A pending "look at N cards, choose some" decision reveals its candidates
+  // to the choosing player only — this is the only place library cards ever
+  // become visible (graveyard candidates are already public via `graveyards`
+  // in the view, but naming them again here is harmless).
+  if (state.awaiting?.kind === "choose-from-zone" && state.awaiting.player === viewer) {
+    // A face-down card in exile a processor may take stays hidden from a
+    // chooser who may not look at it (rule 406.3): it's picked by its group,
+    // as a face-down back.
+    const hidden = new Set((state.awaiting.faceDownGroups ?? []).flat());
+    shown.push(
+      ...state.awaiting.ids.filter((id) => {
+        if (!hidden.has(id)) return true;
+        const object = state.objects[id];
+        if (object?.exiledFaceDown !== undefined) return object.exiledFaceDown.lookers.includes(viewer);
+        return object?.foretold !== true || object.owner === viewer;
+      }),
+    );
+  }
+  // Objects being separated into piles are seen by the separator (rule
+  // 700.3: they looked at them, or they were revealed); a face-down pile, by
+  // the players who looked at its cards.
+  if (state.awaiting?.kind === "separate-piles" && state.awaiting.player === viewer) {
+    shown.push(...state.awaiting.objects);
+  }
+  if (state.awaiting?.kind === "choose-pile" && state.awaiting.lookers.includes(viewer)) {
+    shown.push(...state.awaiting.piles.flat());
+  }
+  // A scry / surveil reveals the looked-at top cards to that player only.
+  if (state.awaiting?.kind === "scry" && state.awaiting.player === viewer) {
+    shown.push(...state.awaiting.cards);
+  }
+  // So does a `cast-now` that has its player look at the top of their
+  // library to choose a spell from among (Velomachus Lorehold).
+  if (state.awaiting?.kind === "cast-now" && state.awaiting.player === viewer) {
+    shown.push(...(state.awaiting.looked ?? []));
+  }
+  // A spell waiting on its assisting player (rule 702.132a) is one being
+  // cast — on the stack for everyone to see (601.2a) — though it waits in
+  // its caster's hand here until the cast is done.
+  if (state.awaiting?.kind === "choose-number" && state.awaiting.assist !== undefined) {
+    shown.push(state.awaiting.assist.cast.card);
+  }
+  // So is one waiting on the opponent its caster named to choose some of
+  // its targets or its modes (rules 601.2c, 700.2e).
+  if (
+    (state.awaiting?.kind === "choose-targets" || state.awaiting?.kind === "choose-modes") &&
+    state.awaiting.otherCast?.action.type === "cast-spell"
+  ) {
+    shown.push(state.awaiting.otherCast.action.card);
+  }
+  // And a hand looked at before naming a card (Sorcerous Spyglass).
+  if (state.awaiting?.kind === "choose-card-name" && state.awaiting.player === viewer) {
+    shown.push(...(state.awaiting.looked ?? []));
+  }
+  // Or before choosing anything else as it enters (Arachne, Psionic Weaver).
+  if (state.awaiting?.kind === "choose-creature-type" && state.awaiting.player === viewer) {
+    shown.push(...(state.awaiting.looked ?? []));
+  }
+  return shown;
+}
+
 function viewForUncached(
   state: GameState,
   registry: CardRegistry,
@@ -1228,64 +1314,7 @@ function viewForUncached(
     }),
     ...state.zones.shared.command,
   ];
-  // A pending "look at N cards, choose some" decision reveals its candidates
-  // to the choosing player only — this is the only place library cards ever
-  // become visible (graveyard candidates are already public via `graveyards`
-  // below, but pushing them again here is harmless).
-  if (state.awaiting?.kind === "choose-from-zone" && state.awaiting.player === viewer) {
-    // A face-down card in exile a processor may take stays hidden from a
-    // chooser who may not look at it (rule 406.3): it's picked by its group,
-    // as a face-down back.
-    const hidden = new Set((state.awaiting.faceDownGroups ?? []).flat());
-    visibleIds.push(
-      ...state.awaiting.ids.filter((id) => {
-        if (!hidden.has(id)) return true;
-        const object = state.objects[id];
-        if (object?.exiledFaceDown !== undefined) return object.exiledFaceDown.lookers.includes(viewer);
-        return object?.foretold !== true || object.owner === viewer;
-      }),
-    );
-  }
-  // Objects being separated into piles are seen by the separator (rule
-  // 700.3: they looked at them, or they were revealed); a face-down pile, by
-  // the players who looked at its cards.
-  if (state.awaiting?.kind === "separate-piles" && state.awaiting.player === viewer) {
-    visibleIds.push(...state.awaiting.objects);
-  }
-  if (state.awaiting?.kind === "choose-pile" && state.awaiting.lookers.includes(viewer)) {
-    visibleIds.push(...state.awaiting.piles.flat());
-  }
-  // A scry / surveil reveals the looked-at top cards to that player only.
-  if (state.awaiting?.kind === "scry" && state.awaiting.player === viewer) {
-    visibleIds.push(...state.awaiting.cards);
-  }
-  // So does a `cast-now` that has its player look at the top of their
-  // library to choose a spell from among (Velomachus Lorehold).
-  if (state.awaiting?.kind === "cast-now" && state.awaiting.player === viewer) {
-    visibleIds.push(...(state.awaiting.looked ?? []));
-  }
-  // A spell waiting on its assisting player (rule 702.132a) is one being
-  // cast — on the stack for everyone to see (601.2a) — though it waits in
-  // its caster's hand here until the cast is done.
-  if (state.awaiting?.kind === "choose-number" && state.awaiting.assist !== undefined) {
-    visibleIds.push(state.awaiting.assist.cast.card);
-  }
-  // So is one waiting on the opponent its caster named to choose some of
-  // its targets or its modes (rules 601.2c, 700.2e).
-  if (
-    (state.awaiting?.kind === "choose-targets" || state.awaiting?.kind === "choose-modes") &&
-    state.awaiting.otherCast?.action.type === "cast-spell"
-  ) {
-    visibleIds.push(state.awaiting.otherCast.action.card);
-  }
-  // And a hand looked at before naming a card (Sorcerous Spyglass).
-  if (state.awaiting?.kind === "choose-card-name" && state.awaiting.player === viewer) {
-    visibleIds.push(...(state.awaiting.looked ?? []));
-  }
-  // Or before choosing anything else as it enters (Arachne, Psionic Weaver).
-  if (state.awaiting?.kind === "choose-creature-type" && state.awaiting.player === viewer) {
-    visibleIds.push(...(state.awaiting.looked ?? []));
-  }
+  visibleIds.push(...awaitedCardsShownTo(state, viewer));
   // A real reveal (rule 701.16) is to *everyone*, which is the whole point —
   // this is the only path that puts a card another player owns, and that is
   // sitting in a hidden zone, into your view. Turn-scoped, so it stops being

@@ -38,7 +38,8 @@ import { manaValue, parseManaCost } from "../mana.js";
 import { computeCharacteristics, withComputedCache } from "../characteristics.js";
 import { whyCannotAttack } from "../combat/eligibility.js";
 import { Game } from "../game.js";
-import { libraryOrderMemo, withHiddenLibraryOrder } from "./determinize.js";
+import { withHiddenCards } from "./determinize.js";
+import { observe, seatMemory } from "./seat-memory.js";
 import { phaseOfStep } from "../turn.js";
 import { polarityBias } from "../deck-bias.js";
 import { newColorsFirst } from "../land-colors.js";
@@ -147,13 +148,18 @@ export interface EvalBotOptions {
    * default, and as many again for each next-turn look. */
   readonly planSimulations?: number;
   /**
-   * What the bot's simulations know of the libraries' order. `"hidden"`, the
-   * default: an order made up for each decision (`withHiddenLibraryOrder`),
-   * which is all a player knows. `"real"`: the game's own order and random
-   * numbers, as every decision read them until 2026-11-17 — for measuring
-   * what the knowledge was worth.
+   * What the bot's simulations know of the cards the seat can't see.
+   * `"hidden"`, the default: the libraries' order and the other players'
+   * hands dealt afresh each turn, but for what the seat knows or remembers
+   * (`withHiddenCards`, `seat-memory.ts`), which is all a player knows.
+   * `"real"`: the game's own state and random numbers, as every decision
+   * read them until 2026-11-17 — for measuring what the knowledge was worth.
    */
   readonly libraryOrder?: "hidden" | "real";
+  /** With `libraryOrder: "hidden"`, `"real"` leaves the other players' hands
+   * as they are: only how the libraries lie is hidden (2026-11-17's first
+   * step, kept to measure the second against). */
+  readonly opponentHands?: "hidden" | "real";
   /**
    * Ceiling on simulations per decision. The action space is small in
    * practice (median 2 concrete actions per window, 99th percentile around 9),
@@ -1196,8 +1202,10 @@ export class EvalBotController extends HeuristicBotController {
   private readonly planMode: "turn" | "next-turn" | null;
   private readonly planSimulations: number;
   private readonly libraryOrder: "hidden" | "real";
-  /** The orders `fairView` has made up this turn (`LibraryOrderMemo`). */
-  private readonly libraryOrders = libraryOrderMemo();
+  private readonly opponentHands: "hidden" | "real";
+  /** What this seat has seen of the hidden cards (`seat-memory.ts`), taken
+   * in at every decision the real game asks it (`fairView`). */
+  private readonly memory = seatMemory();
   /**
    * The rest of the line the last plan chose (`planLines`), replayed window
    * by window (`continueTurnPlan`) while each step's board is the one it was
@@ -1274,6 +1282,7 @@ export class EvalBotController extends HeuristicBotController {
     this.planMode = plan === "off" ? null : plan;
     this.planSimulations = options.planSimulations ?? DEFAULT_PLAN_SIMULATIONS;
     this.libraryOrder = options.libraryOrder ?? "hidden";
+    this.opponentHands = options.opponentHands ?? "hidden";
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.now = options.now ?? Date.now;
@@ -1319,17 +1328,21 @@ export class EvalBotController extends HeuristicBotController {
   }
 
   /**
-   * `view` with nothing in it the seat can't know of a library's order
-   * (`withHiddenLibraryOrder`): the state every search of this decision reads
-   * and copies, and the looks ahead a view offers, taken from that state too.
-   * What is legal now is the real game's (the order of a library changes none
-   * of it; a top card the seat can see is left where it is). The view itself
-   * under `libraryOrder: "real"`, and wherever an order can't be made up.
+   * `view` with nothing in it the seat can't know of the cards it can't see
+   * (`withHiddenCards`): the state every search of this decision reads and
+   * copies, and the looks ahead a view offers, taken from that state too.
+   * What is legal now is the real game's (where an unseen card lies changes
+   * none of it; a card the seat can see or the decision names is left where
+   * it is). The seat's memory takes in the real game first (`observe`). The
+   * view itself under `libraryOrder: "real"`.
    */
   private fairView(view: ControllerView): ControllerView {
     if (this.libraryOrder === "real") return view;
-    const state = withHiddenLibraryOrder(view.state, this.cards, this.playerId, this.libraryOrders);
-    if (state === view.state) return view;
+    observe(this.memory, view.state, this.cards, this.playerId);
+    const state = withHiddenCards(view.state, this.cards, this.playerId, {
+      memory: this.memory,
+      hands: this.opponentHands,
+    });
     const registry = this.cards;
     const player = view.player;
     const after = (action: Action | readonly Action[], keepEvents: boolean): Game => {
@@ -2580,7 +2593,7 @@ export class EvalBotController extends HeuristicBotController {
     const payment = asked?.kind === "choose-modes" && asked.cost !== undefined && asked.guess === undefined;
     if (!payment && asked?.kind !== "pay-life-for-untapped") return undefined;
     if (state.turnOrder[state.turn.activePlayerIndex] !== me || !PLANNABLE_STEPS.has(state.turn.step)) return undefined;
-    const unknown = unknownCards(state, this.cards, me);
+    const unknown = unknownCards(state, this.cards, me, this.memory.placed[me]);
     const hooks = this.planHooks();
     // The hooks read the last priority decision's pass for an interaction's
     // score; these lines are valued plainly.
@@ -3814,7 +3827,7 @@ export class EvalBotController extends HeuristicBotController {
       ...this.planLimits(),
       clock: { out: () => outOfTime(budget), timed: <T>(simulate: () => T): T => timed(budget, simulate) },
     };
-    const unknown = unknownCards(state, this.cards, me);
+    const unknown = unknownCards(state, this.cards, me, this.memory.placed[me]);
     const asScored = this.plansAsScored();
     const lines = planTurn(
       state,

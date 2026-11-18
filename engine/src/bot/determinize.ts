@@ -11,8 +11,10 @@
  * Built for v3, which planned over sampled worlds and is retired
  * (`docs/plans/bot-effect-knowledge.md`). What still uses `determinize` and
  * `sampleWorlds` is the rollout column of `bot:audit`. v2 stopped reading the
- * libraries' order on 2026-11-17 through the lighter `withHiddenLibraryOrder`
- * at the end of this file: one made-up order a turn, no hands redealt.
+ * libraries' order and the other players' hands on 2026-11-17 through
+ * `withHiddenCards` at the end of this file: one deal a turn of the cards the
+ * seat can't see, the ones it knows or remembers (`seat-memory.ts`) left
+ * where they are.
  *
  * ## What sampling buys
  *
@@ -52,9 +54,12 @@
 import type { CardRegistry } from "../cards.js";
 import { createRng, shuffle } from "../primitives.js";
 import type { ObjectId, PlayerId, Rng } from "../primitives.js";
-import type { GameState } from "../state.js";
+import { playersControlledBy } from "../player-control.js";
+import type { GameObject, GameState } from "../state.js";
 import { cloneGameState } from "../state.js";
-import { libraryTopsSeenBy } from "../view.js";
+import { hiddenCardsInSight } from "../view.js";
+import { knownEnds, publiclyKnown } from "./seat-memory.js";
+import type { SeatMemory } from "./seat-memory.js";
 
 /**
  * A copy of `state` with the zones `me` cannot see resampled: every opponent's
@@ -136,100 +141,161 @@ function hash(text: string): number {
 }
 
 /**
- * Whether a library's order can be made up without disturbing anything in
- * flight: no resolution is waiting to carry on (it may hold cards it looked
- * at by their place), and the decision being asked names no library card (a
- * scry, a search, a "look at the top four": cards the player is looking at).
+ * The cards something in flight names: the decision being asked, a
+ * resolution waiting to carry on, a trigger waiting to go on the stack, a
+ * spell or ability on it. Every quoted string of those, so a card's id is in
+ * it if any of them holds the card. `null` with nothing in flight.
+ *
+ * Such a card stays where it really is in a planning state: the player is
+ * looking at it (a scry, a search, a hand being chosen from), or what is in
+ * flight would act on it where it lies.
  */
-function orderCanBeHidden(state: GameState): boolean {
-  if (state.suspendedResolutions.length > 0) return false;
-  if (state.awaiting === null) return true;
-  const asked = JSON.stringify(state.awaiting);
-  return !state.turnOrder.some((player) =>
-    (state.zones.perPlayer[player]?.library ?? []).some((id) => asked.includes(`"${id}"`)),
-  );
+function namedInFlight(state: GameState): ReadonlySet<string> | null {
+  const stack = state.zones.shared.stack;
+  if (
+    state.awaiting === null &&
+    state.suspendedResolutions.length === 0 &&
+    state.pendingTriggers.length === 0 &&
+    state.pendingTargetedTrigger === null &&
+    stack.length === 0
+  ) {
+    return null;
+  }
+  const text = JSON.stringify([
+    state.awaiting,
+    state.suspendedResolutions,
+    state.pendingTriggers,
+    state.pendingTargetedTrigger,
+    stack.map((id) => state.objects[id]),
+  ]);
+  const named = new Set<string>();
+  for (const quoted of text.match(/"[^"\\]+"/g) ?? []) named.add(quoted.slice(1, -1));
+  return named;
+}
+
+/** What `withHiddenCards` may be told. */
+export interface HiddenCardsOptions {
+  /** What the seat has seen (`seat-memory.ts`): the cards it knows in other
+   * players' hands, and the ones it can place in a library. Without one, it
+   * knows what everyone knows and what the board shows it now. */
+  readonly memory?: Pick<SeatMemory, "hands" | "placed">;
+  /** `"real"` leaves the other players' hands as they are, and hides only
+   * how the libraries lie. */
+  readonly hands?: "hidden" | "real";
 }
 
 /**
- * `state` as `me` may plan on it: every library's cards in an order made up
- * for this decision, and a simulation's random numbers not the real game's.
+ * `state` as `me` may plan on it: the cards it can't see dealt out afresh,
+ * the ones it knows left where they are, and a simulation's random numbers
+ * not the real game's.
  *
- * v2's rollouts play on copies of the real state, so a draw in one came off
- * the real library, and a shuffle or a coin flip came out as the real one
- * would (`fromSnapshot` restores `rngState`). On a live board with Garruk's
- * Uprising, Dragonhawk and Ureni out — a draw, an exile-and-play and a look
- * at the top eight in every line — the same position played three different
- * turns over three orders of the same library, and a line's value moved by
- * tens of points on what its rollout turned up (`docs/bot-misplays.md`,
- * 2026-11-17).
+ * v2's rollouts play on copies of the real state. So a draw in one came off
+ * the real library, a shuffle or a coin flip came out as the real one would
+ * (`fromSnapshot` restores `rngState`), and an opponent in one cast what
+ * that player really held. On a live board with Garruk's Uprising,
+ * Dragonhawk and Ureni out — a draw, an exile-and-play and a look at the top
+ * eight in every line — the same position played three different turns over
+ * three orders of the same library (`docs/bot-misplays.md`, 2026-11-17).
  *
- * The order is made from the cards themselves: each unseen card is keyed by a
- * hash of the turn, the seat and its id, and the library is those keys in
- * order. So the real order has no say at all: two games that differ only in
- * how a library lies give the same answer. A top card `me` can see
- * (`libraryTopSeenBy`: Future Sight, an opponent's revealed top) stays on
- * top. One order a turn, the same for every line a decision weighs (lines are
- * compared on the same draws: `sampleWorlds`' note on common random numbers)
- * and for every decision of the turn: a plan made in one window still reads
- * the same in the next, and a window already searched and passed on is known
- * again (`passMemoKey` takes the whole state, these lists included).
+ * **What is hidden.** For each other player, the cards of their hand `me`
+ * doesn't know and the cards of their library it can't place are one pool:
+ * the hand is dealt again from it, at the size it really is, and the rest go
+ * under the library. For `me`'s own library, the cards it can't place. A
+ * player in the bot's chair knows no more: how many cards a player holds,
+ * and which cards of that deck it hasn't seen leave (the bot plans as if it
+ * had read each deck's list, as at an open-decklist table; it knows nothing
+ * of where a card is).
  *
- * A shallow copy: only the library lists and `rngState` are new, and nothing
- * moves between zones, so every reference into the state still holds. The
- * state itself is returned where an order can't be made up safely
- * (`orderCanBeHidden`).
+ * **What is left where it is.** A card of a hand everyone knows is there
+ * (`publiclyKnown`: bounced, returned, revealed) or `me` was shown
+ * (`SeatMemory.hands`), a hand played revealed, a player `me` is making the
+ * decisions of (rule 723); a run of library cards `me` can name from the top
+ * or the bottom (`knownEnds`: a top card in sight, cards it scried or put
+ * back); any card something in flight names (`namedInFlight`). A library
+ * card everyone knows is in that library, at a place `me` can't name, is
+ * never dealt into the hand.
  *
- * Not done here, and still read by the rollouts: the opponents' hands, and
- * what a player knows of a library beyond its top (a card they put there).
+ * **How it is dealt.** By the cards themselves: each pool card is keyed by a
+ * hash of the turn, the seat and its id, and the pool is those keys in
+ * order: the first into the hand's unknown places, the rest into the
+ * library's. So where a card really is has no say at all: two games that
+ * differ only in how the unseen cards lie give the same answer. One deal a
+ * turn, the same for every line a decision weighs (lines are compared on the
+ * same draws: `sampleWorlds`' note on common random numbers) and for every
+ * decision of the turn: a plan made in one window still reads the same in
+ * the next, and a window already searched and passed on is known again
+ * (`passMemoKey` takes the whole state, these lists included). A card the
+ * other player draws is the one the deal had on top; one they cast leaves
+ * the pool and the rest stay as dealt.
+ *
+ * A shallow copy: the hand and library lists and `rngState` are new, and so
+ * is the record of a card dealt across (its `zone` says where the deal put
+ * it); every other object is the game's own.
+ *
+ * Not done here: face-down cards (a foretold card, a morph) are read as what
+ * they are, and one deal stands for all the hands a player might hold.
  */
-export function withHiddenLibraryOrder(
+export function withHiddenCards(
   state: GameState,
   registry: CardRegistry,
   me: PlayerId,
-  /** The caller's, kept between its decisions: the orders made up so far
-   * this turn, reused while a library and its seen top are what they were. */
-  memo?: LibraryOrderMemo,
+  options: HiddenCardsOptions = {},
 ): GameState {
-  if (!orderCanBeHidden(state)) return state;
+  const named = namedInFlight(state);
   const seed = `${state.turn.number}:${me}`;
-  if (memo !== undefined && memo.seed !== seed) {
-    memo.seed = seed;
-    memo.libraries = {};
-  }
-  const tops = libraryTopsSeenBy(state, registry, me);
+  const sight = hiddenCardsInSight(state, registry, me);
+  const hideHands = options.hands !== "real";
+  const answering = hideHands ? playersControlledBy(state, me) : [];
+  const memory = options.memory;
+  const byKey = (ids: readonly ObjectId[]): ObjectId[] =>
+    ids
+      .map((id) => ({ id, key: hash(`${seed}:${id}`) }))
+      .sort((a, b) => a.key - b.key || (a.id < b.id ? -1 : 1))
+      .map(({ id }) => id);
   const perPlayer = { ...state.zones.perPlayer };
+  let objects: Record<ObjectId, GameObject> | null = null;
   for (const player of state.turnOrder) {
     const zones = perPlayer[player];
-    if (zones === undefined || zones.library.length < 2) continue;
-    const top = tops[player] ?? null;
-    const made = memo?.libraries[player];
-    const known =
-      made !== undefined &&
-      made.top === top &&
-      made.real.length === zones.library.length &&
-      made.real.every((id, i) => id === zones.library[i]);
-    let order: readonly ObjectId[];
-    if (known) {
-      order = made.order;
-    } else {
-      const unseen = top === null ? zones.library : zones.library.filter((id) => id !== top);
-      const sorted = unseen
-        .map((id) => ({ id, key: hash(`${seed}:${id}`) }))
-        .sort((a, b) => a.key - b.key || (a.id < b.id ? -1 : 1))
-        .map(({ id }) => id);
-      order = top === null ? sorted : [top, ...sorted];
-      if (memo !== undefined) memo.libraries[player] = { real: [...zones.library], top, order };
+    if (zones === undefined) continue;
+    const library = zones.library;
+    const ends = knownEnds(library, memory?.placed[player], sight.tops[player] ?? null);
+    const held = library.map(
+      (id, at) => at < ends.top || at >= library.length - ends.bottom || named?.has(id) === true,
+    );
+    const loose = library.filter((_, at) => !held[at]);
+    const hides = hideHands && player !== me && !sight.hands.has(player) && !answering.includes(player);
+    const unknown = hides
+      ? zones.hand.filter(
+          (id) => named?.has(id) !== true && !publiclyKnown(state, id) && memory?.hands.has(id) !== true,
+        )
+      : [];
+    if (loose.length === 0 || loose.length + unknown.length < 2) continue;
+    // A library card everyone knows is in the library can't be in the hand.
+    const stays = unknown.length === 0 ? [] : loose.filter((id) => publiclyKnown(state, id));
+    const pool = byKey(stays.length === 0 ? [...unknown, ...loose] : [...unknown, ...loose.filter((id) => !stays.includes(id))]);
+    const dealt = pool.slice(0, unknown.length);
+    const under = stays.length === 0 ? pool.slice(unknown.length) : byKey([...pool.slice(unknown.length), ...stays]);
+    let next = 0;
+    const order = library.map((id, at) => (held[at] ? id : under[next++]));
+    if (unknown.length === 0) {
+      perPlayer[player] = { ...zones, library: order };
+      continue;
     }
-    perPlayer[player] = { ...zones, library: [...order] };
+    const was = new Set(unknown);
+    let slot = 0;
+    perPlayer[player] = { ...zones, hand: zones.hand.map((id) => (was.has(id) ? dealt[slot++] : id)), library: order };
+    const now = new Set(dealt);
+    for (const id of dealt) {
+      if (!was.has(id)) (objects ??= { ...state.objects })[id] = { ...state.objects[id], zone: "hand" };
+    }
+    for (const id of unknown) {
+      if (!now.has(id)) (objects ??= { ...state.objects })[id] = { ...state.objects[id], zone: "library" };
+    }
   }
-  return { ...state, rngState: hash(`${seed}:rng`), zones: { ...state.zones, perPlayer } };
+  return {
+    ...state,
+    rngState: hash(`${seed}:rng`),
+    zones: { ...state.zones, perPlayer },
+    ...(objects === null ? {} : { objects }),
+  };
 }
-
-/** What `withHiddenLibraryOrder` remembers for one seat between decisions. */
-export interface LibraryOrderMemo {
-  seed: string;
-  libraries: Record<PlayerId, { readonly real: readonly ObjectId[]; readonly top: ObjectId | null; readonly order: readonly ObjectId[] }>;
-}
-
-/** An empty `LibraryOrderMemo`. */
-export const libraryOrderMemo = (): LibraryOrderMemo => ({ seed: "", libraries: {} });

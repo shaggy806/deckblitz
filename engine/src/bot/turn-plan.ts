@@ -37,6 +37,7 @@ import { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
 import { ownLibraryTopSeen } from "../view.js";
+import { knownEnds } from "./seat-memory.js";
 import {
   CombatRolloutController,
   DefendingRolloutController,
@@ -123,12 +124,21 @@ export function boardKey(state: GameState, me: PlayerId): string {
  * could cast sat in plain sight (the gate's "pays a shock land's life to
  * cast the spell it sees on top of its library"; several of the bots' decks
  * carry such a permanent). The card under it stays unknown: the plan turns
- * it up, the seat hasn't yet.
+ * it up, the seat hasn't yet. So do the cards the seat knows lie on top
+ * because it put them there (`placed`, `SeatMemory.placed` for its own
+ * library: a scry kept, a Brainstorm's two, a tutor's find): the run it can
+ * name from the top (`knownEnds`) is its to plan with.
  */
-export function unknownCards(state: GameState, registry: CardRegistry, me: PlayerId): Set<ObjectId> {
-  const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
-  const seen = ownLibraryTopSeen(state, registry, me);
-  if (seen !== null) unknown.delete(seen);
+export function unknownCards(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  placed?: ReadonlySet<ObjectId>,
+): Set<ObjectId> {
+  const library = state.zones.perPlayer[me]?.library ?? [];
+  const unknown = new Set(library);
+  const known = knownEnds(library, placed, ownLibraryTopSeen(state, registry, me)).top;
+  for (let at = 0; at < known; at += 1) unknown.delete(library[at]);
   return unknown;
 }
 

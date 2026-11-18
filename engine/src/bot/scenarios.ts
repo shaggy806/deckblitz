@@ -6815,7 +6815,7 @@ const SCENARIOS: readonly BotScenario[] = [
       // order alone: Fanatic of Rhonas first with the library as the log has
       // it, Scourge of Valkas first with the same cards the other way up.
       // Fixed: every decision plays its rollouts over an order made up for
-      // it from the cards themselves (`withHiddenLibraryOrder`), so the real
+      // it from the cards themselves (`withHiddenCards`), so the real
       // order has no say; under `libraryOrder: "real"` this reads as before.
       const first = (game: Game): string => {
         const action = makeBot(A, registry, weights).act(viewOf(game, A));

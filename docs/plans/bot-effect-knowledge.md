@@ -1285,7 +1285,7 @@ that lives on answering its own spells.
 **The libraries' order is hidden from every decision (2026-11-17, the user's yes).** The second
 misplay of that game showed how much the order had been deciding: one board, three library
 orders, three different turns. Now `EvalBotController.act` answers on a view whose state has
-each library's unseen cards in an order made up for the turn (`withHiddenLibraryOrder`), keyed
+each library's unseen cards in an order made up for the turn (`withHiddenCards`), keyed
 by a hash of the turn, the seat and each card's id, so the real order cannot reach a decision
 at all; a top card the seat can see stays; the rollouts' random numbers are a hash too. One
 order a turn, not a decision: with one a decision the pass memo never recognised a board again
@@ -1294,6 +1294,21 @@ order a turn, not a decision: with one a decision the pass memo never recognised
 What this is not: sampling. One made-up order is one sample, and a decision can turn on it as
 it used to turn on the truth; the difference is that it can no longer be right for a reason the
 seat couldn't have.
+
+**The other players' hands are hidden too, and the seat remembers (2026-11-17, the user: hide
+the hands and teach the bots to remember; strength a mild concern beside playing as a player
+does).** The same deal now covers each other player's hand: the hand cards the seat doesn't
+know and the library cards it can't place are one pool, the hand dealt from it at its real
+size. What v2 lost by it is small: its rollouts are combat-only by default, so an opponent's
+hand reached a decision through a discard or a reveal it simulated, a next-turn look, or a
+playing rollout, and a probe of Duress at two opponents (one holding the only spell) passed
+without casting it under both readings. What it gained is the memory, which matters every
+game: before, a seat that scried forgot what it had left on top, since the made-up order
+covered everything but a top card in sight. `bot/seat-memory.ts` keeps, per seat, the hand
+cards it was shown and the library cards it can place, from what its decisions show it and
+how the libraries change between them; the engine's `publicStints` already says what everyone
+knows. It errs towards forgetting. The pieces are in `docs/architecture/engine.md` under
+`bot/`.
 
 Benched because every decision with a draw in it could move (`bot:ab`, one seat on the new
 build against three on the old, bench decks, count budgets): 27 wins in 111 games, 24.3% where
@@ -1364,7 +1379,12 @@ scenario that can decide it.
   games, `bot:diff`), where the old search cast Shiko. Bench level; worth a scenario from a live
   game before changing it. `payoffFirst` (2026-10-08) tries a spell-count payoff first, which
   may have settled it.
-- **The bot no longer knows how its library lies** (since `withHiddenLibraryOrder`,
+- **The bot plans on a hand it made up for each opponent** (since `withHiddenCards` took the
+  hands, 2026-11-17): the hand it imagines is a deal from that player's own unseen cards, new
+  each turn, so it may play round a card the player doesn't hold, or into one they do. What
+  it saw it keeps (a looked-at hand, a bounced card). If a bot seems to know a hand it was
+  never shown, or forgets one it was (a Peek, a Telepathy that left), capture it.
+- **The bot no longer knows how its library lies** (since `withHiddenCards`,
   2026-11-17): its rollouts used to draw the real next card, so it sometimes held a play for a
   card it "knew" was coming, or made one because of it. It now plans on an order made up for
   the turn, and will sometimes plan around a card that isn't on top. If a live game shows a

@@ -940,4 +940,11 @@ Revisit if bot play ever feels uncannily well-informed.
 turn changed with the hidden order of the bot's own library (`docs/bot-misplays.md`). The
 libraries' order and the game's random numbers no longer reach a v2 decision: each plays its
 rollouts on a state whose libraries lie in an order made up for the turn
-(`bot/determinize.ts`'s `withHiddenLibraryOrder`). The opponents' hands still do.
+(`bot/determinize.ts`'s `withHiddenCards`). **And the rest, the same day** (the user:
+"strength is a mild concern here compared to this significant of a departure from how real
+players operate"): the other players' hands are dealt afresh for the turn too, at their real
+size, from each player's cards the seat can't see, and the two simplifications this section's
+plan accepted are gone. A card everyone knows is in a hand stays there (the engine's
+`publicStints`), and each seat keeps a memory of what it alone was shown and where it put
+cards (`bot/seat-memory.ts`): a hand it looked at, a scry's cards, a tutor's find. Not done:
+inferring a hand from play, face-down cards, and averaging several deals.
