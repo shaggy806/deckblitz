@@ -1081,8 +1081,16 @@ export type EffectAmount =
   /** The damage dealt so far in the resolution under way — "you gain life
    * equal to the damage dealt this way" (Creeping Bloodsucker). Damage
    * prevented was never dealt, so it doesn't count. `to` counts only what was
-   * dealt to that target slot's player or object. */
-  | { readonly damageDealtThisWay: true; readonly to?: number }
+   * dealt to that target slot's player or object.
+   *
+   * `capped`: each damage event counts no more than its recipient could give
+   * — Drain Life's "but not more life than the player's life total before the
+   * damage was dealt, the planeswalker's loyalty before the damage was dealt,
+   * or the creature's toughness": a player's life just before (never below
+   * 0), a planeswalker's loyalty just before, a creature's toughness as it is
+   * now (or last was), however damaged (its ruling); a creature planeswalker
+   * the greater of the two. Anything else (a battle) caps nothing. */
+  | { readonly damageDealtThisWay: true; readonly to?: number; readonly capped?: true }
   /** The damage prevented so far by the shields this effect's resolution made
    * — read in the delayed ability it set up too, whose text is the same
    * sentence: Sacred Boon's "at the beginning of the next end step, put a
@@ -13290,8 +13298,8 @@ export interface EffectApi {
    * object only, when given. */
   excessDamageThisWay(to?: ObjectId): number;
   /** See the `damageDealtThisWay` {@link EffectAmount}: dealt to `to` only,
-   * when given. */
-  damageDealtThisWay(to?: TargetRef): number;
+   * when given; `capped`, each event no more than its recipient could give. */
+  damageDealtThisWay(to?: TargetRef, capped?: boolean): number;
   /** See the `damagePreventedThisWay` {@link EffectAmount}. */
   damagePreventedThisWay(): number;
   /** See the `keptOnTopThisWay` {@link EffectAmount}. */
@@ -18323,9 +18331,10 @@ export function signedAmountValue(
     return ref?.kind === "object" ? ctx.excessDamageThisWay(ref.object) : 0;
   }
   if ("damageDealtThisWay" in amount) {
-    if (amount.to === undefined) return ctx.damageDealtThisWay();
+    const capped = amount.capped === true;
+    if (amount.to === undefined) return ctx.damageDealtThisWay(undefined, capped);
     const ref = ctx.targets[amount.to];
-    return ref === undefined ? 0 : ctx.damageDealtThisWay(ref);
+    return ref === undefined ? 0 : ctx.damageDealtThisWay(ref, capped);
   }
   if ("damagePreventedThisWay" in amount) return ctx.damagePreventedThisWay();
   if ("keptOnTopThisWay" in amount) return ctx.keptOnTopThisWay();

@@ -1624,6 +1624,12 @@ export type GameEvent =
        * for a source that has left — rule 608.2h), when known: what a client
        * tallies a player's damage dealt by. */
       readonly by?: PlayerId;
+      /** What the recipient had just before it was dealt: a player's life
+       * total, a planeswalker's loyalty — Drain Life's "not more life than
+       * the player's life total before the damage was dealt, the
+       * planeswalker's loyalty before the damage was dealt" (the capped
+       * `damageDealtThisWay`). Absent for anything else. */
+      readonly before?: number;
     })
   | (Base & {
       readonly type: "life-changed";

@@ -1343,7 +1343,12 @@ to players only with `player: true`. "If a creature is dealt damage this way"
 discard" (Sonic Shrieker) is `{ to: 0, player: true }`; a "you may have it deal
 2 damage to you. When you do" (Elektra, Femme Fatale) is `{ player: true }`
 around the `reflexive-trigger` (rule 603.12). Never a bare second effect on the
-same slot: that runs even when the damage was prevented.
+same slot: that runs even when the damage was prevented. `capped: true` counts
+each hit no higher than its recipient had — Drain Life's "but not more life than
+the player's life total before the damage was dealt, the planeswalker's loyalty
+before the damage was dealt, or the creature's toughness" is `{
+damageDealtThisWay: true, to: 0, capped: true }` (the `damage-dealt` event's
+`before`; a creature's toughness however damaged; `damage-dealt-capped.test.ts`).
 
 **"This way."** `{ thisWay, who?, filter?, cardTypes? }` counts what the
 resolving spell or ability has done **so far** — `thisWay` is one of

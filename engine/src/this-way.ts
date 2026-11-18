@@ -115,12 +115,14 @@ export function excessDamageSince(state: GameState, since: number, to?: ObjectId
 /** The damage dealt in the resolution that began at event `since` — see the
  * `damageDealtThisWay` amount: to `to` only when given (an object or a
  * player), to players only with `playersOnly`. Damage prevented was never
- * dealt (rule 615.1), so it isn't here. */
+ * dealt (rule 615.1), so it isn't here. `cap`, given, is the most each event
+ * counts for (the capped amount — Drain Life). */
 export function damageDealtSince(
   state: GameState,
   since: number,
   to?: TargetRef,
   playersOnly?: boolean,
+  cap?: (event: Extract<GameEvent, { type: "damage-dealt" }>) => number,
 ): number {
   let dealt = 0;
   for (const event of eventsSince(state, since)) {
@@ -133,7 +135,7 @@ export function damageDealtSince(
           : event.target.kind === "object" && event.target.object === to.object;
       if (!same) continue;
     }
-    dealt += event.amount;
+    dealt += cap === undefined ? event.amount : Math.max(0, Math.min(event.amount, cap(event)));
   }
   return dealt;
 }

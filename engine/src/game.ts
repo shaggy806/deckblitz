@@ -41872,7 +41872,8 @@ export class Game {
       lifeLostThisWay: (players) => lifeLostSince(this.state, since, players),
       playerCountersRemovedThisWay: (players) => playerCountersRemovedSince(this.state, since, players),
       excessDamageThisWay: (to) => excessDamageSince(this.state, since, to),
-      damageDealtThisWay: (to) => damageDealtSince(this.state, since, to),
+      damageDealtThisWay: (to, capped) =>
+        damageDealtSince(this.state, since, to, undefined, capped === true ? (event) => this.damageRecipientCap(event) : undefined),
       damagePreventedThisWay: () => damagePreventedBy(this.state, refs?.madeIn ?? since),
       keptOnTopThisWay: () => keptOnTopSince(this.state, since),
       exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
@@ -51047,6 +51048,30 @@ controlledBy,
    * crew, saddle or station): read its toughness, multiply, add. Nothing
    * once it has lost its abilities (layer 6); off the battlefield, its
    * card's (as it last existed). */
+  /**
+   * The most one damage event counts for in a capped `damageDealtThisWay`
+   * (Drain Life's "not more life than the player's life total before the
+   * damage was dealt, the planeswalker's loyalty before the damage was dealt,
+   * or the creature's toughness"): a player's life just before, never below
+   * 0; a planeswalker's loyalty just before; a creature's toughness as it is
+   * now, or as it last existed once it has left, however damaged (the
+   * ruling) — the greater for a creature planeswalker. Anything else (a
+   * battle) caps nothing.
+   */
+  private damageRecipientCap(event: Extract<GameEvent, { type: "damage-dealt" }>): number {
+    if (event.target.kind === "player") return event.before === undefined ? event.amount : Math.max(0, event.before);
+    const caps: number[] = [];
+    if (event.before !== undefined) caps.push(event.before);
+    const object = this.state.objects[event.target.object];
+    if (object?.zone === "battlefield") {
+      const chars = computeCharacteristics(this.state, this.registry, event.target.object);
+      if (chars.types.includes("creature")) caps.push(chars.toughness);
+    } else if (object?.lastKnown !== undefined && object.lastKnown.types.includes("creature")) {
+      caps.push(object.lastKnown.toughness);
+    }
+    return caps.length === 0 ? event.amount : Math.max(...caps);
+  }
+
   /**
    * Whether the creature tapped for a station ability stations using its
    * toughness rather than its power under another permanent's
@@ -66258,7 +66283,16 @@ controlledBy,
         return 0;
       }
       if (sourceLastKnown === undefined) this.recordDealtDamage(source, target, combat);
-      this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many });
+      this.emit({
+        type: "damage-dealt",
+        source,
+        target,
+        amount,
+        combat,
+        ...by,
+        ...many,
+        before: this.state.players[target.player].life,
+      });
       this.tallyDamage(source, target, amount);
       // The damage is dealt in full — lifelink, commander damage and "is
       // dealt damage" all see it — whatever it does to the life total.
@@ -66344,7 +66378,7 @@ controlledBy,
       const had = object.counters.loyalty ?? 0;
       const removing = this.loyaltyRemovedByDamage(target.object, had, amount);
       object.counters.loyalty = had - removing;
-      this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
+      this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField, before: had });
       this.emit({
         type: "loyalty-changed",
         object: target.object,
@@ -66355,8 +66389,11 @@ controlledBy,
       this.applyLifelink(source, amount, sourceLastKnown);
       return amount;
     }
+    // A creature planeswalker's loyalty before, for the event below.
+    let loyaltyBefore: { before: number } | Record<string, never> = {};
     if (recipientTypes.includes("planeswalker")) {
       const had = object.counters.loyalty ?? 0;
+      loyaltyBefore = { before: had };
       const removing = this.loyaltyRemovedByDamage(target.object, had, amount);
       object.counters.loyalty = had - removing;
       this.emit({
@@ -66378,7 +66415,7 @@ controlledBy,
     if (this.sourceHasKeyword(source, "deathtouch", sourceLastKnown)) {
       object.markedByDeathtouch = true;
     }
-    this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField });
+    this.emit({ type: "damage-dealt", source, target, amount, combat, ...by, ...many, ...excessField, ...loyaltyBefore });
     if (asCounters) {
       const by = sourceLastKnown?.controller ?? this.state.objects[source]?.controller;
       this.addCounter(target, "-1/-1", amount, false, by);
