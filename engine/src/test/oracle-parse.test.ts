@@ -24023,3 +24023,21 @@ describe("another player's face-down pick its source's controller looks at (Kher
     expect(kheru.static[0].mayPlay).toEqual({ from: "exile", play: true, filter: {}, linked: true });
   });
 });
+
+describe("lands freely and one spell a turn from a linked exile (Hedonist's Trove)", () => {
+  it("reads two permissions, the spells' once a turn", () => {
+    const trove = parseFace({
+      name: "Hedonist's Trove",
+      type_line: "Enchantment",
+      oracle_text:
+        "When this enchantment enters, exile target opponent's graveyard.\nYou may play lands from among cards exiled with this enchantment.\nYou may cast spells from among cards exiled with this enchantment. You can't cast more than one spell this way each turn.",
+      mana_cost: "{5}{B}{B}",
+      colors: ["B"],
+    }) as unknown as { complete: boolean; static: { mayPlay?: unknown }[] };
+    expect(trove.complete).toBe(true);
+    expect(trove.static.map((s) => s.mayPlay)).toEqual([
+      { from: "exile", play: true, filter: { type: "land" }, linked: true },
+      { from: "exile", filter: {}, linked: true, oncePerTurn: true },
+    ]);
+  });
+});

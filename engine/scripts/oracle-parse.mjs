@@ -24182,6 +24182,20 @@ function parseStatic(line, text) {
   ) {
     return { affects: { scope: "self" }, mayPlay: { from: "exile", play: true, filter: {}, linked: true }, text };
   }
+  // "You may play lands from among cards exiled with ~." and "You may cast
+  // spells from among cards exiled with ~. You can't cast more than one spell
+  // this way each turn." (Hedonist's Trove): two permissions over the linked
+  // exile, the second spent once a turn (`oncePerTurn`, its own).
+  if (/^You may play lands from among cards exiled with (?:~|this (?:enchantment|artifact|creature))\.$/.test(line)) {
+    return { affects: { scope: "self" }, mayPlay: { from: "exile", play: true, filter: { type: "land" }, linked: true }, text };
+  }
+  if (
+    /^You may cast spells from among cards exiled with (?:~|this (?:enchantment|artifact|creature))\. You can't cast more than one spell this way each turn\.$/.test(
+      line,
+    )
+  ) {
+    return { affects: { scope: "self" }, mayPlay: { from: "exile", filter: {}, linked: true, oncePerTurn: true }, text };
+  }
   // …and each player plays only the cards they exiled with it.
   if (
     /^Each player may look at cards they exiled with (?:~|this (?:enchantment|artifact|creature)), and they may play lands and cast spells from among those cards\.$/.test(

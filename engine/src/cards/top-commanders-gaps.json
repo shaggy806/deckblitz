@@ -3041,7 +3041,9 @@
   "effect:exile-target-card-play-until-next-turn",
   "filter:has-awaken",
   "effect:prohibit-abilities-permanent",
-  "effect:face-down-linked-exile-source-controller-looks"
+  "effect:face-down-linked-exile-source-controller-looks",
+  "effect:face-down-linked-exile-source-controller-looks",
+  "static:play-from-linked-exile-once-per-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
