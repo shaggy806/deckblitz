@@ -4596,7 +4596,12 @@ stopped covering:
   `attacking: "trigger-player"` is "target creature **that's attacking that
   player**" (Echoing Assault, on an `attacks-player` trigger): attacking that
   player itself — a creature attacking a planeswalker they control isn't
-  (rules 506.3, 509.1a). `whose: { seat: n }` binds the slot to one player —
+  (rules 506.3, 509.1a). `protectedBy: "trigger-player"` is "battle **that
+  player protects**" (rule 310.8), whoever controls it: Rampaging Raptor's
+  "target planeswalker that player controls or battle that player protects"
+  is a `one-of` of `{ kind: "permanent", whose: "trigger-player", filter: {
+  type: "planeswalker" } }` and `{ kind: "permanent", protectedBy:
+  "trigger-player", filter: { type: "battle" } }`. `whose: { seat: n }` binds the slot to one player —
   the one `n` places after you in turn order (0 is you; `playerAtSeat`):
   "**for each opponent**, destroy up to one target artifact or enchantment
   **that player** controls" (Dismantling Wave) is three `optional` slots,

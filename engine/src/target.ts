@@ -149,6 +149,12 @@ export type TargetSpec =
        * a planeswalker they control, which is a different thing to attack
        * (rules 506.3, 509.1a). Needs `TargetSource.triggerPlayer`. */
       readonly attacking?: "trigger-player";
+      /** "…battle **that player protects**" (Rampaging Raptor's "target
+       * planeswalker that player controls or battle that player protects",
+       * a `one-of` beside a `whose: "trigger-player"` planeswalker): its
+       * protector (rule 310.8) is the player the trigger names, whoever
+       * controls it. Needs `TargetSource.triggerPlayer`. */
+      readonly protectedBy?: "trigger-player";
       /** "…**or opponent**" / "…**or player**": a player is a legal target
        * of this slot too — Price of Betrayal's "target artifact, creature,
        * planeswalker, or opponent", Etched Slith's "another target permanent

@@ -725,6 +725,12 @@ function isLegalTargetUncached(
     ) {
       return false;
     }
+    if (
+      spec.protectedBy === "trigger-player" &&
+      (source?.triggerPlayer === undefined || object.protector !== source.triggerPlayer)
+    ) {
+      return false;
+    }
     return matchesFilter(state, registry, ref.object, spec.filter, targetFilterContext(forPlayer, source));
   }
   // A filtered spell on the stack.
