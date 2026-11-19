@@ -317,7 +317,55 @@ export interface RoomGuide {
   readonly refuses: (room: Room, player: PlayerId, request: Action | "pass-turn" | "auto-pass") => string | null;
 }
 
+/**
+ * One thing done to a room's game. Every write a room makes to its game is
+ * one of these (`Room.act`), which is what lets a game be kept on several
+ * devices at once (`docs/plans/replicated-rooms.md`): each input is made by
+ * exactly one copy of the room, and every copy applies them in one order.
+ *
+ * - `action`: an engine `Action`, a person's or a bot's, or one the room
+ *   makes for a seat (an auto-pass, a zone choice with one answer).
+ * - `concede`: `player` concedes (rule 104.3a), any decision they owed
+ *   answered first (`answers`, in order). One input and not several: sent as
+ *   the answers and then the concession, the first answer handed the move to
+ *   whoever is next, and their copy moved before the concession reached it
+ *   (the copies fuzz, 2026-11-19).
+ * - `orders-own-triggers`: `player`'s setting for ordering their own
+ *   simultaneous triggers, which the engine reads (`PassSettings`).
+ */
+export type RoomInput =
+  | { readonly kind: "action"; readonly action: Action }
+  | { readonly kind: "concede"; readonly player: PlayerId; readonly answers: readonly Action[] }
+  | { readonly kind: "orders-own-triggers"; readonly player: PlayerId; readonly on: boolean };
+
+/**
+ * What makes a room one copy of a game that other devices hold too
+ * (`RoomOptions.copy`). A copy plays only the seats it answers for — its own
+ * person's, and the bots' on the one copy that runs them — and waits for
+ * everyone else's inputs to arrive (`Room.receive`); whatever it does to the
+ * game itself it also sends out.
+ *
+ * A room without one answers for every seat and sends nothing: the server's
+ * rooms and a solo game's, exactly as before.
+ */
+export interface RoomCopy {
+  /**
+   * Whether this copy makes `player`'s moves: the person's whose device this
+   * is, a bot's if this is the copy running the bots. Asked afresh each
+   * time, so who runs the bots can change; tell the room when it does
+   * (`Room.answersChanged`). For a player whose decisions another makes
+   * (rule 723) the room asks about the one deciding.
+   */
+  readonly answersFor: (player: PlayerId) => boolean;
+  /** An input this copy just made and applied to its own game, for every
+   * other copy. Called in the order they were made. May not call back into
+   * the room: deliveries wait until the room has returned. */
+  readonly sent: (input: RoomInput) => void;
+}
+
 export interface RoomOptions {
+  /** See `RoomCopy`: this room is one device's copy of a game. */
+  readonly copy?: RoomCopy;
   /** Where this room's published frames go. The transport layer turns each
    * into a `state` push per connected seat (see `room-service.ts`), and binds
    * it itself for any room it's handed — passing it here matters for a room
@@ -479,7 +527,14 @@ interface FrameGate {
 
 export class Room {
   readonly id: string;
-  readonly game: Game;
+  /** The game, replaced only by `replaceGame`. */
+  private current: Game;
+  /** See `RoomOptions.copy`; `null` for a room that is the only one. */
+  private readonly copy: RoomCopy | null;
+  /** How many times `replaceGame` has put another state in place of the
+   * game: a frame's reader that kept the old game's events (`room-service.ts`)
+   * tells by it that they are no longer the log. */
+  private replaced = 0;
   private readonly seats: Seat[];
   private readonly bots = new Map<PlayerId, PlayerController>();
   /** `affects`'s answers, by event index, object and player. */
@@ -549,7 +604,8 @@ export class Room {
 
   constructor(id: string, game: Game, options: RoomOptions = {}) {
     this.id = id;
-    this.game = game;
+    this.current = game;
+    this.copy = options.copy ?? null;
     this.frozen = options.frozen === true;
     this.seq = options.startSeq ?? 0;
     this.recipe = options.recipe ?? null;
@@ -595,6 +651,131 @@ export class Room {
   /** The frame number of the most recent push — `ServerMessage.state.seq`. */
   get frameSeq(): number {
     return this.seq;
+  }
+
+  /** The room's game. One `Game` for the room's life, unless `replaceGame`
+   * has put another in its place: read it afresh, don't keep it. */
+  get game(): Game {
+    return this.current;
+  }
+
+  /** See `replaced`. */
+  get replacements(): number {
+    return this.replaced;
+  }
+
+  /** Whether this room makes `player`'s moves: always, unless it is a copy
+   * (`RoomCopy.answersFor`). */
+  private answers(player: PlayerId): boolean {
+    return this.copy === null || this.copy.answersFor(player);
+  }
+
+  /** One input into the game: the only places a room writes to it. */
+  private applyInput(input: RoomInput): void {
+    switch (input.kind) {
+      case "action":
+        this.game.dispatch(input.action);
+        return;
+      case "concede":
+        for (const answer of input.answers) this.game.dispatch(answer);
+        this.game.concede(input.player);
+        this.bots.delete(input.player);
+        return;
+      case "orders-own-triggers":
+        this.game.setOrdersOwnTriggers(input.player, input.on);
+        return;
+    }
+  }
+
+  /**
+   * Does one thing to the game on this room's own account — a person's
+   * action, a bot's move, a pass the room makes for a seat — and, in a copy,
+   * sends it to the other copies. Throws what the engine throws, having sent
+   * nothing: an input the engine refused never leaves.
+   */
+  private act(input: RoomInput): void {
+    this.applyInput(input);
+    if (this.copy === null) return;
+    // Every copy takes the game on to its next decision as soon as an input
+    // is in (`receive` does the same), whatever its own pacing is doing. Left
+    // to the settle loop, a copy with a bot's move parked behind a frame sat
+    // on its own concession unadvanced while the others moved on, and the
+    // next input found a different game there (the copies fuzz, paced).
+    this.game.advanceUntil(isSettled);
+    this.copy.sent(input);
+  }
+
+  /**
+   * An input another copy made (`RoomCopy`), in its place in the one order
+   * every copy applies them in. Applied, the game taken on to its next
+   * decision as every copy takes it, and then this copy's own turn to look:
+   * the next move may be one it answers for.
+   */
+  receive(input: RoomInput): void {
+    if (this.copy === null) throw new Error("only a copy of a room takes inputs from elsewhere");
+    if (this.frozen || this.stopped !== null) return;
+    try {
+      this.applyInput(input);
+      this.game.advanceUntil(isSettled);
+    } catch (error) {
+      this.stop(error);
+      return;
+    }
+    this.lastActivityAt = Date.now();
+    this.settle();
+  }
+
+  /** What `RoomCopy.answersFor` says has changed (this copy runs the bots
+   * now, or no longer does): a move it now answers for may be waiting. */
+  answersChanged(): void {
+    this.settle();
+  }
+
+  /**
+   * Puts `state` in place of this room's game and carries on from it. What a
+   * copy does with a state it is sent — the host's, when it joins late or is
+   * found to have drifted (`docs/plans/replicated-rooms.md`) — and how an
+   * input of its own that lost its place in the order is undone.
+   *
+   * The seats, their connections and their settings stay. What was in flight
+   * for the old game goes: a bot's move parked behind a frame (it was decided
+   * on a board that may be gone), a resolve-all (it reads the log from a
+   * place the new one may not have); an armed auto-pass stays armed and reads
+   * on from no later than where the new log ends. A room an engine error had
+   * stopped starts again: the state it is given is another copy's good one.
+   * The frame this publishes says so through `replacements`, since whoever
+   * kept the old game's events can't add these to them.
+   */
+  replaceGame(state: GameState): void {
+    if (this.frozen) throw new Error("a board being built has no game to replace");
+    this.cancelResume();
+    this.dropGate();
+    this.current = Game.fromSnapshot(state, { registry: cardRegistry() });
+    this.replaced += 1;
+    this.stopped = null;
+    this.affectsSeen.clear();
+    const events = this.current.events.length;
+    for (const seat of this.seats) {
+      seat.resolveAllFrom = null;
+      seat.resolveAllAsked = null;
+      if (seat.autoPassFrom !== null) seat.autoPassFrom = Math.min(seat.autoPassFrom, events);
+      if (seat.autoPassPausedAt !== null) seat.autoPassPausedAt = Math.min(seat.autoPassPausedAt, events);
+    }
+    // The new board is what the next frame shows: nothing on it is "unshown"
+    // against the old one's.
+    this.markShown();
+    this.lastActivityAt = Date.now();
+    this.settle();
+  }
+
+  /** Lets go of a move parked behind a frame, its timers with it. */
+  private dropGate(): void {
+    const gate = this.gate;
+    this.gate = null;
+    if (gate === null) return;
+    for (const handle of [gate.minHandle, gate.timeoutHandle, gate.lingerHandle]) {
+      if (handle !== null) this.timers.clearTimeout(handle);
+    }
   }
 
   /** Settles a freshly-promoted room to the first thing anyone has to answer
@@ -838,14 +1019,23 @@ export class Room {
   concede(connection: Connection): void {
     const seat = this.seatOf(connection);
     if (seat === null) throw new Error("claim a seat before conceding");
+    // Worked out on a copy of the game first, so that it is one input: the
+    // answers to whatever the player owes, then the concession. If any of it
+    // is refused (the opening hands, a player already out, a decision still
+    // owed past the limit), nothing has happened to the game itself.
+    const trial = Game.fromSnapshot(this.game.snapshot(), { registry: cardRegistry() });
     const stand = this.makeBot(seat);
+    const answers: Action[] = [];
     for (let i = 0; i < CONCEDE_DECISION_LIMIT; i += 1) {
-      const awaiting = this.game.state.awaiting;
+      const awaiting = trial.state.awaiting;
       if (awaiting === null || awaiting.kind === "mulligan" || awaiting.player !== seat) break;
-      this.game.dispatch(stand.act(this.game.controllerView(seat)));
+      const answer = stand.act(trial.controllerView(seat));
+      trial.dispatch(answer);
+      answers.push(answer);
     }
-    this.game.concede(seat);
-    this.bots.delete(seat);
+    trial.concede(seat);
+    // The seat's bot, if it had handed itself to one, goes with it (`applyInput`).
+    this.act({ kind: "concede", player: seat, answers });
     this.lastActivityAt = Date.now();
     this.settle();
   }
@@ -879,6 +1069,7 @@ export class Room {
     if (this.stopped !== null) throw new Error("this game has stopped after an engine error");
     const seat = this.seatOf(connection);
     if (seat === null) throw new Error("claim a seat before acting");
+    if (!this.answers(seat)) throw new Error(`this copy of the room doesn't play ${seat}'s seat`);
     if (this.bots.has(seat)) throw new Error("a bot is playing this seat — take it back first");
     // The seat that makes this player's decisions now: their own, or whoever
     // controls them or chooses for them (rule 723.5). A controlled seat's own
@@ -890,7 +1081,7 @@ export class Room {
     }
     this.refuseIfGuided(seat, action);
     const resolveAllFrom = this.resolveAllResumedBy(seat, action);
-    this.game.dispatch(action);
+    this.act({ kind: "action", action });
     if (resolveAllFrom !== null && this.game.state.zones.shared.stack.length > 0) {
       this.seatFor(seat).resolveAllFrom = resolveAllFrom;
     }
@@ -1018,8 +1209,11 @@ export class Room {
       stops: { mine: steps(settings?.stops?.mine), theirs: steps(settings?.stops?.theirs) },
     };
     // The engine asks; a bot standing in for the seat answers with the
-    // engine's own order.
-    this.game.setOrdersOwnTriggers(player, orderTriggers);
+    // engine's own order. The one setting here the game itself reads, so the
+    // one that is an input: sent only when it changes anything.
+    if ((this.game.state.ordersOwnTriggers ?? []).includes(player) !== orderTriggers) {
+      this.act({ kind: "orders-own-triggers", player, on: orderTriggers });
+    }
     this.settle();
   }
 
@@ -1199,10 +1393,10 @@ export class Room {
   private nextBotDecider(awaiting: AwaitingDecision): PlayerId | null {
     if (awaiting.kind === "mulligan") {
       const stillDeciding = Object.keys(awaiting.hands) as PlayerId[];
-      return stillDeciding.find((p) => this.bots.has(p)) ?? null;
+      return stillDeciding.find((p) => this.bots.has(p) && this.answers(p)) ?? null;
     }
     const answering = answeringPlayer(this.game.state, awaiting.player);
-    return this.bots.has(answering) ? answering : null;
+    return this.bots.has(answering) && this.answers(answering) ? answering : null;
   }
 
   /** The bot seat that owes the game its next action right now, if any —
@@ -1216,7 +1410,8 @@ export class Room {
     const holder = s.priority.holder;
     if (holder === null) return null;
     const answering = answeringPlayer(s, holder);
-    return this.bots.has(answering) ? answering : null;
+    // In a copy, a bot's seat is played by the one copy that answers for it.
+    return this.bots.has(answering) && this.answers(answering) ? answering : null;
   }
 
   /** What `seat` may do right now: the decision put to whichever player it's
@@ -1317,7 +1512,7 @@ export class Room {
     const eventsBefore = this.game.events.length;
     const seqBefore = this.game.state.eventSeq;
     try {
-      this.game.dispatch(move);
+      this.act({ kind: "action", action: move });
     } catch (error) {
       if (this.game.events.length !== eventsBefore || this.game.state.eventSeq !== seqBefore) throw error;
       const { turn } = this.game.state;
@@ -1328,7 +1523,7 @@ export class Room {
       const fallback = this.fallbackMove(seat);
       // The same move again would only be refused again.
       if (JSON.stringify(fallback) === JSON.stringify(move)) throw error;
-      this.game.dispatch(fallback);
+      this.act({ kind: "action", action: fallback });
     }
     this.lastActivityAt = Date.now();
   }
@@ -1400,13 +1595,17 @@ export class Room {
    * something — i.e. whether the caller should look again.
    */
   private autoAdvanceHumanSeat(s: GameState): boolean {
+    // A copy makes nothing for a seat that isn't its own: whatever this
+    // window or decision gets, the copy that answers for it sends.
+    const asked = s.awaiting !== null ? s.awaiting.player : s.priority.holder;
+    if (asked !== null && !this.answers(answeringPlayer(s, asked))) return false;
     if (s.awaiting !== null) {
       // A zone choice with only one answer — every card shown taken (Dark
       // Confidant's revealed card into the hand) — is answered for the seat
       // rather than opening a picker with nothing to pick (`forcedZoneChoice`).
       const forced = forcedZoneChoice(s);
       if (forced !== null) {
-        this.game.dispatch({ type: "choose-from-zone", ...forced });
+        this.act({ kind: "action", action: { type: "choose-from-zone", ...forced } });
         return true;
       }
       // Whoever answers for them passes by their own settings (rule 723.5).
@@ -1427,7 +1626,7 @@ export class Room {
           ? autoAnswerFor(s.awaiting, s.awaiting.player, this.game.legalActions(s.awaiting.player))
           : null;
       if (skip !== null) {
-        this.game.dispatch(skip);
+        this.act({ kind: "action", action: skip });
         return true;
       }
       // A decision owed by the resolving seat is exactly what "stops on
@@ -1530,7 +1729,7 @@ export class Room {
       // going to pass itself anyway.
       (wasActive && !justCleared && !interrupted && !held)
     ) {
-      this.game.dispatch({ type: "pass-priority", player: holder });
+      this.act({ kind: "action", action: { type: "pass-priority", player: holder } });
       return true;
     }
     return false; // a real choice for whoever holds it
@@ -1580,13 +1779,7 @@ export class Room {
     console.error(`room ${this.id}: the game stopped on an engine error`, error);
     this.stopped = message;
     this.cancelResume();
-    const gate = this.gate;
-    this.gate = null;
-    if (gate !== null) {
-      for (const handle of [gate.minHandle, gate.timeoutHandle, gate.lingerHandle]) {
-        if (handle !== null) this.timers.clearTimeout(handle);
-      }
-    }
+    this.dropGate();
     try {
       this.publish();
     } catch (again) {
@@ -1813,6 +2006,13 @@ export class Room {
   publish(): void {
     this.onPublish?.(this);
     this.seq += 1;
+    this.markShown();
+    this.onUpdate(this);
+  }
+
+  /** The board as it stands is what the clients have been (or are being)
+   * shown: what the "unshown" checks measure the next one against. */
+  private markShown(): void {
     this.eventsAtPublish = this.game.events.length;
     this.stackAtPublish = [...this.game.state.zones.shared.stack];
     this.copyKeysAtPublish = new Map(
@@ -1822,7 +2022,6 @@ export class Room {
       }),
     );
     this.combatAtPublish = this.combatPairs();
-    this.onUpdate(this);
   }
 
   /**

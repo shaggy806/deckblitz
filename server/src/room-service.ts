@@ -117,7 +117,10 @@ export class RoomService {
    * record from another `Room` counts for nothing. A new connection (a reload,
    * a reconnect) has no record at all.
    */
-  private readonly sentEvents = new WeakMap<Connection, Map<string, { readonly room: Room; readonly count: number }>>();
+  private readonly sentEvents = new WeakMap<
+    Connection,
+    Map<string, { readonly room: Room; readonly count: number; readonly replaced: number }>
+  >();
 
   /**
    * The connections watching each room without a seat (`spectate-room`), by
@@ -311,9 +314,17 @@ export class RoomService {
     let sent = this.sentEvents.get(connection);
     if (sent === undefined) this.sentEvents.set(connection, (sent = new Map()));
     const last = sent.get(room.id);
+    // A game put in place of the room's (`Room.replaceGame`) has a log of its
+    // own, even where it is as long: the whole of it goes.
     const from =
-      this.eventDeltas.has(connection) && last !== undefined && last.room === room && last.count <= total ? last.count : 0;
-    sent.set(room.id, { room, count: total });
+      this.eventDeltas.has(connection) &&
+      last !== undefined &&
+      last.room === room &&
+      last.replaced === room.replacements &&
+      last.count <= total
+        ? last.count
+        : 0;
+    sent.set(room.id, { room, count: total, replaced: room.replacements });
     return from === 0 ? { view, eventsFrom: 0 } : { view: { ...view, events: view.events.slice(from) }, eventsFrom: from };
   }
 

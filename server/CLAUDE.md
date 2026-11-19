@@ -18,6 +18,16 @@ that file.
   as backstops). Tests and scripts use `RoomOptions.pacing: "immediate"` and fake timers.
 - **A seat answers for whoever `answeringPlayer` says** (rule 723): `dispatch`, `actionsFor`, the bots
   and auto-pass all go through it, never `action.player === seat`.
+- **A room writes to its game only through `Room.act`**, one `RoomInput` at a time (an engine
+  action, a concession with its answers, the orders-own-triggers setting): never call
+  `game.dispatch`, `game.concede` or a setter on the game anywhere else in `room.ts`. It is what
+  lets a room be one **copy** of a game other devices hold too (`RoomOptions.copy`,
+  `docs/plans/replicated-rooms.md`): a copy plays only the seats it answers for, sends what it
+  does and takes everyone else's inputs through `receive`. Anything new a room does to the game
+  for a seat (an automatic answer, a setting the engine reads) must be an input made by the copy
+  that answers for that seat, and one input, not a run of them that hands the move away
+  halfway. `npm run copies:fuzz -w server` plays games on several copies at once and fails where
+  they stop holding the same game.
 - **`broadcast` is never called from a message handler.** A room publishes its own frames
   (`room.publish()` → `onUpdate`).
 - **The host** (`host.ts`) is whoever created the room. Only they may add or remove seats and
@@ -56,7 +66,9 @@ that file.
 ## Where things are
 
 `room.ts`, `pending-room.ts`, `room-manager.ts`, `room-service.ts` (the message handlers and
-`broadcast`, per connection by `ConnId`), `transport.ts` (sockets, rate limit, compression),
+`broadcast`, per connection by `ConnId`), `room-copies.ts` (several copies of one room in one
+process, wired through an in-memory order: the check that copies agree, for the tests and
+`scripts/copies-fuzz.mjs`, nothing a server runs), `transport.ts` (sockets, rate limit, compression),
 `room-host.ts` / `in-process-host.ts` / `ws-server.ts` (the seam between them), `worker-host.ts` /
 `shard.ts` / `shard-worker.ts` / `shard-protocol.ts` (rooms on worker threads; tests drive them
 in-thread through `loopback-channel.ts`), `room-code.ts`, `host.ts`, `decks.ts` (fallback

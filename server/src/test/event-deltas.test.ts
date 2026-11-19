@@ -10,6 +10,7 @@
 import type { AddressInfo } from "node:net";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { WebSocket, WebSocketServer } from "ws";
+import { stateFromJson, stateToJson } from "engine";
 import type { GameEvent } from "engine";
 import type { ClientMessage, ServerMessage } from "protocol";
 import { RoomManager } from "../room-manager.js";
@@ -192,6 +193,30 @@ describe("frames carry only the events a connection hasn't had", () => {
       expect(forBob.view.events).toEqual(wire(log));
     });
     expect(aliceLog.deltas).toBeGreaterThanOrEqual(6);
+    expect(aliceLog.events).toEqual(wire(room(roomId).game.state.eventLog));
+  });
+
+  it("sends the whole log again when another game is put in place of the room's, then slices of that one", async () => {
+    const { alice, bob, roomId, aliceLog } = await startRoom();
+    await passes(roomId, { [ALICE]: alice, [BOB]: bob }, 3, ([forAlice]) => aliceLog.take(forAlice));
+    expect(aliceLog.deltas).toBeGreaterThanOrEqual(3);
+
+    // A state as another copy would send it (`Room.replaceGame`): the same
+    // game here, so the log is exactly as long as what Alice has had, and a
+    // count alone would send her nothing.
+    const theRoom = room(roomId);
+    theRoom.replaceGame(stateFromJson(stateToJson(theRoom.game.snapshot())));
+    const [replaced] = await Promise.all([nextState(alice), nextState(bob)]);
+    expect(theRoom.replacements).toBe(1);
+    expect(replaced.eventsFrom).toBe(0);
+    expect(replaced.view.events).toEqual(wire(room(roomId).game.state.eventLog));
+    aliceLog.take(replaced);
+
+    // From there on, slices of the new game's log.
+    await passes(roomId, { [ALICE]: alice, [BOB]: bob }, 2, ([forAlice]) => {
+      expect(forAlice.eventsFrom).toBeGreaterThan(0);
+      aliceLog.take(forAlice);
+    });
     expect(aliceLog.events).toEqual(wire(room(roomId).game.state.eventLog));
   });
 
