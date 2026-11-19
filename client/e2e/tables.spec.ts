@@ -339,9 +339,20 @@ test("a move made as someone concedes is taken back on the mover's page, which s
   // Until the move is the guest's to make: the host passes, the bot plays.
   const guestPass = guest.page.getByRole('button', { name: 'Pass (space)' })
   const deadline = Date.now() + 120_000
-  while (!(await guestPass.isEnabled().catch(() => false))) {
+  // Asked, and still asked a moment later: the button is lit for an instant
+  // on a window the room then passes for them, as its frames play.
+  const asked = async (): Promise<boolean> => {
+    if (!(await guestPass.isEnabled().catch(() => false))) return false
+    await guest.page.waitForTimeout(800)
+    return guestPass.isEnabled().catch(() => false)
+  }
+  while (!(await asked())) {
     if (Date.now() > deadline) throw new Error('the guest was never asked')
     await getOn(host.page)
+    // A guest dealt nothing to play is passed for all the way to their own
+    // cleanup, where the one thing asked of them is a discard: made here, or
+    // the game waits on it for good.
+    if (await guest.page.getByText(/Discard to hand size/).isVisible().catch(() => false)) await getOn(guest.page)
     await host.page.waitForTimeout(250)
   }
   // The host's menu is opened first, so the concession is two quick clicks.
