@@ -7,8 +7,11 @@ names ordered the same on every machine (`compareNames`) — and of step 1, the 
 done**: recorded games came out identical in Node, in three builds of Chrome's engine, in
 Firefox's and in Safari's, and in Chrome on the test laptop. **Step 2 is done** (2026-11-19): a
 `Room` can be one copy of a game (`RoomOptions.copy`), and 480 fuzzed games played on several
-copies at once came out the same on every one. Step 3, the table on the server, is next. No
-network, server table or page uses a copy yet.
+copies at once came out the same on every one. **Step 3 is done** (2026-11-19): the server keeps
+a table (the recipe, the order of inputs, the host) with no engine, a lobby whose every
+connection can hold a copy starts as one, and scripted devices running real copies play through
+it over sockets on both hosts. Step 4, the client, is next: no page asks for a table yet, so
+every game on the site still starts on the server.
 
 ## Why
 
@@ -269,13 +272,41 @@ What the fuzz taught, each now a rule of the cut:
 
 ### Server
 
-- **Tables**: the recipe, the log, the order, the host, reconnects from a place in the log, a
-  rematch as a new recipe under the same code. On the main thread, with no engine.
-- **A lobby starts as a table** when every seated client can run one: the waiting room stays the
-  `PendingRoom` it is (deck checks need the pool), and at the start it hands its seats and decks
-  to a table in place of promoting itself.
-- **Admission**: a table weighs next to nothing, so the cap becomes a cap on waiting rooms and on
-  games that fell back to the server.
+**Built (step 3, 2026-11-19)**; `docs/architecture/server.md` has the detail.
+
+- **Tables** (`server/src/tables.ts`): the recipe, the log, the order, the host, a device back in
+  its seat by its token with the log from a place it names, a rematch as a new recipe under the
+  same code. On the main thread, with no engine, the same for both hosts.
+- **The order is compare-and-set.** A device sends an input with how much of the log it had seen
+  (`after`); it takes the next place only if the log still ends there, and goes to everyone, the
+  sender included, with its place. Otherwise the sender is told (`table-refused`) and nothing
+  else happens. The server checks nothing against the game: there is none there.
+- **A lobby starts as a table** when every connection in it (the people, anyone watching) has
+  said its page can hold a copy (`table-capable`, with the page's build) and they name one build:
+  the waiting room stays the `PendingRoom` it is (deck checks need the pool), and at the start it
+  hands its finished game config, seats and connections to a table in place of promoting itself.
+  One device that can't, or a second build, and the game starts as a server room as ever.
+- **The host** is the creator's seat while their device is connected, else the first person
+  connected in seating order; a host that drops keeps the bots for five seconds before the next
+  device has them, and the creator has them back the moment they return.
+- **Admission**: a table weighs nothing, so the cap is now a cap on waiting rooms and on games
+  that fell back to the server. A table still counts against the address that opened it.
+- **The device's side** (`server/src/table-copy.ts`, room code): a `Room` copy dealt from the
+  recipe, sending what it makes and taking the server's order. The tests' scripted clients are
+  this over real sockets; the page's worker will run the same class in step 4.
+
+What building it taught:
+
+- **A table's devices talk far more than a room's clients.** A device sends every pass its room
+  makes for its seat and, as host, every bot's move: dozens of inputs between two real plays. The
+  transport's limit of 40 messages in five seconds an address stalled a table inside its first
+  turn, so table inputs don't count against it (as acks don't); a cap on a table's log bounds
+  them instead. Sending a run of a device's own inputs as one message is the obvious saving, and
+  is not done.
+- **A device applies its own input when it makes it**, so a refused one (or someone else's input
+  taking its place) leaves that copy holding a game the table doesn't. The device's copy stops
+  and says so. Nothing in the tests races, so it never happens there; making it harmless is step
+  5 (the undo) and step 7 (taking the host's state).
 
 ### Client
 
@@ -307,7 +338,12 @@ Each step ends in a check that can fail.
    were fixed. Nothing in it races: inputs are made one at a time and the order is the order of
    making, so what an order does with two inputs made at once is still step 3's and step 5's.
 3. **Tables on the server.** *Check*: the loopback suite with scripted clients; main still
-   imports no engine.
+   imports no engine. **Done 2026-11-19** (`test/tables.test.ts`, `test/tables-e2e.test.ts`):
+   over real sockets, against rooms on this thread and on worker threads, three devices (two
+   people, one watching, a bot on the host's) play a table through the server's order and end
+   with one digest; the host's device goes and the next runs the bots; a device comes back to
+   its seat with the whole log; the host deals a rematch; a lobby with a device that can't hold a
+   copy, or two builds, starts on the server. `tables.ts` is in the main-side import guard.
 4. **The client.** *Check*: an e2e test with two browser contexts playing two people and a bot;
    the server's `/status` shows a table and no room; the same lobby with one client unable falls
    back to a server room.
