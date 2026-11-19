@@ -444,7 +444,11 @@ export function CardTile({
         {/* An adventurer's Adventure or an omen card's Omen — the other spell
             the card can be cast as, which the printed card shows beside its
             creature's text (a bug report, 2026-10-04: a hand's Smaug, the
-            Great Calamity showed only "Flying"). */}
+            Great Calamity showed only "Flying"). A preparation card's
+            prepare spell too (rule 722.2), on the battlefield as well: what
+            its controller casts a copy of while it's prepared (a bug report,
+            2026-11-18: a hand's Studious First-Year showed no Rampant
+            Growth). */}
         {obj.spellFace ? (
           <span className="ct-spellface">
             <span className="ct-sf-head">

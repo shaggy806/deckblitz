@@ -176,7 +176,10 @@ export interface VisibleObject {
    * An adventurer card's Adventure or an omen card's Omen — the spell half
    * that shares its creature's frame (rules 715, 719) — while the card shows
    * its creature face anywhere but the battlefield, so a hand or a graveyard
-   * can show both halves as the printed card does. Absent otherwise.
+   * can show both halves as the printed card does. Also a preparation card's
+   * prepare spell (rule 722.2, the inset frame of its one face), in every
+   * zone and on a copy of it: on the battlefield it's the spell a prepared
+   * permanent's controller casts a copy of. Absent otherwise.
    */
   readonly spellFace?: {
     readonly name: string;
@@ -922,8 +925,28 @@ export function artManifest(state: GameState, registry: CardRegistry): ArtManife
 }
 
 /** `VisibleObject.spellFace` for `object`, as a spread: its card's Adventure
- * or Omen half while it shows its creature face off the battlefield. */
+ * or Omen half while it shows its creature face off the battlefield, or its
+ * prepare spell wherever it is. */
 function spellFaceOf(registry: CardRegistry, object: GameObject): { spellFace?: VisibleObject["spellFace"] } {
+  // A preparation card's prepare spell (rule 722.2), read as
+  // `Game.becomePrepared` reads it: by the printed card, so a copy has it
+  // too, a token among them (722.2b). The battlefield as well, unlike an
+  // Adventure: it's what the permanent's controller casts a copy of while
+  // it's prepared.
+  const printed = printedCardName(object);
+  const prepare = registry.has(printed) ? registry.get(printed).prepareSpell : null;
+  if (prepare !== null && registry.has(prepare)) {
+    const spell = registry.get(prepare);
+    return {
+      spellFace: {
+        name: spell.name,
+        manaCost: spell.manaCost,
+        types: [...spell.types],
+        subtypes: [...spell.subtypes],
+        text: spell.text,
+      },
+    };
+  }
   if (object.zone === "battlefield" || object.zone === "phased-out") return {};
   if (object.kind !== "card" || (object.face ?? 0) !== 0) return {};
   const front = object.faces?.[0];

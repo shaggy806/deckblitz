@@ -54,3 +54,44 @@ describe("an Adventure or Omen half in a view", () => {
     expect(view.objects[theirs]).toBeUndefined();
   });
 });
+
+// Rule 722.1-722.2: the prepare spell is printed in an inset frame of the
+// card's one face, and a hand's Studious First-Year showed only "This
+// creature enters prepared" (a bug report, 2026-11-18).
+describe("a preparation card's prepare spell in a view", () => {
+  it("shows it in hand, in a graveyard and on the battlefield, where it's what a prepared one casts", () => {
+    const game = setUp();
+    const inHand = game.debugSpawn("Studious First-Year", A, "hand");
+    const inYard = game.debugSpawn("Studious First-Year", A, "graveyard");
+    const onBoard = game.debugSpawn("Studious First-Year", A, "battlefield");
+    const view = game.viewFor(A);
+    expect(view.objects[inHand].spellFace).toMatchObject({ name: "Rampant Growth", manaCost: "{1}{G}", types: ["sorcery"], subtypes: [] });
+    expect(view.objects[inHand].spellFace?.text).toMatch(/^Search your library for a basic land card/);
+    expect(view.objects[inYard].spellFace?.name).toBe("Rampant Growth");
+    expect(view.objects[onBoard].spellFace?.name).toBe("Rampant Growth");
+    // An opponent reads the same on what they can see.
+    expect(game.viewFor(B).objects[onBoard].spellFace?.name).toBe("Rampant Growth");
+  });
+
+  it("shows it on a token copy too (rule 722.2b), and not on the spell's own copy in exile", () => {
+    const game = setUp();
+    const year = game.debugSpawn("Studious First-Year", A, "battlefield");
+    game.debugApplyEffect(A, { kind: "become-prepared", target: 0 }, [{ kind: "object", object: year }]);
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1 }, [{ kind: "object", object: year }]);
+    const view = game.viewFor(A);
+    const token = Object.values(view.objects).find((o) => o.cardName === "Studious First-Year" && o.isToken);
+    expect(token?.spellFace?.name).toBe("Rampant Growth");
+    const copy = view.objects[year].preparedSpell;
+    expect(copy).toBeDefined();
+    expect(view.objects[copy!].cardName).toBe("Rampant Growth");
+    expect(view.objects[copy!].spellFace).toBeUndefined();
+  });
+
+  it("gives a face-down one none", () => {
+    const game = setUp();
+    const year = game.debugSpawn("Studious First-Year", A, "battlefield");
+    game.debugApplyEffect(A, { kind: "turn-face-down", target: 0 }, [{ kind: "object", object: year }]);
+    expect(game.state.objects[year].faceDown).toBeDefined();
+    expect(game.viewFor(A).objects[year].spellFace).toBeUndefined();
+  });
+});
