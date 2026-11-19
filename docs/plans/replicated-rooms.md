@@ -25,8 +25,13 @@ windows of a player whose device is gone, as a room on the server does. **Step 7
 (2026-11-18; the user: "Step 7"): every copy sends a fingerprint of the game every 32 inputs, the
 server compares each with the host's, and a copy that differs is dealt the host's state; a
 device that joins late, reloads or reconnects is dealt from another device's state and the
-inputs since, 5 ms where replaying a late game's log took 307. Next is step 8: the laptop, then
-on by default.
+inputs since, 5 ms where replaying a late game's log took 307. **Step 8's measure is done**
+(2026-11-18; the user: "It should be connected now"): a table between the test laptop and the
+dev PC, the laptop hosting two bots and then as a guest. Its bots stay inside their second, its
+own moves take about 8 ms, a reload late in the game is back at the board in 4.5 s with the
+deal itself 12 ms. Two faults found on the way and fixed (a start pressed before a slow page's
+card pool was in fell back to the server; a refusal read by the wrong copy). **Still off by
+default**: turning it on is the user's call, with what is under "The laptop" to weigh.
 
 ## Why
 
@@ -450,6 +455,73 @@ for the server by design ("The undo").
   player's device and shows as a bot only on it.
 - **Bots wait for the host's page only**, as proposed under "Open decisions".
 
+### The laptop (step 8)
+
+**Measured 2026-11-18** on the test laptop (Core i5-6300U, 2 cores and 4 threads, Chrome 157,
+1366x768), a production build served from the dev PC over the LAN, the laptop's page driven
+through its browser and the PC's seat by a headless Chromium. The worker reports its own costs
+now (`deckblitzLocal.stats()`: `moves…`, and `table`, the copy's own bookkeeping,
+`tableCosts()`).
+
+| | laptop hosting two bots | laptop as a guest | the PC, as a guest |
+|---|---|---|---|
+| worker up (the card pool in) | 3.1 s | 3.4 s | 1.8 s |
+| Start pressed to the opening hand | 0.6 s | — | — |
+| the copy dealt | 28 ms | 48 ms | 21 ms |
+| a bot's decision (1 s allowed) | 3 ms median, 9 ms at the 90th, 976 ms worst, of 265 | — | — |
+| a move of the player's own | 8 ms (8.5 worst, of 4) | 10.6 ms (25 worst, of 4) | 6 ms (8.6 worst) |
+| the game kept before a run of moves | 3.1 ms each (75 worst, of 154) | 3.7 ms (13 worst, of 114) | 1.6 ms (9 worst) |
+| a fingerprint | 8 ms (13 worst, of 15) | 10 ms (49 worst, of 15) | 4.7 ms |
+| a reload late on, to the board | 4.6 s at turn 14 (510 inputs), the deal 12 ms | 4.4 s at turn 13, the deal 12 ms | — |
+
+So what a table adds on the slow machine is small beside what a solo game already costs it:
+the card pool (the 3 s it pays for a blitz too), 3 ms before a run of moves, 8 ms every 32
+inputs. A player's own move is on their board in about 8 ms there, where a game on the server
+is the round trip.
+
+**What the run found, both fixed:**
+
+- **A start pressed while a page was still loading the card pool was a game on the server.**
+  With the PC hosting and pressing Start nine seconds after the laptop readied, the laptop's
+  worker (10.5 s that time: its timings vary threefold from run to run) hadn't said it could
+  hold a copy, and the lobby fell back, as designed, without a word. A page now says it will
+  be able to shortly as soon as its worker starts (`table-capable`'s `soon`), and the server
+  holds a start for such a page, twelve seconds at most (`RoomService.startGame`,
+  `startHoldMs`), instead of deciding without it. Tried again with Start pressed 1.5 s after
+  the laptop readied: a table, the opening hand 5.2 s after the laptop's page began loading.
+- **A refusal read by the wrong copy.** A device dealt again on the same connection (put right
+  after drifting) was still sent the server's refusals of what its last copy had on the way,
+  took one for its own, lost its place and was dealt a third time. Each copy now names itself
+  on its inputs (`table-input`'s `copy`), and a refusal goes back to the copy that made the
+  move.
+
+**Not measured, or not good:**
+
+- **Two tabs on the laptop.** A second tab watching the same table while the first hosted two
+  bots took 28 s to reach the board (its worker 13.8 s), and the first took 1.2 s to write out
+  its state for it (6.6 ms on the PC): two workers and the bots on two cores. It works; it is
+  slow. One tab a player is the case that matters.
+- **Memory.** The worker's heap can't be read in this Chrome (`performance.memory` isn't given
+  to a worker), so nothing here. A solo game's ~250 MB (`local-rooms.md`) is the nearest
+  figure; a table's worker holds the same pool and one game.
+- **Smoothness.** The laptop's page was drawing a frame a second through both runs (its
+  screen was most likely asleep: `requestAnimationFrame` gaps of a second, one of 43 s), so
+  nothing can be said from them about frames. The page draws a table's frames with the code
+  it draws a server game's with.
+- **The lobby doesn't say** whose page can hold a copy, so a host can't tell a table from a
+  server game before it starts, or after except by how quick it feels.
+
+**Before it is the default** (the user's call):
+
+- A page on another build can come to a table and is dealt the host's state; if the state's
+  shape changed between the builds it is told the game "is being played on another version of
+  the site" and stays out. A number on the state's shape would make that exact, at the cost
+  of someone bumping it when the shape changes; refusing every other build would need no
+  upkeep and lock a reloading player out of their game after any deploy. Neither is built.
+- The engine fault the fuzz found (a concession while another player chooses targets,
+  `docs/engine-gaps.md`) is in server games too, and isn't a table's.
+- Nothing has been deployed since before step 1.
+
 ### The copies check each other, and a game dealt from a state (step 7)
 
 **Built 2026-11-18.** Two things on one mechanism: a device can be handed the game as another
@@ -606,7 +678,8 @@ Each step ends in a check that can fail.
    next comparison and says so; a page reloaded as another build is dealt from the host's
    state; two builds in one lobby start on the server.
 8. **Measured on the laptop, then on by default.** As `local-rooms.md` did: start-up time and
-   memory with two tabs' worth of games, opt-in by a URL flag first.
+   memory with two tabs' worth of games, opt-in by a URL flag first. **Measured 2026-11-18**
+   ("The laptop"); the default is not flipped, and is the user's to flip.
 
 Steps 1 and 2 decide whether the rest is worth building, and neither touches a live room.
 
