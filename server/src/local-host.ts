@@ -118,16 +118,31 @@ export class LocalRoomHost {
       return;
     }
     const startSeq = before?.room.frameSeq ?? 0;
+    let copy: TableCopy;
+    try {
+      copy = new TableCopy(start, {
+        send: this.toServer,
+        room: { ...this.tableRoom, startSeq, ...(this.pacing !== undefined ? { pacing: this.pacing } : {}) },
+        notice: (message) => this.send({ type: "notice", roomId, message }),
+        onOutOfStep: (why) => this.outOfStep(roomId, seating.token, why),
+      });
+    } catch (error) {
+      if (start.state === undefined) throw error;
+      // The game as another device holds it couldn't be read here: this
+      // page's build knows another shape of state than the one the table is
+      // being played on (a deploy since). Whatever copy it had stays.
+      console.error(`table ${roomId}: couldn't start from another device's state`, error);
+      this.send({
+        type: "error",
+        message:
+          "This game is being played on another version of the site, and couldn't be picked up here. Reloading the page may help.",
+      });
+      return;
+    }
     if (before !== undefined) {
       before.dispose();
       manager.remove(roomId);
     }
-    const copy = new TableCopy(start, {
-      send: this.toServer,
-      room: { ...this.tableRoom, startSeq, ...(this.pacing !== undefined ? { pacing: this.pacing } : {}) },
-      notice: (message) => this.send({ type: "notice", roomId, message }),
-      onOutOfStep: (why) => this.outOfStep(roomId, seating.token, why),
-    });
     this.copies.set(roomId, copy);
     const { seat } = start;
     const token = seating.token ?? "this device";

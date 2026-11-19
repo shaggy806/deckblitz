@@ -205,7 +205,7 @@ export class Tables {
         // Made in a game this table has dealt past (a rematch): the device
         // has the new game by now, and nothing of the old one is waiting.
         if (message.game !== undefined && message.game !== table.recipe.gameNumber) return;
-        this.input(table, conn, message.after, message.mine, message.input);
+        this.input(table, conn, message.after, message.mine, message.input, message.copy);
         return;
       case "table-join":
         this.join(table, conn, message.clientToken, message.from);
@@ -346,7 +346,7 @@ export class Tables {
     for (const to of this.everyone(table)) if (to !== except) this.send(to, message);
   }
 
-  private input(table: Table, conn: ConnId, after: unknown, mine: unknown, input: unknown): void {
+  private input(table: Table, conn: ConnId, after: unknown, mine: unknown, input: unknown, copy?: unknown): void {
     const from = this.seatOf(table, conn);
     if (from === null) {
       this.send(conn, { type: "error", message: `you aren't seated at ${table.id}` });
@@ -373,7 +373,13 @@ export class Tables {
       let asMade = after === table.log.length && own <= after;
       for (let back = 1; asMade && back <= own; back += 1) asMade = table.log[after - back].from === from;
       if (!asMade) {
-        this.send(conn, { type: "table-refused", roomId: table.id, after, head: table.log.length });
+        this.send(conn, {
+          type: "table-refused",
+          roomId: table.id,
+          after,
+          head: table.log.length,
+          ...(typeof copy === "number" ? { copy } : {}),
+        });
         return;
       }
     }

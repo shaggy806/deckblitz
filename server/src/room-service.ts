@@ -50,7 +50,16 @@ export interface RoomServerOptions {
    * both. */
   readonly reapIdleMs?: number;
   readonly reapIntervalMs?: number;
+  /** How long a start waits for a page that said it will shortly be able to
+   * hold a copy (`table-capable`'s `soon`). 12 s unless given. */
+  readonly startHoldMs?: number;
 }
+
+/** See `RoomServerOptions.startHoldMs`: the test laptop's worker takes 3 to
+ * 10 s to load the card pool, more with its two cores busy. */
+const START_HOLD_MS = 12_000;
+/** How long a page's "shortly" is believed. */
+const SOON_MS = 20_000;
 
 /** What one broadcast's spectators have in common: the view, the seats, and
  * each distinct frame made so far, by the log slice and art it carries. */
@@ -120,6 +129,13 @@ export class RoomService {
   /** The connections whose pages can hold a copy of a game, and the build
    * each runs (`table-capable`). */
   private readonly copyBuilds = new WeakMap<Connection, string>();
+  /** The connections whose pages said they will shortly be able to
+   * (`table-capable`'s `soon`), and when each said so. */
+  private readonly copySoon = new WeakMap<Connection, number>();
+  /** Waiting rooms whose start is held for such a page: who pressed start,
+   * and the timer that ends the wait. */
+  private readonly heldStarts = new Map<string, { readonly by: ConnId; readonly timer: ReturnType<typeof setTimeout> }>();
+  private readonly startHoldMs: number;
   /** Each connection's id, for handing a table's members to the host. */
   private readonly connIds = new WeakMap<Connection, ConnId>();
 
@@ -158,6 +174,7 @@ export class RoomService {
     this.manager = manager;
     this.outbox = outbox;
     this.builderEnabled = options.builder === true;
+    this.startHoldMs = options.startHoldMs ?? START_HOLD_MS;
     // Every frame a promoted room publishes — whether it came from a message
     // just handled or from a bot the room released on its own clock — goes out
     // through here.
@@ -185,6 +202,8 @@ export class RoomService {
   /** Stops the reaper. The rooms stay as they are. */
   stop(): void {
     if (this.reaper !== null) clearInterval(this.reaper);
+    for (const held of this.heldStarts.values()) clearTimeout(held.timer);
+    this.heldStarts.clear();
   }
 
   /** Reports `room`'s stage and bots if either isn't what was last reported
@@ -532,6 +551,78 @@ export class RoomService {
     };
   }
 
+  /** Every connection in `room`: the people seated, anyone watching, a host
+   * who hasn't sat down. */
+  private membersOf(room: PendingRoom): Connection[] {
+    const unseated = room.unseatedHost();
+    return [...room.claims().map((c) => c.connection), ...this.spectatorsOf(room.id), ...(unseated !== null ? [unseated] : [])];
+  }
+
+  /**
+   * Whether `room` can't start as a table only because a page in it is still
+   * loading what a copy needs: someone said `soon` lately, and everyone else
+   * either can already or said the same.
+   */
+  private waitingOnAPage(room: PendingRoom): boolean {
+    const now = Date.now();
+    const soon = (c: Connection): boolean => {
+      const said = this.copySoon.get(c);
+      return said !== undefined && now - said < SOON_MS;
+    };
+    const members = this.membersOf(room);
+    return members.some(soon) && members.every((c) => this.copyBuilds.has(c) || soon(c));
+  }
+
+  /**
+   * Starts `room`'s game: as a table if every page in it can hold a copy, on
+   * one build; else, with `wait`, held a few seconds where a page is still
+   * getting there (`waitingOnAPage`); else as a `Room` here.
+   */
+  private startGame(conn: ConnId, connection: Connection, room: PendingRoom, wait: boolean): void {
+    // Played on the players' own devices if every one of them can: the
+    // host keeps the order from here, and this waiting room is done.
+    const opening = this.outbox.tableStarted === undefined ? null : this.tableFor(room);
+    if (opening !== null) {
+      for (const member of [...opening.people.map((p) => p.conn), ...opening.watchers]) {
+        if (member !== null) this.boundRoom.delete(member);
+      }
+      this.spectators.delete(room.id);
+      this.outbox.tableStarted?.(opening);
+      this.manager.remove(room.id);
+      return;
+    }
+    if (wait && this.outbox.tableStarted !== undefined && this.waitingOnAPage(room)) {
+      const timer = setTimeout(() => this.releaseStart(room.id, false), this.startHoldMs);
+      timer.unref?.();
+      this.heldStarts.set(room.id, { by: conn, timer });
+      return;
+    }
+    const activeRoom = this.tryPromote(connection, room);
+    if (activeRoom !== null) this.boundRoom.set(conn, activeRoom);
+  }
+
+  /**
+   * A held start goes ahead, if it still can: the wait ran out (`wait`
+   * false: whatever the pages can do now decides), or a page said something
+   * new (`wait` true: it may still be held for another). Dropped without a
+   * word if the room has changed under it; the host can press start again.
+   */
+  private releaseStart(roomId: string, wait: boolean): void {
+    const held = this.heldStarts.get(roomId);
+    if (held === undefined) return;
+    const room = this.manager.get(roomId);
+    const connection = this.connections.get(held.by);
+    if (!(room instanceof PendingRoom) || connection === undefined || !room.isHost(connection) || !room.allReady()) {
+      clearTimeout(held.timer);
+      this.heldStarts.delete(roomId);
+      return;
+    }
+    if (wait && this.tableFor(room) === null && this.waitingOnAPage(room)) return;
+    clearTimeout(held.timer);
+    this.heldStarts.delete(roomId);
+    this.startGame(held.by, connection, room, false);
+  }
+
   private tryPromote(connection: Connection, room: PendingRoom): Room | null {
     try {
       // `promote` settles the new room and publishes its opening frame itself,
@@ -800,20 +891,10 @@ export class RoomService {
           connection.send({ type: "error", message: "not everyone is ready yet" });
           return;
         }
-        // Played on the players' own devices if every one of them can: the
-        // host keeps the order from here, and this waiting room is done.
-        const opening = this.outbox.tableStarted === undefined ? null : this.tableFor(room);
-        if (opening !== null) {
-          for (const member of [...opening.people.map((p) => p.conn), ...opening.watchers]) {
-            if (member !== null) this.boundRoom.delete(member);
-          }
-          this.spectators.delete(room.id);
-          this.outbox.tableStarted?.(opening);
-          manager.remove(room.id);
-          return;
-        }
-        const activeRoom = this.tryPromote(connection, room);
-        if (activeRoom !== null) this.boundRoom.set(conn, activeRoom);
+        // Already starting, held for a page that is nearly able to hold a
+        // copy: a second press changes nothing.
+        if (this.heldStarts.has(room.id)) return;
+        this.startGame(conn, connection, room, true);
         return;
       }
       case "rematch": {
@@ -984,12 +1065,21 @@ export class RoomService {
         return;
       }
       case "table-capable": {
+        if (message.soon === true) {
+          // Not yet: a start in the next few seconds waits for it.
+          this.copySoon.set(connection, Date.now());
+          return;
+        }
+        this.copySoon.delete(connection);
         if (typeof message.build === "string" && message.build.length > 0 && message.build.length <= 100) {
           this.copyBuilds.set(connection, message.build);
         } else {
           // Taken back: the page's worker failed since it said so.
           this.copyBuilds.delete(connection);
         }
+        // A start held for this page, or for another now that this one has
+        // spoken, may go ahead.
+        for (const roomId of [...this.heldStarts.keys()]) this.releaseStart(roomId, true);
         return;
       }
       case "resync": {

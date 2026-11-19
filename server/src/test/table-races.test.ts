@@ -267,6 +267,26 @@ describe("inputs racing at a table", () => {
     expect(table.refused).toBe(made.length - 1);
   }, PLAYS);
 
+  it("leaves alone a refusal of an input another copy on the device made", () => {
+    const table = new RacingTable({ seed: 38, seats: ["person", "person"] });
+    const mover = playTo(table);
+    move(table, mover);
+    const copy = table.copyOf(mover);
+    expect(inputsOf(mover).length).toBeGreaterThan(0);
+    // The copy this device held before (dealt again since, after drifting)
+    // had a move on its way that the server refused: the refusal comes down
+    // the same connection, naming that copy.
+    copy.handle({ type: "table-refused", roomId: "RACES", after: 0, head: table.log.length + 3, copy: -1 });
+    expect(copy.undone).toBe(0);
+    expect(copy.outOfStep).toBeNull();
+    expect(copy.settled).toBe(false);
+    // And everything this copy made still lands where it made it.
+    table.rest();
+    table.agree("after the stray refusal");
+    expect(table.refused).toBe(0);
+    expect(copy.undone).toBe(0);
+  }, PLAYS);
+
   it("passes the empty windows of a person whose device is gone, on the host's, until they are back", () => {
     const table = new RacingTable({ seed: 36, seats: ["person", "person", "person"] });
     const [alice, bob, carol] = table.devices;

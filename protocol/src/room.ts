@@ -571,6 +571,12 @@ export type ClientMessage =
       /** The page's build: copies of one game must run the same engine. An
        * empty one takes the word back (the page's worker failed). */
       readonly build: string;
+      /** Not yet, but shortly: the page has started loading what a copy
+       * needs (the card pool, a few seconds on a slow machine) and will say
+       * `table-capable` again without this when it has. A game started in
+       * the meantime waits a few seconds for it, where it would otherwise
+       * start on the server for want of this one page's word. */
+      readonly soon?: true;
     }
   | {
       /**
@@ -600,6 +606,11 @@ export type ClientMessage =
       readonly type: "table-input";
       readonly roomId: string;
       readonly game?: number;
+      /** Which of this device's copies made it: a number the device picks
+       * afresh each time it is dealt one. Sent back with a refusal, so a
+       * copy dealt since doesn't take a refusal of the last one's input for
+       * its own. */
+      readonly copy?: number;
       readonly after: number | null;
       /** How many of the entries just before `after` the device counts as its
        * own, sent and not yet confirmed. 0 if absent. */
@@ -927,6 +938,8 @@ export type ServerMessage =
       readonly roomId: string;
       readonly after: number;
       readonly head: number;
+      /** The refused input's `copy`, if it named one. */
+      readonly copy?: number;
     }
   | {
       /** Another device runs the table's bots from now on. */

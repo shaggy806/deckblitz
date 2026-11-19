@@ -111,13 +111,15 @@ describe('HybridSocket at a table', () => {
     servers[0].say(seatBoard)
     expect(shown.map((m) => m.type)).toEqual(['room-joined'])
     expect(FakeWorker.made).toHaveLength(1)
-    // Started, not up: the card pool is still loading.
-    expect(servers[0].types).not.toContain('table-capable')
+    // Started, not up: the card pool is still loading. The server is told it
+    // is on its way, so a game started meanwhile waits for this page.
+    expect(servers[0].last('table-capable')).toMatchObject({ build: expect.stringMatching(/.+/), soon: true })
     worker().say({ kind: 'open' })
+    expect(servers[0].last<{ soon?: boolean }>('table-capable')?.soon).toBeUndefined()
     expect(servers[0].last('table-capable')).toMatchObject({ build: expect.stringMatching(/.+/) })
-    // Once a connection.
+    // Each once a connection.
     servers[0].say(seatBoard)
-    expect(servers[0].types.filter((type) => type === 'table-capable')).toHaveLength(1)
+    expect(servers[0].types.filter((type) => type === 'table-capable')).toHaveLength(2)
   })
 
   it('hands the worker the table when the room starts as one, and the room is the worker\'s from then', async () => {

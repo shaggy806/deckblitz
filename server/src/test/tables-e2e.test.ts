@@ -95,7 +95,11 @@ const HOSTS: readonly (readonly [string, () => Promise<Served>])[] = [
     "rooms on this thread",
     async () => {
       const wss = new WebSocketServer({ port: 0 });
-      const host = attachRoomServer(wss, new RoomManager({ pacing: "immediate" }), { tables: { hostGraceMs: 0 } });
+      const host = attachRoomServer(wss, new RoomManager({ pacing: "immediate" }), {
+        tables: { hostGraceMs: 0 },
+        // A start held for a page that is "nearly able" gives up quickly here.
+        startHoldMs: 250,
+      });
       await new Promise<void>((resolve) => wss.once("listening", resolve));
       return {
         port: (wss.address() as AddressInfo).port,
@@ -334,6 +338,40 @@ describe.each(HOSTS)("a table, end to end: %s", (_label, serve) => {
     expect(new Set(digests([alice, bob])).size).toBe(1);
     expect(alice.copy?.room.gameNumber).toBe(2);
   }, 60_000);
+
+  it("holds the start for a page that says it will shortly be able to hold a copy, and starts a table when it is", async () => {
+    // Bob's page has started loading the card pool and said so.
+    const [alice, bob] = [await connect(), await connect(null)];
+    bob.send({ type: "table-capable", build: "test-build", soon: true });
+    const roomId = await lobby(alice, bob);
+    // Started, and nothing yet: neither a table nor a game on the server.
+    await tick(120);
+    expect(served?.tables()).toEqual([]);
+    expect(alice.got).toEqual([]);
+    expect(alice.copy).toBeNull();
+    // A second press while it waits changes nothing.
+    alice.send({ type: "start-game", roomId });
+    await tick(30);
+    expect(served?.tables()).toEqual([]);
+    // Bob's page is ready: the game starts, as a table.
+    bob.send({ type: "table-capable", build: "test-build" });
+    await Promise.all([alice, bob].map((d) => d.next((m) => m.type === "table-start")));
+    expect(served?.tables().map((t) => t.id)).toEqual([roomId]);
+    await rest([alice, bob], roomId);
+  }, 60_000);
+
+  it.skipIf(_label !== "rooms on this thread")(
+    "gives up waiting for such a page after a few seconds, and starts the game on the server",
+    async () => {
+      const [alice, bob] = [await connect(), await connect(null)];
+      bob.send({ type: "table-capable", build: "test-build", soon: true });
+      await lobby(alice, bob);
+      const [a, b] = await Promise.all([alice, bob].map((d) => d.next((m) => m.type === "state")));
+      expect(a.type === "state" && b.type === "state").toBe(true);
+      expect(served?.tables()).toEqual([]);
+    },
+    60_000,
+  );
 
   it("starts on the server as ever when a device can't hold a copy, or the builds differ", async () => {
     // Bob's page is an older one: it never said it could.

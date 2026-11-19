@@ -218,6 +218,20 @@ describe("a table on the server", () => {
     expect(watching.message.log).toHaveLength(4);
   });
 
+  it("sends a refusal back with the copy's number the input came with", () => {
+    const { tables, take } = harness();
+    tables.open(opening());
+    take();
+    tables.message(1, { type: "table-input", roomId: "TABLE", copy: 7, after: 0, input: pass(BOB) });
+    take();
+    // Carol's device made hers for the same place, on its fourth copy.
+    tables.message(3, { type: "table-input", roomId: "TABLE", copy: 4, after: 0, input: pass(CAROL) });
+    expect(take()).toEqual([{ to: 3, message: { type: "table-refused", roomId: "TABLE", after: 0, head: 1, copy: 4 } }]);
+    // One that names none (an older page) gets none back.
+    tables.message(4, { type: "table-input", roomId: "TABLE", after: 0, input: pass(DAVE) });
+    expect(take()).toEqual([{ to: 4, message: { type: "table-refused", roomId: "TABLE", after: 0, head: 1 } }]);
+  });
+
   it("deals a device that names no place from another device's state: the host's first, then the inputs since", () => {
     const { tables, take } = harness(0);
     tables.open(opening());

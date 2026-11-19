@@ -73,6 +73,18 @@ export interface LocalStats {
   readonly games: number
   /** The worker's JS heap, where the browser says (Chrome). */
   readonly workerHeapMb: number | null
+  /** The page's own moves (`dispatch`) as the worker handled them, from the
+   * message arriving to the room having answered: what stands between a
+   * click and its frame in a game played here. */
+  readonly moves: number
+  readonly moveP50Ms: number | null
+  readonly moveP90Ms: number | null
+  readonly moveMaxMs: number | null
+  /** What this tab's copies of tables cost beyond playing the game
+   * (`TableCosts`, `server/src/table-copy.ts`): dealing, the game kept before
+   * a run of moves, fingerprints, the game written out for another device,
+   * moves gone back on. Each a count, milliseconds in total and the worst. */
+  readonly table: Readonly<Record<string, number>>
 }
 
 /** The part of a WebSocket `useNetworkGame` uses. */
@@ -277,6 +289,8 @@ export class HybridSocket implements RoomSocket {
   private serverOpen = false
   /** Whether this connection has been told the tab can hold a copy. */
   private saidCapable = false
+  /** Whether it has been told the tab will be able to shortly. */
+  private saidSoon = false
   /** The page's `join-room` or `spectate-room` for a table, kept while the
    * server is asked for the table: answered by the worker once its copy is
    * dealt. By room. */
@@ -335,6 +349,7 @@ export class HybridSocket implements RoomSocket {
       if (!current()) return
       this.serverOpen = true
       this.saidCapable = false
+      this.saidSoon = false
       if (!quiet) {
         this.onopen?.()
         this.sayCapable()
@@ -438,7 +453,17 @@ export class HybridSocket implements RoomSocket {
    */
   private sayCapable(): void {
     if (this.tables === null || this.saidCapable || !this.serverOpen || this.closed || workerFailed) return
-    if (this.local === null || this.local.dead || !this.local.opened) return
+    if (this.local === null || this.local.dead) return
+    if (!this.local.opened) {
+      // Started, the card pool still loading: the server is told it is on
+      // its way, so a game started in these seconds waits for this page and
+      // doesn't start on the server for want of its word.
+      if (!this.saidSoon) {
+        this.saidSoon = true
+        this.server.send(JSON.stringify({ type: 'table-capable', build: PAGE_BUILD, soon: true }))
+      }
+      return
+    }
     this.saidCapable = true
     this.server.send(JSON.stringify({ type: 'table-capable', build: PAGE_BUILD }))
   }

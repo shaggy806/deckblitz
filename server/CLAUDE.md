@@ -60,7 +60,8 @@ that file.
   main keeps the recipe, the order of their inputs, who is connected and whose device runs the
   bots. A lobby starts as one only when every connection in it said `table-capable` on one build
   (a page with `?tables=1` does, once its worker has the card pool; off by default), otherwise as
-  a `Room` as ever. The page's worker runs the copy through `local-host.ts` (`LocalRoomHost.table`),
+  a `Room` as ever; a start is held a few seconds for a page that said it is nearly there
+  (`table-capable`'s `soon`, `RoomService.startGame`). The page's worker runs the copy through `local-host.ts` (`LocalRoomHost.table`),
   so what a copy's room tells its connections (frames, `isHost`, who is online, a `notice`) is
   what a player sees. The host's copy runs the bots and also passes the empty windows of a
   person whose device is gone (`TableCopy.away`), never a choice of theirs. The copies send a

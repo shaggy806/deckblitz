@@ -433,8 +433,18 @@ test("the host's tab closes mid-game: the bots, and the game, carry on from the 
   await guest.page.context().close()
 })
 
-/** Every player's life total as a page shows it, in the page's own order. */
-const lifeOf = (page: Page): Promise<string[]> => page.locator('.pp-life').allInnerTexts()
+/** Every player's life total as a page shows it, lowest first (each page
+ * draws the table from its own seat, so the order on screen differs). */
+const lifeOf = async (page: Page): Promise<number[]> =>
+  (await page.locator('.pp-life').allInnerTexts()).map(Number).sort((a, b) => a - b)
+
+/** How much higher each life total is on `page` than on `other`: one number
+ * if they differ by the same amount all round, `null` if not. */
+async function lifeAhead(page: Page, other: Page): Promise<number | null> {
+  const [mine, theirs] = await Promise.all([lifeOf(page), lifeOf(other)])
+  const gaps = new Set(mine.map((life, i) => life - theirs[i]))
+  return mine.length === theirs.length && gaps.size === 1 ? [...gaps][0] : null
+}
 
 test('the copies check each other: one that drifts is put back on the host\u2019s, and a page coming back starts from the host\u2019s game', async ({
   browser,
@@ -466,7 +476,7 @@ test('the copies check each other: one that drifts is put back on the host\u2019
   const turn = await turnOf(guest.page)
   await playTo(turn + 1, [host.page, guest.page])
   await agree([host.page, guest.page])
-  expect(await lifeOf(guest.page)).toEqual(['40', '40', '40'])
+  await expect.poll(() => lifeAhead(guest.page, host.page), paced).toBe(0)
 
   // The guest's copy comes to hold another game (a test's hook: every life
   // total a point up), as a browser that worked something out differently
@@ -474,8 +484,7 @@ test('the copies check each other: one that drifts is put back on the host\u2019
   await guest.page.evaluate((code) => {
     ;(window as unknown as { deckblitzLocal: { corrupt: (roomId: string) => void } }).deckblitzLocal.corrupt(code)
   }, room)
-  await expect.poll(() => lifeOf(guest.page), paced).toEqual(['41', '41', '41'])
-  expect(await lifeOf(host.page)).toEqual(['40', '40', '40'])
+  await expect.poll(() => lifeAhead(guest.page, host.page), paced).toBe(1)
 
   // They play on. At the next place the copies compare, the server finds the
   // guest's isn't the host's and deals it the host's: the page says so, and
@@ -488,7 +497,7 @@ test('the copies check each other: one that drifts is put back on the host\u2019
     await getOn(guest.page)
     await guest.page.waitForTimeout(250)
   }
-  await expect.poll(() => lifeOf(guest.page), paced).toEqual(['40', '40', '40'])
+  await expect.poll(() => lifeAhead(guest.page, host.page), paced).toBe(0)
   await guest.page.screenshot({ path: test.info().outputPath('drift-notice.png') })
   expect(guest.traffic.starts.at(-1)).toMatchObject({ state: true, resync: true })
   expect(guest.traffic.sent).toContain('table-digest')
@@ -501,6 +510,24 @@ test('the copies check each other: one that drifts is put back on the host\u2019
   await agree([host.page, guest.page])
   for (const seated of [host, guest]) {
     await expect(seated.page.locator('.toast.bad')).toHaveCount(0)
+    expect(seated.errors).toEqual([])
+    await seated.page.context().close()
+  }
+})
+
+test('a start pressed before a page has the card pool in waits for it, and is still a table', async ({ browser, request }) => {
+  test.setTimeout(180_000)
+  // No waiting for the pages to say they can hold a copy: the host starts as
+  // soon as everyone is ready, as a quick host would. Each page has said it
+  // will be able to shortly, so the server holds the start for them.
+  const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE)
+  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  for (const { page } of [host, guest]) await expect(keepPrompt(page)).toBeVisible(paced)
+  const started = await status(request)
+  expect(started.tables?.map((t) => t.id)).toContain(room)
+  expect(started.rooms.map((r) => r.id)).not.toContain(room)
+  for (const seated of [host, guest]) {
+    expect(seated.traffic.sent).toContain('table-capable')
     expect(seated.errors).toEqual([])
     await seated.page.context().close()
   }

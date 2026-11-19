@@ -74,6 +74,84 @@ export type TableStart = Extract<ServerMessage, { type: "table-start" }>;
  * the same places on every copy. Two to three milliseconds each. */
 export const DIGEST_EVERY = 32;
 
+/**
+ * What the copies in this process have spent on being copies, beyond playing
+ * the game: for measuring a slow machine (`docs/plans/replicated-rooms.md`,
+ * step 8; the page's `deckblitzLocal.stats()`). Counts, and milliseconds in
+ * total (and at worst, where one long one is what a player would feel).
+ */
+export interface TableCosts {
+  /** Copies dealt, from a recipe and its log or from a state. */
+  readonly deals: number;
+  readonly dealMs: number;
+  readonly dealMaxMs: number;
+  /** The game kept before a run of the copy's own moves (`making`). */
+  readonly snapshots: number;
+  readonly snapshotMs: number;
+  readonly snapshotMaxMs: number;
+  /** Fingerprints taken. */
+  readonly digests: number;
+  readonly digestMs: number;
+  readonly digestMaxMs: number;
+  /** The game written out for another device. */
+  readonly states: number;
+  readonly stateMs: number;
+  readonly stateMaxMs: number;
+  /** Moves gone back on, each with the game put back and inputs applied again. */
+  readonly undos: number;
+  readonly undoMs: number;
+  readonly undoMaxMs: number;
+}
+
+/** The number each copy dealt in this process names itself by
+ * (`table-input`'s `copy`). */
+let copies = 0;
+
+type Cost = "deal" | "snapshot" | "digest" | "state" | "undo";
+const spent: Record<Cost, { n: number; ms: number; max: number }> = {
+  deal: { n: 0, ms: 0, max: 0 },
+  snapshot: { n: 0, ms: 0, max: 0 },
+  digest: { n: 0, ms: 0, max: 0 },
+  state: { n: 0, ms: 0, max: 0 },
+  undo: { n: 0, ms: 0, max: 0 },
+};
+
+/** Runs `work`, adding what it took to `what`'s account. */
+function costed<T>(what: Cost, work: () => T): T {
+  const from = performance.now();
+  try {
+    return work();
+  } finally {
+    const ms = performance.now() - from;
+    const account = spent[what];
+    account.n += 1;
+    account.ms += ms;
+    if (ms > account.max) account.max = ms;
+  }
+}
+
+/** The accounts so far. */
+export function tableCosts(): TableCosts {
+  const round = (ms: number): number => Math.round(ms * 10) / 10;
+  return {
+    deals: spent.deal.n,
+    dealMs: round(spent.deal.ms),
+    dealMaxMs: round(spent.deal.max),
+    snapshots: spent.snapshot.n,
+    snapshotMs: round(spent.snapshot.ms),
+    snapshotMaxMs: round(spent.snapshot.max),
+    digests: spent.digest.n,
+    digestMs: round(spent.digest.ms),
+    digestMaxMs: round(spent.digest.max),
+    states: spent.state.n,
+    stateMs: round(spent.state.ms),
+    stateMaxMs: round(spent.state.max),
+    undos: spent.undo.n,
+    undoMs: round(spent.undo.ms),
+    undoMaxMs: round(spent.undo.max),
+  };
+}
+
 export interface TableCopyOptions {
   /** Sends a message to the server. */
   readonly send: (message: ClientMessage) => void;
@@ -105,6 +183,11 @@ export class TableCopy {
   /** The seat this device plays, or `null`: it watches. */
   readonly seat: PlayerId | null;
   readonly room: Room;
+  /** What this copy names itself by on the inputs it sends, so the server's
+   * refusal of one comes back to the copy that made it: a device dealt again
+   * on the same connection (put right after drifting) is still sent the
+   * refusals of what its last copy had on the way. */
+  private readonly id = (copies += 1);
   /** Why this copy stopped playing, once it has. */
   outOfStep: string | null = null;
   /** How many times it has gone back on inputs that lost their place. */
@@ -149,6 +232,7 @@ export class TableCopy {
     if (start.from !== 0 && start.state === undefined) {
       throw new Error("a copy is dealt from the start of a table's log, or from a state");
     }
+    const dealing = performance.now();
     const { recipe } = start;
     this.count = start.from;
     this.dealtTo = start.from + start.log.length;
@@ -208,6 +292,12 @@ export class TableCopy {
       this.room.receive(entry.input);
     }
     this.dealtTo = null;
+    // Dealt: what the recipe (or the state) and the log took, before any
+    // move of this copy's own.
+    const took = performance.now() - dealing;
+    spent.deal.n += 1;
+    spent.deal.ms += took;
+    if (took > spent.deal.max) spent.deal.max = took;
     this.catchingUp = false;
     this.room.answersChanged();
   }
@@ -237,6 +327,9 @@ export class TableCopy {
         this.ordered(message.index, message.from, message.input);
         return;
       case "table-refused":
+        // Of an input another copy on this device made, before this one was
+        // dealt: nothing of this copy's.
+        if (message.copy !== undefined && message.copy !== this.id) return;
         this.refused(message.head);
         return;
       case "table-host":
@@ -270,7 +363,7 @@ export class TableCopy {
    * outstanding, the game as it stands is where an undo would go back to. */
   private making(): void {
     if (this.pending.some((p) => p.applied)) return;
-    this.base = this.room.game.snapshot();
+    this.base = costed("snapshot", () => this.room.game.snapshot());
     this.since = [];
   }
 
@@ -282,13 +375,14 @@ export class TableCopy {
     // place it is asking for. If that is one the copies compare at, this is
     // the moment to take the fingerprint; it is sent if the place is given.
     const at = this.count + mine + 1;
-    const digest = how.applied && at % DIGEST_EVERY === 0 ? stateDigest(this.room.game.state) : undefined;
+    const digest =
+      how.applied && at % DIGEST_EVERY === 0 ? costed("digest", () => stateDigest(this.room.game.state)) : undefined;
     this.pending.push({ input, applied: how.applied, by: how.by, ...(digest !== undefined ? { digest } : {}) });
-    const { roomId, gameNumber: game } = this;
+    const { roomId, gameNumber: game, id: copy } = this;
     this.options.send(
       how.applied
-        ? { type: "table-input", roomId, game, after: this.count + mine, mine, input }
-        : { type: "table-input", roomId, game, after: null, input },
+        ? { type: "table-input", roomId, game, copy, after: this.count + mine, mine, input }
+        : { type: "table-input", roomId, game, copy, after: null, input },
     );
   }
 
@@ -392,13 +486,15 @@ export class TableCopy {
     this.refusalsDue += lost.length;
     this.undone += 1;
     this.catchingUp = true;
-    this.room.replaceGame(base);
-    this.replaying = true;
-    try {
-      for (const input of this.since) this.room.receive(input);
-    } finally {
-      this.replaying = false;
-    }
+    costed("undo", () => {
+      this.room.replaceGame(base);
+      this.replaying = true;
+      try {
+        for (const input of this.since) this.room.receive(input);
+      } finally {
+        this.replaying = false;
+      }
+    });
     this.base = null;
     this.since = [];
     return lost;
@@ -437,7 +533,7 @@ export class TableCopy {
     // Being dealt: only the last such place in what it was sent, which says
     // whether the copy it built is the table's.
     if (this.dealtTo !== null && this.count + DIGEST_EVERY <= this.dealtTo) return;
-    this.report(this.count, stateDigest(this.room.game.state));
+    this.report(this.count, costed("digest", () => stateDigest(this.room.game.state)));
   }
 
   private report(at: number, digest: string): void {
@@ -455,15 +551,18 @@ export class TableCopy {
   private giveState(request: number): void {
     if (this.outOfStep !== null || this.catchingUp || this.room.stopped !== null) return;
     const ahead = this.pending.some((p) => p.applied);
-    const state = ahead ? this.base : this.room.game.snapshot();
-    if (state === null) return;
+    const text = costed("state", () => {
+      const state = ahead ? this.base : this.room.game.snapshot();
+      return state === null ? null : stateToJson(state);
+    });
+    if (text === null) return;
     this.options.send({
       type: "table-state",
       roomId: this.roomId,
       request,
       game: this.gameNumber,
       at: ahead ? this.count - this.since.length : this.count,
-      state: stateToJson(state),
+      state: text,
     });
   }
 

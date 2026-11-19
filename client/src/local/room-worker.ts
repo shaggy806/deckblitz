@@ -31,6 +31,7 @@ import { CARD_SHARD_COUNT, loadCardShard, registryFrom } from 'engine/local'
 import type { ClientMessage, ServerMessage } from 'protocol'
 import { provideCardRegistry } from 'server/dist/card-registry.js'
 import { LocalRoomHost } from 'server/dist/local-host.js'
+import { tableCosts } from 'server/dist/table-copy.js'
 import type { TableStart } from 'server/dist/table-copy.js'
 import { recordBotDecisionsTo } from 'server/dist/room.js'
 import type { FromRoomWorker, LocalStats, ToRoomWorker } from './localSocket.ts'
@@ -57,9 +58,15 @@ recordBotDecisionsTo({
   },
 })
 
+/** How long each of the page's own moves took the worker (`LocalStats`). */
+const movesMs: number[] = []
+
 function stats(): LocalStats {
   const sorted = [...decisionsMs].sort((a, b) => a - b)
   const at = (q: number): number | null => (sorted.length === 0 ? null : Math.round(sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))]))
+  const moves = [...movesMs].sort((a, b) => a - b)
+  const moveAt = (q: number): number | null =>
+    moves.length === 0 ? null : Math.round(moves[Math.min(moves.length - 1, Math.floor(q * moves.length))] * 10) / 10
   const memory = (performance as Performance & { memory?: { usedJSHeapSize: number } }).memory
   return {
     readyMs,
@@ -70,6 +77,11 @@ function stats(): LocalStats {
     decisionMaxMs: sorted.length === 0 ? null : Math.round(sorted[sorted.length - 1]),
     games: host?.save().length ?? 0,
     workerHeapMb: memory === undefined ? null : Math.round(memory.usedJSHeapSize / 1048576),
+    moves: moves.length,
+    moveP50Ms: moveAt(0.5),
+    moveP90Ms: moveAt(0.9),
+    moveMaxMs: moves.length === 0 ? null : Math.round(moves[moves.length - 1] * 10) / 10,
+    table: { ...tableCosts() },
   }
 }
 let saveTimer: ReturnType<typeof setTimeout> | null = null
@@ -121,9 +133,19 @@ self.onmessage = async (event: MessageEvent<ToRoomWorker>) => {
     case 'open':
       post({ kind: 'open' })
       return
-    case 'send':
-      host?.message(JSON.parse(message.data) as ClientMessage)
+    case 'send': {
+      const sent = JSON.parse(message.data) as ClientMessage
+      if (sent.type !== 'dispatch') {
+        host?.message(sent)
+        return
+      }
+      // A move of the page's own: timed, for `stats`.
+      const from = performance.now()
+      host?.message(sent)
+      movesMs.push(performance.now() - from)
+      if (movesMs.length > 5000) movesMs.shift()
       return
+    }
     case 'table':
       try {
         host?.table(JSON.parse(message.data) as TableStart, {
