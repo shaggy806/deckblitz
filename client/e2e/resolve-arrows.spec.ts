@@ -322,13 +322,18 @@ for (const size of SIZES) {
     const bolt = idOf(state, 'alice', 'Lightning Bolt')
     const counterspell = idOf(state, 'alice', 'Counterspell')
     await cast(page, bolt, [{ player: 'bob' }])
-    // A spell that can only target spells is aimed on the stack itself, with
-    // no banner: the priority buttons simply give way.
+    // A spell that can only target spells is aimed on the stack itself, and
+    // the banner still says what is being picked, with its Cancel: it was
+    // empty there, a pulsing line with nothing in it (a bug report,
+    // 2026-11-18).
     await expect(async () => {
       await ready(page)
       await page.locator(`.hand-card[data-obj-id="${counterspell}"] .card-tile`).dispatchEvent('click')
       await expect(page.getByRole('button', { name: 'Pass (space)' })).toBeHidden({ timeout: 2000 })
     }).toPass(paced)
+    const banner = page.locator('.decision-banner')
+    await expect(banner).toContainText('Cast Counterspell: choose spell')
+    await expect(banner.getByRole('button', { name: 'Cancel' })).toBeVisible()
     await page.locator(`.stack-entry[data-stack-id="${bolt}"] .card-tile`).click()
     await expect(page.locator(`.stack-entry[data-stack-id="${counterspell}"]`)).toBeVisible(paced)
     // Off the pile, so the pointer lifts no entry out of it.

@@ -6607,16 +6607,13 @@ function Table({
     )
   } else if (mode === 'targeting' && activeTargeting) {
     // A slot whose only legal options are spells on the stack (Counterspell
-    // and the like) needs no banner at all -- the stack itself is directly
-    // clickable/highlighted now (see Stack.tsx's targetSlot/onTargetClick
-    // wiring), so the player picks a target by clicking the actual card
-    // instead of a text-button duplicate of it. Escape still cancels (see
-    // the global keydown handler above) even with no visible Cancel button.
-    const allStackTargets =
-      targetSlot.length > 0 &&
-      targetSlot.every((o) => o.kind === 'object' && view.zones.stack.includes(o.object))
-    // An "any number of" group keeps its prompt even over stack targets:
-    // Done is how it ends.
+    // and the like) asks here like any other: the spell is picked on the
+    // stack itself (see Stack.tsx's targetSlot/onTargetClick wiring), and
+    // this says what is being picked, with Cancel beside it. It had no prompt
+    // from 2026-09-13, when the prompt was a row of name buttons doubling the
+    // stack's cards; once the pulse became the banner's own ring, the empty
+    // banner was a flashing line that asked for nothing (a bug report,
+    // 2026-11-18).
     const grouped = inTargetGroup(activeTargeting)
     const groupPicked = grouped ? activeTargeting.picked.length - groupStartOf(activeTargeting) : 0
     const slotSpec = currentSpec(activeTargeting)
@@ -6643,10 +6640,7 @@ function Table({
           : view.objects[keep.object]
             ? game.nameOf(keep.object)
             : 'its target'
-    // "Up to one target" over stack targets (Tishana's Tidebinder) keeps its
-    // prompt too: Skip is how it declines.
-    const mayDecline = slotSpec !== undefined && isOptionalSpec(slotSpec)
-    controls = allStackTargets && !grouped && keep === undefined && !mayDecline ? null : (
+    controls = (
       <div className="controls">
         <span>
           {activeTargeting.label}: choose {slotSpec === undefined ? 'a target' : describeSlot(slotSpec)}{' '}
