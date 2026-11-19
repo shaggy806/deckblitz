@@ -1,6 +1,9 @@
 # Replicated rooms: a multiplayer game on every player's device
 
-Status: **in progress** (2026-11-18; the user: "Start step 1"). Built: the groundwork — the
+Status: **shipped, on by default** (2026-11-18; the user, after playing it: "With tables
+enabled it plays very cleanly, I think it is good to push as the default"; `?tables=0` turns it
+off for a tab). What is still open is under "The laptop", "Left as it is" in each step's
+section, and "Open decisions". Begun 2026-11-18 (the user: "Start step 1"). Built: the groundwork — the
 fuzzer's copy check (`MTG_REPLICA=1`), a state's exact form as text (`engine/src/state-wire.ts`),
 names ordered the same on every machine (`compareNames`) — and of step 1, the state digest
 (`stateDigest`) and the check across browsers (`npm run play:browsers -w engine`). **Step 1 is
@@ -30,8 +33,8 @@ inputs since, 5 ms where replaying a late game's log took 307. **Step 8's measur
 dev PC, the laptop hosting two bots and then as a guest. Its bots stay inside their second, its
 own moves take about 8 ms, a reload late in the game is back at the board in 4.5 s with the
 deal itself 12 ms. Two faults found on the way and fixed (a start pressed before a slow page's
-card pool was in fell back to the server; a refusal read by the wrong copy). **Still off by
-default**: turning it on is the user's call, with what is under "The laptop" to weigh.
+card pool was in fell back to the server; a refusal read by the wrong copy). **On by default
+since 2026-11-18**, the user's call after playing it on the live site behind the flag.
 
 ## Why
 
@@ -446,7 +449,7 @@ for the server by design ("The undo").
 
 **Left as it is, and why**:
 
-- **Off by default.** Step 8 turns it on, after the laptop.
+- **Off by default** then; on since the user's word on 2026-11-18 ("The laptop").
 - **A reload, or a connection that dropped, replayed the whole log** until step 7, which deals
   a returning device from another device's state ("The copies check each other").
 - **The host's controls act on the host's device only**: bot speed, pausing and stepping the
@@ -511,16 +514,37 @@ is the round trip.
 - **The lobby doesn't say** whose page can hold a copy, so a host can't tell a table from a
   server game before it starts, or after except by how quick it feels.
 
-**Before it is the default** (the user's call):
+**The default** (2026-11-18). The user played tables on the live site behind `?tables=1`
+("it plays very cleanly, I think it is good to push as the default"), and `tablesMode` is now on
+wherever local mode is: every production page, and the dev server's with `?local=1`.
+`?tables=0` turns it off for a tab. A lobby is a table when every page in it is on one build
+and can hold a copy; a page from before the deploy that made it the default says nothing, so a
+lobby with one in it is a game on the server, as ever.
+
+Flipping it showed two more things, both fixed with it:
+
+- **A solo blitz told the server its tab could hold a copy** the moment its worker was up, though
+  no lobby was in sight. The server is told only once the page has been in a waiting room
+  (`HybridSocket`'s `lobbySeen`): a solo game still says nothing to the server.
+- **A copy took its predecessor's move for its own.** A device put right after drifting is dealt
+  a new copy while the old one's last move is still on its way. The server places that move; the
+  new copy, which has usually just made the very same pass for the same place, took its return
+  for a confirmation, and was then refused its own with nothing expecting it, lost its place and
+  was dealt a third time. The server now sends an input on with the copy that made it
+  (`table-input`'s `copy`, both ways), and a copy counts only its own.
+
+**Still open:**
 
 - A page on another build can come to a table and is dealt the host's state; if the state's
   shape changed between the builds it is told the game "is being played on another version of
   the site" and stays out. A number on the state's shape would make that exact, at the cost
   of someone bumping it when the shape changes; refusing every other build would need no
   upkeep and lock a reloading player out of their game after any deploy. Neither is built.
+- A deploy restarts the server, and the server's memory is where a table's order is kept: the
+  game is gone, as a server game is. The devices each still hold it; picking a table up from
+  one of them after a restart is "Saving a game to play on later" in another form.
 - The engine fault the fuzz found (a concession while another player chooses targets,
   `docs/engine-gaps.md`) is in server games too, and isn't a table's.
-- Nothing has been deployed since before step 1.
 
 ### The copies check each other, and a game dealt from a state (step 7)
 
@@ -679,7 +703,7 @@ Each step ends in a check that can fail.
    state; two builds in one lobby start on the server.
 8. **Measured on the laptop, then on by default.** As `local-rooms.md` did: start-up time and
    memory with two tabs' worth of games, opt-in by a URL flag first. **Measured 2026-11-18**
-   ("The laptop"); the default is not flipped, and is the user's to flip.
+   ("The laptop"), and **on by default the same day**, the user's word after playing it.
 
 Steps 1 and 2 decide whether the rest is worth building, and neither touches a live room.
 

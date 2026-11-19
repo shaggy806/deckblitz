@@ -18,8 +18,10 @@ that order so `engine` builds first, then `protocol`, then `server`).
   Emits no runtime code.
 - `server/` — Node + `ws`: the room host, one real `Game` per room, each seat pushed its own
   redacted view. **`server/CLAUDE.md`**.
-- `client/` — Vite + React 19: a networked client, one device per seat, never running a `Game`
-  itself. Needs `engine/dist` and `protocol/dist` built. **`client/CLAUDE.md`**.
+- `client/` — Vite + React 19: a networked client, one device per seat. The page never runs a
+  `Game`; its room worker does, for a solo game and for the tab's copy of a multiplayer one
+  (`docs/plans/replicated-rooms.md`). Needs `engine/dist` and `protocol/dist` built.
+  **`client/CLAUDE.md`**.
 
 Each workspace's `CLAUDE.md` loads when you work in it. The full per-file detail behind them is
 in **`docs/architecture/engine.md`, `server.md` and `client.md`**: not loaded automatically, so
@@ -103,12 +105,13 @@ for:
   (Wizards' text, unedited). Grep it for a rule's number and wording before citing one in code, a
   comment or a commit; when a newer edition is added, replace the file and this line.
 - **`docs/plans/*.md`** — design records, each saying *why* its piece is shaped the way it is,
-  with a `Status:` line at the top. `docs/plans/README.md` indexes them. Four are **in
+  with a `Status:` line at the top. `docs/plans/README.md` indexes them. Three are **in
   progress**: `bot-effect-knowledge` (the plan of record for the bots — read it before changing
   how a bot picks actions), `bot-next-steps` (the order of the bot work from 2026-11-15, and why
-  it isn't a longer clock), `token-stack-choices`, and `replicated-rooms` (a multiplayer game on
-  every player's device, from 2026-11-18: read it before changing how a room is driven or what
-  goes into a game's state, which has to come out the same on every machine).
+  it isn't a longer clock) and `token-stack-choices`. One that shipped is still the thing to read
+  first: `replicated-rooms` (a multiplayer game on every player's device, on by default since
+  2026-11-18: read it before changing how a room is driven or what goes into a game's state,
+  which has to come out the same on every machine).
 - **`client/BOARD_REDESIGN_PLAN.md`** — the board-overhaul record: the mockup URL, the settled
   design rules, and the known gaps. All 18 phases shipped.
 
