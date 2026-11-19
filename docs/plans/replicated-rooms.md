@@ -21,7 +21,12 @@ hold a copy, so every game on the site still starts on the server. **Step 6 is d
 (2026-11-18; the user: "Go ahead"): the host's tab closed mid-game, the other player's page takes
 the bots after the server's few seconds' wait and the game carries on, in a browser and with
 tabs closing and reopening through the racing fuzz; and the host's device now passes the empty
-windows of a player whose device is gone, as a room on the server does. Next are steps 7 and 8.
+windows of a player whose device is gone, as a room on the server does. **Step 7 is done**
+(2026-11-18; the user: "Step 7"): every copy sends a fingerprint of the game every 32 inputs, the
+server compares each with the host's, and a copy that differs is dealt the host's state; a
+device that joins late, reloads or reconnects is dealt from another device's state and the
+inputs since, 5 ms where replaying a late game's log took 307. Next is step 8: the laptop, then
+on by default.
 
 ## Why
 
@@ -437,15 +442,73 @@ for the server by design ("The undo").
 **Left as it is, and why**:
 
 - **Off by default.** Step 8 turns it on, after the laptop.
-- **A reload, or a connection that dropped, replays the whole log.** Half a second on the dev
-  PC, a quarter to most of a minute on the test laptop late in a long game (step 1's
-  measure). Step 7 builds a table that starts from a state; the restore from IndexedDB and
-  "the inputs since" belong with it.
+- **A reload, or a connection that dropped, replayed the whole log** until step 7, which deals
+  a returning device from another device's state ("The copies check each other").
 - **The host's controls act on the host's device only**: bot speed, pausing and stepping the
   bots are the host's room's, which is the one that runs them, and the other pages aren't
   told (no "Bots paused" badge there). A seat its player hands to a bot is played by that
   player's device and shows as a bot only on it.
 - **Bots wait for the host's page only**, as proposed under "Open decisions".
+
+### The copies check each other, and a game dealt from a state (step 7)
+
+**Built 2026-11-18.** Two things on one mechanism: a device can be handed the game as another
+device holds it.
+
+- **A fingerprint every 32 inputs** (`DIGEST_EVERY`, `stateDigest`, 2 to 3 ms). Every copy
+  passes through the game exactly as it stands with N inputs in: when an input from elsewhere
+  lands (`RoomCopy.landed`, before the room makes anything of its own on top), or when it
+  makes one itself in turn, the fingerprint then taken and sent only once the server has
+  confirmed that place (an undo throws it away). So all copies report at the same places,
+  whatever they have in flight (`table-digest`).
+- **The server compares each with the host's** for the same place (`Tables.digest`; it reads
+  nothing into the text, and holds no game). A device whose copy differs is dealt the host's:
+  the user's "unless the host disagrees". The host's copy is the game, even where the host's
+  is the one that drifted: then everyone else is put on it. A table's latest eight places are
+  kept; a new game clears them.
+- **A game dealt from a state.** `table-start` may carry the game as text (`stateToJson`, 300
+  to 670 KB, 19 to 49 KB as the socket compresses it) with the first `from` inputs in, and the
+  log's tail. A copy starts from that in place of the recipe's deal and every input again:
+  dealt in at turn 32 of a four-player game (1,325 inputs), 4.9 ms against 307 ms on the dev
+  PC, and the laptop's replay was the quarter to most of a minute.
+- **Who gives it.** The server asks a device at the table for its state
+  (`table-state-wanted`): the host's first, then any other seated device, never one waiting
+  to be dealt itself, three seconds each before the next is asked, and with nobody left the
+  whole log as before. The device answers with the game as of the last input the server has
+  placed: with moves of its own unconfirmed, the game as it stood before them (`TableCopy`'s
+  `base`). The server passes the text on unread, with the inputs placed since.
+- **So a join, a reload, a reconnection, a copy that lost its place and a copy that drifted
+  are one path**: a `table-start` with a state. The page is told when it was dealt again for
+  drifting ("had drifted from the table's, and was put back in step with it"), since the
+  board may change under the player with nothing done to it.
+- **Another build of the page** can't start a table with this one (the game starts on the
+  server), but can come to one under way: it is dealt the host's state like anyone, and its
+  copy is compared with the host's like anyone's. Where its engine works something out
+  differently it is put back on the host's game at the next comparison, each time. That is
+  the plan's proposed answer to "a latecomer on a newer build", taken; the stricter one
+  (refuse) is still open to the user.
+
+**Checked.** In a browser (`client/e2e/tables.spec.ts`): a page reloads as another build and
+is dealt a state and a few inputs, not the log; then its copy is made to differ by a test's
+hook (every life total a point up, shown on its own page and not the host's), they play on,
+and at the next comparison it is dealt the host's, says so, and shows the table's totals
+again; and a lobby of two builds starts on the server. In Node
+(`test/local-tables.test.ts`, `test/tables.test.ts`): a drifted copy put right within two
+stretches between fingerprints, nobody else touched; a drifted host puts the others on its
+game; the server asking the next device when one is silent, sends rubbish or leaves. Raced:
+300 games (two to four seats, decks from the whole pool, 240 of them with tabs closing and reopening, 70 paced, 70 with three times the racing): 166,994 inputs put in order, 11,492 fingerprints sent and compared with not one copy found to differ from the host's, and 384 copies dealt from another device's state, every copy holding the table's game at each of 5,062 moments of rest. (The fuzz fails a game in which any copy is dealt again for differing, since it does nothing to any copy.)
+
+**Left as it is**:
+
+- **No saved state on the device.** A reload is dealt from another device, which is quick
+  and needs no storage; with nobody else at the table (everyone else gone) it replays the
+  log. The plan's IndexedDB restore would only serve that case.
+- **The state's shape isn't numbered.** A page on a build whose state has another shape
+  can't read the host's and is told it couldn't deal the game. "Saving a game" needs the
+  number; so does this, the day a deploy changes the shape with tables on by default.
+- **A copy that differs is put right, not explained.** The server knows two fingerprints
+  differ and nothing about why; a report of it (which place, which builds) would be the
+  first thing to add if it ever happens in play.
 
 ### The host changing, and a player who is gone (step 6)
 
@@ -538,7 +601,10 @@ Each step ends in a check that can fail.
    guest's page has them, the game going on; and tables fuzzed with tabs closing and reopening
    as everything races end with one game on every copy.
 7. **The digest check and taking the host's state.** *Check*: a test hook that corrupts one copy;
-   a client on an older build.
+   a client on an older build. **Done 2026-11-18** ("The copies check each other, and a game
+   dealt from a state"): a page's copy corrupted by a test's hook is dealt the host's at the
+   next comparison and says so; a page reloaded as another build is dealt from the host's
+   state; two builds in one lobby start on the server.
 8. **Measured on the laptop, then on by default.** As `local-rooms.md` did: start-up time and
    memory with two tabs' worth of games, opt-in by a URL flag first.
 
@@ -561,7 +627,8 @@ a save in all but name.
 - **Someone watching** needs the engine and the pool loaded as a player does (2.7 s on the
   laptop). Proposed: accept it.
 - **A latecomer on a newer build** takes the host's state and is corrected by the digest check.
-  The stricter choice is to refuse and ask the table to finish first.
+  The stricter choice is to refuse and ask the table to finish first. Built as proposed in
+  step 7; say if it should refuse.
 - **Saved games, when they come**: kept on the device and as a file, or on the server under a
   code; and how old a save the site promises to load (every format change migrated, or "saves
   last until the next change to the state's shape", said plainly to the player). Proposed: the
