@@ -60,11 +60,16 @@ jobs:
           - name: typecheck
             run: npm run typecheck
           # The engine suite is the long pole (~5 minutes in one job), split
-          # by file across two.
-          - name: engine tests 1/2
-            run: npm run gen:cards -w engine && npm test -w engine -- --shard=1/2
-          - name: engine tests 2/2
-            run: npm run gen:cards -w engine && npm test -w engine -- --shard=2/2
+          # by file across four: in two, the halves took 157 and 231 seconds,
+          # the longest of the checks by a minute and a half (2026-11-18).
+          - name: engine tests 1/4
+            run: npm run gen:cards -w engine && npm test -w engine -- --shard=1/4
+          - name: engine tests 2/4
+            run: npm run gen:cards -w engine && npm test -w engine -- --shard=2/4
+          - name: engine tests 3/4
+            run: npm run gen:cards -w engine && npm test -w engine -- --shard=3/4
+          - name: engine tests 4/4
+            run: npm run gen:cards -w engine && npm test -w engine -- --shard=4/4
           - name: server and client tests
             run: npm test -w server && npm test -w client
           # The fuzzer: random play until legalActions offers something dispatch
@@ -76,8 +81,12 @@ jobs:
             run: node engine/scripts/random-demo.mjs --games 60
           # A long game stops at the fuzzer's turn cap and passes; its time limit
           # is there to catch a hang.
-          - name: fuzz, 4 players
-            run: node engine/scripts/random-demo.mjs --games 8 --players 4
+          # The same eight seeds, four a job (`--start`): together they were
+          # the second longest check.
+          - name: fuzz, 4 players, seeds 1-4
+            run: node engine/scripts/random-demo.mjs --games 4 --players 4
+          - name: fuzz, 4 players, seeds 5-8
+            run: node engine/scripts/random-demo.mjs --games 4 --players 4 --start 5
     name: ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v5
