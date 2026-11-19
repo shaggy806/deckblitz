@@ -16,7 +16,9 @@
 //
 // Steps: cast:<hand card> (or hand:), card:<card in a popup, on the board,
 // in hand, in the command zone or shown on top of a library>, stack:<entry on the stack>, click:<button, menu item or labelled box's text>,
-// player:<name>, x:<n> (the choose-X box, before its click:Confirm), pass, wait
+// player:<name>, x:<n> (the choose-X box, before its click:Confirm), hover:<card in
+// hand or on the board> (the pointer left on it for the step's shot: a hand card
+// raised, a permanent's hover card), pass, wait
 // (for the bots, up to 30 s: until a decision is yours, or a stack seen
 // has emptied), unfollow (stay in this seat while another of yours must act).
 // After every step the run passes priority while your own

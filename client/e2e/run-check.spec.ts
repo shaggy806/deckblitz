@@ -221,6 +221,26 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       await page.locator(tile).dispatchEvent('click')
       return true
     }
+    case 'hover': {
+      // The pointer left on a card for the shot: a hand card raised out of
+      // its tray, or a permanent's hover card.
+      const inHand = await findId(page, 'hand', arg)
+      if (inHand !== null) {
+        const tile = page.locator(`.hand-card[data-obj-id="${inHand}"] .card-tile`)
+        // The tray sits under the screen's edge until the pointer is on it:
+        // onto the strip that shows first, then onto the card once it's up.
+        await tile.hover({ position: { x: 12, y: 4 }, force: true, timeout: 3_000 })
+        await page.waitForTimeout(700)
+        await tile.hover({ force: true, timeout: 3_000 })
+        await page.waitForTimeout(900)
+        return true
+      }
+      const onBoard = await findId(page, 'battlefield', arg)
+      if (onBoard === null) return false
+      await page.locator(`.board [data-obj-id="${onBoard}"]`).first().hover({ timeout: 3_000 })
+      await page.waitForTimeout(900)
+      return true
+    }
     case 'card': {
       // A card in an open popup first (it's over the board), then the board,
       // then the hand, then the command zone.
@@ -346,8 +366,9 @@ test('run a manual check', async ({ page }) => {
 
   for (const [i, step] of run.steps.entries()) {
     const found = await runStep(page, step)
-    // Off the board, so a hover card doesn't cover the next target.
-    await page.mouse.move(1, 1)
+    // Off the board, so a hover card doesn't cover the next target — but a
+    // `hover:` step's shot is of the card under the pointer.
+    if (!/^\s*hover\s*:/i.test(step)) await page.mouse.move(1, 1)
     const s = await settle(page, step.trim().toLowerCase() === 'wait', run.hold)
     const shot = await shoot(i + 1, step)
     if (!found) {
