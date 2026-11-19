@@ -4,9 +4,9 @@ Status: **in progress** (2026-11-18; the user: "Start step 1"). Built: the groun
 fuzzer's copy check (`MTG_REPLICA=1`), a state's exact form as text (`engine/src/state-wire.ts`),
 names ordered the same on every machine (`compareNames`) — and of step 1, the state digest
 (`stateDigest`) and the check across browsers (`npm run play:browsers -w engine`). **Step 1 is
-done but for the test laptop**: 30 recorded games came out identical in Node, in three builds of
-Chrome's engine, in Firefox's and in Safari's. Step 2, the room as a copy, is next. None of the
-rooms themselves are built.
+done**: recorded games came out identical in Node, in three builds of Chrome's engine, in
+Firefox's and in Safari's, and in Chrome on the test laptop. Step 2, the room as a copy, is next.
+None of the rooms themselves are built.
 
 ## Why
 
@@ -89,7 +89,8 @@ input first, and applies its own again if it is still legal. Measured, a state c
     choice offers and the creature types suggested first). They use `compareNames` now, and
     `test/same-on-every-machine.test.ts` fails on a locale read anywhere in the engine.
 - **The numbers** (dev PC): an action is 43 bytes on average against a 50-80 KB frame a seat;
-  applying one takes 0.2-0.5 ms, so a whole game's log replays in about half a second; the whole
+  applying one takes 0.2-0.5 ms, so a whole game's log replays in about half a second there
+  (2-6 ms and tens of seconds on the test laptop: below); the whole
   state is 220-420 KB as JSON, 11-23 KB gzipped.
 
 - **Step 1: one digest, in every browser tried.** `stateDigest` is 16 hex characters for a
@@ -106,10 +107,17 @@ input first, and applies its own again if it is still legal. Measured, a state c
   same state as V8 to the last digest. An action costs 0.34 ms in Chrome, 0.59 in Firefox and
   0.63 in WebKit on the dev PC, and the pool loads in 0.4-1.2 s.
 
-**Not checked**: two different builds of the engine itself; Safari on a Mac (Playwright's WebKit
-is the same engine, built for Windows); and the test laptop (its Chrome wasn't connected when
-step 1 ran: `play:browsers -- --serve` leaves a page up that any machine's browser can open, and
-prints what it reports).
+- **And on the test laptop** (Core i5-6300U, 4 threads, Chrome 157; `play:browsers -- --serve`
+  leaves the page up on the LAN, and a browser that opens it posts its result back): twelve
+  games (seeds 1-6 at both table sizes; 32,463 actions, 343 checkpoints) identical, twice over.
+  It is slow there, and unevenly so: 5.7 ms an action on the first run and 2.0 on the second
+  (0.34 on the dev PC), a four-player game's 4,000-odd actions taking 14-41 s to replay in the
+  first. Playing along costs a device a dozen actions a real move, which that speed carries; but
+  **catching up by replaying a whole log does not hold on a slow machine**, where it is the
+  host's state a late device should be sent ("Shape").
+
+**Not checked**: two different builds of the engine itself, and Safari on a Mac (Playwright's
+WebKit is the same engine, built for Windows).
 
 ## Shape
 
@@ -153,8 +161,11 @@ and carries on from it: the user's "unless the host disagrees". This is also wha
 with a slightly different engine (a browser that computes something differently, a page loaded
 after a deploy) in the game.
 
-**Joining late, reconnecting, watching**: the device is sent the recipe and the log and replays
-it (half a second), or is sent the host's state where a replay can't be trusted (another build).
+**Joining late, reconnecting, watching**: the device is sent the host's state and the inputs
+since, or the recipe and the whole log to replay. The state is the rule, not the exception: a
+replay is half a second on the dev PC but a quarter to most of a minute on the test laptop
+(step 1's measure), and it can't be trusted across builds at all. A short gap (a dropped
+connection, a reload) is the log's tail, which is quick anywhere.
 A reloaded page restores its game from IndexedDB as a solo game does and asks for the inputs it
 missed.
 
@@ -261,9 +272,9 @@ Each step ends in a check that can fail.
 
 0. **Done**: the groundwork above. *Check*: `MTG_REPLICA=1` on the fuzzer.
 1. **The digest, and the other browsers.** *Check*: one log, the same digest in Node, Chromium,
-   Firefox, WebKit and on the laptop. **Done 2026-11-18, but for the laptop**: 30 games
-   identical in Node 24, Chromium 141, Chrome 157, Edge 157, Firefox 142 and WebKit 26
-   ("What was checked").
+   Firefox, WebKit and on the laptop. **Done 2026-11-18**: 30 games identical in Node 24,
+   Chromium 141, Chrome 157, Edge 157, Firefox 142 and WebKit 26, and twelve in Chrome on the
+   laptop ("What was checked").
 2. **The room as a copy, in Node.** Seats a room answers for, inputs out and in, replace-the-game.
    *Check*: several rooms in one process, wired through an in-memory order, play whole games
    (random players, bots on one, auto-pass, pass-the-turn, resolve-the-stack, a concession with
