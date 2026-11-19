@@ -181,6 +181,19 @@ export class Tables {
       case "leave-room":
         this.leave(table, conn);
         return;
+      case "join-room":
+      case "spectate-room":
+        // A page that came by the room's code, not knowing its game is a
+        // table: there is no game here to join. One that can hold a copy
+        // reads the code and asks for the table (`table-join`); any other
+        // shows the message.
+        this.send(conn, {
+          type: "error",
+          code: "table",
+          roomId: table.id,
+          message: `room ${table.id}'s game is played on its players' own devices, which this page can't join`,
+        });
+        return;
       default:
         if (SILENT.has(message.type)) return;
         this.send(conn, { type: "error", message: `room ${table.id} is played on its players' own devices` });
@@ -271,7 +284,20 @@ export class Tables {
       host: table.host,
       from,
       log: table.log.slice(from),
+      online: this.online(table),
     };
+  }
+
+  /** The people whose devices are connected, in seating order. */
+  private online(table: Table): PlayerId[] {
+    return table.recipe.seats.filter((s) => table.seats.get(s.player)?.conn != null).map((s) => s.player);
+  }
+
+  /** Tells every device who is connected now, but `except`, which is being
+   * told in its `table-start`. */
+  private seatsChanged(table: Table, except?: ConnId): void {
+    const message: ServerMessage = { type: "table-seats", roomId: table.id, online: this.online(table) };
+    for (const to of this.everyone(table)) if (to !== except) this.send(to, message);
   }
 
   private input(table: Table, conn: ConnId, after: unknown, mine: unknown, input: unknown): void {
@@ -329,6 +355,7 @@ export class Tables {
     // one the bots were waiting for.
     this.rehost(table);
     this.send(conn, this.startFor(table, seat, start));
+    if (seat !== null) this.seatsChanged(table, conn);
   }
 
   private rematch(table: Table, conn: ConnId): void {
@@ -357,8 +384,10 @@ export class Tables {
   }
 
   private leave(table: Table, conn: ConnId): void {
+    const seated = this.seatOf(table, conn) !== null;
     if (!this.unbind(table, conn)) return;
     this.rehost(table);
+    if (seated) this.seatsChanged(table);
   }
 
   /** Lets go of `conn` at `table`; whether it was there. */

@@ -1212,6 +1212,29 @@ function ErrorLine({ game }: { readonly game: NetworkGame }) {
   )
 }
 
+/**
+ * Something the player is told that is nobody's mistake (`game.notice`): a
+ * move of theirs at a table was taken back, because someone conceded in the
+ * moment they made it. Without it the board would simply not be the one
+ * their click made, with nothing to say why. A toast like an error's, in the
+ * notices' colour and up for as long as the blitz's report, since it is to
+ * be read and not just noticed.
+ */
+function NoticeLine({ game }: { readonly game: NetworkGame }) {
+  const { notice, clearNotice } = game
+  useEffect(() => {
+    if (!notice) return
+    const t = window.setTimeout(clearNotice, BLITZ_REPORT_LINGER_MS)
+    return () => window.clearTimeout(t)
+  }, [notice, clearNotice])
+  if (!notice) return null
+  return (
+    <div key={notice.seq} className="toast info toast-long" onClick={clearNotice} role="status" title="Click to dismiss">
+      {withNames(notice.message, game.seats, game.nameOf)}
+    </div>
+  )
+}
+
 /** How many stand-ins a blitz's notice names before "and N more". */
 const BLITZ_REPORT_SHOWN = 6
 
@@ -1789,6 +1812,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
             Your turn ended on its own: nothing was left that you could play. Settings has the stops.
           </HighrollToast>
         ) : null}
+        <NoticeLine game={game} />
         {/* Last: an error comes and goes, and above the notices that stay it
             pushed them down a line each time (the jitter sweep, 2026-10-10). */}
         <ErrorLine game={game} />

@@ -97,6 +97,9 @@ export interface Device {
   readonly clock: FakeClock | null;
   /** The last frame its page said it had shown (`"realtime"` pacing). */
   acked: number;
+  /** What its page was told beyond frames: a refusal, a notice that a move
+   * was taken back. */
+  readonly told: ServerMessage[];
 }
 
 const ROOM = "RACES";
@@ -144,15 +147,17 @@ export class RacingTable {
     };
     players.forEach((player, i) => {
       if (options.seats[i] !== "person") return;
+      const told: ServerMessage[] = [];
       this.devices.push({
         conn: i + 1,
         player,
-        page: { send: () => {} },
+        page: { send: (message) => told.push(message) },
         copy: null,
         up: [],
         down: [],
         clock: this.paced ? new FakeClock() : null,
         acked: 0,
+        told,
       });
     });
     if (this.devices.length === 0) throw new Error("a table needs a person");
@@ -278,9 +283,15 @@ export class RacingTable {
           : { pacing: "realtime" as const, timers: clock.timers, settleSliceMs: Infinity }),
         botController: this.botController,
       },
+      notice: (message) => device.told.push({ type: "notice", roomId: ROOM, message }),
     });
     if (start.seat !== null) copy.room.claimSeat(start.seat, `page-${device.conn}`, device.page);
     return copy;
+  }
+
+  /** What `device`'s page has been told beyond frames, oldest first. */
+  toldTo(device: Device): readonly ServerMessage[] {
+    return device.told;
   }
 
   /**

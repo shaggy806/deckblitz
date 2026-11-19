@@ -59,7 +59,10 @@ that file.
   `docs/plans/replicated-rooms.md`): the players' devices each run a copy (`table-copy.ts`), and
   main keeps the recipe, the order of their inputs, who is connected and whose device runs the
   bots. A lobby starts as one only when every connection in it said `table-capable` on one build
-  (no page does yet), otherwise as a `Room` as ever. Nothing in `tables.ts` may import the engine
+  (a page with `?tables=1` does, once its worker has the card pool; off by default), otherwise as
+  a `Room` as ever. The page's worker runs the copy through `local-host.ts` (`LocalRoomHost.table`),
+  so what a copy's room tells its connections (frames, `isHost`, who is online, a `notice`) is
+  what a player sees. Nothing in `tables.ts` may import the engine
   or check an input against a game: it takes an in-turn input only where the device made it (the
   log ending at `after`, its last `mine` entries that device's) and an out-of-turn one
   (`after: null`) anywhere. `table-input` is not rate-limited, and both hosts must route a

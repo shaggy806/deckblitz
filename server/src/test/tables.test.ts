@@ -223,8 +223,10 @@ describe("a table on the server", () => {
     tables.open(opening());
     take();
     tables.close(1);
-    // Nothing yet: a reload is back in a moment.
-    expect(take()).toEqual([]);
+    // Nothing yet but that she is gone: a reload is back in a moment.
+    expect(take()).toEqual(
+      [3, 4, 9].map((to) => ({ to, message: { type: "table-seats", roomId: "TABLE", online: [CAROL, DAVE] } })),
+    );
     expect(waiting()).toBe(true);
     expect(elapse()).toBe(true);
     expect(take()).toEqual([3, 4, 9].map((to) => ({ to, message: { type: "table-host", roomId: "TABLE", host: CAROL } })));
@@ -233,7 +235,28 @@ describe("a table on the server", () => {
     tables.message(10, { type: "table-join", roomId: "TABLE", clientToken: "a", from: 0 });
     const back = take();
     expect(back.filter((o) => o.message.type === "table-host").map((o) => o.to)).toEqual([10, 3, 4, 9]);
-    expect(back.at(-1)).toMatchObject({ to: 10, message: { type: "table-start", seat: ALICE, host: ALICE } });
+    expect(back.find((o) => o.message.type === "table-start")).toMatchObject({
+      to: 10,
+      message: { type: "table-start", seat: ALICE, host: ALICE, online: [ALICE, CAROL, DAVE] },
+    });
+    // And everyone else is told she is back.
+    expect(back.filter((o) => o.message.type === "table-seats")).toEqual(
+      [3, 4, 9].map((to) => ({ to, message: { type: "table-seats", roomId: "TABLE", online: [ALICE, CAROL, DAVE] } })),
+    );
+  });
+
+  it("answers a join by the room's code with an error a capable page reads as \"ask for the table\"", () => {
+    const { tables, take } = harness();
+    tables.open(opening());
+    take();
+    tables.message(20, { type: "join-room", roomId: "TABLE" });
+    tables.message(21, { type: "spectate-room", roomId: "TABLE" });
+    expect(take()).toMatchObject([
+      { to: 20, message: { type: "error", code: "table" } },
+      { to: 21, message: { type: "error", code: "table" } },
+    ]);
+    // Neither is at the table for having asked.
+    expect(tables.summaries()[0]).toMatchObject({ connected: 3 });
   });
 
   it("leaves the bots where they are when the host is back within the grace", () => {
@@ -247,7 +270,7 @@ describe("a table on the server", () => {
     tables.message(11, { type: "table-join", roomId: "TABLE", clientToken: "a", from: 0 });
     expect(waiting()).toBe(false);
     expect(elapse()).toBe(false);
-    expect(take().map((o) => o.message.type)).toEqual(["table-start"]);
+    expect(take().map((o) => o.message.type).filter((type) => type !== "table-seats")).toEqual(["table-start"]);
     expect(tables.summaries()[0].host).toBe(ALICE);
 
     // With nobody at all connected there is no host; the first back has them.
@@ -256,7 +279,10 @@ describe("a table on the server", () => {
     expect(tables.summaries()[0]).toMatchObject({ host: null, connected: 0 });
     take();
     tables.message(12, { type: "table-join", roomId: "TABLE", clientToken: "d", from: 0 });
-    expect(take().at(-1)).toMatchObject({ to: 12, message: { type: "table-start", seat: DAVE, host: DAVE } });
+    expect(take().find((o) => o.message.type === "table-start")).toMatchObject({
+      to: 12,
+      message: { type: "table-start", seat: DAVE, host: DAVE, online: [DAVE] },
+    });
   });
 
   it("deals a rematch for the host: a new game number, seed and salt, an empty log", () => {

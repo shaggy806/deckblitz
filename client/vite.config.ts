@@ -171,8 +171,15 @@ const buildAsap = (): Plugin => ({
 })
 
 // https://vite.dev/config/
+/** This build of the page, for `PAGE_BUILD` (`src/local/tablesMode.ts`): one
+ * value a build, or a dev server's run, the same in the page and its worker.
+ * Pages that would play one game on their own devices compare it, since
+ * their copies must run the same engine and cards. */
+const PAGE_BUILD = Date.now().toString(36)
+
 export default defineConfig({
   plugins: [react(), engineLocal(), cardCatalog(), shardFiles(), buildAsap()],
+  define: { __PAGE_BUILD__: JSON.stringify(PAGE_BUILD) },
   // The landing page's dev menu of test rooms (`src/lobby/devRooms.ts`)
   // reads dev-rooms' command port (`server/scripts/dev-rooms.mjs`) through
   // this: same-origin, so no CORS, and the dev server only — a build has

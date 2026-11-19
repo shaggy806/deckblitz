@@ -562,12 +562,14 @@ export type ClientMessage =
       /**
        * "I can hold a copy of a game": this connection's page can run a room
        * of its own (`docs/plans/replicated-rooms.md`), on the build it names.
-       * Sent once, as the socket opens, like `event-deltas`. A waiting room
-       * whose every member said so, with one build between them, starts as a
-       * **table** (`table-start`) and not as a game on the server.
+       * Sent once the page's worker has the card pool loaded, and again on
+       * each new connection. A waiting room whose every member said so, with
+       * one build between them, starts as a **table** (`table-start`) and not
+       * as a game on the server.
        */
       readonly type: "table-capable";
-      /** The page's build: copies of one game must run the same engine. */
+      /** The page's build: copies of one game must run the same engine. An
+       * empty one takes the word back (the page's worker failed). */
       readonly build: string;
     }
   | {
@@ -770,6 +772,12 @@ export type ServerMessage =
        * than it: the whole log.
        */
       readonly eventsFrom?: number;
+      /** The game this frame shows was put in place of the one the last
+       * frame showed (`Room.replaceGame`: a move at a table undone, a copy
+       * taking another's state): its log isn't the old one grown, so there
+       * is nothing to animate from the old board to this one. The client
+       * shows it as it stands. Always with `eventsFrom: 0`. */
+      readonly replaced?: true;
       readonly actions: readonly LegalAction[];
       readonly seats: readonly SeatStatus[];
       /** Whether *this* seat currently has an auto-pass in effect, paused or
@@ -843,6 +851,16 @@ export type ServerMessage =
       /** The inputs put in order so far, from `from` on. */
       readonly from: number;
       readonly log: readonly TableEntry[];
+      /** The people whose devices are connected to the table now. Absent
+       * from a server older than it: everyone. */
+      readonly online?: readonly PlayerId[];
+    }
+  | {
+      /** Who is connected to a table changed (a device dropped, or came
+       * back): to every device there, for the dot beside each player. */
+      readonly type: "table-seats";
+      readonly roomId: string;
+      readonly online: readonly PlayerId[];
     }
   | {
       /** An input took its place in a table's order: to every device there,
@@ -872,6 +890,21 @@ export type ServerMessage =
       readonly message: string;
       /** Set on a create the server refused for its limits: `server-full`
        * (every room shard is at its cap) or `too-many-rooms` (this address
-       * already has its share open). Absent on every other error. */
-      readonly code?: "server-full" | "too-many-rooms";
+       * already has its share open); and on a `join-room` or `spectate-room`
+       * for a room whose game is a **table** (`table`): there is no game on
+       * the server to join, and a page that can hold a copy asks for the
+       * table (`table-join`) instead of showing this. Absent on every other
+       * error. */
+      readonly code?: "server-full" | "too-many-rooms" | "table";
+      /** The room a `table` error is about. */
+      readonly roomId?: string;
+    }
+  | {
+      /** Something the player should be told that is nobody's mistake: a
+       * move of theirs at a table that was taken back because someone else's
+       * input came first (`docs/plans/replicated-rooms.md`, "The undo").
+       * Shown as a toast, like an `error`, without its warning. */
+      readonly type: "notice";
+      readonly roomId: string;
+      readonly message: string;
     };

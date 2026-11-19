@@ -154,6 +154,20 @@ createServer((req, res) => {
       res.end(`${JSON.stringify({ error: String(err?.message ?? err) })}\n`);
       return;
     }
+    // The host's own account of itself (`RoomHost.status`): every room, and
+    // the tables, whose games no room here holds. For the tests that check
+    // where a game is being played.
+    if (cmd.op === "status") {
+      res.end(`${JSON.stringify(await roomHost.status(), null, 2)}\n`);
+      return;
+    }
+    // Every socket closed from this end, as a network that went away would:
+    // for the tests of pages finding their way back.
+    if (cmd.op === "drop") {
+      for (const client of wss.clients) client.close();
+      res.end("null\n");
+      return;
+    }
     const out = await command(cmd);
     if (!out.ok) {
       res.statusCode = 400;

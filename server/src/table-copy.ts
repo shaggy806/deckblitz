@@ -2,8 +2,8 @@
  * One device's copy of a table's game (`docs/plans/replicated-rooms.md`,
  * steps 3 and 5): a `Room` dealt from the table's recipe, playing this
  * device's seat (and the bots' while it is the host), wired to the server's
- * order. Part of the room code: a page's worker will run it (step 4), and the
- * server's tests run it as their scripted clients.
+ * order. Part of the room code: a page's worker runs it (step 4,
+ * `local-host.ts`), and the server's tests run it as their scripted clients.
  *
  * **In turn.** An action of the player the game waits on is applied here the
  * moment it is made, so the person sees their move with no trip to the
@@ -27,7 +27,13 @@
  * not applied when made (`RoomCopy.sent`'s `applied: false`): they go out
  * with no place asked for and are applied when they come back, here as on
  * every device. Until its own has landed the copy plays nothing, since what
- * it made next would be made on a game without it.
+ * it made next would be made on a game without it; a move the person makes
+ * meanwhile is kept and made when it has (`RoomCopy.hold`).
+ *
+ * **What the page sees.** An undo is one frame, where it ends (`quiet`), and
+ * when it took back a move the person made and didn't make it again, they
+ * are told why (`notice`). The copy also answers, for its room, whether
+ * this device is the host and which other people are connected.
  */
 
 import { Game } from "engine/local";
@@ -49,6 +55,9 @@ export interface TableCopyOptions {
   /** This copy has stopped playing: it holds a game the table doesn't, and
    * couldn't put itself right. */
   readonly onOutOfStep?: (why: string) => void;
+  /** Something to tell the person at this device: a move of theirs was
+   * taken back. Seats are named by their ids, as a room's errors name them. */
+  readonly notice?: (message: string) => void;
 }
 
 /** An input this copy made that the server hasn't given its place yet. */
@@ -70,6 +79,12 @@ export class TableCopy {
   /** How many times it has gone back on inputs that lost their place. */
   undone = 0;
   private host: PlayerId | null;
+  /** The people whose devices are connected to the table, as the server
+   * last said; `null` from a server that doesn't say: everyone. */
+  private online: ReadonlySet<PlayerId> | null;
+  /** The person's actions that arrived while an input of this copy's made
+   * out of turn was on its way: made, in order, once it has landed. */
+  private readonly held: (() => void)[] = [];
   private readonly botSeats: ReadonlySet<PlayerId>;
   /** How many of the table's inputs this copy holds: everyone else's it has
    * applied, and its own that the server has confirmed. */
@@ -100,6 +115,7 @@ export class TableCopy {
     this.roomId = start.roomId;
     this.seat = start.seat;
     this.host = start.host;
+    this.online = start.online === undefined ? null : new Set(start.online);
     this.gameNumber = recipe.gameNumber;
     this.botSeats = new Set(recipe.seats.filter((s) => s.bot).map((s) => s.player));
     const names: Record<string, string> = {};
@@ -117,6 +133,16 @@ export class TableCopy {
           (player === this.seat || (this.host === this.seat && this.botSeats.has(player))),
         sent: (input, how) => this.sent(input, how),
         making: () => this.making(),
+        hold: (again) => {
+          if (!this.pending.some((p) => !p.applied)) return false;
+          this.held.push(again);
+          return true;
+        },
+        // One frame for an undo, where it ends: not the game put back and
+        // then each input again.
+        quiet: () => this.catchingUp,
+        isHost: () => this.isHost,
+        online: (player) => this.online === null || this.online.has(player),
       },
       botSpeed: recipe.botSpeed,
       firstPlayerChosen: recipe.firstPlayer !== "random",
@@ -165,8 +191,15 @@ export class TableCopy {
         this.refused(message.head);
         return;
       case "table-host":
+        if (this.host === message.host) return;
         this.host = message.host;
         this.room.answersChanged();
+        // Whether or not a move was waiting on it: the page's host controls.
+        this.room.publish();
+        return;
+      case "table-seats":
+        this.online = new Set(message.online);
+        this.room.publish();
         return;
       default:
         return;
@@ -212,6 +245,7 @@ export class TableCopy {
         // Made out of turn: it happens now, here as on every device. With
         // it landed, the room may play again, and looks as it takes this in.
         this.room.receive(input);
+        this.release();
       }
       return;
     }
@@ -233,7 +267,16 @@ export class TableCopy {
     // order later, so after one their action stands if the game takes it.
     this.count += 1;
     this.room.receive(input);
-    this.carryOn(input.kind === "orders-own-triggers" ? lost : []);
+    this.carryOn(lost, input);
+  }
+
+  /** Makes the person's actions that were waiting for an input of this
+   * copy's to land (`RoomCopy.hold`), unless another is on its way now. */
+  private release(): void {
+    while (this.held.length > 0 && !this.pending.some((p) => !p.applied)) {
+      const again = this.held.shift();
+      again?.();
+    }
   }
 
   /** The server didn't take an input of this copy's: the log ends at `head`. */
@@ -260,7 +303,7 @@ export class TableCopy {
     // This refusal was the first of theirs.
     this.refusalsDue -= 1;
     this.behind = head;
-    this.carryOn([]);
+    this.carryOn(lost, null);
   }
 
   /**
@@ -290,17 +333,36 @@ export class TableCopy {
     return lost;
   }
 
-  /** After an undo: the person's own action again if it is to stand (`again`
-   * holds what was dropped), it was the first thing dropped and the game
-   * still takes it; then the room's own seats are its to play again (a bot's
-   * move, an auto-pass, it makes afresh). */
-  private carryOn(again: readonly Outstanding[]): void {
+  /**
+   * After an undo that dropped `lost` because `first` got in ahead of it
+   * (`null`: the server refused them with nothing seen in their place). The
+   * person's own action is made again if it is to stand: after a setting,
+   * which changes nothing they were asked, where it was the first thing
+   * dropped and the game still takes it. Otherwise they are told it was
+   * taken back. Then the room's own seats are its to play again (a bot's
+   * move, an auto-pass, it makes afresh).
+   */
+  private carryOn(lost: readonly Outstanding[], first: RoomInput | null): void {
+    const mine = lost.find((p) => p.by === "person" && p.input.kind === "action");
+    let remade = false;
     this.catchingUp = false;
-    const first = again[0];
-    if (first !== undefined && first.by === "person" && first.input.kind === "action") {
-      this.room.remake(first.input.action);
+    if (first !== null && first.kind === "orders-own-triggers" && mine !== undefined && mine === lost[0]) {
+      if (mine.input.kind === "action") remade = this.room.remake(mine.input.action);
     }
     this.room.answersChanged();
+    if (mine !== undefined && !remade) {
+      this.options.notice?.(
+        first !== null && first.kind === "concede"
+          ? `${first.player} conceded just as you moved, so your move was taken back. The game is as it now stands.`
+          : "The game changed just as you moved, so your move was taken back. The game is as it now stands.",
+      );
+    }
+  }
+
+  /** Lets go of the room: its timers, and the bots' with them. */
+  dispose(): void {
+    this.held.length = 0;
+    this.room.dispose();
   }
 
   private stop(why: string): void {

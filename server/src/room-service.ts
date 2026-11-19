@@ -324,7 +324,11 @@ export class RoomService {
    * events a connection has had are the log's first `count`, whichever seat or
    * spectator it was watching from. Never touches `view` itself.
    */
-  private newEvents(room: Room, view: PlayerView, connection: Connection): { view: PlayerView; eventsFrom: number } {
+  private newEvents(
+    room: Room,
+    view: PlayerView,
+    connection: Connection,
+  ): { view: PlayerView; eventsFrom: number; replaced?: true } {
     const total = view.events.length;
     let sent = this.sentEvents.get(connection);
     if (sent === undefined) this.sentEvents.set(connection, (sent = new Map()));
@@ -339,8 +343,13 @@ export class RoomService {
       last.count <= total
         ? last.count
         : 0;
+    // This connection was shown the game that one took the place of: the
+    // frame says so (`state.replaced`), for a client not to animate its way
+    // from the old board to this one.
+    const replaced = last !== undefined && last.room === room && last.replaced !== room.replacements;
     sent.set(room.id, { room, count: total, replaced: room.replacements });
-    return from === 0 ? { view, eventsFrom: 0 } : { view: { ...view, events: view.events.slice(from) }, eventsFrom: from };
+    if (from !== 0) return { view: { ...view, events: view.events.slice(from) }, eventsFrom: from };
+    return replaced ? { view, eventsFrom: 0, replaced: true } : { view, eventsFrom: 0 };
   }
 
   /** `roomJoined` for `connection`, counting the room's spectators. */
@@ -379,7 +388,7 @@ export class RoomService {
     const firstFrame = !this.sentArtManifest.has(connection);
     if (firstFrame) this.sentArtManifest.add(connection);
     const sliced = this.newEvents(room, shared?.view ?? room.game.viewFor(SPECTATOR), connection);
-    const key = `${sliced.eventsFrom}:${firstFrame}`;
+    const key = `${sliced.eventsFrom}:${firstFrame}:${sliced.replaced === true}`;
     const same = shared?.frames.get(key);
     if (same !== undefined) return same;
     const message: ServerMessage = {
@@ -977,6 +986,9 @@ export class RoomService {
       case "table-capable": {
         if (typeof message.build === "string" && message.build.length > 0 && message.build.length <= 100) {
           this.copyBuilds.set(connection, message.build);
+        } else {
+          // Taken back: the page's worker failed since it said so.
+          this.copyBuilds.delete(connection);
         }
         return;
       }

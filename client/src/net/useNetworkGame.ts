@@ -46,6 +46,7 @@ import { localMode } from '../local/localMode.ts'
 import { localStart } from '../lobby/localStart.ts'
 import { createDeckFromImport, listDecks } from '../deck-builder/decks.ts'
 import { HybridSocket, isLocalRoom } from '../local/localSocket.ts'
+import { tablesMode } from '../local/tablesMode.ts'
 import type { RoomSocket } from '../local/localSocket.ts'
 
 const SERVER_URL =
@@ -242,6 +243,11 @@ export interface NetworkGame {
    * from the first (setting the same string doesn't even re-render), so the
    * toast keys on this to restart its clock and its fade. */
   readonly errorSeq: number
+  /** Something the player is told that is nobody's mistake (the server's
+   * `notice`): a move of theirs at a table that was taken back because
+   * someone else's input came first. `seq` restarts its toast, as
+   * `errorSeq` does an error's. */
+  readonly notice: { readonly message: string; readonly seq: number } | null
   readonly roomId: string | null
   readonly seats: readonly SeatStatus[]
   readonly seat: PlayerId | null
@@ -450,6 +456,7 @@ export interface NetworkGame {
   tutorialRetry: () => void
   nameOf: (id: ObjectId) => string
   clearError: () => void
+  clearNotice: () => void
   reconnect: () => void
 }
 
@@ -523,6 +530,7 @@ export function useNetworkGame(): NetworkGame {
   const [everConnected, setEverConnected] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [errorSeq, setErrorSeq] = useState(0)
+  const [notice, setNotice] = useState<{ readonly message: string; readonly seq: number } | null>(null)
   const [roomId, setRoomId] = useState<string | null>(null)
   const [seats, setSeats] = useState<readonly SeatStatus[]>([])
   const [seat, setSeat] = useState<PlayerId | null>(null)
@@ -630,6 +638,14 @@ export function useNetworkGame(): NetworkGame {
           () => isLocalRoom(roomIdRef.current),
           // A reload into a game played here needn't wait for the server.
           isLocalRoom(new URL(window.location.href).searchParams.get('room')),
+          // A game with other people in it, played on each player's own
+          // device (`local/tablesMode.ts`): this tab's seat there is the one
+          // it holds in the room, by the same token.
+          tablesMode()
+            ? {
+                seatToken: (id) => loadStoredSeat(id)?.clientToken ?? pendingClaimRef.current?.clientToken ?? null,
+              }
+            : null,
         )
       : (new WebSocket(SERVER_URL) as RoomSocket)
     wsRef.current = ws
@@ -905,6 +921,7 @@ export function useNetworkGame(): NetworkGame {
             view,
             actions: message.actions,
             ...(message.tutorial !== undefined ? { tutorial: message.tutorial } : {}),
+            ...(message.replaced === true ? { replaced: true as const } : {}),
           })
           setAutoPassing(message.autoPassing)
           setAutoPassPaused(message.autoPassPaused)
@@ -923,6 +940,11 @@ export function useNetworkGame(): NetworkGame {
             if (held && held.seat !== message.seat) storeSeat(message.roomId, message.seat, held.clientToken)
           }
           setStatus('playing')
+          return
+        }
+        case 'notice': {
+          if (message.roomId !== roomIdRef.current) return
+          setNotice((n) => ({ message: message.message, seq: (n?.seq ?? 0) + 1 }))
           return
         }
         case 'capture-list': {
@@ -950,6 +972,16 @@ export function useNetworkGame(): NetworkGame {
             roomIdRef.current = null
             setRoomId(null)
             clearRoomFromUrl()
+            if (message.code === 'table') {
+              // The room is there, but its game is on its players' own
+              // devices (a table) and this page can't hold a copy of one:
+              // tables are off here, or the tab's worker failed. Said in so
+              // many words, not as a room that wasn't found.
+              setError("That game is being played on its players' own devices, and this browser can't join it that way.")
+              setErrorSeq((n) => n + 1)
+              setStatus('no-room')
+              return
+            }
             setStatus('room-not-found')
             return
           }
@@ -1519,6 +1551,7 @@ export function useNetworkGame(): NetworkGame {
   )
 
   const clearError = useCallback(() => setError(null), [])
+  const clearNotice = useCallback(() => setNotice(null), [])
   const reconnect = useCallback(() => {
     if (reconnectTimeoutRef.current !== null) {
       window.clearTimeout(reconnectTimeoutRef.current)
@@ -1625,6 +1658,8 @@ export function useNetworkGame(): NetworkGame {
     tutorialRetry,
     nameOf,
     clearError,
+    clearNotice,
+    notice,
     reconnect,
   }
 }

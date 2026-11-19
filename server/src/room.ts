@@ -405,6 +405,28 @@ export interface RoomCopy {
   /** About to make an input in turn: the game as it stands is the one it is
    * made on, what an undo of it goes back to. */
   readonly making?: () => void;
+  /**
+   * A person's action arrived while this copy can't make it yet but soon
+   * can: an input of its own made out of turn is on its way, and the action
+   * belongs after it. If the copy keeps `again` to call once that has landed
+   * it returns `true`, and the room does nothing now; `false`, and the action
+   * goes ahead (or is refused) as usual.
+   */
+  readonly hold?: (again: () => void) => boolean;
+  /**
+   * Whether the room keeps its frames to itself for now: the copy is in the
+   * middle of putting its game right (an undo: the game put back, then each
+   * input again), and only where that ends is worth showing. The copy calls
+   * `Room.answersChanged` when it is done, which publishes what was held.
+   */
+  readonly quiet?: () => boolean;
+  /** Whether this copy's device holds the table's host role (it runs the
+   * bots, and may deal a rematch): what its own connections are told, there
+   * being nobody else's here to compare with. */
+  readonly isHost?: () => boolean;
+  /** Whether the device of `player`, a person at another device, is
+   * connected to the table: the dot beside their name. */
+  readonly online?: (player: PlayerId) => boolean;
 }
 
 export interface RoomOptions {
@@ -579,6 +601,9 @@ export class Room {
    * game: a frame's reader that kept the old game's events (`room-service.ts`)
    * tells by it that they are no longer the log. */
   private replaced = 0;
+  /** A frame was asked for while the copy kept them back (`RoomCopy.quiet`):
+   * it goes out when the copy is done (`answersChanged`). */
+  private unpublished = false;
   private readonly seats: Seat[];
   private readonly bots = new Map<PlayerId, PlayerController>();
   /** `affects`'s answers, by event index, object and player. */
@@ -792,6 +817,13 @@ export class Room {
    * now, or no longer does): a move it now answers for may be waiting. */
   answersChanged(): void {
     this.settle();
+    // What `RoomCopy.quiet` held back, if settling had nothing new to show.
+    if (this.unpublished && this.stopped === null) this.publish();
+  }
+
+  /** Whether this room is one copy of a game other devices hold too. */
+  get isCopy(): boolean {
+    return this.copy !== null;
   }
 
   /**
@@ -877,11 +909,16 @@ export class Room {
   }
 
   seatStatuses(): SeatStatus[] {
+    // In a copy the other people's seats are held on their own devices: no
+    // token or connection of theirs is here, so the copy says who is there.
+    const elsewhere = (s: Seat): boolean => this.copy !== null && s.clientToken === null && !this.bots.has(s.player);
     return this.seats.map((s) => ({
       player: s.player,
-      claimed: s.clientToken !== null,
-      online: s.connection !== null,
-      displayName: s.displayName,
+      claimed: s.clientToken !== null || elsewhere(s),
+      online: elsewhere(s) ? this.copy?.online?.(s.player) !== false : s.connection !== null,
+      // A seat nobody here has claimed still has its name (`seatNames`): a
+      // person at another device, in a copy.
+      displayName: s.displayName ?? this.seatNames[s.player] ?? null,
       isBot: this.bots.has(s.player),
       // Once promoted to a real `Room`, every seat's deck is already baked
       // into `game.state` — the seat-picker screen that shows `deck` is
@@ -890,7 +927,9 @@ export class Room {
       // The ready/start-game dance is behind us too — every seat that's
       // going to play is, definitionally, already in.
       ready: true,
-      isHost: s.connection !== null && s.connection === this.hostConnection(),
+      isHost:
+        s.connection !== null &&
+        (this.copy?.isHost !== undefined ? this.copy.isHost() : s.connection === this.hostConnection()),
       deckProblem: null,
     }));
   }
@@ -906,6 +945,9 @@ export class Room {
 
   /** Whether `connection` may take a host-only action — see `HostRole`. */
   isHost(connection: Connection): boolean {
+    // A copy's only connections are its own device's: the table says whether
+    // that device is the host.
+    if (this.copy?.isHost !== undefined) return this.seatOf(connection) !== null && this.copy.isHost();
     return this.host.allows(connection, this.humanSeats());
   }
 
@@ -1144,8 +1186,21 @@ export class Room {
     const seat = this.seatOf(connection);
     if (seat === null) throw new Error("claim a seat before acting");
     // A copy that isn't playing this seat right now: another device's seat,
-    // or its own while it catches up or waits for a choice of its own to land.
-    if (!this.answers(seat)) throw new Error(`${seat} can't act from here just now: try again in a moment`);
+    // or its own while it catches up or waits for a choice of its own to
+    // land. That last the copy can wait out (`RoomCopy.hold`): the action is
+    // made when the choice has landed, and what it then throws goes to the
+    // connection as any refusal does.
+    if (!this.answers(seat)) {
+      const held = this.copy?.hold?.(() => {
+        try {
+          this.dispatch(connection, action);
+        } catch (error) {
+          connection.send({ type: "error", message: error instanceof Error ? error.message : String(error) });
+        }
+      });
+      if (held === true) return;
+      throw new Error(`${seat} can't act from here just now: try again in a moment`);
+    }
     if (this.bots.has(seat)) throw new Error("a bot is playing this seat — take it back first");
     // The seat that makes this player's decisions now: their own, or whoever
     // controls them or chooses for them (rule 723.5). A controlled seat's own
@@ -2080,6 +2135,11 @@ export class Room {
    * push — `room-service.ts` turns one of these into one message per connected
    * seat — so every seat always sees the same frame under the same `seq`. */
   publish(): void {
+    if (this.copy?.quiet?.() === true) {
+      this.unpublished = true;
+      return;
+    }
+    this.unpublished = false;
     this.onPublish?.(this);
     this.seq += 1;
     this.markShown();

@@ -11,7 +11,20 @@
  * either way, so the game screen, playback, acks and event slices run
  * unchanged. Lobbies, joining by code and spectating stay on the server:
  * another person may join those.
+ *
+ * **Tables** (`docs/plans/replicated-rooms.md`, step 4; `tablesMode.ts`): a
+ * game with other people in it can be played on its players' own devices,
+ * each tab's worker holding a copy, the server only putting their inputs in
+ * order. With that on, the socket tells the server so once the worker is up
+ * (`table-capable`); when the server says a room's game is a table
+ * (`table-start`) the worker deals this tab's copy and the page is seated at
+ * it, and from then on the page's messages for that room go to the worker,
+ * what the copy makes goes to the server, and the server's order comes back
+ * to the copy. The page sees frames from a room, as ever.
  */
+
+import { PAGE_BUILD } from './tablesMode.ts'
+
 
 /** What the page sends the worker. */
 export type ToRoomWorker =
@@ -19,11 +32,24 @@ export type ToRoomWorker =
   | { readonly kind: 'stats'; readonly id: number }
   | { readonly kind: 'send'; readonly data: string }
   | { readonly kind: 'close' }
+  /** The server's `table-start` (`data`): deal this tab's copy of the table
+   * and seat the page at it, by the `token` it holds its seat with; `join` is
+   * the page's own `join-room` or `spectate-room`, when that is how it came
+   * (`LocalRoomHost.table`). */
+  | { readonly kind: 'table'; readonly data: string; readonly token: string | null; readonly join: string | null }
+  /** Anything else the server says about a table held here: an input in its
+   * place, a refusal, who hosts, who is connected. */
+  | { readonly kind: 'table-message'; readonly data: string }
+  /** The page left the table: the copy goes. */
+  | { readonly kind: 'table-leave'; readonly roomId: string }
 
 /** What the worker sends the page. */
 export type FromRoomWorker =
   | { readonly kind: 'open' }
   | { readonly kind: 'message'; readonly data: string }
+  /** For the room server, on the page's connection: what a table's copy
+   * makes (`table-input`), or its asking for the table again. */
+  | { readonly kind: 'server'; readonly data: string }
   | { readonly kind: 'failed'; readonly message: string }
   | { readonly kind: 'stats'; readonly id: number; readonly stats: LocalStats }
 
@@ -60,6 +86,11 @@ export class LocalSocket implements RoomSocket {
   onmessage: ((event: { readonly data: unknown }) => void) | null = null
   onclose: (() => void) | null = null
   onerror: (() => void) | null = null
+  /** A message of the worker's for the room server (a table's copy). */
+  onserver: ((data: string) => void) | null = null
+  /** Whether the worker has said it is up: the card pool in, its rooms
+   * ready. A table's copy can be dealt from then. */
+  opened = false
   private worker: Worker | null
   private nextStats = 0
   private readonly waitingStats = new Map<number, (stats: LocalStats) => void>()
@@ -68,8 +99,11 @@ export class LocalSocket implements RoomSocket {
     this.worker = new Worker(new URL('./room-worker.ts', import.meta.url), { type: 'module' })
     this.worker.onmessage = (event: MessageEvent<FromRoomWorker>) => {
       const message = event.data
-      if (message.kind === 'open') this.onopen?.()
-      else if (message.kind === 'message') this.onmessage?.({ data: message.data })
+      if (message.kind === 'open') {
+        this.opened = true
+        this.onopen?.()
+      } else if (message.kind === 'message') this.onmessage?.({ data: message.data })
+      else if (message.kind === 'server') this.onserver?.(message.data)
       else if (message.kind === 'stats') {
         this.waitingStats.get(message.id)?.(message.stats)
         this.waitingStats.delete(message.id)
@@ -81,6 +115,21 @@ export class LocalSocket implements RoomSocket {
 
   send(data: string): void {
     this.post({ kind: 'send', data })
+  }
+
+  /** The server's `table-start`: the worker deals this tab's copy. */
+  table(data: string, token: string | null, join: string | null): void {
+    this.post({ kind: 'table', data, token, join })
+  }
+
+  /** The server's word about a table the worker holds a copy of. */
+  tableMessage(data: string): void {
+    this.post({ kind: 'table-message', data })
+  }
+
+  /** The page left the table under `roomId`. */
+  tableLeave(roomId: string): void {
+    this.post({ kind: 'table-leave', roomId })
   }
 
   /** The worker's numbers (`LocalStats`). */
@@ -155,6 +204,24 @@ export function isLocalRoom(roomId: string | null): boolean {
   return roomId !== null && localRooms.has(roomId)
 }
 
+/** The rooms this tab knows to be tables: the server said so (`table-start`,
+ * or its answer to a join by the code). Not kept across a reload: the page
+ * joins by the code again and is told again. */
+const tableRooms = new Set<string>()
+
+/** Whether `roomId`'s game is a table this tab holds a copy of. */
+export function isTableRoom(roomId: string | null): boolean {
+  return roomId !== null && tableRooms.has(roomId)
+}
+
+/** What a `HybridSocket` needs to play tables (`tablesMode.ts`). */
+export interface TableOptions {
+  /** The token this tab holds its seat in `roomId` by, if it has one: what
+   * gives it the seat back at the table, and what the page claims the
+   * copy's seat with. */
+  readonly seatToken: (roomId: string) => string | null
+}
+
 /** The longest wait between attempts to reopen the server's connection under
  * a game here: the page's own (`useNetworkGame`'s `MAX_RECONNECT_DELAY_MS`). */
 const MAX_REOPEN_DELAY_MS = 8000
@@ -195,6 +262,18 @@ export class HybridSocket implements RoomSocket {
   private serverDown = false
   private reopenAttempt = 0
   private reopenTimer: ReturnType<typeof setTimeout> | null = null
+  /** Set when this tab plays tables (`TableOptions`). */
+  private readonly tables: TableOptions | null
+  /** Whether the server's connection is open: `table-capable` waits for it. */
+  private serverOpen = false
+  /** Whether this connection has been told the tab can hold a copy. */
+  private saidCapable = false
+  /** The page's `join-room` or `spectate-room` for a table, kept while the
+   * server is asked for the table: answered by the worker once its copy is
+   * dealt. By room. */
+  private readonly joining = new Map<string, string>()
+  /** The tables this connection is at: the server has sent it their start. */
+  private readonly seated = new Set<string>()
 
   /**
    * `openServer` opens a connection to the room server; `playingHere` says
@@ -210,9 +289,15 @@ export class HybridSocket implements RoomSocket {
    * server answers, and the server's side opens behind it as a reopened one
    * would — so a game played here is picked up with the server down.
    */
-  constructor(openServer: () => RoomSocket, playingHere: () => boolean = () => false, startsHere = false) {
+  constructor(
+    openServer: () => RoomSocket,
+    playingHere: () => boolean = () => false,
+    startsHere = false,
+    tables: TableOptions | null = null,
+  ) {
     this.openServer = openServer
     this.playingHere = playingHere
+    this.tables = tables
     const here = startsHere && !workerFailed
     this.server = this.attachServer(openServer(), here)
     if (here) {
@@ -239,19 +324,28 @@ export class HybridSocket implements RoomSocket {
     const current = () => this.server === server && !this.closed
     server.onopen = () => {
       if (!current()) return
+      this.serverOpen = true
+      this.saidCapable = false
       if (!quiet) {
         this.onopen?.()
+        this.sayCapable()
         return
       }
       this.serverDown = false
       this.reopenAttempt = 0
       server.send(JSON.stringify({ type: 'event-deltas' }))
+      this.sayCapable()
     }
     server.onmessage = (event) => {
-      if (current()) this.onmessage?.(event)
+      if (!current()) return
+      if (this.tables !== null && typeof event.data === 'string' && this.fromServerForTable(event.data)) return
+      this.onmessage?.(event)
     }
     server.onclose = () => {
       if (!current()) return
+      this.serverOpen = false
+      this.seated.clear()
+      this.joining.clear()
       if (this.holdingGame()) {
         this.serverDown = true
         const delay = Math.min(1000 * 2 ** this.reopenAttempt, MAX_REOPEN_DELAY_MS)
@@ -275,11 +369,19 @@ export class HybridSocket implements RoomSocket {
   send(data: string): void {
     const roomId = roomIdOf(data)
     if (roomId !== null && localRooms.has(roomId)) this.worker().send(data)
+    else if (roomId !== null && this.tables !== null && tableRooms.has(roomId)) this.toTable(roomId, data)
     else if (this.serverDown) {
       // A new connection's first word: the server's side says it itself
       // when it opens again (`attachServer`), the worker already has.
       if (!data.includes('"event-deltas"')) this.dropServer()
-    } else this.server.send(data)
+    } else {
+      // A join by the room's code, which may turn out to be a table's: kept
+      // until the server says which (`fromServerForTable`).
+      if (this.tables !== null && roomId !== null && (data.includes('"type":"join-room"') || data.includes('"type":"spectate-room"'))) {
+        this.joining.set(roomId, data)
+      }
+      this.server.send(data)
+    }
   }
 
   /** The server's connection went down under a game here and is still down
@@ -318,6 +420,117 @@ export class HybridSocket implements RoomSocket {
     }
   }
 
+  /**
+   * Tells the server this tab can hold a copy of a game, once: when it plays
+   * tables, its worker is up (the card pool loaded, which is what a copy
+   * needs) and the connection is open. The worker is started by the first
+   * waiting room the page is in (`fromServerForTable`), not before: a page
+   * that never sits down with anyone loads no pool for it.
+   */
+  private sayCapable(): void {
+    if (this.tables === null || this.saidCapable || !this.serverOpen || this.closed || workerFailed) return
+    if (this.local === null || this.local.dead || !this.local.opened) return
+    this.saidCapable = true
+    this.server.send(JSON.stringify({ type: 'table-capable', build: PAGE_BUILD }))
+  }
+
+  /**
+   * One message from the server, when this tab plays tables: whether it was
+   * for the worker's copy of a table and not for the page.
+   *
+   * - `table-start`: the room's game is a table (the waiting room started as
+   *   one, a rematch was dealt, or this tab asked for it). The worker deals
+   *   the copy and seats the page.
+   * - the rest of a table's messages go to the copy.
+   * - an `error` coded `table` answers the page's own `join-room` or
+   *   `spectate-room`: the room is a table, so the server is asked for it
+   *   (`table-join`) and the page's message waits for the copy.
+   * - a waiting room's seat board (`room-joined`, `pending`) starts the
+   *   worker, so the tab can say it holds copies before the game starts; the
+   *   page still gets the message.
+   */
+  private fromServerForTable(data: string): boolean {
+    if (data.includes('"type":"room-joined"')) {
+      // The room is the server's own: the page's join is answered.
+      const joined = /"roomId":"([^"]+)"/.exec(data)?.[1]
+      if (joined !== undefined) this.joining.delete(joined)
+      if (data.includes('"pending":true') && !workerFailed) {
+        this.worker()
+        this.sayCapable()
+      }
+      return false
+    }
+    const tableMessage = data.includes('"type":"table-')
+    if (!tableMessage && !data.includes('"code":"table"')) return false
+    let message: { type?: string; roomId?: string; code?: string }
+    try {
+      message = JSON.parse(data) as typeof message
+    } catch {
+      return false
+    }
+    const roomId = message.roomId
+    if (typeof roomId !== 'string') return false
+    if (message.type === 'error' && message.code === 'table') {
+      const asked = this.joining.get(roomId)
+      // Not something this socket asked: the page's to show.
+      if (asked === undefined || workerFailed) return false
+      tableRooms.add(roomId)
+      // A seat is taken back by its token; to watch, none is given.
+      const token = asked.includes('"spectate-room"') ? null : this.tables?.seatToken(roomId) ?? null
+      this.server.send(JSON.stringify({ type: 'table-join', roomId, ...(token !== null ? { clientToken: token } : {}) }))
+      return true
+    }
+    if (!tableMessage || typeof message.type !== 'string' || !message.type.startsWith('table-')) return false
+    if (workerFailed) return true
+    if (message.type === 'table-start') {
+      tableRooms.add(roomId)
+      this.seated.add(roomId)
+      const join = this.joining.get(roomId) ?? null
+      this.joining.delete(roomId)
+      const token = join !== null && join.includes('"spectate-room"') ? null : this.tables?.seatToken(roomId) ?? null
+      this.worker().table(data, token, join)
+    } else {
+      this.worker().tableMessage(data)
+    }
+    return true
+  }
+
+  /**
+   * One message from the page for a table's room. Its copy is a room in the
+   * worker, which takes whatever a room takes; but the table itself is the
+   * server's, so:
+   *
+   * - joining or watching (a reload, a reconnect, a link) asks the server for
+   *   the table first, and the worker answers the page once its copy is
+   *   dealt from what comes back;
+   * - a rematch is the table's to deal (`table-rematch`): every device is
+   *   sent the new game;
+   * - leaving leaves both.
+   */
+  private toTable(roomId: string, data: string): void {
+    const type = (JSON.parse(data) as { type?: string }).type
+    if (type === 'join-room' || (type === 'spectate-room' && !this.seated.has(roomId))) {
+      this.joining.set(roomId, data)
+      const token = type === 'join-room' ? this.tables?.seatToken(roomId) ?? null : null
+      if (this.serverOpen) {
+        this.server.send(JSON.stringify({ type: 'table-join', roomId, ...(token !== null ? { clientToken: token } : {}) }))
+      }
+      return
+    }
+    if (type === 'rematch') {
+      if (this.serverOpen) this.server.send(JSON.stringify({ type: 'table-rematch', roomId }))
+      return
+    }
+    if (type === 'leave-room') {
+      tableRooms.delete(roomId)
+      this.seated.delete(roomId)
+      if (this.serverOpen) this.server.send(data)
+      this.worker().tableLeave(roomId)
+      return
+    }
+    this.worker().send(data)
+  }
+
   /** The tab's worker, attached to this socket: its messages come out of
    * `onmessage`, and it's told the page wants event slices, as the server is
    * when the socket opens. */
@@ -329,6 +542,15 @@ export class HybridSocket implements RoomSocket {
     }
     const local = tabWorker
     this.local = local
+    // What a table's copy makes goes to the server on this connection; with
+    // it down there is nowhere for it to go, and the page, told of the drop,
+    // joins the table again when it is back.
+    local.onserver = (data) => {
+      if (!this.closed && this.serverOpen) this.server.send(data)
+    }
+    local.onopen = () => {
+      if (!this.closed) this.sayCapable()
+    }
     local.onmessage = (event) => {
       if (this.closed) return
       const data = event.data as string
@@ -352,6 +574,10 @@ export class HybridSocket implements RoomSocket {
       workerFailed = true
       localRooms.clear()
       remember(localRooms)
+      // No copies here any more: the server is told, so the next waiting room
+      // starts as a game it holds itself.
+      tableRooms.clear()
+      if (this.saidCapable && this.serverOpen) this.server.send(JSON.stringify({ type: 'table-capable', build: '' }))
       const unanswered = this.unanswered
       this.unanswered = []
       if (unanswered.length > 0) for (const data of unanswered) this.server.send(data)

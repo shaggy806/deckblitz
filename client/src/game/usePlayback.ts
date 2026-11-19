@@ -21,6 +21,11 @@ export interface Frame {
    * through playback untouched, so a coach card comes up with the board it
    * describes rather than ahead of it. */
   readonly tutorial?: TutorialInfo
+  /** The game this frame shows was put in place of the one before it
+   * (`state.replaced`: a move at a table undone): its log is not the last
+   * one grown, so nothing is animated from the old board to this one. It is
+   * shown as it stands. */
+  readonly replaced?: true
 }
 
 export interface Playback {
@@ -259,7 +264,10 @@ export function usePlayback(
     const total = next.view.events.length
     // A reconnect (or a different game entirely) can hand back a shorter log
     // than we've already shown; there's nothing sensible to animate then.
-    const from = shownEventsRef.current <= total ? shownEventsRef.current : total
+    // Nor from a game that another has taken the place of (`replaced`), even
+    // where its log is the longer: the events past the count shown aren't
+    // what happened to the board on screen.
+    const from = next.replaced !== true && shownEventsRef.current <= total ? shownEventsRef.current : total
     shownEventsRef.current = total
     const events = next.view.events.slice(from)
     const startPhase = phaseRef.current

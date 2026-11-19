@@ -7,6 +7,12 @@
  * request to the server, `POST /import-deck`). The worker hands over its card
  * registry (`provideCardRegistry`) before constructing this.
  *
+ * And this device's copies of **tables** (`docs/plans/replicated-rooms.md`,
+ * step 4): a multiplayer game played on its players' own devices. A copy
+ * (`TableCopy`) is a `Room` like any here, so the page talks to it through
+ * the same service, by the table's code; what the copy makes goes to the
+ * server (`toServer`), and the server's order comes in through `tableMessage`.
+ *
  * Part of the room code, so it imports nothing a browser can't run
  * (`test/room-core-imports.test.ts`).
  */
@@ -20,6 +26,8 @@ import type { GameRecipe } from "./room.js";
 import { RoomManager } from "./room-manager.js";
 import type { ConnId } from "./room-host.js";
 import { RoomService } from "./room-service.js";
+import { TableCopy } from "./table-copy.js";
+import type { TableCopyOptions, TableStart } from "./table-copy.js";
 
 /**
  * A local game as it stood, kept by the browser (the client's room worker
@@ -43,13 +51,135 @@ export interface SavedLocalRoom {
 /** The page: the one connection a local host has. */
 const PAGE: ConnId = 1;
 
+/** How a table's copy is seated for the page (`LocalRoomHost.table`). */
+export interface TableSeating {
+  /** The token the page holds its seat by, if it has one: the page claims
+   * the copy's seat with it, as it would a room's. */
+  readonly token: string | null;
+  /** The page's own `join-room`, when that is how it came to the table (a
+   * reload, a link): answered once the copy is dealt, and the page takes its
+   * seat or watches from there. Without it the page is already in the room
+   * (the waiting room that just started) and is seated here. */
+  readonly join: ClientMessage | null;
+}
+
+/** How many times a copy that fell out of step is dealt again from the
+ * table's log before the player is told instead. */
+const MAX_REDEALS = 3;
+
 export class LocalRoomHost {
   readonly service: RoomService;
+  private readonly send: (message: ServerMessage) => void;
+  private readonly pacing: "realtime" | "immediate" | undefined;
+  /** This device's copies of tables, by the table's code. */
+  private readonly copies = new Map<string, TableCopy>();
+  /** How many times each table's copy has asked to be dealt again. */
+  private readonly redeals = new Map<string, number>();
+  private readonly toServer: (message: ClientMessage) => void;
+  private readonly tableRoom: TableCopyOptions["room"];
 
-  /** `send` delivers each message to the page, in order. */
-  constructor(send: (message: ServerMessage) => void, options: { readonly pacing?: "realtime" | "immediate" } = {}) {
+  /**
+   * `send` delivers each message to the page, in order. `toServer` sends one
+   * to the room server on the page's connection: what a table's copy makes.
+   * A host given none holds no tables. `tableRoom` is for tests: options for
+   * the rooms of the copies dealt here (their bots).
+   */
+  constructor(
+    send: (message: ServerMessage) => void,
+    options: {
+      readonly pacing?: "realtime" | "immediate";
+      readonly toServer?: (message: ClientMessage) => void;
+      readonly tableRoom?: TableCopyOptions["room"];
+    } = {},
+  ) {
     const manager = new RoomManager(options.pacing !== undefined ? { pacing: options.pacing } : {});
+    this.send = send;
+    this.pacing = options.pacing;
+    this.toServer = options.toServer ?? (() => {});
+    this.tableRoom = options.tableRoom;
     this.service = new RoomService(manager, { send: (_conn, message) => send(message) });
+  }
+
+  /**
+   * The server's word that a table's game starts, or where it stands
+   * (`table-start`): the lobby started as a table, a rematch was dealt, or
+   * this device came (back) to one. Deals this device's copy from the recipe
+   * and the log, in place of any copy it held under that code, and seats the
+   * page at it. Frames keep counting on from the copy before, as a rematch's
+   * do in a room.
+   */
+  table(start: TableStart, seating: TableSeating): void {
+    const manager = this.service.manager;
+    const { roomId } = start;
+    const before = this.copies.get(roomId);
+    if (before === undefined && manager.get(roomId) !== undefined) {
+      // A solo game here happens to have the table's code.
+      this.send({ type: "error", message: `room ${roomId} can't be played here: a game in this tab already has that code` });
+      return;
+    }
+    const startSeq = before?.room.frameSeq ?? 0;
+    if (before !== undefined) {
+      before.dispose();
+      manager.remove(roomId);
+    }
+    const copy = new TableCopy(start, {
+      send: this.toServer,
+      room: { ...this.tableRoom, startSeq, ...(this.pacing !== undefined ? { pacing: this.pacing } : {}) },
+      notice: (message) => this.send({ type: "notice", roomId, message }),
+      onOutOfStep: (why) => this.outOfStep(roomId, seating.token, why),
+    });
+    this.copies.set(roomId, copy);
+    const { seat } = start;
+    const token = seating.token ?? "this device";
+    if (seat !== null) {
+      copy.room.reserveSeat(seat, token, start.recipe.seats.find((s) => s.player === seat)?.name ?? null);
+    }
+    manager.adopt(copy.room);
+    if (seating.join !== null) this.message(seating.join);
+    else if (seat !== null) this.message({ type: "claim-seat", roomId, seat, clientToken: token });
+    else this.message({ type: "spectate-room", roomId });
+  }
+
+  /** A message from the server about a table this device holds a copy of
+   * (`table-input`, `table-refused`, `table-host`, `table-seats`). */
+  tableMessage(message: ServerMessage): void {
+    const roomId = "roomId" in message ? message.roomId : undefined;
+    if (roomId !== undefined) this.copies.get(roomId)?.handle(message);
+  }
+
+  /** Whether this device holds a copy of the table under `roomId`. */
+  hasTable(roomId: string): boolean {
+    return this.copies.has(roomId);
+  }
+
+  /** The page left the table: its copy goes. */
+  leaveTable(roomId: string): void {
+    const copy = this.copies.get(roomId);
+    if (copy === undefined) return;
+    copy.dispose();
+    this.copies.delete(roomId);
+    this.redeals.delete(roomId);
+    this.service.manager.remove(roomId);
+  }
+
+  /**
+   * A copy holds a game the table doesn't and couldn't put itself right
+   * (`TableCopy.outOfStep`). The table's log is the game: the copy is dealt
+   * again from it, by asking the server for the table afresh, a few times
+   * at most. After that the player is told, and a reload is theirs to try.
+   */
+  private outOfStep(roomId: string, token: string | null, why: string): void {
+    const redeals = this.redeals.get(roomId) ?? 0;
+    console.error(`table ${roomId}: this device's copy fell out of step: ${why}`);
+    if (redeals >= MAX_REDEALS) {
+      this.send({
+        type: "error",
+        message: "This device lost its place in the game and couldn't find it again. Reload the page to pick the game up.",
+      });
+      return;
+    }
+    this.redeals.set(roomId, redeals + 1);
+    this.toServer({ type: "table-join", roomId, ...(token !== null ? { clientToken: token } : {}) });
   }
 
   /** One message from the page. A create needs no code from here: the
@@ -78,6 +208,8 @@ export class LocalRoomHost {
     const out: SavedLocalRoom[] = [];
     for (const room of manager.all()) {
       if (!(room instanceof Room)) continue;
+      // A table's copy is dealt again from the table's log, not from here.
+      if (room.isCopy) continue;
       const kind = manager.kindOf(room.id);
       if (kind !== "lobby" && kind !== "adopted") continue;
       if (room.game.state.result.over) continue;

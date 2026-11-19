@@ -8,6 +8,14 @@
  * `HybridSocket` (`localSocket.ts`), as it talks to the server through a
  * WebSocket.
  *
+ * It also holds this tab's copies of **tables** (`docs/plans/replicated-rooms.md`,
+ * step 4): a game with other people in it, played on every player's device.
+ * A copy is a room here like any other, which the page plays through the
+ * same messages; what the copy makes goes back to the page to send the
+ * server (`server`), and the server's order comes in from the page
+ * (`table`, `table-message`). A copy isn't saved: after a reload it is dealt
+ * again from the table's log.
+ *
  * Its games outlive a reload: they're kept in IndexedDB (`savedRooms.ts`) as
  * they're played — at most once a second, whenever there's a new frame — and
  * seated again before the first message is handled, for the page to rejoin
@@ -23,6 +31,7 @@ import { CARD_SHARD_COUNT, loadCardShard, registryFrom } from 'engine/local'
 import type { ClientMessage, ServerMessage } from 'protocol'
 import { provideCardRegistry } from 'server/dist/card-registry.js'
 import { LocalRoomHost } from 'server/dist/local-host.js'
+import type { TableStart } from 'server/dist/table-copy.js'
 import { recordBotDecisionsTo } from 'server/dist/room.js'
 import type { FromRoomWorker, LocalStats, ToRoomWorker } from './localSocket.ts'
 import { loadSavedRooms, saveRooms } from './savedRooms.ts'
@@ -90,7 +99,7 @@ const ready: Promise<void> = (async () => {
     loadSavedRooms(),
   ])
   provideCardRegistry(registryFrom(shards.flatMap((shard) => [...shard.pool, ...shard.tokens])))
-  host = new LocalRoomHost(deliver)
+  host = new LocalRoomHost(deliver, { toServer: (message) => post({ kind: 'server', data: JSON.stringify(message) }) })
   saved = new Set(host.restore(rooms))
   readyMs = Math.round(performance.now() - started)
 })()
@@ -114,6 +123,24 @@ self.onmessage = async (event: MessageEvent<ToRoomWorker>) => {
       return
     case 'send':
       host?.message(JSON.parse(message.data) as ClientMessage)
+      return
+    case 'table':
+      try {
+        host?.table(JSON.parse(message.data) as TableStart, {
+          token: message.token,
+          join: message.join === null ? null : (JSON.parse(message.join) as ClientMessage),
+        })
+      } catch (error) {
+        // The copy couldn't be dealt (a recipe this build can't read): the
+        // page is told, as it is of anything a room refuses.
+        deliver({ type: 'error', message: `couldn't deal this game here: ${error instanceof Error ? error.message : String(error)}` })
+      }
+      return
+    case 'table-message':
+      host?.tableMessage(JSON.parse(message.data) as ServerMessage)
+      return
+    case 'table-leave':
+      host?.leaveTable(message.roomId)
       return
     case 'close':
       host?.close()

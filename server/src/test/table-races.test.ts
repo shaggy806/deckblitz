@@ -73,8 +73,10 @@ describe("inputs racing at a table", () => {
     for (const device of [alice, bob]) {
       expect(stateDigest(table.copyOf(device).room.game.state, { events: true })).toBe(dealt);
     }
-    // And until it lands, that device makes nothing more.
-    expect(() => table.copyOf(alice).room.dispatch(alice.page, keep(ALICE))).toThrow(/can't act from here just now/);
+    // And until it lands, that device makes nothing more: a second click is
+    // kept for after it.
+    table.copyOf(alice).room.dispatch(alice.page, keep(ALICE));
+    expect(inputsOf(alice)).toHaveLength(1);
 
     // Bob's reaches the server first.
     table.toServer(bob);
@@ -85,7 +87,38 @@ describe("inputs racing at a table", () => {
     expect(table.refused).toBe(0);
     expect(undone(table)).toEqual({ [ALICE]: 0, [BOB]: 0 });
     expect(table.state.awaiting?.kind).not.toBe("mulligan");
+    // The second click was tried once the first had landed, where the game
+    // no longer asks for it: refused there, to the page, and never sent.
+    expect(inputsOf(alice)).toHaveLength(0);
+    const keeps = table.log.filter((entry) => entry.input.kind === "action" && entry.input.action.type === "mulligan");
+    expect(keeps.map((entry) => entry.from)).toEqual([BOB, ALICE]);
+    expect(table.toldTo(alice).map((m) => m.type)).toEqual(["error"]);
   });
+
+  it("holds a move made while a setting of the person's own is on its way, and makes it once that has landed", () => {
+    const table = new RacingTable({ seed: 35, seats: ["person", "person"] });
+    const mover = playTo(table);
+    const { room } = table.copyOf(mover);
+    const before = table.log.length;
+    room.setPassSettings(mover.page, SETTINGS);
+    expect(inputsOf(mover)).toMatchObject([{ after: null, input: { kind: "orders-own-triggers", on: true } }]);
+    // The move is the person's to make, and the copy can't make it yet: it
+    // is neither refused nor sent.
+    const asked = stateDigest(room.game.state, { events: true });
+    move(table, mover);
+    expect(inputsOf(mover)).toHaveLength(1);
+    expect(stateDigest(room.game.state, { events: true })).toBe(asked);
+
+    table.rest();
+    table.agree("once the setting and the move have landed");
+    // The setting, then the move made on the game with the setting in it.
+    expect(table.log.slice(before, before + 2)).toMatchObject([
+      { from: mover.player, input: { kind: "orders-own-triggers", player: mover.player, on: true } },
+      { from: mover.player, input: { kind: "action" } },
+    ]);
+    expect(table.refused).toBe(0);
+    expect(table.toldTo(mover)).toEqual([]);
+  }, PLAYS);
 
   it("undoes a move made as someone else conceded, and leaves it to the person to make again", () => {
     const table = new RacingTable({ seed: 32, seats: ["person", "person", "person"] });
@@ -118,6 +151,11 @@ describe("inputs racing at a table", () => {
     // concession, their device sent after seeing it.
     expect(table.log.slice(before + 1).every((entry) => entry.index > before)).toBe(true);
     expect(table.copyOf(mover).settled).toBe(true);
+    // They are told why the board isn't the one their move made, and only they.
+    expect(table.toldTo(mover)).toEqual([
+      { type: "notice", roomId: "RACES", message: expect.stringContaining(`${leaver.player} conceded just as you moved`) },
+    ]);
+    for (const device of others(table, mover)) expect(table.toldTo(device)).toEqual([]);
 
     // And the game goes on.
     for (let i = 0; i < 12; i += 1) {
@@ -148,6 +186,8 @@ describe("inputs racing at a table", () => {
     table.agree("after the race");
 
     expect(table.copyOf(mover).undone).toBe(1);
+    // Made again for them: nothing to tell the person.
+    expect(table.toldTo(mover)).toEqual([]);
     // The setting, then the same move, sent again for the place after it.
     expect(table.log.slice(before, before + 2)).toEqual([
       { index: before, from: setter.player, input: { kind: "orders-own-triggers", player: setter.player, on: true } },
@@ -221,7 +261,7 @@ describe("inputs racing at a table", () => {
   );
 
   it("and across those games inputs did lose their place, and copies went back on them", () => {
-    expect(raced.refused).toBeGreaterThan(20);
+    expect(raced.refused).toBeGreaterThan(8);
     expect(raced.undone).toBeGreaterThan(5);
   });
 });
