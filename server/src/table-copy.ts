@@ -324,7 +324,7 @@ export class TableCopy {
     if (!("roomId" in message) || message.roomId !== this.roomId) return;
     switch (message.type) {
       case "table-input":
-        this.ordered(message.index, message.from, message.input);
+        this.ordered(message.index, message.from, message.input, message.copy);
         return;
       case "table-refused":
         // Of an input another copy on this device made, before this one was
@@ -387,14 +387,25 @@ export class TableCopy {
   }
 
   /** An input took its place in the table's order. */
-  private ordered(index: number, from: PlayerId, input: RoomInput): void {
+  private ordered(index: number, from: PlayerId, input: RoomInput, copy?: number): void {
     if (this.outOfStep !== null || index < this.count) return;
     if (index !== this.count) {
       this.stop(`the table's order skipped from ${this.count} to ${index}`);
       return;
     }
     const own = this.pending[0];
-    if (own !== undefined && from === this.seat && JSON.stringify(own.input) === JSON.stringify(input)) {
+    // This copy's own input, back with its place: from this seat, the same
+    // input, and made by this copy. The last is what tells it from one the
+    // copy this device held before had on its way when this one was dealt:
+    // that one is often the very move this copy made next (the same pass,
+    // for the same place), and taking it for a confirmation left this
+    // copy's own to be refused with nothing here expecting it.
+    const mine =
+      own !== undefined &&
+      from === this.seat &&
+      (copy === undefined || copy === this.id) &&
+      JSON.stringify(own.input) === JSON.stringify(input);
+    if (own !== undefined && mine) {
       this.pending.shift();
       this.count += 1;
       if (own.applied) {

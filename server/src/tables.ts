@@ -385,7 +385,12 @@ export class Tables {
     }
     const entry: TableEntry = { index: table.log.length, from, input: input as TableEntry["input"] };
     table.log.push(entry);
-    const message: ServerMessage = { type: "table-input", roomId: table.id, ...entry };
+    const message: ServerMessage = {
+      type: "table-input",
+      roomId: table.id,
+      ...entry,
+      ...(typeof copy === "number" ? { copy } : {}),
+    };
     for (const to of this.everyone(table)) this.send(to, message);
   }
 

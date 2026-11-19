@@ -291,6 +291,10 @@ export class HybridSocket implements RoomSocket {
   private saidCapable = false
   /** Whether it has been told the tab will be able to shortly. */
   private saidSoon = false
+  /** Whether the page has been in a waiting room on this connection: only
+   * then is the server told what the tab can hold. A solo game says nothing
+   * to the server, the worker being up or not. */
+  private lobbySeen = false
   /** The page's `join-room` or `spectate-room` for a table, kept while the
    * server is asked for the table: answered by the worker once its copy is
    * dealt. By room. */
@@ -350,6 +354,7 @@ export class HybridSocket implements RoomSocket {
       this.serverOpen = true
       this.saidCapable = false
       this.saidSoon = false
+      this.lobbySeen = false
       if (!quiet) {
         this.onopen?.()
         this.sayCapable()
@@ -453,7 +458,7 @@ export class HybridSocket implements RoomSocket {
    */
   private sayCapable(): void {
     if (this.tables === null || this.saidCapable || !this.serverOpen || this.closed || workerFailed) return
-    if (this.local === null || this.local.dead) return
+    if (!this.lobbySeen || this.local === null || this.local.dead) return
     if (!this.local.opened) {
       // Started, the card pool still loading: the server is told it is on
       // its way, so a game started in these seconds waits for this page and
@@ -489,6 +494,7 @@ export class HybridSocket implements RoomSocket {
       const joined = /"roomId":"([^"]+)"/.exec(data)?.[1]
       if (joined !== undefined) this.joining.delete(joined)
       if (data.includes('"pending":true') && !workerFailed) {
+        this.lobbySeen = true
         this.worker()
         this.sayCapable()
       }

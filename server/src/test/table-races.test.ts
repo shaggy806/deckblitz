@@ -287,6 +287,40 @@ describe("inputs racing at a table", () => {
     expect(copy.undone).toBe(0);
   }, PLAYS);
 
+  it("doesn't take the last copy's move, placed after this one was dealt, for its own", () => {
+    const table = new RacingTable({ seed: 39, seats: ["person", "person"] });
+    const mover = playTo(table);
+    move(table, mover);
+    const copy = table.copyOf(mover);
+    const [made] = inputsOf(mover);
+    expect(made).toBeDefined();
+    const at = table.log.length;
+    // The copy this device held before had the very same move on its way,
+    // and the server placed it: it comes back from this seat, naming that
+    // copy. It took the place this copy's own was made for.
+    copy.handle({ type: "table-input", roomId: "RACES", index: at, from: mover.player, input: made.input, copy: -1 });
+    // Not a confirmation of this copy's: its own is gone back on, and the
+    // refusal the server will send for it is expected.
+    expect(copy.undone).toBe(1);
+    expect(copy.outOfStep).toBeNull();
+    expect(copy.settled).toBe(false);
+    copy.handle({ type: "table-refused", roomId: "RACES", after: at, head: at + 1 });
+    expect(copy.outOfStep).toBeNull();
+    // And one that names no copy (an older server) is its own, as before.
+    const other = new RacingTable({ seed: 39, seats: ["person", "person"] });
+    const again = playTo(other);
+    move(other, again);
+    const same = other.copyOf(again);
+    same.handle({
+      type: "table-input",
+      roomId: "RACES",
+      index: other.log.length,
+      from: again.player,
+      input: inputsOf(again)[0].input,
+    });
+    expect(same.undone).toBe(0);
+  }, PLAYS);
+
   it("passes the empty windows of a person whose device is gone, on the host's, until they are back", () => {
     const table = new RacingTable({ seed: 36, seats: ["person", "person", "person"] });
     const [alice, bob, carol] = table.devices;

@@ -223,7 +223,13 @@ describe("a table on the server", () => {
     tables.open(opening());
     take();
     tables.message(1, { type: "table-input", roomId: "TABLE", copy: 7, after: 0, input: pass(BOB) });
-    take();
+    // Placed, and sent on to everyone with the copy that made it named.
+    expect(take()).toEqual(
+      [1, 3, 4, 9].map((to) => ({
+        to,
+        message: { type: "table-input", roomId: "TABLE", index: 0, from: ALICE, input: pass(BOB), copy: 7 },
+      })),
+    );
     // Carol's device made hers for the same place, on its fourth copy.
     tables.message(3, { type: "table-input", roomId: "TABLE", copy: 4, after: 0, input: pass(CAROL) });
     expect(take()).toEqual([{ to: 3, message: { type: "table-refused", roomId: "TABLE", after: 0, head: 1, copy: 4 } }]);

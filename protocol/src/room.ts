@@ -930,6 +930,10 @@ export type ServerMessage =
       readonly index: number;
       readonly from: PlayerId;
       readonly input: RoomInput;
+      /** The `copy` the device that sent it named, if it named one: how
+       * that device tells an input of the copy it holds now from one its
+       * last copy sent before it was dealt again. */
+      readonly copy?: number;
     }
   | {
       /** This device's `table-input` came too late: the log no longer ended

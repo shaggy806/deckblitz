@@ -122,6 +122,17 @@ describe('HybridSocket at a table', () => {
     expect(servers[0].types.filter((type) => type === 'table-capable')).toHaveLength(2)
   })
 
+  it('says nothing to the server of a solo game, the worker being up or not', async () => {
+    const ws = await open()
+    // A blitz: its room is made in the worker, and the page never sits in a
+    // waiting room on the server.
+    ws.sendLocal(JSON.stringify({ type: 'create-room', players: 4 }))
+    expect(FakeWorker.made).toHaveLength(1)
+    worker().say({ kind: 'open' })
+    worker().say({ kind: 'message', data: JSON.stringify({ type: 'room-joined', roomId: 'LOCAL', pending: true, seats: [] }) })
+    expect(servers[0].types).not.toContain('table-capable')
+  })
+
   it('hands the worker the table when the room starts as one, and the room is the worker\'s from then', async () => {
     const ws = await open({ token: 'my-token' })
     servers[0].say(seatBoard)

@@ -2,10 +2,11 @@
 
 Vite + React 19 + TypeScript, ESM + bundler mode (relative imports include `.ts`/`.tsx`). A
 **networked** client: each device is one seat on a `server` room over WebSocket. The page never
-owns a `Game` or runs a controller loop; its room worker does, for a solo game and, behind
-`?tables=1`, for this tab's copy of a multiplayer game played on its players' own devices
-(`src/local/`, `docs/plans/replicated-rooms.md`), and the page talks to that room in the same
-messages it sends the server.
+owns a `Game` or runs a controller loop; its room worker does, for a solo game and for this
+tab's copy of a multiplayer game played on its players' own devices (a **table**: the default
+wherever solo games run in the browser, `?tables=0` to turn it off; `src/local/`,
+`docs/plans/replicated-rooms.md`), and the page talks to that room in the same messages it
+sends the server.
 
 **Full per-file detail: `docs/architecture/client.md`.** Read a file's entry before changing
 that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.

@@ -1,7 +1,8 @@
 import { expect, test } from '@playwright/test'
 import type { APIRequestContext, Browser, Page } from '@playwright/test'
 
-// A game played on its players' own devices (`?tables=1`,
+// A game played on its players' own devices (on wherever solo games are
+// played in the browser; `?tables=0` turns it off,
 // `docs/plans/replicated-rooms.md`, step 4): two people in two browser
 // contexts and a bot, each page's worker holding a copy of the game, the
 // server holding only the order of what they do. The lobby is the server's
@@ -80,8 +81,10 @@ const paced = { timeout: 45_000 }
 const keepPrompt = (page: Page) => page.getByText('Keep your opening hand?')
 const resultPanel = (page: Page) => page.getByRole('dialog', { name: 'Game over' })
 
-/** A page that can hold a copy of a game. */
-const CAPABLE = 'local=1&tables=1'
+/** A page that can hold a copy of a game: one that plays solo games in its
+ * browser, which the dev server does only when asked. Tables are on with
+ * that by default; `tables=0` is how a page says it won't. */
+const CAPABLE = 'local=1'
 
 interface Seated {
   readonly page: Page
@@ -553,7 +556,7 @@ test('two builds of the page in one lobby: the game starts on the server', async
 test('one page that cannot hold a copy, and the same lobby starts as a game on the server', async ({ browser, request }) => {
   test.setTimeout(120_000)
   // The guest's page plays solo games in its browser but not tables.
-  const { host, guest, room } = await lobby(browser, CAPABLE, 'local=1')
+  const { host, guest, room } = await lobby(browser, CAPABLE, 'local=1&tables=0')
   await capable(host)
   await host.page.getByRole('button', { name: 'Start Game' }).click()
   for (const page of [host.page, guest.page]) {
