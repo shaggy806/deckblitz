@@ -19,9 +19,45 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Built once and handed to every part (2026-11-18): each of the eight jobs
+  # used to build engine, protocol and server itself, 70 to 80 seconds apiece.
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # dev-rooms imports engine, protocol and server from their dist/.
+      - run: npm run build -w engine && npm run build -w protocol && npm run build -w server
+      # One file, so the upload isn't tens of thousands of small ones.
+      - run: tar -cf e2e-dist.tar engine/dist protocol/dist server/dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e2e-dist
+          path: e2e-dist.tar
+          retention-days: 1
+          compression-level: 1
+
   smoke:
+    needs: build
     runs-on: ubuntu-24.04
     timeout-minutes: 25
+    # Playwright's own image, with Chromium and the system packages it needs
+    # already in it (2026-11-18). `npx playwright install --with-deps chromium`
+    # on the bare runner took 20 seconds in some jobs and 2 to 10 minutes in
+    # others, in every run: Chromium came down in seconds, but its packages
+    # came from an Ubuntu mirror that was often slow (32 MB at 112 kB/s), and
+    # the slowest of the eight jobs is what a deploy waits for. The tag is the
+    # version of `@playwright/test` in client/package.json: the step below
+    # stops the job with that said when the two part ways.
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+      # The runner's own user, so the checkout is this user's to write.
+      options: --user 1001
     # dev-rooms' rooms on the main thread (0) and on a worker thread (1), as
     # the server's --shards runs them (docs/plans/room-shards.md), each in
     # four parts side by side (Playwright's --shard, which deals out the spec
@@ -42,10 +78,19 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # dev-rooms imports engine, protocol and server from their dist/.
-      - run: npm run build -w engine && npm run build -w protocol && npm run build -w server
-      - run: npx playwright install --with-deps chromium
+      - name: The image's Playwright is the one installed
         working-directory: client
+        run: |
+          installed=$(npx playwright --version | sed 's/^Version //')
+          if [ "$installed" != "1.56.1" ]; then
+            echo "@playwright/test is $installed, but this job runs in mcr.microsoft.com/playwright:v1.56.1-noble."
+            echo "Change the image's tag in .github/workflows/e2e.yml to v$installed-noble (and this check with it)."
+            exit 1
+          fi
+      - uses: actions/download-artifact@v4
+        with:
+          name: e2e-dist
+      - run: tar -xf e2e-dist.tar && rm e2e-dist.tar
       # Starts dev-rooms and the Vite dev server itself (client/playwright.config.ts).
       - run: npm run ${{ github.event_name != 'pull_request' && 'test:e2e:full' || 'test:e2e' }} -w client -- --shard=${{ matrix.part }}/4
         env:
