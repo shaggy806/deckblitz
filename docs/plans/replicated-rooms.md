@@ -12,9 +12,13 @@ a table (the recipe, the order of inputs, the host) with no engine, a lobby whos
 connection can hold a copy starts as one, and scripted devices running real copies play through
 it over sockets on both hosts. **Step 5 is done** (2026-11-18, built ahead of step 4 at the
 user's word): a device's own move takes effect at once and is undone if another input took its
-place, and tables fuzzed with every message racing end with one game on every copy. Step 4, the
-client, is next: no page asks for a table yet, so every game on the site still starts on the
-server.
+place, and tables fuzzed with every message racing end with one game on every copy. **Step 4 is
+done** (2026-11-18; the user: "Start step 4"): a page can play a table, its worker holding the
+copy, behind `?tables=1`; two browsers and a bot play one end to end, and a player's own move
+reaches their screen in 13 ms however slow the connection, where a game on the server takes the
+round trip (620 ms at 300 ms each way). **Off by default**: without the flag no page says it can
+hold a copy, so every game on the site still starts on the server. Next is step 6, the host
+changing, then 7 and 8.
 
 ## Why
 
@@ -324,12 +328,12 @@ server's order and nothing unanswered; a copy dealt afterwards from the log alon
 It passed the first time it ran, so it was shown to fail: with the undo not putting back the
 confirmed inputs, and with the server's run check removed, the tests go red.
 
-Left for step 4, since it is about what a page shows: an undo publishes a frame at each stage
-(the game put back, then each input), where one frame after the whole undo would do; a person
-whose move was undone is told nothing but the board; and a move tried while a setting or
-concession of their own is still on its way is refused with "try again in a moment", which the
-page should hold and send again by itself. The cost of the snapshot before each run (one a
-person's move, one a bots' run) is part of step 8's measure on the laptop.
+What a page shows of it was left to step 4, and built there ("The client"): an undo is one
+frame, where it ends (`RoomCopy.quiet`); the person whose move was taken back is told why
+(`TableCopyOptions.notice`); and a move made while a setting or concession of their own is
+still on its way is kept and made when that has landed (`RoomCopy.hold`), not refused. The cost
+of the snapshot before each run (one a person's move, one a bots' run) is part of step 8's
+measure on the laptop.
 
 ### Server
 
@@ -370,14 +374,77 @@ What building it taught:
   device's copy stopped and said so; step 5's undo puts it right, and step 7 (taking the host's
   state) is for a copy that still can't.
 
-### Client
+### The client (step 4)
 
-- **The worker runs a table's copy** beside solo rooms, with a wire to the server for inputs;
-  `HybridSocket` already sends a room's messages to the worker by its code.
-- **The start**: `lobby/localStart.ts` moves a lobby into the browser when it is the host and
-  bots; the same move for several people, each device building the same game from the recipe.
-- **The build's id** in what a client says when it joins, so the server can tell whether a table
-  may start and how a latecomer catches up.
+**Built 2026-11-18**, behind `?tables=1` (`client/src/local/tablesMode.ts`, kept for the tab as
+`?local=1` is); `docs/architecture/client.md` has the detail.
+
+- **The worker holds the copy** (`room-worker.ts`, `LocalRoomHost.table`): a `TableCopy` whose
+  room is adopted into the same `RoomManager` a solo game's is, so the page plays it through
+  the messages it sends any room (`dispatch`, `ack`, `pass-turn`, the settings) and gets frames
+  from it as from any room. The game screen, playback and the event log needed nothing.
+- **The socket routes** (`HybridSocket`, `localSocket.ts`): `table-start` and the rest of a
+  table's messages go from the server to the worker and are never shown to the page; what the
+  copy makes goes from the worker to the server; the page's messages for that room go to the
+  worker, except the three that are the table's own: a join (the server is asked for the table
+  first), a rematch (`table-rematch`) and leaving (both are left).
+- **The page says it can hold a copy when it can** (`table-capable`, with the build Vite
+  stamped, `PAGE_BUILD`): the worker is started by the first waiting room the page is in and
+  the word goes out when the card pool is loaded, again on each new connection, and is taken
+  back if the worker fails. So a page that never sits down with anyone loads no pool for it,
+  and a start before a guest's pool is in is a game on the server (the fallback, not an
+  error).
+- **The start** is the server's (`start-game` as ever): each page is sent `table-start`, its
+  worker deals the copy and claims the page's seat with the token it held in the waiting
+  room, and the first thing the page hears is its opening frame. A lobby of the host and bots
+  alone still moves into the host's browser as a solo game (`lobby/localStart.ts`), unless
+  someone is watching.
+- **Coming to a table by its code** (a reload, a link, a dropped connection): the page joins
+  as it joins any room; the server answers that the room is a table (`error`, `code: "table"`),
+  the socket asks for it (`table-join`, with the seat's token if the tab has one), and the
+  worker answers the page's join once the copy is dealt from the log. The page then takes its
+  seat by its token or, at a full table, offers to watch, exactly as at a room. A page that
+  can't hold a copy is told so in words.
+- **A rematch** is a new `table-start` to every device: a new copy under the same code, the
+  page still seated, frames counting on.
+- **A copy that lost its place** (`TableCopy.outOfStep`) asks for the table again and is dealt
+  afresh from the log, three times at most before the player is told to reload. The table's
+  log is the game, so this is always right; step 7's digest check is what will notice a copy
+  that is wrong without knowing it.
+- **Who is there**: the server says which people are connected (`table-start`'s `online`,
+  `table-seats`), for the dot beside each name; a copy shows the other people's seats as
+  held, by their names from the recipe, and only the host's page is offered the host's
+  controls.
+
+**The measure** (`TABLE_LATENCY=1 npx playwright test table-latency`, the dev PC, Chromium, two
+people and no bot, fourteen moves a game, the page's socket delayed each way): from a move
+leaving the page to its frame arriving, median (worst):
+
+| delay each way | game on the server | table |
+|---|---|---|
+| 0 ms | 23 ms (53) | 14 ms (43) |
+| 75 ms | 173 ms (187) | 13 ms (39) |
+| 150 ms | 327 ms (336) | 13 ms (39) |
+| 300 ms | 620 ms (624) | 13 ms (39) |
+
+A player's own move no longer waits on the network at all. Everyone else's still takes one
+trip up and one down, as before; and an opening-hand choice, a concession and a setting wait
+for the server by design ("The undo").
+
+**Left as it is, and why**:
+
+- **Off by default.** Step 8 turns it on, after the laptop.
+- **A reload, or a connection that dropped, replays the whole log.** Half a second on the dev
+  PC, a quarter to most of a minute on the test laptop late in a long game (step 1's
+  measure). Step 7 builds a table that starts from a state; the restore from IndexedDB and
+  "the inputs since" belong with it.
+- **The host's controls act on the host's device only**: bot speed, pausing and stepping the
+  bots are the host's room's, which is the one that runs them, and the other pages aren't
+  told (no "Bots paused" badge there). A seat its player hands to a bot is played by that
+  player's device and shows as a bot only on it.
+- **The host changing mid-game** is built and tested on the server and in Node (steps 2 and
+  3) and untried in a browser: step 6.
+- **Bots wait for the host's page only**, as proposed under "Open decisions".
 
 ## Rollout
 
@@ -409,7 +476,15 @@ Each step ends in a check that can fail.
 4. **The client.** *Check*: an e2e test with two browser contexts playing two people and a bot;
    the server's `/status` shows a table and no room; the same lobby with one client unable falls
    back to a server room; and (moved here from step 5, which had no page to measure) click to
-   frame on a slowed network.
+   frame on a slowed network. **Done 2026-11-18** (`client/e2e/tables.spec.ts`,
+   `server/src/test/local-tables.test.ts`, `client/src/local/tableSocket.test.ts`): two pages and
+   a bot play a table for turns, the server's status naming a table and no room and neither
+   page sending a room's message; every connection dropped and both pages back in their seats;
+   a third page watching by the room's code; one page reloaded mid-game; both conceding and the
+   host's rematch dealt to all three; and the same lobby with one page that can't starting on
+   the server. In Node, a `LocalRoomHost` a device over the real `Tables`: an undo reaches the
+   page as one frame and a notice (shown to fail with the frames not held), a rejoin, a
+   rematch, a copy dealt again after losing its place. The measure is under "The client".
 5. **Own inputs at once, and the undo.** *Check*: a unit test of a concession racing an action;
    tables fuzzed with every message racing. **Done 2026-11-18**, ahead of step 4 (the user:
    "Step 5"), since the client is simpler to build on a copy that is already right when inputs
