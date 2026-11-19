@@ -20,6 +20,8 @@ import { cardRegistry } from "../card-registry.js";
 import { SEATS } from "../decks.js";
 import { LocalRoomHost } from "../local-host.js";
 import { Room } from "../room.js";
+import { DIGEST_EVERY } from "../table-copy.js";
+import type { TableStart } from "../table-copy.js";
 import { Tables } from "../tables.js";
 
 const ROOM = "TABLE";
@@ -41,6 +43,8 @@ interface Device {
   readonly down: ServerMessage[];
   /** The page's own join, handed over with the next `table-start`. */
   join: ClientMessage | null;
+  /** Every `table-start` it was dealt from, oldest first. */
+  readonly starts: TableStart[];
 }
 
 function table(seats: readonly ("person" | "bot")[], options: { readonly watchers?: number; readonly seed?: number } = {}) {
@@ -72,6 +76,7 @@ function table(seats: readonly ("person" | "bot")[], options: { readonly watcher
       up,
       down: [],
       join: null,
+      starts: [],
       host: new LocalRoomHost((message) => got.push(structuredClone(message)), {
         pacing: "immediate",
         toServer: (message) => up.push(structuredClone(message)),
@@ -94,6 +99,7 @@ function table(seats: readonly ("person" | "bot")[], options: { readonly watcher
     const message = d.down.shift();
     if (message === undefined) return false;
     if (message.type === "table-start") {
+      d.starts.push(message);
       d.host.table(message, { token: d.token, join: d.join });
       d.join = null;
     } else {
@@ -245,6 +251,13 @@ describe("a table in a page's worker", () => {
     t.tables.message(back.conn, { type: "table-join", roomId: ROOM, clientToken: bob.token as string });
     t.rest();
 
+    // Dealt from the game as Alice's device holds it and the inputs since:
+    // nothing of the log before that is sent, or played again.
+    const start = back.starts.at(-1);
+    expect(typeof start?.state).toBe("string");
+    expect(start?.from).toBeGreaterThan(0);
+    expect(start?.log.length).toBeLessThan(start?.from ?? 0);
+    expect(start?.resync).toBeUndefined();
     // Its page's join is answered once the copy is dealt, the seat held for it.
     const joined = back.got.find((m) => m.type === "room-joined");
     expect(joined).toMatchObject({ roomId: ROOM, pending: false, seat: null });
@@ -367,6 +380,77 @@ describe("a table in a page's worker", () => {
     }
     t.rest();
     expect(new Set(t.digests()).size).toBe(1);
+  }, PLAYS);
+
+  it("puts a copy that holds another game right from the host's state, at the next place they compare", () => {
+    const t = table(["person", "person", "person"]);
+    const [alice, bob, carol] = t.devices;
+    t.open();
+    t.playTo();
+    const drifted = (d: Device): ServerMessage[] => d.got.filter((m) => m.type === "notice" && m.message.includes("drifted"));
+    const inputs = (): number => t.tables.summaries()[0].inputs;
+
+    // Bob's device comes to hold a game the table doesn't, as a browser that
+    // worked something out differently would.
+    expect(bob.host.corruptTable(ROOM)).toBe(true);
+    expect(new Set(t.digests()).size).toBe(2);
+    const at = inputs();
+    const dealt = bob.starts.length;
+    for (let i = 0; i < 400 && drifted(bob).length === 0; i += 1) {
+      t.rest();
+      const waiting = t.waitingOn();
+      if (waiting === null) break;
+      t.move(waiting);
+    }
+    t.rest();
+
+    // Noticed within one stretch between fingerprints, and dealt the host's.
+    expect(drifted(bob)).toHaveLength(1);
+    expect(inputs() - at).toBeLessThanOrEqual(2 * DIGEST_EVERY);
+    expect(bob.starts).toHaveLength(dealt + 1);
+    expect(bob.starts.at(-1)).toMatchObject({ resync: true, seat: bob.player });
+    expect(typeof bob.starts.at(-1)?.state).toBe("string");
+    expect(new Set(t.digests()).size).toBe(1);
+    // Nobody else was touched, and the page was only told, not refused.
+    for (const d of [alice, carol]) {
+      expect(drifted(d)).toEqual([]);
+      expect(d.starts).toHaveLength(1);
+    }
+    for (const d of t.devices) expect(errors(d)).toEqual([]);
+    // The game goes on, the copies still one, through another comparison.
+    const on = inputs();
+    for (let i = 0; i < 400 && inputs() < on + 2 * DIGEST_EVERY; i += 1) {
+      t.rest();
+      const waiting = t.waitingOn();
+      if (waiting === null) break;
+      t.move(waiting);
+    }
+    t.rest();
+    expect(new Set(t.digests()).size).toBe(1);
+    expect(drifted(bob)).toHaveLength(1);
+  }, PLAYS);
+
+  it("takes the host's game for the table's: a host whose copy differs puts everyone else on it", () => {
+    const t = table(["person", "person", "person"]);
+    const [alice, bob, carol] = t.devices;
+    t.open();
+    t.playTo();
+    const drifted = (d: Device): number => d.got.filter((m) => m.type === "notice" && m.message.includes("drifted")).length;
+    const before = t.roomOf(alice).game.state.players[alice.player as PlayerId].life;
+    alice.host.corruptTable(ROOM);
+    for (let i = 0; i < 400 && (drifted(bob) === 0 || drifted(carol) === 0); i += 1) {
+      t.rest();
+      const waiting = t.waitingOn();
+      if (waiting === null) break;
+      t.move(waiting);
+    }
+    t.rest();
+    // "Unless the host disagrees": hers is the game, a life up and all.
+    expect([drifted(alice), drifted(bob), drifted(carol)]).toEqual([0, 1, 1]);
+    expect(new Set(t.digests()).size).toBe(1);
+    for (const d of t.devices) {
+      expect(t.roomOf(d).game.state.players[alice.player as PlayerId].life).toBe(before + 1);
+    }
   }, PLAYS);
 
   it("lets go of the copy when the page leaves", () => {

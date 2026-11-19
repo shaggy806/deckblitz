@@ -611,13 +611,48 @@ export type ClientMessage =
        * Back at a table, or arriving at one: a reload, a dropped connection,
        * someone coming to watch. `clientToken` reclaims the seat it claimed
        * in the waiting room; without one (or with one the table doesn't
-       * know) the connection watches. Answered with a `table-start` whose
-       * log begins at `from` (0, the whole log, if absent).
+       * know) the connection watches. Answered with a `table-start`.
+       *
+       * With `from`, its log begins there: the device holds (or will deal)
+       * the game up to that place itself. Without it the server chooses:
+       * where another device is at the table, the game as that device holds
+       * it (`table-start`'s `state`) and the inputs since, which costs a
+       * device nothing to start from however long the game has run; else
+       * the whole log from the deal.
        */
       readonly type: "table-join";
       readonly roomId: string;
       readonly clientToken?: string;
       readonly from?: number;
+    }
+  | {
+      /**
+       * A fingerprint of this device's copy of a table's game as it stood
+       * with exactly the first `at` inputs in (`stateDigest`): sent every so
+       * many inputs, by every device, at the same places. The server compares
+       * each against the host's for the same place; a device whose copy
+       * differs is dealt the host's (`table-start` with `state` and
+       * `resync`). The server reads nothing into the text.
+       */
+      readonly type: "table-digest";
+      readonly roomId: string;
+      readonly game: number;
+      readonly at: number;
+      readonly digest: string;
+    }
+  | {
+      /**
+       * This device's copy of a table's game, for a device that needs one:
+       * the answer to `table-state-wanted`. `state` is the game as text
+       * (`stateToJson`) with exactly the first `at` inputs of the table's log
+       * in: none of this device's own that the server hasn't placed.
+       */
+      readonly type: "table-state";
+      readonly roomId: string;
+      readonly request: number;
+      readonly game: number;
+      readonly at: number;
+      readonly state: string;
     }
   | {
       /** The host deals a new game at the table: the same seats and decks, a
@@ -854,6 +889,20 @@ export type ServerMessage =
       /** The people whose devices are connected to the table now. Absent
        * from a server older than it: everyone. */
       readonly online?: readonly PlayerId[];
+      /** The game as another device at the table holds it, as text
+       * (`stateToJson`), with the first `from` inputs in: the copy starts
+       * from it, not from the recipe's deal, and applies `log` on top. */
+      readonly state?: string;
+      /** This device's copy didn't match the host's (`table-digest`): it is
+       * dealt again from the host's state. */
+      readonly resync?: true;
+    }
+  | {
+      /** Another device needs the game as this one holds it: answer with
+       * `table-state`, quoting `request`. */
+      readonly type: "table-state-wanted";
+      readonly roomId: string;
+      readonly request: number;
     }
   | {
       /** Who is connected to a table changed (a device dropped, or came

@@ -39,13 +39,28 @@
  * own device answers again; a pass both made for the same place is settled
  * by the order like any two inputs.
  *
+ * **The copies check each other** (step 7). Every `DIGEST_EVERY` inputs each
+ * copy sends a fingerprint of the game as it stood with exactly that many
+ * in (`table-digest`): taken as an input from elsewhere lands, or as one of
+ * its own is made, and sent once the server has confirmed that one's place.
+ * The server compares it with the host's, and a copy that differs is dealt
+ * again from the host's state. A copy is asked for its state the same way
+ * (`table-state-wanted`): it answers with the game as of the last input the
+ * server has placed, never with moves of its own still on their way.
+ *
+ * **Dealt from a state.** `table-start` may carry the game as another device
+ * holds it (`state`, with the first `from` inputs in): the copy starts from
+ * that and applies the log's tail, in place of dealing from the recipe and
+ * replaying everything. It is how a device joins late, comes back, or is put
+ * right, and it costs a few milliseconds however long the game has run.
+ *
  * **What the page sees.** An undo is one frame, where it ends (`quiet`), and
  * when it took back a move the person made and didn't make it again, they
  * are told why (`notice`). The copy also answers, for its room, whether
  * this device is the host and which other people are connected.
  */
 
-import { Game } from "engine/local";
+import { Game, stateDigest, stateFromJson, stateToJson } from "engine/local";
 import type { GameState, PlayerId } from "engine/local";
 import type { ClientMessage, RoomInput, ServerMessage } from "protocol";
 import { cardRegistry } from "./card-registry.js";
@@ -54,6 +69,10 @@ import type { RoomOptions } from "./room.js";
 
 /** The server's word that a table's game starts (or where it stands). */
 export type TableStart = Extract<ServerMessage, { type: "table-start" }>;
+
+/** A fingerprint of the game is taken, and sent, every this many inputs: at
+ * the same places on every copy. Two to three milliseconds each. */
+export const DIGEST_EVERY = 32;
 
 export interface TableCopyOptions {
   /** Sends a message to the server. */
@@ -76,6 +95,9 @@ interface Outstanding {
    * turn, applied when it comes back. */
   readonly applied: boolean;
   readonly by: "person" | "room";
+  /** The game's fingerprint as this input left it, where its place is one
+   * the copies compare at: sent once the server confirms the place. */
+  readonly digest?: string;
 }
 
 export class TableCopy {
@@ -115,11 +137,21 @@ export class TableCopy {
   /** Taking in the table's inputs without making any of its own: while it is
    * dealt and catches up, and in the middle of an undo. */
   private catchingUp = true;
+  /** While it is dealt: where the log it was sent ends. Of the places it
+   * passes on the way only the last is worth a fingerprint. `null` after. */
+  private dealtTo: number | null;
+  /** Putting back its own confirmed inputs in an undo: no place is passed
+   * that it didn't pass before. */
+  private replaying = false;
   private readonly options: TableCopyOptions;
 
   constructor(start: TableStart, options: TableCopyOptions) {
-    if (start.from !== 0) throw new Error("a copy is dealt from the start of a table's log");
+    if (start.from !== 0 && start.state === undefined) {
+      throw new Error("a copy is dealt from the start of a table's log, or from a state");
+    }
     const { recipe } = start;
+    this.count = start.from;
+    this.dealtTo = start.from + start.log.length;
     this.options = options;
     this.roomId = start.roomId;
     this.seat = start.seat;
@@ -129,7 +161,13 @@ export class TableCopy {
     this.botSeats = new Set(recipe.seats.filter((s) => s.bot).map((s) => s.player));
     const names: Record<string, string> = {};
     for (const seat of recipe.seats) if (seat.name !== null) names[seat.player] = seat.name;
-    this.room = new Room(start.roomId, Game.create({ ...recipe.config, registry: cardRegistry() }), {
+    // From the game as another device holds it, where the server sent one:
+    // the same game the recipe would deal and the log replay, with no replay.
+    const game =
+      start.state === undefined
+        ? Game.create({ ...recipe.config, registry: cardRegistry() })
+        : Game.fromSnapshot(stateFromJson(start.state), { registry: cardRegistry() });
+    this.room = new Room(start.roomId, game, {
       ...options.room,
       copy: {
         answersFor: (player) =>
@@ -142,6 +180,7 @@ export class TableCopy {
           (player === this.seat || (this.host === this.seat && (this.botSeats.has(player) || this.away(player)))),
         sent: (input, how) => this.sent(input, how),
         making: () => this.making(),
+        landed: () => this.landed(),
         hold: (again) => {
           if (!this.pending.some((p) => !p.applied)) return false;
           this.held.push(again);
@@ -168,6 +207,7 @@ export class TableCopy {
       this.count += 1;
       this.room.receive(entry.input);
     }
+    this.dealtTo = null;
     this.catchingUp = false;
     this.room.answersChanged();
   }
@@ -206,6 +246,9 @@ export class TableCopy {
         // Whether or not a move was waiting on it: the page's host controls.
         this.room.publish();
         return;
+      case "table-state-wanted":
+        this.giveState(message.request);
+        return;
       case "table-seats":
         this.online = new Set(message.online);
         // Someone gone is the host's to pass for; someone back is their own.
@@ -235,7 +278,12 @@ export class TableCopy {
    * log to end, or (made out of turn) asking for no place at all. */
   private sent(input: RoomInput, how: { readonly applied: boolean; readonly by: "person" | "room" }): void {
     const mine = this.pending.length;
-    this.pending.push({ input, applied: how.applied, by: how.by });
+    // Applied here already: the game stands as this input leaves it, at the
+    // place it is asking for. If that is one the copies compare at, this is
+    // the moment to take the fingerprint; it is sent if the place is given.
+    const at = this.count + mine + 1;
+    const digest = how.applied && at % DIGEST_EVERY === 0 ? stateDigest(this.room.game.state) : undefined;
+    this.pending.push({ input, applied: how.applied, by: how.by, ...(digest !== undefined ? { digest } : {}) });
     const { roomId, gameNumber: game } = this;
     this.options.send(
       how.applied
@@ -258,6 +306,7 @@ export class TableCopy {
       if (own.applied) {
         // Made here, confirmed where it was made: nothing to apply.
         this.since.push(input);
+        if (own.digest !== undefined) this.report(this.count, own.digest);
       } else {
         // Made out of turn: it happens now, here as on every device. With
         // it landed, the room may play again, and looks as it takes this in.
@@ -344,7 +393,12 @@ export class TableCopy {
     this.undone += 1;
     this.catchingUp = true;
     this.room.replaceGame(base);
-    for (const input of this.since) this.room.receive(input);
+    this.replaying = true;
+    try {
+      for (const input of this.since) this.room.receive(input);
+    } finally {
+      this.replaying = false;
+    }
     this.base = null;
     this.since = [];
     return lost;
@@ -374,6 +428,43 @@ export class TableCopy {
           : "The game changed just as you moved, so your move was taken back. The game is as it now stands.",
       );
     }
+  }
+
+  /** An input from elsewhere has just been applied (`RoomCopy.landed`): the
+   * game stands with exactly `count` inputs in. */
+  private landed(): void {
+    if (this.replaying || this.count % DIGEST_EVERY !== 0) return;
+    // Being dealt: only the last such place in what it was sent, which says
+    // whether the copy it built is the table's.
+    if (this.dealtTo !== null && this.count + DIGEST_EVERY <= this.dealtTo) return;
+    this.report(this.count, stateDigest(this.room.game.state));
+  }
+
+  private report(at: number, digest: string): void {
+    this.options.send({ type: "table-digest", roomId: this.roomId, game: this.gameNumber, at, digest });
+  }
+
+  /**
+   * Another device needs the game (`table-state-wanted`): this copy's, as of
+   * the last input the server has placed. With moves of its own made and not
+   * yet confirmed, that is the game as it stood before the oldest of them
+   * (`base`), which is `since.length` confirmed inputs back from `count`.
+   * A copy that isn't sure of its own game doesn't answer, and the server
+   * asks the next.
+   */
+  private giveState(request: number): void {
+    if (this.outOfStep !== null || this.catchingUp || this.room.stopped !== null) return;
+    const ahead = this.pending.some((p) => p.applied);
+    const state = ahead ? this.base : this.room.game.snapshot();
+    if (state === null) return;
+    this.options.send({
+      type: "table-state",
+      roomId: this.roomId,
+      request,
+      game: this.gameNumber,
+      at: ahead ? this.count - this.since.length : this.count,
+      state: stateToJson(state),
+    });
   }
 
   /** Lets go of the room: its timers, and the bots' with them. */

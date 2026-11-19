@@ -420,6 +420,13 @@ export interface RoomCopy {
    * `Room.answersChanged` when it is done, which publishes what was held.
    */
   readonly quiet?: () => boolean;
+  /**
+   * The game stands exactly as an input that came in through `receive` left
+   * it: nothing of this copy's own has been made on top yet. Where a copy
+   * can take a fingerprint of the game that every other copy can take too.
+   * (After an input of its own made in turn, `sent` is that moment.)
+   */
+  readonly landed?: () => void;
   /** Whether this copy's device holds the table's host role (it runs the
    * bots, and may deal a rematch): what its own connections are told, there
    * being nobody else's here to compare with. */
@@ -809,6 +816,7 @@ export class Room {
         return;
       }
     }
+    this.copy.landed?.();
     this.lastActivityAt = Date.now();
     this.settle();
   }

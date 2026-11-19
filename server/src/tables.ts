@@ -70,7 +70,10 @@ export interface TablesOptions {
   /** Told when a table is forgotten (`remove`, `reapIdle`): the host drops
    * what it kept under the code. */
   readonly onRemoved?: (id: string) => void;
-  /** For tests: the clock the grace runs on. */
+  /** How long a device asked for its state has to answer before the next is
+   * asked (or the whole log is sent). 3 s unless given. */
+  readonly stateWaitMs?: number;
+  /** For tests: the clock the grace and the wait for a state run on. */
   readonly timers?: {
     readonly setTimeout: (fn: () => void, ms: number) => unknown;
     readonly clearTimeout: (handle: unknown) => void;
@@ -78,6 +81,13 @@ export interface TablesOptions {
 }
 
 const HOST_GRACE_MS = 5_000;
+const STATE_WAIT_MS = 3_000;
+/** The longest a state's text may be: a late four-player game's is under a
+ * megabyte (most of it the event log), so this is room to spare and still a
+ * bound on what one device can have the server pass on. */
+export const MAX_STATE_CHARS = 16 * 1024 * 1024;
+/** How many of the latest places the devices' fingerprints are kept for. */
+const DIGESTS_KEPT = 8;
 /**
  * The most inputs one game's log takes. A long four-player game is a few
  * thousand (every pass is one); this is twenty times that, and what stands
@@ -88,6 +98,20 @@ export const MAX_TABLE_LOG = 100_000;
 const INPUT_KINDS: ReadonlySet<string> = new Set(["action", "concede", "orders-own-triggers"]);
 /** The messages a table answers; anything else about its code is refused. */
 const SILENT: ReadonlySet<string> = new Set(["ack", "event-deltas", "table-capable"]);
+
+/** A device waiting to be dealt the game from another device's state. */
+interface StateRequest {
+  readonly id: number;
+  /** The connection to be dealt, and the seat it plays (`null`: it watches). */
+  readonly to: ConnId;
+  readonly seat: PlayerId | null;
+  /** Its copy didn't match the host's: said in its `table-start`. */
+  readonly resync: boolean;
+  /** The device asked, and the ones asked before it that didn't answer. */
+  source: ConnId;
+  readonly tried: Set<ConnId>;
+  timer: unknown;
+}
 
 interface Seat {
   readonly token: string;
@@ -105,18 +129,26 @@ interface Table {
   /** Set while the bots wait for a host whose device dropped. */
   hostTimer: unknown;
   lastActivityAt: number;
+  /** The devices' fingerprints of the game (`table-digest`), by the place in
+   * the log each was taken at: the latest few places only. */
+  readonly digests: Map<number, Map<ConnId, string>>;
+  /** Devices waiting for another's state, by request. */
+  readonly requests: Map<number, StateRequest>;
+  nextRequest: number;
 }
 
 export class Tables {
   private readonly tables = new Map<string, Table>();
   private readonly send: (conn: ConnId, message: ServerMessage) => void;
   private readonly hostGraceMs: number;
+  private readonly stateWaitMs: number;
   private readonly timers: NonNullable<TablesOptions["timers"]>;
   private readonly onRemoved: (id: string) => void;
 
   constructor(send: (conn: ConnId, message: ServerMessage) => void, options: TablesOptions = {}) {
     this.send = send;
     this.hostGraceMs = options.hostGraceMs ?? HOST_GRACE_MS;
+    this.stateWaitMs = options.stateWaitMs ?? STATE_WAIT_MS;
     this.onRemoved = options.onRemoved ?? (() => {});
     this.timers = options.timers ?? {
       setTimeout: (fn, ms) => {
@@ -150,6 +182,9 @@ export class Tables {
       host: null,
       hostTimer: null,
       lastActivityAt: Date.now(),
+      digests: new Map(),
+      requests: new Map(),
+      nextRequest: 1,
     };
     table.host = this.hostFor(table);
     this.tables.set(table.id, table);
@@ -178,8 +213,15 @@ export class Tables {
       case "table-rematch":
         this.rematch(table, conn);
         return;
+      case "table-digest":
+        this.digest(table, conn, message.game, message.at, message.digest);
+        return;
+      case "table-state":
+        this.stateArrived(table, conn, message.request, message.game, message.at, message.state);
+        return;
       case "leave-room":
         this.leave(table, conn);
+        this.gone(table, conn);
         return;
       case "join-room":
       case "spectate-room":
@@ -202,7 +244,10 @@ export class Tables {
 
   /** A socket closed: it leaves every table it was at. */
   close(conn: ConnId): void {
-    for (const table of this.tables.values()) this.leave(table, conn);
+    for (const table of this.tables.values()) {
+      this.leave(table, conn);
+      this.gone(table, conn);
+    }
   }
 
   /** Removes tables nobody has been connected to, or sent anything at, for
@@ -224,6 +269,7 @@ export class Tables {
     const table = this.tables.get(id);
     if (table === undefined) return false;
     if (table.hostTimer !== null) this.timers.clearTimeout(table.hostTimer);
+    this.cancelRequests(table);
     this.tables.delete(id);
     this.onRemoved(id);
     return true;
@@ -350,12 +396,154 @@ export class Tables {
       }
     }
     if (seat === null) table.watchers.add(conn);
-    const start = typeof from === "number" && Number.isInteger(from) && from >= 0 ? Math.min(from, table.log.length) : 0;
     // A device back in its seat may be the host again (the creator), or the
     // one the bots were waiting for.
     this.rehost(table);
-    this.send(conn, this.startFor(table, seat, start));
+    if (typeof from === "number" && Number.isInteger(from) && from >= 0) {
+      // It names where it wants the log from: it has the game up to there.
+      this.send(conn, this.startFor(table, seat, Math.min(from, table.log.length)));
+    } else {
+      this.deal(table, conn, seat, false);
+    }
     if (seat !== null) this.seatsChanged(table, conn);
+  }
+
+  /**
+   * Deals `conn` the game: from another device's state where one is at the
+   * table (the host's first), which takes a device milliseconds however long
+   * the game has run, and is the game the table is actually playing where a
+   * replay on this device's build might not be; else the whole log.
+   */
+  private deal(table: Table, conn: ConnId, seat: PlayerId | null, resync: boolean): void {
+    // One deal at a time for a connection: the latest asked for stands.
+    for (const request of [...table.requests.values()]) if (request.to === conn) this.drop(table, request);
+    const request: StateRequest = {
+      id: table.nextRequest,
+      to: conn,
+      seat,
+      resync,
+      source: conn,
+      tried: new Set([conn]),
+      timer: null,
+    };
+    table.nextRequest += 1;
+    table.requests.set(request.id, request);
+    this.ask(table, request);
+  }
+
+  /** Asks the next device for its state, or, with none left to ask, sends
+   * the whole log. */
+  private ask(table: Table, request: StateRequest): void {
+    const hostConn = table.host === null ? null : (table.seats.get(table.host)?.conn ?? null);
+    const seated = [...table.seats.values()].flatMap((s) => (s.conn === null ? [] : [s.conn]));
+    // Not a device that is waiting to be dealt itself: it has no game to
+    // give, and two that came back together would wait on each other.
+    const waiting = new Set([...table.requests.values()].map((r) => r.to));
+    const source = [...(hostConn === null ? [] : [hostConn]), ...seated].find(
+      (c) => !request.tried.has(c) && !waiting.has(c),
+    );
+    if (source === undefined) {
+      this.drop(table, request);
+      this.send(request.to, {
+        ...this.startFor(table, request.seat, 0),
+        ...(request.resync ? { resync: true as const } : {}),
+      } as ServerMessage);
+      return;
+    }
+    request.source = source;
+    request.tried.add(source);
+    request.timer = this.timers.setTimeout(() => {
+      request.timer = null;
+      if (table.requests.get(request.id) === request && this.tables.get(table.id) === table) this.ask(table, request);
+    }, this.stateWaitMs);
+    this.send(source, { type: "table-state-wanted", roomId: table.id, request: request.id });
+  }
+
+  /** A device's answer to `table-state-wanted`. */
+  private stateArrived(table: Table, conn: ConnId, id: unknown, game: unknown, at: unknown, state: unknown): void {
+    const request = typeof id === "number" ? table.requests.get(id) : undefined;
+    if (request === undefined || request.source !== conn) return;
+    this.cancelWait(request);
+    const good =
+      game === table.recipe.gameNumber &&
+      typeof at === "number" &&
+      Number.isInteger(at) &&
+      at >= 0 &&
+      at <= table.log.length &&
+      typeof state === "string" &&
+      state.length > 0 &&
+      state.length <= MAX_STATE_CHARS;
+    if (!good) {
+      // Of a game since dealt past, or nothing a copy could start from: the
+      // next device is asked.
+      this.ask(table, request);
+      return;
+    }
+    table.requests.delete(request.id);
+    this.send(request.to, {
+      ...this.startFor(table, request.seat, at as number),
+      state: state as string,
+      ...(request.resync ? { resync: true as const } : {}),
+    } as ServerMessage);
+  }
+
+  private cancelWait(request: StateRequest): void {
+    if (request.timer === null) return;
+    this.timers.clearTimeout(request.timer);
+    request.timer = null;
+  }
+
+  /** Forgets a request without answering it. */
+  private drop(table: Table, request: StateRequest): void {
+    this.cancelWait(request);
+    table.requests.delete(request.id);
+  }
+
+  private cancelRequests(table: Table): void {
+    for (const request of [...table.requests.values()]) this.drop(table, request);
+  }
+
+  /** `conn` left the table: nothing is dealt to it, and what it was asked
+   * for is asked of the next device. Its fingerprints go too. */
+  private gone(table: Table, conn: ConnId): void {
+    for (const reports of table.digests.values()) reports.delete(conn);
+    for (const request of [...table.requests.values()]) {
+      if (request.to === conn) this.drop(table, request);
+      else if (request.source === conn) {
+        this.cancelWait(request);
+        this.ask(table, request);
+      }
+    }
+  }
+
+  /**
+   * A device's fingerprint of the game with the first `at` inputs in. Every
+   * device takes one at the same places, so they can be compared: a device
+   * whose copy differs from the host's at a place is dealt the host's state
+   * (the user's "unless the host disagrees": the host's copy is the game).
+   * Nothing is read into the text, and the server holds no game to check it
+   * against.
+   */
+  private digest(table: Table, conn: ConnId, game: unknown, at: unknown, digest: unknown): void {
+    if (game !== table.recipe.gameNumber || typeof at !== "number" || !Number.isInteger(at)) return;
+    if (at < 0 || at > table.log.length || typeof digest !== "string" || digest.length === 0 || digest.length > 64) return;
+    if (this.seatOf(table, conn) === null && !table.watchers.has(conn)) return;
+    let reports = table.digests.get(at);
+    if (reports === undefined) {
+      reports = new Map();
+      table.digests.set(at, reports);
+      if (table.digests.size > DIGESTS_KEPT) table.digests.delete(Math.min(...table.digests.keys()));
+    }
+    reports.set(conn, digest);
+    const hostConn = table.host === null ? null : (table.seats.get(table.host)?.conn ?? null);
+    const reference = hostConn === null ? undefined : reports.get(hostConn);
+    if (reference === undefined || hostConn === null) return;
+    for (const [other, theirs] of [...reports]) {
+      if (other === hostConn || theirs === reference) continue;
+      // Compared once: its next fingerprint comes from the copy it is dealt.
+      reports.delete(other);
+      this.deal(table, other, this.seatOf(table, other), true);
+    }
   }
 
   private rematch(table: Table, conn: ConnId): void {
@@ -380,6 +568,9 @@ export class Tables {
       },
     };
     table.log = [];
+    // A new game: nothing of the old one's is compared or waited for.
+    table.digests.clear();
+    this.cancelRequests(table);
     this.start(table);
   }
 

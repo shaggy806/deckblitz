@@ -63,7 +63,10 @@ that file.
   a `Room` as ever. The page's worker runs the copy through `local-host.ts` (`LocalRoomHost.table`),
   so what a copy's room tells its connections (frames, `isHost`, who is online, a `notice`) is
   what a player sees. The host's copy runs the bots and also passes the empty windows of a
-  person whose device is gone (`TableCopy.away`), never a choice of theirs. Nothing in `tables.ts` may import the engine
+  person whose device is gone (`TableCopy.away`), never a choice of theirs. The copies send a
+  fingerprint of the game every 32 inputs (`table-digest`); one that isn't the host's is dealt
+  the host's state, and so is any device that comes to a table under way (`table-start`'s
+  `state`), so whatever a copy holds beyond `GameState` must not matter to the game. Nothing in `tables.ts` may import the engine
   or check an input against a game: it takes an in-turn input only where the device made it (the
   log ending at `after`, its last `mine` entries that device's) and an out-of-turn one
   (`after: null`) anywhere. `table-input` is not rate-limited, and both hosts must route a

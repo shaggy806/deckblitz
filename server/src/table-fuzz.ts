@@ -86,6 +86,10 @@ export interface TableFuzzResult {
   readonly turns: number;
   readonly over: boolean;
   readonly did: Readonly<Record<string, number>>;
+  /** Fingerprints the devices sent for comparing. */
+  readonly compared: number;
+  /** Copies dealt from another device's state (a device coming back). */
+  readonly fromState: number;
   readonly digest: string;
 }
 
@@ -123,13 +127,21 @@ export class RacingTable {
   readonly botSeats: ReadonlySet<PlayerId>;
   readonly recipe: TableRecipe;
   refused = 0;
+  /** Fingerprints the devices sent the server to compare (`table-digest`). */
+  compared = 0;
+  /** Copies dealt from another device's state and not from the whole log. */
+  fromState = 0;
+  /** Copies dealt again because their fingerprint wasn't the host's. With
+   * nothing done to any copy there should be none. */
+  resyncs = 0;
   private readonly tables: Tables;
   private readonly stalled = new Set<Device>();
   private readonly rng: ReturnType<typeof createRng>;
   private readonly botController: (player: PlayerId) => PlayerController;
   private readonly paced: boolean;
-  /** The server's wait before it hands a departed host's bots on, pending. */
-  private grace: (() => void) | null = null;
+  /** The server's waits that haven't run out: before it hands a departed
+   * host's bots on, and for a device it asked for its state. */
+  private readonly waits = new Set<() => void>();
   private undoneGone = 0;
 
   constructor(options: TableFuzzOptions) {
@@ -175,22 +187,25 @@ export class RacingTable {
     this.tables = new Tables(
       (conn, message) => {
         if (message.type === "table-refused") this.refused += 1;
+        if (message.type === "table-start" && message.state !== undefined) this.fromState += 1;
+        if (message.type === "table-start" && message.resync === true) this.resyncs += 1;
         if (conn === RECORDER) {
           if (message.type === "table-input") this.log.push({ index: message.index, from: message.from, input: message.input });
           return;
         }
         this.devices.find((d) => d.conn === conn)?.down.push(message);
       },
-      // The host's grace, when a host's device leaves, is one more thing
-      // that can happen next (`step`): it runs when the harness picks it.
+      // The server's waits (for a host that left, before its bots are handed
+      // on; for a device asked for its state) are more things that can
+      // happen next (`step`): each runs out when the harness picks it.
       {
         timers: {
           setTimeout: (fn) => {
-            this.grace = fn;
+            this.waits.add(fn);
             return fn;
           },
           clearTimeout: (handle) => {
-            if (this.grace === handle) this.grace = null;
+            this.waits.delete(handle as () => void);
           },
         },
       },
@@ -271,11 +286,10 @@ export class RacingTable {
    */
   step(): boolean {
     const next: (() => void)[] = [];
-    const { grace } = this;
-    if (grace !== null) {
+    for (const wait of this.waits) {
       next.push(() => {
-        this.grace = null;
-        grace();
+        this.waits.delete(wait);
+        wait();
       });
     }
     for (const device of this.devices) {
@@ -304,6 +318,7 @@ export class RacingTable {
     for (; sent < count; sent += 1) {
       const message = device.up.shift();
       if (message === undefined) break;
+      if (message.type === "table-digest") this.compared += 1;
       this.tables.message(device.conn, message);
     }
     return sent;
@@ -330,7 +345,7 @@ export class RacingTable {
   /** Whether anything is still on its way, stalled devices' too. */
   get quiet(): boolean {
     return (
-      this.stalled.size === 0 && this.grace === null && this.devices.every((d) => d.up.length === 0 && d.down.length === 0)
+      this.stalled.size === 0 && this.waits.size === 0 && this.devices.every((d) => d.up.length === 0 && d.down.length === 0)
     );
   }
 
@@ -614,6 +629,12 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
   for (const device of table.devices) table.back(device);
   check("at the end");
   table.latecomer();
+  // Nothing was done to any copy here, so none should ever have differed
+  // from the host's: a fingerprint taken at the wrong moment would show up
+  // as this, with the copies agreeing all the while.
+  if (table.resyncs > 0) {
+    throw new Error(`races: ${table.resyncs} cop${table.resyncs === 1 ? "y was" : "ies were"} dealt again for not matching the host's, with nothing wrong`);
+  }
   return {
     devices: table.devices.length,
     moves,
@@ -624,6 +645,8 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
     turns: table.state.turn.number,
     over: table.state.result.over,
     did,
+    compared: table.compared,
+    fromState: table.fromState,
     digest: stateDigest(table.state, { events: true }),
   };
 }

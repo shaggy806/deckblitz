@@ -37,7 +37,23 @@ function chosen(href: string): boolean {
   }
 }
 
+/** A dev build's test hook: `?build=<name>` has this tab name another build
+ * than the one it is, kept for the tab as the other flags are, to stand in
+ * for a page loaded before or after a deploy. Never read in production. */
+function namedBuild(): string | null {
+  if (!import.meta.env.DEV) return null
+  try {
+    const flag = new URL(window.location.href).searchParams.get('build')
+    if (flag !== null) sessionStorage.setItem('mtg.build', flag)
+    return sessionStorage.getItem('mtg.build')
+  } catch {
+    return null
+  }
+}
+
 /** This build of the page, as Vite stamped it (`vite.config.ts`): copies of
  * one game must run the same engine and the same cards, so a table starts
- * only among pages that name the same one. */
-export const PAGE_BUILD: string = __PAGE_BUILD__
+ * only among pages that name the same one. A page on another build can still
+ * come to a table that is under way: it is dealt the host's state, and its
+ * copy is checked against the host's as everyone's is. */
+export const PAGE_BUILD: string = namedBuild() ?? __PAGE_BUILD__

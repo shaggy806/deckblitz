@@ -138,6 +138,30 @@ export class LocalRoomHost {
     if (seating.join !== null) this.message(seating.join);
     else if (seat !== null) this.message({ type: "claim-seat", roomId, seat, clientToken: token });
     else this.message({ type: "spectate-room", roomId });
+    // Dealt again because this copy's game wasn't the host's (`table-digest`):
+    // the board may have changed under the player with nothing done to it.
+    if (start.resync === true) {
+      this.send({
+        type: "notice",
+        roomId,
+        message: "This device's game had drifted from the table's, and was put back in step with it.",
+      });
+    }
+  }
+
+  /**
+   * A test's hook: makes this device's copy of the table under `roomId` hold
+   * a game the table doesn't (each player a life more), as a browser that
+   * computed something differently would, for checking that the copies
+   * notice and this one is put right. Returns whether there was a copy.
+   */
+  corruptTable(roomId: string): boolean {
+    const copy = this.copies.get(roomId);
+    if (copy === undefined) return false;
+    const state = copy.room.game.snapshot();
+    for (const player of Object.values(state.players)) player.life += 1;
+    copy.room.replaceGame(state);
+    return true;
   }
 
   /** A message from the server about a table this device holds a copy of

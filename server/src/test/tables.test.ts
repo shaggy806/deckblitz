@@ -211,11 +211,111 @@ describe("a table on the server", () => {
     tables.message(30, { type: "table-input", roomId: "TABLE", after: 3, input: pass(CAROL) });
     expect(take().map((o) => o.to)).toEqual([1, 30, 4, 9]);
     // No token (or one the table doesn't know): the whole log, to watch.
-    tables.message(40, { type: "table-join", roomId: "TABLE", clientToken: "nobody" });
+    tables.message(40, { type: "table-join", roomId: "TABLE", clientToken: "nobody", from: 0 });
     const [watching] = take();
     expect(watching.message).toMatchObject({ type: "table-start", seat: null, from: 0 });
     if (watching.message.type !== "table-start") throw new Error("unreachable");
     expect(watching.message.log).toHaveLength(4);
+  });
+
+  it("deals a device that names no place from another device's state: the host's first, then the inputs since", () => {
+    const { tables, take } = harness(0);
+    tables.open(opening());
+    for (let i = 0; i < 3; i += 1) tables.message(1, { type: "table-input", roomId: "TABLE", after: i, input: pass(BOB) });
+    take();
+    // Someone arrives to watch. The host's device is asked for the game.
+    tables.message(40, { type: "table-join", roomId: "TABLE" });
+    const asked = take();
+    expect(asked).toEqual([{ to: 1, message: { type: "table-state-wanted", roomId: "TABLE", request: expect.any(Number) } }]);
+    const request = asked[0].message.type === "table-state-wanted" ? asked[0].message.request : -1;
+    // An input lands while the state is on its way: it is in the tail.
+    tables.message(1, { type: "table-input", roomId: "TABLE", after: 3, input: pass(BOB) });
+    expect(take().map((o) => [o.to, o.message.type])).toEqual([1, 3, 4, 9, 40].map((to) => [to, "table-input"]));
+    // The host answers with its game as of two inputs in.
+    tables.message(1, { type: "table-state", roomId: "TABLE", request, game: 1, at: 2, state: "{the game}" });
+    const [dealt, ...rest] = take();
+    expect(rest).toEqual([]);
+    expect(dealt).toMatchObject({ to: 40, message: { type: "table-start", seat: null, from: 2, state: "{the game}", host: ALICE } });
+    if (dealt.message.type !== "table-start") throw new Error("unreachable");
+    expect(dealt.message.log.map((e) => e.index)).toEqual([2, 3]);
+    expect(dealt.message.resync).toBeUndefined();
+    // Answered once: a second answer, or anyone else's, deals nothing.
+    tables.message(1, { type: "table-state", roomId: "TABLE", request, game: 1, at: 2, state: "{again}" });
+    tables.message(3, { type: "table-state", roomId: "TABLE", request, game: 1, at: 2, state: "{not asked}" });
+    expect(take()).toEqual([]);
+  });
+
+  it("asks the next device when one doesn't answer or sends nothing usable, and sends the whole log when none can", () => {
+    const { tables, take, elapse } = harness(0);
+    tables.open(opening());
+    for (let i = 0; i < 2; i += 1) tables.message(1, { type: "table-input", roomId: "TABLE", after: i, input: pass(BOB) });
+    take();
+    const requestOf = (out: { to: number; message: ServerMessage }[]): number => {
+      const message = out.find((o) => o.message.type === "table-state-wanted")?.message;
+      return message?.type === "table-state-wanted" ? message.request : -1;
+    };
+    // Dave reloads: the host is asked first, and says nothing in time.
+    tables.close(4);
+    take();
+    tables.message(41, { type: "table-join", roomId: "TABLE", clientToken: "d" });
+    const first = take();
+    expect(first.filter((o) => o.message.type === "table-state-wanted").map((o) => o.to)).toEqual([1]);
+    expect(first.some((o) => o.message.type === "table-start")).toBe(false);
+    expect(elapse()).toBe(true);
+    // Then Carol's, which sends a state from a place the log hasn't reached.
+    const second = take();
+    expect(second.map((o) => [o.to, o.message.type])).toEqual([[3, "table-state-wanted"]]);
+    tables.message(3, { type: "table-state", roomId: "TABLE", request: requestOf(second), game: 1, at: 99, state: "{}" });
+    // Nobody is left to ask (Dave isn't asked for his own): the whole log.
+    const dealt = take();
+    expect(dealt).toHaveLength(1);
+    expect(dealt[0]).toMatchObject({ to: 41, message: { type: "table-start", seat: DAVE, from: 0 } });
+    expect(dealt[0].message.type === "table-start" && dealt[0].message.state).toBeUndefined();
+    expect(dealt[0].message.type === "table-start" && dealt[0].message.log).toHaveLength(2);
+
+    // A device asked that leaves: the next is asked at once.
+    tables.message(42, { type: "table-join", roomId: "TABLE" });
+    expect(take().map((o) => [o.to, o.message.type])).toEqual([[1, "table-state-wanted"]]);
+    tables.close(1);
+    const after = take().filter((o) => o.message.type === "table-state-wanted");
+    expect(after.map((o) => o.to)).toEqual([3]);
+    // And one that was waiting and leaves is dealt nothing.
+    tables.close(42);
+    tables.message(3, { type: "table-state", roomId: "TABLE", request: requestOf(after), game: 1, at: 2, state: "{}" });
+    expect(take().filter((o) => o.message.type === "table-start")).toEqual([]);
+  });
+
+  it("deals a device whose fingerprint isn't the host's the host's state, and says why", () => {
+    const { tables, take } = harness(0);
+    tables.open(opening());
+    for (let i = 0; i < 4; i += 1) tables.message(1, { type: "table-input", roomId: "TABLE", after: i, input: pass(BOB) });
+    take();
+    const digest = (conn: number, at: number, text: string): void =>
+      tables.message(conn, { type: "table-digest", roomId: "TABLE", game: 1, at, digest: text });
+    // Before the host's own arrives nothing is compared.
+    digest(3, 4, "aaaa");
+    digest(4, 4, "bbbb");
+    expect(take()).toEqual([]);
+    // The host's: Carol agrees with it, Dave doesn't, and is dealt again.
+    digest(1, 4, "aaaa");
+    const asked = take();
+    expect(asked).toEqual([{ to: 1, message: { type: "table-state-wanted", roomId: "TABLE", request: expect.any(Number) } }]);
+    const request = asked[0].message.type === "table-state-wanted" ? asked[0].message.request : -1;
+    tables.message(1, { type: "table-state", roomId: "TABLE", request, game: 1, at: 4, state: "{the host's game}" });
+    expect(take()).toMatchObject([
+      { to: 4, message: { type: "table-start", seat: DAVE, from: 4, state: "{the host's game}", resync: true, log: [] } },
+    ]);
+    // Once: the same report compared again deals nothing more.
+    digest(3, 4, "aaaa");
+    expect(take()).toEqual([]);
+    // One who watches is held to it too; another game's fingerprint, or one
+    // from a place the log hasn't reached, is nobody's.
+    digest(9, 4, "cccc");
+    expect(take().map((o) => [o.to, o.message.type])).toEqual([[1, "table-state-wanted"]]);
+    tables.message(1, { type: "table-digest", roomId: "TABLE", game: 2, at: 4, digest: "zzzz" });
+    digest(3, 40, "zzzz");
+    digest(77, 4, "zzzz");
+    expect(take()).toEqual([]);
   });
 
   it("keeps the bots waiting for a host that dropped, then hands them to the next device", () => {

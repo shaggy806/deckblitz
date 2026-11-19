@@ -48,10 +48,13 @@ function pageErrors(page: Page): string[] {
 interface Traffic {
   readonly sent: string[]
   readonly received: string[]
+  /** For each `table-start` it was sent: whether it came with the game as
+   * another device holds it, and how many inputs came with it to apply. */
+  readonly starts: { readonly state: boolean; readonly resync: boolean; readonly inputs: number }[]
 }
 
 function watchTraffic(page: Page): Traffic {
-  const traffic: Traffic = { sent: [], received: [] }
+  const traffic: Traffic = { sent: [], received: [], starts: [] }
   const typeOf = (payload: string | Buffer): string | null => {
     const match = /"type":"([a-z-]+)"/.exec(String(payload))
     return match === null ? null : match[1]
@@ -64,6 +67,10 @@ function watchTraffic(page: Page): Traffic {
     ws.on('framereceived', (frame) => {
       const type = typeOf(frame.payload)
       if (type !== null) traffic.received.push(type)
+      if (type === 'table-start') {
+        const start = JSON.parse(String(frame.payload)) as { state?: string; resync?: boolean; log: unknown[] }
+        traffic.starts.push({ state: typeof start.state === 'string', resync: start.resync === true, inputs: start.log.length })
+      }
     })
   })
   return traffic
@@ -424,6 +431,96 @@ test("the host's tab closes mid-game: the bots, and the game, carry on from the 
   expect(guest.errors).toEqual([])
   expect(host.errors).toEqual([])
   await guest.page.context().close()
+})
+
+/** Every player's life total as a page shows it, in the page's own order. */
+const lifeOf = (page: Page): Promise<string[]> => page.locator('.pp-life').allInnerTexts()
+
+test('the copies check each other: one that drifts is put back on the host\u2019s, and a page coming back starts from the host\u2019s game', async ({
+  browser,
+  request,
+}) => {
+  test.setTimeout(300_000)
+  const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE)
+  await capable(host, guest)
+  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  for (const { page } of [host, guest]) {
+    await expect(keepPrompt(page)).toBeVisible(paced)
+    await page.getByRole('button', { name: 'Keep', exact: true }).click()
+  }
+  await playTo(3, [host.page, guest.page])
+  // Dealt once each, from the recipe: nobody had the game yet.
+  expect(guest.traffic.starts).toEqual([{ state: false, resync: false, inputs: 0 }])
+  const inputs = (await tableOf(request, room))?.inputs ?? 0
+  expect(inputs).toBeGreaterThan(20)
+
+  // The guest reloads, as a page on another build of the site (one loaded
+  // after a deploy): it is dealt the game as the host's device holds it and
+  // the few inputs since, not the log to play through again.
+  await guest.page.goto(`/?room=${room}&build=after-a-deploy`)
+  await seatedAtBoard(guest.page)
+  expect(guest.traffic.starts).toHaveLength(2)
+  expect(guest.traffic.starts[1]).toMatchObject({ state: true, resync: false })
+  expect(guest.traffic.starts[1].inputs).toBeLessThan(inputs)
+  await expect.poll(async () => (await tableOf(request, room))?.connected, paced).toBe(2)
+  const turn = await turnOf(guest.page)
+  await playTo(turn + 1, [host.page, guest.page])
+  await agree([host.page, guest.page])
+  expect(await lifeOf(guest.page)).toEqual(['40', '40', '40'])
+
+  // The guest's copy comes to hold another game (a test's hook: every life
+  // total a point up), as a browser that worked something out differently
+  // would. Its own page shows it; the host's doesn't.
+  await guest.page.evaluate((code) => {
+    ;(window as unknown as { deckblitzLocal: { corrupt: (roomId: string) => void } }).deckblitzLocal.corrupt(code)
+  }, room)
+  await expect.poll(() => lifeOf(guest.page), paced).toEqual(['41', '41', '41'])
+  expect(await lifeOf(host.page)).toEqual(['40', '40', '40'])
+
+  // They play on. At the next place the copies compare, the server finds the
+  // guest's isn't the host's and deals it the host's: the page says so, and
+  // shows the table's game again.
+  const drifted = guest.page.locator('.toast.info').filter({ hasText: 'had drifted from the table' })
+  const deadline = Date.now() + 150_000
+  while (!(await drifted.isVisible().catch(() => false))) {
+    if (Date.now() > deadline) throw new Error('the drifted copy was never put right')
+    await getOn(host.page)
+    await getOn(guest.page)
+    await guest.page.waitForTimeout(250)
+  }
+  await expect.poll(() => lifeOf(guest.page), paced).toEqual(['40', '40', '40'])
+  await guest.page.screenshot({ path: test.info().outputPath('drift-notice.png') })
+  expect(guest.traffic.starts.at(-1)).toMatchObject({ state: true, resync: true })
+  expect(guest.traffic.sent).toContain('table-digest')
+  expect(host.traffic.sent).toContain('table-digest')
+  expect(host.traffic.sent).toContain('table-state')
+  // The host was never dealt again: its game is the table's.
+  expect(host.traffic.starts).toHaveLength(1)
+  const after = await turnOf(guest.page)
+  await playTo(after + 1, [host.page, guest.page])
+  await agree([host.page, guest.page])
+  for (const seated of [host, guest]) {
+    await expect(seated.page.locator('.toast.bad')).toHaveCount(0)
+    expect(seated.errors).toEqual([])
+    await seated.page.context().close()
+  }
+})
+
+test('two builds of the page in one lobby: the game starts on the server', async ({ browser, request }) => {
+  test.setTimeout(120_000)
+  // Both can hold a copy, but not of the same engine: copies of one game
+  // must run one build.
+  const { host, guest, room } = await lobby(browser, CAPABLE, `${CAPABLE}&build=another`)
+  await capable(host, guest)
+  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  for (const { page } of [host, guest]) await expect(keepPrompt(page)).toBeVisible(paced)
+  const started = await status(request)
+  expect(started.rooms.find((r) => r.id === room)).toMatchObject({ stage: 'playing' })
+  expect(started.tables?.map((t) => t.id) ?? []).not.toContain(room)
+  for (const seated of [host, guest]) {
+    expect(seated.errors).toEqual([])
+    await seated.page.context().close()
+  }
 })
 
 test('one page that cannot hold a copy, and the same lobby starts as a game on the server', async ({ browser, request }) => {

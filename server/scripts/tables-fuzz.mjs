@@ -59,7 +59,7 @@ const SEATS = ["alice", "bob", "carol", "dave"].map(asPlayerId);
 
 const seeds = only !== null ? [Number(only)] : Array.from({ length: games }, (_, k) => start + k);
 const failures = [];
-const totals = { moves: 0, inputs: 0, refused: 0, undone: 0, checks: 0, over: 0 };
+const totals = { moves: 0, inputs: 0, refused: 0, undone: 0, checks: 0, over: 0, compared: 0, fromState: 0 };
 const did = {};
 const startedAt = Date.now();
 for (const seed of seeds) {
@@ -82,7 +82,7 @@ for (const seed of seeds) {
       ...(paced ? { pacing: "realtime" } : {}),
       ...(decks !== undefined ? { decks, rules: "plain" } : {}),
     });
-    for (const key of ["moves", "inputs", "refused", "undone", "checks"]) totals[key] += result[key];
+    for (const key of ["moves", "inputs", "refused", "undone", "checks", "compared", "fromState"]) totals[key] += result[key];
     if (result.over) totals.over += 1;
     for (const [what, n] of Object.entries(result.did)) did[what] = (did[what] ?? 0) + n;
     if (only !== null) console.log(`seed ${seed} (${label}): ${JSON.stringify(result)}`);
@@ -122,6 +122,7 @@ const seconds = Math.round((Date.now() - startedAt) / 1000);
 console.log(
   `${seeds.length} games at racing tables in ${seconds} s: ${totals.moves} moves by people, ${totals.inputs} inputs put in order, ` +
     `${totals.refused} refused, ${totals.undone} undos, ${totals.checks} checks that every copy held the same game, ` +
+    `${totals.compared} fingerprints sent to compare, ${totals.fromState} copies dealt from another device's state, ` +
     `${totals.over} played to the end`,
 );
 console.log(

@@ -42,6 +42,10 @@ export type ToRoomWorker =
   | { readonly kind: 'table-message'; readonly data: string }
   /** The page left the table: the copy goes. */
   | { readonly kind: 'table-leave'; readonly roomId: string }
+  /** A dev build's test hook: this tab's copy of the table is made to hold a
+   * game the table doesn't (`LocalRoomHost.corruptTable`), to see the copies
+   * notice and this one put right. Ignored by a production worker. */
+  | { readonly kind: 'table-corrupt'; readonly roomId: string }
 
 /** What the worker sends the page. */
 export type FromRoomWorker =
@@ -130,6 +134,11 @@ export class LocalSocket implements RoomSocket {
   /** The page left the table under `roomId`. */
   tableLeave(roomId: string): void {
     this.post({ kind: 'table-leave', roomId })
+  }
+
+  /** A dev build's test hook: see `ToRoomWorker`'s `table-corrupt`. */
+  tableCorrupt(roomId: string): void {
+    this.post({ kind: 'table-corrupt', roomId })
   }
 
   /** The worker's numbers (`LocalStats`). */
@@ -603,8 +612,13 @@ function exposeStats(): void {
   } catch {
     // No long-task timing in this browser: the freezes read as none.
   }
-  const target = window as Window & { deckblitzLocal?: { stats: () => Promise<unknown> } }
+  const target = window as Window & {
+    deckblitzLocal?: { stats: () => Promise<unknown>; corrupt?: (roomId: string) => void }
+  }
   target.deckblitzLocal = {
+    // A dev build only (the e2e suite's): makes this tab's copy of a table
+    // differ from everyone's, to check it is noticed and put right.
+    ...(import.meta.env.DEV ? { corrupt: (roomId: string) => tabWorker?.tableCorrupt(roomId) } : {}),
     stats: async () => {
       const worker = tabWorker
       if (worker === null || worker.dead) return 'no local game in this tab'

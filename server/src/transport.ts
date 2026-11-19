@@ -35,6 +35,9 @@ export const COMPRESSION: PerMessageDeflateOptions = {
 
 const RATE_LIMIT_WINDOW_MS = 5_000;
 const RATE_LIMIT_MAX_MESSAGES = 40;
+/** The messages that don't spend the rate limit: a page sends them by itself
+ * as a game goes, however fast it goes. See where it is read. */
+const UNMETERED: ReadonlySet<string> = new Set(["ack", "table-input", "table-digest", "table-state"]);
 
 export function clientIp(req: IncomingMessage): string {
   const forwarded = req.headers["cf-connecting-ip"];
@@ -117,7 +120,9 @@ export function attachTransport(wss: WebSocketServer, host: RoomHost): void {
       // and, as host, every bot's move, dozens between two real plays. At
       // 40 messages in five seconds a table stalled within its first turn.
       // What bounds them instead is the table's own log (`MAX_TABLE_LOG`).
-      if (message.type !== "ack" && message.type !== "table-input" && isRateLimited(ip)) {
+      // A table's fingerprints and the state one device is asked for by the
+      // server are automatic too.
+      if (!UNMETERED.has(message.type) && isRateLimited(ip)) {
         sendMessage(link, { type: "error", message: "too many requests, slow down" });
         return;
       }

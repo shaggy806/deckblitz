@@ -142,6 +142,10 @@ self.onmessage = async (event: MessageEvent<ToRoomWorker>) => {
     case 'table-leave':
       host?.leaveTable(message.roomId)
       return
+    case 'table-corrupt':
+      // A test's hook, in a dev build only.
+      if (import.meta.env.DEV) host?.corruptTable(message.roomId)
+      return
     case 'close':
       host?.close()
       return
