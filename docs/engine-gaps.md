@@ -20,6 +20,20 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   find it still there. Outline: an internal, unlogged event for each such permanent (as `permanents-left` is),
   matched only by `leaves-battlefield` triggers of players still in the game with no `to`, and the object
   marked gone for whatever the trigger does next.
+- **A player leaves while someone else is choosing targets, and the choice still offers what left with them**
+  (2026-11-18, found by the tables fuzz: `npm run tables:fuzz -w server -- --seed 735 --own-decks --max-turn 20
+  --leaves 0.02`). Rule 800.4a: what a player owns leaves the game as they do, so it is no target for anything
+  after. A `choose-targets` decision keeps the options it was asked with (`awaiting.options`), and
+  `Game.concede`/`leaveGame` don't look at a decision another player has open. In the seed, Dave is choosing new
+  targets for his copy of Transforming Flourish (demonstrate, rule 707.10c) when Carol concedes: her permanent is
+  still among his options and in `legalActions`, and choosing it is refused ("illegal target for Transforming
+  Flourish", `invalidTargetReason` reads the game as it now is). A person gets an error and picks again; a
+  controller that takes the engine's options at their word throws. To do: when a player leaves, put any open
+  decision right (prune or re-ask: a slot left with no option is a trigger with no legal target, rule 603.3d, or
+  a copy that keeps its target), for `choose-targets` in its three uses (a copy's new targets, a trigger's, an
+  opponent's choice during a cast) and then the other decisions that list objects or players
+  (`choose-permanent-or-player`, a sacrifice of someone else's choosing). Write the failing engine test first:
+  two opponents, a spell copy asking for new targets, the third player conceding.
 - **A player who loses while they owe a decision** (2026-11-17, the rules audit, `docs/plans/rules-audit-2026-11.md`).
   Rules 800.4f-h: a cost a departed player would pay isn't paid, a choice an object asks of them goes to another
   player its controller picks, and a choice a rule asks of them goes to the next player in turn order. None is

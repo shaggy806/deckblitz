@@ -17,8 +17,11 @@ done** (2026-11-18; the user: "Start step 4"): a page can play a table, its work
 copy, behind `?tables=1`; two browsers and a bot play one end to end, and a player's own move
 reaches their screen in 13 ms however slow the connection, where a game on the server takes the
 round trip (620 ms at 300 ms each way). **Off by default**: without the flag no page says it can
-hold a copy, so every game on the site still starts on the server. Next is step 6, the host
-changing, then 7 and 8.
+hold a copy, so every game on the site still starts on the server. **Step 6 is done**
+(2026-11-18; the user: "Go ahead"): the host's tab closed mid-game, the other player's page takes
+the bots after the server's few seconds' wait and the game carries on, in a browser and with
+tabs closing and reopening through the racing fuzz; and the host's device now passes the empty
+windows of a player whose device is gone, as a room on the server does. Next are steps 7 and 8.
 
 ## Why
 
@@ -442,9 +445,45 @@ for the server by design ("The undo").
   bots are the host's room's, which is the one that runs them, and the other pages aren't
   told (no "Bots paused" badge there). A seat its player hands to a bot is played by that
   player's device and shows as a bot only on it.
-- **The host changing mid-game** is built and tested on the server and in Node (steps 2 and
-  3) and untried in a browser: step 6.
 - **Bots wait for the host's page only**, as proposed under "Open decisions".
+
+### The host changing, and a player who is gone (step 6)
+
+**Built 2026-11-18.** The handing over was there since steps 2 and 3 (the server names the
+host, `table-host`; a copy that hosts runs the bots, `TableCopy.answersFor`); this step tried
+it in a browser, raced it, and found the one thing missing.
+
+- **In a browser** (`client/e2e/tables.spec.ts`): the host reloads and is back before the
+  server's wait is over, still the host; then her tab closes on someone else's turn. The
+  server waits its five seconds, names the guest's seat host, and the guest's page shows the
+  host's controls and her as gone; the turn ends and the next begins, the bot's moves and her
+  passes made on the guest's device. Both ways the server's rooms run.
+- **A player who is gone.** A room on the server passes a priority window with nothing in it
+  for any seat, connected or not, so a player who dropped holds the game up only where they
+  have a real choice. At a table each device passed for its own seat alone, so the game
+  stopped at the first empty window of whoever closed their tab: with the host gone, at once.
+  Now the host's device answers for a person whose device isn't connected (`TableCopy.away`,
+  from the server's `table-seats`): what a room does for a seat by itself, never a choice of
+  theirs. It passes by the room's default settings, not the ones that player had set, which
+  left with their device. When they are back their own device answers again, and a pass both
+  made for one place is settled by the order like any two inputs.
+- **Raced** (`npm run tables:fuzz -w server -- --leaves 0.02`, `RacingTable.leave`/`back`): a
+  tab closes at any moment, its copy gone and whatever was on its way to or from it lost, and
+  comes back to be dealt a new copy from the log; the server's wait before it hands the bots
+  on is one more thing that happens at a random moment. 300 games with tabs closing (two to four seats, decks from the whole pool and the server's own, 70 paced, 70 with three times the racing): 3,326 leavings and 3,092 returns on the way, 177,604 inputs put in order, 48,180 refused and 3,659 undos, and at every one of 6,005 moments of rest every copy at the table held the same game, as did each copy dealt again from the log. One game of the 300 stopped on an engine fault that has nothing to do with tables (a concession while another player was choosing targets left that choice offering the departed player's permanent: `docs/engine-gaps.md`).
+  Two directed cases (`test/table-races.test.ts`): the host's device passes an absent
+  player's empty windows and stops at their real choice, and their own device passes again
+  once back (red without `away`); the bots go to the next device when the host's is gone and
+  back to the creator's when it returns.
+
+**Left as it is**:
+
+- **A choice of a player who never comes back holds the game**, as in a room on the server:
+  nobody can make it, remove them or hand their seat to a bot. And a tab that was closed, not
+  reloaded, has lost its seat's token (it is kept for the tab), so reopening the link watches;
+  also as at a room.
+- **The bots forget across a handover** what a bot keeps between its decisions, the same loss
+  a reloaded solo game takes.
 
 ## Rollout
 
@@ -494,7 +533,10 @@ Each step ends in a check that can fail.
    at once land in the server's order; and 480 fuzzed games with every message racing (964
    undos, 8,971 refusals) ended with one game on every copy ("The undo").
 6. **The host changing.** *Check*: e2e, the host's tab closed mid-game and the bots moving again
-   from the other device.
+   from the other device. **Done 2026-11-18** ("The host changing, and a player who is gone"):
+   in two browser contexts the host reloads and keeps the bots, then closes her tab and the
+   guest's page has them, the game going on; and tables fuzzed with tabs closing and reopening
+   as everything races end with one game on every copy.
 7. **The digest check and taking the host's state.** *Check*: a test hook that corrupts one copy;
    a client on an older build.
 8. **Measured on the laptop, then on by default.** As `local-rooms.md` did: start-up time and
