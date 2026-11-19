@@ -5,8 +5,10 @@ fuzzer's copy check (`MTG_REPLICA=1`), a state's exact form as text (`engine/src
 names ordered the same on every machine (`compareNames`) — and of step 1, the state digest
 (`stateDigest`) and the check across browsers (`npm run play:browsers -w engine`). **Step 1 is
 done**: recorded games came out identical in Node, in three builds of Chrome's engine, in
-Firefox's and in Safari's, and in Chrome on the test laptop. Step 2, the room as a copy, is next.
-None of the rooms themselves are built.
+Firefox's and in Safari's, and in Chrome on the test laptop. **Step 2 is done** (2026-11-19): a
+`Room` can be one copy of a game (`RoomOptions.copy`), and 480 fuzzed games played on several
+copies at once came out the same on every one. Step 3, the table on the server, is next. No
+network, server table or page uses a copy yet.
 
 ## Why
 
@@ -235,17 +237,35 @@ which is fine on the same grounds as the copies themselves.
 
 ### The room (`server/src/room.ts`, which every device runs)
 
-- **Seats this device answers for.** Today a room answers for every bot seat and automates every
-  person's seat. A copy does that only for its own: its person's seat, and the bots' when it is
-  the host. For the rest it waits for inputs.
-- **Inputs out and in.** What a room does to its game for its own seats goes out as inputs; an
-  input from the wire goes into the game the same way. This is a cut through `settle`, the most
-  delicate code on the server, and the reason this step is built and fuzzed in Node before any
-  network exists.
-- **Replace the game.** One operation, used by an undo and by taking the host's state: put this
-  state in place of the game and publish a frame from it.
-- **Pacing.** Today a bot's move waits until every client has shown the last frame
-  (`everyoneCaughtUp`). A copy can only see its own page. See the open decisions.
+**Built (step 2, 2026-11-19)**; `docs/architecture/server.md` has the detail.
+
+- **Seats this device answers for.** A room answered for every bot seat and automated every
+  person's seat. A copy (`RoomOptions.copy`, `RoomCopy.answersFor`) does that only for its own:
+  its person's seat, and the bots' when it is the host. For the rest it waits for inputs.
+- **Inputs out and in.** Every write a room makes to its game is now one `RoomInput` through
+  `Room.act` (an engine action, a concession, the one setting the engine reads); a copy sends
+  each (`RoomCopy.sent`) and takes the others' through `Room.receive`. The cut through `settle`
+  turned out small: the loop is unchanged, and three places ask whether the copy answers for the
+  seat. A room that is no copy behaves as it did.
+- **Replace the game** (`Room.replaceGame`): a state put in place of the game, a frame
+  published from it, the whole log sent again to whoever kept the old one. For taking the host's
+  state now; for the undo in step 5.
+- **Pacing.** A copy paces against its own page alone: the host's bots wait for the host's page
+  and the think time, and every other copy shows inputs as they come. The fuzz runs copies paced
+  this way as well as unpaced. Whether bots should wait for every device is still an open
+  decision.
+
+What the fuzz taught, each now a rule of the cut:
+
+- **Every copy takes the game on to its next decision the moment an input is in**, its own or
+  another's, whatever its own pacing has parked. A copy with a bot's move waiting behind a frame
+  left its own concession unadvanced while the others moved on.
+- **Something done out of turn is one input.** A concession used to be the answers to whatever
+  the player owed and then the concession, as separate writes. Sent that way, the first answer
+  handed the move to the next player, whose copy (the host's bots) moved before the concession
+  arrived: two copies with the same inputs in different orders. It is one input now, worked out
+  on a copy of the game first, and refused whole if any of it is. This is the smallest case of
+  the race step 5 is about: an input made on a game that didn't yet have one already in flight.
 
 ### Server
 
@@ -279,6 +299,13 @@ Each step ends in a check that can fail.
    *Check*: several rooms in one process, wired through an in-memory order, play whole games
    (random players, bots on one, auto-pass, pass-the-turn, resolve-the-stack, a concession with
    the stack full, a seat handed to a bot, the host changing) and end with one digest. Fuzzed.
+   **Done 2026-11-19** (`server/src/room-copies.ts`, `npm run copies:fuzz -w server`): 480 games
+   on tables of two to four seats with decks from the whole pool, half of them paced as a live
+   room is, 404,000 inputs and 2,232 checks that every copy held the same game, with 291
+   concessions, 631 changes of host, 524 seats handed to a bot and 618 states taken from another
+   copy on the way: every copy identical in every game, once the two faults under "The room"
+   were fixed. Nothing in it races: inputs are made one at a time and the order is the order of
+   making, so what an order does with two inputs made at once is still step 3's and step 5's.
 3. **Tables on the server.** *Check*: the loopback suite with scripted clients; main still
    imports no engine.
 4. **The client.** *Check*: an e2e test with two browser contexts playing two people and a bot;
