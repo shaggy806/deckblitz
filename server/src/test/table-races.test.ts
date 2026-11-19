@@ -8,7 +8,7 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { AutomaticController, stateDigest } from "engine";
+import { AutomaticController, activePlayerOf, stateDigest } from "engine";
 import type { PlayerId } from "engine";
 import type { ClientMessage, PassSettings } from "protocol";
 import { ALICE, BOB, CAROL } from "../decks.js";
@@ -51,6 +51,32 @@ function playTo(table: RacingTable, ready: (waiting: Device) => boolean = () => 
 }
 
 const others = (table: RacingTable, device: Device): Device[] => table.devices.filter((d) => d !== device);
+
+/** Whoever is asked moves, from rest to rest, until the game waits on
+ * someone whose device is gone, `enough` says so, or it ends. Returns the
+ * device it stopped on, `null` if the game ended or `enough` did it. */
+function playOn(table: RacingTable, enough: () => boolean = () => false): Device | null {
+  for (let i = 0; i < 400; i += 1) {
+    table.rest();
+    const waiting = table.waitingOn();
+    if (waiting === null || enough()) return null;
+    if (waiting.away) return waiting;
+    move(table, waiting);
+  }
+  throw new Error("the game never stopped");
+}
+
+/** The passes in the log from `at` on that `device` sent for `player`. */
+const passesFor = (table: RacingTable, at: number, device: Device, player: PlayerId): number =>
+  table.log
+    .slice(at)
+    .filter(
+      (entry) =>
+        entry.from === device.player &&
+        entry.input.kind === "action" &&
+        entry.input.action.type === "pass-priority" &&
+        entry.input.action.player === player,
+    ).length;
 const undone = (table: RacingTable): Record<string, number> =>
   Object.fromEntries(table.devices.map((d) => [d.player, table.copyOf(d).undone]));
 
@@ -241,6 +267,82 @@ describe("inputs racing at a table", () => {
     expect(table.refused).toBe(made.length - 1);
   }, PLAYS);
 
+  it("passes the empty windows of a person whose device is gone, on the host's, until they are back", () => {
+    const table = new RacingTable({ seed: 36, seats: ["person", "person", "person"] });
+    const [alice, bob, carol] = table.devices;
+    // A turn of someone else's: all Carol has in it is passing.
+    playTo(table, () => activePlayerOf(table.state) !== CAROL);
+    const turn = table.state.turn.number;
+    const left = table.log.length;
+    table.leave(carol);
+    table.rest();
+    expect(table.host).toBe(alice);
+
+    // The turn ends without her: Alice and Bob pass for themselves, and
+    // Alice's device, the host's, passes Carol's windows with nothing in them.
+    const stopped = playOn(table, () => table.state.turn.number > turn + 1);
+    table.agree("with Carol gone");
+    expect(table.state.turn.number).toBeGreaterThan(turn);
+    expect(passesFor(table, left, alice, CAROL)).toBeGreaterThan(0);
+    expect(passesFor(table, left, bob, CAROL)).toBe(0);
+    // A choice of her own is nobody's to make: the game waits for her there.
+    if (stopped !== null) {
+      expect(stopped).toBe(carol);
+      const state = table.state;
+      expect(state.awaiting !== null || table.copyOf(alice).room.game.offersFor(CAROL).length > 1).toBe(true);
+    }
+
+    // Back at the table, dealt from the log: her windows are hers again.
+    table.back(carol);
+    table.rest();
+    table.agree("with Carol back");
+    const back = table.log.length;
+    playOn(table, () => table.state.turn.number > turn + 4);
+    table.agree("playing on");
+    expect(passesFor(table, back, carol, CAROL)).toBeGreaterThan(0);
+    expect(passesFor(table, back, alice, CAROL)).toBe(0);
+    for (const device of table.devices) expect(table.toldTo(device)).toEqual([]);
+  }, PLAYS);
+
+  it("hands the bots to the next device when the host's is gone, and back when it returns", () => {
+    const table = new RacingTable({ seed: 37, seats: ["person", "bot", "person", "bot"] });
+    const [alice, carol] = table.devices;
+    const people: readonly PlayerId[] = [ALICE, CAROL];
+    const botInputs = (at: number, device: Device): number =>
+      table.log.slice(at).filter((e) => e.from === device.player && e.input.kind === "action" && !people.includes(e.input.action.player)).length;
+    playTo(table, () => activePlayerOf(table.state) !== ALICE);
+    expect(table.host).toBe(alice);
+    expect(botInputs(0, alice)).toBeGreaterThan(0);
+    expect(botInputs(0, carol)).toBe(0);
+
+    // The host's tab closes with whatever she had sent still on its way.
+    move(table, table.waitingOn() as Device);
+    const left = table.log.length;
+    table.leave(alice);
+    table.rest();
+    // The server's wait is over (it is one of the things `rest` runs): the
+    // bots are Carol's device's now.
+    expect(table.host).toBe(carol);
+    const stopped = playOn(table, () => table.state.turn.number > 40);
+    table.agree("with the host gone");
+    expect(botInputs(left, carol)).toBeGreaterThan(0);
+    // The game got as far as a choice of Alice's own, and waits for her.
+    expect(stopped).toBe(alice);
+
+    // The creator back: the bots are hers again at once, from a copy dealt
+    // from the log.
+    table.back(alice);
+    table.rest();
+    expect(table.host).toBe(alice);
+    table.agree("with the host back");
+    const back = table.log.length;
+    const turn = table.state.turn.number;
+    playOn(table, () => table.state.turn.number > turn + 3);
+    table.agree("playing on");
+    expect(botInputs(back, alice)).toBeGreaterThan(0);
+    expect(botInputs(back, carol)).toBe(0);
+  }, PLAYS);
+
   it.each([
     ["PP", ["person", "person"]],
     ["PbPb", ["person", "bot", "person", "bot"]],
@@ -264,4 +366,26 @@ describe("inputs racing at a table", () => {
     expect(raced.refused).toBeGreaterThan(8);
     expect(raced.undone).toBeGreaterThan(5);
   });
+
+  it.each([
+    ["PbP", ["person", "bot", "person"]],
+    ["PPbP", ["person", "person", "bot", "person"]],
+  ] as const)(
+    "keeps every copy the same with tabs closing and reopening as everything races: %s",
+    (_label, seats) => {
+      let left = 0;
+      let back = 0;
+      for (const pacing of ["immediate", "realtime"] as const) {
+        const result = playTable({ seed: 9, seats, maxTurn: 7, sideEvents: 0.05, stalls: 0.03, leaves: 0.04, pacing });
+        expect(result.over || result.turns > 7).toBe(true);
+        left += result.did["left"] ?? 0;
+        back += result.did["came back"] ?? 0;
+      }
+      // People did go, the host among them, and every copy dealt again from
+      // the log held the game (`playTable` throws where one doesn't).
+      expect(left).toBeGreaterThan(3);
+      expect(back).toBeGreaterThan(3);
+    },
+    180_000,
+  );
 });

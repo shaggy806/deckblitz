@@ -30,6 +30,15 @@
  * it made next would be made on a game without it; a move the person makes
  * meanwhile is kept and made when it has (`RoomCopy.hold`).
  *
+ * **Who is gone.** The host's device runs the bots, and it also answers for
+ * a person whose device isn't connected (`away`): not their choices, which
+ * nobody here can make, but what a room does for any seat by itself, above
+ * all passing a priority window with nothing in it. A room on the server
+ * does that for a player who dropped, and without it a table stopped at the
+ * first empty window of whoever closed their tab. When they are back, their
+ * own device answers again; a pass both made for the same place is settled
+ * by the order like any two inputs.
+ *
  * **What the page sees.** An undo is one frame, where it ends (`quiet`), and
  * when it took back a move the person made and didn't make it again, they
  * are told why (`notice`). The copy also answers, for its room, whether
@@ -130,7 +139,7 @@ export class TableCopy {
           this.count >= this.behind &&
           // Nothing while an input of its own made out of turn is on its way.
           !this.pending.some((p) => !p.applied) &&
-          (player === this.seat || (this.host === this.seat && this.botSeats.has(player))),
+          (player === this.seat || (this.host === this.seat && (this.botSeats.has(player) || this.away(player)))),
         sent: (input, how) => this.sent(input, how),
         making: () => this.making(),
         hold: (again) => {
@@ -199,11 +208,19 @@ export class TableCopy {
         return;
       case "table-seats":
         this.online = new Set(message.online);
+        // Someone gone is the host's to pass for; someone back is their own.
+        this.room.answersChanged();
         this.room.publish();
         return;
       default:
         return;
     }
+  }
+
+  /** Whether `player` is a person whose device isn't connected to the table,
+   * as the server last said. Never this device's own seat, nor a bot's. */
+  private away(player: PlayerId): boolean {
+    return this.online !== null && player !== this.seat && !this.botSeats.has(player) && !this.online.has(player);
   }
 
   /** The room is about to make an input in turn. If it has none of those

@@ -60,6 +60,11 @@ export interface TableFuzzOptions {
   readonly sideEvents?: number;
   /** How likely each tick is to stall a device, or let a stalled one go. */
   readonly stalls?: number;
+  /** How likely each tick is to have a device leave the table (its tab
+   * closed: its copy gone, whatever was on its way to or from it lost), or
+   * one that left come back and be dealt a new copy from the log. 0, the
+   * default: nobody leaves. */
+  readonly leaves?: number;
   /** Bring everything to rest and check the copies every this many moves by
    * people (and whenever the table comes to rest by itself, and at the end). */
   readonly checkEvery?: number;
@@ -100,6 +105,8 @@ export interface Device {
   /** What its page was told beyond frames: a refusal, a notice that a move
    * was taken back. */
   readonly told: ServerMessage[];
+  /** Its tab is closed: no copy, no connection, until it comes `back`. */
+  away: boolean;
 }
 
 const ROOM = "RACES";
@@ -121,6 +128,9 @@ export class RacingTable {
   private readonly rng: ReturnType<typeof createRng>;
   private readonly botController: (player: PlayerId) => PlayerController;
   private readonly paced: boolean;
+  /** The server's wait before it hands a departed host's bots on, pending. */
+  private grace: (() => void) | null = null;
+  private undoneGone = 0;
 
   constructor(options: TableFuzzOptions) {
     const players = options.seats.map((_, i) => SEATS[i].id);
@@ -158,6 +168,7 @@ export class RacingTable {
         clock: this.paced ? new FakeClock() : null,
         acked: 0,
         told,
+        away: false,
       });
     });
     if (this.devices.length === 0) throw new Error("a table needs a person");
@@ -170,8 +181,19 @@ export class RacingTable {
         }
         this.devices.find((d) => d.conn === conn)?.down.push(message);
       },
-      // Nobody leaves here, so the host's grace never runs.
-      { timers: { setTimeout: () => null, clearTimeout: () => {} } },
+      // The host's grace, when a host's device leaves, is one more thing
+      // that can happen next (`step`): it runs when the harness picks it.
+      {
+        timers: {
+          setTimeout: (fn) => {
+            this.grace = fn;
+            return fn;
+          },
+          clearTimeout: (handle) => {
+            if (this.grace === handle) this.grace = null;
+          },
+        },
+      },
     );
     this.tables.open({
       id: ROOM,
@@ -187,9 +209,48 @@ export class RacingTable {
     return this.devices.find((d) => d.copy?.isHost === true) ?? null;
   }
 
-  /** The game, as the first device holds it. */
+  /** The devices at the table now, each with its copy. */
+  get present(): Device[] {
+    return this.devices.filter((d) => d.copy !== null);
+  }
+
+  /** The game, as the first device at the table holds it. */
   get state(): GameState {
-    return this.copyOf(this.devices[0]).room.game.state;
+    const [first] = this.present;
+    if (first === undefined) throw new Error("races: nobody is at the table to say how the game stands");
+    return this.copyOf(first).room.game.state;
+  }
+
+  /** Times a copy went back on inputs of its own, copies since gone included. */
+  get undone(): number {
+    return this.undoneGone + this.present.reduce((n, d) => n + this.copyOf(d).undone, 0);
+  }
+
+  /**
+   * `device`'s tab closes: its copy is gone, what it had sent that hasn't
+   * reached the server never will, and what the server had sent it is lost.
+   * The server is told at once, as a closed socket tells it.
+   */
+  leave(device: Device): void {
+    if (device.away) return;
+    device.away = true;
+    this.stalled.delete(device);
+    if (device.copy !== null) {
+      this.undoneGone += device.copy.undone;
+      device.copy.dispose();
+    }
+    device.copy = null;
+    device.up.length = 0;
+    device.down.length = 0;
+    this.tables.close(device.conn);
+  }
+
+  /** `device` comes back: it asks for the table by its seat's token, and is
+   * dealt a new copy from the log when the server's answer arrives. */
+  back(device: Device): void {
+    if (!device.away) return;
+    device.away = false;
+    device.up.push({ type: "table-join", roomId: ROOM, clientToken: `token-${device.conn}` });
   }
 
   copyOf(device: Device): TableCopy {
@@ -210,6 +271,13 @@ export class RacingTable {
    */
   step(): boolean {
     const next: (() => void)[] = [];
+    const { grace } = this;
+    if (grace !== null) {
+      next.push(() => {
+        this.grace = null;
+        grace();
+      });
+    }
     for (const device of this.devices) {
       if (this.stalled.has(device)) continue;
       if (device.up.length > 0) next.push(() => void this.toServer(device));
@@ -261,7 +329,9 @@ export class RacingTable {
 
   /** Whether anything is still on its way, stalled devices' too. */
   get quiet(): boolean {
-    return this.stalled.size === 0 && this.devices.every((d) => d.up.length === 0 && d.down.length === 0);
+    return (
+      this.stalled.size === 0 && this.grace === null && this.devices.every((d) => d.up.length === 0 && d.down.length === 0)
+    );
   }
 
   private arrive(device: Device, message: ServerMessage): void {
@@ -300,9 +370,12 @@ export class RacingTable {
    */
   agree(when: string): void {
     if (!this.quiet) throw new Error(`races: asked whether the copies agree ${when} with messages still on their way`);
-    const copies = this.devices.map((d) => this.copyOf(d));
+    // Whoever is at the table: a device that left holds nothing to compare.
+    const present = this.present;
+    if (present.length === 0) return;
+    const copies = present.map((d) => this.copyOf(d));
     copies.forEach((copy, i) => {
-      const who = this.devices[i].player;
+      const who = present[i].player;
       if (copy.outOfStep !== null) throw new Error(`races: ${who}'s copy fell out of step ${when}: ${copy.outOfStep}`);
       if (copy.room.stopped !== null) throw new Error(`races: ${who}'s copy stopped ${when}: ${copy.room.stopped}`);
       if (!copy.settled || copy.head !== this.log.length) {
@@ -312,7 +385,7 @@ export class RacingTable {
         );
       }
     });
-    this.same(copies[0], this.devices[0].player, copies.slice(1), this.devices.slice(1).map((d) => d.player), when);
+    this.same(copies[0], present[0].player, copies.slice(1), present.slice(1).map((d) => d.player), when);
   }
 
   /** A copy dealt now from the server's log alone holds the game too: what a
@@ -322,7 +395,9 @@ export class RacingTable {
       { type: "table-start", roomId: ROOM, recipe: this.recipe, seat: null, host: this.host?.player ?? null, from: 0, log: this.log },
       { send: () => {}, room: { pacing: "immediate", botController: this.botController } },
     );
-    this.same(this.copyOf(this.devices[0]), this.devices[0].player, [late], ["a device dealt from the log"], "at the end");
+    const [first] = this.present;
+    if (first === undefined) return;
+    this.same(this.copyOf(first), first.player, [late], ["a device dealt from the log"], "at the end");
   }
 
   private same(first: TableCopy, firstName: string, others: readonly TableCopy[], names: readonly string[], when: string): void {
@@ -341,6 +416,8 @@ export class RacingTable {
   /**
    * At rest: the device of the person the game is waiting on, or `null` once
    * it is over. Throws if it waits on a seat a copy should have moved for.
+   * The device may be one that left: the game waits for that person, as a
+   * room on the server would.
    */
   waitingOn(): Device | null {
     const state = this.state;
@@ -349,6 +426,7 @@ export class RacingTable {
     if (asked === null) throw new Error("races: the game is waiting on nobody");
     const answering = answeringPlayer(state, asked);
     const device = this.devices.find((d) => d.player === answering);
+    if (device !== undefined && device.copy === null) return device;
     if (device === undefined || this.copyOf(device).room.isBotSeat(answering)) {
       const { turn } = state;
       throw new Error(
@@ -372,6 +450,7 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
   const maxTurn = options.maxTurn ?? 12;
   const sideEvents = options.sideEvents ?? 0.03;
   const stalls = options.stalls ?? 0.02;
+  const leaves = options.leaves ?? 0;
   const checkEvery = options.checkEvery ?? 25;
   const people = new Map<PlayerId, RandomController>(
     table.devices.map((d) => [d.player, new RandomController(d.player, () => rng.next())]),
@@ -475,6 +554,18 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
     if (tick > 5_000_000) throw new Error("races: the game never ended");
     if (sideEvents > 0 && chance(sideEvents)) sideEvent();
     if (stalls > 0 && chance(stalls)) table.stall(pick(table.devices));
+    // A tab closes, or one that closed is opened again: about as often each
+    // way, so most of the time most people are there.
+    if (leaves > 0 && chance(leaves)) {
+      const device = pick(table.devices);
+      if (device.away) {
+        table.back(device);
+        note("came back");
+      } else {
+        table.leave(device);
+        note("left");
+      }
+    }
     // Whoever's own copy asks them answers at once about half the time,
     // whatever hasn't reached them yet.
     if (chance(0.5)) {
@@ -496,15 +587,31 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
       table.rest();
       continue;
     }
+    // Nobody at the table at all: someone has to come back for it to go on.
+    if (table.present.length === 0) {
+      table.back(pick(table.devices));
+      note("came back");
+      continue;
+    }
     table.agree(`at rest after ${moves} moves`);
     checks += 1;
     const waiting = table.waitingOn();
     if (waiting === null || table.state.turn.number > maxTurn) break;
+    // The game waits on a choice of someone whose tab is closed: nobody
+    // makes it for them, so here they come back.
+    if (waiting.away) {
+      table.back(waiting);
+      note("came back");
+      continue;
+    }
     if (!move(waiting)) {
       throw new Error(`races: the game waits on ${waiting.player}, whose copy takes no move, after ${table.log.length} inputs`);
     }
     sinceCheck += 1;
   }
+  // Everyone back for the last look: every device's copy, however often it
+  // was dealt, holds the game.
+  for (const device of table.devices) table.back(device);
   check("at the end");
   table.latecomer();
   return {
@@ -512,7 +619,7 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
     moves,
     inputs: table.log.length,
     refused: table.refused,
-    undone: table.devices.reduce((n, d) => n + table.copyOf(d).undone, 0),
+    undone: table.undone,
     checks,
     turns: table.state.turn.number,
     over: table.state.result.over,

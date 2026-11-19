@@ -365,6 +365,67 @@ test("a move made as someone concedes is taken back on the mover's page, which s
   }
 })
 
+test("the host's tab closes mid-game: the bots, and the game, carry on from the other player's device", async ({ browser, request }) => {
+  test.setTimeout(300_000)
+  const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE)
+  await capable(host, guest)
+  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  for (const { page } of [host, guest]) {
+    await expect(keepPrompt(page)).toBeVisible(paced)
+    await page.getByRole('button', { name: 'Keep', exact: true }).click()
+  }
+  await playTo(2, [host.page, guest.page])
+  // The creator's device runs the bots, and only its page has their controls.
+  const pause = (page: Page) => page.getByRole('button', { name: 'Pause the bots' })
+  expect(await tableOf(request, room)).toMatchObject({ host: 'alice', connected: 2 })
+  await expect(pause(host.page)).toBeVisible()
+  await expect(pause(guest.page)).toHaveCount(0)
+
+  // The host reloads: back before the server gives the bots to anyone else,
+  // and they are still hers.
+  await host.page.reload()
+  await seatedAtBoard(host.page)
+  await expect(pause(host.page)).toBeVisible(paced)
+  expect(await tableOf(request, room)).toMatchObject({ host: 'alice', connected: 2 })
+  await expect(pause(guest.page)).toHaveCount(0)
+  const reloaded = await turnOf(guest.page)
+  await playTo(reloaded + 1, [host.page, guest.page])
+  await agree([host.page, guest.page])
+
+  // Then her tab closes, on a turn that isn't hers: all she has left in it
+  // is passing, which nobody is there to do.
+  const deadline = Date.now() + 120_000
+  while (/player 1/i.test(await bannerOf(guest.page))) {
+    if (Date.now() > deadline) throw new Error("the turn never left the host's")
+    await getOn(host.page)
+    await getOn(guest.page)
+    await guest.page.waitForTimeout(250)
+  }
+  const closed = await turnOf(guest.page)
+  const inputs = (await tableOf(request, room))?.inputs ?? 0
+  await host.page.context().close()
+
+  // The server waits a few seconds for her, then the bots are the guest's
+  // device's: its page is told it hosts, and shows her as gone.
+  await expect.poll(async () => (await tableOf(request, room))?.connected, paced).toBe(1)
+  await expect.poll(async () => (await tableOf(request, room))?.host, paced).toBe('bob')
+  await expect(pause(guest.page)).toBeVisible(paced)
+  await expect(guest.page.locator('.pp-online-dot.offline')).toHaveCount(1)
+
+  // The game goes on: the turn ends and the next begins, which takes the
+  // bot's moves and the passes of the player who left, all made on the
+  // guest's device now.
+  await playTo(closed + 1, [guest.page])
+  expect((await tableOf(request, room))?.inputs).toBeGreaterThan(inputs)
+  await guest.page.screenshot({ path: test.info().outputPath('host-gone.png') })
+  expect(guest.traffic.sent).toContain('table-input')
+  expect((await status(request)).rooms.map((r) => r.id)).not.toContain(room)
+  await expect(guest.page.locator('.toast.bad')).toHaveCount(0)
+  expect(guest.errors).toEqual([])
+  expect(host.errors).toEqual([])
+  await guest.page.context().close()
+})
+
 test('one page that cannot hold a copy, and the same lobby starts as a game on the server', async ({ browser, request }) => {
   test.setTimeout(120_000)
   // The guest's page plays solo games in its browser but not tables.

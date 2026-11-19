@@ -14,6 +14,7 @@
 //   npm run tables:fuzz -w server -- --own-decks       # the server's four decks, not the pool's
 //   npm run tables:fuzz -w server -- --side 0.1        # more done out of turn (default 0.03 a tick)
 //   npm run tables:fuzz -w server -- --stalls 0.05     # devices stall more often (default 0.02 a tick)
+//   npm run tables:fuzz -w server -- --leaves 0.01     # tabs close and reopen, the host's too (default 0: nobody leaves)
 //   npm run tables:fuzz -w server -- --paced           # each copy paced as a live room is
 //   npm run tables:fuzz -w server -- --verbose         # names each seed as it starts
 //
@@ -37,6 +38,7 @@ const only = flag("--seed", null);
 const maxTurn = Number(flag("--max-turn", "16"));
 const side = Number(flag("--side", "0.03"));
 const stalls = Number(flag("--stalls", "0.02"));
+const leaves = Number(flag("--leaves", "0"));
 const ownDecks = args.includes("--own-decks");
 const paced = args.includes("--paced");
 /** Says which seed it is starting, for finding one that never ends. */
@@ -73,6 +75,7 @@ for (const seed of seeds) {
       maxTurn,
       sideEvents: side,
       stalls,
+      leaves,
       watch: (dealt) => {
         table = dealt;
       },
@@ -110,7 +113,7 @@ for (const seed of seeds) {
     }
     failures.push(
       `seed ${seed} (${label}) — replay with --seed ${seed}${ownDecks ? " --own-decks" : ""}${paced ? " --paced" : ""} ` +
-        `--max-turn ${maxTurn} --side ${side} --stalls ${stalls}`,
+        `--max-turn ${maxTurn} --side ${side} --stalls ${stalls} --leaves ${leaves}`,
     );
   }
 }
