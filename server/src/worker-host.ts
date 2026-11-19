@@ -25,6 +25,8 @@ import type { FromShard, ShardConfig, ShardIndex, ShardLoad, ToShard } from "./s
 import { countRooms } from "./status-server.js";
 import type { RoomSummary, ShardStatus, StatusParts } from "./status-server.js";
 import { sendMessage } from "./transport.js";
+import { Tables } from "./tables.js";
+import type { TableOpening, TableSummary, TablesOptions } from "./tables.js";
 
 /** One shard as main drives it: a worker in production, the same shard
  * in-thread in tests (`loopback-channel.ts`). */
@@ -79,6 +81,8 @@ export interface WorkerHostOptions {
   readonly stopGraceMs?: number;
   /** The caps on creates (`admission.ts`); none if absent. */
   readonly admission?: AdmissionLimits;
+  /** How tables are kept (`tables.ts`): the host's grace, a test's clock. */
+  readonly tables?: TablesOptions;
   /** Restarting a shard that ended unasked: after `baseMs` (1 s), doubling
    * with each recent exit up to `maxMs` (30 s); one that has ended more than
    * `loopLimit` (5) times within `loopWindowMs` (5 minutes) is left down. */
@@ -177,6 +181,13 @@ export class WorkerRoomHost implements RoomHost {
   /** Connections that asked for event slices (`event-deltas`): each shard
    * they reach is told before anything else. */
   private readonly deltas = new Set<ConnId>();
+  /** Connections whose pages can hold a copy of a game (`table-capable`),
+   * with the message as it came: each shard they reach is told, as above. */
+  private readonly capable = new Map<ConnId, string>();
+  /** Games played on their players' own devices (`tables.ts`): the order
+   * and the log are kept here on main, the game on no shard. */
+  readonly tables: Tables;
+  private tableReaper: ReturnType<typeof setInterval> | null = null;
   /** The shard each connection last spectated on. */
   private readonly watching = new Map<ConnId, ShardIndex>();
   private nextRequest = 1;
@@ -191,6 +202,18 @@ export class WorkerRoomHost implements RoomHost {
   constructor(options: WorkerHostOptions) {
     if (!Number.isInteger(options.shards) || options.shards < 1) throw new Error("a worker host needs at least one shard");
     this.options = options;
+    this.tables = new Tables(
+      (conn, message) => {
+        const link = this.links.get(conn);
+        if (link !== undefined) sendMessage(link, message);
+      },
+      { ...options.tables, onRemoved: (id) => this.routes.delete(id) },
+    );
+    const { reapIdleMs, reapIntervalMs } = options.config;
+    if (reapIdleMs !== undefined && reapIntervalMs !== undefined) {
+      this.tableReaper = setInterval(() => this.tables.reapIdle(reapIdleMs), reapIntervalMs);
+      this.tableReaper.unref();
+    }
     for (let index = 0; index < options.shards; index += 1) {
       this.shards.push({
         index,
@@ -291,7 +314,17 @@ export class WorkerRoomHost implements RoomHost {
       for (const shard of this.touched.get(conn) ?? []) this.post(shard, { t: "msg", conn, raw });
       return;
     }
+    if (message.type === "table-capable") {
+      this.capable.set(conn, raw);
+      for (const shard of this.touched.get(conn) ?? []) this.post(shard, { t: "msg", conn, raw });
+      return;
+    }
     const roomId: unknown = (message as { roomId?: unknown }).roomId;
+    // A table is main's own: no shard holds its game.
+    if (typeof roomId === "string" && this.tables.has(roomId)) {
+      this.tables.message(conn, message);
+      return;
+    }
     const route = typeof roomId === "string" ? this.routes.get(roomId) : undefined;
     if (route === undefined) {
       this.noRoute(link, message.type, roomId);
@@ -309,9 +342,11 @@ export class WorkerRoomHost implements RoomHost {
   close(link: ClientLink): void {
     const conn = link.id;
     for (const shard of this.touched.get(conn) ?? []) this.post(shard, { t: "close", conn });
+    this.tables.close(conn);
     this.links.delete(conn);
     this.touched.delete(conn);
     this.deltas.delete(conn);
+    this.capable.delete(conn);
     this.watching.delete(conn);
   }
 
@@ -356,7 +391,7 @@ export class WorkerRoomHost implements RoomHost {
         load: reply?.load ?? shard.load,
       };
     });
-    return { rooms, roomsCreated, shards };
+    return { rooms, roomsCreated, shards, tables: this.tables.summaries() };
   }
 
   /** Runs one command in shard `index`'s `setup` module (dev-rooms' ops);
@@ -385,6 +420,7 @@ export class WorkerRoomHost implements RoomHost {
 
   async stop(): Promise<void> {
     this.stopping = true;
+    if (this.tableReaper !== null) clearInterval(this.tableReaper);
     const grace = this.options.stopGraceMs ?? DEFAULT_STOP_GRACE_MS;
     await Promise.all(
       this.shards.map(async (shard) => {
@@ -440,6 +476,8 @@ export class WorkerRoomHost implements RoomHost {
     if (!touched.has(shard)) {
       touched.add(shard);
       if (this.deltas.has(conn)) this.post(shard, { t: "msg", conn, raw: EVENT_DELTAS });
+      const capable = this.capable.get(conn);
+      if (capable !== undefined) this.post(shard, { t: "msg", conn, raw: capable });
     }
     this.post(shard, { t: "msg", conn, raw, ...(roomId !== undefined ? { roomId } : {}) });
   }
@@ -474,6 +512,7 @@ export class WorkerRoomHost implements RoomHost {
         for (const delivery of message.deliveries) {
           for (const conn of delivery.conns) this.links.get(conn)?.send(delivery.data);
         }
+        for (const opening of message.tables ?? []) this.openTable(opening);
         for (const event of message.rooms) this.roomChanged(shard.index, event);
         return;
       case "load":
@@ -522,6 +561,20 @@ export class WorkerRoomHost implements RoomHost {
       route.stage = event.stage;
       route.bots = event.bots;
     }
+  }
+
+  /** A waiting room started as a table: its code is main's from here, on no
+   * shard (so its shard's `gone` for the waiting room leaves the route be),
+   * still counted against the address that opened it, weighing nothing. */
+  private openTable(opening: TableOpening): void {
+    const was = this.routes.get(opening.id);
+    this.routes.set(opening.id, { shard: -1, kind: "table", stage: "playing", bots: 0, ip: was?.ip ?? null });
+    this.tables.open(opening);
+  }
+
+  /** The tables kept here, for a status page. */
+  tableSummaries(): TableSummary[] {
+    return this.tables.summaries();
   }
 
   /** A shard ended. Its rooms are gone with it: their routes go, and every

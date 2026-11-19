@@ -18,7 +18,16 @@ import { describe, expect, it } from "vitest";
 const SRC = fileURLToPath(new URL("../", import.meta.url));
 
 /** Where the room code starts: what a browser host constructs. */
-const ENTRIES = ["local-host.ts", "room-service.ts", "room-manager.ts", "tutorial-session.ts", "builder.ts", "card-registry.ts"];
+const ENTRIES = [
+  "local-host.ts",
+  "room-service.ts",
+  "room-manager.ts",
+  "tutorial-session.ts",
+  "builder.ts",
+  "card-registry.ts",
+  // A device's copy of a table's game: a page's worker runs it.
+  "table-copy.ts",
+];
 
 /** The server's Node side: the room code never imports these. */
 const NODE_SIDE = new Set([
@@ -41,6 +50,7 @@ const NODE_SIDE = new Set([
   "card-data.ts",
   "oracle-tags.ts",
   "admission.ts",
+  "tables.ts",
 ]);
 
 /** Packages the room code may import values from. */

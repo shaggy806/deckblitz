@@ -10,7 +10,16 @@
  * with, and both workspaces already depend on `engine`.
  */
 
-import type { Action, ArtManifestEntry, AttractionDeckEntry, LegalAction, PlayerId, PlayerView, Step } from "engine";
+import type {
+  Action,
+  ArtManifestEntry,
+  AttractionDeckEntry,
+  GameConfig,
+  LegalAction,
+  PlayerId,
+  PlayerView,
+  Step,
+} from "engine";
 import type { BuilderInfo, ScenarioSpec } from "./scenario.js";
 import type { TutorialInfo } from "./tutorial.js";
 
@@ -548,7 +557,108 @@ export type ClientMessage =
        * it stood then, the chapter's goals undone. Host only. */
       readonly type: "tutorial-retry";
       readonly roomId: string;
+    }
+  | {
+      /**
+       * "I can hold a copy of a game": this connection's page can run a room
+       * of its own (`docs/plans/replicated-rooms.md`), on the build it names.
+       * Sent once, as the socket opens, like `event-deltas`. A waiting room
+       * whose every member said so, with one build between them, starts as a
+       * **table** (`table-start`) and not as a game on the server.
+       */
+      readonly type: "table-capable";
+      /** The page's build: copies of one game must run the same engine. */
+      readonly build: string;
+    }
+  | {
+      /**
+       * One input this device made at a table, to take its place in the
+       * order. `after` is how many inputs the device had seen put in order
+       * when it made this one (counting its own before it): the server takes
+       * the input only if that is still where the log ends, and answers
+       * `table-refused` otherwise.
+       */
+      readonly type: "table-input";
+      readonly roomId: string;
+      readonly after: number;
+      readonly input: RoomInput;
+    }
+  | {
+      /**
+       * Back at a table, or arriving at one: a reload, a dropped connection,
+       * someone coming to watch. `clientToken` reclaims the seat it claimed
+       * in the waiting room; without one (or with one the table doesn't
+       * know) the connection watches. Answered with a `table-start` whose
+       * log begins at `from` (0, the whole log, if absent).
+       */
+      readonly type: "table-join";
+      readonly roomId: string;
+      readonly clientToken?: string;
+      readonly from?: number;
+    }
+  | {
+      /** The host deals a new game at the table: the same seats and decks, a
+       * fresh shuffle. Every device is sent a new `table-start`. */
+      readonly type: "table-rematch";
+      readonly roomId: string;
     };
+
+/**
+ * One thing done to a room's game: the unit a game held on several devices is
+ * kept in step by (`docs/plans/replicated-rooms.md`). Every write a room makes
+ * to its game is one of these, made by exactly one copy of the room and
+ * applied by every copy in one order (`server/src/room.ts`'s `Room.act`).
+ *
+ * - `action`: an engine `Action`, a person's or a bot's, or one the room
+ *   makes for a seat (an auto-pass, a zone choice with one answer).
+ * - `concede`: `player` concedes (rule 104.3a), any decision they owed
+ *   answered first (`answers`, in order). One input and not several: sent as
+ *   the answers and then the concession, the first answer handed the move to
+ *   whoever is next, and their copy moved before the concession reached it.
+ * - `orders-own-triggers`: `player`'s setting for ordering their own
+ *   simultaneous triggers, which the engine reads (`PassSettings`).
+ */
+export type RoomInput =
+  | { readonly kind: "action"; readonly action: Action }
+  | { readonly kind: "concede"; readonly player: PlayerId; readonly answers: readonly Action[] }
+  | { readonly kind: "orders-own-triggers"; readonly player: PlayerId; readonly on: boolean };
+
+/** A seat at a table, as its recipe names it. */
+export interface TableSeat {
+  readonly player: PlayerId;
+  readonly name: string | null;
+  /** Played by a bot, which the host's device runs. */
+  readonly bot: boolean;
+}
+
+/**
+ * What every device at a table deals its own copy of the game from: the
+ * finished game config the waiting room built (decks, seed, id salt, rules,
+ * who starts) and the room around it. The server keeps it and hands it out;
+ * only the devices read `config`, which is the engine's `GameConfig` as plain
+ * data.
+ */
+export interface TableRecipe {
+  /** Which game this is under the room's code: 1, then one more a rematch. */
+  readonly gameNumber: number;
+  readonly config: TableGameConfig;
+  /** The host's setting for who goes first, which a rematch deals by. */
+  readonly firstPlayer: "random" | PlayerId;
+  readonly botSpeed: BotSpeed;
+  /** Every seat, in seating order. */
+  readonly seats: readonly TableSeat[];
+}
+
+/** The engine's `GameConfig` without what isn't data (a registry, controllers). */
+export type TableGameConfig = Omit<GameConfig, "registry" | "controllers">;
+
+/** One input in a table's log: its place, the seat whose device sent it (the
+ * host's, for a bot's move), and the input. */
+export interface TableEntry {
+  readonly index: number;
+  readonly from: PlayerId;
+  readonly input: RoomInput;
+}
 
 /** One bot decision a capture-enabled room kept — see `capture-list`. */
 export interface CaptureSummary {
@@ -683,6 +793,50 @@ export type ServerMessage =
       readonly options: readonly { readonly index: number; readonly text: string }[];
     }
   | { readonly type: "capture-saved"; readonly file: string }
+  | {
+      /**
+       * This room's game is a **table**: played on its players' own devices,
+       * each holding a copy, the server only putting their inputs in order
+       * (`docs/plans/replicated-rooms.md`). Sent when a waiting room starts
+       * as one, when a rematch deals a new game (a new `recipe`, an empty
+       * log), and in answer to `table-join` (the log from the place asked).
+       * The device deals its copy from `recipe` and applies `log` in order.
+       */
+      readonly type: "table-start";
+      readonly roomId: string;
+      readonly recipe: TableRecipe;
+      /** The seat this connection plays, or `null`: it watches. */
+      readonly seat: PlayerId | null;
+      /** The seat whose device runs the bots, or `null` while nobody is
+       * connected to. */
+      readonly host: PlayerId | null;
+      /** The inputs put in order so far, from `from` on. */
+      readonly from: number;
+      readonly log: readonly TableEntry[];
+    }
+  | {
+      /** An input took its place in a table's order: to every device there,
+       * the one that sent it included (its confirmation). */
+      readonly type: "table-input";
+      readonly roomId: string;
+      readonly index: number;
+      readonly from: PlayerId;
+      readonly input: RoomInput;
+    }
+  | {
+      /** This device's `table-input` came too late: the log no longer ended
+       * at `after` (it ends at `head`). The input was not taken. */
+      readonly type: "table-refused";
+      readonly roomId: string;
+      readonly after: number;
+      readonly head: number;
+    }
+  | {
+      /** Another device runs the table's bots from now on. */
+      readonly type: "table-host";
+      readonly roomId: string;
+      readonly host: PlayerId | null;
+    }
   | {
       readonly type: "error";
       readonly message: string;

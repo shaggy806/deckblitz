@@ -27,6 +27,7 @@ import type { RecordableHistogram } from "node:perf_hooks";
 import { LoadMonitor } from "./load-monitor.js";
 import type { LoadReport } from "./load-monitor.js";
 import type { BotDecisionTotals } from "./room.js";
+import type { TableSummary } from "./tables.js";
 
 export interface SeatSummary {
   readonly player: string;
@@ -83,6 +84,9 @@ export interface StatusParts {
   readonly rooms: readonly RoomSummary[];
   readonly roomsCreated: number;
   readonly shards?: readonly ShardStatus[];
+  /** Games played on their players' own devices (`tables.ts`): no room
+   * here, an order and a log. */
+  readonly tables?: readonly TableSummary[];
 }
 
 export type StatusSource = () => StatusParts | Promise<StatusParts>;
@@ -102,6 +106,8 @@ export interface StatusSnapshot {
   readonly counts: RoomCounts;
   readonly humansOnline: number;
   readonly bots: number;
+  /** The tables there are (`StatusParts.tables`), if any. */
+  readonly tables?: readonly TableSummary[];
   /** Only with rooms on worker threads. */
   readonly shards?: readonly ShardStatus[];
 }
@@ -136,6 +142,7 @@ export function assembleStatus(parts: StatusParts, main: LoadReport | null = nul
     humansOnline: rooms.reduce((n, r) => n + r.humansOnline, 0),
     bots: rooms.reduce((n, r) => n + r.bots, 0),
     ...(parts.shards !== undefined ? { shards: parts.shards } : {}),
+    ...(parts.tables !== undefined && parts.tables.length > 0 ? { tables: parts.tables } : {}),
   };
 }
 
@@ -207,6 +214,19 @@ export function renderStatus(snapshot: StatusSnapshot): string {
           `${(load === null ? "—" : `${load.delayP50Ms}/${load.delayP99Ms} ms`).padEnd(16)}` +
           `${(load === null ? "—" : `${load.heapUsedMb} MB`).padEnd(8)}` +
           `${load === null ? "—" : botLine(load)}`,
+      );
+    }
+  }
+
+  if (snapshot.tables !== undefined) {
+    // Played on the players' own devices: the server keeps the order only.
+    lines.push("");
+    lines.push(`  ${"TABLE".padEnd(7)}${"GAME".padEnd(6)}${"INPUTS".padEnd(9)}${"PEOPLE".padEnd(9)}${"HOST".padEnd(8)}IDLE`);
+    for (const table of snapshot.tables) {
+      lines.push(
+        `  ${table.id.padEnd(7)}${String(table.gameNumber).padEnd(6)}${String(table.inputs).padEnd(9)}` +
+          `${`${table.connected}/${table.people}${table.watching > 0 ? `+${table.watching}` : ""}`.padEnd(9)}` +
+          `${(table.host ?? "—").padEnd(8)}${duration(table.idleMs)}`,
       );
     }
   }

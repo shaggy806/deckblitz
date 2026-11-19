@@ -47,7 +47,16 @@ import type {
   Step,
 } from "engine/local";
 import { HostRole } from "./host.js";
-import type { BotSpeed, BuilderInfo, PassSettings, SeatStatus, ServerMessage, TutorialInfo, WireDeck } from "protocol";
+import type {
+  BotSpeed,
+  BuilderInfo,
+  PassSettings,
+  RoomInput,
+  SeatStatus,
+  ServerMessage,
+  TutorialInfo,
+  WireDeck,
+} from "protocol";
 
 export interface Connection {
   readonly send: (message: ServerMessage) => void;
@@ -317,26 +326,10 @@ export interface RoomGuide {
   readonly refuses: (room: Room, player: PlayerId, request: Action | "pass-turn" | "auto-pass") => string | null;
 }
 
-/**
- * One thing done to a room's game. Every write a room makes to its game is
- * one of these (`Room.act`), which is what lets a game be kept on several
- * devices at once (`docs/plans/replicated-rooms.md`): each input is made by
- * exactly one copy of the room, and every copy applies them in one order.
- *
- * - `action`: an engine `Action`, a person's or a bot's, or one the room
- *   makes for a seat (an auto-pass, a zone choice with one answer).
- * - `concede`: `player` concedes (rule 104.3a), any decision they owed
- *   answered first (`answers`, in order). One input and not several: sent as
- *   the answers and then the concession, the first answer handed the move to
- *   whoever is next, and their copy moved before the concession reached it
- *   (the copies fuzz, 2026-11-19).
- * - `orders-own-triggers`: `player`'s setting for ordering their own
- *   simultaneous triggers, which the engine reads (`PassSettings`).
- */
-export type RoomInput =
-  | { readonly kind: "action"; readonly action: Action }
-  | { readonly kind: "concede"; readonly player: PlayerId; readonly answers: readonly Action[] }
-  | { readonly kind: "orders-own-triggers"; readonly player: PlayerId; readonly on: boolean };
+/** One thing done to a room's game (`protocol`'s `RoomInput`, where the wire
+ * carries it): every write a room makes to its game is one, through
+ * `Room.act`. */
+export type { RoomInput } from "protocol";
 
 /**
  * What makes a room one copy of a game that other devices hold too

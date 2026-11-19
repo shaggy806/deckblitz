@@ -90,7 +90,8 @@ export const BOT_WEIGHT = 0.2;
  * cost nothing here.
  */
 export function roomWeight(kind: RoomKind, stage: RoomStage, bots: number): number {
-  if (kind === "builder" || kind === "adopted") return 0;
+  // A table's game is on its players' devices: an order and a log here.
+  if (kind === "builder" || kind === "adopted" || kind === "table") return 0;
   if (stage === "finished") return 0.1;
   if (kind === "tutorial") return 0.5;
   return GAME_WEIGHT + BOT_WEIGHT * Math.min(Math.max(bots, 0), FULL_TABLE);

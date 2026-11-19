@@ -17,9 +17,14 @@ export type {
   RoomSettings,
   CaptureSummary,
   ClientMessage,
+  RoomInput,
   SeatCommander,
   SeatStatus,
   ServerMessage,
+  TableEntry,
+  TableGameConfig,
+  TableRecipe,
+  TableSeat,
   WireDeck,
 } from "./room.js";
 

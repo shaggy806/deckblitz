@@ -21,6 +21,8 @@ const MAIN_SIDE = [
   "import-route.ts",
   "load-monitor.ts",
   "admission.ts",
+  // Tables: games on their players' devices. The order and the log, no game.
+  "tables.ts",
 ];
 
 /** Value imports a main-side module may make besides its own side. */

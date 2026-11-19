@@ -20,8 +20,9 @@ export type ConnId = number;
 
 /** What made a room: a seat board's `create-room` (`lobby`), a tutorial, a
  * scenario builder, or a room built by hand and handed to the manager
- * (`adopted` — dev-rooms' boards). */
-export type RoomKind = "lobby" | "tutorial" | "builder" | "adopted";
+ * (`adopted` — dev-rooms' boards). A `table` is a lobby whose game is played
+ * on its players' own devices (`tables.ts`): the server holds no game for it. */
+export type RoomKind = "lobby" | "tutorial" | "builder" | "adopted" | "table";
 
 /** Where a room is: seats still filling (a `PendingRoom`), a game on, or a
  * game over. */

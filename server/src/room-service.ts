@@ -21,6 +21,7 @@ import { PendingRoom } from "./pending-room.js";
 import type { BuilderSession } from "./builder.js";
 import type { TutorialSession } from "./tutorial-session.js";
 import type { ConnId, RoomEvent, RoomStage } from "./room-host.js";
+import type { TableOpening } from "./tables.js";
 
 /** Where a service's messages go. */
 export interface ServiceOutbox {
@@ -28,6 +29,14 @@ export interface ServiceOutbox {
   send(conn: ConnId, message: ServerMessage): void;
   /** A room appeared, moved to another stage, or went. */
   roomChanged?(event: RoomEvent): void;
+  /**
+   * A waiting room starts as a **table**: its game is played on its players'
+   * own devices, and the host that gave this keeps its order and its log
+   * (`tables.ts`; `docs/plans/replicated-rooms.md`). Given only by a host
+   * that keeps tables: without it every game starts as a `Room` here. The
+   * waiting room is removed right after, reported `gone` as any is.
+   */
+  tableStarted?(opening: TableOpening): void;
 }
 
 /** What a server offers beyond the public game, and how it looks after its
@@ -108,6 +117,11 @@ export class RoomService {
    * — gets the whole log in every frame, as it always did.
    */
   private readonly eventDeltas = new WeakSet<Connection>();
+  /** The connections whose pages can hold a copy of a game, and the build
+   * each runs (`table-capable`). */
+  private readonly copyBuilds = new WeakMap<Connection, string>();
+  /** Each connection's id, for handing a table's members to the host. */
+  private readonly connIds = new WeakMap<Connection, ConnId>();
 
   /**
    * How much of each room's event log each connection has been sent, by room
@@ -191,6 +205,7 @@ export class RoomService {
     if (connection === undefined) {
       connection = { send: (message) => this.outbox.send(conn, message) };
       this.connections.set(conn, connection);
+      this.connIds.set(connection, conn);
     }
     return connection;
   }
@@ -467,6 +482,47 @@ export class RoomService {
    * at promotion time (see `manager.promote`). Returns the new `Room` on
    * success so the caller can update its own bound room, or `null` if
    * promotion failed (the room is left pending). */
+  /**
+   * `room` as a table, if it can start as one: every person seated is
+   * connected, and every connection there (the people, anyone watching, a
+   * host who hasn't sat down) has said its page can hold a copy, all on one
+   * build. Otherwise `null`, and the game starts here as a `Room`.
+   */
+  private tableFor(room: PendingRoom): TableOpening | null {
+    if (!room.isReady()) return null;
+    const statuses = room.seatStatuses();
+    const claims = room.claims();
+    const people = statuses.filter((s) => !s.isBot);
+    if (people.length === 0 || people.some((s) => !s.claimed || !s.online) || claims.length !== people.length) return null;
+    const unseated = room.unseatedHost();
+    const watching = [...this.spectatorsOf(room.id), ...(unseated !== null ? [unseated] : [])];
+    const members = [...claims.map((c) => c.connection), ...watching];
+    const builds = members.map((c) => this.copyBuilds.get(c));
+    if (builds.some((b) => b === undefined || b !== builds[0])) return null;
+    const ids = members.map((c) => this.connIds.get(c));
+    if (ids.some((id) => id === undefined)) return null;
+    const idOf = (c: Connection): ConnId => this.connIds.get(c) as ConnId;
+    let config;
+    try {
+      config = room.toGameConfig();
+    } catch {
+      return null; // `tryPromote` says why
+    }
+    return {
+      id: room.id,
+      recipe: {
+        gameNumber: 1,
+        config,
+        firstPlayer: room.settings.firstPlayer,
+        botSpeed: room.botSpeed,
+        seats: statuses.map((s) => ({ player: s.player, name: s.displayName, bot: s.isBot })),
+      },
+      people: claims.map((c) => ({ player: c.player, token: c.clientToken, conn: idOf(c.connection) })),
+      watchers: [...new Set(watching.map(idOf))],
+      creator: claims.find((c) => room.isHost(c.connection))?.player ?? null,
+    };
+  }
+
   private tryPromote(connection: Connection, room: PendingRoom): Room | null {
     try {
       // `promote` settles the new room and publishes its opening frame itself,
@@ -735,6 +791,18 @@ export class RoomService {
           connection.send({ type: "error", message: "not everyone is ready yet" });
           return;
         }
+        // Played on the players' own devices if every one of them can: the
+        // host keeps the order from here, and this waiting room is done.
+        const opening = this.outbox.tableStarted === undefined ? null : this.tableFor(room);
+        if (opening !== null) {
+          for (const member of [...opening.people.map((p) => p.conn), ...opening.watchers]) {
+            if (member !== null) this.boundRoom.delete(member);
+          }
+          this.spectators.delete(room.id);
+          this.outbox.tableStarted?.(opening);
+          manager.remove(room.id);
+          return;
+        }
         const activeRoom = this.tryPromote(connection, room);
         if (activeRoom !== null) this.boundRoom.set(conn, activeRoom);
         return;
@@ -904,6 +972,12 @@ export class RoomService {
       }
       case "event-deltas": {
         this.eventDeltas.add(connection);
+        return;
+      }
+      case "table-capable": {
+        if (typeof message.build === "string" && message.build.length > 0 && message.build.length <= 100) {
+          this.copyBuilds.set(connection, message.build);
+        }
         return;
       }
       case "resync": {

@@ -24,6 +24,8 @@ import type { ImportDeps } from "./import-deck.js";
 import type { ImportSink } from "./import-route.js";
 import { roomsFor } from "./shard.js";
 import type { ShardConfig } from "./shard-protocol.js";
+import { Tables } from "./tables.js";
+import type { TableOpening, TableSummary, TablesOptions } from "./tables.js";
 
 export interface InProcessHostOptions extends RoomServerOptions {
   /** What `/import-deck` jobs read; a registry of its own, built on the
@@ -32,6 +34,8 @@ export interface InProcessHostOptions extends RoomServerOptions {
   /** The caps on creates (`admission.ts`), this thread counted as one
    * shard; none if absent. */
   readonly admission?: AdmissionLimits;
+  /** How tables are kept (`tables.ts`): the host's grace, a test's clock. */
+  readonly tables?: TablesOptions;
 }
 
 /** The server's rooms on this thread, set up from the same settings a shard
@@ -67,18 +71,45 @@ export class InProcessRoomHost implements RoomHost {
    * address that created it — what admission counts, as a worker host's
    * routes are. */
   private readonly rooms = new Map<string, RoomRecord>();
+  /** Games played on their players' own devices (`tables.ts`): the order
+   * and the log are kept here, the game nowhere on the server. */
+  readonly tables: Tables;
+  private readonly tableReaper: ReturnType<typeof setInterval> | null;
 
   constructor(manager: RoomManager, options: InProcessHostOptions = {}) {
+    const send = (conn: ConnId, message: ServerMessage): void => this.links.get(conn)?.send(JSON.stringify(message));
+    this.tables = new Tables(send, { ...options.tables, onRemoved: (id) => this.rooms.delete(id) });
     this.service = new RoomService(
       manager,
       {
-        send: (conn: ConnId, message: ServerMessage) => this.links.get(conn)?.send(JSON.stringify(message)),
+        send,
         roomChanged: (event) => this.roomChanged(event),
+        tableStarted: (opening) => this.openTable(opening),
       },
       options,
     );
     this.deps = options.importDeps ?? null;
     this.admission = options.admission ?? {};
+    const { reapIdleMs, reapIntervalMs } = options;
+    if (reapIdleMs !== undefined && reapIntervalMs !== undefined) {
+      this.tableReaper = setInterval(() => this.tables.reapIdle(reapIdleMs), reapIntervalMs);
+      this.tableReaper.unref();
+    } else {
+      this.tableReaper = null;
+    }
+  }
+
+  /** A waiting room started as a table: its code is the table's from here
+   * (still counted against the address that opened it, weighing nothing). */
+  private openTable(opening: TableOpening): void {
+    const was = this.rooms.get(opening.id);
+    this.rooms.set(opening.id, { shard: -1, kind: "table", stage: "playing", bots: 0, ip: was?.ip ?? null });
+    this.tables.open(opening);
+  }
+
+  /** The tables kept here, for a status page. */
+  tableSummaries(): TableSummary[] {
+    return this.tables.summaries();
   }
 
   open(link: ClientLink): void {
@@ -88,7 +119,9 @@ export class InProcessRoomHost implements RoomHost {
   message(link: ClientLink, message: ClientMessage): void {
     const kind = CREATES[message.type];
     if (kind === undefined) {
-      this.service.handle(link.id, message);
+      const roomId = (message as { roomId?: unknown }).roomId;
+      if (typeof roomId === "string" && this.tables.has(roomId)) this.tables.message(link.id, message);
+      else this.service.handle(link.id, message);
       return;
     }
     // A create: admitted (or refused) and given its code here, exactly as
@@ -107,7 +140,8 @@ export class InProcessRoomHost implements RoomHost {
 
   private roomChanged(event: RoomEvent): void {
     if (event.stage === "gone") {
-      this.rooms.delete(event.id);
+      // A waiting room that started as a table goes; its code stays, the table's.
+      if (!this.tables.has(event.id)) this.rooms.delete(event.id);
       return;
     }
     const room = this.rooms.get(event.id);
@@ -116,11 +150,12 @@ export class InProcessRoomHost implements RoomHost {
 
   close(link: ClientLink): void {
     this.service.close(link.id);
+    this.tables.close(link.id);
     this.links.delete(link.id);
   }
 
   async status(): Promise<StatusParts> {
-    return statusParts(this.service.manager);
+    return { ...statusParts(this.service.manager), tables: this.tables.summaries() };
   }
 
   importDeck(text: string, sink: ImportSink): void {
@@ -130,5 +165,6 @@ export class InProcessRoomHost implements RoomHost {
 
   async stop(): Promise<void> {
     this.service.stop();
+    if (this.tableReaper !== null) clearInterval(this.tableReaper);
   }
 }

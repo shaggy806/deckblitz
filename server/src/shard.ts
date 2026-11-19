@@ -23,6 +23,7 @@ import { botDecisions, botDecisionTotals } from "./bot-decisions.js";
 import { RoomManager } from "./room-manager.js";
 import { RoomService } from "./room-service.js";
 import type { ConnId, RoomEvent } from "./room-host.js";
+import type { TableOpening } from "./tables.js";
 import type { Delivery, FromShard, ShardConfig, ShardControl, ShardLoad, ToShard } from "./shard-protocol.js";
 
 /** A `ShardConfig.setup` module's export: given the shard's rooms, it may
@@ -79,18 +80,20 @@ export function createShard(
   let deliveries: Delivery[] = [];
   let lastMessage: ServerMessage | null = null;
   let rooms: RoomEvent[] = [];
+  let tables: TableOpening[] = [];
   let transfer: ArrayBuffer[] = [];
   let flushing = false;
   let stopped = false;
 
   const flush = (): void => {
     flushing = false;
-    if (stopped || (deliveries.length === 0 && rooms.length === 0)) return;
-    const out: FromShard = { t: "out", deliveries, rooms };
+    if (stopped || (deliveries.length === 0 && rooms.length === 0 && tables.length === 0)) return;
+    const out: FromShard = { t: "out", deliveries, rooms, ...(tables.length > 0 ? { tables } : {}) };
     const buffers = transfer;
     deliveries = [];
     lastMessage = null;
     rooms = [];
+    tables = [];
     transfer = [];
     post(out, buffers);
   };
@@ -119,6 +122,11 @@ export function createShard(
       },
       roomChanged: (event) => {
         rooms.push(event);
+        schedule();
+      },
+      // A waiting room starting as a table: main's from here.
+      tableStarted: (opening) => {
+        tables.push(opening);
         schedule();
       },
     },

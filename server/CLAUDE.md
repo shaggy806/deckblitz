@@ -47,6 +47,13 @@ that file.
   is a fifth of an all-bot room), told to main in each `RoomEvent`'s `bots`. A lobby counts as the
   heaviest game it can still become, every seat no person holds as a bot: joins, added seats and
   bots, starts, rematches and tutorial steps never meet a limit.
+- **A table is a game the server doesn't hold** (`tables.ts`, main-side;
+  `docs/plans/replicated-rooms.md`): the players' devices each run a copy (`table-copy.ts`), and
+  main keeps the recipe, the order of their inputs, who is connected and whose device runs the
+  bots. A lobby starts as one only when every connection in it said `table-capable` on one build
+  (no page does yet), otherwise as a `Room` as ever. Nothing in `tables.ts` may import the engine
+  or check an input against a game; `table-input` is not rate-limited, and both hosts must route
+  a table's messages the same way.
 - **The room code runs in a browser too** (solo games, `docs/plans/local-rooms.md`): the rooms, lobbies,
   bots, builder and lessons import values only from `engine/local` and each other — no Node built-in,
   no `ws`, no `engine` barrel, no Node-side module (`test/room-core-imports.test.ts`). The card registry
@@ -68,7 +75,8 @@ that file.
 `room.ts`, `pending-room.ts`, `room-manager.ts`, `room-service.ts` (the message handlers and
 `broadcast`, per connection by `ConnId`), `room-copies.ts` (several copies of one room in one
 process, wired through an in-memory order: the check that copies agree, for the tests and
-`scripts/copies-fuzz.mjs`, nothing a server runs), `transport.ts` (sockets, rate limit, compression),
+`scripts/copies-fuzz.mjs`, nothing a server runs), `tables.ts` (games on their players' devices:
+the order, the log, the host, on main) and `table-copy.ts` (the copy a device runs of one), `transport.ts` (sockets, rate limit, compression),
 `room-host.ts` / `in-process-host.ts` / `ws-server.ts` (the seam between them), `worker-host.ts` /
 `shard.ts` / `shard-worker.ts` / `shard-protocol.ts` (rooms on worker threads; tests drive them
 in-thread through `loopback-channel.ts`), `room-code.ts`, `host.ts`, `decks.ts` (fallback

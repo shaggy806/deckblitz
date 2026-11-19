@@ -111,8 +111,13 @@ export function attachTransport(wss: WebSocketServer, host: RoomHost): void {
       // `ack` is automatic traffic — one per frame the client finishes
       // showing, with no effect beyond releasing a bot — and a busy table
       // sends plenty of them, so it doesn't spend the budget meant for
-      // someone hammering `join-room` to guess room codes.
-      if (message.type !== "ack" && isRateLimited(ip)) {
+      // someone hammering `join-room` to guess room codes. A table's inputs
+      // (`table-input`, `tables.ts`) are the same kind of traffic and far
+      // more of it: a device sends every pass its room makes for its seat
+      // and, as host, every bot's move, dozens between two real plays. At
+      // 40 messages in five seconds a table stalled within its first turn.
+      // What bounds them instead is the table's own log (`MAX_TABLE_LOG`).
+      if (message.type !== "ack" && message.type !== "table-input" && isRateLimited(ip)) {
         sendMessage(link, { type: "error", message: "too many requests, slow down" });
         return;
       }

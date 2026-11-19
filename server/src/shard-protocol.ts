@@ -11,6 +11,7 @@
 import type { LoadReport } from "./load-monitor.js";
 import type { ConnId, RoomEvent } from "./room-host.js";
 import type { RoomSummary } from "./status-server.js";
+import type { TableOpening } from "./tables.js";
 
 export type { ConnId, RoomEvent, RoomKind, RoomStage } from "./room-host.js";
 
@@ -85,8 +86,16 @@ export interface Delivery {
 export type FromShard =
   /** Built and listening; `rooms` are any it started with. */
   | { readonly t: "ready"; readonly rooms: readonly RoomEvent[] }
-  /** Everything one tick sent, in order, and any rooms that changed. */
-  | { readonly t: "out"; readonly deliveries: readonly Delivery[]; readonly rooms: readonly RoomEvent[] }
+  /** Everything one tick sent, in order, any waiting rooms that started as
+   * tables (main keeps those: `tables.ts`), and any rooms that changed. Main
+   * takes them in that order, so a table is one before its waiting room is
+   * reported gone. */
+  | {
+      readonly t: "out";
+      readonly deliveries: readonly Delivery[];
+      readonly rooms: readonly RoomEvent[];
+      readonly tables?: readonly TableOpening[];
+    }
   | { readonly t: "load"; readonly report: ShardLoad }
   | {
       readonly t: "status";
