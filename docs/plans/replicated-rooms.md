@@ -5,13 +5,16 @@ fuzzer's copy check (`MTG_REPLICA=1`), a state's exact form as text (`engine/src
 names ordered the same on every machine (`compareNames`) — and of step 1, the state digest
 (`stateDigest`) and the check across browsers (`npm run play:browsers -w engine`). **Step 1 is
 done**: recorded games came out identical in Node, in three builds of Chrome's engine, in
-Firefox's and in Safari's, and in Chrome on the test laptop. **Step 2 is done** (2026-11-19): a
+Firefox's and in Safari's, and in Chrome on the test laptop. **Step 2 is done** (2026-11-18): a
 `Room` can be one copy of a game (`RoomOptions.copy`), and 480 fuzzed games played on several
-copies at once came out the same on every one. **Step 3 is done** (2026-11-19): the server keeps
+copies at once came out the same on every one. **Step 3 is done** (2026-11-18): the server keeps
 a table (the recipe, the order of inputs, the host) with no engine, a lobby whose every
 connection can hold a copy starts as one, and scripted devices running real copies play through
-it over sockets on both hosts. Step 4, the client, is next: no page asks for a table yet, so
-every game on the site still starts on the server.
+it over sockets on both hosts. **Step 5 is done** (2026-11-18, built ahead of step 4 at the
+user's word): a device's own move takes effect at once and is undone if another input took its
+place, and tables fuzzed with every message racing end with one game on every copy. Step 4, the
+client, is next: no page asks for a table yet, so every game on the site still starts on the
+server.
 
 ## Why
 
@@ -55,8 +58,10 @@ What can come between is short and rare:
   reads (`setOrdersOwnTriggers`), the host's own controls (pause the bots, a rematch).
 
 For those the device undoes: it goes back to the last state everyone agreed on, takes the other
-input first, and applies its own again if it is still legal. Measured, a state copy and a rebuilt
-`Game` are about 5 ms.
+input first, and carries on from there. Measured, a state copy and a rebuilt `Game` are about
+5 ms. As built (step 5, "The undo" below): the out-of-turn inputs themselves are never guessed —
+they wait for the order, as the opening hands do — so the only thing ever undone is a move made
+in turn that one of them got in ahead of.
 
 ## What was checked
 
@@ -240,7 +245,7 @@ which is fine on the same grounds as the copies themselves.
 
 ### The room (`server/src/room.ts`, which every device runs)
 
-**Built (step 2, 2026-11-19)**; `docs/architecture/server.md` has the detail.
+**Built (step 2, 2026-11-18)**; `docs/architecture/server.md` has the detail.
 
 - **Seats this device answers for.** A room answered for every bot seat and automated every
   person's seat. A copy (`RoomOptions.copy`, `RoomCopy.answersFor`) does that only for its own:
@@ -270,9 +275,65 @@ What the fuzz taught, each now a rule of the cut:
   on a copy of the game first, and refused whole if any of it is. This is the smallest case of
   the race step 5 is about: an input made on a game that didn't yet have one already in flight.
 
+### The undo (step 5)
+
+**Built 2026-11-18** (`server/src/table-copy.ts`, `Room.act`, `Tables.input`).
+
+Two kinds of input, told apart where they are made (`Room.act`):
+
+- **Made in turn**: an action of the one player the game waits on. Only one device answers for
+  that player, so nothing of the same kind can race it. The device applies it at once and sends
+  it with where it takes the log to end (`after`) and how many entries just before that are its
+  own, still unconfirmed (`mine`).
+- **Made out of turn**: a concession, the setting the engine reads, an opening-hand decision.
+  Another device's input may land first, so the device does **not** apply it: it sends it asking
+  for no place (`after: null`), the server puts it wherever it arrives and never refuses it, and
+  every device, the sender too, applies it when it comes back. Until its own has come back a
+  device makes nothing else, since anything it made would be made on a game without it. A
+  concession is now just `{ concede, player }`: each copy answers whatever the player owed for
+  itself, with v1, which reads no clock, so the answers are the same wherever it lands.
+
+The server takes an in-turn input only if the log is what the device took it to be: ending at
+`after`, **and** its last `mine` entries from that device. The second half is there because a
+host's bots make runs of moves faster than the server answers. Without it, when someone's
+concession took the place of the second of a run of three, the third arrived saying "the log ends
+at 2", which was true, and was taken — on top of a concession the device had not seen.
+
+A device learns it lost a place when someone else's input arrives where it expected its own. It
+then goes back to the game as it stood before its first unconfirmed input (a snapshot taken each
+time it starts a run: `RoomCopy.making`), puts back its own inputs the server did confirm since,
+applies the other input, and lets the room carry on. What the room made for a seat (a bot's move,
+an auto-pass) it makes again by itself, on the game as it now is. A **person's** move is not put
+back after a concession: what they answered is no longer what they would be asked (a pass with a
+spell on the stack means something else once the spell's controller has left), so they see the
+game as it stands and move again. After a setting, which changes nothing anyone was asked, their
+move is made again for them. The server's refusals of the dropped inputs follow on the socket and
+are counted off.
+
+Also closed here: an input still on its way when a rematch is dealt carries the old game's number
+and is dropped by the server, so a concession from the game before can't land in the new one.
+
+What the fuzz showed (`npm run tables:fuzz -w server`, `server/src/table-fuzz.ts`): the real
+`Tables` and a real `TableCopy` a person, joined by queues delivered one message at a time from
+a queue picked at random, devices stalling, people moving the moment their own copy asks them and
+doing things out of turn at any moment. Over 480 games (two to four seats, decks from the whole
+pool and the server's own, 200 of them paced as a live room is, 160 with four times the racing):
+293,638 inputs put in order, 8,971 refused, 964 undos, 474 concessions and 2,503 settings on the
+way, and at every one of 4,347 moments of rest each copy held the same game, the whole of the
+server's order and nothing unanswered; a copy dealt afterwards from the log alone held it too.
+It passed the first time it ran, so it was shown to fail: with the undo not putting back the
+confirmed inputs, and with the server's run check removed, the tests go red.
+
+Left for step 4, since it is about what a page shows: an undo publishes a frame at each stage
+(the game put back, then each input), where one frame after the whole undo would do; a person
+whose move was undone is told nothing but the board; and a move tried while a setting or
+concession of their own is still on its way is refused with "try again in a moment", which the
+page should hold and send again by itself. The cost of the snapshot before each run (one a
+person's move, one a bots' run) is part of step 8's measure on the laptop.
+
 ### Server
 
-**Built (step 3, 2026-11-19)**; `docs/architecture/server.md` has the detail.
+**Built (step 3, 2026-11-18)**; `docs/architecture/server.md` has the detail.
 
 - **Tables** (`server/src/tables.ts`): the recipe, the log, the order, the host, a device back in
   its seat by its token with the log from a place it names, a rematch as a new recipe under the
@@ -280,7 +341,8 @@ What the fuzz taught, each now a rule of the cut:
 - **The order is compare-and-set.** A device sends an input with how much of the log it had seen
   (`after`); it takes the next place only if the log still ends there, and goes to everyone, the
   sender included, with its place. Otherwise the sender is told (`table-refused`) and nothing
-  else happens. The server checks nothing against the game: there is none there.
+  else happens. The server checks nothing against the game: there is none there. (Step 5 added
+  the run check, `mine`, and inputs that ask for no place, `after: null`: "The undo".)
 - **A lobby starts as a table** when every connection in it (the people, anyone watching) has
   said its page can hold a copy (`table-capable`, with the page's build) and they name one build:
   the waiting room stays the `PendingRoom` it is (deck checks need the pool), and at the start it
@@ -304,9 +366,9 @@ What building it taught:
   them instead. Sending a run of a device's own inputs as one message is the obvious saving, and
   is not done.
 - **A device applies its own input when it makes it**, so a refused one (or someone else's input
-  taking its place) leaves that copy holding a game the table doesn't. The device's copy stops
-  and says so. Nothing in the tests races, so it never happens there; making it harmless is step
-  5 (the undo) and step 7 (taking the host's state).
+  taking its place) leaves that copy holding a game the table doesn't. As step 3 left it, the
+  device's copy stopped and said so; step 5's undo puts it right, and step 7 (taking the host's
+  state) is for a copy that still can't.
 
 ### Client
 
@@ -330,7 +392,7 @@ Each step ends in a check that can fail.
    *Check*: several rooms in one process, wired through an in-memory order, play whole games
    (random players, bots on one, auto-pass, pass-the-turn, resolve-the-stack, a concession with
    the stack full, a seat handed to a bot, the host changing) and end with one digest. Fuzzed.
-   **Done 2026-11-19** (`server/src/room-copies.ts`, `npm run copies:fuzz -w server`): 480 games
+   **Done 2026-11-18** (`server/src/room-copies.ts`, `npm run copies:fuzz -w server`): 480 games
    on tables of two to four seats with decks from the whole pool, half of them paced as a live
    room is, 404,000 inputs and 2,232 checks that every copy held the same game, with 291
    concessions, 631 changes of host, 524 seats handed to a bot and 618 states taken from another
@@ -338,7 +400,7 @@ Each step ends in a check that can fail.
    were fixed. Nothing in it races: inputs are made one at a time and the order is the order of
    making, so what an order does with two inputs made at once is still step 3's and step 5's.
 3. **Tables on the server.** *Check*: the loopback suite with scripted clients; main still
-   imports no engine. **Done 2026-11-19** (`test/tables.test.ts`, `test/tables-e2e.test.ts`):
+   imports no engine. **Done 2026-11-18** (`test/tables.test.ts`, `test/tables-e2e.test.ts`):
    over real sockets, against rooms on this thread and on worker threads, three devices (two
    people, one watching, a bot on the host's) play a table through the server's order and end
    with one digest; the host's device goes and the next runs the bots; a device comes back to
@@ -346,9 +408,16 @@ Each step ends in a check that can fail.
    copy, or two builds, starts on the server. `tables.ts` is in the main-side import guard.
 4. **The client.** *Check*: an e2e test with two browser contexts playing two people and a bot;
    the server's `/status` shows a table and no room; the same lobby with one client unable falls
-   back to a server room.
+   back to a server room; and (moved here from step 5, which had no page to measure) click to
+   frame on a slowed network.
 5. **Own inputs at once, and the undo.** *Check*: a unit test of a concession racing an action;
-   an e2e measure of click to frame on a slowed network.
+   tables fuzzed with every message racing. **Done 2026-11-18**, ahead of step 4 (the user:
+   "Step 5"), since the client is simpler to build on a copy that is already right when inputs
+   race (`test/table-races.test.ts`, `npm run tables:fuzz -w server`): a move made as someone
+   concedes is undone and left to the person; one made as a setting lands is made again; a host's
+   run of bot moves cut by an input is dropped from there and made again; two opening hands kept
+   at once land in the server's order; and 480 fuzzed games with every message racing (964
+   undos, 8,971 refusals) ended with one game on every copy ("The undo").
 6. **The host changing.** *Check*: e2e, the host's tab closed mid-game and the bots moving again
    from the other device.
 7. **The digest check and taking the host's state.** *Check*: a test hook that corrupts one copy;

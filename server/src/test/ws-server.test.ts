@@ -194,7 +194,7 @@ describe("room server (end to end over WebSocket)", () => {
     expect(otherUpdate.type).toBe("state");
     // The file's first game: it waits on the card pool being built, which on
     // a loaded four-core runner ran past the default five seconds (CI,
-    // 2026-11-19, once the table and copy suites played beside it).
+    // 2026-11-18, once the table and copy suites played beside it).
   }, 30_000);
 
   it("creating a room without a seed picks a fresh random one each time, not a fixed default", async () => {
