@@ -28,7 +28,15 @@
  * push at the end — which is what tests and scripts drive rooms with.
  */
 
-import { EvalBotController, Game, LIVE_BOT_BUDGET_MS, actionPlayer, activePlayerOf, isSettled } from "engine/local";
+import {
+  EvalBotController,
+  Game,
+  HeuristicBotController,
+  LIVE_BOT_BUDGET_MS,
+  actionPlayer,
+  activePlayerOf,
+  isSettled,
+} from "engine/local";
 import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZoneChoice, playersControlledBy, stackCopyKey, standInFor, wouldAffectPlayer } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
@@ -295,6 +303,29 @@ const CONCEDE_DECISION_LIMIT = 100;
 const MAX_DISPLAY_NAME_LENGTH = 20;
 
 /** Swappable so tests can run a room's bot pacing on a fake clock. */
+/**
+ * `player` concedes `game` (rule 104.3a), any decision they owe answered
+ * first — by v1, which reads no clock, so every copy of a game gives the same
+ * answers wherever the concession lands. The engine doesn't model another
+ * player making a departed player's choice (800.4f–h). Returns whether they
+ * conceded: not during the opening hands, not twice, not a game that is over,
+ * and not while they still owe a decision past the limit.
+ */
+function concession(game: Game, player: PlayerId): boolean {
+  const owes = (): boolean => {
+    const awaiting = game.state.awaiting;
+    return awaiting !== null && awaiting.kind !== "mulligan" && awaiting.player === player;
+  };
+  if (!owes() && game.whyCannotConcede(player) !== null) return false;
+  const stand = new HeuristicBotController(player, cardRegistry());
+  for (let i = 0; i < CONCEDE_DECISION_LIMIT && owes(); i += 1) {
+    game.dispatch(stand.act(game.controllerView(player)));
+  }
+  if (game.whyCannotConcede(player) !== null) return false;
+  game.concede(player);
+  return true;
+}
+
 export interface RoomTimers {
   readonly setTimeout: (fn: () => void, ms: number) => unknown;
   readonly clearTimeout: (handle: unknown) => void;
@@ -350,10 +381,30 @@ export interface RoomCopy {
    * (rule 723) the room asks about the one deciding.
    */
   readonly answersFor: (player: PlayerId) => boolean;
-  /** An input this copy just made and applied to its own game, for every
-   * other copy. Called in the order they were made. May not call back into
-   * the room: deliveries wait until the room has returned. */
-  readonly sent: (input: RoomInput) => void;
+  /**
+   * An input this copy just made, for every other copy. Called in the order
+   * they were made. May not call back into the room: deliveries wait until
+   * the room has returned.
+   *
+   * `applied`: made **in turn** (an action of the one player the game waits
+   * on), so it is in this copy's game already; if it loses its place in the
+   * order, the copy has it to undo (`Room.replaceGame`). Not `applied`: made
+   * **out of turn** — a concession, the setting the engine reads, an
+   * opening-hand decision (asked of everyone at once) — where another copy's
+   * input may come first, so this copy has *not* applied it: it applies it,
+   * as every copy does, when it comes back in its place (`Room.receive`).
+   * While one of its own is on its way a copy should answer for nobody
+   * (`answersFor`): what it made next would be made on a game without it.
+   *
+   * `by`: a person's own action (`person`), or something the room did for a
+   * seat (`room`: a bot's move, an auto-pass). After an undo the room makes
+   * its own again by itself; a person's is theirs to make again, or the
+   * copy's to put back where nothing they were asked has changed (`remake`).
+   */
+  readonly sent: (input: RoomInput, how: { readonly applied: boolean; readonly by: "person" | "room" }) => void;
+  /** About to make an input in turn: the game as it stands is the one it is
+   * made on, what an undo of it goes back to. */
+  readonly making?: () => void;
 }
 
 export interface RoomOptions {
@@ -670,9 +721,8 @@ export class Room {
         this.game.dispatch(input.action);
         return;
       case "concede":
-        for (const answer of input.answers) this.game.dispatch(answer);
-        this.game.concede(input.player);
-        this.bots.delete(input.player);
+        // The seat's bot, if it had handed itself to one, goes with it.
+        if (concession(this.game, input.player)) this.bots.delete(input.player);
         return;
       case "orders-own-triggers":
         this.game.setOrdersOwnTriggers(input.player, input.on);
@@ -686,16 +736,28 @@ export class Room {
    * sends it to the other copies. Throws what the engine throws, having sent
    * nothing: an input the engine refused never leaves.
    */
-  private act(input: RoomInput): void {
+  private act(input: RoomInput, by: "person" | "room" = "room"): void {
+    if (this.copy === null) {
+      this.applyInput(input);
+      return;
+    }
+    // Made out of turn: anything but an action, and an action while the
+    // opening hands are being decided, which every player answers at once.
+    // Another copy's input may land before it, so it isn't applied here: it
+    // goes out, and comes back in its place like anyone's (`receive`).
+    if (input.kind !== "action" || this.game.state.awaiting?.kind === "mulligan") {
+      this.copy.sent(input, { applied: false, by });
+      return;
+    }
+    this.copy.making?.();
     this.applyInput(input);
-    if (this.copy === null) return;
     // Every copy takes the game on to its next decision as soon as an input
     // is in (`receive` does the same), whatever its own pacing is doing. Left
     // to the settle loop, a copy with a bot's move parked behind a frame sat
-    // on its own concession unadvanced while the others moved on, and the
-    // next input found a different game there (the copies fuzz, paced).
+    // on its own input unadvanced while the others moved on, and the next
+    // input found a different game there (the copies fuzz, paced).
     this.game.advanceUntil(isSettled);
-    this.copy.sent(input);
+    this.copy.sent(input, { applied: true, by });
   }
 
   /**
@@ -707,12 +769,20 @@ export class Room {
   receive(input: RoomInput): void {
     if (this.copy === null) throw new Error("only a copy of a room takes inputs from elsewhere");
     if (this.frozen || this.stopped !== null) return;
+    const eventsBefore = this.game.events.length;
+    const seqBefore = this.game.state.eventSeq;
     try {
       this.applyInput(input);
       this.game.advanceUntil(isSettled);
     } catch (error) {
-      this.stop(error);
-      return;
+      // An input made out of turn may find a game that no longer takes it (a
+      // second opening-hand choice sent before the first landed). The engine
+      // refusing it changes nothing, and refuses it the same on every copy:
+      // it is dropped. Anything else is an engine error, as in `settle`.
+      if (this.game.events.length !== eventsBefore || this.game.state.eventSeq !== seqBefore) {
+        this.stop(error);
+        return;
+      }
     }
     this.lastActivityAt = Date.now();
     this.settle();
@@ -722,6 +792,28 @@ export class Room {
    * now, or no longer does): a move it now answers for may be waiting. */
   answersChanged(): void {
     this.settle();
+  }
+
+  /**
+   * Makes a person's action again after it was undone (it lost its place in
+   * the order: `replaceGame`), if it is still theirs to make and the game
+   * still takes it. Returns whether it was made; if not, nothing happened,
+   * and the person sees the game as it now stands. Doesn't settle: the copy
+   * does, once it has put back what it means to.
+   */
+  remake(action: Action): boolean {
+    if (this.copy === null || this.frozen || this.stopped !== null) return false;
+    const state = this.game.state;
+    const asked = state.awaiting !== null ? state.awaiting.player : state.priority.holder;
+    const player = actionPlayer(action);
+    if (asked !== player || !this.answers(answeringPlayer(state, player))) return false;
+    if (this.game.canDispatch(action) !== null) return false;
+    try {
+      this.act({ kind: "action", action }, "person");
+    } catch {
+      return false;
+    }
+    return true;
   }
 
   /**
@@ -1012,23 +1104,12 @@ export class Room {
   concede(connection: Connection): void {
     const seat = this.seatOf(connection);
     if (seat === null) throw new Error("claim a seat before conceding");
-    // Worked out on a copy of the game first, so that it is one input: the
-    // answers to whatever the player owes, then the concession. If any of it
-    // is refused (the opening hands, a player already out, a decision still
-    // owed past the limit), nothing has happened to the game itself.
+    // Tried on a copy of the game first, for the caller's sake: if it can't
+    // be done now (the opening hands, a player already out, a decision still
+    // owed past the limit), they are told and nothing has happened.
     const trial = Game.fromSnapshot(this.game.snapshot(), { registry: cardRegistry() });
-    const stand = this.makeBot(seat);
-    const answers: Action[] = [];
-    for (let i = 0; i < CONCEDE_DECISION_LIMIT; i += 1) {
-      const awaiting = trial.state.awaiting;
-      if (awaiting === null || awaiting.kind === "mulligan" || awaiting.player !== seat) break;
-      const answer = stand.act(trial.controllerView(seat));
-      trial.dispatch(answer);
-      answers.push(answer);
-    }
-    trial.concede(seat);
-    // The seat's bot, if it had handed itself to one, goes with it (`applyInput`).
-    this.act({ kind: "concede", player: seat, answers });
+    if (!concession(trial, seat)) throw new Error(trial.whyCannotConcede(seat) ?? `${seat} can't concede now`);
+    this.act({ kind: "concede", player: seat }, "person");
     this.lastActivityAt = Date.now();
     this.settle();
   }
@@ -1062,7 +1143,9 @@ export class Room {
     if (this.stopped !== null) throw new Error("this game has stopped after an engine error");
     const seat = this.seatOf(connection);
     if (seat === null) throw new Error("claim a seat before acting");
-    if (!this.answers(seat)) throw new Error(`this copy of the room doesn't play ${seat}'s seat`);
+    // A copy that isn't playing this seat right now: another device's seat,
+    // or its own while it catches up or waits for a choice of its own to land.
+    if (!this.answers(seat)) throw new Error(`${seat} can't act from here just now: try again in a moment`);
     if (this.bots.has(seat)) throw new Error("a bot is playing this seat — take it back first");
     // The seat that makes this player's decisions now: their own, or whoever
     // controls them or chooses for them (rule 723.5). A controlled seat's own
@@ -1074,7 +1157,7 @@ export class Room {
     }
     this.refuseIfGuided(seat, action);
     const resolveAllFrom = this.resolveAllResumedBy(seat, action);
-    this.act({ kind: "action", action });
+    this.act({ kind: "action", action }, "person");
     if (resolveAllFrom !== null && this.game.state.zones.shared.stack.length > 0) {
       this.seatFor(seat).resolveAllFrom = resolveAllFrom;
     }
@@ -1205,7 +1288,7 @@ export class Room {
     // engine's own order. The one setting here the game itself reads, so the
     // one that is an input: sent only when it changes anything.
     if ((this.game.state.ordersOwnTriggers ?? []).includes(player) !== orderTriggers) {
-      this.act({ kind: "orders-own-triggers", player, on: orderTriggers });
+      this.act({ kind: "orders-own-triggers", player, on: orderTriggers }, "person");
     }
     this.settle();
   }

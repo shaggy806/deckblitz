@@ -7,11 +7,13 @@
  * device runs the bots (the host). No game, no engine, no card: main-side
  * (`test/main-imports.test.ts`), and the same for both hosts.
  *
- * **The order.** A device sends an input saying how much of the log it had
- * seen (`after`). The input takes the next place only if that is still where
- * the log ends; otherwise the device is told (`table-refused`) and nothing
- * else happens. Everyone at the table, the sender too, is sent each input as
- * it takes its place.
+ * **The order.** A device sends an input made in turn saying where it takes
+ * the log to end (`after`) and how many of the last entries it counts as its
+ * own (`mine`). The input takes the next place only if the log is as it
+ * says; otherwise the device is told (`table-refused`) and nothing else
+ * happens. An input made out of turn (`after: null`: a concession, a setting,
+ * an opening-hand decision) takes whatever place it arrives at. Everyone at
+ * the table, the sender too, is sent each input as it takes its place.
  *
  * **The host** is a seat, not a connection: the lobby's creator while their
  * device is connected, else the first person connected in seating order
@@ -165,7 +167,10 @@ export class Tables {
     table.lastActivityAt = Date.now();
     switch (message.type) {
       case "table-input":
-        this.input(table, conn, message.after, message.input);
+        // Made in a game this table has dealt past (a rematch): the device
+        // has the new game by now, and nothing of the old one is waiting.
+        if (message.game !== undefined && message.game !== table.recipe.gameNumber) return;
+        this.input(table, conn, message.after, message.mine, message.input);
         return;
       case "table-join":
         this.join(table, conn, message.clientToken, message.from);
@@ -269,14 +274,16 @@ export class Tables {
     };
   }
 
-  private input(table: Table, conn: ConnId, after: unknown, input: unknown): void {
+  private input(table: Table, conn: ConnId, after: unknown, mine: unknown, input: unknown): void {
     const from = this.seatOf(table, conn);
     if (from === null) {
       this.send(conn, { type: "error", message: `you aren't seated at ${table.id}` });
       return;
     }
     const kind = (input as { kind?: unknown } | null)?.kind;
-    if (typeof after !== "number" || !Number.isInteger(after) || typeof kind !== "string" || !INPUT_KINDS.has(kind)) {
+    const own = mine === undefined ? 0 : mine;
+    const whole = (n: unknown): n is number => typeof n === "number" && Number.isInteger(n) && n >= 0;
+    if ((after !== null && !whole(after)) || !whole(own) || typeof kind !== "string" || !INPUT_KINDS.has(kind)) {
       this.send(conn, { type: "error", message: "malformed table input" });
       return;
     }
@@ -284,13 +291,21 @@ export class Tables {
       this.send(conn, { type: "error", message: `room ${table.id}'s game has run too long to take another move` });
       return;
     }
-    if (after !== table.log.length) {
-      // Made on a log that has moved on: not taken. The device finds out and
-      // puts itself right (it applied its own input when it made it).
-      this.send(conn, { type: "table-refused", roomId: table.id, after, head: table.log.length });
-      return;
+    // An input made out of turn lands wherever it arrives. One made in turn
+    // was applied where its device made it, so it is taken only if the log
+    // is what the device took it to be: ending at `after`, the last `own`
+    // entries the device's own. Without the second half, a run of three
+    // whose second was refused could have its third taken, someone else's
+    // input standing in the place the second was made for.
+    if (after !== null) {
+      let asMade = after === table.log.length && own <= after;
+      for (let back = 1; asMade && back <= own; back += 1) asMade = table.log[after - back].from === from;
+      if (!asMade) {
+        this.send(conn, { type: "table-refused", roomId: table.id, after, head: table.log.length });
+        return;
+      }
     }
-    const entry: TableEntry = { index: after, from, input: input as TableEntry["input"] };
+    const entry: TableEntry = { index: table.log.length, from, input: input as TableEntry["input"] };
     table.log.push(entry);
     const message: ServerMessage = { type: "table-input", roomId: table.id, ...entry };
     for (const to of this.everyone(table)) this.send(to, message);

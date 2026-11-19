@@ -118,7 +118,7 @@ describe("a room as a copy", () => {
     expect(table.state.result.over).toBe(false);
   }, PLAYS);
 
-  it("sends a concession as one input, the decision the player owed answered inside it", () => {
+  it("sends a concession as one input, the decision the player owed answered with it", () => {
     // Sent as the answer and then the concession, the answer handed the move
     // on, and the host's bots moved before the concession reached them: the
     // copies parted (the copies fuzz, paced, seed 203).
@@ -143,11 +143,12 @@ describe("a room as a copy", () => {
     expect(sent).toHaveLength(1);
     expect(sent[0].from).toBe(owing.index);
     expect(table.log[before]).toBe(sent[0]);
-    const [{ input }] = sent;
-    if (input.kind !== "concede") throw new Error(`sent a ${input.kind}`);
-    expect(input.player).toBe(owing.player);
-    expect(input.answers.length).toBeGreaterThan(0);
+    // Just the concession: each copy answers what she owed for itself, the
+    // same way, where the input lands.
+    expect(sent[0].input).toEqual({ kind: "concede", player: owing.player });
     table.agree("after the concession");
+    // What she owed was answered on the way out, on every copy.
+    for (const copy of table.copies) expect(copy.room.game.state.awaiting?.player).not.toBe(owing.player);
     for (const copy of table.copies) expect(copy.room.game.state.players[owing.player].hasLost).toBe(true);
     play(table, 20);
     table.agree("playing on");

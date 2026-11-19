@@ -573,14 +573,35 @@ export type ClientMessage =
   | {
       /**
        * One input this device made at a table, to take its place in the
-       * order. `after` is how many inputs the device had seen put in order
-       * when it made this one (counting its own before it): the server takes
-       * the input only if that is still where the log ends, and answers
-       * `table-refused` otherwise.
+       * order.
+       *
+       * `after` is where the device takes the log to end once its own inputs
+       * still on their way are in: how many inputs it has seen put in order,
+       * plus how many of its own it has sent since (`mine`). The server takes
+       * the input only if the log does end there **and** its last `mine`
+       * entries are this device's — so that after one of a run of inputs is
+       * refused, a later one of the run can't be taken on the strength of
+       * the count alone, someone else's input standing where the refused one
+       * would have. Otherwise it answers `table-refused`. The device applied
+       * the input to its own copy when it made it, and undoes it then.
+       *
+       * `after: null` is an input that may land anywhere: one made out of
+       * turn (a concession, a setting, an opening-hand decision, which every
+       * player makes at once). The device has *not* applied it; every device,
+       * the sender too, applies it where the order puts it. Never refused.
+       *
+       * `game` is the game it was made in (`TableRecipe.gameNumber`). One
+       * still on its way when a rematch is dealt belongs to a game that is
+       * gone: the server drops it, with no answer, rather than put it in the
+       * new game's order.
        */
       readonly type: "table-input";
       readonly roomId: string;
-      readonly after: number;
+      readonly game?: number;
+      readonly after: number | null;
+      /** How many of the entries just before `after` the device counts as its
+       * own, sent and not yet confirmed. 0 if absent. */
+      readonly mine?: number;
       readonly input: RoomInput;
     }
   | {
@@ -611,16 +632,25 @@ export type ClientMessage =
  *
  * - `action`: an engine `Action`, a person's or a bot's, or one the room
  *   makes for a seat (an auto-pass, a zone choice with one answer).
- * - `concede`: `player` concedes (rule 104.3a), any decision they owed
- *   answered first (`answers`, in order). One input and not several: sent as
- *   the answers and then the concession, the first answer handed the move to
- *   whoever is next, and their copy moved before the concession reached it.
+ * - `concede`: `player` concedes (rule 104.3a), any decision they owe
+ *   answered first. One input and not several (sent as the answers and then
+ *   the concession, the first answer handed the move on, and that copy moved
+ *   before the concession reached it), and without the answers in it: every
+ *   copy works them out for itself where the input lands, the same way
+ *   (`Room.applyInput`), since by then the game may have moved on from the
+ *   one the player's device answered.
  * - `orders-own-triggers`: `player`'s setting for ordering their own
  *   simultaneous triggers, which the engine reads (`PassSettings`).
+ *
+ * An `action` made when its player is the one the game waits on is **in
+ * turn**: nobody else's can come before it but what follows. The rest are
+ * made **out of turn** — a concession, the setting, and an opening-hand
+ * decision, which is asked of everyone at once — and may land anywhere in
+ * the order (`table-input`'s `after: null`).
  */
 export type RoomInput =
   | { readonly kind: "action"; readonly action: Action }
-  | { readonly kind: "concede"; readonly player: PlayerId; readonly answers: readonly Action[] }
+  | { readonly kind: "concede"; readonly player: PlayerId }
   | { readonly kind: "orders-own-triggers"; readonly player: PlayerId; readonly on: boolean };
 
 /** A seat at a table, as its recipe names it. */

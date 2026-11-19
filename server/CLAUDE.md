@@ -19,7 +19,7 @@ that file.
 - **A seat answers for whoever `answeringPlayer` says** (rule 723): `dispatch`, `actionsFor`, the bots
   and auto-pass all go through it, never `action.player === seat`.
 - **A room writes to its game only through `Room.act`**, one `RoomInput` at a time (an engine
-  action, a concession with its answers, the orders-own-triggers setting): never call
+  action, a concession, the orders-own-triggers setting): never call
   `game.dispatch`, `game.concede` or a setter on the game anywhere else in `room.ts`. It is what
   lets a room be one **copy** of a game other devices hold too (`RoomOptions.copy`,
   `docs/plans/replicated-rooms.md`): a copy plays only the seats it answers for, sends what it
@@ -28,6 +28,14 @@ that file.
   that answers for that seat, and one input, not a run of them that hands the move away
   halfway. `npm run copies:fuzz -w server` plays games on several copies at once and fails where
   they stop holding the same game.
+- **In a copy, only a move made in turn is applied when it is made** (an action of the one
+  player the game waits on; the copy undoes it if another input took its place). Anything a
+  player may do while it isn't their move — a concession, a setting the engine reads, an
+  opening-hand decision — is sent and applied only when the order hands it back (`Room.act`),
+  so a new input of that kind must go the same way, and what it does where it lands must come
+  out the same on every copy: no clock, no randomness of its own (a concession's owed answers
+  are v1's for that reason). `npm run tables:fuzz -w server` plays tables with every message
+  racing.
 - **`broadcast` is never called from a message handler.** A room publishes its own frames
   (`room.publish()` → `onUpdate`).
 - **The host** (`host.ts`) is whoever created the room. Only they may add or remove seats and
@@ -52,8 +60,10 @@ that file.
   main keeps the recipe, the order of their inputs, who is connected and whose device runs the
   bots. A lobby starts as one only when every connection in it said `table-capable` on one build
   (no page does yet), otherwise as a `Room` as ever. Nothing in `tables.ts` may import the engine
-  or check an input against a game; `table-input` is not rate-limited, and both hosts must route
-  a table's messages the same way.
+  or check an input against a game: it takes an in-turn input only where the device made it (the
+  log ending at `after`, its last `mine` entries that device's) and an out-of-turn one
+  (`after: null`) anywhere. `table-input` is not rate-limited, and both hosts must route a
+  table's messages the same way.
 - **The room code runs in a browser too** (solo games, `docs/plans/local-rooms.md`): the rooms, lobbies,
   bots, builder and lessons import values only from `engine/local` and each other — no Node built-in,
   no `ws`, no `engine` barrel, no Node-side module (`test/room-core-imports.test.ts`). The card registry
@@ -76,7 +86,9 @@ that file.
 `broadcast`, per connection by `ConnId`), `room-copies.ts` (several copies of one room in one
 process, wired through an in-memory order: the check that copies agree, for the tests and
 `scripts/copies-fuzz.mjs`, nothing a server runs), `tables.ts` (games on their players' devices:
-the order, the log, the host, on main) and `table-copy.ts` (the copy a device runs of one), `transport.ts` (sockets, rate limit, compression),
+the order, the log, the host, on main), `table-copy.ts` (the copy a device runs of one, and its
+undo) and `table-fuzz.ts` (the two together with every message racing: the tests' and
+`scripts/tables-fuzz.mjs`'s, nothing a server runs), `transport.ts` (sockets, rate limit, compression),
 `room-host.ts` / `in-process-host.ts` / `ws-server.ts` (the seam between them), `worker-host.ts` /
 `shard.ts` / `shard-worker.ts` / `shard-protocol.ts` (rooms on worker threads; tests drive them
 in-thread through `loopback-channel.ts`), `room-code.ts`, `host.ts`, `decks.ts` (fallback

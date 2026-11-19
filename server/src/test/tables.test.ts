@@ -114,6 +114,66 @@ describe("a table on the server", () => {
     expect(tables.summaries()[0].inputs).toBe(1);
   });
 
+  it("takes an input made out of turn wherever it arrives", () => {
+    const { tables, take } = harness();
+    tables.open(opening());
+    take();
+    const concede: RoomInput = { kind: "concede", player: DAVE };
+    tables.message(3, { type: "table-input", roomId: "TABLE", after: 0, input: pass(CAROL) });
+    // Dave's device has seen none of it, and asks for no place.
+    tables.message(4, { type: "table-input", roomId: "TABLE", after: null, input: concede });
+    tables.message(4, { type: "table-input", roomId: "TABLE", after: null, input: { kind: "orders-own-triggers", player: DAVE, on: true } });
+    const out = take();
+    expect(out.every((o) => o.message.type === "table-input")).toBe(true);
+    expect(out.filter((o) => o.to === 9).map((o) => o.message)).toMatchObject([
+      { index: 0, from: CAROL },
+      { index: 1, from: DAVE, input: concede },
+      { index: 2, from: DAVE, input: { kind: "orders-own-triggers" } },
+    ]);
+  });
+
+  it("refuses the rest of a run once one of it lost its place", () => {
+    const { tables, take } = harness();
+    tables.open(opening());
+    take();
+    // Alice's device (the bots' too) made three in a row on an empty log;
+    // Dave's concession reaches the server after the first of them.
+    tables.message(1, { type: "table-input", roomId: "TABLE", after: 0, mine: 0, input: pass(ALICE) });
+    tables.message(4, { type: "table-input", roomId: "TABLE", after: null, input: { kind: "concede", player: DAVE } });
+    take();
+    tables.message(1, { type: "table-input", roomId: "TABLE", after: 1, mine: 1, input: pass(BOB) });
+    // The third says the log ends at 2, and it does: but its second entry is
+    // Dave's, not the one of Alice's this was made after.
+    tables.message(1, { type: "table-input", roomId: "TABLE", after: 2, mine: 2, input: pass(BOB) });
+    expect(take()).toEqual([
+      { to: 1, message: { type: "table-refused", roomId: "TABLE", after: 1, head: 2 } },
+      { to: 1, message: { type: "table-refused", roomId: "TABLE", after: 2, head: 2 } },
+    ]);
+    // Made again on the log as it is, a run is taken: each after the last.
+    tables.message(1, { type: "table-input", roomId: "TABLE", after: 2, mine: 0, input: pass(BOB) });
+    tables.message(1, { type: "table-input", roomId: "TABLE", after: 3, mine: 1, input: pass(BOB) });
+    expect(take().filter((o) => o.to === 1).map((o) => o.message.type)).toEqual(["table-input", "table-input"]);
+    // And a count of its own that reaches back past the log's start is no claim at all.
+    tables.message(1, { type: "table-input", roomId: "TABLE", after: 4, mine: 9, input: pass(BOB) });
+    expect(take()).toEqual([{ to: 1, message: { type: "table-refused", roomId: "TABLE", after: 4, head: 4 } }]);
+    expect(tables.summaries()[0].inputs).toBe(4);
+  });
+
+  it("drops an input made in a game a rematch has dealt past, with no answer", () => {
+    const { tables, take } = harness();
+    tables.open(opening());
+    tables.message(1, { type: "table-rematch", roomId: "TABLE" });
+    take();
+    // Still on their way when the new game was dealt: a move, and a
+    // concession that would otherwise land in the new game's order.
+    tables.message(3, { type: "table-input", roomId: "TABLE", game: 1, after: 0, mine: 0, input: pass(CAROL) });
+    tables.message(4, { type: "table-input", roomId: "TABLE", game: 1, after: null, input: { kind: "concede", player: DAVE } });
+    expect(take()).toEqual([]);
+    expect(tables.summaries()[0].inputs).toBe(0);
+    tables.message(3, { type: "table-input", roomId: "TABLE", game: 2, after: 0, mine: 0, input: pass(CAROL) });
+    expect(tables.summaries()[0].inputs).toBe(1);
+  });
+
   it("takes inputs only from a seat, and only ones shaped as inputs", () => {
     const { tables, take } = harness();
     tables.open(opening());

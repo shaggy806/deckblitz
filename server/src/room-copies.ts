@@ -17,7 +17,8 @@
  * concession, the host changing, a copy taking another's state
  * (`Room.replaceGame`). Nothing here races: an out-of-turn input is made only
  * when every copy has caught up, and the order is the order of making. Inputs
- * that race, and the undo they need, are step 5's.
+ * that race, and the undo they need, are `table-fuzz.ts`'s (step 5), over the
+ * server's real order.
  *
  * Used by `test/room-copies.test.ts` and `scripts/copies-fuzz.mjs`. Part of
  * the room code as far as imports go (`engine/local` and its neighbours only).
@@ -43,7 +44,7 @@ import { Room } from "./room.js";
 import type { Connection, RoomInput, RoomTimers } from "./room.js";
 
 /** A clock nobody waits on: `fireNext` runs the timer due soonest, at once. */
-class FakeClock {
+export class FakeClock {
   private now = 0;
   private nextId = 1;
   private readonly pending = new Map<number, { readonly at: number; readonly fn: () => void }>();
@@ -57,6 +58,11 @@ class FakeClock {
       this.pending.delete(handle as number);
     },
   };
+
+  /** Whether any timer is set. */
+  get waiting(): boolean {
+    return this.pending.size > 0;
+  }
 
   /** Runs the earliest timer still set; `false` if there is none. */
   fireNext(): boolean {
@@ -87,6 +93,9 @@ export interface Copy {
   frames: number;
   /** The last frame its page said it had shown (`"realtime"` pacing). */
   acked: number;
+  /** Inputs it made out of turn that haven't come back in their place yet:
+   * while there are any, it plays nothing (`RoomCopy.sent`). */
+  flying: number;
 }
 
 export interface CopiesOptions {
@@ -113,7 +122,7 @@ export interface CopiesOptions {
 }
 
 /** Where two plain values first differ: `path: ours | theirs`, a line each. */
-function differences(ours: unknown, theirs: unknown, path = "state", out: string[] = [], limit = 8): string[] {
+export function differences(ours: unknown, theirs: unknown, path = "state", out: string[] = [], limit = 8): string[] {
   if (out.length >= limit || ours === theirs) return out;
   const leaf = (v: unknown): string => (v === undefined ? "(absent)" : (JSON.stringify(v) ?? String(v)).slice(0, 80));
   if (typeof ours !== "object" || typeof theirs !== "object" || ours === null || theirs === null) {
@@ -142,7 +151,7 @@ export class CopiesTable {
   readonly did: string[] = [];
   /** The copy that runs the bots. */
   private hostIndex = 0;
-  private readonly queue: { readonly from: number; readonly input: RoomInput }[] = [];
+  private readonly queue: { readonly from: number; readonly input: RoomInput; readonly applied: boolean }[] = [];
   /** The one clock every copy's timers run on, in `"realtime"` pacing. */
   private readonly clock: FakeClock | null;
 
@@ -174,14 +183,18 @@ export class CopiesTable {
           : { pacing: "realtime" as const, timers: clock.timers, settleSliceMs: Infinity }),
         botController,
         copy: {
-          answersFor: (who) => who === player || (this.hostIndex === index && this.botSeats.has(who)),
-          sent: (input) => this.queue.push({ from: index, input }),
+          answersFor: (who) =>
+            copy.flying === 0 && (who === player || (this.hostIndex === index && this.botSeats.has(who))),
+          sent: (input, how) => {
+            if (!how.applied) copy.flying += 1;
+            this.queue.push({ from: index, input, applied: how.applied });
+          },
         },
         onUpdate: () => {
           copy.frames += 1;
         },
       });
-      const copy: Copy = { index, player, room, connection, frames: 0, acked: 0 };
+      const copy: Copy = { index, player, room, connection, frames: 0, acked: 0, flying: 0 };
       this.copies.push(copy);
     });
     if (this.copies.length === 0) throw new Error("a table of copies needs a person");
@@ -217,8 +230,16 @@ export class CopiesTable {
     for (let guard = 0; guard < 1_000_000; guard += 1) {
       const next = this.queue.shift();
       if (next !== undefined) {
-        this.log.push(next);
-        for (const copy of this.copies) if (copy.index !== next.from) copy.room.receive(next.input);
+        this.log.push({ from: next.from, input: next.input });
+        for (const copy of this.copies) {
+          // An input its maker applied when it made it goes to the others;
+          // one made out of turn comes back to its maker too, in its place.
+          if (copy.index !== next.from) copy.room.receive(next.input);
+          else if (!next.applied) {
+            copy.flying -= 1;
+            copy.room.receive(next.input);
+          }
+        }
         continue;
       }
       if (this.clock === null) return;
