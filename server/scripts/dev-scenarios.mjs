@@ -1185,6 +1185,23 @@ export default {
     setup: landsOnlyForest,
     bots: { bob: {}, carol: {}, dave: {} },
   },
+  KWSTK: {
+    about:
+      "4p. A stack of tokens shows its keywords: alice has five Pegasus tokens (one tile, x5, " +
+      "its flying disc under the pill rather than behind it), three of Hungry for More's " +
+      "Vampires (x3; trample, lifelink and haste under the pill) and a Serra Angel, whose " +
+      "discs start in the tile's corner. The user's report (2026-11-18): Pegasus tokens " +
+      "showed no flying on their tile.",
+    players: ["alice", "bob", "carol", "dave"],
+    lands: { alice: 4, bob: 3, carol: 3, dave: 3 },
+    battlefield: { alice: ["Serra Angel"] },
+    setup(game) {
+      // Real tokens, made the way a card makes them: the board draws each kind as one tile.
+      game.debugApplyEffect("alice", { kind: "create-token", token: "Pegasus Token", count: 5 });
+      game.debugApplyEffect("alice", { kind: "create-token", token: "Vampire Token (Hungry for More)", count: 3 });
+    },
+    bots: { bob: {}, carol: {}, dave: {} },
+  },
 
   RVEAL: {
     about:

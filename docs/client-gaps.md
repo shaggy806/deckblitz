@@ -119,3 +119,16 @@ its type line from `def.types` and `def.subtypes` alone, so Boo reads "Creature 
 basic land "Land — Forest". `LibraryPage.tsx`'s `typeLineOf` and `CardTile.tsx`'s `typeLine` put
 `def.supertypes` first (rule 205.4); 47 token definitions and every legendary, basic or snow card
 have some. The fix is that one line, and a look at the fallback with an image blocked.
+
+**A long keyword column runs behind the corner chip.** Found 2026-11-18 (fixing a bug report: a
+stack of Pegasus tokens showed no flying, its disc behind the ×N pill), seen in the scenario
+builder at 1366x768 with 30 permanents on one side: a summoning-sick Akroma, Angel of Wrath on a
+~74px tile draws flying, first strike and vigilance down its left edge and haste in a second
+column, and trample behind the "Z" chip. The keyword discs (`.mt-kw`, `App.css`) fill the art's
+left edge from the top to 2px off its bottom and only then wrap; the chips (`.card-flags`) stack up
+from the bottom-left corner and are drawn later, over them. It takes four keywords on the smallest
+tiles, or more on larger ones, and any chip (summoning sick, goaded, suspected). A token stack's
+discs already stop above one chip (`.mt-body:has(> .card-flags) > .mt-kw.below-stack`, the same
+fix): the outline is that rule for every tile (`max-height: calc(100% - 17px)`), a check that two
+or three chips stacked don't bring it back (the reserve is one chip's height), and a crowded dev
+room for `e2e/stack-keywords.spec.ts` to measure, since its `KWSTK` tiles are too large to wrap.

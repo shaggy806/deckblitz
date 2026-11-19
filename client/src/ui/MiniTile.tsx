@@ -119,6 +119,8 @@ export function MiniTile({
   const faceDown = faceDownLabel(obj)
   const art = useCardArt(obj.art, face, { backFace: obj.faceIsBack, skip: faceDown !== null })
   const isCreature = obj.power !== null && obj.toughness !== null
+  /** The top-left corner has its row of pills: ×N, and how many are blocked. */
+  const hasCornerPills = (stackCount !== null && stackCount > 1) || blockedCount > 0
   const clickable = Boolean(onClick) && (highlight || selected || activatable)
   const tint = cardTint(obj)
 
@@ -211,9 +213,12 @@ export function MiniTile({
 
           {/* One icon per keyword, stacked in the art's corner — enough to
               recognize at a glance which keywords a permanent has; the words
-              themselves are in the hover card's keyword line. */}
+              themselves are in the hover card's keyword line. Under the
+              corner's pills when the tile has any (the same test as the
+              row below): drawn in the same corner, the ×N pill hid a
+              stack's first icon, which for Pegasus tokens is its only one. */}
           {obj.keywords.length > 0 || obj.toxic > 0 ? (
-            <span className="mt-kw">
+            <span className={`mt-kw${hasCornerPills ? ' below-stack' : ''}`}>
               {obj.keywords.map((k) => (
                 <span key={k} role="img" aria-label={keywordLabel(k)}>
                   <KeywordIcon keyword={k} />
@@ -239,7 +244,7 @@ export function MiniTile({
           {obj.lights !== undefined && faceDown === null ? <AttractionLights lights={obj.lights} /> : null}
           <CounterChips obj={obj} />
 
-          {(stackCount !== null && stackCount > 1) || blockedCount > 0 ? (
+          {hasCornerPills ? (
             <span className="mt-stack-row">
               {stackCount !== null && stackCount > 1 ? (
                 <span className="card-stack">×{stackCount}</span>

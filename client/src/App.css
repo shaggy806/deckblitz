@@ -3475,6 +3475,21 @@
   max-height: calc(100% - 4px);
   gap: 1px;
 }
+/* A tile with the corner's pills (.mt-stack-row: ×N, how many are blocked)
+   starts its discs under them: the row is 3px down and 16px tall, and drawn
+   later in the same corner it covered the first disc -- a stack of Pegasus
+   tokens showed no flying (a bug report, 2026-11-18). */
+.mt-kw.below-stack {
+  top: 21px;
+  max-height: calc(100% - 23px);
+}
+/* ...and stops above the bottom-left corner's chip when the tile has one
+   (.card-flags: a new stack's "Z" is 3px up and ~11px tall), wrapping into a
+   second column sooner: pushed down by the pill, a small tile's second disc
+   would otherwise sit behind it. */
+.mt-body:has(> .card-flags) > .mt-kw.below-stack {
+  max-height: calc(100% - 36px);
+}
 .mt-kw span {
   width: var(--kw-size);
   height: var(--kw-size);
