@@ -6075,7 +6075,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   Winter, Misanthropic Guide's "each opponent's maximum hand size is equal to
   seven minus the number of those card types" is `{ who: "opponents", set: 7,
   minus: { cardTypesInGraveyard: { ownedBy: "you" } } }` (a `CountSpec`)
-  behind its delirium `condition`; `adjust` adds to it. Never below 0.
+  behind its delirium `condition`; `adjust` adds to it. Never below 0. `set`
+  may be a `CountSpec` too, read at cleanup, with `{ countersOnThis: kind }`
+  the permanent's own counters (Midnight Oil: `{ who: "you", set: {
+  countersOnThis: "hour" } }`).
 - `noMaxHandSize: true` — "You have no maximum hand size" (Thought Vessel).
 - `surveilAdditional: N` — "You may look at an additional two cards each time
   you surveil" (Enhanced Surveillance: `2`): its controller's surveils of one

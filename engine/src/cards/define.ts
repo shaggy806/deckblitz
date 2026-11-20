@@ -3842,7 +3842,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * (`GameObject.chosenPlayer` — Cursed Rack's "the chosen player's
      * maximum hand size is four"). */
     readonly who: "you" | "opponents" | "chosen-player";
-    readonly set?: number;
+    /** A number, or a count read as it applies, from this permanent's
+     * controller's side, `countersOnThis` meaning this permanent's own
+     * (Midnight Oil: "your maximum hand size is equal to the number of hour
+     * counters on this enchantment" is `{ who: "you", set: { countersOnThis:
+     * "hour" } }`). */
+    readonly set?: number | CountSpec;
     readonly minus?: CountSpec;
     readonly adjust?: number;
   };

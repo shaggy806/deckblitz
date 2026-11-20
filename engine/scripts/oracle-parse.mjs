@@ -26633,6 +26633,11 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^The chosen player's maximum hand size is ${N}\\.$`).exec(line)) && typeof numberOf(m[1]) === "number") {
     return { affects: { scope: "self" }, maxHandSize: { who: "chosen-player", set: numberOf(m[1]) }, text };
   }
+  // Midnight Oil's "your maximum hand size is equal to the number of hour
+  // counters on this enchantment".
+  if ((m = /^Your maximum hand size is equal to the number of ([a-z+\/-]+) counters on (?:this [a-z]+|~)\.$/.exec(line))) {
+    return { affects: { scope: "self" }, maxHandSize: { who: "you", set: { countersOnThis: m[1] } }, text };
+  }
   // Devotion (rule 700.5). A Theros God's "as long as your devotion to white
   // [and black] is less than N, ~ isn't a creature" (`godDevotion`), a
   // Demigod's "~'s power is equal to your devotion to red" (a CDA), and Altar

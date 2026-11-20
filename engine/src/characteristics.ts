@@ -5278,8 +5278,11 @@ export function countValue(
     if ("playerCounters" in spec) {
       return state.players[controller]?.counters[spec.playerCounters] ?? 0;
     }
-    // Which permanent's is only known to a `setBasePtFromCount`.
-    if ("countersOnThis" in spec || "countersOnMaker" in spec) return 0;
+    // "On this permanent": the `source` whose static this is, when given
+    // (Midnight Oil's "equal to the number of hour counters on this
+    // enchantment"). The maker's is only known to a `setBasePtFromCount`.
+    if ("countersOnThis" in spec) return source === undefined ? 0 : (state.objects[source]?.counters[spec.countersOnThis] ?? 0);
+    if ("countersOnMaker" in spec) return 0;
     if ("greatestManaValueOf" in spec) {
       let best = 0;
       for (const id of state.zones.shared.battlefield) {

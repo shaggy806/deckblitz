@@ -120,7 +120,7 @@ import {
   stickerSheet,
   type NameStickerRef,
 } from "./stickers.js";
-import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause } from "./cards/define.js";
+import type { CountSpec, CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause } from "./cards/define.js";
 import { costActMaxX, costActPaidLast, costActPayable, costActReadsX, payableCostAct } from "./cost-acts.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
@@ -12438,9 +12438,11 @@ export class Game {
         changes.push({
           timestamp: staticTimestamp(this.registry, source, ability),
           apply: (size) => {
-            const minus =
-              rule.minus === undefined ? 0 : countValue(rule.minus, this.state, this.registry, source.controller);
-            return (rule.set === undefined ? size : rule.set - minus) + (rule.adjust ?? 0);
+            const count = (spec: CountSpec): number =>
+              countValue(spec, this.state, this.registry, source.controller, source.id);
+            const minus = rule.minus === undefined ? 0 : count(rule.minus);
+            const set = rule.set === undefined ? undefined : typeof rule.set === "number" ? rule.set : count(rule.set);
+            return (set === undefined ? size : set - minus) + (rule.adjust ?? 0);
           },
         });
       }

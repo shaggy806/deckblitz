@@ -2,6 +2,8 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "static:max-hand-size-equal-to-counters",
+    "static:max-hand-size-equal-to-count",
     "static:exhaust-reactivation",
     "effect:delayed-sacrifice-modified-this-way",
     "effect:delayed-return-attacking-next-turn",
