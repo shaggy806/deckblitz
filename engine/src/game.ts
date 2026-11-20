@@ -9441,6 +9441,13 @@ export class Game {
       ...(ability.costHasX === true ? { costHasX: true as const } : {}),
       ...(ability.costFor !== undefined ? { costFor: ability.costFor } : {}),
       ...(ability.costWaterbend === true ? { costWaterbend: true as const } : {}),
+      // Asked inside a replacement's effect, what the answer does is still
+      // that replacement's (rule 614.5): Zur's Weirding's "otherwise, that
+      // player draws a card" isn't replaced by it again.
+      ...(this.applyingReplacements.size > 0 ? { replacing: [...this.applyingReplacements] } : {}),
+      ...(this.applyingReplacements.size > 0 && this.state.resolutionSince !== undefined
+        ? { thisWaySince: this.state.resolutionSince }
+        : {}),
       ...(energyCap !== undefined ? { maxX: energyCap } : ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
       ...(energyX !== undefined ? { energyX } : {}),
       ...(ability.costTimes === true ? { costTimes: true as const } : {}),
@@ -9837,8 +9844,15 @@ export class Game {
     if (awaiting.trigger !== undefined) {
       this.resolvingTrigger = { object: awaiting.trigger.object, signature: awaiting.trigger.signature };
     }
+    // Asked inside a replacement's effect, the answer's effects are still
+    // that replacement's (rule 614.5), its "this way" its own; what resumes
+    // after them isn't.
+    const asReplacement = (run: () => void): void =>
+      this.withThisWaySince(awaiting.thisWaySince, () => this.withReplacing(awaiting.replacing, run));
     try {
-      for (const i of ordered) applyEffectSpec(modes[i].effect, context);
+      asReplacement(() => {
+        for (const i of ordered) applyEffectSpec(modes[i].effect, context);
+      });
     } finally {
       this.resolvingTrigger = outerTrigger;
     }
@@ -9852,7 +9866,7 @@ export class Game {
     }
     if (ordered.length === 0 && onDecline !== undefined) {
       const declinedBy = awaiting.declineController;
-      applyEffectSpec(
+      asReplacement(() => applyEffectSpec(
         onDecline,
         declinedBy === undefined
           ? context
@@ -9869,7 +9883,7 @@ export class Game {
               lastKnownRefs,
               identity,
             ),
-      );
+      ));
     }
 
     // A mode's effect may itself raise a decision (rare); otherwise resume.
@@ -45227,6 +45241,13 @@ controlledBy,
           if (cards.length > 0) this.revealCards(controller, cards, "library");
           return cards.map((id) => facts(id, false));
         }
+        if ("drawn" in of) {
+          return thisWayEntries(this.state, "drawn", since)
+            .filter((e) => this.state.zones.perPlayer[e.player]?.hand.includes(e.object) === true)
+            .map((e) => e.object)
+            .filter((id) => matchesFilter(this.state, this.registry, id, of.drawn, { you: controller, source }))
+            .map((id) => facts(id, false));
+        }
         const owner = targets[of.inHandOf];
         if (owner?.kind !== "player") return [];
         return this.state.zones.perPlayer[owner.player].hand
@@ -49577,7 +49598,12 @@ controlledBy,
             : "takeDamage" in option
             ? { kind: "damage", amount: option.takeDamage, who: "you" }
             : "payLife" in option
-            ? { kind: "lose-life", amount: option.payLife, who: "you", paid: true }
+            ? option.ifPaid === undefined
+              ? { kind: "lose-life", amount: option.payLife, who: "you", paid: true }
+              : {
+                  kind: "sequence",
+                  effects: [{ kind: "lose-life", amount: option.payLife, who: "you", paid: true }, option.ifPaid],
+                }
             : "payEnergy" in option
             ? { kind: "pay-energy", amount: option.payEnergy }
             : "sacrificeThat" in option

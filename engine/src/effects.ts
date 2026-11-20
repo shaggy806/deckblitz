@@ -1715,7 +1715,15 @@ export type UnlessOption =
    * instruction that can be done as far as it goes, with nothing to do
    * included (exiling an empty graveyard), but not "a card" with none. */
   | { readonly doing: EffectSpec; readonly text: string }
-  | ({ readonly payLife: number; readonly text: string } & UnlessTimes)
+  | ({
+      readonly payLife: number;
+      readonly text: string;
+      /** "Then any other player may pay 2 life. **If a player does**, put that
+       * card into its owner's graveyard" (Zur's Weirding): what taking this
+       * option also does, as the chooser's effect, after the life is paid —
+       * the mana option's `ifPaid`. */
+      readonly ifPaid?: EffectSpec;
+    } & UnlessTimes)
   /** "…unless its controller pays life **equal to its toughness**" (Essence
    * Vortex): that much life, read as the effect applies — `{X}` in `text` shows
    * the amount. A life option like `payLife`. */
@@ -11305,6 +11313,12 @@ export type EffectSpec =
          * ruling). */
         | { readonly targets: readonly number[] }
         | { readonly inHandOf: number; readonly filter: CardFilter }
+        /** The cards this resolution has had any player draw, matching
+         * `drawn`, still in the hand they were drawn into: "instead they draw
+         * a card and reveal it. If it's a creature card, that player discards
+         * it unless they pay 3 life" (Breathstealer's Crypt, `asks: "owner"`).
+         * The filter's "you" is the effect's controller. */
+        | { readonly drawn: CardFilter }
         | { readonly libraryTop: number }
         /** The spells and/or abilities on the stack, `whose` controls them —
          * Whirlwind Denial's "for each spell and ability your opponents
@@ -16346,7 +16360,12 @@ function bindUnlessTimes(option: BoundUnlessOption, ctx: ResolutionContext): Bou
         : {}),
     };
   }
-  if ("payLife" in option) return { payLife: option.payLife * n, text: `Pay ${option.payLife * n} life` };
+  if ("payLife" in option)
+    return {
+      payLife: option.payLife * n,
+      text: `Pay ${option.payLife * n} life`,
+      ...(option.ifPaid !== undefined ? { ifPaid: option.ifPaid } : {}),
+    };
   if ("putCounter" in option) {
     const count = (option.count ?? 1) * n;
     return { putCounter: option.putCounter, on: option.on, count, text: `${option.text} (${count})` };

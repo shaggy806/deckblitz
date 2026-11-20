@@ -5112,6 +5112,12 @@ export type AwaitingDecision =
        * `maxModes` distinct modes; their effects apply after. */
       readonly kind: "choose-modes";
       readonly player: PlayerId;
+      /** Asked inside a replacement's effect: the replacements carrying out
+       * their own effect then, and that effect's "this way" start, restored
+       * while the answer runs — as `ParkedSteps.replacing` and
+       * `thisWaySince` are (rule 614.5). */
+      readonly replacing?: readonly string[];
+      readonly thisWaySince?: number;
       /** The player the question is about — see the offer's `about`. */
       readonly about?: PlayerId;
       /** The permanent the question is about — see the offer's `aboutObject`. */

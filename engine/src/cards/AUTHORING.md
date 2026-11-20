@@ -1629,7 +1629,9 @@ a player who can do all of it: `{ pay, times?, andLife?, ifPaid?, waterbend?, te
 life" — Mundungu; "{G} for each wind counter on it. If you pay, …" — Cyclone,
 `ifPaid` being the chooser's effect like the payment; `waterbend: true` is "unless
 you **waterbend {2}**" — Waterbending Lesson, each {1} of `pay` payable by tapping
-an untapped artifact or creature, rule 701.67a), `{ payGeneric }`, `{ payLife }`,
+an untapped artifact or creature, rule 701.67a), `{ payGeneric }`, `{ payLife, ifPaid? }`
+(Zur's Weirding's "any other player may pay 2 life. If a player does, put that card into its
+owner's graveyard"),
 `{ payLifeAmount, text: "Pay {X} life" }` ("life equal to its toughness" — Essence
 Vortex), `{ payManaCostOf, ifPaid?, text: "Pay {X}" }` (an object's mana cost, "that
 spell's mana cost" — Ice Cave, Tariff: X as chosen for a spell on the stack and 0
@@ -8281,6 +8283,15 @@ The `prevent-damage` family makes the same record.
   each make the player discard first, and once one mills there's no draw
   for the next (`draw-replaced-by-discard.test.ts`). A draw a Notion Thief
   hands its controller is theirs to replace this way too.
+  A choice asked inside the effect (a `may`, an `unless`) keeps it that
+  replacement's effect as it's answered (the `choose-modes` decision's
+  `replacing`): Zur's Weirding is `who: "any-player"`, `{ effect: reveal-top
+  of "trigger-player", then an unless with chooser { anyOf: { otherThan:
+  "trigger-player" } }, options [{ payLife: 2, ifPaid: put-into-graveyard 0 }],
+  otherwise a draw by "trigger-player" }`; Enduring Renewal a `reveal-top`
+  with a conditional on target 0; Breathstealer's Crypt a draw by
+  "trigger-player", `reveal-drawn`, then `for-each-unless` `of: { drawn:
+  { type: "creature" } }`, `asks: "owner"` (`draw-replacement-reveal.test.ts`).
   With `may: true` it's "you **may** instead" (Abundance, Pavel Chekov, First
   Posting; Obstinate Familiar's "you may skip that draw instead" is an empty
   `sequence`): each draw, as it would happen, asks the drawing player "Draw a

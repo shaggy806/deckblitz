@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A draw replaced by a reveal, and a draw within the replacement — built 2026-11-20
+
+The key `replacement:draw-replacement-reveal`: Zur's Weirding (12293), Breathstealer's Crypt (15597), Enduring Renewal
+(17538). `would-draw` `{ effect }` already ran these shapes but for two things. A `choose-modes` decision asked inside
+a replacement's effect now keeps `replacing` and `thisWaySince` and restores them while its answer's effects run, so
+Zur's "otherwise, that player draws a card" after an `unless` isn't replaced by the same Weirding again (rule 614.5;
+it looped before). The `unless` option `{ payLife }` takes `ifPaid`, and `for-each-unless` takes `of: { drawn }` (the
+cards this resolution drew, still in hand). `test/draw-replacement-reveal.test.ts`.
+
 ### A commander's colour chosen before the game begins — built 2026-11-20
 
 The key `mechanic:commander-chosen-color-pregame`, for Clara Oswald (#737) and The Prismatic Piper: "If ~ is your

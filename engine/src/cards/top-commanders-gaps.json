@@ -3047,7 +3047,8 @@
   "static:play-from-linked-exile-once-per-turn",
   "effect:look-and-choose-then-always",
   "effect:look-one-each-then-one-onto-battlefield",
-  "amount:aggregate-over-attached-equipment"
+  "amount:aggregate-over-attached-equipment",
+  "replacement:draw-replacement-reveal"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
