@@ -340,6 +340,14 @@ a replacement's effect now keeps `replacing` and `thisWaySince` and restores the
 Zur's "otherwise, that player draws a card" after an `unless` isn't replaced by the same Weirding again (rule 614.5;
 it looped before). The `unless` option `{ payLife }` takes `ifPaid`, and `for-each-unless` takes `of: { drawn }` (the
 cards this resolution drew, still in hand). `test/draw-replacement-reveal.test.ts`.
+### Exiling the cards of a discard — found built 2026-11-20
+
+The key `trigger:discards-batch-objects`, for Toluz, Clever Conductor: needed no engine code. A `discards` trigger's
+batch is the discarded cards (`"trigger-batch"`), so "exile them from your graveyard" is `exile-graveyard` with `target:
+"you"`, `filter: { inSet: "trigger-batch" }` and `linked: true`, and "put the cards exiled with it into their owner's
+hand" Hoarding Dragon's `return-exiled-by-source` with `linked: "hand"`. The scaffolder reads both lines (its
+`discardBatch` context). `test/discards-batch-objects.test.ts`.
+
 ### An attack trigger's intervening-if over "those creatures" — built 2026-11-20
 
 The key `trigger:attack-with-intervening-if`, for Squall, Gunblade Duelist: an intervening-if (rule 603.4) is now

@@ -24103,3 +24103,19 @@ describe("lands freely and one spell a turn from a linked exile (Hedonist's Trov
     ]);
   });
 });
+
+describe("a discard's cards exiled with the source, and put into hand as it dies (Toluz, Clever Conductor)", () => {
+  it("reads \"exile them from your graveyard\" as the discard's batch, linked", () => {
+    const toluz = parseFace({
+      name: "Toluz, Clever Conductor",
+      type_line: "Legendary Creature — Human Rogue",
+      oracle_text:
+        "When Toluz enters, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)\nWhenever you discard one or more cards, exile them from your graveyard.\nWhen Toluz dies, put the cards exiled with it into their owner's hand.",
+      mana_cost: "{W/U}{U}{U/B}",
+      colors: ["W", "U", "B"],
+    }) as unknown as { complete: boolean; triggered: { effect: unknown }[] };
+    expect(toluz.complete).toBe(true);
+    expect(toluz.triggered[1].effect).toEqual({ kind: "exile-graveyard", target: "you", filter: { inSet: "trigger-batch" }, linked: true });
+    expect(toluz.triggered[2].effect).toEqual({ kind: "return-exiled-by-source", linked: "hand" });
+  });
+});

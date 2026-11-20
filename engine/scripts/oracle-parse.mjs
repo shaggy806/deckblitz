@@ -4930,8 +4930,14 @@ export function parseSentence(sentence, ctx) {
   if (re("look at the top card of each opponent's library and exile those cards face down").test(s)) {
     return faceDownExile("looked", { whose: "each-opponent", amount: 1 });
   }
+  // "Exile them from your graveyard" of a discard read as one batch (Toluz,
+  // Clever Conductor): the discarded cards, linked to the source for "the
+  // cards exiled with it".
+  if (ctx?.discardBatch === true && re("exile them from your graveyard").test(s)) {
+    return { kind: "exile-graveyard", target: "you", filter: { inSet: "trigger-batch" }, linked: true };
+  }
   // What the source's other abilities do with them.
-  if (re("put all cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) hands?").test(s)) {
+  if (re("put (?:all|the) cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) hands?").test(s)) {
     return { kind: "return-exiled-by-source", linked: "hand" };
   }
   // "Return all cards exiled with ~ to their owner's hand and you lose that
@@ -20652,6 +20658,8 @@ function parseFaceAsWritten(face, ctx = {}) {
             : {}),
           // "One of them": the sources of a batched damage trigger.
           ...(triggers.every((t) => t.on === "deals-damage-batch") ? { damageBatch: true } : {}),
+          // "Them": the cards of a discard read as one batch.
+          ...(triggers.every((t) => t.on === "discards" && t.perCard !== true) ? { discardBatch: true } : {}),
           // "That excess damage": what the recipient was dealt past lethal.
           ...(triggers.every((t) => t.on === "deals-damage" && t.toFilter?.excessDamageThisTurn === true)
             ? { excessRecipient: true }
@@ -22477,6 +22485,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(ctx.attackBatch === true ? { attackBatch: true } : {}),
     ...(ctx.damageBatch === true ? { damageBatch: true } : {}),
+    ...(ctx.discardBatch === true ? { discardBatch: true } : {}),
     ...(ctx.dreadBatch === true ? { dreadBatch: true } : {}),
     ...(ctx.excessRecipient === true ? { excessRecipient: true } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
