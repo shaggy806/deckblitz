@@ -459,6 +459,7 @@ import _poolKinTreeInvocation from "../pool/kin-tree-invocation.js";
 import _poolKindredCharge from "../pool/kindred-charge.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
 import _poolKirkEnterprisingCaptain from "../pool/kirk-enterprising-captain.js";
+import _poolKitesailSkirmisher from "../pool/kitesail-skirmisher.js";
 import _poolKithkinHealer from "../pool/kithkin-healer.js";
 import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKlawSonicSubjugator from "../pool/klaw-sonic-subjugator.js";
@@ -1533,6 +1534,7 @@ const shard: CardShard = {
     _poolKindredCharge,
     _poolKindredDominance,
     _poolKirkEnterprisingCaptain,
+    _poolKitesailSkirmisher,
     _poolKithkinHealer,
     _poolKlawMasterOfSound,
     _poolKlawSonicSubjugator,

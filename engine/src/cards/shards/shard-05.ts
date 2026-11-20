@@ -427,6 +427,7 @@ import _poolGuardianLions from "../pool/guardian-lions.js";
 import _poolGuidedPassage from "../pool/guided-passage.js";
 import _poolHaazdaSnareSquad from "../pool/haazda-snare-squad.js";
 import _poolHailstormValkyrie from "../pool/hailstorm-valkyrie.js";
+import _poolHakimLoreweaver from "../pool/hakim-loreweaver.js";
 import _poolHalamDjinn from "../pool/halam-djinn.js";
 import _poolHallwayHeckler from "../pool/hallway-heckler.js";
 import _poolHangarbackWalker from "../pool/hangarback-walker.js";
@@ -1471,6 +1472,7 @@ const shard: CardShard = {
     _poolGuidedPassage,
     _poolHaazdaSnareSquad,
     _poolHailstormValkyrie,
+    _poolHakimLoreweaver,
     _poolHalamDjinn,
     _poolHallwayHeckler,
     _poolHangarbackWalker,

@@ -3014,6 +3014,7 @@ import _poolBlossomDryad from "./pool/blossom-dryad.js";
 import _poolBlossomPrancer from "./pool/blossom-prancer.js";
 import _poolBlossombind from "./pool/blossombind.js";
 import _poolBlossomingBogbeast from "./pool/blossoming-bogbeast.js";
+import _poolBlossomingCalm from "./pool/blossoming-calm.js";
 import _poolBlossomingDefense from "./pool/blossoming-defense.js";
 import _poolBlossomingSands from "./pool/blossoming-sands.js";
 import _poolBlossomingTortoise from "./pool/blossoming-tortoise.js";
@@ -8291,6 +8292,7 @@ import _poolEllieBrickMaster from "./pool/ellie-brick-master.js";
 import _poolEllieVengefulHunter from "./pool/ellie-vengeful-hunter.js";
 import _poolEllivereOfTheWildCourt from "./pool/ellivere-of-the-wild-court.js";
 import _poolEllynHarbreezeBusybody from "./pool/ellyn-harbreeze-busybody.js";
+import _poolEllywickTumblestrum from "./pool/ellywick-tumblestrum.js";
 import _poolElmarUlvenwaldInformant from "./pool/elmar-ulvenwald-informant.js";
 import _poolElminster from "./pool/elminster.js";
 import _poolElminstersSimulacrum from "./pool/elminsters-simulacrum.js";
@@ -12365,6 +12367,7 @@ import _poolHailstormValkyrie from "./pool/hailstorm-valkyrie.js";
 import _poolHairStrungKoto from "./pool/hair-strung-koto.js";
 import _poolHajarLoyalBodyguard from "./pool/hajar-loyal-bodyguard.js";
 import _poolHakbalOfTheSurgingSoul from "./pool/hakbal-of-the-surging-soul.js";
+import _poolHakimLoreweaver from "./pool/hakim-loreweaver.js";
 import _poolHakkaWhisperingRaven from "./pool/hakka-whispering-raven.js";
 import _poolHakodaSelflessCommander from "./pool/hakoda-selfless-commander.js";
 import _poolHaktosTheUnscarred from "./pool/haktos-the-unscarred.js";
@@ -15270,6 +15273,7 @@ import _poolKitesailCorsair from "./pool/kitesail-corsair.js";
 import _poolKitesailFreebooter from "./pool/kitesail-freebooter.js";
 import _poolKitesailLarcenist from "./pool/kitesail-larcenist.js";
 import _poolKitesailScout from "./pool/kitesail-scout.js";
+import _poolKitesailSkirmisher from "./pool/kitesail-skirmisher.js";
 import _poolKitesail from "./pool/kitesail.js";
 import _poolKithkeeper from "./pool/kithkeeper.js";
 import _poolKithkinBillyrider from "./pool/kithkin-billyrider.js";
@@ -18619,6 +18623,7 @@ import _poolNamelessConqueror from "./pool/nameless-conqueror.js";
 import _poolNamelessInversion from "./pool/nameless-inversion.js";
 import _poolNamelessOne from "./pool/nameless-one.js";
 import _poolNamelessRace from "./pool/nameless-race.js";
+import _poolNamorAtlanteanKing from "./pool/namor-atlantean-king.js";
 import _poolNamorScourgeOfTheSeas from "./pool/namor-scourge-of-the-seas.js";
 import _poolNamorTheSubMariner from "./pool/namor-the-sub-mariner.js";
 import _poolNamoraTheSeaQueen from "./pool/namora-the-sea-queen.js";
@@ -24573,6 +24578,7 @@ import _poolSeymourFlux from "./pool/seymour-flux.js";
 import _poolShabrazTheSkyshark from "./pool/shabraz-the-skyshark.js";
 import _poolShackleSlinger from "./pool/shackle-slinger.js";
 import _poolShacklegeist from "./pool/shacklegeist.js";
+import _poolShacklesOfTreachery from "./pool/shackles-of-treachery.js";
 import _poolShackles from "./pool/shackles.js";
 import _poolShadeOfTrokair from "./pool/shade-of-trokair.js";
 import _poolShadesBreath from "./pool/shades-breath.js";
@@ -26559,6 +26565,7 @@ import _poolSquadCommander from "./pool/squad-commander.js";
 import _poolSquadRallier from "./pool/squad-rallier.js";
 import _poolSquadronHawk from "./pool/squadron-hawk.js";
 import _poolSquallDrifter from "./pool/squall-drifter.js";
+import _poolSquallGunbladeDuelist from "./pool/squall-gunblade-duelist.js";
 import _poolSquallLine from "./pool/squall-line.js";
 import _poolSquallSorcery from "./pool/squall-sorcery.js";
 import _poolSquall from "./pool/squall.js";
@@ -29324,6 +29331,7 @@ import _poolTollsOfWar from "./pool/tolls-of-war.js";
 import _poolTolsimirFriendToWolves from "./pool/tolsimir-friend-to-wolves.js";
 import _poolTolsimirMidnightsLight from "./pool/tolsimir-midnights-light.js";
 import _poolTolsimirWolfblood from "./pool/tolsimir-wolfblood.js";
+import _poolToluzCleverConductor from "./pool/toluz-clever-conductor.js";
 import _poolTomBertAndWilliam from "./pool/tom-bert-and-william.js";
 import _poolTomBombadil from "./pool/tom-bombadil.js";
 import _poolTomParisRiskTaker from "./pool/tom-paris-risk-taker.js";
@@ -36686,6 +36694,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlossomPrancer,
   _poolBlossombind,
   _poolBlossomingBogbeast,
+  _poolBlossomingCalm,
   _poolBlossomingDefense,
   _poolBlossomingSands,
   _poolBlossomingTortoise,
@@ -41963,6 +41972,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEllieVengefulHunter,
   _poolEllivereOfTheWildCourt,
   _poolEllynHarbreezeBusybody,
+  _poolEllywickTumblestrum,
   _poolElmarUlvenwaldInformant,
   _poolElminster,
   _poolElminstersSimulacrum,
@@ -46037,6 +46047,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHairStrungKoto,
   _poolHajarLoyalBodyguard,
   _poolHakbalOfTheSurgingSoul,
+  _poolHakimLoreweaver,
   _poolHakkaWhisperingRaven,
   _poolHakodaSelflessCommander,
   _poolHaktosTheUnscarred,
@@ -48942,6 +48953,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKitesailFreebooter,
   _poolKitesailLarcenist,
   _poolKitesailScout,
+  _poolKitesailSkirmisher,
   _poolKitesail,
   _poolKithkeeper,
   _poolKithkinBillyrider,
@@ -52291,6 +52303,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNamelessInversion,
   _poolNamelessOne,
   _poolNamelessRace,
+  _poolNamorAtlanteanKing,
   _poolNamorScourgeOfTheSeas,
   _poolNamorTheSubMariner,
   _poolNamoraTheSeaQueen,
@@ -58245,6 +58258,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShabrazTheSkyshark,
   _poolShackleSlinger,
   _poolShacklegeist,
+  _poolShacklesOfTreachery,
   _poolShackles,
   _poolShadeOfTrokair,
   _poolShadesBreath,
@@ -60231,6 +60245,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSquadRallier,
   _poolSquadronHawk,
   _poolSquallDrifter,
+  _poolSquallGunbladeDuelist,
   _poolSquallLine,
   _poolSquallSorcery,
   _poolSquall,
@@ -62996,6 +63011,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTolsimirFriendToWolves,
   _poolTolsimirMidnightsLight,
   _poolTolsimirWolfblood,
+  _poolToluzCleverConductor,
   _poolTomBertAndWilliam,
   _poolTomBombadil,
   _poolTomParisRiskTaker,
@@ -70371,6 +70387,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blossom-prancer": _poolBlossomPrancer,
   "pool/blossombind": _poolBlossombind,
   "pool/blossoming-bogbeast": _poolBlossomingBogbeast,
+  "pool/blossoming-calm": _poolBlossomingCalm,
   "pool/blossoming-defense": _poolBlossomingDefense,
   "pool/blossoming-sands": _poolBlossomingSands,
   "pool/blossoming-tortoise": _poolBlossomingTortoise,
@@ -75648,6 +75665,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ellie-vengeful-hunter": _poolEllieVengefulHunter,
   "pool/ellivere-of-the-wild-court": _poolEllivereOfTheWildCourt,
   "pool/ellyn-harbreeze-busybody": _poolEllynHarbreezeBusybody,
+  "pool/ellywick-tumblestrum": _poolEllywickTumblestrum,
   "pool/elmar-ulvenwald-informant": _poolElmarUlvenwaldInformant,
   "pool/elminster": _poolElminster,
   "pool/elminsters-simulacrum": _poolElminstersSimulacrum,
@@ -79722,6 +79740,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hair-strung-koto": _poolHairStrungKoto,
   "pool/hajar-loyal-bodyguard": _poolHajarLoyalBodyguard,
   "pool/hakbal-of-the-surging-soul": _poolHakbalOfTheSurgingSoul,
+  "pool/hakim-loreweaver": _poolHakimLoreweaver,
   "pool/hakka-whispering-raven": _poolHakkaWhisperingRaven,
   "pool/hakoda-selfless-commander": _poolHakodaSelflessCommander,
   "pool/haktos-the-unscarred": _poolHaktosTheUnscarred,
@@ -82627,6 +82646,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kitesail-freebooter": _poolKitesailFreebooter,
   "pool/kitesail-larcenist": _poolKitesailLarcenist,
   "pool/kitesail-scout": _poolKitesailScout,
+  "pool/kitesail-skirmisher": _poolKitesailSkirmisher,
   "pool/kitesail": _poolKitesail,
   "pool/kithkeeper": _poolKithkeeper,
   "pool/kithkin-billyrider": _poolKithkinBillyrider,
@@ -85976,6 +85996,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nameless-inversion": _poolNamelessInversion,
   "pool/nameless-one": _poolNamelessOne,
   "pool/nameless-race": _poolNamelessRace,
+  "pool/namor-atlantean-king": _poolNamorAtlanteanKing,
   "pool/namor-scourge-of-the-seas": _poolNamorScourgeOfTheSeas,
   "pool/namor-the-sub-mariner": _poolNamorTheSubMariner,
   "pool/namora-the-sea-queen": _poolNamoraTheSeaQueen,
@@ -91930,6 +91951,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shabraz-the-skyshark": _poolShabrazTheSkyshark,
   "pool/shackle-slinger": _poolShackleSlinger,
   "pool/shacklegeist": _poolShacklegeist,
+  "pool/shackles-of-treachery": _poolShacklesOfTreachery,
   "pool/shackles": _poolShackles,
   "pool/shade-of-trokair": _poolShadeOfTrokair,
   "pool/shades-breath": _poolShadesBreath,
@@ -93916,6 +93938,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/squad-rallier": _poolSquadRallier,
   "pool/squadron-hawk": _poolSquadronHawk,
   "pool/squall-drifter": _poolSquallDrifter,
+  "pool/squall-gunblade-duelist": _poolSquallGunbladeDuelist,
   "pool/squall-line": _poolSquallLine,
   "pool/squall-sorcery": _poolSquallSorcery,
   "pool/squall": _poolSquall,
@@ -96681,6 +96704,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tolsimir-friend-to-wolves": _poolTolsimirFriendToWolves,
   "pool/tolsimir-midnights-light": _poolTolsimirMidnightsLight,
   "pool/tolsimir-wolfblood": _poolTolsimirWolfblood,
+  "pool/toluz-clever-conductor": _poolToluzCleverConductor,
   "pool/tom-bert-and-william": _poolTomBertAndWilliam,
   "pool/tom-bombadil": _poolTomBombadil,
   "pool/tom-paris-risk-taker": _poolTomParisRiskTaker,

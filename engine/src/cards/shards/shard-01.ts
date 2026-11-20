@@ -761,6 +761,7 @@ import _poolSelvalaEagerTrailblazer from "../pool/selvala-eager-trailblazer.js";
 import _poolSensoryDeprivation from "../pool/sensory-deprivation.js";
 import _poolSerpentOfTheEndlessSea from "../pool/serpent-of-the-endless-sea.js";
 import _poolSerrasGuardian from "../pool/serras-guardian.js";
+import _poolShacklesOfTreachery from "../pool/shackles-of-treachery.js";
 import _poolShadowRitePriest from "../pool/shadow-rite-priest.js";
 import _poolShadowfeed from "../pool/shadowfeed.js";
 import _poolShadyTraveler from "../pool/shady-traveler.js";
@@ -900,6 +901,7 @@ import _poolTitaniaProtectorOfArgoth from "../pool/titania-protector-of-argoth.j
 import _poolToil from "../pool/toil.js";
 import _poolTolarianKraken from "../pool/tolarian-kraken.js";
 import _poolTolarianTerror from "../pool/tolarian-terror.js";
+import _poolToluzCleverConductor from "../pool/toluz-clever-conductor.js";
 import _poolTombstalker from "../pool/tombstalker.js";
 import _poolTookReaper from "../pool/took-reaper.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
@@ -1796,6 +1798,7 @@ const shard: CardShard = {
     _poolSensoryDeprivation,
     _poolSerpentOfTheEndlessSea,
     _poolSerrasGuardian,
+    _poolShacklesOfTreachery,
     _poolShadowRitePriest,
     _poolShadowfeed,
     _poolShadyTraveler,
@@ -1935,6 +1938,7 @@ const shard: CardShard = {
     _poolToil,
     _poolTolarianKraken,
     _poolTolarianTerror,
+    _poolToluzCleverConductor,
     _poolTombstalker,
     _poolTookReaper,
     _poolToxicAbomination,

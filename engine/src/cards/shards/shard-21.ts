@@ -88,6 +88,7 @@ import _poolBloodFeud from "../pool/blood-feud.js";
 import _poolBloodFountain from "../pool/blood-fountain.js";
 import _poolBloodlineCulling from "../pool/bloodline-culling.js";
 import _poolBloodskyBerserker from "../pool/bloodsky-berserker.js";
+import _poolBlossomingCalm from "../pool/blossoming-calm.js";
 import _poolBlueManaBattery from "../pool/blue-mana-battery.js";
 import _poolBlueWard from "../pool/blue-ward.js";
 import _poolBogRats from "../pool/bog-rats.js";
@@ -560,6 +561,7 @@ import _poolNabanDeanOfIteration from "../pool/naban-dean-of-iteration.js";
 import _poolNacatlWarPride from "../pool/nacatl-war-pride.js";
 import _poolNagaEternal from "../pool/naga-eternal.js";
 import _poolNahiriTheUnforgiving from "../pool/nahiri-the-unforgiving.js";
+import _poolNamorAtlanteanKing from "../pool/namor-atlantean-king.js";
 import _poolNarcolepsy from "../pool/narcolepsy.js";
 import _poolNashiSearcherInTheDark from "../pool/nashi-searcher-in-the-dark.js";
 import _poolNassariDeanOfExpression from "../pool/nassari-dean-of-expression.js";
@@ -786,6 +788,7 @@ import _poolSpikedRipsaw from "../pool/spiked-ripsaw.js";
 import _poolSpinedFluke from "../pool/spined-fluke.js";
 import _poolSpinneretteArachnobat from "../pool/spinnerette-arachnobat.js";
 import _poolSpringleafParade from "../pool/springleaf-parade.js";
+import _poolSquallGunbladeDuelist from "../pool/squall-gunblade-duelist.js";
 import _poolStabbingPain from "../pool/stabbing-pain.js";
 import _poolStalkingAssassin from "../pool/stalking-assassin.js";
 import _poolStallionOfAshmouth from "../pool/stallion-of-ashmouth.js";
@@ -1099,6 +1102,7 @@ const shard: CardShard = {
     _poolBloodFountain,
     _poolBloodlineCulling,
     _poolBloodskyBerserker,
+    _poolBlossomingCalm,
     _poolBlueManaBattery,
     _poolBlueWard,
     _poolBogRats,
@@ -1571,6 +1575,7 @@ const shard: CardShard = {
     _poolNacatlWarPride,
     _poolNagaEternal,
     _poolNahiriTheUnforgiving,
+    _poolNamorAtlanteanKing,
     _poolNarcolepsy,
     _poolNashiSearcherInTheDark,
     _poolNassariDeanOfExpression,
@@ -1797,6 +1802,7 @@ const shard: CardShard = {
     _poolSpinedFluke,
     _poolSpinneretteArachnobat,
     _poolSpringleafParade,
+    _poolSquallGunbladeDuelist,
     _poolStabbingPain,
     _poolStalkingAssassin,
     _poolStallionOfAshmouth,
