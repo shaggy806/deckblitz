@@ -24279,3 +24279,31 @@ describe("an attack at a player who did nothing last turn (Arboria)", () => {
     ]);
   });
 });
+
+describe("an escape cost, with a part that isn't mana (Lunar Hatchling)", () => {
+  it("reads the escape's mana, its other part as `also` and the graveyard exile", () => {
+    const hatchling = parseFace({
+      name: "Lunar Hatchling",
+      type_line: "Creature — Alien Beast",
+      mana_cost: "{4}{G}{U}",
+      oracle_text:
+        "Flying, trample\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)\nEscape—{4}{G}{U}, Exile a land you control, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)",
+    }) as unknown as { complete: boolean; escape: unknown };
+    expect(hatchling.complete).toBe(true);
+    expect(hatchling.escape).toEqual({
+      cost: "{4}{G}{U}",
+      exileCount: 5,
+      also: {
+        text: "Exile a land you control",
+        do: {
+          kind: "choose-permanents",
+          filter: { type: "land", controlledBy: "you" },
+          min: 1,
+          upTo: 1,
+          then: { kind: "exile", target: 0 },
+          prompt: "Exile a land you control",
+        },
+      },
+    });
+  });
+});

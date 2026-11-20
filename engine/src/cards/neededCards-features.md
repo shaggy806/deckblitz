@@ -362,6 +362,13 @@ toughness equal to the chosen number" is an `amounts` condition over an aggregat
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
 `dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
 read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
+### An escape cost with another part — built 2026-11-20
+
+The key `cost:escape-exile-permanent`, for Lunar Hatchling: `escape.also`, a `KickerAlsoCost` as freerunning's,
+carried on the printed `EscapeOption` and returned by `castAlsoCosts` for `via: "escape"` (rule 702.138a). "Exile a
+land you control" is a `do` of `choose-permanents` that exiles it; `kickerAlso` in the scaffolder reads "Exile a[n]
+… you control", and the scaffolder now reads a printed escape line. `test/escape-also-cost.test.ts`.
+
 ### Cast from exile by waterbending its mana value — built 2026-11-20
 
 The key `cost:alt-cost-waterbend`, for Hama, the Bloodbender: `PlayTerms.byWaterbending`, an alternative cost of {N}

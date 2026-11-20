@@ -2535,6 +2535,9 @@ type EscapeOption = {
   /** The printed escape's "with N or more card types among them" (Nethergoyf)
    * — see `CardDefinition.escape`. */
   readonly exileTypesAmong?: number;
+  /** The printed escape's other part (Lunar Hatchling's "Exile a land you
+   * control") — see `CardDefinition.escape.also`. */
+  readonly also?: KickerAlsoCost;
   /** The permanent whose static grants it; absent for the card's own. */
   readonly grantor?: ObjectId;
 };
@@ -22481,7 +22484,7 @@ export class Game {
       cardId,
       def,
       this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption, via, graveyardGrant, modes),
-      altCost || via === "blitz" || via === "freerunning",
+      altCost || via === "blitz" || via === "freerunning" || via === "escape",
     );
     if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
@@ -51446,8 +51449,12 @@ controlledBy,
     // "Return a blue creature you control to its owner's hand"), when it's
     // cast for that cost (rule 702.173a) — a granted one is its mana alone.
     const freerunningAlso = via === "freerunning" ? def.freerunning?.also : undefined;
+    // A printed escape cost's other part (Lunar Hatchling's "Exile a land you
+    // control"), when it's cast with that escape (rule 702.138a).
+    const escapeAlso = via === "escape" ? this.escapeOf(cardId, 0, graveyardGrant)?.also : undefined;
     const additional = [
       ...(madnessAlso !== undefined ? [madnessAlso] : []),
+      ...(escapeAlso !== undefined ? [escapeAlso] : []),
       ...(blitzAlso !== undefined ? [blitzAlso] : []),
       ...(freerunningAlso !== undefined ? [freerunningAlso] : []),
       ...(own !== undefined ? [own] : []),
@@ -63393,6 +63400,7 @@ controlledBy,
         cost: printed.cost,
         exileCount: printed.exileCount,
         ...(printed.exileTypesAmong !== undefined ? { exileTypesAmong: printed.exileTypesAmong } : {}),
+        ...(printed.also !== undefined ? { also: printed.also } : {}),
       });
     }
     if (card.zone !== "graveyard") return out;

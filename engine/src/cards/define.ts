@@ -6350,6 +6350,14 @@ export interface CardDefinition {
      * Robber's "from among cards exiled with this creature". Only those of the
      * last time it escaped, by this escape and not a granted one (its ruling). */
     readonly exileLinked?: true;
+    /** The printed escape cost's other part (rule 702.138a: "[cost]" is any
+     * cost): Lunar Hatchling's "Escape—{4}{G}{U}, **Exile a land you
+     * control**, Exile five other cards from your graveyard" is a `do` of one
+     * `choose-permanents` that exiles it. Paid as the spell is cast, after
+     * its mana (601.2h), which ones chosen once it's on the stack, and the
+     * escape offered only while it can be paid, as freerunning's `also` is.
+     * A granted escape is its mana and graveyard exile alone. */
+    readonly also?: KickerAlsoCost;
   } | null;
   /** Suspend (rule 702.62 — ROADMAP Phase 6b) — instead of casting this from
    * your hand you may pay `cost` to exile it with `n` time counters; one comes
@@ -7142,6 +7150,7 @@ interface CardDraft {
     readonly counters?: { readonly kind: string; readonly amount: number };
     readonly counterChoice?: readonly string[];
     readonly exileLinked?: true;
+    readonly also?: KickerAlsoCost;
   };
   chapters?: readonly SagaChapter[];
   /** See {@link CardDefinition.readAhead}. */

@@ -1563,6 +1563,23 @@ function kickerAlso(text) {
   }
   // "An opponent gains 5 life" (Roar of Jukai).
   if ((m = /^An opponent gains (\d+) life$/.exec(text))) return { text, opponentGainsLife: Number(m[1]) };
+  // "Exile a land you control" (Lunar Hatchling's escape): one chosen as it's
+  // paid, a `do` of `choose-permanents`.
+  if ((m = /^Exile an? (.+?) you control$/.exec(text))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || Object.keys(filter).length === 0) return null;
+    return {
+      text,
+      do: {
+        kind: "choose-permanents",
+        filter: { ...filter, controlledBy: "you" },
+        min: 1,
+        upTo: 1,
+        then: { kind: "exile", target: 0 },
+        prompt: text,
+      },
+    };
+  }
   if ((m = new RegExp(`^Sacrifice (an?|${N.slice(1, -1)}) (.+)$`).exec(text))) {
     const count = /^an?$/.test(m[1]) ? 1 : numberOf(m[1]);
     const filter = parseTypePhrase(m[2]);
@@ -18922,6 +18939,17 @@ function parseFaceAsWritten(face, ctx = {}) {
       const also = kickerAlso(m[1]);
       if (also !== null) {
         out.freerunning = { cost: "{0}", also };
+        continue;
+      }
+    }
+    // Escape—[mana cost], [another part,] Exile N other cards from your
+    // graveyard (rule 702.138a): Uro's, and Lunar Hatchling's "Exile a land
+    // you control" as `escape.also`.
+    if ((m = new RegExp(`^Escape—((?:\\{[^}]+\\})+)(?:, (.+?))?, Exile ${N} other cards from your graveyard\\.$`).exec(line))) {
+      const exileCount = numberOf(m[3]);
+      const also = m[2] === undefined ? undefined : kickerAlso(m[2]);
+      if (typeof exileCount === "number" && also !== null) {
+        out.escape = { cost: m[1], exileCount, ...(also !== undefined ? { also } : {}) };
         continue;
       }
     }
