@@ -68,6 +68,17 @@ describe("Urgent Necropsy", () => {
     expect(zone(game, necropsy)).toBe("graveyard");
   });
 
+  it("evidence 0 beside a card in the graveyard: no card is a legal answer (rule 701.59a)", () => {
+    const { game, a } = table();
+    const necropsy = ready(game);
+    const forest = toGraveyard(game, "Forest");
+    const seen = pickFromZone(a);
+    cast(game, necropsy, { targets: [null, null, null, null] });
+    expect(seen.offered).toContain(forest);
+    expect(zone(game, necropsy)).toBe("graveyard");
+    expect(zone(game, forest)).toBe("graveyard");
+  });
+
   it("an artifact creature chosen for two targets counts once", () => {
     const { game, a } = table();
     const necropsy = ready(game);

@@ -58375,7 +58375,10 @@ controlledBy,
         tags,
         atLeast: amount,
         ...(cap !== undefined ? { atMost: cap } : {}),
-        ...(opts.optional === true ? { orNone: true } : {}),
+        // Collect evidence 0 (Urgent Necropsy with no target worth
+        // anything): no card is needed to reach it (rule 701.59a), so none
+        // is an answer too.
+        ...(opts.optional === true || amount <= 0 ? { orNone: true } : {}),
         text:
           cap !== undefined
             ? `with total mana value ${amount} to ${cap}, so ${leave} is left to collect next (collect evidence ${amount})`
