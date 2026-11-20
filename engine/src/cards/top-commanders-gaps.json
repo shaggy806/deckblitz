@@ -3057,7 +3057,8 @@
   "effect:delayed-return-then-discard-toughness",
   "effect:free-cast-as-though-flash-if-condition",
   "effect:may-reveal-from-hand",
-  "filter:same-name-as-revealed-card"
+  "filter:same-name-as-revealed-card",
+  "effect:player-hexproof-until-your-next-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

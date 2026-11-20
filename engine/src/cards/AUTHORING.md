@@ -6086,7 +6086,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   its permanent's timestamp): a Twenty-Toed Toad newer than a Reliquary
   Tower makes it twenty, an older one leaves no maximum.
 - `prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }]` — "You can't lose the game and your opponents can't win the game" (Platinum Angel). `only: "zero-life"` is "you don't lose the game for having 0 or less life" (Lich's Tomb), which stops rule 704.5a's loss alone. See §6 *Winning and losing*.
-- `playerKeywords: ["hexproof" | "shroud"]` — "**You** have hexproof" (Shalai, Voice of Plenty; rule 702.11d) or "you have shroud" (Ivory Mask, 702.18), read as a target is checked (`playerHasKeyword`). In a `timed-static` it's "you gain shroud until end of turn" (Gilded Light). `targetsIgnoringHexproof: { object?, players?: "opponents", anyController? }` is "as though they didn't have hexproof" (Glaring Spotlight).
+- `playerKeywords: ["hexproof" | "shroud"]` — "**You** have hexproof" (Shalai, Voice of Plenty; rule 702.11d) or "you have shroud" (Ivory Mask, 702.18), read as a target is checked (`playerHasKeyword`). In a `timed-static` it's "you gain shroud until end of turn" (Gilded Light), or with `duration: "until-your-next-turn"` "you gain hexproof until your next turn" (Blossoming Calm). `targetsIgnoringHexproof: { object?, players?: "opponents", anyController? }` is "as though they didn't have hexproof" (Glaring Spotlight).
 - `playerProtection: { colors?, types?, filter?, chosenColor?, chosenCardType?, fromPlayers? }` —
   "**You** have protection from …" (rule 702.16b, c, e): its controller can't
   be targeted by a spell with the quality or an ability from a source with it,
