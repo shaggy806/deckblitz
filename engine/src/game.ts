@@ -36412,6 +36412,17 @@ export class Game {
       candidates.add(id);
       eminenceOnly.delete(id);
     }
+    // The cards that just left a graveyard, wherever they went: only their
+    // own "when this card is put into your hand from your graveyard"
+    // abilities, which look back to the graveyard (rule 603.10a — Golgari
+    // Brownscale).
+    const leftGraveyard = new Set<ObjectId>(
+      event.type === "cards-left-graveyard" ? event.objects.filter((id) => this.hasGraveyardTrigger(id)) : [],
+    );
+    for (const id of leftGraveyard) {
+      candidates.add(id);
+      eminenceOnly.delete(id);
+    }
     // Rule 603.10a: a leaves-the-battlefield ability looks back to just
     // before the event, so the permanents that left *together* with this one
     // — earlier in the same wrath or state-based sweep — still see it go,
@@ -36554,7 +36565,11 @@ export class Game {
         if (event === null) return;
         if (this.state.players[object.controller]?.hasLost === true) return;
         if (onlyEminence && ability.fromCommandZone !== true) return;
-        if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
+        if (leftGraveyard.has(id)) {
+          if (ability.fromGraveyard !== true || ability.trigger.on !== "leaves-graveyard" || ability.trigger.who !== "self") {
+            return;
+          }
+        } else if ((ability.fromGraveyard === true) !== graveyardOnly.has(id)) return;
         if ((ability.fromExile === true) !== exileOnly.has(id)) return;
         if (hauntOnly.has(id) !== (ability.trigger.on === "haunted-dies")) return;
         if ((ability.whileSuspended === true) !== suspendedOnly.has(id)) return;
@@ -39189,6 +39204,15 @@ export class Game {
           this.exileArrivals(spec, event.arrivals, self).length > 0
         );
       case "leaves-graveyard":
+        // Its own card leaving (Golgari Brownscale), wherever `to` says it
+        // went: looked back for in the trigger scan (`leftGraveyard`).
+        if (spec.who === "self") {
+          return (
+            event.type === "cards-left-graveyard" &&
+            event.objects.includes(self.id) &&
+            (spec.to === undefined || self.zone === spec.to)
+          );
+        }
         // One of those cards itself — a Teval reanimated along with others —
         // was in the graveyard, not on the battlefield, as they left (rule
         // 603.10a looks back to just before the move).

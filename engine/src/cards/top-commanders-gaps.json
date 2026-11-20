@@ -30,6 +30,7 @@
     "cost:alt-cost-waterbend",
     "cost:self-reduction-per-instant-sorcery-cast-this-turn",
     "condition:turn-history-that-player",
+    "trigger:self-put-into-hand-from-graveyard",
     "effect:colors-among-permanents-and-spells-cast",
     "effect:opponent-casts-exiled-free",
     "effect:delayed-trigger-next-untap-step",

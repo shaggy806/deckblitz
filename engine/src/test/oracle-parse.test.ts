@@ -24621,3 +24621,18 @@ describe("a land entering under an opponent's control, if that player had anothe
     });
   });
 });
+
+describe("its own card put into your hand from your graveyard (Golgari Brownscale)", () => {
+  it("reads a self leaves-graveyard trigger that works from the graveyard", () => {
+    const lizard = parseFace({
+      name: "Golgari Brownscale",
+      type_line: "Creature — Lizard",
+      oracle_text: "When this card is put into your hand from your graveyard, you gain 2 life.",
+      mana_cost: "{1}{G}{G}",
+      colors: ["G"],
+    }) as unknown as { complete: boolean; triggered: { trigger: unknown; fromGraveyard?: boolean }[] };
+    expect(lizard.complete).toBe(true);
+    expect(lizard.triggered[0].trigger).toEqual({ on: "leaves-graveyard", who: "self", to: "hand" });
+    expect(lizard.triggered[0].fromGraveyard).toBe(true);
+  });
+});

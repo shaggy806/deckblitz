@@ -2291,11 +2291,21 @@ export type TriggerKind =
        * `perCard` is the per-card form — "whenever a creature card leaves
        * your graveyard" (Syr Konrad, the Grim): once per matching card,
        * however many left together, each card the trigger object.
+       *
+       * `who: "self"` is the card's own leaving, on a `fromGraveyard`
+       * ability: Golgari Brownscale's "when this card is put into your hand
+       * from your graveyard, you gain 2 life" (`to: "hand"`). It looks back
+       * (rule 603.10a), so the card that just left is scanned for it
+       * wherever it went, that ability alone; `to` is where it went (a
+       * commander's owner sending it to the command zone instead, 903.9b,
+       * isn't a trip to the hand). The trigger object is the card.
        */
       readonly on: "leaves-graveyard";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
       readonly perCard?: boolean;
+      /** With `who: "self"`: the zone it was put into. */
+      readonly to?: ZoneType;
       /** The batched form's `{ triggerValue: true }`, in place of how many:
        * `"greatest-mana-value"` is the greatest mana value among the cards
        * that counted, each as it was in the graveyard (rule 603.10a; Amzu,

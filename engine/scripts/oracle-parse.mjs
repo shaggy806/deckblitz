@@ -2078,6 +2078,11 @@ export function parseTrigger(clause) {
     return [{ on: "becomes-tapped", who: "you-control", filter, batched: true }];
   }
   if (/^When(?:ever)? ~ enters$/.test(c)) return self("enters-battlefield");
+  // "When this card is put into your hand from your graveyard" (Golgari
+  // Brownscale): its own leaving, which looks back (rule 603.10a).
+  if ((m = /^When(?:ever)? (?:~|this card) is put into your (hand|library) from your graveyard$/.exec(c))) {
+    return [{ on: "leaves-graveyard", who: "self", to: m[1] }];
+  }
   // "Enter or attack" for a pair's name (Krang & Shredder, Aang and Katara).
   if (/^When(?:ever)? ~ (?:enters or attacks|enter or attack)$/.test(c)) return [...self("enters-battlefield"), ...self("attacks")];
   // Two abilities, one for each event (Gulping Scraptrap, Chaos Defiler).
@@ -20906,6 +20911,9 @@ function parseFaceAsWritten(face, ctx = {}) {
         effect: null,
         resolve: null,
         text: printed(raw),
+        // Its own card leaving the graveyard looks back to it there (rule
+        // 603.10a — Golgari Brownscale).
+        ...(parsedTriggers.every((t) => t.on === "leaves-graveyard" && t.who === "self") ? { fromGraveyard: true } : {}),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
         ...(timeCounterOk ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
