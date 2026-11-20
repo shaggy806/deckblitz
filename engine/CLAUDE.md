@@ -30,6 +30,15 @@ Read a file's entry before changing that file; you don't need the rest.
   (`withLeaveBatch`, `withGraveyardLeaveBatch`, `withEnterBatch`).
 - **`moveObject` is the single zone-transition function** and returns whether the move
   happened. It can defer a commander's move (903.9b) or refuse a card that can't enter.
+- **A player who has left the game still has permanents on the battlefield list.** Rule 800.4a
+  removes what they own; the engine leaves it where it was, to be seen, and inert (`Game.inGame`:
+  state-based actions skip it, `matchesFilter` finds none of it). So no scan may read a
+  permanent's static abilities straight from the registry: in `game.ts` they come through
+  `Game.ownStatics(object)` or `staticsOfSource`, which have none for such a permanent
+  (`test/left-game-statics.test.ts` holds the file to it, after Gisa, Glorious Resurrector went on
+  exiling creatures once its owner had lost), and a scan in another module skips a source whose
+  controller `hasLost`. One exception, inside `ownStatics`: what dies in the state-based check a
+  player loses in died in the same event (704.3), so their Rest in Peace still exiles it.
 - **Token stacks.** One `GameObject` with `stackCount` can stand for many identical tokens.
   **Anything that counts permanents counts a stack as every token in it** (`permanentCount`,
   `weightedMatches`). Anything that singles one token out splits it off first (`splitOneFromStack`,

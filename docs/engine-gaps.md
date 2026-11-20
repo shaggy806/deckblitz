@@ -6,6 +6,19 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A player's loss comes before the rest of its state-based check** (2026-11-19, found beside the
+  eliminated-player statics fix). Rule 704.3: the game checks every state-based condition, then performs all
+  that apply "simultaneously as a single event". `Game.runStateBasedActionsUncached` eliminates the players who
+  lose first (`eliminate` → `leaveGame`) and only then finds what goes to a graveyard
+  (`stateBasedGraveyardMoves`), so a continuous effect of the losing player's is already off when lethal damage
+  and zero toughness are read. Reproduction: three players, bob's Elesh Norn, Grand Cenobite, alice's Hill Giant
+  (1/1 under it); one effect deals bob 20 and the Giant 1; the next check eliminates bob and the Giant, 3/3
+  again with 1 damage, survives where it should be destroyed. Replacements are right since that fix: the moves
+  of the same check still read the losing player's statics (`lostInThisCheck`), so their Rest in Peace exiles
+  what died with them. Outline: find the graveyard moves before eliminating anyone, then eliminate, then
+  perform. What it risks: the moves found then include the losing players' own permanents and their legend-rule
+  choice (704.5j is asked before anything moves), which must be dropped rather than asked of a player who has
+  left, and a decision raised mid-sweep resumes the pass from the top with the losers already gone.
 - **A departing player's permanents don't trigger "leaves the battlefield"** (2026-11-17, the rules audit,
   `docs/plans/rules-audit-2026-11.md`). Rule 603.6c: leaves-the-battlefield abilities trigger "when a phased-in
   permanent leaves the game because its owner leaves the game". `Game.leaveGame` leaves what the player owned on

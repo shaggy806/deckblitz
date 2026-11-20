@@ -52,7 +52,8 @@ function landwalkIgnoredForBlocks(state: GameState, registry: CardRegistry): Set
     const out = new Set<Keyword>();
     for (const id of state.zones.shared.battlefield) {
       const source = state.objects[id];
-      if (source === undefined || hasLostAbilities(state, registry, source)) continue;
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      if (hasLostAbilities(state, registry, source)) continue;
       for (const ability of registry.get(rulesTextName(source)).static) {
         if (ability.blockableDespiteLandwalk === undefined) continue;
         if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;

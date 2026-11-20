@@ -912,6 +912,8 @@ interface DamageApplied {
   readonly shields: readonly ActiveReplacement[];
 }
 const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
+/** What a permanent that has left the game says (`Game.ownStatics`). */
+const NO_STATICS: readonly StaticAbility[] = [];
 
 /** The `permanent-destroyed` reasons that are destructions (rule 701.8b): a
  * "destroy" effect's, the lethal-damage and deathtouch state-based actions'
@@ -2994,6 +2996,12 @@ export class Game {
    * anywhere in it (rule 800.4a). Not game state: it spans one synchronous
    * call. */
   private departing: PlayerId | null = null;
+  /** The players the state-based check under way eliminated, while that
+   * check's moves to graveyards are made: one event with their loss (rule
+   * 704.3), so those moves are still replaced and watched by what the
+   * players' permanents say (`textInGame`). Not game state: it spans one
+   * synchronous call. */
+  private lostInThisCheck: ReadonlySet<PlayerId> | null = null;
 
   /** The cards that have left a graveyard so far in the one simultaneous
    * move being carried out — a whole graveyard exiled, the cards a choice
@@ -7071,7 +7079,7 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (source === undefined) continue;
-        for (const ability of this.registry.get(rulesTextName(source)).static) {
+        for (const ability of this.ownStatics(source)) {
           const grant = ability.grantsToSpells;
           if (grant === undefined || (grant.convoke !== true && grant.improvise !== true)) continue;
           if ((convoke || grant.convoke !== true) && (improvise || grant.improvise !== true)) continue;
@@ -10554,7 +10562,7 @@ export class Game {
    * begin: nearly always not, which the next two needn't then work out. */
   private anyTurnBeginReplacement(): boolean {
     for (const id of this.state.zones.shared.battlefield) {
-      if (this.registry.get(rulesTextName(this.state.objects[id])).static.some((s) => s.replacement?.event === "would-begin-turn")) {
+      if (this.ownStatics(this.state.objects[id]).some((s) => s.replacement?.event === "would-begin-turn")) {
         return true;
       }
     }
@@ -10570,7 +10578,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         const spec = ability.replacement;
         if (spec?.event !== "would-begin-turn" || !this.staticActive(object, ability)) continue;
         if (spec.extraOnly === true && !isExtra) continue;
@@ -11918,7 +11926,7 @@ export class Game {
       const source = this.state.objects[id];
       if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
       if (this.state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const { untapLimit, untapOnlyChosenType } = ability;
         if (untapLimit === undefined && untapOnlyChosenType === undefined) continue;
         if (!this.staticActive(source, ability)) continue;
@@ -12100,9 +12108,7 @@ export class Game {
       return true;
     }
     if (hasLostAbilities(this.state, this.registry,object)) return false;
-    return this.registry
-      .get(rulesTextName(object))
-      .static.some((ability) => test(ability) && this.staticActive(object, ability));
+    return this.ownStatics(object).some((ability) => test(ability) && this.staticActive(object, ability));
   }
 
   /** Whether a permanent untaps during a player's untap step other than its
@@ -12125,7 +12131,7 @@ export class Game {
       const granter = this.state.objects[id];
       if (granter === undefined || granter.controller !== object.controller) return false;
       if (hasLostAbilities(this.state, this.registry,granter)) return false;
-      return this.registry.get(rulesTextName(granter)).static.some((ability) => {
+      return this.ownStatics(granter).some((ability) => {
         const filter = ability.untapsDuringOthersUntap;
         return (
           filter !== undefined &&
@@ -12145,7 +12151,7 @@ export class Game {
       if (source === undefined || hasLostAbilities(this.state, this.registry, source) || this.state.players[source.controller]?.hasLost === true) {
         continue;
       }
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const rule = ability.skipsSteps;
         if (rule === undefined || !rule.steps.includes(step)) continue;
         const reaches = rule.who === "each-player" || (rule.who === "you") === (player === source.controller);
@@ -12205,7 +12211,7 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
-        for (const ability of this.registry.get(rulesTextName(source)).static) {
+        for (const ability of this.ownStatics(source)) {
           if (ability.drawsInOpponentsDrawStep === true && this.staticActive(source, ability)) draws += 1;
         }
       }
@@ -12235,7 +12241,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const type = ability.unspentManaBecomes;
         if (type === undefined || !this.staticActive(source, ability)) continue;
         if (found === null || source.timestamp > found.timestamp) found = { type, timestamp: source.timestamp };
@@ -12261,7 +12267,7 @@ export class Game {
       const source = this.state.objects[id];
       if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
       if (this.state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.manaLossCausesLifeLoss === true && this.staticActive(source, ability)) times += source.stackCount ?? 1;
       }
     }
@@ -12276,7 +12282,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.keepsUnspentMana === undefined || !this.staticActive(source, ability)) continue;
         if (source.controller !== player && ability.keepsUnspentManaEachPlayer !== true) continue;
         for (const type of ability.keepsUnspentMana) out.add(type);
@@ -14499,7 +14505,7 @@ export class Game {
       grantedStatics(this.state, this.registry, object).filter(live).length +
       (hasLostAbilities(this.state, this.registry, object)
         ? 0
-        : this.registry.get(rulesTextName(object)).static.filter(live).length)
+        : this.ownStatics(object).filter(live).length)
     );
   }
 
@@ -16403,7 +16409,7 @@ export class Game {
       const source = this.state.objects[id];
       if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
       if (this.state.players[source.controller]?.hasLost !== false) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const grant = ability.grantsToHand;
         if (grant === undefined || (source.controller !== card.owner && grant.eachPlayer !== true)) continue;
         if (!this.staticActive(source, ability)) continue;
@@ -16451,7 +16457,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.grantsToSpells?.keywordValues !== undefined) add(source, ability);
       }
     }
@@ -17557,7 +17563,7 @@ export class Game {
   private discardAsEntering(id: ObjectId, player: PlayerId, cards: readonly ObjectId[]): void {
     const entering = this.state.objects[id];
     let listed: readonly Keyword[] = [];
-    for (const r of this.registry.get(rulesTextName(entering)).static) {
+    for (const r of this.ownStatics(entering)) {
       const kinds = r.replacement?.event === "enters-battlefield" ? r.replacement.asEnters?.discard?.keywordCounters : undefined;
       if (kinds !== undefined) listed = kinds;
     }
@@ -18840,7 +18846,7 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         const object = this.state.objects[id];
         if (object === undefined) continue;
-        for (const ability of this.registry.get(rulesTextName(object)).static) see(ability);
+        for (const ability of this.ownStatics(object)) see(ability);
         for (const modifier of object.modifiers) for (const ability of modifier.grantsStatic ?? []) see(ability);
       }
       return { any, mana };
@@ -18852,7 +18858,7 @@ export class Game {
   private targetedCostStatics(object: GameObject): readonly StaticAbility[] {
     const own = hasLostAbilities(this.state, this.registry, object)
       ? []
-      : this.registry.get(rulesTextName(object)).static;
+      : this.ownStatics(object);
     const granted = grantedStatics(this.state, this.registry, object);
     return granted.length === 0 ? own : [...own, ...granted];
   }
@@ -19695,7 +19701,7 @@ export class Game {
         const object = this.state.objects[id];
         return (
           object !== undefined &&
-          this.registry.get(rulesTextName(object)).static.some((a) => a.costModification !== undefined && isTargetKeyed(a.costModification))
+          this.ownStatics(object).some((a) => a.costModification !== undefined && isTargetKeyed(a.costModification))
         );
       }),
     );
@@ -20626,7 +20632,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const s = ability.suppressEntryTriggers;
         if (s === undefined || !this.staticActive(source, ability)) continue;
         const who = typeof s === "string" ? s : s.who;
@@ -20658,7 +20664,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const s = ability.suppressEntryTriggers;
         if (typeof s !== "object" || s.dying === undefined || !this.staticActive(source, ability)) continue;
         live.push({ controller: source.controller, who: s.who, dying: s.dying });
@@ -20743,7 +20749,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const filter = ability.suppressWardTriggers;
         if (filter === undefined || !this.staticActive(source, ability)) continue;
         if (matchesFilter(this.state, this.registry, permanent, filter, { you: source.controller, source: id })) return true;
@@ -20757,7 +20763,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source.controller !== controller || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const d = ability.doubleEntryTriggers;
         if (d === undefined) continue;
         if (!this.staticActive(source, ability)) continue;
@@ -22856,9 +22862,7 @@ export class Game {
     return this.state.zones.shared.battlefield.some((id) => {
       const o = this.state.objects[id];
       if (o === undefined || o.controller !== player || hasLostAbilities(this.state, this.registry, o)) return false;
-      return this.registry
-        .get(rulesTextName(o))
-        .static.some((s) => s.assistFirstSpellOfYourTurns === true && this.staticActive(o, s));
+      return this.ownStatics(o).some((s) => s.assistFirstSpellOfYourTurns === true && this.staticActive(o, s));
     });
   }
 
@@ -25646,7 +25650,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const n = ability.grantsToSpells?.casualty;
         if (n !== undefined && spellGrantReaches(this.state, this.registry, source, ability, spell)) amounts.push(n);
       }
@@ -25949,7 +25953,7 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.grantsToSpells?.conspire === true && spellGrantReaches(this.state, this.registry, source, ability, spell)) {
           instances += 1;
         }
@@ -26496,7 +26500,7 @@ export class Game {
       // A source that lost its abilities grants nothing, but for a static
       // with a layer-4 part (rule 613.6 — see `activatedGrantSources`).
       const lost = hasLostAbilities(this.state, this.registry,source);
-      this.registry.get(rulesTextName(source)).static.forEach((ability, staticIndex) => {
+      this.ownStatics(source).forEach((ability, staticIndex) => {
         if (lost && !hasLayerFourPart(ability)) return;
         // One that works only from a graveyard does nothing here (rule 113.6b).
         if (ability.fromGraveyard === true) return;
@@ -26715,7 +26719,7 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (source === undefined) continue;
-        this.registry.get(rulesTextName(source)).static.forEach((ability, staticIndex) => {
+        this.ownStatics(source).forEach((ability, staticIndex) => {
           if (ability.grantsToSpells?.triggered === undefined) return;
           const amount = this.filterAmounts({ source: source.id, controller: source.controller });
           if (spellGrantReaches(this.state, this.registry, source, ability, target, amount)) {
@@ -26773,7 +26777,7 @@ export class Game {
       // applying in the later layers (rule 613.6), its grants going against
       // the loss in timestamp order (Goddric, Cloaked Reveler's ruling).
       const lost = hasLostAbilities(this.state, this.registry,source);
-      this.registry.get(rulesTextName(source)).static.forEach((ability, staticIndex) => {
+      this.ownStatics(source).forEach((ability, staticIndex) => {
         if (lost && !hasLayerFourPart(ability)) return;
         // One that works only from a graveyard does nothing here (rule 113.6b).
         if (ability.fromGraveyard === true) return;
@@ -26800,7 +26804,7 @@ export class Game {
       for (const id of this.state.zones.perPlayer[player]?.graveyard ?? []) {
         const source = this.state.objects[id];
         if (source === undefined || !this.registry.has(rulesTextName(source))) continue;
-        this.registry.get(rulesTextName(source)).static.forEach((ability, staticIndex) => {
+        this.ownStatics(source).forEach((ability, staticIndex) => {
           if (ability.fromGraveyard !== true || ability.grantsActivated === undefined) return;
           out.push({ source, ability, staticIndex, abilities: ability.grantsActivated });
         });
@@ -31479,7 +31483,7 @@ export class Game {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== object.controller) return false;
       if (hasLostAbilities(this.state, this.registry, source)) return false;
-      return this.registry.get(rulesTextName(source)).static.some(
+      return this.ownStatics(source).some(
         (ability) =>
           ability.activateAsThoughHaste !== undefined &&
           this.staticActive(source, ability) &&
@@ -31543,7 +31547,7 @@ export class Game {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player) return false;
       if (hasLostAbilities(this.state, this.registry, source)) return false;
-      return this.registry.get(rulesTextName(source)).static.some((ability) => which(ability) && this.staticActive(source, ability));
+      return this.ownStatics(source).some((ability) => which(ability) && this.staticActive(source, ability));
     });
     if (onBattlefield || this.state.emblems.length === 0) return onBattlefield;
     return emblemStatics(this.state, player).some(({ source, ability }) => which(ability) && this.staticActive(source, ability));
@@ -31762,7 +31766,7 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
-        for (const ability of this.registry.get(rulesTextName(source)).static) {
+        for (const ability of this.ownStatics(source)) {
           if (ability.payLifeForPips !== undefined && this.staticActive(source, ability) && !found.includes(ability.payLifeForPips)) {
             found.push(ability.payLifeForPips);
           }
@@ -31788,7 +31792,7 @@ export class Game {
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
         if (hasLostAbilities(this.state, this.registry,source)) continue;
-        for (const ability of this.registry.get(rulesTextName(source)).static) {
+        for (const ability of this.ownStatics(source)) {
           if (ability.spendManaAs !== undefined && (source.controller === player || ability.spendManaAs.everyone === true) && this.staticActive(source, ability)) {
             found.push({ ...ability.spendManaAs, from: id });
           }
@@ -49857,7 +49861,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.votesAdditionalTime !== true && ability.getsAdditionalVote !== true) continue;
         if (!this.staticActive(source, ability)) continue;
         if (ability.votesAdditionalTime === true) may += source.stackCount ?? 1;
@@ -51605,7 +51609,7 @@ controlledBy,
     for (const sourceId of this.state.zones.shared.battlefield) {
       const source = this.state.objects[sourceId];
       if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const how = ability.stationsByToughness;
         if (how === undefined || !this.staticActive(source, ability)) continue;
         if (live) {
@@ -51638,7 +51642,7 @@ controlledBy,
     const out = { byToughness: false, times: 1, plus: 0 };
     const object = this.state.objects[id];
     if (object === undefined || hasLostAbilities(this.state, this.registry, object)) return out;
-    for (const ability of this.registry.get(rulesTextName(object)).static) {
+    for (const ability of this.ownStatics(object)) {
       const crews = ability.crewsAs;
       if (crews === undefined || ability.affects.scope !== "self") continue;
       if (keyword === "saddle" && crews.saddles !== true) continue;
@@ -51864,7 +51868,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.spellsHaveDelve === true && this.staticActive(source, ability)) return true;
       }
     }
@@ -52214,7 +52218,7 @@ controlledBy,
         const source = this.state.objects[id];
         return (
           source !== undefined &&
-          this.registry.get(rulesTextName(source)).static.some((ability) => ability.grantKeywords?.includes(keyword) === true)
+          this.ownStatics(source).some((ability) => ability.grantKeywords?.includes(keyword) === true)
         );
       }),
     );
@@ -52333,7 +52337,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const by = this.state.objects[id];
       if (by.controller !== controller || hasLostAbilities(this.state, this.registry, by)) continue;
-      for (const ability of this.registry.get(rulesTextName(by)).static) {
+      for (const ability of this.ownStatics(by)) {
         const r = ability.replacement;
         if (r?.event !== "would-create-token" || (r.firstEachTurn === true && !first)) continue;
         // Jinnie Fay's "you may instead create that many Cats or Dogs": the
@@ -52453,7 +52457,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, object)) continue;
-      const statics = this.registry.get(rulesTextName(object)).static;
+      const statics = this.ownStatics(object);
       for (let i = 0; i < statics.length; i++) {
         const r = statics[i].replacement;
         if (r?.event !== "would-create-token" || !this.staticActive(object, statics[i])) continue;
@@ -53686,7 +53690,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.replacement?.event === "would-copy-spell" && this.staticActive(source, ability)) {
           additional += this.replacementAmount(ability.replacement.instead.modify.plus ?? 0, source);
         }
@@ -55526,7 +55530,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const flash = ability.castAsThoughFlash;
         if (flash === undefined) continue;
         if (source.controller !== player && ability.castAsThoughFlashAnyPlayer !== true) continue;
@@ -56932,7 +56936,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.replacement?.event === "would-proliferate" && this.staticActive(source, ability)) {
           times = Math.min(times * (ability.replacement.instead.modify.times ?? 1), Game.MAX_EFFECT_INSTANCES);
         }
@@ -56973,7 +56977,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const replacement = ability.replacement;
         if (replacement?.event !== "would-explore" || !this.staticActive(source, ability)) continue;
         const read = { you: source.controller, source: id, ...(ceased !== undefined ? { snapshot: ceased } : { lastKnown: true }) };
@@ -59171,7 +59175,7 @@ controlledBy,
     if ((object.regenerationShields ?? 0) > 0) return true;
     return (
       !hasLostAbilities(this.state, this.registry, object) &&
-      this.registry.get(rulesTextName(object)).static.some((ability) => ability.regeneratesInstead === true && this.staticActive(object, ability))
+      this.ownStatics(object).some((ability) => ability.regeneratesInstead === true && this.staticActive(object, ability))
     );
   }
 
@@ -59202,9 +59206,7 @@ controlledBy,
     const byStatic =
       object !== undefined &&
       !hasLostAbilities(this.state, this.registry, object) &&
-      this.registry
-        .get(rulesTextName(object))
-        .static.some((ability) => ability.regeneratesInstead === true && this.staticActive(object, ability));
+      this.ownStatics(object).some((ability) => ability.regeneratesInstead === true && this.staticActive(object, ability));
     if (shields <= 0 && !byStatic) return false;
     // "It can't be regenerated this turn" (rule 701.19c): its shields aren't
     // applied, and stay until cleanup.
@@ -60652,7 +60654,7 @@ controlledBy,
     const fails = (ability: StaticAbility): boolean =>
       ability.attachOnlyTo !== undefined &&
       !matchesFilter(this.state, this.registry, host, ability.attachOnlyTo, { you: object.controller, source: id });
-    if (object.zone !== "battlefield") return !this.registry.get(rulesTextName(object)).static.some(fails);
+    if (object.zone !== "battlefield") return !this.ownStatics(object).some(fails);
     return !this.hasOwnStatic(object, fails);
   }
 
@@ -60977,7 +60979,7 @@ controlledBy,
         const source = this.state.objects[other];
         // A face-down permanent has no text (rule 708.2a).
         if (source === undefined || source.faceDown !== undefined || hasLostAbilities(this.state, this.registry, source)) continue;
-        for (const ability of this.registry.get(rulesTextName(source)).static) {
+        for (const ability of this.ownStatics(source)) {
           if (ability.morphCostIncrease !== undefined && this.staticActive(source, ability)) more += ability.morphCostIncrease;
         }
       }
@@ -63206,7 +63208,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== controller || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (pick(ability) && this.staticActive(source, ability)) out.push({ source, ability });
       }
     }
@@ -63228,15 +63230,47 @@ controlledBy,
     return emblems.length === 0 ? battlefield : [...battlefield, ...emblems];
   }
 
+  /**
+   * Whether what's printed on `object` is part of the game: not once its
+   * owner or its controller has left it. Rule 800.4a takes everything such a
+   * player owns out of the game; the engine leaves a permanent of theirs
+   * where it was, to be seen (`inGame`), so each read of its text has to
+   * find nothing. A bug report, 2026-11-19: Gisa, Glorious Resurrector went
+   * on exiling dying creatures two turns after its owner had lost, and a
+   * World Shaper token never died.
+   *
+   * One exception, for as long as a state-based check's moves take
+   * (`lostInThisCheck`): a player that check eliminated lost in the same
+   * event as what it put into graveyards (rule 704.3), so their Rest in
+   * Peace still exiles what died with them.
+   */
+  private textInGame(object: GameObject): boolean {
+    if (this.inGame(object)) return true;
+    const lost = this.lostInThisCheck;
+    if (lost === null) return false;
+    const there = (player: PlayerId): boolean => this.state.players[player]?.hasLost !== true || lost.has(player);
+    return there(object.owner) && there(object.controller);
+  }
+
+  /** The static abilities of `object`'s own text, as every scan reads them —
+   * never the registry itself, which still has the text of a permanent that
+   * has left the game ({@link textInGame}; `test/left-game-statics.test.ts`
+   * holds this file to it). {@link staticsOfSource} adds those granted it. */
+  private ownStatics(object: GameObject): readonly StaticAbility[] {
+    return this.textInGame(object) ? this.registry.get(rulesTextName(object)).static : NO_STATICS;
+  }
+
   /** The static abilities an object of {@link staticSourceIds} has: a
    * permanent's text, then those granted it (`grantedStatics` — Caduceus,
    * Staff of Hermes's equipped creature's "Prevent all damage that would be
    * dealt to this creature", working from that creature, rule 113.10), or an
    * emblem's (`EmblemState`, not its definition). So every scan through here
    * — damage replacements and prevention, cost modifications, play
-   * permissions, prohibitions — reads a granted static as its own. */
+   * permissions, prohibitions — reads a granted static as its own. None of
+   * either for a permanent that has left the game ({@link textInGame}). */
   private staticsOfSource(source: GameObject): readonly StaticAbility[] {
     if (source.kind !== "emblem") {
+      if (!this.textInGame(source)) return NO_STATICS;
       const own = this.registry.get(rulesTextName(source)).static;
       const granted = grantedStatics(this.state, this.registry, source);
       return granted.length === 0 ? own : [...own, ...granted];
@@ -63591,7 +63625,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller === caster) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.alternativeCostForSpells?.anyPlayer !== true) continue;
         if (this.state.players[source.controller]?.hasLost !== false) continue;
         if (hasLostAbilities(this.state, this.registry, source) || !this.staticActive(source, ability)) continue;
@@ -64503,7 +64537,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || object.controller !== player || hasLostAbilities(this.state, this.registry, object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         if (ability.replacement?.event === "would-counter-spell" && this.staticActive(object, ability)) return true;
       }
     }
@@ -65099,7 +65133,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || object.controller !== player || hasLostAbilities(this.state, this.registry, object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         const r = ability.replacement;
         if (r?.event !== "would-discard" || (r.causedBy === "opponent" && cause === player)) continue;
         if (!this.staticActive(object, ability)) continue;
@@ -65949,7 +65983,7 @@ controlledBy,
       // its own as `staticsOfSource` lists them.
       const lost = hasLostAbilities(this.state, this.registry, object);
       const statics = lost ? grantedStatics(this.state, this.registry, object) : this.staticsOfSource(object);
-      const from = lost ? this.registry.get(rulesTextName(object)).static.length : 0;
+      const from = lost ? this.ownStatics(object).length : 0;
       statics.forEach((ability, i) => {
         const r = ability.replacement;
         if (r === undefined || r.event !== "would-deal-damage") return;
@@ -66811,7 +66845,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         const rule = ability.damageCantBePrevented;
         if (rule === undefined || !this.staticActive(object, ability)) continue;
         if (rule.combat === true && !combat) continue;
@@ -67347,7 +67381,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         const as = ability.damageAsThoughSourceHad;
         if (as?.keyword !== keyword) continue;
         if (as.to === "you" && toPlayer !== object.controller) continue;
@@ -68659,7 +68693,7 @@ controlledBy,
       if (aura?.chosenCopy === undefined || aura.attachedTo == null) continue;
       const host = this.state.objects[aura.attachedTo];
       if (host?.zone !== "battlefield") continue;
-      if (!this.registry.get(rulesTextName(aura)).static.some((ability) => ability.copyOfChosen === true)) continue;
+      if (!this.ownStatics(aura).some((ability) => ability.copyOfChosen === true)) continue;
       const stint = aura.zoneChangeCount ?? 0;
       const hostStint = host.zoneChangeCount ?? 0;
       const ours = (ends: CopyEnds): boolean =>
@@ -68734,6 +68768,8 @@ controlledBy,
       // engines! and has no speed gets a speed of 1.
       if (this.startEngines()) changed = true;
 
+      // Who this check eliminates, for the moves it makes (`lostInThisCheck`).
+      const lostNow: PlayerId[] = [];
       for (const player of this.state.turnOrder) {
         const playerState = this.state.players[player];
         if (playerState.hasLost) continue;
@@ -68763,7 +68799,10 @@ controlledBy,
         // Each way of losing can be replaced ("if you would lose the game,
         // instead …", rule 614.6); the next pass sees what it changed.
         if (reason !== null && !playerCantLoseGame(this.state, this.registry, player)) {
-          if (!this.loseGameReplaced(player, reason)) this.eliminate(player, reason);
+          if (!this.loseGameReplaced(player, reason)) {
+            this.eliminate(player, reason);
+            lostNow.push(player);
+          }
           changed = true;
         }
       }
@@ -68830,24 +68869,33 @@ controlledBy,
       // Equipment (702.16d). One on a permanent that's leaving is seen below.
       if (sweep.length > 0 && this.unattachIllegalEquipment(new Set(sweep.map((m) => m.id)))) changed = true;
       if (sweep.length > 0) {
-        this.withLeaveBatch(() => {
-          this.snapshotLeaving(sweep.map((m) => m.id));
-          for (const { id, event } of sweep) {
-            if (this.state.objects[id]?.zone !== "battlefield") continue;
-            // Who sacrifices a completed Saga: its controller (rule 714.4),
-            // read before the move hands it back to its owner.
-            const controller = this.state.objects[id].controller;
-            const announce: GameEventInput[] = [event];
-            if (event.type === "saga-completed") {
-              announce.push({ type: "permanent-sacrificed", object: id, player: controller });
+        // A player this check eliminated lost in one event with these moves
+        // (rule 704.3), so what their permanents say still replaces and
+        // watches them: Rest in Peace exiles what died with its controller
+        // (`textInGame`). Only these moves; the next check finds it gone.
+        this.lostInThisCheck = lostNow.length > 0 ? new Set(lostNow) : null;
+        try {
+          this.withLeaveBatch(() => {
+            this.snapshotLeaving(sweep.map((m) => m.id));
+            for (const { id, event } of sweep) {
+              if (this.state.objects[id]?.zone !== "battlefield") continue;
+              // Who sacrifices a completed Saga: its controller (rule 714.4),
+              // read before the move hands it back to its owner.
+              const controller = this.state.objects[id].controller;
+              const announce: GameEventInput[] = [event];
+              if (event.type === "saga-completed") {
+                announce.push({ type: "permanent-sacrificed", object: id, player: controller });
+              }
+              // A move an optional replacement makes wait announces these once
+              // it's made.
+              if (!this.moveAnnouncing(id, announce)) continue;
+              for (const one of announce) this.emit(one);
+              changed = true;
             }
-            // A move an optional replacement makes wait announces these once
-            // it's made.
-            if (!this.moveAnnouncing(id, announce)) continue;
-            for (const one of announce) this.emit(one);
-            changed = true;
-          }
-        });
+          });
+        } finally {
+          this.lostInThisCheck = null;
+        }
         delete this.state.legendRuleKeeps;
         if (this.state.awaiting !== null) return;
       }
@@ -70303,7 +70351,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source) || source.controller !== player) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const r = ability.replacement;
         if (r?.event !== "would-draw" || r.who !== "you") continue;
         const set = insteadModify(r.instead)?.set;
@@ -70323,7 +70371,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry, source) || source.controller !== player) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const r = ability.replacement;
         if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object" || !("modify" in r.instead)) continue;
         if (r.instead.also === undefined || r.instruction !== undefined) continue;
@@ -70539,7 +70587,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const r = ability.replacement;
         if (r?.event !== "would-draw" || r.instead !== "win-game" || r.who !== "you") continue;
         if (r.whileLibraryEmpty === true && this.staticActive(source, ability)) return source;
@@ -70642,7 +70690,7 @@ controlledBy,
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source) || source.controller === player) continue;
       if ((applied.get(id) ?? 0) >= (source.stackCount ?? 1)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const r = ability.replacement;
         if (r?.event !== "would-draw" || r.who !== "opponent" || r.instead !== "you-draw") continue;
         if (r.exceptFirstInDrawStep === true && firstInDrawStep) continue;
@@ -70726,7 +70774,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.revealsFirstDrawEachTurn === true && this.staticActive(source, ability)) return true;
       }
     }
@@ -70739,7 +70787,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.drawsFromBottom === "you" && this.staticActive(source, ability)) return true;
       }
     }
@@ -70752,7 +70800,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source?.chosenPlayer !== player || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.revealsDraws === "chosen-player" && this.staticActive(source, ability)) return true;
       }
     }
@@ -71137,7 +71185,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         if (ability.replacement?.event === "others-enter-battlefield" && ability.replacement.asCopyOf !== undefined) return true;
       }
     }
@@ -71163,7 +71211,7 @@ controlledBy,
       const source = this.state.objects[sourceId];
       if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
       if (this.state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.ownStatics(source)) {
         const r = ability.replacement;
         if (r?.event !== "others-enter-battlefield" || r.asCopyOf === undefined || typeof r.asCopyOf === "object") continue;
         if (!this.staticActive(source, ability) || !reaches(r.filter, source.controller, sourceId)) continue;
@@ -71521,7 +71569,7 @@ controlledBy,
       for (const cardId of this.state.zones.perPlayer[player]?.graveyard ?? []) {
         const card = this.state.objects[cardId];
         if (card === undefined || !this.registry.has(rulesTextName(card))) continue;
-        if (!this.registry.get(rulesTextName(card)).static.some((a) => a.fromGraveyard === true && a.replacement !== undefined)) continue;
+        if (!this.ownStatics(card).some((a) => a.fromGraveyard === true && a.replacement !== undefined)) continue;
         enterSources.push({ source: card, you: player, fromGraveyard: true });
       }
     }
@@ -71534,7 +71582,7 @@ controlledBy,
       if (this.state.players[you]?.hasLost === true) continue;
       // Its own statics and those granted it (Master Chef's commander has
       // "other creatures you control enter with an additional +1/+1 counter").
-      const printedStatics = this.registry.get(rulesTextName(source)).static;
+      const printedStatics = this.ownStatics(source);
       const granted = fromGraveyard
         ? []
         : grantedStatics(this.state, this.registry, source, (a) => a.replacement?.event === "others-enter-battlefield");
@@ -71751,10 +71799,10 @@ controlledBy,
       for (const id of this.state.zones.shared.battlefield) {
         const holder = this.state.objects[id];
         if (holder === undefined) continue;
-        const definition = this.registry.get(rulesTextName(holder));
-        if (definition.static.every((ability) => ability.manaProduction === undefined)) continue;
+        const statics = this.ownStatics(holder);
+        if (statics.every((ability) => ability.manaProduction === undefined)) continue;
         if (hasLostAbilities(this.state, this.registry, holder)) continue;
-        for (const ability of definition.static) {
+        for (const ability of statics) {
           if (ability.manaProduction === undefined || !this.staticActive(holder, ability)) continue;
           for (const rule of ability.manaProduction) {
             held.push({ rule, you: holder.controller, holder: holder.id, timestamp: holder.timestamp });
@@ -71837,7 +71885,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         const r = ability.replacement;
         if (
           r?.event === "would-create-token" &&
@@ -72001,7 +72049,7 @@ controlledBy,
       (!asCost && r.byKeywordAbility === (placing === null ? (placing = this.keywordAbilityResolving()) : placing));
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
-      const statics = this.registry.get(rulesTextName(object)).static;
+      const statics = this.ownStatics(object);
       for (let index = 0; index < statics.length; index += 1) {
         const ability = statics[index];
         const r = ability.replacement;
@@ -72094,7 +72142,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         const r = ability.replacement;
         if (
           r?.event !== "would-be-put-into-graveyard" ||
@@ -72185,7 +72233,7 @@ controlledBy,
     // Its own text: a static's `self` reaches the object it's on, from
     // whichever zone it has the ability in.
     if (!hasLostAbilities(this.state, this.registry, object)) {
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      for (const ability of this.ownStatics(object)) {
         const r = ability.replacement;
         // An optional one ("you may …") is asked before the move
         // (`optionalGraveyardInstead`), not taken here.
@@ -72204,7 +72252,7 @@ controlledBy,
     for (const id of this.state.zones.shared.battlefield) {
       const by = this.state.objects[id];
       if (by === undefined || hasLostAbilities(this.state, this.registry, by)) continue;
-      for (const ability of this.registry.get(rulesTextName(by)).static) {
+      for (const ability of this.ownStatics(by)) {
         const r = ability.replacement;
         if (r?.event !== "would-be-put-into-graveyard" || r.self === true || r.instead === "exile") continue;
         if (r.from === "battlefield" && object.zone !== "battlefield") continue;
@@ -72218,7 +72266,7 @@ controlledBy,
 
   private exilesItselfInstead(object: GameObject): boolean {
     if (hasLostAbilities(this.state, this.registry,object)) return false;
-    return this.registry.get(rulesTextName(object)).static.some((ability) => {
+    return this.ownStatics(object).some((ability) => {
       const r = ability.replacement;
       return (
         r?.event === "would-be-put-into-graveyard" &&
@@ -72261,7 +72309,7 @@ controlledBy,
     const instead = (ability: StaticAbility): PendingOptionalGraveyardMove["instead"] =>
       (ability.replacement as GraveyardExileReplacement).instead;
     if (!hasLostAbilities(this.state, this.registry, object)) {
-      const own = this.registry.get(rulesTextName(object)).static.find((a) => optional(a) && this.staticActive(object, a));
+      const own = this.ownStatics(object).find((a) => optional(a) && this.staticActive(object, a));
       if (own !== undefined) return { instead: instead(own), source: object.id };
     }
     const granted = grantedStatics(this.state, this.registry, object, optional).find(
@@ -72270,7 +72318,7 @@ controlledBy,
     if (granted !== undefined) {
       // The permanent whose static grants it, for the question to name.
       const by = this.state.zones.shared.battlefield.find((id) =>
-        this.registry.get(rulesTextName(this.state.objects[id])).static.some((s) => s.grantsStatic?.includes(granted) === true),
+        this.ownStatics(this.state.objects[id]).some((s) => s.grantsStatic?.includes(granted) === true),
       );
       return { instead: instead(granted), source: by ?? object.id };
     }
