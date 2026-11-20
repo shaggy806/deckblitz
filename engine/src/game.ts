@@ -41020,7 +41020,13 @@ export class Game {
     if (x !== undefined) this.state.objects[abilityId].xValue = x;
     // A static-granted trigger names its granter as it triggered (201.5a).
     const granter = granterOfRef(grantedAbility);
-    const refs = granter === undefined ? lastKnownRefs : { ...lastKnownRefs, granter };
+    let refs = granter === undefined ? lastKnownRefs : { ...lastKnownRefs, granter };
+    // What its source was attached to as it triggered ("attached-as-triggered").
+    const hostId = this.state.objects[sourceId]?.zone === "battlefield" ? this.state.objects[sourceId].attachedTo : null;
+    const host = hostId === null ? undefined : this.state.objects[hostId];
+    if (refs?.attachedHost === undefined && host !== undefined && host.zone === "battlefield") {
+      refs = { ...refs, attachedHost: { object: host.id, zoneChangeCount: host.zoneChangeCount ?? 0 } };
+    }
     if (refs !== undefined) this.state.objects[abilityId].lastKnownRefs = refs;
     if (autoTargetSlots.length > 0) {
       this.state.objects[abilityId].autoTargetSlots = [...autoTargetSlots];
@@ -42296,6 +42302,15 @@ export class Game {
             this.dealDamage(by.id, { kind: "player", player: p }, amountFor(p), false, by.lastKnown);
           }
         });
+      },
+      attachedAsTriggered: (read) => {
+        const host = refs.attachedHost;
+        if (host === undefined) return undefined;
+        const target: TargetRef = { kind: "object", object: host.object };
+        if (read === true) return target;
+        // Gone since: a new object (rule 400.7).
+        const object = this.state.objects[host.object];
+        return object?.zone === "battlefield" && (object.zoneChangeCount ?? 0) === host.zoneChangeCount ? target : undefined;
       },
       triggerRecipient: (read) => {
         const recipient = refs.recipient;
@@ -44374,7 +44389,7 @@ export class Game {
           rememberExiledOn: object.id,
         };
       },
-      fight: (a, b, oneSided) => this.fightCreatures(a, b, oneSided),
+      fight: (a, b, oneSided, byToughness) => this.fightCreatures(a, b, oneSided, byToughness === true),
       couldEnterBattlefield: (card, under) => this.couldEnterBattlefield(card, under),
       counterSpell: (target, into, lockSource, timeCounters) =>
         this.counterSpellByEffect(target, into, lockSource === true, controller, timeCounters, source),
@@ -65154,22 +65169,35 @@ controlledBy,
   /** Two creatures fight (rule 701.12): each deals damage equal to its power to
    * the other, unless `oneSided` (Rabid Bite — only `a` deals). Whichever is
    * already gone deals/takes nothing. */
-  private fightCreatures(a: TargetRef, b: TargetRef, oneSided: boolean): void {
+  private fightCreatures(a: TargetRef, b: TargetRef, oneSided: boolean, byToughness = false): void {
     if (a.kind !== "object" || b.kind !== "object") return;
     a = { kind: "object", object: this.splitOneFromStack(a.object) };
     b = { kind: "object", object: this.splitOneFromStack(b.object) };
     const liveCreature = (id: ObjectId): boolean => this.creatureDef(id) !== null;
-    const powerOf = (id: ObjectId): number =>
-      computeCharacteristics(this.state, this.registry, id).power;
+    const powerOf = (id: ObjectId): number => {
+      const c = computeCharacteristics(this.state, this.registry, id);
+      return byToughness ? c.toughness : c.power;
+    };
 
     const aLive = liveCreature(a.object);
     // A one-sided "deals damage equal to its power to target creature or
     // planeswalker" (Stump Stomp) needs only its receiver on the
-    // battlefield; a fight needs two creatures (rule 701.12b).
+    // battlefield; a fight needs two creatures (rule 701.14b).
     const bLive = oneSided ? this.state.objects[b.object]?.zone === "battlefield" : liveCreature(b.object);
     const aPower = aLive ? powerOf(a.object) : 0;
     const bPower = bLive ? powerOf(b.object) : 0;
 
+    if (byToughness) {
+      // Grim Contest's "each of those creatures deals damage equal to its
+      // toughness to the other": one event, both at once — and not a fight.
+      if (!aLive || !bLive) return;
+      const [first, second] = [a, b];
+      this.withDamageBatch(() => {
+        if (aPower > 0) this.dealDamage(first.object, second, aPower);
+        if (!oneSided && bPower > 0) this.dealDamage(second.object, first, bPower);
+      });
+      return;
+    }
     if (aLive && bLive && aPower > 0) this.dealDamage(a.object, b, aPower);
     if (!oneSided && aLive && bLive && bPower > 0) this.dealDamage(b.object, a, bPower);
     if (this.dryRunningEvents) return;

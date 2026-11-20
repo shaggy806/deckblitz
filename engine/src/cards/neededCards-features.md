@@ -8487,6 +8487,10 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Two creatures exchange power (2026-11-20).** `effect:exchange-power`: the `exchange-stat` effect (`stat`, `first`, `second`, `duration`; `Game.exchangeStat`), each a layer-7b set to the other's previous value (701.12g), both or neither (701.12a). Serene Master. `test/exchange-stat.test.ts`.
 
+**The creature equipped as it triggered (2026-11-20).** `effect:effect-target-equipped-creature`: `ObjectRef` `"attached-as-triggered"`, read from `LastKnownRefs.attachedHost` (recorded as any trigger of an attached source goes on the stack). Dead-Iron Sledge. `test/attached-as-triggered.test.ts`.
+
+**Each deals damage equal to its toughness to the other (2026-11-20).** `effect:fight-by-toughness`: `fight`'s `byToughness` — toughness for power, both in one damage batch, no fought events. Grim Contest. `test/fight-by-toughness.test.ts`.
+
 **Attached to the ability's own source (2026-11-20).** `filter:attached-to-source` needed no engine code: `attachedTo: { isSource: true }` reads the source in a target slot (`targetFilterContext`) and is bound in an effect's filter. Shackles of Treachery (a granted trigger's "target Equipment attached to it"), Hakim, Loreweaver ("all Auras attached to Hakim"). `test/attached-to-source-target.test.ts`.
 
 **Attacking a player with more life than you; creatures attacking that player, or the same thing (2026-11-20).** `trigger:attacks-player-with-more-life-than-you`: `DefenderLife` `"more-than-you"` (a trigger condition, asked once; `Game.defenderLifeRanks`). `condition:filter-attacking-same-player`: two `CardFilter` clauses — `attackingPlayerRef: PlayerRef` ("attacking that player", bound to `attackingIn` by `bindDynamicCompares`) and `attackingSameAsSource` (the source's attack now, read in target slots too). Namor, Atlantean King; Kitesail Skirmisher. `test/attacks-player-with-more-life.test.ts`.

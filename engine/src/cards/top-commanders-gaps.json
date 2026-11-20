@@ -3108,7 +3108,9 @@
   "trigger:delayed-first-time-this-turn-chosen-name",
   "condition:creature-spell-countered-by-opponent-this-turn",
   "effect:damage-by-toughness-rule-eot",
-  "effect:exchange-power"
+  "effect:exchange-power",
+  "effect:effect-target-equipped-creature",
+  "effect:fight-by-toughness"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -4285,7 +4285,7 @@ export type EffectSpec =
     }
   | {
       /** `targets[a]` and `targets[b]` each deal damage equal to their power
-       * to the other (rule 701.12). With `oneSided`, only `a` deals to `b`
+       * to the other (rule 701.14a). With `oneSided`, only `a` deals to `b`
        * (Rabid Bite) — and `b` may be any permanent that can be dealt damage,
        * a planeswalker too (Stump Stomp's "to target creature or
        * planeswalker"). */
@@ -4296,6 +4296,12 @@ export type EffectSpec =
       readonly a: ObjectRef;
       readonly b: ObjectRef;
       readonly oneSided?: boolean;
+      /** "Each of those creatures deals damage equal to **its toughness** to
+       * the other" (Grim Contest): each deals its toughness, both at once
+       * (one damage event), and — not the word "fight" — nothing has fought
+       * (no `creature-fought`). Neither deals or is dealt any unless both are
+       * still creatures on the battlefield, as with a fight (the ruling). */
+      readonly byToughness?: true;
     }
   | {
       /**
@@ -13389,6 +13395,10 @@ export interface EffectApi {
    * `read`: for reading rather than acting on it, a permanent that has left
    * still answers, to be read as it last existed there (rule 608.2h). */
   triggerRecipient(read?: boolean): TargetRef | undefined;
+  /** What an {@link ObjectRef} `"attached-as-triggered"` names: the
+   * permanent the source was attached to as this ability triggered — while
+   * it's still that object, or (`read`) as it last existed. */
+  attachedAsTriggered(read?: boolean): TargetRef | undefined;
   draw(player: PlayerId, count: number): void;
   /** The mana value of the card behind `target`, from its printed cost — see
    * the `{ manaValueOf }` {@link EffectAmount}. `0` for a player target or an
@@ -14434,8 +14444,9 @@ export interface EffectApi {
    * permissions this effect is about to give: its id. */
   newPermissionGroup(left: number): number;
   /** `a` and `b` (both creatures) fight; with `oneSided` only `a` deals,
-   * to a creature or a planeswalker. */
-  fight(a: TargetRef, b: TargetRef, oneSided: boolean): void;
+   * to a creature or a planeswalker; `byToughness`, each deals its
+   * toughness and it isn't a fight (Grim Contest). */
+  fight(a: TargetRef, b: TargetRef, oneSided: boolean, byToughness?: boolean): void;
   /** This spell on the stack can't be countered while it stays there
    * (`GameObject.uncounterable`); nothing for anything else. */
   spellCantBeCountered(spell: ObjectId): void;
@@ -19189,6 +19200,7 @@ export function objectRefRead(ref: ObjectRef, ctx: ResolutionContext): TargetRef
     return ctx.granter === undefined ? undefined : { kind: "object", object: ctx.granter };
   }
   if (ref === "trigger-recipient") return ctx.triggerRecipient(true);
+  if (ref === "attached-as-triggered") return ctx.attachedAsTriggered(true);
   // A read: a trigger object — or the source — that has moved on since is
   // read as it last existed, which the context's lookups do (rule 608.2h).
   // Only acting on one needs it to be the same object still (`sourceLost`,
@@ -19409,6 +19421,7 @@ export function objectRefAct(
     return ctx.granter !== undefined && ctx.granterLost !== true ? { kind: "object", object: ctx.granter } : undefined;
   }
   if (ref === "trigger-recipient") return ctx.triggerRecipient();
+  if (ref === "attached-as-triggered") return ctx.attachedAsTriggered();
   return ctx.slotStillMeant(ctx.targets[ref]);
 }
 
@@ -21510,7 +21523,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (asksReplacementOrder(spec, ctx)) return;
       const a = objectRefAct(spec.a, ctx);
       const b = objectRefAct(spec.b, ctx);
-      if (a !== undefined && b !== undefined) ctx.fight(a, b, spec.oneSided === true);
+      if (a !== undefined && b !== undefined) ctx.fight(a, b, spec.oneSided === true, spec.byToughness === true);
       return;
     }
     case "created-tokens-fight":

@@ -2758,6 +2758,14 @@ export interface LastKnownRefs {
    */
   readonly recipient?: { readonly target: TargetRef; readonly zoneChangeCount?: number };
   /**
+   * A triggered ability's: the permanent its source was attached to as it
+   * went on the stack, in that battlefield stint — what the `ObjectRef`
+   * `"attached-as-triggered"` names. Dead-Iron Sledge's "destroy both
+   * creatures" destroys the creature that was equipped when it triggered,
+   * wherever the Equipment has moved since (the ruling).
+   */
+  readonly attachedHost?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  /**
    * The player the triggering event names — "that player": the player dealt
    * damage (or the controller of the permanent dealt damage), the defending
    * player of an attack. What the `"trigger-player"` and

@@ -24,6 +24,11 @@ import type { ObjectSetRef } from "./object-sets.js";
  * - `"trigger-object"`: the object behind the trigger. Not a target.
  * - `"attached"`: what the source is attached to, in the stint the resolution
  *   recorded; a Curse's host is a player. Not a target.
+ * - `"attached-as-triggered"`: a triggered ability's — what its source was
+ *   attached to as it triggered, still that object (Dead-Iron Sledge's
+ *   "destroy both creatures": moving the Equipment after it triggers changes
+ *   nothing, the ruling). Read as it last existed once it has left. Not a
+ *   target.
  * - `"chosen"`: the permanent chosen for the source (rule 607.2d).
  * - `"granter"`: the permanent whose static granted this ability (rule 201.5a).
  * - `"trigger-recipient"`: what the triggering event was aimed at — the
@@ -44,6 +49,7 @@ export type ObjectRef =
   | "source"
   | "trigger-object"
   | "attached"
+  | "attached-as-triggered"
   | "chosen"
   | "granter"
   | "trigger-recipient"
