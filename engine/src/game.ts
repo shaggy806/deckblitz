@@ -30754,7 +30754,7 @@ export class Game {
     );
   }
 
-  private manaSourcesUncached(player: PlayerId): ManaSource[] {
+  private manaSourcesUncached(player: PlayerId, spokenFor?: ReadonlySet<ObjectId>): ManaSource[] {
     const out: ManaSource[] = [];
     // The mana abilities that tap other permanents, planned once every other
     // source is known (`tapCostManaSources`).
@@ -31123,7 +31123,7 @@ export class Game {
       if (options.length === 0) continue;
       out.push(this.manaSourceEntry(id, options, sacrificeSelf));
     }
-    out.push(...this.tapCostManaSources(player, out, tapCosts));
+    out.push(...this.tapCostManaSources(player, out, tapCosts, spokenFor));
     const flexibility = (s: ManaSource): number =>
       new Set(s.options.flatMap((o) => [...o.fixed])).size +
       (s.options.some((o) => o.anyColor > 0) ? 5 : 0);
@@ -31192,11 +31192,19 @@ export class Game {
    *   it has (Holdout Settlement's "{T}: Add {C}"); one without is a source
    *   of its own for each set of permanents it can tap, under an id
    *   `useManaSource` reads back (`tapCostSourceId`).
+   *
+   * `spokenFor` is what the cost being paid taps beside its mana (the
+   * creatures a spell convokes, an ability's own `{T}` source): none of them
+   * is picked, so the Drum taps the Bears when the Druid's own ability taps
+   * the Druid. The list every payment shares is made without it
+   * (`manaSources`); `manaPlanningView` asks again with it for a payment
+   * whose own taps that list had picked.
    */
   private tapCostManaSources(
     player: PlayerId,
     sources: ManaSource[],
     abilities: readonly TapCostManaAbility[],
+    spokenFor?: ReadonlySet<ObjectId>,
   ): ManaSource[] {
     if (abilities.length === 0) return [];
     // What's spoken for: anything a listed option taps, and the source of
@@ -31212,6 +31220,7 @@ export class Game {
     for (const ability of abilities) {
       if (ability.tapsSelf) used.set(ability.id, capacity(ability.id));
     }
+    for (const id of spokenFor ?? []) used.set(id, capacity(id));
     const isCreature = (id: ObjectId): boolean =>
       effectiveTypes(this.state, this.registry, this.state.objects[id]).includes("creature");
     const rank = (id: ObjectId): number =>
@@ -31237,6 +31246,8 @@ export class Game {
     // `{T}` ones first: each is one activation at most.
     for (const ability of abilities) {
       if (!ability.tapsSelf) continue;
+      // Its own {T} is already this payment's: it picks nothing another could.
+      if (spokenFor?.has(ability.id) === true) continue;
       const taps = pick(ability);
       if (taps === null) continue;
       const options = withTaps(ability, taps);
@@ -31611,7 +31622,19 @@ export class Game {
       extra.tag?.restriction === undefined ||
       this.manaUnitCanPay(player, { type: extra.type ?? "C", ...extra.tag }, purpose);
     const onlyType = this.spendOnlyManaTypeFor(purpose);
-    const listed = this.manaSources(player);
+    // What this cost taps itself (`withheld`) may be what a mana ability's
+    // cost was to tap (`ManaOption.tapsOthers`, picked before anything was
+    // known of this payment): those are picked again around it, rather than
+    // the ability dropped — Springleaf Drum taps the Bears when the Druid's
+    // own {T} is being paid. Rare, so the shared list stays the cached one.
+    const shared = this.manaSources(player);
+    const withheld = arrange?.withheld;
+    const listed =
+      withheld !== undefined &&
+      withheld.size > 0 &&
+      shared.some((s) => s.options.some((o) => o.tapsOthers?.some((id) => withheld.has(id)) === true))
+        ? withComputedCache(() => this.manaSourcesUncached(player, withheld))
+        : shared;
     // Nearly every payment: nothing limits where its mana comes from or what
     // type it is, and no source carries extra units. The list then is the one
     // `manaSources` made, as it stands — which the passes below would come to
