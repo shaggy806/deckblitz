@@ -723,6 +723,7 @@ import _poolSeedguideAsh from "../pool/seedguide-ash.js";
 import _poolSeedsOfInnocence from "../pool/seeds-of-innocence.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
+import _poolSelectiveSnare from "../pool/selective-snare.js";
 import _poolSelfDestruct from "../pool/self-destruct.js";
 import _poolSelkieHedgeMage from "../pool/selkie-hedge-mage.js";
 import _poolSentinelTower from "../pool/sentinel-tower.js";
@@ -1759,6 +1760,7 @@ const shard: CardShard = {
     _poolSeedsOfInnocence,
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
+    _poolSelectiveSnare,
     _poolSelfDestruct,
     _poolSelkieHedgeMage,
     _poolSentinelTower,

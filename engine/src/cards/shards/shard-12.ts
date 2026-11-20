@@ -592,6 +592,7 @@ import _poolNayaSoulbeast from "../pool/naya-soulbeast.js";
 import _poolNecromanticSelection from "../pool/necromantic-selection.js";
 import _poolNecronMonolith from "../pool/necron-monolith.js";
 import _poolNecropolisRegent from "../pool/necropolis-regent.js";
+import _poolNemesisPhoenix from "../pool/nemesis-phoenix.js";
 import _poolNeverwinterHydra from "../pool/neverwinter-hydra.js";
 import _poolNightMarketAeronaut from "../pool/night-market-aeronaut.js";
 import _poolNighthowler from "../pool/nighthowler.js";
@@ -1640,6 +1641,7 @@ const shard: CardShard = {
     _poolNecromanticSelection,
     _poolNecronMonolith,
     _poolNecropolisRegent,
+    _poolNemesisPhoenix,
     _poolNeverwinterHydra,
     _poolNightMarketAeronaut,
     _poolNighthowler,

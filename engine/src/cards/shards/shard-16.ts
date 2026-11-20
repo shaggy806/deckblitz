@@ -33,7 +33,9 @@ import _poolAnger from "../pool/anger.js";
 import _poolAnglerTurtle from "../pool/angler-turtle.js";
 import _poolAngryRabble from "../pool/angry-rabble.js";
 import _poolAnointerOfChampions from "../pool/anointer-of-champions.js";
+import _poolAphettoDredging from "../pool/aphetto-dredging.js";
 import _poolAqueousForm from "../pool/aqueous-form.js";
+import _poolArashinWarBeast from "../pool/arashin-war-beast.js";
 import _poolArbiterOfKnollridge from "../pool/arbiter-of-knollridge.js";
 import _poolArborElf from "../pool/arbor-elf.js";
 import _poolArcaneAmphisbaena from "../pool/arcane-amphisbaena.js";
@@ -951,6 +953,7 @@ import _poolTolarianDrake from "../pool/tolarian-drake.js";
 import _poolTolarianEmissary from "../pool/tolarian-emissary.js";
 import _poolTolsimirWolfblood from "../pool/tolsimir-wolfblood.js";
 import _poolTomBertAndWilliam from "../pool/tom-bert-and-william.js";
+import _poolTombOfUrami from "../pool/tomb-of-urami.js";
 import _poolTomikIzzetSparkmage from "../pool/tomik-izzet-sparkmage.js";
 import _poolTophHardheadedTeacher from "../pool/toph-hardheaded-teacher.js";
 import _poolTorstenFounderOfBenalia from "../pool/torsten-founder-of-benalia.js";
@@ -1143,7 +1146,9 @@ const shard: CardShard = {
     _poolAnglerTurtle,
     _poolAngryRabble,
     _poolAnointerOfChampions,
+    _poolAphettoDredging,
     _poolAqueousForm,
+    _poolArashinWarBeast,
     _poolArbiterOfKnollridge,
     _poolArborElf,
     _poolArcaneAmphisbaena,
@@ -2061,6 +2066,7 @@ const shard: CardShard = {
     _poolTolarianEmissary,
     _poolTolsimirWolfblood,
     _poolTomBertAndWilliam,
+    _poolTombOfUrami,
     _poolTomikIzzetSparkmage,
     _poolTophHardheadedTeacher,
     _poolTorstenFounderOfBenalia,

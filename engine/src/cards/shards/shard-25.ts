@@ -506,6 +506,7 @@ import _poolLotusBlossom from "../pool/lotus-blossom.js";
 import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
 import _poolLuXunScholarGeneral from "../pool/lu-xun-scholar-general.js";
+import _poolLunarHatchling from "../pool/lunar-hatchling.js";
 import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
 import _poolMadameVastra from "../pool/madame-vastra.js";
 import _poolMagmaHellion from "../pool/magma-hellion.js";
@@ -526,6 +527,7 @@ import _poolMasterChef from "../pool/master-chef.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMasumaroFirstToLive from "../pool/masumaro-first-to-live.js";
+import _poolMedomaisProphecy from "../pool/medomais-prophecy.js";
 import _poolMelancholy from "../pool/melancholy.js";
 import _poolMelting from "../pool/melting.js";
 import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
@@ -849,6 +851,7 @@ import _poolStunningShot from "../pool/stunning-shot.js";
 import _poolSultaiDevotee from "../pool/sultai-devotee.js";
 import _poolSummonPrimalGaruda from "../pool/summon-primal-garuda.js";
 import _poolSummonersSending from "../pool/summoners-sending.js";
+import _poolSummoningTrap from "../pool/summoning-trap.js";
 import _poolSunderingVitae from "../pool/sundering-vitae.js";
 import _poolSunkenField from "../pool/sunken-field.js";
 import _poolSupremeInquisitor from "../pool/supreme-inquisitor.js";
@@ -1526,6 +1529,7 @@ const shard: CardShard = {
     _poolLotusCobra,
     _poolLoyalApprentice,
     _poolLuXunScholarGeneral,
+    _poolLunarHatchling,
     _poolMachinistsArsenal,
     _poolMadameVastra,
     _poolMagmaHellion,
@@ -1546,6 +1550,7 @@ const shard: CardShard = {
     _poolMasterOfEtherium,
     _poolMastersGuideMural,
     _poolMasumaroFirstToLive,
+    _poolMedomaisProphecy,
     _poolMelancholy,
     _poolMelting,
     _poolMeltstridersGear,
@@ -1869,6 +1874,7 @@ const shard: CardShard = {
     _poolSultaiDevotee,
     _poolSummonPrimalGaruda,
     _poolSummonersSending,
+    _poolSummoningTrap,
     _poolSunderingVitae,
     _poolSunkenField,
     _poolSupremeInquisitor,

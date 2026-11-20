@@ -118,6 +118,7 @@ import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
 import _poolBrassKnuckles from "../pool/brass-knuckles.js";
 import _poolBreach from "../pool/breach.js";
+import _poolBriarbridgePatrol from "../pool/briarbridge-patrol.js";
 import _poolBribersPurse from "../pool/bribers-purse.js";
 import _poolBrineGiant from "../pool/brine-giant.js";
 import _poolBrinebornCutthroat from "../pool/brineborn-cutthroat.js";
@@ -567,6 +568,7 @@ import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNaturesWill from "../pool/natures-will.js";
+import _poolNecroticPlague from "../pool/necrotic-plague.js";
 import _poolNeedlebug from "../pool/needlebug.js";
 import _poolNeurokTransmuter from "../pool/neurok-transmuter.js";
 import _poolNezumiShadowWatcher from "../pool/nezumi-shadow-watcher.js";
@@ -1165,6 +1167,7 @@ const shard: CardShard = {
     _poolBrashTaunter,
     _poolBrassKnuckles,
     _poolBreach,
+    _poolBriarbridgePatrol,
     _poolBribersPurse,
     _poolBrineGiant,
     _poolBrinebornCutthroat,
@@ -1614,6 +1617,7 @@ const shard: CardShard = {
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
     _poolNaturesWill,
+    _poolNecroticPlague,
     _poolNeedlebug,
     _poolNeurokTransmuter,
     _poolNezumiShadowWatcher,

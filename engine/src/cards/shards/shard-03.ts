@@ -27,6 +27,7 @@ import _poolAnimationModule from "../pool/animation-module.js";
 import _poolAnodetLurker from "../pool/anodet-lurker.js";
 import _poolAnthemOfRakdos from "../pool/anthem-of-rakdos.js";
 import _poolAppetiteForTheUnnatural from "../pool/appetite-for-the-unnatural.js";
+import _poolAprilOneilHacktivist from "../pool/april-oneil-hacktivist.js";
 import _poolArachnoform from "../pool/arachnoform.js";
 import _poolAradaraExpress from "../pool/aradara-express.js";
 import _poolAragornAndArwenWed from "../pool/aragorn-and-arwen-wed.js";
@@ -975,6 +976,7 @@ import _tokensPlantToken from "../tokens/plant-token.js";
 import _tokensScrapToken from "../tokens/scrap-token.js";
 import _tokensSharkToken from "../tokens/shark-token.js";
 import _tokensSpiritTokenWhiteBlack from "../tokens/spirit-token-white-black.js";
+import _tokensUrami from "../tokens/urami.js";
 import _tokensWhaleToken from "../tokens/whale-token.js";
 import _tokensWhiteCitizenToken from "../tokens/white-citizen-token.js";
 import _tokensWormToken from "../tokens/worm-token.js";
@@ -1006,6 +1008,7 @@ const shard: CardShard = {
     _poolAnodetLurker,
     _poolAnthemOfRakdos,
     _poolAppetiteForTheUnnatural,
+    _poolAprilOneilHacktivist,
     _poolArachnoform,
     _poolAradaraExpress,
     _poolAragornAndArwenWed,
@@ -1956,6 +1959,7 @@ const shard: CardShard = {
     _tokensScrapToken,
     _tokensSharkToken,
     _tokensSpiritTokenWhiteBlack,
+    _tokensUrami,
     _tokensWhaleToken,
     _tokensWhiteCitizenToken,
     _tokensWormToken,

@@ -614,6 +614,7 @@ import _poolOverclockedElectromancer from "../pool/overclocked-electromancer.js"
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
 import _poolOxOfAgonas from "../pool/ox-of-agonas.js";
 import _poolPacificationArray from "../pool/pacification-array.js";
+import _poolPackAttack from "../pool/pack-attack.js";
 import _poolPainfulLesson from "../pool/painful-lesson.js";
 import _poolPaintedBluffs from "../pool/painted-bluffs.js";
 import _poolPalaceFamiliar from "../pool/palace-familiar.js";
@@ -1684,6 +1685,7 @@ const shard: CardShard = {
     _poolOvergrownBattlement,
     _poolOxOfAgonas,
     _poolPacificationArray,
+    _poolPackAttack,
     _poolPainfulLesson,
     _poolPaintedBluffs,
     _poolPalaceFamiliar,
