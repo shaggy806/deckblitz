@@ -277,6 +277,7 @@ import { decisionFor, decisionForAction, mayActOn } from "./decisions/registry.j
 import { fillCast } from "./decisions/shared/random-cast.js";
 import { assignCombatDamage } from "./decisions/assign-combat-damage.js";
 import { MAX_MATERIALIZED } from "./combat/stack-counts.js";
+import { playersBeingAttacked } from "./combat/attacked.js";
 import { attackers } from "./decisions/attackers.js";
 import { chooseTargets } from "./decisions/choose-targets.js";
 import { blockers } from "./decisions/blockers.js";
@@ -68326,18 +68327,11 @@ controlledBy,
         ? []
         : [this.activePlayer];
     }
-    // "Players being attacked" (Norn's Decree): who the active player
-    // declared attackers at this combat (rule 508.1b), as the declaration
-    // left it — melee's record, so none outside that combat.
-    if (who === "players-being-attacked") {
-      const record = this.state.players[this.activePlayer]?.attackedThisCombat;
-      const turn = this.state.turn;
-      if (record === undefined || PHASE_OF_STEP[turn.step] !== "combat") return [];
-      if (record.combat.turn !== turn.number || record.combat.phase !== (turn.combatPhases ?? 1)) return [];
-      const from = this.state.turnOrder.indexOf(this.activePlayer);
-      const order = [...this.state.turnOrder.slice(from), ...this.state.turnOrder.slice(0, from)];
-      return order.filter((p) => record.players.includes(p) && this.state.players[p]?.hasLost === false);
-    }
+    // "Players being attacked" (Norn's Decree, Pack Attack): who the active
+    // player declared attackers at this combat (rule 508.1b), and anyone a
+    // creature put onto the battlefield attacking is attacking (508.4) — none
+    // outside that combat (`combat/attacked.ts`).
+    if (who === "players-being-attacked") return playersBeingAttacked(this.state);
     const active = this.state.turnOrder.indexOf(this.activePlayer);
     const rotated = [
       ...this.state.turnOrder.slice(active),

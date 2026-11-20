@@ -24209,3 +24209,24 @@ describe("a creature spell of yours countered this turn by an opponent's spell o
     });
   });
 });
+
+describe("attacking two or more opponents (Nemesis Phoenix)", () => {
+  it("reads the declare attackers step and the opponents attacked as the ability's condition", () => {
+    const phoenix = parseFace(
+      {
+        name: "Nemesis Phoenix",
+        type_line: "Creature — Phoenix",
+        oracle_text:
+          "Flying\n{2}{R}: Return this card from your graveyard to the battlefield tapped and attacking. Activate only during the declare attackers step and only if you're attacking two or more opponents.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(phoenix.activated[0].condition).toEqual({
+      kind: "all",
+      of: [{ kind: "turn-structure", steps: ["declare-attackers"] }, { kind: "attacking-opponents", atLeast: 2 }],
+    });
+    expect(phoenix.complete).toBe(true);
+    expect(phoenix.activated[0].zone).toBe("graveyard");
+    expect(phoenix.activated[0].effect).toEqual({ kind: "put-onto-battlefield", target: "source", enterTapped: true, attacking: "choose" });
+  });
+});

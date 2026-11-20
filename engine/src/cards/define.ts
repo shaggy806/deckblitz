@@ -1650,6 +1650,14 @@ export type StaticCondition =
    * another: true }`, the attacking player being the active one, 506.2).
    */
   | { readonly kind: "unattacked-opponent"; readonly of: ConditionPlayer; readonly another?: true }
+  /**
+   * "**You're attacking two or more opponents**" (Nemesis Phoenix): it's your
+   * combat, and at least `atLeast` of your opponents are being attacked — the
+   * players, not their planeswalkers or battles (rule 802.4 tells the two
+   * apart), declared attacked this combat or attacked by a creature put onto
+   * the battlefield attacking (`combat/attacked.ts`'s `playersBeingAttacked`).
+   */
+  | { readonly kind: "attacking-opponents"; readonly atLeast: number }
   /** At least `atLeast` (default 1) counters put this turn, as
    * {@link CountersPutSpec} narrows them — "if you put a counter on a creature
    * this turn" (Lord Jyscal Guado). */

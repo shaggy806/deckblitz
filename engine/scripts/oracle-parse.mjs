@@ -20413,6 +20413,15 @@ function parseFaceAsWritten(face, ctx = {}) {
         ability.oncePerTurn = true;
         return "";
       });
+      // Nemesis Phoenix: your declare attackers step, two or more opponents
+      // being attacked (the players, rule 802.4).
+      rest = rest.replace(/ Activate only during the declare attackers step and only if you're attacking (two|three) or more opponents\.$/, (_whole, n) => {
+        ability.condition = {
+          kind: "all",
+          of: [{ kind: "turn-structure", steps: ["declare-attackers"] }, { kind: "attacking-opponents", atLeast: n === "two" ? 2 : 3 }],
+        };
+        return "";
+      });
       if (/Activate only /.test(rest)) {
         ability.__todo = [`a restriction: "${rest.slice(rest.indexOf("Activate only "))}"`];
         rest = rest.slice(0, rest.indexOf(" Activate only "));
@@ -20439,6 +20448,18 @@ function parseFaceAsWritten(face, ctx = {}) {
           duration: "end-of-turn",
           ...(/^You may play/.test(rest) ? { play: true } : {}),
         };
+        out.activated.push(ability);
+        continue;
+      }
+      // Nemesis Phoenix: an ability of the card in its owner's graveyard,
+      // which stays there as it's activated; it enters attacking whom its
+      // controller chooses (rule 508.4).
+      if (rest === "Return ~ from your graveyard to the battlefield tapped and attacking.") {
+        Object.assign(ability, {
+          zone: "graveyard",
+          staysInZone: true,
+          effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true, attacking: "choose" },
+        });
         out.activated.push(ability);
         continue;
       }

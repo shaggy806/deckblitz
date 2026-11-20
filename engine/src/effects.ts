@@ -2502,9 +2502,12 @@ export type PlayerScope =
   /** "**Players being attacked**" (Norn's Decree's "if one or more players
    * being attacked are poisoned"): the players the active player declared
    * attackers at this combat (rule 508.1b; `PlayerState.attackedThisCombat`,
-   * melee's record), in turn order from the active player — the player, not
-   * one whose planeswalker or battle is attacked, and whatever has become of
-   * the attackers since. Read from the state rather than a trigger's
+   * melee's record), and any a creature put onto the battlefield attacking
+   * is attacking (508.4), in turn order from the active player — the player,
+   * not one whose planeswalker or battle is attacked, and whatever has become
+   * of the attackers since (`combat/attacked.ts`). Pack Attack's "the number
+   * of players being attacked" is `{ countPlayers: "players-being-attacked"
+   * }`. Read from the state rather than a trigger's
    * attackers, so it answers in an intervening `condition` as the ability
    * triggers as well as when it resolves, where `"attacked-players"` can't.
    * Nobody outside the combat the attack was declared in. */

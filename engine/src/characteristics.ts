@@ -109,6 +109,7 @@ import {
   subtypeKind,
 } from "./subtypes.js";
 import { namesOf } from "./card-names.js";
+import { playersBeingAttacked } from "./combat/attacked.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import {
   JOURNAL_VIEWS,
@@ -1527,6 +1528,12 @@ function evalStaticCondition(
         (p) => p !== you && state.players[p]?.hasLost !== true && attackedYouDuringTheirLastTurn(state, you, p),
       );
     }
+    case "attacking-opponents":
+      // Only the active player attacks (rule 506.2).
+      return (
+        activePlayerOf(state) === you &&
+        playersBeingAttacked(state).filter((p) => p !== you).length >= condition.atLeast
+      );
     case "unattacked-opponent": {
       // "Being attacked" is now: a creature attacking that player (rule
       // 506.3), not one of their planeswalkers or battles (Suppressor

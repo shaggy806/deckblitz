@@ -7429,6 +7429,14 @@ clause (section 9):
   combat damage that would be dealt to you this combat" is `{ of:
   "active-player", another: true }` on `attacks-player` with `defender:
   "you"`, its effect a `damage-rule` with `duration: "until-end-of-combat"`.
+- `{ kind: "attacking-opponents", atLeast }` — "you're attacking two or more
+  opponents" (Nemesis Phoenix, `atLeast: 2`, beside a `turn-structure`
+  `steps: ["declare-attackers"]`): your combat, and that many opponents being
+  attacked — players, not their planeswalkers (802.4), declared attacked this
+  combat or attacked by a creature put onto the battlefield attacking
+  (`combat/attacked.ts`). The same players are the `"players-being-attacked"`
+  scope: Pack Attack's "where X is the number of players being attacked" is
+  `{ countPlayers: "players-being-attacked" }`.
 - `{ kind: "life-total", who?, atLeast?, atMost? }` — a life total, inclusive:
   Bilbo, Birthday Celebrant's "activate only if you have 111 or more life"
   is `atLeast: 111`; "at most half your starting life total" is `atMost:
