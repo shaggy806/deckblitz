@@ -143,7 +143,17 @@ export interface CopyExceptions<Pt = number> extends CharacteristicsPatch<Pt> {
     readonly card: string;
     readonly activated?: number;
     readonly triggered?: number;
+    /** The ability isn't printed on `card` but given by its `copyOnEnter`'s
+     * exceptions, at that index of their list (Vesuvan Doppelganger's quoted
+     * upkeep ability, which "has this ability"): printed, an uncopied card
+     * would have it too. */
+    readonly inCopyOnEnter?: true;
   };
+  /** "…except it doesn't copy that creature's color" (Vesuvan Doppelganger):
+   * the copy keeps the colours its copiable values had before this copy effect
+   * (rule 707.9c), read as the copy is made (`Game.keepingOwnColors`), so a
+   * copy of the copy has them too. */
+  readonly keepOwnColors?: true;
   /** "The legend rule doesn't apply to [these permanents]" as an ability it
    * has (Sakashima of a Thousand Faces). The scope is read from the copy's
    * own side, as the static's `affects` is. */

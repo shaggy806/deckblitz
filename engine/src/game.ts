@@ -1631,8 +1631,10 @@ function copyExceptionModifier(exceptions: ResolvedPatch & CopyExceptions, regis
   const own = exceptions.thisAbility;
   if (own !== undefined && registry === undefined) throw new Error("copy exception 'thisAbility' needs the registry");
   const ownDef = own === undefined ? undefined : registry!.get(own.card);
-  const ownActivated = own?.activated === undefined ? undefined : ownDef!.activated[own.activated];
-  const ownTriggered = own?.triggered === undefined ? undefined : ownDef!.triggered[own.triggered];
+  // Given by its own copy exceptions, not printed (Vesuvan Doppelganger).
+  const ownLists = own?.inCopyOnEnter === true ? ownDef!.copyOnEnter?.except : ownDef;
+  const ownActivated = own?.activated === undefined ? undefined : ownLists?.activated?.[own.activated];
+  const ownTriggered = own?.triggered === undefined ? undefined : ownLists?.triggered?.[own.triggered];
   if (own !== undefined && ownActivated === undefined && ownTriggered === undefined) {
     throw new Error(`copy exception 'thisAbility': ${own.card} has no such ability`);
   }
@@ -8746,7 +8748,8 @@ export class Game {
    * these exceptions: `copied`'s own copy exceptions, which are part of what's
    * copied (rule 707.9b — a token copy's "isn't legendary" among them), then
    * `except`, which win where they differ. */
-  private copyEffectModifiers(copied: GameObject, except: CopyExceptions | undefined): PtModifier[] {
+  private copyEffectModifiers(copied: GameObject, except: CopyExceptions | undefined, copy?: GameObject): PtModifier[] {
+    if (copy !== undefined) except = this.keepingOwnColors(copy, except);
     const name = this.unflippedName(printedCardName(copied));
     // A card in a graveyard or exile has only what's printed on it.
     const its = copied.zone === "battlefield" ? copied.modifiers : [];
@@ -8763,6 +8766,16 @@ export class Game {
           )
         : []),
     ];
+  }
+
+  /** `except` with "it doesn't copy that creature's color" (`keepOwnColors`)
+   * read for `copy`: the colours its copiable values have before this copy
+   * effect, kept (rule 707.9c) as a set of colours the copy's own copiers copy
+   * too (Vesuvan Doppelganger's ruling). */
+  private keepingOwnColors(copy: GameObject, except: CopyExceptions | undefined): CopyExceptions | undefined {
+    if (except?.keepOwnColors !== true) return except;
+    const own = effectiveColors(null, this.registry, { ...copy, modifiers: copy.modifiers.filter((m) => m.copiable === true) });
+    return { ...except, setColors: [...own] };
   }
 
   /** What `chooser` chose for the Clone `cloneId` to enter as a copy of — a
@@ -8790,7 +8803,7 @@ export class Game {
     clone.enterChoice = {
       ...clone.enterChoice,
       copyOf: copied === undefined ? null : this.unflippedName(printedCardName(copied)),
-      copyModifiers: copied === undefined ? [] : this.copyEffectModifiers(copied, except),
+      copyModifiers: copied === undefined ? [] : this.copyEffectModifiers(copied, except, clone),
       // What copying adds to how it enters (rule 707.9e) — only if it copies.
       ...(copied !== undefined &&
       spec !== null &&
@@ -53239,7 +53252,13 @@ controlledBy,
       if (object?.zone !== "battlefield") continue;
       const ends = endsFor(id);
       if (ends === null) continue;
-      this.setCopiableValues(object, { copyOf: source.copyOf, modifiers: copied.map((m) => ({ ...m })) }, ends);
+      // "…except it doesn't copy that creature's color": each keeps its own
+      // copiable colours (rule 707.9c), after the rest of the exceptions.
+      const kept = this.keepingOwnColors(object, exceptions);
+      const ownColors = kept?.setColors !== undefined && kept !== exceptions
+        ? [{ power: 0, toughness: 0, keywords: [], setColors: [...kept.setColors], untilEndOfTurn: false, copiable: true as const, timestamp: -2 }]
+        : [];
+      this.setCopiableValues(object, { copyOf: source.copyOf, modifiers: [...copied.map((m) => ({ ...m })), ...ownColors] }, ends);
       changed.push(id);
     }
     if (changed.length === 0) return;
@@ -61592,7 +61611,7 @@ controlledBy,
     const copied = copySpec !== null && copyAnswer !== undefined && copyAnswer !== null ? this.state.objects[copyAnswer] : undefined;
     if (copySpec !== null && copied !== undefined) {
       const copyOf = this.unflippedName(printedCardName(copied));
-      const modifiers = this.copyEffectModifiers(copied, copySpec.except).map((m) => ({ ...m, timestamp: -2 }));
+      const modifiers = this.copyEffectModifiers(copied, copySpec.except, object).map((m) => ({ ...m, timestamp: -2 }));
       this.setCopiableValues(
         object,
         { copyOf, modifiers },
