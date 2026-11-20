@@ -82,6 +82,7 @@ import _poolBlazingSunsteel from "../pool/blazing-sunsteel.js";
 import _poolBlexVexingPest from "../pool/blex-vexing-pest.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
+import _poolBloodSun from "../pool/blood-sun.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
 import _poolBloodvialPurveyor from "../pool/bloodvial-purveyor.js";
 import _poolBloomwielderDryads from "../pool/bloomwielder-dryads.js";
@@ -1119,6 +1120,7 @@ const shard: CardShard = {
     _poolBlexVexingPest,
     _poolBlightTitan,
     _poolBloodHypnotist,
+    _poolBloodSun,
     _poolBloodtracker,
     _poolBloodvialPurveyor,
     _poolBloomwielderDryads,

@@ -2901,6 +2901,7 @@ import _poolBloodServitor from "./pool/blood-servitor.js";
 import _poolBloodSpatterAnalysis from "./pool/blood-spatter-analysis.js";
 import _poolBloodSpeaker from "./pool/blood-speaker.js";
 import _poolBloodSportChampion from "./pool/blood-sport-champion.js";
+import _poolBloodSun from "./pool/blood-sun.js";
 import _poolBloodTithe from "./pool/blood-tithe.js";
 import _poolBloodTollHarpy from "./pool/blood-toll-harpy.js";
 import _poolBloodTribute from "./pool/blood-tribute.js";
@@ -3979,6 +3980,7 @@ import _poolCanopyStalker from "./pool/canopy-stalker.js";
 import _poolCanopySurge from "./pool/canopy-surge.js";
 import _poolCanopyTactician from "./pool/canopy-tactician.js";
 import _poolCanopyVista from "./pool/canopy-vista.js";
+import _poolCantStayAway from "./pool/cant-stay-away.js";
 import _poolCantWakeUp from "./pool/cant-wake-up.js";
 import _poolCantankerousCaptain from "./pool/cantankerous-captain.js";
 import _poolCantankerousKeepers from "./pool/cantankerous-keepers.js";
@@ -6191,6 +6193,7 @@ import _poolDarettiRocketeerEngineer from "./pool/daretti-rocketeer-engineer.js"
 import _poolDarettiScrapSavant from "./pool/daretti-scrap-savant.js";
 import _poolDargoTheShipwrecker from "./pool/dargo-the-shipwrecker.js";
 import _poolDarienKingOfKjeldor from "./pool/darien-king-of-kjeldor.js";
+import _poolDarigaazReincarnated from "./pool/darigaaz-reincarnated.js";
 import _poolDarigaazTheIgniter from "./pool/darigaaz-the-igniter.js";
 import _poolDarigaazsAttendant from "./pool/darigaazs-attendant.js";
 import _poolDarigaazsCaldera from "./pool/darigaazs-caldera.js";
@@ -27081,6 +27084,7 @@ import _poolStoryCircle from "./pool/story-circle.js";
 import _poolStorySeeker from "./pool/story-seeker.js";
 import _poolStorybookRide from "./pool/storybook-ride.js";
 import _poolStorytellerPixie from "./pool/storyteller-pixie.js";
+import _poolStoryweave from "./pool/storyweave.js";
 import _poolStrafe from "./pool/strafe.js";
 import _poolStragoAndRelm from "./pool/strago-and-relm.js";
 import _poolStrandsOfNight from "./pool/strands-of-night.js";
@@ -36590,6 +36594,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBloodSpatterAnalysis,
   _poolBloodSpeaker,
   _poolBloodSportChampion,
+  _poolBloodSun,
   _poolBloodTithe,
   _poolBloodTollHarpy,
   _poolBloodTribute,
@@ -37668,6 +37673,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCanopySurge,
   _poolCanopyTactician,
   _poolCanopyVista,
+  _poolCantStayAway,
   _poolCantWakeUp,
   _poolCantankerousCaptain,
   _poolCantankerousKeepers,
@@ -39880,6 +39886,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDarettiScrapSavant,
   _poolDargoTheShipwrecker,
   _poolDarienKingOfKjeldor,
+  _poolDarigaazReincarnated,
   _poolDarigaazTheIgniter,
   _poolDarigaazsAttendant,
   _poolDarigaazsCaldera,
@@ -60770,6 +60777,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStorySeeker,
   _poolStorybookRide,
   _poolStorytellerPixie,
+  _poolStoryweave,
   _poolStrafe,
   _poolStragoAndRelm,
   _poolStrandsOfNight,
@@ -70292,6 +70300,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blood-spatter-analysis": _poolBloodSpatterAnalysis,
   "pool/blood-speaker": _poolBloodSpeaker,
   "pool/blood-sport-champion": _poolBloodSportChampion,
+  "pool/blood-sun": _poolBloodSun,
   "pool/blood-tithe": _poolBloodTithe,
   "pool/blood-toll-harpy": _poolBloodTollHarpy,
   "pool/blood-tribute": _poolBloodTribute,
@@ -71370,6 +71379,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/canopy-surge": _poolCanopySurge,
   "pool/canopy-tactician": _poolCanopyTactician,
   "pool/canopy-vista": _poolCanopyVista,
+  "pool/cant-stay-away": _poolCantStayAway,
   "pool/cant-wake-up": _poolCantWakeUp,
   "pool/cantankerous-captain": _poolCantankerousCaptain,
   "pool/cantankerous-keepers": _poolCantankerousKeepers,
@@ -73582,6 +73592,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/daretti-scrap-savant": _poolDarettiScrapSavant,
   "pool/dargo-the-shipwrecker": _poolDargoTheShipwrecker,
   "pool/darien-king-of-kjeldor": _poolDarienKingOfKjeldor,
+  "pool/darigaaz-reincarnated": _poolDarigaazReincarnated,
   "pool/darigaaz-the-igniter": _poolDarigaazTheIgniter,
   "pool/darigaazs-attendant": _poolDarigaazsAttendant,
   "pool/darigaazs-caldera": _poolDarigaazsCaldera,
@@ -94472,6 +94483,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/story-seeker": _poolStorySeeker,
   "pool/storybook-ride": _poolStorybookRide,
   "pool/storyteller-pixie": _poolStorytellerPixie,
+  "pool/storyweave": _poolStoryweave,
   "pool/strafe": _poolStrafe,
   "pool/strago-and-relm": _poolStragoAndRelm,
   "pool/strands-of-night": _poolStrandsOfNight,

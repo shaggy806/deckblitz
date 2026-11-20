@@ -128,6 +128,7 @@ import _poolCallTheSpiritDragons from "../pool/call-the-spirit-dragons.js";
 import _poolCallapheBelovedOfTheSea from "../pool/callaphe-beloved-of-the-sea.js";
 import _poolCalmingVerse from "../pool/calming-verse.js";
 import _poolCanalDredger from "../pool/canal-dredger.js";
+import _poolCantStayAway from "../pool/cant-stay-away.js";
 import _poolCantankerousCaptain from "../pool/cantankerous-captain.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
@@ -1231,6 +1232,7 @@ const shard: CardShard = {
     _poolCallapheBelovedOfTheSea,
     _poolCalmingVerse,
     _poolCanalDredger,
+    _poolCantStayAway,
     _poolCantankerousCaptain,
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,
