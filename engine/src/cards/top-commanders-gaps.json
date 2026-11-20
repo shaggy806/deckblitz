@@ -7,6 +7,7 @@
     "effect:delayed-remove-counters-placed-this-way",
     "effect:return-from-trigger-owners-graveyard-under-owner",
     "cost:exile-creature-cost-linked",
+    "cost:exile-permanents-may",
     "effect:players-being-attacked-count",
     "target:filter-from-chooser-side",
     "static:cant-attack-player-unless-acted-last-turn",

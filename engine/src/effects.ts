@@ -78,6 +78,7 @@ import type { ObjectRef, PlayerRef } from "./refs.js";
 import type { StickerCount } from "./stickers.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import { sameTargetRef } from "./target.js";
+import { largestOneEach } from "./zone-choice-together.js";
 import {
   isAttachAll,
   isAttachChoice,
@@ -352,7 +353,14 @@ export type ChoosePermanentsTogether =
    * Foundry's cost, through `AbilityCost.do`): their mana values add up to
    * exactly this — `"x"` the X announced as it's activated (rules 107.3,
    * 601.2b), a token stack's each counted. */
-  | { readonly totalManaValue: number | "x" };
+  | { readonly totalManaValue: number | "x" }
+  /** "Exile **a Human you control and an artifact you control**" (Fugitive of
+   * the Judoon): one permanent a slot, each matching its slot's filter, as a
+   * search's `oneEach` (an Artifact Human fills one slot, not both). The
+   * effect's `filter` admits what some slot does, and `min`/`upTo` are the
+   * number of slots; `mayBeDone` offers it only when every slot can be
+   * filled by a different permanent. */
+  | Extract<SearchTogether, { readonly oneEach: unknown }>;
 
 /**
  * Where each chosen card of a `look-and-choose` goes when that depends on the
@@ -20304,6 +20312,29 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // full with fewer to choose from (rule 702.24a: no partial payments). Read
   // for the effect's controller choosing from the whole battlefield; another
   // chooser, one seat's permanents or a set-wide rule isn't read here.
+  // "You may exile a Human you control and an artifact you control"
+  // (Fugitive of the Judoon): only when every slot can be filled by a
+  // different permanent — a bipartite matching, a stack's tokens each their
+  // own.
+  if (
+    action.kind === "choose-permanents" &&
+    action.chooser === undefined &&
+    action.controlledByPlayer === undefined &&
+    action.together !== undefined &&
+    "oneEach" in action.together &&
+    action.random !== true &&
+    action.orPlayers === undefined
+  ) {
+    const slots = action.together.oneEach;
+    const except = action.exceptTriggerObject === true && ctx.triggerObject !== undefined ? [ctx.triggerObject] : [];
+    const among = ctx.eachPermanentMatching(action.filter, action.exceptSource === true, except, undefined);
+    const tags: Record<ObjectId, readonly string[]> = {};
+    for (const { object } of among) {
+      tags[object] = slots.flatMap((slot, index) => (ctx.cardMatches(object, slot.filter) ? [String(index)] : []));
+    }
+    const room = largestOneEach({ rule: "one-each", tags, text: "" }, among.map(({ object }) => object));
+    return room >= Math.max(0, Math.floor(amountValue(action.min ?? slots.length, ctx)));
+  }
   if (
     action.kind === "choose-permanents" &&
     action.min !== undefined &&

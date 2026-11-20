@@ -58880,10 +58880,20 @@ controlledBy,
     const together = togetherRule === undefined ? undefined : this.searchTogether(togetherRule, matching, player, x);
     const eligible = eligibleForTogether(together, matching);
     // One a name or a power at most, so no more than there are of those.
+    // One a slot: as many as can be matched to different slots, a stack's
+    // tokens each their own (an Artifact Human alone fills one of "a Human
+    // and an artifact").
     const available =
       together === undefined || together.rule === "total"
         ? eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0)
-        : new Set(eligible.flatMap((id) => together.tags[id] ?? [])).size;
+        : together.rule === "one-each"
+          ? largestOneEach(
+              together,
+              eligible.flatMap((id) =>
+                Array<ObjectId>(Math.min(this.state.objects[id]?.stackCount ?? 1, (together.tags[id] ?? []).length)).fill(id),
+              ),
+            )
+          : new Set(eligible.flatMap((id) => together.tags[id] ?? [])).size;
     const most = Math.min(Math.max(0, max), available);
     if (most <= 0) return;
     this.state.awaiting = {
