@@ -324,7 +324,15 @@ export type SearchTogether =
    * Cynical Opportunist's "you may exile any number of cards from your
    * graveyard with four or more card types among them" (the zone choice's
    * `"variety"` rule). */
-  | { readonly cardTypesAmongAtLeast: number };
+  | { readonly cardTypesAmongAtLeast: number }
+  /** One slot for each permanent on the battlefield matching this filter
+   * (its "you" the searcher), each filled by a card with the same name as
+   * that permanent (rule 201.2), read as the choice is raised — Doubling
+   * Chant's "for each creature you control, you may search your library for
+   * a creature card with the same name as that creature". A token stack is a
+   * slot for each token in it; a face-down permanent has no name and fills
+   * no slot. */
+  | { readonly oneEachSameNameAs: CardFilter };
 
 /** A {@link SearchTogether} as `Game` raises it: its amount read. */
 export type ResolvedSearchTogether =

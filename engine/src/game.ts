@@ -48954,7 +48954,7 @@ controlledBy,
     // zones, where any may be left (Counterbore's ruling).
     const all = more?.all === true;
     const alsoTaken = all ? inGraveyard : [];
-    const eligible = [
+    const searchable = [
       ...(all ? [] : inGraveyard),
       ...inHand,
       ...inExile,
@@ -48967,13 +48967,21 @@ controlledBy,
     // may find none (Nissa's Encouragement's ruling), and so may one that says
     // "up to" (The Five Doctors).
     const least = zones === "graveyard" && inGraveyard.length > 0 && more?.upTo !== true ? Math.max(min, 1) : min;
-    const set = together === undefined ? undefined : this.searchTogether(together, eligible, player, x);
+    const set = together === undefined ? undefined : this.searchTogether(together, searchable, player, x);
+    // A slot a permanent: only a card with one of their names can be found,
+    // and no more than the slots it can fill (Doubling Chant).
+    const eligible =
+      set !== undefined && together !== undefined && "oneEachSameNameAs" in together
+        ? searchable.filter((id) => (set.tags[id] ?? []).length > 0)
+        : searchable;
     // "A Forest card and a Plains card" finds one card per slot at most.
     const most = all
       ? eligible.length
       : together !== undefined && "oneEach" in together
         ? Math.min(max, together.oneEach.length)
-        : max;
+        : set !== undefined && together !== undefined && "oneEachSameNameAs" in together
+          ? Math.min(max, largestOneEach(set, eligible))
+          : max;
     // "Exactly two cards … that have different names" (Burning-Rune Demon):
     // no more must be found than some answer can hold, or a library of one
     // name would leave the search with no answer (a stated quality may be
@@ -49323,6 +49331,19 @@ controlledBy,
         tags,
         text: slots.map((type) => `${/^[aeiou]/.test(type) ? "an" : "a"} ${type} card`).join(" and "),
       };
+    }
+    if ("oneEachSameNameAs" in together) {
+      // A slot a permanent (each token of a stack), named as it is now.
+      const slots = this.battlefieldMatching(player, together.oneEachSameNameAs).flatMap((permanent) => {
+        const held = this.state.objects[permanent];
+        const names = namesOf(this.registry, held);
+        return Array.from({ length: held.stackCount ?? 1 }, (_, i) => ({ slot: `${permanent}:${i}`, names }));
+      });
+      for (const id of eligible) {
+        const names = namesOf(this.registry, this.state.objects[id]);
+        tags[id] = slots.filter((s) => s.names.some((name) => names.includes(name))).map((s) => s.slot);
+      }
+      return { rule: "one-each", tags, text: "each with the same name as a different one of them" };
     }
     if ("share" in together) {
       for (const id of eligible) {
