@@ -666,6 +666,24 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 336 (2026-11-20, `author-top-cards overnight 3pm`, ranks 12293–19997)** — 74 cards from
+  19 lane agents, five at once, 10:15-15:00 (`B336.json`; `COMPLETED.md` lists the features): every
+  triaged card from Zur's Weirding (12293) on by rank to Grim Contest (19997) that the agents reached,
+  skipping those waiting on the user, among them Blood Sun, Infernal Tutor, Ellywick Tumblestrum,
+  Enduring Renewal, Demilich, Hama, the Bloodbender, Vesuvan Doppelganger, Necrotic Plague, Summoning
+  Trap and Doubling Chant, plus the other cards on each key (Assembly Hall, Priest of the Wakening Sun,
+  Hakim, Loreweaver, Kitesail Skirmisher, Realm Razer, Arashin War Beast, Selective Snare, Arsenal
+  Thresher, Shambling Swarm). About a third needed no engine code. Re-keyed: **Caller of the Hunt**
+  (`cost:creature-type-chosen-as-cast-kept-on-permanent`: no targets to share the type, and the
+  permanent keeps it) and **Mister Immortal** (`zone:ability-from-several-zones`). Doubling Chant's key
+  stays open for Clarion Ultimatum (a chosen set of permanents) and Dichotomancy (an opponent's
+  permanents, their library). **Calls for the user**, each authored as read: Nemesis Phoenix counts
+  only opponents attacked directly, not through their planeswalkers or battles (no rule or ruling
+  says); Aphetto Dredging and Selective Snare choose the creature type after the targets, among the
+  types they share (601.2b has it first; the outcomes are the same); Kitesail Skirmisher's "attacking
+  the same player" reads the Skirmisher live, so it removed from combat leaves no legal target.
+  Skipped for a design call: Spawnsire of Ulamog (11790, "cards you own from outside the game" in
+  Commander).
 - **Batch 335 (2026-11-18, `author-top-cards overnight`, ranks 13560–17788)** — 171 cards (178
   definitions), every triaged card from Zevlor, Elturel Exile (13560) on in rank order but those waiting on
   the user, from 34 lane agents (`COMPLETED.md` lists the features). About a third of the keys needed no

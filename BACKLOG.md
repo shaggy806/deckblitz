@@ -40,10 +40,14 @@ section keeps only what to do next.
   or `build-family overnight lanes`. **B334 (2026-11-17) reached 13755; B335 (2026-11-18, overnight,
   34 lane agents, 171 cards) took every triaged card from 13560 to 17788 but those below.** **Five
   agents at once** (B335's experiment: five built as many cards an hour as six with fewer failures;
-  `docs/card-blockers.md`, batch 335; the build-family and author-flagged skills say five since). **Next by rank** (`rank-goal.mjs --rank 20000 --keys`):
-  Ellywick Tumblestrum (14843, `amount:differently-named-dungeons-completed`), Blood Sun (16071),
-  First Family (16094), Forbidden Crypt (16193), Darigaaz Reincarnated (16306), Vanish into Memory
-  (16309), then 16688 on (Qasali Ambusher, Elvish Refueler, Blossoming Calm, Squall). Waiting on the
+  `docs/card-blockers.md`, batch 335; the build-family and author-flagged skills say five since). **B336 (2026-11-20, `author-top-cards overnight 3pm`, 10:15-15:00)** took the triaged keys from
+  Zur's Weirding (12293) to Grim Contest (19997) in rank order, skipping those below
+  (`docs/card-blockers.md`, batch 336). **Next by rank** (`rank-goal.mjs --rank 20000 --keys`):
+  Elvish Refueler (16775, `static:exhaust-reactivation`), Titania's Song (16809), Debt of Loyalty
+  (16985), Midnight Oil (17053), Nihiloor (17126), Fatal Fissure (17288), Unpredictable Cyclone
+  (17339), then 17455 on; re-keyed in `B336.json`: Caller of the Hunt, Mister Immortal; Clarion
+  Ultimatum and Dichotomancy want the rest of Doubling Chant's search. Spawnsire of Ulamog (11790,
+  `effect:cast-from-outside-the-game`) wants a design call on "outside the game" in Commander. Waiting on the
   user: **Drain Power** (16523, a forced mana-ability decision: B335 left it as a major), Clara Oswald
   (13608, a pregame colour for a commander), Cryptic Spires (10790, a deck-construction choice: circle
   two colours), Path of the Ghosthunter (16226, Planechase), and the majors and decisions B308, B309 and

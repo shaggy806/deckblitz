@@ -1,0 +1,594 @@
+{
+ "batch": 336,
+ "status": "done",
+ "ranks": "author-top-cards overnight, 2026-11-20 (10:15 to 15:00): the triaged cards past EDHREC rank 10,000 in rank order, Zur's Weirding (12293) and Ellywick Tumblestrum (14843) to Grim Contest (19997), each with the small key it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop, five at once), skipping the cards waiting on the user (Cryptic Spires, Starlight Spectacular, Spawnsire of Ulamog, Malik, The Toymaker's Trap, Command Performance, Path of the Ghosthunter, Vedalken Squirrel-Whacker, Drain Power) and the recheck list. About a third needed no engine code. Bugs fixed on the way, each with a test: a draw within a replacement's unless was replaced again by it (Zur's Weirding looped, 614.5); a card's own die-exile replacement dropped its counters; a first-time-this-turn cast trigger on a chosen name never fired; an intervening-if during a simultaneous entry missed the batch's other permanents; a face-down exiled card offered its exile abilities (406.3a); Doubling Chant searched and shuffled when declined.",
+ "authored": [
+  {
+   "name": "Allure of the Unknown",
+   "files": [
+    "engine/src/cards/pool/allure-of-the-unknown.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/opponent-casts-exiled-free.test.ts"
+  },
+  {
+   "name": "Aphetto Dredging",
+   "files": [
+    "engine/src/cards/pool/aphetto-dredging.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/targets-of-chosen-creature-type.test.ts"
+  },
+  {
+   "name": "April O'Neil, Hacktivist",
+   "files": [
+    "engine/src/cards/pool/april-oneil-hacktivist.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/card-types-among-spells-cast.test.ts"
+  },
+  {
+   "name": "Arashin War Beast",
+   "files": [
+    "engine/src/cards/pool/arashin-war-beast.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/deals-damage-batched-recipients.test.ts"
+  },
+  {
+   "name": "Arboria",
+   "files": [
+    "engine/src/cards/pool/arboria.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attack-unless-acted-last-turn.test.ts"
+  },
+  {
+   "name": "Arsenal Thresher",
+   "files": [
+    "engine/src/cards/pool/arsenal-thresher.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-enters-reveal.test.ts"
+  },
+  {
+   "name": "Assembly Hall",
+   "files": [
+    "engine/src/cards/pool/assembly-hall.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-from-hand-same-name.test.ts"
+  },
+  {
+   "name": "Blood Sun",
+   "files": [
+    "engine/src/cards/pool/blood-sun.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/lose-all-except-mana.test.ts"
+  },
+  {
+   "name": "Bloodfeather Phoenix",
+   "files": [
+    "engine/src/cards/pool/bloodfeather-phoenix.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/spell-damage-or-battle.test.ts"
+  },
+  {
+   "name": "Blossoming Calm",
+   "files": [
+    "engine/src/cards/pool/blossoming-calm.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/player-hexproof-until-next-turn.test.ts"
+  },
+  {
+   "name": "Breathstealer's Crypt",
+   "files": [
+    "engine/src/cards/pool/breathstealers-crypt.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/draw-replacement-reveal.test.ts"
+  },
+  {
+   "name": "Briarbridge Patrol",
+   "files": [
+    "engine/src/cards/pool/briarbridge-patrol.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/deals-damage-batched-recipients.test.ts"
+  },
+  {
+   "name": "Can't Stay Away",
+   "files": [
+    "engine/src/cards/pool/cant-stay-away.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/grant-exile-if-would-die.test.ts"
+  },
+  {
+   "name": "Darigaaz Reincarnated",
+   "files": [
+    "engine/src/cards/pool/darigaaz-reincarnated.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/die-exile-with-counter.test.ts"
+  },
+  {
+   "name": "Dead-Iron Sledge",
+   "files": [
+    "engine/src/cards/pool/dead-iron-sledge.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attached-as-triggered.test.ts"
+  },
+  {
+   "name": "Demilich",
+   "files": [
+    "engine/src/cards/pool/demilich.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cost-reduction-per-instant-sorcery-cast.test.ts"
+  },
+  {
+   "name": "Don't Blink",
+   "files": [
+    "engine/src/cards/pool/dont-blink.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/enter-shuffle-instead.test.ts"
+  },
+  {
+   "name": "Doubling Chant",
+   "files": [
+    "engine/src/cards/pool/doubling-chant.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/search-same-name-as-permanents.test.ts"
+  },
+  {
+   "name": "Dragon's Disciple",
+   "files": [
+    "engine/src/cards/pool/dragons-disciple.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/as-enters-reveal.test.ts"
+  },
+  {
+   "name": "Dragon-Kami's Egg",
+   "files": [
+    "engine/src/cards/pool/dragon-kamis-egg.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/look-and-choose-exile-with-counter.test.ts"
+  },
+  {
+   "name": "Ellywick Tumblestrum",
+   "files": [
+    "engine/src/cards/pool/ellywick-tumblestrum.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/dungeons-completed-differently-named.test.ts"
+  },
+  {
+   "name": "Enduring Renewal",
+   "files": [
+    "engine/src/cards/pool/enduring-renewal.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/draw-replacement-reveal.test.ts"
+  },
+  {
+   "name": "First Family",
+   "files": [
+    "engine/src/cards/pool/first-family.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/colors-among-spells-cast.test.ts"
+  },
+  {
+   "name": "Forbidden Crypt",
+   "files": [
+    "engine/src/cards/pool/forbidden-crypt.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/draw-replacement-reveal.test.ts"
+  },
+  {
+   "name": "Golgari Brownscale",
+   "files": [
+    "engine/src/cards/pool/golgari-brownscale.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/self-leaves-graveyard.test.ts"
+  },
+  {
+   "name": "Grim Contest",
+   "files": [
+    "engine/src/cards/pool/grim-contest.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/fight-by-toughness.test.ts"
+  },
+  {
+   "name": "Hakim, Loreweaver",
+   "files": [
+    "engine/src/cards/pool/hakim-loreweaver.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attached-to-source-target.test.ts"
+  },
+  {
+   "name": "Hama, the Bloodbender",
+   "files": [
+    "engine/src/cards/pool/hama-the-bloodbender.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/waterbend-alt-cost.test.ts"
+  },
+  {
+   "name": "Hurkyl's Final Meditation",
+   "files": [
+    "engine/src/cards/pool/hurkyls-final-meditation.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/self-cost-increase.test.ts"
+  },
+  {
+   "name": "Infernal Tutor",
+   "files": [
+    "engine/src/cards/pool/infernal-tutor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-from-hand-same-name.test.ts"
+  },
+  {
+   "name": "Infinite Reflection",
+   "files": [
+    "engine/src/cards/pool/infinite-reflection.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/enters-attached-becomes-copy-of-host.test.ts"
+  },
+  {
+   "name": "Kentaro, the Smiling Cat",
+   "files": [
+    "engine/src/cards/pool/kentaro-the-smiling-cat.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/alt-cost-mana-value.test.ts"
+  },
+  {
+   "name": "Kitesail Skirmisher",
+   "files": [
+    "engine/src/cards/pool/kitesail-skirmisher.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attacks-player-with-more-life.test.ts"
+  },
+  {
+   "name": "Kotose, the Silent Spider",
+   "files": [
+    "engine/src/cards/pool/kotose-the-silent-spider.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/play-one-of-exiled.test.ts"
+  },
+  {
+   "name": "Lunar Hatchling",
+   "files": [
+    "engine/src/cards/pool/lunar-hatchling.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/escape-also-cost.test.ts"
+  },
+  {
+   "name": "Meandering Towershell",
+   "files": [
+    "engine/src/cards/pool/meandering-towershell.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-return-attacking-next-turn.test.ts"
+  },
+  {
+   "name": "Medomai's Prophecy",
+   "files": [
+    "engine/src/cards/pool/medomais-prophecy.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-first-time-chosen-name.test.ts"
+  },
+  {
+   "name": "Melira, the Living Cure",
+   "files": [
+    "engine/src/cards/pool/melira-the-living-cure.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/poison-counters-capped.test.ts"
+  },
+  {
+   "name": "Namor, Atlantean King",
+   "files": [
+    "engine/src/cards/pool/namor-atlantean-king.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attacks-player-with-more-life.test.ts"
+  },
+  {
+   "name": "Necrotic Plague",
+   "files": [
+    "engine/src/cards/pool/necrotic-plague.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/chooser-side-target.test.ts"
+  },
+  {
+   "name": "Nemesis Phoenix",
+   "files": [
+    "engine/src/cards/pool/nemesis-phoenix.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attacking-opponents.test.ts"
+  },
+  {
+   "name": "Pack Attack",
+   "files": [
+    "engine/src/cards/pool/pack-attack.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/players-being-attacked.test.ts"
+  },
+  {
+   "name": "Priest of the Wakening Sun",
+   "files": [
+    "engine/src/cards/pool/priest-of-the-wakening-sun.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reveal-from-hand-same-name.test.ts"
+  },
+  {
+   "name": "Qasali Ambusher",
+   "files": [
+    "engine/src/cards/pool/qasali-ambusher.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/free-cast-as-though-flash.test.ts"
+  },
+  {
+   "name": "Rain of Gore",
+   "files": [
+    "engine/src/cards/pool/rain-of-gore.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/gain-life-from-own-spell-or-ability.test.ts"
+  },
+  {
+   "name": "Realm Razer",
+   "files": [
+    "engine/src/cards/pool/realm-razer.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/flicker-return-tapped-if.test.ts"
+  },
+  {
+   "name": "Selective Snare",
+   "files": [
+    "engine/src/cards/pool/selective-snare.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/targets-of-chosen-creature-type.test.ts"
+  },
+  {
+   "name": "Serene Master",
+   "files": [
+    "engine/src/cards/pool/serene-master.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exchange-stat.test.ts"
+  },
+  {
+   "name": "Shackles of Treachery",
+   "files": [
+    "engine/src/cards/pool/shackles-of-treachery.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attached-to-source-target.test.ts"
+  },
+  {
+   "name": "Shield of the Avatar",
+   "files": [
+    "engine/src/cards/pool/shield-of-the-avatar.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/prevent-dynamic-amount.test.ts"
+  },
+  {
+   "name": "Silver Surfer, Cosmic Voyager",
+   "files": [
+    "engine/src/cards/pool/silver-surfer-cosmic-voyager.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/flicker-return-tapped-if.test.ts"
+  },
+  {
+   "name": "Spellpyre Phoenix",
+   "files": [
+    "engine/src/cards/pool/spellpyre-phoenix.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cards-cycled-this-turn.test.ts"
+  },
+  {
+   "name": "Sphinx of the Chimes",
+   "files": [
+    "engine/src/cards/pool/sphinx-of-the-chimes.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/discard-same-name.test.ts"
+  },
+  {
+   "name": "Squall, Gunblade Duelist",
+   "files": [
+    "engine/src/cards/pool/squall-gunblade-duelist.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/attack-with-intervening-if.test.ts"
+  },
+  {
+   "name": "Storyweave",
+   "files": [
+    "engine/src/cards/pool/storyweave.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/next-enter-with-counters.test.ts"
+  },
+  {
+   "name": "Summoning Trap",
+   "files": [
+    "engine/src/cards/pool/summoning-trap.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/countered-this-turn-by-opponent.test.ts"
+  },
+  {
+   "name": "Synod Sanctum",
+   "files": [
+    "engine/src/cards/pool/synod-sanctum.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/linked-exile-return-under-you.test.ts"
+  },
+  {
+   "name": "Tears of Rage",
+   "files": [
+    "engine/src/cards/pool/tears-of-rage.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/remembered-permanents.test.ts"
+  },
+  {
+   "name": "The Dragon-Kami Reborn",
+   "files": [
+    "engine/src/cards/pool/the-dragon-kami-reborn.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/look-and-choose-exile-with-counter.test.ts"
+  },
+  {
+   "name": "The Kingpin of Crime",
+   "files": [
+    "engine/src/cards/pool/the-kingpin-of-crime.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/combat-damage-by-toughness-timed.test.ts"
+  },
+  {
+   "name": "The Spot, Living Portal",
+   "files": [
+    "engine/src/cards/pool/the-spot-living-portal.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/put-on-library-this-way.test.ts"
+  },
+  {
+   "name": "Toluz, Clever Conductor",
+   "files": [
+    "engine/src/cards/pool/toluz-clever-conductor.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/discards-batch-objects.test.ts"
+  },
+  {
+   "name": "Tomb of Urami",
+   "files": [
+    "engine/src/cards/pool/tomb-of-urami.ts",
+    "engine/src/cards/tokens/urami.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/art-pins.test.ts"
+  },
+  {
+   "name": "Torrent Elemental",
+   "files": [
+    "engine/src/cards/pool/torrent-elemental.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/activate-from-exile.test.ts"
+  },
+  {
+   "name": "Tunnel Ignus",
+   "files": [
+    "engine/src/cards/pool/tunnel-ignus.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/turn-history-that-player.test.ts"
+  },
+  {
+   "name": "Undiscovered Paradise",
+   "files": [
+    "engine/src/cards/pool/undiscovered-paradise.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/return-to-hand-during-next-untap.test.ts"
+  },
+  {
+   "name": "Urgent Necropsy",
+   "files": [
+    "engine/src/cards/pool/urgent-necropsy.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/collect-evidence-targets.test.ts"
+  },
+  {
+   "name": "Vanish into Memory",
+   "files": [
+    "engine/src/cards/pool/vanish-into-memory.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/vanish-into-memory.test.ts"
+  },
+  {
+   "name": "Vesuvan Doppelganger",
+   "files": [
+    "engine/src/cards/pool/vesuvan-doppelganger.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/copy-grants-unprinted-self-ability.test.ts"
+  },
+  {
+   "name": "Winter's Chill",
+   "files": [
+    "engine/src/cards/pool/winters-chill.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/x-capped-by-snow-lands.test.ts"
+  },
+  {
+   "name": "Zur's Weirding",
+   "files": [
+    "engine/src/cards/pool/zurs-weirding.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/draw-replacement-reveal.test.ts"
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Caller of the Hunt",
+   "needs": [
+    "cost:creature-type-chosen-as-cast-kept-on-permanent"
+   ],
+   "size": "small",
+   "why": "Re-keyed: cost:choose-creature-type-as-cast was built for Aphetto Dredging (a type its targets share), but Caller has no targets and its permanent must keep the type, which moveObject clears from the spell."
+  },
+  {
+   "name": "Mister Immortal",
+   "needs": [
+    "zone:ability-from-several-zones"
+   ],
+   "size": "small",
+   "why": "Re-keyed: zone:activate-from-exile was built for Torrent Elemental, but Mister Immortal's one ability works from a graveyard or exile, which one zone can't say."
+  }
+ ]
+}

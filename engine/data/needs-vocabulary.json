@@ -6514,6 +6514,13 @@
    "family": "cost:may-cost-non-mana",
    "example": "Celestial Reunion: \"you may choose a creature type and behold two creatures of that type\" — a creature type named as the spell is cast (601.2b), remembered on it and read as it resolves."
   },
+  "cost:creature-type-chosen-as-cast-kept-on-permanent": {
+   "family": "cost:may-cost-non-mana",
+   "example": "Caller of the Hunt: \"as an additional cost to cast this spell, choose a creature type\", its P/T counting that type — a type chosen with no targets to share it, kept by the permanent the spell becomes (moveObject clears the spell's chosenCreatureType)."
+  },
+  "zone:ability-from-several-zones": {
+   "example": "Mister Immortal: one activated ability that works while its card is in a graveyard or in exile — an ability's zone as a list."
+  },
   "zone:impulse-while-you-control-source": {
    "family": "zone:impulse-permission-options",
    "example": "Gwen Stacy // Ghost-Spider: \"you may play that card for as long as you control this creature\" — the impulse while-source duration checks only that the source is on the battlefield, not who controls it."
