@@ -248,14 +248,22 @@ export interface TargetTaxShare {
  * once for each target it's on, its shared part once in all. */
 export function targetsWithinTaxes(
   legal: {
-    readonly targetTaxes?: {
-      readonly taxes: readonly { readonly object: ObjectId; readonly generic: number; readonly once?: readonly TargetTaxShare[] }[];
-      readonly afford: number;
-    };
+    readonly targetTaxes?: TargetTaxBudget;
+    /** The evidence the targets cost (`targetEvidence`), a budget of its own. */
+    readonly targetEvidence?: TargetTaxBudget;
   },
   targets: readonly (TargetRef | null)[],
 ): boolean {
-  const offer = legal.targetTaxes;
+  return withinBudget(legal.targetTaxes, targets) && withinBudget(legal.targetEvidence, targets);
+}
+
+/** What each target adds to one cost, and the most that can be paid. */
+export interface TargetTaxBudget {
+  readonly taxes: readonly { readonly object: ObjectId; readonly generic: number; readonly once?: readonly TargetTaxShare[] }[];
+  readonly afford: number;
+}
+
+function withinBudget(offer: TargetTaxBudget | undefined, targets: readonly (TargetRef | null)[]): boolean {
   if (offer === undefined) return true;
   let total = 0;
   const once = new Map<string, number>();

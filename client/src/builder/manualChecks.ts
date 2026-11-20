@@ -13625,4 +13625,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       fill: 1,
     }),
   ),
+  // --- Collect evidence X, X the targets' total mana value (2026-11-20) ------
+  preset(
+    "Urgent Necropsy: a target the graveyard can't cover isn't offered",
+    board({
+      you: { bf: ['Swamp*2', 'Forest*2'], hand: ['Urgent Necropsy'], gy: ['Grizzly Bears'] },
+      opp: { bf: ['Sol Ring', 'Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
 ]

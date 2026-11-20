@@ -19578,6 +19578,16 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.additionalCost = { payLifePerTarget: Number(m[1]) };
       continue;
     }
+    // "As an additional cost to cast this spell, collect evidence X, where X
+    // is the total mana value of the permanents this spell targets" (Urgent
+    // Necropsy — rule 701.59a).
+    if (
+      castable &&
+      line === "As an additional cost to cast ~, collect evidence X, where X is the total mana value of the permanents ~ targets."
+    ) {
+      out.additionalCost = { collectEvidenceTargetsManaValue: true };
+      continue;
+    }
     // "This spell costs {3} less to cast if it targets a creature whose
     // controller has eight or more cards in their graveyard" (Lullmage's
     // Domination — `targetCostReduction`).

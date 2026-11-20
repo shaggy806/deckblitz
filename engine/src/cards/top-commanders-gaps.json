@@ -21,6 +21,7 @@
     "cost:self-cost-increase-not-your-turn",
     "cost:alternative-cost-generic-equal-spell-mana-value",
     "cost:discard-same-name",
+    "cost:collect-evidence-x-target-mana-value",
     "trigger:discards-batch-objects",
     "trigger:attack-with-intervening-if",
     "amount:differently-named-dungeons-completed",

@@ -346,6 +346,16 @@ The key `cost:discard-same-name`: `AbilityCost.discard.sameName` — gated on `c
 and refuses a mix; the bots' candidates and the fuzzer keep to one name, and the client won't pick a second name.
 Sphinx of the Chimes (18810). `test/discard-same-name.test.ts`.
 
+### Collect evidence X, X the targets' total mana value — built 2026-11-20
+
+The key `cost:collect-evidence-x-target-mana-value`: `additionalCost.collectEvidenceTargetsManaValue` (rule
+701.59a). X is the distinct targeted permanents' mana values (`Game.evidenceOfTargets`), gated in
+`whyCannotCastSpell` once the targets are known (701.59b) and paid as a required `AlsoCostAsk.collectEvidence`
+(`evidenceRequired`) once the spell is on the stack (601.2h). The cast offer's `targetEvidence` (each target's worth,
+the graveyard's total) keeps a target past it off the offer, and `targetsWithinTaxes` reads it beside `targetTaxes`,
+so the client, the bots and the fuzzer don't pick a set too dear together. Urgent Necropsy (18881).
+`test/collect-evidence-targets.test.ts`.
+
 ### A draw replaced by a card returned from the graveyard, or a loss — found built 2026-11-20
 
 The key `replacement:draw-replacement-return-from-graveyard-or-lose`: Forbidden Crypt (16193). No engine code: Out

@@ -6288,6 +6288,10 @@ export class Game {
         perX !== null
           ? null
           : this.targetTaxOffer(def, player, card, undefined, () => castableAt(pricedAt).castable, kicked === true, overload);
+      // "Collect evidence X, where X is the total mana value of the
+      // permanents this spell targets": a target the graveyard can't cover
+      // isn't offered (Urgent Necropsy).
+      const targetEvidence = this.targetEvidenceOffer(def, player, card);
       // "Costs {N} less if it targets …": offered with only the targets that
       // earn it when the full price isn't affordable.
       // "As though it had flash if it targets …": offered with only the
@@ -6300,7 +6304,9 @@ export class Game {
           def,
           player,
           card,
-          this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card)), targetTax),
+          this.affordableTargetOptions(player, this.targetOptionsFor(specs, player, this.cardSource(def, card)), targetTax).map(
+            (slot) => (targetEvidence === null ? slot : slot.filter(targetEvidence.within)),
+          ),
           () => castableAt(pricedAt).castable,
         ),
         () => castableAt(pricedAt).castable,
@@ -6493,6 +6499,7 @@ export class Game {
         ...(face !== undefined ? { face } : {}),
         ...this.castModalDescriptor(def, player, card, escalatedMaxModes(), spreeSets ?? undefined, kicked === true, targetTax, payableX),
         ...(targetTax !== null ? { targetTaxes: { taxes: targetTax.taxes, afford: targetTax.afford } } : {}),
+        ...(targetEvidence !== null ? { targetEvidence: { taxes: targetEvidence.taxes, afford: targetEvidence.afford } } : {}),
         ...(sacrifices.length > 0
           ? {
               sacrifice: {
@@ -19168,6 +19175,52 @@ export class Game {
     );
   }
 
+  /** For a spell whose additional cost collects evidence X, X the total mana
+   * value of the permanents it targets (Urgent Necropsy — rule 701.59a):
+   * what each permanent it could target adds, and what `player`'s graveyard
+   * holds, the spell itself left out (it's on the stack by then, 601.2a;
+   * 701.59b). `within` is whether one target alone can be paid for. `null`
+   * for any other spell. */
+  private targetEvidenceOffer(
+    def: CardDefinition,
+    player: PlayerId,
+    card: ObjectId,
+  ): {
+    readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+    readonly afford: number;
+    readonly within: (ref: TargetRef) => boolean;
+  } | null {
+    if (def.additionalCost?.collectEvidenceTargetsManaValue !== true) return null;
+    const afford = this.state.zones.perPlayer[player].graveyard.reduce(
+      (sum, id) => (id === card ? sum : sum + this.evidenceWorth(id, undefined)),
+      0,
+    );
+    const worth = new Map<ObjectId, number>();
+    const specs = this.effectiveTargetSpecs(def, undefined, false, false, player, card);
+    for (const ref of this.targetOptionsFor(specs, player, this.cardSource(def, card)).flat()) {
+      if (ref.kind === "object" && !worth.has(ref.object)) worth.set(ref.object, this.evidenceOfTargets([ref]));
+    }
+    return {
+      taxes: [...worth].flatMap(([object, generic]) => (generic > 0 ? [{ object, generic }] : [])),
+      afford,
+      within: (ref) => ref.kind !== "object" || (worth.get(ref.object) ?? 0) <= afford,
+    };
+  }
+
+  /** The total mana value of the permanents among `targets`, each once
+   * however many times it's targeted ("the permanents this spell targets"). */
+  private evidenceOfTargets(targets: readonly (TargetRef | null | undefined)[]): number {
+    const seen = new Set<ObjectId>();
+    let total = 0;
+    for (const ref of targets) {
+      if (ref?.kind !== "object" || seen.has(ref.object)) continue;
+      seen.add(ref.object);
+      const object = this.state.objects[ref.object];
+      if (object?.zone === "battlefield") total += manaValueOfObject(this.registry, object);
+    }
+    return total;
+  }
+
   /** A suspended card whose free cast didn't happen stays exiled, no longer
    * suspended (rule 702.62a: "if you don't, it remains exiled"). */
   private abandonSuspendedCast(cardId: ObjectId, reason: string): void {
@@ -22515,6 +22568,16 @@ export class Game {
     if (lifePerTarget !== undefined && !this.canPayLife(player, lifePerTarget * targetCount)) {
       return `${player} can't pay ${lifePerTarget * targetCount} life to cast ${def.name} with ${targetCount} targets`;
     }
+    // "Collect evidence X, where X is the total mana value of the permanents
+    // this spell targets" (Urgent Necropsy): only with that much in the
+    // graveyard besides the spell (rule 701.59b). Before the targets are
+    // chosen none is assumed, X 0.
+    if (def.additionalCost?.collectEvidenceTargetsManaValue === true && targets !== undefined) {
+      const evidence = this.evidenceOfTargets(targets);
+      if (!this.canCollectEvidence(player, evidence, { filter: {}, except: cardId })) {
+        return `${player}'s graveyard can't collect evidence ${evidence} for ${def.name} with those targets`;
+      }
+    }
     // "You may behold a Dragon" (rule 701.4a): only with one to behold, the
     // spell itself (on its way to the stack, 601.2a) not among them. "You
     // may reveal a Dragon card from your hand" likewise.
@@ -25540,6 +25603,19 @@ export class Game {
         player,
         priorityTo: via === "effect" ? this.activePlayer : player,
         collectEvidence: altEvidence,
+      });
+    }
+    // "Collect evidence X, where X is the total mana value of the permanents
+    // this spell targets" (Urgent Necropsy): X from the targets just locked
+    // in (601.2c), the cards chosen now the spell is on the stack (601.2h).
+    // Not declinable, and evidence 0 is collected all the same.
+    if (def.additionalCost?.collectEvidenceTargetsManaValue === true) {
+      (this.state.pendingAlsoCosts ??= []).push({
+        spell: cardId,
+        player,
+        priorityTo: via === "effect" ? this.activePlayer : player,
+        collectEvidence: this.evidenceOfTargets(this.state.objects[cardId]?.targets ?? []),
+        evidenceRequired: true,
       });
     }
     // Jump-start's "by discarding a card" (rule 702.133a), paid the same way.
@@ -51672,7 +51748,11 @@ controlledBy,
       );
     }
     if (ask.collectEvidence !== undefined) {
-      this.beginCollectEvidence(player, spell, ask.collectEvidence, { x: this.state.objects[spell]?.xValue ?? 0, priorityTo });
+      this.beginCollectEvidence(player, spell, ask.collectEvidence, {
+        x: this.state.objects[spell]?.xValue ?? 0,
+        priorityTo,
+        ...(ask.evidenceRequired === true ? { required: true } : {}),
+      });
     }
     const shared = ask.sharedCreatureTypes;
     const object = this.state.objects[spell];

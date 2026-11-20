@@ -3459,6 +3459,9 @@ export interface AlsoCostAsk {
    * when there's one, else asked (`choose-creature-type`'s `forCost`). Not a
    * cost: queued here to be settled before anyone gets priority. */
   readonly sharedCreatureTypes?: readonly string[];
+  /** The evidence is a mandatory additional cost's (Urgent Necropsy): not
+   * declinable, and evidence 0 counts as collected with nothing exiled. */
+  readonly evidenceRequired?: true;
   /** An action as the cost (`KickerAlsoCost.do`, or an ability's `AbilityCost.do`
    * paid after its other parts, 601.2h). */
   readonly do?: EffectSpec;

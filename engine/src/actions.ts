@@ -1515,6 +1515,16 @@ export type LegalAction =
         readonly taxes: readonly { readonly object: ObjectId; readonly generic: number; readonly once?: readonly TargetTaxShare[] }[];
         readonly afford: number;
       };
+      /** Set when the spell's additional cost collects evidence equal to the
+       * total mana value of the permanents it targets (Urgent Necropsy —
+       * `additionalCost.collectEvidenceTargetsManaValue`): each offered
+       * permanent's mana value, and the total its caster's graveyard holds.
+       * A target past it isn't offered; several too dear together are
+       * refused (`targetsWithinTaxes` reads this beside `targetTaxes`). */
+      readonly targetEvidence?: {
+        readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+        readonly afford: number;
+      };
       /** Present when this is an alternative-permission cast (not from the hand
        * for the printed cost — `"flashback"` / `"escape"` from the graveyard,
        * `"foretell"` from face-down exile). The driver must echo `via` back in

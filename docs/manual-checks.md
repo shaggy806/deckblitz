@@ -8996,3 +8996,8 @@ Each board's die comes up 4.
 - **Do:** In this 4-player game, activate Sphinx of the Chimes's ability.
 - **Expect:** Both Shocks are discarded with no question asked, Grizzly Bears stays in your hand, and you draw four cards.
 
+## Collect evidence X, where X is the total mana value of the targets (2026-11-20)
+
+### Urgent Necropsy: a target the graveyard can't cover isn't offered
+- **Do:** Cast Urgent Necropsy. Target Bob's Sol Ring as the artifact, skip the other three, then pick the Grizzly Bears in your graveyard and confirm.
+- **Expect:** Your graveyard holds mana value 2. With Sol Ring (1) picked, neither Grizzly Bears (2) nor Hill Giant (4) can be the creature target. The evidence popup asks for total mana value 1 or more; Sol Ring is destroyed and your Grizzly Bears is exiled.

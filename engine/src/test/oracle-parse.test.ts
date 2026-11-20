@@ -782,6 +782,15 @@ describe("what a spell costs: amounts, colours and targets", () => {
     };
   const self = (text: string): unknown => face("Sorcery", text).selfCostReduction;
 
+  it("collect evidence X, X the total mana value of its targets (Urgent Necropsy)", () => {
+    expect(
+      face(
+        "Instant",
+        "As an additional cost to cast this spell, collect evidence X, where X is the total mana value of the permanents this spell targets.\nDestroy up to one target artifact.",
+      ).additionalCost,
+    ).toEqual({ collectEvidenceTargetsManaValue: true });
+  });
+
   it("an increase the spell prints on itself (Hurkyl's Final Meditation)", () => {
     expect(self("During turns other than yours, this spell costs {3} more to cast.")).toEqual({
       condition: { kind: "not", of: { kind: "your-turn" } },

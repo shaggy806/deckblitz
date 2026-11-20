@@ -5035,6 +5035,14 @@ export interface CardDefinition {
      * (601.2c). The offer's `targetCount` range is what the caster's life
      * can pay (rule 119.4). */
     readonly payLifePerTarget?: number;
+    /** "As an additional cost to cast this spell, **collect evidence X,
+     * where X is the total mana value of the permanents this spell
+     * targets**" (Urgent Necropsy — rule 701.59a): X fixed with the targets
+     * (601.2c), each permanent counted once; paid once the spell is on the
+     * stack (601.2h), the cards chosen then. The offer's `targetEvidence`
+     * says what each target adds and what the graveyard holds (701.59b), so
+     * a target past it isn't offered and a set too dear together is refused. */
+    readonly collectEvidenceTargetsManaValue?: true;
     /**
      * "As an additional cost to cast this spell, **waterbend {5}**" (rule
      * 701.67a — Water Whip): the generic mana is added to the total cost
@@ -6976,6 +6984,7 @@ interface CardDraft {
     readonly payLife?: number;
     readonly payLifeX?: boolean;
     readonly payLifePerTarget?: number;
+    readonly collectEvidenceTargetsManaValue?: true;
     readonly waterbend?: number | "x";
     readonly behold?: BeholdSpec;
     readonly exileFromGraveyard?: {

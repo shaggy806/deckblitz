@@ -355,6 +355,8 @@ const castExtras = (cast: CastAction) => ({
   // Nor these: what a target adds to the cost (Boreal Elemental's "costs {2}
   // more to cast") or takes off it, which the targeting steps keep payable.
   ...(cast.targetTaxes !== undefined ? { targetTaxes: cast.targetTaxes } : {}),
+  // And the evidence each target costs (Urgent Necropsy).
+  ...(cast.targetEvidence !== undefined ? { targetEvidence: cast.targetEvidence } : {}),
   ...(cast.xCost !== undefined ? { xCost: cast.xCost } : {}),
   // Not `escapeExile`: that's an offer to pick from, not a field to echo.
   // `startCast` asks for the picks and carries them as `CastPicks`.
@@ -654,6 +656,9 @@ interface Targeting {
   /** What some targets add to a spell's cost and how much more can be paid
    * (the cast offer's `targetTaxes`): a target past it isn't offered. */
   readonly targetTaxes?: CastAction['targetTaxes']
+  /** The evidence each target adds to collect and how much the graveyard
+   * holds (the cast offer's `targetEvidence` — Urgent Necropsy). */
+  readonly targetEvidence?: CastAction['targetEvidence']
   /** An X spell's offer: with `xValue` chosen, a target is offered only
    * while that X stays payable with it (a taxed target lowers the most X, a
    * cost-reducing one may be what affords it — `maxXForTargets`). */
@@ -770,13 +775,13 @@ function targetTaxNotes(t: Targeting, nameOf: (id: ObjectId) => string): readonl
  * leaves that X unpayable. The engine refuses those casts; never offering
  * them saves the player the refusal. */
 function payableOptions(t: Targeting, options: readonly TargetRef[]): readonly TargetRef[] {
-  const { targetTaxes, xCost, xValue } = t
+  const { targetTaxes, targetEvidence, xCost, xValue } = t
   const taxedX = xCost !== undefined && xValue !== undefined && (xCost.targetTaxes !== undefined || xCost.maxXUnreduced !== undefined)
-  if (targetTaxes === undefined && !taxedX) return options
+  if (targetTaxes === undefined && targetEvidence === undefined && !taxedX) return options
   return options.filter((ref) => {
     const picked = [...t.picked, ref]
-    if (taxedX) return maxXForTargets(xCost, t.targetCount, picked) >= xValue
-    return targetsWithinTaxes({ targetTaxes }, picked)
+    if (taxedX && maxXForTargets(xCost, t.targetCount, picked) < xValue) return false
+    return targetsWithinTaxes({ ...(taxedX ? {} : { targetTaxes }), targetEvidence }, picked)
   })
 }
 
