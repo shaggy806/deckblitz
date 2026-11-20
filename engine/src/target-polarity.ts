@@ -573,6 +573,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // for a library: a refill for a graveyard deck, or none left to draw.
   "exchange-zones": (n, v) => v.touch(n.who, "either", MINOR),
   "skip-next-untap": (n, v) => v.touch(n.who, "harm", MINOR),
+  // Undiscovered Paradise's own return, on its mana ability: no target.
+  "return-to-hand-during-next-untap": none,
   "skip-untap-step": (n, v) => v.touch(n.who, "harm", MINOR),
   "skip-step": (n, v) => v.touch(n.who, "harm", MINOR),
   "exile-from-library": (n, v) => v.touch(n.whose, "harm", MINOR),

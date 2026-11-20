@@ -3220,6 +3220,14 @@ export interface PlayerState {
    * their control since included (the rulings). Cleared by that untap step.
    * Absent with none. See the `skip-next-untap` effect. */
   untapSkips?: readonly CardFilter[];
+  /** "During your next untap step, as you untap your permanents, return this
+   * land to its owner's hand" (Undiscovered Paradise): the permanents, each
+   * in the battlefield stint it was in when the effect applied (rule 400.7),
+   * that this player's next untap step returns to their owners' hands —
+   * whether or not they'd untap (the ruling), and only if still there.
+   * Cleared by that untap step; a skipped one leaves them waiting (614.10a).
+   * Absent with none. See the `return-to-hand-during-next-untap` effect. */
+  untapReturns?: readonly { readonly object: ObjectId; readonly stint: number }[];
   /** "That player skips their next untap step" (Brine Elemental, Dovin,
    * Architect of Law — rule 614.10): how many of this player's untap steps
    * are still to be skipped whole — no phasing, no day/night check, nothing

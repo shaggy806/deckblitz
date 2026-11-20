@@ -9518,6 +9518,20 @@ export type EffectSpec =
     }
   | {
       /**
+       * "**During your next untap step, as you untap your permanents, return
+       * this land to its owner's hand**" (Undiscovered Paradise, on its mana
+       * ability's `also`): not a triggered ability — nothing triggers or
+       * resolves in an untap step (rule 502.4) — but part of the untap
+       * step's own untapping (502.3), the effect's controller's next one that
+       * isn't skipped (614.10a). The permanent goes only if it's still the
+       * same object then (rule 400.7), and whether or not it would untap
+       * (the ruling).
+       */
+      readonly kind: "return-to-hand-during-next-untap";
+      readonly target: ObjectRef;
+    }
+  | {
+      /**
        * "[That player] **skips their next untap step**" (Brine Elemental,
        * Shisato, Dovin, Architect of Law's −9, Avizoa — rule 614.10): the
        * whole step, as though it didn't exist (500.11) — no phasing (502.1),
@@ -14469,6 +14483,9 @@ export interface EffectApi {
   ): number;
   /** See the `"skip-next-untap"` {@link EffectSpec}. */
   skipNextUntap(target: TargetRef, filter: CardFilter): void;
+  /** See the `"return-to-hand-during-next-untap"` {@link EffectSpec}: the
+   * effect's controller's next untap step returns `object`. */
+  returnToHandDuringNextUntap(object: ObjectId): void;
   /** See the `"skip-untap-step"` {@link EffectSpec}: one more of `player`'s
    * untap steps to skip. */
   skipUntapStep(player: PlayerId): void;
@@ -22151,6 +22168,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "skip-next-untap": {
       for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) ctx.skipNextUntap(target, spec.filter);
+      return;
+    }
+    case "return-to-hand-during-next-untap": {
+      const target = objectRefAct(spec.target, ctx);
+      if (target?.kind === "object") ctx.returnToHandDuringNextUntap(target.object);
       return;
     }
     case "skip-untap-step": {

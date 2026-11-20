@@ -12005,11 +12005,24 @@ export class Game {
    * which of `untapping` to leave tapped (`kept`). */
   private finishUntapStep(untapping: readonly ObjectId[], kept: readonly ObjectId[]): void {
     const active = this.activePlayer;
+    // "During your next untap step, as you untap your permanents, return
+    // this land to its owner's hand" (Undiscovered Paradise): part of the
+    // untapping (rule 502.3), whether or not it would untap (the ruling), if
+    // it's still the same object (400.7).
+    const activeReturns = this.state.players[active];
+    const returns = activeReturns?.untapReturns ?? [];
+    if (activeReturns !== undefined) delete activeReturns.untapReturns;
+    for (const { object, stint } of returns) {
+      const permanent = this.state.objects[object];
+      if (permanent?.zone !== "battlefield" || (permanent.zoneChangeCount ?? 0) !== stint) continue;
+      this.returnToHandByEffect({ kind: "object", object });
+    }
     // How many of the active player's permanents the step untapped (rule
     // 502.3), a token stack as every token in it.
     let untapped = 0;
     for (const id of untapping) {
       if (kept.includes(id)) continue;
+      if (this.state.objects[id]?.zone !== "battlefield") continue;
       const count = this.state.objects[id]?.stackCount ?? 1;
       if (this.untapUnlessStunned(id, active)) untapped += count;
     }
@@ -44215,6 +44228,12 @@ controlledBy,
       skipNextUntap: (target, filter) => {
         const player = target.kind === "player" ? this.state.players[target.player] : undefined;
         if (player !== undefined) player.untapSkips = [...(player.untapSkips ?? []), filter];
+      },
+      returnToHandDuringNextUntap: (object) => {
+        const permanent = this.state.objects[object];
+        const player = this.state.players[controller];
+        if (permanent?.zone !== "battlefield" || player === undefined) return;
+        player.untapReturns = [...(player.untapReturns ?? []), { object, stint: permanent.zoneChangeCount ?? 0 }];
       },
       skipUntapStep: (player) => {
         const state = this.state.players[player];
