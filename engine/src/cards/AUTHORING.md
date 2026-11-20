@@ -7650,7 +7650,15 @@ clause (section 9):
   same two for the zone a land was played from (rule 305.1), Spider-Man 2099's
   "played a land … from anywhere other than your hand" `{ what:
   "lands-played", who: "you", notFrom: ["hand"] }`, in an `any` with the
-  `cast-this-turn` read of `castFrom: { not: "hand" }`. Éowyn, Shieldmaiden's "if another Human entered the battlefield
+  `cast-this-turn` read of `castFrom: { not: "hand" }`. `what: "spells-cast"`
+  is a spell its caster cast (the journal's `spell-cast` entries), for a
+  window `cast-this-turn` can't read: Arboria's "creatures can't attack a
+  player unless that player cast a spell or put a nontoken permanent onto the
+  battlefield during their last turn" is a `cant-attack` `at: { defender: {
+  holds: { kind: "not", of: { kind: "any", of: [{ kind: "turn-history", what:
+  "spells-cast", who: "you", window: "your-last-turn" }, { … what: "entered",
+  filter: { token: false } }] } } } }` — the `PlayerTest`'s "you" is the player
+  attacked. Éowyn, Shieldmaiden's "if another Human entered the battlefield
   under your control this turn" is `{ what: "entered", filter: { subtype:
   "Human" }, excludeSelf: true }` (a Human that entered and left since still
   counts); "if a creature died under your control this turn" is `{ what:

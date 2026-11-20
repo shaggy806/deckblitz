@@ -126,6 +126,9 @@ export type JournalKind =
   /** `player` played a land (305.1), from the zone `from` ("played a land
    * from anywhere other than your hand"). */
   | "land-played"
+  /** `player` cast the spell `object` (601.2i), whoever's turn it was:
+   * Arboria's "unless that player cast a spell … during their last turn". */
+  | "spell-cast"
   /** `player` drew a card (121.1). */
   | "card-drawn"
   /** A card `player` owned left their graveyard, for anywhere; `was`: the
@@ -474,6 +477,8 @@ export type JournalWhat =
   | "life-gained"
   /** A player played a land. */
   | "lands-played"
+  /** A player cast a spell. */
+  | "spells-cast"
   /** A player waterbent, earthbent, firebent or airbent (`bent` entries):
    * Avatar Aang's "if you've done all four this turn". */
   | "waterbent"
@@ -574,6 +579,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   "life-lost": { kind: "life-lost" },
   "life-gained": { kind: "life-gained" },
   "lands-played": { kind: "land-played" },
+  "spells-cast": { kind: "spell-cast" },
   waterbent: { kind: "bent", match: (e) => e.how === "water" },
   earthbent: { kind: "bent", match: (e) => e.how === "earth" },
   firebent: { kind: "bent", match: (e) => e.how === "fire" },

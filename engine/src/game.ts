@@ -25380,6 +25380,7 @@ export class Game {
     }
     this.state.players[player].spellsCastThisTurn += 1;
     (this.state.players[player].spellsCastThisTurnAs ??= []).push(this.castRecordOf(cardId, player, castFrom));
+    this.journal({ kind: "spell-cast", player, object: cardId });
     this.spendNextSpellFlash(player, cardId);
     this.spendNextSpellGrants(player, cardId, castFrom);
     this.recordCastName(player, cardId);

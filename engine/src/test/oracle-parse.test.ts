@@ -24230,3 +24230,37 @@ describe("attacking two or more opponents (Nemesis Phoenix)", () => {
     expect(phoenix.activated[0].effect).toEqual({ kind: "put-onto-battlefield", target: "source", enterTapped: true, attacking: "choose" });
   });
 });
+
+describe("an attack at a player who did nothing last turn (Arboria)", () => {
+  it("reads the restriction with the player's own last turn", () => {
+    const arboria = parseFace(
+      {
+        name: "Arboria",
+        type_line: "World Enchantment",
+        oracle_text:
+          "Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(arboria.complete).toBe(true);
+    expect(arboria.static[0].restrictions).toEqual([
+      {
+        kind: "cant-attack",
+        at: {
+          defender: {
+            holds: {
+              kind: "not",
+              of: {
+                kind: "any",
+                of: [
+                  { kind: "turn-history", what: "spells-cast", who: "you", window: "your-last-turn" },
+                  { kind: "turn-history", what: "entered", who: "you", window: "your-last-turn", filter: { token: false } },
+                ],
+              },
+            },
+          },
+        },
+      },
+    ]);
+  });
+});

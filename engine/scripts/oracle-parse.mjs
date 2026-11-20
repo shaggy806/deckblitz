@@ -25665,6 +25665,22 @@ function parseStatic(line, text) {
       return { affects: { scope: "self" }, attackTax: { generic, ...(covers === "you" ? {} : { covers }) }, text };
     }
   }
+  // Arboria: an attack at a player who did neither during their own last
+  // turn (rule 508.1c) — the player alone, their planeswalkers still open.
+  if (line === "Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn.") {
+    const acted = {
+      kind: "any",
+      of: [
+        { kind: "turn-history", what: "spells-cast", who: "you", window: "your-last-turn" },
+        { kind: "turn-history", what: "entered", who: "you", window: "your-last-turn", filter: { token: false } },
+      ],
+    };
+    return {
+      affects: { scope: "filter", filter: { type: "creature" } },
+      restrictions: [{ kind: "cant-attack", at: { defender: { holds: { kind: "not", of: acted } } } }],
+      text,
+    };
+  }
   // "Creatures with power greater than the number of cards in your hand can't
   // attack" (Ensnaring Bridge): its scope read as attackers are declared,
   // against the source's controller's hand (`restrictionsOf`).
