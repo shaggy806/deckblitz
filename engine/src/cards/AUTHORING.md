@@ -1239,8 +1239,12 @@ Ramos, Dragon Engine's "for each of **that spell's** colors"; as it last
 existed if it has left, colourless 0; with `chosen: true`, only the colours
 chosen for the source as it entered — Tablet of the Guilds' "1 life for each
 of the chosen colors it is"), `{ colorsAmong: CardFilter,
-excludeSelf? }` (colours among battlefield permanents, each once — Sisay's
-"each color among other legendary permanents you control"),
+excludeSelf?, andSpellsCastThisTurn? }` (colours among battlefield permanents, each once — Sisay's
+"each color among other legendary permanents you control"; with
+`andSpellsCastThisTurn: true` the colours of the spells you've cast this turn,
+each as cast and the resolving one included, join the same set — First
+Family's "colors among permanents you control and spells you've cast this
+turn"; `colors-among-spells-cast.test.ts`),
 `{ distinctTokenNames: CardFilter }` (how many differently named tokens among
 the matching permanents — Neriv, Crackling Vanguard's "the number of
 differently named tokens you control" is `{ token: true, controlledBy: "you"

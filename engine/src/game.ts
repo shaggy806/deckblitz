@@ -159,6 +159,7 @@ import {
   playerEffectCovers,
   restrictionsOf,
   colorsAmongPermanents,
+  colorSetAmongPermanents,
   computeCharacteristics,
   nothingAttackedThisCombat,
   effectiveSupertypes,
@@ -42292,8 +42293,18 @@ export class Game {
         const object = this.state.objects[target.object];
         return object === undefined ? [] : [...effectiveColors(this.state, this.registry, object)];
       },
-      colorsAmong: (filter, except) =>
-        colorsAmongPermanents(this.state, this.registry, controller, filter, except),
+      colorsAmong: (filter, except, andSpellsCastThisTurn) => {
+        if (andSpellsCastThisTurn !== true) {
+          return colorsAmongPermanents(this.state, this.registry, controller, filter, except);
+        }
+        // "…and spells you've cast this turn" (First Family): one set of
+        // colours, each spell's as it was cast.
+        const colors = new Set(colorSetAmongPermanents(this.state, this.registry, controller, filter, except));
+        for (const { spell } of this.state.players[controller]?.spellsCastThisTurnAs ?? []) {
+          for (const color of spell.colors) colors.add(color);
+        }
+        return colors.size;
+      },
       distinctTokenNames: (filter) => {
         // A token's name (rule 111.4): the one its maker gave it — a
         // `tokenName` or a copy exception's (`nameOf`), or the key of a
@@ -71873,7 +71884,8 @@ controlledBy,
           stillInExile: fromExile,
           source,
         }),
-      colorsAmong: (filter, except = []) => ctx.colorsAmong(filter, [...except, ...notYet]),
+      colorsAmong: (filter, except = [], andSpellsCastThisTurn) =>
+        ctx.colorsAmong(filter, [...except, ...notYet], andSpellsCastThisTurn),
     });
     return Math.max(0, n);
   }

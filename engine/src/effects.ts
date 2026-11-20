@@ -1245,8 +1245,14 @@ export type EffectAmount =
   /** How many colours there are **among** battlefield permanents matching a
    * filter, each counted once however many permanents have it — "for each
    * color among other legendary permanents you control" (Sisay, Weatherlight
-   * Captain). `excludeSelf` leaves the effect's own source out ("other"). */
-  | { readonly colorsAmong: CardFilter; readonly excludeSelf?: boolean }
+   * Captain). `excludeSelf` leaves the effect's own source out ("other").
+   * `andSpellsCastThisTurn` adds the colours of the spells the effect's
+   * controller has cast this turn, each as it was cast, to the same set — "the
+   * number of colors among permanents you control **and spells you've cast
+   * this turn**" (First Family, `{ controlledBy: "you" }`); a spell cast this
+   * turn counts whether or not it's still on the stack, the resolving one
+   * included. */
+  | { readonly colorsAmong: CardFilter; readonly excludeSelf?: boolean; readonly andSpellsCastThisTurn?: true }
   /** How many **differently named** tokens among the battlefield permanents
    * matching a filter — Neriv, Crackling Vanguard's "the number of
    * differently named tokens you control" (`{ token: true, controlledBy:
@@ -13399,7 +13405,7 @@ export interface EffectApi {
    * battlefield if it has left — see `{ colorsOf }`. */
   colorsOf(target: TargetRef): readonly Color[];
   /** See the `{ colorsAmong }` {@link EffectAmount}. */
-  colorsAmong(filter: CardFilter, except: readonly ObjectId[]): number;
+  colorsAmong(filter: CardFilter, except: readonly ObjectId[], andSpellsCastThisTurn?: boolean): number;
   /** See the `{ distinctTokenNames }` {@link EffectAmount}. */
   distinctTokenNames(filter: CardFilter): number;
   /** The votes of the `vote` this resolution held, in the order cast — or,
@@ -18481,7 +18487,11 @@ export function signedAmountValue(
     return ctx.colorsOf(ref).filter((color) => chosen.includes(color)).length;
   }
   if ("colorsAmong" in amount) {
-    return ctx.colorsAmong(amount.colorsAmong, amount.excludeSelf === true ? [ctx.source] : []);
+    return ctx.colorsAmong(
+      amount.colorsAmong,
+      amount.excludeSelf === true ? [ctx.source] : [],
+      amount.andSpellsCastThisTurn === true,
+    );
   }
   if ("distinctTokenNames" in amount) return ctx.distinctTokenNames(amount.distinctTokenNames);
   if ("votesFor" in amount) {

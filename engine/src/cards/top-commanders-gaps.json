@@ -5,6 +5,7 @@
     "trigger:discards-batch-objects",
     "trigger:attack-with-intervening-if",
     "amount:differently-named-dungeons-completed",
+    "effect:colors-among-permanents-and-spells-cast",
     "mechanic:commander-chosen-color-pregame",
     "amount:pile-or-guess-effects-this-turn",
     "trigger:surveils-first-time-each-turn",

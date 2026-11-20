@@ -4242,6 +4242,12 @@ export function parseSentence(sentence, ctx) {
       if (head === "add x mana of any one color") return { kind: "add-mana", mana: "any-color", amount: SHARED_CREATURE_TYPE };
     }
   }
+  // "You draw X cards and gain X life, where X is the number of colors among
+  // permanents you control [and spells you've cast this turn]" (First Family).
+  if ((m = /^(?:you )?draw x cards and (?:you )?gain x life, where x is the number of colors among permanents you control( and spells you've cast this turn)?\.$/i.exec(s))) {
+    const amount = { colorsAmong: { controlledBy: "you" }, ...(m[1] !== undefined ? { andSpellsCastThisTurn: true } : {}) };
+    return { kind: "sequence", effects: [{ kind: "draw", amount }, { kind: "gain-life", amount }] };
+  }
   if (/^put target nonland permanent into its owner's library second from the top\.$/i.test(s)) {
     return {
       kind: "put-on-library",

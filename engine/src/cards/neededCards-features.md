@@ -362,6 +362,12 @@ toughness equal to the chosen number" is an `amounts` condition over an aggregat
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
 `dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
 read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
+### Colours among your permanents and the spells you've cast this turn — built 2026-11-20
+
+The key `effect:colors-among-permanents-and-spells-cast`, for First Family: the `{ colorsAmong }` amount's
+`andSpellsCastThisTurn`, one set of colours from the matching permanents and from the controller's
+`spellsCastThisTurnAs` records (each spell's colours as it was cast, the resolving one included).
+`test/colors-among-spells-cast.test.ts`.
 
 ### A commander's colour chosen before the game begins — built 2026-11-20
 

@@ -4869,7 +4869,7 @@ export function colorsAmongPermanents(
 }
 
 /** The colours {@link colorsAmongPermanents} counts. */
-function colorSetAmongPermanents(
+export function colorSetAmongPermanents(
   state: GameState,
   registry: CardRegistry,
   you: PlayerId,

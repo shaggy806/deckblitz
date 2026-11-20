@@ -15856,6 +15856,14 @@ describe("chroma, what it devoured, a commander here, a shared creature type", (
       sentence("Add X mana of any one color, where X is the greatest number of creatures you control that have a creature type in common."),
     ).toEqual({ kind: "add-mana", mana: "any-color", amount: shared });
   });
+  it("the colours among your permanents and the spells you've cast this turn (First Family)", () => {
+    const amount = { colorsAmong: { controlledBy: "you" }, andSpellsCastThisTurn: true };
+    expect(
+      sentence(
+        "You draw X cards and gain X life, where X is the number of colors among permanents you control and spells you've cast this turn.",
+      ),
+    ).toEqual({ kind: "sequence", effects: [{ kind: "draw", amount }, { kind: "gain-life", amount }] });
+  });
   it("static reads", () => {
     const read = (oracle_text: string) =>
       parseFace({ name: "Card", type_line: "Enchantment", oracle_text }, { tokenFor: (d: string) => d }).static[0];
