@@ -19494,9 +19494,14 @@ export class Game {
       colored.push({ colors: offering.colors, coloredOnly: false });
     }
     // What the spell prints on itself: each one judged alone (Assassin's Ink).
+    // An increase ("during turns other than yours, this spell costs {3}
+    // more", Hurkyl's Final Meditation) goes on before anything comes off
+    // (rule 601.2f).
+    let selfIncrease = 0;
     for (const self of def.selfCostReduction === null ? [] : [def.selfCostReduction].flat()) {
       if (self.thisWay === "flashback" && costString !== def.flashback?.cost) continue;
       if (!staticConditionMet(this.state, this.registry, this.state.objects[cardId], self.condition)) continue;
+      if (self.increaseGeneric !== undefined) selfIncrease += Math.max(0, this.costAmount(self.increaseGeneric, player, cardId, cardId));
       if (self.reduceGeneric !== undefined) reduction += this.costAmount(self.reduceGeneric, player, cardId, cardId);
       if (self.reduceColored !== undefined) {
         const times = self.reduceColoredTimes === undefined ? 1 : this.costAmount(self.reduceColoredTimes, player, cardId, cardId);
@@ -19583,7 +19588,7 @@ export class Game {
     const reducedTotal = reduceManaCost(
       {
         ...base,
-        generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax + permissionTax,
+        generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax + permissionTax + selfIncrease,
         // "Black spells you cast cost {B} more to cast" (Derelor): pips added
         // before anything comes off (rule 601.2f).
         colored: Object.fromEntries(

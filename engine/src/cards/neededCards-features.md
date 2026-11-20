@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A spell's own conditional cost increase — built 2026-11-20
+
+The key `cost:self-cost-increase-not-your-turn`: `SelfCostReduction.increaseGeneric`, any amount added under the
+entry's `condition` before any reduction (rule 601.2f), read in `castingCostOf`. Hurkyl's Final Meditation (17881).
+The scaffolder reads "During your turn / turns other than yours, ~ costs {N} more to cast" and "~ costs {N} more to
+cast if …" (`costIfCondition`). `test/self-cost-increase.test.ts`.
+
 ### A draw replaced by a card returned from the graveyard, or a loss — found built 2026-11-20
 
 The key `replacement:draw-replacement-return-from-graveyard-or-lose`: Forbidden Crypt (16193). No engine code: Out

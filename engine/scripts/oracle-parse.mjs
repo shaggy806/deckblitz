@@ -23567,6 +23567,16 @@ function selfCostLine(line) {
     const one = reducing(m[1], { kind: "your-turn" });
     return one === null ? null : { selfCostReduction: one };
   }
+  // "During turns other than yours, ~ costs {3} more to cast" (Hurkyl's Final
+  // Meditation): an increase the spell prints on itself (rule 601.2f).
+  if ((m = /^During (your turn|turns other than yours), ~ costs \{(\d+)\} more to cast\.$/.exec(line))) {
+    const yours = { kind: "your-turn" };
+    return { selfCostReduction: { condition: m[1] === "your turn" ? yours : { kind: "not", of: yours }, increaseGeneric: Number(m[2]) } };
+  }
+  if ((m = /^~ costs \{(\d+)\} more to cast if (.+)\.$/.exec(line))) {
+    const condition = costIfCondition(m[2]);
+    return condition === null ? null : { selfCostReduction: { condition, increaseGeneric: Number(m[1]) } };
+  }
   // "This effect can't reduce the amount of mana ~ costs by more than {5}"
   // (Valiant Changeling): the lesser of the count and the cap, so a cost
   // increase past it still leaves mana to pay (rule 601.2f).

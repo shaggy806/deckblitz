@@ -18,6 +18,7 @@
     "effect:copy-exception-grants-unprinted-self-ability",
     "replacement:poison-counters-capped",
     "replacement:gain-life-from-spell-or-ability",
+    "cost:self-cost-increase-not-your-turn",
     "trigger:discards-batch-objects",
     "trigger:attack-with-intervening-if",
     "amount:differently-named-dungeons-completed",

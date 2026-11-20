@@ -4759,6 +4759,11 @@ export interface SelfCostReduction {
   readonly condition: StaticCondition;
   /** Generic mana taken off: a fixed number or a live count. */
   readonly reduceGeneric?: EffectAmount;
+  /** Generic mana **added** instead, under the same condition: "During turns
+   * other than yours, this spell costs {3} more to cast" (Hurkyl's Final
+   * Meditation, `{ condition: { kind: "not", of: { kind: "your-turn" } },
+   * increaseGeneric: 3 }`), put on before any reduction (rule 601.2f). */
+  readonly increaseGeneric?: EffectAmount;
   /** Coloured mana taken off, as a mana string — Ertai's Scorn's "{U} less",
    * Stormwing Entity's "{2}{U} less" (`reduceGeneric: 2, reduceColored: "{U}"`).
    * Each symbol takes a pip of its colour, else a hybrid pip with it (rule

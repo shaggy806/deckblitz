@@ -782,6 +782,17 @@ describe("what a spell costs: amounts, colours and targets", () => {
     };
   const self = (text: string): unknown => face("Sorcery", text).selfCostReduction;
 
+  it("an increase the spell prints on itself (Hurkyl's Final Meditation)", () => {
+    expect(self("During turns other than yours, this spell costs {3} more to cast.")).toEqual({
+      condition: { kind: "not", of: { kind: "your-turn" } },
+      increaseGeneric: 3,
+    });
+    expect(self("This spell costs {2} more to cast if you control an artifact.")).toEqual({
+      condition: { kind: "controls", filter: { type: "artifact" }, atLeast: 1 },
+      increaseGeneric: 2,
+    });
+  });
+
   it("a count of lands your opponents control that could produce {C} (Obsidian Charmaw)", () => {
     expect(
       self("This spell costs {1} less to cast for each land your opponents control that could produce {C}."),
