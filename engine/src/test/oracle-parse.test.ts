@@ -23650,6 +23650,18 @@ describe("a life gain become draws (Nefarious Lich)", () => {
       byOwnSpellOrAbility: true,
     });
   });
+
+  it("reads an Aura's trigger as it enters attached to a creature (Infinite Reflection)", () => {
+    const aura = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura",
+      oracle_text: "Enchant creature\nWhen this Aura enters attached to a creature, you gain 1 life.",
+      mana_cost: "{5}{U}",
+      colors: ["U"],
+      cmc: 6,
+    } as never) as unknown as { triggered: { trigger?: unknown }[] };
+    expect(aura.triggered[0]?.trigger).toEqual({ on: "becomes-attached", who: "self", asEnters: true, filter: { type: "creature" } });
+  });
 });
 
 describe("creatures your opponents control, or played by them, enter tapped (Uphill Battle)", () => {

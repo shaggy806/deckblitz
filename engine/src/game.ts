@@ -38618,6 +38618,8 @@ export class Game {
         return (
           event.type === "permanent-attached" &&
           (spec.who !== "self" || event.source === self.id) &&
+          // "When this Aura enters attached to a creature" (Infinite Reflection).
+          (spec.asEnters !== true || event.asEntered === true) &&
           (spec.onto !== "self" || event.target === self.id) &&
           this.triggerFilterOk(spec.attachment, event.source, self) &&
           // "With mana value less than or equal to that Aura's": with the
@@ -53462,7 +53464,7 @@ controlledBy,
           this.emit({ type: "permanent-attached-to-player", source: id, player: attachTo.player });
         } else if (attachTo !== undefined) {
           this.state.objects[id].attachedTo = attachTo;
-          this.emit({ type: "permanent-attached", source: id, target: attachTo });
+          this.emit({ type: "permanent-attached", source: id, target: attachTo, asEntered: true });
         }
         this.emit({ type: "permanent-entered-battlefield", object: id });
         // A Saga token — a copy of a Saga — enters with a lore counter too
@@ -74399,7 +74401,7 @@ controlledBy,
           (hostZone === "graveyard" && enchantsGraveyardCard(this.registry.get(printedCardName(object)))))
       ) {
         object.attachedTo = host;
-        this.emit({ type: "permanent-attached", source: id, target: host });
+        this.emit({ type: "permanent-attached", source: id, target: host, asEntered: true });
       }
       // Or to the player it enchants, if they're still in the game; if not,
       // the state-based check puts it into the graveyard (704.5m).
@@ -74432,7 +74434,7 @@ controlledBy,
         }
         if (spec?.attach === true && object.attachedTo == null && this.canEquip(id, chosen.id)) {
           object.attachedTo = chosen.id;
-          this.emit({ type: "permanent-attached", source: id, target: chosen.id });
+          this.emit({ type: "permanent-attached", source: id, target: chosen.id, asEntered: true });
         }
       }
       // An Equipment put onto the battlefield "attached to a creature you
@@ -74446,7 +74448,7 @@ controlledBy,
         this.canEquip(id, attachHost, true)
       ) {
         object.attachedTo = attachHost;
-        this.emit({ type: "permanent-attached", source: id, target: attachHost });
+        this.emit({ type: "permanent-attached", source: id, target: attachHost, asEntered: true });
       }
     }
     // Alt-cast zone markers (ROADMAP Phase 6) end on any zone change: a

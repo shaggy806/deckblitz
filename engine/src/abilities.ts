@@ -1319,6 +1319,11 @@ export type TriggerKind =
        * (Brood Keeper), a move from elsewhere or an Aura entering attached
        * alike (the ruling). */
       readonly onto?: "self";
+      /** "When this Aura **enters** attached to a creature" (Infinite
+       * Reflection): only as it enters attached (rule 303.4), never a later
+       * move. The trigger object is the host it entered on, fixed there (its
+       * ruling: moved before the trigger resolves, it's still the first). */
+      readonly asEnters?: true;
       /** What became attached: "an **Aura you control** becomes attached"
        * (Siona), read from this ability's controller's side. */
       readonly attachment?: CardFilter;

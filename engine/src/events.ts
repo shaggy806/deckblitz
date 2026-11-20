@@ -1619,6 +1619,9 @@ export type GameEvent =
       readonly type: "permanent-attached";
       readonly source: ObjectId;
       readonly target: ObjectId;
+      /** It entered the battlefield attached to `target` (rule 303.4), not
+       * moved there: "when this Aura enters attached to a creature". */
+      readonly asEntered?: true;
     })
   | (Base & {
       /** An Aura moved onto a player (rule 303.4): a Curse. */

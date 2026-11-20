@@ -2679,6 +2679,11 @@ export function parseTrigger(clause) {
   if (c === "Whenever ~ becomes attached to a creature") {
     return [{ on: "becomes-attached", who: "self", filter: { type: "creature" } }];
   }
+  // "When this Aura enters attached to a creature" (Infinite Reflection): only
+  // as it enters, "that creature" the host it entered on.
+  if (c === "When ~ enters attached to a creature" || c === "When this Aura enters attached to a creature") {
+    return [{ on: "becomes-attached", who: "self", asEnters: true, filter: { type: "creature" } }];
+  }
   // "Whenever an Aura becomes attached to this creature" (Bramble Elemental).
   if (c === "Whenever an Aura becomes attached to ~") {
     return [{ on: "becomes-attached", onto: "self", attachment: { subtype: "Aura" } }];
