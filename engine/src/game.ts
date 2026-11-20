@@ -41664,6 +41664,13 @@ export class Game {
             : [];
         });
       }
+      if ("onBattlefield" in ref) {
+        // The permanents matching it now, each in its current stint.
+        return this.battlefieldMatching(controller, ref.onBattlefield).flatMap((id): SetMember[] => {
+          const held = this.state.objects[id];
+          return held === undefined ? [] : [{ object: id, stint: held.zoneChangeCount ?? 0, count: held.stackCount ?? 1 }];
+        });
+      }
       if ("turnHistory" in ref) {
         // A journal word's objects, each as its entry kept it (603.10a).
         return journalSetMembers(this.state, this.registry, scoped(ref.who ?? "you"), ref.turnHistory, controller, ref.window);

@@ -4137,6 +4137,19 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
     };
   }
+  // "Attacking creatures you control get +X/+0 until end of turn, where X is
+  // the number of attacking creatures" (Tears of Rage, Jazal Goldmane's
+  // +X/+X): X read once as it resolves, every player's attackers counted.
+  if ((m = sentenceRe(`attacking creatures you control get \\+X/\\+(X|0) until end of turn, where X is the number of attacking creatures`).exec(s))) {
+    const count = { countOf: { type: "creature", attacking: true } };
+    return {
+      kind: "modify-pt-all",
+      filter: { type: "creature", attacking: true, controlledBy: "you" },
+      power: count,
+      toughness: m[1] === "X" ? count : 0,
+      duration: "end-of-turn",
+    };
+  }
   // "Create X [tokens], where X is the amount of damage dealt to it this
   // turn" (Tangled Colony's dies trigger): all the turn's damage to the
   // source, in the stint it refers to. A quoted ability's closing comma
@@ -13552,6 +13565,28 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: delayed });
       continue;
     }
+    // "Sacrifice those creatures at the beginning of the next end step." after
+    // a mass pump (Tears of Rage): the permanents it affected (rule 611.2c),
+    // remembered by its filter right after it, in the same resolution.
+    if (
+      /^sacrifice (?:them|those creatures) at the beginning of the next end step\.$/i.test(sentence) &&
+      priorStep?.kind === "modify-pt-all" &&
+      priorStep.exceptSource !== true &&
+      priorStep.controlledByTarget === undefined &&
+      priorStep.controlledByPlayer === undefined &&
+      priorStep.perMatchOf === undefined
+    ) {
+      const delayed = {
+        kind: "delayed-trigger",
+        at: { step: "end" },
+        remember: { those: { set: { onBattlefield: priorStep.filter } } },
+        effect: { kind: "sacrifice-all", who: "you", filter: { inSet: { remembered: "those" } } },
+        text: sentence,
+      };
+      parsed.push(delayed);
+      hints.push({ sentence, effect: delayed });
+      continue;
+    }
     // "They gain haste until end of turn." after that untap (the same
     // permanents), or a return to the battlefield (Wake the Past).
     if (/^they gain haste until end of turn\.$/i.test(sentence)) {
@@ -18996,6 +19031,9 @@ function parseFaceAsWritten(face, ctx = {}) {
           affects: { scope: "self" },
           replacement: { event: "enters-battlefield", counters: { kind, amount: { ifCondition: kicked, then: words[word], else: 0 } } },
           text,
+    // (Not "…the declare attackers step": read, it would read Teleport whole,
+    // whose "can't be blocked this turn" the templates take for a granted
+    // keyword where it's authored as a restriction, rule 611.2c.)
         });
       }
       if (keyword !== undefined) {

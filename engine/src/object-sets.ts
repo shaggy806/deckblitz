@@ -123,6 +123,13 @@ export type PaidKind =
  *   onto the battlefield with this enchantment" is `exile` of `{
  *   putOntoBattlefieldWith: { triggered: 0 } }`. One that has left the
  *   battlefield since is a new object (rule 400.7) and isn't in it.
+ * - `{ onBattlefield }` — the permanents on the battlefield matching this
+ *   filter now (its "you" the resolving ability's controller), each in its
+ *   current stint. Remembered right after an effect on "each attacking
+ *   creature you control" in the same resolution, it is the set that effect
+ *   changed (rule 611.2c fixes which objects a continuous effect from a
+ *   resolving spell affects as it begins): Tears of Rage's "Sacrifice
+ *   **those creatures** at the beginning of the next end step".
  */
 export type ObjectSetRef =
   | { readonly thisWay: ThisWayKind; readonly who?: PlayerScope | "each" | "each-other"; readonly byOwner?: true }
@@ -135,7 +142,8 @@ export type ObjectSetRef =
   | { readonly targets: readonly number[] }
   | { readonly remembered: string }
   | { readonly turnHistory: JournalWhat; readonly who?: PlayerScope; readonly window?: JournalWindow }
-  | { readonly putOntoBattlefieldWith: true | { readonly triggered: number } | { readonly activated: number } };
+  | { readonly putOntoBattlefieldWith: true | { readonly triggered: number } | { readonly activated: number } }
+  | { readonly onBattlefield: CardFilter };
 
 /** A set captured into a delayed or reflexive trigger as it's made — its
  * members, the ones matching `filter` (read as they are then) when given:
@@ -166,7 +174,8 @@ export function isObjectSetRef(value: unknown): value is ObjectSetRef {
     "attachmentsOf" in value ||
     "targetsOf" in value ||
     "turnHistory" in value ||
-    "putOntoBattlefieldWith" in value
+    "putOntoBattlefieldWith" in value ||
+    "onBattlefield" in value
   );
 }
 
@@ -181,7 +190,7 @@ export function isObjectSetRef(value: unknown): value is ObjectSetRef {
 export function isCardSet(ref: ObjectSetRef): boolean {
   if (ref === "trigger-batch" || ref === "convokers") return false;
   if (typeof ref !== "object") return true;
-  if ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref || "putOntoBattlefieldWith" in ref) return false;
+  if ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref || "putOntoBattlefieldWith" in ref || "onBattlefield" in ref) return false;
   // A journal word's: cards for a discard or a card put into a graveyard,
   // permanents for everything else that left, entered, attacked or crewed.
   if ("turnHistory" in ref) return ref.turnHistory === "discarded" || ref.turnHistory === "descended";

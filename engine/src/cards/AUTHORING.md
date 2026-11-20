@@ -1547,7 +1547,12 @@ reflexive "shares a creature type with **the exiled card**" names its creator's
 is empty; Push the Limit's "return all Mount and Vehicle cards … **Sacrifice
 them** at the beginning of the next end step" remembers `{ thisWay:
 "put-onto-battlefield" }` and sacrifices with `sacrifice-all`'s `filter: {
-inSet: { remembered: "returned" } }`. A delayed ability also keeps its creator's X and "that player", and
+inSet: { remembered: "returned" } }`. `{ onBattlefield: filter }` is the
+permanents matching now: Tears of Rage's "attacking creatures you control get
++X/+0 … **Sacrifice those creatures** at the beginning of the next end step"
+remembers `{ onBattlefield: <the pump's filter> }` right after the
+`modify-pt-all`, the set it affected (rule 611.2c;
+`remembered-permanents.test.ts`). A delayed ability also keeps its creator's X and "that player", and
 its target slots: Rescue from the Underworld's "return that card **and the
 sacrificed card** to the battlefield under your control at the beginning of
 your next upkeep" is a `delayed-trigger` with `remember: { sacrificed: { set: {
