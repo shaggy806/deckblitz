@@ -3546,7 +3546,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     controller's, so a `may` in `then` is still theirs;
     `remember: true` keeps the name on the source permanent for its
     `chosenName` statics (Petrified Hamlet's enters trigger, Day of the
-    Moon's chapters). "Until your next turn, your opponents can't cast spells
+    Moon's chapters). Medomai's Prophecy's "when you cast a spell with the
+    chosen name for the first time this turn" is a `delayed-trigger` `at: {
+    whenever: { on: "cast-spell", who: "you", filter: { chosenName: true },
+    firstTimeEachTurn: true }, once: true }`: the wrapper asks the earlier
+    spells about the Saga's name too. "Until your next turn, your opponents can't cast spells
     with the chosen name" is a `prohibit` effect with `cast` and `play-land` acts; "spells with the chosen name cost {1} less this turn"
     (anyone's) is `reduceSpells { …, allCasters: true }`. Cabal Therapy's
     "Choose a nonland card name. Target player reveals their hand and

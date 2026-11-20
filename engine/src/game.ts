@@ -38209,11 +38209,13 @@ export class Game {
         const filter = spec.filter;
         // With a filter the count is of matching spells: "your first
         // enchantment spell each turn" can be your third spell. Earlier
-        // spells are asked the same question as this one, as they were cast.
+        // spells are asked the same question as this one, as they were cast,
+        // from the same source: "a spell with the chosen name" (Medomai's
+        // Prophecy's delayed trigger) reads the name chosen for it.
         if (filter === undefined) return event.spellsThisTurn === undefined ? undefined : event.spellsThisTurn - 1;
         return (
           (this.state.players[event.player]?.spellsCastThisTurnAs ?? []).filter(({ id, spell }) =>
-            matchesFilter(this.state, this.registry, id, filter, { you: self.controller, snapshot: spell }),
+            matchesFilter(this.state, this.registry, id, filter, { you: self.controller, source: self.id, snapshot: spell }),
           ).length - 1
         );
       }

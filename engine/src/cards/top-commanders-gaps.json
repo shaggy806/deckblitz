@@ -3075,7 +3075,8 @@
   "trigger:attacks-player-with-more-life-than-you",
   "condition:filter-attacking-same-player",
   "stat:card-types-among-spells-cast-this-turn",
-  "trigger:deals-damage-to-recipients-once-per-event"
+  "trigger:deals-damage-to-recipients-once-per-event",
+  "trigger:delayed-first-time-this-turn-chosen-name"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
