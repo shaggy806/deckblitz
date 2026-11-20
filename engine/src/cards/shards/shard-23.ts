@@ -376,6 +376,7 @@ import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHagraMauling from "../pool/hagra-mauling.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
+import _poolHamaTheBloodbender from "../pool/hama-the-bloodbender.js";
 import _poolHaphazardBombardment from "../pool/haphazard-bombardment.js";
 import _poolHarmonicConvergence from "../pool/harmonic-convergence.js";
 import _poolHarvestWurm from "../pool/harvest-wurm.js";
@@ -1442,6 +1443,7 @@ const shard: CardShard = {
     _poolHagraMauling,
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
+    _poolHamaTheBloodbender,
     _poolHaphazardBombardment,
     _poolHarmonicConvergence,
     _poolHarvestWurm,

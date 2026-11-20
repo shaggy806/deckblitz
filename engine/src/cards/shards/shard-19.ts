@@ -351,6 +351,7 @@ import _poolFireBowman from "../pool/fire-bowman.js";
 import _poolFireLordZuko from "../pool/fire-lord-zuko.js";
 import _poolFireNationRaider from "../pool/fire-nation-raider.js";
 import _poolFiremaneAngel from "../pool/firemane-angel.js";
+import _poolFirstFamily from "../pool/first-family.js";
 import _poolFirstTimeFlyer from "../pool/first-time-flyer.js";
 import _poolFissureWizard from "../pool/fissure-wizard.js";
 import _poolFlameKinWarScout from "../pool/flame-kin-war-scout.js";
@@ -1453,6 +1454,7 @@ const shard: CardShard = {
     _poolFireLordZuko,
     _poolFireNationRaider,
     _poolFiremaneAngel,
+    _poolFirstFamily,
     _poolFirstTimeFlyer,
     _poolFissureWizard,
     _poolFlameKinWarScout,

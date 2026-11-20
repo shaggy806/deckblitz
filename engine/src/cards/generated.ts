@@ -6739,6 +6739,7 @@ import _poolDematerialize from "./pool/dematerialize.js";
 import _poolDementiaBat from "./pool/dementia-bat.js";
 import _poolDementiaSliver from "./pool/dementia-sliver.js";
 import _poolDemigodOfRevenge from "./pool/demigod-of-revenge.js";
+import _poolDemilich from "./pool/demilich.js";
 import _poolDemogorgonsClutches from "./pool/demogorgons-clutches.js";
 import _poolDemolish from "./pool/demolish.js";
 import _poolDemolisherSpawn from "./pool/demolisher-spawn.js";
@@ -9835,6 +9836,7 @@ import _poolFirkraagCunningInstigator from "./pool/firkraag-cunning-instigator.j
 import _poolFirmamentSage from "./pool/firmament-sage.js";
 import _poolFirstContact from "./pool/first-contact.js";
 import _poolFirstDayOfClass from "./pool/first-day-of-class.js";
+import _poolFirstFamily from "./pool/first-family.js";
 import _poolFirstResponder from "./pool/first-responder.js";
 import _poolFirstResponse from "./pool/first-response.js";
 import _poolFirstSliversChosen from "./pool/first-slivers-chosen.js";
@@ -12419,6 +12421,7 @@ import _poolHalsinEmeraldArchdruid from "./pool/halsin-emerald-archdruid.js";
 import _poolHaltOrder from "./pool/halt-order.js";
 import _poolHalvarGodOfBattle from "./pool/halvar-god-of-battle.js";
 import _poolHamaPasharRuinSeeker from "./pool/hama-pashar-ruin-seeker.js";
+import _poolHamaTheBloodbender from "./pool/hama-the-bloodbender.js";
 import _poolHamatoGuardianStance from "./pool/hamato-guardian-stance.js";
 import _poolHamatoNinpo from "./pool/hamato-ninpo.js";
 import _poolHamletCaptain from "./pool/hamlet-captain.js";
@@ -40419,6 +40422,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDementiaBat,
   _poolDementiaSliver,
   _poolDemigodOfRevenge,
+  _poolDemilich,
   _poolDemogorgonsClutches,
   _poolDemolish,
   _poolDemolisherSpawn,
@@ -43515,6 +43519,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFirmamentSage,
   _poolFirstContact,
   _poolFirstDayOfClass,
+  _poolFirstFamily,
   _poolFirstResponder,
   _poolFirstResponse,
   _poolFirstSliversChosen,
@@ -46099,6 +46104,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHaltOrder,
   _poolHalvarGodOfBattle,
   _poolHamaPasharRuinSeeker,
+  _poolHamaTheBloodbender,
   _poolHamatoGuardianStance,
   _poolHamatoNinpo,
   _poolHamletCaptain,
@@ -74112,6 +74118,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dementia-bat": _poolDementiaBat,
   "pool/dementia-sliver": _poolDementiaSliver,
   "pool/demigod-of-revenge": _poolDemigodOfRevenge,
+  "pool/demilich": _poolDemilich,
   "pool/demogorgons-clutches": _poolDemogorgonsClutches,
   "pool/demolish": _poolDemolish,
   "pool/demolisher-spawn": _poolDemolisherSpawn,
@@ -77208,6 +77215,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/firmament-sage": _poolFirmamentSage,
   "pool/first-contact": _poolFirstContact,
   "pool/first-day-of-class": _poolFirstDayOfClass,
+  "pool/first-family": _poolFirstFamily,
   "pool/first-responder": _poolFirstResponder,
   "pool/first-response": _poolFirstResponse,
   "pool/first-slivers-chosen": _poolFirstSliversChosen,
@@ -79792,6 +79800,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/halt-order": _poolHaltOrder,
   "pool/halvar-god-of-battle": _poolHalvarGodOfBattle,
   "pool/hama-pashar-ruin-seeker": _poolHamaPasharRuinSeeker,
+  "pool/hama-the-bloodbender": _poolHamaTheBloodbender,
   "pool/hamato-guardian-stance": _poolHamatoGuardianStance,
   "pool/hamato-ninpo": _poolHamatoNinpo,
   "pool/hamlet-captain": _poolHamletCaptain,
