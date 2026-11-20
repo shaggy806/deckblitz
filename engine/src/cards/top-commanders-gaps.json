@@ -8,6 +8,7 @@
     "cost:alt-cost-waterbend",
     "cost:self-reduction-per-instant-sorcery-cast-this-turn",
     "effect:colors-among-permanents-and-spells-cast",
+    "effect:opponent-casts-exiled-free",
     "effect:delayed-trigger-next-untap-step",
     "effect:flicker-lands-return-tapped",
     "effect:look-and-choose-exile-with-counter",

@@ -12903,6 +12903,12 @@ export type EffectSpec =
        * step" is the shape: the card put onto the battlefield isn't a target
        * of the spell, so nothing downstream could otherwise refer to it.
        *
+       * It's applied for **the player who chose**: with a `chooser`, that
+       * player is its "you" — Allure of the Unknown's "an opponent exiles a
+       * nonland card from among them … **That opponent** may cast the exiled
+       * card without paying its mana cost" is `chooser: "an-opponent"` with
+       * `then: { kind: "cast-now", target: 0, free: true }`.
+       *
        * Skipped entirely when nothing was chosen — unless `thenAlways`.
        */
       readonly then?: EffectSpec;
