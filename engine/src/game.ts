@@ -48659,7 +48659,9 @@ controlledBy,
     // Choosing what comes under someone else's control (Drana's defending
     // player, Scrounge's target opponent): a client's own title would say
     // "under your control", or nothing.
-    const entersUnder = enterUnder ?? player;
+    // `underOwners` from one player's graveyard: under that player, its owner
+    // (Reincarnation's "under the control of that creature's owner").
+    const entersUnder = underOwners ? player : (enterUnder ?? player);
     const chooser = anOpponentPicks ? undefined : (picker ?? player);
     const forAnother =
       destination === "battlefield" && entersUnder !== chooser && together === undefined && split === undefined
@@ -48702,8 +48704,10 @@ controlledBy,
       ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
       // A card from another player's graveyard enters under the chooser's
       // control ("to the battlefield under your control").
-      ...(fromAnyGraveyard && destination === "battlefield" ? { enterUnder: player } : {}),
-      ...(enterUnder !== undefined && destination === "battlefield" ? { enterUnder } : {}),
+      // Not one put there under its owner's control (`underOwners`): no
+      // `enterUnder`, so it enters under its owner's.
+      ...(fromAnyGraveyard && destination === "battlefield" && !underOwners ? { enterUnder: player } : {}),
+      ...(enterUnder !== undefined && destination === "battlefield" && !underOwners ? { enterUnder } : {}),
       ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
       ...(enterAttachedTo !== undefined && destination === "battlefield" ? { enterAttachedTo } : {}),
       ...(then?.effect !== undefined ? { then: then.effect } : {}),

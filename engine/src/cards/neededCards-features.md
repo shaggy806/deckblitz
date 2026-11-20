@@ -355,6 +355,12 @@ The key `cost:collect-evidence-x-target-mana-value`: `additionalCost.collectEvid
 the graveyard's total) keeps a target past it off the offer, and `targetsWithinTaxes` reads it beside `targetTaxes`,
 so the client, the bots and the fuzzer don't pick a set too dear together. Urgent Necropsy (18881).
 `test/collect-evidence-targets.test.ts`.
+### A creature card from another player's graveyard, under its owner — built 2026-11-20
+
+The key `effect:return-from-trigger-owners-graveyard-under-owner`: Reincarnation (18968). A dies delayed trigger's
+`look-and-choose` from `{ ownerOf: "trigger-object" }`'s graveyard with `under: "owners"`; the spell's controller
+chooses. `under: "owners"` was ignored from another player's graveyard (the pick entered under the chooser): it now
+enters under its owner. `test/reincarnation.test.ts`.
 
 ### A draw replaced by a card returned from the graveyard, or a loss — found built 2026-11-20
 
