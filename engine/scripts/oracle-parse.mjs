@@ -8516,6 +8516,17 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`all creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
     return { kind: "modify-pt-all", filter: { type: "creature" }, power: Number(m[1]), toughness: Number(m[2]), duration: "end-of-turn" };
   }
+  // Pack Attack: the players being attacked (not their planeswalkers, rule
+  // 802.4), counted as it resolves.
+  if (re(`attacking creatures get \\+X/\\+0 until end of turn, where X is the number of players being attacked`).test(s)) {
+    return {
+      kind: "modify-pt-all",
+      filter: { type: "creature", attacking: true },
+      power: { countPlayers: "players-being-attacked" },
+      toughness: 0,
+      duration: "end-of-turn",
+    };
+  }
   // "Roll the planar die" (Fractured Powerstone): nothing outside a
   // Planechase game, which the engine doesn't play (rule 901.3).
   if (re(`roll the planar die`).test(s)) return { kind: "roll-dice", sides: "planar" };

@@ -24231,6 +24231,21 @@ describe("attacking two or more opponents (Nemesis Phoenix)", () => {
   });
 });
 
+describe("the number of players being attacked (Pack Attack)", () => {
+  it("reads the pump as a count of the players being attacked", () => {
+    const pack = parseFace(
+      {
+        name: "Pack Attack",
+        type_line: "Instant",
+        oracle_text: "Attacking creatures get +X/+0 until end of turn, where X is the number of players being attacked.\nDraw a card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(pack.complete).toBe(true);
+    expect(JSON.stringify(pack.spell ?? pack.effect)).toContain('"countPlayers":"players-being-attacked"');
+  });
+});
+
 describe("an attack at a player who did nothing last turn (Arboria)", () => {
   it("reads the restriction with the player's own last turn", () => {
     const arboria = parseFace(
