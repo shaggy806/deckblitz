@@ -746,6 +746,7 @@ import _poolSerrasHymn from "../pool/serras-hymn.js";
 import _poolSevenDwarves from "../pool/seven-dwarves.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
+import _poolShamblingSwarm from "../pool/shambling-swarm.js";
 import _poolShatterAssumptions from "../pool/shatter-assumptions.js";
 import _poolShatteredAngel from "../pool/shattered-angel.js";
 import _poolShellSkulkin from "../pool/shell-skulkin.js";
@@ -1790,6 +1791,7 @@ const shard: CardShard = {
     _poolSevenDwarves,
     _poolSeveredStrands,
     _poolShalaisAcolyte,
+    _poolShamblingSwarm,
     _poolShatterAssumptions,
     _poolShatteredAngel,
     _poolShellSkulkin,

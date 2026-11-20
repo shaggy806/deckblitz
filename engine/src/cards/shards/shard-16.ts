@@ -724,6 +724,7 @@ import _poolRecall from "../pool/recall.js";
 import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
 import _poolRegalUnicorn from "../pool/regal-unicorn.js";
+import _poolReincarnation from "../pool/reincarnation.js";
 import _poolReiteratingBolt from "../pool/reiterating-bolt.js";
 import _poolReleaseTheGremlins from "../pool/release-the-gremlins.js";
 import _poolRelicGolem from "../pool/relic-golem.js";
@@ -1839,6 +1840,7 @@ const shard: CardShard = {
     _poolRedtoothGenealogist,
     _poolReflectingPool,
     _poolRegalUnicorn,
+    _poolReincarnation,
     _poolReiteratingBolt,
     _poolReleaseTheGremlins,
     _poolRelicGolem,

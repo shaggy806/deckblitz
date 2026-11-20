@@ -3343,6 +3343,7 @@ import _poolBountyBoard from "./pool/bounty-board.js";
 import _poolBountyHunter from "./pool/bounty-hunter.js";
 import _poolBountyOfMight from "./pool/bounty-of-might.js";
 import _poolBountyOfSkemfar from "./pool/bounty-of-skemfar.js";
+import _poolBountyOfTheHunt from "./pool/bounty-of-the-hunt.js";
 import _poolBountyOfTheLuxa from "./pool/bounty-of-the-luxa.js";
 import _poolBovineIntervention from "./pool/bovine-intervention.js";
 import _poolBowOfNylea from "./pool/bow-of-nylea.js";
@@ -22324,6 +22325,7 @@ import _poolReignOfChaos from "./pool/reign-of-chaos.js";
 import _poolReignOfTerror from "./pool/reign-of-terror.js";
 import _poolReignOfThePit from "./pool/reign-of-the-pit.js";
 import _poolReigningVictor from "./pool/reigning-victor.js";
+import _poolReincarnation from "./pool/reincarnation.js";
 import _poolReinforcedBulwark from "./pool/reinforced-bulwark.js";
 import _poolReinforcedRonin from "./pool/reinforced-ronin.js";
 import _poolReinforcements from "./pool/reinforcements.js";
@@ -24695,6 +24697,7 @@ import _poolShamblingRemains from "./pool/shambling-remains.js";
 import _poolShamblingShell from "./pool/shambling-shell.js";
 import _poolShamblingStrider from "./pool/shambling-strider.js";
 import _poolShamblingSuit from "./pool/shambling-suit.js";
+import _poolShamblingSwarm from "./pool/shambling-swarm.js";
 import _poolShamblingVent from "./pool/shambling-vent.js";
 import _poolShamelessCharlatan from "./pool/shameless-charlatan.js";
 import _poolShangChiAndTheTenRings from "./pool/shang-chi-and-the-ten-rings.js";
@@ -37078,6 +37081,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBountyHunter,
   _poolBountyOfMight,
   _poolBountyOfSkemfar,
+  _poolBountyOfTheHunt,
   _poolBountyOfTheLuxa,
   _poolBovineIntervention,
   _poolBowOfNylea,
@@ -56059,6 +56063,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReignOfTerror,
   _poolReignOfThePit,
   _poolReigningVictor,
+  _poolReincarnation,
   _poolReinforcedBulwark,
   _poolReinforcedRonin,
   _poolReinforcements,
@@ -58430,6 +58435,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShamblingShell,
   _poolShamblingStrider,
   _poolShamblingSuit,
+  _poolShamblingSwarm,
   _poolShamblingVent,
   _poolShamelessCharlatan,
   _poolShangChiAndTheTenRings,
@@ -70826,6 +70832,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bounty-hunter": _poolBountyHunter,
   "pool/bounty-of-might": _poolBountyOfMight,
   "pool/bounty-of-skemfar": _poolBountyOfSkemfar,
+  "pool/bounty-of-the-hunt": _poolBountyOfTheHunt,
   "pool/bounty-of-the-luxa": _poolBountyOfTheLuxa,
   "pool/bovine-intervention": _poolBovineIntervention,
   "pool/bow-of-nylea": _poolBowOfNylea,
@@ -89807,6 +89814,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reign-of-terror": _poolReignOfTerror,
   "pool/reign-of-the-pit": _poolReignOfThePit,
   "pool/reigning-victor": _poolReigningVictor,
+  "pool/reincarnation": _poolReincarnation,
   "pool/reinforced-bulwark": _poolReinforcedBulwark,
   "pool/reinforced-ronin": _poolReinforcedRonin,
   "pool/reinforcements": _poolReinforcements,
@@ -92178,6 +92186,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shambling-shell": _poolShamblingShell,
   "pool/shambling-strider": _poolShamblingStrider,
   "pool/shambling-suit": _poolShamblingSuit,
+  "pool/shambling-swarm": _poolShamblingSwarm,
   "pool/shambling-vent": _poolShamblingVent,
   "pool/shameless-charlatan": _poolShamelessCharlatan,
   "pool/shang-chi-and-the-ten-rings": _poolShangChiAndTheTenRings,

@@ -99,6 +99,7 @@ import _poolBonebindOrator from "../pool/bonebind-orator.js";
 import _poolBoonOfEmrakul from "../pool/boon-of-emrakul.js";
 import _poolBother from "../pool/bother.js";
 import _poolBouncersBeatdown from "../pool/bouncers-beatdown.js";
+import _poolBountyOfTheHunt from "../pool/bounty-of-the-hunt.js";
 import _poolBragosRepresentative from "../pool/bragos-representative.js";
 import _poolBramblefortFink from "../pool/bramblefort-fink.js";
 import _poolBrawnAmadeusCho from "../pool/brawn-amadeus-cho.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolBoonOfEmrakul,
     _poolBother,
     _poolBouncersBeatdown,
+    _poolBountyOfTheHunt,
     _poolBragosRepresentative,
     _poolBramblefortFink,
     _poolBrawnAmadeusCho,
