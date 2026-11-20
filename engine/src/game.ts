@@ -13319,6 +13319,10 @@ export class Game {
           // "You may play that card for as long as it remains exiled"
           // (Praetor's Grasp): a permission dies with any move, so after it.
           if (awaiting.playGrant !== undefined) object.playPermission = { ...awaiting.playGrant };
+          // "Exile one of them face down with a hatching counter on it"
+          // (The Dragon-Kami Reborn): counters aren't characteristics, so a
+          // face-down card keeps them where everyone sees them.
+          this.putCountersOnExiled(id, awaiting.exileWithCounters);
           this.forgetStints([id], since);
         }
         return;
@@ -46241,7 +46245,9 @@ controlledBy,
           return (
             object !== undefined &&
             (owner === undefined || object.owner === owner) &&
-            object.exiledFaceDown === undefined &&
+            // A face-down one only if the caster may look at it (rule
+            // 406.3b): Dragon-Kami's Egg's hatching cards.
+            (object.exiledFaceDown === undefined || object.exiledFaceDown.lookers.includes(controller)) &&
             object.foretold !== true &&
             (object.counters?.[counter] ?? 0) > 0
           );
@@ -48226,6 +48232,9 @@ controlledBy,
         ...(destination === "battlefield" && !underOwners ? { enterUnder: enterUnder ?? chooser } : {}),
         ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
         ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
+        ...(withCounters !== undefined && (destination === "exile" || destination === "exile-face-down")
+          ? { exileWithCounters: withCounters }
+          : {}),
         ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
         ...(enterAs !== undefined && destination === "battlefield" ? { enterAs } : {}),
         ...(then?.effect !== undefined ? { then: then.effect } : {}),
@@ -48396,6 +48405,11 @@ controlledBy,
       ...(split !== undefined ? { split, prompt: splitPrompt(split, Math.min(most, eligible.length)) } : {}),
       ...(enterTapped && destination === "battlefield" ? { enterTapped: true } : {}),
       ...(withCounters !== undefined && destination === "battlefield" ? { enterWithCounters: withCounters } : {}),
+      // "Exile one of them face down with a hatching counter on it" (The
+      // Dragon-Kami Reborn).
+      ...(withCounters !== undefined && (destination === "exile" || destination === "exile-face-down")
+        ? { exileWithCounters: withCounters }
+        : {}),
       ...(attacking !== undefined && destination === "battlefield" ? { enterAttacking: attacking } : {}),
       // A card from another player's graveyard enters under the chooser's
       // control ("to the battlefield under your control").
@@ -65159,13 +65173,14 @@ controlledBy,
 
   /** "…and put a cage counter on it": `id`, just exiled, if it stayed there. A
    * card in exile isn't a permanent, so no event says so. */
-  private putCountersOnExiled(
-    id: ObjectId,
-    withCounters: { readonly kind: string; readonly amount: number } | undefined,
-  ): void {
+  private putCountersOnExiled(id: ObjectId, withCounters: EnterCounters | undefined): void {
     const card = this.state.objects[id];
-    if (withCounters === undefined || card?.zone !== "exile" || withCounters.amount <= 0) return;
-    card.counters[withCounters.kind] = (card.counters[withCounters.kind] ?? 0) + withCounters.amount;
+    if (withCounters === undefined || card?.zone !== "exile") return;
+    const each: readonly EnterCounter[] = Array.isArray(withCounters) ? withCounters : [withCounters as EnterCounter];
+    for (const c of each) {
+      if (c.amount <= 0) continue;
+      card.counters[c.kind] = (card.counters[c.kind] ?? 0) + c.amount;
+    }
     invalidateComputedCache();
   }
 

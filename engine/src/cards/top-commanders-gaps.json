@@ -8,6 +8,7 @@
     "cost:alt-cost-waterbend",
     "cost:self-reduction-per-instant-sorcery-cast-this-turn",
     "effect:colors-among-permanents-and-spells-cast",
+    "effect:look-and-choose-exile-with-counter",
     "mechanic:commander-chosen-color-pregame",
     "amount:pile-or-guess-effects-this-turn",
     "trigger:surveils-first-time-each-turn",

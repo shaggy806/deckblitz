@@ -6008,10 +6008,13 @@ export type EffectSpec =
          * card there they own, a face-down one only if they may look at it
          * (rule 406.3b). */
         | { readonly zones: readonly ("hand" | "graveyard" | "exile")[] }
-        /** The face-up cards the effect's controller owns in exile with this
-         * kind of counter on them, as this applies: "copy each exiled card you
-         * own **with a kick counter on it**" (Zethi, Arcane Blademaster, with
-         * `copies`). */
+        /** The cards the effect's controller owns in exile with this kind of
+         * counter on them, as this applies: "copy each exiled card you own
+         * **with a kick counter on it**" (Zethi, Arcane Blademaster, with
+         * `copies`). Face up, or face down where the caster may look at them
+         * (rule 406.3b): Dragon-Kami's Egg's "cast a creature spell from among
+         * cards you own in exile with hatching counters on them", the cards
+         * The Dragon-Kami Reborn exiled face down. */
         | { readonly exiledOwnedWithCounter: string }
         /** The face-up cards in exile with this kind of counter on them,
          * **whoever owns them**, as this applies: Tasha, the Witch Queen's
@@ -12749,7 +12752,10 @@ export type EffectSpec =
        * `ifMatches` the same way — The First Tyrannic War's "if its mana cost
        * contains {X}, it enters with a number of +1/+1 counters on it equal
        * to the number of lands you control" is `ifMatches: { xInManaCost:
-       * true }` (a copy's mana cost, if it enters as one — the ruling). */
+       * true }` (a copy's mana cost, if it enters as one — the ruling).
+       * With `destination: "exile"` or `"exile-face-down"`, the counters the
+       * chosen card gets in exile (`if*` aren't read there): The Dragon-Kami
+       * Reborn's "exile one of them face down with a hatching counter on it". */
       readonly withCounters?:
         | { readonly kind: string; readonly amount: number }
         | readonly {
@@ -14072,9 +14078,10 @@ export interface EffectApi {
   /** "Face-up cards your opponents own" in exile — see the `cast-now`
    * effect's `from`. */
   faceUpExileOpponentsOwn(): readonly ObjectId[];
-  /** The face-up cards `owner` owns in exile with a `counter` counter on them
-   * — a `cast-now`'s `exiledOwnedWithCounter`; whoever owns them with no
-   * `owner` (`exiledWithCounter`). */
+  /** The cards `owner` owns in exile with a `counter` counter on them — a
+   * `cast-now`'s `exiledOwnedWithCounter`; whoever owns them with no `owner`
+   * (`exiledWithCounter`). Face up, or face down where the effect's
+   * controller may look at them (rule 406.3b). */
   exiledOwnedWithCounter(owner: PlayerId | undefined, counter: string): readonly ObjectId[];
   /** The cards `owner` owns in exile that they can see: every face-up one,
    * and a face-down one they may look at (rule 406.3b) — a `cast-now`'s

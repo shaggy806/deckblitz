@@ -4214,9 +4214,11 @@ export type AwaitingDecision =
       /** For a `choose-exiled-card`: nothing moves (`"stay"`); the card picked
        * is what this permanent has now chosen (`GameObject.chosenExiledCard`). */
       readonly rememberExiledOn?: ObjectId;
-      /** For `destination: "exile"`: counters the chosen card gets there —
-       * Mairsil, the Pretender's "and put a cage counter on it". */
-      readonly exileWithCounters?: { readonly kind: string; readonly amount: number };
+      /** For `destination: "exile"` or `"exile-face-down"`: counters the
+       * chosen card gets there — Mairsil, the Pretender's "and put a cage
+       * counter on it", The Dragon-Kami Reborn's "exile one of them face down
+       * with a hatching counter on it" (a look-and-choose's `withCounters`). */
+      readonly exileWithCounters?: EnterCounters;
       /** For `destination: "exile"`: "exile that card **until this creature
        * leaves the battlefield**" (Kitesail Freebooter) — `exiledUntil` for
        * the chosen card. */
