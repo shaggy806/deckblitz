@@ -3058,7 +3058,9 @@
   "effect:free-cast-as-though-flash-if-condition",
   "effect:may-reveal-from-hand",
   "filter:same-name-as-revealed-card",
-  "effect:player-hexproof-until-your-next-turn"
+  "effect:player-hexproof-until-your-next-turn",
+  "effect:player-hexproof-until-your-next-turn",
+  "filter:attached-to-source"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
