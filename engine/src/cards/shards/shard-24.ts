@@ -627,6 +627,7 @@ import _poolPredatoryAdvantage from "../pool/predatory-advantage.js";
 import _poolPrepareFight from "../pool/prepare-fight.js";
 import _poolPressurePoint from "../pool/pressure-point.js";
 import _poolPrideOfThePerfect from "../pool/pride-of-the-perfect.js";
+import _poolPriestOfTheWakeningSun from "../pool/priest-of-the-wakening-sun.js";
 import _poolPrimalOrder from "../pool/primal-order.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProtectiveBubble from "../pool/protective-bubble.js";
@@ -1672,6 +1673,7 @@ const shard: CardShard = {
     _poolPrepareFight,
     _poolPressurePoint,
     _poolPrideOfThePerfect,
+    _poolPriestOfTheWakeningSun,
     _poolPrimalOrder,
     _poolPrologueToPhyresis,
     _poolProtectiveBubble,

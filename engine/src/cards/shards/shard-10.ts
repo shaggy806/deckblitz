@@ -449,6 +449,7 @@ import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInescapableBrute from "../pool/inescapable-brute.js";
 import _poolInfernalSovereign from "../pool/infernal-sovereign.js";
+import _poolInfernalTutor from "../pool/infernal-tutor.js";
 import _poolInformationDealer from "../pool/information-dealer.js";
 import _poolInscriptionOfInsight from "../pool/inscription-of-insight.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
@@ -1506,6 +1507,7 @@ const shard: CardShard = {
     _poolInescapableBlaze,
     _poolInescapableBrute,
     _poolInfernalSovereign,
+    _poolInfernalTutor,
     _poolInformationDealer,
     _poolInscriptionOfInsight,
     _poolInspiringRoar,

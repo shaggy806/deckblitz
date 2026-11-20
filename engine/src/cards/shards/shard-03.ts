@@ -595,6 +595,7 @@ import _poolPutridImp from "../pool/putrid-imp.js";
 import _poolPyreticCharge from "../pool/pyretic-charge.js";
 import _poolPyroclasticElemental from "../pool/pyroclastic-elemental.js";
 import _poolPyrohemia from "../pool/pyrohemia.js";
+import _poolQasaliAmbusher from "../pool/qasali-ambusher.js";
 import _poolQueenBrahne from "../pool/queen-brahne.js";
 import _poolQuestForPureFlame from "../pool/quest-for-pure-flame.js";
 import _poolQuestForTheGravelord from "../pool/quest-for-the-gravelord.js";
@@ -882,6 +883,7 @@ import _poolUrbanDaggertooth from "../pool/urban-daggertooth.js";
 import _poolUrborgJustice from "../pool/urborg-justice.js";
 import _poolUtopiaTree from "../pool/utopia-tree.js";
 import _poolValakutStoneforge from "../pool/valakut-stoneforge.js";
+import _poolVanishIntoMemory from "../pool/vanish-into-memory.js";
 import _poolVariableChaser from "../pool/variable-chaser.js";
 import _poolVassalsDuty from "../pool/vassals-duty.js";
 import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
@@ -1572,6 +1574,7 @@ const shard: CardShard = {
     _poolPyreticCharge,
     _poolPyroclasticElemental,
     _poolPyrohemia,
+    _poolQasaliAmbusher,
     _poolQueenBrahne,
     _poolQuestForPureFlame,
     _poolQuestForTheGravelord,
@@ -1859,6 +1862,7 @@ const shard: CardShard = {
     _poolUrborgJustice,
     _poolUtopiaTree,
     _poolValakutStoneforge,
+    _poolVanishIntoMemory,
     _poolVariableChaser,
     _poolVassalsDuty,
     _poolVeneratedRotpriest,

@@ -1549,6 +1549,7 @@ import _poolAssembleTheLegion from "./pool/assemble-the-legion.js";
 import _poolAssembleThePlayers from "./pool/assemble-the-players.js";
 import _poolAssemble from "./pool/assemble.js";
 import _poolAssembledAlphas from "./pool/assembled-alphas.js";
+import _poolAssemblyHall from "./pool/assembly-hall.js";
 import _poolAssemblySpecialist from "./pool/assembly-specialist.js";
 import _poolAssemblyWorker from "./pool/assembly-worker.js";
 import _poolAssertAuthority from "./pool/assert-authority.js";
@@ -13900,6 +13901,7 @@ import _poolInfernalReckoning from "./pool/infernal-reckoning.js";
 import _poolInfernalScarring from "./pool/infernal-scarring.js";
 import _poolInfernalSovereign from "./pool/infernal-sovereign.js";
 import _poolInfernalTribute from "./pool/infernal-tribute.js";
+import _poolInfernalTutor from "./pool/infernal-tutor.js";
 import _poolInfernalVessel from "./pool/infernal-vessel.js";
 import _poolInfernoElemental from "./pool/inferno-elemental.js";
 import _poolInfernoFist from "./pool/inferno-fist.js";
@@ -21013,6 +21015,7 @@ import _poolPriestOfTheBlessedGraf from "./pool/priest-of-the-blessed-graf.js";
 import _poolPriestOfTheBloodRite from "./pool/priest-of-the-blood-rite.js";
 import _poolPriestOfTheCrossing from "./pool/priest-of-the-crossing.js";
 import _poolPriestOfTheHauntedEdge from "./pool/priest-of-the-haunted-edge.js";
+import _poolPriestOfTheWakeningSun from "./pool/priest-of-the-wakening-sun.js";
 import _poolPriestOfTitania from "./pool/priest-of-titania.js";
 import _poolPriestOfUrabrask from "./pool/priest-of-urabrask.js";
 import _poolPriestOfYawgmoth from "./pool/priest-of-yawgmoth.js";
@@ -21453,6 +21456,7 @@ import _poolQalaAjanisPridemate from "./pool/qala-ajanis-pridemate.js";
 import _poolQarsiHighPriest from "./pool/qarsi-high-priest.js";
 import _poolQarsiRevenant from "./pool/qarsi-revenant.js";
 import _poolQarsiSadist from "./pool/qarsi-sadist.js";
+import _poolQasaliAmbusher from "./pool/qasali-ambusher.js";
 import _poolQasaliPridemage from "./pool/qasali-pridemage.js";
 import _poolQasaliSlingers from "./pool/qasali-slingers.js";
 import _poolQilinsBlessing from "./pool/qilins-blessing.js";
@@ -30606,6 +30610,7 @@ import _poolVanguardsShield from "./pool/vanguards-shield.js";
 import _poolVanilleCheerfulLcie from "./pool/vanille-cheerful-lcie.js";
 import _poolVanishFromSight from "./pool/vanish-from-sight.js";
 import _poolVanishIntoEternity from "./pool/vanish-into-eternity.js";
+import _poolVanishIntoMemory from "./pool/vanish-into-memory.js";
 import _poolVanishingVerse from "./pool/vanishing-verse.js";
 import _poolVanishing from "./pool/vanishing.js";
 import _poolVanishment from "./pool/vanishment.js";
@@ -35216,6 +35221,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAssembleThePlayers,
   _poolAssemble,
   _poolAssembledAlphas,
+  _poolAssemblyHall,
   _poolAssemblySpecialist,
   _poolAssemblyWorker,
   _poolAssertAuthority,
@@ -47567,6 +47573,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInfernalScarring,
   _poolInfernalSovereign,
   _poolInfernalTribute,
+  _poolInfernalTutor,
   _poolInfernalVessel,
   _poolInfernoElemental,
   _poolInfernoFist,
@@ -54680,6 +54687,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPriestOfTheBloodRite,
   _poolPriestOfTheCrossing,
   _poolPriestOfTheHauntedEdge,
+  _poolPriestOfTheWakeningSun,
   _poolPriestOfTitania,
   _poolPriestOfUrabrask,
   _poolPriestOfYawgmoth,
@@ -55120,6 +55128,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolQarsiHighPriest,
   _poolQarsiRevenant,
   _poolQarsiSadist,
+  _poolQasaliAmbusher,
   _poolQasaliPridemage,
   _poolQasaliSlingers,
   _poolQilinsBlessing,
@@ -64273,6 +64282,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVanilleCheerfulLcie,
   _poolVanishFromSight,
   _poolVanishIntoEternity,
+  _poolVanishIntoMemory,
   _poolVanishingVerse,
   _poolVanishing,
   _poolVanishment,
@@ -68896,6 +68906,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/assemble-the-players": _poolAssembleThePlayers,
   "pool/assemble": _poolAssemble,
   "pool/assembled-alphas": _poolAssembledAlphas,
+  "pool/assembly-hall": _poolAssemblyHall,
   "pool/assembly-specialist": _poolAssemblySpecialist,
   "pool/assembly-worker": _poolAssemblyWorker,
   "pool/assert-authority": _poolAssertAuthority,
@@ -81247,6 +81258,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/infernal-scarring": _poolInfernalScarring,
   "pool/infernal-sovereign": _poolInfernalSovereign,
   "pool/infernal-tribute": _poolInfernalTribute,
+  "pool/infernal-tutor": _poolInfernalTutor,
   "pool/infernal-vessel": _poolInfernalVessel,
   "pool/inferno-elemental": _poolInfernoElemental,
   "pool/inferno-fist": _poolInfernoFist,
@@ -88360,6 +88372,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/priest-of-the-blood-rite": _poolPriestOfTheBloodRite,
   "pool/priest-of-the-crossing": _poolPriestOfTheCrossing,
   "pool/priest-of-the-haunted-edge": _poolPriestOfTheHauntedEdge,
+  "pool/priest-of-the-wakening-sun": _poolPriestOfTheWakeningSun,
   "pool/priest-of-titania": _poolPriestOfTitania,
   "pool/priest-of-urabrask": _poolPriestOfUrabrask,
   "pool/priest-of-yawgmoth": _poolPriestOfYawgmoth,
@@ -88800,6 +88813,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/qarsi-high-priest": _poolQarsiHighPriest,
   "pool/qarsi-revenant": _poolQarsiRevenant,
   "pool/qarsi-sadist": _poolQarsiSadist,
+  "pool/qasali-ambusher": _poolQasaliAmbusher,
   "pool/qasali-pridemage": _poolQasaliPridemage,
   "pool/qasali-slingers": _poolQasaliSlingers,
   "pool/qilins-blessing": _poolQilinsBlessing,
@@ -97953,6 +97967,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vanille-cheerful-lcie": _poolVanilleCheerfulLcie,
   "pool/vanish-from-sight": _poolVanishFromSight,
   "pool/vanish-into-eternity": _poolVanishIntoEternity,
+  "pool/vanish-into-memory": _poolVanishIntoMemory,
   "pool/vanishing-verse": _poolVanishingVerse,
   "pool/vanishing": _poolVanishing,
   "pool/vanishment": _poolVanishment,

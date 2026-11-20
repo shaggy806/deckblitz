@@ -66,6 +66,7 @@ import _poolAshiokSculptorOfFears from "../pool/ashiok-sculptor-of-fears.js";
 import _poolAshlingRimebound from "../pool/ashling-rimebound.js";
 import _poolAsmoranomardicadaistinaculdacar from "../pool/asmoranomardicadaistinaculdacar.js";
 import _poolAssassinsTrophy from "../pool/assassins-trophy.js";
+import _poolAssemblyHall from "../pool/assembly-hall.js";
 import _poolAtlantisAttacks from "../pool/atlantis-attacks.js";
 import _poolAuraFracture from "../pool/aura-fracture.js";
 import _poolAurochs from "../pool/aurochs.js";
@@ -1176,6 +1177,7 @@ const shard: CardShard = {
     _poolAshlingRimebound,
     _poolAsmoranomardicadaistinaculdacar,
     _poolAssassinsTrophy,
+    _poolAssemblyHall,
     _poolAtlantisAttacks,
     _poolAuraFracture,
     _poolAurochs,
