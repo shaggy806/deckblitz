@@ -1345,6 +1345,18 @@ revealed card even in a library (Naya Soulbeast, whose cast trigger gives the
 spell `enters-with-counters`). `{ keptOnTopThisWay: true }` counts what a `scry`
 or `surveil` left on top, in its `then` (Starving Revenant).
 
+**Guesses and piles this turn.** `{ pileOrGuessEffectsThisTurn: true }` counts
+the spells and abilities that made one or more players guess or group cards or
+permanents into piles this turn, each once (The Celestial Toymaker's drain, a
+`product` with 2). It counts a `guess`, a `separate-into-piles` that asked
+someone to separate, an `exile-into-piles` that exiled anything, and an
+`each-player-may` marked `guess: true` — mark any guess written as an
+`each-player-may` that way (Liar's Pendulum). `separate-into-piles`' `exilePiles`
+(with `faceDown`) exiles the piles as they're made, the face-down one face down,
+before the choice: "Exile any number of them in a face-down pile and the rest in
+a face-up pile. Defending player chooses one of those piles" (The Celestial
+Toymaker), the unchosen pile staying in exile.
+
 **"The damage prevented this way."** Right after each hit it's the shield's
 `then` with `"x"` (rule 615.5 — Temper, Brace for Impact, Bone Mask, Refraction
 Trap; a `prevent-damage-from-chosen-source`'s `then` reads the spell's own

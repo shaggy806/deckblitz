@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Guesses and piles counted this turn, and piles exiled as made — built 2026-11-20
+
+The key `amount:pile-or-guess-effects-this-turn`, for The Celestial Toymaker (#890): the journal's `piled-or-guessed`
+kind, an entry for each player a spell or ability made guess (`guess`, or an `each-player-may` marked `guess` — Liar's
+Pendulum) or group cards or permanents into piles (rule 700.3: a `separate-into-piles` that asked someone to separate, an
+`exile-into-piles` that exiled anything), keyed by the resolution, so `{ pileOrGuessEffectsThisTurn: true }` counts each
+spell or ability once however many players it asked. Its attack trigger is `separate-into-piles` with `exilePiles`: the
+piles exiled as they're made, the face-down one face down (406.3), before the defending player chooses; the other pile
+stays in exile. `test/commanders-pile-or-guess.test.ts`.
+
 ### The greatest mana value among attached Equipment, and haste for a copy — built 2026-11-18
 
 Two of the last five top-1000 commanders. The key `amount:aggregate-over-attached-equipment`: Tetsuo, Imperial Champion

@@ -27,6 +27,7 @@ export default defineCard({
           effect: {
             kind: "each-player-may",
             who: "that-player",
+            guess: true,
             prompt: "Guess whether a card with the chosen name is in that player's hand",
             choices: [
               {

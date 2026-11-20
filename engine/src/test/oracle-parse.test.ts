@@ -17686,6 +17686,26 @@ describe("manifest or cloak with a choosable source, piles in exile, a return fa
     });
   });
 
+  it("reads The Celestial Toymaker: piles exiled as made, and the pile-or-guess drain", () => {
+    const toymaker = read(
+      "Legendary Creature — Rogue Artificer",
+      "Whenever this creature attacks, look at the top three cards of your library. Exile any number of them in a face-down pile and the rest in a face-up pile. Defending player chooses one of those piles. Put that pile into your hand.\nAt the beginning of each end step, each opponent loses 2 life for each spell or ability that caused one or more players to guess or to group cards or permanents into a pile this turn.",
+    );
+    expect(toymaker.triggered[0].effect).toEqual({
+      kind: "separate-into-piles",
+      objects: { libraryTop: 3 },
+      faceDown: true,
+      exilePiles: true,
+      chooser: "trigger-player",
+      chosen: "hand",
+    });
+    expect(toymaker.triggered[1].effect).toEqual({
+      kind: "lose-life",
+      who: "each-opponent",
+      amount: { product: [{ pileOrGuessEffectsThisTurn: true }, 2] },
+    });
+  });
+
   it("reads a flicker back face down and Yarus's return", () => {
     const shore = read(
       "Creature — Elemental",

@@ -143,6 +143,13 @@ export type JournalKind =
    * entry per choice (`modes-chosen`'s `modal`; the `faces-dilemma`
    * trigger's event). */
   | "faced-dilemma"
+  /** A spell or ability made `player` guess (the `guess` effect, a yes-or-no
+   * marked as one) or group cards or permanents into piles (rule 700.3:
+   * `separate-into-piles`, `exile-into-piles`) — an entry per player per
+   * question, `ability` the resolution's key (`resolutionSince`), so one
+   * spell or ability is one however many players it asked: The Celestial
+   * Toymaker's count. */
+  | "piled-or-guessed"
   /** An extra turn of `player`'s began (rule 500.7). */
   | "extra-turn-began"
   /** `player` spent `amount` mana to cast a spell (700.14, expend). */
@@ -706,6 +713,15 @@ export function entriesThisTurn(state: GameState, kind: JournalKind): JournalEnt
   const out: JournalEntry[] = [];
   for (const entry of state.journal?.entries ?? []) if (entry.turn === now && entry.kind === kind) out.push(entry);
   return out;
+}
+
+/** How many spells and abilities made one or more players guess or group
+ * cards or permanents into piles this turn (`piled-or-guessed`): each
+ * resolution once, however many players it asked — The Celestial Toymaker's
+ * "for each spell or ability that caused one or more players to guess or to
+ * group cards or permanents into a pile this turn". */
+export function pileOrGuessEffectsThisTurn(state: GameState): number {
+  return new Set(entriesThisTurn(state, "piled-or-guessed").map((e) => e.ability)).size;
 }
 
 /** The sum of `amount` (or the count) of this turn's entries of `kind` in

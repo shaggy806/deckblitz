@@ -1107,6 +1107,16 @@ export type EffectAmount =
    * library — Starving Revenant's "surveil 2. Then for each card you put on
    * top of your library, …". A count: which cards they are stays hidden. */
   | { readonly keptOnTopThisWay: true }
+  /** The spells and abilities that made one or more players guess or group
+   * cards or permanents into piles this turn (rule 700.3), each once — The
+   * Celestial Toymaker's "each opponent loses 2 life for each spell or
+   * ability that caused one or more players to guess or to group cards or
+   * permanents into a pile this turn" (a `product` with 2). What counts: a
+   * `guess`, an `each-player-may` marked `guess` (Liar's Pendulum), a
+   * `separate-into-piles` that asked someone to separate, an
+   * `exile-into-piles` that exiled anything (the journal's
+   * `piled-or-guessed`). */
+  | { readonly pileOrGuessEffectsThisTurn: true }
   /**
    * A per-player running total for this turn ({@link TurnStat}), summed over
    * the players `who` names (default `"you"`) — Kydele's "{C} for each card
@@ -11578,6 +11588,12 @@ export type EffectSpec =
        * more times, each one after the last is done (701.55c — The Valeyard).
        */
       readonly villainous?: true;
+      /** These `choices` are a guess: "target opponent **guesses** whether a
+       * card with that name is in your hand" (Liar's Pendulum), a guess
+       * about something other than one card (the `guess` effect's). Each
+       * player asked is noted as having guessed (The Celestial Toymaker's
+       * count, the `pileOrGuessEffectsThisTurn` amount). */
+      readonly guess?: true;
       /** Ask them in turn order **starting with the effect's controller**
        * rather than the active player. (A vote — "starting with you, each
        * player votes …" — is the `vote` effect.) */
@@ -11803,6 +11819,13 @@ export type EffectSpec =
        * pile without seeing it (unless they looked). Only for `libraryTop`.
        */
       readonly faceDown?: true;
+      /** With `faceDown`: "**Exile** any number of them in a face-down pile
+       * and the rest in a face-up pile. Defending player chooses one of those
+       * piles" (The Celestial Toymaker) — the piles are exiled as they're
+       * made, before the choice: the face-down one face down (rule 406.3),
+       * seen only by whoever looked; the chosen pile's fate takes it from
+       * exile, and the other stays there unless `rest` says otherwise. */
+      readonly exilePiles?: true;
       /** What happens to the chosen pile's objects. */
       readonly chosen: PileFate;
       /** What happens to the other pile's — nothing when absent (Liliana's
@@ -13453,6 +13476,15 @@ export interface EffectApi {
   damagePreventedThisWay(): number;
   /** See the `keptOnTopThisWay` {@link EffectAmount}. */
   keptOnTopThisWay(): number;
+  /** See the `pileOrGuessEffectsThisTurn` {@link EffectAmount}. */
+  pileOrGuessEffectsThisTurn(): number;
+  /** This resolution made `player` guess or group cards or permanents into
+   * piles: a `piled-or-guessed` journal entry, keyed by the resolution. */
+  notePileOrGuess(player: PlayerId): void;
+  /** See `separate-into-piles`' `exilePiles`: exile each pile's cards still
+   * in their library, the first pile face down (rule 406.3), seen only by
+   * `lookers`, the rest face up; the cards each pile holds now. */
+  exileSeparatedPiles(piles: readonly (readonly ObjectId[])[], lookers: readonly PlayerId[]): readonly (readonly ObjectId[])[];
   /** Announce that the effect's controller foraged — see the `foraged`
    * {@link EffectSpec}. */
   foraged(): void;
@@ -16704,6 +16736,7 @@ function applyEachPlayerMay(
             }),
           }
         : spec;
+    if (spec.guess === true) ctx.notePileOrGuess(player);
     ctx.askEachPlayerMay(player, theirs, deferred);
     if (!pendingBefore && ctx.decisionPending()) {
       park({ since, asked, toAsk }, parked);
@@ -17142,6 +17175,7 @@ function applyGuess(spec: Extract<EffectSpec, { kind: "guess" }>, ctx: Resolutio
     if (guesser === undefined) return;
     const unseen = [...ctx.cardsIn(ctx.controller, "hand"), ...ctx.cardsIn(ctx.controller, "library")];
     const matching = unseen.filter((id) => ctx.cardMatches(id, proposition.filter)).length;
+    ctx.notePileOrGuess(guesser);
     ctx.askPlayerToChoose(
       guesser,
       [
@@ -18557,6 +18591,7 @@ export function signedAmountValue(
   }
   if ("damagePreventedThisWay" in amount) return ctx.damagePreventedThisWay();
   if ("keptOnTopThisWay" in amount) return ctx.keptOnTopThisWay();
+  if ("pileOrGuessEffectsThisTurn" in amount) return ctx.pileOrGuessEffectsThisTurn();
   if ("turnStat" in amount) {
     if (amount.target !== undefined) {
       const ref = ctx.targets[amount.target];
@@ -25213,6 +25248,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           const begun = ctx.beginPiles({ permanents: what.permanents, whose: separator }, separator);
           lookers = begun.lookers;
           if (begun.objects.length > 0 && ctx.askSeparatePiles(separator, begun.objects, chooser ?? separator, false, fates, false, shape)) {
+            ctx.notePileOrGuess(separator);
             ctx.resumeAfterDecisions(
               { ...spec, progress: { objects: begun.objects, lookers, each: { toSeparate, made, chosen, asked: "separate" } } },
               below,
@@ -25302,12 +25338,19 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         if (chooser === undefined) return;
         const named = opponents.length > 1 ? {} : { chooser };
         if (ctx.askSeparatePiles(separator, progress.objects, chooser, faceDown, fates, opponents.length > 1, pileShape(spec))) {
+          ctx.notePileOrGuess(separator);
           ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, separator, ...named } }, below);
         }
         return;
       }
       let piles = progress.piles;
-      if (piles === undefined) piles = ctx.takePiles() ?? allInLastPile(spec.pileCount, progress.objects);
+      if (piles === undefined) {
+        piles = ctx.takePiles() ?? allInLastPile(spec.pileCount, progress.objects);
+        // "Exile any number of them in a face-down pile and the rest in a
+        // face-up pile" (The Celestial Toymaker): exiled as made, before the
+        // choice.
+        if (spec.exilePiles === true) piles = ctx.exileSeparatedPiles(piles, progress.lookers);
+      }
       if (spec.atRandom === true) {
         const chosen = piles.every((pile) => pile.length === 0) ? 0 : ctx.choosePileAtRandom(progress.separator, piles);
         ctx.finishPiles(
@@ -25357,6 +25400,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           looked,
         );
         if (piles.every((pile) => pile.length === 0)) return;
+        // The effect's controller grouped the cards into piles as it exiled
+        // them.
+        ctx.notePileOrGuess(ctx.controller);
         if (spec.turnOneFaceUp === true) {
           if (ctx.askChoosePile(ctx.controller, ctx.controller, piles, false, looked, { chosen: "turned-face-up" })) {
             ctx.resumeAfterDecisions({ ...spec, progress: { piles, step: "turning" } }, below);

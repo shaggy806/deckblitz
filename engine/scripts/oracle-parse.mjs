@@ -13398,6 +13398,23 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: mill });
       continue;
     }
+    // "Each opponent loses N life for each spell or ability that caused one
+    // or more players to guess or to group cards or permanents into a pile
+    // this turn." (The Celestial Toymaker)
+    const pileM =
+      /^each opponent loses (\d+) life for each spell or ability that caused one or more players to guess or to group cards or permanents into a pile this turn\.$/i.exec(
+        sentence,
+      );
+    if (pileM !== null) {
+      const drain = {
+        kind: "lose-life",
+        who: "each-opponent",
+        amount: { product: [{ pileOrGuessEffectsThisTurn: true }, Number(pileM[1])] },
+      };
+      parsed.push(drain);
+      hints.push({ sentence, effect: drain });
+      continue;
+    }
     // "Then for each card you put on top of your library, you draw a card and
     // you lose 3 life." after a surveil (Starving Revenant).
     const keptM = /^then for each card you put on top of your library, you draw a card and you lose (\d+) life\.$/i.exec(sentence);
@@ -17703,6 +17720,33 @@ function pilesAt(sentences, i, ctx) {
         ...handGraveyard,
       },
       used: 3,
+    };
+  }
+  // "Look at the top three cards of your library. Exile any number of them in
+  // a face-down pile and the rest in a face-up pile. Defending player chooses
+  // one of those piles. Put that pile into your hand." (The Celestial
+  // Toymaker, off its attack trigger): the piles exiled as made
+  // (`exilePiles`), the other staying in exile.
+  m = new RegExp(`^look at the top ${N} cards of your library\\.$`, "i").exec(s(0));
+  if (
+    m !== null &&
+    ctx.thatPlayer === "trigger-player" &&
+    /^exile any number of them in a face-down pile and the rest in a face-up pile\.$/i.test(s(1)) &&
+    /^defending player chooses one of those piles\.$/i.test(s(2)) &&
+    /^put that pile into your hand\.$/i.test(s(3))
+  ) {
+    const n = numberOf(m[1]);
+    if (typeof n !== "number") return null;
+    return {
+      effect: {
+        kind: "separate-into-piles",
+        objects: { libraryTop: n },
+        faceDown: true,
+        exilePiles: true,
+        chooser: "trigger-player",
+        chosen: "hand",
+      },
+      used: 4,
     };
   }
   // "Target opponent looks at the top N … and separates them into a

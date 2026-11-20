@@ -905,6 +905,7 @@ import _poolTerritorialBruntar from "../pool/territorial-bruntar.js";
 import _poolTestOfPriorities from "../pool/test-of-priorities.js";
 import _poolThassaGodOfTheSea from "../pool/thassa-god-of-the-sea.js";
 import _poolTheAetherspark from "../pool/the-aetherspark.js";
+import _poolTheCelestialToymaker from "../pool/the-celestial-toymaker.js";
 import _poolTheCityOnTheEdgeOfForever from "../pool/the-city-on-the-edge-of-forever.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheEnigmaJewel from "../pool/the-enigma-jewel.js";
@@ -1980,6 +1981,7 @@ const shard: CardShard = {
     _poolTestOfPriorities,
     _poolThassaGodOfTheSea,
     _poolTheAetherspark,
+    _poolTheCelestialToymaker,
     _poolTheCityOnTheEdgeOfForever,
     _poolTheEchoverseFulcrum,
     _poolTheEnigmaJewel,

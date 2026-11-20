@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-997 already implemented / 3 missing
+998 already implemented / 2 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -893,7 +893,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  887  Kamahl, Heart of Krosa                          3409 decks  {6}{G}{G}        Legendary Creature — Human Druid
 [x]  888  Círdan the Shipwright                           3400 decks  {3}{G}{U}        Legendary Creature — Elf Noble
 [x]  889  Zul Ashur, Lich Lord                            3398 decks  {1}{B}           Legendary Creature — Zombie Warlock
-[ ]  890  The Celestial Toymaker                          3394 decks  {W}{U}{B}        Legendary Creature — Rogue Artificer
+[x]  890  The Celestial Toymaker                          3394 decks  {W}{U}{B}        Legendary Creature — Rogue Artificer
 [x]  891  Skithiryx, the Blight Dragon                    3393 decks  {3}{B}{B}        Legendary Creature — Phyrexian Dragon Skeleton
 [x]  892  Six                                             3376 decks  {2}{G}           Legendary Creature — Treefolk
 [x]  893  Ghen, Arcanum Weaver                            3373 decks  {R}{W}{B}        Legendary Creature — Human Wizard

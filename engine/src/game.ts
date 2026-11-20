@@ -466,6 +466,7 @@ import {
   beginJournalTurn,
   entriesThisTurn,
   journalTotal,
+  pileOrGuessEffectsThisTurn,
   modesDoneThisTurn,
   noteCombatDamagedBy,
   noteCycledNames,
@@ -42363,6 +42364,11 @@ export class Game {
         damageDealtSince(this.state, since, to, undefined, capped === true ? (event) => this.damageRecipientCap(event) : undefined),
       damagePreventedThisWay: () => damagePreventedBy(this.state, refs?.madeIn ?? since),
       keptOnTopThisWay: () => keptOnTopSince(this.state, since),
+      pileOrGuessEffectsThisTurn: () => pileOrGuessEffectsThisTurn(this.state),
+      // Keyed by the resolution, so one spell or ability that asks several
+      // players (or the same one twice) counts once.
+      notePileOrGuess: (player) =>
+        this.journal({ kind: "piled-or-guessed", player, ability: `${this.state.resolutionSince ?? since}` }),
       exileDamagedThisWayIfTheyDie: (creaturesOnly) => {
         // Every permanent this resolution has dealt damage to so far — damage
         // prevented was never dealt (rule 615.1) — or only the creatures
@@ -44515,6 +44521,22 @@ controlledBy,
           const since = this.state.eventSeq;
           const exiled = this.exileFromLibraryByEffect({ kind: "player", player: controller }, { top }, controller);
           if (!faceUp) this.turnExiledFaceDown(exiled, lookers, since);
+          return exiled;
+        }),
+      exileSeparatedPiles: (piles, lookers) =>
+        piles.map((pile, i) => {
+          const since = this.state.eventSeq;
+          const exiled: ObjectId[] = [];
+          for (const id of pile) {
+            if (this.state.objects[id]?.zone !== "library") continue;
+            this.moveObject(id, "exile");
+            const card = this.state.objects[id];
+            if (card?.zone !== "exile") continue;
+            card.exiledByPlayer = controller;
+            exiled.push(id);
+          }
+          // The first pile is the face-down one (rule 406.3).
+          if (i === 0) this.turnExiledFaceDown(exiled, lookers, since);
           return exiled;
         }),
       turnExiledCardsFaceUp: (cards) => {

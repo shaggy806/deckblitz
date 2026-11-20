@@ -16,17 +16,13 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**997 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
+**998 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
 doubled from 500 on 2026-11-14; re-mark with `npm run cmdrs:mark -w engine`). An imported decklist
 usually has its commander substituted, and that one card is the reason the deck exists. Live
 numbers for everything below come from `npm run cmdrs:gaps -w engine`.
 
-- **The 3 left**, all from ranks 501-1000 and triaged in the sweep records (`card:brief -- "Name"`):
-  - **The Celestial Toymaker** (#890), `amount:pile-or-guess-effects-this-turn`: engine-only, the
-    next to build. Its end-step trigger counts the spells and abilities that made a player guess
-    (the `guess` effect) or group cards or permanents into piles (`separate-into-piles`) this turn —
-    a journal kind recorded per resolving spell or ability, read as a turn stat; its attack trigger
-    is `separate-into-piles` with a face-down pile.
+- **The 2 left**, both from ranks 501-1000, triaged in the sweep records (`card:brief -- "Name"`),
+  and both waiting on a major only the user can approve — no engine-only commander is left:
   - **Clara Oswald** (#737), `mechanic:commander-chosen-color-pregame` — a major waiting on the user
     (a colour chosen before the game, which changes colour identity).
   - **Malik, Grim Manipulator** (#779), `mechanic:secret-choice` — a major waiting on the user (a
