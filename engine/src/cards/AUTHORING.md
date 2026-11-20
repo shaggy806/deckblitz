@@ -7639,6 +7639,9 @@ clause (section 9):
   ability triggers, `what: "entered"` also counts what entered in the same
   event and isn't announced yet, so two lands entering at once each see the
   other — its ruling; `turn-history-that-player.test.ts`.)
+  (`what: "cycled"` is the cards a player cycled, one entry a cycle:
+  Spellpyre Phoenix's "if you cycled two or more cards this turn" is `{ what:
+  "cycled", atLeast: 2 }`; `cards-cycled-this-turn.test.ts`.)
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
   this turn: "if you've discarded a card this turn" is `{ what: "discarded"
   }` (Gilt-Blade Prowler's activation restriction, Recalibrate's

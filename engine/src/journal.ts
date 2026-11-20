@@ -405,6 +405,10 @@ export type JournalWhat =
    * (each "descends"). */
   | "descended"
   | "discarded"
+  /** A card a player cycled (rule 702.29a), an entry a cycle, their list —
+   * Spellpyre Phoenix's "if you cycled two or more cards this turn" (`{ what:
+   * "cycled", atLeast: 2 }`). The card is as it is now. */
+  | "cycled"
   | "to-graveyard"
   /** A card left its owner's graveyard, for anywhere (`left-graveyard`
    * entries); the list is the owner's, and a filter reads the card as it
@@ -546,6 +550,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   "put-into-hand": { kind: "left", whose: "owner", match: (e) => e.to === "hand" },
   descended: { kind: "to-graveyard", match: (e, read) => isPermanentCard(e, read) },
   discarded: { kind: "discarded" },
+  cycled: { kind: "cycled" },
   "to-graveyard": { kind: "to-graveyard" },
   "left-graveyard": { kind: "left-graveyard" },
   surveilled: { kind: "to-graveyard", match: (e) => e.how === "surveil" },

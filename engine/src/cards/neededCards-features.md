@@ -8542,3 +8542,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **When this card is put into your hand from your graveyard (2026-11-20).** `trigger:self-put-into-hand-from-graveyard`: `leaves-graveyard` with `who: "self"` and `to`, on a `fromGraveyard` ability; the trigger scan looks back to the cards that just left (`leftGraveyard`, rule 603.10a). Golgari Brownscale. `test/self-leaves-graveyard.test.ts`.
 
 **A spell's damage to an opponent or battle (2026-11-20).** `trigger:spell-damage-to-opponent-or-battle-from-graveyard`: `deals-damage.orBattle` (with `to: "opponent"` or `"player"`, a battle is a recipient too); the rest was Nether Traitor's `fromGraveyard` payment. Bloodfeather Phoenix. `test/spell-damage-or-battle.test.ts`.
+
+**If you cycled two or more cards this turn (2026-11-20).** `condition:cards-cycled-this-turn`: the journal word `"cycled"` over the `cycled` entries (`turn-history`'s `what: "cycled"`). Spellpyre Phoenix. `test/cards-cycled-this-turn.test.ts`.

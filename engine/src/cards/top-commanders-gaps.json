@@ -32,6 +32,7 @@
     "condition:turn-history-that-player",
     "trigger:self-put-into-hand-from-graveyard",
     "trigger:spell-damage-to-opponent-or-battle-from-graveyard",
+    "condition:cards-cycled-this-turn",
     "effect:colors-among-permanents-and-spells-cast",
     "effect:opponent-casts-exiled-free",
     "effect:delayed-trigger-next-untap-step",

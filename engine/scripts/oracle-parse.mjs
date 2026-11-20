@@ -1521,8 +1521,9 @@ function exileTargetOf(phrase) {
 function graveyardTargetOf(phrase) {
   // "…with mana value X plus 1" (Sidisi, Regent of the Mire): a sum on X.
   // "Target card with awaken" (Halimar Tidecaller): a keyword ability read
-  // off the card's definition (`CardFilter.hasKeyword`).
-  const m = /^target (?:(.+?) )?card(?:( with mana value X(?: plus (\d+))?)| with (awaken|flashback|madness|unearth|disturb))? from (your|a|an opponent's) graveyard$/i.exec(phrase);
+  // off the card's definition (`CardFilter.hasKeyword`); "with a cycling
+  // ability" (Spellpyre Phoenix) likewise.
+  const m = /^target (?:(.+?) )?card(?:( with mana value X(?: plus (\d+))?)| with (?:a )?(awaken|flashback|madness|unearth|disturb|cycling)(?: ability)?)? from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
   const parsed = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
   if (parsed === null) return undefined;
@@ -6953,7 +6954,7 @@ export function parseSentence(sentence, ctx) {
     if (typeof t === "string" ? !/(^|-)spell$/.test(t) : t?.kind !== "spell") return null;
     return { kind: "spell-cant-be-countered", target: slot(m[1]) };
   }
-  if ((m = /^return (target (?:.+? card|card with [a-z]+) from your graveyard) to your hand\.$/i.exec(s))) {
+  if ((m = /^return (target (?:.+? card(?: with a cycling ability)?|card with [a-z]+) from your graveyard) to your hand\.$/i.exec(s))) {
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "return-to-hand", target: i, from: "graveyard" };
   }
@@ -20949,8 +20950,11 @@ function parseFaceAsWritten(face, ctx = {}) {
         // 603.10a — Golgari Brownscale).
         ...(parsedTriggers.every((t) => t.on === "leaves-graveyard" && t.who === "self") ||
         // An ability that returns its own card from the graveyard works
-        // only there (rule 113.6k — Nether Traitor, Bloodfeather Phoenix).
-        /^you may pay (?:\{[^}]+\})+\. If you do, return ~ from your graveyard to the battlefield\./i.test(rest)
+        // only there (rule 113.6k — Nether Traitor, Bloodfeather Phoenix,
+        // Spellpyre Phoenix) — not an Aura's whose host died, which went to
+        // the graveyard with it (Screams from Within).
+        (!parsedTriggers.some((t) => t.who === "attached") &&
+          /^(?:if [^,.]+, )?(?:you may pay (?:\{[^}]+\})+\. If you do, )?return ~ from your graveyard to (?:the battlefield|your hand)\./i.test(rest))
           ? { fromGraveyard: true }
           : {}),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
@@ -21830,6 +21834,9 @@ const TURN_TALLY_IFS = {
     filter: { type: "land" },
     atLeast: 2,
   },
+  // The journal's cycles (Spellpyre Phoenix).
+  "if you cycled two or more cards this turn,": { kind: "turn-history", what: "cycled", atLeast: 2 },
+  "if you've cycled two or more cards this turn,": { kind: "turn-history", what: "cycled", atLeast: 2 },
   // Counters put this turn (`CountersPutSpec`).
   "if you put a counter on a creature this turn,": { kind: "counters-put-this-turn", onType: "creature" },
   "if a +1/+1 counter was put on a permanent under your control this turn,": {

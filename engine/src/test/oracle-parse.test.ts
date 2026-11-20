@@ -24670,3 +24670,26 @@ describe("a spell's damage to an opponent or battle, paid to return from the gra
     });
   });
 });
+
+describe("cards cycled this turn, and a card with a cycling ability (Spellpyre Phoenix)", () => {
+  it("reads the target's cycling and the end-step return's intervening if", () => {
+    const phoenix = parseFace({
+      name: "Spellpyre Phoenix",
+      type_line: "Creature — Phoenix",
+      oracle_text:
+        "Flying\nWhen this creature enters, you may return target instant or sorcery card with a cycling ability from your graveyard to your hand.\nAt the beginning of each end step, if you cycled two or more cards this turn, return this card from your graveyard to your hand.",
+      mana_cost: "{3}{R}{R}",
+      colors: ["R"],
+    }) as unknown as {
+      complete: boolean;
+      triggered: { targets: unknown[]; condition?: unknown; effect: unknown; fromGraveyard?: boolean }[];
+    };
+    expect(phoenix.complete).toBe(true);
+    expect(phoenix.triggered[0].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"], hasKeyword: "cycling" } },
+    ]);
+    expect(phoenix.triggered[1].fromGraveyard).toBe(true);
+    expect(phoenix.triggered[1].condition).toEqual({ kind: "turn-history", what: "cycled", atLeast: 2 });
+    expect(phoenix.triggered[1].effect).toEqual({ kind: "return-to-hand", target: "source", from: "graveyard" });
+  });
+});
