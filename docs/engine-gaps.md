@@ -60,8 +60,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   neither). **String matches to replace:** `readsResolutionCount` finds `timesResolvedThisTurn` by matching the
   ability's JSON (a false positive only journals more); the journal's `destroyed` kind reads `permanent-destroyed`
   reasons through `DESTRUCTION_REASONS`, free text kept in step by hand with the reasons `game.ts` emits (rule
-  701.8b: zero toughness, the legend rule and an unattached Aura aren't destruction). **Silent shapes:** a static's `affects: { scope: "creatures-you-control", filter }` type-checks but ignores
-  the `filter` (use `scope: "filter"`; no pool card has the shape); a permanent's static `underYou` (Gather
+  701.8b: zero toughness, the legend rule and an unattached Aura aren't destruction). **Silent shapes:** a permanent's static `underYou` (Gather
   Specimens' replacement as a static) isn't read, only a resolved one. **Rulings left open:** a token Hallowed
   Moonlight exiles as it would enter isn't counted as created (701.7a; no ruling on "whenever you create");
   a may-answer on a resolved damage replacement's modify or prevent is never asked, only its redirect; Collision
@@ -218,12 +217,10 @@ Found 2026-11-06, building Tempt with Bunnies.
 
 **A door's unlock timestamp is read by some statics only.** `staticTimestamp` (`characteristics.ts`, Steaming Sauna's ruling, 2026-11-11) is read in `scanContributingStaticSources` and `Game.maxHandSizeOf`. A door static that grants a type (layer 4) or changes another rule would still take the Room's own timestamp; no Room in the pool has one. A Room whose text box was exchanged also falls back to the Room's timestamp.
 
-**A back face spawned by name isn't a working permanent.** `debugSpawn("The Myriad Pools")` could not tap for mana; spawning the front and transforming it worked. Seen only in a test (B297); not chased.
 
 
 
 
-**A `trigger-value` condition reads false while triggering.** B327's agent: a `trigger-value` condition reads false outside resolution, so it can't serve as an intervening "if" (rule 603.4) — what kept Atomwheel Acrobats' "whenever you roll a 1 or 2" off a filtered effect (it waits on `trigger:rolls-at-most`).
 
 **An object's own "instead" against an exile replacement isn't asked.** Found in the third lanes run (2026-11-14, Quintorius, Loremaster): Blightsteel Colossus (`shufflesItselfInstead`) and Gravebane Zombie (`ownDestinationInstead`) apply their own replacement first when Rest in Peace or Leyline of the Void would also apply. Neither is a self-replacement effect (rule 614.15: they're static abilities, not part of a resolving spell's instructions), so the owner chooses which applies first (616.1, 616.1e). Quintorius's `bottomAfter` now asks (`askBottomAfterOrder`), except when the spell is countered by another spell's resolution, where nothing can be asked mid-resolution; the same question for those two, raised from `moveObjectUncached`, would need the move deferred as the commander's 903.9b move is. The same for life: Strong's radiation replacement goes ahead of Enduring Angel's `toZeroOrLess` unasked (`Game.lifeToZeroInstead`).
 

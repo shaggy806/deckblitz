@@ -10519,11 +10519,19 @@ export class Game {
     zone: ZoneType = "battlefield",
     opts: { tapped?: boolean; summoningSick?: boolean; announceEntry?: boolean } = {},
   ): ObjectId {
-    const id = this.makeCardObject(name, player);
+    // A back face's name is its card, front face first (rule 712.8a): on the
+    // battlefield it's spawned with that face up, anywhere else as the card.
+    const faces = this.registry.get(name).faces;
+    const backFace = faces === null ? -1 : faces.indexOf(name);
+    const id = this.makeCardObject(backFace > 0 ? faces![0] : name, player);
     this.state.zones.perPlayer[player].library.unshift(id);
     if (zone === "library") return id;
-    this.moveObject(id, zone);
+    this.moveObject(id, zone, backFace > 0 ? { transformed: true } : {});
     const object = this.state.objects[id];
+    if (backFace > 0 && object !== undefined && object.zone === "battlefield" && object.face !== backFace) {
+      object.face = backFace;
+      invalidateComputedCache();
+    }
     // The library is only a staging point here, not where the card came
     // from: a card spawned into a graveyard wasn't milled.
     if (object !== undefined) object.putIntoGraveyardOn = undefined;

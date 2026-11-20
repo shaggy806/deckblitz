@@ -154,6 +154,8 @@ describe("Shinryu, Transcendent Rival: the chosen player loses", () => {
     expect(game.state.objects[shinryu].chosenPlayer).toBeUndefined();
     lose(game, B);
     expect(game.state.result.over).toBe(false);
-    expect(named(game, "Shinryu, Transcendent Rival")).toHaveLength(1);
+    // The card is Zenos yae Galvus, its back face up.
+    expect(named(game, "Zenos yae Galvus")).toEqual([shinryu]);
+    expect(face(game, shinryu)).toBe(1);
   });
 });

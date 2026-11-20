@@ -609,6 +609,9 @@ export type AffectSpec =
   | {
       readonly scope: "creatures-you-control";
       readonly excludeSelf?: boolean;
+      /** Never: these scopes read no `filter` (use `scope: "filter"`), and
+       * without this a `filter` here type-checked and was ignored. */
+      readonly filter?: never;
       readonly subtype?: string;
       /**
        * Only creatures that have a counter on them — Rishkar's "each creature
@@ -644,6 +647,7 @@ export type AffectSpec =
   | {
       readonly scope: "all-creatures";
       readonly excludeSelf?: boolean;
+      readonly filter?: never;
       readonly subtype?: string;
       readonly withKeyword?: Keyword;
       /** Only creatures *without* the keyword — the other half of
