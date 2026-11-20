@@ -29,7 +29,7 @@ describe("Hurkyl's Final Meditation", () => {
     expect(hand(game, B)).toContain(bears);
     expect(hand(game)).toContain(mine);
     expect(zone(game, islands[0])).toBe("battlefield");
-    // Ending the turn exiled it from the stack (rule 724.1a).
+    // Ending the turn exiled it from the stack (rule 724.1b).
     expect(zone(game, meditation)).toBe("exile");
   });
 
