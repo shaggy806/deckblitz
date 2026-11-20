@@ -12700,7 +12700,14 @@ export class Game {
     if (awaiting.asEntersOf !== undefined) {
       this.state.awaiting = null;
       if (awaiting.destination === "graveyard") this.putFromExileAsEntering(awaiting.asEntersOf, chosen, awaiting.max);
-      else if (awaiting.destination === "discard") this.discardAsEntering(awaiting.asEntersOf, player, chosen);      else this.exileAsEntering(awaiting.asEntersOf, chosen);
+      else if (awaiting.destination === "discard") this.discardAsEntering(awaiting.asEntersOf, player, chosen);
+      else if (awaiting.destination === "reveal") {
+        // Revealed, and staying in the hand (rule 701.20a).
+        this.revealCards(player, chosen, "hand");
+        const entering = this.state.objects[awaiting.asEntersOf];
+        if (entering !== undefined) entering.enterChoice = { ...entering.enterChoice, asEntersDone: chosen.length };
+      }
+      else this.exileAsEntering(awaiting.asEntersOf, chosen);
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
@@ -17595,6 +17602,35 @@ export class Game {
         destination: "discard",
         leftover: "stay",
         prompt: `Discard any number of cards as ${nameOf(object)} enters`,
+        asEntersOf: id,
+      };
+      return true;
+    }
+    // "You may reveal a Dragon card / any number of other artifact cards from
+    // your hand" (rule 701.20a): they stay in the hand.
+    if (spec.reveal !== undefined) {
+      const filter = spec.reveal.filter;
+      const eligible = this.state.zones.perPlayer[chooser].hand.filter(
+        (card) =>
+          card !== id &&
+          this.enterBatch?.has(card) !== true &&
+          matchesFilter(this.state, this.registry, card, filter, { you: chooser, source: id }),
+      );
+      if (eligible.length === 0) {
+        object.enterChoice = { ...answered, asEntersDone: 0 };
+        return false;
+      }
+      const max = Math.min(eligible.length, spec.reveal.upTo ?? eligible.length);
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player: chooser,
+        ids: eligible,
+        eligible,
+        min: 0,
+        max,
+        destination: "reveal",
+        leftover: "stay",
+        prompt: `You may reveal ${spec.reveal.upTo === 1 ? "a card" : "any number of cards"} from your hand as ${nameOf(object)} enters`,
         asEntersOf: id,
       };
       return true;
@@ -72003,7 +72039,18 @@ controlledBy,
           : undefined;
       if (r.counters && startingLoyalty !== undefined) {
         addCounters("loyalty", startingLoyalty);
-      } else if (r.counters) {
+      } else if (
+        r.counters &&
+        // "If you do or if you control a Dragon" (Dragon's Disciple): what its
+        // `asEnters` did, or the condition as it enters (rule 614.12).
+        (r.counters.ifDone === undefined ||
+          (asEntersDone ?? 0) > 0 ||
+          (r.counters.ifDone.orIf !== undefined &&
+            staticConditionMet(this.state, this.registry, object, r.counters.ifDone.orIf, {
+              ...(this.enterBatch !== null ? { notYetHere: this.enterBatch } : {}),
+              x: object.xValue ?? 0,
+            })))
+      ) {
         // "x" is the X it was cast with (rule 107.3m). A live amount is read
         // as it enters, never counting itself or what enters with it (Aeve,
         // Progenitor Ooze's "for each other Ooze you control").

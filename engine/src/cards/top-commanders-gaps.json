@@ -3053,6 +3053,7 @@
   "amount:damage-dealt-capped",
   "effect:temporary-enter-exile-replacement",
   "replacement:enter-from-exile-shuffle-instead-until-eot",
+  "replacement:reveal-from-hand-enters-with-counters",
   "replacement:chosen-players-damage-doubling",
   "replacement:as-enters-mill",
   "amount:cda-aggregate-sum-excluding-self",

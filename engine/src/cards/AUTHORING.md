@@ -8005,7 +8005,14 @@ clause (section 9):
   (Ulamog's Despoiler); `discard: { filter, keywordCounters? }` is "discard any
   number of creature cards" from hand (Indominus Rex, Alpha), and
   `keywordCounters` gives it one counter of each listed keyword some discarded
-  card has. `removeCounters: { filter }` is "remove all counters from any
+  card has. `reveal: { filter, upTo? }` is "you may reveal [any number of /
+  a] [filter] card(s) from your hand" (rule 701.20a; they stay there, never
+  itself): Arsenal Thresher's `{ filter: { type: "artifact" } }` with
+  `counters: { amount: "done-as-enters" }`, Dragon's Disciple's `{ filter: {
+  subtype: "Dragon" }, upTo: 1 }` with `counters: { amount: 1, ifDone: {
+  orIf: <StaticCondition> } }` — `ifDone` is "if you do" (anything done as it
+  entered), `orIf` "or if you control a Dragon" (`as-enters-reveal.test.ts`).
+  `removeCounters: { filter }` is "remove all counters from any
   number of [filter]" (Sin, Unending Cataclysm: anyone's, chosen, counted by
   counters removed); `turnFaceDown: CardFilter` is "turn all other [filter]
   face down" (Ixidron: anyone's, nothing chosen). `mill: EffectAmount` is "mill

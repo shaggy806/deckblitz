@@ -362,6 +362,18 @@ export interface AsEntersAction {
    */
   readonly discard?: { readonly filter: CardFilter; readonly keywordCounters?: readonly Keyword[] };
   /**
+   * "As this creature enters, you may reveal any number of other artifact
+   * cards from your hand" (Arsenal Thresher): cards matching `filter` from its
+   * controller's hand — never itself — chosen and revealed as it's about to
+   * enter (rules 614.12, 701.20a), none to all, or none to `upTo` ("you may
+   * reveal **a** Dragon card", Dragon's Disciple: `upTo: 1`). They stay in the
+   * hand. How many is `"done-as-enters"`; the counters' `ifDone` reads
+   * whether any was. Asked as a `choose-from-zone` with the `"reveal"`
+   * destination, amplify's. Entering some way that never asks (a token copy),
+   * none was revealed.
+   */
+  readonly reveal?: { readonly filter: CardFilter; readonly upTo?: number };
+  /**
    * "As Sin enters, remove all counters from **any number of** artifacts,
    * creatures, and enchantments" (Sin, Unending Cataclysm): its controller
    * chooses, as it's about to enter (rule 614.12), any number of the
@@ -509,6 +521,13 @@ export interface EntersBattlefieldReplacement {
       | "done-as-enters"
       | "rolled-as-enters";
     readonly eachDone?: number;
+    /** Only if its `asEnters` did something ("if you do") — or, with
+     * `orIf`, if that condition holds as it enters, read as `tappedUnless`
+     * is (what enters alongside it doesn't count, rule 614.12): Dragon's
+     * Disciple's "if you do or if you control a Dragon, this creature enters
+     * with a +1/+1 counter on it" is `{ orIf: { kind: "controls", filter: {
+     * subtype: "Dragon" }, atLeast: 1 } }` beside `asEnters.reveal`. */
+    readonly ifDone?: { readonly orIf?: StaticCondition };
   };
   /**
    * "As this creature enters, roll X d6" (Neverwinter Hydra): its controller
