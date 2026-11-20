@@ -355,6 +355,14 @@ The key `cost:collect-evidence-x-target-mana-value`: `additionalCost.collectEvid
 the graveyard's total) keeps a target past it off the offer, and `targetsWithinTaxes` reads it beside `targetTaxes`,
 so the client, the bots and the fuzzer don't pick a set too dear together. Urgent Necropsy (18881).
 `test/collect-evidence-targets.test.ts`.
+### Removing later the counters put on this way — built 2026-11-20
+
+The key `effect:delayed-remove-counters-placed-this-way`: Bounty of the Hunt (19292), Shambling Swarm. A delayed
+trigger's `about: "counters-placed"` with the new `aboutPerCount` holds one target per counter placed (a creature
+twice for two), and a `for-each-target` removes one from each; a creature that left since is a new object (400.7).
+`test/delayed-remove-counters-placed.test.ts`. The scaffolder doesn't read "distribute three +1/+1 counters among
+one, two, or three target creatures" yet (Defend the Celestus neither), so neither line is scaffolded.
+
 ### A creature card from another player's graveyard, under its owner — built 2026-11-20
 
 The key `effect:return-from-trigger-owners-graveyard-under-owner`: Reincarnation (18968). A dies delayed trigger's

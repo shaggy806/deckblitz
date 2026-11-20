@@ -4,6 +4,7 @@
  "built": [
     "effect:delayed-sacrifice-modified-this-way",
     "effect:delayed-return-attacking-next-turn",
+    "effect:delayed-remove-counters-placed-this-way",
     "effect:return-from-trigger-owners-graveyard-under-owner",
     "effect:players-being-attacked-count",
     "target:filter-from-chooser-side",

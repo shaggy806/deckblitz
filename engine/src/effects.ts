@@ -5843,6 +5843,14 @@ export type EffectSpec =
        * Wings of Hubris's "sacrifice **it** at the beginning of the next end
        * step", the creature it equipped. */
       readonly about?: ThisWayKind | "attached";
+      /** With a `ThisWayKind` `about`: each object as many times as the
+       * resolution counted for it, one target a unit — Bounty of the Hunt's
+       * "for each +1/+1 counter you put on a creature this way, remove a
+       * +1/+1 counter from that creature at the beginning of the next cleanup
+       * step" is `about: "counters-placed"` with this, and a
+       * `for-each-target` removing one counter from each. A counter a
+       * replacement added (Hardened Scales) was put there this way too. */
+      readonly aboutPerCount?: true;
       /** With `about`: set up with nothing done too, for an ability with more
        * to do than act on those cards: Ignorant Bliss's "return those cards to
        * your hand, **then draw a card**" with an empty hand. */
@@ -16624,6 +16632,22 @@ function forEachTargetSlots(spec: Extract<EffectSpec, { kind: "for-each-target" 
 
 /** A `for-each-target`'s members in the order they're handled when nobody
  * chooses it. */
+/** A delayed trigger's `about` targets: what this resolution did that to,
+ * each object once — or, `aboutPerCount`, once per unit its entry counted
+ * (each counter placed). */
+function delayedAboutTargets(
+  spec: Extract<EffectSpec, { kind: "delayed-trigger" }>,
+  about: ThisWayKind,
+  ctx: ResolutionContext,
+): TargetRef[] {
+  const out: TargetRef[] = [];
+  for (const e of ctx.thisWay(about)) {
+    const times = spec.aboutPerCount === true ? Math.max(0, e.count) : 1;
+    for (let i = 0; i < times; i += 1) out.push({ kind: "object", object: e.object });
+  }
+  return out;
+}
+
 function orderedForEachTargetMembers(
   spec: Extract<EffectSpec, { kind: "for-each-target" }>,
   ctx: ResolutionContext,
@@ -22364,7 +22388,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const about =
           spec.about === undefined || spec.about === "attached"
             ? undefined
-            : ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
+            : delayedAboutTargets(spec, spec.about, ctx);
         if (about?.length === 0) return;
         ctx.delayTrigger(
           {
@@ -22433,7 +22457,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const about =
           spec.about === undefined || spec.about === "attached"
             ? undefined
-            : ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
+            : delayedAboutTargets(spec, spec.about, ctx);
         if (about?.length === 0 && spec.orNone !== true) return;
         ctx.delayTrigger(
           {
@@ -22470,7 +22494,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             ? undefined
             : spec.about === "created"
               ? ctx.createdTokensApart().map((object) => ({ kind: "object", object }) as const)
-              : ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
+              : delayedAboutTargets(spec, spec.about, ctx);
         if (about?.length === 0 && spec.orNone !== true) return;
         const { leaves, to, thisTurn } = spec.at;
         const watch = (object: ObjectId): void =>
@@ -22510,7 +22534,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         return;
       }
       if (spec.about !== undefined) {
-        const done = ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
+        const done = delayedAboutTargets(spec, spec.about, ctx);
         if (done.length > 0 || spec.orNone === true) ctx.delayTrigger(at, spec.effect, spec.text, controller, done);
         return;
       }
