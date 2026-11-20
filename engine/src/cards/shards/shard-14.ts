@@ -939,6 +939,7 @@ import _poolUnexpectedAssistance from "../pool/unexpected-assistance.js";
 import _poolUnionOfTheThirdPath from "../pool/union-of-the-third-path.js";
 import _poolUnlivingPsychopath from "../pool/unliving-psychopath.js";
 import _poolUnnaturalGrowth from "../pool/unnatural-growth.js";
+import _poolUnpredictableCyclone from "../pool/unpredictable-cyclone.js";
 import _poolUnravel from "../pool/unravel.js";
 import _poolUpTheBeanstalk from "../pool/up-the-beanstalk.js";
 import _poolUrborgShambler from "../pool/urborg-shambler.js";
@@ -1982,6 +1983,7 @@ const shard: CardShard = {
     _poolUnionOfTheThirdPath,
     _poolUnlivingPsychopath,
     _poolUnnaturalGrowth,
+    _poolUnpredictableCyclone,
     _poolUnravel,
     _poolUpTheBeanstalk,
     _poolUrborgShambler,

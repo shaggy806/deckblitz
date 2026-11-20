@@ -29315,6 +29315,7 @@ import _poolTitaniaGaeaIncarnate from "./pool/titania-gaea-incarnate.js";
 import _poolTitaniaNaturesForce from "./pool/titania-natures-force.js";
 import _poolTitaniaProtectorOfArgoth from "./pool/titania-protector-of-argoth.js";
 import _poolTitaniaProudPummeler from "./pool/titania-proud-pummeler.js";
+import _poolTitaniaSSong from "./pool/titania-s-song.js";
 import _poolTitaniaVoiceOfGaea from "./pool/titania-voice-of-gaea.js";
 import _poolTitaniasBoon from "./pool/titanias-boon.js";
 import _poolTitaniasChosen from "./pool/titanias-chosen.js";
@@ -30395,6 +30396,7 @@ import _poolUnnaturalSpeed from "./pool/unnatural-speed.js";
 import _poolUnnerve from "./pool/unnerve.js";
 import _poolUnnervingAssault from "./pool/unnerving-assault.js";
 import _poolUnnervingGrasp from "./pool/unnerving-grasp.js";
+import _poolUnpredictableCyclone from "./pool/unpredictable-cyclone.js";
 import _poolUnquenchableFury from "./pool/unquenchable-fury.js";
 import _poolUnquenchableThirst from "./pool/unquenchable-thirst.js";
 import _poolUnquestionedAuthority from "./pool/unquestioned-authority.js";
@@ -63059,6 +63061,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTitaniaNaturesForce,
   _poolTitaniaProtectorOfArgoth,
   _poolTitaniaProudPummeler,
+  _poolTitaniaSSong,
   _poolTitaniaVoiceOfGaea,
   _poolTitaniasBoon,
   _poolTitaniasChosen,
@@ -64139,6 +64142,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnnerve,
   _poolUnnervingAssault,
   _poolUnnervingGrasp,
+  _poolUnpredictableCyclone,
   _poolUnquenchableFury,
   _poolUnquenchableThirst,
   _poolUnquestionedAuthority,
@@ -96816,6 +96820,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/titania-natures-force": _poolTitaniaNaturesForce,
   "pool/titania-protector-of-argoth": _poolTitaniaProtectorOfArgoth,
   "pool/titania-proud-pummeler": _poolTitaniaProudPummeler,
+  "pool/titania-s-song": _poolTitaniaSSong,
   "pool/titania-voice-of-gaea": _poolTitaniaVoiceOfGaea,
   "pool/titanias-boon": _poolTitaniasBoon,
   "pool/titanias-chosen": _poolTitaniasChosen,
@@ -97896,6 +97901,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/unnerve": _poolUnnerve,
   "pool/unnerving-assault": _poolUnnervingAssault,
   "pool/unnerving-grasp": _poolUnnervingGrasp,
+  "pool/unpredictable-cyclone": _poolUnpredictableCyclone,
   "pool/unquenchable-fury": _poolUnquenchableFury,
   "pool/unquenchable-thirst": _poolUnquenchableThirst,
   "pool/unquestioned-authority": _poolUnquestionedAuthority,

@@ -925,6 +925,7 @@ import _poolThunderingGiant from "../pool/thundering-giant.js";
 import _poolTimberGorge from "../pool/timber-gorge.js";
 import _poolTimeReversal from "../pool/time-reversal.js";
 import _poolTinybonesBaubleBurglar from "../pool/tinybones-bauble-burglar.js";
+import _poolTitaniaSSong from "../pool/titania-s-song.js";
 import _poolTivitSellerOfSecrets from "../pool/tivit-seller-of-secrets.js";
 import _poolTomikDistinguishedAdvokist from "../pool/tomik-distinguished-advokist.js";
 import _poolTorchCourier from "../pool/torch-courier.js";
@@ -2002,6 +2003,7 @@ const shard: CardShard = {
     _poolTimberGorge,
     _poolTimeReversal,
     _poolTinybonesBaubleBurglar,
+    _poolTitaniaSSong,
     _poolTivitSellerOfSecrets,
     _poolTomikDistinguishedAdvokist,
     _poolTorchCourier,
