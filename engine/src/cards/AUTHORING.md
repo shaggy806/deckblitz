@@ -7631,6 +7631,14 @@ clause (section 9):
   turn by an Assassin you controlled" is `{ what: "attackers", who: "you",
   filter: { subtype: "Assassin" }, against: "that-player" }` on the
   `loses-game` trigger, each attacker matched as it was declared.)
+  (`of`, a `ConditionPlayer`, reads one named player's history in place of
+  `who`'s: Tunnel Ignus's "whenever a land enters under an opponent's
+  control, if that player had another land enter the battlefield under their
+  control this turn" is `{ what: "entered", of: "that-player", filter: {
+  type: "land" }, atLeast: 2 }`, the land that fired it one of the two. As an
+  ability triggers, `what: "entered"` also counts what entered in the same
+  event and isn't announced yet, so two lands entering at once each see the
+  other — its ruling; `turn-history-that-player.test.ts`.)
   one of the `turnHistory` lists (§6) holds at least `atLeast` (default 1)
   this turn: "if you've discarded a card this turn" is `{ what: "discarded"
   }` (Gilt-Blade Prowler's activation restriction, Recalibrate's

@@ -494,6 +494,15 @@ export interface ConditionOptions {
    */
   readonly thatPlayer?: PlayerId;
   /**
+   * The permanents that entered in the same simultaneous event as the one
+   * whose entry is being announced, not yet announced (so not yet in the
+   * journal): a `turn-history` of `what: "entered"` counts them too, since
+   * they had entered by the time this one's ability triggered (rule 603.6a).
+   * Tunnel Ignus's ruling: two lands entering at once each see the other.
+   * Passed only by the intervening-if check as an ability triggers.
+   */
+  readonly enteringTogether?: readonly ObjectId[];
+  /**
    * The player a condition is read as — its "you" — in place of the
    * source's controller. Set only by `of-player` as it reads its inner
    * condition.
@@ -1486,8 +1495,14 @@ function evalStaticCondition(
       );
     }
     case "turn-history": {
+      // "If **that player** had …": theirs alone, who may have left the game
+      // since (Tunnel Ignus).
+      const named = condition.of === undefined ? undefined : conditionPlayerOf(state, condition.of, opts, source, true);
+      if (condition.of !== undefined && named === undefined) return false;
       const seats =
-        condition.who === undefined || condition.who === "you"
+        named !== undefined
+          ? [named]
+          : condition.who === undefined || condition.who === "you"
           ? [you]
           : condition.who === "opponent"
             ? state.turnOrder.filter((p) => p !== you)
@@ -1496,7 +1511,7 @@ function evalStaticCondition(
       // who may have left the game since (Ramses, Assassin Lord).
       const toPlayer = condition.against === undefined ? undefined : conditionPlayerOf(state, condition.against, opts, source, true);
       if (condition.against !== undefined && toPlayer === undefined) return false;
-      const countOver = (over: readonly PlayerId[]): number =>
+      const journalCountOver = (over: readonly PlayerId[]): number =>
         journalCount(
           state,
           registry,
@@ -1511,6 +1526,26 @@ function evalStaticCondition(
             ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
             : undefined,
         );
+      // What entered with the permanent whose entry is being announced, and
+      // isn't announced yet (`enteringTogether`), had entered too.
+      const together =
+        condition.what === "entered" &&
+        condition.selfOnly !== true &&
+        condition.against === undefined &&
+        condition.window !== "last-turn" &&
+        condition.window !== "your-last-turn" &&
+        condition.window !== "their-last-turn"
+          ? (opts.enteringTogether ?? [])
+          : [];
+      const countOver = (over: readonly PlayerId[]): number =>
+        journalCountOver(over) +
+        together.reduce((n, id) => {
+          const o = state.objects[id];
+          if (o === undefined || o.zone !== "battlefield" || !over.includes(o.controller)) return n;
+          if (condition.excludeSelf === true && id === source.id) return n;
+          if (condition.filter !== undefined && !matchesFilter(state, registry, id, condition.filter, { you })) return n;
+          return n + (o.stackCount ?? 1);
+        }, 0);
       const atLeast = condition.atLeast ?? 1;
       // "If **an opponent** had two or more creatures enter": one opponent's
       // own count, never the opponents' together (one each from two of them

@@ -2788,6 +2788,11 @@ export function parseTrigger(clause) {
       return [{ on: "dies", who: "you-control", filter: { ...kind, counters: { kind: m[2], compare: { op: "gte", n: 1 } } } }];
     }
   }
+  // "Whenever a land enters under an opponent's control" (Tunnel Ignus): the
+  // same trigger as "a land an opponent controls enters".
+  if ((m = /^Whenever (a|an|another) (.+?) enters under (your|an opponent's) control$/.exec(c))) {
+    return parseTrigger(`Whenever ${m[1]} ${m[2]} ${m[3] === "your" ? "you control" : "an opponent controls"} enters`);
+  }
   if (
     (m =
       /^Whenever (a|an|another) (.+?)(?: (you control|an opponent controls))? (enters|dies|attacks|leaves the battlefield|is put into a graveyard from the battlefield)$/.exec(
@@ -21769,6 +21774,15 @@ const TURN_TALLY_IFS = {
   // or not.
   "if this ability has been activated four or more times this turn,": { kind: "activated-this-turn", atLeast: 4 },
   "if a player discarded a card this turn,": { kind: "turn-history", what: "discarded", who: "any-player" },
+  // That player's own entries, the land that fired it one of the two
+  // (Tunnel Ignus).
+  "if that player had another land enter the battlefield under their control this turn,": {
+    kind: "turn-history",
+    what: "entered",
+    of: "that-player",
+    filter: { type: "land" },
+    atLeast: 2,
+  },
   // Counters put this turn (`CountersPutSpec`).
   "if you put a counter on a creature this turn,": { kind: "counters-put-this-turn", onType: "creature" },
   "if a +1/+1 counter was put on a permanent under your control this turn,": {

@@ -1599,6 +1599,13 @@ export type StaticCondition =
        * default; `"last-turn"` for "if you lost life last turn". */
       readonly window?: JournalWindow;
       readonly who?: "you" | "opponent" | "any-player";
+      /** One named player's history in place of `who`'s — Tunnel Ignus's
+       * "whenever a land enters under an opponent's control, if **that
+       * player** had another land enter the battlefield under their control
+       * this turn" (`{ what: "entered", of: "that-player", filter: { type:
+       * "land" }, atLeast: 2 }`: the land that fired it is one of the two).
+       * Nobody to name, it doesn't hold. */
+      readonly of?: ConditionPlayer;
       readonly filter?: CardFilter;
       readonly atLeast?: number;
       readonly excludeSelf?: boolean;

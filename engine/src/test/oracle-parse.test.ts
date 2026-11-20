@@ -24599,3 +24599,25 @@ describe("oracle-parse: casting-zones lane, 2026-11-20 (a52f)", () => {
     });
   });
 });
+
+describe("a land entering under an opponent's control, if that player had another (Tunnel Ignus)", () => {
+  it("reads the trigger and that player's own turn history", () => {
+    const ignus = parseFace({
+      name: "Tunnel Ignus",
+      type_line: "Creature — Elemental",
+      oracle_text:
+        "Whenever a land enters under an opponent's control, if that player had another land enter the battlefield under their control this turn, this creature deals 3 damage to that player.",
+      mana_cost: "{1}{R}",
+      colors: ["R"],
+    }) as unknown as { complete: boolean; triggered: { trigger: unknown; condition: unknown }[] };
+    expect(ignus.complete).toBe(true);
+    expect(ignus.triggered[0].trigger).toEqual({ on: "enters-battlefield", who: "any", filter: { type: "land", controlledBy: "opponent" } });
+    expect(ignus.triggered[0].condition).toEqual({
+      kind: "turn-history",
+      what: "entered",
+      of: "that-player",
+      filter: { type: "land" },
+      atLeast: 2,
+    });
+  });
+});

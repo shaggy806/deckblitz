@@ -3005,6 +3005,10 @@ export class Game {
   private enterBatchFired: Set<string> | null = null;
   /** …and that entry's announcements, which a batched trigger counts. */
   private enterBatchEvents: readonly GameEventInput[] | null = null;
+  /** …and the permanents of it not announced yet, which an intervening if
+   * asked as one of them triggers still counts as having entered
+   * (`ConditionOptions.enteringTogether` — Tunnel Ignus's ruling). */
+  private enteringUnannounced: readonly ObjectId[] | null = null;
   /** Each permanent of the enter batch being announced, as it was once all of
    * them had entered: the journal's `entered` snapshots, taken together in
    * `withEnterBatch` so they share one pass of the computed cache. */
@@ -37962,11 +37966,19 @@ export class Game {
         return snapshots;
       });
     }
+    const outerUnannounced = this.enteringUnannounced;
     try {
       this.withCounterBatch(() => {
-        for (const event of entered) this.emit(event);
+        entered.forEach((event, i) => {
+          this.enteringUnannounced =
+            entered.length > 1
+              ? entered.slice(i + 1).flatMap((e) => (e.type === "permanent-entered-battlefield" ? [e.object] : []))
+              : null;
+          this.emit(event);
+        });
       });
     } finally {
+      this.enteringUnannounced = outerUnannounced;
       [this.enterBatchFired, this.enterBatchEvents, this.enterBatchSnapshots] = outer;
       this.firstTokenCreators.clear();
     }
@@ -39528,6 +39540,7 @@ export class Game {
       ...(triggerObject !== undefined ? { triggerObject } : {}),
       ...(x !== undefined ? { x } : {}),
       ...(triggerSpellStint !== undefined ? { triggerSpellStint } : {}),
+      ...(this.enteringUnannounced !== null ? { enteringTogether: this.enteringUnannounced } : {}),
     });
   }
 
