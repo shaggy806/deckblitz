@@ -27404,7 +27404,7 @@ export class Game {
   }
 
   /** How many `kind` abilities `player` has activated this turn, from the journal. */
-  private activationsThisTurn(player: PlayerId, kind: "equip" | "power-up"): number {
+  private activationsThisTurn(player: PlayerId, kind: "equip" | "power-up" | "exhaust"): number {
     return entriesThisTurn(this.state, "activated").filter((e) => e.how === kind && e.player === player).length;
   }
 
@@ -28182,6 +28182,17 @@ export class Game {
 
   /** "Can be activated an additional time" (Wonder Man, Hollywood Hero): each
    * such static its controller has adds one, to power-up abilities alone. */
+  /** "During your turn, as long as you haven't activated an exhaust ability
+   * this turn, you may activate exhaust abilities as though they haven't been
+   * activated" (Elvish Refueler, `StaticAbility.exhaustReactivation`): an
+   * exhaust ability `player` activates, on their own turn, before they've
+   * begun to activate any exhaust ability this turn (rule 702.177b). */
+  private mayReactivateExhaust(player: PlayerId, ability: ActivatedAbility): boolean {
+    if (ability.exhaust !== true || this.activePlayer !== player) return false;
+    if (this.activeStaticsOf(player, (a) => a.exhaustReactivation === true).length === 0) return false;
+    return this.activationsThisTurn(player, "exhaust") === 0;
+  }
+
   private extraPowerUps(ability: ActivatedAbility, source: GameObject): number {
     if (ability.powerUp !== true) return 0;
     return this.activeStaticsOf(source.controller, (a) => a.additionalPowerUps !== undefined).reduce(
@@ -28383,7 +28394,8 @@ export class Game {
     // Exhaust and power-up: once for as long as this object exists.
     if (
       (ability.exhaust === true || ability.powerUp === true || ability.onlyOnce === true) &&
-      this.activationsUsed(source, ability, abilityIndex) >= 1 + this.extraPowerUps(ability, source)
+      this.activationsUsed(source, ability, abilityIndex) >= 1 + this.extraPowerUps(ability, source) &&
+      !this.mayReactivateExhaust(player, ability)
     ) {
       return `${def.name}'s ability can be activated only once, and has been`;
     }
@@ -29180,6 +29192,11 @@ export class Game {
     }
     if (ability.exhaust === true || ability.powerUp === true || ability.onlyOnce === true) {
       source.exhaustedAbilities = [...(source.exhaustedAbilities ?? []), ability.altCostOf ?? abilityIndex];
+    }
+    // "As long as you haven't activated an exhaust ability this turn" (rule
+    // 702.177b — begun to activate counts): read by `mayReactivateExhaust`.
+    if (ability.exhaust === true) {
+      this.journal({ kind: "activated", how: "exhaust", player, object: sourceId, stint: source.zoneChangeCount ?? 0 });
     }
     if (ability.cost.addCounter !== undefined) {
       this.putCostCounters(sourceId, ability.cost.addCounter.kind, ability.cost.addCounter.count, player);

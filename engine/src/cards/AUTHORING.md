@@ -5529,7 +5529,12 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
 - `exhaust: true` — **Exhaust**, "activate each exhaust ability only once":
   once for as long as the object exists, rather than once a turn (Loot, the
   Pathfinder). Recorded on `GameObject.exhaustedAbilities`; a zone change
-  clears it.
+  clears it. Each activation is also journaled (`activated`, `how: "exhaust"`),
+  so a static `exhaustReactivation: true` (Elvish Refueler: "during your turn,
+  as long as you haven't activated an exhaust ability this turn, you may
+  activate exhaust abilities as though they haven't been activated", 702.177b)
+  lifts the limit for the first exhaust ability its controller activates on
+  their turn.
 - `onlyOnce: true` — a plain "Activate only once" on an ability without the
   Exhaust label (Stalking Leonin, Duggan, Private Detective): the same limit,
   tracked the same way, but "exhaust abilities" (Boom Scholar's cost reduction,

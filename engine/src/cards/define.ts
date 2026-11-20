@@ -3416,6 +3416,14 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * controller's permanents have may be activated this many more times, in the
    * time power-up's own "only once" gives. */
   readonly additionalPowerUps?: number;
+  /** "During your turn, as long as you haven't activated an exhaust ability
+   * this turn, you may activate exhaust abilities as though they haven't been
+   * activated" (Elvish Refueler): its controller's exhaust abilities skip
+   * their "activate only once" while it's their turn and they haven't begun
+   * to activate an exhaust ability this turn (rule 702.177b — the journal's
+   * `activated` entries `how: "exhaust"`). Only abilities exhaust itself
+   * marks: an "activate only once" that isn't exhaust isn't one (702.177a). */
+  readonly exhaustReactivation?: true;
   /**
    * "You may pay `mana` rather than pay the [kind] cost of …" (rule 602.2b):
    * the abilities of that kind this permanent's controller could activate have
