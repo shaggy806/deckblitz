@@ -14,6 +14,7 @@
  */
 
 import { STARTER_DECKS, STRONG_DECKS, commandersOf, nameForFlavorName } from 'engine/client'
+import type { CommanderColors } from 'engine/client'
 import type { SeatCommander, WireDeck } from 'protocol'
 
 export interface SavedDeck {
@@ -26,6 +27,13 @@ export interface SavedDeck {
    * `commander` instead, which `readDecks` turns into this.
    */
   readonly commanders: readonly string[];
+  /**
+   * The colour chosen for a commander that says "If ~ is your commander,
+   * choose a color before the game begins" (rule 903.4b — Clara Oswald, The
+   * Prismatic Piper), by its name: chosen in the deck editor, or read off an
+   * imported list's cards. Absent on every other deck.
+   */
+  readonly commanderColors?: CommanderColors;
   readonly cards: readonly string[];
   /**
    * Which printing of a card this deck brings, keyed by card name → Scryfall
@@ -219,6 +227,7 @@ export function createDeckFromImport(
   printings?: Readonly<Record<string, string>>,
   sideboard: readonly string[] = [],
   attractions: readonly AttractionEntry[] = [],
+  commanderColors: CommanderColors = {},
 ): SavedDeck {
   const deck: SavedDeck = {
     id: newId(),
@@ -226,6 +235,7 @@ export function createDeckFromImport(
     name: unusedDeckName(name, readDecks().map((d) => d.name)),
     cards,
     commanders,
+    ...(Object.keys(commanderColors).length > 0 ? { commanderColors } : {}),
     ...(sideboard.length > 0 ? { sideboard } : {}),
     ...(attractions.length > 0 ? { attractions } : {}),
     // Omitted entirely when the pasted list carried no printing suffixes, so
@@ -299,6 +309,8 @@ export function setActive(ref: ActiveRef | null): void {
 export interface DeckContents {
   readonly name: string
   readonly commanders: readonly string[]
+  /** See `SavedDeck.commanderColors`. */
+  readonly commanderColors?: CommanderColors
   readonly cards: readonly string[]
   readonly printings?: Readonly<Record<string, string>>
   readonly sideboard?: readonly string[]
@@ -358,6 +370,7 @@ export function listPickableDecks(): readonly PickableDeck[] {
       ref: { kind: 'saved', id: d.id } as ActiveRef,
       name: d.name,
       commanders: d.commanders,
+      ...(d.commanderColors !== undefined ? { commanderColors: d.commanderColors } : {}),
       cards: d.cards,
       printings: d.printings,
       ...(d.sideboard !== undefined ? { sideboard: d.sideboard } : {}),

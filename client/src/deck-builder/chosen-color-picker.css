@@ -1,0 +1,46 @@
+/* A commander's colour chosen before the game begins (rule 903.4b): five pips,
+ * the chosen one lit and the rest dimmed. */
+.db-chosen-color {
+  display: inline-flex;
+  flex: none;
+  gap: 0.15em;
+}
+
+.db-chosen-color button {
+  padding: 0.05em 0.1em;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: none;
+  line-height: 1;
+  box-shadow: none;
+  translate: none;
+  opacity: 0.35;
+  cursor: pointer;
+}
+
+.db-chosen-color button:hover:not(:disabled) {
+  background: none;
+  opacity: 0.75;
+}
+
+.db-chosen-color button.selected {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.db-chosen-color button:disabled {
+  cursor: default;
+}
+
+/* The blitz panel's ask (BlitzPanel.tsx), in the commander picker's popup. */
+.chosen-color-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0;
+}
+
+.chosen-color-ask .db-chosen-color {
+  font-size: 1.4em;
+}

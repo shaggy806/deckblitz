@@ -14,6 +14,7 @@ import {
   isDeckableCard,
   fitsDeckIdentity,
   rulebreakersOf,
+  settleCommanderColors,
   validateCommanderDeck,
   withinIdentity,
 } from 'engine/client'
@@ -28,6 +29,7 @@ import type { MenuAnchor, MenuItem } from './CardContextMenu.tsx'
 import { matchesTerms, searchHaystack, searchTerms } from '../library/search.ts'
 import { PrintingPicker } from './PrintingPicker.tsx'
 import { ReplacementPicker } from './ReplacementPicker.tsx'
+import { ChosenColorPicker } from './ChosenColorPicker.tsx'
 import type { AttractionEntry, SavedDeck } from './decks.ts'
 import { MAX_SIDEBOARD, attractionCollector, attractionName, replaceCard } from './decks.ts'
 import { AttractionLights } from '../ui/AttractionLights.tsx'
@@ -198,6 +200,22 @@ export function DeckEditor({
 
   /** The commanders' combined colour identity, or null with no commander
    * (or one the pool doesn't have) to keep the pool to. */
+  /** The colour chosen for a commander that chooses one before the game
+   * begins (rule 903.4b — Clara Oswald, The Prismatic Piper): the deck's, or
+   * the one its cards need. */
+  const commanderColors = useMemo(
+    () =>
+      settleCommanderColors(
+        deck.commanders,
+        deck.cards.flatMap((name) => {
+          const def = cardNamed(name)
+          return def === undefined ? [] : [identityOf(def)]
+        }),
+        cardPool().registry,
+        deck.commanderColors,
+      ),
+    [deck.commanders, deck.cards, deck.commanderColors],
+  )
   const commanderIdentity = useMemo(() => {
     if (deck.commanders.length === 0) return null
     const identity = new Set<Color>()
@@ -205,9 +223,11 @@ export function DeckEditor({
       const def = cardNamed(name)
       if (def === undefined) return null
       for (const c of identityOf(def)) identity.add(c)
+      const chosen = commanderColors[name]
+      if (def.chooseColorAsCommander === true && chosen !== undefined) identity.add(chosen)
     }
     return identity
-  }, [deck.commanders])
+  }, [deck.commanders, commanderColors])
   const identityFilter = inIdentityOnly ? commanderIdentity : null
   /** Whether a card may go in this deck by colour identity: within the
    * commanders', or let in by a commander's Rulebreaker. */
@@ -286,7 +306,12 @@ export function DeckEditor({
 
   const legality = useMemo(() => {
     const result = validateCommanderDeck(
-      { commanders: deck.commanders, cards: deck.cards, size: DECK_SIZE },
+      {
+        commanders: deck.commanders,
+        cards: deck.cards,
+        size: DECK_SIZE,
+        ...(deck.commanderColors !== undefined ? { commanderColors: deck.commanderColors } : {}),
+      },
       cardPool().registry,
     )
     // The Attraction deck's own rules (717.2a) beside the 99's.
@@ -294,7 +319,7 @@ export function DeckEditor({
     return attractionIssues.length === 0
       ? result
       : { ...result, legal: false, violations: [...result.violations, ...attractionIssues] }
-  }, [deck.commanders, deck.cards, attractions])
+  }, [deck.commanders, deck.cards, deck.commanderColors, attractions])
 
   // The Attraction deck (rule 717.2): only Attractions, which never go in the
   // 99, so an Attraction card's "add" puts it here.
@@ -818,6 +843,16 @@ export function DeckEditor({
                   </span>
                 ) : null}
                 <span className="db-card-row-spacer" />
+                {cardNamed(commander)?.chooseColorAsCommander === true ? (
+                  <ChosenColorPicker
+                    commander={commander}
+                    chosen={commanderColors[commander] ?? null}
+                    readOnly={readOnly}
+                    onChoose={(color) =>
+                      change({ ...deck, commanderColors: { ...deck.commanderColors, [commander]: color } })
+                    }
+                  />
+                ) : null}
                 {readOnly ? null : (
                   <button type="button" title="Clear commander" onClick={() => toggleCommander(commander)}>
                     −

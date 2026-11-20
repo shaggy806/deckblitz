@@ -587,6 +587,7 @@ export function useNetworkGame(): NetworkGame {
       blitzDeck.printings,
       [],
       blitzDeck.attractions ?? [],
+      blitzDeck.commanderColors ?? {},
     )
     setBlitzDeckSaved(true)
   }, [blitzDeck, blitzDeckSaved])
@@ -1378,6 +1379,7 @@ export function useNetworkGame(): NetworkGame {
           saved: listDecks().map((d) => ({
             cards: d.cards,
             commanders: d.commanders,
+            ...(d.commanderColors !== undefined ? { commanderColors: d.commanderColors } : {}),
             name: d.name,
             ...(d.printings !== undefined ? { printings: d.printings } : {}),
           })),

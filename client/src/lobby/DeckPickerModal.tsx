@@ -129,7 +129,7 @@ function DeckPickerRow({
           <span className="deck-picker-row-commander muted">{deck.cards.length} cards</span>
         )}
       </span>
-      <DeckIdentityPips commanders={deck.commanders} />
+      <DeckIdentityPips commanders={deck.commanders} colors={deck.commanderColors} />
     </button>
   )
 }

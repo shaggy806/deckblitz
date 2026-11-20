@@ -145,7 +145,7 @@ export function DeckBuilderPage() {
                   onClick={() => selectDeck({ kind: 'saved', id: d.id })}
                 >
                   {d.name}
-                  <DeckIdentityPips commanders={d.commanders} />
+                  <DeckIdentityPips commanders={d.commanders} colors={d.commanderColors} />
                   {isActive({ kind: 'saved', id: d.id }) ? <span className="db-active-badge">active</span> : null}
                 </button>
               </li>
@@ -338,6 +338,9 @@ function ImportPanel({
           resolved.printings,
           resolved.sideboard,
           resolved.attractions,
+          // A commander's colour chosen before the game (rule 903.4b), as
+          // the list's cards settled it; the deck editor's pips change it.
+          format?.commanderColors ?? {},
         )
         onImported(deck, resolved.report)
       })

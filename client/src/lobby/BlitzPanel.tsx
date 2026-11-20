@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
-import type { CommanderCandidate } from 'protocol'
+import type { Color } from 'engine/client'
+import type { CommanderCandidate, WireDeck } from 'protocol'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { CommanderPicker } from '../deck-builder/CommanderPicker.tsx'
+import { CommanderColorAsk } from '../deck-builder/CommanderColorAsk.tsx'
 import { importDecklist, looksLikeDecklist, resolveImport } from '../deck-builder/importDeck.ts'
 import type { ImportProgress } from '../deck-builder/importDeck.ts'
 
@@ -13,6 +15,19 @@ type Phase =
   /** The list didn't say which card is its commander, and more than one
    * could be: asked (`CommanderPicker`), then imported again with the answer. */
   | { readonly kind: 'choosing'; readonly text: string; readonly candidates: readonly CommanderCandidate[] }
+  /** Its commander chooses its colour as the deck is built (rule 903.4b —
+   * Clara Oswald, The Prismatic Piper) and the list's cards don't settle
+   * which: asked (`ChosenColorPicker`), then the game starts. */
+  | {
+      readonly kind: 'colour'
+      readonly deck: WireDeck
+      readonly report: BlitzReport
+      readonly open: readonly string[]
+      readonly chosen: Readonly<Record<string, Color>>
+    }
+
+/** What `NetworkGame.blitz` is told about the import, beside the deck. */
+type BlitzReport = Parameters<NetworkGame['blitz']>[1]
 
 /**
  * Blitzing — goldfishing against bots. One button at the foot of the landing
@@ -81,29 +96,39 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
         if (resolved.cards.length === 0) throw new Error('None of the cards in that list could be played.')
         // Nothing is saved here: the result screen offers to keep the deck.
         const size = resolved.cards.length + resolved.commanders.length
-        game.blitz(
-          {
-            cards: resolved.cards,
-            commanders: resolved.commanders,
-            name: resolved.name,
-            ...(Object.keys(resolved.printings).length > 0 ? { printings: resolved.printings } : {}),
-            ...(resolved.attractions.length > 0 ? { attractions: resolved.attractions } : {}),
-          },
-          {
-            deckName: resolved.name,
-            substituted: resolved.report.substituted.map(({ from, to }) => ({ from, to })),
-            dropped: resolved.report.dropped,
-            ...(size < COMMANDER_DECK_SIZE ? { short: size } : {}),
-          },
-        )
-        setPhase({ kind: 'idle' })
-        setPasted('')
+        const chosen = format?.commanderColors ?? {}
+        const deck: WireDeck = {
+          cards: resolved.cards,
+          commanders: resolved.commanders,
+          ...(Object.keys(chosen).length > 0 ? { commanderColors: chosen } : {}),
+          name: resolved.name,
+          ...(Object.keys(resolved.printings).length > 0 ? { printings: resolved.printings } : {}),
+          ...(resolved.attractions.length > 0 ? { attractions: resolved.attractions } : {}),
+        }
+        const report: BlitzReport = {
+          deckName: resolved.name,
+          substituted: resolved.report.substituted.map(({ from, to }) => ({ from, to })),
+          dropped: resolved.report.dropped,
+          ...(size < COMMANDER_DECK_SIZE ? { short: size } : {}),
+        }
+        const open = format?.commanderColorOpen ?? []
+        if (open.length > 0) {
+          setPhase({ kind: 'colour', deck, report, open, chosen })
+          return
+        }
+        start(deck, report)
       })
       .catch((err: unknown) => {
         setError(err instanceof Error ? err.message : String(err))
         setPhase({ kind: 'paste', note: 'Fix the list and try again, or paste a different one.' })
         setPasted(text)
       })
+  }
+
+  const start = (deck: WireDeck, report: BlitzReport) => {
+    game.blitz(deck, report)
+    setPhase({ kind: 'idle' })
+    setPasted('')
   }
 
   const fromClipboard = () => {
@@ -126,7 +151,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
         className="landing-cta landing-blitz-btn"
         data-tour="landing-blitz"
         onClick={fromClipboard}
-        disabled={busy || phase.kind === 'choosing'}
+        disabled={busy || phase.kind === 'choosing' || phase.kind === 'colour'}
       >
         Have a deck copied? Click here to blitz!
       </button>
@@ -199,6 +224,14 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
         <CommanderPicker
           candidates={phase.candidates}
           onPick={(picked) => run(phase.text, picked)}
+          onCancel={() => setPhase({ kind: 'idle' })}
+        />
+      ) : null}
+      {phase.kind === 'colour' ? (
+        <CommanderColorAsk
+          open={phase.open}
+          settled={phase.chosen}
+          onDone={(colors) => start({ ...phase.deck, commanderColors: colors }, phase.report)}
           onCancel={() => setPhase({ kind: 'idle' })}
         />
       ) : null}

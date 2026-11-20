@@ -13,7 +13,15 @@ import './deck-identity-pips.css'
  * show. Reads the commanders' own shards, not the whole pool, so the lobby,
  * which never loads the pool, can draw it; nothing is drawn until they're in.
  */
-export function DeckIdentityPips({ commanders }: { readonly commanders: readonly string[] }) {
+export function DeckIdentityPips({
+  commanders,
+  colors,
+}: {
+  readonly commanders: readonly string[]
+  /** The colour chosen for a commander that chooses one before the game
+   * begins (rule 903.4b), part of the deck's identity. */
+  readonly colors?: Readonly<Record<string, Color>>
+}) {
   const card = useCardData()
   const key = commanders.join('\n')
   useEffect(() => {
@@ -24,7 +32,7 @@ export function DeckIdentityPips({ commanders }: { readonly commanders: readonly
       requestCards(defs.flatMap((d) => d?.faces ?? [])),
     )
   }, [key])
-  const identity = deckIdentity(commanders, card)
+  const identity = deckIdentity(commanders, card, colors)
   if (identity === null) return null
   const text = identity.size === 0 ? '{C}' : [...identityString(identity)].map((c) => `{${c}}`).join('')
   return (
@@ -39,6 +47,7 @@ export function DeckIdentityPips({ commanders }: { readonly commanders: readonly
 function deckIdentity(
   commanders: readonly string[],
   card: (name: string) => CardDefinition | null | undefined,
+  colors: Readonly<Record<string, Color>> | undefined,
 ): ReadonlySet<Color> | null {
   if (commanders.length === 0) return null
   const identity = new Set<Color>()
@@ -49,6 +58,8 @@ function deckIdentity(
     if (def.faces?.some((f) => card(f) === undefined)) return null
     const faces = { has: (n: string) => card(n) != null, get: (n: string) => card(n) as CardDefinition }
     for (const c of colorIdentityOf(def, faces)) identity.add(c)
+    const chosen = colors?.[name]
+    if (def.chooseColorAsCommander === true && chosen !== undefined) identity.add(chosen)
   }
   return identity
 }

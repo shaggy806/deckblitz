@@ -22,6 +22,7 @@ const toWire = (d: DeckContents): WireDeck => {
   return {
     cards: d.cards,
     commanders: d.commanders,
+    ...(d.commanderColors !== undefined ? { commanderColors: d.commanderColors } : {}),
     name: d.name,
     printings: d.printings,
     ...(sideboard !== undefined ? { sideboard } : {}),
