@@ -113,6 +113,33 @@ describe("Enduring Renewal", () => {
   });
 });
 
+describe("Forbidden Crypt", () => {
+  it("each draw returns a card from the graveyard instead; with none left, its controller loses", () => {
+    const { game, a } = table();
+    // Into the graveyard before the Crypt, which would exile it on the way.
+    const bears = game.debugSpawn("Grizzly Bears", A, "graveyard");
+    spawn(game, "Forbidden Crypt");
+    a.chooseFromZoneFn = (_view, eligible) => [eligible[0]];
+    const drawnBefore = turnTotal(game.state, A, "card-drawn");
+    const libraryBefore = game.state.zones.perPlayer[A].library.length;
+    game.debugApplyEffect(A, { kind: "draw", amount: 2 });
+    settle(game);
+    expect(zone(game, bears)).toBe("hand");
+    expect(game.state.zones.perPlayer[A].library.length).toBe(libraryBefore);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(drawnBefore);
+    // The second draw found the graveyard empty.
+    expect(game.state.players[A].hasLost).toBe(true);
+  });
+
+  it("a card of yours that would go to your graveyard is exiled instead", () => {
+    const { game } = table();
+    spawn(game, "Forbidden Crypt");
+    const bears = spawn(game, "Grizzly Bears");
+    destroy(game, bears);
+    expect(zone(game, bears)).toBe("exile");
+  });
+});
+
 describe("Breathstealer's Crypt", () => {
   it("a creature card drawn is discarded unless its drawer pays 3 life", () => {
     const { game, a, b } = table();

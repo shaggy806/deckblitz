@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A draw replaced by a card returned from the graveyard, or a loss — found built 2026-11-20
+
+The key `replacement:draw-replacement-return-from-graveyard-or-lose`: Forbidden Crypt (16193). No engine code: Out
+of the Tombs' `would-draw` `{ effect }` conditional (`cards-in-graveyard`, `return-from-graveyard` to hand, else
+`lose-game`) without its empty-library condition, and Yawgmoth's Agenda's exile-instead.
+`test/draw-replacement-reveal.test.ts`.
+
 ### A draw replaced by a reveal, and a draw within the replacement — built 2026-11-20
 
 The key `replacement:draw-replacement-reveal`: Zur's Weirding (12293), Breathstealer's Crypt (15597), Enduring Renewal

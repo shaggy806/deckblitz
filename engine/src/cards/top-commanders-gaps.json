@@ -3048,7 +3048,8 @@
   "effect:look-and-choose-then-always",
   "effect:look-one-each-then-one-onto-battlefield",
   "amount:aggregate-over-attached-equipment",
-  "replacement:draw-replacement-reveal"
+  "replacement:draw-replacement-reveal",
+  "replacement:draw-replacement-return-from-graveyard-or-lose"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
