@@ -249,6 +249,7 @@ import _poolElectroduplicate from "../pool/electroduplicate.js";
 import _poolElegantRotunda from "../pool/elegant-rotunda.js";
 import _poolElenaTurkRecruit from "../pool/elena-turk-recruit.js";
 import _poolElvenPalisade from "../pool/elven-palisade.js";
+import _poolElvishRefueler from "../pool/elvish-refueler.js";
 import _poolEmberSwallower from "../pool/ember-swallower.js";
 import _poolEmberWeaver from "../pool/ember-weaver.js";
 import _poolEmbraalGearSmasher from "../pool/embraal-gear-smasher.js";
@@ -1365,6 +1366,7 @@ const shard: CardShard = {
     _poolElegantRotunda,
     _poolElenaTurkRecruit,
     _poolElvenPalisade,
+    _poolElvishRefueler,
     _poolEmberSwallower,
     _poolEmberWeaver,
     _poolEmbraalGearSmasher,

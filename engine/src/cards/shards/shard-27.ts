@@ -284,6 +284,7 @@ import _poolFaramirPrinceOfIthilien from "../pool/faramir-prince-of-ithilien.js"
 import _poolFatalBlow from "../pool/fatal-blow.js";
 import _poolFatalGrudge from "../pool/fatal-grudge.js";
 import _poolFealtyToTheRealm from "../pool/fealty-to-the-realm.js";
+import _poolFearOfAbduction from "../pool/fear-of-abduction.js";
 import _poolFeedingFrenzy from "../pool/feeding-frenzy.js";
 import _poolFelhideBrawler from "../pool/felhide-brawler.js";
 import _poolFellMire from "../pool/fell-mire.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolFatalBlow,
     _poolFatalGrudge,
     _poolFealtyToTheRealm,
+    _poolFearOfAbduction,
     _poolFeedingFrenzy,
     _poolFelhideBrawler,
     _poolFellMire,

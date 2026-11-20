@@ -1064,6 +1064,7 @@ import _tokensFishTokenExpendableLackey from "../tokens/fish-token-expendable-la
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensGiantBadgerToken from "../tokens/giant-badger-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
+import _tokensHumanTokenWard2 from "../tokens/human-token-ward-2.js";
 import _tokensHumanWarriorToken31TrampleHaste from "../tokens/human-warrior-token-3-1-trample-haste.js";
 import _tokensHumanWizardToken from "../tokens/human-wizard-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
@@ -2151,6 +2152,7 @@ const shard: CardShard = {
     _tokensFoodToken,
     _tokensGiantBadgerToken,
     _tokensHorrorToken,
+    _tokensHumanTokenWard2,
     _tokensHumanWarriorToken31TrampleHaste,
     _tokensHumanWizardToken,
     _tokensJellyfishToken,

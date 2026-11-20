@@ -559,6 +559,7 @@ import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
 import _poolMidgarCityOfMako from "../pool/midgar-city-of-mako.js";
 import _poolMidnightEntourage from "../pool/midnight-entourage.js";
 import _poolMidnightMangler from "../pool/midnight-mangler.js";
+import _poolMidnightOil from "../pool/midnight-oil.js";
 import _poolMilitaryIntelligence from "../pool/military-intelligence.js";
 import _poolMindbenderSpores from "../pool/mindbender-spores.js";
 import _poolMindsparker from "../pool/mindsparker.js";
@@ -1606,6 +1607,7 @@ const shard: CardShard = {
     _poolMidgarCityOfMako,
     _poolMidnightEntourage,
     _poolMidnightMangler,
+    _poolMidnightOil,
     _poolMilitaryIntelligence,
     _poolMindbenderSpores,
     _poolMindsparker,

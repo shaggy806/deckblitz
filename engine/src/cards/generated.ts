@@ -8389,6 +8389,7 @@ import _poolElvishPiper from "./pool/elvish-piper.js";
 import _poolElvishPromenade from "./pool/elvish-promenade.js";
 import _poolElvishRanger from "./pool/elvish-ranger.js";
 import _poolElvishReclaimer from "./pool/elvish-reclaimer.js";
+import _poolElvishRefueler from "./pool/elvish-refueler.js";
 import _poolElvishRegrower from "./pool/elvish-regrower.js";
 import _poolElvishRejuvenator from "./pool/elvish-rejuvenator.js";
 import _poolElvishScout from "./pool/elvish-scout.js";
@@ -9437,6 +9438,7 @@ import _poolFblthpLostOnTheRange from "./pool/fblthp-lost-on-the-range.js";
 import _poolFblthpTheLost from "./pool/fblthp-the-lost.js";
 import _poolFealtyToTheRealm from "./pool/fealty-to-the-realm.js";
 import _poolFearFireFoes from "./pool/fear-fire-foes.js";
+import _poolFearOfAbduction from "./pool/fear-of-abduction.js";
 import _poolFearOfBeingHunted from "./pool/fear-of-being-hunted.js";
 import _poolFearOfBurningAlive from "./pool/fear-of-burning-alive.js";
 import _poolFearOfDeath from "./pool/fear-of-death.js";
@@ -10529,6 +10531,7 @@ import _poolFuelTheFlames from "./pool/fuel-the-flames.js";
 import _poolFugitiveCodebreaker from "./pool/fugitive-codebreaker.js";
 import _poolFugitiveDroid from "./pool/fugitive-droid.js";
 import _poolFugitiveListener from "./pool/fugitive-listener.js";
+import _poolFugitiveOfTheJudoon from "./pool/fugitive-of-the-judoon.js";
 import _poolFugitiveWizard from "./pool/fugitive-wizard.js";
 import _poolFugue from "./pool/fugue.js";
 import _poolFulgentDistraction from "./pool/fulgent-distraction.js";
@@ -17621,6 +17624,7 @@ import _poolMidnightGuard from "./pool/midnight-guard.js";
 import _poolMidnightHaunting from "./pool/midnight-haunting.js";
 import _poolMidnightMangler from "./pool/midnight-mangler.js";
 import _poolMidnightMayhem from "./pool/midnight-mayhem.js";
+import _poolMidnightOil from "./pool/midnight-oil.js";
 import _poolMidnightPathlighter from "./pool/midnight-pathlighter.js";
 import _poolMidnightReaper from "./pool/midnight-reaper.js";
 import _poolMidnightRecovery from "./pool/midnight-recovery.js";
@@ -32969,6 +32973,7 @@ import _tokensAjanisPridemateToken from "./tokens/ajanis-pridemate-token.js";
 import _tokensAkromaAngelOfWrathToken from "./tokens/akroma-angel-of-wrath-token.js";
 import _tokensAlienAngelToken from "./tokens/alien-angel-token.js";
 import _tokensAlienInsectToken from "./tokens/alien-insect-token.js";
+import _tokensAlienRhinoToken from "./tokens/alien-rhino-token.js";
 import _tokensAlienSalamanderToken from "./tokens/alien-salamander-token.js";
 import _tokensAlienTokenAlienInvasion from "./tokens/alien-token-alien-invasion.js";
 import _tokensAlienToken from "./tokens/alien-token.js";
@@ -33289,6 +33294,7 @@ import _tokensHumanSoldierTokenTorensFistOfTheAngels from "./tokens/human-soldie
 import _tokensHumanSoldierToken from "./tokens/human-soldier-token.js";
 import _tokensHumanTokenCantPhaseIn from "./tokens/human-token-cant-phase-in.js";
 import _tokensHumanTokenDoctorSpellsCostLess from "./tokens/human-token-doctor-spells-cost-less.js";
+import _tokensHumanTokenWard2 from "./tokens/human-token-ward-2.js";
 import _tokensHumanToken from "./tokens/human-token.js";
 import _tokensHumanWarriorToken31TrampleHaste from "./tokens/human-warrior-token-3-1-trample-haste.js";
 import _tokensHumanWarriorToken from "./tokens/human-warrior-token.js";
@@ -42127,6 +42133,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElvishPromenade,
   _poolElvishRanger,
   _poolElvishReclaimer,
+  _poolElvishRefueler,
   _poolElvishRegrower,
   _poolElvishRejuvenator,
   _poolElvishScout,
@@ -43175,6 +43182,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFblthpTheLost,
   _poolFealtyToTheRealm,
   _poolFearFireFoes,
+  _poolFearOfAbduction,
   _poolFearOfBeingHunted,
   _poolFearOfBurningAlive,
   _poolFearOfDeath,
@@ -44267,6 +44275,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFugitiveCodebreaker,
   _poolFugitiveDroid,
   _poolFugitiveListener,
+  _poolFugitiveOfTheJudoon,
   _poolFugitiveWizard,
   _poolFugue,
   _poolFulgentDistraction,
@@ -51359,6 +51368,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMidnightHaunting,
   _poolMidnightMangler,
   _poolMidnightMayhem,
+  _poolMidnightOil,
   _poolMidnightPathlighter,
   _poolMidnightReaper,
   _poolMidnightRecovery,
@@ -66713,6 +66723,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensAkromaAngelOfWrathToken,
   _tokensAlienAngelToken,
   _tokensAlienInsectToken,
+  _tokensAlienRhinoToken,
   _tokensAlienSalamanderToken,
   _tokensAlienTokenAlienInvasion,
   _tokensAlienToken,
@@ -67033,6 +67044,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensHumanSoldierToken,
   _tokensHumanTokenCantPhaseIn,
   _tokensHumanTokenDoctorSpellsCostLess,
+  _tokensHumanTokenWard2,
   _tokensHumanToken,
   _tokensHumanWarriorToken31TrampleHaste,
   _tokensHumanWarriorToken,
@@ -75878,6 +75890,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elvish-promenade": _poolElvishPromenade,
   "pool/elvish-ranger": _poolElvishRanger,
   "pool/elvish-reclaimer": _poolElvishReclaimer,
+  "pool/elvish-refueler": _poolElvishRefueler,
   "pool/elvish-regrower": _poolElvishRegrower,
   "pool/elvish-rejuvenator": _poolElvishRejuvenator,
   "pool/elvish-scout": _poolElvishScout,
@@ -76926,6 +76939,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fblthp-the-lost": _poolFblthpTheLost,
   "pool/fealty-to-the-realm": _poolFealtyToTheRealm,
   "pool/fear-fire-foes": _poolFearFireFoes,
+  "pool/fear-of-abduction": _poolFearOfAbduction,
   "pool/fear-of-being-hunted": _poolFearOfBeingHunted,
   "pool/fear-of-burning-alive": _poolFearOfBurningAlive,
   "pool/fear-of-death": _poolFearOfDeath,
@@ -78018,6 +78032,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fugitive-codebreaker": _poolFugitiveCodebreaker,
   "pool/fugitive-droid": _poolFugitiveDroid,
   "pool/fugitive-listener": _poolFugitiveListener,
+  "pool/fugitive-of-the-judoon": _poolFugitiveOfTheJudoon,
   "pool/fugitive-wizard": _poolFugitiveWizard,
   "pool/fugue": _poolFugue,
   "pool/fulgent-distraction": _poolFulgentDistraction,
@@ -85110,6 +85125,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/midnight-haunting": _poolMidnightHaunting,
   "pool/midnight-mangler": _poolMidnightMangler,
   "pool/midnight-mayhem": _poolMidnightMayhem,
+  "pool/midnight-oil": _poolMidnightOil,
   "pool/midnight-pathlighter": _poolMidnightPathlighter,
   "pool/midnight-reaper": _poolMidnightReaper,
   "pool/midnight-recovery": _poolMidnightRecovery,
@@ -100458,6 +100474,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/akroma-angel-of-wrath-token": _tokensAkromaAngelOfWrathToken,
   "tokens/alien-angel-token": _tokensAlienAngelToken,
   "tokens/alien-insect-token": _tokensAlienInsectToken,
+  "tokens/alien-rhino-token": _tokensAlienRhinoToken,
   "tokens/alien-salamander-token": _tokensAlienSalamanderToken,
   "tokens/alien-token-alien-invasion": _tokensAlienTokenAlienInvasion,
   "tokens/alien-token": _tokensAlienToken,
@@ -100778,6 +100795,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/human-soldier-token": _tokensHumanSoldierToken,
   "tokens/human-token-cant-phase-in": _tokensHumanTokenCantPhaseIn,
   "tokens/human-token-doctor-spells-cost-less": _tokensHumanTokenDoctorSpellsCostLess,
+  "tokens/human-token-ward-2": _tokensHumanTokenWard2,
   "tokens/human-token": _tokensHumanToken,
   "tokens/human-warrior-token-3-1-trample-haste": _tokensHumanWarriorToken31TrampleHaste,
   "tokens/human-warrior-token": _tokensHumanWarriorToken,

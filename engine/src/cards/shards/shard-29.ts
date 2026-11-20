@@ -318,6 +318,7 @@ import _poolFoulRebirth from "../pool/foul-rebirth.js";
 import _poolFracturedSanity from "../pool/fractured-sanity.js";
 import _poolFrodoSauronsBane from "../pool/frodo-saurons-bane.js";
 import _poolFrogTongue from "../pool/frog-tongue.js";
+import _poolFugitiveOfTheJudoon from "../pool/fugitive-of-the-judoon.js";
 import _poolFullFlowering from "../pool/full-flowering.js";
 import _poolFuneralRoomAwakeningHall from "../pool/funeral-room-awakening-hall.js";
 import _poolFurtiveHomunculus from "../pool/furtive-homunculus.js";
@@ -1366,6 +1367,7 @@ const shard: CardShard = {
     _poolFracturedSanity,
     _poolFrodoSauronsBane,
     _poolFrogTongue,
+    _poolFugitiveOfTheJudoon,
     _poolFullFlowering,
     _poolFuneralRoomAwakeningHall,
     _poolFurtiveHomunculus,

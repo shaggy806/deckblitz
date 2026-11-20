@@ -1040,6 +1040,7 @@ import _poolZuriWarriorOfWakanda from "../pool/zuri-warrior-of-wakanda.js";
 import _poolZursWeirding from "../pool/zurs-weirding.js";
 import _tokens22BlackBirdToken from "../tokens/2-2-black-bird-token.js";
 import _tokens44RedOgreToken from "../tokens/4-4-red-ogre-token.js";
+import _tokensAlienRhinoToken from "../tokens/alien-rhino-token.js";
 import _tokensCentaurToken33 from "../tokens/centaur-token-3-3.js";
 import _tokensDragonTokenDragonbackAssault from "../tokens/dragon-token-dragonback-assault.js";
 import _tokensElementalShamanTokenHaste from "../tokens/elemental-shaman-token-haste.js";
@@ -2106,6 +2107,7 @@ const shard: CardShard = {
   tokens: [
     _tokens22BlackBirdToken,
     _tokens44RedOgreToken,
+    _tokensAlienRhinoToken,
     _tokensCentaurToken33,
     _tokensDragonTokenDragonbackAssault,
     _tokensElementalShamanTokenHaste,
