@@ -23633,6 +23633,23 @@ describe("a life gain become draws (Nefarious Lich)", () => {
     } as never) as unknown as { static: { replacement?: unknown }[] };
     expect(lich.static[0]?.replacement).toEqual({ event: "would-gain-life", who: "you", instead: { effect: { kind: "draw", amount: "x" } } });
   });
+
+  it("reads a spell's or ability's gain to its controller becoming a loss (Rain of Gore)", () => {
+    const gore = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text: "If a spell or ability would cause its controller to gain life, that player loses that much life instead.",
+      mana_cost: "{B}{R}",
+      colors: ["B", "R"],
+      cmc: 2,
+    } as never) as unknown as { static: { replacement?: unknown }[] };
+    expect(gore.static[0]?.replacement).toEqual({
+      event: "would-gain-life",
+      who: "any-player",
+      becomesLoss: true,
+      byOwnSpellOrAbility: true,
+    });
+  });
 });
 
 describe("creatures your opponents control, or played by them, enter tapped (Uphill Battle)", () => {

@@ -8451,6 +8451,10 @@ The `prevent-damage` family makes the same record.
   pick, rule 616.1). `becomesLoss: true` is Tainted Remedy's "if an opponent
   would gain life, that player loses that much life instead" (`who:
   "opponent"`): applied before any `plus` or `multiplier`, after a `prevent`.
+  `byOwnSpellOrAbility: true` narrows any of them to a gain a spell or ability brings its own
+  controller — Rain of Gore's "if a spell or ability would cause its controller to gain life"
+  (`who: "any-player"`, `becomesLoss: true`): never lifelink's (its ruling), a cost's, or
+  Swords to Plowshares' gain for the creature's controller.
 - `{ event: "would-deal-damage", instead, combat?, source?, fromSelf?, to?, toFilter?, ifAtMost?, ifAtLeast? }` — `instead` is `{ modify: { times, plus, atLeast, atMost, set, half } }`, `{ prevent, then?, perEvent?, thenCountsUnprevented? }`, `{ redirect }` or `{ effect }` (see **One `instead`** above); and — and since B250 `fromAttached?, toOther?, redirect?, preventAmount?, preventAllBut?, preventHalf?, halve?, ifAtMost?`:
   `to: "your-side"` is you or a permanent you control (`toFilter` narrowing only the permanents — Hyperion's "you or a Hero you control"),
   `to: "attached"` / `fromAttached: true` the Aura's or Equipment's host (Inviolability; Muzzle), `toOther` "other permanents" (Palisade Giant);

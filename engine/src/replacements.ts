@@ -1224,6 +1224,11 @@ export interface LifeGainReplacement {
    * order best for them: a `prevent` first (nothing happens), else this
    * first — so no `plus` or `multiplier` changes the gain it becomes. */
   readonly becomesLoss?: true;
+  /** "If a spell or ability would cause its controller to gain life …" (Rain
+   * of Gore): only a gain an effect brings to its own controller, never
+   * lifelink's (the card's ruling), a cost's, or one a spell gives another
+   * player. */
+  readonly byOwnSpellOrAbility?: true;
 }
 
 /**

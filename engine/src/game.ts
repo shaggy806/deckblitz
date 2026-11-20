@@ -42746,7 +42746,7 @@ export class Game {
         }
         return types.size;
       },
-      gainLife: (player, amount) => this.changeLife(player, amount),
+      gainLife: (player, amount) => this.changeLife(player, amount, false, undefined, controller),
       // Life lost as a result of the rad counters' own ability is lost "from
       // radiation" (rule 728.1a) — a copy of that ability's too.
       loseLife: (player, amount) =>
@@ -67426,7 +67426,8 @@ controlledBy,
               ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
             }))
         ) {
-          this.changeLife(shield.gainLife, prevented);
+          // The prevention effect's own gain, its controller's (Healing Grace).
+          this.changeLife(shield.gainLife, prevented, false, undefined, shield.gainLife);
         }
         // "If damage is prevented this way, …" (615.5): right after.
         if (shield.then !== undefined && shield.redirect === undefined && shield.redirectToSource === undefined) {
@@ -68155,9 +68156,13 @@ controlledBy,
 
   /** The would-gain-life replacements on `player`'s gain, for them to order
    * (rule 616.1). */
-  private lifeGainSteps(player: PlayerId): readonly LifeGainStep[] {
+  private lifeGainSteps(player: PlayerId, byEffectOf?: PlayerId): readonly LifeGainStep[] {
     const replacements = this.playerEventReplacements(player).filter(
-      (e): e is PlayerEventReplacement<LifeGainReplacement> => e.r.event === "would-gain-life",
+      (e): e is PlayerEventReplacement<LifeGainReplacement> =>
+        e.r.event === "would-gain-life" &&
+        // "If a spell or ability would cause its controller to gain life"
+        // (Rain of Gore): an effect's gain to the one who controls it.
+        (e.r.byOwnSpellOrAbility !== true || byEffectOf === player),
     );
     return replacements.flatMap(({ r, by }, i): LifeGainStep[] => {
       const effect = insteadEffect(r.instead)?.effect;
@@ -68192,8 +68197,8 @@ controlledBy,
    * applies (rule 616.1), the order being able to change what comes of it:
    * an effect's gain, gone through dry (`replacementOrdersAsked`). A gain
    * that can't wait (lifelink, a cost) takes the order best for them. */
-  private lifeOrderAsked(player: PlayerId, amount: number): void {
-    const steps = this.lifeGainSteps(player);
+  private lifeOrderAsked(player: PlayerId, amount: number, byEffectOf?: PlayerId): void {
+    const steps = this.lifeGainSteps(player, byEffectOf);
     if (steps.length < 2 || steps.length > 6) return;
     const first = this.answeredLifeSteps(steps, player);
     const rest = steps.filter((s) => !first.includes(s));
@@ -68231,7 +68236,8 @@ controlledBy,
     delta: number,
     lossReplaced = false,
     cause?: LifeLossReplacement["from"],
-    /** A loss an effect caused: its spell's or ability's controller (rule 119.3). */
+    /** A loss or gain an effect caused: its spell's or ability's controller
+     * (rule 119.3) — not lifelink's, a cost's or damage's. */
     byEffectOf?: PlayerId,
   ): void {
     // An amount that was never set — a number never noted (`{ chosenNumber }`
@@ -68240,7 +68246,7 @@ controlledBy,
     if (Number.isNaN(delta)) return;
     if (this.dryRunningEvents) {
       if (delta > 0 && this.state.awaiting === null && !playerGainLifeProhibited(this.state, this.registry, player)) {
-        this.lifeOrderAsked(player, delta);
+        this.lifeOrderAsked(player, delta, byEffectOf);
       }
       return;
     }
@@ -68271,7 +68277,7 @@ controlledBy,
     // order them: what they chose (`lifeOrderAsked`), and past that the best
     // for them (`bestLifeOrder`).
     if (delta > 0) {
-      const steps = this.lifeGainSteps(player);
+      const steps = this.lifeGainSteps(player, byEffectOf);
       const chosen = this.answeredLifeSteps(steps, player);
       const order = [...chosen, ...bestLifeOrder(steps.filter((s) => !chosen.includes(s)))];
       const outcome = runLifeGainSteps(delta, order);
@@ -68458,7 +68464,7 @@ controlledBy,
     if (delta === 0) return;
     for (const p of players) {
       if (delta < 0) this.loseLifeTallied(p, -delta, undefined, controller);
-      else this.changeLife(p, delta);
+      else this.changeLife(p, delta, false, undefined, controller);
     }
   }
 

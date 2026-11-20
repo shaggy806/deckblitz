@@ -24571,6 +24571,18 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // A gain that becomes a loss: anyone's an opponent's (Tainted Remedy), or
+  // only one a spell or ability brings its own controller (Rain of Gore).
+  if (line === "If an opponent would gain life, that player loses that much life instead.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "opponent", becomesLoss: true }, text };
+  }
+  if (line === "If a spell or ability would cause its controller to gain life, that player loses that much life instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-gain-life", who: "any-player", becomesLoss: true, byOwnSpellOrAbility: true },
+      text,
+    };
+  }
   if (line === "Enchanted player can't gain life.") {
     return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }, text };
   }
