@@ -13602,4 +13602,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { lib: ['Divination', 'Grizzly Bears', 'Island'] },
     }),
   ),
+  // --- Targets of the creature type of your choice (2026-11-20) -------------
+  preset(
+    'Aphetto Dredging: Llanowar Elves goes with Elvish Mystic, not Grizzly Bears',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Aphetto Dredging'], gy: ['Llanowar Elves', 'Elvish Mystic', 'Grizzly Bears'] },
+    }),
+  ),
 ]

@@ -8980,3 +8980,9 @@ Each board's die comes up 4.
 ### Hama, the Bloodbender: cast the exiled card by tapping three Ornithopters
 - **Do:** Cast Hama, the Bloodbender and pick Divination from Bob's milled cards. Open Bob's exile, click Divination and confirm "Waterbend 3".
 - **Expect:** Grizzly Bears and Island can't be picked. The banner reads "Divination: waterbend — tap up to 3 artifacts or creatures", the three Ornithopters already chosen. They tap, no mana is spent, and you draw two cards.
+
+## Targets of the creature type of your choice (2026-11-20)
+
+### Aphetto Dredging: Llanowar Elves goes with Elvish Mystic, not Grizzly Bears
+- **Do:** Cast Aphetto Dredging and pick Llanowar Elves and Grizzly Bears, then swap Grizzly Bears for Elvish Mystic, confirm, and choose Elf.
+- **Expect:** Confirm stays off while Grizzly Bears is picked with the Elves. With Elvish Mystic it confirms, you're asked to choose between Druid and Elf, and both Elves go to your hand.

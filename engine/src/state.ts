@@ -3453,6 +3453,12 @@ export interface AlsoCostAsk {
   /** Collect evidence this much (rule 701.59a) — an alternative cost's
    * (`alternativeCostForSpells.collectEvidence`). */
   readonly collectEvidence?: number;
+  /** "Of the creature type of your choice" (a target group's
+   * `oneCreatureType` — Aphetto Dredging): the creature types its targets
+   * share, one of which becomes the spell's `chosenCreatureType` — at once
+   * when there's one, else asked (`choose-creature-type`'s `forCost`). Not a
+   * cost: queued here to be settled before anyone gets priority. */
+  readonly sharedCreatureTypes?: readonly string[];
   /** An action as the cost (`KickerAlsoCost.do`, or an ability's `AbilityCost.do`
    * paid after its other parts, 601.2h). */
   readonly do?: EffectSpec;

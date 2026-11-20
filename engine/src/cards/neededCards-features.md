@@ -362,6 +362,17 @@ toughness equal to the chosen number" is an `amounts` condition over an aggregat
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
 `dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
 read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
+### Targets of the creature type of your choice — built 2026-11-20
+
+The key `cost:choose-creature-type-as-cast`, for Aphetto Dredging and Selective Snare: a target group's
+`oneCreatureType` (target.ts), its members sharing a creature type (`TargetFacts.creatureTypesOf`, narrowed in
+`slotOptions`, refused by `groupBroken`); `Game.queueSharedTypeChoice` keeps the shared type as the spell's
+`chosenCreatureType`, asking among several through `choose-creature-type`'s `forCost` (`AlsoCostAsk
+.sharedCreatureTypes`); `targetLegality` drops a member no longer of that type (608.2b). The rulings put the type
+before the targets (601.2c); the targets sharing it is the same set of choices. Caller of the Hunt's "as an
+additional cost, choose a creature type" (no targets, and the permanent keeps the type) is not built.
+`test/targets-of-chosen-creature-type.test.ts`.
+
 ### An escape cost with another part — built 2026-11-20
 
 The key `cost:escape-exile-permanent`, for Lunar Hatchling: `escape.also`, a `KickerAlsoCost` as freerunning's,

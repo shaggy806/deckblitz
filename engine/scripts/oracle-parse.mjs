@@ -1348,6 +1348,19 @@ function quantifiedSlots(phrase, ctx) {
     const group = { kind: "any-number", of, ...(n !== undefined ? { max: n } : {}), maxTotalManaValue: Number(m[3]) };
     return { slots: [ctx.target(group)], group: true };
   }
+  // "Up to three target creature cards of the creature type of your choice
+  // from your graveyard" (Aphetto Dredging), "X target creatures of the
+  // creature type of your choice" (Selective Snare): a group whose members
+  // are of one creature type (`oneCreatureType`).
+  if ((m = /^(up to (?:two|three|four|five|six)|X|any number of) target (.+?) of the creature type of your choice( from your graveyard)?$/i.exec(phrase))) {
+    const q = m[1].toLowerCase();
+    const n = q === "x" ? "x" : q === "any number of" ? undefined : numberOf(q.slice(6));
+    const phrase1 = `target ${singularTarget(m[2])}${m[3] ?? ""}`;
+    const of = m[3] ? graveyardTargetOf(phrase1) : targetOf(phrase1);
+    if (of === undefined || (n !== undefined && n !== "x" && typeof n !== "number")) return undefined;
+    const group = { kind: "any-number", of, ...(n === "x" ? { min: "x" } : {}), ...(n !== undefined ? { max: n } : {}), oneCreatureType: true };
+    return { slots: [ctx.target(group)], group: true };
+  }
   // "Two target permanents that share a card type" (Shifting Loyalties),
   // "two target creatures you control that share a creature type" (Secret
   // Tunnel), "two target creatures that share no creature types" (Rivals'
@@ -6401,6 +6414,22 @@ export function parseSentence(sentence, ctx) {
       from: got.slots[0],
       simultaneous: true,
       effect: { kind: "put-onto-battlefield", target: got.slots[0] },
+    };
+  }
+  // "Return up to three target creature cards of the creature type of your
+  // choice from your graveyard to your hand" (Aphetto Dredging), "Return X
+  // target creatures of the creature type of your choice to their owner's
+  // hand" (Selective Snare): the group, together.
+  if ((m = /^return (.+ of the creature type of your choice(?: from your graveyard)?) to (your hand|their owner's hand|their owners' hands)\.$/i.exec(s))) {
+    const got = quantifiedSlots(m[1], ctx);
+    if (got === undefined || !got.group) return null;
+    const fromYard = /from your graveyard$/i.test(m[1]);
+    if (fromYard !== /^your hand$/i.test(m[2])) return null;
+    return {
+      kind: "for-each-target",
+      from: got.slots[0],
+      simultaneous: true,
+      effect: { kind: "return-to-hand", target: got.slots[0], ...(fromYard ? { from: "graveyard" } : {}) },
     };
   }
   if ((m = re(`destroy (${TARGET})`).exec(s))) return { kind: "destroy", target: slot(m[1]) };

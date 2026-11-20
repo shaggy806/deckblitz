@@ -1,5 +1,6 @@
 /** Reference types for spell / ability targets. Pure data, no logic. */
 
+import { shareACreatureType } from "./actions.js";
 import type { CardType, TurnStat } from "./cards.js";
 import type { StaticCondition } from "./cards/define.js";
 import type { EffectAmount } from "./effects.js";
@@ -578,6 +579,17 @@ export type TargetSpec =
        * Sinister Six!): no two members share a name. Checked as
        * `differentManaValues` is. Needs {@link TargetFacts}' `nameOf`. */
       readonly differentNames?: true;
+      /** "…target creature cards **of the creature type of your choice**"
+       * (Aphetto Dredging, Selective Snare): every member is of one creature
+       * type, chosen as the spell is cast, before its targets (their
+       * rulings, rule 601.2c). Judged as a set here — the members share a
+       * creature type (a changeling every one, 702.73a) — and the type, the
+       * one they share or the caster's pick among those, is kept as the
+       * spell's `chosenCreatureType` (`Game.queueSharedTypeChoice`): the same
+       * choices either way round. As it resolves, a member no longer of that
+       * type is illegal (608.2b). Needs {@link TargetFacts}'
+       * `creatureTypesOf`. */
+      readonly oneCreatureType?: true;
       /** Every member's player is the same — "up to two target cards **from
        * a single graveyard**" (Decompose), "two target cards from **an
        * opponent's** graveyard" (Nullmage Advocate: one opponent's) — or,
@@ -622,6 +634,9 @@ export interface TargetFacts {
   /** Its name — for a group's `differentNames`. Without it that narrows
    * nothing. */
   readonly nameOf?: (ref: TargetRef) => string;
+  /** Its subtypes where it is, a changeling's with `EVERY_CREATURE_TYPE` —
+   * for a group's `oneCreatureType`. Without it that narrows nothing. */
+  readonly creatureTypesOf?: (ref: TargetRef) => readonly string[];
   /** Do `a` and `b` share a type of `share`'s kind (see
    * {@link TargetShare})? `none` isn't this one's to read: the relation
    * negates the answer. Without it an `other` slot's `shares` narrows
@@ -1569,6 +1584,13 @@ export function slotOptions(
         const used = new Set(taken.map(nameOf));
         left = left.filter((ref) => !used.has(nameOf(ref)));
       }
+      // "Of the creature type of your choice": only one sharing a type with
+      // every member taken so far, all of them at once.
+      const creatureTypesOf = facts.creatureTypesOf;
+      if (spec.oneCreatureType === true && creatureTypesOf !== undefined && taken.length > 0) {
+        const lists = taken.map(creatureTypesOf);
+        left = left.filter((ref) => shareACreatureType([...lists, creatureTypesOf(ref)]));
+      }
     }
     // So for "total mana value 3 or less", and "each a different mana value".
     const manaValueOf = facts.manaValueOf;
@@ -1786,6 +1808,10 @@ export function groupBroken(
   if (only === "mana-value") return false;
   const toughnessOf = facts.toughnessOf;
   if (spec.equalToughness === true && toughnessOf !== undefined && new Set(members.map(toughnessOf)).size > 1) {
+    return true;
+  }
+  const creatureTypesOf = facts.creatureTypesOf;
+  if (spec.oneCreatureType === true && creatureTypesOf !== undefined && !shareACreatureType(members.map(creatureTypesOf))) {
     return true;
   }
   const nameOf = facts.nameOf;

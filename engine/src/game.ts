@@ -25497,6 +25497,7 @@ export class Game {
     // above, the rest asked in turn before anyone gets priority.
     // "Return X Swamps" (Infernal Harvest) asks the same way, once X is known.
     const returnsX = def.additionalCost?.returnToHandX;
+    this.queueSharedTypeChoice(cardId, player, via === "effect" ? this.activePlayer : player);
     this.queueAlsoCosts(
       player,
       cardId,
@@ -41019,6 +41020,18 @@ export class Game {
     // A group's "total power N or less" broken now makes every one of its
     // targets illegal (Reunion of the House's ruling).
     const facts = stateTargetFacts(this.state, this.registry);
+    // "…of the creature type of your choice" (rule 608.2b): a member no
+    // longer of the type chosen as it was cast is illegal, the rest stand.
+    const chosenType = source?.object === undefined ? undefined : this.state.objects[source.object]?.chosenCreatureType;
+    if (chosenType != null) {
+      for (const { spec, start, count } of groupMembers(declared, targets, chosen)) {
+        if (typeof spec !== "object" || spec.kind !== "any-number" || spec.oneCreatureType !== true) continue;
+        for (let i = start; i < start + count; i += 1) {
+          const ref = targets[i];
+          if (ref?.kind === "object" && !hasSubtype(facts.creatureTypesOf?.(ref) ?? [], chosenType)) drop(i);
+        }
+      }
+    }
     for (const { spec, start, count, members } of groupMembers(declared, targets, chosen)) {
       if (!groupBroken(spec, members, facts)) continue;
       for (let i = start; i < start + count; i += 1) drop(i);
@@ -51631,6 +51644,49 @@ controlledBy,
     }
     if (ask.collectEvidence !== undefined) {
       this.beginCollectEvidence(player, spell, ask.collectEvidence, { x: this.state.objects[spell]?.xValue ?? 0, priorityTo });
+    }
+    const shared = ask.sharedCreatureTypes;
+    const object = this.state.objects[spell];
+    if (shared !== undefined && shared.length > 0 && object?.zone === "stack") {
+      if (shared.length === 1) {
+        object.chosenCreatureType = shared[0];
+        this.emit({ type: "creature-type-chosen", object: spell, creatureType: shared[0] });
+        invalidateComputedCache();
+      } else {
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player,
+          source: spell,
+          options: shared,
+          catalog: shared.length > 12,
+          prompt: "Choose the creature type of your choice — one its targets share",
+          forCost: { stint: object.zoneChangeCount ?? 0, priorityTo },
+        };
+      }
+    }
+  }
+
+  /** "…of the creature type of your choice" (a target group's
+   * `oneCreatureType` — Aphetto Dredging, Selective Snare; rule 601.2c): the
+   * creature types the spell's members of each such group share, queued to
+   * become its `chosenCreatureType` before anyone gets priority. The type is
+   * chosen before the targets by the rulings; the targets sharing it is the
+   * same set of choices taken the other way round. Nothing when the group
+   * chose none, where no type reads anything. */
+  private queueSharedTypeChoice(spell: ObjectId, player: PlayerId, priorityTo: PlayerId): void {
+    const object = this.state.objects[spell];
+    if (object === undefined) return;
+    const declared = this.spellTargetSpecs(object);
+    for (const { spec, members } of groupMembers(declared, object.targets ?? [])) {
+      if (typeof spec !== "object" || spec.kind !== "any-number" || spec.oneCreatureType !== true || members.length === 0) continue;
+      const lists = members.map((ref) =>
+        ref.kind === "object" && this.state.objects[ref.object] !== undefined
+          ? effectiveSubtypes(this.state, this.registry, this.state.objects[ref.object])
+          : [],
+      );
+      const shared = CREATURE_TYPES.filter((type) => lists.every((list) => hasSubtype(list, type)));
+      if (shared.length === 0) continue;
+      (this.state.pendingAlsoCosts ??= []).push({ spell, player, priorityTo, sharedCreatureTypes: shared });
     }
   }
 

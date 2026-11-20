@@ -4424,7 +4424,12 @@ ability, read with its bounds below — Orcus, Prince of Undeath), and
 creatures **with equal toughness**" (V.A.T.S.): as it resolves, the members
 still legal no longer all equal makes every one illegal (a lone one never
 breaks it); `differentNames: true` is "up to six target creature cards **with
-different names**" (Behold the Sinister Six!); `differentControllers: true`
+different names**" (Behold the Sinister Six!); `oneCreatureType: true` is
+"up to three target creature cards **of the creature type of your choice**"
+(Aphetto Dredging, Selective Snare): the members share a creature type, which
+becomes the spell's `chosenCreatureType` (asked among the shared ones when
+there are several), and a member no longer of it as it resolves is illegal
+alone; `differentControllers: true`
 is "any number of target tapped creatures **with different controllers**"
 (Cloud's Limit Break): each member past the first an `other` slot with
 `differentController`, so two one player controls as it resolves are both

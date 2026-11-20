@@ -1403,7 +1403,7 @@ export function invalidTargetReason(
     return `${name}'s targets break their mana value limit`;
   }
   if (groupRelationBroken(declared, chosen, facts)) {
-    return `${name}'s targets must have equal toughness or different names`;
+    return `${name}'s targets must have equal toughness, different names or a creature type in common`;
   }
   if (groupPowerExceeded(declared, chosen, facts)) return `${name}'s targets have too much total power`;
   return null;
@@ -1436,6 +1436,10 @@ export function stateTargetFacts(state: GameState, registry: CardRegistry): Targ
         : 0,
     nameOf: (ref) =>
       ref.kind === "object" && state.objects[ref.object] !== undefined ? nameOf(state.objects[ref.object]) : "",
+    creatureTypesOf: (ref) =>
+      ref.kind === "object" && state.objects[ref.object] !== undefined
+        ? effectiveSubtypes(state, registry, state.objects[ref.object])
+        : [],
     shareTypes: (a, b, share) => {
       const typesOf = (ref: TargetRef): SharedTypeFacts | undefined =>
         ref.kind === "object" && state.objects[ref.object] !== undefined

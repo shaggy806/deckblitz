@@ -842,6 +842,13 @@ const viewTargetFacts = (view: PlayerView): TargetFacts => ({
       o.everyCreatureType === true ? [...o.subtypes, EVERY_CREATURE_TYPE] : o.subtypes
     return shareACreatureType([creatureTypes(one), creatureTypes(other)])
   },
+  // "Of the creature type of your choice" (Aphetto Dredging): a group's
+  // members all of one creature type.
+  creatureTypesOf: (ref) => {
+    const o = ref.kind === 'object' ? view.objects[ref.object] : undefined
+    if (o === undefined) return []
+    return o.everyCreatureType === true ? [...o.subtypes, EVERY_CREATURE_TYPE] : o.subtypes
+  },
   attachedTo: (ref) => {
     if (ref.kind !== 'object' || !view.zones.battlefield.includes(ref.object)) return undefined
     return view.objects[ref.object]?.attachedTo ?? undefined

@@ -24307,3 +24307,32 @@ describe("an escape cost, with a part that isn't mana (Lunar Hatchling)", () => 
     });
   });
 });
+
+describe("targets of the creature type of your choice (Aphetto Dredging, Selective Snare)", () => {
+  it("reads a group whose members are of one creature type, returned together", () => {
+    const dredging = parseFace({
+      name: "Aphetto Dredging",
+      type_line: "Sorcery",
+      mana_cost: "{3}{B}",
+      oracle_text: "Return up to three target creature cards of the creature type of your choice from your graveyard to your hand.",
+    }) as unknown as { complete: boolean; targets: unknown; effect: unknown };
+    expect(dredging.complete).toBe(true);
+    expect(dredging.targets).toEqual([
+      { kind: "any-number", of: { kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }, max: 3, oneCreatureType: true },
+    ]);
+    expect(dredging.effect).toEqual({
+      kind: "for-each-target",
+      from: 0,
+      simultaneous: true,
+      effect: { kind: "return-to-hand", target: 0, from: "graveyard" },
+    });
+    const snare = parseFace({
+      name: "Selective Snare",
+      type_line: "Sorcery",
+      mana_cost: "{X}{U}",
+      oracle_text: "Return X target creatures of the creature type of your choice to their owner's hand.",
+    }) as unknown as { complete: boolean; targets: unknown };
+    expect(snare.complete).toBe(true);
+    expect(snare.targets).toEqual([{ kind: "any-number", of: "creature", min: "x", max: "x", oneCreatureType: true }]);
+  });
+});
