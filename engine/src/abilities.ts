@@ -2664,6 +2664,13 @@ export type TriggerKind =
        * ability's damage is dealt by its source permanent, which has no
        * targets of its own). */
       readonly toItsTarget?: boolean;
+      /** "Whenever this deals damage to **one or more** creatures" (Briarbridge
+       * Patrol, Arashin War Beast's "one or more blocking creatures"): with a
+       * recipient named, once per simultaneous damage event however many
+       * matching recipients it hit (rule 603.2c; Briarbridge Patrol's ruling:
+       * once a combat damage step), "that much" what they were dealt
+       * together. Not for an excess-damage `toFilter`. */
+      readonly batched?: true;
     }
   | {
       /** A permanent became tapped (rule 701.21a — City of Brass, Grand

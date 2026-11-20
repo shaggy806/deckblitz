@@ -2115,6 +2115,7 @@ interface OwedPreventFollowUp {
  * Armadillo Cloak's ruling); one that names a recipient ("to a player", "to
  * a creature", "exactly 1 to a permanent or player") once per recipient. */
 function dealsDamageOncePerEvent(trigger: TriggerSpec): boolean {
+  if (trigger.on === "deals-damage" && trigger.batched === true) return true;
   return (
     trigger.on === "deals-damage" &&
     trigger.to === undefined &&

@@ -2303,6 +2303,20 @@ export function parseTrigger(clause) {
     ];
   }
   if (c === "Whenever ~ deals damage") return [{ on: "deals-damage", who: "self" }];
+  // "…to one or more creatures" (Briarbridge Patrol), "…combat damage to one
+  // or more blocking creatures" (Arashin War Beast): once per damage event.
+  if ((m = /^Whenever ~ deals (combat )?damage to one or more (blocking )?creatures$/.exec(c))) {
+    return [
+      {
+        on: "deals-damage",
+        who: "self",
+        to: "creature",
+        ...(m[2] !== undefined ? { toFilter: { blocking: true } } : {}),
+        ...(m[1] !== undefined ? { combat: true } : {}),
+        batched: true,
+      },
+    ];
+  }
   // "…to an opponent" (Arm with Aether's granted ability), "…to the player who
   // cast ~" (Hellish Rebuke's, where `massQuotedTriggerOf` reads it: the
   // granting spell's name and "this permanent" are both ~ by then).

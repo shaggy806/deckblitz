@@ -24177,3 +24177,20 @@ describe("card types among spells cast this turn (April O'Neil, Hacktivist)", ()
     expect(april.triggered[0].effect).toEqual({ kind: "draw", amount: { castThisTurn: {}, cardTypes: true } });
   });
 });
+
+describe("deals damage to one or more creatures, once per event (Briarbridge Patrol, Arashin War Beast)", () => {
+  it("reads \"one or more (blocking) creatures\" as a batched deals-damage trigger", () => {
+    const beast = parseFace({
+      name: "Arashin War Beast",
+      type_line: "Creature — Beast",
+      oracle_text:
+        "Whenever this creature deals combat damage to one or more blocking creatures, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)",
+      mana_cost: "{5}{G}{G}",
+      colors: ["G"],
+      power: "6",
+      toughness: "6",
+    }) as unknown as { complete: boolean; triggered: { trigger: unknown }[] };
+    expect(beast.complete).toBe(true);
+    expect(beast.triggered[0].trigger).toEqual({ on: "deals-damage", who: "self", to: "creature", toFilter: { blocking: true }, combat: true, batched: true });
+  });
+});
