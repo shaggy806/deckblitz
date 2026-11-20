@@ -8276,7 +8276,10 @@ The `prevent-damage` family makes the same record.
   ruling). An ability of the card that works in exile and reads those
   counters reads them with a `source` filter, not `self-counters` (which
   reads a source off the battlefield as it last existed there).
-  `die-exile-with-counter.test.ts`.
+  `die-exile-with-counter.test.ts`. A granted one works as a printed one:
+  Can't Stay Away's "It gains 'If this creature would die, exile it
+  instead.'" is a `grant-static` (`duration: "permanent"`) of that static on
+  the returned card's slot (`grant-exile-if-would-die.test.ts`).
 - **Finality counters** (rule 122) need no spec: any permanent with a
   `finality` counter that would go to a graveyard from the battlefield is
   exiled instead, by `moveObject` itself. Put one on with

@@ -8435,3 +8435,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Its own "would die" exiles it with counters (2026-11-20).** `replacement:die-exile-with-counter`: a self `would-be-put-into-graveyard` `exile` replacement's `withCounters` now reaches the move (`Game.ownExileWithCounters`), one of the replacements its controller picks among (616.1). Darigaaz Reincarnated. `test/die-exile-with-counter.test.ts`.
 
 **The next time one or more enter this turn, each with counters (2026-11-20).** `replacement:next-enter-with-counters`: a resolved `others-enter-battlefield` `counters` replacement with `next: true` applies to everything entering in one event, then is spent (`Game.noteEnterShieldSpent`, beside Mystic Reflection's copy shields). Storyweave. `test/next-enter-with-counters.test.ts`.
+
+**A creature returned gains "If this creature would die, exile it instead" (2026-11-20).** `replacement:grant-exile-if-would-die`: `Game.ownExileReplacements` reads granted statics, so a `grant-static` of the self exile replacement works. Can't Stay Away. `test/grant-exile-if-would-die.test.ts`.

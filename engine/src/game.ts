@@ -72525,10 +72525,15 @@ controlledBy,
   }
 
   /** The object's own mandatory "if this would be put into a graveyard /
-   * die, exile it instead" replacements that apply to it where it is. */
+   * die, exile it instead" replacements that apply to it where it is: its
+   * text's, and one granted it (Can't Stay Away's "It gains 'If this creature
+   * would die, exile it instead'" — `grant-static`), which outlasts a loss of
+   * its abilities only if granted after it (rule 613.7). */
   private ownExileReplacements(object: GameObject): readonly GraveyardExileReplacement[] {
-    if (hasLostAbilities(this.state, this.registry,object)) return [];
-    return this.ownStatics(object).flatMap((ability) => {
+    const statics = hasLostAbilities(this.state, this.registry, object)
+      ? grantedStatics(this.state, this.registry, object)
+      : this.staticsOfSource(object);
+    return statics.flatMap((ability) => {
       const r = ability.replacement;
       return (
         r?.event === "would-be-put-into-graveyard" &&
