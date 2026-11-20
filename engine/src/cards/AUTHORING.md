@@ -5085,7 +5085,8 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   exiled creature as it last existed): offered and named as a sacrifice is, read back as
   `"sacrificed"` (`manaValueOf`, the `sacrificed` condition), but exiled: no sacrifice event, and
   what can't be sacrificed still pays. On a spell, `additionalCost: { sacrifice, exilesSacrifice: true }`
-  (Necrotic Fumes). `exile-chosen-costs.test.ts`. "Exile a **face-down permanent** you control face
+  (Necrotic Fumes); on a permanent spell the card is exiled with the permanent it becomes (607.2q:
+  Fear of Abduction's "each card exiled with it", `exile-creature-cost-linked.test.ts`). `exile-chosen-costs.test.ts`. "Exile a **face-down permanent** you control face
   up: You may play that card this turn" (Primordial Mist) is the same cost over `{ faceDown: true }`
   with `grant-play` of `cards: { paid: "sacrificed" }` — the card where it lies in exile, a land as
   the land play, nothing for a token (`exile-face-down-to-play.test.ts`). With a cost of several (a

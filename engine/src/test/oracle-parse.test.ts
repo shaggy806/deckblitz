@@ -24543,6 +24543,22 @@ describe("casting-zones lane: The Spot, Kotose, Torrent Elemental, Synod Sanctum
     expect(face.complete).toBe(true);
     expect(face.activated[1].effect).toEqual({ kind: "return-exiled-by-source", linked: "battlefield", under: "you" });
   });
+
+  it("reads Fear of Abduction's exile cost and its 'each card exiled with it' to hand", () => {
+    const face = parseFace({
+      name: "Fear of Abduction",
+      type_line: "Enchantment Creature — Nightmare",
+      oracle_text:
+        "As an additional cost to cast this spell, exile a creature you control.\nFlying\nWhen this creature enters, exile target creature an opponent controls.\nWhen this creature leaves the battlefield, put each card exiled with it into its owner's hand.",
+      mana_cost: "{4}{W}{W}",
+      colors: ["W"],
+      power: "5",
+      toughness: "5",
+    }) as unknown as Parsed & { additionalCost?: unknown };
+    expect(face.complete).toBe(true);
+    expect(face.additionalCost).toEqual({ sacrifice: { type: "creature" }, exilesSacrifice: true });
+    expect(face.triggered[1].effect).toEqual({ kind: "return-exiled-by-source", linked: "hand" });
+  });
 });
 
 describe("oracle-parse: casting-zones lane, 2026-11-20 (a52f)", () => {

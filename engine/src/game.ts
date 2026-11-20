@@ -25501,6 +25501,14 @@ export class Game {
       if (def.additionalCost?.exilesSacrifice === true) {
         // "Exile a creature you control": no sacrifice (rule 701.21a).
         this.moveObject(victim, "exile");
+        // A permanent spell's is "exiled with" the permanent it becomes
+        // (rule 607.2q — Fear of Abduction's "each card exiled with it"):
+        // the stint after this one on the stack, which only resolving onto
+        // the battlefield reaches.
+        const exiledCard = this.state.objects[victim];
+        if (exiledCard?.zone === "exile" && def.types.some((type) => PERMANENT_TYPES.has(type))) {
+          exiledCard.exiledWith = { source: object.id, zoneChangeCount: (object.zoneChangeCount ?? 0) + 1 };
+        }
       } else {
         this.moveObject(victim, "graveyard");
         this.emit({ type: "permanent-sacrificed", object: victim, player: sacrificer });

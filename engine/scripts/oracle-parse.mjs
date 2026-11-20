@@ -5057,7 +5057,8 @@ export function parseSentence(sentence, ctx) {
     return { kind: "exile-graveyard", target: "you", filter: { inSet: "trigger-batch" }, linked: true };
   }
   // What the source's other abilities do with them.
-  if (re("put (?:all|the) cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) hands?").test(s)) {
+  // "Put each card exiled with it into its owner's hand" (Fear of Abduction).
+  if (re("put (?:all|the|each) cards? exiled with (?:~|it) into (?:their owners?'s?|its owner's) hands?").test(s)) {
     return { kind: "return-exiled-by-source", linked: "hand" };
   }
   // "Return all cards exiled with ~ to their owner's hand and you lose that
