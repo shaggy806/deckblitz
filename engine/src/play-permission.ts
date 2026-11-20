@@ -58,6 +58,12 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand" | "outside
  *   alternative cost "rather than its mana cost", and only that way under this
  *   permission (Bolas's Citadel, Raffine's Guidance). Another permission reaching
  *   the card may still let it be cast for its mana cost (601.3).
+ * - `byWaterbending`: "by **waterbending {X}** rather than paying its mana
+ *   cost, where X is its mana value" (Hama, the Bloodbender): the alternative
+ *   cost {N}, N the mana value of the face cast (X 0, 107.3b), every generic
+ *   mana of which an untapped artifact or creature the caster controls may pay
+ *   by tapping (rule 701.67a — the cast's `waterbend`, as an additional
+ *   waterbend's). An impulse's alone, so far: from exile (`playWaterbendMode`).
  * - `byDiscarding`, `byPayingEnergy`: `cast-now`'s alone.
  * - `alsoPaying`, `payLife`, `sacrifice` (+ `sacrificeCount`), `exileOthers` + `exileFilter`, `discard`,
  *   `costIncreasePerOther`, `do` (an action, the `cost-acts.ts` table: "by
@@ -175,6 +181,7 @@ export interface PlayTerms {
   readonly free?: boolean | { readonly filter?: CardFilter };
   readonly byPaying?: string;
   readonly byPayingLife?: boolean;
+  readonly byWaterbending?: true;
   readonly byDiscarding?: boolean;
   readonly byPayingEnergy?: boolean;
   readonly alsoPaying?: string;
@@ -373,15 +380,17 @@ export type CastNowTerms = Pick<
  * - `"free-only"`: cast only without paying its mana cost;
  * - `"free-may"`: may be, and may be paid for;
  * - `"life"`: only for life equal to its mana value;
+ * - `"waterbend"`: only by waterbending {its mana value};
  * - `"mana"`: only for its `byPaying`;
  * - `"paid"`: for its mana cost.
  */
-export type PlayCostMode = "free-only" | "free-may" | "life" | "mana" | "paid";
+export type PlayCostMode = "free-only" | "free-may" | "life" | "waterbend" | "mana" | "paid";
 
 export function playCostMode(terms: PlayTerms, freeFilterMatches: boolean): PlayCostMode {
   if (terms.free === true) return "free-only";
   if (typeof terms.free === "object" && freeFilterMatches) return "free-may";
   if (terms.byPayingLife === true) return "life";
+  if (terms.byWaterbending === true) return "waterbend";
   if (terms.byPaying !== undefined) return "mana";
   return "paid";
 }
@@ -401,6 +410,7 @@ const PLAY_GRANT_KEYS = [
   "free",
   "byPaying",
   "byPayingLife",
+  "byWaterbending",
   "byDiscarding",
   "byPayingEnergy",
   "alsoPaying",

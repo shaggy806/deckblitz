@@ -13594,4 +13594,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'end',
     }),
   ),
+  // --- Casting from exile by waterbending its mana value (2026-11-20) --------
+  preset(
+    'Hama, the Bloodbender: cast the exiled card by tapping three Ornithopters',
+    board({
+      you: { bf: ['Island*5', 'Ornithopter*3'], hand: ['Hama, the Bloodbender'] },
+      opp: { lib: ['Divination', 'Grizzly Bears', 'Island'] },
+    }),
+  ),
 ]

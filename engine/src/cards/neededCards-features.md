@@ -362,6 +362,15 @@ toughness equal to the chosen number" is an `amounts` condition over an aggregat
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
 `dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
 read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
+### Cast from exile by waterbending its mana value — built 2026-11-20
+
+The key `cost:alt-cost-waterbend`, for Hama, the Bloodbender: `PlayTerms.byWaterbending`, an alternative cost of {N}
+(the face's mana value, as `byPayingLife` reads it) that is all waterbend (rule 701.67a). `Game.playWaterbendMode` says
+whether it's the only way (as `playLifeMode` for life); `alternativeCostsOf` offers `{ mana: "{N}", waterbend: true }`;
+`spellWaterbend` adds an alternative cost's waterbend generic, so the cast's `waterbend` taps and the offer's
+`WaterbendOffer` work as an additional waterbend's do; `permissionCastMode` picks the waterbend permission. From exile
+(impulse) only so far. `test/waterbend-alt-cost.test.ts`.
+
 ### {U} less for each instant and sorcery spell you've cast this turn — built 2026-11-20
 
 The key `cost:self-reduction-per-instant-sorcery-cast-this-turn`, for Demilich: no engine code — a `selfCostReduction`

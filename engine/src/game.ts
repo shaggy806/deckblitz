@@ -905,6 +905,10 @@ interface AlternativeCostOffer {
   };
   /** Life equal to the spell's mana value, paid with it (rule 119.4). */
   readonly payLifeManaValue?: true;
+  /** Its `mana` is a waterbend cost (rule 701.67a): a permission's "by
+   * waterbending {X} rather than paying its mana cost" (Hama, the
+   * Bloodbender, `PlayTerms.byWaterbending`). */
+  readonly waterbend?: true;
   /** Evidence collected with it — an `alternativeCostForSpells`'
    * `collectEvidence` (Conspiracy Unraveler, rule 701.59a). */
   readonly collectEvidence?: number;
@@ -5644,8 +5648,11 @@ export class Game {
     // So too a static's, when nothing else lets the card be cast (Valgavoth,
     // Terror Eater).
     // And a graveyard permission's (Eye of Duskmantle), which the cast names.
+    // So is its "by waterbending {X} rather than paying its mana cost" (Hama,
+    // the Bloodbender).
     if (
       (via === "impulse" && this.playLifeMode(player, card, face ?? 0) === "only") ||
+      (via === "impulse" && this.playWaterbendMode(player, card, face ?? 0) === "only") ||
       (via === "graveyard-permission" && this.graveyardPaysLife(player, card, face ?? 0))
     ) {
       variants.length = 0;
@@ -6580,6 +6587,8 @@ export class Game {
                   }
                 : altCost === true && alternative?.payLifeManaValue === true
                   ? { altCostText: `pay ${this.castNowEnergyOf(card, face ?? 0)} life` }
+                  : altCost === true && alternative?.waterbend === true
+                  ? { altCostText: `waterbend ${alternative.mana}` }
                   : altCost === true && alternative?.gainLife !== undefined
                     ? {
                         altCostText:
@@ -6790,14 +6799,14 @@ export class Game {
           : {}),
         // Waterbend (rule 701.67a): what may tap for the waterbend part, and
         // the fewest that make the rest payable.
-        ...(variantCost !== null && this.spellHasWaterbend(def, kicked)
+        ...(variantCost !== null && this.spellHasWaterbend(def, kicked, altCost === true ? this.alternativeCostOf(card, def, via, player) : null)
           ? {
               waterbend: this.withFace(card, face ?? 0, () =>
                 this.waterbendOffer(
                   player,
                   (x) => ({
                     cost: this.castingCostOf(player, card, def, x, variantCost, pricedAt),
-                    waterbend: this.spellWaterbend(def, kicked, x),
+                    waterbend: this.spellWaterbend(def, kicked, x, altCost === true ? this.alternativeCostOf(card, def, via, player) : null),
                   }),
                   (rest, withheld) =>
                     this.payMana(
@@ -22515,6 +22524,9 @@ export class Game {
     if (via === "impulse" && !altCost && this.playLifeMode(player, cardId, face ?? 0) === "only") {
       return `${def.name} may be cast from exile only by paying life equal to its mana value`;
     }
+    if (via === "impulse" && !altCost && this.playWaterbendMode(player, cardId, face ?? 0) === "only") {
+      return `${def.name} may be cast from exile only by waterbending its mana value`;
+    }
     if (via === "graveyard-permission" && !altCost && this.graveyardPaysLife(player, cardId, face ?? 0)) {
       return `${def.name} may be cast from a graveyard this way only by paying life equal to its mana value`;
     }
@@ -22748,7 +22760,7 @@ export class Game {
       cardId,
       def.name,
       cost,
-      this.spellWaterbend(def, kicked, xValue),
+      this.spellWaterbend(def, kicked, xValue, altCost ? this.alternativeCostOf(cardId, def, via, player) : null),
       (rest, withheld) => this.payMana(player, rest, undefined, undefined, purpose, arrangementWith(withheld)) !== null,
     );
     if (typeof waterbent === "string") return waterbent;
@@ -23543,22 +23555,30 @@ export class Game {
 
   /** The generic mana of a spell's waterbend costs at `x` (rule 701.67b):
    * its `additionalCost.waterbend`, and a waterbend kicker's when kicked. 0
-   * for none. */
-  private spellWaterbend(def: CardDefinition, kicked: boolean | number, x: number): number {
+   * for none. With `alt`, the alternative cost the cast pays, a waterbend
+   * one's mana too (Hama, the Bloodbender's permission). */
+  private spellWaterbend(
+    def: CardDefinition,
+    kicked: boolean | number,
+    x: number,
+    alt: AlternativeCostOffer | null = null,
+  ): number {
     const fixed = def.additionalCost?.waterbend;
     let generic = fixed === undefined ? 0 : fixed === "x" ? Math.max(0, Math.floor(x)) : fixed;
     if (kicked !== false && kicked !== 0 && def.kicker?.keyword === "waterbend") {
       generic += parseManaCost(def.kicker.cost).generic;
     }
+    if (alt?.waterbend === true) generic += parseManaCost(alt.mana).generic;
     return generic;
   }
 
   /** Whether a spell cast so has a waterbend cost at all — "waterbend {X}"
    * at any X included. */
-  private spellHasWaterbend(def: CardDefinition, kicked: boolean | number): boolean {
+  private spellHasWaterbend(def: CardDefinition, kicked: boolean | number, alt: AlternativeCostOffer | null = null): boolean {
     return (
       def.additionalCost?.waterbend !== undefined ||
-      (kicked !== false && kicked !== 0 && def.kicker?.keyword === "waterbend")
+      (kicked !== false && kicked !== 0 && def.kicker?.keyword === "waterbend") ||
+      alt?.waterbend === true
     );
   }
 
@@ -24879,7 +24899,7 @@ export class Game {
             cardId,
             def.name,
             cost,
-            this.spellWaterbend(def, kicked, chosenX),
+            this.spellWaterbend(def, kicked, chosenX, alternativeCost),
             (rest, withheld) =>
               this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) }, withWaterbent(withheld)) !==
               null,
@@ -24901,7 +24921,7 @@ export class Game {
       waterbent,
       player,
       alternativeTaps === undefined &&
-        (def.additionalCost?.waterbend !== undefined || this.spellWaterbend(def, kicked, chosenX) > 0),
+        (def.additionalCost?.waterbend !== undefined || this.spellWaterbend(def, kicked, chosenX, alternativeCost) > 0),
     );
     // Convoke (rule 702.51a): tap the chosen creatures as part of the cost,
     // alongside the mana payment above — a token peeled off a stack for each
@@ -50841,7 +50861,7 @@ controlledBy,
     player: PlayerId,
     cardId: ObjectId,
     face: number,
-    mode: "paid" | "free" | "life",
+    mode: "paid" | "free" | "life" | "waterbend",
     x = 0,
     flashOnly = false,
   ): PlayOption | undefined {
@@ -50852,6 +50872,7 @@ controlledBy,
       const cost = this.optionCostMode(option, player, cardId);
       if (mode === "free") return cost === "free-only" || cost === "free-may";
       if (mode === "life") return cost === "life";
+      if (mode === "waterbend") return cost === "waterbend";
       return cost === "paid" || cost === "free-may" || cost === "mana";
     });
     const askedFor = (terms: PlayTerms): boolean =>
@@ -51095,6 +51116,16 @@ controlledBy,
     const life = options.filter((o) => o.terms.byPayingLife === true);
     if (life.length === 0) return null;
     return life.length === options.length ? "only" : "may";
+  }
+
+  /** Whether "by waterbending {X} rather than paying its mana cost, where X
+   * is its mana value" is how `player` may cast `cardId` as `face` from exile
+   * (Hama, the Bloodbender), as {@link playLifeMode} answers for life. */
+  private playWaterbendMode(player: PlayerId, cardId: ObjectId, face: number): "may" | "only" | null {
+    const options = this.playOptions(player, cardId, face);
+    const bending = options.filter((o) => o.terms.byWaterbending === true);
+    if (bending.length === 0) return null;
+    return bending.length === options.length ? "only" : "may";
   }
 
   /** Whether a cast of `cardId` from a graveyard is under a permission that
@@ -55503,8 +55534,23 @@ controlledBy,
 
   /** How a permission cast is paid, as {@link chosenPlayOption} sorts the
    * permissions: without paying, for life, or for its cost. */
-  private permissionCastMode(player: PlayerId, cardId: ObjectId, face: number, free: boolean, altCost: boolean): "paid" | "free" | "life" {
-    return free ? "free" : altCost && this.playLifeMode(player, cardId, face) !== null ? "life" : "paid";
+  private permissionCastMode(
+    player: PlayerId,
+    cardId: ObjectId,
+    face: number,
+    free: boolean,
+    altCost: boolean,
+  ): "paid" | "free" | "life" | "waterbend" {
+    if (free) return "free";
+    if (!altCost) return "paid";
+    // Waterbent (Hama, the Bloodbender) when that's the alternative cost picked.
+    if (
+      this.playWaterbendMode(player, cardId, face) !== null &&
+      this.alternativeCostOf(cardId, this.faceDef(cardId, face), "impulse", player)?.waterbend === true
+    ) {
+      return "waterbend";
+    }
+    return this.playLifeMode(player, cardId, face) !== null ? "life" : "paid";
   }
 
   /** "If you cast a spell this way, you may cast it as though it had flash"
@@ -63591,6 +63637,13 @@ controlledBy,
     const face0 = Math.max(0, card?.faces?.indexOf(def.name) ?? 0);
     const staticLife = via === "impulse" && caster !== undefined ? this.playLifeMode(caster, cardId, face0) : null;
     if (staticLife === "only") return payLifeOnly();
+    // "By waterbending {X} rather than paying its mana cost, where X is its
+    // mana value" (Hama, the Bloodbender): {N} for the face cast, X 0 (rule
+    // 107.3b), all of it waterbend (701.67a) — likewise the only way.
+    const staticWaterbend = via === "impulse" && caster !== undefined ? this.playWaterbendMode(caster, cardId, face0) : null;
+    const waterbending: AlternativeCostOffer | null =
+      staticWaterbend === null ? null : { mana: `{${this.castNowEnergyOf(cardId, face0)}}`, waterbend: true };
+    if (staticWaterbend === "only") return def.alternativeCost !== null ? [null, waterbending] : [waterbending];
     // A graveyard permission's (Eye of Duskmantle): the one the cast names.
     if (via === "graveyard-permission" && caster !== undefined && this.graveyardPaysLife(caster, cardId, face0)) {
       return payLifeOnly();
@@ -63718,6 +63771,7 @@ controlledBy,
       out.push({ mana: "{0}" });
     }
     if (staticLife === "may") out.push({ mana: "{0}", payLifeManaValue: true });
+    if (staticWaterbend === "may" && waterbending !== null) out.push(waterbending);
     // Bolas's Citadel beside Future Sight: cast under the Citadel's
     // permission, for life (see above).
     if (libraryTopPayLife) out.push({ mana: "{0}", payLifeManaValue: true });

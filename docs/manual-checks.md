@@ -8974,3 +8974,9 @@ Each board's die comes up 4.
 ### Relic of Legends: the game stops at Bob's end step, and Lightning Bolt taps Thrasios for its mana
 - **Do:** Leave "Skip mana stops" on. When the game stops at Bob's end step, cast Lightning Bolt at Bob's Grizzly Bears.
 - **Expect:** The game stops for you at Bob's end step with Lightning Bolt castable. Casting it needs no tapping by hand: Thrasios, Triton Hero is tapped for the mana, and Relic of Legends stays tapped.
+
+## Casting from exile by waterbending its mana value (2026-11-20)
+
+### Hama, the Bloodbender: cast the exiled card by tapping three Ornithopters
+- **Do:** Cast Hama, the Bloodbender and pick Divination from Bob's milled cards. Open Bob's exile, click Divination and confirm "Waterbend 3".
+- **Expect:** Grizzly Bears and Island can't be picked. The banner reads "Divination: waterbend — tap up to 3 artifacts or creatures", the three Ornithopters already chosen. They tap, no mana is spent, and you draw two cards.
