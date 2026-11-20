@@ -60,6 +60,7 @@ const TERMS = [
   "free",
   "byPaying",
   "byPayingLife",
+  "byWaterbending",
   "byDiscarding",
   "byPayingEnergy",
   "alsoPaying",
