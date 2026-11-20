@@ -3105,7 +3105,11 @@ export class Game {
       },
       pendingTriggerTargetSource: () => {
         const pending = this.state.pendingTargetedTrigger;
-        return pending === null ? undefined : this.abilityTargetSource(pending);
+        if (pending === null) return undefined;
+        // Judged from the side of the player choosing them (`targetsChosenBy`).
+        const awaiting = this.state.awaiting;
+        const chooser = awaiting?.kind === "choose-targets" && awaiting.player !== pending.controller ? awaiting.player : undefined;
+        return chooser === undefined ? this.abilityTargetSource(pending) : { ...this.abilityTargetSource(pending), chooser };
       },
       spellTargetSource: (spell) => this.cardSource(this.registry.get(this.state.objects[spell].cardName), spell),
       whyCannotOtherTargets: (targets) => {
@@ -9995,6 +9999,11 @@ export class Game {
       );
       if (trig.modes !== undefined) this.state.objects[abilityId].chosenModes = [...trig.modes];
       if (shares !== undefined && typeof shares !== "string") this.state.objects[abilityId].division = shares;
+      // Another player chose them (`targetsChosenBy`): what "their opponents"
+      // reads again as it resolves (608.2b).
+      if (awaitingNow?.kind === "choose-targets" && awaitingNow.player !== trig.controller) {
+        this.state.objects[abilityId].otherChooser = awaitingNow.player;
+      }
     }
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
@@ -40287,7 +40296,14 @@ export class Game {
       return "done";
     }
 
-    const triggerSource = this.abilityTargetSource(trigger);
+    // "Its controller chooses target creature one of their opponents
+    // controls" (Necrotic Plague): the targets are judged from the side of
+    // whoever chooses them (`controlledBy: "chooser-opponent"`).
+    const targetChooser = this.triggerTargetChooser(ability as TriggeredAbility, trigger);
+    const triggerSource: TargetSource =
+      targetChooser === undefined || targetChooser === trigger.controller
+        ? this.abilityTargetSource(trigger)
+        : { ...this.abilityTargetSource(trigger), chooser: targetChooser };
     const abilityKind: "triggered" | "chapter" = trigger.chapter ? "chapter" : "triggered";
 
     // Resolve each slot: an event-determined `auto` target (a saboteur's
@@ -40402,6 +40418,7 @@ export class Game {
       );
       if ((trigger.copies ?? 1) > 1) this.state.objects[abilityId].stackCount = trigger.copies;
       if (trigger.modes !== undefined) this.state.objects[abilityId].chosenModes = [...trigger.modes];
+      if (triggerSource.chooser !== undefined) this.state.objects[abilityId].otherChooser = triggerSource.chooser;
       // Miracle's trigger casts only the card as it was drawn (rule 400.7).
       if (trigger.miracle !== undefined && trigger.miracle.card === undefined) {
         this.state.objects[abilityId].sourceZoneChangeCount = trigger.miracle.stint;

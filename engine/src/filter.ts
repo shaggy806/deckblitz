@@ -1017,6 +1017,12 @@ export interface CardFilter {
    * player (rule 601.2c) — "target creature of an opponent's choice **they
    * control**" (Evangelize, `CardDefinition.opponentChoosesTargets`); with
    * no such chooser (`FilterContext.chooser`), nothing matches.
+   * `"chooser-opponent"`: controlled by an opponent of whoever chooses the
+   * target — a triggered ability's `targetsChosenBy` player, Necrotic
+   * Plague's "its controller chooses target creature **one of their
+   * opponents controls**" — or of the filtering player, who chooses with no
+   * other chooser. Read the same way when the target is checked again as the
+   * ability resolves (the stack object's `otherChooser`).
    * `"enchanted-player"`: the player the filter's source, an Aura, is attached
    * to (a Curse's "creatures **enchanted player controls**" — Curse of Death's
    * Hold); with no such source, nothing matches. `"chosen-player"`: the
@@ -1037,6 +1043,7 @@ export interface CardFilter {
     | "opponent"
     | "active-player"
     | "chooser"
+    | "chooser-opponent"
     | "enchanted-player"
     | "chosen-player"
     | "monarch"
@@ -3165,6 +3172,9 @@ export function matchesFilter(
     return false;
   }
   if (filter.controlledBy === "chooser" && (ctx.chooser === undefined || controller !== ctx.chooser)) return false;
+  // "One of their opponents": the chooser's, or the filtering player's when
+  // they choose themselves (no teams, so any other player — rule 102.2).
+  if (filter.controlledBy === "chooser-opponent" && controller === (ctx.chooser ?? ctx.you)) return false;
   if (filter.controlledBy === "enchanted-player") {
     const aura = ctx.source === undefined ? undefined : state.objects[ctx.source];
     if (aura?.attachedToPlayer === undefined || controller !== aura.attachedToPlayer) return false;
