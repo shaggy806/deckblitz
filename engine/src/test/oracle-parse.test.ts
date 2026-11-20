@@ -6371,6 +6371,13 @@ describe("block limits, lost abilities and chosen types (B249)", () => {
     expect(
       face("Enchantment — Aura", "Enchant creature\nEnchanted creature loses all abilities and has base power and toughness 1/1.").static[0],
     ).toMatchObject({ loseAllAbilities: true, setBasePt: { power: 1, toughness: 1 } });
+    // Blood Sun.
+    expect(face("Enchantment", "All lands lose all abilities except mana abilities.").static[0]).toEqual({
+      affects: { scope: "filter", filter: { type: "land" } },
+      loseAllAbilities: true,
+      exceptManaAbilities: true,
+      text: "All lands lose all abilities except mana abilities.",
+    });
   });
 
   it("reads 'becomes the creature type of your choice'", () => {

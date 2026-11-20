@@ -193,6 +193,7 @@ import {
   hasExileIfLeavesAbility,
   hasLayerFourPart,
   abilitiesLostAt,
+  abilityLostAt,
   wardLostAt,
   grantOutlastsLoss,
   modifierGrantApplies,
@@ -27245,13 +27246,20 @@ export class Game {
     target: GameObject,
     grantors?: readonly GrantSource[],
   ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
-    // Only what was granted after a loss of all its abilities (rule 613.7).
+    // Only what was granted after a loss of all its abilities (rule 613.7);
+    // a loss "except mana abilities" (Blood Sun) leaves granted mana ones.
     const lostAt = abilitiesLostAt(this.state, this.registry,target);
+    const manaLostAt = lostAt === null ? null : abilityLostAt(this.state, this.registry, target, true);
+    const keeps = (ability: ActivatedAbility, applies: (at: number | null) => boolean): boolean =>
+      applies(lostAt) || (manaLostAt !== lostAt && isManaAbility(ability) && applies(manaLostAt));
     // Its own modifiers' grants first — a copy exception's, a one-shot's.
     const own: { ability: ActivatedAbility; ref: GrantedAbilityRef }[] = [];
     for (const modifier of target.modifiers) {
-      if (modifier.grantsActivated === undefined || !modifierGrantApplies(modifier, lostAt)) continue;
-      for (const ability of modifier.grantsActivated) own.push({ ability, ref: { kind: "modifier-activated", ability } });
+      if (modifier.grantsActivated === undefined) continue;
+      for (const ability of modifier.grantsActivated) {
+        if (!keeps(ability, (at) => modifierGrantApplies(modifier, at))) continue;
+        own.push({ ability, ref: { kind: "modifier-activated", ability } });
+      }
     }
     const sources = grantors ?? this.activatedGrantSources();
     if (sources.length === 0) return own; // nothing else grants anything — the norm
@@ -27260,14 +27268,16 @@ export class Game {
       entries: { ability: ActivatedAbility; ref: GrantedAbilityRef }[];
     }[] = [];
     for (const { source, ability, staticIndex, abilities, refs } of sources) {
-      if (!grantOutlastsLoss(lostAt, source.timestamp)) continue;
+      const kept = (grantedAbility: ActivatedAbility): boolean =>
+        keeps(grantedAbility, (at) => grantOutlastsLoss(at, source.timestamp));
+      if (!abilities.some(kept)) continue;
       const keywords = (): ReadonlySet<Keyword> => this.characteristics(target.id).keywords;
       if (!staticReaches(this.state, this.registry, source, ability, target, { keywords })) continue;
       if (!this.staticActive(source, ability)) continue;
       const cardName = printedCardName(source);
       grants.push({
         ts: source.timestamp,
-        entries: abilities.map((grantedAbility, index) => ({
+        entries: abilities.flatMap<{ ability: ActivatedAbility; ref: GrantedAbilityRef }>((grantedAbility, index) => !kept(grantedAbility) ? [] : [{
           ability: grantedAbility,
           ref: refs?.[index] ?? {
             kind: "static",
@@ -27279,7 +27289,7 @@ export class Game {
             granter: source.id,
             granterStint: source.zoneChangeCount ?? 0,
           },
-        })),
+        }]),
       });
     }
     grants.sort((a, b) => a.ts - b.ts);
@@ -28125,7 +28135,11 @@ export class Game {
       }
       // What was granted it after it lost them, it has (rule 613.7) — those
       // are left out of `effectiveActivated` when they came before.
-      if (abilityIndex < this.registry.get(rulesTextName(source)).activated.length && hasLostAbilities(this.state, this.registry,source)) {
+      // A loss "except mana abilities" leaves those (Blood Sun).
+      if (
+        abilityIndex < this.registry.get(rulesTextName(source)).activated.length &&
+        abilityLostAt(this.state, this.registry, source, isManaAbility(ability)) !== null
+      ) {
         return `${def.name} has lost its abilities`;
       }
       // A Licid that became an Aura "loses this ability".
@@ -30868,7 +30882,10 @@ export class Game {
 
       // Layer 6: one that has lost its abilities has no printed mana ability,
       // only one granted it since (rule 613.7).
-      const printedLost = hasLostAbilities(this.state, this.registry,object) ? this.registry.get(rulesTextName(object)).activated.length : 0;
+      // Only mana abilities are read here, so a loss "except mana abilities"
+      // (Blood Sun) takes none of them.
+      const printedLost =
+        abilityLostAt(this.state, this.registry, object, true) !== null ? this.registry.get(rulesTextName(object)).activated.length : 0;
       const options: ManaOption[] = [];
       // `sacrificeSelf` is tracked per source, not per option: no real card
       // mixes a tap-only and a sacrifice mana ability on one permanent.
@@ -35011,11 +35028,12 @@ export class Game {
   private couldProduce(id: ObjectId, visiting: ReadonlySet<ObjectId>): readonly ManaType[] {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return [];
-    const printedLost = hasLostAbilities(this.state, this.registry,object)
-      ? this.registry.get(rulesTextName(object)).activated.length
-      : 0;
+    const printedCount = this.registry.get(rulesTextName(object)).activated.length;
+    // A loss "except mana abilities" (Blood Sun) leaves the printed mana ones.
+    const lost = (mana: boolean): boolean => abilityLostAt(this.state, this.registry, object, mana) !== null;
     const abilities = this.effectiveActivated(id).filter(
-      (_, index) => index >= printedLost && !inactiveStandIn(this.state, this.registry, object, index),
+      (ability, index) =>
+        (index >= printedCount || !lost(isManaAbility(ability))) && !inactiveStandIn(this.state, this.registry, object, index),
     );
     // A land that reads no other land answers the same whoever asks: once
     // per cache region.

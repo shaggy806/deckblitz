@@ -12,6 +12,7 @@
     "effect:delayed-trigger-next-untap-step",
     "effect:flicker-lands-return-tapped",
     "effect:look-and-choose-exile-with-counter",
+    "static:lose-all-abilities-except-mana",
     "mechanic:commander-chosen-color-pregame",
     "amount:pile-or-guess-effects-this-turn",
     "trigger:surveils-first-time-each-turn",

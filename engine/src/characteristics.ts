@@ -3135,12 +3135,38 @@ export function abilitiesLostAt(state: GameState, registry: CardRegistry, object
   return landTextLost(state, registry, object) ? Number.NEGATIVE_INFINITY : null;
 }
 
+/**
+ * {@link abilitiesLostAt} for its mana abilities (rule 605.1a): a loss "of all
+ * abilities except mana abilities" (Blood Sun — `exceptManaAbilities`) leaves
+ * them, so only the other losses count. Asked where a printed or granted
+ * ability is judged one at a time — whether it's still there to activate, the
+ * mana a permanent can make — never for the permanent as a whole.
+ */
+export function manaAbilitiesLostAt(state: GameState, registry: CardRegistry, object: GameObject): number | null {
+  const layerSix = layerSixLossAt(state, registry, object, true);
+  if (layerSix !== null) return layerSix;
+  return landTextLost(state, registry, object) ? Number.NEGATIVE_INFINITY : null;
+}
+
+/** When `object` last lost `ability` if it was there before: a mana ability
+ * by {@link manaAbilitiesLostAt}, any other by {@link abilitiesLostAt}. */
+export function abilityLostAt(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  mana: boolean,
+): number | null {
+  return mana ? manaAbilitiesLostAt(state, registry, object) : abilitiesLostAt(state, registry, object);
+}
+
 /** {@link abilitiesLostAt} in layer 6 alone: a loss of all abilities, which
- * takes the intrinsic mana abilities too (unlike rule 305.7's). */
-function layerSixLossAt(state: GameState, registry: CardRegistry, object: GameObject): number | null {
+ * takes the intrinsic mana abilities too (unlike rule 305.7's); with `mana`,
+ * only the losses that take mana abilities. */
+function layerSixLossAt(state: GameState, registry: CardRegistry, object: GameObject, mana = false): number | null {
   const own = modifierLossAt(object);
   if (object.zone !== "battlefield") return own;
-  const fromStatic = staticAbilityLosses(state, registry).lost.get(object.id);
+  const losses = staticAbilityLosses(state, registry);
+  const fromStatic = (mana ? losses.lostMana : losses.lost).get(object.id);
   if (fromStatic === undefined) return own;
   return own === null || fromStatic > own ? fromStatic : own;
 }
@@ -3225,11 +3251,14 @@ let staticLossesInProgress = false;
 interface StaticLosses {
   /** Each permanent a loss reaches → the latest such loss's timestamp. */
   readonly lost: ReadonlyMap<ObjectId, number>;
+  /** `lost` without the losses that leave mana abilities (`exceptManaAbilities`
+   * — Blood Sun): when each permanent last lost its mana abilities too. */
+  readonly lostMana: ReadonlyMap<ObjectId, number>;
   /** The `loseAllAbilities` statics that apply, by their permanent. */
   readonly applied: ReadonlyMap<ObjectId, ReadonlySet<StaticAbility>>;
 }
 
-const NO_LOSSES: StaticLosses = { lost: new Map(), applied: new Map() };
+const NO_LOSSES: StaticLosses = { lost: new Map(), lostMana: new Map(), applied: new Map() };
 
 /**
  * Whether `source`'s static `ability` keeps applying though `source` has lost
@@ -3326,8 +3355,9 @@ let staticLossesHits = 0;
 const STATIC_LOSSES_CHECK_EVERY = 16;
 
 function sameLosses(a: StaticLosses, b: StaticLosses): boolean {
-  if (a.lost.size !== b.lost.size || a.applied.size !== b.applied.size) return false;
+  if (a.lost.size !== b.lost.size || a.lostMana.size !== b.lostMana.size || a.applied.size !== b.applied.size) return false;
   for (const [id, at] of a.lost) if (b.lost.get(id) !== at) return false;
+  for (const [id, at] of a.lostMana) if (b.lostMana.get(id) !== at) return false;
   for (const [id, set] of a.applied) {
     const other = b.applied.get(id);
     if (other === undefined || other.size !== set.size || [...set].some((x) => !other.has(x))) return false;
@@ -3520,15 +3550,20 @@ function computeStaticAbilityLosses(state: GameState, registry: CardRegistry): S
     }
   }
   const out = new Map<ObjectId, number>();
+  const outMana = new Map<ObjectId, number>();
   const applied = new Map<ObjectId, Set<StaticAbility>>();
   const apply = (p: Pending): void => {
     let mine = applied.get(p.source.id);
     if (mine === undefined) applied.set(p.source.id, (mine = new Set()));
     mine.add(p.ability);
     const at = p.source.timestamp - 0.5;
+    const keepsMana = p.ability.exceptManaAbilities === true;
     for (const id of p.reaches) {
       const was = out.get(id);
       if (was === undefined || at > was) out.set(id, at);
+      if (keepsMana) continue;
+      const wasMana = outMana.get(id);
+      if (wasMana === undefined || at > wasMana) outMana.set(id, at);
     }
   };
   // Whether `q` takes away the ability behind `p`: an effect doesn't depend
@@ -3542,7 +3577,7 @@ function computeStaticAbilityLosses(state: GameState, registry: CardRegistry): S
     for (const p of round) apply(p);
     pending = pending.filter((p) => !round.includes(p) && !round.some((q) => takes(q, p)));
   }
-  return { lost: out, applied };
+  return { lost: out, lostMana: outMana, applied };
 }
 
 /**
@@ -5671,8 +5706,9 @@ export function intrinsicManaColors(
   const { types, subtypes } = layerFour(state, registry, object);
   if (!types.includes("land")) return [];
   // A loss of all abilities takes them; rule 305.7's loss of the rules text
-  // doesn't — that's how a land made a Mountain gets "{T}: Add {R}".
-  if (object.zone === "battlefield" && layerSixLossAt(state, registry, object) !== null) return [];
+  // doesn't — that's how a land made a Mountain gets "{T}: Add {R}". Nor does
+  // one "except mana abilities" (Blood Sun).
+  if (object.zone === "battlefield" && layerSixLossAt(state, registry, object, true) !== null) return [];
   return BASIC_LAND_TYPE_COLORS.filter(([type]) => hasSubtype(subtypes, type)).map(([, color]) => color);
 }
 
@@ -5834,7 +5870,8 @@ const MANA_TYPES: ReadonlySet<string> = new Set<ManaType>(["W", "U", "B", "R", "
  * Raggadragga's ruling includes): printed, granted by a static that reaches it
  * (Cryptolith Rite, an Aura or Equipment), or granted by a one-shot modifier.
  * A permanent that has lost its abilities has only one granted it since (rule
- * 613.7), as everywhere else the engine asks (`Game.manaSources`).
+ * 613.7), as everywhere else the engine asks (`Game.manaSources`) — unless the
+ * loss left its mana abilities (Blood Sun, `manaAbilitiesLostAt`).
  *
  * See {@link hasGrantedAbility} for `view`.
  */
@@ -5845,7 +5882,7 @@ export function hasManaAbility(
   view: TargetView = {},
 ): boolean {
   const onBattlefield = object.zone === "battlefield";
-  const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
+  const lostAt = onBattlefield ? manaAbilitiesLostAt(state, registry, object) : null;
   const def = registry.get(rulesTextName(object));
   if (
     lostAt === null &&
@@ -5901,8 +5938,17 @@ export function hasActivatedAbilityOf(
   // A basic land type's mana ability (rule 305.6).
   if (mana !== false && intrinsicManaColors(state, registry, object).length > 0) return true;
   if (object.modifiers.some((m) => modifierGrantApplies(m, lostAt) && m.grantsActivated?.some(fits) === true)) return true;
-  if (!onBattlefield) return false;
-  return hasGrantedAbility(state, registry, object, view, (ability) => ability.grantsActivated?.some(fits) === true, lostAt);
+  if (onBattlefield && hasGrantedAbility(state, registry, object, view, (ability) => ability.grantsActivated?.some(fits) === true, lostAt)) {
+    return true;
+  }
+  // The mana abilities a loss "except mana abilities" left (Blood Sun).
+  if (lostAt === null || mana === false) return false;
+  const manaLostAt = manaAbilitiesLostAt(state, registry, object);
+  if (manaLostAt === lostAt) return false;
+  const fitsMana = (ability: ActivatedAbility): boolean => isManaAbility(ability) && fits(ability);
+  if (manaLostAt === null && def.activated.some((a, i) => fitsMana(a) && !inactiveStandIn(state, registry, object, i))) return true;
+  if (object.modifiers.some((m) => modifierGrantApplies(m, manaLostAt) && m.grantsActivated?.some(fitsMana) === true)) return true;
+  return hasGrantedAbility(state, registry, object, view, (ability) => ability.grantsActivated?.some(fitsMana) === true, manaLostAt);
 }
 
 /**
@@ -5939,6 +5985,10 @@ export function hasAnyAbility(
   const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
   const def = registry.get(rulesTextName(object));
   if (lostAt === null && printedHasAbility(def)) return true;
+  // The mana abilities a loss "except mana abilities" left (Blood Sun).
+  if (lostAt !== null && manaAbilitiesLostAt(state, registry, object) !== lostAt && hasManaAbility(state, registry, object, view)) {
+    return true;
+  }
   if (intrinsicManaColors(state, registry, object).length > 0) return true;
   if (object.hastyUntilItLeaves === true) return true;
   if (view.inFold === true) {

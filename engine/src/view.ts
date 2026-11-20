@@ -17,6 +17,7 @@ import {
   extraIntrinsicManaColors,
   grantedStatics,
   hasLostAbilities,
+  manaAbilitiesLostAt,
   inactiveStandIn,
   intrinsicManaColors,
   modifierGrantApplies,
@@ -27,6 +28,7 @@ import {
   withComputedCache,
 } from "./characteristics.js";
 import { protectionLabel } from "./effects.js";
+import { isManaAbility } from "./abilities.js";
 import type { GameEvent } from "./events.js";
 import { journalTotal } from "./journal.js";
 import type { Color, ManaPool } from "./mana.js";
@@ -655,7 +657,14 @@ function visible(
   // another card's.
   // A spell's text too, once a text-changing effect has changed it (rule 612).
   let text = lostAbilities
-    ? ""
+    ? // A loss "except mana abilities" (Blood Sun) leaves those lines.
+      manaAbilitiesLostAt(state, registry, object) === null
+      ? registry
+          .get(rulesTextName(object))
+          .activated.filter(isManaAbility)
+          .map((ability) => ability.text)
+          .join("\n")
+      : ""
     : onBattlefield || (zone === "stack" && object.kind === "card")
       ? registry.get(rulesTextName(object)).text
       : def.text;

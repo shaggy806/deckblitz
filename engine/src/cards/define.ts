@@ -3036,6 +3036,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * effect.
    */
   readonly loseAllAbilities?: true;
+  /** With `loseAllAbilities`: "…lose all abilities **except mana abilities**"
+   * (Blood Sun). What it reaches keeps its mana abilities (rule 605.1a),
+   * printed and granted alike, and loses every other one; a full loss beside
+   * it still takes them (`manaAbilitiesLostAt`). */
+  readonly exceptManaAbilities?: true;
   /** "…named Legitimate Businessperson" (Witness Protection): the name of what
    * this reaches, with `affects: { scope: "attached" }`, its only name for as
    * long as this applies. A copy of it isn't named that (rule 707.2). */

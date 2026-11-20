@@ -6539,6 +6539,15 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   The scaffolder reads "Enchanted creature [gets -N/-0 and] loses all
   abilities [and has base power and toughness N/N]" and "[All] creatures lose
   all abilities". `static-lose-all-abilities.test.ts`.
+  **`exceptManaAbilities: true`** beside it — "All lands lose all abilities
+  except mana abilities" (Blood Sun): the permanents keep their mana
+  abilities (605.1a), printed, intrinsic and granted (one granted before the
+  loss stays), and lose every other one, their "enters tapped" included.
+  Ask `abilityLostAt(state, registry, object, isManaAbility(a))` /
+  `manaAbilitiesLostAt` where one ability is judged; `hasLostAbilities` still
+  answers "yes" for the permanent. A full loss beside it takes the mana ones
+  too. The scaffolder reads "All lands|creatures|artifacts lose all
+  abilities except mana abilities". `lose-all-except-mana.test.ts`.
 - `blockAdditional: 1 | N | "any"` — the affected creatures "can block an
   additional creature each combat" (Two-Headed Giant of Foriys, Brave the
   Sands' "each creature you control", Echo Circlet's "equipped creature"),

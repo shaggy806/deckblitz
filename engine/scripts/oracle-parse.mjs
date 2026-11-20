@@ -25410,6 +25410,18 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Blood Sun's "All lands lose all abilities except mana abilities."
+  {
+    const w = /^All (lands|creatures|artifacts) lose all abilities except mana abilities\.$/.exec(line);
+    if (w !== null) {
+      return {
+        affects: w[1] === "creatures" ? { scope: "all-creatures" } : { scope: "filter", filter: { type: w[1].slice(0, -1) } },
+        loseAllAbilities: true,
+        exceptManaAbilities: true,
+        text,
+      };
+    }
+  }
   if (line === "~ can't block.") return { affects: { scope: "self" }, restrictions: ["cant-block"], text };
   // A limit on drawing (`prohibits`'s `drawsPerTurn`): "Each opponent can't draw
   // more than one card each turn." (Narset, Parter of Veils), "Each player …"
