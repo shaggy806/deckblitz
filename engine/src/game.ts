@@ -5210,6 +5210,9 @@ export class Game {
       if (onlySource !== undefined && card !== onlySource) continue;
       const object = this.state.objects[card];
       if (object === undefined || object.owner !== player || object.kind !== "card") continue;
+      // A card exiled face down has no characteristics (rule 406.3a): no
+      // ability to activate.
+      if (object.exiledFaceDown !== undefined || object.faceDown !== undefined) continue;
       const def = this.registry.get(object.cardName);
       const suspended = this.isSuspended(card);
       this.effectiveActivated(card).forEach((ability, index) => {
@@ -28138,6 +28141,9 @@ export class Game {
           : `that card is not in ${ability.zone === "command" ? "the command zone" : ability.zone}`;
       }
       if (source.owner !== player) return `${player} does not own that card`;
+      if (source.zone === "exile" && (source.exiledFaceDown !== undefined || source.faceDown !== undefined)) {
+        return "a card exiled face down has no abilities (rule 406.3a)";
+      }
     } else {
       if (source.zone !== "battlefield") {
         return "that permanent is not on the battlefield";
