@@ -24363,3 +24363,15 @@ describe("a mana ability's damage without an Ogre, and \"Sacrifice all lands you
     });
   });
 });
+
+describe("X capped by a count of what you control (Winter's Chill)", () => {
+  it("reads the ceiling as the spell's maxX", () => {
+    const chill = parseFace({
+      name: "Winter's Chill",
+      type_line: "Instant",
+      mana_cost: "{X}{U}",
+      oracle_text: "X can't be greater than the number of snow lands you control.\nDraw a card.",
+    }) as unknown as { maxX: unknown };
+    expect(chill.maxX).toEqual({ countOf: { type: "land", supertype: "snow", controlledBy: "you" } });
+  });
+});

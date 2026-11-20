@@ -9,6 +9,7 @@
     "cost:escape-exile-permanent",
     "cost:choose-creature-type-as-cast",
     "cost:sacrifice-all-lands",
+    "cost:x-capped-by-count",
     "trigger:discards-batch-objects",
     "trigger:attack-with-intervening-if",
     "amount:differently-named-dungeons-completed",

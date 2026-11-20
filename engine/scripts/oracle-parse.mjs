@@ -18806,6 +18806,15 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.maxX = { countPlayers: "each-player" };
       continue;
     }
+    // "X can't be greater than the number of snow lands you control"
+    // (Winter's Chill): a count, read as X is announced.
+    if (isSpell && (m = /^X can't be greater than the number of (.+?) you control\.$/.exec(line))) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter !== null && Object.keys(filter).length > 0) {
+        out.maxX = { countOf: { ...filter, controlledBy: "you" } };
+        continue;
+      }
+    }
     // The most any one opponent has, not the sum: Cavern-Hoard Dragon.
     if ((m = /^~ costs \{X\} less to cast, where X is the greatest number of (.+?) an opponent controls\.$/.exec(line))) {
       const filter = parseTypePhrase(m[1]);

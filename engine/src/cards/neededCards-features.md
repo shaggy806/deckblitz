@@ -362,6 +362,14 @@ toughness equal to the chosen number" is an `amounts` condition over an aggregat
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
 `dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
 read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
+### X capped by a count — built 2026-11-20
+
+The key `cost:x-capped-by-count`, for Winter's Chill: no engine code — the spell's `maxX` (Open the Way's) over a
+`{ countOf }` of the caster's snow lands; "its controller may pay {1} or {2}" is an `unless` of {1} whose `ifPaid` is
+an `unless` of {1} more (the same three outcomes; an `unless` takes one mana option), the prevention two
+`damage-rule`s `until-end-of-combat`, the decline a delayed destroy at end of combat. The scaffolder reads the X line.
+`test/x-capped-by-snow-lands.test.ts`.
+
 ### "Sacrifice all lands you control" as a cost — built 2026-11-20
 
 The key `cost:sacrifice-all-lands`, for Tomb of Urami: no engine code — `AbilityCost.do` of `sacrifice-all` (Soulblast's
