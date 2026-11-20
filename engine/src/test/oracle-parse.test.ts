@@ -24194,3 +24194,18 @@ describe("deals damage to one or more creatures, once per event (Briarbridge Pat
     expect(beast.triggered[0].trigger).toEqual({ on: "deals-damage", who: "self", to: "creature", toFilter: { blocking: true }, combat: true, batched: true });
   });
 });
+
+describe("a creature spell of yours countered this turn by an opponent's spell or ability (Summoning Trap)", () => {
+  it("reads the alternative cost's condition from the journal's countered entries", () => {
+    const trap = parseFace({
+      name: "Summoning Trap",
+      type_line: "Instant — Trap",
+      oracle_text:
+        "If a creature spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay {0} rather than pay this spell's mana cost.\nLook at the top seven cards of your library. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in any order.",
+    }) as unknown as { alternativeCost?: unknown };
+    expect(trap.alternativeCost).toEqual({
+      mana: "{0}",
+      condition: { kind: "turn-history", what: "countered", who: "you", filter: { type: "creature" }, by: "opponent" },
+    });
+  });
+});

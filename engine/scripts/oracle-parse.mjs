@@ -18598,6 +18598,22 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "If a creature spell you cast this turn was countered by a spell or
+    // ability an opponent controlled, you may pay {0} …" (Summoning Trap): the
+    // journal's `countered` entries (rule 701.6a), by an opponent's.
+    if (
+      !/Land/.test(face.type_line ?? "") &&
+      (m = /^If an? (.+?) spell you cast this turn was countered by a spell or ability an opponent controlled, you may pay ((?:\{[^}]+\})+) rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))
+    ) {
+      const filter = parseTypePhrase(m[1]);
+      if (filter !== null) {
+        out.alternativeCost = {
+          mana: m[2],
+          condition: { kind: "turn-history", what: "countered", who: "you", ...(Object.keys(filter).length > 0 ? { filter } : {}), by: "opponent" },
+        };
+        continue;
+      }
+    }
     // A mana alternative cost (rule 118.9), the rest a parameter: "You may pay
     // {2}{R}{R} rather than pay this spell's mana cost" (Fervent Mastery), "and
     // exile a creature card from your graveyard" (Stalwart Valkyrie), "if there

@@ -7574,7 +7574,13 @@ clause (section 9):
   or ability that player controlled destroyed: Cobra Trap's "if a noncreature
   permanent under your control was destroyed this turn by a spell or ability
   an opponent controlled" is `{ what: "destroyed", who: "you", filter: {
-  notTypes: ["creature"] }, by: "opponent" }`.)
+  notTypes: ["creature"] }, by: "opponent" }`. `what: "countered"` is each
+  spell `who` cast that was countered, rule 701.6a — never a copy, an ability
+  or one countered on resolution — read as it was cast, `by` the countering
+  spell's or ability's controller: Summoning Trap's "if a creature spell you
+  cast this turn was countered by a spell or ability an opponent controlled"
+  is `{ what: "countered", who: "you", filter: { type: "creature" }, by:
+  "opponent" }`.)
   (`window: "this-game"` reads the whole game's count of a view that is its kind, unfiltered
   — the journal's entries last only a round: H.M.S. Bounty's "haven't begun an extra turn this
   game" is `{ kind: "not", of: { kind: "turn-history", what: "extra-turn-began", window:

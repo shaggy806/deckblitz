@@ -42,6 +42,12 @@ export type JournalKind =
    * `stint`: as it left; `by`: who controlled the spell or ability that
    * destroyed it, for an effect's. */
   | "destroyed"
+  /** A spell `player` cast was countered (rule 701.6a) — never a copy, which
+   * wasn't cast (707.10), or an ability; `by`: who controlled the spell or
+   * ability that countered it; `was` and `stint`: the spell as it was cast
+   * (its `CastSpellRecord`). A spell "countered on resolution" for want of
+   * legal targets (608.2b) isn't countered by anything and isn't here. */
+  | "countered"
   /** A card or token was put into the graveyard of `player`, its owner, from
    * `from`. From the battlefield, `was` and `stint` are as it left. */
   | "to-graveyard"
@@ -379,6 +385,11 @@ export type JournalWhat =
    * noncreature permanent under your control was destroyed this turn by a
    * spell or ability an opponent controlled" (`turn-history`'s `by`). */
   | "destroyed"
+  /** A spell was countered; the list is its caster's, and a filter reads it
+   * as it was cast — Summoning Trap's "if a creature spell you cast this turn
+   * was countered by a spell or ability an opponent controlled" (`filter: {
+   * type: "creature" }`, `turn-history`'s `by: "opponent"`). */
+  | "countered"
   /** A permanent left the battlefield for exile. */
   | "exiled"
   /** A permanent was put into its owner's hand from the battlefield (a
@@ -525,6 +536,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   died: { kind: "left", match: (e) => e.to === "graveyard" && e.was?.types.includes("creature") === true },
   sacrificed: { kind: "sacrificed" },
   destroyed: { kind: "destroyed" },
+  countered: { kind: "countered" },
   exiled: { kind: "left", match: (e) => e.to === "exile" },
   "put-into-hand": { kind: "left", whose: "owner", match: (e) => e.to === "hand" },
   descended: { kind: "to-graveyard", match: (e, read) => isPermanentCard(e, read) },

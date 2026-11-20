@@ -1618,7 +1618,9 @@ export type StaticCondition =
        * permanent under your control was destroyed this turn by a spell or
        * ability an opponent controlled" (`{ what: "destroyed", filter: {
        * notTypes: ["creature"] }, by: "opponent" }`). Only the views whose
-       * entries say who did it (`"destroyed"`'s effect destructions). */
+       * entries say who did it (`"destroyed"`'s effect destructions,
+       * `"countered"` — Summoning Trap's "if a creature spell you cast this
+       * turn was countered by a spell or ability an opponent controlled"). */
       readonly by?: "you" | "opponent";
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];

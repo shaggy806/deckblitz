@@ -62870,6 +62870,20 @@ controlledBy,
     const duringCombat = (): { combat?: number } =>
       PHASE_OF_STEP[this.state.turn.step] === "combat" ? { combat: this.state.turn.combatPhases ?? 1 } : {};
     switch (event.type) {
+      case "spell-countered": {
+        // A cast spell only (rule 707.10: a copy wasn't cast), read as it
+        // was cast — it has left the stack by now.
+        if (event.ability === true || event.castBy === undefined) return;
+        const record = (this.state.players[event.castBy]?.spellsCastThisTurnAs ?? []).findLast(({ id }) => id === event.object);
+        add({
+          kind: "countered",
+          player: event.castBy,
+          object: event.object,
+          by: event.by,
+          ...(record !== undefined ? { stint: record.spell.zoneChangeCount, was: record.spell } : {}),
+        });
+        return;
+      }
       case "blocker-declared": {
         const blocker = this.state.objects[event.blocker];
         if (blocker === undefined) return;
