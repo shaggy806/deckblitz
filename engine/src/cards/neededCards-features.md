@@ -8540,3 +8540,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **If that player had another land enter this turn (2026-11-20).** `condition:turn-history-that-player`: `turn-history.of` names the player whose history it reads; an entry's intervening if counts what entered with it and isn't announced yet (`ConditionOptions.enteringTogether`). Tunnel Ignus. `test/turn-history-that-player.test.ts`.
 
 **When this card is put into your hand from your graveyard (2026-11-20).** `trigger:self-put-into-hand-from-graveyard`: `leaves-graveyard` with `who: "self"` and `to`, on a `fromGraveyard` ability; the trigger scan looks back to the cards that just left (`leftGraveyard`, rule 603.10a). Golgari Brownscale. `test/self-leaves-graveyard.test.ts`.
+
+**A spell's damage to an opponent or battle (2026-11-20).** `trigger:spell-damage-to-opponent-or-battle-from-graveyard`: `deals-damage.orBattle` (with `to: "opponent"` or `"player"`, a battle is a recipient too); the rest was Nether Traitor's `fromGraveyard` payment. Bloodfeather Phoenix. `test/spell-damage-or-battle.test.ts`.

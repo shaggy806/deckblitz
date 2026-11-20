@@ -2653,6 +2653,11 @@ export type TriggerKind =
        * the spell (rule 112.2), and a copy that wasn't cast (rule 707.10)
        * has none, so its ability never triggers (the rulings). */
       readonly spellCaster?: PlayerId;
+      /** With `to: "player"` or `"opponent"`: a battle is a recipient too,
+       * whoever protects it — Bloodfeather Phoenix's "whenever an instant or
+       * sorcery spell you control deals damage to **an opponent or battle**"
+       * (as `deals-damage-batch`'s `orBattle`). */
+      readonly orBattle?: true;
       /** A filter on a *permanent* recipient ("deals damage to a creature an
        * opponent controls"). Never matches a player. */
       readonly toFilter?: CardFilter;

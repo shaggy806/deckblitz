@@ -39822,9 +39822,15 @@ export class Game {
         return false;
       }
     } else {
+      // "…to an opponent or battle" (Bloodfeather Phoenix): a battle is a
+      // recipient of its own, whoever protects it.
+      const battle =
+        spec.orBattle === true &&
+        (spec.to === "player" || spec.to === "opponent") &&
+        this.state.objects[target.object] !== undefined &&
+        effectiveTypes(this.state, this.registry, this.state.objects[target.object]).includes("battle");
       if (
-        spec.to === "player" ||
-        spec.to === "opponent" ||
+        (!battle && (spec.to === "player" || spec.to === "opponent")) ||
         spec.to === "you" ||
         spec.to === "spell-caster" ||
         spec.to === "chosen-players"

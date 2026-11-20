@@ -2417,6 +2417,18 @@ export function parseTrigger(clause) {
       batched: true,
     }];
   }
+  // "Whenever an instant or sorcery spell you control deals damage [to an
+  // opponent [or battle]]" (Blaze Commando, Satyr Firedancer, Bloodfeather
+  // Phoenix: a battle counts as `orBattle`).
+  if ((m = /^Whenever an instant or sorcery spell you control deals damage(?: to (an opponent|a player)( or battle)?)?$/.exec(c))) {
+    return [{
+      on: "deals-damage",
+      who: "you-control",
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      ...(m[1] !== undefined ? { to: m[1] === "an opponent" ? "opponent" : "player" } : {}),
+      ...(m[2] !== undefined ? { orBattle: true } : {}),
+    }];
+  }
   if (/^Whenever ~ deals combat damage to a player or battle$/.test(c)) {
     return [{ on: "deals-combat-damage-to-player", who: "self", orBattle: true }];
   }
@@ -15566,6 +15578,28 @@ function exiledCardPickAt(sentences, i, ctx) {
       used: animate === null ? 2 : 3,
     };
   }
+  // "You may pay {R}. If you do, return ~ from your graveyard to the
+  // battlefield. [It gains haste until end of turn.]" (Nether Traitor,
+  // Bloodfeather Phoenix): "it" is the card put there, which `"source"`
+  // follows within the resolution.
+  if (payMana !== null && done !== null && /^return ~ from your graveyard to the battlefield\.$/i.test(done[1])) {
+    const haste = /^it gains haste until end of turn\.$/i.test(sentences[i + 2] ?? "");
+    const back = { kind: "put-onto-battlefield", target: "source" };
+    return {
+      effect: {
+        kind: "may",
+        prompt: `Pay ${payMana[1]} to return ~ to the battlefield?`,
+        cost: payMana[1],
+        effect: haste
+          ? {
+              kind: "sequence",
+              effects: [back, { kind: "grant-keyword", target: "source", keyword: "haste", duration: "end-of-turn" }],
+            }
+          : back,
+      },
+      used: haste ? 3 : 2,
+    };
+  }
   // "You may pay {1}{R}. If you do, creatures attacking your opponents and/or
   // planeswalkers they control get +2/+0 until end of turn." (Roar of
   // Resistance).
@@ -20913,7 +20947,12 @@ function parseFaceAsWritten(face, ctx = {}) {
         text: printed(raw),
         // Its own card leaving the graveyard looks back to it there (rule
         // 603.10a — Golgari Brownscale).
-        ...(parsedTriggers.every((t) => t.on === "leaves-graveyard" && t.who === "self") ? { fromGraveyard: true } : {}),
+        ...(parsedTriggers.every((t) => t.on === "leaves-graveyard" && t.who === "self") ||
+        // An ability that returns its own card from the graveyard works
+        // only there (rule 113.6k — Nether Traitor, Bloodfeather Phoenix).
+        /^you may pay (?:\{[^}]+\})+\. If you do, return ~ from your graveyard to the battlefield\./i.test(rest)
+          ? { fromGraveyard: true }
+          : {}),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
         ...(timeCounterOk ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),

@@ -24636,3 +24636,37 @@ describe("its own card put into your hand from your graveyard (Golgari Brownscal
     expect(lizard.triggered[0].fromGraveyard).toBe(true);
   });
 });
+
+describe("a spell's damage to an opponent or battle, paid to return from the graveyard (Bloodfeather Phoenix)", () => {
+  it("reads orBattle, the payment, the return and the haste", () => {
+    const phoenix = parseFace({
+      name: "Bloodfeather Phoenix",
+      type_line: "Creature — Phoenix",
+      oracle_text:
+        "Whenever an instant or sorcery spell you control deals damage to an opponent or battle, you may pay {R}. If you do, return this card from your graveyard to the battlefield. It gains haste until end of turn.",
+      mana_cost: "{1}{R}",
+      colors: ["R"],
+    }) as unknown as { complete: boolean; triggered: { trigger: unknown; effect: unknown; fromGraveyard?: boolean }[] };
+    expect(phoenix.complete).toBe(true);
+    expect(phoenix.triggered[0].fromGraveyard).toBe(true);
+    expect(phoenix.triggered[0].trigger).toEqual({
+      on: "deals-damage",
+      who: "you-control",
+      filter: { typesAnyOf: ["instant", "sorcery"] },
+      to: "opponent",
+      orBattle: true,
+    });
+    expect(phoenix.triggered[0].effect).toEqual({
+      kind: "may",
+      prompt: "Pay {R} to return Bloodfeather Phoenix to the battlefield?",
+      cost: "{R}",
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "put-onto-battlefield", target: "source" },
+          { kind: "grant-keyword", target: "source", keyword: "haste", duration: "end-of-turn" },
+        ],
+      },
+    });
+  });
+});
