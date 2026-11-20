@@ -11,7 +11,8 @@
  * drift.
  */
 
-import { colorIdentityOf, identityString, withinIdentity } from "./identity.js";
+import { colorIdentityOf, commandersIdentity, commandersWithoutColor, identityString, settleCommanderColors, withinIdentity } from "./identity.js";
+import type { CommanderColors } from "./identity.js";
 import { isCardFront, isTokenCard } from "./cards/classify.js";
 import { COMMANDER_BANNED } from "./cards/generated-index.js";
 import { manaValue, parseManaCost } from "./mana.js";
@@ -28,6 +29,11 @@ export interface DeckToValidate {
   /** Total deck size the format wants, including commanders (100 for
    * Commander). */
   readonly size?: number;
+  /** The colour chosen for a commander that chooses one before the game
+   * begins (rule 903.4b — Clara Oswald, The Prismatic Piper), by name. One
+   * not given is read off the deck's cards where they settle it
+   * (`settleCommanderColors`). */
+  readonly commanderColors?: CommanderColors;
 }
 
 export interface DeckValidationResult {
@@ -40,6 +46,10 @@ export interface DeckValidationResult {
   readonly banned: readonly string[];
   /** The combined colour identity of the commander(s), as a WUBRG string. */
   readonly identity: string;
+  /** The colours chosen for the commanders that choose one (rule 903.4b):
+   * the deck's own, and any its cards settled. Absent when no commander
+   * chooses one. */
+  readonly commanderColors?: CommanderColors;
 }
 
 /** Names exempt from the singleton rule (903.5b) by being basic lands. */
@@ -356,7 +366,18 @@ export function validateCommanderDeck(
   if (deck.commanders.length < 1 || deck.commanders.length > 2) {
     violations.push(`a Commander deck has 1 or 2 commanders, this has ${deck.commanders.length}`);
   }
-  const commanderIdentity = new Set<Color>();
+  // The colour a commander chooses before the game begins (903.4b): the
+  // deck's, or the one its cards need.
+  const commanderColors = settleCommanderColors(
+    deck.commanders,
+    deck.cards.filter((name) => registry.has(name)).map((name) => colorIdentityOf(registry.get(name), registry)),
+    registry,
+    deck.commanderColors,
+  );
+  const commanderIdentity = commandersIdentity(deck.commanders, registry, commanderColors);
+  for (const name of commandersWithoutColor(deck.commanders, registry, commanderColors)) {
+    violations.push(`choose a colour for "${name}" (it's chosen as the deck is built, rule 903.4b)`);
+  }
   const paired = deck.commanders.length === 2;
   for (const name of deck.commanders) {
     if (!registry.has(name)) {
@@ -379,8 +400,6 @@ export function validateCommanderDeck(
         `"${name}" can't be a commander (not a legendary creature or Vehicle, and it doesn't say it can be your commander)`,
       );
     }
-    // A pair's colour identity is the union of both (rule 903.4).
-    for (const c of colorIdentityOf(def, registry)) commanderIdentity.add(c);
   }
   // An unimplemented commander is already a violation above, and whether it
   // can pair is exactly what the registry can't say.
@@ -448,5 +467,6 @@ export function validateCommanderDeck(
     violations,
     banned: [...new Set([...deck.commanders, ...deck.cards])].filter((name) => bannedNames.has(name)),
     identity: identityString(commanderIdentity),
+    ...(Object.keys(commanderColors).length > 0 ? { commanderColors } : {}),
   };
 }

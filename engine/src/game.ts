@@ -440,7 +440,8 @@ import { blockersRequiredBy, defendersForAttacker, mustBeBlockedByExactlyOne } f
 import { combatRuleWord } from "./combat/rules.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
 import { isRingBearer, RING_EMBLEM_TRIGGERS, ringEmblemText } from "./ring.js";
-import { colorIdentityOf } from "./identity.js";
+import { commandersIdentity } from "./identity.js";
+import type { CommanderColors } from "./identity.js";
 import { companionProblem } from "./companion.js";
 import type { StartingDeck } from "./companion.js";
 import type {
@@ -742,6 +743,14 @@ export interface DeckList {
    * 702.124 / ROADMAP Phase 9). Not among `cards` — extra cards on top of the
    * deck. Absent or empty, it isn't a Commander deck. */
   readonly commanders?: readonly string[];
+  /** The colour chosen for each of `commanders` that says "If ~ is your
+   * commander, choose a color before the game begins" (rule 903.4b —
+   * `CardDefinition.chooseColorAsCommander`), by name: chosen as the deck was
+   * built, revealed as the commander goes into the command zone (103.2c),
+   * part of the deck's colour identity, and the commander's colour all game
+   * (`GameObject.commanderColor`). One left out leaves it its printed
+   * colours. */
+  readonly commanderColors?: CommanderColors;
   /**
    * Which printing this player's copy of each card is, keyed by card name —
    * a Scryfall reference in any of the shapes {@link CardDefinition.art}
@@ -7888,18 +7897,15 @@ export class Game {
     skipCompanionReveals: boolean,
     idSalt: string,
   ): void {
-    for (const { player, cards, commanders, printings, sideboard, attractions, stickerSheets } of decks) {
+    for (const { player, cards, commanders, commanderColors, printings, sideboard, attractions, stickerSheets } of decks) {
       const commanderNames = commanders ?? [];
       this.state.players[player] = createPlayerState(player, this.state.rules);
       // Copied, not aliased: `GameState` has to stay a self-contained,
       // `structuredClone`-able tree, and a caller's object is neither.
       this.state.players[player].printings = { ...printings };
-      // Rule 903.4: a pair's identity is both of theirs.
-      const identity = new Set<Color>();
-      for (const name of commanderNames) {
-        if (!this.registry.has(name)) continue;
-        for (const c of colorIdentityOf(this.registry.get(name), this.registry)) identity.add(c);
-      }
+      // Rule 903.4: a pair's identity is both of theirs, with the colour a
+      // commander chose before the game began (903.4b).
+      const identity = commandersIdentity(commanderNames, this.registry, commanderColors);
       this.state.players[player].commanderIdentity = COLORS.filter((c) => identity.has(c));
       if (commanderNames.length > 0) this.state.players[player].commanders = [...commanderNames];
       this.state.players[player].startingDeckSize = cards.length + commanderNames.length;
@@ -7932,6 +7938,17 @@ export class Game {
           isCommander: true,
         });
         this.state.zones.shared.command.push(id);
+        // "Choose a color before the game begins": chosen with the deck,
+        // revealed as it goes into the command zone (rules 903.4b, 103.2c).
+        const color = commanderColors?.[commanderName];
+        if (
+          this.registry.get(commanderName).chooseColorAsCommander === true &&
+          color !== undefined &&
+          (COLORS as readonly string[]).includes(color)
+        ) {
+          this.state.objects[id].commanderColor = color;
+          this.emit({ type: "creature-type-chosen", object: id, creatureType: color });
+        }
       }
 
       // Its sideboard, outside the game (rule 400.11a) — none in a Commander
@@ -8019,11 +8036,18 @@ export class Game {
   private companionChoices(player: PlayerId): ObjectId[] {
     const outside = this.state.outside?.[player] ?? [];
     if (outside.length === 0) return [];
+    const mine = this.state.zones.shared.command.filter(
+      (id) => this.state.objects[id].owner === player && this.state.objects[id].isCommander === true,
+    );
+    const commanderColors: Record<string, Color> = {};
+    for (const id of mine) {
+      const { cardName, commanderColor } = this.state.objects[id];
+      if (commanderColor !== undefined) commanderColors[cardName] = commanderColor;
+    }
     const deck: StartingDeck = {
       cards: this.state.zones.perPlayer[player].library.map((id) => this.state.objects[id].cardName),
-      commanders: this.state.zones.shared.command
-        .filter((id) => this.state.objects[id].owner === player && this.state.objects[id].isCommander === true)
-        .map((id) => this.state.objects[id].cardName),
+      commanders: mine.map((id) => this.state.objects[id].cardName),
+      commanderColors,
     };
     return outside.filter((id) => companionProblem(this.state.objects[id].cardName, deck, this.registry) === null);
   }

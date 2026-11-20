@@ -6113,6 +6113,15 @@ export interface CardDefinition {
    * `colorIdentityOf` leaves them out — an exception the card itself makes to
    * rule 903.4, so only its mana symbols count. */
   readonly colorsOutsideIdentity?: true;
+  /** "If ~ is your commander, choose a color before the game begins. ~ is
+   * the chosen color." (Clara Oswald, The Prismatic Piper): the colour is
+   * chosen during deck construction and revealed as the commander goes into
+   * the command zone (rules 903.4b, 103.2c) — `DeckList.commanderColors` —
+   * it's part of the commander's colour identity, and the commander is that
+   * colour in every zone for the whole game (a characteristic-defining
+   * ability, 604.3, linked to the choice, 607.2p). The card in the 99, or a
+   * copy of it, has no choice and stays its printed colours. */
+  readonly chooseColorAsCommander?: true;
   /** "You can't spend mana to cast this spell" (Hogaak, Arisen Necropolis):
    * its total cost (rule 601.2f) is paid by what its convoke and delve pay
    * (702.51a, 702.66a) or not at all — whatever they leave can't be paid
@@ -6749,6 +6758,7 @@ const PRINTED_ABILITY: {
   moreThanMeetsTheEye: (def) => def.moreThanMeetsTheEye !== undefined,
   cantBeCopied: (def) => def.cantBeCopied !== undefined,
   colorsOutsideIdentity: (def) => def.colorsOutsideIdentity === true,
+  chooseColorAsCommander: (def) => def.chooseColorAsCommander === true,
   // A static ability that functions on the stack (rule 604.5).
   cantSpendManaToCast: (def) => def.cantSpendManaToCast === true,
   attractionLights: (def) => def.attractionLights !== undefined,
@@ -7072,6 +7082,8 @@ interface CardDraft {
   cantBeCopied?: true;
   /** See {@link CardDefinition.colorsOutsideIdentity}. */
   colorsOutsideIdentity?: true;
+  /** See {@link CardDefinition.chooseColorAsCommander}. */
+  chooseColorAsCommander?: true;
   /** See {@link CardDefinition.cantSpendManaToCast}. */
   cantSpendManaToCast?: true;
   /** See {@link CardDefinition.attractionLights}. */
@@ -7474,6 +7486,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.moreThanMeetsTheEye !== undefined ? { moreThanMeetsTheEye: draft.moreThanMeetsTheEye } : {}),
     ...(draft.cantBeCopied !== undefined ? { cantBeCopied: draft.cantBeCopied } : {}),
     ...(draft.colorsOutsideIdentity === true ? { colorsOutsideIdentity: true as const } : {}),
+    ...(draft.chooseColorAsCommander === true ? { chooseColorAsCommander: true as const } : {}),
     ...(draft.cantSpendManaToCast === true ? { cantSpendManaToCast: true as const } : {}),
     ...(draft.attractionLights !== undefined ? { attractionLights: draft.attractionLights } : {}),
   };

@@ -93,6 +93,13 @@ export type DeckFormatReport = DeckValidationResult & {
    * with it (the stand-ins are chosen for the commander's colours).
    */
   readonly commanderCandidates?: readonly CommanderCandidate[];
+  /**
+   * The commanders that choose their colour as the deck is built (rule
+   * 903.4b — Clara Oswald, The Prismatic Piper) whose colour the list's cards
+   * don't settle: any colour is legal, so the player is asked
+   * (`ChosenColorPicker`). One the cards settle is in `commanderColors`.
+   */
+  readonly commanderColorOpen?: readonly string[];
 };
 
 /** A card of an imported list that could be its commander — see

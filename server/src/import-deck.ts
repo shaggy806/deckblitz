@@ -23,9 +23,11 @@ import {
   canCommandAlone,
   canPairCommanders,
   colorIdentityOf,
+  commandersWithoutColor,
   isBackground,
   isCardFront,
   nameForFlavorName,
+  settleCommanderColors,
   suggestReplacements,
   validateCommanderDeck,
 } from "engine";
@@ -812,6 +814,21 @@ function chooseReplacements(
     }
     for (const c of colors) identity.add(c);
   }
+  // A commander that chooses its colour as the deck is built (rule 903.4b —
+  // Clara Oswald, The Prismatic Piper): the colour the list's cards need,
+  // the ones the pool lacks read from Scryfall, so their stand-ins may have it.
+  if (identity !== null) {
+    const settled = settleCommanderColors(
+      commanders,
+      entries.flatMap((e): Iterable<Color>[] => {
+        if (registry.has(e.name)) return [colorIdentityOf(registry.get(e.name), registry)];
+        const known = scryfallByName.get(e.name)?.colorIdentity;
+        return known === undefined ? [] : [known];
+      }),
+      registry,
+    );
+    for (const c of Object.values(settled)) identity.add(c);
+  }
 
   const inDeck = new Set(entries.filter((e) => registry.has(e.name)).map((e) => e.name));
   const isCommander = new Set(commanders);
@@ -952,7 +969,12 @@ export function formatCheck(
     if (at !== -1) rest.splice(at, 1);
   }
   const result = validateCommanderDeck({ commanders, cards: rest, size: 100 }, registry);
-  return { ...result, commanders };
+  // A colour chosen as the deck is built (rule 903.4b) that the cards don't
+  // settle: the player's to choose, so not a fault of the list.
+  const open = commandersWithoutColor(commanders, registry, result.commanderColors);
+  if (open.length === 0) return { ...result, commanders };
+  const violations = result.violations.filter((v) => !v.startsWith("choose a colour for "));
+  return { ...result, legal: violations.length === 0, violations, commanders, commanderColorOpen: open };
 }
 
 /**
@@ -1242,6 +1264,12 @@ export function suggestReplacementsFor(request: SuggestRequest, deps: ImportDeps
       break;
     }
     for (const c of colorIdentityOf(registry.get(name), registry)) identity.add(c);
+  }
+  // A commander that chooses its colour as the deck is built (rule 903.4b):
+  // the one the deck's cards need.
+  if (identity !== null) {
+    const held = request.cards.filter((name) => registry.has(name)).map((name) => colorIdentityOf(registry.get(name), registry));
+    for (const c of Object.values(settleCommanderColors(request.commanders, held, registry))) identity.add(c);
   }
   const tags = deps.tags();
   const ranked = suggestReplacements(

@@ -915,6 +915,7 @@ import _poolTheLastAgniKai from "../pool/the-last-agni-kai.js";
 import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
 import _poolTheMonumentalFacade from "../pool/the-monumental-facade.js";
+import _poolThePrismaticPiper from "../pool/the-prismatic-piper.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
 import _poolTheRealityChip from "../pool/the-reality-chip.js";
 import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
@@ -1986,6 +1987,7 @@ const shard: CardShard = {
     _poolTheLonelyMountain,
     _poolTheMightyThorJaneFoster,
     _poolTheMonumentalFacade,
+    _poolThePrismaticPiper,
     _poolThePrydwenSteelFlagship,
     _poolTheRealityChip,
     _poolTheRevelationsOfEzio,

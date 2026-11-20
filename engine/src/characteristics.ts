@@ -4745,6 +4745,14 @@ export function effectiveColors(
   object: GameObject,
 ): Set<Color> {
   let colors = new Set<Color>(registry.get(printedCardName(object)).colors);
+  // "~ is the chosen color" for a commander that chose one before the game
+  // began (rule 903.4b): its characteristic-defining ability (604.3), in
+  // every zone, applied first in layer 5 (613.3) — and so not undone by a
+  // loss of abilities, a layer later. Not while it's another card's copy
+  // (layer 1 took its text) or face down (708.2).
+  if (object.commanderColor !== undefined && printedCardName(object) === object.cardName && object.faceDown === undefined) {
+    colors = new Set<Color>([object.commanderColor]);
+  }
   if (state !== null && object.zone !== "battlefield" && object.zone !== "phased-out" && object.kind === "card") {
     for (const { source, ability } of orderedOutsideColors(state, registry)) {
       if (object.faceDown !== undefined || object.foretold === true || object.exiledFaceDown !== undefined) break;

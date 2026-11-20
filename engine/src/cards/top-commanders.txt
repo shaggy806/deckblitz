@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-998 already implemented / 2 missing
+999 already implemented / 1 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -740,7 +740,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  734  Tetzin, Gnome Champion                          4505 decks  {U}{R}{W}        Legendary Artifact Creature — Gnome // Legendary Artifact Creature — Gnome
 [x]  735  Othelm, Sigardian Outcast                       4498 decks  {1}{G}{W}        Legendary Creature — Human
 [x]  736  Archelos, Lagoon Mystic                         4482 decks  {1}{B}{G}{U}     Legendary Creature — Turtle Shaman
-[ ]  737  Clara Oswald                                    4480 decks  {6}              Legendary Creature — Human Advisor
+[x]  737  Clara Oswald                                    4480 decks  {6}              Legendary Creature — Human Advisor
 [x]  738  Gut, True Soul Zealot                           4475 decks  {2}{R}           Legendary Creature — Goblin Shaman
 [x]  739  Kathril, Aspect Warper                          4465 decks  {2}{W}{B}{G}     Legendary Creature — Nightmare Insect
 [x]  740  Kresh the Bloodbraided                          4461 decks  {2}{B}{R}{G}     Legendary Creature — Human Warrior

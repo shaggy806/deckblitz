@@ -9,9 +9,9 @@
  * on `CardDefinition.companion`; the ten printed ones are four shapes.
  */
 
-import { colorIdentityOf, identityString, withinIdentity } from "./identity.js";
+import { colorIdentityOf, commandersIdentity, identityString, withinIdentity } from "./identity.js";
+import type { CommanderColors } from "./identity.js";
 import { manaValue, parseManaCost } from "./mana.js";
-import type { Color } from "./mana.js";
 import { hasSubtype, EVERY_CREATURE_TYPE } from "./subtypes.js";
 import type { CardDefinition, CardType } from "./cards/define.js";
 import type { CardRegistry } from "./cards/card-registry.js";
@@ -57,6 +57,8 @@ export type CompanionCondition =
 export interface StartingDeck {
   readonly cards: readonly string[];
   readonly commanders?: readonly string[];
+  /** The colour chosen for a commander that chooses one (rule 903.4b). */
+  readonly commanderColors?: CommanderColors;
 }
 
 /** Rule 100.2a. */
@@ -173,11 +175,7 @@ export function companionProblem(name: string, deck: StartingDeck, registry: Car
   if (condition === null) return `"${name}" has no companion ability`;
   const commanders = deck.commanders ?? [];
   if (commanders.length > 0) {
-    const identity = new Set<Color>();
-    for (const commander of commanders) {
-      if (!registry.has(commander)) continue;
-      for (const c of colorIdentityOf(registry.get(commander), registry)) identity.add(c);
-    }
+    const identity = commandersIdentity(commanders, registry, deck.commanderColors);
     if (!withinIdentity(colorIdentityOf(def, registry), identity)) {
       return `it's outside the commander's colour identity (${identityString(identity) || "colourless"})`;
     }

@@ -96,6 +96,71 @@ function addIdentityOf(def: CardDefinition, identity: Set<Color>): void {
   }
 }
 
+/** A colour chosen for each commander that chooses one before the game
+ * begins, keyed by its name (`CardDefinition.chooseColorAsCommander`, rule
+ * 903.4b). */
+export type CommanderColors = Readonly<Record<string, Color>>;
+
+/**
+ * A deck's colour identity from its commanders (rule 903.4): each one's own,
+ * a pair's together, and the colour chosen for a commander that chooses one
+ * before the game begins (903.4b — Clara Oswald, The Prismatic Piper). A
+ * colour named for a card without that ability, or for a name that isn't a
+ * commander here, counts for nothing.
+ */
+export function commandersIdentity(
+  commanders: readonly string[],
+  registry: FaceLookup,
+  chosen?: CommanderColors,
+): Set<Color> {
+  const identity = new Set<Color>();
+  for (const name of commanders) {
+    if (!registry.has(name)) continue;
+    const def = registry.get(name);
+    for (const c of colorIdentityOf(def, registry)) identity.add(c);
+    const color = chosen?.[name];
+    if (def.chooseColorAsCommander === true && color !== undefined && (COLORS as readonly string[]).includes(color)) {
+      identity.add(color);
+    }
+  }
+  return identity;
+}
+
+/** The commanders among `commanders` that choose a colour before the game
+ * begins (`chooseColorAsCommander`, rule 903.4b) and have none in `chosen`. */
+export function commandersWithoutColor(
+  commanders: readonly string[],
+  registry: FaceLookup,
+  chosen?: CommanderColors,
+): string[] {
+  return commanders.filter(
+    (name) => registry.has(name) && registry.get(name).chooseColorAsCommander === true && chosen?.[name] === undefined,
+  );
+}
+
+/**
+ * The colour a commander that chooses one (rule 903.4b) has to have chosen
+ * for this deck, read off its cards: when exactly one such commander is
+ * unchosen and the cards' identities (`identities`, one per card in the 99)
+ * reach exactly one colour beyond the rest of the commanders' identity, that
+ * colour. `chosen` comes back with it added, or as it was when the cards
+ * don't settle it (none beyond — any colour is legal — or more than one).
+ */
+export function settleCommanderColors(
+  commanders: readonly string[],
+  identities: Iterable<Iterable<Color>>,
+  registry: FaceLookup,
+  chosen?: CommanderColors,
+): CommanderColors {
+  const open = commandersWithoutColor(commanders, registry, chosen);
+  if (open.length !== 1) return { ...chosen };
+  const base = commandersIdentity(commanders, registry, chosen);
+  const beyond = new Set<Color>();
+  for (const identity of identities) for (const c of identity) if (!base.has(c)) beyond.add(c);
+  if (beyond.size !== 1) return { ...chosen };
+  return { ...chosen, [open[0]]: [...beyond][0] };
+}
+
 /** Sorted WUBRG string form ("", "WU", "WUBRG") — handy for display / compare. */
 export function identityString(identity: ReadonlySet<Color>): string {
   return COLORS.filter((c) => identity.has(c)).join("");

@@ -298,6 +298,29 @@ describe("players who can't search libraries, and a floor under a life total", (
     expect(courier.colorsOutsideIdentity).toBeUndefined();
     expect(courier.complete).toBe(true);
   });
+
+  it("reads a colour chosen before the game begins (The Prismatic Piper, Clara Oswald)", () => {
+    const piper = parseFace(
+      {
+        name: "The Prismatic Piper",
+        type_line: "Legendary Creature — Shapeshifter",
+        oracle_text:
+          "If The Prismatic Piper is your commander, choose a color before the game begins. The Prismatic Piper is the chosen color.\nPartner (You can have two commanders if both have partner.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(piper.chooseColorAsCommander).toBe(true);
+    const clara = parseFace(
+      {
+        name: "Clara Oswald",
+        type_line: "Legendary Creature — Human Advisor",
+        oracle_text:
+          "Impossible Girl — If Clara Oswald is your commander, choose a color before the game begins. Clara Oswald is the chosen color.\nIf a triggered ability of a Doctor you control triggers, that ability triggers an additional time.\nDoctor's companion (You can have two commanders if the other is the Doctor.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(clara.chooseColorAsCommander).toBe(true);
+  });
   it("reads damage that causes no loss of life, under its condition (Archon of Coronation)", () => {
     expect(
       read(

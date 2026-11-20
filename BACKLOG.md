@@ -16,17 +16,14 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**998 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
+**999 of the 1000 most-played commanders are implemented** (`top-commanders.txt`, refetched and
 doubled from 500 on 2026-11-14; re-mark with `npm run cmdrs:mark -w engine`). An imported decklist
 usually has its commander substituted, and that one card is the reason the deck exists. Live
 numbers for everything below come from `npm run cmdrs:gaps -w engine`.
 
-- **The 2 left**, both from ranks 501-1000, triaged in the sweep records (`card:brief -- "Name"`),
-  and both waiting on a major only the user can approve — no engine-only commander is left:
-  - **Clara Oswald** (#737), `mechanic:commander-chosen-color-pregame` — a major waiting on the user
-    (a colour chosen before the game, which changes colour identity).
-  - **Malik, Grim Manipulator** (#779), `mechanic:secret-choice` — a major waiting on the user (a
-    new kind of decision).
+- **The 1 left**, from ranks 501-1000, triaged in the sweep records (`card:brief -- "Name"`):
+  **Malik, Grim Manipulator** (#779), `mechanic:secret-choice` — a major waiting on the user (a new
+  kind of decision: two players each secretly choose, then both are revealed).
 
 ## Card backlog (by EDHREC rank, and the precons)
 

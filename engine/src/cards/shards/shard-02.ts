@@ -140,6 +140,7 @@ import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
 import _poolCircleOfTheLandDruid from "../pool/circle-of-the-land-druid.js";
 import _poolClaimFame from "../pool/claim-fame.js";
+import _poolClaraOswald from "../pool/clara-oswald.js";
 import _poolClear from "../pool/clear.js";
 import _poolCloisterGargoyle from "../pool/cloister-gargoyle.js";
 import _poolClone from "../pool/clone.js";
@@ -1197,6 +1198,7 @@ const shard: CardShard = {
     _poolCircleOfProtectionArtifacts,
     _poolCircleOfTheLandDruid,
     _poolClaimFame,
+    _poolClaraOswald,
     _poolClear,
     _poolCloisterGargoyle,
     _poolClone,

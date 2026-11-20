@@ -19016,6 +19016,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.colorsOutsideIdentity = true;
       continue;
     }
+    // "If ~ is your commander, choose a color before the game begins. ~ is the
+    // chosen color." (The Prismatic Piper; Clara Oswald's Impossible Girl):
+    // chosen as the deck is built (rule 903.4b) — `chooseColorAsCommander`.
+    if (/^(?:[A-Z][^—]* — )?If ~ is your commander, choose a color before the game begins\. ~ is the chosen color\.$/.test(line)) {
+      out.chooseColorAsCommander = true;
+      continue;
+    }
     // "This spell can't be copied." (See Double — `cantBeCopied`).
     if (line === "~ can't be copied.") { out.cantBeCopied = true; continue; }
     // "You can't spend mana to cast this spell." (Hogaak, Arisen Necropolis —

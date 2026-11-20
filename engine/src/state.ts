@@ -1825,6 +1825,16 @@ export interface GameObject {
    * replacement" — applied automatically here, with no opt-out).
    */
   isCommander: boolean;
+  /**
+   * The colour its owner chose for it before the game began (rule 903.4b),
+   * for a commander that says "If ~ is your commander, choose a color before
+   * the game begins. ~ is the chosen color" (`chooseColorAsCommander`):
+   * intrinsic like `isCommander`, never reset by `moveObject` — the choice
+   * holds "even as the commander changes zones" (903.4b, 607.2p). Read as its
+   * colour in every zone (`effectiveColors`), its characteristic-defining
+   * ability's (604.3).
+   */
+  commanderColor?: Color;
 }
 
 /**

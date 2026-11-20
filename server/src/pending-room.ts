@@ -16,7 +16,17 @@
  * null-checks through `Room`'s entire API for no benefit.
  */
 
-import { STRONG_DECKS, attractionDeckProblems, colorIdentityOf, commandersOf, validateCommanderDeck } from "engine/local";
+import {
+  COLORS,
+  STRONG_DECKS,
+  attractionDeckProblems,
+  colorIdentityOf,
+  commandersIdentity,
+  commandersOf,
+  settleCommanderColors,
+  validateCommanderDeck,
+} from "engine/local";
+import type { CommanderColors } from "engine/local";
 import { cardRegistry } from "./card-registry.js";
 import type { CardRegistry, Color, DeckList, GameConfig, PlayerId } from "engine/local";
 import { botNameFits, botNameFor } from "./bot-names.js";
@@ -75,8 +85,9 @@ function deckCreator(deck: PendingDeck): string | null {
 
 function deckIdentity(deck: PendingDeck): Set<Color> {
   const commanders = commandersOf(deck);
+  if (commanders.length > 0) return commandersIdentity(commanders, registry(), deckCommanderColors(deck));
   const identity = new Set<Color>();
-  for (const name of commanders.length > 0 ? commanders : deck.cards) {
+  for (const name of deck.cards) {
     if (!registry().has(name)) continue;
     for (const c of colorIdentityOf(registry().get(name), registry())) identity.add(c);
   }
@@ -100,7 +111,15 @@ function deckIdentity(deck: PendingDeck): Set<Color> {
  * 2026-10-11). */
 function deckProblemOf(deck: PendingDeck | null): string | null {
   if (deck === null) return null;
-  const result = validateCommanderDeck({ commanders: commandersOf(deck), cards: deck.cards, size: 100 }, registry());
+  const result = validateCommanderDeck(
+    {
+      commanders: commandersOf(deck),
+      cards: deck.cards,
+      size: 100,
+      ...(deck.commanderColors !== undefined ? { commanderColors: deck.commanderColors } : {}),
+    },
+    registry(),
+  );
   if (!result.legal) return result.violations[0] ?? "not a Commander-legal deck";
   const [banned] = result.banned;
   if (banned !== undefined) return `"${banned}" is banned in Commander`;
@@ -148,8 +167,43 @@ function assertAttractionsAreBuildable(deck: PendingDeck): void {
   }
 }
 
+/**
+ * The colours chosen for `deck`'s commanders that choose one before the game
+ * begins (rule 903.4b): the deck's own, and any its cards settle
+ * (`settleCommanderColors` — a deck saved before the choice existed has its
+ * colour read off what it holds). One the cards don't settle is left out, and
+ * that commander plays its printed colours.
+ */
+export function deckCommanderColors(deck: PendingDeck): CommanderColors {
+  const reg = registry();
+  return settleCommanderColors(
+    commandersOf(deck),
+    deck.cards.filter((name) => reg.has(name)).map((name) => colorIdentityOf(reg.get(name), reg)),
+    reg,
+    deck.commanderColors,
+  );
+}
+
+/** A deck's `commanderColors` as it arrived: an object of colour letters
+ * keyed by name, which the engine reads only for the deck's own commanders. */
+function assertCommanderColorsAreSafe(deck: PendingDeck): void {
+  const colors: unknown = deck.commanderColors;
+  if (colors === undefined) return;
+  if (colors === null || typeof colors !== "object" || Array.isArray(colors)) {
+    throw new Error("a deck's commander colours are a colour for each commander that chooses one");
+  }
+  const entries = Object.entries(colors as Record<string, unknown>);
+  if (entries.length > 2) throw new Error("a deck chooses a colour for at most two commanders");
+  for (const [, color] of entries) {
+    if (typeof color !== "string" || !(COLORS as readonly string[]).includes(color)) {
+      throw new Error("a commander's chosen colour is one of W, U, B, R or G");
+    }
+  }
+}
+
 function assertDeckIsBuildable(deck: PendingDeck): void {
   assertPrintingsAreSafe(deck);
+  assertCommanderColorsAreSafe(deck);
   assertAttractionsAreBuildable(deck);
   const commanders = commandersOf(deck);
   // A game has room for one commander, or two (rule 903.3c); more would reach
@@ -646,6 +700,7 @@ export class PendingRoom {
         player: s.player,
         cards: s.deck.cards,
         commanders: commandersOf(s.deck),
+        commanderColors: deckCommanderColors(s.deck),
         printings: s.deck.printings,
         ...(s.deck.sideboard !== undefined && s.deck.sideboard.length > 0 ? { sideboard: s.deck.sideboard } : {}),
         // A bot plays without an Attraction deck (docs/plans/attractions.md),

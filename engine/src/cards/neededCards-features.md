@@ -325,6 +325,21 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A commander's colour chosen before the game begins — built 2026-11-20
+
+The key `mechanic:commander-chosen-color-pregame`, for Clara Oswald (#737) and The Prismatic Piper: "If ~ is your
+commander, choose a color before the game begins. ~ is the chosen color." Rule 903.4b makes it a choice of deck
+construction, revealed as the commander goes into the command zone, so it's the deck's, not a decision in the game:
+`CardDefinition.chooseColorAsCommander`, `DeckList.commanderColors` (and `WireDeck`'s, `SavedDeck`'s), the colour in the
+identity (`commandersIdentity`, which the game's setup, deck validation, companions and the server read) and the
+commander's colour in every zone (`GameObject.commanderColor`, applied first in layer 5, 613.3, so a loss of abilities
+doesn't undo it; not while face down or another card's copy). A deck that doesn't say has it read off its cards
+(`settleCommanderColors`: exactly one colour beyond the other commanders'); one its cards don't settle is a deck-
+building violation, and an import reports it (`commanderColorOpen`) for the player to choose. The deck editor's
+commander row has five pips (`ChosenColorPicker`), and blitzing asks in a popup (`CommanderColorAsk`). The fuzzers
+deal such a commander a colour without a new random draw. `test/commanders-chosen-color.test.ts`, the server's
+`commander-colors.test.ts`.
+
 ### Guesses and piles counted this turn, and piles exiled as made — built 2026-11-20
 
 The key `amount:pile-or-guess-effects-this-turn`, for The Celestial Toymaker (#890): the journal's `piled-or-guessed`

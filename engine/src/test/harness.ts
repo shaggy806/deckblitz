@@ -42,6 +42,7 @@ import { appendJournal, journalTotal, type JournalKind } from "../journal.js";
 import type { CardRegistry } from "../cards/card-registry.js";
 import { createDefaultRegistry } from "../cards/registry.js";
 import type { TargetRef, TargetSpec } from "../target.js";
+import type { Color } from "../mana.js";
 
 export const A = asPlayerId("alice");
 export const B = asPlayerId("bob");
@@ -97,6 +98,10 @@ export function table(
     step?: GameState["turn"]["step"];
     /** Alice's sideboard: her cards outside the game (rule 400.11a). */
     sideboard?: readonly string[];
+    /** Alice's commanders, in the command zone (rule 903.6), and the colour
+     * chosen for one that chooses it before the game begins (903.4b). */
+    commanders?: readonly string[];
+    commanderColors?: Readonly<Record<string, Color>>;
     /** Each player's Attraction deck (rule 717.2), top card first (the table
      * doesn't shuffle) — alice's if given as a list. */
     attractions?: readonly AttractionDeckEntry[] | Readonly<Partial<Record<PlayerId, readonly AttractionDeckEntry[]>>>;
@@ -131,6 +136,8 @@ export function table(
       player,
       cards: Array<string>(40).fill(opts.deck ?? "Wastes"),
       ...(player === A && opts.sideboard !== undefined ? { sideboard: opts.sideboard } : {}),
+      ...(player === A && opts.commanders !== undefined ? { commanders: opts.commanders } : {}),
+      ...(player === A && opts.commanderColors !== undefined ? { commanderColors: opts.commanderColors } : {}),
       ...attractionsOf(opts.attractions, player),
       ...stickerSheetsOf(opts.stickerSheets, player),
     })),

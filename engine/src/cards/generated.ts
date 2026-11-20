@@ -4836,6 +4836,7 @@ import _poolClanDefiance from "./pool/clan-defiance.js";
 import _poolClanGuildmage from "./pool/clan-guildmage.js";
 import _poolClandestineMeddler from "./pool/clandestine-meddler.js";
 import _poolClapSnap from "./pool/clap-snap.js";
+import _poolClaraOswald from "./pool/clara-oswald.js";
 import _poolClarionCathars from "./pool/clarion-cathars.js";
 import _poolClarionConqueror from "./pool/clarion-conqueror.js";
 import _poolClarionSpirit from "./pool/clarion-spirit.js";
@@ -28633,6 +28634,7 @@ import _poolThePrideOfHullClade from "./pool/the-pride-of-hull-clade.js";
 import _poolThePrimaVista from "./pool/the-prima-vista.js";
 import _poolThePrincessTakesFlight from "./pool/the-princess-takes-flight.js";
 import _poolThePrismaticBridge from "./pool/the-prismatic-bridge.js";
+import _poolThePrismaticPiper from "./pool/the-prismatic-piper.js";
 import _poolThePromiseOfKahless from "./pool/the-promise-of-kahless.js";
 import _poolThePrydwenSteelFlagship from "./pool/the-prydwen-steel-flagship.js";
 import _poolTheQueenOfDale from "./pool/the-queen-of-dale.js";
@@ -38497,6 +38499,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClanGuildmage,
   _poolClandestineMeddler,
   _poolClapSnap,
+  _poolClaraOswald,
   _poolClarionCathars,
   _poolClarionConqueror,
   _poolClarionSpirit,
@@ -62294,6 +62297,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThePrimaVista,
   _poolThePrincessTakesFlight,
   _poolThePrismaticBridge,
+  _poolThePrismaticPiper,
   _poolThePromiseOfKahless,
   _poolThePrydwenSteelFlagship,
   _poolTheQueenOfDale,
@@ -72171,6 +72175,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/clan-guildmage": _poolClanGuildmage,
   "pool/clandestine-meddler": _poolClandestineMeddler,
   "pool/clap-snap": _poolClapSnap,
+  "pool/clara-oswald": _poolClaraOswald,
   "pool/clarion-cathars": _poolClarionCathars,
   "pool/clarion-conqueror": _poolClarionConqueror,
   "pool/clarion-spirit": _poolClarionSpirit,
@@ -95968,6 +95973,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-prima-vista": _poolThePrimaVista,
   "pool/the-princess-takes-flight": _poolThePrincessTakesFlight,
   "pool/the-prismatic-bridge": _poolThePrismaticBridge,
+  "pool/the-prismatic-piper": _poolThePrismaticPiper,
   "pool/the-promise-of-kahless": _poolThePromiseOfKahless,
   "pool/the-prydwen-steel-flagship": _poolThePrydwenSteelFlagship,
   "pool/the-queen-of-dale": _poolTheQueenOfDale,

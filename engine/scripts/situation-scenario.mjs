@@ -419,7 +419,16 @@ export function runScenario(cardName, seed, { players: forcedPlayers = null, onB
     mulligans: false,
     controllers,
     rules: { openingHandSize: 0, startingLife: commander ? 40 : 20 },
-    decks: seats.map((p) => ({ player: p, cards: library(p), ...(p === A && asCommander ? { commanders: [cardName] } : {}) })),
+    decks: seats.map((p) => ({
+      player: p,
+      cards: library(p),
+      ...(p === A && asCommander ? { commanders: [cardName] } : {}),
+      // A colour chosen before the game begins (rule 903.4b), one of the
+      // table's own, by the seed's dice already rolled: no new draw.
+      ...(p === A && asCommander && def.chooseColorAsCommander === true
+        ? { commanderColors: { [cardName]: COLORS[((seed + hashName(cardName)) >>> 0) % COLORS.length] } }
+        : {}),
+    })),
   });
 
   let description = null;

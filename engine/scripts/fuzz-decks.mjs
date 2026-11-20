@@ -150,15 +150,23 @@ function deckFor(player, index, rng, forced) {
   const need = new Set(forced.flatMap((n) => [...identityOf.get(n)]));
   const allowed = commanders.filter((c) => withinIdentity(need, identityOf.get(c.name)));
   if (allowed.length === 0) throw new Error(`no commander's identity allows ${forced.join(", ")}`);
+  // A commander that chooses its colour as the deck is built (rule 903.4b —
+  // Clara Oswald, The Prismatic Piper) takes one by the seat's index, not the
+  // random stream, so every other deck a seed deals stays as it was.
+  const chosenColor = ["W", "U", "B", "R", "G"][index % 5];
+  const commandIdentity = (commander) =>
+    commander.chooseColorAsCommander === true
+      ? new Set([...identityOf.get(commander.name), chosenColor])
+      : identityOf.get(commander.name);
   const fitsUnder = (commander) => (d) =>
-    d.name !== commander.name && withinIdentity(identityOf.get(d.name), identityOf.get(commander.name));
+    d.name !== commander.name && withinIdentity(identityOf.get(d.name), commandIdentity(commander));
   let commander = null;
   let best = -1;
   for (const c of shuffled(allowed, rng).slice(0, COMMANDER_SAMPLE)) {
     const score = spellWindow.filter(fitsUnder(c)).length + landWindow.filter(fitsUnder(c)).length;
     if (score > best) [commander, best] = [c, score];
   }
-  const identity = identityOf.get(commander.name);
+  const identity = commandIdentity(commander);
   const fits = fitsUnder(commander);
 
   // The window's cards that fit, then random ones to make up the count.
@@ -181,7 +189,12 @@ function deckFor(player, index, rng, forced) {
   const basics = Array.from({ length: BASICS }, (_, i) =>
     colors.length === 0 ? "Wastes" : BASIC_OF[colors[i % colors.length]],
   );
-  return { player, commanders: [commander.name], cards: [...chosen, ...basics] };
+  return {
+    player,
+    commanders: [commander.name],
+    ...(commander.chooseColorAsCommander === true ? { commanderColors: { [commander.name]: chosenColor } } : {}),
+    cards: [...chosen, ...basics],
+  };
 }
 
 /** Every seat's deck for `seed`, in seating order. */

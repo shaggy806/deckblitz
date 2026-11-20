@@ -14,6 +14,7 @@ import type {
   Action,
   ArtManifestEntry,
   AttractionDeckEntry,
+  CommanderColors,
   GameConfig,
   LegalAction,
   PlayerId,
@@ -66,6 +67,12 @@ export interface WireDeck {
   /** One or two commanders: two for a Partner pair, or a commander and its
    * Background (rule 903.3c). */
   readonly commanders?: readonly string[];
+  /** The colour chosen for a commander that says "If ~ is your commander,
+   * choose a color before the game begins" (rule 903.4b — Clara Oswald, The
+   * Prismatic Piper), by its name: `DeckList.commanderColors`. Chosen as the
+   * deck is built. Absent, the server reads it off the deck's cards where
+   * they settle it (`settleCommanderColors`). */
+  readonly commanderColors?: CommanderColors;
   readonly name?: string;
   /** Which printing of each card this deck brings, keyed by card name — a
    * Scryfall card id (or any reference `CardDefinition.art` accepts). Purely
