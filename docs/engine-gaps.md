@@ -6,19 +6,6 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **A player's loss comes before the rest of its state-based check** (2026-11-19, found beside the
-  eliminated-player statics fix). Rule 704.3: the game checks every state-based condition, then performs all
-  that apply "simultaneously as a single event". `Game.runStateBasedActionsUncached` eliminates the players who
-  lose first (`eliminate` → `leaveGame`) and only then finds what goes to a graveyard
-  (`stateBasedGraveyardMoves`), so a continuous effect of the losing player's is already off when lethal damage
-  and zero toughness are read. Reproduction: three players, bob's Elesh Norn, Grand Cenobite, alice's Hill Giant
-  (1/1 under it); one effect deals bob 20 and the Giant 1; the next check eliminates bob and the Giant, 3/3
-  again with 1 damage, survives where it should be destroyed. Replacements are right since that fix: the moves
-  of the same check still read the losing player's statics (`lostInThisCheck`), so their Rest in Peace exiles
-  what died with them. Outline: find the graveyard moves before eliminating anyone, then eliminate, then
-  perform. What it risks: the moves found then include the losing players' own permanents and their legend-rule
-  choice (704.5j is asked before anything moves), which must be dropped rather than asked of a player who has
-  left, and a decision raised mid-sweep resumes the pass from the top with the losers already gone.
 - **A departing player's permanents don't trigger "leaves the battlefield"** (2026-11-17, the rules audit,
   `docs/plans/rules-audit-2026-11.md`). Rule 603.6c: leaves-the-battlefield abilities trigger "when a phased-in
   permanent leaves the game because its owner leaves the game". `Game.leaveGame` leaves what the player owned on
@@ -33,20 +20,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   find it still there. Outline: an internal, unlogged event for each such permanent (as `permanents-left` is),
   matched only by `leaves-battlefield` triggers of players still in the game with no `to`, and the object
   marked gone for whatever the trigger does next.
-- **A player leaves while someone else is choosing targets, and the choice still offers what left with them**
-  (2026-11-18, found by the tables fuzz: `npm run tables:fuzz -w server -- --seed 735 --own-decks --max-turn 20
-  --leaves 0.02`). Rule 800.4a: what a player owns leaves the game as they do, so it is no target for anything
-  after. A `choose-targets` decision keeps the options it was asked with (`awaiting.options`), and
-  `Game.concede`/`leaveGame` don't look at a decision another player has open. In the seed, Dave is choosing new
-  targets for his copy of Transforming Flourish (demonstrate, rule 707.10c) when Carol concedes: her permanent is
-  still among his options and in `legalActions`, and choosing it is refused ("illegal target for Transforming
-  Flourish", `invalidTargetReason` reads the game as it now is). A person gets an error and picks again; a
-  controller that takes the engine's options at their word throws. To do: when a player leaves, put any open
-  decision right (prune or re-ask: a slot left with no option is a trigger with no legal target, rule 603.3d, or
-  a copy that keeps its target), for `choose-targets` in its three uses (a copy's new targets, a trigger's, an
-  opponent's choice during a cast) and then the other decisions that list objects or players
-  (`choose-permanent-or-player`, a sacrifice of someone else's choosing). Write the failing engine test first:
-  two opponents, a spell copy asking for new targets, the third player conceding.
 - **A player who loses while they owe a decision** (2026-11-17, the rules audit, `docs/plans/rules-audit-2026-11.md`).
   Rules 800.4f-h: a cost a departed player would pay isn't paid, a choice an object asks of them goes to another
   player its controller picks, and a choice a rule asks of them goes to the next player in turn order. None is
@@ -222,6 +195,13 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an
   effect would ask of a player who has already left (800.4g–h: the object's controller picks
   another player, or the next in turn order makes it) — the engine skips that player instead.
+  Left by the 2026-11-20 fixes: a concession puts another player's open `choose-targets` right
+  (`Game.settleTargetChoiceAfterLeave`), but not the other decisions that list objects or players
+  (`choose-permanent-or-player`, a sacrifice of someone else's choosing), not a loss by state-based
+  action with such a choice open, and it only takes options away (a target made legal by the leaving
+  isn't added). And a creature kept alive only by a losing player's static dies in the check they
+  lose in (704.3, `heldMoves`) unless that same check also asks a legend-rule choice, which resumes
+  the check with the player already gone.
 **A shuffled face-down pile keeps its object ids.** Become Anonymous and Expose the Culprit (`Game.cloakExiledPile`) exile cards face up,
 shuffle them and cloak one, but an object keeps its id through the exile, so a client reading the wire or animating by id can tell which
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the

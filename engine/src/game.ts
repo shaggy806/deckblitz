@@ -3717,7 +3717,9 @@ export class Game {
     playerState.hasLost = true;
     playerState.lossReason = "conceded";
     this.emit({ type: "player-lost", player, reason: "conceded" });
+    const offeredFrom = this.targetChoiceZones();
     this.leaveGame(player);
+    this.settleTargetChoiceAfterLeave(player, offeredFrom);
     const priority = this.state.priority;
     if (priority.active && priority.holder === player) {
       priority.holder = this.nextEligibleAfter(player);
@@ -3729,6 +3731,99 @@ export class Game {
       priority.holder = null;
     }
     return this.state.eventLog.slice(from);
+  }
+
+  /** Where each object an open `choose-targets` decision offers is now: read
+   * before a player leaves the game, for `settleTargetChoiceAfterLeave`. */
+  private targetChoiceZones(): ReadonlyMap<ObjectId, ZoneType> {
+    const zones = new Map<ObjectId, ZoneType>();
+    const awaiting = this.state.awaiting;
+    if (awaiting?.kind !== "choose-targets") return zones;
+    for (const t of awaiting.options.flat()) {
+      const object = t.kind === "object" ? this.state.objects[t.object] : undefined;
+      if (object !== undefined) zones.set(object.id, object.zone);
+    }
+    return zones;
+  }
+
+  /**
+   * `left` has just left the game with a `choose-targets` decision of another
+   * player's open. What they own left with them (rule 800.4a) and they are
+   * no player to target, so the decision stops offering either, and anything
+   * their leaving moved (a spell of theirs, what they controlled but didn't
+   * own). `offeredFrom` is `targetChoiceZones` from before they left.
+   *
+   * - A copy's new targets, or a change of targets (`current`): the target a
+   *   slot has stays on offer, legal or not (707.10c, 115.7); if the spell
+   *   being changed left the stack, or no answer is left that changes what
+   *   must change, nothing is asked (115.7a).
+   * - A trigger's targets: a required slot with nothing left to choose
+   *   removes the ability (603.3d), as does its controller leaving (800.4d).
+   * - An opponent's targets for a cast (601.2c): a required slot left empty
+   *   reverses the cast (733.1); the caster leaving ends it.
+   */
+  private settleTargetChoiceAfterLeave(left: PlayerId, offeredFrom: ReadonlyMap<ObjectId, ZoneType>): void {
+    const awaiting = this.state.awaiting;
+    if (awaiting?.kind !== "choose-targets" || awaiting.player === left) return;
+    const gone = (t: TargetRef): boolean => {
+      if (t.kind === "player") return this.state.players[t.player]?.hasLost === true;
+      const object = this.state.objects[t.object];
+      return (
+        object === undefined ||
+        this.state.players[object.owner]?.hasLost === true ||
+        (offeredFrom.has(t.object) && offeredFrom.get(t.object) !== object.zone)
+      );
+    };
+    const current = awaiting.current;
+    const options = awaiting.options.map((slot, i) =>
+      slot.filter((t) => (current?.[i] != null && sameTargetRef(t, current[i])) || !gone(t)),
+    );
+    const drop = (): void => {
+      this.state.awaiting = null;
+      this.state.pendingRetarget = null;
+      this.state.pendingCopyTargets = null;
+      this.state.pendingTargetedTrigger = null;
+      this.prepareForPriority(this.activePlayer);
+    };
+    const emptied = options.some((slot, i) => slot.length === 0 && !isOptionalSpec(awaiting.specs[i]));
+
+    const ask = awaiting.otherCast;
+    if (ask !== undefined) {
+      const caster = ask.action.player;
+      if (caster !== left && !emptied) {
+        this.state.awaiting = { ...awaiting, options };
+        return;
+      }
+      this.state.awaiting = null;
+      if (caster !== left) {
+        const object = ask.action.type === "cast-spell" ? ask.action.card : ask.action.source;
+        if (ask.castNow === undefined) this.state.priority.holder = caster;
+        this.emit({ type: "cast-reversed", player: caster, object, reason: "a target left the game" });
+      }
+      this.prepareForPriority(ask.castNow === undefined && caster !== left ? caster : this.activePlayer);
+      return;
+    }
+
+    const retarget = this.state.pendingRetarget;
+    if (retarget != null && current !== undefined) {
+      const changes = options.map((slot, i) => slot.some((t) => current[i] == null || !sameTargetRef(t, current[i])));
+      // Every slot must change ("change the target", its own left out of the
+      // options), exactly one ("change a target"), or none need to.
+      const keeps = options.every((slot, i) => current[i] == null || slot.some((t) => sameTargetRef(t, current[i])));
+      const answerable = awaiting.changeOne === true ? changes.some(Boolean) : keeps || !emptied;
+      if (this.state.objects[retarget.object]?.zone !== "stack" || !answerable) {
+        drop();
+        return;
+      }
+    }
+    const trigger = this.state.pendingTargetedTrigger;
+    if (retarget == null && this.state.pendingCopyTargets == null && trigger !== null) {
+      if (trigger.controller === left || emptied) {
+        drop();
+        return;
+      }
+    }
+    this.state.awaiting = { ...awaiting, options };
   }
 
   /** Why `action` cannot be dispatched right now, or `null` if it can. */
@@ -69489,6 +69584,7 @@ controlledBy,
 
       // Who this check eliminates, for the moves it makes (`lostInThisCheck`).
       const lostNow: PlayerId[] = [];
+      let heldMoves: ReturnType<Game["stateBasedGraveyardMoves"]>["moves"] | null = null;
       for (const player of this.state.turnOrder) {
         const playerState = this.state.players[player];
         if (playerState.hasLost) continue;
@@ -69519,6 +69615,11 @@ controlledBy,
         // instead …", rule 614.6); the next pass sees what it changed.
         if (reason !== null && !playerCantLoseGame(this.state, this.registry, player)) {
           if (!this.loseGameReplaced(player, reason)) {
+            // What this check puts into graveyards is found with everyone
+            // still in the game (rule 704.3: every condition is read, then
+            // all of it performed at once): a creature at lethal damage only
+            // under the losing player's Elesh Norn dies with them.
+            heldMoves ??= this.stateBasedGraveyardMoves().moves;
             this.eliminate(player, reason);
             lostNow.push(player);
           }
@@ -69563,7 +69664,21 @@ controlledBy,
           return;
         }
       }
-      const { moves: sweep, legend } = this.stateBasedGraveyardMoves();
+      const { moves: found, legend } = this.stateBasedGraveyardMoves();
+      // With what was found before anyone was eliminated (`heldMoves`), less
+      // what left the game with them (rule 800.4a).
+      const sweep =
+        heldMoves === null
+          ? found
+          : [
+              ...found,
+              ...heldMoves.filter((held) => {
+                const object = this.state.objects[held.id];
+                return (
+                  object?.zone === "battlefield" && this.inGame(object) && !found.some((move) => move.id === held.id)
+                );
+              }),
+            ];
       // The legend rule is a choice (704.5j): asked before anything moves, so
       // that when every choice is made the check still performs all it found
       // at once (704.3). Resumed by the answer.

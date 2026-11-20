@@ -207,6 +207,33 @@ describe("a permanent whose owner has left the game (rule 800.4a)", () => {
     expect(zone(game, next)).toBe("graveyard");
   });
 
+  it("what a losing player's static keeps at lethal damage dies in the check they lose in (rule 704.3)", () => {
+    // Every condition is read before any is acted on: the Giant is 1/1 with
+    // 1 damage under Bob's Elesh Norn as the check finds Bob at 0 life.
+    const { game } = table({ players: 3 });
+    spawn(game, "Elesh Norn, Grand Cenobite", B);
+    const giant = spawn(game, "Hill Giant");
+    const bobs = spawn(game, "Hill Giant", B);
+    spawn(game, "Forest");
+    const elves = toHand(game, "Llanowar Elves");
+    game.debugApplyEffect(
+      C,
+      {
+        kind: "sequence",
+        effects: [
+          { kind: "damage", amount: 20, target: 0 },
+          { kind: "damage", amount: 1, target: 1 },
+        ],
+      },
+      [ref(B), ref(giant)],
+    );
+    cast(game, elves);
+    expect(game.state.players[B].hasLost).toBe(true);
+    expect(zone(game, giant)).toBe("graveyard");
+    // What Bob owned left the game with him, where it was: nothing moves it.
+    expect(zone(game, bobs)).toBe("battlefield");
+  });
+
   it("no scan in game.ts reads a permanent's statics from the registry itself", () => {
     // `Game.ownStatics` is the one place: a scan that goes round it reads a
     // departed player's permanents as live.
