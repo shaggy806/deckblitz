@@ -6212,6 +6212,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("'until end of turn, if one or more creatures would enter from exile …, their owners shuffle them into their libraries instead' (Don't Blink)", () => {
+    const blink = face(
+      "Until end of turn, if one or more creatures would enter from exile or after being cast from exile, their owners shuffle them into their libraries instead.",
+      "Instant",
+    );
+    expect(blink.effect).toEqual({
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: { type: "creature", anyOf: [{ enteredFrom: "exile" }, { castFrom: "exile" }] },
+        shuffleInstead: true,
+      },
+    });
+  });
+
   it("'each time target permanent would deal damage … this turn, it deals double that damage' (Overblaze)", () => {
     const blaze = face(
       "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.",

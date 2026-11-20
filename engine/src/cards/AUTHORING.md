@@ -8095,6 +8095,15 @@ clause (section 9):
   `filter: { type: "creature", cast: false }`, and a creature token is put
   into exile as it's minted, never created (701.7a), ceasing to exist (111.7
   — its ruling). `token-enter-exile-instead.test.ts`.
+  `shuffleInstead: true` is the same with "its owner shuffles it into their
+  library instead" (701.24a), ordered the same way: Don't Blink's "until end
+  of turn, if one or more creatures would enter from exile or after being
+  cast from exile, their owners shuffle them into their libraries instead"
+  is a `replacement-effect` of `filter: { type: "creature", anyOf: [{
+  enteredFrom: "exile" }, { castFrom: "exile" }] }` (a cast spell's entry is
+  from the stack, so "cast from exile" is `castFrom`). Where an exile and a
+  shuffle both reach one, the first found applies, unasked (§15,
+  "Replacement ordering"). `enter-shuffle-instead.test.ts`.
   `underYou: true` is "it enters under your control instead" (rule 614.1a),
   resolved ones only: Gather Specimens' "if a creature would enter the
   battlefield under an opponent's control this turn, it enters under your

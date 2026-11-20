@@ -684,6 +684,19 @@ export interface OthersEnterReplacement {
    */
   readonly exileInstead?: true;
   /**
+   * It doesn't enter: its owner shuffles it into their library instead (rule
+   * 614.6; 701.24a). Don't Blink's "until end of turn, if one or more
+   * creatures would enter from exile or after being cast from exile, their
+   * owners shuffle them into their libraries instead" is a resolved one,
+   * `filter: { type: "creature", anyOf: [{ enteredFrom: "exile" }, {
+   * castFrom: "exile" }] }` — judged as `exileInstead`'s is, as it would
+   * exist on the battlefield with the entry its move would record, and
+   * ordered against the entrant's own "as this enters" actions the same way
+   * (`Game.exileInsteadOrderAsked`). A token is put there and ceases to
+   * exist (rule 111.7).
+   */
+  readonly shuffleInstead?: true;
+  /**
    * It enters under **your** control instead (rule 614.1a) — Gather
    * Specimens' "if a creature would enter the battlefield under an opponent's
    * control this turn, it enters under your control instead", `filter: {

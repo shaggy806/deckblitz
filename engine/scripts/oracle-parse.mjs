@@ -7965,6 +7965,18 @@ export function parseSentence(sentence, ctx) {
       },
     };
   }
+  // Don't Blink: shuffled into their owners' libraries instead (701.24a).
+  if (/^until end of turn, if one or more creatures would enter from exile or after being cast from exile, their owners shuffle them into their libraries instead\.$/i.test(s)) {
+    return {
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: {
+        event: "others-enter-battlefield",
+        filter: { type: "creature", anyOf: [{ enteredFrom: "exile" }, { castFrom: "exile" }] },
+        shuffleInstead: true,
+      },
+    };
+  }
 
   // Mana.
   if ((m = /^add ((?:\{[WUBRGC]\})+)\.$/i.exec(s))) {

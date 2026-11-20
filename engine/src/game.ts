@@ -498,7 +498,7 @@ import {
   type RollShiftOption,
   type RollThen,
 } from "./random-results.js";
-import type { CoinFlipReplacement, DiceRollReplacement, ReplacementSpec, VillainousChoiceReplacement } from "./replacements.js";
+import type { CoinFlipReplacement, DiceRollReplacement, OthersEnterReplacement, ReplacementSpec, VillainousChoiceReplacement } from "./replacements.js";
 import {
   COLORS,
   MANA_TYPES,
@@ -1005,6 +1005,14 @@ function onlyAResolutionReads(who: PlayerScope): boolean {
 /** A target's id: the object's, or the player's (the two never collide). */
 function targetRefId(ref: TargetRef): ObjectId | PlayerId {
   return ref.kind === "object" ? ref.object : ref.player;
+}
+
+/** An `others-enter-battlefield` replacement that keeps a permanent from
+ * entering (rule 614.6), and where it goes instead: `exileInstead`'s exile, or
+ * `shuffleInstead`'s owner's library, shuffled. */
+interface EnterKeptOut {
+  readonly source: ObjectId;
+  readonly to: "exile" | "library";
 }
 
 /** A `would-draw` replacement that makes the draw an effect: whose, and the
@@ -12692,8 +12700,7 @@ export class Game {
     if (awaiting.asEntersOf !== undefined) {
       this.state.awaiting = null;
       if (awaiting.destination === "graveyard") this.putFromExileAsEntering(awaiting.asEntersOf, chosen, awaiting.max);
-      else if (awaiting.destination === "discard") this.discardAsEntering(awaiting.asEntersOf, player, chosen);
-      else this.exileAsEntering(awaiting.asEntersOf, chosen);
+      else if (awaiting.destination === "discard") this.discardAsEntering(awaiting.asEntersOf, player, chosen);      else this.exileAsEntering(awaiting.asEntersOf, chosen);
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
@@ -53771,12 +53778,16 @@ controlledBy,
     // was never created (701.7a): no entry, nothing on its list, and the
     // next state-based check ends it. `mintTokenBatch` leaves it out of what
     // it made.
-    if (!skipBattlefield && this.enterExilers(id, under, {}, true).length > 0) {
+    // So with "its owner shuffles it into their library instead": put there,
+    // the library shuffled (701.24a), and gone at the next check.
+    const tokenInstead = skipBattlefield ? undefined : this.enterExilers(id, under, {}, true)[0];
+    if (tokenInstead !== undefined) {
       const token = this.state.objects[id];
-      token.zone = "exile";
-      this.state.zones.shared.exile.push(id);
+      token.zone = tokenInstead.to;
+      this.zoneList(tokenInstead.to, token.owner).push(id);
       (this.state.tokensLeftBattlefield ??= []).push(id);
       invalidateComputedCache();
+      if (tokenInstead.to === "library") this.shuffleLibraryOf(token.owner);
       return id;
     }
     // Either source of "enters tapped" is enough — the token's own replacement
@@ -71475,10 +71486,13 @@ controlledBy,
     /** A token being minted straight onto the battlefield, not yet on its
      * list (`mintFreshTokenObject`): judged where it is. */
     minted = false,
-  ): ObjectId[] {
+  ): EnterKeptOut[] {
     const object = this.state.objects[id];
     if (object === undefined || (object.zone === "battlefield" && !minted)) return [];
-    const candidates: { readonly source: ObjectId; readonly filter: CardFilter; readonly you: PlayerId }[] = [];
+    const candidates: { readonly source: ObjectId; readonly filter: CardFilter; readonly you: PlayerId; readonly to: EnterKeptOut["to"] }[] = [];
+    // "Exile it instead" or "its owner shuffles it into their library instead".
+    const insteadTo = (r: OthersEnterReplacement): EnterKeptOut["to"] | undefined =>
+      r.exileInstead === true ? "exile" : r.shuffleInstead === true ? "library" : undefined;
     for (const sourceId of this.state.zones.shared.battlefield) {
       if (sourceId === id || this.enterBatch?.has(sourceId) === true) continue;
       const source = this.state.objects[sourceId];
@@ -71486,15 +71500,19 @@ controlledBy,
       if (this.state.players[source.controller]?.hasLost === true) continue;
       for (const ability of this.staticsOfSource(source)) {
         const r = ability.replacement;
-        if (r?.event !== "others-enter-battlefield" || r.exileInstead !== true || !this.staticActive(source, ability)) continue;
-        candidates.push({ source: sourceId, filter: r.filter, you: source.controller });
+        if (r?.event !== "others-enter-battlefield") continue;
+        const to = insteadTo(r);
+        if (to === undefined || !this.staticActive(source, ability)) continue;
+        candidates.push({ source: sourceId, filter: r.filter, you: source.controller, to });
       }
     }
     for (const active of this.state.activeReplacements) {
       const r = active.replacement;
-      if (r.event !== "others-enter-battlefield" || r.exileInstead !== true) continue;
+      if (r.event !== "others-enter-battlefield") continue;
+      const to = insteadTo(r);
+      if (to === undefined) continue;
       if (this.state.players[active.owner]?.hasLost === true || !this.activeReplacementStands(active)) continue;
-      candidates.push({ source: active.source, filter: r.filter, you: active.owner });
+      candidates.push({ source: active.source, filter: r.filter, you: active.owner, to });
     }
     if (candidates.length === 0) return [];
     return this.judgedAsEntering(id, under, enter, () =>
@@ -71505,7 +71523,7 @@ controlledBy,
             source: c.source,
           }),
         )
-        .map((c) => c.source),
+        .map((c) => ({ source: c.source, to: c.to })),
     );
   }
 
@@ -71662,8 +71680,9 @@ controlledBy,
     // A resolved one's source may be a token that has ceased to exist since
     // (a sacrificed token copy of Mistcaller): named as `enterCopiersFor`
     // names one.
-    const exiler = this.state.objects[exilers[0]] as GameObject | undefined;
+    const exiler = this.state.objects[exilers[0].source] as GameObject | undefined;
     const exilerName = exiler?.cardName ?? "An effect";
+    const goes = exilers[0].to === "library" ? "shuffled into its owner's library" : "exiled";
     this.state.awaiting = {
       kind: "replacement-order",
       player: chooser,
@@ -71672,15 +71691,15 @@ controlledBy,
         {
           key: "exile",
           name: exilerName,
-          text: "exiles it instead",
-          result: `${object.cardName} is exiled and does nothing as it enters`,
+          text: exilers[0].to === "library" ? "has its owner shuffle it into their library instead" : "exiles it instead",
+          result: `${object.cardName} is ${goes} and does nothing as it enters`,
           ...(exiler !== undefined ? { object: exiler.id } : {}),
         },
         {
           key: "own",
           name: object.cardName,
           text: "does what it does as it enters",
-          result: `that happens, then ${object.cardName} is exiled`,
+          result: `that happens, then ${object.cardName} is ${goes}`,
         },
       ],
       // Its own first gives a choice that can only add (Sin's counters off an
@@ -73810,14 +73829,20 @@ controlledBy,
       return false;
     }
     // Another permanent's "exile it instead" (Containment Priest — rule
-    // 614.6): it never enters. Already in exile, it stays there.
-    if (
-      to === "battlefield" &&
-      object.zone !== "battlefield" &&
-      this.enterExilers(id, this.enteringUnder(id, enter.under ?? object.controller, enter), enter).length > 0
-    ) {
+    // 614.6): it never enters. Already in exile, it stays there. Or "its
+    // owner shuffles it into their library instead" (Don't Blink — 701.24a):
+    // put there, then that library shuffled. Where both reach it, the first
+    // found applies (no order asked — AUTHORING §15, "Replacement ordering").
+    const enterInstead =
+      to === "battlefield" && object.zone !== "battlefield"
+        ? this.enterExilers(id, this.enteringUnder(id, enter.under ?? object.controller, enter), enter)[0]
+        : undefined;
+    if (enterInstead !== undefined) {
       object.enterChoice = undefined;
-      if (object.zone !== "exile") this.moveObjectUncached(id, "exile", {});
+      if (enterInstead.to === "library") {
+        if (object.zone !== "library") this.moveObjectUncached(id, "library", { libraryPlacement: "shuffle" });
+        this.shuffleLibraryOf(object.owner);
+      } else if (object.zone !== "exile") this.moveObjectUncached(id, "exile", {});
       return false;
     }
     const leavingBattlefield = object.zone === "battlefield" && to !== "battlefield";
