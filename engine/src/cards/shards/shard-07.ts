@@ -272,6 +272,7 @@ import _poolEmbraalBruiser from "../pool/embraal-bruiser.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
 import _poolEndBlazeEpiphany from "../pool/end-blaze-epiphany.js";
+import _poolEnduringRenewal from "../pool/enduring-renewal.js";
 import _poolEnormousEnergyBlade from "../pool/enormous-energy-blade.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
 import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
@@ -1350,6 +1351,7 @@ const shard: CardShard = {
     _poolEmeraldDragonfly,
     _poolEncroachingWastes,
     _poolEndBlazeEpiphany,
+    _poolEnduringRenewal,
     _poolEnormousEnergyBlade,
     _poolEnterTheEnigma,
     _poolErebosGodOfTheDead,

@@ -95,6 +95,7 @@ import _poolBorosReckoner from "../pool/boros-reckoner.js";
 import _poolBoshIronGolem from "../pool/bosh-iron-golem.js";
 import _poolBrainWeevil from "../pool/brain-weevil.js";
 import _poolBreakTies from "../pool/break-ties.js";
+import _poolBreathstealersCrypt from "../pool/breathstealers-crypt.js";
 import _poolBrenardGingerSculptor from "../pool/brenard-ginger-sculptor.js";
 import _poolBronzeBombshell from "../pool/bronze-bombshell.js";
 import _poolBrowbeat from "../pool/browbeat.js";
@@ -1091,6 +1092,7 @@ const shard: CardShard = {
     _poolBoshIronGolem,
     _poolBrainWeevil,
     _poolBreakTies,
+    _poolBreathstealersCrypt,
     _poolBrenardGingerSculptor,
     _poolBronzeBombshell,
     _poolBrowbeat,

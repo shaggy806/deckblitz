@@ -1037,6 +1037,7 @@ import _poolZogTriceratonCastaway from "../pool/zog-triceraton-castaway.js";
 import _poolZombieMaster from "../pool/zombie-master.js";
 import _poolZukoAvatarHunter from "../pool/zuko-avatar-hunter.js";
 import _poolZuriWarriorOfWakanda from "../pool/zuri-warrior-of-wakanda.js";
+import _poolZursWeirding from "../pool/zurs-weirding.js";
 import _tokens22BlackBirdToken from "../tokens/2-2-black-bird-token.js";
 import _tokens44RedOgreToken from "../tokens/4-4-red-ogre-token.js";
 import _tokensCentaurToken33 from "../tokens/centaur-token-3-3.js";
@@ -2100,6 +2101,7 @@ const shard: CardShard = {
     _poolZombieMaster,
     _poolZukoAvatarHunter,
     _poolZuriWarriorOfWakanda,
+    _poolZursWeirding,
   ],
   tokens: [
     _tokens22BlackBirdToken,

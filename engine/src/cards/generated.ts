@@ -3468,6 +3468,7 @@ import _poolBreatheYourLast from "./pool/breathe-your-last.js";
 import _poolBreathkeeperSeraph from "./pool/breathkeeper-seraph.js";
 import _poolBreathlessKnight from "./pool/breathless-knight.js";
 import _poolBreathstealer from "./pool/breathstealer.js";
+import _poolBreathstealersCrypt from "./pool/breathstealers-crypt.js";
 import _poolBredForTheHunt from "./pool/bred-for-the-hunt.js";
 import _poolBreechesBrazenPlunderer from "./pool/breeches-brazen-plunderer.js";
 import _poolBreechesEagerPillager from "./pool/breeches-eager-pillager.js";
@@ -8555,6 +8556,7 @@ import _poolEnduringCourage from "./pool/enduring-courage.js";
 import _poolEnduringCuriosity from "./pool/enduring-curiosity.js";
 import _poolEnduringIdeal from "./pool/enduring-ideal.js";
 import _poolEnduringInnocence from "./pool/enduring-innocence.js";
+import _poolEnduringRenewal from "./pool/enduring-renewal.js";
 import _poolEnduringScalelord from "./pool/enduring-scalelord.js";
 import _poolEnduringSliver from "./pool/enduring-sliver.js";
 import _poolEnduringTenacity from "./pool/enduring-tenacity.js";
@@ -10187,6 +10189,7 @@ import _poolForatog from "./pool/foratog.js";
 import _poolForayOfOrcs from "./pool/foray-of-orcs.js";
 import _poolForbid from "./pool/forbid.js";
 import _poolForbiddenAlchemy from "./pool/forbidden-alchemy.js";
+import _poolForbiddenCrypt from "./pool/forbidden-crypt.js";
 import _poolForbiddenFriendship from "./pool/forbidden-friendship.js";
 import _poolForbiddenLore from "./pool/forbidden-lore.js";
 import _poolForbiddenOrchard from "./pool/forbidden-orchard.js";
@@ -32869,6 +32872,7 @@ import _poolZurgoStormrender from "./pool/zurgo-stormrender.js";
 import _poolZurgoThundersDecree from "./pool/zurgo-thunders-decree.js";
 import _poolZurgosVanguard from "./pool/zurgos-vanguard.js";
 import _poolZuriWarriorOfWakanda from "./pool/zuri-warrior-of-wakanda.js";
+import _poolZursWeirding from "./pool/zurs-weirding.js";
 import _poolZurzothChaosRider from "./pool/zurzoth-chaos-rider.js";
 import _poolZygonInfiltrator from "./pool/zygon-infiltrator.js";
 import _tokens00TrampleOozeToken from "./tokens/0-0-trample-ooze-token.js";
@@ -37131,6 +37135,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBreathkeeperSeraph,
   _poolBreathlessKnight,
   _poolBreathstealer,
+  _poolBreathstealersCrypt,
   _poolBredForTheHunt,
   _poolBreechesBrazenPlunderer,
   _poolBreechesEagerPillager,
@@ -42218,6 +42223,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEnduringCuriosity,
   _poolEnduringIdeal,
   _poolEnduringInnocence,
+  _poolEnduringRenewal,
   _poolEnduringScalelord,
   _poolEnduringSliver,
   _poolEnduringTenacity,
@@ -43850,6 +43856,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForayOfOrcs,
   _poolForbid,
   _poolForbiddenAlchemy,
+  _poolForbiddenCrypt,
   _poolForbiddenFriendship,
   _poolForbiddenLore,
   _poolForbiddenOrchard,
@@ -66532,6 +66539,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZurgoThundersDecree,
   _poolZurgosVanguard,
   _poolZuriWarriorOfWakanda,
+  _poolZursWeirding,
   _poolZurzothChaosRider,
   _poolZygonInfiltrator,
 ];
@@ -70807,6 +70815,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/breathkeeper-seraph": _poolBreathkeeperSeraph,
   "pool/breathless-knight": _poolBreathlessKnight,
   "pool/breathstealer": _poolBreathstealer,
+  "pool/breathstealers-crypt": _poolBreathstealersCrypt,
   "pool/bred-for-the-hunt": _poolBredForTheHunt,
   "pool/breeches-brazen-plunderer": _poolBreechesBrazenPlunderer,
   "pool/breeches-eager-pillager": _poolBreechesEagerPillager,
@@ -75894,6 +75903,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/enduring-curiosity": _poolEnduringCuriosity,
   "pool/enduring-ideal": _poolEnduringIdeal,
   "pool/enduring-innocence": _poolEnduringInnocence,
+  "pool/enduring-renewal": _poolEnduringRenewal,
   "pool/enduring-scalelord": _poolEnduringScalelord,
   "pool/enduring-sliver": _poolEnduringSliver,
   "pool/enduring-tenacity": _poolEnduringTenacity,
@@ -77526,6 +77536,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/foray-of-orcs": _poolForayOfOrcs,
   "pool/forbid": _poolForbid,
   "pool/forbidden-alchemy": _poolForbiddenAlchemy,
+  "pool/forbidden-crypt": _poolForbiddenCrypt,
   "pool/forbidden-friendship": _poolForbiddenFriendship,
   "pool/forbidden-lore": _poolForbiddenLore,
   "pool/forbidden-orchard": _poolForbiddenOrchard,
@@ -100208,6 +100219,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zurgo-thunders-decree": _poolZurgoThundersDecree,
   "pool/zurgos-vanguard": _poolZurgosVanguard,
   "pool/zuri-warrior-of-wakanda": _poolZuriWarriorOfWakanda,
+  "pool/zurs-weirding": _poolZursWeirding,
   "pool/zurzoth-chaos-rider": _poolZurzothChaosRider,
   "pool/zygon-infiltrator": _poolZygonInfiltrator,
   "tokens/0-0-trample-ooze-token": _tokens00TrampleOozeToken,

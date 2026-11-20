@@ -328,6 +328,7 @@ import _poolFlurryOfWings from "../pool/flurry-of-wings.js";
 import _poolFogwellsGym from "../pool/fogwells-gym.js";
 import _poolFollowedFootsteps from "../pool/followed-footsteps.js";
 import _poolFoolsTome from "../pool/fools-tome.js";
+import _poolForbiddenCrypt from "../pool/forbidden-crypt.js";
 import _poolForceAway from "../pool/force-away.js";
 import _poolForceOfVirtue from "../pool/force-of-virtue.js";
 import _poolForceVoid from "../pool/force-void.js";
@@ -1400,6 +1401,7 @@ const shard: CardShard = {
     _poolFogwellsGym,
     _poolFollowedFootsteps,
     _poolFoolsTome,
+    _poolForbiddenCrypt,
     _poolForceAway,
     _poolForceOfVirtue,
     _poolForceVoid,
