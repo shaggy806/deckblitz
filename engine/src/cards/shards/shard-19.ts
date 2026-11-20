@@ -547,6 +547,7 @@ import _poolKnightOfTheKeep from "../pool/knight-of-the-keep.js";
 import _poolKnightsOfThorn from "../pool/knights-of-thorn.js";
 import _poolKnowledgeVault from "../pool/knowledge-vault.js";
 import _poolKothophedSoulHoarder from "../pool/kothophed-soul-hoarder.js";
+import _poolKotoseTheSilentSpider from "../pool/kotose-the-silent-spider.js";
 import _poolKrondTheDawnClad from "../pool/krond-the-dawn-clad.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
 import _poolKykarWindsFury from "../pool/kykar-winds-fury.js";
@@ -1651,6 +1652,7 @@ const shard: CardShard = {
     _poolKnightsOfThorn,
     _poolKnowledgeVault,
     _poolKothophedSoulHoarder,
+    _poolKotoseTheSilentSpider,
     _poolKrondTheDawnClad,
     _poolKrovikanFetish,
     _poolKykarWindsFury,

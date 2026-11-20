@@ -543,6 +543,7 @@ import _poolMazeSentinel from "../pool/maze-sentinel.js";
 import _poolMeatLocker from "../pool/meat-locker.js";
 import _poolMechanNavigator from "../pool/mechan-navigator.js";
 import _poolMeglonoth from "../pool/meglonoth.js";
+import _poolMeliraTheLivingCure from "../pool/melira-the-living-cure.js";
 import _poolMetalworkColossus from "../pool/metalwork-colossus.js";
 import _poolMetathranElite from "../pool/metathran-elite.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
@@ -1619,6 +1620,7 @@ const shard: CardShard = {
     _poolMeatLocker,
     _poolMechanNavigator,
     _poolMeglonoth,
+    _poolMeliraTheLivingCure,
     _poolMetalworkColossus,
     _poolMetathranElite,
     _poolMidnightScavengers,

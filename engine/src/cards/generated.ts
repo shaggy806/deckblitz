@@ -13943,6 +13943,7 @@ import _poolInfiniteDiversity from "./pool/infinite-diversity.js";
 import _poolInfiniteGuidelineStation from "./pool/infinite-guideline-station.js";
 import _poolInfiniteHourglass from "./pool/infinite-hourglass.js";
 import _poolInfiniteObliteration from "./pool/infinite-obliteration.js";
+import _poolInfiniteReflection from "./pool/infinite-reflection.js";
 import _poolInfinityFormula from "./pool/infinity-formula.js";
 import _poolInfirmaryHealer from "./pool/infirmary-healer.js";
 import _poolInflame from "./pool/inflame.js";
@@ -15496,6 +15497,7 @@ import _poolKothsCourier from "./pool/koths-courier.js";
 import _poolKotisSibsigChampion from "./pool/kotis-sibsig-champion.js";
 import _poolKotisTheFangkeeper from "./pool/kotis-the-fangkeeper.js";
 import _poolKotoriPilotProdigy from "./pool/kotori-pilot-prodigy.js";
+import _poolKotoseTheSilentSpider from "./pool/kotose-the-silent-spider.js";
 import _poolKoyaDeathFromAbove from "./pool/koya-death-from-above.js";
 import _poolKozilekButcherOfTruth from "./pool/kozilek-butcher-of-truth.js";
 import _poolKozilekTheBrokenReality from "./pool/kozilek-the-broken-reality.js";
@@ -17383,6 +17385,7 @@ import _poolMelesseSpirit from "./pool/melesse-spirit.js";
 import _poolMeletisAstronomer from "./pool/meletis-astronomer.js";
 import _poolMeletisCharlatan from "./pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "./pool/melira-sylvok-outcast.js";
+import _poolMeliraTheLivingCure from "./pool/melira-the-living-cure.js";
 import _poolMelirasKeepers from "./pool/meliras-keepers.js";
 import _poolMelkotianAdjudicator from "./pool/melkotian-adjudicator.js";
 import _poolMelokuTheCloudedMirror from "./pool/meloku-the-clouded-mirror.js";
@@ -21725,6 +21728,7 @@ import _poolRainOfBlades from "./pool/rain-of-blades.js";
 import _poolRainOfDaggers from "./pool/rain-of-daggers.js";
 import _poolRainOfEmbers from "./pool/rain-of-embers.js";
 import _poolRainOfFilth from "./pool/rain-of-filth.js";
+import _poolRainOfGore from "./pool/rain-of-gore.js";
 import _poolRainOfRevelation from "./pool/rain-of-revelation.js";
 import _poolRainOfRiches from "./pool/rain-of-riches.js";
 import _poolRainOfRust from "./pool/rain-of-rust.js";
@@ -27760,6 +27764,7 @@ import _poolSyndicateMessenger from "./pool/syndicate-messenger.js";
 import _poolSyndicateTrafficker from "./pool/syndicate-trafficker.js";
 import _poolSynodArtificer from "./pool/synod-artificer.js";
 import _poolSynodCenturion from "./pool/synod-centurion.js";
+import _poolSynodSanctum from "./pool/synod-sanctum.js";
 import _poolSynthEradicator from "./pool/synth-eradicator.js";
 import _poolSynthInfiltrator from "./pool/synth-infiltrator.js";
 import _poolSynthesisPod from "./pool/synthesis-pod.js";
@@ -28718,6 +28723,7 @@ import _poolTheSpearOfBashenga from "./pool/the-spear-of-bashenga.js";
 import _poolTheSpearOfLeonidas from "./pool/the-spear-of-leonidas.js";
 import _poolTheSpeedDemon from "./pool/the-speed-demon.js";
 import _poolTheSpiritOasis from "./pool/the-spirit-oasis.js";
+import _poolTheSpotLivingPortal from "./pool/the-spot-living-portal.js";
 import _poolTheSpotsPortal from "./pool/the-spots-portal.js";
 import _poolTheSquadronSinister from "./pool/the-squadron-sinister.js";
 import _poolTheStasisCoffin from "./pool/the-stasis-coffin.js";
@@ -29458,6 +29464,7 @@ import _poolTornado from "./pool/tornado.js";
 import _poolTorpidMoloch from "./pool/torpid-moloch.js";
 import _poolTorporDust from "./pool/torpor-dust.js";
 import _poolTorporOrb from "./pool/torpor-orb.js";
+import _poolTorrentElemental from "./pool/torrent-elemental.js";
 import _poolTorrentOfFire from "./pool/torrent-of-fire.js";
 import _poolTorrentOfSouls from "./pool/torrent-of-souls.js";
 import _poolTorrentOfStone from "./pool/torrent-of-stone.js";
@@ -30882,6 +30889,7 @@ import _poolVesselOfTheAllConsuming from "./pool/vessel-of-the-all-consuming.js"
 import _poolVesselOfVolatility from "./pool/vessel-of-volatility.js";
 import _poolVestigeOfEmrakul from "./pool/vestige-of-emrakul.js";
 import _poolVesuva from "./pool/vesuva.js";
+import _poolVesuvanDoppelganger from "./pool/vesuvan-doppelganger.js";
 import _poolVesuvanDrifter from "./pool/vesuvan-drifter.js";
 import _poolVesuvanDuplimancy from "./pool/vesuvan-duplimancy.js";
 import _poolVesuvanShapeshifter from "./pool/vesuvan-shapeshifter.js";
@@ -47651,6 +47659,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInfiniteGuidelineStation,
   _poolInfiniteHourglass,
   _poolInfiniteObliteration,
+  _poolInfiniteReflection,
   _poolInfinityFormula,
   _poolInfirmaryHealer,
   _poolInflame,
@@ -49204,6 +49213,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKotisSibsigChampion,
   _poolKotisTheFangkeeper,
   _poolKotoriPilotProdigy,
+  _poolKotoseTheSilentSpider,
   _poolKoyaDeathFromAbove,
   _poolKozilekButcherOfTruth,
   _poolKozilekTheBrokenReality,
@@ -51091,6 +51101,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeletisAstronomer,
   _poolMeletisCharlatan,
   _poolMeliraSylvokOutcast,
+  _poolMeliraTheLivingCure,
   _poolMelirasKeepers,
   _poolMelkotianAdjudicator,
   _poolMelokuTheCloudedMirror,
@@ -55433,6 +55444,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRainOfDaggers,
   _poolRainOfEmbers,
   _poolRainOfFilth,
+  _poolRainOfGore,
   _poolRainOfRevelation,
   _poolRainOfRiches,
   _poolRainOfRust,
@@ -61468,6 +61480,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSyndicateTrafficker,
   _poolSynodArtificer,
   _poolSynodCenturion,
+  _poolSynodSanctum,
   _poolSynthEradicator,
   _poolSynthInfiltrator,
   _poolSynthesisPod,
@@ -62426,6 +62439,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheSpearOfLeonidas,
   _poolTheSpeedDemon,
   _poolTheSpiritOasis,
+  _poolTheSpotLivingPortal,
   _poolTheSpotsPortal,
   _poolTheSquadronSinister,
   _poolTheStasisCoffin,
@@ -63166,6 +63180,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTorpidMoloch,
   _poolTorporDust,
   _poolTorporOrb,
+  _poolTorrentElemental,
   _poolTorrentOfFire,
   _poolTorrentOfSouls,
   _poolTorrentOfStone,
@@ -64590,6 +64605,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVesselOfVolatility,
   _poolVestigeOfEmrakul,
   _poolVesuva,
+  _poolVesuvanDoppelganger,
   _poolVesuvanDrifter,
   _poolVesuvanDuplimancy,
   _poolVesuvanShapeshifter,
@@ -81372,6 +81388,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/infinite-guideline-station": _poolInfiniteGuidelineStation,
   "pool/infinite-hourglass": _poolInfiniteHourglass,
   "pool/infinite-obliteration": _poolInfiniteObliteration,
+  "pool/infinite-reflection": _poolInfiniteReflection,
   "pool/infinity-formula": _poolInfinityFormula,
   "pool/infirmary-healer": _poolInfirmaryHealer,
   "pool/inflame": _poolInflame,
@@ -82925,6 +82942,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kotis-sibsig-champion": _poolKotisSibsigChampion,
   "pool/kotis-the-fangkeeper": _poolKotisTheFangkeeper,
   "pool/kotori-pilot-prodigy": _poolKotoriPilotProdigy,
+  "pool/kotose-the-silent-spider": _poolKotoseTheSilentSpider,
   "pool/koya-death-from-above": _poolKoyaDeathFromAbove,
   "pool/kozilek-butcher-of-truth": _poolKozilekButcherOfTruth,
   "pool/kozilek-the-broken-reality": _poolKozilekTheBrokenReality,
@@ -84812,6 +84830,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/meletis-astronomer": _poolMeletisAstronomer,
   "pool/meletis-charlatan": _poolMeletisCharlatan,
   "pool/melira-sylvok-outcast": _poolMeliraSylvokOutcast,
+  "pool/melira-the-living-cure": _poolMeliraTheLivingCure,
   "pool/meliras-keepers": _poolMelirasKeepers,
   "pool/melkotian-adjudicator": _poolMelkotianAdjudicator,
   "pool/meloku-the-clouded-mirror": _poolMelokuTheCloudedMirror,
@@ -89154,6 +89173,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rain-of-daggers": _poolRainOfDaggers,
   "pool/rain-of-embers": _poolRainOfEmbers,
   "pool/rain-of-filth": _poolRainOfFilth,
+  "pool/rain-of-gore": _poolRainOfGore,
   "pool/rain-of-revelation": _poolRainOfRevelation,
   "pool/rain-of-riches": _poolRainOfRiches,
   "pool/rain-of-rust": _poolRainOfRust,
@@ -95189,6 +95209,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/syndicate-trafficker": _poolSyndicateTrafficker,
   "pool/synod-artificer": _poolSynodArtificer,
   "pool/synod-centurion": _poolSynodCenturion,
+  "pool/synod-sanctum": _poolSynodSanctum,
   "pool/synth-eradicator": _poolSynthEradicator,
   "pool/synth-infiltrator": _poolSynthInfiltrator,
   "pool/synthesis-pod": _poolSynthesisPod,
@@ -96147,6 +96168,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-spear-of-leonidas": _poolTheSpearOfLeonidas,
   "pool/the-speed-demon": _poolTheSpeedDemon,
   "pool/the-spirit-oasis": _poolTheSpiritOasis,
+  "pool/the-spot-living-portal": _poolTheSpotLivingPortal,
   "pool/the-spots-portal": _poolTheSpotsPortal,
   "pool/the-squadron-sinister": _poolTheSquadronSinister,
   "pool/the-stasis-coffin": _poolTheStasisCoffin,
@@ -96887,6 +96909,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/torpid-moloch": _poolTorpidMoloch,
   "pool/torpor-dust": _poolTorporDust,
   "pool/torpor-orb": _poolTorporOrb,
+  "pool/torrent-elemental": _poolTorrentElemental,
   "pool/torrent-of-fire": _poolTorrentOfFire,
   "pool/torrent-of-souls": _poolTorrentOfSouls,
   "pool/torrent-of-stone": _poolTorrentOfStone,
@@ -98311,6 +98334,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vessel-of-volatility": _poolVesselOfVolatility,
   "pool/vestige-of-emrakul": _poolVestigeOfEmrakul,
   "pool/vesuva": _poolVesuva,
+  "pool/vesuvan-doppelganger": _poolVesuvanDoppelganger,
   "pool/vesuvan-drifter": _poolVesuvanDrifter,
   "pool/vesuvan-duplimancy": _poolVesuvanDuplimancy,
   "pool/vesuvan-shapeshifter": _poolVesuvanShapeshifter,

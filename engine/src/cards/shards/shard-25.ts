@@ -859,6 +859,7 @@ import _poolSurgingMight from "../pool/surging-might.js";
 import _poolSuspendAggression from "../pool/suspend-aggression.js";
 import _poolSuspiciousStowaway from "../pool/suspicious-stowaway.js";
 import _poolSweepTheSkies from "../pool/sweep-the-skies.js";
+import _poolSynodSanctum from "../pool/synod-sanctum.js";
 import _poolSynthInfiltrator from "../pool/synth-infiltrator.js";
 import _poolTahngarthFirstMate from "../pool/tahngarth-first-mate.js";
 import _poolTaintedPeak from "../pool/tainted-peak.js";
@@ -1882,6 +1883,7 @@ const shard: CardShard = {
     _poolSuspendAggression,
     _poolSuspiciousStowaway,
     _poolSweepTheSkies,
+    _poolSynodSanctum,
     _poolSynthInfiltrator,
     _poolTahngarthFirstMate,
     _poolTaintedPeak,

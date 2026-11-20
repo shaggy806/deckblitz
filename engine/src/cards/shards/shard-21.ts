@@ -870,6 +870,7 @@ import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolTheSoundOfDrums from "../pool/the-sound-of-drums.js";
+import _poolTheSpotLivingPortal from "../pool/the-spot-living-portal.js";
 import _poolTheoreticalDuplication from "../pool/theoretical-duplication.js";
 import _poolThorinCompanysLeader from "../pool/thorin-companys-leader.js";
 import _poolThornbowArcher from "../pool/thornbow-archer.js";
@@ -1884,6 +1885,7 @@ const shard: CardShard = {
     _poolTheRegalia,
     _poolTheSibsigCeremony,
     _poolTheSoundOfDrums,
+    _poolTheSpotLivingPortal,
     _poolTheoreticalDuplication,
     _poolThorinCompanysLeader,
     _poolThornbowArcher,

@@ -732,6 +732,7 @@ import _poolPuppetConjurer from "../pool/puppet-conjurer.js";
 import _poolPutridWarrior from "../pool/putrid-warrior.js";
 import _poolRabidBite from "../pool/rabid-bite.js";
 import _poolRaidingNightstalker from "../pool/raiding-nightstalker.js";
+import _poolRainOfGore from "../pool/rain-of-gore.js";
 import _poolRakdosHeadliner from "../pool/rakdos-headliner.js";
 import _poolRakdosTheDefiler from "../pool/rakdos-the-defiler.js";
 import _poolRallyForTheThrone from "../pool/rally-for-the-throne.js";
@@ -1845,6 +1846,7 @@ const shard: CardShard = {
     _poolPutridWarrior,
     _poolRabidBite,
     _poolRaidingNightstalker,
+    _poolRainOfGore,
     _poolRakdosHeadliner,
     _poolRakdosTheDefiler,
     _poolRallyForTheThrone,
