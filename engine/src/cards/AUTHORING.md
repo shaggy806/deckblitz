@@ -6343,6 +6343,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   cast: rule 118.9a allows one). A card with its own alternative cost
   (Sephara) offers both, a variant each (`altCostIndex`, rules 118.9a, 601.2b).
   An X spell cast this way has X = 0.
+  `manaIsManaValue: true` (with `mana: "{X}"`) is "you may pay {X} rather
+  than pay the mana cost for Samurai spells you cast, where X is that
+  spell's mana value" (Kentaro, the Smiling Cat, `filter: { subtype:
+  "Samurai" }`): {N} generic, N the mana value of the face cast, X 0.
   `payLifeManaValue` makes it life equal to the spell's mana value, with
   `mana: "{0}"`; "once during each of your turns" (Demon of Fate's Design) is
   `oncePerTurn` + `yourTurnOnly`, "cast a spell from your hand" `fromHand`.

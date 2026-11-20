@@ -63936,7 +63936,12 @@ controlledBy,
         }
         seen.add(ability);
         out.push({
-          mana: grant.mana,
+          // "Pay {X} … where X is that spell's mana value" (Kentaro, the
+          // Smiling Cat): the face's mana value, X 0 (rules 601.3e, 107.3b).
+          mana:
+            grant.manaIsManaValue === true
+              ? `{${this.castNowEnergyOf(cardId, Math.max(0, card?.faces?.indexOf(def.name) ?? 0))}}`
+              : grant.mana,
           ...(grant.discard !== undefined ? { discard: grant.discard } : {}),
           ...(grant.collectEvidence !== undefined ? { collectEvidence: grant.collectEvidence } : {}),
           ...(grant.energy !== undefined ? { payEnergy: grant.energy } : {}),

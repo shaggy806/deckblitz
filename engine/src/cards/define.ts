@@ -3382,9 +3382,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * (Crimestopper Sprite) both are paid, from cards set apart, and the
    * evidence is collected twice. It isn't that spell's "if evidence was
    * collected" (rule 701.59c: linked to its own cost).
+   *
+   * `manaIsManaValue` is Kentaro, the Smiling Cat's "you may pay {X} rather
+   * than pay the mana cost for Samurai spells you cast, where X is that
+   * spell's mana value" (`mana: "{X}"`, which it replaces): the cost is
+   * that many generic mana, the mana value of the spell it would be (its
+   * face, rule 601.3e; an {X} in its cost counted as 0, rule 107.3b).
    */
   readonly alternativeCostForSpells?: {
     readonly mana: string;
+    readonly manaIsManaValue?: true;
     readonly filter?: CardFilter;
     readonly discard?: { readonly filter?: CardFilter; readonly sharesColor?: true; readonly text: string };
     readonly collectEvidence?: number;

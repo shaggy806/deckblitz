@@ -4195,6 +4195,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
     const grantOf = (line: string) => face(line, "Enchantment").static[0].alternativeCostForSpells;
     expect(grantOf("You may cast spells from your hand without paying their mana costs.")).toEqual({ mana: "{0}", when: { castFrom: "hand" } });
+    // Kentaro, the Smiling Cat: {X}, X the spell's mana value.
+    expect(
+      grantOf("You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's mana value."),
+    ).toEqual({ mana: "{X}", manaIsManaValue: true, filter: { subtype: "Samurai" } });
     expect(grantOf("You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.")).toEqual({
       mana: "{0}",
 

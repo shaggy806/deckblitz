@@ -24046,6 +24046,18 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "You may pay {X} rather than pay the mana cost for Samurai spells you
+  // cast, where X is that spell's mana value" (Kentaro, the Smiling Cat).
+  if ((m = /^You may pay \{X\} rather than pay the mana cost for (?:(.+?) )?spells you cast, where X is that spell's mana value\.$/.exec(line))) {
+    const filter = m[1] === undefined ? {} : parseTypePhrase(m[1]);
+    if (filter !== null && (m[1] === undefined || Object.keys(filter).length > 0)) {
+      return {
+        affects: { scope: "self" },
+        alternativeCostForSpells: { mana: "{X}", manaIsManaValue: true, ...(m[1] !== undefined ? { filter } : {}) },
+        text,
+      };
+    }
+  }
   // A free cast by an alternative cost (rule 118.9), with its limits.
   if (line === "You may cast spells from your hand without paying their mana costs.") {
     return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } }, text };

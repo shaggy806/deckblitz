@@ -19,6 +19,7 @@
     "replacement:poison-counters-capped",
     "replacement:gain-life-from-spell-or-ability",
     "cost:self-cost-increase-not-your-turn",
+    "cost:alternative-cost-generic-equal-spell-mana-value",
     "trigger:discards-batch-objects",
     "trigger:attack-with-intervening-if",
     "amount:differently-named-dungeons-completed",

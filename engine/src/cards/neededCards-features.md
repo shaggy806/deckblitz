@@ -332,6 +332,12 @@ entry's `condition` before any reduction (rule 601.2f), read in `castingCostOf`.
 The scaffolder reads "During your turn / turns other than yours, ~ costs {N} more to cast" and "~ costs {N} more to
 cast if …" (`costIfCondition`). `test/self-cost-increase.test.ts`.
 
+### An alternative cost of the spell's mana value — built 2026-11-20
+
+The key `cost:alternative-cost-generic-equal-spell-mana-value`: `alternativeCostForSpells.manaIsManaValue`, {N}
+generic with N the face's mana value, X 0 (rules 118.9, 601.3e, 107.3b). Kentaro, the Smiling Cat (18322).
+`test/alt-cost-mana-value.test.ts`.
+
 ### A draw replaced by a card returned from the graveyard, or a loss — found built 2026-11-20
 
 The key `replacement:draw-replacement-return-from-graveyard-or-lose`: Forbidden Crypt (16193). No engine code: Out
