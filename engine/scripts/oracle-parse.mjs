@@ -1776,6 +1776,12 @@ export function parseCost(text) {
       if (count === undefined || filter === null || Object.keys(filter).length === 0) return null;
       cost.sacrifice = { filter, count, ...(m[3] !== undefined ? { differentNames: true } : {}) };
       if (word === "one or more") extra.minX = 1;
+    } else if ((m = /^Sacrifice all (.+?) you control$/.exec(part))) {
+      // "Sacrifice all lands you control" (Tomb of Urami): a cost act, the
+      // source among them when it matches.
+      const filter = parseTypePhrase(m[1]);
+      if (filter === null || Object.keys(filter).length === 0) return null;
+      addCostAct(cost, { kind: "sacrifice-all", who: "you", filter });
     } else if ((m = /^Pay (\d+) life$/.exec(part))) cost.payLife = Number(m[1]);
     else if (part === "Pay half your life") cost.payLife = "half-rounded-up";
     else if (part === "Pay X life") cost.payLife = "x";
@@ -8609,6 +8615,15 @@ export function parseSentence(sentence, ctx) {
     };
   }
   if ((m = re(`~ deals ${N} damage to you`).exec(s))) return { kind: "damage", amount: amount(m[1]), who: "you" };
+  // "~ deals 1 damage to you if you don't control an Ogre" (Tomb of Urami):
+  // the damage only without one — on a mana ability, its `also`.
+  if ((m = re(`~ deals ${N} damage to you if you don't control an? ([A-Z][a-z]+)`).exec(s)) && /^[A-Z]/.test(m[2])) {
+    return {
+      kind: "conditional",
+      condition: { kind: "not", of: { kind: "controls", filter: { subtype: m[2] }, atLeast: 1 } },
+      then: { kind: "damage", amount: amount(m[1]), who: "you" },
+    };
+  }
 
   // Damage and life together (Lightning Helix): two instructions.
   if ((m = re(`~ deals ${N} damage to (${TARGET}) and you gain ${N} life`).exec(s))) {

@@ -8,6 +8,7 @@
     "condition:attacking-two-or-more-opponents",
     "cost:escape-exile-permanent",
     "cost:choose-creature-type-as-cast",
+    "cost:sacrifice-all-lands",
     "trigger:discards-batch-objects",
     "trigger:attack-with-intervening-if",
     "amount:differently-named-dungeons-completed",

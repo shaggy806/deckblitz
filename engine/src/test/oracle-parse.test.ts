@@ -24336,3 +24336,30 @@ describe("targets of the creature type of your choice (Aphetto Dredging, Selecti
     expect(snare.targets).toEqual([{ kind: "any-number", of: "creature", min: "x", max: "x", oneCreatureType: true }]);
   });
 });
+
+describe("a mana ability's damage without an Ogre, and \"Sacrifice all lands you control\" as a cost (Tomb of Urami)", () => {
+  it("reads the damage as the mana ability's conditional `also`, and the sacrifice as a cost act", () => {
+    const tomb = parseFace({
+      name: "Tomb of Urami",
+      type_line: "Legendary Land",
+      mana_cost: "",
+      oracle_text:
+        "{T}: Add {B}. Tomb of Urami deals 1 damage to you if you don't control an Ogre.\n{2}{B}{B}, {T}, Sacrifice all lands you control: Create Urami, a legendary 5/5 black Demon Spirit creature token with flying.",
+    }) as unknown as { activated: { cost: unknown; effect: unknown }[] };
+    expect(tomb.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "B",
+      amount: 1,
+      also: {
+        kind: "conditional",
+        condition: { kind: "not", of: { kind: "controls", filter: { subtype: "Ogre" }, atLeast: 1 } },
+        then: { kind: "damage", amount: 1, who: "you" },
+      },
+    });
+    expect(tomb.activated[1].cost).toEqual({
+      mana: "{2}{B}{B}",
+      tap: true,
+      do: { kind: "sacrifice-all", who: "you", filter: { type: "land" } },
+    });
+  });
+});

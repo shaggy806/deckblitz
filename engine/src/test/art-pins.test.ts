@@ -65,6 +65,8 @@ const NO_TOKEN_PRINTING = new Set([
   // no token printing in the Oracle snapshot.
   "Kaldra",
   "Pincher Token",
+  // Tomb of Urami (SOK)'s Urami: no token printing in the Oracle snapshot.
+  "Urami",
   // One Dozen Eyes (MRD)'s vanilla green 5/5 Beast: no token printing in the
   // Oracle snapshot.
   "5/5 Beast Token",

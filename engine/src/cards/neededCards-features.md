@@ -362,6 +362,13 @@ toughness equal to the chosen number" is an `amounts` condition over an aggregat
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
 `dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
 read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
+### "Sacrifice all lands you control" as a cost — built 2026-11-20
+
+The key `cost:sacrifice-all-lands`, for Tomb of Urami: no engine code — `AbilityCost.do` of `sacrifice-all` (Soulblast's
+spell cost, a `COST_ACTS` row) with `who: "you"`, the source among the lands; the mana ability's "if you don't control
+an Ogre" damage is its `also`, a `conditional` over `not` `controls`. A token, Urami, with no printing. The scaffolder
+reads both lines but the token. `test/sacrifice-all-lands-cost.test.ts`.
+
 ### Targets of the creature type of your choice — built 2026-11-20
 
 The key `cost:choose-creature-type-as-cast`, for Aphetto Dredging and Selective Snare: a target group's
