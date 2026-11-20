@@ -13787,6 +13787,55 @@ export function parseEffect(text, outer) {
       }
       ctx.targets.length = slots;
     }
+    // "For each creature you control, you may search your library for a
+    // creature card with the same name as that creature. Put those cards onto
+    // the battlefield, then shuffle." (Doubling Chant): one search, a slot for
+    // each of those permanents (`together.oneEachSameNameAs`).
+    const perNameM = /^for each (creature|artifact|enchantment|land|permanent) you control, you may search your library for an? (creature |artifact |enchantment |land |)card with the same name as that \1\.$/i.exec(sentence);
+    const perNameRest = /^put those cards onto the battlefield( tapped)?, then shuffle\.$/i.exec(sentences[i + 1] ?? "");
+    if (perNameM !== null && perNameRest !== null) {
+      const word = perNameM[1].toLowerCase();
+      const of = word === "permanent" ? { controlledBy: "you" } : { type: word, controlledBy: "you" };
+      const made = {
+        kind: "search-library",
+        filter: perNameM[2] === "" ? {} : { type: perNameM[2].trim().toLowerCase() },
+        destination: "battlefield",
+        ...(perNameRest[1] !== undefined ? { enterTapped: true } : {}),
+        min: 0,
+        max: { countOf: of },
+        upTo: true,
+        together: { oneEachSameNameAs: of },
+      };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      skip = 1;
+      continue;
+    }
+    // "Exile it. Return it to the battlefield under your control tapped and
+    // attacking at the beginning of the declare attackers step on your next
+    // turn." (Meandering Towershell's attack trigger): its own permanent, back
+    // attacking what its controller chooses then (rule 508.4), never this
+    // turn's combat.
+    if (
+      /^exile (?:it|~)\.$/i.test(sentence) &&
+      /^return it to the battlefield under your control tapped and attacking at the beginning of the declare attackers step on your next turn\.$/i.test(
+        sentences[i + 1] ?? "",
+      )
+    ) {
+      const made = {
+        kind: "flicker",
+        target: "source",
+        underYourControl: true,
+        returnAt: { step: "declare-attackers", whose: "you", which: "next-turn" },
+        tapped: true,
+        attacking: "choose",
+        returnText: "Return it to the battlefield under your control tapped and attacking.",
+      };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      skip = 1;
+      continue;
+    }
     // A graveyard replacement a resolving spell makes for the turn (a
     // `replacement-effect`, rule 614.1a): "If a creature [an opponent controls]
     // would die this turn, exile it instead." (Malicious Eclipse), "If a card
@@ -18982,6 +19031,9 @@ function parseFaceAsWritten(face, ctx = {}) {
       continue;
     }
     // Timing with respect to combat (rule 506.8): the steps it means.
+    // (Not "…the declare attackers step": read, it would read Teleport whole,
+    // whose "can't be blocked this turn" the templates take for a granted
+    // keyword where it's authored as a restriction, rule 611.2c.)
     if (isSpell && /^Cast ~ only during the declare blockers step\.$/.test(line)) {
       out.castOnlyIf = { kind: "turn-structure", steps: ["declare-blockers"] };
       continue;
@@ -19031,9 +19083,6 @@ function parseFaceAsWritten(face, ctx = {}) {
           affects: { scope: "self" },
           replacement: { event: "enters-battlefield", counters: { kind, amount: { ifCondition: kicked, then: words[word], else: 0 } } },
           text,
-    // (Not "…the declare attackers step": read, it would read Teleport whole,
-    // whose "can't be blocked this turn" the templates take for a granted
-    // keyword where it's authored as a restriction, rule 611.2c.)
         });
       }
       if (keyword !== undefined) {

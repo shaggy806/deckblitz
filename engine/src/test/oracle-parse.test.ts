@@ -24528,3 +24528,55 @@ describe("casting-zones lane: The Spot, Kotose, Torrent Elemental, Synod Sanctum
     expect(face.activated[1].effect).toEqual({ kind: "return-exiled-by-source", linked: "battlefield", under: "you" });
   });
 });
+
+describe("oracle-parse: casting-zones lane, 2026-11-20 (a52f)", () => {
+  type Face = { complete: boolean; castOnlyIf?: unknown; effect: unknown; triggered: { effect: unknown }[] };
+  const read = (name: string, type_line: string, oracle_text: string): Face =>
+    parseFace({ name, type_line, oracle_text, mana_cost: "{4}", colors: [] } as never) as unknown as Face;
+
+  it("reads Tears of Rage's counted pump and the delayed sacrifice of those creatures", () => {
+    const face = read(
+      "Tears of Rage",
+      "Instant",
+      "Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.",
+    );
+    expect(face.complete).toBe(true);
+    const attackers = { type: "creature", attacking: true, controlledBy: "you" };
+    expect(face.effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "modify-pt-all", filter: attackers, power: { countOf: { type: "creature", attacking: true } }, toughness: 0 },
+        { kind: "delayed-trigger", remember: { those: { set: { onBattlefield: attackers } } }, effect: { kind: "sacrifice-all" } },
+      ],
+    });
+  });
+
+  it("reads Doubling Chant as one search with a slot for each creature's name", () => {
+    const face = read(
+      "Doubling Chant",
+      "Sorcery",
+      "For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.effect).toMatchObject({
+      kind: "search-library",
+      destination: "battlefield",
+      together: { oneEachSameNameAs: { type: "creature", controlledBy: "you" } },
+    });
+  });
+
+  it("reads Meandering Towershell's exile and return attacking on your next turn", () => {
+    const face = read(
+      "Meandering Towershell",
+      "Creature — Turtle",
+      "Whenever this creature attacks, exile it. Return it to the battlefield under your control tapped and attacking at the beginning of the declare attackers step on your next turn.",
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toMatchObject({
+      kind: "flicker",
+      target: "source",
+      returnAt: { step: "declare-attackers", whose: "you", which: "next-turn" },
+      attacking: "choose",
+    });
+  });
+});

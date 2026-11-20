@@ -2,6 +2,8 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "effect:delayed-sacrifice-modified-this-way",
+    "effect:delayed-return-attacking-next-turn",
     "effect:players-being-attacked-count",
     "target:filter-from-chooser-side",
     "static:cant-attack-player-unless-acted-last-turn",
