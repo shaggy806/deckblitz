@@ -19593,6 +19593,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "couldEnchant" in value ||
       "attachedToPlayerRef" in value ||
       "controlledByRef" in value ||
+      "attackingPlayerRef" in value ||
       "ownedByRef" in value ||
       "wasAttachedTo" in value ||
       "inSet" in value ||
@@ -20000,6 +20001,12 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const { controlledByRef: ref, ...rest } = walked;
       const player = resolvePlayerRef(ref as PlayerRef, ctx);
       walked = { ...rest, controllerIn: player === undefined ? [] : [player] };
+    }
+    // "Creatures attacking that player": whoever the ref names as this applies.
+    if (walked["attackingPlayerRef"] !== undefined) {
+      const { attackingPlayerRef: ref, ...rest } = walked;
+      const player = resolvePlayerRef(ref as PlayerRef, ctx);
+      walked = { ...rest, attackingIn: player === undefined ? [] : [player] };
     }
     // "A permanent owned by the voter": likewise, its owner.
     if (walked["ownedByRef"] !== undefined) {

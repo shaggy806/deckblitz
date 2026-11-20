@@ -1094,6 +1094,11 @@ export type DefenderLife =
    * permanent's controller. An intervening-if (rule 603.4), so it's asked
    * again as the ability resolves, of the same attacked player. */
   | "more-than-another-opponent"
+  /** "Whenever Namor attacks **a player who has more life than you**"
+   * (Namor, Atlantean King): the attacked player's life is greater than this
+   * permanent's controller's. Like dethrone's `"most"`, a trigger condition,
+   * not an intervening-if: asked as the attack is declared and never again. */
+  | "more-than-you"
   /** "…, **if it's attacking** the player with the most life or tied for
    * most life" (Scourge of the Throne): `"most"` as an intervening-if (rule
    * 603.4), asked again as the ability resolves of the player the attacker

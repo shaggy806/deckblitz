@@ -480,6 +480,21 @@ export interface CardFilter {
    * Hospitality's "creatures **attacking enchanted player** have trample".
    * With no source, or one attached to no player, nothing matches. */
   readonly attackingEnchantedPlayer?: true;
+  /** Attacking the one player a {@link PlayerRef} names — the player, not a
+   * planeswalker or battle of theirs (rule 506.3): Namor, Atlantean King's
+   * "other creatures you control attacking **that player**" (`"trigger-player"`:
+   * the player Namor attacked as it triggered). Bound to `attackingIn` as an
+   * effect applies, as `controlledByRef` is; unbound, or naming nobody, it
+   * matches nothing. */
+  readonly attackingPlayerRef?: PlayerRef;
+  /** `attackingPlayerRef` bound — written by `bindDynamicCompares`, never
+   * authored: attacking one of these players, on the battlefield, now. */
+  readonly attackingIn?: readonly PlayerId[];
+  /** Attacking the same player, planeswalker or battle as the filter's source
+   * is attacking now (rule 506.3): Kitesail Skirmisher's "another target
+   * creature **attacking the same player or planeswalker**". With no source,
+   * or a source not attacking, nothing matches. */
+  readonly attackingSameAsSource?: true;
   /** Currently blocking — the mirror of `attacking` (Kangee, Sky Warden's
    * "blocking creatures with flying get +0/+2"). */
   readonly blocking?: boolean;
@@ -2838,6 +2853,18 @@ export function matchesFilter(
   if (filter.attackingPlayer === true) {
     const at = live?.attacking;
     if (at === undefined || at === null || state.players[at as PlayerId] === undefined) return false;
+  }
+  // "Attacking that player": unbound, nothing; bound, the player itself.
+  if (filter.attackingPlayerRef !== undefined && filter.attackingIn === undefined) return false;
+  if (filter.attackingIn !== undefined) {
+    const at = live?.zone === "battlefield" ? live.attacking : null;
+    if (at === null || at === undefined || !filter.attackingIn.includes(at as PlayerId)) return false;
+  }
+  if (filter.attackingSameAsSource === true) {
+    const at = live?.zone === "battlefield" ? live.attacking : null;
+    const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const theirs = by?.zone === "battlefield" ? by.attacking : null;
+    if (at === null || at === undefined || theirs === null || theirs === undefined || at !== theirs) return false;
   }
   if (filter.controlledByDefendingPlayer === true) {
     const controller = live?.controller;

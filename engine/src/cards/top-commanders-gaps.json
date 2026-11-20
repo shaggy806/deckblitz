@@ -3060,7 +3060,9 @@
   "filter:same-name-as-revealed-card",
   "effect:player-hexproof-until-your-next-turn",
   "effect:player-hexproof-until-your-next-turn",
-  "filter:attached-to-source"
+  "filter:attached-to-source",
+  "trigger:attacks-player-with-more-life-than-you",
+  "condition:filter-attacking-same-player"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

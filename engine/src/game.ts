@@ -13978,6 +13978,8 @@ export class Game {
         return others.every((p) => this.state.players[p].life <= attacked.life);
       case "more-than-another-opponent":
         return others.some((p) => p !== you && this.state.players[p].life < attacked.life);
+      case "more-than-you":
+        return defender !== you && this.state.players[you] !== undefined && this.state.players[you].life < attacked.life;
     }
   }
 
