@@ -8433,3 +8433,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **All lands lose all abilities except mana abilities (2026-11-20).** `static:lose-all-abilities-except-mana`: `StaticAbility.exceptManaAbilities` beside `loseAllAbilities` (layer 6, rule 605.1a); `staticAbilityLosses` keeps `lostMana`, read per ability through `abilityLostAt` / `manaAbilitiesLostAt`. Blood Sun. `test/lose-all-except-mana.test.ts`.
 
 **Its own "would die" exiles it with counters (2026-11-20).** `replacement:die-exile-with-counter`: a self `would-be-put-into-graveyard` `exile` replacement's `withCounters` now reaches the move (`Game.ownExileWithCounters`), one of the replacements its controller picks among (616.1). Darigaaz Reincarnated. `test/die-exile-with-counter.test.ts`.
+
+**The next time one or more enter this turn, each with counters (2026-11-20).** `replacement:next-enter-with-counters`: a resolved `others-enter-battlefield` `counters` replacement with `next: true` applies to everything entering in one event, then is spent (`Game.noteEnterShieldSpent`, beside Mystic Reflection's copy shields). Storyweave. `test/next-enter-with-counters.test.ts`.

@@ -8016,6 +8016,14 @@ clause (section 9):
   differ are ordered by the player it enters under (a `replacement-order`),
   except for a token minted straight onto the battlefield, which takes them
   unasked (§15, "Replacement ordering").
+  `counters` with `next: true` on a resolved one is the same "next time" for
+  counters: Storyweave's "the next time one or more enchantment creatures you
+  control enter this turn, each enters with two additional +1/+1 counters on
+  it" is a `replacement-effect` with `next: true`, `duration: "end-of-turn"`
+  and `{ event: "others-enter-battlefield", filter: { types: ["enchantment",
+  "creature"], controlledBy: "you" }, counters: { kind: "+1/+1", amount: 2 } }`
+  — every match entering in that one event gets them, then it's spent
+  (`next-enter-with-counters.test.ts`).
   `exileInstead: true` is "exile it instead": it never enters (rule 614.6).
   Containment Priest's "if a nontoken creature would enter and it wasn't
   cast, exile it instead" is `filter: { type: "creature", token: false, cast:

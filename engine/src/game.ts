@@ -71500,6 +71500,13 @@ controlledBy,
     if (this.enterBatch === null) this.spendEnterShields();
   }
 
+  /** A "next time … enter with counters" shield one entering permanent used,
+   * spent as {@link noteEnterShieldsSpent}'s are, once the event is over. */
+  private noteEnterShieldSpent(shield: ActiveReplacement): void {
+    if (!this.enterShieldsSpent.includes(shield)) this.enterShieldsSpent.push(shield);
+    if (this.enterBatch === null) this.spendEnterShields();
+  }
+
   private spendEnterShields(): void {
     if (this.enterShieldsSpent.length === 0) return;
     const spent = this.enterShieldsSpent;
@@ -71863,14 +71870,20 @@ controlledBy,
     // A resolved one that lasts (rule 611.2c), from its controller's side, the
     // spell or ability's source gone or not — Arlinn, the Pack's Hope's "until
     // your next turn, … each creature you control enters with an additional
-    // +1/+1 counter on it". A "next time" shield is Mystic Reflection's copy,
-    // read where copies are.
+    // +1/+1 counter on it". A "next time" copy shield is Mystic Reflection's,
+    // read where copies are; a "next time" counter shield (Storyweave's "the
+    // next time one or more enchantment creatures you control enter this turn,
+    // each enters with two additional +1/+1 counters") reaches everything
+    // entering in that one event, then it's spent (rule 615.8's "next time",
+    // `spendEnterShields` once the event is over).
     for (const active of this.state.activeReplacements) {
       const r = active.replacement;
       if (r.event !== "others-enter-battlefield" || r.asCopyOf !== undefined) continue;
-      if (active.next === true || active.left !== undefined) continue;
+      if (active.left !== undefined) continue;
+      if (active.next === true && r.counters === undefined) continue;
       if (this.state.players[active.owner]?.hasLost === true) continue;
       if (!matchesFilter(this.state, this.registry, id, r.filter, { you: active.owner, source: active.source })) continue;
+      if (active.next === true && !this.probingEnter) this.noteEnterShieldSpent(active);
       if (r.counters !== undefined) {
         addCounters(r.counters.kind, this.enteringCounterAmount(active.source, active.owner, id, r.counters.amount));
       }
