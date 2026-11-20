@@ -23,6 +23,7 @@ describe("Doubling Chant", () => {
     lands(game, "Forest", 6);
     let together: ZoneChoiceTogether | undefined;
     let offered: readonly string[] = [];
+    a.chooseModesFn = () => [0];
     a.chooseFromZoneFn = (_view, eligible) => {
       offered = eligible;
       const awaiting = game.state.awaiting;
@@ -49,6 +50,7 @@ describe("Doubling Chant", () => {
     const bears = toLibrary(game, "Grizzly Bears");
     lands(game, "Forest", 6);
     let offered: readonly string[] = ["x"];
+    a.chooseModesFn = () => [0];
     a.chooseFromZoneFn = (_view, eligible) => {
       offered = eligible;
       return [];
@@ -56,5 +58,23 @@ describe("Doubling Chant", () => {
     cast(game, toHand(game, "Doubling Chant"));
     expect(offered).not.toContain(bears);
     expect(zone(game, bears)).toBe("library");
+  });
+
+  it("declined, searches nothing and leaves the library unshuffled", () => {
+    const { game, a } = table();
+    spawn(game, "Grizzly Bears");
+    const bears = toLibrary(game, "Grizzly Bears");
+    lands(game, "Forest", 6);
+    let searched = false;
+    a.chooseModesFn = () => [];
+    a.chooseFromZoneFn = () => {
+      searched = true;
+      return [];
+    };
+    const shuffles = game.eventsOfType("library-shuffled").filter((e) => e.player === A).length;
+    cast(game, toHand(game, "Doubling Chant"));
+    expect(searched).toBe(false);
+    expect(zone(game, bears)).toBe("library");
+    expect(game.eventsOfType("library-shuffled").filter((e) => e.player === A).length).toBe(shuffles);
   });
 });

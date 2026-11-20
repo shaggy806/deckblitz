@@ -13808,15 +13808,20 @@ export function parseEffect(text, outer) {
     if (perNameM !== null && perNameRest !== null) {
       const word = perNameM[1].toLowerCase();
       const of = word === "permanent" ? { controlledBy: "you" } : { type: word, controlledBy: "you" };
+      // "You may search": declined, there's no search and no shuffle.
       const made = {
-        kind: "search-library",
-        filter: perNameM[2] === "" ? {} : { type: perNameM[2].trim().toLowerCase() },
-        destination: "battlefield",
-        ...(perNameRest[1] !== undefined ? { enterTapped: true } : {}),
-        min: 0,
-        max: { countOf: of },
-        upTo: true,
-        together: { oneEachSameNameAs: of },
+        kind: "may",
+        prompt: `Search your library for ${word} cards with the same names as your ${word}s?`,
+        effect: {
+          kind: "search-library",
+          filter: perNameM[2] === "" ? {} : { type: perNameM[2].trim().toLowerCase() },
+          destination: "battlefield",
+          ...(perNameRest[1] !== undefined ? { enterTapped: true } : {}),
+          min: 0,
+          max: { countOf: of },
+          upTo: true,
+          together: { oneEachSameNameAs: of },
+        },
       };
       parsed.push(made);
       hints.push({ sentence, effect: made });

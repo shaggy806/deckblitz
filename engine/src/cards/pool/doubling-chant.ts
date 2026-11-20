@@ -16,13 +16,17 @@ export default defineCard({
   types: ["sorcery"],
   text: "For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle.",
   targets: [],
+  // "You may search": declined, there's no search and no shuffle.
   effect: {
-    kind: "search-library",
-    filter: { type: "creature" },
-    destination: "battlefield",
-    min: 0,
-    max: { countOf: YOUR_CREATURES },
-    upTo: true,
-    together: { oneEachSameNameAs: YOUR_CREATURES },
+    kind: "may",
+    prompt: "Search your library for creature cards with the same names as your creatures?",    effect: {
+      kind: "search-library",
+      filter: { type: "creature" },
+      destination: "battlefield",
+      min: 0,
+      max: { countOf: YOUR_CREATURES },
+      upTo: true,
+      together: { oneEachSameNameAs: YOUR_CREATURES },
+    },
   },
 });

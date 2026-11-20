@@ -24575,9 +24575,12 @@ describe("oracle-parse: casting-zones lane, 2026-11-20 (a52f)", () => {
     );
     expect(face.complete).toBe(true);
     expect(face.effect).toMatchObject({
-      kind: "search-library",
-      destination: "battlefield",
-      together: { oneEachSameNameAs: { type: "creature", controlledBy: "you" } },
+      kind: "may",
+      effect: {
+        kind: "search-library",
+        destination: "battlefield",
+        together: { oneEachSameNameAs: { type: "creature", controlledBy: "you" } },
+      },
     });
   });
 
