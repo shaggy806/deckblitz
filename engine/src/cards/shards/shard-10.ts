@@ -217,6 +217,7 @@ import _poolDauntlessRiverMarshal from "../pool/dauntless-river-marshal.js";
 import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
 import _poolDawnElemental from "../pool/dawn-elemental.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
+import _poolDeadIronSledge from "../pool/dead-iron-sledge.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
 import _poolDeadeyePlunderers from "../pool/deadeye-plunderers.js";
 import _poolDeadeyeQuartermaster from "../pool/deadeye-quartermaster.js";
@@ -1276,6 +1277,7 @@ const shard: CardShard = {
     _poolDavrielsShadowfugue,
     _poolDawnElemental,
     _poolDaybreakCharger,
+    _poolDeadIronSledge,
     _poolDeadbridgeChant,
     _poolDeadeyePlunderers,
     _poolDeadeyeQuartermaster,

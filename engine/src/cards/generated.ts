@@ -2932,6 +2932,7 @@ import _poolBloodcrazedSocialite from "./pool/bloodcrazed-socialite.js";
 import _poolBloodcrusherOfKhorne from "./pool/bloodcrusher-of-khorne.js";
 import _poolBloodcurdler from "./pool/bloodcurdler.js";
 import _poolBloodcurdlingScream from "./pool/bloodcurdling-scream.js";
+import _poolBloodfeatherPhoenix from "./pool/bloodfeather-phoenix.js";
 import _poolBloodfellCaves from "./pool/bloodfell-caves.js";
 import _poolBloodfireColossus from "./pool/bloodfire-colossus.js";
 import _poolBloodfireDwarf from "./pool/bloodfire-dwarf.js";
@@ -6420,6 +6421,7 @@ import _poolDeEvolve from "./pool/de-evolve.js";
 import _poolDeadBeforeSunrise from "./pool/dead-before-sunrise.js";
 import _poolDeadDrop from "./pool/dead-drop.js";
 import _poolDeadGone from "./pool/dead-gone.js";
+import _poolDeadIronSledge from "./pool/dead-iron-sledge.js";
 import _poolDeadMansChest from "./pool/dead-mans-chest.js";
 import _poolDeadOfWinter from "./pool/dead-of-winter.js";
 import _poolDeadReveler from "./pool/dead-reveler.js";
@@ -11712,6 +11714,7 @@ import _poolGolemArtisan from "./pool/golem-artisan.js";
 import _poolGolemFoundry from "./pool/golem-foundry.js";
 import _poolGolemSkinGauntlets from "./pool/golem-skin-gauntlets.js";
 import _poolGolemsHeart from "./pool/golems-heart.js";
+import _poolGolgariBrownscale from "./pool/golgari-brownscale.js";
 import _poolGolgariCharm from "./pool/golgari-charm.js";
 import _poolGolgariCluestone from "./pool/golgari-cluestone.js";
 import _poolGolgariDecoy from "./pool/golgari-decoy.js";
@@ -12063,6 +12066,7 @@ import _poolGrimBackwoods from "./pool/grim-backwoods.js";
 import _poolGrimBauble from "./pool/grim-bauble.js";
 import _poolGrimBounty from "./pool/grim-bounty.js";
 import _poolGrimCaptainsCall from "./pool/grim-captains-call.js";
+import _poolGrimContest from "./pool/grim-contest.js";
 import _poolGrimDiscovery from "./pool/grim-discovery.js";
 import _poolGrimDraugr from "./pool/grim-draugr.js";
 import _poolGrimFeast from "./pool/grim-feast.js";
@@ -24494,6 +24498,7 @@ import _poolSerendibDjinn from "./pool/serendib-djinn.js";
 import _poolSerendibEfreet from "./pool/serendib-efreet.js";
 import _poolSerendibSorcerer from "./pool/serendib-sorcerer.js";
 import _poolSereneHeart from "./pool/serene-heart.js";
+import _poolSereneMaster from "./pool/serene-master.js";
 import _poolSereneOffering from "./pool/serene-offering.js";
 import _poolSereneRemembrance from "./pool/serene-remembrance.js";
 import _poolSereneSleuth from "./pool/serene-sleuth.js";
@@ -26248,6 +26253,7 @@ import _poolSpellgorgerWeird from "./pool/spellgorger-weird.js";
 import _poolSpellgyre from "./pool/spellgyre.js";
 import _poolSpellheartChimera from "./pool/spellheart-chimera.js";
 import _poolSpellkeeperWeird from "./pool/spellkeeper-weird.js";
+import _poolSpellpyrePhoenix from "./pool/spellpyre-phoenix.js";
 import _poolSpellruneHowler from "./pool/spellrune-howler.js";
 import _poolSpellrunePainter from "./pool/spellrune-painter.js";
 import _poolSpellscornCoven from "./pool/spellscorn-coven.js";
@@ -28610,6 +28616,7 @@ import _poolTheJollyBalloonMan from "./pool/the-jolly-balloon-man.js";
 import _poolTheKamiWar from "./pool/the-kami-war.js";
 import _poolTheKenrithsRoyalFuneral from "./pool/the-kenriths-royal-funeral.js";
 import _poolTheKeyToTheVault from "./pool/the-key-to-the-vault.js";
+import _poolTheKingpinOfCrime from "./pool/the-kingpin-of-crime.js";
 import _poolTheLadyOfOtaria from "./pool/the-lady-of-otaria.js";
 import _poolTheLadyOfTheMountain from "./pool/the-lady-of-the-mountain.js";
 import _poolTheLastAgniKai from "./pool/the-last-agni-kai.js";
@@ -29917,6 +29924,7 @@ import _poolTundraWolves from "./pool/tundra-wolves.js";
 import _poolTundra from "./pool/tundra.js";
 import _poolTuneTheNarrative from "./pool/tune-the-narrative.js";
 import _poolTuneUp from "./pool/tune-up.js";
+import _poolTunnelIgnus from "./pool/tunnel-ignus.js";
 import _poolTunnelOfHate from "./pool/tunnel-of-hate.js";
 import _poolTunnelRats from "./pool/tunnel-rats.js";
 import _poolTunnelSurveyor from "./pool/tunnel-surveyor.js";
@@ -36659,6 +36667,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBloodcrusherOfKhorne,
   _poolBloodcurdler,
   _poolBloodcurdlingScream,
+  _poolBloodfeatherPhoenix,
   _poolBloodfellCaves,
   _poolBloodfireColossus,
   _poolBloodfireDwarf,
@@ -40147,6 +40156,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeadBeforeSunrise,
   _poolDeadDrop,
   _poolDeadGone,
+  _poolDeadIronSledge,
   _poolDeadMansChest,
   _poolDeadOfWinter,
   _poolDeadReveler,
@@ -45439,6 +45449,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGolemFoundry,
   _poolGolemSkinGauntlets,
   _poolGolemsHeart,
+  _poolGolgariBrownscale,
   _poolGolgariCharm,
   _poolGolgariCluestone,
   _poolGolgariDecoy,
@@ -45790,6 +45801,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrimBauble,
   _poolGrimBounty,
   _poolGrimCaptainsCall,
+  _poolGrimContest,
   _poolGrimDiscovery,
   _poolGrimDraugr,
   _poolGrimFeast,
@@ -58221,6 +58233,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSerendibEfreet,
   _poolSerendibSorcerer,
   _poolSereneHeart,
+  _poolSereneMaster,
   _poolSereneOffering,
   _poolSereneRemembrance,
   _poolSereneSleuth,
@@ -59975,6 +59988,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpellgyre,
   _poolSpellheartChimera,
   _poolSpellkeeperWeird,
+  _poolSpellpyrePhoenix,
   _poolSpellruneHowler,
   _poolSpellrunePainter,
   _poolSpellscornCoven,
@@ -62337,6 +62351,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheKamiWar,
   _poolTheKenrithsRoyalFuneral,
   _poolTheKeyToTheVault,
+  _poolTheKingpinOfCrime,
   _poolTheLadyOfOtaria,
   _poolTheLadyOfTheMountain,
   _poolTheLastAgniKai,
@@ -63644,6 +63659,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTundra,
   _poolTuneTheNarrative,
   _poolTuneUp,
+  _poolTunnelIgnus,
   _poolTunnelOfHate,
   _poolTunnelRats,
   _poolTunnelSurveyor,
@@ -70399,6 +70415,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bloodcrusher-of-khorne": _poolBloodcrusherOfKhorne,
   "pool/bloodcurdler": _poolBloodcurdler,
   "pool/bloodcurdling-scream": _poolBloodcurdlingScream,
+  "pool/bloodfeather-phoenix": _poolBloodfeatherPhoenix,
   "pool/bloodfell-caves": _poolBloodfellCaves,
   "pool/bloodfire-colossus": _poolBloodfireColossus,
   "pool/bloodfire-dwarf": _poolBloodfireDwarf,
@@ -73887,6 +73904,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dead-before-sunrise": _poolDeadBeforeSunrise,
   "pool/dead-drop": _poolDeadDrop,
   "pool/dead-gone": _poolDeadGone,
+  "pool/dead-iron-sledge": _poolDeadIronSledge,
   "pool/dead-mans-chest": _poolDeadMansChest,
   "pool/dead-of-winter": _poolDeadOfWinter,
   "pool/dead-reveler": _poolDeadReveler,
@@ -79179,6 +79197,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/golem-foundry": _poolGolemFoundry,
   "pool/golem-skin-gauntlets": _poolGolemSkinGauntlets,
   "pool/golems-heart": _poolGolemsHeart,
+  "pool/golgari-brownscale": _poolGolgariBrownscale,
   "pool/golgari-charm": _poolGolgariCharm,
   "pool/golgari-cluestone": _poolGolgariCluestone,
   "pool/golgari-decoy": _poolGolgariDecoy,
@@ -79530,6 +79549,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grim-bauble": _poolGrimBauble,
   "pool/grim-bounty": _poolGrimBounty,
   "pool/grim-captains-call": _poolGrimCaptainsCall,
+  "pool/grim-contest": _poolGrimContest,
   "pool/grim-discovery": _poolGrimDiscovery,
   "pool/grim-draugr": _poolGrimDraugr,
   "pool/grim-feast": _poolGrimFeast,
@@ -91961,6 +91981,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/serendib-efreet": _poolSerendibEfreet,
   "pool/serendib-sorcerer": _poolSerendibSorcerer,
   "pool/serene-heart": _poolSereneHeart,
+  "pool/serene-master": _poolSereneMaster,
   "pool/serene-offering": _poolSereneOffering,
   "pool/serene-remembrance": _poolSereneRemembrance,
   "pool/serene-sleuth": _poolSereneSleuth,
@@ -93715,6 +93736,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spellgyre": _poolSpellgyre,
   "pool/spellheart-chimera": _poolSpellheartChimera,
   "pool/spellkeeper-weird": _poolSpellkeeperWeird,
+  "pool/spellpyre-phoenix": _poolSpellpyrePhoenix,
   "pool/spellrune-howler": _poolSpellruneHowler,
   "pool/spellrune-painter": _poolSpellrunePainter,
   "pool/spellscorn-coven": _poolSpellscornCoven,
@@ -96077,6 +96099,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-kami-war": _poolTheKamiWar,
   "pool/the-kenriths-royal-funeral": _poolTheKenrithsRoyalFuneral,
   "pool/the-key-to-the-vault": _poolTheKeyToTheVault,
+  "pool/the-kingpin-of-crime": _poolTheKingpinOfCrime,
   "pool/the-lady-of-otaria": _poolTheLadyOfOtaria,
   "pool/the-lady-of-the-mountain": _poolTheLadyOfTheMountain,
   "pool/the-last-agni-kai": _poolTheLastAgniKai,
@@ -97384,6 +97407,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tundra": _poolTundra,
   "pool/tune-the-narrative": _poolTuneTheNarrative,
   "pool/tune-up": _poolTuneUp,
+  "pool/tunnel-ignus": _poolTunnelIgnus,
   "pool/tunnel-of-hate": _poolTunnelOfHate,
   "pool/tunnel-rats": _poolTunnelRats,
   "pool/tunnel-surveyor": _poolTunnelSurveyor,

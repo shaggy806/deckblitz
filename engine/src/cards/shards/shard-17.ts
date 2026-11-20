@@ -98,6 +98,7 @@ import _poolBlastZone from "../pool/blast-zone.js";
 import _poolBloodAspirant from "../pool/blood-aspirant.js";
 import _poolBloodCursedKnight from "../pool/blood-cursed-knight.js";
 import _poolBloodServitor from "../pool/blood-servitor.js";
+import _poolBloodfeatherPhoenix from "../pool/bloodfeather-phoenix.js";
 import _poolBloodforgedBattleAxe from "../pool/bloodforged-battle-axe.js";
 import _poolBloodlineShaman from "../pool/bloodline-shaman.js";
 import _poolBloodthirstyOgre from "../pool/bloodthirsty-ogre.js";
@@ -1144,6 +1145,7 @@ const shard: CardShard = {
     _poolBloodAspirant,
     _poolBloodCursedKnight,
     _poolBloodServitor,
+    _poolBloodfeatherPhoenix,
     _poolBloodforgedBattleAxe,
     _poolBloodlineShaman,
     _poolBloodthirstyOgre,

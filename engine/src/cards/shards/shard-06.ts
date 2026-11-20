@@ -409,6 +409,7 @@ import _poolGreaterWerewolf from "../pool/greater-werewolf.js";
 import _poolGreenScarab from "../pool/green-scarab.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
+import _poolGrimContest from "../pool/grim-contest.js";
 import _poolGrislySalvage from "../pool/grisly-salvage.js";
 import _poolGrizzlyFate from "../pool/grizzly-fate.js";
 import _poolGrotagNightRunner from "../pool/grotag-night-runner.js";
@@ -1458,6 +1459,7 @@ const shard: CardShard = {
     _poolGreenScarab,
     _poolGretaSweettoothScourge,
     _poolGreyHavensNavigator,
+    _poolGrimContest,
     _poolGrislySalvage,
     _poolGrizzlyFate,
     _poolGrotagNightRunner,
