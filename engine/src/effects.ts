@@ -643,8 +643,9 @@ export interface FlickerOptions {
   readonly returnUnder?: PlayerId;
   /** It returns transformed (Clive, Ifrit's Dominant). */
   readonly transformed?: boolean;
-  /** It returns tapped (Nezahal, Primal Tide). */
-  readonly tapped?: boolean;
+  /** It returns tapped (Nezahal, Primal Tide) — with a filter, only the
+   * cards matching it (Silver Surfer's "if a land enters this way"). */
+  readonly tapped?: boolean | CardFilter;
   /** It returns attacking — see `flicker`'s `attacking`. */
   readonly attacking?: ResolvedEnterAttacking;
   /** It returns at once, face down (Shorecrasher Elemental). */
@@ -5192,8 +5193,12 @@ export type EffectSpec =
        * back face up (rule 712.14); anything else returns as usual. */
       readonly transformed?: boolean;
       /** "Return it to the battlefield **tapped**" (Nezahal, Primal Tide):
-       * it enters tapped, as it enters (rule 614.1c). */
-      readonly tapped?: boolean;
+       * it enters tapped, as it enters (rule 614.1c). A filter is only the
+       * cards matching it, each judged in exile as it's about to return:
+       * Silver Surfer, Cosmic Voyager's "return those cards to the
+       * battlefield … If a land enters this way, it enters tapped" is
+       * `{ type: "land" }`. */
+      readonly tapped?: boolean | CardFilter;
       /** "Return it to the battlefield … tapped and **attacking** at the
        * beginning of that player's next declare attackers step" (Noctis, Heir
        * Apparent's Warp-Strike): put onto the battlefield attacking (rule
@@ -5265,7 +5270,8 @@ export type EffectSpec =
        * `underYourControl` or `under`). */
       readonly underPlayer?: PlayerId;
       readonly transformed?: boolean;
-      readonly tapped?: boolean;
+      /** `flicker`'s `tapped`. */
+      readonly tapped?: boolean | CardFilter;
       /** A `flicker`'s `attacking`, its player read as it exiled. */
       readonly attacking?: ResolvedEnterAttacking;
       /** Each card returns attached to this permanent (a `flicker`'s
@@ -14340,7 +14346,7 @@ export interface EffectApi {
     thenCounters: FlickerCounters | undefined,
     underYourControl: boolean,
     transformed: boolean,
-    tapped: boolean,
+    tapped: boolean | CardFilter,
     under?: PlayerId,
     attachTo?: ObjectId,
     arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[],
@@ -22055,7 +22061,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.returnText !== undefined ? { returnText: spec.returnText } : {}),
         ...(spec.returnThen !== undefined ? { returnThen: spec.returnThen } : {}),
         ...(spec.transformed === true ? { transformed: true } : {}),
-        ...(spec.tapped === true ? { tapped: true } : {}),
+        ...(spec.tapped !== undefined && spec.tapped !== false ? { tapped: spec.tapped } : {}),
         ...(attacking !== undefined ? { attacking } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
         ...(spec.withAuras === true ? { withAuras: true } : {}),
@@ -22071,7 +22077,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.thenCounters,
         spec.underYourControl === true,
         spec.transformed === true,
-        spec.tapped === true,
+        spec.tapped ?? false,
         spec.underPlayer,
         spec.attachTo,
         spec.arms,

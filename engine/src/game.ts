@@ -61887,7 +61887,7 @@ controlledBy,
           ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
           ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
           ...(options.transformed === true ? { transformed: true } : {}),
-          ...(options.tapped === true ? { tapped: true } : {}),
+          ...(options.tapped !== undefined && options.tapped !== false ? { tapped: options.tapped } : {}),
           ...(options.attacking !== undefined ? { attacking: options.attacking } : {}),
         };
       }
@@ -61896,7 +61896,7 @@ controlledBy,
         options.thenCounters,
         returnUnder,
         options.transformed === true,
-        options.tapped === true,
+        options.tapped ?? false,
         options.faceDown === true,
         options.attacking,
       );
@@ -61915,7 +61915,7 @@ controlledBy,
         ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
         ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
         ...(options.transformed === true ? { transformed: true } : {}),
-        ...(options.tapped === true ? { tapped: true } : {}),
+        ...(options.tapped !== undefined && options.tapped !== false ? { tapped: options.tapped } : {}),
         ...(options.attacking !== undefined ? { attacking: options.attacking } : {}),
         ...(auraReturns.length > 0 ? { arms: auraReturns } : {}),
       };
@@ -61965,7 +61965,7 @@ controlledBy,
     counters: FlickerCounters | undefined,
     returnUnder: PlayerId | undefined,
     transformed = false,
-    tapped = false,
+    tapped: boolean | CardFilter = false,
     attachTo?: ObjectId,
     arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[],
     attacking?: ResolvedEnterAttacking,
@@ -62018,13 +62018,21 @@ controlledBy,
     counters?: FlickerCounters,
     returnUnder?: PlayerId,
     transformed = false,
-    tapped = false,
+    /** A filter: only the cards matching it, judged in exile as each is
+     * about to return — Silver Surfer's "if a land enters this way, it enters
+     * tapped" (rule 614.1c). */
+    tappedIf: boolean | CardFilter = false,
     faceDown = false,
     attacking?: ResolvedEnterAttacking,
   ): void {
     const entered: ObjectId[] = [];
     this.withEnterBatch(() => {
       for (const id of ids) {
+        const tapped =
+          typeof tappedIf === "boolean"
+            ? tappedIf
+            : this.state.objects[id] !== undefined &&
+              matchesFilter(this.state, this.registry, id, tappedIf, { you: returnUnder ?? this.state.objects[id].owner });
         // Rule 400.7: the object returning to the battlefield is brand new, so
         // nothing that was attached to the *old* object stays attached — unlike
         // an ordinary exile, `id` comes straight back here before a state-based
