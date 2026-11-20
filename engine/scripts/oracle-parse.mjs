@@ -20649,6 +20649,10 @@ function parseFaceAsWritten(face, ctx = {}) {
           zone: "graveyard",
           staysInZone: true,
           effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true, attacking: "choose" },
+        });
+        out.activated.push(ability);
+        continue;
+      }
       // "Return this card from your graveyard to the battlefield tapped"
       // (Reassembling Skeleton), "Put this card from exile onto the
       // battlefield tapped" (Torrent Elemental): an ability that moves its
