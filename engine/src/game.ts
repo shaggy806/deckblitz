@@ -68477,7 +68477,15 @@ controlledBy,
     if (delta > 0 && this.countersPrevented({ player }, counter)) return;
     const before = ps.counters[counter] ?? 0;
     // Putting them (`by`), not taking them off: "… or player" (Vorinclex).
-    const put = delta > 0 && by !== undefined ? this.playerCounterTotal(player, counter, delta, by) : delta;
+    const steps = delta > 0 && by !== undefined ? this.playerCounterSteps(player, counter, by) : [];
+    const put = delta > 0 && by !== undefined ? counterTotalInBestOrder(counter, delta, counterStepsTally(steps)) : delta;
+    // What a replacement does beside the counters it changed: "… and you
+    // can't get additional poison counters this turn" (Melira, the Living
+    // Cure — the ruling: once it applied, no later event puts any).
+    for (const step of steps) {
+      if (step.also === undefined) continue;
+      this.runReplacedBy(step.also, step.by, this.state.objects[step.by]?.controller ?? player, { player });
+    }
     const total = Math.max(0, before + put);
     if (total === before) return;
     if (total === 0) delete ps.counters[counter];
@@ -72380,10 +72388,14 @@ controlledBy,
    * replacements reach them. The player orders them (rule 616.1). */
   private playerCounterTotal(player: PlayerId, kind: string, amount: number, by: PlayerId): number {
     if (amount <= 0) return amount;
-    const steps = this.counterReplacementStepList(kind, false, by, (r, source) =>
+    return counterTotalInBestOrder(kind, amount, counterStepsTally(this.playerCounterSteps(player, kind, by)));
+  }
+
+  /** The `would-add-counter` replacements on a placement of `kind` counters on `player`. */
+  private playerCounterSteps(player: PlayerId, kind: string, by: PlayerId): readonly CounterStep[] {
+    return this.counterReplacementStepList(kind, false, by, (r, source) =>
       r.onPlayers === "any" || (r.onPlayers === "you" && source.controller === player),
     );
-    return counterTotalInBestOrder(kind, amount, counterStepsTally(steps));
   }
 
   /** Every `would-add-counter` on the battlefield that reaches this placement
@@ -72427,7 +72439,9 @@ controlledBy,
                 ...(change.times !== undefined ? { times: change.times } : {}),
                 ...(change.plus !== undefined ? { plus: this.replacementAmount(change.plus, object) } : {}),
                 ...(change.half !== undefined ? { half: true as const } : {}),
+                ...(change.set !== undefined ? { set: this.replacementAmount(change.set, object) } : {}),
               },
+              ...(r.instead.also !== undefined ? { also: r.instead.also } : {}),
             });
           }
         }

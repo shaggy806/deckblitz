@@ -867,6 +867,9 @@ export interface CounterReplacementSteps {
   readonly multipliers: readonly number[];
   readonly plus: readonly number[];
   readonly halved: number;
+  /** "Instead you get one poison counter" (Melira, the Living Cure): exactly
+   * this many, wherever it's ordered. */
+  readonly sets?: readonly number[];
 }
 
 /** One replacement on a placement of counters, for its controller to order
@@ -874,7 +877,9 @@ export interface CounterReplacementSteps {
 export interface CounterStep {
   readonly key: string;
   readonly by: ObjectId;
-  readonly change: { readonly times?: number; readonly plus?: number; readonly half?: true };
+  readonly change: { readonly times?: number; readonly plus?: number; readonly half?: true; readonly set?: number };
+  /** The replacement's `also`, done beside the placement it changes. */
+  readonly also?: EffectSpec;
 }
 
 /** Counters of this kind are ones a player wants the fewest of. */
@@ -884,7 +889,8 @@ export function fewestCountersWanted(kind: string): boolean {
 
 /** `value` counters after this replacement. */
 export function applyCounterStep(value: number, step: CounterStep): number {
-  const { times, plus, half } = step.change;
+  const { times, plus, half, set } = step.change;
+  if (set !== undefined) return set;
   let out = value;
   if (plus !== undefined) out = Math.max(0, out + plus);
   if (times !== undefined) out *= times;
@@ -904,6 +910,7 @@ export function counterStepsTally(steps: readonly CounterStep[]): CounterReplace
     multipliers: steps.flatMap((s) => (s.change.times !== undefined ? [s.change.times] : [])),
     plus: steps.flatMap((s) => (s.change.plus !== undefined ? [s.change.plus] : [])),
     halved: steps.filter((s) => s.change.half === true).length,
+    sets: steps.flatMap((s) => (s.change.set !== undefined ? [s.change.set] : [])),
   };
 }
 
@@ -917,7 +924,8 @@ export function counterStepsTally(steps: readonly CounterStep[]): CounterReplace
 export function counterTotalInBestOrder(kind: string, amount: number, steps: CounterReplacementSteps): number {
   const fewest = fewestCountersWanted(kind);
   const { multipliers, plus, halved } = steps;
-  if (halved === 0) {
+  const sets = steps.sets ?? [];
+  if (halved === 0 && sets.length === 0) {
     const mult = multipliers.reduce((all, m) => all * m, 1);
     const up = plus.filter((p) => p >= 0).reduce((all, p) => all + p, 0);
     const down = plus.filter((p) => p < 0).reduce((all, p) => all + p, 0);
@@ -928,23 +936,28 @@ export function counterTotalInBestOrder(kind: string, amount: number, steps: Cou
     return Math.max(0, (amount + up) * mult + down);
   }
   // Halving rounds down, so no one order is best every time: 4 with two "plus
-  // one"s and a halving is 3 adding first and 4 adding last.
+  // one"s and a halving is 3 adding first and 4 adding last. An exact number
+  // ("instead you get one", Melira) is best last or first, so it's searched
+  // too.
   const seen = new Map<string, number>();
-  const best = (value: number, nextPlus: number, nextMultiplier: number, halvesLeft: number): number => {
+  const best = (value: number, nextPlus: number, nextMultiplier: number, halvesLeft: number, nextSet: number): number => {
     if (value <= 0) return 0;
-    if (nextPlus === plus.length && nextMultiplier === multipliers.length && halvesLeft === 0) return value;
-    const key = `${value}/${nextPlus}/${nextMultiplier}/${halvesLeft}`;
+    if (nextPlus === plus.length && nextMultiplier === multipliers.length && halvesLeft === 0 && nextSet === sets.length) return value;
+    const key = `${value}/${nextPlus}/${nextMultiplier}/${halvesLeft}/${nextSet}`;
     const known = seen.get(key);
     if (known !== undefined) return known;
     const options: number[] = [];
-    if (nextPlus < plus.length) options.push(best(Math.max(0, value + plus[nextPlus]), nextPlus + 1, nextMultiplier, halvesLeft));
-    if (nextMultiplier < multipliers.length) options.push(best(value * multipliers[nextMultiplier], nextPlus, nextMultiplier + 1, halvesLeft));
-    if (halvesLeft > 0) options.push(best(Math.floor(value / 2), nextPlus, nextMultiplier, halvesLeft - 1));
+    if (nextPlus < plus.length) options.push(best(Math.max(0, value + plus[nextPlus]), nextPlus + 1, nextMultiplier, halvesLeft, nextSet));
+    if (nextMultiplier < multipliers.length) {
+      options.push(best(value * multipliers[nextMultiplier], nextPlus, nextMultiplier + 1, halvesLeft, nextSet));
+    }
+    if (halvesLeft > 0) options.push(best(Math.floor(value / 2), nextPlus, nextMultiplier, halvesLeft - 1, nextSet));
+    if (nextSet < sets.length) options.push(best(sets[nextSet], nextPlus, nextMultiplier, halvesLeft, nextSet + 1));
     const result = fewest ? Math.min(...options) : Math.max(...options);
     seen.set(key, result);
     return result;
   };
-  return best(amount, 0, 0, halved);
+  return best(amount, 0, 0, halved, 0);
 }
 
 /** "If a card would be put into a graveyard from anywhere, exile it instead"

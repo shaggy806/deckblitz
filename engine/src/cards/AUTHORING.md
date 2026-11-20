@@ -8213,7 +8213,11 @@ The `prevent-damage` family makes the same record.
   Innkeeper's Talent; with `filter` to narrow it, Lae'zel, Vlaakith's Champion);
   `onPlayers: "any" | "you"` reaches players too, energy included ("or player",
   "or on yourself"); `halved: true` is "half that many, rounded down". A plus
-  loyalty cost is put by its controller, so it's reached too.
+  loyalty cost is put by its controller, so it's reached too. `set: 1` is "instead you get one
+  poison counter" (Melira, the Living Cure, `onPlayers: "you"`, `counterKind: "poison"`), ordered
+  with the rest the way best for the player (her ruling: usually last); a player placement's
+  `also` runs beside it whenever it applies — her `prohibit` `get-counters` poison for the turn,
+  "and you can't get additional poison counters this turn".
 - A static's `prohibits` `get-counters` act (`object` or `who`, `kind?`) is "counters can't be put on …"
   / "players can't get counters" (Solemnity: `{ players: "each" }` and `{ permanents: {
   typesAnyOf: ["artifact", "creature", "enchantment", "land"] } }`; Melira, Sylvok Outcast:
