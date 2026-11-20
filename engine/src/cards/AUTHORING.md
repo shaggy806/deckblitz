@@ -8261,7 +8261,14 @@ The `prevent-damage` family makes the same record.
   the object it's on (a token too), on the stack or the battlefield — so a
   Clone of the face is exiled too (rule 707.2) and the face that lost its
   abilities isn't. Give every disturb back face one; the disturb cast itself
-  exiles nothing.
+  exiles nothing. `self: true` with `withCounters` is "If ~ would die,
+  instead exile it with three egg counters on it" (Darigaaz Reincarnated):
+  it's one of the replacements its controller picks among, so beside an
+  opponent's Rest in Peace its own applies and the counters go on (the
+  ruling). An ability of the card that works in exile and reads those
+  counters reads them with a `source` filter, not `self-counters` (which
+  reads a source off the battlefield as it last existed there).
+  `die-exile-with-counter.test.ts`.
 - **Finality counters** (rule 122) need no spec: any permanent with a
   `finality` counter that would go to a graveyard from the battlefield is
   exiled instead, by `moveObject` itself. Put one on with

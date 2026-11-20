@@ -72501,8 +72501,21 @@ controlledBy,
   }
 
   private exilesItselfInstead(object: GameObject): boolean {
-    if (hasLostAbilities(this.state, this.registry,object)) return false;
-    return this.ownStatics(object).some((ability) => {
+    return this.ownExileReplacements(object).length > 0;
+  }
+
+  /** Its own "exile it instead" that puts counters on it as it's exiled
+   * ("instead exile it with three egg counters on it" — Darigaaz
+   * Reincarnated), if it has one. */
+  private ownExileWithCounters(object: GameObject): GraveyardExileReplacement | undefined {
+    return this.ownExileReplacements(object).find((r) => r.withCounters !== undefined);
+  }
+
+  /** The object's own mandatory "if this would be put into a graveyard /
+   * die, exile it instead" replacements that apply to it where it is. */
+  private ownExileReplacements(object: GameObject): readonly GraveyardExileReplacement[] {
+    if (hasLostAbilities(this.state, this.registry,object)) return [];
+    return this.ownStatics(object).flatMap((ability) => {
       const r = ability.replacement;
       return (
         r?.event === "would-be-put-into-graveyard" &&
@@ -72513,7 +72526,9 @@ controlledBy,
         // battlefield (rule 700.4), so a countered or discarded one goes to
         // its graveyard.
         (r.from !== "battlefield" || object.zone === "battlefield")
-      );
+      )
+        ? [r]
+        : [];
     });
   }
 
@@ -73683,7 +73698,19 @@ controlledBy,
         ((object.counters["finality"] ?? 0) > 0 ||
           (object.exileIfDiesTurn === this.state.turn.number &&
             effectiveTypes(this.state, this.registry, object).some((t) => t === "creature" || t === "planeswalker")));
-      const replaced = this.graveyardExileReplacements(id, leavingBattlefield);
+      // Its own "instead exile it with three egg counters on it" (Darigaaz
+      // Reincarnated) is one of the replacements its controller picks among
+      // (rule 616.1 — the ruling: they may apply its own first).
+      const ownWithCounters = exilesItself ? this.ownExileWithCounters(object) : undefined;
+      const replaced: {
+        readonly replacement: GraveyardExileReplacement;
+        readonly controller: PlayerId;
+        readonly source?: ObjectId;
+        readonly returnsFrom?: ObjectId;
+      }[] = [
+        ...this.graveyardExileReplacements(id, leavingBattlefield),
+        ...(ownWithCounters !== undefined ? [{ replacement: ownWithCounters, controller: object.controller }] : []),
+      ];
       if (finality || replaced.length > 0) {
         to = "exile";
         const chosen = this.exileReplacementChosen(
@@ -73693,7 +73720,7 @@ controlledBy,
             object.castVia === "flashback" ||
             object.castVia === "harmonize" ||
             this.aftermathExiles(object) ||
-            exilesItself ||
+            (exilesItself && ownWithCounters === undefined) ||
             object.exileIfWouldGoToGraveyard === true,
         );
         exileCounters = chosen?.replacement.withCounters;

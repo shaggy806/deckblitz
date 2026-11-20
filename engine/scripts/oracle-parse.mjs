@@ -25546,6 +25546,23 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "If Darigaaz would die, instead exile it with three egg counters on it."
+  {
+    const w = /^If ~ would die, instead exile it with (an?|one|two|three|four|five|six) ([a-z-]+) counters? on it\.$/.exec(line);
+    if (w !== null && NUMBERS[w[1]] !== undefined) {
+      return {
+        affects: { scope: "self" },
+        replacement: {
+          event: "would-be-put-into-graveyard",
+          instead: "exile",
+          self: true,
+          from: "battlefield",
+          withCounters: { kind: w[2], amount: NUMBERS[w[1]] },
+        },
+        text,
+      };
+    }
+  }
   // "If a creature dealt damage by enchanted creature this turn would die,
   // exile it instead" (Kumano's Blessing).
   if (line === "If a creature dealt damage by enchanted creature this turn would die, exile it instead.") {

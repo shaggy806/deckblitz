@@ -6380,6 +6380,21 @@ describe("block limits, lost abilities and chosen types (B249)", () => {
     });
   });
 
+  it("reads a self die-replacement that exiles it with counters (Darigaaz Reincarnated)", () => {
+    expect(
+      face("Legendary Creature — Dragon", "If Test Card would die, instead exile it with three egg counters on it.").static?.[0],
+    ).toMatchObject({
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-be-put-into-graveyard",
+        instead: "exile",
+        self: true,
+        from: "battlefield",
+        withCounters: { kind: "egg", amount: 3 },
+      },
+    });
+  });
+
   it("reads 'becomes the creature type of your choice'", () => {
     expect(face("Creature — Illusion", "{1}: This creature becomes the creature type of your choice until end of turn.").activated[0].effect).toEqual({
       kind: "choose-creature-type",
