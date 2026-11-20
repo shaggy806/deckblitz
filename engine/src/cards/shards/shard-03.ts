@@ -207,7 +207,9 @@ import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
 import _poolDoctorDoom from "../pool/doctor-doom.js";
 import _poolDogmeatEverLoyal from "../pool/dogmeat-ever-loyal.js";
+import _poolDontBlink from "../pool/dont-blink.js";
 import _poolDoombotHarbinger from "../pool/doombot-harbinger.js";
+import _poolDoublingChant from "../pool/doubling-chant.js";
 import _poolDracosaurAuxiliary from "../pool/dracosaur-auxiliary.js";
 import _poolDreadOsseosaur from "../pool/dread-osseosaur.js";
 import _poolDreadWanderer from "../pool/dread-wanderer.js";
@@ -701,6 +703,7 @@ import _poolSheHulkAttorneyAtLaw from "../pool/she-hulk-attorney-at-law.js";
 import _poolShelteredThicket from "../pool/sheltered-thicket.js";
 import _poolSheoldredWhisperingOne from "../pool/sheoldred-whispering-one.js";
 import _poolSheoldredsHeadcleaver from "../pool/sheoldreds-headcleaver.js";
+import _poolShieldOfTheAvatar from "../pool/shield-of-the-avatar.js";
 import _poolShimmerdriftVale from "../pool/shimmerdrift-vale.js";
 import _poolShimmeringGlasskite from "../pool/shimmering-glasskite.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
@@ -1189,7 +1192,9 @@ const shard: CardShard = {
     _poolDoctorDoomKingOfLatveria,
     _poolDoctorDoom,
     _poolDogmeatEverLoyal,
+    _poolDontBlink,
     _poolDoombotHarbinger,
+    _poolDoublingChant,
     _poolDracosaurAuxiliary,
     _poolDreadOsseosaur,
     _poolDreadWanderer,
@@ -1683,6 +1688,7 @@ const shard: CardShard = {
     _poolShelteredThicket,
     _poolSheoldredWhisperingOne,
     _poolSheoldredsHeadcleaver,
+    _poolShieldOfTheAvatar,
     _poolShimmerdriftVale,
     _poolShimmeringGlasskite,
     _poolShivanBranchBurner,

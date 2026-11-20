@@ -46,6 +46,7 @@ import _poolArgivianPhalanx from "../pool/argivian-phalanx.js";
 import _poolArlinnVoiceOfThePack from "../pool/arlinn-voice-of-the-pack.js";
 import _poolArmoredAscension from "../pool/armored-ascension.js";
 import _poolArniHumbleScribe from "../pool/arni-humble-scribe.js";
+import _poolArsenalThresher from "../pool/arsenal-thresher.js";
 import _poolArtistsTalent from "../pool/artists-talent.js";
 import _poolAshcoatOfTheShadowSwarm from "../pool/ashcoat-of-the-shadow-swarm.js";
 import _poolAspectOfManticore from "../pool/aspect-of-manticore.js";
@@ -1088,6 +1089,7 @@ const shard: CardShard = {
     _poolArlinnVoiceOfThePack,
     _poolArmoredAscension,
     _poolArniHumbleScribe,
+    _poolArsenalThresher,
     _poolArtistsTalent,
     _poolAshcoatOfTheShadowSwarm,
     _poolAspectOfManticore,

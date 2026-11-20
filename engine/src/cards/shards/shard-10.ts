@@ -552,6 +552,7 @@ import _poolMasterOfTheWildHunt from "../pool/master-of-the-wild-hunt.js";
 import _poolMathemagics from "../pool/mathemagics.js";
 import _poolMauhurUrukHaiCaptain from "../pool/mauhur-uruk-hai-captain.js";
 import _poolMaximizeVelocity from "../pool/maximize-velocity.js";
+import _poolMeanderingTowershell from "../pool/meandering-towershell.js";
 import _poolMedomaiTheAgeless from "../pool/medomai-the-ageless.js";
 import _poolMercurialKite from "../pool/mercurial-kite.js";
 import _poolMerfolkMesmerist from "../pool/merfolk-mesmerist.js";
@@ -1610,6 +1611,7 @@ const shard: CardShard = {
     _poolMathemagics,
     _poolMauhurUrukHaiCaptain,
     _poolMaximizeVelocity,
+    _poolMeanderingTowershell,
     _poolMedomaiTheAgeless,
     _poolMercurialKite,
     _poolMerfolkMesmerist,

@@ -402,6 +402,7 @@ import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
 import _poolHumpbackWhales from "../pool/humpback-whales.js";
 import _poolHuntingCheetah from "../pool/hunting-cheetah.js";
+import _poolHurkylsFinalMeditation from "../pool/hurkyls-final-meditation.js";
 import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
 import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
 import _poolHustle from "../pool/hustle.js";
@@ -1478,6 +1479,7 @@ const shard: CardShard = {
     _poolHowlingMoon,
     _poolHumpbackWhales,
     _poolHuntingCheetah,
+    _poolHurkylsFinalMeditation,
     _poolHurlIntoHistory,
     _poolHurloonBattleHymn,
     _poolHustle,

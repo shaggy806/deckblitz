@@ -844,6 +844,7 @@ import _poolSoullessRevival from "../pool/soulless-revival.js";
 import _poolSoulsGrace from "../pool/souls-grace.js";
 import _poolSpeakerOfTheHeavens from "../pool/speaker-of-the-heavens.js";
 import _poolSphinxOfLostTruths from "../pool/sphinx-of-lost-truths.js";
+import _poolSphinxOfTheChimes from "../pool/sphinx-of-the-chimes.js";
 import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
 import _poolSphinxsDisciple from "../pool/sphinxs-disciple.js";
 import _poolSpinedKarok from "../pool/spined-karok.js";
@@ -905,6 +906,7 @@ import _poolTamiyoCompleatedSage from "../pool/tamiyo-compleated-sage.js";
 import _poolTarfire from "../pool/tarfire.js";
 import _poolTauntingElf from "../pool/taunting-elf.js";
 import _poolTavernRuffian from "../pool/tavern-ruffian.js";
+import _poolTearsOfRage from "../pool/tears-of-rage.js";
 import _poolTectonicReformation from "../pool/tectonic-reformation.js";
 import _poolTeferiAkosaOfZhalfir from "../pool/teferi-akosa-of-zhalfir.js";
 import _poolTempleOfPower from "../pool/temple-of-power.js";
@@ -1957,6 +1959,7 @@ const shard: CardShard = {
     _poolSoulsGrace,
     _poolSpeakerOfTheHeavens,
     _poolSphinxOfLostTruths,
+    _poolSphinxOfTheChimes,
     _poolSphinxOfTheGuildpact,
     _poolSphinxsDisciple,
     _poolSpinedKarok,
@@ -2018,6 +2021,7 @@ const shard: CardShard = {
     _poolTarfire,
     _poolTauntingElf,
     _poolTavernRuffian,
+    _poolTearsOfRage,
     _poolTectonicReformation,
     _poolTeferiAkosaOfZhalfir,
     _poolTempleOfPower,

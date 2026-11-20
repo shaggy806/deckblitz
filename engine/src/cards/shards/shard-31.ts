@@ -513,6 +513,7 @@ import _poolKaylasMusicBox from "../pool/kaylas-music-box.js";
 import _poolKazanduRefuge from "../pool/kazandu-refuge.js";
 import _poolKazanduStomper from "../pool/kazandu-stomper.js";
 import _poolKellansLightblades from "../pool/kellans-lightblades.js";
+import _poolKentaroTheSmilingCat from "../pool/kentaro-the-smiling-cat.js";
 import _poolKessigMalcontents from "../pool/kessig-malcontents.js";
 import _poolKessigWolfrider from "../pool/kessig-wolfrider.js";
 import _poolKiteShield from "../pool/kite-shield.js";
@@ -1627,6 +1628,7 @@ const shard: CardShard = {
     _poolKazanduRefuge,
     _poolKazanduStomper,
     _poolKellansLightblades,
+    _poolKentaroTheSmilingCat,
     _poolKessigMalcontents,
     _poolKessigWolfrider,
     _poolKiteShield,

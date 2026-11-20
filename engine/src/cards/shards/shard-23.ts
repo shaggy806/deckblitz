@@ -976,6 +976,7 @@ import _poolUnluckyDrop from "../pool/unlucky-drop.js";
 import _poolUnmakeTheGraves from "../pool/unmake-the-graves.js";
 import _poolUnnaturalRestoration from "../pool/unnatural-restoration.js";
 import _poolUrabraskTheHidden from "../pool/urabrask-the-hidden.js";
+import _poolUrgentNecropsy from "../pool/urgent-necropsy.js";
 import _poolUrzasSaga from "../pool/urzas-saga.js";
 import _poolUthrosScanship from "../pool/uthros-scanship.js";
 import _poolValakutInvoker from "../pool/valakut-invoker.js";
@@ -2043,6 +2044,7 @@ const shard: CardShard = {
     _poolUnmakeTheGraves,
     _poolUnnaturalRestoration,
     _poolUrabraskTheHidden,
+    _poolUrgentNecropsy,
     _poolUrzasSaga,
     _poolUthrosScanship,
     _poolValakutInvoker,
