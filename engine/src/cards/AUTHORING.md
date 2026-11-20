@@ -6571,6 +6571,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
 - `loseLandTypes: true` — layer 4: the affected permanents lose all land types
   (and with them their intrinsic mana abilities, 305.7) — Lithoform Blight,
   Alpine Moon.
+- `lingersAfterLeaving: "end-of-turn"` — "If this … leaves the battlefield,
+  this effect continues until end of turn" (Titania's Song): the static
+  carries on as a timed static until cleanup, reaching later permanents too.
 - `loseAllAbilities: true` — layer 6 (rule 613.1f): the affected permanents
   lose all abilities — Humility, Dress Down ("Creatures lose all
   abilities"), the Auras (Lignify, Frogify, Kenrith's Transformation, beside

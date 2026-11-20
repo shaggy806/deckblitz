@@ -3053,6 +3053,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * effect.
    */
   readonly loseAllAbilities?: true;
+  /** "If this … leaves the battlefield, this effect continues until end of
+   * turn" (Titania's Song): as its permanent leaves the battlefield with this
+   * static working, the static carries on as a timed static (an
+   * `EmblemState.expires` one, like the `timed-static` effect) controlled by
+   * whoever controlled the permanent, until the cleanup step. Like the
+   * static itself it reaches what comes along later (rule 611.3a). */
+  readonly lingersAfterLeaving?: "end-of-turn";
   /** With `loseAllAbilities`: "…lose all abilities **except mana abilities**"
    * (Blood Sun). What it reaches keeps its mana abilities (rule 605.1a),
    * printed and granted alike, and loses every other one; a full loss beside

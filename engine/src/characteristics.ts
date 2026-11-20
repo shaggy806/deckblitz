@@ -3460,7 +3460,8 @@ function scanForLoseAllSource(state: GameState, registry: CardRegistry): boolean
   for (const id of state.zones.shared.battlefield) {
     if (staticsOf(registry, rulesTextName(state.objects[id])).loseAll.length > 0) return true;
   }
-  return false;
+  // A timed static carrying one on (`lingersAfterLeaving` — Titania's Song).
+  return emblemStatics(state).some(({ ability }) => ability.loseAllAbilities === true);
 }
 
 /**
@@ -3590,6 +3591,16 @@ function computeStaticAbilityLosses(state: GameState, registry: CardRegistry): S
       }
       pending.push({ source, ability, reaches });
     }
+  }
+  // A timed static's (an emblem object's), carrying on a static after its
+  // permanent left (`lingersAfterLeaving` — Titania's Song).
+  for (const { source, ability } of emblemStatics(state)) {
+    if (ability.loseAllAbilities !== true) continue;
+    const reaches = new Set<ObjectId>();
+    for (const targetId of state.zones.shared.battlefield) {
+      if (staticReaches(state, registry, source, ability, state.objects[targetId])) reaches.add(targetId);
+    }
+    pending.push({ source, ability, reaches });
   }
   const out = new Map<ObjectId, number>();
   const outMana = new Map<ObjectId, number>();
@@ -4573,6 +4584,11 @@ function scanTypeGrantSources(state: GameState, registry: CardRegistry): readonl
     // (rule 613.6; Goddric, Cloaked Reveler's ruling).
     if (state.players[source.controller]?.hasLost === true) continue;
     for (const ability of layer4) (out ??= []).push({ source, ability });
+  }
+  // A timed static with a layer-4 part, carrying on a static after its
+  // permanent left (`lingersAfterLeaving` — Titania's Song).
+  for (const { source, ability } of emblemStatics(state)) {
+    if (hasLayerFourPart(ability)) (out ??= []).push({ source, ability });
   }
   return out === null ? NO_STATICS : withoutTextLostSources(state, registry, out);
 }
@@ -6415,7 +6431,9 @@ function scanContributingStaticSources(state: GameState, registry: CardRegistry)
   // permanent's static has, read from its owner's side, after the
   // battlefield's as its timestamp says.
   for (const { source, ability } of emblemStatics(state)) {
-    if (contributesToCharacteristics(ability) && !hasLayerFourPart(ability)) out.push({ source, ability });
+    // One with a layer-4 part is a static carried on after its permanent
+    // left (`lingersAfterLeaving`), its layer 4 read by `typeGrantSources`.
+    if (contributesToCharacteristics(ability)) out.push({ source, ability });
   }
   return out;
 }

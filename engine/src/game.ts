@@ -74064,6 +74064,16 @@ controlledBy,
     // owner took to answer, and a second event reaching it while it waits
     // doesn't redirect it.
     if (leavingBattlefield) {
+      // "If this leaves the battlefield, this effect continues until end of
+      // turn" (Titania's Song): its static, still working as it leaves, goes
+      // on as a timed static under its controller.
+      if (!hasLostAbilities(this.state, this.registry, object)) {
+        for (const ability of this.staticsOfSource(object)) {
+          if (ability.lingersAfterLeaving === undefined) continue;
+          const { lingersAfterLeaving: _ends, ...rest } = ability;
+          this.createEmblem(object.controller, ability.text ?? "", rest, nameOf(object), [], object.controller, [], ability.lingersAfterLeaving);
+        }
+      }
       // Before anything has moved in a simultaneous event, or before this
       // lone move.
       if (this.leaveBatch === null || this.grantLookBack?.batch !== this.leaveBatch) this.takeGrantLookBack();
