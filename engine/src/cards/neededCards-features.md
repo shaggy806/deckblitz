@@ -340,6 +340,15 @@ a replacement's effect now keeps `replacing` and `thisWaySince` and restores the
 Zur's "otherwise, that player draws a card" after an `unless` isn't replaced by the same Weirding again (rule 614.5;
 it looped before). The `unless` option `{ payLife }` takes `ifPaid`, and `for-each-unless` takes `of: { drawn }` (the
 cards this resolution drew, still in hand). `test/draw-replacement-reveal.test.ts`.
+### An attack trigger's intervening-if over "those creatures" — built 2026-11-20
+
+The key `trigger:attack-with-intervening-if`, for Squall, Gunblade Duelist: an intervening-if (rule 603.4) is now
+asked with the sets the ability carries — at trigger time the batch `withAttackedTogether` / `refsAtTrigger` will give
+it, on resolution its own `lastKnownRefs.sets` (`Game.interveningIfMet`'s `sets`) — and its amounts' dynamic compares
+bound first (`bindAmountCompares`, `filterAmounts`' `bindCompares`), so "if any of those creatures have power or
+toughness equal to the chosen number" is an `amounts` condition over an aggregate count `in: "trigger-batch"`.
+`test/attack-with-intervening-if.test.ts`.
+
 ### Differently named dungeons completed — built 2026-11-20
 
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s

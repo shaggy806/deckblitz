@@ -20020,6 +20020,18 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
   return walk(spec) as EffectSpec;
 }
 
+/** An amount's dynamic compares bound in `ctx`, as `bindDynamicCompares` binds
+ * an effect's — for an amount read outside any effect: an intervening-if's
+ * "if any of those creatures have power … equal to **the chosen number**"
+ * (Squall, Gunblade Duelist), whose filter would match nothing unbound. */
+export function bindAmountCompares(amount: EffectAmount, ctx: ResolutionContext): EffectAmount {
+  if (typeof amount !== "object" || !containsDynamicCompare(amount)) return amount;
+  const { amount: bound } = bindDynamicCompares({ amount } as unknown as EffectSpec, ctx) as unknown as {
+    readonly amount: EffectAmount;
+  };
+  return bound;
+}
+
 /** The `shares…TypeWith` clauses and the kind of type each compares (rule
  * 205.2a card types, 110.4 permanent types, 205.3m creature types, 205.3i
  * land types). */

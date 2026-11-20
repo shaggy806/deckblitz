@@ -312,6 +312,7 @@ import { scry } from "./decisions/scry.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import {
   amountValue,
+  bindAmountCompares,
   signedAmountValue,
   applyEffectSpec,
   isCountScalableEffect,
@@ -5367,6 +5368,9 @@ export class Game {
     readonly lastKnownRefs?: LastKnownRefs;
     /** As it stands, a negative power included, for a comparison. */
     readonly signed?: true;
+    /** Bind the amount's dynamic compares first (`bindAmountCompares`): an
+     * intervening-if's, read outside any effect. */
+    readonly bindCompares?: true;
   }): (amount: EffectAmount, each?: PlayerId) => number {
     let ctx: ResolutionContext | undefined;
     return (amount, each) => {
@@ -5382,7 +5386,8 @@ export class Game {
         env.targetZones ?? [],
         env.lastKnownRefs,
       );
-      return env.signed === true ? signedAmountValue(amount, ctx, each) : amountValue(amount, ctx, each);
+      const read = env.bindCompares === true ? bindAmountCompares(amount, ctx) : amount;
+      return env.signed === true ? signedAmountValue(read, ctx, each) : amountValue(read, ctx, each);
     };
   }
 
@@ -35158,6 +35163,7 @@ export class Game {
           object.lastKnownRefs?.player,
           condition === undefined ? undefined : this.abilityTurnKey(object),
           object.triggerValue,
+          object.lastKnownRefs?.sets,
         ) ||
         (object.delayedTrigger !== undefined &&
           !this.delayedIfHolds(object.delayedTrigger, object.triggerObject, object.lastKnownRefs)) ||
@@ -36391,6 +36397,15 @@ export class Game {
               ? undefined
               : this.triggerTurnKey(id, index, ref, false),
             ability.condition === undefined ? undefined : this.triggerValueOf(ability.trigger, event, object),
+            // "If any of those creatures …": the batch it will carry.
+            ability.condition === undefined
+              ? undefined
+              : this.withAttackedTogether(
+                  this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event)),
+                  ability.trigger,
+                  event,
+                  object,
+                )?.sets,
           ) &&
           // "Whenever … while …" — part of the trigger condition, asked only
           // now (rule 603.1), never again as it resolves. "That player" is the
@@ -39254,8 +39269,21 @@ export class Game {
     /** The trigger's `triggerValue`: "if it was crewed by exactly two
      * creatures" (`Game.triggerValueOf`). */
     triggerValue?: number,
+    /** The sets the ability carries — "**if any of those creatures** have
+     * power … equal to the chosen number" (Squall, Gunblade Duelist) reads
+     * its `"trigger-batch"`: the ones it will carry as it triggers, its own
+     * as it resolves. */
+    sets?: ObjectSets,
   ): boolean {
     if (condition === undefined) return true;
+    const refs: LastKnownRefs | undefined =
+      triggerSpellStint === undefined && sets === undefined
+        ? undefined
+        : {
+            // The spell that fired it, gone from the stack since (608.2h).
+            ...(triggerSpellStint !== undefined ? { triggerSpell: triggerSpellStint } : {}),
+            ...(sets !== undefined ? { sets } : {}),
+          };
     return staticConditionMet(this.state, this.registry, source, condition, {
       includeSelf: true,
       outsideFold: true,
@@ -39263,11 +39291,11 @@ export class Game {
         source: source.id,
         controller: source.controller,
         signed: true,
+        bindCompares: true,
         ...(x !== undefined ? { x } : {}),
         ...(triggerValue !== undefined ? { triggerValue } : {}),
         ...(triggerObject !== undefined ? { triggerObject } : {}),
-        // The spell that fired it, gone from the stack since (608.2h).
-        ...(triggerSpellStint !== undefined ? { lastKnownRefs: { triggerSpell: triggerSpellStint } } : {}),
+        ...(refs !== undefined ? { lastKnownRefs: refs } : {}),
       }),
       ...(thatPlayer !== undefined ? { thatPlayer } : {}),
       ...(abilityKey !== undefined ? { abilityKey } : {}),

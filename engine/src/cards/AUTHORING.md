@@ -1329,6 +1329,13 @@ binds it as it's set up, so "whenever either of those creatures deals combat
 damage to a player **this combat**" keeps them (Love on the Battlefield, with
 `until: "end-of-combat"`); its `effect` reads the batch its own trigger fires on
 (Garruk, Curse Breaker's −4). It matches nothing outside such a resolution.
+An intervening-if reads the batch too, the one the ability will carry as it
+triggers and its own as it resolves (rule 603.4): "if any of those creatures
+have power or toughness equal to the chosen number" (Squall, Gunblade Duelist)
+is an `amounts` condition over `{ aggregate: "count", filter: { anyOf: [...] },
+in: "trigger-batch" }` — the aggregate, not `countOf`, whose `inSet` is bound
+only in an effect. A dynamic compare in it (`{ amount: { chosenNumber: true }
+}`) is bound as the condition is read (`bindAmountCompares`).
 
 **"Those creatures", "they gained control of this way".** `thisWay:
 "control-effect"` (a filter clause or an amount) is every permanent a control
