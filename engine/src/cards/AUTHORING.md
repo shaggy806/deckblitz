@@ -8460,6 +8460,10 @@ The `prevent-damage` family makes the same record.
   "creature", not: { anyOf: [{ keyword: "flying" }, { keyword: "islandwalk"
   }] } }` with `[{ kind: "cant-attack", at: "you" }]` and `duration:
   "until-your-next-turn"` (`island-sanctuary.test.ts`).
+  `byCyclingOf: <filter>` on a `would-draw` replacement reaches only a draw a
+  cycling ability makes as it resolves, of a card the filter matches;
+  `"trigger-object"` in its `{ effect }` is the cycled card (Unpredictable
+  Cyclone, `cycling-draw-replacement.test.ts`).
   `{ event: "would-draw", who: "you", instead: "win-game", whileLibraryEmpty:
   true }` is Laboratory Maniac's "if you would draw a card while your library
   has no cards in it, you win the game instead" (rule 614.11: it applies

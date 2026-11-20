@@ -1183,6 +1183,13 @@ export interface DrawRedirectReplacement {
    * happens). Beside a mandatory effect replacement of theirs (Underrealm
    * Lich), the draw is replaced either way, so "Draw a card" isn't offered. */
   readonly may?: true;
+  /** Only a draw a **cycling** ability makes as it resolves (rule 702.29a),
+   * of a card this filter matches, read as it is now (in the graveyard, as
+   * a rule 702.29a cycled card is): "if a cycling ability of another nonland
+   * card would cause you to draw a card" (Unpredictable Cyclone — `{ notTypes:
+   * ["land"] }`; "another" holds by itself: this permanent's own cycling
+   * starts in a hand). The effect's `"trigger-object"` is the cycled card. */
+  readonly byCyclingOf?: CardFilter;
   /** Only a draw while the drawing player's library has no cards in it. */
   readonly whileLibraryEmpty?: boolean;
   /** Only a draw while the drawing player's hand has no cards in it, or at

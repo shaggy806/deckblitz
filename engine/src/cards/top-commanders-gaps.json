@@ -5,6 +5,7 @@
     "static:max-hand-size-equal-to-counters",
     "static:max-hand-size-equal-to-count",
     "static:exhaust-reactivation",
+    "replacement:cycling-draw",
     "static:effect-lingers-until-eot-after-leaving",
     "effect:delayed-sacrifice-modified-this-way",
     "effect:delayed-return-attacking-next-turn",

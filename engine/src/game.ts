@@ -1376,6 +1376,9 @@ function landManaInsteadOptions(option: ManaOption, change: LandManaChange): Man
 interface WouldDrawEvent {
   readonly firstInDrawStep: boolean;
   readonly before: { readonly all: number; readonly exceptDrawStepFirst: number };
+  /** The card whose cycling ability is making this draw as it resolves, if
+   * one is (`DrawRedirectReplacement.byCyclingOf`). */
+  readonly cycled?: ObjectId;
 }
 
 /** Whether a `would-draw` replacement of the drawing player's reaches this
@@ -1384,6 +1387,7 @@ interface WouldDrawEvent {
  * first (non-exempt) draw event when it says "the first time you would draw
  * a card each turn". */
 function drawReplacementReaches(r: DrawRedirectReplacement, event: WouldDrawEvent): boolean {
+  if (r.byCyclingOf !== undefined && event.cycled === undefined) return false;
   if (r.exceptFirstInDrawStep === true && event.firstInDrawStep) return false;
   if (r.firstEachTurn !== true) return true;
   return (r.exceptFirstInDrawStep === true ? event.before.exceptDrawStepFirst : event.before.all) === 0;
@@ -70751,7 +70755,7 @@ controlledBy,
     if (this.optionalDrawReplacementAsked(player, drawEvent)) return;
     const replacing = this.drawEffectReplacementFor(player, drawEvent);
     if (replacing !== null) {
-      this.runDrawReplacement(replacing, player);
+      this.runDrawReplacement(replacing, player, drawEvent.cycled);
       return;
     }
     this.drawUnreplacedByEffect(player, drawEvent);
@@ -70817,11 +70821,13 @@ controlledBy,
   /** A draw replaced by an effect (rule 614.1a): `"x"` is 1, the card drawn
    * would have been one; `"trigger-player"` the player who would have drawn
    * it. A `next` record is spent as it applies. */
-  private runDrawReplacement(replacing: DrawEffectReplacement, player: PlayerId): void {
+  private runDrawReplacement(replacing: DrawEffectReplacement, player: PlayerId, cycled?: ObjectId): void {
     const record = replacing.record;
     if (record?.next === true) this.state.activeReplacements = this.state.activeReplacements.filter((r) => r !== record);
     this.runReplacedBy(replacing.effect, replacing.source, replacing.controller, {
       player,
+      // The cycled card, as `"trigger-object"` (`byCyclingOf`).
+      ...(cycled !== undefined ? { object: cycled } : {}),
       key: replacing.key,
       ...(record !== undefined ? { record } : {}),
     });
@@ -71111,7 +71117,19 @@ controlledBy,
         exceptDrawStepFirst: before.exceptDrawStepFirst + (firstInDrawStep ? 0 : 1),
       };
     }
-    return { firstInDrawStep, before: { ...before } };
+    const cycled = this.cyclingDrawSource();
+    return { firstInDrawStep, before: { ...before }, ...(cycled !== undefined ? { cycled } : {}) };
+  }
+
+  /** The card whose cycling ability is resolving right now, making a draw
+   * (rule 702.29a), if the innermost ability resolving is one. */
+  private cyclingDrawSource(): ObjectId | undefined {
+    const id = this.resolvingAbilities[this.resolvingAbilities.length - 1];
+    const object = id === undefined ? undefined : this.state.objects[id];
+    const source = object?.sourceObjectId;
+    if (object === undefined || source === undefined || source === null) return undefined;
+    const ability = this.stackAbilityOf(object);
+    return "cycling" in ability && ability.cycling === true ? source : undefined;
   }
 
   /** The `would-draw` effect replacement (Underrealm Lich) that replaces this draw `event` of `player`'s, with the
@@ -71191,6 +71209,11 @@ controlledBy,
     const zones = this.state.zones.perPlayer[player];
     if (r.whileLibraryEmpty === true && zones.library.length !== 0) return false;
     if (r.whileHandAtMost !== undefined && zones.hand.length > r.whileHandAtMost) return false;
+    if (r.byCyclingOf !== undefined) {
+      if (event.cycled === undefined || !matchesFilter(this.state, this.registry, event.cycled, r.byCyclingOf, { you: player })) {
+        return false;
+      }
+    }
     return true;
   }
 
