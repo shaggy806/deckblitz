@@ -3052,7 +3052,9 @@
   "replacement:draw-replacement-return-from-graveyard-or-lose",
   "effect:delayed-return-then-discard-toughness",
   "effect:delayed-return-then-discard-toughness",
-  "effect:free-cast-as-though-flash-if-condition"
+  "effect:free-cast-as-though-flash-if-condition",
+  "effect:may-reveal-from-hand",
+  "filter:same-name-as-revealed-card"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
