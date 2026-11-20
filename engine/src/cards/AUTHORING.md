@@ -8831,13 +8831,13 @@ Delete an entry in the same commit as the feature that retires it.
   Kaleidostone — Implements of Sacrifice is in) or has no `{T}` (Crosis's
   Attendant): sacrificing to swap mana is the player's call. Selvala, Heart of
   the Wilds is still blocked, on its output rather than its cost.
-- **A *mana* ability with a `tapOthers` cost is invisible to the auto-payer**
-  (Jaspera Sentinel, Holdout Settlement: "{T}, Tap an untapped creature you
-  control: Add one mana of any color"). `useManaSource` taps only the source,
-  so offering these to `manaSources()` would hand out the mana without paying
-  for it — strictly better than the printed card. They're excluded there and
-  stay activatable by hand, which floats the mana; the effect is that the card
-  is inert during auto-payment rather than wrong.
+- **A *mana* ability with a `tapOthers` cost reaches the auto-payer only in its
+  plain form** (since 2026-11-20, `Game.tapCostManaSources`): a numeric
+  `count`, no mana or sacrifice beside it, not once a turn — Relic of Legends,
+  Springleaf Drum, Holdout Settlement, Heritage Druid. The permanents it taps
+  are picked as the sources are listed (`ManaOption.tapsOthers`, tapped by
+  `useManaSource`). Crew's total power, `shareCreatureType`, `count: "x"` and
+  one with a mana cost stay activatable by hand, which floats the mana.
 - No **"a player plays a land"** trigger distinct from "a land enters the
   battlefield" generally (Burgeoning) — the latter also fires for a land
   fetched by an effect, which the former shouldn't (needed-cards P18).

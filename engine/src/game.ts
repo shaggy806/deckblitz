@@ -2347,6 +2347,33 @@ function heldManaSourceOf(id: ObjectId): { readonly player: PlayerId; readonly a
   return { player: player.join(":") as PlayerId, ability: Number(ability) };
 }
 
+/** What a payment plan calls one activation of a mana ability without `{T}`
+ * that taps other permanents (Relic of Legends' second ability — see
+ * `Game.tapCostManaSources`): one id per set of permanents it could tap, so
+ * the planner can use it more than once. The permanent's id comes last,
+ * whatever characters it has. */
+const TAP_COST_MANA_PREFIX = "tap-cost-mana:";
+function tapCostSourceId(source: ObjectId, ability: number, use: number): ObjectId {
+  return `${TAP_COST_MANA_PREFIX}${ability}:${use}:${source}` as ObjectId;
+}
+function tapCostSourceOf(id: ObjectId): ObjectId | undefined {
+  if (!id.startsWith(TAP_COST_MANA_PREFIX)) return undefined;
+  const [_ability, _use, ...source] = id.slice(TAP_COST_MANA_PREFIX.length).split(":");
+  return source.join(":") as ObjectId;
+}
+
+/** A mana ability whose cost taps other permanents, found as the sources
+ * are listed and planned once they all are (`Game.tapCostManaSources`). */
+interface TapCostManaAbility {
+  readonly id: ObjectId;
+  readonly abilityIndex: number;
+  readonly count: number;
+  readonly spec: { readonly filter: CardFilter; readonly includeSelf?: boolean };
+  /** It has `{T}` too (Springleaf Drum). */
+  readonly tapsSelf: boolean;
+  readonly options: readonly ManaOption[];
+}
+
 interface ManaSourceArrangement {
   readonly first?: ReadonlySet<ObjectId>;
   readonly last?: ReadonlySet<ObjectId>;
@@ -2360,13 +2387,18 @@ function arrangeManaSources(
   // A withheld permanent is being tapped for something else, which only
   // rules out its `{T}` options — an untapped ability (Vivi Ornitier's
   // "{0}: Add …") never needed it untapped in the first place.
+  // Nor may an option tap one as its cost (Springleaf Drum's creature —
+  // `ManaOption.tapsOthers`).
+  const tapsWithheld = (o: ManaOption): boolean => o.tapsOthers?.some((id) => withheld?.has(id) === true) === true;
   const kept =
     withheld === undefined
       ? [...sources]
       : sources.flatMap((s) => {
-          if (!withheld.has(s.id)) return [s];
-          const options = s.options.filter((o) => o.untapped === true);
-          return options.length === 0 || s.sacrificeSelf ? [] : [{ ...s, options }];
+          const options = s.options.filter(
+            (o) => !tapsWithheld(o) && (!withheld.has(s.id) || o.untapped === true),
+          );
+          if (options.length === s.options.length) return [s];
+          return options.length === 0 || (withheld.has(s.id) && s.sacrificeSelf) ? [] : [{ ...s, options }];
         });
   const ordered =
     first === undefined ? kept : [...kept.filter((s) => first.has(s.id)), ...kept.filter((s) => !first.has(s.id))];
@@ -30724,6 +30756,9 @@ export class Game {
 
   private manaSourcesUncached(player: PlayerId): ManaSource[] {
     const out: ManaSource[] = [];
+    // The mana abilities that tap other permanents, planned once every other
+    // source is known (`tapCostManaSources`).
+    const tapCosts: TapCostManaAbility[] = [];
     // Computed once for the whole scan — see `activatedGrantSources`.
     const grantors = this.activatedGrantSources();
     for (const id of this.state.zones.shared.battlefield) {
@@ -30782,8 +30817,27 @@ export class Game {
         // {Q} isn't paid by a mana payment (`AbilityCost.untap`), nor is
         // untapping anything else.
         if (ability.cost.untap === true || ability.cost.untapOthers !== undefined) return;
+        // "Tap N untapped [permanents] you control" as the cost, and nothing
+        // else beside an optional {T} (Relic of Legends, Springleaf Drum,
+        // Heritage Druid): planned once the whole board is listed, with the
+        // permanents it taps picked then (`tapCostManaSources`). Its count is
+        // what bounds how often one without {T} can be activated in one
+        // payment. Crew's total power, a shared type and X stay by hand.
+        const tapOthers = ability.cost.tapOthers;
+        const plainTapOthers =
+          tapOthers !== undefined &&
+          typeof tapOthers.count === "number" &&
+          tapOthers.count > 0 &&
+          tapOthers.totalPower === undefined &&
+          tapOthers.shareCreatureType !== true &&
+          ability.cost.mana === null &&
+          ability.cost.sacrifice === undefined &&
+          ability.oncePerTurn !== true;
+        if (tapOthers !== undefined && !plainTapOthers) return;
         if (ability.cost.tap) {
           if (!canTap) return;
+        } else if (plainTapOthers) {
+          // Bounded by the permanents it taps, not by the source.
         } else if (ability.oncePerTurn !== true && (ability.cost.mana === null || ability.cost.sacrifice !== undefined)) {
           // Without `{T}` or a once-a-turn limit an ability could be
           // activated any number of times in one payment, which the planner
@@ -30796,15 +30850,10 @@ export class Game {
           // call, not the auto-payer's.
           return;
         }
-        // "Tap an untapped creature you control" as part of the cost
-        // (Jaspera Sentinel, Holdout Settlement). `useManaSource` taps only
-        // the source, so offering these to the auto-payer would hand out the
-        // mana without paying for it — strictly better than the printed card.
-        // They stay activatable by hand; see AUTHORING §15. The same goes
-        // for every other cost it can't pay: sacrificing a chosen permanent
-        // (Kykar's Spirits), removing counters (Ramos), energy, exiling or
-        // discarding, and an exhaust ability's single use.
-        if (ability.cost.tapOthers !== undefined) return;
+        // Every other cost the auto-payer can't pay stays by hand (AUTHORING
+        // §15): sacrificing a chosen permanent (Kykar's Spirits), removing
+        // counters (Ramos), energy, exiling or discarding, and an exhaust
+        // ability's single use.
         // A Treasure that can't be sacrificed can't pay its own cost.
         if (ability.cost.sacrifice === "self" && (!this.canBeSacrificed(id) || this.sacrificeCostProhibited(player, id, true))) return;
         // A counter put on the source as the cost (Wall of Roots) is paid by
@@ -31054,6 +31103,17 @@ export class Game {
           (options, extra) => options.flatMap((option) => this.withManaExtra(option, extra, player)),
           multiplied,
         );
+        if (plainTapOthers && tapOthers !== undefined) {
+          tapCosts.push({
+            id,
+            abilityIndex,
+            count: tapOthers.count as number,
+            spec: tapOthers,
+            tapsSelf: ability.cost.tap,
+            options: withExtras,
+          });
+          return;
+        }
         for (const built of withExtras) {
           const option = hybridCost.length > 0 ? { ...built, hybridCost } : built;
           if (!options.some((o) => key(o) === key(option))) options.push(option);
@@ -31061,19 +31121,9 @@ export class Game {
         if (ability.cost.sacrifice === "self") sacrificeSelf = true;
       });
       if (options.length === 0) continue;
-      out.push({
-        id,
-        isLand: this.registry.get(printedCardName(object)).types.includes("land"),
-        // Its current types (an animated land, a Mishra's Factory, is one).
-        isCreature: effectiveTypes(this.state, this.registry, object).includes("creature"),
-        options,
-        sacrificeSelf,
-        // Its mana is snow mana (rule 107.4h), the supertype `manaOriginOf`
-        // stamps on what it makes.
-        ...(effectiveSupertypes(this.state, this.registry, object).includes("snow") ? { snow: true } : {}),
-        ...(this.holdsFreeSpell(id) ? { reserved: true } : {}),
-      });
+      out.push(this.manaSourceEntry(id, options, sacrificeSelf));
     }
+    out.push(...this.tapCostManaSources(player, out, tapCosts));
     const flexibility = (s: ManaSource): number =>
       new Set(s.options.flatMap((o) => [...o.fixed])).size +
       (s.options.some((o) => o.anyColor > 0) ? 5 : 0);
@@ -31107,6 +31157,121 @@ export class Game {
     out.push(...this.heldManaSources(player));
     return out;
   }
+
+  /** A permanent as a source for a payment, with the options it offers. */
+  private manaSourceEntry(id: ObjectId, options: ManaOption[], sacrificeSelf: boolean): ManaSource {
+    const object = this.state.objects[id];
+    return {
+      id,
+      isLand: this.registry.get(printedCardName(object)).types.includes("land"),
+      // Its current types (an animated land, a Mishra's Factory, is one).
+      isCreature: effectiveTypes(this.state, this.registry, object).includes("creature"),
+      options,
+      sacrificeSelf,
+      // Its mana is snow mana (rule 107.4h), the supertype `manaOriginOf`
+      // stamps on what it makes.
+      ...(effectiveSupertypes(this.state, this.registry, object).includes("snow") ? { snow: true } : {}),
+      ...(this.holdsFreeSpell(id) ? { reserved: true } : {}),
+    };
+  }
+
+  /**
+   * The mana abilities whose cost taps other permanents (`AbilityCost.tapOthers`
+   * — Relic of Legends' "Tap an untapped legendary creature you control",
+   * Springleaf Drum's "{T}, Tap an untapped creature you control", Heritage
+   * Druid's three Elves) as sources for a payment, the permanents each taps
+   * picked here, so the plan is one the cost can be paid for (rule 602.2b):
+   *
+   * - none of them taps for mana of its own in this list (`sources`), nor is
+   *   the source of a `{T}` one, and no two activations share one (a token
+   *   stack gives one a token);
+   * - what can't attack this turn is tapped first (a noncreature, then a
+   *   summoning-sick creature: rule 302.6 doesn't stop one paying such a
+   *   cost), and a creature that could attack last;
+   * - one with `{T}` is one more option of its permanent, beside the ones
+   *   it has (Holdout Settlement's "{T}: Add {C}"); one without is a source
+   *   of its own for each set of permanents it can tap, under an id
+   *   `useManaSource` reads back (`tapCostSourceId`).
+   */
+  private tapCostManaSources(
+    player: PlayerId,
+    sources: ManaSource[],
+    abilities: readonly TapCostManaAbility[],
+  ): ManaSource[] {
+    if (abilities.length === 0) return [];
+    // What's spoken for: anything a listed option taps, and the source of
+    // every `{T}` one. A token stack is used one token at a time.
+    const used = new Map<ObjectId, number>();
+    const capacity = (id: ObjectId): number => this.state.objects[id]?.stackCount ?? 1;
+    const spend = (id: ObjectId): void => {
+      used.set(id, (used.get(id) ?? 0) + 1);
+    };
+    for (const source of sources) {
+      if (source.options.some((o) => o.untapped === undefined)) used.set(source.id, capacity(source.id));
+    }
+    for (const ability of abilities) {
+      if (ability.tapsSelf) used.set(ability.id, capacity(ability.id));
+    }
+    const isCreature = (id: ObjectId): boolean =>
+      effectiveTypes(this.state, this.registry, this.state.objects[id]).includes("creature");
+    const rank = (id: ObjectId): number =>
+      !isCreature(id) ? 0 : this.state.objects[id].summoningSick ? 1 : 2;
+    const pick = (ability: TapCostManaAbility): ObjectId[] | null => {
+      const candidates = this.tapOthersCandidates(player, ability.id, ability.spec)
+        .filter((id) => !(ability.tapsSelf && id === ability.id))
+        .sort((a, b) => rank(a) - rank(b));
+      const picked: ObjectId[] = [];
+      for (const id of candidates) {
+        while (picked.length < ability.count && (used.get(id) ?? 0) + picked.filter((p) => p === id).length < capacity(id)) {
+          picked.push(id);
+        }
+        if (picked.length === ability.count) break;
+      }
+      if (picked.length < ability.count) return null;
+      for (const id of picked) spend(id);
+      return picked;
+    };
+    const withTaps = (ability: TapCostManaAbility, taps: readonly ObjectId[]): ManaOption[] =>
+      ability.options.map((o) => ({ ...o, tapsOthers: taps }));
+    const out: ManaSource[] = [];
+    // `{T}` ones first: each is one activation at most.
+    for (const ability of abilities) {
+      if (!ability.tapsSelf) continue;
+      const taps = pick(ability);
+      if (taps === null) continue;
+      const options = withTaps(ability, taps);
+      const own = sources.find((s) => s.id === ability.id) ?? out.find((s) => s.id === ability.id);
+      if (own !== undefined) {
+        const merged: ManaSource = { ...own, options: [...own.options, ...options] };
+        const list = sources.includes(own) ? sources : out;
+        list[list.indexOf(own)] = merged;
+      } else {
+        out.push(this.manaSourceEntry(ability.id, options, false));
+      }
+    }
+    // Then one source per set of permanents for the ones without `{T}`,
+    // capped: a payment is never as large as a board of Elf tokens.
+    for (const ability of abilities) {
+      if (ability.tapsSelf) continue;
+      for (let use = 0; use < Game.MAX_TAP_COST_MANA_USES; use += 1) {
+        const taps = pick(ability);
+        if (taps === null) break;
+        out.push({
+          ...this.manaSourceEntry(ability.id, withTaps(ability, taps), false),
+          id: tapCostSourceId(ability.id, ability.abilityIndex, use),
+          isLand: false,
+          // Tapping a creature costs it an attack or a block, so generic
+          // reaches for this last, as for a creature's own mana.
+          isCreature: taps.some(isCreature),
+        });
+      }
+    }
+    return out;
+  }
+
+  /** How many times one mana ability without `{T}` that taps other
+   * permanents is offered to one payment (`tapCostManaSources`). */
+  private static readonly MAX_TAP_COST_MANA_USES = 16;
 
   /** The mana abilities `player` has rather than a permanent (Channel — see
    * `PlayerManaAbility`), one of each: two Channels in a turn are the same
@@ -31393,6 +31558,12 @@ export class Game {
     purpose: ManaPurpose = null,
     arrange?: ManaSourceArrangement,
   ): ManaPayment | null {
+    // What's excluded (an ability's own {T} source) can't be tapped as
+    // another mana ability's cost either (`ManaOption.tapsOthers`): the
+    // planner drops it as a source only.
+    if (exclude !== undefined && !(arrange?.withheld?.has(exclude) ?? false)) {
+      arrange = { ...arrange, withheld: new Set([...(arrange?.withheld ?? []), exclude]) };
+    }
     const plan = planPayment(this.manaPlanningView(player, purpose, arrange), cost, purpose, avoid, exclude);
     if (plan === null && avoid !== undefined) {
       // `avoid` is only an order too, and the greedy planner can fail with
@@ -31431,7 +31602,7 @@ export class Game {
     // if that source qualifies too (`manaUnitCanPay` holds the floating units).
     const onlyFrom = purpose?.kind === "cast" ? this.spendOnlyManaFromOf(purpose.card) : undefined;
     const fits = (id: ObjectId): boolean => {
-      const origin = this.manaOriginOf(id);
+      const origin = this.manaOriginOf(tapCostSourceOf(id) ?? id);
       return origin !== undefined && onlyFrom !== undefined && manaOriginMatches(origin, onlyFrom);
     };
     // An extra with its own restriction (Snowfall's "spend this mana only to pay
@@ -31759,7 +31930,10 @@ export class Game {
       if (ability !== undefined) this.activateHeldManaAbility(held.player, ability);
       return;
     }
-    const object = this.state.objects[step.source];
+    // One use of a mana ability without {T} that taps other permanents
+    // (`tapCostManaSources`): its permanent is the source.
+    const sourceId = tapCostSourceOf(step.source) ?? step.source;
+    const object = this.state.objects[sourceId];
     const player = object.controller;
     // A mana ability activated while paying, as `activateAbility` journals
     // one (Tezzeret, Betrayer of Flesh's "first activated ability of an
@@ -31769,11 +31943,14 @@ export class Game {
         kind: "activated",
         how: "ability",
         player,
-        object: step.source,
+        object: sourceId,
         stint: object.zoneChangeCount ?? 0,
-        was: this.takeLastKnown(step.source),
+        was: this.takeLastKnown(sourceId),
       });
     }
+    // "Tap an untapped creature you control" (rule 602.2b: costs are paid
+    // before the ability resolves), the permanents the plan picked.
+    if (step.tapsOthers !== undefined) this.payTapCost(step.tapsOthers, player);
     // A converter's own cost comes out of the pool before its output goes in
     // — the plan orders its funding sources ahead of it, and names the exact
     // units they contributed. What it spent is announced with its activation
@@ -31782,7 +31959,7 @@ export class Game {
     // What the mana ability does before its mana (`add-mana`'s `first`):
     // the plan sized the mana as it is once that's done (`liveManaAmount`).
     if (step.first !== undefined) {
-      applyEffectSpec(step.first, this.makeResolutionContext(step.source, player, []));
+      applyEffectSpec(step.first, this.makeResolutionContext(sourceId, player, []));
     }
     // The last units are what triggered mana abilities added, and theirs:
     // none of this source's restrictions or riders ride on them (the Mirari's
@@ -31796,7 +31973,7 @@ export class Game {
     };
     step.mana.forEach((m, i) =>
       i < own
-        ? this.addMana(player, m, 1, step.tag, originOf(step.source))
+        ? this.addMana(player, m, 1, step.tag, originOf(sourceId))
         : this.addMana(player, m, 1, step.extraTagOf?.[extraFrom[i - own]], originOf(extraFrom[i - own])),
     );
     for (const extra of step.floating ?? []) {
@@ -31814,44 +31991,44 @@ export class Game {
       invalidateComputedCache();
     }
     if (step.counterCost !== undefined) {
-      this.putCostCounters(step.source, step.counterCost.kind, step.counterCost.count, player);
+      this.putCostCounters(sourceId, step.counterCost.kind, step.counterCost.count, player);
     }
     if (step.sacrifice) {
-      this.moveObject(step.source, "graveyard");
+      this.moveObject(sourceId, "graveyard");
       // `player`, read before the move: its controller sacrificed it (701.21a).
-      this.emit({ type: "permanent-sacrificed", object: step.source, player });
+      this.emit({ type: "permanent-sacrificed", object: sourceId, player });
     } else if (step.untapped === undefined) {
       object.tapped = true;
-      this.emit({ type: "permanent-tapped", object: step.source, by: player });
+      this.emit({ type: "permanent-tapped", object: sourceId, by: player });
     }
     if (step.lifeCost > 0) this.payLife(player, step.lifeCost);
     if (step.pain > 0) {
-      this.dealDamage(step.source, { kind: "player", player }, step.pain);
+      this.dealDamage(sourceId, { kind: "player", player }, step.pain);
     }
     // What else the mana ability does (`add-mana`'s `also`), "that color"
     // the first unit it made, as by hand (Foraging Wickermaw).
     if (step.rider !== undefined) {
       const made = own > 0 ? step.mana[0] : undefined;
-      const ctx = this.makeResolutionContext(step.source, player, []);
+      const ctx = this.makeResolutionContext(sourceId, player, []);
       applyEffectSpec(step.rider, made !== undefined ? { ...ctx, manaColor: made } : ctx);
     }
-    this.applyManaExtraRiders(extraRiders, step.source, player);
+    this.applyManaExtraRiders(extraRiders, sourceId, player);
     // What triggers on the tap and uses the stack, once this spell or ability
     // is cast and someone would get priority (rules 106.12a, 603.3). An option
     // with no {T} (`untapped`) isn't a tap, and one that made no mana of its
     // own sets nothing off.
     if (step.untapped === undefined && own > 0) {
-      this.emit({ type: "permanent-tapped-for-mana", object: step.source, player, produced: step.mana.slice(0, own) });
+      this.emit({ type: "permanent-tapped-for-mana", object: sourceId, player, produced: step.mana.slice(0, own) });
     }
     // The mana ability resolved (rule 605.3b), making `own` of the mana.
-    this.emit({ type: "mana-ability-resolved", object: step.source, player, amount: own });
+    this.emit({ type: "mana-ability-resolved", object: sourceId, player, amount: own });
     // A mana ability activated to pay a cost (rule 605.3a), for "whenever
     // you activate an ability of a creature" (Elrond, Moon-Reader) — only
     // when something on the battlefield asks: this is every land tapped.
     if (this.manaActivationWatched()) {
       this.emit({
         type: "ability-activated",
-        source: step.source,
+        source: sourceId,
         player,
         onStack: false,
         ofPermanent: true,

@@ -13584,4 +13584,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Forest*6'] },
     }),
   ),
+  // --- Mana from tapping another permanent, in the auto-payer (2026-11-20) ---
+  preset(
+    "Relic of Legends: the game stops at Bob's end step, and Lightning Bolt taps Thrasios for its mana",
+    board({
+      you: { bf: [{ name: 'Relic of Legends', tapped: true }, 'Thrasios, Triton Hero'], hand: ['Lightning Bolt'] },
+      opp: { bf: ['Grizzly Bears'] },
+      turn: 0,
+      step: 'end',
+    }),
+  ),
 ]

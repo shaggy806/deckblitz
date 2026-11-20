@@ -8968,3 +8968,9 @@ Each board's die comes up 4.
 ### Selective Adaptation: the first card you pick goes onto the battlefield, the others into your hand
 - **Do:** Cast Selective Adaptation. Click Giant Spider, then Serra Angel, Raging Goblin and Typhoid Rats, and confirm.
 - **Expect:** The popup's title reads "Choose a card for each keyword: the first you pick goes onto the battlefield, the rest into your hand", and Grizzly Bears, Hill Giant and Craw Wurm can't be picked. Giant Spider is on the battlefield; Serra Angel, Raging Goblin and Typhoid Rats are in your hand; the other three are in your graveyard.
+
+## Mana from tapping another permanent (2026-11-20)
+
+### Relic of Legends: the game stops at Bob's end step, and Lightning Bolt taps Thrasios for its mana
+- **Do:** Leave "Skip mana stops" on. When the game stops at Bob's end step, cast Lightning Bolt at Bob's Grizzly Bears.
+- **Expect:** The game stops for you at Bob's end step with Lightning Bolt castable. Casting it needs no tapping by hand: Thrasios, Triton Hero is tapped for the mana, and Relic of Legends stays tapped.

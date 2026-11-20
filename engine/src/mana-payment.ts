@@ -107,6 +107,14 @@ export interface ManaOption {
    * mana: they're still made as the source is tapped, and float. See
    * {@link optionKeepingExtras}. */
   readonly floating?: readonly ManaExtraUnit[];
+  /** The other permanents the activation taps as its cost — "Tap an untapped
+   * legendary creature you control: Add one mana of any color" (Relic of
+   * Legends), "{T}, Tap an untapped creature you control" (Springleaf Drum)
+   * — picked as the sources are listed (`Game.manaSources`), so no two
+   * options of one list share one, nor does it tap for mana of its own. A
+   * token stack's id appears once per token it gives. Tapped when the
+   * payment uses it. */
+  readonly tapsOthers?: readonly ObjectId[];
 }
 
 /** `o` with only the extra units `keep` admits counted toward a payment; the rest
@@ -240,6 +248,8 @@ export interface ManaPlanStep {
   readonly counterCost?: { readonly kind: string; readonly count: number };
   /** See {@link ManaOption.floating}. */
   readonly floating?: readonly ManaExtraUnit[];
+  /** See {@link ManaOption.tapsOthers}. */
+  readonly tapsOthers?: readonly ObjectId[];
 }
 
 /** A fully-worked-out way to pay a cost: which sources to tap ({@link
@@ -1107,6 +1117,7 @@ function planSnowPayment(
       ...extraTagsOf(extras),
       ...(o.counterCost !== undefined ? { counterCost: o.counterCost } : {}),
       ...(o.floating !== undefined ? { floating: o.floating } : {}),
+      ...(o.tapsOthers !== undefined ? { tapsOthers: o.tapsOthers } : {}),
     };
   };
   // What a chosen activation leaves floating once its one unit pays a pip:
@@ -1375,6 +1386,7 @@ function planManaPaymentOrdered(
     readonly first?: EffectSpec;
     readonly counterCost?: { readonly kind: string; readonly count: number };
     readonly floating?: readonly ManaExtraUnit[];
+    readonly tapsOthers?: readonly ObjectId[];
     readonly extraTagOf?: Readonly<Record<ObjectId, Omit<ManaUnit, "type">>>;
   }
   // Colours this cost still wants, for `coverGenericFrom`'s preference.
@@ -1481,6 +1493,7 @@ function planManaPaymentOrdered(
       ...(opt.first !== undefined ? { first: opt.first } : {}),
       ...(opt.counterCost !== undefined ? { counterCost: opt.counterCost } : {}),
       ...(opt.floating !== undefined ? { floating: opt.floating } : {}),
+      ...(opt.tapsOthers !== undefined ? { tapsOthers: opt.tapsOthers } : {}),
       ...extraTagsOf(opt.extras ?? []),
     };
     tapped.push(t);
@@ -1964,6 +1977,7 @@ function planManaPaymentOrdered(
       ...(t.extraTagOf !== undefined ? { extraTagOf: t.extraTagOf } : {}),
       ...(t.counterCost !== undefined ? { counterCost: t.counterCost } : {}),
       ...(t.floating !== undefined ? { floating: t.floating } : {}),
+      ...(t.tapsOthers !== undefined ? { tapsOthers: t.tapsOthers } : {}),
     };
   });
 }
