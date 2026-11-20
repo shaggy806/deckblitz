@@ -3050,7 +3050,9 @@
   "amount:aggregate-over-attached-equipment",
   "replacement:draw-replacement-reveal",
   "replacement:draw-replacement-return-from-graveyard-or-lose",
-  "effect:delayed-return-then-discard-toughness"
+  "effect:delayed-return-then-discard-toughness",
+  "effect:delayed-return-then-discard-toughness",
+  "effect:free-cast-as-though-flash-if-condition"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

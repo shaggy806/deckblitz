@@ -5363,8 +5363,13 @@ export interface CardDefinition {
    * addition to* the normal cast, not instead of it: a player who doesn't
    * meet the condition (or simply prefers to) can still pay the printed mana
    * cost. `null` for no such permission.
+   *
+   * `flash: true` is "you may cast this creature without paying its mana
+   * cost **and as though it had flash**" (Qasali Ambusher): the free cast
+   * alone may begin any time an instant could be cast, while the condition
+   * holds (rule 601.3c, 601.3d) — a paid cast keeps its own timing.
    */
-  readonly freeCastIf: { readonly condition: StaticCondition } | null;
+  readonly freeCastIf: { readonly condition: StaticCondition; readonly flash?: true } | null;
   /**
    * A conditional flash printed on the spell itself: "You may cast this
    * spell as though it had flash if you control a Human" (Bard's Company),
@@ -6991,7 +6996,7 @@ interface CardDraft {
    * `affects: { scope: "attached" }`. A cost that also collects evidence
    * ("Bestow—{R}, Collect evidence 6") is `{ cost, collectEvidence }`. */
   bestow?: string | { readonly cost: string; readonly collectEvidence: number };
-  freeCastIf?: { readonly condition: StaticCondition };
+  freeCastIf?: NonNullable<CardDefinition["freeCastIf"]>;
   /** See {@link CardDefinition.flashIf}. */
   flashIf?: NonNullable<CardDefinition["flashIf"]>;
   alternativeCost?: NonNullable<CardDefinition["alternativeCost"]>;

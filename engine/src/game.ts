@@ -22342,6 +22342,14 @@ export class Game {
       // flash" (Primal Prayers): cast for that alternative cost, it may
       // begin any time (601.3c).
       !(altCost && this.alternativeCostOf(cardId, def, via, player)?.flash === true) &&
+      // "You may cast this creature without paying its mana cost and as
+      // though it had flash" if … (Qasali Ambusher): the free cast under that
+      // permission, while its condition holds as the cast begins (601.3c, d).
+      !(
+        free &&
+        def.freeCastIf?.flash === true &&
+        staticConditionMet(this.state, this.registry, { ...this.state.objects[cardId], controller: player }, def.freeCastIf.condition)
+      ) &&
       // The same of a permission (Elsha of the Infinite's "from the top of
       // your library"): only a cast under that permission, paid its way.
       !this.permissionGivesFlash(player, cardId, face ?? 0, via, free, altCost, Math.max(0, Math.floor(xValue)), graveyardGrant) &&
