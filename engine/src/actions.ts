@@ -2119,6 +2119,10 @@ export type LegalAction =
        * Keeper): each card's name, in `from`'s order — no two cards
        * discarded may share one. */
       readonly differentNames?: readonly string[];
+      /** "Discard two nonland cards with the same name" (Sphinx of the
+       * Chimes): each card's name, in `from`'s order — every card discarded
+       * must have the same one (each in `from` has enough namesakes). */
+      readonly sameNames?: readonly string[];
     }
   | {
       readonly kind: "choose-from-zone";

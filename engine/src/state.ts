@@ -3922,6 +3922,10 @@ export type AwaitingDecision =
       /** "Discard three cards with different names" (Ormos, Archive
        * Keeper's cost): no two of the cards discarded share a name. */
       readonly differentNames?: true;
+      /** "Discard two nonland cards with the same name" (Sphinx of the
+       * Chimes' cost): every card discarded has the same name. `eligible`
+       * holds only cards with enough namesakes to make up `count`. */
+      readonly sameName?: true;
       /** A cost's discard (a spell's additional cost, an activated
        * ability's): who gets priority once it's answered — who cast or
        * activated (rule 117.3c), whoever's turn it is. Absent: the active
@@ -6951,6 +6955,8 @@ export interface GameState {
     readonly upTo?: true;
     /** See the `discard` decision's `differentNames`. */
     readonly differentNames?: true;
+    /** See the `discard` decision's `sameName`. */
+    readonly sameName?: true;
     /** See the `discard` decision's `forCost`. */
     readonly forCost?: ObjectId;
   }[];

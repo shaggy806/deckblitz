@@ -1664,6 +1664,12 @@ describe("costs and triggers", () => {
       tap: false,
       discard: { count: 3, differentNames: true },
     });
+    // With the same name (Sphinx of the Chimes).
+    expect(parseCost("Discard two nonland cards with the same name")?.cost).toEqual({
+      mana: null,
+      tap: false,
+      discard: { count: 2, filter: { notTypes: ["land"] }, sameName: true },
+    });
     // Exert as a cost (rule 701.43 — Steward of Solidarity).
     expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, do: { kind: "exert", target: "source" } });
     expect(parseCost("{2}, Exile the top card of your library").cost).toEqual({ mana: "{2}", tap: false, do: { kind: "exile-from-library", amount: 1 } });

@@ -338,6 +338,14 @@ The key `cost:alternative-cost-generic-equal-spell-mana-value`: `alternativeCost
 generic with N the face's mana value, X 0 (rules 118.9, 601.3e, 107.3b). Kentaro, the Smiling Cat (18322).
 `test/alt-cost-mana-value.test.ts`.
 
+### Discard cards with the same name as a cost — built 2026-11-20
+
+The key `cost:discard-same-name`: `AbilityCost.discard.sameName` — gated on `count` matching cards of one name
+(`Game.sameNameDiscards`), paid with the ordinary `discard` decision, whose awaiting carries `sameName` and an
+`eligible` of only cards with enough namesakes, whose offer carries each card's name (`LegalAction.discard.sameNames`)
+and refuses a mix; the bots' candidates and the fuzzer keep to one name, and the client won't pick a second name.
+Sphinx of the Chimes (18810). `test/discard-same-name.test.ts`.
+
 ### A draw replaced by a card returned from the graveyard, or a loss — found built 2026-11-20
 
 The key `replacement:draw-replacement-return-from-graveyard-or-lose`: Forbidden Crypt (16193). No engine code: Out

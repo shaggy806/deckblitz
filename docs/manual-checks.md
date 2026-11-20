@@ -8986,3 +8986,13 @@ Each board's die comes up 4.
 ### Aphetto Dredging: Llanowar Elves goes with Elvish Mystic, not Grizzly Bears
 - **Do:** Cast Aphetto Dredging and pick Llanowar Elves and Grizzly Bears, then swap Grizzly Bears for Elvish Mystic, confirm, and choose Elf.
 - **Expect:** Confirm stays off while Grizzly Bears is picked with the Elves. With Elvish Mystic it confirms, you're asked to choose between Druid and Elf, and both Elves go to your hand.
+## Two nonland cards with the same name as a cost (2026-11-20)
+
+### Sphinx of the Chimes: its cost's two cards must share a name
+- **Do:** Activate Sphinx of the Chimes's ability. Click a Shock, then a Grizzly Bears, then the other Shock, and click Discard.
+- **Expect:** The banner reads "Discard 2 cards with the same name". Savannah Lions and the Forests aren't lit. Once a Shock is picked the Grizzly Bears aren't lit and clicking one does nothing. Both Shocks go to your graveyard and you draw four cards.
+
+### Sphinx of the Chimes: in a 4-player game, its only pair is discarded without a question
+- **Do:** In this 4-player game, activate Sphinx of the Chimes's ability.
+- **Expect:** Both Shocks are discarded with no question asked, Grizzly Bears stays in your hand, and you draw four cards.
+

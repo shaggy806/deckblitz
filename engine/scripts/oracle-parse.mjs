@@ -1812,6 +1812,13 @@ export function parseCost(text) {
       const count = numberOf(m[1]);
       if (typeof count !== "number" || count < 2) return null;
       cost.discard = { count, ...(m[2] !== undefined ? { differentNames: true } : {}) };
+    } else if ((m = new RegExp(`^Discard ${N} (\\w+) cards with the same name$`).exec(part))) {
+      // "Discard two nonland cards with the same name" (Sphinx of the
+      // Chimes): which, chosen as it's paid — all of one name.
+      const count = numberOf(m[1]);
+      const filter = parseTypePhrase(m[2], { cards: true });
+      if (typeof count !== "number" || count < 2 || filter === null || Object.keys(filter).length === 0) return null;
+      cost.discard = { count, filter, sameName: true };
     } else if ((m = /^Remove all ([+-]\d+\/[+-]\d+|\w+) counters from ~$/i.exec(part))) {
       // Every one there, none allowed; the number removed is the ability's X
       // (Catti-brie of Mithral Hall).

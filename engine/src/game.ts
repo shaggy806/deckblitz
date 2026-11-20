@@ -28450,10 +28450,13 @@ export class Game {
       const payable = x === undefined ? filter : discardCostFilterAtX(ability.cost.discard, x);
       const candidates = this.discardCandidates(player, payable, sourceId);
       // "Discard three cards with different names": that many names.
+      // "Two nonland cards with the same name": that many of one name.
       const offers =
         ability.cost.discard.differentNames === true
           ? new Set(candidates.map((id) => nameOf(this.state.objects[id]))).size
-          : candidates.length;
+          : ability.cost.discard.sameName === true
+            ? this.sameNameDiscards(candidates, n).length
+            : candidates.length;
       if (offers < n) {
         return `${player} has too few cards in hand to pay ${def.name}'s cost`;
       }
@@ -29236,7 +29239,7 @@ export class Game {
             discardCostFilterAtX(manaDiscard, chosenX),
             undefined,
             false,
-            manaDiscard.differentNames === true,
+            manaDiscard.sameName === true ? "same" : manaDiscard.differentNames === true,
           ),
         );
         const asked = this.state.awaiting;
@@ -29461,7 +29464,7 @@ export class Game {
           discardCostFilterAtX(costDiscard, chosenX),
           undefined,
           false,
-          costDiscard.differentNames === true,
+          costDiscard.sameName === true ? "same" : costDiscard.differentNames === true,
         );
       });
       this.costDiscardPriorityTo(player);
@@ -65403,8 +65406,10 @@ controlledBy,
      * or with `amount` 0 the whole hand, the player's pick of how many. */
     upTo = false,
     /** "Discard three cards with different names" (a cost's — Ormos,
-     * Archive Keeper): no two of them share a name. */
-    differentNames = false,
+     * Archive Keeper): no two of them share a name. `"same"` is "two
+     * nonland cards with the same name" (Sphinx of the Chimes'): all of
+     * them share one. */
+    differentNames: boolean | "same" = false,
   ): void {
     if (target.kind !== "player") return;
     const player = target.player;
@@ -65454,7 +65459,8 @@ controlledBy,
         ...(from !== null ? { source: from } : {}),
         ...(filter !== undefined ? { filter } : {}),
         ...(unlessOne !== undefined ? { unlessOne } : {}),
-        ...(differentNames ? { differentNames: true as const } : {}),
+        ...(differentNames === true ? { differentNames: true as const } : {}),
+        ...(differentNames === "same" ? { sameName: true as const } : {}),
         ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       });
       return;
@@ -65917,7 +65923,14 @@ controlledBy,
     const outerSource = this.state.decisionSource;
     if (next.source !== undefined) this.state.decisionSource = next.source;
     try {
-      this.discardNow(next.player, next.count, next.filter, next.unlessOne, next.upTo === true, next.differentNames === true);
+      this.discardNow(
+        next.player,
+        next.count,
+        next.filter,
+        next.unlessOne,
+        next.upTo === true,
+        next.sameName === true ? "same" : next.differentNames === true,
+      );
     } finally {
       this.costDiscardFor = outer;
       if (this.state.awaiting === null) this.state.decisionSource = outerSource;
@@ -65932,9 +65945,14 @@ controlledBy,
     filter?: CardFilter,
     unlessOne?: CardFilter,
     upTo = false,
-    differentNames = false,
+    differentNames: boolean | "same" = false,
   ): void {
-    const hand = this.discardCandidates(player, filter);
+    const sameName = differentNames === "same";
+    // "With the same name": only cards with enough namesakes to make up the
+    // count (a cost's, gated on there being some).
+    const hand = sameName
+      ? this.sameNameDiscards(this.discardCandidates(player, filter), amount)
+      : this.discardCandidates(player, filter);
     // "Any number of cards": a choice of how many whenever there's a card.
     if (upTo) {
       if (hand.length === 0) return;
@@ -65949,7 +65967,7 @@ controlledBy,
       };
       return;
     }
-    if (!this.discardHasChoice(player, amount, filter, unlessOne)) {
+    if (sameName ? hand.length <= amount : !this.discardHasChoice(player, amount, filter, unlessOne)) {
       const all = [...hand];
       if (this.state.heldChoices !== undefined) {
         this.holdDiscard(player, all);
@@ -65966,8 +65984,9 @@ controlledBy,
       player,
       count: amount,
       fromEffect: true,
-      ...(narrowed ? { eligible: hand } : {}),
-      ...(differentNames ? { differentNames: true as const } : {}),
+      ...(narrowed || sameName ? { eligible: hand } : {}),
+      ...(differentNames === true ? { differentNames: true as const } : {}),
+      ...(sameName ? { sameName: true as const } : {}),
       ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       ...(unlessOne !== undefined
         ? {
@@ -65977,6 +65996,18 @@ controlledBy,
           }
         : {}),
     };
+  }
+
+  /** Of `candidates`, those with at least `count` cards of their name among
+   * them (rule 201.2a: "same name") — what a "discard N cards with the same
+   * name" may take. */
+  private sameNameDiscards(candidates: readonly ObjectId[], count: number): ObjectId[] {
+    const tally = new Map<string, number>();
+    for (const id of candidates) {
+      const name = nameOf(this.state.objects[id]);
+      tally.set(name, (tally.get(name) ?? 0) + 1);
+    }
+    return candidates.filter((id) => (tally.get(nameOf(this.state.objects[id])) ?? 0) >= count);
   }
 
   /** The cards in `player`'s hand a discard may take: those matching

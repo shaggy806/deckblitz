@@ -13609,4 +13609,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Swamp*4'], hand: ['Aphetto Dredging'], gy: ['Llanowar Elves', 'Elvish Mystic', 'Grizzly Bears'] },
     }),
   ),
+  // --- Two nonland cards with the same name discarded (2026-11-20) -----------
+  preset(
+    "Sphinx of the Chimes: its cost's two cards must share a name",
+    board({
+      you: { bf: ['Sphinx of the Chimes'], hand: ['Shock', 'Shock', 'Grizzly Bears', 'Grizzly Bears', 'Savannah Lions', 'Forest', 'Forest'] },
+      opp: {},
+    }),
+  ),
+  preset(
+    'Sphinx of the Chimes: in a 4-player game, its only pair is discarded without a question',
+    board({
+      you: { bf: ['Sphinx of the Chimes'], hand: ['Shock', 'Shock', 'Grizzly Bears'], lib: ['Island', 'Island', 'Island', 'Island'] },
+      opp: [{}, {}, {}],
+      fill: 1,
+    }),
+  ),
 ]

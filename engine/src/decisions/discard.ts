@@ -47,6 +47,7 @@ export const discard = defineDecision({
         ...(awaiting.differentNames === true
           ? { differentNames: from.map((id) => nameOf(ctx.state.objects[id])) }
           : {}),
+        ...(awaiting.sameName === true ? { sameNames: from.map((id) => nameOf(ctx.state.objects[id])) } : {}),
       },
     ];
   },
@@ -87,6 +88,10 @@ export const discard = defineDecision({
       (awaiting.differentNames === true &&
       new Set(cards.map((id) => nameOf(ctx.state.objects[id]))).size < cards.length
         ? `${player} must discard cards with different names`
+        : null) ??
+      // "With the same name".
+      (awaiting.sameName === true && new Set(cards.map((id) => nameOf(ctx.state.objects[id]))).size > 1
+        ? `${player} must discard cards with the same name`
         : null)
     );
   },
@@ -108,6 +113,13 @@ export const discard = defineDecision({
         seen.add(name);
         return true;
       });
+    }
+    // "With the same name": the controller chooses among the cards of one
+    // name — whichever name its first choice from the whole set has.
+    if (awaiting.sameName === true) {
+      const first = controller.chooseDiscards(hand, 1, view)[0];
+      const name = first === undefined ? undefined : nameOf(view.state.objects[first]);
+      hand = hand.filter((object) => nameOf(object) === name);
     }
     return { type: "discard", player, cards: controller.chooseDiscards(hand, awaiting.count, view) };
   },
@@ -139,9 +151,20 @@ export const discard = defineDecision({
       if (out.length >= singles) break;
       if (legal.orOneOf?.includes(id) === true) out.push({ type: "discard", player, cards: [id] });
     }
+    // "With the same name": combinations within each name, the names in the
+    // order their worst card comes.
+    const same = legal.sameNames;
+    const groups =
+      same === undefined
+        ? [worstFirst]
+        : [...new Set(worstFirst.map((id) => same[legal.from.indexOf(id)]))].map((name) =>
+            worstFirst.filter((id) => same[legal.from.indexOf(id)] === name),
+          );
     for (const size of sizes) {
-      if (out.length >= limit) break;
-      for (const cards of combinations(worstFirst, size, limit - out.length)) out.push({ type: "discard", player, cards });
+      for (const group of groups) {
+        if (out.length >= limit) break;
+        for (const cards of combinations(group, size, limit - out.length)) out.push({ type: "discard", player, cards });
+      }
     }
     return out;
   },
@@ -153,6 +176,12 @@ export const discard = defineDecision({
       return { type: "discard", player, cards: [orOneOf[rng.pickIndex(orOneOf.length)]] };
     }
     let pool = [...legal.from];
+    // "With the same name": one name, drawn by one of its cards.
+    const same = legal.sameNames;
+    if (same !== undefined && pool.length > 0) {
+      const name = same[rng.pickIndex(pool.length)];
+      pool = pool.filter((_id, i) => same[i] === name);
+    }
     const cards: ObjectId[] = [];
     // "Any number": how many is drawn too.
     const count = legal.upTo === true ? rng.pickIndex(legal.count + 1) : legal.count;

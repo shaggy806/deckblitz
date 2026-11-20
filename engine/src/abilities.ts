@@ -484,6 +484,11 @@ export interface AbilityCost {
    * Archive Keeper): no two of the cards discarded share a name, and the
    * ability is offered only with that many names in hand; the `discard`
    * decision carries each offered card's name and refuses a repeat.
+   * `sameName` is the other way: "Discard two nonland cards with the same
+   * name" (Sphinx of the Chimes) — every card discarded has one name, the
+   * ability offered only while `count` matching cards share one, and the
+   * decision offers only cards with enough namesakes, carries each one's
+   * name (`LegalAction.sameNames`) and refuses a mix.
    */
   readonly discard?: {
     readonly count: number | "x";
@@ -491,6 +496,7 @@ export interface AbilityCost {
     readonly random?: boolean;
     readonly manaValueX?: boolean;
     readonly differentNames?: true;
+    readonly sameName?: true;
   };
   /**
    * Exile `count` cards from your graveyard, matching `filter` if given, as

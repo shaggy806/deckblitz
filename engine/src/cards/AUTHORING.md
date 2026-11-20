@@ -5028,6 +5028,10 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   discard (`xCost.maxX`). `differentNames: true` is "Discard three cards with
   different names" (Ormos, Archive Keeper): offered only with that many names
   in hand, the decision carrying each card's name and refusing a repeat.
+  `sameName: true` is the reverse, "Discard two nonland cards with the same
+  name" (Sphinx of the Chimes, `{ count: 2, filter: { notTypes: ["land"] },
+  sameName: true }`): offered only while that many matching cards share a
+  name, the decision offering only those (`sameNames`) and refusing a mix.
   The player gets priority back once it's paid (rule 117.3c — the
   decision's `priorityTo`), on another player's turn too.
 - `reveal: { count, filter, text }` — "Reveal X white cards from your hand"

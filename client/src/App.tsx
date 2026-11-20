@@ -3587,10 +3587,14 @@ function Table({
         // is already picked can't be.
         const names = discardAction.differentNames
         const nameOf = (x: ObjectId) => names?.[discardAction.from.indexOf(x)]
+        // "With the same name" (Sphinx of the Chimes): only the picked name.
+        const same = discardAction.sameNames
+        const sameOf = (x: ObjectId) => same?.[discardAction.from.indexOf(x)]
         setDiscardPicks((cur) => {
           if (cur.includes(id)) return cur.filter((x) => x !== id)
           if (cur.length >= discardAction.count) return cur
           if (names !== undefined && cur.some((x) => nameOf(x) === nameOf(id))) return cur
+          if (same !== undefined && cur.some((x) => sameOf(x) !== sameOf(id))) return cur
           return [...cur, id]
         })
         return
@@ -7229,7 +7233,9 @@ function Table({
                 discardAction.upTo === true && discardAction.count >= discardAction.from.length
                   ? ''
                   : ` card${discardAction.count === 1 ? '' : 's'}`
-              }${discardAction.differentNames !== undefined ? ' with different names' : ''}`
+              }${discardAction.differentNames !== undefined ? ' with different names' : ''}${
+                discardAction.sameNames !== undefined ? ' with the same name' : ''
+              }`
             : 'Discard to hand size'}
           {discardAction.orOneOf !== undefined
             ? `, or one ${discardAction.orOneKind ?? 'qualifying'} card`
@@ -8079,6 +8085,12 @@ function Table({
             if (highlight && !selected && names !== undefined && discardAction !== undefined) {
               const nameAt = (x: ObjectId) => names[discardAction.from.indexOf(x)]
               if (discardPicks.some((x) => nameAt(x) === nameAt(id))) highlight = false
+            }
+            // "With the same name": only the name already picked.
+            const same = discardAction?.sameNames
+            if (highlight && !selected && same !== undefined && discardAction !== undefined) {
+              const sameAt = (x: ObjectId) => same[discardAction.from.indexOf(x)]
+              if (discardPicks.some((x) => sameAt(x) !== sameAt(id))) highlight = false
             }
           } else if (mode === 'put-on-bottom') {
             highlight = bottomAction?.from.includes(id) ?? false
