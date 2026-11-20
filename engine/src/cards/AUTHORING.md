@@ -1059,7 +1059,9 @@ control, a creature of two of them counted in whichever role makes the party
 largest, 700.8b — Malakir Blood-Priest; the same form is a
 `selfCostReduction` amount, Deadly Alliance, and a CDA count, Archpriest of
 Iona; `grantPtPerCount: { partySize: true }` is Ravager's Mace's "+1/+0 for
-each creature in your party"; `grantPtPerCount: { opponents: true }` is "for
+each creature in your party"; `grantPtPerCount: { dungeonsCompleted:
+"differently-named" }` is "for each differently named dungeon you've
+completed" (rule 309.7; Ellywick Tumblestrum's emblem); `grantPtPerCount: { opponents: true }` is "for
 each opponent you have" (Blazing Sunsteel), and `opponents: { where }` only
 the opponents a condition holds for, each its `"that-player"` — Anya,
 Merciless Angel's "+3/+3 for each opponent whose life total is less than half

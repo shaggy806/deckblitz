@@ -6501,6 +6501,8 @@ function collectStaticEffects(
             ? speedOf(state, side)
             : per.partySize === true
             ? partySizeOf(state, registry, side)
+            : per.dungeonsCompleted === "differently-named"
+            ? new Set(state.players[side]?.completedDungeons ?? []).size
             : per.countersOnAffected !== undefined
             ? (target.counters[per.countersOnAffected] ?? 0)
             : per.countersOnSource !== undefined

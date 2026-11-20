@@ -2533,6 +2533,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * creature in your party" is `{ partySize: true, pt: [1, 0] }`. Reads only
      * types and controllers (layers 2 and 4), so the P/T fold doesn't recurse. */
     readonly partySize?: true;
+    /** The differently named dungeons this permanent's controller has
+     * completed (rule 309.7: as each is removed from the game;
+     * `PlayerState.completedDungeons`, each name counted once) — Ellywick
+     * Tumblestrum's emblem's "creatures you control … get +2/+2 for each
+     * differently named dungeon you've completed" is `{ dungeonsCompleted:
+     * "differently-named", pt: [2, 2] }`. */
+    readonly dungeonsCompleted?: "differently-named";
     /** The number of cards in a hand. `true` is the hand of the player whose
      * side it counts from: Grim Strider's "this creature gets -1/-1 for each
      * card in your hand" (`pt: [-1, -1]`), Empyrial Armor's "enchanted

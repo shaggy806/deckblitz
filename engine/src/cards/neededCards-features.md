@@ -340,6 +340,11 @@ a replacement's effect now keeps `replacing` and `thisWaySince` and restores the
 Zur's "otherwise, that player draws a card" after an `unless` isn't replaced by the same Weirding again (rule 614.5;
 it looped before). The `unless` option `{ payLife }` takes `ifPaid`, and `for-each-unless` takes `of: { drawn }` (the
 cards this resolution drew, still in hand). `test/draw-replacement-reveal.test.ts`.
+### Differently named dungeons completed — built 2026-11-20
+
+The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
+`dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
+read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
 
 ### A commander's colour chosen before the game begins — built 2026-11-20
 
