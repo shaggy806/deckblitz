@@ -647,6 +647,7 @@ import _poolAlloyAnimist from "./pool/alloy-animist.js";
 import _poolAlloyGolem from "./pool/alloy-golem.js";
 import _poolAlloyMyr from "./pool/alloy-myr.js";
 import _poolAllureOfPower from "./pool/allure-of-power.js";
+import _poolAllureOfTheUnknown from "./pool/allure-of-the-unknown.js";
 import _poolAlluringScent from "./pool/alluring-scent.js";
 import _poolAlluringSiren from "./pool/alluring-siren.js";
 import _poolAlluringSuitor from "./pool/alluring-suitor.js";
@@ -7486,6 +7487,7 @@ import _poolDragonFangs from "./pool/dragon-fangs.js";
 import _poolDragonFodder from "./pool/dragon-fodder.js";
 import _poolDragonGrip from "./pool/dragon-grip.js";
 import _poolDragonHatchling from "./pool/dragon-hatchling.js";
+import _poolDragonKamisEgg from "./pool/dragon-kamis-egg.js";
 import _poolDragonMage from "./pool/dragon-mage.js";
 import _poolDragonManReformedRobot from "./pool/dragon-man-reformed-robot.js";
 import _poolDragonMantle from "./pool/dragon-mantle.js";
@@ -22075,6 +22077,7 @@ import _poolRealityTwist from "./pool/reality-twist.js";
 import _poolReality from "./pool/reality.js";
 import _poolRealmCloakedGiant from "./pool/realm-cloaked-giant.js";
 import _poolRealmOfKoh from "./pool/realm-of-koh.js";
+import _poolRealmRazer from "./pool/realm-razer.js";
 import _poolRealmScorcherHellkite from "./pool/realm-scorcher-hellkite.js";
 import _poolRealmSeekers from "./pool/realm-seekers.js";
 import _poolRealmbreakerTheInvasionTree from "./pool/realmbreaker-the-invasion-tree.js";
@@ -25164,6 +25167,7 @@ import _poolSilverSableMercenaryLeader from "./pool/silver-sable-mercenary-leade
 import _poolSilverScrutiny from "./pool/silver-scrutiny.js";
 import _poolSilverSeraph from "./pool/silver-seraph.js";
 import _poolSilverShroudCostume from "./pool/silver-shroud-costume.js";
+import _poolSilverSurferCosmicVoyager from "./pool/silver-surfer-cosmic-voyager.js";
 import _poolSilverSurferGalactussHerald from "./pool/silver-surfer-galactuss-herald.js";
 import _poolSilverbackApe from "./pool/silverback-ape.js";
 import _poolSilverbackElder from "./pool/silverback-elder.js";
@@ -28481,6 +28485,7 @@ import _poolTheDestinedWhiteMage from "./pool/the-destined-white-mage.js";
 import _poolTheDestructionOfPraxis from "./pool/the-destruction-of-praxis.js";
 import _poolTheDoctorEmh from "./pool/the-doctor-emh.js";
 import _poolTheDominionBracelet from "./pool/the-dominion-bracelet.js";
+import _poolTheDragonKamiReborn from "./pool/the-dragon-kami-reborn.js";
 import _poolTheDrossPits from "./pool/the-dross-pits.js";
 import _poolTheDukeRebelSentry from "./pool/the-duke-rebel-sentry.js";
 import _poolTheDurasSisters from "./pool/the-duras-sisters.js";
@@ -30246,6 +30251,7 @@ import _poolUnderworldFires from "./pool/underworld-fires.js";
 import _poolUnderworldHermit from "./pool/underworld-hermit.js";
 import _poolUnderworldRageHound from "./pool/underworld-rage-hound.js";
 import _poolUnderworldSentinel from "./pool/underworld-sentinel.js";
+import _poolUndiscoveredParadise from "./pool/undiscovered-paradise.js";
 import _poolUndo from "./pool/undo.js";
 import _poolUndulatingWitness from "./pool/undulating-witness.js";
 import _poolUndyingBeast from "./pool/undying-beast.js";
@@ -34330,6 +34336,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAlloyGolem,
   _poolAlloyMyr,
   _poolAllureOfPower,
+  _poolAllureOfTheUnknown,
   _poolAlluringScent,
   _poolAlluringSiren,
   _poolAlluringSuitor,
@@ -41169,6 +41176,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDragonFodder,
   _poolDragonGrip,
   _poolDragonHatchling,
+  _poolDragonKamisEgg,
   _poolDragonMage,
   _poolDragonManReformedRobot,
   _poolDragonMantle,
@@ -55758,6 +55766,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReality,
   _poolRealmCloakedGiant,
   _poolRealmOfKoh,
+  _poolRealmRazer,
   _poolRealmScorcherHellkite,
   _poolRealmSeekers,
   _poolRealmbreakerTheInvasionTree,
@@ -58847,6 +58856,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilverScrutiny,
   _poolSilverSeraph,
   _poolSilverShroudCostume,
+  _poolSilverSurferCosmicVoyager,
   _poolSilverSurferGalactussHerald,
   _poolSilverbackApe,
   _poolSilverbackElder,
@@ -62164,6 +62174,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheDestructionOfPraxis,
   _poolTheDoctorEmh,
   _poolTheDominionBracelet,
+  _poolTheDragonKamiReborn,
   _poolTheDrossPits,
   _poolTheDukeRebelSentry,
   _poolTheDurasSisters,
@@ -63929,6 +63940,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnderworldHermit,
   _poolUnderworldRageHound,
   _poolUnderworldSentinel,
+  _poolUndiscoveredParadise,
   _poolUndo,
   _poolUndulatingWitness,
   _poolUndyingBeast,
@@ -68026,6 +68038,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/alloy-golem": _poolAlloyGolem,
   "pool/alloy-myr": _poolAlloyMyr,
   "pool/allure-of-power": _poolAllureOfPower,
+  "pool/allure-of-the-unknown": _poolAllureOfTheUnknown,
   "pool/alluring-scent": _poolAlluringScent,
   "pool/alluring-siren": _poolAlluringSiren,
   "pool/alluring-suitor": _poolAlluringSuitor,
@@ -74865,6 +74878,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dragon-fodder": _poolDragonFodder,
   "pool/dragon-grip": _poolDragonGrip,
   "pool/dragon-hatchling": _poolDragonHatchling,
+  "pool/dragon-kamis-egg": _poolDragonKamisEgg,
   "pool/dragon-mage": _poolDragonMage,
   "pool/dragon-man-reformed-robot": _poolDragonManReformedRobot,
   "pool/dragon-mantle": _poolDragonMantle,
@@ -89454,6 +89468,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reality": _poolReality,
   "pool/realm-cloaked-giant": _poolRealmCloakedGiant,
   "pool/realm-of-koh": _poolRealmOfKoh,
+  "pool/realm-razer": _poolRealmRazer,
   "pool/realm-scorcher-hellkite": _poolRealmScorcherHellkite,
   "pool/realm-seekers": _poolRealmSeekers,
   "pool/realmbreaker-the-invasion-tree": _poolRealmbreakerTheInvasionTree,
@@ -92543,6 +92558,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silver-scrutiny": _poolSilverScrutiny,
   "pool/silver-seraph": _poolSilverSeraph,
   "pool/silver-shroud-costume": _poolSilverShroudCostume,
+  "pool/silver-surfer-cosmic-voyager": _poolSilverSurferCosmicVoyager,
   "pool/silver-surfer-galactuss-herald": _poolSilverSurferGalactussHerald,
   "pool/silverback-ape": _poolSilverbackApe,
   "pool/silverback-elder": _poolSilverbackElder,
@@ -95860,6 +95876,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-destruction-of-praxis": _poolTheDestructionOfPraxis,
   "pool/the-doctor-emh": _poolTheDoctorEmh,
   "pool/the-dominion-bracelet": _poolTheDominionBracelet,
+  "pool/the-dragon-kami-reborn": _poolTheDragonKamiReborn,
   "pool/the-dross-pits": _poolTheDrossPits,
   "pool/the-duke-rebel-sentry": _poolTheDukeRebelSentry,
   "pool/the-duras-sisters": _poolTheDurasSisters,
@@ -97625,6 +97642,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/underworld-hermit": _poolUnderworldHermit,
   "pool/underworld-rage-hound": _poolUnderworldRageHound,
   "pool/underworld-sentinel": _poolUnderworldSentinel,
+  "pool/undiscovered-paradise": _poolUndiscoveredParadise,
   "pool/undo": _poolUndo,
   "pool/undulating-witness": _poolUndulatingWitness,
   "pool/undying-beast": _poolUndyingBeast,

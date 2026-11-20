@@ -981,6 +981,7 @@ import _poolUnauthorizedExit from "../pool/unauthorized-exit.js";
 import _poolUnblinkingBleb from "../pool/unblinking-bleb.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
 import _poolUnderworldSentinel from "../pool/underworld-sentinel.js";
+import _poolUndiscoveredParadise from "../pool/undiscovered-paradise.js";
 import _poolUnleashShell from "../pool/unleash-shell.js";
 import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
 import _poolUrborgUprising from "../pool/urborg-uprising.js";
@@ -2065,6 +2066,7 @@ const shard: CardShard = {
     _poolUnblinkingBleb,
     _poolUnclaimedTerritory,
     _poolUnderworldSentinel,
+    _poolUndiscoveredParadise,
     _poolUnleashShell,
     _poolUnrulyKrasis,
     _poolUrborgUprising,

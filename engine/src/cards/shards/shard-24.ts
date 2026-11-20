@@ -761,6 +761,7 @@ import _poolSigiledContender from "../pool/sigiled-contender.js";
 import _poolSilhanaStarfletcher from "../pool/silhana-starfletcher.js";
 import _poolSilicateSurveyor from "../pool/silicate-surveyor.js";
 import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-leader.js";
+import _poolSilverSurferCosmicVoyager from "../pool/silver-surfer-cosmic-voyager.js";
 import _poolSilverquillSilencer from "../pool/silverquill-silencer.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
@@ -1807,6 +1808,7 @@ const shard: CardShard = {
     _poolSilhanaStarfletcher,
     _poolSilicateSurveyor,
     _poolSilverSableMercenaryLeader,
+    _poolSilverSurferCosmicVoyager,
     _poolSilverquillSilencer,
     _poolSimicGuildgate,
     _poolSinkhole,

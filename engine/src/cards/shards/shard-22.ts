@@ -18,6 +18,7 @@ import _poolAkromasWill from "../pool/akromas-will.js";
 import _poolAlenaKessigTrapper from "../pool/alena-kessig-trapper.js";
 import _poolAllOfHistoryAllAtOnce from "../pool/all-of-history-all-at-once.js";
 import _poolAllSunsDawn from "../pool/all-suns-dawn.js";
+import _poolAllureOfTheUnknown from "../pool/allure-of-the-unknown.js";
 import _poolAlmostPerfect from "../pool/almost-perfect.js";
 import _poolAmateurHero from "../pool/amateur-hero.js";
 import _poolAmuletOfUnmaking from "../pool/amulet-of-unmaking.js";
@@ -1093,6 +1094,7 @@ const shard: CardShard = {
     _poolAlenaKessigTrapper,
     _poolAllOfHistoryAllAtOnce,
     _poolAllSunsDawn,
+    _poolAllureOfTheUnknown,
     _poolAlmostPerfect,
     _poolAmateurHero,
     _poolAmuletOfUnmaking,

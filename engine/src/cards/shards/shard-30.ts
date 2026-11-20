@@ -726,6 +726,7 @@ import _poolRampagingClassmate from "../pool/rampaging-classmate.js";
 import _poolRavnicaAtWar from "../pool/ravnica-at-war.js";
 import _poolRazorfieldThresher from "../pool/razorfield-thresher.js";
 import _poolReadyToRumble from "../pool/ready-to-rumble.js";
+import _poolRealmRazer from "../pool/realm-razer.js";
 import _poolRecklessBushwhacker from "../pool/reckless-bushwhacker.js";
 import _poolReclamation from "../pool/reclamation.js";
 import _poolRedWard from "../pool/red-ward.js";
@@ -910,6 +911,7 @@ import _poolTestOfConviction from "../pool/test-of-conviction.js";
 import _poolTheAkroanWar from "../pool/the-akroan-war.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
 import _poolTheBrothersWar from "../pool/the-brothers-war.js";
+import _poolTheDragonKamiReborn from "../pool/the-dragon-kami-reborn.js";
 import _poolTheFirstIroanGames from "../pool/the-first-iroan-games.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
 import _poolTheLastAgniKai from "../pool/the-last-agni-kai.js";
@@ -1799,6 +1801,7 @@ const shard: CardShard = {
     _poolRavnicaAtWar,
     _poolRazorfieldThresher,
     _poolReadyToRumble,
+    _poolRealmRazer,
     _poolRecklessBushwhacker,
     _poolReclamation,
     _poolRedWard,
@@ -1983,6 +1986,7 @@ const shard: CardShard = {
     _poolTheAkroanWar,
     _poolTheBalrogOfMoria,
     _poolTheBrothersWar,
+    _poolTheDragonKamiReborn,
     _poolTheFirstIroanGames,
     _poolTheFloodOfMars,
     _poolTheLastAgniKai,
