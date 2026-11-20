@@ -1140,7 +1140,11 @@ export type EffectAmount =
    * the one whose casting fired this ability (`CastSpellRecord.seq`): Sentinel
    * Tower's "1 plus the number of instant and sorcery spells cast before that
    * spell this turn" (`who: "each-player"`), fixed however many are cast in
-   * response. 0 with none. */
+   * response. `cardTypes` counts each card type among them once instead
+   * (rule 205.2a's types, kindred included, read as each spell was cast):
+   * April O'Neil, Hacktivist's "draw a card for each card type among spells
+   * you've cast this turn" — an artifact creature spell gives two. 0 with
+   * none. */
   | {
       readonly castThisTurn: CardFilter;
       readonly who?: PlayerScope;
@@ -1148,6 +1152,7 @@ export type EffectAmount =
       readonly total?: "mana-value";
       readonly other?: true;
       readonly before?: "trigger-spell";
+      readonly cardTypes?: true;
     }
   /** How many counters were put on permanents this turn, as
    * {@link CountersPutSpec} narrows them, whoever or wherever they are now —
@@ -18673,7 +18678,13 @@ export function signedAmountValue(
       .reduce((n, p) => n + ctx.turnStatOf(p, amount.turnStat), 0);
   }
   if ("castThisTurn" in amount) {
-    const cast = ctx.playersInScope(amount.who ?? "you").map((p) => ctx.castThisTurnOf(p, amount.castThisTurn, amount));
+    const players = ctx.playersInScope(amount.who ?? "you");
+    if (amount.cardTypes === true) {
+      // Each card type once, among every counted player's spells together.
+      const filter = amount.castThisTurn;
+      return CARD_TYPE_CHOICES.filter((type) => players.some((p) => ctx.castThisTurnOf(p, { ...filter, type }, amount) > 0)).length;
+    }
+    const cast = players.map((p) => ctx.castThisTurnOf(p, amount.castThisTurn, amount));
     return amount.greatest === undefined ? cast.reduce((n, v) => n + v, 0) : Math.max(0, ...cast);
   }
   if ("countersPutThisTurn" in amount) return ctx.countersPutThisTurn(amount.countersPutThisTurn);

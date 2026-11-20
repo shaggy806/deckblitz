@@ -24161,3 +24161,19 @@ describe("a discard's cards exiled with the source, and put into hand as it dies
     expect(toluz.triggered[2].effect).toEqual({ kind: "return-exiled-by-source", linked: "hand" });
   });
 });
+
+describe("card types among spells cast this turn (April O'Neil, Hacktivist)", () => {
+  it("reads the end-step draw as castThisTurn's cardTypes", () => {
+    const april = parseFace({
+      name: "April O'Neil, Hacktivist",
+      type_line: "Legendary Creature — Human Scientist",
+      oracle_text: "At the beginning of your end step, draw a card for each card type among spells you've cast this turn.",
+      mana_cost: "{3}{U}",
+      colors: ["U"],
+      power: "1",
+      toughness: "5",
+    }) as unknown as { complete: boolean; triggered: { effect: unknown }[] };
+    expect(april.complete).toBe(true);
+    expect(april.triggered[0].effect).toEqual({ kind: "draw", amount: { castThisTurn: {}, cardTypes: true } });
+  });
+});

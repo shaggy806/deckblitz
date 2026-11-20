@@ -3073,7 +3073,8 @@
   "effect:player-hexproof-until-your-next-turn",
   "filter:attached-to-source",
   "trigger:attacks-player-with-more-life-than-you",
-  "condition:filter-attacking-same-player"
+  "condition:filter-attacking-same-player",
+  "stat:card-types-among-spells-cast-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

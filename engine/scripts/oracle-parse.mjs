@@ -4289,6 +4289,11 @@ export function parseSentence(sentence, ctx) {
     const of = m[1].toLowerCase() === "power" ? "power" : "mana-value";
     return { kind: "draw", amount: { aggregate: "distinct", of, filter: { ...filter, controlledBy: "you" } } };
   }
+  // "Draw a card for each card type among spells you've cast this turn"
+  // (April O'Neil, Hacktivist): each type once, as the spells were cast.
+  if (/^draw a card for each card type among spells you've cast this turn\.$/i.test(s)) {
+    return { kind: "draw", amount: { castThisTurn: {}, cardTypes: true } };
+  }
   // The turn history's graveyard tallies: "draw a card for each card you've
   // discarded this turn" (Change of Fortune, Misty Knight), "cards that were
   // put into target player's graveyard from their library this turn" (Cruel
