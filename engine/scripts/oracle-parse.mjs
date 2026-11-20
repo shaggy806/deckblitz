@@ -21010,6 +21010,11 @@ function graveyardCastCost(part) {
     const count = m[1] === "another" ? 1 : NUMBERS[m[1].split(" ")[0]];
     return { exileOthers: count, ...(m[2] ? { exileFilter: { type: "creature" } } : {}) };
   }
+  // Demilich's "exiling four instant and/or sorcery cards": a creature card,
+  // so never itself.
+  if ((m = /^exiling (two|three|four|five|six) instant and\/or sorcery cards from your graveyard$/.exec(part))) {
+    return { exileOthers: NUMBERS[m[1]], exileFilter: { typesAnyOf: ["instant", "sorcery"] } };
+  }
   const SACRIFICE = {
     "an artifact or creature": { typesAnyOf: ["artifact", "creature"] },
     "a creature": { type: "creature" },
@@ -23123,6 +23128,8 @@ function costEachAmount(phrase) {
     "permanent sacrificed this turn": { turnHistory: "sacrificed", who: "each-player" },
     "card type among permanents you've sacrificed this turn": { turnHistory: "sacrificed", cardTypes: true },
     "{E} you've paid or lost this turn": { turnStat: "energy-paid-or-lost", who: "you" },
+    // Each as it was cast (Demilich's "{U} less … for each").
+    "instant and sorcery spell you've cast this turn": { castThisTurn: { typesAnyOf: ["instant", "sorcery"] } },
     "basic land type among lands you control": { basicLandTypes: "you" },
     // Oskar, Rubbish Reclaimer: cast from the graveyard, itself left out.
     "different mana value among cards in your graveyard": { aggregate: "distinct", of: "mana-value", filter: { ownedBy: "you" }, in: "graveyards" },

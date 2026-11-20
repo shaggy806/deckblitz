@@ -362,6 +362,13 @@ toughness equal to the chosen number" is an `amounts` condition over an aggregat
 The key `amount:differently-named-dungeons-completed`, for Ellywick Tumblestrum: `grantPtPerCount`'s
 `dungeonsCompleted: "differently-named"`, the names in `PlayerState.completedDungeons` (rule 309.7) each counted once,
 read live off the emblem's controller. `test/dungeons-completed-differently-named.test.ts`.
+### {U} less for each instant and sorcery spell you've cast this turn — built 2026-11-20
+
+The key `cost:self-reduction-per-instant-sorcery-cast-this-turn`, for Demilich: no engine code — a `selfCostReduction`
+of `reduceColored: "{U}"` times the `castThisTurn` amount (Khalni Hydra's shape over Rionya's count). Its graveyard cast
+is Helbrute's `mayPlaySelf` `exileOthers` with an instant-or-sorcery `exileFilter`, its attack trigger Kaervek's exile
+and `cast-now` copy. The scaffolder reads both lines. `test/cost-reduction-per-instant-sorcery-cast.test.ts`.
+
 ### Colours among your permanents and the spells you've cast this turn — built 2026-11-20
 
 The key `effect:colors-among-permanents-and-spells-cast`, for First Family: the `{ colorsAmong }` amount's

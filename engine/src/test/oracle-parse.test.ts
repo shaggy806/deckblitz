@@ -830,6 +830,11 @@ describe("what a spell costs: amounts, colours and targets", () => {
       reduceColored: "{G}",
       reduceColoredTimes: { countOf: { type: "creature", colors: ["G"], controlledBy: "you" } },
     });
+    expect(self("This spell costs {U} less to cast for each instant and sorcery spell you've cast this turn.")).toEqual({
+      condition: always,
+      reduceColored: "{U}",
+      reduceColoredTimes: { castThisTurn: { typesAnyOf: ["instant", "sorcery"] } },
+    });
     expect(self("This spell costs {U} less to cast if an opponent cast two or more spells this turn.")).toEqual({
       condition: { kind: "turn-stat", stat: "spells-cast", who: "opponent", atLeast: 2 },
       reduceColored: "{U}",
@@ -8525,6 +8530,13 @@ describe("a card's own graveyard permission with costs (castSelfFromGraveyard)",
         "Sarcophagus — You may cast this card from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs.",
       ),
     ).toEqual({ from: ["graveyard"], exileOthers: 1, exileFilter: { type: "creature" } });
+    expect(
+      read(
+        "Demilich",
+        "Creature — Skeleton Wizard",
+        "You may cast this card from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs.",
+      ),
+    ).toEqual({ from: ["graveyard"], exileOthers: 4, exileFilter: { typesAnyOf: ["instant", "sorcery"] } });
     expect(
       read(
         "Wickerfolk Indomitable",

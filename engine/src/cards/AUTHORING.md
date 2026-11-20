@@ -7049,7 +7049,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     "this effect reduces only the amount of colored mana you pay".
     `reduceColoredTimes` (an `EffectAmount`) applies it that many
     times: Eluge, the Shoreless Sea's "{U} (or {1}) less to cast for each
-    land you control with a flood counter on it".
+    land you control with a flood counter on it". On a spell's own
+    `selfCostReduction` too: Demilich's "{U} less to cast for each instant
+    and sorcery spell you've cast this turn" is `reduceColored: "{U}"`,
+    `reduceColoredTimes: { castThisTurn: { typesAnyOf: ["instant",
+    "sorcery"] } }` (with no generic left, a {U} past the last pip takes
+    nothing, 118.7c; `cost-reduction-per-instant-sorcery-cast.test.ts`).
   - `optionalLife: 2` — the Defilers' "As an additional cost to cast green
     permanent spells, you may pay 2 life. Those spells cost {G} less to cast
     if you paid life this way. This effect reduces only the amount of green
