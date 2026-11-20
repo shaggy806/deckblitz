@@ -17,7 +17,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, controller, destroy, enter, lands, ref, spawn, table, toHand, tokensNamed, zone } from "./harness.js";
+import { A, B, activate, cast, controller, destroy, enter, lands, ref, spawn, table, toHand, tokensNamed, zone } from "./harness.js";
 
 /** Alice takes Bob's Hill Giant for the turn (Act of Treason). */
 function stealGiant(game: Game): ObjectId {
@@ -79,5 +79,42 @@ describe("Day of the Dragons", () => {
     destroy(game, day);
     expect(zone(game, bears)).toBe("exile");
     expect(tokensNamed(game, "Dragon Token", A)).toBe(1);
+  });
+});
+
+/**
+ * Synod Sanctum: "{2}, {T}: Exile target permanent you control. {2},
+ * Sacrifice this artifact: Return all cards exiled with this artifact to the
+ * battlefield under your control." The cards come back under the controller
+ * of the sacrificing ability (rule 110.2a), though the cost sacrificed the
+ * artifact: the ability refers to the stint it was activated from (607.2a).
+ */
+describe("Synod Sanctum", () => {
+  it("returns every card exiled with it under your control, a card another player owns too", () => {
+    const { game } = table();
+    const sanctum = spawn(game, "Synod Sanctum");
+    const bears = spawn(game, "Grizzly Bears");
+    const giant = stealGiant(game);
+    lands(game, "Plains", 6);
+    activate(game, sanctum, 0, { targets: [ref(bears)] });
+    expect(zone(game, bears)).toBe("exile");
+    game.debugApplyEffect(A, { kind: "untap", target: 0 }, [ref(sanctum)]);
+    activate(game, sanctum, 0, { targets: [ref(giant)] });
+    expect(zone(game, giant)).toBe("exile");
+    activate(game, sanctum, 1);
+    expect(zone(game, sanctum)).toBe("graveyard");
+    for (const id of [bears, giant]) {
+      expect(zone(game, id)).toBe("battlefield");
+      expect(controller(game, id)).toBe(A);
+    }
+    expect(game.state.objects[giant].owner).toBe(B);
+  });
+
+  it("can't exile a permanent another player controls", () => {
+    const { game } = table();
+    const sanctum = spawn(game, "Synod Sanctum");
+    const theirs = spawn(game, "Grizzly Bears", B);
+    lands(game, "Plains", 2);
+    expect(() => activate(game, sanctum, 0, { targets: [ref(theirs)] })).toThrow();
   });
 });

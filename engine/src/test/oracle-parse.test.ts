@@ -24375,3 +24375,97 @@ describe("X capped by a count of what you control (Winter's Chill)", () => {
     expect(chill.maxX).toEqual({ countOf: { type: "land", supertype: "snow", controlledBy: "you" } });
   });
 });
+
+describe("casting-zones lane: The Spot, Kotose, Torrent Elemental, Synod Sanctum", () => {
+  type Parsed = { complete: boolean; triggered: { targets: unknown[]; effect: unknown }[]; activated: Record<string, unknown>[] };
+  it("reads The Spot's two optional exiles and his dies trigger's 'if you do'", () => {
+    const face = parseFace({
+      name: "The Spot, Living Portal",
+      type_line: "Legendary Creature — Human Scientist Villain",
+      oracle_text:
+        "When The Spot enters, exile up to one target nonland permanent and up to one target nonland permanent card from a graveyard.\nWhen The Spot dies, put him on the bottom of his owner's library. If you do, return the exiled cards to their owners' hands.",
+      mana_cost: "{3}{W}{B}",
+      colors: ["W", "B"],
+    }) as unknown as Parsed;
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].targets).toEqual([
+      { kind: "optional", of: "nonland-permanent" },
+      { kind: "optional", of: { kind: "card-in-graveyard", whose: "any", filter: { notTypes: ["land", "instant", "sorcery"] } } },
+    ]);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "sequence",
+      simultaneous: true,
+      effects: [
+        { kind: "exile", target: 0, linked: true },
+        { kind: "exile", target: 1, linked: true },
+      ],
+    });
+    expect(face.triggered[1].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "put-on-library", target: "trigger-object", position: "bottom" },
+        { kind: "conditional", condition: { kind: "this-way", what: "put-into-library" }, then: { kind: "return-exiled-by-source", linked: "hand" } },
+      ],
+    });
+  });
+
+  it("reads Kotose's search and its one shared play of the exiled cards", () => {
+    const face = parseFace({
+      name: "Kotose, the Silent Spider",
+      type_line: "Legendary Creature — Human Ninja",
+      oracle_text:
+        "When Kotose enters, exile target card other than a basic land card from an opponent's graveyard. Search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles. For as long as you control Kotose, you may play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it.",
+      mana_cost: "{3}{U}{B}",
+      colors: ["U", "B"],
+    }) as unknown as Parsed;
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "exile", target: 0 },
+        { kind: "search-library", zones: "graveyard-hand-library", filter: { sameNameWith: 0 }, destination: "exile" },
+        { kind: "grant-play", cards: { thisWay: "exiled" }, duration: "while-you-control-source", play: true, upTo: 1, spendAs: "any-color" },
+      ],
+    });
+  });
+
+  it("reads 'tap all creatures defending player controls' and a card's own way out of exile or a graveyard", () => {
+    const torrent = parseFace({
+      name: "Torrent Elemental",
+      type_line: "Creature — Elemental",
+      oracle_text:
+        "Flying\nWhenever this creature attacks, tap all creatures defending player controls.\n{3}{B/G}{B/G}: Put this card from exile onto the battlefield tapped. Activate only as a sorcery.",
+      mana_cost: "{4}{U}",
+      colors: ["U"],
+    }) as unknown as Parsed;
+    expect(torrent.complete).toBe(true);
+    expect(torrent.triggered[0].effect).toEqual({ kind: "tap-all", filter: { type: "creature", controlledByRef: "trigger-player" } });
+    expect(torrent.activated[0]).toMatchObject({
+      zone: "exile",
+      staysInZone: true,
+      sorcerySpeed: true,
+      effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true },
+    });
+    const skeleton = parseFace({
+      name: "Reassembling Skeleton",
+      type_line: "Creature — Skeleton Warrior",
+      oracle_text: "{1}{B}: Return this card from your graveyard to the battlefield tapped.",
+      mana_cost: "{1}{B}",
+      colors: ["B"],
+    }) as unknown as Parsed;
+    expect(skeleton.activated[0]).toMatchObject({ zone: "graveyard", staysInZone: true, effect: { kind: "put-onto-battlefield", target: "source" } });
+  });
+
+  it("reads Synod Sanctum's return under your control", () => {
+    const face = parseFace({
+      name: "Synod Sanctum",
+      type_line: "Artifact",
+      oracle_text:
+        "{2}, {T}: Exile target permanent you control.\n{2}, Sacrifice this artifact: Return all cards exiled with this artifact to the battlefield under your control.",
+      mana_cost: "{1}",
+      colors: [],
+    }) as unknown as Parsed;
+    expect(face.complete).toBe(true);
+    expect(face.activated[1].effect).toEqual({ kind: "return-exiled-by-source", linked: "battlefield", under: "you" });
+  });
+});

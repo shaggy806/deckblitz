@@ -5358,7 +5358,12 @@ export function parseSentence(sentence, ctx) {
   }
   // "Put all cards exiled with ~ onto the battlefield" (Underworld Sentinel):
   // under the putting player's control (rule 110.2a).
-  if (re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s)) {
+  // "Return all cards exiled with this artifact to the battlefield under your
+  // control" (Synod Sanctum) is the same.
+  if (
+    re(`put all cards exiled with (?:~|it) onto the battlefield`).test(s) ||
+    re(`return all cards exiled with (?:~|it) to the battlefield under your control`).test(s)
+  ) {
     return { kind: "return-exiled-by-source", linked: "battlefield", under: "you" };
   }
   // "You lose half your life, rounded up" (rule 107.1a — Doomsday).
@@ -6409,6 +6414,15 @@ export function parseSentence(sentence, ctx) {
       effect: { kind, target: got.slots[0] },
     };
   }
+  // "Exile up to one target nonland permanent and up to one target nonland
+  // permanent card from a graveyard" (The Spot, Living Portal): two optional
+  // slots, one instruction, so they leave together.
+  if ((m = /^exile up to one (target .+?) and up to one (target .+?)\.$/i.exec(s))) {
+    const specs = [m[1], m[2]].map((p) => targetOf(p) ?? graveyardTargetOf(p));
+    if (specs.some((spec) => spec === undefined)) return null;
+    const slots = specs.map((spec) => ctx.target({ kind: "optional", of: spec }));
+    return { kind: "sequence", simultaneous: true, effects: slots.map((target) => ({ kind: "exile", target })) };
+  }
   // "Return up to three target creature cards with total mana value 3 or
   // less from your graveyard to the battlefield" (Patch Up), "… with
   // different names …" (Behold the Sinister Six!): together.
@@ -6845,6 +6859,12 @@ export function parseSentence(sentence, ctx) {
     if (kind !== null && Object.keys(kind).length > 0) {
       return { kind: m[1].toLowerCase() === "tap" ? "tap-all" : "untap-all", filter: { ...kind, controlledByRef: ctx.thatPlayer } };
     }
+  }
+  // "Whenever this creature attacks, tap all creatures defending player
+  // controls" (Torrent Elemental): the attack trigger's player.
+  if (ctx.thatPlayer === "trigger-player" && (m = re("tap all (.+?) defending player controls").exec(s))) {
+    const kind = parseTypePhrase(singular(m[1]));
+    if (kind !== null && Object.keys(kind).length > 0) return { kind: "tap-all", filter: { ...kind, controlledByRef: "trigger-player" } };
   }
   if (ctx.thatPlayer === "active-player" && re("tap target creature that player controls").test(s)) {
     return { kind: "tap", target: ctx.target({ kind: "permanent", filter: { type: "creature", controlledBy: "active-player" } }) };
@@ -12112,6 +12132,79 @@ export function parseEffect(text, outer) {
     }
     // "Exile target nonland permanent. For as long as that card remains exiled,
     // its owner may play it."
+    // "When The Spot dies, put him on the bottom of his owner's library. If
+    // you do, return the exiled cards to their owners' hands." (The Spot,
+    // Living Portal): the card in the graveyard it went to, and "if you do"
+    // is a card put into a library this way (a token isn't — rule 111.7).
+    if (
+      ctx.departed === "source" &&
+      /^Put (?:him|her|it|~) on the bottom of (?:his|her|its) owner's library\.$/.test(sentence) &&
+      /^If you do, return the exiled cards to their owners' hands\.$/.test(sentences[i + 1] ?? "")
+    ) {
+      const effect = {
+        kind: "sequence",
+        effects: [
+          { kind: "put-on-library", target: "trigger-object", position: "bottom" },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "put-into-library" },
+            then: { kind: "return-exiled-by-source", linked: "hand" },
+          },
+        ],
+      };
+      parsed.push(effect);
+      hints.push({ sentence, effect });
+      skip = 1;
+      continue;
+    }
+    // "Exile target card other than a basic land card from an opponent's
+    // graveyard. Search that player's graveyard, hand, and library for any
+    // number of cards with the same name as that card and exile them. Then
+    // that player shuffles. For as long as you control ~, you may play one of
+    // the exiled cards, …" (Kotose, the Silent Spider): Surgical Extraction's
+    // search, then one play shared among every card exiled this way.
+    const sameNameExile = /^Exile target card other than a basic land card from (an opponent's|a) graveyard\.$/.exec(sentence);
+    if (
+      sameNameExile !== null &&
+      sentences[i + 1] === "Search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them." &&
+      sentences[i + 2] === "Then that player shuffles." &&
+      /^For as long as you control ~, you may play one of the exiled cards(, and you may spend mana as though it were mana of any color to cast it)?\.$/.test(
+        sentences[i + 3] ?? "",
+      )
+    ) {
+      const target = ctx.target({
+        kind: "card-in-graveyard",
+        whose: sameNameExile[1] === "a" ? "any" : "opponent",
+        filter: { anyOf: [{ notTypes: ["land"] }, { notSupertype: "basic" }] },
+      });
+      const effect = {
+        kind: "sequence",
+        effects: [
+          { kind: "exile", target },
+          {
+            kind: "search-library",
+            whose: { ownerOf: target },
+            zones: "graveyard-hand-library",
+            filter: { sameNameWith: target },
+            destination: "exile",
+            min: 0,
+            max: 99,
+          },
+          {
+            kind: "grant-play",
+            cards: { thisWay: "exiled" },
+            duration: "while-you-control-source",
+            play: true,
+            upTo: 1,
+            ...(/any color/.test(sentences[i + 3]) ? { spendAs: "any-color" } : {}),
+          },
+        ],
+      };
+      parsed.push(effect);
+      hints.push({ sentence, effect });
+      skip = 3;
+      continue;
+    }
     const ownerPermission = ownerPermissionAt(sentences, i, ctx);
     if (ownerPermission !== null) {
       parsed.push(ownerPermission.effect);
@@ -20551,6 +20644,21 @@ function parseFaceAsWritten(face, ctx = {}) {
           zone: "graveyard",
           staysInZone: true,
           effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true, attacking: "choose" },
+      // "Return this card from your graveyard to the battlefield tapped"
+      // (Reassembling Skeleton), "Put this card from exile onto the
+      // battlefield tapped" (Torrent Elemental): an ability that moves its
+      // card out of that zone works only there (rule 113.6m), the card
+      // staying put until it resolves.
+      const selfOut = /^(?:Return|Put) ~ from (your graveyard|exile) (?:to|onto) the battlefield( tapped)?\.$/.exec(rest);
+      // Mana costs alone: the cost parser reads "tap an untapped creature you
+      // control" and "sacrifice two Blood tokens" as a permanent's (with
+      // `includeSelf`, without Blood's artifact type), not a graveyard card's.
+      const manaOnly = ability.cost.sacrifice === undefined && ability.cost.tapOthers === undefined;
+      if (selfOut !== null && ability.zone === undefined && manaOnly) {
+        Object.assign(ability, {
+          zone: selfOut[1] === "exile" ? "exile" : "graveyard",
+          staysInZone: true,
+          effect: { kind: "put-onto-battlefield", target: "source", ...(selfOut[2] !== undefined ? { enterTapped: true } : {}) },
         });
         out.activated.push(ability);
         continue;

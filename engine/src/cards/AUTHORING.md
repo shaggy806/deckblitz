@@ -5543,6 +5543,12 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
     `put-onto-battlefield` on `"source"`). Putting a commander onto the
     battlefield this way isn't casting it: no commander tax, no cast
     triggers, but its enters triggers fire.
+  - `"exile"` works only while the card is in exile, face up (a card exiled
+    face down has no abilities, rule 406.3a): Torrent Elemental's
+    "{3}{B/G}{B/G}: Put this card from exile onto the battlefield tapped" —
+    an ability that moves its card out of a zone works only there (rule
+    113.6m) — with `staysInZone: true` and `put-onto-battlefield` on
+    `"source"`. The scaffolder reads it, and the graveyard form.
 
   When the source stays put (`"command"`, or `staysInZone`), the ability
   remembers *which object* it was activated from: if the card changes zones
