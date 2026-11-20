@@ -8433,6 +8433,25 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Exchange its power and the power of target creature it's blocking
+       * until end of combat" (Serene Master): two creatures exchange a
+       * number (rule 701.12g), each becoming the other's previous value as
+       * the effect begins — a layer-7b set (`PtModifier.setPower` /
+       * `setToughness`, one timestamp for both), so counters, Auras and
+       * Equipment still apply on top (the ruling: a 3/2 with +3/+0 that
+       * exchanges with a 5/5 is 8/2, the other 3/5). Both must be on the
+       * battlefield as the same objects and be creatures, or nothing happens
+       * (701.12a and the ruling); one creature named twice changes nothing.
+       */
+      readonly kind: "exchange-stat";
+      readonly stat: "power" | "toughness";
+      readonly first: ObjectRef;
+      readonly second: ObjectRef;
+      /** For good when absent. */
+      readonly duration?: PermanentDuration;
+    }
+  | {
+      /**
        * "Exchange life totals with target opponent" (Mirror Universe), "two
        * target players exchange life totals" (Soul Conduit — rule 701.12c):
        * each player gains or loses the life it takes to reach the other's
@@ -14948,6 +14967,8 @@ export interface EffectApi {
   putInCommandZone(target: TargetRef): void;
   /** See the `"exchange-life-stat"` {@link EffectSpec}. */
   exchangeLifeStat(target: TargetRef, player: PlayerId, stat: "power" | "toughness"): void;
+  /** See the `"exchange-stat"` {@link EffectSpec}. */
+  exchangeStat(first: TargetRef, second: TargetRef, stat: "power" | "toughness", duration: PermanentDuration): void;
   /** See the `"exchange-life-totals"` {@link EffectSpec}. */
   exchangeLifeTotals(first: PlayerId, second: PlayerId): void;
   /** Whether `player` can't be given a higher life total, or a lower one, by
@@ -23756,6 +23777,12 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const target = objectRefAct(spec.target, ctx);
       const player = resolvePlayerRef(spec.player ?? "you", ctx);
       if (target !== undefined && player !== undefined) ctx.exchangeLifeStat(target, player, spec.stat);
+      return;
+    }
+    case "exchange-stat": {
+      const first = objectRefAct(spec.first, ctx);
+      const second = objectRefAct(spec.second, ctx);
+      if (first !== undefined && second !== undefined) ctx.exchangeStat(first, second, spec.stat, spec.duration ?? "permanent");
       return;
     }
     case "exchange-life-totals": {

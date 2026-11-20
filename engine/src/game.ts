@@ -46103,6 +46103,7 @@ controlledBy,
         this.markUntilEndOfTurn(target, { assignAsThoughUnblocked: must ? "must" : "may" });
       },
       exchangeLifeStat: (target, player, stat) => this.exchangeLifeStat(player, target, stat),
+      exchangeStat: (first, second, stat, duration) => this.exchangeStat(first, second, stat, lastingHere(duration)),
       exchangeLifeTotals: (first, second) => this.exchangeLifeTotals(first, second),
       lifeTotalLocks: (player) => ({
         cantGain: this.playerCantGainLife(player),
@@ -56179,6 +56180,40 @@ controlledBy,
     });
     invalidateComputedCache();
     if (delta !== 0) this.changeLife(player, delta);
+  }
+
+  /**
+   * See the `"exchange-stat"` effect (rule 701.12g): each creature's `stat`
+   * becomes the other's previous value, a layer-7b set under one timestamp.
+   * Both must still be on the battlefield and be creatures, or neither
+   * changes (701.12a).
+   */
+  private exchangeStat(first: TargetRef, second: TargetRef, stat: "power" | "toughness", kept: Expiry): void {
+    if (first.kind !== "object" || second.kind !== "object" || first.object === second.object) return;
+    const here = (id: ObjectId): boolean =>
+      this.state.objects[id]?.zone === "battlefield" && this.characteristics(id).types.includes("creature");
+    if (!here(first.object) || !here(second.object)) return;
+    const a = this.splitOneFromStack(first.object);
+    const b = this.splitOneFromStack(second.object);
+    const objectA = this.state.objects[a];
+    const objectB = this.state.objects[b];
+    if (objectA === undefined || objectB === undefined || !durationBegins(objectA, kept) || !durationBegins(objectB, kept)) return;
+    const valueA = this.characteristics(a)[stat];
+    const valueB = this.characteristics(b)[stat];
+    const timestamp = this.freshTimestamp();
+    const set = (object: GameObject, value: number): void => {
+      object.modifiers.push({
+        timestamp,
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        ...(stat === "power" ? { setPower: value } : { setToughness: value }),
+        ...durationFields(kept),
+      });
+    };
+    set(objectA, valueB);
+    set(objectB, valueA);
+    invalidateComputedCache();
   }
 
   /**

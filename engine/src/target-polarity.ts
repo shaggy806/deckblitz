@@ -559,6 +559,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // from 40 and a gift at 5.
     if (n.player !== undefined && typeof n.player === "object") v.touch(n.player, "either", MAJOR);
   },
+  // Two creatures' powers swapped (Serene Master): which way it cuts turns on
+  // the numbers, for each of them.
+  "exchange-stat": (n, v) => {
+    v.touch(n.first, "either", MINOR);
+    v.touch(n.second, "either", MINOR);
+  },
   // Which way it cuts is whose life total is the higher, for each of them.
   "exchange-life-totals": (n, v) => {
     if (n.first !== undefined && typeof n.first === "object") v.touch(n.first, "either", MAJOR);

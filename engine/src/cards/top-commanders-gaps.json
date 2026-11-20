@@ -3106,7 +3106,9 @@
   "stat:card-types-among-spells-cast-this-turn",
   "trigger:deals-damage-to-recipients-once-per-event",
   "trigger:delayed-first-time-this-turn-chosen-name",
-  "condition:creature-spell-countered-by-opponent-this-turn"
+  "condition:creature-spell-countered-by-opponent-this-turn",
+  "effect:damage-by-toughness-rule-eot",
+  "effect:exchange-power"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
