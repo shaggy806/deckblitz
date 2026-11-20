@@ -1,7 +1,7 @@
 {
  "batch": 336,
  "status": "done",
- "ranks": "author-top-cards overnight, 2026-11-20 (10:15 to 15:00): the triaged cards past EDHREC rank 10,000 in rank order, Zur's Weirding (12293) and Ellywick Tumblestrum (14843) to Grim Contest (19997), each with the small key it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop, five at once), skipping the cards waiting on the user (Cryptic Spires, Starlight Spectacular, Spawnsire of Ulamog, Malik, The Toymaker's Trap, Command Performance, Path of the Ghosthunter, Vedalken Squirrel-Whacker, Drain Power) and the recheck list. About a third needed no engine code. Bugs fixed on the way, each with a test: a draw within a replacement's unless was replaced again by it (Zur's Weirding looped, 614.5); a card's own die-exile replacement dropped its counters; a first-time-this-turn cast trigger on a chosen name never fired; an intervening-if during a simultaneous entry missed the batch's other permanents; a face-down exiled card offered its exile abilities (406.3a); Doubling Chant searched and shuffled when declined.",
+ "ranks": "author-top-cards overnight, 2026-11-20 (10:15 to 15:00): the triaged cards past EDHREC rank 10,000 in rank order, Zur's Weirding (12293) and Ellywick Tumblestrum (14843) to Grim Contest (19997), with a last round to Unpredictable Cyclone (17339), each with the small key it waited on, built by worktree agents one lane at a time (build-family's overnight lanes loop, five at once), skipping the cards waiting on the user (Cryptic Spires, Starlight Spectacular, Spawnsire of Ulamog, Malik, The Toymaker's Trap, Command Performance, Path of the Ghosthunter, Vedalken Squirrel-Whacker, Drain Power) and the recheck list. About a third needed no engine code. Bugs fixed on the way, each with a test: a draw within a replacement's unless was replaced again by it (Zur's Weirding looped, 614.5); a card's own die-exile replacement dropped its counters; a first-time-this-turn cast trigger on a chosen name never fired; an intervening-if during a simultaneous entry missed the batch's other permanents; a face-down exiled card offered its exile abilities (406.3a); Doubling Chant searched and shuffled when declined.",
  "authored": [
   {
    "name": "Allure of the Unknown",
@@ -82,6 +82,14 @@
    ],
    "tested": true,
    "test": "engine/src/test/player-hexproof-until-next-turn.test.ts"
+  },
+  {
+   "name": "Bounty of the Hunt",
+   "files": [
+    "engine/src/cards/pool/bounty-of-the-hunt.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-remove-counters-placed.test.ts"
   },
   {
    "name": "Breathstealer's Crypt",
@@ -172,12 +180,28 @@
    "test": "engine/src/test/dungeons-completed-differently-named.test.ts"
   },
   {
+   "name": "Elvish Refueler",
+   "files": [
+    "engine/src/cards/pool/elvish-refueler.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exhaust-reactivation.test.ts"
+  },
+  {
    "name": "Enduring Renewal",
    "files": [
     "engine/src/cards/pool/enduring-renewal.ts"
    ],
    "tested": true,
    "test": "engine/src/test/draw-replacement-reveal.test.ts"
+  },
+  {
+   "name": "Fear of Abduction",
+   "files": [
+    "engine/src/cards/pool/fear-of-abduction.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-creature-cost-linked.test.ts"
   },
   {
    "name": "First Family",
@@ -194,6 +218,14 @@
    ],
    "tested": true,
    "test": "engine/src/test/draw-replacement-reveal.test.ts"
+  },
+  {
+   "name": "Fugitive of the Judoon",
+   "files": [
+    "engine/src/cards/pool/fugitive-of-the-judoon.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/exile-permanents-may.test.ts"
   },
   {
    "name": "Golgari Brownscale",
@@ -308,6 +340,14 @@
    "test": "engine/src/test/poison-counters-capped.test.ts"
   },
   {
+   "name": "Midnight Oil",
+   "files": [
+    "engine/src/cards/pool/midnight-oil.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/max-hand-size-counters.test.ts"
+  },
+  {
    "name": "Namor, Atlantean King",
    "files": [
     "engine/src/cards/pool/namor-atlantean-king.ts"
@@ -372,6 +412,14 @@
    "test": "engine/src/test/flicker-return-tapped-if.test.ts"
   },
   {
+   "name": "Reincarnation",
+   "files": [
+    "engine/src/cards/pool/reincarnation.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/reincarnation.test.ts"
+  },
+  {
    "name": "Selective Snare",
    "files": [
     "engine/src/cards/pool/selective-snare.ts"
@@ -394,6 +442,14 @@
    ],
    "tested": true,
    "test": "engine/src/test/attached-to-source-target.test.ts"
+  },
+  {
+   "name": "Shambling Swarm",
+   "files": [
+    "engine/src/cards/pool/shambling-swarm.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/delayed-remove-counters-placed.test.ts"
   },
   {
    "name": "Shield of the Avatar",
@@ -492,6 +548,14 @@
    "test": "engine/src/test/put-on-library-this-way.test.ts"
   },
   {
+   "name": "Titania's Song",
+   "files": [
+    "engine/src/cards/pool/titania-s-song.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/lingers-after-leaving.test.ts"
+  },
+  {
    "name": "Toluz, Clever Conductor",
    "files": [
     "engine/src/cards/pool/toluz-clever-conductor.ts"
@@ -531,6 +595,14 @@
    ],
    "tested": true,
    "test": "engine/src/test/return-to-hand-during-next-untap.test.ts"
+  },
+  {
+   "name": "Unpredictable Cyclone",
+   "files": [
+    "engine/src/cards/pool/unpredictable-cyclone.ts"
+   ],
+   "tested": true,
+   "test": "engine/src/test/cycling-draw-replacement.test.ts"
   },
   {
    "name": "Urgent Necropsy",
