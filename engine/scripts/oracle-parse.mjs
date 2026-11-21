@@ -17045,6 +17045,12 @@ function castNowTermsAt(sentences, i, ctx) {
     }
     return { effect: out, used };
   };
+  // "You may cast target card with the same name as that spell from your
+  // graveyard" (Harness the Storm): the slot reads the triggering spell.
+  if (/^you may cast target card with the same name as that spell from your graveyard\.$/i.test(sentences[i])) {
+    const slot = ctx.target({ kind: "card-in-graveyard", whose: "you", filter: { sameNameWith: "trigger-object" } });
+    return followed({ kind: "cast-now", target: slot }, 1);
+  }
   const targeted = new RegExp(
     `^you may cast target (.+?) card from (your graveyard|a graveyard|that player's graveyard)${CAST_NOW_TERMS}\\.$`,
     "i",

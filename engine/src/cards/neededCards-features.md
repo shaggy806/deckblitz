@@ -1928,6 +1928,14 @@ permanents (`Game`'s together resolver, beside `oneEachTypeAmong`). The rest was
 `grant-play { thisWay: "exiled" }`. The only card with the line, so no scaffolder template.
 `test/exile-one-per-color.test.ts`.
 
+### A trigger's target slot named by the spell that triggered it — built 2026-11-21
+
+The key `filter:same-name-as-trigger-spell-target-slot`, for Harness the Storm: no engine code. A cast trigger's
+`card-in-graveyard` slot with `filter: { sameNameWith: "trigger-object" }` reads the spell as the trigger goes on the
+stack (rule 603.3d) and again as it resolves (608.2b), the spell gone from the stack included; a paid `cast-now
+target: 0` casts it. The scaffolder reads "you may cast target card with the same name as that spell from your
+graveyard". `test/same-name-trigger-target.test.ts`.
+
 ### Fateseal — built 2026-11-21
 
 The key `effect:fateseal`, for Mesmeric Sliver and Spin into Myth: no engine code. `cards/helpers.ts`'s `fateseal(n)`

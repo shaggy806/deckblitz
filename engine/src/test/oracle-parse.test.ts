@@ -2064,6 +2064,18 @@ describe("costs and triggers", () => {
     expect(remembrance.complete).toBe(true);
     expect(remembrance.triggered[0].effect.effect.filter).toEqual({ sameNameWith: "trigger-object" });
 
+    const harness = parseFace({
+      name: "Harness the Storm",
+      type_line: "Enchantment",
+      oracle_text:
+        "Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard. (You still pay its costs.)",
+    });
+    expect(harness.complete).toBe(true);
+    expect(harness.triggered[0].targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { sameNameWith: "trigger-object" } },
+    ]);
+    expect(harness.triggered[0].effect).toEqual({ kind: "cast-now", target: 0 });
+
     const succession = parseFace({
       name: "Verdant Succession",
       type_line: "Enchantment",

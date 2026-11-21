@@ -745,7 +745,9 @@ in the public zone it was expected in, and otherwise as it last existed (rules 6
 - **Attaching to a player**: `attach`'s `target` also takes `{ player: PlayerRef }` (Archnemesis).
 
 **Relational `CardFilter` clauses take refs too** (`filter.ts`): `sameNameWith` (a slot or
-trigger object also matches itself, as "that permanent and all others with the same name" needs),
+trigger object also matches itself, as "that permanent and all others with the same name" needs;
+`"trigger-object"` also works in a trigger's own target slot — Harness the Storm's "target card with the
+same name as that spell from your graveyard"),
 `sharesColorWith`, `sharesCardTypeWith` / `sharesPermanentTypeWith` / `sharesCreatureTypeWith` /
 `sharesLandTypeWith`, `attachedToObject`, `notObject` ("an artifact **other than Dire Blunderbuss**" in
 the trigger it grants: `notObject: "granter"`, that one object, not a namesake), and `controlledByRef: PlayerRef` ("all lands that player
