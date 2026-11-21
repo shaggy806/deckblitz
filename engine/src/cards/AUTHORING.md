@@ -967,7 +967,9 @@ token stack once per token** — twenty 1/1 Goblins in one stack are 20 power.
 A max over no permanents is 0, and the amount is clamped at 0, rule 107.1b;
 `aggregate: "distinct"` counts the **different** values instead, each once —
 `of: "mana-value" | "mana-cost" | "power" | "name" | "color-pair" | "color" |
-"permanent-type" | "card-type" | "counter-kind" | { subtypesOf: "creature" | "planeswalker" }`
+"permanent-type" | "card-type" | "counter-kind" | "controller" | { subtypesOf: "creature" | "planeswalker" }`
+(`"controller"`: Sudden Salvation's "for each opponent who controls one or more of those permanents",
+`in: { thisWay: "put-onto-battlefield" }` with `filter: { controlledBy: "opponent" }`)
 (`"color"`: Sunbird Effigy's "the number of colors among the exiled cards used
 to craft it", `in: "exiled-with-source"`, colourless adding none): Lunar Insight's
 "each different mana value among nonland permanents you control", Embodiment of

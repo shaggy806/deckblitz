@@ -3162,7 +3162,9 @@
   "cost:cumulative-upkeep-discard",
   "cost:flashback-remove-x-loyalty-among",
   "effect:granted-mana-ability-own-colors-gated",
-  "effect:for-each-player-destroy-then-token-per-destroyed-controller"
+  "effect:for-each-player-destroy-then-token-per-destroyed-controller",
+  "effect:for-each-player-destroy-then-token-per-destroyed-controller",
+  "amount:opponents-controlling-this-way"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

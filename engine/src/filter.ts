@@ -4229,6 +4229,10 @@ export function aggregateMatches(
  * - `"counter-kind"`: each kind of counter on it (rule 122.1), however many:
  *   Hundred-Battle Veteran's "different kinds of counters among creatures you
  *   control".
+ * - `"controller"`: the player who controls it now — "for each opponent who
+ *   controls one or more of those permanents" (Sudden Salvation) is this over
+ *   `in: { thisWay: "put-onto-battlefield" }` with `filter: { controlledBy:
+ *   "opponent" }`: each such opponent once, however many of them they control.
  * - `{ subtypesOf }`: its subtypes of that card type — "creature types among
  *   creatures you control" (Valiant Changeling, where a changeling is every
  *   one of them, rule 702.73a), "planeswalker types among planeswalkers you
@@ -4244,6 +4248,7 @@ export type DistinctOf =
   | "permanent-type"
   | "card-type"
   | "counter-kind"
+  | "controller"
   | { readonly subtypesOf: "creature" | "planeswalker" };
 
 /** The name a "differently named" count tells an object by: its names
@@ -4291,6 +4296,7 @@ function distinctValuesOf(
     return object.zone === "battlefield" ? computeCharacteristics(state, registry, id).types : registry.get(printedCardName(object)).types;
   }
   if (of === "counter-kind") return Object.keys(object.counters ?? {}).filter((kind) => (object.counters[kind] ?? 0) > 0);
+  if (of === "controller") return [object.controller];
   const c = computeCharacteristics(state, registry, id);
   if (of === "power") return [c.power];
   if (of === "color-pair") return c.colors.size === 2 ? [[...c.colors].sort().join("")] : [];
