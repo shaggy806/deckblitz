@@ -21963,6 +21963,14 @@ const TURN_TALLY_IFS = {
   // or not.
   "if this ability has been activated four or more times this turn,": { kind: "activated-this-turn", atLeast: 4 },
   "if a player discarded a card this turn,": { kind: "turn-history", what: "discarded", who: "any-player" },
+  // Command the Stage: the journal's damage entries to an opponent, less
+  // combat damage, over the turn before.
+  "if an opponent was dealt noncombat damage last turn,": {
+    kind: "turn-history",
+    what: "noncombat-damaged",
+    who: "opponent",
+    window: "last-turn",
+  },
   // That player's own entries, the land that fired it one of the two
   // (Tunnel Ignus).
   "if that player had another land enter the battlefield under their control this turn,": {

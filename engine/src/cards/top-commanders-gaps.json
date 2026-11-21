@@ -3146,7 +3146,8 @@
   "effect:game-is-a-draw",
   "effect:game-is-a-draw",
   "effect:reflexive-trigger-per-counter-put",
-  "condition:vote-option-most-or-tied"
+  "condition:vote-option-most-or-tied",
+  "condition:opponent-dealt-noncombat-damage-last-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

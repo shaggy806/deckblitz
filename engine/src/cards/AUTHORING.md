@@ -7718,7 +7718,10 @@ clause (section 9):
   (Oblivious Bookworm), `what: "regenerated"` with `selfOnly` (Spiny Starfish,
   the `{ turnHistory }` amount's `selfOnly` its count); `what: "entered"` with
   `filter: { token: true }` is "tokens you created this turn" (rule 111.2 —
-  Ellyn Harbreeze); `what: "combat-damaged-by"` is the sources that dealt `who`
+  Ellyn Harbreeze); `what: "noncombat-damaged"` is `who` dealt damage other
+  than combat damage, an entry a source an event — Command the Stage's "if an
+  opponent was dealt noncombat damage last turn" (`who: "opponent"`, `window:
+  "last-turn"`); `what: "combat-damaged-by"` is the sources that dealt `who`
   combat damage, each read as it dealt it, whatever it is now: Lost Monarch of
   Ifnir's "if a player was dealt combat damage by a Zombie this turn" (`who:
   "any-player"`, `filter: { subtype: "Zombie" }`), Blitzball's "an opponent …

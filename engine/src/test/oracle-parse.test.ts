@@ -24853,6 +24853,24 @@ describe("a vote for colors, protection from each most or tied", () => {
   });
 });
 
+describe("an opponent dealt noncombat damage last turn", () => {
+  it("reads Command the Stage's intervening if", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      oracle_text:
+        "At the beginning of each upkeep, if an opponent was dealt noncombat damage last turn, return this card from your graveyard to your hand.",
+    });
+    expect(parsed.triggered[0].condition).toEqual({
+      kind: "turn-history",
+      what: "noncombat-damaged",
+      who: "opponent",
+      window: "last-turn",
+    });
+    expect(parsed.triggered[0].fromGraveyard).toBe(true);
+  });
+});
+
 describe("a counter put, then a reflexive ability per counter put", () => {
   it("reads Etched Slith's 'When you do' with another target permanent or opponent", () => {
     const parsed = parseFace({

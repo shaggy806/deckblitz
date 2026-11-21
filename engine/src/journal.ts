@@ -425,6 +425,13 @@ export type JournalWhat =
   /** A source dealt combat damage to this player, one entry a source a combat
    * damage step: the list is the damaged player's. */
   | "combat-damaged-by"
+  /** This player was dealt noncombat damage — any but combat damage (rule
+   * 120.2a), such as a spell's or an ability's (120.2b) — one entry a source
+   * an event: the list
+   * is the damaged player's — Command the Stage's "if an opponent was dealt
+   * noncombat damage last turn" (`{ what: "noncombat-damaged", who:
+   * "opponent", window: "last-turn" }`). */
+  | "noncombat-damaged"
   /** A source dealt combat damage to a player, once per source and stint
    * however often it did: the list is the source's controller's as it dealt
    * it, and a filter reads the source as it was then — Excess's "for each
@@ -559,6 +566,11 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     whose: "target",
     match: (e) => e.combat !== undefined && e.target?.kind === "player",
     oncePerList: true,
+  },
+  "noncombat-damaged": {
+    kind: "damage",
+    whose: "target",
+    match: (e) => e.combat === undefined && e.target?.kind === "player",
   },
   "dealt-combat-damage-to-player": {
     kind: "damage",
