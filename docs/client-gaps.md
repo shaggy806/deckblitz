@@ -103,6 +103,13 @@ too little or too much; the server refuses an illegal board with the reason.
 takes them, but the deck builder and the import set none, so a deck with a sticker card brings all
 48 Unfinity sheets and three are dealt at random from those.
 
+**B337's display gaps.** Found 2026-11-21 (batch 337's agents): Archangel of Strife's "each player
+chooses war or peace" (`chooseOnEnterBy: "each-player"`, answers kept as `GameObject.chosenOnEnterBy`)
+logs "Archangel of Strife chooses war" without naming the player, and `view.ts`'s `chosenOf` shows no
+per-player answers on the card. Cloak and Dagger, Entwined's optional second target reads "choose
+creature other than target 1 (optional)", the `other` slot's generic wording, where "that player
+controls" would say what the slot is.
+
 **A trigger asked again doesn't say which one it is.** Found 2026-11-16 (the check of prompts
 beside other triggers): each trigger put on the stack asks for its own targets (rule 603.3d), so
 Panharmonicon's second Ravenous Chupacabra trigger, or a Blood Artist's for each of five creatures

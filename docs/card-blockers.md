@@ -666,6 +666,22 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 337 (2026-11-21, `author-top-cards overnight`, ranks 16985–20627)** — 54 cards from
+  15 lane agents, five at once, in the decisions, replacements-copies, triggers-journal, costs-mana and
+  casting-zones lanes (`B337.json`; `COMPLETED.md` lists the features), wrapped up at the user's word
+  after three rounds: Debt of Loyalty, Nihiloor, Fatal Fissure, Exotic Pets, Maestros Ascendancy,
+  Sasaya, Celestial Dawn, Divine Intervention, Celestial Convergence, Archangel of Strife, Living
+  Conundrum, Dream Tides, Szadek, Next of Kin and the rest, with the cards sharing a key (Spin into
+  Myth, Infinite Coursework, Mudslide, Thelon's Curse, Magnetic Mountain, Phantom Centaur). About half
+  the keys needed no engine code; the decisions lane's six "decision:" keys were all existing shapes.
+  Left blocked: **Stone Calendar** (20630, `cost:optional-cost-reduction`, major: its ruling lets the
+  caster decline "up to {1} less", a new choice while casting). Not reached: the combat-targeting
+  lane's cards and the others in 18541–19671 none of the five lanes took (Mana Maze, Tilonalli's Crown,
+  Spider-Woman, Bishop of Binding, Spellweaver Volute, Celestial Judgment, Leshrac's Sigil, Lamplight
+  Phoenix, Magus of the Balance, Word of Command, Emissary of Soulfire, Avatar of Might). Not a bug,
+  checked: scry asks the order of both groups (701.22a, `beginLibraryOrder`). Leads the agents left:
+  `modal.exactlyIf` isn't read on activated abilities; bots read `regenerate` as friendly, so Debt of
+  Loyalty is never aimed to steal; Grimoire Thief now needs only "counter all spells with those names".
 - **Batch 336 (2026-11-20, `author-top-cards overnight 3pm`, ranks 12293–19997)** — 80 cards from
   21 lane agents, five at once, 10:15-15:00 (`B336.json`; `COMPLETED.md` lists the features): every
   triaged card from Zur's Weirding (12293) on by rank to Grim Contest (19997) that the agents reached,

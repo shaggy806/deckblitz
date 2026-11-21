@@ -1,0 +1,481 @@
+{
+  "batch": 337,
+  "status": "done",
+  "ranks": "author-top-cards overnight, 2026-11-21 (12:35 to about 18:00, wrapped up at the user's word): the triaged cards past EDHREC rank 16,900 in rank order, Debt of Loyalty (16985) to Next of Kin (20627), each with the small key it waited on, built by 15 worktree agents one lane at a time (build-family's overnight lanes loop, five at once, in five of the six lanes), skipping the cards waiting on the user (Cryptic Spires, Spawnsire of Ulamog, Drain Power, the secret-choice, sticker, Planechase and other majors) and the recheck list. About half the keys needed no engine code. Features: regeneration riders (Debt of Loyalty), keyword-counters every kind, chosen-source prevent all but, tap.atRelease (held taps as one tapping), signed aggregate sums, the game is a draw and highest life wins or draw, counter-removed by, vote-won orTied, the noncombat-damaged journal word, DistinctOf controller, modal exactlyIf, triggered mana per same-name land and a reveal-your-hand cost, spend other mana only as colorless, enteredPaid, flashback also/minX costs, hasActivatedAbility atLeast, a permission's sacrifice beside a spell's own, noted exiled mana values, one-each-colour searches, fateseal, look-and-choose atRandom and hand-and-command, face-down exiles looked at by the source's controller, chooseOnEnterBy each-player, note.copyOf, become-unprepared, choose-permanents payEach, a drawer's own draw replacement ordered against Notion Thief, discard-chosen alsoFrom a target permanent, bushido counted. Bugs fixed on the way, each with a test: off-battlefield colours ignored outsideBattlefield statics (Mycosynth Lattice, Painter's Servant); a cast's additional cost was judged before its X (Light Up the Night); cycling didn't count as an activated ability; Kess reached no Adventure half; a declined dredge's draw ran behind the queue and was replaced again by Chains of Mephistopheles (614.11a, 614.5), and so did the replacement-order answer's.",
+  "authored": [
+    {
+      "name": "(tokens)",
+      "files": [
+        "engine/src/cards/tokens/alien-token-adipose-offspring.ts",
+        "engine/src/cards/tokens/mutant-token-green-deathtouch.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Adipose Offspring",
+      "files": [
+        "engine/src/cards/pool/adipose-offspring.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/emerge-sacrificed-creature.test.ts"
+    },
+    {
+      "name": "Angrath, Minotaur Pirate",
+      "files": [
+        "engine/src/cards/pool/angrath-minotaur-pirate.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/aggregate-sum-unclamped.test.ts"
+    },
+    {
+      "name": "Archangel of Strife",
+      "files": [
+        "engine/src/cards/pool/archangel-of-strife.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/each-player-chooses-on-enter.test.ts"
+    },
+    {
+      "name": "Bell Borca, Spectral Sergeant",
+      "files": [
+        "engine/src/cards/pool/bell-borca-spectral-sergeant.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/note-exiled-mana-value.test.ts"
+    },
+    {
+      "name": "Biblioplex Tomekeeper",
+      "files": [
+        "engine/src/cards/pool/biblioplex-tomekeeper.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/become-unprepared.test.ts"
+    },
+    {
+      "name": "Celestial Convergence",
+      "files": [
+        "engine/src/cards/pool/celestial-convergence.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/highest-life-wins.test.ts"
+    },
+    {
+      "name": "Celestial Dawn",
+      "files": [
+        "engine/src/cards/pool/celestial-dawn.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/spend-only-as-colorless.test.ts"
+    },
+    {
+      "name": "Cherished Hatchling",
+      "files": [
+        "engine/src/cards/pool/cherished-hatchling.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/spell-gains-trigger-kept.test.ts"
+    },
+    {
+      "name": "Cloak and Dagger, Entwined",
+      "files": [
+        "engine/src/cards/pool/cloak-and-dagger-entwined.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/hand-card-or-target-permanent.test.ts"
+    },
+    {
+      "name": "Colfenor's Plans",
+      "files": [
+        "engine/src/cards/pool/colfenors-plans.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/exile-face-down-lookers-follow.test.ts"
+    },
+    {
+      "name": "Command the Stage",
+      "files": [
+        "engine/src/cards/pool/command-the-stage.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/noncombat-damaged-last-turn.test.ts"
+    },
+    {
+      "name": "Council Guardian",
+      "files": [
+        "engine/src/cards/pool/council-guardian.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/vote-most-or-tied.test.ts"
+    },
+    {
+      "name": "Debt of Loyalty",
+      "files": [
+        "engine/src/cards/pool/debt-of-loyalty.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/regenerate-gain-control.test.ts"
+    },
+    {
+      "name": "Deem Inferior",
+      "files": [
+        "engine/src/cards/pool/deem-inferior.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/owner-chooses-second-or-bottom.test.ts"
+    },
+    {
+      "name": "Dinosaur Headdress",
+      "files": [
+        "engine/src/cards/pool/dinosaur-headdress.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/attached-copy-of-chosen-exiled.test.ts"
+    },
+    {
+      "name": "Divine Intervention",
+      "files": [
+        "engine/src/cards/pool/divine-intervention.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/game-is-a-draw.test.ts"
+    },
+    {
+      "name": "Dralnu, Lich Lord",
+      "files": [
+        "engine/src/cards/pool/dralnu-lich-lord.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/damage-to-self-sacrifice-instead.test.ts"
+    },
+    {
+      "name": "Dream Tides",
+      "files": [
+        "engine/src/cards/pool/dream-tides.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/pay-per-chosen-untap.test.ts"
+    },
+    {
+      "name": "Etched Slith",
+      "files": [
+        "engine/src/cards/pool/etched-slith.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/reflexive-per-counters-placed.test.ts"
+    },
+    {
+      "name": "Exotic Pets",
+      "files": [
+        "engine/src/cards/pool/exotic-pets.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/counter-per-kind-among.test.ts"
+    },
+    {
+      "name": "Fatal Fissure",
+      "files": [
+        "engine/src/cards/pool/fatal-fissure.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/delayed-dies-own-targets.test.ts"
+    },
+    {
+      "name": "Forcefield",
+      "files": [
+        "engine/src/cards/pool/forcefield.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/chosen-source-prevent-all-but.test.ts"
+    },
+    {
+      "name": "Getaway Barrel",
+      "files": [
+        "engine/src/cards/pool/getaway-barrel.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/random-card-from-revealed.test.ts"
+    },
+    {
+      "name": "Harness the Storm",
+      "files": [
+        "engine/src/cards/pool/harness-the-storm.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/same-name-trigger-target.test.ts"
+    },
+    {
+      "name": "Infinite Coursework",
+      "files": [
+        "engine/src/cards/pool/infinite-coursework.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/become-unprepared.test.ts"
+    },
+    {
+      "name": "Liberated Livestock",
+      "files": [
+        "engine/src/cards/pool/liberated-livestock.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/aura-onto-each-created-token.test.ts"
+    },
+    {
+      "name": "Life of Toshiro Umezawa",
+      "files": [
+        "engine/src/cards/pool/life-of-toshiro-umezawa.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/modal-chapter-targets.test.ts"
+    },
+    {
+      "name": "Light Up the Night",
+      "files": [
+        "engine/src/cards/pool/light-up-the-night.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/flashback-remove-counters-cost.test.ts"
+    },
+    {
+      "name": "Living Conundrum",
+      "files": [
+        "engine/src/cards/pool/living-conundrum.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/draw-replacement-order.test.ts"
+    },
+    {
+      "name": "Maestros Ascendancy",
+      "files": [
+        "engine/src/cards/pool/maestros-ascendancy.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/graveyard-permission-sacrifice-beside-own.test.ts"
+    },
+    {
+      "name": "Magma Pummeler",
+      "files": [
+        "engine/src/cards/pool/magma-pummeler.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/prevent-damage-remove-counters.test.ts"
+    },
+    {
+      "name": "Magnetic Mountain",
+      "files": [
+        "engine/src/cards/pool/magnetic-mountain.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/pay-per-chosen-untap.test.ts"
+    },
+    {
+      "name": "Memory of Toshiro",
+      "files": [
+        "engine/src/cards/pool/memory-of-toshiro.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/modal-chapter-targets.test.ts"
+    },
+    {
+      "name": "Mesmeric Sliver",
+      "files": [
+        "engine/src/cards/pool/mesmeric-sliver.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/fateseal.test.ts"
+    },
+    {
+      "name": "Mind Bomb",
+      "files": [
+        "engine/src/cards/pool/mind-bomb.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/each-player-discards-up-to.test.ts"
+    },
+    {
+      "name": "Mudslide",
+      "files": [
+        "engine/src/cards/pool/mudslide.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/pay-per-chosen-untap.test.ts"
+    },
+    {
+      "name": "Nahiri's Wrath",
+      "files": [
+        "engine/src/cards/pool/nahiris-wrath.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/discarded-cost-mana-value.test.ts"
+    },
+    {
+      "name": "Next of Kin",
+      "files": [
+        "engine/src/cards/pool/next-of-kin.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/hand-or-command-zone-choice.test.ts"
+    },
+    {
+      "name": "Nihiloor",
+      "files": [
+        "engine/src/cards/pool/nihiloor.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/per-opponent-tap-reflexive-steal.test.ts"
+    },
+    {
+      "name": "Otherworldly Escort",
+      "files": [
+        "engine/src/cards/pool/otherworldly-escort.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/enter-as-set-subtypes.test.ts"
+    },
+    {
+      "name": "Paleontologist's Pick-Axe",
+      "files": [
+        "engine/src/cards/pool/paleontologists-pick-axe.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/attached-copy-of-chosen-exiled.test.ts"
+    },
+    {
+      "name": "Phantom Centaur",
+      "files": [
+        "engine/src/cards/pool/phantom-centaur.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/replacement-order-damage.test.ts"
+    },
+    {
+      "name": "Possessed Portal",
+      "files": [
+        "engine/src/cards/pool/possessed-portal.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/skip-every-draw.test.ts"
+    },
+    {
+      "name": "Prophetic Titan",
+      "files": [
+        "engine/src/cards/pool/prophetic-titan.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/exact-mode-count.test.ts"
+    },
+    {
+      "name": "Sanar, Innovative First-Year",
+      "files": [
+        "engine/src/cards/pool/sanar-innovative-first-year.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/exile-one-per-color.test.ts"
+    },
+    {
+      "name": "Sasaya's Essence",
+      "files": [
+        "engine/src/cards/pool/sasayas-essence.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/same-name-land-mana.test.ts"
+    },
+    {
+      "name": "Sasaya, Orochi Ascendant",
+      "files": [
+        "engine/src/cards/pool/sasaya-orochi-ascendant.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/same-name-land-mana.test.ts"
+    },
+    {
+      "name": "Savior of Ollenbock",
+      "files": [
+        "engine/src/cards/pool/savior-of-ollenbock.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/mixed-zone-targets.test.ts"
+    },
+    {
+      "name": "Spin into Myth",
+      "files": [
+        "engine/src/cards/pool/spin-into-myth.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/fateseal.test.ts"
+    },
+    {
+      "name": "Sudden Salvation",
+      "files": [
+        "engine/src/cards/pool/sudden-salvation.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/distinct-controllers.test.ts"
+    },
+    {
+      "name": "Szadek, Lord of Secrets",
+      "files": [
+        "engine/src/cards/pool/szadek-lord-of-secrets.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/replacement-order-damage.test.ts"
+    },
+    {
+      "name": "Takeno, Samurai General",
+      "files": [
+        "engine/src/cards/pool/takeno-samurai-general.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/bushido-points.test.ts"
+    },
+    {
+      "name": "Tazri, Stalwart Survivor",
+      "files": [
+        "engine/src/cards/pool/tazri-stalwart-survivor.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/granted-mana-own-colors-gated.test.ts"
+    },
+    {
+      "name": "Tenth District Hero",
+      "files": [
+        "engine/src/cards/pool/tenth-district-hero.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/becomes-named-with-static.test.ts"
+    },
+    {
+      "name": "The Curse of Fenric",
+      "files": [
+        "engine/src/cards/pool/the-curse-of-fenric.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/curse-of-fenric.test.ts"
+    },
+    {
+      "name": "Thelon's Curse",
+      "files": [
+        "engine/src/cards/pool/thelons-curse.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/pay-per-chosen-untap.test.ts"
+    },
+    {
+      "name": "Vexing Sphinx",
+      "files": [
+        "engine/src/cards/pool/vexing-sphinx.ts"
+      ],
+      "tested": true,
+      "test": "engine/src/test/cumulative-upkeep-discard.test.ts"
+    }
+  ],
+  "blocked": [
+    {
+      "name": "Stone Calendar",
+      "needs": [
+        "cost:optional-cost-reduction"
+      ],
+      "size": "major",
+      "why": "\"Spells you cast cost up to {1} less\": its ruling lets the caster decline the reduction, a new choice while casting (a cast-offer variant or a decline flag, client wording and bot handling); left for the user"
+    }
+  ]
+}
