@@ -5180,6 +5180,10 @@ function basePtCount(
 ): number {
   const of = from.countOf;
   if (of === "chosen-number") return chosenNumberOf(object);
+  if (of === "greatest-noted-mana-value") {
+    const noted = object.notedManaValue;
+    return object.zone === "battlefield" && noted !== undefined && noted.turn === state.turn.number ? noted.greatest : 0;
+  }
   if (typeof of === "object" && "countersOnThis" in of) return object.counters[of.countersOnThis] ?? 0;
   if (typeof of === "object" && "countersOnMaker" in of) {
     const link = object.createdWith;

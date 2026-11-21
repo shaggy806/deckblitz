@@ -63693,6 +63693,35 @@ controlledBy,
    * change counts. Each object is kept as it was then (rules 603.10a, 608.2h):
    * the snapshot the event's own move took where there is one.
    */
+  /** "Note the mana value of each card as it's put into exile" (Bell Borca,
+   * Spectral Sergeant — `StaticAbility.notesExiledManaValues`): each
+   * permanent on the battlefield with it now notes the cards that just
+   * arrived, each as it is in exile (its rulings) — a face-down one has none
+   * (406.3a), X is 0 (202.3e); a token is no card. Only the turn's greatest is
+   * kept (`GameObject.notedManaValue`). */
+  private noteExiledManaValues(arrivals: readonly { readonly object: ObjectId; readonly token?: true }[]): void {
+    let greatest: number | undefined;
+    for (const arrival of arrivals) {
+      if (arrival.token === true) continue;
+      const card = this.state.objects[arrival.object];
+      if (card === undefined || card.zone !== "exile") continue;
+      const value = card.exiledFaceDown !== undefined ? 0 : manaValueOfObject(this.registry, card);
+      greatest = Math.max(greatest ?? 0, value);
+    }
+    if (greatest === undefined) return;
+    const turn = this.state.turn.number;
+    for (const id of this.state.zones.shared.battlefield) {
+      const permanent = this.state.objects[id];
+      if (permanent === undefined || !this.ownStatics(permanent).some((s) => s.notesExiledManaValues === true)) continue;
+      if (hasLostAbilities(this.state, this.registry, permanent)) continue;
+      const before = permanent.notedManaValue;
+      const kept = before !== undefined && before.turn === turn ? before.greatest : undefined;
+      if (kept !== undefined && kept >= greatest) continue;
+      permanent.notedManaValue = { turn, greatest };
+      invalidateComputedCache();
+    }
+  }
+
   private recordJournal(event: GameEvent): void {
     const add = (entry: Omit<JournalEntry, "turn">): void => this.journal(entry);
     const stintOf = (id: ObjectId): number => this.state.objects[id]?.zoneChangeCount ?? 0;
@@ -63963,6 +63992,7 @@ controlledBy,
         for (const arrival of event.arrivals) {
           if (arrival.token !== true) add({ kind: "put-into-exile", player: arrival.owner, object: arrival.object });
         }
+        this.noteExiledManaValues(event.arrivals);
         return;
       case "permanent-tapped": {
         const permanent = this.state.objects[event.object];
@@ -75147,6 +75177,8 @@ controlledBy,
     delete object.enlistedIn;
     // And the die results stored on it (Centaur of Attention).
     delete object.storedResults;
+    // And the mana values noted for it (Bell Borca, Spectral Sergeant).
+    delete object.notedManaValue;
     // Its stickers go with it to another public zone, an exception to rule
     // 400.7, each with a new timestamp in the order they had (rules 123.5,
     // 613.7k); to a hand or library they're lost (123.5).

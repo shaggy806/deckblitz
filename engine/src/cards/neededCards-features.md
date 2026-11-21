@@ -1911,6 +1911,14 @@ permission's into `spellSacrificeParts` (`besideOwn`, chosen as it's paid, not r
 filter became `spell` (an Adventure's instant half, per the rulings). The scaffolder reads both lines.
 `test/graveyard-permission-sacrifice-beside-own.test.ts`.
 
+### Mana values noted as cards are exiled — built 2026-11-21
+
+The key `mechanic:note-exiled-mana-value`, for Bell Borca, Spectral Sergeant: the static
+`notesExiledManaValues` (each card put into exile, read off `cards-put-into-exile` beside the journal's
+`put-into-exile`, noted for every permanent with it on the battlefield then, face down 0 — `Game.noteExiledManaValues`),
+kept as the turn's greatest on `GameObject.notedManaValue` (forgotten on a zone change), and the CDA count
+`"greatest-noted-mana-value"`. The only card with the line, so no scaffolder template. `test/note-exiled-mana-value.test.ts`.
+
 ### Mana whose rider copies the ability it paid for — built 2026-11-13
 
 By EDHREC rank: Sunken Palace (4621), the only card. `add-mana`'s

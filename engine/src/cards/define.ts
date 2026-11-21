@@ -733,6 +733,13 @@ export type CountSpec =
    * the token, which wasn't created with it. Only a `setBasePtFromCount` knows
    * which token that is. */
   | { readonly countersOnMaker: string }
+  /** The greatest mana value noted for this permanent this turn
+   * (`GameObject.notedManaValue`, `StaticAbility.notesExiledManaValues`) —
+   * Bell Borca, Spectral Sergeant's "power is equal to the greatest number
+   * noted for it this turn". 0 before any is noted this turn, and off the
+   * battlefield (its rulings). Only a `setBasePtFromCount` knows which
+   * permanent that is. */
+  | "greatest-noted-mana-value"
   | "cards-in-all-graveyards"
   /** How many cards are in its controller's hand (Psychosis Crawler) — its
    * owner's, off the battlefield. */
@@ -2374,6 +2381,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * fold has nothing to do with it.
    */
   readonly fromCommandZone?: boolean;
+  /** "Note the mana value of each card as it's put into exile" (Bell Borca,
+   * Spectral Sergeant): while this permanent is on the battlefield, each card
+   * put into exile, from anywhere, has its mana value there noted for it
+   * (`GameObject.notedManaValue`) — 0 for one exiled face down (406.3a), X
+   * as 0 (202.3e); a token is no card. Read by the `"greatest-noted-mana-value"`
+   * count. Use `affects: { scope: "self" }`. */
+  readonly notesExiledManaValues?: true;
   /** A condition gating this static (rule 604.3 — "as long as …"). When
    * present and false, the static contributes nothing. Re-evaluated on every
    * characteristics read, so it's live. ROADMAP Phase 11 EG-3. */

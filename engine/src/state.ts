@@ -520,6 +520,11 @@ export interface GameObject {
    * "most-alike-stored-results"`. The object's own, so a change of zone
    * forgets them (rule 400.7). Absent until the first. */
   storedResults?: { readonly sides: number; readonly result: number }[];
+  /** The greatest mana value noted for this permanent in turn `turn` (Bell
+   * Borca, Spectral Sergeant — `StaticAbility.notesExiledManaValues`); only
+   * the greatest is ever read. The object's own: a change of zone forgets it
+   * (rule 400.7). Absent until the first. */
+  notedManaValue?: { readonly turn: number; readonly greatest: number };
   /** The stickers on it (rule 123), oldest first — see {@link PlacedSticker}.
    * Not part of its copiable values (123.1), so a copy of it has none. Kept
    * as it moves from one public zone to another, an exception to rule 400.7,

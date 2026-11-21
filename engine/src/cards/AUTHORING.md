@@ -6755,6 +6755,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     (Psychosis Crawler), `"your-life-total"` (Serra Avatar's "power and
     toughness are each equal to your life total" — negative at negative life,
     rule 107.1b).
+  - `"greatest-noted-mana-value"` — the greatest mana value noted for this
+    permanent this turn, 0 before any and off the battlefield: Bell Borca,
+    Spectral Sergeant's "power is equal to the greatest number noted for it
+    this turn", beside its static `notesExiledManaValues: true` ("Note the
+    mana value of each card as it's put into exile": each card as it is in
+    exile, face down 0, while this is on the battlefield).
   - `{ playerCounters: "experience" }` — the counters of that kind its
     controller has (Daxos the Returned's Spirit: "power and toughness are each
     equal to the number of experience counters you have").
