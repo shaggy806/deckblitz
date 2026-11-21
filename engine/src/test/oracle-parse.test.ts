@@ -2085,6 +2085,22 @@ describe("costs and triggers", () => {
       ifRegenerates: { kind: "gain-control", target: 0, untilEndOfTurn: false },
     });
 
+    const forcefield = parseFace({
+      name: "Forcefield",
+      type_line: "Artifact",
+      oracle_text:
+        "{1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.",
+    });
+    expect(forcefield.complete).toBe(true);
+    expect(forcefield.activated[0].effect).toEqual({
+      kind: "prevent-damage-from-chosen-source",
+      filter: { type: "creature", unblocked: true },
+      to: "you",
+      amount: "next-time",
+      allBut: 1,
+      combatOnly: true,
+    });
+
     const parasite = parseFace({
       name: "Invader Parasite",
       type_line: "Creature — Phyrexian Insect",

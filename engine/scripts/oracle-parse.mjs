@@ -8141,6 +8141,19 @@ export function parseSentence(sentence, ctx) {
       ...(m[3] !== undefined ? { half: m[3].toLowerCase() } : {}),
     };
   }
+  // "The next time an unblocked creature of your choice would deal combat
+  // damage to you this turn, prevent all but 1 of that damage" (Forcefield):
+  // `allBut`, `combatOnly`.
+  if ((m = re(`the next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but (\\d+) of that damage`).exec(s))) {
+    return {
+      kind: "prevent-damage-from-chosen-source",
+      filter: { type: "creature", unblocked: true },
+      to: "you",
+      amount: "next-time",
+      allBut: Number(m[1]),
+      combatOnly: true,
+    };
+  }
   // "… would deal damage this turn, prevent that damage": any recipient
   // (Pilgrim of Virtue); "to you and/or creatures you control" (Shadowbane).
   if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage (to you and\\/or creatures you control )?this turn, prevent that damage`).exec(s))) {

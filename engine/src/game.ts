@@ -48409,10 +48409,14 @@ controlledBy,
         this.state.activeReplacements.push({
           // Dark Sphere's "prevent half that damage, rounded down": the
           // shield's step is a `prevent-half` (`damageSteps`).
+          // Forcefield's "prevent all but 1 of that damage", a
+          // `prevent-all-but` step; "combat damage", its `combat`.
           replacement:
             more?.half !== undefined
-              ? { event: "would-deal-damage", instead: { prevent: { half: more.half } } }
-              : preventionRecord(),
+              ? { event: "would-deal-damage", instead: { prevent: { half: more.half } }, ...(more.combatOnly === true ? { combat: true } : {}) }
+              : more?.allBut !== undefined
+                ? { event: "would-deal-damage", instead: { prevent: { allBut: more.allBut } }, ...(more.combatOnly === true ? { combat: true } : {}) }
+                : preventionRecord(more?.combatOnly === true ? true : undefined),
           owner: controller,
           source,
           expires: "end-of-turn",

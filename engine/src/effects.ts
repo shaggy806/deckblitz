@@ -11066,6 +11066,17 @@ export type EffectSpec =
        * 2). One that would prevent none of it (1 damage, rounded down) isn't
        * used up (rule 609.7b). Not with a number `amount` or a redirection. */
       readonly half?: "up" | "down";
+      /** All but this much of that damage instead of all of it: "the next
+       * time an unblocked creature of your choice would deal combat damage
+       * to you this turn, prevent all but 1 of that damage" (Forcefield: `{
+       * filter: { type: "creature", unblocked: true }, to: "you", amount:
+       * "next-time", allBut: 1, combatOnly: true }`). One that would prevent
+       * none of it isn't used up (609.7b). Not with `half`, a number
+       * `amount` or a redirection. */
+      readonly allBut?: number;
+      /** Only combat damage from that source ("would deal **combat**
+       * damage"). */
+      readonly combatOnly?: true;
       /** Only the damage prevented from a source that matches this, as the
        * damage would be dealt, gains life: "If damage from a black source is
        * prevented this way, you gain that much life" (Shadowbane); needs
@@ -15798,6 +15809,10 @@ export interface EffectApi {
       readonly gainLifeFrom?: CardFilter;
       /** Only half of the damage, rounded this way (Dark Sphere). */
       readonly half?: "up" | "down";
+      /** All but this much of the damage (Forcefield). */
+      readonly allBut?: number;
+      /** Only combat damage (Forcefield). */
+      readonly combatOnly?: true;
     },
   ): void;
   /** `target`'s text has every `change.from` replaced by `change.to` — see
@@ -25143,6 +25158,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ...(spec.redirectToSource !== undefined ? { redirectToSource: spec.redirectToSource } : {}),
               ...(spec.gainLifeFrom !== undefined ? { gainLifeFrom: spec.gainLifeFrom } : {}),
               ...(spec.half !== undefined ? { half: spec.half } : {}),
+              ...(spec.allBut !== undefined ? { allBut: spec.allBut } : {}),
+              ...(spec.combatOnly === true ? { combatOnly: true as const } : {}),
             },
           );
         }
