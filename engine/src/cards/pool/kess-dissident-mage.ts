@@ -23,7 +23,9 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, oncePerTurn: true, yourTurnOnly: true, exileAfter: true },
+      // `spell`: judged as the face cast (601.3e), so an Adventure card's
+      // instant or sorcery half is reached too.
+      mayPlay: { from: "graveyard", spell: { typesAnyOf: ["instant", "sorcery"] }, oncePerTurn: true, yourTurnOnly: true, exileAfter: true },
       text:
         "Once during each of your turns, you may cast an instant or sorcery spell from your " +
         "graveyard. If a spell cast this way would be put into your graveyard, exile it instead.",

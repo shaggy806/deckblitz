@@ -1902,6 +1902,15 @@ kind, so no scaffolder templates. A spell's additional cost reading X
 cost:sacrifice-mana-value-x (activated abilities), cost:sacrifice-up-to-n,
 cost:graveyard-cast-sacrifice-count.
 
+### A permission's sacrifice beside the spell's own — built 2026-11-21
+
+The key `cost:graveyard-permission-sacrifice-beside-own`, for Maestros Ascendancy: a permission's one `sacrifice` was
+refused beside a spell's own named one (Fling), since a cast names one. Now `Game.namesOwnSacrifice` moves the
+permission's into `spellSacrificeParts` (`besideOwn`, chosen as it's paid, not recorded as the spell's
+`{ paid: "sacrificed" }`), and the cast check leaves the named one out of what can pay the parts. Kess's and Maestros's
+filter became `spell` (an Adventure's instant half, per the rulings). The scaffolder reads both lines.
+`test/graveyard-permission-sacrifice-beside-own.test.ts`.
+
 ### Mana whose rider copies the ability it paid for — built 2026-11-13
 
 By EDHREC rank: Sunken Palace (4621), the only card. `add-mana`'s

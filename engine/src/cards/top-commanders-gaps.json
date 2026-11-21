@@ -9,6 +9,7 @@
     "effect:counter-per-kind-among",
     "effect:chosen-source-shield-prevent-all-but",
     "replacement:skip-every-draw",
+    "cost:graveyard-permission-sacrifice-beside-own",
     "static:max-hand-size-equal-to-counters",
     "static:max-hand-size-equal-to-count",
     "static:exhaust-reactivation",

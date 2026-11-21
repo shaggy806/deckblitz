@@ -4326,6 +4326,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       entersTapped: true,
     });
     expect(fromGraveyard("Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that creature enters tapped.")).toBeUndefined();
+    // Kess, Dissident Mage; Maestros Ascendancy's sacrifice beside the spell's own costs.
+    expect(fromGraveyard("Once during each of your turns, you may cast an instant or sorcery spell from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead.")).toEqual({
+      from: "graveyard",
+      spell: { typesAnyOf: ["instant", "sorcery"] },
+      oncePerTurn: true,
+      yourTurnOnly: true,
+      exileAfter: true,
+    });
+    expect(fromGraveyard("Once during each of your turns, you may cast an instant or sorcery spell from your graveyard by sacrificing a creature in addition to paying its other costs. If a spell cast this way would be put into your graveyard, exile it instead.")).toEqual({
+      from: "graveyard",
+      spell: { typesAnyOf: ["instant", "sorcery"] },
+      oncePerTurn: true,
+      yourTurnOnly: true,
+      sacrifice: { type: "creature" },
+      exileAfter: true,
+    });
     const maze = face("Once during each of your turns, you may cast a spell from your hand by paying life equal to its mana value rather than paying its mana cost.", "Enchantment — Room");
     expect(maze.static[0].alternativeCostForSpells.when?.castFrom).toBe("hand");
     const bloodcaster = face("{1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.", "Creature — Vampire Warlock");

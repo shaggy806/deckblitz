@@ -21918,8 +21918,23 @@ export class Game {
     if (!isPermissionCast(via)) return undefined;
     const permission = this.castPermission(player, card, face, via, grant);
     // Several ("sacrificing two creatures") are chosen as they're paid, not
-    // named on the cast: `spellSacrificeParts`.
-    return permission?.sacrificeCount === undefined ? permission?.sacrifice : undefined;
+    // named on the cast: `spellSacrificeParts`. So is one beside a sacrifice
+    // the card names of its own (Fling under Maestros Ascendancy).
+    return permission?.sacrificeCount === undefined && !Game.namesOwnSacrifice(this.faceDef(card, face))
+      ? permission?.sacrifice
+      : undefined;
+  }
+
+  /** Whether `def`'s own additional cost names one sacrifice on the cast
+   * (Fling's "sacrifice a creature", or a choice of costs with one). One
+   * cast names one, so a cast permission's single sacrifice beside it is
+   * chosen as it's paid instead (`spellSacrificeParts`) — Maestros
+   * Ascendancy's creature "in addition to paying its other costs" (601.2f). */
+  private static namesOwnSacrifice(def: CardDefinition): boolean {
+    return (
+      (def.additionalCost?.sacrifice !== undefined && def.additionalCost.sacrificeCount === undefined) ||
+      def.additionalCost?.options?.some((o) => o.sacrifice !== undefined) === true
+    );
   }
 
   /** What emerge sacrifices (rule 702.119): a creature, or a permanent of
@@ -23162,17 +23177,18 @@ export class Game {
       arrangementWith(waterbent),
     );
     if (plan === null) return `${player} cannot pay the cost of ${def.name}`;
-    if (
-      sacrificeParts !== null &&
-      sacrificeCandidates !== undefined &&
-      !this.costSacrificeFillable(
-        player,
-        sacrificeParts,
-        undefined,
-        this.costSacrificeLeftAfter(sacrificeCandidates, plan),
-      )
-    ) {
-      return `${player} has too few permanents to sacrifice to cast ${def.name}`;
+    if (sacrificeParts !== null && sacrificeCandidates !== undefined) {
+      const left = this.costSacrificeLeftAfter(sacrificeCandidates, plan);
+      // The one named on the cast (Fling's own) is sacrificed before these
+      // are chosen (`castSpell`), so it can't pay them too.
+      const named =
+        sacrifice ??
+        this.additionalCostSacrifices(player, def, costOption, this.castRouteSacrifice(player, cardId, face, via, graveyardGrant), Math.floor(xValue))[0];
+      const namedLeft = named === undefined ? undefined : left.get(named);
+      if (named !== undefined && namedLeft !== undefined) left.set(named, Math.max(0, namedLeft - 1));
+      if (!this.costSacrificeFillable(player, sacrificeParts, undefined, left)) {
+        return `${player} has too few permanents to sacrifice to cast ${def.name}`;
+      }
     }
     return null;
   }
@@ -25879,7 +25895,10 @@ export class Game {
     // ones is chosen now, as the cost is paid (rule 601.2h), the spell on the
     // stack and its mana paid.
     if (severalSacrificed !== null) {
-      this.beginCostSacrifice(player, cardId, severalSacrificed, undefined, via === "effect" ? this.activePlayer : player, undefined, cardId);
+      // A permission's sacrifice beside the card's own isn't what the
+      // spell's "the sacrificed creature" reads (Fling under Maestros).
+      const onto = severalSacrificed.every((part) => part.besideOwn === true) ? undefined : cardId;
+      this.beginCostSacrifice(player, cardId, severalSacrificed, undefined, via === "effect" ? this.activePlayer : player, undefined, onto);
     }
     // The chosen branch of a choice of additional costs, paid here with the
     // fixed ones — after the announcement, so the log reads "casts X,
@@ -26974,8 +26993,13 @@ export class Game {
     }
     if (isPermissionCast(via)) {
       const permission = this.castPermission(player, cardId, face, via, grant);
-      if (permission?.sacrifice !== undefined && permission.sacrificeCount !== undefined) {
-        parts.push({ filter: permission.sacrifice, count: permission.sacrificeCount });
+      const besideOwn = Game.namesOwnSacrifice(def);
+      if (permission?.sacrifice !== undefined && (permission.sacrificeCount !== undefined || besideOwn)) {
+        parts.push({
+          filter: permission.sacrifice,
+          count: permission.sacrificeCount ?? 1,
+          ...(besideOwn ? { besideOwn: true as const } : {}),
+        });
       }
     }
     return parts.length === 0 ? null : parts;
@@ -51042,23 +51066,16 @@ controlledBy,
   /** Whether `player` could pay a permission's own additional costs for
    * `card` (as `def`) — rule 601.2h: none is offered that can't be paid in
    * full. Life only up to what they have (119.4); enough other cards to
-   * exile, enough in hand to discard, enough counters to remove; and a
-   * sacrifice only for a card without one of its own, since one cast names
-   * one `sacrifice`. */
-  private playCostsPayable(player: PlayerId, card: ObjectId, def: CardDefinition, costs: PlayTerms): boolean {
+   * exile, enough in hand to discard, enough counters to remove. A
+   * sacrifice is judged with the cast (`whyCannotCastSpell`): one beside the
+   * card's own is chosen as it's paid (`Game.namesOwnSacrifice`). */
+  private playCostsPayable(player: PlayerId, card: ObjectId, _def: CardDefinition, costs: PlayTerms): boolean {
     if (costs.payLife !== undefined && !this.canPayLife(player, costs.payLife)) return false;
     if (costs.exileOthers !== undefined && this.graveyardExileChoices(player, card, costs).length < costs.exileOthers) {
       return false;
     }
     if (costs.discard !== undefined && this.state.zones.perPlayer[player].hand.length < costs.discard) return false;
     if (costs.do !== undefined && !costActPayable(costs.do, this.makeResolutionContext(card, player, []))) return false;
-    if (
-      costs.sacrifice !== undefined &&
-      (def.additionalCost?.sacrifice !== undefined ||
-        def.additionalCost?.options?.some((o) => o.sacrifice !== undefined) === true)
-    ) {
-      return false;
-    }
     return true;
   }
 

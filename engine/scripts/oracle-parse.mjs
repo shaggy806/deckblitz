@@ -27098,6 +27098,22 @@ function parseStatic(line, text) {
       };
     }
   }
+  // "Once during each of your turns, you may cast an instant or sorcery spell
+  // from your graveyard [by sacrificing a creature in addition to paying its
+  // other costs]. If a spell cast this way would be put into your graveyard,
+  // exile it instead." (Kess, Dissident Mage; Maestros Ascendancy): `spell`,
+  // judged as the face cast, so an Adventure's instant half is reached.
+  if ((m = /^Once during each of your turns, you may cast an? (.+?) spell from your graveyard(?: by (.+?) in addition to paying its other costs)?\. If a spell cast this way would be put into your graveyard, exile it instead\.$/.exec(line))) {
+    const spell = parseTypePhrase(m[1]);
+    const costs = m[2] === undefined ? {} : graveyardCastCost(m[2]);
+    if (spell !== null && Object.keys(spell).length > 0 && costs !== null) {
+      return {
+        affects: { scope: "self" },
+        mayPlay: { from: "graveyard", spell, oncePerTurn: true, yourTurnOnly: true, ...costs, exileAfter: true },
+        text,
+      };
+    }
+  }
   // "Once each turn, you may cast a creature spell with power 2 or less from
   // the top of your library." (Assemble the Players).
   if ((m = /^Once each turn, you may cast an? (.+?) spell from the top of your library\.$/.exec(line))) {

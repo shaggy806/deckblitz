@@ -95,6 +95,10 @@ export interface SacrificeCostPart {
   readonly count: number;
   /** "With different names": no two of the part's share a name. */
   readonly differentNames?: true;
+  /** A cast permission's sacrifice paid beside the card's own named one
+   * (Maestros Ascendancy's creature beside Fling's): not what the spell's
+   * "the sacrificed creature" (`{ paid: "sacrificed" }`) reads. */
+  readonly besideOwn?: true;
 }
 
 /**
