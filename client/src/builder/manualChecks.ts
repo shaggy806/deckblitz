@@ -13714,4 +13714,16 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Hill Giant'], hand: ['Lightning Bolt', 'Mountain'] },
     }),
   ),
+  // --- A card from your hand or the command zone, one choice (2026-11-21) ----
+  preset(
+    'Next of Kin: your commander and your hand offered together',
+    board({
+      you: {
+        bf: ['Mountain', 'Hill Giant', { name: 'Next of Kin', attach: 'Hill Giant' }],
+        hand: ['Lightning Bolt', 'Grizzly Bears', 'Colossal Dreadmaw'],
+        cmd: ['Llanowar Elves'],
+      },
+      opp: {},
+    }),
+  ),
 ]

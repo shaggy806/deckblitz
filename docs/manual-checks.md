@@ -9040,3 +9040,9 @@ Each board's die comes up 4.
 ### Cloak and Dagger, Entwined: the chosen creature is offered beside the revealed hand
 - **Do:** Cast Cloak and Dagger, Entwined, target Bob and his Hill Giant, then pick Hill Giant in the popup and confirm.
 - **Expect:** One popup, "Choose a card from Bob's cards to exile", shows Lightning Bolt and Mountain ("In a hand") and Hill Giant ("On the battlefield"), choose 0-1; Mountain can't be picked. Hill Giant is exiled.
+
+## A card from your hand or the command zone, one choice (2026-11-21)
+
+### Next of Kin: your commander and your hand offered together
+- **Do:** Cast Lightning Bolt at your own Hill Giant, then pick Llanowar Elves in the popup and confirm.
+- **Expect:** One popup offers Grizzly Bears and Llanowar Elves (your commander); Colossal Dreadmaw can't be picked. Llanowar Elves enters, and at the end step Next of Kin returns attached to it.

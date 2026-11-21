@@ -49087,7 +49087,17 @@ controlledBy,
               const object = this.state.objects[id];
               return object?.owner === player && object.isCommander === true;
             })
-          : this.state.zones.perPlayer[player][zone];
+          : zone === "hand-and-command"
+            ? // Their hand, and the cards they own in the command zone (Next
+              // of Kin): one choice over both.
+              [
+                ...this.state.zones.perPlayer[player].hand,
+                ...this.state.zones.shared.command.filter((id) => {
+                  const object = this.state.objects[id];
+                  return object?.owner === player && object.kind !== "emblem";
+                }),
+              ]
+            : this.state.zones.perPlayer[player][zone];
     // "From among the milled cards": a milled card is found in whatever
     // public zone it went to from the library (rule 701.17c), so one a
     // replacement exiled instead of putting it into the graveyard (Rest in

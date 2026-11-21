@@ -121,6 +121,7 @@ export type LookAndChooseZone =
   | "hand"
   | "graveyards"
   | "command"
+  | "hand-and-command"
   | "exile"
   /** `revealed`: the cards a `"revealed-this-way"` names, in a library or a
    * hand; `found`: a `"trigger-batch"`'s, already narrowed to those found
@@ -12819,6 +12820,10 @@ export type EffectSpec =
         | "hand"
         | "graveyards"
         | "command"
+        /** The chooser's hand and the cards they own in the command zone, in
+         * one choice: Next of Kin's "a creature card you own with lesser mana
+         * value **from your hand or from the command zone**". */
+        | "hand-and-command"
         | "targets"
         | "exile"
         | "exiled-with-source"
