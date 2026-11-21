@@ -24826,3 +24826,27 @@ describe("the game is a draw, and the last counter removed", () => {
     expect(parseSentence("The game is a draw.")).toEqual({ kind: "game-is-a-draw" });
   });
 });
+
+describe("a counter put, then a reflexive ability per counter put", () => {
+  it("reads Etched Slith's 'When you do' with another target permanent or opponent", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Artifact Creature — Slith",
+      oracle_text:
+        "Whenever this creature deals combat damage to a player, put a +1/+1 counter on it. When you do, you may remove a counter from another target permanent or opponent.",
+    });
+    expect(parsed.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        {
+          kind: "reflexive-trigger",
+          times: { thisWay: "counters-placed" },
+          targets: [{ kind: "other", of: { kind: "permanent", filter: {}, orPlayer: "opponent" } }],
+          effect: { kind: "remove-counters", target: 0, counter: "any", count: 1, upTo: true },
+          text: "When you do, you may remove a counter from another target permanent or opponent.",
+        },
+      ],
+    });
+  });
+});

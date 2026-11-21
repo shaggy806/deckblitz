@@ -82,3 +82,53 @@ describe("Craig Boone, Novac Guard — one reflexive ability per two quest count
     expect(asked).toBe(0);
   });
 });
+
+describe("Etched Slith — one reflexive ability per +1/+1 counter put", () => {
+  it("puts a counter on it, then removes a counter from another target permanent", () => {
+    const { game, a } = table();
+    const slith = spawn(game, "Etched Slith");
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.state.objects[bears].counters["+1/+1"] = 2;
+    let offered: readonly string[] = [];
+    a.chooseTargetsFn = (_view, _name, _specs, legal) => {
+      offered = legal[0].map((t) => (t.kind === "object" ? t.object : t.player));
+      return [{ kind: "object", object: bears }];
+    };
+    a.chooseCounterRemovalsFn = () => [{ object: bears, kind: "+1/+1", count: 1 }];
+    attack(game, a, [slith]);
+    expect(counters(game, slith)).toBe(1);
+    expect(counters(game, bears)).toBe(1);
+    // "Another": never itself; "or opponent": bob, not alice.
+    expect(offered).toContain(B);
+    expect(offered).not.toContain(A);
+    expect(offered).not.toContain(slith);
+  });
+
+  it("takes an opponent's own counter", () => {
+    const { game, a } = table();
+    const slith = spawn(game, "Etched Slith");
+    game.state.players[B].counters.poison = 3;
+    a.chooseTargetsFn = () => [{ kind: "player", player: B }];
+    a.chooseModesFn = () => [1];
+    attack(game, a, [slith]);
+    expect(game.state.players[B].counters.poison).toBe(2);
+  });
+
+  it("triggers twice under Doubling Season", () => {
+    const { game, a } = table();
+    spawn(game, "Doubling Season");
+    const slith = spawn(game, "Etched Slith");
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.state.objects[bears].counters["+1/+1"] = 3;
+    let asked = 0;
+    a.chooseTargetsFn = () => {
+      asked += 1;
+      return [{ kind: "object", object: bears }];
+    };
+    a.chooseCounterRemovalsFn = () => [{ object: bears, kind: "+1/+1", count: 1 }];
+    attack(game, a, [slith]);
+    expect(counters(game, slith)).toBe(2);
+    expect(asked).toBe(2);
+    expect(counters(game, bears)).toBe(1);
+  });
+});

@@ -3143,7 +3143,9 @@
   "amount:emerge-sacrificed-creature",
   "condition:self-emerge-paid",
   "amount:discarded-as-cost-total-mana-value",
-  "effect:game-is-a-draw"
+  "effect:game-is-a-draw",
+  "effect:game-is-a-draw",
+  "effect:reflexive-trigger-per-counter-put"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

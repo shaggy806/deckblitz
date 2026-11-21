@@ -10251,6 +10251,38 @@ function payWhenYouDoAt(sentences, i, ctx) {
 }
 
 /**
+ * "Put a +1/+1 counter on it. When you do, you may remove a counter from
+ * another target permanent or opponent." (Etched Slith): the counter, and a
+ * reflexive ability (rule 603.12) that triggers once for each counter actually
+ * put on it this way (the Doubling Season ruling) — `times` over `thisWay:
+ * "counters-placed"`, so none if none went on. The clause's one "another
+ * target" is an `other` slot. `null` when not read whole.
+ */
+function countersWhenYouDoAt(sentences, i, ctx) {
+  const put = /^Put an? ([+-]\d+\/[+-]\d+|[a-z]+) counter on (?:it|~)\.$/.exec(sentences[i] ?? "");
+  const clause = /^When you do, (.+\.)$/.exec(sentences[i + 1] ?? "");
+  if (put === null || clause === null) return null;
+  const another = (clause[1].match(/\banother target\b/g) ?? []).length;
+  if (another > 1) return null;
+  const targets = [];
+  const inner = { ...ctx, targets, target: (spec) => targets.push(spec) - 1 };
+  const said = clause[1].replace(/\banother target\b/, "target");
+  const effect = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}`, inner);
+  if (effect === null || effect === undefined || containsUndefined(effect)) return null;
+  if (another === 1 && targets.length !== 1) return null;
+  return [
+    { kind: "add-counter", target: "source", counter: put[1], amount: 1 },
+    {
+      kind: "reflexive-trigger",
+      times: { thisWay: "counters-placed" },
+      targets: another === 1 ? [{ kind: "other", of: targets[0] }] : targets,
+      effect,
+      text: sentences[i + 1].replaceAll("~", "this creature"),
+    },
+  ];
+}
+
+/**
  * "You may pay {1}{W} any number of times. When you pay this cost one or more
  * times, put that many valor counters on this creature." (Intrepid Adversary;
  * "up to three times", `maxX`): a `may` whose `cost` is paid a chosen number of
@@ -12381,6 +12413,16 @@ export function parseEffect(text, outer) {
     if (discardThen !== null) {
       parsed.push(discardThen);
       hints.push({ sentence, effect: discardThen });
+      skip = 1;
+      continue;
+    }
+    // "Put a +1/+1 counter on it. When you do, …" (`countersWhenYouDoAt`).
+    const countersThen = countersWhenYouDoAt(sentences, i, ctx);
+    if (countersThen !== null) {
+      for (const effect of countersThen) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+      }
       skip = 1;
       continue;
     }
