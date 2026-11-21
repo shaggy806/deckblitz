@@ -676,6 +676,9 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     // win ends the game for every seat (an opponent's is ours lost), and a
     // pact left unpaid loses it.
     case "win-game":
+      // "The player with the highest life total wins": nobody's in
+      // particular as it's put on the stack (Celestial Convergence).
+      if (effect.who !== undefined) return 0;
       return ctx.controller === ctx.me ? 100 : -100;
     case "lose-game":
       // A targeted one is read through its slot, with the other targets.

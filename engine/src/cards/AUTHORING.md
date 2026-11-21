@@ -2881,7 +2881,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `step-begins` upkeep trigger with `condition: { kind: "life-total",
   atLeast: 40 }` — or in a `conditional` asked as it resolves (Thassa's
   Oracle's `library-size` `compare`, Jace's −8 `atMost: 0`). "Or" is
-  `not(all(not …, not …))` (Twenty-Toed Toad).
+  `not(all(not …, not …))` (Twenty-Toed Toad). `who: { greatest: { lifeTotal:
+  "each" } }` is "**the player with the highest life total** wins the game"
+  (Celestial Convergence): read for each player still in it, the one with the
+  most wins; two or more tied and nobody does, `ifTied` (an `EffectSpec`,
+  `{ kind: "game-is-a-draw" }`) done instead. `highest-life-wins.test.ts`.
 - **`game-is-a-draw`** — "the game is a draw" (rule 104.4c — Divine
   Intervention): the game ends at once, nobody winning or losing, for every
   player still in it (the limited range of influence option, 104.4e, isn't

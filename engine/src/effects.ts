@@ -7960,8 +7960,18 @@ export type EffectSpec =
        * trigger as an intervening-if (Felidar Sovereign's upkeep). The
        * draw-from-an-empty-library form (Laboratory Maniac) is a `would-draw`
        * replacement, not this.
+       *
+       * `who: { greatest }` is "**the player with the highest life total**
+       * wins the game" (Celestial Convergence, `{ greatest: { lifeTotal:
+       * "each" } }`): the amount is read for each player still in the game
+       * (`"each"` is that player), and the one with the most wins. Two or
+       * more tied for it means there's no such player, so nobody wins, and
+       * `ifTied` is done instead — the card's "if two or more players are
+       * tied for highest life total, the game is a draw" (`game-is-a-draw`).
        */
       readonly kind: "win-game";
+      readonly who?: { readonly greatest: EffectAmount };
+      readonly ifTied?: EffectSpec;
     }
   | {
       /**
@@ -23754,9 +23764,21 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }, "during" in lasts ? lasts.during : undefined);
       return;
     }
-    case "win-game":
-      ctx.winGame(ctx.controller);
+    case "win-game": {
+      if (spec.who === undefined) {
+        ctx.winGame(ctx.controller);
+        return;
+      }
+      const players = ctx.playersInScope("each-player");
+      if (players.length === 0) return;
+      const greatest = spec.who.greatest;
+      const values = players.map((p) => signedAmountValue(greatest, ctx, p));
+      const top = Math.max(...values);
+      const leaders = players.filter((_, i) => values[i] === top);
+      if (leaders.length === 1) ctx.winGame(leaders[0]);
+      else if (spec.ifTied !== undefined) applyEffectSpec(spec.ifTied, ctx);
       return;
+    }
     case "game-is-a-draw":
       ctx.drawGame();
       return;
