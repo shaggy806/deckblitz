@@ -485,6 +485,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Murf Token",
   "Mutagen Token",
   "Mutant Token",
+  "Mutant Token (Green, Deathtouch)",
   "Mutavault Token",
   "Myr Token",
   "Nalaar Aetherjet Token",

@@ -4311,6 +4311,7 @@ import _poolCelestialAncient from "./pool/celestial-ancient.js";
 import _poolCelestialArchon from "./pool/celestial-archon.js";
 import _poolCelestialArmor from "./pool/celestial-armor.js";
 import _poolCelestialColonnade from "./pool/celestial-colonnade.js";
+import _poolCelestialConvergence from "./pool/celestial-convergence.js";
 import _poolCelestialCrusader from "./pool/celestial-crusader.js";
 import _poolCelestialDawn from "./pool/celestial-dawn.js";
 import _poolCelestialEnforcer from "./pool/celestial-enforcer.js";
@@ -21265,6 +21266,7 @@ import _poolPropheticBolt from "./pool/prophetic-bolt.js";
 import _poolPropheticFlamespeaker from "./pool/prophetic-flamespeaker.js";
 import _poolPropheticPrism from "./pool/prophetic-prism.js";
 import _poolPropheticRavings from "./pool/prophetic-ravings.js";
+import _poolPropheticTitan from "./pool/prophetic-titan.js";
 import _poolProsperTomeBound from "./pool/prosper-tome-bound.js";
 import _poolProsperityTycoon from "./pool/prosperity-tycoon.js";
 import _poolProsperity from "./pool/prosperity.js";
@@ -27337,6 +27339,7 @@ import _poolSuddenEdict from "./pool/sudden-edict.js";
 import _poolSuddenImpact from "./pool/sudden-impact.js";
 import _poolSuddenInsight from "./pool/sudden-insight.js";
 import _poolSuddenReclamation from "./pool/sudden-reclamation.js";
+import _poolSuddenSalvation from "./pool/sudden-salvation.js";
 import _poolSuddenSetback from "./pool/sudden-setback.js";
 import _poolSuddenShock from "./pool/sudden-shock.js";
 import _poolSuddenSpinnerets from "./pool/sudden-spinnerets.js";
@@ -28556,6 +28559,7 @@ import _poolTheCreationOfAvacyn from "./pool/the-creation-of-avacyn.js";
 import _poolTheCrowdGoesWild from "./pool/the-crowd-goes-wild.js";
 import _poolTheCrueltyOfGix from "./pool/the-cruelty-of-gix.js";
 import _poolTheCrystalsChosen from "./pool/the-crystals-chosen.js";
+import _poolTheCurseOfFenric from "./pool/the-curse-of-fenric.js";
 import _poolTheCyberController from "./pool/the-cyber-controller.js";
 import _poolTheDalekEmperor from "./pool/the-dalek-emperor.js";
 import _poolTheDarkhold from "./pool/the-darkhold.js";
@@ -33446,6 +33450,7 @@ import _tokensMowu from "./tokens/mowu.js";
 import _tokensMunitionsToken from "./tokens/munitions-token.js";
 import _tokensMurfToken from "./tokens/murf-token.js";
 import _tokensMutagenToken from "./tokens/mutagen-token.js";
+import _tokensMutantTokenGreenDeathtouch from "./tokens/mutant-token-green-deathtouch.js";
 import _tokensMutantToken from "./tokens/mutant-token.js";
 import _tokensMutavaultToken from "./tokens/mutavault-token.js";
 import _tokensMyrToken from "./tokens/myr-token.js";
@@ -38102,6 +38107,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCelestialArchon,
   _poolCelestialArmor,
   _poolCelestialColonnade,
+  _poolCelestialConvergence,
   _poolCelestialCrusader,
   _poolCelestialDawn,
   _poolCelestialEnforcer,
@@ -55056,6 +55062,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPropheticFlamespeaker,
   _poolPropheticPrism,
   _poolPropheticRavings,
+  _poolPropheticTitan,
   _poolProsperTomeBound,
   _poolProsperityTycoon,
   _poolProsperity,
@@ -61128,6 +61135,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSuddenImpact,
   _poolSuddenInsight,
   _poolSuddenReclamation,
+  _poolSuddenSalvation,
   _poolSuddenSetback,
   _poolSuddenShock,
   _poolSuddenSpinnerets,
@@ -62347,6 +62355,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheCrowdGoesWild,
   _poolTheCrueltyOfGix,
   _poolTheCrystalsChosen,
+  _poolTheCurseOfFenric,
   _poolTheCyberController,
   _poolTheDalekEmperor,
   _poolTheDarkhold,
@@ -67243,6 +67252,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensMunitionsToken,
   _tokensMurfToken,
   _tokensMutagenToken,
+  _tokensMutantTokenGreenDeathtouch,
   _tokensMutantToken,
   _tokensMutavaultToken,
   _tokensMyrToken,
@@ -71906,6 +71916,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/celestial-archon": _poolCelestialArchon,
   "pool/celestial-armor": _poolCelestialArmor,
   "pool/celestial-colonnade": _poolCelestialColonnade,
+  "pool/celestial-convergence": _poolCelestialConvergence,
   "pool/celestial-crusader": _poolCelestialCrusader,
   "pool/celestial-dawn": _poolCelestialDawn,
   "pool/celestial-enforcer": _poolCelestialEnforcer,
@@ -88860,6 +88871,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/prophetic-flamespeaker": _poolPropheticFlamespeaker,
   "pool/prophetic-prism": _poolPropheticPrism,
   "pool/prophetic-ravings": _poolPropheticRavings,
+  "pool/prophetic-titan": _poolPropheticTitan,
   "pool/prosper-tome-bound": _poolProsperTomeBound,
   "pool/prosperity-tycoon": _poolProsperityTycoon,
   "pool/prosperity": _poolProsperity,
@@ -94932,6 +94944,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sudden-impact": _poolSuddenImpact,
   "pool/sudden-insight": _poolSuddenInsight,
   "pool/sudden-reclamation": _poolSuddenReclamation,
+  "pool/sudden-salvation": _poolSuddenSalvation,
   "pool/sudden-setback": _poolSuddenSetback,
   "pool/sudden-shock": _poolSuddenShock,
   "pool/sudden-spinnerets": _poolSuddenSpinnerets,
@@ -96151,6 +96164,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-crowd-goes-wild": _poolTheCrowdGoesWild,
   "pool/the-cruelty-of-gix": _poolTheCrueltyOfGix,
   "pool/the-crystals-chosen": _poolTheCrystalsChosen,
+  "pool/the-curse-of-fenric": _poolTheCurseOfFenric,
   "pool/the-cyber-controller": _poolTheCyberController,
   "pool/the-dalek-emperor": _poolTheDalekEmperor,
   "pool/the-darkhold": _poolTheDarkhold,
@@ -101041,6 +101055,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/munitions-token": _tokensMunitionsToken,
   "tokens/murf-token": _tokensMurfToken,
   "tokens/mutagen-token": _tokensMutagenToken,
+  "tokens/mutant-token-green-deathtouch": _tokensMutantTokenGreenDeathtouch,
   "tokens/mutant-token": _tokensMutantToken,
   "tokens/mutavault-token": _tokensMutavaultToken,
   "tokens/myr-token": _tokensMyrToken,

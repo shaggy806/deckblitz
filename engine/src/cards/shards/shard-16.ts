@@ -923,6 +923,7 @@ import _poolTerrorOfKruinPass from "../pool/terror-of-kruin-pass.js";
 import _poolTethmosHighPriest from "../pool/tethmos-high-priest.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
 import _poolTheArgentEtchings from "../pool/the-argent-etchings.js";
+import _poolTheCurseOfFenric from "../pool/the-curse-of-fenric.js";
 import _poolTheCyberController from "../pool/the-cyber-controller.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
 import _poolTheLastRonin from "../pool/the-last-ronin.js";
@@ -2040,6 +2041,7 @@ const shard: CardShard = {
     _poolTethmosHighPriest,
     _poolTeyoTheShieldmage,
     _poolTheArgentEtchings,
+    _poolTheCurseOfFenric,
     _poolTheCyberController,
     _poolTheFalconSamWilson,
     _poolTheLastRonin,

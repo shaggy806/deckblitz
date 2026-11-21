@@ -152,6 +152,7 @@ import _poolCateranOverlord from "../pool/cateran-overlord.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
 import _poolCathedralMembrane from "../pool/cathedral-membrane.js";
 import _poolCease from "../pool/cease.js";
+import _poolCelestialConvergence from "../pool/celestial-convergence.js";
 import _poolCessation from "../pool/cessation.js";
 import _poolChaosCharm from "../pool/chaos-charm.js";
 import _poolChargeOfTheForeverBeast from "../pool/charge-of-the-forever-beast.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolCatharCommando,
     _poolCathedralMembrane,
     _poolCease,
+    _poolCelestialConvergence,
     _poolCessation,
     _poolChaosCharm,
     _poolChargeOfTheForeverBeast,

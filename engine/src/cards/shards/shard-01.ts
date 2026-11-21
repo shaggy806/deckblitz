@@ -838,6 +838,7 @@ import _poolStructuralCollapse from "../pool/structural-collapse.js";
 import _poolStructuralDistortion from "../pool/structural-distortion.js";
 import _poolStun from "../pool/stun.js";
 import _poolSubterraneanTremors from "../pool/subterranean-tremors.js";
+import _poolSuddenSalvation from "../pool/sudden-salvation.js";
 import _poolSulfurElemental from "../pool/sulfur-elemental.js";
 import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
@@ -1878,6 +1879,7 @@ const shard: CardShard = {
     _poolStructuralDistortion,
     _poolStun,
     _poolSubterraneanTremors,
+    _poolSuddenSalvation,
     _poolSulfurElemental,
     _poolSunderflock,
     _poolSungrassPrairie,

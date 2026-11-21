@@ -1036,6 +1036,7 @@ import _tokensGreenEnchantmentSpiderTokenReach from "../tokens/green-enchantment
 import _tokensHumanRogueToken12HastePing from "../tokens/human-rogue-token-1-2-haste-ping.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
 import _tokensMetallicSliverToken from "../tokens/metallic-sliver-token.js";
+import _tokensMutantTokenGreenDeathtouch from "../tokens/mutant-token-green-deathtouch.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
 import _tokensPrimoTheIndivisibleToken from "../tokens/primo-the-indivisible-token.js";
 import _tokensSandToken from "../tokens/sand-token.js";
@@ -2083,6 +2084,7 @@ const shard: CardShard = {
     _tokensHumanRogueToken12HastePing,
     _tokensKrakenToken,
     _tokensMetallicSliverToken,
+    _tokensMutantTokenGreenDeathtouch,
     _tokensNinjaTokenKaitoShizuki,
     _tokensPrimoTheIndivisibleToken,
     _tokensSandToken,
