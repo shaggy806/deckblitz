@@ -10660,11 +10660,23 @@ export type EffectSpec =
        * upkeep, choose left or right" is a two-mode `modal` (chosen as it
        * resolves, rule 608.2d) whose modes note `"left"` and `"right"`, read
        * by its `attackOnlyNearestOpponent` static as "the last chosen
-       * direction", as an "as this enters" `chooseOnEnter` answer is. */
+       * direction", as an "as this enters" `chooseOnEnter` answer is.
+       *
+       * With `copyOf` instead: the source keeps the copiable values (rule
+       * 707.2) of what this names as **the last chosen** card, replacing the
+       * one before — `GameObject.chosenCopy`, read by a static's
+       * `copyOfChosen`. Dinosaur Headdress's "as this Equipment becomes
+       * attached to a creature, choose an exiled creature card used to craft
+       * this Equipment. Equipped creature is a copy of the last chosen card"
+       * is an `asBecomesAttached` `look-and-choose` over `"exiled-with-source"`
+       * whose `then` is `{ kind: "note", copyOf: 0 }`. A card has only its
+       * printed values, front face up (712.8a); a copy effect it had begun on
+       * the permanent it's attached to ends, so the new one begins there. */
       readonly kind: "note";
       readonly amount?: EffectAmount;
       readonly manaTypeSpent?: true;
       readonly word?: string;
+      readonly copyOf?: ObjectRef;
     }
   | {
       /**
@@ -15722,6 +15734,9 @@ export interface EffectApi {
   /** The source permanent notes `value` (a number, or a mana type) — see the
    * `"note"` {@link EffectSpec}. */
   noteOnSource(value: string): void;
+  /** The source permanent keeps card `of`'s copiable values as the last
+   * chosen — see the `"note"` {@link EffectSpec}'s `copyOf`. */
+  noteCopyOnSource(of: ObjectId): void;
   /** `who` becomes the monarch (rule 720). */
   becomeMonarch(who: PlayerScope | undefined, via?: "combat-damage"): void;
   /** One player becomes the monarch — a `become-monarch`'s target slot's. */
@@ -24931,6 +24946,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       ctx.cumulativeUpkeepUnpaid();
       return;
     case "note": {
+      if (spec.copyOf !== undefined) {
+        const of = objectRefRead(spec.copyOf, ctx);
+        if (of?.kind === "object") ctx.noteCopyOnSource(of.object);
+        return;
+      }
       if (spec.word !== undefined) {
         ctx.noteOnSource(spec.word);
         return;

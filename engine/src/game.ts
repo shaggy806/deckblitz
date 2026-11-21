@@ -48179,6 +48179,26 @@ controlledBy,
         if (!sourceStillOn()) return;
         this.state.objects[source].chosenOnEnter = value;
       },
+      noteCopyOnSource: (of) => {
+        // Only the permanent this ability refers to (rule 400.7).
+        if (!sourceStillOn()) return;
+        const values = this.copiableValuesOf(of, true, undefined);
+        if (values === undefined) return;
+        const object = this.state.objects[source];
+        object.chosenCopy = { copyOf: values.copyOf, modifiers: values.modifiers.map((m) => ({ ...m, timestamp: -2 })) };
+        // A copy it had begun on what it's attached to was of the card chosen
+        // before: that one ends, and `refreshStaticCopies` begins this one.
+        const host = object.attachedTo != null ? this.state.objects[object.attachedTo] : undefined;
+        const stint = object.zoneChangeCount ?? 0;
+        if (host !== undefined) {
+          this.endTemporaryCopies(
+            host,
+            (ends) => typeof ends === "object" && "whileSource" in ends && ends.whileSource.id === source && ends.whileSource.zoneChangeCount === stint,
+          );
+        }
+        delete object.staticCopyOn;
+        invalidateComputedCache();
+      },
       becomeMonarch: (who, via) => {
         for (const p of scoped(who ?? "you")) {
           this.setMonarch(p, via ?? "effect");
