@@ -8668,7 +8668,9 @@ vocabulary before adding one back.
   ability's `divided` (rule 603.3d): "II — Distribute seven +1/+1 counters
   among any number of target creatures you control" is an `any-number` group,
   `divided: { total: 7, slot: 0, of: "+1/+1 counters" }` and a
-  `counters-divided` (`the-grand-evolution.ts`). Once its final chapter ability
+  `counters-divided` (`the-grand-evolution.ts`). "I, II — Choose one — •
+  Target creature gets +2/+2 …" is a chapter whose `effect` is an `announced`
+  modal, each mode with its own `targets` (`life-of-toshiro-umezawa.ts`). Once its final chapter ability
   has left the stack its controller sacrifices it (rule 714.4) — a real
   sacrifice, so "whenever you sacrifice an enchantment" sees it — and the
   `chapter-resolves` trigger (§9) fires as each chapter ability resolves.

@@ -3126,7 +3126,8 @@
   "effect:damage-by-toughness-rule-eot",
   "effect:exchange-power",
   "effect:effect-target-equipped-creature",
-  "effect:fight-by-toughness"
+  "effect:fight-by-toughness",
+  "effect:modal-chapter-targeted-modes"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
