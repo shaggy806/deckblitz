@@ -121,6 +121,10 @@ describe("types and colours everywhere (the Mycosynths)", () => {
     const inGrave = toGraveyard(game, "Serra Angel", B);
     expect(colorsOf(game, inHand)).toEqual([]);
     expect(colorsOf(game, inGrave)).toEqual([]);
+    // The characteristics every filter reads say so too, off the battlefield
+    // as on the stack (they used to keep the printed colours).
+    expect([...game.characteristics(inHand).colors]).toEqual([]);
+    expect([...game.characteristics(inGrave).colors]).toEqual([]);
     // Swamps pay white pips.
     lands(game, "Swamp", 5);
     cast(game, toHand(game, "Serra Angel"));

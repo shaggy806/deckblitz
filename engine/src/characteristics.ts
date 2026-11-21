@@ -4827,6 +4827,26 @@ function orderedOutsideColors(state: GameState, registry: CardRegistry): readonl
     .sort((a, b) => a.source.timestamp - b.source.timestamp);
 }
 
+/** `colors`, a card's or a spell's off the battlefield, with layer 5 of the
+ * `outsideBattlefield` statics that reach it, in timestamp order — "nonland
+ * cards you own that aren't on the battlefield" are white (Celestial Dawn,
+ * rule 604.1). A face-down card has no colour to change (rule 708.2). */
+function outsideColored(state: GameState, registry: CardRegistry, object: GameObject, colors: Set<Color>): Set<Color> {
+  if (object.zone === "battlefield" || object.zone === "phased-out" || object.kind !== "card") return colors;
+  if (object.faceDown !== undefined || object.foretold === true || object.exiledFaceDown !== undefined) return colors;
+  let out = colors;
+  for (const { source, ability } of orderedOutsideColors(state, registry)) {
+    if (!outsideReaches(state, registry, source, ability, object, ownLayerFour(registry, object).types)) continue;
+    const grant = ability.outsideBattlefield!;
+    if (grant.setColors !== undefined) out = new Set(grant.setColors);
+    if (grant.addColors !== undefined) {
+      if (out === colors) out = new Set(colors);
+      for (const c of grant.addColors) out.add(c);
+    }
+  }
+  return out;
+}
+
 /** A permanent's current colours: printed → layer 5 (`setColors` replaces,
  * `addColors` unions), in timestamp order (rule 613.7) — its own modifiers
  * and, on the battlefield, every static with a `setColors` whose scope
@@ -4846,15 +4866,7 @@ export function effectiveColors(
   if (object.commanderColor !== undefined && printedCardName(object) === object.cardName && object.faceDown === undefined) {
     colors = new Set<Color>([object.commanderColor]);
   }
-  if (state !== null && object.zone !== "battlefield" && object.zone !== "phased-out" && object.kind === "card") {
-    for (const { source, ability } of orderedOutsideColors(state, registry)) {
-      if (object.faceDown !== undefined || object.foretold === true || object.exiledFaceDown !== undefined) break;
-      if (!outsideReaches(state, registry, source, ability, object, ownLayerFour(registry, object).types)) continue;
-      const grant = ability.outsideBattlefield!;
-      if (grant.setColors !== undefined) colors = new Set(grant.setColors);
-      if (grant.addColors !== undefined) for (const c of grant.addColors) colors.add(c);
-    }
-  }
+  if (state !== null) colors = outsideColored(state, registry, object, colors);
   const sources =
     state !== null && object.zone === "battlefield" && !layer5InProgress.has(object.id)
       ? colorSetSources(state, registry)
@@ -6981,9 +6993,14 @@ function computeCharacteristicsUncached(
   // copiable values change them.
   const colors: ReadonlySet<Color> = onBattlefield || object.zone === "stack"
     ? effectiveColors(state, registry, object)
-    : object.modifiers.some((m) => m.copiable === true)
-      ? effectiveColors(null, registry, { ...object, modifiers: object.modifiers.filter((m) => m.copiable === true) })
-      : new Set(def.colors);
+    : outsideColored(
+        state,
+        registry,
+        object,
+        object.modifiers.some((m) => m.copiable === true)
+          ? effectiveColors(null, registry, { ...object, modifiers: object.modifiers.filter((m) => m.copiable === true) })
+          : new Set(def.colors),
+      );
 
   const staticEffects = onBattlefield
     ? collectStaticEffects(state, registry, object)
