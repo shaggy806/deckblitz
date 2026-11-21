@@ -3901,8 +3901,11 @@ export type ReplacementOrderResume =
   | { readonly site: "effect" }
   /** Combat damage, dealt once nothing more is to be asked. */
   | { readonly site: "combat-damage" }
-  /** The draw that asked, made again with the answer. */
-  | { readonly site: "draw"; readonly player: PlayerId }
+  /** The draw that asked, made again with the answer — inside the
+   * replacements that were carrying out their effect as it asked
+   * (`replacing`, rule 614.5: the card Chains of Mephistopheles has its
+   * player draw isn't replaced by it again). */
+  | { readonly site: "draw"; readonly player: PlayerId; readonly replacing?: readonly string[] }
   /** A resolved spell leaving the stack, tried again with the answer. */
   | { readonly site: "leave-stack"; readonly spell: ObjectId };
 
@@ -5210,7 +5213,9 @@ export type AwaitingDecision =
        * graveyard (rule 702.52): mode 0 draws it, mode i dredges `cards[i-1]`
        * instead. Answered by the engine itself; the modes' effects are
        * unused. */
-      readonly dredgeFor?: { readonly cards: readonly ObjectId[] };
+      /** `replacing`: as a `"draw"` `ReplacementOrderResume`'s, the
+       * replacements the declined draw is made inside. */
+      readonly dredgeFor?: { readonly cards: readonly ObjectId[]; readonly replacing?: readonly string[] };
       /** Which replacement applies to a draw of `player`'s (rule 616.1, the
        * Words cycle): mode i is `effects[i]`, an index into `activeReplacements`
        * (a resolved "next time" one), or `null` for their printed "if you would draw"

@@ -9846,7 +9846,10 @@ export class Game {
       this.state.awaiting = null;
       const pick = modeIndices[0] ?? 0;
       const card = pick > 0 ? awaiting.dredgeFor.cards[pick - 1] : undefined;
-      if (card === undefined) this.drawCard(player, true);
+      // Declined, the draw goes on — ahead of any queued behind it, all of
+      // another replacement of it with it (rule 614.11a: Chains of
+      // Mephistopheles' discard and draw before the next card).
+      if (card === undefined) this.drawAheadOfQueue(player, awaiting.dredgeFor.replacing);
       else this.dredge(player, card);
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
@@ -67950,19 +67953,7 @@ controlledBy,
     this.emit({ type: "replacement-order-chosen", player, event: awaiting.event, effect: chosen.name });
     const { resume } = awaiting;
     if (resume.site === "combat-damage") this.promptNextDamageAssignment();
-    else if (resume.site === "draw") {
-      // The draw goes ahead of any queued behind it, all of its replacement
-      // with it (rule 614.11a), as `drawNextWaiting` runs one.
-      const parkedBefore = this.state.suspendedResolutions.length;
-      const outer = this.drawsAheadOfQueue;
-      this.drawsAheadOfQueue = true;
-      try {
-        this.drawCard(resume.player, true);
-      } finally {
-        this.drawsAheadOfQueue = outer;
-      }
-      if ((this.state.pendingDraws?.length ?? 0) > 0) this.holdDrawsBehind(parkedBefore);
-    }
+    else if (resume.site === "draw") this.drawAheadOfQueue(resume.player, resume.replacing);
     else if (resume.site === "leave-stack") this.leaveStackAfterResolving(resume.spell);
     const next = this.state.awaiting as AwaitingDecision | null;
     this.prepareForPriority(next?.player ?? this.activePlayer);
@@ -71432,7 +71423,7 @@ controlledBy,
           ],
           x: 0,
           targets: [],
-          dredgeFor: { cards },
+          dredgeFor: { cards, ...this.replacingNow() },
         };
         return;
       }
@@ -71778,6 +71769,29 @@ controlledBy,
       this.drawsAheadOfQueue = outer;
     }
     if ((this.state.pendingDraws?.length ?? 0) > 0) this.holdDrawsBehind(parkedBefore);
+  }
+
+  /** A draw made again once a question about it is answered (a dredge
+   * declined, which replacement applies first): made now, dredge not asked
+   * again, ahead of any queued behind it with all of its replacement (rule
+   * 614.11a), as `drawNextWaiting` runs one — and inside the replacements
+   * that were carrying out their effect as it asked (`replacing`, 614.5). */
+  private drawAheadOfQueue(player: PlayerId, replacing: readonly string[] | undefined): void {
+    const parkedBefore = this.state.suspendedResolutions.length;
+    const outer = this.drawsAheadOfQueue;
+    this.drawsAheadOfQueue = true;
+    try {
+      this.withReplacing(replacing, () => this.drawCard(player, true));
+    } finally {
+      this.drawsAheadOfQueue = outer;
+    }
+    if ((this.state.pendingDraws?.length ?? 0) > 0) this.holdDrawsBehind(parkedBefore);
+  }
+
+  /** The replacements carrying out their effect now (`applyingReplacements`),
+   * for a draw question to be answered inside them (rule 614.5). */
+  private replacingNow(): { readonly replacing?: readonly string[] } {
+    return this.applyingReplacements.size > 0 ? { replacing: [...this.applyingReplacements] } : {};
   }
 
   /** Marks what a draw's replacement parked — the suspended resolutions from
@@ -72182,7 +72196,7 @@ controlledBy,
       // more to them, but not always — Chains of Mephistopheles' discard.)
       best: 0,
       answers,
-      resume: { site: "draw", player },
+      resume: { site: "draw", player, ...this.replacingNow() },
     };
     return true;
   }
