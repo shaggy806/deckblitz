@@ -2521,6 +2521,7 @@ import _poolBhaalLordOfMurder from "./pool/bhaal-lord-of-murder.js";
 import _poolBhaalsInvoker from "./pool/bhaals-invoker.js";
 import _poolBiblioplexAssistant from "./pool/biblioplex-assistant.js";
 import _poolBiblioplexKraken from "./pool/biblioplex-kraken.js";
+import _poolBiblioplexTomekeeper from "./pool/biblioplex-tomekeeper.js";
 import _poolBidentOfThassa from "./pool/bident-of-thassa.js";
 import _poolBifurMelodicRider from "./pool/bifur-melodic-rider.js";
 import _poolBifurcate from "./pool/bifurcate.js";
@@ -7599,6 +7600,7 @@ import _poolDrakeUmbra from "./pool/drake-umbra.js";
 import _poolDrakestownForgotten from "./pool/drakestown-forgotten.js";
 import _poolDrakewingKrasis from "./pool/drakewing-krasis.js";
 import _poolDrakusethMawOfFlames from "./pool/drakuseth-maw-of-flames.js";
+import _poolDralnuLichLord from "./pool/dralnu-lich-lord.js";
 import _poolDralnusCrusade from "./pool/dralnus-crusade.js";
 import _poolDramaticAccusation from "./pool/dramatic-accusation.js";
 import _poolDramaticEntrance from "./pool/dramatic-entrance.js";
@@ -13973,6 +13975,7 @@ import _poolInfiltrate from "./pool/infiltrate.js";
 import _poolInfiltrationLens from "./pool/infiltration-lens.js";
 import _poolInfiltratorIlKor from "./pool/infiltrator-il-kor.js";
 import _poolInfiltratorsMagemark from "./pool/infiltrators-magemark.js";
+import _poolInfiniteCoursework from "./pool/infinite-coursework.js";
 import _poolInfiniteDiversity from "./pool/infinite-diversity.js";
 import _poolInfiniteGuidelineStation from "./pool/infinite-guideline-station.js";
 import _poolInfiniteHourglass from "./pool/infinite-hourglass.js";
@@ -16831,6 +16834,7 @@ import _poolMagmaJet from "./pool/magma-jet.js";
 import _poolMagmaMine from "./pool/magma-mine.js";
 import _poolMagmaOpus from "./pool/magma-opus.js";
 import _poolMagmaPhoenix from "./pool/magma-phoenix.js";
+import _poolMagmaPummeler from "./pool/magma-pummeler.js";
 import _poolMagmaRift from "./pool/magma-rift.js";
 import _poolMagmaSliver from "./pool/magma-sliver.js";
 import _poolMagmaSpray from "./pool/magma-spray.js";
@@ -19926,6 +19930,7 @@ import _poolOtepecHuntmaster from "./pool/otepec-huntmaster.js";
 import _poolOtharriSunsGlory from "./pool/otharri-suns-glory.js";
 import _poolOthelmSigardianOutcast from "./pool/othelm-sigardian-outcast.js";
 import _poolOtherworldAtlas from "./pool/otherworld-atlas.js";
+import _poolOtherworldlyEscort from "./pool/otherworldly-escort.js";
 import _poolOtherworldlyGaze from "./pool/otherworldly-gaze.js";
 import _poolOtherworldlyJourney from "./pool/otherworldly-journey.js";
 import _poolOtherworldlyOutburst from "./pool/otherworldly-outburst.js";
@@ -36317,6 +36322,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBhaalsInvoker,
   _poolBiblioplexAssistant,
   _poolBiblioplexKraken,
+  _poolBiblioplexTomekeeper,
   _poolBidentOfThassa,
   _poolBifurMelodicRider,
   _poolBifurcate,
@@ -41395,6 +41401,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrakestownForgotten,
   _poolDrakewingKrasis,
   _poolDrakusethMawOfFlames,
+  _poolDralnuLichLord,
   _poolDralnusCrusade,
   _poolDramaticAccusation,
   _poolDramaticEntrance,
@@ -47769,6 +47776,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInfiltrationLens,
   _poolInfiltratorIlKor,
   _poolInfiltratorsMagemark,
+  _poolInfiniteCoursework,
   _poolInfiniteDiversity,
   _poolInfiniteGuidelineStation,
   _poolInfiniteHourglass,
@@ -50627,6 +50635,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMagmaMine,
   _poolMagmaOpus,
   _poolMagmaPhoenix,
+  _poolMagmaPummeler,
   _poolMagmaRift,
   _poolMagmaSliver,
   _poolMagmaSpray,
@@ -53722,6 +53731,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOtharriSunsGlory,
   _poolOthelmSigardianOutcast,
   _poolOtherworldAtlas,
+  _poolOtherworldlyEscort,
   _poolOtherworldlyGaze,
   _poolOtherworldlyJourney,
   _poolOtherworldlyOutburst,
@@ -70126,6 +70136,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bhaals-invoker": _poolBhaalsInvoker,
   "pool/biblioplex-assistant": _poolBiblioplexAssistant,
   "pool/biblioplex-kraken": _poolBiblioplexKraken,
+  "pool/biblioplex-tomekeeper": _poolBiblioplexTomekeeper,
   "pool/bident-of-thassa": _poolBidentOfThassa,
   "pool/bifur-melodic-rider": _poolBifurMelodicRider,
   "pool/bifurcate": _poolBifurcate,
@@ -75204,6 +75215,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/drakestown-forgotten": _poolDrakestownForgotten,
   "pool/drakewing-krasis": _poolDrakewingKrasis,
   "pool/drakuseth-maw-of-flames": _poolDrakusethMawOfFlames,
+  "pool/dralnu-lich-lord": _poolDralnuLichLord,
   "pool/dralnus-crusade": _poolDralnusCrusade,
   "pool/dramatic-accusation": _poolDramaticAccusation,
   "pool/dramatic-entrance": _poolDramaticEntrance,
@@ -81578,6 +81590,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/infiltration-lens": _poolInfiltrationLens,
   "pool/infiltrator-il-kor": _poolInfiltratorIlKor,
   "pool/infiltrators-magemark": _poolInfiltratorsMagemark,
+  "pool/infinite-coursework": _poolInfiniteCoursework,
   "pool/infinite-diversity": _poolInfiniteDiversity,
   "pool/infinite-guideline-station": _poolInfiniteGuidelineStation,
   "pool/infinite-hourglass": _poolInfiniteHourglass,
@@ -84436,6 +84449,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/magma-mine": _poolMagmaMine,
   "pool/magma-opus": _poolMagmaOpus,
   "pool/magma-phoenix": _poolMagmaPhoenix,
+  "pool/magma-pummeler": _poolMagmaPummeler,
   "pool/magma-rift": _poolMagmaRift,
   "pool/magma-sliver": _poolMagmaSliver,
   "pool/magma-spray": _poolMagmaSpray,
@@ -87531,6 +87545,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/otharri-suns-glory": _poolOtharriSunsGlory,
   "pool/othelm-sigardian-outcast": _poolOthelmSigardianOutcast,
   "pool/otherworld-atlas": _poolOtherworldAtlas,
+  "pool/otherworldly-escort": _poolOtherworldlyEscort,
   "pool/otherworldly-gaze": _poolOtherworldlyGaze,
   "pool/otherworldly-journey": _poolOtherworldlyJourney,
   "pool/otherworldly-outburst": _poolOtherworldlyOutburst,

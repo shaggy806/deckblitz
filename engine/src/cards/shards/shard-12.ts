@@ -622,6 +622,7 @@ import _poolOrdruunCommando from "../pool/ordruun-commando.js";
 import _poolOriKeeperOfSongs from "../pool/ori-keeper-of-songs.js";
 import _poolOrimsChant from "../pool/orims-chant.js";
 import _poolOrnamentalCourage from "../pool/ornamental-courage.js";
+import _poolOtherworldlyEscort from "../pool/otherworldly-escort.js";
 import _poolOutmaneuver from "../pool/outmaneuver.js";
 import _poolOutrageShaman from "../pool/outrage-shaman.js";
 import _poolOverlordOfTheHauntwoods from "../pool/overlord-of-the-hauntwoods.js";
@@ -1671,6 +1672,7 @@ const shard: CardShard = {
     _poolOriKeeperOfSongs,
     _poolOrimsChant,
     _poolOrnamentalCourage,
+    _poolOtherworldlyEscort,
     _poolOutmaneuver,
     _poolOutrageShaman,
     _poolOverlordOfTheHauntwoods,

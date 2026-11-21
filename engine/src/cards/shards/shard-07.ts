@@ -437,6 +437,7 @@ import _poolIndomitableCreativity from "../pool/indomitable-creativity.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
 import _poolInfectedDefector from "../pool/infected-defector.js";
 import _poolInfestationSage from "../pool/infestation-sage.js";
+import _poolInfiniteCoursework from "../pool/infinite-coursework.js";
 import _poolInkfathomDivers from "../pool/inkfathom-divers.js";
 import _poolInnocentBlood from "../pool/innocent-blood.js";
 import _poolInordinateRage from "../pool/inordinate-rage.js";
@@ -1519,6 +1520,7 @@ const shard: CardShard = {
     _poolInfantryVeteran,
     _poolInfectedDefector,
     _poolInfestationSage,
+    _poolInfiniteCoursework,
     _poolInkfathomDivers,
     _poolInnocentBlood,
     _poolInordinateRage,
