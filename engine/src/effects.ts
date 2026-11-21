@@ -3979,6 +3979,15 @@ export type EffectSpec =
        */
       readonly kind: "regenerate";
       readonly target: ObjectRef;
+      /** "…You gain control of that creature **if it regenerates this
+       * way**" (Debt of Loyalty: `{ kind: "gain-control", target: 0,
+       * untilEndOfTurn: false }`): this shield carries the effect, run as
+       * part of the regeneration when this shield is the one that replaces
+       * a destruction (rule 701.19a), by the effect's controller with its
+       * source, the regenerated permanent in slot 0. A shield that's never
+       * used does nothing. With a plain shield too, the permanent's
+       * controller chooses which applies (616.1). */
+      readonly ifRegenerates?: EffectSpec;
     }
   | {
       /** Regenerate every battlefield permanent matching `filter` (Wrap in
@@ -13814,7 +13823,7 @@ export interface EffectApi {
     except?: ObjectId,
   ): void;
   /** Give a permanent a regeneration shield (rule 701.15a). */
-  regenerate(target: TargetRef): void;
+  regenerate(target: TargetRef, ifRegenerates?: EffectSpec): void;
   /** Give every battlefield permanent matching `filter` one. */
   regenerateAll(filter: CardFilter): void;
   /** Return every battlefield permanent matching `filter` to its owner's hand
@@ -21436,7 +21445,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "regenerate": {
       const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.regenerate(target);
+      if (target !== undefined) ctx.regenerate(target, spec.ifRegenerates);
       return;
     }
     case "regenerate-all":

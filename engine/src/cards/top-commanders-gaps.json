@@ -5,6 +5,7 @@
     "effect:owner-chooses-library-position",
     "effect:each-player-discards-up-to-n",
     "amount:bushido-value-of-each",
+    "effect:regenerate-gain-control",
     "static:max-hand-size-equal-to-counters",
     "static:max-hand-size-equal-to-count",
     "static:exhaust-reactivation",

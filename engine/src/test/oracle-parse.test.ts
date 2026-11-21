@@ -2073,6 +2073,18 @@ describe("costs and triggers", () => {
       cantBeRegenerated: true,
     });
 
+    const debt = parseFace({
+      name: "Debt of Loyalty",
+      type_line: "Instant",
+      oracle_text: "Regenerate target creature. You gain control of that creature if it regenerates this way.",
+    });
+    expect(debt.complete).toBe(true);
+    expect(debt.effect).toEqual({
+      kind: "regenerate",
+      target: 0,
+      ifRegenerates: { kind: "gain-control", target: 0, untilEndOfTurn: false },
+    });
+
     const parasite = parseFace({
       name: "Invader Parasite",
       type_line: "Creature — Phyrexian Insect",

@@ -13490,6 +13490,17 @@ export function parseEffect(text, outer) {
       parsed[parsed.length - 1] = { ...asked, then: { ...asked.then, cantBeRegenerated: true } };
       continue;
     }
+    // "You gain control of that creature if it regenerates this way." after a
+    // regenerate (Debt of Loyalty): the shield carries it (701.19a).
+    if (
+      /^you gain control of (?:that creature|it) if it regenerates this way\.$/i.test(sentence) &&
+      parsed.at(-1)?.kind === "regenerate" &&
+      typeof parsed.at(-1).target === "number"
+    ) {
+      const regen = parsed.at(-1);
+      parsed[parsed.length - 1] = { ...regen, ifRegenerates: { kind: "gain-control", target: regen.target, untilEndOfTurn: false } };
+      continue;
+    }
     if (/^it can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
       continue;

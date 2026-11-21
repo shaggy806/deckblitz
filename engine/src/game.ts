@@ -623,6 +623,7 @@ import type {
   EntryRecord,
   ExtraTurnRider,
   GameObject,
+  RegenerationRider,
   GameRules,
   GameRulesConfig,
   GameState,
@@ -14105,6 +14106,7 @@ export class Game {
       // saddled (702.171b) and what a creature saddled this turn (702.171c)
       // or crewed (702.122b).
       delete object.regenerationShields;
+      delete object.regenerationRiders;
       delete object.saddled;
       delete object.saddledThisTurn;
       delete object.crewedThisTurn;
@@ -43307,7 +43309,13 @@ export class Game {
           cantBeRegenerated === true,
           exceptSource === true ? source : except,
         ),
-      regenerate: (target) => this.regenerateByEffect(target),
+      regenerate: (target, ifRegenerates) =>
+        this.regenerateByEffect(
+          target,
+          ifRegenerates === undefined
+            ? undefined
+            : { controller, source, name: this.state.objects[source]?.cardName ?? "", effect: ifRegenerates },
+        ),
       regenerateAll: (filter) => {
         for (const id of this.battlefieldMatching(controller, filter)) {
           this.regenerateByEffect({ kind: "object", object: id });
@@ -59892,7 +59900,7 @@ controlledBy,
     // "Instead remove all +1/+1 counters from it …" (Dr. McCoy): chosen, or
     // the only replacement there is.
     if ((chosen === undefined || chosen.startsWith("replace:")) && this.destroyReplacedInstead(id, chosen)) return;
-    if (chosen !== "shield-counter" && !cantBeRegenerated && this.regenerateInstead(id)) return;
+    if (chosen !== "shield-counter" && !cantBeRegenerated && this.regenerateInstead(id, chosen)) return;
     // A shield counter: "if this permanent would be destroyed as the result of
     // an effect, instead remove a shield counter from it" (rule 122.1c) — an
     // effect's destruction only; state-based actions still destroy it (the
@@ -59977,7 +59985,19 @@ controlledBy,
     const object = this.state.objects[id];
     const options: ReplacementOrderOption[] = [];
     if (!cantBeRegenerated && this.regenerationWouldApply(id)) {
-      options.push({ key: "regeneration", name: "Regeneration", text: "tap it and remove it from combat" });
+      // Each shield is its own replacement (701.19a): one with an effect "if
+      // it regenerates this way" (Debt of Loyalty) is a different choice from
+      // a plain one, and from another player's.
+      if (this.plainRegenerationApplies(id)) {
+        options.push({ key: "regeneration", name: "Regeneration", text: "tap it and remove it from combat" });
+      }
+      const seenRiders = new Set<string>();
+      (object.regenerationRiders ?? []).forEach((rider, index) => {
+        const key = `${rider.controller}|${rider.name}|${JSON.stringify(rider.effect)}`;
+        if (seenRiders.has(key)) return;
+        seenRiders.add(key);
+        options.push({ key: `regeneration:${index}`, name: rider.name, text: "regenerate it this way" });
+      });
     }
     if (byEffect && (object.counters.shield ?? 0) > 0) {
       options.push({ key: "shield-counter", name: "Shield counter", text: "remove a shield counter from it" });
@@ -60075,12 +60095,24 @@ controlledBy,
 
   /** A regeneration shield on `target` (rule 701.15a — see the
    * `regenerate` {@link EffectSpec}). Nothing for a permanent that has left. */
-  private regenerateByEffect(target: TargetRef): void {
+  private regenerateByEffect(target: TargetRef, rider?: RegenerationRider): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
     if (object === undefined || object.zone !== "battlefield") return;
     object.regenerationShields = (object.regenerationShields ?? 0) + 1;
+    if (rider !== undefined) object.regenerationRiders = [...(object.regenerationRiders ?? []), rider];
     this.emit({ type: "regeneration-shield-created", object: target.object });
+  }
+
+  /** Whether `id` has a regeneration with nothing riding on it: a shield
+   * without an `ifRegenerates` effect, or a static's (701.19b). */
+  private plainRegenerationApplies(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if ((object.regenerationShields ?? 0) > (object.regenerationRiders?.length ?? 0)) return true;
+    return (
+      !hasLostAbilities(this.state, this.registry, object) &&
+      this.ownStatics(object).some((ability) => ability.regeneratesInstead === true && this.staticActive(object, ability))
+    );
   }
 
   /**
@@ -60091,9 +60123,34 @@ controlledBy,
    * "can't be regenerated" (701.15c); a sacrifice, the legend rule or 0
    * toughness isn't destruction, so none of those does.
    */
-  private regenerateInstead(id: ObjectId): boolean {
+  private regenerateInstead(id: ObjectId, chosen?: string): boolean {
     const object = this.state.objects[id];
     const shields = object?.regenerationShields ?? 0;
+    // A shield carrying an effect "if it regenerates this way" (Debt of
+    // Loyalty): the one its controller chose (616.1, `regeneration:<i>`), or
+    // the only kind there is; a plain regeneration first, unasked.
+    const riders = object?.regenerationRiders ?? [];
+    const chosenRider = chosen?.startsWith("regeneration:") === true ? Number(chosen.slice("regeneration:".length)) : undefined;
+    if (
+      object !== undefined &&
+      riders.length > 0 &&
+      object.cantBeRegeneratedTurn !== this.state.turn.number &&
+      (chosenRider !== undefined ? chosenRider < riders.length : !this.plainRegenerationApplies(id))
+    ) {
+      const index = chosenRider ?? 0;
+      const rider = riders[index];
+      const rest = riders.filter((_, i) => i !== index);
+      if (rest.length === 0) delete object.regenerationRiders;
+      else object.regenerationRiders = rest;
+      if (shields <= 1) delete object.regenerationShields;
+      else object.regenerationShields = shields - 1;
+      this.regenerateUsingUp(id);
+      // As part of the same replacement (701.19a): "you gain control of that
+      // creature if it regenerates this way".
+      applyEffectSpec(rider.effect, this.makeResolutionContext(rider.source, rider.controller, [{ kind: "object", object: id }], 0));
+      invalidateComputedCache();
+      return true;
+    }
     // "If this creature would be destroyed, regenerate it" (rule 701.19b): a
     // static ability's replaces each destruction, with no shield used up, so
     // its controller keeps any shield for later.
@@ -60109,6 +60166,14 @@ controlledBy,
       if (shields === 1) delete object.regenerationShields;
       else object.regenerationShields = shields - 1;
     }
+    this.regenerateUsingUp(id);
+    return true;
+  }
+
+  /** What regenerating `id` does instead of destroying it (701.19a): remove
+   * all damage from it, tap it, remove it from combat. */
+  private regenerateUsingUp(id: ObjectId): void {
+    const object = this.state.objects[id];
     if (object.damageMarked !== 0 || object.markedByDeathtouch) {
       object.damageMarked = 0;
       object.markedByDeathtouch = false;
@@ -60121,7 +60186,6 @@ controlledBy,
     this.removeFromCombat(id);
     invalidateComputedCache();
     this.emit({ type: "permanent-destroy-prevented", object: id, reason: "regenerated" });
-    return true;
   }
 
   /** Rule 506.4: `id` stops being an attacking, blocking, blocked or
@@ -70779,7 +70843,7 @@ controlledBy,
         }
         // Both damage checks destroy it (704.5g-h), which a regeneration
         // shield replaces (701.15a); 0 toughness doesn't.
-        if (reason !== null && reason !== "toughness is 0 or less" && umbraChosen === undefined && this.regenerateInstead(id)) {
+        if (reason !== null && reason !== "toughness is 0 or less" && umbraChosen === undefined && this.regenerateInstead(id, destroyChosen)) {
           reason = null;
         }
         // So does umbra armor (702.89a) — once for every check at once (the
@@ -74993,6 +75057,7 @@ controlledBy,
     object.blocked = false;
     object.markedByDeathtouch = false;
     delete object.regenerationShields;
+    delete object.regenerationRiders;
     delete object.cantBeRegeneratedTurn;
     if (!keepCounters) {
       object.counters = {};

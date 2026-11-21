@@ -180,6 +180,16 @@ export type EnterAttachHost =
   | { readonly among: CardFilter };
 
 /** An instance of a card (or token) somewhere in the game. */
+/** One regeneration shield that carries an effect "if it regenerates this
+ * way" (`GameObject.regenerationRiders`). */
+export interface RegenerationRider {
+  readonly controller: PlayerId;
+  readonly source: ObjectId;
+  /** The source's name, for the 616.1 question between shields. */
+  readonly name: string;
+  readonly effect: EffectSpec;
+}
+
 export interface GameObject {
   readonly id: ObjectId;
   /** Key into the {@link CardRegistry} for printed characteristics. */
@@ -401,6 +411,11 @@ export interface GameObject {
    * many.
    */
   regenerationShields?: number;
+  /** The shields among `regenerationShields` that carry an effect "if it
+   * regenerates this way" (Debt of Loyalty — the `regenerate` effect's
+   * `ifRegenerates`): who made each, its source, and the effect. Gone with
+   * the shields. */
+  regenerationRiders?: readonly RegenerationRider[];
   /** "It can't be regenerated this turn" (the `prohibit` effect's
    * `regeneration` — rule 701.19c): the turn number it was said on. While
    * `state.turn.number` still equals it, its regeneration shields aren't
@@ -8288,6 +8303,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.counterTimestamps ?? null,
     o.modifiers,
     o.regenerationShields ?? 0,
+    o.regenerationRiders ?? null,
     o.cantBeRegeneratedTurn ?? null,
     o.exileIfDiesTurn ?? null,
     o.adaptAsThoughNoCountersTurn ?? null,
