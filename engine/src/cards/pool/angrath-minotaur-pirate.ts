@@ -41,7 +41,7 @@ export default defineCard({
       loyaltyCost: -3,
       cost: { mana: null, tap: false },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { subtype: "Pirate" } }],
-      effect: { kind: "put-onto-battlefield", target: 0, underYourControl: true },
+      effect: { kind: "put-onto-battlefield", target: 0 },
       resolve: null,
       text: MINUS_THREE_TEXT,
     },
