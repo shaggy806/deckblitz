@@ -96,3 +96,60 @@ describe("a player concedes while another is choosing targets", () => {
     expect(game.state.priority.holder).toBe(A);
   });
 });
+
+describe("a player leaves while another chooses among permanents or players", () => {
+  it("a choice among permanents stops offering what they own, its count down to what's left", () => {
+    const { game } = table({ players: 3 });
+    const bobs = spawn(game, "Grizzly Bears", B);
+    const carols = spawn(game, "Grizzly Bears", C);
+    game.debugApplyEffect(A, {
+      kind: "choose-permanents",
+      filter: { type: "creature", controlledBy: "opponent" },
+      min: 2,
+      upTo: 2,
+      then: { kind: "destroy", target: 0 },
+      prompt: "Choose two creatures",
+    });
+    expect(game.state.awaiting).toMatchObject({ kind: "choose-permanents", eligible: [bobs, carols], min: 2, max: 2 });
+    game.concede(C);
+    expect(game.state.awaiting).toMatchObject({ kind: "choose-permanents", eligible: [bobs], min: 1, max: 1 });
+    game.dispatch({ type: "choose-permanents", player: A, permanents: [bobs] });
+    game.advanceUntil((s) => s.awaiting === null && s.zones.shared.stack.length === 0);
+    expect(zone(game, bobs)).toBe("graveyard");
+  });
+
+  it("proliferate stops offering them and their permanents", () => {
+    const { game } = table({ players: 3 });
+    const bobs = spawn(game, "Grizzly Bears", B);
+    const carols = spawn(game, "Grizzly Bears", C);
+    for (const id of [bobs, carols]) game.state.objects[id].counters = { "+1/+1": 1 };
+    game.state.players[C].counters = { poison: 1 };
+    game.debugApplyEffect(A, { kind: "proliferate" }, []);
+    const before = game.state.awaiting;
+    if (before?.kind !== "proliferate") throw new Error("not asked to proliferate");
+    expect(before.eligible).toContainEqual(ref(carols));
+    expect(before.eligible).toContainEqual(ref(C));
+    game.concede(C);
+    const after = game.state.awaiting;
+    if (after?.kind !== "proliferate") throw new Error("no longer asked to proliferate");
+    expect(after.eligible).toEqual([ref(bobs)]);
+  });
+
+  it("a loss by an effect does the same: the count comes down as they lose", () => {
+    const { game } = table({ players: 3 });
+    const bobs = spawn(game, "Grizzly Bears", B);
+    const carols = spawn(game, "Grizzly Bears", C);
+    game.debugApplyEffect(A, {
+      kind: "choose-permanents",
+      filter: { type: "creature", controlledBy: "opponent" },
+      min: 2,
+      upTo: 2,
+      then: { kind: "destroy", target: 0 },
+      prompt: "Choose two creatures",
+    });
+    expect(game.state.awaiting).toMatchObject({ kind: "choose-permanents", eligible: [bobs, carols] });
+    game.debugApplyEffect(B, { kind: "lose-game", target: 0 }, [ref(C)]);
+    expect(game.state.players[C].hasLost).toBe(true);
+    expect(game.state.awaiting).toMatchObject({ kind: "choose-permanents", eligible: [bobs], min: 1, max: 1 });
+  });
+});

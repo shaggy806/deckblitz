@@ -13633,4 +13633,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Sol Ring', 'Grizzly Bears', 'Hill Giant'] },
     }),
   ),
+  // --- Blitz and dash from a zone a permission casts from (2026-11-20) -------
+  preset(
+    'Screamreach Brawler: dashed from the top of the library under Future Sight',
+    board({
+      you: { bf: ['Future Sight', 'Mountain*3'], lib: ['Screamreach Brawler'] },
+      opp: {},
+    }),
+  ),
 ]

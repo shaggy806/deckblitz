@@ -165,13 +165,13 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   blue creature you control") isn't paid: `cost:splice-non-mana`. Found building splice
   (B202, 2026-10-26).
 
-- **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone.** (More Than Meets the Eye since 2026-11-07, Slicer: 702.162a lets it be cast from any zone the card may be cast from.) The same
-  limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
-  rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
-  those two zones, so a blitz card another permission lets you cast (an impulse exile, a
-  graveyard grant, the top of a library) isn't offered its blitz cost there, though rule
-  702.152a allows it; `Game.dashCostOf` the same (702.109a). Henzie's discount also moves only a cost's generic number, never an `{X}`
-  (no blitz cost in the pool has one yet).
+- **Sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone.** Rules 702.190a, 702.188a and 702.162a allow any zone the card may be cast from
+  (`legalActions`' sneak and web-slinging loops, `moreThanMeetsTheEyeCostOf`'s offer), so one
+  another permission lets you cast (an impulse exile, a graveyard grant, the top of a library)
+  isn't offered that cost there. Blitz and dash are, since 2026-11-20, as alternative costs of
+  the permission's cast (`Game.alternativeCostsOf`); these three need more than a cost there (a
+  creature returned, the back face up). Henzie's discount also moves only a cost's generic
+  number, never an `{X}` (no blitz cost in the pool has one yet).
 - **Replacement order is chosen for the affected player, never asked.** Rule 616.1 has the
   affected player (or the controller of the affected object) order the replacement and
   prevention effects that apply to one event. The engine picks the order best for them, as
@@ -194,13 +194,18 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an
   effect would ask of a player who has already left (800.4g–h: the object's controller picks
   another player, or the next in turn order makes it) — the engine skips that player instead.
-  Left by the 2026-11-20 fixes: a concession puts another player's open `choose-targets` right
-  (`Game.settleTargetChoiceAfterLeave`), but not the other decisions that list objects or players
-  (`choose-permanent-or-player`, a sacrifice of someone else's choosing), not a loss by state-based
-  action with such a choice open, and it only takes options away (a target made legal by the leaving
-  isn't added). And a creature kept alive only by a losing player's static dies in the check they
-  lose in (704.3, `heldMoves`) unless that same check also asks a legend-rule choice, which resumes
-  the check with the player already gone.
+  Left by the 2026-11-20 fixes: a player leaving puts another player's open `choose-targets` right
+  (`Game.settleTargetChoiceAfterLeave`) and prunes the lists of `choose-permanents`,
+  `choose-permanent-or-player`, `sacrifice`, `proliferate`, `time-travel` and an optional
+  `remove-counters` (`Game.pruneEligibleAfterLeave`). Not: a list left with nothing where something
+  must be chosen (it stays as it was, the resolution waiting on it having nowhere else to go), a
+  `remove-counters` that must remove some, `choose-from-zone` over a departed player's cards, piles,
+  or combat declarations; a loss by an effect with a `choose-targets` open that would have to be
+  dropped or reversed (only a concession does that); and options are only taken away (a target
+  made legal by the leaving isn't added). State-based actions never run with a decision open, so a
+  loss by one can't meet an open choice. And a creature kept alive only by a losing player's static
+  dies in the check they lose in (704.3, `heldMoves`) unless that same check also asks a
+  legend-rule choice, which resumes the check with the player already gone.
 **A shuffled face-down pile keeps its object ids.** Become Anonymous and Expose the Culprit (`Game.cloakExiledPile`) exile cards face up,
 shuffle them and cloak one, but an object keeps its id through the exile, so a client reading the wire or animating by id can tell which
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the

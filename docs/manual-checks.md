@@ -9001,3 +9001,9 @@ Each board's die comes up 4.
 ### Urgent Necropsy: a target the graveyard can't cover isn't offered
 - **Do:** Cast Urgent Necropsy. Target Bob's Sol Ring as the artifact, skip the other three, then pick the Grizzly Bears in your graveyard and confirm.
 - **Expect:** Your graveyard holds mana value 2. With Sol Ring (1) picked, neither Grizzly Bears (2) nor Hill Giant (4) can be the creature target. The evidence popup asks for total mana value 1 or more; Sol Ring is destroyed and your Grizzly Bears is exiled.
+
+## Blitz and dash from a zone a permission casts from (2026-11-20)
+
+### Screamreach Brawler: dashed from the top of the library under Future Sight
+- **Do:** Click Screamreach Brawler on top of your library and cast it for its dash cost ({1}{R}).
+- **Expect:** The offer names dash beside the cast for {2}{R}. Dashed, it enters with haste and returns to your hand at the beginning of the end step.

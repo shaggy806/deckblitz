@@ -922,7 +922,7 @@ interface AlternativeCostOffer {
   readonly flash?: true;
   /** The keyword it is, when it's one (`"prowl"`: "if its prowl cost was
    * paid"). */
-  readonly keyword?: NonNullable<CardDefinition["alternativeCost"]>["keyword"];
+  readonly keyword?: NonNullable<CardDefinition["alternativeCost"]>["keyword"] | "blitz" | "dash";
 }
 
 interface DamageApplied {
@@ -3720,6 +3720,7 @@ export class Game {
     const offeredFrom = this.targetChoiceZones();
     this.leaveGame(player);
     this.settleTargetChoiceAfterLeave(player, offeredFrom);
+    this.pruneEligibleAfterLeave(player);
     const priority = this.state.priority;
     if (priority.active && priority.holder === player) {
       priority.holder = this.nextEligibleAfter(player);
@@ -3762,7 +3763,11 @@ export class Game {
    * - An opponent's targets for a cast (601.2c): a required slot left empty
    *   reverses the cast (733.1); the caster leaving ends it.
    */
-  private settleTargetChoiceAfterLeave(left: PlayerId, offeredFrom: ReadonlyMap<ObjectId, ZoneType>): void {
+  private settleTargetChoiceAfterLeave(
+    left: PlayerId,
+    offeredFrom: ReadonlyMap<ObjectId, ZoneType>,
+    pruneOnly = false,
+  ): void {
     const awaiting = this.state.awaiting;
     if (awaiting?.kind !== "choose-targets" || awaiting.player === left) return;
     const gone = (t: TargetRef): boolean => {
@@ -3786,6 +3791,20 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
     };
     const emptied = options.some((slot, i) => slot.length === 0 && !isOptionalSpec(awaiting.specs[i]));
+    // A loss in the middle of a state-based check (`eliminate`): the options
+    // are put right where the question stays as it is, and nothing is
+    // dropped or reversed from inside the check.
+    if (pruneOnly) {
+      const caster = awaiting.otherCast?.action.player;
+      const trigger = this.state.pendingTargetedTrigger;
+      const plain =
+        !emptied &&
+        caster !== left &&
+        this.state.pendingRetarget == null &&
+        (this.state.pendingCopyTargets != null || trigger === null || trigger.controller !== left);
+      if (plain) this.state.awaiting = { ...awaiting, options };
+      return;
+    }
 
     const ask = awaiting.otherCast;
     if (ask !== undefined) {
@@ -3824,6 +3843,67 @@ export class Game {
       }
     }
     this.state.awaiting = { ...awaiting, options };
+  }
+
+  /**
+   * `left` has just left the game with another player's decision open that
+   * lists permanents or players to choose among (`eligible`): what `left`
+   * owns left with them (rule 800.4a) and they are no player to choose, so
+   * the list stops offering either. A count the shorter list can't meet comes
+   * down to it ("as many as possible"); a list that would be left with
+   * nothing where something must be chosen is left alone, since the
+   * resolution waiting on the answer has nowhere else to go.
+   */
+  private pruneEligibleAfterLeave(left: PlayerId): void {
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || !("player" in awaiting) || awaiting.player === left) return;
+    const goneObject = (id: ObjectId): boolean => {
+      const object = this.state.objects[id];
+      return object === undefined || this.state.players[object.owner]?.hasLost === true;
+    };
+    const goneRef = (t: TargetRef): boolean =>
+      t.kind === "player" ? this.state.players[t.player]?.hasLost === true : t.kind === "object" ? goneObject(t.object) : false;
+    switch (awaiting.kind) {
+      case "choose-permanents": {
+        const eligible = awaiting.eligible.filter((id) => !goneObject(id));
+        if (eligible.length === awaiting.eligible.length) return;
+        // A stack stands for every token in it: the count is of permanents.
+        const room = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
+        this.state.awaiting = { ...awaiting, eligible, min: Math.min(awaiting.min, room), max: Math.min(awaiting.max, room) };
+        return;
+      }
+      case "choose-permanent-or-player": {
+        const eligible = awaiting.eligible.filter((t) => !goneRef(t));
+        if (eligible.length > 0 && eligible.length < awaiting.eligible.length) this.state.awaiting = { ...awaiting, eligible };
+        return;
+      }
+      case "sacrifice": {
+        const eligible = awaiting.eligible.filter((id) => !goneObject(id));
+        if (eligible.length === 0 || eligible.length === awaiting.eligible.length) return;
+        const room = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
+        this.state.awaiting = { ...awaiting, eligible, count: Math.min(awaiting.count, room) };
+        return;
+      }
+      case "proliferate": {
+        const eligible = awaiting.eligible.filter((t) => !goneRef(t));
+        if (eligible.length < awaiting.eligible.length) this.state.awaiting = { ...awaiting, eligible };
+        return;
+      }
+      case "time-travel": {
+        const eligible = awaiting.eligible.filter((id) => !goneObject(id));
+        if (eligible.length < awaiting.eligible.length) this.state.awaiting = { ...awaiting, eligible };
+        return;
+      }
+      case "remove-counters": {
+        // Only where nothing need be removed: what the rest could still pay
+        // isn't counted here.
+        const eligible = awaiting.eligible.filter((id) => !goneObject(id));
+        if (awaiting.min === 0 && eligible.length < awaiting.eligible.length) this.state.awaiting = { ...awaiting, eligible };
+        return;
+      }
+      default:
+        return;
+    }
   }
 
   /** Why `action` cannot be dispatched right now, or `null` if it can. */
@@ -6670,7 +6750,9 @@ export class Game {
         ...(evoke !== undefined && evoke === def.evoke?.cost && def.evoke.exileFromHand !== undefined
           ? { altCostText: `exile ${def.evoke.exileFromHand.text} from your hand` }
           : {}),
-        ...(ownAltPaid && def.alternativeCost?.exileFromHand !== undefined
+        ...(altCost === true && (alternative?.keyword === "blitz" || alternative?.keyword === "dash")
+          ? { altCostText: `${alternative.keyword} ${alternative.mana}` }
+          : ownAltPaid && def.alternativeCost?.exileFromHand !== undefined
           ? {
               altCostText: [
                 ...(def.alternativeCost.payLife !== undefined ? [`pay ${def.alternativeCost.payLife} life`] : []),
@@ -25328,7 +25410,10 @@ export class Game {
     // way (rules 702.85a, 702.62a), and suspend's creature spell gains haste
     // until its controller loses control of it or the permanent it becomes.
     const freeCastOf = via === "effect" ? this.castNowProbe?.freeCastOf : undefined;
-    object.castVia = freeCastOf ?? via ?? null;
+    // Blitzed or dashed under a permission (an alternative cost of that
+    // cast): the spell is one all the same (rules 702.152a, 702.109a).
+    const keywordVia = alternativeCost?.keyword === "blitz" || alternativeCost?.keyword === "dash" ? alternativeCost.keyword : undefined;
+    object.castVia = freeCastOf ?? keywordVia ?? via ?? null;
     if (freeCastOf === "suspend") object.hastyUntilItLeaves = true;
     // Thundermane Dragon: "if you cast a creature spell this way, it gains
     // haste until end of turn" — the spell this permission let be cast
@@ -51830,7 +51915,12 @@ controlledBy,
     // A printed blitz cost's part that isn't mana (Sabin, Master Monk's
     // "Discard a card", Tenacious Underdog's "Pay 2 life"), when it's cast for
     // that blitz cost (rule 702.152a) — a granted blitz is its mana alone.
-    const blitzAlso = via === "blitz" ? def.blitz?.also : undefined;
+    // Under a permission it's the first alternative cost of a card with none
+    // of its own (`alternativeCostsOf`).
+    const blitzAlso =
+      via === "blitz" || (altCost && isPermissionCast(via) && def.alternativeCost === null && (this.altCostPick ?? 0) === 0)
+        ? def.blitz?.also
+        : undefined;
     // A printed freerunning cost's part that isn't mana (Escape Detection's
     // "Return a blue creature you control to its owner's hand"), when it's
     // cast for that cost (rule 702.173a) — a granted one is its mana alone.
@@ -64119,6 +64209,15 @@ controlledBy,
     if (!fromGraveyard && !this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
       return null;
     }
+    return this.blitzCostAnywhere(cardId, def, player);
+  }
+
+  /** The blitz cost `player` would cast `cardId` for wherever it is: under a
+   * permission to cast it from another zone (an impulse exile, a graveyard
+   * grant, the top of a library), blitz is one more alternative cost that
+   * cast may announce (rule 702.152a; `alternativeCostsOf`). */
+  private blitzCostAnywhere(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
+    if (this.state.players[player] === undefined) return null;
     const cost = def.blitz?.cost ?? this.spellKeywordCosts(player, cardId, def, "blitz")[0] ?? null;
     if (cost === null) return null;
     const discounts = this.activeStaticsOf(player, (a) => a.blitzCostReductionPerCommanderCast === true).length;
@@ -64274,6 +64373,17 @@ controlledBy,
       }
     }
     if (caster === undefined) return out;
+    // Blitz and dash (rules 702.152a, 702.109a: "you may cast this card by
+    // paying [cost] rather than its mana cost") from wherever a permission
+    // lets the card be cast for its mana cost: one more cost that cast may
+    // announce. From the hand and the command zone each is its own offer
+    // (`via: "blitz"`, `"dash"`). They come straight after the card's own
+    // (`keywordAltPicked` counts on it).
+    if (isPermissionCast(via)) {
+      const blitz = this.blitzCostAnywhere(cardId, def, caster);
+      if (blitz !== null) out.push({ mana: blitz, keyword: "blitz" });
+      if (def.dash !== null) out.push({ mana: def.dash.cost, keyword: "dash" });
+    }
     // Granted prowl (rule 702.76a — Hunting Velociraptor's "Dinosaur spells
     // you cast have prowl {2}{R}"): while a source the caster controlled
     // with any of the card's creature types dealt combat damage to a player
@@ -69902,7 +70012,12 @@ controlledBy,
     playerState.hasLost = true;
     playerState.lossReason = reason;
     this.emit({ type: "player-lost", player, reason });
+    const offeredFrom = this.targetChoiceZones();
     this.leaveGame(player);
+    // Another player's open choice stops offering them and what they owned
+    // (800.4a), as when they concede.
+    this.settleTargetChoiceAfterLeave(player, offeredFrom, true);
+    this.pruneEligibleAfterLeave(player);
     const priority = this.state.priority;
     if (priority.active && priority.holder === player) {
       priority.holder = this.nextEligibleAfter(player);
