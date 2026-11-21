@@ -25473,6 +25473,40 @@ function parseStatic(line, text) {
   // Damage become a sacrifice (rules 614.1a, 614.6): "if damage would be
   // dealt to Dralnu, sacrifice that many permanents instead" (Dralnu, Lich
   // Lord) — all of them if there are fewer (the ruling).
+  // Damage to this creature prevented while it has a +1/+1 counter, and that
+  // many (or one) removed (rule 615.5): Polukranos, Unchained, Ugin's
+  // Conjurant, Oathsworn Knight — once per simultaneous event (`perEvent`).
+  // Magma Pummeler adds "when one or more counters are removed … this way, it
+  // deals that much damage to any target": a reflexive trigger valued at the
+  // damage, which counts even when it can't be prevented (615.12) and is all
+  // of it even past the counters there were (the ruling).
+  m = /^If damage would be dealt to ~ while it has a \+1\/\+1 counter on it, prevent that damage and remove (that many|a) \+1\/\+1 counters? from (?:it|~)\.( When one or more counters are removed from ~ this way, it deals that much damage to any target\.)?$/.exec(line);
+  if (m !== null) {
+    const remove = { kind: "remove-counter", target: "source", counter: "+1/+1", amount: m[1] === "a" ? 1 : "x" };
+    const reflexive = m[2] === undefined ? undefined : {
+      kind: "reflexive-trigger",
+      targets: ["any-target"],
+      value: "x",
+      effect: { kind: "damage", amount: { triggerValue: true }, target: 0 },
+      text: m[2].trim().replace("~", "this creature"),
+    };
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "gte", n: 1 } },
+      replacement: {
+        event: "would-deal-damage",
+        to: "self",
+        instead: {
+          prevent: true,
+          perEvent: true,
+          ...(reflexive === undefined
+            ? { then: remove }
+            : { thenCountsUnprevented: true, then: { kind: "sequence", effects: [remove, reflexive] } }),
+        },
+      },
+      text,
+    };
+  }
   if (line === "If damage would be dealt to ~, sacrifice that many permanents instead.") {
     return {
       affects: { scope: "self" },

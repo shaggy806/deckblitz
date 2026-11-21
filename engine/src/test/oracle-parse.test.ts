@@ -4588,6 +4588,36 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("reads damage prevented while it has a +1/+1 counter, the counters removed and a reflexive hit (Magma Pummeler)", () => {
+    const pummeler = face(
+      "If damage would be dealt to this creature while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it. When one or more counters are removed from this creature this way, it deals that much damage to any target.",
+      "Creature",
+    ).static?.[0];
+    expect(pummeler?.condition).toEqual({ kind: "self-counters", counter: "+1/+1", compare: { op: "gte", n: 1 } });
+    expect(pummeler?.replacement).toEqual({
+      event: "would-deal-damage",
+      to: "self",
+      instead: {
+        prevent: true,
+        perEvent: true,
+        thenCountsUnprevented: true,
+        then: {
+          kind: "sequence",
+          effects: [
+            { kind: "remove-counter", target: "source", counter: "+1/+1", amount: "x" },
+            {
+              kind: "reflexive-trigger",
+              targets: ["any-target"],
+              value: "x",
+              effect: { kind: "damage", amount: { triggerValue: true }, target: 0 },
+              text: "When one or more counters are removed from this creature this way, it deals that much damage to any target.",
+            },
+          ],
+        },
+      },
+    });
+  });
+
   it("reads the would-scry and would-lose-game replacements (rule 614.1a)", () => {
     expect(face("If you would scry a number of cards, scry that many cards plus one instead.", "Creature").static?.[0]?.replacement).toEqual({
       event: "would-scry",
