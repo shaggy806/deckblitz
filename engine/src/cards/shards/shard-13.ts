@@ -146,6 +146,7 @@ import _poolCaughtRedHanded from "../pool/caught-red-handed.js";
 import _poolCavalierOfDawn from "../pool/cavalier-of-dawn.js";
 import _poolCavernOfSouls from "../pool/cavern-of-souls.js";
 import _poolCavernWhisperer from "../pool/cavern-whisperer.js";
+import _poolCelestialDawn from "../pool/celestial-dawn.js";
 import _poolCelestialUnicorn from "../pool/celestial-unicorn.js";
 import _poolCennsHeir from "../pool/cenns-heir.js";
 import _poolChainedToTheRocks from "../pool/chained-to-the-rocks.js";
@@ -1168,6 +1169,7 @@ const shard: CardShard = {
     _poolCavalierOfDawn,
     _poolCavernOfSouls,
     _poolCavernWhisperer,
+    _poolCelestialDawn,
     _poolCelestialUnicorn,
     _poolCennsHeir,
     _poolChainedToTheRocks,

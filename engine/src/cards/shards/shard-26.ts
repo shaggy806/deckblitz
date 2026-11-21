@@ -9,6 +9,7 @@ import _poolAbzanBattlePriest from "../pool/abzan-battle-priest.js";
 import _poolAccessDenied from "../pool/access-denied.js";
 import _poolAdNauseam from "../pool/ad-nauseam.js";
 import _poolAdaptiveSporesinger from "../pool/adaptive-sporesinger.js";
+import _poolAdiposeOffspring from "../pool/adipose-offspring.js";
 import _poolAdrianaCaptainOfTheGuard from "../pool/adriana-captain-of-the-guard.js";
 import _poolAegisAutomaton from "../pool/aegis-automaton.js";
 import _poolAegisOfTheHeavens from "../pool/aegis-of-the-heavens.js";
@@ -1087,6 +1088,7 @@ const shard: CardShard = {
     _poolAccessDenied,
     _poolAdNauseam,
     _poolAdaptiveSporesinger,
+    _poolAdiposeOffspring,
     _poolAdrianaCaptainOfTheGuard,
     _poolAegisAutomaton,
     _poolAegisOfTheHeavens,

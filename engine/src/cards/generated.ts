@@ -221,6 +221,7 @@ import _poolAdelizTheCinderWind from "./pool/adeliz-the-cinder-wind.js";
 import _poolAdeptWatershaper from "./pool/adept-watershaper.js";
 import _poolAdewaleBreakerOfChains from "./pool/adewale-breaker-of-chains.js";
 import _poolAdherentOfHope from "./pool/adherent-of-hope.js";
+import _poolAdiposeOffspring from "./pool/adipose-offspring.js";
 import _poolAdmiralBeckettBrass from "./pool/admiral-beckett-brass.js";
 import _poolAdmiralBrassUnsinkable from "./pool/admiral-brass-unsinkable.js";
 import _poolAdmiralsOrder from "./pool/admirals-order.js";
@@ -4309,6 +4310,7 @@ import _poolCelestialArchon from "./pool/celestial-archon.js";
 import _poolCelestialArmor from "./pool/celestial-armor.js";
 import _poolCelestialColonnade from "./pool/celestial-colonnade.js";
 import _poolCelestialCrusader from "./pool/celestial-crusader.js";
+import _poolCelestialDawn from "./pool/celestial-dawn.js";
 import _poolCelestialEnforcer from "./pool/celestial-enforcer.js";
 import _poolCelestialFlare from "./pool/celestial-flare.js";
 import _poolCelestialForce from "./pool/celestial-force.js";
@@ -18652,6 +18654,7 @@ import _poolNahirisResolve from "./pool/nahiris-resolve.js";
 import _poolNahirisSacrifice from "./pool/nahiris-sacrifice.js";
 import _poolNahirisStoneblades from "./pool/nahiris-stoneblades.js";
 import _poolNahirisWarcrafting from "./pool/nahiris-warcrafting.js";
+import _poolNahirisWrath from "./pool/nahiris-wrath.js";
 import _poolNaiadOfHiddenCoves from "./pool/naiad-of-hidden-coves.js";
 import _poolNajalTheStormRunner from "./pool/najal-the-storm-runner.js";
 import _poolNajeelaTheBladeBlossom from "./pool/najeela-the-blade-blossom.js";
@@ -23803,6 +23806,8 @@ import _poolSarumanTheWhiteHand from "./pool/saruman-the-white-hand.js";
 import _poolSarumanTheWhite from "./pool/saruman-the-white.js";
 import _poolSarumansTrickery from "./pool/sarumans-trickery.js";
 import _poolSarythTheVipersFang from "./pool/saryth-the-vipers-fang.js";
+import _poolSasayaOrochiAscendant from "./pool/sasaya-orochi-ascendant.js";
+import _poolSasayasEssence from "./pool/sasayas-essence.js";
 import _poolSashAndWaistcoatUnmen from "./pool/sash-and-waistcoat-unmen.js";
 import _poolSaskiaTheUnyielding from "./pool/saskia-the-unyielding.js";
 import _poolSatoruTheInfiltrator from "./pool/satoru-the-infiltrator.js";
@@ -32989,6 +32994,7 @@ import _tokensAlienAngelToken from "./tokens/alien-angel-token.js";
 import _tokensAlienInsectToken from "./tokens/alien-insect-token.js";
 import _tokensAlienRhinoToken from "./tokens/alien-rhino-token.js";
 import _tokensAlienSalamanderToken from "./tokens/alien-salamander-token.js";
+import _tokensAlienTokenAdiposeOffspring from "./tokens/alien-token-adipose-offspring.js";
 import _tokensAlienTokenAlienInvasion from "./tokens/alien-token-alien-invasion.js";
 import _tokensAlienToken from "./tokens/alien-token.js";
 import _tokensAlienWarriorToken from "./tokens/alien-warrior-token.js";
@@ -33979,6 +33985,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAdeptWatershaper,
   _poolAdewaleBreakerOfChains,
   _poolAdherentOfHope,
+  _poolAdiposeOffspring,
   _poolAdmiralBeckettBrass,
   _poolAdmiralBrassUnsinkable,
   _poolAdmiralsOrder,
@@ -38067,6 +38074,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCelestialArmor,
   _poolCelestialColonnade,
   _poolCelestialCrusader,
+  _poolCelestialDawn,
   _poolCelestialEnforcer,
   _poolCelestialFlare,
   _poolCelestialForce,
@@ -52410,6 +52418,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNahirisSacrifice,
   _poolNahirisStoneblades,
   _poolNahirisWarcrafting,
+  _poolNahirisWrath,
   _poolNaiadOfHiddenCoves,
   _poolNajalTheStormRunner,
   _poolNajeelaTheBladeBlossom,
@@ -57561,6 +57570,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSarumanTheWhite,
   _poolSarumansTrickery,
   _poolSarythTheVipersFang,
+  _poolSasayaOrochiAscendant,
+  _poolSasayasEssence,
   _poolSashAndWaistcoatUnmen,
   _poolSaskiaTheUnyielding,
   _poolSatoruTheInfiltrator,
@@ -66753,6 +66764,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensAlienInsectToken,
   _tokensAlienRhinoToken,
   _tokensAlienSalamanderToken,
+  _tokensAlienTokenAdiposeOffspring,
   _tokensAlienTokenAlienInvasion,
   _tokensAlienToken,
   _tokensAlienWarriorToken,
@@ -67750,6 +67762,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/adept-watershaper": _poolAdeptWatershaper,
   "pool/adewale-breaker-of-chains": _poolAdewaleBreakerOfChains,
   "pool/adherent-of-hope": _poolAdherentOfHope,
+  "pool/adipose-offspring": _poolAdiposeOffspring,
   "pool/admiral-beckett-brass": _poolAdmiralBeckettBrass,
   "pool/admiral-brass-unsinkable": _poolAdmiralBrassUnsinkable,
   "pool/admirals-order": _poolAdmiralsOrder,
@@ -71838,6 +71851,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/celestial-armor": _poolCelestialArmor,
   "pool/celestial-colonnade": _poolCelestialColonnade,
   "pool/celestial-crusader": _poolCelestialCrusader,
+  "pool/celestial-dawn": _poolCelestialDawn,
   "pool/celestial-enforcer": _poolCelestialEnforcer,
   "pool/celestial-flare": _poolCelestialFlare,
   "pool/celestial-force": _poolCelestialForce,
@@ -86181,6 +86195,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nahiris-sacrifice": _poolNahirisSacrifice,
   "pool/nahiris-stoneblades": _poolNahirisStoneblades,
   "pool/nahiris-warcrafting": _poolNahirisWarcrafting,
+  "pool/nahiris-wrath": _poolNahirisWrath,
   "pool/naiad-of-hidden-coves": _poolNaiadOfHiddenCoves,
   "pool/najal-the-storm-runner": _poolNajalTheStormRunner,
   "pool/najeela-the-blade-blossom": _poolNajeelaTheBladeBlossom,
@@ -91332,6 +91347,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/saruman-the-white": _poolSarumanTheWhite,
   "pool/sarumans-trickery": _poolSarumansTrickery,
   "pool/saryth-the-vipers-fang": _poolSarythTheVipersFang,
+  "pool/sasaya-orochi-ascendant": _poolSasayaOrochiAscendant,
+  "pool/sasayas-essence": _poolSasayasEssence,
   "pool/sash-and-waistcoat-unmen": _poolSashAndWaistcoatUnmen,
   "pool/saskia-the-unyielding": _poolSaskiaTheUnyielding,
   "pool/satoru-the-infiltrator": _poolSatoruTheInfiltrator,
@@ -100518,6 +100535,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/alien-insect-token": _tokensAlienInsectToken,
   "tokens/alien-rhino-token": _tokensAlienRhinoToken,
   "tokens/alien-salamander-token": _tokensAlienSalamanderToken,
+  "tokens/alien-token-adipose-offspring": _tokensAlienTokenAdiposeOffspring,
   "tokens/alien-token-alien-invasion": _tokensAlienTokenAlienInvasion,
   "tokens/alien-token": _tokensAlienToken,
   "tokens/alien-warrior-token": _tokensAlienWarriorToken,

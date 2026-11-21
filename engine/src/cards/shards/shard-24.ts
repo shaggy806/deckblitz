@@ -566,6 +566,7 @@ import _poolMycoloth from "../pool/mycoloth.js";
 import _poolMyrAdapter from "../pool/myr-adapter.js";
 import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolMysticDecree from "../pool/mystic-decree.js";
+import _poolNahirisWrath from "../pool/nahiris-wrath.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
 import _poolNaturesWill from "../pool/natures-will.js";
@@ -712,6 +713,7 @@ import _poolSaheeliSublimeArtificer from "../pool/saheeli-sublime-artificer.js";
 import _poolSampleCollector from "../pool/sample-collector.js";
 import _poolSanctumCustodian from "../pool/sanctum-custodian.js";
 import _poolSarkhanTheDragonspeaker from "../pool/sarkhan-the-dragonspeaker.js";
+import _poolSasayaOrochiAscendant from "../pool/sasaya-orochi-ascendant.js";
 import _poolSatyrGrovedancer from "../pool/satyr-grovedancer.js";
 import _poolSavageLandDinosaur from "../pool/savage-land-dinosaur.js";
 import _poolSavageSmash from "../pool/savage-smash.js";
@@ -1617,6 +1619,7 @@ const shard: CardShard = {
     _poolMyrAdapter,
     _poolMyrGalvanizer,
     _poolMysticDecree,
+    _poolNahirisWrath,
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
     _poolNaturesWill,
@@ -1763,6 +1766,7 @@ const shard: CardShard = {
     _poolSampleCollector,
     _poolSanctumCustodian,
     _poolSarkhanTheDragonspeaker,
+    _poolSasayaOrochiAscendant,
     _poolSatyrGrovedancer,
     _poolSavageLandDinosaur,
     _poolSavageSmash,

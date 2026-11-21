@@ -770,6 +770,7 @@ import _poolSanctumSeeker from "../pool/sanctum-seeker.js";
 import _poolSanguineEvangelist from "../pool/sanguine-evangelist.js";
 import _poolSanitationAutomaton from "../pool/sanitation-automaton.js";
 import _poolSarumanTheWhiteHand from "../pool/saruman-the-white-hand.js";
+import _poolSasayasEssence from "../pool/sasayas-essence.js";
 import _poolScamperingScorcher from "../pool/scampering-scorcher.js";
 import _poolScavengerFolk from "../pool/scavenger-folk.js";
 import _poolScorpionsSting from "../pool/scorpions-sting.js";
@@ -1850,6 +1851,7 @@ const shard: CardShard = {
     _poolSanguineEvangelist,
     _poolSanitationAutomaton,
     _poolSarumanTheWhiteHand,
+    _poolSasayasEssence,
     _poolScamperingScorcher,
     _poolScavengerFolk,
     _poolScorpionsSting,
