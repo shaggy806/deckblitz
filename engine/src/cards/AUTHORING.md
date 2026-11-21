@@ -3041,7 +3041,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   Yeti; Cult of Skaro; Summon: Magus Sisters): picked as it goes on the stack,
   before its targets, among the modes it could have, so players respond knowing
   it (rules 603.3c, 700.2b); `chooseIf` (a `StaticCondition`) is "… you choose
-  one instead", read then (Typhoid Mary, Fractured).
+  one instead", read then (Typhoid Mary, Fractured). `exactlyIf: { condition,
+  modes }` is "choose one. If [condition], **choose both instead**" (Prophetic
+  Titan's delirium, `modes: 2`): exactly that many while the condition holds as
+  the modes are chosen, not checked again on resolution (the ruling); only as
+  many as have a legal target. `exact-mode-count.test.ts`.
   `random-mode-announced.test.ts`. `random: true` alone is "choose one **at random**"
   as the effect applies (Crystalline Giant): nobody is asked — one mode is
   picked on the game's seeded random stream, each equally likely, among those

@@ -11273,6 +11273,14 @@ export type EffectSpec =
        * you choose one instead" (Typhoid Mary, Fractured): read as it goes on
        * the stack, and then it's a choice like any other. */
       readonly chooseIf?: StaticCondition;
+      /** "Choose one. If [condition], **choose both instead**" (Prophetic
+       * Titan's delirium): exactly `modes` modes while `condition` holds —
+       * read once, as the modes are chosen (an `announced` trigger's as it's
+       * put on the stack, rule 700.2b; the ruling: not checked again as it
+       * resolves) — else `minModes` to `maxModes`. A mode with no legal
+       * target can't be chosen (rule 603.3c), so with fewer on offer it's as
+       * many as there are. Not read on an activated ability. */
+      readonly exactlyIf?: { readonly condition: StaticCondition; readonly modes: number };
     }
   | {
       /** Apply `then` if `condition` holds at resolution, otherwise `else`
@@ -25403,9 +25411,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ? spec.modes.filter((mode) => mode.onlyIf === undefined || ctx.conditionMet(mode.onlyIf))
         : spec.modes;
       if (open.length === 0) return;
+      const exactly = spec.exactlyIf !== undefined && ctx.conditionMet(spec.exactlyIf.condition) ? spec.exactlyIf.modes : undefined;
       ctx.chooseModes(
-        Math.min(spec.minModes, open.length),
-        amountValue(spec.maxModes, ctx),
+        Math.min(exactly ?? spec.minModes, open.length),
+        exactly ?? amountValue(spec.maxModes, ctx),
         searchableModes(open, ctx),
         undefined,
         undefined,

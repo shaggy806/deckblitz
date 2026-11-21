@@ -40858,9 +40858,14 @@ export class Game {
           ? [i]
           : [],
       );
-      const maxModes = Math.min(amountValue(modal.maxModes, ctx), offered.length);
+      // "If [condition], choose both instead" (Prophetic Titan): read now,
+      // as the modes are chosen (rule 700.2b), and not again.
+      const exactly =
+        modal.exactlyIf !== undefined && ctx.conditionMet(modal.exactlyIf.condition) ? modal.exactlyIf.modes : undefined;
+      const minModes = exactly ?? modal.minModes;
+      const maxModes = Math.min(exactly ?? amountValue(modal.maxModes, ctx), offered.length);
       // "You may choose two" with fewer than two on offer: none it is.
-      if (maxModes <= 0 || (modal.optional === true && maxModes < modal.minModes)) {
+      if (maxModes <= 0 || (modal.optional === true && maxModes < minModes)) {
         this.emit({ type: "trigger-removed", source: trigger.sourceObjectId, reason: "no modes chosen" });
         return "done";
       }
@@ -40880,7 +40885,7 @@ export class Game {
         player: trigger.controller,
         source: trigger.sourceObjectId,
         announcing: true,
-        minModes: Math.min(modal.minModes, maxModes),
+        minModes: Math.min(minModes, maxModes),
         maxModes,
         ...(modal.optional === true ? { orNone: true } : {}),
         modes: offered.map((i) => ({ text: modal.modes[i].text, effect: modal.modes[i].effect })),

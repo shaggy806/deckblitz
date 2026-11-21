@@ -3165,7 +3165,8 @@
   "effect:for-each-player-destroy-then-token-per-destroyed-controller",
   "effect:for-each-player-destroy-then-token-per-destroyed-controller",
   "amount:opponents-controlling-this-way",
-  "effect:highest-life-wins-or-draw"
+  "effect:highest-life-wins-or-draw",
+  "effect:conditional-exact-mode-count"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
