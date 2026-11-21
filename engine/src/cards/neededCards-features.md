@@ -325,6 +325,12 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The discarded cards' total mana value — found built 2026-11-21
+
+The key `amount:discarded-as-cost-total-mana-value` needed no engine code: a `sum` aggregate of `mana-value` over `{
+paid: "discarded" }`, the cards a `discard: "x"` additional cost took. Nahiri's Wrath (18000).
+`test/discarded-cost-mana-value.test.ts`.
+
 ### What a permanent's spell sacrificed, read by its own trigger — built 2026-11-21
 
 The key `amount:emerge-sacrificed-creature` (and `condition:self-emerge-paid`, which was there: the entry's `castVia:

@@ -3137,7 +3137,8 @@
   "static:spend-mana-only-as-colorless",
   "static:color-cards-outside-battlefield",
   "amount:emerge-sacrificed-creature",
-  "condition:self-emerge-paid"
+  "condition:self-emerge-paid",
+  "amount:discarded-as-cost-total-mana-value"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -1527,7 +1527,9 @@ names any set a card refers to, and every consumer takes it: an aggregate's
 `in`, a filter's `inSet` ("one of them"), a share clause ("shares a creature
 type with the exiled card": `sharesCreatureTypeWith: { thisWay: "exiled" }`),
 an amount that reads one object (`{ powerOf: { paid: "sacrificed" } }`, "the
-sacrificed creature's power"), `create-token-copy`'s `of`. The sets: `{
+sacrificed creature's power") or sums them (Nahiri's Wrath's "the total mana value of the discarded cards",
+a "discard X cards" cost's, is `{ aggregate: "sum", of: "mana-value", filter: {}, in: { paid: "discarded" }
+}`), `create-token-copy`'s `of`. The sets: `{
 thisWay, who?, byOwner? }`; `{ paid: "sacrificed" | "discarded" | "exiled" |
 "revealed" | "tapped" | "unattached" | "beheld" | "returned" }`, what the cost took (`"beheld"`: what a
 behold cost revealed or chose, card or permanent — Dragon's Fire's "the power of that card or
