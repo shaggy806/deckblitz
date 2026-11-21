@@ -5811,6 +5811,43 @@ function hasGrantedAbility(
   }
 }
 
+/** {@link hasGrantedAbility}, counted: the sum of `count` over every static
+ * that reaches `object` with a grant (each instance its own ability — two
+ * Tazris give a creature two). */
+function grantedAbilityCount(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  view: TargetView,
+  count: (ability: StaticAbility) => number,
+  lostAt: number | null,
+): number {
+  const sources = abilityGrantSources(state, registry);
+  if (sources.length === 0 || grantedAbilitiesInProgress.has(object.id)) return 0;
+  const reach: TargetView =
+    view.inFold === true
+      ? view
+      : { keywords: () => computeCharacteristics(state, registry, object.id).keywords };
+  grantedAbilitiesInProgress.add(object.id);
+  try {
+    let total = 0;
+    for (const { source, ability } of sources) {
+      const n = count(ability);
+      if (
+        n > 0 &&
+        grantOutlastsLoss(lostAt, source.timestamp) &&
+        staticReaches(state, registry, source, ability, object, reach) &&
+        (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
+      ) {
+        total += n;
+      }
+    }
+    return total;
+  } finally {
+    grantedAbilitiesInProgress.delete(object.id);
+  }
+}
+
 /**
  * The colours of the intrinsic "{T}: Add [mana]" abilities `object` has
  * (rule 305.6): one for each basic land type it has now, as a land — a type
@@ -6041,15 +6078,21 @@ export function hasManaAbility(
  * Whether `object` has an activated ability (rule 602), printed or granted:
  * with `mana` given, only one that is or isn't a mana ability (rule 605.1a);
  * with `tapCost`, only one with the {T} symbol in its cost (rule 107.5) — a
- * basic land type's intrinsic "{T}: Add" (rule 305.6) among them.
+ * basic land type's intrinsic "{T}: Add" (rule 305.6) among them. Cycling is
+ * one wherever the card is (rule 702.29a: activated from the hand, but the
+ * card has it on the battlefield too — Tazri, Stalwart Survivor's ruling).
+ * With `atLeast`, that many such abilities, each instance counted on its own
+ * (two of the same granted ability are two): "activate only if this creature
+ * has another activated ability" is two, the one being activated among them.
  */
 export function hasActivatedAbilityOf(
   state: GameState,
   registry: CardRegistry,
   object: GameObject,
-  want: { readonly mana?: boolean; readonly tapCost?: boolean },
+  want: { readonly mana?: boolean; readonly tapCost?: boolean; readonly atLeast?: number },
   view: TargetView = {},
 ): boolean {
+  if (want.atLeast !== undefined && want.atLeast > 1) return activatedAbilityCount(state, registry, object, want, view) >= want.atLeast;
   const onBattlefield = object.zone === "battlefield";
   const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
   const mana = want.mana;
@@ -6057,6 +6100,7 @@ export function hasActivatedAbilityOf(
     (mana === undefined || isManaAbility(ability) === mana) && (want.tapCost !== true || ability.cost.tap === true);
   const def = registry.get(rulesTextName(object));
   if (lostAt === null && def.activated.some((a, i) => fits(a) && !inactiveStandIn(state, registry, object, i))) return true;
+  if (lostAt === null && mana !== true && want.tapCost !== true && def.cycling !== null) return true;
   // A basic land type's mana ability (rule 305.6).
   if (mana !== false && intrinsicManaColors(state, registry, object).length > 0) return true;
   if (object.modifiers.some((m) => modifierGrantApplies(m, lostAt) && m.grantsActivated?.some(fits) === true)) return true;
@@ -6071,6 +6115,45 @@ export function hasActivatedAbilityOf(
   if (manaLostAt === null && def.activated.some((a, i) => fitsMana(a) && !inactiveStandIn(state, registry, object, i))) return true;
   if (object.modifiers.some((m) => modifierGrantApplies(m, manaLostAt) && m.grantsActivated?.some(fitsMana) === true)) return true;
   return hasGrantedAbility(state, registry, object, view, (ability) => ability.grantsActivated?.some(fitsMana) === true, manaLostAt);
+}
+
+/** How many activated abilities `object` has that `want` asks for, as
+ * {@link hasActivatedAbilityOf} reads them: printed (cycling and its other
+ * cyclings among them), a basic land type's each, and every one granted. */
+function activatedAbilityCount(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  want: { readonly mana?: boolean; readonly tapCost?: boolean },
+  view: TargetView,
+): number {
+  const onBattlefield = object.zone === "battlefield";
+  const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
+  // The mana abilities a loss "except mana abilities" left (Blood Sun).
+  const manaLostAt = lostAt === null ? null : manaAbilitiesLostAt(state, registry, object);
+  const mana = want.mana;
+  const fits = (ability: ActivatedAbility): boolean =>
+    (mana === undefined || isManaAbility(ability) === mana) && (want.tapCost !== true || ability.cost.tap === true);
+  // Each ability is counted against the loss that would take it: a mana
+  // ability's own (`manaLostAt`), any other's `lostAt`.
+  const lostFor = (ability: ActivatedAbility): number | null => (isManaAbility(ability) ? manaLostAt : lostAt);
+  const def = registry.get(rulesTextName(object));
+  let n = 0;
+  def.activated.forEach((a, i) => {
+    if (fits(a) && lostFor(a) === null && !inactiveStandIn(state, registry, object, i)) n += 1;
+  });
+  if (lostAt === null && mana !== true && want.tapCost !== true && def.cycling !== null) n += 1 + (def.moreCycling?.length ?? 0);
+  if (mana !== false) n += intrinsicManaColors(state, registry, object).length;
+  for (const m of object.modifiers) {
+    for (const a of m.grantsActivated ?? []) if (fits(a) && modifierGrantApplies(m, lostFor(a))) n += 1;
+  }  if (onBattlefield) {
+    // A grant newer than the loss still counts (rule 613.7).
+    const granted = (manaOnes: boolean) => (ability: StaticAbility): number =>
+      (ability.grantsActivated ?? []).filter((a) => fits(a) && isManaAbility(a) === manaOnes).length;
+    n += grantedAbilityCount(state, registry, object, view, granted(false), lostAt);
+    n += grantedAbilityCount(state, registry, object, view, granted(true), manaLostAt);
+  }
+  return n;
 }
 
 /**

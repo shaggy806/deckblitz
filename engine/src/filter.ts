@@ -1266,9 +1266,13 @@ export interface CardFilter {
    * `tapCost: true`, one with the {T} symbol in its cost (rule 107.5) —
    * Magewright's Stone's "a creature that has an activated ability with {T} in
    * its cost"; a cost that taps other permanents ("tap an untapped creature
-   * you control") doesn't count, per its ruling.
+   * you control") doesn't count, per its ruling. Cycling counts wherever the
+   * card is. With `atLeast`, that many, each instance its own: Tazri,
+   * Stalwart Survivor's granted "activate only if this creature has another
+   * activated ability" is `{ atLeast: 2 }` on its source, the ability itself
+   * one of them.
    */
-  readonly hasActivatedAbility?: { readonly mana?: boolean; readonly tapCost?: boolean };
+  readonly hasActivatedAbility?: { readonly mana?: boolean; readonly tapCost?: boolean; readonly atLeast?: number };
   /** Above the applying permanent in its owner's graveyard (rule 404.2: a
    * graveyard keeps its order): Nether Shadow's "with three or more creature
    * cards above it". The top is the card put there last. */
