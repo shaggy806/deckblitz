@@ -103,7 +103,7 @@ export function PileViewer({ title, resolve, labels, separate, choose, collapsed
         ))}
         {separate ? (
           <div className="zone-viewer-footer">
-            <button type="button" onClick={() => separate.onConfirm(piles)}>
+            <button type="button" className="primary" onClick={() => separate.onConfirm(piles)}>
               Confirm piles
             </button>
           </div>

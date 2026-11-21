@@ -340,7 +340,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
             {host ? (
               <button
                 type="button"
-                className={`start-game-btn${pending('start')}`}
+                className={`start-game-btn primary${pending('start')}`}
                 data-tour="lobby-start"
                 disabled={!allReady}
                 onClick={game.startGame}

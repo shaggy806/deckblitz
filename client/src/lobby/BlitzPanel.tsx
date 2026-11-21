@@ -195,7 +195,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
             >
               Cancel
             </button>
-            <button type="submit" className="landing-join-btn" disabled={pasted.trim() === ''}>
+            <button type="submit" className="landing-join-btn primary" disabled={pasted.trim() === ''}>
               Blitz
             </button>
           </div>

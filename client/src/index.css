@@ -7,6 +7,10 @@
 
 :root {
   color-scheme: dark;
+  /* Checkboxes, radios and sliders tick and fill in the site's gold (it
+     inherits), not the browser's blue. Set here 2026-11-21; before, only the
+     volume sliders had it. */
+  accent-color: var(--accent);
   /* Mana (2026-10-06): a neutral near-black, so the colour comes from the
      game -- a vivid gold accent (links, selection, the primary button), and
      the seats as black, red, green and blue mana at full strength. Chosen
@@ -272,7 +276,18 @@ input:where([type='text'], [type='search'], [type='email'], [type='url'], :not([
   border-radius: 0;
   padding: 5px 10px;
 }
-input:focus-visible {
+/* One focus ring for the whole site, square and gold like the rest of it.
+   Until 2026-11-21 only `input` had one, and a button, link, select or
+   textarea reached by Tab drew the browser's own: white, with rounded
+   corners. `:where()` adds no specificity, so a component that draws its own
+   focus (a board tile's lift, `.lib-card-open`'s wider ring) still wins. */
+:where(button, a, input, select, summary, [tabindex]:not([tabindex='-1'])):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* A text box shows its ring on every click, not only from the keyboard, so
+   it gets the dimmer gold (a checkbox or slider keeps the bright one). */
+:where(textarea, input:where([type='text'], [type='search'], [type='email'], [type='url'], [type='number'], [type='password'], :not([type]))):focus-visible {
   outline: 2px solid var(--accent-dim);
   outline-offset: 1px;
 }

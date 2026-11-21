@@ -378,7 +378,7 @@ function ImportPanel({
           <button type="button" onClick={paste} disabled={loading}>
             Paste from clipboard
           </button>
-          <button type="submit" disabled={!text.trim() || loading}>
+          <button type="submit" className="primary" disabled={!text.trim() || loading}>
             <StableLabel widest={['Importing…']}>{loading ? 'Importing…' : 'Import'}</StableLabel>
           </button>
         </div>

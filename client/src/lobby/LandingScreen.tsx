@@ -283,7 +283,7 @@ export function LandingScreen({
                 spellCheck={false}
                 inputMode="text"
               />
-              <button type="submit" className="landing-join-btn" disabled={joinCode.length < ROOM_CODE_LENGTH}>
+              <button type="submit" className="landing-join-btn primary" disabled={joinCode.length < ROOM_CODE_LENGTH}>
                 Join
               </button>
             </div>

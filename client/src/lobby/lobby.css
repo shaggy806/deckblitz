@@ -476,9 +476,9 @@ button.seat-add-panel:hover {
   padding: 10px 28px;
   font-size: var(--text-base);
   font-weight: 600;
-  color: var(--good);
-  border-color: var(--good);
-  background: color-mix(in srgb, var(--good) 12%, transparent);
+  /* Its fill is `button.primary`'s gold, as every other "next thing to do"
+     is (it was a green outline until 2026-11-21; green stays the seats'
+     "ready"). */
 }
 .start-game-btn:disabled {
   cursor: default;

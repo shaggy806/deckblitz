@@ -132,3 +132,76 @@ discs already stop above one chip (`.mt-body:has(> .card-flags) > .mt-kw.below-s
 fix): the outline is that rule for every tile (`max-height: calc(100% - 17px)`), a check that two
 or three chips stacked don't bring it back (the reserve is one chip's height), and a crowded dev
 room for `e2e/stack-keywords.spec.ts` to measure, since its `KWSTK` tiles are too large to wrap.
+
+**The cohesion audit's changes.** Found 2026-11-21 (the user: "examine all the elements on each page
+and in each stage of the game … list any changes that you think should be made to make the website
+more cohesive"). A walk of the landing page, About, the card library, the deck builder, the lobby
+and a game from the mulligan to the result, at 1920x1080 with a 1366x768 spot check, in Playwright
+Chromium: a screenshot of each state, and every kind of control hovered and focused once with its
+computed style read before and after. Each item is a place where one page or stage breaks a pattern
+the rest of the site follows. The numbers are the audit's own and stay as items land, so "item 7"
+means the same thing in every session. Not looked at: the scenario builder, the Capture panel and
+the test-rooms menu (dev only), the tutorials past their first step, spectating, 2560x1440, and
+most of the rarer decision prompts.
+
+Site-wide:
+
+1-3. Landed 2026-11-21 (`COMPLETED.md`): the focus ring, gold checkboxes, and `button.primary` on
+   the confirming buttons. Two things left from item 3. **Pass (space) is still plain**, on
+   purpose: it is the do-nothing answer, and lit for the whole game it would be the loudest thing
+   on the board — the user's call. **The same gold comes from six classes**: `button.primary`,
+   `.result-primary`, `.seat-panel-ready-btn.next`, `.coach-next`, `.bp-primary`, `.rr-primary`
+   (and `.landing-cta`); fold them into `primary` when one is next touched. The decision banner's
+   prompts were given `primary` by reading `App.tsx`'s buttons, and only the attack and damage
+   ones were seen live: a prompt whose confirming button is still grey is a miss, not a choice.
+4. **The primary button's side varies.** Left in the mulligan (Keep | Mulligan) and the concede
+   confirmation (Concede | Cancel), right everywhere else (the result, the tour, blitz, import, the
+   decision banner).
+5. **Cancel is a link in some places and a button in others.** The blitz panel's Cancel and the
+   tour's "Exit tour" are underlined `.link-button`s; import, concede and the decision banner use
+   buttons.
+6. **Text links answer the pointer three ways.** The legal footer's change colour
+   (`.site-notice a:hover`), the About page's do nothing (`.about-page a`), and `.link-button`
+   (Back, Main menu, "Build or import a deck", Cancel) does nothing visible. No global `a:hover`.
+7. **Three back links to the same place.** "← Deck Blitz" (About: not underlined, smaller),
+   "← Back" (library, deck builder), "← Main menu" (lobby).
+8. **Close controls differ.** Three sizes of "×" (`.lib-overlay-close` 20px, `.deck-picker-close`
+   16px, `.help-callout-close` 18px) and a text "Close" button (the zone viewer, History).
+9. **Button casing.** "Start Game" and "Pass Turn" are Title Case; everything else is sentence
+   case ("Create a game", "Auto-pass", "View the board", "Copy invite link").
+10. **Gold and dark panel borders follow no rule.** Gold: the mulligan, the result, the tour, the
+    ability menu, keyword tips. Dark: settings, help, the deck builder's context menu, the zone
+    viewer, the deck picker, the library's card overlay. The decision banner, the one surface that
+    always means "your move", is dark while declaring attackers and tan while targeting. Pick the
+    rule (gold = asking you something) and apply it.
+11. **Section labels come in three styles.** Bebas ("ROOM SETTINGS", "TEST ROOMS"), bold Barlow
+    ("PRIORITY", "ANIMATIONS", "SOUND" in the settings popover) and spaced muted caps ("TUTORIALS",
+    "MY DECKS", "STARTING LIFE").
+12. **Small controls drift in size.** The top bar's buttons are 11px text, 21px tall; the bottom
+    controls 15px, 30px. The deck builder's Import and "+ New" are 11px, 19px tall, and its row
+    buttons (☆ − + ×) about 26x20.
+
+Page by page:
+
+13. **Page titles: three sizes and layouts.** About's is the largest, the deck builder's sits under
+    its back link, the library's is small and on the back link's line.
+14. **The same type chips read two ways.** "All / Creature / Instant" in the library
+    (`text-transform: capitalize`), "all / creature / instant" in the deck builder.
+15. **The library overlay's printings rows** (`.lib-printing`) are buttons that look like plain
+    text until hovered.
+16. **The deck builder's hover preview** is the app's own text card where the library shows the
+    card's image, and it opens over the rows beside the one hovered.
+17. **The deck builder's legal notice** floats directly under the one-line empty prompt, and in the
+    import view is centred on the page while the form is left-aligned.
+18. **Lobby.** The "other" starting-life box (`.rs-life-input`) looks disabled while editable; a
+    bot's seat leaves a blank gap (an empty disabled `.seat-panel-ready-btn.seat-action-room`)
+    where a person's has Ready.
+19. **Card faces in a game.** Hand cards put the art above the name (`.card-tile.art-first`);
+    board tiles, the zone viewer's cards and hover previews put the name above the art.
+20. **Corner radii in a game.** Board tiles 5px (`.mini-tile`), hand cards and commander tiles
+    8px; the stack's "PROMPTED BY" label (`.stack-entry-label`, 999px) and its eye toggle are
+    rounded pills on an otherwise square interface.
+21. **A targetable player panel** (`.player-panel.targetable`) gets an outline and a pointer but
+    no hover response, where a targetable permanent lifts.
+22. **The result screen.** The top bar still reads "Alice's turn · Precombat Main Phase" with M1
+    lit, and the result is said again in the bottom strip.

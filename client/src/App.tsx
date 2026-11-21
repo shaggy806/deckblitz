@@ -5587,6 +5587,7 @@ function Table({
             ))}
             <button
               type="button"
+              className="primary"
               disabled={modePicks.length < minModes || modePicks.length > maxModes}
               onClick={() =>
                 askLifeThen(modesChoiceAction,(life) =>
@@ -5703,6 +5704,7 @@ function Table({
         <button
           type="button"
           disabled={!complete}
+          className="primary"
           onClick={confirmModes}
         >
           Confirm
@@ -5741,6 +5743,7 @@ function Table({
         </span>
         <button
           type="button"
+          className="primary"
           disabled={
             offer.anyNumber === true
               ? // A per-tap reduction's fewest (Explosive Singularity).
@@ -5900,6 +5903,7 @@ function Table({
         </button>
         <button
           type="button"
+          className="primary"
           disabled={!valid}
           onClick={() => {
             setCounterPicks({})
@@ -5971,6 +5975,7 @@ function Table({
         {/* Never disabled: leaving everything as it is is an answer too. */}
         <button
           type="button"
+          className={adding + removing > 0 ? 'primary' : undefined}
           onClick={() => {
             const ids = timeTravelAction.eligible
             const add = ids.filter((id) => pickFor(id) === 1)
@@ -6012,6 +6017,7 @@ function Table({
         </span>
         <button
           type="button"
+          className="primary"
           disabled={upTo ? sum > total : sum !== total}
           onClick={() => {
             setPendingDivision(null)
@@ -6065,6 +6071,7 @@ function Table({
         </span>
         <button
           type="button"
+          className="primary"
           disabled={!offer.manaAffordable && picks.length === 0}
           onClick={() => {
             setPendingConvoke(null)
@@ -6111,6 +6118,7 @@ function Table({
         </span>
         <button
           type="button"
+          className="primary"
           disabled={picks.length < least}
           onClick={() => {
             setPendingWaterbend(null)
@@ -6136,6 +6144,7 @@ function Table({
         </span>
         <button
           type="button"
+          className="primary"
           disabled={sacrificePicks.length !== sacrificeAction.count}
           onClick={() =>
             game.dispatch({ type: 'sacrifice', player: seat, permanents: [...sacrificePicks] })
@@ -6187,6 +6196,7 @@ function Table({
           </button>
           <button
             type="button"
+            className="primary"
             onClick={() => game.dispatch({ type: 'separate-piles', player: seat, piles: piles.map((pile) => [...pile]) })}
           >
             Confirm piles
@@ -6325,6 +6335,7 @@ function Table({
         </button>
         <button
           type="button"
+          className="primary"
           disabled={permanentPicks.length < min || permanentPicks.length > max || overCap || breaksTogether}
           onClick={() =>
             game.dispatch({ type: 'choose-permanents', player: seat, permanents: [...permanentPicks] })
@@ -6370,6 +6381,7 @@ function Table({
         {/* Never disabled: choosing nothing is a legal answer (rule 701.27a). */}
         <button
           type="button"
+          className={proliferatePicks.length > 0 ? 'primary' : undefined}
           onClick={() =>
             game.dispatch({
               type: 'proliferate',
@@ -6615,6 +6627,7 @@ function Table({
         <button
           type="button"
           disabled={bottomPicks.length !== bottomAction.count}
+          className="primary"
           onClick={confirmBottom}
         >
           Confirm
@@ -6684,7 +6697,7 @@ function Table({
           </button>
         ) : null}
         {grouped ? (
-          <button type="button" disabled={!mayFinishGroup(activeTargeting)} onClick={() => pickTarget(null)}>
+          <button type="button" className="primary" disabled={!mayFinishGroup(activeTargeting)} onClick={() => pickTarget(null)}>
             Done
           </button>
         ) : slotSpec !== undefined && isOptionalSpec(slotSpec) ? (
@@ -6810,7 +6823,7 @@ function Table({
           style={{ width: '4rem' }}
         />
         <span>(max {pxMax})</span>
-        <button type="button" onClick={confirmX}>
+        <button type="button" className="primary" onClick={confirmX}>
           Confirm
         </button>
         <button type="button" onClick={() => setPendingX(null)}>
@@ -7035,6 +7048,9 @@ function Table({
         <button
           type="button"
           disabled={unmetMusts.length > 0 || companyBroken.length > 0 || assignedCount < declareAtLeast || attackAtWrong}
+          // Gold once there is something to confirm, as the zone viewer's
+          // Confirm is: "No attacks" stays one plain answer among the others.
+          className={enterAttackingAction !== undefined || assignedCount > 0 ? 'primary' : undefined}
           onClick={confirmAttackers}
         >
           {enterAttackingAction !== undefined ? (
@@ -7212,6 +7228,7 @@ function Table({
             lonelyBlockers.length > 0 ||
             n < declareAtLeast
           }
+          className={n > 0 ? 'primary' : undefined}
           onClick={confirmBlockers}
         >
           <StableLabel widest={['No blocks', `Block (${blockAction.eligible.length})`]}>
@@ -7254,6 +7271,7 @@ function Table({
             (discardAction.upTo === true ? discardPicks.length > discardAction.count : discardPicks.length !== discardAction.count) &&
             !(discardPicks.length === 1 && (discardAction.orOneOf ?? []).includes(discardPicks[0]))
           }
+          className="primary"
           onClick={confirmDiscard}
         >
           Discard
@@ -7468,6 +7486,7 @@ function Table({
         </button>
         <button
           type="button"
+          className="primary"
           disabled={!valid}
           onClick={() =>
             game.dispatch({

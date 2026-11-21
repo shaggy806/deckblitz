@@ -196,7 +196,6 @@
 }
 .motion-volume input[type='range'] {
   width: 10em;
-  accent-color: var(--accent);
 }
 .motion-volume-value {
   min-width: 3em;
