@@ -284,6 +284,7 @@ import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvinWaterdeepOpportunist from "../pool/evin-waterdeep-opportunist.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
+import _poolExoticPets from "../pool/exotic-pets.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
 import _poolExperimentalLabStaffRoom from "../pool/experimental-lab-staff-room.js";
 import _poolExtraplanarLens from "../pool/extraplanar-lens.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolEvinWaterdeepOpportunist,
     _poolEvolvingAdaptive,
     _poolExclusionMage,
+    _poolExoticPets,
     _poolExpeditionHealer,
     _poolExperimentalLabStaffRoom,
     _poolExtraplanarLens,

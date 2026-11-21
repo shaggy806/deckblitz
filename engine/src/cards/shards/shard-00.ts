@@ -637,6 +637,7 @@ import _poolPlaguecrafter from "../pool/plaguecrafter.js";
 import _poolPlatedOnslaught from "../pool/plated-onslaught.js";
 import _poolPledgeOfUnity from "../pool/pledge-of-unity.js";
 import _poolPlunderingPirate from "../pool/plundering-pirate.js";
+import _poolPossessedPortal from "../pool/possessed-portal.js";
 import _poolPowerFist from "../pool/power-fist.js";
 import _poolPowerSurge from "../pool/power-surge.js";
 import _poolPredatoryHunger from "../pool/predatory-hunger.js";
@@ -1696,6 +1697,7 @@ const shard: CardShard = {
     _poolPlatedOnslaught,
     _poolPledgeOfUnity,
     _poolPlunderingPirate,
+    _poolPossessedPortal,
     _poolPowerFist,
     _poolPowerSurge,
     _poolPredatoryHunger,

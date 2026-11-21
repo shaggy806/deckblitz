@@ -184,6 +184,7 @@ import _poolDarkslickShores from "../pool/darkslick-shores.js";
 import _poolDaxossTorment from "../pool/daxoss-torment.js";
 import _poolDayOfBlackSun from "../pool/day-of-black-sun.js";
 import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
+import _poolDebtOfLoyalty from "../pool/debt-of-loyalty.js";
 import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
 import _poolDeepfathomEcho from "../pool/deepfathom-echo.js";
@@ -1208,6 +1209,7 @@ const shard: CardShard = {
     _poolDaxossTorment,
     _poolDayOfBlackSun,
     _poolDeathHoodCobra,
+    _poolDebtOfLoyalty,
     _poolDeconstruct,
     _poolDeepAnalysis,
     _poolDeepfathomEcho,

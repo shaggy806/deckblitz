@@ -337,6 +337,7 @@ import _poolFleshCarver from "../pool/flesh-carver.js";
 import _poolFluctuator from "../pool/fluctuator.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
 import _poolForagingWickermaw from "../pool/foraging-wickermaw.js";
+import _poolForcefield from "../pool/forcefield.js";
 import _poolForswornPaladin from "../pool/forsworn-paladin.js";
 import _poolFoulTongueShriek from "../pool/foul-tongue-shriek.js";
 import _poolFoundryScreecher from "../pool/foundry-screecher.js";
@@ -1387,6 +1388,7 @@ const shard: CardShard = {
     _poolFluctuator,
     _poolFootSoldiers,
     _poolForagingWickermaw,
+    _poolForcefield,
     _poolForswornPaladin,
     _poolFoulTongueShriek,
     _poolFoundryScreecher,

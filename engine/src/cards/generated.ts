@@ -6562,6 +6562,7 @@ import _poolDeathsprout from "./pool/deathsprout.js";
 import _poolDebilitatingInjury from "./pool/debilitating-injury.js";
 import _poolDebrisBeetle from "./pool/debris-beetle.js";
 import _poolDebrisFieldCrusher from "./pool/debris-field-crusher.js";
+import _poolDebtOfLoyalty from "./pool/debt-of-loyalty.js";
 import _poolDebtToTheDeathless from "./pool/debt-to-the-deathless.js";
 import _poolDebtToTheKami from "./pool/debt-to-the-kami.js";
 import _poolDebtorsKnell from "./pool/debtors-knell.js";
@@ -9018,6 +9019,7 @@ import _poolExosuitSavior from "./pool/exosuit-savior.js";
 import _poolExoticCurse from "./pool/exotic-curse.js";
 import _poolExoticDisease from "./pool/exotic-disease.js";
 import _poolExoticOrchard from "./pool/exotic-orchard.js";
+import _poolExoticPets from "./pool/exotic-pets.js";
 import _poolExpandTheSphere from "./pool/expand-the-sphere.js";
 import _poolExpandedAnatomy from "./pool/expanded-anatomy.js";
 import _poolExpandingOoze from "./pool/expanding-ooze.js";
@@ -10239,6 +10241,7 @@ import _poolForcedLanding from "./pool/forced-landing.js";
 import _poolForcedMarch from "./pool/forced-march.js";
 import _poolForcedRetreat from "./pool/forced-retreat.js";
 import _poolForcedWorship from "./pool/forced-worship.js";
+import _poolForcefield from "./pool/forcefield.js";
 import _poolForcefulDenial from "./pool/forceful-denial.js";
 import _poolForcemageAdvocate from "./pool/forcemage-advocate.js";
 import _poolForebearsBlade from "./pool/forebears-blade.js";
@@ -20913,6 +20916,7 @@ import _poolPossessedBarbarian from "./pool/possessed-barbarian.js";
 import _poolPossessedCentaur from "./pool/possessed-centaur.js";
 import _poolPossessedGoat from "./pool/possessed-goat.js";
 import _poolPossessedNomad from "./pool/possessed-nomad.js";
+import _poolPossessedPortal from "./pool/possessed-portal.js";
 import _poolPossessedSkaab from "./pool/possessed-skaab.js";
 import _poolPossessionEngine from "./pool/possession-engine.js";
 import _poolPossibilityStorm from "./pool/possibility-storm.js";
@@ -40311,6 +40315,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDebilitatingInjury,
   _poolDebrisBeetle,
   _poolDebrisFieldCrusher,
+  _poolDebtOfLoyalty,
   _poolDebtToTheDeathless,
   _poolDebtToTheKami,
   _poolDebtorsKnell,
@@ -42767,6 +42772,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExoticCurse,
   _poolExoticDisease,
   _poolExoticOrchard,
+  _poolExoticPets,
   _poolExpandTheSphere,
   _poolExpandedAnatomy,
   _poolExpandingOoze,
@@ -43988,6 +43994,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForcedMarch,
   _poolForcedRetreat,
   _poolForcedWorship,
+  _poolForcefield,
   _poolForcefulDenial,
   _poolForcemageAdvocate,
   _poolForebearsBlade,
@@ -54662,6 +54669,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPossessedCentaur,
   _poolPossessedGoat,
   _poolPossessedNomad,
+  _poolPossessedPortal,
   _poolPossessedSkaab,
   _poolPossessionEngine,
   _poolPossibilityStorm,
@@ -74073,6 +74081,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/debilitating-injury": _poolDebilitatingInjury,
   "pool/debris-beetle": _poolDebrisBeetle,
   "pool/debris-field-crusher": _poolDebrisFieldCrusher,
+  "pool/debt-of-loyalty": _poolDebtOfLoyalty,
   "pool/debt-to-the-deathless": _poolDebtToTheDeathless,
   "pool/debt-to-the-kami": _poolDebtToTheKami,
   "pool/debtors-knell": _poolDebtorsKnell,
@@ -76529,6 +76538,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/exotic-curse": _poolExoticCurse,
   "pool/exotic-disease": _poolExoticDisease,
   "pool/exotic-orchard": _poolExoticOrchard,
+  "pool/exotic-pets": _poolExoticPets,
   "pool/expand-the-sphere": _poolExpandTheSphere,
   "pool/expanded-anatomy": _poolExpandedAnatomy,
   "pool/expanding-ooze": _poolExpandingOoze,
@@ -77750,6 +77760,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/forced-march": _poolForcedMarch,
   "pool/forced-retreat": _poolForcedRetreat,
   "pool/forced-worship": _poolForcedWorship,
+  "pool/forcefield": _poolForcefield,
   "pool/forceful-denial": _poolForcefulDenial,
   "pool/forcemage-advocate": _poolForcemageAdvocate,
   "pool/forebears-blade": _poolForebearsBlade,
@@ -88424,6 +88435,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/possessed-centaur": _poolPossessedCentaur,
   "pool/possessed-goat": _poolPossessedGoat,
   "pool/possessed-nomad": _poolPossessedNomad,
+  "pool/possessed-portal": _poolPossessedPortal,
   "pool/possessed-skaab": _poolPossessedSkaab,
   "pool/possession-engine": _poolPossessionEngine,
   "pool/possibility-storm": _poolPossibilityStorm,
