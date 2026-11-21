@@ -3310,7 +3310,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     wild vote" with `reveal-until-count`);
   - condition `{ kind: "vote-won", option: i }` — "if time gets **more
     votes**", more than each other option; "or the vote is tied" is its
-    `else` (Plea for Power, Sail into the West); `{ kind: "votes-cast" }` —
+    `else` (Plea for Power, Sail into the West); `orTied: true` is "each
+    [option] with the most votes **or tied for most votes**" over named
+    options, no other option having more and this one at least one vote
+    (Council Guardian's colors, a `conditional` per color); `{ kind: "votes-cast" }` —
     any vote at all (Vault 11's "if no creature got votes" under a `not`);
   - `for-each-vote { option?, effect }` — "for each evidence vote,
     investigate" (Tivit), once per vote, voters in turn order from the

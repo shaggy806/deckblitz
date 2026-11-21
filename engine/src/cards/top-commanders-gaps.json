@@ -3145,7 +3145,8 @@
   "amount:discarded-as-cost-total-mana-value",
   "effect:game-is-a-draw",
   "effect:game-is-a-draw",
-  "effect:reflexive-trigger-per-counter-put"
+  "effect:reflexive-trigger-per-counter-put",
+  "condition:vote-option-most-or-tied"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -9776,6 +9776,30 @@ function chosenAndTheRest(text) {
       ],
     };
   }
+  // A vote for colors (Council Guardian): "Starting with you, each player
+  // votes for blue, black, red, or green. ~ gains protection from each color
+  // with the most votes or tied for most votes." — each color's `vote-won`
+  // with `orTied`.
+  if (
+    (m =
+      /^starting with you, each player votes for ((?:(?:white|blue|black|red|green), )+)or (white|blue|black|red|green)\. ~ gains protection from each color with the most votes or tied for most votes\.$/i.exec(
+        text,
+      ))
+  ) {
+    const LETTER = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+    const words = [...m[1].split(", ").filter((w) => w !== ""), m[2]].map((w) => w.toLowerCase());
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "vote", for: { options: words } },
+        ...words.map((word, option) => ({
+          kind: "conditional",
+          condition: { kind: "vote-won", option, orTied: true },
+          then: { kind: "grant-protection", target: "source", from: { colors: [LETTER[word]] }, duration: "permanent" },
+        })),
+      ],
+    };
+  }
   return null;
 }
 

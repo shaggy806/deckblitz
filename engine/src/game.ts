@@ -42305,7 +42305,10 @@ export class Game {
           if ("option" in choice) tally.set(choice.option, (tally.get(choice.option) ?? 0) + 1);
         }
         const mine = tally.get(condition.option) ?? 0;
-        return [...tally].every(([option, n]) => option === condition.option || n < mine) && mine > 0;
+        // `orTied`: "each color with the most votes or tied for most votes"
+        // (Council Guardian) — no other option got more.
+        const beaten = condition.orTied === true ? (n: number) => n <= mine : (n: number) => n < mine;
+        return [...tally].every(([option, n]) => option === condition.option || beaten(n)) && mine > 0;
       }
       if (condition.kind === "votes-cast") return votes().length > 0;
       if (condition.kind === "voted-number") {

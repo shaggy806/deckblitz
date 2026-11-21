@@ -2087,8 +2087,12 @@ export type StaticCondition =
    * `option` of the `vote` this resolution held got more votes than each
    * other option. A tie isn't more, so "if knowledge gets more votes **or
    * the vote is tied**" is the `else`. Only a resolution can answer it.
+   *
+   * `orTied` is "with the most votes **or tied for most votes**" over named
+   * options (Council Guardian's colors): no other option got more. Either
+   * way an option nobody voted for hasn't won.
    */
-  | { readonly kind: "vote-won"; readonly option: number }
+  | { readonly kind: "vote-won"; readonly option: number; readonly orTied?: true }
   /**
    * "If **no creature got votes**" (Vault 11: Voter's Dilemma) is this under
    * a `not`: at least one vote was cast in the `vote` this resolution held.

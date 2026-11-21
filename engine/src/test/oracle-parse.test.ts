@@ -24827,6 +24827,32 @@ describe("the game is a draw, and the last counter removed", () => {
   });
 });
 
+describe("a vote for colors, protection from each most or tied", () => {
+  it("reads Council Guardian's will of the council", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Giant Soldier",
+      oracle_text:
+        "Will of the council — When this creature enters, starting with you, each player votes for blue, black, red, or green. This creature gains protection from each color with the most votes or tied for most votes.",
+    });
+    const grant = (option: number, color: string) => ({
+      kind: "conditional",
+      condition: { kind: "vote-won", option, orTied: true },
+      then: { kind: "grant-protection", target: "source", from: { colors: [color] }, duration: "permanent" },
+    });
+    expect(parsed.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "vote", for: { options: ["blue", "black", "red", "green"] } },
+        grant(0, "U"),
+        grant(1, "B"),
+        grant(2, "R"),
+        grant(3, "G"),
+      ],
+    });
+  });
+});
+
 describe("a counter put, then a reflexive ability per counter put", () => {
   it("reads Etched Slith's 'When you do' with another target permanent or opponent", () => {
     const parsed = parseFace({
