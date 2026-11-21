@@ -11,6 +11,7 @@
     "replacement:skip-every-draw",
     "cost:graveyard-permission-sacrifice-beside-own",
     "mechanic:note-exiled-mana-value",
+    "effect:exile-one-per-color-from-revealed",
     "static:max-hand-size-equal-to-counters",
     "static:max-hand-size-equal-to-count",
     "static:exhaust-reactivation",

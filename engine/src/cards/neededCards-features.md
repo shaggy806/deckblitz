@@ -1919,6 +1919,15 @@ The key `mechanic:note-exiled-mana-value`, for Bell Borca, Spectral Sergeant: th
 kept as the turn's greatest on `GameObject.notedManaValue` (forgotten on a zone change), and the CDA count
 `"greatest-noted-mana-value"`. The only card with the line, so no scaffolder template. `test/note-exiled-mana-value.test.ts`.
 
+### One card a colour from among the revealed — built 2026-11-21
+
+The key `effect:exile-one-per-color-from-revealed`, for Sanar, Innovative First-Year: a zone choice's
+`together: { oneEachColorAmong: CardFilter }`, a `"one-each"` slot per colour among the chooser's matching
+permanents (`Game`'s together resolver, beside `oneEachTypeAmong`). The rest was there: `reveal-until-count`
+(`put: "with-rest", rest: "stay"`), look-and-choose `zone: "revealed-this-way"` to exile, `shuffle-library`,
+`grant-play { thisWay: "exiled" }`. The only card with the line, so no scaffolder template.
+`test/exile-one-per-color.test.ts`.
+
 ### Mana whose rider copies the ability it paid for — built 2026-11-13
 
 By EDHREC rank: Sunken Palace (4621), the only card. `add-mana`'s

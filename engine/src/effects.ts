@@ -312,6 +312,13 @@ export type SearchTogether =
    * type". Each type once however many spells had it (the slots of a
    * `oneEach`, rule 205.2a). */
   | { readonly oneEachTypeAmong: { readonly spellsYouCastThisTurn: CardFilter } }
+  /** One slot a colour, the colours being those among the permanents the
+   * chooser controls that match the filter, read as the choice is raised —
+   * Sanar, Innovative First-Year's "for each of those colors [among permanents
+   * you control], you may exile a card of that color from among the revealed
+   * cards". A multicoloured card fills one slot of a colour it has, one card a
+   * slot (as `oneEach`); colorless is no colour (rule 105.2c). */
+  | { readonly oneEachColorAmong: CardFilter }
   /** The chosen cards' mana values add up to this or less, choosing none also
    * allowed — Ao, the Dawn Sky's "any number of nonland permanent cards with
    * total mana value 4 or less". An amount on a `look-and-choose`, read as it

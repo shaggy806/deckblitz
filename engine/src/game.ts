@@ -49834,6 +49834,24 @@ controlledBy,
         text: slots.map((type) => `${/^[aeiou]/.test(type) ? "an" : "a"} ${type} card`).join(" and "),
       };
     }
+    if ("oneEachColorAmong" in together) {
+      // A slot a colour among the chooser's matching permanents, as they are
+      // now; each card fits the slots of its own colours.
+      const among = new Set<Color>();
+      for (const permanent of this.battlefieldMatching(player, together.oneEachColorAmong)) {
+        for (const color of effectiveColors(this.state, this.registry, this.state.objects[permanent])) among.add(color);
+      }
+      const slots = COLORS.filter((color) => among.has(color));
+      for (const id of eligible) {
+        const colors = effectiveColors(this.state, this.registry, this.state.objects[id]);
+        tags[id] = slots.filter((color) => colors.has(color));
+      }
+      return {
+        rule: "one-each",
+        tags,
+        text: slots.length === 0 ? "no card" : slots.map((color) => `a ${COLOR_WORDS[color]} card`).join(" and "),
+      };
+    }
     if ("oneEachSameNameAs" in together) {
       // A slot a permanent (each token of a stack), named as it is now.
       const slots = this.battlefieldMatching(player, together.oneEachSameNameAs).flatMap((permanent) => {
