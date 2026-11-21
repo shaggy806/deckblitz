@@ -388,6 +388,7 @@ import _poolHaktosTheUnscarred from "../pool/haktos-the-unscarred.js";
 import _poolHallOfGemstone from "../pool/hall-of-gemstone.js";
 import _poolHallOfHeliodsGenerosity from "../pool/hall-of-heliods-generosity.js";
 import _poolHamletGlutton from "../pool/hamlet-glutton.js";
+import _poolHarnessTheStorm from "../pool/harness-the-storm.js";
 import _poolHarnessedSnubhorn from "../pool/harnessed-snubhorn.js";
 import _poolHaruspex from "../pool/haruspex.js";
 import _poolHarvesterDruid from "../pool/harvester-druid.js";
@@ -1414,6 +1415,7 @@ const shard: CardShard = {
     _poolHallOfGemstone,
     _poolHallOfHeliodsGenerosity,
     _poolHamletGlutton,
+    _poolHarnessTheStorm,
     _poolHarnessedSnubhorn,
     _poolHaruspex,
     _poolHarvesterDruid,

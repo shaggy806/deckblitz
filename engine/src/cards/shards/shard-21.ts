@@ -166,6 +166,7 @@ import _poolClockworkServant from "../pool/clockwork-servant.js";
 import _poolCoastlineMarauders from "../pool/coastline-marauders.js";
 import _poolCockatrice from "../pool/cockatrice.js";
 import _poolCoercion from "../pool/coercion.js";
+import _poolColfenorsPlans from "../pool/colfenors-plans.js";
 import _poolColossusOfAkros from "../pool/colossus-of-akros.js";
 import _poolColossusOfTheBloodAge from "../pool/colossus-of-the-blood-age.js";
 import _poolColossusSteelStalwart from "../pool/colossus-steel-stalwart.js";
@@ -1183,6 +1184,7 @@ const shard: CardShard = {
     _poolCoastlineMarauders,
     _poolCockatrice,
     _poolCoercion,
+    _poolColfenorsPlans,
     _poolColossusOfAkros,
     _poolColossusOfTheBloodAge,
     _poolColossusSteelStalwart,

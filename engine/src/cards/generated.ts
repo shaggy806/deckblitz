@@ -4630,6 +4630,7 @@ import _poolChekovAndMccoy from "./pool/chekov-and-mccoy.js";
 import _poolChelonianTackle from "./pool/chelonian-tackle.js";
 import _poolChemistersInsight from "./pool/chemisters-insight.js";
 import _poolChemistersTrick from "./pool/chemisters-trick.js";
+import _poolCherishedHatchling from "./pool/cherished-hatchling.js";
 import _poolChevillBaneOfMonsters from "./pool/chevill-bane-of-monsters.js";
 import _poolChiefEngineer from "./pool/chief-engineer.js";
 import _poolChiefKyleTransporterTech from "./pool/chief-kyle-transporter-tech.js";
@@ -5098,6 +5099,7 @@ import _poolColdStorage from "./pool/cold-storage.js";
 import _poolColdWaterSnapper from "./pool/cold-water-snapper.js";
 import _poolColdsteelHeart from "./pool/coldsteel-heart.js";
 import _poolColfenorTheLastYew from "./pool/colfenor-the-last-yew.js";
+import _poolColfenorsPlans from "./pool/colfenors-plans.js";
 import _poolColfenorsUrn from "./pool/colfenors-urn.js";
 import _poolColiseumBehemoth from "./pool/coliseum-behemoth.js";
 import _poolCollarTheCulprit from "./pool/collar-the-culprit.js";
@@ -10982,6 +10984,7 @@ import _poolGetALegUp from "./pool/get-a-leg-up.js";
 import _poolGetLost from "./pool/get-lost.js";
 import _poolGetOut from "./pool/get-out.js";
 import _poolGetThePoint from "./pool/get-the-point.js";
+import _poolGetawayBarrel from "./pool/getaway-barrel.js";
 import _poolGetawayCar from "./pool/getaway-car.js";
 import _poolGetawayGlamer from "./pool/getaway-glamer.js";
 import _poolGethLordOfTheVault from "./pool/geth-lord-of-the-vault.js";
@@ -12563,6 +12566,7 @@ import _poolHarmonizedTrio from "./pool/harmonized-trio.js";
 import _poolHarmonyOfNature from "./pool/harmony-of-nature.js";
 import _poolHarnessByForce from "./pool/harness-by-force.js";
 import _poolHarnessInfinity from "./pool/harness-infinity.js";
+import _poolHarnessTheStorm from "./pool/harness-the-storm.js";
 import _poolHarnessedLightning from "./pool/harnessed-lightning.js";
 import _poolHarnessedSnubhorn from "./pool/harnessed-snubhorn.js";
 import _poolHarnesserOfStorms from "./pool/harnesser-of-storms.js";
@@ -38417,6 +38421,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChelonianTackle,
   _poolChemistersInsight,
   _poolChemistersTrick,
+  _poolCherishedHatchling,
   _poolChevillBaneOfMonsters,
   _poolChiefEngineer,
   _poolChiefKyleTransporterTech,
@@ -38885,6 +38890,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolColdWaterSnapper,
   _poolColdsteelHeart,
   _poolColfenorTheLastYew,
+  _poolColfenorsPlans,
   _poolColfenorsUrn,
   _poolColiseumBehemoth,
   _poolCollarTheCulprit,
@@ -44769,6 +44775,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGetLost,
   _poolGetOut,
   _poolGetThePoint,
+  _poolGetawayBarrel,
   _poolGetawayCar,
   _poolGetawayGlamer,
   _poolGethLordOfTheVault,
@@ -46350,6 +46357,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHarmonyOfNature,
   _poolHarnessByForce,
   _poolHarnessInfinity,
+  _poolHarnessTheStorm,
   _poolHarnessedLightning,
   _poolHarnessedSnubhorn,
   _poolHarnesserOfStorms,
@@ -72217,6 +72225,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chelonian-tackle": _poolChelonianTackle,
   "pool/chemisters-insight": _poolChemistersInsight,
   "pool/chemisters-trick": _poolChemistersTrick,
+  "pool/cherished-hatchling": _poolCherishedHatchling,
   "pool/chevill-bane-of-monsters": _poolChevillBaneOfMonsters,
   "pool/chief-engineer": _poolChiefEngineer,
   "pool/chief-kyle-transporter-tech": _poolChiefKyleTransporterTech,
@@ -72685,6 +72694,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cold-water-snapper": _poolColdWaterSnapper,
   "pool/coldsteel-heart": _poolColdsteelHeart,
   "pool/colfenor-the-last-yew": _poolColfenorTheLastYew,
+  "pool/colfenors-plans": _poolColfenorsPlans,
   "pool/colfenors-urn": _poolColfenorsUrn,
   "pool/coliseum-behemoth": _poolColiseumBehemoth,
   "pool/collar-the-culprit": _poolCollarTheCulprit,
@@ -78569,6 +78579,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/get-lost": _poolGetLost,
   "pool/get-out": _poolGetOut,
   "pool/get-the-point": _poolGetThePoint,
+  "pool/getaway-barrel": _poolGetawayBarrel,
   "pool/getaway-car": _poolGetawayCar,
   "pool/getaway-glamer": _poolGetawayGlamer,
   "pool/geth-lord-of-the-vault": _poolGethLordOfTheVault,
@@ -80150,6 +80161,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/harmony-of-nature": _poolHarmonyOfNature,
   "pool/harness-by-force": _poolHarnessByForce,
   "pool/harness-infinity": _poolHarnessInfinity,
+  "pool/harness-the-storm": _poolHarnessTheStorm,
   "pool/harnessed-lightning": _poolHarnessedLightning,
   "pool/harnessed-snubhorn": _poolHarnessedSnubhorn,
   "pool/harnesser-of-storms": _poolHarnesserOfStorms,

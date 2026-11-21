@@ -152,6 +152,7 @@ import _poolCelestialMantle from "../pool/celestial-mantle.js";
 import _poolCephalidShrine from "../pool/cephalid-shrine.js";
 import _poolChainedThroatseeker from "../pool/chained-throatseeker.js";
 import _poolChancellorGorkon from "../pool/chancellor-gorkon.js";
+import _poolCherishedHatchling from "../pool/cherished-hatchling.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
 import _poolChildOfGaea from "../pool/child-of-gaea.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
@@ -1212,6 +1213,7 @@ const shard: CardShard = {
     _poolCephalidShrine,
     _poolChainedThroatseeker,
     _poolChancellorGorkon,
+    _poolCherishedHatchling,
     _poolChiefWargsCompany,
     _poolChildOfGaea,
     _poolChildOfThorns,
