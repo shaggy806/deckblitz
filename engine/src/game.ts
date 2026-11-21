@@ -922,7 +922,7 @@ interface AlternativeCostOffer {
   readonly flash?: true;
   /** The keyword it is, when it's one (`"prowl"`: "if its prowl cost was
    * paid"). */
-  readonly keyword?: NonNullable<CardDefinition["alternativeCost"]>["keyword"] | "blitz" | "dash";
+  readonly keyword?: NonNullable<CardDefinition["alternativeCost"]>["keyword"] | "blitz" | "dash" | "sneak" | "web-slinging" | "more-than-meets-the-eye";
 }
 
 interface DamageApplied {
@@ -3993,14 +3993,16 @@ export class Game {
           return probe.seen === undefined ? "that cast has no generic mana for another player to pay" : null;
         }
         if (
-          action.via === "sneak" &&
+          (action.via === "sneak" || (action.altCost === true && isPermissionCast(action.via))) &&
           action.sneakReturn !== undefined &&
           !this.sneakReturns(action.player).includes(action.sneakReturn)
         ) {
           return "sneak returns an unblocked creature you control";
         }
         if (action.webSlingingReturn !== undefined) {
-          if (action.via !== "web-slinging") return "only a web-slinging cast returns a creature for its cost";
+          if (action.via !== "web-slinging" && !(action.altCost === true && isPermissionCast(action.via))) {
+            return "only a web-slinging cast returns a creature for its cost";
+          }
           if (!this.webSlingingReturns(action.player).includes(action.webSlingingReturn)) {
             return "web-slinging returns a tapped creature you control";
           }
@@ -5711,6 +5713,31 @@ export class Game {
    * way of reducing by that permanent's mana cost (rule 118.7e), each priced
    * so, the permanent named on the offer (702.48b).
    */
+  /** A permission's cast for a sneak or web-slinging cost (`alternativeCostsOf`)
+   * names the creature it returns: one offer per creature, as those casts
+   * from the hand are offered. */
+  private withKeywordReturns(
+    player: PlayerId,
+    card: ObjectId,
+    def: CardDefinition,
+    via: CastVia | undefined,
+    offers: LegalAction[],
+  ): LegalAction[] {
+    if (!isPermissionCast(via)) return offers;
+    const costs = this.alternativeCostsOf(card, def, via, player);
+    if (!costs.some((c) => c?.keyword === "sneak" || c?.keyword === "web-slinging")) return offers;
+    const named = (id: ObjectId) => ({ object: id, cardName: this.state.objects[id].cardName });
+    return offers.flatMap((offer): LegalAction[] => {
+      if (offer.kind !== "cast-spell" || offer.altCost !== true) return [offer];
+      const keyword = costs[offer.altCostIndex ?? 0]?.keyword;
+      if (keyword === "sneak") return this.sneakReturns(player).map((id) => ({ ...offer, sneakReturn: named(id) }));
+      if (keyword === "web-slinging") {
+        return this.webSlingingReturns(player).map((id) => ({ ...offer, webSlingingReturn: named(id) }));
+      }
+      return [offer];
+    });
+  }
+
   private castSpellActionsAlone(
     player: PlayerId,
     card: ObjectId,
@@ -5723,7 +5750,7 @@ export class Game {
       graveyardGrant?: GraveyardGrant;
     },
   ): LegalAction[] {
-    const offers = this.castSpellVariants(player, card, cardName, def, opts);
+    const offers = this.withKeywordReturns(player, card, def, opts.via, this.castSpellVariants(player, card, cardName, def, opts));
     const offering = def.kicker?.offering;
     if (offering === undefined) return offers;
     for (const victim of this.eligibleSacrifices(player, offering)) {
@@ -6750,8 +6777,12 @@ export class Game {
         ...(evoke !== undefined && evoke === def.evoke?.cost && def.evoke.exileFromHand !== undefined
           ? { altCostText: `exile ${def.evoke.exileFromHand.text} from your hand` }
           : {}),
-        ...(altCost === true && (alternative?.keyword === "blitz" || alternative?.keyword === "dash")
+        ...(altCost === true &&
+        (alternative?.keyword === "blitz" || alternative?.keyword === "dash" || alternative?.keyword === "sneak" ||
+          alternative?.keyword === "web-slinging")
           ? { altCostText: `${alternative.keyword} ${alternative.mana}` }
+          : altCost === true && alternative?.keyword === "more-than-meets-the-eye"
+          ? { altCostText: `More Than Meets the Eye ${alternative.mana}` }
           : ownAltPaid && def.alternativeCost?.exileFromHand !== undefined
           ? {
               altCostText: [
@@ -22213,7 +22244,8 @@ export class Game {
       def.transform &&
       via !== "disturb" &&
       via !== "more-than-meets-the-eye" &&
-      via !== "effect"
+      via !== "effect" &&
+      this.keywordAltPicked(cardId, def, via, player, altCost) !== "more-than-meets-the-eye"
     ) {
       return `${def.name} is a transforming card's back face, cast only transformed or converted`;
     }
@@ -22694,6 +22726,7 @@ export class Game {
       // Sneak: "any time you could cast an instant during your declare
       // blockers step" (rule 702.190a) — `sneakReturns` checked the step.
       via !== "sneak" &&
+      this.keywordAltPicked(cardId, def, via, player, altCost) !== "sneak" &&
       !def.types.includes("instant") &&
       !def.keywords.includes("flash") &&
       // "As though it had flash if you behold a Dragon as an additional
@@ -23363,6 +23396,35 @@ export class Game {
     ) {
       return this.withCastGrantScope(card, opts.graveyardGrant, () => this.castSpellActions(player, card, cardName, def, opts));
     }
+    // More Than Meets the Eye (rule 702.162a) under a permission: the card
+    // cast converted, its back face up, for that cost: one more offer
+    // beside its front face's.
+    if (isPermissionCast(opts.via) && (opts.face ?? 0) === 0) {
+      const converted = this.moreThanMeetsTheEyeCostOf(card);
+      if (converted !== null) {
+        const back = this.faceDef(card, 1);
+        return [
+          ...this.castSpellActionsOfFace(player, card, cardName, def, opts),
+          ...this.castSpellActionsOfFace(player, card, back.name, back, { ...opts, face: 1, costString: converted }),
+        ];
+      }
+    }
+    return this.castSpellActionsOfFace(player, card, cardName, def, opts);
+  }
+
+  /** {@link castSpellActions} for the one face named. */
+  private castSpellActionsOfFace(
+    player: PlayerId,
+    card: ObjectId,
+    cardName: string,
+    def: CardDefinition,
+    opts: {
+      via?: CastVia;
+      face?: number;
+      costString: string | null;
+      graveyardGrant?: GraveyardGrant;
+    },
+  ): LegalAction[] {
     // "Of an opponent's choice" (rules 601.2c, 700.2e): a variant per
     // opponent who could choose, each judged with them choosing.
     if (this.castNeedsOtherChooser(def) && this.otherChoice?.for !== card) {
@@ -25412,7 +25474,12 @@ export class Game {
     const freeCastOf = via === "effect" ? this.castNowProbe?.freeCastOf : undefined;
     // Blitzed or dashed under a permission (an alternative cost of that
     // cast): the spell is one all the same (rules 702.152a, 702.109a).
-    const keywordVia = alternativeCost?.keyword === "blitz" || alternativeCost?.keyword === "dash" ? alternativeCost.keyword : undefined;
+    const paidKeyword = alternativeCost?.keyword;
+    const keywordVia =
+      paidKeyword === "blitz" || paidKeyword === "dash" || paidKeyword === "sneak" || paidKeyword === "web-slinging" ||
+      paidKeyword === "more-than-meets-the-eye"
+        ? paidKeyword
+        : undefined;
     object.castVia = freeCastOf ?? keywordVia ?? via ?? null;
     if (freeCastOf === "suspend") object.hastyUntilItLeaves = true;
     // Thundermane Dragon: "if you cast a creature spell this way, it gains
@@ -25636,7 +25703,7 @@ export class Game {
     // Sneak's "returning an unblocked creature you control to its owner's
     // hand" (rule 702.190a), the other half of that cost: what it was
     // attacking is what the permanent this spell becomes attacks (702.190b).
-    if (via === "sneak") {
+    if (via === "sneak" || alternativeCost?.keyword === "sneak") {
       const choice = this.sneakReturnChoice ?? this.sneakReturns(player)[0];
       const returned = choice === undefined ? undefined : this.state.objects[choice];
       if (choice !== undefined && returned !== undefined) {
@@ -25649,7 +25716,7 @@ export class Game {
     // (601.2g–h): one token singled out of a stack first. Its mana value as
     // it last existed on the battlefield rides on the spell (the ruling —
     // Scarlet Spider, Ben Reilly's X).
-    if (via === "web-slinging") {
+    if (via === "web-slinging" || alternativeCost?.keyword === "web-slinging") {
       const eligible = this.webSlingingReturns(player);
       const named = this.webSlingingReturnChoice;
       const choice = named !== undefined && eligible.includes(named) ? named : eligible[0];
@@ -64266,6 +64333,19 @@ controlledBy,
     return this.alternativeCostsOf(cardId, def, via, caster)[this.altCostPick ?? 0] ?? null;
   }
 
+  /** The casting keyword whose cost a permission's cast pays as its
+   * alternative cost (blitz, dash, sneak, web-slinging, More Than Meets the
+   * Eye: `alternativeCostsOf`), or `undefined`. */
+  private keywordAltPicked(
+    cardId: ObjectId,
+    def: CardDefinition,
+    via: CastVia | undefined,
+    caster: PlayerId | undefined,
+    altCost: boolean,
+  ): AlternativeCostOffer["keyword"] | undefined {
+    return altCost && isPermissionCast(via) ? this.alternativeCostOf(cardId, def, via, caster)?.keyword : undefined;
+  }
+
   /** The card's own alternative cost, when that's the one the cast being
    * judged pays (`altCostPick`): it comes first in `alternativeCostsOf`, so
    * any later entry is a granted one (or another opponent to gain the life). */
@@ -64380,9 +64460,23 @@ controlledBy,
     // (`via: "blitz"`, `"dash"`). They come straight after the card's own
     // (`keywordAltPicked` counts on it).
     if (isPermissionCast(via)) {
+      // Its back face, cast converted (rule 702.162a): for its More Than
+      // Meets the Eye cost and no other (118.9a).
+      if (card?.faces?.[1] === def.name) {
+        const converted = this.moreThanMeetsTheEyeCostOf(cardId);
+        if (converted !== null) return [{ mana: converted, keyword: "more-than-meets-the-eye" }];
+      }
       const blitz = this.blitzCostAnywhere(cardId, def, caster);
       if (blitz !== null) out.push({ mana: blitz, keyword: "blitz" });
       if (def.dash !== null) out.push({ mana: def.dash.cost, keyword: "dash" });
+      // Sneak (rule 702.190a) and web-slinging (702.188a) likewise, while
+      // there's a creature to return for each.
+      const sneak = this.castKeywordCosts(cardId, "sneak", def.sneak?.cost ?? null)[0]?.cost;
+      if (sneak !== undefined && this.sneakReturns(caster).length > 0) out.push({ mana: sneak, keyword: "sneak" });
+      const webSlinging = this.webSlingingCostOf(caster, cardId, def);
+      if (webSlinging !== null && this.webSlingingReturns(caster).length > 0) {
+        out.push({ mana: webSlinging, keyword: "web-slinging" });
+      }
     }
     // Granted prowl (rule 702.76a — Hunting Velociraptor's "Dinosaur spells
     // you cast have prowl {2}{R}"): while a source the caster controlled

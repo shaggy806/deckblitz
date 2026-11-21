@@ -9007,3 +9007,7 @@ Each board's die comes up 4.
 ### Screamreach Brawler: dashed from the top of the library under Future Sight
 - **Do:** Click Screamreach Brawler on top of your library and cast it for its dash cost ({1}{R}).
 - **Expect:** The offer names dash beside the cast for {2}{R}. Dashed, it enters with haste and returns to your hand at the beginning of the end step.
+
+### Amazing Spider-Girl: web-slung from the top of the library under Future Sight
+- **Do:** Click Amazing Spider-Girl on top of your library and cast it for its web-slinging cost ({2}{W}), returning Hill Giant.
+- **Expect:** The offers name web-slinging and ask which tapped creature to return, Hill Giant or Grizzly Bears. Hill Giant goes back to your hand and Amazing Spider-Girl enters.

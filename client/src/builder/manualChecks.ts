@@ -13641,4 +13641,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: {},
     }),
   ),
+  preset(
+    'Amazing Spider-Girl: web-slung from the top of the library under Future Sight',
+    board({
+      you: {
+        bf: ['Future Sight', 'Plains*3', { name: 'Hill Giant', tapped: true }, { name: 'Grizzly Bears', tapped: true }],
+        lib: ['Amazing Spider-Girl'],
+      },
+      opp: {},
+    }),
+  ),
 ]

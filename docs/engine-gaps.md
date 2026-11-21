@@ -165,13 +165,9 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   blue creature you control") isn't paid: `cost:splice-non-mana`. Found building splice
   (B202, 2026-10-26).
 
-- **Sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone.** Rules 702.190a, 702.188a and 702.162a allow any zone the card may be cast from
-  (`legalActions`' sneak and web-slinging loops, `moreThanMeetsTheEyeCostOf`'s offer), so one
-  another permission lets you cast (an impulse exile, a graveyard grant, the top of a library)
-  isn't offered that cost there. Blitz and dash are, since 2026-11-20, as alternative costs of
-  the permission's cast (`Game.alternativeCostsOf`); these three need more than a cost there (a
-  creature returned, the back face up). Henzie's discount also moves only a cost's generic
-  number, never an `{X}` (no blitz cost in the pool has one yet).
+- **Henzie's blitz discount never moves an `{X}`.** Henzie "Toolbox" Torre's "blitz costs you pay cost {1} less"
+  (`Game.blitzCostAnywhere`) moves only a cost's generic number, never an `{X}`. No blitz cost
+  in the pool has one yet.
 - **Replacement order is chosen for the affected player, never asked.** Rule 616.1 has the
   affected player (or the controller of the affected object) order the replacement and
   prevention effects that apply to one event. The engine picks the order best for them, as
