@@ -19016,6 +19016,8 @@ function parseFaceAsWritten(face, ctx = {}) {
       "~ costs {1} less to cast for each creature in your party.": { partySize: "you" },
       "~ costs {1} less to cast for each basic land type among lands you control.": { basicLandTypes: "you" },
       "~ costs {1} less to cast for each opponent you have.": { countPlayers: "each-opponent" },
+      // Inspired Fire, Deem Inferior.
+      "~ costs {1} less to cast for each card you've drawn this turn.": { turnStat: "cards-drawn", who: "you" },
     }[line];
     if (perEach !== undefined) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };

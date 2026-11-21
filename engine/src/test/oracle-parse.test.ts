@@ -822,6 +822,11 @@ describe("what a spell costs: amounts, colours and targets", () => {
   });
 
   it("reads a count of what a spell costs less for", () => {
+    // Inspired Fire, Deem Inferior.
+    expect(self("This spell costs {1} less to cast for each card you've drawn this turn.")).toEqual({
+      condition: always,
+      reduceGeneric: { turnStat: "cards-drawn", who: "you" },
+    });
     expect(self("This spell costs {1} less to cast for each counter among players and permanents.")).toEqual({
       condition: always,
       reduceGeneric: { allCounters: true },
