@@ -21,8 +21,8 @@ import './legal.css'
 export function AboutPage() {
   return (
     <main className="about-page">
-      <a className="about-home" href="/">
-        ← {SITE_TITLE}
+      <a className="link-button about-home" href="/">
+        ← Main menu
       </a>
       <h1>About &amp; legal</h1>
       <p className="about-lead">

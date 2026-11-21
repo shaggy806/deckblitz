@@ -53,7 +53,7 @@ export function PileViewer({ title, resolve, labels, separate, choose, collapsed
 
   return (
     <div className="zone-viewer-overlay">
-      <div className="zone-viewer-box" role="dialog" aria-label={title}>
+      <div className={separate ? 'zone-viewer-box asking' : 'zone-viewer-box'} role="dialog" aria-label={title}>
         <div className="zone-viewer-head">
           <h2>{title}</h2>
           <span className="zone-viewer-head-actions">

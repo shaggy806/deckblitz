@@ -99,7 +99,7 @@ const passTurn = (id: string, title: string, body: string, opensOn: TutorialCond
   holdPriority: true,
   opensOn,
   allow: [{ do: "pass-turn" }],
-  goals: [{ id: `${id}-done`, label: "Press Pass Turn", when: { event: "turn-began", player: ROWAN } }],
+  goals: [{ id: `${id}-done`, label: "Press Pass turn", when: { event: "turn-began", player: ROWAN } }],
 });
 
 export const COMMANDER_RULES: Lesson = {
@@ -187,7 +187,7 @@ export const COMMANDER_RULES: Lesson = {
           placement: "bottom",
           opensOn: { event: "combat-damage" },
         },
-        passTurn("first-pass", "Over to Rowan", "Attacking has tapped all your creatures, so they can't block this time round. Press Pass Turn.", {
+        passTurn("first-pass", "Over to Rowan", "Attacking has tapped all your creatures, so they can't block this time round. Press Pass turn.", {
           lifeAtMost: { player: MIRA, value: 6 },
         }),
       ],
@@ -282,7 +282,7 @@ export const COMMANDER_RULES: Lesson = {
           "Finish what you started",
           "Mira has no creatures left to block with. Send your Evangel and your Rats at her, then press Attack with 2.",
         ),
-        passTurn("second-pass", "Mira is on 3", "One more attack like that will do it. Press Pass Turn, and we'll skip ahead to your next turn.", {
+        passTurn("second-pass", "Mira is on 3", "One more attack like that will do it. Press Pass turn, and we'll skip ahead to your next turn.", {
           lifeAtMost: { player: MIRA, value: 3 },
         }),
       ],

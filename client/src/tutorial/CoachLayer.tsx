@@ -156,7 +156,7 @@ export function CoachLayer({ page, resumable = SITE_TOUR }: { readonly page: Pag
           body="You were partway through the site tour. Carry on from where you left off?"
           actions={
             <>
-              <button type="button" className="link-button coach-exit" onClick={stopTour}>
+              <button type="button" className="coach-exit" onClick={stopTour}>
                 Exit tour
               </button>
               <button type="button" className="coach-next" onClick={continueTour} autoFocus>
@@ -444,12 +444,13 @@ function StepView({
         </ul>
       ) : null}
       {step.buttons !== undefined ? (
-        // The quiet links on the left, the buttons pushed right.
+        // The quiet ones (plain buttons, as every Cancel beside a gold button
+        // is) on the left, the rest pushed right.
         <div className="coach-actions">
           {step.buttons
             .filter((b) => b.link === true)
             .map((b) => (
-              <button key={b.label} type="button" className="link-button coach-exit" onClick={b.onClick}>
+              <button key={b.label} type="button" className="coach-exit" onClick={b.onClick}>
                 {b.label}
               </button>
             ))}
@@ -473,7 +474,7 @@ function StepView({
         </div>
       ) : (
         <div className="coach-actions">
-          <button type="button" className="link-button coach-exit" onClick={stopTour}>
+          <button type="button" className="coach-exit" onClick={stopTour}>
             Exit tour
           </button>
           <span className="coach-spacer" />

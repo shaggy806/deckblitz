@@ -189,7 +189,9 @@ export function ZoneViewer({
   return (
     <div className="zone-viewer-overlay" onClick={selection ? undefined : onClose}>
       <div
-        className="zone-viewer-box"
+        // A viewer that is a decision wears the gold edge everything that
+        // asks does (the mulligan, the decision banner, an ability menu).
+        className={selection ? 'zone-viewer-box asking' : 'zone-viewer-box'}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-label={title}

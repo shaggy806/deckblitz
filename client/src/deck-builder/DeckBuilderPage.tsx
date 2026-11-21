@@ -111,7 +111,9 @@ export function DeckBuilderPage() {
     <div className="db-page">
       <aside className="db-list">
         <a className="link-button db-back" href={backHref}>
-          ← Back
+          {/* The one label every page's way home has; from a room's deck
+              picker it goes back to that room instead. */}
+          {roomId ? '← Back to the room' : '← Main menu'}
         </a>
         <h1>Deck Builder</h1>
 

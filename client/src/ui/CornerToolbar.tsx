@@ -10,7 +10,7 @@ import { HelpMenu } from '../tutorial/HelpMenu.tsx'
  *
  * @param intro The landing page: a first visit gets the tutorials' callout
  *   over the "?" button. Not in the lobby, where it would sit over the room
- *   settings and Start Game.
+ *   settings and Start game.
  * @param onLesson How the "?" menu opens a lesson (*Tour the board*, *Learn
  *   Commander* — `HelpMenu`): given on the landing page, which has no room
  *   to leave.

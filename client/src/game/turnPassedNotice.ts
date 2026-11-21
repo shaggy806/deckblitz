@@ -12,7 +12,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 const TIMES_SHOWN = 3
 const STORAGE_KEY = 'mtg.turnPassedNotice'
 
-// The passes the player made by hand (Pass, Pass Turn, Auto-pass, Resolve
+// The passes the player made by hand (Pass, Pass turn, Auto-pass, Resolve
 // stack), counted where they're sent (`useNetworkGame`). One game per page, so
 // a module-level count does.
 let handPasses = 0

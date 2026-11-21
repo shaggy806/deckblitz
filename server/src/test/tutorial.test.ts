@@ -347,7 +347,7 @@ describe("Learn Commander", () => {
     session.next("tapped");
     session.next("summoning-sick");
 
-    // Pass Turn's card opens Pass Turn, and the Pass it needs.
+    // Pass turn's card opens Pass turn, and the Pass it needs.
     expect(info().allows.passTurn).toBe(true);
     expect(offered()).toEqual(["pass-priority"]);
     // Pressing Pass instead only gets there a step at a time.
@@ -374,7 +374,7 @@ describe("Learn Commander", () => {
     m.tap(2);
     m.cast("Cabal Evangel");
 
-    // To combat: Pass, and not Pass Turn, which would skip the attack.
+    // To combat: Pass, and not Pass turn, which would skip the attack.
     expect(info().step?.id).toBe("first-to-combat");
     expect(info().allows.passTurn).toBe(false);
     expect(() => session.room.requestPassTurn(connection)).toThrow(/waiting for something else/);

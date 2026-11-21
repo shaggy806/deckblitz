@@ -39,7 +39,7 @@ const toWire = (d: DeckContents): WireDeck => {
  * watching the rest of the table fill in).
  *
  * Filling every seat doesn't start the game by itself: each seat has to
- * ready up (a green outline — bots always are) and the *Start Game* button
+ * ready up (a green outline — bots always are) and the *Start game* button
  * at the bottom only lights up once every seat has. Un-readying (mine only)
  * reopens my own deck slot for editing; a readied deck is locked until then.
  *
@@ -67,7 +67,7 @@ const toWire = (d: DeckContents): WireDeck => {
  *
  * Two boxes side by side: the room's own — its header (`children`: the room
  * code and the way back) over the seats — sized to the seats, and the room's
- * settings and Start Game in a box of their own at the screen's right edge.
+ * settings and Start game in a box of their own at the screen's right edge.
  * One box holding both ran the screen's width: a long, mostly empty panel
  * around a small table.
  */
@@ -345,7 +345,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                 disabled={!allReady}
                 onClick={game.startGame}
               >
-                {busy === 'start' ? 'Starting…' : 'Start Game'}
+                {busy === 'start' ? 'Starting…' : 'Start game'}
               </button>
             ) : null}
             {/* Always there (empty for a host with everyone ready), two lines

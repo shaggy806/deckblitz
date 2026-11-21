@@ -270,7 +270,7 @@ test('a full room can be watched: the seat board, then the game with no hand', a
   await shots(watcher, 'spectate-lobby')
 
   await host.getByRole('button', { name: 'Ready', exact: true }).click()
-  await host.getByRole('button', { name: 'Start Game' }).click()
+  await host.getByRole('button', { name: 'Start game' }).click()
 
   // The watcher follows into the game: the board, tagged, nothing to decide.
   await expect(watcher.locator('.ts-spectating')).toBeVisible(paced)

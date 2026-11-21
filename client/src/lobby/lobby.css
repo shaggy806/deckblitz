@@ -37,7 +37,7 @@
 }
 
 /* Two boxes side by side, centred as one group: the room's (its header over
-   the seats) and one for the room's settings and Start Game. The room box
+   the seats) and one for the room's settings and Start game. The room box
    is always four places wide (`.seat-board-grid`), so the group never moves
    as seats come and go — the reason the settings were once pinned to the
    screen's right edge, which left a wide screen a gap between the two. */
@@ -67,7 +67,7 @@
      share the row. Letting 2 seats take a half each is what made the
      2-player lobby a different screen from the 4-player one -- each deck's
      art grew to 450px, the seats' contents to twice their height, and the
-     Start Game button fell below the fold at 768px, while four seats sat
+     Start game button fell below the fold at 768px, while four seats sat
      compact on one screen. A smaller table is now a narrower, centred row
      of the same seats. Measured against the whole board (`100cqw`, the
      `.seat-board` container) less the settings column and the room box's
@@ -534,14 +534,6 @@ button.seat-add-panel:hover {
 }
 .deck-picker-head h3 {
   font-size: var(--text-lg);
-}
-.deck-picker-close {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1;
-  padding: 4px;
 }
 .deck-picker-list {
   display: flex;

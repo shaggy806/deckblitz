@@ -52,7 +52,7 @@ export interface Step {
    * Whether a click inside the spotlight reaches the page. On by default for
    * a step that waits on the player (`click`, `visible`, `when`), off for a
    * `next` step, where pressing the thing pointed at could leave the tour
-   * behind (Start Game, a link to another page).
+   * behind (Start game, a link to another page).
    */
   readonly interactive?: boolean
   /**
@@ -74,7 +74,7 @@ export interface Step {
    * The card's own buttons, in place of Exit / Back / Next: for a step the
    * tour doesn't move on by itself (a tutorial room's, which the server moves
    * on). The `primary` one is styled and focused as Next is; a `link` one is
-   * drawn as a quiet link, as Exit is.
+   * drawn as a quiet plain button on the left, as Exit is.
    */
   readonly buttons?: readonly StepButton[]
 }

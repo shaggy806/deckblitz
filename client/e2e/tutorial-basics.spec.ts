@@ -230,7 +230,7 @@ for (const size of SIZES) {
     await next(page, 'summoning-sick', size)
     const firstPass = await expectCard(page, 'first-pass', size)
     await expectSpotlit(page, passTurn)
-    await expectApart(firstPass, passTurn, 'Pass Turn')
+    await expectApart(firstPass, passTurn, 'Pass turn')
     await passTurn.click()
 
     // Rowan's turn stops at each card, with nothing going on behind it.

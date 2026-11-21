@@ -726,8 +726,8 @@ export function useNetworkGame(): NetworkGame {
           if (message.roomId !== roomIdRef.current) return
           // A blitz's room, or a lobby's game moving into this tab, on its
           // way to its first frame: the seat board on screen (a lobby's, its
-          // Start Game saying "Starting…") stays as it is until then, rather
-          // than the new room's empty seats and a Start Game button flashing
+          // Start game saying "Starting…") stays as it is until then, rather
+          // than the new room's empty seats and a Start game button flashing
           // past as if the click had failed (a bug report, 2026-11-12).
           const blitzBound = pendingBlitzRef.current !== null && message.pending === true
           // The seat board as the server now has it: whatever it was asked.

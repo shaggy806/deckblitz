@@ -644,7 +644,7 @@ export function LibraryPage() {
       <header className="lib-header">
         <div className="lib-header-top">
           <a className="link-button lib-back" href="/">
-            ← Back
+            ← Main menu
           </a>
           <h1>Card Library</h1>
           <input
@@ -1016,8 +1016,8 @@ function CardOverlay({
       onClick={onClose}
     >
       <div className="lib-overlay-box" onClick={(e) => e.stopPropagation()}>
-        <button type="button" className="lib-overlay-close" onClick={onClose} aria-label="Close">
-          ×
+        <button type="button" className="lib-overlay-close" onClick={onClose}>
+          Close
         </button>
 
         <div className="lib-overlay-art">

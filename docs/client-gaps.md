@@ -154,32 +154,14 @@ Site-wide:
    (and `.landing-cta`); fold them into `primary` when one is next touched. The decision banner's
    prompts were given `primary` by reading `App.tsx`'s buttons, and only the attack and damage
    ones were seen live: a prompt whose confirming button is still grey is a miss, not a choice.
-4. **The primary button's side varies.** Left in the mulligan (Keep | Mulligan) and the concede
-   confirmation (Concede | Cancel), right everywhere else (the result, the tour, blitz, import, the
-   decision banner).
-5. **Cancel is a link in some places and a button in others.** The blitz panel's Cancel and the
-   tour's "Exit tour" are underlined `.link-button`s; import, concede and the decision banner use
-   buttons.
-6. **Text links answer the pointer three ways.** The legal footer's change colour
-   (`.site-notice a:hover`), the About page's do nothing (`.about-page a`), and `.link-button`
-   (Back, Main menu, "Build or import a deck", Cancel) does nothing visible. No global `a:hover`.
-7. **Three back links to the same place.** "← Deck Blitz" (About: not underlined, smaller),
-   "← Back" (library, deck builder), "← Main menu" (lobby).
-8. **Close controls differ.** Three sizes of "×" (`.lib-overlay-close` 20px, `.deck-picker-close`
-   16px, `.help-callout-close` 18px) and a text "Close" button (the zone viewer, History).
-9. **Button casing.** "Start Game" and "Pass Turn" are Title Case; everything else is sentence
-   case ("Create a game", "Auto-pass", "View the board", "Copy invite link").
-10. **Gold and dark panel borders follow no rule.** Gold: the mulligan, the result, the tour, the
-    ability menu, keyword tips. Dark: settings, help, the deck builder's context menu, the zone
-    viewer, the deck picker, the library's card overlay. The decision banner, the one surface that
-    always means "your move", is dark while declaring attackers and tan while targeting. Pick the
-    rule (gold = asking you something) and apply it.
-11. **Section labels come in three styles.** Bebas ("ROOM SETTINGS", "TEST ROOMS"), bold Barlow
-    ("PRIORITY", "ANIMATIONS", "SOUND" in the settings popover) and spaced muted caps ("TUTORIALS",
-    "MY DECKS", "STARTING LIFE").
-12. **Small controls drift in size.** The top bar's buttons are 11px text, 21px tall; the bottom
-    controls 15px, 30px. The deck builder's Import and "+ New" are 11px, 19px tall, and its row
-    buttons (☆ − + ×) about 26x20.
+4-12. Landed 2026-11-21 (`COMPLETED.md`): the primary button last in its row, Cancel and "Exit
+   tour" as buttons, one link hover, "← Main menu" on every page, "Close" as a word, sentence-case
+   labels, gold on a viewer that is a choice, the settings popover's headings, the smallest buttons
+   at `--text-sm`. Item 10 was partly a misreading: the decision banner was never dark, its gold
+   ring pulses (`.decision-banner::after`) and the screenshots caught it at both ends. Left from
+   these: the help callout's "×" is the site's one bare × (a callout, not a dialog); the deck
+   builder's row buttons (☆ − + ×) are still about 26x20; `.db-list-head` and a few other section
+   labels are `--text-sm` where most are `--text-xs`.
 
 Page by page:
 

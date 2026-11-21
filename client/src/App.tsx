@@ -7597,7 +7597,7 @@ function Table({
               disabled={!canPassTurn}
               title="Keep passing for the rest of this turn — pauses if something happens you may want to answer"
             >
-              Pass Turn
+              Pass turn
             </button>
             {/* Short labels so all four fit one row; `title` carries the full
                 sentence, since that's the part that actually explains them. */}
@@ -7971,11 +7971,6 @@ function Table({
         </span>
         {renderHand()}
         <div className="mulligan-modal-actions">
-          {/* Keeping is what most hands do: the primary button, so the pair
-              doesn't read as two equal choices. */}
-          <button type="button" className="primary" disabled={locked} onClick={() => confirmMulligan(true)}>
-            Keep
-          </button>
           {mulliganAction.mustKeep ? null : (
             <button type="button" disabled={locked} onClick={() => confirmMulligan(false)}>
               Mulligan
@@ -7992,6 +7987,13 @@ function Table({
               {view.objects[mulliganAbility.card]?.cardName}: exile this hand, draw as many
             </button>
           ) : null}
+          {/* Keeping is what most hands do: the primary button, so the pair
+              doesn't read as two equal choices. Last in the row, where every
+              other dialog has its primary button (the result, the tour, a
+              decision's Confirm). */}
+          <button type="button" className="primary" disabled={locked} onClick={() => confirmMulligan(true)}>
+            Keep
+          </button>
         </div>
       </div>
     )
@@ -8232,7 +8234,7 @@ function Table({
           now (see `AbilityMenu`, rendered near the other floating overlays
           below).
 
-          priority mode's controls (Pass/Pass Turn/Auto-pass/Skip-mana) render
+          priority mode's controls (Pass/Pass turn/Auto-pass/Skip-mana) render
           in a fixed bottom-right bar instead (see .priority-actions below),
           mulligan's Keep/Mulligan choice (with the hand itself) renders as
           its own centered popup (see .mulligan-modal below), and every other

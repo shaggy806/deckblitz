@@ -110,7 +110,7 @@ async function measure(browser: Browser, flags: string, lag: number): Promise<{ 
   // On a slow line a click made while the last is still on its way goes
   // nowhere (the seat board waits for the server's answer): each Ready is
   // pressed until it has taken.
-  const start = host.page.getByRole('button', { name: 'Start Game' })
+  const start = host.page.getByRole('button', { name: 'Start game' })
   for (let tries = 0; tries < 20 && !(await start.isEnabled()); tries += 1) {
     for (const { page } of [host, guest]) {
       await page.getByRole('button', { name: 'Ready', exact: true }).click({ timeout: 700 }).catch(() => {})
@@ -121,7 +121,7 @@ async function measure(browser: Browser, flags: string, lag: number): Promise<{ 
   // The word is on its way to the server for `lag` yet.
   await host.page.waitForTimeout(lag + 300)
   await expect(start).toBeEnabled(paced)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   for (const { page } of [host, guest]) {
     await expect(page.getByText('Keep your opening hand?')).toBeVisible(paced)
     await page.getByRole('button', { name: 'Keep', exact: true }).click()

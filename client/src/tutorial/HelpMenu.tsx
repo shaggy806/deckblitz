@@ -32,7 +32,7 @@ export function HelpMenu({
   /** Whether the lesson `onLesson` asked for is still on its way (the
    * landing's `tutorialStarting`). Given, the menu stays open on that lesson,
    * saying "Starting…", until its room's first frame takes the page — as the
-   * lobby's Start Game does — rather than closing on a page that then sits
+   * lobby's Start game does — rather than closing on a page that then sits
    * there looking as though the click did nothing (the user, 2026-11-14). */
   readonly starting?: boolean
 }) {

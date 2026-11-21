@@ -35,7 +35,7 @@ import type { TutorialCondition } from "./conditions.js";
 
 /**
  * A move a card of a `scripted` lesson leaves open. Naming a `card` narrows it
- * to those cards. `pass` is the Pass button, `pass-turn` the Pass Turn button
+ * to those cards. `pass` is the Pass button, `pass-turn` the Pass turn button
  * (which needs a window to pass, so Pass stays open with it). A card that opens
  * `attack` or `block` wants a declaration of at least `atLeast` creatures: its
  * goal could never be met after one with fewer. An attack's `at` says whom each

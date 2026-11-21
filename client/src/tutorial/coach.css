@@ -172,8 +172,10 @@
 .coach-spacer {
   flex: 1;
 }
+/* Exit and a step's other quiet answers: plain buttons, a size under Next.
+   They were underlined links until 2026-11-21, when every other dialog's
+   Cancel was already a button. */
 .coach-exit {
-  color: var(--muted);
   font-size: var(--text-sm);
 }
 .coach-next {

@@ -206,7 +206,7 @@ button {
    are buttons only for the click. `:not(:where(…))` adds no specificity, so
    a component's own border or shadow still wins over this. */
 button:not(:where(.card-tile, .mini-tile, .commander-tile, .lib-card-open, .seat-deck-slot, .rr-option, .phase-pip,
-    .pp-zone-link, .link-button, .deck-picker-close, .lib-overlay-close, .bp-icon, .db-list li > button,
+    .pp-zone-link, .link-button, .bp-icon, .db-list li > button,
     .deck-picker-row, .seat-add-panel, .landing-nav-card, .lib-color-pip, .lib-flip, .zv-flip, .builder-tab,
     .bp-card, .db-printing, .db-printing-more, .lib-printing)) {
   border-color: var(--bevel-edge);
@@ -215,7 +215,7 @@ button:not(:where(.card-tile, .mini-tile, .commander-tile, .lib-card-open, .seat
 /* Pressed in while held, like a key going down: the bevel inverts and the
    button drops a pixel. */
 button:not(:where(.card-tile, .mini-tile, .commander-tile, .lib-card-open, .seat-deck-slot, .rr-option, .phase-pip,
-    .pp-zone-link, .link-button, .deck-picker-close, .lib-overlay-close, .bp-icon, .db-list li > button,
+    .pp-zone-link, .link-button, .bp-icon, .db-list li > button,
     .deck-picker-row, .seat-add-panel, .landing-nav-card, .lib-color-pip, .lib-flip, .zv-flip, .builder-tab,
     .bp-card, .db-printing, .db-printing-more, .lib-printing)):active:not(:disabled) {
   box-shadow: var(--bevel-pressed);
@@ -226,7 +226,7 @@ button:hover:not(:disabled) {
 }
 /* The buttons that are cards (or a card's part, or a toggle drawn as text)
    own their hover and disabled looks; every other button gets these two. */
-button:hover:not(:disabled, .card-tile, .mini-tile, .commander-tile, .lib-card-open, .seat-deck-slot, .rr-option, .phase-pip, .pp-zone-link) {
+button:hover:not(:disabled, .card-tile, .mini-tile, .commander-tile, .lib-card-open, .seat-deck-slot, .rr-option, .phase-pip, .pp-zone-link, .link-button) {
   /* a veil over whatever fill the button has, rather than a new fill, so a
      transparent, tinted or accent button each lifts from its own colour (one
      flat colour: a "gradient" of a single colour is how CSS lays a veil) */
@@ -238,7 +238,7 @@ button:disabled {
 }
 /* A control that can't be used yet reads as an outline with dimmed text,
    not a ghost at 40% opacity, which on the near-black table nearly vanished
-   (the lobby's Start Game). */
+   (the lobby's Start game). */
 button:disabled:not(.card-tile, .mini-tile, .commander-tile, .lib-card-open, .seat-deck-slot, .rr-option, .phase-pip, .pp-zone-link) {
   opacity: 1;
   color: var(--muted-dim);
@@ -254,6 +254,27 @@ button.primary:not(:disabled) {
   border-color: var(--accent);
   color: var(--on-accent);
   font-weight: 600;
+}
+
+/* A button drawn as a text link (the pages' "← Main menu", the deck picker's
+   "Build or import a deck"), and what every text link does under the
+   pointer: a step brighter and a heavier underline. Until 2026-11-21 the
+   legal footer's links changed colour, the About page's did nothing, and
+   these did nothing either. `:any-link` is there for its weight, so a page's
+   own `a` colour doesn't outrank the hover; the landing page's two cards are
+   links only for the click. */
+.link-button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  text-decoration: underline;
+  padding: 2px;
+}
+a:any-link:hover:not(.landing-nav-card),
+.link-button:hover:not(:disabled) {
+  color: var(--gold);
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
 }
 
 /* Text fields got the same baseline as buttons, which they had never had --

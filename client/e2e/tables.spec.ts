@@ -147,7 +147,7 @@ async function lobby(
   await host.page.getByRole('button', { name: 'Ready', exact: true }).click()
   await guest.page.getByRole('button', { name: 'Ready', exact: true }).click()
   await host.page.getByRole('group', { name: 'Add a bot' }).getByRole('button').first().click()
-  await expect(host.page.getByRole('button', { name: 'Start Game' })).toBeEnabled()
+  await expect(host.page.getByRole('button', { name: 'Start game' })).toBeEnabled()
   return { host, guest, room }
 }
 
@@ -183,7 +183,7 @@ async function getOn(page: Page): Promise<void> {
     await page.getByRole('button', { name: 'Discard', exact: true }).click(quick).catch(() => {})
     return
   }
-  await page.getByRole('button', { name: 'Pass Turn' }).click(quick).catch(() => {})
+  await page.getByRole('button', { name: 'Pass turn' }).click(quick).catch(() => {})
 }
 
 /**
@@ -224,7 +224,7 @@ test('two people and a bot play a table: a copy in each browser, only the order 
   test.setTimeout(300_000)
   const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE)
   await capable(host, guest)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   await expect(keepPrompt(host.page)).toBeVisible(paced)
   await expect(keepPrompt(guest.page)).toBeVisible(paced)
 
@@ -329,7 +329,7 @@ test("a move made as someone concedes is taken back on the mover's page, which s
   const lag: Lag = { ms: 0 }
   const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE, lag)
   await capable(host, guest)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   for (const { page } of [host, guest]) {
     await expect(keepPrompt(page)).toBeVisible(paced)
     await page.getByRole('button', { name: 'Keep', exact: true }).click()
@@ -390,7 +390,7 @@ test("the host's tab closes mid-game: the bots, and the game, carry on from the 
   test.setTimeout(300_000)
   const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE)
   await capable(host, guest)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   for (const { page } of [host, guest]) {
     await expect(keepPrompt(page)).toBeVisible(paced)
     await page.getByRole('button', { name: 'Keep', exact: true }).click()
@@ -467,7 +467,7 @@ test('the copies check each other: one that drifts is put back on the host\u2019
   test.setTimeout(300_000)
   const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE)
   await capable(host, guest)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   for (const { page } of [host, guest]) {
     await expect(keepPrompt(page)).toBeVisible(paced)
     await page.getByRole('button', { name: 'Keep', exact: true }).click()
@@ -535,7 +535,7 @@ test('a start pressed before a page has the card pool in waits for it, and is st
   // soon as everyone is ready, as a quick host would. Each page has said it
   // will be able to shortly, so the server holds the start for them.
   const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   for (const { page } of [host, guest]) await expect(keepPrompt(page)).toBeVisible(paced)
   const started = await status(request)
   expect(started.tables?.map((t) => t.id)).toContain(room)
@@ -553,7 +553,7 @@ test('two builds of the page in one lobby: the game starts on the server', async
   // must run one build.
   const { host, guest, room } = await lobby(browser, CAPABLE, `${CAPABLE}&build=another`)
   await capable(host, guest)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   for (const { page } of [host, guest]) await expect(keepPrompt(page)).toBeVisible(paced)
   const started = await status(request)
   expect(started.rooms.find((r) => r.id === room)).toMatchObject({ stage: 'playing' })
@@ -569,7 +569,7 @@ test('one page that cannot hold a copy, and the same lobby starts as a game on t
   // The guest's page plays solo games in its browser but not tables.
   const { host, guest, room } = await lobby(browser, CAPABLE, 'local=1&tables=0')
   await capable(host)
-  await host.page.getByRole('button', { name: 'Start Game' }).click()
+  await host.page.getByRole('button', { name: 'Start game' }).click()
   for (const page of [host.page, guest.page]) {
     await expect(keepPrompt(page)).toBeVisible(paced)
     await page.getByRole('button', { name: 'Keep', exact: true }).click()

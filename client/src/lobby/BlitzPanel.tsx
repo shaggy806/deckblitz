@@ -187,7 +187,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
           <div className="landing-blitz-paste-row">
             <button
               type="button"
-              className="link-button"
+              className="landing-join-btn"
               onClick={() => {
                 setPhase({ kind: 'idle' })
                 setError(null)

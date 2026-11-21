@@ -51,7 +51,7 @@ function serverTraffic(page: Page): string[] {
 }
 
 /**
- * Alice passes her turns (Auto-pass stops at her own, so Pass Turn there)
+ * Alice passes her turns (Auto-pass stops at her own, so Pass turn there)
  * until a bot's permanent is on the board. When she is the one who goes
  * first she ends that turn with eight cards, having played none, and the
  * game waits on her cleanup discard: answered here. Unanswered, nothing ever
@@ -68,7 +68,7 @@ async function passUntilTheBoardHasSomething(page: Page): Promise<void> {
           await page.locator('.hand-card .card-tile').first().dispatchEvent('click')
           await discard.getByRole('button', { name: 'Discard' }).click({ timeout: 2_000 }).catch(() => {})
         }
-        const passTurn = page.getByRole('button', { name: 'Pass Turn' })
+        const passTurn = page.getByRole('button', { name: 'Pass turn' })
         if (await passTurn.isEnabled().catch(() => false)) await passTurn.click().catch(() => {})
         return page.locator('.board-entry').count()
       },
@@ -155,7 +155,7 @@ test('a local game picks up again after a reload, where it was', async ({ page, 
   expect(await page.evaluate(() => new URL(window.location.href).searchParams.get('room'))).toBe(roomId)
   await expect(page.locator('[data-player-id]')).toHaveCount(4)
   await expect.poll(() => page.locator('.board-entry').count(), { timeout: 20_000 }).toBeGreaterThanOrEqual(before)
-  await expect(page.getByRole('button', { name: /^(Pass|Pass Turn|Auto-pass|Keep.*|Discard)/ }).first()).toBeVisible()
+  await expect(page.getByRole('button', { name: /^(Pass|Pass turn|Auto-pass|Keep.*|Discard)/ }).first()).toBeVisible()
   expect(sent.some((s) => s.includes(roomId!))).toBe(false)
 })
 
@@ -193,7 +193,7 @@ test('a lobby game with only bots across the table moves into the page as it sta
   await expect(page.getByRole('button', { name: 'Add precon bot' })).toHaveCount(0, { timeout: 20_000 })
   const lobbyId = await page.evaluate(() => new URL(window.location.href).searchParams.get('room'))
   await page.getByRole('button', { name: 'Ready' }).click()
-  await page.getByRole('button', { name: 'Start Game' }).click()
+  await page.getByRole('button', { name: 'Start game' }).click()
 
   await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 60_000 })
   await expect(page.locator('[data-player-id]')).toHaveCount(2, { timeout: 20_000 })

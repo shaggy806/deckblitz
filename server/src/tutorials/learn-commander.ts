@@ -113,7 +113,7 @@ const passTurn = (id: string, title: string, body: string, opensOn?: TutorialCon
   holdPriority: true,
   ...(opensOn !== undefined ? { opensOn } : {}),
   allow: [{ do: "pass-turn" }],
-  goals: [{ id: `${id}-done`, label: "Press Pass Turn", when: { event: "turn-began", player: ROWAN } }],
+  goals: [{ id: `${id}-done`, label: "Press Pass turn", when: { event: "turn-began", player: ROWAN } }],
 });
 
 /** Pass out of the main phase. Its goal is combat beginning, not attackers
@@ -286,7 +286,7 @@ export const LEARN_COMMANDER: Lesson = {
           anchor: `card:${RATS}`,
           placement: "right",
         },
-        passTurn("first-pass", "That's your turn", "You've done everything you can for now. Press Pass Turn to hand over to Rowan."),
+        passTurn("first-pass", "That's your turn", "You've done everything you can for now. Press Pass turn to hand over to Rowan."),
       ],
     },
     {
@@ -361,7 +361,7 @@ export const LEARN_COMMANDER: Lesson = {
           placement: "bottom",
           opensOn: { lifeAtMost: { player: ROWAN, value: 12 } },
         },
-        passTurn("second-pass", "Over to Rowan", "Nothing more to do this turn. Pass Turn stops by itself if you need to decide something."),
+        passTurn("second-pass", "Over to Rowan", "Nothing more to do this turn. Pass turn stops by itself if you need to decide something."),
       ],
     },
     {
@@ -433,7 +433,7 @@ export const LEARN_COMMANDER: Lesson = {
         passTurn(
           "third-pass",
           "Rowan is on 9",
-          "Two more creatures' worth of damage landed. Press Pass Turn.",
+          "Two more creatures' worth of damage landed. Press Pass turn.",
           { lifeAtMost: { player: ROWAN, value: 9 } },
         ),
       ],

@@ -60,8 +60,10 @@ export function DeckPickerModal({
       <div className="deck-picker-box" onClick={(e) => e.stopPropagation()}>
         <div className="deck-picker-head">
           <h3>{title}</h3>
-          <button type="button" className="deck-picker-close" onClick={onClose} aria-label="Close">
-            ✕
+          {/* The word, as the zone viewer, History and the deck builder's
+              pickers close: this and the library's overlay had a bare ×. */}
+          <button type="button" onClick={onClose}>
+            Close
           </button>
         </div>
         <div className="deck-picker-tabs" role="tablist" aria-label="Kind of deck">

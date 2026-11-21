@@ -90,6 +90,11 @@ export function SeatMenu({
             <div className="seat-menu-slot">
               <div className={`seat-menu-confirm${confirming ? '' : ' slot-hidden'}`} aria-hidden={!confirming}>
                 <span>Concede the game?</span>
+                {/* Cancel first, the answer that does it last: the side every
+                    other dialog's confirming button is on. */}
+                <button type="button" onClick={() => setConfirming(false)}>
+                  Cancel
+                </button>
                 <button
                   type="button"
                   className="seat-menu-danger"
@@ -99,9 +104,6 @@ export function SeatMenu({
                   }}
                 >
                   Concede
-                </button>
-                <button type="button" onClick={() => setConfirming(false)}>
-                  Cancel
                 </button>
               </div>
               <button
@@ -128,6 +130,9 @@ export function SeatMenu({
             <div className="seat-menu-slot">
               <div className={`seat-menu-confirm${confirmingRestart ? '' : ' slot-hidden'}`} aria-hidden={!confirmingRestart}>
                 <span>Restart for everyone?</span>
+                <button type="button" onClick={() => setConfirmingRestart(false)}>
+                  Cancel
+                </button>
                 <button
                   type="button"
                   className="seat-menu-danger"
@@ -137,9 +142,6 @@ export function SeatMenu({
                   }}
                 >
                   Restart
-                </button>
-                <button type="button" onClick={() => setConfirmingRestart(false)}>
-                  Cancel
                 </button>
               </div>
               <button
@@ -171,11 +173,11 @@ export function SeatMenu({
             <div className="seat-menu-slot">
               <div className={`seat-menu-confirm${confirmingLeave ? '' : ' slot-hidden'}`} aria-hidden={!confirmingLeave}>
                 <span>Leave this game?</span>
-                <button type="button" className="seat-menu-danger" onClick={() => window.location.assign('/')}>
-                  Leave
-                </button>
                 <button type="button" onClick={() => setConfirmingLeave(false)}>
                   Cancel
+                </button>
+                <button type="button" className="seat-menu-danger" onClick={() => window.location.assign('/')}>
+                  Leave
                 </button>
               </div>
               <button

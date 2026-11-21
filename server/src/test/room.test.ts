@@ -209,7 +209,7 @@ describe("Room", () => {
     expect(room.game.state.turn.step).toBe(stepBefore);
   });
 
-  it("Pass Turn carries a seat clean through its own end step into the opponent's turn", () => {
+  it("Pass turn carries a seat clean through its own end step into the opponent's turn", () => {
     // Sparse (all-Forest) decks: no shuffle-dependent castable turns up, so the
     // starting position is a plain "play a land or pass" window every time.
     const room = makeSparseRoom();
@@ -1068,7 +1068,7 @@ describe("Room: passing preferences and stops", () => {
     const { room, activeConn, other, otherConn } = table();
     room.setPassSettings(otherConn, { ...NONE, passToMain: true });
     room.requestAutoPass(otherConn);
-    // Auto-pass rather than Pass Turn, so the active player passes the
+    // Auto-pass rather than Pass turn, so the active player passes the
     // windows they get in the other player's upkeep and draw too.
     room.requestAutoPass(activeConn);
     expect(at(room)).toEqual({ holder: other, step: "precombat-main", active: other });
@@ -1095,7 +1095,7 @@ describe("Room: passing preferences and stops", () => {
     expect(at(second.room)).toMatchObject({ holder: second.active, step: "postcombat-main" });
   });
 
-  it("a stop holds the first window of its step against Pass Turn, then lets it go on", () => {
+  it("a stop holds the first window of its step against Pass turn, then lets it go on", () => {
     const { room, active, activeConn, otherConn } = table();
     room.requestAutoPass(otherConn);
     room.setPassSettings(activeConn, { ...NONE, stops: { mine: ["end"], theirs: [] } });
@@ -1106,7 +1106,7 @@ describe("Room: passing preferences and stops", () => {
     expect(room.game.activePlayer).not.toBe(active);
   });
 
-  it("a stop on the step Pass Turn is pressed in doesn't hold it", () => {
+  it("a stop on the step Pass turn is pressed in doesn't hold it", () => {
     const { room, active, activeConn, otherConn } = table();
     room.requestAutoPass(otherConn);
     room.setPassSettings(activeConn, { ...NONE, stops: { mine: ["precombat-main"], theirs: [] } });

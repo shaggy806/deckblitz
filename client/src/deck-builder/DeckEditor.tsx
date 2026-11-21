@@ -546,9 +546,6 @@ export function DeckEditor({
               {/* Short, so the confirm is no wider than the buttons it shares
                   a cell with and the head row doesn't wrap for it. */}
               <span>Delete this deck?</span>
-              <button type="button" className="db-danger" title="It can't be undone." onClick={() => onDelete?.()}>
-                Delete
-              </button>
               {confirmingDelete ? (
                 // Keyed apart from the idle one, so it mounts — and takes the
                 // focus — as the confirm opens.
@@ -560,6 +557,10 @@ export function DeckEditor({
                   Cancel
                 </button>
               )}
+              {/* After Cancel: the answer that does it is last, as everywhere. */}
+              <button type="button" className="db-danger" title="It can't be undone." onClick={() => onDelete?.()}>
+                Delete
+              </button>
             </div>
             <div className="db-editor-actions" hidden={confirmingDelete}>
               <button type="button" data-tour="db-make-active" onClick={onMakeActive} disabled={isActive}>

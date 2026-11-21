@@ -145,7 +145,7 @@ export const BOARD_TOUR: Lesson = {
         },
         {
           id: "pass-turn",
-          title: "Pass Turn",
+          title: "Pass turn",
           body: "Passes for the rest of this turn, but still stops whenever you have something to decide, like blockers.",
           anchor: "tour:game-pass-turn",
           placement: "top",

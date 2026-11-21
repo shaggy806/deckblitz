@@ -72,7 +72,7 @@ export interface Connection {
 
 /**
  * How far a seat's auto-pass should carry: through the rest of the current
- * turn only ("Pass Turn"), or all the way through an opponent's turn too,
+ * turn only ("Pass turn"), or all the way through an opponent's turn too,
  * stopping only once it's this seat's own turn again ("Auto-pass").
  * `afterTurn` is the turn number in effect when requested, so "my turn"
  * means a *later* turn than that — not an already-current one. `restarts`
@@ -112,7 +112,7 @@ interface Seat {
    * The `turn:step` whose stop this seat has already been held at, so a stop
    * holds only the first window of its step: once the player passes there,
    * the rest of the step passes as it would have. Also set to the step a
-   * Pass Turn or Auto-pass is armed in, so a stop on the step you're already
+   * Pass turn or Auto-pass is armed in, so a stop on the step you're already
    * in doesn't hold the pass you just asked for.
    */
   stoppedAt: string | null;
@@ -511,10 +511,10 @@ export interface RoomOptions {
    * Whether `player`'s priority window — the stack empty, nothing to do in
    * it but pass (or tap for mana) — waits for them instead of passing
    * itself. A tutorial's (`tutorial-session.ts`): a coach card that asks the
-   * player to pass the turn needs a window to press Pass Turn in, and with
+   * player to pass the turn needs a window to press Pass turn in, and with
    * nothing left to cast the room would otherwise pass straight through it
    * into the next turn. Asked from `settle()`, so like `onPublish` it may
-   * read the game, never dispatch, settle or publish. An armed Pass Turn or
+   * read the game, never dispatch, settle or publish. An armed Pass turn or
    * Auto-pass still passes the window.
    */
   readonly holdsPriority?: (room: Room, player: PlayerId) => boolean;

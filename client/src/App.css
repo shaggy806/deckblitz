@@ -95,7 +95,9 @@
   background: transparent;
   border-color: var(--border-soft);
   color: var(--muted);
-  font-size: var(--text-xs);
+  /* --text-sm, the smallest a button's label goes anywhere on the site
+     (the filter chips, the settings rows); these were a size under it. */
+  font-size: var(--text-sm);
   padding: 3px 9px;
 }
 .ts-menu button:hover:not(:disabled) {
@@ -241,12 +243,13 @@
 }
 /* The settings panel's section headings, and a note that wraps rather than
    stretching the nowrap panel. */
+/* A section label, as the room settings' and the deck builder's are: muted
+   spaced caps (bold white until 2026-11-21, the one label that was). */
 .motion-heading {
-  color: var(--text);
-  font-weight: 700;
+  color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: var(--text-2xs);
+  font-size: var(--text-xs);
 }
 .motion-heading + .motion-row {
   margin-top: -2px;
@@ -312,9 +315,6 @@
   font-size: var(--text-xs);
   color: var(--muted);
   text-align: center;
-}
-.seat-menu-link:hover {
-  color: var(--accent);
 }
 /* A history entry can be clicked to point its cards out on the board. */
 .event-log .ev.selectable {
@@ -1449,7 +1449,7 @@
   transition: none;
 }
 
-/* priority mode's Pass/Pass Turn/Auto-pass/Skip-mana controls, pulled out of
+/* priority mode's Pass/Pass turn/Auto-pass/Skip-mana controls, pulled out of
    the (now peekable) hand strip into their own fixed corner so they're
    reachable without hovering the hand open first. */
 .priority-actions {
@@ -4411,6 +4411,12 @@
   overflow: hidden;
   box-shadow: var(--frame-raised), var(--shadow-dialog);
 }
+/* Gold means it is asking you something: the mulligan, the result, the
+   decision banner's pulse, an ability menu -- and a viewer that is a choice
+   (a search, a scry, piles to separate) rather than a look at a zone. */
+.zone-viewer-box.asking {
+  border-color: var(--accent);
+}
 .zone-viewer-head {
   display: flex;
   align-items: center;
@@ -4595,15 +4601,6 @@
   line-height: 1;
   background: var(--scrim);
   color: var(--text);
-}
-
-/* lobby entry point for the decklist-import feasibility report */
-.link-button {
-  background: none;
-  border: none;
-  color: var(--accent);
-  text-decoration: underline;
-  padding: 2px;
 }
 
 /* AnimationLayer -- portalled to document.body (see MiniTile's popover for

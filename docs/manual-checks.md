@@ -66,7 +66,7 @@ engine terms. A second thing to check is a second test.
 ### A turn that ends on its own says so
 - **Do:** Play the Forest and wait.
 - **Expect:** As Bob's turn begins, a notice at the top: "Your turn ended on its own: nothing was left that you could play. Settings has the stops." It fades after a few seconds.
-- **Not a bug:** A device is told three times, then never again. Pressing Pass or Pass Turn yourself that turn means no notice.
+- **Not a bug:** A device is told three times, then never again. Pressing Pass or Pass turn yourself that turn means no notice.
 
 ## Prompts and log lines that say what the engine checks (2026-11-11)
 
@@ -8814,7 +8814,7 @@ Each board's die comes up 4.
 - **Not a bug:** The History says "That player draws a card" rather than naming Bob.
 
 ### Grizzly Bears: a combat with no attack has no blockers or damage step
-- **Do:** Pass priority one step at a time (Pass, not Pass Turn) through your combat without attacking.
+- **Do:** Pass priority one step at a time (Pass, not Pass turn) through your combat without attacking.
 - **Expect:** After the declare attackers step (DA) the strip goes straight to end of combat (EC): DB and CD never light, and nobody is given priority in them. The History's Detailed view has no "[combat] declare-blockers" or "[combat] combat-damage" line for the turn.
 - **Not a bug:** On a turn where a creature does attack, all five steps are there.
 

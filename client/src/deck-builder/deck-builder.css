@@ -44,7 +44,7 @@
   color: var(--muted-dim);
 }
 .db-list-head button {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   padding: 2px 8px;
 }
 .db-list-head-actions {

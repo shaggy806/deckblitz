@@ -139,7 +139,7 @@ test("the host's rematch carries the other player into the new game", async ({ b
   expect(room).toMatch(/^[A-Z0-9]{5}$/)
   await guest.goto(`/?room=${room}`)
   await guest.getByRole('button', { name: 'Ready', exact: true }).click()
-  await host.getByRole('button', { name: 'Start Game' }).click()
+  await host.getByRole('button', { name: 'Start game' }).click()
 
   for (const page of [host, guest]) {
     await expect(keepPrompt(page)).toBeVisible(paced)
@@ -192,7 +192,7 @@ test('the host restarts a game mid-way, and the other player is told', async ({ 
   const room = await roomOf(host)
   await guest.goto(`/?room=${room}`)
   await guest.getByRole('button', { name: 'Ready', exact: true }).click()
-  await host.getByRole('button', { name: 'Start Game' }).click()
+  await host.getByRole('button', { name: 'Start game' }).click()
   for (const page of [host, guest]) {
     await expect(keepPrompt(page)).toBeVisible(paced)
     await page.getByRole('button', { name: 'Keep', exact: true }).click()

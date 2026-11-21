@@ -12,7 +12,7 @@ import { STEPS, STOPPABLE_STEPS, toggleStop, usePassSettings } from '../game/pas
  * Each pip is also a switch: clicking one flags that step as a **stop**
  * (`game/passSettings.ts`), where the server holds your first priority window
  * whatever would pass it otherwise — "pass to main", "pass through combat",
- * Auto-pass, Pass Turn. Your own turns and everyone else's have separate
+ * Auto-pass, Pass turn. Your own turns and everyone else's have separate
  * stops, and the row shows and edits whichever kind of turn this is. Untap
  * and cleanup can't be flagged: nobody gets priority in them.
  */
