@@ -2076,6 +2076,16 @@ describe("costs and triggers", () => {
     ]);
     expect(harness.triggered[0].effect).toEqual({ kind: "cast-now", target: 0 });
 
+    const plans = parseFace({
+      name: "Colfenor's Plans",
+      type_line: "Enchantment",
+      oracle_text:
+        "When this enchantment enters, exile the top seven cards of your library face down.\nYou may look at the cards exiled with this enchantment, and you may play lands and cast spells from among those cards.\nSkip your draw step.\nYou can't cast more than one spell each turn.",
+    });
+    expect(plans.complete).toBe(true);
+    expect(plans.triggered[0].effect).toEqual({ kind: "exile-from-library", amount: 7, faceDown: "linked-controller", linked: true });
+    expect(plans.static[0].mayPlay).toEqual({ from: "exile", play: true, filter: {}, linked: true });
+
     const succession = parseFace({
       name: "Verdant Succession",
       type_line: "Enchantment",

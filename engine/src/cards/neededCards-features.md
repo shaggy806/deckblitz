@@ -1928,6 +1928,16 @@ permanents (`Game`'s together resolver, beside `oneEachTypeAmong`). The rest was
 `grant-play { thisWay: "exiled" }`. The only card with the line, so no scaffolder template.
 `test/exile-one-per-color.test.ts`.
 
+### Face-down library exiles the source's controller looks at — built 2026-11-21
+
+The key `effect:exile-face-down-lookers-follow-source-controller`, for Colfenor's Plans: `exile-from-library`'s
+`faceDown: "linked-controller"` (with `linked`) makes the linked source's controller the looker without
+`lookersOnly`, so `Game.shareLinkedLooks` adds whoever gains control of it (rule 406.3: each may go on looking, even
+once it has left; playing them stays the linked `mayPlay`'s, its controller's while it's on the battlefield). The
+scaffolder turns a face-down `exile-from-library` into it beside "you may look at (the) cards exiled with …", and reads
+Colfenor's "the cards" in the Kheru permission line. Grimoire Thief wants the same exile from a target opponent's
+library, plus "counter all spells with those names". `test/exile-face-down-lookers-follow.test.ts`.
+
 ### A spell's gained trigger kept by the permanent it becomes — built 2026-11-21
 
 The key `effect:spell-gains-ability-kept-by-permanent`, for Cherished Hatchling: no engine code. "Whenever you cast a

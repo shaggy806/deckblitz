@@ -44978,12 +44978,18 @@ controlledBy,
       exileFromLibrary: (target, count, withCounters, linked, faceDown) => {
         const since = this.state.eventSeq;
         const exiled = this.exileFromLibraryByEffect(target, count, controller, withCounters);
-        if (linked === true) {
-          const src = this.state.objects[source];
-          const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
-          if (stint !== undefined) this.linkExiledToSource(exiled, source, stint);
+        const src = this.state.objects[source];
+        const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
+        if (linked === true && stint !== undefined) this.linkExiledToSource(exiled, source, stint);
+        // "You may look at the cards exiled with this enchantment" (Colfenor's
+        // Plans): whoever controls the linked source looks, and whoever comes
+        // to control it (`shareLinkedLooks`) — each may go on looking (406.3).
+        if (faceDown === "linked-controller") {
+          const lookers = linked === true && stint !== undefined ? this.linkedSourceController({ source, zoneChangeCount: stint }) : [];
+          this.turnExiledFaceDown(exiled, lookers, since, false);
+        } else if (faceDown !== undefined) {
+          this.turnExiledFaceDown(exiled, faceDown === "looked" ? [controller] : [], since);
         }
-        if (faceDown !== undefined) this.turnExiledFaceDown(exiled, faceDown === "looked" ? [controller] : [], since);
       },
       turnExiledFaceUp: () => {
         const src = this.state.objects[source];
@@ -74640,12 +74646,14 @@ controlledBy,
 
   /**
    * Cards an effect has just exiled are face down (rule 406.3): only `lookers`
-   * may look, whoever comes to control a source they're linked to, and what
-   * the log knew of them since `since` is forgotten.
+   * may look, whoever comes to control a source they're linked to — unless
+   * `lookersOnly` is false, when a new controller of that source may look too
+   * (`shareLinkedLooks`) — and what the log knew of them since `since` is
+   * forgotten.
    */
-  private turnExiledFaceDown(exiled: readonly ObjectId[], lookers: readonly PlayerId[], since: number): void {
+  private turnExiledFaceDown(exiled: readonly ObjectId[], lookers: readonly PlayerId[], since: number, lookersOnly = true): void {
     for (const id of exiled) {
-      this.state.objects[id].exiledFaceDown = { lookers: [...lookers], group: since, lookersOnly: true };
+      this.state.objects[id].exiledFaceDown = { lookers: [...lookers], group: since, ...(lookersOnly ? { lookersOnly: true as const } : {}) };
     }
     this.forgetStints(exiled, since);
   }

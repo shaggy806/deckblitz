@@ -9,6 +9,7 @@
     "decision:mixed-zone-targets",
     "decision:replacement-order-draw",
     "decision:pay-per-chosen-untap",
+    "effect:exile-face-down-lookers-follow-source-controller",
     "effect:spell-gains-ability-kept-by-permanent",
     "effect:random-card-from-revealed",
     "filter:same-name-as-trigger-spell-target-slot",

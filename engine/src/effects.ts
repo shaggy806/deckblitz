@@ -5771,8 +5771,13 @@ export type EffectSpec =
        * it.)" (Bomat Courier), nobody may look, its owner included; `"looked"`
        * is "look at the top card of your library, then exile it face down"
        * (Kayla's Music Box), and only the effect's controller may, even if
-       * another player gains control of a linked source (their rulings). */
-      readonly faceDown?: true | "looked";
+       * another player gains control of a linked source (their rulings);
+       * `"linked-controller"` (with `linked`) is "exile the top seven cards
+       * of your library face down. You may look at the cards exiled with this
+       * enchantment" (Colfenor's Plans): the controller of the linked source
+       * looks, and whoever comes to control it after (rule 406.3 — each may go
+       * on looking, even once it has left). */
+      readonly faceDown?: true | "looked" | "linked-controller";
     }
   | {
       /** "**Turn** the exiled card / all cards exiled with this **face up**"
@@ -14664,7 +14669,7 @@ export interface EffectApi {
     count: { readonly top: number } | { readonly bottom: number } | { readonly allBut: number },
     withCounters?: { readonly kind: string; readonly amount: number },
     linked?: boolean,
-    faceDown?: true | "looked",
+    faceDown?: true | "looked" | "linked-controller",
   ): void;
   /** See the `"turn-exiled-face-up"` {@link EffectSpec}. */
   turnExiledFaceUp(): void;

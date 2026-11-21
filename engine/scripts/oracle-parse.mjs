@@ -21635,6 +21635,15 @@ function parseFaceAsWritten(face, ctx = {}) {
       if (Array.isArray(node)) node.forEach(linkedExile);
       else if (node !== null && typeof node === "object") {
         if (node.kind === "exile-from-library" || node.kind === "impulse-exile") node.linked = true;
+        // "Exile the top seven cards of your library face down. You may look
+        // at the cards exiled with this enchantment" (Colfenor's Plans): the
+        // source's controller looks, whoever that comes to be.
+        if (
+          node.kind === "exile-from-library" &&
+          node.faceDown === true &&
+          /\byou may look at (?:the )?cards exiled with\b/i.test(face.oracle_text ?? "")
+        )
+          node.faceDown = "linked-controller";
         // An exile until a card is found (Krang & Shredder), every card linked.
         if (node.kind === "reveal-until" && node.exile === true) node.linked = true;
         // (An exile "until ~ leaves the battlefield" is linked that way already.)
@@ -25007,7 +25016,7 @@ function parseStatic(line, text) {
   // spells from among those cards." (Kheru Mind-Eater): the look is the
   // exiling effect's `faceDownLooks`; this is Nightveil Specter's permission.
   if (
-    /^You may look at cards exiled with (?:~|this (?:enchantment|artifact|creature)), and you may play lands and cast spells from among those cards\.$/.test(
+    /^You may look at (?:the )?cards exiled with (?:~|this (?:enchantment|artifact|creature)), and you may play lands and cast spells from among those cards\.$/.test(
       line,
     )
   ) {
