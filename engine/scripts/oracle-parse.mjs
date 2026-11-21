@@ -25470,6 +25470,20 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Damage become a sacrifice (rules 614.1a, 614.6): "if damage would be
+  // dealt to Dralnu, sacrifice that many permanents instead" (Dralnu, Lich
+  // Lord) — all of them if there are fewer (the ruling).
+  if (line === "If damage would be dealt to ~, sacrifice that many permanents instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-deal-damage",
+        instead: { effect: { kind: "sacrifice", who: "you", filter: {}, count: "x" } },
+        to: "self",
+      },
+      text,
+    };
+  }
   // A life gain become draws (rules 614.1a, 614.6): "if you would gain life,
   // draw that many cards instead" (Lich, Nefarious Lich).
   if (line === "If you would gain life, draw that many cards instead.") {

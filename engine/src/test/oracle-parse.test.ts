@@ -4580,6 +4580,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("If that creature would die this turn, exile it instead.", "Instant").complete).toBe(false);
   });
 
+  it("reads damage to this creature become a sacrifice of that many permanents (Dralnu, Lich Lord)", () => {
+    expect(face("If damage would be dealt to Test Card, sacrifice that many permanents instead.", "Creature").static?.[0]?.replacement).toEqual({
+      event: "would-deal-damage",
+      instead: { effect: { kind: "sacrifice", who: "you", filter: {}, count: "x" } },
+      to: "self",
+    });
+  });
+
   it("reads the would-scry and would-lose-game replacements (rule 614.1a)", () => {
     expect(face("If you would scry a number of cards, scry that many cards plus one instead.", "Creature").static?.[0]?.replacement).toEqual({
       event: "would-scry",
