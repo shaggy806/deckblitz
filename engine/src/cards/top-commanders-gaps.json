@@ -8,6 +8,7 @@
     "effect:regenerate-gain-control",
     "effect:counter-per-kind-among",
     "effect:chosen-source-shield-prevent-all-but",
+    "replacement:skip-every-draw",
     "static:max-hand-size-equal-to-counters",
     "static:max-hand-size-equal-to-count",
     "static:exhaust-reactivation",

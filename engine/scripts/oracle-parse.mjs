@@ -7580,6 +7580,19 @@ export function parseSentence(sentence, ctx) {
     }
   }
   if (re("sacrifice ~").test(s)) return { kind: "sacrifice-source" };
+  // "Each player sacrifices a permanent of their choice unless they discard a
+  // card" (Possessed Portal; The Long Reach of Night's "each opponent … a
+  // creature"): each asked, the sacrifice for those who don't.
+  if ((m = /^each (player|opponent) sacrifices an? (.+?) of their choice unless they discard a card\.$/i.exec(s))) {
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null) return null;
+    return {
+      kind: "each-player-may",
+      who: m[1].toLowerCase() === "player" ? "each-player" : "each-opponent",
+      options: [{ discard: 1, text: "Discard a card" }],
+      ifDidnt: { kind: "sacrifice", who: "that-player", filter, count: 1 },
+    };
+  }
   if ((m = re(`(each player|each opponent|target player|target opponent) sacrifices ${N} (.+?)(?: of their choice)?`).exec(s))) {
     const count = amount(m[2]);
     const filter = parseTypePhrase(m[3]);
@@ -24750,6 +24763,15 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // "If a player would draw a card, that player skips that draw instead"
+  // (Possessed Portal): the draw becomes nothing (rule 614.1a).
+  if (line === "If a player would draw a card, that player skips that draw instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-draw", who: "any-player", instead: { effect: { kind: "sequence", effects: [] } } },
+      text,
+    };
   }
   // Shared Fate: any player's draw, made by them — they choose the opponent
   // and exile its top card face down, linked to this, theirs to look at.

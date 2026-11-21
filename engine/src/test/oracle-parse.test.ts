@@ -2101,6 +2101,25 @@ describe("costs and triggers", () => {
       combatOnly: true,
     });
 
+    const portal = parseFace({
+      name: "Possessed Portal",
+      type_line: "Artifact",
+      oracle_text:
+        "If a player would draw a card, that player skips that draw instead.\nAt the beginning of each end step, each player sacrifices a permanent of their choice unless they discard a card.",
+    });
+    expect(portal.complete).toBe(true);
+    expect(portal.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "any-player",
+      instead: { effect: { kind: "sequence", effects: [] } },
+    });
+    expect(portal.triggered[0].effect).toEqual({
+      kind: "each-player-may",
+      who: "each-player",
+      options: [{ discard: 1, text: "Discard a card" }],
+      ifDidnt: { kind: "sacrifice", who: "that-player", filter: {}, count: 1 },
+    });
+
     const parasite = parseFace({
       name: "Invader Parasite",
       type_line: "Creature — Phyrexian Insect",

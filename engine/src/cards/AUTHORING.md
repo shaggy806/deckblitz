@@ -8425,7 +8425,9 @@ The `prevent-damage` family makes the same record.
   draw replaced by an effect: Underrealm Lich's "instead look at the top three
   cards of your library, then put one into your hand and the rest into your
   graveyard" (a `look-and-choose`), Sages of the Anima's reveal-three,
-  Tomorrow, Azami's Familiar's. It applies though the library is empty (rule
+  Tomorrow, Azami's Familiar's; "if a player would draw a card, that player
+  skips that draw instead" (Possessed Portal) is `who: "any-player"` with the
+  empty `{ kind: "sequence", effects: [] }`. It applies though the library is empty (rule
   614.11: no loss for it), the card isn't drawn (no draw trigger or count),
   and each draw of several is finished, its choice answered, before the next
   (614.11a). It takes the exemptions too, and is applied before a "draw N"
