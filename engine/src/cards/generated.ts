@@ -4938,6 +4938,7 @@ import _poolClinquantSkymage from "./pool/clinquant-skymage.js";
 import _poolClipWings from "./pool/clip-wings.js";
 import _poolCliveIfritsDominant from "./pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "./pool/clives-hideaway.js";
+import _poolCloakAndDaggerEntwined from "./pool/cloak-and-dagger-entwined.js";
 import _poolCloakAndDagger from "./pool/cloak-and-dagger.js";
 import _poolCloakAndPhaser from "./pool/cloak-and-phaser.js";
 import _poolCloakOfConfusion from "./pool/cloak-of-confusion.js";
@@ -18979,6 +18980,7 @@ import _poolNewPrahvGuildmage from "./pool/new-prahv-guildmage.js";
 import _poolNewWayForward from "./pool/new-way-forward.js";
 import _poolNewsHelicopter from "./pool/news-helicopter.js";
 import _poolNexos from "./pool/nexos.js";
+import _poolNextOfKin from "./pool/next-of-kin.js";
 import _poolNexusMentality from "./pool/nexus-mentality.js";
 import _poolNexusOfBecoming from "./pool/nexus-of-becoming.js";
 import _poolNexusOfFate from "./pool/nexus-of-fate.js";
@@ -20492,6 +20494,7 @@ import _poolPhantatog from "./pool/phantatog.js";
 import _poolPhantomBeast from "./pool/phantom-beast.js";
 import _poolPhantomBlade from "./pool/phantom-blade.js";
 import _poolPhantomCarriage from "./pool/phantom-carriage.js";
+import _poolPhantomCentaur from "./pool/phantom-centaur.js";
 import _poolPhantomFlock from "./pool/phantom-flock.js";
 import _poolPhantomGeneral from "./pool/phantom-general.js";
 import _poolPhantomInterference from "./pool/phantom-interference.js";
@@ -27859,6 +27862,7 @@ import _poolSyrVondamTheLucent from "./pool/syr-vondam-the-lucent.js";
 import _poolSyrixCarrierOfTheFlame from "./pool/syrix-carrier-of-the-flame.js";
 import _poolSystemsOverride from "./pool/systems-override.js";
 import _poolSythisHarvestsHand from "./pool/sythis-harvests-hand.js";
+import _poolSzadekLordOfSecrets from "./pool/szadek-lord-of-secrets.js";
 import _poolSzarekhTheSilentKing from "./pool/szarekh-the-silent-king.js";
 import _poolSzarelGenesisShepherd from "./pool/szarel-genesis-shepherd.js";
 import _poolSzatsWill from "./pool/szats-will.js";
@@ -38739,6 +38743,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClipWings,
   _poolCliveIfritsDominant,
   _poolClivesHideaway,
+  _poolCloakAndDaggerEntwined,
   _poolCloakAndDagger,
   _poolCloakAndPhaser,
   _poolCloakOfConfusion,
@@ -52780,6 +52785,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNewWayForward,
   _poolNewsHelicopter,
   _poolNexos,
+  _poolNextOfKin,
   _poolNexusMentality,
   _poolNexusOfBecoming,
   _poolNexusOfFate,
@@ -54293,6 +54299,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhantomBeast,
   _poolPhantomBlade,
   _poolPhantomCarriage,
+  _poolPhantomCentaur,
   _poolPhantomFlock,
   _poolPhantomGeneral,
   _poolPhantomInterference,
@@ -61660,6 +61667,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSyrixCarrierOfTheFlame,
   _poolSystemsOverride,
   _poolSythisHarvestsHand,
+  _poolSzadekLordOfSecrets,
   _poolSzarekhTheSilentKing,
   _poolSzarelGenesisShepherd,
   _poolSzatsWill,
@@ -72553,6 +72561,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/clip-wings": _poolClipWings,
   "pool/clive-ifrits-dominant": _poolCliveIfritsDominant,
   "pool/clives-hideaway": _poolClivesHideaway,
+  "pool/cloak-and-dagger-entwined": _poolCloakAndDaggerEntwined,
   "pool/cloak-and-dagger": _poolCloakAndDagger,
   "pool/cloak-and-phaser": _poolCloakAndPhaser,
   "pool/cloak-of-confusion": _poolCloakOfConfusion,
@@ -86594,6 +86603,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/new-way-forward": _poolNewWayForward,
   "pool/news-helicopter": _poolNewsHelicopter,
   "pool/nexos": _poolNexos,
+  "pool/next-of-kin": _poolNextOfKin,
   "pool/nexus-mentality": _poolNexusMentality,
   "pool/nexus-of-becoming": _poolNexusOfBecoming,
   "pool/nexus-of-fate": _poolNexusOfFate,
@@ -88107,6 +88117,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phantom-beast": _poolPhantomBeast,
   "pool/phantom-blade": _poolPhantomBlade,
   "pool/phantom-carriage": _poolPhantomCarriage,
+  "pool/phantom-centaur": _poolPhantomCentaur,
   "pool/phantom-flock": _poolPhantomFlock,
   "pool/phantom-general": _poolPhantomGeneral,
   "pool/phantom-interference": _poolPhantomInterference,
@@ -95474,6 +95485,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/syrix-carrier-of-the-flame": _poolSyrixCarrierOfTheFlame,
   "pool/systems-override": _poolSystemsOverride,
   "pool/sythis-harvests-hand": _poolSythisHarvestsHand,
+  "pool/szadek-lord-of-secrets": _poolSzadekLordOfSecrets,
   "pool/szarekh-the-silent-king": _poolSzarekhTheSilentKing,
   "pool/szarel-genesis-shepherd": _poolSzarelGenesisShepherd,
   "pool/szats-will": _poolSzatsWill,

@@ -643,6 +643,7 @@ import _poolNetherVoid from "../pool/nether-void.js";
 import _poolNetheresePuzzleWard from "../pool/netherese-puzzle-ward.js";
 import _poolNeutralizingBlast from "../pool/neutralizing-blast.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
+import _poolNextOfKin from "../pool/next-of-kin.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
 import _poolNightDay from "../pool/night-day.js";
 import _poolNimReplica from "../pool/nim-replica.js";
@@ -1758,6 +1759,7 @@ const shard: CardShard = {
     _poolNetheresePuzzleWard,
     _poolNeutralizingBlast,
     _poolNewHorizons,
+    _poolNextOfKin,
     _poolNezumiBladeblesser,
     _poolNightDay,
     _poolNimReplica,
