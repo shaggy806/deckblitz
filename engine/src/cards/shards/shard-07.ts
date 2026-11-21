@@ -181,6 +181,7 @@ import _poolContrabandLivestock from "../pool/contraband-livestock.js";
 import _poolCorneredMarket from "../pool/cornered-market.js";
 import _poolCorporealProjection from "../pool/corporeal-projection.js";
 import _poolCosmosCharger from "../pool/cosmos-charger.js";
+import _poolCouncilGuardian from "../pool/council-guardian.js";
 import _poolCourtOfVantress from "../pool/court-of-vantress.js";
 import _poolCrashOfRhinoBeetles from "../pool/crash-of-rhino-beetles.js";
 import _poolCrazedSkirge from "../pool/crazed-skirge.js";
@@ -1262,6 +1263,7 @@ const shard: CardShard = {
     _poolCorneredMarket,
     _poolCorporealProjection,
     _poolCosmosCharger,
+    _poolCouncilGuardian,
     _poolCourtOfVantress,
     _poolCrashOfRhinoBeetles,
     _poolCrazedSkirge,

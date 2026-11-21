@@ -300,6 +300,7 @@ import _poolEsperSentinel from "../pool/esper-sentinel.js";
 import _poolEssenceInfusion from "../pool/essence-infusion.js";
 import _poolEssenceOfAntiquity from "../pool/essence-of-antiquity.js";
 import _poolEtchedOracle from "../pool/etched-oracle.js";
+import _poolEtchedSlith from "../pool/etched-slith.js";
 import _poolEthercasteKnight from "../pool/ethercaste-knight.js";
 import _poolEtherswornSphinx from "../pool/ethersworn-sphinx.js";
 import _poolEvernightShade from "../pool/evernight-shade.js";
@@ -1387,6 +1388,7 @@ const shard: CardShard = {
     _poolEssenceInfusion,
     _poolEssenceOfAntiquity,
     _poolEtchedOracle,
+    _poolEtchedSlith,
     _poolEthercasteKnight,
     _poolEtherswornSphinx,
     _poolEvernightShade,

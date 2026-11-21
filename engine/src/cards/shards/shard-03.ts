@@ -136,6 +136,7 @@ import _poolCinderBarrens from "../pool/cinder-barrens.js";
 import _poolClashOfTheEikons from "../pool/clash-of-the-eikons.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCloudthresher from "../pool/cloudthresher.js";
+import _poolCommandTheStage from "../pool/command-the-stage.js";
 import _poolCommandTower from "../pool/command-tower.js";
 import _poolCompelBrutality from "../pool/compel-brutality.js";
 import _poolConcordantCrossroads from "../pool/concordant-crossroads.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolClashOfTheEikons,
     _poolCleverConcealment,
     _poolCloudthresher,
+    _poolCommandTheStage,
     _poolCommandTower,
     _poolCompelBrutality,
     _poolConcordantCrossroads,

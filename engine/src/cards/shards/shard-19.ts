@@ -263,6 +263,7 @@ import _poolDissatisfiedCustomer from "../pool/dissatisfied-customer.js";
 import _poolDissectionPractice from "../pool/dissection-practice.js";
 import _poolDivergentTransformations from "../pool/divergent-transformations.js";
 import _poolDiversionSpecialist from "../pool/diversion-specialist.js";
+import _poolDivineIntervention from "../pool/divine-intervention.js";
 import _poolDivineRetribution from "../pool/divine-retribution.js";
 import _poolDivinerOfVictory from "../pool/diviner-of-victory.js";
 import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
@@ -1369,6 +1370,7 @@ const shard: CardShard = {
     _poolDissectionPractice,
     _poolDivergentTransformations,
     _poolDiversionSpecialist,
+    _poolDivineIntervention,
     _poolDivineRetribution,
     _poolDivinerOfVictory,
     _poolDonLeoProblemSolvers,

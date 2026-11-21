@@ -5185,6 +5185,7 @@ import _poolCommandDecision from "./pool/command-decision.js";
 import _poolCommandOfUnsummoning from "./pool/command-of-unsummoning.js";
 import _poolCommandSubadjunct from "./pool/command-subadjunct.js";
 import _poolCommandTheDreadhorde from "./pool/command-the-dreadhorde.js";
+import _poolCommandTheStage from "./pool/command-the-stage.js";
 import _poolCommandTheStorm from "./pool/command-the-storm.js";
 import _poolCommandTower from "./pool/command-tower.js";
 import _poolCommandeer from "./pool/commandeer.js";
@@ -5552,6 +5553,7 @@ import _poolCosmotronicWave from "./pool/cosmotronic-wave.js";
 import _poolCostOfBrilliance from "./pool/cost-of-brilliance.js";
 import _poolCostlyPlunder from "./pool/costly-plunder.js";
 import _poolCostumeCloset from "./pool/costume-closet.js";
+import _poolCouncilGuardian from "./pool/council-guardian.js";
 import _poolCouncilOfAdvisors from "./pool/council-of-advisors.js";
 import _poolCouncilOfEchoes from "./pool/council-of-echoes.js";
 import _poolCouncilOfReeds from "./pool/council-of-reeds.js";
@@ -7270,6 +7272,7 @@ import _poolDivineArrow from "./pool/divine-arrow.js";
 import _poolDivineCongregation from "./pool/divine-congregation.js";
 import _poolDivineFavor from "./pool/divine-favor.js";
 import _poolDivineGambit from "./pool/divine-gambit.js";
+import _poolDivineIntervention from "./pool/divine-intervention.js";
 import _poolDivineLight from "./pool/divine-light.js";
 import _poolDivineOffering from "./pool/divine-offering.js";
 import _poolDivinePresence from "./pool/divine-presence.js";
@@ -8857,6 +8860,7 @@ import _poolEtchedFamiliar from "./pool/etched-familiar.js";
 import _poolEtchedHostDoombringer from "./pool/etched-host-doombringer.js";
 import _poolEtchedMonstrosity from "./pool/etched-monstrosity.js";
 import _poolEtchedOracle from "./pool/etched-oracle.js";
+import _poolEtchedSlith from "./pool/etched-slith.js";
 import _poolEtchingOfKumano from "./pool/etching-of-kumano.js";
 import _poolEtchingsOfTheChosen from "./pool/etchings-of-the-chosen.js";
 import _poolEternalDominion from "./pool/eternal-dominion.js";
@@ -38954,6 +38958,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCommandOfUnsummoning,
   _poolCommandSubadjunct,
   _poolCommandTheDreadhorde,
+  _poolCommandTheStage,
   _poolCommandTheStorm,
   _poolCommandTower,
   _poolCommandeer,
@@ -39321,6 +39326,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCostOfBrilliance,
   _poolCostlyPlunder,
   _poolCostumeCloset,
+  _poolCouncilGuardian,
   _poolCouncilOfAdvisors,
   _poolCouncilOfEchoes,
   _poolCouncilOfReeds,
@@ -41039,6 +41045,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDivineCongregation,
   _poolDivineFavor,
   _poolDivineGambit,
+  _poolDivineIntervention,
   _poolDivineLight,
   _poolDivineOffering,
   _poolDivinePresence,
@@ -42626,6 +42633,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEtchedHostDoombringer,
   _poolEtchedMonstrosity,
   _poolEtchedOracle,
+  _poolEtchedSlith,
   _poolEtchingOfKumano,
   _poolEtchingsOfTheChosen,
   _poolEternalDominion,
@@ -72736,6 +72744,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/command-of-unsummoning": _poolCommandOfUnsummoning,
   "pool/command-subadjunct": _poolCommandSubadjunct,
   "pool/command-the-dreadhorde": _poolCommandTheDreadhorde,
+  "pool/command-the-stage": _poolCommandTheStage,
   "pool/command-the-storm": _poolCommandTheStorm,
   "pool/command-tower": _poolCommandTower,
   "pool/commandeer": _poolCommandeer,
@@ -73103,6 +73112,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cost-of-brilliance": _poolCostOfBrilliance,
   "pool/costly-plunder": _poolCostlyPlunder,
   "pool/costume-closet": _poolCostumeCloset,
+  "pool/council-guardian": _poolCouncilGuardian,
   "pool/council-of-advisors": _poolCouncilOfAdvisors,
   "pool/council-of-echoes": _poolCouncilOfEchoes,
   "pool/council-of-reeds": _poolCouncilOfReeds,
@@ -74821,6 +74831,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/divine-congregation": _poolDivineCongregation,
   "pool/divine-favor": _poolDivineFavor,
   "pool/divine-gambit": _poolDivineGambit,
+  "pool/divine-intervention": _poolDivineIntervention,
   "pool/divine-light": _poolDivineLight,
   "pool/divine-offering": _poolDivineOffering,
   "pool/divine-presence": _poolDivinePresence,
@@ -76408,6 +76419,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/etched-host-doombringer": _poolEtchedHostDoombringer,
   "pool/etched-monstrosity": _poolEtchedMonstrosity,
   "pool/etched-oracle": _poolEtchedOracle,
+  "pool/etched-slith": _poolEtchedSlith,
   "pool/etching-of-kumano": _poolEtchingOfKumano,
   "pool/etchings-of-the-chosen": _poolEtchingsOfTheChosen,
   "pool/eternal-dominion": _poolEternalDominion,
