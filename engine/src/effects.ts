@@ -7946,6 +7946,17 @@ export type EffectSpec =
     }
   | {
       /**
+       * "The game is a draw" (rule 104.4c; Divine Intervention): the game
+       * ends at once (104.1) and nobody wins or loses it. The limited range
+       * of influence option isn't played, so in a multiplayer game it's a
+       * draw for every player still in it, not just those near the source
+       * (104.4e is that option's). Platinum Angel's "can't win" and "can't
+       * lose" don't stop it: a draw is neither.
+       */
+      readonly kind: "game-is-a-draw";
+    }
+  | {
+      /**
        * "You lose the game" / "that player loses the game" (rule 104.3e):
        * each player `who` names (default `"you"`) loses and leaves the game
        * at once (104.5, 800.4a) — unless they can't lose
@@ -15297,6 +15308,8 @@ export interface EffectApi {
   /** `player` wins the game, unless they can't — see the `"win-game"`
    * {@link EffectSpec}. */
   winGame(player: PlayerId): void;
+  /** The game ends as a draw — see the `"game-is-a-draw"` {@link EffectSpec}. */
+  drawGame(): void;
   /** Each of `players` loses the game, at once, unless they can't — see the
    * `"lose-game"` {@link EffectSpec}. */
   loseGame(players: readonly PlayerId[]): void;
@@ -23677,6 +23690,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "win-game":
       ctx.winGame(ctx.controller);
+      return;
+    case "game-is-a-draw":
+      ctx.drawGame();
       return;
     case "lose-game": {
       if (spec.target !== undefined) {

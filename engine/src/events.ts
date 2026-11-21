@@ -1120,6 +1120,13 @@ export type GameEvent =
       /** How many of that kind it has left — 0 is vanishing's "the last"
        * (the `counters-removed` trigger's `last`). */
       readonly after: number;
+      /** Who removed them: the controller of the spell or ability whose
+       * effect did, or the player who paid the cost. Absent where no player
+       * did (a stun counter replacing an untap, +1/+1 and -1/-1 counters
+       * annihilating as a state-based action, a shield counter used up) —
+       * Divine Intervention's "when **you** remove the last …" never hears
+       * those. */
+      readonly by?: PlayerId;
       /** A token stack that lost them together (`remove-counter-all`): how
        * many tokens, each losing `amount` — what "the number of counters
        * removed this way" counts. Absent, one object. */

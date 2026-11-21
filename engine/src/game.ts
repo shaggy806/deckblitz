@@ -15456,7 +15456,7 @@ export class Game {
         if (paid) this.payLife(player, option.payLife);
       }
       if (paid && option.removeCounter !== undefined) {
-        paid = this.removeCountersFrom(option.by, option.removeCounter, 1, false) > 0;
+        paid = this.removeCountersFrom(option.by, option.removeCounter, 1, false, player) > 0;
       }
       if (paid) {
         if (option.oncePerTurn === true) this.markDone(option.key, player);
@@ -29458,7 +29458,7 @@ export class Game {
       if (count > 0) {
         source.counters[kind] = (source.counters[kind] ?? 0) - count;
         if (source.counters[kind] <= 0) delete source.counters[kind];
-        this.emit({ type: "counter-removed", object: sourceId, counter: kind, amount: count, after: source.counters[kind] ?? 0 });
+        this.emit({ type: "counter-removed", object: sourceId, counter: kind, amount: count, after: source.counters[kind] ?? 0, by: player });
       }
     }
     if (ability.cost.payEnergy !== undefined) {
@@ -29523,7 +29523,7 @@ export class Game {
       // A minus cost removes them (606.4) — Chandra, Fire Artisan's
       // "whenever one or more loyalty counters are removed".
       if (loyaltyPaid < 0) {
-        this.emit({ type: "counter-removed", object: sourceId, counter: "loyalty", amount: -loyaltyPaid, after: source.counters.loyalty });
+        this.emit({ type: "counter-removed", object: sourceId, counter: "loyalty", amount: -loyaltyPaid, after: source.counters.loyalty, by: player });
       }
     }
     if (sacrificeVictim !== null) {
@@ -39035,8 +39035,11 @@ export class Game {
           );
         }
         return (
-          spec.byYou !== true &&
           event.type === "counter-removed" &&
+          // "When **you** remove the last …" (Divine Intervention): only a
+          // removal its controller made (the rulings: another player's
+          // Clockspinning doesn't trigger it).
+          (spec.byYou !== true || (event.by !== undefined && event.by === self.controller)) &&
           event.amount > 0 &&
           (spec.counter === undefined || event.counter === spec.counter) &&
           // Vanishing's "when the last time counter is removed" (702.63a).
@@ -44627,12 +44630,12 @@ export class Game {
           this.removeTimeCounter(target.object, amount === "all" ? (before.counters.time ?? 0) : amount, controller);
           return;
         }
-        this.removeCountersFrom(target.object, counter, amount, true);
+        this.removeCountersFrom(target.object, counter, amount, true, controller);
       },
       removeCounterAll: (filter, counter, amount) => {
         // Who matches is read once, before any counter comes off — "remove
         // all fate counters from all permanents" isn't emptied as it goes.
-        for (const id of this.battlefieldMatching(controller, filter, x, source)) this.removeCountersFrom(id, counter, amount, false);
+        for (const id of this.battlefieldMatching(controller, filter, x, source)) this.removeCountersFrom(id, counter, amount, false, controller);
       },
       moveCounters: (from, to, counter, amount) => this.moveCounters(from, to, counter, amount, controller),
       countersHere: (target) => {
@@ -46837,6 +46840,10 @@ controlledBy,
         this.emit({ type: "gift-given", source, player: controller, to });
       },
       winGame: (player) => this.winGame(player, `won the game with ${this.effectSourceName(source)}`),
+      // Rule 104.4c: nobody wins or loses, so nothing can stop it.
+      drawGame: () => {
+        if (!this.state.result.over) this.endGame(null, `the game is a draw (${this.effectSourceName(source)})`);
+      },
       loseGame: (players) => this.loseGame(players, `lost the game to ${this.effectSourceName(source)}`),
       restartGame: (spec) => {
         // "All non-Aura permanent cards exiled with Karn" (rule 607.2a): the
@@ -57864,7 +57871,7 @@ controlledBy,
     const object = this.state.objects[id];
     object.counters[counter] = have - n;
     if (object.counters[counter] <= 0) delete object.counters[counter];
-    this.emit({ type: "counter-removed", object: id, counter, amount: n, after: object.counters[counter] ?? 0 });
+    this.emit({ type: "counter-removed", object: id, counter, amount: n, after: object.counters[counter] ?? 0, by });
     this.addCounter(to, counter, n, true, by);
     return n;
   }
@@ -58263,7 +58270,7 @@ controlledBy,
         const n = Math.min(left, one.counters[kind] ?? 0);
         one.counters[kind] = (one.counters[kind] ?? 0) - n;
         if (one.counters[kind] <= 0) delete one.counters[kind];
-        this.emit({ type: "counter-removed", object: id, counter: kind, amount: n, after: one.counters[kind] ?? 0 });
+        this.emit({ type: "counter-removed", object: id, counter: kind, amount: n, after: one.counters[kind] ?? 0, by });
         left -= n;
       }
     }
@@ -58346,9 +58353,11 @@ controlledBy,
    * on a card that left ceased to exist, rule 122.2). Each kind is one
    * `counter-removed`. `split`: one token of a stack loses them (a targeted
    * removal); otherwise the whole stack does, together (`tokens`). Returns
-   * how many counters came off in all (a stack's, token by token).
+   * how many counters came off in all (a stack's, token by token). `by` is
+   * who removed them (the event's `by`), where a player did.
    */
-  private removeCountersFrom(id: ObjectId, counter: string, amount: number | "all", split: boolean): number {
+  private removeCountersFrom(id: ObjectId, counter: string, amount: number | "all", split: boolean, by?: PlayerId): number {
+    const byField = by === undefined ? {} : { by };
     if (amount !== "all" && amount <= 0) return 0;
     if (counter === "any" && amount !== "all") return 0;
     const before = this.state.objects[id];
@@ -58372,7 +58381,7 @@ controlledBy,
         if (have - n <= 0) delete before.counters[kind];
         else before.counters[kind] = have - n;
         fromCard += n;
-        if (n > 0) this.emit({ type: "counter-removed", object: id, counter: kind, amount: n, after: before.counters[kind] ?? 0 });
+        if (n > 0) this.emit({ type: "counter-removed", object: id, counter: kind, amount: n, after: before.counters[kind] ?? 0, ...byField });
       }
       invalidateComputedCache();
       return fromCard;
@@ -58394,6 +58403,7 @@ controlledBy,
         counter: kind,
         amount: n,
         after: object.counters[kind] ?? 0,
+        ...byField,
         ...(tokens > 1 ? { tokens } : {}),
       });
     }
@@ -58418,7 +58428,7 @@ controlledBy,
     if (after > 0) object.counters.time = after;
     else delete object.counters.time;
     if (object.zone === "battlefield") {
-      this.emit({ type: "counter-removed", object: id, counter: "time", amount: n, after });
+      this.emit({ type: "counter-removed", object: id, counter: "time", amount: n, after, by });
     } else if (object.zone === "exile" && (object.suspended === true || object.timeCast === true)) {
       this.emit({ type: "time-counter-removed", object: id, remaining: after, amount: n, by });
       if (after === 0 && object.suspended === true) this.suspendTrigger(id, "cast");
@@ -59787,7 +59797,7 @@ controlledBy,
       let removed = 0;
       for (const picked of chosen) {
         if (this.state.objects[picked]?.zone !== "battlefield") continue;
-        removed += this.removeCountersFrom(picked, "any", "all", true);
+        removed += this.removeCountersFrom(picked, "any", "all", true, entering.controller);
       }
       entering.enterChoice = { ...entering.enterChoice, asEntersDone: removed };
       this.state.awaiting = null;
@@ -72736,7 +72746,7 @@ controlledBy,
         const entering = this.enterBatch ?? new Set<ObjectId>();
         for (const other of this.battlefieldMatching(object.controller, r.removeAllCountersFrom, undefined, id)) {
           if (other === id || entering.has(other)) continue;
-          removedAsEnters += this.removeCountersFrom(other, "any", "all", false);
+          removedAsEnters += this.removeCountersFrom(other, "any", "all", false, object.controller);
         }
       }
       // Neverwinter Hydra's "as this creature enters, roll X d6" (rule

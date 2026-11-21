@@ -803,6 +803,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // "You win" has no target; "target opponent loses the game" harms it.
   "win-game": none,
+  "game-is-a-draw": none,
   "lose-game": (n, v) => v.touch(n.target, "harm", MAJOR),
   // Restarting the game (Karn Liberated's −14) has no target.
   "restart-game": none,

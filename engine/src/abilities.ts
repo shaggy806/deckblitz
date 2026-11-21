@@ -1566,8 +1566,10 @@ export type TriggerKind =
        * controller — suspend's own upkeep trigger, a spell or ability they
        * control, a cost they paid. Read off a card's time counters in exile
        * (the `time-counter-removed` event, which records who removed them),
-       * and only there: a permanent's removal doesn't record it, so a
-       * `byYou` trigger never hears one. */
+       * and off a permanent: Divine Intervention's "when **you** remove the
+       * last intervention counter" (with `last`), read from the
+       * `counter-removed` event's `by` — a removal no player made (a stun
+       * counter replacing an untap, annihilation) is nobody's. */
       readonly byYou?: true;
     }
   | {

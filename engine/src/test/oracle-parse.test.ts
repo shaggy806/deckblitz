@@ -24813,3 +24813,16 @@ describe("fateseal and Slivers' granted triggers", () => {
     expect(parseEffect("Fateseal 3.", ctx()).effect).toEqual(fateseal(3));
   });
 });
+
+describe("the game is a draw, and the last counter removed", () => {
+  it("reads Divine Intervention's trigger and draw", () => {
+    expect(parseTrigger("When you remove the last intervention counter from ~")).toEqual([
+      { on: "counters-removed", who: "self", counter: "intervention", last: true, byYou: true },
+    ]);
+    expect(parseTrigger("When the last fade counter is removed from ~")).toEqual([
+      { on: "counters-removed", who: "self", counter: "fade", last: true },
+    ]);
+    expect(parseTrigger("When you remove the last fade counter is removed from ~")).toBeNull();
+    expect(parseSentence("The game is a draw.")).toEqual({ kind: "game-is-a-draw" });
+  });
+});

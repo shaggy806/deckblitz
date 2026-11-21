@@ -2045,6 +2045,11 @@ export function parseTrigger(clause) {
   if (/^When (?:this creature|~) enters or leaves the battlefield$/.test(c)) {
     return [...self("enters-battlefield"), ...self("leaves-battlefield")];
   }
+  // "When the last <kind> counter is removed from ~", and "when **you**
+  // remove the last …" (Divine Intervention: only its controller's removals).
+  if ((m = /^When (you remove )?the last ([\w+/-]+) counter (?:is removed )?from ~$/.exec(c)) && (m[1] !== undefined) === !/ is removed /.test(c)) {
+    return [{ on: "counters-removed", who: "self", counter: m[2], last: true, ...(m[1] !== undefined ? { byYou: true } : {}) }];
+  }
   // A token enters under the control of the player who creates it (rule
   // 111.2): "Whenever you create a Blood token" is one entering under you,
   // "one or more" once per entry (Staff of the Storyteller), and "for the first
@@ -3767,6 +3772,8 @@ export function parseSentence(sentence, ctx) {
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
   if (/^you win the game\.$/i.test(s)) return { kind: "win-game" };
+  // Divine Intervention (rule 104.4c).
+  if (/^the game is a draw\.$/i.test(s)) return { kind: "game-is-a-draw" };
   // "They lose the game": the trigger's "that player" — the player dealt
   // damage (Vessel of the All-Consuming).
   if (ctx?.thatPlayer === "trigger-player" && /^(?:they|that player) loses? the game\.$/i.test(s)) {
