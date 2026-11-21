@@ -5644,6 +5644,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(savior.complete).toBe(true);
   });
 
+  it("'skip that draw instead': Obstinate Familiar's may, Living Conundrum's while the library is empty", () => {
+    const conundrum = face("If you would draw a card while your library has no cards in it, skip that draw instead.", "Creature — Elemental");
+    expect(conundrum.static[0].replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      whileLibraryEmpty: true,
+      instead: { text: "skip that draw", effect: { kind: "sequence", effects: [] } },
+    });
+    const familiar = face("If you would draw a card, you may skip that draw instead.", "Creature — Lizard");
+    expect(familiar.static[0].replacement).toMatchObject({ event: "would-draw", may: true, instead: { text: "skip that draw" } });
+  });
+
   it("shield counters (rule 122.1c): 'enters with a shield counter on him'", () => {
     const cap = face("Test Card enters with a shield counter on him.", "Legendary Creature — Human Soldier Hero");
     expect(cap.static[0].replacement).toEqual({ event: "enters-battlefield", counters: { kind: "shield", amount: 1 } });

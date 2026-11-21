@@ -8493,7 +8493,15 @@ The `prevent-damage` family makes the same record.
   what: "discarded" } with a draw by "trigger-player", else a mill }`: two
   each make the player discard first, and once one mills there's no draw
   for the next (`draw-replaced-by-discard.test.ts`). A draw a Notion Thief
-  hands its controller is theirs to replace this way too.
+  hands its controller is theirs to replace this way too. Beside an
+  opponent's Thief that could take the draw, the drawing player is asked
+  which applies first (rule 616.1, a `replacement-order` "You would draw a
+  card"): the effect first, it replaces the draw and no Thief gets it; the
+  Thief first, it's the Thief's controller's draw (bots take the Thief first).
+  Living Conundrum's "if you would draw a card while your library has no
+  cards in it, skip that draw instead" is `{ effect: { kind: "sequence",
+  effects: [] }, text: "skip that draw" }` with `whileLibraryEmpty: true`
+  (`draw-replacement-order.test.ts`).
   A choice asked inside the effect (a `may`, an `unless`) keeps it that
   replacement's effect as it's answered (the `choose-modes` decision's
   `replacing`): Zur's Weirding is `who: "any-player"`, `{ effect: reveal-top

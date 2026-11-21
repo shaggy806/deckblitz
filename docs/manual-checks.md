@@ -9019,3 +9019,8 @@ Each board's die comes up 4.
 ### Archangel of Strife: in a 4-player game, every player chooses in turn
 - **Do:** Cast Archangel of Strife and choose peace.
 - **Expect:** After you, Bob, Carol and Dave are asked in that order, and the History has four "Archangel of Strife chooses …" lines, yours first. The Angel is 6/9; each opponent's creature gets +3/+0 for war or +0/+3 for peace, by what its controller chose.
+## Skipping a draw against an opponent's Notion Thief (2026-11-21)
+
+### Living Conundrum: with an empty library, skip the draw before Notion Thief takes it
+- **Do:** Cast Divination. Each time you're asked which applies first, choose Living Conundrum.
+- **Expect:** You're asked twice, "You would draw a card", with Notion Thief and Living Conundrum as the choices. Bob draws nothing, you don't lose for your empty library, and Living Conundrum is a 10/10 flier.

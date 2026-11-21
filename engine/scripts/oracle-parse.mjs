@@ -24850,6 +24850,22 @@ function parseStatic(line, text) {
   if ((m = /^You have (hexproof|shroud)\.$/.exec(line))) {
     return { affects: { scope: "self" }, playerKeywords: [m[1]], text };
   }
+  // "If you would draw a card, you may skip that draw instead" (Obstinate
+  // Familiar), "… while your library has no cards in it, skip that draw
+  // instead" (Living Conundrum): the draw replaced by nothing.
+  if ((m = /^If you would draw a card( while your library has no cards in it)?, (you may )?skip that draw instead\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-draw",
+        who: "you",
+        ...(m[1] !== undefined ? { whileLibraryEmpty: true } : {}),
+        instead: { text: "skip that draw", effect: { kind: "sequence", effects: [] } },
+        ...(m[2] !== undefined ? { may: true } : {}),
+      },
+      text,
+    };
+  }
   // "If you would draw a card, you may put a study counter on this
   // enchantment instead." (Pursuit of Knowledge): an optional replacement,
   // asked draw by draw (rule 616.1) — declined, the card is drawn.

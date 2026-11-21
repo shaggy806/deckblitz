@@ -13666,4 +13666,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Llanowar Elves'] }],
     }),
   ),
+  // --- Skipping a draw against an opponent's Notion Thief (2026-11-21) -------
+  preset(
+    'Living Conundrum: with an empty library, skip the draw before Notion Thief takes it',
+    board({
+      you: { bf: ['Living Conundrum', 'Island*3'], hand: ['Divination'] },
+      opp: { bf: ['Notion Thief'] },
+      fill: 0,
+    }),
+  ),
 ]

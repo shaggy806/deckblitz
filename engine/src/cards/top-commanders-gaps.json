@@ -7,6 +7,7 @@
     "static:anthem-by-per-player-choice-on-enter",
     "effect:becomes-named-with-granted-static",
     "decision:mixed-zone-targets",
+    "decision:replacement-order-draw",
     "effect:owner-chooses-library-position",
     "effect:each-player-discards-up-to-n",
     "amount:bushido-value-of-each",

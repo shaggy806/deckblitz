@@ -42758,7 +42758,11 @@ export class Game {
           const empty =
             this.state.zones.perPlayer[from].library.length === 0 &&
             !this.state.activeReplacements.some((r) => r.replacement.event === "would-draw" && r.next === true && (r.owner === from || r.owner === player)) &&
-            this.drawEffectReplacementsFor(from, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).length === 0;
+            this.drawEffectReplacementsFor(from, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).length === 0 &&
+            // Nor while one of the drawing player's own could apply before a
+            // Thief hands the draw on (rule 616.1 — `drawRedirectOrderAsked`).
+            (from === player ||
+              this.drawEffectReplacementsFor(player, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).length === 0);
           const unasked = this.state.awaiting === null;
           const parkedBefore = this.state.suspendedResolutions.length;
           this.drawCard(player);
@@ -67827,7 +67831,19 @@ controlledBy,
     this.emit({ type: "replacement-order-chosen", player, event: awaiting.event, effect: chosen.name });
     const { resume } = awaiting;
     if (resume.site === "combat-damage") this.promptNextDamageAssignment();
-    else if (resume.site === "draw") this.drawCard(resume.player, true);
+    else if (resume.site === "draw") {
+      // The draw goes ahead of any queued behind it, all of its replacement
+      // with it (rule 614.11a), as `drawNextWaiting` runs one.
+      const parkedBefore = this.state.suspendedResolutions.length;
+      const outer = this.drawsAheadOfQueue;
+      this.drawsAheadOfQueue = true;
+      try {
+        this.drawCard(resume.player, true);
+      } finally {
+        this.drawsAheadOfQueue = outer;
+      }
+      if ((this.state.pendingDraws?.length ?? 0) > 0) this.holdDrawsBehind(parkedBefore);
+    }
     else if (resume.site === "leave-stack") this.leaveStackAfterResolving(resume.spell);
     const next = this.state.awaiting as AwaitingDecision | null;
     this.prepareForPriority(next?.player ?? this.activePlayer);
@@ -71320,6 +71336,17 @@ controlledBy,
     // cycle): set up on purpose, so taken before a Notion Thief's — one of the
     // orders the drawing player could pick (rule 616.1; AUTHORING §15).
     if (this.nextDrawReplaced(player, drawEvent)) return;
+    // The drawing player chose an effect replacement over every Thief (rule
+    // 616.1 — `drawRedirectOrderAsked`): it replaces the draw, and no Thief
+    // gets it.
+    const chosenFirst = this.state.replacementAnswers?.[`draw:${player}`]?.[0];
+    const effectFirst =
+      chosenFirst === undefined ? undefined : this.drawEffectReplacementsFor(player, drawEvent).find((r) => r.key === chosenFirst);
+    if (effectFirst !== undefined) {
+      if (this.state.replacementAnswers !== undefined) delete this.state.replacementAnswers[`draw:${player}`];
+      this.runDrawReplacement(effectFirst, player, drawEvent.cycled);
+      return;
+    }
     // would-draw redirect (Notion Thief — rule 614 / ROADMAP Phase 11 EG-6):
     // "If an opponent would draw a card except the first one they draw in
     // each of their draw steps, instead that player skips that draw and you
@@ -71581,8 +71608,10 @@ controlledBy,
     return (
       (!this.drawsAheadOfQueue && (this.state.pendingDraws?.length ?? 0) > 0) ||
       (awaiting !== null &&
-        awaiting.kind === "choose-modes" &&
-        (awaiting.dredgeFor !== undefined || awaiting.nextDrawFor !== undefined))
+        ((awaiting.kind === "choose-modes" && (awaiting.dredgeFor !== undefined || awaiting.nextDrawFor !== undefined)) ||
+          // Which of a draw's replacements applies first (rule 616.1 —
+          // `drawRedirectOrderAsked`): the draws behind it wait too.
+          (awaiting.kind === "replacement-order" && awaiting.resume.site === "draw")))
     );
   }
 
@@ -71986,32 +72015,68 @@ controlledBy,
   }
 
   /** Asks `player`, about to draw, whose Notion Thief applies first, when
-   * Thieves of different players could; says whether it asked. */
+   * Thieves of different players could — or whether a Thief or an effect
+   * replacement of the draw does (Living Conundrum's "skip that draw",
+   * Underrealm Lich's look): the drawing player's choice (rule 616.1), and
+   * one that decides whether the draw is replaced at all or handed on. Says
+   * whether it asked. */
   private drawRedirectOrderAsked(player: PlayerId): boolean {
     const answers = `draw:${player}`;
     if (this.state.awaiting !== null || this.state.replacementAnswers?.[answers] !== undefined) return false;
     const all = this.drawRedirectsFor(player, new Map());
+    if (all.length === 0) return false;
     const byPlayer = all.filter((r, i) => all.findIndex((o) => o.to === r.to) === i);
     // What matters is who ends up with the card: the draw each Thief takes
     // can be handed on again by the others.
     const options = byPlayer.map((r) => ({ r, drawer: this.finalDrawerAfter(r) }));
-    if (new Set(options.map((o) => o.drawer)).size < 2) return false;
+    // The effect replacements this draw would meet once no Thief took it,
+    // identical ones once.
+    const seen = new Set<string>();
+    const effects = this.drawEffectReplacementsFor(player, this.peekWouldDraw(player)).filter((r) => {
+      if (seen.has(r.text)) return false;
+      seen.add(r.text);
+      return true;
+    });
+    if (effects.length === 0 && new Set(options.map((o) => o.drawer)).size < 2) return false;
     this.state.awaiting = {
       kind: "replacement-order",
       player,
       event: "You would draw a card",
-      options: options.map(({ r, drawer }) => ({
-        key: r.source,
-        name: this.state.objects[r.source].cardName,
-        text: "applied first, the card goes to",
-        object: r.source,
-        who: drawer,
-      })),
+      options: [
+        ...options.map(({ r, drawer }) => ({
+          key: r.source,
+          name: this.state.objects[r.source].cardName,
+          text: "applied first, the card goes to",
+          object: r.source,
+          who: drawer,
+        })),
+        ...effects.map((r) => ({
+          key: r.key,
+          name: this.state.objects[r.source]?.cardName ?? "A replacement",
+          // Its words without the card's name, which the option shows.
+          text: `applied first: ${/^.+?: (.+)$/.exec(r.text)?.[1] ?? "it replaces the draw"}`,
+          ...(this.state.objects[r.source] !== undefined ? { object: r.source } : {}),
+        })),
+      ],
+      // The engine's own pick, a bot's answer: the order it takes unasked,
+      // a Thief first. (A skip or a look of the drawer's own is often worth
+      // more to them, but not always — Chains of Mephistopheles' discard.)
       best: 0,
       answers,
       resume: { site: "draw", player },
     };
     return true;
+  }
+
+  /** The draw event `noteWouldDraw` would note for `player` now, without
+   * noting it. */
+  private peekWouldDraw(player: PlayerId): WouldDrawEvent {
+    const seat = this.state.players[player];
+    const firstInDrawStep =
+      this.state.turn.step === "draw" && player === this.activePlayer && seat?.drewInDrawStepThisTurn !== true;
+    const before = seat?.wouldDrawThisTurn ?? { all: 0, exceptDrawStepFirst: 0 };
+    const cycled = this.cyclingDrawSource();
+    return { firstInDrawStep, before: { ...before }, ...(cycled !== undefined ? { cycled } : {}) };
   }
 
   /** Who ends up drawing once `first` has taken a draw, each other Thief
