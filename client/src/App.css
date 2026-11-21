@@ -4205,12 +4205,9 @@
 .hand-card .card-tile.clickable:hover {
   transform: none;
 }
-/* The art credit only on the grown card: at the fan's own size it would be
-   a few pixels high, noise. Hidden, not removed: it holds its place in the
-   foot beside the P/T box. */
-.hand-cards .hand-card:not(:hover, .hover-carry, :focus-within) .ct-credit {
-  visibility: hidden;
-}
+/* The art credit shows on every hand card, grown or not (the user,
+   2026-11-21): in the foot it is clear of the art, where over the art at the
+   fan's size it had been hidden as noise. */
 /* A card the pointer swept across between two of its move events
    (ui/handSweep.ts), grown as a hovered card is for as long as the pointer
    was over it -- but left in the fan's stacking, and never taking the
