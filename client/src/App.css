@@ -641,6 +641,12 @@
   justify-content: center;
   background: var(--scrim-soft);
 }
+/* While the result is up, the bottom bar's own "Bob wins · … · Main menu"
+   stays out of sight: it showed through the scrim, saying the same thing
+   twice. It is there for once the dialog is put aside. */
+.app:has(.result-overlay) .controls {
+  visibility: hidden;
+}
 .result-box {
   display: flex;
   flex-direction: column;
@@ -804,6 +810,12 @@
 .player-panel.targetable {
   outline: 2px solid var(--warn);
   cursor: pointer;
+}
+/* Under the pointer it answers, as a targetable permanent lifts: a tint of
+   the outline's colour, lighter than a picked panel's fill (below). */
+.player-panel.targetable:hover:not(.selected),
+.quadrant-head .player-panel.targetable:hover:not(.selected) {
+  background: color-mix(in srgb, var(--warn) 9%, var(--panel));
 }
 /* Picked, in a choice still being made (a proliferate's players): the
    panel fills with the same gold the outline says it can be picked with.

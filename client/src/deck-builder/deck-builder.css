@@ -22,6 +22,10 @@
 .db-back {
   align-self: flex-start;
 }
+/* The page's title, the size About's and the library's are. */
+.db-list > h1 {
+  font-size: var(--text-2xl);
+}
 
 .db-list-section {
   display: flex;
@@ -115,6 +119,18 @@
   min-width: 0;
   overflow-y: auto;
   padding: 24px 32px;
+  /* A column, so the legal notice can close it: at the foot of the page
+     under a short view (the empty prompt, the import form), under the deck
+     when that runs longer. It floated a line under the prompt before. */
+  display: flex;
+  flex-direction: column;
+}
+.db-detail > * {
+  flex: none;
+}
+.db-detail > .site-notice {
+  margin-top: auto;
+  padding-top: clamp(1rem, 3vh, 2rem);
 }
 .db-prompt {
   margin-top: 40px;
@@ -244,6 +260,8 @@
   gap: 6px;
 }
 .db-type-filters button {
+  /* "Creature", as the library's same chips read. */
+  text-transform: capitalize;
   font-size: var(--text-sm);
   padding: 3px 9px;
   background: var(--panel-2);

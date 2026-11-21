@@ -35,7 +35,8 @@ html:has(.lib-page) {
 }
 
 .lib-header-top h1 {
-  font-size: clamp(17px, 2vw, 22px);
+  font-size: var(--text-2xl);
+  line-height: 1;
   white-space: nowrap;
 }
 
@@ -492,12 +493,13 @@ html:has(.lib-page) {
   padding: 5px 8px;
   text-align: left;
   font-size: var(--text-sm);
-  background: none;
-  border: 1px solid transparent;
+  /* A row that reads as one before the pointer reaches it, as the deck
+     picker's and the deck list's do (bare text until 2026-11-21). */
+  background: var(--panel-2, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--border-soft);
 }
 .lib-printing:hover:not(:disabled) {
-  background: var(--panel-2, rgba(255, 255, 255, 0.05));
-  border-color: var(--border);
+  border-color: var(--accent);
 }
 .lib-printing[aria-pressed='true'] {
   background: var(--accent-bg);

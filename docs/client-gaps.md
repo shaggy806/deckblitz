@@ -165,25 +165,23 @@ Site-wide:
 
 Page by page:
 
-13. **Page titles: three sizes and layouts.** About's is the largest, the deck builder's sits under
-    its back link, the library's is small and on the back link's line.
-14. **The same type chips read two ways.** "All / Creature / Instant" in the library
-    (`text-transform: capitalize`), "all / creature / instant" in the deck builder.
-15. **The library overlay's printings rows** (`.lib-printing`) are buttons that look like plain
-    text until hovered.
+13-15, 17, 18, 21, 22. Landed 2026-11-21 (`COMPLETED.md`): one page-title size (`--text-2xl`), the
+   deck builder's chips capitalised, the library's printings rows drawn as rows, the deck builder's
+   legal notice at the foot of its column, the lobby's "other" life box themed and "✓ Ready" under
+   another seat, a targetable player panel tinting under the pointer, and a finished game's top bar
+   and bottom strip.
+
+Three are left, each a call for the user rather than a miss:
+
 16. **The deck builder's hover preview** is the app's own text card where the library shows the
-    card's image, and it opens over the rows beside the one hovered.
-17. **The deck builder's legal notice** floats directly under the one-line empty prompt, and in the
-    import view is centred on the page while the form is left-aligned.
-18. **Lobby.** The "other" starting-life box (`.rs-life-input`) looks disabled while editable; a
-    bot's seat leaves a blank gap (an empty disabled `.seat-panel-ready-btn.seat-action-room`)
-    where a person's has Ready.
+    card's image, and it opens over the rows beside the one hovered. The text card is instant and
+    the image is a network load on every hover; which the builder should show is a product choice.
+    Moving it off the list (to the side of the pane) is the smaller half.
 19. **Card faces in a game.** Hand cards put the art above the name (`.card-tile.art-first`);
-    board tiles, the zone viewer's cards and hover previews put the name above the art.
+    board tiles, the zone viewer's cards and hover previews put the name above the art. The hand's
+    layout reads as deliberate (the fan shows each card's top edge), so it was left.
 20. **Corner radii in a game.** Board tiles 5px (`.mini-tile`), hand cards and commander tiles
-    8px; the stack's "PROMPTED BY" label (`.stack-entry-label`, 999px) and its eye toggle are
-    rounded pills on an otherwise square interface.
-21. **A targetable player panel** (`.player-panel.targetable`) gets an outline and a pointer but
-    no hover response, where a targetable permanent lifts.
-22. **The result screen.** The top bar still reads "Alice's turn · Precombat Main Phase" with M1
-    lit, and the result is said again in the bottom strip.
+    8px; the stack's "PROMPTED BY" label and targets (`.stack-entry-label`, `.stack-targets`), the
+    dice caption and the zone viewer's gold pill (`--pill`) are 999px pills on an otherwise square
+    interface. The pills are a family of their own (labels floating over cards), so squaring them
+    is a look to choose, not a stray rule.

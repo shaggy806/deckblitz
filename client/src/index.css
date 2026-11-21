@@ -157,7 +157,10 @@
   --text-md: calc(13px * var(--ui)); /* the default for panels and dialogs */
   --text-base: calc(15px * var(--ui)); /* body text, names, primary buttons */
   --text-lg: calc(18px * var(--ui)); /* dialog and pane headings */
-  --text-xl: calc(22px * var(--ui)); /* page titles, life totals */
+  --text-xl: calc(22px * var(--ui)); /* pane titles, life totals */
+  /* A page's own title (About, the card library, the deck builder): one
+     size, where they were 42px, 22px and the browser's 2em (2026-11-21). */
+  --text-2xl: calc(32px * var(--ui));
 
   font-family: var(--font-body);
   font-size: var(--text-base);

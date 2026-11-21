@@ -397,6 +397,17 @@ button.seat-add-panel:hover {
 .seat-panel-action > .seat-action-room {
   visibility: hidden;
 }
+/* Another seat's standing, in the Ready button's place: words, not a
+   control. */
+.seat-panel-status {
+  align-self: center;
+  text-align: center;
+  font-weight: 600;
+  color: var(--muted);
+}
+.seat-panel-status.ready {
+  color: var(--good);
+}
 .seat-deck-hint.hidden {
   visibility: hidden;
 }
@@ -450,6 +461,15 @@ button.seat-add-panel:hover {
   font-size: var(--text-sm);
   text-align: center;
   appearance: textfield;
+  /* The themed field every text box is: a number input gets no baseline
+     from index.css, and the browser's own grey box read as disabled. */
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+}
+.rs-life-input::placeholder {
+  color: var(--muted);
 }
 .rs-life-input::-webkit-inner-spin-button,
 .rs-life-input::-webkit-outer-spin-button {

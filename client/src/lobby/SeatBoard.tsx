@@ -308,6 +308,13 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                           </button>
                         ))}
                       </div>
+                    ) : s.ready ? (
+                      // Someone else's seat says where it stands in the
+                      // place mine has its Ready button: it was a blank gap
+                      // under every bot.
+                      <span className="seat-panel-status ready">✓ Ready</span>
+                    ) : s.claimed ? (
+                      <span className="seat-panel-status">Not ready</span>
                     ) : null}
                   </div>
                 </div>

@@ -1724,8 +1724,11 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
           room {game.roomId}
           {game.spectating ? <span className="ts-spectating"> · spectating</span> : null}
         </span>
-        <TurnBanner view={view} seats={game.seats} />
-        <PhaseTrack view={view} seat={seat} />
+        {/* A finished game has no turn or step: the strip says "Game over"
+            alone, where it went on reading "Alice's turn · Precombat Main
+            Phase" with M1 lit. */}
+        {over ? null : <TurnBanner view={view} seats={game.seats} />}
+        {over ? null : <PhaseTrack view={view} seat={seat} />}
         <ControlNotice view={view} seat={ownSeat} seats={game.seats} />
         <span className="ts-acting">
           {over
