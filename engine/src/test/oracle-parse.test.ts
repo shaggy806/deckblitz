@@ -5644,6 +5644,28 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(savior.complete).toBe(true);
   });
 
+  it("Dream Tides: a mass doesn't-untap static, and the upkeep's choose-and-pay-for-each untap (payEach)", () => {
+    const tides = face(
+      "Creatures without flying don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player may choose any number of tapped creatures without flying they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.",
+      "Enchantment",
+    );
+    expect(tides.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", notKeyword: "flying" } },
+      restrictions: ["doesnt-untap"],
+    });
+    expect(tides.triggered[0].effect).toEqual({
+      kind: "choose-permanents",
+      chooser: "active-player",
+      filter: { type: "creature", notKeyword: "flying", tapped: true, controlledBy: "you" },
+      upTo: { countOf: { type: "creature", notKeyword: "flying", tapped: true } },
+      payEach: "{2}",
+      thenTogether: true,
+      then: { kind: "untap-all", filter: { thisWay: "chosen" } },
+      prompt: "Choose tapped creatures without flying to untap, paying {2} for each",
+    });
+    expect(tides.complete).toBe(true);
+  });
+
   it("'skip that draw instead': Obstinate Familiar's may, Living Conundrum's while the library is empty", () => {
     const conundrum = face("If you would draw a card while your library has no cards in it, skip that draw instead.", "Creature — Elemental");
     expect(conundrum.static[0].replacement).toEqual({

@@ -13675,4 +13675,35 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       fill: 0,
     }),
   ),
+  // --- Choose tapped creatures and pay for each one untapped (2026-11-21) ----
+  preset(
+    'Dream Tides: in your upkeep, pay {2} for each tapped creature you untap',
+    board({
+      you: {
+        bf: [
+          'Dream Tides',
+          'Mountain*4',
+          { name: 'Hill Giant', tapped: true },
+          { name: 'Hill Giant', tapped: true },
+          { name: 'Llanowar Elves', tapped: true },
+        ],
+      },
+      opp: {},
+      turn: 0,
+      step: 'end',
+    }),
+  ),
+  preset(
+    "Mudslide: in a 4-player game, you're asked only about your own creatures without flying",
+    board({
+      you: { bf: ['Mudslide', 'Mountain*2', { name: 'Hill Giant', tapped: true }, { name: 'Wind Drake', tapped: true }] },
+      opp: [
+        { bf: [{ name: 'Hill Giant', tapped: true }] },
+        { bf: [{ name: 'Hill Giant', tapped: true }] },
+        { bf: [{ name: 'Hill Giant', tapped: true }] },
+      ],
+      turn: 2,
+      step: 'end',
+    }),
+  ),
 ]

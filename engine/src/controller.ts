@@ -1001,6 +1001,12 @@ export class AutomaticController implements PlayerController {
     if (awaiting?.kind === "choose-permanents" && awaiting.asEntersRemoveCounters === true) {
       return counterRemovalPicks(view, eligible, max);
     }
+    // Each one paid for (Dream Tides' upkeep untap): no more than half of
+    // what could be paid for, so the turn keeps some of its mana. (A
+    // searching bot weighs how many — the decision's `candidates`.)
+    if (awaiting?.kind === "choose-permanents" && awaiting.payEach !== undefined) {
+      return ownPermanentsFirst(view, eligible, min, Math.max(min, Math.ceil(max / 2)));
+    }
     if (awaiting?.kind === "choose-permanents" && awaiting.then.kind === "cast-vote" && awaiting.then.keep !== true && max === 1) {
       return votePermanent(view, eligible, min);
     }

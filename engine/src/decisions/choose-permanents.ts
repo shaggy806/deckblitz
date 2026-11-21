@@ -79,6 +79,7 @@ export const choosePermanents = defineDecision({
           : {}),
         ...(awaiting.blight !== undefined ? { blight: awaiting.blight } : {}),
         ...(awaiting.bolster !== undefined ? { bolster: awaiting.bolster } : {}),
+        ...(awaiting.payEach !== undefined ? { payEach: awaiting.payEach } : {}),
       },
     ];
   },
@@ -253,6 +254,16 @@ export const choosePermanents = defineDecision({
         player,
         permanents,
       }));
+    }
+    // Each one chosen paid for (Dream Tides' untap): how many is the
+    // question, mana spent now against what it buys — none, the most
+    // valuable one, half of them and all, the most valuable first.
+    if (legal.payEach !== undefined) {
+      const units = expand(helpers.order(legal.eligible), legal.copies).slice(0, legal.max);
+      const counts = [...new Set([legal.min, 1, Math.ceil(units.length / 2), units.length])]
+        .filter((n) => n >= legal.min && n <= units.length)
+        .slice(0, Math.max(2, limit));
+      return counts.map((n) => ({ type: "choose-permanents", player, permanents: units.slice(0, n) }));
     }
     const mine = legal.eligible.filter((id) => helpers.controllerOf(id) === player);
     const theirs = legal.eligible.filter((id) => helpers.controllerOf(id) !== player);

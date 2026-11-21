@@ -6313,7 +6313,7 @@ function Table({
       <div className="controls">
         <span>
           {view.decisionSource ? `${view.decisionSource.cardName}: ` : ''}
-          {choosePermanentsAction.prompt} —{' '}
+          <Symbols text={choosePermanentsAction.prompt} /> —{' '}
           {maxTotalPower !== undefined
             ? `total power ${totalPower}/${maxTotalPower}`
             : sumToReach !== undefined
@@ -6323,6 +6323,13 @@ function Table({
                 ? `still to choose: ${stillWanted.join(', ')}`
                 : `${permanentPicks.length} chosen`
               : `${permanentPicks.length}/${max} chosen`}
+          {/* Each one paid for (Dream Tides): the price so far, paid on Done. */}
+          {choosePermanentsAction.payEach !== undefined && permanentPicks.length > 0 ? (
+            <>
+              {' — pay '}
+              <Symbols text={choosePermanentsAction.payEach.repeat(permanentPicks.length)} />
+            </>
+          ) : null}
         </span>
         {permanentPopupIds.length > 0 && decisionCollapsed ? (
           <button type="button" onClick={() => setDecisionCollapsed(false)}>

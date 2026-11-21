@@ -9019,6 +9019,16 @@ Each board's die comes up 4.
 ### Archangel of Strife: in a 4-player game, every player chooses in turn
 - **Do:** Cast Archangel of Strife and choose peace.
 - **Expect:** After you, Bob, Carol and Dave are asked in that order, and the History has four "Archangel of Strife chooses …" lines, yours first. The Angel is 6/9; each opponent's creature gets +3/+0 for war or +0/+3 for peace, by what its controller chose.
+## Choose tapped creatures and pay for each one untapped (2026-11-21)
+
+### Dream Tides: in your upkeep, pay {2} for each tapped creature you untap
+- **Do:** Wait for your upkeep. Click one Hill Giant, then Confirm.
+- **Expect:** The banner reads "Dream Tides: Choose tapped nongreen creatures to untap, paying {2} for each — 0/2 chosen"; Llanowar Elves isn't lit. With a Hill Giant picked it adds "— pay {2}". That Hill Giant untaps, two Mountains tap, and the other Hill Giant and the Elves stay tapped.
+
+### Mudslide: in a 4-player game, you're asked only about your own creatures without flying
+- **Do:** In this 4-player game, wait for your upkeep. Click your Hill Giant, then Confirm.
+- **Expect:** Wind Drake has untapped in your untap step and isn't lit; only your Hill Giant is offered ("0/1 chosen"). It untaps and two Mountains tap. The opponents' Hill Giants are theirs to pay for, in their own upkeeps.
+
 ## Skipping a draw against an opponent's Notion Thief (2026-11-21)
 
 ### Living Conundrum: with an empty library, skip the draw before Notion Thief takes it

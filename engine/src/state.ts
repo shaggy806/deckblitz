@@ -5021,6 +5021,10 @@ export type AwaitingDecision =
        * `prevent-damage-from-chosen-source`): a spell on the stack may be
        * chosen as well as a permanent. */
       readonly damageSource?: true;
+      /** The mana each permanent chosen costs, paid as the choice is answered
+       * — the `choose-permanents` effect's `payEach` (Dream Tides). `max` is
+       * already no more than the chooser could pay for. */
+      readonly payEach?: string;
       /** Set when the choice is the untap step's "you may choose not to
        * untap" (rule 502.3): every permanent about to untap, the picks among
        * them staying tapped. `then` is unused. */

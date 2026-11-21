@@ -10955,6 +10955,33 @@ export function parseEffect(text, outer) {
   ) {
     return { effect: { kind: "exile-top-contest", then: { kind: "take-extra-turn", who: "that-player" } }, todo: [], hints: [] };
   }
+  // "That player may choose any number of tapped nongreen creatures they
+  // control and pay {2} for each creature chosen this way. If the player does,
+  // untap those creatures" (Dream Tides, Mudslide, Thelon's Curse): the
+  // choice first, each one paid for (`payEach`), the chosen untapped together.
+  {
+    const m =
+      /^That player may choose any number of tapped (.+?) they control and pay ((?:\{[^}]+\})+) for each creature chosen this way\. If the player does, untap those creatures\.$/.exec(
+        text,
+      );
+    const creatures = m === null ? null : attackingCreatures(m[1][0].toUpperCase() + m[1].slice(1));
+    if (m !== null && creatures !== null) {
+      return {
+        effect: {
+          kind: "choose-permanents",
+          chooser: "active-player",
+          filter: { ...creatures, tapped: true, controlledBy: "you" },
+          upTo: { countOf: { ...creatures, tapped: true } },
+          payEach: m[2],
+          thenTogether: true,
+          then: { kind: "untap-all", filter: { thisWay: "chosen" } },
+          prompt: `Choose tapped ${m[1]} to untap, paying ${m[2]} for each`,
+        },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
   const tempting = temptingOfferOf(text, outer);
   if (tempting !== null) return { effect: tempting, todo: [], hints: [] };
   // "Creatures you control gain flying until end of turn if a creature you
@@ -25239,6 +25266,14 @@ function parseStatic(line, text) {
       const filter = m[2] === undefined ? "self" : { permanents: {}, artifacts: { type: "artifact" }, creatures: { type: "creature" } }[m[2]];
       return { affects: { scope: "self" }, untapsDuringOthersUntap: filter, text };
     }
+  }
+  // "Creatures don't untap during their controllers' untap steps" (Dream
+  // Tides), "Blue creatures …" (Thelon's Curse), "Creatures without flying …"
+  // (Mudslide): rule 502.3's untap, skipped for each that matches.
+  {
+    const m = /^(.+) don't untap during their controllers' untap steps\.$/.exec(line);
+    const filter = m === null ? null : attackingCreatures(m[1]);
+    if (filter !== null) return { affects: { scope: "filter", filter }, restrictions: ["doesnt-untap"], text };
   }
   // What an Aura says of its host: Fall from Favor (its controller, read at each
   // untap step), Street Savvy (the blocker's side of rule 702.14), Power Artifact

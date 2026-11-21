@@ -3110,6 +3110,20 @@ export type EffectSpec =
        * the other choice fields aren't read. Nothing happens with no source
        * to choose. */
       readonly damageSource?: true;
+      /**
+       * Each one chosen costs this mana, paid as the choice is answered: "that
+       * player **may choose any number of tapped nongreen creatures they
+       * control and pay {2} for each creature chosen this way**. If the player
+       * does, untap those creatures" (Dream Tides, Mudslide, Thelon's Curse's
+       * `"{U}"`) is `min` 0 with this, `chooser: "active-player"`,
+       * `thenTogether` and `then` an `untap-all` over `{ thisWay: "chosen" }`.
+       * The choice comes first (a creature tapped for mana in the payment
+       * wasn't tapped when it was chosen), so no more may be chosen than the
+       * chooser could pay for (rule 118.3 — `upTo` capped at it); choosing
+       * none is declining, and pays nothing. If the payment can't be made
+       * after all, nothing was chosen. With `thenTogether`.
+       */
+      readonly payEach?: string;
     }
   | {
       /** Set only by the engine — a `choose-permanents`' `remember`, applied
@@ -14001,6 +14015,8 @@ export interface EffectApi {
     thenTargets?: ResolvedTargets,
     /** The effect's `thenTogether`: `then` runs once, over all of them. */
     thenTogether?: true,
+    /** The effect's `payEach`: the mana each one chosen costs. */
+    payEach?: string,
   ): void;
   /** See the `"choose-permanents"` {@link EffectSpec}'s `orPlayers`: raise
    * the `choose-permanent-or-player` decision over the permanents matching
@@ -21141,6 +21157,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         spec.together,
         spec.keepTargets === true ? ctx.targets : undefined,
         spec.thenTogether,
+        spec.payEach,
       );
       // Nothing to choose from: one instruction over an empty set still
       // happens (Fortune, Loyal Steed's "exile it and up to one creature").

@@ -2631,6 +2631,10 @@ export type LegalAction =
       /** Set when it's which of the least-toughness creatures bolsters this
        * many (rule 701.39a): exactly one, and the +1/+1 counters go on it. */
       readonly bolster?: number;
+      /** The mana each one chosen costs, paid as this is answered ("pay {2}
+       * for each creature chosen this way" — Dream Tides); `max` is no more
+       * than the chooser could pay for. */
+      readonly payEach?: string;
     }
   | {
       readonly kind: "scry";

@@ -46386,13 +46386,13 @@ controlledBy,
         ),
       reverseTurnOrder: () => this.reverseTurnOrder(),
       timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount, controller),
-      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
+      choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether, payEach) =>
         this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether, {
           triggerValue,
           ...(triggerObject !== undefined ? { triggerObject } : {}),
           targetZones,
           lastKnownRefs: refs,
-        }),
+        }, payEach),
       choosePermanentOrPlayer: (filter, players, then, prompt, exceptSource, except, chooser) =>
         this.beginChoosePermanentOrPlayer(source, chooser, x, filter, players, then, prompt, exceptSource, except, {
           triggerValue,
@@ -59342,6 +59342,8 @@ controlledBy,
     thenTargets?: ResolvedTargets,
     thenTogether?: true,
     thenResolution?: ChoosePermanentsResolution,
+    /** The effect's `payEach`: no more than `player` could pay for. */
+    payEach?: string,
   ): void {
     // With the source, for a filter about it: "equipped creature" (Hand of
     // Vecna's `hostOfSource`), "attached to this".
@@ -59366,7 +59368,11 @@ controlledBy,
               ),
             )
           : new Set(eligible.flatMap((id) => together.tags[id] ?? [])).size;
-    const most = Math.min(Math.max(0, max), available);
+    // "…and pay {2} for each creature chosen this way" (Dream Tides): no
+    // more than they could pay for (rule 118.3).
+    const affordable =
+      payEach === undefined ? Infinity : this.maxAffordableAbilityX(player, (n) => repeatedManaCost(parseManaCost(payEach), n));
+    const most = Math.min(Math.max(0, max), available, affordable);
     if (most <= 0) return;
     this.state.awaiting = {
       kind: "choose-permanents",
@@ -59382,6 +59388,7 @@ controlledBy,
       ...(thenTargets !== undefined ? { thenTargets } : {}),
       ...(thenTogether === true ? { thenTogether: true as const } : {}),
       ...(thenResolution !== undefined ? { thenResolution } : {}),
+      ...(payEach !== undefined ? { payEach } : {}),
     };
   }
 
@@ -59941,11 +59948,26 @@ controlledBy,
     // The set is what this resolution chose this way (`thisWay: "chosen"`),
     // and the instruction happens over it however few were chosen.
     if (awaiting.thenTogether === true) {
+      // "…and pay {2} for each creature chosen this way" (Dream Tides): paid
+      // now, all of it; a payment that can't be made after all is choosing
+      // none (rule 118.3).
+      let paidFor = chosen;
+      if (awaiting.payEach !== undefined && chosen.length > 0) {
+        const payment = this.payMana(
+          player,
+          repeatedManaCost(parseManaCost(awaiting.payEach), chosen.length),
+          undefined,
+          undefined,
+          otherCostPurpose(awaiting.payEach),
+        );
+        if (payment === null) paidFor = [];
+        else this.executePayment(player, payment);
+      }
       // A token chosen out of a stack is singled out first, one for each
       // time it was named, so the set is those tokens and not the whole
       // stack (a stack is a representation: it may not change a result) —
       // Elrond of the White Council's voter gives away the one creature.
-      const picked = chosen.map((id) => (this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id));
+      const picked = paidFor.map((id) => (this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id));
       if (picked.length > 0) {
         this.emit({ type: "cards-chosen-from-zone", player, objects: [...new Set(picked)], chosenOnly: true });
       }
