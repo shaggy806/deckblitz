@@ -34,6 +34,7 @@ export default defineCard({
   text: `${BUSHIDO_TEXT}\n${ATTACK_TEXT}`,
   triggered: [
     {
+      keywordOf: "bushido",
       trigger: { on: "blocks", who: "self" },
       targets: [],
       effect: BUSHIDO,
@@ -41,6 +42,7 @@ export default defineCard({
       text: BUSHIDO_TEXT,
     },
     {
+      keywordOf: "bushido",
       trigger: { on: "becomes-blocked", who: "self" },
       targets: [],
       effect: BUSHIDO,

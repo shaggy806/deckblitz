@@ -20,8 +20,10 @@ import type { PtModifier } from "./state.js";
  * whether it has the keyword and lose it, a replacement can ask which ability
  * is putting counters ("if a modular triggered ability would put …" — Zabaz,
  * the Glimmerwasp), and a trigger can watch it resolve ("whenever equipped
- * creature mentors a creature" — rule 702.134c, `mentored`). */
-export type KeywordAbilityName = "vanishing" | "soulbond" | "modular" | "mentor";
+ * creature mentors a creature" — rule 702.134c, `mentored`), and a count
+ * can read its value ("+1/+1 for each point of bushido it has" — Takeno,
+ * Samurai General: `grantPtPerCount.ofAffected: "bushido"`). */
+export type KeywordAbilityName = "vanishing" | "soulbond" | "modular" | "mentor" | "bushido";
 
 /** Layer 4: card types, subtypes and supertypes (rules 205, 613.1d). */
 export interface TypePatch {

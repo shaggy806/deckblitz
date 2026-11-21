@@ -563,14 +563,17 @@ export const afterlife = (n: number): TriggeredAbility => ({
  * blocked, it gets +N/+N until end of turn" — one ability over two events,
  * so two triggers sharing its text (a creature never both blocks and becomes
  * blocked in one combat). Spread them into `triggered`, and put "Bushido N"
- * in `text` as well.
+ * in `text` as well. Both are stamped `keywordOf: "bushido"`, so a count can
+ * read how many points of bushido a creature has (Takeno, Samurai General —
+ * `bushidoValue`, which reads the "blocks" half's N). `text` replaces the
+ * reminder line where the card prints another (Jade Avenger's bare "Bushido 2").
  */
-export const bushido = (n: number): TriggeredAbility[] => {
-  const text = `Bushido ${n} (Whenever this creature blocks or becomes blocked, it gets +${n}/+${n} until end of turn.)`;
+export const bushido = (n: number, text?: string): TriggeredAbility[] => {
+  const line = text ?? `Bushido ${n} (Whenever this creature blocks or becomes blocked, it gets +${n}/+${n} until end of turn.)`;
   const effect = { kind: "modify-pt", target: "source", power: n, toughness: n, duration: "end-of-turn" } as const;
   return [
-    { trigger: { on: "blocks", who: "self" }, targets: [], effect, resolve: null, text },
-    { trigger: { on: "becomes-blocked", who: "self" }, targets: [], effect, resolve: null, text },
+    { keywordOf: "bushido", trigger: { on: "blocks", who: "self" }, targets: [], effect, resolve: null, text: line },
+    { keywordOf: "bushido", trigger: { on: "becomes-blocked", who: "self" }, targets: [], effect, resolve: null, text: line },
   ];
 };
 

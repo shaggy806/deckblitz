@@ -18,7 +18,7 @@ export default defineCard({
   toughness: 1,
   text: `${BUSHIDO_TEXT}\n${REGEN_TEXT}`,
   triggered: [
-    { trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO_TEXT },
+    { keywordOf: "bushido", trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO_TEXT },
     { trigger: { on: "becomes-blocked", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO_TEXT },
   ],
   activated: [

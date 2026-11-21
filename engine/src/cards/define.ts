@@ -2613,8 +2613,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * battlefield then, entering attacking not counting (Moraug, Fury of
      * Akoum's rulings; `GameObject.attacksThisTurn`). `"most-alike-stored-results"`:
      * the greatest number of the die results stored on it that are the same
-     * value (Centaur of Attention; `GameObject.storedResults`). */
+     * value (Centaur of Attention; `GameObject.storedResults`). `"bushido"`:
+     * the total of its bushido values, every instance it has (rule 702.45b) —
+     * Takeno, Samurai General's "+1/+1 for each point of bushido it has" (see
+     * `bushidoValue`). */
     readonly ofAffected?:
+      | "bushido"
       | "mana-value"
       | "colors"
       | "creature-types"

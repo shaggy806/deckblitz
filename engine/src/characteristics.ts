@@ -5223,6 +5223,51 @@ function affectedCharacteristicCount(
   return creatureTypes.includes(EVERY_CREATURE_TYPE) ? CREATURE_TYPES.length : creatureTypes.length;
 }
 
+/**
+ * How many points of bushido `object` has (rule 702.45a): the N of each
+ * bushido ability it has, added up over every instance (702.45b) — what
+ * `grantPtPerCount.ofAffected: "bushido"` reads (Takeno, Samurai General).
+ * A bushido ability is two triggers stamped `keywordOf: "bushido"` (the
+ * `bushido` helper), so its "blocks" half is the one counted, its N the
+ * +N/+N it gives: a number, or Fumiko the Lowblood's "bushido X, where X is
+ * the number of attacking creatures", a `countOf` read through `count`.
+ * Its printed abilities count unless it has lost them (all of them, or
+ * bushido by name), and so does a bushido an effect gave it (Sensei
+ * Golden-Tail's training) unless a later loss took it, as
+ * `Game.effectiveTriggeredEntries` lists them. No static grants bushido to
+ * other permanents, so none is looked for. Abilities are layer 6, read
+ * without the layer-7 fold, so nothing here recurses.
+ */
+function bushidoValue(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  count: (filter: CardFilter) => number,
+): number {
+  const lostAt = abilitiesLostAt(state, registry, object);
+  const valueOf = (ability: { readonly keywordOf?: KeywordAbilityName; readonly trigger: { readonly on: string }; readonly effect: unknown }): number => {
+    if (ability.keywordOf !== "bushido" || ability.trigger.on !== "blocks") return 0;
+    const effect = ability.effect as { readonly kind?: string; readonly power?: EffectAmount } | null;
+    if (effect?.kind !== "modify-pt") return 0;
+    const power = effect.power;
+    if (typeof power === "number") return power;
+    if (power !== undefined && typeof power === "object" && "countOf" in power && typeof power.countOf === "object") {
+      return count(power.countOf as CardFilter);
+    }
+    return 0;
+  };
+  let total = 0;
+  const lostKeyword = object.modifiers.some((m) => m.loseKeywordAbilities?.includes("bushido") === true);
+  if (lostAt === null && !lostKeyword) {
+    for (const ability of registry.get(rulesTextName(object)).triggered) total += valueOf(ability);
+  }
+  for (const modifier of object.modifiers) {
+    if (!modifierGrantApplies(modifier, lostAt)) continue;
+    for (const ability of modifier.grantsTriggered ?? []) total += valueOf(ability);
+  }
+  return total;
+}
+
 /** The hand size a count-scaled bonus reads (`grantPtPerCount.cardsInHand`):
  * the counting player's own (`true`), their opponents' together, or the
  * affected creature's controller's. A player who has left the game has no
@@ -6568,7 +6613,9 @@ function collectStaticEffects(
       };
       const counted = nobody
         ? 0
-        : per.ofAffected !== undefined
+        : per.ofAffected === "bushido"
+          ? bushidoValue(state, registry, target, battlefieldMatching)
+          : per.ofAffected !== undefined
           ? affectedCharacteristicCount(state, registry, target, per.ofAffected)
           : per.countersAmong !== undefined
           ? countersAmong(per.countersAmong)

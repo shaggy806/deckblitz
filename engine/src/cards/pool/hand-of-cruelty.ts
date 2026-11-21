@@ -24,7 +24,7 @@ export default defineCard({
   text: `${PROTECTION_TEXT}\n${BUSHIDO_TEXT}`,
   static: [{ affects: { scope: "self" }, protection: { colors: ["W"] }, text: PROTECTION_TEXT }],
   triggered: [
-    { trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO_TEXT },
+    { keywordOf: "bushido", trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO_TEXT },
     { trigger: { on: "becomes-blocked", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO_TEXT },
   ],
 });

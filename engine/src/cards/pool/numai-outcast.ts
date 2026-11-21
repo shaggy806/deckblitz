@@ -22,6 +22,7 @@ export default defineCard({
   ],
   triggered: [
     {
+      keywordOf: "bushido",
       trigger: { on: "blocks", who: "self" },
       targets: [],
       effect: { kind: "modify-pt", target: "source", power: 2, toughness: 2, duration: "end-of-turn" },
@@ -29,6 +30,7 @@ export default defineCard({
       text: "Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)",
     },
     {
+      keywordOf: "bushido",
       trigger: { on: "becomes-blocked", who: "self" },
       targets: [],
       effect: { kind: "modify-pt", target: "source", power: 2, toughness: 2, duration: "end-of-turn" },

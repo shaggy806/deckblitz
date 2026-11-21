@@ -23,7 +23,7 @@ export default defineCard({
   toughness: 2,
   text: TEXT,
   triggered: [
-    { trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: TEXT },
+    { keywordOf: "bushido", trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: TEXT },
     { trigger: { on: "becomes-blocked", who: "self" }, targets: [], effect: PUMP, resolve: null, text: TEXT },
   ],
 });

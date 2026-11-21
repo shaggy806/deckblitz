@@ -25,6 +25,7 @@ export default defineCard({
   ],
   triggered: [
     {
+      keywordOf: "bushido",
       trigger: { on: "blocks", who: "self" },
       targets: [],
       effect: { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },
@@ -32,6 +33,7 @@ export default defineCard({
       text: BUSHIDO,
     },
     {
+      keywordOf: "bushido",
       trigger: { on: "becomes-blocked", who: "self" },
       targets: [],
       effect: { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },

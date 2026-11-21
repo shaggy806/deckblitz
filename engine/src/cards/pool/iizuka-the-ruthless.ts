@@ -18,7 +18,7 @@ export default defineCard({
   toughness: 3,
   text: `Bushido 2 (Whenever this creature blocks or becomes blocked, it gets +2/+2 until end of turn.)\n${SAC_TEXT}`,
   triggered: [
-    { trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO },
+    { keywordOf: "bushido", trigger: { on: "blocks", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO },
     { trigger: { on: "becomes-blocked", who: "self" }, targets: [], effect: PUMP, resolve: null, text: BUSHIDO },
   ],
   activated: [
