@@ -447,6 +447,11 @@ export interface AbilityCost {
    * as the cost is paid. Payable only by the player who made it: nobody else
    * has anything to reveal. */
   readonly revealChosen?: true;
+  /** "Reveal your hand: …" (Sasaya, Orochi Ascendant): the activating
+   * player's whole hand is shown to every player as the cost is paid (rule
+   * 701.20a) — always payable, an empty hand included. The effect then asks
+   * what it was about itself (the hand as it resolves, the ruling). */
+  readonly revealHand?: true;
   /**
    * Unattach an Equipment as part of the cost (rule 701.3d): it stays on the
    * battlefield, attached to nothing, and it becomes unattached as the cost

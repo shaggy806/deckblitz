@@ -1659,6 +1659,8 @@ describe("costs and triggers", () => {
       extra: {},
     });
     expect(parseCost("Sacrifice another creature").extra).toEqual({ otherOnly: true });
+    // Sasaya, Orochi Ascendant (rule 701.20a).
+    expect(parseCost("Reveal your hand").cost).toEqual({ mana: null, tap: false, revealHand: true });
     expect(parseCost("Tap two untapped Elves you control").cost.tapOthers).toEqual({
       count: 2,
       filter: { subtype: "Elf", controlledBy: "you" },

@@ -1916,6 +1916,7 @@ export function parseCost(text) {
     else if (part === "Exile ~") addCostAct(cost, { kind: "exile", target: "source" });
     // The secret chosen for this permanent (`GameObject.secretChoice`).
     else if (part === "Reveal the player you chose" || part === "Reveal the creature type you chose") cost.revealChosen = true;
+    else if (part === "Reveal your hand") cost.revealHand = true;
     // "Exile a card from your hand" (Cadaverous Bloom), "Exile a creature you
     // control" (Food Chain: `sacrifice` paid by exile), "Exile an instant or
     // sorcery spell you control" (Nivmagus Elemental), "Exile two creature

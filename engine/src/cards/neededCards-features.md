@@ -325,6 +325,16 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Mana per other land of the tapped land's name, and a "Reveal your hand" cost — built 2026-11-21
+
+The keys `effect:mana-produced-per-same-name-land` and `condition:hand-land-card-count` (the second was already
+there: `hand-size`'s `filter`). A triggered mana ability's live amount is read with the tapped permanent as its
+trigger object (`Game.liveManaAmount`'s `triggerObject`, bound through `bindAmountCompares`), so `{ countOf: { …,
+sameNameWith: "trigger-object", notObject: "trigger-object" } }` counts "each other land … with the same name as it";
+several units of `mana: "produced"` are each their own pick (`tappedForManaExtras`, the Mossfire Valley ruling).
+`AbilityCost.revealHand` is "Reveal your hand:" (rule 701.20a). Sasaya, Orochi Ascendant // Sasaya's Essence
+(17489). `test/same-name-land-mana.test.ts`.
+
 ### A spell's own conditional cost increase — built 2026-11-20
 
 The key `cost:self-cost-increase-not-your-turn`: `SelfCostReduction.increaseGeneric`, any amount added under the

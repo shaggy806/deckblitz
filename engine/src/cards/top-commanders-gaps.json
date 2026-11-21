@@ -3131,7 +3131,9 @@
   "amount:aggregate-sum-unclamped",
   "effect:delayed-leaves-own-targets",
   "effect:per-opponent-tap-then-reflexive-steal",
-  "trigger:attack-with-creature-opponent-owns-owner-ref"
+  "trigger:attack-with-creature-opponent-owns-owner-ref",
+  "effect:mana-produced-per-same-name-land",
+  "condition:hand-land-card-count"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

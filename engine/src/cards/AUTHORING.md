@@ -5070,6 +5070,10 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   shareColor: true }`): only cards with a colour enough of them have are
   offered (colourless shares none), the choice's `together` rule "share"
   over their colours. `revealed-card-cost.test.ts`.
+- `revealHand: true` — "Reveal your hand:" (Sasaya, Orochi Ascendant, rule
+  701.20a): the whole hand shown as it's paid, always payable. Whatever the
+  effect asks of the hand it asks as it resolves (`hand-size` with a
+  `filter`). `same-name-land-mana.test.ts`.
 - **"The revealed card"** — the one card a cost revealed from the hand (a
   spell's `additionalCost.behold` with `fromHand`, a cost option's, a
   kicker's `keyword: "reveal"`, an ability's `reveal` of one) is the
@@ -5445,7 +5449,11 @@ mana: "B", amount: 1 }`; a `delayed-trigger`'s `at: { whenever }` with that
 trigger and that effect is one for the turn (High Tide, Bubbling Muck, Molten
 Tide); Roxanne, Starfall Savant's "…add one mana of any type
 that artifact token produced" is `mana: "produced"` (meaningless anywhere
-else). They never go on the stack: the extra mana is made with the rest, and
+else; an amount over one is that many picks, any mix of the types it made). A
+counted amount reads the tapped permanent as `"trigger-object"`: Sasaya's
+Essence's "for each other land you control with the same name as it" is
+`amount: { countOf: { type: "land", controlledBy: "you", sameNameWith:
+"trigger-object", notObject: "trigger-object" } }`. They never go on the stack: the extra mana is made with the rest, and
 the auto-payer counts it — a Swamp under Crypt Ghast is a `{B}{B}` source. Its
 `anyAbility: true` is "whenever a land's **ability causes you to add** mana"
 (Caged Sun, with `producing: "chosen"`), whichever ability did it: one with no

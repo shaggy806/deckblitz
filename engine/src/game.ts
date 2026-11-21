@@ -29391,6 +29391,8 @@ export class Game {
 
     // Pay the cost. The secret first: a sacrifice beside it clears the choice.
     if (ability.cost.revealChosen === true) this.revealSecretChoice(source, player);
+    // "Reveal your hand:" (rule 701.20a): every player sees it.
+    if (ability.cost.revealHand === true) this.revealCards(player, [...this.state.zones.perPlayer[player].hand], "hand");
     if (ability.cost.tap) {
       source.tapped = true;
       this.emit({ type: "permanent-tapped", object: sourceId, by: player });
@@ -31439,6 +31441,7 @@ export class Game {
           ability.cost.exileSpell !== undefined ||
           ability.cost.putFromExile !== undefined ||
           ability.cost.revealChosen === true ||
+          ability.cost.revealHand === true ||
           ability.exhaust === true ||
           ability.onlyOnce === true ||
           ability.powerUp === true
@@ -31939,15 +31942,20 @@ export class Game {
      * Autogenerator's charge counter). Only a {@link Game.sizesManaFirst}
      * one is read; the auto-payer leaves the rest to be activated by hand. */
     first?: EffectSpec,
+    /** A triggered mana ability's trigger object — the permanent tapped for
+     * mana, which "for each other land you control with the same name **as
+     * it**" (Sasaya's Essence) reads as `"trigger-object"`. */
+    triggerObject?: ObjectId,
   ): number {
     const counter = first !== undefined && Game.sizesManaFirst(first) ? first : undefined;
+    const tapped = triggerObject === undefined ? "" : `:t${triggerObject}`;
     // Asked for every mana source, every offer and every "could produce"
     // read, and a resolution context is dear to build: once per cache region.
     return computedCacheMemo(
-      `liveMana:${source}:${player}:${manaColor ?? ""}:${JSON.stringify(amount)}${counter === undefined ? "" : `:first${counter.counter}${counter.amount}`}`,
+      `liveMana:${source}:${player}:${manaColor ?? ""}:${JSON.stringify(amount)}${counter === undefined ? "" : `:first${counter.counter}${counter.amount}`}${tapped}`,
       () => {
-        const ctx = computedCacheMemo(`liveManaCtx:${source}:${player}`, () =>
-          this.makeResolutionContext(source, player, []),
+        const ctx = computedCacheMemo(`liveManaCtx:${source}:${player}${tapped}`, () =>
+          this.makeResolutionContext(source, player, [], 0, 0, triggerObject),
         );
         let read = manaColor === undefined ? ctx : { ...ctx, manaColor };
         if (counter !== undefined) {
@@ -31967,7 +31975,9 @@ export class Game {
                 : 0),
           };
         }
-        const n = amountValue(amount, read);
+        // "The same name as it": a reference only a resolution can read, bound
+        // here as an effect binds its own (`bindAmountCompares`).
+        const n = amountValue(triggerObject === undefined ? amount : bindAmountCompares(amount, read), read);
         return Math.max(0, Math.min(n, Game.MAX_EFFECT_INSTANCES));
       },
     );
@@ -33089,15 +33099,35 @@ export class Game {
           }
           continue;
         }
+        // A counted amount — "an additional {G} for each Elf on the
+        // battlefield" (Elvish Guidance) — is read as the mana is made,
+        // from the trigger's side, like a mana ability's own (rule 605.3a),
+        // with the tapped permanent as "it" (Sasaya's Essence's "each other
+        // land you control with the same name as it").
+        const amount =
+          typeof effect.amount === "number"
+            ? effect.amount
+            : this.liveManaAmount(holder.id, holder.controller, effect.amount, undefined, undefined, tapped.id);
+        // Several units "of any type that land produced" are each their own
+        // pick: off a land that made {R}{G}, any combination of the two
+        // (Sasaya's Essence's Mossfire Valley ruling).
+        if (effect.mana === "produced" && amount > 1 && effect.mayAdd !== true) {
+          for (let unit = 0; unit < amount; unit += 1) {
+            out.push({
+              mana: "produced",
+              amount: 1,
+              holder: holder.id,
+              ...(producing !== undefined ? { producing } : {}),
+              ...(unit === 0 && effect.also !== undefined ? { also: effect.also } : {}),
+              ...(tag !== undefined ? { tag } : {}),
+              ...(unit > 0 ? { combination: true as const } : {}),
+            });
+          }
+          continue;
+        }
         out.push({
           mana: effect.mana,
-          // A counted amount — "an additional {G} for each Elf on the
-          // battlefield" (Elvish Guidance) — is read as the mana is made,
-          // from the trigger's side, like a mana ability's own (rule 605.3a).
-          amount:
-            typeof effect.amount === "number"
-              ? effect.amount
-              : this.liveManaAmount(holder.id, holder.controller, effect.amount),
+          amount,
           holder: holder.id,
           ...(producing !== undefined ? { producing } : {}),
           ...(effect.also !== undefined ? { also: effect.also } : {}),
@@ -33137,7 +33167,7 @@ export class Game {
         amount:
           typeof effect.amount === "number"
             ? effect.amount
-            : this.liveManaAmount(delayed.source, delayed.controller, effect.amount),
+            : this.liveManaAmount(delayed.source, delayed.controller, effect.amount, undefined, undefined, tapped.id),
         holder: delayed.source,
         controller: delayed.controller,
         ...(producing !== undefined ? { producing } : {}),
