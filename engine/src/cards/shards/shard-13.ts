@@ -793,6 +793,7 @@ import _poolSpiderGwenFreeSpirit from "../pool/spider-gwen-free-spirit.js";
 import _poolSpiderSlayerHatredHoned from "../pool/spider-slayer-hatred-honed.js";
 import _poolSpikeWorker from "../pool/spike-worker.js";
 import _poolSpikedCorridorTorturePit from "../pool/spiked-corridor-torture-pit.js";
+import _poolSpinIntoMyth from "../pool/spin-into-myth.js";
 import _poolSpinOut from "../pool/spin-out.js";
 import _poolSpinalCentipede from "../pool/spinal-centipede.js";
 import _poolSpinalEmbrace from "../pool/spinal-embrace.js";
@@ -1816,6 +1817,7 @@ const shard: CardShard = {
     _poolSpiderSlayerHatredHoned,
     _poolSpikeWorker,
     _poolSpikedCorridorTorturePit,
+    _poolSpinIntoMyth,
     _poolSpinOut,
     _poolSpinalCentipede,
     _poolSpinalEmbrace,

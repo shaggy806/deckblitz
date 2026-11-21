@@ -65,6 +65,7 @@ import _poolBeaconHawk from "../pool/beacon-hawk.js";
 import _poolBeastcallerSavant from "../pool/beastcaller-savant.js";
 import _poolBeetleLegacyCriminal from "../pool/beetle-legacy-criminal.js";
 import _poolBefriendingTheMoths from "../pool/befriending-the-moths.js";
+import _poolBellBorcaSpectralSergeant from "../pool/bell-borca-spectral-sergeant.js";
 import _poolBenjaminSiskoBesieged from "../pool/benjamin-sisko-besieged.js";
 import _poolBergStrider from "../pool/berg-strider.js";
 import _poolBertaWiseExtrapolator from "../pool/berta-wise-extrapolator.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolBeastcallerSavant,
     _poolBeetleLegacyCriminal,
     _poolBefriendingTheMoths,
+    _poolBellBorcaSpectralSergeant,
     _poolBenjaminSiskoBesieged,
     _poolBergStrider,
     _poolBertaWiseExtrapolator,

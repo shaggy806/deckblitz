@@ -502,6 +502,7 @@ import _poolLurkingJackals from "../pool/lurking-jackals.js";
 import _poolLurkingSkirge from "../pool/lurking-skirge.js";
 import _poolLustForWar from "../pool/lust-for-war.js";
 import _poolLuxurySuite from "../pool/luxury-suite.js";
+import _poolMaestrosAscendancy from "../pool/maestros-ascendancy.js";
 import _poolMageHuntersOnslaught from "../pool/mage-hunters-onslaught.js";
 import _poolMagicMissile from "../pool/magic-missile.js";
 import _poolMagusOfTheCoffers from "../pool/magus-of-the-coffers.js";
@@ -1573,6 +1574,7 @@ const shard: CardShard = {
     _poolLurkingSkirge,
     _poolLustForWar,
     _poolLuxurySuite,
+    _poolMaestrosAscendancy,
     _poolMageHuntersOnslaught,
     _poolMagicMissile,
     _poolMagusOfTheCoffers,

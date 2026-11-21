@@ -2403,6 +2403,7 @@ import _poolBelenonWarAnthem from "./pool/belenon-war-anthem.js";
 import _poolBelfrySpirit from "./pool/belfry-spirit.js";
 import _poolBelieve from "./pool/believe.js";
 import _poolBelisariusCawl from "./pool/belisarius-cawl.js";
+import _poolBellBorcaSpectralSergeant from "./pool/bell-borca-spectral-sergeant.js";
 import _poolBelladonnaTook from "./pool/belladonna-took.js";
 import _poolBelleOfTheBrawl from "./pool/belle-of-the-brawl.js";
 import _poolBelligerentBrontodon from "./pool/belligerent-brontodon.js";
@@ -16763,6 +16764,7 @@ import _poolMaelstromOfTheSpiritDragon from "./pool/maelstrom-of-the-spirit-drag
 import _poolMaelstromPulse from "./pool/maelstrom-pulse.js";
 import _poolMaelstromWanderer from "./pool/maelstrom-wanderer.js";
 import _poolMaesterSeymour from "./pool/maester-seymour.js";
+import _poolMaestrosAscendancy from "./pool/maestros-ascendancy.js";
 import _poolMaestrosCharm from "./pool/maestros-charm.js";
 import _poolMaestrosConfluence from "./pool/maestros-confluence.js";
 import _poolMaestrosDiabolist from "./pool/maestros-diabolist.js";
@@ -17554,6 +17556,7 @@ import _poolMesaUnicorn from "./pool/mesa-unicorn.js";
 import _poolMesmericFiend from "./pool/mesmeric-fiend.js";
 import _poolMesmericGlare from "./pool/mesmeric-glare.js";
 import _poolMesmericOrb from "./pool/mesmeric-orb.js";
+import _poolMesmericSliver from "./pool/mesmeric-sliver.js";
 import _poolMesmericTrance from "./pool/mesmeric-trance.js";
 import _poolMesmerizingBenthid from "./pool/mesmerizing-benthid.js";
 import _poolMesmerizingDose from "./pool/mesmerizing-dose.js";
@@ -23647,6 +23650,7 @@ import _poolSamutVoiceOfDissent from "./pool/samut-voice-of-dissent.js";
 import _poolSamutsSprint from "./pool/samuts-sprint.js";
 import _poolSamwiseGamgee from "./pool/samwise-gamgee.js";
 import _poolSamwiseTheStouthearted from "./pool/samwise-the-stouthearted.js";
+import _poolSanarInnovativeFirstYear from "./pool/sanar-innovative-first-year.js";
 import _poolSanarUnfinishedGenius from "./pool/sanar-unfinished-genius.js";
 import _poolSanctifiedCharge from "./pool/sanctified-charge.js";
 import _poolSanctifierEnVec from "./pool/sanctifier-en-vec.js";
@@ -26397,6 +26401,7 @@ import _poolSpiketailDrakeling from "./pool/spiketail-drakeling.js";
 import _poolSpiketailHatchling from "./pool/spiketail-hatchling.js";
 import _poolSpikewheelAcrobat from "./pool/spikewheel-acrobat.js";
 import _poolSpinEngine from "./pool/spin-engine.js";
+import _poolSpinIntoMyth from "./pool/spin-into-myth.js";
 import _poolSpinOut from "./pool/spin-out.js";
 import _poolSpinalCentipede from "./pool/spinal-centipede.js";
 import _poolSpinalEmbrace from "./pool/spinal-embrace.js";
@@ -36167,6 +36172,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBelfrySpirit,
   _poolBelieve,
   _poolBelisariusCawl,
+  _poolBellBorcaSpectralSergeant,
   _poolBelladonnaTook,
   _poolBelleOfTheBrawl,
   _poolBelligerentBrontodon,
@@ -50527,6 +50533,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMaelstromPulse,
   _poolMaelstromWanderer,
   _poolMaesterSeymour,
+  _poolMaestrosAscendancy,
   _poolMaestrosCharm,
   _poolMaestrosConfluence,
   _poolMaestrosDiabolist,
@@ -51318,6 +51325,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMesmericFiend,
   _poolMesmericGlare,
   _poolMesmericOrb,
+  _poolMesmericSliver,
   _poolMesmericTrance,
   _poolMesmerizingBenthid,
   _poolMesmerizingDose,
@@ -57411,6 +57419,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSamutsSprint,
   _poolSamwiseGamgee,
   _poolSamwiseTheStouthearted,
+  _poolSanarInnovativeFirstYear,
   _poolSanarUnfinishedGenius,
   _poolSanctifiedCharge,
   _poolSanctifierEnVec,
@@ -60161,6 +60170,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpiketailHatchling,
   _poolSpikewheelAcrobat,
   _poolSpinEngine,
+  _poolSpinIntoMyth,
   _poolSpinOut,
   _poolSpinalCentipede,
   _poolSpinalEmbrace,
@@ -69944,6 +69954,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/belfry-spirit": _poolBelfrySpirit,
   "pool/believe": _poolBelieve,
   "pool/belisarius-cawl": _poolBelisariusCawl,
+  "pool/bell-borca-spectral-sergeant": _poolBellBorcaSpectralSergeant,
   "pool/belladonna-took": _poolBelladonnaTook,
   "pool/belle-of-the-brawl": _poolBelleOfTheBrawl,
   "pool/belligerent-brontodon": _poolBelligerentBrontodon,
@@ -84304,6 +84315,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/maelstrom-pulse": _poolMaelstromPulse,
   "pool/maelstrom-wanderer": _poolMaelstromWanderer,
   "pool/maester-seymour": _poolMaesterSeymour,
+  "pool/maestros-ascendancy": _poolMaestrosAscendancy,
   "pool/maestros-charm": _poolMaestrosCharm,
   "pool/maestros-confluence": _poolMaestrosConfluence,
   "pool/maestros-diabolist": _poolMaestrosDiabolist,
@@ -85095,6 +85107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mesmeric-fiend": _poolMesmericFiend,
   "pool/mesmeric-glare": _poolMesmericGlare,
   "pool/mesmeric-orb": _poolMesmericOrb,
+  "pool/mesmeric-sliver": _poolMesmericSliver,
   "pool/mesmeric-trance": _poolMesmericTrance,
   "pool/mesmerizing-benthid": _poolMesmerizingBenthid,
   "pool/mesmerizing-dose": _poolMesmerizingDose,
@@ -91188,6 +91201,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/samuts-sprint": _poolSamutsSprint,
   "pool/samwise-gamgee": _poolSamwiseGamgee,
   "pool/samwise-the-stouthearted": _poolSamwiseTheStouthearted,
+  "pool/sanar-innovative-first-year": _poolSanarInnovativeFirstYear,
   "pool/sanar-unfinished-genius": _poolSanarUnfinishedGenius,
   "pool/sanctified-charge": _poolSanctifiedCharge,
   "pool/sanctifier-en-vec": _poolSanctifierEnVec,
@@ -93938,6 +93952,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spiketail-hatchling": _poolSpiketailHatchling,
   "pool/spikewheel-acrobat": _poolSpikewheelAcrobat,
   "pool/spin-engine": _poolSpinEngine,
+  "pool/spin-into-myth": _poolSpinIntoMyth,
   "pool/spin-out": _poolSpinOut,
   "pool/spinal-centipede": _poolSpinalCentipede,
   "pool/spinal-embrace": _poolSpinalEmbrace,

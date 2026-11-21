@@ -620,6 +620,7 @@ import _poolMelekIzzetParagon from "../pool/melek-izzet-paragon.js";
 import _poolMemoryJar from "../pool/memory-jar.js";
 import _poolMercilessExecutioner from "../pool/merciless-executioner.js";
 import _poolMerfolkSeastalkers from "../pool/merfolk-seastalkers.js";
+import _poolMesmericSliver from "../pool/mesmeric-sliver.js";
 import _poolMetalspinnersPuzzleknot from "../pool/metalspinners-puzzleknot.js";
 import _poolMeticulousArchive from "../pool/meticulous-archive.js";
 import _poolMiaraThornOfTheGlade from "../pool/miara-thorn-of-the-glade.js";
@@ -1725,6 +1726,7 @@ const shard: CardShard = {
     _poolMemoryJar,
     _poolMercilessExecutioner,
     _poolMerfolkSeastalkers,
+    _poolMesmericSliver,
     _poolMetalspinnersPuzzleknot,
     _poolMeticulousArchive,
     _poolMiaraThornOfTheGlade,
