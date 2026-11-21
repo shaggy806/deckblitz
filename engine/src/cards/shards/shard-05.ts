@@ -539,6 +539,7 @@ import _poolLaunchTheFleet from "../pool/launch-the-fleet.js";
 import _poolLeapingMaster from "../pool/leaping-master.js";
 import _poolLeyDruid from "../pool/ley-druid.js";
 import _poolLeylineOfLifeforce from "../pool/leyline-of-lifeforce.js";
+import _poolLightUpTheNight from "../pool/light-up-the-night.js";
 import _poolLightningStrike from "../pool/lightning-strike.js";
 import _poolLilianaWakerOfTheDead from "../pool/liliana-waker-of-the-dead.js";
 import _poolLiltingRefrain from "../pool/lilting-refrain.js";
@@ -1584,6 +1585,7 @@ const shard: CardShard = {
     _poolLeapingMaster,
     _poolLeyDruid,
     _poolLeylineOfLifeforce,
+    _poolLightUpTheNight,
     _poolLightningStrike,
     _poolLilianaWakerOfTheDead,
     _poolLiltingRefrain,

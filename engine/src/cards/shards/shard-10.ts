@@ -973,6 +973,7 @@ import _poolVenomthrope from "../pool/venomthrope.js";
 import _poolVernalBloom from "../pool/vernal-bloom.js";
 import _poolVesselOfEndlessRest from "../pool/vessel-of-endless-rest.js";
 import _poolVeteranDungeoneer from "../pool/veteran-dungeoneer.js";
+import _poolVexingSphinx from "../pool/vexing-sphinx.js";
 import _poolViashinoHeretic from "../pool/viashino-heretic.js";
 import _poolVigeanHydropon from "../pool/vigean-hydropon.js";
 import _poolVigorsporeWurm from "../pool/vigorspore-wurm.js";
@@ -2034,6 +2035,7 @@ const shard: CardShard = {
     _poolVernalBloom,
     _poolVesselOfEndlessRest,
     _poolVeteranDungeoneer,
+    _poolVexingSphinx,
     _poolViashinoHeretic,
     _poolVigeanHydropon,
     _poolVigorsporeWurm,

@@ -16155,6 +16155,7 @@ import _poolLightOfSanction from "./pool/light-of-sanction.js";
 import _poolLightOfTheLegion from "./pool/light-of-the-legion.js";
 import _poolLightPawsEmperorsVoice from "./pool/light-paws-emperors-voice.js";
 import _poolLightTheWay from "./pool/light-the-way.js";
+import _poolLightUpTheNight from "./pool/light-up-the-night.js";
 import _poolLightUpTheStage from "./pool/light-up-the-stage.js";
 import _poolLightbringer from "./pool/lightbringer.js";
 import _poolLightfootRogue from "./pool/lightfoot-rogue.js";
@@ -28104,6 +28105,7 @@ import _poolTayamLuminousEnigma from "./pool/tayam-luminous-enigma.js";
 import _poolTazeemRaptor from "./pool/tazeem-raptor.js";
 import _poolTazeemRoilmage from "./pool/tazeem-roilmage.js";
 import _poolTazriBeaconOfUnity from "./pool/tazri-beacon-of-unity.js";
+import _poolTazriStalwartSurvivor from "./pool/tazri-stalwart-survivor.js";
 import _poolTchakaVenerableKing from "./pool/tchaka-venerable-king.js";
 import _poolTchallaTheBlackPanther from "./pool/tchalla-the-black-panther.js";
 import _poolTcriBuilding from "./pool/tcri-building.js";
@@ -30993,6 +30995,7 @@ import _poolVexingPuzzlebox from "./pool/vexing-puzzlebox.js";
 import _poolVexingRadgull from "./pool/vexing-radgull.js";
 import _poolVexingScuttler from "./pool/vexing-scuttler.js";
 import _poolVexingShusher from "./pool/vexing-shusher.js";
+import _poolVexingSphinx from "./pool/vexing-sphinx.js";
 import _poolVeyranVoiceOfDuality from "./pool/veyran-voice-of-duality.js";
 import _poolVgerTheIntruder from "./pool/vger-the-intruder.js";
 import _poolVhalCandlekeepResearcher from "./pool/vhal-candlekeep-researcher.js";
@@ -49939,6 +49942,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLightOfTheLegion,
   _poolLightPawsEmperorsVoice,
   _poolLightTheWay,
+  _poolLightUpTheNight,
   _poolLightUpTheStage,
   _poolLightbringer,
   _poolLightfootRogue,
@@ -61888,6 +61892,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTazeemRaptor,
   _poolTazeemRoilmage,
   _poolTazriBeaconOfUnity,
+  _poolTazriStalwartSurvivor,
   _poolTchakaVenerableKing,
   _poolTchallaTheBlackPanther,
   _poolTcriBuilding,
@@ -64777,6 +64782,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVexingRadgull,
   _poolVexingScuttler,
   _poolVexingShusher,
+  _poolVexingSphinx,
   _poolVeyranVoiceOfDuality,
   _poolVgerTheIntruder,
   _poolVhalCandlekeepResearcher,
@@ -83736,6 +83742,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/light-of-the-legion": _poolLightOfTheLegion,
   "pool/light-paws-emperors-voice": _poolLightPawsEmperorsVoice,
   "pool/light-the-way": _poolLightTheWay,
+  "pool/light-up-the-night": _poolLightUpTheNight,
   "pool/light-up-the-stage": _poolLightUpTheStage,
   "pool/lightbringer": _poolLightbringer,
   "pool/lightfoot-rogue": _poolLightfootRogue,
@@ -95685,6 +95692,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tazeem-raptor": _poolTazeemRaptor,
   "pool/tazeem-roilmage": _poolTazeemRoilmage,
   "pool/tazri-beacon-of-unity": _poolTazriBeaconOfUnity,
+  "pool/tazri-stalwart-survivor": _poolTazriStalwartSurvivor,
   "pool/tchaka-venerable-king": _poolTchakaVenerableKing,
   "pool/tchalla-the-black-panther": _poolTchallaTheBlackPanther,
   "pool/tcri-building": _poolTcriBuilding,
@@ -98574,6 +98582,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vexing-radgull": _poolVexingRadgull,
   "pool/vexing-scuttler": _poolVexingScuttler,
   "pool/vexing-shusher": _poolVexingShusher,
+  "pool/vexing-sphinx": _poolVexingSphinx,
   "pool/veyran-voice-of-duality": _poolVeyranVoiceOfDuality,
   "pool/vger-the-intruder": _poolVgerTheIntruder,
   "pool/vhal-candlekeep-researcher": _poolVhalCandlekeepResearcher,
