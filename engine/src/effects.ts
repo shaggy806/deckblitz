@@ -3131,7 +3131,12 @@ export type EffectSpec =
       /** `from` is read over the cards in the controller's graveyard, not
        * the battlefield. */
       readonly inGraveyard?: true;
-      readonly keywords: readonly Keyword[];
+      /** `"every-kind"`: not keywords but "for each kind of counter among
+       * creatures you control, put a counter of that kind on either of those
+       * tokens" (Exotic Pets: `from` the creatures you control, `onto`
+       * `{ thisWay: "created" }`) — each kind of counter (rule 122.1) on
+       * some `from` permanent, read as this begins, in name order. */
+      readonly keywords: readonly Keyword[] | "every-kind";
       readonly onto: CardFilter;
     }
   | {
@@ -15224,7 +15229,7 @@ export interface EffectApi {
    * `"keyword-counters"` {@link EffectSpec}: the battlefield's permanents from
    * this effect's controller's side or, `inGraveyard`, the cards in that
    * player's graveyard. */
-  keywordCountersAmong(from: CardFilter, keywords: readonly Keyword[], inGraveyard?: true): readonly string[];
+  keywordCountersAmong(from: CardFilter, keywords: readonly Keyword[] | "every-kind", inGraveyard?: true): readonly string[];
   sharedAbilities(
     from: CardFilter,
     share: { readonly keywords: readonly Keyword[]; readonly protection?: true; readonly landwalk?: true },

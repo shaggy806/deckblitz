@@ -47700,7 +47700,19 @@ controlledBy,
       },
       become: (target, patch, duration) => this.become(target, patch, lastingHere(duration)),
       keywordCountersAmong: (from, keywords, inGraveyard) =>
-        keywordCounterKindsAmong(
+        keywords === "every-kind"
+          ? // "For each kind of counter among creatures you control" (Exotic
+            // Pets): each kind some matching permanent has one or more of.
+            sortedNames([
+              ...new Set(
+                this.battlefieldMatching(controller, from).flatMap((id) =>
+                  Object.entries(this.state.objects[id].counters)
+                    .filter(([, n]) => (n ?? 0) > 0)
+                    .map(([kind]) => kind),
+                ),
+              ),
+            ])
+          : keywordCounterKindsAmong(
           this.state,
           this.registry,
           inGraveyard === true
