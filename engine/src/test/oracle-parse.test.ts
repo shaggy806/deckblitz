@@ -2954,6 +2954,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ["Empower Jace 2.", { kind: "empower-jace", amount: 2 }],
     ["~ becomes prepared.", { kind: "become-prepared", target: "source" }],
     ["Each creature you control becomes prepared.", { kind: "become-prepared", filter: { type: "creature", controlledBy: "you" } }],
+    ["Target creature becomes unprepared.", { kind: "become-unprepared", target: 0 }],
     [
       "~ deals 3 damage to any target and 1 damage to you.",
       {

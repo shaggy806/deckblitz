@@ -10722,6 +10722,19 @@ export type EffectSpec =
     }
   | {
       /**
+       * "… becomes unprepared" (rule 722.3b): the prepared designation leaves
+       * `target` — a slot, `"source"` or `"attached"` (Infinite Coursework's
+       * "it becomes unprepared") — or every permanent `filter` matches. Its
+       * copy in exile ceases to exist with the next state-based check
+       * (704.5e); a permanent that isn't prepared is untouched (Biblioplex
+       * Tomekeeper's ruling). `Game.unprepare`.
+       */
+      readonly kind: "become-unprepared";
+      readonly target?: ObjectRef;
+      readonly filter?: CardFilter;
+    }
+  | {
+      /**
        * Empower Jace N (rule 701.71a): "If you don't control a Jace
        * planeswalker token, create a blue Jace planeswalker token with 0
        * loyalty, '[−1]: Surveil 1,' and '[−3]: Draw a card.' Choose a Jace
@@ -13909,6 +13922,8 @@ export interface EffectApi {
   /** `id` becomes prepared (rule 722.3a — `Game.becomePrepared`): each
    * token of a compacted stack, singly. */
   becomePrepared(id: ObjectId): void;
+  /** `id` loses the prepared designation (rule 722.3b — `Game.unprepare`). */
+  becomeUnprepared(id: ObjectId): void;
   untapPermanent(target: TargetRef): void;
   /** `cantBeRegenerated`: rule 701.15c. */
   destroyPermanent(target: TargetRef, cantBeRegenerated?: boolean): void;
@@ -21024,6 +21039,15 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target?.kind === "object") ctx.becomePrepared(target.object);
+      return;
+    }
+    case "become-unprepared": {
+      if (spec.filter !== undefined) {
+        for (const { object } of ctx.permanentsMatching(spec.filter)) ctx.becomeUnprepared(object);
+        return;
+      }
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
+      if (target?.kind === "object") ctx.becomeUnprepared(target.object);
       return;
     }
     case "empower-jace": {

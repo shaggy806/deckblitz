@@ -8849,6 +8849,9 @@ export function parseSentence(sentence, ctx) {
     return { kind: "become-prepared", filter: { type: "creature", controlledBy: "you" } };
   }
   if ((m = re(`(${TARGET}) becomes prepared`).exec(s))) return { kind: "become-prepared", target: slot(m[1]) };
+  // Rule 722.3b — "… becomes unprepared".
+  if (re("~ becomes unprepared").test(s)) return { kind: "become-unprepared", target: "source" };
+  if ((m = re(`(${TARGET}) becomes unprepared`).exec(s))) return { kind: "become-unprepared", target: slot(m[1]) };
   if (re("~ connives").test(s)) return { kind: "connive", target: "source" };
   if (re("~ explores").test(s)) return { kind: "explore", target: "source" };
   // Incubate N (rule 701.53a) — a fixed N.

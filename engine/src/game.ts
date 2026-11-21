@@ -43448,6 +43448,7 @@ export class Game {
         }
         this.becomePrepared(id);
       },
+      becomeUnprepared: (id) => this.unprepare(id),
       destroyPermanent: (target, cantBeRegenerated) =>
         this.destroyByEffect(target, true, cantBeRegenerated === true),
       destroyAll: (filter, onlyDamaged, cantBeRegenerated, scopeTo, exceptSource, except) =>
