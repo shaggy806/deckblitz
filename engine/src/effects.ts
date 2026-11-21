@@ -13071,6 +13071,16 @@ export type EffectSpec =
        * any of them. Not with `split` or `secondPick`.
        */
       readonly restDestination?: "hand" | "battlefield";
+      /**
+       * "Put **a random** creature card from among them onto the
+       * battlefield" (Getaway Barrel): nobody chooses — `max` of the cards
+       * that may be chosen are picked at random (each pick equally likely
+       * among those left, from the game's seeded randomness, each announced
+       * as a `chosen-at-random` event), all of them when there are no more,
+       * and the choice is carried out as if made. Not with `secondPick`,
+       * `split`, `together` or `chooser`.
+       */
+      readonly atRandom?: true;
     };
 
 /** The types a `put-onto-battlefield` says the permanent has, in place as it
@@ -16068,6 +16078,7 @@ export interface EffectApi {
       readonly leftoverCounters?: { readonly kind: string; readonly amount: number };
       readonly thenAlways?: true;
       readonly restDestination?: "hand" | "battlefield";
+      readonly atRandom?: true;
     },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
@@ -26269,6 +26280,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.leftoverCounters !== undefined ? { leftoverCounters: spec.leftoverCounters } : {}),
           ...(spec.thenAlways === true ? { thenAlways: true as const } : {}),
           ...(spec.restDestination !== undefined ? { restDestination: spec.restDestination } : {}),
+          ...(spec.atRandom === true ? { atRandom: true as const } : {}),
         },
       );
       // Nothing to choose from, so nothing asked: the instruction's other

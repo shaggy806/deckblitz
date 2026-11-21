@@ -10516,6 +10516,24 @@ describe("a choice drawn from several zones, or one card a slot", () => {
       destination: "battlefield",
       leftover: "bottom-random",
     });
+    // A random pick among the revealed: Getaway Barrel's.
+    const barrel = face(
+      "Test Barrel",
+      "Sorcery",
+      "Reveal the top thirteen cards of your library. Put a random creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.",
+    );
+    expect(barrel.effect).toEqual({
+      kind: "look-and-choose",
+      zone: "library",
+      count: 13,
+      reveal: true,
+      min: 1,
+      max: 1,
+      filter: { type: "creature" },
+      destination: "battlefield",
+      leftover: "bottom-random",
+      atRandom: true,
+    });
     // Another player divides the finds.
     const intuition = face(
       "Intuition",

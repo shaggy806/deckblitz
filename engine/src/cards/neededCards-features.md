@@ -1928,6 +1928,13 @@ permanents (`Game`'s together resolver, beside `oneEachTypeAmong`). The rest was
 `grant-play { thisWay: "exiled" }`. The only card with the line, so no scaffolder template.
 `test/exile-one-per-color.test.ts`.
 
+### A random card from among the revealed — built 2026-11-21
+
+The key `effect:random-card-from-revealed`, for Getaway Barrel: `look-and-choose`'s `atRandom` (`Game.beginZoneChoice`
+picks `max` of the eligible cards through `pickAtRandom` and finishes the choice unasked). The scaffolder reads the
+reveal / "put a random X card from among them onto the battlefield" / random-bottom trio.
+`test/random-card-from-revealed.test.ts`.
+
 ### A trigger's target slot named by the spell that triggered it — built 2026-11-21
 
 The key `filter:same-name-as-trigger-spell-target-slot`, for Harness the Storm: no engine code. A cast trigger's

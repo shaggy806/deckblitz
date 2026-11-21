@@ -48857,6 +48857,7 @@ controlledBy,
           more?.thenAlways === true,
           more?.eachChooses,
           more?.restDestination,
+          more?.atRandom === true,
         );
       },
     };
@@ -48949,6 +48950,8 @@ controlledBy,
     eachPicks?: readonly PlayerId[],
     /** See `look-and-choose`'s `restDestination`. */
     restDestination?: "hand" | "battlefield",
+    /** See `look-and-choose`'s `atRandom`. */
+    atRandom = false,
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -49230,6 +49233,18 @@ controlledBy,
     // picks now, the rest after (`pickersAfter`), each from what's left.
     // Nobody who has left the game picks (rule 800.4a), and with nothing that
     // may be chosen, or nobody to choose, nobody is asked: the rest go.
+    // "A random creature card from among them" (Getaway Barrel): nobody is
+    // asked — the game picks, each pick equally likely among those left.
+    if (atRandom) {
+      const pool = [...decision.eligible];
+      const chosen: ObjectId[] = [];
+      while (chosen.length < decision.max && pool.length > 0) {
+        const index = this.pickAtRandom(player, source ?? pool[0], pool.length, (i) => ({ kind: "card", object: pool[i] }));
+        chosen.push(...pool.splice(index, 1));
+      }
+      this.finishZoneChoice({ kind: "zone-choice", awaiting: decision, player: decision.player, chosen });
+      return;
+    }
     if (eachPicks !== undefined) {
       const [first, ...after] = eachPicks.filter((p) => this.state.players[p]?.hasLost !== true);
       if (first === undefined || decision.max <= 0) {
@@ -50067,8 +50082,9 @@ controlledBy,
 
     const library = this.state.zones.perPlayer[player].library;
     const rest = library.slice(cards.length);
-    // Rebuild: kept cards on top (original order), then the untouched rest,
-    // then the moved-away cards at the bottom.
+    // Rebuild: kept cards on top (for now in their original order — the
+    // player orders them below, rule 701.22a), then the untouched rest, then
+    // the moved-away cards at the bottom.
     library.length = 0;
     library.push(...stay, ...rest, ...awayOrdered);
     this.state.awaiting = null;

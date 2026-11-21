@@ -13311,6 +13311,7 @@ export function parseEffect(text, outer) {
       oneEachLookAt(sentences, i) ??
       splitLookAt(sentences, i) ??
       totalManaValueLookAt(sentences, i) ??
+      randomFromRevealedAt(sentences, i) ??
       mayOnceEachTurnAt(sentences, i, ctx) ??
       revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
@@ -17773,6 +17774,36 @@ function totalManaValueLookAt(sentences, i) {
       leftover: "bottom-random",
     },
     used: 2,
+  };
+}
+
+/** "Reveal the top thirteen cards of your library. Put a random creature card
+ * from among them onto the battlefield. Put the rest on the bottom of your
+ * library in a random order." (Getaway Barrel) — a `look-and-choose` the game
+ * answers at random (`atRandom`). */
+function randomFromRevealedAt(sentences, i) {
+  const look = sentenceRe("reveal the top (\\w+) cards of your library").exec(sentences[i]);
+  if (look === null) return null;
+  const count = numberOf(look[1]) ?? { eleven: 11, twelve: 12, thirteen: 13 }[look[1].toLowerCase()];
+  const pick = sentenceRe(`put a random ([\\w-]+) card from among them onto the battlefield`).exec(sentences[i + 1] ?? "");
+  if (typeof count !== "number" || pick === null) return null;
+  if (!sentenceRe("put the rest on the bottom of your library in a random order").test(sentences[i + 2] ?? "")) return null;
+  const filter = parseTypePhrase(pick[1], { cards: true });
+  if (filter === null) return null;
+  return {
+    effect: {
+      kind: "look-and-choose",
+      zone: "library",
+      count,
+      reveal: true,
+      min: 1,
+      max: 1,
+      filter,
+      destination: "battlefield",
+      leftover: "bottom-random",
+      atRandom: true,
+    },
+    used: 3,
   };
 }
 
