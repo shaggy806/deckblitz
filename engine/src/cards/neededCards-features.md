@@ -1928,6 +1928,14 @@ permanents (`Game`'s together resolver, beside `oneEachTypeAmong`). The rest was
 `grant-play { thisWay: "exiled" }`. The only card with the line, so no scaffolder template.
 `test/exile-one-per-color.test.ts`.
 
+### A spell's gained trigger kept by the permanent it becomes — built 2026-11-21
+
+The key `effect:spell-gains-ability-kept-by-permanent`, for Cherished Hatchling: no engine code. "Whenever you cast a
+Dinosaur spell this turn, it gains '…'" is a `delayed-trigger` `whenever` a `cast-spell` around `grant-triggered` on
+`"trigger-object"` with `duration: "permanent"` — a `castRider` on the spell, kept by the permanent (rule 400.7a), as
+Rivaz of the Claw's — not `grant-spells-this-turn`'s `triggered`, which the spell has only on the stack.
+`test/spell-gains-trigger-kept.test.ts`.
+
 ### A random card from among the revealed — built 2026-11-21
 
 The key `effect:random-card-from-revealed`, for Getaway Barrel: `look-and-choose`'s `atRandom` (`Game.beginZoneChoice`
