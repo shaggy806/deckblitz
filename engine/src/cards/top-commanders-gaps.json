@@ -3154,7 +3154,10 @@
   "effect:game-is-a-draw",
   "effect:reflexive-trigger-per-counter-put",
   "condition:vote-option-most-or-tied",
-  "condition:opponent-dealt-noncombat-damage-last-turn"
+  "condition:opponent-dealt-noncombat-damage-last-turn",
+  "cost:cumulative-upkeep-discard",
+  "cost:flashback-remove-x-loyalty-among",
+  "effect:granted-mana-ability-own-colors-gated"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
