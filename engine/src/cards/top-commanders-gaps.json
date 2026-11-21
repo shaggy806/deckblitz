@@ -3161,7 +3161,8 @@
   "condition:opponent-dealt-noncombat-damage-last-turn",
   "cost:cumulative-upkeep-discard",
   "cost:flashback-remove-x-loyalty-among",
-  "effect:granted-mana-ability-own-colors-gated"
+  "effect:granted-mana-ability-own-colors-gated",
+  "effect:for-each-player-destroy-then-token-per-destroyed-controller"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
