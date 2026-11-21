@@ -1888,6 +1888,12 @@ counter" (Kelsien, the Plague):
 }
 ```
 
+A `leaves` watch takes no targets of its own. When the delayed ability's
+effect has one ("when that creature dies this turn, you earthbend 4" — Fatal
+Fissure's land), write it as a "whenever" watch instead: `at: { whenever: {
+on: "dies", who: "self" }, watching: 0, once: true, targets:
+["land-you-control"] }`, its effect's slot 0 that land (rule 603.3d).
+
 `leaves` is a slot, `"source"` or `"trigger-object"`, and has to be a
 permanent on the battlefield as the effect applies — otherwise nothing is set
 up. `"created"` is "that token": every token this resolution has made, each

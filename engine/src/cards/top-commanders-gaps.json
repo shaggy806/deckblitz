@@ -3128,7 +3128,8 @@
   "effect:effect-target-equipped-creature",
   "effect:fight-by-toughness",
   "effect:modal-chapter-targeted-modes",
-  "amount:aggregate-sum-unclamped"
+  "amount:aggregate-sum-unclamped",
+  "effect:delayed-leaves-own-targets"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
