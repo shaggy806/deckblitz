@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
 
-import { useArtCreditText } from './artistCredit.ts'
+import { CARD_COPYRIGHT, useArtCreditArtist } from './artistCredit.ts'
 import { textEmWidth, useFontEpoch } from './textWidth.ts'
 
 /**
@@ -10,15 +10,15 @@ import { textEmWidth, useFontEpoch } from './textWidth.ts'
  * image guidelines; see `artistCredit.ts`). The copyright shows at once; the
  * artist once Scryfall has said who it is.
  *
- * `fit` sets it on one line across the box it's in, its font grown or shrunk
- * to the text's length (the user, 2026-10-17: it wrapped onto two lines): the
- * box is a size container (`.art-credit-fit`) and the text's font is its width
- * over the text's own measured width in ems (`--credit-em`, `textWidth.ts`),
- * capped at the box's own size — so the line ends at the art's right edge
- * whoever the artist is. An estimate from the character count
- * (`--credit-chars`, half an em each) stood in for the measure until
- * 2026-11-17 and left the line 10-20% short of the edge (the user); it is
- * still the fallback where nothing can measure.
+ * `fit` sets it on two lines, the artist over the copyright, in the box it's
+ * in: a card's foot, beside its P/T box or loyalty shield (the user,
+ * 2026-11-21; it was one line across the foot of the art from 2026-10-17).
+ * The box is a size container (`.art-credit-fit`) and the font is its width
+ * over the wider line's own measured width in ems (`--credit-em`,
+ * `textWidth.ts`), capped at `--credit-max` — so both lines fit whoever the
+ * artist is, and squeeze where a stat box takes part of the row. An estimate
+ * from the character count (`--credit-chars`, half an em each) is the
+ * fallback where nothing can measure.
  */
 export function ArtCredit({
   art,
@@ -33,21 +33,27 @@ export function ArtCredit({
   readonly className: string
   readonly fit?: boolean
 }) {
-  const text = useArtCreditText(art, name, backFace)
+  const artist = useArtCreditArtist(art, name, backFace)
+  const artistLine = artist !== null ? `Illus. ${artist}` : null
   const textRef = useRef<HTMLSpanElement>(null)
   const fonts = useFontEpoch()
   useLayoutEffect(() => {
     const el = textRef.current
     if (!el) return
-    const em = textEmWidth(text, 'art-credit', el)
-    if (em === null) el.style.removeProperty('--credit-em')
-    else el.style.setProperty('--credit-em', String(em))
-  }, [text, fonts])
-  if (!fit) return <span className={className}>{text}</span>
+    const copyright = textEmWidth(CARD_COPYRIGHT, 'art-credit', el)
+    const illustrator = artistLine !== null ? textEmWidth(artistLine, 'art-credit', el) : 0
+    if (copyright === null || illustrator === null) el.style.removeProperty('--credit-em')
+    else el.style.setProperty('--credit-em', String(Math.max(copyright, illustrator)))
+  }, [artistLine, fonts])
+  if (!fit) {
+    return <span className={className}>{artistLine !== null ? `${artistLine} · ${CARD_COPYRIGHT}` : CARD_COPYRIGHT}</span>
+  }
+  const chars = Math.max(CARD_COPYRIGHT.length, artistLine?.length ?? 0)
   return (
     <span className={`${className} art-credit-fit`}>
-      <span className="art-credit-text" ref={textRef} style={{ '--credit-chars': text.length } as CSSProperties}>
-        {text}
+      <span className="art-credit-text" ref={textRef} style={{ '--credit-chars': chars } as CSSProperties}>
+        {artistLine !== null ? <span className="art-credit-line">{artistLine}</span> : null}
+        <span className="art-credit-line">{CARD_COPYRIGHT}</span>
       </span>
     </span>
   )

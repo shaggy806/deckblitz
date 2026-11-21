@@ -372,10 +372,8 @@ export function CardTile({
   const classes = [
     'card-tile',
     artFirst ? 'art-first' : '',
-    // Nothing in the bottom corner (no P/T, loyalty or stack count): the
-    // rules text may use the room kept for one (see .ct-text).
-    !isCreature && obj.loyalty === null && !(stackCount !== null && stackCount > 1) ? 'no-corner-stat' : '',
-    // The loyalty shield stands taller than a P/T box: more room under the text.
+    // The loyalty shield stands taller than a P/T box, and the foot with it:
+    // the corner chips sit that much higher (.card-flags).
     obj.loyalty !== null ? 'has-loyalty' : '',
     obj.supertypes?.includes('legendary') ? 'legendary' : '',
     // An Attraction's 1-6 column down the right: the text keeps clear of it.
@@ -425,13 +423,6 @@ export function CardTile({
             used to land on its second line. */}
         {badge ? <span className="card-badge">{badge}</span> : null}
         {aimedBy !== null ? <TargetedMark by={aimedBy} /> : null}
-        {/* The illustrator and copyright along the foot of the art: the
-            credit Scryfall asks for beside an art crop (artistCredit.ts),
-            on one line in either layout — the hand, the spotlight and the
-            reveals as well as the hover card and the stack. */}
-        {faceDown === null ? (
-          <ArtCredit art={obj.art} name={face} backFace={obj.faceIsBack} className="ct-credit" fit />
-        ) : null}
       </span>
 
       {artFirst ? <span className="ct-name-row">{nameNode}</span> : null}
@@ -503,16 +494,27 @@ export function CardTile({
         ) : null}
       </span>
 
-      {isCreature ? (
-        <span className="ct-pt">
-          {obj.power}/{obj.toughness}
-          {obj.damageMarked > 0 ? (
-            <span className="ct-dmg"> −{obj.damageMarked}</span>
-          ) : null}
-        </span>
-      ) : null}
-
-      {obj.loyalty !== null ? <LoyaltyCounter value={obj.loyalty} /> : null}
+      {/* The card's foot: the illustrator and copyright (the credit Scryfall
+          asks for beside an art crop, artistCredit.ts) on two lines, and the
+          P/T box or loyalty shield at its right end, as a printed card sets
+          them. The credit takes the row's height and whatever width the stat
+          leaves, its type squeezed to fit (the user, 2026-11-21: it lay
+          along the foot of the art before, over the picture). A face-down
+          card keeps the row for its P/T and credits nobody. */}
+      <span className="ct-foot">
+        {faceDown === null ? (
+          <ArtCredit art={obj.art} name={face} backFace={obj.faceIsBack} className="ct-credit" fit />
+        ) : null}
+        {isCreature ? (
+          <span className="ct-pt">
+            {obj.power}/{obj.toughness}
+            {obj.damageMarked > 0 ? (
+              <span className="ct-dmg"> −{obj.damageMarked}</span>
+            ) : null}
+          </span>
+        ) : null}
+        {obj.loyalty !== null ? <LoyaltyCounter value={obj.loyalty} /> : null}
+      </span>
 
       {stackCount !== null && stackCount > 1 ? (
         <span className="card-stack">×{stackCount}</span>

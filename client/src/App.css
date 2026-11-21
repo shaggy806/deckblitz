@@ -2995,6 +2995,33 @@
   border-radius: 0;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
 }
+/* A full card's foot (CardTile): the art credit on two lines, then the P/T
+   box or loyalty shield at the right end, where a printed card has them. A
+   row in the card's own flow, the P/T box's height at least (13px text, its
+   padding and border), so every card keeps the band whether or not it has a
+   stat, and the text box ends above it. A board tile's P/T (MiniTile) stays
+   pinned to its corner by the rule above. */
+.ct-foot {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-height: calc(21px * var(--ct-scale, 1));
+}
+.ct-foot > .ct-pt,
+.ct-foot > .ct-loyalty {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  flex: none;
+}
+/* over the card's own border at the corner, as it sat when it was pinned */
+.ct-foot > .ct-pt {
+  margin: 0 -1px -1px 0;
+}
+.ct-foot > .ct-loyalty {
+  margin: 0 calc(2px * var(--ct-scale, 1)) calc(1px * var(--ct-scale, 1)) 0;
+}
 .ct-dmg {
   color: #ff8f8f;
   font-size: calc(11px * var(--ct-scale, 1));
@@ -3038,11 +3065,11 @@
   display: flex;
   flex-direction: column;
   gap: calc(2px * var(--ct-scale, 1));
-  /* The bottom padding is the P/T box's height (.ct-pt: 13px text, its
-     padding and border), so a last line long enough to reach the corner is
-     never under the box; it was 16px, and the box covered the bottom of
-     Abdel Adrian's last line. */
-  padding: calc(4px * var(--ct-scale, 1)) calc(5px * var(--ct-scale, 1)) calc(21px * var(--ct-scale, 1));
+  /* The text ends above the card's foot (.ct-foot: the credit and the P/T
+     box), which is a row of its own; until 2026-11-21 the P/T box was pinned
+     over this box's corner and the bottom padding kept the last line out
+     from under it. */
+  padding: calc(4px * var(--ct-scale, 1)) calc(5px * var(--ct-scale, 1));
   /* --text-scale: set by CardTile.tsx only for the hand's art-first layout,
      when the printed text doesn't fit this fixed box at normal size
      (Wurmcoil Engine and the like) -- unset (1) everywhere else. */
@@ -3063,58 +3090,59 @@
 .card-tile.art-first .ct-text {
   min-height: 0;
 }
-/* The bottom padding keeps the last line clear of the P/T or loyalty badge;
-   a card with neither gives that room to its text, and the loyalty shield
-   (.ct-loyalty, 2.1em of 13px) needs more than a P/T box. */
-.card-tile.no-corner-stat .ct-text {
-  padding-bottom: calc(4px * var(--ct-scale, 1));
+/* A card's chips (.card-flags: a Curse's "on Edgar Markov", a Class's level,
+   Banishing Light's "N exiled") sit in the text box's bottom-left corner,
+   above the foot and its credit, and the text keeps a row clear for them:
+   they sat on the last line of rules text (a bug report, 2026-10-10). */
+.card-tile > .card-flags {
+  bottom: calc(24px * var(--ct-scale, 1));
 }
-/* ...unless the bottom-left corner shows a chip (.card-flags): a Curse's "on
-   Edgar Markov", a Class's level, Banishing Light's "N exiled" sat on its last
-   line of rules text (a bug report, 2026-10-10). One row of chips' room. */
-.card-tile.no-corner-stat:has(> .card-flags) .ct-text {
+.card-tile.has-loyalty > .card-flags {
+  bottom: calc(32px * var(--ct-scale, 1));
+}
+.card-tile:has(> .card-flags) .ct-text {
   padding-bottom: calc(21px * var(--ct-scale, 1));
-}
-.card-tile.has-loyalty .ct-text {
-  padding-bottom: calc(29px * var(--ct-scale, 1));
 }
 .ct-kw {
   color: #cbb26a;
   font-weight: 700;
 }
-/* The illustrator and copyright (`ArtCredit`) along the foot of the art, on
-   a dark fade so it reads over any illustration: the credit Scryfall's
-   guidelines ask for beside an art crop. Under the badges (z-index 2); it
-   wraps rather than cutting the copyright off a narrow card. */
+/* The illustrator and copyright (`ArtCredit`) in the card's foot, at the
+   bottom of its text box as a printed card has them: the credit Scryfall's
+   guidelines ask for beside an art crop. Two lines, the row's height (the
+   P/T box's, or a loyalty shield's), and whatever width the stat leaves. It
+   lay along the foot of the art, over the picture, until 2026-11-21. */
 .ct-credit {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  padding: calc(6px * var(--ct-scale, 1)) calc(4px * var(--ct-scale, 1)) calc(2px * var(--ct-scale, 1));
-  font-size: calc(6.5px * var(--ct-scale, 1));
-  line-height: 1.25;
-  color: #ece9e2;
-  text-shadow: 0 0 2px #000;
-  background: rgba(0, 0, 0, 0.62);
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 calc(5px * var(--ct-scale, 1));
+  line-height: 1.15;
+  color: var(--muted);
   pointer-events: none;
 }
-/* ArtCredit's `fit`: one line across the art, whatever the artist's name —
-   the font is the box's width over the text's own width in ems (--credit-em,
-   measured by ArtCredit: the line ends at the art's right edge), never past
-   --credit-max. Where nothing measured it, about half an em a character. The
-   ellipsis is only a backstop. */
+/* ArtCredit's `fit`: the artist over the copyright, whatever the artist's
+   name — the font is the box's width over the wider line's own width in ems
+   (--credit-em, measured by ArtCredit), never past --credit-max, at which
+   two lines are the P/T box's height. So beside a stat the type squeezes
+   rather than wraps. Where nothing measured it, about half an em a
+   character. The ellipsis is only a backstop. */
 .art-credit-fit {
   container-type: inline-size;
-  --credit-max: calc(8.5px * var(--ct-scale, 1));
+  --credit-max: calc(8px * var(--ct-scale, 1));
 }
 .art-credit-text {
   display: block;
   white-space: nowrap;
+  font-size: min(var(--credit-max), calc(100cqw / var(--credit-em, calc(var(--credit-chars, 40) * 0.5))));
+}
+.art-credit-line {
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: min(var(--credit-max), calc(100cqw / var(--credit-em, calc(var(--credit-chars, 40) * 0.5))));
 }
 /* An Adventure or Omen half (`VisibleObject.spellFace`): its own small block
    at the top of the text box, set off from the creature's text below it. */
@@ -4177,10 +4205,11 @@
 .hand-card .card-tile.clickable:hover {
   transform: none;
 }
-/* The art credit (ArtCredit's one line) only on the grown card: at the fan's
-   own size it would be a few pixels high, noise over the art. */
+/* The art credit only on the grown card: at the fan's own size it would be
+   a few pixels high, noise. Hidden, not removed: it holds its place in the
+   foot beside the P/T box. */
 .hand-cards .hand-card:not(:hover, .hover-carry, :focus-within) .ct-credit {
-  display: none;
+  visibility: hidden;
 }
 /* A card the pointer swept across between two of its move events
    (ui/handSweep.ts), grown as a hovered card is for as long as the pointer

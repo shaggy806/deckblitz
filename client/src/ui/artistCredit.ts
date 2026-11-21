@@ -281,3 +281,10 @@ export function useArtCreditText(art: string | null | undefined, name: string, b
   const artist = artistFor(art, name, backFace)
   return `${artist ? `Illus. ${artist} · ` : ''}${CARD_COPYRIGHT}`
 }
+
+/** The illustrator alone (null until Scryfall has said who): for a credit set
+ * on two lines, the artist over the copyright (a card's foot, `ArtCredit`). */
+export function useArtCreditArtist(art: string | null | undefined, name: string, backFace = false): string | null {
+  useSyncExternalStore(subscribeArtists, getArtistsVersion, getArtistsVersion)
+  return artistFor(art, name, backFace) || null
+}
