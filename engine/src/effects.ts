@@ -3948,6 +3948,15 @@ export type EffectSpec =
        * permanent then, so it comes back under someone else without a pause
        * (`GameObject.skipsUntapOf`). */
       readonly untapStepOf?: "you";
+      /** With choices held (a `for-each-player`'s `choicesHeld`): it's tapped
+       * when they're released, with every other permanent held this way, as
+       * one tapping — Nihiloor's "for each opponent, tap up to one untapped
+       * creature you control" chooses them all and taps them at the same
+       * time (its ruling), so "whenever one or more creatures you control
+       * become tapped" sees one tapping. A permanent that has left the
+       * battlefield by then isn't tapped (rule 400.7). Tapped at once with
+       * nothing held. Not with `doesntUntapNext`. */
+      readonly atRelease?: true;
     }
   | {
       /** `target` accepts `"trigger-object"` for an untargeted "untap it"
@@ -15072,6 +15081,8 @@ export interface EffectApi {
   counterAtRelease(target: TargetRef): void;
   /** See `put-on-library`'s `atRelease`. */
   putOnLibraryAtRelease(target: TargetRef, position: LibraryPosition): void;
+  /** See `tap`'s `atRelease`. */
+  tapAtRelease(target: TargetRef): void;
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
@@ -21397,6 +21408,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "tap": {
       const target = objectRefAct(spec.target, ctx);
+      if (target !== undefined && spec.atRelease === true) {
+        ctx.tapAtRelease(target);
+        return;
+      }
       if (target !== undefined) {
         ctx.tapPermanent(
           target,

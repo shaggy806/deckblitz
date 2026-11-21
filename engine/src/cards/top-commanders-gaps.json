@@ -3129,7 +3129,9 @@
   "effect:fight-by-toughness",
   "effect:modal-chapter-targeted-modes",
   "amount:aggregate-sum-unclamped",
-  "effect:delayed-leaves-own-targets"
+  "effect:delayed-leaves-own-targets",
+  "effect:per-opponent-tap-then-reflexive-steal",
+  "trigger:attack-with-creature-opponent-owns-owner-ref"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

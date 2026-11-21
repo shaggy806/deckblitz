@@ -7174,6 +7174,11 @@ export interface GameState {
      * `put-on-library`'s `atRelease` (Sylvan Library's put-backs): each with
      * its stint when it was held. */
     readonly libraryPuts?: readonly { readonly object: ObjectId; readonly stint: number; readonly position: LibraryPosition }[];
+    /** Permanents to tap together, as one tapping — `tap`'s `atRelease`
+     * (Nihiloor's "for each opponent, tap up to one untapped creature you
+     * control", the creatures tapped at the same time): each with its stint
+     * when it was held and the player tapping it. */
+    readonly taps?: readonly { readonly object: ObjectId; readonly stint: number; readonly by: PlayerId }[];
   };
   /**
    * The players a `search-library`'s `shufflesLater` left owing their library

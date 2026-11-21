@@ -45962,6 +45962,17 @@ controlledBy,
         const entry = { object: target.object, stint: object.zoneChangeCount ?? 0, position };
         this.state.heldChoices = { ...held, libraryPuts: [...(held.libraryPuts ?? []), entry] };
       },
+      tapAtRelease: (target) => {
+        const held = this.state.heldChoices;
+        const object = target.kind === "object" ? this.state.objects[target.object] : undefined;
+        if (held === undefined || object === undefined || target.kind !== "object") {
+          this.setTapped(target, true, controller);
+          return;
+        }
+        if (object.zone !== "battlefield") return;
+        const entry = { object: target.object, stint: object.zoneChangeCount ?? 0, by: controller };
+        this.state.heldChoices = { ...held, taps: [...(held.taps ?? []), entry] };
+      },
       manaCostToPay: (ref) => {
         const object = ref.kind === "object" ? this.state.objects[ref.object] : undefined;
         if (object === undefined || object.faceDown !== undefined) return null;
@@ -66448,6 +66459,19 @@ controlledBy,
     // simultaneously returned" (the ruling) — the draws first.
     for (const { player, count, source, controller } of held.draws ?? []) {
       this.makeResolutionContext(source, controller, []).draw(player, count);
+    }
+    // Nihiloor's creatures, one for each opponent: tapped at the same time
+    // (its ruling), so a batched "becomes tapped" trigger sees one tapping —
+    // each still the permanent it was when held (rule 400.7).
+    if (held.taps !== undefined && held.taps.length > 0) {
+      this.tapBatchFired.clear();
+      this.tapBatchHeld = true;
+      for (const { object, stint, by } of held.taps) {
+        const now = this.state.objects[object];
+        if (now?.zone !== "battlefield" || (now.zoneChangeCount ?? 0) !== stint) continue;
+        this.setTapped({ kind: "object", object }, true, by);
+      }
+      this.tapBatchHeld = false;
     }
     const discards = held.discards
       .map(({ player, objects, cause }) => ({
