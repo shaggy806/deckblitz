@@ -748,6 +748,7 @@ import _poolSabretoothTiger from "../pool/sabretooth-tiger.js";
 import _poolSamuraiOfThePaleCurtain from "../pool/samurai-of-the-pale-curtain.js";
 import _poolSanctifierEnVec from "../pool/sanctifier-en-vec.js";
 import _poolSarkhanDragonAscendant from "../pool/sarkhan-dragon-ascendant.js";
+import _poolSaviorOfOllenbock from "../pool/savior-of-ollenbock.js";
 import _poolSawbackManticore from "../pool/sawback-manticore.js";
 import _poolScarringMemories from "../pool/scarring-memories.js";
 import _poolScarwoodTreefolk from "../pool/scarwood-treefolk.js";
@@ -1797,6 +1798,7 @@ const shard: CardShard = {
     _poolSamuraiOfThePaleCurtain,
     _poolSanctifierEnVec,
     _poolSarkhanDragonAscendant,
+    _poolSaviorOfOllenbock,
     _poolSawbackManticore,
     _poolScarringMemories,
     _poolScarwoodTreefolk,

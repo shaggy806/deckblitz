@@ -214,6 +214,7 @@ import _poolDragonSniper from "../pool/dragon-sniper.js";
 import _poolDragonStyleTwins from "../pool/dragon-style-twins.js";
 import _poolDrakestownForgotten from "../pool/drakestown-forgotten.js";
 import _poolDreamEater from "../pool/dream-eater.js";
+import _poolDreamTides from "../pool/dream-tides.js";
 import _poolDromokaMonument from "../pool/dromoka-monument.js";
 import _poolDubiousChallenge from "../pool/dubious-challenge.js";
 import _poolDukharaScavenger from "../pool/dukhara-scavenger.js";
@@ -1253,6 +1254,7 @@ const shard: CardShard = {
     _poolDragonStyleTwins,
     _poolDrakestownForgotten,
     _poolDreamEater,
+    _poolDreamTides,
     _poolDromokaMonument,
     _poolDubiousChallenge,
     _poolDukharaScavenger,

@@ -7683,6 +7683,7 @@ import _poolDreamStrix from "./pool/dream-strix.js";
 import _poolDreamThief from "./pool/dream-thief.js";
 import _poolDreamThiefsBandana from "./pool/dream-thiefs-bandana.js";
 import _poolDreamThrush from "./pool/dream-thrush.js";
+import _poolDreamTides from "./pool/dream-tides.js";
 import _poolDreamTrawler from "./pool/dream-trawler.js";
 import _poolDreamTwist from "./pool/dream-twist.js";
 import _poolDreambornMuse from "./pool/dreamborn-muse.js";
@@ -16313,6 +16314,7 @@ import _poolLivingArmor from "./pool/living-armor.js";
 import _poolLivingArtifact from "./pool/living-artifact.js";
 import _poolLivingBrainMechanicalMarvel from "./pool/living-brain-mechanical-marvel.js";
 import _poolLivingBreakthrough from "./pool/living-breakthrough.js";
+import _poolLivingConundrum from "./pool/living-conundrum.js";
 import _poolLivingDeath from "./pool/living-death.js";
 import _poolLivingDestiny from "./pool/living-destiny.js";
 import _poolLivingEnd from "./pool/living-end.js";
@@ -16845,6 +16847,7 @@ import _poolMagmaw from "./pool/magmaw.js";
 import _poolMagnanimousMagistrate from "./pool/magnanimous-magistrate.js";
 import _poolMagneticFlux from "./pool/magnetic-flux.js";
 import _poolMagneticMine from "./pool/magnetic-mine.js";
+import _poolMagneticMountain from "./pool/magnetic-mountain.js";
 import _poolMagneticSnuffler from "./pool/magnetic-snuffler.js";
 import _poolMagneticTheft from "./pool/magnetic-theft.js";
 import _poolMagneticWeb from "./pool/magnetic-web.js";
@@ -18433,6 +18436,7 @@ import _poolMuddleTheEverChanging from "./pool/muddle-the-ever-changing.js";
 import _poolMuddleTheMixture from "./pool/muddle-the-mixture.js";
 import _poolMudflatVillage from "./pool/mudflat-village.js";
 import _poolMudhole from "./pool/mudhole.js";
+import _poolMudslide from "./pool/mudslide.js";
 import _poolMuerraTrashTactician from "./pool/muerra-trash-tactician.js";
 import _poolMugato from "./pool/mugato.js";
 import _poolMugging from "./pool/mugging.js";
@@ -23883,6 +23887,7 @@ import _poolSavantiRomeroTimesExile from "./pool/savanti-romero-times-exile.js";
 import _poolSavedByTheShell from "./pool/saved-by-the-shell.js";
 import _poolSavingGrace from "./pool/saving-grace.js";
 import _poolSavingGrasp from "./pool/saving-grasp.js";
+import _poolSaviorOfOllenbock from "./pool/savior-of-ollenbock.js";
 import _poolSaviorOfTheSleeping from "./pool/savior-of-the-sleeping.js";
 import _poolSaviorOfTheSmall from "./pool/savior-of-the-small.js";
 import _poolSavorTheMoment from "./pool/savor-the-moment.js";
@@ -28853,6 +28858,7 @@ import _poolThelonOfHavenwood from "./pool/thelon-of-havenwood.js";
 import _poolTheloniteDruid from "./pool/thelonite-druid.js";
 import _poolTheloniteHermit from "./pool/thelonite-hermit.js";
 import _poolTheloniteMonk from "./pool/thelonite-monk.js";
+import _poolThelonsCurse from "./pool/thelons-curse.js";
 import _poolThemberchaud from "./pool/themberchaud.js";
 import _poolTheodenKingOfRohan from "./pool/theoden-king-of-rohan.js";
 import _poolTheoreticalDuplication from "./pool/theoretical-duplication.js";
@@ -41461,6 +41467,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDreamThief,
   _poolDreamThiefsBandana,
   _poolDreamThrush,
+  _poolDreamTides,
   _poolDreamTrawler,
   _poolDreamTwist,
   _poolDreambornMuse,
@@ -50091,6 +50098,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLivingArtifact,
   _poolLivingBrainMechanicalMarvel,
   _poolLivingBreakthrough,
+  _poolLivingConundrum,
   _poolLivingDeath,
   _poolLivingDestiny,
   _poolLivingEnd,
@@ -50623,6 +50631,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMagnanimousMagistrate,
   _poolMagneticFlux,
   _poolMagneticMine,
+  _poolMagneticMountain,
   _poolMagneticSnuffler,
   _poolMagneticTheft,
   _poolMagneticWeb,
@@ -52211,6 +52220,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMuddleTheMixture,
   _poolMudflatVillage,
   _poolMudhole,
+  _poolMudslide,
   _poolMuerraTrashTactician,
   _poolMugato,
   _poolMugging,
@@ -57661,6 +57671,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSavedByTheShell,
   _poolSavingGrace,
   _poolSavingGrasp,
+  _poolSaviorOfOllenbock,
   _poolSaviorOfTheSleeping,
   _poolSaviorOfTheSmall,
   _poolSavorTheMoment,
@@ -62631,6 +62642,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheloniteDruid,
   _poolTheloniteHermit,
   _poolTheloniteMonk,
+  _poolThelonsCurse,
   _poolThemberchaud,
   _poolTheodenKingOfRohan,
   _poolTheoreticalDuplication,
@@ -75252,6 +75264,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dream-thief": _poolDreamThief,
   "pool/dream-thiefs-bandana": _poolDreamThiefsBandana,
   "pool/dream-thrush": _poolDreamThrush,
+  "pool/dream-tides": _poolDreamTides,
   "pool/dream-trawler": _poolDreamTrawler,
   "pool/dream-twist": _poolDreamTwist,
   "pool/dreamborn-muse": _poolDreambornMuse,
@@ -83882,6 +83895,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/living-artifact": _poolLivingArtifact,
   "pool/living-brain-mechanical-marvel": _poolLivingBrainMechanicalMarvel,
   "pool/living-breakthrough": _poolLivingBreakthrough,
+  "pool/living-conundrum": _poolLivingConundrum,
   "pool/living-death": _poolLivingDeath,
   "pool/living-destiny": _poolLivingDestiny,
   "pool/living-end": _poolLivingEnd,
@@ -84414,6 +84428,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/magnanimous-magistrate": _poolMagnanimousMagistrate,
   "pool/magnetic-flux": _poolMagneticFlux,
   "pool/magnetic-mine": _poolMagneticMine,
+  "pool/magnetic-mountain": _poolMagneticMountain,
   "pool/magnetic-snuffler": _poolMagneticSnuffler,
   "pool/magnetic-theft": _poolMagneticTheft,
   "pool/magnetic-web": _poolMagneticWeb,
@@ -86002,6 +86017,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/muddle-the-mixture": _poolMuddleTheMixture,
   "pool/mudflat-village": _poolMudflatVillage,
   "pool/mudhole": _poolMudhole,
+  "pool/mudslide": _poolMudslide,
   "pool/muerra-trash-tactician": _poolMuerraTrashTactician,
   "pool/mugato": _poolMugato,
   "pool/mugging": _poolMugging,
@@ -91452,6 +91468,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/saved-by-the-shell": _poolSavedByTheShell,
   "pool/saving-grace": _poolSavingGrace,
   "pool/saving-grasp": _poolSavingGrasp,
+  "pool/savior-of-ollenbock": _poolSaviorOfOllenbock,
   "pool/savior-of-the-sleeping": _poolSaviorOfTheSleeping,
   "pool/savior-of-the-small": _poolSaviorOfTheSmall,
   "pool/savor-the-moment": _poolSavorTheMoment,
@@ -96422,6 +96439,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thelonite-druid": _poolTheloniteDruid,
   "pool/thelonite-hermit": _poolTheloniteHermit,
   "pool/thelonite-monk": _poolTheloniteMonk,
+  "pool/thelons-curse": _poolThelonsCurse,
   "pool/themberchaud": _poolThemberchaud,
   "pool/theoden-king-of-rohan": _poolTheodenKingOfRohan,
   "pool/theoretical-duplication": _poolTheoreticalDuplication,

@@ -469,6 +469,7 @@ import _poolLightshellDuo from "../pool/lightshell-duo.js";
 import _poolLilianaTheFaultless from "../pool/liliana-the-faultless.js";
 import _poolLilianaUntouchedByDeath from "../pool/liliana-untouched-by-death.js";
 import _poolLisetteDeanOfTheRoot from "../pool/lisette-dean-of-the-root.js";
+import _poolLivingConundrum from "../pool/living-conundrum.js";
 import _poolLivingLaser from "../pool/living-laser.js";
 import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLoamcrafterFaun from "../pool/loamcrafter-faun.js";
@@ -1495,6 +1496,7 @@ const shard: CardShard = {
     _poolLilianaTheFaultless,
     _poolLilianaUntouchedByDeath,
     _poolLisetteDeanOfTheRoot,
+    _poolLivingConundrum,
     _poolLivingLaser,
     _poolLlanowarStalker,
     _poolLoamcrafterFaun,
