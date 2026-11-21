@@ -276,6 +276,11 @@ function keywordPart(part, faceName, typeLine = "", tokenFor = undefined) {
     return { triggered: [cumulativeUpkeep({ doing: { kind: "flip-coin" }, text: "Flip a coin" })] };
   }
   // Thought Lash: never with fewer cards than age counters (`mayBeDone`).
+  // "Discard a card" for each age counter (Vexing Sphinx): never with fewer
+  // cards in hand (`mayBeDone`'s repeated discard).
+  if (/^cumulative upkeep—discard a card\.?$/i.test(p)) {
+    return { triggered: [cumulativeUpkeep({ doing: { kind: "discard", target: "you", amount: 1 }, text: "Discard a card" })] };
+  }
   if (/^cumulative upkeep—exile the top card of your library\.?$/i.test(p)) {
     return { triggered: [cumulativeUpkeep({ doing: { kind: "exile-from-library", amount: 1 }, text: "Exile the top card of your library" })] };
   }
@@ -4343,6 +4348,11 @@ export function parseSentence(sentence, ctx) {
     return { kind: "gain-life", amount: { product: [Number(m[1]), { devoured: "source" }] } };
   }
   if (/^draw a card for each creature it devoured\.$/i.test(s)) return { kind: "draw", amount: { devoured: "source" } };
+  // "When this creature dies, draw a card for each age counter on it"
+  // (Vexing Sphinx): its counters as it last existed (603.10a).
+  if ((m = /^draw a card for each ([a-z]+) counter on it\.$/i.exec(s))) {
+    return { kind: "draw", amount: { countersOn: "source", counter: m[1].toLowerCase() } };
+  }
   if (/^target player discards a card for each creature it devoured\.$/i.test(s)) {
     return { kind: "discard", target: ctx.target("player"), amount: { devoured: "source" } };
   }

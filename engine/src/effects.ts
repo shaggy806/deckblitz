@@ -20393,6 +20393,24 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
         ref.kind !== "player" || ctx.librarySizeOf(ref.player) >= times * amountValue(pass.amount ?? 1, ctx, ref.player),
     );
   }
+  // "Discard a card" for each age counter (Vexing Sphinx): all of it or none
+  // (rule 702.24a), so only with that many cards in hand to discard (118.3).
+  if (
+    action.kind === "repeat" &&
+    action.times !== undefined &&
+    action.again === undefined &&
+    action.mayAgain === undefined &&
+    action.effect.kind === "discard" &&
+    action.effect.random !== true &&
+    action.effect.anyNumber === undefined &&
+    action.effect.unlessOne === undefined
+  ) {
+    const pass = action.effect;
+    const times = Math.max(0, Math.floor(amountValue(action.times, ctx)));
+    return scopedOrTargetedPlayers(pass.target, ctx).every(
+      (ref) => ref.kind !== "player" || ctx.handSizeOf(ref.player, pass.filter) >= times * amountValue(pass.amount, ctx, ref.player),
+    );
+  }
   // "Any opponent may have you put that card into your graveyard" with no such
   // card (an empty library revealed nothing), or "into your hand" with nothing
   // exiled this way: an impossible option isn't one to choose (rule 608.2d).

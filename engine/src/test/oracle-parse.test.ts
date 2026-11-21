@@ -23220,6 +23220,26 @@ describe("cumulative upkeep from the top of the library, and 'when a player does
   });
 });
 
+describe("cumulative upkeep—discard a card (Vexing Sphinx)", () => {
+  it("a discard repeated per age counter, and the dies trigger's draw for each", () => {
+    const sphinx = parseFace(
+      {
+        name: "Vexing Sphinx",
+        type_line: "Creature — Sphinx",
+        mana_cost: "{1}{U}{U}",
+        power: "4",
+        toughness: "4",
+        oracle_text:
+          "Flying\nCumulative upkeep—Discard a card. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen this creature dies, draw a card for each age counter on it.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(sphinx.complete).toBe(true);
+    expect(JSON.stringify(sphinx.triggered[0].effect)).toContain('"kind":"repeat"');
+    expect(JSON.stringify(sphinx.triggered[0].effect)).toContain('{"kind":"discard","target":"you","amount":1}');
+  });
+});
+
 describe("behold in its older words (Monstrous Emergence)", () => {
   it("choose one you control or reveal one from your hand, and the power of what was chosen or revealed", () => {
     const emergence = parseFace(
