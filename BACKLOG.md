@@ -43,7 +43,7 @@ section keeps only what to do next.
   `docs/card-blockers.md`, batch 335; the build-family and author-flagged skills say five since). **B336 (2026-11-20, `author-top-cards overnight 3pm`, 10:15-15:00)** took the triaged keys from
   Zur's Weirding (12293) to Grim Contest (19997) in rank order, with Elvish Refueler to Unpredictable Cyclone (16775-17339), skipping those below
   (`docs/card-blockers.md`, batch 336). **B337 (2026-11-21, `author-top-cards overnight`, wrapped up
-  at the user's word)** took 54 cards from Debt of Loyalty (16985) to Next of Kin (20627), 15 lane
+  at the user's word)** took 54 cards from Debt of Loyalty (16985) to Next of Kin (20627), 13 lane
   agents in five lanes; the combat-targeting lane didn't run, so its cards in that range wait
   (`docs/card-blockers.md`, batch 337). **Next by rank** (`rank-goal.mjs --rank 30000 --keys`):
   Mana Maze (18541, `static:prohibit-color-of-last-spell-cast`), Tilonalli's Crown (18621), Spider-Woman,

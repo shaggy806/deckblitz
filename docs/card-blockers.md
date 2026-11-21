@@ -667,7 +667,7 @@ Five more passes, all merged (156 cards):
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
 - **Batch 337 (2026-11-21, `author-top-cards overnight`, ranks 16985–20627)** — 54 cards from
-  15 lane agents, five at once, in the decisions, replacements-copies, triggers-journal, costs-mana and
+  13 lane agents, five at once, in the decisions, replacements-copies, triggers-journal, costs-mana and
   casting-zones lanes (`B337.json`; `COMPLETED.md` lists the features), wrapped up at the user's word
   after three rounds: Debt of Loyalty, Nihiloor, Fatal Fissure, Exotic Pets, Maestros Ascendancy,
   Sasaya, Celestial Dawn, Divine Intervention, Celestial Convergence, Archangel of Strife, Living
