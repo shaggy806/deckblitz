@@ -5086,6 +5086,24 @@ export function parseSentence(sentence, ctx) {
   if (re("return the exiled cards to their owner's graveyard").test(s)) {
     return { kind: "return-exiled-by-source", linked: "graveyard" };
   }
+  // Savior of Ollenbock's leaves trigger: every card its linked exile took,
+  // under their owners' control.
+  if (re("put the exiled cards onto the battlefield under their owners' control").test(s)) {
+    return { kind: "return-exiled-by-source", linked: "battlefield" };
+  }
+  // "Exile up to one other target creature from the battlefield or creature
+  // card from a graveyard" (Savior of Ollenbock): one slot over both zones
+  // (`one-of`).
+  if (re("exile up to one other target creature from the battlefield or creature card from a graveyard").test(s)) {
+    const slot = ctx.target({
+      kind: "optional",
+      of: {
+        kind: "other",
+        of: { kind: "one-of", of: ["creature", { kind: "card-in-graveyard", whose: "any", filter: { type: "creature" } }] },
+      },
+    });
+    return { kind: "exile", target: slot };
+  }
   // "Put them into their owner's graveyard, then ~ deals that much damage to
   // each opponent" (Valakut Exploration): what reached a graveyard this way.
   if (re("put them into their owner's graveyard, then ~ deals that much damage to each opponent").test(s)) {
@@ -21471,6 +21489,8 @@ function parseFaceAsWritten(face, ctx = {}) {
     /\breturn the exiled cards?\b/.test(oracleText) ||
     // Hoarding Dragon's "you may put the exiled card into its owner's hand".
     /\bput the exiled card into\b/.test(oracleText) ||
+    // Savior of Ollenbock's "put the exiled cards onto the battlefield".
+    /\bput the exiled cards onto\b/.test(oracleText) ||
     /\bsame name as the exiled card\b/.test(oracleText) ||
     // Phyrexian Ingester's "+X/+Y, where X is the exiled creature card's power".
     /\bthe exiled creature card's\b/.test(oracleText) ||

@@ -5628,6 +5628,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(skaab.complete).toBe(true);
   });
 
+  it("Savior of Ollenbock: one target slot over the battlefield and graveyards, linked to the leaves trigger's return", () => {
+    const savior = face(
+      "Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nWhenever this creature trains, exile up to one other target creature from the battlefield or creature card from a graveyard.\nWhen this creature leaves the battlefield, put the exiled cards onto the battlefield under their owners' control.",
+      "Creature — Human Soldier",
+    );
+    expect(savior.triggered[1].targets).toEqual([
+      {
+        kind: "optional",
+        of: { kind: "other", of: { kind: "one-of", of: ["creature", { kind: "card-in-graveyard", whose: "any", filter: { type: "creature" } }] } },
+      },
+    ]);
+    expect(savior.triggered[1].effect).toEqual({ kind: "exile", target: 0, linked: true });
+    expect(savior.triggered[2].effect).toEqual({ kind: "return-exiled-by-source", linked: "battlefield" });
+    expect(savior.complete).toBe(true);
+  });
+
   it("shield counters (rule 122.1c): 'enters with a shield counter on him'", () => {
     const cap = face("Test Card enters with a shield counter on him.", "Legendary Creature — Human Soldier Hero");
     expect(cap.static[0].replacement).toEqual({ event: "enters-battlefield", counters: { kind: "shield", amount: 1 } });
