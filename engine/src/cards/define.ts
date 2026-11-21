@@ -6156,6 +6156,16 @@ export interface CardDefinition {
      * flashback's mana has none, which the spell then reads (rules 107.3a,
      * 601.2b), at most the other matching cards there (rule 118.3). */
     readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter };
+    /** Any other part of the flashback cost, paid with it on that cast alone
+     * as an additional cost's `also` is (601.2h) — Light Up the Night's
+     * "Flashback—{3}{R}, Remove X loyalty counters from among planeswalkers
+     * you control" (`do` a `remove-counters` of `count: "x"`, `among`): an X
+     * announced for this cast though the flashback's mana has none, which the
+     * spell then reads (rules 107.3a, 601.2b), at most what the act could pay. */
+    readonly also?: KickerAlsoCost;
+    /** "If you cast this spell this way, X can't be 0" (Light Up the Night):
+     * the least X announced on a flashback cast (rule 601.2b). */
+    readonly minX?: number;
   } | null;
   /** Harmonize (rule 702.180a) — this card may be cast from its owner's
    * graveyard for `cost`, tapping up to one untapped creature they control,

@@ -2538,6 +2538,11 @@ type FlashbackOption = {
   /** Cards exiled from the graveyard for it — only a printed one's (Summons
    * of Saruman's "Exile X cards from your graveyard"). */
   readonly exileFromGraveyard?: { readonly count: number | "x"; readonly filter?: CardFilter };
+  /** Any other part of it — only a printed one's (Light Up the Night's
+   * "Remove X loyalty counters from among planeswalkers you control"). */
+  readonly also?: KickerAlsoCost;
+  /** "If you cast this spell this way, X can't be 0" — only a printed one's. */
+  readonly minX?: number;
   /** What gave it: the effect's source (Past in Flames) or the permanent
    * whose static grants it. Absent for the card's own. */
   readonly grantor?: ObjectId;
@@ -6319,7 +6324,11 @@ export class Game {
             ? 1
             : kicked && def.kicker?.minX !== undefined
               ? def.kicker.minX
-              : // "X can't be 0" on the spell's own {X} (Mind Grind).
+              : // "If you cast this spell this way, X can't be 0" on a
+                // flashback cast (Light Up the Night).
+                via === "flashback" && this.flashbackOf(card, graveyardGrant)?.minX !== undefined
+                ? this.flashbackOf(card, graveyardGrant)!.minX!
+                : // "X can't be 0" on the spell's own {X} (Mind Grind).
                 def.minX !== undefined && variantCost !== null && parseManaCost(variantCost).x > 0
                 ? def.minX
                 : 0;
@@ -6663,13 +6672,16 @@ export class Game {
           // "Blight X" (Soul Immolation): an act as the cost that reads X, as
           // much as the act could pay and no more than the card's own
           // "X can't be greater than …" (rule 601.2b).
-          : xPlan === null && sacrificeX === undefined && this.additionalCostActX(def) !== undefined
+          : xPlan === null && sacrificeX === undefined && this.castCostActX(card, def, via, graveyardGrant) !== undefined
             ? Math.min(
-                costActMaxX(this.additionalCostActX(def)!, this.makeResolutionContext(card, player, [])) ??
+                costActMaxX(this.castCostActX(card, def, via, graveyardGrant)!, this.makeResolutionContext(card, player, [])) ??
                   Game.MAX_EFFECT_INSTANCES,
                 def.maxX !== undefined ? this.costAmount(def.maxX, player, card, card) : Game.MAX_EFFECT_INSTANCES,
               )
             : undefined;
+      // An X a cost act sets, with a floor ("X can't be 0" on Light Up the
+      // Night's flashback): not castable this way below it.
+      if (xPlan === null && sacrificeX === undefined && discardX !== undefined && discardX < xFloor) continue;
       const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
       // A divided total that reads X ("X plus 1"): one per X, which bounds
       // the number of targets as "up to X" does — at least 1 each.
@@ -7158,7 +7170,7 @@ export class Game {
                             maxXByTargetCount: xGroup.maxXByTargetCount,
                             minXByTargetCount: xGroup.minXByTargetCount,
                           }
-                        : { maxX: discardX },
+                        : { maxX: discardX, ...(xFloor > 0 ? { minX: xFloor } : {}) },
                   }
                 : {}),
         ...(prototype === true && def.prototype !== null
@@ -21265,6 +21277,16 @@ export class Game {
     return act !== undefined && costActReadsX(act) ? act : undefined;
   }
 
+  /** {@link additionalCostActX}, or on a flashback cast the flashback cost's
+   * own act that reads X (Light Up the Night's "Remove X loyalty counters
+   * from among planeswalkers you control"): X announced for it (601.2b). */
+  private castCostActX(cardId: ObjectId, def: CardDefinition, via?: CastVia, grant?: GraveyardGrant): EffectSpec | undefined {
+    const own = this.additionalCostActX(def);
+    if (own !== undefined || via !== "flashback") return own;
+    const act = this.flashbackOf(cardId, grant)?.also?.do;
+    return act !== undefined && costActReadsX(act) ? act : undefined;
+  }
+
   /** A spell's "you may exile any number of creature cards from your
    * graveyard. This spell costs {2} less to cast for each card exiled this
    * way" (Gorex, the Tombshell): its `exileFromGraveyard` of X cards with a
@@ -22878,6 +22900,7 @@ export class Game {
       def,
       this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption, via, graveyardGrant, modes),
       altCost || via === "blitz" || via === "freerunning" || via === "escape",
+      Math.max(0, Math.floor(xValue)),
     );
     if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
@@ -22989,6 +23012,12 @@ export class Game {
     // 107.3b), so it can't be cast that way.
     if (def.minX !== undefined && Math.floor(xValue) < def.minX) {
       return `X can't be ${Math.floor(xValue)} for ${def.name}`;
+    }
+    // "If you cast this spell this way, X can't be 0" (Light Up the Night's
+    // flashback).
+    const flashbackMinX = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.minX : undefined;
+    if (flashbackMinX !== undefined && Math.floor(xValue) < flashbackMinX) {
+      return `X can't be ${Math.floor(xValue)} for ${def.name} cast this way`;
     }
     // An additional sacrifice cost (rule 601.2f) must be payable, and — once
     // the driver has named one — that permanent must actually qualify.
@@ -25228,7 +25257,7 @@ export class Game {
       // "Sacrifice an artifact or creature with mana value X" (Nahiri's
       // Sacrifice): X announced though the mana cost has none (rule 601.2b).
       (def.additionalCost?.sacrifice !== undefined && filterReadsX(def.additionalCost.sacrifice)) ||
-      this.additionalCostActX(def) !== undefined ||
+      this.castCostActX(cardId, def, via, graveyardGrant) !== undefined ||
       // The Shoals' "exile a … card with mana value X" (rule 107.3a).
       (altCost && this.ownAltCost(def)?.exileFromHand?.manaValueX === true);
     const chosenX = hasX ? Math.max(0, Math.floor(xValue)) : 0;
@@ -52181,9 +52210,13 @@ controlledBy,
     // A printed escape cost's other part (Lunar Hatchling's "Exile a land you
     // control"), when it's cast with that escape (rule 702.138a).
     const escapeAlso = via === "escape" ? this.escapeOf(cardId, 0, graveyardGrant)?.also : undefined;
+    // A printed flashback cost's other part (Light Up the Night's "Remove X
+    // loyalty counters from among planeswalkers you control"), on that cast.
+    const flashbackAlso = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.also : undefined;
     const additional = [
       ...(madnessAlso !== undefined ? [madnessAlso] : []),
       ...(escapeAlso !== undefined ? [escapeAlso] : []),
+      ...(flashbackAlso !== undefined ? [flashbackAlso] : []),
       ...(blitzAlso !== undefined ? [blitzAlso] : []),
       ...(freerunningAlso !== undefined ? [freerunningAlso] : []),
       ...(own !== undefined ? [own] : []),
@@ -52210,6 +52243,9 @@ controlledBy,
     def: CardDefinition,
     costs: readonly KickerAlsoCost[],
     altCost = false,
+    /** The X announced, which an act as the cost may read ("remove X
+     * loyalty counters"): not payable with fewer to take (rule 118.3). */
+    x = 0,
   ): string | null {
     const keyword = altCost
       ? "alternative"
@@ -52261,7 +52297,7 @@ controlledBy,
       }
     }
     for (const also of costs) {
-      if (also.do !== undefined && !costActPayable(also.do, this.makeResolutionContext(cardId, player, []))) {
+      if (also.do !== undefined && !costActPayable(also.do, this.makeResolutionContext(cardId, player, [], x))) {
         return `${player} can't pay ${def.name}'s ${keyword} cost: ${also.text}`;
       }
     }
@@ -64260,7 +64296,9 @@ controlledBy,
             f.discard === option.discard &&
             f.returnToHand === option.returnToHand &&
             f.tapCreatures === option.tapCreatures &&
-            f.exileFromGraveyard === option.exileFromGraveyard,
+            f.exileFromGraveyard === option.exileFromGraveyard &&
+            f.also === option.also &&
+            f.minX === option.minX,
         )
       ) {
         return;
@@ -64273,7 +64311,8 @@ controlledBy,
       add(
         printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined &&
           printed.discard === undefined && printed.keyword === undefined && printed.tapCreatures === undefined &&
-          printed.returnToHand === undefined && printed.exileFromGraveyard === undefined
+          printed.returnToHand === undefined && printed.exileFromGraveyard === undefined &&
+          printed.also === undefined && printed.minX === undefined
           ? { cost: printed.cost }
           : { ...printed },
       );
