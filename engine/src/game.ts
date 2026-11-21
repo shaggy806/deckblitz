@@ -339,6 +339,7 @@ import {
 import type {
   BeholdSpec,
   BoardManaList,
+  DiscardChosenAlsoFrom,
   ManaListSpec,
   CascadeFinish,
   CascadeFound,
@@ -13642,10 +13643,16 @@ export class Game {
         // permanent whose ability exiled it (rule 607.2a); a cost's "exile
         // two cards from your graveyard" links it to nothing.
         const asSpell = awaiting.costExileFor !== undefined ? this.spellsAsTheyAre([id]) : {};
+        // A permanent offered beside a hand's cards (Cloak and Dagger,
+        // Entwined) comes back to the battlefield, not a hand (rule 610.3c).
+        const wasPermanent = this.state.objects[id]?.zone === "battlefield";
         if (this.moveObject(id, "exile")) {
           const object = this.state.objects[id];
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
-          if (awaiting.exileUntil !== undefined) object.exiledUntil = awaiting.exileUntil;
+          if (awaiting.exileUntil !== undefined) {
+            const until = awaiting.exileUntil;
+            object.exiledUntil = wasPermanent ? { source: until.source, zoneChangeCount: until.zoneChangeCount } : until;
+          }
           if (playGrant !== undefined) object.playPermission = { ...playGrant };
           if (awaiting.costExileFor !== undefined) this.recordCostExile(awaiting.costExileFor, [id], asSpell);
           this.putCountersOnExiled(id, awaiting.exileWithCounters);
@@ -49329,9 +49336,9 @@ controlledBy,
     upTo?: number,
     destination?: "exile" | "library-top" | "library-bottom" | "battlefield",
     exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number },
-    /** One choice over the hand and another zone of that player's — see
-     * `discard-chosen`'s `alsoFrom`. */
-    alsoFrom?: { readonly zone: "graveyard"; readonly filter?: CardFilter } | { readonly zone: "library-top" },
+    /** One choice over the hand and another zone of that player's, or a
+     * targeted permanent — see `discard-chosen`'s `alsoFrom`. */
+    alsoFrom?: DiscardChosenAlsoFrom,
     /** What may be done with the card exiled — see `discard-chosen`'s
      * `mayPlay`. */
     playGrant?: CardPlayPermission,
@@ -49342,16 +49349,29 @@ controlledBy,
     /** See `discard-chosen`'s `oneEach`. */
     oneEach?: { readonly filters: readonly CardFilter[]; readonly text: string },
   ): void {
-    if (target.kind !== "player") return;
-    const player = target.player;
+    // "…or the chosen creature" with the player's own target gone illegal
+    // (Cloak and Dagger, Entwined): `target` is that permanent, and no
+    // hand is revealed.
+    const permanent =
+      alsoFrom?.zone === "permanent" && this.state.objects[alsoFrom.object]?.zone === "battlefield" ? alsoFrom.object : undefined;
+    if (target.kind !== "player" && (permanent === undefined || target.object !== permanent)) return;
+    const player = target.kind === "player" ? target.player : this.state.objects[target.object].controller;
     if (this.state.players[player]?.hasLost !== false) return;
-    const hand = this.state.zones.perPlayer[player].hand;
+    const hand = target.kind === "player" ? this.state.zones.perPlayer[player].hand : [];
     // "…or a card from their graveyard" (Agonizing Remorse), "…and the top
-    // card of their library" (Psychotic Episode): offered beside the hand,
-    // in the same choice.
+    // card of their library" (Psychotic Episode), "…or the chosen creature"
+    // (Cloak and Dagger): offered beside the hand, in the same choice.
     const zones = this.state.zones.perPlayer[player];
     const extra =
-      alsoFrom === undefined ? [] : alsoFrom.zone === "graveyard" ? [...zones.graveyard] : zones.library.slice(0, 1);
+      alsoFrom === undefined
+        ? []
+        : alsoFrom.zone === "graveyard"
+          ? [...zones.graveyard]
+          : alsoFrom.zone === "library-top"
+            ? zones.library.slice(0, 1)
+            : permanent === undefined
+              ? []
+              : [permanent];
     if (hand.length === 0 && extra.length === 0) return;
     if (!lookOnly && hand.length > 0) this.revealCards(player, [...hand], "hand");
     // "Reveals … the top card of their library" (rule 701.20a): to everyone.

@@ -6,6 +6,7 @@
     "replacement:prevent-damage-remove-counters",
     "replacement:damage-to-self-sacrifice-instead",
     "effect:become-unprepared",
+    "decision:choose-hand-card-or-target-permanent",
     "decision:replacement-order-damage",
     "effect:attached-becomes-copy-of-chosen-exiled",
     "effect:aura-onto-each-created-token",

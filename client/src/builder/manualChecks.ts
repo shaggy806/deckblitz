@@ -13706,4 +13706,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'end',
     }),
   ),
+  // --- A hand's card or a targeted creature, one choice (2026-11-21) ---------
+  preset(
+    'Cloak and Dagger, Entwined: the chosen creature is offered beside the revealed hand',
+    board({
+      you: { bf: ['Plains*2', 'Swamp'], hand: ['Cloak and Dagger, Entwined'] },
+      opp: { bf: ['Hill Giant'], hand: ['Lightning Bolt', 'Mountain'] },
+    }),
+  ),
 ]

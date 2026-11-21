@@ -9034,3 +9034,9 @@ Each board's die comes up 4.
 ### Living Conundrum: with an empty library, skip the draw before Notion Thief takes it
 - **Do:** Cast Divination. Each time you're asked which applies first, choose Living Conundrum.
 - **Expect:** You're asked twice, "You would draw a card", with Notion Thief and Living Conundrum as the choices. Bob draws nothing, you don't lose for your empty library, and Living Conundrum is a 10/10 flier.
+
+## A hand's card or a targeted creature, one choice (2026-11-21)
+
+### Cloak and Dagger, Entwined: the chosen creature is offered beside the revealed hand
+- **Do:** Cast Cloak and Dagger, Entwined, target Bob and his Hill Giant, then pick Hill Giant in the popup and confirm.
+- **Expect:** One popup, "Choose a card from Bob's cards to exile", shows Lightning Bolt and Mountain ("In a hand") and Hill Giant ("On the battlefield"), choose 0-1; Mountain can't be picked. Hill Giant is exiled.

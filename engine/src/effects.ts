@@ -6719,11 +6719,19 @@ export type EffectSpec =
        * `filter` says of the hand). A card must be chosen if any may be,
        * from either zone (Agonizing Remorse's ruling); with nothing in
        * either, nothing is asked. Not with a discard: only `destination`
-       * moves a graveyard's or library's card.
+       * moves a graveyard's or library's card. `{ zone: "target", slot }` —
+       * "you may exile a nonland card from their hand **or the chosen
+       * creature**" (Cloak and Dagger, Entwined): the permanent in that
+       * target slot, if it's still a legal target (rule 608.2b), offered
+       * beside the hand's cards whatever `filter` says of them. With the
+       * player's own slot illegal by then, the hand isn't revealed and only
+       * the permanent is offered. With `untilSourceLeaves` a permanent
+       * returns to the battlefield, a hand's card to the hand (rule 610.3c).
        */
       readonly alsoFrom?:
         | { readonly zone: "graveyard"; readonly filter?: CardFilter }
-        | { readonly zone: "library-top" };
+        | { readonly zone: "library-top" }
+        | { readonly zone: "target"; readonly slot: number };
       /**
        * With `destination: "exile"`, what the effect's controller may do with
        * the card chosen, as `exile`'s `mayPlay`: Psychic Intrusion's "you may
@@ -13502,6 +13510,13 @@ export interface ModeOption {
   readonly onlyIf?: StaticCondition;
 }
 
+/** `discard-chosen`'s `alsoFrom` as the engine is handed it: a target slot
+ * becomes the permanent still in it. */
+export type DiscardChosenAlsoFrom =
+  | { readonly zone: "graveyard"; readonly filter?: CardFilter }
+  | { readonly zone: "library-top" }
+  | { readonly zone: "permanent"; readonly object: ObjectId };
+
 /** Primitive mutations an effect can perform. Implemented by the engine. */
 export interface EffectApi {
   /** `from`: the triggering object, or a target, deals it, not the effect's
@@ -14770,9 +14785,10 @@ export interface EffectApi {
       readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
       readonly unlinked?: true;
       readonly untilSourceLeaves?: true;
-      readonly alsoFrom?:
-        | { readonly zone: "graveyard"; readonly filter?: CardFilter }
-        | { readonly zone: "library-top" };
+      /** The effect's `alsoFrom`, a target slot read as the permanent in it
+       * (`target` is then that permanent, not a player, when the player's
+       * slot has gone illegal). */
+      readonly alsoFrom?: DiscardChosenAlsoFrom;
       readonly mayPlay?: PlayGrant;
       /** See the effect's `reveals` and `picks`, read as it resolves. */
       readonly reveals?: { readonly count: number; readonly picks: number };
@@ -22977,16 +22993,30 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           : ((player) => (player === undefined ? undefined : { kind: "player" as const, player }))(
               resolvePlayerRef(spec.target, ctx),
             );
-      if (target !== undefined) {
+      // "…or the chosen creature" (Cloak and Dagger, Entwined): the
+      // permanent in that slot while it's still a legal target (608.2b).
+      const alsoTarget = spec.alsoFrom?.zone === "target" ? ctx.targets[spec.alsoFrom.slot] : undefined;
+      const alsoFrom: DiscardChosenAlsoFrom | undefined =
+        spec.alsoFrom === undefined
+          ? undefined
+          : spec.alsoFrom.zone !== "target"
+            ? spec.alsoFrom
+            : alsoTarget?.kind === "object"
+              ? { zone: "permanent", object: alsoTarget.object }
+              : undefined;
+      // The player's slot gone illegal: their hand isn't revealed, and the
+      // permanent alone is offered.
+      const chosenFrom = target ?? (alsoFrom?.zone === "permanent" ? { kind: "object" as const, object: alsoFrom.object } : undefined);
+      if (chosenFrom !== undefined) {
         const upTo = spec.upTo === undefined ? undefined : Math.max(0, Math.floor(amountValue(spec.upTo, ctx)));
         const chooser = spec.chooser === undefined ? undefined : chooserPlayer(spec.chooser, ctx);
         if (spec.chooser !== undefined && chooser === undefined) return;
-        ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true, upTo, {
+        ctx.discardChosen(chosenFrom, spec.filter, spec.lookOnly === true, spec.optional === true, upTo, {
           ...(chooser !== undefined ? { chooser } : {}),
           ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
           ...(spec.unlinked === true ? { unlinked: true } : {}),
           ...(spec.untilSourceLeaves === true ? { untilSourceLeaves: true } : {}),
-          ...(spec.alsoFrom !== undefined ? { alsoFrom: spec.alsoFrom } : {}),
+          ...(alsoFrom !== undefined ? { alsoFrom } : {}),
           ...(spec.mayPlay !== undefined ? { mayPlay: spec.mayPlay } : {}),
           ...(spec.reveals !== undefined
             ? {
