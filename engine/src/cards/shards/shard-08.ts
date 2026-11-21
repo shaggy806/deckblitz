@@ -53,6 +53,7 @@ import _poolAngelOfSalvation from "../pool/angel-of-salvation.js";
 import _poolAngelicArmaments from "../pool/angelic-armaments.js";
 import _poolAngelicCub from "../pool/angelic-cub.js";
 import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
+import _poolAngrathMinotaurPirate from "../pool/angrath-minotaur-pirate.js";
 import _poolAngrathsFury from "../pool/angraths-fury.js";
 import _poolAnnieFlashTheVeteran from "../pool/annie-flash-the-veteran.js";
 import _poolAnyaMercilessAngel from "../pool/anya-merciless-angel.js";
@@ -1139,6 +1140,7 @@ const shard: CardShard = {
     _poolAngelicArmaments,
     _poolAngelicCub,
     _poolAngelicQuartermaster,
+    _poolAngrathMinotaurPirate,
     _poolAngrathsFury,
     _poolAnnieFlashTheVeteran,
     _poolAnyaMercilessAngel,

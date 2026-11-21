@@ -930,6 +930,7 @@ import _poolAnger from "./pool/anger.js";
 import _poolAnglerDrake from "./pool/angler-drake.js";
 import _poolAnglerTurtle from "./pool/angler-turtle.js";
 import _poolAngrathCaptainOfChaos from "./pool/angrath-captain-of-chaos.js";
+import _poolAngrathMinotaurPirate from "./pool/angrath-minotaur-pirate.js";
 import _poolAngrathTheFlameChained from "./pool/angrath-the-flame-chained.js";
 import _poolAngrathsAmbusher from "./pool/angraths-ambusher.js";
 import _poolAngrathsFury from "./pool/angraths-fury.js";
@@ -9383,6 +9384,7 @@ import _poolFastForward from "./pool/fast-forward.js";
 import _poolFastFurious from "./pool/fast-furious.js";
 import _poolFast from "./pool/fast.js";
 import _poolFatalBlow from "./pool/fatal-blow.js";
+import _poolFatalFissure from "./pool/fatal-fissure.js";
 import _poolFatalFrenzy from "./pool/fatal-frenzy.js";
 import _poolFatalFumes from "./pool/fatal-fumes.js";
 import _poolFatalGrudge from "./pool/fatal-grudge.js";
@@ -16106,6 +16108,7 @@ import _poolLifeGoesOn from "./pool/life-goes-on.js";
 import _poolLifeInsurance from "./pool/life-insurance.js";
 import _poolLifeMatrix from "./pool/life-matrix.js";
 import _poolLifeOfTheParty from "./pool/life-of-the-party.js";
+import _poolLifeOfToshiroUmezawa from "./pool/life-of-toshiro-umezawa.js";
 import _poolLife from "./pool/life.js";
 import _poolLifebaneZombie from "./pool/lifebane-zombie.js";
 import _poolLifebloodHydra from "./pool/lifeblood-hydra.js";
@@ -17433,6 +17436,7 @@ import _poolMemoryGuardian from "./pool/memory-guardian.js";
 import _poolMemoryJar from "./pool/memory-jar.js";
 import _poolMemoryLapse from "./pool/memory-lapse.js";
 import _poolMemoryLeak from "./pool/memory-leak.js";
+import _poolMemoryOfToshiro from "./pool/memory-of-toshiro.js";
 import _poolMemoryPlunder from "./pool/memory-plunder.js";
 import _poolMemorySluice from "./pool/memory-sluice.js";
 import _poolMemoryTheft from "./pool/memory-theft.js";
@@ -19057,6 +19061,7 @@ import _poolNightwingShade from "./pool/nightwing-shade.js";
 import _poolNihilSpellbomb from "./pool/nihil-spellbomb.js";
 import _poolNihilisticGlee from "./pool/nihilistic-glee.js";
 import _poolNihilith from "./pool/nihilith.js";
+import _poolNihiloor from "./pool/nihiloor.js";
 import _poolNikaraLairScavenger from "./pool/nikara-lair-scavenger.js";
 import _poolNikkoOnna from "./pool/nikko-onna.js";
 import _poolNikoAris from "./pool/niko-aris.js";
@@ -34683,6 +34688,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnglerDrake,
   _poolAnglerTurtle,
   _poolAngrathCaptainOfChaos,
+  _poolAngrathMinotaurPirate,
   _poolAngrathTheFlameChained,
   _poolAngrathsAmbusher,
   _poolAngrathsFury,
@@ -43136,6 +43142,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFastFurious,
   _poolFast,
   _poolFatalBlow,
+  _poolFatalFissure,
   _poolFatalFrenzy,
   _poolFatalFumes,
   _poolFatalGrudge,
@@ -49859,6 +49866,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLifeInsurance,
   _poolLifeMatrix,
   _poolLifeOfTheParty,
+  _poolLifeOfToshiroUmezawa,
   _poolLife,
   _poolLifebaneZombie,
   _poolLifebloodHydra,
@@ -51186,6 +51194,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMemoryJar,
   _poolMemoryLapse,
   _poolMemoryLeak,
+  _poolMemoryOfToshiro,
   _poolMemoryPlunder,
   _poolMemorySluice,
   _poolMemoryTheft,
@@ -52810,6 +52819,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNihilSpellbomb,
   _poolNihilisticGlee,
   _poolNihilith,
+  _poolNihiloor,
   _poolNikaraLairScavenger,
   _poolNikkoOnna,
   _poolNikoAris,
@@ -68449,6 +68459,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/angler-drake": _poolAnglerDrake,
   "pool/angler-turtle": _poolAnglerTurtle,
   "pool/angrath-captain-of-chaos": _poolAngrathCaptainOfChaos,
+  "pool/angrath-minotaur-pirate": _poolAngrathMinotaurPirate,
   "pool/angrath-the-flame-chained": _poolAngrathTheFlameChained,
   "pool/angraths-ambusher": _poolAngrathsAmbusher,
   "pool/angraths-fury": _poolAngrathsFury,
@@ -76902,6 +76913,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fast-furious": _poolFastFurious,
   "pool/fast": _poolFast,
   "pool/fatal-blow": _poolFatalBlow,
+  "pool/fatal-fissure": _poolFatalFissure,
   "pool/fatal-frenzy": _poolFatalFrenzy,
   "pool/fatal-fumes": _poolFatalFumes,
   "pool/fatal-grudge": _poolFatalGrudge,
@@ -83625,6 +83637,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/life-insurance": _poolLifeInsurance,
   "pool/life-matrix": _poolLifeMatrix,
   "pool/life-of-the-party": _poolLifeOfTheParty,
+  "pool/life-of-toshiro-umezawa": _poolLifeOfToshiroUmezawa,
   "pool/life": _poolLife,
   "pool/lifebane-zombie": _poolLifebaneZombie,
   "pool/lifeblood-hydra": _poolLifebloodHydra,
@@ -84952,6 +84965,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/memory-jar": _poolMemoryJar,
   "pool/memory-lapse": _poolMemoryLapse,
   "pool/memory-leak": _poolMemoryLeak,
+  "pool/memory-of-toshiro": _poolMemoryOfToshiro,
   "pool/memory-plunder": _poolMemoryPlunder,
   "pool/memory-sluice": _poolMemorySluice,
   "pool/memory-theft": _poolMemoryTheft,
@@ -86576,6 +86590,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nihil-spellbomb": _poolNihilSpellbomb,
   "pool/nihilistic-glee": _poolNihilisticGlee,
   "pool/nihilith": _poolNihilith,
+  "pool/nihiloor": _poolNihiloor,
   "pool/nikara-lair-scavenger": _poolNikaraLairScavenger,
   "pool/nikko-onna": _poolNikkoOnna,
   "pool/niko-aris": _poolNikoAris,
