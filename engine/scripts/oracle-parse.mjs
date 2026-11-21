@@ -5488,6 +5488,26 @@ export function parseSentence(sentence, ctx) {
     return { kind: "mill", target: `each-${m[1].toLowerCase()}`, amount: amount(m[2]) };
   }
   if ((m = re(`scry ${N}`).exec(s))) return { kind: "scry", amount: amount(m[1]) };
+  // Fateseal N (rule 701.29a): `cards/helpers.ts`'s `fateseal(n)`, spelled
+  // out (Mesmeric Sliver, Spin into Myth).
+  if ((m = re(`fateseal ${N}`).exec(s))) {
+    const n = amount(m[1]);
+    if (typeof n === "number") {
+      return {
+        kind: "choose-opponent",
+        then: {
+          kind: "look-and-choose",
+          from: "that-player",
+          zone: "library",
+          count: n,
+          min: 0,
+          max: n,
+          destination: "library-bottom",
+          leftover: n > 1 ? "top-any-order" : "stay",
+        },
+      };
+    }
+  }
   // "Target player scries 2": `scry` has no `who`, so the player does it (`as-player`).
   if ((m = re(`target player scries ${N}`).exec(s))) {
     const target = slot("target player");
@@ -18468,7 +18488,9 @@ function parseFaceAsWritten(face, ctx = {}) {
     // "Creatures you control have 'Whenever this creature becomes the target
     // of a spell or ability for the first time each turn, counter that spell
     // or ability.'" (Kira, Great Glass-Spinner) likewise.
-    const grantedTrigger = /^(Commander creatures you own|Creatures you control) have "((?:When|Whenever|At) [^"]+\.)"$/.exec(printed(raw));
+    // "All Slivers have 'When this permanent enters, …'" (Dormant Sliver,
+    // Mesmeric Sliver): every Sliver, whoever controls it.
+    const grantedTrigger = /^(Commander creatures you own|Creatures you control|All Slivers) have "((?:When|Whenever|At) [^"]+\.)"$/.exec(printed(raw));
     if (grantedTrigger !== null) {
       const read = parseFace({ ...face, type_line: "Creature", oracle_text: grantedTrigger[2] }, ctx);
       if (read.complete && read.triggered.length === 1 && read.activated.length + read.static.length + read.keywords.length === 0) {
@@ -18478,7 +18500,9 @@ function parseFaceAsWritten(face, ctx = {}) {
             filter:
               grantedTrigger[1] === "Creatures you control"
                 ? { type: "creature", controlledBy: "you" }
-                : { type: "creature", isCommander: true, ownedBy: "you" },
+                : grantedTrigger[1] === "All Slivers"
+                  ? { subtype: "Sliver" }
+                  : { type: "creature", isCommander: true, ownedBy: "you" },
           },
           grantsTriggered: read.triggered,
           text: printed(raw),

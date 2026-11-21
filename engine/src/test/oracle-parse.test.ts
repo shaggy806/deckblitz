@@ -14,7 +14,7 @@
 import { describe, expect, it } from "vitest";
 
 import { POOL_CARDS, createDefaultRegistry, defineCard } from "../cards.js";
-import { learn, soulbond, transfigure } from "../cards/helpers.js";
+import { fateseal, learn, soulbond, transfigure } from "../cards/helpers.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -1546,6 +1546,23 @@ describe("effect templates", () => {
     ["~ deals 3 damage to any target.", { kind: "damage", amount: 3, target: 0 }],
     ["Destroy target nonland permanent.", { kind: "destroy", target: 0 }],
     ["Scry 2.", { kind: "scry", amount: 2 }],
+    // Fateseal (rule 701.29a): `cards/helpers.ts`'s `fateseal(2)`.
+    [
+      "Fateseal 2.",
+      {
+        kind: "choose-opponent",
+        then: {
+          kind: "look-and-choose",
+          from: "that-player",
+          zone: "library",
+          count: 2,
+          min: 0,
+          max: 2,
+          destination: "library-bottom",
+          leftover: "top-any-order",
+        },
+      },
+    ],
     ["~ gets +1/+0 until end of turn.", { kind: "modify-pt", target: "source", power: 1, toughness: 0, duration: "end-of-turn" }],
     ["Target creature gains flying until end of turn.", { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" }],
     [
@@ -24777,5 +24794,22 @@ describe("cards cycled this turn, and a card with a cycling ability (Spellpyre P
     expect(phoenix.triggered[1].fromGraveyard).toBe(true);
     expect(phoenix.triggered[1].condition).toEqual({ kind: "turn-history", what: "cycled", atLeast: 2 });
     expect(phoenix.triggered[1].effect).toEqual({ kind: "return-to-hand", target: "source", from: "graveyard" });
+  });
+});
+
+describe("fateseal and Slivers' granted triggers", () => {
+  it("reads 'you may fateseal 1' as the helper's shape, granted to all Slivers", () => {
+    const sliver = parseFace(
+      {
+        name: "Mesmeric Sliver",
+        type_line: "Creature — Sliver",
+        oracle_text:
+          'All Slivers have "When this permanent enters, you may fateseal 1." (To fateseal 1, its controller looks at the top card of an opponent\'s library, then they may put that card on the bottom of that library.)',
+      },
+      { tokenFor: () => null },
+    );
+    expect(sliver.static[0].affects).toEqual({ scope: "filter", filter: { subtype: "Sliver" } });
+    expect(sliver.static[0].grantsTriggered[0].effect).toEqual({ kind: "may", prompt: "Fateseal 1?", effect: fateseal(1) });
+    expect(parseEffect("Fateseal 3.", ctx()).effect).toEqual(fateseal(3));
   });
 });

@@ -1928,6 +1928,13 @@ permanents (`Game`'s together resolver, beside `oneEachTypeAmong`). The rest was
 `grant-play { thisWay: "exiled" }`. The only card with the line, so no scaffolder template.
 `test/exile-one-per-color.test.ts`.
 
+### Fateseal — built 2026-11-21
+
+The key `effect:fateseal`, for Mesmeric Sliver and Spin into Myth: no engine code. `cards/helpers.ts`'s `fateseal(n)`
+is a `choose-opponent` around a look-and-choose of that player's library (`library-bottom`, the rest `top-any-order`),
+rule 701.29a. The scaffolder reads "fateseal N" and, beside it, "All Slivers have '…'" granted triggers (Dormant
+Sliver's family). `test/fateseal.test.ts`.
+
 ### Mana whose rider copies the ability it paid for — built 2026-11-13
 
 By EDHREC rank: Sunken Palace (4621), the only card. `add-mana`'s

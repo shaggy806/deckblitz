@@ -249,6 +249,27 @@ export const forageCost = (): EffectSpec => ({
   ],
 });
 
+/** Fateseal N (rule 701.29a): "look at the top N cards of an opponent's
+ * library, then put any number of them on the bottom of that library in any
+ * order and the rest on top of that library in any order". The opponent is
+ * chosen as it resolves (none targeted), then a look-and-choose of that
+ * library: the picks go to the bottom in the order picked, the rest back on
+ * top in an order the fatesealer chooses. Not a scry: "whenever you scry"
+ * doesn't see it. */
+export const fateseal = (n: number): EffectSpec => ({
+  kind: "choose-opponent",
+  then: {
+    kind: "look-and-choose",
+    from: "that-player",
+    zone: "library",
+    count: n,
+    min: 0,
+    max: n,
+    destination: "library-bottom",
+    leftover: n > 1 ? "top-any-order" : "stay",
+  },
+});
+
 export const forageOptions = (): readonly BoundUnlessOption[] => [
   { exileFromGraveyard: 3, forage: true, text: "Exile three cards from your graveyard" },
   { sacrifice: { subtype: "Food" }, forage: true, text: "Sacrifice a Food" },
