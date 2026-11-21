@@ -32277,6 +32277,7 @@ export class Game {
       keepCosts: this.otherCardCosts(player, purpose?.kind === "cast" ? purpose.card : undefined),
       ...(spend.wide !== undefined ? { spendAs: spend.wide } : {}),
       ...(spend.units.length > 0 ? { spendUnits: spend.units } : {}),
+      ...(spend.onlyAsColorless !== undefined ? { onlyAsColorless: spend.onlyAsColorless } : {}),
     };
   }
 
@@ -32352,7 +32353,7 @@ export class Game {
   private spendAsFor(
     player: PlayerId,
     purpose: ManaPurpose,
-  ): { readonly wide: WideSpendAs | undefined; readonly units: readonly SpendUnitAs[] } {
+  ): { readonly wide: WideSpendAs | undefined; readonly units: readonly SpendUnitAs[]; readonly onlyAsColorless?: Color } {
     let wide: WideSpendAs | undefined;
     const units: SpendUnitAs[] = [];
     const allow = (as: SpendAs | undefined): void => {
@@ -32446,7 +32447,11 @@ export class Game {
       // resolves (Tinybones): the offer's, for the cast it allows.
       allow(this.castNowOffer(player, spellCard)?.spendAs);
     }
-    return { wide, units };
+    // "You may spend other mana only as though it were colorless mana"
+    // (Celestial Dawn): a restriction on every payment, whatever it's for.
+    const only = rules.find((rule) => rule.othersOnlyAsColorless === true && typeof rule.as === "object" && rule.as.unit !== "snow" && rule.as.unit !== "C");
+    const onlyAsColorless = only !== undefined && typeof only.as === "object" ? (only.as.unit as Color) : undefined;
+    return { wide, units, ...(onlyAsColorless !== undefined ? { onlyAsColorless } : {}) };
   }
 
   /**

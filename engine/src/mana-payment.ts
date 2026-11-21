@@ -401,6 +401,11 @@ export interface ManaPlanningView {
   /** An effect lets one type of mana be spent as a colour it isn't (Sunglasses
    * of Urza, Abstruse Appropriation). See {@link pipsAsSpendable}. */
   readonly spendUnits?: readonly SpendUnitAs[];
+  /** "You may spend other mana only as though it were colorless mana" beside
+   * "you may spend **this colour's** mana as though it were mana of any color"
+   * (Celestial Dawn's white): see {@link costAsOnlyColorless}. Set, it
+   * outweighs `spendAs` and `spendUnits` (rule 101.2). */
+  readonly onlyAsColorless?: Color;
 }
 
 /** The more generous of two spending permissions (either may be absent):
@@ -499,6 +504,43 @@ export function pipsAsSpendable(cost: ManaCost, units: readonly SpendUnitAs[] | 
     colored[color] = 0;
   }
   return { ...cost, colored, hybrid: widened };
+}
+
+/**
+ * `cost` as a payer sees it who "may spend `color` mana as though it were mana
+ * of any color" and "may spend other mana only as though it were colorless
+ * mana" (Celestial Dawn): a coloured pip, and a hybrid's coloured half, only
+ * `color` mana pays; a `{C}` pip any mana but `color` pays (rule 118.14:
+ * spent as colorless, it pays `{C}` too) — and `color` also, when the payer
+ * may spend mana as though it were mana of any type. The "only" is a
+ * restriction, so it outweighs a permission to spend other mana as a colour
+ * (rule 101.2). Only a step of a payment: the cost and the mana spent stay
+ * what they are (609.4b).
+ */
+export function costAsOnlyColorless(cost: ManaCost, color: Color, anyType: boolean): ManaCost {
+  const coloredPips = COLORS.reduce((n, c) => n + cost.colored[c], 0);
+  const colorlessPip: HybridPip = [
+    { kind: "colorless" },
+    ...COLORS.filter((c) => c !== color || anyType).map((c): HybridOption => ({ kind: "color", color: c })),
+  ];
+  const hybrid = cost.hybrid.map((pip): HybridPip => {
+    const options: HybridOption[] = [];
+    for (const option of pip) {
+      const narrowed: readonly HybridOption[] =
+        option.kind === "color" ? [{ kind: "color", color }] : option.kind === "colorless" ? colorlessPip : [option];
+      for (const o of narrowed) {
+        const already = options.some((x) => x.kind === o.kind && (x.kind !== "color" || o.kind !== "color" || x.color === o.color));
+        if (!already) options.push(o);
+      }
+    }
+    return options;
+  });
+  return {
+    ...cost,
+    colored: { W: 0, U: 0, B: 0, R: 0, G: 0, [color]: coloredPips },
+    colorless: 0,
+    hybrid: [...hybrid, ...Array.from({ length: cost.colorless }, () => colorlessPip)],
+  };
 }
 
 /** `concrete` with one more pip paid by `option`, when it's one a payment can
@@ -2001,6 +2043,12 @@ export function planPayment(
   avoid?: ObjectId,
   exclude?: ObjectId,
 ): ManaPayment | null {
+  if (view.onlyAsColorless !== undefined) {
+    // Celestial Dawn: the pips rewritten as only its mana may pay them, and
+    // no other permission left to widen them again (rule 101.2).
+    const { onlyAsColorless, spendAs, spendUnits: _units, ...rest } = view;
+    return planPayment(rest, costAsOnlyColorless(cost, onlyAsColorless, spendAs === "any-type"), purpose, avoid, exclude);
+  }
   const resolved = resolveHybridCost(view, withLifeForPips(pipsAsSpendable(cost, view.spendUnits), view.lifeForPips), avoid, exclude);
   if (resolved === null) return null;
   // The life the pips take comes out of what the tolls may spend.

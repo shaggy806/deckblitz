@@ -3133,7 +3133,9 @@
   "effect:per-opponent-tap-then-reflexive-steal",
   "trigger:attack-with-creature-opponent-owns-owner-ref",
   "effect:mana-produced-per-same-name-land",
-  "condition:hand-land-card-count"
+  "condition:hand-land-card-count",
+  "static:spend-mana-only-as-colorless",
+  "static:color-cards-outside-battlefield"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

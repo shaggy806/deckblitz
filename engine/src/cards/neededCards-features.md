@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Other mana spent only as colorless, and colours off the battlefield — built 2026-11-21
+
+The keys `static:spend-mana-only-as-colorless` and `static:color-cards-outside-battlefield`:
+`spendManaAs.othersOnlyAsColorless` (`ManaPlanningView.onlyAsColorless`, `mana-payment.ts`'s `costAsOnlyColorless`:
+coloured pips paid by the one colour alone, `{C}` by any other mana, outweighing every other spending permission —
+rules 118.14, 101.2), and `outsideBattlefield`'s colours now reaching cards in every zone, not only spells
+(`characteristics.ts`'s `outsideColored` — Painter's Servant and Mycosynth Lattice had left cards in hand their own
+colours). Celestial Dawn (17585). `test/spend-only-as-colorless.test.ts`.
+
 ### Mana per other land of the tapped land's name, and a "Reveal your hand" cost — built 2026-11-21
 
 The keys `effect:mana-produced-per-same-name-land` and `condition:hand-land-card-count` (the second was already

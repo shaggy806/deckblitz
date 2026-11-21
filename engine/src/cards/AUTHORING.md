@@ -6528,7 +6528,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   battlefield **have flash**" (Teferi, Mage of Zhalfir —
   `outsideBattlefield: { ofType: ["creature"], keywords: ["flash"] }`), a
   keyword the cards have, which cast and suspend timing read; not
-  `castAsThoughFlash`, a permission of the controller's.
+  `castAsThoughFlash`, a permission of the controller's. Its `setColors` /
+  `addColors` are layer 5 there, cards in every zone and spells alike:
+  Celestial Dawn's "the same is true for spells you control and nonland cards
+  you own that aren't on the battlefield" is `outsideBattlefield: { notType:
+  "land", setColors: ["W"] }` (Painter's Servant's and Mycosynth Lattice's
+  cards in hand were left their own colours until 2026-11-21).
 - `setSubtypes: string[]` — layer 4: the affected permanents' subtypes of the
   same kind are **replaced** by these (rule 205.1a), the rest staying —
   Goddric, Cloaked Reveler's "is a Dragon … (He loses all other creature
@@ -7257,7 +7262,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   spent. A *permission's* own spending rule rides on it instead —
   `spendAs` on any permission (`mayPlay`, `impulse-exile`) — and
   applies only to a spell cast under that permission (rule 118.14).
-  `mana-spending-rules.test.ts`.
+  `mana-spending-rules.test.ts`. `othersOnlyAsColorless: true` beside `{
+  unit: "W", as: "any-color" }` is Celestial Dawn's "you may spend other mana
+  only as though it were colorless mana": every other type pays only generic
+  and `{C}`, whatever else lets it pay a colour (rule 101.2) —
+  `spend-only-as-colorless.test.ts`.
 - `extraLandsPerTurn: number` — additional land drops per turn for this
   permanent's controller (Oracle of Mul Daya, Azusa, Lost but Seeking — needed-cards
   P16); granted ones count too (Nog, Ambitious Cadet's `become` with `static`). `affects` is ignored. With `extraLandsForEachPlayer: true` it reaches

@@ -4130,6 +4130,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * permanent's controller's side — Agatha's Soul Cauldron's "to activate
      * abilities of creatures you control". */
     readonly activatingOf?: CardFilter;
+    /** "You may spend other mana only as though it were colorless mana"
+     * (Celestial Dawn), beside an `as` of `{ unit: <a colour>, as:
+     * "any-color" }`: mana of every other type pays only generic and `{C}`
+     * (rule 118.14), and outweighs any permission to spend it as a colour
+     * (rule 101.2) — `mana-payment.ts`'s `costAsOnlyColorless`. Every payment
+     * its controller makes, whatever it's for. */
+    readonly othersOnlyAsColorless?: true;
   };
   /** Protection (rule 702.16) — the affected object can't be targeted,
    * blocked, enchanted/equipped, or damaged by a source whose colour or type
