@@ -227,6 +227,7 @@ import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDecompose from "../pool/decompose.js";
 import _poolDeeKayFinderOfTheLost from "../pool/dee-kay-finder-of-the-lost.js";
+import _poolDeemInferior from "../pool/deem-inferior.js";
 import _poolDeepFreeze from "../pool/deep-freeze.js";
 import _poolDeepSpace9 from "../pool/deep-space-9.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
@@ -1287,6 +1288,7 @@ const shard: CardShard = {
     _poolDecodeTransmissions,
     _poolDecompose,
     _poolDeeKayFinderOfTheLost,
+    _poolDeemInferior,
     _poolDeepFreeze,
     _poolDeepSpace9,
     _poolDefendTheCelestus,

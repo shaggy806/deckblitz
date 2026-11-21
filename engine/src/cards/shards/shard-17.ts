@@ -862,6 +862,7 @@ import _poolSylvanYeti from "../pool/sylvan-yeti.js";
 import _poolSymmetrySage from "../pool/symmetry-sage.js";
 import _poolSynchronizedSpellcraft from "../pool/synchronized-spellcraft.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
+import _poolTakenoSamuraiGeneral from "../pool/takeno-samurai-general.js";
 import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
 import _poolTalusPaladin from "../pool/talus-paladin.js";
 import _poolTamiyoInquisitiveStudent from "../pool/tamiyo-inquisitive-student.js";
@@ -1910,6 +1911,7 @@ const shard: CardShard = {
     _poolSymmetrySage,
     _poolSynchronizedSpellcraft,
     _poolTaintedIsle,
+    _poolTakenoSamuraiGeneral,
     _poolTallymanOfNurgle,
     _poolTalusPaladin,
     _poolTamiyoInquisitiveStudent,

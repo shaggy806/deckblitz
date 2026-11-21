@@ -506,6 +506,7 @@ import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMightSliver from "../pool/might-sliver.js";
+import _poolMindBomb from "../pool/mind-bomb.js";
 import _poolMinionOfTheMighty from "../pool/minion-of-the-mighty.js";
 import _poolMinionReflector from "../pool/minion-reflector.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
@@ -1491,6 +1492,7 @@ const shard: CardShard = {
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMightSliver,
+    _poolMindBomb,
     _poolMinionOfTheMighty,
     _poolMinionReflector,
     _poolMinotaurAggressor,

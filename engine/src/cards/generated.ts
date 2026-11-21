@@ -6609,6 +6609,7 @@ import _poolDedicatedMartyr from "./pool/dedicated-martyr.js";
 import _poolDeduce from "./pool/deduce.js";
 import _poolDeeKayFinderOfTheLost from "./pool/dee-kay-finder-of-the-lost.js";
 import _poolDeekahFractalTheorist from "./pool/deekah-fractal-theorist.js";
+import _poolDeemInferior from "./pool/deem-inferior.js";
 import _poolDeemWorthy from "./pool/deem-worthy.js";
 import _poolDeepAnalysis from "./pool/deep-analysis.js";
 import _poolDeepCavernBat from "./pool/deep-cavern-bat.js";
@@ -17697,6 +17698,7 @@ import _poolMinasMorgulDarkFortress from "./pool/minas-morgul-dark-fortress.js";
 import _poolMinasTirithGarrison from "./pool/minas-tirith-garrison.js";
 import _poolMinasTirith from "./pool/minas-tirith.js";
 import _poolMindBend from "./pool/mind-bend.js";
+import _poolMindBomb from "./pool/mind-bomb.js";
 import _poolMindBurst from "./pool/mind-burst.js";
 import _poolMindCarver from "./pool/mind-carver.js";
 import _poolMindControl from "./pool/mind-control.js";
@@ -27887,6 +27889,7 @@ import _poolTakeUpTheShield from "./pool/take-up-the-shield.js";
 import _poolTakeVengeance from "./pool/take-vengeance.js";
 import _poolTake from "./pool/take.js";
 import _poolTakenByNightmares from "./pool/taken-by-nightmares.js";
+import _poolTakenoSamuraiGeneral from "./pool/takeno-samurai-general.js";
 import _poolTakenosCavalry from "./pool/takenos-cavalry.js";
 import _poolTakenumaAbandonedMire from "./pool/takenuma-abandoned-mire.js";
 import _poolTakenumaBleeder from "./pool/takenuma-bleeder.js";
@@ -40355,6 +40358,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeduce,
   _poolDeeKayFinderOfTheLost,
   _poolDeekahFractalTheorist,
+  _poolDeemInferior,
   _poolDeemWorthy,
   _poolDeepAnalysis,
   _poolDeepCavernBat,
@@ -51443,6 +51447,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMinasTirithGarrison,
   _poolMinasTirith,
   _poolMindBend,
+  _poolMindBomb,
   _poolMindBurst,
   _poolMindCarver,
   _poolMindControl,
@@ -61633,6 +61638,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTakeVengeance,
   _poolTake,
   _poolTakenByNightmares,
+  _poolTakenoSamuraiGeneral,
   _poolTakenosCavalry,
   _poolTakenumaAbandonedMire,
   _poolTakenumaBleeder,
@@ -74114,6 +74120,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/deduce": _poolDeduce,
   "pool/dee-kay-finder-of-the-lost": _poolDeeKayFinderOfTheLost,
   "pool/deekah-fractal-theorist": _poolDeekahFractalTheorist,
+  "pool/deem-inferior": _poolDeemInferior,
   "pool/deem-worthy": _poolDeemWorthy,
   "pool/deep-analysis": _poolDeepAnalysis,
   "pool/deep-cavern-bat": _poolDeepCavernBat,
@@ -85202,6 +85209,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/minas-tirith-garrison": _poolMinasTirithGarrison,
   "pool/minas-tirith": _poolMinasTirith,
   "pool/mind-bend": _poolMindBend,
+  "pool/mind-bomb": _poolMindBomb,
   "pool/mind-burst": _poolMindBurst,
   "pool/mind-carver": _poolMindCarver,
   "pool/mind-control": _poolMindControl,
@@ -95392,6 +95400,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/take-vengeance": _poolTakeVengeance,
   "pool/take": _poolTake,
   "pool/taken-by-nightmares": _poolTakenByNightmares,
+  "pool/takeno-samurai-general": _poolTakenoSamuraiGeneral,
   "pool/takenos-cavalry": _poolTakenosCavalry,
   "pool/takenuma-abandoned-mire": _poolTakenumaAbandonedMire,
   "pool/takenuma-bleeder": _poolTakenumaBleeder,
