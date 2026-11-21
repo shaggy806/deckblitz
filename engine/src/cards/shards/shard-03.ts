@@ -196,6 +196,7 @@ import _poolDespair from "../pool/despair.js";
 import _poolDestinedLead from "../pool/destined-lead.js";
 import _poolDidgeridoo from "../pool/didgeridoo.js";
 import _poolDigDeep from "../pool/dig-deep.js";
+import _poolDinosaurHeaddress from "../pool/dinosaur-headdress.js";
 import _poolDinosaurStampede from "../pool/dinosaur-stampede.js";
 import _poolDirtyWererat from "../pool/dirty-wererat.js";
 import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolDestinedLead,
     _poolDidgeridoo,
     _poolDigDeep,
+    _poolDinosaurHeaddress,
     _poolDinosaurStampede,
     _poolDirtyWererat,
     _poolDiscipleOfTheOldWays,

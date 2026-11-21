@@ -583,6 +583,7 @@ import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolOverburden from "../pool/overburden.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
 import _poolPainfulMemories from "../pool/painful-memories.js";
+import _poolPaleontologistsPickAxe from "../pool/paleontologists-pick-axe.js";
 import _poolParallelEvolution from "../pool/parallel-evolution.js";
 import _poolParch from "../pool/parch.js";
 import _poolPartWater from "../pool/part-water.js";
@@ -1608,6 +1609,7 @@ const shard: CardShard = {
     _poolOverburden,
     _poolOverlordOfTheBoilerbilges,
     _poolPainfulMemories,
+    _poolPaleontologistsPickAxe,
     _poolParallelEvolution,
     _poolParch,
     _poolPartWater,

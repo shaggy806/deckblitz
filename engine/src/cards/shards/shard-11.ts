@@ -521,6 +521,7 @@ import _poolLeoninIconoclast from "../pool/leonin-iconoclast.js";
 import _poolLeoninSkyhunter from "../pool/leonin-skyhunter.js";
 import _poolLeshracsRite from "../pool/leshracs-rite.js";
 import _poolLeylineOfMutation from "../pool/leyline-of-mutation.js";
+import _poolLiberatedLivestock from "../pool/liberated-livestock.js";
 import _poolLifebaneZombie from "../pool/lifebane-zombie.js";
 import _poolLightTheWay from "../pool/light-the-way.js";
 import _poolLightningSurge from "../pool/lightning-surge.js";
@@ -1586,6 +1587,7 @@ const shard: CardShard = {
     _poolLeoninSkyhunter,
     _poolLeshracsRite,
     _poolLeylineOfMutation,
+    _poolLiberatedLivestock,
     _poolLifebaneZombie,
     _poolLightTheWay,
     _poolLightningSurge,

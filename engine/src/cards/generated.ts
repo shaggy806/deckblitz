@@ -1198,6 +1198,7 @@ import _poolArchaeomender from "./pool/archaeomender.js";
 import _poolArchaicsAgony from "./pool/archaics-agony.js";
 import _poolArchangelAvacyn from "./pool/archangel-avacyn.js";
 import _poolArchangelElspeth from "./pool/archangel-elspeth.js";
+import _poolArchangelOfStrife from "./pool/archangel-of-strife.js";
 import _poolArchangelOfThune from "./pool/archangel-of-thune.js";
 import _poolArchangelOfTithes from "./pool/archangel-of-tithes.js";
 import _poolArchangelOfWrath from "./pool/archangel-of-wrath.js";
@@ -7083,6 +7084,7 @@ import _poolDingusStaff from "./pool/dingus-staff.js";
 import _poolDiningRoom from "./pool/dining-room.js";
 import _poolDinoDna from "./pool/dino-dna.js";
 import _poolDinosaurEgg from "./pool/dinosaur-egg.js";
+import _poolDinosaurHeaddress from "./pool/dinosaur-headdress.js";
 import _poolDinosaurHunter from "./pool/dinosaur-hunter.js";
 import _poolDinosaurStampede from "./pool/dinosaur-stampede.js";
 import _poolDinosaursOnASpaceship from "./pool/dinosaurs-on-a-spaceship.js";
@@ -16073,6 +16075,7 @@ import _poolLiability from "./pool/liability.js";
 import _poolLiarsPendulum from "./pool/liars-pendulum.js";
 import _poolLiberate from "./pool/liberate.js";
 import _poolLiberatedDwarf from "./pool/liberated-dwarf.js";
+import _poolLiberatedLivestock from "./pool/liberated-livestock.js";
 import _poolLiberatingCombustion from "./pool/liberating-combustion.js";
 import _poolLiberatorUrzasBattlethopter from "./pool/liberator-urzas-battlethopter.js";
 import _poolLibertyPrimeRecharged from "./pool/liberty-prime-recharged.js";
@@ -20109,6 +20112,7 @@ import _poolPaleRecluse from "./pool/pale-recluse.js";
 import _poolPaleRiderOfTrostad from "./pool/pale-rider-of-trostad.js";
 import _poolPaleWayfarer from "./pool/pale-wayfarer.js";
 import _poolPaleoloth from "./pool/paleoloth.js";
+import _poolPaleontologistsPickAxe from "./pool/paleontologists-pick-axe.js";
 import _poolPalianoTheHighCity from "./pool/paliano-the-high-city.js";
 import _poolPalianoVanguard from "./pool/paliano-vanguard.js";
 import _poolPalinchron from "./pool/palinchron.js";
@@ -28304,6 +28308,7 @@ import _poolTenebTheHarvester from "./pool/teneb-the-harvester.js";
 import _poolTenementCrasher from "./pool/tenement-crasher.js";
 import _poolTentativeConnection from "./pool/tentative-connection.js";
 import _poolTenthDistrictGuard from "./pool/tenth-district-guard.js";
+import _poolTenthDistrictHero from "./pool/tenth-district-hero.js";
 import _poolTenthDistrictLegionnaire from "./pool/tenth-district-legionnaire.js";
 import _poolTenthDistrictVeteran from "./pool/tenth-district-veteran.js";
 import _poolTenuousTruce from "./pool/tenuous-truce.js";
@@ -34971,6 +34976,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchaicsAgony,
   _poolArchangelAvacyn,
   _poolArchangelElspeth,
+  _poolArchangelOfStrife,
   _poolArchangelOfThune,
   _poolArchangelOfTithes,
   _poolArchangelOfWrath,
@@ -40856,6 +40862,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiningRoom,
   _poolDinoDna,
   _poolDinosaurEgg,
+  _poolDinosaurHeaddress,
   _poolDinosaurHunter,
   _poolDinosaurStampede,
   _poolDinosaursOnASpaceship,
@@ -49846,6 +49853,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLiarsPendulum,
   _poolLiberate,
   _poolLiberatedDwarf,
+  _poolLiberatedLivestock,
   _poolLiberatingCombustion,
   _poolLiberatorUrzasBattlethopter,
   _poolLibertyPrimeRecharged,
@@ -53882,6 +53890,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPaleRiderOfTrostad,
   _poolPaleWayfarer,
   _poolPaleoloth,
+  _poolPaleontologistsPickAxe,
   _poolPalianoTheHighCity,
   _poolPalianoVanguard,
   _poolPalinchron,
@@ -62077,6 +62086,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTenementCrasher,
   _poolTentativeConnection,
   _poolTenthDistrictGuard,
+  _poolTenthDistrictHero,
   _poolTenthDistrictLegionnaire,
   _poolTenthDistrictVeteran,
   _poolTenuousTruce,
@@ -68757,6 +68767,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archaics-agony": _poolArchaicsAgony,
   "pool/archangel-avacyn": _poolArchangelAvacyn,
   "pool/archangel-elspeth": _poolArchangelElspeth,
+  "pool/archangel-of-strife": _poolArchangelOfStrife,
   "pool/archangel-of-thune": _poolArchangelOfThune,
   "pool/archangel-of-tithes": _poolArchangelOfTithes,
   "pool/archangel-of-wrath": _poolArchangelOfWrath,
@@ -74642,6 +74653,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dining-room": _poolDiningRoom,
   "pool/dino-dna": _poolDinoDna,
   "pool/dinosaur-egg": _poolDinosaurEgg,
+  "pool/dinosaur-headdress": _poolDinosaurHeaddress,
   "pool/dinosaur-hunter": _poolDinosaurHunter,
   "pool/dinosaur-stampede": _poolDinosaurStampede,
   "pool/dinosaurs-on-a-spaceship": _poolDinosaursOnASpaceship,
@@ -83632,6 +83644,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/liars-pendulum": _poolLiarsPendulum,
   "pool/liberate": _poolLiberate,
   "pool/liberated-dwarf": _poolLiberatedDwarf,
+  "pool/liberated-livestock": _poolLiberatedLivestock,
   "pool/liberating-combustion": _poolLiberatingCombustion,
   "pool/liberator-urzas-battlethopter": _poolLiberatorUrzasBattlethopter,
   "pool/liberty-prime-recharged": _poolLibertyPrimeRecharged,
@@ -87668,6 +87681,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pale-rider-of-trostad": _poolPaleRiderOfTrostad,
   "pool/pale-wayfarer": _poolPaleWayfarer,
   "pool/paleoloth": _poolPaleoloth,
+  "pool/paleontologists-pick-axe": _poolPaleontologistsPickAxe,
   "pool/paliano-the-high-city": _poolPalianoTheHighCity,
   "pool/paliano-vanguard": _poolPalianoVanguard,
   "pool/palinchron": _poolPalinchron,
@@ -95863,6 +95877,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tenement-crasher": _poolTenementCrasher,
   "pool/tentative-connection": _poolTentativeConnection,
   "pool/tenth-district-guard": _poolTenthDistrictGuard,
+  "pool/tenth-district-hero": _poolTenthDistrictHero,
   "pool/tenth-district-legionnaire": _poolTenthDistrictLegionnaire,
   "pool/tenth-district-veteran": _poolTenthDistrictVeteran,
   "pool/tenuous-truce": _poolTenuousTruce,

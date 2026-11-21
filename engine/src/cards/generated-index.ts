@@ -959,6 +959,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Depraved Harvester": "https://cards.scryfall.io/art_crop/back/0/e/0ec488de-fded-4df9-97ed-ba46cbacfdbf.jpg",
   "Desperate Parry": "https://cards.scryfall.io/art_crop/back/0/0/0001e77a-7fff-49d2-a55c-42f6fdf6db08.jpg",
   "Dig Deep": "https://cards.scryfall.io/art_crop/back/4/f/4fe31ab9-d217-464e-96b1-d8a1ca6ad005.jpg",
+  "Dinosaur Headdress": "https://cards.scryfall.io/art_crop/back/e/0/e08c0cf4-3669-4a9a-aa12-7e8fe0f063ad.jpg",
   "Dire Blunderbuss": "https://cards.scryfall.io/art_crop/back/0/d/0d2d98ae-fe02-4a86-9e80-7b95e08de21c.jpg",
   "Dire-Strain Anarchist": "https://cards.scryfall.io/art_crop/back/8/7/87a02ac1-c43a-43cc-9c2b-628cfdeb4cbf.jpg",
   "Dire-Strain Brawler": "https://cards.scryfall.io/art_crop/back/3/e/3e96f9a6-c215-42b1-aa02-8e6143fe5bd7.jpg",
