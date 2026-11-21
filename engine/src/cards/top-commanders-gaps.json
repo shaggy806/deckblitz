@@ -3127,7 +3127,8 @@
   "effect:exchange-power",
   "effect:effect-target-equipped-creature",
   "effect:fight-by-toughness",
-  "effect:modal-chapter-targeted-modes"
+  "effect:modal-chapter-targeted-modes",
+  "amount:aggregate-sum-unclamped"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

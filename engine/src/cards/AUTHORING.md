@@ -1496,7 +1496,11 @@ aggregate over the set** (§ object sets below): `{ aggregate: "sum", of:
 "power", filter: {}, in: { thisWay: "sacrificed" } }` is Reign of the Pit's "X
 is the total power of the creatures sacrificed this way", each permanent that
 left doing it as it last existed (signed: a -2 counts as -2) and a whole stack
-once per token; `of: "toughness"` is Tip the Scales' "the sacrificed
+once per token. Angrath, Minotaur Pirate's "their total power" after "destroy all
+creatures target opponent controls" is a `{ sum: [...] }` of that over `{ thisWay:
+"destroyed" }` and one over the survivors (`filter: { type: "creature",
+controlledBy: "you" }, forTarget: 0`): both signed, only the whole clamped at 0
+(rule 107.1b). `of: "toughness"` is Tip the Scales' "the sacrificed
 creature's toughness", and Disciple of Bolas's edict ("sacrifice another
 creature … X is that creature's power") the power one after a `sacrifice` with
 `exceptSource`. `of: "mana-value"` adds up mana values — Combustible Gearhulk's
