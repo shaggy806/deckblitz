@@ -1053,6 +1053,12 @@ export interface CardFilter {
    * a protection grant's "creatures **your opponents** control" fixed to the
    * players they were as it resolved (`grant-protection`). */
   readonly controllerIn?: readonly PlayerId[];
+  /** "Creatures controlled by **players who chose war**" (Archangel of
+   * Strife): its controller is a player whose answer, as the filter's source
+   * entered, was this option (`CardDefinition.chooseOnEnterBy: "each-player"`,
+   * the source's `chosenOnEnterBy`) — as the source last was if it has left
+   * (rule 608.2h). Nothing matches with no source or no such answer. */
+  readonly controllerChoseOnEnter?: string;
   /** In a delayed ability's effect: controlled by this player **as the
    * delayed ability is set up**, whoever that is by the time it resolves —
    * Siren's Call's "that player", the active player then, though the next end
@@ -3185,6 +3191,12 @@ export function matchesFilter(
     if (chosen === undefined || controller !== chosen) return false;
   }
   if (filter.controllerIn !== undefined && !filter.controllerIn.includes(controller)) return false;
+  if (filter.controllerChoseOnEnter !== undefined) {
+    const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const answers = from?.zone === "battlefield" ? from.chosenOnEnterBy : from?.lastKnown?.chosenOnEnterBy;
+    const chose = answers?.find((answer) => answer.player === controller)?.option;
+    if (chose !== filter.controllerChoseOnEnter) return false;
+  }
   if (filter.controlledByAsSetUp !== undefined) return false;
   if (
     filter.controllerGraveyardAtLeast !== undefined &&

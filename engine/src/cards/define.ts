@@ -5950,8 +5950,14 @@ export interface CardDefinition {
    * is its controller's pick, asked first among two or more (as an "an
    * opponent chooses" of a resolving effect is — Guided Passage's ruling).
    * Absent for its controller's own choice.
+   *
+   * `"each-player"`: "As this creature enters, **each player** chooses war or
+   * peace" (Archangel of Strife), with a `chooseOnEnter` menu: every player
+   * still in the game chooses, the active player first and then the others in
+   * turn order (rule 101.4), each answer kept as `GameObject.chosenOnEnterBy`
+   * (none as `chosenOnEnter`) and read by `CardFilter.controllerChoseOnEnter`.
    */
-  readonly chooseOnEnterBy?: "an-opponent";
+  readonly chooseOnEnterBy?: "an-opponent" | "each-player";
   /**
    * "As this creature enters, choose 2, 3, or 4 **at random**" (Haktos the
    * Unscarred), with `chooseOnEnter` over the options: nobody is asked — one
@@ -7173,7 +7179,7 @@ interface CardDraft {
   chooseTwoPlayersOnEnter?: true;
   chooseOnEnterCount?: number;
   /** See {@link CardDefinition.chooseOnEnterBy}. */
-  chooseOnEnterBy?: "an-opponent";
+  chooseOnEnterBy?: "an-opponent" | "each-player";
   entersUnderChosenPlayer?: true;
   choosePermanentOnEnter?: PermanentOnEnter;
   loyalty?: number;

@@ -3418,7 +3418,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   (Urza's Incubator), not this; "as this creature enters, **an opponent**
   chooses a creature type" (Callous Oppressor) adds `chooseOnEnterBy:
   "an-opponent"` (a `chooseOnEnter` menu takes it too): the opponent answers,
-  which one its controller's pick among two or more, asked first. `options` and `prompt` choose among a fixed
+  which one its controller's pick among two or more, asked first. "As this creature enters, **each player**
+  chooses war or peace" (Archangel of Strife) is `chooseOnEnter: ["war", "peace"]` with `chooseOnEnterBy:
+  "each-player"`: every player answers, active player first (rule 101.4), kept as `chosenOnEnterBy`; a
+  static reads it with the filter clause `controllerChoseOnEnter: "war"` ("creatures controlled by players
+  who chose war"). `options` and `prompt` choose among a fixed
   list as buttons: "choose a planeswalker type" as it resolves is `options:
   PLANESWALKER_TYPES, prompt: "choose a planeswalker type"` (rule 205.3j —
   Leori, Sparktouched Hunter, whose `then` is a `delayed-trigger` watching

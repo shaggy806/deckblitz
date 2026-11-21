@@ -907,6 +907,11 @@ export interface GameObject {
    * **two** colors" (`CardDefinition.chooseOnEnterCount` — Tablet of the
    * Guilds). Cleared with it. */
   chosenOnEnterAlso?: readonly string[];
+  /** What each player chose as this permanent entered, for "as this enters,
+   * **each player** chooses war or peace" (`CardDefinition.chooseOnEnterBy:
+   * "each-player"` — Archangel of Strife), in the order they chose; read by
+   * `CardFilter.controllerChoseOnEnter`. Cleared with `chosenOnEnter`. */
+  chosenOnEnterBy?: readonly { readonly player: PlayerId; readonly option: string }[];
   /**
    * The card names chosen for this permanent (rule 201.4), oldest first: one
    * chosen as it entered (Pithing Needle, Meddling Mage —
@@ -1050,6 +1055,10 @@ export interface GameObject {
      * chooses a creature type"): its controller's pick, first, among two or
      * more. */
     readonly chooserOf?: PlayerId;
+    /** Each player's answer so far to "as this enters, each player chooses
+     * …" (`CardDefinition.chooseOnEnterBy: "each-player"`), in the order
+     * they chose. */
+    readonly chosenBy?: readonly { readonly player: PlayerId; readonly option: string }[];
     readonly enchant?: ObjectId | null;
     /** The player an "Enchant player" Aura enters attached to — its spell's
      * target, or its controller's choice (303.4f). Answers what `enchant`
@@ -2553,6 +2562,8 @@ export interface LastKnownInfo {
   readonly chosenOnEnter?: string;
   /** `GameObject.chosenOnEnterAlso` as it left. */
   readonly chosenOnEnterAlso?: readonly string[];
+  /** `GameObject.chosenOnEnterBy` as it left. */
+  readonly chosenOnEnterBy?: readonly { readonly player: PlayerId; readonly option: string }[];
   /** `GameObject.chosenNames` as it left — "the chosen name" for an ability
    * of it that resolves after it has gone (rule 608.2h). */
   readonly chosenNames?: readonly string[];
@@ -4652,6 +4663,10 @@ export type AwaitingDecision =
        * (`CardDefinition.chooseOnEnterBy`) — `options` are the opponents,
        * the answer recorded as `enterChoice.chooserOf`. */
       readonly enterChooser?: true;
+      /** One player's answer to "as this enters, **each player** chooses …"
+       * (`CardDefinition.chooseOnEnterBy: "each-player"`) — `player` is that
+       * player, the answer recorded in `enterChoice.chosenBy`. */
+      readonly eachPlayerChooses?: true;
       /** "As this enters, choose a player / an opponent"
        * (`CardDefinition.choosePlayerOnEnter`) — `options` are the players
        * who may be chosen, recorded as `enterChoice.chosenPlayer`. */
@@ -8311,6 +8326,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.controlEndsAtCleanup,
     o.chosenOnEnter ?? null,
     o.chosenOnEnterAlso ?? null,
+    o.chosenOnEnterBy ?? null,
     o.chosenCreatureType ?? null,
     o.chosenNames ?? null,
     o.chosenPlayer ?? null,

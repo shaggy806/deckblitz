@@ -9291,6 +9291,12 @@ export class Game {
         source.enterChoice = { ...source.enterChoice, lookAt: creatureType as PlayerId };
       } else if (awaiting.enterChooser === true) {
         source.enterChoice = { ...source.enterChoice, chooserOf: creatureType as PlayerId };
+      } else if (awaiting.eachPlayerChooses === true) {
+        // One player's answer to "each player chooses" (Archangel of Strife).
+        source.enterChoice = {
+          ...source.enterChoice,
+          chosenBy: [...(source.enterChoice?.chosenBy ?? []), { player: awaiting.player, option: creatureType }],
+        };
       } else if (awaiting.choosePlayer === true && awaiting.secondPlayer === true) {
         source.enterChoice = { ...source.enterChoice, otherChosenPlayer: creatureType as PlayerId };
       } else if (awaiting.choosePlayer === true) {
@@ -17284,6 +17290,9 @@ export class Game {
         readonly prompt?: string;
         readonly look?: true;
         readonly by?: "an-opponent";
+        /** One player's answer to "each player chooses" (`chooseOnEnterBy:
+         * "each-player"`): theirs, whoever it enters under. */
+        readonly answerer?: PlayerId;
       }
     | { readonly kind: "number" }
     | { readonly kind: "flip-form"; readonly heads: string; readonly tails: string }
@@ -17359,7 +17368,23 @@ export class Game {
     }
     if (answered?.chosen === undefined) {
       // "An opponent chooses a creature type" (Callous Oppressor): theirs.
-      const by = becoming.chooseOnEnterBy !== undefined ? { by: becoming.chooseOnEnterBy } : {};
+      const by = becoming.chooseOnEnterBy === "an-opponent" ? { by: becoming.chooseOnEnterBy } : {};
+      // "Each player chooses war or peace" (Archangel of Strife): the active
+      // player first, then the rest in turn order (rule 101.4), each answer
+      // its own; nothing is `chosen` for its controller.
+      const eachPlayer = becoming.chooseOnEnterBy === "each-player" && becoming.chooseOnEnter !== null;
+      if (eachPlayer && becoming.chooseOnEnter.length > 0) {
+        const answeredBy = answered?.chosenBy ?? [];
+        const answerer = this.apnapOrder().find(
+          (p) => this.state.players[p]?.hasLost === false && !answeredBy.some((answer) => answer.player === p),
+        );
+        // Each answer is logged as it's made (`creature-type-chosen`), in
+        // this order, so a later player knows the earlier ones (its ruling).
+        const options = becoming.chooseOnEnter;
+        if (answerer !== undefined) {
+          return { kind: "choose", options, answerer, prompt: `each player chooses ${options.join(" or ")}` };
+        }
+      }
       if (becoming.chooseCreatureTypeOnEnter) {
         const menu = becoming.chooseCreatureTypeMenu;
         return menu === null ? { kind: "choose", ...by } : { kind: "choose", options: menu, ...by };
@@ -17376,8 +17401,9 @@ export class Game {
       }
       // "A card type shared among two exiled cards used to craft it" (Apex
       // Observatory): only those, and with none nothing is chosen.
-      const options =
-        becoming.chooseOnEnter !== null && becoming.chooseOnEnterSharedByExiled === true
+      const options = eachPlayer
+        ? null
+        : becoming.chooseOnEnter !== null && becoming.chooseOnEnterSharedByExiled === true
           ? this.sharedByExiledWith(id, becoming.chooseOnEnter)
           : becoming.chooseOnEnter;
       if (options !== null && options.length > 0) {
@@ -18110,15 +18136,20 @@ export class Game {
         const looked = next.look === true ? this.lookAtOpponentHandOnEnter(id, chooser) : undefined;
         if (looked === "asked") return true;
         // "An opponent chooses" (Callous Oppressor): which one first.
-        const answerer = next.by === "an-opponent" ? this.enterChooserOpponent(id, chooser) : chooser;
+        const answerer =
+          next.answerer ?? (next.by === "an-opponent" ? this.enterChooserOpponent(id, chooser) : chooser);
         if (answerer === "asked") return true;
         this.beginCreatureTypeChoice(id, answerer, next.options);
         const asked = this.state.awaiting as AwaitingDecision | null;
-        if (asked?.kind === "choose-creature-type" && (next.prompt !== undefined || looked !== undefined)) {
+        if (
+          asked?.kind === "choose-creature-type" &&
+          (next.prompt !== undefined || looked !== undefined || next.answerer !== undefined)
+        ) {
           this.state.awaiting = {
             ...asked,
             ...(next.prompt !== undefined ? { prompt: next.prompt } : {}),
             ...(looked !== undefined ? { looked } : {}),
+            ...(next.answerer !== undefined ? { eachPlayerChooses: true as const } : {}),
           };
         }
         return true;
@@ -74175,6 +74206,7 @@ controlledBy,
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
       ...(object.chosenOnEnter != null ? { chosenOnEnter: object.chosenOnEnter } : {}),
       ...(object.chosenOnEnterAlso !== undefined ? { chosenOnEnterAlso: object.chosenOnEnterAlso } : {}),
+      ...(object.chosenOnEnterBy !== undefined ? { chosenOnEnterBy: object.chosenOnEnterBy } : {}),
       ...(object.chosenNames !== undefined ? { chosenNames: [...object.chosenNames] } : {}),
       ...(object.chosenPlayer !== undefined ? { chosenPlayer: object.chosenPlayer } : {}),
       ...(object.otherChosenPlayer !== undefined ? { otherChosenPlayer: object.otherChosenPlayer } : {}),
@@ -75286,6 +75318,7 @@ controlledBy,
     object.chosenCreatureType = null;
     delete object.chosenOnEnter;
     delete object.chosenOnEnterAlso;
+    delete object.chosenOnEnterBy;
     delete object.chosenNames;
     delete object.chosenPlayer;
     delete object.otherChosenPlayer;
@@ -75326,6 +75359,7 @@ controlledBy,
         }
         this.emit({ type: "permanent-copied", object: id, copyOf: enterChoice.copyOf });
       }
+      if (enterChoice.chosenBy !== undefined) object.chosenOnEnterBy = enterChoice.chosenBy;
       if (enterChoice.chosen !== undefined) {
         object.chosenCreatureType = enterChoice.chosen;
         object.chosenOnEnter = enterChoice.chosen;

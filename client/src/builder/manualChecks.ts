@@ -13651,4 +13651,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: {},
     }),
   ),
+  // --- Each player chooses as it enters (2026-11-21) -------------------------
+  preset(
+    'Archangel of Strife: you and Bob each choose war or peace',
+    board({
+      you: { bf: ['Plains*7', 'Grizzly Bears'], hand: ['Archangel of Strife'] },
+      opp: { human: true, bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Archangel of Strife: in a 4-player game, every player chooses in turn',
+    board({
+      you: { bf: ['Plains*7'], hand: ['Archangel of Strife'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Llanowar Elves'] }],
+    }),
+  ),
 ]

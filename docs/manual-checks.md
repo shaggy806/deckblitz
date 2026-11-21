@@ -9011,3 +9011,11 @@ Each board's die comes up 4.
 ### Amazing Spider-Girl: web-slung from the top of the library under Future Sight
 - **Do:** Click Amazing Spider-Girl on top of your library and cast it for its web-slinging cost ({2}{W}), returning Hill Giant.
 - **Expect:** The offers name web-slinging and ask which tapped creature to return, Hill Giant or Grizzly Bears. Hill Giant goes back to your hand and Amazing Spider-Girl enters.
+
+### Archangel of Strife: you and Bob each choose war or peace
+- **Do:** Cast Archangel of Strife and choose war. As Bob, choose peace.
+- **Expect:** You're asked first, "Archangel of Strife — each player chooses war or peace", then Bob is. The Angel is 9/6 and your Grizzly Bears 5/2; Bob's Grizzly Bears are 2/5.
+
+### Archangel of Strife: in a 4-player game, every player chooses in turn
+- **Do:** Cast Archangel of Strife and choose peace.
+- **Expect:** After you, Bob, Carol and Dave are asked in that order, and the History has four "Archangel of Strife chooses …" lines, yours first. The Angel is 6/9; each opponent's creature gets +3/+0 for war or +0/+3 for peace, by what its controller chose.
