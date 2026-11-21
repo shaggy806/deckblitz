@@ -41571,6 +41571,22 @@ export class Game {
     );
   }
 
+  /** `refs` for an ability of `source` whose own costs took nothing — a
+   * permanent's enters trigger — with what its spell's costs took
+   * (`GameObject.enteredPaid`) as its `paid` sets, from the stint it entered
+   * with that spell or as it last existed there: Adipose Offspring's "the
+   * sacrificed creature" is its emerge sacrifice (rule 702.119a). */
+  private withEnteredPaid(source: ObjectId, refs: LastKnownRefs): LastKnownRefs {
+    if (refs.sets?.paid !== undefined) return refs;
+    const own = this.state.objects[source];
+    if (own === undefined || own.kind !== "card") return refs;
+    const stint = refs.source ?? (own.zone === "battlefield" ? (own.zoneChangeCount ?? 0) : undefined);
+    if (stint === undefined) return refs;
+    const entered =
+      own.zone === "battlefield" && (own.zoneChangeCount ?? 0) === stint ? own.enteredPaid : this.lastKnownOfStint(source, stint)?.enteredPaid;
+    return entered === undefined ? refs : { ...refs, sets: { ...refs.sets, paid: entered } };
+  }
+
   private makeResolutionContext(
     source: ObjectId,
     controller: PlayerId,
@@ -41616,7 +41632,7 @@ export class Game {
       readonly castFor?: "printed" | "madness" | "none";
     } = {},
   ): ResolutionContext {
-    const refs = lastKnownRefs;
+    const refs = this.withEnteredPaid(source, lastKnownRefs);
     const createRefs = refs;
     // Where "this way" starts: the resolution under way (every continuation
     // of it reads the same), or — outside one — this context's own start.
@@ -74075,6 +74091,7 @@ controlledBy,
       ...(object.tributeUnpaid === true ? { tributeUnpaid: true as const } : {}),
       ...(object.enteredTimesKicked !== undefined ? { enteredTimesKicked: object.enteredTimesKicked } : {}),
       ...(object.enteredDevoured !== undefined ? { enteredDevoured: object.enteredDevoured } : {}),
+      ...(object.enteredPaid !== undefined ? { enteredPaid: object.enteredPaid } : {}),
       ...(object.enteredKickedWith !== undefined ? { enteredKickedWith: object.enteredKickedWith } : {}),
       ...(object.enteredGiftTo !== undefined ? { enteredGiftTo: object.enteredGiftTo } : {}),
       ...(object.chosenCreatureType != null ? { chosenCreatureType: object.chosenCreatureType } : {}),
@@ -74924,6 +74941,8 @@ controlledBy,
     // And the creatures that convoked it ("for each creature that convoked
     // it" - Ancient Imperiosaur).
     const enteringConvokedBy = resolving ? object.convokedBy : undefined;
+    // And what its costs took ("the sacrificed creature" - Adipose Offspring).
+    const enteringPaid = resolving ? object.lastKnownRefs?.sets?.paid : undefined;
     const enteringPhyrexianLife = resolving ? object.phyrexianPaidWithLife : undefined;
     // Its gift's opponent, the same way (rule 702.174b's "if its gift cost
     // was paid" is an ETB trigger).
@@ -75404,6 +75423,8 @@ controlledBy,
     }
     object.enteredKickedWith = enteringKickedWith;
     object.enteredConvokedBy = enteringConvokedBy;
+    if (enteringPaid !== undefined) object.enteredPaid = enteringPaid;
+    else delete object.enteredPaid;
     object.enteredPhyrexianPaidWithLife = enteringPhyrexianLife;
     delete object.phyrexianPaidWithLife;
     object.enteredGiftTo = enteringGiftTo;

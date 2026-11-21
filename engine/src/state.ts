@@ -248,6 +248,12 @@ export interface GameObject {
    * creature that convoked it" (Ancient Imperiosaur), "each creature that
    * convoked it" (Zephyr Singer). Gone with its next move. */
   enteredConvokedBy?: readonly { readonly object: ObjectId; readonly stint: number }[];
+  /** What its spell's costs took (the spell's `lastKnownRefs.sets.paid`),
+   * carried across the stack-to-battlefield move the way `enteredConvokedBy`
+   * is — what "the sacrificed creature" means in its own triggered abilities
+   * (Adipose Offspring's emerge sacrifice, rule 702.119a). Gone with its next
+   * move. */
+  enteredPaid?: ObjectSets["paid"];
   /** How many Phyrexian mana symbols its caster paid life for, set as the
    * spell is cast (rule 702.150a — compleated). Gone with its next move. */
   phyrexianPaidWithLife?: number;
@@ -2435,6 +2441,9 @@ export interface LastKnownInfo {
   /** `GameObject.enteredDevoured`: "for each creature it devoured" read after
    * it has left. */
   readonly enteredDevoured?: readonly LastKnownInfo[];
+  /** `GameObject.enteredPaid`: "the sacrificed creature" of its spell's cost,
+   * read by its own trigger once it has left. */
+  readonly enteredPaid?: ObjectSets["paid"];
   /** `enteredKickedWith`, so "if it was kicked with its [A] kicker" still
    * answers once it has left. */
   readonly enteredKickedWith?: number;

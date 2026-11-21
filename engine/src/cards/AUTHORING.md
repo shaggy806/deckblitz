@@ -1535,7 +1535,11 @@ creature" is `{ powerOf: { paid: "beheld" } }`; `"returned"`: what an activated 
 `returnToHand` cost returned, as it last existed on the battlefield — Wonderscape Sage's
 "unless that land had a nonbasic land type" is `{ kind: "not", of: { kind: "object-matches",
 object: { paid: "returned" }, filter: { subtypes: NONBASIC_LAND_TYPES } } }`, the list from
-`subtypes.ts`); `"exiled-with-source"`
+`subtypes.ts`). In an ability of a permanent whose own costs took nothing — its enters trigger — `{ paid }`
+is what **its spell's** costs took (`GameObject.enteredPaid`): Adipose Offspring's "X is the sacrificed
+creature's toughness" is `{ toughnessOf: { paid: "sacrificed" } }`, its emerge sacrifice as it last was
+on the battlefield, beside "if this creature's emerge cost was paid", `{ kind: "source", filter: { castVia:
+"emerge" } }`; `"exiled-with-source"`
 (rule 607.2a); `"trigger-batch"`; `{ attachmentsOf: "source" }` ("each Aura and
 Equipment attached to it", as it last existed once it has left); `{ targets:
 [slots] }`; `{ remembered: name }`. Each member is read as it was in the act

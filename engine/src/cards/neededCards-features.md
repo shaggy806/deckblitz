@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### What a permanent's spell sacrificed, read by its own trigger — built 2026-11-21
+
+The key `amount:emerge-sacrificed-creature` (and `condition:self-emerge-paid`, which was there: the entry's `castVia:
+"emerge"`): `GameObject.enteredPaid` carries the spell's `lastKnownRefs.sets.paid` across the move onto the battlefield
+(and into its last-known information), and `Game.withEnteredPaid` gives it to an ability of that permanent whose own
+costs took nothing, so `{ paid: "sacrificed" }` there is the emerge sacrifice as it last was on the battlefield (rule
+702.119a). Adipose Offspring (17950). `test/emerge-sacrificed-creature.test.ts`.
+
 ### Other mana spent only as colorless, and colours off the battlefield — built 2026-11-21
 
 The keys `static:spend-mana-only-as-colorless` and `static:color-cards-outside-battlefield`:
