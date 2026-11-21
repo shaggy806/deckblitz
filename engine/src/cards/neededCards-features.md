@@ -8664,3 +8664,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 
 **Each player chooses as it enters (2026-11-21).** `static:anthem-by-per-player-choice-on-enter`: `CardDefinition.chooseOnEnterBy: "each-player"` over a `chooseOnEnter` menu: every player still in the game answers in APNAP order (101.4) through the `choose-creature-type` decision (`eachPlayerChooses`, recorded in `enterChoice.chosenBy`), kept as `GameObject.chosenOnEnterBy` (and its last-known info, cleared on leaving); the filter clause `CardFilter.controllerChoseOnEnter` reads the source's answer for the matched object's controller. Archangel of Strife. `test/each-player-chooses-on-enter.test.ts`.
+
+**An Aura onto each token created (2026-11-21, found built).** `effect:aura-onto-each-created-token`: a `for-each-permanent` over `{ thisWay: "created" }` (every token the resolution made, a doubled creation's too), each turn a `may` around `return-from-graveyard` `from: "hand-or-graveyard"`, `attachedTo: 0`; only Auras that could enchant that token are offered (303.4i). No engine code. Liberated Livestock. `test/aura-onto-each-created-token.test.ts`.
