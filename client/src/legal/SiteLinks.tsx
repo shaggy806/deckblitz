@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { BUILT_WITH, BUILT_WITH_NOTE, CLAUDE_CODE_URL, FEEDBACK_HREF } from './notice.ts'
+import { BUILT_WITH, BUILT_WITH_NOTE, CLAUDE_CODE_URL, FEEDBACK_EMAIL, FEEDBACK_HREF } from './notice.ts'
 import './legal.css'
 
 /**
@@ -73,10 +73,75 @@ export function SiteLinks() {
           </div>
         ) : null}
       </div>
-      <a className="site-link-btn" href={FEEDBACK_HREF}>
-        Send feedback
-      </a>
+      <FeedbackLink />
     </>
+  )
+}
+
+/**
+ * "Send feedback": a box with the address to copy, and a link that opens a
+ * mail program for whoever has one. Not a bare `mailto:` link, which does
+ * nothing at all on a machine with no mail program set (anyone on webmail):
+ * the user's own first click, on the live site (2026-11-21).
+ */
+function FeedbackLink() {
+  const [open, setOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const boxRef = useRef<HTMLDivElement>(null)
+
+  // Closes on a click anywhere else, or Escape.
+  useEffect(() => {
+    if (!open) return
+    const onDown = (e: PointerEvent) => {
+      if (!boxRef.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('pointerdown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const copy = () => {
+    // The address stays on screen to select by hand where the clipboard is
+    // refused.
+    navigator.clipboard?.writeText(FEEDBACK_EMAIL).then(
+      () => setCopied(true),
+      () => {},
+    )
+  }
+
+  return (
+    <div className="site-link-box" ref={boxRef}>
+      <button
+        type="button"
+        className="site-link-btn"
+        aria-expanded={open}
+        onClick={() => {
+          setOpen((was) => !was)
+          setCopied(false)
+        }}
+      >
+        Send feedback
+      </button>
+      {open ? (
+        <div className="site-link-note" role="dialog" aria-label="Send feedback">
+          <p className="site-link-note-title">Send feedback</p>
+          <p>Found a bug, a card that plays wrong, or something you&apos;d like to see? Write to:</p>
+          <p className="site-link-address">{FEEDBACK_EMAIL}</p>
+          <div className="site-link-actions">
+            <button type="button" onClick={copy}>
+              {copied ? 'Copied' : 'Copy address'}
+            </button>
+            <a href={FEEDBACK_HREF}>Open in my mail app</a>
+          </div>
+        </div>
+      ) : null}
+    </div>
   )
 }
 
