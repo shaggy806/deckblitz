@@ -168,6 +168,22 @@ describe("POST /usage", () => {
     }
   });
 
+  it("notes the country Cloudflare names, never one the page claims", async () => {
+    const log = new UsageLog({ dir: tempDir(), now: () => NOON });
+    const { url, close } = await serve(log);
+    try {
+      const post = (headers: Record<string, string>) =>
+        fetch(url, { method: "POST", body: JSON.stringify({ kind: "view", country: "ZZ" }), headers });
+      await post({ "cf-ipcountry": "ca" });
+      await post({});
+      const events = log.read(1)[0]!.events;
+      expect(events.map((e) => e.country)).toEqual(["CA", undefined]);
+      expect(summarizeUsage(log.read(1)).countries).toEqual([["CA", 1]]);
+    } finally {
+      await close();
+    }
+  });
+
   it("drops the event when usage is off", async () => {
     const { url, close } = await serve(null);
     try {

@@ -293,7 +293,8 @@ curl localhost:4010/usage         # who has used the site, the last 14 days (bel
 
 **Usage** (`server/src/usage.ts`): `/usage` prints a line a day (visitors, new visitors, page
 views, games begun and finished, deck imports, page errors) and then, over the span, the pages
-opened, the sites visitors came from, games by kind and how they ended, the commanders imported,
+opened, the sites visitors came from, their countries (Cloudflare's `CF-IPCountry` header, the one thing
+about a visitor's whereabouts that's kept), games by kind and how they ended, the commanders imported,
 the cards imported that the engine lacks, failed imports, the page's errors, and window sizes.
 `/usage?days=90` for another span, `/usage.json` for scripting. From the dev PC, `npm run usage`
 (`ssh deckblitz curl -s localhost:4010/usage`; for another span run that line yourself with the

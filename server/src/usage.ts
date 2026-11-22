@@ -61,7 +61,17 @@ const MAX_TEXT = 300;
 const MAX_LIST = 60;
 const MAX_LIST_TEXT = 120;
 /** Field names an event can't use: the log's own. */
-const RESERVED = new Set(["t", "v", "kind"]);
+const RESERVED = new Set(["t", "v", "kind", "country"]);
+
+/** The visitor's country as Cloudflare names it on each request it passes
+ * through the tunnel (`CF-IPCountry`: two letters, `XX` when it can't tell,
+ * `T1` for Tor), or `null` with no such header (a local server). It is the
+ * only thing about where someone is that's kept: Cloudflare reads it off the
+ * IP, and the IP itself is never written. */
+export function countryOf(req: IncomingMessage): string | null {
+  const header = req.headers["cf-ipcountry"];
+  return typeof header === "string" && /^[A-Za-z0-9]{2}$/.test(header) ? header.toUpperCase() : null;
+}
 
 /**
  * What a posted body may put in the log: its `kind` if it's one of ours, and
@@ -268,7 +278,11 @@ export function handleUsageRoute(
     const event = cleanEvent(body);
     if (event === null) return;
     const agent = req.headers["user-agent"];
-    log.record(log.visitor(ipOf(req), typeof agent === "string" ? agent : ""), event.kind, event.fields);
+    const country = countryOf(req);
+    log.record(log.visitor(ipOf(req), typeof agent === "string" ? agent : ""), event.kind, {
+      ...event.fields,
+      ...(country !== null ? { country } : {}),
+    });
   });
   return true;
 }
@@ -318,6 +332,8 @@ export interface UsageSummary {
   readonly visitorDays: number;
   readonly pages: readonly [string, number][];
   readonly referrers: readonly [string, number][];
+  /** Visitors by country, each counted once a day. */
+  readonly countries: readonly [string, number][];
   readonly modes: readonly [string, number][];
   readonly outcomes: readonly [string, number][];
   readonly medianGameMinutes: number | null;
@@ -358,6 +374,11 @@ export function summarizeUsage(days: readonly { readonly day: string; readonly e
     visitorDays: days.reduce((sum, { events }) => sum + new Set(events.map((e) => e.v)).size, 0),
     pages: tally(views.map((e) => text(e.page))),
     referrers: tally(views.map((e) => text(e.referrer, "")).filter((r) => r !== "")),
+    countries: tally(
+      days.flatMap(({ events }) => [
+        ...new Map(events.filter((e) => typeof e.country === "string").map((e) => [e.v, text(e.country)])).values(),
+      ]),
+    ),
     modes: tally(of("game-start").map((e) => `${text(e.mode)}, ${num(e.players) ?? "?"} players`)),
     outcomes: tally(ends.map((e) => text(e.outcome))),
     medianGameMinutes: median(ends.map((e) => num(e.minutes)).filter((n): n is number => n !== null)),
@@ -418,6 +439,7 @@ export function renderUsage(summary: UsageSummary, top = 20): string {
   };
   section("PAGES OPENED", summary.pages);
   section("CAME FROM", summary.referrers);
+  section("COUNTRIES (visitors, counted per day)", summary.countries);
   section("GAMES STARTED (each player's report)", summary.modes);
   section("HOW GAMES ENDED (each player's report)", summary.outcomes);
   if (summary.medianGameMinutes !== null || summary.medianGameTurns !== null) {
