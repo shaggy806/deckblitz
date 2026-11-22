@@ -36,8 +36,10 @@ NAMES['0,2'] = '20'
 ;[...'WUBRG'].forEach((c, i) => (NAMES[`${i},4`] = `2${c}`))
 ;[...'WUBRG'].forEach((c, i) => (NAMES[`${i + 5},4`] = `${c}P`))
 Object.assign(NAMES, {
-  '0,5': 'Q',
-  '1,5': 'T',
+  // The sheet has untap first (black, white arrow), then tap (grey, black
+  // arrow). They were named the other way round until 2026-11-21.
+  '0,5': 'T',
+  '1,5': 'Q',
   '2,5': 'INFINITY',
   '3,5': 'HALF',
   '4,5': 'TAP_ALT',
