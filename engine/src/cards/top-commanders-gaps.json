@@ -3184,7 +3184,9 @@
   "static:artifacts-become-equipment",
   "effect:damage-to-attached",
   "effect:damage-to-attached",
-  "static:prohibit-color-of-last-spell-cast"
+  "static:prohibit-color-of-last-spell-cast",
+  "filter:color-count-amount",
+  "filter:transformed"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

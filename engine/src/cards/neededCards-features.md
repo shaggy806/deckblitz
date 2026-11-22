@@ -8737,3 +8737,7 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **An Aura's damage to the creature it enchants (2026-11-22, found built).** `effect:damage-to-attached`: `damage` `target: "attached"` (Earthbind's). No engine code. Tilonalli's Crown, Fatal Attraction. `test/top10000-batch-338a.test.ts`.
 
 **Sharing a color with the last spell cast this turn (2026-11-22).** `static:prohibit-color-of-last-spell-cast`: `CardFilter.sharesColorWithLastSpellCast` (filter.ts `lastSpellCastColors`: the latest `seq` among every player's `spellsCastThisTurnAs`, live on the stack, as cast after). Mana Maze. `test/top10000-batch-338a.test.ts`.
+
+**A color count compared with an amount (2026-11-22).** `filter:color-count-amount`: `CardFilter.colorCount` takes a `NumCompare` beside a number, read after the dynamic operands are bound. Evolving Door (`colorsOf: { paid: "sacrificed" }` plus one). `test/top10000-batch-338a.test.ts`.
+
+**Transformed permanents (2026-11-22).** `filter:transformed`: `CardFilter.transformed` (filter.ts `isTransformedPermanent`, rule 701.27g: a double-faced permanent on the battlefield with its back face up, not melded, merged or face down). Invasion of Pyrulea // Gargantuan Slabhorn. `test/top10000-batch-338a.test.ts`.

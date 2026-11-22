@@ -788,6 +788,9 @@ export function parseTypePhrase(phrase, { cards = false } = {}) {
       continue;
     }
     if (w === "double-faced") filter.doubleFaced = true;
+    // "Other transformed permanents you control" (Gargantuan Slabhorn): rule
+    // 701.27g, a permanent's state, never a card's.
+    else if (w === "transformed" && !cards) filter.transformed = true;
     else if (w === "nontoken") filter.token = false;
     else if (w === "token" || w === "tokens") filter.token = true;
     else if (w === "legendary") filter.supertype = "legendary";
@@ -27504,6 +27507,16 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "creatures-you-control", ...(m[1] ? { excludeSelf: true } : {}) },
       grantKeywords: [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
+      text,
+    };
+  }
+  // "Other transformed permanents you control have trample and ward {2}"
+  // (Gargantuan Slabhorn): rule 701.27g's transformed permanents.
+  if ((m = new RegExp(`^(Other )?transformed permanents you control have ${KW}(?: and ward (\\{\\d+\\}))?\\.$`).exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { transformed: true, controlledBy: "you" }, ...(m[1] ? { excludeSelf: true } : {}) },
+      grantKeywords: [KEYWORDS[m[2].toLowerCase()]],
+      ...(m[3] ? { grantsTriggered: [wardAbility({ mana: m[3] })] } : {}),
       text,
     };
   }

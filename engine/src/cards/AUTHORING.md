@@ -3801,7 +3801,9 @@ xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameWith, sameNameAsTriggerObject, sharesColorWith, ofChosenType, targets, greatestAmongItsController, greatestInZone, couldProduce, couldEnchant }`,
 every present clause ANDed. `colorCount: 2` is "exactly two colors", and "isn't exactly two
 colors" its `not` — colorless, one color, or three or more (Invasion of Ravnica // Guildpact
-Paragon). `couldProduce: "C"` is "a land that could produce {C}" (rule 106.7):
+Paragon). It also takes a `NumCompare`: Evolving Door's "a creature card that's exactly that
+many colors plus one" (that many = the sacrificed creature's) is `colorCount: { op: "eq", n: {
+amount: { sum: [{ colorsOf: { paid: "sacrificed" } }, 1] } } }`. `couldProduce: "C"` is "a land that could produce {C}" (rule 106.7):
 one of the permanent's mana abilities would make that type if it resolved now, replacement
 effects included and whether or not it could be activated, so a tapped land counts — Obsidian
 Charmaw's `countOf: { type: "land", controlledBy: "opponent", couldProduce: "C" }`, Break the
@@ -3886,6 +3888,10 @@ with a land. "If it's a double-faced card, you may transform it" after a put is 
 own, not "enters transformed": a `choose-permanents` over `{ thisWay: "put-onto-battlefield",
 doubleFaced: true }`, `upTo: 1`, `then: { kind: "transform", target: 0 }` (Nick Fury, Agent of
 S.H.I.E.L.D.).
+`transformed: true` is a "transformed permanent" (rule 701.27g): a double-faced permanent on the
+battlefield with its back face up, never melded, merged or face down — Gargantuan Slabhorn's
+"other transformed permanents you control have trample and ward {2}" is a static over
+`{ scope: "filter", filter: { transformed: true, controlledBy: "you" }, excludeSelf: true }`.
 `sameNameAsTriggerObject: true` is the same for the trigger object — the
 Shrines' "where X is the number of cards in all graveyards **with the same name
 as that spell**" (Aven Shrine): `{ countInGraveyard: { sameNameAsTriggerObject:

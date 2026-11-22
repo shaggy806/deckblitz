@@ -144,6 +144,7 @@ export function filterReadsX(filter: CardFilter): boolean {
     readsX(filter.equipmentAttached) ||
     readsX(filter.coloredManaSymbols) ||
     readsX(filter.cardTypeCount) ||
+    readsX(typeof filter.colorCount === "object" ? filter.colorCount : undefined) ||
     (filter.nameDiffersFromEach !== undefined && filterReadsX(filter.nameDiffersFromEach)) ||
     (filter.anyOf ?? []).some(filterReadsX) ||
     (filter.not !== undefined && filterReadsX(filter.not))
@@ -405,8 +406,11 @@ export interface CardFilter {
    * mono-coloured *and* colourless, which is what "nonmulticolored" means.
    * Not expressible as `colors`, which asks for specific ones. */
   readonly multicolored?: boolean;
-  /** Exactly this many colours ("exactly three colors", Threefold Signal). */
-  readonly colorCount?: number;
+  /** Exactly this many colours ("exactly three colors", Threefold Signal), or
+   * a comparison with the number of its colours — Evolving Door's "a
+   * creature card that's exactly that many colors plus one" is `{ op: "eq",
+   * n: { amount: { sum: [{ colorsOf: { paid: "sacrificed" } }, 1] } } }`. */
+  readonly colorCount?: number | NumCompare;
   readonly manaValue?: NumCompare;
   /** The value chosen for its `{X}` (rule 107.3): a spell or ability on the
    * stack's, 0 anywhere else — Banefire's "if X is 5 or more, this spell
@@ -753,6 +757,16 @@ export interface CardFilter {
    * isn't, unless it's a token copy (707.8a), which is made with its faces.
    */
   readonly doubleFaced?: true;
+  /**
+   * A "transformed permanent" (rule 701.27g): a double-faced permanent on the
+   * battlefield with its back face up — Gargantuan Slabhorn's "other
+   * transformed permanents you control". A melded or merged permanent never
+   * is, nor a face-down one (it has no faces, 708.2a), nor one that has
+   * turned back to its front face. The rule's text names any double-faced
+   * permanent, so a modal one with its back face up counts (its 2023 ruling,
+   * from before modal ones could transform, said otherwise).
+   */
+  readonly transformed?: true;
   /** `sameNameAsTarget` / `sameNameAsTriggerObject` bound — written by `bindDynamicCompares`, never
    * authored: the target itself, and the name it has (`null` for none — a
    * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
@@ -2253,6 +2267,20 @@ function damagingStint(
 }
 
 /**
+ * Is it a transformed permanent (rule 701.27g, `CardFilter.transformed`): a
+ * double-faced card or token (712.1, not an adventurer, Omen, split or flip
+ * card) on the battlefield with its back face up, not melded, merged or face
+ * down.
+ */
+export function isTransformedPermanent(registry: CardRegistry, object: GameObject | undefined): boolean {
+  if (object === undefined || object.zone !== "battlefield") return false;
+  if ((object.face ?? 0) !== 1 || object.faces === undefined || object.faces.length < 2) return false;
+  if (object.faceDown !== undefined || object.melded !== undefined || object.merged !== undefined) return false;
+  const front = registry.has(object.faces[0]) ? registry.get(object.faces[0]) : undefined;
+  return front !== undefined && !front.adventure && !front.omen && !front.split && !front.flip;
+}
+
+/**
  * The colors of the spell most recently cast this turn by any player
  * (`CardFilter.sharesColorWithLastSpellCast`): the latest `seq` among every
  * player's `spellsCastThisTurnAs`, read live while that spell is still the
@@ -2759,6 +2787,7 @@ export function matchesFilter(
         (registry.has(card.cardName) && registry.get(card.cardName).meldCard));
     if (!isOne) return false;
   }
+  if (filter.transformed === true && !isTransformedPermanent(registry, live)) return false;
   if (filter.sameNameAsSource !== undefined) {
     const applying = filter.appliedBy ?? ctx.source;
     const from = applying === undefined ? undefined : state.objects[applying];
@@ -2884,7 +2913,7 @@ export function matchesFilter(
     if (filter.multicolored !== undefined && colors.size >= 2 !== filter.multicolored) {
       return false;
     }
-    if (filter.colorCount !== undefined && colors.size !== filter.colorCount) return false;
+    if (typeof filter.colorCount === "number" && colors.size !== filter.colorCount) return false;
     if (filter.onlyColorItsControllerChose !== undefined) {
       const controller = live !== undefined ? live.controller : lki!.controller;
       const vote = votesThisWay(state).find((v) => v.voter === controller && "option" in v.choice);
@@ -3155,6 +3184,10 @@ export function matchesFilter(
   }
   if (filter.manaValue !== undefined) {
     if (!compareNum(manaValueNow(), filter.manaValue, ctx.x, dynamic)) return false;
+  }
+  if (typeof filter.colorCount === "object") {
+    const colorCount = live !== undefined ? effectiveColors(state, registry, live).size : lki!.colors.length;
+    if (!compareNum(colorCount, filter.colorCount, ctx.x, dynamic)) return false;
   }
   if (filter.xValue !== undefined) {
     const chosen = live !== undefined && live.zone === "stack" ? (live.xValue ?? 0) : 0;

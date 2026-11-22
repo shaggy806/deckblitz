@@ -25124,3 +25124,21 @@ describe("a cast prohibition by the last spell's colors", () => {
     ]);
   });
 });
+
+describe("transformed permanents", () => {
+  it("reads Gargantuan Slabhorn's \"other transformed permanents you control have trample and ward {2}\"", () => {
+    const slabhorn = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Beast",
+      oracle_text: "Other transformed permanents you control have trample and ward {2}.",
+    });
+    expect(slabhorn.complete).toBe(true);
+    expect(slabhorn.static[0].affects).toEqual({
+      scope: "filter",
+      filter: { transformed: true, controlledBy: "you" },
+      excludeSelf: true,
+    });
+    expect(slabhorn.static[0].grantKeywords).toEqual(["trample"]);
+    expect(slabhorn.static[0].grantsTriggered[0].effect).toEqual({ kind: "ward", cost: { mana: "{2}" } });
+  });
+});
