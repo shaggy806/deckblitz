@@ -324,6 +324,25 @@ somebody closed a tab mid-game. `created since start` distinguishes a genuinely 
 from one that restarted five minutes ago, which is the first thing worth knowing after an
 incident.
 
+### Played games (`games/`)
+
+Every game is kept so a reported play can be looked at afterwards (`server/src/game-record.ts`,
+`game-store.ts`): how it was dealt and every input made to it, one gzipped JSON file a game in
+`/opt/mtg-engine/games/<UTC day>/<room>-<game>-<seed>.json.gz` (git-ignored, outside the `dist`
+folders, so a deploy leaves it alone). A game a browser plays alone is posted by the page as it ends
+(`POST /games` on the public port: at most 4 MB a post, 40 an hour an address); a game at a table is
+written from the server's own log when the table is forgotten. A record names nobody: decks, plays,
+the commit it was played on and the country the post came from. A game is 20-50 KB; the folder stops
+at 1 GB, the oldest files going first. `Environment=GAMES_DIR=…` moves it, `GAMES_MAX_MB=…` sizes
+it, `GAMES=0` turns it off.
+
+From the dev PC: `npm run games:pull` copies them into `games/` there and deletes them on the box
+(`-- --keep` leaves them, `-- --list` only counts); `npm run game:replay -- games/<day>/<file>`
+plays one again (`--log` writes the whole game as text, `--turn N` stops there and saves the
+position, `--bots` lists the bot moves that weren't a finished search). A record plays exactly only
+on the commit it names: the replay says so when this checkout isn't it and the game comes out
+different.
+
 ### Why it is a second listener, and not a route on :4000
 
 **A room code is a join credential** — anyone who knows one can walk into that game. Port 4000 is

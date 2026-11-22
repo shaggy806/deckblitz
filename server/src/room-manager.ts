@@ -143,6 +143,7 @@ export class RoomManager {
       botSpeed: pending.botSpeed,
       firstPlayerChosen: pending.settings.firstPlayer !== "random",
       recipe: { config, firstPlayer: pending.settings.firstPlayer },
+      dealt: config,
       ...this.sharedOptions(),
     });
     for (const claim of pending.claims()) {
@@ -190,14 +191,14 @@ export class RoomManager {
 
     const recipe: GameRecipe = old.recipe;
     const players = recipe.config.decks.map((d) => d.player);
-    const game = Game.create({
+    const dealt = {
       ...recipe.config,
-      registry: cardRegistry(),
       seed: Math.floor(Math.random() * 0x100000000),
       idSalt: freshIdSalt(),
       startingPlayer:
         recipe.firstPlayer === "random" ? players[Math.floor(Math.random() * players.length)] : recipe.firstPlayer,
-    });
+    };
+    const game = Game.create({ ...dealt, registry: cardRegistry() });
     old.dispose();
     const room = new Room(id, game, {
       onUpdate: (r) => this.onRoomUpdate(r),
@@ -205,6 +206,7 @@ export class RoomManager {
       botSpeed: old.botSpeed,
       firstPlayerChosen: old.firstPlayerChosen,
       recipe,
+      dealt,
       gameNumber: old.gameNumber + 1,
       startSeq: old.frameSeq,
       ...this.sharedOptions(),

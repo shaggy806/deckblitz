@@ -44,6 +44,7 @@ export interface InProcessHostOptions extends RoomServerOptions {
 export function createInProcessHost(
   settings: Omit<ShardConfig, "index" | "importJobs" | "loadReportMs">,
   admission: AdmissionLimits = {},
+  tables?: TablesOptions,
 ): InProcessRoomHost {
   const { registry, manager } = roomsFor(settings);
   return new InProcessRoomHost(manager, {
@@ -52,6 +53,7 @@ export function createInProcessHost(
     ...(settings.reapIntervalMs !== undefined ? { reapIntervalMs: settings.reapIntervalMs } : {}),
     importDeps: importDeps(registry),
     admission,
+    ...(tables !== undefined ? { tables } : {}),
   });
 }
 

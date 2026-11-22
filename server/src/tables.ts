@@ -30,6 +30,7 @@ import { randomBytes } from "node:crypto";
 import type { PlayerId } from "engine";
 import type { ClientMessage, ServerMessage, TableEntry, TableRecipe } from "protocol";
 
+import type { GameRecord } from "./game-record.js";
 import type { ConnId } from "./room-host.js";
 
 /** A person at a table as the waiting room hands them over. */
@@ -73,6 +74,13 @@ export interface TablesOptions {
   /** How long a device asked for its state has to answer before the next is
    * asked (or the whole log is sent). 3 s unless given. */
   readonly stateWaitMs?: number;
+  /**
+   * Keep each table's game as it goes (`game-record.ts`, `game-store.ts`):
+   * handed the record when the table is forgotten or dealt a rematch, with
+   * `build` as the commit it says it was played on (the server's own: the
+   * devices at a table run one build, which a deploy keeps in step with it).
+   */
+  readonly keep?: { readonly build: string | null; readonly record: (record: GameRecord) => void };
   /** For tests: the clock the grace and the wait for a state run on. */
   readonly timers?: {
     readonly setTimeout: (fn: () => void, ms: number) => unknown;
@@ -118,8 +126,14 @@ interface Seat {
   conn: ConnId | null;
 }
 
+/** A table whose log is shorter than this was left before its game began:
+ * not kept (`game-record.ts`'s `MIN_RECORDED_INPUTS`). */
+const MIN_KEPT_INPUTS = 12;
+
 interface Table {
   readonly id: string;
+  /** When this game was dealt (a rematch deals another). */
+  startedAt: number;
   recipe: TableRecipe;
   log: TableEntry[];
   readonly seats: Map<PlayerId, Seat>;
@@ -144,12 +158,14 @@ export class Tables {
   private readonly stateWaitMs: number;
   private readonly timers: NonNullable<TablesOptions["timers"]>;
   private readonly onRemoved: (id: string) => void;
+  private readonly keep: TablesOptions["keep"] | null;
 
   constructor(send: (conn: ConnId, message: ServerMessage) => void, options: TablesOptions = {}) {
     this.send = send;
     this.hostGraceMs = options.hostGraceMs ?? HOST_GRACE_MS;
     this.stateWaitMs = options.stateWaitMs ?? STATE_WAIT_MS;
     this.onRemoved = options.onRemoved ?? (() => {});
+    this.keep = options.keep ?? null;
     this.timers = options.timers ?? {
       setTimeout: (fn, ms) => {
         const handle = setTimeout(fn, ms);
@@ -174,6 +190,7 @@ export class Tables {
   open(opening: TableOpening): void {
     const table: Table = {
       id: opening.id,
+      startedAt: Date.now(),
       recipe: opening.recipe,
       log: [],
       seats: new Map(opening.people.map((p) => [p.player, { token: p.token, conn: p.conn }])),
@@ -269,10 +286,44 @@ export class Tables {
     const table = this.tables.get(id);
     if (table === undefined) return false;
     if (table.hostTimer !== null) this.timers.clearTimeout(table.hostTimer);
+    this.keepRecord(table);
     this.cancelRequests(table);
     this.tables.delete(id);
     this.onRemoved(id);
     return true;
+  }
+
+  /**
+   * The table's game so far as a record (`game-record.ts`): its recipe's
+   * config and the log, in order. There is no game here, so the record says
+   * neither how it ended nor what it came to (`end`'s nulls), and each
+   * input's `by` is read off the recipe: a bot seat's action is the bot's. A
+   * seat handed to a bot mid-game still reads as its person's. Never throws.
+   */
+  private keepRecord(table: Table): void {
+    if (this.keep === null || this.keep === undefined || table.log.length < MIN_KEPT_INPUTS) return;
+    try {
+      const bots = new Set(table.recipe.seats.filter((s) => s.bot).map((s) => s.player));
+      const now = Date.now();
+      this.keep.record({
+        version: 1,
+        build: this.keep.build,
+        where: "table",
+        roomId: table.id,
+        gameNumber: table.recipe.gameNumber,
+        config: table.recipe.config,
+        startedAt: table.startedAt,
+        endedAt: now,
+        seats: table.recipe.seats.map((s) => ({ player: s.player, name: s.name, bot: s.bot })),
+        inputs: table.log.map(({ input }) => ({
+          input,
+          by: input.kind === "action" && bots.has((input.action as { player: PlayerId }).player) ? ("bot" as const) : ("person" as const),
+        })),
+        end: { reason: "closed", winner: null, turn: null, events: null, digest: null },
+      });
+    } catch (error) {
+      console.error(`table ${table.id}: couldn't keep the game's record`, error);
+    }
   }
 
   summaries(): TableSummary[] {
@@ -563,6 +614,7 @@ export class Tables {
       this.send(conn, { type: "error", message: "only the host can start a rematch" });
       return;
     }
+    this.keepRecord(table);
     const { recipe } = table;
     const people = recipe.seats.map((s) => s.player);
     table.recipe = {
@@ -579,6 +631,7 @@ export class Tables {
       },
     };
     table.log = [];
+    table.startedAt = Date.now();
     // A new game: nothing of the old one's is compared or waited for.
     table.digests.clear();
     this.cancelRequests(table);

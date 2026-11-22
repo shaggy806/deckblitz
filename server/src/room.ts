@@ -31,7 +31,6 @@
 import {
   EvalBotController,
   Game,
-  HeuristicBotController,
   LIVE_BOT_BUDGET_MS,
   actionPlayer,
   activePlayerOf,
@@ -42,6 +41,8 @@ import {
 import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZoneChoice, playersControlledBy, stackCopyKey, standInFor, wouldAffectPlayer } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
+import { GameRecorder, concession as concede } from "./game-record.js";
+import type { DealtConfig, GameRecordSink, RecordSoFar } from "./game-record.js";
 import type {
   Action,
   AwaitingDecision,
@@ -225,6 +226,19 @@ let decisionRecorder: DecisionRecorder | null = null;
 export function recordBotDecisionsTo(recorder: DecisionRecorder | null): void {
   decisionRecorder = recorder;
 }
+
+/**
+ * Where this thread's rooms hand each game's record when it ends
+ * (`game-record.ts`), or `null`: none is kept. Set by the host, like the
+ * decision recorder above: the browser's room worker posts a record to the
+ * room server, and a server's own rooms write theirs to its store.
+ */
+let gameRecords: GameRecordSink | null = null;
+
+/** Hand this thread's finished game records to `sink` (`null`: keep none). */
+export function recordGamesTo(sink: GameRecordSink | null): void {
+  gameRecords = sink;
+}
 /**
  * The host's bot speed, as a pause *after* every client has finished showing
  * a bot's move and before the next one. On top of the animation wait rather
@@ -298,10 +312,6 @@ const COMBAT_STEPS: ReadonlySet<Step> = new Set<Step>([
  * its last restart (rule 727: turn 1 again). */
 const stepKey = (state: GameState): string => `${state.restarts ?? 0}:${state.turn.number}:${state.turn.step}`;
 
-/** How many decisions in a row a conceding player's stand-in bot answers
- * before giving up — a backstop against a decision loop, never reached by
- * a real one. */
-const CONCEDE_DECISION_LIMIT = 100;
 const MAX_DISPLAY_NAME_LENGTH = 20;
 
 /** Swappable so tests can run a room's bot pacing on a fake clock. */
@@ -313,20 +323,7 @@ const MAX_DISPLAY_NAME_LENGTH = 20;
  * conceded: not during the opening hands, not twice, not a game that is over,
  * and not while they still owe a decision past the limit.
  */
-function concession(game: Game, player: PlayerId): boolean {
-  const owes = (): boolean => {
-    const awaiting = game.state.awaiting;
-    return awaiting !== null && awaiting.kind !== "mulligan" && awaiting.player === player;
-  };
-  if (!owes() && game.whyCannotConcede(player) !== null) return false;
-  const stand = new HeuristicBotController(player, cardRegistry());
-  for (let i = 0; i < CONCEDE_DECISION_LIMIT && owes(); i += 1) {
-    game.dispatch(stand.act(game.controllerView(player)));
-  }
-  if (game.whyCannotConcede(player) !== null) return false;
-  game.concede(player);
-  return true;
-}
+const concession = (game: Game, player: PlayerId): boolean => concede(game, player, cardRegistry());
 
 export interface RoomTimers {
   readonly setTimeout: (fn: () => void, ms: number) => unknown;
@@ -496,6 +493,14 @@ export interface RoomOptions {
    * way — see `GameRecipe`. Absent (a scenario builder's room, or one a
    * script built by hand) means the room can't be rematched. */
   readonly recipe?: GameRecipe;
+  /**
+   * How this room's game was dealt (the config `Game.create` took, less the
+   * registry), or a saved game's record so far: the room then keeps a record
+   * of the game (`game-record.ts`) where the host set somewhere for it to go
+   * (`recordGamesTo`). Never in a copy, whose table keeps the order, nor a
+   * frozen room.
+   */
+  readonly dealt?: DealtConfig | RecordSoFar;
   /** Which game this is under the room's code: 1 for the first, one more for
    * each rematch. Said on every frame, so a client knows a new game from a
    * later frame of the old one. */
@@ -679,6 +684,12 @@ export class Room {
   readonly recipe: GameRecipe | null;
   /** See `RoomOptions.gameNumber`. */
   readonly gameNumber: number;
+  /** This game's record as it is played (`RoomOptions.dealt`), or `null`. */
+  private readonly recorder: GameRecorder | null;
+  /** The audit of the bot decision being dispatched, for its record entry;
+   * `undefined` while the move in hand isn't a bot's. */
+  private botMove: DecisionAudit | null | undefined = undefined;
+  private lastAudit: DecisionAudit | null = null;
 
   constructor(id: string, game: Game, options: RoomOptions = {}) {
     this.id = id;
@@ -688,6 +699,10 @@ export class Room {
     this.seq = options.startSeq ?? 0;
     this.recipe = options.recipe ?? null;
     this.gameNumber = options.gameNumber ?? 1;
+    this.recorder =
+      gameRecords !== null && options.dealt !== undefined && this.copy === null && !this.frozen
+        ? new GameRecorder(options.dealt)
+        : null;
     this.host = options.host ?? new HostRole(null);
     this.botSpeed = options.botSpeed ?? "normal";
     this.firstPlayerChosen = options.firstPlayerChosen === true;
@@ -781,6 +796,12 @@ export class Room {
   private act(input: RoomInput, by: "person" | "room" = "room"): void {
     if (this.copy === null) {
       this.applyInput(input);
+      // Only once the game took it: a refused input threw above.
+      if (this.botMove !== undefined) this.recorder?.note(input, "bot", this.botMove);
+      else this.recorder?.note(input, by);
+      if (this.recorder !== null && gameRecords?.asItGoes !== undefined && this.recorder.unsent >= gameRecords.asItGoes) {
+        this.handOverRecord("so-far");
+      }
       return;
     }
     // Made out of turn: anything but an action, and an action while the
@@ -837,6 +858,38 @@ export class Room {
     this.settle();
     // What `RoomCopy.quiet` held back, if settling had nothing new to show.
     if (this.unpublished && this.stopped === null) this.publish();
+  }
+
+  /** This game's record so far, for a saved game to carry across a reload
+   * (`SavedLocalRoom.record`), or `null` where none is kept. */
+  recordSoFar(): RecordSoFar | null {
+    return this.recorder?.soFar() ?? null;
+  }
+
+  /** Hands over the record as it stands, the game still going: a host calls
+   * it where it may be the last it hears of the game (a browser's page
+   * leaving, a saved game seated again). Nothing if nothing is new. */
+  handOverRecordSoFar(): void {
+    this.handOverRecord(this.game.state.result.over ? "over" : "so-far");
+  }
+
+  /** Hands the game's record to the host's sink: as the game ends, as its
+   * room goes with the game unfinished, or as it goes (`asItGoes`). Nothing
+   * if the sink already has all of it. Never throws into the room. */
+  private handOverRecord(reason: "over" | "left" | "so-far"): void {
+    if (this.recorder === null || gameRecords === null) return;
+    try {
+      const record = this.recorder.finish(this.game, reason, {
+        build: gameRecords.build,
+        where: gameRecords.where,
+        roomId: this.id,
+        gameNumber: this.gameNumber,
+        seats: this.seatStatuses().map((s) => ({ player: s.player, name: s.displayName ?? null, bot: this.bots.has(s.player) })),
+      });
+      if (record !== null) gameRecords.deliver(record);
+    } catch (error) {
+      console.error(`room ${this.id}: couldn't hand over the game's record`, error);
+    }
   }
 
   /** Whether this room is one copy of a game other devices hold too. */
@@ -1661,6 +1714,7 @@ export class Room {
       this.captures?.record(seat, captured, action, { audit, trace: this.searchTrace });
     }
     this.searchTrace = [];
+    this.lastAudit = audit;
     return action;
   }
 
@@ -1683,6 +1737,8 @@ export class Room {
   private dispatchBotMove(seat: PlayerId, move: Action): void {
     const eventsBefore = this.game.events.length;
     const seqBefore = this.game.state.eventSeq;
+    this.botMove = this.lastAudit;
+    this.lastAudit = null;
     try {
       this.act({ kind: "action", action: move });
     } catch (error) {
@@ -1695,7 +1751,11 @@ export class Room {
       const fallback = this.fallbackMove(seat);
       // The same move again would only be refused again.
       if (JSON.stringify(fallback) === JSON.stringify(move)) throw error;
+      // The stand-in's answer, not the search's.
+      this.botMove = null;
       this.act({ kind: "action", action: fallback });
+    } finally {
+      this.botMove = undefined;
     }
     this.lastActivityAt = Date.now();
   }
@@ -2181,6 +2241,7 @@ export class Room {
       return;
     }
     this.unpublished = false;
+    if (this.game.state.result.over) this.handOverRecord("over");
     this.onPublish?.(this);
     this.seq += 1;
     this.markShown();
@@ -2303,6 +2364,7 @@ export class Room {
   /** Drops any parked bot move and its timers — for a room being reaped, so
    * nothing keeps firing against a game nobody is watching. */
   dispose(): void {
+    this.handOverRecord("left");
     this.cancelResume();
     const gate = this.gate;
     if (gate === null) return;

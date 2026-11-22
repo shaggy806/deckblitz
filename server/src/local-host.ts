@@ -23,6 +23,7 @@ import type { BotSpeed, ClientMessage, ServerMessage } from "protocol";
 import { cardRegistry } from "./card-registry.js";
 import { Room } from "./room.js";
 import type { GameRecipe } from "./room.js";
+import type { RecordSoFar } from "./game-record.js";
 import { RoomManager } from "./room-manager.js";
 import type { ConnId } from "./room-host.js";
 import { RoomService } from "./room-service.js";
@@ -46,6 +47,9 @@ export interface SavedLocalRoom {
   readonly firstPlayerChosen: boolean;
   readonly bots: readonly { readonly player: PlayerId; readonly displayName: string | null }[];
   readonly humans: readonly { readonly player: PlayerId; readonly clientToken: string; readonly displayName: string | null }[];
+  /** The game's record so far (`game-record.ts`), so a reload doesn't cut it
+   * in two. Absent in a save from before records, or where none is kept. */
+  readonly record?: RecordSoFar | null;
 }
 
 /** The page: the one connection a local host has. */
@@ -278,11 +282,22 @@ export class LocalRoomHost {
   /** One message from the page. A create needs no code from here: the
    * manager allocates one, there being no other host to route by it. */
   message(message: ClientMessage): void {
+    // The page walking away from a game may be the last this hears of it.
+    if (message.type === "leave-room") this.handOverRecords(message.roomId);
     this.service.handle(PAGE, message);
+  }
+
+  /** Each game's record as it stands, to wherever records go
+   * (`recordGamesTo`): one room's, or every room's. */
+  private handOverRecords(roomId?: string): void {
+    for (const room of this.service.manager.all()) {
+      if (room instanceof Room && (roomId === undefined || room.id === roomId)) room.handOverRecordSoFar();
+    }
   }
 
   /** The page went away (or reconnected): what a closed socket does. */
   close(): void {
+    this.handOverRecords();
     this.service.close(PAGE);
   }
 
@@ -316,6 +331,7 @@ export class LocalRoomHost {
         firstPlayerChosen: room.firstPlayerChosen,
         bots: room.botSeats(),
         humans: room.humanClaims().map(({ player, clientToken, displayName }) => ({ player, clientToken, displayName })),
+        record: room.recordSoFar(),
       });
     }
     return out;
@@ -339,12 +355,16 @@ export class LocalRoomHost {
           botSpeed: s.botSpeed,
           firstPlayerChosen: s.firstPlayerChosen,
           ...(s.recipe !== null ? { recipe: s.recipe } : {}),
+          ...(s.record != null ? { dealt: s.record } : {}),
         });
         for (const human of s.humans) room.reserveSeat(human.player, human.clientToken, human.displayName);
         manager.adopt(room);
         // As a rematch seats them: bots last, once every human is bound.
         for (const { player, displayName } of s.bots) room.addBot(player, undefined, displayName ?? undefined);
         room.start();
+        // A game picked up after a reload: whatever of it was never handed
+        // over (the tab closed mid-game) goes now.
+        room.handOverRecordSoFar();
         restored.push(s.id);
       } catch (error) {
         console.error(`local rooms: couldn't restore ${s.id}`, error);

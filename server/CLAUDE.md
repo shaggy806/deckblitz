@@ -86,6 +86,11 @@ that file.
   the hosts.
 - **The wire protocol lives in the `protocol/` workspace**, imported as types by both server
   and client. Change it there, never restate it here.
+- **A room keeps a record of its game** where its host set a sink (`recordGamesTo`; `game-record.ts`,
+  `game-store.ts`): the deal and every input the game took, noted in `Room.act` after `applyInput`. So
+  the "only through `Room.act`" rule has a second reason: anything written to the game outside an
+  input is missing from the record, which then no longer plays again to the same game. A replay
+  applies inputs exactly as `applyInput` does (`replayRecord`); change one and change the other.
 - **Security-relevant:** printings are accepted only as a bare Scryfall card id
   (`assertPrintingsAreSafe`, since they become `<img src>` in every seat's browser). The
   `/status` endpoint runs on a **separate loopback-only port** (4010) on purpose: the game port

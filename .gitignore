@@ -35,6 +35,9 @@ scratch-*
 client/test-results/
 client/playwright-report/
 
+# Played games' records (server/src/game-store.ts; `npm run games:pull` fetches the live site's here)
+games/
+
 # Scryfall bulk-data downloads (engine/scripts/gen-oracle.mjs)
 engine/.cache/
 

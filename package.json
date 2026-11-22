@@ -16,7 +16,9 @@
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "verify": "node scripts/verify.mjs",
-    "usage": "ssh deckblitz curl -s localhost:4010/usage"
+    "usage": "ssh deckblitz curl -s localhost:4010/usage",
+    "games:pull": "node scripts/games-pull.mjs",
+    "game:replay": "node scripts/game-replay.mjs"
   },
   "repository": {
     "type": "git",

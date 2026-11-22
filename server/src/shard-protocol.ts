@@ -32,6 +32,10 @@ export interface ShardConfig {
   /** Runs `/import-deck` jobs: shard 0 only, so the Scryfall throttle and
    * caches stay single copies. */
   readonly importJobs: boolean;
+  /** Keep a record of each game a room here plays (`game-store.ts`): where,
+   * the build to say it was played on, and how much the folder may hold.
+   * Absent or `null`: none kept. */
+  readonly games?: { readonly dir: string; readonly build: string | null; readonly maxBytes?: number } | null;
   /** `RoomOptions.pacing` for every room (tests drive games `"immediate"`). */
   readonly pacing?: "realtime" | "immediate";
   /** Tests only: a room message `{type: "__crash", roomId}` throws out of

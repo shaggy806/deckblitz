@@ -30,10 +30,11 @@
 import { CARD_SHARD_COUNT, loadCardShard, registryFrom } from 'engine/local'
 import type { ClientMessage, ServerMessage } from 'protocol'
 import { provideCardRegistry } from 'server/dist/card-registry.js'
+import { HAND_OVER_EVERY } from 'server/dist/game-record.js'
 import { LocalRoomHost } from 'server/dist/local-host.js'
 import { tableCosts } from 'server/dist/table-copy.js'
 import type { TableStart } from 'server/dist/table-copy.js'
-import { recordBotDecisionsTo } from 'server/dist/room.js'
+import { recordBotDecisionsTo, recordGamesTo } from 'server/dist/room.js'
 import type { FromRoomWorker, LocalStats, ToRoomWorker } from './localSocket.ts'
 import { loadSavedRooms, saveRooms } from './savedRooms.ts'
 
@@ -55,6 +56,30 @@ recordBotDecisionsTo({
   record: (micros) => {
     decisionsMs.push(micros / 1000)
     if (decisionsMs.length > 5000) decisionsMs.shift()
+  },
+})
+
+/**
+ * Each game played here is kept as how it was dealt and what was done to it
+ * (the server's `game-record.ts`) and posted to the room server as it ends,
+ * or as its room goes: a solo game runs in this tab, so the server has
+ * nothing of it otherwise, and a bot's play someone reports can then be
+ * looked at. Sent blind, like a usage event (`usage.ts`): a text body, so no
+ * preflight, nothing read back, a failure nobody's problem. No name, address
+ * or id goes with it; the About page says games are kept.
+ */
+const gamesUrl = (): string =>
+  `${((import.meta.env.VITE_SERVER_URL as string | undefined) ?? `ws://${self.location.hostname}:4000`).replace(/^ws/, 'http')}/games`
+recordGamesTo({
+  build: __PAGE_COMMIT__,
+  where: 'browser',
+  asItGoes: HAND_OVER_EVERY,
+  deliver: (record) => {
+    try {
+      void fetch(gamesUrl(), { method: 'POST', body: JSON.stringify(record), mode: 'no-cors' }).catch(() => {})
+    } catch {
+      // Not worth a player's notice.
+    }
   },
 })
 

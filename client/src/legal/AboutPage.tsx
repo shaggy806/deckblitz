@@ -128,7 +128,9 @@ export function AboutPage() {
           {SITE_TITLE} counts visits, games and deck imports, and notes errors the page runs into, so its maker can
           see what gets used and what breaks. The counts are anonymous: no cookies, no accounts, no advertising or
           third-party trackers, and no IP address is stored, only the country a visit came from. An imported list is never kept, only its commander and
-          the names of cards the site doesn&apos;t have yet. Your decks and settings stay in your browser.
+          the names of cards the site doesn&apos;t have yet. A finished game is kept for a while (the decks in it and the
+          plays made, with nothing saying who played) so that a mistake by a bot or the rules can be found and fixed.
+          Your saved decks and settings stay in your browser.
         </p>
       </section>
 

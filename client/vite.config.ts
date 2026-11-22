@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import type { IncomingMessage } from 'node:http'
 import { fileURLToPath } from 'node:url'
@@ -177,9 +178,21 @@ const buildAsap = (): Plugin => ({
  * their copies must run the same engine and cards. */
 const PAGE_BUILD = Date.now().toString(36)
 
+/** The commit this page is built from, which a game's record says it was
+ * played on (`src/local/room-worker.ts`, the server's `game-record.ts`):
+ * CI's `GITHUB_SHA`, else what the checkout says, else none. */
+const PAGE_COMMIT = ((): string | null => {
+  if (process.env.GITHUB_SHA) return process.env.GITHUB_SHA
+  try {
+    return execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || null
+  } catch {
+    return null
+  }
+})()
+
 export default defineConfig({
   plugins: [react(), engineLocal(), cardCatalog(), shardFiles(), buildAsap()],
-  define: { __PAGE_BUILD__: JSON.stringify(PAGE_BUILD) },
+  define: { __PAGE_BUILD__: JSON.stringify(PAGE_BUILD), __PAGE_COMMIT__: JSON.stringify(PAGE_COMMIT) },
   // The landing page's dev menu of test rooms (`src/lobby/devRooms.ts`)
   // reads dev-rooms' command port (`server/scripts/dev-rooms.mjs`) through
   // this: same-origin, so no CORS, and the dev server only — a build has

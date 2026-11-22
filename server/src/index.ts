@@ -12,17 +12,20 @@
  * starts workers it didn't ask for.
  */
 
+import { execFileSync } from "node:child_process";
 import { createServer } from "node:http";
 import { fileURLToPath } from "node:url";
 import { WebSocketServer } from "ws";
 import type { AdmissionLimits } from "./admission.js";
 import { handleImportRoute } from "./import-route.js";
 import type { RoomHost } from "./room-host.js";
+import type { TablesOptions } from "./tables.js";
 import type { ShardSettings } from "./worker-host.js";
 import { WorkerRoomHost, workerChannel } from "./worker-host.js";
 import { startStatusServer } from "./status-server.js";
 import { COMPRESSION, attachTransport, clientIp } from "./transport.js";
 import { UsageLog, handleUsageRoute, renderUsage, summarizeUsage } from "./usage.js";
+import { GameStore, handleGamesRoute } from "./game-store.js";
 
 const port = Number(process.env.PORT ?? 4000);
 
@@ -89,6 +92,28 @@ const usage =
     ? null
     : new UsageLog({ dir: process.env.USAGE_DIR ?? fileURLToPath(new URL("../../usage/", import.meta.url)) });
 
+// Played games (`game-store.ts`): each game's record, gzipped, a file a game
+// in `games/` at the repo root (git-ignored). A browser's solo game is posted
+// by its page (`POST /games`); a game a room here runs is written by its
+// thread. `GAMES_DIR` moves it, `GAMES_MAX_MB` sizes it (1024), `GAMES=0`
+// keeps none. `npm run games:pull` fetches them to the operator's machine.
+const gamesDir = process.env.GAMES_DIR ?? fileURLToPath(new URL("../../games/", import.meta.url));
+const gamesMaxBytes = process.env.GAMES_MAX_MB !== undefined ? Number(process.env.GAMES_MAX_MB) * 1024 * 1024 : undefined;
+const games =
+  process.env.GAMES === "0"
+    ? null
+    : new GameStore({ dir: gamesDir, ...(gamesMaxBytes !== undefined ? { maxBytes: gamesMaxBytes } : {}) });
+/** The commit this server runs, for its own rooms' records: `BUILD_SHA`, else
+ * what the checkout says. */
+const buildSha = ((): string | null => {
+  if (process.env.BUILD_SHA) return process.env.BUILD_SHA;
+  try {
+    return execFileSync("git", ["rev-parse", "HEAD"], { cwd: fileURLToPath(new URL("../../", import.meta.url)), encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim() || null;
+  } catch {
+    return null;
+  }
+})();
+
 // An operator endpoint for `curl` over SSH, bound to loopback on a port the
 // Cloudflare tunnel does not forward. It carries room codes, which are join
 // credentials, so it must never share the public port — and a loopback *check*
@@ -125,21 +150,28 @@ const admission: AdmissionLimits = {
 const settings: ShardSettings = {
   builder,
   capture: capture ? { dir: captureDir, ...(keep !== undefined ? { keep } : {}) } : null,
+  games: games === null ? null : { dir: gamesDir, build: buildSha, ...(gamesMaxBytes !== undefined ? { maxBytes: gamesMaxBytes } : {}) },
   reapIdleMs: IDLE_ROOM_MS,
   reapIntervalMs: REAP_INTERVAL_MS,
   loadReportMs: 1_000,
 };
 
+// A table's game (played on its players' devices) is kept from main's own
+// log of it, as the table goes.
+const tableOptions: TablesOptions =
+  games === null ? {} : { keep: { build: buildSha, record: (record) => void games.write(record) } };
+
 let host: RoomHost;
 if (shards === 0) {
   const { createInProcessHost } = await import("./in-process-host.js");
-  host = createInProcessHost(settings, admission);
+  host = createInProcessHost(settings, admission, tableOptions);
 } else {
   const started = Date.now();
   const workers = new WorkerRoomHost({
     shards,
     config: settings,
     admission,
+    tables: tableOptions,
     spawn: (config) => workerChannel(config, undefined, shardHeapMb),
   });
   await workers.start();
@@ -152,6 +184,8 @@ const httpServer = createServer((req, res) => {
   if (handleImportRoute(req, res, (text, sink) => host.importDeck(text, sink), clientOrigin)) return;
   // `POST /usage`: one anonymous event from the page, for the operator's report.
   if (handleUsageRoute(req, res, usage, clientIp, clientOrigin)) return;
+  // `POST /games`: a finished solo game's record, from the page that played it.
+  if (handleGamesRoute(req, res, games, clientIp, clientOrigin)) return;
   res.writeHead(404);
   res.end();
 });

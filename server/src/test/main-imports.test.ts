@@ -20,6 +20,7 @@ const MAIN_SIDE = [
   "status-server.ts",
   "import-route.ts",
   "usage.ts",
+  "game-store.ts",
   "load-monitor.ts",
   "admission.ts",
   // Tables: games on their players' devices. The order and the log, no game.

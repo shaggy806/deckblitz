@@ -18,7 +18,8 @@ import { importDeps, runImportJob } from "./import-deck.js";
 import type { ImportDeps } from "./import-deck.js";
 import { LoadMonitor } from "./load-monitor.js";
 import { PendingRoom } from "./pending-room.js";
-import { Room } from "./room.js";
+import { Room, recordGamesTo } from "./room.js";
+import { GameStore } from "./game-store.js";
 import { botDecisions, botDecisionTotals } from "./bot-decisions.js";
 import { RoomManager } from "./room-manager.js";
 import { RoomService } from "./room-service.js";
@@ -38,9 +39,17 @@ import { roomSummaries } from "./status.js";
 
 /** The rooms' side of a config: its own registry, and a manager over it. */
 export function roomsFor(
-  config: Pick<ShardConfig, "capture" | "pacing">,
+  config: Pick<ShardConfig, "capture" | "pacing" | "games">,
   registry: CardRegistry = cardRegistry(),
 ): { readonly registry: CardRegistry; readonly manager: RoomManager } {
+  // Each game a room on this thread plays, kept as it ends (`game-store.ts`).
+  if (config.games != null) {
+    const store = new GameStore({
+      dir: config.games.dir,
+      ...(config.games.maxBytes !== undefined ? { maxBytes: config.games.maxBytes } : {}),
+    });
+    recordGamesTo({ build: config.games.build, where: "server", deliver: (record) => void store.write(record) });
+  }
   const manager = new RoomManager({
     ...(config.capture !== null
       ? {
