@@ -818,6 +818,7 @@ import _poolStokeGenius from "../pool/stoke-genius.js";
 import _poolStonehands from "../pool/stonehands.js";
 import _poolStormCauldron from "../pool/storm-cauldron.js";
 import _poolStrandsOfUndeath from "../pool/strands-of-undeath.js";
+import _poolStraxSontaranNurse from "../pool/strax-sontaran-nurse.js";
 import _poolStreamOfLife from "../pool/stream-of-life.js";
 import _poolStrifeScholar from "../pool/strife-scholar.js";
 import _poolStrongholdArena from "../pool/stronghold-arena.js";
@@ -1857,6 +1858,7 @@ const shard: CardShard = {
     _poolStonehands,
     _poolStormCauldron,
     _poolStrandsOfUndeath,
+    _poolStraxSontaranNurse,
     _poolStreamOfLife,
     _poolStrifeScholar,
     _poolStrongholdArena,

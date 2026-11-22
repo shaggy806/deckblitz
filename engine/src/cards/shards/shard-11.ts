@@ -419,6 +419,7 @@ import _poolHerculesOlympianHero from "../pool/hercules-olympian-hero.js";
 import _poolHeroOfThePride from "../pool/hero-of-the-pride.js";
 import _poolHeroicCharge from "../pool/heroic-charge.js";
 import _poolHexhavenDuelingArena from "../pool/hexhaven-dueling-arena.js";
+import _poolHibernationsEnd from "../pool/hibernations-end.js";
 import _poolHiddenHorror from "../pool/hidden-horror.js";
 import _poolHideSeek from "../pool/hide-seek.js";
 import _poolHighTide from "../pool/high-tide.js";
@@ -993,6 +994,7 @@ import _poolVodalianMindsinger from "../pool/vodalian-mindsinger.js";
 import _poolVoiceOfResurgence from "../pool/voice-of-resurgence.js";
 import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
+import _poolVoltageSurge from "../pool/voltage-surge.js";
 import _poolVraskaTheSilencer from "../pool/vraska-the-silencer.js";
 import _poolVulshokBattlemaster from "../pool/vulshok-battlemaster.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
@@ -1489,6 +1491,7 @@ const shard: CardShard = {
     _poolHeroOfThePride,
     _poolHeroicCharge,
     _poolHexhavenDuelingArena,
+    _poolHibernationsEnd,
     _poolHiddenHorror,
     _poolHideSeek,
     _poolHighTide,
@@ -2063,6 +2066,7 @@ const shard: CardShard = {
     _poolVoiceOfResurgence,
     _poolVolcanicFallout,
     _poolVolcanicSubmersion,
+    _poolVoltageSurge,
     _poolVraskaTheSilencer,
     _poolVulshokBattlemaster,
     _poolVulshokFactory,

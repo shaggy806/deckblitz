@@ -9,6 +9,7 @@ import _poolAbominationOfLlanowar from "../pool/abomination-of-llanowar.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
 import _poolAddle from "../pool/addle.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
+import _poolAetherplasm from "../pool/aetherplasm.js";
 import _poolAethersnipe from "../pool/aethersnipe.js";
 import _poolAgadeemOccultist from "../pool/agadeem-occultist.js";
 import _poolAgentOfErebos from "../pool/agent-of-erebos.js";
@@ -1081,6 +1082,7 @@ const shard: CardShard = {
     _poolAccomplishedAlchemist,
     _poolAddle,
     _poolAetherSearcher,
+    _poolAetherplasm,
     _poolAethersnipe,
     _poolAgadeemOccultist,
     _poolAgentOfErebos,

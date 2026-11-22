@@ -410,6 +410,7 @@ import _poolGrubsCommand from "../pool/grubs-command.js";
 import _poolGruesomeScourger from "../pool/gruesome-scourger.js";
 import _poolGrunnTheLonelyKing from "../pool/grunn-the-lonely-king.js";
 import _poolGuerrillaGorilla from "../pool/guerrilla-gorilla.js";
+import _poolGuildFeud from "../pool/guild-feud.js";
 import _poolGumdropPoisoner from "../pool/gumdrop-poisoner.js";
 import _poolGwaihirGreatestOfTheEagles from "../pool/gwaihir-greatest-of-the-eagles.js";
 import _poolHERBIEScoutUnit from "../pool/h-e-r-b-i-e-scout-unit.js";
@@ -1461,6 +1462,7 @@ const shard: CardShard = {
     _poolGruesomeScourger,
     _poolGrunnTheLonelyKing,
     _poolGuerrillaGorilla,
+    _poolGuildFeud,
     _poolGumdropPoisoner,
     _poolGwaihirGreatestOfTheEagles,
     _poolHERBIEScoutUnit,

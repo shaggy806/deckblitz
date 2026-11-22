@@ -761,6 +761,7 @@ import _poolRushedRebirth from "../pool/rushed-rebirth.js";
 import _poolRuthlessLawbringer from "../pool/ruthless-lawbringer.js";
 import _poolSabertoothOutrider from "../pool/sabertooth-outrider.js";
 import _poolSacredFoundry from "../pool/sacred-foundry.js";
+import _poolSacredGround from "../pool/sacred-ground.js";
 import _poolSagesOfTheAnima from "../pool/sages-of-the-anima.js";
 import _poolSallySparrow from "../pool/sally-sparrow.js";
 import _poolSalvageSlasher from "../pool/salvage-slasher.js";
@@ -780,6 +781,7 @@ import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
 import _poolSeaSnidd from "../pool/sea-snidd.js";
 import _poolSealFromExistence from "../pool/seal-from-existence.js";
+import _poolSeasinger from "../pool/seasinger.js";
 import _poolSecretInvasion from "../pool/secret-invasion.js";
 import _poolSecretSalvage from "../pool/secret-salvage.js";
 import _poolSecurityDetail from "../pool/security-detail.js";
@@ -1879,6 +1881,7 @@ const shard: CardShard = {
     _poolRuthlessLawbringer,
     _poolSabertoothOutrider,
     _poolSacredFoundry,
+    _poolSacredGround,
     _poolSagesOfTheAnima,
     _poolSallySparrow,
     _poolSalvageSlasher,
@@ -1898,6 +1901,7 @@ const shard: CardShard = {
     _poolScurryOak,
     _poolSeaSnidd,
     _poolSealFromExistence,
+    _poolSeasinger,
     _poolSecretInvasion,
     _poolSecretSalvage,
     _poolSecurityDetail,

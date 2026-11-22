@@ -479,6 +479,7 @@ import _poolKambalProfiteeringMayor from "../pool/kambal-profiteering-mayor.js";
 import _poolKamiOfEmptyGraves from "../pool/kami-of-empty-graves.js";
 import _poolKangPrime from "../pool/kang-prime.js";
 import _poolKavuRecluse from "../pool/kavu-recluse.js";
+import _poolKeenEaredSentry from "../pool/keen-eared-sentry.js";
 import _poolKemuriOnna from "../pool/kemuri-onna.js";
 import _poolKeyToTheCity from "../pool/key-to-the-city.js";
 import _poolKeysToTheHouse from "../pool/keys-to-the-house.js";
@@ -516,6 +517,7 @@ import _poolLightkeeperOfEmeria from "../pool/lightkeeper-of-emeria.js";
 import _poolLithoformBlight from "../pool/lithoform-blight.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
 import _poolLiuBeiLordOfShu from "../pool/liu-bei-lord-of-shu.js";
+import _poolLivioOathswornSentinel from "../pool/livio-oathsworn-sentinel.js";
 import _poolLoneRider from "../pool/lone-rider.js";
 import _poolLostOrderOfJarkeld from "../pool/lost-order-of-jarkeld.js";
 import _poolLostToLegend from "../pool/lost-to-legend.js";
@@ -1529,6 +1531,7 @@ const shard: CardShard = {
     _poolKamiOfEmptyGraves,
     _poolKangPrime,
     _poolKavuRecluse,
+    _poolKeenEaredSentry,
     _poolKemuriOnna,
     _poolKeyToTheCity,
     _poolKeysToTheHouse,
@@ -1566,6 +1569,7 @@ const shard: CardShard = {
     _poolLithoformBlight,
     _poolLithoformEngine,
     _poolLiuBeiLordOfShu,
+    _poolLivioOathswornSentinel,
     _poolLoneRider,
     _poolLostOrderOfJarkeld,
     _poolLostToLegend,

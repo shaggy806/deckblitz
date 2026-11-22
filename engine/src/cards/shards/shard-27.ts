@@ -449,6 +449,7 @@ import _poolKnightCaptainOfEos from "../pool/knight-captain-of-eos.js";
 import _poolKnightOfSursi from "../pool/knight-of-sursi.js";
 import _poolKnollspineDragon from "../pool/knollspine-dragon.js";
 import _poolKoboldTaskmaster from "../pool/kobold-taskmaster.js";
+import _poolKodamaOfTheCenterTree from "../pool/kodama-of-the-center-tree.js";
 import _poolKomaWorldEater from "../pool/koma-world-eater.js";
 import _poolKoskunKeep from "../pool/koskun-keep.js";
 import _poolKruphixGodOfHorizons from "../pool/kruphix-god-of-horizons.js";
@@ -1478,6 +1479,7 @@ const shard: CardShard = {
     _poolKnightOfSursi,
     _poolKnollspineDragon,
     _poolKoboldTaskmaster,
+    _poolKodamaOfTheCenterTree,
     _poolKomaWorldEater,
     _poolKoskunKeep,
     _poolKruphixGodOfHorizons,

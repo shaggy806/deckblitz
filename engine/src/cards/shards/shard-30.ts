@@ -38,6 +38,7 @@ import _poolAnkleShanker from "../pool/ankle-shanker.js";
 import _poolAnointerPriest from "../pool/anointer-priest.js";
 import _poolAragornKingOfGondor from "../pool/aragorn-king-of-gondor.js";
 import _poolArcaneBombardment from "../pool/arcane-bombardment.js";
+import _poolArcanumWings from "../pool/arcanum-wings.js";
 import _poolArcboundCondor from "../pool/arcbound-condor.js";
 import _poolArchonOfTheTriumvirate from "../pool/archon-of-the-triumvirate.js";
 import _poolArcumDagsson from "../pool/arcum-dagsson.js";
@@ -159,6 +160,7 @@ import _poolClawsOfValakut from "../pool/claws-of-valakut.js";
 import _poolClearShot from "../pool/clear-shot.js";
 import _poolClockOfOmens from "../pool/clock-of-omens.js";
 import _poolCloisteredTelepath from "../pool/cloistered-telepath.js";
+import _poolCloseEncounter from "../pool/close-encounter.js";
 import _poolCloudOfDarkness from "../pool/cloud-of-darkness.js";
 import _poolCloudOfFaeries from "../pool/cloud-of-faeries.js";
 import _poolCloudshift from "../pool/cloudshift.js";
@@ -1116,6 +1118,7 @@ const shard: CardShard = {
     _poolAnointerPriest,
     _poolAragornKingOfGondor,
     _poolArcaneBombardment,
+    _poolArcanumWings,
     _poolArcboundCondor,
     _poolArchonOfTheTriumvirate,
     _poolArcumDagsson,
@@ -1237,6 +1240,7 @@ const shard: CardShard = {
     _poolClearShot,
     _poolClockOfOmens,
     _poolCloisteredTelepath,
+    _poolCloseEncounter,
     _poolCloudOfDarkness,
     _poolCloudOfFaeries,
     _poolCloudshift,

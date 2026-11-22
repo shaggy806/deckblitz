@@ -965,6 +965,7 @@ import _poolVeteranAdventurer from "../pool/veteran-adventurer.js";
 import _poolVeteranSoldier from "../pool/veteran-soldier.js";
 import _poolVictoriousDestruction from "../pool/victorious-destruction.js";
 import _poolVictoryChimes from "../pool/victory-chimes.js";
+import _poolVineGecko from "../pool/vine-gecko.js";
 import _poolVinesOfVastwood from "../pool/vines-of-vastwood.js";
 import _poolVizierOfTumblingSands from "../pool/vizier-of-tumbling-sands.js";
 import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
@@ -2019,6 +2020,7 @@ const shard: CardShard = {
     _poolVeteranSoldier,
     _poolVictoriousDestruction,
     _poolVictoryChimes,
+    _poolVineGecko,
     _poolVinesOfVastwood,
     _poolVizierOfTumblingSands,
     _poolVoiceOfDuty,

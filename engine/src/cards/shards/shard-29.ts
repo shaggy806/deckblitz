@@ -641,6 +641,7 @@ import _poolProfaneProcession from "../pool/profane-procession.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
 import _poolProwlingNightstalker from "../pool/prowling-nightstalker.js";
+import _poolPsychicRebuttal from "../pool/psychic-rebuttal.js";
 import _poolPsychicTheft from "../pool/psychic-theft.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
@@ -1692,6 +1693,7 @@ const shard: CardShard = {
     _poolProsperousPartnership,
     _poolProudPackRhino,
     _poolProwlingNightstalker,
+    _poolPsychicRebuttal,
     _poolPsychicTheft,
     _poolPsychoticFury,
     _poolPsychotropeThallid,
