@@ -14,6 +14,7 @@ import {
   SCRYFALL_URL,
   SITE_DESCRIPTOR,
   SITE_TITLE,
+  SUPPORT_URL,
   TRADEMARK_LINE,
 } from './notice.ts'
 import './legal.css'
@@ -102,7 +103,12 @@ export function AboutPage() {
       <section>
         <h2>Free to play</h2>
         <p>
-          {SITE_TITLE} is free: no payments, subscriptions, ads or sign-up, and nothing on it is for sale.
+          {SITE_TITLE} is free: no payments, subscriptions, ads or sign-up, and nothing on it is for sale. If
+          you&apos;d like to help with what it costs to run, you can{' '}
+          <a href={SUPPORT_URL} target="_blank" rel="noreferrer">
+            support it on Ko-fi
+          </a>
+          ; that&apos;s optional and unlocks nothing. {SITE_TITLE} isn&apos;t affiliated with or endorsed by Ko-fi.
         </p>
       </section>
 

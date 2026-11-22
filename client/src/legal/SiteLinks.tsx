@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { BUILT_WITH, BUILT_WITH_NOTE, CLAUDE_CODE_URL, FEEDBACK_EMAIL, FEEDBACK_HREF } from './notice.ts'
+import { BUILT_WITH, BUILT_WITH_NOTE, CLAUDE_CODE_URL, FEEDBACK_EMAIL, FEEDBACK_HREF, SUPPORT_URL } from './notice.ts'
 import { markIntroSeen } from '../tutorial/progress.ts'
 import './legal.css'
 
 /**
  * Two text buttons at the head of the landing page's corner toolbar
  * (`ui/CornerToolbar`, beside Help and Settings): one says the site was
- * built with Claude Code and opens a short note above itself, the other
- * mails feedback. The Claude Code button is words only: Anthropic's
+ * built with Claude Code and opens a short note above itself, one gives
+ * the feedback address, and one links the Ko-fi page for whoever wants to
+ * support the site. The Claude Code button is words only (and Ko-fi's too): Anthropic's
  * trademark guidelines want its approval before its logo is used, and allow
  * saying in plain text what a thing was built with.
  *
@@ -75,6 +76,9 @@ export function SiteLinks() {
         ) : null}
       </div>
       <FeedbackLink />
+      <a className="site-link-btn" href={SUPPORT_URL} target="_blank" rel="noreferrer">
+        Support on Ko-fi
+      </a>
     </>
   )
 }

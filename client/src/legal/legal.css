@@ -44,7 +44,20 @@
   border-radius: 0;
   cursor: pointer;
 }
+/* "Support on Ko-fi" is a link, so it misses the bevel every button gets
+   (index.css): given here, pressed look and all. */
+a.site-link-btn:any-link {
+  box-shadow: var(--bevel);
+}
+a.site-link-btn:any-link:active {
+  box-shadow: var(--bevel-pressed);
+  translate: 0 1px;
+}
+a.site-link-btn:any-link:hover {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+}
 .site-link-btn:hover,
+.site-link-btn:any-link:hover,
 .site-link-btn[aria-expanded='true'] {
   color: var(--accent);
   text-decoration: none;

@@ -43,6 +43,11 @@ export const EDHREC_URL = 'https://edhrec.com'
 export const FEEDBACK_EMAIL = 'toby@deckblitz.net'
 export const FEEDBACK_SUBJECT = `${SITE_TITLE} feedback`
 
+/** Where someone who wants to chip in can: the site's Ko-fi page. Optional,
+ * and nothing is unlocked by it — the Fan Content Policy allows donations
+ * only while access stays free (`docs/plans/fan-content-policy.md`). */
+export const SUPPORT_URL = 'https://ko-fi.com/deckblitz'
+
 /** How the site was made, said up front so nobody has to ask. Words only,
  * no Anthropic logo: its trademark guidelines want approval before a logo
  * is used, and the note says there's no affiliation. */
