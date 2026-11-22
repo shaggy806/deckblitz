@@ -1386,8 +1386,14 @@ export type TriggerKind =
        * `to: ["exile"]`, `batched` and `who: "any"`): only a leave the effect
        * of a resolving spell or ability of this permanent's controller made
        * (`LeftBattlefield.byEffectOf`), tokens and other players' permanents
-       * included — not a cost or a state-based action, as `put-into-exile`'s. */
-      readonly byEffectOf?: "you";
+       * included — not a cost or a state-based action, as `put-into-exile`'s.
+       * `"opponent"`: "whenever **a spell or ability an opponent controls
+       * causes** a land to be put into your graveyard from the battlefield"
+       * (Sacred Ground, with `to: ["graveyard"]` and `ownedBy: "you"`): an
+       * opponent of this permanent's controller's — a destroy and an edict's
+       * sacrifice alike (each made while its spell resolves); never the
+       * state-based actions (lethal damage) or a cost. */
+      readonly byEffectOf?: "you" | "opponent";
     }
   | {
       /** A player gained life (Ajani's Pridemate). `who` is whose life.

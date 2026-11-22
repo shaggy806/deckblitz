@@ -8804,3 +8804,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Aura swap (2026-11-22).** `mechanic:aura-swap`: `auraSwap(cost)` in `helpers.ts` (rule 702.65), from existing vocabulary — an Aura card from hand `attachedTo: { hostOf: "source" }`, then this to hand if it entered, inside `source-on-battlefield` (702.65b). Scaffolder reads it. Arcanum Wings. `test/top10000-batch-338l.test.ts`.
 
 **Return every exiled card with a kind of counter (2026-11-22).** `effect:return-exiled-with-counter-kind`: `return-exiled-by-source`'s `withCounter` (with `linked: "battlefield"`) takes every card in exile with that counter, whoever exiled it, under their owners' control (610.3c). Livio, Oathsworn Sentinel. `test/top10000-batch-338l.test.ts`.
+
+**A leave an opponent's spell or ability caused (2026-11-22).** `trigger:put-into-graveyard-caused-by-opponent`: `leaves-battlefield.byEffectOf: "opponent"` (`Game.leftByEffectOfOk`, off `LeftBattlefield.byEffectOf`; an edict's sacrifice is made while its spell resolves, so it counts). Sacred Ground. `test/top10000-batch-338i.test.ts`.

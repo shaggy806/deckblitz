@@ -38883,6 +38883,19 @@ export class Game {
     return self.zone === "battlefield" ? self.controller : (self.lastKnown?.controller ?? self.controller);
   }
 
+  /** A `leaves-battlefield` trigger's `byEffectOf` against whose effect took
+   * the permanent (`LeftBattlefield.byEffectOf`), "you" and "an opponent"
+   * read from this ability's controller as it last was. */
+  private leftByEffectOfOk(
+    wanted: "you" | "opponent" | undefined,
+    by: PlayerId | undefined,
+    self: GameObject,
+  ): boolean {
+    if (wanted === undefined) return true;
+    if (by === undefined) return false;
+    return wanted === "you" ? by === this.watcherController(self) : by !== this.watcherController(self);
+  }
+
   /** The permanents of a `permanents-left` event a batched `leaves-battlefield`
    * trigger is about. */
   private leftBatchMatching(
@@ -38894,7 +38907,7 @@ export class Game {
       .filter(
         ({ object, to, byEffectOf }) =>
           (spec.to === undefined || spec.to.includes(to)) &&
-          (spec.byEffectOf === undefined || byEffectOf === this.watcherController(self)) &&
+          this.leftByEffectOfOk(spec.byEffectOf, byEffectOf, self) &&
           !(spec.otherOnly === true && object === self.id) &&
           this.matchesWho(spec.who, object, self, true) &&
           this.triggerFilterOk(spec.filter, object, self, true),
@@ -39447,7 +39460,7 @@ export class Game {
         return (
           event.type === "permanent-left-battlefield" &&
           (spec.to === undefined || spec.to.includes(event.toZone)) &&
-          (spec.byEffectOf === undefined || event.byEffectOf === this.watcherController(self)) &&
+          this.leftByEffectOfOk(spec.byEffectOf, event.byEffectOf, self) &&
           // "While you're activating a craft ability": this ability's
           // controller, as it last existed if it has left.
           (spec.whileActivatingCraft !== true ||

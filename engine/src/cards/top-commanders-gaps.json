@@ -3215,7 +3215,8 @@
   "effect:reveal-opponent-library-put-onto-battlefield",
   "effect:fight-between-put-this-way",
   "mechanic:aura-swap",
-  "effect:return-exiled-with-counter-kind"
+  "effect:return-exiled-with-counter-kind",
+  "trigger:put-into-graveyard-caused-by-opponent"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
