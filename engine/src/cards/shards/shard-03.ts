@@ -714,6 +714,7 @@ import _poolShimmeringGlasskite from "../pool/shimmering-glasskite.js";
 import _poolShivanBranchBurner from "../pool/shivan-branch-burner.js";
 import _poolShockmawDragon from "../pool/shockmaw-dragon.js";
 import _poolShopkeepersBane from "../pool/shopkeepers-bane.js";
+import _poolShroudedLore from "../pool/shrouded-lore.js";
 import _poolSilkweaverElite from "../pool/silkweaver-elite.js";
 import _poolSilumgarSpellEater from "../pool/silumgar-spell-eater.js";
 import _poolSilverBolt from "../pool/silver-bolt.js";
@@ -1705,6 +1706,7 @@ const shard: CardShard = {
     _poolShivanBranchBurner,
     _poolShockmawDragon,
     _poolShopkeepersBane,
+    _poolShroudedLore,
     _poolSilkweaverElite,
     _poolSilumgarSpellEater,
     _poolSilverBolt,

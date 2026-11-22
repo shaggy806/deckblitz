@@ -201,6 +201,7 @@ import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDesperateFarmer from "../pool/desperate-farmer.js";
 import _poolDevourerOfMemory from "../pool/devourer-of-memory.js";
 import _poolDiamondWeapon from "../pool/diamond-weapon.js";
+import _poolDiscipleOfCaelusNin from "../pool/disciple-of-caelus-nin.js";
 import _poolDismalBackwater from "../pool/dismal-backwater.js";
 import _poolDisruptiveStormbrood from "../pool/disruptive-stormbrood.js";
 import _poolDisruptorFlute from "../pool/disruptor-flute.js";
@@ -1243,6 +1244,7 @@ const shard: CardShard = {
     _poolDesperateFarmer,
     _poolDevourerOfMemory,
     _poolDiamondWeapon,
+    _poolDiscipleOfCaelusNin,
     _poolDismalBackwater,
     _poolDisruptiveStormbrood,
     _poolDisruptorFlute,

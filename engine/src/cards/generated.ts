@@ -4198,6 +4198,7 @@ import _poolCastOut from "./pool/cast-out.js";
 import _poolCastThroughTime from "./pool/cast-through-time.js";
 import _poolCastawaysDespair from "./pool/castaways-despair.js";
 import _poolCastigate from "./pool/castigate.js";
+import _poolCastingOfBones from "./pool/casting-of-bones.js";
 import _poolCastleArdenvale from "./pool/castle-ardenvale.js";
 import _poolCastleDoom from "./pool/castle-doom.js";
 import _poolCastleEmbereth from "./pool/castle-embereth.js";
@@ -4540,6 +4541,7 @@ import _poolChangelingSentinel from "./pool/changeling-sentinel.js";
 import _poolChangelingTitan from "./pool/changeling-titan.js";
 import _poolChangelingWayfinder from "./pool/changeling-wayfinder.js";
 import _poolChangingLoyalty from "./pool/changing-loyalty.js";
+import _poolChannelHarm from "./pool/channel-harm.js";
 import _poolChannelTheSuns from "./pool/channel-the-suns.js";
 import _poolChannel from "./pool/channel.js";
 import _poolChanneledDragonfire from "./pool/channeled-dragonfire.js";
@@ -7166,6 +7168,7 @@ import _poolDiscerningFinancier from "./pool/discerning-financier.js";
 import _poolDiscerningPeddler from "./pool/discerning-peddler.js";
 import _poolDiscerningTaste from "./pool/discerning-taste.js";
 import _poolDiscipleOfBolas from "./pool/disciple-of-bolas.js";
+import _poolDiscipleOfCaelusNin from "./pool/disciple-of-caelus-nin.js";
 import _poolDiscipleOfDeceit from "./pool/disciple-of-deceit.js";
 import _poolDiscipleOfFreyalise from "./pool/disciple-of-freyalise.js";
 import _poolDiscipleOfGrace from "./pool/disciple-of-grace.js";
@@ -10321,6 +10324,7 @@ import _poolForgottenCave from "./pool/forgotten-cave.js";
 import _poolForgottenCellar from "./pool/forgotten-cellar.js";
 import _poolForgottenCreation from "./pool/forgotten-creation.js";
 import _poolForgottenHarvest from "./pool/forgotten-harvest.js";
+import _poolForgottenLore from "./pool/forgotten-lore.js";
 import _poolForgottenMonument from "./pool/forgotten-monument.js";
 import _poolForgottenSentinel from "./pool/forgotten-sentinel.js";
 import _poolForiysianBrigade from "./pool/foriysian-brigade.js";
@@ -15656,6 +15660,7 @@ import _poolKrovikanMist from "./pool/krovikan-mist.js";
 import _poolKrovikanPlague from "./pool/krovikan-plague.js";
 import _poolKrovikanRot from "./pool/krovikan-rot.js";
 import _poolKrovikanScoundrel from "./pool/krovikan-scoundrel.js";
+import _poolKrovikanSorcerer from "./pool/krovikan-sorcerer.js";
 import _poolKrovikanWhispers from "./pool/krovikan-whispers.js";
 import _poolKrovodHaunch from "./pool/krovod-haunch.js";
 import _poolKroxaAndKunoros from "./pool/kroxa-and-kunoros.js";
@@ -25108,6 +25113,7 @@ import _poolShrink from "./pool/shrink.js";
 import _poolShrivel from "./pool/shrivel.js";
 import _poolShrivelingRot from "./pool/shriveling-rot.js";
 import _poolShroofusSproutsire from "./pool/shroofus-sproutsire.js";
+import _poolShroudedLore from "./pool/shrouded-lore.js";
 import _poolShroudedSerpent from "./pool/shrouded-serpent.js";
 import _poolShroudedShepherd from "./pool/shrouded-shepherd.js";
 import _poolShroudstomper from "./pool/shroudstomper.js";
@@ -25966,6 +25972,7 @@ import _poolSoldeviExcavations from "./pool/soldevi-excavations.js";
 import _poolSoldeviGolem from "./pool/soldevi-golem.js";
 import _poolSoldeviHeretic from "./pool/soldevi-heretic.js";
 import _poolSoldeviMachinist from "./pool/soldevi-machinist.js";
+import _poolSoldeviSage from "./pool/soldevi-sage.js";
 import _poolSoldeviSimulacrum from "./pool/soldevi-simulacrum.js";
 import _poolSoldeviSteamBeast from "./pool/soldevi-steam-beast.js";
 import _poolSoldierMilitaryProgram from "./pool/soldier-military-program.js";
@@ -38056,6 +38063,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCastThroughTime,
   _poolCastawaysDespair,
   _poolCastigate,
+  _poolCastingOfBones,
   _poolCastleArdenvale,
   _poolCastleDoom,
   _poolCastleEmbereth,
@@ -38398,6 +38406,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChangelingTitan,
   _poolChangelingWayfinder,
   _poolChangingLoyalty,
+  _poolChannelHarm,
   _poolChannelTheSuns,
   _poolChannel,
   _poolChanneledDragonfire,
@@ -41024,6 +41033,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiscerningPeddler,
   _poolDiscerningTaste,
   _poolDiscipleOfBolas,
+  _poolDiscipleOfCaelusNin,
   _poolDiscipleOfDeceit,
   _poolDiscipleOfFreyalise,
   _poolDiscipleOfGrace,
@@ -44179,6 +44189,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForgottenCellar,
   _poolForgottenCreation,
   _poolForgottenHarvest,
+  _poolForgottenLore,
   _poolForgottenMonument,
   _poolForgottenSentinel,
   _poolForiysianBrigade,
@@ -49514,6 +49525,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKrovikanPlague,
   _poolKrovikanRot,
   _poolKrovikanScoundrel,
+  _poolKrovikanSorcerer,
   _poolKrovikanWhispers,
   _poolKrovodHaunch,
   _poolKroxaAndKunoros,
@@ -58966,6 +58978,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShrivel,
   _poolShrivelingRot,
   _poolShroofusSproutsire,
+  _poolShroudedLore,
   _poolShroudedSerpent,
   _poolShroudedShepherd,
   _poolShroudstomper,
@@ -59824,6 +59837,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoldeviGolem,
   _poolSoldeviHeretic,
   _poolSoldeviMachinist,
+  _poolSoldeviSage,
   _poolSoldeviSimulacrum,
   _poolSoldeviSteamBeast,
   _poolSoldierMilitaryProgram,
@@ -71927,6 +71941,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cast-through-time": _poolCastThroughTime,
   "pool/castaways-despair": _poolCastawaysDespair,
   "pool/castigate": _poolCastigate,
+  "pool/casting-of-bones": _poolCastingOfBones,
   "pool/castle-ardenvale": _poolCastleArdenvale,
   "pool/castle-doom": _poolCastleDoom,
   "pool/castle-embereth": _poolCastleEmbereth,
@@ -72269,6 +72284,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/changeling-titan": _poolChangelingTitan,
   "pool/changeling-wayfinder": _poolChangelingWayfinder,
   "pool/changing-loyalty": _poolChangingLoyalty,
+  "pool/channel-harm": _poolChannelHarm,
   "pool/channel-the-suns": _poolChannelTheSuns,
   "pool/channel": _poolChannel,
   "pool/channeled-dragonfire": _poolChanneledDragonfire,
@@ -74895,6 +74911,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/discerning-peddler": _poolDiscerningPeddler,
   "pool/discerning-taste": _poolDiscerningTaste,
   "pool/disciple-of-bolas": _poolDiscipleOfBolas,
+  "pool/disciple-of-caelus-nin": _poolDiscipleOfCaelusNin,
   "pool/disciple-of-deceit": _poolDiscipleOfDeceit,
   "pool/disciple-of-freyalise": _poolDiscipleOfFreyalise,
   "pool/disciple-of-grace": _poolDiscipleOfGrace,
@@ -78050,6 +78067,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/forgotten-cellar": _poolForgottenCellar,
   "pool/forgotten-creation": _poolForgottenCreation,
   "pool/forgotten-harvest": _poolForgottenHarvest,
+  "pool/forgotten-lore": _poolForgottenLore,
   "pool/forgotten-monument": _poolForgottenMonument,
   "pool/forgotten-sentinel": _poolForgottenSentinel,
   "pool/foriysian-brigade": _poolForiysianBrigade,
@@ -83385,6 +83403,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/krovikan-plague": _poolKrovikanPlague,
   "pool/krovikan-rot": _poolKrovikanRot,
   "pool/krovikan-scoundrel": _poolKrovikanScoundrel,
+  "pool/krovikan-sorcerer": _poolKrovikanSorcerer,
   "pool/krovikan-whispers": _poolKrovikanWhispers,
   "pool/krovod-haunch": _poolKrovodHaunch,
   "pool/kroxa-and-kunoros": _poolKroxaAndKunoros,
@@ -92837,6 +92856,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shrivel": _poolShrivel,
   "pool/shriveling-rot": _poolShrivelingRot,
   "pool/shroofus-sproutsire": _poolShroofusSproutsire,
+  "pool/shrouded-lore": _poolShroudedLore,
   "pool/shrouded-serpent": _poolShroudedSerpent,
   "pool/shrouded-shepherd": _poolShroudedShepherd,
   "pool/shroudstomper": _poolShroudstomper,
@@ -93695,6 +93715,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soldevi-golem": _poolSoldeviGolem,
   "pool/soldevi-heretic": _poolSoldeviHeretic,
   "pool/soldevi-machinist": _poolSoldeviMachinist,
+  "pool/soldevi-sage": _poolSoldeviSage,
   "pool/soldevi-simulacrum": _poolSoldeviSimulacrum,
   "pool/soldevi-steam-beast": _poolSoldeviSteamBeast,
   "pool/soldier-military-program": _poolSoldierMilitaryProgram,

@@ -135,6 +135,7 @@ import _poolCentaurVeteran from "../pool/centaur-veteran.js";
 import _poolCephalidConstable from "../pool/cephalid-constable.js";
 import _poolChainerDementiaMaster from "../pool/chainer-dementia-master.js";
 import _poolChameleonColossus from "../pool/chameleon-colossus.js";
+import _poolChannelHarm from "../pool/channel-harm.js";
 import _poolChargingCinderhorn from "../pool/charging-cinderhorn.js";
 import _poolChillerpillar from "../pool/chillerpillar.js";
 import _poolChitinousGraspling from "../pool/chitinous-graspling.js";
@@ -1216,6 +1217,7 @@ const shard: CardShard = {
     _poolCephalidConstable,
     _poolChainerDementiaMaster,
     _poolChameleonColossus,
+    _poolChannelHarm,
     _poolChargingCinderhorn,
     _poolChillerpillar,
     _poolChitinousGraspling,

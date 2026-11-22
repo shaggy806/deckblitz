@@ -803,6 +803,7 @@ import _poolSnapdaxApexOfTheHunt from "../pool/snapdax-apex-of-the-hunt.js";
 import _poolSnarlingWolf from "../pool/snarling-wolf.js";
 import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
 import _poolSolKanarTheTainted from "../pool/sol-kanar-the-tainted.js";
+import _poolSoldeviSage from "../pool/soldevi-sage.js";
 import _poolSongbirdSonicScreamer from "../pool/songbird-sonic-screamer.js";
 import _poolSonicTheHedgehog from "../pool/sonic-the-hedgehog.js";
 import _poolSophicCentaur from "../pool/sophic-centaur.js";
@@ -1855,6 +1856,7 @@ const shard: CardShard = {
     _poolSnarlingWolf,
     _poolSoaringSandwing,
     _poolSolKanarTheTainted,
+    _poolSoldeviSage,
     _poolSongbirdSonicScreamer,
     _poolSonicTheHedgehog,
     _poolSophicCentaur,

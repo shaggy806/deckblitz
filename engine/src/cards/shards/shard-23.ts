@@ -320,6 +320,7 @@ import _poolFoolishFate from "../pool/foolish-fate.js";
 import _poolForeshadow from "../pool/foreshadow.js";
 import _poolForgeArmor from "../pool/forge-armor.js";
 import _poolForgebornOreads from "../pool/forgeborn-oreads.js";
+import _poolForgottenLore from "../pool/forgotten-lore.js";
 import _poolForkInTheRoad from "../pool/fork-in-the-road.js";
 import _poolForsakenThresher from "../pool/forsaken-thresher.js";
 import _poolFortifyingDraught from "../pool/fortifying-draught.js";
@@ -1393,6 +1394,7 @@ const shard: CardShard = {
     _poolForeshadow,
     _poolForgeArmor,
     _poolForgebornOreads,
+    _poolForgottenLore,
     _poolForkInTheRoad,
     _poolForsakenThresher,
     _poolFortifyingDraught,

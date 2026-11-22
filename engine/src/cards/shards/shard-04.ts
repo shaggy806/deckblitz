@@ -107,6 +107,7 @@ import _poolCaprichrome from "../pool/caprichrome.js";
 import _poolCarnageTyrant from "../pool/carnage-tyrant.js";
 import _poolCarnage from "../pool/carnage.js";
 import _poolCarnivalCarnage from "../pool/carnival-carnage.js";
+import _poolCastingOfBones from "../pool/casting-of-bones.js";
 import _poolCatacombSifter from "../pool/catacomb-sifter.js";
 import _poolCauldronOfSouls from "../pool/cauldron-of-souls.js";
 import _poolCelestialPrism from "../pool/celestial-prism.js";
@@ -1147,6 +1148,7 @@ const shard: CardShard = {
     _poolCarnageTyrant,
     _poolCarnage,
     _poolCarnivalCarnage,
+    _poolCastingOfBones,
     _poolCatacombSifter,
     _poolCauldronOfSouls,
     _poolCelestialPrism,
