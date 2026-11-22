@@ -44561,6 +44561,15 @@ export class Game {
           if (object === undefined || object.isToken) return false;
           if (toToken !== undefined) return toToken.includes(id);
           if (linked !== true) return object.exiledBy === source;
+          // "All exiled cards with aegis counters on them" (Livio): whoever
+          // exiled them.
+          if (options?.withCounter !== undefined) {
+            if ((object.counters?.[options.withCounter] ?? 0) <= 0) return false;
+            return (
+              options.filter === undefined ||
+              matchesFilter(this.state, this.registry, id, options.filter, { you: controller, source })
+            );
+          }
           const link = object.exiledWith;
           if (stint === undefined || link === undefined || link.source !== source || link.zoneChangeCount !== stint) {
             return false;

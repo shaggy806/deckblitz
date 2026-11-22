@@ -4893,6 +4893,15 @@ export type EffectSpec =
       /** With `linked: "battlefield"`: they enter tapped (Timothar, Baron of
        * Bats's Bat). */
       readonly enterTapped?: true;
+      /** With `linked: "battlefield"`: instead of the cards linked to this
+       * source, **every** card in exile with a counter of this kind on it,
+       * whoever exiled it and however — Livio, Oathsworn Sentinel's
+       * "Return all exiled cards with aegis counters on them to the
+       * battlefield under their owners' control", which reaches the cards
+       * another Livio exiled. Together, under their owners' control (610.3c)
+       * unless `under`; `filter` narrows them as before. A token there has
+       * ceased to exist (rule 111.7). */
+      readonly withCounter?: string;
     }
   | {
       /** "The exiled card" of a token's own ability (Hofri Ghostforge's "it
@@ -14300,12 +14309,14 @@ export interface EffectApi {
    * again once it's answered. */
   returnExiledBySource(
     linked?: boolean,
-    /** The linked return's `under`, `others`, `filter` and `enterTapped`. */
+    /** The linked return's `under`, `others`, `filter`, `enterTapped` and
+     * `withCounter`. */
     options?: {
       readonly underYou?: boolean;
       readonly others?: boolean;
       readonly filter?: CardFilter;
       readonly enterTapped?: boolean;
+      readonly withCounter?: string;
     },
   ): boolean;
   /** The tokens this resolution has created, one object per token: a stack
@@ -22223,6 +22234,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ...(spec.others === true ? { others: true } : {}),
               ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
               ...(spec.enterTapped === true ? { enterTapped: true } : {}),
+              ...(spec.withCounter !== undefined ? { withCounter: spec.withCounter } : {}),
             }
           : undefined;
       if (ctx.returnExiledBySource(spec.linked === "battlefield", linkedOptions)) ctx.resumeAfterDecisions(spec, parked);

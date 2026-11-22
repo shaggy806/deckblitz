@@ -3,7 +3,8 @@
  * `asLastOnStack`, the spell countered this way copied as it last was on the
  * stack), Guild Feud (an opponent's look-and-choose through `as-player`, the
  * two put onto the battlefield fighting), Arcanum Wings (aura swap, rule
- * 702.65 — `auraSwap()`). Written from the Oracle text.
+ * 702.65 — `auraSwap()`), Livio, Oathsworn Sentinel (`return-exiled-by-source`
+ * `withCounter`). Written from the Oracle text.
  */
 import { describe, expect, it } from "vitest";
 
@@ -15,6 +16,7 @@ import {
   activate,
   cast,
   controller,
+  counters,
   graveyard,
   keywords,
   lands,
@@ -27,6 +29,7 @@ import {
   settle,
   spawn,
   table,
+  toExile,
   toGraveyard,
   toHand,
   toLibrary,
@@ -204,5 +207,46 @@ describe("Arcanum Wings", () => {
     toHand(game, "Spectral Flight");
     activate(game, wings, 0);
     expect(zone(game, wings)).toBe("battlefield");
+  });
+});
+
+describe("Livio, Oathsworn Sentinel", () => {
+  it("another creature's controller may exile it with an aegis counter; the second ability returns every such card", () => {
+    const { game, b } = table();
+    const livio = spawn(game, "Livio, Oathsworn Sentinel");
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Plains", 5);
+    pickModes(b, 0);
+    activate(game, livio, 0, { targets: [ref(bears)] });
+    expect(zone(game, bears)).toBe("exile");
+    expect(counters(game, bears, "aegis")).toBe(1);
+    // One another Livio exiled, and one exiled with no aegis counter.
+    const other = toExile(game, "Hill Giant", B);
+    game.state.objects[other].counters = { aegis: 1 };
+    const plain = toExile(game, "Grizzly Bears");
+    activate(game, livio, 1);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(controller(game, bears)).toBe(B);
+    expect(counters(game, bears, "aegis")).toBe(0);
+    expect(zone(game, other)).toBe("battlefield");
+    expect(controller(game, other)).toBe(B);
+    expect(zone(game, plain)).toBe("exile");
+  });
+
+  it("the controller may decline", () => {
+    const { game, b } = table();
+    const livio = spawn(game, "Livio, Oathsworn Sentinel");
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Plains", 2);
+    pickModes(b);
+    activate(game, livio, 0, { targets: [ref(bears)] });
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+
+  it("can't target itself", () => {
+    const { game } = table();
+    const livio = spawn(game, "Livio, Oathsworn Sentinel");
+    lands(game, "Plains", 2);
+    expect(() => activate(game, livio, 0, { targets: [ref(livio)] })).toThrow(/target/i);
   });
 });

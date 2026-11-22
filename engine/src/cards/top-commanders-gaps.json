@@ -3214,7 +3214,8 @@
   "effect:copy-countered-spell",
   "effect:reveal-opponent-library-put-onto-battlefield",
   "effect:fight-between-put-this-way",
-  "mechanic:aura-swap"
+  "mechanic:aura-swap",
+  "effect:return-exiled-with-counter-kind"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
