@@ -26881,6 +26881,15 @@ function parseStatic(line, text) {
   if ((m = /^Your opponents can't cast spells with (odd|even) mana values\.$/.exec(line))) {
     return { affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", filter: { manaValueParity: m[1] } }], text };
   }
+  // "Players can't cast spells that share a color with the spell most recently
+  // cast this turn." (Mana Maze).
+  if (line === "Players can't cast spells that share a color with the spell most recently cast this turn.") {
+    return {
+      affects: { scope: "self" },
+      prohibits: [{ act: "cast", who: "each-player", filter: { sharesColorWithLastSpellCast: true } }],
+      text,
+    };
+  }
   // "Noncreature spells with mana value equal to the chosen number can't be
   // cast." (Sanctum Prelate): the number chosen as it entered.
   if (line === "Noncreature spells with mana value equal to the chosen number can't be cast.") {

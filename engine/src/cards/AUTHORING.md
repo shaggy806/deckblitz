@@ -3948,6 +3948,12 @@ that shares a color with the mana spent on this activation cost" is a
 `prevent-damage-from-chosen-source` with `filter: { sharesColorWithMana:
 "spent" }` (its shield rechecks the source, 609.7b). Bound as the effect
 applies; anywhere else it matches nothing.
+`sharesColorWithLastSpellCast: true` shares a color with **the spell most
+recently cast this turn**, anyone's (the latest `seq` among every player's
+`spellsCastThisTurnAs`), read live while it's on the stack and as it was cast
+after: Mana Maze's "players can't cast spells that share a color with the spell
+most recently cast this turn" is a static `prohibits: [{ act: "cast", who:
+"each-player", filter: { sharesColorWithLastSpellCast: true } }]`.
 `goaded` is goaded by anyone, however (a one-shot
 goad, one for the rest of the game, a static one), `suspected` rule
 701.60's designation, `saddled` rule 702.171b's and `monstrous` rule 701.37b's ("as long as this

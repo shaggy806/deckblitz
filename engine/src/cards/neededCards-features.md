@@ -8733,3 +8733,7 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A card from your hand or the command zone, one choice (2026-11-21).** `decision:choose-from-hand-or-command-zone`: `look-and-choose`'s `zone: "hand-and-command"` offers the chooser's hand and the cards they own in the command zone together; "if you do" is a `delayed-trigger` `about: "put-onto-battlefield"` (Gift of Immortality's shape). Next of Kin. `test/hand-or-command-zone-choice.test.ts`.
 
 **Damage replacements ordered beside prevention (2026-11-21, found built).** `decision:replacement-order-damage`: protection and an `instead: { effect }` are both damage steps `Game.damageOrderAsked` offers (616.1). No engine code. Szadek, Lord of Secrets; Phantom Centaur. `test/replacement-order-damage.test.ts`.
+
+**An Aura's damage to the creature it enchants (2026-11-22, found built).** `effect:damage-to-attached`: `damage` `target: "attached"` (Earthbind's). No engine code. Tilonalli's Crown, Fatal Attraction. `test/top10000-batch-338a.test.ts`.
+
+**Sharing a color with the last spell cast this turn (2026-11-22).** `static:prohibit-color-of-last-spell-cast`: `CardFilter.sharesColorWithLastSpellCast` (filter.ts `lastSpellCastColors`: the latest `seq` among every player's `spellsCastThisTurnAs`, live on the stack, as cast after). Mana Maze. `test/top10000-batch-338a.test.ts`.

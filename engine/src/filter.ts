@@ -41,7 +41,7 @@ import type { Color, ManaCost, ManaOrigin, ManaSpentQuery, ManaType } from "./ma
 import { COLORS, colorSymbols, manaValue, parseManaCost, spentManaCount } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName, seatingOf } from "./state.js";
-import type { AttachmentRecord, GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
+import type { AttachmentRecord, CastSpellRecord, GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
@@ -828,6 +828,16 @@ export interface CardFilter {
    * anywhere else, it matches nothing.
    */
   readonly sharesColorWithMana?: "produced" | "spent";
+  /**
+   * Shares a color (rule 105.2) with **the spell most recently cast this
+   * turn**, by any player — Mana Maze's "players can't cast spells that share
+   * a color with the spell most recently cast this turn". Read from every
+   * player's `spellsCastThisTurnAs`, the latest by `seq`: its colors as they
+   * are while it's still on the stack, as it was cast once it has left (it
+   * counts after it resolves or is countered). Nothing cast this turn, or a
+   * colorless last spell, and nothing shares a color with it.
+   */
+  readonly sharesColorWithLastSpellCast?: true;
   /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each
@@ -2243,6 +2253,27 @@ function damagingStint(
 }
 
 /**
+ * The colors of the spell most recently cast this turn by any player
+ * (`CardFilter.sharesColorWithLastSpellCast`): the latest `seq` among every
+ * player's `spellsCastThisTurnAs`, read live while that spell is still the
+ * same object on the stack, else as it was cast. None with nothing cast.
+ */
+export function lastSpellCastColors(state: GameState, registry: CardRegistry): readonly Color[] {
+  let latest: CastSpellRecord | undefined;
+  for (const player of state.turnOrder) {
+    for (const record of state.players[player]?.spellsCastThisTurnAs ?? []) {
+      if (latest === undefined || (record.seq ?? 0) >= (latest.seq ?? 0)) latest = record;
+    }
+  }
+  if (latest === undefined) return [];
+  const object = state.objects[latest.id];
+  if (object !== undefined && object.zone === "stack" && object.zoneChangeCount === latest.spell.zoneChangeCount) {
+    return [...effectiveColors(state, registry, object)];
+  }
+  return latest.spell.colors;
+}
+
+/**
  * The objects a `ShareReference` names, read from the state and the filter's
  * context alone — `undefined` for a reference only a resolving effect can
  * read (`bindDynamicCompares` binds those). `"exiled-with-source"` is the
@@ -2819,6 +2850,12 @@ export function matchesFilter(
       });
       if (!shared) return false;
     }
+  }
+  if (filter.sharesColorWithLastSpellCast === true) {
+    const last = lastSpellCastColors(state, registry);
+    const colors: ReadonlySet<Color> =
+      live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
+    if (!last.some((col) => colors.has(col))) return false;
   }
 
   if (

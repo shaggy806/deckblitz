@@ -25110,3 +25110,17 @@ describe("an Aura's damage to enchanted creature", () => {
     expect(attraction.triggered[0].effect).toEqual({ kind: "damage", amount: 4, target: "attached" });
   });
 });
+
+describe("a cast prohibition by the last spell's colors", () => {
+  it("reads Mana Maze's \"spells that share a color with the spell most recently cast this turn\"", () => {
+    const maze = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text: "Players can't cast spells that share a color with the spell most recently cast this turn.",
+    });
+    expect(maze.complete).toBe(true);
+    expect(maze.static[0].prohibits).toEqual([
+      { act: "cast", who: "each-player", filter: { sharesColorWithLastSpellCast: true } },
+    ]);
+  });
+});

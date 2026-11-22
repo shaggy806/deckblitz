@@ -3182,7 +3182,9 @@
   "effect:granter-controller-player-ref",
   "mechanic:exalted-counters",
   "static:artifacts-become-equipment",
-  "effect:damage-to-attached"
+  "effect:damage-to-attached",
+  "effect:damage-to-attached",
+  "static:prohibit-color-of-last-spell-cast"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

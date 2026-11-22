@@ -6,7 +6,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { B, cast, keywords, lands, nextTurn, pt, ref, spawn, table, toHand, zone } from "./harness.js";
+import { B, cast, keywords, lands, life, nextTurn, pt, ref, spawn, table, toHand, zone } from "./harness.js";
 
 describe("Tilonalli's Crown", () => {
   it("deals 1 damage to the creature it enchants, which gets +3/+0 and trample", () => {
@@ -25,6 +25,35 @@ describe("Tilonalli's Crown", () => {
     const elves = spawn(game, "Llanowar Elves", B);
     cast(game, toHand(game, "Tilonalli's Crown"), { targets: [ref(elves)] });
     expect(zone(game, elves)).toBe("graveyard");
+  });
+});
+
+describe("Mana Maze", () => {
+  it("stops a spell sharing a color with the last spell cast this turn, even once that resolved", () => {
+    const { game } = table();
+    spawn(game, "Mana Maze", B);
+    const start = life(game, B);
+    lands(game, "Mountain", 2);
+    lands(game, "Island", 1);
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(B)] });
+    expect(() => cast(game, toHand(game, "Shock"), { targets: [ref(B)] })).toThrow();
+    // Blue shares nothing with red; then red is fine again and blue isn't.
+    cast(game, toHand(game, "Opt"));
+    cast(game, toHand(game, "Shock"), { targets: [ref(B)] });
+    expect(life(game, B)).toBe(start - 5);
+  });
+
+  it("restricts nothing before the turn's first spell, nor after a colorless one", () => {
+    const { game } = table();
+    spawn(game, "Mana Maze", B);
+    lands(game, "Mountain", 2);
+    lands(game, "Wastes", 1);
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(B)] });
+    nextTurn(game);
+    nextTurn(game);
+    cast(game, toHand(game, "Shock"), { targets: [ref(B)] });
+    cast(game, toHand(game, "Sol Ring"));
+    expect(() => cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(B)] })).not.toThrow();
   });
 });
 
