@@ -1970,6 +1970,7 @@ function staticProtection(
       : [];
   return {
     colors,
+    ...(p.ownColors === true ? { ownColors: true as const } : {}),
     ...(types !== undefined || exiledTypes.length > 0 ? { types: [...(types ?? []), ...exiledTypes] } : {}),
     ...(filter !== undefined ? { filter, filterSource: source.id } : {}),
     ...(p.fromPlayers !== undefined ? { players: protectionPlayers(state, p.fromPlayers, source) } : {}),
@@ -6355,6 +6356,10 @@ interface AppliedEffect {
     /** The Aura this instance doesn't remove (702.16n), or the attachments
      * already there (702.16p). */
     sparesAura?: SparedAttachments;
+    /** Protection from each of the affected permanent's own colours
+     * (`StaticAbility.protection.ownColors`), read per permanent in the
+     * layer-6 fold. */
+    ownColors?: true;
   } | null;
   /** "Hexproof from …" it grants — the same shape as `protection`, with the
    * qualifiers of a printed "can't be the target of …". */
@@ -7186,13 +7191,17 @@ function computeCharacteristicsUncached(
     // Protection goes with a later loss of it (rule 613.7 — Shay Cormac), a
     // permanent's own printed instance with any.
     if (effect.protection && granted && !lostAfter(losses, "protection", effect.ownAt)) {
+      // "Protection from each of its colors" (Earnest Fellowship): this
+      // permanent's own, as layer 5 left them.
+      const fromColors =
+        effect.protection.ownColors === true ? [...(effect.protection.colors ?? []), ...colors] : (effect.protection.colors ?? []);
       if (effect.protection.sparesAura !== undefined) {
-        protSparing.push({ aura: effect.protection.sparesAura, colors: effect.protection.colors ?? [], types: effect.protection.types ?? [] });
+        protSparing.push({ aura: effect.protection.sparesAura, colors: fromColors, types: effect.protection.types ?? [] });
       } else {
-        for (const c of effect.protection.colors ?? []) protOtherColors.add(c);
+        for (const c of fromColors) protOtherColors.add(c);
         for (const t of effect.protection.types ?? []) protOtherTypes.add(t);
       }
-      for (const c of effect.protection.colors ?? []) protColors.add(c);
+      for (const c of fromColors) protColors.add(c);
       for (const t of effect.protection.types ?? []) protTypes.add(t);
       if (effect.protection.filter !== undefined) {
         if (effect.protection.filterSource !== undefined) {

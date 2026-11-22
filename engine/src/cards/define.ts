@@ -4201,6 +4201,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * `CARD_TYPE_CHOICES` — Serra's Emissary). Nothing while none was
      * chosen. */
     readonly chosenCardType?: true;
+    /** "Protection from **each of its colors**" (Earnest Fellowship's "Each
+     * creature has …"): for each affected permanent, protection from each
+     * colour that permanent is now (layer 5's answer, read as layer 6 is
+     * folded, rule 613.1f) — none while it's colourless (rule 105.2c). The
+     * shape of `hexproofFrom.ownColors`. */
+    readonly ownColors?: true;
     /** "Protection from **each of the exiled card's card types**" (Mirror
      * Golem): the card types of the cards in exile linked to the static's
      * source (rule 607.2a, `exiled-with-source`), as long as they stay there.
