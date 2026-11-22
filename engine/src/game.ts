@@ -315,6 +315,8 @@ import { scry } from "./decisions/scry.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import {
   amountValue,
+  countAsSourceLeftKey,
+  countsAsSourceLeftIn,
   bindAmountCompares,
   signedAmountValue,
   applyEffectSpec,
@@ -364,6 +366,7 @@ import type {
   ZoneSecondPick,
   ModesGuess,
   BoundUnlessOption,
+  CountAsSourceLeft,
   CopyForEach,
   CopyAimChoice,
   WardCost,
@@ -3157,6 +3160,10 @@ export class Game {
    * filled in as cards are asked about. Not game state: it only caches the
    * registry. */
   private readonly lookBackGreatestClauses = new Map<string, readonly GreatestAmongItsController[]>();
+  /** The `asSourceLeft` counts each card's own printed triggered abilities
+   * hold (`countsAsSourceLeftIn`), by the name its rules text comes from.
+   * Not game state: it only caches the registry. */
+  private readonly countsAsSourceLeftOf = new Map<string, readonly CountAsSourceLeft[]>();
 
   private constructor(
     state: GameState,
@@ -45270,6 +45277,15 @@ controlledBy,
           ? this.countAttachedToDeparted(you ?? controller, filter, gone, source, except)
           : this.countBattlefieldMatching(you ?? controller, filter, except, source);
       },
+      // The stint this refers to, as it last existed — or, before the
+      // ability knows one (its targets chosen as it's put on the stack), the
+      // departure the source last made, while it hasn't returned.
+      countNotedAsSourceLeft: (key) => {
+        const object = this.state.objects[source];
+        const departed =
+          departedSource() ?? (object !== undefined && object.zone !== "battlefield" ? object.lastKnown : undefined);
+        return departed?.countsAsItLeft?.[key];
+      },
       // "Among them": the attackers of the declaration that fired this
       // trigger, as `AggregateZone` "attackers" reads them.
       aggregate: (spec, except, you = controller, each) =>
@@ -74937,6 +74953,33 @@ controlledBy,
     return met;
   }
 
+  /**
+   * The `asSourceLeft` counts a permanent's own printed triggered abilities
+   * hold, counted as it is about to leave (rule 603.10a) — every member of a
+   * simultaneous event is snapshotted before the first of them moves
+   * (`snapshotLeaving`), so each count sees them all: Kodama of the Center
+   * Tree's soulshift X counts itself and the Spirits dying with it.
+   */
+  private countsAsItLeft(id: ObjectId): { readonly [key: string]: number } | undefined {
+    const object = this.state.objects[id];
+    if (object?.zone !== "battlefield") return undefined;
+    const name = rulesTextName(object);
+    let amounts = this.countsAsSourceLeftOf.get(name);
+    if (amounts === undefined) {
+      amounts = this.registry.has(name) ? countsAsSourceLeftIn(this.registry.get(name).triggered) : [];
+      this.countsAsSourceLeftOf.set(name, amounts);
+    }
+    if (amounts.length === 0) return undefined;
+    const read = this.filterAmounts({ source: id, controller: object.controller });
+    const counts: { [key: string]: number } = {};
+    for (const amount of amounts) {
+      const plain: { asSourceLeft?: true } & CountAsSourceLeft = { ...amount };
+      delete plain.asSourceLeft;
+      counts[countAsSourceLeftKey(amount)] = read(plain);
+    }
+    return counts;
+  }
+
   private takeLastKnown(id: ObjectId): LastKnownInfo {
     const object = this.state.objects[id];
     const name = printedCardName(object);
@@ -74960,9 +75003,11 @@ controlledBy,
     // before the first moves).
     const goaders = goadersOf(this.state, this.registry, id);
     const greatest = this.greatestClausesMet(id);
+    const countsAsItLeft = this.countsAsItLeft(id);
     return {
       zoneChangeCount: object.zoneChangeCount ?? 0,
       ...(greatest.length > 0 ? { greatestAmongItsController: greatest } : {}),
+      ...(countsAsItLeft !== undefined ? { countsAsItLeft } : {}),
       ...(object.classLevel !== undefined ? { classLevel: object.classLevel } : {}),
       ...(object.notedName !== undefined ? { notedName: object.notedName } : {}),
       ...(object.linkedExile !== undefined ? { linkedExile: object.linkedExile } : {}),

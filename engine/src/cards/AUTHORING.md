@@ -958,7 +958,12 @@ controls"; a `countInGraveyard` takes `forEachPlayer`, `forTarget` and
 graveyard", Roiling Terrain's "that player's graveyard"); `forPlayer: PlayerRef` reads it from one named player's
 side — `{ controllerOf: 0 }` (Weight of Spires' "that creature's
 controller"), `"trigger-player"` (Emissary of Hope's "that player"),
-`"chosen-player"` — 0 when it names nobody),
+`"chosen-player"` — 0 when it names nobody); `asSourceLeft: true` in the
+source's own leaves-the-battlefield ability counts the battlefield as it was
+just before the source left (rule 603.10a), itself and what left with it
+included — Kodama of the Center Tree's "soulshift X, where X is the number of
+Spirits you control" (noted in its last-known information as it leaves, so
+its targets read it too),
 `{ aggregate: "sum" | "max", of: "power" | "toughness" |
 "mana-value" | { counters }, filter, excludeSelf? }` (an `AggregateSpec`,
 `filter.ts` — "X is the **total power** of creatures you control", "the

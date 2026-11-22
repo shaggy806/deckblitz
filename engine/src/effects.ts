@@ -737,6 +737,16 @@ export type EffectAmount =
        * controlledBy: "you" }, forEachPlayer: true }` halved). Outside a
        * scoped effect, the controller's side. */
       readonly forEachPlayer?: true;
+      /** Counted as the battlefield was just before the source left it, once
+       * it has — its own leaves-the-battlefield ability looks back (rule
+       * 603.10a): Kodama of the Center Tree's "soulshift X, where X is the
+       * number of Spirits you control" counts itself and every Spirit that
+       * left with it. Noted in the source's last-known information as it
+       * leaves (`LastKnownInfo.countsAsItLeft`, for the amounts its own
+       * printed triggered abilities hold), and read from there — as its
+       * targets are chosen as well as when it resolves. While the source is
+       * on the battlefield, the count now. */
+      readonly asSourceLeft?: true;
     }
   /** A sum, maximum or count over a set of objects — "X is the **total
    * power** of creatures you control", "the **greatest mana value** among
@@ -14829,6 +14839,10 @@ export interface EffectApi {
    * effect's controller as "you" (for an `EffectAmount` `{ countOf }`) —
    * or `you`, given one (a `countOf`'s `forTarget`). */
   countMatching(filter: CardFilter, except?: readonly ObjectId[], you?: PlayerId): number;
+  /** A `countOf`'s `asSourceLeft` count, by `countAsSourceLeftKey`, as the
+   * source's last-known information noted it; `undefined` while the source
+   * hasn't left, or nothing was noted. */
+  countNotedAsSourceLeft(key: string): number | undefined;
   /** See the aggregate {@link EffectAmount}: the raw sum, maximum or count,
    * with `except` left out one permanent apiece, from the effect's
    * controller's side — or `you`'s, given one (its `forTarget`). Its sets
@@ -18679,6 +18693,34 @@ export type NewActiveReplacement = Omit<ActiveReplacement, "owner" | "source" | 
   readonly fromObject?: ObjectId;
 };
 
+/** A `countOf` amount with `asSourceLeft`, as its source's last-known
+ * information keys the count it noted: the amount without the flag. */
+export type CountAsSourceLeft = Extract<EffectAmount, { readonly countOf: CardFilter }>;
+export function countAsSourceLeftKey(amount: CountAsSourceLeft): string {
+  const rest: { asSourceLeft?: true } = { ...amount };
+  delete rest.asSourceLeft;
+  return JSON.stringify(rest);
+}
+
+/** Every `countOf` amount with `asSourceLeft` anywhere in `spec` (an
+ * ability: its targets' filters and its effect), for the source's
+ * last-known information to note as it leaves. */
+export function countsAsSourceLeftIn(spec: unknown): readonly CountAsSourceLeft[] {
+  const found: CountAsSourceLeft[] = [];
+  const walk = (value: unknown): void => {
+    if (typeof value !== "object" || value === null) return;
+    if (Array.isArray(value)) {
+      for (const item of value) walk(item);
+      return;
+    }
+    const record = value as Record<string, unknown>;
+    if ("countOf" in record && record.asSourceLeft === true) found.push(record as unknown as CountAsSourceLeft);
+    for (const key of Object.keys(record)) walk(record[key]);
+  };
+  walk(spec);
+  return found;
+}
+
 export function amountValue(
   amount: EffectAmount,
   ctx: ResolutionContext,
@@ -19159,6 +19201,10 @@ export function signedAmountValue(
       return ctx.aggregate(spec, except, ref.player, each);
     }
     return ctx.aggregate(spec, except, undefined, each);
+  }
+  if (amount.asSourceLeft === true) {
+    const noted = ctx.countNotedAsSourceLeft(countAsSourceLeftKey(amount));
+    if (noted !== undefined) return noted;
   }
   const except: ObjectId[] = [];
   if (amount.excludeSelf === true) except.push(ctx.source);

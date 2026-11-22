@@ -2379,6 +2379,10 @@ export interface LastKnownInfo {
    * comparison is with the board as it was (rule 603.10a), its fellows that
    * left with it and what shrank once it was gone included. */
   readonly greatestAmongItsController?: readonly string[];
+  /** The `countOf` amounts with `asSourceLeft` its own printed triggered
+   * abilities hold, each counted just before it left (rule 603.10a), by
+   * `countAsSourceLeftKey` — Kodama of the Center Tree's soulshift X. */
+  readonly countsAsItLeft?: { readonly [key: string]: number };
   /** A token's `GameObject.linkedExile`: what its leaves-the-battlefield
    * ability still means once it has ceased to exist. */
   readonly linkedExile?: GameObject["linkedExile"];

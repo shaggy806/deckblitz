@@ -2,7 +2,9 @@
  * B338 (author-top-cards overnight), triggers-journal lane: Sacred Ground
  * (`leaves-battlefield.byEffectOf: "opponent"`; an edict's sacrifice,
  * chosen by the player, is still its spell's doing); Hibernation's End
- * (the `cumulative-upkeep-paid` event, announced by every way of paying).
+ * (the `cumulative-upkeep-paid` event, announced by every way of paying);
+ * Kodama of the Center Tree (`countOf.asSourceLeft`, a count its own
+ * leaves-the-battlefield ability reads as the battlefield was).
  */
 import { describe, expect, it } from "vitest";
 
@@ -15,13 +17,16 @@ import {
   lands,
   pickFromZone,
   pickModes,
+  pt,
   ref,
   settle,
   spawn,
   table,
+  toGraveyard,
   toHand,
   toLibrary,
   toStep,
+  watchTargets,
   zone,
 } from "./harness.js";
 
@@ -114,5 +119,38 @@ describe("Hibernation's End", () => {
     expect(
       game.state.eventLog.some((e) => e.type === "cumulative-upkeep-paid" && e.object === lash && e.player === A),
     ).toBe(true);
+  });
+});
+
+describe("Kodama of the Center Tree", () => {
+  it("is as big as your Spirits, and soulshift X counts itself", () => {
+    const { game, a } = table();
+    const kodama = spawn(game, "Kodama of the Center Tree");
+    spawn(game, "Hana Kami");
+    expect(pt(game, kodama)).toEqual({ power: 2, toughness: 2 });
+    const ancientLaw = toGraveyard(game, "Kami of Ancient Law");
+    const falseHope = toGraveyard(game, "Kami of False Hope");
+    const thief = toGraveyard(game, "Thief of Hope");
+    const seen = watchTargets(a, (offered) => [offered[0]?.includes(ancientLaw) ? ancientLaw : null]);
+    pickModes(a, 0);
+    destroy(game, kodama);
+    expect(seen.offered[0]).toEqual(expect.arrayContaining([ancientLaw, falseHope]));
+    expect(seen.offered[0]).not.toContain(thief);
+    expect(zone(game, ancientLaw)).toBe("hand");
+  });
+
+  it("counts the Spirits that die with it, as the battlefield was", () => {
+    const { game, a } = table();
+    const kodama = spawn(game, "Kodama of the Center Tree");
+    spawn(game, "Hana Kami");
+    spawn(game, "Kami of False Hope");
+    const thief = toGraveyard(game, "Thief of Hope");
+    const seen = watchTargets(a, (offered) => [offered[0]?.includes(thief) ? thief : null]);
+    pickModes(a, 0);
+    game.debugApplyEffect(B, { kind: "destroy-all", filter: { type: "creature" } });
+    settle(game);
+    expect(zone(game, kodama)).toBe("graveyard");
+    expect(seen.offered[0]).toContain(thief);
+    expect(zone(game, thief)).toBe("hand");
   });
 });

@@ -3218,7 +3218,8 @@
   "effect:return-exiled-with-counter-kind",
   "trigger:put-into-graveyard-caused-by-opponent",
   "trigger:put-into-graveyard-caused-by-opponent",
-  "trigger:cumulative-upkeep-paid"
+  "trigger:cumulative-upkeep-paid",
+  "amount:leaves-battlefield-lki-count"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
