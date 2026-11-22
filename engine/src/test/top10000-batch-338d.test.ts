@@ -139,7 +139,7 @@ describe("top-10000 batch 338d — Bludgeon Brawl", () => {
     expect(pt(game, bears)).toEqual({ power: 4, toughness: 2 });
     game.debugApplyEffect(
       A,
-      { kind: "become", target: 0, addTypes: ["creature"], setBasePt: { power: 2, toughness: 2 }, duration: "end-of-turn" },
+      { kind: "become", target: 0, addTypes: ["creature"], power: 2, toughness: 2, duration: "end-of-turn" },
       [{ kind: "object", object: mine }],
     );
     settle(game);
