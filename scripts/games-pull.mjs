@@ -30,8 +30,8 @@ function ssh(command, input = "") {
   return run.stdout;
 }
 
-// Older than a minute, so a file still being written isn't taken half done.
-const listing = ssh(`cd ${remote} 2>/dev/null && find . -name '*.json.gz' -mmin +1 -printf '%s %p\\n' || true`);
+// A whole minute old (`-mmin +0`), so a file still being written isn't taken half done.
+const listing = ssh(`cd ${remote} 2>/dev/null && find . -name '*.json.gz' -mmin +0 -printf '%s %p\\n' || true`);
 const files = listing
   .split("\n")
   .map((line) => line.trim())
