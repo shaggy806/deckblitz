@@ -15,8 +15,8 @@ import { Game, HeuristicBotController, createDefaultRegistry } from "engine";
 import type { RoomInput, TableRecipe } from "protocol";
 
 import { ALICE, BOB, DECKS } from "../decks.js";
-import { MIN_RECORDED_INPUTS, replayRecord } from "../game-record.js";
-import type { DealtConfig, GameRecord } from "../game-record.js";
+import { GameRecorder, MIN_RECORDED_INPUTS, replayRecord } from "../game-record.js";
+import type { DealtConfig, GameRecord, GameRecordPart } from "../game-record.js";
 import { GAMES_PER_HOUR, GameStore, handleGamesRoute, recordShape } from "../game-store.js";
 import { Room, recordGamesTo } from "../room.js";
 import { Tables } from "../tables.js";
@@ -47,7 +47,9 @@ function recordingRoom(config: DealtConfig | GameRecord, game = Game.create({ ..
   records: GameRecord[];
 } {
   const records: GameRecord[] = [];
-  recordGamesTo({ build: "abc123", where: "server", deliver: (record) => records.push(record) });
+  // Whole records here: nothing is handed over until the game ends or the
+  // room goes, so each part begins at 0 and carries the deal.
+  recordGamesTo({ build: "abc123", where: "server", deliver: (part) => void records.push(part as GameRecord) });
   const room = new Room("REC1", game, {
     pacing: "immediate",
     botController: (player) => new HeuristicBotController(player, registry),
@@ -160,10 +162,21 @@ describe("a game's record", () => {
     }
   });
 
-  it("is handed over as it goes where the sink asks, each time longer, and each plays again", () => {
-    const records: GameRecord[] = [];
+  it("is handed over a part at a time where the sink asks, and the parts put together are the game", () => {
     const EVERY = 60;
-    recordGamesTo({ build: null, where: "browser", asItGoes: EVERY, deliver: (record) => records.push(record) });
+    const parts: GameRecordPart[] = [];
+    const store = new GameStore({ dir: tempDir() });
+    let file: string | null = null;
+    // A keeper that takes each part as it comes and says nothing: all of it.
+    recordGamesTo({
+      build: null,
+      where: "browser",
+      asItGoes: EVERY,
+      deliver: (part) => {
+        parts.push(part);
+        file = store.take(part)?.path ?? file;
+      },
+    });
     const config = dealt(7);
     const room = new Room("REC4", Game.create({ ...config, registry }), {
       pacing: "immediate",
@@ -173,19 +186,107 @@ describe("a game's record", () => {
     room.addBot(ALICE);
     room.addBot(BOB);
     room.start();
-    const last = records[records.length - 1];
+    const last = parts[parts.length - 1];
     expect(last.end.reason).toBe("over");
-    const soFar = records.slice(0, -1);
-    expect(soFar).toHaveLength(Math.floor((last.inputs.length - 1) / EVERY));
-    expect(soFar.length).toBeGreaterThan(0);
-    for (const [i, record] of soFar.entries()) {
-      expect(record.end.reason).toBe("so-far");
-      expect(record.inputs).toHaveLength((i + 1) * EVERY);
-      expect(replayRecord(record, registry).matches).toBe(true);
+    expect(parts.length).toBeGreaterThan(2);
+    // Only the first carries the deal; each of the rest begins where the one
+    // before ended.
+    expect(parts[0]).toMatchObject({ from: 0, seed: 7 });
+    expect(parts[0].config).toBeDefined();
+    let at = 0;
+    for (const part of parts) {
+      expect(part.from).toBe(at);
+      if (at > 0) expect(part.config).toBeUndefined();
+      at += part.inputs.length;
     }
+    expect(parts.slice(0, -1).every((part) => part.inputs.length === EVERY && part.end.reason === "so-far")).toBe(true);
+    // What the store kept of them is the whole game.
+    const kept = JSON.parse(gunzipSync(readFileSync(file!)).toString("utf8")) as GameRecord;
+    expect(kept.inputs).toHaveLength(at);
+    expect(kept.end.reason).toBe("over");
+    expect(replayRecord(kept, registry).matches).toBe(true);
     // Asked for it once more with nothing new: nothing.
     room.handOverRecordSoFar();
-    expect(records[records.length - 1]).toBe(last);
+    expect(parts[parts.length - 1]).toBe(last);
+  });
+
+  it("sends again from where the keeper says it is, when the keeper has fallen behind", async () => {
+    const parts: GameRecordPart[] = [];
+    // A keeper whose copy went after the first part (fetched away): it holds
+    // nothing when the second arrives, and takes whatever starts from 0.
+    let held = 0;
+    recordGamesTo({
+      build: null,
+      where: "browser",
+      deliver: (part) => {
+        parts.push(part);
+        if (parts.length === 2) held = 0;
+        if (part.from <= held) held = part.from + part.inputs.length;
+        return Promise.resolve(held);
+      },
+    });
+    const config = dealt(8);
+    const room = new Room("REC5", Game.create({ ...config, registry }), {
+      pacing: "immediate",
+      botController: (player) => new HeuristicBotController(player, registry),
+      dealt: config,
+    });
+    room.addBot(ALICE);
+    room.start();
+    const first = room.recordSoFar()?.inputs.length ?? 0;
+    expect(first).toBeGreaterThanOrEqual(MIN_RECORDED_INPUTS);
+    room.handOverRecordSoFar();
+    await Promise.resolve();
+    expect(parts).toHaveLength(1);
+    expect(room.recordSoFar()?.handed).toBe(first);
+    // The rest of the game, handed over as it ends: a part from `first`,
+    // which the keeper can't place, then the whole game.
+    room.addBot(BOB);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(parts.map((part) => part.from)).toEqual([0, first, 0]);
+    expect(parts[2].config).toBeDefined();
+    expect(held).toBe(parts[2].inputs.length);
+    expect(replayRecord(parts[2] as GameRecord, registry).matches).toBe(true);
+  });
+
+  it("a recorder left unanswered sends the same inputs again with the next part, and never loops on a keeper that takes nothing", () => {
+    const recorder = new GameRecorder(dealt(9));
+    const game = Game.create({ ...dealt(9), registry });
+    const about = { build: null, where: "browser" as const, roomId: "R", gameNumber: 1, seats: [] };
+    const pass: RoomInput = { kind: "action", action: { type: "pass-priority", player: ALICE } };
+    for (let i = 0; i < 20; i += 1) recorder.note(pass, "person");
+    const first = recorder.part(game, "so-far", about);
+    expect(first).toMatchObject({ from: 0 });
+    expect(first?.inputs).toHaveLength(20);
+    // Nothing new: nothing to send.
+    expect(recorder.part(game, "so-far", about)).toBeNull();
+    // The post failed: the next part carries those twenty too.
+    expect(recorder.acked(null, 20)).toBe(false);
+    recorder.note(pass, "person");
+    const second = recorder.part(game, "so-far", about);
+    expect(second).toMatchObject({ from: 0 });
+    expect(second?.inputs).toHaveLength(21);
+    // Kept: the next starts after them.
+    expect(recorder.acked(21, 21)).toBe(false);
+    recorder.note(pass, "person");
+    // What the page keeps by it for a closing tab: the same inputs, with
+    // nothing counted as sent and no fingerprint of the state.
+    const tail = recorder.tail(game, about);
+    expect(tail).toMatchObject({ from: 21, seed: 9, end: { reason: "so-far", events: null, digest: null } });
+    expect(tail?.inputs).toHaveLength(1);
+    expect(tail?.config).toBeUndefined();
+    const third = recorder.part(game, "so-far", about);
+    expect(third).toMatchObject({ from: 21 });
+    expect(third?.config).toBeUndefined();
+    // The keeper holds nothing of it: once, send again; told the same a
+    // second time, wait for more to send.
+    expect(recorder.acked(0, 22)).toBe(true);
+    expect(recorder.part(game, "so-far", about)).toMatchObject({ from: 0 });
+    expect(recorder.acked(0, 22)).toBe(false);
+    expect(recorder.soFar()?.handed).toBe(0);
+    // Held in full: no tail.
+    expect(recorder.acked(22, 22)).toBe(false);
+    expect(recorder.tail(game, about)).toBeNull();
   });
 
   it("keeps nothing where no sink is set, and nothing in a room that wasn't told its deal", () => {
@@ -193,8 +294,8 @@ describe("a game's record", () => {
     const game = Game.create({ ...dealt(6), registry });
     const room = new Room("REC2", game, { pacing: "immediate", dealt: dealt(6) });
     expect(room.recordSoFar()).toBeNull();
-    const records: GameRecord[] = [];
-    recordGamesTo({ build: null, where: "browser", deliver: (r) => records.push(r) });
+    const records: GameRecordPart[] = [];
+    recordGamesTo({ build: null, where: "browser", deliver: (r) => void records.push(r) });
     const untold = new Room("REC3", Game.create({ ...dealt(6), registry }), { pacing: "immediate" });
     expect(untold.recordSoFar()).toBeNull();
   });
@@ -264,11 +365,57 @@ describe("the game store", () => {
     expect(readdirSync(join(dir, "2026-11-22")).sort()).toEqual(["ABCD-2-7.json.gz", "ABCD-3-7.json.gz"]);
   });
 
-  it("takes a posted record over HTTP, answers nothing, and stops an address that posts too many", async () => {
+  it("puts a part after what it holds, and says where to start again when it can't", () => {
+    const dir = tempDir();
+    let now = NOON;
+    const store = new GameStore({ dir, now: () => now });
+    const input = (n: number): GameRecord["inputs"][number] => ({ input: { kind: "concede", player: ALICE }, by: "person", via: String(n) });
+    const inputs = (from: number, to: number): GameRecord["inputs"] => Array.from({ length: to - from }, (_, i) => input(from + i));
+    const read = (path: string): GameRecord => JSON.parse(gunzipSync(readFileSync(path)).toString("utf8")) as GameRecord;
+    const { config, ...rest } = sample();
+    const part = (from: number, to: number, more: Partial<GameRecordPart> = {}): GameRecordPart => ({
+      ...rest,
+      seed: 7,
+      from,
+      ...(from === 0 ? { config } : {}),
+      inputs: inputs(from, to),
+      ...more,
+    });
+
+    // A part with nothing kept to go after: not placed, start from 0.
+    expect(store.take(part(3, 5))).toEqual({ have: 0, path: null });
+    const first = store.take(part(0, 3));
+    expect(first).toMatchObject({ have: 3 });
+    const path = first!.path!;
+    // The next goes after it, and its `end` is the record's.
+    expect(store.take(part(3, 5, { end: { ...sample().end, reason: "over", turn: 9 } }))).toEqual({ have: 5, path });
+    const kept = read(path);
+    expect(kept.inputs.map((i) => i.via)).toEqual(["0", "1", "2", "3", "4"]);
+    expect(kept.config).toEqual(config);
+    expect(kept.end).toMatchObject({ reason: "over", turn: 9 });
+    expect("from" in kept).toBe(false);
+    // One that overlaps what is kept replaces from where it begins; one that
+    // ends inside it, or begins past it, changes nothing.
+    expect(store.take(part(4, 7))).toEqual({ have: 7, path });
+    expect(read(path).inputs.map((i) => i.via)).toEqual(["0", "1", "2", "3", "4", "5", "6"]);
+    expect(store.take(part(2, 6))).toEqual({ have: 7, path: null });
+    expect(store.take(part(9, 12))).toEqual({ have: 7, path: null });
+    expect(store.take(part(0, 5))).toEqual({ have: 7, path: null });
+    // Past midnight UTC it is still the one file.
+    now += 86_400_000 / 2 + 3_600_000;
+    expect(store.take(part(7, 8))).toEqual({ have: 8, path });
+    expect(store.stats().games).toBe(1);
+    // Fetched away: the next part can't be placed, and the whole game starts a new file.
+    rmSync(path);
+    expect(store.take(part(8, 9))).toEqual({ have: 0, path: null });
+    expect(store.take(part(0, 9))).toMatchObject({ have: 9 });
+  });
+
+  it("takes a post over HTTP and answers how much of the game it holds", async () => {
     const dir = tempDir();
     const store = new GameStore({ dir, now: () => NOON });
     const server = createServer((req, res) => {
-      if (handleGamesRoute(req, res, store, () => "1.2.3.4", "*")) return;
+      if (handleGamesRoute(req, res, store, () => "1.2.3.4", "https://deckblitz.net")) return;
       res.writeHead(404);
       res.end();
     });
@@ -277,16 +424,31 @@ describe("the game store", () => {
     try {
       const post = (body: string): Promise<Response> => fetch(url, { method: "POST", body });
       const answer = await post(JSON.stringify(sample()));
-      expect(answer.status).toBe(204);
-      expect(await answer.text()).toBe("");
-      expect((await post("not json")).status).toBe(204);
+      expect(answer.status).toBe(200);
+      expect(answer.headers.get("access-control-allow-origin")).toBe("https://deckblitz.net");
+      expect(await answer.json()).toEqual({ have: 1 });
+      // A part it can't place: told what it holds.
+      const { config: _config, ...rest } = sample();
+      const late = await post(JSON.stringify({ ...rest, seed: 7, from: 4 }));
+      expect(await late.json()).toEqual({ have: 1 });
+      // Not a record: nothing said.
+      const junk = await post("not json");
+      expect(junk.status).toBe(204);
+      expect(await junk.text()).toBe("");
       expect(store.stats().games).toBe(1);
-      for (let i = 2; i <= GAMES_PER_HOUR + 5; i += 1) await post(JSON.stringify(sample({ gameNumber: i })));
-      // The first, the junk and 38 more were admitted; the rest dropped unread.
-      expect(store.stats().games).toBe(GAMES_PER_HOUR - 1);
     } finally {
       server.close();
     }
+  });
+
+  it("stops an address that posts too many in an hour", () => {
+    let now = NOON;
+    const store = new GameStore({ dir: tempDir(), now: () => now });
+    for (let i = 0; i < GAMES_PER_HOUR; i += 1) expect(store.admits("1.2.3.4")).toBe(true);
+    expect(store.admits("1.2.3.4")).toBe(false);
+    expect(store.admits("5.6.7.8")).toBe(true);
+    now += 3_600_000;
+    expect(store.admits("1.2.3.4")).toBe(true);
   });
 });
 

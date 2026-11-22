@@ -42,7 +42,7 @@ import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZone
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
 import { GameRecorder, concession as concede } from "./game-record.js";
-import type { DealtConfig, GameRecordSink, RecordSoFar } from "./game-record.js";
+import type { DealtConfig, GameRecordPart, GameRecordSink, RecordSoFar } from "./game-record.js";
 import type {
   Action,
   AwaitingDecision,
@@ -873,20 +873,49 @@ export class Room {
     this.handOverRecord(this.game.state.result.over ? "over" : "so-far");
   }
 
+  /** What of the game's record the sink isn't known to hold, nothing sent
+   * (`GameRecorder.tail`): for a host that must be able to send it without
+   * this room (a browser's page, as its tab closes). `null` if there is none. */
+  recordTail(): GameRecordPart | null {
+    if (this.recorder === null || gameRecords === null) return null;
+    return this.recorder.tail(this.game, this.recordAbout(gameRecords));
+  }
+
+  /** What a part says of this room's game besides its inputs. */
+  private recordAbout(sink: GameRecordSink): Pick<GameRecordPart, "build" | "where" | "roomId" | "gameNumber" | "seats"> {
+    return {
+      build: sink.build,
+      where: sink.where,
+      roomId: this.id,
+      gameNumber: this.gameNumber,
+      seats: this.seatStatuses().map((s) => ({ player: s.player, name: s.displayName ?? null, bot: this.bots.has(s.player) })),
+    };
+  }
+
   /** Hands the game's record to the host's sink: as the game ends, as its
    * room goes with the game unfinished, or as it goes (`asItGoes`). Nothing
    * if the sink already has all of it. Never throws into the room. */
   private handOverRecord(reason: "over" | "left" | "so-far"): void {
-    if (this.recorder === null || gameRecords === null) return;
+    const recorder = this.recorder;
+    if (recorder === null || gameRecords === null) return;
     try {
-      const record = this.recorder.finish(this.game, reason, {
-        build: gameRecords.build,
-        where: gameRecords.where,
-        roomId: this.id,
-        gameNumber: this.gameNumber,
-        seats: this.seatStatuses().map((s) => ({ player: s.player, name: s.displayName ?? null, bot: this.bots.has(s.player) })),
-      });
-      if (record !== null) gameRecords.deliver(record);
+      const part = recorder.part(this.game, reason, this.recordAbout(gameRecords));
+      if (part === null) return;
+      const through = part.from + part.inputs.length;
+      const answer = gameRecords.deliver(part);
+      // A keeper that answers nothing took it all (a server's own store).
+      if (answer === undefined) {
+        recorder.acked(through, through);
+        return;
+      }
+      // One that answers says how much of the game it holds: less than this
+      // part began from, and the part goes again from there (`acked`).
+      void answer.then(
+        (have) => {
+          if (recorder.acked(have, through)) this.handOverRecord(reason);
+        },
+        () => void recorder.acked(null, through),
+      );
     } catch (error) {
       console.error(`room ${this.id}: couldn't hand over the game's record`, error);
     }

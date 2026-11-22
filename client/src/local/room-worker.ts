@@ -61,12 +61,22 @@ recordBotDecisionsTo({
 
 /**
  * Each game played here is kept as how it was dealt and what was done to it
- * (the server's `game-record.ts`) and posted to the room server as it ends,
- * or as its room goes: a solo game runs in this tab, so the server has
- * nothing of it otherwise, and a bot's play someone reports can then be
- * looked at. Sent blind, like a usage event (`usage.ts`): a text body, so no
- * preflight, nothing read back, a failure nobody's problem. No name, address
- * or id goes with it; the About page says games are kept.
+ * (the server's `game-record.ts`) and posted to the room server: a solo game
+ * runs in this tab, so the server has nothing of it otherwise, and a bot's
+ * play someone reports can then be looked at. No name, address or id goes
+ * with it; the About page says games are kept.
+ *
+ * **A few inputs at a time**, so that a tab closed without a word has lost
+ * almost nothing: only the inputs the server doesn't hold yet go (every
+ * `HAND_OVER_EVERY`, as the game ends, and whenever the page says its tab is
+ * hidden: `records`), and the server answers how many it now holds, which
+ * the next part starts from (`GameRecorder.acked`). A tab that closes takes
+ * this worker with it before it can send, so the page is kept the unsent
+ * inputs (`tails`, about once a second) and sends those itself. A text
+ * body, so no preflight. `keepalive` lets a small post outlive the tab that
+ * made it (a browser allows about 64 KB of those at once; a part is a few).
+ * A failure is tried twice more, then left: the next part carries the same
+ * inputs again.
  */
 const gamesUrl = (): string =>
   `${((import.meta.env.VITE_SERVER_URL as string | undefined) ?? `ws://${self.location.hostname}:4000`).replace(/^ws/, 'http')}/games`
@@ -74,14 +84,27 @@ recordGamesTo({
   build: __PAGE_COMMIT__,
   where: 'browser',
   asItGoes: HAND_OVER_EVERY,
-  deliver: (record) => {
-    try {
-      void fetch(gamesUrl(), { method: 'POST', body: JSON.stringify(record), mode: 'no-cors' }).catch(() => {})
-    } catch {
-      // Not worth a player's notice.
+  deliver: async (part) => {
+    const body = JSON.stringify(part)
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        const answer = await fetch(gamesUrl(), { method: 'POST', body, keepalive: body.length < KEEPALIVE_MOST })
+        // 204: the server kept nothing (records off, too many posts).
+        if (answer.status !== 200) return null
+        const said = (await answer.json()) as { have?: unknown }
+        return typeof said.have === 'number' ? said.have : null
+      } catch {
+        // The connection, most likely: wait, and try again.
+        await new Promise((resolve) => setTimeout(resolve, 2000 * (attempt + 1)))
+      }
     }
+    return null
   },
 })
+
+/** The largest body sent with `keepalive` (the browsers' quota is 64 KiB for
+ * all such requests in flight; a larger one is sent plainly). */
+const KEEPALIVE_MOST = 48_000
 
 /** How long each of the page's own moves took the worker (`LocalStats`). */
 const movesMs: number[] = []
@@ -121,6 +144,10 @@ function save(): void {
   const ended = [...saved].filter((id) => !now.has(id))
   saved = now
   void saveRooms(rooms, ended)
+  // And what the room server hasn't of each game's record, for the page to
+  // send itself if its tab closes: this worker goes with the tab, before it
+  // could send anything (`localSocket.ts`, `sendTailsNow`).
+  post({ kind: 'tails', tails: host.recordTails().map((tail) => JSON.stringify(tail)) })
 }
 
 function deliver(message: ServerMessage): void {
@@ -188,6 +215,10 @@ self.onmessage = async (event: MessageEvent<ToRoomWorker>) => {
       return
     case 'table-leave':
       host?.leaveTable(message.roomId)
+      return
+    case 'records':
+      // The tab is hidden or closing: what hasn't been sent of each game goes now.
+      host?.handOverRecords()
       return
     case 'server-down':
       host?.serverDown()

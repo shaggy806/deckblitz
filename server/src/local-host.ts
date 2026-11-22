@@ -23,7 +23,7 @@ import type { BotSpeed, ClientMessage, ServerMessage } from "protocol";
 import { cardRegistry } from "./card-registry.js";
 import { Room } from "./room.js";
 import type { GameRecipe } from "./room.js";
-import type { RecordSoFar } from "./game-record.js";
+import type { GameRecordPart, RecordSoFar } from "./game-record.js";
 import { RoomManager } from "./room-manager.js";
 import type { ConnId } from "./room-host.js";
 import { RoomService } from "./room-service.js";
@@ -287,12 +287,24 @@ export class LocalRoomHost {
     this.service.handle(PAGE, message);
   }
 
-  /** Each game's record as it stands, to wherever records go
-   * (`recordGamesTo`): one room's, or every room's. */
-  private handOverRecords(roomId?: string): void {
+  /** What hasn't been handed over of each game's record, to wherever records
+   * go (`recordGamesTo`): one room's, or every room's. The page asks for it
+   * when its tab is hidden or closing. */
+  handOverRecords(roomId?: string): void {
     for (const room of this.service.manager.all()) {
       if (room instanceof Room && (roomId === undefined || room.id === roomId)) room.handOverRecordSoFar();
     }
+  }
+
+  /** Each game's unsent inputs as a part (`Room.recordTail`), nothing counted
+   * as sent: the page keeps them by it, to send itself as its tab closes. */
+  recordTails(): GameRecordPart[] {
+    const tails: GameRecordPart[] = [];
+    for (const room of this.service.manager.all()) {
+      const tail = room instanceof Room ? room.recordTail() : null;
+      if (tail !== null) tails.push(tail);
+    }
+    return tails;
   }
 
   /** The page went away (or reconnected): what a closed socket does. */

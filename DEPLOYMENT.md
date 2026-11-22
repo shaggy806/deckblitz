@@ -330,7 +330,9 @@ Every game is kept so a reported play can be looked at afterwards (`server/src/g
 `game-store.ts`): how it was dealt and every input made to it, one gzipped JSON file a game in
 `/opt/mtg-engine/games/<UTC day>/<room>-<game>-<seed>.json.gz` (git-ignored, outside the `dist`
 folders, so a deploy leaves it alone). A game a browser plays alone is posted by the page as it ends
-(`POST /games` on the public port: at most 4 MB a post, 40 an hour an address); a game at a table is
+(`POST /games` on the public port, a few inputs at a time as the game goes and again as its tab
+closes, so a tab closed mid-game has lost at most a second: at most 4 MB a post, 600 an hour an
+address); a game at a table is
 written from the server's own log when the table is forgotten. A record names nobody: decks, plays,
 the commit it was played on and the country the post came from. A game is 20-50 KB; the folder stops
 at 1 GB, the oldest files going first. `Environment=GAMES_DIR=…` moves it, `GAMES_MAX_MB=…` sizes

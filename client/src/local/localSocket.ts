@@ -32,6 +32,9 @@ export type ToRoomWorker =
   | { readonly kind: 'stats'; readonly id: number }
   | { readonly kind: 'send'; readonly data: string }
   | { readonly kind: 'close' }
+  /** The tab is hidden or closing: each game's record, as far as it hasn't
+   * been sent, goes to the room server now (`LocalRoomHost.handOverRecords`). */
+  | { readonly kind: 'records' }
   /** The server's `table-start` (`data`): deal this tab's copy of the table
    * and seat the page at it, by the `token` it holds its seat with; `join` is
    * the page's own `join-room` or `spectate-room`, when that is how it came
@@ -62,6 +65,10 @@ export type FromRoomWorker =
   | { readonly kind: 'server'; readonly data: string }
   | { readonly kind: 'failed'; readonly message: string }
   | { readonly kind: 'stats'; readonly id: number; readonly stats: LocalStats }
+  /** What the room server doesn't hold yet of each game's record, a part a
+   * game as JSON (the server's `GameRecordPart`), about once a second: the
+   * page sends them itself as its tab closes (`sendTailsNow`). */
+  | { readonly kind: 'tails'; readonly tails: readonly string[] }
 
 /** The worker's numbers, for measuring local games on a slower machine
  * (`docs/plans/local-rooms.md`, step 6): `deckblitzLocal.stats()` in the
@@ -129,7 +136,8 @@ export class LocalSocket implements RoomSocket {
       else if (message.kind === 'stats') {
         this.waitingStats.get(message.id)?.(message.stats)
         this.waitingStats.delete(message.id)
-      } else this.fail(message.message)
+      } else if (message.kind === 'tails') this.tails = message.tails
+      else this.fail(message.message)
     }
     this.worker.onerror = (event) => this.fail(event.message)
     this.post({ kind: 'open' })
@@ -158,6 +166,31 @@ export class LocalSocket implements RoomSocket {
    * the tables held here. */
   serverLink(up: boolean): void {
     this.post({ kind: up ? 'server-up' : 'server-down' })
+  }
+
+  /** The tab is hidden: see `ToRoomWorker`'s `records`. */
+  records(): void {
+    this.post({ kind: 'records' })
+  }
+
+  /** The worker's latest `tails` (`FromRoomWorker`). */
+  tails: readonly string[] = []
+
+  /**
+   * The tab is going: sends each game's unsent inputs to the room server
+   * from the page itself, with `sendBeacon`, which a browser carries out
+   * after the page is gone. The worker can't: it is ended with the page,
+   * before a message asking it to send is ever handled (seen 2026-11-22: the
+   * last 34 inputs of a game only arrived when its save was reopened). At
+   * most a second stale, and the server puts a part it partly holds in its
+   * place, so sending one twice costs nothing.
+   */
+  sendTailsNow(): void {
+    try {
+      for (const tail of this.tails) navigator.sendBeacon(GAMES_URL(), tail)
+    } catch {
+      // Not worth a player's notice.
+    }
   }
 
   /** A dev build's test hook: see `ToRoomWorker`'s `table-corrupt`. */
@@ -269,6 +302,31 @@ const NO_SERVER: RoomSocket = { send: () => {}, close: () => {}, onopen: null, o
 /** The tab's one room worker, shared by every `HybridSocket` the page opens,
  * so a reconnect to the server doesn't end a game played here. */
 let tabWorker: LocalSocket | null = null
+
+/**
+ * Gets what the room server hasn't of each game's record to it whenever this
+ * tab is hidden (another tab in front, the window minimised) or going away
+ * (closed, reloaded, navigated): a tab can close without a word, and the
+ * game with it. Set up once, when the tab first has a worker.
+ */
+let watchingForLeaving = false
+function watchForLeaving(): void {
+  if (watchingForLeaving || typeof document === 'undefined') return
+  watchingForLeaving = true
+  // Hidden: the worker lives on, and sends what it has (and hears how much
+  // the server holds). Going away: only the page can still send.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && tabWorker !== null && !tabWorker.dead) tabWorker.records()
+  })
+  window.addEventListener('pagehide', () => {
+    if (tabWorker !== null && !tabWorker.dead) tabWorker.sendTailsNow()
+  })
+}
+
+/** Where game records are posted: the room server's `POST /games`, by the
+ * convention `usage.ts` and the room worker share. */
+const GAMES_URL = (): string =>
+  `${((import.meta.env.VITE_SERVER_URL as string | undefined) ?? `ws://${window.location.hostname}:4000`).replace(/^ws/, 'http')}/games`
 
 /** Set once the tab's worker has failed (its card pool wouldn't load, say):
  * every solo game after that is played on the server. */
@@ -650,6 +708,7 @@ export class HybridSocket implements RoomSocket {
     if (tabWorker === null || tabWorker.dead) {
       tabWorker = new LocalSocket()
       exposeStats()
+      watchForLeaving()
     }
     const local = tabWorker
     this.local = local

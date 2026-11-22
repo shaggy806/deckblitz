@@ -59,9 +59,13 @@ export interface RecordSoFar {
   readonly config: DealtConfig;
   readonly startedAt: number;
   readonly inputs: readonly RecordedInput[];
+  /** How many of `inputs` whoever keeps records is known to hold already
+   * (`GameRecorder.acked`), so a game seated again after a reload sends only
+   * the rest. Absent: none. */
+  readonly handed?: number;
 }
 
-export interface GameRecord extends RecordSoFar {
+export interface GameRecord extends Omit<RecordSoFar, "handed"> {
   readonly version: typeof GAME_RECORD_VERSION;
   /** The commit this was played on, where the build knows it. */
   readonly build: string | null;
@@ -89,13 +93,27 @@ export interface GameRecord extends RecordSoFar {
   };
 }
 
+/**
+ * A record as it is handed over: all of it (`from` 0, with the `config`), or
+ * only the inputs from `from` on, for a keeper that already holds the ones
+ * before (`GameStore.take` appends them). A browser's game goes this way, a
+ * few inputs at a time, so that a tab closed without a word has lost almost
+ * nothing; `seed` names the game where there is no `config` to read it from.
+ */
+export interface GameRecordPart extends Omit<GameRecord, "config"> {
+  readonly from: number;
+  readonly seed: number | null;
+  readonly config?: DealtConfig;
+}
+
 /** A game with fewer inputs than this was left before it began: not kept. */
 export const MIN_RECORDED_INPUTS = 12;
 
-/** How many more inputs a browser's game has before it is handed over again
- * (`GameRecordSink.asItGoes`, `Room.act`): a tab that closes for good takes
- * at most that much of the game with it. */
-export const HAND_OVER_EVERY = 500;
+/** How many more inputs a browser's game has before the new ones are handed
+ * over (`GameRecordSink.asItGoes`, `Room.act`): about every twenty seconds of
+ * a bots' game, a few kilobytes each. The page also asks for it whenever its
+ * tab is hidden or closing (`LocalRoomHost.handOverRecords`). */
+export const HAND_OVER_EVERY = 50;
 
 /** Past this many inputs a record stops growing (a game the fuzzer's turn cap
  * would have stopped long before): it is then no record, and isn't kept. */
@@ -108,14 +126,18 @@ export class GameRecorder {
   private readonly inputs: RecordedInput[];
   /** The record no longer holds the whole game (it overflowed): never sent. */
   private broken = false;
-  /** How many inputs the record held when it was last handed over. */
+  /** How many inputs the keeper is known to hold (`acked`). */
   private handed = 0;
+  /** How many the record held when a part was last sent: nothing is sent
+   * again until there is more, or the keeper says it holds less. */
+  private sent = 0;
 
   constructor(start: DealtConfig | RecordSoFar, now: number = Date.now()) {
     if ("inputs" in start) {
       this.config = start.config;
       this.startedAt = start.startedAt;
       this.inputs = [...start.inputs];
+      this.handed = Math.min(Math.max(0, start.handed ?? 0), this.inputs.length);
     } else {
       this.config = start;
       this.startedAt = now;
@@ -139,37 +161,44 @@ export class GameRecorder {
 
   /** What a saved game carries, or `null` once the record is no good. */
   soFar(): RecordSoFar | null {
-    return this.broken ? null : { config: this.config, startedAt: this.startedAt, inputs: this.inputs };
+    return this.broken
+      ? null
+      : { config: this.config, startedAt: this.startedAt, inputs: this.inputs, handed: this.handed };
   }
 
-  /** How many inputs have been made since the record was last handed over. */
+  /** How many inputs have been made since a part was last sent. */
   get unsent(): number {
-    return this.broken ? 0 : this.inputs.length - this.handed;
+    return this.broken ? 0 : this.inputs.length - Math.max(this.handed, this.sent);
   }
 
   /**
-   * The record as it stands, to hand over: `null` if nothing has been added
-   * since it last was, it is broken, or the game hardly began. A game may be
-   * handed over more than once as it goes; whoever keeps records keeps the
-   * longest (`GameStore.write`).
+   * What to hand over now: the inputs the keeper doesn't hold yet (all of
+   * them, with the deal, when it holds none), and how the game stands.
+   * `null` if nothing has been added since the last part was sent, the
+   * record is broken, or the game hardly began. Tell the keeper's answer to
+   * `acked`.
    */
-  finish(
+  part(
     game: Game,
     reason: "over" | "left" | "so-far",
     about: Pick<GameRecord, "build" | "where" | "roomId" | "gameNumber" | "seats">,
     now: number = Date.now(),
-  ): GameRecord | null {
-    if (this.broken || this.inputs.length < MIN_RECORDED_INPUTS || this.inputs.length <= this.handed) return null;
-    this.handed = this.inputs.length;
+  ): GameRecordPart | null {
+    if (this.broken || this.inputs.length < MIN_RECORDED_INPUTS) return null;
+    if (this.inputs.length <= Math.max(this.handed, this.sent)) return null;
+    const from = this.handed;
+    this.sent = this.inputs.length;
     const state = game.state;
     return {
       version: GAME_RECORD_VERSION,
       ...about,
-      config: this.config,
+      seed: typeof this.config.seed === "number" ? this.config.seed : null,
+      from,
+      ...(from === 0 ? { config: this.config } : {}),
       startedAt: this.startedAt,
       endedAt: now,
-      // A copy: the game may go on, and a record handed over must not.
-      inputs: [...this.inputs],
+      // A copy: the game goes on, and a part handed over must not.
+      inputs: this.inputs.slice(from),
       end: {
         reason,
         winner: state.result.over ? (state.result.winner ?? null) : null,
@@ -179,6 +208,73 @@ export class GameRecorder {
       },
     };
   }
+
+  /**
+   * The inputs the keeper isn't known to hold, as a part, with nothing
+   * counted as sent: what a browser's page keeps by it to send as its tab
+   * closes, when its worker is past sending anything (`Room.recordTail`).
+   * Made about once a second, so without the state's fingerprint, which
+   * costs a pass over the whole state: `end`'s `events` and `digest` are
+   * `null`, as a table's are. `null` if the keeper holds it all, the record
+   * is broken, or the game hardly began.
+   */
+  tail(
+    game: Game,
+    about: Pick<GameRecord, "build" | "where" | "roomId" | "gameNumber" | "seats">,
+    now: number = Date.now(),
+  ): GameRecordPart | null {
+    if (this.broken || this.inputs.length < MIN_RECORDED_INPUTS || this.inputs.length <= this.handed) return null;
+    const from = this.handed;
+    const state = game.state;
+    return {
+      version: GAME_RECORD_VERSION,
+      ...about,
+      seed: typeof this.config.seed === "number" ? this.config.seed : null,
+      from,
+      ...(from === 0 ? { config: this.config } : {}),
+      startedAt: this.startedAt,
+      endedAt: now,
+      inputs: this.inputs.slice(from),
+      end: {
+        reason: state.result.over ? "over" : "so-far",
+        winner: state.result.over ? (state.result.winner ?? null) : null,
+        turn: state.turn.number,
+        events: null,
+        digest: null,
+      },
+    };
+  }
+
+  /**
+   * The keeper's answer to a part that ran to `through` inputs: how many of
+   * the game's inputs it now holds, or `null` when it didn't say (the post
+   * failed, or records are off there). Returns whether to send again at
+   * once: it holds less than the part began from (its copy went: fetched
+   * away, or dropped for room), so the next part starts from what it has.
+   * Asked for at most once until an answer agrees, so a keeper that never
+   * takes anything is not sent the game over and over.
+   */
+  acked(have: number | null, through: number): boolean {
+    if (have === null) {
+      // Unknown: as if never sent, so the next part carries these too.
+      this.sent = this.handed;
+      return false;
+    }
+    const held = Math.min(Math.max(0, have), this.inputs.length);
+    const behind = held < Math.min(through, this.inputs.length);
+    this.handed = held;
+    if (!behind) {
+      this.resent = false;
+      return false;
+    }
+    this.sent = held;
+    if (this.resent) return false;
+    this.resent = true;
+    return true;
+  }
+
+  /** A part was sent again for a keeper that had fallen behind (`acked`). */
+  private resent = false;
 }
 
 /** How many decisions a conceding player's stand-in answers first: `Room`'s. */
@@ -301,5 +397,7 @@ export interface GameRecordSink {
    * (`HAND_OVER_EVERY`): a browser's, whose tab can close without the room
    * ever hearing. */
   readonly asItGoes?: number;
-  readonly deliver: (record: GameRecord) => void;
+  /** Takes a part, and may answer how many of the game's inputs the keeper
+   * now holds (`GameRecorder.acked`); answering nothing is "all of them". */
+  readonly deliver: (part: GameRecordPart) => void | Promise<number | null>;
 }
