@@ -64431,6 +64431,9 @@ controlledBy,
       case "investigated":
         add({ kind: "investigated", player: event.player });
         return;
+      case "ventured":
+        add({ kind: "ventured", player: event.player });
+        return;
       case "modes-chosen":
         // Facing a dilemma: what the `faces-dilemma` trigger reads.
         if (event.modal === true && event.modes.length > 0 && event.player !== undefined) {
@@ -70194,6 +70197,9 @@ controlledBy,
   private ventureInto(player: PlayerId, undercity: boolean, source: ObjectId): void {
     const ps = this.state.players[player];
     if (ps === undefined || ps.hasLost) return;
+    // "Can't venture into the dungeon more than once each turn" (Keen-Eared
+    // Sentry): a venture past the limit doesn't happen.
+    if (this.cantVentureMore(player)) return;
     const current = ps.dungeon;
     if (current === undefined) {
       this.beginEnterDungeon(player, undercity, source);
@@ -72191,6 +72197,16 @@ controlledBy,
   /** Whether a `draw` prohibition stops `player` drawing another card
    * now, with `more` of them about to be drawn: read from the turn's real draws
    * (the journal's), those before the permanent arrived included. */
+  /** Whether a `venture` prohibition stops `player` venturing once more this
+   * turn: they have ventured `perTurn` times already (the journal's
+   * `ventured` entries). */
+  private cantVentureMore(player: PlayerId): boolean {
+    const ventured = journalTotal(this.state, "ventured", player, "count");
+    return prohibitionsOnPlayer(this.state, this.registry, "venture", player).some(
+      ({ prohibition }) => ventured + 1 > prohibition.perTurn,
+    );
+  }
+
   private cantDrawMore(player: PlayerId, more = 1): boolean {
     const drawn = journalTotal(this.state, "card-drawn", player, "count");
     return prohibitionsOnPlayer(this.state, this.registry, "draw", player).some(

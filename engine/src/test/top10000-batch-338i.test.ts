@@ -4,9 +4,14 @@
  * chosen by the player, is still its spell's doing); Hibernation's End
  * (the `cumulative-upkeep-paid` event, announced by every way of paying);
  * Kodama of the Center Tree (`countOf.asSourceLeft`, a count its own
- * leaves-the-battlefield ability reads as the battlefield was).
+ * leaves-the-battlefield ability reads as the battlefield was); Keen-Eared
+ * Sentry (a `venture` prohibition, counted from the journal's `ventured`).
  */
 import { describe, expect, it } from "vitest";
+
+import { playerHasKeyword } from "../characteristics.js";
+import type { Game } from "../game.js";
+import type { PlayerId } from "../primitives.js";
 
 import {
   A,
@@ -15,6 +20,7 @@ import {
   counters,
   destroy,
   lands,
+  nextTurn,
   pickFromZone,
   pickModes,
   pt,
@@ -152,5 +158,35 @@ describe("Kodama of the Center Tree", () => {
     expect(zone(game, kodama)).toBe("graveyard");
     expect(seen.offered[0]).toContain(thief);
     expect(zone(game, thief)).toBe("hand");
+  });
+});
+
+describe("Keen-Eared Sentry", () => {
+  const ventures = (game: Game, player: PlayerId): number =>
+    game.state.eventLog.filter((e) => e.type === "ventured" && e.player === player).length;
+  const venture = (game: Game, player: PlayerId): void => {
+    game.debugApplyEffect(player, { kind: "venture", into: "undercity" });
+    settle(game);
+  };
+
+  it("lets each opponent venture once a turn, and its controller freely", () => {
+    const { game } = table();
+    spawn(game, "Keen-Eared Sentry");
+    venture(game, B);
+    venture(game, B);
+    expect(ventures(game, B)).toBe(1);
+    venture(game, A);
+    venture(game, A);
+    expect(ventures(game, A)).toBe(2);
+    nextTurn(game);
+    venture(game, B);
+    expect(ventures(game, B)).toBe(2);
+  });
+
+  it("gives its controller hexproof", () => {
+    const { game } = table();
+    spawn(game, "Keen-Eared Sentry");
+    expect(playerHasKeyword(game.state, game.registry, A, "hexproof")).toBe(true);
+    expect(playerHasKeyword(game.state, game.registry, B, "hexproof")).toBe(false);
   });
 });

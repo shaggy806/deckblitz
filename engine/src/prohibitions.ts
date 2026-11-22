@@ -201,6 +201,15 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly who: W;
     }
   | {
+      /** "Can't venture into the dungeon more than `perTurn` times each
+       * turn" (Keen-Eared Sentry, rule 701.49): a venture past it, Undercity's
+       * included (701.49d), doesn't happen. Counted from the journal's
+       * `ventured` entries. See `Game.cantVentureMore`. */
+      readonly act: "venture";
+      readonly who: W;
+      readonly perTurn: number;
+    }
+  | {
       /** "Can't pay life to cast spells or activate abilities" (Angel of
        * Jubilation). Only those costs: a shock land's life is still paid. */
       readonly act: "pay-life";

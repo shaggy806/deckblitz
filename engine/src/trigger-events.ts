@@ -168,7 +168,7 @@ export const TRIGGER_EVENTS = {
           : e.copy,
   }),
   /** "Whenever you venture into the dungeon" (rule 701.49). */
-  ventures: row({ type: "ventured", player: (e) => e.player }),
+  ventures: row({ type: "ventured", player: (e) => e.player, journaled: "ventured" }),
   /** "Whenever you complete a dungeon" (rule 309.7). */
   "completes-dungeon": row({ type: "dungeon-completed", player: (e) => e.player }),
   /** "Whenever you open an Attraction" (rule 701.51c): only an Attraction
