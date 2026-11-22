@@ -164,6 +164,8 @@ export class CopiesTable {
       seed: options.seed,
       idSalt: `copies-${options.seed}`,
       mulligans: true,
+      // The take-back house rule on, so the fuzz takes turns back too.
+      takeBacks: 3,
       ...(options.rules === "plain" ? {} : { rules: COMMANDER_RULES }),
       registry: cardRegistry(),
       decks: players.map((player, i) => {
@@ -365,7 +367,7 @@ export function playCopies(options: CopiesFuzzOptions): CopiesFuzzResult {
   const sideEvent = (): void => {
     const copy = pick(table.copies);
     const { room, connection } = copy;
-    const kinds = ["auto-pass", "pass-turn", "resolve-all", "settings", "takeover", "host", "take-state", "concede"] as const;
+    const kinds = ["auto-pass", "pass-turn", "resolve-all", "settings", "takeover", "host", "take-state", "concede", "take-back"] as const;
     const kind = pick(kinds);
     try {
       switch (kind) {
@@ -408,6 +410,9 @@ export function playCopies(options: CopiesFuzzOptions): CopiesFuzzResult {
           if (conceded >= table.copies.length - 1) return;
           room.concede(connection);
           conceded += 1;
+          break;
+        case "take-back":
+          room.takeBack(connection, pick(room.game.state.takeBacks?.turnStarts ?? []).turn);
           break;
       }
       note(kind);

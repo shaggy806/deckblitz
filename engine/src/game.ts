@@ -737,6 +737,7 @@ import {
 import type { SharedTypeFacts, TargetSource } from "./targeting.js";
 import { exactTokenShape, referencedObjectIds } from "./token-fold.js";
 import { PHASE_OF_STEP, isMainPhase, nextStep, stepUsesPriority } from "./turn.js";
+import { turnStartOf } from "./take-back.js";
 import type { Step } from "./turn.js";
 import { COMMANDER_DAMAGE_LETHAL, artManifest, viewFor } from "./view.js";
 import type { ArtManifestEntry, PlayerView, ViewOptions } from "./view.js";
@@ -837,6 +838,10 @@ export interface GameConfig {
    * board built by hand, whose decks aren't anyone's real starting deck, says
    * for itself who has one (`debugRevealCompanion`). */
   readonly skipCompanionReveals?: boolean;
+  /** The take-back house rule (`take-back.ts`): how many times over the game
+   * each player may put it back to the start of the turn in progress. Absent
+   * or 0, the game allows none and keeps nothing for it. */
+  readonly takeBacks?: number | "unlimited";
   readonly registry?: CardRegistry;
   readonly controllers?: Partial<Record<PlayerId, PlayerController>>;
   readonly rules?: GameRulesConfig;
@@ -3278,6 +3283,9 @@ export class Game {
       ...(byPlayerCount.length > 0 ? { byPlayerCount } : {}),
     };
     if (Object.keys(pregame).length > 0) state.pregame = pregame;
+    if (config.takeBacks !== undefined && config.takeBacks !== 0) {
+      state.takeBacks = { limit: config.takeBacks, used: {} };
+    }
 
     const game = new Game(state, registry, controllers, rng);
     game.setup(
@@ -3708,6 +3716,28 @@ export class Game {
   setOrdersOwnTriggers(player: PlayerId, on: boolean): void {
     const now = (this.state.ordersOwnTriggers ?? []).filter((p) => p !== player);
     this.state.ordersOwnTriggers = on ? [...now, player] : now;
+  }
+
+  /**
+   * Where the game allows take-backs (`take-back.ts`), keeps the state as it
+   * stands as the start of the turn in progress, the first time it is called
+   * in that turn, beside the starts of the turns before it (one a player);
+   * otherwise nothing. Whoever drives the game calls it before
+   * each thing a player does (the server's `Room.applyInput`), so the start
+   * is the turn's first moment of rest: a simulation, which never calls it,
+   * copies nothing.
+   */
+  markTurnStart(): void {
+    const rule = this.state.takeBacks;
+    const turn = this.state.turn.number;
+    const starts = rule?.turnStarts ?? [];
+    if (rule === undefined || turn === 0 || starts.at(-1)?.turn === turn) return;
+    const keep = Math.max(2, this.state.turnOrder.length);
+    this.state.takeBacks = {
+      limit: rule.limit,
+      used: rule.used,
+      turnStarts: [...starts, turnStartOf(this.state)].slice(-keep),
+    };
   }
 
   /**
@@ -70625,6 +70655,7 @@ controlledBy,
       seed: this.state.seed,
       turnOrder: this.state.turnOrder,
       pregame: this.state.pregame,
+      takeBacks: this.state.takeBacks,
       restarts: this.state.restarts ?? 0,
     };
 
@@ -70697,6 +70728,9 @@ controlledBy,
     fresh.timestampSeq = was.timestampSeq;
     fresh.restarts = was.restarts + 1;
     if (was.pregame !== undefined) fresh.pregame = was.pregame;
+    // The house rule and what each player has used of it go on; the turn
+    // starts kept are the old game's, so the new game marks its own.
+    if (was.takeBacks !== undefined) fresh.takeBacks = { limit: was.takeBacks.limit, used: was.takeBacks.used };
     // What the log knew of each old object, which is known no longer.
     if (was.publicStints !== undefined) {
       for (const stints of Object.values(was.publicStints)) {

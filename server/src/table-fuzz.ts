@@ -157,6 +157,8 @@ export class RacingTable {
         seed: options.seed,
         idSalt: `races-${options.seed}`,
         mulligans: true,
+        // The take-back house rule on, so the fuzz takes turns back too.
+        takeBacks: 3,
         ...(options.rules === "plain" ? {} : { rules: COMMANDER_RULES }),
         decks: players.map((player, i) => {
           const deck = options.decks?.[i] ?? SEATS[i];
@@ -513,7 +515,7 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
     const copy = device.copy;
     if (copy === null) return;
     const { room } = copy;
-    const kind = pick(["auto-pass", "pass-turn", "resolve-all", "settings", "settings", "takeover", "concede"] as const);
+    const kind = pick(["auto-pass", "pass-turn", "resolve-all", "settings", "settings", "takeover", "concede", "take-back"] as const);
     try {
       switch (kind) {
         case "auto-pass":
@@ -549,6 +551,9 @@ export function playTable(options: TableFuzzOptions): TableFuzzResult {
           conceded += 1;
           break;
         }
+        case "take-back":
+          room.takeBack(device.page, pick(room.game.state.takeBacks?.turnStarts ?? []).turn);
+          break;
       }
       note(kind);
       table.did.push(`${device.player} ${kind} (after ${table.log.length} inputs)`);

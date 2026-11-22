@@ -8,7 +8,7 @@ import { commanderPrintings, deckLabel, getActiveDeck, playableSideboard, setAct
 import type { DeckContents, PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderArt } from './CommanderArt.tsx'
 import { DeckPickerModal } from './DeckPickerModal.tsx'
-import { RoomSettingsPanel } from './RoomSettingsPanel.tsx'
+import { HouseRulesPanel, RoomSettingsPanel } from './RoomSettingsPanel.tsx'
 import { BOT_DECK_POOLS, randomBotDeck } from './randomBotDeck.ts'
 import './lobby.css'
 
@@ -342,6 +342,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
 
         <aside className="overlay-box seat-board-side">
           <RoomSettingsPanel game={game} seatLabel={seatLabel} botSeats={botSeats} />
+          <HouseRulesPanel game={game} />
 
           <div className="seat-board-footer">
             {host ? (

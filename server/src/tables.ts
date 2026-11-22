@@ -95,7 +95,7 @@ const DIGESTS_KEPT = 8;
  * since table inputs don't spend the transport's rate limit (`transport.ts`).
  */
 export const MAX_TABLE_LOG = 100_000;
-const INPUT_KINDS: ReadonlySet<string> = new Set(["action", "concede", "orders-own-triggers"]);
+const INPUT_KINDS: ReadonlySet<string> = new Set(["action", "concede", "take-back", "orders-own-triggers"]);
 /** The messages a table answers; anything else about its code is refused. */
 const SILENT: ReadonlySet<string> = new Set(["ack", "event-deltas", "table-capable"]);
 

@@ -950,6 +950,10 @@ export class RoomService {
         this.requireActiveRoom(message.roomId).concede(connection);
         return;
       }
+      case "take-back": {
+        this.requireActiveRoom(message.roomId).takeBack(connection, message.turn);
+        return;
+      }
       case "bot-takeover": {
         this.requireActiveRoom(message.roomId).setBotTakeover(connection, message.on);
         return;

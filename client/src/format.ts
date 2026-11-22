@@ -508,6 +508,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
         : `${who(event.player)} offers ${event.amount} generic mana toward ${name(event.object)}`
     case 'choice-requested':
       return `${who(event.caster)} asks ${who(event.player)} to choose ${event.what === 'modes' ? 'the mode' : 'targets'} for ${name(event.object)}`
+    case 'turn-taken-back':
+      return `${who(event.player)} takes the game back to the start of turn ${event.turn}`
     case 'cast-reversed':
       return `${who(event.player)}'s cast of ${name(event.object)} is undone — ${event.reason}`
     case 'crime-committed':

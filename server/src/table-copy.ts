@@ -532,6 +532,8 @@ export class TableCopy {
       this.options.notice?.(
         first !== null && first.kind === "concede"
           ? `${first.player} conceded just as you moved, so your move was taken back. The game is as it now stands.`
+          : first !== null && first.kind === "take-back"
+            ? "The game was taken back to the start of a turn just as you moved."
           : "The game changed just as you moved, so your move was taken back. The game is as it now stands.",
       );
     }

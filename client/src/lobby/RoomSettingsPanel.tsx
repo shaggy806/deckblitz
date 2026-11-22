@@ -170,6 +170,69 @@ export function RoomSettingsPanel({
   )
 }
 
+/** What the host may set take-backs to: off, a few counts, or no limit. */
+const TAKE_BACK_OPTIONS: readonly (readonly [RoomSettings['takeBacks'], string])[] = [
+  [0, 'Off'],
+  [1, '1'],
+  [2, '2'],
+  [3, '3'],
+  [5, '5'],
+  // The side column has no room for the words beside five counts.
+  ['unlimited', '∞'],
+]
+
+/**
+ * The waiting room's house rules: ways this table plays that aren't the
+ * game's own rules, off unless the host turns them on. Under the room
+ * settings, and shown to everyone the same way those are. The first is
+ * take-backs (the user, 2026-11-21): how many times a game each player may
+ * put it back to the start of the turn in progress.
+ */
+export function HouseRulesPanel({ game }: { readonly game: NetworkGame }) {
+  const settings = game.roomSettings
+  if (settings === null) return null
+  const takeBacks = settings.takeBacks ?? 0
+  const label =
+    takeBacks === 0 ? 'Off' : takeBacks === 'unlimited' ? 'No limit' : `${takeBacks} per player`
+  return (
+    <section
+      className={`room-settings house-rules${game.lobbyBusy === 'settings' ? ' pending' : ''}`}
+      aria-label="House rules"
+    >
+      <h3 className="room-settings-title">House rules</h3>
+      <div className="room-settings-fields">
+        <div className="rs-field">
+          <span
+            className="rs-label"
+            title="Each player may put the game back to the start of the turn in progress this many times a game. Everything since is undone for everyone, and the same cards are drawn again."
+          >
+            Take-backs
+          </span>
+          {game.isHost ? (
+            <div className="rs-options" role="group" aria-label="Take-backs per player">
+              {TAKE_BACK_OPTIONS.map(([value, text]) => (
+                <button
+                  key={text}
+                  type="button"
+                  className={`seg-option${takeBacks === value ? ' active' : ''}`}
+                  aria-pressed={takeBacks === value}
+                  aria-label={value === 'unlimited' ? 'No limit' : value === 0 ? 'Off' : `${value} per player`}
+                  title={value === 'unlimited' ? 'No limit' : undefined}
+                  onClick={() => game.setRoomSettings({ takeBacks: value })}
+                >
+                  {text}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <span className="rs-value">{label}</span>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /**
  * The starting life, as presets and a box for any other total. The box keeps
  * its own draft while it's being typed in and sends on Enter or leaving it,

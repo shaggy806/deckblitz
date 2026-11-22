@@ -363,6 +363,10 @@ export interface NetworkGame {
   spectate: () => void
   /** Concede the game (rule 104.3a): lose and leave it, and keep watching. */
   concede: () => void
+  /** Spend one of my take-backs (the house rule, `RoomSettings.takeBacks`):
+   * the game goes back to the start of turn `turn`, one of the view's
+   * `takeBacks.turns`, for everyone. */
+  takeBack: (turn: number) => void
   /** Hand my seat to a bot (`true`) or take it back (`false`). */
   setBotTakeover: (on: boolean) => void
   /** Send my priority-passing preferences to the server, which does the
@@ -763,6 +767,12 @@ export function useNetworkGame(): NetworkGame {
               const mine = message.seats[at]
               const others = message.seats.filter((_, i) => i !== at)
               if (blitz.settings) send({ type: 'set-room-settings', roomId: message.roomId, settings: blitz.settings })
+              // A blitz has no waiting room to set house rules in, and
+              // nobody else at the table: take-backs without limit (the
+              // user, 2026-11-21).
+              else if (blitz.settings === undefined) {
+                send({ type: 'set-room-settings', roomId: message.roomId, settings: { takeBacks: 'unlimited' } })
+              }
               const clientToken = newClientToken()
               pendingClaimRef.current = { seat: mine.player, clientToken }
               const displayName = blitz.name ?? undefined
@@ -1220,6 +1230,15 @@ export function useNetworkGame(): NetworkGame {
     send({ type: 'concede', roomId: id })
   }, [send])
 
+  const takeBack = useCallback(
+    (turn: number) => {
+      const id = roomIdRef.current
+      if (id === null) return
+      send({ type: 'take-back', roomId: id, turn })
+    },
+    [send],
+  )
+
   const sendPassSettings = useCallback(
     (settings: PassSettings) => {
       const id = roomIdRef.current
@@ -1626,6 +1645,7 @@ export function useNetworkGame(): NetworkGame {
     spectating,
     spectate,
     concede,
+    takeBack,
     setBotTakeover,
     sendPassSettings,
     addBot,

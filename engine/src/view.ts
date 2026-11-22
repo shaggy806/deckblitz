@@ -73,6 +73,7 @@ import {
 } from "./player-control.js";
 import { EVERY_CREATURE_TYPE, withoutTypeMarkers } from "./subtypes.js";
 import { stickerSheetsView } from "./stickers.js";
+import { takeBackTurns, whyCannotTakeBack } from "./take-back.js";
 import type { TargetRef } from "./target.js";
 
 export interface PublicPlayerInfo {
@@ -477,6 +478,17 @@ export interface PlayerView {
   readonly dayNight: "day" | "night" | null;
   /** The monarch (rule 725 — ROADMAP Phase 10), or `null`. */
   readonly monarch: PlayerId | null;
+  /** The take-back house rule, in a game that allows it (`take-back.ts`):
+   * how many each player gets, how many each has used, the turns the viewer
+   * could take the game back to the start of now (oldest first, each with
+   * whose turn it is), and why they can't take anything back (`null`: they
+   * can). */
+  readonly takeBacks?: {
+    readonly limit: number | "unlimited";
+    readonly used: Readonly<Record<PlayerId, number>>;
+    readonly turns: readonly { readonly turn: number; readonly player: PlayerId }[];
+    readonly cannot: string | null;
+  };
   /** The player who has the initiative (rule 726), or `null`. */
   readonly initiative: PlayerId | null;
   /** Emblems in the game (rule 114 — ROADMAP Phase 10), owner + text only. */
@@ -1586,6 +1598,16 @@ function viewForUncached(
     dayNight: state.dayNight,
     monarch: state.monarch,
     initiative: state.initiative ?? null,
+    ...(state.takeBacks !== undefined
+      ? {
+          takeBacks: {
+            limit: state.takeBacks.limit,
+            used: state.takeBacks.used,
+            turns: takeBackTurns(state, viewer).map(({ turn, player }) => ({ turn, player })),
+            cannot: whyCannotTakeBack(state, viewer),
+          },
+        }
+      : {}),
     emblems: state.emblems
       .filter((e) => e.expires === undefined)
       .map((e) => ({

@@ -2019,6 +2019,14 @@ export type GameEvent =
       readonly objects: readonly ObjectId[];
     })
   | (Base & {
+      /** `player` spent a take-back (the house rule, `take-back.ts`): the
+       * game is back at the start of turn `turn`, and this is the first
+       * event after it. */
+      readonly type: "turn-taken-back";
+      readonly player: PlayerId;
+      readonly turn: number;
+    })
+  | (Base & {
       readonly type: "player-lost";
       readonly player: PlayerId;
       readonly reason: string;

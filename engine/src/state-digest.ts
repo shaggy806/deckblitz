@@ -118,8 +118,14 @@ export function stateDigest(state: GameState, options: StateDigestOptions = {}):
   if (options.events === true) {
     mix(mixer, state);
   } else {
-    const { eventLog, ...rest } = state;
+    const { eventLog, takeBacks, ...rest } = state;
     mix(mixer, rest);
+    // The take-back rule's turn starts are whole states again: each counts
+    // by the turn it is of, which with the same game since says the same.
+    if (takeBacks !== undefined) {
+      const { turnStarts, ...rule } = takeBacks;
+      mix(mixer, { ...rule, turns: (turnStarts ?? []).map((start) => start.turn) });
+    }
     mixer.text(`events:${eventLog.length}`);
   }
   return mixer.hex();

@@ -294,6 +294,15 @@
   gap: 6px;
   color: var(--text);
 }
+/* The turns a take-back can go to, under the button that opens them. */
+.seat-menu-takebacks {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 2px 0 4px 10px;
+  color: var(--text);
+}
 /* A confirm and the button that asks it, in one cell: the panel is as wide
    as the confirm from the start, so asking moves nothing. */
 .seat-menu-slot {

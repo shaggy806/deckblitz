@@ -172,6 +172,11 @@ export interface RoomSettings {
    * can't ready up with one that isn't, and turning this on un-readies any
    * such seat. Off by default — any deck the server can build is welcome. */
   readonly commanderLegalOnly: boolean;
+  /** A house rule: how many times over the game each player may take the
+   * game back to the start of a recent turn (the `take-back` message, the
+   * engine's `take-back.ts`). 0, the default, is off; a whole number up to
+   * 99, or `"unlimited"`. */
+  readonly takeBacks: number | "unlimited";
 }
 
 export type ClientMessage =
@@ -215,6 +220,17 @@ export type ClientMessage =
        * by a bot first. Not during the opening hands. */
       readonly type: "concede";
       readonly roomId: string;
+    }
+  | {
+      /** This connection's player spends one of their take-backs (the house
+       * rule, `RoomSettings.takeBacks`): the game goes back to the start of
+       * turn `turn` (one of the view's `takeBacks.turns`: the turn in
+       * progress or one of the few before it), for everyone, at once. Refused
+       * where the game allows none, they have none left, or that start isn't
+       * one they can go back to. */
+      readonly type: "take-back";
+      readonly roomId: string;
+      readonly turn: number;
     }
   | {
       /** Hands this connection's seat to a bot (`on`), or takes it back. The
@@ -706,6 +722,10 @@ export type ClientMessage =
 export type RoomInput =
   | { readonly kind: "action"; readonly action: Action }
   | { readonly kind: "concede"; readonly player: PlayerId }
+  /** `player` takes the game back to the start of turn `turn` (the house
+   * rule). Made out of turn; one that lands where the game no longer takes
+   * it is dropped. */
+  | { readonly kind: "take-back"; readonly player: PlayerId; readonly turn: number }
   | { readonly kind: "orders-own-triggers"; readonly player: PlayerId; readonly on: boolean };
 
 /** A seat at a table, as its recipe names it. */

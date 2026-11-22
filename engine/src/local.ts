@@ -29,6 +29,7 @@ export * from "./controller.js";
 export * from "./auto-settle.js";
 export * from "./state-wire.js";
 export * from "./state-digest.js";
+export * from "./take-back.js";
 export { wouldAffectPlayer } from "./stack-preview.js";
 // The bots themselves, not `bot/index.ts`: its training scenarios build the
 // whole pool.

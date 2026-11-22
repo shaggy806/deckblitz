@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { PlayerView } from 'engine/client'
+import { playerLabel } from '../format.ts'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 
 /**
@@ -29,6 +30,7 @@ export function SeatMenu({
   const [confirming, setConfirming] = useState(false)
   const [confirmingRestart, setConfirmingRestart] = useState(false)
   const [confirmingLeave, setConfirmingLeave] = useState(false)
+  const [confirmingTakeBack, setConfirmingTakeBack] = useState(false)
   const boxRef = useRef<HTMLDivElement>(null)
 
   // Closes on a click anywhere else, or Escape, as the animations panel does.
@@ -55,6 +57,13 @@ export function SeatMenu({
   // The opening hands are answered in parallel before the game begins; the
   // server refuses a concession then (`Game.whyCannotConcede`).
   const begun = view.turn.number > 0
+  const takeBacks = view.takeBacks
+  const takeBacksLeft =
+    takeBacks === undefined || seat === null
+      ? ''
+      : takeBacks.limit === 'unlimited'
+        ? 'no limit'
+        : `${Math.max(0, takeBacks.limit - (takeBacks.used[seat] ?? 0))} left`
 
   return (
     <div className="motion-control seat-menu" ref={boxRef}>
@@ -71,6 +80,7 @@ export function SeatMenu({
           setConfirming(false)
           setConfirmingRestart(false)
           setConfirmingLeave(false)
+          setConfirmingTakeBack(false)
           setOpen((o) => !o)
         }}
       >
@@ -82,6 +92,50 @@ export function SeatMenu({
             <button type="button" onClick={() => game.setBotTakeover(!botPlaying)}>
               {botPlaying ? 'Take back control' : 'Let a bot play for me'}
             </button>
+          ) : null}
+          {/* The take-back house rule, in a game that allows it: back to the
+              start of the turn in progress or one of the few before it, for
+              everyone. The button opens the turns to pick from, under it, so
+              a take-back is two clicks as a concession is: it can't be
+              undone and uses one up. The newest turn first. */}
+          {inGame && takeBacks !== undefined ? (
+            <>
+              <button
+                type="button"
+                aria-expanded={confirmingTakeBack}
+                disabled={takeBacks.cannot !== null}
+                title={
+                  takeBacks.cannot !== null
+                    ? `Can't take anything back: ${takeBacks.cannot}`
+                    : 'Put the game back to the start of a turn, for everyone'
+                }
+                onClick={() => setConfirmingTakeBack((on) => !on)}
+              >
+                Take back… ({takeBacksLeft})
+              </button>
+              {confirmingTakeBack && takeBacks.cannot === null ? (
+                <div className="seat-menu-takebacks" role="group" aria-label="Go back to the start of">
+                  <span>Go back, for everyone, to the start of:</span>
+                  {[...takeBacks.turns].reverse().map(({ turn, player }) => (
+                    <button
+                      key={turn}
+                      type="button"
+                      className="seat-menu-danger"
+                      onClick={() => {
+                        game.takeBack(turn)
+                        setOpen(false)
+                      }}
+                    >
+                      {turn === view.turn.number
+                        ? 'This turn'
+                        : player === seat
+                          ? `My turn ${turn}`
+                          : `${playerLabel(player, game.seats)}'s turn ${turn}`}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </>
           ) : null}
           {/* Each confirm shares a cell with the button that asks it (the
               hidden one keeping its room), so asking doesn't widen the

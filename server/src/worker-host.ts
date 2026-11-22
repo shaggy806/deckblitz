@@ -136,6 +136,7 @@ const ROOM_MESSAGES = new Set([
   "spectate-room",
   "set-pass-settings",
   "concede",
+  "take-back",
   "bot-takeover",
   "take-seat",
   "claim-seat",

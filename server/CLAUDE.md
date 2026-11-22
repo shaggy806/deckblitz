@@ -36,6 +36,12 @@ that file.
   out the same on every copy: no clock, no randomness of its own (a concession's owed answers
   are v1's for that reason). `npm run tables:fuzz -w server` plays tables with every message
   racing.
+- **A take-back is an input too** (the house rule, `RoomSettings.takeBacks`; the engine's
+  `take-back.ts`): `{ kind: "take-back", player, turn }`, made out of turn, which puts the state
+  the engine returns in the game's place (`Room.putGame`, what `replaceGame` does without
+  settling). The turn starts it goes back to are in `GameState`, marked by `Room.applyInput`
+  before the first input of each turn, so every copy keeps the same ones: don't keep a snapshot
+  for it anywhere else.
 - **`broadcast` is never called from a message handler.** A room publishes its own frames
   (`room.publish()` → `onUpdate`).
 - **The host** (`host.ts`) is whoever created the room. Only they may add or remove seats and

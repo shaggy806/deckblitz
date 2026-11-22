@@ -36,6 +36,8 @@ import {
   actionPlayer,
   activePlayerOf,
   isSettled,
+  takeBackState,
+  whyCannotTakeBack,
 } from "engine/local";
 import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZoneChoice, playersControlledBy, stackCopyKey, standInFor, wouldAffectPlayer } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
@@ -748,6 +750,10 @@ export class Room {
 
   /** One input into the game: the only places a room writes to it. */
   private applyInput(input: RoomInput): void {
+    // The take-back house rule: the game as it stands before the first thing
+    // done in a turn is that turn's start. Here, so every copy keeps the same
+    // one (each applies the same inputs to the same game).
+    this.game.markTurnStart();
     switch (input.kind) {
       case "action":
         this.game.dispatch(input.action);
@@ -758,6 +764,10 @@ export class Room {
         return;
       case "orders-own-triggers":
         this.game.setOrdersOwnTriggers(input.player, input.on);
+        return;
+      case "take-back":
+        // Throws, with nothing changed, where the game doesn't take it.
+        this.putGame(takeBackState(this.game.state, input.player, input.turn));
         return;
     }
   }
@@ -873,6 +883,14 @@ export class Room {
    */
   replaceGame(state: GameState): void {
     if (this.frozen) throw new Error("a board being built has no game to replace");
+    this.putGame(state);
+    this.lastActivityAt = Date.now();
+    this.settle();
+  }
+
+  /** `replaceGame` without carrying on: `state` is the room's game now, and
+   * whoever put it there settles. A take-back's input too (`applyInput`). */
+  private putGame(state: GameState): void {
     this.cancelResume();
     this.dropGate();
     this.current = Game.fromSnapshot(state, { registry: cardRegistry() });
@@ -889,8 +907,6 @@ export class Room {
     // The new board is what the next frame shows: nothing on it is "unshown"
     // against the old one's.
     this.markShown();
-    this.lastActivityAt = Date.now();
-    this.settle();
   }
 
   /** Lets go of a move parked behind a frame, its timers with it. */
@@ -1140,6 +1156,23 @@ export class Room {
     from.autoPassPausedAt = null;
     from.resolveAllFrom = null;
     from.resolveAllAsked = null;
+    this.lastActivityAt = Date.now();
+    this.settle();
+  }
+
+  /**
+   * `connection`'s player takes the game back to the start of turn `turn`
+   * (the take-back house rule, `RoomSettings.takeBacks`): one of their
+   * take-backs spent, and the game put back for everyone. Refused, with nothing done,
+   * where the engine says why not (`whyCannotTakeBack`).
+   */
+  takeBack(connection: Connection, turn: number): void {
+    const seat = this.seatOf(connection);
+    if (seat === null) throw new Error("claim a seat before taking a turn back");
+    if (this.frozen || this.stopped !== null) throw new Error("the game isn't being played");
+    const why = whyCannotTakeBack(this.game.state, seat, turn);
+    if (why !== null) throw new Error(why);
+    this.act({ kind: "take-back", player: seat, turn }, "person");
     this.lastActivityAt = Date.now();
     this.settle();
   }

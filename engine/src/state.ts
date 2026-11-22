@@ -3436,6 +3436,39 @@ export type GameRulesConfig = Omit<Partial<GameRules>, "freeFirstMulligan"> & {
   readonly freeFirstMulligan?: boolean | "multiplayer";
 };
 
+/**
+ * The take-back house rule's record on a game (`take-back.ts`,
+ * `GameConfig.takeBacks`): how many each player gets, how many each has used,
+ * and the last few turns as each began.
+ */
+export interface TakeBacks {
+  /** Take-backs each player gets over the whole game. */
+  readonly limit: number | "unlimited";
+  /** How many each player has used; a player not here has used none. */
+  readonly used: Readonly<Record<PlayerId, number>>;
+  /**
+   * The starts of the last turns, oldest first and the turn in progress
+   * last once it has waited on a player: as many as there are players, so a
+   * player's own last turn is usually among them. History: the list is
+   * replaced whole and never written into, so `cloneGameState` shares it, as
+   * it shares an object's `lastKnown` — a bot's simulations copy the state
+   * thousands of times a decision.
+   */
+  readonly turnStarts?: readonly TurnStart[];
+}
+
+/** One turn as it began, kept for a take-back (`TakeBacks.turnStarts`). */
+export interface TurnStart {
+  readonly turn: number;
+  /** Whose turn it is. */
+  readonly player: PlayerId;
+  /** How long the event log was: `state` holds none of it. */
+  readonly events: number;
+  /** The state when the turn first waited on a player, without the
+   * take-back record and with an empty event log. */
+  readonly state: GameState;
+}
+
 /** See {@link GameState.pregame}. */
 export interface PregameOptions {
   readonly mulligans?: true;
@@ -7496,6 +7529,9 @@ export interface GameState {
    * engine — a preference set from outside (`Game.setOrdersOwnTriggers`),
    * off for everyone by default. */
   ordersOwnTriggers?: PlayerId[];
+  /** The take-back house rule, where the game allows it (`take-back.ts`);
+   * absent in a game played without. */
+  takeBacks?: TakeBacks;
   /**
    * The `eventSeq` the spell or ability now resolving began at — what "this
    * way" reads (the `thisWay` amount and the `this-way` condition): every
@@ -7946,7 +7982,7 @@ function clonePlainTree(value: unknown): unknown {
     if (
       field !== null &&
       typeof field === "object" &&
-      (key === "lastKnown" || key === "earlierLastKnown" || key === "lastOnStack")
+      (key === "lastKnown" || key === "earlierLastKnown" || key === "lastOnStack" || key === "turnStarts")
     ) {
       // A snapshot: shared — see `cloneGameState`.
       if (freezeShared) deepFreeze(field);

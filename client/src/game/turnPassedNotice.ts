@@ -60,7 +60,10 @@ export function useTurnPassedNotice(
     const before = watched.current
     if (before !== null && before.number === turn) return
     watched.current = { number: turn, mine, passesAtStart: handPasses }
-    if (before === null || !watching || !endedOnItsOwn(before, handPasses)) return
+    // A turn number going back is a take-back (the house rule), not a turn
+    // that ended.
+    if (before === null || turn < before.number) return
+    if (!watching || !endedOnItsOwn(before, handPasses)) return
     const shown = timesShown()
     if (shown >= TIMES_SHOWN) return
     try {
