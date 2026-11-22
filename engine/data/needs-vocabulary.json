@@ -16583,15 +16583,15 @@
   },
   "trigger:rolls-at-most": {
    "family": "mechanic:dice-rolling",
-   "example": "Atomwheel Acrobats: \"whenever you roll a 1 or 2, put that many +1/+1 counters on this creature\" \u2014 the rolls-die test has atLeast and natural, no at-most."
+   "example": "Atomwheel Acrobats: \"whenever you roll a 1 or 2, put that many +1/+1 counters on this creature\" — the rolls-die test has atLeast and natural, no at-most."
   },
   "mechanic:devour-x": {
    "family": "keyword:devour",
-   "example": "Thromok the Insatiable: \"Devour X, where X is the number of creatures devoured this way\" \u2014 devour takes only a fixed multiplier; this is n squared counters."
+   "example": "Thromok the Insatiable: \"Devour X, where X is the number of creatures devoured this way\" — devour takes only a fixed multiplier; this is n squared counters."
   },
   "amount:pile-or-guess-effects-this-turn": {
    "family": "mechanic:piles",
-   "example": "The Celestial Toymaker: \"each opponent loses 2 life for each spell or ability that caused one or more players to guess or to group cards or permanents into a pile this turn\" \u2014 nothing in the journal counts them."
+   "example": "The Celestial Toymaker: \"each opponent loses 2 life for each spell or ability that caused one or more players to guess or to group cards or permanents into a pile this turn\" — nothing in the journal counts them."
   },
   "duration:until-die-roll": {
    "family": "mechanic:dice-rolling",
@@ -16618,7 +16618,7 @@
   },
   "trigger:watched-object-own-controller": {
    "family": "effect:delayed-trigger-dealt-damage-this-way-dies",
-   "example": "Reckless Blaze: \"whenever a creature you control dealt damage this way dies\" \u2014 Game.watchedSubject treats every watched object as the delayed ability's controller's."
+   "example": "Reckless Blaze: \"whenever a creature you control dealt damage this way dies\" — Game.watchedSubject treats every watched object as the delayed ability's controller's."
   },
   "trigger:nth-die-roll-each-turn": {
    "family": "mechanic:dice-rolling",
@@ -16652,7 +16652,7 @@
   },
   "replacement:exchange-die-result-with-base-pt": {
    "family": "mechanic:dice-rolling",
-   "example": "Vedalken Squirrel-Whacker: \"if you would roll one or more six-sided dice, instead roll them and you may exchange one result with this creature's base power or base toughness\" \u2014 a choice inside every d6 roll, as-enters rolls and the Attraction visit roll included."
+   "example": "Vedalken Squirrel-Whacker: \"if you would roll one or more six-sided dice, instead roll them and you may exchange one result with this creature's base power or base toughness\" — a choice inside every d6 roll, as-enters rolls and the Attraction visit roll included."
   },
   "replacement:extra-die-chosen-ignore": {
    "family": "mechanic:dice-rolling",
@@ -16727,6 +16727,16 @@
    "family": "effect:random-choice",
    "description": "'Exile three cards at random from your graveyard' as one event: choose-random-card picks one card, so three in a row are three moves and a 'one or more cards leave your graveyard' trigger fires three times (rule 603.2c). Make a Wish, in the pool, has the same gap.",
    "example": "Capricious Hellraiser"
+  },
+  "cost:pay-unless-inside-mana-ability": {
+   "family": "effect:unless-any-player-pays",
+   "description": "An \"unless any player pays\" inside a mana ability, the payer choosing their own sources: every unless payment goes through the auto-planner today, and none can be made during a mana ability.",
+   "example": "Rhystic Cave: \"Add one mana of that color unless any player pays {1}\""
+  },
+  "amount:mana-spent-on-cumulative-upkeep": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "The colours of mana spent paying cumulative upkeep, read by the paid trigger.",
+   "example": "Balduvian Fallen: \"+1/+0 for each {B} or {R} spent this way\""
   }
  },
  "groups": [

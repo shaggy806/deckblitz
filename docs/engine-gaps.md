@@ -28,6 +28,21 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   resolution is waiting on a choice of theirs (a suspended resolution with their life at 0), or losing with a
   "may pay" of theirs still to come in the same resolution ("each opponent may pay"). Not reproduced; write the
   failing test first (`engine/src/test/player-left-audit.test.ts` has the setup).
+- **An "unless … pays" is paid by the auto-planner** (2026-11-22, found by B338's costs-mana agent):
+  every option whose cost is paid as a mode is chosen goes through `Game.applyModesChoice` → `payMana`
+  → `executePayment`, so the payer never picks which of their sources pay: Mana Leak, the rhystic spells
+  (`beginUnless`'s chooser `"any-player"`, Nakaya Shade) and every punisher option. A choice made for the
+  player (AUTHORING.md §0). There's no payment window where a payer floats or picks mana, and
+  `whyCannotAct` refuses a mana ability while a decision is pending. Rhystic Cave waits on the same window
+  inside a mana ability (`cost:pay-unless-inside-mana-ability`, major; its build is commit 67ce0c3cb).
+- **B338's small gaps** (2026-11-22, what the overnight lane agents reported; none checked beyond the
+  agent's own reading): exalted counters stay through a later "loses all abilities" (as `keywordCountersOn`
+  does, ignoring 613.7 order); Lich's "if you can't" counts nontoken permanents including one that can't be
+  sacrificed; a prevention shield's shares (`shieldShareKey`, source + `madeIn`) are shared by two shields
+  made in one resolution, and a share caps a hit after doublers; Captured by the Consulate's `to:
+  "attached"` reads the host from `lastKnown` with no stint check; a token split off a stack after attackers
+  are declared loses its `could-attack` entry (Season of the Witch spares it); Season of the Witch's
+  "couldn't attack" is read from the rules alone (no rulings in the snapshot).
 - **B335's small gaps** (2026-11-18, what the overnight lane agents reported while building keys; none checked
   beyond the agent's own reading). **Trigger ordering:** a delayed step trigger is put on the stack directly, so
   its controller can't order it among the step's other triggers (603.3b: Noctis's return comes after the attack

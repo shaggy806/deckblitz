@@ -45,10 +45,17 @@ section keeps only what to do next.
   (`docs/card-blockers.md`, batch 336). **B337 (2026-11-21, `author-top-cards overnight`, wrapped up
   at the user's word)** took 54 cards from Debt of Loyalty (16985) to Next of Kin (20627), 13 lane
   agents in five lanes; the combat-targeting lane didn't run, so its cards in that range wait
-  (`docs/card-blockers.md`, batch 337). **Next by rank** (`rank-goal.mjs --rank 30000 --keys`):
-  Mana Maze (18541, `static:prohibit-color-of-last-spell-cast`), Tilonalli's Crown (18621), Spider-Woman,
-  Secret Agent (18845), Bishop of Binding (18929), Spellweaver Volute (18930, enchant a card in a
-  graveyard: likely major), Celestial Judgment (18991), Leshrac's Sigil (19001), then 19133 on; **Stone
+  (`docs/card-blockers.md`, batch 337). **B338 (2026-11-22, `author-top-cards overnight`, no new
+  agents after the user's word)** took 59 cards from Mana Maze (18541) to Shrouded Lore (21695), 18
+  lane agents in all six lanes, and laned every open key to 22256 (`docs/card-blockers.md`, batch 338).
+  Left as majors for the user: Spellweaver Volute (18930, an Aura on a graveyard card), Word of
+  Command (19342, controlling a player), Raging River (20295, labelled piles), Swirl the Mists (20599,
+  text changes over every spell and permanent) and Rhystic Cave (20257, a payment window inside a
+  mana ability; its working build is in commit 67ce0c3cb). **Next by rank** (`rank-goal.mjs --rank
+  30000 --keys`, every key laned): Sabertooth Cobra (20245, `effect:pay-before-delayed-deadline`),
+  Psychogenic Probe (20611), Elemental Resonance (20686), Piracy (20704), Invoke the Ancients (20794),
+  Bribe Taker (20944), Kithkin Armor (20952), Master's Councillors (21015), then on; Balduvian Fallen
+  was re-keyed (`amount:mana-spent-on-cumulative-upkeep`). **Stone
   Calendar** (20630) waits on the user (a major: declining its "up to {1} less" while casting). The
   keys B337 built still need lanes in `engine/data/lanes.json` only when re-keyed; re-keyed in `B336.json`: Caller of the Hunt, Mister Immortal; Clarion
   Ultimatum and Dichotomancy want the rest of Doubling Chant's search. Spawnsire of Ulamog (11790,
@@ -112,6 +119,8 @@ section keeps only what to do next.
 - **The rules audit's next slices** (2026-11-17, `docs/plans/rules-audit-2026-11.md`): the first slice (players who leave, combat, skip rules) fixed 800.4e, 508.8 and 506.8f and recorded 603.6c below. The second slice (casting, resolving, multiplayer flow) found nothing more in the engine. Left: four uncited leads not yet probed (506.3d, 104.3f, 704.5r/t, 603.2g); more exported logs read by script, which is where both real finds came from; then keyword interactions (702), merged commanders (903) and two replacement effects on one event (616.1). `npm run rules:uncited -w engine` lists the leads.
 - **A departing player's permanents don't trigger "leaves the battlefield"** — rule 603.6c: another player's "whenever a creature leaves the battlefield" (Extractor Demon) should trigger for what a departing player owned; the engine leaves those permanents on the board inert and announces nothing. A design call (`docs/engine-gaps.md`).
 - **A player who loses while they owe a decision** — rules 800.4f-h (another player pays nothing or chooses for them) aren't modeled; a concession is refused until the decision is answered, so only a state-based loss with a choice open reaches it (`docs/engine-gaps.md`).
+- **An "unless … pays" is paid by the auto-planner** — the payer never picks which sources pay (Mana Leak, the rhystic spells, punisher options), a choice made for them; Rhystic Cave waits on the same window inside a mana ability (`docs/engine-gaps.md`).
+- **B338's small gaps** — what the overnight lane agents reported and left: exalted counters through "loses all abilities", Lich's count of sacrificeable permanents, shared prevention-shield answers, a host with no stint check, Season of the Witch's "couldn't attack" unchecked against rulings (`docs/engine-gaps.md`).
 - **B335's small gaps** — what the overnight lane agents reported and left: delayed triggers not ordered among a step's triggers or by which simultaneous event fires them (603.3b, 603.7b), Goad or encore against an "at least one attacks" requirement, a few cost combinations, two JSON string matches to replace, a reversed turn order lost by the builder's export (`docs/engine-gaps.md`).
 - **B334's small gaps** — what the overnight lane agents reported and left: cost exiles inside a resolution counted as "exiled this way", a few unread grants, a copied Lodestone Bauble, scaffolder lines, a 3-4 player scenario with empty libraries (`docs/engine-gaps.md`). (2026-11-17: Bleeding Effect's "hexproof from" built; the Clone beside a simultaneous reanimation didn't reproduce and is pinned; "distribute among any number" may be none, rule 107.1c.)
 - **An object's own "instead" against an exile replacement isn't asked** — Blightsteel Colossus's shuffle and Gravebane Zombie's library top are applied ahead of Rest in Peace or a finality counter without the owner choosing (rule 616.1e), and a Quintorius-cast spell countered by another spell's resolution goes to the library bottom unasked (`docs/engine-gaps.md`).

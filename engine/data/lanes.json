@@ -457,7 +457,8 @@
   "zone:impulse-play-one-including-exiled-self": "casting-zones",
   "effect:choose-color-become-color": "replacements-copies",
   "replacement:damage-to-player-exiles-library": "replacements-copies",
-  "cost:creature-type-chosen-as-cast-kept-on-permanent": "costs-mana"
+  "cost:creature-type-chosen-as-cast-kept-on-permanent": "costs-mana",
+  "amount:mana-spent-on-cumulative-upkeep": "costs-mana"
  },
  "groups": [
   {

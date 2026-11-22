@@ -666,6 +666,30 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 338 (2026-11-22, `author-top-cards overnight`, ranks 18541–21695)** — 59 cards from
+  18 lane agents, five at once, in all six lanes (`B338.json`; `COMPLETED.md` lists the features); every
+  open key to rank 22,256 laned in `engine/data/lanes.json` first. Mana Maze, Tilonalli's Crown, Fatal
+  Attraction, Spider-Woman, Bishop of Binding, Celestial Judgment, Leshrac's Sigil, Lamplight Phoenix,
+  Magus of the Balance, Emissary of Soulfire, Avatar of Might, Mana Cache, Tester of the Tangential, Bomb
+  Squad, Bend or Break, Hold for Ransom, Churning Reservoir, Divine Deflection, Corruption of Towashi,
+  Bludgeon Brawl, Sacred Ground, Storm Herald, Hibernation's End, Evolving Door, Kodama of the Center Tree,
+  Close Encounter, Gargantuan Slabhorn, Vine Gecko, Voltage Surge, Psychic Rebuttal, Total War, Earnest
+  Fellowship, Lich, Captured by the Consulate, Guild Feud, Keen-Eared Sentry, Arcanum Wings, Rites of
+  Initiation, Livio, Torchling, Suncleanser, Phyrexian Portal, Season of the Witch, Artificer's Hex,
+  Strax, Aetherplasm, Casting of Bones, Channel Harm, Seasinger, Disciple of Caelus Nin, Shrouded Lore,
+  with the cards sharing a key (Harm's Way, Bite Down on Crime, Thraben Exorcism, Shipwreck Sifters,
+  Krovikan Sorcerer, Soldevi Sage, Forgotten Lore). About a third needed no engine code. **Majors, for
+  the user:** Spellweaver Volute (an Aura enchanting a graveyard card, not attempted), Word of Command
+  (controlling a player, not attempted), Swirl the Mists (static text changes over every spell and
+  permanent: text changes are per object), Raging River (labelled piles no one chooses between, then a
+  left/right choice per attacker) and Rhystic Cave (a payment inside a mana ability where the payer picks
+  their sources; built on the auto-planner in 67ce0c3cb and taken out for rule zero). Re-keyed: Balduvian
+  Fallen (`amount:mana-spent-on-cumulative-upkeep`). Found on the way: every "unless … pays" option is
+  paid by the auto-planner, never the payer's own choice (BACKLOG, Engine rules gaps); a stolen Lamplight
+  Phoenix returns under its thief (110.2a), sent back and fixed before landing; Arcanum Wings' aura swap
+  spelled the host the long way (`refs.test`), fixed. Leads: Dwarven Sea Clan reuses `controllerControls`;
+  bots answer Celestial Judgment's keep-one-per-power, Shrouded Lore's pick and the Disciple's keep-5 with
+  no polarity.
 - **Batch 337 (2026-11-21, `author-top-cards overnight`, ranks 16985–20627)** — 54 cards from
   13 lane agents, five at once, in the decisions, replacements-copies, triggers-journal, costs-mana and
   casting-zones lanes (`B337.json`; `COMPLETED.md` lists the features), wrapped up at the user's word

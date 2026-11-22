@@ -1,0 +1,470 @@
+{
+ "batch": 338,
+ "status": "done",
+ "ranks": "author-top-cards overnight, 2026-11-22 (about 09:30 to 14:00, no new agents after the user's word): the triaged cards past EDHREC rank 18,500 in rank order, Mana Maze (18541) to Shrouded Lore (21695), each with the key it waited on, built by 18 worktree agents in all six lanes (build-family's overnight lanes loop, five at once), skipping the majors (Spellweaver Volute, Word of Command, Swirl the Mists, Raging River, Rhystic Cave) and the cards waiting on the user. Features: choose-for-each-slot powers and rest destroy, exalted counters, a cast prohibition on the last spell's colours, colorCount compares, transformed permanents, state triggers per permanent, counters-removed journal, enters transformed, collect-evidence exiling, move X counters, protection from its own colours, change-targets to attached and sameNewTarget, could-attack journal, piles chosen by an opponent and face down, prevention shields shared among one event's hits (615.7), return-from-graveyard exileIfItWouldLeave, as-enters lose life, copy a countered spell as it last was, aura swap, return exiled with a counter kind, leaves-battlefield by an opponent's effect, cumulative-upkeep-paid, counts as the source left, a venture limit, kicked meaning plain kicker and the first kicked spell, warped cards as a behold choice, a reflexive trigger's chosen player, controllerControls, a may in a prevention follow-up, keep N the rest phase out, thisWayScope across passes.",
+ "authored": [
+  {
+   "name": "Aetherplasm",
+   "files": [
+    "engine/src/cards/pool/aetherplasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcanum Wings",
+   "files": [
+    "engine/src/cards/pool/arcanum-wings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Artificer's Hex",
+   "files": [
+    "engine/src/cards/pool/artificers-hex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Avatar of Might",
+   "files": [
+    "engine/src/cards/pool/avatar-of-might.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bend or Break",
+   "files": [
+    "engine/src/cards/pool/bend-or-break.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bishop of Binding",
+   "files": [
+    "engine/src/cards/pool/bishop-of-binding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bite Down on Crime",
+   "files": [
+    "engine/src/cards/pool/bite-down-on-crime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bludgeon Brawl",
+   "files": [
+    "engine/src/cards/pool/bludgeon-brawl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bomb Squad",
+   "files": [
+    "engine/src/cards/pool/bomb-squad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captured by the Consulate",
+   "files": [
+    "engine/src/cards/pool/captured-by-the-consulate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Casting of Bones",
+   "files": [
+    "engine/src/cards/pool/casting-of-bones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Judgment",
+   "files": [
+    "engine/src/cards/pool/celestial-judgment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Channel Harm",
+   "files": [
+    "engine/src/cards/pool/channel-harm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Churning Reservoir",
+   "files": [
+    "engine/src/cards/pool/churning-reservoir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Close Encounter",
+   "files": [
+    "engine/src/cards/pool/close-encounter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corruption of Towashi",
+   "files": [
+    "engine/src/cards/pool/corruption-of-towashi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disciple of Caelus Nin",
+   "files": [
+    "engine/src/cards/pool/disciple-of-caelus-nin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Divine Deflection",
+   "files": [
+    "engine/src/cards/pool/divine-deflection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earnest Fellowship",
+   "files": [
+    "engine/src/cards/pool/earnest-fellowship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emissary of Soulfire",
+   "files": [
+    "engine/src/cards/pool/emissary-of-soulfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evolving Door",
+   "files": [
+    "engine/src/cards/pool/evolving-door.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fatal Attraction",
+   "files": [
+    "engine/src/cards/pool/fatal-attraction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forgotten Lore",
+   "files": [
+    "engine/src/cards/pool/forgotten-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gargantuan Slabhorn",
+   "files": [
+    "engine/src/cards/pool/gargantuan-slabhorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guild Feud",
+   "files": [
+    "engine/src/cards/pool/guild-feud.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harm's Way",
+   "files": [
+    "engine/src/cards/pool/harms-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hibernation's End",
+   "files": [
+    "engine/src/cards/pool/hibernations-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hold for Ransom",
+   "files": [
+    "engine/src/cards/pool/hold-for-ransom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Pyrulea",
+   "files": [
+    "engine/src/cards/pool/invasion-of-pyrulea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Keen-Eared Sentry",
+   "files": [
+    "engine/src/cards/pool/keen-eared-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kodama of the Center Tree",
+   "files": [
+    "engine/src/cards/pool/kodama-of-the-center-tree.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krovikan Sorcerer",
+   "files": [
+    "engine/src/cards/pool/krovikan-sorcerer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lamplight Phoenix",
+   "files": [
+    "engine/src/cards/pool/lamplight-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leshrac's Sigil",
+   "files": [
+    "engine/src/cards/pool/leshracs-sigil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lich",
+   "files": [
+    "engine/src/cards/pool/lich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Livio, Oathsworn Sentinel",
+   "files": [
+    "engine/src/cards/pool/livio-oathsworn-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magus of the Balance",
+   "files": [
+    "engine/src/cards/pool/magus-of-the-balance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mana Cache",
+   "files": [
+    "engine/src/cards/pool/mana-cache.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mana Maze",
+   "files": [
+    "engine/src/cards/pool/mana-maze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Portal",
+   "files": [
+    "engine/src/cards/pool/phyrexian-portal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Rebuttal",
+   "files": [
+    "engine/src/cards/pool/psychic-rebuttal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rites of Initiation",
+   "files": [
+    "engine/src/cards/pool/rites-of-initiation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sacred Ground",
+   "files": [
+    "engine/src/cards/pool/sacred-ground.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seasinger",
+   "files": [
+    "engine/src/cards/pool/seasinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Season of the Witch",
+   "files": [
+    "engine/src/cards/pool/season-of-the-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shipwreck Sifters",
+   "files": [
+    "engine/src/cards/pool/shipwreck-sifters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrouded Lore",
+   "files": [
+    "engine/src/cards/pool/shrouded-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soldevi Sage",
+   "files": [
+    "engine/src/cards/pool/soldevi-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Woman, Secret Agent",
+   "files": [
+    "engine/src/cards/pool/spider-woman-secret-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm Herald",
+   "files": [
+    "engine/src/cards/pool/storm-herald.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strax, Sontaran Nurse",
+   "files": [
+    "engine/src/cards/pool/strax-sontaran-nurse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suncleanser",
+   "files": [
+    "engine/src/cards/pool/suncleanser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tester of the Tangential",
+   "files": [
+    "engine/src/cards/pool/tester-of-the-tangential.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thraben Exorcism",
+   "files": [
+    "engine/src/cards/pool/thraben-exorcism.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tilonalli's Crown",
+   "files": [
+    "engine/src/cards/pool/tilonallis-crown.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torchling",
+   "files": [
+    "engine/src/cards/pool/torchling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Total War",
+   "files": [
+    "engine/src/cards/pool/total-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vine Gecko",
+   "files": [
+    "engine/src/cards/pool/vine-gecko.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voltage Surge",
+   "files": [
+    "engine/src/cards/pool/voltage-surge.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Spellweaver Volute",
+   "needs": [
+    "mechanic:enchant-card-in-graveyard"
+   ],
+   "size": "major",
+   "why": "An Aura that enchants a card in a graveyard: a new kind of attachment outside the battlefield (legality, the copy-and-cast, reattaching to another graveyard card). Not attempted; for the user."
+  },
+  {
+   "name": "Word of Command",
+   "needs": [
+    "mechanic:control-player-while-resolving"
+   ],
+   "size": "major",
+   "why": "Controlling another player while the spell resolves, with that player's mana-ability limits: a new subsystem. Not attempted; for the user."
+  },
+  {
+   "name": "Swirl the Mists",
+   "needs": [
+    "static:text-change-all-color-words"
+   ],
+   "size": "major",
+   "why": "A static that changes the text of every spell and permanent: text changes are per-object (rulesTextName/textChangesOf), so reaching a spell as it's cast (601.2a-c) and each permanent as it enters needs a new text-changing subsystem."
+  },
+  {
+   "name": "Raging River",
+   "needs": [
+    "effect:block-restricted-to-labeled-pile"
+   ],
+   "size": "major",
+   "why": "Each defender splits creatures into labelled piles no one chooses between, kept through a later per-attacker left/right choice in the same resolution: a new decision with its own UI and a new pile strategy for the bots."
+  },
+  {
+   "name": "Rhystic Cave",
+   "needs": [
+    "cost:pay-unless-inside-mana-ability"
+   ],
+   "size": "major",
+   "why": "Its {1} would be paid by the auto-planner, choosing the payer's lands for them (rule zero); there is no payment window where a payer picks sources, and none inside a mana ability. A working build with the auto-planner is kept in commit 67ce0c3cb (revert 65e583c45 once such a window exists)."
+  },
+  {
+   "name": "Balduvian Fallen",
+   "needs": [
+    "amount:mana-spent-on-cumulative-upkeep"
+   ],
+   "size": "small",
+   "why": "Re-keyed: trigger:cumulative-upkeep-paid is built (B338), but it still needs the {B} or {R} spent paying the upkeep."
+  }
+ ]
+}
