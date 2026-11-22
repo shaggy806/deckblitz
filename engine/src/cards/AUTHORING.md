@@ -4953,8 +4953,10 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   the granter elsewhere as the `"granter"` `ObjectRef` ("Return Trusty
   Boomerang to its owner's hand" is `return-to-hand` of `target: "granter"`;
   "the number of arrow counters on Archery Training" is `{ countersOn:
-  "granter", counter: "arrow" }`, read as it last existed once it's gone),
-  and a `damage` it deals as `from: "granter"` (Ninja's Kunai, dealt as the
+  "granter", counter: "arrow" }`, read as it last existed once it's gone;
+  "Hold for Ransom's controller sacrifices it and draws a card" is
+  `sacrifice-target` of `"granter"` with `byItsController` and a `draw` with
+  `who: { controllerOf: "granter" }`), and a `damage` it deals as `from: "granter"` (Ninja's Kunai, dealt as the
   sacrificed Equipment last existed). A granted *trigger* names it the same
   way: Spare Dagger's "you may sacrifice Spare Dagger" is `sacrifice-target`
   of `"granter"`. The granter is fixed as the ability is activated or

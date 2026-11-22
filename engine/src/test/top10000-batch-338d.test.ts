@@ -6,7 +6,21 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { B, enter, nextTurn, pickTargets, settle, spawn, table } from "./harness.js";
+import {
+  A,
+  B,
+  activate,
+  enter,
+  graveyard,
+  hand,
+  lands,
+  nextTurn,
+  pickTargets,
+  settle,
+  spawn,
+  table,
+  zone,
+} from "./harness.js";
 
 describe("top-10000 batch 338d — Spider-Woman, Secret Agent", () => {
   it("taps the creature, which stays tapped through untap steps and untap effects while she stays", () => {
@@ -41,5 +55,28 @@ describe("top-10000 batch 338d — Spider-Woman, Secret Agent", () => {
     expect(game.state.objects[woman].controller).toBe(B);
     nextTurn(game); // bob's untap step
     expect(game.state.objects[bears].tapped).toBe(false);
+  });
+});
+
+describe("top-10000 batch 338d — Hold for Ransom", () => {
+  it("the enchanted creature's controller pays {7}: the Aura's controller sacrifices it and draws", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const ransom = spawn(game, "Hold for Ransom");
+    game.state.objects[ransom].attachedTo = bears;
+    expect(game.characteristics(bears).restrictions.has("cant-attack")).toBe(true);
+    lands(game, "Wastes", 7, B);
+    const aliceHand = hand(game, A).length;
+    const bobHand = hand(game, B).length;
+    // Alice can't activate it: she doesn't control the creature.
+    expect(game.canDispatch({ type: "activate-ability", player: A, source: bears, abilityIndex: 0, targets: [] })).not.toBeNull();
+    nextTurn(game); // bob's turn, sorcery timing
+    const bobDrew = hand(game, B).length - bobHand;
+    activate(game, bears, 0, { player: B });
+    expect(zone(game, ransom)).toBe("graveyard");
+    expect(graveyard(game, A)).toContain(ransom);
+    expect(hand(game, A).length).toBe(aliceHand + 1);
+    expect(hand(game, B).length).toBe(bobHand + bobDrew);
+    expect(game.characteristics(bears).restrictions.has("cant-attack")).toBe(false);
   });
 });

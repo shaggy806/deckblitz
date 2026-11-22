@@ -3177,7 +3177,9 @@
   "effect:sacrifice-all-but-dynamic",
   "effect:discard-chosen-nontargeted-player",
   "effect:destroy-all-not-chosen",
-  "effect:cant-become-untapped-while-you-control-source"
+  "effect:cant-become-untapped-while-you-control-source",
+  "effect:cant-become-untapped-while-you-control-source",
+  "effect:granter-controller-player-ref"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
