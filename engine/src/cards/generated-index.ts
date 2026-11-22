@@ -1021,6 +1021,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Galian Beast": "https://cards.scryfall.io/art_crop/back/0/2/028ef608-acfe-4e9d-90db-eca4411ba78a.jpg",
   "Garden of Freyalise": "https://cards.scryfall.io/art_crop/back/a/8/a8e9ea5a-5e10-4b77-baef-0352ff035483.jpg",
   "Garenbrig Growth": "https://cards.scryfall.io/art_crop/back/f/f/ff857d41-767d-4e99-83cc-444738341b92.jpg",
+  "Gargantuan Slabhorn": "https://cards.scryfall.io/art_crop/back/5/0/50180fda-6d67-41e9-8b2b-2e7c5876b8ab.jpg",
   "Garruk, the Veil-Cursed": "https://cards.scryfall.io/art_crop/back/6/8/6897514f-e396-46d6-91e3-158366c741bb.jpg",
   "Gatstaf Howler": "https://cards.scryfall.io/art_crop/back/5/7/57f0907f-74f4-4d86-93df-f2e50c9d0b2f.jpg",
   "Gatstaf Ravagers": "https://cards.scryfall.io/art_crop/back/6/a/6ab67098-d3d5-4799-ae03-c734244f370e.jpg",

@@ -516,6 +516,7 @@ import _poolMaladyInvoker from "../pool/malady-invoker.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMalfunction from "../pool/malfunction.js";
 import _poolMalignus from "../pool/malignus.js";
+import _poolManaMaze from "../pool/mana-maze.js";
 import _poolManipulateFate from "../pool/manipulate-fate.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaraudingBoneslasher from "../pool/marauding-boneslasher.js";
@@ -1543,6 +1544,7 @@ const shard: CardShard = {
     _poolMalevolentChandelier,
     _poolMalfunction,
     _poolMalignus,
+    _poolManaMaze,
     _poolManipulateFate,
     _poolMantisRider,
     _poolMaraudingBoneslasher,

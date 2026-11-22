@@ -928,6 +928,7 @@ import _poolTiborAndLumia from "../pool/tibor-and-lumia.js";
 import _poolTickedOff from "../pool/ticked-off.js";
 import _poolTidyConclusion from "../pool/tidy-conclusion.js";
 import _poolTillerOfFlesh from "../pool/tiller-of-flesh.js";
+import _poolTilonallisCrown from "../pool/tilonallis-crown.js";
 import _poolTimeBomb from "../pool/time-bomb.js";
 import _poolTimeToReflect from "../pool/time-to-reflect.js";
 import _poolTishanasWayfinder from "../pool/tishanas-wayfinder.js";
@@ -2000,6 +2001,7 @@ const shard: CardShard = {
     _poolTickedOff,
     _poolTidyConclusion,
     _poolTillerOfFlesh,
+    _poolTilonallisCrown,
     _poolTimeBomb,
     _poolTimeToReflect,
     _poolTishanasWayfinder,

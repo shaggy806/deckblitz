@@ -363,6 +363,7 @@ import _poolGalianBeast from "../pool/galian-beast.js";
 import _poolGalufsFinalAct from "../pool/galufs-final-act.js";
 import _poolGandalfSparkStarter from "../pool/gandalf-spark-starter.js";
 import _poolGargadon from "../pool/gargadon.js";
+import _poolGargantuanSlabhorn from "../pool/gargantuan-slabhorn.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGatheringThrong from "../pool/gathering-throng.js";
 import _poolGeistOfSaintTraft from "../pool/geist-of-saint-traft.js";
@@ -1440,6 +1441,7 @@ const shard: CardShard = {
     _poolGalufsFinalAct,
     _poolGandalfSparkStarter,
     _poolGargadon,
+    _poolGargantuanSlabhorn,
     _poolGarrukPrimalHunter,
     _poolGatheringThrong,
     _poolGeistOfSaintTraft,

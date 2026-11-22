@@ -8984,6 +8984,7 @@ import _poolEvolutionaryLeap from "./pool/evolutionary-leap.js";
 import _poolEvolvedSleeper from "./pool/evolved-sleeper.js";
 import _poolEvolvedSpinoderm from "./pool/evolved-spinoderm.js";
 import _poolEvolvingAdaptive from "./pool/evolving-adaptive.js";
+import _poolEvolvingDoor from "./pool/evolving-door.js";
 import _poolEvolvingWilds from "./pool/evolving-wilds.js";
 import _poolEvraHalcyonWitness from "./pool/evra-halcyon-witness.js";
 import _poolExaltedAngel from "./pool/exalted-angel.js";
@@ -9403,6 +9404,7 @@ import _poolFascination from "./pool/fascination.js";
 import _poolFastForward from "./pool/fast-forward.js";
 import _poolFastFurious from "./pool/fast-furious.js";
 import _poolFast from "./pool/fast.js";
+import _poolFatalAttraction from "./pool/fatal-attraction.js";
 import _poolFatalBlow from "./pool/fatal-blow.js";
 import _poolFatalFissure from "./pool/fatal-fissure.js";
 import _poolFatalFrenzy from "./pool/fatal-frenzy.js";
@@ -10778,6 +10780,7 @@ import _poolGargadon from "./pool/gargadon.js";
 import _poolGargantosTheEndbringer from "./pool/gargantos-the-endbringer.js";
 import _poolGargantuanGorilla from "./pool/gargantuan-gorilla.js";
 import _poolGargantuanLeech from "./pool/gargantuan-leech.js";
+import _poolGargantuanSlabhorn from "./pool/gargantuan-slabhorn.js";
 import _poolGargosViciousWatcher from "./pool/gargos-vicious-watcher.js";
 import _poolGargoyleCastle from "./pool/gargoyle-castle.js";
 import _poolGargoyleFlock from "./pool/gargoyle-flock.js";
@@ -14221,6 +14224,7 @@ import _poolInvasionOfMoag from "./pool/invasion-of-moag.js";
 import _poolInvasionOfMuraganda from "./pool/invasion-of-muraganda.js";
 import _poolInvasionOfNewCapenna from "./pool/invasion-of-new-capenna.js";
 import _poolInvasionOfNewPhyrexia from "./pool/invasion-of-new-phyrexia.js";
+import _poolInvasionOfPyrulea from "./pool/invasion-of-pyrulea.js";
 import _poolInvasionOfRavnica from "./pool/invasion-of-ravnica.js";
 import _poolInvasionOfRegatha from "./pool/invasion-of-regatha.js";
 import _poolInvasionOfSegovia from "./pool/invasion-of-segovia.js";
@@ -17003,6 +17007,7 @@ import _poolManaGeyser from "./pool/mana-geyser.js";
 import _poolManaLeak from "./pool/mana-leak.js";
 import _poolManaLeech from "./pool/mana-leech.js";
 import _poolManaMatrix from "./pool/mana-matrix.js";
+import _poolManaMaze from "./pool/mana-maze.js";
 import _poolManaPrism from "./pool/mana-prism.js";
 import _poolManaReflection from "./pool/mana-reflection.js";
 import _poolManaSculpt from "./pool/mana-sculpt.js";
@@ -29290,6 +29295,7 @@ import _poolTillAndTend from "./pool/till-and-tend.js";
 import _poolTillerEngine from "./pool/tiller-engine.js";
 import _poolTillerOfFlesh from "./pool/tiller-of-flesh.js";
 import _poolTillingTreefolk from "./pool/tilling-treefolk.js";
+import _poolTilonallisCrown from "./pool/tilonallis-crown.js";
 import _poolTilonallisKnight from "./pool/tilonallis-knight.js";
 import _poolTilonallisSkinshifter from "./pool/tilonallis-skinshifter.js";
 import _poolTilonallisSummoner from "./pool/tilonallis-summoner.js";
@@ -42797,6 +42803,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEvolvedSleeper,
   _poolEvolvedSpinoderm,
   _poolEvolvingAdaptive,
+  _poolEvolvingDoor,
   _poolEvolvingWilds,
   _poolEvraHalcyonWitness,
   _poolExaltedAngel,
@@ -43216,6 +43223,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFastForward,
   _poolFastFurious,
   _poolFast,
+  _poolFatalAttraction,
   _poolFatalBlow,
   _poolFatalFissure,
   _poolFatalFrenzy,
@@ -44591,6 +44599,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGargantosTheEndbringer,
   _poolGargantuanGorilla,
   _poolGargantuanLeech,
+  _poolGargantuanSlabhorn,
   _poolGargosViciousWatcher,
   _poolGargoyleCastle,
   _poolGargoyleFlock,
@@ -48034,6 +48043,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInvasionOfMuraganda,
   _poolInvasionOfNewCapenna,
   _poolInvasionOfNewPhyrexia,
+  _poolInvasionOfPyrulea,
   _poolInvasionOfRavnica,
   _poolInvasionOfRegatha,
   _poolInvasionOfSegovia,
@@ -50816,6 +50826,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolManaLeak,
   _poolManaLeech,
   _poolManaMatrix,
+  _poolManaMaze,
   _poolManaPrism,
   _poolManaReflection,
   _poolManaSculpt,
@@ -63103,6 +63114,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTillerEngine,
   _poolTillerOfFlesh,
   _poolTillingTreefolk,
+  _poolTilonallisCrown,
   _poolTilonallisKnight,
   _poolTilonallisSkinshifter,
   _poolTilonallisSummoner,
@@ -76623,6 +76635,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/evolved-sleeper": _poolEvolvedSleeper,
   "pool/evolved-spinoderm": _poolEvolvedSpinoderm,
   "pool/evolving-adaptive": _poolEvolvingAdaptive,
+  "pool/evolving-door": _poolEvolvingDoor,
   "pool/evolving-wilds": _poolEvolvingWilds,
   "pool/evra-halcyon-witness": _poolEvraHalcyonWitness,
   "pool/exalted-angel": _poolExaltedAngel,
@@ -77042,6 +77055,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fast-forward": _poolFastForward,
   "pool/fast-furious": _poolFastFurious,
   "pool/fast": _poolFast,
+  "pool/fatal-attraction": _poolFatalAttraction,
   "pool/fatal-blow": _poolFatalBlow,
   "pool/fatal-fissure": _poolFatalFissure,
   "pool/fatal-frenzy": _poolFatalFrenzy,
@@ -78417,6 +78431,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gargantos-the-endbringer": _poolGargantosTheEndbringer,
   "pool/gargantuan-gorilla": _poolGargantuanGorilla,
   "pool/gargantuan-leech": _poolGargantuanLeech,
+  "pool/gargantuan-slabhorn": _poolGargantuanSlabhorn,
   "pool/gargos-vicious-watcher": _poolGargosViciousWatcher,
   "pool/gargoyle-castle": _poolGargoyleCastle,
   "pool/gargoyle-flock": _poolGargoyleFlock,
@@ -81860,6 +81875,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/invasion-of-muraganda": _poolInvasionOfMuraganda,
   "pool/invasion-of-new-capenna": _poolInvasionOfNewCapenna,
   "pool/invasion-of-new-phyrexia": _poolInvasionOfNewPhyrexia,
+  "pool/invasion-of-pyrulea": _poolInvasionOfPyrulea,
   "pool/invasion-of-ravnica": _poolInvasionOfRavnica,
   "pool/invasion-of-regatha": _poolInvasionOfRegatha,
   "pool/invasion-of-segovia": _poolInvasionOfSegovia,
@@ -84642,6 +84658,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mana-leak": _poolManaLeak,
   "pool/mana-leech": _poolManaLeech,
   "pool/mana-matrix": _poolManaMatrix,
+  "pool/mana-maze": _poolManaMaze,
   "pool/mana-prism": _poolManaPrism,
   "pool/mana-reflection": _poolManaReflection,
   "pool/mana-sculpt": _poolManaSculpt,
@@ -96929,6 +96946,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tiller-engine": _poolTillerEngine,
   "pool/tiller-of-flesh": _poolTillerOfFlesh,
   "pool/tilling-treefolk": _poolTillingTreefolk,
+  "pool/tilonallis-crown": _poolTilonallisCrown,
   "pool/tilonallis-knight": _poolTilonallisKnight,
   "pool/tilonallis-skinshifter": _poolTilonallisSkinshifter,
   "pool/tilonallis-summoner": _poolTilonallisSummoner,

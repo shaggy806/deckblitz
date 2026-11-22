@@ -258,6 +258,7 @@ import _poolEternalStudent from "../pool/eternal-student.js";
 import _poolEtherealElk from "../pool/ethereal-elk.js";
 import _poolEtheriumAstrolabe from "../pool/etherium-astrolabe.js";
 import _poolEttercap from "../pool/ettercap.js";
+import _poolEvolvingDoor from "../pool/evolving-door.js";
 import _poolExcavationTechnique from "../pool/excavation-technique.js";
 import _poolExcommunicate from "../pool/excommunicate.js";
 import _poolExdeathVoidWarlock from "../pool/exdeath-void-warlock.js";
@@ -1308,6 +1309,7 @@ const shard: CardShard = {
     _poolEtherealElk,
     _poolEtheriumAstrolabe,
     _poolEttercap,
+    _poolEvolvingDoor,
     _poolExcavationTechnique,
     _poolExcommunicate,
     _poolExdeathVoidWarlock,

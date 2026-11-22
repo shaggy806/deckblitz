@@ -463,6 +463,7 @@ import _poolIntoTheNorth from "../pool/into-the-north.js";
 import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
 import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
 import _poolInvasionOfKamigawa from "../pool/invasion-of-kamigawa.js";
+import _poolInvasionOfPyrulea from "../pool/invasion-of-pyrulea.js";
 import _poolInvasionTactics from "../pool/invasion-tactics.js";
 import _poolInvigorate from "../pool/invigorate.js";
 import _poolIridianMaelstrom from "../pool/iridian-maelstrom.js";
@@ -1531,6 +1532,7 @@ const shard: CardShard = {
     _poolIntrudingSoulrager,
     _poolInvasionOfInnistrad,
     _poolInvasionOfKamigawa,
+    _poolInvasionOfPyrulea,
     _poolInvasionTactics,
     _poolInvigorate,
     _poolIridianMaelstrom,

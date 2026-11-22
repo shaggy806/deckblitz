@@ -289,6 +289,7 @@ import _poolFantasticBounce from "../pool/fantastic-bounce.js";
 import _poolFarrelsMantle from "../pool/farrels-mantle.js";
 import _poolFarseek from "../pool/farseek.js";
 import _poolFarsightRitual from "../pool/farsight-ritual.js";
+import _poolFatalAttraction from "../pool/fatal-attraction.js";
 import _poolFathomTrawl from "../pool/fathom-trawl.js";
 import _poolFearOfImpostors from "../pool/fear-of-impostors.js";
 import _poolFearsomeAwakening from "../pool/fearsome-awakening.js";
@@ -1368,6 +1369,7 @@ const shard: CardShard = {
     _poolFarrelsMantle,
     _poolFarseek,
     _poolFarsightRitual,
+    _poolFatalAttraction,
     _poolFathomTrawl,
     _poolFearOfImpostors,
     _poolFearsomeAwakening,
