@@ -2256,6 +2256,20 @@ export function parseTrigger(clause) {
     if (typeof n !== "number") return null;
     return [{ on: "state", state: { kind: "self-counters", counter: m[2] ?? m[4], compare: { op: "gte", n } } }];
   }
+  // "Whenever a permanent you control transforms or a permanent you control
+  // enters transformed" (Corruption of Towashi — rules 701.27, 712.14a).
+  if ((m = /^Whenever an? ([a-z]+) you control transforms( or an? \1 you control enters transformed)?$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null) return null;
+    return [
+      {
+        on: "transforms",
+        who: "you-control",
+        ...(Object.keys(filter).length > 0 ? { filter } : {}),
+        ...(m[2] !== undefined ? { orEntersTransformed: true } : {}),
+      },
+    ];
+  }
   // The same of each permanent on its own (Bomb Squad's "whenever a creature
   // has four or more fuse counters on it"): `each`, it the trigger object.
   if ((m = /^Whenever an? ([a-z]+) has (\w+) or more (\w+) counters on it$/.exec(c))) {

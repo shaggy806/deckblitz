@@ -39601,8 +39601,11 @@ export class Game {
         );
       case "transforms":
         return (
-          event.type === "permanent-transformed" &&
-          (spec.intoFront === undefined || spec.intoFront === event.front) &&
+          ((event.type === "permanent-transformed" && (spec.intoFront === undefined || spec.intoFront === event.front)) ||
+            (spec.orEntersTransformed === true &&
+              spec.intoFront !== true &&
+              event.type === "permanent-entered-battlefield" &&
+              this.enteredTransformed(event.object))) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
@@ -70677,6 +70680,20 @@ controlledBy,
         });
       });
     }
+  }
+
+  /**
+   * Whether the permanent `id` "entered transformed": a transforming
+   * double-faced permanent with its back face up (rules 712.14a, 701.27g) —
+   * never a modal double-faced one, nor a melded or merged permanent, nor a
+   * face-down one (Corruption of Towashi's rulings). Asked as its entry is
+   * announced.
+   */
+  private enteredTransformed(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "battlefield" || (object.face ?? 0) === 0) return false;
+    if (object.faceDown !== undefined || object.melded !== undefined || object.merged !== undefined) return false;
+    return this.registry.get(object.cardName).transform === true;
   }
 
   /**

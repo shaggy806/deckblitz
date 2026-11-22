@@ -1976,6 +1976,12 @@ export type TriggerKind =
       readonly who: TriggerWho;
       readonly intoFront?: boolean;
       readonly filter?: CardFilter;
+      /** "… transforms **or enters transformed**" (Corruption of Towashi): a
+       * transforming double-faced permanent entering the battlefield with its
+       * back face up (rules 712.14a, 701.27g) fires it too, the entering
+       * permanent the trigger object. A modal double-faced or melded one
+       * entering back face up doesn't (the card's rulings). */
+      readonly orEntersTransformed?: true;
     }
   | {
       /** A mutating creature spell merged with a permanent (rule 702.140d).

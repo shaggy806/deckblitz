@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A permanent entering transformed — built 2026-11-22
+
+The key `trigger:enters-transformed`: the `transforms` trigger's `orEntersTransformed`, firing as well when a
+transforming double-faced permanent enters with its back face up (rules 712.14a, 701.27g; `Game.enteredTransformed` —
+never a modal double-faced, melded, merged or face-down one). Corruption of Towashi (19891). The scaffolder reads
+"whenever a <type> you control transforms [or a <type> you control enters transformed]". `test/top10000-batch-338b.test.ts`.
+
 ### Counters removed this turn — built 2026-11-22
 
 The key `condition:oil-counter-removed-this-turn`: the journal kind and word `counters-removed` (recorded from

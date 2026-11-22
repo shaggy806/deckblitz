@@ -10074,6 +10074,19 @@ describe("a state trigger about each permanent (Bomb Squad)", () => {
   });
 });
 
+describe("transforms or enters transformed (Corruption of Towashi)", () => {
+  it("reads the entry half as `orEntersTransformed`", () => {
+    const corruption = parseFace({
+      name: "Corruption of Towashi",
+      type_line: "Enchantment",
+      oracle_text:
+        "Whenever a permanent you control transforms or a permanent you control enters transformed, you may draw a card. Do this only once each turn.",
+    });
+    expect(corruption.complete).toBe(true);
+    expect(corruption.triggered[0].trigger).toEqual({ on: "transforms", who: "you-control", orEntersTransformed: true });
+  });
+});
+
 describe("the card discarded to pay a cost", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

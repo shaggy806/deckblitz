@@ -15,9 +15,11 @@ import {
   destroy,
   enter,
   grant,
+  hand,
   lands,
   life,
   named,
+  pickModes,
   pickTargets,
   pt,
   ref,
@@ -163,5 +165,45 @@ describe("batch 338b — Churning Reservoir (counters removed this turn)", () =>
     settle(game);
     expect(counters(game, bears, "oil")).toBe(1);
     expect(counters(game, reservoir, "oil")).toBe(0);
+  });
+});
+
+describe("batch 338b — Corruption of Towashi (transforms or enters transformed)", () => {
+  /** Onto the battlefield as `name` — a back face's name puts its card there back face up — announcing the entry. */
+  const arrive = (game: Game, name: string, player = A): ObjectId => {
+    const id = game.debugSpawn(name, player, "battlefield", { announceEntry: true, summoningSick: false });
+    settle(game);
+    return id;
+  };
+
+  it("incubates 4, and draws when the Incubator transforms — once a turn", () => {
+    const { game, a } = table();
+    lands(game, "Island", 4);
+    pickModes(a, 0);
+    arrive(game, "Corruption of Towashi");
+    const incubators = named(game, "Incubator Token");
+    expect(incubators.length).toBe(1);
+    expect(counters(game, incubators[0])).toBe(4);
+    const before = hand(game).length;
+    activate(game, incubators[0]);
+    expect(hand(game).length).toBe(before + 1);
+    // A second transform this turn draws nothing.
+    pickModes(a, 0);
+    arrive(game, "Insectile Aberration");
+    expect(hand(game).length).toBe(before + 1);
+  });
+
+  it("a transforming double-faced card entering back face up triggers it; a modal one doesn't, nor an opponent's", () => {
+    const { game, a } = table();
+    spawn(game, "Corruption of Towashi");
+    const before = hand(game).length;
+    pickModes(a, 0);
+    arrive(game, "Agadeem, the Undercrypt");
+    arrive(game, "Insectile Aberration", B);
+    arrive(game, "Delver of Secrets");
+    expect(hand(game).length).toBe(before);
+    const aberration = arrive(game, "Insectile Aberration");
+    expect(game.state.objects[aberration].face).toBe(1);
+    expect(hand(game).length).toBe(before + 1);
   });
 });
