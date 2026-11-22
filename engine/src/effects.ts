@@ -2031,6 +2031,10 @@ export function substituteChosenCreatureType(spec: EffectSpec, creatureType: str
  * spec that never resolved (a bot's look at the text), where it matches
  * nothing. A chosen number needs none: `then` reads it as `"x"`.
  */
+/** The slots of a `choose-for-each-slot`: the basic land types, the five
+ * colors, card types, or each different power among what it may choose. */
+export type ForEachSlots = "basic-land-types" | "colors" | "powers" | readonly CardType[];
+
 export const CHOSEN_COLOR = "$chosenColor" as Color;
 export const CHOSEN_CARD_TYPE = "$chosenCardType" as CardType;
 export const CHOSEN_COUNTER = "$chosenCounter";
@@ -11949,12 +11953,23 @@ export type EffectSpec =
        * 608.2f), `each` applies to every permanent chosen — target 0, with
        * `"x"` the number of slots it was chosen for. `{slot}` in `prompt` is
        * the slot's word ("white", "Island", "artifact").
+       *
+       * `slots: "powers"` is "**for each different power among creatures on
+       * the battlefield**, choose a creature with that power" (Celestial
+       * Judgment): one slot for each power a permanent matching `filter` has
+       * as the effect begins, lowest first, its word the number. Each
+       * creature has one power, so no permanent fills two of these slots.
        */
       readonly kind: "choose-for-each-slot";
-      readonly slots: "basic-land-types" | "colors" | readonly CardType[];
+      readonly slots: ForEachSlots;
       readonly filter: CardFilter;
       readonly prompt: string;
-      readonly each: EffectSpec;
+      readonly each?: EffectSpec;
+      /** "**Destroy each creature not chosen this way**" (Celestial Judgment):
+       * once `each` has applied, every permanent matching `filter` that wasn't
+       * chosen is destroyed, all at once. A token of a stack chosen is singled
+       * out first, so the rest of its stack is destroyed. */
+      readonly rest?: "destroy";
       /** Set only by the engine: the slots still to choose for, and what was
        * chosen for those before (one entry a slot). */
       readonly progress?: { readonly slotsLeft: readonly string[]; readonly chosen: readonly ObjectId[] };
@@ -14865,10 +14880,11 @@ export interface EffectApi {
    * the controller's permanents matching `filter` and of `slot`. `true` when
    * it asked; otherwise the one there is (none, with none) is waiting for
    * `takeKept`. */
-  askForSlot(filter: CardFilter, slots: "basic-land-types" | "colors" | readonly CardType[], slot: string, prompt: string): boolean;
+  askForSlot(filter: CardFilter, slots: ForEachSlots, slot: string, prompt: string): boolean;
   /** The words of `slots`, in order: "white" … "green", "Plains" … "Forest",
-   * or the card types as given. */
-  slotWords(slots: "basic-land-types" | "colors" | readonly CardType[]): readonly string[];
+   * the card types as given, or (`"powers"`) each different power among the
+   * permanents matching `filter`, lowest first. */
+  slotWords(slots: ForEachSlots, filter: CardFilter): readonly string[];
   /** Each kept permanent as one object and its stint, a token stack kept in
    * part having those members peeled off: what `amongObjects` asks. */
   separateKept(kept: readonly ObjectId[]): readonly { readonly object: ObjectId; readonly stint: number }[];
@@ -25608,7 +25624,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // token of a stack singled out as it's chosen, so a later slot can
       // name it again or another of its stack. Then all of it at once.
       const below = ctx.parkedCount();
-      let slotsLeft = spec.progress?.slotsLeft ?? ctx.slotWords(spec.slots);
+      let slotsLeft = spec.progress?.slotsLeft ?? ctx.slotWords(spec.slots, spec.filter);
       const chosen = [...(spec.progress?.chosen ?? [])];
       const take = (): void => {
         for (const id of ctx.takeKept()) {
@@ -25628,9 +25644,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       const times = new Map<ObjectId, number>();
       for (const id of chosen) times.set(id, (times.get(id) ?? 0) + 1);
-      ctx.simultaneously(() => {
-        for (const [id, n] of times) applyEffectSpec(spec.each, ctx.withFoundAt(0, id).withX(n));
-      });
+      const each = spec.each;
+      if (each !== undefined) {
+        ctx.simultaneously(() => {
+          for (const [id, n] of times) applyEffectSpec(each, ctx.withFoundAt(0, id).withX(n));
+        });
+      }
+      if (spec.rest === "destroy") {
+        // Rule 608.2c: "not chosen this way" — everything else matching.
+        const chosenOnes: CardFilter = { amongObjects: ctx.separateKept([...times.keys()]) };
+        const not = spec.filter.not === undefined ? chosenOnes : { anyOf: [spec.filter.not, chosenOnes] };
+        applyEffectSpec({ kind: "destroy-all", filter: { ...spec.filter, not } }, ctx);
+      }
       return;
     }
     case "keep-total-power": {

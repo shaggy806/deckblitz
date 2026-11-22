@@ -340,6 +340,7 @@ import type {
   BeholdSpec,
   BoardManaList,
   DiscardChosenAlsoFrom,
+  ForEachSlots,
   ManaListSpec,
   CascadeFinish,
   CascadeFound,
@@ -45744,12 +45745,22 @@ controlledBy,
         };
         return true;
       },
-      slotWords: (slots) =>
+      slotWords: (slots, filter) =>
         slots === "basic-land-types"
           ? ["Plains", "Island", "Swamp", "Mountain", "Forest"]
           : slots === "colors"
             ? ["white", "blue", "black", "red", "green"]
-            : slots,
+            : slots === "powers"
+              ? [
+                  ...new Set(
+                    this.battlefieldMatching(controller, filter).map(
+                      (id) => computeCharacteristics(this.state, this.registry, id).power,
+                    ),
+                  ),
+                ]
+                  .sort((a, b) => a - b)
+                  .map(String)
+              : slots,
       separateKept: (kept) => {
         const counts = new Map<ObjectId, number>();
         for (const id of kept) counts.set(id, (counts.get(id) ?? 0) + 1);
@@ -59512,9 +59523,10 @@ controlledBy,
    * to choose from, all of them are the only answer, and still asked.
    */
   /** The slots of a `choose-one-of-each` that `id` can fill, as it is now. */
-  private oneOfEachSlotsOf(id: ObjectId, slots: "basic-land-types" | "colors" | "party" | readonly CardType[]): readonly string[] {
+  private oneOfEachSlotsOf(id: ObjectId, slots: ForEachSlots | "party"): readonly string[] {
     const object = this.state.objects[id];
     if (object === undefined) return [];
+    if (slots === "powers") return [String(computeCharacteristics(this.state, this.registry, id).power)];
     if (slots === "party") {
       // Rule 700.8: a creature of each of these types, a changeling all four.
       if (!effectiveTypes(this.state, this.registry, object).includes("creature")) return [];
