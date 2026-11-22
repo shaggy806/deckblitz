@@ -13,41 +13,42 @@ import './lobby.css'
  * lets the caller decide what that means (stage it for your own seat's
  * `Join`, or immediately assign it to a bot).
  *
- * `includeSaved` gates this browser's saved decks (and the "build a new
- * one" link, which only makes sense alongside them) — on for your own seat,
- * off for a bot's: a bot only ever plays a curated starter deck, never a
- * deck you're still building or one meant for you to actually play.
- *
  * The decks are in groups, one shown at a time (the user, 2026-11-15: "they
  * should be sorted into 3 strength categories rather than a long list"):
- * for a bot Precon, Upgraded and Strong, the strengths its "+ Bot" buttons
- * deal from; for your own seat My decks, Precon and Upgraded (the strong
- * decks are real players' lists, dealt to bots only). It opens on the group
- * holding `current`, the seat's deck by name, so the choice already made is
- * in view.
+ * for your own seat My decks, Precon and Upgraded (the strong decks are real
+ * players' lists, dealt to bots only); for a bot (`forBot`) Precon, Upgraded
+ * and Strong, the strengths its "+ Bot" buttons deal from, then My decks.
+ * A bot plays one of your saved decks only when you pick it here (the user,
+ * 2026-11-22: "it should remain a manual choice"): the "+ Bot" buttons and
+ * Fill with bots never deal one, and the tab comes last so the picker opens
+ * on the bot decks. It opens on the group holding `current`, the seat's deck
+ * by name, so the choice already made is in view. The "build a new one" link
+ * is for your own seat: it leaves the room's page.
  */
 export function DeckPickerModal({
   title,
   roomId,
-  includeSaved,
+  forBot,
   current,
   onPick,
   onClose,
 }: {
   readonly title: string
   readonly roomId: string | null
-  readonly includeSaved: boolean
+  readonly forBot: boolean
   readonly current?: string | null
   readonly onPick: (deck: PickableDeck) => void
   readonly onClose: () => void
 }) {
   const decks = listPickableDecks()
   const starters = decks.filter((d) => d.key.startsWith('starter:'))
+  const saved = { id: 'saved', label: 'My decks', decks: decks.filter((d) => d.key.startsWith('saved:')) }
   const groups: readonly { readonly id: string; readonly label: string; readonly decks: readonly PickableDeck[] }[] = [
-    { id: 'saved', label: 'My decks', decks: includeSaved ? decks.filter((d) => d.key.startsWith('saved:')) : [] },
+    ...(forBot ? [] : [saved]),
     { id: 'precon', label: 'Precon', decks: starters.filter((d) => d.strength === 'precon') },
     { id: 'upgraded', label: 'Upgraded', decks: starters.filter((d) => d.strength === 'upgraded') },
-    { id: 'strong', label: 'Strong', decks: includeSaved ? [] : listStrongDecks() },
+    { id: 'strong', label: 'Strong', decks: forBot ? listStrongDecks() : [] },
+    ...(forBot ? [saved] : []),
   ].filter((g) => g.decks.length > 0)
   const [chosen, setChosen] = useState<string | null>(null)
   const open =
@@ -85,7 +86,7 @@ export function DeckPickerModal({
             <DeckPickerRow key={d.key} deck={d} onPick={onPick} current={d.name === current} />
           ))}
         </div>
-        {includeSaved ? (
+        {!forBot ? (
           <a
             className="link-button deck-picker-build"
             href={roomId ? `/deck-builder?room=${roomId}` : '/deck-builder'}
