@@ -3230,7 +3230,8 @@
   "effect:discard-one-of-drawn",
   "effect:discard-one-of-drawn",
   "decision:may-in-prevention-followup",
-  "effect:each-player-chooses-permanents-rest-phase-out"
+  "effect:each-player-chooses-permanents-rest-phase-out",
+  "effect:repeat-choice-excluding-earlier-passes"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

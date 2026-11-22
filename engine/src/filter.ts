@@ -1631,6 +1631,17 @@ export interface CardFilter {
    */
   readonly thisWayBy?: "you";
   /**
+   * Which of what the resolution has done `thisWay` and `notThisWay` read.
+   * `"across-passes"`: every pass so far of the `repeat` under way, not only
+   * this pass — Shrouded Lore's "repeat this process except that opponent
+   * **can't choose a card already chosen** for Shrouded Lore" is
+   * `{ notThisWay: "chosen", thisWayScope: "across-passes" }` (outside a
+   * `repeat`, the whole resolution as usual). `"last"`: `thisWay` matches
+   * only the object most recently done this way — "then put **the last
+   * chosen card** into your hand", after the repeat.
+   */
+  readonly thisWayScope?: "across-passes" | "last";
+  /**
    * One of the members of a set (`object-sets.ts`), in the stint the set
    * found it in (rule 400.7), whatever it has become since: `"trigger-batch"`
    * is "those creatures", "each of them" — the attackers that counted for an
@@ -2650,12 +2661,15 @@ export function matchesFilter(
   if (filter.isCopy !== undefined && ((live ?? state.objects[id])?.isCopy === true) !== filter.isCopy) return false;
   if (filter.inZone !== undefined && state.objects[id]?.zone !== filter.inZone) return false;
   const byScope = (e: { readonly player: PlayerId }): boolean => filter.thisWayBy !== "you" || e.player === ctx.you;
-  if (filter.thisWay !== undefined && !thisWayEntries(state, filter.thisWay).some((e) => e.object === id && byScope(e))) {
-    return false;
+  const thisWaySince =
+    filter.thisWayScope === "across-passes" ? (state.repeatSince ?? state.resolutionSince) : state.resolutionSince;
+  if (filter.thisWay !== undefined) {
+    const done = thisWayEntries(state, filter.thisWay, thisWaySince).filter(byScope);
+    if (!(filter.thisWayScope === "last" ? done.slice(-1) : done).some((e) => e.object === id)) return false;
   }
   if (
     filter.notThisWay !== undefined &&
-    thisWayEntries(state, filter.notThisWay).some((e) => e.object === id && byScope(e))
+    thisWayEntries(state, filter.notThisWay, thisWaySince).some((e) => e.object === id && byScope(e))
   ) {
     return false;
   }

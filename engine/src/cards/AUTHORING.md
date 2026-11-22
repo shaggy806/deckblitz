@@ -4228,7 +4228,11 @@ creatures" is `{ type: "creature", notThisWay: "created" }` (with the tokens
 made `separate`). `thisWayBy: "you"` narrows either to what *you* did that
 way: Rise of the Witch-king's "another permanent card" after "each player
 sacrifices" is `{ notThisWay: "sacrificed", thisWayBy: "you" }`, so a card you
-own that an opponent sacrificed may still come back. `attacking` asks whether the permanent is currently attacking
+own that an opponent sacrificed may still come back. `thisWayScope:
+"across-passes"` reads every pass of the `repeat` under way rather than this
+pass (Shrouded Lore's "can't choose a card already chosen"), and `"last"`
+narrows `thisWay` to the one object done that way most recently ("put the last
+chosen card into your hand"). `attacking` asks whether the permanent is currently attacking
 (Kangee's Lieutenant); `unblocked` whether it's an unblocked attacker (rule
 509.1h: attacking, with blockers declared and none for it, or put onto the
 battlefield attacking since — 508.4d) — from the declare blockers step on,
