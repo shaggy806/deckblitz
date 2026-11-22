@@ -4083,6 +4083,7 @@ import _poolCaptiveWeird from "./pool/captive-weird.js";
 import _poolCaptureOfJingzhou from "./pool/capture-of-jingzhou.js";
 import _poolCaptureSphere from "./pool/capture-sphere.js";
 import _poolCapturedByLagacs from "./pool/captured-by-lagacs.js";
+import _poolCapturedByTheConsulate from "./pool/captured-by-the-consulate.js";
 import _poolCapturedSunlight from "./pool/captured-sunlight.js";
 import _poolCaradoraHeartOfAlacria from "./pool/caradora-heart-of-alacria.js";
 import _poolCarapaceForger from "./pool/carapace-forger.js";
@@ -8031,6 +8032,7 @@ import _poolEardrumRattler from "./pool/eardrum-rattler.js";
 import _poolEarlyFrost from "./pool/early-frost.js";
 import _poolEarlyHarvest from "./pool/early-harvest.js";
 import _poolEarlyWinter from "./pool/early-winter.js";
+import _poolEarnestFellowship from "./pool/earnest-fellowship.js";
 import _poolEarsplittingRats from "./pool/earsplitting-rats.js";
 import _poolEarthCultElemental from "./pool/earth-cult-elemental.js";
 import _poolEarthElemental from "./pool/earth-elemental.js";
@@ -16112,6 +16114,7 @@ import _poolLibraryOfLeng from "./pool/library-of-leng.js";
 import _poolLibrary from "./pool/library.js";
 import _poolLichKnightsConquest from "./pool/lich-knights-conquest.js";
 import _poolLichLordOfUnx from "./pool/lich-lord-of-unx.js";
+import _poolLich from "./pool/lich.js";
 import _poolLichenthrope from "./pool/lichenthrope.js";
 import _poolLichsCaress from "./pool/lichs-caress.js";
 import _poolLichsMastery from "./pool/lichs-mastery.js";
@@ -24975,6 +24978,7 @@ import _poolShipwreckMarsh from "./pool/shipwreck-marsh.js";
 import _poolShipwreckMoray from "./pool/shipwreck-moray.js";
 import _poolShipwreckPatrol from "./pool/shipwreck-patrol.js";
 import _poolShipwreckSentry from "./pool/shipwreck-sentry.js";
+import _poolShipwreckSifters from "./pool/shipwreck-sifters.js";
 import _poolShipwreckSinger from "./pool/shipwreck-singer.js";
 import _poolShireScarecrow from "./pool/shire-scarecrow.js";
 import _poolShireShirriff from "./pool/shire-shirriff.js";
@@ -27121,6 +27125,7 @@ import _poolStormFleetSwashbuckler from "./pool/storm-fleet-swashbuckler.js";
 import _poolStormForceOfNature from "./pool/storm-force-of-nature.js";
 import _poolStormFront from "./pool/storm-front.js";
 import _poolStormGodsOracle from "./pool/storm-gods-oracle.js";
+import _poolStormHerald from "./pool/storm-herald.js";
 import _poolStormHerd from "./pool/storm-herd.js";
 import _poolStormKilnArtist from "./pool/storm-kiln-artist.js";
 import _poolStormKingsThunder from "./pool/storm-kings-thunder.js";
@@ -27486,6 +27491,7 @@ import _poolSunbladeSamurai from "./pool/sunblade-samurai.js";
 import _poolSunblastAngel from "./pool/sunblast-angel.js";
 import _poolSunbond from "./pool/sunbond.js";
 import _poolSunbringersTouch from "./pool/sunbringers-touch.js";
+import _poolSuncleanser from "./pool/suncleanser.js";
 import _poolSuncrusher from "./pool/suncrusher.js";
 import _poolSunderFromWithin from "./pool/sunder-from-within.js";
 import _poolSunderShaman from "./pool/sunder-shaman.js";
@@ -29058,6 +29064,7 @@ import _poolThousandYearElixir from "./pool/thousand-year-elixir.js";
 import _poolThousandYearStorm from "./pool/thousand-year-storm.js";
 import _poolThrabenCharm from "./pool/thraben-charm.js";
 import _poolThrabenDoomsayer from "./pool/thraben-doomsayer.js";
+import _poolThrabenExorcism from "./pool/thraben-exorcism.js";
 import _poolThrabenFoulbloods from "./pool/thraben-foulbloods.js";
 import _poolThrabenGargoyle from "./pool/thraben-gargoyle.js";
 import _poolThrabenHeretic from "./pool/thraben-heretic.js";
@@ -29582,6 +29589,7 @@ import _poolTorture from "./pool/torture.js";
 import _poolTorturedExistence from "./pool/tortured-existence.js";
 import _poolToshiroUmezawa from "./pool/toshiro-umezawa.js";
 import _poolToskiBearerOfSecrets from "./pool/toski-bearer-of-secrets.js";
+import _poolTotalWar from "./pool/total-war.js";
 import _poolTotallyLost from "./pool/totally-lost.js";
 import _poolTotemGuideHartebeest from "./pool/totem-guide-hartebeest.js";
 import _poolTotemSpeaker from "./pool/totem-speaker.js";
@@ -37910,6 +37918,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaptureOfJingzhou,
   _poolCaptureSphere,
   _poolCapturedByLagacs,
+  _poolCapturedByTheConsulate,
   _poolCapturedSunlight,
   _poolCaradoraHeartOfAlacria,
   _poolCarapaceForger,
@@ -41858,6 +41867,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEarlyFrost,
   _poolEarlyHarvest,
   _poolEarlyWinter,
+  _poolEarnestFellowship,
   _poolEarsplittingRats,
   _poolEarthCultElemental,
   _poolEarthElemental,
@@ -49939,6 +49949,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLibrary,
   _poolLichKnightsConquest,
   _poolLichLordOfUnx,
+  _poolLich,
   _poolLichenthrope,
   _poolLichsCaress,
   _poolLichsMastery,
@@ -58802,6 +58813,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShipwreckMoray,
   _poolShipwreckPatrol,
   _poolShipwreckSentry,
+  _poolShipwreckSifters,
   _poolShipwreckSinger,
   _poolShireScarecrow,
   _poolShireShirriff,
@@ -60948,6 +60960,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStormForceOfNature,
   _poolStormFront,
   _poolStormGodsOracle,
+  _poolStormHerald,
   _poolStormHerd,
   _poolStormKilnArtist,
   _poolStormKingsThunder,
@@ -61313,6 +61326,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSunblastAngel,
   _poolSunbond,
   _poolSunbringersTouch,
+  _poolSuncleanser,
   _poolSuncrusher,
   _poolSunderFromWithin,
   _poolSunderShaman,
@@ -62885,6 +62899,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThousandYearStorm,
   _poolThrabenCharm,
   _poolThrabenDoomsayer,
+  _poolThrabenExorcism,
   _poolThrabenFoulbloods,
   _poolThrabenGargoyle,
   _poolThrabenHeretic,
@@ -63409,6 +63424,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTorturedExistence,
   _poolToshiroUmezawa,
   _poolToskiBearerOfSecrets,
+  _poolTotalWar,
   _poolTotallyLost,
   _poolTotemGuideHartebeest,
   _poolTotemSpeaker,
@@ -71750,6 +71766,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/capture-of-jingzhou": _poolCaptureOfJingzhou,
   "pool/capture-sphere": _poolCaptureSphere,
   "pool/captured-by-lagacs": _poolCapturedByLagacs,
+  "pool/captured-by-the-consulate": _poolCapturedByTheConsulate,
   "pool/captured-sunlight": _poolCapturedSunlight,
   "pool/caradora-heart-of-alacria": _poolCaradoraHeartOfAlacria,
   "pool/carapace-forger": _poolCarapaceForger,
@@ -75698,6 +75715,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/early-frost": _poolEarlyFrost,
   "pool/early-harvest": _poolEarlyHarvest,
   "pool/early-winter": _poolEarlyWinter,
+  "pool/earnest-fellowship": _poolEarnestFellowship,
   "pool/earsplitting-rats": _poolEarsplittingRats,
   "pool/earth-cult-elemental": _poolEarthCultElemental,
   "pool/earth-elemental": _poolEarthElemental,
@@ -83779,6 +83797,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/library": _poolLibrary,
   "pool/lich-knights-conquest": _poolLichKnightsConquest,
   "pool/lich-lord-of-unx": _poolLichLordOfUnx,
+  "pool/lich": _poolLich,
   "pool/lichenthrope": _poolLichenthrope,
   "pool/lichs-caress": _poolLichsCaress,
   "pool/lichs-mastery": _poolLichsMastery,
@@ -92642,6 +92661,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shipwreck-moray": _poolShipwreckMoray,
   "pool/shipwreck-patrol": _poolShipwreckPatrol,
   "pool/shipwreck-sentry": _poolShipwreckSentry,
+  "pool/shipwreck-sifters": _poolShipwreckSifters,
   "pool/shipwreck-singer": _poolShipwreckSinger,
   "pool/shire-scarecrow": _poolShireScarecrow,
   "pool/shire-shirriff": _poolShireShirriff,
@@ -94788,6 +94808,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/storm-force-of-nature": _poolStormForceOfNature,
   "pool/storm-front": _poolStormFront,
   "pool/storm-gods-oracle": _poolStormGodsOracle,
+  "pool/storm-herald": _poolStormHerald,
   "pool/storm-herd": _poolStormHerd,
   "pool/storm-kiln-artist": _poolStormKilnArtist,
   "pool/storm-kings-thunder": _poolStormKingsThunder,
@@ -95153,6 +95174,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sunblast-angel": _poolSunblastAngel,
   "pool/sunbond": _poolSunbond,
   "pool/sunbringers-touch": _poolSunbringersTouch,
+  "pool/suncleanser": _poolSuncleanser,
   "pool/suncrusher": _poolSuncrusher,
   "pool/sunder-from-within": _poolSunderFromWithin,
   "pool/sunder-shaman": _poolSunderShaman,
@@ -96725,6 +96747,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thousand-year-storm": _poolThousandYearStorm,
   "pool/thraben-charm": _poolThrabenCharm,
   "pool/thraben-doomsayer": _poolThrabenDoomsayer,
+  "pool/thraben-exorcism": _poolThrabenExorcism,
   "pool/thraben-foulbloods": _poolThrabenFoulbloods,
   "pool/thraben-gargoyle": _poolThrabenGargoyle,
   "pool/thraben-heretic": _poolThrabenHeretic,
@@ -97249,6 +97272,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tortured-existence": _poolTorturedExistence,
   "pool/toshiro-umezawa": _poolToshiroUmezawa,
   "pool/toski-bearer-of-secrets": _poolToskiBearerOfSecrets,
+  "pool/total-war": _poolTotalWar,
   "pool/totally-lost": _poolTotallyLost,
   "pool/totem-guide-hartebeest": _poolTotemGuideHartebeest,
   "pool/totem-speaker": _poolTotemSpeaker,

@@ -241,6 +241,7 @@ import _poolDuchessWaywardTavernkeep from "../pool/duchess-wayward-tavernkeep.js
 import _poolDuelingRapier from "../pool/dueling-rapier.js";
 import _poolDustToDust from "../pool/dust-to-dust.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
+import _poolEarnestFellowship from "../pool/earnest-fellowship.js";
 import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEaterOfTheDead from "../pool/eater-of-the-dead.js";
 import _poolEchoChamber from "../pool/echo-chamber.js";
@@ -1321,6 +1322,7 @@ const shard: CardShard = {
     _poolDuelingRapier,
     _poolDustToDust,
     _poolDwarvenGrunt,
+    _poolEarnestFellowship,
     _poolEarthRift,
     _poolEaterOfTheDead,
     _poolEchoChamber,

@@ -872,6 +872,7 @@ import _poolTitanicBulvox from "../pool/titanic-bulvox.js";
 import _poolTitanicUltimatum from "../pool/titanic-ultimatum.js";
 import _poolTorchSlinger from "../pool/torch-slinger.js";
 import _poolTormentOfHailfire from "../pool/torment-of-hailfire.js";
+import _poolTotalWar from "../pool/total-war.js";
 import _poolTowerOfTheMagistrate from "../pool/tower-of-the-magistrate.js";
 import _poolTreacherousTerrain from "../pool/treacherous-terrain.js";
 import _poolTreetopSentries from "../pool/treetop-sentries.js";
@@ -1862,6 +1863,7 @@ const shard: CardShard = {
     _poolTitanicUltimatum,
     _poolTorchSlinger,
     _poolTormentOfHailfire,
+    _poolTotalWar,
     _poolTowerOfTheMagistrate,
     _poolTreacherousTerrain,
     _poolTreetopSentries,

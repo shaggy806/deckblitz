@@ -121,6 +121,7 @@ import _poolCannibalize from "../pool/cannibalize.js";
 import _poolCantWakeUp from "../pool/cant-wake-up.js";
 import _poolCaptainAmericaTeamLeader from "../pool/captain-america-team-leader.js";
 import _poolCaptainJeanLucPicard from "../pool/captain-jean-luc-picard.js";
+import _poolCapturedByTheConsulate from "../pool/captured-by-the-consulate.js";
 import _poolCarrionCall from "../pool/carrion-call.js";
 import _poolCaseOfTheGatewayExpress from "../pool/case-of-the-gateway-express.js";
 import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
@@ -1149,6 +1150,7 @@ const shard: CardShard = {
     _poolCantWakeUp,
     _poolCaptainAmericaTeamLeader,
     _poolCaptainJeanLucPicard,
+    _poolCapturedByTheConsulate,
     _poolCarrionCall,
     _poolCaseOfTheGatewayExpress,
     _poolCavalierOfNight,

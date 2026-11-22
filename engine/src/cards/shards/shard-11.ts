@@ -920,6 +920,7 @@ import _poolTheTombOfAclazotz from "../pool/the-tomb-of-aclazotz.js";
 import _poolTheloniteDruid from "../pool/thelonite-druid.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThoughtleech from "../pool/thoughtleech.js";
+import _poolThrabenExorcism from "../pool/thraben-exorcism.js";
 import _poolThranFoundry from "../pool/thran-foundry.js";
 import _poolThrash from "../pool/thrash.js";
 import _poolThresherBeast from "../pool/thresher-beast.js";
@@ -1989,6 +1990,7 @@ const shard: CardShard = {
     _poolTheloniteDruid,
     _poolThornscapeApprentice,
     _poolThoughtleech,
+    _poolThrabenExorcism,
     _poolThranFoundry,
     _poolThrash,
     _poolThresherBeast,

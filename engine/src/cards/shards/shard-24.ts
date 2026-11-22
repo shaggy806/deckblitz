@@ -845,6 +845,7 @@ import _poolSultaiRunemark from "../pool/sultai-runemark.js";
 import _poolSuluSpaceSwashbuckler from "../pool/sulu-space-swashbuckler.js";
 import _poolSunbladeAngel from "../pool/sunblade-angel.js";
 import _poolSunblastAngel from "../pool/sunblast-angel.js";
+import _poolSuncleanser from "../pool/suncleanser.js";
 import _poolSunkenCity from "../pool/sunken-city.js";
 import _poolSupremeExemplar from "../pool/supreme-exemplar.js";
 import _poolSupremeWill from "../pool/supreme-will.js";
@@ -1899,6 +1900,7 @@ const shard: CardShard = {
     _poolSuluSpaceSwashbuckler,
     _poolSunbladeAngel,
     _poolSunblastAngel,
+    _poolSuncleanser,
     _poolSunkenCity,
     _poolSupremeExemplar,
     _poolSupremeWill,
