@@ -4319,6 +4319,7 @@ import _poolCelestialEnforcer from "./pool/celestial-enforcer.js";
 import _poolCelestialFlare from "./pool/celestial-flare.js";
 import _poolCelestialForce from "./pool/celestial-force.js";
 import _poolCelestialGatekeeper from "./pool/celestial-gatekeeper.js";
+import _poolCelestialJudgment from "./pool/celestial-judgment.js";
 import _poolCelestialKirin from "./pool/celestial-kirin.js";
 import _poolCelestialMantle from "./pool/celestial-mantle.js";
 import _poolCelestialMessenger from "./pool/celestial-messenger.js";
@@ -16034,6 +16035,7 @@ import _poolLeosGuidance from "./pool/leos-guidance.js";
 import _poolLeovoldEmissaryOfTrest from "./pool/leovold-emissary-of-trest.js";
 import _poolLeovoldsOperative from "./pool/leovolds-operative.js";
 import _poolLeshracsRite from "./pool/leshracs-rite.js";
+import _poolLeshracsSigil from "./pool/leshracs-sigil.js";
 import _poolLesserGargadon from "./pool/lesser-gargadon.js";
 import _poolLesserMasticore from "./pool/lesser-masticore.js";
 import _poolLesserWerewolf from "./pool/lesser-werewolf.js";
@@ -16874,6 +16876,7 @@ import _poolMagosiTheWaterveil from "./pool/magosi-the-waterveil.js";
 import _poolMagusLuceaKane from "./pool/magus-lucea-kane.js";
 import _poolMagusOfTheAbyss from "./pool/magus-of-the-abyss.js";
 import _poolMagusOfTheArena from "./pool/magus-of-the-arena.js";
+import _poolMagusOfTheBalance from "./pool/magus-of-the-balance.js";
 import _poolMagusOfTheBazaar from "./pool/magus-of-the-bazaar.js";
 import _poolMagusOfTheBridge from "./pool/magus-of-the-bridge.js";
 import _poolMagusOfTheCandelabra from "./pool/magus-of-the-candelabra.js";
@@ -38125,6 +38128,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCelestialFlare,
   _poolCelestialForce,
   _poolCelestialGatekeeper,
+  _poolCelestialJudgment,
   _poolCelestialKirin,
   _poolCelestialMantle,
   _poolCelestialMessenger,
@@ -49840,6 +49844,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLeovoldEmissaryOfTrest,
   _poolLeovoldsOperative,
   _poolLeshracsRite,
+  _poolLeshracsSigil,
   _poolLesserGargadon,
   _poolLesserMasticore,
   _poolLesserWerewolf,
@@ -50680,6 +50685,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMagusLuceaKane,
   _poolMagusOfTheAbyss,
   _poolMagusOfTheArena,
+  _poolMagusOfTheBalance,
   _poolMagusOfTheBazaar,
   _poolMagusOfTheBridge,
   _poolMagusOfTheCandelabra,
@@ -71944,6 +71950,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/celestial-flare": _poolCelestialFlare,
   "pool/celestial-force": _poolCelestialForce,
   "pool/celestial-gatekeeper": _poolCelestialGatekeeper,
+  "pool/celestial-judgment": _poolCelestialJudgment,
   "pool/celestial-kirin": _poolCelestialKirin,
   "pool/celestial-mantle": _poolCelestialMantle,
   "pool/celestial-messenger": _poolCelestialMessenger,
@@ -83659,6 +83666,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/leovold-emissary-of-trest": _poolLeovoldEmissaryOfTrest,
   "pool/leovolds-operative": _poolLeovoldsOperative,
   "pool/leshracs-rite": _poolLeshracsRite,
+  "pool/leshracs-sigil": _poolLeshracsSigil,
   "pool/lesser-gargadon": _poolLesserGargadon,
   "pool/lesser-masticore": _poolLesserMasticore,
   "pool/lesser-werewolf": _poolLesserWerewolf,
@@ -84499,6 +84507,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/magus-lucea-kane": _poolMagusLuceaKane,
   "pool/magus-of-the-abyss": _poolMagusOfTheAbyss,
   "pool/magus-of-the-arena": _poolMagusOfTheArena,
+  "pool/magus-of-the-balance": _poolMagusOfTheBalance,
   "pool/magus-of-the-bazaar": _poolMagusOfTheBazaar,
   "pool/magus-of-the-bridge": _poolMagusOfTheBridge,
   "pool/magus-of-the-candelabra": _poolMagusOfTheCandelabra,

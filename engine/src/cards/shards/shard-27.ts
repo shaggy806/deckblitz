@@ -126,6 +126,7 @@ import _poolCaseOfTheGatewayExpress from "../pool/case-of-the-gateway-express.js
 import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
 import _poolCaythFamedMechanist from "../pool/cayth-famed-mechanist.js";
 import _poolCelebrityFencer from "../pool/celebrity-fencer.js";
+import _poolCelestialJudgment from "../pool/celestial-judgment.js";
 import _poolCentaurSafeguard from "../pool/centaur-safeguard.js";
 import _poolCephalopodSentry from "../pool/cephalopod-sentry.js";
 import _poolChainflailCentipede from "../pool/chainflail-centipede.js";
@@ -1153,6 +1154,7 @@ const shard: CardShard = {
     _poolCavalierOfNight,
     _poolCaythFamedMechanist,
     _poolCelebrityFencer,
+    _poolCelestialJudgment,
     _poolCentaurSafeguard,
     _poolCephalopodSentry,
     _poolChainflailCentipede,

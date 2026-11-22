@@ -546,6 +546,7 @@ import _poolLydiaFrye from "../pool/lydia-frye.js";
 import _poolMageRingNetwork from "../pool/mage-ring-network.js";
 import _poolMageRingResponder from "../pool/mage-ring-responder.js";
 import _poolMagneticMountain from "../pool/magnetic-mountain.js";
+import _poolMagusOfTheBalance from "../pool/magus-of-the-balance.js";
 import _poolMajorTeroh from "../pool/major-teroh.js";
 import _poolMammothHarness from "../pool/mammoth-harness.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
@@ -1599,6 +1600,7 @@ const shard: CardShard = {
     _poolMageRingNetwork,
     _poolMageRingResponder,
     _poolMagneticMountain,
+    _poolMagusOfTheBalance,
     _poolMajorTeroh,
     _poolMammothHarness,
     _poolManaCrypt,
