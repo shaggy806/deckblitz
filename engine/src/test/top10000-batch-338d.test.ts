@@ -22,7 +22,9 @@ import {
   ref,
   settle,
   spawn,
+  subtypes,
   table,
+  toStep,
   zone,
 } from "./harness.js";
 
@@ -96,6 +98,54 @@ describe("top-10000 batch 338d — Emissary of Soulfire (exalted counters, rule 
     nextTurn(game);
     attack(game, a, [bears]);
     expect(pt(game, bears)).toEqual({ power: 4, toughness: 4 });
+  });
+});
+
+describe("top-10000 batch 338d — Bludgeon Brawl", () => {
+  it("makes each player's noncreature, non-Equipment artifacts Equipment with equip {X} and +X/+0", () => {
+    const { game } = table();
+    const brawl = spawn(game, "Bludgeon Brawl");
+    const mine = spawn(game, "Howling Mine"); // mana value 2
+    const ring = spawn(game, "Sol Ring", B);
+    const splitter = spawn(game, "Bonesplitter");
+    const bears = spawn(game, "Grizzly Bears");
+    expect(subtypes(game, mine)).toContain("Equipment");
+    expect(subtypes(game, ring)).toContain("Equipment");
+    lands(game, "Wastes", 2);
+    // Already Equipment: no second equip ability.
+    expect(game.legalActions(A).filter((l) => l.kind === "activate-ability" && l.source === splitter).length).toBe(1);
+    // X is the artifact's mana value, not chosen.
+    expect(
+      game.canDispatch({ type: "activate-ability", player: A, source: mine, abilityIndex: 0, targets: [ref(bears)], xValue: 1 }),
+    ).not.toBeNull();
+    activate(game, mine, 0, { targets: [ref(bears)], x: 2 });
+    expect(game.state.objects[mine].attachedTo).toBe(bears);
+    expect(pt(game, bears)).toEqual({ power: 4, toughness: 2 });
+    // Once Bludgeon Brawl leaves, the Howling Mine is no Equipment and falls off.
+    game.debugApplyEffect(B, { kind: "destroy", target: 0 }, [{ kind: "object", object: brawl }]);
+    toStep(game, "end"); // the debug effect runs no state-based actions
+    expect(subtypes(game, mine)).not.toContain("Equipment");
+    expect(game.state.objects[mine].attachedTo).toBeNull();
+    expect(pt(game, bears)).toEqual({ power: 2, toughness: 2 });
+  });
+
+  it("an attached artifact that becomes a creature stops being Equipment and falls off", () => {
+    const { game } = table();
+    spawn(game, "Bludgeon Brawl");
+    const mine = spawn(game, "Howling Mine");
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Wastes", 2);
+    activate(game, mine, 0, { targets: [ref(bears)], x: 2 });
+    expect(pt(game, bears)).toEqual({ power: 4, toughness: 2 });
+    game.debugApplyEffect(
+      A,
+      { kind: "become", target: 0, addTypes: ["creature"], setBasePt: { power: 2, toughness: 2 }, duration: "end-of-turn" },
+      [{ kind: "object", object: mine }],
+    );
+    settle(game);
+    toStep(game, "end");
+    expect(game.state.objects[mine].attachedTo).toBeNull();
+    expect(pt(game, bears)).toEqual({ power: 2, toughness: 2 });
   });
 });
 

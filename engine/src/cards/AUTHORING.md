@@ -6753,7 +6753,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   and has trample'", Sedge Sliver, Cloudsteel Kirin, Criminal Past. Each
   granted static works from the object that has it (rule 113.10): its
   `affects` and `condition` read from there — `"self"` is that object, "you"
-  its controller, `"attached"` what it's attached to — and two granting
+  its controller, `"attached"` what it's attached to; Bludgeon Brawl's
+  "Equipped creature gets +X/+0, where X is that artifact's mana value" is a
+  `grantPtPerCount` `aggregate` sum of `"mana-value"` over `{ isSource: true }`,
+  the artifact, beside a granted equip `{X}` with `xIs: { manaValueOf:
+  "source" }` — and two granting
   sources grant two instances. Its effects take the later of the two
   timestamps; a later loss of all abilities takes it away (613.7). Read
   through `grantedStatics`, so it reaches the layer fold (P/T, keywords,
