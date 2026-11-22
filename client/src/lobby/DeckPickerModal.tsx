@@ -81,6 +81,13 @@ export function DeckPickerModal({
             </button>
           ))}
         </div>
+        {forBot && open?.id === 'saved' ? (
+          // The user, 2026-11-22: the bots' play is tuned on the preset
+          // decks, so say so where a bot is handed any other.
+          <p className="deck-picker-warning" role="note">
+            Bots are tuned for the preset decks. With one of your own decks a bot will almost always make misplays.
+          </p>
+        ) : null}
         <div className="deck-picker-list" role="tabpanel">
           {(open?.decks ?? []).map((d) => (
             <DeckPickerRow key={d.key} deck={d} onPick={onPick} current={d.name === current} />

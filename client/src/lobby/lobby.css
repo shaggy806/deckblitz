@@ -625,6 +625,11 @@ button.seat-add-panel:hover {
   align-self: center;
   font-size: var(--text-sm);
 }
+.deck-picker-warning {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--warn);
+}
 
 /* Last in the file so it overrides the rules above. A narrow board (about 1100px of screen and below) can't spare the
    column: four seats would be ~150px each and their names truncate to
