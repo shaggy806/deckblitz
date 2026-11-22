@@ -3194,7 +3194,8 @@
   "effect:damage-to-attached",
   "static:prohibit-color-of-last-spell-cast",
   "filter:color-count-amount",
-  "filter:transformed"
+  "filter:transformed",
+  "filter:has-disturb"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
