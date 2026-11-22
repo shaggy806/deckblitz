@@ -3139,6 +3139,31 @@ const SCENARIOS: readonly BotScenario[] = [
       return { passed: at === D, detail: at === undefined ? "Ghalta stayed home" : `Ghalta attacked ${at}` };
     },
   },
+  {
+    name: "keeps its Dragon home at 9 commander damage from a Slicer that comes round three times",
+    rule: "A creature handed to each opponent in turn attacks on every one of their turns: count them all before tapping the only blocker.",
+    run(weights, registry, makeBot) {
+      // From the kept live games (2026-11-22; D75RS-1 turn 14 is the
+      // clearest of ten): Slicer, Hired Muscle is handed to each opponent at
+      // their upkeep, goaded, and swings for 6 under every one of them. A
+      // seat at 9 commander damage attacked with its only creature and took
+      // 6 and 6 before it untapped: 21. The crackback counted Slicer once,
+      // on the side it stood (or not at all, while the seat itself held
+      // it), so 15 read as safe. Fixed: `combat-math.ts`'s `swingBack`.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 6);
+      const dragon = onBoard(game, "Shivan Dragon", A);
+      const slicer = onBoard(game, "Slicer, Hired Muscle", B);
+      game.state.objects[slicer].isCommander = true;
+      for (const player of [A, B, C, D]) game.state.players[player].life = 40;
+      game.state.players[A].commanderDamageTaken = { [slicer]: 9 };
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" || s.turn.step === "postcombat-main" || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "never asked to attack" };
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const sent = attackers.find((d) => d.attacker === dragon);
+      return { passed: sent === undefined, detail: sent === undefined ? "the Dragon stayed home" : `the Dragon attacked ${sent.defender}` };
+    },
+  },
   asked({
     name: "casts Colfenor's Urn before the Citywide Bust that fills it",
     rule: "A dies payoff goes down before the wipe that kills what it pays off: the Urn exiles the Walls the Bust destroys, and brings them back.",

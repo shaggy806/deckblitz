@@ -54,6 +54,15 @@ re-run; positions are rebuilt by replaying the game to the turn):
   8WNCA-1 Sidisi t19, 8WNCA-2 Surrak t21, NX4BN-1 Yasova t19 and t22, RCSBH-3 Korvold t13, TPGJ6-1
   Chandra t12; and by life, YA57F-2 Kykar t50, YA57F-1 Kykar t24, 8G96K-3 Jaya t36, FU89K-1
   Muldrotha t33 (died by 1).
+  **Partly fixed 2026-11-22** (`combat-math.ts`'s `swingBack`; scenario "keeps its Dragon home at
+  9 commander damage from a Slicer that comes round three times"): the crackback counted Slicer
+  once, on the side it stood, and as the borrower's own blocker while the borrower held it. On
+  D75RS-1 t14 it read 0 commander damage to come where 12 was; now a creature handed round the
+  table (Slicer, Alexios, Karona) is in every opponent's swing, and a creature held until end of
+  turn is no blocker. On the live boards D75RS-1 t14 and NX4BN-1 t22 now keep their creatures
+  home, and RCSBH-3 t13 keeps one. Still open: a Slicer in the command zone or converted (living
+  metal: a creature only on its owner's turn, so not among its attackers; D75RS-8 Domri t22), the
+  extra attackers piled onto a kill under Smoke (D75RS-3 t21), and the four by life.
 - **Dictate of the Twin Gods cast by the seat it then kills** — RCSBH-3 t17, RCSBH-2 t26 (at 6
   Slicer damage; 12 doubled, then first strike), YA57F-2 t35 (15 became 30 at 30 life).
 - **Pillow fort held to the grave** — YA57F-1 t27-t32: Inniaz's bot died tapped out with Ghostly

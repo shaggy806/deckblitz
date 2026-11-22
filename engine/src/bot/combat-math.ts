@@ -413,6 +413,98 @@ export function isLethal(
 /** The steps of a turn in which its player's attack is still to be declared. */
 const ATTACK_TO_COME: ReadonlySet<string> = new Set(["untap", "upkeep", "draw", "precombat-main", "begin-combat"]);
 
+/** Per registry, whether a card hands itself to the player whose upkeep
+ * begins ({@link handedRound}). */
+const handedRoundByName = new WeakMap<CardRegistry, Map<string, boolean>>();
+
+/**
+ * Whether the card `name` is **handed round the table**: a trigger of its own
+ * at the beginning of each opponent's upkeep, or each player's, gives that
+ * player control of it (Slicer, Hired Muscle; Alexios, Deimos of Kosmos;
+ * Karona, False God). Such a creature attacks on every player's turn, not
+ * only its controller's.
+ */
+function handedRound(registry: CardRegistry, name: string): boolean {
+  let known = handedRoundByName.get(registry);
+  if (known === undefined) {
+    known = new Map();
+    handedRoundByName.set(registry, known);
+  }
+  const cached = known.get(name);
+  if (cached !== undefined) return cached;
+  const handsItself = (node: unknown): boolean => {
+    if (node === null || typeof node !== "object") return false;
+    if (Array.isArray(node)) return node.some(handsItself);
+    const record = node as { readonly kind?: unknown; readonly target?: unknown; readonly who?: unknown };
+    if (record.kind === "gain-control" && record.target === "source" && record.who === "active-player") return true;
+    return Object.values(node).some(handsItself);
+  };
+  const answer =
+    registry.has(name) &&
+    registry.get(name).triggered.some((t) => {
+      const trigger = t.trigger as { readonly on?: unknown; readonly step?: unknown; readonly who?: unknown };
+      return (
+        trigger.on === "step-begins" &&
+        trigger.step === "upkeep" &&
+        (trigger.who === "opponent" || trigger.who === "any") &&
+        handsItself(t.effect)
+      );
+    });
+  known.set(name, answer);
+  return answer;
+}
+
+/**
+ * The swing back as the turns to come will find the board, not as it stands:
+ * who attacks `me` with what, and what `me` has home to block with.
+ *
+ * - A creature **handed round the table** ({@link handedRound}) is in the
+ *   swing of every opponent still to act, and never among `me`'s blockers:
+ *   whoever holds it now, each of them holds it on their own turn. Never
+ *   against its owner (Slicer is goaded by them, rule 701.15b; Alexios can't
+ *   attack them). Counted once, on the side it stood, a seat at 9 commander
+ *   damage from Slicer read two more attacks of 6 as none and tapped its only
+ *   blocker; ten of the fourteen seats that died that way in one day's kept
+ *   games had the hits to count (2026-11-22).
+ * - A creature `me` controls only until end of turn (Act of Treason, a
+ *   borrowed Slicer) is no blocker on a turn of `me`'s own: it's gone at
+ *   cleanup, and back in its owner's swing.
+ */
+function swingBack(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  lost: ReadonlySet<ObjectId> | "all" | undefined,
+): { readonly blockers: CombatCreature[]; readonly attackersOf: (opponent: PlayerId) => CombatCreature[] } {
+  const myTurn = state.turnOrder[state.turn.activePlayerIndex] === me;
+  const roaming: CombatCreature[] = [];
+  const returning = new Map<PlayerId, CombatCreature[]>();
+  const leaving = new Set<ObjectId>();
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || state.players[object.controller]?.hasLost !== false) continue;
+    const roams = handedRound(registry, object.cardName);
+    const borrowed = myTurn && object.controller === me && object.controlEndsAtCleanup && object.owner !== me;
+    if (!roams && !borrowed) continue;
+    leaving.add(id);
+    if (object.owner === me) continue;
+    const creature = combatCreatures(state, registry, object.controller, false).find((c) => c.id === id);
+    if (creature === undefined || !creature.canAttack) continue;
+    if (roams) roaming.push(creature);
+    else returning.set(object.owner, [...(returning.get(object.owner) ?? []), creature]);
+  }
+  const blockers =
+    lost === "all"
+      ? []
+      : combatCreatures(state, registry, me, true).filter((c) => !leaving.has(c.id) && (lost === undefined || !lost.has(c.id)));
+  const attackersOf = (opponent: PlayerId): CombatCreature[] => [
+    ...combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack && !leaving.has(c.id)),
+    ...roaming,
+    ...(returning.get(opponent) ?? []),
+  ];
+  return { blockers, attackersOf };
+}
+
 /**
  * Crackback: before `me` untaps again, every living opponent gets a turn. If
  * each swings every creature able to attack into the blockers `me` has
@@ -480,10 +572,7 @@ function crackbackByOpponent(
   killShot: { readonly weight: number; readonly margin: number },
   each: (opponent: PlayerId, sofar: DamageThrough) => boolean,
 ): void {
-  const blockers =
-    lost === "all"
-      ? []
-      : combatCreatures(state, registry, me, true).filter((c) => lost === undefined || !lost.has(c.id));
+  const { blockers, attackersOf } = swingBack(state, registry, me, lost);
   const opponents = opponentsToAct(state, me);
 
   let damage = 0;
@@ -502,8 +591,7 @@ function crackbackByOpponent(
   });
   for (const [i, opponent] of opponents.entries()) {
     if (!(i > 0 && shared === 0 && killWeight === 0)) {
-      const attackers = combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack);
-      const through = damageThrough(attackers, blockers);
+      const through = damageThrough(attackersOf(opponent), blockers);
       const weight =
         i === 0 ? 1 : killWeight > shared && isLethal(state, me, through, -killShot.margin) ? killWeight : shared;
       if (weight !== 0) {
@@ -537,14 +625,10 @@ export function opponentsLethalAlone(
   lost?: ReadonlySet<ObjectId> | "all",
   margin = 0,
 ): PlayerId[] {
-  const blockers =
-    lost === "all"
-      ? []
-      : combatCreatures(state, registry, me, true).filter((c) => lost === undefined || !lost.has(c.id));
-  return opponentsToAct(state, me).filter((opponent) => {
-    const attackers = combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack);
-    return isLethal(state, me, damageThrough(attackers, blockers), margin);
-  });
+  const { blockers, attackersOf } = swingBack(state, registry, me, lost);
+  return opponentsToAct(state, me).filter((opponent) =>
+    isLethal(state, me, damageThrough(attackersOf(opponent), blockers), margin),
+  );
 }
 
 /**
