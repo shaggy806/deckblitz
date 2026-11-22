@@ -68953,7 +68953,11 @@ controlledBy,
     damageSource: ObjectId,
   ): void {
     const resolved = targets.map((t) => t ?? undefined) as ResolvedTargets;
-    applyEffectSpec(spec, this.makeResolutionContext(by, controller, resolved, prevented, 0, damageSource));
+    const ctx = this.makeResolutionContext(by, controller, resolved, prevented, 0, damageSource);
+    // A "you may" in it (Channel Harm) is asked here; one already asking —
+    // an earlier follow-up of the same simultaneous event — goes first.
+    if (this.decisionOutstanding()) ctx.resumeAfterDecisions(spec);
+    else applyEffectSpec(spec, ctx);
   }
 
   /** Deal `amount` damage from `source` to `target`. Returns the amount

@@ -2289,7 +2289,9 @@ export interface DamageRuleSpec {
    * damage it prevented, the spell's targets are its own, and the damage's
    * source is `"trigger-object"` (its controller `who: "trigger-controller"`)
    * — Temper's "for each 1 damage prevented this way, put a +1/+1 counter on
-   * that creature", Comeuppance's damage back. Once per damage event. */
+   * that creature", Comeuppance's damage back. Once per damage event. A
+   * `may` in it ("you may have Channel Harm deal that much damage") is asked
+   * as the damage is prevented, before the rest of whatever dealt it. */
   readonly then?: EffectSpec;
   /** "You gain life equal to the damage prevented this way". */
   readonly gainLifePrevented?: true;
