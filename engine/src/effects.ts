@@ -6526,6 +6526,19 @@ export type EffectSpec =
        */
       readonly about?: ObjectRef;
       /**
+       * "That player" in the reflexive ability, when it's a player the
+       * creating resolution chose rather than its triggering event's: Strax,
+       * Sontaran Nurse's "choose a player at random. When you do, Strax fights
+       * another target creature **that player controls**" is a `choose-opponent`
+       * (`random`, `anyPlayer`) whose `then` is this with `player:
+       * "that-player"` and a target slot `whose: "trigger-player"`. Read as it
+       * triggers and kept as the reflexive ability's trigger player
+       * (`LastKnownRefs.player`), so its targets are chosen among that
+       * player's permanents as it's put on the stack (rules 603.12, 603.3d).
+       * Naming nobody, nothing triggers.
+       */
+      readonly player?: PlayerRef;
+      /**
        * "When you do, it deals 7 damage divided as you choose among one or
        * two targets" (Death to Our Enemies): the reflexive ability divides an
        * amount among its `any-number` group, as a triggered ability's
@@ -14559,6 +14572,9 @@ export interface EffectApi {
     remembered?: { readonly [name: string]: readonly SetMember[] },
     /** Its targets are chosen at random (`targetsAtRandom`). */
     atRandom?: true,
+    /** Its trigger player ("that player"), in place of the creating
+     * ability's (`player`). */
+    player?: PlayerId,
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
@@ -26374,6 +26390,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // it's 0 (rule 107.2).
       const noArmy = spec.about === "amassed" && about?.kind !== "object";
       if (spec.about !== undefined && about?.kind !== "object" && !noArmy) return;
+      const player = spec.player === undefined ? undefined : resolvePlayerRef(spec.player, ctx);
+      if (spec.player !== undefined && player === undefined) return;
       const times =
         spec.times === undefined ? 1 : Math.min(Math.max(0, Math.floor(amountValue(spec.times, ctx))), MAX_REPEATS);
       for (let i = 0; i < times; i++) {
@@ -26386,6 +26404,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           about?.kind === "object" ? about.object : noArmy ? null : undefined,
           spec.remember === undefined ? undefined : rememberSets(spec.remember, ctx),
           spec.targetsAtRandom,
+          player,
         );
       }
       return;
