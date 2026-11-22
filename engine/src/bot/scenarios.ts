@@ -2449,6 +2449,92 @@ const SCENARIOS: readonly BotScenario[] = [
   }),
   ...(
     [
+      // name, Goblin Welder on our side too
+      ["equips Kusari-Gama to a commander the opponent must block", false],
+      ["equips Kusari-Gama to the commander, not the creature they'll let through", true],
+    ] as const
+  ).map(([name, welder]) =>
+    asked({
+      name,
+      kind: "training",
+      rule: "A commander that kills by commander damage unblocked will be blocked: Kusari-Gama on it turns that block into a wipe of the blocker's side. On another creature, they just take the hit and keep their board.",
+      position(registry) {
+        // Reported from a live game (2026-11-22, TPGJ6-2, turns 39 and 41):
+        // Slicer, with Beamtown Beatstick, attacked Elsha at 16 commander
+        // damage of 21; she chump-blocked with two tokens and kept her board.
+        // Kusari-Gama sat unattached with its equip {3} in untapped Mountains:
+        // every rollout let Slicer through for the win (999961 for pass and
+        // every equip alike), so the equip whose value is only in a block tied
+        // with passing. Two turns later Kusari-Gama went on Goblin Welder,
+        // which Elsha let through for 8, and her board killed us next turn.
+        const game = table(registry, [A, B], A);
+        lands(game, "Mountain", A, 3);
+        const slicer = onBoard(game, "Slicer, Hired Muscle", A);
+        game.state.objects[slicer].isCommander = true;
+        game.state.objects[slicer].counters = { "+1/+1": 2 };
+        const beatstick = onBoard(game, "Beamtown Beatstick", A);
+        game.state.objects[beatstick].attachedTo = slicer;
+        if (welder) onBoard(game, "Goblin Welder", A);
+        const gama = onBoard(game, "Kusari-Gama", A);
+        for (let i = 0; i < 3; i += 1) onBoard(game, "Grizzly Bears", B);
+        onBoard(game, "Hill Giant", B);
+        game.state.players[B].life = 16;
+        game.state.players[B].commanderDamageTaken = { [slicer]: 16 };
+        return {
+          game,
+          player: A,
+          judge(action) {
+            const target = action.type === "activate-ability" ? action.targets?.[0] : undefined;
+            return {
+              passed: action.type === "activate-ability" && action.source === gama &&
+                target?.kind === "object" && target.object === slicer,
+              detail: `chose ${describeAction(action)}`,
+            };
+          },
+        };
+      },
+    }),
+  ),
+  ...(
+    [
+      // name, artifacts worth protecting on our side, cast it
+      ["casts Welding Jar once there are artifacts worth protecting", true, true],
+      ["holds Welding Jar with no artifact to protect", false, false],
+    ] as const
+  ).map(([name, gear, cast]) =>
+    asked({
+      name,
+      ...(cast ? { kind: "training" as const } : {}),
+      rule: "A sacrifice-to-protect permanent is worth casting once there's something on our side it can save; before that it only waits for an artifact wipe.",
+      position(registry) {
+        // Reported from a live game (2026-11-22, TPGJ6-2, turns 30-35): Slicer's
+        // bot held Welding Jar three turns with Lost Jitte, Kusari-Gama and
+        // Mithril Coat out. A {0} noncreature permanent scores the same on the
+        // battlefield as in hand (`otherPermanents` 2 = `hand` 2, nothing per
+        // mana value), and the tie goes to passing. The user's call: cast it
+        // when there's stuff to protect, not earlier (artifact wipes).
+        const game = table(registry, [A, B], A);
+        onBoard(game, "Grizzly Bears", A);
+        if (gear) {
+          onBoard(game, "Lost Jitte", A);
+          onBoard(game, "Kusari-Gama", A);
+          onBoard(game, "Mithril Coat", A);
+        }
+        const jar = game.debugSpawn("Welding Jar", A, "hand");
+        onBoard(game, "Grizzly Bears", B);
+        return {
+          game,
+          player: A,
+          judge(action) {
+            const cast_ = action.type === "cast-spell" && action.card === jar;
+            return { passed: cast_ === cast, detail: `chose ${describeAction(action)}` };
+          },
+        };
+      },
+    }),
+  ),
+  ...(
+    [
       ["cracks Sakura-Tribe Elder at the end of the turn before its own", D, true],
       ["keeps Sakura-Tribe Elder as a blocker earlier in the round", B, false],
     ] as const

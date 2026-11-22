@@ -4,6 +4,47 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-22 — Slicer's bot: Kusari-Gama left off the commander, Welding Jar held (TPGJ6-2)
+
+Status: open.
+
+From a kept live game (`games/2026-11-22/TPGJ6-2-4141081779.json.gz`, four bots, played on
+772fd79d2; it replays exactly there). Alice's bot on Slicer, Hired Muscle lost to Elsha on turn 42.
+
+**1. Kusari-Gama not equipped to Slicer (turn 39).** Elsha was at 16 life with 16 commander damage
+from Slicer, so Slicer unblocked killed her: she had to block. Alice put Beamtown Beatstick on
+Slicer (two of six mana) and attacked; Elsha chump-blocked with two Monk tokens and kept her board.
+Kusari-Gama ("whenever equipped creature deals damage to a blocking creature, this deals that much
+to each other creature defending player controls"), equip {3}, stayed unattached. **Why:** after the
+Beatstick equip, every candidate scored 999961, a won game: the rollouts let Slicer through, so
+pass, Kusari-Gama on Slicer and every other equip tied, and ties go to passing. An equip whose value
+is only in a block can't show where the rollouts never block. Scenario: "equips Kusari-Gama to a
+commander the opponent must block". **Likely fix:** when the best candidates all score a win (or
+tie at the top), score them again against the defenders' best blocks (`combat-math.ts`'s
+worst-case blocks, the attack search's) so a line that wins only if the opponent declines a
+forced block stops looking like the others. Might change: how often v2 commits to an all-in swing.
+
+**2. Kusari-Gama on Goblin Welder (turn 41).** Slicer, untapped and still lethal by commander
+damage, stayed home; The Sound of Drums and Kusari-Gama went on Goblin Welder, which Elsha let
+through for 8 and kept all nine creatures, which killed Alice next turn. **Why:** the search scored
+The Sound of Drums on Welder (74.4) far above everything; Sound of Drums on Slicer was never scored
+in that search (out of its 92 simulations, or left out of the candidates: not yet found), and
+Kusari-Gama followed on Welder from the turn plan's replay, unsearched. Scenario: "equips
+Kusari-Gama to the commander, not the creature they'll let through". **Likely fix:** the same
+re-scoring as 1, and finding why the commander's target was missing from the search.
+
+**3. Welding Jar held three turns (turns 30-35).** "Sacrifice this artifact: Regenerate target
+artifact", {0}. Cast scored exactly equal to pass at every main-phase decision (1.792 = 1.792 on
+turn 30, 33.137 = 33.137 and 75.657 = 75.657 on turn 33): a noncreature permanent on the
+battlefield is `otherPermanents` (2) + `permanentManaValue` × mana value, the card in hand `hand`
+(2) + `handManaValue` × mana value, the same at mana value 0, and the tie goes to passing outside
+the `"acting"` rollout. The user's call: cast it when there's something to protect, not earlier,
+where it only waits for an artifact wipe — so not a flat weight change. Scenarios: "casts Welding
+Jar once there are artifacts worth protecting" (training) and "holds Welding Jar with no artifact
+to protect" (gate). **Likely fix:** value a permanent whose ability protects our permanents
+(sacrifice-to-regenerate, -to-give-indestructible) by the best permanent it can save, in
+`features.ts`, so it's worth more on the battlefield only when there is one.
+
 ## 2026-11-21 — One game's log, seven misplays (seed 230659861), and Slicer on turn one
 
 Status: fixed 2026-11-22. All seven scenarios gate.
