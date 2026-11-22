@@ -19,46 +19,51 @@
   color: var(--muted);
 }
 
-/* The landing page's two small buttons above the footer (SiteLinks):
-   feedback by mail, and the "Built with Claude Code" note it opens. */
-.site-links {
+/* The landing page's two text buttons in the corner toolbar (SiteLinks),
+   as tall as its square ones (.motion-cog): "Built with Claude Code", whose
+   note rises above it like the Settings panel, and feedback by mail. */
+.site-link-box {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(0.4rem, 1vh, 0.6rem);
-}
-.site-links-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(0.5rem, 1vw, 0.75rem);
 }
 .site-link-btn,
 .site-link-btn:any-link {
-  padding: 0.35em 0.9em;
+  display: grid;
+  place-items: center;
+  height: 44px;
+  padding: 0 12px;
   font: inherit;
-  font-size: clamp(0.72rem, 0.62rem + 0.3vw, 0.875rem);
-  line-height: 1.4;
+  font-size: var(--text-sm);
   color: var(--muted);
   text-decoration: none;
-  background: none;
+  white-space: nowrap;
+  background: var(--panel);
   border: 1px solid var(--border-soft);
   border-radius: 0;
   cursor: pointer;
 }
 .site-link-btn:hover,
+.site-link-btn:any-link:hover,
 .site-link-btn[aria-expanded='true'] {
-  color: var(--text);
+  color: var(--accent);
   text-decoration: none;
+  background: var(--panel-2);
   border-color: var(--accent);
 }
-.site-links-note {
-  max-width: min(92vw, 40rem);
+.site-link-note {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  z-index: 10003;
+  width: min(22rem, 80vw);
   margin: 0;
-  font-size: clamp(0.72rem, 0.62rem + 0.3vw, 0.875rem);
+  padding: 10px 12px;
+  font-size: var(--text-sm);
   line-height: 1.5;
-  color: var(--muted);
-  text-align: center;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--frame-raised), var(--shadow-popover);
 }
 
 .about-page {
