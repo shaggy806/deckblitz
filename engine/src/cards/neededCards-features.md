@@ -8825,3 +8825,9 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Put onto the battlefield blocking from hand (2026-11-22).** `effect:put-onto-battlefield-blocking`: no engine code — a `look-and-choose` from hand to the battlefield, then `enter-blocking` `blocker: "put-this-way"` (509.4). Aetherplasm. `test/top10000-batch-338m-aetherplasm.test.ts`.
 
 **Whose controller controls an X (2026-11-22).** `filter:controller-controls-filter`: `CardFilter.controllerControls: CardFilter`, at least one permanent matching it controlled by the object's controller, read from their side. Seasinger. `test/top10000-batch-338m-seasinger.test.ts`.
+
+**Draw N, then discard one of them (2026-11-22, B338).** `effect:discard-one-of-drawn`: no engine code, a `discard` with `filter: { thisWay: "drawn" }`; the scaffolder reads the line. Casting of Bones, Krovikan Sorcerer, Soldevi Sage. `test/top10000-batch-338n.test.ts`.
+
+**A "you may" in a prevention's follow-up (2026-11-22, B338).** `decision:may-in-prevention-followup`: a `may` in a `damage-rule`'s `then` (615.5) already asked as the damage is prevented, before the rest of what dealt it; `applyPreventionFollowUp` now waits behind a decision already outstanding. Channel Harm. `test/top10000-batch-338n-channel.test.ts`.
+
+**Each player keeps up to N, the rest phase out (2026-11-22, B338).** `effect:each-player-chooses-permanents-rest-phase-out`: `sacrifice-all-but` takes `startingWithYou`, `rest: "phase-out"` and `exceptSource`; "Permanents can't phase in" is a static `phase-in` prohibition with `object: {}`. Disciple of Caelus Nin. `test/top10000-batch-338n-disciple.test.ts`.

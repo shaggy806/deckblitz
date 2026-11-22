@@ -11985,6 +11985,18 @@ export type EffectSpec =
       readonly keep: EffectAmount;
       readonly filter: CardFilter;
       readonly upTo?: boolean;
+      /** "**Starting with you**, each player chooses …" (Disciple of Caelus
+       * Nin): in turn order from the effect's controller, not the active
+       * player. */
+      readonly startingWithYou?: true;
+      /** What happens to the ones not chosen, instead of being sacrificed:
+       * `"phase-out"` — "all permanents … that weren't chosen this way phase
+       * out" (Disciple of Caelus Nin), each player's at once, what's attached
+       * to them going with them (rule 702.26g). */
+      readonly rest?: "phase-out";
+      /** "All permanents **other than this creature**": the effect's source,
+       * in the stint it means (rule 607.2a), is spared whether chosen or not. */
+      readonly exceptSource?: true;
       /** Set only by the engine: the players still to choose, and what those
        * before them kept. */
       readonly progress?: { readonly toAsk: readonly PlayerId[]; readonly kept: readonly ObjectId[] };
@@ -15005,7 +15017,7 @@ export interface EffectApi {
    * matching `filter` they control (`upTo`: as many as `keep`). `true` when
    * it asked; otherwise what's kept — all of them, when there's no choice —
    * is waiting for `takeKept`. */
-  askKeep(player: PlayerId, filter: CardFilter, keep: number, upTo: boolean): boolean;
+  askKeep(player: PlayerId, filter: CardFilter, keep: number, upTo: boolean, rest?: "phase-out"): boolean;
   /** `choose-one-of-each`'s choice, with `askKeep`'s answer: `true` when it
    * asked; otherwise what's chosen, when only one answer is legal, is waiting
    * for `takeKept`. */
@@ -25787,17 +25799,33 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const below = ctx.parkedCount();
       const players =
         ctx.playersInScope(spec.who);
-      let toAsk = spec.progress?.toAsk ?? ctx.apnap(players);
+      let toAsk =
+        spec.progress?.toAsk ?? (spec.startingWithYou === true ? eachPlayerMayAsks(spec.who, ctx, true) : ctx.apnap(players));
       let kept = [...(spec.progress?.kept ?? []), ...ctx.takeKept()];
       const keep = amountValue(spec.keep, ctx);
       while (toAsk.length > 0) {
         const player = toAsk[0];
         toAsk = toAsk.slice(1);
-        if (ctx.askKeep(player, spec.filter, keep, spec.upTo === true)) {
+        if (ctx.askKeep(player, spec.filter, keep, spec.upTo === true, spec.rest)) {
           ctx.resumeAfterDecisions({ ...spec, progress: { toAsk, kept } }, below);
           return;
         }
         kept = [...kept, ...ctx.takeKept()];
+      }
+      if (spec.rest === "phase-out") {
+        // Everything not chosen, each player's, at once (702.26b): a token
+        // stack kept in part has its kept members peeled off first.
+        const stint = spec.exceptSource === true ? ctx.sourceStintNow() : undefined;
+        const spared = [
+          ...ctx.separateKept(kept),
+          ...(stint !== undefined ? [{ object: ctx.source, stint }] : []),
+        ];
+        ctx.simultaneously(() => {
+          for (const player of ctx.apnap(players)) {
+            ctx.phaseOut({ filter: { ...spec.filter, controlledBy: "you", not: { amongObjects: spared } }, scopeTo: player });
+          }
+        });
+        return;
       }
       ctx.sacrificeAllExcept(players, spec.filter, kept);
       return;

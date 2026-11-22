@@ -9,7 +9,8 @@
 import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
-import type { ObjectId, TargetRef } from "../state.js";
+import type { ObjectId } from "../primitives.js";
+import type { TargetRef } from "../target.js";
 import { A, B, attack, cast, life, lands, pickModes, ref, settle, spawn, table, toHand, zone } from "./harness.js";
 
 const hit = (game: Game, source: ObjectId, to: TargetRef, amount: number): void => {

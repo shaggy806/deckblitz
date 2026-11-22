@@ -45757,7 +45757,7 @@ controlledBy,
         carryOut(chosenPile, chosenFate);
         carryOut(otherPile, restFate);
       },
-      askKeep: (player, filter, keep, upTo) => {
+      askKeep: (player, filter, keep, upTo, rest) => {
         // "Creatures they control": only the asked player's own.
         const eligible = this.battlefieldMatching(player, filter).filter(
           (id) => this.state.objects[id]?.controller === player,
@@ -45782,7 +45782,7 @@ controlledBy,
           eligible: ordered,
           min: upTo ? 0 : most,
           max: most,
-          prompt: `Choose ${upTo ? "up to " : ""}${keep} to keep — the rest are sacrificed`,
+          prompt: `Choose ${upTo ? "up to " : ""}${keep} to keep — the rest ${rest === "phase-out" ? "phase out" : "are sacrificed"}`,
           then: { kind: "sequence", effects: [] },
           source,
           x,

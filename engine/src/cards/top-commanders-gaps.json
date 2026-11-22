@@ -3229,7 +3229,8 @@
   "filter:controller-controls-filter",
   "effect:discard-one-of-drawn",
   "effect:discard-one-of-drawn",
-  "decision:may-in-prevention-followup"
+  "decision:may-in-prevention-followup",
+  "effect:each-player-chooses-permanents-rest-phase-out"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
