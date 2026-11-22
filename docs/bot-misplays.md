@@ -4,6 +4,82 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-21 — One game's log, seven misplays (seed 230659861), and Slicer on turn one
+
+Status: open. Seven training scenarios, all reading wrong. No fix made.
+
+From the log of a live four-bot game a friend of the user's sent (bots on his Queen Marchesa
+deck and on Teval, Kangee and Eshki decks; Queen Marchesa won when Teval's bot drew from an
+empty library), and one report from another game. Four causes between them.
+
+**1. Out of time, v2 plays v1's cast unscored — and v1 casts anything.** Three misplays, one
+path: on a board too big for one rollout to fit the 1 s clock (some forty permanents), a
+priority search with nothing scored plays v1's cast (`unscoredCast`, `eval-bot.ts`), and the
+rest of the turn is answered the same way (`tooSlow`). Searched in full, v2 gets all three
+right; each scenario runs v2 on a clock that has always run out (`outOfTime`).
+
+- *Living Death onto a three-card library.* Teval's bot, on 27 life with thirty creatures and
+  one opponent left, cast it; Stitcher's Supplier milled the three and Uro's draw lost the game.
+  It had milled itself there with Syr Konrad's ability, eight activations that turn, the last
+  four after the only player they could hurt was dead. Scenario: "doesn't cast Living Death when
+  what it returns runs its library out". Beside BACKLOG's "A draw the bot can't decline can
+  still deck it".
+- *Fire Covenant for X=1 at no target.* Queen Marchesa's bot, on 10 life. The log has no target
+  and no damage for it (the friend remembered it killing a 1/1 Insect; the Insect died in combat
+  after). The scenario's v1 cast is exactly that: `xValue: 1, targets: []`. Scenario: "keeps Fire
+  Covenant for a creature worth its life, not X=1".
+- *Angel's Grace in its own main phase*, on 25 life, among five other spells. Scenario: "keeps
+  Angel's Grace in hand on its own turn with nothing threatening it".
+- **Likely fix:** `unscoredCast` takes v1's cast only where a cheap test says it does something
+  (a spell with targets has one; an X spell isn't cast at its least; nothing whose effect ends
+  this turn on our own turn; no cast while the library is inside the reserve), or v1 learns
+  those. Risk: the bot audit's S1 (2026-11-10) was the opposite failure, 180 of 180 expired
+  windows passing; a filter must not bring that back for ordinary creatures and rocks.
+
+**2. Protection from a player is invisible to the bot.** Nothing in `engine/src/bot` reads
+`protectionFromPlayers`.
+
+- *Noble Heritage's counters taken twice.* Teval's bot took two +1/+1 counters each time, which
+  gave Queen Marchesa's bot (on 11) protection from it until her next turn: every Syr Konrad
+  ping and any attack prevented. v1 declines; v2 searches (two simulations) and takes them,
+  because the rollout ends before its own next attack, where the protection would cost it.
+  Scenario: "declines Noble Heritage's counters when they give the player it is about to kill
+  protection from it".
+- *An attack at the protected player.* Kangee's bot, having taken the counters too, sent 12
+  power at her on its next turn; all prevented. The all-in looked lethal to the combat
+  arithmetic, which doesn't read the protection, so v1's swing stood after one simulation.
+  Scenario: "doesn't attack a player who has protection from it".
+- **Likely fix:** the lethal read (`combat-math.ts`) and the attack's candidates drop a defender
+  with protection from us; an offer whose `ifDid` hands an opponent protection from us is priced
+  as a turn of our damage at them lost (`effect-worth.ts`). Small risk: both are rare.
+
+**3. A free "may" that changes nothing this turn is declined.** Teval's bot took Avenger of
+Zendikar's landfall counters the turn it landed and declined them ten times the turn after. By
+then its twelve Plants killed a player as they stood, so the rollout ended the same with the
+counters or without; a tie keeps v1's answer, and v1 declines. (Rebuilt: twelve Plants at one
+counter against 20 life, taken; at two counters or more, declined; two Plants at four, taken.)
+The game went on two more turns. Scenario: "takes Avenger of Zendikar's landfall counters on
+twelve Plants". **Likely fix:** v1 takes a costless "may" whose effect is good by polarity
+(`chooseModes`, `effect-worth.ts`), so a tie falls on taking it.
+
+**4. Mana a card in hand makes isn't counted.** Another game: a bot on a Slicer deck held a
+land, Lotus Petal and Simian Spirit Guide on turn one and didn't cast Slicer converted for
+{2}{R}. The auto-payer never reaches into a hand (`Game.manaSources`; the Guide is activated by
+hand before the cast), and the bot's reads of what it can pay follow it: rebuilt, it plays the
+Mountain and nothing else, not even the Petal. Scenario: "casts Slicer on turn one off a land,
+Lotus Petal and Simian Spirit Guide". **Likely fix:** the candidates include a cast that hand
+mana abilities would complete, played as the activation first. Costs a card, so only where the
+cast is worth it.
+
+Also in the log, not rebuilt: Path to Exile aimed at a commander (BACKLOG, the threat marks);
+three lone attacks into a wide board, one of them trading a Shadowspear carrier for Wonder;
+Disenchant on Gleaming Splendor with Smothering Tithe beside it.
+
+**Brass Squire "tapped for its ability and still attacked"** (the same friend, another game):
+not reproduced. The engine refuses both orders — tapped by its ability it isn't offered as an
+attacker and a declaration naming it is refused ("is tapped and cannot attack"); once attacking
+it is tapped and the ability is refused ("already tapped"). Needs that game's log.
+
 ## 2026-11-17 — Scourge of Valkas, then Atarka: Terror of the Peaks left in hand
 
 Status: half fixed 2026-11-17. The library's order no longer reaches a decision (its scenario

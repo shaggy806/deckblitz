@@ -461,6 +461,15 @@ function murderKept(game: Game, dragon: ObjectId, taken: readonly Action[]): Sce
 const evalBotFactory: BotFactory = (player, registry, weights) =>
   new EvalBotController(player, registry, { weights });
 
+/** Alice's v2 on a clock that has always just run out: every search is
+ * stopped before it scores anything, as on a live board too big for one
+ * rollout to fit the budget, so each window is answered by `unscoredCast`
+ * (v1's cast, unscored, or a pass). Deterministic: the clock is a counter. */
+function outOfTime(registry: CardRegistry, weights: EvalWeights): PlayerController {
+  let clock = 0;
+  return new EvalBotController(A, registry, { weights, timeBudgetMs: 1000, now: () => (clock += 2000) });
+}
+
 const describeAction = (action: Action): string => JSON.stringify(action);
 
 /** Who a target belongs to: a player, or a permanent's controller. */
@@ -6947,6 +6956,252 @@ const SCENARIOS: readonly BotScenario[] = [
       return {
         passed: asItLay === upsideDown,
         detail: `cast ${asItLay} with the library as it lay, ${upsideDown} with it the other way up`,
+      };
+    },
+  },
+  // --- Reported from a live game's log (2026-11-21, seed 230659861: bots on
+  // Queen Marchesa, Teval, Kangee and Eshki decks) and one more game ---
+  {
+    name: "doesn't cast Living Death when what it returns runs its library out (Uro and Stitcher's Supplier, three cards left)",
+    rule: "Drawing from an empty library loses the game (rule 104.3c): a mass return whose enter triggers mill and draw the library's last cards is a loss, whatever board it brings.",
+    kind: "training",
+    run(weights, registry) {
+      // Reported from a live game (2026-11-21): Teval's bot, on 27 life with
+      // some thirty creatures and one opponent left, milled itself down with
+      // Syr Konrad's ability and cast Living Death with three cards in its
+      // library. Stitcher's Supplier milled the three and Uro's draw, which
+      // isn't a "may", lost it the game. Here nothing can be won this turn
+      // (bob is on 40), so Living Death is three cards milled and a draw
+      // now, or an empty library at the next draw step: a loss either way.
+      const game = table(registry, [A, B], A);
+      lands(game, "Swamp", A, 8);
+      game.state.players[B].life = 9;
+      onBoard(game, "Syr Konrad, the Grim", A);
+      const zombies = onBoard(game, "Zombie Token", A);
+      game.state.objects[zombies].isToken = true;
+      game.state.objects[zombies].stackCount = 12;
+      (game.state.playerEffects ??= []).push({
+        owner: B,
+        expires: { untilTurnOf: B },
+        protectionFromPlayers: { who: [B], from: [A] },
+      });
+      onBoard(game, "Grizzly Bears", B);
+      const zones = game.state.zones.perPlayer[A];
+      zones.library = zones.library.slice(0, 3);
+      for (const name of [
+        "Uro, Titan of Nature's Wrath",
+        "Stitcher's Supplier",
+        "Eternal Witness",
+        "Craw Wurm",
+        "Craw Wurm",
+        "Craw Wurm",
+        "Craw Wurm",
+        "Hill Giant",
+        "Hill Giant",
+        "Hill Giant",
+        "Grizzly Bears",
+        "Grizzly Bears",
+      ]) {
+        game.debugSpawn(name, A, "graveyard");
+      }
+      const death = game.debugSpawn("Living Death", A, "hand");
+      // Searched in full, v2 keeps it (a rollout loses the game). On the live
+      // board one rollout didn't fit the clock, and a search with nothing
+      // scored plays v1's cast (`unscoredCast`): v1 casts it.
+      const taken = playOutTurn(game, outOfTime(registry, weights), A, () => false);
+      const cast = taken.some((a) => a.type === "cast-spell" && a.card === death);
+      const lost = game.state.result.over;
+      return {
+        passed: !cast,
+        detail: cast ? `cast Living Death${lost ? " and lost the game to it" : ""}` : "kept Living Death",
+      };
+    },
+  },
+  asked({
+    name: "declines Noble Heritage's counters when they give the player it is about to kill protection from it",
+    rule: "Two +1/+1 counters aren't worth a turn in which nothing it controls can damage the opponent it has lethal on (rule 702.16k).",
+    kind: "training",
+    position(registry) {
+      // The same game: Queen Marchesa's bot was on 11 life in front of
+      // thirty creatures and Syr Konrad's pings, and Teval's bot took Noble
+      // Heritage's two counters twice, each time giving her protection from
+      // it until her next turn. She won. Here bob's upkeep asks alice, who
+      // has 24 power against bob's 10 life and one blocker.
+      const game = table(registry, [A, B], A);
+      game.state.players[B].life = 10;
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Craw Wurm", A);
+      const queen = onBoard(game, "Queen Marchesa", B);
+      game.state.objects[queen].isCommander = true;
+      onBoard(game, "Noble Heritage", B);
+      game.advanceUntil(
+        (s) =>
+          (s.turnOrder[s.turn.activePlayerIndex] === B && s.awaiting?.kind === "choose-modes" && s.awaiting.player === A) ||
+          s.result.over,
+      );
+      if (game.state.awaiting?.kind !== "choose-modes" || game.state.awaiting.player !== A) {
+        return { passed: false, detail: "Noble Heritage never asked alice" };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length === 0,
+          detail: action.type === "choose-modes" ? (action.modes.length === 0 ? "declined" : "took the counters") : describeAction(action),
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "takes Avenger of Zendikar's landfall counters on twelve Plants",
+    rule: "A free +1/+1 counter on every Plant is never worse than none.",
+    kind: "training",
+    position(registry) {
+      // The same game: Teval's bot took the counters on its first turn with
+      // Avenger and declined them ten times running a turn later (eight
+      // lands from Will of the Sultai, then two land drops), with twelve
+      // Plants and Syr Konrad out. It killed a player with them that turn,
+      // and that is why: once the Plants are lethal as they stand (twelve
+      // 4/5s at bob's 20), the rollout ends the same with the counters or
+      // without, a tie keeps v1's answer, and v1 declines. With two Plants,
+      // or twelve at one counter, v2 takes them. The game went on two more
+      // turns against the other players.
+      const game = table(registry, [A, B], A);
+      lands(game, "Forest", A, 8);
+      onBoard(game, "Avenger of Zendikar", A);
+      onBoard(game, "Syr Konrad, the Grim", A);
+      const plants = onBoard(game, "Plant Token", A);
+      game.state.objects[plants].isToken = true;
+      game.state.objects[plants].stackCount = 12;
+      game.state.objects[plants].counters["+1/+1"] = 4;
+      onBoard(game, "Grizzly Bears", B);
+      const forest = game.debugSpawn("Forest", A, "hand");
+      game.dispatch({ type: "play-land", player: A, card: forest });
+      game.advanceUntil((s) => (s.awaiting?.kind === "choose-modes" && s.awaiting.player === A) || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-modes") return { passed: false, detail: "Avenger of Zendikar never asked" };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: action.type === "choose-modes" ? (action.modes.length > 0 ? "took the counters" : "declined") : describeAction(action),
+        }),
+      };
+    },
+  }),
+  {
+    name: "keeps Fire Covenant for a creature worth its life, not X=1",
+    rule: "A removal spell that scales with life paid is held for a threat: cast for X=1 it kills a token at best, and nothing at all with no target.",
+    kind: "training",
+    run(weights, registry) {
+      // The same game: Queen Marchesa's bot, on 10 life, cast Fire Covenant
+      // for X=1 on its own turn. The log shows no target and no damage for
+      // it; the user saw it kill a 1/1 Insect token. Either way Syr Konrad,
+      // which was killing the table, stayed.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 10;
+      lands(game, "Swamp", A, 4);
+      lands(game, "Mountain", A, 4);
+      (game.state.playerEffects ??= []).push({
+        owner: A,
+        expires: { untilTurnOf: A },
+        protectionFromPlayers: { who: [A], from: [B] },
+      });
+      for (const name of ["Talisman of Indulgence", "Fellwar Stone"]) game.debugSpawn(name, A, "hand");
+      onBoard(game, "Syr Konrad, the Grim", B);
+      const zombies = onBoard(game, "Zombie Token", B);
+      game.state.objects[zombies].isToken = true;
+      game.state.objects[zombies].stackCount = 12;
+      for (let i = 0; i < 2; i += 1) game.state.objects[onBoard(game, "Insect Token", B)].isToken = true;
+      const covenant = game.debugSpawn("Fire Covenant", A, "hand");
+      // Searched in full, v2 keeps it. With the clock out before anything is
+      // scored (the live board: some forty permanents across the table) it
+      // plays v1's cast, and v1 casts it for X=1 at no target.
+      const taken = playOutTurn(game, outOfTime(registry, weights), A, () => false);
+      const cast = taken.find((a) => a.type === "cast-spell" && a.card === covenant);
+      const x = cast?.type === "cast-spell" ? (cast.xValue ?? 0) : 0;
+      return {
+        passed: cast === undefined || x >= 4,
+        detail: cast === undefined ? "kept Fire Covenant" : `cast it: ${describeAction(cast).slice(0, 300)}`,
+      };
+    },
+  },
+  {
+    name: "keeps Angel's Grace in hand on its own turn with nothing threatening it",
+    rule: "A spell whose whole effect is not losing this turn does nothing on a turn it can't lose.",
+    kind: "training",
+    run(weights, registry) {
+      // The same game: Queen Marchesa's bot cast Angel's Grace in its own
+      // first main phase on 25 life, among five other spells, and was later
+      // at 9 with nothing to save it.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 25;
+      lands(game, "Plains", A, 9);
+      const zombies = onBoard(game, "Zombie Token", B);
+      game.state.objects[zombies].isToken = true;
+      game.state.objects[zombies].stackCount = 15;
+      for (const name of ["Esper Sentinel", "Orzhov Signet", "Shadowspear"]) game.debugSpawn(name, A, "hand");
+      const grace = game.debugSpawn("Angel's Grace", A, "hand");
+      // Searched in full, v2 keeps it; out of time, it plays v1's cast.
+      const taken = playOutTurn(game, outOfTime(registry, weights), A, () => false);
+      const cast = taken.some((a) => a.type === "cast-spell" && a.card === grace);
+      return { passed: !cast, detail: cast ? "cast Angel's Grace on its own turn" : "kept Angel's Grace" };
+    },
+  },
+  {
+    name: "doesn't attack a player who has protection from it",
+    rule: "Damage from a source a player has protection from is prevented (rule 702.16k): an attack at them deals nothing.",
+    kind: "training",
+    run(weights, registry, makeBot) {
+      // The same game: Kangee's bot had taken Noble Heritage's counters, and
+      // on its next turn sent both its fliers, 12 power, at the player that
+      // gave protection from it. All 12 was prevented. The other opponent's
+      // board would have eaten them, so staying home was the play.
+      const game = table(registry, [A, B, C], A);
+      game.state.players[B].life = 8;
+      const angels = [onBoard(game, "Serra Angel", A), onBoard(game, "Serra Angel", A)];
+      (game.state.playerEffects ??= []).push({
+        owner: B,
+        expires: { untilTurnOf: B },
+        protectionFromPlayers: { who: [B], from: [A] },
+      });
+      for (let i = 0; i < 4; i += 1) onBoard(game, "Giant Spider", C);
+      game.advanceUntil((s) => (s.awaiting?.kind === "attackers" && s.awaiting.player === A) || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "alice was never asked to attack" };
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const atBob = attackers.filter(
+        (d) => angels.includes(d.attacker) && d.defender === B,
+      ).length;
+      return { passed: atBob === 0, detail: `sent ${atBob} of 2 at the player with protection from it` };
+    },
+  },
+  {
+    name: "casts Slicer on turn one off a land, Lotus Petal and Simian Spirit Guide",
+    rule: "Mana a card in hand makes (rule 605.1a) is mana: a land, a Petal and a Spirit Guide are the {2}{R} of More Than Meets the Eye.",
+    kind: "training",
+    run(weights, registry, makeBot) {
+      // Reported from a live game (2026-11-21): the bot on a Slicer deck
+      // held a land, Lotus Petal and Simian Spirit Guide on turn one and
+      // didn't cast its commander converted for {2}{R}. The auto-payer never
+      // reaches into a hand (`Game.manaSources`), so the Guide's {R} has to
+      // be made by hand before the cast, and nothing in the bot counts it.
+      const game = Game.create({
+        seed: 3,
+        registry,
+        decks: [
+          { player: A, cards: Array<string>(40).fill("Mountain"), commanders: ["Slicer, Hired Muscle"] },
+          forestDeck(B),
+        ],
+      });
+      game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+      game.state.zones.perPlayer[A].hand = [];
+      for (const name of ["Mountain", "Lotus Petal", "Simian Spirit Guide"]) game.debugSpawn(name, A, "hand");
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const did = taken
+        .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
+        .filter((s) => s !== "pass-priority");
+      return {
+        passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).startsWith("Slicer")),
+        detail: `did: ${did.join(", ") || "nothing"}`,
       };
     },
   },
