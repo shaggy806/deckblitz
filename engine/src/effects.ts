@@ -4510,6 +4510,17 @@ export type EffectSpec =
       readonly amount: EffectAmount;
       readonly then?: EffectSpec;
       readonly required?: true;
+      /** "You may **exile it and** collect evidence 4. If you do, return this
+       * card to the battlefield tapped" (Lamplight Phoenix's dies trigger,
+       * `"trigger-object"`): one action — that card, still in its owner's
+       * graveyard as the object the trigger found (rule 400.7), is exiled,
+       * then evidence is collected from the rest of the graveyard (701.59a),
+       * the card itself never part of it (the ruling). Under a `may`, offered
+       * only when both can be done (`mayBeDone`; 701.59b), and once chosen the
+       * collecting can't be declined; neither happens when either can't.
+       * `then` has that card, now in exile, as its target 0 and the evidence
+       * after it. Read only for the effect's controller's own graveyard. */
+      readonly exiling?: ObjectRef;
     }
   | {
       /** "If you do, it becomes plotted" (rule 702.170c): a card an
@@ -15555,8 +15566,14 @@ export interface EffectApi {
     },
   ): void;
   /** The controller may collect evidence `amount` — see the
-   * `collect-evidence` effect. */
-  collectEvidence(amount: number, then: EffectSpec | undefined, required?: boolean): void;
+   * `collect-evidence` effect. With `exiling`, that card in their graveyard
+   * is exiled first, apart from the evidence, and is the `then`'s target 0
+   * (the effect's `exiling`); nothing at all unless both can be done. */
+  collectEvidence(amount: number, then: EffectSpec | undefined, required?: boolean, exiling?: ObjectId): void;
+  /** Whether the controller could exile `card` from their graveyard and
+   * collect evidence `amount` from the rest of it (the `collect-evidence`
+   * effect's `exiling`). */
+  canExileAndCollectEvidence(card: ObjectId, amount: number): boolean;
   /** The source, a Case, becomes solved — see the `solve` effect. */
   solveSource(): void;
   /** A card in exile becomes foretold — see the `become-foretold` effect. */
@@ -20554,6 +20571,13 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   if (action.kind === "blight") return blightingPlayers(action.who, ctx).every((player) => ctx.canBlight(player));
   // "You may behold a Dragon" (rule 701.4a): only with one to behold.
   if (action.kind === "behold") return ctx.canBehold(action);
+  // "You may exile it and collect evidence 4" (Lamplight Phoenix): only with
+  // that card still there and the rest of the graveyard holding enough
+  // (rule 701.59b) — both or neither.
+  if (action.kind === "collect-evidence" && action.exiling !== undefined) {
+    const card = objectRefAct(action.exiling, ctx);
+    return card?.kind === "object" && ctx.canExileAndCollectEvidence(card.object, Math.max(0, Math.floor(amountValue(action.amount, ctx))));
+  }
   // "You may return one of them": not with none of them left, and then it
   // hasn't been done this turn either (Rinoa, Angel Wing).
   if (action.kind === "put-arrived-onto-battlefield") return ctx.arrivedStillThere() > 0;
@@ -22046,9 +22070,16 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       }
       return;
     }
-    case "collect-evidence":
-      ctx.collectEvidence(Math.max(0, Math.floor(amountValue(spec.amount, ctx))), spec.then, spec.required === true);
+    case "collect-evidence": {
+      const amount = Math.max(0, Math.floor(amountValue(spec.amount, ctx)));
+      if (spec.exiling !== undefined) {
+        const card = objectRefAct(spec.exiling, ctx);
+        if (card?.kind === "object") ctx.collectEvidence(amount, spec.then, true, card.object);
+        return;
+      }
+      ctx.collectEvidence(amount, spec.then, spec.required === true);
       return;
+    }
     case "solve":
       ctx.solveSource();
       return;

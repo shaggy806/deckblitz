@@ -13945,7 +13945,7 @@ export class Game {
       const ctx = this.makeResolutionContext(
         awaiting.thenSource ?? asObjectId("choose-from-zone-source"),
         player,
-        seen.map((id) => ({ kind: "object", object: id }) as const),
+        [...(awaiting.thenLead !== undefined ? [awaiting.thenLead] : []), ...seen].map((id) => ({ kind: "object", object: id }) as const),
         awaiting.thenX ?? 0,
         awaiting.thenTriggerValue ?? 0,
         undefined,
@@ -47767,12 +47767,33 @@ controlledBy,
         invalidateComputedCache();
         this.emit({ type: "case-solved", object: source });
       },
-      collectEvidence: (amount, then, required) =>
+      canExileAndCollectEvidence: (card, amount) => this.canExileAndCollectEvidence(controller, card, amount),
+      collectEvidence: (amount, then, required, exiling) => {
+        if (exiling !== undefined) {
+          // "Exile it and collect evidence N": both or neither (the effect's
+          // `exiling`), the card exiled first so it's never evidence.
+          if (!this.canExileAndCollectEvidence(controller, exiling, amount)) return;
+          const before = this.state.objects[exiling].zoneChangeCount;
+          this.exileByEffect({ kind: "object", object: exiling });
+          const exiled = this.state.objects[exiling];
+          if (exiled?.zone !== "exile" || exiled.zoneChangeCount === before) return;
+          // From here the card is the `then`'s target 0, in exile: the note
+          // that "it" was named in the graveyard no longer applies.
+          if (this.state.namedOffSlot !== undefined) delete this.state.namedOffSlot[exiling];
+          this.beginCollectEvidence(controller, source, amount, {
+            required: true,
+            x,
+            ...(then !== undefined ? { then } : {}),
+            thenLead: exiling,
+          });
+          return;
+        }
         this.beginCollectEvidence(controller, source, amount, {
           ...(required === true ? { required: true } : { optional: true }),
           x,
           ...(then !== undefined ? { then } : {}),
-        }),
+        });
+      },
       devouredBySource: (filter) => {
         // In the stint this refers to, as it last existed once it has left
         // (rule 608.2h): "for each creature it devoured" holds though it's gone.
@@ -59003,6 +59024,18 @@ controlledBy,
     return total >= amount;
   }
 
+  /** Whether `player` could exile `card` from their own graveyard and collect
+   * evidence `amount` from the rest of it (the `collect-evidence` effect's
+   * `exiling` — Lamplight Phoenix; rule 701.59b). */
+  private canExileAndCollectEvidence(player: PlayerId, card: ObjectId, amount: number): boolean {
+    if (this.state.players[player]?.hasLost !== false) return false;
+    const graveyard = this.state.zones.perPlayer[player]?.graveyard ?? [];
+    if (!graveyard.includes(card)) return false;
+    let total = 0;
+    for (const id of graveyard) if (id !== card) total += this.evidenceWorth(id, undefined);
+    return total >= amount;
+  }
+
   /** Whether `player` could collect evidence `first` and then `second` from
    * what's left (rule 701.59a twice, as one cast's two costs — Conspiracy
    * Unraveler's beside a spell's own): some cards totaling `first` to the
@@ -59076,6 +59109,8 @@ controlledBy,
        * (Conspiracy Unraveler's beside a spell's own): the cards chosen may
        * total no more than leaves that much behind. */
       readonly leave?: number;
+      /** The card exiled beside the evidence: `then`'s target 0. */
+      readonly thenLead?: ObjectId;
     } = {},
   ): void {
     const among = opts.among;
@@ -59124,6 +59159,7 @@ controlledBy,
       ...(among === undefined ? { collectEvidence: amount } : {}),
       ...(opts.required === true ? { collectEvidenceRequired: true as const } : {}),
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
+      ...(opts.thenLead !== undefined ? { thenLead: opts.thenLead } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
       ...(opts.thenManaAbility !== undefined ? { thenManaAbility: opts.thenManaAbility } : {}),
       ...(opts.exileLink !== undefined ? { exileLink: opts.exileLink } : {}),

@@ -2715,7 +2715,12 @@ collect evidence **X**. When you do, … X damage" (Incinerator of the Guilty) i
 `"sum"` of `"mana-value"` `in: "graveyards"`, rule 701.59b) whose `then` is a `sequence` of
 `collect-evidence { amount: "x", required: true }` and the `reflexive-trigger`, which reads the
 same X. `required` is a collecting whose may was already answered: it can't be declined, and
-evidence 0 with nothing exiled still counts (that card's ruling). As an activated ability's cost it's
+evidence 0 with nothing exiled still counts (that card's ruling). `exiling: "trigger-object"` is
+"you may **exile it and** collect evidence 4. If you do, return this card to the battlefield
+tapped" (Lamplight Phoenix's dies trigger, under a `may`): one action, offered only while that card is
+still in the graveyard and the rest of it holds N (`mayBeDone`); the card is exiled first, never
+evidence (the ruling), the collecting can't then be declined, and `then` has the exiled card as its
+target 0 (`put-onto-battlefield { target: 0, enterTapped: true }`). As an activated ability's cost it's
 `cost.collectEvidence: N` — Forensic Researcher (the record `{ totalManaValue: N, filter }` is the
 same payment over the matching cards only, and no collecting of evidence: The Capitoline Triad's
 "Exile any number of historic cards from your graveyard with total mana value 30 or greater";

@@ -404,6 +404,29 @@ describe("collect evidence X and its reflexive ability (Incinerator of the Guilt
       },
     });
   });
+
+  it("'you may exile it and collect evidence N. If you do, return this card …' as one action (Lamplight Phoenix)", () => {
+    const ability = parseFace(
+      {
+        name: "Card",
+        type_line: "Creature — Phoenix",
+        oracle_text:
+          "When this creature dies, you may exile it and collect evidence 4. If you do, return this card to the battlefield tapped. (To collect evidence 4, exile cards with total mana value 4 or greater from your graveyard.)",
+        power: "3",
+        toughness: "3",
+      },
+      { tokenFor: (d: string) => d },
+    ).triggered[0];
+    expect(ability.effect).toMatchObject({
+      kind: "may",
+      effect: {
+        kind: "collect-evidence",
+        amount: 4,
+        exiling: "trigger-object",
+        then: { kind: "put-onto-battlefield", target: 0, enterTapped: true },
+      },
+    });
+  });
 });
 
 describe("a cost paid a chosen number of times", () => {

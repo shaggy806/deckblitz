@@ -10277,6 +10277,23 @@ function reflexiveAboutAt(sentences, i, ctx) {
  * ability (rule 603.12) reading X. Its clause takes no target here; `null`
  * when it isn't read whole or doesn't read X.
  */
+function exileItAndCollectEvidenceAt(sentences, i, ctx) {
+  const m = /^you may exile it and collect evidence (\d+)\.$/i.exec(sentences[i] ?? "");
+  if (m === null || ctx.departed !== "source" || ctx.targets.length > 0) return null;
+  const back = /^If you do, return (?:this card|it) to the battlefield( tapped)?\.$/.exec(sentences[i + 1] ?? "");
+  if (back === null) return null;
+  return {
+    kind: "may",
+    prompt: `Exile ~ and collect evidence ${m[1]}?`,
+    effect: {
+      kind: "collect-evidence",
+      amount: Number(m[1]),
+      exiling: "trigger-object",
+      then: { kind: "put-onto-battlefield", target: 0, ...(back[1] !== undefined ? { enterTapped: true } : {}) },
+    },
+  };
+}
+
 function collectEvidenceXAt(sentences, i, ctx) {
   if (!/^you may collect evidence X\.$/i.test(sentences[i] ?? "")) return null;
   const clause = /^When you do, (.+\.)$/.exec(sentences[i + 1] ?? "");
@@ -12551,6 +12568,15 @@ export function parseEffect(text, outer) {
         parsed.push(effect);
         hints.push({ sentence, effect });
       }
+      skip = 1;
+      continue;
+    }
+    // "You may exile it and collect evidence N. If you do, return this card to
+    // the battlefield tapped." (`exileItAndCollectEvidenceAt`).
+    const exileAndEvidence = exileItAndCollectEvidenceAt(sentences, i, ctx);
+    if (exileAndEvidence !== null) {
+      parsed.push(exileAndEvidence);
+      hints.push({ sentence, effect: exileAndEvidence });
       skip = 1;
       continue;
     }

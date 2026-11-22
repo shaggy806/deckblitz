@@ -4242,6 +4242,10 @@ export type AwaitingDecision =
        * `required`): the event follows even with nothing exiled, which is
        * collecting evidence 0 (Incinerator of the Guilty's ruling). */
       readonly collectEvidenceRequired?: true;
+      /** A card exiled beside the evidence ("exile it and collect evidence
+       * 4" — the `collect-evidence` effect's `exiling`): `then`'s target 0,
+       * the cards chosen after it. */
+      readonly thenLead?: ObjectId;
       /**
        * Only an **order** is asked: every card in `ids` is picked, and the
        * order picked is where each goes (rule 401.4 — the owner arranges
