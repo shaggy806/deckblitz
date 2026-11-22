@@ -2930,6 +2930,7 @@
   "zone:choose-play-permission-any-zone",
   "cost:granted-graveyard-cast-increase-unless-targets",
   "amount:exiled-with-source-count",
+  "amount:exiled-with-source-power",
   "effect:player-mana-ability-until-eot",
   "effect:choose-new-targets-any-number",
   "static:cost-reduction-targeting-enchanted-player",

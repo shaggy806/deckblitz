@@ -4623,6 +4623,28 @@ export function parseSentence(sentence, ctx) {
     const ofDiscarded = { manaValueOf: { paid: "discarded" } };
     return { kind: "modify-pt", target: "source", power: ofDiscarded, toughness: ofDiscarded, duration: "end-of-turn" };
   }
+  // "Where X is the power of the exiled card": the card linked to this
+  // permanent (rule 607.2a), exiled with it or until it leaves (Bishop of
+  // Binding) — the `"exiled-with-source"` set, 0 with none.
+  {
+    const exiledPt = /^(~|target [a-z' ]+?) gets \+X\/\+X until end of turn, where X is the power of the exiled card\.$/i.exec(s);
+    if (exiledPt !== null) {
+      const target = exiledPt[1] === "~" ? "source" : (() => {
+        // "Target Vampire": a creature type names any permanent of it.
+        const typed = /^target ([A-Z][a-z]+)$/.exec(exiledPt[1].replace(/^Target/, "target"));
+        const bySubtype = typed === null ? null : parseTypePhrase(typed[1]);
+        const spec =
+          targetOf(exiledPt[1]) ??
+          (bySubtype !== null && typeof bySubtype?.subtype === "string" && Object.keys(bySubtype).length === 1
+            ? { kind: "permanent", filter: bySubtype }
+            : undefined);
+        return spec === undefined ? undefined : ctx.target(spec);
+      })();
+      if (target === undefined) return null;
+      const power = { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" };
+      return { kind: "modify-pt", target, power, toughness: power, duration: "end-of-turn" };
+    }
+  }
   // "The revealed card's mana value / power" where a "reveal a … card from
   // your hand" cost revealed it: the `{ paid: "revealed" }` amount ref — ahead of the
   // guard too.
@@ -6626,6 +6648,14 @@ export function parseSentence(sentence, ctx) {
     const leaves = slot(m[2]);
     if (exiled === undefined || leaves === undefined) return null;
     return { kind: "exile", target: exiled, until: { targetLeaves: leaves } };
+  }
+  // "Exile target creature an opponent controls until ~ leaves the
+  // battlefield" (Banisher Priest, rule 610.3): the card comes back as the
+  // source leaves; "the exiled card" after it is the `"exiled-with-source"` set.
+  if ((m = re(`exile (${TARGET}) until ~ leaves the battlefield`).exec(s))) {
+    const exiled = slot(m[1]);
+    if (exiled === undefined) return null;
+    return { kind: "exile", target: exiled, untilSourceLeaves: true };
   }
   if ((m = re(`exile (${TARGET})`).exec(s))) return { kind: "exile", target: slot(m[1]) };
   // Airbend (rule 701.65a): exiled, its owner may cast it for {2}. Several

@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The power of the card exiled until this leaves — found built 2026-11-22
+
+The key `amount:exiled-with-source-power` needed no engine code: a `sum` aggregate of `power` over `"exiled-with-source"`,
+which holds a card exiled "until this leaves the battlefield" (rule 610.3, `exiledUntil`) as well as a linked one, and
+none once the source has left (X is 0 then, the ruling). Bishop of Binding (18929). The scaffolder now reads "exile
+target … until ~ leaves the battlefield" and "… gets +X/+X …, where X is the power of the exiled card".
+`test/top10000-batch-338b.test.ts`.
+
 ### The discarded cards' total mana value — found built 2026-11-21
 
 The key `amount:discarded-as-cost-total-mana-value` needed no engine code: a `sum` aggregate of `mana-value` over `{

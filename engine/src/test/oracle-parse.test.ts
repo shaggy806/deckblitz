@@ -10043,6 +10043,22 @@ describe("counters put or removed this way", () => {
   });
 });
 
+describe("the card exiled until this leaves (Bishop of Binding)", () => {
+  it("reads the exile-until-it-leaves and X as the exiled card's power", () => {
+    const bishop = parseFace({
+      name: "Bishop of Binding",
+      type_line: "Creature — Vampire Cleric",
+      oracle_text:
+        "When this creature enters, exile target creature an opponent controls until this creature leaves the battlefield.\nWhenever this creature attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.",
+    });
+    expect(bishop.complete).toBe(true);
+    expect(bishop.triggered[0].effect).toEqual({ kind: "exile", target: 0, untilSourceLeaves: true });
+    const x = { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" };
+    expect(bishop.triggered[1].targets).toEqual([{ kind: "permanent", filter: { subtype: "Vampire" } }]);
+    expect(bishop.triggered[1].effect).toEqual({ kind: "modify-pt", target: 0, power: x, toughness: x, duration: "end-of-turn" });
+  });
+});
+
 describe("the card discarded to pay a cost", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
