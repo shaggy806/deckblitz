@@ -8605,7 +8605,7 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Returned cards exiled if they would leave (2026-11-22).** `effect:return-auras-exile-if-would-leave`: `return-from-graveyard`'s `exileIfItWouldLeave` sets `GameObject.exileIfItWouldLeave` on each permanent it put onto the battlefield, on both its all-at-once path and an asked `choose-from-zone` (`enterExileIfLeaves`), as `put-onto-battlefield`'s already did for one card. Proving card: Storm Herald.
 
-**Life lost as a permanent enters (2026-11-22).** Lich (a "recheck" record, every key built): its one missing line was `AsEntersAction.loseLife` (an `EffectAmount`, `{ lifeTotal: "you" }`), done in `askAsEnters` beside `mill`.
+**Life lost as a permanent enters; counters kept off while a source remains (2026-11-22).** Lich (a "recheck" record, every key built): its one missing line was `AsEntersAction.loseLife` (an `EffectAmount`, `{ lifeTotal: "you" }`), done in `askAsEnters` beside `mill`. `effect:prevent-counters-while-source`: no engine code — the `prohibit` effect's `get-counters` act on `target: 0` or `who: { target: 0 }` with `duration: "while-source"`, Solemnity's gate. Proving card: Suncleanser.
 
 **The defending player assigns an attacker's combat damage (2026-11-21).** `static:defending-player-assigns-combat-damage`: `StaticAbility.assignsAttackersCombatDamage`, read by `combat/banding.ts`'s `defenderAssignsFor` inside `damageAssigner`, so the player a creature is attacking answers its `assign-combat-damage` as banding's defender does (`forOpponent`) — and, unlike banding, its "as though it weren't blocked" choice in the same question (`DamageQuestion.everyChoice`, the card's ruling). Defensive Formation. `defensive-formation.test.ts`.
 

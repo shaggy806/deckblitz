@@ -7,12 +7,15 @@ import {
   A,
   B,
   cast,
+  counters,
   destroy,
   hand,
   lands,
   life,
   named,
   pickFromZone,
+  pickModes,
+  pickTargets,
   ref,
   settle,
   spawn,
@@ -74,6 +77,60 @@ describe("Storm Herald: Auras returned, exiled at your end step or if they'd lea
     settle(game);
     expect(on(game, rancor)).not.toBeNull();
     toStep(game, "end", A);
+    settle(game);
+    expect(zone(game, rancor)).toBe("exile");
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+});
+
+describe("Suncleanser: no counters while it remains", () => {
+  const counter = (game: Game, id: ObjectId, n = 1): void => {
+    game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter: "+1/+1", amount: n }, [ref(id)]);
+    settle(game);
+  };
+
+  it("removes all counters from the creature, which then can't get any until Suncleanser leaves", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    counter(game, bears, 2);
+    game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter: "stun", amount: 1 }, [ref(bears)]);
+    lands(game, "Plains", 2);
+    pickModes(a, 0);
+    pickTargets(a, bears);
+    const cleanser = toHand(game, "Suncleanser");
+    cast(game, cleanser);
+    settle(game);
+    expect(Object.values(game.state.objects[bears].counters).filter((n) => n > 0)).toEqual([]);
+    counter(game, bears);
+    expect(counters(game, bears)).toBe(0);
+    destroy(game, cleanser);
+    counter(game, bears);
+    expect(counters(game, bears)).toBe(1);
+  });
+
+  it("the opponent loses all counters, and can't get counters while it remains", () => {
+    const { game, a } = table();
+    game.debugApplyEffect(A, { kind: "add-player-counters", counter: "poison", amount: 3, who: { target: 0 } }, [ref(B)]);
+    game.debugApplyEffect(A, { kind: "get-energy", amount: 2, who: { target: 0 } }, [ref(B)]);
+    settle(game);
+    expect(game.state.players[B].counters.poison).toBe(3);
+    expect(game.state.players[B].energy).toBe(2);
+    lands(game, "Plains", 2);
+    pickModes(a, 1);
+    pickTargets(a, B);
+    const cleanser = toHand(game, "Suncleanser");
+    cast(game, cleanser);
+    settle(game);
+    expect(game.state.players[B].counters.poison ?? 0).toBe(0);
+    expect(game.state.players[B].energy).toBe(0);
+    game.debugApplyEffect(A, { kind: "add-player-counters", counter: "poison", amount: 2, who: { target: 0 } }, [ref(B)]);
+    settle(game);
+    expect(game.state.players[B].counters.poison ?? 0).toBe(0);
+    // You can still get them.
+    game.debugApplyEffect(A, { kind: "add-player-counters", counter: "poison", amount: 1 });
+    settle(game);
+    expect(game.state.players[A].counters.poison).toBe(1);
+    destroy(game, cleanser);
     game.debugApplyEffect(A, { kind: "add-player-counters", counter: "poison", amount: 2, who: { target: 0 } }, [ref(B)]);
     settle(game);
     expect(game.state.players[B].counters.poison).toBe(2);
@@ -137,3 +194,9 @@ describe("Lich", () => {
 
   it("loses the game when it's put into a graveyard, whatever the life total", () => {
     const { game } = table();
+    const lich = spawn(game, "Lich");
+    game.state.players[A].life = 20;
+    destroy(game, lich);
+    expect(game.state.players[A].hasLost).toBe(true);
+  });
+});

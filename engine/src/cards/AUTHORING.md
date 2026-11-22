@@ -8400,6 +8400,10 @@ The `prevent-damage` family makes the same record.
   "you" }, kind: "-1/-1" }`). Not a replacement: the counters just aren't put — by an effect,
   infect or wither damage, a move (122.5), a Saga's lore counter — a cost that would put them
   can't be paid, and a permanent enters without them unless the static enters with it.
+  The `prohibit` effect makes the same act for a while: "it can't have counters put on it for
+  as long as this creature remains on the battlefield" is `{ act: "get-counters", target: 0 }`,
+  "that player can't get counters …" `{ act: "get-counters", who: { target: 0 } }`, both with
+  `duration: "while-source"` (Suncleanser).
 - A static's `prohibits` `lose-counters` act (`object`, `kind?`) is "counters can't be removed
   from …" (Fear of Sleep Paralysis: `{ act: "lose-counters", kind: "stun", object: {
   controlledBy: "opponent" } }`). They stay through an effect's removal, chosen or not, and a
