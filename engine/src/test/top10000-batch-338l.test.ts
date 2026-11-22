@@ -2,7 +2,8 @@
  * B338, the casting-zones lane: Psychic Rebuttal (`copy-spell`'s
  * `asLastOnStack`, the spell countered this way copied as it last was on the
  * stack), Guild Feud (an opponent's look-and-choose through `as-player`, the
- * two put onto the battlefield fighting). Written from the Oracle text.
+ * two put onto the battlefield fighting), Arcanum Wings (aura swap, rule
+ * 702.65 — `auraSwap()`). Written from the Oracle text.
  */
 import { describe, expect, it } from "vitest";
 
@@ -11,14 +12,17 @@ import type { ObjectId } from "../primitives.js";
 import {
   A,
   B,
+  activate,
   cast,
   controller,
   graveyard,
+  keywords,
   lands,
   life,
   pickFromZone,
   pickModes,
   pickTargets,
+  pt,
   ref,
   settle,
   spawn,
@@ -158,5 +162,47 @@ describe("Guild Feud", () => {
     expect(zone(game, theirs[0])).toBe("graveyard");
     expect(zone(game, mine[0])).toBe("battlefield");
     expect(game.state.objects[mine[0]].damageMarked).toBe(0);
+  });
+});
+
+describe("Arcanum Wings", () => {
+  const wingsOn = (game: Game): { bears: ObjectId; wings: ObjectId } => {
+    const bears = spawn(game, "Grizzly Bears");
+    lands(game, "Island", 5);
+    const wings = toHand(game, "Arcanum Wings");
+    cast(game, wings, { targets: [ref(bears)] });
+    return { bears, wings };
+  };
+
+  it("gives flying, and aura swap exchanges it with an Aura card in hand", () => {
+    const { game, a } = table();
+    const { bears, wings } = wingsOn(game);
+    expect(keywords(game, bears).has("flying")).toBe(true);
+    const shroud = toHand(game, "Spectral Flight");
+    pickFromZone(a, shroud);
+    activate(game, wings, 0);
+    expect(zone(game, wings)).toBe("hand");
+    expect(zone(game, shroud)).toBe("battlefield");
+    expect(game.state.objects[shroud].attachedTo).toBe(bears);
+    expect(pt(game, bears)).toEqual({ power: 4, toughness: 4 });
+  });
+
+  it("an Aura that can't enchant that creature stays in hand, and so does nothing else", () => {
+    const { game, a } = table();
+    const { bears, wings } = wingsOn(game);
+    const growth = toHand(game, "Wild Growth");
+    pickFromZone(a, growth);
+    activate(game, wings, 0);
+    expect(zone(game, growth)).toBe("hand");
+    expect(zone(game, wings)).toBe("battlefield");
+    expect(game.state.objects[wings].attachedTo).toBe(bears);
+  });
+
+  it("choosing no card exchanges nothing", () => {
+    const { game } = table();
+    const { wings } = wingsOn(game);
+    toHand(game, "Spectral Flight");
+    activate(game, wings, 0);
+    expect(zone(game, wings)).toBe("battlefield");
   });
 });

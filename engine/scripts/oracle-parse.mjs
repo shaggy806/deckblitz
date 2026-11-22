@@ -54,6 +54,7 @@ import {
   myriad,
   outlast,
   transfigure,
+  auraSwap,
   persist,
   saddle,
   champion,
@@ -342,6 +343,8 @@ function keywordPart(part, faceName, typeLine = "", tokenFor = undefined) {
   if ((m = new RegExp(`^outlast ${COST}$`, "i").exec(p))) return { activated: [outlast(m[1])] };
   // Transfigure [cost] (rule 702.71a): sacrifice it for a creature card of its mana value.
   if ((m = new RegExp(`^transfigure ${COST}$`, "i").exec(p))) return { activated: [transfigure(m[1])] };
+  // Aura swap [cost] (rule 702.65a): exchange this Aura with an Aura card in hand.
+  if ((m = new RegExp(`^aura swap ${COST}$`, "i").exec(p))) return { activated: [auraSwap(m[1])] };
   if ((m = new RegExp(`^unearth ${COST}$`, "i").exec(p))) return { activated: [unearth(m[1])] };
   if ((m = /^fabricate (\d+)$/i.exec(p))) {
     // Angel of Invention's shape: the counters or that many Servos, chosen as it resolves.

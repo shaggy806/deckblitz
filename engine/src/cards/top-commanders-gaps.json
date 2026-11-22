@@ -3213,7 +3213,8 @@
   "effect:copy-countered-spell",
   "effect:copy-countered-spell",
   "effect:reveal-opponent-library-put-onto-battlefield",
-  "effect:fight-between-put-this-way"
+  "effect:fight-between-put-this-way",
+  "mechanic:aura-swap"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

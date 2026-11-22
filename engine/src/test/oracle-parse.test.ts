@@ -14,7 +14,7 @@
 import { describe, expect, it } from "vitest";
 
 import { POOL_CARDS, createDefaultRegistry, defineCard } from "../cards.js";
-import { fateseal, learn, soulbond, transfigure } from "../cards/helpers.js";
+import { auraSwap, fateseal, learn, soulbond, transfigure } from "../cards/helpers.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -23320,6 +23320,22 @@ describe("transfigure", () => {
     );
     expect(face.complete).toBe(true);
     expect(face.activated).toEqual([transfigure("{1}{B}{B}")]);
+  });
+});
+
+describe("aura swap", () => {
+  it("reads Arcanum Wings whole, its aura swap as the helper's ability", () => {
+    const face = parseFace(
+      {
+        name: "Arcanum Wings",
+        type_line: "Enchantment — Aura",
+        oracle_text:
+          "Enchant creature\nEnchanted creature has flying.\nAura swap {2}{U} ({2}{U}: Exchange this Aura with an Aura card in your hand.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.activated).toEqual([auraSwap("{2}{U}")]);
   });
 });
 

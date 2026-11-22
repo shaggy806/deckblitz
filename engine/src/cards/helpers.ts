@@ -1316,6 +1316,47 @@ export const transfigure = (cost: string): ActivatedAbility => ({
 });
 
 /**
+ * Aura swap (rule 702.65a): "[Cost]: You may exchange this permanent with an
+ * Aura card in your hand." The Aura card chosen enters attached to what this
+ * Aura is attached to (a player too), and then this one returns to its
+ * owner's hand. If either half can't be completed — this permanent has left
+ * the battlefield, or the card chosen can't legally be attached there and so
+ * stays in hand (rule 303.4i) — nothing happens (702.65b). The card enters
+ * rather than being cast, so it targets nothing. Put the printed line, its
+ * reminder included, in the card's `text`.
+ */
+export const auraSwap = (cost: string): ActivatedAbility => ({
+  cost: { mana: cost, tap: false },
+  targets: [],
+  effect: {
+    kind: "conditional",
+    condition: { kind: "source-on-battlefield" },
+    then: {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "look-and-choose",
+          zone: "hand",
+          min: 0,
+          max: 1,
+          destination: "battlefield",
+          leftover: "stay",
+          filter: { subtype: "Aura" },
+          attachedTo: { hostOf: "source" },
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "put-onto-battlefield" },
+          then: { kind: "return-to-hand", target: "source" },
+        },
+      ],
+    },
+  },
+  resolve: null,
+  text: `Aura swap ${cost}`,
+});
+
+/**
  * Annihilator N (rule 702.86): "Whenever this creature attacks, defending
  * player sacrifices N permanents." The defending player is the one it
  * attacks, or the controller of the planeswalker it attacks. A triggered
