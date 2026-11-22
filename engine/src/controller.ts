@@ -48,7 +48,7 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { handCardQuality } from "./bot/hand-worth.js";
 import { LANDS_WANTED, chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
-import { crackback, isLethal } from "./bot/combat-math.js";
+import { combatCreatures, crackback, damageThrough, isLethal } from "./bot/combat-math.js";
 import { DEFAULT_WEIGHTS } from "./bot/evaluate.js";
 import { allColors, colorToName, newColorsFirst } from "./land-colors.js";
 import { scryAway } from "./scry-pick.js";
@@ -5939,21 +5939,46 @@ export class HeuristicBotController extends AutomaticController {
       }
     }
 
-    // Chump-block the biggest remaining unblocked attackers if the
-    // unblocked damage left over would be lethal (or close to it).
+    // Chump-block the biggest remaining unblocked attackers while what they
+    // would deal unblocked is lethal: on life, or on 21 from one commander
+    // counting what it has dealt us already (rule 903.10a), double strike
+    // counted twice (`damageThrough`, `isLethal`). Summing power against life
+    // let a 5/6 double-striking Slicer at 16 commander damage of 21 through
+    // at 16 life, so every rollout of v2's own turn, whose defenders block as
+    // this does, read the attack as won and Kusari-Gama on Slicer — worth
+    // something only when it's blocked — as nothing (a live game, TPGJ6-2
+    // turn 39, 2026-11-22). An attacker lethal on its own is chumped first.
     const blockedAttackers = new Set(chosen.values());
+    const active = state.turnOrder[state.turn.activePlayerIndex];
+    const attackerUnits = new Map(
+      (active === undefined ? [] : combatCreatures(state, this.registry, active, false)).map((c) => [c.id, c]),
+    );
+    const lethalThrough = (attackers: readonly ObjectId[]): boolean =>
+      isLethal(
+        state,
+        this.playerId,
+        damageThrough(
+          attackers.flatMap((a) => attackerUnits.get(a) ?? []),
+          [],
+        ),
+      );
     const unblocked = [...new Set(legal.eligible.flatMap((e) => e.canBlock))]
       .filter((a) => !blockedAttackers.has(a))
-      .sort((a, b) => power(b) - power(a));
-    let remaining = unblocked.reduce((sum, a) => sum + power(a), 0);
-    const myLife = view.state.players[this.playerId].life;
+      .sort((a, b) => Number(lethalThrough([b])) - Number(lethalThrough([a])) || power(b) - power(a));
+    let left = [...unblocked];
     for (const attacker of unblocked) {
-      if (remaining < myLife) break;
+      if (!lethalThrough(left)) break;
       // The creature worth least of those free: a chump dies whatever it is
       // (the first one listed was a 5/5 commander with 2/2 tokens beside it).
-      const entry = units
+      // A menace attacker takes the two worth least (rule 702.111b): one
+      // alone was dropped at the end as illegal, so a lethal Slicer with
+      // Beamtown Beatstick's menace went unchumped in every rollout.
+      const needed = legal.menaceAttackers.includes(attacker) ? 2 : 1;
+      const free = units
         .filter((e) => !used.has(e) && e.canBlock.includes(attacker))
-        .sort((x, y) => worth(x.blocker) - worth(y.blocker))[0];
+        .sort((x, y) => worth(x.blocker) - worth(y.blocker));
+      if (free.length > 0 && free.length < needed) continue;
+      const entry = free[0];
       if (entry === undefined) {
         // Every blocker is already on something: the one stopping the least
         // is moved here (of several, the one worth least: a 2/2 token, not
@@ -5970,13 +5995,15 @@ export class HeuristicBotController extends AutomaticController {
         if (moved === undefined) continue;
         const [unit, was] = moved;
         chosen.set(unit, attacker);
-        if (![...chosen.values()].includes(was)) remaining += power(was);
-        remaining -= power(attacker);
+        if (![...chosen.values()].includes(was)) left.push(was);
+        left = left.filter((a) => a !== attacker);
         continue;
       }
-      chosen.set(entry, attacker);
-      used.add(entry);
-      remaining -= power(attacker);
+      for (const unit of free.slice(0, needed)) {
+        chosen.set(unit, attacker);
+        used.add(unit);
+      }
+      left = left.filter((a) => a !== attacker);
     }
 
     // One token of a compacted stack per unit, never the whole stack (the
