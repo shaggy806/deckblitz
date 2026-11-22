@@ -1646,6 +1646,14 @@ export interface BeholdSpec {
    * Only a creature with a type enough of them have is offered. A cast
    * cost's behold only (`forCost`). */
   readonly shareCreatureType?: true;
+  /** Not a behold but its shape with exile for the hand: "choose a creature
+   * you control **or a warped creature card you own in exile**" (Close
+   * Encounter, rule 702.185b — `GameObject.warped`). The candidates are the
+   * matching permanents its payer controls and the matching warped cards
+   * they own in exile; nothing is revealed (exile is public), and the
+   * spell's `{ paid: "beheld" }` names the one chosen. The prompt reads
+   * `text`. */
+  readonly orWarpedInExile?: true;
 }
 
 /** A ward cost as printed after "Ward" — "{2}" or "—{2}, Pay 2 life." — so a
@@ -3835,6 +3843,17 @@ export type EffectSpec =
        * stack, "that player adds … they choose" is `as-player` round a plain
        * `add-mana` (Stadium Vendors), so this is a mana ability's. */
       readonly theyChoose?: true;
+      /** "Add one mana of that color **unless any player pays {1}**"
+       * (Rhystic Cave): still a mana ability (rule 605.1a — it could add
+       * mana), so it resolves off the stack (605.3b) with its colour chosen
+       * as it's activated; then each player in turn order from the active
+       * player (101.4, the card's ruling) who could pay is asked, a
+       * `choose-modes` whose `ManaAbilityPick.unless` the engine answers,
+       * nobody getting priority meanwhile. One who pays: no mana, and the
+       * source wasn't tapped for mana (the ruling). Everyone declining: the
+       * mana, as ever. The auto-payer never activates it: activated by hand,
+       * at priority. A mana ability's own `add-mana` only. */
+      readonly unlessAnyPlayerPays?: string;
       /** A target slot holding the player who adds it — "**Target player**
        * adds one mana of any color" (The Warring Triad), "Choose a color.
        * Target player adds three mana of the chosen color" (Radiant Lotus).
@@ -4669,6 +4688,12 @@ export type EffectSpec =
        * card can't be cast at all.
        */
       readonly airbend?: boolean;
+      /**
+       * The exile warp's delayed triggered ability makes (rule 702.185a): the
+       * card it exiles is a **warped** card while it stays there (702.185b —
+       * `GameObject.warped`). A token ceases to exist (111.7), so none is.
+       */
+      readonly warp?: true;
       /**
        * Exile it **with this source** (rule 607.2a): the card is linked to the
        * source's battlefield stint (`GameObject.exiledWith`), so a later
@@ -14318,6 +14343,8 @@ export interface EffectApi {
     airbend?: boolean,
     /** See the `exile` effect's `until`, with its slot read. */
     until?: { readonly leaves: ObjectId } | "opponent-becomes-monarch",
+    /** Warp's exile — see the `exile` effect's `warp`. */
+    warp?: boolean,
   ): void;
   /** Haunt (rule 702.55b): `card`, just exiled by this effect, haunts
    * `creature` — in the battlefield stint it's in now. Nothing unless the
@@ -22209,7 +22236,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             ? undefined
             : { kind: spec.withCounters.kind, amount: Math.max(0, Math.floor(amountValue(spec.withCounters.amount, ctx))) };
         ctx.exileObject(target, spec.untilSourceLeaves === true, withCounters, spec.mayPlay, spec.linked === true,
-          spec.airbend === true, leaves?.kind === "object" ? { leaves: leaves.object } : spec.until === "opponent-becomes-monarch" ? spec.until : undefined);
+          spec.airbend === true, leaves?.kind === "object" ? { leaves: leaves.object } : spec.until === "opponent-becomes-monarch" ? spec.until : undefined,
+          spec.warp === true);
         const haunted = spec.haunting === undefined ? undefined : ctx.targets[spec.haunting];
         if (haunted?.kind === "object" && target.kind === "object") ctx.markHaunting(target.object, haunted.object);
       }

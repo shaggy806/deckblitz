@@ -637,6 +637,7 @@ import type {
   AttachmentRecord,
   LastKnownInfo,
   LastKnownRefs,
+  ManaAbilityPick,
   ResolutionResume,
   LeaveDestination,
   MulliganHandState,
@@ -10047,6 +10048,45 @@ export class Game {
       const granted = wait.grantedAbility === undefined ? undefined : this.abilityFromRef(wait.grantedAbility);
       const ability =
         granted !== undefined && "cost" in granted ? granted : this.effectiveActivated(wait.source)[wait.abilityIndex];
+      // "Unless any player pays {1}" (Rhystic Cave): one who pays (mode 1)
+      // ends it with no mana — the source wasn't tapped for mana (the
+      // ruling). One who declines, or can't pay after all: the next player,
+      // and once nobody is left, the mana.
+      const unless = wait.unless;
+      if (unless !== undefined) {
+        let paid = false;
+        if (modeIndices[0] === 1) {
+          const payment = this.payMana(player, parseManaCost(unless.pay), undefined, undefined, otherCostPurpose(unless.pay, false));
+          if (payment !== null) {
+            this.executePayment(player, payment);
+            paid = true;
+          }
+        }
+        if (!paid) {
+          const { manaFor: _asked, unless: _was, ...rest } = wait;
+          if (this.askManaUnless(unless.rest, unless.pay, rest, unless.manaForChoice)) return;
+          if (ability !== undefined) {
+            this.resolveManaAbility(
+              wait.source,
+              wait.activator,
+              ability,
+              wait.x,
+              wait.picks[0],
+              wait.grantedAbility,
+              wait.paidSets,
+              wait.sacrificedCouldMake,
+              unless.manaForChoice,
+              wait.revealSince,
+              wait.abilityIndex,
+              false,
+              wait.manaSpent,
+              true,
+            );
+          }
+        }
+        if (this.state.awaiting === null) this.prepareForPriority(wait.activator);
+        return;
+      }
       if (ability !== undefined) {
         this.resolveManaAbility(
           wait.source,
@@ -21025,7 +21065,9 @@ export class Game {
     if (clause.caster === "enchanted-player" && player !== enchanted) return false;
     if (clause.exceptOnCastersTurn === true && player === this.activePlayer) return false;
     if (clause.yourTurnOnly === true && player !== this.activePlayer) return false;
-    if (clause.kicked === true && this.kickedCast?.card !== cardId) return false;
+    // A kicked spell is one paying a plain kicker (rule 702.33d): a bargained
+    // or gifted cast prices as a kicked variant too, but isn't one.
+    if (clause.kicked === true && (this.kickedCast?.card !== cardId || !this.isPlainKicker(cardId))) return false;
     // "Flashback costs you pay" (Catalyst Stone): only a cast paying one —
     // the card's own or a granted one, never jump-start's (702.133a).
     if (clause.via !== undefined) {
@@ -21054,10 +21096,13 @@ export class Game {
       if (clause.notFromCastersHand === true && from === "hand" && card?.owner === player) return false;
     }
     // "The first … spell you cast each turn": any matching spell this player
-    // has already cast this turn has had it.
+    // has already cast this turn has had it — "the first kicked spell" (Vine
+    // Gecko) only a kicked one.
     if (
       clause.firstEachTurn === true &&
-      (this.state.players[player].spellsCastThisTurnAs ?? []).some(({ id, spell }) => isSame(id, spell))
+      (this.state.players[player].spellsCastThisTurnAs ?? []).some(
+        (record) => (clause.kicked !== true || record.kicked === true) && isSame(record.id, record.spell),
+      )
     ) {
       return false;
     }
@@ -30369,6 +30414,50 @@ export class Game {
     if (rolled !== undefined && stacked !== undefined) stacked.lastKnownRefs = { ...stacked.lastKnownRefs, roll: rolled };
   }
 
+  /**
+   * A mana ability's "unless any player pays `pay`" (Rhystic Cave — `add-mana`'s
+   * `unlessAnyPlayerPays`): the first of `players` (in turn order, rule
+   * 101.4) who could pay it is asked, a `choose-modes` the engine answers
+   * (`ManaAbilityPick.unless` — mode 0 declines, mode 1 pays), the rest kept
+   * to ask after. Whether anyone was asked: nobody could pay, and the mana
+   * comes.
+   */
+  private askManaUnless(
+    players: readonly PlayerId[],
+    pay: string,
+    wait: Omit<ManaAbilityPick, "manaFor" | "unless">,
+    manaForChoice: PlayerId | undefined,
+  ): boolean {
+    for (let i = 0; i < players.length; i += 1) {
+      const asked = players[i];
+      if (this.payMana(asked, parseManaCost(pay), undefined, undefined, otherCostPurpose(pay, false)) === null) continue;
+      const source = this.state.objects[wait.source];
+      const name = source === undefined ? "it" : printedCardName(source);
+      this.state.awaiting = {
+        kind: "choose-modes",
+        player: asked,
+        source: wait.source,
+        minModes: 1,
+        maxModes: 1,
+        modes: [
+          { text: `Don't pay ${pay}: ${name}'s mana is added`, effect: { kind: "sequence", effects: [] } },
+          { text: `Pay ${pay}: ${name} adds no mana`, effect: { kind: "sequence", effects: [] } },
+        ],
+        x: wait.x,
+        targets: [],
+        manaAbilityPick: {
+          ...wait,
+          manaFor: asked,
+          unless: { pay, rest: players.slice(i + 1), ...(manaForChoice !== undefined ? { manaForChoice } : {}) },
+        },
+      };
+      this.state.decisionSource =
+        source === undefined ? null : { object: wait.source, cardName: printedCardName(source), controller: source.controller };
+      return true;
+    }
+    return false;
+  }
+
   /** {@link resolveManaAbilityNow}, counted in `manaAbilitiesResolving`: what
    * a mana ability does (Pristine Talisman's life) is its own doing, not a
    * spell's that asked for a payment as it resolved. */
@@ -30409,6 +30498,9 @@ export class Game {
     /** The mana its own cost spent (605.3a), for the `ability-activated` it
      * announces — "if mana from a Treasure was spent to activate it" (Vazi). */
     manaSpent?: readonly SpentMana[],
+    /** Its "unless any player pays" (`add-mana`'s `unlessAnyPlayerPays`) has
+     * been asked of everyone, and nobody paid. */
+    unlessAsked = false,
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
@@ -30477,6 +30569,32 @@ export class Game {
       }
       // One outcome, or none: nothing to ask.
       manaColors = picks[0];
+    }
+    // "Unless any player pays {1}" (Rhystic Cave): each player in turn order
+    // who could pay is asked, the colour already chosen (rule 605.3b: still
+    // off the stack, nobody getting priority until it has resolved).
+    const unlessPay = theirs?.kind === "add-mana" ? theirs.unlessAnyPlayerPays : undefined;
+    if (unlessPay !== undefined && !unlessAsked) {
+      const index = abilityIndex ?? this.effectiveActivated(sourceId).indexOf(ability);
+      const order = this.apnapOrder().filter((p) => this.state.players[p]?.hasLost === false);
+      if (
+        index >= 0 &&
+        this.askManaUnless(order, unlessPay, {
+          source: sourceId,
+          abilityIndex: index,
+          activator: player,
+          x: chosenX,
+          picks: manaColors === undefined ? [] : [manaColors],
+          ...(grantedAbility !== undefined ? { grantedAbility } : {}),
+          ...(paidSets !== undefined ? { paidSets } : {}),
+          ...(sacrificedCouldMake !== undefined ? { sacrificedCouldMake } : {}),
+          ...(revealSince !== undefined ? { revealSince } : {}),
+          ...(manaSpent !== undefined && manaSpent.length > 0 ? { manaSpent } : {}),
+        }, manaFor)
+      ) {
+        this.afterPlayerAction(player);
+        return;
+      }
     }
     const base = this.makeResolutionContext(
       sourceId,
@@ -31687,6 +31805,10 @@ export class Game {
           ability.zone !== undefined ||
           ability.effect === null ||
           ability.effect.kind !== "add-mana" ||
+          // "Unless any player pays {1}" (Rhystic Cave): asks the table, and
+          // "activate only as an instant" keeps it out of a payment (its
+          // ruling) — activated by hand, at priority.
+          ability.effect.unlessAnyPlayerPays !== undefined ||
           // "Its activated abilities with {T} in their costs" (Serra
           // Bestiary): only those.
           (ability.cost.tap && this.abilitiesProhibited(player, object, true, true))
@@ -34759,7 +34881,7 @@ export class Game {
         {
           kind: "sequence",
           effects: [
-            { kind: "exile", target: "source" },
+            { kind: "exile", target: "source", warp: true },
             {
               kind: "conditional",
               condition: { kind: "this-way", what: "exiled" },
@@ -44163,7 +44285,7 @@ export class Game {
         if (exiled?.zone !== "exile" || haunted === undefined) return;
         exiled.haunting = { object: creature, zoneChangeCount: haunted.zoneChangeCount ?? 0 };
       },
-      exileObject: (target, untilSourceLeaves, withCounters, mayPlay, linked, airbend, until) => {
+      exileObject: (target, untilSourceLeaves, withCounters, mayPlay, linked, airbend, until, warp) => {
         // Rule 610.3a/b: exiled "until" something that has already happened
         // — its source gone, or back as a new object (400.7) — it isn't
         // exiled at all. A source phased out hasn't left (702.26d).
@@ -44224,6 +44346,10 @@ export class Game {
         // {2} — a card, a token having ceased to exist (111.7).
         if (airbend === true && exiled?.zone === "exile" && exiled.zoneChangeCount !== before && !exiled.isToken) {
           exiled.airbended = true;
+        }
+        // Warp's delayed exile (rule 702.185b): a warped card while it stays.
+        if (warp === true && exiled?.zone === "exile" && exiled.zoneChangeCount !== before && !exiled.isToken) {
+          exiled.warped = true;
         }
         // "Whenever you airbend" (rule 701.65b) — even if it couldn't be
         // exiled (the Avatar Aang ruling).
@@ -59475,7 +59601,16 @@ controlledBy,
   private beholdCandidates(player: PlayerId, spec: BeholdSpec, except?: ObjectId): ObjectId[] {
     if (this.state.players[player]?.hasLost !== false) return [];
     const ctx = { you: player };
-    const cards = this.state.zones.perPlayer[player].hand.filter(
+    // "Or a warped creature card you own in exile" (Close Encounter, rule
+    // 702.185b) takes the hand's place.
+    const cards = (
+      spec.orWarpedInExile === true
+        ? this.state.zones.shared.exile.filter((id) => {
+            const card = this.state.objects[id];
+            return card?.warped === true && card.owner === player;
+          })
+        : this.state.zones.perPlayer[player].hand
+    ).filter(
       (id) =>
         id !== except &&
         this.state.objects[id] !== undefined &&
@@ -59637,6 +59772,8 @@ controlledBy,
       destination: spec.exile === true ? "exile" : spec.fromHand === true ? "reveal" : "behold",
       leftover: "stay",
       behold,
+      // Close Encounter's choice isn't a behold: its own words.
+      ...(spec.orWarpedInExile === true ? { prompt: `Choose ${spec.text}` } : {}),
       ...(together !== undefined ? { together } : {}),
       ...(opts.exileLink !== undefined ? { exileLink: opts.exileLink } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
@@ -67556,7 +67693,18 @@ controlledBy,
         entry: { from: castFrom, cast: { by: caster, from: castFrom, ...(via !== undefined ? { via } : {}) } },
       },
       seq: this.state.eventSeq,
+      ...(this.state.objects[id]?.kicked === true && this.isPlainKicker(id) ? { kicked: true as const } : {}),
     };
+  }
+
+  /** Whether `id`'s kicker is a plain kicker (rule 702.33), not bargain, gift,
+   * "additional cost" or another keyword's optional cost — what makes a spell
+   * paying it a *kicked* spell to anything else (as `CardFilter.kicked` reads). */
+  private isPlainKicker(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined) return false;
+    const name = rulesTextName(object);
+    return this.registry.has(name) && this.registry.get(name).kicker?.keyword === undefined;
   }
 
   /** A spell's mana value while it's on the stack: printed, plus each {X}
@@ -76342,6 +76490,8 @@ controlledBy,
     delete object.plottedOnTurn;
     // Airbend's permission lasts "for as long as it remains exiled" (701.65a).
     delete object.airbended;
+    // A warped card is one while it stays in exile (702.185b).
+    delete object.warped;
     object.exiledFaceDown = undefined;
     // A new object isn't face down (400.7) — `moveObject` revealed it as it
     // left the battlefield (708.9); one entering face down is turned so below.

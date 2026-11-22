@@ -19964,9 +19964,27 @@ function parseFaceAsWritten(face, ctx = {}) {
       continue;
     }
     // "You may collect evidence N" (rule 701.59a), the same: "if evidence was collected" is the card's own.
-    if ((m = /^As an additional cost to cast ~, you may collect evidence (\d+)\.$/.exec(line))) {
-      out.kicker = { cost: "", keyword: "collect-evidence", collectEvidence: Number(m[1]) };
+    if ((m = /^As an additional cost to cast ~, you may collect evidence (\d+)\.(?: ~ costs \{(\d+)\} less to cast if evidence was collected\.)?$/.exec(line))) {
+      // "This spell costs {2} less to cast if evidence was collected" (Bite
+      // Down on Crime): the kicked cast's own reduction.
+      out.kicker = {
+        cost: "",
+        keyword: "collect-evidence",
+        collectEvidence: Number(m[1]),
+        ...(m[2] !== undefined ? { reduceGeneric: Number(m[2]) } : {}),
+      };
       continue;
+    }
+    // "You may sacrifice an artifact" (Voltage Surge, rule 118.8): a kicker by
+    // another name, its cost a sacrifice — "if this spell's additional cost
+    // was paid" is the card's own.
+    if (isSpell && (m = /^As an additional cost to cast ~, you may (sacrifice an? [^,]+?)\.$/.exec(line))) {
+      const text = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+      const also = kickerAlso(text);
+      if (also !== null) {
+        out.kicker = { cost: "", keyword: "additional cost", also };
+        continue;
+      }
     }
     // Behold (rule 701.4a) as a spell's cost — any spell's, a creature's too:
     // "behold an Elf or pay {2}" (a choice of whole costs), "you may behold a
@@ -24207,8 +24225,8 @@ function selfCostLine(line) {
  * it's cast from, or read off the spell or its source (`costModification`),
  * or null. */
 function spellCostStaticOf(line, text) {
-  const made = ({ caster, castFrom, castFromAnyones, notFromCastersHand, firstEachTurn, exceptOnCastersTurn, ...rest }) => {
-    const when = { ...(caster !== undefined ? { caster } : {}), ...(castFrom !== undefined ? { castFrom } : {}), ...(castFromAnyones !== undefined ? { castFromAnyones } : {}), ...(notFromCastersHand !== undefined ? { notFromCastersHand } : {}), ...(exceptOnCastersTurn !== undefined ? { exceptOnCastersTurn } : {}), ...(firstEachTurn !== undefined ? { firstEachTurn } : {}) };
+  const made = ({ caster, castFrom, castFromAnyones, notFromCastersHand, firstEachTurn, exceptOnCastersTurn, kicked, ...rest }) => {
+    const when = { ...(caster !== undefined ? { caster } : {}), ...(castFrom !== undefined ? { castFrom } : {}), ...(castFromAnyones !== undefined ? { castFromAnyones } : {}), ...(notFromCastersHand !== undefined ? { notFromCastersHand } : {}), ...(exceptOnCastersTurn !== undefined ? { exceptOnCastersTurn } : {}), ...(kicked !== undefined ? { kicked } : {}), ...(firstEachTurn !== undefined ? { firstEachTurn } : {}) };
     return { affects: { scope: "self" }, costModification: { ...rest, ...(Object.keys(when).length > 0 ? { when } : {}) }, text };
   };
   let m;
@@ -24279,6 +24297,11 @@ function spellCostStaticOf(line, text) {
   if ((m = /^The first (instant or sorcery|creature) spell you cast each turn costs \{(\d+)\} less to cast\.$/.exec(line))) {
     const applies = m[1] === "creature" ? { type: "creature" } : { typesAnyOf: ["instant", "sorcery"] };
     return made({ applies, reduceGeneric: Number(m[2]), caster: "you", firstEachTurn: true });
+  }
+  // "The first kicked spell you cast each turn costs {1} less to cast" (Vine
+  // Gecko): only a kicked cast, and only an earlier kicked spell uses it up.
+  if ((m = /^The first kicked spell you cast each turn costs \{(\d+)\} less to cast\.$/.exec(line))) {
+    return made({ applies: {}, reduceGeneric: Number(m[1]), caster: "you", kicked: true, firstEachTurn: true });
   }
   if ((m = /^Spells you cast from your graveyard( or from exile)? cost \{(\d+)\} less to cast\.$/.exec(line))) {
     return made({ applies: {}, caster: "you", castFrom: m[1] !== undefined ? ["graveyard", "exile"] : "graveyard", reduceGeneric: Number(m[2]) });

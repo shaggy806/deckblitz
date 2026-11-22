@@ -307,7 +307,10 @@ export interface SpellCastClause {
    * spell but one cast from its caster's own hand. */
   readonly notFromCastersHand?: true;
   /** Only a kicked spell (702.33d — announced before the total is worked out,
-   * 601.2b before 601.2f). */
+   * 601.2b before 601.2f): a plain kicker's, never bargain, gift or another
+   * keyword's optional cost. With `firstEachTurn`, only an earlier *kicked*
+   * spell uses it up — Vine Gecko's "the first kicked spell you cast each
+   * turn costs {1} less to cast" (`CastSpellRecord.kicked`). */
   readonly kicked?: true;
   /** Only a spell cast this way, the cost it pays announced before the total
    * is worked out (601.2b before 601.2f): `"flashback"` is "flashback costs

@@ -25313,3 +25313,25 @@ describe("transformed permanents", () => {
     expect(slabhorn.static[0].grantsTriggered[0].effect).toEqual({ kind: "ward", cost: { mana: "{2}" } });
   });
 });
+
+describe("optional additional costs and a kicked spell's discount (B338: Voltage Surge, Bite Down on Crime, Vine Gecko)", () => {
+  it("'you may sacrifice an artifact', 'collect evidence 6 … costs {2} less', 'the first kicked spell'", () => {
+    const card = (name: string, type_line: string, oracle_text: string) =>
+      parseFace({ name, type_line, mana_cost: "{R}", oracle_text }, { tokenFor: () => null });
+    expect(card("Voltage Surge", "Instant", "As an additional cost to cast this spell, you may sacrifice an artifact.").kicker).toEqual({
+      cost: "",
+      keyword: "additional cost",
+      also: { text: "Sacrifice an artifact", sacrifice: { filter: { type: "artifact" }, count: 1 } },
+    });
+    expect(
+      card(
+        "Bite Down on Crime",
+        "Sorcery",
+        "As an additional cost to cast this spell, you may collect evidence 6. This spell costs {2} less to cast if evidence was collected. (To collect evidence 6, exile cards with total mana value 6 or greater from your graveyard.)",
+      ).kicker,
+    ).toEqual({ cost: "", keyword: "collect-evidence", collectEvidence: 6, reduceGeneric: 2 });
+    expect(card("Vine Gecko", "Creature — Elemental Lizard", "The first kicked spell you cast each turn costs {1} less to cast.").static[0]).toMatchObject({
+      costModification: { applies: {}, reduceGeneric: 1, when: { caster: "you", kicked: true, firstEachTurn: true } },
+    });
+  });
+});

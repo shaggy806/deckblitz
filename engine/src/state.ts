@@ -1454,6 +1454,12 @@ export interface GameObject {
    * exist, rule 111.7); cleared on any zone change, which ends "for as long
    * as it remains exiled". */
   airbended?: boolean;
+  /** A **warped** card in exile (rule 702.185b): exiled by the delayed
+   * triggered ability a warp ability created (the `exile` effect's `warp`).
+   * Set only on a card; cleared on any zone change. What Close Encounter's
+   * "a warped creature card you own in exile" reads (`BeholdSpec
+   * .orWarpedInExile`). */
+  warped?: true;
   /** Exiled **face down** (rule 406.3): nobody may look at it but these
    * players — the one an instruction let look at it ("look at the top card
    * of that player's library, then exile it face down" — Edward Kenway), who
@@ -2343,6 +2349,16 @@ export interface ManaAbilityPick {
   readonly revealSince?: number;
   /** The mana spent on its cost (rule 605.3a), announced as it resolves. */
   readonly manaSpent?: readonly SpentMana[];
+  /** Not a colour but "unless any player pays {1}" (Rhystic Cave, `add-mana`'s
+   * `unlessAnyPlayerPays`): `manaFor` is the player asked, mode 0 declines
+   * and mode 1 pays `pay`; `rest` are the players still to ask, in turn
+   * order, and `picks[0]` the activation's own colours. `manaForChoice` is
+   * the activation's own `manaFor`, if it named one. */
+  readonly unless?: {
+    readonly pay: string;
+    readonly rest: readonly PlayerId[];
+    readonly manaForChoice?: PlayerId;
+  };
 }
 
 /** A permanent attached to another, in the stint (`zoneChangeCount`) it was
@@ -2655,6 +2671,11 @@ export interface CastSpellRecord {
   /** The game's event count as it was cast: which of two players' spells came
    * first (Sentinel Tower's "spells cast **before that spell** this turn"). */
   readonly seq?: number;
+  /** It was cast kicked — a plain kicker (rule 702.33d), not bargain, gift or
+   * another keyword's optional cost: what uses up "the first kicked spell you
+   * cast each turn" (Vine Gecko's `SpellCastClause.kicked` with
+   * `firstEachTurn`). */
+  readonly kicked?: true;
 }
 
 /** A `choose-permanents` effect's resolution, for its `then`, which runs once
