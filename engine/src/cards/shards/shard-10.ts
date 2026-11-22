@@ -850,6 +850,7 @@ import _poolSpectralGrasp from "../pool/spectral-grasp.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
 import _poolSpiderManMilesMorales from "../pool/spider-man-miles-morales.js";
+import _poolSpiderWomanSecretAgent from "../pool/spider-woman-secret-agent.js";
 import _poolSpikewheelAcrobat from "../pool/spikewheel-acrobat.js";
 import _poolSpirebluffCanal from "../pool/spirebluff-canal.js";
 import _poolSpiritEnKor from "../pool/spirit-en-kor.js";
@@ -1912,6 +1913,7 @@ const shard: CardShard = {
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,
     _poolSpiderManMilesMorales,
+    _poolSpiderWomanSecretAgent,
     _poolSpikewheelAcrobat,
     _poolSpirebluffCanal,
     _poolSpiritEnKor,

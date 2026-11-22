@@ -404,6 +404,7 @@ import _poolHildibrandManderville from "../pool/hildibrand-manderville.js";
 import _poolHiredBlade from "../pool/hired-blade.js";
 import _poolHobble from "../pool/hobble.js";
 import _poolHobgoblinDragoon from "../pool/hobgoblin-dragoon.js";
+import _poolHoldForRansom from "../pool/hold-for-ransom.js";
 import _poolHoldTheGates from "../pool/hold-the-gates.js";
 import _poolHolyFrazzleCannon from "../pool/holy-frazzle-cannon.js";
 import _poolHomewardPath from "../pool/homeward-path.js";
@@ -1474,6 +1475,7 @@ const shard: CardShard = {
     _poolHiredBlade,
     _poolHobble,
     _poolHobgoblinDragoon,
+    _poolHoldForRansom,
     _poolHoldTheGates,
     _poolHolyFrazzleCannon,
     _poolHomewardPath,

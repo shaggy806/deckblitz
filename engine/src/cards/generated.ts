@@ -3037,6 +3037,7 @@ import _poolBlotOut from "./pool/blot-out.js";
 import _poolBlowOffSteam from "./pool/blow-off-steam.js";
 import _poolBlowYourHouseDown from "./pool/blow-your-house-down.js";
 import _poolBlowflyInfestation from "./pool/blowfly-infestation.js";
+import _poolBludgeonBrawl from "./pool/bludgeon-brawl.js";
 import _poolBlueDragon from "./pool/blue-dragon.js";
 import _poolBlueElementalBlast from "./pool/blue-elemental-blast.js";
 import _poolBlueLoyalRaptor from "./pool/blue-loyal-raptor.js";
@@ -8506,6 +8507,7 @@ import _poolEmissaryGreen from "./pool/emissary-green.js";
 import _poolEmissaryOfDespair from "./pool/emissary-of-despair.js";
 import _poolEmissaryOfGrudges from "./pool/emissary-of-grudges.js";
 import _poolEmissaryOfHope from "./pool/emissary-of-hope.js";
+import _poolEmissaryOfSoulfire from "./pool/emissary-of-soulfire.js";
 import _poolEmissaryOfSunrise from "./pool/emissary-of-sunrise.js";
 import _poolEmissaryOfTheSleepless from "./pool/emissary-of-the-sleepless.js";
 import _poolEmmaraSoulOfTheAccord from "./pool/emmara-soul-of-the-accord.js";
@@ -13181,6 +13183,7 @@ import _poolHogaakArisenNecropolis from "./pool/hogaak-arisen-necropolis.js";
 import _poolHokoriDustDrinker from "./pool/hokori-dust-drinker.js";
 import _poolHoldAtBay from "./pool/hold-at-bay.js";
 import _poolHoldForQuestioning from "./pool/hold-for-questioning.js";
+import _poolHoldForRansom from "./pool/hold-for-ransom.js";
 import _poolHoldTheGates from "./pool/hold-the-gates.js";
 import _poolHoldTheLine from "./pool/hold-the-line.js";
 import _poolHoldoutSettlement from "./pool/holdout-settlement.js";
@@ -26400,6 +26403,7 @@ import _poolSpiderSuit from "./pool/spider-suit.js";
 import _poolSpiderUk from "./pool/spider-uk.js";
 import _poolSpiderUmbra from "./pool/spider-umbra.js";
 import _poolSpiderVerse from "./pool/spider-verse.js";
+import _poolSpiderWomanSecretAgent from "./pool/spider-woman-secret-agent.js";
 import _poolSpiderWomanStunningSavior from "./pool/spider-woman-stunning-savior.js";
 import _poolSpidersManHeroicHorde from "./pool/spiders-man-heroic-horde.js";
 import _poolSpidersilkArmor from "./pool/spidersilk-armor.js";
@@ -36846,6 +36850,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlowOffSteam,
   _poolBlowYourHouseDown,
   _poolBlowflyInfestation,
+  _poolBludgeonBrawl,
   _poolBlueDragon,
   _poolBlueElementalBlast,
   _poolBlueLoyalRaptor,
@@ -42315,6 +42320,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmissaryOfDespair,
   _poolEmissaryOfGrudges,
   _poolEmissaryOfHope,
+  _poolEmissaryOfSoulfire,
   _poolEmissaryOfSunrise,
   _poolEmissaryOfTheSleepless,
   _poolEmmaraSoulOfTheAccord,
@@ -46990,6 +46996,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHokoriDustDrinker,
   _poolHoldAtBay,
   _poolHoldForQuestioning,
+  _poolHoldForRansom,
   _poolHoldTheGates,
   _poolHoldTheLine,
   _poolHoldoutSettlement,
@@ -60209,6 +60216,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSpiderUk,
   _poolSpiderUmbra,
   _poolSpiderVerse,
+  _poolSpiderWomanSecretAgent,
   _poolSpiderWomanStunningSavior,
   _poolSpidersManHeroicHorde,
   _poolSpidersilkArmor,
@@ -70668,6 +70676,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blow-off-steam": _poolBlowOffSteam,
   "pool/blow-your-house-down": _poolBlowYourHouseDown,
   "pool/blowfly-infestation": _poolBlowflyInfestation,
+  "pool/bludgeon-brawl": _poolBludgeonBrawl,
   "pool/blue-dragon": _poolBlueDragon,
   "pool/blue-elemental-blast": _poolBlueElementalBlast,
   "pool/blue-loyal-raptor": _poolBlueLoyalRaptor,
@@ -76137,6 +76146,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emissary-of-despair": _poolEmissaryOfDespair,
   "pool/emissary-of-grudges": _poolEmissaryOfGrudges,
   "pool/emissary-of-hope": _poolEmissaryOfHope,
+  "pool/emissary-of-soulfire": _poolEmissaryOfSoulfire,
   "pool/emissary-of-sunrise": _poolEmissaryOfSunrise,
   "pool/emissary-of-the-sleepless": _poolEmissaryOfTheSleepless,
   "pool/emmara-soul-of-the-accord": _poolEmmaraSoulOfTheAccord,
@@ -80812,6 +80822,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hokori-dust-drinker": _poolHokoriDustDrinker,
   "pool/hold-at-bay": _poolHoldAtBay,
   "pool/hold-for-questioning": _poolHoldForQuestioning,
+  "pool/hold-for-ransom": _poolHoldForRansom,
   "pool/hold-the-gates": _poolHoldTheGates,
   "pool/hold-the-line": _poolHoldTheLine,
   "pool/holdout-settlement": _poolHoldoutSettlement,
@@ -94031,6 +94042,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/spider-uk": _poolSpiderUk,
   "pool/spider-umbra": _poolSpiderUmbra,
   "pool/spider-verse": _poolSpiderVerse,
+  "pool/spider-woman-secret-agent": _poolSpiderWomanSecretAgent,
   "pool/spider-woman-stunning-savior": _poolSpiderWomanStunningSavior,
   "pool/spiders-man-heroic-horde": _poolSpidersManHeroicHorde,
   "pool/spidersilk-armor": _poolSpidersilkArmor,
