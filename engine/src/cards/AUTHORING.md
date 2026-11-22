@@ -7709,7 +7709,7 @@ clause (section 9):
   of theirs). "Another target creature attacking **the same player or
   planeswalker**" (Kitesail Skirmisher) is `attackingSameAsSource: true`,
   read against the source's attack now, in a target slot too.
-- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, doneBy?, by?, from?, notFrom?, against? }` —
+- `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, doneBy?, by?, counter?, from?, notFrom?, against? }` —
   (`what: "destroyed"` is each permanent `who` controlled that was destroyed —
   rule 701.8b: a "destroy" effect, or the lethal-damage and deathtouch
   state-based actions, never a sacrifice, 0 toughness or the legend rule —
@@ -7724,6 +7724,12 @@ clause (section 9):
   cast this turn was countered by a spell or ability an opponent controlled"
   is `{ what: "countered", who: "you", filter: { type: "creature" }, by:
   "opponent" }`.)
+  (`what: "counters-removed"` is each removal of counters from a permanent `who` controlled as they came off —
+  by a cost, an effect or nobody — and `counter` keeps one kind (it narrows `"counters-put"` too): Churning
+  Reservoir's "if an oil counter was removed from a permanent you controlled this turn" is `{ what:
+  "counters-removed", counter: "oil" }`; its "or a permanent with an oil counter on it was put into a graveyard
+  this turn" `{ what: "to-graveyard", who: "any-player", from: ["battlefield"], filter: { counters: { kind:
+  "oil", compare: { op: "gte", n: 1 } } } }`, read as it left.)
   (`window: "this-game"` reads the whole game's count of a view that is its kind, unfiltered
   — the journal's entries last only a round: H.M.S. Bounty's "haven't begun an extra turn this
   game" is `{ kind: "not", of: { kind: "turn-history", what: "extra-turn-began", window:

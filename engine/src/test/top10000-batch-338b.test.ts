@@ -15,6 +15,7 @@ import {
   destroy,
   enter,
   grant,
+  lands,
   life,
   named,
   pickTargets,
@@ -28,8 +29,11 @@ import {
 } from "./harness.js";
 
 /** Put `n` fuse counters on `id` the way an effect does. */
-const fuse = (game: Game, id: ObjectId, n: number): void =>
-  game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter: "fuse", amount: n }, [ref(id)]);
+const fuse = (game: Game, id: ObjectId, n: number, counter = "fuse"): void =>
+  game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter, amount: n }, [ref(id)]);
+/** Remove `n` counters of `counter` from `id` the way an effect does. */
+const unfuse = (game: Game, id: ObjectId, n: number, counter: string): void =>
+  game.debugApplyEffect(A, { kind: "remove-counter", target: 0, counter, amount: n }, [ref(id)]);
 
 describe("batch 338b — Bishop of Binding", () => {
   it("gives a Vampire +X/+X, X the exiled card's power, and the card comes back when it leaves", () => {
@@ -107,5 +111,57 @@ describe("batch 338b — Bomb Squad (a state trigger about each creature)", () =
     expect(counters(game, giant, "fuse")).toBe(2);
     expect(counters(game, bears, "fuse")).toBe(0);
     expect(named(game, "Bomb Squad").length).toBe(1);
+  });
+});
+
+describe("batch 338b — Churning Reservoir (counters removed this turn)", () => {
+  const goblins = (game: Game): number => named(game, "Phyrexian Goblin Token").length;
+
+  it("activates only once an oil counter came off a permanent you controlled", () => {
+    const { game } = table();
+    const reservoir = spawn(game, "Churning Reservoir");
+    lands(game, "Mountain", 4);
+    const bears = spawn(game, "Grizzly Bears");
+    fuse(game, bears, 2, "oil");
+    expect(() => activate(game, reservoir)).toThrow();
+    // A +1/+1 counter isn't an oil counter.
+    fuse(game, bears, 1, "+1/+1");
+    unfuse(game, bears, 1, "+1/+1");
+    expect(() => activate(game, reservoir)).toThrow();
+    unfuse(game, bears, 1, "oil");
+    activate(game, reservoir);
+    expect(goblins(game)).toBe(1);
+  });
+
+  it("an opponent's permanent losing one doesn't count; one with an oil counter dying does, anyone's", () => {
+    const { game } = table();
+    const reservoir = spawn(game, "Churning Reservoir");
+    lands(game, "Mountain", 4);
+    const theirs = spawn(game, "Grizzly Bears", B);
+    fuse(game, theirs, 2, "oil");
+    unfuse(game, theirs, 1, "oil");
+    expect(() => activate(game, reservoir)).toThrow();
+    destroy(game, theirs);
+    activate(game, reservoir);
+    expect(goblins(game)).toBe(1);
+  });
+
+  it("a permanent put into a graveyard with no oil counter doesn't count", () => {
+    const { game } = table();
+    const reservoir = spawn(game, "Churning Reservoir");
+    lands(game, "Mountain", 4);
+    destroy(game, spawn(game, "Grizzly Bears"));
+    expect(() => activate(game, reservoir)).toThrow();
+  });
+
+  it("puts an oil counter on another nontoken artifact or creature you control at your upkeep", () => {
+    const { game, a } = table();
+    const reservoir = spawn(game, "Churning Reservoir");
+    const bears = spawn(game, "Grizzly Bears");
+    pickTargets(a, bears);
+    toStep(game, "upkeep");
+    settle(game);
+    expect(counters(game, bears, "oil")).toBe(1);
+    expect(counters(game, reservoir, "oil")).toBe(0);
   });
 });

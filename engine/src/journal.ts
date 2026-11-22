@@ -71,6 +71,12 @@ export type JournalKind =
   /** `player` put `amount` counters of `counter` on a permanent (every token of
    * a stack counted); `was`: the permanent as they went on. */
   | "counters-put"
+  /** `amount` counters of `counter` were removed from a permanent `player`
+   * controlled (every token of a stack counted), by anyone or by nothing (a
+   * cost, an effect, -1/-1 and +1/+1 counters annihilating, rule 704.5q);
+   * `by`: who removed them, where a player did; `was`: the permanent as it
+   * was once they were off. */
+  | "counters-removed"
   /** A permanent `player` controlled became tapped. */
   | "tapped"
   /** `player` turned a permanent face up (701.40b). */
@@ -231,7 +237,7 @@ export interface JournalEntry {
    * combat phase (`to-graveyard`, by any means: "wasn't put there this
    * combat"). */
   readonly combat?: number;
-  /** The kind of counter (`counters-put`). */
+  /** The kind of counter (`counters-put`, `counters-removed`). */
   readonly counter?: string;
   /** The kind's own qualifier (`scried`: scry or surveil; `activated`: the
    * ability's kind; `targeted`: a spell's or an ability's; `to-graveyard`:
@@ -471,6 +477,11 @@ export type JournalWhat =
   | "turned-face-up"
   | "regenerated"
   | "counters-put"
+  /** Counters removed from a permanent, the list its controller's as they
+   * came off: Churning Reservoir's "if an oil counter was removed from a
+   * permanent you controlled this turn" (`turn-history`'s `counter` names
+   * the kind). */
+  | "counters-removed"
   | "tapped"
   /** `activated` entries for any ability of a permanent, mana and loyalty
    * abilities included (`how: "ability"`): with a `journaled` clause, Cut
@@ -589,6 +600,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   "turned-face-up": { kind: "turned-face-up" },
   regenerated: { kind: "regenerated" },
   "counters-put": { kind: "counters-put" },
+  "counters-removed": { kind: "counters-removed" },
   tapped: { kind: "tapped" },
   "abilities-activated": { kind: "activated", match: (e) => e.how === "ability" },
   "loyalty-activated": { kind: "activated", match: (e) => e.how === "loyalty" },

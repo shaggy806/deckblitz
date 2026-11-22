@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Counters removed this turn — built 2026-11-22
+
+The key `condition:oil-counter-removed-this-turn`: the journal kind and word `counters-removed` (recorded from
+`counter-removed` events off a permanent, the list its controller's as they came off, `by` who removed them), and
+`turn-history`'s `counter`, keeping one kind of counter (it narrows `counters-put` too). Churning Reservoir (19872), its
+other half a `to-graveyard` read of permanents with an oil counter as they left. `test/top10000-batch-338b.test.ts`.
+
 ### A state trigger about each permanent — built 2026-11-22
 
 The key `trigger:state-trigger-per-permanent`: the `"state"` trigger's `each: CardFilter` (rule 603.8 per permanent,

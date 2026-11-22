@@ -64237,6 +64237,23 @@ controlledBy,
         });
         return;
       }
+      case "counter-removed": {
+        // From a permanent only: a card's counters in another zone (a
+        // suspended card's time counters) weren't removed "from a permanent".
+        const permanent = this.state.objects[event.object];
+        if (permanent === undefined || permanent.zone !== "battlefield" || event.amount <= 0) return;
+        add({
+          kind: "counters-removed",
+          player: permanent.controller,
+          ...(event.by !== undefined ? { by: event.by } : {}),
+          object: event.object,
+          stint: stintOf(event.object),
+          was: this.takeLastKnown(event.object),
+          counter: event.counter,
+          amount: event.amount * (event.tokens ?? 1),
+        });
+        return;
+      }
       case "cards-discarded":
         for (const id of event.objects) add({ kind: "discarded", player: event.player, object: id, stint: stintOf(id) });
         return;

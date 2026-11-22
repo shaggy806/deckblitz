@@ -1640,6 +1640,11 @@ export type StaticCondition =
        * `"countered"` — Summoning Trap's "if a creature spell you cast this
        * turn was countered by a spell or ability an opponent controlled"). */
       readonly by?: "you" | "opponent";
+      /** Only the entries about counters of this kind (`"counters-put"`,
+       * `"counters-removed"`) — Churning Reservoir's "if an **oil** counter
+       * was removed from a permanent you controlled this turn" (`{ what:
+       * "counters-removed", counter: "oil" }`). */
+      readonly counter?: string;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
       /** Only what was done to this player — an attack at them (the player,

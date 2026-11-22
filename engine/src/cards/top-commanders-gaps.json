@@ -2932,6 +2932,7 @@
   "amount:exiled-with-source-count",
   "amount:exiled-with-source-power",
   "trigger:state-trigger-per-permanent",
+  "condition:oil-counter-removed-this-turn",
   "effect:player-mana-ability-until-eot",
   "effect:choose-new-targets-any-number",
   "static:cost-reduction-targeting-enchanted-player",
