@@ -77,6 +77,10 @@ describe("modal activated abilities (rule 700.2b)", () => {
     setCounters(game, jitte, "charge", 2);
     activate(game, jitte, 0, { modes: [0] });
     expect(pt(game, bear)).toEqual({ power: 4, toughness: 4 });
+    // The log names the mode in its own words.
+    expect(game.state.eventLog.flatMap((e) => (e.type === "modes-chosen" ? [e.texts] : [])).at(-1)).toEqual([
+      "Equipped creature gets +2/+2 until end of turn.",
+    ]);
     activate(game, jitte, 0, { modes: [2] });
     expect(life(game)).toBe(22);
     expect(counters(game, jitte, "charge")).toBe(0);

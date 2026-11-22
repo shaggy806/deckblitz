@@ -245,6 +245,17 @@ describe('log lines that name where a thing went or came from', () => {
     expect(left('shuffle')).toBe('Hill Giant leaves the battlefield → library (shuffled in)')
   })
 
+  it('names a chosen mode in its own words, by number only where it has none', () => {
+    expect(line({ type: 'modes-chosen', source: src, player: p1, modes: [1], texts: ['You gain 2 life.'] })).toBe(
+      'Tidebinder — Toby chose: You gain 2 life',
+    )
+    expect(
+      line({ type: 'modes-chosen', source: src, player: p1, modes: [0, 2], texts: ['Draw a card.', 'You gain 2 life.'], modal: true }),
+    ).toBe('Tidebinder — Toby chose: Draw a card; You gain 2 life')
+    expect(line({ type: 'modes-chosen', source: src, player: p1, modes: [1] })).toBe('Tidebinder — Toby chose mode(s) 2')
+    expect(line({ type: 'modes-chosen', source: src, player: p1, modes: [] })).toBe('Tidebinder — Toby declined')
+  })
+
   it('words a chosen card by its destination', () => {
     expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o] })).toBe('Toby takes Hill Giant')
     expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o], to: 'battlefield' })).toBe(

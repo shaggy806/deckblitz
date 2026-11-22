@@ -46,6 +46,9 @@ describe("Deem Inferior", () => {
     const lib = library(game, B);
     expect(lib[lib.length - 1]).toBe(bears);
     expect(leftTo(game, bears)).toBe("bottom");
+    expect(game.state.eventLog.flatMap((e) => (e.type === "modes-chosen" ? [e.texts] : [])).at(-1)).toEqual([
+      "Put it on the bottom of your library",
+    ]);
   });
 
   it("can't target a land", () => {

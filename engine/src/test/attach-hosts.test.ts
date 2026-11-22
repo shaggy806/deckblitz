@@ -67,6 +67,10 @@ describe("One Last Job: attached to a creature you control, chosen as it enters"
     const rancor = toGraveyard(game, "Rancor");
     const seen = pickEnchant(a, () => giant);
     cast(game, toHand(game, "One Last Job"), { modes: [2], targets: [ref(rancor)] });
+    // The log names the mode in its own words.
+    const logged = game.state.eventLog.flatMap((e) => (e.type === "modes-chosen" ? [e.texts] : [])).at(-1);
+    expect(logged).toHaveLength(1);
+    expect(logged![0]).toMatch(/Aura or Equipment/);
     expect(seen.asked).toBe(1);
     expect([...seen.options].sort()).toEqual([bears, giant].sort());
     expect(seen.players).toEqual([]);

@@ -1937,6 +1937,9 @@ export type GameEvent =
       readonly source: ObjectId;
       readonly player?: PlayerId;
       readonly modes: readonly number[];
+      /** The chosen modes' texts, in `modes`' order, for the log: what was
+       * chosen, not its number. Absent when a mode has no text. */
+      readonly texts?: readonly string[];
       /** The modes of a modal spell or ability (rule 700.2), chosen as it's
        * cast, activated or put on the stack — not a "you may", a vote or a
        * choice made on resolution. What "face a dilemma" reads. */

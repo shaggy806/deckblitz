@@ -2085,6 +2085,16 @@ type LeaveEvent = Extract<
   { type: "permanent-left-battlefield" | "permanent-destroyed" | "permanent-sacrificed" }
 >;
 
+/** The chosen modes' texts for the log (`modes-chosen`'s `texts`): nothing
+ * unless every one of them has one. */
+function modeTextsOf(
+  modes: readonly { readonly text?: string }[],
+  chosen: readonly number[],
+): { readonly texts?: readonly string[] } {
+  const texts = chosen.map((i) => modes[i]?.text ?? "");
+  return texts.length > 0 && texts.every((t) => t !== "") ? { texts } : {};
+}
+
 function isLeaveEvent(event: GameEvent): event is LeaveEvent {
   return (
     event.type === "permanent-left-battlefield" ||
@@ -9926,7 +9936,7 @@ export class Game {
       const prevents = (modeIndices[0] ?? 0) === 0;
       this.state.replacementAnswers = { ...(this.state.replacementAnswers ?? {}), [answers]: [prevents ? "prevent" : "decline"] };
       // "… declined" in the log when it doesn't.
-      this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: prevents ? [0] : [] });
+      this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: prevents ? [0] : [], ...modeTextsOf(awaiting.modes, prevents ? [0] : []) });
       if (resume.site === "combat-damage") this.promptNextDamageAssignment();
       const next = this.state.awaiting as AwaitingDecision | null;
       this.prepareForPriority(next?.player ?? this.activePlayer);
@@ -10034,7 +10044,14 @@ export class Game {
       if (awaiting.abilityKey !== undefined && ordered.length > 0) {
         this.recordModesChosen(awaiting.abilityKey, awaiting.chosenEver === true, ordered, player);
       }
-      this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: ordered, modal: true });
+      this.emit({
+        type: "modes-chosen",
+        source: awaiting.source,
+        player,
+        modes: ordered,
+        modal: true,
+        ...modeTextsOf(awaiting.modes, [...modeIndices].sort((a, b) => a - b)),
+      });
       if (trigger !== undefined && this.placeTriggerOnStack({ ...trigger, modes: ordered }) === "paused") return;
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
@@ -10139,7 +10156,7 @@ export class Game {
     }
     // A secret vote's answer stays out of the log until the votes are
     // revealed together (`votes-finished`).
-    if (awaiting.secret !== true) this.emit({ type: "modes-chosen", source, player, modes: own });
+    if (awaiting.secret !== true) this.emit({ type: "modes-chosen", source, player, modes: own, ...modeTextsOf(awaiting.modes, ordered) });
     // The X paid for the choice is what the mode's effect reads (Flameblast
     // Dragon's "it deals X damage"), overriding the ability's own X, which is
     // 0 on a trigger. A villainous choice's option is its controller's
@@ -26010,7 +26027,14 @@ export class Game {
     if (sortedModes !== undefined) {
       // Chosen by the opponent its caster named (rule 700.2e), when one did.
       const modesBy = this.otherChoice?.for === cardId ? this.otherChoice.chooser : player;
-      this.emit({ type: "modes-chosen", source: cardId, player: modesBy, modes: [...sortedModes], modal: true });
+      this.emit({
+        type: "modes-chosen",
+        source: cardId,
+        player: modesBy,
+        modes: [...sortedModes],
+        modal: true,
+        ...modeTextsOf(def.castModal?.modes ?? [], sortedModes),
+      });
     }
     // The rest of the additional cost (rule 601.2f-h). Paid as the spell is
     // cast, so — like the sacrifice above — it stands even if the spell is
@@ -29955,7 +29979,14 @@ export class Game {
     if (modeOffer !== null && modes !== undefined) {
       this.state.objects[abilityId].chosenModes = [...modes];
       if (modeOffer.key !== undefined) this.recordModesChosen(modeOffer.key, modeOffer.ever, modes, player);
-      this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes], modal: true });
+      this.emit({
+        type: "modes-chosen",
+        source: sourceId,
+        player,
+        modes: [...modes],
+        modal: true,
+        ...modeTextsOf(ability.effect?.kind === "modal" ? ability.effect.modes : [], modes),
+      });
     }
     const granterRef = granterOfRef(grantedAbility);
     // Its source as it's activated (602.2i), its costs paid: "for as long as

@@ -746,9 +746,12 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.from)}'s draw is redirected — ${who(event.to)} draws instead`
     case 'modes-chosen': {
       const chooser = event.player === undefined ? '' : `${who(event.player)} `
-      return event.modes.length > 0
-        ? `${name(event.source)} — ${chooser}chose mode(s) ${event.modes.map((m) => m + 1).join(', ')}`
-        : `${name(event.source)} — ${chooser}declined`
+      if (event.modes.length === 0) return `${name(event.source)} — ${chooser}declined`
+      // What was chosen, in its own words; its number only where it has none.
+      const texts = event.texts
+      return texts !== undefined && texts.length === event.modes.length
+        ? `${name(event.source)} — ${chooser}chose: ${texts.map((t) => t.replace(/\.$/, '')).join('; ')}`
+        : `${name(event.source)} — ${chooser}chose mode(s) ${event.modes.map((m) => m + 1).join(', ')}`
     }
     case 'permanent-returned-to-hand':
       return `${name(event.object)} returns to ${who(event.owner)}'s hand`

@@ -3642,7 +3642,7 @@ engine terms. A second thing to check is a second test.
 ### Selvala's Stampede: later voters see the earlier votes
 - **Do:** Cast Selvala's Stampede and vote 'wild'. Switch to Bob and look before voting, then at Carol's.
 - **Expect:** Bob can tell how you voted, and Carol can tell both earlier votes.
-- **Not a bug:** The log words a vote as 'Selvala's Stampede — Bob chose mode(s) 2' — but report it if that isn't enough to tell how someone voted.
+- **Not a bug:** The log words a vote as 'Selvala's Stampede — Bob chose: ' and the option's text — but report it if that isn't enough to tell how someone voted.
 
 ### Selvala's Stampede: two wild votes and one free
 - **Do:** Cast Selvala's Stampede. Vote: you 'wild', Bob 'free', Carol 'wild'. At the hand prompt, pick Serra Angel.
@@ -6056,7 +6056,7 @@ engine terms. A second thing to check is a second test.
 
 ### Library of Lat-Nam: Bob picks the mode
 - **Do:** Cast Library of Lat-Nam. As Bob, choose the search. As you, pass priority.
-- **Expect:** Bob, not you, is shown the two modes, and the log says Bob chose mode 2. As it resolves you search your library for a card to put into your hand.
+- **Expect:** Bob, not you, is shown the two modes, and the log says what Bob chose, in the mode's own words. As it resolves you search your library for a card to put into your hand.
 
 ### Barrin's Spite: Bob picks the one he sacrifices
 - **Do:** Cast Barrin's Spite targeting Grizzly Bears and Hill Giant. As Bob, click Grizzly Bears and Confirm.
@@ -8752,7 +8752,7 @@ Each board's die comes up 4.
 ### Verdant Mastery: in a 4-player game, you choose which opponent gets a land
 - **Do:** In this 4-player game, cast Verdant Mastery (only its {3}{G} cost is affordable). Pick all four basic lands, click "Choose Carol", pick Plains, then Island and Swamp.
 - **Expect:** Once the four are revealed, the banner "Verdant Mastery — choose one" offers "Choose Bob", "Choose Carol" and "Choose Dave". Then the popup "Choose one to put onto the battlefield tapped under Carol's control", then "Choose 2 to put onto the battlefield tapped — the other goes into your hand". Plains enters tapped under Carol's control, Island and Swamp tapped under yours, and Forest goes to your hand.
-- **Not a bug:** The History says "Alice chose mode(s) 2" for the opponent chosen.
+- **Not a bug:** The History says "Alice chose: " and the option's text for the opponent chosen.
 
 ## Your graveyard chosen from by an opponent (2026-11-17)
 
