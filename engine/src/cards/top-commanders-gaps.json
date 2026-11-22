@@ -3204,7 +3204,8 @@
   "effect:change-target-to-enchanted",
   "effect:change-targets-trigger-spell",
   "effect:change-targets-same-new-target",
-  "filter:could-have-attacked-this-turn"
+  "filter:could-have-attacked-this-turn",
+  "effect:discard-any-number-at-random"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
