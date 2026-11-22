@@ -3226,7 +3226,8 @@
   "effect:host-of-attached-permanent",
   "target:controlled-by-chosen-player",
   "effect:put-onto-battlefield-blocking",
-  "filter:controller-controls-filter"
+  "filter:controller-controls-filter",
+  "effect:discard-one-of-drawn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

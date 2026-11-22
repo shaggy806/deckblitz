@@ -5092,6 +5092,17 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(target player|target opponent) takes an extra turn after this one`).exec(s))) {
     return { kind: "take-extra-turn", target: slot(m[1]) };
   }
+  // "Draw three cards, then discard one of them" (Casting of Bones, Soldevi
+  // Sage): only a card drawn this way can be discarded.
+  if ((m = re(`draw ${N} cards?, then discard one of them`).exec(s))) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: amount(m[1]) },
+        { kind: "discard", target: "you", amount: 1, filter: { thisWay: "drawn" } },
+      ],
+    };
+  }
   if ((m = re(`draw ${N} cards?, then discard ${N} cards?`).exec(s))) {
     return {
       kind: "sequence",
