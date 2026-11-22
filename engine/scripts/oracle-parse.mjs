@@ -6949,6 +6949,15 @@ export function parseSentence(sentence, ctx) {
     if ((m = re(`(?:it|that creature|that land|that permanent) ${HELD}`).exec(s))) {
       return { kind: "tap", target: heldObject, ...heldThrough(m[1], m[2]) };
     }
+    // "That creature doesn't untap during its controller's untap step / can't
+    // become untapped for as long as you control ~" (Dungeon Geists,
+    // Spider-Woman, Secret Agent): the untap step's restriction, or every
+    // untap's prohibition, bound to that object.
+    if ((m = re("(?:it|that creature|that permanent) (doesn't untap during its controller's untap step|can't become untapped) for as long as you control ~").exec(s))) {
+      return m[1].startsWith("can't")
+        ? { kind: "prohibit", prohibits: [{ act: "untap", target: heldObject }], duration: "while-you-control-source" }
+        : { kind: "restrict", target: heldObject, restrictions: ["doesnt-untap"], duration: "while-you-control-source" };
+    }
     if (ctx.targets.length === 1 && re("tap that creature").test(s)) return { kind: "tap", target: 0 };
     if (ctx.targets.length === 1 && re("prevent all combat damage that would be dealt by that creature this turn").test(s)) {
       return { kind: "damage-rule", by: { target: 0 }, combat: true };

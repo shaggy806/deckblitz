@@ -3176,7 +3176,8 @@
   "effect:conditional-exact-mode-count",
   "effect:sacrifice-all-but-dynamic",
   "effect:discard-chosen-nontargeted-player",
-  "effect:destroy-all-not-chosen"
+  "effect:destroy-all-not-chosen",
+  "effect:cant-become-untapped-while-you-control-source"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

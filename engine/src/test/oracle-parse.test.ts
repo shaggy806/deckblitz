@@ -25043,3 +25043,32 @@ describe("a counter put, then a reflexive ability per counter put", () => {
     });
   });
 });
+
+describe("untap locks for as long as you control the source", () => {
+  it("reads the untap step's restriction and the can't-become-untapped prohibition (Dungeon Geists, Spider-Woman)", () => {
+    const face = (text: string) =>
+      parseFace({ name: "Test Card", type_line: "Creature — Spirit", power: "3", toughness: "3", oracle_text: text });
+    const geists = face(
+      "When this creature enters, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control this creature.",
+    );
+    expect(geists.complete).toBe(true);
+    expect(geists.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "tap", target: 0 },
+        { kind: "restrict", target: 0, restrictions: ["doesnt-untap"], duration: "while-you-control-source" },
+      ],
+    });
+    const woman = face(
+      "When this creature enters, tap target creature an opponent controls. That creature can't become untapped for as long as you control this creature.",
+    );
+    expect(woman.complete).toBe(true);
+    expect(woman.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "tap", target: 0 },
+        { kind: "prohibit", prohibits: [{ act: "untap", target: 0 }], duration: "while-you-control-source" },
+      ],
+    });
+  });
+});
