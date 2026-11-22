@@ -23452,6 +23452,24 @@ describe("cumulative upkeep from the top of the library, and 'when a player does
   });
 });
 
+describe("'whenever you pay this enchantment's cumulative upkeep' (Hibernation's End)", () => {
+  it("the paid event as a trigger", () => {
+    const end = parseFace(
+      {
+        name: "Hibernation's End",
+        type_line: "Enchantment",
+        mana_cost: "{4}{G}",
+        oracle_text:
+          "Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever you pay this enchantment's cumulative upkeep, you may search your library for a creature card with mana value equal to the number of age counters on this enchantment, put it onto the battlefield, then shuffle.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(end.triggered[1]).toMatchObject({
+      trigger: { on: "event", event: "cumulative-upkeep-paid", who: "self" },
+    });
+  });
+});
+
 describe("cumulative upkeep—discard a card (Vexing Sphinx)", () => {
   it("a discard repeated per age counter, and the dies trigger's draw for each", () => {
     const sphinx = parseFace(

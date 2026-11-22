@@ -864,6 +864,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} manifests dread`
     case 'cumulative-upkeep-unpaid':
       return `${who(event.player)} doesn't pay ${possessive(name(event.object))} cumulative upkeep`
+    case 'cumulative-upkeep-paid':
+      return `${who(event.player)} pays ${possessive(name(event.object))} cumulative upkeep`
     // Never logged: each asks the triggers about deaths and leaves that have
     // their own events (`Game.emit`).
     case 'permanents-died':

@@ -10737,6 +10737,16 @@ export type EffectSpec =
       readonly kind: "cumulative-upkeep-unpaid";
     }
   | {
+      /** Cumulative upkeep was paid (rule 702.24a): the
+       * `cumulative-upkeep-paid` event, naming this effect's controller and
+       * its source, for "whenever you pay this enchantment's cumulative
+       * upkeep" (Hibernation's End). Added by the engine after whichever
+       * option of a cumulative upkeep's `unless` is taken (`Game.optionModes`,
+       * told by the `cumulative-upkeep-unpaid` its "if you don't" begins
+       * with), never authored. */
+      readonly kind: "cumulative-upkeep-paid";
+    }
+  | {
       /** "Then **note** your life total" (Sigarda's Splendor): the source
        * permanent keeps `amount`, read now, as the number it last noted —
        * `GameObject.chosenOnEnter`, where a `choose-value`'s `remember` and
@@ -13995,6 +14005,9 @@ export interface EffectApi {
   /** Announce that this effect's controller didn't pay its source's
    * cumulative upkeep (`cumulative-upkeep-unpaid`). */
   cumulativeUpkeepUnpaid(): void;
+  /** Announce that this effect's controller paid its source's cumulative
+   * upkeep (`cumulative-upkeep-paid`). */
+  cumulativeUpkeepPaid(): void;
   /** Change life for a whole scope (`gain-life` / `lose-life` with `who`). */
   changeLifeScoped(who: PlayerScope, delta: number): void;
   /** The concrete types a {@link BoardManaList} names right now, read from
@@ -25220,6 +25233,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "cumulative-upkeep-unpaid":
       ctx.cumulativeUpkeepUnpaid();
+      return;
+    case "cumulative-upkeep-paid":
+      ctx.cumulativeUpkeepPaid();
       return;
     case "note": {
       if (spec.copyOf !== undefined) {

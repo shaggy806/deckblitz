@@ -2020,6 +2020,14 @@ function turnFaceUpPurpose(cost: string): ManaPurpose {
   };
 }
 
+/** Whether an `unless` is a cumulative upkeep's (rule 702.24a): its "if you
+ * don't" begins by announcing so (`cumulative-upkeep-unpaid`), which every
+ * cumulative upkeep in the pool does, through `cumulativeUpkeep` or written
+ * out. */
+function isCumulativeUpkeepUnless(otherwise: EffectSpec): boolean {
+  return otherwise.kind === "sequence" && otherwise.effects[0]?.kind === "cumulative-upkeep-unpaid";
+}
+
 /** A cost that's neither a spell's nor an ability's (a suspend cost, one asked
  * for as something resolves): nothing a restriction can name, unless it has
  * `{X}` in it (`hasX`, for one whose X is already a number by now — Condescend's
@@ -43647,6 +43655,7 @@ export class Game {
         for (let i = 0; i < times && i < Game.MAX_EFFECT_INSTANCES; i += 1) this.emit({ type: "investigated", player });
       },
       cumulativeUpkeepUnpaid: () => this.emit({ type: "cumulative-upkeep-unpaid", player: controller, object: source }),
+      cumulativeUpkeepPaid: () => this.emit({ type: "cumulative-upkeep-paid", player: controller, object: source }),
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
       addMana: (player, mana, amount, spec) => {
         this.addMana(
@@ -50681,7 +50690,7 @@ controlledBy,
     }
 
     // Only offer what they can actually take.
-    const offer = this.optionModes(decide, options, source, targets, x);
+    const offer = this.optionModes(decide, options, source, targets, x, isCumulativeUpkeepUnless(otherwise));
     if (offer === null) {
       applyOtherwise();
       return;
@@ -50726,6 +50735,8 @@ controlledBy,
     source: ObjectId,
     targets: ResolvedTargets,
     x: number,
+    /** The `unless` is a cumulative upkeep's (`isCumulativeUpkeepUnless`). */
+    cumulativeUpkeep = false,
   ): {
     readonly modes: ModeOption[];
     readonly cost?: string;
@@ -50924,7 +50935,14 @@ controlledBy,
                     },
       );
     };
-    const modes = available.map((option): ModeOption => ({ text: option.text, effect: effectOf(option) }));
+    // A cumulative upkeep's payment, whichever way it's paid, announces
+    // itself once made for every age counter (rule 702.24a): "whenever you
+    // pay this enchantment's cumulative upkeep" (Hibernation's End).
+    const withPaid = (option: BoundUnlessOption): EffectSpec =>
+      cumulativeUpkeep
+        ? { kind: "sequence", effects: [effectOf(option), { kind: "cumulative-upkeep-paid" }] }
+        : effectOf(option);
+    const modes = available.map((option): ModeOption => ({ text: option.text, effect: withPaid(option) }));
     return {
       modes,
       ...(mana !== undefined ? { cost: mana.pay } : {}),

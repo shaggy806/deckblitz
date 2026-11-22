@@ -120,6 +120,14 @@ export type GameEvent =
       readonly object: ObjectId;
     })
   | (Base & {
+      /** `player` paid `object`'s cumulative upkeep (rule 702.24a): announced
+       * once the whole payment for every age counter is made, for "whenever
+       * you pay this enchantment's cumulative upkeep" (Hibernation's End). */
+      readonly type: "cumulative-upkeep-paid";
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+    })
+  | (Base & {
       /** `controller` begins making `controlled`'s decisions (rule 723). */
       readonly type: "player-control-began";
       readonly controlled: PlayerId;

@@ -3187,6 +3187,11 @@ export function parseTrigger(clause) {
   if (/^When a player doesn't pay (?:~|this (?:creature|permanent|artifact|enchantment|land))'s cumulative upkeep$/.test(c)) {
     return [{ on: "event", event: "cumulative-upkeep-unpaid", who: "self" }];
   }
+  // Announced once the payment for every age counter is made (Hibernation's
+  // End).
+  if (/^Whenever you pay (?:~|this (?:creature|permanent|artifact|enchantment|land))'s cumulative upkeep$/.test(c)) {
+    return [{ on: "event", event: "cumulative-upkeep-paid", who: "self" }];
+  }
   // Rule 702.26b-c; phasing out looks back (603.10b) — Teferi's Imp.
   if ((m = /^When(?:ever)? (?:~|this (?:creature|permanent|artifact|enchantment|land)) phases (out|in)$/.exec(c))) {
     return [{ on: "event", event: m[1] === "out" ? "phases-out" : "phases-in", who: "self" }];

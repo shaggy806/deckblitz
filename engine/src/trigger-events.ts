@@ -357,6 +357,10 @@ export const TRIGGER_EVENTS = {
    * and the player who didn't pay it ("that player"), as the sacrifice it
    * owes begins — whether or not the sacrifice happens. */
   "cumulative-upkeep-unpaid": row({ type: "cumulative-upkeep-unpaid", object: (e) => e.object, player: (e) => e.player }),
+  /** "Whenever you pay this enchantment's cumulative upkeep" (Hibernation's
+   * End — rule 702.24a): the permanent whose upkeep was paid, once the
+   * payment for every age counter is made. */
+  "cumulative-upkeep-paid": row({ type: "cumulative-upkeep-paid", object: (e) => e.object, player: (e) => e.player }),
   /** "Whenever you pay life" (rule 119.4 — Font of Agonies): any payment
    * of more than 0, a cost's or an effect's; the value is how much. */
   "pays-life": row({ type: "life-paid", player: (e) => e.player, amount: (e) => e.amount }),

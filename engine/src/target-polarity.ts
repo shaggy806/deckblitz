@@ -1051,6 +1051,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "day-night": none,
   "cumulative-upkeep-unpaid": none,
+  "cumulative-upkeep-paid": none,
   note: none,
   // "Target opponent becomes the monarch" (Jared Carthalion) gives them a card a turn.
   "become-monarch": (n, v) => v.touch(n.who, "help", MINOR),
