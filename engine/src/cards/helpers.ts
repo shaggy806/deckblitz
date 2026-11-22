@@ -1342,7 +1342,7 @@ export const auraSwap = (cost: string): ActivatedAbility => ({
           destination: "battlefield",
           leftover: "stay",
           filter: { subtype: "Aura" },
-          attachedTo: { hostOf: "source" },
+          attachedTo: "attached",
         },
         {
           kind: "conditional",
