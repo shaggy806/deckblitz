@@ -31,6 +31,7 @@ export const BASELINE_2026_09_17: Champion = {
     extraLands: 2.5,
     untappedMana: 0,
     otherPermanents: 0.5,
+    guards: 0,
     permanentManaValue: 0.5,
     loyalty: 1,
     counters: 0.5,

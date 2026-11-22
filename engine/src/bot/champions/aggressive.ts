@@ -35,6 +35,7 @@ export const AGGRESSIVE: Champion = {
     extraLands: 1.5,
     untappedMana: 0,
     otherPermanents: 0.3,
+    guards: 0,
     permanentManaValue: 0.3,
     loyalty: 0.75,
     counters: 0.5,

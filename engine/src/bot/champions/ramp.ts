@@ -34,6 +34,7 @@ export const RAMP: Champion = {
     extraLands: 2,
     untappedMana: 0.75,
     otherPermanents: 1,
+    guards: 0,
     permanentManaValue: 1.25,
     loyalty: 1,
     counters: 0.5,

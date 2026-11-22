@@ -6,7 +6,20 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-22 — Slicer's bot: Kusari-Gama left off the commander, Welding Jar held (TPGJ6-2)
 
-Status: open.
+Status: fixed 2026-11-22. All four scenarios gate.
+
+**What was done.** (1)-(2) The real cause was v1's chump block, which every rollout's defenders
+play: it summed power against life, so commander damage and double strike never made an attack
+lethal, and it chumped a menace attacker with one creature, which the menace rule then dropped.
+Beamtown Beatstick gives menace, so Elsha's rollouts never blocked Slicer at all. It now chumps
+while `isLethal` holds over `damageThrough` of the unblocked attackers (rule 903.10a, double strike
+twice), an attacker lethal alone first, and sends two at a menace attacker (702.111b). With the
+block predicted, Kusari-Gama on Slicer scores 62.2 against 43.3 for passing. `bot:diff` (six games):
+3 of 10,470 decisions changed, Lathliss's controller casting Leyline Tyrant before combat instead
+of pumping Dragons into blocks it had expected not to come. (3) A new evaluation feature, `guards`
+(`features.ts`'s `guardsAnother`, weight 0.5): a noncreature permanent that can regenerate another
+of ours worth keeping (nonland, nontoken, mana value 1+). Welding Jar is cast once there's an
+Equipment out and held with nothing to protect.
 
 From a kept live game (`games/2026-11-22/TPGJ6-2-4141081779.json.gz`, four bots, played on
 772fd79d2; it replays exactly there). Alice's bot on Slicer, Hired Muscle lost to Elsha on turn 42.

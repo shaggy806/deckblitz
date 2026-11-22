@@ -92,6 +92,9 @@ export interface EvalWeights {
   readonly untappedMana: number;
   /** Permanents that are neither lands nor creatures. */
   readonly otherPermanents: number;
+  /** Noncreature permanents that can regenerate another of ours worth keeping
+   * (`guardsAnother`, `bot/features.ts`): Welding Jar with an Equipment out. */
+  readonly guards: number;
   /** Total mana value of nonland permanents — a Sol Ring and a six-drop
    * enchantment aren't the same one permanent. */
   readonly permanentManaValue: number;
@@ -327,6 +330,11 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // card sitting in your hand, or the evaluation will refuse to deploy it.
   // Kept just under `creatures` (2.5) — a Sol Ring is not a body.
   otherPermanents: 2,
+  // A Welding Jar out with something to protect, over the card in hand: at
+  // mana value 0 the two scored the same and the tie went to passing. Only
+  // while there's something to protect: with nothing, the Jar stays in hand
+  // against an artifact wipe (the user, 2026-11-22). Half a point.
+  guards: 0.5,
   permanentManaValue: 0.5,
   loyalty: 1,
   counters: 0.5,

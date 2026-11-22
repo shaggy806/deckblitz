@@ -86,6 +86,7 @@ export const FEATURE_KEYS = [
   "extraLands",
   "untappedMana",
   "otherPermanents",
+  "guards",
   "permanentManaValue",
   "loyalty",
   "counters",
@@ -1043,6 +1044,66 @@ function standingWorth(registry: CardRegistry, def: CardDefinition, opponents: n
   return Math.max(0, manaValue(parseManaCost(def.manaCost)) + STANDING_BASE - priced);
 }
 
+/** The card types a regeneration target word reaches among our own
+ * permanents (`guardsAnother`); empty for any permanent. A word for an
+ * opponent's permanent isn't here. */
+const GUARDED_TYPES: Readonly<Record<string, readonly CardDefinition["types"][number][]>> = {
+  creature: ["creature"],
+  "creature-you-control": ["creature"],
+  artifact: ["artifact"],
+  enchantment: ["enchantment"],
+  "artifact-or-creature": ["artifact", "creature"],
+  "artifact-or-enchantment": ["artifact", "enchantment"],
+  "creature-or-enchantment": ["creature", "enchantment"],
+  permanent: [],
+  "nonland-permanent": [],
+};
+
+/**
+ * Whether noncreature permanent `id` (`def`) can regenerate another
+ * permanent of `player`'s worth keeping — a nonland, nontoken one of mana
+ * value 1 or more — through an activated ability aimed at it (Welding Jar's
+ * "Sacrifice this artifact: Regenerate target artifact", Jhoira's Toolbox,
+ * Loxodon Mender). Such a permanent is worth more on the battlefield than in
+ * hand only while it has something to protect: before that it only waits for
+ * a wipe. Without it a {0} Welding Jar scored exactly as much on the
+ * battlefield as in hand (`otherPermanents` against `hand`), and the tie went
+ * to passing for three turns with Lost Jitte, Kusari-Gama and Mithril Coat out
+ * (a live game, TPGJ6-2, 2026-11-22). The user's call: cast it when there's
+ * stuff to protect, not earlier.
+ */
+function guardsAnother(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+  def: CardDefinition,
+  player: PlayerId,
+): boolean {
+  const specs = def.activated.flatMap((a) => {
+    const effect = a.effect as EffectSpec | null | undefined;
+    if (effect?.kind !== "regenerate" || effect.target !== 0) return [];
+    const spec = a.targets?.[0];
+    return spec === undefined ? [] : [spec];
+  });
+  if (specs.length === 0) return false;
+  for (const other of state.zones.shared.battlefield) {
+    if (other === id) continue;
+    const object = state.objects[other];
+    if (object === undefined || object.controller !== player || object.isToken === true) continue;
+    const c = computeCharacteristics(state, registry, other);
+    if (c.types.includes("land") || manaValueOf(registry, printedCardName(object)) < 1) continue;
+    for (const spec of specs) {
+      if (typeof spec === "string") {
+        const types = GUARDED_TYPES[spec];
+        if (types !== undefined && (types.length === 0 || types.some((t) => c.types.includes(t)))) return true;
+      } else if (spec.kind === "permanent" && matchesFilter(state, registry, other, spec.filter ?? {}, { you: player, source: id })) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 /**
  * What `def`'s engine scores once it is on the battlefield, in points beside
  * its body: its draw, value and token rates at the shipped weights
@@ -1322,6 +1383,7 @@ function playerFeaturesUncached(
   let landCount = 0;
   let untappedMana = 0;
   let otherPermanents = 0;
+  let guards = 0;
   let permanentManaValue = 0;
   let loyalty = 0;
   let counters = 0;
@@ -1405,6 +1467,7 @@ function playerFeaturesUncached(
     if (registry.has(name)) graveyardPlaysInForce(state, registry, object, registry.get(name), graveyardPlays);
     if (!isLand && registry.has(name)) {
       const def = registry.get(name);
+      if (!isCreature && guardsAnother(state, registry, id, def, player)) guards += n;
       nonlandMana += (manaPerTurn(def) + reductionPerTurn(def)) * n;
       drawEngines += drawRate(def, opponents) * n;
       tokenEngines += tokenRate(registry, def, opponents) * n;
@@ -1615,6 +1678,7 @@ function playerFeaturesUncached(
     extraLands: Math.max(0, landCount - cap),
     untappedMana,
     otherPermanents,
+    guards,
     permanentManaValue,
     loyalty,
     counters,

@@ -2456,7 +2456,6 @@ const SCENARIOS: readonly BotScenario[] = [
   ).map(([name, welder]) =>
     asked({
       name,
-      kind: "training",
       rule: "A commander that kills by commander damage unblocked will be blocked: Kusari-Gama on it turns that block into a wipe of the blocker's side. On another creature, they just take the hit and keep their board.",
       position(registry) {
         // Reported from a live game (2026-11-22, TPGJ6-2, turns 39 and 41):
@@ -2504,7 +2503,6 @@ const SCENARIOS: readonly BotScenario[] = [
   ).map(([name, gear, cast]) =>
     asked({
       name,
-      ...(cast ? { kind: "training" as const } : {}),
       rule: "A sacrifice-to-protect permanent is worth casting once there's something on our side it can save; before that it only waits for an artifact wipe.",
       position(registry) {
         // Reported from a live game (2026-11-22, TPGJ6-2, turns 30-35): Slicer's

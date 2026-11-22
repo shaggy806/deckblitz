@@ -37,6 +37,7 @@ export const SHIPPED_2026_09_23: Champion = {
     extraLands: 2.5,
     untappedMana: 0,
     otherPermanents: 2,
+    guards: 0,
     permanentManaValue: 0.5,
     loyalty: 1,
     counters: 0.5,
