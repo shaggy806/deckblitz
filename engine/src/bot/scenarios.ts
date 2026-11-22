@@ -6964,7 +6964,6 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "doesn't cast Living Death when what it returns runs its library out (Uro and Stitcher's Supplier, three cards left)",
     rule: "Drawing from an empty library loses the game (rule 104.3c): a mass return whose enter triggers mill and draw the library's last cards is a loss, whatever board it brings.",
-    kind: "training",
     run(weights, registry) {
       // Reported from a live game (2026-11-21): Teval's bot, on 27 life with
       // some thirty creatures and one opponent left, milled itself down with
@@ -7020,7 +7019,6 @@ const SCENARIOS: readonly BotScenario[] = [
   asked({
     name: "declines Noble Heritage's counters when they give the player it is about to kill protection from it",
     rule: "Two +1/+1 counters aren't worth a turn in which nothing it controls can damage the opponent it has lethal on (rule 702.16k).",
-    kind: "training",
     position(registry) {
       // The same game: Queen Marchesa's bot was on 11 life in front of
       // thirty creatures and Syr Konrad's pings, and Teval's bot took Noble
@@ -7054,7 +7052,6 @@ const SCENARIOS: readonly BotScenario[] = [
   asked({
     name: "takes Avenger of Zendikar's landfall counters on twelve Plants",
     rule: "A free +1/+1 counter on every Plant is never worse than none.",
-    kind: "training",
     position(registry) {
       // The same game: Teval's bot took the counters on its first turn with
       // Avenger and declined them ten times running a turn later (eight
@@ -7091,7 +7088,6 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "keeps Fire Covenant for a creature worth its life, not X=1",
     rule: "A removal spell that scales with life paid is held for a threat: cast for X=1 it kills a token at best, and nothing at all with no target.",
-    kind: "training",
     run(weights, registry) {
       // The same game: Queen Marchesa's bot, on 10 life, cast Fire Covenant
       // for X=1 on its own turn. The log shows no target and no damage for
@@ -7128,7 +7124,6 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "keeps Angel's Grace in hand on its own turn with nothing threatening it",
     rule: "A spell whose whole effect is not losing this turn does nothing on a turn it can't lose.",
-    kind: "training",
     run(weights, registry) {
       // The same game: Queen Marchesa's bot cast Angel's Grace in its own
       // first main phase on 25 life, among five other spells, and was later
@@ -7150,7 +7145,6 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "doesn't attack a player who has protection from it",
     rule: "Damage from a source a player has protection from is prevented (rule 702.16k): an attack at them deals nothing.",
-    kind: "training",
     run(weights, registry, makeBot) {
       // The same game: Kangee's bot had taken Noble Heritage's counters, and
       // on its next turn sent both its fliers, 12 power, at the player that
@@ -7177,7 +7171,6 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "casts Slicer on turn one off a land, Lotus Petal and Simian Spirit Guide",
     rule: "Mana a card in hand makes (rule 605.1a) is mana: a land, a Petal and a Spirit Guide are the {2}{R} of More Than Meets the Eye.",
-    kind: "training",
     run(weights, registry, makeBot) {
       // Reported from a live game (2026-11-21): the bot on a Slicer deck
       // held a land, Lotus Petal and Simian Spirit Guide on turn one and
@@ -7200,7 +7193,7 @@ const SCENARIOS: readonly BotScenario[] = [
         .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
         .filter((s) => s !== "pass-priority");
       return {
-        passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).startsWith("Slicer")),
+        passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Slicer")),
         detail: `did: ${did.join(", ") || "nothing"}`,
       };
     },

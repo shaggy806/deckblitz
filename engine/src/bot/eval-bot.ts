@@ -35,7 +35,7 @@ import type { GameState } from "../state.js";
 import { matchesFilter } from "../filter.js";
 import type { CardFilter } from "../filter.js";
 import { manaValue, parseManaCost } from "../mana.js";
-import { computeCharacteristics, withComputedCache } from "../characteristics.js";
+import { computeCharacteristics, playerProtectedFrom, withComputedCache } from "../characteristics.js";
 import { whyCannotAttack } from "../combat/eligibility.js";
 import { Game } from "../game.js";
 import { withHiddenCards } from "./determinize.js";
@@ -690,6 +690,22 @@ function keepFirstInHand(
  * to replace it: 0 for a search, and a margin where v1's answer rests on
  * something the rollouts can't see (`KEPT_PER_MANA`, `EvalBotController.decide`).
  */
+/** `legal` without the players who have protection from `me` as defenders
+ * (`playerProtectedFrom`): nothing `me` controls can damage them. A
+ * planeswalker of theirs is still one. */
+function reachableDefenders(state: GameState, me: PlayerId, legal: DeclareAttackersLegal): DeclareAttackersLegal {
+  const shut = (d: PlayerId | ObjectId): boolean =>
+    state.players[d as PlayerId] !== undefined && playerProtectedFrom(state, d as PlayerId, me);
+  if (!legal.defenders.some(shut)) return legal;
+  return {
+    ...legal,
+    defenders: legal.defenders.filter((d) => !shut(d)),
+    defendersFor: Object.fromEntries(
+      Object.entries(legal.defendersFor).map(([attacker, options]) => [attacker, options.filter((d) => !shut(d))]),
+    ) as DeclareAttackersLegal["defendersFor"],
+  };
+}
+
 /** What an answer that leaves us dead to the swing back scores below every
  * answer that doesn't (`bestDecision`). Half a lost game, and so still above
  * one: exposed next turn beats dead this turn. (An attack's `UNSAFE` is a
@@ -1623,6 +1639,28 @@ export class EvalBotController extends HeuristicBotController {
     // `declareAttackers`/`declareBlockers`. The rest are searched here.
     if (view.state.awaiting !== null) return this.decide(view, inherited);
 
+    // **Mana a card in hand makes** (`handManaLine`: Simian Spirit Guide, with
+    // a free rock cast first). The candidates leave mana abilities out and
+    // the payer never reaches into a hand, so no search could find the spell
+    // it pays for. The line's steps are played as v1 lays them out, and the
+    // spell itself as soon as its mana is there: searched, a pass could win
+    // with the card already exiled.
+    const goal = this.handManaGoal;
+    if (goal !== null && goal.turn === view.state.turn.number) {
+      if (inherited.type === "cast-spell" && inherited.card === goal.card) {
+        this.handManaGoal = null;
+        this.lastDecision = audit("priority", null, "hand mana");
+        return inherited;
+      }
+    } else {
+      this.handManaGoal = null;
+    }
+    const handMana = this.handManaLine(view);
+    if (handMana !== null) {
+      this.lastDecision = audit("priority", null, "hand mana");
+      return handMana;
+    }
+
     const player = this.playerId;
     const pass: Action = { type: "pass-priority", player };
     this.tapGuard = null;
@@ -1821,7 +1859,7 @@ export class EvalBotController extends HeuristicBotController {
     // unscored, or a pass (`unscoredCast`), then what a pass falls to anyway
     // — the land a landfall permanent was waiting on, a due cantrip.
     const unsearched = (): Action => {
-      const cast = this.unscoredCast(inherited, candidates, mustKill, heldForCombat);
+      const cast = this.unscoredCast(view, inherited, candidates, mustKill, heldForCombat);
       if (cast === null && landfall !== undefined) {
         const land = landRule();
         if (land !== null) return land;
@@ -2120,8 +2158,17 @@ export class EvalBotController extends HeuristicBotController {
    * the whole action: v1 and the search aim the same spell differently, and
    * the search's own filling (its best-ranked, listed first) is the one that
    * passed its filters.
+   *
+   * **Never a cast that only a rollout could have shown to do something**
+   * (a live game, 2026-11-21, on a board too big for one rollout): a spell
+   * with targets to choose and none chosen, an X spell at too small an X
+   * (`xTooSmall`; the candidates try an X paid in life across its range, the
+   * least first, so Fire Covenant went out for X=1 at no target), or one
+   * that would run our library out (`runsLibraryOut`: v1 holds it since, and
+   * this asks again for the search's own filling).
    */
   private unscoredCast(
+    view: ControllerView,
     inherited: Action,
     candidates: readonly Action[],
     mustKill: ReadonlyMap<Action, PlayerId>,
@@ -2134,7 +2181,20 @@ export class EvalBotController extends HeuristicBotController {
       a.face === inherited.face &&
       JSON.stringify(a.via) === JSON.stringify(inherited.via);
     const offered = candidates.filter((a) => sameOffer(a) && !mustKill.has(a) && !heldForCombat.has(a));
-    return offered.find((a) => sameAction(a, inherited)) ?? offered[0] ?? null;
+    const cast = offered.find((a) => sameAction(a, inherited)) ?? offered[0] ?? null;
+    if (cast === null || cast.type !== "cast-spell") return cast;
+    const legal = view.legalActions().find(
+      (l) =>
+        l.kind === "cast-spell" &&
+        l.card === cast.card &&
+        l.face === cast.face &&
+        JSON.stringify(l.via) === JSON.stringify(cast.via),
+    );
+    if (legal === undefined || legal.kind !== "cast-spell") return cast;
+    const aimed = (cast.targets ?? []).flat().some((target) => target !== null && target !== undefined);
+    if (legal.targetOptions.length > 0 && legal.castModal === undefined && !aimed) return null;
+    if (this.xTooSmall(view.state, legal, cast) || this.runsLibraryOut(view.state, legal)) return null;
+    return cast;
   }
 
   /**
@@ -2851,9 +2911,13 @@ export class EvalBotController extends HeuristicBotController {
   }
 
   private attackersSearched(view: ControllerView): readonly AttackerDeclaration[] {
-    const legal = view
+    const offered = view
       .legalActions()
       .find((o): o is DeclareAttackersLegal => o.kind === "declare-attackers");
+    // A player with protection from us (rule 702.16k) is no defender to
+    // weigh: all of it is prevented, which the block arithmetic doesn't read
+    // (`reachableDefenders`). v1's attack, the fallback, leaves them out too.
+    const legal = offered === undefined ? undefined : reachableDefenders(view.state, this.playerId, offered);
     const fallback = super.declareAttackers(view);
     if (legal === undefined || legal.eligible.length === 0 || legal.defenders.length === 0) {
       return fallback;

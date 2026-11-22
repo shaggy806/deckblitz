@@ -635,6 +635,24 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "add-counter":
       if (typeof effect.target === "number") return 0;
       return onObjectRef(effect.target, HARMFUL_COUNTERS.has(effect.counter) ? -1 : 1, ctx);
+    // "Put a +1/+1 counter on each Plant creature you control" (Avenger of
+    // Zendikar): a counter's worth on each permanent it reaches, ours for us
+    // and an opponent's against. It read 0, so v1 declined the "may", and v2
+    // kept that answer on any tie: Teval's bot declined the counters ten
+    // times on Plants already lethal that turn (a live game, 2026-11-21).
+    case "add-counter-all": {
+      const cards = ctx.cards;
+      if (cards === undefined) return 0;
+      const sign = HARMFUL_COUNTERS.has(effect.counter) ? -1 : 1;
+      let worth = 0;
+      for (const id of ctx.state.zones.shared.battlefield) {
+        const object = ctx.state.objects[id];
+        if (object === undefined) continue;
+        if (!matchesFilter(ctx.state, cards, id, effect.filter, { you: ctx.controller })) continue;
+        worth += object.controller === ctx.me ? sign : -sign;
+      }
+      return worth;
+    }
     // Adapt (rule 701.46a): +1/+1 counters on its own permanent.
     case "adapt":
       return onObjectRef("source", 1, ctx);
@@ -761,6 +779,104 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     default:
       return false;
   }
+}
+
+/**
+ * How many cards `effect` takes off its controller's own library whether
+ * they like it or not: every "draw N" and "mill N" in it that is theirs and
+ * isn't a "may", with a plain number for N. A read of the definition, for
+ * asking whether a play would run the library out (`entersLibraryLoss`,
+ * `HeuristicBotController.runsLibraryOut`); anything it can't read counts 0.
+ */
+export function forcedLibraryLoss(effect: unknown): number {
+  if (effect === null || typeof effect !== "object") return 0;
+  if (Array.isArray(effect)) return effect.reduce((n: number, part) => n + forcedLibraryLoss(part), 0);
+  const node = effect as Record<string, unknown>;
+  if (node.optional === true || node.kind === "may" || node.kind === "each-player-may") return 0;
+  const mine = (who: unknown): boolean => who === undefined || who === "you" || who === "each-player";
+  if (node.kind === "draw" && typeof node.amount === "number" && node.target === undefined && mine(node.who)) {
+    return node.amount;
+  }
+  if (node.kind === "mill" && typeof node.amount === "number" && mine(node.target)) return node.amount;
+  let total = 0;
+  for (const [key, value] of Object.entries(node)) {
+    if (key === "filter" || key === "condition") continue;
+    if (value !== null && typeof value === "object") total += forcedLibraryLoss(value);
+  }
+  return total;
+}
+
+/** What `def`'s own "when this enters" triggers take off its controller's
+ * library (`forcedLibraryLoss`): Uro's draw, Stitcher's Supplier's three. */
+export function entersLibraryLoss(def: CardDefinition): number {
+  let total = 0;
+  for (const ability of def.triggered ?? []) {
+    const trigger = ability.trigger as { readonly on?: unknown; readonly who?: unknown };
+    if (trigger.on !== "enters-battlefield" || trigger.who !== "self") continue;
+    if ((ability as { readonly optional?: unknown }).optional === true) continue;
+    total += forcedLibraryLoss(ability.effect);
+  }
+  return total;
+}
+
+/** Whether `effect` puts every creature card in its controller's graveyard
+ * onto the battlefield at once (Living Death's exile, sacrifice, return). */
+export function returnsWholeGraveyard(effect: EffectSpec | null | undefined): boolean {
+  if (effect === null || effect === undefined || effect.kind !== "sequence") return false;
+  return (
+    effect.effects.some((e) => e.kind === "exile-graveyard" && e.target === "each-player") &&
+    effect.effects.some((e) => e.kind === "put-exiled-this-way-onto-battlefield")
+  );
+}
+
+/** What a `prohibit` may forbid and still be nothing but a guard on its
+ * controller's own life: Angel's Grace's "you can't lose the game this turn
+ * and your opponents can't win the game this turn". */
+const GUARD_ACTS: ReadonlySet<string> = new Set(["lose-game", "win-game"]);
+
+/**
+ * Whether every part of `effect` only keeps its controller from losing until
+ * end of turn: a floor under their life (`damageLifeFloor`), protection for
+ * the player, "you can't lose the game this turn" (Angel's Grace). It does
+ * nothing unless something would have cost them the game or life this turn,
+ * so it is held for that (`guardCanMatter`), where a pump is cast for the
+ * attack to come.
+ */
+export function onlyGuardsPlayerThisTurn(effect: EffectSpec | null | undefined): boolean {
+  if (effect === null || effect === undefined) return false;
+  switch (effect.kind) {
+    case "sequence":
+      return effect.effects.length > 0 && effect.effects.every(onlyGuardsPlayerThisTurn);
+    case "player-effect": {
+      if (effect.duration !== "end-of-turn") return false;
+      const said = Object.keys(effect).filter((key) => key !== "kind" && key !== "duration");
+      return said.length > 0 && said.every((key) => key === "damageLifeFloor" || key === "protectionFromEverything");
+    }
+    case "prohibit":
+      return (
+        effect.duration === "end-of-turn" &&
+        effect.prohibits.length > 0 &&
+        effect.prohibits.every((p) => GUARD_ACTS.has(p.act))
+      );
+    default:
+      return false;
+  }
+}
+
+/**
+ * Whether a guard on `me` for the rest of this turn (`onlyGuardsPlayerThisTurn`)
+ * could matter now: something of an opponent's is on the stack, or it is an
+ * opponent's combat. On our own turn with an empty stack nothing is coming
+ * that it would stop (Angel's Grace cast in its own main phase on 25 life,
+ * a live game, 2026-11-21).
+ */
+export function guardCanMatter(state: GameState, me: PlayerId): boolean {
+  const theirs = state.zones.shared.stack.some((id) => {
+    const controller = state.objects[id]?.controller;
+    return controller !== undefined && controller !== me;
+  });
+  if (theirs) return true;
+  return COMBAT_STEPS.has(state.turn.step) && activePlayerOf(state) !== me;
 }
 
 /** Combat, any player's: where an until-end-of-turn pump changes damage or

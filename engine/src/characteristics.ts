@@ -3113,6 +3113,23 @@ export function playerHasProtectionFromEverything(state: GameState, player: Play
   return (state.playerEffects ?? []).some((e) => e.protectionFromEverything?.includes(player) === true);
 }
 
+/**
+ * Whether `player` has protection from `from` — from that player (rule
+ * 702.16k: Noble Heritage, Guardian Archon) or from everything (702.16j) —
+ * so that nothing `from` controls can damage or target them. A read for the
+ * bots, which otherwise attack such a player and count the damage: the rules
+ * themselves ask `playerProtectionBlocks` (`targeting.ts`) per source.
+ */
+export function playerProtectedFrom(state: GameState, player: PlayerId, from: PlayerId): boolean {
+  return (state.playerEffects ?? []).some(
+    (e) =>
+      e.protectionFromEverything?.includes(player) === true ||
+      (e.protectionFromPlayers !== undefined &&
+        e.protectionFromPlayers.who.includes(player) &&
+        e.protectionFromPlayers.from.includes(from)),
+  );
+}
+
 /** The keywords `grantsToSpells` statics on the battlefield give `spell`. */
 function spellGrantedKeywords(state: GameState, registry: CardRegistry, spell: GameObject): Keyword[] {
   const out: Keyword[] = [];

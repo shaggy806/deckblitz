@@ -40,6 +40,7 @@ import {
   computeCharacteristics,
   lethalDamageLeft,
   lethalDamageOf,
+  playerProtectedFrom,
   staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
@@ -57,7 +58,12 @@ import {
   costWorth,
   effectWorth,
   entersToCounter,
+  entersLibraryLoss,
+  forcedLibraryLoss,
+  guardCanMatter,
+  onlyGuardsPlayerThisTurn,
   onlyUntilEndOfTurn,
+  returnsWholeGraveyard,
   temporaryEffectCanMatter,
 } from "./effect-worth.js";
 import type { Color, ManaType } from "./mana.js";
@@ -3595,6 +3601,9 @@ export class HeuristicBotController extends AutomaticController {
    */
   protected wastedNow(state: GameState, offer: LegalAction): boolean {
     const effect = this.offerEffect(offer);
+    // A guard on our own life for the turn (Angel's Grace) waits for
+    // something it would stop: an opponent's spell, an opponent's attack.
+    if (onlyGuardsPlayerThisTurn(effect)) return !guardCanMatter(state, this.playerId);
     if (effect === undefined || !onlyUntilEndOfTurn(effect)) return false;
     if (!temporaryEffectCanMatter(state, this.playerId)) return true;
     // A sacrifice for it is a card for a turn's effect: only with something
@@ -3607,6 +3616,38 @@ export class HeuristicBotController extends AutomaticController {
     // into the wrath its controller just cast.
     if (offer.kind !== "activate-ability" || offer.sacrifice === undefined) return false;
     return state.zones.shared.stack.length === 0 && !SACRIFICE_STEPS.has(state.turn.step);
+  }
+
+  /**
+   * Whether casting `offer` would take the last cards off our own library
+   * (rule 104.3c: the next draw loses the game): what the spell itself makes
+   * us draw and mill, a permanent's own "when this enters", and, for a spell
+   * that returns our whole graveyard (Living Death), every returning
+   * creature's. Read off the definitions (`forcedLibraryLoss`), and only
+   * asked with the library already inside the reserve. v2's search sees the
+   * loss in a rollout; this is for v1, and for the cast v2 plays unscored
+   * when its clock runs out (`unscoredCast`): Teval's bot cast Living Death
+   * onto three cards with Stitcher's Supplier and Uro in its graveyard, and
+   * lost the game it was winning (a live game, 2026-11-21).
+   */
+  protected runsLibraryOut(state: GameState, offer: LegalAction): boolean {
+    if (offer.kind !== "cast-spell" || offer.castModal !== undefined || offer.face !== undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    const zones = state.zones.perPlayer[this.playerId];
+    const library = zones?.library.length ?? 0;
+    if (zones === undefined || library > LIBRARY_RUNS_OUT_AT) return false;
+    const def = this.registry.get(offer.cardName);
+    const permanent = !def.types.includes("instant") && !def.types.includes("sorcery");
+    let loss = forcedLibraryLoss(def.effect) + (permanent ? entersLibraryLoss(def) : 0);
+    if (returnsWholeGraveyard(def.effect)) {
+      for (const id of zones.graveyard) {
+        const card = state.objects[id];
+        if (card === undefined || !this.registry.has(card.cardName)) continue;
+        const returning = this.registry.get(card.cardName);
+        if (returning.types.includes("creature")) loss += entersLibraryLoss(returning);
+      }
+    }
+    return loss > 0 && loss >= library;
   }
 
   /**
@@ -4406,8 +4447,12 @@ export class HeuristicBotController extends AutomaticController {
     if (offer.xCost === undefined || action.xValue === undefined || !this.registry.has(offer.cardName)) return false;
     if (offer.xCost.sacrifice === true || offer.xCost.removesCounters === true) return false;
     const me = this.playerId;
-    if ((state.players[me]?.life ?? 0) <= TAKE_ANYTHING_AT) return false;
-    if ((state.zones.perPlayer[me]?.hand.length ?? 0) >= FULL_HAND) return false;
+    // Neither way out for an X paid in life (Fire Covenant): low on life is
+    // the worst time to spend any on a small one, and a full hand no reason.
+    if (offer.xCost.paidInLife !== true) {
+      if ((state.players[me]?.life ?? 0) <= TAKE_ANYTHING_AT) return false;
+      if ((state.zones.perPlayer[me]?.hand.length ?? 0) >= FULL_HAND) return false;
+    }
     const def = this.registry.get(offer.cardName);
     const spell = def.types.includes("instant") || def.types.includes("sorcery");
     const x = action.xValue;
@@ -5321,6 +5366,7 @@ export class HeuristicBotController extends AutomaticController {
       !this.holdsXForMore(state, o) &&
       !this.holdsTopTutor(state, o) &&
       !this.wastedNow(state, o) &&
+      !this.runsLibraryOut(state, o) &&
       !this.holdsForASpell(state, o) &&
       !this.holdsWipeForCombat(state, o) &&
       !this.holdsManaForMain(state, o) &&
@@ -5479,7 +5525,82 @@ export class HeuristicBotController extends AutomaticController {
       return this.toActivateAbility(view.state, ability);
     }
 
-    return passFor(player);
+    return this.handManaLine(view) ?? passFor(player);
+  }
+
+  /** The card a hand-mana line is for (`handManaLine`), and the turn it was
+   * begun in: `EvalBotController` casts it once its mana is there. */
+  protected handManaGoal: { readonly turn: number; readonly card: ObjectId } | null = null;
+
+  /**
+   * The next step toward a spell that only **mana a card in hand makes**
+   * would pay for, or `null`: Simian Spirit Guide's "exile this card from
+   * your hand: add {R}" (rule 605.1a), with any free mana rock in hand
+   * (Lotus Petal) cast first. The payer never reaches into a hand
+   * (`Game.manaSources`), so such a spell is never among the legal casts
+   * and nothing here counted it: on turn one with a land, a Petal and a
+   * Spirit Guide a bot played the land and passed, its commander's {2}{R}
+   * in reach (a live game, 2026-11-21).
+   *
+   * Asked in our own main phase with an empty stack, where everything else
+   * has been considered and passed over. The look plays the free rocks (each
+   * resolved), then the hand's mana abilities one more at a time, and stops
+   * at the first that makes castable a spell we would cast (`wouldCast`)
+   * worth a card to hurry out: mana value {@link HAND_MANA_FLOOR} or more,
+   * and not itself one of the cards spent. The step returned is the first
+   * of that line; the next window finds the rest.
+   */
+  protected handManaLine(view: ControllerView): Action | null {
+    const state = view.state;
+    const me = this.playerId;
+    if (view.legalActionsAfter === undefined || state.awaiting !== null) return null;
+    if (state.zones.shared.stack.length > 0 || activePlayerOf(state) !== me) return null;
+    if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return null;
+    const now = view.legalActions();
+    const fromHand = now.filter((o): o is ActivateAbilityLegal => {
+      if (o.kind !== "activate-ability" || state.objects[o.source]?.zone !== "hand") return false;
+      if (!this.registry.has(o.cardName)) return false;
+      const ability = this.registry.get(o.cardName).activated?.[o.abilityIndex];
+      return ability !== undefined && ability.zone === "hand" && isManaAbility(ability);
+    });
+    if (fromHand.length === 0) return null;
+    const rocks = now.filter((o): o is CastSpellLegal => {
+      if (o.kind !== "cast-spell" || o.face !== undefined || o.castModal !== undefined) return false;
+      if (state.objects[o.card]?.zone !== "hand" || !this.registry.has(o.cardName)) return false;
+      const def = this.registry.get(o.cardName);
+      return (
+        def.manaCost !== null &&
+        manaValue(parseManaCost(def.manaCost)) === 0 &&
+        def.types.includes("artifact") &&
+        def.activated.some(isManaAbility)
+      );
+    });
+    const spent = new Set<ObjectId>([...fromHand.map((o) => o.source), ...rocks.map((o) => o.card)]);
+    const castable = new Set(now.flatMap((o) => (o.kind === "cast-spell" ? [o.card] : [])));
+    const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
+    const from = order.indexOf(me);
+    const passes = [...order.slice(from), ...order.slice(0, from)].map((p) => passFor(p));
+    const rockSteps = rocks.flatMap((rock) => [this.toCastSpell(state, rock), ...passes]);
+    for (let k = 1; k <= Math.min(fromHand.length, HAND_MANA_MOST); k += 1) {
+      const steps = [...rockSteps, ...fromHand.slice(0, k).map((o) => this.toActivateAbility(state, o))];
+      const after = view.legalActionsAfter(steps);
+      if (after === null || after === undefined) return null;
+      const gained = after.find(
+        (a): a is CastSpellLegal =>
+          a.kind === "cast-spell" &&
+          !castable.has(a.card) &&
+          !spent.has(a.card) &&
+          this.registry.has(a.cardName) &&
+          // By the card, not the face it would be cast as (a converted Slicer's
+          // back face has no cost of its own).
+          this.manaValueOf(state.objects[a.card]?.cardName ?? a.cardName) >= HAND_MANA_FLOOR &&
+          this.wouldCast(state, a),
+      );
+      if (gained === undefined) continue;
+      this.handManaGoal = { turn: state.turn.number, card: gained.card };
+      return steps[0];
+    }
+    return null;
   }
 
   /** The value (life, or a planeswalker's loyalty) of attacking `defender`
@@ -5519,9 +5640,14 @@ export class HeuristicBotController extends AutomaticController {
     // autopsies) — and as v2's model of every opponent, it never saw that
     // swing coming at v2 either.
     const lethal = this.wideLethal(state, legal, able);
+    // Never at a player who has protection from us (rule 702.16k): every
+    // point of it is prevented. Kangee's bot sent 12 power at one, on the
+    // arithmetic that 12 was lethal (a live game, 2026-11-21).
+    const reachable = (d: PlayerId | ObjectId): boolean =>
+      state.players[d as PlayerId] === undefined || !playerProtectedFrom(state, d as PlayerId, this.playerId);
     return able
       .flatMap((attacker) => {
-        const options = [...(legal.defendersFor[attacker] ?? [])].sort(byValue);
+        const options = [...(legal.defendersFor[attacker] ?? [])].filter(reachable).sort(byValue);
         if (options.length === 0) return [];
         if (lethal !== null && options.includes(lethal)) return [{ attacker, defender: lethal }];
         // Prefer a defender who can't eat this creature for free. Sorting on
@@ -5551,7 +5677,10 @@ export class HeuristicBotController extends AutomaticController {
     legal: DeclareAttackersLegal,
     able: readonly ObjectId[],
   ): PlayerId | null {
-    const players = legal.defenders.filter((d): d is PlayerId => state.players[d as PlayerId] !== undefined);
+    const players = legal.defenders.filter(
+      (d): d is PlayerId =>
+        state.players[d as PlayerId] !== undefined && !playerProtectedFrom(state, d as PlayerId, this.playerId),
+    );
     for (const player of [...players].sort((a, b) => state.players[a].life - state.players[b].life)) {
       const blockers = state.zones.shared.battlefield.filter((id) => {
         const object = state.objects[id];
@@ -5907,8 +6036,16 @@ type Sweep = Extract<
 const TAKE_FLOOR = 4;
 /** And the share of the battlefield's average creature it has to match. */
 const TAKE_SHARE = 0.75;
+/** The least mana value a spell has for a card in hand to be spent on mana
+ * for it (`handManaLine`): the Spirit Guide's own. */
+const HAND_MANA_FLOOR = 3;
+/** The most hand mana abilities one line spends. */
+const HAND_MANA_MOST = 3;
 /** The life at or below which a reanimation spell takes whatever there is. */
 const TAKE_ANYTHING_AT = 10;
+/** The library size at or below which a cast is asked whether it would run
+ * the library out (`runsLibraryOut`): `effect-worth.ts`'s reserve. */
+const LIBRARY_RUNS_OUT_AT = 15;
 /** The least an opponent's creature is worth (`targetValue`: a Grizzly Bears
  * is 6, a vanilla 3/3 for three 9) for a removal spell to be spent on it
  * (`removesTooLittle`). */

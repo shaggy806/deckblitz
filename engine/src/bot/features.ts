@@ -45,6 +45,7 @@ import {
   computeCharacteristics,
   hasLostAbilities,
   lethalDamageOf,
+  playerProtectedFrom,
   staticConditionMet,
   withComputedCache,
 } from "../characteristics.js";
@@ -1480,6 +1481,19 @@ function playerFeaturesUncached(
     // Without this, at 6 life facing a Craw Wurm v2 cast Smothering Tithe
     // over the 4/4 beside it ("casts the blocker before a tax engine").
     standingEffects *= Math.min(1, Math.max(0, (p.life - incoming) / ((p.life * 2) / 3)));
+  }
+
+  // An opponent with protection from us (rule 702.16k: Noble Heritage's
+  // "you gain protection from that player") takes no damage from anything we
+  // control: that share of our power has nowhere to go, like a creature that
+  // can't attack. Nothing priced it, so Teval's bot took Noble Heritage's two
+  // counters twice with the player it was about to kill as the price, and
+  // lost to her (a live game, 2026-11-21).
+  if (opponents > 0 && power > 0 && (state.playerEffects?.length ?? 0) > 0) {
+    const shut = state.turnOrder.filter(
+      (o) => o !== player && !state.players[o].hasLost && playerProtectedFrom(state, o, player),
+    ).length;
+    idlePower += (power * shut) / opponents;
   }
 
   let handManaValue = 0;

@@ -6,7 +6,23 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-21 — One game's log, seven misplays (seed 230659861), and Slicer on turn one
 
-Status: open. Seven training scenarios, all reading wrong. No fix made.
+Status: fixed 2026-11-22. All seven scenarios gate.
+
+**What was done.** (1) `unscoredCast` no longer plays a cast only a rollout could vouch for: a
+spell with targets to choose and none chosen, an X too small (`xTooSmall`, which no longer lets an X
+paid in life through at low life or from a full hand), or one that would run the library out
+(`runsLibraryOut`: the spell's own forced draws and mills, a permanent's "when this enters", and
+for a whole-graveyard return every returning creature's, asked at fifteen cards or fewer). v1
+holds a guard on its own life for a turn nothing threatens (`onlyGuardsPlayerThisTurn`,
+`guardCanMatter`, through `wastedNow`, so v2's candidates leave it out too). (2) The share of
+our power that has no one to hit because an opponent has protection from us counts as idle
+(`idlePower`, `playerProtectedFrom`), which prices Noble Heritage's offer; v1's attack and v2's
+attack search leave a protected player out of the defenders. (3) `effect-worth.ts` prices
+`add-counter-all`, so v1 takes Avenger's counters and a tie no longer declines them. (4)
+`handManaLine`: in our own main phase, where everything else has been passed over, a look plays
+the free rocks in hand and then the hand's mana abilities one more at a time, and takes the first
+step of the first line that makes castable a spell of mana value 3 or more that v1 would cast;
+v2 plays the line's steps and then the spell without a search.
 
 From the log of a live four-bot game a friend of the user's sent (bots on his Queen Marchesa
 deck and on Teval, Kangee and Eshki decks; Queen Marchesa won when Teval's bot drew from an
