@@ -26,7 +26,7 @@ import type { CardRegistry } from "../cards.js";
 import { assignedCombatDamage, computeCharacteristics, lethalDamageLeft, objHasKeyword } from "../characteristics.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState, OverPlaneswalker } from "../state.js";
-import { blockedAttackersOf, damageAssigner, opposedAssignment } from "./banding.js";
+import { blockedAttackersOf, damageAssigner, defenderAssignsFor, opposedAssignment } from "./banding.js";
 
 /** The blockers of `attackerId` that are still on the battlefield and still
  * blocking — one may have been removed in response after blocks were
@@ -213,6 +213,10 @@ export interface DamageQuestion extends DamageAssignmentOffer {
   readonly blocking: boolean;
   /** `player` doesn't control the dealer. */
   readonly forOpponent: boolean;
+  /** `player` also chooses whether it assigns "as though it weren't
+   * blocked" (Defensive Formation's ruling); under banding that choice
+   * stays with the dealer's controller. */
+  readonly everyChoice: boolean;
 }
 
 export function damageQuestionFor(
@@ -237,6 +241,7 @@ export function damageQuestionFor(
     indestructible: recipients.map((r) => objHasKeyword(state, registry, r, "indestructible")),
     blocking,
     forOpponent: player !== state.objects[dealerId].controller,
+    everyChoice: !blocking && defenderAssignsFor(state, registry, dealerId),
     ...(overPlaneswalker !== undefined && !blocking ? { overPlaneswalker } : {}),
   };
 }

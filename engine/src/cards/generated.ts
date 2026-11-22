@@ -6687,6 +6687,7 @@ import _poolDefenestratedPhantom from "./pool/defenestrated-phantom.js";
 import _poolDefenseForceAggressor from "./pool/defense-force-aggressor.js";
 import _poolDefenseGrid from "./pool/defense-grid.js";
 import _poolDefenseOfTheHeart from "./pool/defense-of-the-heart.js";
+import _poolDefensiveFormation from "./pool/defensive-formation.js";
 import _poolDefensiveManeuvers from "./pool/defensive-maneuvers.js";
 import _poolDefensiveStance from "./pool/defensive-stance.js";
 import _poolDefiantBloodlord from "./pool/defiant-bloodlord.js";
@@ -40492,6 +40493,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDefenseForceAggressor,
   _poolDefenseGrid,
   _poolDefenseOfTheHeart,
+  _poolDefensiveFormation,
   _poolDefensiveManeuvers,
   _poolDefensiveStance,
   _poolDefiantBloodlord,
@@ -74310,6 +74312,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/defense-force-aggressor": _poolDefenseForceAggressor,
   "pool/defense-grid": _poolDefenseGrid,
   "pool/defense-of-the-heart": _poolDefenseOfTheHeart,
+  "pool/defensive-formation": _poolDefensiveFormation,
   "pool/defensive-maneuvers": _poolDefensiveManeuvers,
   "pool/defensive-stance": _poolDefensiveStance,
   "pool/defiant-bloodlord": _poolDefiantBloodlord,

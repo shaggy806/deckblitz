@@ -16070,9 +16070,10 @@ export class Game {
       const alike = cd.pendingAssignments.slice(1).filter((id) => this.damageSituation(id) === situation).length;
       // "As though it weren't blocked" is its controller's choice; where the
       // division is the other side's (banding, 702.22j), that choice comes
-      // first, on its own.
+      // first, on its own. Defensive Formation's player makes that choice
+      // too (its ruling), so there it's one question.
       const mayUnblocked = this.mayAssignAsThoughUnblocked(dealerId);
-      const unblockedOnly = mayUnblocked && q.forOpponent;
+      const unblockedOnly = mayUnblocked && q.forOpponent && !q.everyChoice;
       this.state.awaiting = {
         kind: "assign-combat-damage",
         player: unblockedOnly ? this.state.objects[dealerId].controller : q.player,

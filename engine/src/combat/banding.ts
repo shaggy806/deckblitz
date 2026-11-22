@@ -21,10 +21,11 @@
  */
 
 import type { CardRegistry } from "../cards.js";
-import { computeCharacteristics } from "../characteristics.js";
+import { computeCharacteristics, hasLostAbilities, staticConditionMet } from "../characteristics.js";
 import type { CardFilter } from "../filter.js";
 import { matchesFilter } from "../filter.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
+import { rulesTextName } from "../state.js";
 import type { GameState } from "../state.js";
 import type { DamageAssignmentOffer } from "./damage.js";
 
@@ -179,8 +180,32 @@ export function damageAssigner(
   recipients: readonly ObjectId[],
 ): PlayerId {
   const own = state.objects[dealerId].controller;
+  if (defenderAssignsFor(state, registry, dealerId)) return state.objects[dealerId].attacking as PlayerId;
   const other = bandingController(state, registry, recipients);
   return other !== null && other !== own ? other : own;
+}
+
+/**
+ * Whether the player `dealerId` is attacking makes every choice about its
+ * combat damage (`StaticAbility.assignsAttackersCombatDamage` — Defensive
+ * Formation): that player controls a permanent saying so. More than
+ * banding's division: "as though it weren't blocked" is theirs too (the
+ * card's ruling). Not for a creature attacking a planeswalker or battle.
+ */
+export function defenderAssignsFor(state: GameState, registry: CardRegistry, dealerId: ObjectId): boolean {
+  const defender = state.objects[dealerId]?.attacking;
+  if (defender == null || state.players[defender as PlayerId]?.hasLost !== false) return false;
+  for (const id of state.zones.shared.battlefield) {
+    const source = state.objects[id];
+    if (source === undefined || source.controller !== defender) continue;
+    if (hasLostAbilities(state, registry, source)) continue;
+    for (const ability of registry.get(rulesTextName(source)).static) {
+      if (ability.assignsAttackersCombatDamage !== true) continue;
+      if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+      return true;
+    }
+  }
+  return false;
 }
 
 /**

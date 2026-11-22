@@ -554,6 +554,12 @@ it applies; "loses all 'bands with other' abilities" is `become` of
 banded with it" is the `CardFilter` clause `bandedWithSource: true` (Icatian
 Skirmishers, Urza's Engine). All of it lives in `combat/banding.ts`.
 
+**"Rather than the attacking player, you assign the combat damage of each
+creature attacking you"** (Defensive Formation) is the static
+`assignsAttackersCombatDamage: true`: its controller answers every damage
+assignment of a creature attacking them — the division, what tramples over,
+and "as though it weren't blocked" — not one attacking their planeswalker.
+
 **Phasing** (rule 702.26a): `phasing` — as each of its controller's untap
 steps begins, before anything untaps, it phases out, or back in
 (`Game.phasingStep`); read off its current keywords, so one granted it phases

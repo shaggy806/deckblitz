@@ -498,6 +498,7 @@
     "replacement:double-damage-from-target-this-turn",
     "replacement:enters-under-your-control-instead",
     "replacement:token-enter-exile-instead",
+    "static:defending-player-assigns-combat-damage",
     "bug:aura-enters-transformed-asks-enchant",
     "static:prohibit-cast-by-face",
     "effect:spell-color-change-carries-to-permanent",

@@ -7404,9 +7404,10 @@ function Table({
       <div className="controls damage-assign">
         <span>
           {/* Banding hands the division to the other side (rules
-              702.22j-k): it's the opponent's creature's damage being split,
+              702.22j-k), and Defensive Formation the defending player's
+              attackers': it's the opponent's creature's damage being split,
               and a blocker's among the band it blocks. */}
-          {offer.forOpponent === true ? 'Banding: you divide ' : 'Assign '}
+          {offer.forOpponent === true ? 'You divide ' : 'Assign '}
           {game.nameOf(offer.attacker)}&rsquo;s {offer.power} damage
           {overPw !== undefined ? ' (trample over planeswalkers)' : offer.trample ? ' (trample)' : ''}
           {offer.blockers.length > 0 ? (

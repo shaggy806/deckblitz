@@ -664,6 +664,9 @@ export interface DamageAssignmentAsk {
 export function prefersUnblocked(view: ControllerView, a: DamageAssignmentAsk): boolean {
   if (a.mayUnblocked !== true) return false;
   if (a.unblockedOnly === true) return true;
+  // Another player's creature, attacking the one answering (Defensive
+  // Formation): "unblocked" is all of it to themself.
+  if (a.forOpponent === true) return false;
   const split = defaultAssignment(a);
   const kills = a.blockers.filter((_, i) => a.indestructible[i] !== true && (split[i] ?? 0) >= a.lethal[i]);
   if (kills.length === 0) return true;

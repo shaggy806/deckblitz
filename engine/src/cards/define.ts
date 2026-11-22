@@ -3980,6 +3980,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * creature's landwalk of these kinds is ignored when a block is declared,
    * whoever controls the creature or this. `affects` is ignored. */
   readonly blockableDespiteLandwalk?: readonly Keyword[];
+  /** "Rather than the attacking player, you assign the combat damage of each
+   * creature attacking you" (Defensive Formation — rule 510.1c's choice,
+   * handed over): this static's controller makes every choice about how a
+   * creature attacking that player assigns its combat damage — the division
+   * among its blockers, what tramples over, and "as though it weren't
+   * blocked" (the card's ruling) — as `combat/banding.ts`'s `damageAssigner`
+   * reads it. A creature attacking their planeswalker or battle isn't
+   * attacking them (rule 508.1b: it attacks one or the other). `affects` is
+   * ignored. */
+  readonly assignsAttackersCombatDamage?: true;
   /** "Can block creatures with landwalk abilities as though they didn't have
    * those abilities" (Street Savvy — rule 702.14): the blocker's side of it,
    * for what `affects` picks out and of every kind of landwalk. */

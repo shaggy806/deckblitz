@@ -13726,4 +13726,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: {},
     }),
   ),
+  // --- The defending player assigns an attacker's damage (2026-11-21) -------
+  preset(
+    'Defensive Formation: the defender divides, and keeps a Thorn Elemental off themself',
+    board({
+      you: { bf: ['Thorn Elemental'] },
+      opp: { human: true, bf: ['Defensive Formation', 'Grizzly Bears', 'Llanowar Elves'] },
+    }),
+  ),
 ]

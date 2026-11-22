@@ -5810,7 +5810,7 @@ engine terms. A second thing to check is a second test.
 
 ### Benalish Hero: the defender divides a trampler's damage
 - **Do:** Attack Bob with Colossal Dreadmaw. As Bob, block it with Benalish Hero.
-- **Expect:** Bob is asked "Banding: you divide Colossal Dreadmaw's 6 damage (trample)", starting with all 6 on the Hero and none to Bob. Confirming leaves Bob's life where it was.
+- **Expect:** Bob is asked "You divide Colossal Dreadmaw's 6 damage (trample)", starting with all 6 on the Hero and none to Bob. Confirming leaves Bob's life where it was.
 
 ## Searching an opponent's zones (2026-10-28, need-keys Phase 2: the search-opponent-library family)
 
@@ -9046,3 +9046,9 @@ Each board's die comes up 4.
 ### Next of Kin: your commander and your hand offered together
 - **Do:** Cast Lightning Bolt at your own Hill Giant, then pick Llanowar Elves in the popup and confirm.
 - **Expect:** One popup offers Grizzly Bears and Llanowar Elves (your commander); Colossal Dreadmaw can't be picked. Llanowar Elves enters, and at the end step Next of Kin returns attached to it.
+
+## The defending player assigns an attacker's damage (2026-11-21)
+
+### Defensive Formation: the defender divides, and keeps a Thorn Elemental off themself
+- **Do:** Attack Bob with Thorn Elemental. As Bob, block it with Grizzly Bears and Llanowar Elves.
+- **Expect:** Bob, not Alice, is asked "You divide Thorn Elemental's 7 damage", with an "All to Bob" button beside Confirm. Putting all 7 on the Elves and confirming leaves the Bears alive and Bob's life where it was.
