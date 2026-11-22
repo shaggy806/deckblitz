@@ -1406,6 +1406,25 @@ function drawReplacementReaches(r: DrawRedirectReplacement, event: WouldDrawEven
 const shieldLeft = (shield: ActiveReplacement): number =>
   shield.next === true ? Number.MAX_SAFE_INTEGER : (shield.left ?? 0);
 
+/** One hit of a simultaneous damage event — `amount` from each of `sources`
+ * identical sources to `target` — as `Game.shieldSharesAsked` reads it, with
+ * the event it's part of (`group`). */
+interface DamageHit {
+  readonly source: ObjectId;
+  readonly target: TargetRef;
+  readonly amount: number;
+  readonly sources: number;
+  readonly combat: boolean;
+  readonly sourceLastKnown: LastKnownInfo | undefined;
+  readonly group: number;
+}
+
+/** `GameState.replacementAnswers`' key for how much of an amount shield one
+ * hit gets (rule 615.7): the shield by its source and the resolution that
+ * made it, the hit by its source and recipient. */
+const shieldShareKey = (shield: ActiveReplacement, source: ObjectId, target: TargetRef): string =>
+  `shield-share:${shield.source}:${shield.madeIn ?? ""}:${source}>${target.kind === "player" ? target.player : target.object}`;
+
 /** A prevention shield's follow-up owed once per source of a simultaneous
  * event rather than once for all of it: one about the damage's source
  * ("deals that much damage to that creature" — Comeuppance; "that source's
@@ -2976,6 +2995,12 @@ export class Game {
   /** Set while an effect that deals damage is gone through to see what would
    * ask (`replacementOrdersAsked`): `dealDamage` asks and deals nothing. */
   private dryRunningEvents = false;
+  /** While `dryRunningEvents`: every hit the effect would make, each with the
+   * simultaneous event it's part of (`group`: one `withDamageBatch`, or the
+   * hit alone outside one) — what `shieldSharesAsked` reads (rule 615.7). Not
+   * game state: it only ever spans one synchronous call. */
+  private dryRunHits: DamageHit[] | null = null;
+  private dryRunHitGroup = 0;
   /** Set during `debugApplyEffect`, which nothing resumes. */
   private applyingDebugEffect = false;
   /** Replacements carrying out their own effect (rule 614.5), so an event
@@ -9500,6 +9525,18 @@ export class Game {
       throw new Error("unreachable: whyCannot should have caught this");
     }
     this.state.awaiting = null;
+    // How much of a shield goes to one hit of a simultaneous damage event
+    // (rule 615.7): kept for that hit, and the damage carries on, asking the
+    // next share or dealing it.
+    if (awaiting.shieldShare !== undefined) {
+      const { answers: key, resume } = awaiting.shieldShare;
+      this.state.replacementAnswers = { ...(this.state.replacementAnswers ?? {}), [key]: [String(number)] };
+      this.emit({ type: "number-chosen", player, object: awaiting.source, number });
+      if (resume.site === "combat-damage") this.promptNextDamageAssignment();
+      const next = this.state.awaiting as AwaitingDecision | null;
+      this.prepareForPriority(next?.player ?? this.activePlayer);
+      return;
+    }
     // How much of a spell's generic mana its assisting player pays (rule
     // 702.132a): the cast goes on, or is reversed.
     if (awaiting.assist !== undefined) {
@@ -45509,7 +45546,7 @@ controlledBy,
           objects: [...objects],
           chooser,
           ...(anOpponentChooses === true ? { anOpponentChooses: true } : {}),
-          ...(faceDown ? { faceDown: true } : {}),
+          ...(faceDown !== false ? { faceDown } : {}),
           ...(shape?.pileCount !== undefined && shape.pileCount !== 2 ? { pileCount: shape.pileCount } : {}),
           ...(shape?.atRandom === true ? { atRandom: true } : {}),
           fates,
@@ -45533,7 +45570,8 @@ controlledBy,
         // The face-up pile is turned face up as the piles are made (Curator
         // of Destinies); without a face-down pile, every pile is shown — a
         // library card no one but the separator has seen yet included.
-        const shown = (faceDown ? piles.slice(1) : piles)
+        // Two face-down piles (Phyrexian Portal): nothing is shown.
+        const shown = (faceDown === "both" ? [] : faceDown ? piles.slice(1) : piles)
           .flat()
           .filter((id) => this.state.objects[id]?.zone === "library" && !this.state.revealedThisTurn.includes(id));
         if (shown.length > 0) this.revealCards(controller, shown, "library");
@@ -45544,7 +45582,7 @@ controlledBy,
           source,
           piles: piles.map((pile) => [...pile]),
           separator,
-          ...(faceDown ? { faceDown: true } : {}),
+          ...(faceDown !== false ? { faceDown } : {}),
           lookers: [...lookers],
           fates,
         };
@@ -68219,12 +68257,16 @@ controlledBy,
   private replacementOrdersAsked(run: () => void): boolean {
     if (this.dryRunningEvents || this.applyingDebugEffect || this.decisionOutstanding()) return false;
     this.dryRunningEvents = true;
+    const hits: DamageHit[] = [];
+    this.dryRunHits = hits;
     try {
       run();
     } finally {
       this.dryRunningEvents = false;
+      this.dryRunHits = null;
     }
-    return this.state.awaiting !== null;
+    if (this.state.awaiting !== null) return true;
+    return this.shieldSharesAsked(hits, { site: "effect" });
   }
 
   /** Combat damage asks before any of it is dealt, one simultaneous event. */
@@ -68232,9 +68274,116 @@ controlledBy,
     const cd = this.state.combatDamage;
     if (cd === null) return false;
     const assignments = this.combatDamageAssignments(this.subPassKind(cd.pass), cd.assigned, cd.asThoughUnblocked ?? []);
-    return assignments.some(({ source, target, amount, sources }) =>
-      this.damageOrderAsked(source, target, amount, true, undefined, sources ?? 1, { site: "combat-damage" }),
+    if (
+      assignments.some(({ source, target, amount, sources }) =>
+        this.damageOrderAsked(source, target, amount, true, undefined, sources ?? 1, { site: "combat-damage" }),
+      )
+    ) {
+      return true;
+    }
+    // All of it one event (rule 510.2): a shield too small for all it covers
+    // is shared out by the player it protects (615.7).
+    return this.shieldSharesAsked(
+      assignments.map(({ source, target, amount, sources }) => ({
+        source,
+        target,
+        amount,
+        sources: sources ?? 1,
+        combat: true,
+        sourceLastKnown: undefined,
+        group: 0,
+      })),
+      { site: "combat-damage" },
     );
+  }
+
+  /**
+   * Rule 615.7 as a question: "if damage would be dealt to the shielded
+   * permanent or player by two or more applicable sources at the same time,
+   * the player or the controller of the permanent chooses which damage the
+   * shield prevents" — and a shield over several recipients ("you and/or
+   * permanents you control" — Divine Deflection, Harm's Way) likewise, its
+   * player choosing. For each amount shield (prevention or redirection) that
+   * covers two or more hits of one simultaneous event (`hits`, by `group`)
+   * whose total is more than it has left, its player says how much of it each
+   * hit gets, hit by hit (a `choose-number` of `shieldShare`), players' hits
+   * first; the last hit gets what's left, and a share with one possible answer
+   * isn't asked. Each answer waits in `replacementAnswers` under
+   * `shieldShareKey`, read as the hit is dealt (`dealDamage`). Damage that
+   * can't be prevented takes nothing from a prevention shield (615.12). Says
+   * whether it asked.
+   */
+  private shieldSharesAsked(hits: readonly DamageHit[], resume: ReplacementOrderResume): boolean {
+    if (hits.length < 2) return false;
+    const groups = [...new Set(hits.map((h) => h.group))];
+    for (const shield of this.state.activeReplacements) {
+      const r = shield.replacement;
+      if (r.event !== "would-deal-damage" || !("prevent" in r.instead) || r.instead.prevent !== true) continue;
+      if (shield.next === true || shield.left === undefined || shield.left <= 0) continue;
+      const redirects = shield.redirect !== undefined || shield.redirectToSource !== undefined;
+      const by: DamageReplacer = { id: shield.source, controller: shield.owner, attachedTo: null };
+      for (const group of groups) {
+        const recipientOf = (h: DamageHit): PlayerId | undefined =>
+          h.target.kind === "player" ? h.target.player : this.state.objects[h.target.object]?.controller;
+        const covered: DamageHit[] = hits.filter(
+          (h) =>
+            h.group === group &&
+            (redirects || !this.damageUnpreventable(h.source, h.combat, h.sourceLastKnown)) &&
+            this.shieldCovers(shield, h.target, h.combat, h.source, h.sourceLastKnown) &&
+            this.damageReplacementReaches(r, by, h.source, h.target, h.combat, h.sourceLastKnown),
+        );
+        if (covered.length < 2) continue;
+        const total = covered.reduce((n, h) => n + h.amount * h.sources, 0);
+        if (total <= shield.left) continue;
+        // The player shielded, or the controller of the permanents: one of
+        // them for all the hits, or nobody is asked.
+        const players = new Set<PlayerId | undefined>(covered.map(recipientOf));
+        const asked = [...players][0];
+        if (players.size !== 1 || asked === undefined || this.state.players[asked]?.hasLost !== false) continue;
+        // Players' hits first: the last hit's share is whatever is left.
+        const ordered = [...covered.filter((h) => h.target.kind === "player"), ...covered.filter((h) => h.target.kind !== "player")];
+        const answers = this.state.replacementAnswers ?? {};
+        const shareOf = (h: DamageHit): number | undefined => {
+          const answer = answers[shieldShareKey(shield, h.source, h.target)]?.[0];
+          return answer === undefined ? undefined : Number(answer);
+        };
+        let left = shield.left - ordered.reduce((n, h) => n + (shareOf(h) ?? 0), 0);
+        const open = ordered.filter((h) => shareOf(h) === undefined);
+        for (let i = 0; i < open.length; i += 1) {
+          const hit = open[i];
+          const damage = hit.amount * hit.sources;
+          const later = open.slice(i + 1).reduce((n, h) => n + h.amount * h.sources, 0);
+          const min = Math.max(0, Math.min(damage, left - later));
+          const max = Math.max(min, Math.min(damage, left));
+          const key = shieldShareKey(shield, hit.source, hit.target);
+          if (min === max) {
+            this.state.replacementAnswers = { ...(this.state.replacementAnswers ?? {}), [key]: [String(min)] };
+            left -= min;
+            continue;
+          }
+          const sourceName = this.state.objects[hit.source]?.cardName ?? "A source";
+          const victim =
+            hit.target.kind === "player"
+              ? hit.target.player === asked
+                ? "you"
+                : hit.target.player
+              : (this.state.objects[hit.target.object]?.cardName ?? "a permanent");
+          // Shown after the shield's name ("Harm's Way — of the 2 it has
+          // left, …").
+          this.state.awaiting = {
+            kind: "choose-number",
+            player: asked,
+            source: shield.source,
+            min,
+            max,
+            prompt: `Of the ${left} it has left, how much of the ${damage} damage ${sourceName} would deal to ${victim} does it ${redirects ? "redirect" : "prevent"}?`,
+            shieldShare: { answers: key, resume },
+          };
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   /** Answers a `replacement-order` question: the effect goes first, and what
@@ -68733,6 +68882,9 @@ controlledBy,
     if (this.dryRunningEvents) {
       if (this.state.awaiting === null && applied === NO_DAMAGE_APPLIED) {
         this.damageOrderAsked(source, target, amount, combat, sourceLastKnown, sources, { site: "effect" });
+        // One simultaneous event's hits, together (rule 615.7).
+        const group = this.damageBatch !== null ? this.dryRunHitGroup : ++this.dryRunHitGroup;
+        this.dryRunHits?.push({ source, target, amount, sources, combat, sourceLastKnown, group });
       }
       return 0;
     }
@@ -68761,7 +68913,17 @@ controlledBy,
           ? []
           : this.answeredDamageSteps(steps, damageAnswersKey(recipient, steps));
       const order = this.bestDamageOrder(amount, sources, steps.filter((s) => !chosen.includes(s)), unpreventable, chosen);
-      const outcome = runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
+      // A shield shared out among this event's hits (rule 615.7) gives this
+      // one no more than its share.
+      const shares = this.state.replacementAnswers;
+      const sharedLeft =
+        shares === undefined
+          ? shieldLeft
+          : (shield: ActiveReplacement): number => {
+              const share = shares[shieldShareKey(shield, source, target)]?.[0];
+              return share === undefined ? shieldLeft(shield) : Math.min(Number(share), shieldLeft(shield));
+            };
+      const outcome = runDamageSteps(amount, sources, order, sharedLeft, unpreventable);
       const spent: ActiveReplacement[] = [];
       const redirected: { readonly to: TargetRef; readonly amount: number; readonly applied: DamageApplied }[] = [];
       for (const { shield, prevented } of outcome.shields) {
@@ -69316,6 +69478,8 @@ controlledBy,
       fn();
       return;
     }
+    // A new simultaneous event, for the hits a dry run records.
+    this.dryRunHitGroup += 1;
     const batch = {
       id: this.state.eventSeq,
       lifelink: new Map<ObjectId, { controller: PlayerId; amount: number }>(),

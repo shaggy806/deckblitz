@@ -24,16 +24,15 @@ export const choosePile = defineDecision({
     const all = awaiting.piles.flat();
     // A face-down pile is worth what the chooser can't see only to those
     // who looked (rule 700.3 leaves it face down).
-    // Cards looked at in a library, not revealed, are unseen by all but the
-    // lookers too (Phyrexian Portal's "two face-down piles"; a reveal makes
-    // every player a looker).
+    // Two face-down piles (Phyrexian Portal): both.
     const hidden = new Set<string>(
       awaiting.lookers.includes(player)
         ? []
-        : [
-            ...(awaiting.faceDown === true ? awaiting.piles[0] : []),
-            ...all.filter((id) => ctx.state.objects[id]?.zone === "library"),
-          ],
+        : awaiting.faceDown === "both"
+          ? all
+          : awaiting.faceDown === true
+            ? awaiting.piles[0]
+            : [],
     );
     const seen = all.filter((id) => !hidden.has(id));
     return [
@@ -42,7 +41,7 @@ export const choosePile = defineDecision({
         source: awaiting.source,
         piles: awaiting.piles.map((pile) => [...pile]),
         separator: awaiting.separator,
-        ...(awaiting.faceDown === true ? { faceDown: true } : {}),
+        ...(awaiting.faceDown !== undefined ? { faceDown: awaiting.faceDown } : {}),
         fates: awaiting.fates,
         worth: pileWorth(ctx, seen),
         whose: pileWhose(ctx, all, awaiting.fates, awaiting.source),

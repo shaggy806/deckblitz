@@ -13734,4 +13734,31 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, bf: ['Defensive Formation', 'Grizzly Bears', 'Llanowar Elves'] },
     }),
   ),
+  // --- Piles chosen by an opponent of the separator's choice (2026-11-22) ----
+  preset(
+    'Bend or Break: in a 4-player game, you name the opponent who chooses your pile',
+    board({
+      you: { bf: ['Mountain*4', 'Forest*2'], hand: ['Bend or Break'] },
+      opp: [{ bf: ['Island*2'] }, { bf: ['Swamp*2'] }, { bf: ['Plains*2'] }],
+    }),
+  ),
+  // --- A shield too small for all of one event's damage (2026-11-22) --------
+  preset(
+    "Harm's Way: you choose which of Pestilence's damage is redirected",
+    board({
+      you: { bf: ['Pestilence', 'Swamp', 'Plains', 'Grizzly Bears', 'Llanowar Elves'], hand: ["Harm's Way"] },
+      opp: {},
+    }),
+  ),
+  // --- Face-down piles of your library (2026-11-22) -------------------------
+  preset(
+    'Phyrexian Portal: you exile a pile without seeing it, then search the other',
+    board({
+      you: {
+        bf: ['Phyrexian Portal', 'Island*3'],
+        lib: ['Grizzly Bears', 'Hill Giant', 'Llanowar Elves', 'Lightning Bolt', 'Shock', 'Serra Angel', 'Wind Drake', 'Colossal Dreadmaw', 'Divination', 'Counterspell'],
+      },
+      opp: {},
+    }),
+  ),
 ]

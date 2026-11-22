@@ -25,6 +25,7 @@ export default defineCard({
         then: {
           kind: "separate-into-piles",
           objects: { libraryTop: 10 },
+          faceDown: "both",
           separator: { target: 0 },
           chooser: "you",
           chosen: "exile",

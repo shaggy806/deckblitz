@@ -30,7 +30,7 @@ export const separatePiles = defineDecision({
       objects: [...awaiting.objects],
       chooser: awaiting.chooser,
       ...(awaiting.anOpponentChooses === true ? { anOpponentChooses: true } : {}),
-      ...(awaiting.faceDown === true ? { faceDown: true } : {}),
+      ...(awaiting.faceDown !== undefined ? { faceDown: awaiting.faceDown } : {}),
       ...(awaiting.pileCount !== undefined ? { pileCount: awaiting.pileCount } : {}),
       ...(awaiting.atRandom === true ? { atRandom: true } : {}),
       fates: awaiting.fates,

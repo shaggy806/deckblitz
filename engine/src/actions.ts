@@ -2377,8 +2377,9 @@ export type LegalAction =
       /** `chooser` only stands in: you'll name the opponent once the piles
        * are made. */
       readonly anOpponentChooses?: true;
-      /** Pile 0 is face down, pile 1 face up. */
-      readonly faceDown?: true;
+      /** Pile 0 is face down, pile 1 face up; `"both"`, both face down
+       * (Phyrexian Portal). */
+      readonly faceDown?: true | "both";
       /** How many piles to make: two when absent, three for Whims of the
        * Fates. */
       readonly pileCount?: number;
@@ -2419,8 +2420,9 @@ export type LegalAction =
       readonly piles: readonly (readonly ObjectId[])[];
       readonly separator: PlayerId;
       /** Pile 0 is face down; `piles[0]` is then the chooser's to see only
-       * when they looked at the cards. */
-      readonly faceDown?: true;
+       * when they looked at the cards. `"both"`: every pile is (Phyrexian
+       * Portal). */
+      readonly faceDown?: true | "both";
       readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
       /** As `separate-piles`' — a face-down card the chooser can't see is
        * left out. */

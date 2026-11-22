@@ -9052,3 +9052,21 @@ Each board's die comes up 4.
 ### Defensive Formation: the defender divides, and keeps a Thorn Elemental off themself
 - **Do:** Attack Bob with Thorn Elemental. As Bob, block it with Grizzly Bears and Llanowar Elves.
 - **Expect:** Bob, not Alice, is asked "You divide Thorn Elemental's 7 damage", with an "All to Bob" button beside Confirm. Putting all 7 on the Elves and confirming leaves the Bears alive and Bob's life where it was.
+
+## Piles chosen by an opponent of the separator's choice (2026-11-22)
+
+### Bend or Break: in a 4-player game, you name the opponent who chooses your pile
+- **Do:** Cast Bend or Break. Click a Forest into pile 1 and confirm the piles. When asked, choose Carol, then pick a pile each time an opponent names you.
+- **Expect:** Once every player has separated, the banner offers "Choose Bob / Carol / Dave to choose one of your piles". Carol chooses one of your piles: its lands are destroyed and the rest tapped. Each opponent then names one of their own opponents, and their piles meet the same fates.
+
+## A shield too small for all of one event's damage (2026-11-22)
+
+### Harm's Way: you choose which of Pestilence's damage is redirected
+- **Do:** Cast Harm's Way at Bob and choose Pestilence as the source. Activate Pestilence. Answer 1 to the first question and 0 to the second.
+- **Expect:** The first question reads "Harm's Way — of the 2 it has left, how much of the 1 damage Pestilence would deal to you does it redirect? (0–1)"; the second asks the same about one of your creatures, "of the 1 it has left". Your life stays put, one creature is dealt 1 and the other none, and Bob loses 3 (1 from Pestilence, 2 redirected).
+
+## Face-down piles of your library (2026-11-22)
+
+### Phyrexian Portal: you exile a pile without seeing it, then search the other
+- **Do:** Activate Phyrexian Portal targeting Bob. Choose either pile, then pick a card from the popup and confirm.
+- **Expect:** Bob separates your top ten cards; the pile choice shows both piles face down, nothing named. The pile you chose is exiled face up; then a popup shows only the other pile's cards, and the one you pick goes to your hand.

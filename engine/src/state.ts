@@ -4049,7 +4049,8 @@ export type AwaitingDecision =
       /** `chooser` only stands in for an opponent to be named once the piles
        * are made ("an opponent chooses one of those piles"). */
       readonly anOpponentChooses?: true;
-      readonly faceDown?: true;
+      /** `"both"`: both piles face down (Phyrexian Portal). */
+      readonly faceDown?: true | "both";
       /** "Into **three** piles" (Whims of the Fates): how many. Two when
        * absent. */
       readonly pileCount?: number;
@@ -4070,7 +4071,8 @@ export type AwaitingDecision =
       readonly source: ObjectId;
       readonly piles: readonly (readonly ObjectId[])[];
       readonly separator: PlayerId;
-      readonly faceDown?: true;
+      /** `"both"`: every pile is face down (Phyrexian Portal). */
+      readonly faceDown?: true | "both";
       readonly lookers: readonly PlayerId[];
       readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
     }
@@ -4801,6 +4803,7 @@ export type AwaitingDecision =
           /** Keep the answer on `source` too, while it's still the permanent
            * of this stint (`GameObject.chosenOnEnter`) — Shapeshifter. */
           readonly remember?: { readonly stint: number };
+          readonly shieldShare?: undefined;
         }
       | {
           readonly assist: AssistAsk;
@@ -4810,6 +4813,7 @@ export type AwaitingDecision =
           readonly payLifeAsEntering?: undefined;
           readonly numberAsEntering?: undefined;
           readonly remember?: undefined;
+          readonly shieldShare?: undefined;
         }
       | {
           /** The other copies, still on the stack as this is asked. */
@@ -4820,6 +4824,7 @@ export type AwaitingDecision =
           readonly then?: undefined;
           readonly resume?: undefined;
           readonly remember?: undefined;
+          readonly shieldShare?: undefined;
         }
       | {
           /** How much life `player` pays as `source` is about to enter
@@ -4833,12 +4838,32 @@ export type AwaitingDecision =
           readonly then?: undefined;
           readonly resume?: undefined;
           readonly remember?: undefined;
+          readonly shieldShare?: undefined;
         }
       | {
           /** "As this creature enters, choose a number" (Sanctum Prelate —
            * `CardDefinition.chooseNumberOnEnter`): the answer waits on
            * `source` as `enterChoice.chosen`, and its entry carries on. */
           readonly numberAsEntering: true;
+          readonly payLifeAsEntering?: undefined;
+          readonly placeCopy?: undefined;
+          readonly assist?: undefined;
+          readonly then?: undefined;
+          readonly resume?: undefined;
+          readonly remember?: undefined;
+          readonly shieldShare?: undefined;
+        }
+      | {
+          /** Rule 615.7: how much of a prevention (or redirection) shield's
+           * amount goes to one hit of a simultaneous damage event, when the
+           * shield covers two or more and can't take all of them — asked of
+           * the player who'd be dealt the damage, or the controller of the
+           * permanents (`Game.shieldSharesAsked`). `source` is the shield's
+           * source. The answer waits in `GameState.replacementAnswers` under
+           * `answers`, read as that hit is dealt; the damage carries on from
+           * `resume`, asking the next share. */
+          readonly shieldShare: { readonly answers: string; readonly resume: ReplacementOrderResume };
+          readonly numberAsEntering?: undefined;
           readonly payLifeAsEntering?: undefined;
           readonly placeCopy?: undefined;
           readonly assist?: undefined;

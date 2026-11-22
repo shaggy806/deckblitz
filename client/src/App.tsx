@@ -279,6 +279,10 @@ function graveyardVariantLabel(
   return parts.length > 0 ? `${verb} ${parts.join(', ')}` : verb
 }
 
+/** A sentence carried on after a dash: its first letter lowered, and only
+ * that, so the card names in it keep their capitals. */
+const lowerFirst = (text: string): string => text.charAt(0).toLowerCase() + text.slice(1)
+
 /** A menu item or button for one way of playing a card, naming the card too:
  * "Cast Patron of the Akki (offering sacrificing Goblin Piker: -{1}{R})". */
 function castWayLabel(a: CastAction | LandAction, view: PlayerView): string {
@@ -2662,10 +2666,13 @@ function Table({
   const pileCount = Math.max(2, separatePilesAction?.pileCount ?? choosePileAction?.piles.length ?? 2)
   const lastPile = pileCount - 1
   const pileIndexOf = useCallback((id: ObjectId): number => pileOf[id] ?? lastPile, [pileOf, lastPile])
+  const pilesFaceDown = (separatePilesAction ?? choosePileAction)?.faceDown
   const pileLabels: readonly string[] =
-    (separatePilesAction ?? choosePileAction)?.faceDown === true
+    pilesFaceDown === true
       ? ['Pile 1 (face down)', 'Pile 2 (face up)']
-      : Array.from({ length: pileCount }, (_, i) => `Pile ${i + 1}`)
+      : pilesFaceDown === 'both'
+        ? ['Pile 1 (face down)', 'Pile 2 (face down)']
+        : Array.from({ length: pileCount }, (_, i) => `Pile ${i + 1}`)
   const proliferateAction = actions.find(
     (a): a is ProliferateAction => a.kind === 'proliferate',
   )
@@ -6260,7 +6267,8 @@ function Table({
     controls = (
       <NumberChoice
         key={chooseNumberAction.source}
-        title={`${game.nameOf(chooseNumberAction.source)} — ${(chooseNumberAction.prompt ?? 'choose a number').toLowerCase()}${
+        // Only the first letter lowered: a prompt may name cards.
+        title={`${game.nameOf(chooseNumberAction.source)} — ${lowerFirst(chooseNumberAction.prompt ?? 'choose a number')}${
           chooseNumberAction.max === undefined ? '' : ` (${chooseNumberAction.min}–${chooseNumberAction.max})`
         }`}
         min={chooseNumberAction.min}

@@ -12100,8 +12100,12 @@ export type EffectSpec =
        * but the players who looked at the cards, and the second is revealed
        * to everyone as the piles are made. The chooser picks a face-down
        * pile without seeing it (unless they looked). Only for `libraryTop`.
+       *
+       * `"both"`: "separates them into **two face-down piles**" (Phyrexian
+       * Portal): neither pile is revealed, so a chooser who didn't look
+       * chooses blind.
        */
-      readonly faceDown?: true;
+      readonly faceDown?: true | "both";
       /** With `faceDown`: "**Exile** any number of them in a face-down pile
        * and the rest in a face-up pile. Defending player chooses one of those
        * piles" (The Celestial Toymaker) — the piles are exiled as they're
@@ -14959,7 +14963,7 @@ export interface EffectApi {
     separator: PlayerId,
     objects: readonly ObjectId[],
     chooser: PlayerId,
-    faceDown: boolean,
+    faceDown: boolean | "both",
     fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord },
     /** `chooser` only stands in for an opponent to be named once the piles
      * are made. */
@@ -14979,7 +14983,7 @@ export interface EffectApi {
     chooser: PlayerId,
     separator: PlayerId,
     piles: readonly (readonly ObjectId[])[],
-    faceDown: boolean,
+    faceDown: boolean | "both",
     lookers: readonly PlayerId[],
     fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord },
   ): boolean;
@@ -20920,6 +20924,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "sequence": {
       // One instruction over several objects: nothing in it stops to ask.
       if (spec.simultaneous === true) {
+        // Damage to several kinds of thing at once (Earthquake's "each
+        // creature without flying and each player") is one event, asked
+        // about whole — a shield shared out among its hits (rule 615.7) —
+        // before any of it is dealt. Only damage steps: the dry run deals
+        // nothing, but would carry out any other step.
+        if (
+          spec.effects.length > 1 &&
+          spec.effects.every((step) => step.kind === "damage" || step.kind === "damage-all") &&
+          asksReplacementOrder(spec, ctx)
+        ) {
+          return;
+        }
         ctx.simultaneously(() => {
           for (const step of spec.effects) applyEffectSpec(step, ctx);
         });
@@ -25758,7 +25774,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // Separated first, then chosen (rule 700.3), each answered before the
       // next is asked; the piles' fates wait for both.
       const below = ctx.parkedCount();
-      const faceDown = spec.faceDown === true;
+      const faceDown: boolean | "both" = spec.faceDown === "both" ? "both" : spec.faceDown === true;
       const progress = spec.progress;
       if (spec.each !== undefined) {
         // Three instructions, each for every player of the scope: all

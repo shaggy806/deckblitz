@@ -29,6 +29,7 @@ describe("Phyrexian Portal", () => {
     a.choosePileFn = (_view, offer) => {
       chosePile = true;
       expect(offer.separator).toBe(B);
+      expect(offer.faceDown).toBe("both");
       return 0;
     };
     let searched: readonly ObjectId[] = [];
@@ -40,6 +41,8 @@ describe("Phyrexian Portal", () => {
     activate(game, portal, 0, { targets: [ref(B)] });
     expect(separated?.chooser).toBe("alice");
     expect(chosePile).toBe(true);
+    // Two face-down piles: nothing was revealed.
+    expect(game.state.eventLog.some((e) => e.type === "cards-revealed")).toBe(false);
     // The first pile exiled.
     for (const id of top.slice(0, 4)) expect(zone(game, id)).toBe("exile");
     // Searched the other pile alone, one card to hand.
