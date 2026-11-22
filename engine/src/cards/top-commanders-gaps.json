@@ -3222,7 +3222,11 @@
   "trigger:put-into-graveyard-caused-by-opponent",
   "trigger:cumulative-upkeep-paid",
   "amount:leaves-battlefield-lki-count",
-  "static:venture-limit-once-per-turn"
+  "static:venture-limit-once-per-turn",
+  "effect:host-of-attached-permanent",
+  "target:controlled-by-chosen-player",
+  "effect:put-onto-battlefield-blocking",
+  "filter:controller-controls-filter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

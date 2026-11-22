@@ -8817,3 +8817,11 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **The first kicked spell each turn, and a kicked cast's own discount (2026-11-22).** `cost:cost-reduction-if-kicked`: `SpellCastClause.kicked` now asks a plain kicker (bargain and the other keywords price as kicked variants but aren't, 702.33d), and with `firstEachTurn` only an earlier kicked spell uses it up (`CastSpellRecord.kicked`). Bite Down on Crime's "costs {2} less if evidence was collected" was already `kicker.reduceGeneric`; the scaffolder reads both lines. Vine Gecko (rank 20144), Bite Down on Crime (26167).
 
 **A warped card in exile, chosen as a cost (2026-11-22).** `cost:choose-creature-or-warped-card-as-cost`: warp's delayed exile marks the card `GameObject.warped` (the `exile` effect's `warp`, rule 702.185b; cleared on any zone change), and `BeholdSpec.orWarpedInExile` offers those the payer owns in place of the hand, read as `{ paid: "beheld" }`. Close Encounter (rank 20077).
+
+**The host of the enchanted Equipment (2026-11-22).** `effect:host-of-attached-permanent`: no engine code — an intervening if of `{ kind: "source", filter: { attachedTo: { attachedTo: { type: "creature" } } } }` and `destroy` `{ hostOf: "attached" }`, read as it resolves. Artificer's Hex. `test/top10000-batch-338m-hex.test.ts`.
+
+**A reflexive ability's "that player" (2026-11-22).** `target:controlled-by-chosen-player`: `reflexive-trigger`'s `player: PlayerRef`, read as it triggers and kept as the reflexive ability's trigger player (`LastKnownRefs.player`), so a `whose: "trigger-player"` slot picks among that player's permanents (603.12). Strax, Sontaran Nurse. `test/top10000-batch-338m-strax.test.ts`.
+
+**Put onto the battlefield blocking from hand (2026-11-22).** `effect:put-onto-battlefield-blocking`: no engine code — a `look-and-choose` from hand to the battlefield, then `enter-blocking` `blocker: "put-this-way"` (509.4). Aetherplasm. `test/top10000-batch-338m-aetherplasm.test.ts`.
+
+**Whose controller controls an X (2026-11-22).** `filter:controller-controls-filter`: `CardFilter.controllerControls: CardFilter`, at least one permanent matching it controlled by the object's controller, read from their side. Seasinger. `test/top10000-batch-338m-seasinger.test.ts`.
