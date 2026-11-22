@@ -412,6 +412,16 @@ export interface AsEntersAction {
    */
   readonly mill?: EffectAmount;
   /**
+   * "As this enchantment enters, **you lose life equal to your life total**"
+   * (Lich): its controller, the player it's entering under, loses that much
+   * as it's about to enter (rule 614.12), part of the replacement (614.1c),
+   * so nobody can respond — the amount read as an "enters with" count is
+   * (`enteringCounterAmount`, `{ lifeTotal: "you" }`). Nothing for an amount
+   * of 0 or less (rule 107.1b: no negative life loss). How
+   * much was lost is `"done-as-enters"`.
+   */
+  readonly loseLife?: EffectAmount;
+  /**
    * "As this artifact enters, **pay any amount of life**" (Phyrexian
    * Processor): its controller chooses how much as it's about to enter (rule
    * 614.12, a `choose-number` from 0) and pays it then (614.1c) — no more than

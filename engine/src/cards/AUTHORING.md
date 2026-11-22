@@ -8161,7 +8161,9 @@ clause (section 9):
   N cards" (Urborg Lhurgoyf's `{ product: [3, { timesKicked: "source" }] }`,
   Monstrous War-Leech's `{ ifCondition: { kind: "self-kicked" }, then: 4, else: 0 }`:
   its controller's, nothing chosen, done before it moves so a CDA over the
-  graveyard enters seeing them). `payLife: "any"` is "pay any
+  graveyard enters seeing them). `loseLife: EffectAmount` is "you lose N life"
+  (Lich's `{ lifeTotal: "you" }`: the player it enters under, nothing chosen, done
+  before it moves). `payLife: "any"` is "pay any
   amount of life" (Phyrexian Processor: a `choose-number` from 0 to its
   controller's life total, paid then, and noted on it as `{ chosenNumber: true }`
   — "the life paid as this artifact entered"). Pair it with `counters: {

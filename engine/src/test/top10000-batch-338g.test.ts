@@ -10,7 +10,10 @@ import {
   destroy,
   hand,
   lands,
+  life,
+  named,
   pickFromZone,
+  ref,
   settle,
   spawn,
   table,
@@ -71,8 +74,66 @@ describe("Storm Herald: Auras returned, exiled at your end step or if they'd lea
     settle(game);
     expect(on(game, rancor)).not.toBeNull();
     toStep(game, "end", A);
+    game.debugApplyEffect(A, { kind: "add-player-counters", counter: "poison", amount: 2, who: { target: 0 } }, [ref(B)]);
     settle(game);
-    expect(zone(game, rancor)).toBe("exile");
-    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.players[B].counters.poison).toBe(2);
   });
 });
+
+describe("Lich", () => {
+  const nontoken = (game: Game): number =>
+    game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].controller === A && !game.state.objects[id].isToken).length;
+
+  it("you lose life equal to your life total as it enters, and don't lose for 0 life", () => {
+    const { game } = table();
+    lands(game, "Swamp", 4);
+    expect(life(game)).toBe(20);
+    cast(game, toHand(game, "Lich"));
+    settle(game);
+    expect(zone(game, named(game, "Lich")[0])).toBe("battlefield");
+    expect(life(game)).toBe(0);
+    expect(game.state.players[A].hasLost).toBe(false);
+  });
+
+  it("draws that many cards instead of gaining life", () => {
+    const { game } = table();
+    spawn(game, "Lich");
+    const before = { life: life(game), hand: hand(game).length };
+    game.debugApplyEffect(A, { kind: "gain-life", amount: 2 });
+    settle(game);
+    expect(life(game)).toBe(before.life);
+    expect(hand(game).length).toBe(before.hand + 2);
+  });
+
+  it("dealt damage: sacrifices that many nontoken permanents", () => {
+    const { game, a } = table();
+    const lich = spawn(game, "Lich");
+    const bears = [0, 1, 2].map(() => spawn(game, "Grizzly Bears"));
+    lands(game, "Mountain", 1);
+    expect(nontoken(game)).toBe(5);
+    const seen = { offered: [] as readonly ObjectId[] };
+    a.chooseSacrificesFn = (_view, eligible) => {
+      seen.offered = eligible;
+      return bears;
+    };
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(A)] });
+    settle(game);
+    expect(seen.offered).toContain(lich);
+    expect(bears.map((id) => zone(game, id))).toEqual(["graveyard", "graveyard", "graveyard"]);
+    expect(zone(game, lich)).toBe("battlefield");
+    expect(game.state.players[A].hasLost).toBe(false);
+  });
+
+  it("dealt more damage than it has nontoken permanents: sacrifices them all and loses", () => {
+    const { game } = table();
+    spawn(game, "Lich");
+    spawn(game, "Grizzly Bears");
+    lands(game, "Mountain", 1);
+    cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(A)] });
+    settle(game);
+    expect(nontoken(game)).toBe(0);
+    expect(game.state.players[A].hasLost).toBe(true);
+  });
+
+  it("loses the game when it's put into a graveyard, whatever the life total", () => {
+    const { game } = table();

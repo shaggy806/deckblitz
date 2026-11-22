@@ -17901,6 +17901,16 @@ export class Game {
       object.enterChoice = { ...object.enterChoice, asEntersDone: Math.max(0, milled) };
       return false;
     }
+    // "You lose life equal to your life total" (Lich): nothing to choose;
+    // lost before it moves, as part of the replacement (614.1c).
+    if (spec.loseLife !== undefined) {
+      const amount = this.enteringCounterAmount(id, chooser, id, spec.loseLife);
+      const before = this.state.players[chooser]?.life ?? 0;
+      if (amount > 0) this.loseLifeTallied(chooser, amount);
+      const lost = before - (this.state.players[chooser]?.life ?? before);
+      object.enterChoice = { ...object.enterChoice, asEntersDone: Math.max(0, lost) };
+      return false;
+    }
     if (spec.putFromExile !== undefined) {
       const count = spec.putFromExile;
       const { eligible, faceDownGroups } = this.exileChoiceCandidates(chooser, { ownedBy: "opponent" }, undefined, id);
