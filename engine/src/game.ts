@@ -70638,6 +70638,10 @@ controlledBy,
       }
       this.effectiveTriggeredEntries(id).forEach(({ ability, ref, lost }, index) => {
         if (lost === true || ability.trigger.on !== "state") return;
+        if (ability.trigger.each !== undefined) {
+          this.checkEachStateTrigger(id, object, ability, index, ability.trigger.each, ref);
+          return;
+        }
         const waiting =
           this.state.pendingTriggers.some((t) => t.sourceObjectId === id && t.abilityIndex === index) ||
           this.state.zones.shared.stack.some((s) => {
@@ -70654,6 +70658,57 @@ controlledBy,
           controller: object.controller,
           ...(ref !== undefined ? { grantedAbility: ref } : {}),
         });
+      });
+    }
+  }
+
+  /**
+   * A state trigger about **each permanent** matching `each` (the `"state"`
+   * trigger's `each` — Bomb Squad's "whenever a creature has four or more
+   * fuse counters on it"): rule 603.8 for every such permanent on its own,
+   * the permanent the trigger object in the stint it's in. An instance for
+   * that permanent waiting or on the stack holds off only its own; the
+   * source's `state`, if any, and the ability's condition must hold too.
+   */
+  private checkEachStateTrigger(
+    id: ObjectId,
+    object: GameObject,
+    ability: TriggeredAbility,
+    index: number,
+    each: CardFilter,
+    ref: GrantedAbilityRef | undefined,
+  ): void {
+    if (ability.trigger.on !== "state") return;
+    if (ability.trigger.state !== undefined && !this.interveningIfMet(ability.trigger.state, object)) return;
+    const ctx = { you: object.controller, source: id };
+    for (const other of this.state.zones.shared.battlefield) {
+      const subject = this.state.objects[other];
+      if (subject === undefined || !matchesFilter(this.state, this.registry, other, each, ctx)) continue;
+      const stint = subject.zoneChangeCount ?? 0;
+      const about = (o: { readonly triggerObject?: ObjectId; readonly lastKnownRefs?: LastKnownRefs }): boolean =>
+        o.triggerObject === other && (o.lastKnownRefs?.triggerObject ?? stint) === stint;
+      const waiting =
+        this.state.pendingTriggers.some((t) => t.sourceObjectId === id && t.abilityIndex === index && about(t)) ||
+        this.state.zones.shared.stack.some((s) => {
+          const o = this.state.objects[s];
+          return (
+            o?.kind === "ability" &&
+            o.abilityKind === "triggered" &&
+            o.sourceObjectId === id &&
+            o.abilityIndex === index &&
+            about(o)
+          );
+        });
+      if (waiting) continue;
+      if (!this.interveningIfMet(ability.condition, object, undefined, undefined, other)) continue;
+      this.state.pendingTriggers.push({
+        sourceObjectId: id,
+        cardName: printedCardName(object),
+        abilityIndex: index,
+        controller: object.controller,
+        triggerObject: other,
+        lastKnownRefs: { triggerObject: stint },
+        ...(ref !== undefined ? { grantedAbility: ref } : {}),
       });
     }
   }

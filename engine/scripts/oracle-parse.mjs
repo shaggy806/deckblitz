@@ -2256,6 +2256,14 @@ export function parseTrigger(clause) {
     if (typeof n !== "number") return null;
     return [{ on: "state", state: { kind: "self-counters", counter: m[2] ?? m[4], compare: { op: "gte", n } } }];
   }
+  // The same of each permanent on its own (Bomb Squad's "whenever a creature
+  // has four or more fuse counters on it"): `each`, it the trigger object.
+  if ((m = /^Whenever an? ([a-z]+) has (\w+) or more (\w+) counters on it$/.exec(c))) {
+    const n = numberOf(m[2]);
+    const filter = parseTypePhrase(m[1]);
+    if (typeof n !== "number" || filter === null || Object.keys(filter).length === 0) return null;
+    return [{ on: "state", each: { ...filter, counters: { kind: m[3], compare: { op: "gte", n } } } }];
+  }
   if ((m = /^When ~ has no (\w+) counters on it$/.exec(c))) {
     return [{ on: "state", state: { kind: "self-counters", counter: m[1], compare: { op: "eq", n: 0 } } }];
   }

@@ -10059,6 +10059,21 @@ describe("the card exiled until this leaves (Bishop of Binding)", () => {
   });
 });
 
+describe("a state trigger about each permanent (Bomb Squad)", () => {
+  it("reads 'whenever a creature has four or more fuse counters on it' as `each`", () => {
+    const squad = parseFace({
+      name: "Bomb Squad",
+      type_line: "Creature — Dwarf",
+      oracle_text:
+        "Whenever a creature has four or more fuse counters on it, remove all fuse counters from it and destroy it. That creature deals 4 damage to its controller.",
+    });
+    expect(squad.triggered[0].trigger).toEqual({
+      on: "state",
+      each: { type: "creature", counters: { kind: "fuse", compare: { op: "gte", n: 4 } } },
+    });
+  });
+});
+
 describe("the card discarded to pay a cost", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

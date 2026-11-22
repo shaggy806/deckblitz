@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A state trigger about each permanent — built 2026-11-22
+
+The key `trigger:state-trigger-per-permanent`: the `"state"` trigger's `each: CardFilter` (rule 603.8 per permanent,
+`Game.checkEachStateTrigger`): every matching permanent is its own instance with it the trigger object, held off only
+by that permanent's instance waiting or on the stack, so two sources each trigger for it. `state` is optional beside it.
+Bomb Squad (19797), its "that creature deals 4 damage to its controller" a `damage` `from: "trigger-object"` read as it
+last existed. The scaffolder reads "whenever a <type> has N or more <kind> counters on it". `test/top10000-batch-338b.test.ts`.
+
 ### The power of the card exiled until this leaves — found built 2026-11-22
 
 The key `amount:exiled-with-source-power` needed no engine code: a `sum` aggregate of `power` over `"exiled-with-source"`,

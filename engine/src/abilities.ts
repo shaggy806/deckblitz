@@ -2255,9 +2255,22 @@ export type TriggerKind =
        * countered or otherwise left the stack; then, if `state` is still
        * true, it triggers again. Looked for whenever state-based actions are
        * (and as zones, counters and control change), from the battlefield.
+       *
+       * With `each`, it's a state of **each permanent** matching the filter
+       * (read from the source's side), every one its own instance with that
+       * permanent as the trigger object: Bomb Squad's "whenever a creature
+       * has four or more fuse counters on it, remove all fuse counters from
+       * it and destroy it" is `{ on: "state", each: { type: "creature",
+       * counters: { kind: "fuse", compare: { op: "gte", n: 4 } } } }`, its
+       * effect about `"trigger-object"`. `state`, if given too, must also
+       * hold, of the source. One permanent's instance waiting or on the stack
+       * holds off only that permanent's (rule 603.8, per object), and two
+       * sources each trigger for it (the Bomb Squad ruling). A state trigger
+       * has a `state`, an `each`, or both.
        */
       readonly on: "state";
-      readonly state: StaticCondition;
+      readonly state?: StaticCondition;
+      readonly each?: CardFilter;
     }
   | {
       /**
