@@ -1,13 +1,14 @@
 ---
 name: site-usage
-description: Fetch the live site's usage numbers (deckblitz.net) and report them here — visitors by day and country, where they came from, games begun and finished, commanders imported, cards people import that the engine lacks, failed imports and page errors. Takes an optional number of days (`/site-usage 30`; 14 by default). Use when the user asks who is using the site, for the usage / traffic / metrics / analytics / stats, how many visitors or games there were, what decks or commanders people are testing, which missing cards are asked for most, or what errors visitors are hitting.
+description: Fetch the live site's usage numbers (deckblitz.net) and report them here — visitors by day and country, where they came from, games begun and finished, commanders imported, cards people import that the engine lacks, failed imports and page errors. Takes an optional number of days (`/site-usage 30`; 14 by default). Use when the user asks who is using the site, for the usage / traffic / metrics / analytics / stats, how many visitors or games there were, what decks or commanders people are testing, which missing cards are asked for most, or what errors visitors are hitting. Also says how much room the kept games (the played-game records) take on the box, how much disk is left, and whether it is time to fetch them to this PC: use it too when the user asks about storage, disk space, how many games are saved, or whether to transfer or pull the saved games.
 ---
 
 # Site usage
 
 Reads the usage report the live server keeps (`server/src/usage.ts`; `DEPLOYMENT.md`,
-"Checking on it") and tells the user what it says. Read-only: one `curl` on the box over SSH,
-against the server's loopback status port. Nothing on the box changes.
+"Checking on it") and tells the user what it says, and with it how the kept games stand
+(`server/src/game-store.ts`; `DEPLOYMENT.md`, "Played games"). Read-only: two `curl`s on the
+box over SSH, against the server's loopback status port. Nothing on the box changes.
 
 ## Fetch it
 
@@ -33,6 +34,35 @@ If it fails:
 - **No answer from `curl`**: the server is down or restarting. `ssh deckblitz "systemctl
   is-active mtg-server"` says which; report it, and leave fixing it to the user's word.
 - **SSH itself fails**: say that the box couldn't be reached and show the error.
+
+## The kept games' storage
+
+Every run, beside the usage report (and alone, when storage is all that was asked):
+
+```bash
+ssh -o ConnectTimeout=15 deckblitz "curl -s -m 20 localhost:4010/games"
+```
+
+It prints how many games are kept and their size, the days they span, how full the folder is of
+what it may hold (20 GB, or less where the disk would be left under 5 GB free), how fast it is
+filling, the disk's free space, and a `transfer` line. `localhost:4010/games.json` has the same
+as numbers.
+
+Report it in two or three lines under the usage summary, and **say plainly whether to transfer
+the games**, from the `transfer` line:
+
+- **`not needed for room`**: no. Say so, with the figures (games, size, percent full, disk free).
+  Fetching is still how a reported play gets looked at: `npm run games:pull`, then
+  `npm run game:replay -- games/<day>/<file>`.
+- **`soon`** (over half full): yes, at the next convenient moment.
+- **`NOW`** (over four fifths): yes, now. At full the oldest games are deleted to make room.
+
+Offer the pull, don't run it unasked: `npm run games:pull` copies the files into `games/` here
+and **deletes them on the box**. A game still being played is sent again whole by its browser
+afterwards, so nothing is lost by pulling mid-game.
+
+If it fails: **`not found`** means the installed build is older than this report (2026-11-22):
+say it needs a deploy. **`games aren't being kept`** means the unit sets `GAMES=0`.
 
 ## Report it
 

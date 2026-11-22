@@ -17,7 +17,7 @@ import type { RoomInput, TableRecipe } from "protocol";
 import { ALICE, BOB, DECKS } from "../decks.js";
 import { GameRecorder, MIN_RECORDED_INPUTS, replayRecord } from "../game-record.js";
 import type { DealtConfig, GameRecord, GameRecordPart } from "../game-record.js";
-import { GAMES_PER_HOUR, GameStore, handleGamesRoute, recordShape } from "../game-store.js";
+import { GAMES_PER_HOUR, GameStore, handleGamesRoute, recordShape, renderGamesReport } from "../game-store.js";
 import { Room, recordGamesTo } from "../room.js";
 import { Tables } from "../tables.js";
 
@@ -165,7 +165,7 @@ describe("a game's record", () => {
   it("is handed over a part at a time where the sink asks, and the parts put together are the game", () => {
     const EVERY = 60;
     const parts: GameRecordPart[] = [];
-    const store = new GameStore({ dir: tempDir() });
+    const store = new GameStore({ disk: () => null, dir: tempDir() });
     let file: string | null = null;
     // A keeper that takes each part as it comes and says nothing: all of it.
     recordGamesTo({
@@ -321,7 +321,7 @@ describe("the game store", () => {
 
   it("keeps a record gzipped under its day, once", () => {
     const dir = tempDir();
-    const store = new GameStore({ dir, now: () => NOON });
+    const store = new GameStore({ disk: () => null, dir, now: () => NOON });
     const path = store.write(sample(), { country: "CA" });
     expect(path).toBe(join(dir, "2026-11-22", "ABCD-1-7.json.gz"));
     const kept = JSON.parse(gunzipSync(readFileSync(path!)).toString("utf8")) as Record<string, unknown>;
@@ -339,7 +339,7 @@ describe("the game store", () => {
   });
 
   it("refuses what isn't a record", () => {
-    const store = new GameStore({ dir: tempDir() });
+    const store = new GameStore({ disk: () => null, dir: tempDir() });
     expect(recordShape(null)).toBeNull();
     expect(recordShape({ ...sample(), version: 2 })).toBeNull();
     expect(recordShape({ ...sample(), roomId: "../../etc" })).toBeNull();
@@ -352,9 +352,9 @@ describe("the game store", () => {
   it("drops the oldest files once the folder is full", () => {
     const dir = tempDir();
     let now = NOON;
-    const one = new GameStore({ dir, now: () => now }).write(sample());
+    const one = new GameStore({ disk: () => null, dir, now: () => now }).write(sample());
     const size = readFileSync(one!).length;
-    const store = new GameStore({ dir, maxBytes: Math.floor(size * 2.5), now: () => now });
+    const store = new GameStore({ disk: () => null, dir, maxBytes: Math.floor(size * 2.5), now: () => now });
     now += 1000;
     store.write(sample({ gameNumber: 2 }));
     expect(store.stats().games).toBe(2);
@@ -368,7 +368,7 @@ describe("the game store", () => {
   it("puts a part after what it holds, and says where to start again when it can't", () => {
     const dir = tempDir();
     let now = NOON;
-    const store = new GameStore({ dir, now: () => now });
+    const store = new GameStore({ disk: () => null, dir, now: () => now });
     const input = (n: number): GameRecord["inputs"][number] => ({ input: { kind: "concede", player: ALICE }, by: "person", via: String(n) });
     const inputs = (from: number, to: number): GameRecord["inputs"] => Array.from({ length: to - from }, (_, i) => input(from + i));
     const read = (path: string): GameRecord => JSON.parse(gunzipSync(readFileSync(path)).toString("utf8")) as GameRecord;
@@ -413,7 +413,7 @@ describe("the game store", () => {
 
   it("takes a post over HTTP and answers how much of the game it holds", async () => {
     const dir = tempDir();
-    const store = new GameStore({ dir, now: () => NOON });
+    const store = new GameStore({ disk: () => null, dir, now: () => NOON });
     const server = createServer((req, res) => {
       if (handleGamesRoute(req, res, store, () => "1.2.3.4", "https://deckblitz.net")) return;
       res.writeHead(404);
@@ -441,9 +441,67 @@ describe("the game store", () => {
     }
   });
 
+  it("reports how full it is, how fast it fills, and when to fetch the games away", () => {
+    const dir = tempDir();
+    const GB = 1024 ** 3;
+    let free = 50 * GB;
+    // The report reads the folder itself, so its times are the files' own.
+    const store = new GameStore({ dir, maxBytes: 100_000, minFreeBytes: 5 * GB, disk: () => ({ free, total: 60 * GB }) });
+    expect(store.report()).toMatchObject({ games: 0, bytes: 0, room: 100_000, full: 0, transfer: "no", oldest: null });
+    store.write(sample());
+    store.write(sample({ gameNumber: 2 }));
+    const two = store.report();
+    const bytes = two.bytes;
+    expect(two).toMatchObject({ games: 2, maxBytes: 100_000, room: 100_000, transfer: "no" });
+    expect(bytes).toBeGreaterThan(200);
+    expect(two.full).toBeCloseTo(bytes / 100_000);
+    expect(two.oldest).not.toBeNull();
+    // Both written just now: all of it within the day.
+    expect(two.perDay).toBe(bytes);
+    const text = renderGamesReport(two);
+    expect(text).toContain("2 file(s)");
+    expect(text).toContain("50.0 GB free of 60.0 GB");
+    expect(text).toContain("transfer   not needed for room");
+
+    // Half of what it may hold: soon. Four fifths: now.
+    const half = new GameStore({ dir, maxBytes: 2 * bytes, disk: () => null });
+    expect(half.report()).toMatchObject({ full: 0.5, transfer: "soon" });
+    expect(renderGamesReport(half.report())).toContain("transfer   soon");
+    const most = new GameStore({ dir, maxBytes: Math.floor(1.2 * bytes), disk: () => null });
+    expect(most.report().transfer).toBe("now");
+    expect(renderGamesReport(most.report())).toContain("transfer   NOW");
+
+    // The disk can allow less than the folder's own limit: what is free
+    // above the floor, with what is already here.
+    free = 5 * GB + bytes;
+    const tight = store.report();
+    expect(tight.room).toBe(2 * bytes);
+    expect(tight.transfer).toBe("soon");
+    expect(renderGamesReport(tight)).toContain("the disk allows less");
+  });
+
+  it("drops the oldest games when the disk itself runs short, whatever the folder's limit", () => {
+    const dir = tempDir();
+    let now = NOON;
+    const GB = 1024 ** 3;
+    let free = 50 * GB;
+    const store = new GameStore({ dir, now: () => now, minFreeBytes: 5 * GB, disk: () => ({ free, total: 60 * GB }) });
+    const first = store.write(sample())!;
+    now += 1000;
+    const second = store.write(sample({ gameNumber: 2 }))!;
+    expect(store.stats().games).toBe(2);
+    // Short by a few bytes: one game's worth frees it, and the oldest goes.
+    free = 5 * GB - 10;
+    now += 1000;
+    const third = store.write(sample({ gameNumber: 3 }))!;
+    expect(existsSync(first)).toBe(false);
+    expect(existsSync(second)).toBe(true);
+    expect(existsSync(third)).toBe(true);
+  });
+
   it("stops an address that posts too many in an hour", () => {
     let now = NOON;
-    const store = new GameStore({ dir: tempDir(), now: () => now });
+    const store = new GameStore({ disk: () => null, dir: tempDir(), now: () => now });
     for (let i = 0; i < GAMES_PER_HOUR; i += 1) expect(store.admits("1.2.3.4")).toBe(true);
     expect(store.admits("1.2.3.4")).toBe(false);
     expect(store.admits("5.6.7.8")).toBe(true);

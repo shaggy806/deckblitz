@@ -14,16 +14,18 @@
  * post came from. The About page says games are kept.
  *
  * **It can't fill the disk.** A post is at most `GAME_BODY_LIMIT`, an address
- * may post `GAMES_PER_HOUR`, and once the folder holds `maxBytes` the oldest
- * files go first. `npm run games:pull` on the operator's machine copies the
- * files over SSH and deletes them here.
+ * may post `GAMES_PER_HOUR`, and the oldest files go first once the folder
+ * holds `maxBytes` or the disk it is on has less than `minFreeBytes` free,
+ * whichever comes first. `npm run games:pull` on the operator's machine
+ * copies the files over SSH and deletes them here; `report` says how full the
+ * folder is and whether it is time to (`GET /games` on the status port).
  *
  * Main-side: nothing here imports the engine (`test/main-imports.test.ts`).
  * A record is checked for its shape only; whether it is a real game is for
  * whoever plays it again.
  */
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, unlinkSync, writeFileSync, rmdirSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, statfsSync, unlinkSync, writeFileSync, rmdirSync } from "node:fs";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { join } from "node:path";
 import { gunzipSync, gzipSync } from "node:zlib";
@@ -41,14 +43,49 @@ export const GAMES_PER_HOUR = 600;
 /** The most inputs one kept game holds (`game-record.ts`'s
  * `MAX_RECORDED_INPUTS`): parts past it are refused. */
 export const MAX_KEPT_INPUTS = 60_000;
-/** What the folder may hold before the oldest files go: 1 GB, some 20,000
- * games. */
-export const DEFAULT_MAX_BYTES = 1024 * 1024 * 1024;
+/** What the folder may hold before the oldest files go: 20 GB, over a
+ * million games at the 10-18 KB a four-player game comes to. It was 1 GB
+ * until 2026-11-22; the live box has 54 GB free of 61. */
+export const DEFAULT_MAX_BYTES = 20 * 1024 * 1024 * 1024;
+/** The free space the store leaves on its disk whatever `maxBytes` says: a
+ * deploy downloads and unpacks a build, and the usage log and the system
+ * need room too. */
+export const DEFAULT_MIN_FREE_BYTES = 5 * 1024 * 1024 * 1024;
+/** How full the folder is, of what it may hold, before `report` says to
+ * fetch the games away, and before it says to do it now. */
+export const TRANSFER_SOON_AT = 0.5;
+export const TRANSFER_NOW_AT = 0.8;
 
 export interface GameStoreConfig {
   readonly dir: string;
   readonly maxBytes?: number;
+  readonly minFreeBytes?: number;
   readonly now?: () => number;
+  /** The disk the folder is on: its free and total bytes, or `null` where
+   * that can't be read. `statfs` unless given (a test's). */
+  readonly disk?: () => { readonly free: number; readonly total: number } | null;
+}
+
+/** How the store stands (`GameStore.report`). */
+export interface GameStoreReport {
+  readonly games: number;
+  readonly bytes: number;
+  /** The folder's own limit, and the most it can in fact reach: that, or
+   * what the disk has left above `minFreeBytes`, whichever is less. */
+  readonly maxBytes: number;
+  readonly room: number;
+  /** `bytes` over `room`. */
+  readonly full: number;
+  readonly oldest: number | null;
+  readonly newest: number | null;
+  /** Bytes a day, over the files of the last seven days still here (games
+   * fetched away aren't counted, so right after a pull this reads low). */
+  readonly perDay: number;
+  readonly disk: { readonly free: number; readonly total: number } | null;
+  readonly minFreeBytes: number;
+  /** Whether to fetch the games to the operator's machine for the room:
+   * not yet, soon (half full), or now (four fifths: at full the oldest go). */
+  readonly transfer: "no" | "soon" | "now";
 }
 
 /** The parts of a record the store reads. The rest is kept as it came. */
@@ -103,6 +140,8 @@ interface StoredFile {
 export class GameStore {
   readonly dir: string;
   private readonly maxBytes: number;
+  private readonly minFreeBytes: number;
+  private readonly disk: () => { readonly free: number; readonly total: number } | null;
   private readonly now: () => number;
   /** What the folder holds, oldest first: read once, then kept in step. */
   private files: StoredFile[] | null = null;
@@ -113,6 +152,18 @@ export class GameStore {
   constructor(config: GameStoreConfig) {
     this.dir = config.dir;
     this.maxBytes = config.maxBytes ?? DEFAULT_MAX_BYTES;
+    this.minFreeBytes = config.minFreeBytes ?? DEFAULT_MIN_FREE_BYTES;
+    this.disk =
+      config.disk ??
+      ((): { free: number; total: number } | null => {
+        try {
+          // The folder itself once it exists, its parent until then.
+          const at = statfsSync(existsSync(this.dir) ? this.dir : join(this.dir, ".."));
+          return { free: at.bavail * at.bsize, total: at.blocks * at.bsize };
+        } catch {
+          return null;
+        }
+      });
     this.now = config.now ?? Date.now;
   }
 
@@ -152,6 +203,37 @@ export class GameStore {
   stats(): { readonly games: number; readonly bytes: number } {
     const files = this.scan();
     return { games: files.length, bytes: files.reduce((n, f) => n + f.bytes, 0) };
+  }
+
+  /**
+   * How the store stands, read from the folder afresh (another thread's
+   * store writes here too, and a pull deletes): how much is kept, how much
+   * room there is, how fast it is filling, and whether it is time to fetch
+   * the games away.
+   */
+  report(): GameStoreReport {
+    this.files = null;
+    const files = this.scan();
+    const now = this.now();
+    const bytes = files.reduce((n, f) => n + f.bytes, 0);
+    const disk = this.disk();
+    const room = disk === null ? this.maxBytes : Math.max(0, Math.min(this.maxBytes, bytes + disk.free - this.minFreeBytes));
+    const full = room > 0 ? bytes / room : bytes > 0 ? 1 : 0;
+    const week = files.filter((f) => now - f.mtimeMs <= 7 * 86_400_000);
+    const span = week.length === 0 ? 1 : Math.min(7, Math.max(1, (now - week[0]!.mtimeMs) / 86_400_000));
+    return {
+      games: files.length,
+      bytes,
+      maxBytes: this.maxBytes,
+      room,
+      full,
+      oldest: files[0]?.mtimeMs ?? null,
+      newest: files[files.length - 1]?.mtimeMs ?? null,
+      perDay: week.reduce((n, f) => n + f.bytes, 0) / span,
+      disk,
+      minFreeBytes: this.minFreeBytes,
+      transfer: full >= TRANSFER_NOW_AT ? "now" : full >= TRANSFER_SOON_AT ? "soon" : "no",
+    };
   }
 
   /**
@@ -223,15 +305,22 @@ export class GameStore {
 
   /** Drops the oldest files until the folder is within its size. */
   private prune(): void {
-    if (this.scan().reduce((n, f) => n + f.bytes, 0) <= this.maxBytes) return;
+    // Short of room on the disk itself counts as over, by as much as it is short.
+    const short = (): number => {
+      const disk = this.disk();
+      return disk === null ? 0 : Math.max(0, this.minFreeBytes - disk.free);
+    };
+    let over = short();
+    if (over === 0 && this.scan().reduce((n, f) => n + f.bytes, 0) <= this.maxBytes) return;
     // Over: read the folder again first. Files go without this store knowing
     // (a pull, another thread's store), and it must not delete on a stale count.
     this.files = null;
     const files = this.scan();
     let total = files.reduce((n, f) => n + f.bytes, 0);
-    while (total > this.maxBytes && files.length > 1) {
+    while ((total > this.maxBytes || over > 0) && files.length > 1) {
       const oldest = files.shift()!;
       total -= oldest.bytes;
+      over -= oldest.bytes;
       try {
         unlinkSync(oldest.path);
         // The day's folder too, once it is empty.
@@ -247,6 +336,41 @@ export class GameStore {
   rescan(): void {
     this.files = null;
   }
+}
+
+const size = (bytes: number): string =>
+  bytes >= 1024 ** 3
+    ? `${(bytes / 1024 ** 3).toFixed(1)} GB`
+    : bytes >= 1024 ** 2
+      ? `${(bytes / 1024 ** 2).toFixed(1)} MB`
+      : `${Math.round(bytes / 1024)} KB`;
+
+/** A `GameStoreReport` as the status port prints it (`GET /games`). */
+export function renderGamesReport(r: GameStoreReport): string {
+  const day = (ms: number | null): string => (ms === null ? "—" : new Date(ms).toISOString().slice(0, 10));
+  const left = r.room - r.bytes;
+  const lines = [
+    "Kept games",
+    `  games      ${r.games} file(s), ${size(r.bytes)}${r.games > 0 ? ` (${size(r.bytes / r.games)} a game)` : ""}`,
+    `  from       ${day(r.oldest)} to ${day(r.newest)}`,
+    `  room       ${(r.full * 100).toFixed(r.full < 0.1 ? 2 : 0)}% of ${size(r.room)} used` +
+      (r.room < r.maxBytes ? ` (the folder's limit is ${size(r.maxBytes)}; the disk allows less)` : ""),
+    `  filling    ${size(r.perDay)} a day` +
+      (r.perDay <= 0 || left <= 0
+        ? ""
+        : left / r.perDay > 730
+          ? ": years from full at that rate"
+          : `: full in about ${Math.max(1, Math.round(left / r.perDay))} day(s) at that rate`),
+    r.disk === null
+      ? "  disk       unknown"
+      : `  disk       ${size(r.disk.free)} free of ${size(r.disk.total)} (the store leaves ${size(r.minFreeBytes)} free)`,
+    r.transfer === "now"
+      ? "  transfer   NOW: over four fifths full, and at full the oldest games are deleted (npm run games:pull)"
+      : r.transfer === "soon"
+        ? "  transfer   soon: over half full (npm run games:pull)"
+        : "  transfer   not needed for room; fetch them when there is a game to look at (npm run games:pull)",
+  ];
+  return `${lines.join("\n")}\n`;
 }
 
 /**

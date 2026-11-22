@@ -25,7 +25,7 @@ import { WorkerRoomHost, workerChannel } from "./worker-host.js";
 import { startStatusServer } from "./status-server.js";
 import { COMPRESSION, attachTransport, clientIp } from "./transport.js";
 import { UsageLog, handleUsageRoute, renderUsage, summarizeUsage } from "./usage.js";
-import { GameStore, handleGamesRoute } from "./game-store.js";
+import { GameStore, handleGamesRoute, renderGamesReport } from "./game-store.js";
 
 const port = Number(process.env.PORT ?? 4000);
 
@@ -95,8 +95,9 @@ const usage =
 // Played games (`game-store.ts`): each game's record, gzipped, a file a game
 // in `games/` at the repo root (git-ignored). A browser's solo game is posted
 // by its page (`POST /games`); a game a room here runs is written by its
-// thread. `GAMES_DIR` moves it, `GAMES_MAX_MB` sizes it (1024), `GAMES=0`
-// keeps none. `npm run games:pull` fetches them to the operator's machine.
+// thread. `GAMES_DIR` moves it, `GAMES_MAX_MB` sizes it (20480, and never so
+// far that the disk has under 5 GB free), `GAMES=0` keeps none; the status
+// port's `/games` says how full it is. `npm run games:pull` fetches them to the operator's machine.
 const gamesDir = process.env.GAMES_DIR ?? fileURLToPath(new URL("../../games/", import.meta.url));
 const gamesMaxBytes = process.env.GAMES_MAX_MB !== undefined ? Number(process.env.GAMES_MAX_MB) * 1024 * 1024 : undefined;
 const games =
@@ -202,6 +203,12 @@ const statusServer = startStatusServer(
     : (days, json) => {
         const summary = summarizeUsage(usage.read(days));
         return json ? `${JSON.stringify(summary, null, 2)}\n` : renderUsage(summary);
+      },
+  games === null
+    ? undefined
+    : (json) => {
+        const report = games.report();
+        return json ? `${JSON.stringify(report, null, 2)}\n` : renderGamesReport(report);
       },
 );
 

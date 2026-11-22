@@ -273,6 +273,8 @@ export function renderStatus(snapshot: StatusSnapshot): string {
  * - `GET /healthz` `ok`, for a monitor that only wants a 200
  * - `GET /usage`   who has used the site these 14 days (`usage.ts`), as
  *   text; `?days=N` for another span (up to 366), `/usage.json` for scripting
+ * - `GET /games`   how the kept games stand (`game-store.ts`): how many, how
+ *   much room, the disk, and whether to fetch them away; `/games.json` too
  */
 export function startStatusServer(
   source: StatusSource,
@@ -284,6 +286,9 @@ export function startStatusServer(
   /** The usage report over the last `days` days, as text or JSON
    * (`usage.ts`); absent where usage isn't kept. */
   usage?: (days: number, json: boolean) => string,
+  /** How the kept games stand (`game-store.ts`'s report), as text or JSON;
+   * absent where games aren't kept. */
+  games?: (json: boolean) => string,
 ): Server {
   const monitor = new LoadMonitor({
     ...(decisions !== undefined ? { decisions } : {}),
@@ -331,6 +336,23 @@ export function startStatusServer(
       } catch (err) {
         res.writeHead(500, { "content-type": "text/plain" });
         res.end(`usage failed: ${err instanceof Error ? err.message : String(err)}\n`);
+      }
+      return;
+    }
+    if (url === "/games" || url === "/games.json") {
+      if (games === undefined) {
+        res.writeHead(404, { "content-type": "text/plain" });
+        res.end("games aren't being kept (GAMES=0)\n");
+        return;
+      }
+      const json = url === "/games.json";
+      try {
+        const body = games(json);
+        res.writeHead(200, { "content-type": json ? "application/json" : "text/plain; charset=utf-8" });
+        res.end(body);
+      } catch (err) {
+        res.writeHead(500, { "content-type": "text/plain" });
+        res.end(`games failed: ${err instanceof Error ? err.message : String(err)}\n`);
       }
       return;
     }

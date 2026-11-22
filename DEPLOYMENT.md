@@ -334,9 +334,13 @@ folders, so a deploy leaves it alone). A game a browser plays alone is posted by
 closes, so a tab closed mid-game has lost at most a second: at most 4 MB a post, 600 an hour an
 address); a game at a table is
 written from the server's own log when the table is forgotten. A record names nobody: decks, plays,
-the commit it was played on and the country the post came from. A game is 20-50 KB; the folder stops
-at 1 GB, the oldest files going first. `Environment=GAMES_DIR=…` moves it, `GAMES_MAX_MB=…` sizes
-it, `GAMES=0` turns it off.
+the commit it was played on and the country the post came from. A four-player game is 10-18 KB; the
+folder stops at 20 GB (over a million games; 1 GB until 2026-11-22), or sooner if the disk would
+have under 5 GB free, the oldest files going first. `Environment=GAMES_DIR=…` moves it,
+`GAMES_MAX_MB=…` sizes it, `GAMES=0` turns it off. `curl localhost:4010/games` (from the dev PC,
+`npm run games:space`) says how many are kept, how full the folder is, how fast it is filling, the
+disk's free space, and whether it is time to fetch them away: not needed under half full, soon past
+half, now past four fifths. The `site-usage` skill reads it with the usage report.
 
 From the dev PC: `npm run games:pull` copies them into `games/` there and deletes them on the box
 (`-- --keep` leaves them, `-- --list` only counts); `npm run game:replay -- games/<day>/<file>`
