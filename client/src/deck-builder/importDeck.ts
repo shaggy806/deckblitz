@@ -6,6 +6,7 @@ import type {
   ReplacementOption,
 } from 'protocol'
 import type { AttractionEntry } from './decks.ts'
+import { track } from '../usage.ts'
 
 // Same host/port convention as useNetworkGame's SERVER_URL, but http(s) for
 // this one-off request/response endpoint rather than the room's WebSocket.
@@ -111,7 +112,7 @@ export function looksLikeDecklist(text: string): boolean {
  * (the first import's `format.commanderCandidates`, asked by
  * `CommanderPicker`): the list is then read with those as its commander.
  */
-export async function importDecklist(
+async function runImport(
   text: string,
   onProgress: (progress: ImportProgress) => void,
   commanders?: readonly string[],
@@ -167,6 +168,24 @@ export async function importDecklist(
   }
   if (outcome === null) throw new Error('import ended before the deck was resolved')
   return outcome
+}
+
+/** {@link runImport}, and a word to the operator's usage report (`usage.ts`)
+ * of how it went: the commanders, how many cards, and which of them the
+ * engine doesn't have — or why it failed. Never the list itself. */
+export async function importDecklist(...args: Parameters<typeof runImport>): ReturnType<typeof runImport> {
+  try {
+    const outcome = await runImport(...args)
+    track('import', {
+      commanders: outcome.format?.commanders ?? [],
+      cards: outcome.cards.reduce((sum, card) => sum + card.count, 0),
+      missing: outcome.cards.filter((card) => !card.implemented).map((card) => card.name),
+    })
+    return outcome
+  } catch (err) {
+    track('import-failed', { message: err instanceof Error ? err.message : String(err) })
+    throw err
+  }
 }
 
 /**

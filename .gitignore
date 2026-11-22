@@ -47,3 +47,6 @@ captures/
 .deploy-prev/
 .deploy-commit
 __pycache__/
+
+# who uses the site: the server's usage log (server/src/usage.ts)
+usage/

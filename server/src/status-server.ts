@@ -271,6 +271,8 @@ export function renderStatus(snapshot: StatusSnapshot): string {
  * - `GET /status`  the same
  * - `GET /status.json`  the snapshot, for scripting
  * - `GET /healthz` `ok`, for a monitor that only wants a 200
+ * - `GET /usage`   who has used the site these 14 days (`usage.ts`), as
+ *   text; `?days=N` for another span (up to 366), `/usage.json` for scripting
  */
 export function startStatusServer(
   source: StatusSource,
@@ -279,6 +281,9 @@ export function startStatusServer(
   decisions?: RecordableHistogram,
   /** And its totals since it started (`botDecisionTotals`). */
   totals?: () => BotDecisionTotals,
+  /** The usage report over the last `days` days, as text or JSON
+   * (`usage.ts`); absent where usage isn't kept. */
+  usage?: (days: number, json: boolean) => string,
 ): Server {
   const monitor = new LoadMonitor({
     ...(decisions !== undefined ? { decisions } : {}),
@@ -308,6 +313,25 @@ export function startStatusServer(
           res.end(`status failed: ${err instanceof Error ? err.message : String(err)}\n`);
         },
       );
+      return;
+    }
+    if (url === "/usage" || url === "/usage.json") {
+      if (usage === undefined) {
+        res.writeHead(404, { "content-type": "text/plain" });
+        res.end("usage isn't being kept (USAGE=0)\n");
+        return;
+      }
+      const asked = Number(new URLSearchParams((req.url ?? "").split("?")[1] ?? "").get("days") ?? 14);
+      const days = Number.isInteger(asked) && asked >= 1 ? Math.min(asked, 366) : 14;
+      const json = url === "/usage.json";
+      try {
+        const body = usage(days, json);
+        res.writeHead(200, { "content-type": json ? "application/json" : "text/plain; charset=utf-8" });
+        res.end(body);
+      } catch (err) {
+        res.writeHead(500, { "content-type": "text/plain" });
+        res.end(`usage failed: ${err instanceof Error ? err.message : String(err)}\n`);
+      }
       return;
     }
     res.writeHead(404, { "content-type": "text/plain" });

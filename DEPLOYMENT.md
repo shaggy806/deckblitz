@@ -288,7 +288,22 @@ plain text, meant to be read with `curl` once you are on the box:
 curl localhost:4010/status        # the table below
 curl localhost:4010/status.json   # the same, for scripting
 curl localhost:4010/healthz       # just a 200, for a monitor
+curl localhost:4010/usage         # who has used the site, the last 14 days (below)
 ```
+
+**Usage** (`server/src/usage.ts`): `/usage` prints a line a day (visitors, new visitors, page
+views, games begun and finished, deck imports, page errors) and then, over the span, the pages
+opened, the sites visitors came from, games by kind and how they ended, the commanders imported,
+the cards imported that the engine lacks, failed imports, the page's errors, and window sizes.
+`/usage?days=90` for another span, `/usage.json` for scripting. From the dev PC, `npm run usage`
+(`ssh deckblitz curl -s localhost:4010/usage`; for another span run that line yourself with the
+query, quoted: `ssh deckblitz "curl -s 'localhost:4010/usage?days=90'"`). The events are anonymous, posted by the page (`POST /usage` on
+the public port) and kept one JSON-lines file a UTC day in `/opt/mtg-engine/usage/`, which is
+git-ignored and outside the `dist` folders, so a deploy leaves it alone; nothing prunes it (a busy
+day is well under 1 MB, and a day's file stops at 20 MB). `Environment=USAGE_DIR=…` in the unit
+moves it, `Environment=USAGE=0` turns it off. No IP is written: a visitor is a hash salted afresh
+each day (`usage/.salt.json`), so the same person is one visitor a day and can't be followed
+across days.
 
 ```
 Deck Blitz server

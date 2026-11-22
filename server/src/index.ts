@@ -21,7 +21,8 @@ import type { RoomHost } from "./room-host.js";
 import type { ShardSettings } from "./worker-host.js";
 import { WorkerRoomHost, workerChannel } from "./worker-host.js";
 import { startStatusServer } from "./status-server.js";
-import { COMPRESSION, attachTransport } from "./transport.js";
+import { COMPRESSION, attachTransport, clientIp } from "./transport.js";
+import { UsageLog, handleUsageRoute, renderUsage, summarizeUsage } from "./usage.js";
 
 const port = Number(process.env.PORT ?? 4000);
 
@@ -79,6 +80,14 @@ if (capture) console.log(`capturing bot decisions to ${captureDir}, the last ${k
 // any card anywhere — a developer's server only, never the public site.
 const builder = process.argv.includes("--builder");
 if (builder) console.log("scenario builder on");
+
+// Who uses the site (`usage.ts`): anonymous events the page posts, a file a
+// day in `usage/` at the repo root (git-ignored, so a deploy leaves it be).
+// `USAGE_DIR` moves it; `USAGE=0` drops every event unrecorded.
+const usage =
+  process.env.USAGE === "0"
+    ? null
+    : new UsageLog({ dir: process.env.USAGE_DIR ?? fileURLToPath(new URL("../../usage/", import.meta.url)) });
 
 // An operator endpoint for `curl` over SSH, bound to loopback on a port the
 // Cloudflare tunnel does not forward. It carries room codes, which are join
@@ -141,13 +150,26 @@ if (shards === 0) {
 const httpServer = createServer((req, res) => {
   // `POST /import-deck`: the job runs wherever the host keeps the card pool.
   if (handleImportRoute(req, res, (text, sink) => host.importDeck(text, sink), clientOrigin)) return;
+  // `POST /usage`: one anonymous event from the page, for the operator's report.
+  if (handleUsageRoute(req, res, usage, clientIp, clientOrigin)) return;
   res.writeHead(404);
   res.end();
 });
 
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
 attachTransport(wss, host);
-const statusServer = startStatusServer(() => host.status(), statusPort, host.decisions, host.decisionTotals);
+const statusServer = startStatusServer(
+  () => host.status(),
+  statusPort,
+  host.decisions,
+  host.decisionTotals,
+  usage === null
+    ? undefined
+    : (days, json) => {
+        const summary = summarizeUsage(usage.read(days));
+        return json ? `${JSON.stringify(summary, null, 2)}\n` : renderUsage(summary);
+      },
+);
 
 httpServer.listen(port, () => {
   console.log(`Deck Blitz room server listening on ws://localhost:${port}`);

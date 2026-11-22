@@ -9,6 +9,7 @@ import { PoolLoadBoundary, PoolLoading } from './cards/PoolLoading.tsx'
 import { clickButtons } from './game/sound.ts'
 import { CoachLayer } from './tutorial/CoachLayer.tsx'
 import type { PageId } from './tutorial/types.ts'
+import { trackPage } from './usage.ts'
 
 /**
  * A page that works over the whole card pool, loaded with it. The library
@@ -58,5 +59,9 @@ const page = path.startsWith('/library')
 
 // Every button on every page clicks.
 clickButtons()
+
+// The operator's usage report hears of this page load, and of any error the
+// page throws from here on (`usage.ts`).
+trackPage()
 
 createRoot(document.getElementById('root')!).render(<StrictMode>{page}</StrictMode>)

@@ -120,6 +120,7 @@ import { setShare } from './game/divideShares.ts'
 import { StableLabel } from './ui/StableLabel.tsx'
 import { usePlayback } from './game/usePlayback.ts'
 import { AnimationBus } from './game/animationBus.ts'
+import { useGameUsage } from './usage.ts'
 import { abilitySourcesOf, describeEvent, isDetailOnlyEvent, logNameAt, playerLabel, possessive, seatClassOf, withNames } from './format.ts'
 import { PhaseTrack } from './ui/PhaseTrack.tsx'
 import { TurnBanner } from './ui/TurnBanner.tsx'
@@ -1677,6 +1678,25 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   useEffect(() => {
     if (lost) playSound('defeat')
   }, [lost])
+  // The operator's usage report hears of the game once as it begins and once
+  // as it ends for me (`usage.ts`): not a spectator's, not the builder's.
+  const humans = game.seats.filter((s) => !s.isBot).length
+  useGameUsage({
+    roomId: game.roomId,
+    mode:
+      view === null || ownSeat === null || spectating || game.builder !== null
+        ? null
+        : game.tutorial !== null
+          ? 'tutorial'
+          : humans <= 1
+            ? 'solo'
+            : 'multiplayer',
+    players: game.seats.length,
+    humans,
+    turn: view?.turn.number ?? 0,
+    over: view?.result.over === true,
+    outcome: won ? 'won' : lost || (view?.result.over === true && view.result.winner !== null) ? 'lost' : view?.result.over === true ? 'draw' : null,
+  })
   // Music through the game, fading out as it ends — or as I'm knocked out —
   // under the tune, and back in once the tune has played. Someone watching
   // hears no tune, and the music back after a short pause.
