@@ -232,6 +232,19 @@ describe('log lines that name where a thing went or came from', () => {
   const names = (id: ObjectId): string => ({ [o]: 'Hill Giant', [src]: 'Tidebinder' })[id as string] ?? 'a card'
   const line = (e: Parameters<typeof event>[0]): string => describeEvent(event(e), names, seats)
 
+  // A bug report, 2026-11-21: a tuck whose owner chose the place (Wan Shi
+  // Tong, All-Knowing; Aetherspouts) said only "→ library".
+  it('says where in the library a permanent was put', () => {
+    const left = (libraryAt?: 'top' | 'bottom' | 'shuffle' | { fromTop: number }): string =>
+      line({ type: 'permanent-left-battlefield', object: o, toZone: 'library', ...(libraryAt !== undefined ? { libraryAt } : {}) })
+    expect(left()).toBe('Hill Giant leaves the battlefield → library')
+    expect(left('top')).toBe('Hill Giant leaves the battlefield → library (on top)')
+    expect(left('bottom')).toBe('Hill Giant leaves the battlefield → library (on the bottom)')
+    expect(left({ fromTop: 2 })).toBe('Hill Giant leaves the battlefield → library (second from the top)')
+    expect(left({ fromTop: 7 })).toBe('Hill Giant leaves the battlefield → library (7th from the top)')
+    expect(left('shuffle')).toBe('Hill Giant leaves the battlefield → library (shuffled in)')
+  })
+
   it('words a chosen card by its destination', () => {
     expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o] })).toBe('Toby takes Hill Giant')
     expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o], to: 'battlefield' })).toBe(

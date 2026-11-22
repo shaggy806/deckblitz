@@ -76240,10 +76240,16 @@ controlledBy,
       // the client draws the leave as the stack going down by one.
       const stack = object.splitFrom;
       const fromStack = stack !== undefined && this.state.objects[stack]?.zone === "battlefield" ? stack : undefined;
+      // Where in the library, for the log (a random place among the bottom
+      // cards is just the bottom to it).
+      const placed = enter.libraryPlacement;
+      const libraryAt =
+        placed === undefined ? undefined : typeof placed === "object" && "randomlyAmong" in placed ? "bottom" : placed;
       this.emit({
         type: "permanent-left-battlefield",
         object: id,
         toZone: to,
+        ...(to === "library" && libraryAt !== undefined ? { libraryAt } : {}),
         ...(fromStack !== undefined ? { stack: fromStack } : {}),
         ...(this.craftActivator !== undefined ? { craftBy: this.craftActivator } : {}),
         ...cause,

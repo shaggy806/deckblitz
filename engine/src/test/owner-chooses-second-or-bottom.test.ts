@@ -11,6 +11,8 @@ import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 
 const library = (game: Game, player: PlayerId): readonly ObjectId[] => game.state.zones.perPlayer[player].library;
+const leftTo = (game: Game, id: ObjectId) =>
+  game.state.eventLog.flatMap((e) => (e.type === "permanent-left-battlefield" && e.object === id ? [e.libraryAt] : []))[0];
 const castOffers = (game: Game, card: ObjectId) =>
   game.legalActions(A).filter((o) => o.kind === "cast-spell" && o.card === card);
 
@@ -31,6 +33,8 @@ describe("Deem Inferior", () => {
     cast(game, spell, { targets: [ref(angel)] });
     expect(asked).toEqual(["Put it second from the top of your library", "Put it on the bottom of your library"]);
     expect(library(game, B)[1]).toBe(angel);
+    // The log says where (a bug report, 2026-11-21).
+    expect(leftTo(game, angel)).toEqual({ fromTop: 2 });
   });
 
   it("the owner may pick the bottom", () => {
@@ -41,6 +45,7 @@ describe("Deem Inferior", () => {
     cast(game, toHand(game, "Deem Inferior"), { targets: [ref(bears)] });
     const lib = library(game, B);
     expect(lib[lib.length - 1]).toBe(bears);
+    expect(leftTo(game, bears)).toBe("bottom");
   });
 
   it("can't target a land", () => {

@@ -56,6 +56,19 @@ const RESTRICTION_TEXT: Record<CombatWord, string> = {
 }
 
 /** A colour as the log says it — "becomes black". */
+/** Where in a library a permanent was put, for the log: " (second from the
+ * top)". Nothing when the move didn't say. Exported for its test. */
+export function libraryPlace(at: 'top' | 'bottom' | 'shuffle' | { readonly fromTop: number } | undefined): string {
+  if (at === undefined) return ''
+  if (at === 'top') return ' (on top)'
+  if (at === 'bottom') return ' (on the bottom)'
+  if (at === 'shuffle') return ' (shuffled in)'
+  const n = at.fromTop
+  if (n <= 1) return ' (on top)'
+  const word = n === 2 ? 'second' : n === 3 ? 'third' : `${n}th`
+  return ` (${word} from the top)`
+}
+
 const COLOR_WORD = { W: 'white', U: 'blue', B: 'black', R: 'red', G: 'green' } as const
 
 const NOISY_EVENTS: ReadonlySet<GameEvent['type']> = new Set([
@@ -681,7 +694,7 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'permanent-entered-battlefield':
       return `${name(event.object)} enters the battlefield`
     case 'permanent-left-battlefield':
-      return `${name(event.object)} leaves the battlefield → ${event.toZone}`
+      return `${name(event.object)} leaves the battlefield → ${event.toZone}${libraryPlace(event.libraryAt)}`
     case 'permanent-attached':
       return `${name(event.source)} attaches to ${name(event.target)}`
     case 'permanent-unattached':

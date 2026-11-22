@@ -1610,6 +1610,10 @@ export type GameEvent =
       readonly type: "permanent-left-battlefield";
       readonly object: ObjectId;
       readonly toZone: "graveyard" | "exile" | "hand" | "library" | "command";
+      /** Where in the library it went, when the move said: the log's "second
+       * from the top" for a tuck whose owner chose (Wan Shi Tong,
+       * All-Knowing; Aetherspouts). Everyone sees where it's put. */
+      readonly libraryAt?: "top" | "bottom" | "shuffle" | { readonly fromTop: number };
       /** For a token split off a compacted stack, the stack, while it's still
        * on the battlefield (`GameObject.splitFrom`): the client draws the
        * stack going down rather than a token it never drew leaving. */

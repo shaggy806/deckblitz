@@ -177,6 +177,10 @@ describe("Aetherspouts: each owner chooses an end for each attacker, then they a
     expect(orders).toHaveLength(1);
     expect(library(game).slice(0, 2)).toEqual([giant, bears]);
     expect(library(game)[library(game).length - 1]).toBe(wurm);
+    // The log says which end each went to (a bug report, 2026-11-21).
+    const leftTo = (id: ObjectId) =>
+      game.state.eventLog.flatMap((e) => (e.type === "permanent-left-battlefield" && e.object === id ? [e.libraryAt] : []))[0];
+    expect([leftTo(giant), leftTo(bears), leftTo(wurm)]).toEqual(["top", "top", "bottom"]);
   });
 
   it("puts them all on top when none is chosen", () => {
