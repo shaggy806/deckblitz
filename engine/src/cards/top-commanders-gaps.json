@@ -3209,7 +3209,8 @@
   "effect:discard-any-number-at-random",
   "effect:each-player-separates-piles-together",
   "mechanic:face-down-piles-exile-one-search-other",
-  "decision:prevention-shield-allocation"
+  "decision:prevention-shield-allocation",
+  "effect:copy-countered-spell"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -47662,7 +47662,8 @@ controlledBy,
           refs,
           opts,
         ),
-      copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
+      copySpell: (target, newTargets, by, change, asLastOnStack) =>
+        this.copySpellByEffect(by ?? controller, target, newTargets, change, asLastOnStack),
       stackObjectsToCopy: (what, anyController) => this.stackObjectsToCopy(controller, what, anyController),
       otherStackObjects: () => {
         // The one resolving: an ability's own stack object (or, waiting on a
@@ -56289,8 +56290,16 @@ controlledBy,
     target: TargetRef,
     newTargets: boolean,
     change?: SpellCopyChange,
+    asLastOnStack = false,
   ): void {
     if (target.kind !== "object") return;
+    // "Copy the spell countered this way" (Psychic Rebuttal): the spell as it
+    // last was on the stack (rule 608.2h), every choice made for it (707.10).
+    const gone = this.state.objects[target.object];
+    if (asLastOnStack && gone !== undefined && gone.zone !== "stack" && gone.lastOnStack !== undefined) {
+      this.copySpellFrom(gone.lastOnStack, target.object, controller, newTargets, change);
+      return;
+    }
     // A slot that may hold an ability copies the ability (Return the Favor's
     // "copy target instant spell, sorcery spell, activated ability, or
     // triggered ability").

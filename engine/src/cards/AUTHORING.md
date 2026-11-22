@@ -2248,7 +2248,12 @@ it goes on applying to the permanent it becomes (rule 400.7a) and a copy of that
 `alsoOriginal: true` is "you may copy it. If you do, **those spells** gain wither" (Spinerock
 Tyrant, a `"trigger-spell"` copy): the spell copied gains the `keywords` too, once a copy was
 made, while it's still that spell on the stack (`spell-on-stack-gains-keyword.test.ts`).
-`copy-spell-changes.test.ts`. Neither with `forEachItCouldTarget`. With
+`copy-spell-changes.test.ts`. Neither with `forEachItCouldTarget`.
+`asLastOnStack: true` (a target slot) copies a spell that has left the stack as it last was
+there (rule 608.2h, `GameObject.lastOnStack`), its targets and choices with it: Psychic
+Rebuttal's "you may copy **the spell countered this way**", a `may` inside the `counter`'s
+`ifCountered` (`top10000-batch-338l.test.ts`). Without it a slot's spell no longer on the
+stack makes no copy. With
 `"trigger-spell"`, two more aim the copy themselves:
 
 - `retargetTo: "source" | "created" | slot` — "the copy targets Ivy" (rule 707.10e — Ivy, Gleeful

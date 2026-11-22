@@ -9008,6 +9008,14 @@ export type EffectSpec =
       /** "You may choose new targets for the copy" (rule 707.10c). */
       readonly newTargets?: true;
       /**
+       * With a target slot: a spell that has left the stack is copied as it
+       * last was there (rule 608.2h; `GameObject.lastOnStack`), targets,
+       * modes and X with it (707.10) — Psychic Rebuttal's "you may copy the
+       * spell countered this way", inside the `counter`'s `ifCountered`.
+       * Without it, a spell no longer on the stack makes no copy.
+       */
+      readonly asLastOnStack?: true;
+      /**
        * "Copy it, **except** the copy isn't legendary" (Iron Man, Bleeding
        * Edge; Double Major's "except it isn't legendary if the spell is
        * legendary" is the same), "except the copy is an artifact in addition
@@ -15511,7 +15519,13 @@ export interface EffectApi {
   finishDiscover(found: DiscoverFound): void;
   /** Copy the spell at `TargetRef` on the stack — see the `copy-spell`
    * {@link EffectSpec}. */
-  copySpell(target: TargetRef, newTargets: boolean, controller?: PlayerId, change?: SpellCopyChange): void;
+  copySpell(
+    target: TargetRef,
+    newTargets: boolean,
+    controller?: PlayerId,
+    change?: SpellCopyChange,
+    asLastOnStack?: boolean,
+  ): void;
   /** What a `copy-all` copies, as it begins: this effect's controller's
    * spells on the stack, bottom first, or the activated and triggered
    * abilities they control there other than the one resolving — an id once
@@ -24425,7 +24439,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             ctx.copyStackObjectForEach(target, spec.forEachItCouldTarget, copier ?? ctx.controller);
             copied = true;
           } else if (target !== undefined) {
-            for (let i = 0; i < times; i += 1) ctx.copySpell(target, newTargets, copier, change);
+            for (let i = 0; i < times; i += 1) ctx.copySpell(target, newTargets, copier, change, spec.asLastOnStack === true);
             copied = times > 0;
           }
         }
