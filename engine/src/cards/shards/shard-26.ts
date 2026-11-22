@@ -76,6 +76,7 @@ import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAureliasFury from "../pool/aurelias-fury.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAvariceAmulet from "../pool/avarice-amulet.js";
+import _poolAvatarOfMight from "../pool/avatar-of-might.js";
 import _poolAvenBrigadier from "../pool/aven-brigadier.js";
 import _poolAvenCourier from "../pool/aven-courier.js";
 import _poolAvenWarhawk from "../pool/aven-warhawk.js";
@@ -1158,6 +1159,7 @@ const shard: CardShard = {
     _poolAureliasFury,
     _poolAutonSoldier,
     _poolAvariceAmulet,
+    _poolAvatarOfMight,
     _poolAvenBrigadier,
     _poolAvenCourier,
     _poolAvenWarhawk,

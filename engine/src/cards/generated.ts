@@ -1758,6 +1758,7 @@ import _poolAvatarOfDiscord from "./pool/avatar-of-discord.js";
 import _poolAvatarOfFury from "./pool/avatar-of-fury.js";
 import _poolAvatarOfGrowth from "./pool/avatar-of-growth.js";
 import _poolAvatarOfHope from "./pool/avatar-of-hope.js";
+import _poolAvatarOfMight from "./pool/avatar-of-might.js";
 import _poolAvatarOfSlaughter from "./pool/avatar-of-slaughter.js";
 import _poolAvatarOfTheResolute from "./pool/avatar-of-the-resolute.js";
 import _poolAvatarOfWill from "./pool/avatar-of-will.js";
@@ -15782,6 +15783,7 @@ import _poolLambholtRavager from "./pool/lambholt-ravager.js";
 import _poolLamentation from "./pool/lamentation.js";
 import _poolLammastideWeave from "./pool/lammastide-weave.js";
 import _poolLampadOfDeathsVigil from "./pool/lampad-of-deaths-vigil.js";
+import _poolLamplightPhoenix from "./pool/lamplight-phoenix.js";
 import _poolLamplighterOfSelhoff from "./pool/lamplighter-of-selhoff.js";
 import _poolLance from "./pool/lance.js";
 import _poolLancerSliver from "./pool/lancer-sliver.js";
@@ -16996,6 +16998,7 @@ import _poolMammothUmbra from "./pool/mammoth-umbra.js";
 import _poolManOWar from "./pool/man-o-war.js";
 import _poolManaBloom from "./pool/mana-bloom.js";
 import _poolManaBreach from "./pool/mana-breach.js";
+import _poolManaCache from "./pool/mana-cache.js";
 import _poolManaCannons from "./pool/mana-cannons.js";
 import _poolManaChains from "./pool/mana-chains.js";
 import _poolManaChargedDragon from "./pool/mana-charged-dragon.js";
@@ -28434,6 +28437,7 @@ import _poolTestOfPriorities from "./pool/test-of-priorities.js";
 import _poolTestOfTalents from "./pool/test-of-talents.js";
 import _poolTestamentBearer from "./pool/testament-bearer.js";
 import _poolTestamentOfFaith from "./pool/testament-of-faith.js";
+import _poolTesterOfTheTangential from "./pool/tester-of-the-tangential.js";
 import _poolTetherTechnician from "./pool/tether-technician.js";
 import _poolTetheredGriffin from "./pool/tethered-griffin.js";
 import _poolTetheredSkirge from "./pool/tethered-skirge.js";
@@ -35581,6 +35585,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvatarOfFury,
   _poolAvatarOfGrowth,
   _poolAvatarOfHope,
+  _poolAvatarOfMight,
   _poolAvatarOfSlaughter,
   _poolAvatarOfTheResolute,
   _poolAvatarOfWill,
@@ -49605,6 +49610,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLamentation,
   _poolLammastideWeave,
   _poolLampadOfDeathsVigil,
+  _poolLamplightPhoenix,
   _poolLamplighterOfSelhoff,
   _poolLance,
   _poolLancerSliver,
@@ -50819,6 +50825,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolManOWar,
   _poolManaBloom,
   _poolManaBreach,
+  _poolManaCache,
   _poolManaCannons,
   _poolManaChains,
   _poolManaChargedDragon,
@@ -62257,6 +62264,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTestOfTalents,
   _poolTestamentBearer,
   _poolTestamentOfFaith,
+  _poolTesterOfTheTangential,
   _poolTetherTechnician,
   _poolTetheredGriffin,
   _poolTetheredSkirge,
@@ -69417,6 +69425,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/avatar-of-fury": _poolAvatarOfFury,
   "pool/avatar-of-growth": _poolAvatarOfGrowth,
   "pool/avatar-of-hope": _poolAvatarOfHope,
+  "pool/avatar-of-might": _poolAvatarOfMight,
   "pool/avatar-of-slaughter": _poolAvatarOfSlaughter,
   "pool/avatar-of-the-resolute": _poolAvatarOfTheResolute,
   "pool/avatar-of-will": _poolAvatarOfWill,
@@ -83441,6 +83450,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lamentation": _poolLamentation,
   "pool/lammastide-weave": _poolLammastideWeave,
   "pool/lampad-of-deaths-vigil": _poolLampadOfDeathsVigil,
+  "pool/lamplight-phoenix": _poolLamplightPhoenix,
   "pool/lamplighter-of-selhoff": _poolLamplighterOfSelhoff,
   "pool/lance": _poolLance,
   "pool/lancer-sliver": _poolLancerSliver,
@@ -84655,6 +84665,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/man-o-war": _poolManOWar,
   "pool/mana-bloom": _poolManaBloom,
   "pool/mana-breach": _poolManaBreach,
+  "pool/mana-cache": _poolManaCache,
   "pool/mana-cannons": _poolManaCannons,
   "pool/mana-chains": _poolManaChains,
   "pool/mana-charged-dragon": _poolManaChargedDragon,
@@ -96093,6 +96104,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/test-of-talents": _poolTestOfTalents,
   "pool/testament-bearer": _poolTestamentBearer,
   "pool/testament-of-faith": _poolTestamentOfFaith,
+  "pool/tester-of-the-tangential": _poolTesterOfTheTangential,
   "pool/tether-technician": _poolTetherTechnician,
   "pool/tethered-griffin": _poolTetheredGriffin,
   "pool/tethered-skirge": _poolTetheredSkirge,

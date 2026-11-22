@@ -466,6 +466,7 @@ import _poolKynaiosAndTiroOfMeletis from "../pool/kynaios-and-tiro-of-meletis.js
 import _poolLacerateFlesh from "../pool/lacerate-flesh.js";
 import _poolLaezelVlaakithsChampion from "../pool/laezel-vlaakiths-champion.js";
 import _poolLakeTownMariners from "../pool/lake-town-mariners.js";
+import _poolLamplightPhoenix from "../pool/lamplight-phoenix.js";
 import _poolLamplighterOfSelhoff from "../pool/lamplighter-of-selhoff.js";
 import _poolLanternLitGraveyard from "../pool/lantern-lit-graveyard.js";
 import _poolLapseOfCertainty from "../pool/lapse-of-certainty.js";
@@ -1511,6 +1512,7 @@ const shard: CardShard = {
     _poolLacerateFlesh,
     _poolLaezelVlaakithsChampion,
     _poolLakeTownMariners,
+    _poolLamplightPhoenix,
     _poolLamplighterOfSelhoff,
     _poolLanternLitGraveyard,
     _poolLapseOfCertainty,

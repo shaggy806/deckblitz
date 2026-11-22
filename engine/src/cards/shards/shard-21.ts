@@ -853,6 +853,7 @@ import _poolTerritorialWitchstalker from "../pool/territorial-witchstalker.js";
 import _poolTerrorOfTheFairgrounds from "../pool/terror-of-the-fairgrounds.js";
 import _poolTerrorOfTowashi from "../pool/terror-of-towashi.js";
 import _poolTerrorTide from "../pool/terror-tide.js";
+import _poolTesterOfTheTangential from "../pool/tester-of-the-tangential.js";
 import _poolTetsuoImperialChampion from "../pool/tetsuo-imperial-champion.js";
 import _poolTezzeretCruelCaptain from "../pool/tezzeret-cruel-captain.js";
 import _poolThalakosSentry from "../pool/thalakos-sentry.js";
@@ -1871,6 +1872,7 @@ const shard: CardShard = {
     _poolTerrorOfTheFairgrounds,
     _poolTerrorOfTowashi,
     _poolTerrorTide,
+    _poolTesterOfTheTangential,
     _poolTetsuoImperialChampion,
     _poolTezzeretCruelCaptain,
     _poolThalakosSentry,

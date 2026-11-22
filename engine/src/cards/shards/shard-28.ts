@@ -510,6 +510,7 @@ import _poolMaiScornfulStriker from "../pool/mai-scornful-striker.js";
 import _poolMakeAStand from "../pool/make-a-stand.js";
 import _poolMakindiShieldmate from "../pool/makindi-shieldmate.js";
 import _poolMalfunctioningHolodeck from "../pool/malfunctioning-holodeck.js";
+import _poolManaCache from "../pool/mana-cache.js";
 import _poolManaCannons from "../pool/mana-cannons.js";
 import _poolManaGeode from "../pool/mana-geode.js";
 import _poolMandroidSquadron from "../pool/mandroid-squadron.js";
@@ -1583,6 +1584,7 @@ const shard: CardShard = {
     _poolMakeAStand,
     _poolMakindiShieldmate,
     _poolMalfunctioningHolodeck,
+    _poolManaCache,
     _poolManaCannons,
     _poolManaGeode,
     _poolMandroidSquadron,
