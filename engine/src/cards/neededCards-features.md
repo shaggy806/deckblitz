@@ -5435,7 +5435,9 @@ piles chosen at random (Whims of the Fates), "on the bottom in any order"
 (Jace, Architect of Thought; Truth or Tale), play from a pile (Brilliant
 Ultimatum), search a pile (Phyrexian Portal), each player's own lands
 (Bend or Break), combat piles (Camouflage, Raging River) — `author-freed`
-narrows them.
+narrows them. Since built: Bend or Break (2026-11-22, B338,
+`effect:each-player-separates-piles-together`: `each` with `chooser:
+"an-opponent"`, each separator naming one of their own opponents).
 
 ### Damage by this source, switches, the defending player's restrictions, other players' choices — built 2026-10-29
 

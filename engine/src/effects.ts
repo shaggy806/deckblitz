@@ -12065,6 +12065,14 @@ export type EffectSpec =
        * simultaneous sacrifice), and every other pile `rest`. A player with
        * nothing to separate has two empty piles (rule 700.3d) and isn't
        * asked, nor is a choice between them. `separator` is unused.
+       *
+       * With `chooser: "an-opponent"`, each player's piles are chosen by
+       * one of **their** opponents, of **their** choice: "Each player
+       * separates all nontoken lands they control into two piles. For each
+       * player, one of their piles is chosen by one of their opponents of
+       * their choice" (Bend or Break). In the same order, each separator
+       * names the opponent (asked only among two or more) as their piles'
+       * choice is reached, and that opponent chooses.
        */
       readonly each?: PlayerScope;
       /** With `each`: "**Starting with you**, each player separates…" (Whims
@@ -12122,6 +12130,9 @@ export type EffectSpec =
           readonly toSeparate: readonly PlayerId[];
           readonly made: readonly { readonly separator: PlayerId; readonly piles: readonly (readonly ObjectId[])[] }[];
           readonly chosen: readonly number[];
+          /** With `chooser: "an-opponent"`: who chooses each separator's
+           * pile, in the same order, as each is named. */
+          readonly choosers?: readonly PlayerId[];
           readonly asked?: "separate" | "choose";
         };
       };
@@ -25757,11 +25768,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         // At random, nobody is asked to choose: each separator's own piles
         // are picked from for them.
         const atRandom = spec.atRandom === true;
-        const chooser = atRandom ? undefined : chooserPlayer(spec.chooser, ctx);
-        if (!atRandom && chooser === undefined) return;
+        // "One of their opponents of their choice" (Bend or Break): each
+        // separator's own opponents, the one who chooses named by them.
+        const theirOpponents = !atRandom && spec.chooser === "an-opponent";
+        const opponentsOf = (separator: PlayerId): readonly PlayerId[] =>
+          ctx.playersInScope("each-player").filter((player) => player !== separator);
+        const chooser = atRandom || theirOpponents ? undefined : chooserPlayer(spec.chooser, ctx);
+        if (!atRandom && !theirOpponents && chooser === undefined) return;
         const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
         const shape = pileShape(spec);
         let { toSeparate, made, chosen } = progress?.each ?? { toSeparate: separationOrder(spec.each, spec.startingWithYou === true, ctx), made: [], chosen: [] };
+        let choosers = progress?.each?.choosers ?? [];
         let lookers = progress?.lookers ?? [];
         if (progress?.each?.asked === "separate") {
           made = [...made, { separator: toSeparate[0], piles: ctx.takePiles() ?? allInLastPile(spec.pileCount, progress.objects) }];
@@ -25775,10 +25792,16 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           const separator = toSeparate[0];
           const begun = ctx.beginPiles({ permanents: what.permanents, whose: separator }, separator);
           lookers = begun.lookers;
-          if (begun.objects.length > 0 && ctx.askSeparatePiles(separator, begun.objects, chooser ?? separator, false, fates, false, shape)) {
+          // Their opponent is named only once their piles are reached: the
+          // first stands in on the offer meanwhile.
+          const theirs = theirOpponents ? opponentsOf(separator) : [];
+          if (
+            begun.objects.length > 0 &&
+            ctx.askSeparatePiles(separator, begun.objects, chooser ?? theirs[0] ?? separator, false, fates, theirs.length > 1, shape)
+          ) {
             ctx.notePileOrGuess(separator);
             ctx.resumeAfterDecisions(
-              { ...spec, progress: { objects: begun.objects, lookers, each: { toSeparate, made, chosen, asked: "separate" } } },
+              { ...spec, progress: { objects: begun.objects, lookers, each: { toSeparate, made, chosen, choosers, asked: "separate" } } },
               below,
             );
             return;
@@ -25794,13 +25817,38 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             chosen = [...chosen, 0];
             continue;
           }
-          if (chooser === undefined) {
+          if (atRandom) {
             chosen = [...chosen, ctx.choosePileAtRandom(separator, piles)];
             continue;
           }
-          if (!ctx.askChoosePile(chooser, separator, piles, false, lookers, fates)) return;
+          let asker = chooser;
+          if (theirOpponents) {
+            asker = choosers[chosen.length];
+            if (asker === undefined) {
+              const theirs = opponentsOf(separator);
+              // No opponent left to choose: no pile is chosen.
+              if (theirs.length === 0) {
+                chosen = [...chosen, -1];
+                continue;
+              }
+              if (theirs.length > 1) {
+                ctx.askPlayerToChoose(
+                  separator,
+                  theirs.map((player) => ({
+                    text: `Choose ${player} to choose one of your piles`,
+                    effect: { ...spec, progress: { objects: [], lookers, each: { toSeparate, made, chosen, choosers: [...choosers, player] } } },
+                  })),
+                );
+                return;
+              }
+              asker = theirs[0];
+              choosers = [...choosers, asker];
+            }
+          }
+          if (asker === undefined) return;
+          if (!ctx.askChoosePile(asker, separator, piles, false, lookers, fates)) return;
           ctx.resumeAfterDecisions(
-            { ...spec, progress: { objects: [], lookers, each: { toSeparate, made, chosen, asked: "choose" } } },
+            { ...spec, progress: { objects: [], lookers, each: { toSeparate, made, chosen, choosers, asked: "choose" } } },
             below,
           );
           return;
