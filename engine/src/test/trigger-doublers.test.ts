@@ -174,6 +174,27 @@ describe("doubleTriggersOf: keyed on whose ability it is", () => {
     // Equipped: two each.
     expect(life(game)).toBe(26);
   });
+
+  // A bug report, 2026-11-21: Skullclamp on Cloud drew two. The dies trigger
+  // looks back at Cloud, equipped, as it last existed (rule 603.10a).
+  it("Cloud dying under Skullclamp draws four; another creature's Skullclamp draws two", () => {
+    const hand = (game: Game) => game.state.zones.perPlayer[A].hand.length;
+    const clampOnto = (game: Game, name: string) => {
+      const host = game.debugSpawn(name, A, "battlefield");
+      const clamp = game.debugSpawn("Skullclamp", A, "battlefield");
+      const before = hand(game);
+      // +1/-1 on a toughness-1 creature: it dies in the state-based check.
+      game.debugApplyEffect(A, { kind: "attach", target: 0 }, [{ kind: "object", object: host }], { source: clamp });
+      game.advanceUntil((s) => s.objects[host].zone === "graveyard" && quiet(s));
+      return hand(game) - before;
+    };
+    expect(clampOnto(setUp(), "Cloud, Midgar Mercenary")).toBe(4);
+    expect(clampOnto(setUp(), "Llanowar Elves")).toBe(2);
+    // Cloud beside it, unequipped, doubles nothing.
+    const game = setUp();
+    game.debugSpawn("Cloud, Midgar Mercenary", A, "battlefield");
+    expect(clampOnto(game, "Llanowar Elves")).toBe(2);
+  });
 });
 
 describe("doubleTriggers' new causes", () => {

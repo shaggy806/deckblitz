@@ -21139,6 +21139,33 @@ export class Game {
         if (ofSelfOrEquipment || matches) count += 1;
       }
     }
+    // "Cloud or an Equipment attached to it", as Cloud dies: its own
+    // leaves-the-battlefield ability, and its Equipment's "whenever equipped
+    // creature dies" (Skullclamp), look back at the doubler as it last
+    // existed (rule 603.10a) — the Equipment still on it until the
+    // state-based check unattaches it.
+    if (!ofSpell) {
+      const hostId = departed ? sourceId : source.zone === "battlefield" ? source.attachedTo : undefined;
+      const host = hostId === undefined || hostId === null ? undefined : this.state.objects[hostId];
+      const last = host?.lastKnown;
+      if (
+        host !== undefined &&
+        last !== undefined &&
+        host.zone !== "battlefield" &&
+        last.controller === controller &&
+        !last.lostAbilities &&
+        (departed || effectiveSubtypes(this.state, this.registry, source).includes("Equipment"))
+      ) {
+        for (const ability of this.registry.get(last.textName ?? last.name).static) {
+          if (ability.doubleTriggersOf?.selfAndEquipment !== true) continue;
+          const c = ability.condition;
+          // Only the condition a departed permanent can still answer.
+          const equippedOnly =
+            c !== undefined && c.kind === "source" && Object.keys(c.filter).length === 1 && c.filter.equipped === true;
+          if (c === undefined || (equippedOnly && last.equipped)) count += 1;
+        }
+      }
+    }
     return count;
   }
 
