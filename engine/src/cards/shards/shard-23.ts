@@ -114,6 +114,7 @@ import _poolBloodstoneCameo from "../pool/bloodstone-cameo.js";
 import _poolBloomingMarsh from "../pool/blooming-marsh.js";
 import _poolBoggartRamGang from "../pool/boggart-ram-gang.js";
 import _poolBolaSlinger from "../pool/bola-slinger.js";
+import _poolBombSquad from "../pool/bomb-squad.js";
 import _poolBomburGentleDreamer from "../pool/bombur-gentle-dreamer.js";
 import _poolBorderlandMinotaur from "../pool/borderland-minotaur.js";
 import _poolBorrowing100000Arrows from "../pool/borrowing-100-000-arrows.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolBloomingMarsh,
     _poolBoggartRamGang,
     _poolBolaSlinger,
+    _poolBombSquad,
     _poolBomburGentleDreamer,
     _poolBorderlandMinotaur,
     _poolBorrowing100000Arrows,

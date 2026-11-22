@@ -2600,6 +2600,7 @@ import _poolBirthingHulk from "./pool/birthing-hulk.js";
 import _poolBirthingPod from "./pool/birthing-pod.js";
 import _poolBirthingRitual from "./pool/birthing-ritual.js";
 import _poolBirthrightBoon from "./pool/birthright-boon.js";
+import _poolBishopOfBinding from "./pool/bishop-of-binding.js";
 import _poolBishopOfRebirth from "./pool/bishop-of-rebirth.js";
 import _poolBishopOfTheBloodstained from "./pool/bishop-of-the-bloodstained.js";
 import _poolBishopOfWings from "./pool/bishop-of-wings.js";
@@ -3149,6 +3150,7 @@ import _poolBoltwave from "./pool/boltwave.js";
 import _poolBoltwingMarauder from "./pool/boltwing-marauder.js";
 import _poolBomatBazaarBarge from "./pool/bomat-bazaar-barge.js";
 import _poolBomatCourier from "./pool/bomat-courier.js";
+import _poolBombSquad from "./pool/bomb-squad.js";
 import _poolBombadilsSong from "./pool/bombadils-song.js";
 import _poolBombard from "./pool/bombard.js";
 import _poolBomberCorps from "./pool/bomber-corps.js";
@@ -4762,6 +4764,7 @@ import _poolChubToad from "./pool/chub-toad.js";
 import _poolChulane from "./pool/chulane.js";
 import _poolChupacabraEcho from "./pool/chupacabra-echo.js";
 import _poolChurningEddy from "./pool/churning-eddy.js";
+import _poolChurningReservoir from "./pool/churning-reservoir.js";
 import _poolCidFreeflierPilot from "./pool/cid-freeflier-pilot.js";
 import _poolCidTimelessArtificer from "./pool/cid-timeless-artificer.js";
 import _poolCinderBarrens from "./pool/cinder-barrens.js";
@@ -5534,6 +5537,7 @@ import _poolCorruptedRoots from "./pool/corrupted-roots.js";
 import _poolCorruptedShapeshifter from "./pool/corrupted-shapeshifter.js";
 import _poolCorruptedZendikon from "./pool/corrupted-zendikon.js";
 import _poolCorruptingLicid from "./pool/corrupting-licid.js";
+import _poolCorruptionOfTowashi from "./pool/corruption-of-towashi.js";
 import _poolCorsairCaptain from "./pool/corsair-captain.js";
 import _poolCorsairsOfUmbar from "./pool/corsairs-of-umbar.js";
 import _poolCoruscationMage from "./pool/coruscation-mage.js";
@@ -36419,6 +36423,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBirthingPod,
   _poolBirthingRitual,
   _poolBirthrightBoon,
+  _poolBishopOfBinding,
   _poolBishopOfRebirth,
   _poolBishopOfTheBloodstained,
   _poolBishopOfWings,
@@ -36968,6 +36973,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoltwingMarauder,
   _poolBomatBazaarBarge,
   _poolBomatCourier,
+  _poolBombSquad,
   _poolBombadilsSong,
   _poolBombard,
   _poolBomberCorps,
@@ -38581,6 +38587,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChulane,
   _poolChupacabraEcho,
   _poolChurningEddy,
+  _poolChurningReservoir,
   _poolCidFreeflierPilot,
   _poolCidTimelessArtificer,
   _poolCinderBarrens,
@@ -39353,6 +39360,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCorruptedShapeshifter,
   _poolCorruptedZendikon,
   _poolCorruptingLicid,
+  _poolCorruptionOfTowashi,
   _poolCorsairCaptain,
   _poolCorsairsOfUmbar,
   _poolCoruscationMage,
@@ -70251,6 +70259,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/birthing-pod": _poolBirthingPod,
   "pool/birthing-ritual": _poolBirthingRitual,
   "pool/birthright-boon": _poolBirthrightBoon,
+  "pool/bishop-of-binding": _poolBishopOfBinding,
   "pool/bishop-of-rebirth": _poolBishopOfRebirth,
   "pool/bishop-of-the-bloodstained": _poolBishopOfTheBloodstained,
   "pool/bishop-of-wings": _poolBishopOfWings,
@@ -70800,6 +70809,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/boltwing-marauder": _poolBoltwingMarauder,
   "pool/bomat-bazaar-barge": _poolBomatBazaarBarge,
   "pool/bomat-courier": _poolBomatCourier,
+  "pool/bomb-squad": _poolBombSquad,
   "pool/bombadils-song": _poolBombadilsSong,
   "pool/bombard": _poolBombard,
   "pool/bomber-corps": _poolBomberCorps,
@@ -72413,6 +72423,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chulane": _poolChulane,
   "pool/chupacabra-echo": _poolChupacabraEcho,
   "pool/churning-eddy": _poolChurningEddy,
+  "pool/churning-reservoir": _poolChurningReservoir,
   "pool/cid-freeflier-pilot": _poolCidFreeflierPilot,
   "pool/cid-timeless-artificer": _poolCidTimelessArtificer,
   "pool/cinder-barrens": _poolCinderBarrens,
@@ -73185,6 +73196,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/corrupted-shapeshifter": _poolCorruptedShapeshifter,
   "pool/corrupted-zendikon": _poolCorruptedZendikon,
   "pool/corrupting-licid": _poolCorruptingLicid,
+  "pool/corruption-of-towashi": _poolCorruptionOfTowashi,
   "pool/corsair-captain": _poolCorsairCaptain,
   "pool/corsairs-of-umbar": _poolCorsairsOfUmbar,
   "pool/coruscation-mage": _poolCoruscationMage,

@@ -171,6 +171,7 @@ import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChiraAllIn from "../pool/chira-all-in.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
 import _poolChromescaleDrake from "../pool/chromescale-drake.js";
+import _poolChurningReservoir from "../pool/churning-reservoir.js";
 import _poolCidTimelessArtificer from "../pool/cid-timeless-artificer.js";
 import _poolCircleOfDespair from "../pool/circle-of-despair.js";
 import _poolCircleOfProtectionGreen from "../pool/circle-of-protection-green.js";
@@ -1252,6 +1253,7 @@ const shard: CardShard = {
     _poolChiraAllIn,
     _poolChromaticOrrery,
     _poolChromescaleDrake,
+    _poolChurningReservoir,
     _poolCidTimelessArtificer,
     _poolCircleOfDespair,
     _poolCircleOfProtectionGreen,

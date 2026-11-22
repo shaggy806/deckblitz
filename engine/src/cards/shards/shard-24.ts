@@ -193,6 +193,7 @@ import _poolConvolute from "../pool/convolute.js";
 import _poolConvulsingLicid from "../pool/convulsing-licid.js";
 import _poolCoralEel from "../pool/coral-eel.js";
 import _poolCorrosiveOoze from "../pool/corrosive-ooze.js";
+import _poolCorruptionOfTowashi from "../pool/corruption-of-towashi.js";
 import _poolCourageousResolve from "../pool/courageous-resolve.js";
 import _poolCovetedJewel from "../pool/coveted-jewel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
@@ -1246,6 +1247,7 @@ const shard: CardShard = {
     _poolConvulsingLicid,
     _poolCoralEel,
     _poolCorrosiveOoze,
+    _poolCorruptionOfTowashi,
     _poolCourageousResolve,
     _poolCovetedJewel,
     _poolCracklingCyclops,

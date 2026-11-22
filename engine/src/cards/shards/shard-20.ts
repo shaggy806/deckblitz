@@ -100,6 +100,7 @@ import _poolBilboFellowConspirator from "../pool/bilbo-fellow-conspirator.js";
 import _poolBillowingShriekmass from "../pool/billowing-shriekmass.js";
 import _poolBiomancersFamiliar from "../pool/biomancers-familiar.js";
 import _poolBiomanticMastery from "../pool/biomantic-mastery.js";
+import _poolBishopOfBinding from "../pool/bishop-of-binding.js";
 import _poolBitterDownfall from "../pool/bitter-downfall.js";
 import _poolBlackCatCunningThief from "../pool/black-cat-cunning-thief.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
@@ -1211,6 +1212,7 @@ const shard: CardShard = {
     _poolBillowingShriekmass,
     _poolBiomancersFamiliar,
     _poolBiomanticMastery,
+    _poolBishopOfBinding,
     _poolBitterDownfall,
     _poolBlackCatCunningThief,
     _poolBlanchwoodTreefolk,
