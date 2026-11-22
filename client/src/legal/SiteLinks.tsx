@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { BUILT_WITH, BUILT_WITH_NOTE, CLAUDE_CODE_URL, FEEDBACK_EMAIL, FEEDBACK_HREF } from './notice.ts'
+import { markIntroSeen } from '../tutorial/progress.ts'
 import './legal.css'
 
 /**
@@ -124,6 +125,10 @@ function FeedbackLink() {
         onClick={() => {
           setOpen((was) => !was)
           setCopied(false)
+          // The box opens over the tutorials' first-visit callout beside it,
+          // so the callout goes, as if dismissed (the user's call,
+          // 2026-11-21); the "?" button still has everything it offered.
+          markIntroSeen()
         }}
       >
         Send feedback
