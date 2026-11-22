@@ -2583,10 +2583,10 @@ export interface LastKnownInfo {
    * after the loss (rule 613.7). A granted dies trigger fires even when its
    * grantor is gone by the time the death is matched. Absent when none. */
   readonly grantedTriggers?: readonly GrantedAbilityRef[];
-  /** The `doubleTriggers` statics it had been granted (The Masamune's
-   * equipped creature's), read by a death at the same time looking back at
-   * the doublers that left with it (Teysa Karlov's ruling, for a granted
-   * one). Absent when none. */
+  /** The `doubleTriggers` and `doubleTriggersOf` statics it had been granted
+   * (The Masamune's equipped creature's; Lwaxana Troi's chosen creature's),
+   * read by a death at the same time looking back at the doublers that left
+   * with it (Teysa Karlov's ruling, for a granted one). Absent when none. */
   readonly grantedDoublers?: readonly StaticAbility[];
 }
 

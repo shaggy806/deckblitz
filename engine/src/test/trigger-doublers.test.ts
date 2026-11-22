@@ -247,6 +247,33 @@ describe("doubleTriggersOf: a doubler leaving in the same event", () => {
     }
   });
 
+  // "For as long as Lwaxana Troi remains tapped, if a triggered ability of
+  // that creature triggers…": the creature has it as it dies, whether she
+  // stays or dies with it; not once she has untapped.
+  it("Lwaxana Troi's chosen creature dying, alone or with her", () => {
+    const chosen = (game: Game) => {
+      const troi = game.debugSpawn("Lwaxana Troi, Charming Guest", A, "battlefield");
+      const traveler = game.debugSpawn("Doomed Traveler", A, "battlefield");
+      game.state.objects[troi].tapped = true;
+      const grant = registry.get("Lwaxana Troi, Charming Guest").activated[0].effect!;
+      game.debugApplyEffect(A, grant, [{ kind: "object", object: traveler }], { source: troi });
+      return { troi, traveler };
+    };
+    const together = setUp();
+    chosen(together);
+    expect(wrath(together)).toBe(2);
+
+    const alone = setUp();
+    chosen(alone);
+    expect(wrath(alone, { kind: "destroy-all", filter: { name: "Doomed Traveler" } })).toBe(2);
+
+    const untapped = setUp();
+    const { troi } = chosen(untapped);
+    untapped.debugApplyEffect(A, { kind: "untap-all", filter: { name: "Lwaxana Troi, Charming Guest" } }, [], {});
+    expect(untapped.state.objects[troi].tapped).toBe(false);
+    expect(wrath(untapped)).toBe(1);
+  });
+
   it("Wizard's Staff, destroyed with its host or left behind", () => {
     for (const filter of [{ typesAnyOf: ["creature", "artifact"] }, { type: "creature" }] as const) {
       const game = setUp();

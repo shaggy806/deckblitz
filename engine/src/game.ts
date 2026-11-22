@@ -21157,7 +21157,9 @@ export class Game {
         const was = this.state.objects[id];
         const last = was?.lastKnown;
         if (was === undefined || was.zone === "battlefield" || last === undefined || last.lostAbilities) continue;
-        for (const ability of this.registry.get(last.textName ?? last.name).static) {
+        // Its printed statics and those it had been granted (Lwaxana Troi's
+        // creature, for as long as she remained tapped).
+        for (const ability of [...this.registry.get(last.textName ?? last.name).static, ...(last.grantedDoublers ?? [])]) {
           const d = ability.doubleTriggersOf;
           if (d === undefined) continue;
           // Only a condition a departed permanent can still answer.
@@ -74457,7 +74459,7 @@ controlledBy,
     // creature): a death at the same time looks back at them, as it does at
     // a printed one (`causeTriggerDoublers`).
     const grantedDoublers =
-      object.zone === "battlefield" ? grantedStatics(this.state, this.registry, object, (s) => s.doubleTriggers !== undefined) : [];
+      object.zone === "battlefield" ? grantedStatics(this.state, this.registry, object, (s) => s.doubleTriggers !== undefined || s.doubleTriggersOf !== undefined) : [];
     // Whoever had goaded it, however — a static goad included, read while
     // its source is still here (a simultaneous event snapshots every victim
     // before the first moves).
