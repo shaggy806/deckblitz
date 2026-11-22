@@ -18,6 +18,7 @@ import type {
   TapCostOffer,
 } from "./actions.js";
 import { abilityLifeCost, isManaAbility } from "./abilities.js";
+import type { ActivatedAbility } from "./abilities.js";
 import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapCountForModes, tapPicksPower, tapShareChoices } from "./actions.js";
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
@@ -5540,7 +5541,8 @@ export class HeuristicBotController extends AutomaticController {
    * (`Game.manaSources`), so such a spell is never among the legal casts
    * and nothing here counted it: on turn one with a land, a Petal and a
    * Spirit Guide a bot played the land and passed, its commander's {2}{R}
-   * in reach (a live game, 2026-11-21).
+   * in reach (a live game, 2026-11-21). The same for mana a permanent of
+   * ours keeps as counters (`paysWithStoredCounters`).
    *
    * Asked in our own main phase with an empty stack, where everything else
    * has been considered and passed over. The look plays the free rocks (each
@@ -5557,11 +5559,20 @@ export class HeuristicBotController extends AutomaticController {
     if (state.zones.shared.stack.length > 0 || activePlayerOf(state) !== me) return null;
     if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return null;
     const now = view.legalActions();
+    // And **mana stored as counters** on a permanent of ours (Jeweled
+    // Amulet's "{T}, Remove a charge counter: Add one mana of its last noted
+    // type"): the payer leaves a cost that removes counters to the player
+    // (`Game.manaSources`), so the mana was never counted either. Slicer's
+    // bot died holding Insurrection with six lands and a charged Amulet, the
+    // seventh mana, against an opponent it would have killed that turn (a
+    // kept live game, 2026-11-22).
     const fromHand = now.filter((o): o is ActivateAbilityLegal => {
-      if (o.kind !== "activate-ability" || state.objects[o.source]?.zone !== "hand") return false;
-      if (!this.registry.has(o.cardName)) return false;
+      if (o.kind !== "activate-ability" || !this.registry.has(o.cardName)) return false;
+      const object = state.objects[o.source];
       const ability = this.registry.get(o.cardName).activated?.[o.abilityIndex];
-      return ability !== undefined && ability.zone === "hand" && isManaAbility(ability);
+      if (object === undefined || ability === undefined || !isManaAbility(ability)) return false;
+      if (object.zone === "hand") return ability.zone === "hand";
+      return object.zone === "battlefield" && object.controller === me && paysWithStoredCounters(ability);
     });
     if (fromHand.length === 0) return null;
     const rocks = now.filter((o): o is CastSpellLegal => {
@@ -6068,6 +6079,28 @@ const TAKE_SHARE = 0.75;
 const HAND_MANA_FLOOR = 3;
 /** The most hand mana abilities one line spends. */
 const HAND_MANA_MOST = 3;
+
+/** Whether a mana ability's cost is a fixed number of counters off its own
+ * source and nothing else but tapping it (Jeweled Amulet): mana kept on the
+ * permanent, which the payer leaves by hand and `handManaLine` spends. Not a
+ * count chosen as it's paid (a storage land's X), counters taken from
+ * elsewhere, or a cost with mana or a sacrifice in it. */
+function paysWithStoredCounters(ability: ActivatedAbility): boolean {
+  const cost = ability.cost;
+  const counters = cost.removeCounter;
+  return (
+    counters !== undefined &&
+    typeof counters.count === "number" &&
+    counters.from === undefined &&
+    counters.among === undefined &&
+    counters.orKinds === undefined &&
+    cost.mana === null &&
+    cost.sacrifice === undefined &&
+    cost.tapOthers === undefined &&
+    cost.discard === undefined &&
+    cost.payEnergy === undefined
+  );
+}
 /** The life at or below which a reanimation spell takes whatever there is. */
 const TAKE_ANYTHING_AT = 10;
 /** The library size at or below which a cast is asked whether it would run

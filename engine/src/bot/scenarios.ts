@@ -3016,6 +3016,130 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   asked({
+    name: "casts the Deadly Tempest that wins now, not after combat",
+    rule: "A wipe is held for after combat so our creatures attack first; one that ends the game as it resolves is cast at once.",
+    position(registry) {
+      // From a kept live game (2026-11-22, DV2N6-3 turn 35): Kardur's bot
+      // held Deadly Tempest ("destroy all creatures; each player loses life
+      // equal to the number of creatures they controlled that were
+      // destroyed") with the last opponent on 14 life and fifteen creatures,
+      // and passed to combat: a wipe that takes our own would-be attackers
+      // waits for the second main phase (`holdsWipeForCombat`). Cast and
+      // pass both scored a won game (the held wipe is cast after combat in
+      // the plan), so nothing told them apart. In combat it then spent the
+      // wipe's mana (the next scenario) and lost the following turn with
+      // the Tempest in hand.
+      const game = table(registry, [A, B], A);
+      lands(game, "Swamp", A, 6);
+      for (let i = 0; i < 6; i += 1) onBoard(game, "Hill Giant", A);
+      for (let i = 0; i < 15; i += 1) onBoard(game, "Hill Giant", B);
+      game.state.players[A].life = 25;
+      game.state.players[B].life = 14;
+      const tempest = game.debugSpawn("Deadly Tempest", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === tempest,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  {
+    name: "keeps a held Wrath of God's mana with its own trigger on the stack",
+    rule: "A wipe held for after combat needs its mana in main 2, also while a trigger of ours waits on the stack.",
+    run(weights, registry, makeBot) {
+      // The same turn of the same game: with the Tempest held, Kardur's
+      // three "dies" triggers went on the stack in the combat damage step
+      // and the bot activated Stensia Bloodhall ({3}{B}{R}) under them, five
+      // of its nine mana, so the six-mana wipe was never on offer again.
+      // `spendsHeldMana` asks whether the held play is still castable, and
+      // a sorcery isn't with anything on the stack: it answered "not on
+      // offer anyway" and let the activation through. Here Scroll Thief's
+      // draw is on the stack when the Bloodhall is offered: seven lands pay
+      // for Wrath of God or for the Bloodhall, not both. (Two creatures
+      // across, not three: against thirteen power the Thief stays home.)
+      const game = table(registry, [A, B], A);
+      lands(game, "Plains", A, 4);
+      lands(game, "Swamp", A, 1);
+      lands(game, "Mountain", A, 1);
+      const hall = onBoard(game, "Stensia Bloodhall", A);
+      onBoard(game, "Scroll Thief", A);
+      for (const name of ["Hill Giant", "Serra Angel"]) onBoard(game, name, B, true);
+      const wrath = game.debugSpawn("Wrath of God", A, "hand");
+      const bot = makeBot(A, registry, weights);
+      const turn = game.state.turn.number;
+      const played: string[] = [];
+      let stacked = false;
+      for (let i = 0; i < 80 && game.state.turn.number === turn && !game.state.result.over; i += 1) {
+        const awaiting = game.state.awaiting;
+        const who = awaiting !== null && "player" in awaiting ? awaiting.player : game.state.priority.holder;
+        if (who !== A) {
+          game.advanceUntil((s) => {
+            const w = s.awaiting !== null && "player" in s.awaiting ? s.awaiting.player : s.priority.holder;
+            return s.turn.number !== turn || s.result.over || w === A;
+          });
+          continue;
+        }
+        if (awaiting?.kind === "attackers") {
+          game.dispatch({ type: "declare-attackers", player: A, attackers: bot.declareAttackers(viewOf(game, A)) });
+          continue;
+        }
+        if (game.state.turn.step === "combat-damage" && game.state.zones.shared.stack.length > 0) stacked = true;
+        const action = bot.act(viewOf(game, A));
+        if (action.type === "cast-spell") played.push(`${game.state.objects[action.card]?.cardName} in ${game.state.turn.step}`);
+        if (action.type === "activate-ability" && action.source === hall) played.push(`Stensia Bloodhall in ${game.state.turn.step}`);
+        game.dispatch(action);
+      }
+      if (!stacked) return { passed: false, detail: "never held priority with the Thief's trigger on the stack" };
+      const spent = played.some((p) => p.startsWith("Stensia Bloodhall") && !p.endsWith("main"));
+      const wiped = game.state.objects[wrath]?.zone !== "hand";
+      return { passed: !spent && wiped, detail: played.join(", ") || "cast nothing" };
+    },
+  },
+  {
+    name: "kills the leader, not the seat with nothing, when one attacker can kill either",
+    rule: "With one kill to make and several players it could take, it takes the one whose board and hand are worth most.",
+    run(weights, registry, makeBot) {
+      // From a kept live game (2026-11-22, 8ZY28-1 turn 35): Ghalta, a
+      // 24/24 trampling commander, could kill any of three opponents by
+      // commander damage (rule 903.10a). Its own Whiptongue Hydra had just
+      // destroyed the leader's creatures: 64 life, seven cards in hand,
+      // tapped out. Ghalta went at the seat with no board and three lands in
+      // hand. The leader untapped, destroyed Ghalta and won fifteen turns
+      // later. `alphaStrike` tried the killable players in turn order and
+      // took the first kill that left it alive; nothing weighed who died.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Forest", A, 6);
+      const ghalta = onBoard(game, "Ghalta, Primal Hunger", A);
+      game.state.objects[ghalta].isCommander = true;
+      game.state.objects[ghalta].counters = { "+1/+1": 12 };
+      game.state.players[A].life = 35;
+      // The seat with nothing: lands, and three more in hand.
+      lands(game, "Plains", B, 7);
+      holding(game, [B], 3);
+      game.state.players[B].life = 32;
+      // One with a small board: Ghalta tramples over its blocker for 21.
+      lands(game, "Swamp", C, 7);
+      onBoard(game, "Grizzly Bears", C);
+      holding(game, [C], 4);
+      game.state.players[C].life = 31;
+      // The leader, its creatures gone and its lands tapped.
+      for (let i = 0; i < 7; i += 1) onBoard(game, "Island", D, true);
+      onBoard(game, "Sol Ring", D, true);
+      for (const name of ["Noxious Gearhulk", "Counterspell", "Mulldrifter", "Rhystic Study", "Cultivate", "Island", "Island"]) {
+        game.debugSpawn(name, D, "hand");
+      }
+      game.state.players[D].life = 64;
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" || s.turn.step === "postcombat-main" || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "never asked to attack" };
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const at = attackers.find((d) => d.attacker === ghalta)?.defender;
+      return { passed: at === D, detail: at === undefined ? "Ghalta stayed home" : `Ghalta attacked ${at}` };
+    },
+  },
+  asked({
     name: "casts Colfenor's Urn before the Citywide Bust that fills it",
     rule: "A dies payoff goes down before the wipe that kills what it pays off: the Urn exiles the Walls the Bust destroys, and brings them back.",
     position(registry) {
@@ -7278,6 +7402,34 @@ const SCENARIOS: readonly BotScenario[] = [
         .filter((s) => s !== "pass-priority");
       return {
         passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Slicer")),
+        detail: `did: ${did.join(", ") || "nothing"}`,
+      };
+    },
+  },
+  {
+    name: "spends Jeweled Amulet's stored mana on the spell it makes castable",
+    rule: "Mana kept as counters on a permanent is mana: three Mountains and a charged Amulet are a four-mana spell.",
+    run(weights, registry, makeBot) {
+      // From a kept live game (2026-11-22, D75RS-1 turn 29): Slicer's bot
+      // had six lands, Ruby Medallion and a charged Jeweled Amulet ("{T},
+      // Remove a charge counter: Add one mana of its last noted type"), and
+      // Insurrection in hand at seven: every creature of an opponent on 15,
+      // tapped out, was 17 power with haste. The payer leaves a cost that
+      // removes counters to the player (`Game.manaSources`), so the cast was
+      // never among the legal ones, and the bot lost the next turn with it in
+      // hand. Fixed: `handManaLine` taps such a source by hand.
+      const game = table(registry, [A, B], A);
+      lands(game, "Mountain", A, 3);
+      const amulet = onBoard(game, "Jeweled Amulet", A);
+      game.state.objects[amulet].counters = { charge: 1 };
+      game.state.objects[amulet].chosenOnEnter = "R";
+      game.debugSpawn("Hill Giant", A, "hand");
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const did = taken
+        .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
+        .filter((s) => s !== "pass-priority");
+      return {
+        passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Hill Giant")),
         detail: `did: ${did.join(", ") || "nothing"}`,
       };
     },

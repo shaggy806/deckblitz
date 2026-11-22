@@ -35,6 +35,19 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   player (AUTHORING.md §0). There's no payment window where a payer floats or picks mana, and
   `whyCannotAct` refuses a mana ability while a decision is pending. Rhystic Cave waits on the same window
   inside a mana ability (`cost:pay-unless-inside-mana-ability`, major; its build is commit 67ce0c3cb).
+- **A goaded creature stays home when its only other defender is behind an attack tax** (2026-11-22,
+  from a kept live game, 8WNCA-2 turn 24). Sidisi's bot controlled Slicer, Hired Muscle, goaded by
+  its owner and untapped; the only player other than the goader had Ghostly Prison and the bot had
+  no mana for the {2}. The declaration's offer gave Slicer `defendersFor: [the taxed player]`,
+  `mustAttack: []`, and a declaration without it was accepted. Rule 701.15b makes two requirements
+  ("attacks each combat if able" and "attacks a player other than the goader if able"), and rule
+  508.1d asks for the most that can be obeyed without paying a cost nobody has to pay: unpaid, the
+  second can't be, the first can, at the goader. So Slicer had to attack its goader. The goader is
+  left out of a goaded creature's defenders while any other player is one, whatever attacking that
+  player costs (`goad.ts`, the attack offer's `defendersFor`); the fix is to count an unpaid taxed
+  defender as not attackable for the "other than the goader" requirement, and then require the
+  attack at the goader. The bots' attack reads `mustAttack`, so it follows. Not fixed: seen on the
+  live board, not yet rebuilt as a test.
 - **B338's small gaps** (2026-11-22, what the overnight lane agents reported; none checked beyond the
   agent's own reading): exalted counters stay through a later "loses all abilities" (as `keywordCountersOn`
   does, ignoring 613.7 order); Lich's "if you can't" counts nontoken permanents including one that can't be

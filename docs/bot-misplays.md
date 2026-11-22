@@ -4,6 +4,74 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-22 — The kept games read for what lost them: a winning wipe held, the kill on the wrong player, stored mana never spent
+
+Status: the three below fixed 2026-11-22, four scenarios gate; the rest of the read is open (the
+list at the end).
+
+All 35 kept games of the day (`games/2026-11-22/`, each replayed exactly on the commit it was
+played on) were read for the plays that lost a game or passed up a win. Each fix was checked on the
+live game's own board, not only on its scenario.
+
+**1. A Deadly Tempest that won on the spot, held for after combat and never cast (DV2N6-3, turn
+35).** Kardur's bot, 25 life and six creatures, against the last opponent on 14 life with fifteen
+creatures and no untapped land: Deadly Tempest ("destroy all creatures; each player loses life
+equal to the creatures they lost") ends the game. It passed, attacked, and lost the next turn with
+the Tempest in hand. **Why:** a wipe that takes our own would-be attackers waits for the second
+main phase (`holdsWipeForCombat`); cast and pass both scored 999965, a won game, so nothing told
+them apart. Then, with Kardur's three "dies" triggers on the stack in the combat damage step, it
+activated Stensia Bloodhall for five of its nine mana: `spendsHeldMana` asks whether the held play
+is still castable, and a sorcery isn't over a stack, so it answered "not on offer anyway".
+**Fixed:** a wipe that ends the game as it resolves isn't held (`winsAsItResolves`), and the held
+play is read on the board the stack leaves. Scenarios: "casts the Deadly Tempest that wins now,
+not after combat" and "keeps a held Wrath of God's mana with its own trigger on the stack".
+
+**2. Ghalta's commander-damage kill taken on the seat with nothing (8ZY28-1, turn 35).** Ghalta,
+24/24 trample, could kill any of three opponents; its own Whiptongue Hydra had just destroyed the
+leader's creatures (64 life, seven cards, tapped out). It killed the seat with no board and three
+lands in hand; the leader untapped, destroyed Ghalta and won on turn 50. **Why:** `alphaStrike`
+tries the killable players in turn order and takes the first kill that leaves it alive. **Fixed:**
+among plans with as many kills that take other players, each is played out and the board it
+leaves scored. Scenario: "kills the leader, not the seat with nothing, when one attacker can kill
+either".
+
+**3. Insurrection never offered: Jeweled Amulet's stored mana (D75RS-1, turn 29).** Slicer's bot
+had six lands, Ruby Medallion and a charged Amulet, and Insurrection at seven against an opponent
+on 15, tapped out, with 17 power of creatures to take. The payer leaves a cost that removes
+counters to the player (AUTHORING §15), so the cast wasn't legal until the Amulet was tapped by
+hand, and no bot taps mana by hand. It lost the next turn. **Fixed:** `handManaLine` (Simian Spirit
+Guide's) also spends a mana ability whose cost is a fixed number of counters off its own source
+(`paysWithStoredCounters`). On the live board it now casts Insurrection and wins that turn.
+Scenario: "spends Jeweled Amulet's stored mana on the spell it makes castable".
+
+**Open from the same read** (today's v2 at count budgets makes the same choice in every one
+re-run; positions are rebuilt by replaying the game to the turn):
+
+- **No blocker kept for an attack already countable** — fourteen eliminations, the most common
+  cause. A seat on a commander-damage clock (mostly a Slicer handed round the table) taps its only
+  blockers for damage that changes nothing: D75RS-1 Domri t14 (9 + 6 + 6 = 21), D75RS-3 Lazav t21,
+  D75RS-5 Domri t16, D75RS-8 Domri t22 (three Dragons out at 18 Slicer damage) and Zurgo t17,
+  8WNCA-1 Sidisi t19, 8WNCA-2 Surrak t21, NX4BN-1 Yasova t19 and t22, RCSBH-3 Korvold t13, TPGJ6-1
+  Chandra t12; and by life, YA57F-2 Kykar t50, YA57F-1 Kykar t24, 8G96K-3 Jaya t36, FU89K-1
+  Muldrotha t33 (died by 1).
+- **Dictate of the Twin Gods cast by the seat it then kills** — RCSBH-3 t17, RCSBH-2 t26 (at 6
+  Slicer damage; 12 doubled, then first strike), YA57F-2 t35 (15 became 30 at 30 life).
+- **Pillow fort held to the grave** — YA57F-1 t27-t32: Inniaz's bot died tapped out with Ghostly
+  Prison, Windborn Muse and Aetherize in hand, 7 mana for the first two, after the same board had
+  hit it for 25.
+- **Removal held or aimed elsewhere** — D75RS-7 Zurgo t23 (Stroke of Midnight held while Alexios
+  could only attack it), D75RS-9 Domri t15 (Clan Defiance at a commander, not the Slicer about to
+  deal its last 3), FU89K-1 Muldrotha t29 (tapped out with Counterspell and Army of the Damned's
+  flashback in view), 8WNCA-1 Surrak t27 (Rapid Hybridization on Slicer's back face at upkeep, so
+  it came back as the double-strike face for exactly 21).
+- **Overkill instead of splitting** — D75RS-7 Domri t25: everything at a player one attacker
+  killed; the spare 4 at the other would have made its next attack lethal, and it lost by 1.
+- **Slicer handed to the last opponent** — RCSBH-3 t21, D75RS-3's last upkeep: goad then points it
+  at its owner.
+- DV2N6-3 Teferi t31-t32: 4 named for Wheel of Misfortune under a damage doubler, then a
+  Generous Gift on its own Darksteel-Mutated commander would have been lethal commander damage
+  (the reader's line, not engine-checked).
+
 ## 2026-11-22 — Slicer's bot: Kusari-Gama left off the commander, Welding Jar held (TPGJ6-2)
 
 Status: fixed 2026-11-22. All four scenarios gate.

@@ -2312,7 +2312,10 @@ export class EvalBotController extends HeuristicBotController {
           const spends = this.spendsHeldMana(view.state, action);
           if (spends === "drop") continue;
           if (spends !== "ok" && !mustKill.has(action)) mustKill.set(action, spends.kills);
-          if (heldWipe) heldForCombat.add(action);
+          // Not a wipe that ends the game as it resolves (`winsAsItResolves`):
+          // held, it tied with passing to combat and casting it after, and
+          // the combat between spent its mana.
+          if (heldWipe && !this.winsAsItResolves(view.state, action)) heldForCombat.add(action);
           candidates.push(action);
         }
       }
@@ -3619,17 +3622,20 @@ export class EvalBotController extends HeuristicBotController {
       readonly kills: number;
       readonly used: number;
       readonly declaration: AttackerDeclaration[];
+      /** The players it kills, sorted: two plans with the same `who` differ
+       * only in what is piled on. */
+      readonly who: string;
     }
     const plans: Plan[] = [];
     const seen = new Set<string>();
-    const add = (declaration: AttackerDeclaration[], kills: number, used: number): void => {
+    const add = (declaration: AttackerDeclaration[], killed: readonly PlayerId[], used: number): void => {
       const key = declaration
         .map((d) => `${d.attacker}>${d.defender}x${d.count ?? "all"}`)
         .sort()
         .join(",");
       if (seen.has(key)) return;
       seen.add(key);
-      plans.push({ kills, used, declaration });
+      plans.push({ kills: killed.length, used, declaration, who: [...killed].sort().join(",") });
     };
     for (const order of permutations(killable)) {
       let pool = [...mine];
@@ -3647,8 +3653,8 @@ export class EvalBotController extends HeuristicBotController {
         const target = killed.find((p) => canAttack(c, p));
         if (target !== undefined) piled.push({ c, defender: target });
       }
-      add(declare(piled), killed.length, units.length);
-      add(declare(units), killed.length, units.length);
+      add(declare(piled), killed, units.length);
+      add(declare(units), killed, units.length);
     }
     // Most kills first; among equals, the fewest attackers the kills need,
     // then the piled-on plan before the lean one (the order they were added).
@@ -3657,21 +3663,58 @@ export class EvalBotController extends HeuristicBotController {
       .sort((a, b) => b.plan.kills - a.plan.kills || a.plan.used - b.plan.used || a.index - b.index)
       .map(({ plan }) => plan);
 
-    for (const plan of ranked) {
-      if (plan.kills === living.length || (deadAnyway && diesSooner === undefined)) return plan.declaration;
-      const after = timed(budget, () =>
+    const played = (plan: Plan): GameState | null =>
+      timed(budget, () =>
         simulateCombat(state, this.cards, {
           type: "declare-attackers",
           player: me,
           attackers: withRequiredAttackers(plan.declaration, legal),
         }),
       );
-      if (deadAnyway) {
-        // A kill that doesn't cost it a turn of life it had.
-        if (after !== null && diesSooner?.(after) !== true) return plan.declaration;
-        continue;
+    // Whether a plan may be declared, and the board it leaves if it was
+    // played out to find that out.
+    const allowed = (plan: Plan): { readonly ok: boolean; readonly after: GameState | null } => {
+      if (plan.kills === living.length || (deadAnyway && diesSooner === undefined)) return { ok: true, after: null };
+      const after = played(plan);
+      // Dead anyway: a kill that doesn't cost it a turn of life it had.
+      if (deadAnyway) return { ok: after !== null && diesSooner?.(after) !== true, after };
+      return { ok: after !== null && !this.crackbackLethal(after, grown), after };
+    };
+    for (const [i, plan] of ranked.entries()) {
+      const first = allowed(plan);
+      if (!first.ok) continue;
+      // **Which player the kill takes.** The plans come in turn order, so
+      // with one kill to make and two players it could take, the first
+      // seated was the one killed: Ghalta, a 24/24 trampler, went at a seat
+      // with no board and three lands in hand while the leader (64 life,
+      // seven cards, tapped out, its creatures just destroyed) stood as open
+      // to the same 24 commander damage, untapped, killed Ghalta and won (a
+      // kept live game, 2026-11-22). Among the plans with as many kills that
+      // take other players, the board each leaves is scored, and the best
+      // of them declared; a plan that kills the same players is this one
+      // with attackers piled on, which the order has settled.
+      const rivals =
+        plan.kills === living.length
+          ? []
+          : ranked.slice(i + 1).filter((other) => other.kills === plan.kills && other.who !== plan.who);
+      if (rivals.length === 0) return plan.declaration;
+      const worth = (after: GameState | null): number =>
+        after === null ? -Infinity : evaluateState(after, this.cards, me, this.weights);
+      let best = plan;
+      let bestWorth = worth(first.after ?? played(plan));
+      const tried = new Set([plan.who]);
+      for (const rival of rivals) {
+        if (tried.has(rival.who)) continue;
+        const verdict = allowed(rival);
+        if (!verdict.ok) continue;
+        tried.add(rival.who);
+        const value = worth(verdict.after ?? played(rival));
+        if (value > bestWorth + TIE) {
+          best = rival;
+          bestWorth = value;
+        }
       }
-      if (after !== null && !this.crackbackLethal(after, grown)) return plan.declaration;
+      return best.declaration;
     }
     return null;
   }
@@ -4354,6 +4397,19 @@ export class EvalBotController extends HeuristicBotController {
   }
 
   /**
+   * Whether `action` ends the game in our favour as it resolves: played out
+   * to an empty stack with nobody answering, the game is over and ours. A
+   * board wipe that takes our attackers is held for after combat
+   * (`holdsWipeForCombat`) — but not Deadly Tempest with the last opponent
+   * on 14 life and fifteen creatures, where there is no combat to wait for
+   * (a kept live game, 2026-11-22: held, and never cast).
+   */
+  private winsAsItResolves(state: GameState, action: Action): boolean {
+    const resolved = simulateAction(state, this.cards, action, "stack", "passive");
+    return resolved !== null && resolved.result.over && resolved.result.winner === this.playerId;
+  }
+
+  /**
    * Whether `action`, in one of our own combat steps, spends mana the play
    * held for after combat this turn needs (`heldPlay`): played out to an
    * empty stack, the held play is no longer on offer in our second main
@@ -4371,7 +4427,16 @@ export class EvalBotController extends HeuristicBotController {
     if (action.type !== "cast-spell" && action.type !== "activate-ability") return "ok";
     if (sameAction(action, held.action)) return "ok";
     const offered = (board: GameState): boolean => heldOnOffer(board, this.cards, me, held.action);
-    if (!offered(state)) return "ok";
+    // Under a stack (a trigger of ours from this combat), the held play is
+    // read on the board that stack leaves: a sorcery is never on offer over
+    // one, which read as "not castable anyway" and let Stensia Bloodhall
+    // spend a held Deadly Tempest's mana under Kardur's three triggers (a
+    // kept live game, 2026-11-22).
+    const settled =
+      state.zones.shared.stack.length === 0
+        ? state
+        : simulateAction(state, this.cards, { type: "pass-priority", player: me }, "stack", "passive");
+    if (settled === null || !offered(settled)) return "ok";
     const resolved = simulateAction(state, this.cards, action, "stack", "passive");
     if (resolved === null || offered(resolved)) return "ok";
     const attacked = [
