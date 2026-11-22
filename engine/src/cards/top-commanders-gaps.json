@@ -3174,7 +3174,8 @@
   "amount:opponents-controlling-this-way",
   "effect:highest-life-wins-or-draw",
   "effect:conditional-exact-mode-count",
-  "effect:sacrifice-all-but-dynamic"
+  "effect:sacrifice-all-but-dynamic",
+  "effect:discard-chosen-nontargeted-player"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
