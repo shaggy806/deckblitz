@@ -2666,6 +2666,7 @@
   "effect:unattached-from-creature-ref",
   "cost:equip-cost-per-color",
   "effect:return-auras-attached-to-chosen-creatures",
+  "effect:return-auras-exile-if-would-leave",
   "effect:reattach-curse-random-opponent",
   "effect:choose-which-created-token-to-attach",
   "effect:reflexive-attach-one-of-put-this-way",

@@ -4395,6 +4395,9 @@ export type AwaitingDecision =
        * {@link EnterAttachHost}. An Aura that can't be attached to it stays
        * where it is; `null`, nothing can (the source has left). */
       readonly enterAttachedTo?: EnterAttachHost;
+      /** Battlefield-bound picks are exiled if they would leave (rule 614.1a)
+       * — a `return-from-graveyard`'s `exileIfItWouldLeave` (Storm Herald). */
+      readonly enterExileIfLeaves?: true;
       /** Cards that enter with this choice's finds, in one event, whatever is
        * found: a `search-library`'s `alongExiledThisWay`. */
       readonly enterAlong?: readonly ObjectId[];

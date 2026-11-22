@@ -13768,6 +13768,11 @@ export class Game {
         entered.summoningSick = true;
       }
       if (moved && to === "battlefield") {
+        // "If those Auras would leave the battlefield, exile them instead"
+        // (Storm Herald): set after the move, which clears it.
+        if (!isRest && awaiting.enterExileIfLeaves === true && entered?.zone === "battlefield") {
+          entered.exileIfItWouldLeave = true;
+        }
         // "…onto the battlefield tapped and attacking" (rule 508.4): as it
         // enters, before anything sees it arrive.
         if (awaiting.enterAttacking !== undefined) this.putIntoAttack([id], player, awaiting.enterAttacking);
@@ -66449,6 +66454,9 @@ controlledBy,
       readonly totalManaValueAtMost?: number;
       /** The spell's X, for a filter that reads it (Rally the Ancestors). */
       readonly x?: number;
+      /** Each permanent it puts there is exiled if it would leave (Storm
+       * Herald) — see the spec's `exileIfItWouldLeave`. */
+      readonly exileIfItWouldLeave?: boolean;
     } = {},
   ): boolean {
     const graveyards =
@@ -66547,6 +66555,10 @@ controlledBy,
               entered.summoningSick = true;
             }
             if (moved && destination === "battlefield") {
+              // Set after the move, which clears it (as `putOntoBattlefieldByEffect`).
+              if (opts.exileIfItWouldLeave === true && entered?.zone === "battlefield") {
+                entered.exileIfItWouldLeave = true;
+              }
               this.enterWithCounters(id, withCounters, player);
               if (host !== undefined) this.attachEntered(id, host);
               this.emit({ type: "permanent-entered-battlefield", object: id });
@@ -66588,6 +66600,7 @@ controlledBy,
       ...(opts.allGraveyards === true && destination === "battlefield" ? { enterUnder: player } : {}),
       ...(enterAs !== undefined ? { enterAs } : {}),
       ...(opts.attachTo !== undefined && destination === "battlefield" ? { enterAttachedTo: opts.attachTo } : {}),
+      ...(opts.exileIfItWouldLeave === true && destination === "battlefield" ? { enterExileIfLeaves: true as const } : {}),
     };
     return false;
   }

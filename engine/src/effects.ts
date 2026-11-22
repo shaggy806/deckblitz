@@ -5871,6 +5871,12 @@ export type EffectSpec =
        * can't equip it, and anything else, enters unattached. `{ among }`:
        * each one's host chosen as it enters — see {@link AttachHostRef}. */
       readonly attachedTo?: AttachHostRef;
+      /** "If those Auras would leave the battlefield, exile them instead of
+       * putting them anywhere else" (Storm Herald): a replacement effect this
+       * resolution creates on each permanent it put onto the battlefield
+       * (rule 614.1a), not an ability they gain — it follows them through a
+       * loss of abilities and ends when they leave (400.7). */
+      readonly exileIfItWouldLeave?: true;
     }
   | {
       /**
@@ -14801,6 +14807,8 @@ export interface EffectApi {
       /** See the spec's `upTo` and `totalManaValueAtMost`. */
       readonly upTo?: boolean;
       readonly totalManaValueAtMost?: number;
+      /** See the spec's `exileIfItWouldLeave`. */
+      readonly exileIfItWouldLeave?: boolean;
     },
   ): boolean;
   /** `target` (a player) discards `amount` cards — only cards matching
@@ -23050,6 +23058,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.attachedTo !== undefined ? { attachTo: attachHost(spec.attachedTo, ctx) } : {}),
           ...(spec.upTo === true ? { upTo: true } : {}),
           ...(spec.totalManaValueAtMost !== undefined ? { totalManaValueAtMost: spec.totalManaValueAtMost } : {}),
+          ...(spec.exileIfItWouldLeave === true ? { exileIfItWouldLeave: true } : {}),
         },
       );
       if (asked) ctx.resumeAfterDecisions(spec, parked);
