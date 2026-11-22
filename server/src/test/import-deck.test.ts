@@ -268,6 +268,15 @@ describe("parseDecklistText — a card's faces, however they're written", () => 
     expect(names("1 Desperate Parry")).toEqual(["Obyra's Attendants"]);
   });
 
+  // The site's usage report (2026-11-22): "hearthhull, the worldseed" was
+  // imported as a card the engine lacks.
+  it("reads a name typed in another case as the pool's card", () => {
+    expect(names("1 hearthhull, the worldseed")).toEqual(["Hearthhull, the Worldseed"]);
+    expect(names("1 MIRROR ROOM / fractured realm")).toEqual(["Mirror Room // Fractured Realm"]);
+    expect(names("1 virtue of knowledge")).toEqual(["Virtue of Knowledge"]);
+    expect(names("1 not a card")).toEqual(["not a card"]);
+  });
+
   it("merges two spellings of one card", () => {
     expect(parseDecklistText("1 Mirror Room / Fractured Realm\n1 Mirror Room // Fractured Realm", registry).entries)
       .toEqual([{ name: "Mirror Room // Fractured Realm", count: 2 }]);

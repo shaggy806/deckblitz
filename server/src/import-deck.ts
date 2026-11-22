@@ -200,12 +200,30 @@ export function poolNameOf(written: string, registry?: CardRegistry): string {
   const name = written.replace(FACE_SEPARATOR, " // ");
   if (registry === undefined) return name;
   const front = name.split(" // ")[0];
-  const found = [name, front].find((n) => registry.has(n));
+  // A list typed by hand may not capitalise as Oracle does ("hearthhull, the
+  // worldseed"): read as written it misses the pool and the card is offered
+  // as its own stand-in, so a miss tries the pool's own spelling.
+  const found = [name, front]
+    .map((n) => (registry.has(n) ? n : poolSpelling(registry).get(n.toLowerCase())))
+    .find((n) => n !== undefined);
   if (found === undefined) return name;
   const def = registry.get(found);
   if (isCardFront(def)) return found;
   const card = def.faces?.[0];
   return card !== undefined && registry.has(card) ? card : found;
+}
+
+const spellings = new WeakMap<CardRegistry, Map<string, string>>();
+
+/** Each pool card's name by its lower-case form, built once a registry. */
+function poolSpelling(registry: CardRegistry): Map<string, string> {
+  let byLower = spellings.get(registry);
+  if (byLower === undefined) {
+    byLower = new Map();
+    for (const def of registry.definitions()) byLower.set(def.name.toLowerCase(), def.name);
+    spellings.set(registry, byLower);
+  }
+  return byLower;
 }
 
 /** Parses decklist lines, merging duplicate names (e.g. a commander also
