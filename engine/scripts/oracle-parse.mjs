@@ -3768,6 +3768,22 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "Put a charge counter on ~ for each untapped land that player controls"
+  // (Mana Cache, at the beginning of each player's end step: the active
+  // player) or "… you control": the count read as it resolves.
+  {
+    const m = /^put an? ([a-z]+|[+-]\d+\/[+-]\d+) counter on ~ for each (untapped )?([a-z ]+?) (you|that player) controls?\.$/i.exec(s);
+    const whose = m === null ? undefined : m[4] === "you" ? "you" : ctx?.thatPlayer === "active-player" ? "active-player" : undefined;
+    const filter = m === null || whose === undefined ? null : parseTypePhrase(m[3]);
+    if (m !== null && whose !== undefined && filter !== null && Object.keys(filter).length > 0) {
+      return {
+        kind: "add-counter",
+        target: "source",
+        counter: m[1],
+        amount: { countOf: { ...filter, ...(m[2] !== undefined ? { tapped: false } : {}), controlledBy: whose } },
+      };
+    }
+  }
   // "If that creature shares a color with the mana that land produced, create
   // a Junk token" (C.A.M.P.): a target condition read off the mana its tapping
   // for mana made (`sharesColorWithMana`, rule 106.12a).
@@ -10280,7 +10296,7 @@ function reflexiveAboutAt(sentences, i, ctx) {
 function exileItAndCollectEvidenceAt(sentences, i, ctx) {
   const m = /^you may exile it and collect evidence (\d+)\.$/i.exec(sentences[i] ?? "");
   if (m === null || ctx.departed !== "source" || ctx.targets.length > 0) return null;
-  const back = /^If you do, return (?:this card|it) to the battlefield( tapped)?\.$/.exec(sentences[i + 1] ?? "");
+  const back = /^If you do, return (?:~|it) to the battlefield( tapped)?\.$/.exec(sentences[i + 1] ?? "");
   if (back === null) return null;
   return {
     kind: "may",
@@ -10390,12 +10406,18 @@ function payWhenYouDoAt(sentences, i, ctx) {
     kind: "may",
     prompt: `Pay ${pay[1]}?`,
     ...(energy ? { costEnergy: pay[1].length / 3 } : { cost: pay[1] }),
-    effect: { kind: "reflexive-trigger", targets, effect, text: sentences[i + 1].replaceAll("~", "this creature") },
+    effect: {
+      kind: "reflexive-trigger",
+      targets: another === 1 ? [{ kind: "other", of: targets[0] }] : targets,
+      effect,
+      text: sentences[i + 1].replaceAll("~", "this creature"),
+    },
   };
 }
 
 /**
  * "Put a +1/+1 counter on it. When you do, you may remove a counter from
+  if (another === 1 && targets.length !== 1) return null;
  * another target permanent or opponent." (Etched Slith): the counter, and a
  * reflexive ability (rule 603.12) that triggers once for each counter actually
  * put on it this way (the Doubling Season ruling) — `times` over `thisWay:
@@ -21016,6 +21038,23 @@ function parseFaceAsWritten(face, ctx = {}) {
       });
       // "Only this creature's owner may activate this ability" (Personal
       // Incarnation — rule 602.1b): its owner, whoever controls it.
+      // "Any player may activate this ability but only during their turn
+      // before the end step" (Mana Cache): "their" is the activator's, read
+      // as "you" (602.2).
+      rest = rest.replace(/ Any player may activate this ability but only during their turn before the end step\.$/, () => {
+        ability.anyPlayer = true;
+        ability.condition = {
+          kind: "all",
+          of: [
+            { kind: "your-turn" },
+            {
+              kind: "turn-structure",
+              steps: ["untap", "upkeep", "draw", "precombat-main", "begin-combat", "declare-attackers", "declare-blockers", "combat-damage", "end-combat", "postcombat-main"],
+            },
+          ],
+        };
+        return "";
+      });
       rest = rest.replace(/ Only (?:~|this \w+)'s owner may activate this ability\.$/, () => {
         ability.onlyBy = "owner";
         return "";
@@ -24054,6 +24093,10 @@ function selfCostLine(line) {
     const parts = costLessParts(cost);
     if (parts === null) return null;
     const { generic, colored } = parts;
+  // "An opponent controls at least four more creatures than you" (Avatar of
+  // Might): some one opponent, compared on their own.
+  const compared = playerComparisonOf(phrase);
+  if (compared?.kind === "opponent-controls-more") return compared;
     if (each === undefined) {
       return {
         condition,
@@ -24104,6 +24147,14 @@ function selfCostLine(line) {
   }
   if ((m = /^During your turn, ~ costs ((?:\{[^}]+\})+) less to cast\.$/.exec(line))) {
     const one = reducing(m[1], { kind: "your-turn" });
+    return one === null ? null : { selfCostReduction: one };
+  }
+  // The same with the condition first: "If an opponent controls at least four
+  // more creatures than you, ~ costs {6} less to cast." (Avatar of Might).
+  if ((m = /^If (.+), ~ costs ((?:\{[^}]+\})+) less to cast\.$/.exec(line))) {
+    const condition = costIfCondition(m[1]);
+    if (condition === null) return null;
+    const one = reducing(m[2], condition);
     return one === null ? null : { selfCostReduction: one };
   }
   // "During turns other than yours, ~ costs {3} more to cast" (Hurkyl's Final
