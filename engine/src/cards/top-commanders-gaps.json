@@ -3181,7 +3181,8 @@
   "effect:cant-become-untapped-while-you-control-source",
   "effect:granter-controller-player-ref",
   "mechanic:exalted-counters",
-  "static:artifacts-become-equipment"
+  "static:artifacts-become-equipment",
+  "effect:damage-to-attached"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

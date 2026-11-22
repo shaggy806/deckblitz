@@ -25092,3 +25092,21 @@ describe("a 'Pay {E}{E}' cost", () => {
     });
   });
 });
+
+describe("an Aura's damage to enchanted creature", () => {
+  it("reads Tilonalli's Crown's and Fatal Attraction's untargeted damage to the host", () => {
+    const crown = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura",
+      oracle_text: "Enchant creature\nWhen this Aura enters, it deals 1 damage to enchanted creature.\nEnchanted creature gets +3/+0 and has trample.",
+    });
+    expect(crown.complete).toBe(true);
+    expect(crown.triggered[0].effect).toEqual({ kind: "damage", amount: 1, target: "attached" });
+    const attraction = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura",
+      oracle_text: "Enchant creature\nAt the beginning of your upkeep, this Aura deals 4 damage to enchanted creature.",
+    });
+    expect(attraction.triggered[0].effect).toEqual({ kind: "damage", amount: 4, target: "attached" });
+  });
+});

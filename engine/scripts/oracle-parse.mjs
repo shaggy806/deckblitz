@@ -7251,6 +7251,12 @@ export function parseSentence(sentence, ctx) {
           ],
         };
   }
+  // "When this Aura enters, it deals 1 damage to enchanted creature"
+  // (Tilonalli's Crown), "this Aura deals 4 damage to enchanted creature"
+  // (Fatal Attraction): untargeted, to what the Aura enchants.
+  if ((m = re(`(?:~|it) deals ${N} damage to enchanted creature`).exec(s)) && (!/^it /i.test(s) || ctx.it === "source")) {
+    return { kind: "damage", amount: amount(m[1]), target: "attached" };
+  }
   // "Enchanted creature deals 1 damage to its owner" (Enslave).
   if ((m = re(`enchanted creature deals ${N} damage to its owner`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: { ownerOf: "attached" }, from: "attached" };
