@@ -1,13 +1,34 @@
 /**
  * B338, the casting-zones lane: Psychic Rebuttal (`copy-spell`'s
  * `asLastOnStack`, the spell countered this way copied as it last was on the
- * stack). Written from the Oracle text.
+ * stack), Guild Feud (an opponent's look-and-choose through `as-player`, the
+ * two put onto the battlefield fighting). Written from the Oracle text.
  */
 import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, graveyard, lands, life, pickModes, pickTargets, ref, table, toGraveyard, toHand, zone } from "./harness.js";
+import {
+  A,
+  B,
+  cast,
+  controller,
+  graveyard,
+  lands,
+  life,
+  pickFromZone,
+  pickModes,
+  pickTargets,
+  ref,
+  settle,
+  spawn,
+  table,
+  toGraveyard,
+  toHand,
+  toLibrary,
+  toStep,
+  zone,
+} from "./harness.js";
 
 /** Bob's Lightning Bolt aimed at Alice, left on the stack with Alice to act. */
 const boltAtAlice = (game: Game): ObjectId => {
@@ -85,5 +106,57 @@ describe("Psychic Rebuttal", () => {
     cast(game, bolt, { player: B, targets: [ref(B)], settle: false });
     game.dispatch({ type: "pass-priority", player: B });
     expect(() => cast(game, toHand(game, "Psychic Rebuttal"), { targets: [ref(bolt)] })).toThrow(/target/i);
+  });
+});
+
+describe("Guild Feud", () => {
+  /** Guild Feud on Alice's side, three cards on each library's top (Bob's
+   * under one more he draws on his turn), then on to Alice's next upkeep. */
+  const feud = (game: Game, mine: readonly string[], theirs: readonly string[]): { mine: ObjectId[]; theirs: ObjectId[] } => {
+    spawn(game, "Guild Feud");
+    const t = theirs.map((name) => toLibrary(game, name, B));
+    toLibrary(game, "Wastes", B);
+    const m = mine.map((name) => toLibrary(game, name, A));
+    return { mine: m, theirs: t };
+  };
+
+  it("each puts a creature onto the battlefield, the rest into the graveyard, and the two fight", () => {
+    const { game, a, b } = table();
+    const { mine, theirs } = feud(game, ["Hill Giant", "Opt", "Wastes"], ["Grizzly Bears", "Opt", "Wastes"]);
+    pickFromZone(a, mine[0]);
+    pickFromZone(b, theirs[0]);
+    toStep(game, "upkeep");
+    settle(game);
+    // The opponent's Bears entered under their control, then died fighting.
+    expect(zone(game, theirs[0])).toBe("graveyard");
+    expect(zone(game, mine[0])).toBe("battlefield");
+    expect(controller(game, mine[0])).toBe(A);
+    expect(game.state.objects[mine[0]].damageMarked).toBe(2);
+    expect(zone(game, mine[1])).toBe("graveyard");
+    expect(zone(game, theirs[1])).toBe("graveyard");
+    expect(zone(game, mine[2])).toBe("graveyard");
+  });
+
+  it("the opponent's creature is theirs", () => {
+    const { game, b } = table();
+    const { theirs } = feud(game, ["Opt", "Opt", "Wastes"], ["Grizzly Bears", "Opt", "Wastes"]);
+    pickFromZone(b, theirs[0]);
+    toStep(game, "upkeep");
+    settle(game);
+    expect(zone(game, theirs[0])).toBe("battlefield");
+    expect(controller(game, theirs[0])).toBe(B);
+    // No second creature, no fight.
+    expect(game.state.objects[theirs[0]].damageMarked).toBe(0);
+  });
+
+  it("with only your creature put there, nothing fights", () => {
+    const { game, a } = table();
+    const { mine, theirs } = feud(game, ["Hill Giant", "Opt", "Wastes"], ["Grizzly Bears", "Opt", "Wastes"]);
+    pickFromZone(a, mine[0]);
+    toStep(game, "upkeep");
+    settle(game);
+    expect(zone(game, theirs[0])).toBe("graveyard");
+    expect(zone(game, mine[0])).toBe("battlefield");
+    expect(game.state.objects[mine[0]].damageMarked).toBe(0);
   });
 });
