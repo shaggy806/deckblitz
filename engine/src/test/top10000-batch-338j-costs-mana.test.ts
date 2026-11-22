@@ -3,19 +3,16 @@
  * sacrifice as an additional cost (rule 118.8 — not kicker); Vine Gecko's
  * first kicked spell each turn (702.33d) and Bite Down on Crime's discount
  * if evidence was collected; Close Encounter's warped card in exile chosen
- * as a cost (702.185b); Rhystic Cave's mana ability "unless any player pays
- * {1}" (605.1a, 605.3b).
+ * as a cost (702.185b).
  */
 import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
-import type { ManaType } from "../mana.js";
-import type { ObjectId, PlayerId } from "../primitives.js";
+import type { ObjectId } from "../primitives.js";
 
 import {
   A,
   B,
-  C,
   cast,
   counters,
   lands,
@@ -154,70 +151,6 @@ describe("Close Encounter", () => {
     pickFromZone(a, giant);
     cast(game, toHand(game, "Close Encounter"), { targets: [ref(target)] });
     expect(zone(game, target)).toBe("graveyard");
-  });
-});
-
-describe("Rhystic Cave", () => {
-  const tapCave = (game: Game, cave: ObjectId, color: ManaType): void => {
-    game.dispatch({ type: "activate-ability", player: A, source: cave, abilityIndex: 0, targets: [], manaColors: [color] });
-  };
-  const pool = (game: Game, player: PlayerId): readonly ManaType[] => game.state.players[player].manaPool.map((u) => u.type);
-  const asked = (game: Game): PlayerId | undefined =>
-    game.state.awaiting?.kind === "choose-modes" ? game.state.awaiting.player : undefined;
-
-  it("a mana ability: each player who could pay {1} is asked in turn order, off the stack", () => {
-    const { game } = table({ players: 3 });
-    const cave = spawn(game, "Rhystic Cave");
-    lands(game, "Island", 1);
-    lands(game, "Swamp", 1, B);
-    lands(game, "Plains", 1, C);
-    tapCave(game, cave, "R");
-    expect(game.state.zones.shared.stack).toEqual([]);
-    expect(game.state.objects[cave].tapped).toBe(true);
-    // Alice first (the active player), then Bob, then Carol.
-    expect(asked(game)).toBe(A);
-    expect(game.legalActions(B)).toEqual([]);
-    game.dispatch({ type: "choose-modes", player: A, modes: [0] });
-    expect(asked(game)).toBe(B);
-    game.dispatch({ type: "choose-modes", player: B, modes: [0] });
-    expect(asked(game)).toBe(C);
-    game.dispatch({ type: "choose-modes", player: C, modes: [0] });
-    expect(game.state.awaiting).toBeNull();
-    expect(pool(game, A)).toEqual(["R"]);
-    expect(game.state.priority.holder).toBe(A);
-  });
-
-  it("one who pays {1}: no mana, and nobody after them is asked; the cave wasn't tapped for mana", () => {
-    const { game } = table({ players: 3 });
-    spawn(game, "Mana Reflection");
-    const cave = spawn(game, "Rhystic Cave");
-    const swamp = lands(game, "Swamp", 1, B)[0];
-    lands(game, "Plains", 1, C);
-    // Alice can't pay: she isn't asked.
-    tapCave(game, cave, "G");
-    expect(asked(game)).toBe(B);
-    game.dispatch({ type: "choose-modes", player: B, modes: [1] });
-    expect(game.state.objects[swamp].tapped).toBe(true);
-    expect(game.state.awaiting).toBeNull();
-    expect(pool(game, A)).toEqual([]);
-    expect(game.state.priority.holder).toBe(A);
-  });
-
-  it("nobody able to pay: the mana at once, doubled by a tap-for-mana doubler", () => {
-    const { game } = table();
-    spawn(game, "Mana Reflection");
-    const cave = spawn(game, "Rhystic Cave");
-    tapCave(game, cave, "U");
-    expect(game.state.awaiting).toBeNull();
-    expect(pool(game, A)).toEqual(["U", "U"]);
-  });
-
-  it("isn't a source the auto-payer taps", () => {
-    const { game } = table();
-    spawn(game, "Rhystic Cave");
-    const bear = toHand(game, "Grizzly Bears");
-    lands(game, "Forest", 1);
-    expect(() => cast(game, bear)).toThrow();
   });
 });
 

@@ -4957,9 +4957,6 @@ export class HeuristicBotController extends AutomaticController {
     // Searchlight's "they choose"): the one our hand wants, as a split's units
     // go (`chooseManaSplit`). `effectWorth` prices every colour alike, so the
     // first mode — white — took it whatever the hand held.
-    // "Unless any player pays {1}" on another's mana ability (Rhystic Cave):
-    // a mana spent to deny one is seldom worth it — decline (mode 0).
-    if (awaiting.manaAbilityPick?.unless !== undefined) return [0];
     const given = awaiting.manaAbilityPick?.picks;
     if (given !== undefined && given.every((pick) => pick.length === 1)) {
       const colors = given.map((pick) => pick[0]);

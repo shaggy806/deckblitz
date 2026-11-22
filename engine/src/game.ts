@@ -637,7 +637,6 @@ import type {
   AttachmentRecord,
   LastKnownInfo,
   LastKnownRefs,
-  ManaAbilityPick,
   ResolutionResume,
   LeaveDestination,
   MulliganHandState,
@@ -10048,45 +10047,6 @@ export class Game {
       const granted = wait.grantedAbility === undefined ? undefined : this.abilityFromRef(wait.grantedAbility);
       const ability =
         granted !== undefined && "cost" in granted ? granted : this.effectiveActivated(wait.source)[wait.abilityIndex];
-      // "Unless any player pays {1}" (Rhystic Cave): one who pays (mode 1)
-      // ends it with no mana — the source wasn't tapped for mana (the
-      // ruling). One who declines, or can't pay after all: the next player,
-      // and once nobody is left, the mana.
-      const unless = wait.unless;
-      if (unless !== undefined) {
-        let paid = false;
-        if (modeIndices[0] === 1) {
-          const payment = this.payMana(player, parseManaCost(unless.pay), undefined, undefined, otherCostPurpose(unless.pay, false));
-          if (payment !== null) {
-            this.executePayment(player, payment);
-            paid = true;
-          }
-        }
-        if (!paid) {
-          const { manaFor: _asked, unless: _was, ...rest } = wait;
-          if (this.askManaUnless(unless.rest, unless.pay, rest, unless.manaForChoice)) return;
-          if (ability !== undefined) {
-            this.resolveManaAbility(
-              wait.source,
-              wait.activator,
-              ability,
-              wait.x,
-              wait.picks[0],
-              wait.grantedAbility,
-              wait.paidSets,
-              wait.sacrificedCouldMake,
-              unless.manaForChoice,
-              wait.revealSince,
-              wait.abilityIndex,
-              false,
-              wait.manaSpent,
-              true,
-            );
-          }
-        }
-        if (this.state.awaiting === null) this.prepareForPriority(wait.activator);
-        return;
-      }
       if (ability !== undefined) {
         this.resolveManaAbility(
           wait.source,
@@ -30414,50 +30374,6 @@ export class Game {
     if (rolled !== undefined && stacked !== undefined) stacked.lastKnownRefs = { ...stacked.lastKnownRefs, roll: rolled };
   }
 
-  /**
-   * A mana ability's "unless any player pays `pay`" (Rhystic Cave — `add-mana`'s
-   * `unlessAnyPlayerPays`): the first of `players` (in turn order, rule
-   * 101.4) who could pay it is asked, a `choose-modes` the engine answers
-   * (`ManaAbilityPick.unless` — mode 0 declines, mode 1 pays), the rest kept
-   * to ask after. Whether anyone was asked: nobody could pay, and the mana
-   * comes.
-   */
-  private askManaUnless(
-    players: readonly PlayerId[],
-    pay: string,
-    wait: Omit<ManaAbilityPick, "manaFor" | "unless">,
-    manaForChoice: PlayerId | undefined,
-  ): boolean {
-    for (let i = 0; i < players.length; i += 1) {
-      const asked = players[i];
-      if (this.payMana(asked, parseManaCost(pay), undefined, undefined, otherCostPurpose(pay, false)) === null) continue;
-      const source = this.state.objects[wait.source];
-      const name = source === undefined ? "it" : printedCardName(source);
-      this.state.awaiting = {
-        kind: "choose-modes",
-        player: asked,
-        source: wait.source,
-        minModes: 1,
-        maxModes: 1,
-        modes: [
-          { text: `Don't pay ${pay}: ${name}'s mana is added`, effect: { kind: "sequence", effects: [] } },
-          { text: `Pay ${pay}: ${name} adds no mana`, effect: { kind: "sequence", effects: [] } },
-        ],
-        x: wait.x,
-        targets: [],
-        manaAbilityPick: {
-          ...wait,
-          manaFor: asked,
-          unless: { pay, rest: players.slice(i + 1), ...(manaForChoice !== undefined ? { manaForChoice } : {}) },
-        },
-      };
-      this.state.decisionSource =
-        source === undefined ? null : { object: wait.source, cardName: printedCardName(source), controller: source.controller };
-      return true;
-    }
-    return false;
-  }
-
   /** {@link resolveManaAbilityNow}, counted in `manaAbilitiesResolving`: what
    * a mana ability does (Pristine Talisman's life) is its own doing, not a
    * spell's that asked for a payment as it resolved. */
@@ -30498,9 +30414,6 @@ export class Game {
     /** The mana its own cost spent (605.3a), for the `ability-activated` it
      * announces — "if mana from a Treasure was spent to activate it" (Vazi). */
     manaSpent?: readonly SpentMana[],
-    /** Its "unless any player pays" (`add-mana`'s `unlessAnyPlayerPays`) has
-     * been asked of everyone, and nobody paid. */
-    unlessAsked = false,
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
@@ -30569,32 +30482,6 @@ export class Game {
       }
       // One outcome, or none: nothing to ask.
       manaColors = picks[0];
-    }
-    // "Unless any player pays {1}" (Rhystic Cave): each player in turn order
-    // who could pay is asked, the colour already chosen (rule 605.3b: still
-    // off the stack, nobody getting priority until it has resolved).
-    const unlessPay = theirs?.kind === "add-mana" ? theirs.unlessAnyPlayerPays : undefined;
-    if (unlessPay !== undefined && !unlessAsked) {
-      const index = abilityIndex ?? this.effectiveActivated(sourceId).indexOf(ability);
-      const order = this.apnapOrder().filter((p) => this.state.players[p]?.hasLost === false);
-      if (
-        index >= 0 &&
-        this.askManaUnless(order, unlessPay, {
-          source: sourceId,
-          abilityIndex: index,
-          activator: player,
-          x: chosenX,
-          picks: manaColors === undefined ? [] : [manaColors],
-          ...(grantedAbility !== undefined ? { grantedAbility } : {}),
-          ...(paidSets !== undefined ? { paidSets } : {}),
-          ...(sacrificedCouldMake !== undefined ? { sacrificedCouldMake } : {}),
-          ...(revealSince !== undefined ? { revealSince } : {}),
-          ...(manaSpent !== undefined && manaSpent.length > 0 ? { manaSpent } : {}),
-        }, manaFor)
-      ) {
-        this.afterPlayerAction(player);
-        return;
-      }
     }
     const base = this.makeResolutionContext(
       sourceId,
@@ -31805,10 +31692,6 @@ export class Game {
           ability.zone !== undefined ||
           ability.effect === null ||
           ability.effect.kind !== "add-mana" ||
-          // "Unless any player pays {1}" (Rhystic Cave): asks the table, and
-          // "activate only as an instant" keeps it out of a payment (its
-          // ruling) — activated by hand, at priority.
-          ability.effect.unlessAnyPlayerPays !== undefined ||
           // "Its activated abilities with {T} in their costs" (Serra
           // Bestiary): only those.
           (ability.cost.tap && this.abilitiesProhibited(player, object, true, true))

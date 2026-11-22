@@ -3843,17 +3843,6 @@ export type EffectSpec =
        * stack, "that player adds … they choose" is `as-player` round a plain
        * `add-mana` (Stadium Vendors), so this is a mana ability's. */
       readonly theyChoose?: true;
-      /** "Add one mana of that color **unless any player pays {1}**"
-       * (Rhystic Cave): still a mana ability (rule 605.1a — it could add
-       * mana), so it resolves off the stack (605.3b) with its colour chosen
-       * as it's activated; then each player in turn order from the active
-       * player (101.4, the card's ruling) who could pay is asked, a
-       * `choose-modes` whose `ManaAbilityPick.unless` the engine answers,
-       * nobody getting priority meanwhile. One who pays: no mana, and the
-       * source wasn't tapped for mana (the ruling). Everyone declining: the
-       * mana, as ever. The auto-payer never activates it: activated by hand,
-       * at priority. A mana ability's own `add-mana` only. */
-      readonly unlessAnyPlayerPays?: string;
       /** A target slot holding the player who adds it — "**Target player**
        * adds one mana of any color" (The Warring Triad), "Choose a color.
        * Target player adds three mana of the chosen color" (Radiant Lotus).

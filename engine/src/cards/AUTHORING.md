@@ -5507,17 +5507,6 @@ adds two mana of any one color they choose", Stadium Vendors) write
 `choose-opponent` `anyPlayer` then `as-player` round a plain `add-mana`
 instead.
 
-`add-mana`'s `unlessAnyPlayerPays: "{1}"` is "Choose a color. Add one mana of
-that color **unless any player pays {1}**. Activate only as an instant"
-(Rhystic Cave: `{ kind: "add-mana", mana: "any-color", amount: 1,
-unlessAnyPlayerPays: "{1}" }`). Still a mana ability (rule 605.1: a timing
-restriction doesn't change that), off the stack, the colour picked as it's
-activated; then each player in turn order who could pay is asked the same
-way (`ManaAbilityPick.unless`: mode 0 declines, mode 1 pays), nobody getting
-priority meanwhile. One who pays ends it — no mana, and no tapped-for-mana
-trigger (the ruling). The auto-payer never taps it, so it's activated by hand,
-at priority, which is the instant timing its errata asks.
-
 `add-mana`'s `notGeneric: true` is "this mana **can't be spent to pay generic mana costs**"
 (Jegantha, the Wellspring): each unit pays only a pip of its own type (a hybrid pip's coloured
 half too), never generic mana or {X}. The auto-payer doesn't tap such a source; the player

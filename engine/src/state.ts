@@ -2349,16 +2349,6 @@ export interface ManaAbilityPick {
   readonly revealSince?: number;
   /** The mana spent on its cost (rule 605.3a), announced as it resolves. */
   readonly manaSpent?: readonly SpentMana[];
-  /** Not a colour but "unless any player pays {1}" (Rhystic Cave, `add-mana`'s
-   * `unlessAnyPlayerPays`): `manaFor` is the player asked, mode 0 declines
-   * and mode 1 pays `pay`; `rest` are the players still to ask, in turn
-   * order, and `picks[0]` the activation's own colours. `manaForChoice` is
-   * the activation's own `manaFor`, if it named one. */
-  readonly unless?: {
-    readonly pay: string;
-    readonly rest: readonly PlayerId[];
-    readonly manaForChoice?: PlayerId;
-  };
 }
 
 /** A permanent attached to another, in the stint (`zoneChangeCount`) it was
