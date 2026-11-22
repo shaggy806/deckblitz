@@ -34,6 +34,15 @@ export default defineConfig({
     browserName: 'chromium',
     baseURL: `http://127.0.0.1:${webPort}`,
     viewport: { width: 1366, height: 768 },
+    // The "Built with Claude Code" note is up on a device's first visit
+    // until dismissed (`legal/SiteLinks.tsx`), and at this size it lies over
+    // the landing page's dev-only Scenario builder card: every click on that
+    // card timed out, and the E2E workflow with it (2026-11-21). A test's
+    // page starts as a device that has seen it.
+    storageState: {
+      cookies: [],
+      origins: [{ origin: `http://127.0.0.1:${webPort}`, localStorage: [{ name: 'deckblitz.builtWithSeen', value: '1' }] }],
+    },
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
