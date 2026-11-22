@@ -6149,6 +6149,11 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`move an? ([+-]\\d+/[+-]\\d+|[a-z]+) counter from ~ onto (${TARGET})`).exec(s)) && m[1].toLowerCase() !== "counter") {
     return { kind: "move-counters", from: "source", to: slot(m[2]), counter: m[1].toLowerCase() };
   }
+  // "Move X +1/+1 counters from ~ onto another target creature" (Tester of
+  // the Tangential): X read as it resolves, as many as there are.
+  if ((m = re(`move X ([+-]\\d+/[+-]\\d+|[a-z]+) counters from ~ onto (${TARGET})`).exec(s))) {
+    return { kind: "move-counters", from: "source", to: slot(m[2]), counter: m[1].toLowerCase(), amount: { count: "x" } };
+  }
   if ((m = re(`move all counters from ~ onto (${TARGET})`).exec(s))) {
     return { kind: "move-counters", from: "source", to: slot(m[1]), amount: "all" };
   }
@@ -10398,10 +10403,16 @@ function payWhenYouDoAt(sentences, i, ctx) {
   if (pay === null || clause === null) return null;
   const energy = /^(?:\{E\})+$/.test(pay[1]);
   if (!energy && /\{E\}/.test(pay[1])) return null;
+  // One "another target" (Tester of the Tangential's "onto another target
+  // creature"): an `other` slot, as `countersWhenYouDoAt` reads it.
+  const another = (clause[1].match(/\banother target\b/g) ?? []).length;
+  if (another > 1) return null;
   const targets = [];
   const inner = { ...ctx, targets, target: (spec) => targets.push(spec) - 1 };
-  const effect = parseSentence(`${clause[1][0].toUpperCase()}${clause[1].slice(1)}`, inner);
+  const said = clause[1].replace(/\banother target\b/, "target");
+  const effect = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}`, inner);
   if (effect === null || effect === undefined || containsUndefined(effect)) return null;
+  if (another === 1 && targets.length !== 1) return null;
   return {
     kind: "may",
     prompt: `Pay ${pay[1]}?`,
@@ -10417,7 +10428,6 @@ function payWhenYouDoAt(sentences, i, ctx) {
 
 /**
  * "Put a +1/+1 counter on it. When you do, you may remove a counter from
-  if (another === 1 && targets.length !== 1) return null;
  * another target permanent or opponent." (Etched Slith): the counter, and a
  * reflexive ability (rule 603.12) that triggers once for each counter actually
  * put on it this way (the Doubling Season ruling) — `times` over `thisWay:
@@ -21028,16 +21038,6 @@ function parseFaceAsWritten(face, ctx = {}) {
         if (sorcery !== undefined) ability.sorcerySpeed = true;
         return "";
       });
-      // "Only your opponents may activate this ability and only as a sorcery"
-      // (Detention Vortex, Oft-Nabbed Goat).
-      rest = rest.replace(/ Only your opponents may activate this ability( and only as a sorcery)?\.$/, (_x, sorcery) => {
-        ability.anyPlayer = true;
-        ability.onlyOpponents = true;
-        if (sorcery !== undefined) ability.sorcerySpeed = true;
-        return "";
-      });
-      // "Only this creature's owner may activate this ability" (Personal
-      // Incarnation — rule 602.1b): its owner, whoever controls it.
       // "Any player may activate this ability but only during their turn
       // before the end step" (Mana Cache): "their" is the activator's, read
       // as "you" (602.2).
@@ -21055,6 +21055,16 @@ function parseFaceAsWritten(face, ctx = {}) {
         };
         return "";
       });
+      // "Only your opponents may activate this ability and only as a sorcery"
+      // (Detention Vortex, Oft-Nabbed Goat).
+      rest = rest.replace(/ Only your opponents may activate this ability( and only as a sorcery)?\.$/, (_x, sorcery) => {
+        ability.anyPlayer = true;
+        ability.onlyOpponents = true;
+        if (sorcery !== undefined) ability.sorcerySpeed = true;
+        return "";
+      });
+      // "Only this creature's owner may activate this ability" (Personal
+      // Incarnation — rule 602.1b): its owner, whoever controls it.
       rest = rest.replace(/ Only (?:~|this \w+)'s owner may activate this ability\.$/, () => {
         ability.onlyBy = "owner";
         return "";
@@ -24083,6 +24093,10 @@ function costIfCondition(phrase) {
   if (phrase === "you've cast an instant or sorcery spell this turn") {
     return { kind: "cast-this-turn", who: "you", filter: { typesAnyOf: ["instant", "sorcery"] } };
   }
+  // "An opponent controls at least four more creatures than you" (Avatar of
+  // Might): some one opponent, compared on their own.
+  const compared = playerComparisonOf(phrase);
+  if (compared?.kind === "opponent-controls-more") return compared;
   return null;
 }
 
@@ -24093,10 +24107,6 @@ function selfCostLine(line) {
     const parts = costLessParts(cost);
     if (parts === null) return null;
     const { generic, colored } = parts;
-  // "An opponent controls at least four more creatures than you" (Avatar of
-  // Might): some one opponent, compared on their own.
-  const compared = playerComparisonOf(phrase);
-  if (compared?.kind === "opponent-controls-more") return compared;
     if (each === undefined) {
       return {
         condition,
@@ -24139,6 +24149,14 @@ function selfCostLine(line) {
     const both = [reducing(m[1], first), reducing(m[3], second)];
     return both.includes(null) ? null : { selfCostReduction: both };
   }
+  // The same with the condition first: "If an opponent controls at least four
+  // more creatures than you, ~ costs {6} less to cast." (Avatar of Might).
+  if ((m = /^If (.+), ~ costs ((?:\{[^}]+\})+) less to cast\.$/.exec(line))) {
+    const condition = costIfCondition(m[1]);
+    if (condition === null) return null;
+    const one = reducing(m[2], condition);
+    return one === null ? null : { selfCostReduction: one };
+  }
   if ((m = /^~ costs ((?:\{[^}]+\})+) less to cast if (.+)\.$/.exec(line))) {
     const condition = costIfCondition(m[2]);
     if (condition === null) return null;
@@ -24147,14 +24165,6 @@ function selfCostLine(line) {
   }
   if ((m = /^During your turn, ~ costs ((?:\{[^}]+\})+) less to cast\.$/.exec(line))) {
     const one = reducing(m[1], { kind: "your-turn" });
-    return one === null ? null : { selfCostReduction: one };
-  }
-  // The same with the condition first: "If an opponent controls at least four
-  // more creatures than you, ~ costs {6} less to cast." (Avatar of Might).
-  if ((m = /^If (.+), ~ costs ((?:\{[^}]+\})+) less to cast\.$/.exec(line))) {
-    const condition = costIfCondition(m[1]);
-    if (condition === null) return null;
-    const one = reducing(m[2], condition);
     return one === null ? null : { selfCostReduction: one };
   }
   // "During turns other than yours, ~ costs {3} more to cast" (Hurkyl's Final

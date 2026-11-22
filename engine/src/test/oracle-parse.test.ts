@@ -429,6 +429,76 @@ describe("collect evidence X and its reflexive ability (Incinerator of the Guilt
   });
 });
 
+describe("a spell's own cost, its condition first", () => {
+  it("'If an opponent controls at least four more creatures than you, ~ costs {6} less to cast.' (Avatar of Might)", () => {
+    const face = parseFace(
+      {
+        name: "Card",
+        type_line: "Creature — Avatar",
+        mana_cost: "{6}{G}{G}",
+        oracle_text: "If an opponent controls at least four more creatures than you, this spell costs {6} less to cast.\nTrample",
+        power: "8",
+        toughness: "8",
+      },
+      { tokenFor: (d: string) => d },
+    ) as unknown as { selfCostReduction: unknown };
+    expect(face.selfCostReduction).toEqual({
+      condition: { kind: "opponent-controls-more", filter: { type: "creature" }, by: 4 },
+      reduceGeneric: 6,
+    });
+  });
+});
+
+describe("Mana Cache's two lines", () => {
+  it("a counter for each untapped land that player controls, and a mana ability any player may activate in their turn before the end step", () => {
+    const face = parseFace(
+      {
+        name: "Card",
+        type_line: "Enchantment",
+        mana_cost: "{1}{R}{R}",
+        oracle_text:
+          "At the beginning of each player's end step, put a charge counter on this enchantment for each untapped land that player controls.\nRemove a charge counter from this enchantment: Add {C}. Any player may activate this ability but only during their turn before the end step.",
+      },
+      { tokenFor: (d: string) => d },
+    );
+    expect(face.triggered[0].effect).toEqual({
+      kind: "add-counter",
+      target: "source",
+      counter: "charge",
+      amount: { countOf: { type: "land", tapped: false, controlledBy: "active-player" } },
+    });
+    expect(face.activated[0].anyPlayer).toBe(true);
+    expect(face.activated[0].condition).toMatchObject({ kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure" }] });
+    expect(face.activated[0].effect).toEqual({ kind: "add-mana", mana: "C", amount: 1 });
+  });
+});
+
+describe("you may pay {X}. When you do, move X counters onto another target creature", () => {
+  it("the reflexive ability's other slot and the X count (Tester of the Tangential)", () => {
+    const face = parseFace(
+      {
+        name: "Card",
+        type_line: "Creature — Djinn Wizard",
+        mana_cost: "{1}{U}",
+        oracle_text:
+          "At the beginning of combat on your turn, you may pay {X}. When you do, move X +1/+1 counters from this creature onto another target creature.",
+        power: "1",
+        toughness: "1",
+      },
+      { tokenFor: (d: string) => d },
+    );
+    expect(face.triggered[0].effect).toMatchObject({
+      kind: "may",
+      cost: "{X}",
+      effect: {
+        kind: "reflexive-trigger",
+        targets: [{ kind: "other", of: "creature" }],
+        effect: { kind: "move-counters", from: "source", to: 0, counter: "+1/+1", amount: { count: "x" } },
+      },
+    });
+  });
+});
+
 describe("a cost paid a chosen number of times", () => {
   const read = (oracle_text: string) =>
     parseFace({ name: "Card", type_line: "Creature — Human", oracle_text, power: "3", toughness: "1" }, { tokenFor: (d: string) => d }).triggered[0];

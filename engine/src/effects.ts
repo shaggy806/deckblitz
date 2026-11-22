@@ -7244,7 +7244,13 @@ export type EffectSpec =
       readonly from: ObjectRef | MoveCountersChooser;
       readonly to: ObjectRef | MoveCountersChooser;
       readonly counter?: string;
-      readonly amount?: 1 | "all" | "each-kind-missing" | "any" | "one-or-more";
+      /** `{ count }` is "move **X** +1/+1 counters" (Tester of the
+       * Tangential's "move X +1/+1 counters from this creature onto another
+       * target creature", X paid for earlier): that many, read as it resolves,
+       * of `counter` — each counter's move its own (122.5), so as many as
+       * `from` has when it has fewer. Without `counter`, of one kind chosen as
+       * for "a counter". */
+      readonly amount?: 1 | "all" | "each-kind-missing" | "any" | "one-or-more" | { readonly count: EffectAmount };
       /** "If you do, draw a card" (Goldberry): after the moves, if any
        * counter moved — with any `amount` (Black Panther, Wakandan King's
        * "move all … If one or more +1/+1 counters are moved this way", whose
@@ -16517,14 +16523,17 @@ function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void
     // "A counter": of the named kind, or of one its controller chooses among
     // those there now (the Nesting Grounds ruling) — asked only with two or
     // more to choose between.
+    // "Move X counters" (`{ count }`): that many of the one kind.
+    const n = typeof amount === "object" ? Math.max(0, Math.floor(amountValue(amount.count, ctx))) : 1;
+    if (n <= 0) return;
     const kinds = kindsHere(ctx, from, spec.counter);
     if (kinds.length === 1) {
-      if (ctx.moveCounters(from, to, kinds[0], 1) > 0 && spec.ifMoved !== undefined) applyEffectSpec(spec.ifMoved, ctx);
+      if (ctx.moveCounters(from, to, kinds[0], n) > 0 && spec.ifMoved !== undefined) applyEffectSpec(spec.ifMoved, ctx);
     } else if (kinds.length > 1) {
       ctx.chooseModes(
         1,
         1,
-        kinds.map((kind) => ({ text: `Move ${countersText(1, kind)}`, effect: { ...spec, counter: kind } })),
+        kinds.map((kind) => ({ text: `Move ${countersText(n, kind)}`, effect: { ...spec, counter: kind } })),
       );
     }
     return;
