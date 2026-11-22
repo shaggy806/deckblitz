@@ -25335,3 +25335,27 @@ describe("optional additional costs and a kicked spell's discount (B338: Voltage
     });
   });
 });
+
+describe("gain control while tapped, of a creature whose controller controls an Island", () => {
+  it("reads Seasinger's target and duration", () => {
+    const seasinger = parseFace(
+      {
+        name: "Seasinger",
+        type_line: "Creature — Merfolk",
+        oracle_text:
+          "{T}: Gain control of target creature whose controller controls an Island for as long as you control this creature and this creature remains tapped.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(seasinger.activated[0].targets).toEqual([
+      { kind: "permanent", whose: "any", filter: { type: "creature", controllerControls: { subtype: "Island" } } },
+    ]);
+    expect(seasinger.activated[0].effect).toEqual({
+      kind: "gain-control",
+      target: 0,
+      untilEndOfTurn: false,
+      whileYouControlSource: true,
+      whileSourceTapped: true,
+    });
+  });
+});

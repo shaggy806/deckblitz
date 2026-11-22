@@ -1092,6 +1092,10 @@ export interface CardFilter {
   /** "A creature **whose controller has eight or more cards in their
    * graveyard**" (Lullmage's Domination's `targetCostReduction`). */
   readonly controllerGraveyardAtLeast?: number;
+  /** "Target creature **whose controller controls an Island**" (Seasinger):
+   * its controller controls at least one permanent matching this, read from
+   * that controller's side ("you" in it is them), as it is now. */
+  readonly controllerControls?: CardFilter;
   /** Its controller's running total of a {@link TurnStat} this turn is at
    * least `atLeast` (1): the creatures of "each opponent **who cast a spell
    * this turn** can't attack with creatures" (Angelic Arbiter). Read from the
@@ -3277,6 +3281,11 @@ export function matchesFilter(
     (state.zones.perPlayer[controller]?.graveyard.length ?? 0) < filter.controllerGraveyardAtLeast
   ) {
     return false;
+  }
+  if (filter.controllerControls !== undefined) {
+    const asked: CardFilter = { ...filter.controllerControls, controlledBy: "you" };
+    const theirs: FilterContext = { you: controller, ...(ctx.source !== undefined ? { source: ctx.source } : {}) };
+    if (!state.zones.shared.battlefield.some((other) => matchesFilter(state, registry, other, asked, theirs))) return false;
   }
   if (
     filter.controllerThisTurn !== undefined &&

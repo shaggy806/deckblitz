@@ -1093,7 +1093,9 @@ function revealedCardEffectOf(s, ctx) {
 const GREATEST_POWER_HERE = { type: "creature", greatestInZone: { of: "power", among: { type: "creature" } } };
 
 const TARGET_PHRASES = [
-  ["target multicolored creature", { kind: "permanent", whose: "any", filter: { type: "creature", multicolored: true } }],
+  // "Whose controller controls an Island" (Seasinger, `controllerControls`).
+  ["target creature whose controller controls an island", { kind: "permanent", whose: "any", filter: { type: "creature", controllerControls: { subtype: "Island" } } }],
+  ["target multicolored creature",{ kind: "permanent", whose: "any", filter: { type: "creature", multicolored: true } }],
   // What it has dealt damage to this turn (`dealtDamageThisTurn`).
   ["target creature that dealt damage to you this turn", { kind: "permanent", whose: "any", filter: { type: "creature", dealtDamageThisTurn: { to: "you" } } }],
   ["target creature an opponent controls that dealt damage this turn", { kind: "permanent", whose: "opponent", filter: { type: "creature", dealtDamageThisTurn: true } }],
@@ -6655,6 +6657,14 @@ export function parseSentence(sentence, ctx) {
     const target = theirs ? ctx.target({ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }) : slot(m[1]);
     if (target !== undefined) {
       return { kind: "gain-control", target, untilEndOfTurn: false, whileMonarch: /^you/i.test(m[2]) ? "you" : "trigger-player" };
+    }
+  }
+  // "Gain control of target creature for as long as you control ~ and ~
+  // remains tapped" (Willow Satyr, Seasinger, Rubinia Soulsinger).
+  if ((m = re(`gain control of (${TARGET}) for as long as you control ~ and ~ remains tapped`).exec(s))) {
+    const target = slot(m[1]);
+    if (target !== undefined) {
+      return { kind: "gain-control", target, untilEndOfTurn: false, whileYouControlSource: true, whileSourceTapped: true };
     }
   }
   // "Gain control of target creature [until end of turn]" — for as long as
