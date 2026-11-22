@@ -2451,6 +2451,7 @@ import _poolBenalishMissionary from "./pool/benalish-missionary.js";
 import _poolBenalishSleeper from "./pool/benalish-sleeper.js";
 import _poolBenalishTrapper from "./pool/benalish-trapper.js";
 import _poolBenalishVeteran from "./pool/benalish-veteran.js";
+import _poolBendOrBreak from "./pool/bend-or-break.js";
 import _poolBendersWaterskin from "./pool/benders-waterskin.js";
 import _poolBeneathTheSands from "./pool/beneath-the-sands.js";
 import _poolBenedictionOfMoons from "./pool/benediction-of-moons.js";
@@ -7286,6 +7287,7 @@ import _poolDivideByZero from "./pool/divide-by-zero.js";
 import _poolDivination from "./pool/divination.js";
 import _poolDivineArrow from "./pool/divine-arrow.js";
 import _poolDivineCongregation from "./pool/divine-congregation.js";
+import _poolDivineDeflection from "./pool/divine-deflection.js";
 import _poolDivineFavor from "./pool/divine-favor.js";
 import _poolDivineGambit from "./pool/divine-gambit.js";
 import _poolDivineIntervention from "./pool/divine-intervention.js";
@@ -12582,6 +12584,7 @@ import _poolHarmonize from "./pool/harmonize.js";
 import _poolHarmonizedCrescendo from "./pool/harmonized-crescendo.js";
 import _poolHarmonizedTrio from "./pool/harmonized-trio.js";
 import _poolHarmonyOfNature from "./pool/harmony-of-nature.js";
+import _poolHarmsWay from "./pool/harms-way.js";
 import _poolHarnessByForce from "./pool/harness-by-force.js";
 import _poolHarnessInfinity from "./pool/harness-infinity.js";
 import _poolHarnessTheStorm from "./pool/harness-the-storm.js";
@@ -20616,6 +20619,7 @@ import _poolPhyrexianNegator from "./pool/phyrexian-negator.js";
 import _poolPhyrexianObliterator from "./pool/phyrexian-obliterator.js";
 import _poolPhyrexianPegasus from "./pool/phyrexian-pegasus.js";
 import _poolPhyrexianPlaguelord from "./pool/phyrexian-plaguelord.js";
+import _poolPhyrexianPortal from "./pool/phyrexian-portal.js";
 import _poolPhyrexianProcessor from "./pool/phyrexian-processor.js";
 import _poolPhyrexianProwler from "./pool/phyrexian-prowler.js";
 import _poolPhyrexianPurge from "./pool/phyrexian-purge.js";
@@ -23009,6 +23013,7 @@ import _poolRiteOfTheRagingStorm from "./pool/rite-of-the-raging-storm.js";
 import _poolRiteOfTheSerpent from "./pool/rite-of-the-serpent.js";
 import _poolRiteOfUndoing from "./pool/rite-of-undoing.js";
 import _poolRitesOfFlourishing from "./pool/rites-of-flourishing.js";
+import _poolRitesOfInitiation from "./pool/rites-of-initiation.js";
 import _poolRitesOfReaping from "./pool/rites-of-reaping.js";
 import _poolRitesOfRefusal from "./pool/rites-of-refusal.js";
 import _poolRitesOfSpring from "./pool/rites-of-spring.js";
@@ -24320,6 +24325,7 @@ import _poolSeasonOfLoss from "./pool/season-of-loss.js";
 import _poolSeasonOfRenewal from "./pool/season-of-renewal.js";
 import _poolSeasonOfTheBold from "./pool/season-of-the-bold.js";
 import _poolSeasonOfTheBurrow from "./pool/season-of-the-burrow.js";
+import _poolSeasonOfTheWitch from "./pool/season-of-the-witch.js";
 import _poolSeasonOfWeaving from "./pool/season-of-weaving.js";
 import _poolSeasonalRitual from "./pool/seasonal-ritual.js";
 import _poolSeasonedButtoneer from "./pool/seasoned-buttoneer.js";
@@ -29548,6 +29554,7 @@ import _poolTorchSlinger from "./pool/torch-slinger.js";
 import _poolTorchSong from "./pool/torch-song.js";
 import _poolTorchTheTower from "./pool/torch-the-tower.js";
 import _poolTorchTheWitness from "./pool/torch-the-witness.js";
+import _poolTorchling from "./pool/torchling.js";
 import _poolTorensFistOfTheAngels from "./pool/torens-fist-of-the-angels.js";
 import _poolTorgaarFamineIncarnate from "./pool/torgaar-famine-incarnate.js";
 import _poolTorgalAFineHound from "./pool/torgal-a-fine-hound.js";
@@ -36286,6 +36293,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBenalishSleeper,
   _poolBenalishTrapper,
   _poolBenalishVeteran,
+  _poolBendOrBreak,
   _poolBendersWaterskin,
   _poolBeneathTheSands,
   _poolBenedictionOfMoons,
@@ -41121,6 +41129,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDivination,
   _poolDivineArrow,
   _poolDivineCongregation,
+  _poolDivineDeflection,
   _poolDivineFavor,
   _poolDivineGambit,
   _poolDivineIntervention,
@@ -46417,6 +46426,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHarmonizedCrescendo,
   _poolHarmonizedTrio,
   _poolHarmonyOfNature,
+  _poolHarmsWay,
   _poolHarnessByForce,
   _poolHarnessInfinity,
   _poolHarnessTheStorm,
@@ -54451,6 +54461,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianObliterator,
   _poolPhyrexianPegasus,
   _poolPhyrexianPlaguelord,
+  _poolPhyrexianPortal,
   _poolPhyrexianProcessor,
   _poolPhyrexianProwler,
   _poolPhyrexianPurge,
@@ -56844,6 +56855,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRiteOfTheSerpent,
   _poolRiteOfUndoing,
   _poolRitesOfFlourishing,
+  _poolRitesOfInitiation,
   _poolRitesOfReaping,
   _poolRitesOfRefusal,
   _poolRitesOfSpring,
@@ -58155,6 +58167,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSeasonOfRenewal,
   _poolSeasonOfTheBold,
   _poolSeasonOfTheBurrow,
+  _poolSeasonOfTheWitch,
   _poolSeasonOfWeaving,
   _poolSeasonalRitual,
   _poolSeasonedButtoneer,
@@ -63383,6 +63396,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTorchSong,
   _poolTorchTheTower,
   _poolTorchTheWitness,
+  _poolTorchling,
   _poolTorensFistOfTheAngels,
   _poolTorgaarFamineIncarnate,
   _poolTorgalAFineHound,
@@ -70134,6 +70148,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/benalish-sleeper": _poolBenalishSleeper,
   "pool/benalish-trapper": _poolBenalishTrapper,
   "pool/benalish-veteran": _poolBenalishVeteran,
+  "pool/bend-or-break": _poolBendOrBreak,
   "pool/benders-waterskin": _poolBendersWaterskin,
   "pool/beneath-the-sands": _poolBeneathTheSands,
   "pool/benediction-of-moons": _poolBenedictionOfMoons,
@@ -74969,6 +74984,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/divination": _poolDivination,
   "pool/divine-arrow": _poolDivineArrow,
   "pool/divine-congregation": _poolDivineCongregation,
+  "pool/divine-deflection": _poolDivineDeflection,
   "pool/divine-favor": _poolDivineFavor,
   "pool/divine-gambit": _poolDivineGambit,
   "pool/divine-intervention": _poolDivineIntervention,
@@ -80265,6 +80281,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/harmonized-crescendo": _poolHarmonizedCrescendo,
   "pool/harmonized-trio": _poolHarmonizedTrio,
   "pool/harmony-of-nature": _poolHarmonyOfNature,
+  "pool/harms-way": _poolHarmsWay,
   "pool/harness-by-force": _poolHarnessByForce,
   "pool/harness-infinity": _poolHarnessInfinity,
   "pool/harness-the-storm": _poolHarnessTheStorm,
@@ -88299,6 +88316,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-obliterator": _poolPhyrexianObliterator,
   "pool/phyrexian-pegasus": _poolPhyrexianPegasus,
   "pool/phyrexian-plaguelord": _poolPhyrexianPlaguelord,
+  "pool/phyrexian-portal": _poolPhyrexianPortal,
   "pool/phyrexian-processor": _poolPhyrexianProcessor,
   "pool/phyrexian-prowler": _poolPhyrexianProwler,
   "pool/phyrexian-purge": _poolPhyrexianPurge,
@@ -90692,6 +90710,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rite-of-the-serpent": _poolRiteOfTheSerpent,
   "pool/rite-of-undoing": _poolRiteOfUndoing,
   "pool/rites-of-flourishing": _poolRitesOfFlourishing,
+  "pool/rites-of-initiation": _poolRitesOfInitiation,
   "pool/rites-of-reaping": _poolRitesOfReaping,
   "pool/rites-of-refusal": _poolRitesOfRefusal,
   "pool/rites-of-spring": _poolRitesOfSpring,
@@ -92003,6 +92022,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/season-of-renewal": _poolSeasonOfRenewal,
   "pool/season-of-the-bold": _poolSeasonOfTheBold,
   "pool/season-of-the-burrow": _poolSeasonOfTheBurrow,
+  "pool/season-of-the-witch": _poolSeasonOfTheWitch,
   "pool/season-of-weaving": _poolSeasonOfWeaving,
   "pool/seasonal-ritual": _poolSeasonalRitual,
   "pool/seasoned-buttoneer": _poolSeasonedButtoneer,
@@ -97231,6 +97251,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/torch-song": _poolTorchSong,
   "pool/torch-the-tower": _poolTorchTheTower,
   "pool/torch-the-witness": _poolTorchTheWitness,
+  "pool/torchling": _poolTorchling,
   "pool/torens-fist-of-the-angels": _poolTorensFistOfTheAngels,
   "pool/torgaar-famine-incarnate": _poolTorgaarFamineIncarnate,
   "pool/torgal-a-fine-hound": _poolTorgalAFineHound,

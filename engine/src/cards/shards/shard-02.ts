@@ -411,6 +411,7 @@ import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
 import _poolHandToHand from "../pool/hand-to-hand.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHanweirMilitiaCaptain from "../pool/hanweir-militia-captain.js";
+import _poolHarmsWay from "../pool/harms-way.js";
 import _poolHarshDeceiver from "../pool/harsh-deceiver.js";
 import _poolHarvesttideInfiltrator from "../pool/harvesttide-infiltrator.js";
 import _poolHateflayer from "../pool/hateflayer.js";
@@ -1472,6 +1473,7 @@ const shard: CardShard = {
     _poolHandToHand,
     _poolHangarScrounger,
     _poolHanweirMilitiaCaptain,
+    _poolHarmsWay,
     _poolHarshDeceiver,
     _poolHarvesttideInfiltrator,
     _poolHateflayer,

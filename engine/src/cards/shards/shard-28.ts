@@ -77,6 +77,7 @@ import _poolBearerOfMemory from "../pool/bearer-of-memory.js";
 import _poolBeckoningWillOWisp from "../pool/beckoning-will-o-wisp.js";
 import _poolBelloBardOfTheBrambles from "../pool/bello-bard-of-the-brambles.js";
 import _poolBelovedBeggar from "../pool/beloved-beggar.js";
+import _poolBendOrBreak from "../pool/bend-or-break.js";
 import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
 import _poolBesmirch from "../pool/besmirch.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
@@ -1151,6 +1152,7 @@ const shard: CardShard = {
     _poolBeckoningWillOWisp,
     _poolBelloBardOfTheBrambles,
     _poolBelovedBeggar,
+    _poolBendOrBreak,
     _poolBeneathTheSands,
     _poolBesmirch,
     _poolBilbosDeadlySlice,

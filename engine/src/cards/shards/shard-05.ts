@@ -730,6 +730,7 @@ import _poolRiftsweeper from "../pool/riftsweeper.js";
 import _poolRingOfTheLucii from "../pool/ring-of-the-lucii.js";
 import _poolRiptidePilferer from "../pool/riptide-pilferer.js";
 import _poolRisingOfTheDay from "../pool/rising-of-the-day.js";
+import _poolRitesOfInitiation from "../pool/rites-of-initiation.js";
 import _poolRitualGuardian from "../pool/ritual-guardian.js";
 import _poolRiversRebuke from "../pool/rivers-rebuke.js";
 import _poolRiverwiseAugur from "../pool/riverwise-augur.js";
@@ -1777,6 +1778,7 @@ const shard: CardShard = {
     _poolRingOfTheLucii,
     _poolRiptidePilferer,
     _poolRisingOfTheDay,
+    _poolRitesOfInitiation,
     _poolRitualGuardian,
     _poolRiversRebuke,
     _poolRiverwiseAugur,

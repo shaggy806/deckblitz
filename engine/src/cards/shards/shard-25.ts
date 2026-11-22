@@ -760,6 +760,7 @@ import _poolSeaGateStormcaller from "../pool/sea-gate-stormcaller.js";
 import _poolSearchForBlex from "../pool/search-for-blex.js";
 import _poolSearchPartyCaptain from "../pool/search-party-captain.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
+import _poolSeasonOfTheWitch from "../pool/season-of-the-witch.js";
 import _poolSecretPassage from "../pool/secret-passage.js";
 import _poolSecurityBypass from "../pool/security-bypass.js";
 import _poolSeedglaiveMentor from "../pool/seedglaive-mentor.js";
@@ -1788,6 +1789,7 @@ const shard: CardShard = {
     _poolSearchForBlex,
     _poolSearchPartyCaptain,
     _poolSeasonOfRenewal,
+    _poolSeasonOfTheWitch,
     _poolSecretPassage,
     _poolSecurityBypass,
     _poolSeedglaiveMentor,

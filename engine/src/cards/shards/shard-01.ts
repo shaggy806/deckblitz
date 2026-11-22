@@ -908,6 +908,7 @@ import _poolTolarianTerror from "../pool/tolarian-terror.js";
 import _poolToluzCleverConductor from "../pool/toluz-clever-conductor.js";
 import _poolTombstalker from "../pool/tombstalker.js";
 import _poolTookReaper from "../pool/took-reaper.js";
+import _poolTorchling from "../pool/torchling.js";
 import _poolToxicAbomination from "../pool/toxic-abomination.js";
 import _poolTradeRoutes from "../pool/trade-routes.js";
 import _poolTragicPoet from "../pool/tragic-poet.js";
@@ -1949,6 +1950,7 @@ const shard: CardShard = {
     _poolToluzCleverConductor,
     _poolTombstalker,
     _poolTookReaper,
+    _poolTorchling,
     _poolToxicAbomination,
     _poolTradeRoutes,
     _poolTragicPoet,

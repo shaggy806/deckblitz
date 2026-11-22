@@ -229,6 +229,7 @@ import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
 import _poolDismantlingBlow from "../pool/dismantling-blow.js";
 import _poolDisownedAncestor from "../pool/disowned-ancestor.js";
 import _poolDivideByZero from "../pool/divide-by-zero.js";
+import _poolDivineDeflection from "../pool/divine-deflection.js";
 import _poolDocOckEvilInventor from "../pool/doc-ock-evil-inventor.js";
 import _poolDominariasJudgment from "../pool/dominarias-judgment.js";
 import _poolDominionSaboteur from "../pool/dominion-saboteur.js";
@@ -1316,6 +1317,7 @@ const shard: CardShard = {
     _poolDismantlingBlow,
     _poolDisownedAncestor,
     _poolDivideByZero,
+    _poolDivineDeflection,
     _poolDocOckEvilInventor,
     _poolDominariasJudgment,
     _poolDominionSaboteur,
