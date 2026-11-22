@@ -21098,7 +21098,7 @@ export class Game {
    * one on the battlefield, or — `departed` — one looking back at its own
    * departure, matched as it last existed there.
    */
-  private sourceTriggerDoublers(controller: PlayerId, sourceId: ObjectId, departed: boolean): number {
+  private sourceTriggerDoublers(controller: PlayerId, sourceId: ObjectId, departed: boolean, event?: GameEvent): number {
     const source = this.state.objects[sourceId];
     if (source === undefined || (!departed && source.zone !== "battlefield" && source.zone !== "stack")) return 0;
     const ofSpell = !departed && source.zone === "stack";
@@ -21139,30 +21139,58 @@ export class Game {
         if (ofSelfOrEquipment || matches) count += 1;
       }
     }
-    // "Cloud or an Equipment attached to it", as Cloud dies: its own
-    // leaves-the-battlefield ability, and its Equipment's "whenever equipped
-    // creature dies" (Skullclamp), look back at the doubler as it last
-    // existed (rule 603.10a) — the Equipment still on it until the
-    // state-based check unattaches it.
-    if (!ofSpell) {
-      const hostId = departed ? sourceId : source.zone === "battlefield" ? source.attachedTo : undefined;
-      const host = hostId === undefined || hostId === null ? undefined : this.state.objects[hostId];
-      const last = host?.lastKnown;
-      if (
-        host !== undefined &&
-        last !== undefined &&
-        host.zone !== "battlefield" &&
-        last.controller === controller &&
-        !last.lostAbilities &&
-        (departed || effectiveSubtypes(this.state, this.registry, source).includes("Equipment"))
-      ) {
+    // A doubler that left in the event the ability triggers on — the ability's
+    // own permanent included — still doubles it: a leaves-the-battlefield
+    // ability looks back at the game as it was (rule 603.10a), the doubler
+    // in it, as the cause-keyed ones do (Teysa Karlov's and Drivnod's rulings,
+    // "including Teysa itself dying"). Each is read as it last existed.
+    // Delney dying in a wrath beside a small creature; Cloud dying under
+    // Skullclamp, which is still on it until the state-based check.
+    if (!ofSpell && event !== undefined && (isLeaveEvent(event) || event.type === "permanents-died" || event.type === "permanents-left")) {
+      const lookingBack = this.lookBackSources(event);
+      const attachedAsItLeft = (attachment: ObjectId, host: ObjectId): boolean => {
+        const on = this.state.objects[attachment];
+        if (on !== undefined && on.zone === "battlefield") return on.attachedTo === host;
+        return this.state.objects[host]?.lastKnown?.attachments?.some((a) => a.object === attachment) === true;
+      };
+      for (const id of isLeaveEvent(event) ? new Set([event.object, ...lookingBack]) : lookingBack) {
+        const was = this.state.objects[id];
+        const last = was?.lastKnown;
+        if (was === undefined || was.zone === "battlefield" || last === undefined || last.lostAbilities) continue;
         for (const ability of this.registry.get(last.textName ?? last.name).static) {
-          if (ability.doubleTriggersOf?.selfAndEquipment !== true) continue;
+          const d = ability.doubleTriggersOf;
+          if (d === undefined) continue;
+          // Only a condition a departed permanent can still answer.
           const c = ability.condition;
-          // Only the condition a departed permanent can still answer.
-          const equippedOnly =
-            c !== undefined && c.kind === "source" && Object.keys(c.filter).length === 1 && c.filter.equipped === true;
-          if (c === undefined || (equippedOnly && last.equipped)) count += 1;
+          if (c !== undefined) {
+            const equippedOnly = c.kind === "source" && Object.keys(c.filter).length === 1 && c.filter.equipped === true;
+            const holds =
+              (equippedOnly && last.equipped) ||
+              (c.kind === "enduring-story" && this.state.players[last.controller]?.enduringStory === true);
+            if (!holds) continue;
+          }
+          // Wizard's Staff's "of equipped creature", leaving with its host.
+          if (d.host === true) {
+            if (attachedAsItLeft(id, sourceId)) count += 1;
+            continue;
+          }
+          if (last.controller !== controller) continue;
+          const ofSelfOrEquipment =
+            d.selfAndEquipment === true &&
+            (sourceId === id ||
+              (attachedAsItLeft(sourceId, id) &&
+                (departed
+                  ? source.lastKnown?.subtypes.includes("Equipment") === true
+                  : effectiveSubtypes(this.state, this.registry, source).includes("Equipment"))));
+          const matches =
+            d.filter !== undefined &&
+            !(d.others === true && sourceId === id) &&
+            matchesFilter(this.state, this.registry, sourceId, d.filter, {
+              you: controller,
+              source: id,
+              ...(departed ? { lastKnown: true } : {}),
+            });
+          if (ofSelfOrEquipment || matches) count += 1;
         }
       }
     }
@@ -37399,7 +37427,7 @@ export class Game {
                   : event,
                 id,
               ) +
-              this.sourceTriggerDoublers(object.controller, id, lastSeen !== undefined);
+              this.sourceTriggerDoublers(object.controller, id, lastSeen !== undefined, event);
           // "Triggers only once each turn": this firing is the one, whatever
           // the stack size or batch count would otherwise multiply it to.
           if (ability.oncePerTurn === true) {

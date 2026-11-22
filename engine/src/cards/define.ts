@@ -4628,9 +4628,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * Delney, Streetwise Lookout's "a creature you control with power 2 or
    * less", Cloud, Midgar Mercenary's "Cloud or an Equipment attached to it"
    * (`selfAndEquipment`, with a `condition` for "as long as Cloud is
-   * equipped"; as Cloud dies, equipped, it still doubles its own and its
-   * Equipment's dies abilities — Skullclamp draws four, rule 603.10a). The
-   * permanent is matched from this static's controller's
+   * equipped"). A doubler that leaves in the event the ability triggers on
+   * still doubles it, read as it last existed (rule 603.10a, as Teysa
+   * Karlov's ruling has it for the cause-keyed ones): Cloud dying under
+   * Skullclamp draws four, Delney dying in a wrath doubles a small
+   * creature's dies ability. Of its conditions, only "equipped" and an
+   * enduring story are asked of one that has gone. The permanent is matched from this static's controller's
    * side, as it is as the ability triggers — or, for its own
    * leaves-the-battlefield ability, as it last existed there. Only abilities
    * of permanents: a spell's "when you cast this" isn't one, and nor is a

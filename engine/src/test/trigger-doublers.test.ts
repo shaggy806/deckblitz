@@ -197,6 +197,73 @@ describe("doubleTriggersOf: keyed on whose ability it is", () => {
   });
 });
 
+// A doubler that leaves in the same event as the ability's permanent still
+// doubles its leaves-the-battlefield ability (rule 603.10a; Teysa Karlov's
+// and Drivnod's "including Teysa itself dying" rulings, for the source-keyed
+// doublers). Doomed Traveler, a 1/1 Human Soldier, leaves a Spirit as it dies.
+describe("doubleTriggersOf: a doubler leaving in the same event", () => {
+  const spirits = (game: Game) =>
+    game.battlefield
+      .filter((id) => game.state.objects[id].cardName === "Spirit Token")
+      .reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0);
+  const wrath = (game: Game, filter: EffectSpec & { kind: "destroy-all" } = { kind: "destroy-all", filter: { type: "creature" } }) => {
+    game.debugApplyEffect(A, filter, [], {});
+    game.advanceUntil(quiet);
+    return spirits(game);
+  };
+
+  it("Delney dying beside a small creature: its dies ability triggers twice", () => {
+    const game = setUp();
+    game.debugSpawn("Delney, Streetwise Lookout", A, "battlefield");
+    game.debugSpawn("Doomed Traveler", A, "battlefield");
+    expect(wrath(game)).toBe(2);
+  });
+
+  it("an opponent's Delney, or none, leaves it at once", () => {
+    const game = setUp();
+    game.debugSpawn("Delney, Streetwise Lookout", B, "battlefield");
+    game.debugSpawn("Doomed Traveler", A, "battlefield");
+    expect(wrath(game)).toBe(1);
+    const alone = setUp();
+    alone.debugSpawn("Doomed Traveler", A, "battlefield");
+    expect(wrath(alone)).toBe(1);
+  });
+
+  it("a Delney that left earlier doubles nothing", () => {
+    const game = setUp();
+    game.debugSpawn("Delney, Streetwise Lookout", A, "battlefield");
+    expect(wrath(game)).toBe(0);
+    game.debugSpawn("Doomed Traveler", A, "battlefield");
+    expect(wrath(game)).toBe(1);
+  });
+
+  it("Roaming Throne reads the type it had chosen", () => {
+    for (const [type, expected] of [["Human", 2], ["Goblin", 1]] as const) {
+      const game = setUp();
+      const throne = game.debugSpawn("Roaming Throne", A, "battlefield");
+      game.state.objects[throne].chosenCreatureType = type;
+      game.debugSpawn("Doomed Traveler", A, "battlefield");
+      expect(wrath(game)).toBe(expected);
+    }
+  });
+
+  it("Wizard's Staff, destroyed with its host or left behind", () => {
+    for (const filter of [{ typesAnyOf: ["creature", "artifact"] }, { type: "creature" }] as const) {
+      const game = setUp();
+      const host = game.debugSpawn("Doomed Traveler", A, "battlefield");
+      const staff = game.debugSpawn("Wizard's Staff", A, "battlefield");
+      game.debugApplyEffect(A, { kind: "attach", target: 0 }, [{ kind: "object", object: host }], { source: staff });
+      expect(game.state.objects[staff].attachedTo).toBe(host);
+      expect(wrath(game, { kind: "destroy-all", filter })).toBe(2);
+    }
+    // A Staff destroyed beside a creature it wasn't on.
+    const game = setUp();
+    game.debugSpawn("Doomed Traveler", A, "battlefield");
+    game.debugSpawn("Wizard's Staff", A, "battlefield");
+    expect(wrath(game, { kind: "destroy-all", filter: { typesAnyOf: ["creature", "artifact"] } })).toBe(1);
+  });
+});
+
 describe("doubleTriggers' new causes", () => {
   it("cast-or-copy: casting an instant fires the cast trigger twice", () => {
     const game = setUp();
