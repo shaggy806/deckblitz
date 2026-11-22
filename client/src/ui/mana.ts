@@ -23,7 +23,13 @@ const KEYS = new Set<string>([
   'T', 'Q', 'INFINITY', 'HALF', 'TAP_ALT', 'TAP_SQUARE', 'CHAOS',
 ])
 
-const asset = (key: string): string => `${import.meta.env.BASE_URL}mana/${key}.svg`
+/** Bump when a symbol's artwork changes. These files aren't content-hashed,
+ * and Cloudflare tells browsers to keep them four hours (`max-age=14400`,
+ * whatever Caddy says), so a changed file under the same address isn't seen
+ * until then: a new address is. 2: tap and untap swapped back, 2026-11-21. */
+const ARTWORK_VERSION = 2
+
+const asset = (key: string): string => `${import.meta.env.BASE_URL}mana/${key}.svg?v=${ARTWORK_VERSION}`
 
 /**
  * The SVG asset URL for a `{…}` symbol token (the raw inner text, e.g. `"W"`,
