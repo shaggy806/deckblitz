@@ -7007,6 +7007,9 @@ export interface GameState {
     readonly object: ObjectId;
     readonly slots: readonly number[];
     readonly unseenBy?: string;
+    /** Asked as one slot whose answer goes to every slot in `slots` — the
+     * `change-targets` effect's `sameNewTarget` (Torchling). */
+    readonly same?: true;
   } | null;
   /** Copies made while another decision was up — storm's several — waiting
    * to be asked about their new targets, oldest first. Drained one at a time

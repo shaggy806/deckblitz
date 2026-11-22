@@ -190,7 +190,15 @@ export type JournalKind =
   | "rolled"
   /** `player` visited the Attraction `object` (rule 701.52a), in `stint`;
    * `was`: as it was visited. An entry per visit. */
-  | "visited";
+  | "visited"
+  /** The creature `object` could have been declared an attacker by `player`
+   * as a declare attackers step began (rule 508.1a: untapped, no summoning
+   * sickness or haste, no restriction alone forbidding it — what
+   * `whyCannotAttack` and the "can't attack alone" companies allow, a cost
+   * to attack not counting against it, 508.1d), in `stint`, `combat` the
+   * combat phase; `count` a token stack's size. Season of the Witch's
+   * "except for creatures that couldn't attack". */
+  | "could-attack";
 
 /** One event the journal keeps. Each field means one thing for every kind;
  * a kind leaves out what it doesn't have. */
@@ -516,7 +524,12 @@ export type JournalWhat =
   /** An extra turn of the player's began (rule 500.7): H.M.S. Bounty,
    * Unlikely Timeship's "if you … haven't begun an extra turn this game"
    * (window `"this-game"`). A skipped one never began (614.10). */
-  | "extra-turn-began";
+  | "extra-turn-began"
+  /** The creatures that could have attacked (`could-attack` entries): with a
+   * `journaled` clause and `attackedThisTurn: false`, Season of the Witch's
+   * "creatures that didn't attack this turn, except for creatures that
+   * couldn't attack". */
+  | "could-attack";
 
 /** The zones a `to-graveyard` read takes its arrivals from (`from`: only
  * these) or leaves out (`notFrom`): "put into graveyards from the
@@ -615,6 +628,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   airbent: { kind: "bent", match: (e) => e.how === "air" },
   visited: { kind: "visited", distinct: true },
   "extra-turn-began": { kind: "extra-turn-began" },
+  "could-attack": { kind: "could-attack" },
 };
 
 const PERMANENT_CARD_TYPES: ReadonlySet<string> = new Set([

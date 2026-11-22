@@ -9263,6 +9263,13 @@ export type EffectSpec =
        * as it is now or, if the source has left, as it last was; the target
        * stays as it was if that one can't be a legal new target. */
       readonly to?: "source" | "attached";
+      /** With `"change"`: every target changes to **one and the same** new
+       * target — Torchling's "change the target of target spell that targets
+       * only this creature", whose ruling has a spell aimed at it more than
+       * once (each instance of "target", rule 115.3) change every one of
+       * those to the same new target. Asked as one slot; the new target must
+       * be legal for every slot (115.7a), or none changes. */
+      readonly sameNewTarget?: true;
       /** "You may change…" (Hydroelectric Specimen): keeping it is a choice. */
       readonly optional?: true;
       /** "Then **the spell's controller** may choose new targets for it"
@@ -15515,6 +15522,8 @@ export interface EffectApi {
     random?: { readonly exceptYou: boolean; readonly withCopies: boolean },
     /** The `change-targets` {@link EffectSpec}'s `unseenByNamesake`. */
     unseenByNamesake?: boolean,
+    /** The `change-targets` {@link EffectSpec}'s `sameNewTarget`. */
+    sameNewTarget?: boolean,
   ): void;
   /** This effect's controller gains control of the spell at `TargetRef` — see
    * the `gain-control-spell` {@link EffectSpec}. */
@@ -24434,6 +24443,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.by === "its-controller",
           spec.how === "random" ? { exceptYou: spec.exceptYou === true, withCopies: spec.withCopies === true } : undefined,
           spec.unseenByNamesake === true,
+          spec.sameNewTarget === true,
         );
       }
       return;

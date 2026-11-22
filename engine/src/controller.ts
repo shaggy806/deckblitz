@@ -4619,7 +4619,7 @@ export class HeuristicBotController extends AutomaticController {
     const copied = state.pendingCopyTargets;
     const pending =
       retarget != null
-        ? { copy: retarget.object, slots: retarget.slots }
+        ? { copy: retarget.object, slots: retarget.same === true ? retarget.slots.slice(0, 1) : retarget.slots }
         : copied != null
           ? copied
           : null;

@@ -3202,7 +3202,9 @@
   "filter:didnt-attack-in-trigger-declaration",
   "static:protection-from-own-colors",
   "effect:change-target-to-enchanted",
-  "effect:change-targets-trigger-spell"
+  "effect:change-targets-trigger-spell",
+  "effect:change-targets-same-new-target",
+  "filter:could-have-attacked-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

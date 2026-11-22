@@ -10293,7 +10293,13 @@ export class Game {
     const retarget = this.state.pendingRetarget;
     if (retarget != null) {
       this.state.pendingRetarget = null;
-      this.retargetStackObject(retarget.object, retarget.slots, chosen, player, retarget.unseenBy);
+      this.retargetStackObject(
+        retarget.object,
+        retarget.slots,
+        retarget.same === true ? retarget.slots.map(() => chosen[0]) : chosen,
+        player,
+        retarget.unseenBy,
+      );
     } else if (copy != null) {
       this.state.pendingCopyTargets = null;
       this.retargetCopy(copy.copy, copy.slots, chosen);
@@ -14459,6 +14465,19 @@ export class Game {
       attackCaps(this.state, this.registry)?.most,
     );
     if (able.length === 0) return;
+    // Each one that could have attacked (Season of the Witch's "except for
+    // creatures that couldn't attack"), as the declaration begins.
+    for (const id of able) {
+      const object = this.state.objects[id];
+      this.journal({
+        kind: "could-attack",
+        player: this.activePlayer,
+        object: id,
+        stint: object.zoneChangeCount ?? 0,
+        combat: this.state.turn.combatPhases ?? 1,
+        ...((object.stackCount ?? 1) !== 1 ? { count: object.stackCount } : {}),
+      });
+    }
     this.state.awaiting = { kind: "attackers", player: this.activePlayer };
   }
 
@@ -47619,7 +47638,7 @@ controlledBy,
         if (this.resolvingAbilities.length === 0) resolving.push(source);
         return [...this.state.zones.shared.stack].reverse().filter((id) => !resolving.includes(id) && this.state.objects[id] !== undefined);
       },
-      changeTargets: (target, how, to, optional, byItsController, random, unseenByNamesake) => {
+      changeTargets: (target, how, to, optional, byItsController, random, unseenByNamesake, sameNewTarget) => {
         if (how === "random") {
           if (target.kind !== "object") return;
           // "For the spell and the copy": the copies of it this resolution
@@ -47657,6 +47676,7 @@ controlledBy,
           // permanents named Psychic Battle": its source's name, as it is or
           // last was.
           unseenByNamesake === true && this.state.objects[source] !== undefined ? nameOf(this.state.objects[source]) : undefined,
+          sameNewTarget === true,
         );
       },
       gainControlOfSpell: (target) => this.gainControlOfSpell(controller, target),
@@ -55740,12 +55760,46 @@ controlledBy,
     optional: boolean,
     /** See `announceTargetsChosen`. */
     unseenBy?: string,
+    /** Every slot to one and the same new target (Torchling's ruling — the
+     * `change-targets` {@link EffectSpec}'s `sameNewTarget`). */
+    sameNewTarget = false,
   ): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
     if (object === undefined || object.zone !== "stack") return;
     const found = this.stackTargetSlots(target.object);
     if (found === null || found.slots.length === 0) return;
+    if (sameNewTarget && how === "change" && found.slots.length > 1) {
+      // One new target for every slot: legal for each (115.7a), so the
+      // options every slot shares, asked as the first slot's question; the
+      // answer is spread over every slot (`pendingRetarget.same`).
+      const shared = found.others[0]
+        .filter((t) => found.others.every((legal) => legal.some((o) => sameTargetRef(o, t))))
+        .filter((t) => only === null || (t.kind === "object" && t.object === only));
+      if (shared.length === 0) return;
+      if (shared.length === 1 && !optional) {
+        this.retargetStackObject(target.object, found.slots, found.slots.map(() => shared[0]), chooser, unseenBy);
+        return;
+      }
+      this.state.pendingRetarget = {
+        object: target.object,
+        slots: found.slots,
+        same: true,
+        ...(unseenBy !== undefined ? { unseenBy } : {}),
+      };
+      this.state.awaiting = {
+        kind: "choose-targets",
+        player: chooser,
+        source: target.object,
+        cardName: object.cardName,
+        specs: [renumberOtherSlots(found.specs[0], new Map([[0, 0]]))],
+        options: [optional ? [found.current[0], ...shared] : shared],
+        current: [found.current[0]],
+        prompt: `Change the target of ${object.cardName}`,
+        ...(object.controller !== chooser ? { targetsFor: object.controller } : {}),
+      };
+      return;
+    }
     const others = found.others.map((legal) =>
       only !== null ? legal.filter((t) => t.kind === "object" && t.object === only) : legal,
     );
