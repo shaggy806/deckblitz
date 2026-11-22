@@ -53,6 +53,6 @@ export const SUPPORT_URL = 'https://ko-fi.com/deckblitz'
  * is used, and the note says there's no affiliation. */
 export const BUILT_WITH = 'Built with Claude Code'
 export const CLAUDE_CODE_URL = 'https://claude.com/product/claude-code'
-export const BUILT_WITH_NOTE = `Yes, ${SITE_TITLE} was made with AI: its code was written with Claude Code, Anthropic's AI coding tool, directed and tested by one person. The card art is the real cards' art, none of it AI-generated. ${SITE_TITLE} isn't affiliated with or endorsed by Anthropic.`
+export const BUILT_WITH_NOTE = `Yes, ${SITE_TITLE} was made with AI. This was over the course of 3 months and hundreds of hours of working with Claude Code. There is no AI-generated imagery on the site and there never will be. ${SITE_TITLE} isn't affiliated with or endorsed by Anthropic.`
 /** The feedback address as a link that opens the visitor's mail program. */
 export const FEEDBACK_HREF = `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(FEEDBACK_SUBJECT)}`
