@@ -452,6 +452,15 @@ for the server by design ("The undo").
 - **Off by default** then; on since the user's word on 2026-11-18 ("The laptop").
 - **A reload, or a connection that dropped, replayed the whole log** until step 7, which deals
   a returning device from another device's state ("The copies check each other").
+- **A dropped connection keeps the copy** (2026-11-21, the user: no reconnecting screen, and
+  what a player does meanwhile kept). The socket reopens the server's side behind the page,
+  as it does under a solo game; the copy stays, plays only its own person (`linkDown`), and
+  when the server is back asks for the log from the place it holds (`table-join`'s `from`,
+  which was already in the protocol) and takes the tail in (`resume`): its own inputs that
+  did arrive are confirmed, anything else undoes what it made on top, and the rest is sent
+  again. No refusal is owed across the gap. This is lockstep still: a move made offline
+  stands only if nothing else took its place, and the host passing an absent player's empty
+  windows often does, so a long outage usually ends in "taken back". Not in `tables:fuzz` yet.
 - **The host's controls act on the host's device only**: bot speed, pausing and stepping the
   bots are the host's room's, which is the one that runs them, and the other pages aren't
   told (no "Bots paused" badge there). A seat its player hands to a bot is played by that

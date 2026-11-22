@@ -1086,10 +1086,13 @@ type ShownStatus = Exclude<NetworkGame['status'], 'connecting' | 'disconnected'>
 
 /**
  * The screen for the connection's status. A connection lost after it was
- * made keeps the last screen up, dimmed under a "Reconnecting…" box, rather
- * than swapping the whole page for one (the user, 2026-10-20): the board is
- * still what it was, and it's back the moment the socket is. A first visit
- * that never got through has no screen to keep.
+ * made keeps the last screen up and usable, with a small mark in the corner
+ * (`ConnectionMark`) and nothing over it (the user, 2026-11-21; a box over a
+ * dimmed screen before that, a page of its own before 2026-10-20). What is
+ * done meanwhile is kept and sent when the socket is back: a table's moves
+ * by its copy (`NetworkGame.linkDown`), a waiting room's and the landing
+ * page's by the hook; only a game the server holds can't take a move until
+ * then. A first visit that never got through has no screen to keep.
  */
 function AppScreen({ game }: { readonly game: NetworkGame }) {
   const [lastShown, setLastShown] = useState<ShownStatus | null>(null)
@@ -1129,18 +1132,31 @@ function AppScreen({ game }: { readonly game: NetworkGame }) {
   return (
     <>
       <StatusScreen game={game} status={connected ? (game.status as ShownStatus) : (held as ShownStatus)} />
-      {connected || opening ? null : (
-        <div className="overlay reconnect-overlay" role="alertdialog" aria-label="Reconnecting">
-          <div className="overlay-box">
-            <h2>Reconnecting…</h2>
-            <p className="muted">Lost the connection to the room server — retrying automatically.</p>
-            <button type="button" onClick={game.reconnect} disabled={game.status === 'connecting'}>
-              Retry now
-            </button>
-          </div>
-        </div>
+      {game.linkDown ? (
+        <ConnectionMark game={game} note="Your moves are kept and sent when you're back." />
+      ) : connected || opening ? null : (
+        <ConnectionMark
+          game={game}
+          note={held === 'playing' ? "The game carries on when you're back." : "What you change is sent when you're back."}
+        />
       )}
     </>
+  )
+}
+
+/** The small "Reconnecting…" mark in the corner of whatever screen is up
+ * while the room server's connection is down: the page under it stays as it
+ * was, and usable. */
+function ConnectionMark({ game, note }: { readonly game: NetworkGame; readonly note: string }) {
+  return (
+    <div className="connection-mark" role="status" title={`Lost the connection to the room server; retrying automatically. ${note}`}>
+      <span className="connection-mark-dot" aria-hidden="true" />
+      <span className="connection-mark-text">Reconnecting…</span>
+      <span className="connection-mark-note">{note}</span>
+      <button type="button" className="link-button" onClick={game.reconnect} disabled={game.status === 'connecting'}>
+        Retry now
+      </button>
+    </div>
   )
 }
 

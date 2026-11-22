@@ -6074,10 +6074,58 @@ body.board-dragging {
   box-shadow: var(--bevel-pressed);
 }
 
-/* Reconnecting over the last screen (App.tsx's AppScreen): the board or lobby
-   stays up, dimmed and unclickable, with the box in the middle — above every
-   popover, banner and tour layer. */
-.reconnect-overlay {
+/* Reconnecting (App.tsx's ConnectionMark): a small mark in the bottom-left
+   corner of whatever screen is up, which stays as it was and usable — above
+   every popover, banner and tour layer, and taking clicks only on itself. */
+.connection-mark {
+  position: fixed;
+  left: clamp(8px, 0.8vw, 16px);
+  bottom: clamp(8px, 1.2vh, 16px);
   z-index: 10050;
-  backdrop-filter: grayscale(0.6);
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.5vw, 10px);
+  max-width: min(92vw, 44em);
+  padding: clamp(4px, 0.6vh, 8px) clamp(8px, 0.8vw, 14px);
+  font-size: var(--text-sm);
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 92%, var(--bad));
+  border: 1px solid var(--bad);
+  box-shadow: var(--frame-raised), var(--shadow-popover);
+}
+.connection-mark-dot {
+  flex: none;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--bad);
+  animation: connection-mark-pulse 1.2s ease-in-out infinite;
+}
+.connection-mark-text {
+  font-weight: 600;
+  color: var(--bad);
+}
+/* What happens to what's done meanwhile: on a wide window, and on hover or
+   focus (and in the tooltip) on a narrower one, where the mark stays small
+   enough to cover a corner of the first card in hand and no more. */
+.connection-mark-note {
+  color: var(--muted);
+  display: none;
+}
+.connection-mark:hover .connection-mark-note,
+.connection-mark:focus-within .connection-mark-note {
+  display: inline;
+}
+@media (min-width: 1700px) {
+  .connection-mark-note {
+    display: inline;
+  }
+}
+@keyframes connection-mark-pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+:root[data-reduce-motion] .connection-mark-dot {
+  animation: none;
 }

@@ -42,6 +42,12 @@ export type ToRoomWorker =
   | { readonly kind: 'table-message'; readonly data: string }
   /** The page left the table: the copy goes. */
   | { readonly kind: 'table-leave'; readonly roomId: string }
+  /** The connection to the room server went down under a table held here:
+   * the copies stay and their person plays on (`LocalRoomHost.serverDown`). */
+  | { readonly kind: 'server-down' }
+  /** It is back: the worker asks for each table from the place its copy
+   * holds (`LocalRoomHost.serverUp`). */
+  | { readonly kind: 'server-up' }
   /** A dev build's test hook: this tab's copy of the table is made to hold a
    * game the table doesn't (`LocalRoomHost.corruptTable`), to see the copies
    * notice and this one put right. Ignored by a production worker. */
@@ -148,6 +154,12 @@ export class LocalSocket implements RoomSocket {
     this.post({ kind: 'table-leave', roomId })
   }
 
+  /** The server's connection went down (`false`) or is back (`true`) under
+   * the tables held here. */
+  serverLink(up: boolean): void {
+    this.post({ kind: up ? 'server-up' : 'server-down' })
+  }
+
   /** A dev build's test hook: see `ToRoomWorker`'s `table-corrupt`. */
   tableCorrupt(roomId: string): void {
     this.post({ kind: 'table-corrupt', roomId })
@@ -247,6 +259,10 @@ export interface TableOptions {
  * a game here: the page's own (`useNetworkGame`'s `MAX_RECONNECT_DELAY_MS`). */
 const MAX_REOPEN_DELAY_MS = 8000
 
+/** How long a table has to answer once the server's connection is back
+ * under it before the page is told of the drop after all. */
+const RESUME_WAIT_MS = 8000
+
 /** Where a `HybridSocket` that has given its server connection up sends. */
 const NO_SERVER: RoomSocket = { send: () => {}, close: () => {}, onopen: null, onmessage: null, onclose: null, onerror: null }
 
@@ -301,6 +317,16 @@ export class HybridSocket implements RoomSocket {
   private readonly joining = new Map<string, string>()
   /** The tables this connection is at: the server has sent it their start. */
   private readonly seated = new Set<string>()
+  /** Told when the server's connection goes down (`false`) under a game
+   * held here and when it is back (`true`): the page's small "Reconnecting"
+   * mark, where the game is one other people are in. */
+  onlink: ((up: boolean) => void) | null = null
+  /** Set from the server's connection opening again under a table until the
+   * table answers the worker's asking for it: an `error` first, or nothing
+   * for `RESUME_WAIT_MS`, and the page hears of the drop after all. */
+  private resumeTimer: ReturnType<typeof setTimeout> | null = null
+  /** The tables the worker has asked for again on this connection. */
+  private readonly resumeAsked = new Set<string>()
 
   /**
    * `openServer` opens a connection to the room server; `playingHere` says
@@ -352,6 +378,7 @@ export class HybridSocket implements RoomSocket {
     server.onopen = () => {
       if (!current()) return
       this.serverOpen = true
+      this.resumeAsked.clear()
       this.saidCapable = false
       this.saidSoon = false
       this.lobbySeen = false
@@ -364,9 +391,29 @@ export class HybridSocket implements RoomSocket {
       this.reopenAttempt = 0
       server.send(JSON.stringify({ type: 'event-deltas' }))
       this.sayCapable()
+      // The tables held here are asked for again by the worker, each from
+      // the place its copy holds, with what its person did meanwhile.
+      if (this.tables !== null && tableRooms.size > 0 && this.local !== null && !this.local.dead) {
+        this.local.serverLink(true)
+        this.resumeTimer = setTimeout(() => this.resumeFailed(), RESUME_WAIT_MS)
+      } else {
+        this.onlink?.(true)
+      }
     }
     server.onmessage = (event) => {
       if (!current()) return
+      if (this.resumeTimer !== null && typeof event.data === 'string') {
+        if (event.data.includes('"type":"table-start"')) {
+          clearTimeout(this.resumeTimer)
+          this.resumeTimer = null
+          this.onlink?.(true)
+        } else if (event.data.includes('"type":"error"')) {
+          // The table isn't there any more (the server restarted): the page
+          // finds that out the way it always has, by joining again.
+          this.resumeFailed()
+          return
+        }
+      }
       if (this.tables !== null && typeof event.data === 'string' && this.fromServerForTable(event.data)) return
       this.onmessage?.(event)
     }
@@ -375,8 +422,12 @@ export class HybridSocket implements RoomSocket {
       this.serverOpen = false
       this.seated.clear()
       this.joining.clear()
+      if (this.resumeTimer !== null) clearTimeout(this.resumeTimer)
+      this.resumeTimer = null
       if (this.holdingGame()) {
         this.serverDown = true
+        if (this.tables !== null && tableRooms.size > 0) this.local?.serverLink(false)
+        this.onlink?.(false)
         const delay = Math.min(1000 * 2 ** this.reopenAttempt, MAX_REOPEN_DELAY_MS)
         this.reopenAttempt += 1
         this.reopenTimer = setTimeout(() => {
@@ -391,6 +442,24 @@ export class HybridSocket implements RoomSocket {
       if (current() && !this.holdingGame()) this.onerror?.()
     }
     return server
+  }
+
+  /** The server came back under a table and the table didn't: the page is
+   * told of the drop, and joins again as it would have. */
+  private resumeFailed(): void {
+    if (this.resumeTimer !== null) clearTimeout(this.resumeTimer)
+    this.resumeTimer = null
+    if (!this.closed) this.dropServer()
+  }
+
+  /** Tries the server again now, if it is down under a game here and
+   * waiting to: the "Retry now" beside the page's mark. */
+  retryServer(): void {
+    if (this.closed || this.reopenTimer === null) return
+    clearTimeout(this.reopenTimer)
+    this.reopenTimer = null
+    this.reopenAttempt = 0
+    this.server = this.attachServer(this.openServer(), true)
   }
 
   /** To the worker when it's for a room the worker made, else to the server
@@ -439,6 +508,8 @@ export class HybridSocket implements RoomSocket {
 
   close(): void {
     this.closed = true
+    if (this.resumeTimer !== null) clearTimeout(this.resumeTimer)
+    this.resumeTimer = null
     if (this.reopenTimer !== null) clearTimeout(this.reopenTimer)
     this.reopenTimer = null
     this.server.close()
@@ -586,7 +657,16 @@ export class HybridSocket implements RoomSocket {
     // it down there is nowhere for it to go, and the page, told of the drop,
     // joins the table again when it is back.
     local.onserver = (data) => {
-      if (!this.closed && this.serverOpen) this.server.send(data)
+      if (this.closed || !this.serverOpen) return
+      // A table asked for again from where its copy stands, once a
+      // connection: a second asking (the worker answering an opening that
+      // didn't last) would have the copy send its kept moves twice.
+      if (data.includes('"type":"table-join"') && data.includes('"from":')) {
+        const roomId = roomIdOf(data)
+        if (roomId === null || this.resumeAsked.has(roomId)) return
+        this.resumeAsked.add(roomId)
+      }
+      this.server.send(data)
     }
     local.onopen = () => {
       if (!this.closed) this.sayCapable()

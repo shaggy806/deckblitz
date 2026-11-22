@@ -96,6 +96,11 @@ interface Seated {
  * time, and messages sent from then on wait that long. */
 interface Lag {
   ms: number
+  /** While set, the server can't be reached: a connection the page opens is
+   * closed at once. */
+  down?: boolean
+  /** Closes the page's open connections, as a network going away does. */
+  drop?: () => void
 }
 
 async function open(browser: Browser, url: string, lag?: Lag): Promise<Seated> {
@@ -105,8 +110,26 @@ async function open(browser: Browser, url: string, lag?: Lag): Promise<Seated> {
     // Through the test, so it can be slowed: a routed socket isn't seen by
     // `watchTraffic`, so what it carries is noted here.
     const typeOf = (message: string | Buffer): string | null => /"type":"([a-z-]+)"/.exec(String(message))?.[1] ?? null
+    const live = new Set<() => void>()
+    lag.drop = () => {
+      for (const close of [...live]) close()
+      live.clear()
+    }
     await page.routeWebSocket(/^ws:/, (ws) => {
+      // The dev server's own socket (hot reload) is on the page's port, and
+      // is left alone: a drop of it reloads the page.
+      const rooms = new URL(ws.url()).port !== new URL(page.url()).port
+      if (rooms && lag.down === true) {
+        void ws.close()
+        return
+      }
       const server = ws.connectToServer()
+      if (rooms) {
+        live.add(() => {
+          void ws.close()
+          void server.close()
+        })
+      }
       ws.onMessage((message) => {
         const type = typeOf(message)
         if (type !== null) seated.traffic.sent.push(type)
@@ -115,6 +138,10 @@ async function open(browser: Browser, url: string, lag?: Lag): Promise<Seated> {
       server.onMessage((message) => {
         const type = typeOf(message)
         if (type !== null) seated.traffic.received.push(type)
+        if (type === 'table-start') {
+          const start = JSON.parse(String(message)) as { state?: string; resync?: boolean; log: unknown[] }
+          seated.traffic.starts.push({ state: typeof start.state === 'string', resync: start.resync === true, inputs: start.log.length })
+        }
         setTimeout(() => ws.send(message), lag.ms)
       })
     })
@@ -320,6 +347,101 @@ test('two people and a bot play a table: a copy in each browser, only the order 
     await expect(seated.page.locator('.toast.bad')).toHaveCount(0)
     await seated.page.context().close()
   }
+})
+
+test("a player's connection drops mid-game: a small mark, the board still theirs to play, the move sent when it is back", async ({ browser, request }) => {
+  test.setTimeout(240_000)
+  const link: Lag = { ms: 0 }
+  const { host, guest, room } = await lobby(browser, CAPABLE, CAPABLE, link)
+  await capable(host, guest)
+  await host.page.getByRole('button', { name: 'Start game' }).click()
+  for (const { page } of [host, guest]) {
+    await expect(keepPrompt(page)).toBeVisible(paced)
+    await page.getByRole('button', { name: 'Keep', exact: true }).click()
+  }
+  await expect(keepPrompt(guest.page)).toHaveCount(0, paced)
+
+  // Until the move is the guest's to make: the host passes, the bot plays.
+  const guestPass = guest.page.getByRole('button', { name: 'Pass (space)' })
+  const deadline = Date.now() + 120_000
+  const asked = async (): Promise<boolean> => {
+    if (!(await guestPass.isEnabled().catch(() => false))) return false
+    await guest.page.waitForTimeout(800)
+    return guestPass.isEnabled().catch(() => false)
+  }
+  while (!(await asked())) {
+    if (Date.now() > deadline) throw new Error('the guest was never asked')
+    await getOn(host.page)
+    if (await guest.page.getByText(/Discard to hand size/).isVisible().catch(() => false)) await getOn(guest.page)
+    await host.page.waitForTimeout(250)
+  }
+
+  // The guest's connection goes, and stays gone.
+  link.down = true
+  link.drop?.()
+  const mark = guest.page.locator('.connection-mark')
+  await expect(mark).toBeVisible(paced)
+  await expect(mark).toContainText('Reconnecting')
+  await expect(mark).toHaveAttribute('title', /Your moves are kept/)
+  // Nothing over the board: it is still there, hand and all, and no seat
+  // picker or "lost the connection" box took its place.
+  await expect(guest.page.locator('.overlay')).toHaveCount(0)
+  await seatedAtBoard(guest.page)
+  await guest.page.screenshot({ path: test.info().outputPath('reconnecting-mark.png') })
+  const inputs = (await tableOf(request, room))?.inputs ?? 0
+
+  // Their move is made at once on their own board, the server none the wiser.
+  await expect(guestPass).toBeEnabled()
+  await guestPass.click()
+  await expect(guestPass).toBeDisabled({ timeout: 4000 })
+  await expect(mark).toBeVisible()
+
+  // Back: the mark goes, by itself, and the game is one game again.
+  link.down = false
+  await expect(mark).toHaveCount(0, paced)
+  await expect.poll(async () => (await tableOf(request, room))?.connected, paced).toBe(2)
+  await expect.poll(async () => (await tableOf(request, room))?.inputs ?? 0, paced).toBeGreaterThan(inputs)
+  // The copy was kept, not dealt again: the table was asked for from where
+  // the copy stood, and what came back was only what it had missed.
+  expect(guest.traffic.sent).toContain('table-join')
+  expect(guest.traffic.starts.at(-1)).toMatchObject({ state: false, resync: false })
+  expect(guest.traffic.starts.at(-1)?.inputs).toBeLessThan((await tableOf(request, room))?.inputs ?? 0)
+  await seatedAtBoard(guest.page)
+  const turn = await turnOf(host.page)
+  await playTo(turn + 2, [host.page, guest.page])
+  await agree([host.page, guest.page])
+  expect(guest.errors).toEqual([])
+  expect(host.errors).toEqual([])
+})
+
+test("a connection drops in the waiting room: a small mark, the room still up, and what was changed is sent when it is back", async ({ browser }) => {
+  test.setTimeout(120_000)
+  const link: Lag = { ms: 0 }
+  const host = await open(browser, `/?${CAPABLE}`, link)
+  await host.page.getByRole('button', { name: 'Create a game' }).click()
+  await expect(host.page.getByRole('button', { name: 'Ready', exact: true })).toBeVisible()
+  const seats = host.page.locator('.seat-board-grid .seat-panel')
+  const before = await seats.count()
+
+  link.down = true
+  link.drop?.()
+  const mark = host.page.locator('.connection-mark')
+  await expect(mark).toBeVisible(paced)
+  await expect(mark).toHaveAttribute('title', /What you change is sent/)
+  // The waiting room is still there, with nothing over it.
+  await expect(host.page.getByRole('alertdialog')).toHaveCount(0)
+  await expect(seats).toHaveCount(before)
+  await host.page.screenshot({ path: test.info().outputPath('reconnecting-lobby.png') })
+  // A seat asked for with the connection down.
+  await host.page.locator('.seat-board-grid').getByRole('button', { name: /Add player/ }).first().click()
+  await host.page.waitForTimeout(1500)
+  await expect(seats).toHaveCount(before)
+
+  link.down = false
+  await expect(mark).toHaveCount(0, paced)
+  await expect(seats).toHaveCount(before + 1, paced)
+  await expect(host.page.getByRole('button', { name: 'Ready', exact: true })).toBeVisible()
+  expect(host.errors).toEqual([])
 })
 
 test("a move made as someone concedes is taken back on the mover's page, which says why", async ({ browser, request }) => {

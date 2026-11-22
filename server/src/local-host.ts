@@ -75,6 +75,12 @@ export class LocalRoomHost {
   private readonly copies = new Map<string, TableCopy>();
   /** How many times each table's copy has asked to be dealt again. */
   private readonly redeals = new Map<string, number>();
+  /** The token each copy's seat is held by (`TableSeating.token`), for
+   * asking for its table again when the connection is back. */
+  private readonly tokens = new Map<string, string | null>();
+  /** The tables asked for from the place their copy holds (`serverUp`): the
+   * next `table-start` for one is the answer, the log's tail for that copy. */
+  private readonly resuming = new Set<string>();
   private readonly toServer: (message: ClientMessage) => void;
   private readonly tableRoom: TableCopyOptions["room"];
 
@@ -117,6 +123,24 @@ export class LocalRoomHost {
       this.send({ type: "error", message: `room ${roomId} can't be played here: a game in this tab already has that code` });
       return;
     }
+    const asked = this.resuming.delete(roomId);
+    if (before !== undefined && start.state === undefined && (asked || start.from > 0)) {
+      // The answer to `serverUp`: what the table did while this device's
+      // connection was down. The copy takes it in and carries on, with the
+      // moves its person made meanwhile.
+      if (before.resume(start)) return;
+      // The same asked twice (a connection that came and went and came):
+      // the copy has taken this in already.
+      if (start.from > 0 && start.recipe.gameNumber === before.game && start.from < before.placed) return;
+      // Not a game this copy can carry on from (a rematch was dealt, say):
+      // the table is asked for afresh, and the copy dealt again below.
+      if (start.from !== 0) {
+        const token = this.tokens.get(roomId) ?? null;
+        this.toServer({ type: "table-join", roomId, ...(token !== null ? { clientToken: token } : {}) });
+        return;
+      }
+    }
+    this.tokens.set(roomId, seating.token);
     const startSeq = before?.room.frameSeq ?? 0;
     let copy: TableCopy;
     try {
@@ -186,6 +210,34 @@ export class LocalRoomHost {
     if (roomId !== undefined) this.copies.get(roomId)?.handle(message);
   }
 
+  /**
+   * The connection to the room server went down. Every copy stays, and its
+   * person plays on (`TableCopy.linkDown`).
+   */
+  serverDown(): void {
+    for (const copy of this.copies.values()) copy.linkDown();
+  }
+
+  /**
+   * The connection is back: each table is asked for from the place this
+   * device's copy holds, with its seat's token, and the answer is taken in
+   * by the copy (`table`, `TableCopy.resume`). A copy that had already lost
+   * its place is asked for whole.
+   */
+  serverUp(): void {
+    for (const [roomId, copy] of this.copies) {
+      const token = this.tokens.get(roomId) ?? null;
+      const whole = copy.outOfStep !== null;
+      if (!whole) this.resuming.add(roomId);
+      this.toServer({
+        type: "table-join",
+        roomId,
+        ...(token !== null ? { clientToken: token } : {}),
+        ...(whole ? {} : { from: copy.placed }),
+      });
+    }
+  }
+
   /** Whether this device holds a copy of the table under `roomId`. */
   hasTable(roomId: string): boolean {
     return this.copies.has(roomId);
@@ -198,6 +250,8 @@ export class LocalRoomHost {
     copy.dispose();
     this.copies.delete(roomId);
     this.redeals.delete(roomId);
+    this.tokens.delete(roomId);
+    this.resuming.delete(roomId);
     this.service.manager.remove(roomId);
   }
 

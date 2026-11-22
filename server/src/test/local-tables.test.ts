@@ -453,6 +453,122 @@ describe("a table in a page's worker", () => {
     }
   }, PLAYS);
 
+  it("keeps the copy through a dropped connection, and sends what its person did meanwhile", () => {
+    const t = table(["person", "person"]);
+    const [alice, bob] = t.devices;
+    t.open();
+    const mover = t.playTo();
+    const other = mover === alice ? bob : alice;
+    const room = t.roomOf(mover);
+    const logBefore = other.starts.length;
+    const framesBefore = t.frames(mover).length;
+
+    // The mover's connection drops (the server hasn't noticed yet): they
+    // go on answering what the game asks of them, on their own copy.
+    mover.host.serverDown();
+    let made = 0;
+    const asked = (): boolean => {
+      const state = room.game.state;
+      const player = state.awaiting !== null ? state.awaiting.player : state.priority.holder;
+      return !state.result.over && player !== null && answeringPlayer(state, player) === mover.player;
+    };
+    while (made < 3 && asked()) {
+      t.move(mover);
+      made += 1;
+    }
+    expect(made).toBeGreaterThan(0);
+    // Seen at once, with nothing from the server.
+    expect(t.frames(mover).length).toBeGreaterThan(framesBefore);
+    // What was sent went nowhere.
+    expect(mover.up.filter((m) => m.type === "table-input").length).toBe(made);
+    mover.up.length = 0;
+    const behind = stateDigest(t.roomOf(other).game.state, { events: true });
+    expect(stateDigest(room.game.state, { events: true })).not.toBe(behind);
+
+    // Back: the table is asked for from where the copy stands, by its token.
+    mover.host.serverUp();
+    expect(mover.up).toMatchObject([{ type: "table-join", roomId: ROOM, clientToken: mover.token }]);
+    expect((mover.up[0] as { from?: number }).from).toBeGreaterThanOrEqual(0);
+    t.rest();
+
+    // The same copy, never dealt again, its moves now everyone's.
+    expect(t.roomOf(mover)).toBe(room);
+    expect(mover.starts.at(-1)?.state).toBeUndefined();
+    expect(errors(mover)).toEqual([]);
+    expect(mover.got.filter((m) => m.type === "notice")).toEqual([]);
+    expect(other.starts.length).toBe(logBefore);
+    expect(new Set(t.digests()).size).toBe(1);
+    // And the game goes on.
+    const next = t.waitingOn();
+    if (next !== null) {
+      t.move(next);
+      t.rest();
+      expect(new Set(t.digests()).size).toBe(1);
+    }
+  }, PLAYS);
+
+  it("takes back what was done with the connection down when the table moved on without it", () => {
+    const t = table(["person", "person", "person"]);
+    const [alice, bob, carol] = t.devices;
+    t.open();
+    const mover = t.playTo((waiting) => waiting !== alice);
+    const leaver = mover === bob ? carol : bob;
+    const room = t.roomOf(mover);
+
+    mover.host.serverDown();
+    t.move(mover);
+    mover.up.length = 0;
+    // Meanwhile someone concedes: it lands where the mover's move was made.
+    leaver.host.message({ type: "concede", roomId: ROOM });
+    // The mover's device hears none of it.
+    for (let i = 0; i < 1000; i += 1) {
+      let moved = false;
+      for (const d of t.devices) moved = t.toServer(d) || moved;
+      for (const d of t.devices) if (d !== mover) moved = t.toDevice(d) || moved;
+      if (!moved) break;
+    }
+    mover.down.length = 0;
+
+    mover.host.serverUp();
+    t.rest();
+
+    expect(t.roomOf(mover)).toBe(room);
+    expect(errors(mover)).toEqual([]);
+    expect(mover.got.filter((m) => m.type === "notice")).toEqual([
+      { type: "notice", roomId: ROOM, message: expect.stringContaining("while this device was disconnected") },
+    ]);
+    expect(new Set(t.digests()).size).toBe(1);
+    // The mover plays on, on the game as it stands.
+    for (let i = 0; i < 6; i += 1) {
+      const next = t.waitingOn();
+      if (next === null) break;
+      t.move(next);
+      t.rest();
+    }
+    expect(new Set(t.digests()).size).toBe(1);
+    for (const d of t.devices) expect(errors(d)).toEqual([]);
+  }, PLAYS);
+
+  it("deals the copy afresh when the game under the code is another by the time it is back", () => {
+    const t = table(["person", "person"]);
+    const [alice, bob] = t.devices;
+    t.open();
+    t.playTo();
+    const room = t.roomOf(bob);
+    bob.host.serverDown();
+    // A rematch is dealt while Bob's device is away; it hears nothing of it.
+    t.tables.message(alice.conn, { type: "table-rematch", roomId: ROOM });
+    t.toDevice(alice);
+    bob.down.length = 0;
+
+    bob.host.serverUp();
+    t.rest();
+    expect(t.roomOf(bob)).not.toBe(room);
+    expect(errors(bob)).toEqual([]);
+    expect(t.frames(bob).at(-1)).toMatchObject({ game: 2, seat: bob.player });
+    expect(new Set(t.digests()).size).toBe(1);
+  }, PLAYS);
+
   it("lets go of the copy when the page leaves", () => {
     const t = table(["person", "person"]);
     const [alice] = t.devices;

@@ -84,7 +84,7 @@ describe('HybridSocket at a table', () => {
 
   /** A hybrid socket as the page holds one, its server open; `token` is the
    * seat token the page has for the room, `tables` whether it plays them. */
-  async function open(options: { readonly token?: string | null; readonly tables?: boolean } = {}) {
+  async function open(options: { readonly token?: string | null; readonly tables?: boolean; readonly atTable?: boolean } = {}) {
     const { HybridSocket } = await import('./localSocket.ts')
     const ws = new HybridSocket(
       () => {
@@ -92,7 +92,7 @@ describe('HybridSocket at a table', () => {
         servers.push(server)
         return server
       },
-      () => false,
+      () => options.atTable === true,
       false,
       options.tables === false ? null : { seatToken: () => options.token ?? null },
     )
@@ -244,6 +244,66 @@ describe('HybridSocket at a table', () => {
     expect(servers[1].last('table-join')).toEqual({ type: 'table-join', roomId: ROOM, clientToken: 'my-token' })
     servers[1].say(start)
     expect(worker().of('table').at(-1)).toEqual({ kind: 'table', data: JSON.stringify(start), token: 'my-token', join })
+  })
+
+  it('keeps a table through a dropped connection: the page hears nothing, the worker is told, and asks again when it is back', async () => {
+    vi.useFakeTimers()
+    try {
+      const ws = await open({ token: 'my-token', atTable: true })
+      const closes: number[] = []
+      const links: boolean[] = []
+      ws.onclose = () => closes.push(1)
+      ws.onlink = (up) => links.push(up)
+      servers[0].say(start)
+      servers[0].onclose?.()
+      // No dropped socket for the page: its board stays live.
+      expect(closes).toEqual([])
+      expect(links).toEqual([false])
+      expect(worker().of('server-down')).toHaveLength(1)
+      // What the copy makes meanwhile has nowhere to go.
+      worker().say({ kind: 'server', data: JSON.stringify({ type: 'table-input', roomId: ROOM }) })
+      expect(servers).toHaveLength(1)
+
+      // Opened again behind the page's back, with its usual backoff.
+      vi.advanceTimersByTime(1000)
+      expect(servers).toHaveLength(2)
+      servers[1].onopen?.()
+      expect(servers[1].types).toEqual(['event-deltas'])
+      expect(worker().of('server-up')).toHaveLength(1)
+      // The worker asks for the table from where its copy stands.
+      const again = JSON.stringify({ type: 'table-join', roomId: ROOM, clientToken: 'my-token', from: 7 })
+      worker().say({ kind: 'server', data: again })
+      expect(servers[1].sent.at(-1)).toBe(again)
+      expect(links).toEqual([false])
+      const tail = { ...start, from: 7 }
+      servers[1].say(tail)
+      expect(links).toEqual([false, true])
+      expect(worker().of('table').at(-1)).toEqual({ kind: 'table', data: JSON.stringify(tail), token: 'my-token', join: null })
+      expect(closes).toEqual([])
+      expect(shown).toEqual([])
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('tells the page of the drop after all when the table is gone by the time the server is back', async () => {
+    vi.useFakeTimers()
+    try {
+      const ws = await open({ token: 'my-token', atTable: true })
+      const closes: number[] = []
+      ws.onclose = () => closes.push(1)
+      servers[0].say(start)
+      servers[0].onclose?.()
+      vi.advanceTimersByTime(1000)
+      servers[1].onopen?.()
+      // The server restarted: it knows no such table.
+      servers[1].say({ type: 'error', message: 'no room TABLE' })
+      expect(closes).toEqual([1])
+      expect(servers[1].closed).toBe(true)
+      expect(shown).toEqual([])
+    } finally {
+      vi.useRealTimers()
+    }
   })
 
   it("shows a page that doesn't play tables the server's refusal, and one it didn't ask for", async () => {

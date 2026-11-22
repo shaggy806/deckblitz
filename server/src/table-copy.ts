@@ -54,6 +54,17 @@
  * replaying everything. It is how a device joins late, comes back, or is put
  * right, and it costs a few milliseconds however long the game has run.
  *
+ * **The connection down.** A device whose connection to the server drops
+ * keeps its copy (`linkDown`): the person goes on making the moves the game
+ * asks of them, applied here as ever and kept as inputs with no place yet,
+ * however many; the bots and absent people are no longer this copy's to
+ * answer for, since another device takes them. Back on a connection, it
+ * asks for the table's inputs from the place it holds and takes them in
+ * (`resume`): its own that did reach the server are confirmed, anything else
+ * that landed takes back what it made on top (the undo, as above), and what
+ * is still its own to send goes again on the new connection. No refusal is
+ * owed across the gap: the old connection's are gone with it.
+ *
  * **What the page sees.** An undo is one frame, where it ends (`quiet`), and
  * when it took back a move the person made and didn't make it again, they
  * are told why (`notice`). The copy also answers, for its room, whether
@@ -226,6 +237,11 @@ export class TableCopy {
   /** Putting back its own confirmed inputs in an undo: no place is passed
    * that it didn't pass before. */
   private replaying = false;
+  /** The connection to the server is down (`linkDown`): its person's moves
+   * are made and kept, nothing is made for anyone else. */
+  private offline = false;
+  /** Taking in what the table did while the connection was down (`resume`). */
+  private resuming = false;
   private readonly options: TableCopyOptions;
 
   constructor(start: TableStart, options: TableCopyOptions) {
@@ -256,12 +272,16 @@ export class TableCopy {
       copy: {
         answersFor: (player) =>
           !this.catchingUp &&
+          !this.resuming &&
           this.outOfStep === null &&
           this.seat !== null &&
           this.count >= this.behind &&
           // Nothing while an input of its own made out of turn is on its way.
           !this.pending.some((p) => !p.applied) &&
-          (player === this.seat || (this.host === this.seat && (this.botSeats.has(player) || this.away(player)))),
+          // With the connection down, only its own person: another device
+          // has the bots and the absent by now, or will.
+          (player === this.seat ||
+            (!this.offline && this.host === this.seat && (this.botSeats.has(player) || this.away(player)))),
         sent: (input, how) => this.sent(input, how),
         making: () => this.making(),
         landed: () => this.landed(),
@@ -272,7 +292,7 @@ export class TableCopy {
         },
         // One frame for an undo, where it ends: not the game put back and
         // then each input again.
-        quiet: () => this.catchingUp,
+        quiet: () => this.catchingUp || this.resuming,
         isHost: () => this.isHost,
         online: (player) => this.online === null || this.online.has(player),
       },
@@ -317,6 +337,78 @@ export class TableCopy {
   /** Whether this device runs the table's bots. */
   get isHost(): boolean {
     return this.seat !== null && this.host === this.seat;
+  }
+
+  /** How many of the table's inputs this copy holds with their places: where
+   * it asks for the log from when its connection is back (`resume`). */
+  get placed(): number {
+    return this.count;
+  }
+
+  /** The game this copy is of: a rematch deals another. */
+  get game(): number {
+    return this.gameNumber;
+  }
+
+  /**
+   * The connection to the server went down. The copy stays: the person's own
+   * moves are still made here and kept (`pending`), to be sent when it is
+   * back; the bots' and absent people's are left alone.
+   */
+  linkDown(): void {
+    if (this.offline) return;
+    this.offline = true;
+    this.room.answersChanged();
+  }
+
+  /**
+   * The connection is back, and the server has sent the table's inputs from
+   * the place this copy holds (`table-join` with `from`, answered by a
+   * `table-start` with no state). Returns `false`, having done nothing, if
+   * that isn't what `start` is, or this copy can't carry on from it: another
+   * game under the code (a rematch), a seat that isn't its own, a copy out
+   * of step. The caller then asks for the table afresh.
+   */
+  resume(start: TableStart): boolean {
+    if (
+      this.outOfStep !== null ||
+      this.catchingUp ||
+      start.state !== undefined ||
+      start.recipe.gameNumber !== this.gameNumber ||
+      start.seat !== this.seat ||
+      start.from !== this.count
+    ) {
+      return false;
+    }
+    this.offline = false;
+    // Whatever the old connection was owed went with it.
+    this.refusalsDue = 0;
+    this.behind = 0;
+    this.host = start.host;
+    this.online = start.online === undefined ? null : new Set(start.online);
+    this.resuming = true;
+    try {
+      for (const entry of start.log) {
+        this.ordered(entry.index, entry.from, entry.input);
+        if (this.outOfStep !== null) return true;
+      }
+    } finally {
+      this.resuming = false;
+    }
+    // What is still this copy's own goes again, in the order made, each
+    // saying where it takes the log to end as it did the first time.
+    const { roomId, gameNumber: game, id: copy } = this;
+    this.pending.forEach((own, mine) => {
+      this.options.send(
+        own.applied
+          ? { type: "table-input", roomId, game, copy, after: this.count + mine, mine, input: own.input }
+          : { type: "table-input", roomId, game, copy, after: null, input: own.input },
+      );
+    });
+    this.room.answersChanged();
+    // Who hosts and who is connected, whether or not a move was waiting.
+    this.room.publish();
+    return true;
   }
 
   /** A message from the server about this table. Anything else is ignored. */
@@ -493,8 +585,9 @@ export class TableCopy {
     const kept = this.pending.filter((p) => !p.applied);
     this.pending.length = 0;
     this.pending.push(...kept);
-    // The server refuses each of them, one message apiece.
-    this.refusalsDue += lost.length;
+    // The server refuses each of them, one message apiece — unless they
+    // were made with the connection down: nothing was sent on this one.
+    if (!this.resuming) this.refusalsDue += lost.length;
     this.undone += 1;
     this.catchingUp = true;
     costed("undo", () => {
@@ -524,13 +617,18 @@ export class TableCopy {
     const mine = lost.find((p) => p.by === "person" && p.input.kind === "action");
     let remade = false;
     this.catchingUp = false;
-    if (first !== null && first.kind === "orders-own-triggers" && mine !== undefined && mine === lost[0]) {
+    // Taking in what the table did while the connection was down: more of
+    // it may follow, so nothing is made again here, and the room settles
+    // once it is all in (`resume`).
+    if (!this.resuming && first !== null && first.kind === "orders-own-triggers" && mine !== undefined && mine === lost[0]) {
       if (mine.input.kind === "action") remade = this.room.remake(mine.input.action);
     }
-    this.room.answersChanged();
+    if (!this.resuming) this.room.answersChanged();
     if (mine !== undefined && !remade) {
       this.options.notice?.(
-        first !== null && first.kind === "concede"
+        this.resuming
+          ? "The game moved on while this device was disconnected, so what you did meanwhile was taken back. The game is as it now stands."
+          : first !== null && first.kind === "concede"
           ? `${first.player} conceded just as you moved, so your move was taken back. The game is as it now stands.`
           : first !== null && first.kind === "take-back"
             ? "The game was taken back to the start of a turn just as you moved."

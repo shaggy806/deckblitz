@@ -45,7 +45,7 @@ import type { GameKey } from './rematch.ts'
 import { localMode } from '../local/localMode.ts'
 import { localStart } from '../lobby/localStart.ts'
 import { createDeckFromImport, listDecks } from '../deck-builder/decks.ts'
-import { HybridSocket, isLocalRoom } from '../local/localSocket.ts'
+import { HybridSocket, isLocalRoom, isTableRoom } from '../local/localSocket.ts'
 import { tablesMode } from '../local/tablesMode.ts'
 import type { RoomSocket } from '../local/localSocket.ts'
 
@@ -84,6 +84,24 @@ export interface BlitzReport {
 /** A stable empty list, so "no frame yet" doesn't look like a changed
  * `actions` prop on every re-render. */
 const EMPTY_ACTIONS: readonly LegalAction[] = []
+
+/** The most the page keeps of what it sent with its connection down. */
+const HELD_MAX = 40
+
+/** What is never kept for a connection that is down: a game's moves and
+ * acks (the frame they answered won't be the one that comes back), and the
+ * joining and leaving the page does again, or has already done, by itself. */
+const NOT_HELD: ReadonlySet<string> = new Set([
+  'dispatch',
+  'ack',
+  'resync',
+  'event-deltas',
+  'join-room',
+  'spectate-room',
+  'leave-room',
+  'claim-seat',
+  'take-seat',
+])
 
 interface StoredSeat {
   readonly seat: PlayerId
@@ -237,6 +255,14 @@ export interface NetworkGame {
    * something. The retry loop is identical either way; only the wording
    * differs (see `App`'s `disconnected` branch). */
   readonly everConnected: boolean
+  /**
+   * Set while the room server's connection is down under a game with other
+   * people in it that this tab holds its own copy of (a table): the status
+   * stays `playing` and the board stays live. The moves this seat makes are
+   * made on the copy and kept, and go to the server when it is back
+   * (`TableCopy.linkDown`, `resume`); everyone else's wait until then.
+   */
+  readonly linkDown: boolean
   readonly error: string | null
   /** Bumped by every error that arrives, including a repeat of the one
    * already showing. `error` alone can't tell a second identical refusal
@@ -532,6 +558,22 @@ export function useNetworkGame(): NetworkGame {
 
   const [status, setStatus] = useState<ConnectionStatus>('connecting')
   const [everConnected, setEverConnected] = useState(false)
+  const [linkDown, setLinkDown] = useState(false)
+  /** Whether the page's socket is open: what it sends otherwise is kept
+   * (`heldRef`), since a closed socket drops it and a connecting one throws. */
+  const socketOpenRef = useRef(false)
+  /** What the page sent while a connection it once had was down: a waiting
+   * room's changes, the landing page's clicks. Sent when it is back and the
+   * page is where it was (`HELD_MAX` at most); a game's own moves aren't
+   * kept here, the frame they answered being gone by then. */
+  const heldRef = useRef<string[]>([])
+  /** The status the page had when its connection last dropped: where it has
+   * to be again before what it kept is sent. */
+  const droppedFromRef = useRef<ConnectionStatus | null>(null)
+  const statusRef = useRef<ConnectionStatus>('connecting')
+  useEffect(() => {
+    statusRef.current = status
+  }, [status])
   const [error, setError] = useState<string | null>(null)
   const [errorSeq, setErrorSeq] = useState(0)
   const [notice, setNotice] = useState<{ readonly message: string; readonly seq: number } | null>(null)
@@ -614,7 +656,8 @@ export function useNetworkGame(): NetworkGame {
   const send = useCallback((message: ClientMessage) => {
     const data = JSON.stringify(message)
     if (preOpenRef.current !== null) preOpenRef.current.push({ data, solo: false })
-    else wsRef.current?.send(data)
+    else if (socketOpenRef.current) wsRef.current?.send(data)
+    else if (!NOT_HELD.has(message.type) && heldRef.current.length < HELD_MAX) heldRef.current.push(data)
   }, [])
   /** A room only this tab will play in — a blitz, a lesson — created in the
    * tab's own room worker in local mode, on the server otherwise. */
@@ -640,7 +683,9 @@ export function useNetworkGame(): NetworkGame {
     const ws: RoomSocket = localMode()
       ? new HybridSocket(
           () => new WebSocket(SERVER_URL) as RoomSocket,
-          () => isLocalRoom(roomIdRef.current),
+          // A table's copy is a game played here too: the server's
+          // connection dropping under it isn't the page's to act on.
+          () => isLocalRoom(roomIdRef.current) || isTableRoom(roomIdRef.current),
           // A reload into a game played here needn't wait for the server.
           isLocalRoom(new URL(window.location.href).searchParams.get('room')),
           // A game with other people in it, played on each player's own
@@ -654,8 +699,15 @@ export function useNetworkGame(): NetworkGame {
         )
       : (new WebSocket(SERVER_URL) as RoomSocket)
     wsRef.current = ws
+    socketOpenRef.current = false
     isPlayingRef.current = false
     const isCurrent = () => wsRef.current === ws
+    if (ws instanceof HybridSocket) {
+      ws.onlink = (up) => {
+        // A solo game needs nothing of the server: its drop is nobody's news.
+        if (isCurrent()) setLinkDown(!up && isTableRoom(roomIdRef.current))
+      }
+    }
 
     const joinRoomId = (id: string) => {
       joiningRef.current = true
@@ -667,6 +719,7 @@ export function useNetworkGame(): NetworkGame {
       if (!isCurrent()) return
       const preOpen = preOpenRef.current ?? []
       preOpenRef.current = null
+      socketOpenRef.current = true
       // A new connection is sent the whole log on its first frame; until
       // then there's nothing to add to. And from here on, frames need carry
       // only the events this socket hasn't had.
@@ -689,6 +742,8 @@ export function useNetworkGame(): NetworkGame {
           if (solo && ws instanceof HybridSocket) ws.sendLocal(data)
           else ws.send(data)
         }
+        // What the landing page was asked while the connection was down.
+        for (const data of heldRef.current.splice(0)) ws.send(data)
         // "Play again", or Learn Commander from a lobby: a room of its own.
         if (lesson !== null) startTutorialRef.current(lesson)
         // The way on from Learn Commander.
@@ -1030,6 +1085,12 @@ export function useNetworkGame(): NetworkGame {
 
     ws.onclose = () => {
       if (!isCurrent() || unmountedRef.current) return
+      socketOpenRef.current = false
+      setLinkDown(false)
+      if (statusRef.current !== 'connecting' && statusRef.current !== 'disconnected') droppedFromRef.current = statusRef.current
+      // On the landing page, which stays up and usable: what is clicked
+      // there waits for the next connection, as on a first visit.
+      if (roomIdRef.current === null && preOpenRef.current === null) preOpenRef.current = []
       isPlayingRef.current = false
       pendingBlitzRef.current = null
       setBlitzing(false)
@@ -1573,7 +1634,31 @@ export function useNetworkGame(): NetworkGame {
 
   const clearError = useCallback(() => setError(null), [])
   const clearNotice = useCallback(() => setNotice(null), [])
+  // Back in the waiting room it was in, as it was (seated, or still picking
+  // a seat): what it was asked meanwhile is sent now. A page seated before
+  // the drop passes through the seat picker on its way back, and waits. In a
+  // game, or out of the room, those clicks were made on something that isn't
+  // there any more, and they go.
+  useEffect(() => {
+    if (heldRef.current.length === 0 || !socketOpenRef.current) return
+    if (status === 'connecting' || status === 'disconnected') return
+    const lobby = status === 'waiting-for-players' || status === 'choosing-seat'
+    if (lobby && status !== droppedFromRef.current) return
+    const held = heldRef.current.splice(0)
+    if (!lobby) return
+    for (const data of held) {
+      const id = (JSON.parse(data) as { roomId?: unknown }).roomId
+      if (id === undefined || id === roomIdRef.current) wsRef.current?.send(data)
+    }
+  }, [status, seat])
+
   const reconnect = useCallback(() => {
+    // Down under a table: only the server's side is opened again.
+    const ws = wsRef.current
+    if (socketOpenRef.current && ws instanceof HybridSocket) {
+      ws.retryServer()
+      return
+    }
     if (reconnectTimeoutRef.current !== null) {
       window.clearTimeout(reconnectTimeoutRef.current)
       reconnectTimeoutRef.current = null
@@ -1600,6 +1685,7 @@ export function useNetworkGame(): NetworkGame {
   return {
     status,
     everConnected,
+    linkDown,
     error,
     errorSeq,
     roomId,
