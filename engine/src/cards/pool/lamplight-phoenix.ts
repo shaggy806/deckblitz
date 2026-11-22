@@ -27,7 +27,9 @@ export default defineCard({
       targets: [],
       // One action, both or neither: offered only while the card is still in
       // the graveyard and the rest of it holds 4 (`exiling`); the card, now
-      // in exile, is the `then`'s target 0.
+      // in exile, is the `then`'s target 0. The trigger's controller returns
+      // it, under their control (rule 110.2a) — a stolen Phoenix's thief,
+      // whose own graveyard holds the evidence.
       effect: {
         kind: "may",
         prompt: "Exile Lamplight Phoenix and collect evidence 4 to return it to the battlefield tapped?",
@@ -35,7 +37,7 @@ export default defineCard({
           kind: "collect-evidence",
           amount: 4,
           exiling: "trigger-object",
-          then: { kind: "put-onto-battlefield", target: 0, enterTapped: true },
+          then: { kind: "put-onto-battlefield", target: 0, enterTapped: true, underYourControl: true },
         },
       },
       resolve: null,

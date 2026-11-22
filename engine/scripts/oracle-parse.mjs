@@ -10310,7 +10310,8 @@ function exileItAndCollectEvidenceAt(sentences, i, ctx) {
       kind: "collect-evidence",
       amount: Number(m[1]),
       exiling: "trigger-object",
-      then: { kind: "put-onto-battlefield", target: 0, ...(back[1] !== undefined ? { enterTapped: true } : {}) },
+      // Under the instructed player's control (rule 110.2a).
+      then: { kind: "put-onto-battlefield", target: 0, ...(back[1] !== undefined ? { enterTapped: true } : {}), underYourControl: true },
     },
   };
 }

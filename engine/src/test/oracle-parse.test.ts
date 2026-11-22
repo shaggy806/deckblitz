@@ -423,7 +423,7 @@ describe("collect evidence X and its reflexive ability (Incinerator of the Guilt
         kind: "collect-evidence",
         amount: 4,
         exiling: "trigger-object",
-        then: { kind: "put-onto-battlefield", target: 0, enterTapped: true },
+        then: { kind: "put-onto-battlefield", target: 0, enterTapped: true, underYourControl: true },
       },
     });
   });

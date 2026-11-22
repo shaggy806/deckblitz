@@ -2720,7 +2720,9 @@ evidence 0 with nothing exiled still counts (that card's ruling). `exiling: "tri
 tapped" (Lamplight Phoenix's dies trigger, under a `may`): one action, offered only while that card is
 still in the graveyard and the rest of it holds N (`mayBeDone`); the card is exiled first, never
 evidence (the ruling), the collecting can't then be declined, and `then` has the exiled card as its
-target 0 (`put-onto-battlefield { target: 0, enterTapped: true }`). As an activated ability's cost it's
+target 0 (`put-onto-battlefield { target: 0, enterTapped: true, underYourControl: true }` — the
+instructed player's, rule 110.2a). The card is found in its owner's graveyard, the evidence always in
+the effect's controller's: a stolen Phoenix's thief collects from their own. As an activated ability's cost it's
 `cost.collectEvidence: N` — Forensic Researcher (the record `{ totalManaValue: N, filter }` is the
 same payment over the matching cards only, and no collecting of evidence: The Capitoline Triad's
 "Exile any number of historic cards from your graveyard with total mana value 30 or greater";

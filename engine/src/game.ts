@@ -59024,13 +59024,16 @@ controlledBy,
     return total >= amount;
   }
 
-  /** Whether `player` could exile `card` from their own graveyard and collect
-   * evidence `amount` from the rest of it (the `collect-evidence` effect's
-   * `exiling` — Lamplight Phoenix; rule 701.59b). */
+  /** Whether `player` could exile `card` from its owner's graveyard and
+   * collect evidence `amount` from their own graveyard, less that card when
+   * it's there (the `collect-evidence` effect's `exiling` — Lamplight
+   * Phoenix; rule 701.59a: evidence is always the collector's own graveyard,
+   * a stolen Phoenix's owner's isn't; 701.59b). */
   private canExileAndCollectEvidence(player: PlayerId, card: ObjectId, amount: number): boolean {
     if (this.state.players[player]?.hasLost !== false) return false;
+    const owner = this.state.objects[card]?.owner;
+    if (owner === undefined || !(this.state.zones.perPlayer[owner]?.graveyard ?? []).includes(card)) return false;
     const graveyard = this.state.zones.perPlayer[player]?.graveyard ?? [];
-    if (!graveyard.includes(card)) return false;
     let total = 0;
     for (const id of graveyard) if (id !== card) total += this.evidenceWorth(id, undefined);
     return total >= amount;

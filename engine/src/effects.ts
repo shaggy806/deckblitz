@@ -4519,7 +4519,10 @@ export type EffectSpec =
        * only when both can be done (`mayBeDone`; 701.59b), and once chosen the
        * collecting can't be declined; neither happens when either can't.
        * `then` has that card, now in exile, as its target 0 and the evidence
-       * after it. Read only for the effect's controller's own graveyard. */
+       * after it. The card is read in its owner's graveyard, the evidence
+       * always in the effect's controller's (a stolen Phoenix's controller
+       * collects from their own), and "return this card to the battlefield"
+       * is `underYourControl` (rule 110.2a: the instructed player's). */
       readonly exiling?: ObjectRef;
     }
   | {
@@ -15576,9 +15579,9 @@ export interface EffectApi {
    * is exiled first, apart from the evidence, and is the `then`'s target 0
    * (the effect's `exiling`); nothing at all unless both can be done. */
   collectEvidence(amount: number, then: EffectSpec | undefined, required?: boolean, exiling?: ObjectId): void;
-  /** Whether the controller could exile `card` from their graveyard and
-   * collect evidence `amount` from the rest of it (the `collect-evidence`
-   * effect's `exiling`). */
+  /** Whether the controller could exile `card` from its owner's graveyard
+   * and collect evidence `amount` from their own graveyard, less that card
+   * (the `collect-evidence` effect's `exiling`). */
   canExileAndCollectEvidence(card: ObjectId, amount: number): boolean;
   /** The source, a Case, becomes solved — see the `solve` effect. */
   solveSource(): void;
