@@ -37,3 +37,17 @@ export const SCRYFALL_URL = 'https://scryfall.com'
  * Commander decks on EDHREC play each card (Scryfall's card data carries
  * the rank). Named wherever the order is, and on the About page. */
 export const EDHREC_URL = 'https://edhrec.com'
+
+/** Where feedback goes: the landing page's button and the About page open
+ * the visitor's mail program on it. */
+export const FEEDBACK_EMAIL = 'toby@deckblitz.net'
+export const FEEDBACK_SUBJECT = `${SITE_TITLE} feedback`
+
+/** How the site was made, said up front so nobody has to ask. Words only,
+ * no Anthropic logo: its trademark guidelines want approval before a logo
+ * is used, and the note says there's no affiliation. */
+export const BUILT_WITH = 'Built with Claude Code'
+export const CLAUDE_CODE_URL = 'https://claude.com/product/claude-code'
+export const BUILT_WITH_NOTE = `Yes, ${SITE_TITLE} was made with AI: its code was written with Claude Code, Anthropic's AI coding tool, directed and tested by one person. The card art is the real cards' art, none of it AI-generated. ${SITE_TITLE} isn't affiliated with or endorsed by Anthropic.`
+/** The feedback address as a link that opens the visitor's mail program. */
+export const FEEDBACK_HREF = `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(FEEDBACK_SUBJECT)}`

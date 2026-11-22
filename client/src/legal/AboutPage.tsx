@@ -1,7 +1,12 @@
 import { STRONG_DECKS } from 'engine/client'
 import {
   ART_RIGHTS,
+  BUILT_WITH,
+  BUILT_WITH_NOTE,
+  CLAUDE_CODE_URL,
   EDHREC_URL,
+  FEEDBACK_EMAIL,
+  FEEDBACK_HREF,
   FAN_CONTENT_POLICY_URL,
   NOTICE_LEAD,
   NOTICE_REST,
@@ -98,6 +103,24 @@ export function AboutPage() {
         <h2>Free to play</h2>
         <p>
           {SITE_TITLE} is free: no payments, subscriptions, ads or sign-up, and nothing on it is for sale.
+        </p>
+      </section>
+
+      <section>
+        <h2>{BUILT_WITH}</h2>
+        <p>
+          {BUILT_WITH_NOTE}{' '}
+          <a href={CLAUDE_CODE_URL} target="_blank" rel="noreferrer">
+            About Claude Code
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Feedback</h2>
+        <p>
+          Found a bug, a card that plays wrong, or something you&apos;d like to see? Write to{' '}
+          <a href={FEEDBACK_HREF}>{FEEDBACK_EMAIL}</a>.
         </p>
       </section>
     </main>

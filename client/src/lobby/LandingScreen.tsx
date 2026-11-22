@@ -4,6 +4,7 @@ import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { PINNED_ART } from 'engine/client'
 import { cssUrl, resolveArtUrl } from '../ui/art.ts'
 import { ArtCredit } from '../ui/ArtCredit.tsx'
+import { SiteLinks } from '../legal/SiteLinks.tsx'
 import { SiteNotice } from '../legal/SiteNotice.tsx'
 import { SITE_DESCRIPTOR, SITE_TITLE } from '../legal/notice.ts'
 import { CornerToolbar } from '../ui/CornerToolbar.tsx'
@@ -306,6 +307,9 @@ export function LandingScreen({
           </button>
         ) : null}
       </nav>
+
+      {/* Feedback by mail, and how the site was built. */}
+      <SiteLinks />
 
       {/* The Fan Content Policy notice under everything, and the hero art's
           credit (an art crop, which Scryfall asks to be credited where it's
