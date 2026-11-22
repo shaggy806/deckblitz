@@ -67,6 +67,19 @@
   border: 1px solid var(--border-soft);
   box-shadow: var(--frame-raised), var(--shadow-popover);
 }
+.site-link-note p {
+  margin: 0;
+}
+.site-link-note .site-link-note-title {
+  margin: 0 22px 4px 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+/* Up by itself on a first visit: the accent border the tutorials' callout
+   beside it has. */
+.site-link-note.first-visit {
+  border-color: var(--accent);
+}
 
 .about-page {
   max-width: min(92vw, 44rem);
