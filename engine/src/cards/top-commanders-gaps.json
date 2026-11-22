@@ -3195,7 +3195,12 @@
   "static:prohibit-color-of-last-spell-cast",
   "filter:color-count-amount",
   "filter:transformed",
-  "filter:has-disturb"
+  "filter:has-disturb",
+  "filter:has-disturb",
+  "filter:didnt-attack-in-trigger-declaration",
+  "static:protection-from-own-colors",
+  "effect:change-target-to-enchanted",
+  "effect:change-targets-trigger-spell"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

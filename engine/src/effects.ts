@@ -9251,8 +9251,12 @@ export type EffectSpec =
       /** With `"random"`: the copies of the spell this resolution made too. */
       readonly withCopies?: true;
       /** "…to this creature": the one new target there is is this effect's
-       * own permanent (Spellskite, Hydroelectric Specimen). */
-      readonly to?: "source";
+       * own permanent (Spellskite, Hydroelectric Specimen). `"attached"`:
+       * "change the target to **enchanted creature** if able" (Captured by
+       * the Consulate) — the permanent this effect's source is attached to,
+       * as it is now or, if the source has left, as it last was; the target
+       * stays as it was if that one can't be a legal new target. */
+      readonly to?: "source" | "attached";
       /** "You may change…" (Hydroelectric Specimen): keeping it is a choice. */
       readonly optional?: true;
       /** "Then **the spell's controller** may choose new targets for it"
@@ -15496,7 +15500,8 @@ export interface EffectApi {
   changeTargets(
     target: TargetRef,
     how: "change" | "change-one" | "choose-new" | "random",
-    toSource: boolean,
+    /** The `change-targets` {@link EffectSpec}'s `to`: the only new target. */
+    to: "source" | "attached" | undefined,
     optional: boolean,
     byItsController?: boolean,
     random?: { readonly exceptYou: boolean; readonly withCopies: boolean },
@@ -24404,7 +24409,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           }
           const [next, ...rest] = left;
           left = rest;
-          ctx.changeTargets({ kind: "object", object: next }, spec.how, false, spec.optional === true, spec.by === "its-controller");
+          ctx.changeTargets({ kind: "object", object: next }, spec.how, undefined, spec.optional === true, spec.by === "its-controller");
         }
         return;
       }
@@ -24415,7 +24420,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ctx.changeTargets(
           target,
           spec.how,
-          spec.to === "source",
+          spec.to,
           spec.optional === true,
           spec.by === "its-controller",
           spec.how === "random" ? { exceptYou: spec.exceptYou === true, withCopies: spec.withCopies === true } : undefined,

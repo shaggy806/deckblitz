@@ -47604,7 +47604,7 @@ controlledBy,
         if (this.resolvingAbilities.length === 0) resolving.push(source);
         return [...this.state.zones.shared.stack].reverse().filter((id) => !resolving.includes(id) && this.state.objects[id] !== undefined);
       },
-      changeTargets: (target, how, toSource, optional, byItsController, random, unseenByNamesake) => {
+      changeTargets: (target, how, to, optional, byItsController, random, unseenByNamesake) => {
         if (how === "random") {
           if (target.kind !== "object") return;
           // "For the spell and the copy": the copies of it this resolution
@@ -47620,13 +47620,23 @@ controlledBy,
           }
           return;
         }
+        // The one new target there may be: this effect's own permanent, or
+        // what it's attached to ("enchanted creature") — as it is, or as it
+        // last was if the source has left (rule 608.2h). Nothing attached:
+        // no new target at all.
+        const self = this.state.objects[source];
+        const host =
+          to === "attached"
+            ? ((self?.zone === "battlefield" ? self.attachedTo : (self?.lastKnown?.attachedTo ?? self?.attachedTo)) ?? null)
+            : null;
+        if (to === "attached" && host === null) return;
+        const only = to === "source" ? source : host;
         return this.changeStackTargets(
           (byItsController && target.kind === "object" ? this.state.objects[target.object]?.controller : undefined) ??
             controller,
-          source,
           target,
           how,
-          toSource,
+          only,
           optional,
           // "Changing targets this way doesn't trigger abilities of
           // permanents named Psychic Battle": its source's name, as it is or
@@ -55620,7 +55630,7 @@ controlledBy,
    * The `change-targets` effect (rule 115.7): `chooser` changes the targets
    * of the spell or ability `target` on the stack — see the effect's
    * `EffectSpec` for `how`. Each target may become only one it could legally
-   * have (`stackTargetSlots`), or with `toSource` only `effectSource` itself
+   * have (`stackTargetSlots`), or with `only` that one object
    * (Spellskite). "Change the target(s)" changes every one or none (115.7a);
    * "change a target" one (115.7b); "choose new targets" any (115.7d). Asked
    * as a `choose-targets` decision with `current` (`pendingRetarget`) unless
@@ -55707,10 +55717,11 @@ controlledBy,
 
   private changeStackTargets(
     chooser: PlayerId,
-    effectSource: ObjectId,
     target: TargetRef,
     how: "change" | "change-one" | "choose-new",
-    toSource: boolean,
+    /** The only new target there may be (Spellskite's "to this creature",
+     * Captured by the Consulate's "to enchanted creature"); `null` for any. */
+    only: ObjectId | null,
     optional: boolean,
     /** See `announceTargetsChosen`. */
     unseenBy?: string,
@@ -55721,7 +55732,7 @@ controlledBy,
     const found = this.stackTargetSlots(target.object);
     if (found === null || found.slots.length === 0) return;
     const others = found.others.map((legal) =>
-      toSource ? legal.filter((t) => t.kind === "object" && t.object === effectSource) : legal,
+      only !== null ? legal.filter((t) => t.kind === "object" && t.object === only) : legal,
     );
     // "Change the target(s)": if any can't go somewhere else, none does
     // (115.7a). The rest need one slot that can.
@@ -55750,7 +55761,7 @@ controlledBy,
       specs: found.specs,
       options,
       current: found.current,
-      prompt: `${what} ${object.cardName}${toSource ? ` to ${this.state.objects[effectSource]?.cardName ?? "this"}` : ""}`,
+      prompt: `${what} ${object.cardName}${only !== null ? ` to ${this.state.objects[only]?.cardName ?? "this"}` : ""}`,
       ...(how === "change-one" && !optional ? { changeOne: true as const } : {}),
       ...(object.controller !== chooser ? { targetsFor: object.controller } : {}),
     };

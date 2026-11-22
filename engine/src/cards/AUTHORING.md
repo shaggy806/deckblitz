@@ -2337,7 +2337,11 @@ controller would choose them, never the spell itself (115.5); a divided
 amount keeps its division (115.7f); each new target "becomes the target"
 (ward, Phantasmal Image). `to: "source"` — "…to this creature": the only
 new target is the effect's own permanent, if it's legal (Spellskite's
-`"change-one"`, Hydroelectric Specimen); `optional: true` — "you may change"
+`"change-one"`, Hydroelectric Specimen); `to: "attached"` — "change the
+target to enchanted creature if able": the only new target is what the
+source is attached to (Captured by the Consulate, with `target:
+"trigger-object"` and a `trigger-object` condition `stackObjectTargets: {
+count: 1 }` for "if it has a single target"); `optional: true` — "you may change"
 (Hydroelectric Specimen). Asked as a `choose-targets` decision with `current`
 (`GameState.pendingRetarget`) unless forced, and nothing at all when nothing
 can change. Steps after it in a `sequence` wait for the answer (Imp's
@@ -7052,8 +7056,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `affects` says who gets them: `"attached"` for Eater of Virtue's "equipped creature has
   flying" (its dies trigger exiles with `linked: true`).
 - `protection: { outsideCommanderIdentity? }` — Commander's Plate's "each color that's not in your commander's color identity", the static's controller's as it is now: nothing with no commander (rule 903.4f), every colour with a colourless one. Beside the rest of the shape:
-- `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, exiledCardTypes?, colorsAmong?, fromPlayers?, doesntRemoveSource?, doesntRemoveAuras? }` — rule 702.16 (White Knight: `{ colors:
-  ["B"] }`; a `filter` for what neither names — Basri's Lieutenant's
+- `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, ownColors?, exiledCardTypes?, colorsAmong?, fromPlayers?, doesntRemoveSource?, doesntRemoveAuras? }` — rule 702.16 (White Knight: `{ colors:
+  ["B"] }`; `ownColors: true` is "protection from each of its colors", each
+  affected permanent's own colours now, none while colourless — Earnest
+  Fellowship over `scope: "all-creatures"`; a `filter` for what neither names — Basri's Lieutenant's
   multicolored, Baneslayer Angel's `{ anyOf: [{ subtype: "Demon" }, { subtype:
   "Dragon" }] }`, `{}` for everything, 702.16j — Vexilus Praetor over `scope:
   "filter"`). A filter reads the static's source as its own: Riders of Gavony's
