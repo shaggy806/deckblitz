@@ -1721,6 +1721,20 @@ const DECAYED_TRIGGER: TriggeredAbility = {
   text: "Decayed (This creature can't block. When it attacks, sacrifice it at end of combat.)",
 };
 
+/** Exalted (rule 702.83a), as an exalted counter gives it (rule 122.1b): one
+ * instance a counter — "a creature with multiple exalted counters will have
+ * that many instances of exalted" (Emissary of Soulfire's ruling), each
+ * triggering on its own. Printed exalted is the card's own triggered ability
+ * (Akrasan Squire); the engine has no exalted keyword, so
+ * `Game.effectiveTriggeredEntries` lists this for each counter. */
+const EXALTED_COUNTER_TRIGGER: TriggeredAbility = {
+  trigger: { on: "attacks-alone", who: "you-control" },
+  targets: [],
+  effect: { kind: "modify-pt", target: "trigger-object", power: 1, toughness: 1, duration: "end-of-turn" },
+  resolve: null,
+  text: "Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)",
+};
+
 const EMPTY_ID_SET: ReadonlySet<ObjectId> = new Set();
 
 /** What a cipher spell may be encoded on (rule 702.99a): "a creature you
@@ -27357,10 +27371,12 @@ export class Game {
     // The common case — a land, a vanilla creature — has nothing printed, no
     // modifiers and no grantors to consult: skip the allocations below. This
     // runs for every battlefield permanent on every emitted event.
+    const exaltedCounters = target.zone === "battlefield" ? (target.counters.exalted ?? 0) : 0;
     if (
       printedAbilities.length === 0 &&
       target.modifiers.length === 0 &&
       !decayedCandidate &&
+      exaltedCounters === 0 &&
       (grantors !== undefined && grantors.length === 0) &&
       target.zone !== "stack" &&
       target.encodedCards === undefined
@@ -27431,6 +27447,12 @@ export class Game {
       for (const g of grants) granted.push(...g.entries);
       if (decayedCandidate && this.characteristics(target.id).keywords.has("decayed")) {
         granted.push({ ability: DECAYED_TRIGGER, ref: { kind: "modifier", ability: DECAYED_TRIGGER } });
+      }
+      // Exalted counters (rule 122.1b): an instance of exalted each. Like the
+      // other keyword counters (`keywordCountersOn`), they stay through a
+      // loss of its own abilities.
+      for (let i = 0; i < exaltedCounters; i += 1) {
+        granted.push({ ability: EXALTED_COUNTER_TRIGGER, ref: { kind: "modifier", ability: EXALTED_COUNTER_TRIGGER } });
       }
       // Cipher (rule 702.99a): each card still encoded on it — exiled in the
       // stint it was encoded in (702.99c) — gives it the trigger.

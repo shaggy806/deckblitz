@@ -1872,6 +1872,8 @@ export function parseCost(text) {
       const { count, filter, noun } = handRevealOf(m[1]);
       cost.reveal = { count, filter, text: noun };
     } else if ((m = /^(\{E\})+$/.exec(part))) cost.payEnergy = part.length / 3;
+    // "Pay {E}{E}" (Emissary of Soulfire): the same energy, worded as a payment.
+    else if ((m = /^Pay ((?:\{E\})+)$/.exec(part))) cost.payEnergy = m[1].length / 3;
     // "Exile any number of historic cards from your graveyard with total mana
     // value 30 or greater" (The Capitoline Triad): collect evidence's payment
     // over the matching cards only, and no evidence collected.

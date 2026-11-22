@@ -3179,7 +3179,8 @@
   "effect:destroy-all-not-chosen",
   "effect:cant-become-untapped-while-you-control-source",
   "effect:cant-become-untapped-while-you-control-source",
-  "effect:granter-controller-player-ref"
+  "effect:granter-controller-player-ref",
+  "mechanic:exalted-counters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

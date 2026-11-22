@@ -2155,7 +2155,8 @@ export function sharedAbilitiesOnBattlefield(
  * vigilance… counter on it has that keyword, in layer 6 alongside every other
  * ability-adding effect. The counter's kind is the keyword's own name here
  * (`"first-strike"`, not "first strike"). Exalted counters aren't among
- * them: the engine has no such keyword.
+ * them: the engine has no exalted keyword, so `Game.effectiveTriggeredEntries`
+ * gives each exalted counter its triggered ability instead.
  */
 export const KEYWORD_COUNTERS: ReadonlySet<Keyword> = new Set<Keyword>([
   "flying",

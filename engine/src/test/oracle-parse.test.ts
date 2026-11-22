@@ -25072,3 +25072,23 @@ describe("untap locks for as long as you control the source", () => {
     });
   });
 });
+
+describe("a 'Pay {E}{E}' cost", () => {
+  it("is the energy payment, and an exalted counter a counter like any other (Emissary of Soulfire)", () => {
+    const emissary = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Djinn Monk",
+      power: "1",
+      toughness: "4",
+      oracle_text:
+        "Pay {E}{E}: Put an exalted counter on target creature you control. Activate only as a sorcery. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)",
+    });
+    expect(emissary.complete).toBe(true);
+    expect(emissary.activated[0]).toMatchObject({
+      cost: { mana: null, tap: false, payEnergy: 2 },
+      targets: ["creature-you-control"],
+      effect: { kind: "add-counter", target: 0, counter: "exalted", amount: 1 },
+      sorcerySpeed: true,
+    });
+  });
+});
