@@ -13774,4 +13774,22 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: {},
     }),
   ),
+  // --- Secret choices by you and target opponent (2026-11-22) ---------------
+  preset(
+    "Malik, Grim Manipulator: you and Bob each secretly pick one of Bob's creatures",
+    board({
+      you: { bf: ['Mountain*2', 'Plains*2', 'Swamp'], hand: ['Malik, Grim Manipulator'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant', 'Llanowar Elves'] },
+    }),
+  ),
+  preset(
+    'Expert-Level Safe: a matching number opens the safe',
+    board({
+      you: {
+        bf: ['Expert-Level Safe', 'Island*2'],
+        lib: ['Grizzly Bears', 'Hill Giant', 'Llanowar Elves', 'Serra Angel'],
+      },
+      opp: { human: true },
+    }),
+  ),
 ]

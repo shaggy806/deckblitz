@@ -9078,3 +9078,14 @@ Each board's die comes up 4.
 ### Phyrexian Portal: you exile a pile without seeing it, then search the other
 - **Do:** Activate Phyrexian Portal targeting Bob. Choose either pile, then pick a card from the popup and confirm.
 - **Expect:** Bob separates your top ten cards; the pile choice shows both piles face down, nothing named. The pile you chose is exiled face up; then a popup shows only the other pile's cards, and the one you pick goes to your hand.
+
+## Secret choices by you and target opponent (2026-11-22)
+
+### Malik, Grim Manipulator: you and Bob each secretly pick one of Bob's creatures
+- **Do:** Cast Malik, Grim Manipulator, targeting Bob for its trigger. Pick Hill Giant. As Bob, pick Llanowar Elves.
+- **Expect:** Both of you are offered only Bob's three creatures. While Bob picks, nothing on his screen or in the log says which one you chose. Then Hill Giant and Llanowar Elves are both sacrificed, Grizzly Bears stays, and you get two Treasures.
+- **Not a bug:** If you both pick the same creature, only that one is sacrificed, and you get one Treasure.
+
+### Expert-Level Safe: a matching number opens the safe
+- **Do:** Activate Expert-Level Safe targeting Bob and choose 2. As Bob, choose 2.
+- **Expect:** Each of you is offered only 1, 2 or 3, and Bob's prompt gives no hint of your number. With both at 2 the safe is sacrificed and the two face-down cards under it go to your hand. Choosing different numbers instead leaves the safe and exiles one more card face down.

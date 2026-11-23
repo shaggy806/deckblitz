@@ -1,0 +1,12 @@
+{
+ "batch": 339,
+ "status": "done",
+ "ranks": "Build ASAP: cards flagged in the library (2026-11-22). Expert-Level Safe and, on the same key, Malik, Grim Manipulator (top-1000 commander #779, the last one blocked): a secret choice by you and target opponent is a secret `vote` (`choose`, `secret`) with `who: { youAnd: { target: 0 } }`, which the voters' lookup had read as one player (`isPlayerSlotRef`), asking nobody. Space Beleren (mechanic:sectors, a new per-creature assignment decision) is left for its own session.",
+ "authored": [
+  {"name": "Expert-Level Safe", "files": ["engine/src/cards/pool/expert-level-safe.ts"], "tested": true},
+  {"name": "Malik, Grim Manipulator", "files": ["engine/src/cards/pool/malik-grim-manipulator.ts"], "tested": true}
+ ],
+ "blocked": [
+  {"name": "Space Beleren", "needs": ["mechanic:sectors"], "size": "major", "why": "Space sculptor (rule 702.158): every creature assigned a sector by its controller as a state-based action (704.5u, opponents first), the assignment kept until no space sculptor is left, a 'choose a sector' for the -1 and -5, and same-sector-only blocking for the +1. A new player decision with client UI; flagged, next session."}
+ ]
+}

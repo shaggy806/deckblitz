@@ -666,6 +666,12 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 339 (2026-11-22, `author-flagged`)** — the flagged Expert-Level Safe and, on its key,
+  Malik, Grim Manipulator, the last of the top 1000 commanders (`B339.json`). `mechanic:secret-choice`
+  needed no new decision: secret council's `vote` (`choose`, `secret`, a bounded `number` or a
+  `permanent` with `controlledByRef`) once its `who` read `{ youAnd: { target: 0 } }` as two players.
+  Space Beleren (`mechanic:sectors`, a new decision) stays flagged for its own session. Lead: a bot
+  choosing among only its own permanents in a vote gives up the first listed (BACKLOG, Bots).
 - **Batch 338 (2026-11-22, `author-top-cards overnight`, ranks 18541–21695)** — 59 cards from
   18 lane agents, five at once, in all six lanes (`B338.json`; `COMPLETED.md` lists the features); every
   open key to rank 22,256 laned in `engine/data/lanes.json` first. Mana Maze, Tilonalli's Crown, Fatal
