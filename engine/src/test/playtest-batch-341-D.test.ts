@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { colorIdentityOf, identityString } from "../identity.js";
 import {
   A,
   B,
@@ -18,6 +19,7 @@ import {
   pickPermanents,
   pt,
   ref,
+  registryOf,
   settle,
   spawn,
   table,
@@ -28,6 +30,12 @@ import {
 } from "./harness.js";
 
 describe("playtest batch 341 D", () => {
+  it("Devoted Mardu is white alone: the {R}, {W} and {B} sit in a reminder holding a reminder (rule 903.4c)", () => {
+    const { game } = table();
+    const def = registryOf(game).get("Devoted Mardu");
+    expect(identityString(colorIdentityOf(def, registryOf(game)))).toBe("W");
+  });
+
   it("Jitte and Divining Top: tapping it draws and tops it; already tapped, nothing", () => {
     const { game } = table();
     const jitte = spawn(game, "Jitte and Divining Top");

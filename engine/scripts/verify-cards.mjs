@@ -499,6 +499,23 @@ function compareText(def, face) {
 }
 
 /**
+ * Fields where Scryfall's data is wrong for a card and the engine is right,
+ * each checked by hand against the rules: the mismatch is left out. Playtest
+ * cards' data is uneven (2026-11-23): Kibo, Uktabi Prince is green and red for
+ * its Banana's "{T}, Sacrifice this artifact: Add {R} or {G}" (a quoted
+ * ability's symbols count, rule 903.4), and the two playtest cards making that
+ * Banana aren't given its red; Char-Dog's "{G}, {T}, Sacrifice this creature"
+ * is in its own rules text; Jasconian Isle's ruling gives it a blue colour
+ * indicator Scryfall's `colors` leaves out.
+ */
+const SCRYFALL_WRONG = new Map([
+  ["Peel Out", ["color identity"]],
+  ["Kibo's Bananamobile", ["color identity"]],
+  ["Char-Dog", ["color identity"]],
+  ["Jasconian Isle", ["colors"]],
+]);
+
+/**
  * The card's colour identity as the engine works it out, against Scryfall's
  * (rule 903.4): every face and a prepare spell counted, reminder text not
  * (903.4c). Skipped for a meld result, which is no card of its own (Scryfall
@@ -710,9 +727,10 @@ async function main() {
       continue;
     }
     checked += 1;
-    const issues = compare(def, card);
+    const raw = compare(def, card);
     const identity = identityIssue(def, card, faces);
-    if (identity !== null) issues.push(identity);
+    if (identity !== null) raw.push(identity);
+    const issues = raw.filter((issue) => !SCRYFALL_WRONG.get(def.name)?.some((field) => issue.startsWith(field)));
     const text = checkText ? compareText(def, faceFor(card, def.name)) : null;
     if (issues.length > 0) {
       mismatched += 1;

@@ -32,10 +32,23 @@ const BASIC_LAND_TYPE_COLOR: Readonly<Record<string, Color>> = {
   Forest: "G",
 };
 
+/** `text` with its reminder text gone, a parenthesis inside a parenthesis
+ * included: Devoted Mardu's mobilize reminder holds "(tapped and attacking 1/1
+ * red Warrior creature tokens)" and, after it, the {R}, {W} and {B} that aren't
+ * its colour identity. Innermost first, until nothing is left to take. */
+function withoutReminders(text: string): string {
+  let out = text;
+  for (let before = ""; before !== out; ) {
+    before = out;
+    out = out.replace(REMINDER, "");
+  }
+  return out;
+}
+
 /** Pull the W/U/B/R/G letters out of every `{…}` symbol in `text`, its
  * reminder text aside (rule 903.4c). */
 function colorsInText(text: string, into: Set<Color>): void {
-  for (const match of text.replace(REMINDER, "").matchAll(SYMBOL)) {
+  for (const match of withoutReminders(text).matchAll(SYMBOL)) {
     for (const ch of match[1].toUpperCase()) {
       if ((COLORS as readonly string[]).includes(ch)) into.add(ch as Color);
     }
