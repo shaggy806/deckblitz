@@ -18,6 +18,7 @@
  */
 
 import type { CardType, Keyword } from "../cards/define.js";
+import { manaValue, parseManaCost } from "../mana.js";
 import type { Color } from "../mana.js";
 import { isManaAbility } from "../abilities.js";
 import {
@@ -33,8 +34,9 @@ import {
 import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy, readyToBlock } from "../combat/eligibility.js";
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import type { GameState } from "../state.js";
+import type { GameObject, GameState } from "../state.js";
 import { POISON_LETHAL, rulesTextName } from "../state.js";
+import { handedRound } from "../handed-round.js";
 import { LANDWALK } from "../subtypes.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 
@@ -89,16 +91,39 @@ const MAX_COPIES = 30;
 /**
  * Every creature `player` controls on the battlefield. `untappedOnly` is what a
  * blocker needs; an attacker on a future turn will have untapped anyway.
+ * `onOwnTurn` adds what is a creature only during its controller's turn
+ * ({@link creatureOnItsTurn}): the attackers a turn of `player`'s will have.
  */
 export function combatCreatures(
   state: GameState,
   registry: CardRegistry,
   player: PlayerId,
   untappedOnly: boolean,
+  onOwnTurn = false,
 ): CombatCreature[] {
   // A pure read of one state, called outside any other cache region by the
   // combat search: without one, every characteristics fold here was fresh.
-  return withComputedCache(() => combatCreaturesUncached(state, registry, player, untappedOnly));
+  return withComputedCache(() => combatCreaturesUncached(state, registry, player, untappedOnly, onOwnTurn));
+}
+
+/**
+ * Whether `object` is a creature during its controller's turn and not
+ * otherwise: living metal (rule 702.161a), printed as a static on itself
+ * that adds the creature type while it's "your turn" (Slicer, High-Speed
+ * Antagonist). On every other player's turn the board shows an artifact, so
+ * the swing back left it out: a seat at 18 commander damage from Slicer sent
+ * its three Dragons out and died to the converted Slicer's 3 (a kept live
+ * game, D75RS-8 turn 22, 2026-11-22).
+ */
+function creatureOnItsTurn(registry: CardRegistry, object: GameObject): boolean {
+  const name = rulesTextName(object);
+  if (!registry.has(name)) return false;
+  return registry.get(name).static.some(
+    (s) =>
+      s.affects?.scope === "self" &&
+      (s.condition as { readonly kind?: unknown } | undefined)?.kind === "your-turn" &&
+      s.addTypes?.includes("creature") === true,
+  );
 }
 
 function combatCreaturesUncached(
@@ -106,6 +131,7 @@ function combatCreaturesUncached(
   registry: CardRegistry,
   player: PlayerId,
   untappedOnly: boolean,
+  onOwnTurn: boolean,
 ): CombatCreature[] {
   const out: CombatCreature[] = [];
   const controllerLands = landTypesControlledBy(state, registry, player);
@@ -117,7 +143,7 @@ function combatCreaturesUncached(
     const ready = readyToBlock(state, registry, object);
     if (untappedOnly && !ready) continue;
     const c = computeCharacteristics(state, registry, id);
-    if (!c.types.includes("creature")) continue;
+    if (!c.types.includes("creature") && !(onOwnTurn && creatureOnItsTurn(registry, object))) continue;
     const creature: CombatCreature = {
       id,
       power: c.power,
@@ -481,45 +507,64 @@ export function payableAttackers(
   return [...attackers].sort((a, b) => worth(b) - worth(a)).slice(0, most);
 }
 
-/** Per registry, whether a card hands itself to the player whose upkeep
- * begins ({@link handedRound}). */
-const handedRoundByName = new WeakMap<CardRegistry, Map<string, boolean>>();
-
 /**
- * Whether the card `name` is **handed round the table**: a trigger of its own
- * at the beginning of each opponent's upkeep, or each player's, gives that
- * player control of it (Slicer, Hired Muscle; Alexios, Deimos of Kosmos;
- * Karona, False God). Such a creature attacks on every player's turn, not
- * only its controller's.
+ * `opponent`'s commanders that will attack from the command zone: a creature
+ * with haste it can pay for on its next turn, commander tax and all, with
+ * every land and mana permanent it has and one land more. As printed: the
+ * face its mana reaches (Slicer's cheaper back face for More Than Meets the
+ * Eye when the front is out of reach), no Equipment, no counters.
+ *
+ * A commander that has been dealt with is still on its way back. A seat at
+ * 15 commander damage from Slicer, Slicer in the command zone and its owner
+ * on six lands, tapped its only blocker and took the last 6 a turn later (a
+ * kept live game, 8WNCA-2 turn 21, 2026-11-22).
  */
-function handedRound(registry: CardRegistry, name: string): boolean {
-  let known = handedRoundByName.get(registry);
-  if (known === undefined) {
-    known = new Map();
-    handedRoundByName.set(registry, known);
-  }
-  const cached = known.get(name);
-  if (cached !== undefined) return cached;
-  const handsItself = (node: unknown): boolean => {
-    if (node === null || typeof node !== "object") return false;
-    if (Array.isArray(node)) return node.some(handsItself);
-    const record = node as { readonly kind?: unknown; readonly target?: unknown; readonly who?: unknown };
-    if (record.kind === "gain-control" && record.target === "source" && record.who === "active-player") return true;
-    return Object.values(node).some(handsItself);
-  };
-  const answer =
-    registry.has(name) &&
-    registry.get(name).triggered.some((t) => {
-      const trigger = t.trigger as { readonly on?: unknown; readonly step?: unknown; readonly who?: unknown };
-      return (
-        trigger.on === "step-begins" &&
-        trigger.step === "upkeep" &&
-        (trigger.who === "opponent" || trigger.who === "any") &&
-        handsItself(t.effect)
-      );
+function commandersToCome(state: GameState, registry: CardRegistry, opponent: PlayerId): CombatCreature[] {
+  const out: CombatCreature[] = [];
+  let mana: number | null = null;
+  for (const id of state.zones.shared.command) {
+    const object = state.objects[id];
+    if (object === undefined || !object.isCommander || object.owner !== opponent) continue;
+    if (!registry.has(object.cardName)) continue;
+    const front = registry.get(object.cardName);
+    if (front.manaCost === null) continue;
+    mana ??= manaToAttackWith(state, registry, opponent) + 1;
+    const tax = 2 * (state.players[opponent].commanderCastCounts[object.cardName] ?? 0);
+    const backName = front.moreThanMeetsTheEye !== undefined ? front.faces?.[1] : undefined;
+    const face =
+      manaValue(parseManaCost(front.manaCost)) + tax <= mana
+        ? front
+        : backName !== undefined &&
+            registry.has(backName) &&
+            manaValue(parseManaCost(front.moreThanMeetsTheEye!.cost)) + tax <= mana
+          ? registry.get(backName)
+          : null;
+    if (face === null || !face.keywords.includes("haste")) continue;
+    // A creature, or one on its controller's turn (the back face's living metal).
+    const attacks = face.types.includes("creature") || face.static.some((s) => s.addTypes?.includes("creature") === true);
+    if (!attacks) continue;
+    const power = typeof face.power === "number" ? face.power : 0;
+    const toughness = typeof face.toughness === "number" ? face.toughness : 0;
+    if (power <= 0) continue;
+    out.push({
+      id,
+      power,
+      toughness,
+      damage: power,
+      lethal: toughness,
+      keywords: new Set(face.keywords),
+      colors: new Set(face.colors),
+      types: face.types,
+      protectionColors: new Set(),
+      protectionTypes: new Set(),
+      canBlock: false,
+      canAttack: true,
+      isCommander: true,
+      controllerLands: landTypesControlledBy(state, registry, opponent),
+      controller: opponent,
     });
-  known.set(name, answer);
-  return answer;
+  }
+  return out;
 }
 
 /**
@@ -537,6 +582,11 @@ function handedRound(registry: CardRegistry, name: string): boolean {
  * - A creature `me` controls only until end of turn (Act of Treason, a
  *   borrowed Slicer) is no blocker on a turn of `me`'s own: it's gone at
  *   cleanup, and back in its owner's swing.
+ * - A permanent that is a creature only on its controller's turn (living
+ *   metal) is among that controller's attackers.
+ * - A hasty commander in the command zone its owner can pay for
+ *   ({@link commandersToCome}) is in its owner's swing, and, handed round,
+ *   in the swing of each opponent who acts after its owner.
  */
 function swingBack(
   state: GameState,
@@ -551,7 +601,8 @@ function swingBack(
   for (const id of state.zones.shared.battlefield) {
     const object = state.objects[id];
     if (object === undefined || state.players[object.controller]?.hasLost !== false) continue;
-    const roams = handedRound(registry, object.cardName);
+    // By the face that is up: a converted Slicer has no such trigger.
+    const roams = handedRound(registry, rulesTextName(object));
     const borrowed = myTurn && object.controller === me && object.controlEndsAtCleanup && object.owner !== me;
     if (!roams && !borrowed) continue;
     leaving.add(id);
@@ -570,14 +621,28 @@ function swingBack(
   // same eight creatures as before and cast neither (a kept live game,
   // 2026-11-22: it died with both in hand).
   const tax = attackTaxAt(state, registry, me);
+  // Commanders on their way back, by the opponent who casts each; one that
+  // is handed round then attacks under whoever acts after its owner too.
+  const order = opponentsToAct(state, me);
+  const coming = new Map(order.map((opponent) => [opponent, commandersToCome(state, registry, opponent)] as const));
+  const comingTo = (opponent: PlayerId): CombatCreature[] => {
+    const at = order.indexOf(opponent);
+    return order.flatMap((owner, i) => {
+      const theirs = coming.get(owner) ?? [];
+      if (i === at) return theirs;
+      if (at < 0 || i > at) return [];
+      return theirs.filter((c) => handedRound(registry, state.objects[c.id]?.cardName ?? ""));
+    });
+  };
   const attackersOf = (opponent: PlayerId): CombatCreature[] =>
     payableAttackers(
       state,
       registry,
       [
-        ...combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack && !leaving.has(c.id)),
+        ...combatCreatures(state, registry, opponent, false, true).filter((c) => c.canAttack && !leaving.has(c.id)),
         ...roaming,
         ...(returning.get(opponent) ?? []),
+        ...comingTo(opponent),
       ],
       opponent,
       tax,

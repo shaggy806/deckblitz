@@ -113,3 +113,53 @@ describe("an attack tax, in the crackback", () => {
     expect(crackback(game.state, game.registry, A, 0.5, undefined, KILL_SHOT).damage).toBe(9);
   });
 });
+
+describe("a creature only on its controller's turn, in the crackback", () => {
+  it("counts a converted Slicer (living metal) among its owner's attackers, and nobody else's", () => {
+    const { game } = table({ players: 4 });
+    const slicer = spawn(game, "Slicer, High-Speed Antagonist", C);
+    game.state.objects[slicer].isCommander = true;
+    // An artifact on our turn, a 3/2 first striker on Carol's: 3 at her
+    // share (she isn't next to act), and no trigger hands this face round.
+    expect(from(game, slicer, "all")).toBe(1.5);
+    // 18 already taken: her swing alone kills, so it counts in full.
+    game.state.players[A].commanderDamageTaken = { [slicer]: 18 };
+    expect(from(game, slicer, "all")).toBe(3);
+    expect(opponentsLethalAlone(game.state, game.registry, A, "all")).toEqual([C]);
+  });
+});
+
+describe("a hasty commander in the command zone, in the crackback", () => {
+  /** Bob's view on alice's turn, her Slicer in the command zone and `lands`
+   * Mountains under her: the commander damage he counts from it. */
+  const coming = (lands: number, casts = 0): number => {
+    const { game } = table({ players: 4, commanders: ["Slicer, Hired Muscle"] });
+    for (let i = 0; i < lands; i += 1) spawn(game, "Mountain");
+    game.state.players[A].commanderCastCounts = { "Slicer, Hired Muscle": casts };
+    const slicer = game.state.zones.shared.command.find((id) => game.state.objects[id]?.cardName === "Slicer, Hired Muscle")!;
+    return crackback(game.state, game.registry, B, 0.5, "all", KILL_SHOT).commanderDamage.get(slicer) ?? 0;
+  };
+
+  it("is in its owner's swing once the mana for it is there, a land drop counted", () => {
+    // {4}{R}: four Mountains and the turn's land. 3 double strike.
+    expect(coming(4)).toBe(6);
+    // Two Mountains and a land reach only More Than Meets the Eye's {2}{R}:
+    // the back face, a 3/2 first striker.
+    expect(coming(2)).toBe(3);
+    expect(coming(1)).toBe(0);
+  });
+
+  it("pays the commander tax first", () => {
+    // Cast twice already: {4} more. Eight and a land for the front face,
+    // six and a land for the back.
+    expect(coming(8, 2)).toBe(6);
+    expect(coming(6, 2)).toBe(3);
+    expect(coming(5, 2)).toBe(0);
+  });
+
+  it("is nothing without haste", () => {
+    const { game } = table({ players: 4, commanders: ["Ghalta, Primal Hunger"] });
+    for (let i = 0; i < 12; i += 1) spawn(game, "Forest");
+    expect(crackback(game.state, game.registry, B, 0.5, "all", KILL_SHOT).commanderDamage.size).toBe(0);
+  });
+});
