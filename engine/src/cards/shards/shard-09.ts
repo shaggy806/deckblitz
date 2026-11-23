@@ -263,6 +263,7 @@ import _poolEmberHauler from "../pool/ember-hauler.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmergeUnscathed from "../pool/emerge-unscathed.js";
 import _poolEmeriaShepherd from "../pool/emeria-shepherd.js";
+import _poolEmerinShivanAngel from "../pool/emerin-shivan-angel.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolEpharaGodOfThePolis from "../pool/ephara-god-of-the-polis.js";
@@ -632,6 +633,7 @@ import _poolOliviasAttendants from "../pool/olivias-attendants.js";
 import _poolOliviasWrath from "../pool/olivias-wrath.js";
 import _poolOnWingsOfGold from "../pool/on-wings-of-gold.js";
 import _poolOnduCleric from "../pool/ondu-cleric.js";
+import _poolOneDoesNot from "../pool/one-does-not.js";
 import _poolOozeFlux from "../pool/ooze-flux.js";
 import _poolOpalAvenger from "../pool/opal-avenger.js";
 import _poolOrzhovEnforcer from "../pool/orzhov-enforcer.js";
@@ -835,6 +837,7 @@ import _poolSlaveringBranchsnapper from "../pool/slavering-branchsnapper.js";
 import _poolSlicerHighSpeedAntagonist from "../pool/slicer-high-speed-antagonist.js";
 import _poolSlimefootTheStowaway from "../pool/slimefoot-the-stowaway.js";
 import _poolSlithFirewalker from "../pool/slith-firewalker.js";
+import _poolSlivMizzetHivemind from "../pool/sliv-mizzet-hivemind.js";
 import _poolSnakeCultInitiation from "../pool/snake-cult-initiation.js";
 import _poolSnakeform from "../pool/snakeform.js";
 import _poolSneakingGuide from "../pool/sneaking-guide.js";
@@ -926,6 +929,7 @@ import _poolThaumatog from "../pool/thaumatog.js";
 import _poolThaumatonTorpedo from "../pool/thaumaton-torpedo.js";
 import _poolTheBirthOfMeletis from "../pool/the-birth-of-meletis.js";
 import _poolTheCabbageMerchant from "../pool/the-cabbage-merchant.js";
+import _poolTheCrafter from "../pool/the-crafter.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheDominionBracelet from "../pool/the-dominion-bracelet.js";
 import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
@@ -1032,6 +1036,7 @@ import _poolWeiInfantry from "../pool/wei-infantry.js";
 import _poolWell from "../pool/well.js";
 import _poolWhirlingStrike from "../pool/whirling-strike.js";
 import _poolWhiteLotusHideout from "../pool/white-lotus-hideout.js";
+import _poolWhiteRhysticStudy from "../pool/white-rhystic-study.js";
 import _poolWickerboughElder from "../pool/wickerbough-elder.js";
 import _poolWildfieldBorderpost from "../pool/wildfield-borderpost.js";
 import _poolWildfire from "../pool/wildfire.js";
@@ -1045,6 +1050,7 @@ import _poolWoodElves from "../pool/wood-elves.js";
 import _poolWoodedFoothills from "../pool/wooded-foothills.js";
 import _poolWordsOfWorship from "../pool/words-of-worship.js";
 import _poolWorldWarHulk from "../pool/world-war-hulk.js";
+import _poolWrathOfLeknif from "../pool/wrath-of-leknif.js";
 import _poolWreckHunter from "../pool/wreck-hunter.js";
 import _poolWrigglingGrub from "../pool/wriggling-grub.js";
 import _poolWriteIntoBeing from "../pool/write-into-being.js";
@@ -1074,6 +1080,7 @@ import _tokensForestDryadToken from "../tokens/forest-dryad-token.js";
 import _tokensGoblinTokenHaste from "../tokens/goblin-token-haste.js";
 import _tokensGolemToken99 from "../tokens/golem-token-9-9.js";
 import _tokensInsectTokenInfestationSage from "../tokens/insect-token-infestation-sage.js";
+import _tokensManaConfluenceToken from "../tokens/mana-confluence-token.js";
 import _tokensMerfolkWizardToken from "../tokens/merfolk-wizard-token.js";
 import _tokensMouseToken from "../tokens/mouse-token.js";
 import _tokensMowu from "../tokens/mowu.js";
@@ -1082,6 +1089,7 @@ import _tokensPhyrexianWurmTokenWurmcoilLarvaDeathtouch from "../tokens/phyrexia
 import _tokensReflectionToken from "../tokens/reflection-token.js";
 import _tokensRobotTokenAutomatedAssemblyLine from "../tokens/robot-token-automated-assembly-line.js";
 import _tokensSpiderToken24BlackReach from "../tokens/spider-token-2-4-black-reach.js";
+import _tokensSpiritTokenColorlessLifelinkHaste from "../tokens/spirit-token-colorless-lifelink-haste.js";
 import _tokensTreasureToken from "../tokens/treasure-token.js";
 import _tokensVojaFriendToElves from "../tokens/voja-friend-to-elves.js";
 import _tokensZombieKnightToken from "../tokens/zombie-knight-token.js";
@@ -1351,6 +1359,7 @@ const shard: CardShard = {
     _poolEmberheartChallenger,
     _poolEmergeUnscathed,
     _poolEmeriaShepherd,
+    _poolEmerinShivanAngel,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
     _poolEpharaGodOfThePolis,
@@ -1720,6 +1729,7 @@ const shard: CardShard = {
     _poolOliviasWrath,
     _poolOnWingsOfGold,
     _poolOnduCleric,
+    _poolOneDoesNot,
     _poolOozeFlux,
     _poolOpalAvenger,
     _poolOrzhovEnforcer,
@@ -1923,6 +1933,7 @@ const shard: CardShard = {
     _poolSlicerHighSpeedAntagonist,
     _poolSlimefootTheStowaway,
     _poolSlithFirewalker,
+    _poolSlivMizzetHivemind,
     _poolSnakeCultInitiation,
     _poolSnakeform,
     _poolSneakingGuide,
@@ -2014,6 +2025,7 @@ const shard: CardShard = {
     _poolThaumatonTorpedo,
     _poolTheBirthOfMeletis,
     _poolTheCabbageMerchant,
+    _poolTheCrafter,
     _poolTheDalekEmperor,
     _poolTheDominionBracelet,
     _poolTheElderDragonWar,
@@ -2120,6 +2132,7 @@ const shard: CardShard = {
     _poolWell,
     _poolWhirlingStrike,
     _poolWhiteLotusHideout,
+    _poolWhiteRhysticStudy,
     _poolWickerboughElder,
     _poolWildfieldBorderpost,
     _poolWildfire,
@@ -2133,6 +2146,7 @@ const shard: CardShard = {
     _poolWoodedFoothills,
     _poolWordsOfWorship,
     _poolWorldWarHulk,
+    _poolWrathOfLeknif,
     _poolWreckHunter,
     _poolWrigglingGrub,
     _poolWriteIntoBeing,
@@ -2164,6 +2178,7 @@ const shard: CardShard = {
     _tokensGoblinTokenHaste,
     _tokensGolemToken99,
     _tokensInsectTokenInfestationSage,
+    _tokensManaConfluenceToken,
     _tokensMerfolkWizardToken,
     _tokensMouseToken,
     _tokensMowu,
@@ -2172,6 +2187,7 @@ const shard: CardShard = {
     _tokensReflectionToken,
     _tokensRobotTokenAutomatedAssemblyLine,
     _tokensSpiderToken24BlackReach,
+    _tokensSpiritTokenColorlessLifelinkHaste,
     _tokensTreasureToken,
     _tokensVojaFriendToElves,
     _tokensZombieKnightToken,

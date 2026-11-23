@@ -471,9 +471,11 @@ import _poolKlawSonicSubjugator from "../pool/klaw-sonic-subjugator.js";
 import _poolKnickknackOuphe from "../pool/knickknack-ouphe.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKnollspineInvocation from "../pool/knollspine-invocation.js";
+import _poolKnowing from "../pool/knowing.js";
 import _poolKolinahrPriest from "../pool/kolinahr-priest.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolKorEntanglers from "../pool/kor-entanglers.js";
+import _poolKozilekCompleated from "../pool/kozilek-compleated.js";
 import _poolKrotiqNestguard from "../pool/krotiq-nestguard.js";
 import _poolKytheonHeroOfAkros from "../pool/kytheon-hero-of-akros.js";
 import _poolLanternsLift from "../pool/lanterns-lift.js";
@@ -489,6 +491,7 @@ import _poolLethalProtection from "../pool/lethal-protection.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
 import _poolLichsMastery from "../pool/lichs-mastery.js";
+import _poolLifeCloud from "../pool/life-cloud.js";
 import _poolLifeOfToshiroUmezawa from "../pool/life-of-toshiro-umezawa.js";
 import _poolLifecraftAwakening from "../pool/lifecraft-awakening.js";
 import _poolLighthouseChronologist from "../pool/lighthouse-chronologist.js";
@@ -641,6 +644,7 @@ import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
 import _poolPhyrexianColossus from "../pool/phyrexian-colossus.js";
+import _poolPhyrexianEsthetician from "../pool/phyrexian-esthetician.js";
 import _poolPhyrexianMarauder from "../pool/phyrexian-marauder.js";
 import _poolPhyrexianProwler from "../pool/phyrexian-prowler.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
@@ -1059,11 +1063,14 @@ import _poolYotiaDeclaresWar from "../pool/yotia-declares-war.js";
 import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZagothMamba from "../pool/zagoth-mamba.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
+import _tokens00FlyingBearVehicleToken from "../tokens/0-0-flying-bear-vehicle-token.js";
 import _tokens11OozeToken from "../tokens/1-1-ooze-token.js";
 import _tokens22RedGreenWormToken from "../tokens/2-2-red-green-worm-token.js";
 import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
 import _tokensAxeToken from "../tokens/axe-token.js";
+import _tokensChefRoleToken from "../tokens/chef-role-token.js";
 import _tokensCloudSpriteToken from "../tokens/cloud-sprite-token.js";
+import _tokensCovertSunglasses from "../tokens/covert-sunglasses.js";
 import _tokensDragonEggToken from "../tokens/dragon-egg-token.js";
 import _tokensDrakeTokenLeafdrakeRoost from "../tokens/drake-token-leafdrake-roost.js";
 import _tokensDwarfToken from "../tokens/dwarf-token.js";
@@ -1553,9 +1560,11 @@ const shard: CardShard = {
     _poolKnickknackOuphe,
     _poolKnightOfTheWhiteOrchid,
     _poolKnollspineInvocation,
+    _poolKnowing,
     _poolKolinahrPriest,
     _poolKonstrariAnnex,
     _poolKorEntanglers,
+    _poolKozilekCompleated,
     _poolKrotiqNestguard,
     _poolKytheonHeroOfAkros,
     _poolLanternsLift,
@@ -1571,6 +1580,7 @@ const shard: CardShard = {
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,
     _poolLichsMastery,
+    _poolLifeCloud,
     _poolLifeOfToshiroUmezawa,
     _poolLifecraftAwakening,
     _poolLighthouseChronologist,
@@ -1723,6 +1733,7 @@ const shard: CardShard = {
     _poolPhyresis,
     _poolPhyrexianAtlas,
     _poolPhyrexianColossus,
+    _poolPhyrexianEsthetician,
     _poolPhyrexianMarauder,
     _poolPhyrexianProwler,
     _poolPillarOfLight,
@@ -2143,11 +2154,14 @@ const shard: CardShard = {
     _poolZiatoraTheIncinerator,
   ],
   tokens: [
+    _tokens00FlyingBearVehicleToken,
     _tokens11OozeToken,
     _tokens22RedGreenWormToken,
     _tokensAlienTokenAlienInvasion,
     _tokensAxeToken,
+    _tokensChefRoleToken,
     _tokensCloudSpriteToken,
+    _tokensCovertSunglasses,
     _tokensDragonEggToken,
     _tokensDrakeTokenLeafdrakeRoost,
     _tokensDwarfToken,

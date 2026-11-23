@@ -106,6 +106,7 @@ import _poolBloodmadVampire from "../pool/bloodmad-vampire.js";
 import _poolBloodtitheHarvester from "../pool/bloodtithe-harvester.js";
 import _poolBodyLaunderer from "../pool/body-launderer.js";
 import _poolBoilingBlood from "../pool/boiling-blood.js";
+import _poolBolshackDragon from "../pool/bolshack-dragon.js";
 import _poolBorosElite from "../pool/boros-elite.js";
 import _poolBorosKeyrune from "../pool/boros-keyrune.js";
 import _poolBorrowedKnowledge from "../pool/borrowed-knowledge.js";
@@ -338,6 +339,7 @@ import _poolGaleriderSliver from "../pool/galerider-sliver.js";
 import _poolGalvanicGiant from "../pool/galvanic-giant.js";
 import _poolGamble from "../pool/gamble.js";
 import _poolGarenbrigGrowth from "../pool/garenbrig-growth.js";
+import _poolGarruksLostWolf from "../pool/garruks-lost-wolf.js";
 import _poolGateSmasher from "../pool/gate-smasher.js";
 import _poolGateToTheAether from "../pool/gate-to-the-aether.js";
 import _poolGenasiEnforcers from "../pool/genasi-enforcers.js";
@@ -529,6 +531,7 @@ import _poolMasterChef from "../pool/master-chef.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMasumaroFirstToLive from "../pool/masumaro-first-to-live.js";
+import _poolMathIsForBlockers from "../pool/math-is-for-blockers.js";
 import _poolMedomaisProphecy from "../pool/medomais-prophecy.js";
 import _poolMelancholy from "../pool/melancholy.js";
 import _poolMelting from "../pool/melting.js";
@@ -634,6 +637,7 @@ import _poolPhyrexianSlayer from "../pool/phyrexian-slayer.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
 import _poolPlanarGuide from "../pool/planar-guide.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
+import _poolPlaneMergeElf from "../pool/plane-merge-elf.js";
 import _poolPlatedPegasus from "../pool/plated-pegasus.js";
 import _poolPloverKnights from "../pool/plover-knights.js";
 import _poolPlunder from "../pool/plunder.js";
@@ -886,6 +890,7 @@ import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolTheMasterOfLakeTown from "../pool/the-master-of-lake-town.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
+import _poolTheSpikeCactus from "../pool/the-spike-cactus.js";
 import _poolThelonsCurse from "../pool/thelons-curse.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThornmantleStriker from "../pool/thornmantle-striker.js";
@@ -1135,6 +1140,7 @@ const shard: CardShard = {
     _poolBloodtitheHarvester,
     _poolBodyLaunderer,
     _poolBoilingBlood,
+    _poolBolshackDragon,
     _poolBorosElite,
     _poolBorosKeyrune,
     _poolBorrowedKnowledge,
@@ -1367,6 +1373,7 @@ const shard: CardShard = {
     _poolGalvanicGiant,
     _poolGamble,
     _poolGarenbrigGrowth,
+    _poolGarruksLostWolf,
     _poolGateSmasher,
     _poolGateToTheAether,
     _poolGenasiEnforcers,
@@ -1558,6 +1565,7 @@ const shard: CardShard = {
     _poolMasterOfEtherium,
     _poolMastersGuideMural,
     _poolMasumaroFirstToLive,
+    _poolMathIsForBlockers,
     _poolMedomaisProphecy,
     _poolMelancholy,
     _poolMelting,
@@ -1663,6 +1671,7 @@ const shard: CardShard = {
     _poolPitilessPlunderer,
     _poolPlanarGuide,
     _poolPlanarIncision,
+    _poolPlaneMergeElf,
     _poolPlatedPegasus,
     _poolPloverKnights,
     _poolPlunder,
@@ -1915,6 +1924,7 @@ const shard: CardShard = {
     _poolTheLegendOfRoku,
     _poolTheMasterOfLakeTown,
     _poolThePartingOfTheWays,
+    _poolTheSpikeCactus,
     _poolThelonsCurse,
     _poolThopterSpyNetwork,
     _poolThornmantleStriker,

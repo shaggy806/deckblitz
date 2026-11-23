@@ -262,6 +262,7 @@ import _poolEclipsedSteppe from "../pool/eclipsed-steppe.js";
 import _poolEerieInterference from "../pool/eerie-interference.js";
 import _poolEiganjoSeatOfTheEmpire from "../pool/eiganjo-seat-of-the-empire.js";
 import _poolElderAuntie from "../pool/elder-auntie.js";
+import _poolEldestDragonHighlander from "../pool/eldest-dragon-highlander.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolElementalMastery from "../pool/elemental-mastery.js";
 import _poolEmbersmith from "../pool/embersmith.js";
@@ -430,6 +431,7 @@ import _poolIdyllicTutor from "../pool/idyllic-tutor.js";
 import _poolIgneousCur from "../pool/igneous-cur.js";
 import _poolIlluminateHistory from "../pool/illuminate-history.js";
 import _poolIllusoryDemon from "../pool/illusory-demon.js";
+import _poolImaginaryFriends from "../pool/imaginary-friends.js";
 import _poolImaginaryPet from "../pool/imaginary-pet.js";
 import _poolImmolatingGlare from "../pool/immolating-glare.js";
 import _poolImpetuousDevils from "../pool/impetuous-devils.js";
@@ -477,6 +479,7 @@ import _poolKembasBanner from "../pool/kembas-banner.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
 import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
 import _poolKhanDespotByDesign from "../pool/khan-despot-by-design.js";
+import _poolKibosBananamobile from "../pool/kibos-bananamobile.js";
 import _poolKillianInkDuelist from "../pool/killian-ink-duelist.js";
 import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
 import _poolKithkeeper from "../pool/kithkeeper.js";
@@ -671,6 +674,7 @@ import _poolPrimevalHerald from "../pool/primeval-herald.js";
 import _poolPrismariApprentice from "../pool/prismari-apprentice.js";
 import _poolPrismariPledgemage from "../pool/prismari-pledgemage.js";
 import _poolPrismaticUndercurrents from "../pool/prismatic-undercurrents.js";
+import _poolProcessingPlant from "../pool/processing-plant.js";
 import _poolProdigiousGrowth from "../pool/prodigious-growth.js";
 import _poolProgenitorMimic from "../pool/progenitor-mimic.js";
 import _poolProgenitus from "../pool/progenitus.js";
@@ -773,6 +777,7 @@ import _poolSearingRays from "../pool/searing-rays.js";
 import _poolSecondChance from "../pool/second-chance.js";
 import _poolSeeBeyond from "../pool/see-beyond.js";
 import _poolSeeRed from "../pool/see-red.js";
+import _poolSeerOfTheBrightSide from "../pool/seer-of-the-bright-side.js";
 import _poolSeizedFromSlumber from "../pool/seized-from-slumber.js";
 import _poolSelesnyaEulogist from "../pool/selesnya-eulogist.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
@@ -1336,6 +1341,7 @@ const shard: CardShard = {
     _poolEerieInterference,
     _poolEiganjoSeatOfTheEmpire,
     _poolElderAuntie,
+    _poolEldestDragonHighlander,
     _poolEldraziConscription,
     _poolElementalMastery,
     _poolEmbersmith,
@@ -1504,6 +1510,7 @@ const shard: CardShard = {
     _poolIgneousCur,
     _poolIlluminateHistory,
     _poolIllusoryDemon,
+    _poolImaginaryFriends,
     _poolImaginaryPet,
     _poolImmolatingGlare,
     _poolImpetuousDevils,
@@ -1551,6 +1558,7 @@ const shard: CardShard = {
     _poolKembasSkyguard,
     _poolKeranosGodOfStorms,
     _poolKhanDespotByDesign,
+    _poolKibosBananamobile,
     _poolKillianInkDuelist,
     _poolKirolHistoryBuff,
     _poolKithkeeper,
@@ -1745,6 +1753,7 @@ const shard: CardShard = {
     _poolPrismariApprentice,
     _poolPrismariPledgemage,
     _poolPrismaticUndercurrents,
+    _poolProcessingPlant,
     _poolProdigiousGrowth,
     _poolProgenitorMimic,
     _poolProgenitus,
@@ -1847,6 +1856,7 @@ const shard: CardShard = {
     _poolSecondChance,
     _poolSeeBeyond,
     _poolSeeRed,
+    _poolSeerOfTheBrightSide,
     _poolSeizedFromSlumber,
     _poolSelesnyaEulogist,
     _poolSelesnyaSignet,

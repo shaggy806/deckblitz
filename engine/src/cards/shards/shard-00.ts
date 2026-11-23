@@ -466,6 +466,7 @@ import _poolKabiraCrossroads from "../pool/kabira-crossroads.js";
 import _poolKabiraVindicator from "../pool/kabira-vindicator.js";
 import _poolKalainReclusivePainter from "../pool/kalain-reclusive-painter.js";
 import _poolKamiOfTheHunt from "../pool/kami-of-the-hunt.js";
+import _poolKamigawaCharm from "../pool/kamigawa-charm.js";
 import _poolKarakykGuardian from "../pool/karakyk-guardian.js";
 import _poolKavuLair from "../pool/kavu-lair.js";
 import _poolKayasOnslaught from "../pool/kayas-onslaught.js";
@@ -811,6 +812,7 @@ import _poolSoulherder from "../pool/soulherder.js";
 import _poolSoulshriek from "../pool/soulshriek.js";
 import _poolSowerOfChaos from "../pool/sower-of-chaos.js";
 import _poolSowingSalt from "../pool/sowing-salt.js";
+import _poolSpaghettiJunction from "../pool/spaghetti-junction.js";
 import _poolSparkmagesGambit from "../pool/sparkmages-gambit.js";
 import _poolSpectacleSummit from "../pool/spectacle-summit.js";
 import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
@@ -899,6 +901,7 @@ import _poolTheMoment from "../pool/the-moment.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheNakedTime from "../pool/the-naked-time.js";
 import _poolTheRavensWarning from "../pool/the-ravens-warning.js";
+import _poolTheRoaringToeclaws from "../pool/the-roaring-toeclaws.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
 import _poolTheUrSphinx from "../pool/the-ur-sphinx.js";
@@ -1528,6 +1531,7 @@ const shard: CardShard = {
     _poolKabiraVindicator,
     _poolKalainReclusivePainter,
     _poolKamiOfTheHunt,
+    _poolKamigawaCharm,
     _poolKarakykGuardian,
     _poolKavuLair,
     _poolKayasOnslaught,
@@ -1873,6 +1877,7 @@ const shard: CardShard = {
     _poolSoulshriek,
     _poolSowerOfChaos,
     _poolSowingSalt,
+    _poolSpaghettiJunction,
     _poolSparkmagesGambit,
     _poolSpectacleSummit,
     _poolSpectralShepherd,
@@ -1961,6 +1966,7 @@ const shard: CardShard = {
     _poolTheMycotyrant,
     _poolTheNakedTime,
     _poolTheRavensWarning,
+    _poolTheRoaringToeclaws,
     _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,
     _poolTheUrSphinx,

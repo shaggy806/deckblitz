@@ -50,6 +50,7 @@ import _poolAsmodeusTheArchfiend from "../pool/asmodeus-the-archfiend.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
+import _poolAteOClock from "../pool/ate-o-clock.js";
 import _poolAtrisOracleOfHalfTruths from "../pool/atris-oracle-of-half-truths.js";
 import _poolAuraFinesse from "../pool/aura-finesse.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
@@ -409,6 +410,7 @@ import _poolHeliodSunCrowned from "../pool/heliod-sun-crowned.js";
 import _poolHerculesPrinceOfPower from "../pool/hercules-prince-of-power.js";
 import _poolHermiticNautilus from "../pool/hermitic-nautilus.js";
 import _poolHeroicTeamwork from "../pool/heroic-teamwork.js";
+import _poolHeyHasAnyoneSeenGarruk from "../pool/hey-has-anyone-seen-garruk.js";
 import _poolHiddenLair from "../pool/hidden-lair.js";
 import _poolHiddenNecropolis from "../pool/hidden-necropolis.js";
 import _poolHighSeas from "../pool/high-seas.js";
@@ -603,6 +605,7 @@ import _poolMurderousRider from "../pool/murderous-rider.js";
 import _poolMurderousSpoils from "../pool/murderous-spoils.js";
 import _poolMurktideRegent from "../pool/murktide-regent.js";
 import _poolMuseVessel from "../pool/muse-vessel.js";
+import _poolMyDeckIsAboutASeven from "../pool/my-deck-is-about-a-seven.js";
 import _poolMycologist from "../pool/mycologist.js";
 import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
 import _poolMysticPenitent from "../pool/mystic-penitent.js";
@@ -642,6 +645,7 @@ import _poolOnakkeOgre from "../pool/onakke-ogre.js";
 import _poolOnduRising from "../pool/ondu-rising.js";
 import _poolOnduWarCleric from "../pool/ondu-war-cleric.js";
 import _poolOneRingToRuleThemAll from "../pool/one-ring-to-rule-them-all.js";
+import _poolOneWithDeath from "../pool/one-with-death.js";
 import _poolOniPossession from "../pool/oni-possession.js";
 import _poolOpenFire from "../pool/open-fire.js";
 import _poolOreGorger from "../pool/ore-gorger.js";
@@ -907,8 +911,11 @@ import _poolThallidDevourer from "../pool/thallid-devourer.js";
 import _poolThassasOracle from "../pool/thassas-oracle.js";
 import _poolThatWhichWasTaken from "../pool/that-which-was-taken.js";
 import _poolThawingGlaciers from "../pool/thawing-glaciers.js";
+import _poolTheBearForcePilotRunner from "../pool/the-bear-force-pilot-runner.js";
+import _poolTheBeardedTeakeeper from "../pool/the-bearded-teakeeper.js";
 import _poolTheBlackBreath from "../pool/the-black-breath.js";
 import _poolTheGitrogRavenousRide from "../pool/the-gitrog-ravenous-ride.js";
+import _poolTheGreatJuggernaut from "../pool/the-great-juggernaut.js";
 import _poolTheGrimCaptainsLocker from "../pool/the-grim-captains-locker.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheMeep from "../pool/the-meep.js";
@@ -966,6 +973,7 @@ import _poolUthrosResearchCraft from "../pool/uthros-research-craft.js";
 import _poolValkyriorSkyrider from "../pool/valkyrior-skyrider.js";
 import _poolValleyQuestcaller from "../pool/valley-questcaller.js";
 import _poolVampiresKiss from "../pool/vampires-kiss.js";
+import _poolVazalTheCompleat from "../pool/vazal-the-compleat.js";
 import _poolVectisGloves from "../pool/vectis-gloves.js";
 import _poolVeilOfSummer from "../pool/veil-of-summer.js";
 import _poolVengefulDreams from "../pool/vengeful-dreams.js";
@@ -1133,6 +1141,7 @@ const shard: CardShard = {
     _poolAspiringChampion,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,
+    _poolAteOClock,
     _poolAtrisOracleOfHalfTruths,
     _poolAuraFinesse,
     _poolAuriokChampion,
@@ -1492,6 +1501,7 @@ const shard: CardShard = {
     _poolHerculesPrinceOfPower,
     _poolHermiticNautilus,
     _poolHeroicTeamwork,
+    _poolHeyHasAnyoneSeenGarruk,
     _poolHiddenLair,
     _poolHiddenNecropolis,
     _poolHighSeas,
@@ -1686,6 +1696,7 @@ const shard: CardShard = {
     _poolMurderousSpoils,
     _poolMurktideRegent,
     _poolMuseVessel,
+    _poolMyDeckIsAboutASeven,
     _poolMycologist,
     _poolMyojinOfInfiniteRage,
     _poolMysticPenitent,
@@ -1725,6 +1736,7 @@ const shard: CardShard = {
     _poolOnduRising,
     _poolOnduWarCleric,
     _poolOneRingToRuleThemAll,
+    _poolOneWithDeath,
     _poolOniPossession,
     _poolOpenFire,
     _poolOreGorger,
@@ -1990,8 +2002,11 @@ const shard: CardShard = {
     _poolThassasOracle,
     _poolThatWhichWasTaken,
     _poolThawingGlaciers,
+    _poolTheBearForcePilotRunner,
+    _poolTheBeardedTeakeeper,
     _poolTheBlackBreath,
     _poolTheGitrogRavenousRide,
+    _poolTheGreatJuggernaut,
     _poolTheGrimCaptainsLocker,
     _poolTheLegendOfKyoshi,
     _poolTheMeep,
@@ -2049,6 +2064,7 @@ const shard: CardShard = {
     _poolValkyriorSkyrider,
     _poolValleyQuestcaller,
     _poolVampiresKiss,
+    _poolVazalTheCompleat,
     _poolVectisGloves,
     _poolVeilOfSummer,
     _poolVengefulDreams,

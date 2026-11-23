@@ -260,11 +260,13 @@ import _poolEldaConjurerOfSpectacle from "../pool/elda-conjurer-of-spectacle.js"
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
 import _poolElectricSeaweed from "../pool/electric-seaweed.js";
+import _poolElementalMyDear from "../pool/elemental-my-dear.js";
 import _poolElmarUlvenwaldInformant from "../pool/elmar-ulvenwald-informant.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
 import _poolElvishPioneer from "../pool/elvish-pioneer.js";
 import _poolElvishPiper from "../pool/elvish-piper.js";
 import _poolEmberEyeWolf from "../pool/ember-eye-wolf.js";
+import _poolEnchantmentize from "../pool/enchantmentize.js";
 import _poolEnchantresssPresence from "../pool/enchantresss-presence.js";
 import _poolEnclaveCryptologist from "../pool/enclave-cryptologist.js";
 import _poolEndangeredArmodon from "../pool/endangered-armodon.js";
@@ -655,6 +657,7 @@ import _poolPrepare from "../pool/prepare.js";
 import _poolPresenceOfTheMaster from "../pool/presence-of-the-master.js";
 import _poolPrimalcrux from "../pool/primalcrux.js";
 import _poolPrimarisChaplain from "../pool/primaris-chaplain.js";
+import _poolPrimetimeSuspect from "../pool/primetime-suspect.js";
 import _poolPrimevalForce from "../pool/primeval-force.js";
 import _poolPrismRing from "../pool/prism-ring.js";
 import _poolProcrastinate from "../pool/procrastinate.js";
@@ -698,6 +701,7 @@ import _poolReachTheHorizon from "../pool/reach-the-horizon.js";
 import _poolRebellionOfTheFlamekin from "../pool/rebellion-of-the-flamekin.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
 import _poolRecurringInsight from "../pool/recurring-insight.js";
+import _poolRedPriestOfYawgmoth from "../pool/red-priest-of-yawgmoth.js";
 import _poolRedSunsZenith from "../pool/red-suns-zenith.js";
 import _poolRedcapThief from "../pool/redcap-thief.js";
 import _poolReedRichardsSmartestMan from "../pool/reed-richards-smartest-man.js";
@@ -892,6 +896,7 @@ import _poolTaiiWakeenPerfectShot from "../pool/taii-wakeen-perfect-shot.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
 import _poolTamMindfulFirstYear from "../pool/tam-mindful-first-year.js";
 import _poolTangledColony from "../pool/tangled-colony.js";
+import _poolTeferiDruidOfArgoth from "../pool/teferi-druid-of-argoth.js";
 import _poolTeferisReproach from "../pool/teferis-reproach.js";
 import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
 import _poolTemper from "../pool/temper.js";
@@ -1072,6 +1077,7 @@ import _tokensRedHumanToken from "../tokens/red-human-token.js";
 import _tokensSmaug from "../tokens/smaug.js";
 import _tokensSoldierTokenRed11 from "../tokens/soldier-token-red-1-1.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
+import _tokensSquidTokenMinus1Minus1 from "../tokens/squid-token-minus-1-minus-1.js";
 import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
 import _tokensTribbleToken from "../tokens/tribble-token.js";
 import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeaker.js";
@@ -1335,11 +1341,13 @@ const shard: CardShard = {
     _poolEldritchPact,
     _poolElectricEel,
     _poolElectricSeaweed,
+    _poolElementalMyDear,
     _poolElmarUlvenwaldInformant,
     _poolElminstersSimulacrum,
     _poolElvishPioneer,
     _poolElvishPiper,
     _poolEmberEyeWolf,
+    _poolEnchantmentize,
     _poolEnchantresssPresence,
     _poolEnclaveCryptologist,
     _poolEndangeredArmodon,
@@ -1730,6 +1738,7 @@ const shard: CardShard = {
     _poolPresenceOfTheMaster,
     _poolPrimalcrux,
     _poolPrimarisChaplain,
+    _poolPrimetimeSuspect,
     _poolPrimevalForce,
     _poolPrismRing,
     _poolProcrastinate,
@@ -1773,6 +1782,7 @@ const shard: CardShard = {
     _poolRebellionOfTheFlamekin,
     _poolRecklessImpulse,
     _poolRecurringInsight,
+    _poolRedPriestOfYawgmoth,
     _poolRedSunsZenith,
     _poolRedcapThief,
     _poolReedRichardsSmartestMan,
@@ -1967,6 +1977,7 @@ const shard: CardShard = {
     _poolTajuruPathwarden,
     _poolTamMindfulFirstYear,
     _poolTangledColony,
+    _poolTeferiDruidOfArgoth,
     _poolTeferisReproach,
     _poolTelJiladLifebreather,
     _poolTemper,
@@ -2149,6 +2160,7 @@ const shard: CardShard = {
     _tokensSmaug,
     _tokensSoldierTokenRed11,
     _tokensSpiderToken21Reach,
+    _tokensSquidTokenMinus1Minus1,
     _tokensStoneforgedBladeToken,
     _tokensTribbleToken,
     _tokensWurmTokenBaruWurmspeaker,

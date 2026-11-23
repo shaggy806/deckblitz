@@ -11,6 +11,7 @@ import _poolAcesBaseballBat from "../pool/aces-baseball-bat.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAetherStorm from "../pool/aether-storm.js";
+import _poolAetherfluxCar from "../pool/aetherflux-car.js";
 import _poolAethertideWhale from "../pool/aethertide-whale.js";
 import _poolAfterburnerExpert from "../pool/afterburner-expert.js";
 import _poolAgrusKosEternalSoldier from "../pool/agrus-kos-eternal-soldier.js";
@@ -45,6 +46,7 @@ import _poolAronBenaliasRuin from "../pool/aron-benalias-ruin.js";
 import _poolArrogantOutlaw from "../pool/arrogant-outlaw.js";
 import _poolArrogantVampire from "../pool/arrogant-vampire.js";
 import _poolArtifactBlast from "../pool/artifact-blast.js";
+import _poolArtifactUnknownShores from "../pool/artifact-unknown-shores.js";
 import _poolArtificersHex from "../pool/artificers-hex.js";
 import _poolAtKnifepoint from "../pool/at-knifepoint.js";
 import _poolAtTheDoor from "../pool/at-the-door.js";
@@ -656,6 +658,7 @@ import _poolPsionicRitual from "../pool/psionic-ritual.js";
 import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
 import _poolPulseOfTheDross from "../pool/pulse-of-the-dross.js";
+import _poolPulseOfTheHunterMaze from "../pool/pulse-of-the-hunter-maze.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
 import _poolPyreOfTheWorldTree from "../pool/pyre-of-the-world-tree.js";
 import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
@@ -808,6 +811,7 @@ import _poolStormTheVault from "../pool/storm-the-vault.js";
 import _poolStormbind from "../pool/stormbind.js";
 import _poolStormcallerOfKeranos from "../pool/stormcaller-of-keranos.js";
 import _poolStormplainDetainment from "../pool/stormplain-detainment.js";
+import _poolStormscaleWurm from "../pool/stormscale-wurm.js";
 import _poolStrengthOfLunacy from "../pool/strength-of-lunacy.js";
 import _poolStrengthOfTheTajuru from "../pool/strength-of-the-tajuru.js";
 import _poolStrongarmTactics from "../pool/strongarm-tactics.js";
@@ -838,6 +842,7 @@ import _poolTangleTumbler from "../pool/tangle-tumbler.js";
 import _poolTanglebloom from "../pool/tanglebloom.js";
 import _poolTanglepoolBridge from "../pool/tanglepool-bridge.js";
 import _poolTapestryOfTheAges from "../pool/tapestry-of-the-ages.js";
+import _poolTarkirCharm from "../pool/tarkir-charm.js";
 import _poolTarkirDuneshaper from "../pool/tarkir-duneshaper.js";
 import _poolTeamTactics from "../pool/team-tactics.js";
 import _poolTeferisWavecaster from "../pool/teferis-wavecaster.js";
@@ -871,6 +876,7 @@ import _poolTheFrightfulFour from "../pool/the-frightful-four.js";
 import _poolTheHowlingCommandos from "../pool/the-howling-commandos.js";
 import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
 import _poolTheMasamune from "../pool/the-masamune.js";
+import _poolTheMassiveZatcatl from "../pool/the-massive-zatcatl.js";
 import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
@@ -985,6 +991,7 @@ import _poolWolfbittenCaptive from "../pool/wolfbitten-captive.js";
 import _poolWoodlandGuidance from "../pool/woodland-guidance.js";
 import _poolWoodworkProdigy from "../pool/woodwork-prodigy.js";
 import _poolWormfangDrake from "../pool/wormfang-drake.js";
+import _poolWowzerTheAspirational from "../pool/wowzer-the-aspirational.js";
 import _poolWurmquake from "../pool/wurmquake.js";
 import _poolWylieDukeAtiinHero from "../pool/wylie-duke-atiin-hero.js";
 import _poolXenograft from "../pool/xenograft.js";
@@ -1007,6 +1014,7 @@ import _tokensBoarTokenRuralRecruit from "../tokens/boar-token-rural-recruit.js"
 import _tokensConstructTokenJanJansenChaosCrafter from "../tokens/construct-token-jan-jansen-chaos-crafter.js";
 import _tokensDogIllusionToken from "../tokens/dog-illusion-token.js";
 import _tokensElementalTokenPrismariPianist from "../tokens/elemental-token-prismari-pianist.js";
+import _tokensForestToken from "../tokens/forest-token.js";
 import _tokensFungusBeastToken from "../tokens/fungus-beast-token.js";
 import _tokensHumanRogueToken from "../tokens/human-rogue-token.js";
 import _tokensIncubatorToken from "../tokens/incubator-token.js";
@@ -1032,6 +1040,7 @@ const shard: CardShard = {
     _poolAcquisitionOctopus,
     _poolAeridKonstrari,
     _poolAetherStorm,
+    _poolAetherfluxCar,
     _poolAethertideWhale,
     _poolAfterburnerExpert,
     _poolAgrusKosEternalSoldier,
@@ -1066,6 +1075,7 @@ const shard: CardShard = {
     _poolArrogantOutlaw,
     _poolArrogantVampire,
     _poolArtifactBlast,
+    _poolArtifactUnknownShores,
     _poolArtificersHex,
     _poolAtKnifepoint,
     _poolAtTheDoor,
@@ -1677,6 +1687,7 @@ const shard: CardShard = {
     _poolPsychicSpear,
     _poolPullFromTheDeep,
     _poolPulseOfTheDross,
+    _poolPulseOfTheHunterMaze,
     _poolPyreHound,
     _poolPyreOfTheWorldTree,
     _poolPyroclasticHellion,
@@ -1829,6 +1840,7 @@ const shard: CardShard = {
     _poolStormbind,
     _poolStormcallerOfKeranos,
     _poolStormplainDetainment,
+    _poolStormscaleWurm,
     _poolStrengthOfLunacy,
     _poolStrengthOfTheTajuru,
     _poolStrongarmTactics,
@@ -1859,6 +1871,7 @@ const shard: CardShard = {
     _poolTanglebloom,
     _poolTanglepoolBridge,
     _poolTapestryOfTheAges,
+    _poolTarkirCharm,
     _poolTarkirDuneshaper,
     _poolTeamTactics,
     _poolTeferisWavecaster,
@@ -1892,6 +1905,7 @@ const shard: CardShard = {
     _poolTheHowlingCommandos,
     _poolTheInvincibleIronMan,
     _poolTheMasamune,
+    _poolTheMassiveZatcatl,
     _poolTheMasterMesmerist,
     _poolTheRegalia,
     _poolTheSibsigCeremony,
@@ -2006,6 +2020,7 @@ const shard: CardShard = {
     _poolWoodlandGuidance,
     _poolWoodworkProdigy,
     _poolWormfangDrake,
+    _poolWowzerTheAspirational,
     _poolWurmquake,
     _poolWylieDukeAtiinHero,
     _poolXenograft,
@@ -2030,6 +2045,7 @@ const shard: CardShard = {
     _tokensConstructTokenJanJansenChaosCrafter,
     _tokensDogIllusionToken,
     _tokensElementalTokenPrismariPianist,
+    _tokensForestToken,
     _tokensFungusBeastToken,
     _tokensHumanRogueToken,
     _tokensIncubatorToken,

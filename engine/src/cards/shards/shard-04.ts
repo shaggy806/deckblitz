@@ -492,6 +492,7 @@ import _poolLingeringDeath from "../pool/lingering-death.js";
 import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLoafingGiant from "../pool/loafing-giant.js";
 import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
+import _poolLocusCobra from "../pool/locus-cobra.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLongForgottenGohei from "../pool/long-forgotten-gohei.js";
 import _poolLoomingSpires from "../pool/looming-spires.js";
@@ -506,6 +507,7 @@ import _poolLuxiorGiadasGift from "../pool/luxior-giadas-gift.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagebaneArmor from "../pool/magebane-armor.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
+import _poolMagusOfTheChains from "../pool/magus-of-the-chains.js";
 import _poolMajesticMyriarch from "../pool/majestic-myriarch.js";
 import _poolMakeAnExample from "../pool/make-an-example.js";
 import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.js";
@@ -531,6 +533,7 @@ import _poolMeriadocBrandybuck from "../pool/meriadoc-brandybuck.js";
 import _poolMidnightRitual from "../pool/midnight-ritual.js";
 import _poolMindclawShaman from "../pool/mindclaw-shaman.js";
 import _poolMindfulBiomancer from "../pool/mindful-biomancer.js";
+import _poolMindslaverToolkit from "../pool/mindslaver-toolkit.js";
 import _poolMistfireWeaver from "../pool/mistfire-weaver.js";
 import _poolMobJustice from "../pool/mob-justice.js";
 import _poolMockingbirdAceAgent from "../pool/mockingbird-ace-agent.js";
@@ -600,6 +603,7 @@ import _poolPastInFlames from "../pool/past-in-flames.js";
 import _poolPatchworkCrawler from "../pool/patchwork-crawler.js";
 import _poolPathOfAncestry from "../pool/path-of-ancestry.js";
 import _poolPatricianGeist from "../pool/patrician-geist.js";
+import _poolPenumbraUmbra from "../pool/penumbra-umbra.js";
 import _poolPestMascot from "../pool/pest-mascot.js";
 import _poolPestilenceDemon from "../pool/pestilence-demon.js";
 import _poolPheresBandThunderhoof from "../pool/pheres-band-thunderhoof.js";
@@ -723,6 +727,7 @@ import _poolScorchmark from "../pool/scorchmark.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
 import _poolSeedguideAsh from "../pool/seedguide-ash.js";
 import _poolSeedsOfInnocence from "../pool/seeds-of-innocence.js";
+import _poolSegovianSword from "../pool/segovian-sword.js";
 import _poolSeizanPerverterOfTruth from "../pool/seizan-perverter-of-truth.js";
 import _poolSeizeTheDay from "../pool/seize-the-day.js";
 import _poolSelectiveSnare from "../pool/selective-snare.js";
@@ -982,6 +987,7 @@ import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
 import _poolWeRideAtDawn from "../pool/we-ride-at-dawn.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
+import _poolWelcomeToMiniApolis from "../pool/welcome-to-mini-apolis.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhirlpoolWhelm from "../pool/whirlpool-whelm.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
@@ -1028,6 +1034,7 @@ import _tokensHumanClericToken21LifelinkHaste from "../tokens/human-cleric-token
 import _tokensInsectTokenBlack01 from "../tokens/insect-token-black-0-1.js";
 import _tokensKnightTokenFirstStrike from "../tokens/knight-token-first-strike.js";
 import _tokensKrakenTokenTrample from "../tokens/kraken-token-trample.js";
+import _tokensPerformerToken from "../tokens/performer-token.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensPorthos from "../tokens/porthos.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
@@ -1039,6 +1046,7 @@ import _tokensSpiritTokenSaintTraftAndRemKarolus from "../tokens/spirit-token-sa
 import _tokensThopterTokenIntrudeOnTheMind from "../tokens/thopter-token-intrude-on-the-mind.js";
 import _tokensTreefolkWarriorToken from "../tokens/treefolk-warrior-token.js";
 import _tokensWallToken13 from "../tokens/wall-token-1-3.js";
+import _tokensWindmillToken from "../tokens/windmill-token.js";
 import _tokensZombieRogueToken from "../tokens/zombie-rogue-token.js";
 import _tokensZombieTokenGeralfVisionaryStitcher from "../tokens/zombie-token-geralf-visionary-stitcher.js";
 
@@ -1533,6 +1541,7 @@ const shard: CardShard = {
     _poolLivingPhone,
     _poolLoafingGiant,
     _poolLoathsomeTroll,
+    _poolLocusCobra,
     _poolLongFinnedSkywhale,
     _poolLongForgottenGohei,
     _poolLoomingSpires,
@@ -1547,6 +1556,7 @@ const shard: CardShard = {
     _poolMacabreWaltz,
     _poolMagebaneArmor,
     _poolMagnifyingGlass,
+    _poolMagusOfTheChains,
     _poolMajesticMyriarch,
     _poolMakeAnExample,
     _poolMalcolmKeenEyedNavigator,
@@ -1572,6 +1582,7 @@ const shard: CardShard = {
     _poolMidnightRitual,
     _poolMindclawShaman,
     _poolMindfulBiomancer,
+    _poolMindslaverToolkit,
     _poolMistfireWeaver,
     _poolMobJustice,
     _poolMockingbirdAceAgent,
@@ -1641,6 +1652,7 @@ const shard: CardShard = {
     _poolPatchworkCrawler,
     _poolPathOfAncestry,
     _poolPatricianGeist,
+    _poolPenumbraUmbra,
     _poolPestMascot,
     _poolPestilenceDemon,
     _poolPheresBandThunderhoof,
@@ -1764,6 +1776,7 @@ const shard: CardShard = {
     _poolSeafloorOracle,
     _poolSeedguideAsh,
     _poolSeedsOfInnocence,
+    _poolSegovianSword,
     _poolSeizanPerverterOfTruth,
     _poolSeizeTheDay,
     _poolSelectiveSnare,
@@ -2023,6 +2036,7 @@ const shard: CardShard = {
     _poolWayspeakerBodyguard,
     _poolWeRideAtDawn,
     _poolWeaverOfLightning,
+    _poolWelcomeToMiniApolis,
     _poolWheelOfFortune,
     _poolWhirlpoolWhelm,
     _poolWhispersilkCloak,
@@ -2071,6 +2085,7 @@ const shard: CardShard = {
     _tokensInsectTokenBlack01,
     _tokensKnightTokenFirstStrike,
     _tokensKrakenTokenTrample,
+    _tokensPerformerToken,
     _tokensPhyrexianMyrToken,
     _tokensPorthos,
     _tokensSandWarriorToken,
@@ -2082,6 +2097,7 @@ const shard: CardShard = {
     _tokensThopterTokenIntrudeOnTheMind,
     _tokensTreefolkWarriorToken,
     _tokensWallToken13,
+    _tokensWindmillToken,
     _tokensZombieRogueToken,
     _tokensZombieTokenGeralfVisionaryStitcher,
   ],

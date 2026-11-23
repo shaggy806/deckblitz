@@ -71,6 +71,7 @@ import _poolAvengersAssemble from "../pool/avengers-assemble.js";
 import _poolAvizoa from "../pool/avizoa.js";
 import _poolAxebaneFerox from "../pool/axebane-ferox.js";
 import _poolBabaLysagaNightWitch from "../pool/baba-lysaga-night-witch.js";
+import _poolBagOfStroopwafels from "../pool/bag-of-stroopwafels.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBalanceOfPower from "../pool/balance-of-power.js";
 import _poolBarbarianClass from "../pool/barbarian-class.js";
@@ -188,6 +189,7 @@ import _poolCobraTrap from "../pool/cobra-trap.js";
 import _poolColdSnap from "../pool/cold-snap.js";
 import _poolCombadge from "../pool/combadge.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
+import _poolCommandMine from "../pool/command-mine.js";
 import _poolCommanderWilliamRiker from "../pool/commander-william-riker.js";
 import _poolCompleteDisregard from "../pool/complete-disregard.js";
 import _poolConquerorsFlail from "../pool/conquerors-flail.js";
@@ -245,6 +247,7 @@ import _poolDesolation from "../pool/desolation.js";
 import _poolDetentionVortex from "../pool/detention-vortex.js";
 import _poolDevastation from "../pool/devastation.js";
 import _poolDeviantGlee from "../pool/deviant-glee.js";
+import _poolDevotedMardu from "../pool/devoted-mardu.js";
 import _poolDiamondFaerie from "../pool/diamond-faerie.js";
 import _poolDigsiteEngineer from "../pool/digsite-engineer.js";
 import _poolDinasGuidance from "../pool/dinas-guidance.js";
@@ -322,6 +325,7 @@ import _poolFallajiWayfarer from "../pool/fallaji-wayfarer.js";
 import _poolFamiliarGround from "../pool/familiar-ground.js";
 import _poolFatalFrenzy from "../pool/fatal-frenzy.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
+import _poolFearOfFearItself from "../pool/fear-of-fear-itself.js";
 import _poolFeastOfWorms from "../pool/feast-of-worms.js";
 import _poolFeastOrFamine from "../pool/feast-or-famine.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
@@ -472,6 +476,7 @@ import _poolIdolOfEndurance from "../pool/idol-of-endurance.js";
 import _poolImoenMysticTrickster from "../pool/imoen-mystic-trickster.js";
 import _poolInThePresenceOfAges from "../pool/in-the-presence-of-ages.js";
 import _poolIncarnationTechnique from "../pool/incarnation-technique.js";
+import _poolIncisorSteed from "../pool/incisor-steed.js";
 import _poolIncubationDruid from "../pool/incubation-druid.js";
 import _poolInfernalTribute from "../pool/infernal-tribute.js";
 import _poolInfiniteObliteration from "../pool/infinite-obliteration.js";
@@ -625,6 +630,7 @@ import _poolNefCropEntangler from "../pool/nef-crop-entangler.js";
 import _poolNeglectedHeirloom from "../pool/neglected-heirloom.js";
 import _poolNerivCracklingVanguard from "../pool/neriv-crackling-vanguard.js";
 import _poolNetworkDisruptor from "../pool/network-disruptor.js";
+import _poolNewMasterOfArms from "../pool/new-master-of-arms.js";
 import _poolNiblisOfFrost from "../pool/niblis-of-frost.js";
 import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
 import _poolNightOfSoulsBetrayal from "../pool/night-of-souls-betrayal.js";
@@ -667,6 +673,7 @@ import _poolPeemaTrailblazer from "../pool/peema-trailblazer.js";
 import _poolPeggyCarterSecretAgent from "../pool/peggy-carter-secret-agent.js";
 import _poolPennonBlade from "../pool/pennon-blade.js";
 import _poolPermissionDenied from "../pool/permission-denied.js";
+import _poolPersonalDecoy from "../pool/personal-decoy.js";
 import _poolPhyrexianIronfoot from "../pool/phyrexian-ironfoot.js";
 import _poolPicklockPrankster from "../pool/picklock-prankster.js";
 import _poolPillarOfOrigins from "../pool/pillar-of-origins.js";
@@ -901,6 +908,7 @@ import _poolTempleOfMalady from "../pool/temple-of-malady.js";
 import _poolTendTheSprigs from "../pool/tend-the-sprigs.js";
 import _poolTheCauldronOfEternity from "../pool/the-cauldron-of-eternity.js";
 import _poolTheDarknessCrystal from "../pool/the-darkness-crystal.js";
+import _poolTheDiluHorse from "../pool/the-dilu-horse.js";
 import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheGoldenThrone from "../pool/the-golden-throne.js";
 import _poolTheHorusHeresy from "../pool/the-horus-heresy.js";
@@ -1119,6 +1127,7 @@ const shard: CardShard = {
     _poolAvizoa,
     _poolAxebaneFerox,
     _poolBabaLysagaNightWitch,
+    _poolBagOfStroopwafels,
     _poolBairdArgivianRecruiter,
     _poolBalanceOfPower,
     _poolBarbarianClass,
@@ -1236,6 +1245,7 @@ const shard: CardShard = {
     _poolColdSnap,
     _poolCombadge,
     _poolCombatTutorial,
+    _poolCommandMine,
     _poolCommanderWilliamRiker,
     _poolCompleteDisregard,
     _poolConquerorsFlail,
@@ -1293,6 +1303,7 @@ const shard: CardShard = {
     _poolDetentionVortex,
     _poolDevastation,
     _poolDeviantGlee,
+    _poolDevotedMardu,
     _poolDiamondFaerie,
     _poolDigsiteEngineer,
     _poolDinasGuidance,
@@ -1370,6 +1381,7 @@ const shard: CardShard = {
     _poolFamiliarGround,
     _poolFatalFrenzy,
     _poolFateUnraveler,
+    _poolFearOfFearItself,
     _poolFeastOfWorms,
     _poolFeastOrFamine,
     _poolFeasterOfFools,
@@ -1520,6 +1532,7 @@ const shard: CardShard = {
     _poolImoenMysticTrickster,
     _poolInThePresenceOfAges,
     _poolIncarnationTechnique,
+    _poolIncisorSteed,
     _poolIncubationDruid,
     _poolInfernalTribute,
     _poolInfiniteObliteration,
@@ -1673,6 +1686,7 @@ const shard: CardShard = {
     _poolNeglectedHeirloom,
     _poolNerivCracklingVanguard,
     _poolNetworkDisruptor,
+    _poolNewMasterOfArms,
     _poolNiblisOfFrost,
     _poolNicoMinoruRunaway,
     _poolNightOfSoulsBetrayal,
@@ -1715,6 +1729,7 @@ const shard: CardShard = {
     _poolPeggyCarterSecretAgent,
     _poolPennonBlade,
     _poolPermissionDenied,
+    _poolPersonalDecoy,
     _poolPhyrexianIronfoot,
     _poolPicklockPrankster,
     _poolPillarOfOrigins,
@@ -1949,6 +1964,7 @@ const shard: CardShard = {
     _poolTendTheSprigs,
     _poolTheCauldronOfEternity,
     _poolTheDarknessCrystal,
+    _poolTheDiluHorse,
     _poolTheGoldSaucer,
     _poolTheGoldenThrone,
     _poolTheHorusHeresy,

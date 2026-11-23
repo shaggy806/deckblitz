@@ -150,6 +150,7 @@ import _poolChandraTorchOfDefiance from "../pool/chandra-torch-of-defiance.js";
 import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
 import _poolChaosMutation from "../pool/chaos-mutation.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
+import _poolCharDog from "../pool/char-dog.js";
 import _poolChargeAcrossTheAraba from "../pool/charge-across-the-araba.js";
 import _poolCharredFoyerWarpedSpace from "../pool/charred-foyer-warped-space.js";
 import _poolChemistersTrick from "../pool/chemisters-trick.js";
@@ -216,6 +217,7 @@ import _poolDashHopes from "../pool/dash-hopes.js";
 import _poolDauntlessRiverMarshal from "../pool/dauntless-river-marshal.js";
 import _poolDavrielsShadowfugue from "../pool/davriels-shadowfugue.js";
 import _poolDawnElemental from "../pool/dawn-elemental.js";
+import _poolDaxiverIzzetElectromancer from "../pool/daxiver-izzet-electromancer.js";
 import _poolDaybreakCharger from "../pool/daybreak-charger.js";
 import _poolDeadIronSledge from "../pool/dead-iron-sledge.js";
 import _poolDeadbridgeChant from "../pool/deadbridge-chant.js";
@@ -271,6 +273,7 @@ import _poolDramaticAccusation from "../pool/dramatic-accusation.js";
 import _poolDreadShade from "../pool/dread-shade.js";
 import _poolDreamThrush from "../pool/dream-thrush.js";
 import _poolDroolingGroodion from "../pool/drooling-groodion.js";
+import _poolDropBear from "../pool/drop-bear.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
@@ -520,6 +523,7 @@ import _poolLionUmbra from "../pool/lion-umbra.js";
 import _poolLionVulture from "../pool/lion-vulture.js";
 import _poolLionheartGlimmer from "../pool/lionheart-glimmer.js";
 import _poolLiquify from "../pool/liquify.js";
+import _poolLiteralDelverOfSecrets from "../pool/literal-delver-of-secrets.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
 import _poolLivingArtifact from "../pool/living-artifact.js";
 import _poolLivingDeath from "../pool/living-death.js";
@@ -615,6 +619,7 @@ import _poolNimbleBirdsticker from "../pool/nimble-birdsticker.js";
 import _poolNimbusMaze from "../pool/nimbus-maze.js";
 import _poolNivixCyclops from "../pool/nivix-cyclops.js";
 import _poolNorthPoleGates from "../pool/north-pole-gates.js";
+import _poolNoxiousBayou from "../pool/noxious-bayou.js";
 import _poolNullpriestOfOblivion from "../pool/nullpriest-of-oblivion.js";
 import _poolNumaiOutcast from "../pool/numai-outcast.js";
 import _poolNumbingDose from "../pool/numbing-dose.js";
@@ -631,6 +636,7 @@ import _poolOneClownBand from "../pool/one-clown-band.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOriginalSkullclamp from "../pool/original-skullclamp.js";
 import _poolOskarRubbishReclaimer from "../pool/oskar-rubbish-reclaimer.js";
 import _poolOutlawsMerriment from "../pool/outlaws-merriment.js";
 import _poolOvertaker from "../pool/overtaker.js";
@@ -899,6 +905,7 @@ import _poolTalruumMinotaur from "../pool/talruum-minotaur.js";
 import _poolTamanoa from "../pool/tamanoa.js";
 import _poolTamiyosSafekeeping from "../pool/tamiyos-safekeeping.js";
 import _poolTannukMemorialEnsign from "../pool/tannuk-memorial-ensign.js";
+import _poolTarkirOmenpath from "../pool/tarkir-omenpath.js";
 import _poolTaroxBladewing from "../pool/tarox-bladewing.js";
 import _poolTayamLuminousEnigma from "../pool/tayam-luminous-enigma.js";
 import _poolTelekineticBonds from "../pool/telekinetic-bonds.js";
@@ -1051,6 +1058,7 @@ import _tokensDemonToken33 from "../tokens/demon-token-3-3.js";
 import _tokensDinosaurToken33 from "../tokens/dinosaur-token-3-3.js";
 import _tokensDragonToken66 from "../tokens/dragon-token-6-6.js";
 import _tokensEverywhereToken from "../tokens/everywhere-token.js";
+import _tokensGamerToken from "../tokens/gamer-token.js";
 import _tokensHydraTokenBlackGreen from "../tokens/hydra-token-black-green.js";
 import _tokensKithkinSoldierToken from "../tokens/kithkin-soldier-token.js";
 import _tokensKnightToken31 from "../tokens/knight-token-3-1.js";
@@ -1213,6 +1221,7 @@ const shard: CardShard = {
     _poolChangelingWayfinder,
     _poolChaosMutation,
     _poolChapelGeist,
+    _poolCharDog,
     _poolChargeAcrossTheAraba,
     _poolCharredFoyerWarpedSpace,
     _poolChemistersTrick,
@@ -1279,6 +1288,7 @@ const shard: CardShard = {
     _poolDauntlessRiverMarshal,
     _poolDavrielsShadowfugue,
     _poolDawnElemental,
+    _poolDaxiverIzzetElectromancer,
     _poolDaybreakCharger,
     _poolDeadIronSledge,
     _poolDeadbridgeChant,
@@ -1334,6 +1344,7 @@ const shard: CardShard = {
     _poolDreadShade,
     _poolDreamThrush,
     _poolDroolingGroodion,
+    _poolDropBear,
     _poolDryadsRevival,
     _poolDuelTactics,
     _poolDuelcraftTrainer,
@@ -1583,6 +1594,7 @@ const shard: CardShard = {
     _poolLionVulture,
     _poolLionheartGlimmer,
     _poolLiquify,
+    _poolLiteralDelverOfSecrets,
     _poolLiveOrDie,
     _poolLivingArtifact,
     _poolLivingDeath,
@@ -1678,6 +1690,7 @@ const shard: CardShard = {
     _poolNimbusMaze,
     _poolNivixCyclops,
     _poolNorthPoleGates,
+    _poolNoxiousBayou,
     _poolNullpriestOfOblivion,
     _poolNumaiOutcast,
     _poolNumbingDose,
@@ -1694,6 +1707,7 @@ const shard: CardShard = {
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOriginalSkullclamp,
     _poolOskarRubbishReclaimer,
     _poolOutlawsMerriment,
     _poolOvertaker,
@@ -1962,6 +1976,7 @@ const shard: CardShard = {
     _poolTamanoa,
     _poolTamiyosSafekeeping,
     _poolTannukMemorialEnsign,
+    _poolTarkirOmenpath,
     _poolTaroxBladewing,
     _poolTayamLuminousEnigma,
     _poolTelekineticBonds,
@@ -2116,6 +2131,7 @@ const shard: CardShard = {
     _tokensDinosaurToken33,
     _tokensDragonToken66,
     _tokensEverywhereToken,
+    _tokensGamerToken,
     _tokensHydraTokenBlackGreen,
     _tokensKithkinSoldierToken,
     _tokensKnightToken31,

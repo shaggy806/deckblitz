@@ -383,6 +383,7 @@ import _poolHide from "../pool/hide.js";
 import _poolHinataDawnCrowned from "../pool/hinata-dawn-crowned.js";
 import _poolHivespineWolverine from "../pool/hivespine-wolverine.js";
 import _poolHoodedBrawler from "../pool/hooded-brawler.js";
+import _poolHoundOfUrabrask from "../pool/hound-of-urabrask.js";
 import _poolHuatlisSnubhorn from "../pool/huatlis-snubhorn.js";
 import _poolHulkbusterArmor from "../pool/hulkbuster-armor.js";
 import _poolHulksThunderclap from "../pool/hulks-thunderclap.js";
@@ -483,6 +484,7 @@ import _poolLeechingSliver from "../pool/leeching-sliver.js";
 import _poolLeeringGargoyle from "../pool/leering-gargoyle.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLegionsOfLimDul from "../pool/legions-of-lim-dul.js";
+import _poolLeisureBicycle from "../pool/leisure-bicycle.js";
 import _poolLembas from "../pool/lembas.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLeylineOfTransformation from "../pool/leyline-of-transformation.js";
@@ -503,6 +505,7 @@ import _poolLurkingChupacabra from "../pool/lurking-chupacabra.js";
 import _poolMabelBitterRecluse from "../pool/mabel-bitter-recluse.js";
 import _poolMadRatter from "../pool/mad-ratter.js";
 import _poolMagesContest from "../pool/mages-contest.js";
+import _poolMagicconsecratedSphinx from "../pool/magicconsecrated-sphinx.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
 import _poolMagusOfTheBazaar from "../pool/magus-of-the-bazaar.js";
 import _poolMakeMischief from "../pool/make-mischief.js";
@@ -872,12 +875,15 @@ import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTerrarion from "../pool/terrarion.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
+import _poolTheBelligerentAndUselessIsland from "../pool/the-belligerent-and-useless-island.js";
 import _poolTheCavesOfAndrozani from "../pool/the-caves-of-androzani.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheEternalWanderer from "../pool/the-eternal-wanderer.js";
+import _poolTheForgottenPlace from "../pool/the-forgotten-place.js";
 import _poolTheGhoulGunslinger from "../pool/the-ghoul-gunslinger.js";
 import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
+import _poolTheKeeperOfTheYellowHat from "../pool/the-keeper-of-the-yellow-hat.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
 import _poolTheMuckslingerGang from "../pool/the-muckslinger-gang.js";
 import _poolTheRiseOfSozin from "../pool/the-rise-of-sozin.js";
@@ -918,6 +924,7 @@ import _poolUneasyAlliance from "../pool/uneasy-alliance.js";
 import _poolUnexpectedFangs from "../pool/unexpected-fangs.js";
 import _poolUnhallowedCathar from "../pool/unhallowed-cathar.js";
 import _poolUnhinge from "../pool/unhinge.js";
+import _poolUnicycle from "../pool/unicycle.js";
 import _poolUniteTheCoalition from "../pool/unite-the-coalition.js";
 import _poolUnnaturalSelection from "../pool/unnatural-selection.js";
 import _poolUnswervingSloth from "../pool/unswerving-sloth.js";
@@ -1408,6 +1415,7 @@ const shard: CardShard = {
     _poolHinataDawnCrowned,
     _poolHivespineWolverine,
     _poolHoodedBrawler,
+    _poolHoundOfUrabrask,
     _poolHuatlisSnubhorn,
     _poolHulkbusterArmor,
     _poolHulksThunderclap,
@@ -1508,6 +1516,7 @@ const shard: CardShard = {
     _poolLeeringGargoyle,
     _poolLegionLoyalty,
     _poolLegionsOfLimDul,
+    _poolLeisureBicycle,
     _poolLembas,
     _poolLeylineDowser,
     _poolLeylineOfTransformation,
@@ -1528,6 +1537,7 @@ const shard: CardShard = {
     _poolMabelBitterRecluse,
     _poolMadRatter,
     _poolMagesContest,
+    _poolMagicconsecratedSphinx,
     _poolMagmakinArtillerist,
     _poolMagusOfTheBazaar,
     _poolMakeMischief,
@@ -1897,12 +1907,15 @@ const shard: CardShard = {
     _poolTerrarion,
     _poolTevalsJudgment,
     _poolThalakosMistfolk,
+    _poolTheBelligerentAndUselessIsland,
     _poolTheCavesOfAndrozani,
     _poolTheDrossPits,
     _poolTheEternalWanderer,
+    _poolTheForgottenPlace,
     _poolTheGhoulGunslinger,
     _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
+    _poolTheKeeperOfTheYellowHat,
     _poolTheManaRig,
     _poolTheMuckslingerGang,
     _poolTheRiseOfSozin,
@@ -1943,6 +1956,7 @@ const shard: CardShard = {
     _poolUnexpectedFangs,
     _poolUnhallowedCathar,
     _poolUnhinge,
+    _poolUnicycle,
     _poolUniteTheCoalition,
     _poolUnnaturalSelection,
     _poolUnswervingSloth,

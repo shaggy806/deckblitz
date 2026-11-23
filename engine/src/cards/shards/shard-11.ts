@@ -149,6 +149,7 @@ import _poolCaptainVargusWrath from "../pool/captain-vargus-wrath.js";
 import _poolCarnivorousCultivator from "../pool/carnivorous-cultivator.js";
 import _poolCarrionette from "../pool/carrionette.js";
 import _poolCastIntoDarkness from "../pool/cast-into-darkness.js";
+import _poolCatOven from "../pool/cat-oven.js";
 import _poolCathedralSanctifier from "../pool/cathedral-sanctifier.js";
 import _poolCauldronHaze from "../pool/cauldron-haze.js";
 import _poolCavePeople from "../pool/cave-people.js";
@@ -224,6 +225,7 @@ import _poolDeathIsIrrelevant from "../pool/death-is-irrelevant.js";
 import _poolDebtorsPulpit from "../pool/debtors-pulpit.js";
 import _poolDecommission from "../pool/decommission.js";
 import _poolDeemWorthy from "../pool/deem-worthy.js";
+import _poolDeepDishPizza from "../pool/deep-dish-pizza.js";
 import _poolDeepGnomeTerramancer from "../pool/deep-gnome-terramancer.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDefendersOfHumanity from "../pool/defenders-of-humanity.js";
@@ -471,6 +473,7 @@ import _poolInvigorate from "../pool/invigorate.js";
 import _poolIridianMaelstrom from "../pool/iridian-maelstrom.js";
 import _poolIronclawOrcs from "../pool/ironclaw-orcs.js";
 import _poolIrreverentRevelers from "../pool/irreverent-revelers.js";
+import _poolIsamaruAndYoshimaru from "../pool/isamaru-and-yoshimaru.js";
 import _poolIsolationAtOrthanc from "../pool/isolation-at-orthanc.js";
 import _poolJaceMemoryAdept from "../pool/jace-memory-adept.js";
 import _poolJacesScrutiny from "../pool/jaces-scrutiny.js";
@@ -495,6 +498,7 @@ import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
 import _poolKeeperOfTheLight from "../pool/keeper-of-the-light.js";
 import _poolKeldonFlamesage from "../pool/keldon-flamesage.js";
 import _poolKetriaCrystal from "../pool/ketria-crystal.js";
+import _poolKevinQuestingDragon from "../pool/kevin-questing-dragon.js";
 import _poolKhaaaaaaaaaaaannn from "../pool/khaaaaaaaaaaaannn.js";
 import _poolKhalniGarden from "../pool/khalni-garden.js";
 import _poolKillSwitch from "../pool/kill-switch.js";
@@ -595,6 +599,7 @@ import _poolMorbidBloom from "../pool/morbid-bloom.js";
 import _poolMoriokReaver from "../pool/moriok-reaver.js";
 import _poolMossDiamond from "../pool/moss-diamond.js";
 import _poolMossdog from "../pool/mossdog.js";
+import _poolMothHerbElixir from "../pool/moth-herb-elixir.js";
 import _poolMountDoom from "../pool/mount-doom.js";
 import _poolMoxSapphire from "../pool/mox-sapphire.js";
 import _poolMoxTantalite from "../pool/mox-tantalite.js";
@@ -712,6 +717,7 @@ import _poolRallyTheRanks from "../pool/rally-the-ranks.js";
 import _poolRambunctiousMutt from "../pool/rambunctious-mutt.js";
 import _poolRamroller from "../pool/ramroller.js";
 import _poolRapidDecay from "../pool/rapid-decay.js";
+import _poolRatatwotwo from "../pool/ratatwotwo.js";
 import _poolRavenousLeucrocota from "../pool/ravenous-leucrocota.js";
 import _poolRavineRaider from "../pool/ravine-raider.js";
 import _poolRaziasPurification from "../pool/razias-purification.js";
@@ -831,6 +837,7 @@ import _poolSorayaTheFalconer from "../pool/soraya-the-falconer.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
 import _poolSoulExchange from "../pool/soul-exchange.js";
 import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
+import _poolSoulOfMirrodin from "../pool/soul-of-mirrodin.js";
 import _poolSowingMycospawn from "../pool/sowing-mycospawn.js";
 import _poolSparkOfCreativity from "../pool/spark-of-creativity.js";
 import _poolSparkRupture from "../pool/spark-rupture.js";
@@ -915,9 +922,11 @@ import _poolTezzeretCruelMachinist from "../pool/tezzeret-cruel-machinist.js";
 import _poolThaliaHereticCathar from "../pool/thalia-heretic-cathar.js";
 import _poolThatsRoughBuddy from "../pool/thats-rough-buddy.js";
 import _poolTheBeamtownBullies from "../pool/the-beamtown-bullies.js";
+import _poolTheBearForcePilot from "../pool/the-bear-force-pilot.js";
 import _poolTheBestOfBothWorlds from "../pool/the-best-of-both-worlds.js";
 import _poolTheNeutrinos from "../pool/the-neutrinos.js";
 import _poolTheRuinousPowers from "../pool/the-ruinous-powers.js";
+import _poolTheSwampKitten from "../pool/the-swamp-kitten.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolTheTombOfAclazotz from "../pool/the-tomb-of-aclazotz.js";
 import _poolTheloniteDruid from "../pool/thelonite-druid.js";
@@ -1056,6 +1065,7 @@ import _tokensElementalShamanTokenHaste from "../tokens/elemental-shaman-token-h
 import _tokensElementalToken from "../tokens/elemental-token.js";
 import _tokensGreenElementalToken22 from "../tokens/green-elemental-token-2-2.js";
 import _tokensHeroTokenBlackMagesRod from "../tokens/hero-token-black-mages-rod.js";
+import _tokensHumanRebelToken from "../tokens/human-rebel-token.js";
 import _tokensHumanTokenDoctorSpellsCostLess from "../tokens/human-token-doctor-spells-cost-less.js";
 import _tokensNecronWarriorToken from "../tokens/necron-warrior-token.js";
 import _tokensOgreToken from "../tokens/ogre-token.js";
@@ -1223,6 +1233,7 @@ const shard: CardShard = {
     _poolCarnivorousCultivator,
     _poolCarrionette,
     _poolCastIntoDarkness,
+    _poolCatOven,
     _poolCathedralSanctifier,
     _poolCauldronHaze,
     _poolCavePeople,
@@ -1298,6 +1309,7 @@ const shard: CardShard = {
     _poolDebtorsPulpit,
     _poolDecommission,
     _poolDeemWorthy,
+    _poolDeepDishPizza,
     _poolDeepGnomeTerramancer,
     _poolDefacingDuskmage,
     _poolDefendersOfHumanity,
@@ -1545,6 +1557,7 @@ const shard: CardShard = {
     _poolIridianMaelstrom,
     _poolIronclawOrcs,
     _poolIrreverentRevelers,
+    _poolIsamaruAndYoshimaru,
     _poolIsolationAtOrthanc,
     _poolJaceMemoryAdept,
     _poolJacesScrutiny,
@@ -1569,6 +1582,7 @@ const shard: CardShard = {
     _poolKeeperOfTheLight,
     _poolKeldonFlamesage,
     _poolKetriaCrystal,
+    _poolKevinQuestingDragon,
     _poolKhaaaaaaaaaaaannn,
     _poolKhalniGarden,
     _poolKillSwitch,
@@ -1669,6 +1683,7 @@ const shard: CardShard = {
     _poolMoriokReaver,
     _poolMossDiamond,
     _poolMossdog,
+    _poolMothHerbElixir,
     _poolMountDoom,
     _poolMoxSapphire,
     _poolMoxTantalite,
@@ -1786,6 +1801,7 @@ const shard: CardShard = {
     _poolRambunctiousMutt,
     _poolRamroller,
     _poolRapidDecay,
+    _poolRatatwotwo,
     _poolRavenousLeucrocota,
     _poolRavineRaider,
     _poolRaziasPurification,
@@ -1905,6 +1921,7 @@ const shard: CardShard = {
     _poolSorinRavenousNeonate,
     _poolSoulExchange,
     _poolSoulOfInnistrad,
+    _poolSoulOfMirrodin,
     _poolSowingMycospawn,
     _poolSparkOfCreativity,
     _poolSparkRupture,
@@ -1989,9 +2006,11 @@ const shard: CardShard = {
     _poolThaliaHereticCathar,
     _poolThatsRoughBuddy,
     _poolTheBeamtownBullies,
+    _poolTheBearForcePilot,
     _poolTheBestOfBothWorlds,
     _poolTheNeutrinos,
     _poolTheRuinousPowers,
+    _poolTheSwampKitten,
     _poolTheThingBenGrimm,
     _poolTheTombOfAclazotz,
     _poolTheloniteDruid,
@@ -2132,6 +2151,7 @@ const shard: CardShard = {
     _tokensElementalToken,
     _tokensGreenElementalToken22,
     _tokensHeroTokenBlackMagesRod,
+    _tokensHumanRebelToken,
     _tokensHumanTokenDoctorSpellsCostLess,
     _tokensNecronWarriorToken,
     _tokensOgreToken,

@@ -488,6 +488,7 @@ import _poolLightningReaver from "../pool/lightning-reaver.js";
 import _poolLightningSkelemental from "../pool/lightning-skelemental.js";
 import _poolLightningStormkin from "../pool/lightning-stormkin.js";
 import _poolLilianasShade from "../pool/lilianas-shade.js";
+import _poolLilianasUndeadMinion from "../pool/lilianas-undead-minion.js";
 import _poolLittjaraMirrorlake from "../pool/littjara-mirrorlake.js";
 import _poolLlanowarGreenwidow from "../pool/llanowar-greenwidow.js";
 import _poolLlanowarWastes from "../pool/llanowar-wastes.js";
@@ -503,6 +504,7 @@ import _poolLuckBobblehead from "../pool/luck-bobblehead.js";
 import _poolLunarConvocation from "../pool/lunar-convocation.js";
 import _poolLunaticPandora from "../pool/lunatic-pandora.js";
 import _poolLupinflowerVillage from "../pool/lupinflower-village.js";
+import _poolLuxiorIgnited from "../pool/luxior-ignited.js";
 import _poolMaarikaBrutalGladiator from "../pool/maarika-brutal-gladiator.js";
 import _poolMacabreMockery from "../pool/macabre-mockery.js";
 import _poolMaccreadyLamplightMayor from "../pool/maccready-lamplight-mayor.js";
@@ -643,6 +645,7 @@ import _poolPlarggAndNassari from "../pool/plargg-and-nassari.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
 import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
+import _poolPotatoes from "../pool/potatoes.js";
 import _poolPouncingCheetah from "../pool/pouncing-cheetah.js";
 import _poolPrecognitionField from "../pool/precognition-field.js";
 import _poolPrecognition from "../pool/precognition.js";
@@ -874,6 +877,7 @@ import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheElderspell from "../pool/the-elderspell.js";
 import _poolTheHive from "../pool/the-hive.js";
+import _poolTheMarvelousScientist from "../pool/the-marvelous-scientist.js";
 import _poolTheMeasureOfAMan from "../pool/the-measure-of-a-man.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolTheOneRing from "../pool/the-one-ring.js";
@@ -996,6 +1000,7 @@ import _poolWildMight from "../pool/wild-might.js";
 import _poolWillOfTheJeskai from "../pool/will-of-the-jeskai.js";
 import _poolWillOfTheMardu from "../pool/will-of-the-mardu.js";
 import _poolWiltLeafCavaliers from "../pool/wilt-leaf-cavaliers.js";
+import _poolWindmillSlam from "../pool/windmill-slam.js";
 import _poolWingedSliver from "../pool/winged-sliver.js";
 import _poolWirewoodSavage from "../pool/wirewood-savage.js";
 import _poolWistfulness from "../pool/wistfulness.js";
@@ -1534,6 +1539,7 @@ const shard: CardShard = {
     _poolLightningSkelemental,
     _poolLightningStormkin,
     _poolLilianasShade,
+    _poolLilianasUndeadMinion,
     _poolLittjaraMirrorlake,
     _poolLlanowarGreenwidow,
     _poolLlanowarWastes,
@@ -1549,6 +1555,7 @@ const shard: CardShard = {
     _poolLunarConvocation,
     _poolLunaticPandora,
     _poolLupinflowerVillage,
+    _poolLuxiorIgnited,
     _poolMaarikaBrutalGladiator,
     _poolMacabreMockery,
     _poolMaccreadyLamplightMayor,
@@ -1689,6 +1696,7 @@ const shard: CardShard = {
     _poolPlatedRootwalla,
     _poolPlowThrough,
     _poolPossibilityTechnician,
+    _poolPotatoes,
     _poolPouncingCheetah,
     _poolPrecognitionField,
     _poolPrecognition,
@@ -1920,6 +1928,7 @@ const shard: CardShard = {
     _poolTheEarthCrystal,
     _poolTheElderspell,
     _poolTheHive,
+    _poolTheMarvelousScientist,
     _poolTheMeasureOfAMan,
     _poolTheMechanistAerialArtisan,
     _poolTheOneRing,
@@ -2042,6 +2051,7 @@ const shard: CardShard = {
     _poolWillOfTheJeskai,
     _poolWillOfTheMardu,
     _poolWiltLeafCavaliers,
+    _poolWindmillSlam,
     _poolWingedSliver,
     _poolWirewoodSavage,
     _poolWistfulness,

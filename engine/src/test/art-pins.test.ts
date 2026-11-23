@@ -157,6 +157,54 @@ const NO_TOKEN_PRINTING = new Set([
   // Tetravus's 1/1 Tetravite: the card lists no token in the Oracle snapshot's `all_parts`,
   // and the snapshot holds none of that name (checked 2026-11-13).
   "Tetravite Token",
+  // The Bear Force Pilot Runner (a playtest card)'s 0/0 flying Bear Vehicle:
+  // never printed as a token, and the card lists none (checked 2026-11-23).
+  "0/0 Flying Bear Vehicle Token",
+  // More playtest cards' tokens, none printed as a token and none listed by
+  // their cards (checked 2026-11-23): Koma and Toski, Compleated's Toski's
+  // Coil, Elemental, My Dear's 0/0 Elemental, The Covert Blue Mage's Covert
+  // Sunglasses, The Bus Runner's Desert Vehicle.
+  "Toski's Coil",
+  "0/0 Blue Elemental Token",
+  "Covert Sunglasses",
+  "Desert Vehicle Token",
+  // Windmill Slam's Windmill, The Keeper of Four Scythes' Scythe, The Value
+  // Knight's Syr Acha and Delve too Deep's 7/7 Demon (playtest cards).
+  "Windmill Token",
+  "Scythe Token",
+  "Syr Acha",
+  "7/7 Black Red Demon Token",
+  // Cat Oven's 1/1 black Cat and Gorilla Tactics' Gorilla (playtest cards).
+  "1/1 Black Cat Token",
+  "Gorilla Token",
+  // 17-Year Cicadas' Insects, Night Out in Vegas's Performer, Garruk's Lost
+  // Wolf's Huntsman Role, The Bird Champion's Birds and Imaginary Friends'
+  // 0/0 Spirits (playtest cards).
+  "White Insect Token (Flying)",
+  "Performer Token",
+  "Huntsman Role Token",
+  "Green-Blue Bird Token (Flying)",
+  "0/0 White Spirit Token (Flying)",
+  // Group H's playtest tokens: a -1/-1 Squid, a colorless Human, a Chef Role.
+  "Squid Token (-1/-1)",
+  "Human Token (Colorless)",
+  "Chef Role Token",
+  // The Keeper of the Yellow Hat's Yellow Hat and Spaghetti Junction's
+  // Atlantakul (playtest cards).
+  "Yellow Hat",
+  "Atlantakul",
+  // Generated Horizons' Forest, MagicConsecrated Sphinx's Gamer and Tarkiran
+  // Towelsbane's Human Rebel (playtest cards).
+  "Forest Token",
+  "Gamer Token",
+  "Human Rebel Token",
+  // Group K's playtest tokens: Emrakul and Chatterfang's Eldrazi Squirrel
+  // Scions, The Bringer of the Red Beard's Red Beard, Khod's Bling and
+  // Establishing Shot's lifelink haste Spirit.
+  "Spirit Token (Colorless, Lifelink, Haste)",
+  "Bling Token",
+  "Red Beard Token",
+  "Eldrazi Squirrel Scion Token",
 ]);
 
 describe("token art", () => {

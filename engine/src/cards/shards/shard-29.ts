@@ -58,6 +58,7 @@ import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
 import _poolBalor from "../pool/balor.js";
 import _poolBalothGorger from "../pool/baloth-gorger.js";
+import _poolBandingSliver from "../pool/banding-sliver.js";
 import _poolBankruptInBlood from "../pool/bankrupt-in-blood.js";
 import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
 import _poolBargain from "../pool/bargain.js";
@@ -125,9 +126,11 @@ import _poolChariotOfTheSun from "../pool/chariot-of-the-sun.js";
 import _poolCharredGraverobber from "../pool/charred-graverobber.js";
 import _poolChasmGuide from "../pool/chasm-guide.js";
 import _poolChimericMass from "../pool/chimeric-mass.js";
+import _poolChimneyGoyf from "../pool/chimney-goyf.js";
 import _poolChooseYourWeapon from "../pool/choose-your-weapon.js";
 import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
+import _poolCinnamonSeasonedSteed from "../pool/cinnamon-seasoned-steed.js";
 import _poolCircleOfAffliction from "../pool/circle-of-affliction.js";
 import _poolCircuitsAct from "../pool/circuits-act.js";
 import _poolCityOfDeath from "../pool/city-of-death.js";
@@ -165,6 +168,7 @@ import _poolCuriousForager from "../pool/curious-forager.js";
 import _poolCurseOfTheNightlyHunt from "../pool/curse-of-the-nightly-hunt.js";
 import _poolCustomsDepot from "../pool/customs-depot.js";
 import _poolCutTheTethers from "../pool/cut-the-tethers.js";
+import _poolCyclopeanTitan from "../pool/cyclopean-titan.js";
 import _poolDackFaydenHelpingHand from "../pool/dack-fayden-helping-hand.js";
 import _poolDailyBugleReporters from "../pool/daily-bugle-reporters.js";
 import _poolDamn from "../pool/damn.js";
@@ -344,6 +348,7 @@ import _poolGlassworksShatteredYard from "../pool/glassworks-shattered-yard.js";
 import _poolGleamingGeardrake from "../pool/gleaming-geardrake.js";
 import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGlimmerpointStag from "../pool/glimmerpoint-stag.js";
+import _poolGloriousDragonKin from "../pool/glorious-dragon-kin.js";
 import _poolGloryOfWarfare from "../pool/glory-of-warfare.js";
 import _poolGluttonousSlime from "../pool/gluttonous-slime.js";
 import _poolGnarlingTarg from "../pool/gnarling-targ.js";
@@ -447,6 +452,7 @@ import _poolJawboneDuelist from "../pool/jawbone-duelist.js";
 import _poolJeskasWill from "../pool/jeskas-will.js";
 import _poolJeweledAmulet from "../pool/jeweled-amulet.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
+import _poolJitteAndDiviningTop from "../pool/jitte-and-divining-top.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
@@ -574,6 +580,7 @@ import _poolObsidianOrderOperative from "../pool/obsidian-order-operative.js";
 import _poolOjerAxonilDeepestMight from "../pool/ojer-axonil-deepest-might.js";
 import _poolOkibaGangShinobi from "../pool/okiba-gang-shinobi.js";
 import _poolOldGhastbark from "../pool/old-ghastbark.js";
+import _poolOmenpathToNaya from "../pool/omenpath-to-naya.js";
 import _poolOminousSeas from "../pool/ominous-seas.js";
 import _poolOnyxMage from "../pool/onyx-mage.js";
 import _poolOraclesVault from "../pool/oracles-vault.js";
@@ -899,6 +906,7 @@ import _poolTheSerpentSociety from "../pool/the-serpent-society.js";
 import _poolTheUrDragon from "../pool/the-ur-dragon.js";
 import _poolTheWarDoctor from "../pool/the-war-doctor.js";
 import _poolTheWaspWinsomeAvenger from "../pool/the-wasp-winsome-avenger.js";
+import _poolTheWileySpeedster from "../pool/the-wiley-speedster.js";
 import _poolThorncasterSliver from "../pool/thorncaster-sliver.js";
 import _poolThoughtCourier from "../pool/thought-courier.js";
 import _poolThrashingMossdog from "../pool/thrashing-mossdog.js";
@@ -1030,6 +1038,7 @@ import _poolZoyowasJustice from "../pool/zoyowas-justice.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensBirdSoldierToken from "../tokens/bird-soldier-token.js";
 import _tokensCherubaelToken from "../tokens/cherubael-token.js";
+import _tokensColossalDreadmawToken from "../tokens/colossal-dreadmaw-token.js";
 import _tokensElementalToken44WhiteFlying from "../tokens/elemental-token-4-4-white-flying.js";
 import _tokensElementalToken53 from "../tokens/elemental-token-5-3.js";
 import _tokensEtheriumCellToken from "../tokens/etherium-cell-token.js";
@@ -1110,6 +1119,7 @@ const shard: CardShard = {
     _poolBallistaCharger,
     _poolBalor,
     _poolBalothGorger,
+    _poolBandingSliver,
     _poolBankruptInBlood,
     _poolBarbedBloodletter,
     _poolBargain,
@@ -1177,9 +1187,11 @@ const shard: CardShard = {
     _poolCharredGraverobber,
     _poolChasmGuide,
     _poolChimericMass,
+    _poolChimneyGoyf,
     _poolChooseYourWeapon,
     _poolChoraleOfTheVoid,
     _poolCinderElemental,
+    _poolCinnamonSeasonedSteed,
     _poolCircleOfAffliction,
     _poolCircuitsAct,
     _poolCityOfDeath,
@@ -1217,6 +1229,7 @@ const shard: CardShard = {
     _poolCurseOfTheNightlyHunt,
     _poolCustomsDepot,
     _poolCutTheTethers,
+    _poolCyclopeanTitan,
     _poolDackFaydenHelpingHand,
     _poolDailyBugleReporters,
     _poolDamn,
@@ -1396,6 +1409,7 @@ const shard: CardShard = {
     _poolGleamingGeardrake,
     _poolGlimmeringAngel,
     _poolGlimmerpointStag,
+    _poolGloriousDragonKin,
     _poolGloryOfWarfare,
     _poolGluttonousSlime,
     _poolGnarlingTarg,
@@ -1499,6 +1513,7 @@ const shard: CardShard = {
     _poolJeskasWill,
     _poolJeweledAmulet,
     _poolJirinaDauntlessGeneral,
+    _poolJitteAndDiviningTop,
     _poolJorKadeenFirstGoldwarden,
     _poolJuggernaut,
     _poolJwariDisruption,
@@ -1626,6 +1641,7 @@ const shard: CardShard = {
     _poolOjerAxonilDeepestMight,
     _poolOkibaGangShinobi,
     _poolOldGhastbark,
+    _poolOmenpathToNaya,
     _poolOminousSeas,
     _poolOnyxMage,
     _poolOraclesVault,
@@ -1951,6 +1967,7 @@ const shard: CardShard = {
     _poolTheUrDragon,
     _poolTheWarDoctor,
     _poolTheWaspWinsomeAvenger,
+    _poolTheWileySpeedster,
     _poolThorncasterSliver,
     _poolThoughtCourier,
     _poolThrashingMossdog,
@@ -2084,6 +2101,7 @@ const shard: CardShard = {
     _tokensAngelWarriorToken,
     _tokensBirdSoldierToken,
     _tokensCherubaelToken,
+    _tokensColossalDreadmawToken,
     _tokensElementalToken44WhiteFlying,
     _tokensElementalToken53,
     _tokensEtheriumCellToken,

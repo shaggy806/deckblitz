@@ -310,6 +310,7 @@ import _poolEsperBattlemage from "../pool/esper-battlemage.js";
 import _poolEsperCormorants from "../pool/esper-cormorants.js";
 import _poolEssenceBacklash from "../pool/essence-backlash.js";
 import _poolEssenceHarvest from "../pool/essence-harvest.js";
+import _poolEstablishingShot from "../pool/establishing-shot.js";
 import _poolEtaliPrimalStorm from "../pool/etali-primal-storm.js";
 import _poolEternitySnare from "../pool/eternity-snare.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
@@ -623,6 +624,7 @@ import _poolNemesisOfReason from "../pool/nemesis-of-reason.js";
 import _poolNightShiftOfTheLivingDead from "../pool/night-shift-of-the-living-dead.js";
 import _poolNightfireGiant from "../pool/nightfire-giant.js";
 import _poolNightmareIncursion from "../pool/nightmare-incursion.js";
+import _poolNimMongoose from "../pool/nim-mongoose.js";
 import _poolNimShrieker from "../pool/nim-shrieker.js";
 import _poolNinjaOfTheDeepHours from "../pool/ninja-of-the-deep-hours.js";
 import _poolNissasTriumph from "../pool/nissas-triumph.js";
@@ -766,6 +768,7 @@ import _poolRewardTheFaithful from "../pool/reward-the-faithful.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
 import _poolRightOfVengeance from "../pool/right-of-vengeance.js";
+import _poolRinAndSeriInseparabler from "../pool/rin-and-seri-inseparabler.js";
 import _poolRiptideMangler from "../pool/riptide-mangler.js";
 import _poolRiseToGlory from "../pool/rise-to-glory.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
@@ -945,6 +948,7 @@ import _poolTezzeretsGambit from "../pool/tezzerets-gambit.js";
 import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js";
 import _poolTheArtOfTea from "../pool/the-art-of-tea.js";
 import _poolTheCapitolineTriad from "../pool/the-capitoline-triad.js";
+import _poolTheCookoutCreator from "../pool/the-cookout-creator.js";
 import _poolTheEleventhDoctor from "../pool/the-eleventh-doctor.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
 import _poolTheFaceOfBoe from "../pool/the-face-of-boe.js";
@@ -1098,6 +1102,7 @@ import _tokensDjinnMonkToken from "../tokens/djinn-monk-token.js";
 import _tokensFaerieToken from "../tokens/faerie-token.js";
 import _tokensGiantWizardToken from "../tokens/giant-wizard-token.js";
 import _tokensGnomeSoldierToken from "../tokens/gnome-soldier-token.js";
+import _tokensGorillaToken from "../tokens/gorilla-token.js";
 import _tokensGreenCatToken22Haste from "../tokens/green-cat-token-2-2-haste.js";
 import _tokensGreenDogToken11 from "../tokens/green-dog-token-1-1.js";
 import _tokensHumanTokenCantPhaseIn from "../tokens/human-token-cant-phase-in.js";
@@ -1108,9 +1113,12 @@ import _tokensMaritLageToken from "../tokens/marit-lage-token.js";
 import _tokensRabbitToken from "../tokens/rabbit-token.js";
 import _tokensReliquaryDragon from "../tokens/reliquary-dragon.js";
 import _tokensSamuraiToken from "../tokens/samurai-token.js";
+import _tokensScytheToken from "../tokens/scythe-token.js";
+import _tokensSyrAcha from "../tokens/syr-acha.js";
 import _tokensTarmogoyfToken from "../tokens/tarmogoyf-token.js";
 import _tokensTetraviteToken from "../tokens/tetravite-token.js";
 import _tokensWallTokenInvisibleWoman from "../tokens/wall-token-invisible-woman.js";
+import _tokensYellowHat from "../tokens/yellow-hat.js";
 import _tokensZombieTokenJadarGhoulcallerOfNephalia from "../tokens/zombie-token-jadar-ghoulcaller-of-nephalia.js";
 
 const shard: CardShard = {
@@ -1422,6 +1430,7 @@ const shard: CardShard = {
     _poolEsperCormorants,
     _poolEssenceBacklash,
     _poolEssenceHarvest,
+    _poolEstablishingShot,
     _poolEtaliPrimalStorm,
     _poolEternitySnare,
     _poolEtherealArmor,
@@ -1735,6 +1744,7 @@ const shard: CardShard = {
     _poolNightShiftOfTheLivingDead,
     _poolNightfireGiant,
     _poolNightmareIncursion,
+    _poolNimMongoose,
     _poolNimShrieker,
     _poolNinjaOfTheDeepHours,
     _poolNissasTriumph,
@@ -1878,6 +1888,7 @@ const shard: CardShard = {
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,
     _poolRightOfVengeance,
+    _poolRinAndSeriInseparabler,
     _poolRiptideMangler,
     _poolRiseToGlory,
     _poolRishkarPeemaRenegade,
@@ -2057,6 +2068,7 @@ const shard: CardShard = {
     _poolThaliaGuardianOfThraben,
     _poolTheArtOfTea,
     _poolTheCapitolineTriad,
+    _poolTheCookoutCreator,
     _poolTheEleventhDoctor,
     _poolTheEmperorOfPalamecia,
     _poolTheFaceOfBoe,
@@ -2212,6 +2224,7 @@ const shard: CardShard = {
     _tokensFaerieToken,
     _tokensGiantWizardToken,
     _tokensGnomeSoldierToken,
+    _tokensGorillaToken,
     _tokensGreenCatToken22Haste,
     _tokensGreenDogToken11,
     _tokensHumanTokenCantPhaseIn,
@@ -2222,9 +2235,12 @@ const shard: CardShard = {
     _tokensRabbitToken,
     _tokensReliquaryDragon,
     _tokensSamuraiToken,
+    _tokensScytheToken,
+    _tokensSyrAcha,
     _tokensTarmogoyfToken,
     _tokensTetraviteToken,
     _tokensWallTokenInvisibleWoman,
+    _tokensYellowHat,
     _tokensZombieTokenJadarGhoulcallerOfNephalia,
   ],
 };

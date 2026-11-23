@@ -169,6 +169,7 @@ import _poolCombineChrysalis from "../pool/combine-chrysalis.js";
 import _poolCompost from "../pool/compost.js";
 import _poolContainmentBreach from "../pool/containment-breach.js";
 import _poolContaminantGrafter from "../pool/contaminant-grafter.js";
+import _poolCorruptedKey from "../pool/corrupted-key.js";
 import _poolCosmotronicWave from "../pool/cosmotronic-wave.js";
 import _poolCouncilsDeliberation from "../pool/councils-deliberation.js";
 import _poolCourtOfGarenbrig from "../pool/court-of-garenbrig.js";
@@ -236,6 +237,7 @@ import _poolDurkwoodTracker from "../pool/durkwood-tracker.js";
 import _poolDuskFeaster from "../pool/dusk-feaster.js";
 import _poolDuskwielder from "../pool/duskwielder.js";
 import _poolDwarvenArmorer from "../pool/dwarven-armorer.js";
+import _poolDwarvenConfluencer from "../pool/dwarven-confluencer.js";
 import _poolDwarvenTrader from "../pool/dwarven-trader.js";
 import _poolEarthbind from "../pool/earthbind.js";
 import _poolEarthshakerKhenra from "../pool/earthshaker-khenra.js";
@@ -468,6 +470,7 @@ import _poolKahoMinamoHistorian from "../pool/kaho-minamo-historian.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
 import _poolKangeeAerieKeeper from "../pool/kangee-aerie-keeper.js";
+import _poolKarlovsCrossbow from "../pool/karlovs-crossbow.js";
 import _poolKarnsTouch from "../pool/karns-touch.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKathariBomber from "../pool/kathari-bomber.js";
@@ -917,6 +920,7 @@ import _poolTempleOfPower from "../pool/temple-of-power.js";
 import _poolTemporalSpring from "../pool/temporal-spring.js";
 import _poolTemptingWitch from "../pool/tempting-witch.js";
 import _poolTemurBanner from "../pool/temur-banner.js";
+import _poolTemurElevator from "../pool/temur-elevator.js";
 import _poolTemurTawnyback from "../pool/temur-tawnyback.js";
 import _poolTenaciousUnderdog from "../pool/tenacious-underdog.js";
 import _poolTerashisVerdict from "../pool/terashis-verdict.js";
@@ -925,6 +929,7 @@ import _poolTerrorOfKruinPass from "../pool/terror-of-kruin-pass.js";
 import _poolTethmosHighPriest from "../pool/tethmos-high-priest.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
 import _poolTheArgentEtchings from "../pool/the-argent-etchings.js";
+import _poolTheBusRunner from "../pool/the-bus-runner.js";
 import _poolTheCurseOfFenric from "../pool/the-curse-of-fenric.js";
 import _poolTheCyberController from "../pool/the-cyber-controller.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
@@ -1091,6 +1096,7 @@ import _poolYouAreAlreadyDead from "../pool/you-are-already-dead.js";
 import _poolYouComeToARiver from "../pool/you-come-to-a-river.js";
 import _poolZodiacHorse from "../pool/zodiac-horse.js";
 import _poolZombieScavengers from "../pool/zombie-scavengers.js";
+import _tokens00BlueElementalToken from "../tokens/0-0-blue-elemental-token.js";
 import _tokensAjanisPridemateToken from "../tokens/ajanis-pridemate-token.js";
 import _tokensBirdIllusionToken from "../tokens/bird-illusion-token.js";
 import _tokensBlackDeathtouchSnakeToken from "../tokens/black-deathtouch-snake-token.js";
@@ -1098,6 +1104,7 @@ import _tokensBlueBlackFaerieToken from "../tokens/blue-black-faerie-token.js";
 import _tokensDinosaurToken31 from "../tokens/dinosaur-token-3-1.js";
 import _tokensGargoyleToken from "../tokens/gargoyle-token.js";
 import _tokensGoblinTokenBoggartMischief from "../tokens/goblin-token-boggart-mischief.js";
+import _tokensHuntsmanRoleToken from "../tokens/huntsman-role-token.js";
 import _tokensInsectTokenRiseOfTheAnts from "../tokens/insect-token-rise-of-the-ants.js";
 import _tokensInsectToken from "../tokens/insect-token.js";
 import _tokensKaldra from "../tokens/kaldra.js";
@@ -1289,6 +1296,7 @@ const shard: CardShard = {
     _poolCompost,
     _poolContainmentBreach,
     _poolContaminantGrafter,
+    _poolCorruptedKey,
     _poolCosmotronicWave,
     _poolCouncilsDeliberation,
     _poolCourtOfGarenbrig,
@@ -1356,6 +1364,7 @@ const shard: CardShard = {
     _poolDuskFeaster,
     _poolDuskwielder,
     _poolDwarvenArmorer,
+    _poolDwarvenConfluencer,
     _poolDwarvenTrader,
     _poolEarthbind,
     _poolEarthshakerKhenra,
@@ -1588,6 +1597,7 @@ const shard: CardShard = {
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
     _poolKangeeAerieKeeper,
+    _poolKarlovsCrossbow,
     _poolKarnsTouch,
     _poolKataraHeroicHealer,
     _poolKathariBomber,
@@ -2037,6 +2047,7 @@ const shard: CardShard = {
     _poolTemporalSpring,
     _poolTemptingWitch,
     _poolTemurBanner,
+    _poolTemurElevator,
     _poolTemurTawnyback,
     _poolTenaciousUnderdog,
     _poolTerashisVerdict,
@@ -2045,6 +2056,7 @@ const shard: CardShard = {
     _poolTethmosHighPriest,
     _poolTeyoTheShieldmage,
     _poolTheArgentEtchings,
+    _poolTheBusRunner,
     _poolTheCurseOfFenric,
     _poolTheCyberController,
     _poolTheFalconSamWilson,
@@ -2213,6 +2225,7 @@ const shard: CardShard = {
     _poolZombieScavengers,
   ],
   tokens: [
+    _tokens00BlueElementalToken,
     _tokensAjanisPridemateToken,
     _tokensBirdIllusionToken,
     _tokensBlackDeathtouchSnakeToken,
@@ -2220,6 +2233,7 @@ const shard: CardShard = {
     _tokensDinosaurToken31,
     _tokensGargoyleToken,
     _tokensGoblinTokenBoggartMischief,
+    _tokensHuntsmanRoleToken,
     _tokensInsectTokenRiseOfTheAnts,
     _tokensInsectToken,
     _tokensKaldra,

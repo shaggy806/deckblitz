@@ -49,6 +49,7 @@ import _poolAureliaTheWarleader from "../pool/aurelia-the-warleader.js";
 import _poolAuriokEdgewright from "../pool/auriok-edgewright.js";
 import _poolAuronsInspiration from "../pool/aurons-inspiration.js";
 import _poolAutomatedWarfareSystem from "../pool/automated-warfare-system.js";
+import _poolAvacynsCollarTheSymbolOfHerChurch from "../pool/avacyns-collar-the-symbol-of-her-church.js";
 import _poolAvalancheTusker from "../pool/avalanche-tusker.js";
 import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
 import _poolAvenFlock from "../pool/aven-flock.js";
@@ -460,6 +461,7 @@ import _poolIronManMasterOfMachines from "../pool/iron-man-master-of-machines.js
 import _poolIsland from "../pool/island.js";
 import _poolJaggedBarrens from "../pool/jagged-barrens.js";
 import _poolJaheiraFriendOfTheForest from "../pool/jaheira-friend-of-the-forest.js";
+import _poolJasconianIsle from "../pool/jasconian-isle.js";
 import _poolJensonCarthalionDruidExile from "../pool/jenson-carthalion-druid-exile.js";
 import _poolJeskaiSage from "../pool/jeskai-sage.js";
 import _poolJeskaiWindscout from "../pool/jeskai-windscout.js";
@@ -821,6 +823,7 @@ import _poolSkyshipWeatherlight from "../pool/skyship-weatherlight.js";
 import _poolSkywardEyeProphets from "../pool/skyward-eye-prophets.js";
 import _poolSlateOfAncestry from "../pool/slate-of-ancestry.js";
 import _poolSlipperyKarst from "../pool/slippery-karst.js";
+import _poolSlumberingWaterways from "../pool/slumbering-waterways.js";
 import _poolSmokyLounge from "../pool/smoky-lounge.js";
 import _poolSmolderInitiate from "../pool/smolder-initiate.js";
 import _poolSmolderingTar from "../pool/smoldering-tar.js";
@@ -1029,6 +1032,8 @@ import _poolZealotsConviction from "../pool/zealots-conviction.js";
 import _poolZirdaTheDawnwaker from "../pool/zirda-the-dawnwaker.js";
 import _poolZombieAssassin from "../pool/zombie-assassin.js";
 import _tokens01BlueStarfishToken from "../tokens/0-1-blue-starfish-token.js";
+import _tokensAtlantakul from "../tokens/atlantakul.js";
+import _tokensBlingToken from "../tokens/bling-token.js";
 import _tokensBoarToken from "../tokens/boar-token.js";
 import _tokensCatWarriorTokenAjaniFellsTheGodsire from "../tokens/cat-warrior-token-ajani-fells-the-godsire.js";
 import _tokensCentaurToken from "../tokens/centaur-token.js";
@@ -1101,6 +1106,7 @@ const shard: CardShard = {
     _poolAuriokEdgewright,
     _poolAuronsInspiration,
     _poolAutomatedWarfareSystem,
+    _poolAvacynsCollarTheSymbolOfHerChurch,
     _poolAvalancheTusker,
     _poolAvatarOfBurgeoningEchoes,
     _poolAvenFlock,
@@ -1512,6 +1518,7 @@ const shard: CardShard = {
     _poolIsland,
     _poolJaggedBarrens,
     _poolJaheiraFriendOfTheForest,
+    _poolJasconianIsle,
     _poolJensonCarthalionDruidExile,
     _poolJeskaiSage,
     _poolJeskaiWindscout,
@@ -1873,6 +1880,7 @@ const shard: CardShard = {
     _poolSkywardEyeProphets,
     _poolSlateOfAncestry,
     _poolSlipperyKarst,
+    _poolSlumberingWaterways,
     _poolSmokyLounge,
     _poolSmolderInitiate,
     _poolSmolderingTar,
@@ -2083,6 +2091,8 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens01BlueStarfishToken,
+    _tokensAtlantakul,
+    _tokensBlingToken,
     _tokensBoarToken,
     _tokensCatWarriorTokenAjaniFellsTheGodsire,
     _tokensCentaurToken,

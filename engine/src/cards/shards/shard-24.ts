@@ -558,6 +558,7 @@ import _poolMobLookout from "../pool/mob-lookout.js";
 import _poolMonumentToEndurance from "../pool/monument-to-endurance.js";
 import _poolMoodmarkPainter from "../pool/moodmark-painter.js";
 import _poolMoonGirlAndDevilDinosaur from "../pool/moon-girl-and-devil-dinosaur.js";
+import _poolMoreOfThatStrangeOil from "../pool/more-of-that-strange-oil.js";
 import _poolMorgueToad from "../pool/morgue-toad.js";
 import _poolMortuary from "../pool/mortuary.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
@@ -882,6 +883,7 @@ import _poolTheCelestus from "../pool/the-celestus.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
 import _poolTheKamiWar from "../pool/the-kami-war.js";
+import _poolTheMillingRunner from "../pool/the-milling-runner.js";
 import _poolTheNecrobloom from "../pool/the-necrobloom.js";
 import _poolTheNotaryHobbits from "../pool/the-notary-hobbits.js";
 import _poolTheRinghartCrest from "../pool/the-ringhart-crest.js";
@@ -910,6 +912,7 @@ import _poolTideOfWar from "../pool/tide-of-war.js";
 import _poolTimeVault from "../pool/time-vault.js";
 import _poolTinybonesJoinsUp from "../pool/tinybones-joins-up.js";
 import _poolTobyBeastieBefriender from "../pool/toby-beastie-befriender.js";
+import _poolToeBreakingHelmet from "../pool/toe-breaking-helmet.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonicPeddler from "../pool/tonic-peddler.js";
 import _poolTonyStark from "../pool/tony-stark.js";
@@ -1613,6 +1616,7 @@ const shard: CardShard = {
     _poolMonumentToEndurance,
     _poolMoodmarkPainter,
     _poolMoonGirlAndDevilDinosaur,
+    _poolMoreOfThatStrangeOil,
     _poolMorgueToad,
     _poolMortuary,
     _poolMostDecrepitOldBird,
@@ -1937,6 +1941,7 @@ const shard: CardShard = {
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,
     _poolTheKamiWar,
+    _poolTheMillingRunner,
     _poolTheNecrobloom,
     _poolTheNotaryHobbits,
     _poolTheRinghartCrest,
@@ -1965,6 +1970,7 @@ const shard: CardShard = {
     _poolTimeVault,
     _poolTinybonesJoinsUp,
     _poolTobyBeastieBefriender,
+    _poolToeBreakingHelmet,
     _poolTolariaWest,
     _poolTonicPeddler,
     _poolTonyStark,

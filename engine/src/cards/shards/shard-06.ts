@@ -282,6 +282,7 @@ import _poolEarthenAlly from "../pool/earthen-ally.js";
 import _poolEaterOfDays from "../pool/eater-of-days.js";
 import _poolEbonDragon from "../pool/ebon-dragon.js";
 import _poolEchoingRuin from "../pool/echoing-ruin.js";
+import _poolEfteekayFlameOfTheKav from "../pool/efteekay-flame-of-the-kav.js";
 import _poolElderwoodScion from "../pool/elderwood-scion.js";
 import _poolElrondLordOfRivendell from "../pool/elrond-lord-of-rivendell.js";
 import _poolElrondMasterOfHealing from "../pool/elrond-master-of-healing.js";
@@ -344,6 +345,7 @@ import _poolFoggySwampSpiritKeeper from "../pool/foggy-swamp-spirit-keeper.js";
 import _poolFolioOfFancies from "../pool/folio-of-fancies.js";
 import _poolForayOfOrcs from "../pool/foray-of-orcs.js";
 import _poolForceOfRage from "../pool/force-of-rage.js";
+import _poolForceOfRowan from "../pool/force-of-rowan.js";
 import _poolForgottenCreation from "../pool/forgotten-creation.js";
 import _poolForkedBranchGarami from "../pool/forked-branch-garami.js";
 import _poolFormAPosse from "../pool/form-a-posse.js";
@@ -397,6 +399,7 @@ import _poolGlissaSunslayer from "../pool/glissa-sunslayer.js";
 import _poolGluntchTheBestower from "../pool/gluntch-the-bestower.js";
 import _poolGnatAlleyCreeper from "../pool/gnat-alley-creeper.js";
 import _poolGnawingZombie from "../pool/gnawing-zombie.js";
+import _poolGobland from "../pool/gobland.js";
 import _poolGoblinGangLeader from "../pool/goblin-gang-leader.js";
 import _poolGoblinRally from "../pool/goblin-rally.js";
 import _poolGoblinTrashmaster from "../pool/goblin-trashmaster.js";
@@ -461,6 +464,7 @@ import _poolImiStatue from "../pool/imi-statue.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
 import _poolImprovisedArmor from "../pool/improvised-armor.js";
+import _poolIndicate from "../pool/indicate.js";
 import _poolIndulgeExcess from "../pool/indulge-excess.js";
 import _poolInfernalCaretaker from "../pool/infernal-caretaker.js";
 import _poolInfernoTitan from "../pool/inferno-titan.js";
@@ -483,6 +487,7 @@ import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJelevaNephaliasScourge from "../pool/jeleva-nephalias-scourge.js";
 import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
+import _poolJeskaAndKamahl from "../pool/jeska-and-kamahl.js";
 import _poolJetmirsFixer from "../pool/jetmirs-fixer.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
@@ -496,6 +501,7 @@ import _poolKapshoKitefins from "../pool/kapsho-kitefins.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKeldonMegaliths from "../pool/keldon-megaliths.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
+import _poolKhodEtlanShiisEnvoy from "../pool/khod-etlan-shiis-envoy.js";
 import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKinsbaileBorderguard from "../pool/kinsbaile-borderguard.js";
@@ -725,6 +731,7 @@ import _poolRiotGear from "../pool/riot-gear.js";
 import _poolRiphookRaider from "../pool/riphook-raider.js";
 import _poolRiptideCrab from "../pool/riptide-crab.js";
 import _poolRivalry from "../pool/rivalry.js";
+import _poolRivenTurnbullAndPrincessLucrezia from "../pool/riven-turnbull-and-princess-lucrezia.js";
 import _poolRoLarenDoubleAgent from "../pool/ro-laren-double-agent.js";
 import _poolRoarOfTheWurm from "../pool/roar-of-the-wurm.js";
 import _poolRocketeerBoostbuggy from "../pool/rocketeer-boostbuggy.js";
@@ -883,6 +890,7 @@ import _poolTempestOfLight from "../pool/tempest-of-light.js";
 import _poolTenthDistrictHero from "../pool/tenth-district-hero.js";
 import _poolTenuredOilcaster from "../pool/tenured-oilcaster.js";
 import _poolTerritorialGorger from "../pool/territorial-gorger.js";
+import _poolTheBirdChampion from "../pool/the-bird-champion.js";
 import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
@@ -915,6 +923,7 @@ import _poolTirelessProvisioner from "../pool/tireless-provisioner.js";
 import _poolToTheSlaughter from "../pool/to-the-slaughter.js";
 import _poolTombHex from "../pool/tomb-hex.js";
 import _poolTomeboundLich from "../pool/tomebound-lich.js";
+import _poolToothyAndZndrsplt from "../pool/toothy-and-zndrsplt.js";
 import _poolTormodsCryptkeeper from "../pool/tormods-cryptkeeper.js";
 import _poolTotentanzSwarmPiper from "../pool/totentanz-swarm-piper.js";
 import _poolTouchOfBrilliance from "../pool/touch-of-brilliance.js";
@@ -1338,6 +1347,7 @@ const shard: CardShard = {
     _poolEaterOfDays,
     _poolEbonDragon,
     _poolEchoingRuin,
+    _poolEfteekayFlameOfTheKav,
     _poolElderwoodScion,
     _poolElrondLordOfRivendell,
     _poolElrondMasterOfHealing,
@@ -1400,6 +1410,7 @@ const shard: CardShard = {
     _poolFolioOfFancies,
     _poolForayOfOrcs,
     _poolForceOfRage,
+    _poolForceOfRowan,
     _poolForgottenCreation,
     _poolForkedBranchGarami,
     _poolFormAPosse,
@@ -1453,6 +1464,7 @@ const shard: CardShard = {
     _poolGluntchTheBestower,
     _poolGnatAlleyCreeper,
     _poolGnawingZombie,
+    _poolGobland,
     _poolGoblinGangLeader,
     _poolGoblinRally,
     _poolGoblinTrashmaster,
@@ -1517,6 +1529,7 @@ const shard: CardShard = {
     _poolImmovableRod,
     _poolImperialAerosaur,
     _poolImprovisedArmor,
+    _poolIndicate,
     _poolIndulgeExcess,
     _poolInfernalCaretaker,
     _poolInfernoTitan,
@@ -1539,6 +1552,7 @@ const shard: CardShard = {
     _poolJarvisEarthsMightiestButler,
     _poolJelevaNephaliasScourge,
     _poolJerrenCorruptedBishop,
+    _poolJeskaAndKamahl,
     _poolJetmirsFixer,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
@@ -1552,6 +1566,7 @@ const shard: CardShard = {
     _poolKeiTakahashi,
     _poolKeldonMegaliths,
     _poolKelsinkoRanger,
+    _poolKhodEtlanShiisEnvoy,
     _poolKindredJudgment,
     _poolKingDarienXlviii,
     _poolKinsbaileBorderguard,
@@ -1781,6 +1796,7 @@ const shard: CardShard = {
     _poolRiphookRaider,
     _poolRiptideCrab,
     _poolRivalry,
+    _poolRivenTurnbullAndPrincessLucrezia,
     _poolRoLarenDoubleAgent,
     _poolRoarOfTheWurm,
     _poolRocketeerBoostbuggy,
@@ -1939,6 +1955,7 @@ const shard: CardShard = {
     _poolTenthDistrictHero,
     _poolTenuredOilcaster,
     _poolTerritorialGorger,
+    _poolTheBirdChampion,
     _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,
     _poolTheDeathOfGwenStacy,
@@ -1971,6 +1988,7 @@ const shard: CardShard = {
     _poolToTheSlaughter,
     _poolTombHex,
     _poolTomeboundLich,
+    _poolToothyAndZndrsplt,
     _poolTormodsCryptkeeper,
     _poolTotentanzSwarmPiper,
     _poolTouchOfBrilliance,

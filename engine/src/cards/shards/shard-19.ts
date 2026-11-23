@@ -181,6 +181,7 @@ import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
 import _poolCoalitionSkyknight from "../pool/coalition-skyknight.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
+import _poolColossalDreadmawAndStormCrow from "../pool/colossal-dreadmaw-and-storm-crow.js";
 import _poolColossusOfSardia from "../pool/colossus-of-sardia.js";
 import _poolCommandersInsight from "../pool/commanders-insight.js";
 import _poolConfoundingRiddle from "../pool/confounding-riddle.js";
@@ -553,6 +554,7 @@ import _poolKrondTheDawnClad from "../pool/krond-the-dawn-clad.js";
 import _poolKrovikanFetish from "../pool/krovikan-fetish.js";
 import _poolKykarWindsFury from "../pool/kykar-winds-fury.js";
 import _poolLaboratoryManiac from "../pool/laboratory-maniac.js";
+import _poolLanternOfUndersight from "../pool/lantern-of-undersight.js";
 import _poolLashOfMalice from "../pool/lash-of-malice.js";
 import _poolLavaZombie from "../pool/lava-zombie.js";
 import _poolLayWaste from "../pool/lay-waste.js";
@@ -730,6 +732,7 @@ import _poolPitilessFists from "../pool/pitiless-fists.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlanForAllOutcomes from "../pool/plan-for-all-outcomes.js";
 import _poolPlanetaryPatrol from "../pool/planetary-patrol.js";
+import _poolPlatinumPersecutor from "../pool/platinum-persecutor.js";
 import _poolPlaxmanta from "../pool/plaxmanta.js";
 import _poolPlayWithFire from "../pool/play-with-fire.js";
 import _poolPlayfulShove from "../pool/playful-shove.js";
@@ -937,6 +940,7 @@ import _poolSurrakarMarauder from "../pool/surrakar-marauder.js";
 import _poolSwallowWhole from "../pool/swallow-whole.js";
 import _poolSweetOblivion from "../pool/sweet-oblivion.js";
 import _poolSwiftSilence from "../pool/swift-silence.js";
+import _poolSwordOfFireAndIceAndWarAndPeace from "../pool/sword-of-fire-and-ice-and-war-and-peace.js";
 import _poolSwordOfSinewAndSteel from "../pool/sword-of-sinew-and-steel.js";
 import _poolSylvanLibrary from "../pool/sylvan-library.js";
 import _poolSylvanPrimordial from "../pool/sylvan-primordial.js";
@@ -954,7 +958,9 @@ import _poolTemptWithBunnies from "../pool/tempt-with-bunnies.js";
 import _poolTemptingContract from "../pool/tempting-contract.js";
 import _poolTenaciousTosk from "../pool/tenacious-tosk.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
+import _poolThatsNoMoonmist from "../pool/thats-no-moonmist.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
+import _poolTheCovertBlueMage from "../pool/the-covert-blue-mage.js";
 import _poolTheDayOfTheDoctor from "../pool/the-day-of-the-doctor.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
 import _poolTheGreatAurora from "../pool/the-great-aurora.js";
@@ -1068,6 +1074,7 @@ import _poolWizardsSpellbook from "../pool/wizards-spellbook.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
 import _poolWordOfBinding from "../pool/word-of-binding.js";
 import _poolWorfStillNotMerry from "../pool/worf-still-not-merry.js";
+import _poolWrathOfOko from "../pool/wrath-of-oko.js";
 import _poolWreckAndRebuild from "../pool/wreck-and-rebuild.js";
 import _poolWretchedConfluence from "../pool/wretched-confluence.js";
 import _poolWuSpy from "../pool/wu-spy.js";
@@ -1087,10 +1094,12 @@ import _poolZombieGoliath from "../pool/zombie-goliath.js";
 import _poolZoologicalStudy from "../pool/zoological-study.js";
 import _poolZukosExile from "../pool/zukos-exile.js";
 import _tokens00TrampleOozeToken from "../tokens/0-0-trample-ooze-token.js";
+import _tokens00WhiteSpiritTokenFlying from "../tokens/0-0-white-spirit-token-flying.js";
 import _tokens11BlackBirdTokenTheRavenMan from "../tokens/1-1-black-bird-token-the-raven-man.js";
 import _tokensBeastToken55Trample from "../tokens/beast-token-5-5-trample.js";
 import _tokensBlueSphinxToken44Flying from "../tokens/blue-sphinx-token-4-4-flying.js";
 import _tokensDinosaurCatToken from "../tokens/dinosaur-cat-token.js";
+import _tokensGreenBlueBirdTokenFlying from "../tokens/green-blue-bird-token-flying.js";
 import _tokensHeartwoodToken from "../tokens/heartwood-token.js";
 import _tokensHumanNobleToken from "../tokens/human-noble-token.js";
 import _tokensJumblebones from "../tokens/jumblebones.js";
@@ -1288,6 +1297,7 @@ const shard: CardShard = {
     _poolCoalitionSkyknight,
     _poolCoastalPeak,
     _poolColorstormStallion,
+    _poolColossalDreadmawAndStormCrow,
     _poolColossusOfSardia,
     _poolCommandersInsight,
     _poolConfoundingRiddle,
@@ -1660,6 +1670,7 @@ const shard: CardShard = {
     _poolKrovikanFetish,
     _poolKykarWindsFury,
     _poolLaboratoryManiac,
+    _poolLanternOfUndersight,
     _poolLashOfMalice,
     _poolLavaZombie,
     _poolLayWaste,
@@ -1837,6 +1848,7 @@ const shard: CardShard = {
     _poolPlagueMyr,
     _poolPlanForAllOutcomes,
     _poolPlanetaryPatrol,
+    _poolPlatinumPersecutor,
     _poolPlaxmanta,
     _poolPlayWithFire,
     _poolPlayfulShove,
@@ -2044,6 +2056,7 @@ const shard: CardShard = {
     _poolSwallowWhole,
     _poolSweetOblivion,
     _poolSwiftSilence,
+    _poolSwordOfFireAndIceAndWarAndPeace,
     _poolSwordOfSinewAndSteel,
     _poolSylvanLibrary,
     _poolSylvanPrimordial,
@@ -2061,7 +2074,9 @@ const shard: CardShard = {
     _poolTemptingContract,
     _poolTenaciousTosk,
     _poolTezzeretsGatebreaker,
+    _poolThatsNoMoonmist,
     _poolTheBalrogFlameOfUdun,
+    _poolTheCovertBlueMage,
     _poolTheDayOfTheDoctor,
     _poolTheDestinedWhiteMage,
     _poolTheGreatAurora,
@@ -2175,6 +2190,7 @@ const shard: CardShard = {
     _poolWoodlandChangeling,
     _poolWordOfBinding,
     _poolWorfStillNotMerry,
+    _poolWrathOfOko,
     _poolWreckAndRebuild,
     _poolWretchedConfluence,
     _poolWuSpy,
@@ -2196,10 +2212,12 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens00TrampleOozeToken,
+    _tokens00WhiteSpiritTokenFlying,
     _tokens11BlackBirdTokenTheRavenMan,
     _tokensBeastToken55Trample,
     _tokensBlueSphinxToken44Flying,
     _tokensDinosaurCatToken,
+    _tokensGreenBlueBirdTokenFlying,
     _tokensHeartwoodToken,
     _tokensHumanNobleToken,
     _tokensJumblebones,

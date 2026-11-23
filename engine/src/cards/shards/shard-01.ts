@@ -46,6 +46,7 @@ import _poolAshiokDreamRender from "../pool/ashiok-dream-render.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAssemble from "../pool/assemble.js";
 import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
+import _poolAvacynAndGriselbrand from "../pool/avacyn-and-griselbrand.js";
 import _poolAvenMindcensor from "../pool/aven-mindcensor.js";
 import _poolAvenge from "../pool/avenge.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
@@ -196,6 +197,7 @@ import _poolDefiantSalvager from "../pool/defiant-salvager.js";
 import _poolDeftDismissal from "../pool/deft-dismissal.js";
 import _poolDejaVu from "../pool/deja-vu.js";
 import _poolDeluge from "../pool/deluge.js";
+import _poolDelveTooDeep from "../pool/delve-too-deep.js";
 import _poolDelverOfSecrets from "../pool/delver-of-secrets.js";
 import _poolDerangedAssistant from "../pool/deranged-assistant.js";
 import _poolDesperateFarmer from "../pool/desperate-farmer.js";
@@ -311,6 +313,7 @@ import _poolGamekeeper from "../pool/gamekeeper.js";
 import _poolGarruksHarbinger from "../pool/garruks-harbinger.js";
 import _poolGaryClone from "../pool/gary-clone.js";
 import _poolGeothermalKami from "../pool/geothermal-kami.js";
+import _poolGerrardAndHanna from "../pool/gerrard-and-hanna.js";
 import _poolGerrardsCommand from "../pool/gerrards-command.js";
 import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
 import _poolGhostsOfTheInnocent from "../pool/ghosts-of-the-innocent.js";
@@ -333,6 +336,7 @@ import _poolGoblinGoon from "../pool/goblin-goon.js";
 import _poolGoblinMasons from "../pool/goblin-masons.js";
 import _poolGoblinPsychopath from "../pool/goblin-psychopath.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
+import _poolGoblinSavant from "../pool/goblin-savant.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
 import _poolGogoMysteriousMime from "../pool/gogo-mysterious-mime.js";
 import _poolGoldenArgosy from "../pool/golden-argosy.js";
@@ -570,6 +574,7 @@ import _poolMoonscarredWerewolf from "../pool/moonscarred-werewolf.js";
 import _poolMoorlandDrifter from "../pool/moorland-drifter.js";
 import _poolMorcantsEyes from "../pool/morcants-eyes.js";
 import _poolMountainGoat from "../pool/mountain-goat.js";
+import _poolMoxPoison from "../pool/mox-poison.js";
 import _poolMrOrfeoTheBoulder from "../pool/mr-orfeo-the-boulder.js";
 import _poolMuerraTrashTactician from "../pool/muerra-trash-tactician.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
@@ -778,6 +783,7 @@ import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
 import _poolShrineOfBurningRage from "../pool/shrine-of-burning-rage.js";
 import _poolShuttleAce from "../pool/shuttle-ace.js";
+import _poolSiegeElemental from "../pool/siege-elemental.js";
 import _poolSigardasImprisonment from "../pool/sigardas-imprisonment.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
 import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
@@ -880,6 +886,7 @@ import _poolThassasRebuff from "../pool/thassas-rebuff.js";
 import _poolTheEleventhHour from "../pool/the-eleventh-hour.js";
 import _poolTheHolodeck from "../pool/the-holodeck.js";
 import _poolTheHunterMaze from "../pool/the-hunter-maze.js";
+import _poolTheMasterOfCuisine from "../pool/the-master-of-cuisine.js";
 import _poolTheMeathookMassacre from "../pool/the-meathook-massacre.js";
 import _poolTheScarletWitch from "../pool/the-scarlet-witch.js";
 import _poolTheSpearOfLeonidas from "../pool/the-spear-of-leonidas.js";
@@ -1089,6 +1096,7 @@ const shard: CardShard = {
     _poolAshioksReaper,
     _poolAssemble,
     _poolAstelliReclaimer,
+    _poolAvacynAndGriselbrand,
     _poolAvenMindcensor,
     _poolAvenge,
     _poolAwakenTheBear,
@@ -1239,6 +1247,7 @@ const shard: CardShard = {
     _poolDeftDismissal,
     _poolDejaVu,
     _poolDeluge,
+    _poolDelveTooDeep,
     _poolDelverOfSecrets,
     _poolDerangedAssistant,
     _poolDesperateFarmer,
@@ -1354,6 +1363,7 @@ const shard: CardShard = {
     _poolGarruksHarbinger,
     _poolGaryClone,
     _poolGeothermalKami,
+    _poolGerrardAndHanna,
     _poolGerrardsCommand,
     _poolGhastlyDeathTyrant,
     _poolGhostsOfTheInnocent,
@@ -1376,6 +1386,7 @@ const shard: CardShard = {
     _poolGoblinMasons,
     _poolGoblinPsychopath,
     _poolGoblinRaider,
+    _poolGoblinSavant,
     _poolGodEternalBontu,
     _poolGogoMysteriousMime,
     _poolGoldenArgosy,
@@ -1613,6 +1624,7 @@ const shard: CardShard = {
     _poolMoorlandDrifter,
     _poolMorcantsEyes,
     _poolMountainGoat,
+    _poolMoxPoison,
     _poolMrOrfeoTheBoulder,
     _poolMuerraTrashTactician,
     _poolMurkwaterPathway,
@@ -1821,6 +1833,7 @@ const shard: CardShard = {
     _poolShoreSnapper,
     _poolShrineOfBurningRage,
     _poolShuttleAce,
+    _poolSiegeElemental,
     _poolSigardasImprisonment,
     _poolSignpostScarecrow,
     _poolSigridGodFavored,
@@ -1923,6 +1936,7 @@ const shard: CardShard = {
     _poolTheEleventhHour,
     _poolTheHolodeck,
     _poolTheHunterMaze,
+    _poolTheMasterOfCuisine,
     _poolTheMeathookMassacre,
     _poolTheScarletWitch,
     _poolTheSpearOfLeonidas,

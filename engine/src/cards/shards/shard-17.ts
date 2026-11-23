@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _pool17YearCicadas from "../pool/17-year-cicadas.js";
 import _poolAangAirbendingMaster from "../pool/aang-airbending-master.js";
 import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
@@ -104,6 +105,7 @@ import _poolBloodlineShaman from "../pool/bloodline-shaman.js";
 import _poolBloodthirstyOgre from "../pool/bloodthirsty-ogre.js";
 import _poolBloodwaterEntity from "../pool/bloodwater-entity.js";
 import _poolBlueScarab from "../pool/blue-scarab.js";
+import _poolBobTheClaymore from "../pool/bob-the-claymore.js";
 import _poolBogDown from "../pool/bog-down.js";
 import _poolBogardanFirefiend from "../pool/bogardan-firefiend.js";
 import _poolBoggartBog from "../pool/boggart-bog.js";
@@ -277,6 +279,7 @@ import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
 import _poolEtherealAmbush from "../pool/ethereal-ambush.js";
 import _poolEtheriumPteramander from "../pool/etherium-pteramander.js";
 import _poolEvergloveCourier from "../pool/everglove-courier.js";
+import _poolEvilBorosCharm from "../pool/evil-boros-charm.js";
 import _poolEvolutionVat from "../pool/evolution-vat.js";
 import _poolExhibitionMagician from "../pool/exhibition-magician.js";
 import _poolExpeditionChampion from "../pool/expedition-champion.js";
@@ -387,6 +390,7 @@ import _poolGroundRift from "../pool/ground-rift.js";
 import _poolGroundchuckDirtbag from "../pool/groundchuck-dirtbag.js";
 import _poolGroundshakerSliver from "../pool/groundshaker-sliver.js";
 import _poolGroundskeeper from "../pool/groundskeeper.js";
+import _poolGrowthCharm from "../pool/growth-charm.js";
 import _poolGuardianOfTazeem from "../pool/guardian-of-tazeem.js";
 import _poolGuardiansPledge from "../pool/guardians-pledge.js";
 import _poolGutTrueSoulZealot from "../pool/gut-true-soul-zealot.js";
@@ -514,6 +518,7 @@ import _poolLifeFromTheLoam from "../pool/life-from-the-loam.js";
 import _poolLifeblood from "../pool/lifeblood.js";
 import _poolLifetimePassHolder from "../pool/lifetime-pass-holder.js";
 import _poolLightkeeperOfEmeria from "../pool/lightkeeper-of-emeria.js";
+import _poolLilianasOtherContract from "../pool/lilianas-other-contract.js";
 import _poolLithoformBlight from "../pool/lithoform-blight.js";
 import _poolLithoformEngine from "../pool/lithoform-engine.js";
 import _poolLiuBeiLordOfShu from "../pool/liu-bei-lord-of-shu.js";
@@ -588,6 +593,7 @@ import _poolMossbridgeTroll from "../pool/mossbridge-troll.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolMressCrewCoordinator from "../pool/mress-crew-coordinator.js";
 import _poolMutatedCultist from "../pool/mutated-cultist.js";
+import _poolMyojinOfNightsReachAndGrimBetrayal from "../pool/myojin-of-nights-reach-and-grim-betrayal.js";
 import _poolMysterioMasterOfIllusion from "../pool/mysterio-master-of-illusion.js";
 import _poolMysticReflection from "../pool/mystic-reflection.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
@@ -891,6 +897,7 @@ import _poolTheFalconAirshipRestored from "../pool/the-falcon-airship-restored.j
 import _poolTheFirstDoctor from "../pool/the-first-doctor.js";
 import _poolTheHuntsmansRedemption from "../pool/the-huntsmans-redemption.js";
 import _poolThePrismaticBridge from "../pool/the-prismatic-bridge.js";
+import _poolTheSixthSeraph from "../pool/the-sixth-seraph.js";
 import _poolTheSkullsporeNexus from "../pool/the-skullspore-nexus.js";
 import _poolTheTwelfthDoctor from "../pool/the-twelfth-doctor.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
@@ -1034,6 +1041,7 @@ import _tokensBlackGreenEnchantmentSnakeToken from "../tokens/black-green-enchan
 import _tokensCatBeastToken from "../tokens/cat-beast-token.js";
 import _tokensConstructTokenKaylasCommand from "../tokens/construct-token-kaylas-command.js";
 import _tokensDarkstar from "../tokens/darkstar.js";
+import _tokensDesertVehicleToken from "../tokens/desert-vehicle-token.js";
 import _tokensEldraziToken from "../tokens/eldrazi-token.js";
 import _tokensFungusTokenCantBlock from "../tokens/fungus-token-cant-block.js";
 import _tokensGiantWarriorToken from "../tokens/giant-warrior-token.js";
@@ -1056,6 +1064,7 @@ import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-fl
 
 const shard: CardShard = {
   pool: [
+    _pool17YearCicadas,
     _poolAangAirbendingMaster,
     _poolAangTheLastAirbender,
     _poolAbandonedOutpost,
@@ -1157,6 +1166,7 @@ const shard: CardShard = {
     _poolBloodthirstyOgre,
     _poolBloodwaterEntity,
     _poolBlueScarab,
+    _poolBobTheClaymore,
     _poolBogDown,
     _poolBogardanFirefiend,
     _poolBoggartBog,
@@ -1330,6 +1340,7 @@ const shard: CardShard = {
     _poolEtherealAmbush,
     _poolEtheriumPteramander,
     _poolEvergloveCourier,
+    _poolEvilBorosCharm,
     _poolEvolutionVat,
     _poolExhibitionMagician,
     _poolExpeditionChampion,
@@ -1440,6 +1451,7 @@ const shard: CardShard = {
     _poolGroundchuckDirtbag,
     _poolGroundshakerSliver,
     _poolGroundskeeper,
+    _poolGrowthCharm,
     _poolGuardianOfTazeem,
     _poolGuardiansPledge,
     _poolGutTrueSoulZealot,
@@ -1567,6 +1579,7 @@ const shard: CardShard = {
     _poolLifeblood,
     _poolLifetimePassHolder,
     _poolLightkeeperOfEmeria,
+    _poolLilianasOtherContract,
     _poolLithoformBlight,
     _poolLithoformEngine,
     _poolLiuBeiLordOfShu,
@@ -1641,6 +1654,7 @@ const shard: CardShard = {
     _poolMountainValley,
     _poolMressCrewCoordinator,
     _poolMutatedCultist,
+    _poolMyojinOfNightsReachAndGrimBetrayal,
     _poolMysterioMasterOfIllusion,
     _poolMysticReflection,
     _poolNardoleResourcefulCyborg,
@@ -1944,6 +1958,7 @@ const shard: CardShard = {
     _poolTheFirstDoctor,
     _poolTheHuntsmansRedemption,
     _poolThePrismaticBridge,
+    _poolTheSixthSeraph,
     _poolTheSkullsporeNexus,
     _poolTheTwelfthDoctor,
     _poolThermalGlider,
@@ -2089,6 +2104,7 @@ const shard: CardShard = {
     _tokensCatBeastToken,
     _tokensConstructTokenKaylasCommand,
     _tokensDarkstar,
+    _tokensDesertVehicleToken,
     _tokensEldraziToken,
     _tokensFungusTokenCantBlock,
     _tokensGiantWarriorToken,

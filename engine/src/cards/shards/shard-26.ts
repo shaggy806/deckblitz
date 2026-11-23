@@ -93,6 +93,7 @@ import _poolBaneOfTheLiving from "../pool/bane-of-the-living.js";
 import _poolBanonTheReturnersLeader from "../pool/banon-the-returners-leader.js";
 import _poolBanquetGuests from "../pool/banquet-guests.js";
 import _poolBaralAndKariZev from "../pool/baral-and-kari-zev.js";
+import _poolBarrysLand from "../pool/barrys-land.js";
 import _poolBasaltRavager from "../pool/basalt-ravager.js";
 import _poolBasilicaSkullbomb from "../pool/basilica-skullbomb.js";
 import _poolBasiliskCollar from "../pool/basilisk-collar.js";
@@ -221,6 +222,7 @@ import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDefensiveManeuvers from "../pool/defensive-maneuvers.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
 import _poolDennickPiousApparition from "../pool/dennick-pious-apparition.js";
+import _poolDevotedAbzan from "../pool/devoted-abzan.js";
 import _poolDidntSayPlease from "../pool/didnt-say-please.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
@@ -463,6 +465,7 @@ import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
 import _poolJestersCap from "../pool/jesters-cap.js";
 import _poolJoinTheCollective from "../pool/join-the-collective.js";
+import _poolJoragaPeach from "../pool/joraga-peach.js";
 import _poolJornGodOfWinter from "../pool/jorn-god-of-winter.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolJourneyForTheElixir from "../pool/journey-for-the-elixir.js";
@@ -533,6 +536,7 @@ import _poolMagneticTheft from "../pool/magnetic-theft.js";
 import _poolMagusOfTheOrder from "../pool/magus-of-the-order.js";
 import _poolMahamotiDjinn from "../pool/mahamoti-djinn.js";
 import _poolMalametWarScribe from "../pool/malamet-war-scribe.js";
+import _poolManakinAndMillikin from "../pool/manakin-and-millikin.js";
 import _poolMantleOfTides from "../pool/mantle-of-tides.js";
 import _poolMantleOfWebs from "../pool/mantle-of-webs.js";
 import _poolMaraudersAxe from "../pool/marauders-axe.js";
@@ -753,6 +757,7 @@ import _poolSapphireDragon from "../pool/sapphire-dragon.js";
 import _poolSarinthGreatwurm from "../pool/sarinth-greatwurm.js";
 import _poolSarumanTheWhite from "../pool/saruman-the-white.js";
 import _poolSaviorOfTheSleeping from "../pool/savior-of-the-sleeping.js";
+import _poolSawtoothAvenger from "../pool/sawtooth-avenger.js";
 import _poolScaldingViper from "../pool/scalding-viper.js";
 import _poolScareTactics from "../pool/scare-tactics.js";
 import _poolScatheZombies from "../pool/scathe-zombies.js";
@@ -924,6 +929,7 @@ import _poolTheMouthOfSauron from "../pool/the-mouth-of-sauron.js";
 import _poolTheRavenMan from "../pool/the-raven-man.js";
 import _poolTheSeedcore from "../pool/the-seedcore.js";
 import _poolTheSoulStone from "../pool/the-soul-stone.js";
+import _poolTheValueKnight from "../pool/the-value-knight.js";
 import _poolTheWorldSpell from "../pool/the-world-spell.js";
 import _poolTheodenKingOfRohan from "../pool/theoden-king-of-rohan.js";
 import _poolTheoreticalNecromancer from "../pool/theoretical-necromancer.js";
@@ -1176,6 +1182,7 @@ const shard: CardShard = {
     _poolBanonTheReturnersLeader,
     _poolBanquetGuests,
     _poolBaralAndKariZev,
+    _poolBarrysLand,
     _poolBasaltRavager,
     _poolBasilicaSkullbomb,
     _poolBasiliskCollar,
@@ -1304,6 +1311,7 @@ const shard: CardShard = {
     _poolDefensiveManeuvers,
     _poolDelifsCone,
     _poolDennickPiousApparition,
+    _poolDevotedAbzan,
     _poolDidntSayPlease,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
@@ -1546,6 +1554,7 @@ const shard: CardShard = {
     _poolJeeringHomunculus,
     _poolJestersCap,
     _poolJoinTheCollective,
+    _poolJoragaPeach,
     _poolJornGodOfWinter,
     _poolJosuVessLichKnight,
     _poolJourneyForTheElixir,
@@ -1616,6 +1625,7 @@ const shard: CardShard = {
     _poolMagusOfTheOrder,
     _poolMahamotiDjinn,
     _poolMalametWarScribe,
+    _poolManakinAndMillikin,
     _poolMantleOfTides,
     _poolMantleOfWebs,
     _poolMaraudersAxe,
@@ -1836,6 +1846,7 @@ const shard: CardShard = {
     _poolSarinthGreatwurm,
     _poolSarumanTheWhite,
     _poolSaviorOfTheSleeping,
+    _poolSawtoothAvenger,
     _poolScaldingViper,
     _poolScareTactics,
     _poolScatheZombies,
@@ -2007,6 +2018,7 @@ const shard: CardShard = {
     _poolTheRavenMan,
     _poolTheSeedcore,
     _poolTheSoulStone,
+    _poolTheValueKnight,
     _poolTheWorldSpell,
     _poolTheodenKingOfRohan,
     _poolTheoreticalNecromancer,

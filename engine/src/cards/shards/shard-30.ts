@@ -18,6 +18,7 @@ import _poolAeronautCavalry from "../pool/aeronaut-cavalry.js";
 import _poolAetherFlash from "../pool/aether-flash.js";
 import _poolAethertow from "../pool/aethertow.js";
 import _poolAgentsToolkit from "../pool/agents-toolkit.js";
+import _poolAggressiveCrag from "../pool/aggressive-crag.js";
 import _poolAjaniWiseCounselor from "../pool/ajani-wise-counselor.js";
 import _poolAlabasterWall from "../pool/alabaster-wall.js";
 import _poolAlaniasPathmaker from "../pool/alanias-pathmaker.js";
@@ -386,6 +387,7 @@ import _poolGoblinSappers from "../pool/goblin-sappers.js";
 import _poolGoblinSmuggler from "../pool/goblin-smuggler.js";
 import _poolGoblinSpymaster from "../pool/goblin-spymaster.js";
 import _poolGoblinTinkerer from "../pool/goblin-tinkerer.js";
+import _poolGolgariDeathSwarm from "../pool/golgari-death-swarm.js";
 import _poolGollumSilentSlinker from "../pool/gollum-silent-slinker.js";
 import _poolGoreSwine from "../pool/gore-swine.js";
 import _poolGoringCeratops from "../pool/goring-ceratops.js";
@@ -518,6 +520,7 @@ import _poolKnightOfNewAlara from "../pool/knight-of-new-alara.js";
 import _poolKnightOfOldBenalia from "../pool/knight-of-old-benalia.js";
 import _poolKnightOfTheEbonLegion from "../pool/knight-of-the-ebon-legion.js";
 import _poolKnowledgeSeeker from "../pool/knowledge-seeker.js";
+import _poolKomaAndToskiCompleated from "../pool/koma-and-toski-compleated.js";
 import _poolKonstrariImproviser from "../pool/konstrari-improviser.js";
 import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolKrakilin from "../pool/krakilin.js";
@@ -630,6 +633,7 @@ import _poolNethergoyf from "../pool/nethergoyf.js";
 import _poolNexos from "../pool/nexos.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNightMarketGuard from "../pool/night-market-guard.js";
+import _poolNightOutInVegas from "../pool/night-out-in-vegas.js";
 import _poolNightcreep from "../pool/nightcreep.js";
 import _poolNimbleInnovator from "../pool/nimble-innovator.js";
 import _poolNimbleObstructionist from "../pool/nimble-obstructionist.js";
@@ -650,6 +654,7 @@ import _poolOdylicWraith from "../pool/odylic-wraith.js";
 import _poolOffenderAtLarge from "../pool/offender-at-large.js";
 import _poolOfferImmortality from "../pool/offer-immortality.js";
 import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
+import _poolOilskelion from "../pool/oilskelion.js";
 import _poolOkoTheRingleader from "../pool/oko-the-ringleader.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
@@ -1079,6 +1084,7 @@ import _tokensKeimi from "../tokens/keimi.js";
 import _tokensKrakenTokenKioraBestsTheSeaGod from "../tokens/kraken-token-kiora-bests-the-sea-god.js";
 import _tokensMinionToken from "../tokens/minion-token.js";
 import _tokensMyrToken from "../tokens/myr-token.js";
+import _tokensToskisCoil from "../tokens/toskis-coil.js";
 import _tokensTwinToken from "../tokens/twin-token.js";
 import _tokensYoungHeroRoleToken from "../tokens/young-hero-role-token.js";
 
@@ -1099,6 +1105,7 @@ const shard: CardShard = {
     _poolAetherFlash,
     _poolAethertow,
     _poolAgentsToolkit,
+    _poolAggressiveCrag,
     _poolAjaniWiseCounselor,
     _poolAlabasterWall,
     _poolAlaniasPathmaker,
@@ -1467,6 +1474,7 @@ const shard: CardShard = {
     _poolGoblinSmuggler,
     _poolGoblinSpymaster,
     _poolGoblinTinkerer,
+    _poolGolgariDeathSwarm,
     _poolGollumSilentSlinker,
     _poolGoreSwine,
     _poolGoringCeratops,
@@ -1599,6 +1607,7 @@ const shard: CardShard = {
     _poolKnightOfOldBenalia,
     _poolKnightOfTheEbonLegion,
     _poolKnowledgeSeeker,
+    _poolKomaAndToskiCompleated,
     _poolKonstrariImproviser,
     _poolKoyaDeathFromAbove,
     _poolKrakilin,
@@ -1711,6 +1720,7 @@ const shard: CardShard = {
     _poolNexos,
     _poolNickValentinePrivateEye,
     _poolNightMarketGuard,
+    _poolNightOutInVegas,
     _poolNightcreep,
     _poolNimbleInnovator,
     _poolNimbleObstructionist,
@@ -1731,6 +1741,7 @@ const shard: CardShard = {
     _poolOffenderAtLarge,
     _poolOfferImmortality,
     _poolOildeepGearhulk,
+    _poolOilskelion,
     _poolOkoTheRingleader,
     _poolOmenOfTheDead,
     _poolOmenOfTheSun,
@@ -2162,6 +2173,7 @@ const shard: CardShard = {
     _tokensKrakenTokenKioraBestsTheSeaGod,
     _tokensMinionToken,
     _tokensMyrToken,
+    _tokensToskisCoil,
     _tokensTwinToken,
     _tokensYoungHeroRoleToken,
   ],

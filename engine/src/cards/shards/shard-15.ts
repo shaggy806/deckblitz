@@ -146,6 +146,7 @@ import _poolComingAttraction from "../pool/coming-attraction.js";
 import _poolCommandOfUnsummoning from "../pool/command-of-unsummoning.js";
 import _poolCommanderSpock from "../pool/commander-spock.js";
 import _poolCommandingPresence from "../pool/commanding-presence.js";
+import _poolCommonBlackRemoval from "../pool/common-black-removal.js";
 import _poolCompassGnome from "../pool/compass-gnome.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
 import _poolConcentrate from "../pool/concentrate.js";
@@ -196,6 +197,7 @@ import _poolDenyTheWitch from "../pool/deny-the-witch.js";
 import _poolDescendantsPath from "../pool/descendants-path.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDestined from "../pool/destined.js";
+import _poolDevotedTemur from "../pool/devoted-temur.js";
 import _poolDevourInFlames from "../pool/devour-in-flames.js";
 import _poolDevouringGreed from "../pool/devouring-greed.js";
 import _poolDiaryOfDreams from "../pool/diary-of-dreams.js";
@@ -372,6 +374,7 @@ import _poolGruulGuildmage from "../pool/gruul-guildmage.js";
 import _poolGuardianScalelord from "../pool/guardian-scalelord.js";
 import _poolGuruPathik from "../pool/guru-pathik.js";
 import _poolGuulDrazSpecter from "../pool/guul-draz-specter.js";
+import _poolHalfTheBattle from "../pool/half-the-battle.js";
 import _poolHamatoNinpo from "../pool/hamato-ninpo.js";
 import _poolHanskSlayerZealot from "../pool/hansk-slayer-zealot.js";
 import _poolHarborBandit from "../pool/harbor-bandit.js";
@@ -620,9 +623,11 @@ import _poolPashalikMons from "../pool/pashalik-mons.js";
 import _poolPatagiaTiger from "../pool/patagia-tiger.js";
 import _poolPauseForReflection from "../pool/pause-for-reflection.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
+import _poolPeelOut from "../pool/peel-out.js";
 import _poolPersonalSanctuary from "../pool/personal-sanctuary.js";
 import _poolPetraSphinx from "../pool/petra-sphinx.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
+import _poolPhyrexianBroodstar from "../pool/phyrexian-broodstar.js";
 import _poolPhyrexianDevourer from "../pool/phyrexian-devourer.js";
 import _poolPhyrexianScriptures from "../pool/phyrexian-scriptures.js";
 import _poolPhyrexianScuta from "../pool/phyrexian-scuta.js";
@@ -687,6 +692,7 @@ import _poolReclamationSpecialist from "../pool/reclamation-specialist.js";
 import _poolRecoup from "../pool/recoup.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolReflectionOfKikiJiki from "../pool/reflection-of-kiki-jiki.js";
+import _poolReflectiveGate from "../pool/reflective-gate.js";
 import _poolRegenerate from "../pool/regenerate.js";
 import _poolRegicide from "../pool/regicide.js";
 import _poolReiverDemon from "../pool/reiver-demon.js";
@@ -852,6 +858,7 @@ import _poolTheBelligerent from "../pool/the-belligerent.js";
 import _poolTheFourthDoctor from "../pool/the-fourth-doctor.js";
 import _poolTheHowlingAbomination from "../pool/the-howling-abomination.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
+import _poolTheKnightOfWeeks from "../pool/the-knight-of-weeks.js";
 import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheOoze from "../pool/the-ooze.js";
 import _poolThePromiseOfKahless from "../pool/the-promise-of-kahless.js";
@@ -1145,6 +1152,7 @@ const shard: CardShard = {
     _poolCommandOfUnsummoning,
     _poolCommanderSpock,
     _poolCommandingPresence,
+    _poolCommonBlackRemoval,
     _poolCompassGnome,
     _poolCompulsiveResearch,
     _poolConcentrate,
@@ -1195,6 +1203,7 @@ const shard: CardShard = {
     _poolDescendantsPath,
     _poolDespark,
     _poolDestined,
+    _poolDevotedTemur,
     _poolDevourInFlames,
     _poolDevouringGreed,
     _poolDiaryOfDreams,
@@ -1371,6 +1380,7 @@ const shard: CardShard = {
     _poolGuardianScalelord,
     _poolGuruPathik,
     _poolGuulDrazSpecter,
+    _poolHalfTheBattle,
     _poolHamatoNinpo,
     _poolHanskSlayerZealot,
     _poolHarborBandit,
@@ -1619,9 +1629,11 @@ const shard: CardShard = {
     _poolPatagiaTiger,
     _poolPauseForReflection,
     _poolPearlOfWisdom,
+    _poolPeelOut,
     _poolPersonalSanctuary,
     _poolPetraSphinx,
     _poolPetrifyingMeddler,
+    _poolPhyrexianBroodstar,
     _poolPhyrexianDevourer,
     _poolPhyrexianScriptures,
     _poolPhyrexianScuta,
@@ -1686,6 +1698,7 @@ const shard: CardShard = {
     _poolRecoup,
     _poolReduceToMemory,
     _poolReflectionOfKikiJiki,
+    _poolReflectiveGate,
     _poolRegenerate,
     _poolRegicide,
     _poolReiverDemon,
@@ -1851,6 +1864,7 @@ const shard: CardShard = {
     _poolTheFourthDoctor,
     _poolTheHowlingAbomination,
     _poolTheHungerTideRises,
+    _poolTheKnightOfWeeks,
     _poolTheNightOfTheDoctor,
     _poolTheOoze,
     _poolThePromiseOfKahless,

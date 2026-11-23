@@ -152,6 +152,7 @@ import _poolCoastalDiscovery from "../pool/coastal-discovery.js";
 import _poolCoaxFromTheBlindEternities from "../pool/coax-from-the-blind-eternities.js";
 import _poolColfenorsUrn from "../pool/colfenors-urn.js";
 import _poolCollectorsVault from "../pool/collectors-vault.js";
+import _poolColorPie from "../pool/color-pie.js";
 import _poolColossalCloneMaster from "../pool/colossal-clone-master.js";
 import _poolColossalMight from "../pool/colossal-might.js";
 import _poolCombustionMan from "../pool/combustion-man.js";
@@ -389,6 +390,7 @@ import _poolGontisMachinations from "../pool/gontis-machinations.js";
 import _poolGorehornRaider from "../pool/gorehorn-raider.js";
 import _poolGornogTheRedReaper from "../pool/gornog-the-red-reaper.js";
 import _poolGravedig from "../pool/gravedig.js";
+import _poolGraveyardDig from "../pool/graveyard-dig.js";
 import _poolGrayAndAdiraForeverJoined from "../pool/gray-and-adira-forever-joined.js";
 import _poolGrayscaledGharial from "../pool/grayscaled-gharial.js";
 import _poolGreatFurnace from "../pool/great-furnace.js";
@@ -718,6 +720,7 @@ import _poolRecklessOgre from "../pool/reckless-ogre.js";
 import _poolRecklessPyrosurfer from "../pool/reckless-pyrosurfer.js";
 import _poolRecklessSpite from "../pool/reckless-spite.js";
 import _poolReclaimTheWastes from "../pool/reclaim-the-wastes.js";
+import _poolRecyclaBird from "../pool/recycla-bird.js";
 import _poolRefreshingRain from "../pool/refreshing-rain.js";
 import _poolRefute from "../pool/refute.js";
 import _poolReitoLantern from "../pool/reito-lantern.js";
@@ -886,6 +889,7 @@ import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
+import _poolTaigaStadium from "../pool/taiga-stadium.js";
 import _poolTamiyoSeasonedScholar from "../pool/tamiyo-seasoned-scholar.js";
 import _poolTangle from "../pool/tangle.js";
 import _poolTanglesap from "../pool/tanglesap.js";
@@ -899,6 +903,7 @@ import _poolTemptingLicid from "../pool/tempting-licid.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
 import _poolThalakosLowlands from "../pool/thalakos-lowlands.js";
+import _poolTheAlrightHenge from "../pool/the-alright-henge.js";
 import _poolTheBorgQueen from "../pool/the-borg-queen.js";
 import _poolTheDurasSisters from "../pool/the-duras-sisters.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
@@ -1050,6 +1055,7 @@ import _poolZuberiGoldenFeather from "../pool/zuberi-golden-feather.js";
 import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
 import _tokensBeastToken55 from "../tokens/beast-token-5-5.js";
 import _tokensBirdSoldierToken44Flying from "../tokens/bird-soldier-token-4-4-flying.js";
+import _tokensDemonToken77BlackRed from "../tokens/demon-token-7-7-black-red.js";
 import _tokensElementalToken33BlueRedFlying from "../tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
 import _tokensGolemToken from "../tokens/golem-token.js";
@@ -1214,6 +1220,7 @@ const shard: CardShard = {
     _poolCoaxFromTheBlindEternities,
     _poolColfenorsUrn,
     _poolCollectorsVault,
+    _poolColorPie,
     _poolColossalCloneMaster,
     _poolColossalMight,
     _poolCombustionMan,
@@ -1451,6 +1458,7 @@ const shard: CardShard = {
     _poolGorehornRaider,
     _poolGornogTheRedReaper,
     _poolGravedig,
+    _poolGraveyardDig,
     _poolGrayAndAdiraForeverJoined,
     _poolGrayscaledGharial,
     _poolGreatFurnace,
@@ -1780,6 +1788,7 @@ const shard: CardShard = {
     _poolRecklessPyrosurfer,
     _poolRecklessSpite,
     _poolReclaimTheWastes,
+    _poolRecyclaBird,
     _poolRefreshingRain,
     _poolRefute,
     _poolReitoLantern,
@@ -1948,6 +1957,7 @@ const shard: CardShard = {
     _poolSwordsToPlowshares,
     _poolSylvanOffering,
     _poolSymbolOfUnsummoning,
+    _poolTaigaStadium,
     _poolTamiyoSeasonedScholar,
     _poolTangle,
     _poolTanglesap,
@@ -1961,6 +1971,7 @@ const shard: CardShard = {
     _poolTenaciousHunter,
     _poolTezzeretsBetrayal,
     _poolThalakosLowlands,
+    _poolTheAlrightHenge,
     _poolTheBorgQueen,
     _poolTheDurasSisters,
     _poolTheFantasticar,
@@ -2114,6 +2125,7 @@ const shard: CardShard = {
     _tokens22RedDwarfToken,
     _tokensBeastToken55,
     _tokensBirdSoldierToken44Flying,
+    _tokensDemonToken77BlackRed,
     _tokensElementalToken33BlueRedFlying,
     _tokensGnomeToken,
     _tokensGolemToken,

@@ -246,6 +246,7 @@ import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
 import _poolEmperorOfBones from "../pool/emperor-of-bones.js";
 import _poolEmrakulsInfluence from "../pool/emrakuls-influence.js";
+import _poolEnchantedPrairie from "../pool/enchanted-prairie.js";
 import _poolEndHostilities from "../pool/end-hostilities.js";
 import _poolEndlessOne from "../pool/endless-one.js";
 import _poolEndriderCatalyzer from "../pool/endrider-catalyzer.js";
@@ -288,6 +289,7 @@ import _poolFireImp from "../pool/fire-imp.js";
 import _poolFireNationOccupation from "../pool/fire-nation-occupation.js";
 import _poolFireSprites from "../pool/fire-sprites.js";
 import _poolFirebrandRanger from "../pool/firebrand-ranger.js";
+import _poolFirstStageOfMagicDesign from "../pool/first-stage-of-magic-design.js";
 import _poolFlamewakePhoenix from "../pool/flamewake-phoenix.js";
 import _poolFlamewaveInvoker from "../pool/flamewave-invoker.js";
 import _poolFlashOfDefiance from "../pool/flash-of-defiance.js";
@@ -857,6 +859,7 @@ import _poolThePeregrineDynamo from "../pool/the-peregrine-dynamo.js";
 import _poolTheScorpionGod from "../pool/the-scorpion-god.js";
 import _poolTheSpearOfBashenga from "../pool/the-spear-of-bashenga.js";
 import _poolTheUnspeakable from "../pool/the-unspeakable.js";
+import _poolThenDreadmawsAteEveryone from "../pool/then-dreadmaws-ate-everyone.js";
 import _poolTheorixCharm from "../pool/theorix-charm.js";
 import _poolTheorixMetamage from "../pool/theorix-metamage.js";
 import _poolThievingAmalgam from "../pool/thieving-amalgam.js";
@@ -875,6 +878,7 @@ import _poolTorchSlinger from "../pool/torch-slinger.js";
 import _poolTormentOfHailfire from "../pool/torment-of-hailfire.js";
 import _poolTotalWar from "../pool/total-war.js";
 import _poolTowerOfTheMagistrate from "../pool/tower-of-the-magistrate.js";
+import _poolTragdaTheBurner from "../pool/tragda-the-burner.js";
 import _poolTreacherousTerrain from "../pool/treacherous-terrain.js";
 import _poolTreetopSentries from "../pool/treetop-sentries.js";
 import _poolTrenchGorger from "../pool/trench-gorger.js";
@@ -1238,6 +1242,7 @@ const shard: CardShard = {
     _poolEmeritusOfIdeation,
     _poolEmperorOfBones,
     _poolEmrakulsInfluence,
+    _poolEnchantedPrairie,
     _poolEndHostilities,
     _poolEndlessOne,
     _poolEndriderCatalyzer,
@@ -1280,6 +1285,7 @@ const shard: CardShard = {
     _poolFireNationOccupation,
     _poolFireSprites,
     _poolFirebrandRanger,
+    _poolFirstStageOfMagicDesign,
     _poolFlamewakePhoenix,
     _poolFlamewaveInvoker,
     _poolFlashOfDefiance,
@@ -1849,6 +1855,7 @@ const shard: CardShard = {
     _poolTheScorpionGod,
     _poolTheSpearOfBashenga,
     _poolTheUnspeakable,
+    _poolThenDreadmawsAteEveryone,
     _poolTheorixCharm,
     _poolTheorixMetamage,
     _poolThievingAmalgam,
@@ -1867,6 +1874,7 @@ const shard: CardShard = {
     _poolTormentOfHailfire,
     _poolTotalWar,
     _poolTowerOfTheMagistrate,
+    _poolTragdaTheBurner,
     _poolTreacherousTerrain,
     _poolTreetopSentries,
     _poolTrenchGorger,
