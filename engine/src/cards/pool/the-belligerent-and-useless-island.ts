@@ -1,9 +1,9 @@
 import { defineCard } from "../define.js";
-import { crew, crewText } from "../helpers.js";
+import { crew, crewText, manaTapAbility } from "../helpers.js";
 
 // Playtest card (Unknown Event). A legendary artifact land Vehicle Island:
-// its "{T}: Add {U}" is the Island type's intrinsic ability (rule 305.6), so
-// it isn't authored again. Crewed, it's a 2/2 artifact creature land until
+// its "{T}: Add {U}" is the Island type's intrinsic ability (rule 305.6),
+// written out as the dual lands write theirs (a stand-in, not a second one). Crewed, it's a 2/2 artifact creature land until
 // end of turn; the loot trigger is Gitaxian Mindstinger's, to a player or a
 // battle.
 
@@ -27,7 +27,7 @@ export default defineCard({
       text: TAPPED_TEXT,
     },
   ],
-  activated: [crew(2, crewText(2))],
+  activated: [manaTapAbility("U"), crew(2, crewText(2))],
   triggered: [
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self", orBattle: true },

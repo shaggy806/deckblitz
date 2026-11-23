@@ -7,6 +7,7 @@
 import { describe, expect, it } from "vitest";
 
 import { POOL_CARDS } from "../cards.js";
+import { PLAYTEST_CARDS } from "../cards/generated-index.js";
 import { subtypeFitsTypes } from "../subtypes.js";
 import {
   A,
@@ -31,7 +32,12 @@ import {
 
 describe("a subtype that goes with no card type the object has (rule 205.3d)", () => {
   it("every pool card's printed subtypes go with its printed types", () => {
-    const misfits = POOL_CARDS.flatMap((card) =>
+    // Playtest cards print subtypes no list in rule 205.3 has (Cow, Koala, Chef,
+    // Omenpath, Ulamog's: rule 100.7). They print and play as written; only an
+    // effect that sets or removes card types would drop one, read as a
+    // planeswalker type.
+    const playtest = new Set(PLAYTEST_CARDS);
+    const misfits = POOL_CARDS.filter((card) => !playtest.has(card.name)).flatMap((card) =>
       (card.subtypes ?? []).filter((s) => !subtypeFitsTypes(s, card.types)).map((s) => `${card.name}: ${s}`),
     );
     expect(misfits).toEqual([]);

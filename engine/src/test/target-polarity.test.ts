@@ -290,7 +290,10 @@ describe("slot polarity", () => {
     // "an opponent controls" slot, and a few a card's definition would have to say — an Aura
     // token or a fetched Aura on any creature (Embereth Veteran, The Rani, Arachnus Spinner,
     // Gryff's Boon), which this table reads no registry for.
-    expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.0052);
+    // 0.54% on 2026-11-23, 78 of 14,545: the playtest cards (B341) added three of
+    // the kinds above — Roles on a creature you control (Garruk's Lost Wolf,
+    // Ratatwotwo) and Indicate, which targets a permanent and does nothing.
+    expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.0054);
   });
 
   it("rates every member of a for-each-target, not just the slot it binds", () => {

@@ -112,6 +112,9 @@ describe("pool Partner commanders (rule 702.124)", () => {
       [/^Partner \(/m, "partner"],
       [/^Partner with /m, "partner-with"],
       [/^Partner—/m, "partner-group"],
+      // The playtest cards' "Ready to run (You can have two commanders if both
+      // have ready to run.)", a partner group by its own name.
+      [/^Ready to run\b/m, "partner-group"],
       [/^Choose a Background\b/m, "choose-a-background"],
       [/^Doctor's companion\b/m, "doctors-companion"],
     ] as const;

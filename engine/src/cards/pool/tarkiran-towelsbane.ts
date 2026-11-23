@@ -26,7 +26,6 @@ export default defineCard({
         on: "deals-damage-batch",
         who: "you-control",
         filter: { subtype: "Rebel" },
-        to: "player",
         combat: true,
       },
       targets: [],
