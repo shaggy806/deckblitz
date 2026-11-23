@@ -9089,3 +9089,17 @@ Each board's die comes up 4.
 ### Expert-Level Safe: a matching number opens the safe
 - **Do:** Activate Expert-Level Safe targeting Bob and choose 2. As Bob, choose 2.
 - **Expect:** Each of you is offered only 1, 2 or 3, and Bob's prompt gives no hint of your number. With both at 2 the safe is sacrificed and the two face-down cards under it go to your hand. Choosing different numbers instead leaves the safe and exiles one more card face down.
+
+## Space sculptor's sectors (2026-11-22)
+
+### Space Beleren: every creature gets a sector, opponents first
+- **Do:** Cast Space Beleren. As Bob, answer his two prompts; then answer yours.
+- **Expect:** Bob is asked first, once per creature ("Llanowar Elves — choose its sector", buttons Alpha / Beta / Gamma), then you for Grizzly Bears and Hill Giant. Each creature then shows a coloured α, β or γ chip, and hovering it names the sector.
+
+### Space Beleren: +1 lets only the same sector block
+- **Do:** Cast Space Beleren. Put Craw Wurm in Beta; as Bob, put Grizzly Bears in Beta and Hill Giant in Alpha. Activate the +1, then attack Bob with Craw Wurm.
+- **Expect:** As Bob, only Grizzly Bears can block Craw Wurm; Hill Giant isn't offered as a blocker for it.
+
+### Space Beleren: −1 counters one sector only
+- **Do:** Cast Space Beleren. Put Grizzly Bears in Alpha and Hill Giant in Gamma. Activate the −1 and choose Alpha sector.
+- **Expect:** Grizzly Bears (and Llanowar Elves, if Bob's bot put it in Alpha) gets a +1/+1 counter; Hill Giant doesn't.

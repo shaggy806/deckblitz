@@ -666,6 +666,10 @@ Five more passes, all merged (156 cards):
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 340 (2026-11-22, `author-flagged`)** — Space Beleren, the last flagged card (`B340.json`):
+  `mechanic:sectors` built (space sculptor, rule 702.158: the sector designation, the 704.5u
+  assignment on the short-menu decision, `CardFilter.sector`, `CantBeBlocked.outsideSector`). No
+  other card uses sectors, so it frees nothing else. The flag list is empty.
 - **Batch 339 (2026-11-22, `author-flagged`)** — the flagged Expert-Level Safe and, on its key,
   Malik, Grim Manipulator, the last of the top 1000 commanders (`B339.json`). `mechanic:secret-choice`
   needed no new decision: secret council's `vote` (`choose`, `secret`, a bounded `number` or a

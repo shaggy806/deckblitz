@@ -1,0 +1,9 @@
+{
+ "batch": 340,
+ "status": "done",
+ "ranks": "Build ASAP: cards flagged in the library (2026-11-22). Space Beleren, the one flag left: space sculptor's sectors built for it (mechanic:sectors).",
+ "authored": [
+  {"name": "Space Beleren", "files": ["engine/src/cards/pool/space-beleren.ts"], "tested": true}
+ ],
+ "blocked": []
+}
