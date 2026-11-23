@@ -38,7 +38,7 @@ export * from "./cards/flavor-names.js";
 export * from "./cards/card-shards.js";
 export * from "./cards/catalog.js";
 export { CardRegistry } from "./cards/card-registry.js";
-export { COMMANDER_BANNED, PINNED_ART, TOKEN_NAMES } from "./cards/generated-index.js";
+export { COMMANDER_BANNED, PINNED_ART, PLAYTEST_CARDS, TOKEN_NAMES } from "./cards/generated-index.js";
 export { attackCompanyViolations, attackingViolations } from "./combat/attacking.js";
 export { blockCompanyViolations, blockTaxTotal, blockingViolations } from "./combat/blocking.js";
 export { damageAssignmentViolations, defaultAssignment, loyaltyStillOwed, standardAssignment } from "./combat/damage.js";

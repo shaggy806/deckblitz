@@ -14,7 +14,7 @@
 import { colorIdentityOf, commandersIdentity, commandersWithoutColor, identityString, settleCommanderColors, withinIdentity } from "./identity.js";
 import type { CommanderColors } from "./identity.js";
 import { isCardFront, isTokenCard } from "./cards/classify.js";
-import { COMMANDER_BANNED } from "./cards/generated-index.js";
+import { COMMANDER_BANNED, PLAYTEST_CARDS } from "./cards/generated-index.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { Color } from "./mana.js";
 import { hasSubtype, isCreatureType } from "./subtypes.js";
@@ -44,6 +44,11 @@ export interface DeckValidationResult {
    * among friends (the user's call, 2026-10-11), so the deck stays `legal`
    * to play here and the deck builder says what a real table would refuse. */
   readonly banned: readonly string[];
+  /** The deck's playtest cards (`PLAYTEST_CARDS`), each once, commanders
+   * first: legal in no format, so a real Commander table refuses them as it
+   * does a banned card, and they're kept for casual play the same way (rule
+   * 100.7; the user, 2026-11-23). Not a violation either. */
+  readonly playtest: readonly string[];
   /** The combined colour identity of the commander(s), as a WUBRG string. */
   readonly identity: string;
   /** The colours chosen for the commanders that choose one (rule 903.4b):
@@ -462,10 +467,13 @@ export function validateCommanderDeck(
   }
 
   const bannedNames = new Set(COMMANDER_BANNED);
+  const playtestNames = new Set(PLAYTEST_CARDS);
+  const names = [...new Set([...deck.commanders, ...deck.cards])];
   return {
     legal: violations.length === 0,
     violations,
-    banned: [...new Set([...deck.commanders, ...deck.cards])].filter((name) => bannedNames.has(name)),
+    banned: names.filter((name) => bannedNames.has(name)),
+    playtest: names.filter((name) => playtestNames.has(name)),
     identity: identityString(commanderIdentity),
     ...(Object.keys(commanderColors).length > 0 ? { commanderColors } : {}),
   };

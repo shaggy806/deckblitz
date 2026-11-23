@@ -193,20 +193,30 @@ function renderBarrel(bySub) {
  */
 function commanderBanned() {
   const out = new Set();
+  const playtest = new Set();
   let text;
   try {
     text = readFileSync(fileURLToPath(new URL("../data/oracle/cards.jsonl", import.meta.url)), "utf8");
   } catch {
-    return out;
+    return { banned: out, playtest };
   }
+  const real = new Set();
   for (const line of text.split("\n")) {
     if (line.trim() === "") continue;
     const card = JSON.parse(line);
-    if (card.commander !== "banned") continue;
-    out.add(card.name);
-    out.add(card.name.split(" // ")[0]);
+    if (card.playtest !== true && card.commander !== "token") {
+      real.add(card.name);
+      for (const face of card.faces ?? []) real.add(face.name);
+    }
+    const into = card.commander === "banned" ? out : card.playtest === true ? playtest : null;
+    if (into === null) continue;
+    into.add(card.name);
+    into.add(card.name.split(" // ")[0]);
   }
-  return out;
+  // A playtest split card's front face can share a real card's name (Bind //
+  // Liberate's Bind): that name is the real card's.
+  for (const name of real) playtest.delete(name);
+  return { banned: out, playtest };
 }
 
 function renderIndex(bySub) {
@@ -216,10 +226,14 @@ function renderIndex(bySub) {
     .get("pool")
     .filter((e) => e.art !== null)
     .sort(byName);
-  const bannedNames = commanderBanned();
+  const { banned: bannedNames, playtest: playtestNames } = commanderBanned();
   const banned = bySub
     .get("pool")
     .filter((e) => bannedNames.has(e.name))
+    .sort(byName);
+  const playtest = bySub
+    .get("pool")
+    .filter((e) => playtestNames.has(e.name))
     .sort(byName);
   return (
     HEADER +
@@ -243,6 +257,13 @@ function renderIndex(bySub) {
     " * `banned`), as the deck builder and the library show it. */\n" +
     "export const COMMANDER_BANNED: readonly string[] = [\n" +
     banned.map((e) => `  ${JSON.stringify(e.name)},\n`).join("") +
+    "];\n\n" +
+    "/** The pool's playtest cards (the Oracle snapshot's `playtest`): legal in\n" +
+    " * no format, in the pool for casual play as banned cards are (rule 100.7;\n" +
+    " * the user, 2026-11-23), and told apart from them (`validateDeck`'s\n" +
+    " * `playtest`). */\n" +
+    "export const PLAYTEST_CARDS: readonly string[] = [\n" +
+    playtest.map((e) => `  ${JSON.stringify(e.name)},\n`).join("") +
     "];\n"
   );
 }

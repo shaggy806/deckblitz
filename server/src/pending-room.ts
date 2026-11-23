@@ -123,6 +123,8 @@ function deckProblemOf(deck: PendingDeck | null): string | null {
   if (!result.legal) return result.violations[0] ?? "not a Commander-legal deck";
   const [banned] = result.banned;
   if (banned !== undefined) return `"${banned}" is banned in Commander`;
+  const [playtest] = result.playtest;
+  if (playtest !== undefined) return `"${playtest}" is a playtest card, not legal in Commander`;
   // The Attraction deck's own rules (717.2a: ten or more, each a different
   // name), beside the 99's.
   const [attractionProblem] = attractionDeckProblems(attractionNames(deck), registry());

@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import type { CardDefinition, CardType, Color } from 'engine/client'
 import {
   COMMANDER_BANNED,
+  PLAYTEST_CARDS,
   canCommandAlone,
   edhrecRankOf,
   releaseDateOf,
@@ -31,6 +32,8 @@ import './library.css'
 
 /** Banned in Commander — in the pool for casual play (2026-10-11). */
 const BANNED: ReadonlySet<string> = new Set(COMMANDER_BANNED)
+/** Playtest cards — legal in no format, in the pool for casual play too (2026-11-23). */
+const PLAYTEST: ReadonlySet<string> = new Set(PLAYTEST_CARDS)
 
 const TYPE_FILTERS = [
   'creature',
@@ -908,6 +911,11 @@ function GridCard({
           banned
         </span>
       ) : null}
+      {PLAYTEST.has(entry.def.name) ? (
+        <span className="lib-token-badge lib-banned-badge" title="Playtest card, not legal in Commander: here for casual play">
+          playtest
+        </span>
+      ) : null}
     </div>
   )
 }
@@ -1042,6 +1050,12 @@ function CardOverlay({
             <p className="lib-banned-note">
               Banned in Commander. It's here for casual play: a room set to Commander-legal decks only refuses a
               deck with it.
+            </p>
+          ) : null}
+          {PLAYTEST.has(entry.def.name) ? (
+            <p className="lib-banned-note">
+              A playtest card, not legal in Commander. It's here for casual play: a room set to Commander-legal decks
+              only refuses a deck with it.
             </p>
           ) : null}
           {entry.halves.length === 0 ? (

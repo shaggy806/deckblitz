@@ -33,13 +33,16 @@ export function loadSnapshot() {
     .map((line) => JSON.parse(line));
   const exact = new Map();
   const folded = new Map();
+  // A card beats a token of the same name ("Treasure" the card, not the
+  // token), and a real card a playtest card's face of the same name (Bind,
+  // not Bind // Liberate's).
+  const weight = (e) => (e.commander === "token" ? 0 : e.playtest === true ? 1 : 2);
   const add = (key, entry) => {
-    // A card beats a token of the same name ("Treasure" the card, not the token).
     const prev = exact.get(key);
-    if (prev === undefined || (prev.commander === "token" && entry.commander !== "token")) exact.set(key, entry);
+    if (prev === undefined || weight(entry) > weight(prev)) exact.set(key, entry);
     const f = fold(key);
     const prevF = folded.get(f);
-    if (prevF === undefined || (prevF.commander === "token" && entry.commander !== "token")) folded.set(f, entry);
+    if (prevF === undefined || weight(entry) > weight(prevF)) folded.set(f, entry);
   };
   for (const entry of entries) {
     add(entry.name, entry);

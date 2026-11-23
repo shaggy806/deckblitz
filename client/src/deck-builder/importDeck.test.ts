@@ -19,6 +19,7 @@ const format = (commanders: readonly string[]): DeckFormatReport => ({
   legal: true,
   violations: [],
   banned: [],
+  playtest: [],
   identity: 'G',
   commanders,
 })

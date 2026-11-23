@@ -320,6 +320,8 @@ export function DeckEditor({
       ? result
       : { ...result, legal: false, violations: [...result.violations, ...attractionIssues] }
   }, [deck.commanders, deck.cards, deck.commanderColors, attractions])
+  /** Cards a real Commander table refuses but this site plays: banned and playtest. */
+  const notLegal = legality.banned.length + legality.playtest.length
 
   // The Attraction deck (rule 717.2): only Attractions, which never go in the
   // 99, so an Attraction card's "add" puts it here.
@@ -578,14 +580,21 @@ export function DeckEditor({
       </div>
 
       <div
-        className={`db-legality ${!legality.legal ? 'illegal' : legality.banned.length > 0 ? 'banned' : 'legal'}`}
+        className={`db-legality ${!legality.legal ? 'illegal' : notLegal > 0 ? 'banned' : 'legal'}`}
       >
         <div className="db-legality-line">
           <strong>
             {!legality.legal
               ? `✗ ${legality.violations.length} ${legality.violations.length === 1 ? 'issue' : 'issues'}`
-              : legality.banned.length > 0
-                ? `✓ Playable — ${legality.banned.length} banned in Commander`
+              : notLegal > 0
+                ? `✓ Playable — ${[
+                    legality.banned.length > 0 ? `${legality.banned.length} banned in Commander` : null,
+                    legality.playtest.length > 0
+                      ? `${legality.playtest.length} playtest ${legality.playtest.length === 1 ? 'card' : 'cards'}`
+                      : null,
+                  ]
+                    .filter(Boolean)
+                    .join(', ')}`
                 : '✓ Commander-legal'}
           </strong>
           <span className="muted"> · identity: {legality.identity || 'colourless'}</span>
@@ -602,6 +611,14 @@ export function DeckEditor({
           <p className="db-banned muted">
             {legality.banned.join(', ')} — banned in Commander. A room set to Commander-legal decks only
             refuses this deck.
+          </p>
+        ) : null}
+        {legality.legal && legality.playtest.length > 0 ? (
+          // Playtest cards are legal in no format, kept for casual play the
+          // same way (2026-11-23).
+          <p className="db-banned muted">
+            {legality.playtest.join(', ')} — playtest {legality.playtest.length === 1 ? 'card' : 'cards'}, not legal in
+            Commander. A room set to Commander-legal decks only refuses this deck.
           </p>
         ) : null}
         {showIssues && legality.violations.length > 0 ? (

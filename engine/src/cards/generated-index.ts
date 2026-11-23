@@ -1502,3 +1502,10 @@ export const COMMANDER_BANNED: readonly string[] = [
   "Upheaval",
   "Yawgmoth's Bargain",
 ];
+
+/** The pool's playtest cards (the Oracle snapshot's `playtest`): legal in
+ * no format, in the pool for casual play as banned cards are (rule 100.7;
+ * the user, 2026-11-23), and told apart from them (`validateDeck`'s
+ * `playtest`). */
+export const PLAYTEST_CARDS: readonly string[] = [
+];
