@@ -61,7 +61,7 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import { POISON_LETHAL, printedCardName, rulesTextName, settledTally } from "../state.js";
 import { HARMFUL_COUNTERS } from "../target-polarity.js";
 import { playersAttackableNextTurn, readyToBlock } from "../combat/eligibility.js";
-import { canBlock, combatCreatures } from "./combat-math.js";
+import { attackTaxAt, canBlock, combatCreatures, manaToAttackWith } from "./combat-math.js";
 import { handQuality as handQualityOf } from "./hand-worth.js";
 import type { CombatCreature } from "./combat-math.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
@@ -1044,6 +1044,90 @@ function standingWorth(registry: CardRegistry, def: CardDefinition, opponents: n
   return Math.max(0, manaValue(parseManaCost(def.manaCost)) + STANDING_BASE - priced);
 }
 
+/** One "deals double that damage instead" a card's static makes: how many
+ * times over, from whose sources and to whose side. */
+interface DamageMultiplier {
+  readonly times: number;
+  readonly from: "any" | "controller";
+  readonly to: "any" | "controller" | "opponents";
+}
+
+const multipliersByDef = new WeakMap<CardDefinition, readonly DamageMultiplier[]>();
+
+/**
+ * The damage multipliers `def` prints as plain statics: Dictate of the Twin
+ * Gods and Furnace of Rath (every source, everyone), Fiery Emancipation and
+ * Angrath's Marauders (sources you control), Gisela (to an opponent's side).
+ * One with a condition, or a filter this doesn't read, is left out: unread,
+ * it counts as it did before, for nothing.
+ */
+function damageMultipliersOf(def: CardDefinition): readonly DamageMultiplier[] {
+  const known = multipliersByDef.get(def);
+  if (known !== undefined) return known;
+  const out: DamageMultiplier[] = [];
+  for (const s of def.static) {
+    const r = s.replacement as
+      | {
+          readonly event?: unknown;
+          readonly instead?: { readonly modify?: { readonly times?: unknown } };
+          readonly source?: Readonly<Record<string, unknown>>;
+          readonly to?: unknown;
+        }
+      | undefined;
+    if (r === undefined || r.event !== "would-deal-damage" || s.condition !== undefined) continue;
+    const times = r.instead?.modify?.times;
+    if (typeof times !== "number" || times <= 1) continue;
+    if (Object.keys(r).some((key) => key !== "event" && key !== "instead" && key !== "source" && key !== "to")) continue;
+    const sourceKeys = Object.keys(r.source ?? {});
+    if (sourceKeys.some((key) => key !== "controlledBy" && key !== "type")) continue;
+    if (r.source !== undefined && (r.source.controlledBy !== "you" || (r.source.type ?? "creature") !== "creature")) continue;
+    const to = r.to === undefined ? "any" : r.to === "opponent-side" ? "opponents" : r.to === "your-side" ? "controller" : null;
+    if (to === null) continue;
+    out.push({ times, from: r.source === undefined ? "any" : "controller", to });
+  }
+  multipliersByDef.set(def, out);
+  return out;
+}
+
+/** Whether `def` doubles damage for everyone alike (Dictate of the Twin
+ * Gods): worth what the two sides' damage makes it, not a creature of its
+ * cost (`standingEffects`). */
+const multipliesEveryonesDamage = (def: CardDefinition): boolean =>
+  damageMultipliersOf(def).some((m) => m.from === "any" && m.to === "any");
+
+/**
+ * How many times over the combat damage of `from`'s creatures to `to` is
+ * dealt, by the multipliers on the battlefield ({@link damageMultipliersOf}).
+ * 1 on nearly every board.
+ *
+ * The evaluation read damage at its printed size, so a doubler was a
+ * permanent like any other, worth a creature of its cost: Kardur's bot cast
+ * Dictate of the Twin Gods at 6 commander damage from a Slicer that then hit
+ * for 12 and for 6, and with the weakest board of four, where one swing of
+ * 15 became its 30 life (three kept live games, 2026-11-22).
+ */
+function damageTimes(state: GameState, registry: CardRegistry): (from: PlayerId, to: PlayerId) => number {
+  const live: { readonly controller: PlayerId; readonly m: DamageMultiplier }[] = [];
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || state.players[object.controller]?.hasLost !== false) continue;
+    const name = rulesTextName(object);
+    if (!registry.has(name)) continue;
+    for (const m of damageMultipliersOf(registry.get(name))) live.push({ controller: object.controller, m });
+  }
+  if (live.length === 0) return () => 1;
+  return (from, to) => {
+    let times = 1;
+    for (const { controller, m } of live) {
+      if (m.from === "controller" && from !== controller) continue;
+      if (m.to === "controller" && to !== controller) continue;
+      if (m.to === "opponents" && to === controller) continue;
+      times *= m.times;
+    }
+    return times;
+  };
+}
+
 /** The card types a regeneration target word reaches among our own
  * permanents (`guardsAnother`); empty for any permanent. A word for an
  * opponent's permanent isn't here. */
@@ -1392,6 +1476,11 @@ function playerFeaturesUncached(
   let tokenEngines = 0;
   let valueEngines = 0;
   let standingEffects = 0;
+  /** `standingWorth` of our permanents that double everyone's damage alike:
+   * added to `standingEffects` by how far our damage outweighs what comes
+   * at us (below), not in full. */
+  let symmetricWorth = 0;
+  const times = damageTimes(state, registry);
   let trackRecord = 0;
   const opponents = state.turnOrder.filter((p) => p !== player && !state.players[p].hasLost).length;
   let commanderOnBoard = 0;
@@ -1472,7 +1561,11 @@ function playerFeaturesUncached(
       drawEngines += drawRate(def, opponents) * n;
       tokenEngines += tokenRate(registry, def, opponents) * n;
       valueEngines += valueRate(registry, def, opponents) * n;
-      if (!isCreature && !object.isToken) standingEffects += standingWorth(registry, def, opponents) * n;
+      if (!isCreature && !object.isToken) {
+        const worth = standingWorth(registry, def, opponents) * n;
+        if (multipliesEveryonesDamage(def)) symmetricWorth += worth;
+        else standingEffects += worth;
+      }
     }
     trackRecord += trackRecordOf(state, registry, id, opponents);
     if (object.isCommander && object.owner === player) commanderOnBoard += 1;
@@ -1497,6 +1590,15 @@ function playerFeaturesUncached(
   let threat = 0;
   if (isMe) {
     let incoming = 0;
+    /** `incoming` at its printed size, no multiplier counted. */
+    let plainIncoming = 0;
+    /** What each creature costs its controller to attack us, and under one,
+     * the creatures that could, by controller. */
+    const tax = attackTaxAt(state, registry, player);
+    const taxed = new Map<
+      PlayerId,
+      { readonly each: number; readonly over: number; readonly scale: number; readonly count: number }[]
+    >();
     const living = state.turnOrder.filter((q) => !state.players[q].hasLost);
     const attackedBy = p.lastAttackedBy ?? {};
     const lostThisTurn = journalTotal(state, "life-lost", p.id, "amount");
@@ -1521,7 +1623,7 @@ function playerFeaturesUncached(
       // Arena), and Anafenza three short of lethal commander damage
       // outweighs a bigger Craw Wurm.
       const commanderLeft = object.isCommander
-        ? COMMANDER_DAMAGE_LETHAL - (p.commanderDamageTaken[id] ?? 0)
+        ? (COMMANDER_DAMAGE_LETHAL - (p.commanderDamageTaken[id] ?? 0)) / times(object.controller, player)
         : Infinity;
       // What this turn has taken is credited back, as far as the life above
       // `THREAT_LIFE`: at high life the damage a simulated combat deals
@@ -1535,8 +1637,39 @@ function playerFeaturesUncached(
         MAX_THREAT_SCALE,
         THREAT_LIFE / Math.max(1, Math.min(life, commanderLeft)),
       );
-      threat += combatDamageOf(c) * (object.stackCount ?? 1) * share * scale;
-      incoming += combatDamageOf(c) * (object.stackCount ?? 1) * share;
+      // Doubled where a damage multiplier doubles it (`damageTimes`).
+      const each = combatDamageOf(c) * share;
+      const over = times(object.controller, player);
+      const count = object.stackCount ?? 1;
+      if (tax > 0) {
+        taxed.set(object.controller, [...(taxed.get(object.controller) ?? []), { each, over, scale, count }]);
+        continue;
+      }
+      threat += each * count * over * scale;
+      incoming += each * count * over;
+      plainIncoming += each * count;
+    }
+    // Behind an attack tax (Ghostly Prison's {2} a creature) only as many
+    // come as their controller can pay for, the hardest hitters first. Read
+    // without it, the tax changed nothing the evaluation counts, and a seat
+    // facing eight creatures left Ghostly Prison and Windborn Muse in hand
+    // for a creature (a kept live game, 2026-11-22).
+    for (const [controller, creatures] of taxed) {
+      let payable = Math.floor(manaToAttackWith(state, registry, controller) / tax);
+      for (const c of creatures.sort((a, b) => b.each * b.over - a.each * a.over)) {
+        const count = Math.min(c.count, payable);
+        if (count <= 0) break;
+        payable -= count;
+        threat += c.each * count * c.over * c.scale;
+        incoming += c.each * count * c.over;
+        plainIncoming += c.each * count;
+      }
+    }
+    // A permanent that doubles everyone's damage is ours to want only as far
+    // as we are the one dealing it: whole with nothing coming at us, nothing
+    // at an even board or a worse one.
+    if (symmetricWorth > 0 && power + plainIncoming > 0) {
+      standingEffects += symmetricWorth * Math.max(0, (power - plainIncoming) / (power + plainIncoming));
     }
     // A permanent that pays later is worth less to someone about to be hit:
     // the floor is whole while what could come at us is under a third of our
@@ -1659,10 +1792,20 @@ function playerFeaturesUncached(
     // it brings the loss: a commander's first 3 points cost 0.4 rather than
     // 3, its last 3 cost 5.6. Linear, the first hit of a 3-power commander
     // was worth chump-blocking with a token at 35 life.
+    // Under a damage multiplier (`damageTimes`) what is left of the 21 goes
+    // that many times faster: 6 taken with 15 to go is, doubled, 7.5 to go.
+    // Read for our own seat only: the same speed-up of our commander's
+    // clock on an opponent is real, but counted it paid for the doubler by
+    // itself (one hit of Kardur's, doubled, outscored the Slicer that then
+    // killed us), and we are the one seat we can't afford to misjudge.
     commanderDamage: commanderDamageCurve(
       Math.max(
         0,
-        ...Object.values(p.commanderDamageTaken),
+        ...Object.entries(p.commanderDamageTaken).map(([commander, taken]) => {
+          const source = isMe ? state.objects[commander as ObjectId] : undefined;
+          const over = source === undefined ? 1 : times(source.zone === "battlefield" ? source.controller : source.owner, player);
+          return over === 1 ? taken : COMMANDER_DAMAGE_LETHAL - (COMMANDER_DAMAGE_LETHAL - taken) / over;
+        }),
         ((p.counters.poison ?? 0) * COMMANDER_DAMAGE_LETHAL) / POISON_LETHAL,
       ),
     ),

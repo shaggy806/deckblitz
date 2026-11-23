@@ -89,3 +89,27 @@ describe("a creature controlled until end of turn, in the crackback", () => {
     expect(crackback(game.state, game.registry, A, 0.5, undefined, KILL_SHOT).damage).toBe(0);
   });
 });
+
+describe("an attack tax, in the crackback", () => {
+  it("lets through only the attackers their controller can pay for, the biggest first", () => {
+    const { game } = table({ players: 4 });
+    spawn(game, "Ghostly Prison");
+    for (let i = 0; i < 3; i += 1) spawn(game, "Hill Giant", B);
+    spawn(game, "Craw Wurm", B);
+    for (let i = 0; i < 4; i += 1) spawn(game, "Plains", B);
+    // Four lands pay {2} twice: the Wurm and one Giant, 6 + 3.
+    expect(crackback(game.state, game.registry, A, 0.5, undefined, KILL_SHOT).damage).toBe(9);
+    // A second tax (Windborn Muse) makes it {4} a creature: the Wurm alone,
+    // which the Muse, a 2/3, then blocks.
+    spawn(game, "Windborn Muse");
+    expect(crackback(game.state, game.registry, A, 0.5, undefined, KILL_SHOT).damage).toBe(0);
+    expect(crackback(game.state, game.registry, A, 0.5, "all", KILL_SHOT).damage).toBe(6);
+  });
+
+  it("is no tax on anyone else's attackers, or with no mana short", () => {
+    const { game } = table({ players: 4 });
+    spawn(game, "Ghostly Prison", C);
+    for (let i = 0; i < 3; i += 1) spawn(game, "Hill Giant", B);
+    expect(crackback(game.state, game.registry, A, 0.5, undefined, KILL_SHOT).damage).toBe(9);
+  });
+});

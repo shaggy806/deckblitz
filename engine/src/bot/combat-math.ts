@@ -19,10 +19,14 @@
 
 import type { CardType, Keyword } from "../cards/define.js";
 import type { Color } from "../mana.js";
+import { isManaAbility } from "../abilities.js";
 import {
   combatDamageOf,
   computeCharacteristics,
+  countValue,
+  hasLostAbilities,
   lethalDamageOf,
+  staticConditionMet,
   unblockedAssignmentOf,
   withComputedCache,
 } from "../characteristics.js";
@@ -30,7 +34,7 @@ import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy, re
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
-import { POISON_LETHAL } from "../state.js";
+import { POISON_LETHAL, rulesTextName } from "../state.js";
 import { LANDWALK } from "../subtypes.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 
@@ -413,6 +417,70 @@ export function isLethal(
 /** The steps of a turn in which its player's attack is still to be declared. */
 const ATTACK_TO_COME: ReadonlySet<string> = new Set(["untap", "upkeep", "draw", "precombat-main", "begin-combat"]);
 
+/**
+ * The generic mana each creature costs its controller to attack `player`
+ * (rule 508.1h): Ghostly Prison's and Windborn Muse's {2}, Sphere of
+ * Safety's {X}, added up. Only a tax paid in mana alone: one with a life or
+ * Phyrexian part is left out, as is a temporary one (a player effect).
+ */
+export function attackTaxAt(state: GameState, registry: CardRegistry, player: PlayerId): number {
+  let tax = 0;
+  for (const id of state.zones.shared.battlefield) {
+    const source = state.objects[id];
+    if (source === undefined || source.controller !== player) continue;
+    const name = rulesTextName(source);
+    if (!registry.has(name)) continue;
+    const statics = registry.get(name).static;
+    if (!statics.some((s) => s.attackTax !== undefined)) continue;
+    if (hasLostAbilities(state, registry, source)) continue;
+    for (const s of statics) {
+      const t = s.attackTax;
+      if (t === undefined || t.life !== undefined || t.phyrexian !== undefined || t.covers === "planeswalkers") continue;
+      if (s.condition !== undefined && !staticConditionMet(state, registry, source, s.condition)) continue;
+      const generic = t.generic ?? 0;
+      tax += typeof generic === "number" ? generic : countValue(generic, state, registry, player, id);
+    }
+  }
+  return tax;
+}
+
+/** The mana `controller` could pay an attack tax with on its next turn: one
+ * for each land and each other permanent with a mana ability, tapped or not. */
+export function manaToAttackWith(state: GameState, registry: CardRegistry, controller: PlayerId): number {
+  let mana = 0;
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || object.controller !== controller) continue;
+    const name = rulesTextName(object);
+    const makes =
+      computeCharacteristics(state, registry, id).types.includes("land") ||
+      (registry.has(name) && registry.get(name).activated.some(isManaAbility));
+    if (makes) mana += object.stackCount ?? 1;
+  }
+  return mana;
+}
+
+/**
+ * How many of `attackers` their controller can pay `tax` for, the hardest
+ * hitters kept: a mana for each land and each other permanent with a mana
+ * ability it controls, tapped or not (its next turn untaps them), and all of
+ * it spent on the attack. The generous reading, so a board is called safe
+ * behind a tax only when it is.
+ */
+export function payableAttackers(
+  state: GameState,
+  registry: CardRegistry,
+  attackers: readonly CombatCreature[],
+  controller: PlayerId,
+  tax: number,
+): CombatCreature[] {
+  if (tax <= 0 || attackers.length === 0) return [...attackers];
+  const most = Math.floor(manaToAttackWith(state, registry, controller) / tax);
+  if (most >= attackers.length) return [...attackers];
+  const worth = (c: CombatCreature): number => c.damage * (c.keywords.has("double-strike") ? 2 : 1);
+  return [...attackers].sort((a, b) => worth(b) - worth(a)).slice(0, most);
+}
+
 /** Per registry, whether a card hands itself to the player whose upkeep
  * begins ({@link handedRound}). */
 const handedRoundByName = new WeakMap<CardRegistry, Map<string, boolean>>();
@@ -497,11 +565,23 @@ function swingBack(
     lost === "all"
       ? []
       : combatCreatures(state, registry, me, true).filter((c) => !leaving.has(c.id) && (lost === undefined || !lost.has(c.id)));
-  const attackersOf = (opponent: PlayerId): CombatCreature[] => [
-    ...combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack && !leaving.has(c.id)),
-    ...roaming,
-    ...(returning.get(opponent) ?? []),
-  ];
+  // Behind an attack tax (Ghostly Prison), only as many as the opponent can
+  // pay for come: a seat with Prison, Windborn Muse and seven mana read the
+  // same eight creatures as before and cast neither (a kept live game,
+  // 2026-11-22: it died with both in hand).
+  const tax = attackTaxAt(state, registry, me);
+  const attackersOf = (opponent: PlayerId): CombatCreature[] =>
+    payableAttackers(
+      state,
+      registry,
+      [
+        ...combatCreatures(state, registry, opponent, false).filter((c) => c.canAttack && !leaving.has(c.id)),
+        ...roaming,
+        ...(returning.get(opponent) ?? []),
+      ],
+      opponent,
+      tax,
+    );
   return { blockers, attackersOf };
 }
 

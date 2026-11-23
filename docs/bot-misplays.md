@@ -65,9 +65,25 @@ re-run; positions are rebuilt by replaying the game to the turn):
   extra attackers piled onto a kill under Smoke (D75RS-3 t21), and the four by life.
 - **Dictate of the Twin Gods cast by the seat it then kills** — RCSBH-3 t17, RCSBH-2 t26 (at 6
   Slicer damage; 12 doubled, then first strike), YA57F-2 t35 (15 became 30 at 30 life).
+  **Fixed 2026-11-22** (`features.ts`'s `damageTimes`; three scenarios, "holds Dictate of the Twin
+  Gods at 6 commander damage from a double striker", "… with the weakest board at the table",
+  "casts … with the only creatures at the table"). A noncreature permanent that keeps working was
+  worth a creature of its cost whoever it worked for, and damage was read at its printed size: on
+  RCSBH-3 t17 Dictate scored 20 against 5 for passing. Now the damage that could come at us
+  (`threat`) and what is left of a commander's 21 on us are read through the multipliers on the
+  battlefield, and one that doubles everyone's damage is worth its cost only as far as our power
+  outweighs what comes at us. All three live boards now leave it in hand (2.8 against 5 on
+  RCSBH-3 t17). The commander clock is read for our own seat alone: counted for the opponents
+  too, one doubled hit of Kardur's paid for the Dictate by itself.
 - **Pillow fort held to the grave** — YA57F-1 t27-t32: Inniaz's bot died tapped out with Ghostly
   Prison, Windborn Muse and Aetherize in hand, 7 mana for the first two, after the same board had
-  hit it for 25.
+  hit it for 25. **Fixed 2026-11-22** (`combat-math.ts`'s `attackTaxAt`; scenario "casts Ghostly
+  Prison, not one more blocker, in front of a board it can't block"): `threat` and the crackback
+  counted every creature that could attack, tax or no tax, and a standing permanent's worth goes
+  to nothing in front of a lethal board, so the Prison scored 1.4 over passing. Both now count
+  only the attackers their controller can pay for, the hardest hitters first. On the live board
+  (t30) it casts Windborn Muse and Ghostly Prison. Aetherize held with attackers declared is
+  still open.
 - **Removal held or aimed elsewhere** — D75RS-7 Zurgo t23 (Stroke of Midnight held while Alexios
   could only attack it), D75RS-9 Domri t15 (Clan Defiance at a commander, not the Slicer about to
   deal its last 3), FU89K-1 Muldrotha t29 (tapped out with Counterspell and Army of the Damned's

@@ -3165,6 +3165,79 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   asked({
+    name: "casts Ghostly Prison, not one more blocker, in front of a board it can't block",
+    rule: "An attack tax keeps home every creature its controller can't pay for: against a wide board that is worth more than a body.",
+    position(registry) {
+      // From a kept live game (2026-11-22, YA57F-1 turns 27-32): Inniaz's
+      // bot, on 17 after one swing of 25, faced eight creatures with Ghostly
+      // Prison and Windborn Muse in hand and seven mana for both. It cast a
+      // creature and died tapped out with both. The evaluation's `threat`
+      // counted every creature that could attack, tax or no tax, and a
+      // standing permanent's worth goes to nothing in front of a lethal
+      // board, so the Prison scored a point over passing. Fixed: `threat`
+      // and the crackback count the attackers their controller can pay for
+      // (`combat-math.ts`'s `attackTaxAt`).
+      const game = table(registry, [A, B], A);
+      lands(game, "Plains", A, 3);
+      lands(game, "Forest", B, 4);
+      for (let i = 0; i < 8; i += 1) onBoard(game, "Hill Giant", B, true);
+      game.state.players[A].life = 17;
+      const prison = game.debugSpawn("Ghostly Prison", A, "hand");
+      game.debugSpawn("Benalish Marshal", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === prison,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  ...(
+    [
+      // name, the opposing commander's damage on us, opposing creatures, cast it
+      ["holds Dictate of the Twin Gods at 6 commander damage from a double striker", 6, 0, false],
+      ["holds Dictate of the Twin Gods with the weakest board at the table", 0, 3, false],
+      ["casts Dictate of the Twin Gods with the only creatures at the table", 0, 0, true],
+    ] as const
+  ).map(([name, taken, theirs, casts]) =>
+    asked({
+      name,
+      rule: "A permanent that doubles everyone's damage is worth having only as far as we are the one dealing it.",
+      position(registry) {
+        // From three kept live games (2026-11-22: RCSBH-3 turn 17, RCSBH-2
+        // turn 26, YA57F-2 turn 35): Kardur's bot cast Dictate of the Twin
+        // Gods ("if a source would deal damage, it deals double that damage
+        // instead") at 6 commander damage from Slicer, which then hit for 12
+        // and for 6, and with the weakest board of four, where a swing of 15
+        // became its 30 life. A noncreature permanent that keeps working was
+        // worth a creature of its cost (`standingWorth`) whoever it worked
+        // for, and damage was read at its printed size. Fixed:
+        // `features.ts`'s `damageTimes`.
+        const game = table(registry, [A, B, C, D], A);
+        lands(game, "Mountain", A, 5);
+        for (const player of [A, B, C, D]) game.state.players[player].life = 30;
+        for (let i = 0; i < 2; i += 1) onBoard(game, "Hill Giant", A);
+        if (taken > 0) {
+          const slicer = onBoard(game, "Slicer, Hired Muscle", B);
+          game.state.objects[slicer].isCommander = true;
+          game.state.players[A].commanderDamageTaken = { [slicer]: taken };
+        }
+        for (const player of [B, C, D]) for (let i = 0; i < theirs; i += 1) onBoard(game, "Craw Wurm", player);
+        const dictate = game.debugSpawn("Dictate of the Twin Gods", A, "hand");
+        return {
+          game,
+          player: A,
+          judge: (action) => {
+            const cast = action.type === "cast-spell" && action.card === dictate;
+            return { passed: cast === casts, detail: `chose ${describeAction(action)}` };
+          },
+        };
+      },
+    }),
+  ),
+  asked({
     name: "casts Colfenor's Urn before the Citywide Bust that fills it",
     rule: "A dies payoff goes down before the wipe that kills what it pays off: the Urn exiles the Walls the Bust destroys, and brings them back.",
     position(registry) {
