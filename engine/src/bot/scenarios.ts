@@ -6034,6 +6034,39 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "makes no Fountainport Fish in its own upkeep over another player's trigger",
+    rule: "Mana spent in our own upkeep is gone for the main phase, whoever's untargeted trigger is on the stack.",
+    position(registry) {
+      // A live game (2026-11-23, room HVXBA): carol's Rite of the Raging
+      // Storm triggered in each of alice's upkeeps, and with an opponent's
+      // ability on the stack `holdsManaForMain` let go, so alice paid {3} of
+      // her turn's mana for a 1/1 Fish nearly every turn.
+      const game = Game.create({ seed: 3, registry, decks: [A, B, C, D].map(forestDeck) });
+      onBoard(game, "Rite of the Raging Storm", C);
+      game.advanceUntil(
+        (s) =>
+          s.turn.number > 4 &&
+          s.turnOrder[s.turn.activePlayerIndex] === A &&
+          s.turn.step === "upkeep" &&
+          s.priority.holder === A &&
+          s.zones.shared.stack.length > 0,
+      );
+      if (game.state.turn.step !== "upkeep") return { passed: false, detail: "never reached alice's upkeep" };
+      game.state.zones.perPlayer[A].hand = [];
+      for (const land of ["Plains", "Plains", "Plains"]) onBoard(game, land, A);
+      const fountainport = onBoard(game, "Fountainport", A);
+      game.debugSpawn("Hero of Bladehold", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "activate-ability" && action.source === fountainport && action.abilityIndex > 0),
+          detail: `in its upkeep chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "blocks with every lifelink Soldier when the life they gain is what keeps it alive",
     rule: "A lifelink blocker gains life as it blocks: against an attack too wide to stop, the blocks that gain the most are the ones that survive it.",
     position(registry) {

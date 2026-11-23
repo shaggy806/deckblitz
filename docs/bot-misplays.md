@@ -4,6 +4,42 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-23 — A friend's Breena deck: Tainted Pact decks itself, Fountainport Fish in the upkeep, Sunforger unused
+
+Status: the first two fixed 2026-11-23 (a test and a gate scenario); Sunforger open (BACKLOG
+"Bots").
+
+Reported by a player watching four bots play their Brash Taunter / Breena deck (room HVXBA game 1,
+2026-11-23, all four seats bots on copies of the same list, 65 turns; the same list was in C2483-1,
+C2483-2 and YGDD4-1). Replayed exactly with `game:replay`.
+
+**1. Tainted Pact exiled the whole library (turn 63).** Player 1's bot cast it on Alesha's turn
+with 26 cards in its library and declined every one; the deck is singleton, so nothing stopped the
+process, and it lost to a draw the next turn. **Why:** v1 answers the "you may put that card into your hand" (`via: v1's
+answer` in the record), and `effectWorth` had no case for `move-exiled-this-way`: worth 0, so
+declined. **Fixed:** a card exiled this way put into our hand is worth a card. Test:
+`bot-optional-choices.test.ts`, "takes the card Tainted Pact offers".
+
+**2. Fountainport Fish made in the bot's own upkeep, turn after turn.** 27 Fountainport
+activations in the game, nearly all `{3}, {T}, Pay 1 life` for a 1/1 Fish, most in the activating
+bot's own upkeep or draw step, with that turn's mana. **Why:** `holdsManaForMain` keeps upkeep mana
+for the main phase only while the stack is empty or holds only the bot's own abilities, and carol's
+Rite of the Raging Storm triggered in every opponent's upkeep. On the replayed turn 40 today's bot
+still made the Fish there. **Fixed:** another player's triggered ability with no targets counts as
+ours for that rule (in the main phase too: held in the upkeep, it then made the Fish over bob's
+Spectrum Sentinel trigger from its land drop). Turn 40 now makes the Fish in the main phase beside
+Boros Signet and an equip. Scenario: "makes no Fountainport Fish in its own upkeep over another
+player's trigger". Making it at an opponent's end step instead isn't planned: the search passes at
+those windows.
+
+**3. Sunforger equipped often, its ability used once, for nothing.** Three bots found it and
+equipped it six times; one unattached it once (Edgar Markov, turn 64), in response to bob's Wing
+Shards aimed at Player 1, fetching Comeuppance, which prevents damage and so did nothing there (a
+searched choice, not a fallback). **Why, so far:** the +4/+0 is priced on the board; the free
+instant it fetches is worth something only in a rollout that reaches the right window (Boros Charm
+at an opponent's end step, Deflecting Palm or Angel's Grace as an answer), and nothing tells the
+search to look there. Open.
+
 ## 2026-11-22 — The kept games read for what lost them: a winning wipe held, the kill on the wrong player, stored mana never spent
 
 Status: the three below fixed 2026-11-22, four scenarios gate; the rest of the read is open (the

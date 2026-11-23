@@ -75,6 +75,22 @@ describe("a v1 bot's \"you may\"", () => {
     expect(game.state.zones.perPlayer[A].hand.length).toBe(hand);
   });
 
+  it("takes the card Tainted Pact offers rather than exiling its library", () => {
+    // It declined every card, all 26 of a live game's library, and lost at
+    // its next draw (2026-11-23).
+    const game = newGame();
+    lands(game, A, "Swamp", 2);
+    const bears = game.debugSpawn("Grizzly Bears", A, "library");
+    const pact = game.debugSpawn("Tainted Pact", A, "hand");
+    const hand = game.state.zones.perPlayer[A].hand.length;
+    const library = game.state.zones.perPlayer[A].library.length;
+    game.dispatch({ type: "cast-spell", player: A, card: pact, targets: [] });
+    game.advanceUntil(quiet);
+    expect(game.state.zones.perPlayer[A].hand).toContain(bears);
+    expect(game.state.zones.perPlayer[A].hand.length).toBe(hand);
+    expect(game.state.zones.perPlayer[A].library.length).toBe(library - 1);
+  });
+
   it("declines Angler Drake's bounce when the only target was its own creature", () => {
     const game = newGame();
     lands(game, A, "Island", 6);

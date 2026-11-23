@@ -3922,13 +3922,25 @@ export class HeuristicBotController extends AutomaticController {
     if (activePlayerOf(state) !== this.playerId) return false;
     const stack = state.zones.shared.stack;
     const beginning = state.turn.step === "upkeep" || state.turn.step === "draw";
+    // Another player's triggered ability with no targets counts as ours: it
+    // asks for no answer that spending this turn's mana would give. Carol's
+    // Rite of the Raging Storm, triggering in each upkeep of alice's, let her
+    // make a Fountainport Fish with {3} of her own turn's mana nearly every
+    // turn (a live game, 2026-11-23); held there, she made it in her main
+    // phase over bob's Spectrum Sentinel trigger from her land drop.
+    const untargetedTrigger = (object: GameObject): boolean =>
+      object.abilityKind === "triggered" && (object.targets ?? []).every((t) => t === undefined);
     const window =
       stack.length === 0
         ? beginning
         : (beginning || state.turn.step === "precombat-main" || state.turn.step === "postcombat-main") &&
           stack.every((id) => {
             const object = state.objects[id];
-            return object !== undefined && object.kind === "ability" && object.controller === this.playerId;
+            return (
+              object !== undefined &&
+              object.kind === "ability" &&
+              (object.controller === this.playerId || untargetedTrigger(object))
+            );
           });
     if (!window) return false;
     // Cycling costs mana too (the Mardu autopsy: a land cycled in its own

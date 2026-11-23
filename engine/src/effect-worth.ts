@@ -606,6 +606,13 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return onPlayers(you, effect.destination === "graveyard" ? 0.5 : CARD, ctx);
     case "look-and-choose":
       return onPlayers(you, effect.destination === "library-top" ? 0.5 : 1.5, ctx);
+    // A card exiled this resolution put into our hand: a card, like a draw
+    // but with no library to run out of. It read 0 and a bot declined every
+    // card Tainted Pact offered, exiling its whole library and losing at its
+    // next draw (a live game, 2026-11-23). This module can't see how many
+    // were exiled, so it's a card; to a library's bottom, nothing.
+    case "move-exiled-this-way":
+      return effect.to === "hand" ? onPlayers(you, CARD, ctx) : 0;
     // Cards exiled with leave to play them: most of a card each, less if it's
     // only for this turn, when it may be too expensive to use.
     case "impulse-exile":
