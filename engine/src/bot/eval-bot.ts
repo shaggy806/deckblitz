@@ -3027,8 +3027,11 @@ export class EvalBotController extends HeuristicBotController {
       return through.damage - (through.gained ?? 0);
     };
     const heldSwings = new Map<PlayerId, number>();
+    // Only where they have someone else to send it at: in a duel the whole
+    // swing comes, and holding back buys nothing.
     const racesForNothing = (after: GameState): boolean =>
       killers.length > 0 &&
+      others.length > 1 &&
       !others.some((p) => after.players[p]?.hasLost === true) &&
       killers.some((killer) => {
         let before = heldSwings.get(killer);
