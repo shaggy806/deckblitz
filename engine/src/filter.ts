@@ -41,7 +41,7 @@ import type { Color, ManaCost, ManaOrigin, ManaSpentQuery, ManaType } from "./ma
 import { COLORS, colorSymbols, manaValue, parseManaCost, spentManaCount } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName, seatingOf } from "./state.js";
-import type { AttachmentRecord, CastSpellRecord, GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
+import type { AttachmentRecord, CastSpellRecord, GameObject, GameState, LastKnownInfo, Sector, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
@@ -536,6 +536,11 @@ export interface CardFilter {
    * Nelly Borca's "goad all suspected creatures". One that has left the
    * battlefield is asked as it last was. */
   readonly suspected?: boolean;
+  /** Has this **sector designation** (rule 702.158b — space sculptor), or
+   * `"any"` of them: Space Beleren's "each creature in the sector of your
+   * choice" (702.158d), "creatures in each sector". One that has left the
+   * battlefield is asked as it last was. */
+  readonly sector?: Sector | "any";
   /** Is (or isn't) **saddled** (rule 702.171b — `GameObject.saddled`):
    * "whenever this creature attacks while saddled" (a `whileCondition` on
    * the source), "if this creature is saddled". One that has left the
@@ -3034,6 +3039,10 @@ export function matchesFilter(
     const suspected =
       live !== undefined ? live.zone === "battlefield" && live.suspectedAt !== undefined : lki!.suspected === true;
     if (suspected !== filter.suspected) return false;
+  }
+  if (filter.sector !== undefined) {
+    const sector = live !== undefined ? (live.zone === "battlefield" ? live.sector : undefined) : lki!.sector;
+    if (sector === undefined || (filter.sector !== "any" && sector !== filter.sector)) return false;
   }
   if (filter.saddled !== undefined) {
     const saddled = live !== undefined ? live.zone === "battlefield" && live.saddled === true : lki!.saddled === true;

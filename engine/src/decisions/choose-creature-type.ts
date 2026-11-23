@@ -138,6 +138,7 @@ function isEnterWordMenu(awaiting: Extract<AwaitingDecision, { kind: "choose-cre
     awaiting.enterTapped !== true &&
     awaiting.asEntersCounter !== true &&
     awaiting.protector !== true &&
+    awaiting.sector !== true &&
     awaiting.tribute === undefined &&
     awaiting.lookAt !== true &&
     awaiting.enterChooser !== true &&

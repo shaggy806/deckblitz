@@ -26222,6 +26222,7 @@ import _poolSowingMycospawn from "./pool/sowing-mycospawn.js";
 import _poolSowingSalt from "./pool/sowing-salt.js";
 import _poolSozinsComet from "./pool/sozins-comet.js";
 import _poolSpDrPilotedByPeni from "./pool/sp-dr-piloted-by-peni.js";
+import _poolSpaceBeleren from "./pool/space-beleren.js";
 import _poolSpaceMarineDevastator from "./pool/space-marine-devastator.js";
 import _poolSpaceMarineScout from "./pool/space-marine-scout.js";
 import _poolSpaceTimeAnomaly from "./pool/space-time-anomaly.js";
@@ -60089,6 +60090,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSowingSalt,
   _poolSozinsComet,
   _poolSpDrPilotedByPeni,
+  _poolSpaceBeleren,
   _poolSpaceMarineDevastator,
   _poolSpaceMarineScout,
   _poolSpaceTimeAnomaly,
@@ -93969,6 +93971,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sowing-salt": _poolSowingSalt,
   "pool/sozins-comet": _poolSozinsComet,
   "pool/sp-dr-piloted-by-peni": _poolSpDrPilotedByPeni,
+  "pool/space-beleren": _poolSpaceBeleren,
   "pool/space-marine-devastator": _poolSpaceMarineDevastator,
   "pool/space-marine-scout": _poolSpaceMarineScout,
   "pool/space-time-anomaly": _poolSpaceTimeAnomaly,

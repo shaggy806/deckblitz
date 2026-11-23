@@ -190,6 +190,10 @@ export interface RegenerationRider {
   readonly effect: EffectSpec;
 }
 
+/** The three sector designations (rule 702.158b — space sculptor). */
+export const SECTORS = ["alpha", "beta", "gamma"] as const;
+export type Sector = (typeof SECTORS)[number];
+
 export interface GameObject {
   readonly id: ObjectId;
   /** Key into the {@link CardRegistry} for printed characteristics. */
@@ -615,6 +619,14 @@ export interface GameObject {
    * ability nor a copiable value (701.60b); a zone change ends it (701.60a).
    */
   suspectedAt?: number;
+  /**
+   * The permanent's **sector designation** (rule 702.158b — space sculptor,
+   * Space Beleren): alpha, beta or gamma. Chosen by its controller as a
+   * state-based action while a permanent with space sculptor is on the
+   * battlefield (704.5u, `Game.assignSectors`), kept until no player controls
+   * one, then cleared. Not a copiable value; a zone change ends it (400.7).
+   */
+  sector?: Sector;
   /**
    * The permanent is **monstrous** (rule 701.37b): a designation the
    * `monstrosity` effect gives it, which the monstrosity action reads ("if
@@ -2543,6 +2555,8 @@ export interface LastKnownInfo {
   readonly goaders?: readonly PlayerId[];
   /** It was suspected (rule 701.60). */
   readonly suspected?: boolean;
+  /** Its sector designation (rule 702.158b), as it last existed. */
+  readonly sector?: Sector;
   /** It was saddled (rule 702.171b) — Caustic Bronco's "if this creature
    * isn't saddled", read as it last existed once it has left (its ruling). */
   readonly saddled?: boolean;
@@ -4710,6 +4724,11 @@ export type AwaitingDecision =
        * already on the battlefield gets a new one — 310.11). */
       readonly protector?: true;
       readonly protectorFor?: ObjectId;
+      /** A sector designation for `source`, a creature on the battlefield
+       * (rule 704.5u — space sculptor): `options` are `SECTOR_OPTIONS`'
+       * words, the "all" ones offered only for a token stack, which give
+       * every token in it that sector (the others split one token off). */
+      readonly sector?: true;
       /** Tribute as `source` is about to enter (rule 702.104a): `"opponent"`
        * — its controller chooses the opponent among `options`; `"pay"` —
        * that opponent answers whether to put the counters on it (the first
@@ -8405,6 +8424,7 @@ export function tokenFoldKey(o: GameObject): string {
     o.goadedBy ?? [],
     o.goadedForGameBy ?? [],
     o.suspectedAt ?? null,
+    o.sector ?? null,
     o.monstrous ?? false,
     o.harnessed ?? false,
     o.renowned ?? false,

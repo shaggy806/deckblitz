@@ -3232,7 +3232,8 @@
   "decision:may-in-prevention-followup",
   "effect:each-player-chooses-permanents-rest-phase-out",
   "effect:repeat-choice-excluding-earlier-passes",
-  "mechanic:secret-choice"
+  "mechanic:secret-choice",
+  "mechanic:sectors"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -519,6 +519,10 @@ function whyThisCannotBlock(
       const attackerDef = registry.get(printedCardName(attacker));
       return `${blockerDef.name} can't block ${attackerDef.name} (can't be blocked unless attacking what it names)`;
     }
+    if (rule.outsideSector === true && attacker.sector !== undefined && blocker.sector !== attacker.sector) {
+      const attackerDef = registry.get(printedCardName(attacker));
+      return `${blockerDef.name} can't block ${attackerDef.name} — they aren't in the same sector`;
+    }
     if (rule.by === undefined) continue;
     if (matchesFilter(state, registry, blockerId, rule.by, { you, amount: sourceAmount(state, registry, source) })) {
       const attackerDef = registry.get(printedCardName(attacker));

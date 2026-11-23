@@ -591,6 +591,7 @@ import {
   speedOf,
   playerCountersHeld,
   seatingOf,
+  SECTORS,
 } from "./state.js";
 import type {
   AssistAsk,
@@ -663,6 +664,7 @@ import type {
   OtherChoiceAsk,
   MeldedInfo,
   PregameOptions,
+  Sector,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType, isPlaneswalkerType } from "./subtypes.js";
 import {
@@ -9290,6 +9292,85 @@ export class Game {
     this.prepareForPriority(this.activePlayer);
   }
 
+  /**
+   * Space sculptor's sectors (rules 702.158b-c, 704.5u). While a permanent
+   * with space sculptor is on the battlefield, each creature without a sector
+   * designation gets one, chosen by its controller: first the players who
+   * control no permanent with space sculptor, then the others, each group in
+   * APNAP order — one creature (or one token of a stack, or the whole stack)
+   * a question, the check resuming with each answer. Once no player controls
+   * such a permanent, and no ability whose source has space sculptor waits on
+   * the stack (Space Beleren's −5 as it dies to its own cost), every
+   * designation ends. Returns whether it asked.
+   */
+  private checkSectors(): boolean {
+    const battlefield = this.state.zones.shared.battlefield;
+    const sculptors = new Set<PlayerId>();
+    let anySector = false;
+    for (const id of battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined) continue;
+      if (object.sector !== undefined) anySector = true;
+      // Only one card prints it, and nothing grants it: its text is read
+      // first, so a check with none on the board costs a lookup a permanent.
+      if (!(this.registry.get(rulesTextName(object)).keywords ?? []).includes("space-sculptor")) continue;
+      if (!this.inGame(object)) continue;
+      if (computeCharacteristics(this.state, this.registry, id).keywords.has("space-sculptor")) {
+        sculptors.add(object.controller);
+      }
+    }
+    if (sculptors.size === 0 && !anySector) return false;
+    if (sculptors.size === 0) {
+      const abilityKeeps = this.state.zones.shared.stack.some((id) => {
+        const ability = this.state.objects[id];
+        if (ability?.kind !== "ability" || ability.sourceObjectId === null) return false;
+        const source = this.state.objects[ability.sourceObjectId];
+        return source !== undefined && (this.registry.get(rulesTextName(source)).keywords ?? []).includes("space-sculptor");
+      });
+      if (abilityKeeps) return false;
+      let cleared = false;
+      for (const id of battlefield) {
+        const object = this.state.objects[id];
+        if (object?.sector === undefined) continue;
+        delete object.sector;
+        cleared = true;
+      }
+      if (cleared) invalidateComputedCache();
+      return false;
+    }
+    const unassigned = battlefield.filter((id) => {
+      const object = this.state.objects[id];
+      return (
+        object !== undefined &&
+        object.sector === undefined &&
+        this.inGame(object) &&
+        this.state.players[object.controller]?.hasLost !== true &&
+        computeCharacteristics(this.state, this.registry, id).types.includes("creature")
+      );
+    });
+    if (unassigned.length === 0) return false;
+    const order = this.apnapOrder();
+    for (const sculptorsTurn of [false, true]) {
+      for (const player of order) {
+        if (sculptors.has(player) !== sculptorsTurn) continue;
+        const id = unassigned.find((one) => this.state.objects[one].controller === player);
+        if (id === undefined) continue;
+        const stacked = (this.state.objects[id].stackCount ?? 1) > 1;
+        this.state.awaiting = {
+          kind: "choose-creature-type",
+          player,
+          source: id,
+          options: [...SECTORS, ...(stacked ? SECTORS.map((s) => `all ${s}`) : [])],
+          catalog: false,
+          sector: true,
+          prompt: stacked ? "choose a sector for one of these tokens, or all of them" : "choose its sector",
+        };
+        return true;
+      }
+    }
+    return false;
+  }
+
   /** Kept because `applyCopyChoice` validates before applying and throws;
    * the rule itself lives in `decisions/choose-copy.ts`. */
   private whyCannotCopyChoice(player: PlayerId, copy: ObjectId | null): string | null {
@@ -9370,6 +9451,21 @@ export class Game {
         if (awaiting.secret === true) keptOn.secretChoice = { by: player };
         invalidateComputedCache();
       }
+    }
+    if (awaiting.sector === true) {
+      // A sector for a creature (rule 704.5u): "all …" gives a whole token
+      // stack that sector; otherwise one token is split off for it, and the
+      // state-based check, resumed, asks about the rest.
+      const all = creatureType.startsWith("all ");
+      const sector = (all ? creatureType.slice(4) : creatureType) as Sector;
+      const creature = this.state.objects[awaiting.source];
+      if (creature?.zone === "battlefield") {
+        const id = all ? creature.id : this.splitOneFromStack(creature.id);
+        this.state.objects[id].sector = sector;
+        invalidateComputedCache();
+      }
+      this.prepareForPriority(this.activePlayer);
+      return;
     }
     if (awaiting.targetChooserFor === true) {
       // The opponent who chooses a parked trigger's targets: place it again.
@@ -46856,7 +46952,15 @@ controlledBy,
           (this.state.playerEffects ??= []).push(made);
           invalidateComputedCache();
         }
-        this.emit({ type: "restrictions-imposed", player: controller, restrictions: combat.rules.map(combatRuleWord), ...(expires === "end-of-turn" && during === undefined ? {} : { duration: expires }) });
+        this.emit({
+          type: "restrictions-imposed",
+          player: controller,
+          restrictions: combat.rules.map(combatRuleWord),
+          ...(expires === "end-of-turn" && during === undefined ? {} : { duration: expires }),
+          ...(combat.rules.some((r) => typeof r !== "string" && r.kind === "cant-be-blocked" && r.outsideSector === true)
+            ? { sameSector: true as const }
+            : {}),
+        });
       },
       grantStatic: (target, filter, ability, duration) => {
         const kept = lastingHere(duration);
@@ -70954,6 +71058,9 @@ controlledBy,
         if (this.state.awaiting !== null) return;
       }
       delete this.state.legendRuleKeeps;
+      // Space sculptor's sectors (704.5u), asked of what stays: a creature
+      // dying in this check needs none.
+      if (this.checkSectors()) return;
 
       // Not a rule — the other half of token stacking's safety contract: a
       // stack stands in for tokens only while none of them can be activated,
@@ -75175,6 +75282,7 @@ controlledBy,
       ...(object.attachedToPlayer !== undefined ? { attachedToPlayer: object.attachedToPlayer } : {}),
       ...(goaders.length > 0 ? { goaders: [...goaders] } : {}),
       ...(object.suspectedAt !== undefined ? { suspected: true } : {}),
+      ...(object.sector !== undefined ? { sector: object.sector } : {}),
       ...(object.saddled === true ? { saddled: true } : {}),
       ...(object.enlistedIn !== undefined ? { enlistedIn: object.enlistedIn } : {}),
       ...(object.monstrous === true ? { monstrous: true } : {}),
@@ -76169,6 +76277,8 @@ controlledBy,
     delete object.goadedBy;
     delete object.goadedForGameBy;
     delete object.suspectedAt;
+    // So is a sector (702.158b).
+    delete object.sector;
     delete object.ringBearer;
     // Monstrous lasts until the permanent leaves the battlefield (701.37b);
     // being exerted, until it's a new object.

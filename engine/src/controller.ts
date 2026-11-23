@@ -882,11 +882,24 @@ export class AutomaticController implements PlayerController {
   }
 
   chooseCreatureType(
-    _view: ControllerView,
+    view: ControllerView,
     _source: ObjectId,
     options: readonly string[],
     suggested: readonly string[],
   ): string {
+    // A sector (rule 704.5u): spread out, so one "destroy all creatures in
+    // the sector of your choice" takes as little as it can — the sector
+    // holding the fewest of our own creatures, a token stack's tokens one at
+    // a time.
+    if (options[0] === "alpha" && options[1] === "beta" && options[2] === "gamma") {
+      const held = { alpha: 0, beta: 0, gamma: 0 } as Record<string, number>;
+      for (const id of view.state.zones.shared.battlefield) {
+        const object = view.state.objects[id];
+        if (object?.controller !== view.player || object.sector === undefined) continue;
+        held[object.sector] += object.stackCount ?? 1;
+      }
+      return ["alpha", "beta", "gamma"].reduce((best, s) => (held[s] < held[best] ? s : best));
+    }
     // The most common type among your own cards and the board. `options[0]`
     // alone would be "Advisor" out of the alphabetical catalog — which for
     // Crippling Fear means shrinking every one of your own creatures.

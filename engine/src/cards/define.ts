@@ -525,6 +525,11 @@ export type Keyword =
    * permanent's current keywords, so one that lost its abilities grants
    * nothing. */
   | "storied"
+  /** Space sculptor (rule 702.158 — Space Beleren): while a permanent with
+   * it is on the battlefield, each creature gets a sector designation
+   * (`GameObject.sector`) its controller chooses, opponents first, as a
+   * state-based action (704.5u, `Game.checkSectors`). */
+  | "space-sculptor"
   /** Ascend (rule 702.131): on a permanent a static ability — any time its
    * controller controls ten or more permanents, they get the city's blessing
    * for the rest of the game (`PlayerState.citysBlessing`,

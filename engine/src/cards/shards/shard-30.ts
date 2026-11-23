@@ -843,6 +843,7 @@ import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSoundwaveSuperiorCaptain from "../pool/soundwave-superior-captain.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
+import _poolSpaceBeleren from "../pool/space-beleren.js";
 import _poolSpatialAnomaly from "../pool/spatial-anomaly.js";
 import _poolSpawnOfMayhem from "../pool/spawn-of-mayhem.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
@@ -1923,6 +1924,7 @@ const shard: CardShard = {
     _poolSoulcatchersAerie,
     _poolSoundwaveSuperiorCaptain,
     _poolSouthernAirTemple,
+    _poolSpaceBeleren,
     _poolSpatialAnomaly,
     _poolSpawnOfMayhem,
     _poolSpawningKraken,

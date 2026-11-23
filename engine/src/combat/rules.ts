@@ -216,6 +216,11 @@ export interface CantBeBlocked {
    * on every block of it while what it's attacking isn't named (rule
    * 509.1b), read about the attacker as blocks are declared. */
   readonly unlessAttacking?: AttackAim;
+  /** "Can be blocked only by creatures **in the same sector**" (Space
+   * Beleren's +1, rules 702.158b and e): a blocker whose sector designation
+   * isn't this attacker's, or that has none, can't block it — read as blocks
+   * are declared. */
+  readonly outsideSector?: true;
   readonly you?: PlayerId;
 }
 

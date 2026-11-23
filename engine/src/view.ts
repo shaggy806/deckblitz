@@ -43,6 +43,7 @@ import type {
   PlayerCounterKind,
   PriorityState,
   PublicStint,
+  Sector,
   TurnState,
   ZoneType,
 } from "./state.js";
@@ -358,6 +359,8 @@ export interface VisibleObject {
   /** Suspected (rule 701.60). Its menace and can't-block already show among
    * `keywords` and `restrictions`; this is the designation itself. */
   readonly suspected: boolean;
+  /** Its sector designation (rule 702.158b — space sculptor), if it has one. */
+  readonly sector?: Sector;
   /** Saddled until end of turn (rule 702.171b) — a designation, which
    * "attacks while saddled" abilities read. */
   readonly saddled: boolean;
@@ -896,6 +899,7 @@ function visible(
     isCommander: object.isCommander && (faceDown === undefined || viewer === object.controller),
     goadedBy: [...goadersOf(state, registry, id)],
     suspected: zone === "battlefield" && object.suspectedAt !== undefined,
+    ...(zone === "battlefield" && object.sector !== undefined ? { sector: object.sector } : {}),
     saddled: zone === "battlefield" && object.saddled === true,
     ...(zone === "battlefield" && object.solved === true ? { solved: true as const } : {}),
     ...(zone === "battlefield" && object.harnessed === true ? { harnessed: true as const } : {}),

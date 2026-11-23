@@ -371,7 +371,7 @@ describe("every definition speaks the one vocabulary", () => {
     "must-attack": ["at", "otherThan", "ifAttacks", "atLeastOne"],
     "cant-block": ["attacker", "attackers", "unlessAttacking"],
     "must-block": ["attacker"],
-    "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock", "unlessAttacking"],
+    "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock", "unlessAttacking", "outsideSector"],
     "must-be-blocked": ["by"],
     "must-be-blocked-if-able": ["by", "exactlyOne", "byAtLeast"],
     // `from` is the permanent that chose, set as the rule is bound.

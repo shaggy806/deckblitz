@@ -1935,6 +1935,9 @@ export type GameEvent =
       readonly duration?: Expiry;
       /** They apply only during this player's next turn (Wall of Dust). */
       readonly nextTurnOf?: PlayerId;
+      /** The `cant-be-blocked` among them is "only by creatures in the same
+       * sector" (Space Beleren's +1 — `CantBeBlocked.outsideSector`). */
+      readonly sameSector?: true;
     })
   | (Base & {
       /** A modal spell/ability's controller (or a "you may" clause) chose
