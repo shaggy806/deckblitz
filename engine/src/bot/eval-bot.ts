@@ -3204,9 +3204,9 @@ export class EvalBotController extends HeuristicBotController {
             }));
           });
         });
-    // **A kill, and what's left.** A kill of a player who can't answer it is
-    // the fewest attackers it needs (`alphaStrike`), and each attacker left
-    // over is added only where the simulated result is better for it, the
+    // **A kill, and what's left.** A kill is the attackers it needs and a
+    // margin where the player could answer it (`alphaStrike`), and each
+    // attacker left over is added only where the simulated result is better for it, the
     // crackback check in every score: at another player it can hurt, or not
     // at all. They were all piled onto the player being killed. Under Smoke,
     // a Zombie deck sent two more creatures at a player with no creature and
@@ -3576,9 +3576,10 @@ export class EvalBotController extends HeuristicBotController {
    * when the same creatures, split, killed two. Killing one player doesn't
    * end a multiplayer game, so a plan still has to leave us alive to the
    * crackback of whoever survives it; the most kills that does is played,
-   * with the attackers left over piled onto a player being killed who could
-   * still answer the kill (a margin against a trick), unless keeping them
-   * home is what survives. `all` says whether the plan kills everyone.
+   * with a margin against a trick at each player being killed who could
+   * still answer (`marginFor`: enough more attackers that the kill survives
+   * losing its biggest), unless keeping them home is what survives. `all`
+   * says whether the plan kills everyone, and then everything goes.
    */
   private alphaStrike(
     state: GameState,
@@ -3669,6 +3670,33 @@ export class EvalBotController extends HeuristicBotController {
     const killable = living.filter(
       (p) => legal.defenders.includes(p) && killWith(p, mine) !== null,
     );
+    // The fewest of `spare`, biggest first, that added to `kill` leave
+    // `defender` dead even with the kill's hardest hitter taken out of it;
+    // none when no number of them does.
+    const marginFor = (
+      defender: PlayerId,
+      kill: readonly CombatCreature[],
+      spare: readonly CombatCreature[],
+    ): CombatCreature[] => {
+      const blockers = blockersOf.get(defender) ?? [];
+      const hits = (c: CombatCreature): number => c.damage * (c.keywords.has("double-strike") ? 2 : 1);
+      const survivesATrick = (attackers: readonly CombatCreature[]): boolean => {
+        if (attackers.length < 2) return false;
+        const biggest = attackers.reduce((a, c) => (hits(c) > hits(a) ? c : a));
+        return isLethal(state, defender, damageThrough(attackers.filter((c) => c !== biggest), blockers));
+      };
+      const added: CombatCreature[] = [];
+      for (const c of [...spare].sort((a, c2) => hits(c2) - hits(a))) {
+        if (survivesATrick([...kill, ...added])) break;
+        added.push(c);
+      }
+      if (!survivesATrick([...kill, ...added])) return [];
+      for (let i = added.length - 1; i >= 0; i -= 1) {
+        const without = added.filter((_, j) => j !== i);
+        if (survivesATrick([...kill, ...without])) added.splice(i, 1);
+      }
+      return added;
+    };
     // Whether `p` could still stop a kill the arithmetic calls lethal: a
     // creature of theirs able to block, or mana open with a card in hand to
     // spend it on. With neither (tapped out, or an empty hand, and nothing
@@ -3725,17 +3753,40 @@ export class EvalBotController extends HeuristicBotController {
         for (const c of set) units.push({ c, defender });
         pool = pool.filter((c) => !set.includes(c));
       }
-      // Everything else piled onto a player being killed who could still do
-      // something about it (`canAnswer`): a margin against a block the
-      // arithmetic missed or a trick. Not onto one who can't: there the kill
-      // is what it needs, and the attackers left over are the declaration's
-      // to weigh one at a time (`attackersSearched`).
-      const piled = [...units];
-      for (const c of pool) {
-        const target = killed.find((p) => canAttack(c, p) && canAnswer(p));
-        if (target !== undefined) piled.push({ c, defender: target });
+      // **A margin, not everything.** A plan that ends the game takes every
+      // attacker along: nothing is left to keep them home for. Short of
+      // that, a player being killed who could still do something about it
+      // (`canAnswer`) gets the fewest more attackers that make the kill
+      // survive losing its biggest one: a removal spell, a fog on one
+      // creature, a blocker the arithmetic missed. Where no number of them
+      // does (a kill by one commander's damage), or the player can't answer,
+      // the kill is what it needs. The attackers left over are the
+      // declaration's to weigh one at a time (`attackersSearched`). Every
+      // one of them used to go: 25 Elf tokens beside the one attacker that
+      // killed a player on 3 (the user, 2026-11-22: an excess swing, not a
+      // ridiculous one).
+      const margined = [...units];
+      if (killed.length === living.length) {
+        for (const c of pool) {
+          const target = killed.find((p) => canAttack(c, p));
+          if (target !== undefined) margined.push({ c, defender: target });
+        }
+      } else {
+        const spare = new Set(pool);
+        for (const defender of killed) {
+          if (!canAnswer(defender)) continue;
+          const extra = marginFor(
+            defender,
+            units.filter((u) => u.defender === defender).map((u) => u.c),
+            [...spare].filter((c) => canAttack(c, defender)),
+          );
+          for (const c of extra) {
+            spare.delete(c);
+            margined.push({ c, defender });
+          }
+        }
       }
-      add(declare(piled), killed, units.length);
+      add(declare(margined), killed, units.length);
       add(declare(units), killed, units.length);
     }
     // Most kills first; among equals, the fewest attackers the kills need,

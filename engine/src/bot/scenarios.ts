@@ -3172,6 +3172,35 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "takes a margin on a kill, one attacker more than it needs, not everything it has",
+    rule: "A kill a player could still answer takes enough more attackers to survive losing its biggest, and no more.",
+    run(weights, registry, makeBot) {
+      // The user, 2026-11-22: "an excess swing without sending a ridiculous
+      // amount". The kill used to take every attacker left over (capture
+      // WAMFR t48: six attackers at a player on 9; a judged game: 25 Elf
+      // tokens beside the one attacker that killed a player on 3). Bob, on
+      // 9 with three ground blockers, dies to two of four 5/5 fliers; a
+      // third makes the kill survive a removal spell or a fog on one of
+      // them (`marginFor`). The fourth and the Hill Giants are the
+      // declaration's to send elsewhere or keep.
+      const game = table(registry, [A, B, C], A);
+      for (const player of [A, B, C]) game.state.players[player].life = 30;
+      game.state.players[B].life = 9;
+      const dragons = [0, 1, 2, 3].map(() => onBoard(game, "Shivan Dragon", A));
+      const giants = [0, 1].map(() => onBoard(game, "Hill Giant", A));
+      for (let i = 0; i < 3; i += 1) onBoard(game, "Grizzly Bears", B);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" || s.turn.step === "postcombat-main" || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "never asked to attack" };
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const atBob = (ids: readonly ObjectId[]): number =>
+        attackers.filter((d) => d.defender === B && ids.includes(d.attacker)).length;
+      return {
+        passed: atBob(dragons) === 3 && atBob(giants) === 0,
+        detail: `${atBob(dragons)} of 4 Dragons and ${atBob(giants)} of 2 Hill Giants at bob`,
+      };
+    },
+  },
+  {
     name: "keeps its blockers home when one opponent's whole board kills it and the attack kills nobody",
     rule: "Dead to one opponent's whole swing on paper, an attack that kills nobody only pays for the times they split it.",
     run(weights, registry, makeBot) {

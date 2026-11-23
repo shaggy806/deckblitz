@@ -70,11 +70,15 @@ re-run; positions are rebuilt by replaying the game to the turn):
   "keeps its blockers home when one opponent's whole board kills it and the attack kills
   nobody"). Traced on the five turns left, the attack search did three different things.
   *Piled on*: `alphaStrike` put every attacker left over onto the player being killed, as a
-  margin against a trick. It still does where that player could answer the kill (a creature able
-  to block, or mana open with a card in hand: the full swing at a player on 9 with three
-  blockers, capture WAMFR t48, judged right on 2026-10-10, still gates). Where they can't, the
-  kill is what it needs and each attacker left over is added only where the simulated result is
-  better for it: D75RS-3 t21's two Zombies now hit another player for 6 where they hit a dead
+  margin against a trick. The margin is now measured (the user: "an excess swing without sending
+  a ridiculous amount"; scenario "takes a margin on a kill, one attacker more than it needs, not
+  everything it has"): where that player could answer the kill (a creature able to block, or mana
+  open with a card in hand), the fewest more attackers that leave it lethal with its biggest one
+  taken out; where no number of them does, or the player can't answer, none; and everything only
+  when the attack ends the game. Capture WAMFR t48 (a full swing of six at a player on 9, judged
+  right on 2026-10-10) is now three Dragons at that player, two to kill and one over, a 1/4 at
+  the other opponent and the rest home; its gate takes either. Each attacker left over is added
+  only where the simulated result is better for it: D75RS-3 t21's two Zombies now hit another player for 6 where they hit a dead
   one for nothing (they are still tapped under Smoke, which nothing here reads), and 8G96K-3 t36
   is now a four-Dragon kill on the player who went on to win that game. *Raced*: FU89K-1 t33 was
   dead on paper to the Zombies' whole swing whatever stayed home, so every attack was free; an
