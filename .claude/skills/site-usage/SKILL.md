@@ -1,6 +1,6 @@
 ---
 name: site-usage
-description: Fetch the live site's usage numbers (deckblitz.net) and report them here — visitors by day and country, where they came from, games begun and finished, commanders imported, cards people import that the engine lacks, failed imports and page errors. Takes an optional number of days (`/site-usage 30`; 14 by default). Use when the user asks who is using the site, for the usage / traffic / metrics / analytics / stats, how many visitors or games there were, what decks or commanders people are testing, which missing cards are asked for most, or what errors visitors are hitting. Also says how much room the kept games (the played-game records) take on the box, how much disk is left, and whether it is time to fetch them to this PC: use it too when the user asks about storage, disk space, how many games are saved, or whether to transfer or pull the saved games.
+description: Fetch the live site's usage numbers (deckblitz.net) and report them here — visitors by day and country, where they came from, games begun and finished, how many different players (browsers) played them, commanders imported, cards people import that the engine lacks, failed imports and page errors. Takes an optional number of days (`/site-usage 30`; 14 by default). Use when the user asks who is using the site, for the usage / traffic / metrics / analytics / stats, how many visitors or games there were, what decks or commanders people are testing, which missing cards are asked for most, or what errors visitors are hitting. Also says how much room the kept games (the played-game records) take on the box, how much disk is left, and whether it is time to fetch them to this PC: use it too when the user asks about storage, disk space, how many games are saved, or whether to transfer or pull the saved games.
 ---
 
 # Site usage
@@ -64,11 +64,47 @@ afterwards, so nothing is lost by pulling mid-game.
 If it fails: **`not found`** means the installed build is older than this report (2026-11-22):
 say it needs a deploy. **`games aren't being kept`** means the unit sets `GAMES=0`.
 
+## How many different players
+
+The same `localhost:4010/games` report ends with a **Players** section: how many different
+browsers posted a game today, in 7, 14, 30 and 90 days (`unique`), then a line a day with that
+day's players and the games they began. `games.json` has it as `players.within` (keyed by the
+number of days) and `players.byDay`.
+
+**Report it every run**, in the summary's first lines beside visitors and games: unique players
+over the span asked for (the default 14 days is one of the windows), and how many games that
+was. For a span that isn't 1, 7, 14, 30 or 90 days, work it out from the day files, which are
+tiny and hold only tags (`{ "<tag>": <games> }` a UTC day):
+
+```bash
+ssh -o ConnectTimeout=15 deckblitz "cd /opt/mtg-engine/games/players 2>/dev/null && tail -n +1 *.json"
+```
+
+and count the different tags in the days wanted.
+
+What the number is, said once where it matters:
+
+- **A player here is a browser**, counted by the tag its games carry (`client/src/playerTag.ts`,
+  `server/src/game-store.ts`): a short code the page works out one way from a random number it
+  keeps to itself. The same person on a phone and a PC, or after clearing site data, is two. A
+  tag says two games came from one browser and nothing of whose: never try to match one to a
+  visit, a country or a person, and don't print the tags themselves unless asked.
+- **Only a browser's own games are in it** (a game against bots, which is nearly all of them):
+  a game several people played at a table, or one the server ran, carries no tag. Nor does a
+  game from a browser that keeps no storage, or an automated one.
+- **It starts the day tags were deployed** (2026-11-22); earlier games have none. A report with no
+  Players section is a build from before it: say it needs a deploy.
+- **It differs from "visitors"**, which is visitor-days from the usage log and counts people who
+  never started a game. Players a day over visitors a day is the share who played.
+- The tally stays on the box when the games are fetched away (`games:pull`), so it covers games
+  no longer there. For the games already fetched, `npm run games:players` counts the same thing
+  from `games/` here.
+
 ## Report it
 
 Lead with the answer to what was asked. With no particular question, a short summary first:
-visitors and games over the span and how that compares with the days before it in the same
-report, then anything that stands out. Then the report's sections as short tables or lists,
+visitors, unique players (above) and games over the span and how that compares with the days
+before it in the same report, then anything that stands out. Then the report's sections as short tables or lists,
 leaving out the empty ones:
 
 - **By day**: visitors, new, views, games begun and finished, imports, errors. Drop leading

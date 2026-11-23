@@ -10,8 +10,13 @@
  * by the thread that ran it (`writeRecord`).
  *
  * **Nobody is named.** A record holds the decks and the plays and nothing of
- * who played: no address, no visitor id, only the country Cloudflare says the
- * post came from. The About page says games are kept.
+ * who played: no address, only the country Cloudflare says the post came
+ * from, and the posting browser's tag (`tag`, `PLAYER_TAG`: ten hex digits
+ * the page works out one way from a random number it keeps to itself, the
+ * client's `playerTag.ts`). The tag says two games came from one browser, so
+ * that ten games of one player's aren't read as ten players'; nothing leads
+ * back from it to a browser or a person, and nothing else the server keeps
+ * carries it. The About page says games are kept, and how.
  *
  * **It can't fill the disk.** A post is at most `GAME_BODY_LIMIT`, an address
  * may post `GAMES_PER_HOUR`, and the oldest files go first once the folder
@@ -86,7 +91,33 @@ export interface GameStoreReport {
   /** Whether to fetch the games to the operator's machine for the room:
    * not yet, soon (half full), or now (four fifths: at full the oldest go). */
   readonly transfer: "no" | "soon" | "now";
+  /** How many different browsers posted games, by their tags (`PLAYER_TAG`),
+   * from the store's own tally (`notePlayer`), which a pull leaves in place. */
+  readonly players: PlayersReport;
 }
+
+/** The browsers that posted games, counted by tag: how many different ones
+ * within each of the last `PLAYER_WINDOWS` days (today is 1), and each day's
+ * own count with the tagged games begun that day, newest first. Only a
+ * browser's own games carry a tag: a table's and the server's rooms' aren't
+ * in it, nor a game from a browser that keeps no storage. */
+export interface PlayersReport {
+  readonly within: Readonly<Record<number, number>>;
+  readonly byDay: readonly { readonly day: string; readonly players: number; readonly games: number }[];
+}
+
+/** The spans `PlayersReport.within` counts over, in days. */
+export const PLAYER_WINDOWS = [1, 7, 14, 30, 90] as const;
+
+/** The folder under the store's the tally of tags is kept in, a small JSON
+ * file a UTC day (`{ tag: games }`), and how many days of it are kept. Not a
+ * `.json.gz`, so `games:pull` and the room's pruning leave it alone. */
+const PLAYERS_DIR = "players";
+const PLAYER_DAYS_KEPT = 400;
+
+/** The shape of a browser's tag (the client's `playerTag.ts`): ten lowercase
+ * hex digits. Anything else sent as one is dropped. */
+export const PLAYER_TAG = /^[0-9a-f]{10}$/;
 
 /** The parts of a record the store reads. The rest is kept as it came. */
 interface RecordShape {
@@ -233,6 +264,66 @@ export class GameStore {
       disk,
       minFreeBytes: this.minFreeBytes,
       transfer: full >= TRANSFER_NOW_AT ? "now" : full >= TRANSFER_SOON_AT ? "soon" : "no",
+      players: this.players(),
+    };
+  }
+
+  /** One more game begun under `tag` on `day`, in the tally. Never throws:
+   * the tally is a count beside the records, not one of them. */
+  private notePlayer(day: string, tag: string): void {
+    try {
+      const folder = join(this.dir, PLAYERS_DIR);
+      mkdirSync(folder, { recursive: true });
+      const path = join(folder, `${day}.json`);
+      const first = !existsSync(path);
+      const tally = first ? {} : (JSON.parse(readFileSync(path, "utf8")) as Record<string, number>);
+      tally[tag] = (tally[tag] ?? 0) + 1;
+      writeFileSync(path, JSON.stringify(tally));
+      // A new day's file: the oldest ones go.
+      if (first) {
+        const days = readdirSync(folder).filter((name) => /^\d{4}-\d{2}-\d{2}\.json$/.test(name)).sort();
+        for (const old of days.slice(0, Math.max(0, days.length - PLAYER_DAYS_KEPT))) unlinkSync(join(folder, old));
+      }
+    } catch (error) {
+      console.error("game store: couldn't note a player", error);
+    }
+  }
+
+  /** The tally read back (`PlayersReport`). */
+  players(): PlayersReport {
+    const now = this.now();
+    const tallies: { day: string; tally: Record<string, number> }[] = [];
+    try {
+      const folder = join(this.dir, PLAYERS_DIR);
+      if (existsSync(folder)) {
+        for (const name of readdirSync(folder)) {
+          if (!/^\d{4}-\d{2}-\d{2}\.json$/.test(name)) continue;
+          try {
+            const tally = JSON.parse(readFileSync(join(folder, name), "utf8")) as Record<string, number>;
+            tallies.push({ day: name.slice(0, 10), tally });
+          } catch {
+            // A file half written: left out.
+          }
+        }
+      }
+    } catch {
+      // No tally to read: nothing counted.
+    }
+    tallies.sort((a, b) => (a.day < b.day ? 1 : -1));
+    const within: Record<number, number> = {};
+    for (const days of PLAYER_WINDOWS) {
+      const from = dayOf(now - (days - 1) * 86_400_000);
+      const tags = new Set<string>();
+      for (const { day, tally } of tallies) if (day >= from) for (const tag of Object.keys(tally)) tags.add(tag);
+      within[days] = tags.size;
+    }
+    return {
+      within,
+      byDay: tallies.map(({ day, tally }) => ({
+        day,
+        players: Object.keys(tally).length,
+        games: Object.values(tally).reduce((n, games) => n + games, 0),
+      })),
     };
   }
 
@@ -283,11 +374,24 @@ export class GameStore {
         return { have: held, path: null };
       }
       if (from + shape.inputs.length > MAX_KEPT_INPUTS) return { have: held, path: null };
-      const { from: _from, ...rest } = shape;
+      // A tag is kept only in its own shape: the one field of a record that
+      // is about the sender, so nothing else may ride in it.
+      const { from: _from, tag: sent, ...rest } = shape as RecordShape & { readonly tag?: unknown };
+      // The one sent, or the one already kept: a part or a whole record that
+      // comes without a tag (sent before the page had said it) leaves the
+      // game's tag where it is.
+      const keptTag = (existing: Record<string, unknown> | null): string | undefined =>
+        typeof sent === "string" && PLAYER_TAG.test(sent)
+          ? sent
+          : typeof existing?.tag === "string" && PLAYER_TAG.test(existing.tag)
+            ? existing.tag
+            : undefined;
+      const tagNow = keptTag(kept);
+      const tag = tagNow !== undefined ? { tag: tagNow } : {};
       const whole =
         from === 0 || kept === null
-          ? { ...rest, received: now, ...extra }
-          : { ...kept, ...rest, config: kept.config, inputs: [...kept.inputs.slice(0, from), ...shape.inputs], received: now, ...extra };
+          ? { ...rest, ...tag, received: now, ...extra }
+          : { ...kept, ...rest, ...tag, config: kept.config, inputs: [...kept.inputs.slice(0, from), ...shape.inputs], received: now, ...extra };
       const files = this.scan();
       const at = files.findIndex((f) => f.path === path);
       if (at >= 0) files.splice(at, 1);
@@ -295,6 +399,9 @@ export class GameStore {
       const data = gzipSync(Buffer.from(JSON.stringify(whole), "utf8"));
       writeFileSync(path, data);
       files.push({ path, bytes: data.length, mtimeMs: now });
+      // The tally of who posted (`players`): once a game, as its tag first
+      // comes (with its first part, or a later one).
+      if (tagNow !== undefined && kept?.tag !== tagNow) this.notePlayer(dayOf(now), tagNow);
       this.prune();
       return { have: (whole.inputs as readonly unknown[]).length, path };
     } catch (error) {
@@ -369,6 +476,9 @@ export function renderGamesReport(r: GameStoreReport): string {
       : r.transfer === "soon"
         ? "  transfer   soon: over half full (npm run games:pull)"
         : "  transfer   not needed for room; fetch them when there is a game to look at (npm run games:pull)",
+    "Players (different browsers that posted a game, by tag; a table's and the server's own rooms' games carry none)",
+    `  unique     ${PLAYER_WINDOWS.map((days) => `${r.players.within[days] ?? 0} ${days === 1 ? "today" : `in ${days} days`}`).join(", ")}`,
+    ...r.players.byDay.slice(0, 14).map((d) => `  ${d.day} ${String(d.players).padStart(4)} player(s), ${String(d.games).padStart(4)} game(s)`),
   ];
   return `${lines.join("\n")}\n`;
 }

@@ -63,7 +63,7 @@ const by = { person: 0, bot: 0, room: 0 };
 for (const input of record.inputs) by[input.by] += 1;
 
 console.log(`${basename(file)}: room ${record.roomId}, game ${record.gameNumber}, seed ${record.config.seed ?? "?"}, played ${record.where === "browser" ? "in a browser" : record.where === "table" ? "at a table (every player's device)" : "on the server"}`);
-console.log(`  ${when(record.startedAt)} to ${when(record.endedAt)} UTC${record.country ? `, from ${record.country}` : ""}`);
+console.log(`  ${when(record.startedAt)} to ${when(record.endedAt)} UTC${record.country ? `, from ${record.country}` : ""}${record.tag ? `, browser tag ${record.tag}` : ""}`);
 console.log(`  seats: ${record.seats.map((s) => seat(s.player)).join(", ")}`);
 console.log(`  ${record.inputs.length} inputs: ${by.person} a person's, ${by.bot} a bot's, ${by.room} the room's own`);
 console.log(`  ended: ${record.end.reason}${record.end.winner ? `, ${seat(record.end.winner)} won` : ""}${record.end.turn !== null ? `, turn ${record.end.turn}` : ""}`);

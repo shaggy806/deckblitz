@@ -130,7 +130,11 @@ export function AboutPage() {
           third-party trackers, and no IP address is stored, only the country a visit came from. An imported list is never kept, only its commander and
           the names of cards the site doesn&apos;t have yet. A finished game is kept for a while (the decks in it and the
           plays made, with nothing saying who played) so that a mistake by a bot or the rules can be found and fixed.
-          Your saved decks and settings stay in your browser.
+          So that ten games from one player aren&apos;t counted as ten players, each kept game carries a short code:
+          your browser makes up a random number the first time you play, keeps it to itself, and sends only a code
+          worked out from it. The same browser always gives the same code, and nothing leads back from the code to
+          the number, your browser or you. It goes with kept games and nothing else, and clearing this site&apos;s data
+          makes a new one. Your saved decks and settings stay in your browser.
         </p>
       </section>
 

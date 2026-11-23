@@ -35,6 +35,7 @@ import { LocalRoomHost } from 'server/dist/local-host.js'
 import { tableCosts } from 'server/dist/table-copy.js'
 import type { TableStart } from 'server/dist/table-copy.js'
 import { recordBotDecisionsTo, recordGamesTo } from 'server/dist/room.js'
+import { PLAYER_TAG } from '../playerTag.ts'
 import type { FromRoomWorker, LocalStats, ToRoomWorker } from './localSocket.ts'
 import { loadSavedRooms, saveRooms } from './savedRooms.ts'
 
@@ -63,8 +64,10 @@ recordBotDecisionsTo({
  * Each game played here is kept as how it was dealt and what was done to it
  * (the server's `game-record.ts`) and posted to the room server: a solo game
  * runs in this tab, so the server has nothing of it otherwise, and a bot's
- * play someone reports can then be looked at. No name, address or id goes
- * with it; the About page says games are kept.
+ * play someone reports can then be looked at. No name or address goes with
+ * it, only this browser's tag (`playerTag.ts`: a short code that says two
+ * games came from one browser and nothing of whose); the About page says
+ * games are kept, and how.
  *
  * **A few inputs at a time**, so that a tab closed without a word has lost
  * almost nothing: only the inputs the server doesn't hold yet go (every
@@ -78,6 +81,14 @@ recordBotDecisionsTo({
  * A failure is tried twice more, then left: the next part carries the same
  * inputs again.
  */
+/** This browser's tag (`playerTag.ts`), once the page has said it: it goes
+ * with every part of a record sent from here on, and the server keeps it
+ * beside the game. Says which games came from one browser, and nothing of
+ * whose. */
+let recordTag: string | null = null
+const tagged = <T extends object>(part: T): T | (T & { readonly tag: string }) =>
+  recordTag === null ? part : { ...part, tag: recordTag }
+
 const gamesUrl = (): string =>
   `${((import.meta.env.VITE_SERVER_URL as string | undefined) ?? `ws://${self.location.hostname}:4000`).replace(/^ws/, 'http')}/games`
 recordGamesTo({
@@ -85,7 +96,7 @@ recordGamesTo({
   where: 'browser',
   asItGoes: HAND_OVER_EVERY,
   deliver: async (part) => {
-    const body = JSON.stringify(part)
+    const body = JSON.stringify(tagged(part))
     for (let attempt = 0; attempt < 3; attempt += 1) {
       try {
         const answer = await fetch(gamesUrl(), { method: 'POST', body, keepalive: body.length < KEEPALIVE_MOST })
@@ -147,7 +158,7 @@ function save(): void {
   // And what the room server hasn't of each game's record, for the page to
   // send itself if its tab closes: this worker goes with the tab, before it
   // could send anything (`localSocket.ts`, `sendTailsNow`).
-  post({ kind: 'tails', tails: host.recordTails().map((tail) => JSON.stringify(tail)) })
+  post({ kind: 'tails', tails: host.recordTails().map((tail) => JSON.stringify(tagged(tail))) })
 }
 
 function deliver(message: ServerMessage): void {
@@ -215,6 +226,10 @@ self.onmessage = async (event: MessageEvent<ToRoomWorker>) => {
       return
     case 'table-leave':
       host?.leaveTable(message.roomId)
+      return
+    case 'tag':
+      // This browser's tag, from the page (`playerTag.ts`).
+      if (PLAYER_TAG.test(message.tag)) recordTag = message.tag
       return
     case 'records':
       // The tab is hidden or closing: what hasn't been sent of each game goes now.

@@ -23,6 +23,7 @@
  * to the copy. The page sees frames from a room, as ever.
  */
 
+import { playerTag } from '../playerTag.ts'
 import { PAGE_BUILD } from './tablesMode.ts'
 
 
@@ -35,6 +36,8 @@ export type ToRoomWorker =
   /** The tab is hidden or closing: each game's record, as far as it hasn't
    * been sent, goes to the room server now (`LocalRoomHost.handOverRecords`). */
   | { readonly kind: 'records' }
+  /** This browser's tag (`playerTag.ts`), to go with each game's record. */
+  | { readonly kind: 'tag'; readonly tag: string }
   /** The server's `table-start` (`data`): deal this tab's copy of the table
    * and seat the page at it, by the `token` it holds its seat with; `join` is
    * the page's own `join-room` or `spectate-room`, when that is how it came
@@ -141,6 +144,11 @@ export class LocalSocket implements RoomSocket {
     }
     this.worker.onerror = (event) => this.fail(event.message)
     this.post({ kind: 'open' })
+    // The tag a kept game carries (`playerTag.ts`): worked out here, where
+    // `localStorage` is, and told the worker, which posts the records.
+    void playerTag().then((tag) => {
+      if (tag !== null) this.post({ kind: 'tag', tag })
+    })
   }
 
   send(data: string): void {

@@ -334,7 +334,13 @@ folders, so a deploy leaves it alone). A game a browser plays alone is posted by
 closes, so a tab closed mid-game has lost at most a second: at most 4 MB a post, 600 an hour an
 address); a game at a table is
 written from the server's own log when the table is forgotten. A record names nobody: decks, plays,
-the commit it was played on and the country the post came from. A four-player game is 10-18 KB; the
+the commit it was played on, the country the post came from and, on a browser's own game, that
+browser's tag (ten hex digits the page works out one way from a random number it keeps in
+`localStorage` and never sends: `client/src/playerTag.ts`; it says two games came from one browser
+and nothing of whose, and the About page says so). The store tallies the tags a day in
+`games/players/<day>.json`, which a pull leaves on the box, and `curl localhost:4010/games` ends
+with how many different browsers posted games today and within 7, 14, 30 and 90 days (the
+`site-usage` skill reports it); `npm run games:players` counts the same from the fetched games. A four-player game is 10-18 KB; the
 folder stops at 20 GB (over a million games; 1 GB until 2026-11-22), or sooner if the disk would
 have under 5 GB free, the oldest files going first. `Environment=GAMES_DIR=…` moves it,
 `GAMES_MAX_MB=…` sizes it, `GAMES=0` turns it off. `curl localhost:4010/games` (from the dev PC,

@@ -3,7 +3,7 @@
  * and the folder such records are kept in (`game-store.ts`).
  */
 
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, unlinkSync } from "node:fs";
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
 import { tmpdir } from "node:os";
@@ -336,6 +336,75 @@ describe("the game store", () => {
     expect((JSON.parse(gunzipSync(readFileSync(path!)).toString("utf8")) as GameRecord).inputs).toHaveLength(2);
     expect(store.write(sample())).toBeNull();
     expect(store.stats().games).toBe(2);
+  });
+
+  it("keeps a browser's tag in its own shape, drops any other, and carries it on through later parts", () => {
+    const dir = tempDir();
+    const store = new GameStore({ disk: () => null, dir, now: () => NOON });
+    const read = (path: string): Record<string, unknown> =>
+      JSON.parse(gunzipSync(readFileSync(path)).toString("utf8")) as Record<string, unknown>;
+    // Ten hex digits: kept beside the game.
+    const tagged = store.write(sample({ tag: "0123456789" }));
+    expect(read(tagged!).tag).toBe("0123456789");
+    // Anything else in its place is not a tag, and isn't kept: a name, a
+    // longer string, a number.
+    for (const [game, bad] of [[2, "toby@example.com"], [3, "0123456789abcdef"], [4, 12345]] as const) {
+      const path = store.write({ ...sample({ gameNumber: game }), tag: bad } as unknown as GameRecord);
+      expect(path).not.toBeNull();
+      expect(read(path!)).not.toHaveProperty("tag");
+    }
+    // A later part without one (sent before the page had said its tag, or by
+    // an older page) leaves the tag already kept where it is.
+    const two = [...sample().inputs, ...sample().inputs];
+    store.take({ ...sample({ inputs: two.slice(1) }), from: 1 });
+    expect(read(tagged!)).toMatchObject({ tag: "0123456789" });
+    expect((read(tagged!).inputs as unknown[]).length).toBe(2);
+    // And one that comes with the tag only later gets it then.
+    const late = store.write(sample({ gameNumber: 5 }));
+    store.take({ ...sample({ gameNumber: 5, inputs: two.slice(1), tag: "abcdef0123" }), from: 1 });
+    expect(read(late!).tag).toBe("abcdef0123");
+    // The whole game sent again without one (a page that hadn't its tag yet)
+    // keeps the tag the game has, and is still one game in the tally.
+    const three = [...two, ...sample().inputs];
+    expect(store.write(sample({ inputs: three }))).toBe(tagged);
+    expect(read(tagged!)).toMatchObject({ tag: "0123456789" });
+    store.take({ ...sample({ inputs: sample().inputs, tag: "0123456789" }), from: 3 });
+    expect(store.report().players.byDay).toEqual([{ day: "2026-11-22", players: 2, games: 2 }]);
+  });
+
+  it("counts the browsers that posted games by tag, a game once, and keeps the count when the games are fetched away", () => {
+    const dir = tempDir();
+    let now = NOON;
+    const store = new GameStore({ disk: () => null, dir, now: () => now });
+    const game = (gameNumber: number, tag?: string): GameRecord => sample({ gameNumber, ...(tag !== undefined ? { tag } : {}) });
+    // Two games from one browser, one from another, one with no tag.
+    store.write(game(1, "aaaaaaaaaa"));
+    store.write(game(2, "aaaaaaaaaa"));
+    store.write(game(3, "bbbbbbbbbb"));
+    store.write(game(4));
+    // More of a game already counted is still that one game.
+    store.take({ ...game(1, "aaaaaaaaaa"), inputs: [...sample().inputs, ...sample().inputs] });
+    expect(store.report().players).toEqual({
+      within: { 1: 2, 7: 2, 14: 2, 30: 2, 90: 2 },
+      byDay: [{ day: "2026-11-22", players: 2, games: 3 }],
+    });
+    // Ten days on, one of them plays again: one today, two within fourteen
+    // days and none new, the days newest first.
+    now = NOON + 10 * 86_400_000;
+    store.write(game(5, "aaaaaaaaaa"));
+    const later = store.report().players;
+    expect(later.within).toEqual({ 1: 1, 7: 1, 14: 2, 30: 2, 90: 2 });
+    expect(later.byDay).toEqual([
+      { day: "2026-12-02", players: 1, games: 1 },
+      { day: "2026-11-22", players: 2, games: 3 },
+    ]);
+    // A pull deletes the games' files and nothing else: the count stands.
+    for (const day of ["2026-11-22", "2026-12-02"]) {
+      for (const name of readdirSync(join(dir, day))) unlinkSync(join(dir, day, name));
+    }
+    store.rescan();
+    expect(store.report()).toMatchObject({ games: 0, players: { within: { 14: 2 } } });
+    expect(renderGamesReport(store.report())).toContain("unique     1 today, 1 in 7 days, 2 in 14 days");
   });
 
   it("refuses what isn't a record", () => {

@@ -76,6 +76,11 @@ export interface GameRecord extends Omit<RecordSoFar, "handed"> {
   readonly roomId: string;
   readonly gameNumber: number;
   readonly endedAt: number;
+  /** The tag of the browser that posted it (`game-store.ts`'s `PLAYER_TAG`,
+   * the client's `playerTag.ts`): which games came from one browser, and
+   * nothing of whose. Only on a game a browser played alone, put there by
+   * its page; a room on the server and a table have none. */
+  readonly tag?: string;
   readonly seats: readonly RecordedSeat[];
   readonly end: {
     /** `"over"`: the game was played out. `"left"`: its room went first.

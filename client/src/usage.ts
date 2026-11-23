@@ -9,7 +9,9 @@ import { useEffect } from 'react'
  *
  * Each is one small anonymous event, sent blind (`sendBeacon`: nothing is
  * read back, and a failure is nobody's problem). No cookie and no id: the
- * only thing kept on the device is a flag that it has been here before.
+ * only thing kept on the device for this is a flag that it has been here
+ * before. (A kept game carries a browser's tag, `playerTag.ts`; nothing sent
+ * from here does.)
  * Nothing is sent from a browser driven by automation (`navigator.webdriver`:
  * the Playwright suites, and most crawlers), or with no `window` at all (a
  * unit test).
