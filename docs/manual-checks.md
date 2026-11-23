@@ -8305,6 +8305,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Dance of the Manse with X = 2, targeting Sol Ring and Mind Stone in your graveyard.
 - **Expect:** After X the page asks for up to 2 cards. Sol Ring and Mind Stone can be chosen, Hedron Archive (mana value 4) can't. Both return to the battlefield as artifacts, not creatures.
 
+### Lantern of Insight: a revealed top card stays seen once it's drawn
+- **Do:** Cast Vision Skeins, then open Bob's hand.
+- **Expect:** Grizzly Bears and Hill Giant, which you saw on top of Bob's library as he drew them, are face up in his hand for the rest of this turn. On the next turn they are face down again.
+
 ## Decisions lane: a creature or player chosen as it resolves, who flips again, and every library searched at once (2026-11-13)
 
 ### Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not

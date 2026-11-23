@@ -1067,6 +1067,30 @@ interface Sight {
   readonly ownLibraryTop: boolean;
 }
 
+/** Whether `player` plays with the top card of their library revealed, to
+ * every player (Courser of Kruphix, Lantern of Insight). Whose sight it is
+ * read from doesn't matter: `Sight.libraryTops` is the same for all. */
+function topRevealed(state: GameState, registry: CardRegistry, player: PlayerId, sight: Sight): boolean {
+  return (
+    sight.libraryTops.has(player) ||
+    state.zones.shared.battlefield.some((id) => {
+      const object = state.objects[id];
+      return object.controller === player && registry.get(rulesTextName(object)).revealsOwnLibraryTop;
+    })
+  );
+}
+
+/**
+ * Whether the top card of `player`'s library is revealed to every player
+ * right now (rule 401.5's "play with the top card of their library
+ * revealed"), as against one player alone being let to look at it. What
+ * `Game.moveObject` asks as a card leaves a library for a hand: everyone saw
+ * that card, so it stays seen for the turn (`GameState.revealedThisTurn`).
+ */
+export function libraryTopRevealedToAll(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
+  return topRevealed(state, registry, player, sightOf(state, registry, player));
+}
+
 /** The card on top of `player`'s library, if `viewer` can see it, else
  * `null`: revealed to everyone, or one `viewer` alone may look at. */
 function seenLibraryTop(
@@ -1076,12 +1100,7 @@ function seenLibraryTop(
   player: PlayerId,
   sight: Sight,
 ): ObjectId | null {
-  const revealsTop =
-    sight.libraryTops.has(player) ||
-    state.zones.shared.battlefield.some((id) => {
-      const object = state.objects[id];
-      return object.controller === player && registry.get(rulesTextName(object)).revealsOwnLibraryTop;
-    });
+  const revealsTop = topRevealed(state, registry, player, sight);
   // "You may look at the top card of your library any time" (Glarb,
   // Calamity's Augur — rule 401.5): shown in its owner's own view only.
   // "You may look at the top card of their library any time" (Xanathar,

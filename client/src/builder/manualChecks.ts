@@ -12518,6 +12518,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Lantern of Insight: a revealed top card stays seen once it's drawn",
+    board({
+      you: { bf: ['Lantern of Insight', 'Island*2'], hand: ['Vision Skeins'] },
+      opp: { lib: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
     'Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not',
     board({
       you: { bf: ['Comet, Stellar Pup', 'Grizzly Bears'] },

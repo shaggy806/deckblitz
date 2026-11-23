@@ -743,7 +743,7 @@ import { exactTokenShape, referencedObjectIds } from "./token-fold.js";
 import { PHASE_OF_STEP, isMainPhase, nextStep, stepUsesPriority } from "./turn.js";
 import { turnStartOf } from "./take-back.js";
 import type { Step } from "./turn.js";
-import { COMMANDER_DAMAGE_LETHAL, artManifest, viewFor } from "./view.js";
+import { COMMANDER_DAMAGE_LETHAL, artManifest, libraryTopRevealedToAll, viewFor } from "./view.js";
 import type { ArtManifestEntry, PlayerView, ViewOptions } from "./view.js";
 
 export interface DeckList {
@@ -75263,11 +75263,26 @@ controlledBy,
     // card's `cards-put-into-exile`) already describe the card where it's
     // going, so a public zone's stint covers them too.
     const startSeq = this.state.eventSeq;
+    // The top card of a library played revealed (rule 401.5: Courser of
+    // Kruphix, Lantern of Insight), put into a hand: every player saw it, as
+    // they see a card revealed and then drawn, so it stays seen for the turn
+    // the same way (`revealedThisTurn`). Only reveal effects wrote that
+    // list, and this card is shown by a rule of the view alone: drawn, it
+    // turned face down in every other seat's view of the hand it went to (a
+    // bug report, 2026-11-22). Not a card one player alone may look at.
+    const mover = this.state.objects[id];
+    const seenOnTop =
+      from === "library" &&
+      to === "hand" &&
+      mover !== undefined &&
+      this.state.zones.perPlayer[mover.owner]?.library[0] === id &&
+      libraryTopRevealedToAll(this.state, this.registry, mover.owner);
     // Zone moves interleave reads and writes too finely for point
     // invalidation — run with the computed-value cache off (and cleared on
     // the way out). See `suspendComputedCache`.
     const moved = suspendComputedCache(() => this.moveObjectUncached(id, to, enter));
     const now = this.state.objects[id]?.zone;
+    if (seenOnTop && now === "hand" && !this.state.revealedThisTurn.includes(id)) this.state.revealedThisTurn.push(id);
     const toReturn = this.exiledToReturn.get(id);
     if (toReturn !== undefined) {
       this.exiledToReturn.delete(id);
