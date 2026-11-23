@@ -14,7 +14,17 @@
 // name in `all_parts`, which the Oracle file doesn't index by printing — a
 // few dozen batched `/cards/collection` calls.
 //
-// Usage: npm run gen:oracle -w engine [-- --refresh]   (--refresh re-downloads)
+// Playtest cards (Scryfall's `playtest` promo type: the Mystery Booster
+// playtest cards, CMB2 and MB2's, and the Unknown Event ones) are kept too,
+// though no format allows them: `commander: "not_legal"` and `playtest: true`,
+// so the pool can have them for casual play the way it has banned cards
+// (rule 100.7; the user, 2026-11-23). Everything that walks the snapshot for
+// Commander cards filters on `commander === "legal"` and skips them.
+//
+// Usage: npm run gen:oracle -w engine [-- --refresh | --cached]
+//   --refresh re-downloads; --cached rebuilds from the cached bulk files
+//   without asking Scryfall whether they're current (token printings are
+//   still resolved over the network)
 
 import { createReadStream, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline";
@@ -27,10 +37,18 @@ const cacheDir = path.join(here, "../.cache/scryfall");
 const outDir = path.join(here, "../data/oracle");
 const HEADERS = { "User-Agent": "MTG-Engine-OracleSnapshot/1.0", Accept: "application/json" };
 const refresh = process.argv.includes("--refresh");
+const cachedOnly = process.argv.includes("--cached");
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function download(type) {
+  if (cachedOnly) {
+    const file = path.join(cacheDir, `${type}.jsonl.gz`);
+    const stamp = path.join(cacheDir, `${type}.updated_at`);
+    if (!existsSync(file) || !existsSync(stamp)) throw new Error(`--cached: no cached ${type} file`);
+    console.error(`${type}: cached (${readFileSync(stamp, "utf8")}), not checked`);
+    return { file, updatedAt: readFileSync(stamp, "utf8") };
+  }
   const index = await (await fetch("https://api.scryfall.com/bulk-data", { headers: HEADERS })).json();
   const entry = index.data.find((b) => b.type === type);
   if (!entry) throw new Error(`no bulk file of type ${type}`);
@@ -97,13 +115,18 @@ const isPreview = (c) =>
   (c.games ?? []).includes("paper") &&
   PREVIEW_SET_TYPES.has(c.set_type);
 
+// A playtest plane, vanguard or emblem isn't a card a deck holds.
+const NOT_DECK_LAYOUTS = new Set(["planar", "vanguard", "emblem", "scheme"]);
+
 const cards = [];
 const tokenIds = new Set();
 for await (const c of jsonLines(oracle.file)) {
   const isToken = c.layout === "token" || c.layout === "double_faced_token";
   const preview = !isToken && isPreview(c);
+  const playtest =
+    !isToken && (c.promo_types ?? []).includes("playtest") && !NOT_DECK_LAYOUTS.has(c.layout);
   const legality = preview ? "legal" : c.legalities?.commander;
-  if (!isToken && legality !== "legal" && legality !== "banned") continue;
+  if (!isToken && !playtest && legality !== "legal" && legality !== "banned") continue;
   const parts = (c.all_parts ?? []).filter((p) => p.component === "token" && p.id !== c.id);
   for (const p of parts) tokenIds.add(p.id);
   const multi = c.card_faces !== undefined && c.oracle_text === undefined;
@@ -116,6 +139,7 @@ for await (const c of jsonLines(oracle.file)) {
     layout: c.layout,
     commander: isToken ? "token" : legality,
     preview: preview ? c.released_at : undefined,
+    playtest: playtest || undefined,
     cmc: c.cmc,
     color_identity: c.color_identity,
     colors: c.colors,
@@ -126,6 +150,14 @@ for await (const c of jsonLines(oracle.file)) {
     token_ids: parts.length ? parts.map((p) => p.id) : undefined,
     rulings: rulings.get(c.oracle_id),
   });
+}
+
+// A playtest card that shares its name with a real card (CMB2's Pick Your
+// Poison, before MKM's) is dropped: the pool and every lookup hold one card a
+// name, and the real one is it.
+{
+  const real = new Set(cards.filter((c) => !c.playtest && c.commander !== "token").map((c) => c.name));
+  for (let i = cards.length - 1; i >= 0; i--) if (cards[i].playtest && real.has(cards[i].name)) cards.splice(i, 1);
 }
 
 // Resolve the token printings `all_parts` names, 75 identifiers a request.
