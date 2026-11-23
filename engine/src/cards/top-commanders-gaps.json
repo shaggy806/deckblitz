@@ -3231,7 +3231,8 @@
   "effect:discard-one-of-drawn",
   "decision:may-in-prevention-followup",
   "effect:each-player-chooses-permanents-rest-phase-out",
-  "effect:repeat-choice-excluding-earlier-passes"
+  "effect:repeat-choice-excluding-earlier-passes",
+  "mechanic:secret-choice"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -16491,7 +16491,7 @@ function eachPlayerMayAsks(
 }
 
 function isPlayerSlotRef(who: PlayerScope): who is Exclude<PlayerRef, string> {
-  return typeof who === "object" && !("otherThan" in who);
+  return typeof who === "object" && !("otherThan" in who) && !("youAnd" in who);
 }
 
 /**

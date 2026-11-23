@@ -293,6 +293,7 @@ import _poolEther from "../pool/ether.js";
 import _poolEunuchsIntrigues from "../pool/eunuchs-intrigues.js";
 import _poolEverglades from "../pool/everglades.js";
 import _poolExaltedAngel from "../pool/exalted-angel.js";
+import _poolExpertLevelSafe from "../pool/expert-level-safe.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolExtraordinaryJourney from "../pool/extraordinary-journey.js";
 import _poolEyesEverywhere from "../pool/eyes-everywhere.js";
@@ -1366,6 +1367,7 @@ const shard: CardShard = {
     _poolEunuchsIntrigues,
     _poolEverglades,
     _poolExaltedAngel,
+    _poolExpertLevelSafe,
     _poolExtractPower,
     _poolExtraordinaryJourney,
     _poolEyesEverywhere,

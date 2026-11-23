@@ -548,6 +548,7 @@ import _poolMageRingResponder from "../pool/mage-ring-responder.js";
 import _poolMagneticMountain from "../pool/magnetic-mountain.js";
 import _poolMagusOfTheBalance from "../pool/magus-of-the-balance.js";
 import _poolMajorTeroh from "../pool/major-teroh.js";
+import _poolMalikGrimManipulator from "../pool/malik-grim-manipulator.js";
 import _poolMammothHarness from "../pool/mammoth-harness.js";
 import _poolManaCrypt from "../pool/mana-crypt.js";
 import _poolManaforgeCinder from "../pool/manaforge-cinder.js";
@@ -1603,6 +1604,7 @@ const shard: CardShard = {
     _poolMagneticMountain,
     _poolMagusOfTheBalance,
     _poolMajorTeroh,
+    _poolMalikGrimManipulator,
     _poolMammothHarness,
     _poolManaCrypt,
     _poolManaforgeCinder,

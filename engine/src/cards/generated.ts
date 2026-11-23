@@ -9094,6 +9094,7 @@ import _poolExperimentalLabStaffRoom from "./pool/experimental-lab-staff-room.js
 import _poolExperimentalLab from "./pool/experimental-lab.js";
 import _poolExperimentalOverload from "./pool/experimental-overload.js";
 import _poolExperimentalSynthesizer from "./pool/experimental-synthesizer.js";
+import _poolExpertLevelSafe from "./pool/expert-level-safe.js";
 import _poolExplodingBarrel from "./pool/exploding-barrel.js";
 import _poolExplodingBorders from "./pool/exploding-borders.js";
 import _poolExplorationBroodship from "./pool/exploration-broodship.js";
@@ -17010,6 +17011,7 @@ import _poolMaliciousInvader from "./pool/malicious-invader.js";
 import _poolMaliciousMalfunction from "./pool/malicious-malfunction.js";
 import _poolMalignantGrowth from "./pool/malignant-growth.js";
 import _poolMalignus from "./pool/malignus.js";
+import _poolMalikGrimManipulator from "./pool/malik-grim-manipulator.js";
 import _poolMalleableImpostor from "./pool/malleable-impostor.js";
 import _poolMammothBellow from "./pool/mammoth-bellow.js";
 import _poolMammothGrowth from "./pool/mammoth-growth.js";
@@ -42959,6 +42961,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolExperimentalLab,
   _poolExperimentalOverload,
   _poolExperimentalSynthesizer,
+  _poolExpertLevelSafe,
   _poolExplodingBarrel,
   _poolExplodingBorders,
   _poolExplorationBroodship,
@@ -50875,6 +50878,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMaliciousMalfunction,
   _poolMalignantGrowth,
   _poolMalignus,
+  _poolMalikGrimManipulator,
   _poolMalleableImpostor,
   _poolMammothBellow,
   _poolMammothGrowth,
@@ -76837,6 +76841,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/experimental-lab": _poolExperimentalLab,
   "pool/experimental-overload": _poolExperimentalOverload,
   "pool/experimental-synthesizer": _poolExperimentalSynthesizer,
+  "pool/expert-level-safe": _poolExpertLevelSafe,
   "pool/exploding-barrel": _poolExplodingBarrel,
   "pool/exploding-borders": _poolExplodingBorders,
   "pool/exploration-broodship": _poolExplorationBroodship,
@@ -84753,6 +84758,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/malicious-malfunction": _poolMaliciousMalfunction,
   "pool/malignant-growth": _poolMalignantGrowth,
   "pool/malignus": _poolMalignus,
+  "pool/malik-grim-manipulator": _poolMalikGrimManipulator,
   "pool/malleable-impostor": _poolMalleableImpostor,
   "pool/mammoth-bellow": _poolMammothBellow,
   "pool/mammoth-growth": _poolMammothGrowth,
