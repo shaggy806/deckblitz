@@ -40,7 +40,7 @@ import type { GameObject, GameState } from "../state.js";
 import { LANDWALK } from "../subtypes.js";
 import { permanentSource, protectionBlocks } from "../targeting.js";
 import { aimNames, playerTestHolds, recordsOfKind, recordsOn } from "./rules.js";
-import { attackCovers } from "./tax.js";
+import { attackCovers, attackIsFree } from "./tax.js";
 import type { AttackAim, AttackerAim, CantAttack, CantBlock, MustAttack, RuleInForce } from "./rules.js";
 
 
@@ -947,11 +947,19 @@ export function attackRequirementsForbid(
   const aimed = aimedRequirements(state, registry, attacker);
   if (others.length === 0 && aimed.length === 0) return false;
   const here = aimedRequirementsObeyed(state, registry, others, aimed, object, defender);
+  // A defender it costs something to attack (Ghostly Prison) forbids no
+  // other: rule 508.1d never obliges a player to pay so that a requirement is
+  // obeyed. A goaded creature whose only other player is behind an attack
+  // tax may be sent at its goader, and, unpaid, must be: "attacks each combat
+  // if able" is still obeyed there (701.15b). Left out, the goader was no
+  // defender at all and the creature stayed home (a kept live game,
+  // 2026-11-22).
   return legalDefenders(state, registry, player).some(
     (other) =>
       other !== defender &&
       aimedRequirementsObeyed(state, registry, others, aimed, object, other) > here &&
-      whyCannotAttack(state, registry, player, attacker, other, asOf) === null,
+      whyCannotAttack(state, registry, player, attacker, other, asOf) === null &&
+      attackIsFree(state, registry, attacker, other),
   );
 }
 

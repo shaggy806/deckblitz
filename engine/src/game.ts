@@ -78,10 +78,10 @@ import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
 import { blockTaxTotal } from "./combat/blocking.js";
 import {
   attackCostAmong,
-  attackCovers,
   blockTaxRates,
   creatureAttackPermanentTaxes,
   creatureAttackTax,
+  defenderAttackTax,
 } from "./combat/tax.js";
 import { ableInCompany, attackCompanyOf } from "./combat/company.js";
 import { attackCaps, blockersLeft } from "./combat/limits.js";
@@ -10410,29 +10410,9 @@ export class Game {
    * pips it costs as well, as symbols — Norn's Annex's "{W/P}", two of them
    * under two Annexes — each paid with its mana or 2 life (rule 107.4f). */
   private attackTaxOn(defender: PlayerId | ObjectId): { generic: number; life: number; phyrexian: string } {
-    const isPlayer = this.state.players[defender as PlayerId] !== undefined;
-    const guarded = isPlayer ? (defender as PlayerId) : this.state.objects[defender as ObjectId]?.controller;
-    const covered = (covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all", owner: PlayerId): boolean =>
-      attackCovers(this.state, this.registry, covers, owner, defender);
-    let generic = 0;
-    let life = 0;
-    let phyrexian = "";
-    if (guarded !== undefined) {
-      for (const { source, ability } of this.activeStaticsOf(guarded, (a) => a.attackTax !== undefined)) {
-        const tax = ability.attackTax!;
-        if (!covered(tax.covers ?? "you", guarded)) continue;
-        const amount = tax.generic ?? 0;
-        generic += typeof amount === "number" ? amount : countValue(amount, this.state, this.registry, source.controller);
-        life += tax.life ?? 0;
-        if (tax.phyrexian !== undefined) phyrexian += `{${tax.phyrexian}/P}`;
-      }
-    }
-    for (const { owner, attackTax } of this.state.playerEffects ?? []) {
-      if (attackTax === undefined || !covered(attackTax.covers, owner)) continue;
-      generic += attackTax.generic;
-      life += attackTax.life;
-    }
-    return { generic, life, phyrexian };
+    // Read off the board by `combat/tax.ts`, where the attack requirements
+    // ask the same thing (`attackIsFree`): one reading for both.
+    return defenderAttackTax(this.state, this.registry, defender);
   }
 
   /** What `declarations` cost to attack in all (rule 508.1h): each creature's

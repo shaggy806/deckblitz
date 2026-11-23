@@ -15,6 +15,7 @@ import {
   sacrificeProhibitedByController,
   computeCharacteristics,
   countValue,
+  emblemStatics,
   hasLostAbilities,
   staticConditionMet,
   staticReaches,
@@ -43,6 +44,69 @@ export function attackCovers(
   if (isPlayer || covers === "you-and-permanents") return covers !== "planeswalkers";
   if (covers === "you" || object === undefined) return false;
   return computeCharacteristics(state, registry, object.id).types.includes("planeswalker");
+}
+
+/**
+ * What one creature attacking `defender` costs whatever it is (rule 508.1h),
+ * in generic mana, in life and in Phyrexian pips (as symbols — Norn's Annex's
+ * "{W/P}", two under two Annexes, each paid with its mana or 2 life, rule
+ * 107.4f): every `attackTax` static of the permanents and emblems of the
+ * player being protected, and every `attackTax` player effect, that covers
+ * this defender, added up — two Ghostly Prisons are {4} a creature. A
+ * planeswalker isn't "you" (Ghostly Prison's ruling), so what covers it is
+ * only what says so; a battle is neither. A creature's own tax
+ * ({@link creatureAttackTax}) is on top.
+ */
+export function defenderAttackTax(
+  state: GameState,
+  registry: CardRegistry,
+  defender: PlayerId | ObjectId,
+): { generic: number; life: number; phyrexian: string } {
+  const isPlayer = state.players[defender as PlayerId] !== undefined;
+  const guarded = isPlayer ? (defender as PlayerId) : state.objects[defender as ObjectId]?.controller;
+  let generic = 0;
+  let life = 0;
+  let phyrexian = "";
+  const add = (source: GameObject, ability: StaticAbility, owner: PlayerId): void => {
+    const tax = ability.attackTax;
+    if (tax === undefined || !attackCovers(state, registry, tax.covers ?? "you", owner, defender)) return;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) return;
+    const amount = tax.generic ?? 0;
+    generic += typeof amount === "number" ? amount : countValue(amount, state, registry, source.controller);
+    life += tax.life ?? 0;
+    if (tax.phyrexian !== undefined) phyrexian += `{${tax.phyrexian}/P}`;
+  };
+  if (guarded !== undefined && state.players[guarded]?.hasLost === false) {
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || source.controller !== guarded) continue;
+      const statics = registry.get(rulesTextName(source)).static;
+      if (!statics.some((a) => a.attackTax !== undefined) || hasLostAbilities(state, registry, source)) continue;
+      for (const ability of statics) add(source, ability, guarded);
+    }
+    for (const { source, ability } of emblemStatics(state, guarded)) add(source, ability, guarded);
+  }
+  for (const { owner, attackTax } of state.playerEffects ?? []) {
+    if (attackTax === undefined || !attackCovers(state, registry, attackTax.covers, owner, defender)) continue;
+    generic += attackTax.generic;
+    life += attackTax.life;
+  }
+  return { generic, life, phyrexian };
+}
+
+/** Whether `attacker` attacking `defender` costs nothing at all: no tax on
+ * the defender and none of the creature's own. Rule 508.1d never obliges a
+ * player to pay a cost so that a requirement is obeyed. */
+export function attackIsFree(
+  state: GameState,
+  registry: CardRegistry,
+  attacker: ObjectId,
+  defender: PlayerId | ObjectId,
+): boolean {
+  const { generic, life, phyrexian } = defenderAttackTax(state, registry, defender);
+  if (generic !== 0 || life !== 0 || phyrexian !== "") return false;
+  const own = creatureAttackTax(state, registry, attacker, defender);
+  return own.generic === 0 && own.life === 0 && own.permanents === undefined;
 }
 
 interface TaxSource {
