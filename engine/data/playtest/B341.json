@@ -1,0 +1,5913 @@
+{
+  "batch": "B341",
+  "status": "done",
+  "ranks": "playtest cards (Scryfall's playtest promo type: Unknown Event, CMB2, MB2, promos) — no EDHREC rank, no format; authored only where no engine work was needed (the user, 2026-11-23)",
+  "authored": [
+    {
+      "name": "17-Year Cicadas",
+      "files": [
+        "src/cards/pool/17-year-cicadas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aetherflux Car",
+      "files": [
+        "src/cards/pool/aetherflux-car.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aggressive Crag",
+      "files": [
+        "src/cards/pool/aggressive-crag.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Anax and Cymede & Kynaios and Tiro",
+      "files": [
+        "src/cards/pool/anax-and-cymede-kynaios-and-tiro.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Another Night in Vegas",
+      "files": [
+        "src/cards/pool/another-night-in-vegas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Artifact Unknown Shores",
+      "files": [
+        "src/cards/pool/artifact-unknown-shores.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Arvad of the Weatherlight",
+      "files": [
+        "src/cards/pool/arvad-of-the-weatherlight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ate-o'-Clock",
+      "files": [
+        "src/cards/pool/ate-o-clock.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avacyn and Griselbrand",
+      "files": [
+        "src/cards/pool/avacyn-and-griselbrand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Avacyn's Collar, the Symbol of Her Church",
+      "files": [
+        "src/cards/pool/avacyns-collar-the-symbol-of-her-church.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bag of Stroopwafels",
+      "files": [
+        "src/cards/pool/bag-of-stroopwafels.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Banding Sliver",
+      "files": [
+        "src/cards/pool/banding-sliver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Barry's Land",
+      "files": [
+        "src/cards/pool/barrys-land.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Believe in the Cleave",
+      "files": [
+        "src/cards/pool/believe-in-the-cleave.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Black Tulip",
+      "files": [
+        "src/cards/pool/black-tulip.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bob the Claymore",
+      "files": [
+        "src/cards/pool/bob-the-claymore.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bolshack Dragon",
+      "files": [
+        "src/cards/pool/bolshack-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cat Oven",
+      "files": [
+        "src/cards/pool/cat-oven.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Catch-Up Mechanic",
+      "files": [
+        "src/cards/pool/catch-up-mechanic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Char-Dog",
+      "files": [
+        "src/cards/pool/char-dog.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Chimney Goyf",
+      "files": [
+        "src/cards/pool/chimney-goyf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cinnamon, Seasoned Steed",
+      "files": [
+        "src/cards/pool/cinnamon-seasoned-steed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Color Pie",
+      "files": [
+        "src/cards/pool/color-pie.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Colossal Dreadmaw and Storm Crow",
+      "files": [
+        "src/cards/pool/colossal-dreadmaw-and-storm-crow.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Command Mine",
+      "files": [
+        "src/cards/pool/command-mine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Common Black Removal",
+      "files": [
+        "src/cards/pool/common-black-removal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Corrupted Key",
+      "files": [
+        "src/cards/pool/corrupted-key.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Cyclopean Titan",
+      "files": [
+        "src/cards/pool/cyclopean-titan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dairy Cow",
+      "files": [
+        "src/cards/pool/dairy-cow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Daxiver, Izzet Electromancer",
+      "files": [
+        "src/cards/pool/daxiver-izzet-electromancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Deep Dish Pizza",
+      "files": [
+        "src/cards/pool/deep-dish-pizza.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Delve too Deep",
+      "files": [
+        "src/cards/pool/delve-too-deep.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devoted Abzan",
+      "files": [
+        "src/cards/pool/devoted-abzan.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devoted Jeskai",
+      "files": [
+        "src/cards/pool/devoted-jeskai.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devoted Mardu",
+      "files": [
+        "src/cards/pool/devoted-mardu.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devoted Sultai",
+      "files": [
+        "src/cards/pool/devoted-sultai.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Devoted Temur",
+      "files": [
+        "src/cards/pool/devoted-temur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Drop Bear",
+      "files": [
+        "src/cards/pool/drop-bear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dwarven Confluencer",
+      "files": [
+        "src/cards/pool/dwarven-confluencer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Efteekay, Flame of the Kav",
+      "files": [
+        "src/cards/pool/efteekay-flame-of-the-kav.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eldest Dragon Highlander",
+      "files": [
+        "src/cards/pool/eldest-dragon-highlander.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Elemental, My Dear",
+      "files": [
+        "src/cards/pool/elemental-my-dear.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emerin, Shivan Angel",
+      "files": [
+        "src/cards/pool/emerin-shivan-angel.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Emrakul and Chatterfang",
+      "files": [
+        "src/cards/pool/emrakul-and-chatterfang.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Enchanted Prairie",
+      "files": [
+        "src/cards/pool/enchanted-prairie.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Enchantmentize",
+      "files": [
+        "src/cards/pool/enchantmentize.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Establishing Shot",
+      "files": [
+        "src/cards/pool/establishing-shot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Evil Boros Charm",
+      "files": [
+        "src/cards/pool/evil-boros-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Famous Museum",
+      "files": [
+        "src/cards/pool/famous-museum.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Farseeing Flockmate",
+      "files": [
+        "src/cards/pool/farseeing-flockmate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fear of Fear Itself",
+      "files": [
+        "src/cards/pool/fear-of-fear-itself.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "First Stage of Magic Design",
+      "files": [
+        "src/cards/pool/first-stage-of-magic-design.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Force of Rowan",
+      "files": [
+        "src/cards/pool/force-of-rowan.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Forestfolk",
+      "files": [
+        "src/cards/pool/forestfolk.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Frenemy of the Guildpact",
+      "files": [
+        "src/cards/pool/frenemy-of-the-guildpact.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Garruk's Lost Wolf // Hey, Has Anyone Seen Garruk?",
+      "files": [
+        "src/cards/pool/garruks-lost-wolf.ts",
+        "src/cards/pool/hey-has-anyone-seen-garruk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Generated Horizons",
+      "files": [
+        "src/cards/pool/generated-horizons.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gerrard and Hanna",
+      "files": [
+        "src/cards/pool/gerrard-and-hanna.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gingerbehemoth",
+      "files": [
+        "src/cards/pool/gingerbehemoth.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glorious Dragon-Kin",
+      "files": [
+        "src/cards/pool/glorious-dragon-kin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Gobland",
+      "files": [
+        "src/cards/pool/gobland.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Goblin Savant",
+      "files": [
+        "src/cards/pool/goblin-savant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Golgari Death Swarm",
+      "files": [
+        "src/cards/pool/golgari-death-swarm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Gorilla Tactics",
+      "files": [
+        "src/cards/pool/gorilla-tactics.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Graveyard Dig",
+      "files": [
+        "src/cards/pool/graveyard-dig.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Growth Charm",
+      "files": [
+        "src/cards/pool/growth-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "HONK!",
+      "files": [
+        "src/cards/pool/honk.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hish of the Snake Cult",
+      "files": [
+        "src/cards/pool/hish-of-the-snake-cult.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hound of Urabrask",
+      "files": [
+        "src/cards/pool/hound-of-urabrask.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "How to Keep an Izzet Mage Busy",
+      "files": [
+        "src/cards/pool/how-to-keep-an-izzet-mage-busy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Imaginary Friends",
+      "files": [
+        "src/cards/pool/imaginary-friends.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Incisor Steed",
+      "files": [
+        "src/cards/pool/incisor-steed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Indicate",
+      "files": [
+        "src/cards/pool/indicate.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Isamaru and Yoshimaru",
+      "files": [
+        "src/cards/pool/isamaru-and-yoshimaru.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jasconian Isle",
+      "files": [
+        "src/cards/pool/jasconian-isle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Jeska and Kamahl",
+      "files": [
+        "src/cards/pool/jeska-and-kamahl.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jitte and Divining Top",
+      "files": [
+        "src/cards/pool/jitte-and-divining-top.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Joraga Peach",
+      "files": [
+        "src/cards/pool/joraga-peach.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kamigawa Charm",
+      "files": [
+        "src/cards/pool/kamigawa-charm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Karlov's Crossbow",
+      "files": [
+        "src/cards/pool/karlovs-crossbow.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kevin, Questing Dragon",
+      "files": [
+        "src/cards/pool/kevin-questing-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Khod, Etlan Shiis Envoy",
+      "files": [
+        "src/cards/pool/khod-etlan-shiis-envoy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kibo's Bananamobile",
+      "files": [
+        "src/cards/pool/kibos-bananamobile.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Knowing // Half the Battle",
+      "files": [
+        "src/cards/pool/half-the-battle.ts",
+        "src/cards/pool/knowing-half-the-battle.ts",
+        "src/cards/pool/knowing.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Koma and Toski, Compleated",
+      "files": [
+        "src/cards/pool/koma-and-toski-compleated.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Kozilek, Compleated",
+      "files": [
+        "src/cards/pool/kozilek-compleated.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lander Rizzi",
+      "files": [
+        "src/cards/pool/lander-rizzi.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lantern of Undersight",
+      "files": [
+        "src/cards/pool/lantern-of-undersight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Leisure Bicycle",
+      "files": [
+        "src/cards/pool/leisure-bicycle.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Life Cloud",
+      "files": [
+        "src/cards/pool/life-cloud.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Liliana's Other Contract // Liliana's Undead Minion",
+      "files": [
+        "src/cards/pool/lilianas-other-contract.ts",
+        "src/cards/pool/lilianas-undead-minion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Literal Delver of Secrets",
+      "files": [
+        "src/cards/pool/literal-delver-of-secrets.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Locus Cobra",
+      "files": [
+        "src/cards/pool/locus-cobra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Luxior, Ignited",
+      "files": [
+        "src/cards/pool/luxior-ignited.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "MagicConsecrated Sphinx",
+      "files": [
+        "src/cards/pool/magicconsecrated-sphinx.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Magus of the Chains",
+      "files": [
+        "src/cards/pool/magus-of-the-chains.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Manakin and Millikin",
+      "files": [
+        "src/cards/pool/manakin-and-millikin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Math is for Blockers",
+      "files": [
+        "src/cards/pool/math-is-for-blockers.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mindslaver Toolkit",
+      "files": [
+        "src/cards/pool/mindslaver-toolkit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "More of That Strange Oil...",
+      "files": [
+        "src/cards/pool/more-of-that-strange-oil.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Moth Herb Elixir",
+      "files": [
+        "src/cards/pool/moth-herb-elixir.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mox Poison",
+      "files": [
+        "src/cards/pool/mox-poison.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "My Deck is About a Seven",
+      "files": [
+        "src/cards/pool/my-deck-is-about-a-seven.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Myojin of Night's Reach and Grim Betrayal",
+      "files": [
+        "src/cards/pool/myojin-of-nights-reach-and-grim-betrayal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "New Master of Arms",
+      "files": [
+        "src/cards/pool/new-master-of-arms.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Night Out in Vegas",
+      "files": [
+        "src/cards/pool/night-out-in-vegas.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nim Mongoose",
+      "files": [
+        "src/cards/pool/nim-mongoose.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Norin and Feldon",
+      "files": [
+        "src/cards/pool/norin-and-feldon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Noxious Bayou",
+      "files": [
+        "src/cards/pool/noxious-bayou.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Oilskelion",
+      "files": [
+        "src/cards/pool/oilskelion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Omenpath to Naya",
+      "files": [
+        "src/cards/pool/omenpath-to-naya.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "One Does Not",
+      "files": [
+        "src/cards/pool/one-does-not.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "One with Death",
+      "files": [
+        "src/cards/pool/one-with-death.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Original Skullclamp",
+      "files": [
+        "src/cards/pool/original-skullclamp.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Peel Out",
+      "files": [
+        "src/cards/pool/peel-out.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Penumbra Umbra",
+      "files": [
+        "src/cards/pool/penumbra-umbra.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Personal Decoy",
+      "files": [
+        "src/cards/pool/personal-decoy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Broodstar",
+      "files": [
+        "src/cards/pool/phyrexian-broodstar.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Chimney Imp",
+      "files": [
+        "src/cards/pool/phyrexian-chimney-imp.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Esthetician",
+      "files": [
+        "src/cards/pool/phyrexian-esthetician.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Phyrexian Ornithopter",
+      "files": [
+        "src/cards/pool/phyrexian-ornithopter.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Plane-Merge Elf",
+      "files": [
+        "src/cards/pool/plane-merge-elf.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Platinum Persecutor",
+      "files": [
+        "src/cards/pool/platinum-persecutor.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Potatoes",
+      "files": [
+        "src/cards/pool/potatoes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Primetime Suspect",
+      "files": [
+        "src/cards/pool/primetime-suspect.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Processing Plant",
+      "files": [
+        "src/cards/pool/processing-plant.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Pulse of the Hunter Maze",
+      "files": [
+        "src/cards/pool/pulse-of-the-hunter-maze.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rat of God",
+      "files": [
+        "src/cards/pool/rat-of-god.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ratatwotwo",
+      "files": [
+        "src/cards/pool/ratatwotwo.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Really Charming Prince",
+      "files": [
+        "src/cards/pool/really-charming-prince.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Recycla-bird",
+      "files": [
+        "src/cards/pool/recycla-bird.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Red Priest of Yawgmoth",
+      "files": [
+        "src/cards/pool/red-priest-of-yawgmoth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Reflective Gate",
+      "files": [
+        "src/cards/pool/reflective-gate.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Riku and Riku",
+      "files": [
+        "src/cards/pool/riku-and-riku.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Rin and Seri, Inseparabler",
+      "files": [
+        "src/cards/pool/rin-and-seri-inseparabler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Riven Turnbull and Princess Lucrezia",
+      "files": [
+        "src/cards/pool/riven-turnbull-and-princess-lucrezia.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Sawtooth Avenger",
+      "files": [
+        "src/cards/pool/sawtooth-avenger.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Scaled Destruction",
+      "files": [
+        "src/cards/pool/scaled-destruction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Search Elemental",
+      "files": [
+        "src/cards/pool/search-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Seer of the Bright Side",
+      "files": [
+        "src/cards/pool/seer-of-the-bright-side.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Segovian Sword",
+      "files": [
+        "src/cards/pool/segovian-sword.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Siege Elemental",
+      "files": [
+        "src/cards/pool/siege-elemental.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Simic Slaw",
+      "files": [
+        "src/cards/pool/simic-slaw.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sliv-Mizzet, Hivemind",
+      "files": [
+        "src/cards/pool/sliv-mizzet-hivemind.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Slumbering Waterways",
+      "files": [
+        "src/cards/pool/slumbering-waterways.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Soul of Mirrodin",
+      "files": [
+        "src/cards/pool/soul-of-mirrodin.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Spaghetti Junction",
+      "files": [
+        "src/cards/pool/spaghetti-junction.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stone Drake",
+      "files": [
+        "src/cards/pool/stone-drake.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stormscale Wurm",
+      "files": [
+        "src/cards/pool/stormscale-wurm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Sword of Fire and Ice and War and Peace",
+      "files": [
+        "src/cards/pool/sword-of-fire-and-ice-and-war-and-peace.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Taiga Stadium",
+      "files": [
+        "src/cards/pool/taiga-stadium.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tarelily, Lovestruck Archer",
+      "files": [
+        "src/cards/pool/tarelily-lovestruck-archer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tarkir Charm",
+      "files": [
+        "src/cards/pool/tarkir-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Tarkir Omenpath",
+      "files": [
+        "src/cards/pool/tarkir-omenpath.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tarkiran Towelsbane",
+      "files": [
+        "src/cards/pool/tarkiran-towelsbane.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Teferi, Druid of Argoth",
+      "files": [
+        "src/cards/pool/teferi-druid-of-argoth.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Temur Elevator",
+      "files": [
+        "src/cards/pool/temur-elevator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "That's No Moonmist",
+      "files": [
+        "src/cards/pool/thats-no-moonmist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Alright Henge",
+      "files": [
+        "src/cards/pool/the-alright-henge.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Bear Force Pilot",
+      "files": [
+        "src/cards/pool/the-bear-force-pilot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Bear Force Pilot Runner",
+      "files": [
+        "src/cards/pool/the-bear-force-pilot-runner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Bearded Teakeeper",
+      "files": [
+        "src/cards/pool/the-bearded-teakeeper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Belligerent and Useless Island",
+      "files": [
+        "src/cards/pool/the-belligerent-and-useless-island.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Bird Champion",
+      "files": [
+        "src/cards/pool/the-bird-champion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Bringer of the Red Beard",
+      "files": [
+        "src/cards/pool/the-bringer-of-the-red-beard.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Bus Runner",
+      "files": [
+        "src/cards/pool/the-bus-runner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Cookout Creator",
+      "files": [
+        "src/cards/pool/the-cookout-creator.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Covert Blue Mage",
+      "files": [
+        "src/cards/pool/the-covert-blue-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Crafter",
+      "files": [
+        "src/cards/pool/the-crafter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Dilu Horse",
+      "files": [
+        "src/cards/pool/the-dilu-horse.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Forgotten Place",
+      "files": [
+        "src/cards/pool/the-forgotten-place.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Great Juggernaut",
+      "files": [
+        "src/cards/pool/the-great-juggernaut.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Ice Dancer",
+      "files": [
+        "src/cards/pool/the-ice-dancer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Juzam Master",
+      "files": [
+        "src/cards/pool/the-juzam-master.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Keeper of Four Scythes",
+      "files": [
+        "src/cards/pool/the-keeper-of-four-scythes.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Keeper of the Yellow Hat",
+      "files": [
+        "src/cards/pool/the-keeper-of-the-yellow-hat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Knight of Weeks",
+      "files": [
+        "src/cards/pool/the-knight-of-weeks.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Marvelous Scientist",
+      "files": [
+        "src/cards/pool/the-marvelous-scientist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Massive Zatcatl",
+      "files": [
+        "src/cards/pool/the-massive-zatcatl.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Master of Cuisine",
+      "files": [
+        "src/cards/pool/the-master-of-cuisine.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Milling Runner",
+      "files": [
+        "src/cards/pool/the-milling-runner.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "The Powerful Dragon",
+      "files": [
+        "src/cards/pool/the-powerful-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Roaring Toeclaws",
+      "files": [
+        "src/cards/pool/the-roaring-toeclaws.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Sixth Seraph",
+      "files": [
+        "src/cards/pool/the-sixth-seraph.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Spike Cactus",
+      "files": [
+        "src/cards/pool/the-spike-cactus.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Swamp Kitten",
+      "files": [
+        "src/cards/pool/the-swamp-kitten.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Value Knight",
+      "files": [
+        "src/cards/pool/the-value-knight.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Wiley Speedster",
+      "files": [
+        "src/cards/pool/the-wiley-speedster.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Then, Dreadmaws Ate Everyone",
+      "files": [
+        "src/cards/pool/then-dreadmaws-ate-everyone.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Theros Charm",
+      "files": [
+        "src/cards/pool/theros-charm.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Toe-Breaking Helmet",
+      "files": [
+        "src/cards/pool/toe-breaking-helmet.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Toothy and Zndrsplt",
+      "files": [
+        "src/cards/pool/toothy-and-zndrsplt.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Tragda, the Burner",
+      "files": [
+        "src/cards/pool/tragda-the-burner.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ulgrotha Charm",
+      "files": [
+        "src/cards/pool/ulgrotha-charm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Unicycle",
+      "files": [
+        "src/cards/pool/unicycle.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Vazal, the Compleat",
+      "files": [
+        "src/cards/pool/vazal-the-compleat.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Welcome to Mini-apolis",
+      "files": [
+        "src/cards/pool/welcome-to-mini-apolis.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Where We're Going...",
+      "files": [
+        "src/cards/pool/where-were-going.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "White Rhystic Study",
+      "files": [
+        "src/cards/pool/white-rhystic-study.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Windmill Slam",
+      "files": [
+        "src/cards/pool/windmill-slam.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wisedrafter's Will",
+      "files": [
+        "src/cards/pool/wisedrafters-will.ts"
+      ],
+      "tested": false
+    },
+    {
+      "name": "Wowzer, the Aspirational",
+      "files": [
+        "src/cards/pool/wowzer-the-aspirational.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wrath of Leknif",
+      "files": [
+        "src/cards/pool/wrath-of-leknif.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wrath of Oko",
+      "files": [
+        "src/cards/pool/wrath-of-oko.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "tokens": [
+    "src/cards/tokens/0-0-blue-elemental-token.ts",
+    "src/cards/tokens/0-0-flying-bear-vehicle-token.ts",
+    "src/cards/tokens/0-0-white-spirit-token-flying.ts",
+    "src/cards/tokens/1-1-black-cat-token.ts",
+    "src/cards/tokens/atlantakul.ts",
+    "src/cards/tokens/bling-token.ts",
+    "src/cards/tokens/chef-role-token.ts",
+    "src/cards/tokens/colossal-dreadmaw-token.ts",
+    "src/cards/tokens/covert-sunglasses.ts",
+    "src/cards/tokens/demon-token-7-7-black-red.ts",
+    "src/cards/tokens/desert-vehicle-token.ts",
+    "src/cards/tokens/eldrazi-squirrel-scion-token.ts",
+    "src/cards/tokens/forest-token.ts",
+    "src/cards/tokens/gamer-token.ts",
+    "src/cards/tokens/gorilla-token.ts",
+    "src/cards/tokens/green-blue-bird-token-flying.ts",
+    "src/cards/tokens/human-rebel-token.ts",
+    "src/cards/tokens/human-token-colorless.ts",
+    "src/cards/tokens/huntsman-role-token.ts",
+    "src/cards/tokens/mana-confluence-token.ts",
+    "src/cards/tokens/performer-token.ts",
+    "src/cards/tokens/red-beard-token.ts",
+    "src/cards/tokens/scythe-token.ts",
+    "src/cards/tokens/spirit-token-colorless-lifelink-haste.ts",
+    "src/cards/tokens/squid-token-minus-1-minus-1.ts",
+    "src/cards/tokens/syr-acha.ts",
+    "src/cards/tokens/toskis-coil.ts",
+    "src/cards/tokens/white-insect-token-flying.ts",
+    "src/cards/tokens/windmill-token.ts",
+    "src/cards/tokens/yellow-hat.ts"
+  ],
+  "blocked": [
+    {
+      "name": "A Chaotic Night in Vegas",
+      "needs": [
+        "effect:random-mode-from-other-cards"
+      ],
+      "size": "small",
+      "why": "(new) random mode among twelve modes of three other playtest cards"
+    },
+    {
+      "name": "A Container of Booster Packs",
+      "needs": [
+        "mechanic:physical-booster-packs"
+      ],
+      "size": "small",
+      "why": "(new) reveals a real container of sealed booster packs and opens one"
+    },
+    {
+      "name": "A Girl and Her Dogs",
+      "needs": [
+        "decision:name-token-freeform"
+      ],
+      "size": "small",
+      "why": "new key; the player names each legendary Dog token"
+    },
+    {
+      "name": "A Good Thing",
+      "needs": [
+        "static:own-spells-cant-affect-self"
+      ],
+      "size": "small",
+      "why": "new key; your spells and abilities can't destroy, exile, target or make you sacrifice it"
+    },
+    {
+      "name": "A-Town",
+      "needs": [
+        "meta:physical-world"
+      ],
+      "size": "small",
+      "why": "\"if you're in a city that starts with an A\""
+    },
+    {
+      "name": "Abbot of the Sacred Meeple",
+      "needs": [
+        "meta:physical-world"
+      ],
+      "size": "small",
+      "why": "references another game (Monk Track, sheep, production phases)"
+    },
+    {
+      "name": "Abian, Luvion Usurper",
+      "needs": [
+        "mechanic:become-planeswalker-player"
+      ],
+      "size": "small",
+      "why": "(new) \"you become Abian\": life total becomes loyalty, loyalty abilities paid with life"
+    },
+    {
+      "name": "Across the Multiverse",
+      "needs": [
+        "filter:card-set"
+      ],
+      "size": "small",
+      "why": "\"not from the MOM main set\" reads a card's set (new key)"
+    },
+    {
+      "name": "Advanced Tactics",
+      "needs": [
+        "mechanic:battlefield-grid"
+      ],
+      "size": "small",
+      "why": "new key; a 5x5 grid of creature positions, orthogonal-adjacency blocking and moves"
+    },
+    {
+      "name": "Adventurer Beguiler",
+      "needs": [
+        "effect:take-adventure-permission"
+      ],
+      "size": "small",
+      "why": "new key; a card on an adventure becomes on an adventure for you"
+    },
+    {
+      "name": "Aggressive Detective",
+      "needs": [
+        "condition:commanders-revealed"
+      ],
+      "size": "small",
+      "why": "new key; \"if all your commanders have been revealed\" — hidden (face-down) commanders aren't modeled"
+    },
+    {
+      "name": "Agoraphobic Phyrexian",
+      "needs": [
+        "mechanic:unknown-event-planes"
+      ],
+      "size": "small",
+      "why": "(new) turns off the Unknown Event's plane effects, which the engine doesn't model"
+    },
+    {
+      "name": "Alberix, the Trade Planet",
+      "needs": [
+        "mechanic:planet-resources"
+      ],
+      "size": "small",
+      "why": "planet resources"
+    },
+    {
+      "name": "All-Star Kicker",
+      "needs": [
+        "mechanic:assist-kicker-team-pass"
+      ],
+      "size": "small",
+      "why": "new key; another player paying the kicker, and passing the ball between teammates"
+    },
+    {
+      "name": "All-You-Can-Eat Buffet",
+      "needs": [
+        "static:library-top-is-token"
+      ],
+      "size": "small",
+      "why": "the top card of your library is a Food token while still a card"
+    },
+    {
+      "name": "Animate Spell",
+      "needs": [
+        "effect:aura-enchants-spell"
+      ],
+      "size": "small",
+      "why": "an Aura on a spell"
+    },
+    {
+      "name": "Ano'thr, Equipment Commander",
+      "needs": [
+        "condition:chosen-on-enter-any"
+      ],
+      "size": "small",
+      "why": "chosen-on-enter reads only the first of two picks"
+    },
+    {
+      "name": "Arcanum Things",
+      "needs": [
+        "effect:equipment-swap"
+      ],
+      "size": "small",
+      "why": "exchanges this Equipment with an Equipment card in hand, attaching the new one"
+    },
+    {
+      "name": "Arcbound Mamba",
+      "needs": [
+        "keyword:poison-modular"
+      ],
+      "size": "small",
+      "why": "poison modular"
+    },
+    {
+      "name": "Artist Alley",
+      "needs": [
+        "mechanic:card-art-signatures"
+      ],
+      "size": "small",
+      "why": "(new) mana colors from signatures physically on the card's art box"
+    },
+    {
+      "name": "At Least It's a Dry Heat",
+      "needs": [
+        "effect:damage-cant-be-redirected"
+      ],
+      "size": "small",
+      "why": "damage that can't be redirected or cause damage to be dealt to a player (Stuffy Doll)"
+    },
+    {
+      "name": "Auntie Ant, Ant Auntie",
+      "needs": [
+        "effect:multiblight-distribute"
+      ],
+      "size": "small",
+      "why": "multiblight"
+    },
+    {
+      "name": "Auntie Flint",
+      "needs": [
+        "mechanic:mono-eminence"
+      ],
+      "size": "small",
+      "why": "(new) static from battlefield or command zone gated on deck being mono-black"
+    },
+    {
+      "name": "Auspicious Aquarium",
+      "needs": [
+        "condition:distinct-creatures-from-type-list"
+      ],
+      "size": "small",
+      "why": "\"twelve different creatures from the above list\" is ambiguous (12 creatures vs 12 different types); win condition can't be said exactly (new key)"
+    },
+    {
+      "name": "Autumn Willow and Baron Sengir",
+      "needs": [
+        "filter:dealt-damage-to-trigger-object-this-turn"
+      ],
+      "size": "small",
+      "why": "counters on each Vampire you control that dealt damage to the dying creature this turn"
+    },
+    {
+      "name": "Awoken Nephilim",
+      "needs": [
+        "deck:name-card-at-deck-construction"
+      ],
+      "size": "small",
+      "why": "copies a Guildpact Nephilim named during deck construction"
+    },
+    {
+      "name": "Azorius Traffic Enforcement",
+      "needs": [
+        "static:suppress-backup-triggers"
+      ],
+      "size": "small",
+      "why": "opponents' entering creatures don't trigger backup; plus detain target with backup or vehicle"
+    },
+    {
+      "name": "Azra Matchthrower",
+      "needs": [
+        "mechanic:battlebond-pairing"
+      ],
+      "size": "small",
+      "why": "pairing with a battle"
+    },
+    {
+      "name": "Bad Knight",
+      "needs": [
+        "mechanic:mirran-phyrexian-teams"
+      ],
+      "size": "small",
+      "why": "Mirran/Phyrexian teams"
+    },
+    {
+      "name": "Baneslayer Aspirant",
+      "needs": [
+        "condition:has-emblem"
+      ],
+      "size": "small",
+      "why": "reads emblems"
+    },
+    {
+      "name": "Banned Eldraine Card",
+      "needs": [
+        "effect:become-copy-of-named-card-all-zones"
+      ],
+      "size": "small",
+      "why": "(new) additional-cost choice makes the card a copy of one of six named cards for the rest of the game in all zones"
+    },
+    {
+      "name": "Barce, Friend Finder",
+      "needs": [
+        "mechanic:commander-replacement-swap"
+      ],
+      "size": "small",
+      "why": "(new) partner-like deckbuilding for any legend plus a dying legend replacing one of your commanders"
+    },
+    {
+      "name": "Battle Myrsphere",
+      "needs": [
+        "cost:tap-x-battles"
+      ],
+      "size": "small",
+      "why": "tap X battles"
+    },
+    {
+      "name": "Bear with Set's Mechanic",
+      "needs": [
+        "mechanic:aggressive-combat-phase"
+      ],
+      "size": "small",
+      "why": "aggressive: an extra combat only aggressive creatures may attack in"
+    },
+    {
+      "name": "Bicycle Elemental",
+      "needs": [
+        "decision:choose-a-word"
+      ],
+      "size": "small",
+      "why": "a word chosen"
+    },
+    {
+      "name": "Bin Chicken",
+      "needs": [
+        "static:food-junk-interchangeable"
+      ],
+      "size": "small",
+      "why": "treats Food tokens as Junk tokens and vice versa; amass Birds X"
+    },
+    {
+      "name": "Bind // Liberate",
+      "needs": [
+        "meta:name-collision-check"
+      ],
+      "size": "small",
+      "why": "a face shares a real card's name (Bind; Start of Start // Finish), and the pool holds one card a name"
+    },
+    {
+      "name": "Biting Remark",
+      "needs": [
+        "trigger:scry-trigger"
+      ],
+      "size": "small",
+      "why": "scrycast: reveal it while scrying and cast it for {0}"
+    },
+    {
+      "name": "Blended Twistling",
+      "needs": [
+        "amount:devotion-to-hybrid"
+      ],
+      "size": "small",
+      "why": "devotion to hybrid mana symbols"
+    },
+    {
+      "name": "Blood Poet",
+      "needs": [
+        "mechanic:spark-abilities"
+      ],
+      "size": "small",
+      "why": "spark counters on the player, one spark ability per turn across permanents"
+    },
+    {
+      "name": "Bloodspatter Vampire",
+      "needs": [
+        "replacement:token-kind-swap"
+      ],
+      "size": "small",
+      "why": "(new) \"if an opponent would create a Clue, they create a Blood instead\": would-create-token has no swap of one token kind for another"
+    },
+    {
+      "name": "Blu, Mansion Prince",
+      "needs": [
+        "effect:random-room-card-token"
+      ],
+      "size": "small",
+      "why": "(new) choose a Room card at random from all Rooms, token copy of one half, unlocked"
+    },
+    {
+      "name": "Blue Screen of Death",
+      "needs": [
+        "mechanic:real-time-priority-clock"
+      ],
+      "size": "small",
+      "why": "real seconds"
+    },
+    {
+      "name": "Blurry Visionary",
+      "needs": [
+        "mechanic:make-mdfc-from-two-cards"
+      ],
+      "size": "small",
+      "why": "sleeves two library cards into a new modal double-faced card"
+    },
+    {
+      "name": "Blustering Barnyard",
+      "needs": [
+        "mechanic:storm-on-land"
+      ],
+      "size": "small",
+      "why": "new key; storm on a land, \"{P} worth of modes\" Channelstorm, horsemanship Horse token"
+    },
+    {
+      "name": "Bobby, Another Dwarf",
+      "needs": [
+        "trigger:sneaks-in"
+      ],
+      "size": "small",
+      "why": "sneak"
+    },
+    {
+      "name": "Boltfire",
+      "needs": [
+        "mechanic:flashforward"
+      ],
+      "size": "small",
+      "why": "flashforward"
+    },
+    {
+      "name": "Bombardment",
+      "needs": [
+        "effect:cards-become-missiles"
+      ],
+      "size": "small",
+      "why": "new key; cards you own off the battlefield lose all characteristics and become Missile sorceries"
+    },
+    {
+      "name": "Bone Rattler",
+      "needs": [
+        "mechanic:token-cards"
+      ],
+      "size": "small",
+      "why": "new key; token cards that exist in the graveyard"
+    },
+    {
+      "name": "Boulder Jockey",
+      "needs": [
+        "cost:land-drop-as-cost"
+      ],
+      "size": "small",
+      "why": "{D}: giving up a land drop as a cost"
+    },
+    {
+      "name": "Bram, Baguette Brawler",
+      "needs": [
+        "static:food-becomes-equipment"
+      ],
+      "size": "small",
+      "why": "noncreature Foods become Equipment with equip {1} and a granted static"
+    },
+    {
+      "name": "Brave Falconhawk",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "creates a Contested Game Ball token (a real card's characteristics as a token); no token printing"
+    },
+    {
+      "name": "Brigid, Who's Seen Some Stuff",
+      "needs": [
+        "keyword:thoughtweft"
+      ],
+      "size": "small",
+      "why": "thoughtweft shares printed keyword abilities among creatures with it; nimble too"
+    },
+    {
+      "name": "Bringer of Green Zenith's Twilight",
+      "needs": [
+        "cost:alt-cost-sets-x"
+      ],
+      "size": "small",
+      "why": "an alternative cost that fixes X"
+    },
+    {
+      "name": "Brutal Command",
+      "needs": [
+        "effect:cast-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "(new) cast a copy of Brute Strength (not in hand); Gingerbrute / Brute Suit / The Brute tokens attach"
+    },
+    {
+      "name": "Bucket List",
+      "needs": [
+        "mechanic:tracker-list"
+      ],
+      "size": "small",
+      "why": "new key; counters on a tracker list that isn't an object"
+    },
+    {
+      "name": "Built Bear",
+      "needs": [
+        "meta:deckbuilding-choice"
+      ],
+      "size": "small",
+      "why": "legacy circles options and recosts the card during deckbuilding"
+    },
+    {
+      "name": "Buried Ogre",
+      "needs": [
+        "mechanic:begin-game-in-graveyard"
+      ],
+      "size": "small",
+      "why": "(new) may begin the game in your graveyard, then lose 1 life"
+    },
+    {
+      "name": "Burn the Phyresis",
+      "needs": [
+        "static:poison-tolerance"
+      ],
+      "size": "small",
+      "why": "poison tolerance"
+    },
+    {
+      "name": "CGI Fight Sequence",
+      "needs": [
+        "target:defending-player-of-other-target"
+      ],
+      "size": "small",
+      "why": "a creature of the player another target attacks (508.5)"
+    },
+    {
+      "name": "Call Up Emrakul to Help",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "kicked: create a token that's a copy of the named card Emrakul, the Promised End; create-token-copy only copies objects"
+    },
+    {
+      "name": "Call from the Grave",
+      "needs": [
+        "effect:random-graveyard-then-random-creature"
+      ],
+      "size": "small",
+      "why": "a random graveyard with a creature, then a random creature from it (two-stage randomness)"
+    },
+    {
+      "name": "Can't Quite Recall",
+      "needs": [
+        "rule:forbidden-from-starting-deck"
+      ],
+      "size": "small",
+      "why": "cards forbidden from a starting deck"
+    },
+    {
+      "name": "Catch of the Day",
+      "needs": [
+        "decision:choose-characteristics-as-enters"
+      ],
+      "size": "small",
+      "why": "a menu of keywords and sizes as it enters"
+    },
+    {
+      "name": "Celestine Cave Witch",
+      "needs": [
+        "effect:curse-token-attached-to-player"
+      ],
+      "size": "small",
+      "why": "Aura Curse token attached to a player whose \"you\" is ambiguous (the token's controller vs the cursed player)"
+    },
+    {
+      "name": "Champion of the Hareish",
+      "needs": [
+        "mechanic:buddy-list"
+      ],
+      "size": "small",
+      "why": "a buddy list"
+    },
+    {
+      "name": "Chancellor of the Mulligan",
+      "needs": [
+        "mechanic:mulligan-hand-ability"
+      ],
+      "size": "small",
+      "why": "opening-hand reveal then \"target players mulligan\" mid-game"
+    },
+    {
+      "name": "Chandra's Dragonmech",
+      "needs": [
+        "effect:cast-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "a random named card cast; team deck rules"
+    },
+    {
+      "name": "Chatterstorm and Awaken the Woods",
+      "needs": [
+        "token:no-printing"
+      ],
+      "size": "small",
+      "why": "authorable, but its Forest Dryad Squirrel token has no printing in the snapshot, so a new token has no art and art-pins.test.ts fails (new key)"
+    },
+    {
+      "name": "Chatzuk, Mighty Guitarist",
+      "needs": [
+        "trigger:attacks-in-a-band"
+      ],
+      "size": "small",
+      "why": "new key; \"whenever two or more creatures you control attack in a band\""
+    },
+    {
+      "name": "Chea, Friend to Maybe Too Many",
+      "needs": [
+        "filter:familiar"
+      ],
+      "size": "small",
+      "why": "\"familiar\" is a subtype list plus any creature with \"Familiar\" in its name; a name-substring filter doesn't exist"
+    },
+    {
+      "name": "Chic // Ago",
+      "needs": [
+        "filter:name-letter-count"
+      ],
+      "size": "small",
+      "why": "counts the letters in a name"
+    },
+    {
+      "name": "Chicago Loop",
+      "needs": [
+        "cost:pay-speed"
+      ],
+      "size": "small",
+      "why": "pay speed"
+    },
+    {
+      "name": "Chronobot",
+      "needs": [
+        "mechanic:switch-upkeep-steps"
+      ],
+      "size": "small",
+      "why": "switches upkeep steps with an opponent while it's on the battlefield"
+    },
+    {
+      "name": "Clear, Fair Magic",
+      "needs": [
+        "mechanic:destroy-nonpermanent-game-objects"
+      ],
+      "size": "small",
+      "why": "emblems, the monarch, dungeons as targets"
+    },
+    {
+      "name": "Clear, the Mind",
+      "needs": [
+        "mechanic:spell-commander"
+      ],
+      "size": "small",
+      "why": "(new) a nonlegendary sorcery as commander; deck validation requires a legendary commander (canBeCommander needs legendary)"
+    },
+    {
+      "name": "Cleaver Blow",
+      "needs": [
+        "mechanic:multicleave"
+      ],
+      "size": "small",
+      "why": "multicleave: paying to delete any of 6 bracketed text spans (64 versions)"
+    },
+    {
+      "name": "Colorless Ultimatum",
+      "needs": [
+        "decision:choose-cards-from-library"
+      ],
+      "size": "small",
+      "why": "\"exiles half the cards in their library\" names neither the top nor who picks which"
+    },
+    {
+      "name": "Command From the Shadows",
+      "needs": [
+        "meta:conspiracy-face-down-commanders"
+      ],
+      "size": "small",
+      "why": "conspiracy: commanders face down and secret until first cast"
+    },
+    {
+      "name": "Command Power Plant",
+      "needs": [
+        "static:grant-ability-to-named-permanents"
+      ],
+      "size": "small",
+      "why": "abilities and mana for permanents by name"
+    },
+    {
+      "name": "Command the Chaff",
+      "needs": [
+        "effect:cast-from-outside-the-game"
+      ],
+      "size": "small",
+      "why": "an opponent's sideboard"
+    },
+    {
+      "name": "Common Curve Filler",
+      "needs": [
+        "mechanic:deckbuilding-chosen-number"
+      ],
+      "size": "small",
+      "why": "new key; a number chosen in deckbuilding writes its cost and P/T"
+    },
+    {
+      "name": "Compleated Clone Shell",
+      "needs": [
+        "effect:play-from-outside-the-game"
+      ],
+      "size": "small",
+      "why": "four random sideboard cards, one exiled face down and cast free on death"
+    },
+    {
+      "name": "Control Win Condition",
+      "needs": [
+        "amount:turns-taken"
+      ],
+      "size": "small",
+      "why": "turns taken as an amount"
+    },
+    {
+      "name": "Convention Maro",
+      "needs": [
+        "deck:choose-ability-at-deck-construction"
+      ],
+      "size": "small",
+      "why": "\"As you create your deck, choose [A] and [B]\" text options, incl. watermark/landscape and artist reads the engine doesn't model"
+    },
+    {
+      "name": "Creepy Crawler",
+      "needs": [
+        "condition:afraid-of-you"
+      ],
+      "size": "small",
+      "why": "afraid of you"
+    },
+    {
+      "name": "Crow Scarer",
+      "needs": [
+        "static:cant-attack-or-block-creatures-you-control"
+      ],
+      "size": "small",
+      "why": "new key; \"Cowards can't attack or block creatures you control\" — \"attack creatures\" has no rules meaning, so the text is ambiguous"
+    },
+    {
+      "name": "Crux of Mirrodin",
+      "needs": [
+        "filter:original-printing-set"
+      ],
+      "size": "small",
+      "why": "printing sets"
+    },
+    {
+      "name": "Dan, Shrewd Trader",
+      "needs": [
+        "cost:bargain-any-permanent"
+      ],
+      "size": "small",
+      "why": "lets bargain sacrifice any permanent; copy if bargained"
+    },
+    {
+      "name": "Davvol's Birthdaymobile",
+      "needs": [
+        "effect:create-named-card-token"
+      ],
+      "size": "small",
+      "why": "new key; a \"Carnival of Souls token\" (a token of a named card, undefined); also the Elf-died-or-Soldier-entered reduction"
+    },
+    {
+      "name": "Defender of the Queue",
+      "needs": [
+        "mechanic:positioning"
+      ],
+      "size": "small",
+      "why": "left/right seating"
+    },
+    {
+      "name": "Delphia, Undecided",
+      "needs": [
+        "filter:original-printing-set"
+      ],
+      "size": "small",
+      "why": "real-world events and printing sets"
+    },
+    {
+      "name": "Demon Detective",
+      "needs": [
+        "condition:all-commanders-revealed"
+      ],
+      "size": "small",
+      "why": "can't be cast unless all your commanders have been revealed"
+    },
+    {
+      "name": "Dialogue Tree",
+      "needs": [
+        "effect:reflexive-spell-exiles-own-card"
+      ],
+      "size": "small",
+      "why": "reflexive trigger after the sorcery resolves must exile the card from the graveyard and return it later (new key)"
+    },
+    {
+      "name": "Disguise Agent",
+      "needs": [
+        "static:grant-disguise-to-commanders"
+      ],
+      "size": "small",
+      "why": "disguise for commanders"
+    },
+    {
+      "name": "Do-Over",
+      "needs": [
+        "effect:restart-turn"
+      ],
+      "size": "small",
+      "why": "undo every game action this turn"
+    },
+    {
+      "name": "Dockbreacher",
+      "needs": [
+        "replacement:opponent-extra-treasure-draw"
+      ],
+      "size": "small",
+      "why": "new key; replaces an opponent's second and later Treasure each turn with your draw"
+    },
+    {
+      "name": "Domesticated Mammoth",
+      "needs": [
+        "effect:token-copy-enters-attached"
+      ],
+      "size": "small",
+      "why": "enters with a token copy of Pacifism attached (a replacement creating a named-card token as it enters)"
+    },
+    {
+      "name": "Domesticated Watercourse",
+      "needs": [
+        "effect:land-becomes-equipment"
+      ],
+      "size": "small",
+      "why": "(new) land becomes an Equipment artifact with equip {2} until end of turn, printed equipped-creature trigger"
+    },
+    {
+      "name": "Don't Worry About It",
+      "needs": [
+        "mechanic:enchant-card-in-hand"
+      ],
+      "size": "small",
+      "why": "(new) Aura enchanting a card in hand, cost reduction and copy on cast of that card"
+    },
+    {
+      "name": "Drake with Set's Mechanic",
+      "needs": [
+        "static:poison-tolerance"
+      ],
+      "size": "small",
+      "why": "raises the poison counters you need to lose"
+    },
+    {
+      "name": "Draw Team Lines",
+      "needs": [
+        "mechanic:race-teams"
+      ],
+      "size": "small",
+      "why": "teams"
+    },
+    {
+      "name": "Drive to Work",
+      "needs": [
+        "mechanic:real-world-speech"
+      ],
+      "size": "small",
+      "why": "\"share a story or fun fact\" gates a life gain (new key)"
+    },
+    {
+      "name": "Duelists' Convocation International",
+      "needs": [
+        "mechanic:written-random-number"
+      ],
+      "size": "small",
+      "why": "a written number"
+    },
+    {
+      "name": "Echoing Echo",
+      "needs": [
+        "effect:grant-echo"
+      ],
+      "size": "small",
+      "why": "granting echo"
+    },
+    {
+      "name": "Educated Detective",
+      "needs": [
+        "condition:all-commanders-revealed"
+      ],
+      "size": "small",
+      "why": "draws instead of surveil if all your commanders have been revealed"
+    },
+    {
+      "name": "Enolc, Perfect Clone",
+      "needs": [
+        "meta:copy-of-other-commander"
+      ],
+      "size": "small",
+      "why": "is a copy of your other partner commander, or castable as a copy of any commander"
+    },
+    {
+      "name": "Enroll in the Coalition",
+      "needs": [
+        "static:must-target-flagbearer"
+      ],
+      "size": "small",
+      "why": "the player becomes a Flagbearer that opponents must target"
+    },
+    {
+      "name": "Ensoul Ring",
+      "needs": [
+        "static:enchanted-becomes-named-card"
+      ],
+      "size": "small",
+      "why": "new key; \"Enchanted permanent is a Sol Ring\" — every characteristic overwritten by a named card's"
+    },
+    {
+      "name": "Everlasting Lich",
+      "needs": [
+        "static:cant-die"
+      ],
+      "size": "small",
+      "why": "can't die"
+    },
+    {
+      "name": "Everyone's an Impostor",
+      "needs": [
+        "mechanic:conspiracy"
+      ],
+      "size": "small",
+      "why": "conspiracies"
+    },
+    {
+      "name": "Evy, Fang Keeper",
+      "needs": [
+        "mechanic:physical-drawing"
+      ],
+      "size": "small",
+      "why": "new key; reads what a player physically draws on a card"
+    },
+    {
+      "name": "Experiment Five",
+      "needs": [
+        "cost:two-color-source-mana"
+      ],
+      "size": "small",
+      "why": "{Z} paid with mana from a source that could make two or more colors; +1/+2 counters"
+    },
+    {
+      "name": "Falko, Showoff Pilot",
+      "needs": [
+        "keyword:spectacle"
+      ],
+      "size": "small",
+      "why": "grants spectacle at mana cost minus {2} to cards in hand, gated on a Vehicle/Spacecraft's combat damage this turn"
+    },
+    {
+      "name": "Fear (split card) // Loathing",
+      "needs": [
+        "meta:name-collision-check"
+      ],
+      "size": "small",
+      "why": "the left half is named Fear, which clashes with the real card Fear already in the pool"
+    },
+    {
+      "name": "Fear of Forgetting Names",
+      "needs": [
+        "effect:lose-name"
+      ],
+      "size": "small",
+      "why": "(new) a creature loses its name; protection from creatures with no names"
+    },
+    {
+      "name": "Fear of Going 0-2 Drop",
+      "needs": [
+        "meta:event-record"
+      ],
+      "size": "small",
+      "why": "an event record"
+    },
+    {
+      "name": "Fear of Unsleeved Decks",
+      "needs": [
+        "mechanic:real-world"
+      ],
+      "size": "small",
+      "why": "new key; reads whether you play with card sleeves"
+    },
+    {
+      "name": "Fear of the Unknown",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "choose a playtest card you own from outside the game, exile it, cast it with any mana"
+    },
+    {
+      "name": "Fetching Garden",
+      "needs": [
+        "replacement:enters-tapped-if-played-from-hand"
+      ],
+      "size": "small",
+      "why": "new key; enters tapped only if played from your hand (a played land's zone isn't readable as it enters)"
+    },
+    {
+      "name": "Fifth Stage of Magic Design",
+      "needs": [
+        "mechanic:ask-person-outside-game"
+      ],
+      "size": "small",
+      "why": "asks someone outside the game"
+    },
+    {
+      "name": "Fioran Reformist",
+      "needs": [
+        "mechanic:democracy"
+      ],
+      "size": "small",
+      "why": "get rid of the monarchy and a while-on-battlefield \"democracy\" designation that also stops anyone becoming monarch"
+    },
+    {
+      "name": "Five Kids in a Trenchcoat",
+      "needs": [
+        "static:counts-as-five-creatures"
+      ],
+      "size": "small",
+      "why": "counts as five creatures for creature counts (new key)"
+    },
+    {
+      "name": "Flanking Licid",
+      "needs": [
+        "mechanic:summon-type-line"
+      ],
+      "size": "small",
+      "why": "a \"Summon Licid\" type line"
+    },
+    {
+      "name": "Flavor Disaster",
+      "needs": [
+        "mechanic:negamorph"
+      ],
+      "size": "small",
+      "why": "negamorph"
+    },
+    {
+      "name": "Fludge, Gunk Guardian",
+      "needs": [
+        "mechanic:gunk-cards"
+      ],
+      "size": "small",
+      "why": "new key; shuffles Gunk cards (cards from outside the game) into opponents' libraries"
+    },
+    {
+      "name": "Form of the Mulldrifter",
+      "needs": [
+        "static:cast-as-though-card-named"
+      ],
+      "size": "small",
+      "why": "cast as though it were another named card"
+    },
+    {
+      "name": "Form of the Stax Player",
+      "needs": [
+        "effect:token-copy-of-named-card-random"
+      ],
+      "size": "small",
+      "why": "token copy of one of six named cards chosen at random, sacrificed when it leaves (new key)"
+    },
+    {
+      "name": "Fourth Stage of Magic Design",
+      "needs": [
+        "effect:cast-as-another-card-same-cost"
+      ],
+      "size": "small",
+      "why": "cast as another card"
+    },
+    {
+      "name": "Friarball",
+      "needs": [
+        "keyword:coststorm"
+      ],
+      "size": "small",
+      "why": "coststorm"
+    },
+    {
+      "name": "Frie, Displaced in Time",
+      "needs": [
+        "trigger:exiled-by-warp"
+      ],
+      "size": "small",
+      "why": "exiled by warp"
+    },
+    {
+      "name": "Frogkin Kidnapper",
+      "needs": [
+        "mechanic:ransom"
+      ],
+      "size": "small",
+      "why": "ransom: exiled card its owner may pay {3} to get back as a special action (new key)"
+    },
+    {
+      "name": "Frontier Explorer",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "a basic Plains from outside the game: the ruling's sideboard of arbitrary basics / personal collection isn't modelled"
+    },
+    {
+      "name": "Furnace Oriflamme",
+      "needs": [
+        "mechanic:race-teams"
+      ],
+      "size": "small",
+      "why": "teams"
+    },
+    {
+      "name": "Gather, the Townsfolk",
+      "needs": [
+        "mechanic:spell-commander"
+      ],
+      "size": "small",
+      "why": "new key; a nonlegendary sorcery that can be your commander (canCommandAlone requires legendary)"
+    },
+    {
+      "name": "Gen, Confider of Ages",
+      "needs": [
+        "mechanic:release-year"
+      ],
+      "size": "small",
+      "why": "counts years of release of permanents (new key)"
+    },
+    {
+      "name": "Genevieve, Conniving Dragon",
+      "needs": [
+        "mechanic:party-die"
+      ],
+      "size": "small",
+      "why": "new key; the party die (d4/d8/d12/d20 by party size)"
+    },
+    {
+      "name": "Geometric Weird",
+      "needs": [
+        "amount:max-stack-sources-this-turn"
+      ],
+      "size": "small",
+      "why": "greatest number of spells and abilities from different sources on the stack simultaneously this turn"
+    },
+    {
+      "name": "Glade of the Pump Spells",
+      "needs": [
+        "rule:land-with-mana-cost"
+      ],
+      "size": "small",
+      "why": "a land with a mana cost"
+    },
+    {
+      "name": "Glimpse, the Unthinkable",
+      "needs": [
+        "static:cant-be-chosen"
+      ],
+      "size": "small",
+      "why": "can't be chosen and its name can't be chosen"
+    },
+    {
+      "name": "Gold Mine",
+      "needs": [
+        "meta:physical-world"
+      ],
+      "size": "small",
+      "why": "legacy nodes marked permanently on the physical card"
+    },
+    {
+      "name": "Gomif, Fast Racer",
+      "needs": [
+        "mechanic:speed"
+      ],
+      "size": "small",
+      "why": "\"your speed can increase beyond 4\""
+    },
+    {
+      "name": "Good Knight",
+      "needs": [
+        "mechanic:teams-scoring"
+      ],
+      "size": "small",
+      "why": "Phyrexian/Mirran teams and end-of-game points"
+    },
+    {
+      "name": "Grek the Ogre",
+      "needs": [
+        "effect:random-choice"
+      ],
+      "size": "small",
+      "why": "one of six tokens at random among those you don't already control"
+    },
+    {
+      "name": "Groaaaaag, Hungry Monster",
+      "needs": [
+        "mechanic:commander-suspend"
+      ],
+      "size": "small",
+      "why": "new key; suspend from the command zone with commander tax applied"
+    },
+    {
+      "name": "Growing Detective",
+      "needs": [
+        "condition:commanders-revealed"
+      ],
+      "size": "small",
+      "why": "revealed commanders"
+    },
+    {
+      "name": "Guess Who it Is!",
+      "needs": [
+        "decision:yes-no-questions"
+      ],
+      "size": "small",
+      "why": "new key; five free-form yes/no questions about a hidden card"
+    },
+    {
+      "name": "Guild Pact",
+      "needs": [
+        "effect:chosen-colors-delayed-pay"
+      ],
+      "size": "small",
+      "why": "choose two colors, add them; next upkeep pay one mana of each chosen color or lose"
+    },
+    {
+      "name": "Guilded Lotus",
+      "needs": [
+        "mechanic:pledge-guild"
+      ],
+      "size": "small",
+      "why": "new key; pledge to a two-colored guild and add mana of its colors"
+    },
+    {
+      "name": "Guildmark",
+      "needs": [
+        "mechanic:pledge-guild"
+      ],
+      "size": "small",
+      "why": "pledge to a two-colour guild for the game, mana of its colours (new key)"
+    },
+    {
+      "name": "Gunk Slug",
+      "needs": [
+        "effect:create-token-cards-into-library"
+      ],
+      "size": "small",
+      "why": "token cards into a library"
+    },
+    {
+      "name": "Hadran, Naya Sunseeder",
+      "needs": [
+        "deck:rulebreaker-min-power"
+      ],
+      "size": "small",
+      "why": "Rulebreaker lets in \"creature cards of power 4 or greater\"; RulebreakerCards has no power clause"
+    },
+    {
+      "name": "Halana and Alena and Gisa and Geralf",
+      "needs": [
+        "effect:cast-from-milled-with-riders"
+      ],
+      "size": "small",
+      "why": "new key; cast a milled creature which gains haste, becomes a Zombie and enters with X counters"
+    },
+    {
+      "name": "Halving Season",
+      "needs": [
+        "replacement:counter-replacement-players"
+      ],
+      "size": "small",
+      "why": "halves opponents' tokens and counters, each kind, rounded down (new: replacement:halve-opponent-tokens-and-counters)"
+    },
+    {
+      "name": "Heart of a Duelist",
+      "needs": [
+        "replacement:draw-from-anywhere-in-library"
+      ],
+      "size": "small",
+      "why": "you may draw cards from anywhere in your library"
+    },
+    {
+      "name": "Hero's Uncle",
+      "needs": [
+        "filter:legendary-team-up-creature"
+      ],
+      "size": "small",
+      "why": "team-up creatures"
+    },
+    {
+      "name": "Hidetsugu's Poison Rite",
+      "needs": [
+        "filter:player-target-counters"
+      ],
+      "size": "small",
+      "why": "\"target player with exactly seven poison counters\": no player target filtered by counters"
+    },
+    {
+      "name": "High Troller",
+      "needs": [
+        "static:random-targets"
+      ],
+      "size": "small",
+      "why": "all targeted spells and abilities cost {2} less and have their targets chosen randomly"
+    },
+    {
+      "name": "Higher Level Zone Monster",
+      "needs": [
+        "effect:copy-except-chosen-colors"
+      ],
+      "size": "small",
+      "why": "clone that is also the colors of your choice in addition"
+    },
+    {
+      "name": "Hosting Season",
+      "needs": [
+        "condition:real-world-date"
+      ],
+      "size": "small",
+      "why": "(new) abilities gated on the calendar date"
+    },
+    {
+      "name": "Htbr, Racetrack Referee",
+      "needs": [
+        "static:prohibit-alternative-and-free-casts"
+      ],
+      "size": "small",
+      "why": "players can't cast spells for alternative costs or without paying mana costs (new key)"
+    },
+    {
+      "name": "Huge Truck",
+      "needs": [
+        "trigger:backup-target-gains-backup"
+      ],
+      "size": "small",
+      "why": "backup granting backup"
+    },
+    {
+      "name": "I'm Going On An Adventure!",
+      "needs": [
+        "mechanic:on-an-adventure-explore"
+      ],
+      "size": "small",
+      "why": "(new) exile a creature \"on an adventure\" castable from exile by its owner, explores when it enters from there"
+    },
+    {
+      "name": "Identify the Culprit",
+      "needs": [
+        "decision:secret-choice-guess"
+      ],
+      "size": "small",
+      "why": "you secretly choose a creature and the opponent guesses which"
+    },
+    {
+      "name": "Illuminating Detective",
+      "needs": [
+        "mechanic:hidden-commanders"
+      ],
+      "size": "small",
+      "why": "(new) opponents reveal commanders; \"already revealed\" has no meaning in the engine"
+    },
+    {
+      "name": "Immersturm Battlefield",
+      "needs": [
+        "mechanic:realm-host"
+      ],
+      "size": "small",
+      "why": "realms"
+    },
+    {
+      "name": "Impatient Iguana",
+      "needs": [
+        "rule:become-starting-player"
+      ],
+      "size": "small",
+      "why": "who starts"
+    },
+    {
+      "name": "Impressive Rat",
+      "needs": [
+        "effect:hole-counter-linked-trigger"
+      ],
+      "size": "small",
+      "why": "hole counters"
+    },
+    {
+      "name": "In Residence",
+      "needs": [
+        "mechanic:introductions"
+      ],
+      "size": "small",
+      "why": "\"introduce the exiled card using an introduction you haven't used this game\" - real-world flourish"
+    },
+    {
+      "name": "Incubation Triformer",
+      "needs": [
+        "mechanic:third-face"
+      ],
+      "size": "small",
+      "why": "(new) transforms a token into a third side"
+    },
+    {
+      "name": "Incubob",
+      "needs": [
+        "mechanic:incubate"
+      ],
+      "size": "small",
+      "why": "incubate into a named card (Dark Confidant), with flashback"
+    },
+    {
+      "name": "Innistrad Charm",
+      "needs": [
+        "mechanic:unclear-oracle-wording"
+      ],
+      "size": "small",
+      "why": "new key; modes name no target or whose graveyard/hand (\"from graveyard\", \"their hand\"), so the player's choice can't be authored exactly"
+    },
+    {
+      "name": "Innocuous Insect",
+      "needs": [
+        "mechanic:buyback-permanent-spell"
+      ],
+      "size": "small",
+      "why": "buyback on a creature spell (returns to hand instead of entering)"
+    },
+    {
+      "name": "Inspirational Antelope",
+      "needs": [
+        "mechanic:legacy-word-blank"
+      ],
+      "size": "small",
+      "why": "(new) a word chosen before the game and written on the card names which spells cost less"
+    },
+    {
+      "name": "Intangible Vibes",
+      "needs": [
+        "static:all-creatures-are-tokens"
+      ],
+      "size": "small",
+      "why": "all creatures are tokens, ceasing to exist on leaving the battlefield"
+    },
+    {
+      "name": "Interplanar Brushwagg",
+      "needs": [
+        "mechanic:interplanar"
+      ],
+      "size": "small",
+      "why": "interplanar battlefield, permanents no one controls (new key)"
+    },
+    {
+      "name": "Interrogation Robot",
+      "needs": [
+        "mechanic:split-card"
+      ],
+      "size": "small",
+      "why": "needs Who // What // When // Where // Why, a five-part split card not in the pool"
+    },
+    {
+      "name": "Invasion Specialist",
+      "needs": [
+        "static:battles-have-loyalty-like-ability"
+      ],
+      "size": "small",
+      "why": "grants battles a \"-3\" ability paid by removing defense counters"
+    },
+    {
+      "name": "Investi-Gate",
+      "needs": [
+        "decision:name-guild-gate-copies"
+      ],
+      "size": "small",
+      "why": "new key; name two Ravnica guilds and copy their Gates"
+    },
+    {
+      "name": "Irrefutable Evidence",
+      "needs": [
+        "keyword:collect-evidence"
+      ],
+      "size": "small",
+      "why": "mana value 10 in your graveyard, and a trigger when it is the card collected as evidence"
+    },
+    {
+      "name": "Item Crate",
+      "needs": [
+        "effect:create-typeless-token-at-random"
+      ],
+      "size": "small",
+      "why": "random one of four tokens that are colorless with no card type, each with its own ability; no vocabulary for a typeless token or a random token pick"
+    },
+    {
+      "name": "Jeskai Baller",
+      "needs": [
+        "mechanic:rebound-permanent-spell"
+      ],
+      "size": "small",
+      "why": "rebound on a creature spell (engine's rebound is instants and sorceries only)"
+    },
+    {
+      "name": "Jiffy, Vehicle Repairer",
+      "needs": [
+        "effect:grant-jump-start"
+      ],
+      "size": "small",
+      "why": "grants jump-start to Vehicles in your graveyard, and jump-start spells aren't exiled"
+    },
+    {
+      "name": "Join the Winning Team",
+      "needs": [
+        "meta:team-points"
+      ],
+      "size": "small",
+      "why": "team points"
+    },
+    {
+      "name": "Jund 'Em Out",
+      "needs": [
+        "decision:random-mode-on-cast"
+      ],
+      "size": "small",
+      "why": "a random mode chosen as it's cast (700.2a)"
+    },
+    {
+      "name": "Just a Li'l Guy",
+      "needs": [
+        "effect:pt-locked-1-1"
+      ],
+      "size": "small",
+      "why": "can't be anything other than 1/1"
+    },
+    {
+      "name": "Kallist Rhoka",
+      "needs": [
+        "effect:exchange-copy-on-cast"
+      ],
+      "size": "small",
+      "why": "exchanges a copy on cast"
+    },
+    {
+      "name": "Kaya, Ghost Haunter",
+      "needs": [
+        "mechanic:planeswalker-haunt"
+      ],
+      "size": "small",
+      "why": "exiles itself haunting a creature and returns when it leaves; emblems reading \"haunted creature\""
+    },
+    {
+      "name": "Keeper of the Crown // Coronation of the Wilds",
+      "needs": [
+        "mechanic:legendary-mana-symbol"
+      ],
+      "size": "small",
+      "why": "new key; the {L} mana symbol (mana from a legendary source)"
+    },
+    {
+      "name": "Knight of Lost Causes",
+      "needs": [
+        "condition:way-behind-this-turn"
+      ],
+      "size": "small",
+      "why": "\"at any point during this turn\" an opponent had 10 more life / 3 more creatures / 3 more cards; needs a turn-long history of comparisons"
+    },
+    {
+      "name": "Krosan Adaptation",
+      "needs": [
+        "replacement:storm-copy-tokens-count-as-created"
+      ],
+      "size": "small",
+      "why": "new key; its ruling says the copies' tokens were \"created\" (the engine's 608.3f copies aren't)"
+    },
+    {
+      "name": "Kylem All-Star",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "new key; token copy of All that Glitters by name, attached (create-token-copy has no named-card source)"
+    },
+    {
+      "name": "Land Station",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "puts a basic land card from outside the game into your hand"
+    },
+    {
+      "name": "Largepox",
+      "needs": [
+        "effect:sacrifice-one-of-each-type-incl-tribal"
+      ],
+      "size": "small",
+      "why": "ordered chain incl. a tribal permanent and \"removes a counter from a permanent they control\" with turn-order simultaneous choices"
+    },
+    {
+      "name": "Lava, Axe",
+      "needs": [
+        "mechanic:spell-commander"
+      ],
+      "size": "small",
+      "why": "new key; a non-legendary sorcery that can be a commander (canCommandAlone requires legendary)"
+    },
+    {
+      "name": "Lazier Goblin",
+      "needs": [
+        "mechanic:motivate"
+      ],
+      "size": "small",
+      "why": "motivate"
+    },
+    {
+      "name": "Lazotep Archway",
+      "needs": [
+        "mechanic:eternalize-loses-card-types"
+      ],
+      "size": "small",
+      "why": "the ruling and the text disagree"
+    },
+    {
+      "name": "Learned Learner",
+      "needs": [
+        "condition:max-hand-size-not-seven"
+      ],
+      "size": "small",
+      "why": "new key; \"as long as you have a maximum hand size other than 7\""
+    },
+    {
+      "name": "Leech Medic",
+      "needs": [
+        "effect:create-token-card-in-hand"
+      ],
+      "size": "small",
+      "why": "(new) \"create a Leeches token card in your hand\": a token card is not conjure's card and a token in hand ceases to exist (704.5d); semantics unsettled"
+    },
+    {
+      "name": "Lich's Duel Mastery",
+      "needs": [
+        "mechanic:shields-zone"
+      ],
+      "size": "small",
+      "why": "a shields zone"
+    },
+    {
+      "name": "Life at Stake",
+      "needs": [
+        "mechanic:secret-choice"
+      ],
+      "size": "small",
+      "why": "two players secretly choose any number 0 or greater, then compare and lose life"
+    },
+    {
+      "name": "Lifening Elemental",
+      "needs": [
+        "keyword:splice"
+      ],
+      "size": "small",
+      "why": "splice of a creature card adding its lifelink keyword to the spell"
+    },
+    {
+      "name": "Lightning Colt",
+      "needs": [
+        "mechanic:instant-creature"
+      ],
+      "size": "small",
+      "why": "(new) an Instant Creature: rule 304.4 keeps instants off the battlefield, so the card needs a rules change the engine doesn't model"
+    },
+    {
+      "name": "Lona, Tracker of the Known",
+      "needs": [
+        "filter:printed-in-five-releases"
+      ],
+      "size": "small",
+      "why": "new key; reads how many English releases a card was printed in"
+    },
+    {
+      "name": "Long-Term Phyresis Study",
+      "needs": [
+        "static:poison-tolerance"
+      ],
+      "size": "small",
+      "why": "poison tolerance"
+    },
+    {
+      "name": "Look at Me, I'm R&D",
+      "needs": [
+        "effect:text-change-numbers"
+      ],
+      "size": "small",
+      "why": "text-changing numbers"
+    },
+    {
+      "name": "Loopy Lobster",
+      "needs": [
+        "mechanic:four-faced"
+      ],
+      "size": "small",
+      "why": "new key; four-faced stages cycling on tap"
+    },
+    {
+      "name": "Lord of Atlanta",
+      "needs": [
+        "filter:playtest-card"
+      ],
+      "size": "small",
+      "why": "reads \"playtest card\""
+    },
+    {
+      "name": "Lorthos, Tentacled Terror",
+      "needs": [
+        "mechanic:mono-eminence"
+      ],
+      "size": "small",
+      "why": "(new) starting hand size 8 if commander and deck mono-blue (pregame deck-identity condition)"
+    },
+    {
+      "name": "Louvaq, the Aberrant",
+      "needs": [
+        "keyword:protection-from-modified-printed"
+      ],
+      "size": "small",
+      "why": "(new) \"modified\" here means differs from its printed version, not rule 700.9's modified"
+    },
+    {
+      "name": "Lutri, Pauper Otter",
+      "needs": [
+        "mechanic:companion-expansion-symbol"
+      ],
+      "size": "small",
+      "why": "a companion condition on expansion symbols"
+    },
+    {
+      "name": "Luxior and Shadowspear",
+      "needs": [
+        "mechanic:planeswalker-equipment"
+      ],
+      "size": "small",
+      "why": "equip creature or planeswalker; equipped permanent isn't a planeswalker and is a creature"
+    },
+    {
+      "name": "Madlands",
+      "needs": [
+        "mechanic:madness-land"
+      ],
+      "size": "small",
+      "why": "madness that plays a land"
+    },
+    {
+      "name": "Maestros' Totally Safe Hideout",
+      "needs": [
+        "keyword:casualty"
+      ],
+      "size": "small",
+      "why": "land casualty: casualty as a land enters, copying the land"
+    },
+    {
+      "name": "Maeve, Wearer of Many Hats",
+      "needs": [
+        "static:roles-unlimited"
+      ],
+      "size": "small",
+      "why": "any number of Roles can be attached (suspends the Role uniqueness SBA) and a \"whenever you attach a Role\" trigger"
+    },
+    {
+      "name": "Magic Designer",
+      "needs": [
+        "filter:playtest-card"
+      ],
+      "size": "small",
+      "why": "reads \"playtest card\""
+    },
+    {
+      "name": "Mana Abundance",
+      "needs": [
+        "replacement:all-players-add-mana"
+      ],
+      "size": "small",
+      "why": "if a player would add mana, all players add that mana instead"
+    },
+    {
+      "name": "Mana Conference",
+      "needs": [
+        "effect:gain-land-types-by-vote"
+      ],
+      "size": "small",
+      "why": "secret vote of basic land types, the land gaining each voted type (new key)"
+    },
+    {
+      "name": "Mana Max, Afterburner",
+      "needs": [
+        "trigger:loses-unspent-mana"
+      ],
+      "size": "small",
+      "why": "when unspent mana is lost"
+    },
+    {
+      "name": "Map to Lorthos's Temple",
+      "needs": [
+        "mechanic:quest-checklist"
+      ],
+      "size": "small",
+      "why": "checks off three objectives, then sacrifices for a Lorthos token"
+    },
+    {
+      "name": "Marchesa's Surprise Party",
+      "needs": [
+        "mechanic:conspiracy"
+      ],
+      "size": "small",
+      "why": "conspiracy / secret-mission card in the command zone before the game (new key)"
+    },
+    {
+      "name": "Margle, Cousin of Yargle",
+      "needs": [
+        "static:cant-gain-abilities"
+      ],
+      "size": "small",
+      "why": "can't gain abilities"
+    },
+    {
+      "name": "Mark Ritual",
+      "needs": [
+        "mechanic:card-signature"
+      ],
+      "size": "small",
+      "why": "a physical signature"
+    },
+    {
+      "name": "Maro's Gone Nuts",
+      "needs": [
+        "replacement:double-doublers"
+      ],
+      "size": "small",
+      "why": "doublers doubled"
+    },
+    {
+      "name": "May of the Machine",
+      "needs": [
+        "condition:real-date"
+      ],
+      "size": "small",
+      "why": "the real date"
+    },
+    {
+      "name": "May the Mana Be with You",
+      "needs": [
+        "keyword:demonstrate"
+      ],
+      "size": "small",
+      "why": "demonstrate plus \"choose two basic land types, create the appropriate Shockland token\" (named-card tokens)"
+    },
+    {
+      "name": "Maître Tree",
+      "needs": [
+        "decision:tempting-offer-token-menu"
+      ],
+      "size": "small",
+      "why": "a tempting offer's token menu"
+    },
+    {
+      "name": "Meandered Towershell",
+      "needs": [
+        "effect:delayed-return-attacking-next-turn"
+      ],
+      "size": "small",
+      "why": "new key; granted attack trigger exiles creature and Aura, returns it attacking next turn and re-attaches the Aura"
+    },
+    {
+      "name": "Melira's Snacks",
+      "needs": [
+        "static:poison-tolerance"
+      ],
+      "size": "small",
+      "why": "Poison Tolerance raises the poison-loss threshold (new key)"
+    },
+    {
+      "name": "Memnarchitect",
+      "needs": [
+        "cost:affinity-for-not-originally-artifact-creatures"
+      ],
+      "size": "small",
+      "why": "affinity counting artifact creatures that weren't originally artifact creatures (new key)"
+    },
+    {
+      "name": "Memory Bank",
+      "needs": [
+        "mechanic:bank-across-match"
+      ],
+      "size": "small",
+      "why": "across a match"
+    },
+    {
+      "name": "Merfolk Surveyor",
+      "needs": [
+        "mechanic:explore-clash"
+      ],
+      "size": "small",
+      "why": "explore-clash is a made-up keyword action: both players reveal, lands to hand, counters per nonland, keep-or-graveyard, win by mana value"
+    },
+    {
+      "name": "Metagamer",
+      "needs": [
+        "mechanic:real-world-meta"
+      ],
+      "size": "small",
+      "why": "new key; reads the latest Mythic Championship's winning decks"
+    },
+    {
+      "name": "Microscope",
+      "needs": [
+        "effect:graveyard-card-becomes-creature"
+      ],
+      "size": "small",
+      "why": "a graveyard card becomes a creature"
+    },
+    {
+      "name": "Mijo, the Bull",
+      "needs": [
+        "replacement:damage-exactly-n-becomes"
+      ],
+      "size": "small",
+      "why": "\"would deal exactly 2 damage, deals 3 instead\"; the Rock token's granted ability sacrifices the Equipment"
+    },
+    {
+      "name": "Minnea, Planar Tourist",
+      "needs": [
+        "filter:plane-of-origin"
+      ],
+      "size": "small",
+      "why": "a card's plane of origin"
+    },
+    {
+      "name": "Mirrored Lotus",
+      "needs": [
+        "keyword:reflect"
+      ],
+      "size": "small",
+      "why": "new key; reflect (each opponent may pay to make a token copy as it enters)"
+    },
+    {
+      "name": "Mister Cheddar, Cheese Sliver",
+      "needs": [
+        "keyword:ratmanship"
+      ],
+      "size": "small",
+      "why": "ratmanship"
+    },
+    {
+      "name": "Monet, Sensei of the Sewers",
+      "needs": [
+        "keyword:ninjutsu"
+      ],
+      "size": "small",
+      "why": "\"fixed commander ninjutsu\" with commander tax, and an ETB reading whether it was ninjutsu'd (new: keyword:commander-ninjutsu-with-tax)"
+    },
+    {
+      "name": "Monster Mash-Up",
+      "needs": [
+        "effect:combine-creatures"
+      ],
+      "size": "small",
+      "why": "new key; two creature cards merged into one permanent with combined P/T and text"
+    },
+    {
+      "name": "Mothers Yamazaki",
+      "needs": [
+        "mechanic:partner-with-itself"
+      ],
+      "size": "small",
+      "why": "new key; two copies as commanders: deck validation refuses two copies of one commander"
+    },
+    {
+      "name": "Mr. Wiggles, Helpful Butterfly",
+      "needs": [
+        "mechanic:mono-eminence"
+      ],
+      "size": "small",
+      "why": "(new) pregame commander + mono-green deck identity condition"
+    },
+    {
+      "name": "Muraganda Eldrazi",
+      "needs": [
+        "mechanic:deworded"
+      ],
+      "size": "small",
+      "why": "deworded; primeval counters"
+    },
+    {
+      "name": "Must Be Knights",
+      "needs": [
+        "condition:defending-player-controls-set-code"
+      ],
+      "size": "small",
+      "why": "set codes"
+    },
+    {
+      "name": "Mysterious Confluence",
+      "needs": [
+        "effect:cast-copy-of-random-named-card"
+      ],
+      "size": "small",
+      "why": "(new) create and cast a copy of a card chosen at random from a named list"
+    },
+    {
+      "name": "Mysterious Hero",
+      "needs": [
+        "mechanic:super-secret-identity"
+      ],
+      "size": "small",
+      "why": "physical sleeves"
+    },
+    {
+      "name": "Mzed, Mercenary Leader",
+      "needs": [
+        "condition:deck-color-identity"
+      ],
+      "size": "small",
+      "why": "\"mono eminence\" reads the deck's colour identity from the command zone (new key)"
+    },
+    {
+      "name": "Naming Screen",
+      "needs": [
+        "decision:name-token-freeform"
+      ],
+      "size": "small",
+      "why": "new key; the player names tokens with up to four letters"
+    },
+    {
+      "name": "Narod, the Beige Flower",
+      "needs": [
+        "static:assign-combat-damage-by-mana-value"
+      ],
+      "size": "small",
+      "why": "damage by mana value"
+    },
+    {
+      "name": "Naturalize 2",
+      "needs": [
+        "effect:destroy-designation"
+      ],
+      "size": "small",
+      "why": "new key; destroys emblems and gameplay designations (monarch, initiative, day/night, dungeons)"
+    },
+    {
+      "name": "Naturalize the Phyresis",
+      "needs": [
+        "static:poison-tolerance"
+      ],
+      "size": "small",
+      "why": "poison tolerance"
+    },
+    {
+      "name": "Need for Speed (Not the Odyssey One)",
+      "needs": [
+        "mechanic:super-haste"
+      ],
+      "size": "small",
+      "why": "new key; speed-4 \"super haste\" (put a creature from hand attacking, pay later or lose) isn't modeled"
+    },
+    {
+      "name": "Nevermind",
+      "needs": [
+        "keyword:splice"
+      ],
+      "size": "small",
+      "why": "splice onto anything; a card with no mana cost that can't be cast"
+    },
+    {
+      "name": "New Magic Game Plus",
+      "needs": [
+        "effect:restart-game-keep-permanents"
+      ],
+      "size": "small",
+      "why": "restarts the game"
+    },
+    {
+      "name": "Night of the Flying Merfolk",
+      "needs": [
+        "mechanic:bedtime-story"
+      ],
+      "size": "small",
+      "why": "new key; no lore counter on entry, lore counters at your end step"
+    },
+    {
+      "name": "Niv-Mizzet's Diary",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "creates a token copy of Niv-Mizzet, Firemind (a card outside the game); copy-and-cast \"can't cause extra turns\" rider; trigger text typo \"cards\""
+    },
+    {
+      "name": "No-Regrets Egret",
+      "needs": [
+        "mechanic:mulligan-reveal-look-top"
+      ],
+      "size": "small",
+      "why": "a mulligan-time reveal"
+    },
+    {
+      "name": "Noble Ox",
+      "needs": [
+        "effect:become-blocked-by-source"
+      ],
+      "size": "small",
+      "why": "an attacker becomes blocked by it"
+    },
+    {
+      "name": "Now THIS Is Aether Racing",
+      "needs": [
+        "mechanic:race-teams"
+      ],
+      "size": "small",
+      "why": "teams"
+    },
+    {
+      "name": "Noyd, Keeper of the Void",
+      "needs": [
+        "mechanic:real-time-timer"
+      ],
+      "size": "small",
+      "why": "new key; a 30-minute real-time timer"
+    },
+    {
+      "name": "Occupation of Kulrath",
+      "needs": [
+        "mechanic:battle-control-point"
+      ],
+      "size": "small",
+      "why": "battle control points"
+    },
+    {
+      "name": "Occupation of Llanowar",
+      "needs": [
+        "mechanic:control-point-battle"
+      ],
+      "size": "small",
+      "why": "a Control Point battle any opponent may attack and that changes control when defeated"
+    },
+    {
+      "name": "Oddric, Lunar Marquis",
+      "needs": [
+        "mechanic:share-listed-abilities"
+      ],
+      "size": "small",
+      "why": "new key; creatures gain banding/changeling/devoid/... if any creature you control has them"
+    },
+    {
+      "name": "Old Way Phyrexian",
+      "needs": [
+        "static:lose-toxic"
+      ],
+      "size": "small",
+      "why": "\"creatures you control with toxic lose toxic and gain infect\""
+    },
+    {
+      "name": "Omnipresent Impostor",
+      "needs": [
+        "mechanic:all-card-names"
+      ],
+      "size": "small",
+      "why": "has every card name, basic creature, joins any search (new key)"
+    },
+    {
+      "name": "Oozeavite",
+      "needs": [
+        "mechanic:keyword-counters-as-plus-counters"
+      ],
+      "size": "small",
+      "why": "counters that are also +1/+1 counters"
+    },
+    {
+      "name": "Orb of Origin",
+      "needs": [
+        "supertype:poly-mono-continuous"
+      ],
+      "size": "small",
+      "why": "new supertypes"
+    },
+    {
+      "name": "Out of Town",
+      "needs": [
+        "filter:controlled-by-owner-of-exiled"
+      ],
+      "size": "small",
+      "why": "new key; trigger on a Town controlled by the owner of the card it exiled"
+    },
+    {
+      "name": "Panglacial Shinobi",
+      "needs": [
+        "mechanic:library-ninjutsu"
+      ],
+      "size": "small",
+      "why": "activated while searching a library"
+    },
+    {
+      "name": "Patient Turtle",
+      "needs": [
+        "condition:went-first"
+      ],
+      "size": "small",
+      "why": "new key; \"if you didn't go first this game\""
+    },
+    {
+      "name": "Phila, Unsealed",
+      "needs": [
+        "mechanic:real-world-event-result"
+      ],
+      "size": "small",
+      "why": "a real-world event's result"
+    },
+    {
+      "name": "Phyrexian Adapter",
+      "needs": [
+        "static:incubator-gains-token-types"
+      ],
+      "size": "small",
+      "why": "Incubator tokens' types"
+    },
+    {
+      "name": "Phyrexian Cytoshaper",
+      "needs": [
+        "static:grant-modified-evolve"
+      ],
+      "size": "small",
+      "why": "new key; Incubators get \"artifact evolve\" compared with their +1/+1 counters, not P/T"
+    },
+    {
+      "name": "Phyrexian Incubator",
+      "needs": [
+        "filter:phyrexian-back-face"
+      ],
+      "size": "small",
+      "why": "searches \"Phyrexian cards or cards with phyrexian back faces\" and incubates 2 that many times"
+    },
+    {
+      "name": "Phyrexian Seedling",
+      "needs": [
+        "mechanic:proliferatelink"
+      ],
+      "size": "small",
+      "why": "damage dealt makes you proliferate that many times, before lethal-damage checks"
+    },
+    {
+      "name": "Pinchy McStingbutt",
+      "needs": [
+        "effect:conjure-reveal"
+      ],
+      "size": "small",
+      "why": "conjure and reveal, a random name"
+    },
+    {
+      "name": "Pirk, Heroic Captain",
+      "needs": [
+        "effect:create-named-spacecraft-token"
+      ],
+      "size": "small",
+      "why": "a player-named Spacecraft token"
+    },
+    {
+      "name": "Pithing Spyglass",
+      "needs": [
+        "static:all-cards-lose-named-keyword"
+      ],
+      "size": "small",
+      "why": "name a keyword or ability word; all cards in all zones lose it and its text"
+    },
+    {
+      "name": "Plain Walker",
+      "needs": [
+        "effect:planeswalk"
+      ],
+      "size": "small",
+      "why": "planeswalking; planeswalkerwalk"
+    },
+    {
+      "name": "Planequake",
+      "needs": [
+        "mechanic:open-booster"
+      ],
+      "size": "small",
+      "why": "new key; opens a plot booster at X 10 or more"
+    },
+    {
+      "name": "Planeswalkerificate",
+      "needs": [
+        "static:toughness-is-loyalty"
+      ],
+      "size": "small",
+      "why": "the creature's toughness becomes its loyalty"
+    },
+    {
+      "name": "Plant a Sapling // Fully-Grown Treefolk",
+      "needs": [
+        "mechanic:shuffle-into-library-transformed"
+      ],
+      "size": "small",
+      "why": "new key; a spell shuffled into the library transformed"
+    },
+    {
+      "name": "Playtest Wish",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "plays a playtest card from outside the game; reads playtest status"
+    },
+    {
+      "name": "Point to the Scoreboard",
+      "needs": [
+        "meta:physical-world"
+      ],
+      "size": "small",
+      "why": "\"score one point for your team\" has no game meaning"
+    },
+    {
+      "name": "Pokey, the Scallywagg",
+      "needs": [
+        "replacement:coin-flip-as-d20-and-back"
+      ],
+      "size": "small",
+      "why": "replaces coin flips with d20 rolls and d20 rolls with coin flips, results mapped"
+    },
+    {
+      "name": "Polis the Planeshifter",
+      "needs": [
+        "mechanic:planechase"
+      ],
+      "size": "small",
+      "why": "gains the abilities of a random planechase plane and its chaos ability"
+    },
+    {
+      "name": "Power Level Analyzer",
+      "needs": [
+        "mechanic:secret-choice"
+      ],
+      "size": "small",
+      "why": "you and an opponent secretly choose 1-10 as it enters; counters = distance (or 7)"
+    },
+    {
+      "name": "Praetorhoof Behemoth",
+      "needs": [
+        "effect:reveal-any-number-from-library-and-hand"
+      ],
+      "size": "small",
+      "why": "reveals Praetors from library and hand and counts the ones \"showing\" across zones"
+    },
+    {
+      "name": "Princess Snowfall",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "(new) token copy of Seven Dwarves (not on the battlefield) then each Dwarf deals 1 damage to its own any-target"
+    },
+    {
+      "name": "Priority Avenger",
+      "needs": [
+        "condition:stack-nonempty"
+      ],
+      "size": "small",
+      "why": "instants only while the stack holds something"
+    },
+    {
+      "name": "Problematic Volcano",
+      "needs": [
+        "mechanic:volcano-sides"
+      ],
+      "size": "small",
+      "why": "left/right sides"
+    },
+    {
+      "name": "Puresteel Angel",
+      "needs": [
+        "effect:emblem-lose-itself"
+      ],
+      "size": "small",
+      "why": "emblem's would-lose-game replacement must remove the emblem and all poison counters; no \"lose this emblem\" effect"
+    },
+    {
+      "name": "Pyromancy 101",
+      "needs": [
+        "keyword:teach"
+      ],
+      "size": "small",
+      "why": "exiled taught to a creature that gains \"{T}: copy the exiled card, cast for its teach cost\""
+    },
+    {
+      "name": "Quest Compleated Beast",
+      "needs": [
+        "prohibit:remove-poison-counters"
+      ],
+      "size": "small",
+      "why": "poison counters can't be removed"
+    },
+    {
+      "name": "Questing Cosplayer",
+      "needs": [
+        "effect:role-with-abilities-of-named-card"
+      ],
+      "size": "small",
+      "why": "a Role with a named card's abilities"
+    },
+    {
+      "name": "Queue of Beetles",
+      "needs": [
+        "static:stack-fifo"
+      ],
+      "size": "small",
+      "why": "the stack resolves first-in first-out"
+    },
+    {
+      "name": "Rafi, Retro Racer",
+      "needs": [
+        "mechanic:mana-burn-combat-stack"
+      ],
+      "size": "small",
+      "why": "(new) turns on mana burn and combat damage using the stack for the rest of the game"
+    },
+    {
+      "name": "Rampant, Growth",
+      "needs": [
+        "rule:spell-commander"
+      ],
+      "size": "small",
+      "why": "a sorcery commander"
+    },
+    {
+      "name": "Rankle, Master of Pranksters",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "new key; each player creates a token copy of a card by name (random mode is fine)"
+    },
+    {
+      "name": "Ransack, the Lab",
+      "needs": [
+        "mechanic:spell-commander"
+      ],
+      "size": "small",
+      "why": "new key; a nonlegendary sorcery that can be your commander (canCommandAlone requires legendary)"
+    },
+    {
+      "name": "Red and Black Legac",
+      "needs": [
+        "stat:mana-spent-replacement"
+      ],
+      "size": "small",
+      "why": "enters with a keyword counter by colour spent, controller choosing one if both; flip result read against its keywords"
+    },
+    {
+      "name": "Retto, Family Racer",
+      "needs": [
+        "mechanic:secret-pregame-choice"
+      ],
+      "size": "small",
+      "why": "secretly written family names before the game, said aloud as they enter"
+    },
+    {
+      "name": "Reverse Ninja",
+      "needs": [
+        "keyword:ustujnin"
+      ],
+      "size": "small",
+      "why": "ustujnin"
+    },
+    {
+      "name": "Rideable Mantis",
+      "needs": [
+        "condition:saddled-by-quality"
+      ],
+      "size": "small",
+      "why": "new key; \"saddled by a blue/red/white creature this turn\" — a saddler that left the battlefield isn't seen by a controls condition"
+    },
+    {
+      "name": "Rift",
+      "needs": [
+        "rule:start-in-opening-hand"
+      ],
+      "size": "small",
+      "why": "starts in the opening hand"
+    },
+    {
+      "name": "Ring Out",
+      "needs": [
+        "trigger:from-library-cast-self"
+      ],
+      "size": "small",
+      "why": "ability that works from the library: search for itself and cast it free at a Sol Ring"
+    },
+    {
+      "name": "Rinta, Cousin of Sitka",
+      "needs": [
+        "filter:playtest-card"
+      ],
+      "size": "small",
+      "why": "reads \"playtest card\""
+    },
+    {
+      "name": "Robby, Another Dwarf",
+      "needs": [
+        "keyword:squad"
+      ],
+      "size": "small",
+      "why": "grants squad to Dwarf, legendary creature and Equipment spells, tokens not legendary"
+    },
+    {
+      "name": "Rosewater's Nemesis",
+      "needs": [
+        "static:poison-tolerance"
+      ],
+      "size": "small",
+      "why": "poison tolerance +3 changes the poison loss threshold; plus protection from Phyrexians"
+    },
+    {
+      "name": "Ruff, Underdog Champ",
+      "needs": [
+        "condition:match-history"
+      ],
+      "size": "small",
+      "why": "new key; \"if you've lost a game this match\" and Hound-is-Dog errata"
+    },
+    {
+      "name": "Rule with an Even Hand",
+      "needs": [
+        "mechanic:conspiracy"
+      ],
+      "size": "small",
+      "why": "new key; a conspiracy card in the command zone from the game's start"
+    },
+    {
+      "name": "Runed Terror",
+      "needs": [
+        "mechanic:sequential-phases"
+      ],
+      "size": "small",
+      "why": "(new) players take phases in turn order instead of whole turns"
+    },
+    {
+      "name": "Saga of Krark Losing His Thumb",
+      "needs": [
+        "mechanic:flip-ahead"
+      ],
+      "size": "small",
+      "why": "lore counters replaced by a coin flip that repeats the chapter; token copies of named cards; coin flip with an opponent"
+    },
+    {
+      "name": "Sagrada Familiar",
+      "needs": [
+        "token:stained-glass"
+      ],
+      "size": "small",
+      "why": "new key; \"Stained Glass\" is no creature type of rule 205.3m (one type or two is unclear) and the token has no printing"
+    },
+    {
+      "name": "Sarah's Wings",
+      "needs": [
+        "mechanic:player-flying"
+      ],
+      "size": "small",
+      "why": "a player with flying"
+    },
+    {
+      "name": "Save Point",
+      "needs": [
+        "effect:remove-all-from-combat-and-recombat"
+      ],
+      "size": "small",
+      "why": "remove each creature from combat, untap each that attacked, additional combat; \"only during combat before combat damage\" timing"
+    },
+    {
+      "name": "Seasoned Weaponsmith",
+      "needs": [
+        "keyword:tasty"
+      ],
+      "size": "small",
+      "why": "tasty"
+    },
+    {
+      "name": "Second City",
+      "needs": [
+        "mana:spend-only-second-spell"
+      ],
+      "size": "small",
+      "why": "mana for the second spell only"
+    },
+    {
+      "name": "Second Stage of Magic Design",
+      "needs": [
+        "condition:spell-shares-keyword-or-ability-word"
+      ],
+      "size": "small",
+      "why": "reads keywords and ability words a spell shares with your permanents and graveyard"
+    },
+    {
+      "name": "Seek Bolas's Counsel",
+      "needs": [
+        "effect:planeswalk"
+      ],
+      "size": "small",
+      "why": "planeswalks to a plane; an emblem casting from the sideboard"
+    },
+    {
+      "name": "Seventh Stage of Magic Design",
+      "needs": [
+        "static:double-all-spells-and-abilities"
+      ],
+      "size": "small",
+      "why": "every spell and ability doubled"
+    },
+    {
+      "name": "Shadowmoor Draw Spell",
+      "needs": [
+        "keyword:untap-convoke"
+      ],
+      "size": "small",
+      "why": "(new) untap tapped creatures to pay, counted as convoke"
+    },
+    {
+      "name": "Shahrazad and Sindbad",
+      "needs": [
+        "mechanic:subgame"
+      ],
+      "size": "small",
+      "why": "plays a Magic subgame"
+    },
+    {
+      "name": "Sharp Eraser",
+      "needs": [
+        "mechanic:real-world-text-edit"
+      ],
+      "size": "small",
+      "why": "erase words from a card's text before casting it (new key)"
+    },
+    {
+      "name": "Shedding Snake",
+      "needs": [
+        "effect:reset-commander-tax"
+      ],
+      "size": "small",
+      "why": "pay 2 life to reset commander tax to zero"
+    },
+    {
+      "name": "Shen, Wish Granter",
+      "needs": [
+        "effect:shuffle-token-cards-into-library"
+      ],
+      "size": "small",
+      "why": "token cards shuffled into a library"
+    },
+    {
+      "name": "Sheoldred's Terror",
+      "needs": [
+        "filter:original-printing-set"
+      ],
+      "size": "small",
+      "why": "(new) \"not originally printed in an Argentum expansion\" reads a card's first printing set"
+    },
+    {
+      "name": "Simic, Value Engine",
+      "needs": [
+        "condition:compare-opponent-last-turn"
+      ],
+      "size": "small",
+      "why": "compares with an opponent's last turn"
+    },
+    {
+      "name": "Sixth Stage of Magic Design",
+      "needs": [
+        "filter:expansion-symbol-color"
+      ],
+      "size": "small",
+      "why": "expansion symbols"
+    },
+    {
+      "name": "Slivdrazi Monstrosity",
+      "needs": [
+        "static:grant-devoid"
+      ],
+      "size": "small",
+      "why": "granting devoid"
+    },
+    {
+      "name": "Sliver of Hope",
+      "needs": [
+        "static:hope-keyword"
+      ],
+      "size": "small",
+      "why": "a new keyword \"hope\" (prevent all damage to attacking creatures with hope) granted to Slivers"
+    },
+    {
+      "name": "Slobad, Actually Just Fine",
+      "needs": [
+        "static:sacrifice-interchangeable-types"
+      ],
+      "size": "small",
+      "why": "sacrifice types interchangeable"
+    },
+    {
+      "name": "Smelt // Herd // Saw",
+      "needs": [
+        "mechanic:three-half-split"
+      ],
+      "size": "small",
+      "why": "new key; a split card with three halves (split is [card, left, right])"
+    },
+    {
+      "name": "Snap Judgment",
+      "needs": [
+        "mechanic:match-outcome"
+      ],
+      "size": "small",
+      "why": "a match's outcome"
+    },
+    {
+      "name": "Snapsail Rider",
+      "needs": [
+        "meta:match-points"
+      ],
+      "size": "small",
+      "why": "match points"
+    },
+    {
+      "name": "Sojourner's Enforcermite",
+      "needs": [
+        "keyword:affinity"
+      ],
+      "size": "small",
+      "why": "affinity for permanents \"with affinity\" and affinitycycling: no filter reads having affinity (hasKeyword has no affinity row)"
+    },
+    {
+      "name": "Sort of _____ and _____",
+      "needs": [
+        "effect:grant-half-of-named-card-trigger"
+      ],
+      "size": "small",
+      "why": "a random half of a named card"
+    },
+    {
+      "name": "Soul Drainer",
+      "needs": [
+        "effect:remove-commander-damage"
+      ],
+      "size": "small",
+      "why": "removes commander damage"
+    },
+    {
+      "name": "Soulmates",
+      "needs": [
+        "keyword:enchant-two-creatures"
+      ],
+      "size": "small",
+      "why": "an Aura enchanting two creatures (new key)"
+    },
+    {
+      "name": "Spare Changeling",
+      "needs": [
+        "trigger:pays-additional-cost"
+      ],
+      "size": "small",
+      "why": "when an additional cost is paid"
+    },
+    {
+      "name": "Spellmorph Raise Dead",
+      "needs": [
+        "mechanic:morph"
+      ],
+      "size": "small",
+      "why": "spellmorph: cast face down as a 2/2, then cast from the battlefield for its spellmorph cost"
+    },
+    {
+      "name": "Spice Rack",
+      "needs": [
+        "mechanic:max-commander-count"
+      ],
+      "size": "small",
+      "why": "(new) chosen player's maximum commander count becomes one"
+    },
+    {
+      "name": "Split into Three Parts",
+      "needs": [
+        "effect:exile-with-time-counters-and-copies-in-exile"
+      ],
+      "size": "small",
+      "why": "exiles a spell or permanent with time counters, makes token copies in exile, all gain suspend"
+    },
+    {
+      "name": "Spuzzem Strategist",
+      "needs": [
+        "decision:choices-for-controlled-permanents"
+      ],
+      "size": "small",
+      "why": "you make every choice for your Spuzzems"
+    },
+    {
+      "name": "Squidnapper",
+      "needs": [
+        "mechanic:ransom"
+      ],
+      "size": "small",
+      "why": "ransom special action to end the control change"
+    },
+    {
+      "name": "Stack of Paperwork",
+      "needs": [
+        "rules:combat-damage-uses-stack"
+      ],
+      "size": "small",
+      "why": "combat damage on the stack"
+    },
+    {
+      "name": "Start // Fire",
+      "needs": [
+        "meta:name-collision-check"
+      ],
+      "size": "small",
+      "why": "a face shares a real card's name (Bind; Start of Start // Finish), and the pool holds one card a name"
+    },
+    {
+      "name": "Starting Town NPC",
+      "needs": [
+        "static:grant-adventure"
+      ],
+      "size": "small",
+      "why": "new key; grants an Adventure (Fetch Herbs) to creature cards in hand"
+    },
+    {
+      "name": "Stika, Playtestress",
+      "needs": [
+        "filter:playtest-card"
+      ],
+      "size": "small",
+      "why": "(new) \"whenever you cast a playtest card\": no playtest flag on definitions"
+    },
+    {
+      "name": "Subgoyf",
+      "needs": [
+        "amount:distinct-noncreature-subtypes-in-graveyards"
+      ],
+      "size": "small",
+      "why": "P/T counts distinct non-creature subtypes among graveyard cards (new key)"
+    },
+    {
+      "name": "Sue, Everlasting Dinosaur",
+      "needs": [
+        "static:grant-fossilize"
+      ],
+      "size": "small",
+      "why": "new key; grants fossilize with a cost of the card's mana cost minus {2}"
+    },
+    {
+      "name": "Sunimret",
+      "needs": [
+        "keyword:reverse-miracle"
+      ],
+      "size": "small",
+      "why": "castable from the library bottom as you begin searching it"
+    },
+    {
+      "name": "Surprise, Nerd!",
+      "needs": [
+        "replacement:invert-pump"
+      ],
+      "size": "small",
+      "why": "(new) replaces +N/+N until end of turn with -N/-N"
+    },
+    {
+      "name": "Swarm of Locus",
+      "needs": [
+        "filter:locus-creature-type"
+      ],
+      "size": "small",
+      "why": "Locus as a creature type"
+    },
+    {
+      "name": "Syr Konrad's Squire",
+      "needs": [
+        "trigger:leaves-graveyard-or-phased-out"
+      ],
+      "size": "small",
+      "why": "new key; triggers on leaving your graveyard, going to library/hand and phasing out"
+    },
+    {
+      "name": "Syx, Robot Overlord",
+      "needs": [
+        "mechanic:secret-pregame-choice"
+      ],
+      "size": "small",
+      "why": "secretly written invader names before the game, an opponent's guess, then a type change"
+    },
+    {
+      "name": "TL;DR",
+      "needs": [
+        "filter:has-non-keyword-ability"
+      ],
+      "size": "small",
+      "why": "non-keyword abilities"
+    },
+    {
+      "name": "Take the High Ground",
+      "needs": [
+        "mechanic:team-points"
+      ],
+      "size": "small",
+      "why": "new key; scores a point for your team"
+    },
+    {
+      "name": "Takesies // Backsies",
+      "needs": [
+        "effect:treat-counters-as"
+      ],
+      "size": "small",
+      "why": "\"treat all counters as -1/-1 counters\"; also move up to one counter of any kind from each permanent"
+    },
+    {
+      "name": "Taught by Bruce Tarl",
+      "needs": [
+        "mechanic:commander-enchantment"
+      ],
+      "size": "small",
+      "why": "an enchantment commander; protection from Oxen"
+    },
+    {
+      "name": "Taught by Narset",
+      "needs": [
+        "mechanic:commander-enchantment"
+      ],
+      "size": "small",
+      "why": "an enchantment commander"
+    },
+    {
+      "name": "Taught by Serra",
+      "needs": [
+        "mechanic:commander-enchantment"
+      ],
+      "size": "small",
+      "why": "an enchantment commander"
+    },
+    {
+      "name": "Taught by Surrak",
+      "needs": [
+        "mechanic:commander-enchantment"
+      ],
+      "size": "small",
+      "why": "Aura that follows a commander between zones and can be cast on one in the command zone"
+    },
+    {
+      "name": "Taught by Vito",
+      "needs": [
+        "mechanic:commander-enchantment"
+      ],
+      "size": "small",
+      "why": "new key; an Aura that stays attached across zones and is cast on a commander in the command zone"
+    },
+    {
+      "name": "Tax Bolt",
+      "needs": [
+        "amount:highest-commander-tax"
+      ],
+      "size": "small",
+      "why": "the largest commander tax, not the sum"
+    },
+    {
+      "name": "Tax Draw",
+      "needs": [
+        "amount:highest-commander-tax"
+      ],
+      "size": "small",
+      "why": "the largest commander tax, not the sum"
+    },
+    {
+      "name": "Tax Hounds",
+      "needs": [
+        "amount:highest-commander-tax"
+      ],
+      "size": "small",
+      "why": "the largest commander tax, not the sum"
+    },
+    {
+      "name": "Tax Keeper",
+      "needs": [
+        "amount:highest-commander-tax"
+      ],
+      "size": "small",
+      "why": "the largest commander tax, not the sum"
+    },
+    {
+      "name": "Tax Sweeper",
+      "needs": [
+        "amount:highest-commander-tax"
+      ],
+      "size": "small",
+      "why": "the largest commander tax, not the sum"
+    },
+    {
+      "name": "Tax Taker",
+      "needs": [
+        "trigger:opponent-pays-tax"
+      ],
+      "size": "small",
+      "why": "triggers on an opponent paying a tax (any extra mana a spell or permanent you control made them pay)"
+    },
+    {
+      "name": "Team Acceleration",
+      "needs": [
+        "mechanic:race-teams"
+      ],
+      "size": "small",
+      "why": "each line is for the players on that team"
+    },
+    {
+      "name": "Team Mage",
+      "needs": [
+        "mechanic:play-teams"
+      ],
+      "size": "small",
+      "why": "\"if you're on Team Cloudspire / Speed Demons\" (new key)"
+    },
+    {
+      "name": "Team Perseverance",
+      "needs": [
+        "mechanic:unknown-event-teams"
+      ],
+      "size": "small",
+      "why": "Team Cloudspire / Team Speed Demons halves"
+    },
+    {
+      "name": "Terry Pin, Turboturtle",
+      "needs": [
+        "static:ignore-sorcery-speed-activation"
+      ],
+      "size": "small",
+      "why": "\"ignore the words Activate only as a sorcery\" (new key)"
+    },
+    {
+      "name": "That Which Was Compleated",
+      "needs": [
+        "amount:annihilator-x"
+      ],
+      "size": "small",
+      "why": "ward of poison counters, annihilator X"
+    },
+    {
+      "name": "The Actualizer",
+      "needs": [
+        "mechanic:real-world-speech"
+      ],
+      "size": "small",
+      "why": "(new) reading a card aloud, lying, opponents guessing simultaneously"
+    },
+    {
+      "name": "The Ancient Dingus",
+      "needs": [
+        "effect:play-from-outside-the-game"
+      ],
+      "size": "small",
+      "why": "physical cards outside the game"
+    },
+    {
+      "name": "The Archenemy's Charm",
+      "needs": [
+        "mechanic:scheme"
+      ],
+      "size": "small",
+      "why": "new key; modes are Archenemy scheme cards set in motion"
+    },
+    {
+      "name": "The Ash Lizard",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "new key; token copy of a card named off a list, chosen at random, not in the game"
+    },
+    {
+      "name": "The Asker of More Mana",
+      "needs": [
+        "static:every-mana-payment-tax"
+      ],
+      "size": "small",
+      "why": "new key; every mana payment by any player costs {1} more (abilities, unmorph, Ghostly Prison)"
+    },
+    {
+      "name": "The Battle of Dragon Brothers // Fate Reforged",
+      "needs": [
+        "effect:copy-card-from-outside-game"
+      ],
+      "size": "small",
+      "why": "manifests a hand; a copy of an Elder Dragon from Legends"
+    },
+    {
+      "name": "The Beleaguered Boxer",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "opens a real booster pack and permanently rewrites the deck"
+    },
+    {
+      "name": "The Brewing Chef",
+      "needs": [
+        "filter:card-text-creates-token"
+      ],
+      "size": "small",
+      "why": "reads a card's text"
+    },
+    {
+      "name": "The Caffeinated Runner",
+      "needs": [
+        "trigger:next-becomes-tapped-this-turn"
+      ],
+      "size": "small",
+      "why": "untaps the next time it becomes tapped this turn"
+    },
+    {
+      "name": "The Chaos Keeper",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "a sealed booster pack put under it"
+    },
+    {
+      "name": "The Charitable Drafter",
+      "needs": [
+        "mechanic:booster-draft"
+      ],
+      "size": "small",
+      "why": "a physical booster draft"
+    },
+    {
+      "name": "The Clever Magician",
+      "needs": [
+        "mechanic:real-world-rule-zero"
+      ],
+      "size": "small",
+      "why": "players propose and vote on a new rule for the game"
+    },
+    {
+      "name": "The Cobra King",
+      "needs": [
+        "effect:reflexive-modal-intervening-if"
+      ],
+      "size": "small",
+      "why": "\"When you do, if you control five or more Snakes and/or Serpents, choose one\" needs a reflexive trigger with an intervening if and announced targeted modes; token named Cobra Coil has no printing"
+    },
+    {
+      "name": "The Collector",
+      "needs": [
+        "filter:signed-card"
+      ],
+      "size": "small",
+      "why": "signed cards and the signer's name length - physical-card facts"
+    },
+    {
+      "name": "The Colossal Dreadmaw",
+      "needs": [
+        "static:cast-as-though-card-named"
+      ],
+      "size": "small",
+      "why": "cast as though it were another named card"
+    },
+    {
+      "name": "The Commander Recommender",
+      "needs": [
+        "mechanic:outside-deck-guessing-minigame"
+      ],
+      "size": "small",
+      "why": "a second physical deck"
+    },
+    {
+      "name": "The Companion of the Wilds",
+      "needs": [
+        "mechanic:companion"
+      ],
+      "size": "small",
+      "why": "Old Companion deck restriction and casting from outside the game; Role token attach choice"
+    },
+    {
+      "name": "The Convention Enthusiast",
+      "needs": [
+        "mechanic:real-world-other-games"
+      ],
+      "size": "small",
+      "why": "cards from other games and \"create one resource of any type\""
+    },
+    {
+      "name": "The Convincing General",
+      "needs": [
+        "mechanic:pregame-commander-choice"
+      ],
+      "size": "small",
+      "why": "as the game begins, two creature types treated as the same everywhere for the rest of the game"
+    },
+    {
+      "name": "The Cosplayzer",
+      "needs": [
+        "effect:copy-exception-grants-unprinted-self-ability"
+      ],
+      "size": "small",
+      "why": "clone that copies its first ability each turn and changes its name's first letter to Z"
+    },
+    {
+      "name": "The Countering Runner",
+      "needs": [
+        "mechanic:psychic-damage"
+      ],
+      "size": "small",
+      "why": "new key; psychic damage (a 20-point second life track) and \"ready to run\" two commanders"
+    },
+    {
+      "name": "The Crab Queen",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "new key; token copy of one of six named cards at random"
+    },
+    {
+      "name": "The Crimson Avenger",
+      "needs": [
+        "effect:reveal-until-shares-mana-value-cast"
+      ],
+      "size": "small",
+      "why": "reveals until a card shares a mana value with target spell, casts it free, revealed cards stay and are shuffled"
+    },
+    {
+      "name": "The Curve Keeper",
+      "needs": [
+        "amount:consecutive-mana-value-run"
+      ],
+      "size": "small",
+      "why": "greatest number of consecutive mana values among nonland nontoken permanents"
+    },
+    {
+      "name": "The Disciple of Nissa",
+      "needs": [
+        "effect:token-copy-of-random-card-list"
+      ],
+      "size": "small",
+      "why": "new key; token copies of random Nissa planeswalkers from a real-world list"
+    },
+    {
+      "name": "The Disciple of Vess",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "token copy of a random Liliana planeswalker from outside the game"
+    },
+    {
+      "name": "The Dogronmaster",
+      "needs": [
+        "effect:token-copy-of-named-card-attached"
+      ],
+      "size": "small",
+      "why": "creates a token copy of the card Armadillo Cloak attached to the entering creature"
+    },
+    {
+      "name": "The Duke of Midrange",
+      "needs": [
+        "effect:cast-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "casts a copy of a named card"
+    },
+    {
+      "name": "The Egotistical Velociraptor",
+      "needs": [
+        "mechanic:real-world"
+      ],
+      "size": "small",
+      "why": "new key; another person outside the game takes over your game"
+    },
+    {
+      "name": "The Fact Checker",
+      "needs": [
+        "mechanic:guess-card-replacement"
+      ],
+      "size": "small",
+      "why": "spoken guesses"
+    },
+    {
+      "name": "The Faction Dragon",
+      "needs": [
+        "mechanic:faction-watermark"
+      ],
+      "size": "small",
+      "why": "watermarks and a faction mana cost"
+    },
+    {
+      "name": "The Fearsome Flock",
+      "needs": [
+        "mechanic:split-second-level-up"
+      ],
+      "size": "small",
+      "why": "level up with split second; activating opponents' artifacts"
+    },
+    {
+      "name": "The Fifth Alias",
+      "needs": [
+        "meta:secret-list"
+      ],
+      "size": "small",
+      "why": "secret pre-game list of five cards, reveal and exclaim as drawn"
+    },
+    {
+      "name": "The Fish Brewer",
+      "needs": [
+        "static:tap-to-double-entry-triggers"
+      ],
+      "size": "small",
+      "why": "new key; Panharmonicon-style extra triggers paid by tapping Fish, one per Fish"
+    },
+    {
+      "name": "The Five Stages of Grief",
+      "needs": [
+        "effect:next-spell-gains-epic"
+      ],
+      "size": "small",
+      "why": "the next spell gains epic"
+    },
+    {
+      "name": "The Flavormancer",
+      "needs": [
+        "meta:deckbuilding-choice"
+      ],
+      "size": "small",
+      "why": "before-game \"flavorfully Heroes or Villains\" creature types are a judgment the engine can't make"
+    },
+    {
+      "name": "The Game-Changing Host",
+      "needs": [
+        "effect:copy-random-game-changer"
+      ],
+      "size": "small",
+      "why": "new key; copy of a random Game Changer list card, and retroactive effects on its entry turn"
+    },
+    {
+      "name": "The Generational Historian",
+      "needs": [
+        "deck:release-year-restriction"
+      ],
+      "size": "small",
+      "why": "real-world release years"
+    },
+    {
+      "name": "The Goblin Mastermind",
+      "needs": [
+        "effect:token-copy-of-random-named-card"
+      ],
+      "size": "small",
+      "why": "tokens copying named cards chosen at random, plus Kindred Goblin for every card you own in every zone"
+    },
+    {
+      "name": "The Goblin Sparring Grounds",
+      "needs": [
+        "rule:land-commander"
+      ],
+      "size": "small",
+      "why": "a land commander; an \"if spent\" mana rider"
+    },
+    {
+      "name": "The Good Gamers",
+      "needs": [
+        "mechanic:non-commander-commander-damage"
+      ],
+      "size": "small",
+      "why": "new key; damage from a non-commander counted as commander damage, plus \"unique names\" for token copies"
+    },
+    {
+      "name": "The Good Time Sleuth",
+      "needs": [
+        "mechanic:secret-choice-face-down-pile"
+      ],
+      "size": "small",
+      "why": "face-down manifested pile, secret choice revealed on turn-up; text runs on past what the engine models"
+    },
+    {
+      "name": "The Grand Tour",
+      "needs": [
+        "effect:follow-card-through-zones"
+      ],
+      "size": "small",
+      "why": "one card exiled, put in hand, discarded, put on top of library, then onto the battlefield in one chain (new key)"
+    },
+    {
+      "name": "The Gunky Runner",
+      "needs": [
+        "mechanic:gunk-cards"
+      ],
+      "size": "small",
+      "why": "(new) shuffles Gunk cards (not real cards) into libraries; \"ready to run\" commander pairing"
+    },
+    {
+      "name": "The Herald of Numot",
+      "needs": [
+        "effect:token-card-into-library"
+      ],
+      "size": "small",
+      "why": "new key; a token card shuffled into the library (a token there ceases to exist, rule 704.5d)"
+    },
+    {
+      "name": "The Heron Moon",
+      "needs": [
+        "effect:cast-copy-of-card-named-from-nowhere"
+      ],
+      "size": "small",
+      "why": "creates and casts a copy of Emrakul"
+    },
+    {
+      "name": "The Highland Runner",
+      "needs": [
+        "effect:stop-being-commander"
+      ],
+      "size": "small",
+      "why": "sets every life total to 20 and makes commanders stop being commanders, shuffled into library; plus ready to run"
+    },
+    {
+      "name": "The Horizon Seeker",
+      "needs": [
+        "keyword:horsemanship"
+      ],
+      "size": "small",
+      "why": "horsemanship, plus counting distinct keywords and ability words (new: amount:distinct-keywords-and-ability-words)"
+    },
+    {
+      "name": "The Inspector Inspector",
+      "needs": [
+        "replacement:others-enter-as-copy-of-named"
+      ],
+      "size": "small",
+      "why": "(new) other creatures you control enter as a copy of Thraben Inspector"
+    },
+    {
+      "name": "The Joiner of Cats",
+      "needs": [
+        "effect:create-token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "a token copy of a card from outside the game"
+    },
+    {
+      "name": "The Judge of Height",
+      "needs": [
+        "amount:creatures-shorter-than-source"
+      ],
+      "size": "small",
+      "why": "new key; counts creatures whose toughness plus mana value is below its own"
+    },
+    {
+      "name": "The Kami Knight",
+      "needs": [
+        "static:share-equipment-bonuses"
+      ],
+      "size": "small",
+      "why": "shared Equipment; can't be goaded"
+    },
+    {
+      "name": "The Karfell Rocker",
+      "needs": [
+        "filter:name-word-count"
+      ],
+      "size": "small",
+      "why": "LOUD reads the number of words in a spell's name (new key)"
+    },
+    {
+      "name": "The Karst, Enchanted",
+      "needs": [
+        "effect:search-no-shared-characteristics"
+      ],
+      "size": "small",
+      "why": "search for up to four cards that don't share mana value, power, toughness or card type with each other"
+    },
+    {
+      "name": "The Keeper of Dark Pacts",
+      "needs": [
+        "mechanic:per-game-doubling-ability-memory"
+      ],
+      "size": "small",
+      "why": "new key; the ability's amounts double for the rest of the game, kept across zone changes"
+    },
+    {
+      "name": "The Keeper of Favorite Cards",
+      "needs": [
+        "mechanic:player-favorites-list"
+      ],
+      "size": "small",
+      "why": "a list kept all game"
+    },
+    {
+      "name": "The Keeper of Kaldra",
+      "needs": [
+        "mechanic:companions-from-outside"
+      ],
+      "size": "small",
+      "why": "adds three named cards as companions you can pay {3} to fetch from outside the game"
+    },
+    {
+      "name": "The Knight of Commentary",
+      "needs": [
+        "mechanic:real-world"
+      ],
+      "size": "small",
+      "why": "new key; its only ability permits real-world advice, nothing the engine runs"
+    },
+    {
+      "name": "The Knight of Land Drops",
+      "needs": [
+        "deck:partner-with-any-legendary-subtype"
+      ],
+      "size": "small",
+      "why": "partner with any legendary of a subtype"
+    },
+    {
+      "name": "The Local Guides",
+      "needs": [
+        "condition:real-world-city"
+      ],
+      "size": "small",
+      "why": "the physical world"
+    },
+    {
+      "name": "The Magic Bandit",
+      "needs": [
+        "effect:copy-played-land"
+      ],
+      "size": "small",
+      "why": "copies a land you play that you don't own, as well as spells"
+    },
+    {
+      "name": "The Magical City, New",
+      "needs": [
+        "mechanic:land-as-commander"
+      ],
+      "size": "small",
+      "why": "\"can be your Commander\" for a land, plus a mana-spent-on-legendary trigger (new key)"
+    },
+    {
+      "name": "The Majestic Duo",
+      "needs": [
+        "meta:physical-world"
+      ],
+      "size": "small",
+      "why": "\"earnestly tell them good luck\" and \"offer them a high-five\" are player speech/gesture; copy keeps only that text"
+    },
+    {
+      "name": "The Many Deeds of Belzenlok",
+      "needs": [
+        "effect:copy-saga-chapter-ability"
+      ],
+      "size": "small",
+      "why": "copies a chapter ability"
+    },
+    {
+      "name": "The Meld Hound",
+      "needs": [
+        "mechanic:meld"
+      ],
+      "size": "small",
+      "why": "melds a spell with an exiled creature card into a combined spell, optionally renamed"
+    },
+    {
+      "name": "The Miniaturizer",
+      "needs": [
+        "keyword:soospect"
+      ],
+      "size": "small",
+      "why": "(new) soospect (first strike + can't block designation) and a token copy of an exiled card as an Equipment whose equip cost is its mana cost"
+    },
+    {
+      "name": "The Misty Stepper",
+      "needs": [
+        "static:spells-you-cast-have-split-second"
+      ],
+      "size": "small",
+      "why": "split second for your spells; a clone \"except\""
+    },
+    {
+      "name": "The Mox Painter",
+      "needs": [
+        "effect:token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "token copy of a random tournament-legal Mox (cards outside the game) and a Mox Lotus token"
+    },
+    {
+      "name": "The Multifaceted Phyrexian",
+      "needs": [
+        "mechanic:commander-ninjutsu-with-tax"
+      ],
+      "size": "small",
+      "why": "commander ninjutsu with tax"
+    },
+    {
+      "name": "The Multiplayer Nitpickers",
+      "needs": [
+        "static:count-extra-player"
+      ],
+      "size": "small",
+      "why": "new key; your effects count one more player or opponent"
+    },
+    {
+      "name": "The Mysterious Sphere",
+      "needs": [
+        "effect:cast-copy-of-card"
+      ],
+      "size": "small",
+      "why": "copies of the cards exiled with it cast free, creature copies gaining haste and an end-step sacrifice (new shape)"
+    },
+    {
+      "name": "The Mystery Raceway",
+      "needs": [
+        "mechanic:race-teams"
+      ],
+      "size": "small",
+      "why": "racing teams and a \"playtest card\" read"
+    },
+    {
+      "name": "The Octopus Official",
+      "needs": [
+        "mechanic:tournament-bracket-piles"
+      ],
+      "size": "small",
+      "why": "new key; random two-card piles advancing like a bracket, cast the last one four times"
+    },
+    {
+      "name": "The Paradise Bird",
+      "needs": [
+        "mechanic:commander-any-color-identity"
+      ],
+      "size": "small",
+      "why": "\"if it's your commander, your deck can include any color identity\" is a deckbuilding rule (new key)"
+    },
+    {
+      "name": "The Playful Winners",
+      "needs": [
+        "effect:enter-as-copy-of-random-card-outside-game"
+      ],
+      "size": "small",
+      "why": "a random card copied; games won"
+    },
+    {
+      "name": "The Pleasant Taxer",
+      "needs": [
+        "cost:chosen-action-tax"
+      ],
+      "size": "small",
+      "why": "(new) choose among casting/searching/drawing-beyond-first/activating; that action costs {1} more"
+    },
+    {
+      "name": "The Policy Maker",
+      "needs": [
+        "meta:outside-player-rule-proposal"
+      ],
+      "size": "small",
+      "why": "rule proposals"
+    },
+    {
+      "name": "The Rebellious Intelligence",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "puts a random card from outside the game into your hand"
+    },
+    {
+      "name": "The Rhystic Storyteller",
+      "needs": [
+        "meta:physical-world"
+      ],
+      "size": "small",
+      "why": "sleeves rule and \"ten or more words of flavor text\""
+    },
+    {
+      "name": "The River Warlock",
+      "needs": [
+        "effect:compare-discarded-mana-values"
+      ],
+      "size": "small",
+      "why": "both players draw/discard and compare the discarded cards' mana values, then exile from hand until it leaves"
+    },
+    {
+      "name": "The Sad Creaturez",
+      "needs": [
+        "mechanic:shared-feelings-designation"
+      ],
+      "size": "small",
+      "why": "a feelings designation"
+    },
+    {
+      "name": "The Salubrious Philosopher",
+      "needs": [
+        "replacement:draw-reveal-until-category"
+      ],
+      "size": "small",
+      "why": "draw replacement revealing until a \"mana base / removal / win condition\" card: categories the engine can't classify"
+    },
+    {
+      "name": "The Scholar of Seas",
+      "needs": [
+        "effect:create-token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "a random named card copied"
+    },
+    {
+      "name": "The Snapstone Wielder",
+      "needs": [
+        "mechanic:random-magic-card"
+      ],
+      "size": "small",
+      "why": "a random card from all of Magic"
+    },
+    {
+      "name": "The Sprinkler of Stardust",
+      "needs": [
+        "effect:instant-sorcery-onto-battlefield-as-creature"
+      ],
+      "size": "small",
+      "why": "an instant or sorcery on the battlefield as a 2/2"
+    },
+    {
+      "name": "The Strixhaven-Lorwyn Rover",
+      "needs": [
+        "mechanic:pregame-college-choice"
+      ],
+      "size": "small",
+      "why": "before-the-game choice of a college and creature type that also sets color identity"
+    },
+    {
+      "name": "The Tokenator",
+      "needs": [
+        "mechanic:token-counters-custom-token"
+      ],
+      "size": "small",
+      "why": "new key; \"token counters\" and a token of chosen colours, creature type and P/T split"
+    },
+    {
+      "name": "The Traveling Postman",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "random Magic cards from outside the game to pick a token type"
+    },
+    {
+      "name": "The Trivia Mastermind",
+      "needs": [
+        "mechanic:opponent-guesses-characteristic"
+      ],
+      "size": "small",
+      "why": "a spoken guess about a playtest card"
+    },
+    {
+      "name": "The Underworld Fantasy Queen",
+      "needs": [
+        "mechanic:seasons"
+      ],
+      "size": "small",
+      "why": "seasons"
+    },
+    {
+      "name": "The Unknown Wizard",
+      "needs": [
+        "filter:playtest-card"
+      ],
+      "size": "small",
+      "why": "\"playtest cards\" filter and eminence cost reduction (new key)"
+    },
+    {
+      "name": "The Vast Scrier",
+      "needs": [
+        "trigger:attack-triggers-for-put-attacking"
+      ],
+      "size": "small",
+      "why": "new key; a creature put onto the battlefield attacking has its attack triggers trigger (against rule 508.4)"
+    },
+    {
+      "name": "The Vegetable Car",
+      "needs": [
+        "mechanic:onionfect"
+      ],
+      "size": "small",
+      "why": "onionfect"
+    },
+    {
+      "name": "The Waffle Restaurant",
+      "needs": [
+        "rule:rulebreaker-cards-that-create-food"
+      ],
+      "size": "small",
+      "why": "a rulebreaker on cards' text"
+    },
+    {
+      "name": "The Water Maro",
+      "needs": [
+        "filter:name-contains-word"
+      ],
+      "size": "small",
+      "why": "\"Maro\" in a name"
+    },
+    {
+      "name": "The Weekly Princess",
+      "needs": [
+        "mechanic:day-night"
+      ],
+      "size": "small",
+      "why": "\"it stops being day or night\" as it leaves: nothing ends the day/night designation once it exists"
+    },
+    {
+      "name": "The Wheeling Runner",
+      "needs": [
+        "effect:random-cards-outside-game"
+      ],
+      "size": "small",
+      "why": "four random Vintage-legal cards"
+    },
+    {
+      "name": "The Whiteboarder",
+      "needs": [
+        "mechanic:real-world-card-frame"
+      ],
+      "size": "small",
+      "why": "reads white borders and \"notes\" written on paper (new key)"
+    },
+    {
+      "name": "The Wise Sable",
+      "needs": [
+        "effect:token-copy-of-named-card-outside-game"
+      ],
+      "size": "small",
+      "why": "a random named card copied"
+    },
+    {
+      "name": "The Wizardly Barge",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "token copy of a random tournament-legal Wizard from outside the game"
+    },
+    {
+      "name": "The Zabulous Cosplayer",
+      "needs": [
+        "effect:become-copy-of-random-card"
+      ],
+      "size": "small",
+      "why": "new key; becomes a copy of a random tournament-legal permanent card from outside the game"
+    },
+    {
+      "name": "The Zassacre Zirl",
+      "needs": [
+        "mechanic:stop-being-commander"
+      ],
+      "size": "small",
+      "why": "destroy target commander and strip its commander designation (new key)"
+    },
+    {
+      "name": "The Zonian Brawler",
+      "needs": [
+        "rule:commander-deck-size-life"
+      ],
+      "size": "small",
+      "why": "deck size and life rules; biting"
+    },
+    {
+      "name": "Theopholos, Order Acolyte",
+      "needs": [
+        "rule:starting-life-modifier"
+      ],
+      "size": "small",
+      "why": "starting life"
+    },
+    {
+      "name": "There // They're // Their",
+      "needs": [
+        "mechanic:three-part-split"
+      ],
+      "size": "small",
+      "why": "a split card with three halves; the engine's split is two halves"
+    },
+    {
+      "name": "Third Stage of Magic Design",
+      "needs": [
+        "decision:choose-word"
+      ],
+      "size": "small",
+      "why": "choose a word and match it in rules text and type lines (new key)"
+    },
+    {
+      "name": "Throat Wolf",
+      "needs": [
+        "keyword:firstest-strike"
+      ],
+      "size": "small",
+      "why": "new key; firstest strike damage step and a combat phase for you during an opponent's turn"
+    },
+    {
+      "name": "Tibalt the Chaotic",
+      "needs": [
+        "effect:cast-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "casts copies of random named cards from outside the game"
+    },
+    {
+      "name": "Time Sidewalk",
+      "needs": [
+        "mechanic:opening-hand-actions"
+      ],
+      "size": "small",
+      "why": "exile from the opening hand to shuffle in four Time Walk token cards"
+    },
+    {
+      "name": "Tinfoil Helm",
+      "needs": [
+        "static:protection-from-creature-types-and-hybrid"
+      ],
+      "size": "small",
+      "why": "protection from types and hybrid; a conspiracy in the command zone"
+    },
+    {
+      "name": "Toddler's Rage",
+      "needs": [
+        "keyword:tantrum"
+      ],
+      "size": "small",
+      "why": "(new) \"tantrum\": trample for blocking, undefined in the rules"
+    },
+    {
+      "name": "Toofer, Keeper of the Full Grip",
+      "needs": [
+        "trigger:card-advantage"
+      ],
+      "size": "small",
+      "why": "(new) triggers on a spell giving its controller card advantage relative to opponents"
+    },
+    {
+      "name": "Trampled Lotus",
+      "needs": [
+        "keyword:splitter-second"
+      ],
+      "size": "small",
+      "why": "new key; \"splitter second\" and tapping opponents' lands for your mana"
+    },
+    {
+      "name": "Transcantation",
+      "needs": [
+        "effect:spell-becomes-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "a spell becomes a copy of a named card"
+    },
+    {
+      "name": "Trash Panda",
+      "needs": [
+        "effect:put-into-opponents-graveyard"
+      ],
+      "size": "small",
+      "why": "an opponent dredges; a card into another's graveyard"
+    },
+    {
+      "name": "Trial and Error",
+      "needs": [
+        "trigger:countered-or-fizzles"
+      ],
+      "size": "small",
+      "why": "countered or fizzled; Elemental as a card type"
+    },
+    {
+      "name": "Tricky Mage",
+      "needs": [
+        "mechanic:unknown-event-teams"
+      ],
+      "size": "small",
+      "why": "Mirran / Phyrexian team membership"
+    },
+    {
+      "name": "Triple Threat",
+      "needs": [
+        "replacement:commander-damage-multiplier"
+      ],
+      "size": "small",
+      "why": "commander damage multiplied"
+    },
+    {
+      "name": "Truth or Dare",
+      "needs": [
+        "decision:opponent-chooses-mode-on-cast"
+      ],
+      "size": "small",
+      "why": "the target opponent chooses the mode as it's cast (700.2e); the engine asks only at resolution"
+    },
+    {
+      "name": "Try-My-Deck Elemental",
+      "needs": [
+        "static:grant-demonstrate-to-commander-spells"
+      ],
+      "size": "small",
+      "why": "demonstrate for commander spells"
+    },
+    {
+      "name": "Twenty Lessons",
+      "needs": [
+        "effect:cast-random-card-outside-game"
+      ],
+      "size": "small",
+      "why": "a random card from outside the game"
+    },
+    {
+      "name": "Two by Four",
+      "needs": [
+        "effect:base-pt-counters"
+      ],
+      "size": "small",
+      "why": "base power 4 / base toughness 4 counters applying in layer 7b"
+    },
+    {
+      "name": "Uh, Squen & Cragg Made a Card",
+      "needs": [
+        "rules:invert-pt-counters"
+      ],
+      "size": "small",
+      "why": "inverted counters"
+    },
+    {
+      "name": "Unclaimed Battle Axe",
+      "needs": [
+        "meta:mirran-phyrexian-team"
+      ],
+      "size": "small",
+      "why": "teams"
+    },
+    {
+      "name": "Unclaimed Bird",
+      "needs": [
+        "meta:mirran-phyrexian-team"
+      ],
+      "size": "small",
+      "why": "teams"
+    },
+    {
+      "name": "Unclaimed Blessing",
+      "needs": [
+        "mechanic:unknown-event-teams"
+      ],
+      "size": "small",
+      "why": "Mirran / Phyrexian team membership"
+    },
+    {
+      "name": "Unclaimed Cat",
+      "needs": [
+        "meta:mirran-phyrexian-team"
+      ],
+      "size": "small",
+      "why": "teams"
+    },
+    {
+      "name": "Unclaimed Tanadon",
+      "needs": [
+        "mechanic:unknown-event-teams"
+      ],
+      "size": "small",
+      "why": "Mirran / Phyrexian team decides cost reduction or Phyrexian mana"
+    },
+    {
+      "name": "Under-Construction Skyscraper",
+      "needs": [
+        "effect:mana-ability-with-decision"
+      ],
+      "size": "small",
+      "why": "the level 8+ mana ability scries 1 (a decision inside a mana ability; add-mana's also is for no decision)"
+    },
+    {
+      "name": "Underdark Beholder",
+      "needs": [
+        "replacement:damage-removes-counters-else-sacrifice"
+      ],
+      "size": "small",
+      "why": "(new) \"remove that many eyestalk counters instead; if you can't, sacrifice it\" isn't sayable (Protean Hydra's shape has no else), nor reveal-until for MV less than a counter count"
+    },
+    {
+      "name": "Underdog Racer",
+      "needs": [
+        "condition:team-behind"
+      ],
+      "size": "small",
+      "why": "a scoreboard"
+    },
+    {
+      "name": "Unicycling Automaton",
+      "needs": [
+        "mechanic:hand-backup"
+      ],
+      "size": "small",
+      "why": "backup from the hand"
+    },
+    {
+      "name": "Unknown Event Shores",
+      "needs": [
+        "deck:circle-colors-at-deck-construction"
+      ],
+      "size": "small",
+      "why": "colours set at deck construction"
+    },
+    {
+      "name": "Unstickerify",
+      "needs": [
+        "mechanic:stickered-playtest-card"
+      ],
+      "size": "small",
+      "why": "reads whether a permanent is a stickered playtest card and the card beneath"
+    },
+    {
+      "name": "Untap, Upkeep, Draw",
+      "needs": [
+        "effect:additional-upkeep-steps"
+      ],
+      "size": "small",
+      "why": "additional untap, upkeep or draw step after this phase, with entwine"
+    },
+    {
+      "name": "Urza's Hot Dog Stand",
+      "needs": [
+        "mechanic:food-crew"
+      ],
+      "size": "small",
+      "why": "new key; \"Food Crew\" (tap Foods to animate), Food tokens named Hot Dog"
+    },
+    {
+      "name": "Valko Indorian, Researcher",
+      "needs": [
+        "static:types-everywhere"
+      ],
+      "size": "small",
+      "why": "artifacts and enchantments you own become both types in every zone; rulebreaker identity for both types"
+    },
+    {
+      "name": "Value Town // Take a Trip to...",
+      "needs": [
+        "mechanic:adventure-land"
+      ],
+      "size": "small",
+      "why": "an Adventure on a land"
+    },
+    {
+      "name": "Vamping Vampire",
+      "needs": [
+        "trigger:while-exiled-counters-carry"
+      ],
+      "size": "small",
+      "why": "stall counters put on the card in exile, read as it enters (\"that were on it\"); plot"
+    },
+    {
+      "name": "Visitor from Planet Q",
+      "needs": [
+        "static:flash-creature-cards-are-instants"
+      ],
+      "size": "small",
+      "why": "instant creatures"
+    },
+    {
+      "name": "Vuzzle Spaceship",
+      "needs": [
+        "mechanic:spaceship"
+      ],
+      "size": "small",
+      "why": "spaceships"
+    },
+    {
+      "name": "Waste Land",
+      "needs": [
+        "effect:create-wastes-token"
+      ],
+      "size": "small",
+      "why": "\"creates a Wastes token\": whether the token is a basic land named Wastes is unsettled; no token printing"
+    },
+    {
+      "name": "Weaponized Scrap",
+      "needs": [
+        "keyword:upgrade"
+      ],
+      "size": "small",
+      "why": "upgrade: enters covering another artifact"
+    },
+    {
+      "name": "Welcome to Australia",
+      "needs": [
+        "mechanic:world-rule"
+      ],
+      "size": "small",
+      "why": "opening-hand start, power/toughness reversed, libraries flipped over"
+    },
+    {
+      "name": "Werewhat",
+      "needs": [
+        "mechanic:day-night"
+      ],
+      "size": "small",
+      "why": "daybound with a back face made from an exiled creature card"
+    },
+    {
+      "name": "Whammy Burn",
+      "needs": [
+        "mechanic:whammy-deck"
+      ],
+      "size": "small",
+      "why": "an extra five-land \"whammy deck\" zone, revealed until an Island or stop"
+    },
+    {
+      "name": "Wheel of Not Ideal",
+      "needs": [
+        "effect:pass-libraries"
+      ],
+      "size": "small",
+      "why": "libraries passed around"
+    },
+    {
+      "name": "Who's That Praetor?",
+      "needs": [
+        "effect:token-copy-of-named-card-random"
+      ],
+      "size": "small",
+      "why": "token copy of one of six named cards chosen at random (new key)"
+    },
+    {
+      "name": "Windy City Aven",
+      "needs": [
+        "mechanic:real-world-event-attendance"
+      ],
+      "size": "small",
+      "why": "(new) Ascend MagicCon: Chicago reads whether the player attended a real event"
+    },
+    {
+      "name": "Windy City Elemental",
+      "needs": [
+        "meta:physical-world"
+      ],
+      "size": "small",
+      "why": "\"Ascend MagicCon Chicago\" needs real-world event attendance"
+    },
+    {
+      "name": "Winter's Demonmech",
+      "needs": [
+        "effect:cast-random-copy-of-named-cards"
+      ],
+      "size": "small",
+      "why": "copy of one of six named cards chosen at random, from outside the game; \"Team Cloudspire\" deck rule"
+    },
+    {
+      "name": "Wistful Puppeteer",
+      "needs": [
+        "token:animated-role"
+      ],
+      "size": "small",
+      "why": "an Animated Role"
+    },
+    {
+      "name": "Witty Demon",
+      "needs": [
+        "condition:starting-deck-size"
+      ],
+      "size": "small",
+      "why": "starting deck size"
+    },
+    {
+      "name": "Wizened Arbiter",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "reveal a white card from outside the game and exchange it with a card in hand"
+    },
+    {
+      "name": "Wormhole Warp",
+      "needs": [
+        "mechanic:outside-the-game"
+      ],
+      "size": "small",
+      "why": "reveals sideboard cards at random until a nonland card and lets that player cast it"
+    },
+    {
+      "name": "Would You Have Done the Same?",
+      "needs": [
+        "effect:token-copy-of-named-card-attached"
+      ],
+      "size": "small",
+      "why": "creates an Arrest token (a copy of a named card) attached to a creature of the opponent's choice"
+    },
+    {
+      "name": "Wrath of Sod",
+      "needs": [
+        "mechanic:manabond-counter"
+      ],
+      "size": "small",
+      "why": "new key; manabond counters turning creatures into lands"
+    },
+    {
+      "name": "Wrenn and One",
+      "needs": [
+        "mechanic:land-planeswalker"
+      ],
+      "size": "small",
+      "why": "(new) a Land Planeswalker played as a land; +1 grants a mana ability until your next turn"
+    },
+    {
+      "name": "Wurmcoil Broodmother",
+      "needs": [
+        "effect:create-token-copy-of-named-card"
+      ],
+      "size": "small",
+      "why": "unprinted named tokens"
+    },
+    {
+      "name": "X, Mystery Racer",
+      "needs": [
+        "static:activate-abilities-of-opponents-permanents"
+      ],
+      "size": "small",
+      "why": "opponents' abilities; a card into an opponent's hand"
+    },
+    {
+      "name": "Xerex Squire",
+      "needs": [
+        "amount:hypotenuse-of-creature"
+      ],
+      "size": "small",
+      "why": "a hypotenuse"
+    },
+    {
+      "name": "Xyru Specter",
+      "needs": [
+        "decision:challenge"
+      ],
+      "size": "small",
+      "why": "new key; the defending player may \"challenge\" and you show two black cards"
+    },
+    {
+      "name": "Yawgmoth's Day Planner",
+      "needs": [
+        "cost:spend-only-mana-from-life-loss-abilities"
+      ],
+      "size": "small",
+      "why": "mana spent only from life-loss abilities"
+    },
+    {
+      "name": "Yawgmoth's Testament",
+      "needs": [
+        "replacement:graveyard-or-exile-to-library-bottom"
+      ],
+      "size": "small",
+      "why": "this-turn replacement sending cards bound for graveyard or exile to the library bottom, plus playing face-up exiled cards (new key)"
+    },
+    {
+      "name": "Yeah Nah // Nah Yeah",
+      "needs": [
+        "effect:force-spell-resolve"
+      ],
+      "size": "small",
+      "why": "\"target spell resolves\", a vote, fuse"
+    },
+    {
+      "name": "Yet Another Night in Vegas",
+      "needs": [
+        "effect:modal-reset-chosen-modes"
+      ],
+      "size": "small",
+      "why": "\"all modes reset\""
+    },
+    {
+      "name": "You Compleat Me",
+      "needs": [
+        "rule:maximum-life-total"
+      ],
+      "size": "small",
+      "why": "a maximum life total"
+    },
+    {
+      "name": "You and Ooze Army?",
+      "needs": [
+        "amount:creature-types-among-battlefield"
+      ],
+      "size": "small",
+      "why": "distinct creature types"
+    },
+    {
+      "name": "You're Toast!",
+      "needs": [
+        "mechanic:manifest-bread"
+      ],
+      "size": "small",
+      "why": "(new) manifest bread: face-down Food that can't be turned face up"
+    },
+    {
+      "name": "You're in Command",
+      "needs": [
+        "effect:change-commander"
+      ],
+      "size": "small",
+      "why": "changes commander"
+    },
+    {
+      "name": "You, Iterative Playtester",
+      "needs": [
+        "mechanic:edit-printed-numbers"
+      ],
+      "size": "small",
+      "why": "changes a number printed on another playtest card; reads \"playtest card\" status"
+    },
+    {
+      "name": "You, Magic Playtester",
+      "needs": [
+        "filter:playtest-card"
+      ],
+      "size": "small",
+      "why": "(new) \"target playtest card\"; also \"increase or decrease a number of your choice on it\""
+    },
+    {
+      "name": "Your Favorite Character",
+      "needs": [
+        "mechanic:name-storyline-character"
+      ],
+      "size": "small",
+      "why": "choose a name, types and colours"
+    },
+    {
+      "name": "Your Favorite Missing Character",
+      "needs": [
+        "meta:deckbuilding-choice"
+      ],
+      "size": "small",
+      "why": "colors, types, a new name and an ability chosen during deckbuilding"
+    },
+    {
+      "name": "Your Mana Rock",
+      "needs": [
+        "meta:deckbuilding-choice"
+      ],
+      "size": "small",
+      "why": "two colors written during deckbuilding"
+    },
+    {
+      "name": "Your Wish Is My Command",
+      "needs": [
+        "effect:cast-from-outside-the-game"
+      ],
+      "size": "small",
+      "why": "cast from sideboard, a modal spell cast so gets an extra mode"
+    },
+    {
+      "name": "Zimone's Homework",
+      "needs": [
+        "condition:life-total-number-sequence"
+      ],
+      "size": "small",
+      "why": "new key; lazy caterer's / Fibonacci / square-number tests on a life total"
+    },
+    {
+      "name": "Zone of Flame",
+      "needs": [
+        "mechanic:enchant-zone"
+      ],
+      "size": "small",
+      "why": "new key; an Aura enchanting a zone"
+    },
+    {
+      "name": "Zyym, Mesmeric Lord",
+      "needs": [
+        "decision:reveal-until-stop"
+      ],
+      "size": "small",
+      "why": "(new) opponent orders hand, reveals one by one until you say stop, discards the last revealed"
+    },
+    {
+      "name": "______",
+      "needs": [
+        "mechanic:player-name-reads"
+      ],
+      "size": "small",
+      "why": "new key; its name becomes types from your first name, mana spendable on spells starting with your name's letter"
+    }
+  ]
+}

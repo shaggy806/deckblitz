@@ -110,6 +110,15 @@ section keeps only what to do next.
   five; Death by Dragons in four; Suffer the Past, Dawnbreak Reclaimer, Dearly Departed and
   Anya, Merciless Angel in three). A deck joins the bot tools' precons on the next run of the
   script once its last card lands; nothing ranks these cards ahead of the EDHREC order.
+- **Playtest cards: 555 of 759 still blocked** (B341, 2026-11-23: the user asked for those needing
+  no engine work, and 204 landed). Their record is `engine/data/playtest/B341.json`, kept out of
+  `sweep-3/` on purpose so these unranked, format-less cards stay out of the `cards:needs`
+  rankings. Nothing is planned for them; if the user asks, the keys that recur most are
+  `effect:token-copy-of-named-card` (10), `static:poison-tolerance` (6),
+  `amount:highest-commander-tax` (5: the largest single commander's tax, where `commanderCasts`
+  sums them), `mechanic:commander-enchantment` and `mechanic:spell-commander` (5 and 4: a
+  non-creature commander). Most of the rest read the physical world, the event's teams, or cards
+  outside the game.
 
 ## Engine rules gaps
 

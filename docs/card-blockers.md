@@ -332,6 +332,26 @@ Five more passes, all merged (156 cards):
   Elder's mana and "exile N cards from your graveyard" as a cost (now with an X). TDC stand-ins
   left: 8 (above).
 
+## Playtest cards (B341, 2026-11-23)
+
+Scryfall's 759 deck-legal playtest cards (Unknown Event 513, MB2 120, CMB2 118, promos 8), authored
+only where the engine ran them as it stood: **204 landed**, among them Platinum Persecutor, Kozilek,
+Compleated, MagicConsecrated Sphinx, Liliana's Other Contract, The Bus Runner and the "Ready to run"
+commanders, the Devoted cycle (Mardu, Jeskai, Abzan, Sultai, Temur) and the plane charms (Ulgrotha,
+Kamigawa, Theros, Tarkir). The 555 blocked, each with one key and a line why, are in
+`engine/data/playtest/B341.json` (outside `sweep-3/`, so they stay out of `cards:needs`). Most read
+what the engine can't hold at all: the physical card or the event (art, signatures, sleeves, real
+dates and places, team standings: `meta:physical-world`, `mechanic:race-teams`,
+`mechanic:unknown-event-teams`), cards outside the game (`mechanic:outside-the-game`, 11), or a
+"playtest card" read (`filter:playtest-card`, 6). The engine-shaped ones that recur:
+`effect:token-copy-of-named-card` (10), `static:poison-tolerance` (6),
+`amount:highest-commander-tax` (5), a non-creature commander (`mechanic:commander-enchantment` 5,
+`mechanic:spell-commander` 4). Left out on review: Truth or Dare (the opponent chooses the mode as
+it's cast, 700.2e, and the engine asks at resolution), Team Acceleration (each line is a team's),
+Colorless Ultimatum (which half of the library?). Five playtest cards that share a real card's
+name, and two split cards whose face does (Bind // Liberate, Start // Fire), can't join a pool of
+one card a name.
+
 ## Top-5000 batches (sweep 3)
 
 - **Batch 4 (2026-09-28)** took the cards the debt fixes unblocked: 15 authored (regeneration,
