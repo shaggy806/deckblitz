@@ -12512,6 +12512,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Dance of the Manse: up to X cards, each with mana value X or less',
+    board({
+      you: { bf: ['Plains*2', 'Island*2'], hand: ['Dance of the Manse'], gy: ['Sol Ring', 'Mind Stone', 'Hedron Archive'] },
+    }),
+  ),
+  preset(
     'Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not',
     board({
       you: { bf: ['Comet, Stellar Pup', 'Grizzly Bears'] },

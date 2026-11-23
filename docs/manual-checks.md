@@ -8301,6 +8301,10 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Nahiri's Sacrifice, choosing X = 3 and sacrificing Gray Ogre. Target both of Bob's creatures, 2 damage to Grizzly Bears and 1 to Hill Giant.
 - **Expect:** Only Gray Ogre is offered at X = 3 (Sol Ring only at X = 1). The Bears die and the Giant has 1 damage.
 
+### Dance of the Manse: up to X cards, each with mana value X or less
+- **Do:** Cast Dance of the Manse with X = 2, targeting Sol Ring and Mind Stone in your graveyard.
+- **Expect:** After X the page asks for up to 2 cards. Sol Ring and Mind Stone can be chosen, Hedron Archive (mana value 4) can't. Both return to the battlefield as artifacts, not creatures.
+
 ## Decisions lane: a creature or player chosen as it resolves, who flips again, and every library searched at once (2026-11-13)
 
 ### Comet, Stellar Pup: his damage goes to a creature or player you click, hexproof or not

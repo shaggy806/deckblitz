@@ -7323,11 +7323,37 @@ export class Game {
             castable,
           );
           if (!targetsFillable(specs, xOptions, [], 0, facts)) continue;
+          // A group "up to X" on a spell offered X by X (Dance of the Manse's
+          // "up to X target … cards each with mana value X or less", Nahiri's
+          // Sacrifice's X from what it sacrifices): its count at this X, over
+          // this X's candidates. The one worked out above was for no X in
+          // particular: none at all, or a group of none where the candidates
+          // themselves wait on X, so the page and the bots cast the spell at
+          // no target (found 2026-11-22, with Fire Covenant's).
+          const xGroupAtX =
+            targetCount === undefined && (groupReadsX(specs) || totalByX !== undefined)
+              ? this.xGroupOffer(specs, xOptions, x, x, totalByX?.slice(0, x + 1))
+              : null;
+          if (xGroupAtX === "none") continue;
           // "A creature with mana value X": only the permanents that pay at this X.
           const xSacrifices = sacrificeAtX ? this.additionalCostSacrifices(player, def, costOption, undefined, x) : null;
           out.push({
             ...offer,
             targetOptions: xOptions,
+            // This offer's X is fixed, so its group is the one at that X
+            // ("up to 2"). Where only the per-X costs give an X (Nahiri's
+            // Sacrifice) the specs above were fixed at X = 0, a group of
+            // none; where mana pays it too (Dance of the Manse) they still
+            // read "up to X".
+            ...(groupReadsX(specs)
+              ? {
+                  targetSpecs:
+                    capDivide === undefined || capDivide.x === true
+                      ? specsAtX(specs, x)
+                      : specsCappedByDivision(specsAtX(specs, x), capDivide),
+                }
+              : {}),
+            ...(xGroupAtX !== null ? { targetCount: xGroupAtX.targetCount } : {}),
             xCost: { maxX: x, minX: x },
             ...(xSacrifices !== null && offer.sacrifice !== undefined
               ? { sacrifice: { ...offer.sacrifice, choices: xSacrifices } }
