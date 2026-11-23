@@ -242,6 +242,34 @@ describe("a Signet as a mana source", () => {
   });
 });
 
+describe("a Signet isn't left stranded (a bot left an Orzhov Signet up with no land to fund it, 2026-11-23)", () => {
+  /** A Plains, a Swamp (or `extra` lands more) and an Orzhov Signet, untapped;
+   * `card` cast and paid by the planner. Which of them it tapped. */
+  const pay = (card: string, extra: readonly string[] = []) => {
+    const game = makeGame();
+    open(game);
+    const lands = spawn(game, ["Plains", "Swamp", ...extra]);
+    const [signet] = spawn(game, ["Orzhov Signet"]);
+    game.dispatch({ type: "cast-spell", player: A, card: game.debugSpawn(card, A, "hand"), targets: [] });
+    return {
+      signet: game.state.objects[signet].tapped,
+      landsTapped: lands.filter((id) => game.state.objects[id].tapped).length,
+    };
+  };
+
+  it("pays a {2} with one land through the Signet, keeping the other land up", () => {
+    expect(pay("Mind Stone")).toEqual({ signet: true, landsTapped: 1 });
+  });
+
+  it("pays a {3} off three lands and the Signet the same way, a land left up", () => {
+    expect(pay("Chromatic Lantern", ["Plains"])).toEqual({ signet: true, landsTapped: 2 });
+  });
+
+  it("leaves the Signet for a {1}: a land through it would waste the second mana", () => {
+    expect(pay("Sol Ring")).toEqual({ signet: false, landsTapped: 1 });
+  });
+});
+
 /** Untapped permanents for A, by name. */
 const spawn = (game: Game, names: readonly string[]): ObjectId[] =>
   names.map((name) => {

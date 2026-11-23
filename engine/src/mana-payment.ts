@@ -1042,7 +1042,7 @@ function planWeighingLife(
   hasCosted: boolean,
 ): ManaPlanStep[] | null {
   const plan = planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", false);
-  if (plan !== null) return plan;
+  if (plan !== null) return hasCosted ? leavingMoreMana(view, cost, avoid, exclude, plan) : plan;
   // Reaching for a converter last can strand it: two Islands and an Izzet
   // Signet are three mana, but a `{3}` cost spends both Islands before it
   // gets to the Signet, and then there's nothing left to pay the Signet's
@@ -1059,6 +1059,63 @@ function planWeighingLife(
     // ahead of it, so no payment that worked then fails now.
     planManaPaymentOrdered(view, cost, avoid, exclude, "last-resort-early", false)
   );
+}
+
+/**
+ * A plain-first plan, or the converters-first one where it leaves more mana
+ * to spend afterwards. Plain sources first can strand a Signet even when it
+ * pays: a {2} off a Plains, a Swamp and an Orzhov Signet taps both lands and
+ * leaves the Signet up with nothing to fund it, where a land through the
+ * Signet pays the same and keeps the other land (a bot left one up that way,
+ * 2026-11-23). Only where the cost takes two mana or more — a {1} put through
+ * a Signet wastes the second — and only for a plan that pays no more life and
+ * uses up no more permanents.
+ */
+function leavingMoreMana(
+  view: ManaPlanningView,
+  cost: ManaCost,
+  avoid: ObjectId | undefined,
+  exclude: ObjectId | undefined,
+  plan: ManaPlanStep[],
+): ManaPlanStep[] {
+  const pips = COLORS.reduce((n, c) => n + cost.colored[c], cost.colorless + cost.generic);
+  if (pips < 2) return plan;
+  const routed = planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first", false);
+  if (routed === null || planToll(routed) > planToll(plan) || planSpends(routed) > planSpends(plan)) return plan;
+  return manaLeftAfter(view, routed, exclude) > manaLeftAfter(view, plan, exclude) ? routed : plan;
+}
+
+/**
+ * How much mana the sources a plan leaves untouched could still make: each
+ * plain source its largest free option, and each converter what it makes
+ * beyond its cost, as long as the plain mana left can fund it (the planner
+ * never funds one converter with another's mana, so neither does this).
+ */
+function manaLeftAfter(view: ManaPlanningView, steps: readonly ManaPlanStep[], exclude: ObjectId | undefined): number {
+  const used = new Set(steps.map((s) => s.source));
+  const made = (o: ManaOption): number => o.fixed.length + o.anyColor;
+  const price = (o: ManaOption): number => o.genericCost + (o.hybridCost?.length ?? 0);
+  let plain = 0;
+  const gains: { readonly price: number; readonly gain: number }[] = [];
+  for (const source of view.sources) {
+    if (used.has(source.id) || source.id === exclude || source.reserved === true) continue;
+    const free = Math.max(0, ...source.options.filter((o) => !costsMana(o)).map(made));
+    plain += free;
+    const best = source.options
+      .filter(gainfulOption)
+      .map((o) => ({ price: price(o), gain: made(o) - price(o) - free }))
+      .filter((g) => g.gain > 0)
+      .sort((a, b) => b.gain - a.gain || a.price - b.price)[0];
+    if (best !== undefined) gains.push(best);
+  }
+  let left = plain;
+  let funds = plain;
+  for (const g of gains.sort((a, b) => a.price - b.price)) {
+    if (g.price > funds) continue;
+    funds -= g.price;
+    left += g.gain;
+  }
+  return left;
 }
 
 /** Whether `unit` is snow mana: made by a snow source (rule 107.4h), as
