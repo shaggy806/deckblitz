@@ -1,5 +1,5 @@
 Top 1000 Commander *commanders* by EDHREC deck count (fetched 2026-11-15)
-999 already implemented / 1 missing
+1000 already implemented / 0 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -782,7 +782,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  776  Garnet, Princess of Alexandria                  4157 decks  {G}{W}           Legendary Creature — Human Noble Cleric
 [x]  777  The Second Doctor                               4151 decks  {2}{W}{U}        Legendary Creature — Time Lord Doctor
 [x]  778  Vaevictis Asmadi, the Dire                      4147 decks  {3}{B}{R}{G}     Legendary Creature — Elder Dragon
-[ ]  779  Malik, Grim Manipulator                         4139 decks  {2}{R}{W}{B}     Legendary Creature — Human Rogue
+[x]  779  Malik, Grim Manipulator                         4139 decks  {2}{R}{W}{B}     Legendary Creature — Human Rogue
 [x]  780  Zimone, Paradox Sculptor                        4131 decks  {2}{G}{U}        Legendary Creature — Human Wizard
 [x]  781  Avacyn, Angel of Horror                         4125 decks  {5}{B}{B}{B}     Legendary Creature — Angel
 [x]  782  Elesh Norn                                      4115 decks  {2}{W}{W}        Legendary Creature — Phyrexian Praetor // Enchantment — Saga
