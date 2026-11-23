@@ -55,6 +55,7 @@ import type { CardDefinition, Keyword } from "../cards/define.js";
 import { entersToCounter } from "../effect-worth.js";
 import type { EffectSpec } from "../effects.js";
 import { matchesFilter } from "../filter.js";
+import { handedRound } from "../handed-round.js";
 import { manaValue, parseManaCost } from "../mana.js";
 import type { StaticPlay } from "../play-permission.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -1496,7 +1497,13 @@ function playerFeaturesUncached(
 
   for (const id of state.zones.shared.battlefield) {
     const object = state.objects[id];
-    if (object === undefined || object.controller !== player) continue;
+    if (object === undefined) continue;
+    // A creature handed round the table (`handedRound`: Slicer, Alexios) is
+    // its owner's, whoever holds it this turn: it comes back, and it never
+    // attacks them. Counted as the holder's, a borrowed Alexios was an 11/11
+    // of our own, and Stroke of Midnight stayed in hand while it went on to
+    // kill us (a kept live game, D75RS-7 turn 23, 2026-11-22).
+    if ((handedRound(registry, rulesTextName(object)) ? object.owner : object.controller) !== player) continue;
     // Gone at the next end step (mobilize's Warriors, blitz, unearth): what
     // it does in a simulated combat shows in life totals, and as a body it's
     // worth nothing past this turn — counted, Zurgo's attack scored +5.5
@@ -1604,19 +1611,36 @@ function playerFeaturesUncached(
     const lostThisTurn = journalTotal(state, "life-lost", p.id, "amount");
     for (const id of state.zones.shared.battlefield) {
       const object = state.objects[id];
-      if (object === undefined || object.controller === player) continue;
-      if (state.players[object.controller]?.hasLost !== false) continue;
+      if (object === undefined) continue;
+      // Handed round the table, it is a threat to everyone but its owner,
+      // under whoever holds it (below).
+      const roams = handedRound(registry, rulesTextName(object));
+      const side = roams ? object.owner : object.controller;
+      if (side === player) continue;
+      if (state.players[object.controller]?.hasLost !== false || state.players[side]?.hasLost !== false) continue;
       const c = computeCharacteristics(state, registry, id);
       if (!c.types.includes("creature")) continue;
       // Who it could attack next turn, by the attack rules themselves: none
       // of it is a threat to us under our Vow of Duty, goaded by us with
       // someone else to hit, or pacified (v2 stopped casting Vow of Duty on
       // an opponent's creature, whose +2/+2 read as more threat).
-      const targets = playersAttackableNextTurn(state, registry, id);
-      if (!targets.includes(player)) continue;
+      const targets = roams ? [] : playersAttackableNextTurn(state, registry, id);
+      if (!roams && !targets.includes(player)) continue;
       const last = attackedBy[object.controller];
       const recent = last !== undefined && state.turn.number - last < living.length;
-      const share = recent ? 1 : 1 / targets.length;
+      // A handed-round creature attacks on every other player's turn, at
+      // someone who isn't its owner: our share of each of those attacks,
+      // added up (four players: a half, a half and a third).
+      const share = roams
+        ? living
+            .filter((holder) => holder !== player)
+            .reduce((sum, holder) => {
+              const at = living.filter((q) => q !== holder && q !== side).length;
+              return at > 0 ? sum + 1 / at : sum;
+            }, 0)
+        : recent
+          ? 1
+          : 1 / targets.length;
       // Damage against what's left to lose — our life, or for a commander
       // what's left of its 21, whichever is nearer: a 2/2 isn't a threat to
       // someone at 38 (v2 Fireballed a Cat token over casting Phyrexian
@@ -1642,7 +1666,7 @@ function playerFeaturesUncached(
       const over = times(object.controller, player);
       const count = object.stackCount ?? 1;
       if (tax > 0) {
-        taxed.set(object.controller, [...(taxed.get(object.controller) ?? []), { each, over, scale, count }]);
+        taxed.set(side, [...(taxed.get(side) ?? []), { each, over, scale, count }]);
         continue;
       }
       threat += each * count * over * scale;

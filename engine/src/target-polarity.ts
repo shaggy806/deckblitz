@@ -30,6 +30,7 @@
  * decision modules may use it too.
  */
 
+import { onLoan } from "./handed-round.js";
 import { insteadEffect } from "./replacements.js";
 import { combatRuleHelps, combatRuleSlots } from "./combat/rules.js";
 import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
@@ -2083,7 +2084,14 @@ export function rankTargets(
   const scored = options.map((ref, index) => ({
     ref,
     index,
-    right: polarity === "take" || sideOf(state, ref, me) === want,
+    // A permanent we only have for now (`onLoan`) is its owner's again by
+    // their turn: right for a harmful slot as well as a helpful one. With a
+    // borrowed Slicer about to deal its last 3, Clan Defiance went at
+    // another player's commander (a kept live game, 2026-11-22).
+    right:
+      polarity === "take" ||
+      sideOf(state, ref, me) === want ||
+      (polarity === "harm" && ref.kind === "object" && state.objects[ref.object] !== undefined && onLoan(registry, state.objects[ref.object], me)),
     lethal: lethal(ref),
     lands: lands(ref),
     value: value(state, registry, ref),

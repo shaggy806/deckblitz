@@ -3164,6 +3164,73 @@ const SCENARIOS: readonly BotScenario[] = [
       return { passed: sent === undefined, detail: sent === undefined ? "the Dragon stayed home" : `the Dragon attacked ${sent.defender}` };
     },
   },
+  ...(
+    [
+      // name, the creature handed to us, the removal in hand, our lands
+      [
+        "destroys the Alexios it holds for the turn",
+        "Alexios, Deimos of Kosmos",
+        "Stroke of Midnight",
+        ["Plains", "Plains", "Plains", "Plains"],
+      ],
+      [
+        "aims Clan Defiance at the Slicer it holds for the turn, at 18 commander damage from it",
+        "Slicer, Hired Muscle",
+        "Clan Defiance",
+        ["Mountain", "Mountain", "Mountain", "Forest", "Forest", "Forest"],
+      ],
+    ] as const
+  ).map(([name, roamer, removal, ourLands]) => ({
+    name,
+    rule: "A creature handed to us for the turn is its owner's again by their turn: removal is aimed at it while we hold it, as at any creature of theirs.",
+    run(weights: EvalWeights, registry: CardRegistry, makeBot: (player: PlayerId, registry: CardRegistry, weights: EvalWeights) => PlayerController): ScenarioResult {
+      // From two kept live games (2026-11-22). D75RS-7 turn 23: Zurgo's bot
+      // held Stroke of Midnight with Alexios under its control for the turn
+      // (handed to each player at their upkeep, a counter bigger each time),
+      // cast a creature instead and took 9 and 17 from it. D75RS-9 turn 15:
+      // Atarka's bot, at 18 commander damage from Slicer and holding it for
+      // the turn, sent Clan Defiance at another player's commander, and
+      // Slicer's next 3 killed it. A target was sorted by who controls it,
+      // so the creature in our own hands was ours: last among a harmful
+      // spell's targets, and an 11/11 of our own to the evaluation. Fixed:
+      // `handed-round.ts`'s `onLoan` in `rankTargets`, and `features.ts`
+      // counts a handed-round creature as its owner's.
+      //
+      // Built on the turn before ours, so the card's own trigger hands it
+      // over: Dave's turn, Bob's creature, then on to Alice's main phase,
+      // Bob saying yes to Slicer's "you may".
+      const game = table(registry, [A, B, C, D], D);
+      for (const player of [A, B, C, D]) game.state.players[player].life = 40;
+      const handed = onBoard(game, roamer, B);
+      game.state.objects[handed].isCommander = true;
+      game.state.players[A].commanderDamageTaken = { [handed]: 18 };
+      onBoard(game, "Zurgo Stormrender", C);
+      for (let i = 0; i < 40 && !(game.state.turnOrder[game.state.turn.activePlayerIndex] === A && game.state.turn.step === "precombat-main"); i += 1) {
+        const awaiting = game.state.awaiting;
+        if (awaiting?.kind === "choose-modes" && awaiting.player === B) {
+          game.dispatch({ type: "choose-modes", player: B, modes: [0] });
+          continue;
+        }
+        game.advanceUntil(
+          (s) =>
+            s.result.over ||
+            (s.awaiting?.kind === "choose-modes" && s.awaiting.player === B) ||
+            (s.turnOrder[s.turn.activePlayerIndex] === A && s.turn.step === "precombat-main" && s.priority.holder === A),
+        );
+      }
+      if (game.state.objects[handed]?.controller !== A) return { passed: false, detail: `${roamer} was never handed over` };
+      game.state.zones.perPlayer[A].hand = [];
+      for (const land of ourLands) onBoard(game, land, A);
+      const spell = game.debugSpawn(removal, A, "hand");
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const cast = taken.find((a) => a.type === "cast-spell" && a.card === spell);
+      const hit = cast?.type === "cast-spell" && (cast.targets ?? []).some((t) => t?.kind === "object" && t.object === handed);
+      const did = taken
+        .filter((a) => a.type === "cast-spell")
+        .map((a) => (a.type === "cast-spell" ? `${cardOf(game, a.card)} at ${(a.targets ?? []).map((t) => (t?.kind === "object" ? cardOf(game, t.object) : t?.kind === "player" ? t.player : "?")).join(", ")}` : ""));
+      return { passed: hit, detail: did.join("; ") || "cast nothing" };
+    },
+  })),
   asked({
     name: "casts Ghostly Prison, not one more blocker, in front of a board it can't block",
     rule: "An attack tax keeps home every creature its controller can't pay for: against a wide board that is worth more than a body.",

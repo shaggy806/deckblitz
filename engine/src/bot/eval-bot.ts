@@ -712,6 +712,11 @@ function reachableDefenders(state: GameState, me: PlayerId, legal: DeclareAttack
  * hundred lost games, among declarations none of which loses on the spot.) */
 export const OPEN_ANSWER = -5e5;
 
+/** What a priority candidate that takes us out of a board we are dead on
+ * scores above every one that doesn't (`EvalBotController.score`): half a
+ * won game, so below a win and above any position. */
+export const ESCAPES = 5e5;
+
 /** Whether `me`, still in a game still going, is dead to the opponents'
  * swing back on `state` as it shows: the crackback with its weights and
  * margin, without `crackbackGrowth` (`EvalBotController.crackbackLethal`,
@@ -862,8 +867,16 @@ export function aimOffer(
   const bias = polarityBias(state, me);
   // Ranked, then twins cut to as many as there are slots (`bot/twins.ts`):
   // seven identical Scute Swarms are one option, not seven simulations.
+  // A commander by the damage it has already dealt us, on top: the one
+  // three points from our 21 comes before a bigger creature that isn't. A
+  // modal spell's slots are tried at their first target alone, and by
+  // stats and engine a token maker outranked the Slicer that then killed us
+  // (a kept live game, 2026-11-22).
+  const clock = (ref: TargetRef): number =>
+    ref.kind === "object" ? (state.players[me]?.commanderDamageTaken[ref.object] ?? 0) : 0;
+  const value = (s: GameState, registry: CardRegistry, ref: TargetRef): number => rankValue(s, registry, ref) + clock(ref);
   const aim = (options: readonly TargetRef[], polarity: Polarity | undefined, slots: number, damage?: number) =>
-    collapseTwins(state, rankTargets(state, cards, me, options, polarity ?? "either", rankValue, damage), slots);
+    collapseTwins(state, rankTargets(state, cards, me, options, polarity ?? "either", value, damage), slots);
   if (legal.kind === "choose-targets") {
     const polarities = pendingTargetPolarities(state, cards, bias);
     return {
@@ -1233,6 +1246,10 @@ export class EvalBotController extends HeuristicBotController {
   /** This priority decision's `crackbackGuard`: null when nothing a cast or
    * activation taps or sacrifices could make the crackback lethal. */
   private tapGuard: TapGuard | null = null;
+  /** Whether, in this priority decision on our own turn, the board as it
+   * stands has us dead to one opponent's swing back alone (`score`'s
+   * `ESCAPES`). Read once a decision, when the first candidate is scored. */
+  private deadAsItStands: boolean | null = null;
   /** This decision's swing backs, by the board each started from
    * (`survivesSwing`): a decision asks the same board more than once.
    * Emptied as each decision's guard is read (`crackbackGuard`). */
@@ -1664,6 +1681,7 @@ export class EvalBotController extends HeuristicBotController {
     const player = this.playerId;
     const pass: Action = { type: "pass-priority", player };
     this.tapGuard = null;
+    this.deadAsItStands = null;
     this.lastUnsafe = [];
     this.lastEnds = new Map();
     this.passOutcome = null;
@@ -3893,9 +3911,33 @@ export class EvalBotController extends HeuristicBotController {
     // one-step line (`lastEnds`). Not a kill that had to land, which no plan
     // starts from.
     if (this.plansAsScored() && mustKill === undefined) this.lastEnds.set(action, { end: after, value });
-    if (!this.tapsIntoCrackback(view.state, action, budget)) return value;
-    this.lastUnsafe.push(action);
-    return UNSAFE + value;
+    if (this.tapsIntoCrackback(view.state, action, budget)) {
+      this.lastUnsafe.push(action);
+      return UNSAFE + value;
+    }
+    // **The way out.** Dead as the board stands to one opponent's swing back,
+    // whatever stays home, a move whose turn ends with us no longer dead to
+    // the crackback comes before every move that leaves us dead: the removal
+    // aimed at the creature that kills us, the blocker, the attack tax. The
+    // evaluation prices a kill by what the permanent is worth, and at 18
+    // commander damage from a Slicer it held, Clan Defiance went at another
+    // player's commander, worth more as a card, where Slicer's next 3 were
+    // the game (a kept live game, D75RS-9 turn 15, 2026-11-22).
+    if (this.escapes(view.state, after)) return ESCAPES + value;
+    return value;
+  }
+
+  /** Whether `after`, the board a candidate's turn ends on, is the way out
+   * of a board that has us dead (`score`): our own turn, dead as it stands
+   * to some opponent alone with everything home, and not dead to the
+   * crackback after. */
+  private escapes(state: GameState, after: GameState): boolean {
+    const me = this.playerId;
+    if (state.turnOrder[state.turn.activePlayerIndex] !== me) return false;
+    this.deadAsItStands ??=
+      this.crackbackLethal(state, false) && opponentsLethalAlone(state, this.cards, me, undefined, -this.weights.crackbackMargin).length > 0;
+    if (!this.deadAsItStands) return false;
+    return !after.result.over && after.players[me]?.hasLost === false && !this.crackbackLethal(after, false);
   }
 
   /**

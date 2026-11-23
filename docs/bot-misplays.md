@@ -60,9 +60,13 @@ re-run; positions are rebuilt by replaying the game to the turn):
   D75RS-1 t14 it read 0 commander damage to come where 12 was; now a creature handed round the
   table (Slicer, Alexios, Karona) is in every opponent's swing, and a creature held until end of
   turn is no blocker. On the live boards D75RS-1 t14 and NX4BN-1 t22 now keep their creatures
-  home, and RCSBH-3 t13 keeps one. Still open: a Slicer in the command zone or converted (living
-  metal: a creature only on its owner's turn, so not among its attackers; D75RS-8 Domri t22), the
-  extra attackers piled onto a kill under Smoke (D75RS-3 t21), and the four by life.
+  home, and RCSBH-3 t13 keeps one. **Later the same day**: a permanent that is a creature only on
+  its controller's turn (living metal: the converted Slicer) is among that controller's attackers,
+  and a hasty commander in the command zone its owner can pay for, tax and a land drop counted
+  (`commandersToCome`), is in its owner's swing and, handed round, in the swing of whoever acts
+  after. D75RS-8 t22 now keeps a Dragon home; 8WNCA-2 t21 and TPGJ6-1 t12 keep their creature
+  home. Still open: the extra attackers piled onto a kill under Smoke (D75RS-3 t21), a Slicer
+  that came back with Equipment the board didn't show (D75RS-8 Zurgo t17), and the four by life.
 - **Dictate of the Twin Gods cast by the seat it then kills** — RCSBH-3 t17, RCSBH-2 t26 (at 6
   Slicer damage; 12 doubled, then first strike), YA57F-2 t35 (15 became 30 at 30 life).
   **Fixed 2026-11-22** (`features.ts`'s `damageTimes`; three scenarios, "holds Dictate of the Twin
@@ -89,10 +93,26 @@ re-run; positions are rebuilt by replaying the game to the turn):
   deal its last 3), FU89K-1 Muldrotha t29 (tapped out with Counterspell and Army of the Damned's
   flashback in view), 8WNCA-1 Surrak t27 (Rapid Hybridization on Slicer's back face at upkeep, so
   it came back as the double-strike face for exactly 21).
+  **The first two fixed 2026-11-22** (scenarios "destroys the Alexios it holds for the turn" and
+  "aims Clan Defiance at the Slicer it holds for the turn, at 18 commander damage from it"). In
+  both the bot held the creature itself that turn, and a target was sorted by who controls it:
+  last among a harmful spell's targets, and an 11/11 of its own to the evaluation. Three changes.
+  A creature on loan (`handed-round.ts`'s `onLoan`: held until end of turn, or handed round) is
+  a right target for a harmful slot. The evaluation counts a handed-round creature as its
+  owner's, and as a threat to every other seat by its share of the attacks it makes under each
+  holder. And a target is ranked with the commander damage it has dealt us on top, since a modal
+  spell's slots are tried at their first target alone. Behind them, a rule for any board that has
+  us dead to one opponent's swing back on our own turn: a move whose turn ends with us no longer
+  dead comes before every move that leaves us dead (`ESCAPES`). On the live boards Zurgo attacks
+  with Alexios and then Strokes it, and Atarka's bot casts a blocker (the Clan Defiance at
+  Slicer scores just under it). The Counterspell and the Rapid Hybridization timing are open.
 - **Overkill instead of splitting** — D75RS-7 Domri t25: everything at a player one attacker
   killed; the spare 4 at the other would have made its next attack lethal, and it lost by 1.
 - **Slicer handed to the last opponent** — RCSBH-3 t21, D75RS-3's last upkeep: goad then points it
-  at its owner.
+  at its owner. Looked at 2026-11-22 and left: on a bare two-player board the bot declines. On
+  those boards Slicer carried Equipment, and declining converts it, which unattaches all of it
+  (a Vehicle is no creature off its owner's turn, rule 301.5c): 6 life against re-equipping
+  Mithril Coat and Infiltration Lens is the evaluation's call, and not clearly the wrong one.
 - DV2N6-3 Teferi t31-t32: 4 named for Wheel of Misfortune under a damage doubler, then a
   Generous Gift on its own Darksteel-Mutated commander would have been lethal commander damage
   (the reader's line, not engine-checked).
