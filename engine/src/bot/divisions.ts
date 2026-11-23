@@ -19,7 +19,13 @@ import { computeCharacteristics, lethalDamageLeft } from "../characteristics.js"
 import type { GameState } from "../state.js";
 import type { TargetRef } from "../target.js";
 
-type Divide = { readonly total: number; readonly slot: number; readonly upTo?: true };
+type Divide = {
+  readonly total: number;
+  readonly slot: number;
+  readonly upTo?: true;
+  readonly x?: true;
+  readonly totalByX?: readonly number[];
+};
 
 /** The damage that kills `target`: what's left of a creature's lethal damage
  * (`lethalDamageLeft` — its toughness, or its power under Zilortha, less what
@@ -36,6 +42,12 @@ function lethalTo(state: GameState, registry: CardRegistry, target: TargetRef): 
   }
   if (c.types.includes("planeswalker")) return { lethal: Math.max(1, object.counters.loyalty ?? 1), player: false };
   return { lethal: Infinity, player: false };
+}
+
+/** The damage that kills `target` outright, `Infinity` where none does (a
+ * player, an indestructible creature): what v1 pays for in life (`lifeX`). */
+export function lethalDamageTo(state: GameState, registry: CardRegistry, target: TargetRef): number {
+  return lethalTo(state, registry, target).lethal;
 }
 
 /**
@@ -74,31 +86,54 @@ export function withDivisions(state: GameState, registry: CardRegistry, legal: L
   const divide: Divide | undefined =
     legal.kind === "cast-spell" || legal.kind === "activate-ability" || legal.kind === "choose-targets" ? legal.divide : undefined;
   if (divide === undefined) return [...actions];
+  // An X paid in life (Fire Covenant): every point past what kills the
+  // targets is life for nothing.
+  const lifeX = legal.kind === "cast-spell" && legal.xCost?.paidInLife === true && divide.x === true && divide.totalByX === undefined;
+  const trimmed = new Set<string>();
   const out: Action[] = [];
-  for (const action of actions) {
+  for (const candidate of actions) {
     if (
-      (action.type !== "cast-spell" && action.type !== "activate-ability" && action.type !== "choose-targets") ||
-      action.targets === undefined ||
-      action.division !== undefined
+      (candidate.type !== "cast-spell" && candidate.type !== "activate-ability" && candidate.type !== "choose-targets") ||
+      candidate.targets === undefined ||
+      candidate.division !== undefined
     ) {
-      out.push(action);
+      out.push(candidate);
       continue;
     }
-    const members = action.targets
+    const members = candidate.targets
       .slice(divide.slot)
       .filter((t): t is TargetRef => t !== null && t !== undefined)
       .map((t) => lethalTo(state, registry, t));
-    if (members.length < 2 || members.length > divide.total) {
+    // The amount shared out is the X this candidate names, where the card
+    // says so (rule 601.2d, X chosen first in 601.2b): read as the offer's
+    // `total`, which is the X = 0 one, an X spell was never shared by what
+    // kills, only evenly.
+    let action = candidate;
+    let x = candidate.type === "choose-targets" ? undefined : candidate.xValue;
+    if (lifeX && candidate.type === "cast-spell" && x !== undefined && members.length > 0) {
+      const kills = members.reduce((sum, member) => sum + member.lethal, 0);
+      if (kills < x) {
+        x = kills;
+        action = { ...candidate, xValue: kills };
+      }
+      // The ladder's larger X's all come down to this one.
+      const key = JSON.stringify([action.targets, x]);
+      if (trimmed.has(key)) continue;
+      trimmed.add(key);
+    }
+    const total = x === undefined ? divide.total : divide.totalByX !== undefined ? (divide.totalByX[x] ?? divide.total) : divide.x === true ? x : divide.total;
+    if (members.length < 2 || members.length > total) {
       out.push(action);
       continue;
     }
+    const split: Divide = { ...divide, total };
     const index = members.map((_, i) => i);
     // The cheapest kills first (the most of them), then the dearest first
     // (the biggest thing dead, whatever is left for the rest).
-    const cheapest = shares(members, divide, [...index].sort((a, b) => members[a].lethal - members[b].lethal));
+    const cheapest = shares(members, split, [...index].sort((a, b) => members[a].lethal - members[b].lethal));
     const dearest = shares(
       members,
-      divide,
+      split,
       [...index].sort((a, b) => (Number.isFinite(members[b].lethal) ? members[b].lethal : -1) - (Number.isFinite(members[a].lethal) ? members[a].lethal : -1)),
     );
     out.push({ ...action, division: cheapest });

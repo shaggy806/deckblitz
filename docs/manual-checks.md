@@ -5490,8 +5490,8 @@ engine terms. A second thing to check is a second test.
 - **Expect:** When Bob is asked, your Grizzly Bears is still in your hand. Once he answers, both hands go to the graveyards and each of you draws five.
 
 ### Fire Covenant: X life, X damage divided
-- **Do:** Cast Fire Covenant with X = 5, targeting Bob's Grizzly Bears and Hill Giant. Give the Bears 2 and the Giant 3.
-- **Expect:** The division step shares out 5 (the X you chose), you pay 5 life, and both creatures die.
+- **Do:** Cast Fire Covenant. Set X to 5, then target Bob's Grizzly Bears and Hill Giant. Give the Bears 2 and the Giant 3.
+- **Expect:** The X prompt says X is paid in life and starts at 1, not at your life total. After X it asks for up to 5 creatures, then the division step shares out 5. You pay 5 life and both creatures die.
 
 ### Dismember: pay its Phyrexian mana with life by choice
 - **Do:** Cast Dismember on Bob's Hill Giant. When asked, pick "2 with life (4 life)".

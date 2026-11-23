@@ -1031,6 +1031,18 @@ function handAbilityLabel(text: string): string {
 }
 
 
+/**
+ * Where the X prompt starts for a spell. As much as can be paid, for an X
+ * paid in mana: the lands are there to be spent. For an X paid in life (Fire
+ * Covenant, Toxic Deluge) the least that does anything: started at the most,
+ * the prompt's own Confirm paid a player's whole life total and ended their
+ * game (found by hand, 2026-11-22).
+ */
+function startingX(xCost: { readonly maxX: number; readonly minX?: number; readonly paidInLife?: true }): number {
+  if (xCost.paidInLife !== true) return xCost.maxX
+  return Math.min(xCost.maxX, Math.max(xCost.minX ?? 0, 1))
+}
+
 export default function App() {
   const game = useNetworkGame()
   // Music in a room's lobby too (the user, 2026-10-10), here rather than in
@@ -3231,7 +3243,7 @@ function Table({
       const fixedX =
         cast.xCost?.minX !== undefined && cast.xCost.minX === cast.xCost.maxX ? cast.xCost.maxX : undefined
       if (cast.xCost && fixedX === undefined) {
-        setPendingX({ action: cast, value: cast.xCost.maxX, ...picks })
+        setPendingX({ action: cast, value: startingX(cast.xCost), ...picks })
         return
       }
       // With X fixed by the offer, nothing else asks its delve range (March of
@@ -3354,7 +3366,7 @@ function Table({
     const fixedX =
       cast.xCost?.minX !== undefined && cast.xCost.minX === cast.xCost.maxX ? cast.xCost.maxX : undefined
     if (cast.xCost && fixedX === undefined) {
-      setPendingX({ action: cast, value: cast.xCost.maxX, ...picks, modes })
+      setPendingX({ action: cast, value: startingX(cast.xCost), ...picks, modes })
       return
     }
     const chosen = modes.map((i) => cast.castModal!.modes[i])
@@ -6863,6 +6875,8 @@ function Table({
                 ? 'choose X for casualty'
               : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.chosenNumber === true
               ? 'choose a number'
+              : pendingX.action.kind === 'cast-spell' && pendingX.action.xCost?.paidInLife === true
+                ? 'choose X, paid in life'
               : 'choose X'}
         </span>
         <input

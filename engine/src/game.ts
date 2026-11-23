@@ -6778,7 +6778,18 @@ export class Game {
       // An X a cost act sets, with a floor ("X can't be 0" on Light Up the
       // Night's flashback): not castable this way below it.
       if (xPlan === null && sacrificeX === undefined && discardX !== undefined && discardX < xFloor) continue;
-      const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
+      // "Pay X life" with no {X} in the mana cost (Fire Covenant): as much
+      // life as there is (rule 119.4), none while they can't lose any (119.8).
+      // It is an X like the others: left out, a group "up to X" was offered
+      // at X = 0, a group of none, and the page cast the spell at no target
+      // for whatever life was named (found by hand, 2026-11-22).
+      const lifeX =
+        xPlan === null && sacrificeX === undefined && discardX === undefined && def.additionalCost?.payLifeX === true
+          ? playerCantLoseLife(this.state, this.registry, player)
+            ? 0
+            : Math.max(0, this.state.players[player].life)
+          : undefined;
+      const payableX = xPlan?.maxX ?? sacrificeX ?? discardX ?? lifeX;
       // A divided total that reads X ("X plus 1"): one per X, which bounds
       // the number of targets as "up to X" does — at least 1 each.
       const castFor = this.ownAlternativeCostPaid(def, player, card, via, altCost === true) ?? "none";
@@ -7212,12 +7223,21 @@ export class Game {
           : def.additionalCost?.payLifeX === true
             ? // "Pay X life" — the ceiling is what you have, not what your
               // lands can make (rule 118.4: any amount of life you have);
-              // nothing but 0 while they can't lose life (119.8).
+              // nothing but 0 while they can't lose life (119.8). With a
+              // group of targets tied to X, each count's own range.
               {
-                xCost: {
-                  maxX: playerCantLoseLife(this.state, this.registry, player) ? 0 : Math.max(0, this.state.players[player].life),
-                  paidInLife: true,
-                },
+                xCost:
+                  xGroup !== null
+                    ? {
+                        maxX: Math.max(...xGroup.maxXByTargetCount),
+                        maxXByTargetCount: xGroup.maxXByTargetCount,
+                        minXByTargetCount: xGroup.minXByTargetCount,
+                        paidInLife: true,
+                      }
+                    : {
+                        maxX: playerCantLoseLife(this.state, this.registry, player) ? 0 : Math.max(0, this.state.players[player].life),
+                        paidInLife: true,
+                      },
               }
             : def.additionalCost?.chooseNumber !== undefined
               ? // "Choose a number between 0 and 5" (Liquid Fire): no more than

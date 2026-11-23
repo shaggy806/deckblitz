@@ -51,6 +51,7 @@ import { handCardQuality } from "./bot/hand-worth.js";
 import { LANDS_WANTED, chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
 import { combatCreatures, crackback, damageThrough, isLethal } from "./bot/combat-math.js";
 import { DEFAULT_WEIGHTS } from "./bot/evaluate.js";
+import { lethalDamageTo } from "./bot/divisions.js";
 import { allColors, colorToName, newColorsFirst } from "./land-colors.js";
 import { scryAway } from "./scry-pick.js";
 import { COLORS, manaValue, parseManaCost } from "./mana.js";
@@ -3137,6 +3138,23 @@ export class HeuristicBotController extends AutomaticController {
         : legal.xCost.sacrifice === true || legal.xCost.removesCounters === true
           ? (legal.xCost.minX ?? 0)
           : maxXForTargets(legal.xCost, legal.targetCount, targets);
+    // An X paid in life is never the most there is to pay: `lifeX`.
+    const inLife = legal.xCost?.paidInLife === true ? this.lifeX(state, legal, targets) : undefined;
+    if (inLife === null) return passFor(player);
+    if (inLife !== undefined) {
+      return {
+        type: "cast-spell",
+        player,
+        card: legal.card,
+        targets: inLife.targets,
+        xValue: inLife.xValue,
+        ...(inLife.division !== undefined ? { division: inLife.division } : {}),
+        ...(legal.via !== undefined ? { via: legal.via } : {}),
+        ...(legal.graveyardGrant !== undefined ? { graveyardGrant: legal.graveyardGrant } : {}),
+        ...(legal.face !== undefined ? { face: legal.face } : {}),
+        ...castExtras(legal, pickLast, inLife.xValue),
+      };
+    }
     return {
       type: "cast-spell",
       player,
@@ -3148,6 +3166,45 @@ export class HeuristicBotController extends AutomaticController {
       ...(legal.face !== undefined ? { face: legal.face } : {}),
       ...castExtras(legal, pickLast, xValue),
     };
+  }
+
+  /**
+   * The X this bot pays for an X paid in life, with the targets it keeps.
+   * At the most there is to pay, which is how it casts every other X, that
+   * was its whole life total: Fire Covenant, Toxic Deluge and Vicious
+   * Rivalry each ended its own game (found 2026-11-22). Shared out among
+   * targets (Fire Covenant), X is what kills them: the targets it aimed at,
+   * in its order, while their lethal damage stays within a third of its
+   * life, each given exactly that. For any other, a third of its life and
+   * {@link LIFE_X_MOST} at most. `null` when no X is worth paying.
+   */
+  protected lifeX(
+    state: GameState,
+    legal: CastSpellLegal,
+    targets: readonly (TargetRef | null)[],
+  ): { readonly xValue: number; readonly targets: (TargetRef | null)[]; readonly division?: number[] } | null {
+    const xCost = legal.xCost;
+    if (xCost === undefined) return null;
+    const afford = Math.floor(Math.max(0, state.players[this.playerId]?.life ?? 0) / 3);
+    const divide = legal.divide;
+    if (divide?.x !== true || divide.totalByX !== undefined) {
+      const x = Math.min(maxXForTargets(xCost, legal.targetCount, targets), afford, LIFE_X_MOST);
+      return x >= Math.max(1, minXForTargets(xCost, legal.targetCount, targets)) ? { xValue: x, targets: [...targets] } : null;
+    }
+    const kept: (TargetRef | null)[] = targets.slice(0, divide.slot);
+    const shares: number[] = [];
+    let total = 0;
+    for (const target of targets.slice(divide.slot)) {
+      if (target === null) continue;
+      const lethal = lethalDamageTo(state, this.registry, target);
+      if (!Number.isFinite(lethal) || total + lethal > afford) continue;
+      kept.push(target);
+      shares.push(lethal);
+      total += lethal;
+    }
+    if (shares.length === 0) return null;
+    if (total > maxXForTargets(xCost, legal.targetCount, kept) || total < minXForTargets(xCost, legal.targetCount, kept)) return null;
+    return { xValue: total, targets: kept, ...(shares.length > 1 ? { division: shares } : {}) };
   }
 
   /**
@@ -6101,6 +6158,9 @@ function paysWithStoredCounters(ability: ActivatedAbility): boolean {
     cost.payEnergy === undefined
   );
 }
+/** The most life v1 pays as an X that isn't shared out among targets it
+ * kills (Toxic Deluge's -X/-X): `lifeX`. */
+const LIFE_X_MOST = 8;
 /** The life at or below which a reanimation spell takes whatever there is. */
 const TAKE_ANYTHING_AT = 10;
 /** The library size at or below which a cast is asked whether it would run

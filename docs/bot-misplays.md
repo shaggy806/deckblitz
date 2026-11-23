@@ -234,7 +234,11 @@ right; each scenario runs v2 on a clock that has always run out (`outOfTime`).
 - *Fire Covenant for X=1 at no target.* Queen Marchesa's bot, on 10 life. The log has no target
   and no damage for it (the friend remembered it killing a 1/1 Insect; the Insect died in combat
   after). The scenario's v1 cast is exactly that: `xValue: 1, targets: []`. Scenario: "keeps Fire
-  Covenant for a creature worth its life, not X=1".
+  Covenant for a creature worth its life, not X=1". *Found later the same day:* no target was
+  all the engine offered. A life-paid X was missing from the cast offer, so the "up to X"
+  group was offered at X = 0 for bots and players alike; fixed in the engine, with v1's
+  `lifeX` and v2's shares by what kills (`COMPLETED.md`, "Fire Covenant could be cast at no
+  target only").
 - *Angel's Grace in its own main phase*, on 25 life, among five other spells. Scenario: "keeps
   Angel's Grace in hand on its own turn with nothing threatening it".
 - **Likely fix:** `unscoredCast` takes v1's cast only where a cheap test says it does something

@@ -17,7 +17,7 @@ import { convokeProofFor, delvePicks, fillModes, fitModeSet } from "../actions.j
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { modeChoicesBetween } from "../decisions/shared/subsets.js";
 import { targetCombos } from "../decisions/shared/target-combos.js";
-import { fitModalXGroup, fitTargetCount, maxXForTargets, targetsWithinTaxes } from "../target-count.js";
+import { fitModalXGroup, fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "../target-count.js";
 import { anyNumberSlot, concatModeSpecs } from "../target.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
@@ -250,7 +250,7 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
     if (seen.has(key)) continue;
     seen.add(key);
     const withX = { ...common, ...xValueOf(legal, targets), targets };
-    out.push(...(legal.xCost?.paidInLife === true ? lifeXLadder(legal.xCost).map((xValue) => ({ ...withX, xValue })) : [withX]));
+    out.push(...(legal.xCost?.paidInLife === true ? lifeXLadder(legal, targets).map((xValue) => ({ ...withX, xValue })) : [withX]));
   }
   return out;
 }
@@ -264,10 +264,20 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
  */
 const LIFE_X_LADDER = [1, 2, 3, 4, 5, 6, 7, 8, 10, 13, 16, 20] as const;
 
-function lifeXLadder(xCost: { readonly maxX: number; readonly minX?: number }): number[] {
-  const low = Math.max(1, xCost.minX ?? 0);
-  const xs = LIFE_X_LADDER.filter((x) => x >= low && x <= xCost.maxX);
-  return xs.length > 0 ? xs : [xCost.maxX];
+function lifeXLadder(legal: CastSpellLegal, targets: readonly (TargetRef | null)[]): number[] {
+  const xCost = legal.xCost;
+  if (xCost === undefined) return [];
+  // With a group of targets tied to X (Fire Covenant's "any number of target
+  // creatures", each dealt at least 1), the range these targets leave: X = 1
+  // at two targets was a candidate the engine refused.
+  const high = maxXForTargets(xCost, legal.targetCount, targets);
+  const floor = minXForTargets(xCost, legal.targetCount, targets);
+  if (high < floor) return [];
+  // An X shared out among the targets, at no target: life for nothing.
+  if (legal.divide?.x === true && !targets.some((t) => t !== null)) return [floor];
+  const low = Math.max(1, floor);
+  const xs = LIFE_X_LADDER.filter((x) => x >= low && x <= high);
+  return xs.length > 0 ? xs : [high];
 }
 
 function fitTargets(
