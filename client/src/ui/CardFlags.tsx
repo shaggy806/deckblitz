@@ -20,7 +20,7 @@ const COLOR_WORD: Readonly<Record<string, string>> = {
 /**
  * The small chips along a permanent's bottom-left corner: summoning sickness,
  * and the designations nothing else on the tile shows — goaded (rule 701.15)
- * suspected (701.60), saddled (702.171b), solved (719.3b), harnessed (701.64) and Ring-bearer (701.54). A designation isn't an ability, so it isn't in the
+ * suspected (701.60), saddled (702.171b), solved (719.3b), harnessed (701.64), Ring-bearer (701.54) and a sector (702.158b). A designation isn't an ability, so it isn't in the
  * keyword icons; suspect's menace and can't-block are, but not the fact that
  * it's suspected. Also how many cards it holds in exile (`holding` — a
  * Banishing Light's), which the hover card shows, and what was chosen as it
@@ -143,6 +143,20 @@ function flagsOf({ obj, goaders, enchanting = null, protectedBy = null, chosenPl
   }
   if (obj.suspected) {
     flags.push({ key: 'suspected', className: 'suspect', compact: 'Sus', long: 'suspected', name: 'Suspected', text: "It has menace and can't block." })
+  }
+  if (obj.sector !== undefined) {
+    // Space sculptor (rule 702.158b): which sector it's in decides what can
+    // block it under Space Beleren's +1, and what its −1 and −5 reach.
+    const greek = { alpha: 'α', beta: 'β', gamma: 'γ' }[obj.sector]
+    const word = obj.sector.charAt(0).toUpperCase() + obj.sector.slice(1)
+    flags.push({
+      key: 'sector',
+      className: `sector-${obj.sector}`,
+      compact: greek,
+      long: `${obj.sector} sector`,
+      name: `${word} sector`,
+      text: 'Its sector designation (space sculptor). Two creatures are in the same sector when both have this one.',
+    })
   }
   if (obj.solved === true) {
     flags.push({ key: 'solved', className: 'solved', compact: 'Slv', long: 'solved', name: 'Solved', text: 'Its Solved ability works now (rule 719.3b).' })

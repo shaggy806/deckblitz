@@ -1017,6 +1017,16 @@ const COLOR_CHOICE_NAMES: Readonly<Record<string, string>> = {
   R: 'Red',
   G: 'Green',
 }
+/** A sector for a creature (rule 704.5u — space sculptor): the "all" words
+ * give a whole token stack that sector. */
+const SECTOR_CHOICE_NAMES: Readonly<Record<string, string>> = {
+  alpha: 'Alpha',
+  beta: 'Beta',
+  gamma: 'Gamma',
+  'all alpha': 'All in Alpha',
+  'all beta': 'All in Beta',
+  'all gamma': 'All in Gamma',
+}
 /** A hand ability's button: its text up to its reminder or its effect, less
  * the part of the cost every such ability has (the card itself, discarded or
  * revealed) — "Ninjutsu {1}{U}", "Channel — {1}{G}". Short, as it's a pill
@@ -5454,7 +5464,7 @@ function Table({
             {/* A battle's protector is chosen among players (rule 310.9a). */}
             {view.turnOrder.includes(t as PlayerId)
               ? playerLabel(t as PlayerId, game.seats)
-              : (COLOR_CHOICE_NAMES[t] ?? t)}
+              : (COLOR_CHOICE_NAMES[t] ?? SECTOR_CHOICE_NAMES[t] ?? t)}
           </button>
         ))}
       </div>

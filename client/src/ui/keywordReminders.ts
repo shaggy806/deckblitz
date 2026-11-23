@@ -73,6 +73,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     name: 'Storied',
     text: 'If you control three or more artifacts, legendaries, and/or Sagas, you have an enduring story for the rest of the game.',
   },
+  'space-sculptor': {
+    name: 'Space sculptor',
+    text: "Divides the battlefield into alpha, beta, and gamma sectors. If a creature isn't assigned to a sector, its controller assigns it to one. Opponents assign first.",
+  },
   ascend: {
     name: 'Ascend',
     text: "If you control ten or more permanents, you get the city's blessing for the rest of the game.",

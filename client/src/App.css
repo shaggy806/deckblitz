@@ -3245,6 +3245,17 @@
 .card-flag.saddled {
   background: #d9a86c;
 }
+/* Space sculptor's sectors (rule 702.158b): one colour each, so a glance
+ * across the table matches creatures in the same sector. */
+.card-flag.sector-alpha {
+  background: #7fc8f8;
+}
+.card-flag.sector-beta {
+  background: #f2a65a;
+}
+.card-flag.sector-gamma {
+  background: #9be59b;
+}
 .card-flag.paired {
   background: #9fd3ff;
   cursor: help;

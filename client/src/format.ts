@@ -484,13 +484,21 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
             ? `${name(event.object)} becomes a copy of ${event.copyOf}`
             : `${name(event.object)} enters as a copy of ${event.copyOf}`
         : `${name(event.object)} copies nothing`
-    case 'creature-type-chosen':
+    case 'creature-type-chosen': {
+      // A creature's sector (rule 704.5u — space sculptor), its controller's
+      // choice: "all …" is every token of its stack. No creature type is one
+      // of these words.
+      const sector = /^(all )?(alpha|beta|gamma)$/.exec(event.creatureType)
+      if (sector !== null) {
+        return `${name(event.object)}${sector[1] !== undefined ? ' (every one)' : ''} goes into the ${sector[2]} sector`
+      }
       // A player chosen (Black Vise's opponent, a battle's protector) goes by name.
       return `${name(event.object)} chooses ${
         seats.some((s) => s.player === event.creatureType)
           ? who(event.creatureType as PlayerId)
           : (CHOSEN_COLOR_NAMES[event.creatureType] ?? event.creatureType)
       }`
+    }
     case 'secret-choice-made':
       return `${who(event.player)} secretly chooses for ${name(event.object)}`
     case 'secret-choice-revealed':
@@ -599,6 +607,11 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
         : `${event.players.map((p) => who(p)).join(', ')} can't ${what} this turn`
     }
     case 'restrictions-imposed': {
+      // Space Beleren's +1 (rule 702.158e): "only by creatures in the same
+      // sector", not unblockable.
+      if (event.sameSector === true) {
+        return `${who(event.player)}: for the rest of the turn, creatures in each sector can be blocked only by creatures in the same sector`
+      }
       const what = event.restrictions.map((r) => RESTRICTION_TEXT[r]).join(' and ')
       return event.object === undefined
         ? `${who(event.player)}: ${event.duration === undefined ? 'for the rest of the turn, ' : ''}affected creatures ${what}`

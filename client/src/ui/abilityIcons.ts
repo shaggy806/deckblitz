@@ -67,6 +67,9 @@ export const KEYWORD_GLYPH: Record<Keyword, string> = {
   storied: '', // ms-saga
   'read-ahead': '', // ms-saga
   ascend: '', // ms-ability-ascend
+  // Space sculptor has no icon of its own; the party one — it sorts the
+  // creatures into groups.
+  'space-sculptor': '', // ms-ability-party
   // No flanking icon anywhere in the font; it's a block trigger, so the
   // combat-condition one.
   flanking: '', // ms-ability-combat-condition

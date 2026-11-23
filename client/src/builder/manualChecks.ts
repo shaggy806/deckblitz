@@ -13792,4 +13792,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true },
     }),
   ),
+  preset(
+    'Space Beleren: every creature gets a sector, opponents first',
+    board({
+      you: { bf: ['Plains*2', 'Island*2', 'Grizzly Bears', 'Hill Giant'], hand: ['Space Beleren'] },
+      opp: { human: true, bf: ['Llanowar Elves', 'Serra Angel'] },
+    }),
+  ),
+  preset(
+    'Space Beleren: +1 lets only the same sector block',
+    board({
+      you: { bf: ['Plains*2', 'Island*2', 'Craw Wurm'], hand: ['Space Beleren'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Space Beleren: −1 counters one sector only',
+    board({
+      you: { bf: ['Plains*2', 'Island*2', 'Grizzly Bears', 'Hill Giant'], hand: ['Space Beleren'] },
+      opp: { bf: ['Llanowar Elves'] },
+    }),
+  ),
 ]
