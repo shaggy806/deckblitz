@@ -3140,6 +3140,63 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "sends the kill what it needs, not every creature it has, at a player one attacker kills",
+    rule: "A kill that doesn't end the game takes the attackers it needs: the rest attack where they do something, or stay home.",
+    run(weights, registry, makeBot) {
+      // From two kept live games (2026-11-22). D75RS-3 turn 21: a Zombie
+      // deck sent two more creatures at a player its borrowed Slicer killed
+      // alone, and had nothing home for the same Slicer the next two turns.
+      // D75RS-7 turn 25: 17 power at a player on 7 with no blockers, the
+      // other opponent open on 26, and a turn later one damage short of
+      // killing them. `alphaStrike` piled every attacker left over onto a
+      // player being killed, "a margin against a trick", whatever else they
+      // could have done. Here Bob dies to the commander alone (18 of its 21
+      // already dealt) with no creature and no card in hand, and two Hill
+      // Giants have two open players to hit.
+      const game = table(registry, [A, B, C, D], A);
+      for (const player of [A, B, C, D]) game.state.players[player].life = 40;
+      const commander = onBoard(game, "Ghalta, Primal Hunger", A);
+      game.state.objects[commander].isCommander = true;
+      game.state.players[B].commanderDamageTaken = { [commander]: 18 };
+      const giants = [onBoard(game, "Hill Giant", A), onBoard(game, "Hill Giant", A)];
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" || s.turn.step === "postcombat-main" || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "never asked to attack" };
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const at = (id: ObjectId): string => String(attackers.find((d) => d.attacker === id)?.defender ?? "home");
+      const kills = at(commander) === B;
+      const piled = giants.some((id) => at(id) === B);
+      return {
+        passed: kills && !piled,
+        detail: `the commander at ${at(commander)}, the Giants at ${giants.map(at).join(" and ")}`,
+      };
+    },
+  },
+  {
+    name: "keeps its blockers home when one opponent's whole board kills it and the attack kills nobody",
+    rule: "Dead to one opponent's whole swing on paper, an attack that kills nobody only pays for the times they split it.",
+    run(weights, registry, makeBot) {
+      // From a kept live game (2026-11-22, FU89K-1 turn 33): on 47 life in
+      // front of 29 Zombies, Muldrotha's bot sent its three creatures at a
+      // third player for no kill. The Zombies split between two players, 48
+      // came at it, and it died by 1 with two more blockers the difference.
+      // Dead to the Zombies whatever stayed home (`deadAnyway`), the attack
+      // search raced: holding back "buys nothing". Fixed: `racesForNothing`.
+      const game = table(registry, [A, B, C], A);
+      for (const player of [A, B, C]) game.state.players[player].life = 30;
+      game.state.players[A].life = 20;
+      const mine = [0, 1, 2].map(() => onBoard(game, "Hill Giant", A));
+      for (let i = 0; i < 10; i += 1) onBoard(game, "Craw Wurm", B, true);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" || s.turn.step === "postcombat-main" || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "never asked to attack" };
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const sent = attackers.filter((d) => mine.includes(d.attacker));
+      return {
+        passed: sent.length === 0,
+        detail: sent.length === 0 ? "everything stayed home" : `${sent.length} Hill Giant(s) attacked ${sent[0].defender}`,
+      };
+    },
+  },
+  {
     name: "keeps its Dragon home at 9 commander damage from a Slicer that comes round three times",
     rule: "A creature handed to each opponent in turn attacks on every one of their turns: count them all before tapping the only blocker.",
     run(weights, registry, makeBot) {

@@ -31,6 +31,7 @@ import { defaultRegistry } from "../cards/default-registry.js";
 import { HeuristicBotController, StandInController, compareReach, isLandfallPermanent, payoffFirst } from"../controller.js";
 import type { ControllerView, LandReach, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
+import { rulesTextName } from "../state.js";
 import type { GameState } from "../state.js";
 import { matchesFilter } from "../filter.js";
 import type { CardFilter } from "../filter.js";
@@ -71,6 +72,7 @@ import {
   damageThrough,
   isLethal,
   opponentsLethalAlone,
+  swingFrom,
   opponentsOutlived,
 } from "./combat-math.js";
 import type { CombatCreature } from "./combat-math.js";
@@ -3012,8 +3014,32 @@ export class EvalBotController extends HeuristicBotController {
     // same game as `held`'s: read as dead anyway, the bot raced, and each
     // race it could pick left it dead outright.
     const onLastPoints = deadAnyway && !this.crackbackLethal(held, false, undefined, 0);
+    // **No race for nothing.** Dead to one opponent's whole swing whatever
+    // stays home, an attack is free only if that reading is right, and it
+    // is the cautious one: every creature they have, all at us. An attack
+    // that kills nobody and lets more of that swing through pays for the
+    // times they split it. On 47 life in front of 29 Zombies, a seat sent
+    // its three creatures at a third player for no kill; the Zombies split
+    // between two players, 48 came at it, and two blockers were the game (a
+    // kept live game, FU89K-1 turn 33, 2026-11-22).
+    const swingOf = (board: GameState, killer: PlayerId): number => {
+      const through = swingFrom(board, this.cards, me, killer);
+      return through.damage - (through.gained ?? 0);
+    };
+    const heldSwings = new Map<PlayerId, number>();
+    const racesForNothing = (after: GameState): boolean =>
+      killers.length > 0 &&
+      !others.some((p) => after.players[p]?.hasLost === true) &&
+      killers.some((killer) => {
+        let before = heldSwings.get(killer);
+        if (before === undefined) {
+          before = swingOf(held, killer);
+          heldSwings.set(killer, before);
+        }
+        return swingOf(after, killer) > before;
+      });
     const loses = (after: GameState): boolean =>
-      (onLastPoints && this.crackbackLethal(after, false, undefined, 0)) || diesSooner(after);
+      (onLastPoints && this.crackbackLethal(after, false, undefined, 0)) || diesSooner(after) || racesForNothing(after);
 
     const alpha = this.alphaStrike(
       state,
@@ -3023,9 +3049,9 @@ export class EvalBotController extends HeuristicBotController {
       budget,
       somethingToLose || onLastPoints ? loses : undefined,
     );
-    if (alpha !== null) {
+    if (alpha !== null && alpha.all) {
       this.lastDecision = audit("attackers", budget);
-      return alpha;
+      return alpha.declaration;
     }
 
     // A creature that must attack is in every declaration the engine takes,
@@ -3156,30 +3182,44 @@ export class EvalBotController extends HeuristicBotController {
           })),
       );
 
+    // One more attacker, or part of a stack, at each defender it may attack.
+    const additions = (current: readonly AttackerDeclaration[]) =>
+      legal.eligible
+        .filter((id) => (mine.get(id)?.damage ?? 0) > 0)
+        .flatMap((attacker) => {
+          const left = stackSize(attacker) - sentOf(current, attacker);
+          if (left <= 0) return [];
+          return (legal.defendersFor[attacker] ?? []).flatMap((defender) => {
+            const each = estimate({ attacker, defender });
+            const finish = toFinish(current, attacker, defender);
+            // Smallest first: `hillClimb` keeps the first of equal scores,
+            // and a token that adds nothing is better kept home.
+            const parts = new Set([1, ...(finish < left ? [finish] : []), left]);
+            return [...parts].map((more) => ({
+              next: withMore(current, attacker, defender, more),
+              estimate: each * Math.min(more, finish),
+            }));
+          });
+        });
+    // **A kill, and what's left.** A kill of a player who can't answer it is
+    // the fewest attackers it needs (`alphaStrike`), and each attacker left
+    // over is added only where the simulated result is better for it, the
+    // crackback check in every score: at another player it can hurt, or not
+    // at all. They were all piled onto the player being killed. Under Smoke,
+    // a Zombie deck sent two more creatures at a player with no creature and
+    // no untapped land, whom a borrowed Slicer killed alone, and with one
+    // untap a turn had nothing home for the same Slicer two turns running (a
+    // kept live game, D75RS-3 turn 21, 2026-11-22).
+    if (alpha !== null) {
+      const [withTheRest] = hillClimb<AttackerDeclaration>(alpha.declaration, additions, score, budget);
+      this.lastDecision = audit("attackers", budget);
+      return withTheRest;
+    }
     // Built one attacker (or part of a stack) at a time, keeping each only if
     // it improves the simulated result, or re-aimed.
     const [built, builtScore] = hillClimb<AttackerDeclaration>(
       [],
-      (current) => [
-        ...reaims(current),
-        ...legal.eligible
-          .filter((id) => (mine.get(id)?.damage ?? 0) > 0)
-          .flatMap((attacker) => {
-            const left = stackSize(attacker) - sentOf(current, attacker);
-            if (left <= 0) return [];
-            return (legal.defendersFor[attacker] ?? []).flatMap((defender) => {
-              const each = estimate({ attacker, defender });
-              const finish = toFinish(current, attacker, defender);
-              // Smallest first: `hillClimb` keeps the first of equal scores,
-              // and a token that adds nothing is better kept home.
-              const parts = new Set([1, ...(finish < left ? [finish] : []), left]);
-              return [...parts].map((more) => ({
-                next: withMore(current, attacker, defender, more),
-                estimate: each * Math.min(more, finish),
-              }));
-            });
-          }),
-      ],
+      (current) => [...reaims(current), ...additions(current)],
       score,
       budget,
     );
@@ -3533,8 +3573,9 @@ export class EvalBotController extends HeuristicBotController {
    * when the same creatures, split, killed two. Killing one player doesn't
    * end a multiplayer game, so a plan still has to leave us alive to the
    * crackback of whoever survives it; the most kills that does is played,
-   * with the attackers left over piled onto a player being killed (a margin
-   * against a trick) unless keeping them home is what survives.
+   * with the attackers left over piled onto a player being killed who could
+   * still answer the kill (a margin against a trick), unless keeping them
+   * home is what survives. `all` says whether the plan kills everyone.
    */
   private alphaStrike(
     state: GameState,
@@ -3547,7 +3588,7 @@ export class EvalBotController extends HeuristicBotController {
      * it lived through before, or dead outright where holding back wasn't
      * (the attack decision's `loses`). Left out, a kill is taken as it comes. */
     diesSooner?: (after: GameState) => boolean,
-  ): AttackerDeclaration[] | null {
+  ): { readonly declaration: AttackerDeclaration[]; readonly all: boolean } | null {
     const me = this.playerId;
     // Every token of a compacted stack is its own attacker here, cloned so
     // the sets below tell the copies apart (`combatCreatures` lists one
@@ -3625,6 +3666,21 @@ export class EvalBotController extends HeuristicBotController {
     const killable = living.filter(
       (p) => legal.defenders.includes(p) && killWith(p, mine) !== null,
     );
+    // Whether `p` could still stop a kill the arithmetic calls lethal: a
+    // creature of theirs able to block, or mana open with a card in hand to
+    // spend it on. With neither (tapped out, or an empty hand, and nothing
+    // to block with) there is no trick to keep a margin against.
+    const canAnswer = (p: PlayerId): boolean => {
+      if ((blockersOf.get(p) ?? []).some((b) => b.canBlock)) return true;
+      if ((state.zones.perPlayer[p]?.hand.length ?? 0) === 0) return false;
+      return state.zones.shared.battlefield.some((id) => {
+        const object = state.objects[id];
+        if (object === undefined || object.controller !== p || object.tapped) return false;
+        if (computeCharacteristics(state, this.cards, id).types.includes("land")) return true;
+        const name = rulesTextName(object);
+        return this.cards.has(name) && this.cards.get(name).activated.some((a) => a.effect?.kind === "add-mana");
+      });
+    };
     if (killable.length === 0) return null;
     // The subset search only matters when more than one kill could fit: the
     // attackers' damage covers the life of every opponent they could kill
@@ -3666,9 +3722,14 @@ export class EvalBotController extends HeuristicBotController {
         for (const c of set) units.push({ c, defender });
         pool = pool.filter((c) => !set.includes(c));
       }
+      // Everything else piled onto a player being killed who could still do
+      // something about it (`canAnswer`): a margin against a block the
+      // arithmetic missed or a trick. Not onto one who can't: there the kill
+      // is what it needs, and the attackers left over are the declaration's
+      // to weigh one at a time (`attackersSearched`).
       const piled = [...units];
       for (const c of pool) {
-        const target = killed.find((p) => canAttack(c, p));
+        const target = killed.find((p) => canAttack(c, p) && canAnswer(p));
         if (target !== undefined) piled.push({ c, defender: target });
       }
       add(declare(piled), killed, units.length);
@@ -3715,7 +3776,7 @@ export class EvalBotController extends HeuristicBotController {
         plan.kills === living.length
           ? []
           : ranked.slice(i + 1).filter((other) => other.kills === plan.kills && other.who !== plan.who);
-      if (rivals.length === 0) return plan.declaration;
+      if (rivals.length === 0) return { declaration: plan.declaration, all: plan.kills === living.length };
       const worth = (after: GameState | null): number =>
         after === null ? -Infinity : evaluateState(after, this.cards, me, this.weights);
       let best = plan;
@@ -3732,7 +3793,7 @@ export class EvalBotController extends HeuristicBotController {
           bestWorth = value;
         }
       }
-      return best.declaration;
+      return { declaration: best.declaration, all: false };
     }
     return null;
   }

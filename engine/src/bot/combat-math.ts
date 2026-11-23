@@ -752,6 +752,19 @@ function crackbackByOpponent(
   }
 }
 
+/** What `opponent`'s swing alone gets through the blockers `me` has home:
+ * the crackback's reading of one opponent, counted in full. */
+export function swingFrom(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  opponent: PlayerId,
+  lost?: ReadonlySet<ObjectId> | "all",
+): DamageThrough {
+  const { blockers, attackersOf } = swingBack(state, registry, me, lost);
+  return damageThrough(attackersOf(opponent), blockers);
+}
+
 /**
  * The opponents still to act before `me` untaps whose swing kills it alone:
  * each one's creatures able to attack into the blockers home, counted in

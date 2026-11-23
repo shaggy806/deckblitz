@@ -65,8 +65,25 @@ re-run; positions are rebuilt by replaying the game to the turn):
   and a hasty commander in the command zone its owner can pay for, tax and a land drop counted
   (`commandersToCome`), is in its owner's swing and, handed round, in the swing of whoever acts
   after. D75RS-8 t22 now keeps a Dragon home; 8WNCA-2 t21 and TPGJ6-1 t12 keep their creature
-  home. Still open: the extra attackers piled onto a kill under Smoke (D75RS-3 t21), a Slicer
-  that came back with Equipment the board didn't show (D75RS-8 Zurgo t17), and the four by life.
+  home. **The attackers a kill doesn't need, and the race for nothing** (the same day; scenarios
+  "sends the kill what it needs, not every creature it has, at a player one attacker kills" and
+  "keeps its blockers home when one opponent's whole board kills it and the attack kills
+  nobody"). Traced on the five turns left, the attack search did three different things.
+  *Piled on*: `alphaStrike` put every attacker left over onto the player being killed, as a
+  margin against a trick. It still does where that player could answer the kill (a creature able
+  to block, or mana open with a card in hand: the full swing at a player on 9 with three
+  blockers, capture WAMFR t48, judged right on 2026-10-10, still gates). Where they can't, the
+  kill is what it needs and each attacker left over is added only where the simulated result is
+  better for it: D75RS-3 t21's two Zombies now hit another player for 6 where they hit a dead
+  one for nothing (they are still tapped under Smoke, which nothing here reads), and 8G96K-3 t36
+  is now a four-Dragon kill on the player who went on to win that game. *Raced*: FU89K-1 t33 was
+  dead on paper to the Zombies' whole swing whatever stayed home, so every attack was free; an
+  attack that kills nobody and lets more of that one opponent's swing through is now unsafe
+  (`racesForNothing`), and it keeps Uro and Jarad home, the two blockers it died without.
+  *Judged safe, and wasn't*: YA57F-2 t50 and YA57F-1 t24 kept blockers that covered the board as
+  it stood, and died to a Thunderfoot Baloth from hand, and to Swords to Plowshares on a blocker
+  with a stolen Collective Blessing. Nothing on the board said so; left as they are. Also open: a
+  Slicer that came back with Equipment the board didn't show (D75RS-8 Zurgo t17).
 - **Dictate of the Twin Gods cast by the seat it then kills** — RCSBH-3 t17, RCSBH-2 t26 (at 6
   Slicer damage; 12 doubled, then first strike), YA57F-2 t35 (15 became 30 at 30 life).
   **Fixed 2026-11-22** (`features.ts`'s `damageTimes`; three scenarios, "holds Dictate of the Twin
@@ -108,6 +125,9 @@ re-run; positions are rebuilt by replaying the game to the turn):
   Slicer scores just under it). The Counterspell and the Rapid Hybridization timing are open.
 - **Overkill instead of splitting** — D75RS-7 Domri t25: everything at a player one attacker
   killed; the spare 4 at the other would have made its next attack lethal, and it lost by 1.
+  Today it sends the one attacker the kill needs and keeps the spare home (the crackback reads
+  the board it leaves as unsafe with it tapped); whether it should go at the open player is the
+  attack search's ordinary call.
 - **Slicer handed to the last opponent** — RCSBH-3 t21, D75RS-3's last upkeep: goad then points it
   at its owner. Looked at 2026-11-22 and left: on a bare two-player board the bot declines. On
   those boards Slicer carried Equipment, and declining converts it, which unattaches all of it
