@@ -588,6 +588,26 @@ describe("PendingRoom: Commander-legal decks only", () => {
     expect(() => room.setReady(alice, true)).toThrow(/"Ancestral Recall" is banned in Commander/);
   });
 
+  it("on, refuses a deck with a playtest card; off, any room takes it", () => {
+    // Platinum Persecutor, a colourless playtest card: legal in no format, in
+    // the pool for casual play like a banned card (2026-11-23).
+    const registry = createDefaultRegistry();
+    const withPlaytest = SEATS.map((seat) => ({ commanders: seat.commanders ?? [], cards: [...seat.cards.slice(1), "Platinum Persecutor"] })).find(
+      (deck) => validateCommanderDeck({ ...deck, size: 100 }, registry).legal,
+    )!;
+    const result = validateCommanderDeck({ ...withPlaytest, size: 100 }, registry);
+    expect(result.playtest).toEqual(["Platinum Persecutor"]);
+    expect(result.banned).toEqual([]);
+    const room = pendingRoom();
+    const alice = { send: () => {} };
+    room.claimSeat(ALICE, "alice-token", alice, undefined, withPlaytest);
+    room.setReady(alice, true);
+    expect(room.seatStatuses()[0].ready).toBe(true);
+    room.setSettings({ commanderLegalOnly: true });
+    expect(room.seatStatuses()[0].ready).toBe(false);
+    expect(() => room.setReady(alice, true)).toThrow(/"Platinum Persecutor" is a playtest card, not legal in Commander/);
+  });
+
   it("on, refuses an illegal deck for a bot", () => {
     const room = pendingRoom();
     room.setSettings({ commanderLegalOnly: true });
