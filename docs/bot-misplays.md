@@ -34,8 +34,12 @@ exiled. **Fixed:** aimed at the caster's own library (`aim: "own-library"`), mos
 a bot names the card it has most of — the name least likely to sit wholly in the six exiled — and
 a player's suggestions are their own cards. The same for Spoils of the Vault, Divining Witch, Petra
 Sphinx and Vexing Arcanix; Cursed Scroll, Magus of the Scroll and Liar's Pendulum suggest the
-chooser's hand. Neither Consultation nor Tainted Pact digs for a particular card yet (BACKLOG
-"Bots"). Test: `choose-card-name.test.ts`.
+chooser's hand. Test: `choose-card-name.test.ts`. **Since then** (the same day): both dig for a
+card as a tutor picks one (`bot/dig.ts`). Consultation names the card the hand most wants while
+the library is big enough that one copy is rarely in the six exiled (sixty cards for a singleton
+deck), and the search casts it; Tainted Pact turns cards down until one near the best in the
+library, and takes anything once thirty are left. `bot-dig.test.ts` and the gate scenario "casts
+Demonic Consultation for the best card in its library".
 
 ## 2026-11-23 — A friend's Breena deck: Tainted Pact decks itself, Fountainport Fish in the upkeep, Sunforger unused
 

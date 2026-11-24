@@ -47,6 +47,9 @@ import {
 } from "./characteristics.js";
 import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
+import { isNameableAs } from "./card-names.js";
+import { thisWayEntries } from "./this-way.js";
+import { digOfCard, namedDigIn, nameToDigFor, takesOffered } from "./bot/dig.js";
 import { handCardQuality } from "./bot/hand-worth.js";
 import { LANDS_WANTED, chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
 import { combatCreatures, crackback, damageThrough, isLethal } from "./bot/combat-math.js";
@@ -4963,18 +4966,50 @@ export class HeuristicBotController extends AutomaticController {
     // tutor in hand was priced on: a land when the hand has none and the
     // board wants one, else the best spell within reach.
     if (awaiting?.kind === "choose-from-zone" && awaiting.destination === "hand") {
-      const lands = view.state.zones.shared.battlefield.filter(
-        (id) =>
-          view.state.objects[id]?.controller === this.playerId &&
-          computeCharacteristics(view.state, this.registry, id).types.includes("land"),
-      ).length;
-      const quality = new Map(
-        eligible.map((id) => [id, handCardQuality(view.state, this.registry, this.playerId, id, lands, LANDS_WANTED)]),
-      );
+      const wanted = this.wantedInHand(view.state);
+      const quality = new Map(eligible.map((id) => [id, wanted(id)]));
       const usual = this.mostUsefulTo(view.state, this.playerId, eligible, eligible.length);
       return [...usual].sort((a, b) => (quality.get(b) ?? 0) - (quality.get(a) ?? 0)).slice(0, take);
     }
     return this.mostUsefulTo(view.state, this.playerId, eligible, take);
+  }
+
+  /** How much our hand wants each card that isn't in it, as v2's evaluation
+   * reads a hand (`bot/hand-worth.ts`): what a tutor's find and a dig's name
+   * are ranked by. */
+  private wantedInHand(state: GameState): (id: ObjectId) => number {
+    const lands = state.zones.shared.battlefield.filter(
+      (id) =>
+        state.objects[id]?.controller === this.playerId &&
+        computeCharacteristics(state, this.registry, id).types.includes("land"),
+    ).length;
+    return (id) => handCardQuality(state, this.registry, this.playerId, id, lands, LANDS_WANTED);
+  }
+
+  /**
+   * A name to dig our own library for (Demonic Consultation, Spoils of the
+   * Vault, Divining Witch) is a tutor's pick: the card our hand most wants
+   * among the names the dig is safe for (`bot/dig.ts`), read from how many
+   * copies the library holds and never from where they lie. It used to be
+   * the first suggestion, the name the library holds most of: a Swamp, every
+   * time (a player's report, 2026-11-23). Any other name is still the first
+   * suggestion.
+   */
+  chooseCardName(
+    view: ControllerView,
+    source: ObjectId,
+    options: readonly string[],
+    suggested: readonly string[],
+  ): string {
+    const awaiting = view.state.awaiting;
+    if (awaiting?.kind === "choose-card-name" && awaiting.player === this.playerId && awaiting.options === undefined) {
+      const dig = namedDigIn(awaiting.then);
+      if (dig?.kind === "named") {
+        const pick = nameToDigFor(view.state, this.playerId, dig, this.wantedInHand(view.state));
+        if (pick !== null && isNameableAs(this.registry, pick.name, awaiting.filter)) return pick.name;
+      }
+    }
+    return super.chooseCardName(view, source, options, suggested);
   }
 
   /**
@@ -5018,6 +5053,20 @@ export class HeuristicBotController extends AutomaticController {
     // most of it is.
     if (awaiting.guess !== undefined) {
       return [awaiting.guess.matching * 2 > awaiting.guess.unseen ? 0 : 1];
+    }
+    // The card a dig of ours just exiled, offered to our hand (Tainted
+    // Pact): taken when it is near the best the library still holds
+    // (`bot/dig.ts`), and turned down to dig on otherwise. `effectWorth`
+    // calls any card a card, so the first one offered was always taken.
+    const offer = awaiting.modes.length === 1 ? awaiting.modes[0]?.effect : undefined;
+    if (offer?.kind === "move-exiled-this-way" && offer.to === "hand" && awaiting.player === this.playerId) {
+      const name = state.objects[awaiting.source]?.cardName;
+      const digs = name !== undefined && this.registry.has(name) && digOfCard(this.registry.get(name))?.kind === "until-taken";
+      const exiled = thisWayEntries(state, "exiled").map((entry) => entry.object);
+      const offered = exiled.at(-1);
+      if (digs && offered !== undefined && state.objects[offered]?.owner === this.playerId) {
+        return takesOffered(state, this.playerId, offered, exiled, this.wantedInHand(state)) ? [0] : [];
+      }
     }
     // "You may prevent X of that damage" (Battletide Alchemist): for damage
     // to us, prevent; to anyone else, let it through.

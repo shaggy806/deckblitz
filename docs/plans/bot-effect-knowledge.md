@@ -690,7 +690,10 @@ each kind anyway (`isCantripDue`: cantrips, then tutors). The evaluation now has
 0.5 to 1.5. Card flow is 0.4 a card netted, so drawing is always a gain; a tutor is 0.85 of the
 best card it can find; a creature goes by its body; a land is 1.25 as the next land drop and
 0.5 once seven are out; a card the lands can't reach is marked down. Targeted spells and
-noncreature permanents stay at 1.
+noncreature permanents stay at 1. A dig (Demonic Consultation, Tainted Pact; `bot/dig.ts`,
+2026-11-23) is priced as a tutor too: 0.85 of the card it would name among the names safe to
+dig for, or of what it expects to stop at; and our own cards in exile count into `library`, so
+what a dig exiles isn't charged 0.05 a card.
 
 What changed in how v2 picks: it casts cantrips, loots and tutors because the search scores
 them a gain, at any window where nothing else wants the mana (in its own main phase before the

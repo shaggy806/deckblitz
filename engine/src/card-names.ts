@@ -65,6 +65,8 @@ export interface CardNameFilter {
  *   the name they hold most.
  * - `"own-library"` — to find a card in the chooser's library (Wood Sage,
  *   Desperate Research): the name it holds most.
+ *   A bot digging for the named card (Demonic Consultation) names the one
+ *   its hand wants instead (`bot/dig.ts`).
  * - `"opponent-library"` — to guess an opponent's top card (Foreshadow): the
  *   names their shown cards repeat most, their basics included.
  * - `"own-library-creatures"` — to guess which creature card an opponent

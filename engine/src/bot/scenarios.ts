@@ -1957,6 +1957,31 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "casts Demonic Consultation for the best card in its library",
+    rule: "A dig is a tutor that pays in library: with cards to spare, cast it for the card the hand wants.",
+    position(registry) {
+      // It named the card the library held most of (a Forest here), which
+      // scored a wash against passing, and each card exiled on the way cost
+      // 0.05: never cast (a player's report, 2026-11-23). Now the name is a
+      // tutor's pick (`dig.ts`), the card in hand is priced as a tutor, and
+      // our own library past thirty cards isn't counted (`features.ts`).
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Swamp", A, 7);
+      for (let i = 0; i < 40; i += 1) game.debugSpawn("Forest", A, "library");
+      for (const name of ["Shivan Dragon", "Grizzly Bears", "Sol Ring"]) game.debugSpawn(name, A, "library");
+      holding(game, [B, C, D], 3);
+      const consultation = game.debugSpawn("Demonic Consultation", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === consultation,
+          detail: `holding Demonic Consultation on seven Swamps with a Shivan Dragon to find, chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "sacrifices its least creature to an edict",
     rule: "An edict takes the creature we'd miss least.",
     position(registry) {

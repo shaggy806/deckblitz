@@ -1776,9 +1776,12 @@ function playerFeaturesUncached(
   }
   if (plain.length > 0) graveyardCastable += reachedFromGraveyard(state, registry, player, graveyardPlays, plain);
   // And a card of ours waiting under a permanent that returns it.
+  let exiled = 0;
   for (const id of state.zones.shared.exile) {
     const object = state.objects[id];
-    if (object !== undefined && waitsToReturn(state, registry, player, object)) graveyardCastable += 1;
+    if (object === undefined) continue;
+    if (waitsToReturn(state, registry, player, object)) graveyardCastable += 1;
+    if (isMe && object.owner === player) exiled += 1;
   }
 
   const cap = Math.max(0, landCap);
@@ -1851,7 +1854,16 @@ function playerFeaturesUncached(
     permanentManaValue,
     loyalty,
     counters,
-    library: zones.library.length,
+    // Our own cards in exile count as still there. `library`'s 0.05 a card
+    // is the counterweight to `graveyard`'s (a mill at ourselves must not
+    // read as a gift); what a short library really costs is `libraryDanger`,
+    // which counts the library alone. A card exiled off our own library
+    // fills no graveyard, and charged 0.05 each, a dig read as a loss:
+    // Demonic Consultation for the best card in a sixty-card library exiles
+    // half of it on average, a point and a half against the 0.7 the find was
+    // worth, and the search never cast it (2026-11-23). An opponent's is
+    // counted as it is: exiling their library is still a mill.
+    library: zones.library.length + exiled,
     libraryDanger: Math.max(0, LIBRARY_DANGER_AT - zones.library.length),
     graveyard: zones.graveyard.length,
     graveyardCastable,

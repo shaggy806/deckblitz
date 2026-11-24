@@ -31,6 +31,9 @@
  * - **A tutor** is {@link CONVERT} of the best card in the library its
  *   filter allows: it finds that card, so casting it is a gain exactly when
  *   there is something better than itself to find.
+ * - **A dig** (`dig.ts`: Demonic Consultation, Tainted Pact) is a tutor that
+ *   pays in library: `CONVERT` of the card it would name, or of what it
+ *   expects to stop at.
  * - **Any other instant or sorcery with no target** is `CONVERT` of what
  *   `effect-worth.ts` reads off its effect, where a card is 2.
  * - **Anything else** — a spell with targets or a cost beyond mana, a
@@ -89,6 +92,8 @@ import { matchesFilter } from "../filter.js";
 import { manaValue, parseManaCost } from "../mana.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
+import { digOf, nameToDigFor, untilTakenQuality } from "./dig.js";
+import type { Dig } from "./dig.js";
 
 /** The least and most a card's quality can be: half a card, a card and a half. */
 export const QUALITY_MIN = 0.5;
@@ -189,6 +194,16 @@ function tutorQuality(reader: Reader, search: SearchToHand): number {
   return CONVERT * total;
 }
 
+/** A dig's quality (`dig.ts`): `CONVERT` of the card it names, or of what it
+ * expects to take. Like a tutor's, what it finds is read with tutors and
+ * digs as average cards. */
+function digQuality(reader: Reader, dig: Dig): number {
+  const quality = (id: ObjectId): number => qualityOf(reader, id, false);
+  if (dig.kind === "until-taken") return CONVERT * untilTakenQuality(reader.state, reader.player, quality);
+  const pick = nameToDigFor(reader.state, reader.player, dig, quality);
+  return pick === null ? QUALITY_MIN : CONVERT * pick.quality;
+}
+
 /** The cards card flow leaves us up, for a spell that is nothing else: its
  * draws less what a discard cost throws, at least one. `null` otherwise. */
 function flowOf(registry: CardRegistry, def: CardDefinition): number | null {
@@ -199,7 +214,9 @@ function flowOf(registry: CardRegistry, def: CardDefinition): number | null {
     if (typeof discard !== "number" || Object.keys(rest).length > 0) return null;
     thrown = discard;
   }
-  if (thrown === 0 && def.targets.length === 0 && tutorOf(def.effect) !== null) return null;
+  if (thrown === 0 && def.targets.length === 0 && (tutorOf(def.effect) !== null || digOf(def.effect) !== null)) {
+    return null;
+  }
   const flow = cardFlowGain(def.effect, registry);
   return flow === null ? null : Math.max(1, flow - thrown);
 }
@@ -211,6 +228,8 @@ function spellQuality(reader: Reader, def: CardDefinition, tutors: boolean): num
   if (def.additionalCost !== null || def.targets.length > 0) return 1;
   const search = tutorOf(def.effect);
   if (search !== null) return tutors ? tutorQuality(reader, search) : 1;
+  const dig = digOf(def.effect);
+  if (dig !== null) return tutors ? digQuality(reader, dig) : 1;
   const worth = effectWorth(def.effect, {
     state: reader.state,
     me: reader.player,
