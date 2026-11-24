@@ -8405,6 +8405,70 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "holds Teferi's Protection until an attack is declared at it",
+    rule: "A spell that phases out our whole board waits for something to save it from: cast before the attack, the attack only goes elsewhere.",
+    position(registry) {
+      // Y'shtola's games (2026-11-24): v1 held the Protection for an attack
+      // or an opponent's spell (`holdsOwnPhaseOut`), and v2's own candidates
+      // never asked, so the search cast it in the upkeep of the first
+      // opponent with creatures, at 30 life as at 10: its rollout showed the
+      // attack coming, and with the Protection cast that attack went at
+      // someone else and the card was gone.
+      const game = table(registry, [A, B, C, D], B);
+      for (const player of [A, B, C, D]) game.state.players[player].life = 30;
+      lands(game, "Plains", A, 3);
+      for (let i = 0; i < 3; i += 1) onBoard(game, "Craw Wurm", B);
+      const protection = game.debugSpawn("Teferi's Protection", A, "hand");
+      // Bob passes, and the two between them: Alice's window in his main phase.
+      game.dispatch({ type: "pass-priority", player: B });
+      game.advanceUntil((s) => (s.awaiting === null && s.priority.holder === A) || s.result.over);
+      if (game.state.priority.holder !== A || game.state.awaiting !== null || game.state.turn.step !== "precombat-main") {
+        return { passed: false, detail: `alice never held priority in bob's main phase (${game.state.turn.step})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === protection),
+          detail: `in bob's ${game.state.turn.step}, chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "casts Teferi's Protection when a lethal attack is declared at it",
+    rule: "The moment the hold waits for: three Wurms at 10 life, and the spell that turns them away.",
+    position(registry) {
+      const game = table(registry, [A, B, C, D], B);
+      for (const player of [A, B, C, D]) game.state.players[player].life = 30;
+      game.state.players[A].life = 10;
+      lands(game, "Plains", A, 3);
+      const wurms = [0, 1, 2].map(() => onBoard(game, "Craw Wurm", B));
+      const protection = game.debugSpawn("Teferi's Protection", A, "hand");
+      game.advanceUntil((s) => (s.awaiting?.kind === "attackers" && s.awaiting.player === B) || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "bob was never asked to attack" };
+      game.dispatch({
+        type: "declare-attackers",
+        player: B,
+        attackers: wurms.map((attacker) => ({ attacker, defender: A })),
+      });
+      game.advanceUntil(
+        (s) => (s.awaiting === null && s.priority.holder === A) || s.awaiting?.player === A || s.result.over,
+      );
+      if (game.state.awaiting !== null || game.state.priority.holder !== A || game.state.turn.step !== "declare-attackers") {
+        return { passed: false, detail: `alice never held priority with the attack declared (${game.state.turn.step})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === protection,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "casts Armageddon from ahead on the battlefield",
     rule: "With the creatures to win the game it leaves, mass land destruction is the play.",
     position(registry) {

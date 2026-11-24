@@ -4384,19 +4384,40 @@ export class HeuristicBotController extends AutomaticController {
    * blockers for a round — the bot cast it in its own upkeep with an
    * opponent on 2 life, and attacked with nothing (reported from a live
    * game, 2026-11-14).
+   *
+   * The attack is one at us or a permanent of ours: any attack counted, and
+   * the spell went at creatures sent at someone else. And v2 asks this too
+   * (`listCandidates`): it had only v1's cast to hold, so the search cast
+   * the Protection in the upkeep of the first opponent with creatures, at
+   * 30 life as at 10, its rollout showing the attack that then didn't come
+   * (Y'shtola's games, 2026-11-24).
    */
-  private holdsOwnPhaseOut(state: GameState, offer: CastSpellLegal): boolean {
-    if (offer.castModal !== undefined || offer.face !== undefined || !this.registry.has(offer.cardName)) return false;
-    if (!phasesOutOurs(this.registry.get(offer.cardName).effect)) return false;
+  protected holdsOwnPhaseOut(state: GameState, offer: LegalAction): boolean {
+    if (offer.kind !== "cast-spell" || !this.savesOurBoard(offer)) return false;
+    const me = this.playerId;
     const answering = state.zones.shared.stack.some((id) => {
       const object = state.objects[id];
-      return object !== undefined && object.controller !== this.playerId;
+      return object !== undefined && object.controller !== me;
     });
     if (answering) return false;
-    const attacked =
-      activePlayerOf(state) !== this.playerId &&
-      (state.turn.step === "declare-attackers" || state.turn.step === "declare-blockers");
+    if (activePlayerOf(state) === me) return true;
+    if (state.turn.step !== "declare-attackers" && state.turn.step !== "declare-blockers") return true;
+    const attacked = state.zones.shared.battlefield.some((id) => {
+      const defender = state.objects[id]?.attacking;
+      if (defender === null || defender === undefined) return false;
+      return defender === me || state.objects[defender as ObjectId]?.controller === me;
+    });
     return !attacked;
+  }
+
+  /** Whether `offer` casts a spell that takes our whole board, and us, out
+   * of an attack's or a wipe's way: one that phases out every permanent we
+   * control (Teferi's Protection). What `holdsOwnPhaseOut` holds for the
+   * moment there is something to save them from. */
+  protected savesOurBoard(offer: LegalAction): boolean {
+    if (offer.kind !== "cast-spell" || offer.castModal !== undefined || offer.face !== undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    return phasesOutOurs(this.registry.get(offer.cardName).effect);
   }
 
   /**

@@ -2319,6 +2319,10 @@ export class EvalBotController extends HeuristicBotController {
         // (`holdsLandWipe`): three opponents' lands for ours scores well, and
         // who is ahead once nobody can cast anything no rollout shows.
         if (this.holdsLandWipe(view.state, legal)) continue;
+        // Teferi's Protection with nothing to save the board from
+        // (`holdsOwnPhaseOut`): the rollout shows an attack it turns away,
+        // and cast before one is declared that attack only goes elsewhere.
+        if (this.holdsOwnPhaseOut(view.state, legal)) continue;
         // A land that taps for mana and fetches (Bountiful Landscape) waits
         // for the end of the turn before ours (`holdsManaLandFetch`).
         if (this.holdsManaLandFetch(view.state, legal)) continue;
