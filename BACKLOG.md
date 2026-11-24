@@ -12,6 +12,7 @@ built.
 Each waits on a decision only the user can make. Once one is answered, move the work it
 decides into its section below.
 
+- **Which bracket choice for the landing page's blitz?** (2026-11-24) Three Bracket 2/3/4 buttons in place of the one, or the one button with a remembered bracket selector under it: both are mocked up on the branch `claude/blitz-bracket-mockup` (`?blitzui=three`, `?blitzui=select`), screenshotted at 1366x768, 1920x1080, 2560x1440 and a phone. `NetworkGame.blitz` already takes the pool (`options.against`); the landing page still always deals Bracket 3.
 - **Does "dies" reach a noncreature, nonplaneswalker permanent?** Rule 700.4 says any permanent "is put into a graveyard from the battlefield"; the Glossary says "a creature or planeswalker", and so does Oracle's practice (Boggart Mischief says "Goblin creature"). The engine follows the Glossary (`dies-creature-only.test.ts`). The BACKLOG line **"A Zombie … dies" is read as a Zombie creature** waits on this: keep it, or close it.
 
 ## Commander gap (the current priority)
