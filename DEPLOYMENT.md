@@ -355,7 +355,9 @@ position, `--bots` lists the bot moves that weren't a finished search). A record
 on the commit it names: the replay says so when this checkout isn't it and the game comes out
 different. `npm run game:to-replay -- games/<day>/<file> [--seat <player or name>] [--open]` turns
 one into a file the site's replay viewer opens (Settings, "Watch a replay…"): from one seat, or
-with `--open` every hand face up in the players' panels (`scripts/record-to-replay.mjs`).
+with `--open` every hand face up in the players' panels (`scripts/record-to-replay.mjs`). It takes a plain
+exported log too (its room and seed find the record in `games/`), and builds the record's own commit once
+in `.scratch/builds/` where the engine has changed since (`-- --clean` removes those builds).
 
 ### Why it is a second listener, and not a route on :4000
 
