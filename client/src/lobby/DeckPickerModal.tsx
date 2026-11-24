@@ -1,9 +1,17 @@
 import { useState } from 'react'
+import type { CommanderCandidate } from 'protocol'
 import { commanderPrintings, deckLabel, listPickableDecks, listStrongDecks } from '../deck-builder/decks.ts'
 import type { PickableDeck } from '../deck-builder/decks.ts'
+import { CommanderPicker } from '../deck-builder/CommanderPicker.tsx'
+import { importAndSave } from '../deck-builder/importAndSave.ts'
+import type { ImportProgress, ImportReport } from '../deck-builder/importDeck.ts'
 import { CommanderArt } from './CommanderArt.tsx'
 import { DeckIdentityPips } from '../ui/DeckIdentityPips.tsx'
+import { poolLabel } from './randomBotDeck.ts'
 import './lobby.css'
+
+/** The tab that imports a pasted list (`DeckImportTab`). */
+const IMPORT_TAB = 'import'
 
 /**
  * The popup the seat board opens when you click a seat's deck slot — lets
@@ -15,9 +23,11 @@ import './lobby.css'
  *
  * The decks are in groups, one shown at a time (the user, 2026-11-15: "they
  * should be sorted into 3 strength categories rather than a long list"):
- * for your own seat My decks, Precon and Upgraded (the strong decks are real
- * players' lists, dealt to bots only); for a bot (`forBot`) Precon, Upgraded
- * and Strong, the strengths its "+ Bot" buttons deal from, then My decks.
+ * for your own seat My decks, Bracket 2 and Bracket 3 (the precons and the
+ * upgraded precons; Bracket 4, real players' lists, is dealt to bots only),
+ * then Import list (`DeckImportTab`, a pasted list saved and brought); for a
+ * bot (`forBot`) Brackets 2, 3 and 4, the pools its "+ Bot" buttons deal
+ * from (`BOT_DECK_POOLS`), then My decks.
  * A bot plays one of your saved decks only when you pick it here (the user,
  * 2026-11-22: "it should remain a manual choice"): the "+ Bot" buttons and
  * Fill with bots never deal one, and the tab comes last so the picker opens
@@ -45,11 +55,14 @@ export function DeckPickerModal({
   const saved = { id: 'saved', label: 'My decks', decks: decks.filter((d) => d.key.startsWith('saved:')) }
   const groups: readonly { readonly id: string; readonly label: string; readonly decks: readonly PickableDeck[] }[] = [
     ...(forBot ? [] : [saved]),
-    { id: 'precon', label: 'Precon', decks: starters.filter((d) => d.strength === 'precon') },
-    { id: 'upgraded', label: 'Upgraded', decks: starters.filter((d) => d.strength === 'upgraded') },
-    { id: 'strong', label: 'Strong', decks: forBot ? listStrongDecks() : [] },
+    { id: 'precon', label: poolLabel('precon'), decks: starters.filter((d) => d.strength === 'precon') },
+    { id: 'upgraded', label: poolLabel('upgraded'), decks: starters.filter((d) => d.strength === 'upgraded') },
+    { id: 'strong', label: poolLabel('strong'), decks: forBot ? listStrongDecks() : [] },
     ...(forBot ? [saved] : []),
-  ].filter((g) => g.decks.length > 0)
+  ]
+    .filter((g) => g.decks.length > 0)
+    // A pasted list, for your own seat: no visit to the deck builder first.
+    .concat(forBot ? [] : [{ id: IMPORT_TAB, label: 'Import list', decks: [] }])
   const [chosen, setChosen] = useState<string | null>(null)
   const open =
     groups.find((g) => g.id === chosen) ??
@@ -89,9 +102,13 @@ export function DeckPickerModal({
           </p>
         ) : null}
         <div className="deck-picker-list" role="tabpanel">
-          {(open?.decks ?? []).map((d) => (
-            <DeckPickerRow key={d.key} deck={d} onPick={onPick} current={d.name === current} />
-          ))}
+          {open?.id === IMPORT_TAB ? (
+            <DeckImportTab onPick={onPick} />
+          ) : (
+            (open?.decks ?? []).map((d) => (
+              <DeckPickerRow key={d.key} deck={d} onPick={onPick} current={d.name === current} />
+            ))
+          )}
         </div>
         {!forBot ? (
           <a
@@ -103,6 +120,132 @@ export function DeckPickerModal({
         ) : null}
       </div>
     </div>
+  )
+}
+
+/**
+ * The picker's Import tab, for your own seat: a pasted list imported as the
+ * deck builder imports one (`importAndSave`: an unimplemented card swapped
+ * for a stand-in, one with none dropped) and saved to your decks, so it's in
+ * My decks and the deck builder afterwards and survives a reload of the room
+ * (the user, 2026-11-24: to test a deck against the bots without visiting the
+ * deck builder first). A list the import didn't change is brought to the seat
+ * at once; one it did shows what changed first, with a button to bring it.
+ */
+function DeckImportTab({ onPick }: { readonly onPick: (deck: PickableDeck) => void }) {
+  const [text, setText] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [progress, setProgress] = useState<ImportProgress | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [asking, setAsking] = useState<readonly CommanderCandidate[] | null>(null)
+  const [imported, setImported] = useState<{ readonly deck: PickableDeck; readonly report: ImportReport } | null>(null)
+
+  const run = (commanders?: readonly string[]) => {
+    setAsking(null)
+    setBusy(true)
+    setProgress(null)
+    setError(null)
+    importAndSave(text, setProgress, commanders)
+      .then((outcome) => {
+        if (outcome.kind === 'ask') {
+          setAsking(outcome.candidates)
+          return
+        }
+        const deck = listPickableDecks().find((d) => d.key === `saved:${outcome.deck.id}`)
+        if (deck === undefined) throw new Error('The deck could not be saved in this browser.')
+        if (outcome.report.substituted.length === 0 && outcome.report.dropped.length === 0) onPick(deck)
+        else setImported({ deck, report: outcome.report })
+      })
+      .catch((err: unknown) => setError(err instanceof Error ? err.message : String(err)))
+      .finally(() => setBusy(false))
+  }
+
+  // The clipboard, read on the click (which is what lets a browser allow it).
+  const paste = () => {
+    setError(null)
+    const read = navigator.clipboard?.readText?.bind(navigator.clipboard)
+    if (read === undefined) {
+      setError("This browser won't let the page read the clipboard: press Ctrl+V in the box.")
+      return
+    }
+    read()
+      .then((clip) => {
+        if (clip.trim() === '') setError('The clipboard is empty.')
+        else setText(clip)
+      })
+      .catch(() => setError("The browser didn't allow reading the clipboard: press Ctrl+V in the box."))
+  }
+
+  if (imported !== null) {
+    const { deck, report } = imported
+    return (
+      <div className="deck-picker-import">
+        <p className="deck-picker-import-head">
+          <strong>{deck.name}</strong> is saved to your decks: {report.asIs} as-is, {report.substitutedCards} swapped
+          for a stand-in, {report.droppedCards} dropped.
+        </p>
+        {report.substituted.length > 0 ? (
+          <ul className="deck-picker-import-changes">
+            {report.substituted.map((s) => (
+              <li key={s.from}>
+                {s.from} <span aria-hidden="true">→</span> <strong>{s.to}</strong>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        {report.dropped.length > 0 ? (
+          <p className="deck-picker-import-note">No stand-in for: {report.dropped.join(', ')}</p>
+        ) : null}
+        <button type="button" className="primary" onClick={() => onPick(deck)}>
+          Bring this deck
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <form
+      className="deck-picker-import"
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (text.trim() !== '' && !busy) run()
+      }}
+    >
+      <label className="deck-picker-import-note" htmlFor="deck-picker-import-list">
+        Paste a decklist (a Moxfield or Archidekt export, or "1 Card Name" lines). It&apos;s saved to your decks; a
+        card the engine doesn&apos;t have yet is swapped for a similar one.
+      </label>
+      <textarea
+        id="deck-picker-import-list"
+        className="deck-picker-import-text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder={'Commander\n1 Ureni of the Unwritten\n\nDeck\n1 Sol Ring\n...'}
+        spellCheck={false}
+        disabled={busy}
+      />
+      <div className="deck-picker-import-actions">
+        <button type="button" onClick={paste} disabled={busy}>
+          Paste from clipboard
+        </button>
+        <button type="submit" className="primary" disabled={busy || text.trim() === ''}>
+          {busy ? 'Importing…' : 'Import'}
+        </button>
+      </div>
+      {busy ? (
+        <p className="deck-picker-import-note" role="status">
+          {progress === null ? 'Reading your list…' : `Reading your list: ${progress.done} of ${progress.total} cards`}
+        </p>
+      ) : null}
+      {error !== null ? (
+        <p className="deck-picker-import-error" role="alert">
+          ⚠ {error}
+        </p>
+      ) : null}
+      {asking !== null ? (
+        <CommanderPicker candidates={asking} onPick={run} onCancel={() => setAsking(null)} />
+      ) : null}
+    </form>
   )
 }
 

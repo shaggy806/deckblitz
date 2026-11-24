@@ -9,27 +9,45 @@ export type BotDeckPool = 'precon' | 'upgraded' | 'strong'
 
 /** The pools in the order the lobby offers them, each with its button's
  * label and what it says on hover: on a seat's own button (`hint`), and on
- * the one that fills the whole table at that strength (`fillHint`). */
-export const BOT_DECK_POOLS: readonly { pool: BotDeckPool; label: string; hint: string; fillHint: string }[] = [
+ * the one that fills the whole table at that strength (`fillHint`). Players
+ * see them as the Commander brackets they play at (the user, 2026-11-24): 2
+ * for a precon as printed, 3 for an upgraded one, 4 for a real player's deck.
+ * The hints still say where the decks come from, which the number doesn't.
+ * Where three buttons sit in a row under one "Bracket" (a seat's Add bot,
+ * Fill with bots), each shows its `bracket` alone: "Bracket 2" three times
+ * over didn't fit a seat at four seats on a 1366px screen. */
+export const BOT_DECK_POOLS: readonly {
+  pool: BotDeckPool
+  label: string
+  bracket: string
+  hint: string
+  fillHint: string
+}[] = [
   {
     pool: 'precon',
-    label: 'Precon',
-    hint: 'Add a bot playing a random precon, as printed',
-    fillHint: 'Fill the table to four with bots, each playing a random precon, as printed',
+    label: 'Bracket 2',
+    bracket: '2',
+    hint: 'Add a Bracket 2 bot, playing a random precon as printed',
+    fillHint: 'Fill the table to four with Bracket 2 bots, each playing a random precon as printed',
   },
   {
     pool: 'upgraded',
-    label: 'Upgraded',
-    hint: 'Add a bot playing a random upgraded precon',
-    fillHint: 'Fill the table to four with bots, each playing a random upgraded precon',
+    label: 'Bracket 3',
+    bracket: '3',
+    hint: 'Add a Bracket 3 bot, playing a random upgraded precon',
+    fillHint: 'Fill the table to four with Bracket 3 bots, each playing a random upgraded precon',
   },
   {
     pool: 'strong',
-    label: 'Strong',
-    hint: "Add a bot playing a real player's deck (credited on the About page)",
-    fillHint: "Fill the table to four with bots, each playing a real player's deck (credited on the About page)",
+    label: 'Bracket 4',
+    bracket: '4',
+    hint: "Add a Bracket 4 bot, playing a real player's deck (credited on the About page)",
+    fillHint: "Fill the table to four with Bracket 4 bots, each playing a real player's deck (credited on the About page)",
   },
 ]
+
+/** What players call pool `pool`: "Bracket 3". */
+export const poolLabel = (pool: BotDeckPool): string => BOT_DECK_POOLS.find((p) => p.pool === pool)?.label ?? pool
 
 /** The decks a pool deals from: the precons, the upgraded precons, or the
  * real players' decks (bots only: the deck builder doesn't offer those). */

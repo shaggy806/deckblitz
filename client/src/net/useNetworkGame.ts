@@ -35,6 +35,8 @@ import type {
 import { prefetchArt } from '../ui/art.ts'
 import { recordFrame } from '../replay/recorder.ts'
 import { randomBotDecks } from '../lobby/randomBotDeck.ts'
+import type { BotDeckPool } from '../lobby/randomBotDeck.ts'
+import { BLITZ_PARAM, BLITZ_POOL_PARAM, DEFAULT_BLITZ_POOL, blitzReady } from '../lobby/blitzDeck.ts'
 import { isRematch } from './rematch.ts'
 import { stopsBelongTo } from '../game/passSettings.ts'
 import { notePrintings } from '../game/seenPrintings.ts'
@@ -45,7 +47,7 @@ import { FIRST_GAME_PARAM, LESSON_PARAM } from '../tutorial/lesson.ts'
 import type { GameKey } from './rematch.ts'
 import { localMode } from '../local/localMode.ts'
 import { localStart } from '../lobby/localStart.ts'
-import { createDeckFromImport, listDecks } from '../deck-builder/decks.ts'
+import { createDeckFromImport, listDecks, listPickableDecks } from '../deck-builder/decks.ts'
 import { HybridSocket, isLocalRoom, isTableRoom } from '../local/localSocket.ts'
 import { tablesMode } from '../local/tablesMode.ts'
 import type { RoomSocket } from '../local/localSocket.ts'
@@ -80,6 +82,16 @@ export interface BlitzReport {
   /** The list is short of a Commander deck's 100 cards: how many it has. It
    * is played as it is, with a word of warning. */
   readonly short?: number
+}
+
+/** How a blitz is dealt. */
+export interface BlitzOptions {
+  /** The pool the three bots' decks come from (`DEFAULT_BLITZ_POOL`, Bracket
+   * 3, if not said). */
+  readonly against?: BotDeckPool
+  /** Whether the result screen offers to save the deck: a pasted list's
+   * blitz does; a first game's starter and a deck already saved don't. */
+  readonly offerSave?: boolean
 }
 
 /** A stable empty list, so "no frame yet" doesn't look like a changed
@@ -215,6 +227,7 @@ export function opensOnLanding(): boolean {
     !params.has('room') &&
     !params.has(LESSON_PARAM) &&
     !params.has(FIRST_GAME_PARAM) &&
+    !params.has(BLITZ_PARAM) &&
     !(import.meta.env.DEV && params.has(CHECK_PARAM))
   )
 }
@@ -238,6 +251,32 @@ function takeFirstGameFromUrl(): boolean {
   url.searchParams.delete(FIRST_GAME_PARAM)
   window.history.replaceState(null, '', url)
   return true
+}
+
+/** A `?blitz=` the page loaded with (the deck builder's Blitz button,
+ * `blitzUrl`): the deck it names and the pool its bots are dealt from, taken
+ * off the URL the same way. Null for none, or a deck no longer here. */
+function takeBlitzFromUrl(): { readonly deck: WireDeck; readonly against: BotDeckPool } | null {
+  const url = new URL(window.location.href)
+  const key = url.searchParams.get(BLITZ_PARAM)
+  if (key === null) return null
+  const pool = url.searchParams.get(BLITZ_POOL_PARAM)
+  url.searchParams.delete(BLITZ_PARAM)
+  url.searchParams.delete(BLITZ_POOL_PARAM)
+  window.history.replaceState(null, '', url)
+  const found = listPickableDecks().find((d) => d.key === key)
+  if (found === undefined) return null
+  return {
+    deck: {
+      cards: found.cards,
+      commanders: found.commanders,
+      ...(found.commanderColors !== undefined ? { commanderColors: found.commanderColors } : {}),
+      name: found.name,
+      ...(found.printings !== undefined && Object.keys(found.printings).length > 0 ? { printings: found.printings } : {}),
+      ...(found.attractions !== undefined && found.attractions.length > 0 ? { attractions: found.attractions } : {}),
+    },
+    against: pool === 'precon' || pool === 'upgraded' || pool === 'strong' ? pool : DEFAULT_BLITZ_POOL,
+  }
 }
 
 /** The starter deck for someone just out of Learn Commander. */
@@ -344,11 +383,12 @@ export interface NetworkGame {
   /** Opens a two-seat room with this tab as its host. The table is sized
    * from the seat board afterwards (`addSeat`/`removeSeat`). */
   createRoom: () => void
-  /** Blitzing: plays `deck` against three bots on random starter decks at
-   * once — a four-seat room, my seat claimed and readied, the bots added and
-   * the game started, with no seat board in between. `report` is what the
-   * import changed, shown over the game (`blitzReport`). */
-  blitz: (deck: WireDeck, report: BlitzReport) => void
+  /** Blitzing: plays `deck` against three bots on random decks from one pool
+   * (`options.against`, Bracket 3 by default) at once — a four-seat room, my
+   * seat claimed and readied, the bots added and the game started, with no
+   * seat board in between. `report` is what the import changed, shown over
+   * the game (`blitzReport`). */
+  blitz: (deck: WireDeck, report: BlitzReport, options?: BlitzOptions) => void
   /** A blitz between its click and the game's first frame. */
   readonly blitzing: boolean
   /** What the blitz's import changed, until dismissed — and gone for good
@@ -358,7 +398,7 @@ export interface NetworkGame {
   dismissBlitzReport: () => void
   /** The pasted deck this tab is blitzing, for the result screen's offer to
    * save it: a blitz saves nothing by itself. Null for the first game's
-   * starter deck, in any other room, and after a reload. */
+   * starter deck, a deck the deck builder blitzed (`offerSave`), in any other room, and after a reload. */
   readonly blitzDeck: WireDeck | null
   /** Whether {@link saveBlitzDeck} has kept it. */
   readonly blitzDeckSaved: boolean
@@ -564,6 +604,8 @@ export function useNetworkGame(): NetworkGame {
   const startTutorialRef = useRef<(lesson: string) => void>(() => {})
   /** The same for a `?first-game=` URL. */
   const startFirstGameRef = useRef<() => void>(() => {})
+  /** The same for a `?blitz=` URL: `blitz` itself. */
+  const blitzRef = useRef<(deck: WireDeck, report: BlitzReport, options?: BlitzOptions) => void>(() => {})
   /** The game the last frame was from, to tell a rematch's first frame. */
   const lastGameRef = useRef<GameKey | null>(null)
   /** The event log as this socket's frames have built it (`eventLog.ts`). */
@@ -751,6 +793,7 @@ export function useNetworkGame(): NetworkGame {
       const fromUrl = url.searchParams.get('room')
       const lesson = fromUrl ? null : takeLessonFromUrl()
       const firstGame = !fromUrl && takeFirstGameFromUrl()
+      const blitzFromUrl = fromUrl ? null : takeBlitzFromUrl()
       // A join clicked on the landing before now put its room in the URL, so
       // the join here is that one: what it queued is dropped, not sent twice.
       if (fromUrl) {
@@ -767,6 +810,16 @@ export function useNetworkGame(): NetworkGame {
         if (lesson !== null) startTutorialRef.current(lesson)
         // The way on from Learn Commander.
         else if (firstGame) startFirstGameRef.current()
+        // The deck builder's Blitz button. The builder checked the deck
+        // against the card pool before sending it here; this checks it again
+        // without one, for a deck changed or deleted in another tab since.
+        else if (blitzFromUrl !== null) {
+          const ready = blitzReady(blitzFromUrl.deck, 'saved')
+          if ('report' in ready) {
+            // Already one of the player's decks: no offer to save it.
+            blitzRef.current(ready.deck, ready.report, { against: blitzFromUrl.against, offerSave: false })
+          } else setError(ready.problem)
+        }
         // A dev build's `?check=<title>`: a builder room, whose Manual checks
         // list takes the parameter and plays that test (e2e/run-check.mjs).
         else if (import.meta.env.DEV && url.searchParams.has(CHECK_PARAM)) {
@@ -1164,18 +1217,18 @@ export function useNetworkGame(): NetworkGame {
   }, [send])
 
   const blitz = useCallback(
-    (deck: WireDeck, report: BlitzReport, against: 'upgraded' | 'precon' = 'upgraded') => {
+    (deck: WireDeck, report: BlitzReport, { against = DEFAULT_BLITZ_POOL, offerSave = true }: BlitzOptions = {}) => {
       const hostToken = newClientToken()
       pendingHostTokenRef.current = hostToken
       pendingBlitzRef.current = {
         deck,
-        // A blitz is a game against the bots at their best: the upgraded
-        // precons (`UPGRADED_DECKS`). A first game isn't.
+        // Bracket 3 unless asked (`DEFAULT_BLITZ_POOL`): the upgraded
+        // precons, the bots at their best. A first game is Bracket 2.
         bots: randomBotDecks(BLITZ_PLAYERS - 1, deck.name === undefined ? [] : [deck.name], Math.random, against),
         sent: false,
       }
       setBlitzing(true)
-      setBlitzDeck(against === 'upgraded' ? deck : null)
+      setBlitzDeck(offerSave ? deck : null)
       setBlitzDeckSaved(false)
       setBlitzReport(
         report.substituted.length > 0 || report.dropped.length > 0 || report.short !== undefined ? report : null,
@@ -1196,9 +1249,10 @@ export function useNetworkGame(): NetworkGame {
           ...(starter.printings !== undefined ? { printings: starter.printings } : {}),
         },
         { deckName: starter.name, substituted: [], dropped: [] },
-        'precon',
+        { against: 'precon', offerSave: false },
       )
     }
+    blitzRef.current = blitz
   }, [blitz])
 
   const dismissBlitzReport = useCallback(() => setBlitzReport(null), [])

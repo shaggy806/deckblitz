@@ -4,7 +4,6 @@ import { STARTER_DECKS, commandersOf } from 'engine/client'
 import type { PreconSubstitution } from 'engine/client'
 import {
   createDeck,
-  createDeckFromImport,
   deleteDeck,
   duplicateDeck,
   duplicateStarter,
@@ -17,7 +16,7 @@ import type { SavedDeck } from './decks.ts'
 import { DeckEditor } from './DeckEditor.tsx'
 import type { CommanderCandidate } from 'protocol'
 import { CommanderPicker } from './CommanderPicker.tsx'
-import { importDecklist, resolveImport } from './importDeck.ts'
+import { importAndSave } from './importAndSave.ts'
 import type { ImportProgress, ImportReport } from './importDeck.ts'
 import { ReplacementReview } from './ReplacementReview.tsx'
 import { StableLabel } from '../ui/StableLabel.tsx'
@@ -25,6 +24,9 @@ import { DeckIdentityPips } from '../ui/DeckIdentityPips.tsx'
 import { CONFIDENCE_LABEL } from './replacement-labels.ts'
 import './deck-builder.css'
 import { SiteNotice } from '../legal/SiteNotice.tsx'
+import { cardPool } from '../cards/cardData.ts'
+import { blitzReady, blitzUrl } from '../lobby/blitzDeck.ts'
+import type { WireDeck } from 'protocol'
 
 type Selection = { readonly kind: 'saved'; readonly id: string } | { readonly kind: 'starter'; readonly index: number } | null
 
@@ -39,6 +41,40 @@ export function DeckBuilderPage() {
   const [importReport, setImportReport] = useState<ImportReport | null>(null)
   /** The stand-in review popup, open over the freshly imported deck. */
   const [reviewing, setReviewing] = useState(false)
+  /** Why a deck's Blitz button didn't start a game, under that deck's row
+   * (`key`: `saved:<id>` or `starter:<index>`, as `blitzUrl` takes it). */
+  const [blitzProblem, setBlitzProblem] = useState<{ readonly key: string; readonly text: string } | null>(null)
+
+  /** A deck's Blitz button: the game page, blitzing it against three bots
+   * (`blitzUrl`) — or, for a deck that can't be played, why not, the same
+   * check a pasted list's blitz makes (`blitzReady`), with the pool at hand
+   * to refuse a card the engine no longer has. */
+  const blitz = (key: string, deck: WireDeck) => {
+    const ready = blitzReady(deck, 'saved', undefined, (name) => cardPool().byName.has(name))
+    if ('problem' in ready) {
+      setBlitzProblem({ key, text: ready.problem })
+      return
+    }
+    setBlitzProblem(null)
+    window.location.assign(blitzUrl(key))
+  }
+  const blitzButton = (key: string, deck: WireDeck, label: string) => (
+    <button
+      type="button"
+      className="db-blitz-btn"
+      aria-label={`Blitz ${label}`}
+      title="Play this deck now against three bots"
+      onClick={() => blitz(key, deck)}
+    >
+      Blitz
+    </button>
+  )
+  const blitzNote = (key: string) =>
+    blitzProblem?.key === key ? (
+      <p className="db-blitz-problem" role="alert">
+        ⚠ {blitzProblem.text}
+      </p>
+    ) : null
 
   const refreshDecks = () => setDecks(listDecks())
   const markActive = (ref: NonNullable<Selection>) => {
@@ -150,6 +186,8 @@ export function DeckBuilderPage() {
                   <DeckIdentityPips commanders={d.commanders} colors={d.commanderColors} />
                   {isActive({ kind: 'saved', id: d.id }) ? <span className="db-active-badge">active</span> : null}
                 </button>
+                {blitzButton(`saved:${d.id}`, { cards: d.cards, commanders: d.commanders, name: d.name }, d.name)}
+                {blitzNote(`saved:${d.id}`)}
               </li>
             ))}
           </ul>
@@ -177,6 +215,8 @@ export function DeckBuilderPage() {
                   <DeckIdentityPips commanders={commandersOf(d)} />
                   {isActive({ kind: 'starter', index: i }) ? <span className="db-active-badge">active</span> : null}
                 </button>
+                {blitzButton(`starter:${i}`, { cards: d.cards, commanders: commandersOf(d), name: d.name }, d.name)}
+                {blitzNote(`starter:${i}`)}
               </li>
             ))}
           </ul>
@@ -277,8 +317,8 @@ export function DeckBuilderPage() {
  * play right now: an implemented card is kept as-is, an unimplemented one
  * with a `suggestedReplacement` (see `engine`'s `assignReplacements`, run
  * server-side against the pool) is swapped in instead, and anything with no
- * match at all (or not found on Scryfall) is dropped. Saves the result via
- * `createDeckFromImport` and hands the new deck + a summary back to the
+ * match at all (or not found on Scryfall) is dropped. Saves the result
+ * (`importAndSave`, which the lobby's deck picker imports through too) and hands the new deck + a summary back to the
  * caller — this component's own job ends there, it doesn't render the
  * summary itself (see `ImportReportBanner`, shown above the editor once
  * this closes).
@@ -324,27 +364,10 @@ function ImportPanel({
     setLoading(true)
     setProgress(null)
     setError(null)
-    importDecklist(text, setProgress, commanders)
-      .then(({ cards: cardReports, format, sideboard, attractions }) => {
-        // Asked once: the answer goes back with the list, read again for it.
-        const candidates = commanders === undefined ? (format?.commanderCandidates ?? []) : []
-        if (candidates.length > 1) {
-          setAsking(candidates)
-          return
-        }
-        const resolved = resolveImport(cardReports, format, sideboard, attractions)
-        const deck = createDeckFromImport(
-          resolved.name,
-          resolved.cards,
-          resolved.commanders,
-          resolved.printings,
-          resolved.sideboard,
-          resolved.attractions,
-          // A commander's colour chosen before the game (rule 903.4b), as
-          // the list's cards settled it; the deck editor's pips change it.
-          format?.commanderColors ?? {},
-        )
-        onImported(deck, resolved.report)
+    importAndSave(text, setProgress, commanders)
+      .then((outcome) => {
+        if (outcome.kind === 'ask') setAsking(outcome.candidates)
+        else onImported(outcome.deck, outcome.report)
       })
       .catch((err: unknown) => setError(err instanceof Error ? err.message : String(err)))
       .finally(() => setLoading(false))

@@ -143,9 +143,9 @@ export function RoomSettingsPanel({
 
         {host ? (
           <div className="rs-field">
-            <span className="rs-label">Fill with bots</span>
+            <span className="rs-label">Fill with bots · Bracket</span>
             <div className="rs-options" role="group" aria-label="Fill with bots">
-              {BOT_DECK_POOLS.map(({ pool, label, fillHint }) => (
+              {BOT_DECK_POOLS.map(({ pool, label, bracket, fillHint }) => (
                 <button
                   key={pool}
                   type="button"
@@ -159,7 +159,7 @@ export function RoomSettingsPanel({
                     game.fillBots(randomBotDecks(botSeats, taken, Math.random, pool), pool)
                   }}
                 >
-                  {label}
+                  {bracket}
                 </button>
               ))}
             </div>

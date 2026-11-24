@@ -252,3 +252,55 @@ test('a commander with a partner in the list can be picked as a pair, or alone',
   const commanders = page.locator('.quadrant-cell.self .commander-tile-wrap')
   await expect(commanders).toHaveCount(2)
 })
+
+// The deck builder's Blitz button: a deck from the list, straight into a game
+// against three bots, the same blitz the landing page starts (`blitzUrl`).
+test("a deck builder deck's Blitz button starts a game against three bots", async ({ page }) => {
+  const errors: string[] = []
+  page.on('pageerror', (error) => errors.push(error.message))
+  await page.goto('/deck-builder')
+  await page.getByRole('button', { name: 'Blitz First Flight', exact: true }).click({ timeout: 60_000 })
+  await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 30_000 })
+  await expect(page.locator('.seat-board')).toHaveCount(0)
+  // The hand-off is taken off the URL, so a reload doesn't blitz again.
+  expect(await page.evaluate(() => new URL(window.location.href).searchParams.has('blitz'))).toBe(false)
+  // A saved deck plays as it is: nothing imported, so nothing to report.
+  await expect(page.locator('.blitz-report')).toHaveCount(0)
+  expect(errors).toEqual([])
+})
+
+test("a deck that can't be blitzed says why, and stays in the deck builder", async ({ page }) => {
+  const decks = [
+    { id: 'nocmdr', name: 'Half-built deck', commanders: [], cards: ['Sol Ring'] },
+    { id: 'gone', name: 'Old deck', commanders: ['Ghalta, Primal Hunger'], cards: ['Not A Real Card Name', 'Forest'] },
+  ]
+  await page.addInitScript((value) => window.localStorage.setItem('mtg-engine:decks', value), JSON.stringify(decks))
+  await page.goto('/deck-builder')
+  await page.getByRole('button', { name: 'Blitz Half-built deck' }).click({ timeout: 60_000 })
+  await expect(page.getByRole('alert')).toHaveText(/This deck has no commander yet/)
+  await page.getByRole('button', { name: 'Blitz Old deck' }).click()
+  await expect(page.getByRole('alert')).toHaveText(/A card this engine no longer has \(Not A Real Card Name\)/)
+  expect(new URL(page.url()).pathname).toBe('/deck-builder')
+})
+
+// A room's deck picker imports a pasted list itself (its Import list tab), so
+// a player needn't visit the deck builder first; the deck is saved, as one
+// imported there is.
+test("the lobby's deck picker imports a pasted list, saves it and brings it to the seat", async ({ page }) => {
+  await stubImport(page)
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Create a game' }).click()
+  await page.getByText('Pick a deck').first().click()
+  const picker = page.locator('.deck-picker-box')
+  await picker.getByRole('tab', { name: 'Import list' }).click()
+  await picker.locator('#deck-picker-import-list').fill(LIST)
+  await picker.getByRole('button', { name: 'Import', exact: true }).click()
+  // The import swapped a card, so it says what before the deck is brought.
+  await expect(picker).toContainText('Tooth and Nail → Natural Order')
+  await picker.getByRole('button', { name: 'Bring this deck' }).click()
+  await expect(picker).toHaveCount(0)
+  await expect(page.locator('.seat-board')).toContainText('Imported: Ghalta, Primal Hunger')
+  const saved = await page.evaluate(() => window.localStorage.getItem('mtg-engine:decks'))
+  expect(saved ?? '').toContain('Imported: Ghalta, Primal Hunger')
+  expect(saved ?? '').toContain('Natural Order')
+})

@@ -293,9 +293,9 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                       // and a room-wide "Bot decks" setting).
                       <div className="seat-panel-add-bots" role="group" aria-label="Add a bot" data-tour="lobby-add-bot">
                         <span className="seat-panel-add-bots-label" aria-hidden="true">
-                          + Bot
+                          + Bot · Bracket
                         </span>
-                        {BOT_DECK_POOLS.map(({ pool, label, hint }) => (
+                        {BOT_DECK_POOLS.map(({ pool, label, bracket, hint }) => (
                           <button
                             key={pool}
                             type="button"
@@ -304,7 +304,7 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                             aria-label={`Add ${label.toLowerCase()} bot`}
                             onClick={() => game.addBot(s.player, randomBotDeck(game.seats, Math.random, pool), pool)}
                           >
-                            {label}
+                            {bracket}
                           </button>
                         ))}
                       </div>

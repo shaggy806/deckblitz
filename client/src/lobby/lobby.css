@@ -360,9 +360,10 @@ button.seat-add-panel:hover {
    row under a small caption that sits in the row's own height. */
 .seat-panel-add-bots {
   display: grid;
-  /* Each button as wide as its word: equal columns clipped "Upgraded" at
-     four seats on a 1366px screen. */
-  grid-template-columns: auto repeat(3, minmax(0, max-content));
+  /* The label, then the three brackets' buttons, a digit each and as wide as
+     each other. (Words, "Upgraded" and then "Bracket 2", clipped at four
+     seats on a 1366px screen.) */
+  grid-template-columns: auto repeat(3, minmax(2.2em, max-content));
   justify-content: space-between;
   align-items: center;
   /* Tight on purpose, and not growing with the screen: at 1440p the text
@@ -379,6 +380,7 @@ button.seat-add-panel:hover {
    found them the smallest controls on the screen). */
 .seat-panel-add-bot {
   font-size: var(--text-sm);
+  min-width: 2.2em;
   padding: 4px clamp(3px, 0.35vw, 6px);
   white-space: nowrap;
   overflow: hidden;
@@ -630,6 +632,51 @@ button.seat-add-panel:hover {
   font-size: var(--text-sm);
   color: var(--warn);
 }
+/* The Import list tab (`DeckImportTab`): the list box takes the room the
+   decks would. */
+.deck-picker-import {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.deck-picker-import-text {
+  flex: 1 1 auto;
+  min-height: 8em;
+  resize: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+.deck-picker-import-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.deck-picker-import-head,
+.deck-picker-import-note {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.deck-picker-import-head strong {
+  color: var(--text);
+}
+.deck-picker-import-error {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--bad);
+}
+.deck-picker-import-changes {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: var(--text-sm);
+  overflow-y: auto;
+  min-height: 0;
+}
+.deck-picker-import > button.primary {
+  align-self: flex-end;
+}
 
 /* Last in the file so it overrides the rules above. A narrow board (about 1100px of screen and below) can't spare the
    column: four seats would be ~150px each and their names truncate to
@@ -659,7 +706,7 @@ button.seat-add-panel:hover {
 
 /* A touch device (`ui/touch.ts`): the lobby's foot leaves the corner
    toolbar's height (`--corner-toolbar-h`, CornerToolbar.tsx), so the room
-   settings' last row ("Strong", Start game) scrolls clear of the "?" and the
+   settings' last row ("Bracket 4", Start game) scrolls clear of the "?" and the
    cog (the user's phone, 2026-11-24). */
 :root[data-touch] .overlay.menu-overlay {
   padding-bottom: calc(var(--corner-toolbar-h, 44px) + 24px);

@@ -139,7 +139,7 @@ test('a click waiting on the server shows it, and a second one goes nowhere', as
   expect(sent).toEqual(['add-seat'])
 
   // A bot's button, double-clicked: one bot.
-  await host.getByRole('button', { name: 'Add precon bot' }).first().dblclick()
+  await host.getByRole('button', { name: 'Add bracket 2 bot' }).first().dblclick()
   await expect(grid.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(1, paced)
   await host.waitForTimeout(1500)
   await expect(grid.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(1)
@@ -172,12 +172,12 @@ test("the host picks each bot's deck by its strength: a precon, an upgraded prec
   await expect(host.getByRole('group', { name: 'Add a bot' })).toHaveCount(1)
   await expect(guest.getByRole('group', { name: 'Add a bot' })).toHaveCount(0)
   await shots(host, 'lobby-add-bot-buttons')
-  await host.getByRole('button', { name: 'Add upgraded bot' }).first().click()
+  await host.getByRole('button', { name: 'Add bracket 3 bot' }).first().click()
   await expect(host.locator('.seat-deck-name', { hasText: '(Upgraded)' })).toHaveCount(1)
   // Strong: a real player's deck. Its name is "<commander> by <creator>" on
   // the wire and the seat shows its creator's own title (2026-11-15).
   await grid.getByRole('button', { name: /Add player/ }).first().click()
-  await host.getByRole('button', { name: 'Add strong bot' }).first().click()
+  await host.getByRole('button', { name: 'Add bracket 4 bot' }).first().click()
   const strong = host.locator('.seat-deck-name[data-deck*=" by "]')
   await expect(strong).toHaveCount(1)
   await expect(strong).not.toContainText(' by ')
@@ -215,14 +215,14 @@ test('the host fills the table with bots of one strength in one click: a bot for
   // seats and a bot in each, on different upgraded precons. Double-clicked,
   // it's still one request.
   const grid = host.locator('.seat-board-grid')
-  await fill(host).getByRole('button', { name: 'Fill with upgraded bots' }).dblclick()
+  await fill(host).getByRole('button', { name: 'Fill with bracket 3 bots' }).dblclick()
   await expect(grid.locator('.seat-panel')).toHaveCount(4)
   await expect(grid.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(2)
   const decks = await grid.locator('.seat-deck-name', { hasText: '(Upgraded)' }).allTextContents()
   expect(new Set(decks).size).toBe(2)
   await expect(guest.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(2)
   // Nothing left to fill: the buttons stay where they were, off.
-  await expect(fill(host).getByRole('button', { name: 'Fill with strong bots' })).toBeDisabled()
+  await expect(fill(host).getByRole('button', { name: 'Fill with bracket 4 bots' })).toBeDisabled()
   expect(sent).toEqual(['fill-bots'])
   await shots(host, 'lobby-filled-with-bots')
 
@@ -230,7 +230,7 @@ test('the host fills the table with bots of one strength in one click: a bot for
   // a real player's deck this time, beside the upgraded one still there.
   await host.getByRole('button', { name: 'Remove seat 4' }).click()
   await expect(grid.locator('.seat-panel')).toHaveCount(3)
-  await fill(host).getByRole('button', { name: 'Fill with strong bots' }).click()
+  await fill(host).getByRole('button', { name: 'Fill with bracket 4 bots' }).click()
   await expect(grid.locator('.seat-panel')).toHaveCount(4)
   await expect(grid.locator('.seat-deck-name[data-deck*=" by "]')).toHaveCount(1)
   await expect(grid.locator('.seat-deck-name', { hasText: '(Upgraded)' })).toHaveCount(1)
@@ -254,8 +254,8 @@ test('a full room can be watched: the seat board, then the game with no hand', a
   await addPlayer.first().click()
   await expect(host.locator('.seat-panel')).toHaveCount(4)
   for (let i = 0; i < 3; i += 1) {
-    await host.getByRole('button', { name: 'Add precon bot' }).first().click()
-    await expect(host.getByRole('button', { name: 'Add precon bot' })).toHaveCount(2 - i)
+    await host.getByRole('button', { name: 'Add bracket 2 bot' }).first().click()
+    await expect(host.getByRole('button', { name: 'Add bracket 2 bot' })).toHaveCount(2 - i)
   }
 
   const watcher = await newPage(browser)

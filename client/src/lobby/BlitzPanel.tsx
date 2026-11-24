@@ -6,6 +6,7 @@ import { CommanderPicker } from '../deck-builder/CommanderPicker.tsx'
 import { CommanderColorAsk } from '../deck-builder/CommanderColorAsk.tsx'
 import { importDecklist, looksLikeDecklist, resolveImport } from '../deck-builder/importDeck.ts'
 import type { ImportProgress } from '../deck-builder/importDeck.ts'
+import { blitzReady } from './blitzDeck.ts'
 
 type Phase =
   | { readonly kind: 'idle' }
@@ -42,9 +43,6 @@ type BlitzReport = Parameters<NetworkGame['blitz']>[1]
  * clipboard holds no "N Card Name" line, a box opens to paste the list into
  * instead, so the button never just does nothing.
  */
-/** A Commander deck's size, commander included (rule 903.5a). */
-const COMMANDER_DECK_SIZE = 100
-
 export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
   const [phase, setPhase] = useState<Phase>({ kind: 'idle' })
   const [pasted, setPasted] = useState('')
@@ -88,29 +86,22 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
           return
         }
         const resolved = resolveImport(cards, format, [], attractions)
-        if (resolved.commanders.length === 0) {
-          throw new Error(
-            'No commander found in that list. Put it under a "Commander" heading, or on its own at the end.',
-          )
-        }
-        if (resolved.cards.length === 0) throw new Error('None of the cards in that list could be played.')
         // Nothing is saved here: the result screen offers to keep the deck.
-        const size = resolved.cards.length + resolved.commanders.length
         const chosen = format?.commanderColors ?? {}
-        const deck: WireDeck = {
-          cards: resolved.cards,
-          commanders: resolved.commanders,
-          ...(Object.keys(chosen).length > 0 ? { commanderColors: chosen } : {}),
-          name: resolved.name,
-          ...(Object.keys(resolved.printings).length > 0 ? { printings: resolved.printings } : {}),
-          ...(resolved.attractions.length > 0 ? { attractions: resolved.attractions } : {}),
-        }
-        const report: BlitzReport = {
-          deckName: resolved.name,
-          substituted: resolved.report.substituted.map(({ from, to }) => ({ from, to })),
-          dropped: resolved.report.dropped,
-          ...(size < COMMANDER_DECK_SIZE ? { short: size } : {}),
-        }
+        const ready = blitzReady(
+          {
+            cards: resolved.cards,
+            commanders: resolved.commanders,
+            ...(Object.keys(chosen).length > 0 ? { commanderColors: chosen } : {}),
+            name: resolved.name,
+            ...(Object.keys(resolved.printings).length > 0 ? { printings: resolved.printings } : {}),
+            ...(resolved.attractions.length > 0 ? { attractions: resolved.attractions } : {}),
+          },
+          'list',
+          resolved.report,
+        )
+        if ('problem' in ready) throw new Error(ready.problem)
+        const { deck, report } = ready
         const open = format?.commanderColorOpen ?? []
         if (open.length > 0) {
           setPhase({ kind: 'colour', deck, report, open, chosen })
