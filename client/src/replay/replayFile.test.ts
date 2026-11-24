@@ -11,6 +11,7 @@ import {
   encodeReplay,
   expandReplay,
   frameOfEvent,
+  quietFrames,
   turnStarts,
   viewAt,
 } from './replayFile.ts'
@@ -126,6 +127,36 @@ describe('ReplayRecorder', () => {
       [1, 3],
     ])
     expect(viewAt(replay, 2).events[2]!.type).toBe('life-lost')
+  })
+
+  it('keeps each frame its own log where the game grows one array in place', () => {
+    // The converter (`scripts/record-to-replay.mjs`) runs the game here, and
+    // a view's log is the game's own array: kept by reference, the first
+    // frame held the whole game's log and every later one added nothing.
+    const recorder = new ReplayRecorder('b', () => 0)
+    const log: GameEvent[] = [event(0)]
+    recorder.record(recorded(board(1, 20, log)))
+    log.push(event(1), event(2))
+    recorder.record(recorded(board(1, 19, log)))
+    log.push(event(3))
+    recorder.record(recorded(board(1, 18, log)))
+    const replay = expandReplay(recorder.data()!)
+    expect(replay.frames.map((f) => f.events)).toEqual([1, 3, 4])
+    expect(replay.logs).toHaveLength(1)
+  })
+
+  it('marks the frames that add nothing but priority and steps', () => {
+    const recorder = new ReplayRecorder('b', () => 0)
+    const log: GameEvent[] = [event(0, 'game-started')]
+    const frame = (...added: GameEvent[]) => {
+      log.push(...added)
+      recorder.record(recorded(board(1, 20, [...log])))
+    }
+    frame()
+    frame(event(1, 'priority-passed'), event(2, 'step-began'), event(3, 'priority-received'))
+    frame(event(4, 'spell-cast'), event(5, 'priority-passed'))
+    frame()
+    expect(quietFrames(expandReplay(recorder.data()!))).toEqual([false, true, false, true])
   })
 
   it('starts again for another game in the room', () => {

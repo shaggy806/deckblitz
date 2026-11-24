@@ -175,7 +175,8 @@ export class ReplayRecorder {
   private header: Omit<ReplayData, 'frames'> | null = null
   private frames: FrameRecord[] = []
   private last: Snapshot | null = null
-  private log: readonly GameEvent[] = []
+  private logLength = 0
+  private lastSeq: number | null = null
   private started = 0
   private readonly build: string
   private readonly now: () => number
@@ -202,30 +203,31 @@ export class ReplayRecorder {
       }
       this.frames = []
       this.last = null
-      this.log = []
+      this.logLength = 0
+      this.lastSeq = null
     } else if (header.art === undefined && frame.art !== undefined) {
       this.header = { ...header, art: frame.art }
     }
     const { events, ...board } = frame.view
     const snapshot: Snapshot = { v: board, s: frame.seats }
     const d = this.last === null ? [snapshot] : (diffValue(this.last, snapshot) ?? null)
-    const prev = this.log
+    // The log as the last frame had it, by its length and its last event:
+    // never the array itself, which a game in this process (the converter,
+    // `scripts/record-to-replay.mjs`) goes on growing in place.
+    const had = this.logLength
     const grown =
       !frame.replaced &&
-      prev.length > 0 &&
-      events.length >= prev.length &&
-      events[prev.length - 1]?.seq === prev[prev.length - 1]?.seq
+      this.frames.length > 0 &&
+      events.length >= had &&
+      (had === 0 || events[had - 1]?.seq === this.lastSeq)
     this.frames.push({
       d,
-      ...(grown
-        ? events.length > prev.length
-          ? { a: events.slice(prev.length) }
-          : {}
-        : { r: events }),
+      ...(grown ? (events.length > had ? { a: events.slice(had) } : {}) : { r: events.slice() }),
       t: this.now() - this.started,
     })
     this.last = snapshot
-    this.log = events
+    this.logLength = events.length
+    this.lastSeq = events[events.length - 1]?.seq ?? null
   }
 
   /** The game kept so far, or `null` before its first frame — or when it is
@@ -353,6 +355,23 @@ export function frameOfEvent(replay: ExpandedReplay, seq: number, log: number): 
     }
   }
   return replay.frames.length - 1
+}
+
+/** The events that only move the game along: priority given and passed, a
+ * step beginning. A frame that adds nothing else has nothing to show. */
+const QUIET_EVENTS: ReadonlySet<GameEvent['type']> = new Set(['priority-received', 'priority-passed', 'step-began'])
+
+/** Per frame, whether it adds nothing but {@link QUIET_EVENTS} to the one
+ * before (or nothing at all): the frames a move steps over, so playing on
+ * gives no pause to a pass. The first frame, and one whose log was replaced,
+ * never are. */
+export function quietFrames(replay: ExpandedReplay): readonly boolean[] {
+  return replay.frames.map((frame, i) => {
+    const prev = replay.frames[i - 1]
+    if (prev === undefined || prev.log !== frame.log) return false
+    const added = replay.logs[frame.log]!.slice(prev.events, frame.events)
+    return added.every((event) => QUIET_EVENTS.has(event.type))
+  })
 }
 
 /** The first frame of each turn: where "turn back" and "turn on" step to. */

@@ -18,7 +18,7 @@ import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { nameInView } from '../net/useNetworkGame.ts'
 import { notePrintings } from '../game/seenPrintings.ts'
 import { prefetchArt } from '../ui/art.ts'
-import { expandReplay, frameOfEvent, turnStarts, viewAt } from './replayFile.ts'
+import { expandReplay, frameOfEvent, quietFrames, turnStarts, viewAt } from './replayFile.ts'
 import type { ExpandedReplay, ReplayData } from './replayFile.ts'
 
 /** How long the replay waits between moves, once a move's animations are
@@ -67,6 +67,23 @@ export function useReplayGame(data: ReplayData): { readonly game: NetworkGame; r
   const replay = useMemo(() => expandReplay(data), [data])
   const starts = useMemo(() => turnStarts(replay), [replay])
   const last = replay.frames.length - 1
+  // The boards a move steps over: nothing happened but priority passing and
+  // steps going by (the user, 2026-11-23: "priority passes shouldn't be given
+  // animation steps, since nothing happens during them").
+  const quiet = useMemo(() => quietFrames(replay), [replay])
+  const after = useCallback(
+    (i: number): number => {
+      let j = i + 1
+      while (j < last && quiet[j]) j += 1
+      return Math.min(j, last)
+    },
+    [quiet, last],
+  )
+  const before = (i: number): number => {
+    let j = i - 1
+    while (j > 0 && quiet[j]) j -= 1
+    return Math.max(j, 0)
+  }
 
   // The game's cards: their art loaded ahead, and each one's printing noted
   // for the History's previews, as a live game's frames do.
@@ -110,9 +127,9 @@ export function useReplayGame(data: ReplayData): { readonly game: NetworkGame; r
   useEffect(() => {
     if (!playing || shownSeq !== frame.seq || index >= last) return
     const gap = REPLAY_PACES.find((p) => p.pace === pace)?.gapMs ?? 600
-    const timer = window.setTimeout(() => goTo(index + 1, pace !== 'instant'), gap)
+    const timer = window.setTimeout(() => goTo(after(index), pace !== 'instant'), gap)
     return () => window.clearTimeout(timer)
-  }, [playing, shownSeq, frame.seq, index, last, pace, goTo])
+  }, [playing, shownSeq, frame.seq, index, last, pace, goTo, after])
 
   const turnOf = (i: number): number => {
     let at = 0
@@ -252,11 +269,11 @@ export function useReplayGame(data: ReplayData): { readonly game: NetworkGame; r
     setPace,
     stepForward: () => {
       setPlaying(false)
-      if (index < last) goTo(index + 1, true)
+      if (index < last) goTo(after(index), true)
     },
     stepBack: () => {
       setPlaying(false)
-      goTo(index - 1, false)
+      goTo(before(index), false)
     },
     turnBack: () => {
       const t = turnOf(index)

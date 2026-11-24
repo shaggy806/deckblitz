@@ -244,7 +244,9 @@ function keep(game, force = false) {
   lastGame = game;
   if (!force && game.events.length === lastEvents) return;
   lastEvents = game.events.length;
-  const view = boardOf(game);
+  // A copy, as a page gets its board: a view shares parts with the game's
+  // state (its log is the game's own array), which the next input changes.
+  const view = JSON.parse(JSON.stringify(boardOf(game)));
   lastView = view;
   recorder.record({
     roomId,
