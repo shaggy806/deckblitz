@@ -66,6 +66,7 @@ import { attackTaxAt, canBlock, combatCreatures, manaToAttackWith } from "./comb
 import { handQuality as handQualityOf } from "./hand-worth.js";
 import type { CombatCreature } from "./combat-math.js";
 import { goneAtEndStep } from "./gone-at-end-step.js";
+import { hasColouredLinkedCard, manaOnlyFromLinkedCards } from "./linked-mana.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 import type { GameObject, GameState } from "../state.js";
 
@@ -597,6 +598,21 @@ function manaPerTurn(def: CardDefinition): number {
     manaMemo.set(def, found);
   }
   return found;
+}
+
+/**
+ * The mana permanent `id` adds each turn ({@link manaPerTurn}), but none
+ * where all of it is the colours of the cards exiled with it and none is: a
+ * Chrome Mox with nothing imprinted, or a colourless card, makes no mana
+ * (the rulings; `linked-mana.ts`).
+ * Counted from the definition alone, an empty Mox was the same mana rock as
+ * an imprinted one, and v2 cast one and kept the card (a report from a live
+ * game, 2026-11-23: `docs/bot-misplays.md`).
+ */
+function manaPerTurnOf(state: GameState, registry: CardRegistry, id: ObjectId, def: CardDefinition): number {
+  const made = manaPerTurn(def);
+  if (made <= 0 || !manaOnlyFromLinkedCards(def)) return made;
+  return hasColouredLinkedCard(state, registry, id) ? made : 0;
 }
 
 const reductionMemo = new WeakMap<CardDefinition, number>();
@@ -1566,7 +1582,7 @@ function playerFeaturesUncached(
     if (!isLand && registry.has(name)) {
       const def = registry.get(name);
       if (!isCreature && guardsAnother(state, registry, id, def, player)) guards += n;
-      nonlandMana += (manaPerTurn(def) + reductionPerTurn(def)) * n;
+      nonlandMana += (manaPerTurnOf(state, registry, id, def) + reductionPerTurn(def)) * n;
       drawEngines += drawRate(def, opponents) * n;
       tokenEngines += tokenRate(registry, def, opponents) * n;
       valueEngines += valueRate(registry, def, opponents) * n;

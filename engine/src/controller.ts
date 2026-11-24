@@ -50,6 +50,7 @@ import { defaultRegistry } from "./cards/default-registry.js";
 import { isNameableAs } from "./card-names.js";
 import { namedDigIn, nameToDigFor, offeredByDig, takesOffered } from "./bot/dig.js";
 import { handCardQuality } from "./bot/hand-worth.js";
+import { isColoured, manaOnlyFromLinkedCards } from "./bot/linked-mana.js";
 import { LANDS_WANTED, chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
 import { combatCreatures, crackback, damageThrough, isLethal } from "./bot/combat-math.js";
 import { DEFAULT_WEIGHTS } from "./bot/evaluate.js";
@@ -4939,6 +4940,22 @@ export class HeuristicBotController extends AutomaticController {
     if (awaiting?.kind === "choose-from-zone" && awaiting.behold !== undefined && awaiting.destination === "exile") {
       return this.leastUsefulTo(view.state, this.playerId, eligible, min);
     }
+    // A card exiled to a source that lends only its colour (Chrome Mox's
+    // imprint, `bot/linked-mana.ts`): the hand's least useful coloured card,
+    // one, which turns the source into a mana rock. A colourless card would
+    // make it nothing, so with none coloured, as few as allowed. Not the
+    // hand's best, as any other choice of our own cards takes: a Mox's card
+    // is spent for its colour alone (a report from a live game, 2026-11-23).
+    // Other imprints (Isochron Scepter, Panoptic Mirror) use the card, and
+    // keep that.
+    if (awaiting?.kind === "choose-from-zone" && awaiting.destination === "exile" && this.lendsOnlyColour(view.state)) {
+      const coloured = eligible.filter((id) => {
+        const object = view.state.objects[id];
+        return object !== undefined && isColoured(view.state, this.registry, object);
+      });
+      if (coloured.length === 0 || coloured.length < min) return this.leastUsefulTo(view.state, this.playerId, eligible, min);
+      return this.leastUsefulTo(view.state, this.playerId, coloured, Math.max(min, Math.min(max, 1)));
+    }
     // What Gemstone Caverns exiles from the opening hand, and what Sylvan
     // Library puts at stake: give up the least.
     if (
@@ -4971,6 +4988,17 @@ export class HeuristicBotController extends AutomaticController {
       return [...usual].sort((a, b) => (quality.get(b) ?? 0) - (quality.get(a) ?? 0)).slice(0, take);
     }
     return this.mostUsefulTo(view.state, this.playerId, eligible, take);
+  }
+
+  /** Whether the decision pending comes from a source whose cards exiled
+   * with it lend it only their colour (`manaOnlyFromLinkedCards`: Chrome
+   * Mox). */
+  private lendsOnlyColour(state: GameState): boolean {
+    const source = state.decisionSource?.object;
+    const object = source === undefined ? undefined : state.objects[source];
+    if (object === undefined) return false;
+    const name = rulesTextName(object);
+    return this.registry.has(name) && manaOnlyFromLinkedCards(this.registry.get(name));
   }
 
   /** How much our hand wants each card that isn't in it, as v2's evaluation

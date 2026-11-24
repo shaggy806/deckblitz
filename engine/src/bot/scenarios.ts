@@ -4805,15 +4805,16 @@ const SCENARIOS: readonly BotScenario[] = [
   asked({
     name: "imprints a card on Chrome Mox",
     rule: "A Chrome Mox with nothing imprinted makes no mana: once it's cast, a card goes under it.",
-    kind: "training",
     position(registry) {
       // Reported from a live game (2026-11-23): a bot "played a Chrome Mox
       // without imprinting anything". The board wasn't given; this is the
       // Ur-Dragon deck that runs one, early, with spells it can't cast yet.
-      // v1 takes a card (`chooseFromZone`'s last branch, the most useful
-      // one); v2 searches the choice (`choose-from-zone`'s candidates, the
-      // empty one first) and keeps nothing when its rollouts score a card in
-      // hand above a mana it doesn't spend this turn.
+      // v2 searches the choice (`choose-from-zone`'s candidates, the empty
+      // one first), and the evaluation read the Mox's mana from its
+      // definition: an empty one was the same mana rock as an imprinted one,
+      // and kept the card in hand besides. Now its mana counts only with a
+      // coloured card under it (`bot/linked-mana.ts`), and v1 offers the
+      // hand's least useful coloured card.
       const game = table(registry, [A, B, C, D], A);
       game.state.turn.number = 5; // alice's second turn
       game.state.players[A].commanderIdentity = ["W", "U", "B", "R", "G"];
