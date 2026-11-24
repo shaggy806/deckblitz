@@ -30,8 +30,16 @@
 // Flags: --decks "A,B,C,D[;…]" (by substring, strong decks first), --seed N or
 // --seeds "1-8", --parallel N (default 6, a process a game), --max-turns N
 // (default 100), --game-minutes N (default 15: a game past it is stopped and
-// named), --all (unflagged losses too), --quiet (totals only). It plays
+// named), --budget MS|live (each decision on a wall clock, `live` the rooms'
+// own 1000 ms), --all (unflagged losses too), --quiet (totals only). It plays
 // `dist/`: build first.
+//
+// `--budget` is for a bench of decks whose boards outgrow count budgets: The
+// First Sliver's games ran 18 to 44 minutes each on them, and 5 of 24 were
+// still going at 45 (2026-11-24). On a clock a decision ends when its time
+// does, as it does on the site, so a game finishes; the price is that a seed
+// no longer replays move for move, and a flagged loss's `bot:watch` line
+// plays the same clock, not the same game.
 
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -40,6 +48,7 @@ import {
   COMMANDER_RULES,
   EvalBotController,
   Game,
+  LIVE_BOT_BUDGET_MS,
   asPlayerId,
   combatCreatures,
   createDefaultRegistry,
@@ -56,6 +65,14 @@ const flag = (name, fallback) => {
   return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : fallback;
 };
 const maxTurns = Number(flag("max-turns", "100"));
+/** Each decision's wall-clock budget in ms, or `null` for count budgets. */
+const budgetMs = (() => {
+  const text = flag("budget", null);
+  if (text === null) return null;
+  const ms = text === "live" ? LIVE_BOT_BUDGET_MS : Number(text);
+  if (!Number.isFinite(ms) || ms <= 0) throw new Error(`--budget: "${text}" is not a number of milliseconds or "live"`);
+  return ms;
+})();
 const quiet = args.includes("--quiet");
 const all = args.includes("--all");
 const seedsOf = (text) =>
@@ -110,6 +127,7 @@ if (jobs.length > 1) {
         [
           fileURLToPath(import.meta.url),
           ...["--decks", job.decks, "--seed", String(job.seed), "--max-turns", String(maxTurns), "--tally"],
+          ...(budgetMs === null ? [] : ["--budget", String(budgetMs)]),
           ...(quiet ? ["--quiet"] : []),
           ...(all ? ["--all"] : []),
         ],
@@ -132,7 +150,7 @@ if (jobs.length > 1) {
         console.log(lines.filter((l) => !l.startsWith(TALLY_MARK)).join("\n").trimEnd());
         if (overTime) {
           stopped += 1;
-          console.log(`bot:losses — seed ${job.seed}: ${job.decks}\n  (stopped: over ${gameMinutes} minutes; --game-minutes N gives it longer)`);
+          console.log(`bot:losses — seed ${job.seed}: ${job.decks}\n  (stopped: over ${gameMinutes} minutes; --game-minutes N gives it longer${budgetMs === null ? ", --budget live puts each decision on the rooms' clock" : ""})`);
         } else if (code !== 0 || tallyLine === undefined) {
           failed += 1;
           console.log(`  (this game failed: exit ${code})`);
@@ -273,7 +291,7 @@ function noteAttacking(s) {
 const COMBAT_STEPS = new Set(["declare-blockers", "combat-damage", "end-combat"]);
 const controllers = {};
 for (const seat of seats) {
-  const bot = new EvalBotController(seat, registry);
+  const bot = new EvalBotController(seat, registry, budgetMs === null ? {} : { timeBudgetMs: budgetMs });
   const act = bot.act.bind(bot);
   bot.act = (view) => {
     const s = view.state;
@@ -427,7 +445,7 @@ game = Game.create({
   decks: seats.map((player, i) => ({ player, cards: decks[i].cards, commanders: decks[i].commanders })),
 });
 const deckArg = deckSets[0];
-console.log(`bot:losses — seed ${seed}: ${seats.map((s) => label[s]).join(", ")}`);
+console.log(`bot:losses — seed ${seed}: ${seats.map((s) => label[s]).join(", ")}${budgetMs === null ? "" : ` (${budgetMs} ms a decision)`}`);
 
 function report(seat, s, turn, active, reason, lifeNow) {
   tally.losses += 1;
@@ -519,7 +537,7 @@ function report(seat, s, turn, active, reason, lifeNow) {
           (record.later.length > 0 ? `\n      after it: ${record.later.join("; ")}` : "")
         : "") +
       `\n      hand as it died: ${seen.hand.join(", ") || "nothing"}` +
-      (flags.length > 0 ? `\n      read: npm run bot:watch -w engine -- --decks "${deckArg}" --seed ${seed} --count --turns ${from}-${turn}` : ""),
+      (flags.length > 0 ? `\n      read: npm run bot:watch -w engine -- --decks "${deckArg}" --seed ${seed} ${budgetMs === null ? "--count" : `--budget ${budgetMs}`} --turns ${from}-${turn}` : ""),
   );
 }
 

@@ -202,13 +202,15 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   creatures whatever it blocks with, followed to its next turn and filed (died, not attacked, that board cut down,
   attacked and lived), with what it cast that turn and the wipes it and the others held. Says how often each out comes,
   and finds the turns worth rebuilding.
-- `bot:losses -- --seeds 1-4 --decks "A,B,C,D[;…]" [--parallel 6] [--game-minutes 15] [--all]`: the screen for losses
+- `bot:losses -- --seeds 1-4 --decks "A,B,C,D[;…]" [--parallel 6] [--game-minutes 15] [--budget MS|live] [--all]`: the screen for losses
   worth reading. For each seat eliminated: the attack that killed it against the block arithmetic (combat dealt more
   than the arithmetic allowed as it blocked; alive had the creatures its own costs tapped stayed untapped; alive had its
   attackers stayed home, with the killer's board already there to see when it attacked), an answer it was offered a
   cast of and held, a wipe it could have cast on its own turn, and life it spent against what it died by. A flag is a
   reason to read, not a verdict (about one loss in ten is flagged); each flagged loss prints the `bot:watch` line for
-  its turns, and a game past its minutes is stopped and named.
+  its turns, and a game past its minutes is stopped and named. `--budget live` puts each decision on the rooms' clock
+  (1000 ms), for a bench of decks whose boards outgrow count budgets: the games finish, and a seed no longer replays
+  move for move (The First Sliver's 24 games: 18-44 minutes each and five unfinished on counts, about a minute on the clock).
 - `bot:engines -- --pool blitz|strong-only|strong --games 96 [--parallel 6]` / `-- --report FILE`: which permanents come
   before a turn that brings far more than its board showed, and what the bots' removal takes. Logs each turn's board as
   it began beside what the turn brought, and each removal aimed with what else was there; the report sorts the cards by
