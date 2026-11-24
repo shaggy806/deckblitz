@@ -38,6 +38,7 @@ import type { GameObject, GameState } from "../state.js";
 import { POISON_LETHAL, rulesTextName } from "../state.js";
 import { handedRound } from "../handed-round.js";
 import { LANDWALK } from "../subtypes.js";
+import { goneAtEndStep } from "./gone-at-end-step.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 
 /** A creature as combat arithmetic sees it. */
@@ -594,7 +595,8 @@ function swingBack(
   me: PlayerId,
   lost: ReadonlySet<ObjectId> | "all" | undefined,
 ): { readonly blockers: CombatCreature[]; readonly attackersOf: (opponent: PlayerId) => CombatCreature[] } {
-  const myTurn = state.turnOrder[state.turn.activePlayerIndex] === me;
+  const active = state.turnOrder[state.turn.activePlayerIndex];
+  const myTurn = active === me;
   const roaming: CombatCreature[] = [];
   const returning = new Map<PlayerId, CombatCreature[]>();
   const leaving = new Set<ObjectId>();
@@ -604,6 +606,15 @@ function swingBack(
     // By the face that is up: a converted Slicer has no such trigger.
     const roams = handedRound(registry, rulesTextName(object));
     const borrowed = myTurn && object.controller === me && object.controlEndsAtCleanup && object.owner !== me;
+    // Sacrificed or exiled at this turn's end step (`goneAtEndStep`): no
+    // blocker of `me`'s on a turn of its own, and in no later swing of an
+    // opponent's. The active opponent's is in the attack still to come.
+    const fleeting =
+      !roams && !borrowed && (myTurn || object.controller !== active) && goneAtEndStep(state, registry, object);
+    if (fleeting) {
+      leaving.add(id);
+      continue;
+    }
     if (!roams && !borrowed) continue;
     leaving.add(id);
     if (object.owner === me) continue;

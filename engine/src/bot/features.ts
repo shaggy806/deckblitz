@@ -65,6 +65,7 @@ import { playersAttackableNextTurn, readyToBlock } from "../combat/eligibility.j
 import { attackTaxAt, canBlock, combatCreatures, manaToAttackWith } from "./combat-math.js";
 import { handQuality as handQualityOf } from "./hand-worth.js";
 import type { CombatCreature } from "./combat-math.js";
+import { goneAtEndStep } from "./gone-at-end-step.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 import type { GameObject, GameState } from "../state.js";
 
@@ -1504,11 +1505,12 @@ function playerFeaturesUncached(
     // of our own, and Stroke of Midnight stayed in hand while it went on to
     // kill us (a kept live game, D75RS-7 turn 23, 2026-11-22).
     if ((handedRound(registry, rulesTextName(object)) ? object.owner : object.controller) !== player) continue;
-    // Gone at the next end step (mobilize's Warriors, blitz, unearth): what
+    // Gone at the next end step (mobilize's Warriors, blitz, unearth, a
+    // Lightning Rager, Sneak Attack's creature — `goneAtEndStep`): what
     // it does in a simulated combat shows in life totals, and as a body it's
     // worth nothing past this turn — counted, Zurgo's attack scored +5.5
     // where it's worth about +2 (the Mardu autopsy).
-    if (object.sacrificeAtEndStep === true || object.exileAtEndStep === true) continue;
+    if (goneAtEndStep(state, registry, object)) continue;
     // One object can stand in for many token copies — see "Token stacking" in
     // docs/architecture/engine.md. A stack of twenty Saprolings is twenty creatures, not one.
     const n = object.stackCount ?? 1;

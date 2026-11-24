@@ -6000,6 +6000,55 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   },
+  {
+    name: "attacks with a Lightning Rager the end step takes anyway",
+    rule: "A creature sacrificed at this turn's end step blocks nothing later: it attacks, into blockers too.",
+    run(weights, registry, makeBot) {
+      // Reported from a live game (2026-11-23, room 7LSU2, Rite of the Raging
+      // Storm): "bots seem to treat temporary creatures that get sacrificed
+      // at the end of turn as worth keeping home as blockers". A seat with a
+      // 5/1 trample, haste Lightning Rager kept it home in 13 declarations of
+      // 16. The evaluation left out only tokens made with the end-step flag;
+      // one whose own text sacrifices it counted as a 5/1 body and as a
+      // blocker in the swing back, and the simulated combat stops before the
+      // end step that takes it (`goneAtEndStep`).
+      const game = table(registry, [A, B, C, D], A);
+      const rager = onBoard(game, "Lightning Rager Token", A);
+      game.state.objects[rager].isToken = true;
+      for (const player of [B, C, D]) onBoard(game, "Centaur Courser", player);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      return {
+        passed: attackers.some((d) => d.attacker === rager),
+        detail: `attacked with ${attackers.map((d) => `${game.state.objects[d.attacker]?.cardName} at ${d.defender}`).join(", ") || "nothing"}`,
+      };
+    },
+  },
+  {
+    name: "attacks with the creature Sneak Attack put in for the turn",
+    rule: "A creature under a delayed sacrifice at the next end step is worth only what it does this turn.",
+    run(weights, registry, makeBot) {
+      // The same report's other shape: no flag and no text of its own, a
+      // delayed ability naming it ("Sacrifice the creature at the beginning
+      // of the next end step").
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 5);
+      const sneak = onBoard(game, "Sneak Attack", A);
+      const giant = game.debugSpawn("Hill Giant", A, "hand");
+      game.dispatch({ type: "activate-ability", player: A, source: sneak, abilityIndex: 0, targets: [] });
+      game.advanceUntil((s) => s.awaiting !== null);
+      if (game.state.awaiting?.kind !== "choose-from-zone") return { passed: false, detail: "Sneak Attack never asked" };
+      game.dispatch({ type: "choose-from-zone", player: A, chosen: [giant] });
+      for (const player of [B, C, D]) onBoard(game, "Centaur Courser", player);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      if (game.state.objects[giant].zone !== "battlefield") return { passed: false, detail: "the Giant never arrived" };
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      return {
+        passed: attackers.some((d) => d.attacker === giant),
+        detail: `attacked with ${attackers.map((d) => `${game.state.objects[d.attacker]?.cardName} at ${d.defender}`).join(", ") || "nothing"}`,
+      };
+    },
+  },
   asked({
     name: "does not cycle a land in its own upkeep",
     rule: "Cycling costs mana the main phase wants; the land is better played.",

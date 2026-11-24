@@ -76,6 +76,7 @@ import {
   opponentsOutlived,
 } from "./combat-math.js";
 import type { CombatCreature } from "./combat-math.js";
+import { goneAtEndStep } from "./gone-at-end-step.js";
 import { DEFAULT_WEIGHTS, aimedOutcome, evaluateState, normalizeWeights, outcomeOf, scoreOutcome } from "./evaluate.js";
 import type { EvalOutcome } from "./evaluate.js";
 import { aimedAt, aimedByLine } from "./interaction.js";
@@ -3091,8 +3092,12 @@ export class EvalBotController extends HeuristicBotController {
     // id, since combat splits the tokens it sends off a stack as new objects
     // (`combatCreatures` lists a stack once per token).
     const share = bystanderShare(state.turnOrder.filter((p) => !state.players[p].hasLost).length);
+    // One the end step takes either way (`goneAtEndStep`) is no loss.
     const creaturesWorth = (s: GameState): number =>
-      combatCreatures(s, this.cards, me, false).reduce((sum, c) => sum + creatureValue(c, w), 0);
+      combatCreatures(s, this.cards, me, false).reduce((sum, c) => {
+        const object = s.objects[c.id];
+        return object !== undefined && goneAtEndStep(s, this.cards, object) ? sum : sum + creatureValue(c, w);
+      }, 0);
     const worthBefore = share === 0 ? 0 : creaturesWorth(state);
     const lessBystanders = (after: GameState, value: number): number =>
       share === 0 ? value : value - share * Math.max(0, worthBefore - creaturesWorth(after));
