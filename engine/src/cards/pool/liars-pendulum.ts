@@ -21,6 +21,7 @@ export default defineCard({
       targets: ["opponent"],
       effect: {
         kind: "choose-card-name",
+        aim: "own-hand",
         then: {
           kind: "for-each-player",
           who: { target: 0 },

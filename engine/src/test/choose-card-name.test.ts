@@ -18,6 +18,7 @@ import {
   spawn,
   table,
   toHand,
+  toLibrary,
   zone,
 } from "./harness.js";
 
@@ -301,5 +302,32 @@ describe("choose a card name (rule 201.4)", () => {
     const again = hand(game, A).length;
     cast(game, toHand(game, "Brain Pry"), { targets: [{ kind: "player", player: B }] });
     expect(hand(game, A).length).toBe(again + 1);
+  });
+
+  it("Demonic Consultation suggests what's in the caster's own library, the name with the most copies first", () => {
+    const { game } = table();
+    // A bot names the first suggestion. Aimed at an opponent's spells, that
+    // was a card its library doesn't hold, and the whole library was exiled.
+    spawn(game, "Shivan Dragon", B);
+    for (const name of ["Sol Ring", "Opt", "Divination"]) toLibrary(game, name);
+    const copies = new Map<string, number>();
+    for (const id of game.state.zones.perPlayer[A].library) {
+      const name = game.state.objects[id].cardName;
+      copies.set(name, (copies.get(name) ?? 0) + 1);
+    }
+    const most = Math.max(...copies.values());
+    expect(most).toBeGreaterThan(6);
+    lands(game, "Swamp", 1);
+    cast(game, toHand(game, "Demonic Consultation"), { settle: false });
+    game.advanceUntil((s) => s.awaiting !== null);
+    const offer = nameOffer(game);
+    const first = offer?.suggested[0] ?? "";
+    expect(copies.get(first)).toBe(most);
+    expect(offer?.suggested).not.toContain("Shivan Dragon");
+    game.dispatch({ type: "choose-card-name", player: A, name: first });
+    settle(game);
+    // Six exiled, then the next copy found: a library is left.
+    expect(hand(game, A).some((id) => game.state.objects[id].cardName === first)).toBe(true);
+    expect(game.state.zones.perPlayer[A].library.length).toBeGreaterThan(0);
   });
 });

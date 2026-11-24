@@ -23,6 +23,7 @@ export default defineCard({
       targets: ["any-target"],
       effect: {
         kind: "choose-card-name",
+        aim: "own-hand",
         then: {
           kind: "choose-random-card",
           zone: "hand",

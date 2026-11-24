@@ -10,6 +10,7 @@ export default defineCard({
   text: "Choose a card name. Reveal cards from the top of your library until you reveal a card with that name, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.",
   effect: {
     kind: "choose-card-name",
+    aim: "own-library",
     then: {
       kind: "sequence",
       effects: [

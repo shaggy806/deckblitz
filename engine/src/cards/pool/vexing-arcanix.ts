@@ -22,6 +22,7 @@ export default defineCard({
       targets: ["player"],
       effect: {
         kind: "choose-card-name",
+        aim: "own-library",
         chooser: 0,
         then: {
           kind: "reveal-top",

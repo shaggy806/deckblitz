@@ -11,6 +11,7 @@ export default defineCard({
   text: "Choose a card name. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal a card with the chosen name. Put that card into your hand and exile all other cards revealed this way.",
   effect: {
     kind: "choose-card-name",
+    aim: "own-library",
     then: {
       kind: "sequence",
       effects: [

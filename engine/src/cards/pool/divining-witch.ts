@@ -18,6 +18,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "choose-card-name",
+        aim: "own-library",
         then: {
           kind: "sequence",
           effects: [
