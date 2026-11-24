@@ -13813,4 +13813,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Llanowar Elves'] },
     }),
   ),
+  preset(
+    'Colossal Skyturtle: the channel ability with nothing to target is greyed, and says why',
+    board({
+      you: { bf: ['Forest*2', 'Island*2'], hand: ['Colossal Skyturtle'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

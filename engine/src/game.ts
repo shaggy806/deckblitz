@@ -60,6 +60,7 @@ import type {
   PlayLandOffer,
   TapCostOffer,
   TapToPay,
+  UnavailableAbility,
   WaterbendOffer,
 } from "./actions.js";
 import {
@@ -3461,6 +3462,14 @@ export class Game {
   }
 
   viewFor(player: PlayerId, options: ViewOptions = {}): PlayerView {
+    const view = this.plainViewFor(player, options);
+    // What the seat's hand can't do right now, and why: only `Game` can say
+    // (the costs, the targets, the timing), so it is added here.
+    const unavailable = this.unavailableHandAbilities(player);
+    return unavailable.length > 0 ? { ...view, unavailableHandAbilities: unavailable } : view;
+  }
+
+  private plainViewFor(player: PlayerId, options: ViewOptions): PlayerView {
     return viewFor(this.state, this.registry, player, {
       // What each of this seat's castable cards really costs, so the client
       // stops showing Blasphemous Act at {8}{R} while it is castable for
@@ -5544,6 +5553,59 @@ export class Game {
       this.pushActivations(player, out, source);
       return out;
     });
+  }
+
+  /**
+   * The abilities of the cards in `player`'s hand that work from there
+   * (channel, rule 702.34; ninjutsu, 702.49; forecast, 702.57) and that
+   * `legalActions` isn't offering, each with why in a player's words — see
+   * {@link UnavailableAbility}. Only while `player` holds priority with
+   * nothing being asked: that is when the others are offered, and outside it
+   * the reason is only that it isn't their time.
+   */
+  unavailableHandAbilities(player: PlayerId): UnavailableAbility[] {
+    return withComputedCache(() => {
+      if (this.state.result.over || this.state.awaiting !== null) return [];
+      if (this.state.priority.holder !== player) return [];
+      const out: UnavailableAbility[] = [];
+      for (const card of this.state.zones.perPlayer[player].hand) {
+        const def = this.registry.get(this.state.objects[card].cardName);
+        const abilities = this.effectiveActivated(card);
+        if (!abilities.some((ability) => ability.zone === "hand")) continue;
+        const offered = new Set(
+          this.legalActivationsOf(player, card).flatMap((offer) =>
+            offer.kind === "activate-ability" ? [offer.abilityIndex] : [],
+          ),
+        );
+        abilities.forEach((ability, index) => {
+          if (ability.zone !== "hand" || offered.has(index) || isManaAbility(ability)) return;
+          const why = this.whyCannotActivateAbility(player, card, index);
+          out.push({
+            source: card,
+            abilityIndex: index,
+            cardName: def.name,
+            text: ability.text,
+            why: Game.inAPlayersWords(why),
+          });
+        });
+      }
+      return out;
+    });
+  }
+
+  /** One of `whyCannotActivateAbility`'s refusals as a hand ability's pill
+   * says it: short, and with no card or player named. */
+  private static inAPlayersWords(why: string | null): string {
+    if (why === null) return "Can't be activated right now";
+    const target = / has no legal (.+) target$/.exec(why);
+    if (target !== null) return `No ${target[1]} to target`;
+    if (why.endsWith("no legal combination of targets")) return "No legal targets";
+    if (/ cannot pay for | can't pay /.test(why)) return "Can't pay its cost";
+    if (/ too few | nothing to | does not have | no commander to pay /.test(why)) return "Can't pay its cost";
+    if (why.endsWith("activation condition isn't met")) return "Its condition isn't met";
+    if (/already been activated|as many times this turn|only once, and has been/.test(why)) return "Already used";
+    if (why.endsWith("has split second")) return "A spell with split second is on the stack";
+    return "Can't be activated right now";
   }
 
   /**

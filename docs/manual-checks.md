@@ -28,6 +28,13 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## A hand ability that can't be used right now (2026-11-23)
+
+### Colossal Skyturtle: the channel ability with nothing to target is greyed, and says why
+- **Do:** Move the pointer onto Colossal Skyturtle in your hand.
+- **Expect:** Two pills on its top edge: "Channel — {1}{U}" in gold, and "Channel — {2}{G}" in grey with a dashed outline. A bubble over the grey one reads "No card in your graveyard to target".
+- **Not a bug:** Clicking the grey pill does nothing. Your graveyard is empty, so the first ability has no card to return.
+
 ## A question asked beside another trigger (2026-11-16)
 
 ### Ravenous Chupacabra: only "prompted by" is written above a trigger asking for its target

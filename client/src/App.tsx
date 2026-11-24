@@ -16,6 +16,7 @@ import type {
   TargetFacts,
   TargetRef,
   TargetSpec,
+  UnavailableAbility,
   VisibleObject,
   WaterbendOffer,
 } from 'engine/client'
@@ -2495,6 +2496,15 @@ function Table({
   }, [actions])
   // One of each set of interchangeable "{T}: Add {W}"s (`abilityMenu.ts`).
   const abilitiesBySource = useMemo(() => abilitiesBySourceOf(actions), [actions])
+  // What a hand card can't do right now, and why (`Game.unavailableHandAbilities`):
+  // greyed pills beside the ones on offer. A player left a game holding
+  // Colossal Skyturtle with one channel ability missing, their graveyard
+  // empty and nothing saying so (2026-11-24).
+  const unavailableBySource = useMemo(() => {
+    const m = new Map<ObjectId, UnavailableAbility[]>()
+    for (const u of view.unavailableHandAbilities ?? []) m.set(u.source, [...(m.get(u.source) ?? []), u])
+    return m
+  }, [view.unavailableHandAbilities])
 
   // The offer with each compacted token stack as one member per token
   // (game/stackMembers.ts): the bar picks and counts creatures, and
@@ -8213,6 +8223,8 @@ function Table({
           // Abilities that work from the hand (ninjutsu, channel): a button
           // each, as cycling's.
           const handAbilities = mode === 'priority' ? (abilitiesBySource.get(id) ?? []) : []
+          // And the ones it can't use now, greyed, each saying why.
+          const offAbilities = mode === 'priority' ? (unavailableBySource.get(id) ?? []) : []
           const faceOpts =
             mode === 'priority' ? (playFacesByCard.get(id) ?? []) : []
           // More than one way to play this card: a multi-face card's sides,
@@ -8245,7 +8257,7 @@ function Table({
               <KeywordTips obj={obj} className={`hand-kw-tips${fanOffset > 0 ? ' to-left' : ''}`} />
               {/* What else the card can do from the hand: pills on its top
                   edge (App.css), seen in the lowered tray too. */}
-              {multiFace || suspend || foretell || plot || cycle || handAbilities.length > 0 ? (
+              {multiFace || suspend || foretell || plot || cycle || handAbilities.length > 0 || offAbilities.length > 0 ? (
               <div className="hand-card-actions">
               {multiFace ? (
                 <button
@@ -8294,6 +8306,19 @@ function Table({
                 <button key={`ab-${ab.abilityIndex}`} type="button" onClick={() => clickAbility(ab)}>
                   <Symbols text={handAbilityLabel(ab.text)} />
                 </button>
+              ))}
+              {offAbilities.map((ab) => (
+                <span
+                  key={`off-${ab.abilityIndex}`}
+                  className="hand-ability-off"
+                  role="note"
+                  aria-label={`${handAbilityLabel(ab.text)}: not available. ${ab.why}`}
+                  data-why={ab.why}
+                >
+                  <span className="hand-ability-off-pill">
+                    <Symbols text={handAbilityLabel(ab.text)} />
+                  </span>
+                </span>
               ))}
               </div>
               ) : null}

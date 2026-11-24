@@ -48,7 +48,7 @@ import type {
   ZoneType,
 } from "./state.js";
 import { decisionHasSource } from "./decisions/registry.js";
-import type { DungeonMap } from "./actions.js";
+import type { DungeonMap, UnavailableAbility } from "./actions.js";
 import { dungeonMap } from "./cards/dungeons.js";
 import { goadersOf } from "./goad.js";
 import { hasRingBearerDesignation } from "./ring.js";
@@ -525,6 +525,11 @@ export interface PlayerView {
   /** Who the game is waiting on, when it isn't the player being asked: who
    * controls them or chooses for them. */
   readonly answering?: PlayerId;
+  /** The abilities of the viewer's hand cards that work from the hand and
+   * can't be activated now, each with why (`Game.unavailableHandAbilities`):
+   * drawn greyed out beside the ones on offer. Added by `Game.viewFor`, and
+   * only while the viewer holds priority; absent when there are none. */
+  readonly unavailableHandAbilities?: readonly UnavailableAbility[];
 }
 
 export interface ViewOptions {

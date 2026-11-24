@@ -1200,6 +1200,25 @@ export interface DungeonMap {
   readonly rooms: readonly { readonly name: string; readonly text: string; readonly next: readonly number[] }[];
 }
 
+/**
+ * An ability of a card in a player's hand that works from there (channel,
+ * ninjutsu, forecast) and can't be activated right now: what a client shows
+ * greyed out beside the ones `legalActions` offers, so the player sees the
+ * ability is there and why it isn't on offer (`Game.unavailableHandAbilities`).
+ * A player left a game holding Colossal Skyturtle with one of its two
+ * channel abilities missing: their graveyard was empty, and nothing said so
+ * (2026-11-24).
+ */
+export interface UnavailableAbility {
+  readonly source: ObjectId;
+  readonly abilityIndex: number;
+  readonly cardName: string;
+  /** The ability's text, as an `activate-ability` offer's. */
+  readonly text: string;
+  /** Why not, in a player's words: "No card in your graveyard to target". */
+  readonly why: string;
+}
+
 export type LegalAction =
   | { readonly kind: "pass-priority" }
   | {
