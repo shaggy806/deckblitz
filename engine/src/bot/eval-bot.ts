@@ -2259,8 +2259,9 @@ export class EvalBotController extends HeuristicBotController {
      * kept only if the defending player dies (`opponentPump`). */
     readonly mustKill: Map<Action, PlayerId>;
     /** A play due now that the evaluation scores a wash — a sacrifice for
-     * cards (`isSacrificeForCardsDue`), a suspend (`isSuspendDue`) — played
-     * if the search would pass. Named for the cantrips it used to hold, which
+     * cards (`isSacrificeForCardsDue`), a suspend (`isSuspendDue`), a tutor
+     * to the top of the library (`isTopTutorDue`) — played if the search
+     * would pass. Named for the cantrips it used to hold, which
      * `hand-worth.ts` prices now. */
     readonly cantrip: Action | null;
     /** Wipes held for after combat: chosen, they mean "pass to combat". */
@@ -2320,7 +2321,18 @@ export class EvalBotController extends HeuristicBotController {
         // So does a creature's (Sakura-Tribe Elder), outside a combat or a
         // spell to answer (`holdsCreatureFetch`): sooner only gives up blocks.
         if (this.holdsCreatureFetch(view.state, legal)) continue;
-        const due = this.isSacrificeForCardsDue(view.state, legal) || this.isSuspendDue(legal);
+        // And a tutor to the top of the library at the one window it is
+        // held for (`isTopTutorDue`): cast, it scores as a card lost, the
+        // card it found lying where the evaluation doesn't look.
+        const ourTop = view.state.zones.perPlayer[player]?.library[0];
+        const due =
+          this.isSacrificeForCardsDue(view.state, legal) ||
+          this.isSuspendDue(legal) ||
+          this.isTopTutorDue(
+            view.state,
+            legal,
+            ourTop !== undefined && this.memory.placed[player]?.has(ourTop) === true ? ourTop : undefined,
+          );
         // A divided amount's candidates each carry their shares (`withDivisions`).
         const aimed = withDivisions(view.state, this.cards, legal, candidateActions(aimOffer(view.state, this.cards, player, legal), player));
         for (const action of this.withSacrificeChoices(view.state, legal, aimed)) {

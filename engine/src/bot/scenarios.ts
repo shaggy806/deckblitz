@@ -536,6 +536,38 @@ function playOutTurn(
   return taken;
 }
 
+/**
+ * Play on from `player`'s turn until their next one begins, `bot` answering
+ * everything they are asked in every player's turn and the engine's defaults
+ * the rest. Returns what `bot` did that wasn't a pass, each with whose turn
+ * and which step it was done in.
+ */
+function playOutRound(
+  game: Game,
+  bot: PlayerController,
+  player: PlayerId,
+): { readonly action: Action; readonly active: PlayerId; readonly step: string }[] {
+  const start = game.state.turn.number;
+  const done = (s: Game["state"]): boolean =>
+    s.result.over || (s.turn.number > start && s.turnOrder[s.turn.activePlayerIndex] === player);
+  const ours = (s: Game["state"]): boolean =>
+    s.awaiting !== null ? s.awaiting.player === player : s.priority.holder === player;
+  const taken: { action: Action; active: PlayerId; step: string }[] = [];
+  for (let i = 0; i < 2000 && !done(game.state); i += 1) {
+    if (!ours(game.state)) {
+      game.advanceUntil((s) => ours(s) || done(s));
+      continue;
+    }
+    const state = game.state;
+    const action = bot.act(viewOf(game, player));
+    if (action.type !== "pass-priority") {
+      taken.push({ action, active: state.turnOrder[state.turn.activePlayerIndex], step: state.turn.step });
+    }
+    game.dispatch(action);
+  }
+  return taken;
+}
+
 /** Whether, after our turn, Murder killed `dragon` or can still be cast
  * (three untapped lands, two of them Swamps). */
 function murderKept(game: Game, dragon: ObjectId, taken: readonly Action[]): ScenarioResult {
@@ -8277,6 +8309,68 @@ const SCENARIOS: readonly BotScenario[] = [
       return {
         passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Frenzied Saddlebrute")),
         detail: `did: ${did.join(", ") || "nothing"}`,
+      };
+    },
+  },
+  {
+    name: "casts Worldly Tutor at the end of the turn before its own, for the creature its hand wants",
+    rule: "A tutor to the top of the library is cast in the last window before the draw it sets up.",
+    run(weights, registry, makeBot) {
+      // Lathril's games (2026-11-24): Worldly Tutor castable and uncast at
+      // the end of five of its turns in twelve games, once two turns round
+      // with the deck on 6 and then 3 life. `holdsTopTutor` keeps such a
+      // tutor for the end of the turn before ours, and there the search
+      // scored the cast as a card lost (24.6 to 22.9): the evaluation prices
+      // a tutor into the hand, and a card on top of the library not at all.
+      // Vampiric, Mystical and Enlightened Tutor the same, in every deck.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Forest", A, 4);
+      const tutor = game.debugSpawn("Worldly Tutor", A, "hand");
+      game.debugSpawn("Grizzly Bears", A, "library");
+      game.debugSpawn("Craw Wurm", A, "library");
+      const taken = playOutRound(game, makeBot(A, registry, weights), A);
+      const cast = taken.find((t) => t.action.type === "cast-spell" && t.action.card === tutor);
+      const top = game.state.zones.perPlayer[A].hand
+        .concat(game.state.zones.perPlayer[A].library.slice(0, 1))
+        .map((id) => game.state.objects[id]?.cardName);
+      if (cast === undefined) return { passed: false, detail: "never cast it" };
+      return {
+        // Cast in Dave's end step; the Wurm is on top, or drawn if the round
+        // ran on into her draw step.
+        passed: cast.active === D && cast.step === "end" && top.includes("Craw Wurm"),
+        detail: `cast in ${cast.active}'s ${cast.step}; hand and top card: ${top.join(", ")}`,
+      };
+    },
+  },
+  {
+    name: "beholds an Elf to untap the land Elven Passage finds",
+    rule: "A free \"you may\" that untaps our own land is taken: the land casts a spell this turn.",
+    run(weights, registry, makeBot) {
+      // Lathril's deck again: "You may behold an Elf. If you do, untap that
+      // land." `effect-worth.ts` read `untap-all` as nothing, a tie went to
+      // declining, and v2's rollouts (which pass our own seat) couldn't
+      // break it: the Forest stayed tapped, and Ezuri in hand with it.
+      const game = table(registry, [A, B], A);
+      lands(game, "Forest", A, 2);
+      onBoard(game, "Llanowar Elves", A);
+      game.debugSpawn("Elven Passage", A, "hand");
+      game.debugSpawn("Craw Wurm", A, "hand");
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const fetched = game.state.zones.shared.battlefield.filter((id) => {
+        const object = game.state.objects[id];
+        return object.controller === A && object.cardName === "Forest";
+      });
+      const did = taken
+        .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
+        .filter((s) => s !== "pass-priority");
+      return {
+        // Two Forests, the Elves and the fetched Forest untapped are four
+        // mana; the Wurm is six, so nothing is cast and the question is the
+        // land alone: three Forests, and the third answered "behold".
+        passed:
+          fetched.length === 3 &&
+          taken.some((a) => a.type === "choose-modes" && a.modes.length > 0),
+        detail: `did: ${did.join(", ") || "nothing"}; Forests ${fetched.length}`,
       };
     },
   },

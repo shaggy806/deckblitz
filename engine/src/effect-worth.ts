@@ -635,6 +635,18 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       );
     case "untap":
       return typeof effect.target === "number" ? 0 : onObjectRef(effect.target, 0.5, ctx);
+    // "Untap all creatures you control" (Vitalize), "untap that land" (Elven
+    // Passage's "you may behold an Elf. If you do, untap that land"): our own
+    // permanents untapped, worth what one `untap` is. It read 0, so a free
+    // "you may" that untaps the land a fetch just found was declined on the
+    // tie, and the land stayed tapped with a three-drop in hand (Lathril's
+    // games, 2026-11-24). Only where the filter says whose they are: ours,
+    // or what this effect just put onto the battlefield.
+    case "untap-all":
+      if (effect.who !== undefined || effect.controlledByTarget !== undefined) return 0;
+      return effect.filter.controlledBy === "you" || effect.filter.thisWay !== undefined
+        ? onPlayers(you, 0.5, ctx)
+        : 0;
     case "explore":
     case "connive":
       if (typeof effect.target === "number") return 0;

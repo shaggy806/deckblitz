@@ -4585,6 +4585,51 @@ export class HeuristicBotController extends AutomaticController {
     return !this.isEndOfTurnBeforeOurs(state);
   }
 
+  /**
+   * Whether `offer` casts a tutor to the top of our library at the moment
+   * to cast it: the instant `holdsTopTutor` has held, at the end of the turn
+   * before ours; a sorcery in our own main phase on an empty stack. Only
+   * with something to find, and where the seat knows the card on top of its
+   * library (`knownTop`: one an earlier search put there), with something
+   * its hand wants more than that: a second search shuffles the first one's
+   * find away.
+   *
+   * What a search plays when it would otherwise pass. The evaluation prices
+   * a tutor that puts its card into the hand (`bot/hand-worth.ts`); one that
+   * puts it on top of the library is a plain card in hand and nothing once
+   * cast, so the search scored the cast as a card lost and passed. With
+   * `holdsTopTutor` keeping it for this one window, Worldly Tutor and
+   * Vampiric Tutor were never cast at all: Worldly Tutor sat in a hand for
+   * two turns round while its deck died (Lathril's games, 2026-11-24). They
+   * had been cast by a rule that went when hand tutors were priced
+   * (`isCantripDue`, 2026-11-10).
+   */
+  protected isTopTutorDue(state: GameState, offer: LegalAction, knownTop?: ObjectId): boolean {
+    if (offer.kind !== "cast-spell" || offer.face !== undefined || offer.castModal !== undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    const search = topSearchOf(def.effect);
+    if (search === null) return false;
+    const me = this.playerId;
+    if (def.types.includes("instant")) {
+      if (!this.isEndOfTurnBeforeOurs(state)) return false;
+    } else if (
+      state.zones.shared.stack.length > 0 ||
+      activePlayerOf(state) !== me ||
+      (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main")
+    ) {
+      return false;
+    }
+    const library = state.zones.perPlayer[me]?.library ?? [];
+    const wanted = this.wantedInHand(state);
+    let best = -Infinity;
+    for (const id of library) {
+      if (matchesFilter(state, this.registry, id, search.filter, { you: me })) best = Math.max(best, wanted(id));
+    }
+    if (best === -Infinity) return false;
+    return knownTop === undefined || library[0] !== knownTop || best > wanted(knownTop);
+  }
+
   /** Whether this bot's own cast of `offer`, aimed as it would aim it, is
    * removal at too small a creature (`removesTooLittle`). */
   private holdsRemovalForMore(state: GameState, offer: CastSpellLegal): boolean {
@@ -5041,8 +5086,16 @@ export class HeuristicBotController extends AutomaticController {
     // Into our own hand, by what v2's evaluation says the card is worth
     // there (`bot/hand-worth.ts`), so the card a rollout finds is the card a
     // tutor in hand was priced on: a land when the hand has none and the
-    // board wants one, else the best spell within reach.
-    if (awaiting?.kind === "choose-from-zone" && awaiting.destination === "hand") {
+    // board wants one, else the best spell within reach. And onto the top of
+    // our own library from it (Worldly Tutor): the next card we draw.
+    const toOurTop =
+      awaiting?.kind === "choose-from-zone" &&
+      awaiting.destination === "library-top" &&
+      eligible.every((id) => {
+        const object = view.state.objects[id];
+        return object !== undefined && object.zone === "library" && object.owner === this.playerId;
+      });
+    if (awaiting?.kind === "choose-from-zone" && (awaiting.destination === "hand" || toOurTop)) {
       const wanted = this.wantedInHand(view.state);
       const quality = new Map(eligible.map((id) => [id, wanted(id)]));
       const usual = this.mostUsefulTo(view.state, this.playerId, eligible, eligible.length);
@@ -6499,9 +6552,24 @@ function stealsATarget(def: CardDefinition): boolean {
  * it on top, alone or as a step of a sequence (Vampiric Tutor's, before its
  * life loss). */
 function searchesToTop(effect: EffectSpec | null | undefined): boolean {
-  if (effect === null || effect === undefined) return false;
-  if (effect.kind === "sequence") return effect.effects.some(searchesToTop);
-  return effect.kind === "search-library" && effect.destination === "library-top" && effect.who === undefined;
+  return topSearchOf(effect) !== null;
+}
+
+/** The search {@link searchesToTop} finds, or `null`. */
+function topSearchOf(
+  effect: EffectSpec | null | undefined,
+): Extract<EffectSpec, { readonly kind: "search-library" }> | null {
+  if (effect === null || effect === undefined) return null;
+  if (effect.kind === "sequence") {
+    for (const step of effect.effects) {
+      const found = topSearchOf(step);
+      if (found !== null) return found;
+    }
+    return null;
+  }
+  return effect.kind === "search-library" && effect.destination === "library-top" && effect.who === undefined
+    ? effect
+    : null;
 }
 
 /** Whether `effect` phases out the permanents its controller controls, all
