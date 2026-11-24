@@ -24,6 +24,7 @@ import {
   hand,
   lands,
   life,
+  named,
   pickFromZone,
   pickTargets,
   ref,
@@ -297,6 +298,20 @@ describe("Sword of Hearth and Home: both cards enter together", () => {
     pickFromZone(a, land);
     attack(game, a, [carrier]);
     expect(zone(game, land)).toBe("battlefield");
+  });
+
+  it("exiling the creature it's on, the Sword comes off: what returns is a new object (rule 400.7)", () => {
+    const { game, a } = table();
+    const carrier = equipped(game);
+    const [sword] = named(game, "Sword of Hearth and Home", A);
+    const land = toLibrary(game, "Forest", A);
+    pickTargets(a, carrier);
+    pickFromZone(a, land);
+    attack(game, a, [carrier]);
+    expect(zone(game, carrier)).toBe("battlefield");
+    expect(game.state.objects[sword].attachedTo).toBeNull();
+    expect(game.characteristics(carrier).power).toBe(2);
+    expect(game.characteristics(carrier).protectionFrom.colors.size).toBe(0);
   });
 
   it("a target gone illegal: the ability does nothing, no search (the ruling)", () => {

@@ -76184,6 +76184,13 @@ controlledBy,
     // 400.7), and the state-based check puts the Aura into its owner's
     // graveyard (704.5m) — unless an effect attaches it again first.
     if (object.zone === "graveyard" && to !== "graveyard") this.detachFrom(id);
+    // The same for a card arriving on the battlefield: what was attached to
+    // the permanent it was before is attached to nothing it is now. Most
+    // attachments fall off in the state-based check after it left (704.5m,
+    // 704.5n); one that left and came back inside a single resolution was
+    // never checked (Sword of Hearth and Home exiling the creature it's on,
+    // then putting it back).
+    else if (to === "battlefield" && object.zone !== "battlefield") this.detachFrom(id);
     const previousZone = object.zone;
     // How it gets onto the battlefield (`EntryRecord`), read before the
     // resets below hand it back to its owner: from where, whether it was
