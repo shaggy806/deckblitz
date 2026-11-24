@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 import type { Page, WebSocket } from '@playwright/test'
+import { readFileSync } from 'node:fs'
 
 // Solo games played locally (`?local=1`, `docs/plans/local-rooms.md`): a
 // blitz's and a lesson's rooms run in a Web Worker in the page
@@ -127,6 +128,32 @@ test('a local blitz plays against three bots in the page, never on the room serv
   // It was all in this tab: nothing about the game went to the room server.
   expect(typesOf(sent)).toEqual([])
   expect(sent.some((s) => s.includes(roomId!))).toBe(false)
+  expect(errors).toEqual([])
+
+  // The file has the game's replay after its lines, and Settings on the
+  // landing page plays it again from Alice's seat (`src/replay/`).
+  const file = await download.path()
+  expect(readFileSync(file, 'utf8')).toContain('=== Deck Blitz replay')
+  await page.goto('/?local=1')
+  await page.getByRole('button', { name: 'Settings' }).click()
+  const [chooser] = await Promise.all([
+    page.waitForEvent('filechooser'),
+    page.getByRole('button', { name: 'Watch a replay…' }).click(),
+  ])
+  await chooser.setFiles(file)
+  const bar = page.getByRole('toolbar', { name: 'Replay' })
+  await expect(bar).toBeVisible({ timeout: 20_000 })
+  await expect(bar.locator('.replay-where')).toContainText('1/')
+  await bar.getByRole('button', { name: 'On a move' }).click()
+  await expect(bar.locator('.replay-where')).toContainText('2/')
+  // A History entry takes the board to its move.
+  await page.getByRole('button', { name: 'History', exact: true }).click()
+  await expect(page.locator('.event-log li.ev-ahead').first()).toBeVisible()
+  await page.locator('.event-log li').last().click()
+  await expect(page.locator('.event-log li.ev-ahead')).toHaveCount(0)
+  await expect(page.locator('.event-log-export')).toHaveCount(0)
+  await bar.getByRole('button', { name: 'Exit replay' }).click()
+  await expect(bar).toHaveCount(0)
   expect(errors).toEqual([])
 })
 

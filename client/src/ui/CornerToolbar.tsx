@@ -12,7 +12,8 @@ import { HelpMenu } from '../tutorial/HelpMenu.tsx'
  * @param intro The landing page: a first visit gets the tutorials' callout
  *   over the "?" button. Not in the lobby, where it would sit over the room
  *   settings and Start game. The landing page also gets `SiteLinks` first in
- *   the row: "Built with Claude Code" and "Send feedback".
+ *   the row: "Built with Claude Code" and "Send feedback", and Settings'
+ *   "Watch a replay…" (`MotionControl`'s `replays`), which takes the page.
  * @param onLesson How the "?" menu opens a lesson (*Tour the board*, *Learn
  *   Commander* — `HelpMenu`): given on the landing page, which has no room
  *   to leave.
@@ -35,7 +36,7 @@ export function CornerToolbar({
         {...(onLesson !== undefined ? { onLesson } : {})}
         {...(lessonStarting !== undefined ? { starting: lessonStarting } : {})}
       />
-      <MotionControl place="corner" />
+      <MotionControl place="corner" replays={intro} />
     </div>
   )
 }

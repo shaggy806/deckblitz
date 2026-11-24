@@ -10,12 +10,14 @@
  * stays hidden in the file too.
  *
  * `logText` and `logFileName` are pure (tested without a page);
- * `downloadText` is the one place that touches the document.
+ * `downloadText` is the one place that touches the document. `exportLog`
+ * adds the game's replay after the lines (`replay/replayFile.ts`).
  */
 
 import type { GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 import { describeEvent } from '../format.ts'
+import { replayTrailer } from '../replay/recorder.ts'
 
 /** `EventLog`'s `NameAt`: what a line about event `seq` calls object `id`. */
 type NameAt = (id: ObjectId, seq: number, heldBy?: PlayerId) => string
@@ -41,6 +43,14 @@ export function logFileName(roomId: string | null, events: readonly GameEvent[])
     .map((part) => part.replace(/[^A-Za-z0-9]+/g, ''))
     .filter((part) => part !== '')
     .join('-')}.txt`
+}
+
+/** Saves the log `text` as `fileName`, with the game's replay after it when
+ * this tab kept one (`replay/recorder.ts`): the same file opens in Settings'
+ * "Watch a replay". The log's own lines come first and are unchanged, so a
+ * bug report still names a line by its number. */
+export async function exportLog(fileName: string, text: string, roomId: string | null): Promise<void> {
+  downloadText(fileName, text + (await replayTrailer(roomId)))
 }
 
 /** Hand the browser `text` to save as `fileName`. */

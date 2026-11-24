@@ -7,7 +7,7 @@ import { requestCards, useCardData } from '../cards/cardData.ts'
 import type { SeenPrinting } from '../game/seenPrintings.ts'
 import { CardTile } from './CardTile.tsx'
 import { defToVisible } from './defToVisible.ts'
-import { downloadText, logFileName, logText } from './logExport.ts'
+import { exportLog, logFileName, logText } from './logExport.ts'
 import { markCard, splitMarked } from './logMarks.ts'
 import { OtherFace } from './OtherFace.tsx'
 import { useHoverPopover } from './useHoverPopover.ts'
@@ -40,6 +40,13 @@ export interface EventLogProps {
   /** Picks one card's name in an entry: the caller points out that card,
    * not the entry's first. Without it a name's click is the entry's. */
   readonly onSelectCard?: (id: ObjectId, event: GameEvent) => void
+  /** Offers "Export log" (the default). A replay's log, the whole game
+   * already in a file, doesn't. */
+  readonly exportable?: boolean
+  /** A replay's place in its game: the last event the board shows. The log
+   * then lists the whole game, the lines past this one dimmed, and keeps the
+   * line it's at in view. */
+  readonly upTo?: number
 }
 
 /** The History panel a log name sits in: its card preview opens beside it,
@@ -186,7 +193,17 @@ function EventText({
  * log is — any seat or spectator, a game in progress or over, a room on the
  * server or one in the page.
  */
-export function EventLog({ events, nameAt, seats, roomId, printingOf, onSelect, onSelectCard }: EventLogProps) {
+export function EventLog({
+  events,
+  nameAt,
+  seats,
+  roomId,
+  printingOf,
+  onSelect,
+  onSelectCard,
+  exportable = true,
+  upTo,
+}: EventLogProps) {
   const boxRef = useRef<HTMLDivElement>(null)
   const [detailed, setDetailed] = useState(false)
   const lookup = useCardData()
@@ -217,23 +234,31 @@ export function EventLog({ events, nameAt, seats, roomId, printingOf, onSelect, 
   }
   useLayoutEffect(() => {
     const box = boxRef.current
-    if (box && following.current) box.scrollTop = box.scrollHeight
-  }, [shown.length])
+    if (box && following.current && upTo === undefined) box.scrollTop = box.scrollHeight
+  }, [shown.length, upTo])
+  // A replay's line: the last one listed at or before its place.
+  const now = upTo === undefined ? undefined : shown.findLast((e) => e.seq <= upTo)?.seq
+  useLayoutEffect(() => {
+    if (now === undefined) return
+    boxRef.current?.querySelector('.ev-now')?.scrollIntoView({ block: 'nearest' })
+  }, [now])
 
   return (
     <div className={detailed ? 'event-log detailed' : 'event-log'} ref={boxRef} onScroll={noteScroll}>
       <div className="event-log-head">
         <h3>Log</h3>
         <div className="event-log-tools">
-          <button
-            type="button"
-            className="event-log-export"
-            disabled={events.length === 0}
-            title="Save the whole log as a text file: every line, numbered"
-            onClick={() => downloadText(logFileName(roomId ?? null, events), logText(events, nameAt, seats))}
-          >
-            Export log
-          </button>
+          {exportable ? (
+            <button
+              type="button"
+              className="event-log-export"
+              disabled={events.length === 0}
+              title="Save the whole log as a text file, every line numbered, with the game's replay after it"
+              onClick={() => void exportLog(logFileName(roomId ?? null, events), logText(events, nameAt, seats), roomId ?? null)}
+            >
+              Export log
+            </button>
+          ) : null}
           <label className="event-log-toggle">
             <input
               type="checkbox"
@@ -248,7 +273,9 @@ export function EventLog({ events, nameAt, seats, roomId, printingOf, onSelect, 
         {shown.map((event) => (
           <li
             key={event.seq}
-            className={`ev ev-${event.type}${onSelect ? ' selectable' : ''}`}
+            className={`ev ev-${event.type}${onSelect ? ' selectable' : ''}${
+              upTo === undefined ? '' : event.seq === now ? ' ev-now' : event.seq > upTo ? ' ev-ahead' : ''
+            }`}
             onClick={onSelect ? () => onSelect(event) : undefined}
             title={onSelect ? 'Show on the board' : undefined}
           >

@@ -5,6 +5,9 @@ import { playSound } from '../game/sound.ts'
 import { STEPS, setPassSettings, usePassSettings } from '../game/passSettings.ts'
 import type { BotSpeed } from 'protocol'
 import { BOT_SPEEDS } from './botSpeeds.ts'
+import { ReplayFileError, decodeReplay } from '../replay/replayFile.ts'
+import { openReplay } from '../replay/recorder.ts'
+import '../replay/replay.css'
 
 const SPEED_LABEL: Record<AnimScale, string> = {
   0.5: 'Fast',
@@ -37,7 +40,11 @@ const SPEED_LABEL: Record<AnimScale, string> = {
 export function MotionControl({
   botSpeed,
   place = 'strip',
+  replays = false,
 }: {
+  /** Offers "Watch a replay" (`ReplayOpener`): the landing page's, where
+   * nothing is under way for a replay to take the page from. */
+  readonly replays?: boolean
   /** The room's bot speed, when this viewer may set it. */
   readonly botSpeed?: { readonly speed: BotSpeed; readonly onChange: (speed: BotSpeed) => void }
   /** The game's top strip (a text button, the panel below it), or a corner
@@ -214,9 +221,61 @@ export function MotionControl({
             value={prefs.musicVolume}
             onChange={(musicVolume) => setMotionSettings({ musicVolume })}
           />
+          {replays ? <ReplayOpener /> : null}
         </div>
       ) : null}
     </div>
+  )
+}
+
+/**
+ * Settings' "Watch a replay": picks a log a game's History saved (Export
+ * log), and opens the replay in it (`replay/recorder.ts`'s `openReplay`),
+ * or says why it can't.
+ */
+function ReplayOpener() {
+  const input = useRef<HTMLInputElement>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [reading, setReading] = useState(false)
+  return (
+    <>
+      <div className="motion-heading">Replays</div>
+      <div className="motion-row">
+        <button type="button" disabled={reading} onClick={() => input.current?.click()}>
+          {reading ? 'Opening…' : 'Watch a replay…'}
+        </button>
+        <input
+          ref={input}
+          type="file"
+          accept=".txt,text/plain"
+          hidden
+          aria-label="Replay file"
+          onChange={(e) => {
+            const file = e.target.files?.[0]
+            e.target.value = ''
+            if (file === undefined) return
+            setError(null)
+            setReading(true)
+            void file
+              .text()
+              .then(decodeReplay)
+              .then((data) => openReplay(data))
+              .catch((err: unknown) =>
+                setError(err instanceof ReplayFileError ? err.message : "That file couldn't be opened."),
+              )
+              .finally(() => setReading(false))
+          }}
+        />
+      </div>
+      <div className="motion-note motion-wrap">
+        A game&apos;s log, saved from its History with Export log, plays the game again as you saw it.
+      </div>
+      {error !== null ? (
+        <div className="motion-note motion-wrap replay-open-error" role="alert">
+          {error}
+        </div>
+      ) : null}
+    </>
   )
 }
 

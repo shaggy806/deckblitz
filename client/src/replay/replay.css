@@ -1,0 +1,88 @@
+/* A replay's controls (replay/ReplayBar.tsx): a second row under the top
+   strip, edge to edge as the strip is, the board below it a row shorter.
+   Floated over the board it hid a seat's name on a four-player table. */
+.replay-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(4px, 0.5vw, 8px);
+  margin: -8px -20px 8px;
+  padding: 3px clamp(8px, 1.2vw, 16px);
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.replay-title {
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  margin-right: 2px;
+}
+.replay-bar button {
+  background: transparent;
+  border-color: var(--border-soft);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  padding: 2px 8px;
+}
+.replay-bar button:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--muted-dim);
+}
+.replay-bar button.replay-icon {
+  min-width: 2.2em;
+  padding: 1px 6px;
+  line-height: 1.2;
+}
+.replay-bar button.replay-play {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+.replay-scrub {
+  width: clamp(80px, 12vw, 220px);
+  accent-color: var(--accent);
+}
+.replay-where {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  min-width: 7.5em;
+}
+.replay-count {
+  color: var(--muted-dim);
+}
+.replay-pace {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+}
+.replay-pace select {
+  padding: 2px 4px;
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+}
+
+/* The History of a replay lists the whole game: what the board hasn't got
+   to yet is dimmed, and the line it's at is marked. */
+.event-log li.ev-ahead {
+  opacity: 0.45;
+}
+.event-log li.ev-now {
+  box-shadow: inset 3px 0 0 var(--accent);
+  background: var(--accent-bg);
+}
+
+/* Settings' "Watch a replay" (ui/MotionControl.tsx), out of a game. */
+.motion-note.replay-open-error {
+  color: var(--bad);
+  white-space: normal;
+  max-width: 22em;
+}

@@ -33,6 +33,7 @@ import type {
   WireDeck,
 } from 'protocol'
 import { prefetchArt } from '../ui/art.ts'
+import { recordFrame } from '../replay/recorder.ts'
 import { randomBotDecks } from '../lobby/randomBotDeck.ts'
 import { isRematch } from './rematch.ts'
 import { stopsBelongTo } from '../game/passSettings.ts'
@@ -184,6 +185,24 @@ function clearRoomFromUrl(): void {
 /** A dev build's `?check=<title>`, or a piece of one: open the scenario
  * builder and play that manual check (`builder/ManualChecksSection.tsx`). */
 export const CHECK_PARAM = 'check'
+
+/** What `view` calls object `id` (`NetworkGame.nameOf`); a replay's game
+ * names its cards the same way. */
+export function nameInView(view: PlayerView | null, id: ObjectId): string {
+  // A member id (`<id>#<k>`, one token of a compacted stack while a
+  // combat declaration is built — game/stackMembers.ts) is its stack.
+  const o = view?.objects[realId(id)]
+  if (o) return o.faceName ?? o.cardName
+  // The pending decision's source when it's no object this seat is
+  // shown — a dungeon in the command zone, whose room ability is asking
+  // (Tomb of Annihilation's Veils of Fear): the view names it.
+  const source = view?.decisionSource
+  if (source && source.object === id) return source.cardName
+  // An emblem's object, whose activated abilities its owner is offered.
+  const emblem = view?.emblems.find((e) => e.object === id)
+  if (emblem) return emblem.source === null ? 'Emblem' : `Emblem — ${emblem.source}`
+  return id
+}
 
 /** Whether this page load ends on the landing page once the socket opens:
  * no room to join and nothing for `onopen` to start. Such a load draws the
@@ -989,6 +1008,17 @@ export function useNetworkGame(): NetworkGame {
             ...(message.tutorial !== undefined ? { tutorial: message.tutorial } : {}),
             ...(message.replaced === true ? { replaced: true as const } : {}),
           })
+          // Kept for the replay "Export log" writes into its file.
+          recordFrame({
+            roomId: message.roomId,
+            game: message.game,
+            seat: message.seat,
+            spectating: message.spectating === true,
+            view,
+            seats: message.seats,
+            replaced: message.replaced === true,
+            ...(message.artManifest ? { art: message.artManifest } : {}),
+          })
           setAutoPassing(message.autoPassing)
           setAutoPassPaused(message.autoPassPaused)
           setIsHost(message.isHost)
@@ -1613,24 +1643,7 @@ export function useNetworkGame(): NetworkGame {
     [send],
   )
 
-  const nameOf = useCallback(
-    (id: ObjectId): string => {
-      // A member id (`<id>#<k>`, one token of a compacted stack while a
-      // combat declaration is built — game/stackMembers.ts) is its stack.
-      const o = view?.objects[realId(id)]
-      if (o) return o.faceName ?? o.cardName
-      // The pending decision's source when it's no object this seat is
-      // shown — a dungeon in the command zone, whose room ability is asking
-      // (Tomb of Annihilation's Veils of Fear): the view names it.
-      const source = view?.decisionSource
-      if (source && source.object === id) return source.cardName
-      // An emblem's object, whose activated abilities its owner is offered.
-      const emblem = view?.emblems.find((e) => e.object === id)
-      if (emblem) return emblem.source === null ? 'Emblem' : `Emblem — ${emblem.source}`
-      return id
-    },
-    [view],
-  )
+  const nameOf = useCallback((id: ObjectId): string => nameInView(view, id), [view])
 
   const clearError = useCallback(() => setError(null), [])
   const clearNotice = useCallback(() => setNotice(null), [])

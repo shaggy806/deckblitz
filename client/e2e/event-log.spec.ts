@@ -112,7 +112,10 @@ for (const room of ['TWOAA', 'FOURP']) {
       box.getByRole('button', { name: 'Export log' }).click(),
     ])
     expect(download.suggestedFilename()).toMatch(new RegExp(`^gamelog-${room}-\\d+\\.txt$`))
-    const lines = readFileSync(await download.path(), 'utf8').split('\n')
+    // The log's lines, then the game's replay (`src/replay/`) after a marker.
+    const [log, replay] = readFileSync(await download.path(), 'utf8').split('\n=== Deck Blitz replay')
+    expect(replay).toBeDefined()
+    const lines = log!.split('\n')
     expect(lines.pop()).toBe('')
     expect(lines.length).toBeGreaterThan(concise)
     expect(lines[0]).toMatch(/^0\t.+ vs .+ · .+ first · seed \d+$/)

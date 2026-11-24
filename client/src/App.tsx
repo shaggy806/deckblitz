@@ -56,7 +56,12 @@ import {
   seatingOf,
 } from 'engine/client'
 import type { SeatStatus, TutorialInfo } from 'protocol'
-import { opensOnLanding, useNetworkGame } from './net/useNetworkGame.ts'
+import { nameInView, opensOnLanding, useNetworkGame } from './net/useNetworkGame.ts'
+import { useOpenReplay } from './replay/recorder.ts'
+import { useReplayGame } from './replay/useReplayGame.ts'
+import type { ReplayControls } from './replay/useReplayGame.ts'
+import type { ReplayData } from './replay/replayFile.ts'
+import { ReplayBar } from './replay/ReplayBar.tsx'
 import type { BlitzReport, NetworkGame } from './net/useNetworkGame.ts'
 import { rematchOffer } from './net/rematch.ts'
 import type { RematchOffer } from './net/rematch.ts'
@@ -1086,6 +1091,13 @@ export default function App() {
     }
   }, [view, seat, nameOf, seats])
 
+  // A replay opened from Settings takes the page until it's closed; the
+  // room connection waits underneath, unused.
+  const replayData = useOpenReplay()
+  if (replayData !== null) {
+    return <ReplayApp key={`${replayData.roomId}.${replayData.game}.${replayData.recordedAt}`} data={replayData} />
+  }
+
   return (
     <>
       <AppScreen game={game} />
@@ -1600,7 +1612,23 @@ function WaitingForPlayersScreen({ game }: { readonly game: NetworkGame }) {
  * it. `game.view` is only for bookkeeping that has to be current, like
  * resolving a card name in the history popup.
  */
-function GameScreen({ game }: { readonly game: NetworkGame }) {
+/**
+ * A replay opened from Settings ("Watch a replay"): the game screen over the
+ * replay's frames (`replay/useReplayGame.ts`), with its controls.
+ */
+function replayLastBoard(replay: ReplayControls): Omit<PlayerView, 'events'> {
+  const log = replay.replay.frames[replay.index]!.log
+  const frames = replay.replay.frames
+  for (let i = frames.length - 1; i >= 0; i--) if (frames[i]!.log === log) return frames[i]!.board
+  return frames[replay.index]!.board
+}
+
+function ReplayApp({ data }: { readonly data: ReplayData }) {
+  const { game, controls } = useReplayGame(data)
+  return <GameScreen key={`${game.gameNumber}.${game.view?.restarts ?? 0}`} game={game} replay={controls} />
+}
+
+function GameScreen({ game, replay }: { readonly game: NetworkGame; readonly replay?: ReplayControls }) {
   const [showHistory, setShowHistory] = useState(false)
   const [showCapture, setShowCapture] = useState(false)
   const [dismissedHighroll, setDismissedHighroll] = useState(false)
@@ -1654,7 +1682,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // Called unconditionally (before the loading-guard below) per the rules of
   // hooks. `ackFrame` is what lets the server pace its bots against these
   // animations rather than racing ahead of them.
-  const shown = usePlayback(game.frame, bus, game.ackFrame, game.spectating ? null : game.seat)
+  // A replay is watched from its player's seat, their draws flying into the
+  // hand, though nothing in it can be done.
+  const shown = usePlayback(game.frame, bus, game.ackFrame, game.spectating && replay === undefined ? null : game.seat)
   const view = shown.view
   // The stack's card faded to show the board under it (Alt, or its eye tab).
   const stackSeeThrough = useStackSeeThrough(view?.zones.stack ?? [])
@@ -1790,7 +1820,11 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
       <header className="top-strip">
         <span className="ts-room">
           room {game.roomId}
-          {game.spectating ? <span className="ts-spectating"> · spectating</span> : null}
+          {replay !== undefined ? (
+            <span className="ts-spectating"> · replay</span>
+          ) : game.spectating ? (
+            <span className="ts-spectating"> · spectating</span>
+          ) : null}
         </span>
         {/* A finished game has no turn or step: the strip says "Game over"
             alone, where it went on reading "Alice's turn · Precombat Main
@@ -1860,9 +1894,14 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
               Capture
             </button>
           ) : null}
-          <SeatMenu game={game} view={view} onShowResult={over && resultDismissed ? showResult : undefined} />
+          {/* A replay has nothing of a player's to do: its way out is its bar. */}
+          {replay === undefined ? (
+            <SeatMenu game={game} view={view} onShowResult={over && resultDismissed ? showResult : undefined} />
+          ) : null}
         </div>
       </header>
+
+      {replay !== undefined ? <ReplayBar controls={replay} /> : null}
 
       <div className="toast-stack">
         {game.stopped !== null ? (
@@ -1968,15 +2007,30 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
               </button>
             </div>
             <EventLog
-              events={view.events}
-              nameAt={((abilities) => (id: ObjectId, seq: number, heldBy?: PlayerId) =>
-                logNameAt(view.publicStints, game.nameOf, id, seq, heldBy !== undefined && heldBy !== game.seat, abilities))(
-                abilitySourcesOf(view.events),
+              events={replay?.log ?? view.events}
+              nameAt={((abilities, stints, nameOf) => (id: ObjectId, seq: number, heldBy?: PlayerId) =>
+                logNameAt(stints, nameOf, id, seq, heldBy !== undefined && heldBy !== game.seat, abilities))(
+                abilitySourcesOf(replay?.log ?? view.events),
+                // A replay's History lists the whole game: its names are as
+                // the game's last board has them, which has seen the most.
+                replay === undefined ? view.publicStints : replayLastBoard(replay).publicStints,
+                replay === undefined ? game.nameOf : (id: ObjectId) => {
+                  const named = game.nameOf(id)
+                  return named !== id ? named : nameInView(replayLastBoard(replay) as PlayerView, id)
+                },
               )}
               seats={game.seats}
               roomId={game.roomId}
               printingOf={printingSeen}
+              exportable={replay === undefined}
+              {...(replay !== undefined ? { upTo: replay.upTo } : {})}
               onSelect={(event) => {
+                // A replay goes to the move: the board as that entry left it.
+                if (replay !== undefined) {
+                  replay.pause()
+                  replay.seekEvent(event.seq)
+                  return
+                }
                 // The board is in view beside the panel: point the entry's
                 // cards and players out on it — or, for a card since gone to
                 // a graveyard or exile, in that zone.
