@@ -22,6 +22,50 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   name in its title. Boneyard Parley's pile fate reads "goes onto the battlefield" without "under your control".
   The Foretell button shows no cost now that Ranar and Cosmos Charger change it.
 
+- **A touch view for phones and tablets** (the user, 2026-11-23: a friend plays on a phone and
+  finds the hand hard to open; surveyed that day, nothing built). The rule: a touch device gets
+  its own view and a mouse-and-keyboard player sees no change, so every change is gated on the
+  device (`(hover: none) and (pointer: coarse)`, read once into a `data-touch` attribute on the
+  root as `data-reduce-motion` is), never on window width alone. Surveyed in Playwright's
+  Chromium with touch emulated (iPhone SE, 13 and 14 Pro Max, Pixel 7, iPad Mini and Pro 11, each
+  upright and on its side), the landing page, library, deck builder and a 2- and a 4-player dev
+  room; not on a real phone, and not in Safari. What it found, worst first:
+  - *A tap is a hover and a click at once.* The lowered tray shows 22-32px of each hand card. A
+    tap there raises the tray and, in the same tap, plays the card under the finger (a Plains was
+    played by the tap meant to open the hand, iPhone 13 on its side and iPad Mini). With a phone
+    upright the fan is as wide as the screen, so every lowered card is under the Pass bar: the
+    tap meant for the hand pressed Pass and moved the game to declare attackers.
+  - *The raised tray doesn't drop.* Nothing sends `mouseleave` until the next tap lands
+    elsewhere, and that tap acts on whatever it hits. Raised on a phone on its side, the hand
+    covers the player's whole battlefield.
+  - *Your own permanents can't be read without using them.* A tap on a tile opens its card and
+    clicks it: fine for an opponent's, but your own land is tapped for mana and your own
+    creature is declared as an attacker. The card it opens is 96px wide on a phone, its rules
+    text 7px.
+  - *The top bar runs off a phone held upright.* At 390px wide History is cut, and Capture and
+    the Game menu (leave, concede) are off the screen with no way to scroll to them; the phase
+    track is gone too, so stops can't be set.
+  - *A phone on its side has no room for the board.* At 750x342 each player's panel is ~110px
+    tall and its head takes 60px of that: one row of 40px tiles shows, the rest scrolls inside
+    the panel (fifteen of an opponent's creatures were below the fold in `SWARM`). Four players
+    there, or upright, show one or two tiles a seat.
+  - *Small targets and text.* About half the controls on the board are under 32px on a side
+    (zone buttons 18px tall, phase steps 28x19, the top bar's buttons 19px tall); text on tiles
+    is 7.3px on every phone.
+  - *What already works.* No page scrolls sideways at any size. Tablets get the desktop layout
+    whole (iPad Mini on its side is 1024x768, close to the 1366x768 the suite runs at): there
+    only the taps are wrong. The landing page, library and deck builder reflow to one column
+    and are usable; the landing's "New here?" card covers the room-code field at 390px.
+  Proposed order: (1) the device flag and the hand — a Hand button in the Pass bar that raises
+  and lowers the tray, the lowered tray taking no taps, a tap on a raised card selecting it
+  (grown, readable) and a second tap or a Play pill playing it; (2) reading — a tap on a
+  permanent opens its card, sized to the screen, with its actions as buttons, and a long press
+  does the same anywhere; (3) the top bar folded into one menu on a narrow screen; (4) a phone
+  layout for the board (your seat and one opponent at a time, panel heads cut to a line), which
+  is the large piece; (5) larger targets. Not measured: a room on a phone's own worker (local
+  and replicated rooms load the engine and ~32,000 card definitions there), the mulligan,
+  targeting arrows, zone viewers and decisions at phone sizes.
+
 - **The Pass bar sits over the rightmost hand cards** (found 2026-11-11). At 1366x768 the fixed
   `.priority-actions` bar (Pass, Pass Turn, Auto-pass) covers the lower edges of the fan's last cards, and in the
   lowered tray their whole peek: the pointer moving onto that part of a card is over the bar, outside

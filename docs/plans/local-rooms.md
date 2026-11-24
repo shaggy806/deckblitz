@@ -42,9 +42,10 @@ that player the bots' hands).
   for half an hour. The bots get new names. A local room has no code anyone else can join, and no
   spectating or invite link.
 - **Fallback to the server** when the browser can't (no module workers), the card shards fail to
-  load, or a `?local=0` override is set. The site is desktop and laptop only (never phones), so
-  there's no device sniffing: the weakest machine to plan for is a low-end laptop, and the user has
-  one to test on (step 6). The server path stays exactly as it is.
+  load, or a `?local=0` override is set. The site was desktop and laptop only when this was built, so
+  there's no device sniffing: the weakest machine planned for was a low-end laptop, and the user has
+  one to test on (step 6). Phones and tablets are in scope since 2026-11-23 (the root `CLAUDE.md`);
+  a room on a phone's own worker hasn't been measured. The server path stays exactly as it is.
 
 ## What has to change
 
