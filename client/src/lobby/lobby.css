@@ -657,6 +657,25 @@ button.seat-add-panel:hover {
   }
 }
 
+/* A touch device (`ui/touch.ts`): the lobby's foot leaves the corner
+   toolbar's height (`--corner-toolbar-h`, CornerToolbar.tsx), so the room
+   settings' last row ("Strong", Start game) scrolls clear of the "?" and the
+   cog (the user's phone, 2026-11-24). */
+:root[data-touch] .overlay.menu-overlay {
+  padding-bottom: calc(var(--corner-toolbar-h, 44px) + 24px);
+}
+/* A phone (a touch device whose board is under 640px): four seats in a row
+   were a hundred pixels each, their names cut to "A.." and the bot buttons
+   spilling out of the seat (the user's phone, 2026-11-24). They go in two
+   rows of two, each twice as wide. A tablet's board has the room for four,
+   and a mouse's page reads none of this. */
+@container (max-width: 640px) {
+  :root[data-touch] .seat-board-grid {
+    --seat-w: min(calc((100cqw - 2 * var(--seat-gap) - 2px - var(--seat-gap)) / 2), calc(230px * var(--touch-k, 1)));
+    grid-template-columns: repeat(2, var(--seat-w));
+  }
+}
+
 /* A seat-board request still waiting on the server (`NetworkGame.lobbyBusy`):
    the board takes no clicks till it's answered — a second click went out
    against the board as it was (a second bot over the first, a solo game
