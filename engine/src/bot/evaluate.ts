@@ -609,7 +609,7 @@ export function outcomeOf(
   const base = { mine, theirs, eliminated, round, players };
   if (bias === null) return base;
   const ownWeights = bias.ownWeights;
-  const ownCards = mine === null || bias.cardWorth === undefined ? 0 : ownCardWorth(state, me);
+  const ownCards = mine === null ? 0 : ownCardWorth(state, me);
   return {
     ...base,
     ...(ownWeights === undefined ? {} : { ownWeights }),

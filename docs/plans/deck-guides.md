@@ -1,12 +1,17 @@
 # Deck guides: what each strong deck's builder says its plan is
 
-Status: **collecting** (2026-11-24). The user is sending the strong decks' guides one at a time;
-nothing here is built yet. When they are all in, each becomes its deck's entry in
-`engine/src/deck-bias.ts`, the way pbToast's guide became The First Sliver's
-(`deck-biases.md`, "The First Sliver"): the guide read point by point, each point a value the
-search can act on (a card's worth by zone, an own weight, a polarity, a mulligan rule), each
-pinned by a gate scenario that fails without it, and the deck benched on the rooms' clock with
-and without its entry (`bot:losses --budget live`, in more than one seat).
+Status: **the two guides there are, built** (2026-11-24); the other seven decks have none yet.
+Each guide becomes its deck's entry in `engine/src/deck-bias.ts`, the way pbToast's became The
+First Sliver's: the guide tried point by point on boards, what the bot gets wrong made a value
+the search can act on (a card's worth by zone, a life goal, an own weight, a polarity, a mulligan
+rule), each pinned by a gate scenario that fails without it, and the deck benched on the rooms'
+clock with and without its entry, in more than one seat. `deck-biases.md` has what each entry
+became and what was left out.
+
+**The seven with no guide.** The user's three ways to one (2026-11-24): he gleans a strategy
+from playing the deck himself; we look for a deck with the same commander that has a primer; or
+the bots' own games are watched and a guide written from what wins and loses them
+(`bot:watch`, `bot:losses`). None is started.
 
 Each guide below is its builder's, from the deck's own page (`credit` in
 `engine/src/strong-decks.ts`), set down here as notes: every point kept, the wording ours. The
@@ -15,8 +20,9 @@ beside the checkout in `.scratch/deck-guides/` (ignored by git) for the session 
 them. "In the list" was checked against the deck as the pool plays it on the day the guide
 arrived.
 
-Guides in so far: Edgar Markov, Giada. Already built: The First Sliver. Still to come (or with
-no guide): Krenko, The Ur-Dragon, Y'shtola, Lathril, Pantlaza, Atraxa, Ureni.
+Guides in, and built: The First Sliver, Edgar Markov, Giada. With no guide: Krenko, The
+Ur-Dragon, Y'shtola, Lathril, Pantlaza, Atraxa, Ureni. The "For the build" notes under each deck
+are the leads as they stood before the boards were tried; `deck-biases.md` says which held.
 
 ## Edgar Markov ("High Power Aristocrats", by Ozymandias-)
 

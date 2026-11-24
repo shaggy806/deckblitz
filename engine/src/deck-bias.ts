@@ -67,9 +67,30 @@ export interface DeckBias {
   /** What named cards of the deck are worth to it, by zone: points added to
    * its own score for each (`ownCardWorth`). */
   readonly cardWorth?: Readonly<Record<string, CardWorth>>;
+  /** Life totals the deck plays toward while a card of its own is out:
+   * points added to its own score as its life nears each (`ownCardWorth`). */
+  readonly lifeGoals?: readonly LifeGoal[];
   /** Which opening hands the deck keeps (`bot/mulligan.ts`). */
   readonly mulligan?: MulliganBias;
 }
+
+/**
+ * A life total that wins the deck the game while `card` is on its
+ * battlefield (Test of Endurance's 50): worth `worth` points at `life` or
+ * more, and less in a line down to nothing {@link LIFE_GOAL_SPAN} below it.
+ * The shared evaluation prices life as a buffer against dying, which at 40
+ * and above is next to nothing; to such a deck the last few points are the
+ * game, and the card that reads them is worth casting for what its life
+ * already is.
+ */
+export interface LifeGoal {
+  readonly card: string;
+  readonly life: number;
+  readonly worth: number;
+}
+
+/** How far below a {@link LifeGoal}'s life its worth starts to count. */
+export const LIFE_GOAL_SPAN = 15;
 
 /** What one of a deck's own cards is worth to it in each zone, in evaluation
  * points; a zone left out is worth nothing more than the shared evaluation
@@ -150,6 +171,67 @@ export const COMMANDER_BIASES: Readonly<Record<string, DeckBias>> = {
     },
     mulligan: { minLands: 4 },
   },
+  // SmokyCashew01's "Miku Angelic Life Gain" (`STRONG_DECKS`), from its
+  // builder's guide (`docs/plans/deck-guides.md`, 2026-11-24): the life
+  // total is how the deck wins. The rest of the guide the bots already
+  // played when it was tried on boards (Aetherflux Reservoir's 50 at a
+  // player it kills, Angel of Destiny's attack from 55 life, a wipe or
+  // Armageddon behind Avacyn, Worldslayer onto Avacyn and the attack), so
+  // the entry is what they didn't, all of it Test of Endurance:
+  //
+  // - **Cast it for the life it would read.** It wins at the next upkeep
+  //   from 50 life, and at 52 the bot cast a Baneslayer Angel beside it in
+  //   hand: a four-mana enchantment that does nothing this turn. The goal
+  //   prices it at 40 points from 50 life, a third of that at 40.
+  // - **Out, the life above 50 is not to spend.** With the Test and the
+  //   Reservoir out at 95 life the bot paid 50 to kill one player of three
+  //   and sat at 45; the same 40 points are lost under 50.
+  // - **In the graveyard** it is one Hall of Heliod's Generosity from the
+  //   top of the library (3 there, nothing in the graveyard), as The First
+  //   Sliver's Vortex is one Mistveil Plains from its cascade.
+  "Giada, Font of Hope": {
+    why: "Its life total is its win: Test of Endurance is worth what the life already is, the life over 50 is kept for it, and a Test in the graveyard is fetched back.",
+    cardWorth: {
+      "Test of Endurance": { battlefield: 4, hand: 4, library: 3 },
+    },
+    lifeGoals: [{ card: "Test of Endurance", life: 50, worth: 40 }],
+  },
+  // Ozymandias-'s "High Power Aristocrats" (`STRONG_DECKS`), from its
+  // builder's guide (`docs/plans/deck-guides.md`, 2026-11-24): an
+  // aristocrats deck that wins slowly, not an aggro one. Tried on boards,
+  // the bots already played most of it: they keep the tokens home from an
+  // attack that loses them, feed Skullclamp, the Priest and Yawgmoth, dig
+  // with Necropotence and Bolas's Citadel, and cast Bloodthirsty Conqueror
+  // beside Vito and win with the two. What they didn't, and is here:
+  //
+  // - **The pieces that hold the table come before another body.** The
+  //   guide: Bloodchief Ascension on turn one to three, Impact Tremors early,
+  //   and the board controlled with Grave Pact, Dictate of Erebos and
+  //   Authority of the Consuls (and Priest of Forgotten Gods, a creature
+  //   the bots cast and use as it is). The shared evaluation floors an
+  //   enchantment at a creature of its cost and then cast the creature: a
+  //   one-drop over the Ascension, Legion Lieutenant over the Tremors,
+  //   Sanctum Seeker over Grave Pact. Each is worth enough more to go
+  //   first by about two points, and no more. Benched, the order is worth
+  //   nothing either way (10 wins of 48 with it, 10 and 12 without): it is
+  //   here as the builder's order, at no cost.
+  //
+  // And what was built and taken out, for costing the deck games: **the
+  // guide's opening hand**, "at least two lands and a piece of card draw".
+  // Two lands kept (the shared policy wants three or four sources) won 4
+  // and 6 games of 48; a free mulligan spent looking for card draw, the
+  // shared policy otherwise, 8. A bot on two lands doesn't dig out as its
+  // builder does (`docs/plans/deck-biases.md`).
+  "Edgar Markov": {
+    why: "Aristocrats, not aggro: the enchantments that hold the table are cast before another Vampire.",
+    cardWorth: {
+      "Bloodchief Ascension": { battlefield: 6 },
+      "Authority of the Consuls": { battlefield: 6 },
+      "Impact Tremors": { battlefield: 5 },
+      "Grave Pact": { battlefield: 6 },
+      "Dictate of Erebos": { battlefield: 5 },
+    },
+  },
 };
 
 /** One merged bias per set of commanders, so a merge is done once and the
@@ -203,6 +285,7 @@ function scanBias(state: GameState, player: PlayerId): DeckBias | null {
               polarity: Object.assign({}, ...entries.map((b) => b.polarity ?? {})),
               ownWeights: Object.assign({}, ...entries.map((b) => b.ownWeights ?? {})),
               cardWorth: Object.assign({}, ...entries.map((b) => b.cardWorth ?? {})),
+              lifeGoals: entries.flatMap((b) => b.lifeGoals ?? []),
               ...mulliganOf(entries),
             };
     merged.set(key, found);
@@ -225,8 +308,10 @@ function mulliganOf(entries: readonly DeckBias[]): { readonly mulligan?: Mulliga
  * something a player knows.
  */
 export function ownCardWorth(state: GameState, player: PlayerId): number {
-  const worth = deckBias(state, player)?.cardWorth;
-  if (worth === undefined) return 0;
+  const bias = deckBias(state, player);
+  const worth = bias?.cardWorth;
+  const goals = bias?.lifeGoals;
+  if (worth === undefined && goals === undefined) return 0;
   const zones = state.zones.perPlayer[player];
   if (zones === undefined) return 0;
   let total = 0;
@@ -235,12 +320,23 @@ export function ownCardWorth(state: GameState, player: PlayerId): number {
       const object = state.objects[id];
       if (object === undefined || object.owner !== player) continue;
       if (held && object.controller !== player) continue;
-      total += worth[object.cardName]?.[zone] ?? 0;
+      if (worth !== undefined) total += worth[object.cardName]?.[zone] ?? 0;
+      // A life goal, once for each copy of its card out (a deck has one).
+      if (zone === "battlefield" && goals !== undefined) {
+        const life = state.players[player]?.life ?? 0;
+        for (const goal of goals) {
+          if (goal.card !== object.cardName) continue;
+          const near = (life - (goal.life - LIFE_GOAL_SPAN)) / LIFE_GOAL_SPAN;
+          total += goal.worth * Math.min(1, Math.max(0, near));
+        }
+      }
     }
   };
-  count(zones.hand, "hand", false);
-  count(zones.library, "library", false);
-  count(zones.graveyard, "graveyard", false);
+  if (worth !== undefined) {
+    count(zones.hand, "hand", false);
+    count(zones.library, "library", false);
+    count(zones.graveyard, "graveyard", false);
+  }
   count(state.zones.shared.battlefield, "battlefield", true);
   return total;
 }

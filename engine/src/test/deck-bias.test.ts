@@ -12,7 +12,7 @@ import { describe, expect, it } from "vitest";
 import { createDefaultRegistry } from "../cards.js";
 import { HeuristicBotController } from "../controller.js";
 import { DEFAULT_WEIGHTS, outcomeOf, scoreOutcome } from "../bot/evaluate.js";
-import { COMMANDER_BIASES, deckBias, ownCardWorth } from "../deck-bias.js";
+import { COMMANDER_BIASES, LIFE_GOAL_SPAN, deckBias, ownCardWorth } from "../deck-bias.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { PlayerId } from "../primitives.js";
@@ -78,8 +78,47 @@ describe("deck biases", () => {
       expect((def.supertypes ?? []).includes("legendary") && def.types.includes("creature"), name).toBe(true);
       expect(bias.why.length, name).toBeGreaterThan(0);
       // A card it prices is a real one: a misspelt name would price nothing.
-      for (const card of Object.keys(bias.cardWorth ?? {})) expect(registry.has(card), `${name}: ${card}`).toBe(true);
+      const named = [...Object.keys(bias.cardWorth ?? {}), ...(bias.lifeGoals ?? []).map((goal) => goal.card)];
+      for (const card of named) expect(registry.has(card), `${name}: ${card}`).toBe(true);
     }
+  });
+});
+
+describe("a life total a deck plays toward", () => {
+  const goal = COMMANDER_BIASES["Giada, Font of Hope"].lifeGoals?.[0] ?? { card: "", life: 0, worth: 0 };
+  const test = COMMANDER_BIASES["Giada, Font of Hope"].cardWorth?.["Test of Endurance"] ?? {};
+
+  function giadaGame(): Game {
+    const game = Game.create({
+      seed: 3,
+      registry,
+      decks: [{ ...forests(A), commanders: ["Giada, Font of Hope"] }, forests(B)],
+    });
+    game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+    return game;
+  }
+
+  it("is worth nothing until its card is out", () => {
+    const game = giadaGame();
+    game.state.players[A].life = 60;
+    expect(ownCardWorth(game.state, A)).toBe(0);
+    game.debugSpawn("Test of Endurance", A, "hand");
+    expect(ownCardWorth(game.state, A)).toBe(test.hand);
+  });
+
+  it("is worth all of it at the goal, and less in a line below it", () => {
+    const game = giadaGame();
+    game.debugSpawn("Test of Endurance", A, "battlefield");
+    const out = test.battlefield ?? 0;
+    const at = (life: number): number => {
+      game.state.players[A].life = life;
+      return ownCardWorth(game.state, A) - out;
+    };
+    expect(at(goal.life)).toBe(goal.worth);
+    expect(at(goal.life + 40)).toBe(goal.worth);
+    expect(at(goal.life - LIFE_GOAL_SPAN)).toBe(0);
+    expect(at(5)).toBe(0);
+    expect(at(goal.life - LIFE_GOAL_SPAN / 3)).toBeCloseTo((goal.worth * 2) / 3);
   });
 });
 
