@@ -4,6 +4,34 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-23 — Chrome Mox cast and nothing imprinted
+
+Status: open. Scenario: "imprints a card on Chrome Mox" (training).
+
+Reported by the user: a bot "played a chrome mox without imprinting anything". No board was given;
+the scenario is the Ur-Dragon deck (the strong deck that runs one) on its second turn, two lands
+out and a hand of spells. Chrome Mox's imprint is a `look-and-choose` of 0 or 1 nonartifact,
+nonland cards from the hand, answered as a `choose-from-zone`.
+
+**Why:** v1 takes a card (`controller.ts`'s `chooseFromZone`, its last branch: `mostUsefulTo`,
+the hand's *best* card, itself wrong for an imprint). v2 searches the answer
+(`decisions/choose-from-zone.ts`'s `candidates`: the empty set first, then one card at a time from
+the least valuable) and plays each out. The evaluation reads a permanent's mana from its
+definition (`bot/features.ts`'s `manaPerTurn`, into `nonlandMana` and `earlyMana`): Chrome Mox's
+`{T}: Add one mana of any of the exiled card's colors` counts as one mana a turn whatever is under
+it. So on the board an empty Mox and an imprinted one score the same, and the empty one has a card
+more in hand: `[]` wins every time there's a card to imprint.
+
+**Likely fix:** count a mana ability that reads `zone: "exiled-with-source"` (`colorAmong`) as
+nothing while no card is exiled with that permanent in this stint, and as 0 too where the imprinted
+card is colourless. That's per object rather than per definition, so it sits beside `manaPerTurn`
+rather than in its memo. Then v2 prices the imprint as a card for a mana rock, which the rollouts
+already weigh for Sol Ring and Signets. v1's pick then wants turning around for an exile from our
+own hand into a permanent's linked ability (the least useful card, as `behold` and Gemstone Caverns
+do), or the card v2 keeps on a tie is the hand's best. Might break: nothing else reads an imprinted
+card's mana; Mox Diamond (a discarded land) and Mox Opal (metalcraft) are other shapes and want their
+own look.
+
 ## 2026-11-23 — Creatures the end step takes kept home as blockers; Demonic Consultation aimed at an opponent
 
 Status: both fixed 2026-11-23 (two gate scenarios and a test).
