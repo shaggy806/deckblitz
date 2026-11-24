@@ -104,7 +104,7 @@ describe("STRONG_DECKS", () => {
         // An Archidekt deck by its id; one from elsewhere by its address,
         // and only that one may differ from its creator's list. One a player
         // brought to this site (pbToast's, 2026-11-24) has no page, and is
-        // played exactly as they played it here.
+        // played exactly as they gave it.
         if (deck.credit?.url === undefined && deck.credit?.archidektId === undefined) {
           expect(deck.credit?.title).toBeTruthy();
           expect(deck.credit?.changed).toBeUndefined();

@@ -1375,10 +1375,13 @@ scenario that can decide it.
   turn 42, each decision 5-30 s because every simulation resolves the whole stack. All seats
   there were the old build, but nothing since makes the new one cheaper on it.
 - **More deck biases.** `engine/src/deck-bias.ts` (`docs/plans/deck-biases.md`) lets a
-  commander's deck aim effects the other way and value its own board differently; Teval is the
-  one entry. Add one when a live game shows a deck's bot playing against its plan, with a gate
-  scenario that fails without it. Kinds not built: cards to cast first or hold, attack
-  eagerness, and opponents' biases (milling an opponent's Teval still reads as neutral to us).
+  commander's deck aim effects the other way and value its own board differently; Teval was the
+  one entry until The First Sliver's (2026-11-24, from its builder's guide: its hands kept on
+  their lands, and its key card priced by the zone it is in, so the commander is cast for the
+  cascade and the card fetched back). Add one when a live game shows a deck's bot playing
+  against its plan, with a gate scenario that fails without it. Kinds not built: what a deck
+  fears across the table (an attack tax, for a combat deck), attack eagerness, and opponents'
+  biases (milling an opponent's Teval still reads as neutral to us).
 - **Fewer 1/1 tokens made since `smallTokens`** (2026-10-04): `bot:diff` showed March of the
   Multitudes, Raise the Alarm and Dawn of Hope's activation passed over for other plays. Watch the
   token decks (Token Triumph is on the bench); a token payoff on the board isn't priced yet.

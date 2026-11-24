@@ -33,7 +33,7 @@
  */
 
 import type { CardRegistry } from "../cards.js";
-import { deckBias } from "../deck-bias.js";
+import { deckBias, ownCardWorth } from "../deck-bias.js";
 import type { PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
 import { FEATURE_KEYS, featureSign, playerFeatures, roundOf } from "./features.js";
@@ -564,6 +564,10 @@ export interface EvalOutcome {
   /** Weights `me`'s deck scores its own features with instead of the shared
    * ones (`deck-bias.ts`): Teval's graveyard is worth more to Teval. */
   readonly ownWeights?: Readonly<Partial<EvalWeights>>;
+  /** Points added to `mine` whatever the weights: what `me`'s deck's own
+   * named cards are worth to it where they lie (`deck-bias.ts`'s
+   * `cardWorth`). Absent for a deck with none. */
+  readonly ownCards?: number;
   /** Every opponent still in the game. */
   readonly theirs: readonly PlayerFeatures[];
   /** Opponents who have lost, and the round — what `eliminations` scores. */
@@ -601,9 +605,16 @@ export function outcomeOf(
     own === undefined || own.hasLost ? null : playerFeatures(state, registry, me, true, landCap);
   const players = state.turnOrder.filter((player) => player !== me && !state.players[player].hasLost);
   const theirs = players.map((player) => playerFeatures(state, registry, player, false, landCap));
-  const ownWeights = deckBias(state, me)?.ownWeights;
+  const bias = deckBias(state, me);
   const base = { mine, theirs, eliminated, round, players };
-  return ownWeights === undefined ? base : { ...base, ownWeights };
+  if (bias === null) return base;
+  const ownWeights = bias.ownWeights;
+  const ownCards = mine === null || bias.cardWorth === undefined ? 0 : ownCardWorth(state, me);
+  return {
+    ...base,
+    ...(ownWeights === undefined ? {} : { ownWeights }),
+    ...(ownCards === 0 ? {} : { ownCards }),
+  };
 }
 
 /**
@@ -700,7 +711,9 @@ function ownWeightsOf(weights: EvalWeights, own: Readonly<Partial<EvalWeights>> 
 export function scoreOutcome(outcome: EvalOutcome, weights: EvalWeights): number {
   if (outcome.decided !== undefined) return outcome.decided;
   const mine =
-    outcome.mine === null ? DEAD : scoreFeatures(outcome.mine, ownWeightsOf(weights, outcome.ownWeights));
+    outcome.mine === null
+      ? DEAD
+      : scoreFeatures(outcome.mine, ownWeightsOf(weights, outcome.ownWeights)) + (outcome.ownCards ?? 0);
   const theirs = outcome.theirs.map((f) => scoreFeatures(f, weights));
   let taken = 0;
   if (outcome.hit !== undefined) {

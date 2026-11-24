@@ -296,3 +296,36 @@ share), Ureni 8, The Ur-Dragon 5, Giada 1. Every win came in a long game: 11 gam
 minutes, and of the 6 of those that finished inside 45 minutes it won 5; 5 still hadn't finished
 then, so 26% likely undercounts it. Its games are slow for the bots (17-21 turns taking 18 to 44
 minutes at count budgets), which the live clock bounds but is worth watching.
+
+### Its builder's second list, and his guide (2026-11-24, the same day)
+
+pbToast sent an updated list "which will fit the bot better" and a guide to playing it. The list
+(26 cards changed: the Triomes, the cycling and slow fetch lands and five spells out; the ten
+original dual lands, the five-colour lands and six creatures in) leaves Monstrous Vortex the only
+card the commander's cascade can hit, and every other spell a creature of power 5 or more that the
+Vortex discovers into the next. The guide (four lands or more in hand, the commander first and
+once, the Vortex brought back when it dies, mill at yourself) is the deck's bias in
+`engine/src/deck-bias.ts`; `deck-biases.md` has it point by point, with what wasn't built.
+
+**Benched on a clock.** The count-budget bench above lost five games to its 45 minutes, so
+`bot:losses` takes `--budget MS|live` now: each decision on the rooms' own 1000 ms, as the deck
+is played on the site. All 24 games then finish, in four minutes for the batch (22 to 147 seconds
+a game). The price is that a seed no longer replays move for move, so these are counts, not
+paired comparisons. Against the Ur-Dragon, Giada and Ureni decks, v2 in every seat, seeds 1-24:
+
+| The First Sliver's seat | With its bias | Without (the list alone) |
+| --- | --- | --- |
+| First to play | 18 of 24 | 11 of 24 |
+| Last to play | 12 of 24 | 10 of 24 |
+| Both | 30 of 48 (62%) | 21 of 48 (44%) |
+
+A quarter is an even share. Its wins seated first came on turns 17 to 29 (its fifth to eighth
+turn), all but one: five lands, the commander, and a creature the turn after. So the list alone
+is already well above the old one's 26%, and the guide is worth about nine games in 48 on top —
+a small sample on an unrepeatable clock, read as a direction. Going first matters to it more
+than to most (a deck that wins on its sixth turn). **Against these three it is now well ahead**
+(they are three of the pool's stronger decks); whether a blitz should deal it as often as the
+others is the user's call.
+
+The first watched game also showed the bots can't pay with Gemstone Mine's counters inside a
+rollout (`BACKLOG.md`, "Bots"), which cost that game a turn; the deck has one Mine.

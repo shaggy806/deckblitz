@@ -140,6 +140,7 @@ export const mulligan = defineDecision({
         cards: controller.chooseBottomOfLibrary(
           held,
           Math.min(mulliganCardsOwed(hand.taken, view.state.rules.freeFirstMulligan), held.length),
+          view,
         ),
       };
     }

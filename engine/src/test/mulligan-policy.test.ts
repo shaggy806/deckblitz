@@ -180,3 +180,41 @@ describe("bottoming a kept hand", () => {
     expect(new Set(bottom).size).toBe(3);
   });
 });
+
+describe("a deck's own rule for its hands (`deck-bias.ts`)", () => {
+  // The First Sliver's: lands and five-drops, kept on four lands or more.
+  const FOUR = { minLands: 4 } as const;
+  const fourLands = hand("Scrubland", "Bayou", "Steam Vents", "Taiga", "Sludge Monster", "Baneslayer Angel", "Sandworm");
+  const threeLands = hand("Scrubland", "Bayou", "Steam Vents", "Kenrith, the Returned King", "Sludge Monster", "Baneslayer Angel", "Sandworm");
+
+  it("keeps a hand with the lands it asks for, whatever the spells cost", () => {
+    // Without the rule: no early plays, so back it goes while a look is free.
+    expect(shouldMulligan(fourLands, registry, 0, COMMANDER)).toBe(true);
+    expect(shouldMulligan(fourLands, registry, 0, COMMANDER, FOUR)).toBe(false);
+    expect(shouldMulligan(hand("Forest", "Forest", "Forest", "Forest", "Forest", "Forest", "Forest"), registry, 0, COMMANDER, FOUR)).toBe(false);
+  });
+
+  it("throws back a hand short of them, a card down as well", () => {
+    expect(shouldMulligan(threeLands, registry, 0, COMMANDER, FOUR)).toBe(true);
+    // Six cards kept: the shared policy keeps three lands here.
+    expect(shouldMulligan(threeLands, registry, 2, COMMANDER)).toBe(false);
+    expect(shouldMulligan(threeLands, registry, 2, COMMANDER, FOUR)).toBe(true);
+  });
+
+  it("still stops at four cards", () => {
+    expect(shouldMulligan(threeLands, registry, 4, COMMANDER, FOUR)).toBe(false);
+  });
+
+  it("bottoms a spell before the fourth land", () => {
+    const names = (cards: readonly GameObject[], ids: readonly string[]) =>
+      ids.map((id) => cards.find((card) => card.id === id)!.cardName);
+    // Six kept of seven: the shared policy wants three lands of six cards.
+    expect(names(fourLands, chooseBottomOfHand(fourLands, registry, 1))).toEqual(["Taiga"]);
+    const bottom = names(fourLands, chooseBottomOfHand(fourLands, registry, 1, 0, FOUR));
+    expect(bottom).toHaveLength(1);
+    expect(["Sludge Monster", "Baneslayer Angel", "Sandworm"]).toContain(bottom[0]);
+    // Lands past the ones it asked for still go first.
+    const flooded = hand("Scrubland", "Bayou", "Steam Vents", "Taiga", "Plateau", "Tundra", "Sandworm");
+    expect(names(flooded, chooseBottomOfHand(flooded, registry, 1, 0, FOUR))).toEqual(["Plateau"]);
+  });
+});

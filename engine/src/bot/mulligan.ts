@@ -50,6 +50,7 @@
 import { isManaAbility } from "../abilities.js";
 import { mulliganCardsOwed } from "../decisions/shared/mulligan-math.js";
 import type { CardDefinition, CardRegistry } from "../cards.js";
+import type { MulliganBias } from "../deck-bias.js";
 import type { EffectSpec } from "../effects.js";
 import type { CardFilter } from "../filter.js";
 import { manaValue, parseManaCost } from "../mana.js";
@@ -246,9 +247,16 @@ export function shouldMulligan(
   registry: CardRegistry,
   taken: number,
   rules: { readonly openingHandSize: number; readonly freeFirstMulligan: boolean },
+  /** The deck's own rule for its hands (`deck-bias.ts`), in place of the
+   * score: a deck of lands and five-drops has no early plays to score, and
+   * keeps on its lands alone. The floor under every mulligan still holds. */
+  bias?: MulliganBias,
 ): boolean {
   const kept = keptHandSize(taken, rules.openingHandSize, rules.freeFirstMulligan);
   if (kept <= MIN_KEPT) return false;
+  if (bias !== undefined) {
+    return readHand(hand, registry).filter((card) => card.isLand).length < bias.minLands;
+  }
   const next = keptHandSize(taken + 1, rules.openingHandSize, rules.freeFirstMulligan);
 
   const bar =
@@ -273,6 +281,9 @@ export function chooseBottomOfHand(
    * mulligan. A hand's lands are worth keeping only while the board is
    * short of {@link LANDS_WANTED}; past that they are the first to go. */
   landsInPlay = 0,
+  /** The deck's rule for its opening hands: a kept hand keeps at least the
+   * lands it was kept for. */
+  bias?: MulliganBias,
 ): readonly ObjectId[] {
   if (count <= 0) return [];
   const cards = readHand(hand, registry);
@@ -280,7 +291,7 @@ export function chooseBottomOfHand(
   const keepLands =
     landsInPlay > 0
       ? Math.max(0, LANDS_WANTED - landsInPlay)
-      : clamp(Math.round(kept * LAND_SHARE), 2, 4);
+      : Math.max(clamp(Math.round(kept * LAND_SHARE), 2, 4), Math.min(bias?.minLands ?? 0, kept));
 
   let landsSeen = 0;
   const ranked = cards.map((card, index) => {

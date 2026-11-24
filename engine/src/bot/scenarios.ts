@@ -238,6 +238,39 @@ function landfallMill(
   return game;
 }
 
+/**
+ * A four-player game at Alice's precombat main, her deck led by The First
+ * Sliver (pbToast's "Prince Rupert's Packed Penthouse", `deck-bias.ts`): the
+ * commander in the command zone, cast `casts` times already, `landCount`
+ * Command Towers (any colour, with a five-colour commander), every hand
+ * empty. Her library is forty Forests, so a cascade or a discover finds only
+ * what a scenario puts there.
+ */
+function firstSliver(registry: CardRegistry, landCount: number, casts = 0): Game {
+  const game = Game.create({
+    seed: 3,
+    registry,
+    decks: [
+      { player: A, cards: Array<string>(40).fill("Forest"), commanders: ["The First Sliver"] },
+      forestDeck(B),
+      forestDeck(C),
+      forestDeck(D),
+    ],
+  });
+  game.advanceUntil(
+    (s) => s.turnOrder[s.turn.activePlayerIndex] === A && s.priority.holder === A && s.turn.step === "precombat-main",
+  );
+  midGame(game);
+  for (const player of [A, B, C, D]) game.state.zones.perPlayer[player].hand = [];
+  lands(game, "Command Tower", A, landCount);
+  if (casts > 0) game.state.players[A].commanderCastCounts = { "The First Sliver": casts } as never;
+  return game;
+}
+
+/** What a scenario's answer cast, by name; `undefined` for anything else. */
+const castName = (game: Game, action: Action): string | undefined =>
+  action.type === "cast-spell" ? game.state.objects[action.card]?.cardName : undefined;
+
 /** Take `game` from Alice's first main phase to her second, attacking with
  * nothing; a failure if it doesn't get there. */
 /**
@@ -721,13 +754,16 @@ function openingHand(
   registry: CardRegistry,
   hand: readonly string[],
   keep: boolean,
-  opts: { readonly taken?: number; readonly free?: boolean } = {},
+  opts: { readonly taken?: number; readonly free?: boolean; readonly commander?: string } = {},
 ): ScenarioPosition | ScenarioResult {
   const taken = opts.taken ?? 0;
   const game = Game.create({
     seed: 3,
     registry,
-    decks: [forestDeck(A), forestDeck(B)],
+    decks: [
+      opts.commander === undefined ? forestDeck(A) : { ...forestDeck(A), commanders: [opts.commander] },
+      forestDeck(B),
+    ],
     mulligans: true,
     startingPlayer: A,
     rules: { freeFirstMulligan: opts.free === true },
@@ -5066,6 +5102,189 @@ const SCENARIOS: readonly BotScenario[] = [
           const target = action.type === "choose-targets" ? action.targets[0] : undefined;
           return {
             passed: target?.kind === "player" && target.player !== A,
+            detail: `chose ${describeAction(action)}`,
+          };
+        },
+      };
+    },
+  }),
+  // The First Sliver's bias (`deck-bias.ts`): pbToast's guide to his own
+  // deck, point by point. Each of these fails with its part of the entry
+  // taken out, but for "is recast for a Vortex back in its library", which
+  // holds the entry's `commanderTax` to what it is for.
+  asked({
+    name: "The First Sliver keeps four lands and three five-drops",
+    rule: "A deck of lands and five-drops keeps on its lands: four of them is the hand it wants.",
+    position: (registry) =>
+      // The first hand of the first game watched (seed 1), thrown back by
+      // the shared policy for having no early plays, twice over.
+      openingHand(
+        registry,
+        ["Scrubland", "Polluted Delta", "Steam Vents", "Bayou", "Worf, Still Not Merry", "Sludge Monster", "Kazuul, Tyrant of the Cliffs"],
+        true,
+        { free: true, commander: "The First Sliver" },
+      ),
+  }),
+  asked({
+    name: "The First Sliver throws back three lands at six cards",
+    rule: "Its builder's rule is four lands or more, a card down as much as at seven.",
+    position: (registry) =>
+      openingHand(
+        registry,
+        ["Scrubland", "Steam Vents", "Bayou", "Worf, Still Not Merry", "Sludge Monster", "Kazuul, Tyrant of the Cliffs", "Baneslayer Angel"],
+        false,
+        { taken: 2, free: true, commander: "The First Sliver" },
+      ),
+  }),
+  asked({
+    name: "The First Sliver isn't recast with its Vortex out",
+    rule: "The commander is cast for its cascade: with Monstrous Vortex out, another creature is cast and the tax kept down.",
+    position(registry) {
+      // Seven mana pays for the commander a second time or for the Angel.
+      // The shared evaluation takes the 7/7 commander.
+      const game = firstSliver(registry, 7, 1);
+      onBoard(game, "Monstrous Vortex", A);
+      game.debugSpawn("Baneslayer Angel", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: castName(game, action) === "Baneslayer Angel",
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "The First Sliver is recast for a Vortex back in its library",
+    rule: "A Vortex in the library is one the commander's cascade finds: the recast is worth its tax.",
+    position(registry) {
+      const game = firstSliver(registry, 7, 1);
+      game.debugSpawn("Monstrous Vortex", A, "library");
+      game.debugSpawn("Baneslayer Angel", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: castName(game, action) === "The First Sliver",
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "The First Sliver's Mistveil Plains puts its Vortex back",
+    rule: "A Vortex in the graveyard goes under the library, where the commander's cascade finds it.",
+    position(registry) {
+      const game = firstSliver(registry, 2, 1);
+      // It enters tapped; this one has been there a turn.
+      const plains = onBoard(game, "Mistveil Plains", A);
+      game.state.objects[plains].tapped = false;
+      // Two white permanents, which the Plains asks for.
+      onBoard(game, "Baneslayer Angel", A);
+      onBoard(game, "Sigarda, Host of Herons", A);
+      for (const name of ["Sludge Monster", "Ridgescale Tusker", "Sandworm"]) game.debugSpawn(name, A, "graveyard");
+      const vortex = game.debugSpawn("Monstrous Vortex", A, "graveyard");
+      game.debugSpawn("Railway Brawler", A, "graveyard");
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const target = action.type === "activate-ability" && action.source === plains ? action.targets?.[0] : undefined;
+          return {
+            passed: target?.kind === "object" && target.object === vortex,
+            detail: `chose ${describeAction(action)}`,
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "The First Sliver channels Colossal Skyturtle for its Vortex",
+    rule: "A card that brings the Vortex back is spent on it.",
+    position(registry) {
+      const game = firstSliver(registry, 3, 1);
+      const turtle = game.debugSpawn("Colossal Skyturtle", A, "hand");
+      for (const name of ["Sludge Monster", "Ridgescale Tusker"]) game.debugSpawn(name, A, "graveyard");
+      const vortex = game.debugSpawn("Monstrous Vortex", A, "graveyard");
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const target = action.type === "activate-ability" && action.source === turtle ? action.targets?.[0] : undefined;
+          return {
+            passed: target?.kind === "object" && target.object === vortex,
+            detail: `chose ${describeAction(action)}`,
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "The First Sliver holds Astelli Reclaimer while another creature will do",
+    rule: "What brings the Vortex back stays in hand: the other five-drop is cast.",
+    position(registry) {
+      // The Reclaimer is the better body (a 5/4 flier beside a 5/3
+      // trampler), and entering with nothing to return it is only that.
+      const game = firstSliver(registry, 5, 1);
+      onBoard(game, "Monstrous Vortex", A);
+      game.debugSpawn("Astelli Reclaimer", A, "hand");
+      game.debugSpawn("Nylea's Forerunner", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: castName(game, action) === "Nylea's Forerunner",
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "The First Sliver fetches Mistveil Plains",
+    rule: "A fetch land finds the land that puts the Vortex back, when tapped costs it nothing this turn.",
+    position(registry) {
+      const game = firstSliver(registry, 2, 1);
+      const strand = onBoard(game, "Flooded Strand", A);
+      const mistveil = game.debugSpawn("Mistveil Plains", A, "library");
+      for (const name of ["Tundra", "Plains", "Island", "Hallowed Fountain"]) game.debugSpawn(name, A, "library");
+      game.dispatch({ type: "activate-ability", player: A, source: strand, abilityIndex: 0 });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-from-zone" || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-from-zone") {
+        return { passed: false, detail: "the fetch land never searched" };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-from-zone" && action.chosen.length === 1 && action.chosen[0] === mistveil,
+          detail:
+            action.type === "choose-from-zone"
+              ? `found ${action.chosen.map((id) => game.state.objects[id]?.cardName).join(", ") || "nothing"}`
+              : describeAction(action),
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "The First Sliver's Necron Deathmark mills itself",
+    rule: "The deck brings back what lands in its graveyard: its mill is aimed at its own library.",
+    position(registry) {
+      const game = firstSliver(registry, 5, 1);
+      onBoard(game, "Craw Wurm", B);
+      const deathmark = game.debugSpawn("Necron Deathmark", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: deathmark, targets: [] });
+      game.advanceUntil((s) => s.awaiting?.kind === "choose-targets" || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-targets") {
+        return { passed: false, detail: "the Deathmark's trigger never asked for its targets" };
+      }
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const milled = action.type === "choose-targets" ? action.targets.find((t) => t?.kind === "player") : undefined;
+          return {
+            passed: milled?.kind === "player" && milled.player === A,
             detail: `chose ${describeAction(action)}`,
           };
         },

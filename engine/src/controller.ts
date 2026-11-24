@@ -23,7 +23,7 @@ import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, ta
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
 import { defaultAssignment } from "./combat/damage.js";
-import { polarityBias } from "./deck-bias.js";
+import { deckBias, polarityBias } from "./deck-bias.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { CardDefinition, Keyword } from "./cards/define.js";
@@ -297,11 +297,13 @@ export interface PlayerController {
   mulligan(view: ControllerView, count: number): boolean;
   /**
    * Choose which `count` cards from `hand` go to the bottom of the library
-   * after keeping a mulliganed hand (the London mulligan).
+   * after keeping a mulliganed hand (the London mulligan). `view` is the
+   * game as the player sees it, for a choice that reads more than the hand.
    */
   chooseBottomOfLibrary(
     hand: readonly GameObject[],
     count: number,
+    view?: ControllerView,
   ): readonly ObjectId[];
   /**
    * A commander is in a graveyard or exile (rule 903.9a), or is about to be
@@ -5448,7 +5450,13 @@ export class HeuristicBotController extends AutomaticController {
     const hand = view.state.zones.perPlayer[this.playerId].hand.map(
       (id) => view.state.objects[id],
     );
-    return shouldMulligan(hand, this.registry, count, view.state.rules);
+    return shouldMulligan(
+      hand,
+      this.registry,
+      count,
+      view.state.rules,
+      deckBias(view.state, this.playerId)?.mulligan,
+    );
   }
 
   /**
@@ -5544,8 +5552,10 @@ export class HeuristicBotController extends AutomaticController {
   chooseBottomOfLibrary(
     hand: readonly GameObject[],
     count: number,
+    view?: ControllerView,
   ): readonly ObjectId[] {
-    return chooseBottomOfHand(hand, this.registry, count);
+    const bias = view === undefined ? undefined : deckBias(view.state, this.playerId)?.mulligan;
+    return chooseBottomOfHand(hand, this.registry, count, 0, bias);
   }
 
   /** Whether this bot would cast `o` now, given the mana: none of the
