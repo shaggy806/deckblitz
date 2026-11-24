@@ -8375,6 +8375,61 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   asked({
+    name: "holds Ravages of War with no creature out",
+    rule: "Mass land destruction is cast from ahead: with nothing on the battlefield it only ends our own game.",
+    position(registry) {
+      // A watched game (2026-11-24, seed 2 turn 14): Giada's bot, four lands,
+      // no creature, a hand of four- to seven-drops, cast Ravages of War.
+      // "Mine less theirs" counts three opponents' lands against one of
+      // ours; everyone then sat on a land or none, and the 26-land Elf deck
+      // across the table to the end of the game.
+      const game = fourPlayerMain(registry);
+      lands(game, "Plains", A, 4);
+      for (const player of [B, C, D]) {
+        lands(game, "Forest", player, 4);
+        onBoard(game, "Grizzly Bears", player);
+      }
+      // The Angels it holds are a land or three away, and stay that way
+      // once the lands are gone.
+      game.debugSpawn("Ravages of War", A, "hand");
+      game.debugSpawn("Lyra Dawnbringer", A, "hand");
+      game.debugSpawn("Herald of Eternal Dawn", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: castName(game, action) !== "Ravages of War",
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "casts Armageddon from ahead on the battlefield",
+    rule: "With the creatures to win the game it leaves, mass land destruction is the play.",
+    position(registry) {
+      // The counterweight to the scenario above: two Angels against a Bears
+      // each, and the lands go.
+      const game = fourPlayerMain(registry);
+      lands(game, "Plains", A, 4);
+      onBoard(game, "Baneslayer Angel", A);
+      onBoard(game, "Serra Angel", A);
+      for (const player of [B, C, D]) {
+        lands(game, "Forest", player, 6);
+        onBoard(game, "Grizzly Bears", player);
+      }
+      game.debugSpawn("Armageddon", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: castName(game, action) === "Armageddon",
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "casts Opt first so Shiko's Flurry copies the Lightning Bolt",
     rule: "With a second-spell payoff out, a cheap first spell turns the next one into two.",
     position(registry) {

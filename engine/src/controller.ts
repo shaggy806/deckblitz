@@ -3800,6 +3800,48 @@ export class HeuristicBotController extends AutomaticController {
   }
 
   /**
+   * Whether `offer` casts mass land destruction (Armageddon, Ravages of War:
+   * a `destroy-all` of lands) that takes our own lands with nothing on our
+   * battlefield to win the game it leaves: our creatures under
+   * {@link LAND_WIPE_POWER} power together, or no more than some opponent's.
+   * One our lands survive (Avacyn's indestructible) is never held.
+   *
+   * The evaluation is "mine less theirs", and three opponents losing their
+   * lands outweighs one of us losing ours, so the search cast it whenever
+   * it could: Giada's bot on its fourth turn with no creature out and a hand
+   * of four- to seven-drops, which left it and a 26-land Elf deck on one
+   * land to the end of the game (a watched game, 2026-11-24); with one 2/2
+   * against three Craw Wurms the same. What decides the spell is who is
+   * ahead once nobody can cast anything, which no rollout to the end of the
+   * turn shows.
+   */
+  protected holdsLandWipe(state: GameState, offer: LegalAction): boolean {
+    if (offer.kind !== "cast-spell") return false;
+    const effect = this.offerEffect(offer);
+    const lands = sweepsOf(effect).some(
+      (sweep) =>
+        sweep.kind === "destroy-all" && (sweep.filter.type === "land" || (sweep.filter.types ?? []).includes("land")),
+    );
+    if (!lands) return false;
+    const me = this.playerId;
+    const isLand = (id: ObjectId): boolean => computeCharacteristics(state, this.registry, id).types.includes("land");
+    if (!this.sweepTakesOurs(state, effect, isLand)) return false;
+    const power = (player: PlayerId): number => {
+      let total = 0;
+      for (const id of state.zones.shared.battlefield) {
+        const object = state.objects[id];
+        if (object === undefined || object.controller !== player) continue;
+        const c = computeCharacteristics(state, this.registry, id);
+        if (c.types.includes("creature")) total += Math.max(0, c.power) * (object.stackCount ?? 1);
+      }
+      return total;
+    };
+    const ours = power(me);
+    if (ours < LAND_WIPE_POWER) return true;
+    return state.turnOrder.some((p) => p !== me && !state.players[p].hasLost && power(p) >= ours);
+  }
+
+  /**
    * Whether the spell on top of the stack is our own board wipe, about to
    * take a creature of ours — a window worth searching even though we just
    * cast it (`EvalBotController.holdPass`), since the creature may have a
@@ -5661,6 +5703,7 @@ export class HeuristicBotController extends AutomaticController {
       !this.holdsCloneForMore(state, o) &&
       !this.holdsXForMore(state, o) &&
       !this.holdsTopTutor(state, o) &&
+      !this.holdsLandWipe(state, o) &&
       !this.wastedNow(state, o) &&
       !this.runsLibraryOut(state, o) &&
       !this.holdsForASpell(state, o) &&
@@ -6452,6 +6495,9 @@ const TAKE_SHARE = 0.75;
 const HAND_MANA_FLOOR = 3;
 /** The most hand mana abilities one line spends. */
 const HAND_MANA_MOST = 3;
+/** The power our creatures need together before mass land destruction is
+ * ours to cast (`holdsLandWipe`): a clock that ends the game it leaves. */
+const LAND_WIPE_POWER = 6;
 /** The most lines of by-hand mana one question looks down (`byHandLines`):
  * a Gemstone Mine alone is five, a colour each. */
 const HAND_MANA_LOOKS = 8;

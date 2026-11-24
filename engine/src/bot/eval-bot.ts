@@ -2315,6 +2315,10 @@ export class EvalBotController extends HeuristicBotController {
         // ours (`holdsTopTutor`): what waiting gains is nothing a rollout shows.
         if (this.holdsCloneForMore(view.state, legal)) continue;
         if (this.holdsTopTutor(view.state, legal)) continue;
+        // Mass land destruction with nothing out to win the game it leaves
+        // (`holdsLandWipe`): three opponents' lands for ours scores well, and
+        // who is ahead once nobody can cast anything no rollout shows.
+        if (this.holdsLandWipe(view.state, legal)) continue;
         // A land that taps for mana and fetches (Bountiful Landscape) waits
         // for the end of the turn before ours (`holdsManaLandFetch`).
         if (this.holdsManaLandFetch(view.state, legal)) continue;
