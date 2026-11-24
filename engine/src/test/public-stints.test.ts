@@ -142,3 +142,21 @@ describe("tokens' names in the history", () => {
     expect(seenAs(game, token, died.seq)).toBe("Soldier Token");
   });
 });
+
+describe("a transformed permanent's name in the history", () => {
+  it("is the face that's up from the transform on: Ormendahl dies as Ormendahl, not as Westvale Abbey", () => {
+    const game = setUp();
+    const abbey = game.debugSpawn("Westvale Abbey", A, "battlefield", { summoningSick: false });
+    game.debugApplyEffect(A, { kind: "transform", target: 0 }, [{ kind: "object", object: abbey }]);
+    game.advanceUntil(quiet);
+    const turned = game.eventsOfType("permanent-transformed").find((e) => e.object === abbey)!;
+    // The line saying it transformed keeps the name it had.
+    expect(seenAs(game, abbey, turned.seq)).toBe("Westvale Abbey");
+    game.debugApplyEffect(B, { kind: "exile", target: 0 }, [{ kind: "object", object: abbey }]);
+    game.advanceUntil(quiet);
+    const left = game.eventsOfType("permanent-left-battlefield").find((e) => e.object === abbey)!;
+    expect(seenAs(game, abbey, left.seq)).toBe("Ormendahl, Profane Prince");
+    // In exile it's the card again, from the next line on.
+    expect(seenAs(game, abbey, game.state.eventSeq)).toBe("Westvale Abbey");
+  });
+});

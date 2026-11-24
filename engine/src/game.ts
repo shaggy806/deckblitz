@@ -58196,6 +58196,16 @@ controlledBy,
       front: object.face === 0,
     });
     object.transformedAtSeq = this.state.eventSeq;
+    // The history names it by the face that's up from the next event on (rule
+    // 712.8: it has that face's name alone); the line saying it transformed
+    // keeps the name it had. Without this Ormendahl, Profane Prince blocked
+    // and died as "Westvale Abbey" (a bug report, 2026-11-23).
+    const open = this.openStintOf(id);
+    if (open !== undefined && object.faceDown === undefined && open.name !== faceName(object)) {
+      const since = this.state.eventSeq;
+      open.until = since;
+      this.state.publicStints?.[id]?.push({ from: since, name: faceName(object) });
+    }
   }
 
   /** Flip the permanent `id` (rule 710): give it the flipped status, which
@@ -75441,6 +75451,18 @@ controlledBy,
    * — see {@link PublicStint}. */
   private trackPublicity(id: ObjectId, from: ZoneType, to: ZoneType, startSeq: number): void {
     const hidden = (zone: ZoneType): boolean => zone === "hand" || zone === "library";
+    // A permanent that left under another name than the card has where it
+    // went (a transformed one: its back face's): the lines of its leaving,
+    // and those before, keep that name; the card's own starts after them.
+    if (from === "battlefield") {
+      const object = this.state.objects[id];
+      const was = this.openStintOf(id);
+      if (object !== undefined && was !== undefined && object.faceDown === undefined && was.name !== faceName(object)) {
+        const since = this.state.eventSeq;
+        was.until = since;
+        this.state.publicStints?.[id]?.push({ from: since, name: faceName(object) });
+      }
+    }
     const open = this.openStintOf(id);
     if (!hidden(to)) {
       this.openStint(id, startSeq);
