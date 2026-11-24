@@ -280,3 +280,19 @@ It does, and more: top of the pool, winning on turn 27 on average, though twenty
 its rate anywhere from 26% to 66%. A board of big fliers is what v2 plays best
 (`upgraded-decks.md` says the same of Temur Roar). A first run of 39 games at 14 workers, too
 many for clocked games, had it at 45% as well.
+
+## A tenth deck, a player's own (2026-11-24)
+
+pbToast's "Prince Rupert's Packed Penthouse" (The First Sliver: five colours of big creatures on
+a deep mana base) joined the pool on the user's word, as pbToast played it on this site against
+the Ur-Dragon, Giada and Ureni decks (room 7MU75, taken from the game's record in `games/`). It is
+on no deck site, so its credit has neither an Archidekt id nor a `url`, and the About page shows
+its title unlinked; it is played exactly as listed. Hand-written in `houseStrongDecks` with Ureni.
+
+**Does it hold its own?** The user's condition was a decent win rate. Against those three decks,
+v2 in every seat at count budgets (`bot:losses --seeds 1-24`, the deck read from a file:
+`findDeck` takes a `.json` deck), it won 5 of 19 decided games (26%, a quarter being an even
+share), Ureni 8, The Ur-Dragon 5, Giada 1. Every win came in a long game: 11 games ran past 15
+minutes, and of the 6 of those that finished inside 45 minutes it won 5; 5 still hadn't finished
+then, so 26% likely undercounts it. Its games are slow for the bots (17-21 turns taking 18 to 44
+minutes at count budgets), which the live clock bounds but is worth watching.

@@ -102,8 +102,13 @@ describe("STRONG_DECKS", () => {
         expect(deck.credit?.author).toBeTruthy();
         expect(deck.name).toContain(`by ${deck.credit?.author}`);
         // An Archidekt deck by its id; one from elsewhere by its address,
-        // and only that one may differ from its creator's list.
-        if (deck.credit?.url === undefined) {
+        // and only that one may differ from its creator's list. One a player
+        // brought to this site (pbToast's, 2026-11-24) has no page, and is
+        // played exactly as they played it here.
+        if (deck.credit?.url === undefined && deck.credit?.archidektId === undefined) {
+          expect(deck.credit?.title).toBeTruthy();
+          expect(deck.credit?.changed).toBeUndefined();
+        } else if (deck.credit?.url === undefined) {
           expect(deck.credit?.archidektId).toBeGreaterThan(0);
           expect(deck.credit?.changed).toBeUndefined();
         } else {

@@ -2148,7 +2148,7 @@ export const STARTER_DECKS: readonly SampleDeck[] = [...SAMPLE_DECKS, ...UPGRADE
  * The strong decks: real bracket 4 decks that players built on Archidekt,
  * each exactly as its creator built it and credited to them, in its name
  * ("Edgar Markov by Ozymandias-") and its `credit` (the About page links each
- * one), and after them one from Moxfield (`houseStrongDecks`). The
+ * one), and after them the ones from elsewhere (`houseStrongDecks`). The
  * Archidekt ones are generated from the lists the user copied by hand
  * (`scripts/gen-strong-decks.mjs`; nothing may fetch from Archidekt). A third
  * pool a room's host can deal a bot from (the lobby's "Strong" button), and
@@ -2165,7 +2165,7 @@ export const STRONG_DECKS: readonly SampleDeck[] = [
 ];
 
 /**
- * Strong decks from outside the generated Archidekt lists: one so far.
+ * Strong decks from outside the generated Archidekt lists.
  *
  * **Ureni** (2026-11-15) is the site owner's own deck, "Here Be Dragons" on
  * Moxfield, credited there (`credit.url`). It is here because Ureni left the
@@ -2178,6 +2178,12 @@ export const STRONG_DECKS: readonly SampleDeck[] = [
  * lands that enter tapped and six basics out, for the three original duals,
  * the other two shocks, the Triome, three fetches, the three bond lands,
  * Cavern of Souls and Reflecting Pool).
+ *
+ * **The First Sliver** (2026-11-24) is pbToast's "Prince Rupert's Packed
+ * Penthouse", as he played it on this site against the strong decks (room
+ * 7MU75): on no deck site, so its credit has no link. Benched against the
+ * Ur-Dragon, Giada and Ureni decks, v2 in every seat, it won 5 of 19 decided
+ * games, all among the long ones (`bot:losses`, seeds 1-24).
  */
 function houseStrongDecks(): SampleDeck[] {
   const hereBeDragons = (deck: SampleDeck): SampleDeck => ({
@@ -2293,5 +2299,116 @@ function houseStrongDecks(): SampleDeck[] {
       ],
       substitutions: [],
     })),
+    {
+      ...precon({
+        name: "The First Sliver by pbToast",
+        commander: "The First Sliver",
+        description:
+          "A real deck, \"Prince Rupert's Packed Penthouse\", built by pbToast and played on Deck Blitz: five colours of big creatures on a deep mana base.",
+        printed: [
+        ["Anti-Venom, Horrifying Healer", 1],
+        ["Arid Mesa", 1],
+        ["Bad River", 1],
+        ["Beanstalk Wurm", 1],
+        ["Beorn, Reluctant Host", 1],
+        ["Blood Crypt", 1],
+        ["Bloodstained Mire", 1],
+        ["Breeding Pool", 1],
+        ["Cavalier of Flame", 1],
+        ["Cavalier of Thorns", 1],
+        ["Cavern of Souls", 1],
+        ["Changeling Titan", 1],
+        ["Colossal Skyturtle", 1],
+        ["Command Tower", 1],
+        ["Draconic Visitor", 1],
+        ["Dragonhawk, Fate's Tempest", 1],
+        ["Dragonlord Dromoka", 1],
+        ["Evolving Wilds", 1],
+        ["Exotic Orchard", 1],
+        ["Fabled Passage", 1],
+        ["Flood Plain", 1],
+        ["Flooded Strand", 1],
+        ["Forest", 1],
+        ["Frenzied Saddlebrute", 1],
+        ["Garth One-Eye", 1],
+        ["Gemstone Caverns", 1],
+        ["God-Eternal Rhonas", 1],
+        ["Godless Shrine", 1],
+        ["Grasslands", 1],
+        ["Hallowed Fountain", 1],
+        ["Hivespine Wolverine", 1],
+        ["Hungering Puppetbeast", 1],
+        ["Ilharg, the Raze-Boar", 1],
+        ["Indatha Triome", 1],
+        ["Indominus Rex, Alpha", 1],
+        ["Island", 1],
+        ["Ivorytusk Fortress", 1],
+        ["Jean-Luc, Mon Capitaine", 1],
+        ["Jetmir's Garden", 1],
+        ["Junji, the Midnight Sky", 1],
+        ["Kenrith, the Returned King", 1],
+        ["Ketria Triome", 1],
+        ["Kinzu of the Bleak Coven", 1],
+        ["Krosan Verge", 1],
+        ["Maelstrom Archangel", 1],
+        ["Maha, Its Feathers Night", 1],
+        ["Mana Confluence", 1],
+        ["Marsh Flats", 1],
+        ["Mass of Mysteries", 1],
+        ["Mistveil Plains", 1],
+        ["Misty Rainforest", 1],
+        ["Moldering Gym // Weight Room", 1],
+        ["Monstrous Vortex", 1],
+        ["Mountain", 1],
+        ["Mountain Valley", 1],
+        ["Necron Deathmark", 1],
+        ["Nylea's Forerunner", 1],
+        ["Overgrown Tomb", 1],
+        ["Overlord of the Hauntwoods", 1],
+        ["Plains", 1],
+        ["Polluted Delta", 1],
+        ["Prismatic Vista", 1],
+        ["Q, Your Illustrious Host", 1],
+        ["Raffine's Tower", 1],
+        ["Railway Brawler", 1],
+        ["Rakish Revelers", 1],
+        ["Raugrin Triome", 1],
+        ["Ridgescale Tusker", 1],
+        ["Rocky Tar Pit", 1],
+        ["Sacred Foundry", 1],
+        ["Sandworm", 1],
+        ["Savai Triome", 1],
+        ["Scalding Tarn", 1],
+        ["Shilgengar, Sire of Famine", 1],
+        ["Sigarda, Host of Herons", 1],
+        ["Sliver Legion", 1],
+        ["Sludge Monster", 1],
+        ["Spara's Headquarters", 1],
+        ["Spinewoods Paladin", 1],
+        ["Steam Vents", 1],
+        ["Stomping Ground", 1],
+        ["Summon: Valefor", 1],
+        ["Swamp", 1],
+        ["Temple Garden", 1],
+        ["Terramorphic Expanse", 1],
+        ["The Gitrog Monster", 1],
+        ["Titania, Protector of Argoth", 1],
+        ["Urborg, Tomb of Yawgmoth", 1],
+        ["Verdant Catacombs", 1],
+        ["Watery Grave", 1],
+        ["Windswept Heath", 1],
+        ["Wistfulness", 1],
+        ["Wooded Foothills", 1],
+        ["Worf, Still Not Merry", 1],
+        ["Xander's Lounge", 1],
+        ["Xenagos, God of Revels", 1],
+        ["Yavimaya, Cradle of Growth", 1],
+        ["Zagoth Triome", 1],
+        ["Ziatora's Proving Ground", 1],
+        ],
+        substitutions: [],
+      }),
+      credit: { author: "pbToast", title: "Prince Rupert's Packed Penthouse", taken: "2026-11-24" },
+    },
   ];
 }
