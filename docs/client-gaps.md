@@ -52,6 +52,17 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   - *Small targets and text.* About half the controls on the board are under 32px on a side
     (zone buttons 18px tall, phase steps 28x19, the top bar's buttons 19px tall); text on tiles
     is 7.3px on every phone.
+  - *How the friend's phone showed it* (his screenshot, 2026-11-23: Chrome on a Samsung phone,
+    upright). Not the 390-412px layout above: the page laid out ~980px wide and shrunk to the
+    screen, which is Chrome's "Desktop site" setting (it ignores the page's viewport tag).
+    Reproduced at 980x1668 with touch, the same picture: the whole desktop board and top bar,
+    at 0.42 of their size. On the phone that makes Pass 45x13, Settings 27x9, a zone button 32x8,
+    the lowered hand 12 tall and tile text 3. The device still reports `(hover: none)` and
+    `(pointer: coarse)` there, though its user agent says desktop, so the flag above holds and
+    a user-agent test would not. A touch device whose window is far wider than its screen
+    (`innerWidth` against `screen.width`) is in this mode, and the page can't turn it off: a
+    line telling the player to untick "Desktop site" is what it can do, once the upright phone
+    view is worth switching to (today it loses the Game menu).
   - *What already works.* No page scrolls sideways at any size. Tablets get the desktop layout
     whole (iPad Mini on its side is 1024x768, close to the 1366x768 the suite runs at): there
     only the taps are wrong. The landing page, library and deck builder reflow to one column
