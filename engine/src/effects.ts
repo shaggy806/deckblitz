@@ -14648,6 +14648,10 @@ export interface EffectApi {
   defendingPlayerOf(target: TargetRef): PlayerId | undefined;
   /** The object's `zoneChangeCount` now; `undefined` once it's gone. */
   stintNow(object: ObjectId): number | undefined;
+  /** Who makes a choice the effect asks of `chooser` (rule 800.4g): them while
+   * they're in the game, else another player in their place
+   * (`Game.choiceStandIn`); `undefined` with no one left to. */
+  choiceStandIn(chooser: PlayerId): PlayerId | undefined;
   /** This step names `object` by something other than a target slot
    * (`GameState.namedOffSlot`). */
   noteNamedOffSlot(object: ObjectId): void;
@@ -19505,13 +19509,20 @@ export function chooserPlayer(chooser: ChooserRef, ctx: ResolutionContext): Play
   if (typeof chooser === "number") {
     const ref = ctx.targets[chooser];
     if (ref === undefined) return undefined;
-    return ref.kind === "player" ? ref.player : ctx.controllerOf(ref);
+    const named = ref.kind === "player" ? ref.player : ctx.controllerOf(ref);
+    return named === undefined ? undefined : ctx.choiceStandIn(named);
   }
   if (chooser === "an-opponent") return ctx.playersInScope("each-opponent")[0];
   if (chooser === "any-player" || chooser === "their-controller") return undefined;
   if (typeof chooser === "object" && "player" in chooser) return chooser.player;
   if (typeof chooser === "object" && "anyOf" in chooser) return ctx.playersInScope(chooser.anyOf)[0];
-  return resolvePlayerRef(chooser, ctx);
+  // A player named before this resolved ("that player", "defending player",
+  // a target's controller) who has since left the game: another makes the
+  // choice in their place (rule 800.4g).
+  const named =
+    resolvePlayerRef(chooser, ctx) ??
+    (typeof chooser === "string" && chooser !== "you" ? ctx.playersCountedInScope(chooser)[0] : undefined);
+  return named === undefined ? undefined : ctx.choiceStandIn(named);
 }
 
 /**

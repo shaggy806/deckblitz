@@ -6,20 +6,6 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **A departing player's permanents don't trigger "leaves the battlefield"** (2026-11-17, the rules audit,
-  `docs/plans/rules-audit-2026-11.md`). Rule 603.6c: leaves-the-battlefield abilities trigger "when a phased-in
-  permanent leaves the game because its owner leaves the game". `Game.leaveGame` leaves what the player owned on
-  the board, inert (`inGame`), and announces nothing, so another player's "whenever another creature leaves the
-  battlefield" (Extractor Demon; sixteen cards watch any permanent, twelve an enchanted one) never hears it.
-  Reproduction: three players, alice's Extractor Demon, bob's Grizzly Bears, `game.concede(B)`: no
-  `ability-triggered` for the Demon. Dies triggers are right not to fire (nothing went to a graveyard), and the
-  departing player's own leave triggers are theirs and never go on the stack (800.4d). A design call, not a
-  patch: the permanents stay on the battlefield as objects, so an event that says they left needs every reader
-  of `permanent-left-battlefield` looked at (its `toZone` has no "left the game"; the client draws a tile going
-  somewhere; the journal counts permanents that left), and an effect that then reaches for "that card" must not
-  find it still there. Outline: an internal, unlogged event for each such permanent (as `permanents-left` is),
-  matched only by `leaves-battlefield` triggers of players still in the game with no `to`, and the object
-  marked gone for whatever the trigger does next.
 - **A player who loses while they owe a decision** (2026-11-17, the rules audit, `docs/plans/rules-audit-2026-11.md`).
   Rules 800.4f-h: a cost a departed player would pay isn't paid, a choice an object asks of them goes to another
   player its controller picks, and a choice a rule asks of them goes to the next player in turn order. None is
@@ -195,9 +181,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`Game.mintFreshTokenObject`) takes the resolved one last, unasked.
 - **The rest of leaving the game** (rule 800.4). 800.4a, 800.4c (a control effect ending with the
   default controller gone exiles the permanent — `recomputeControl`) and 800.4m are modeled, and
-  a conceding player's own pending decision is answered by the server first. Not yet: a choice an
-  effect would ask of a player who has already left (800.4g–h: the object's controller picks
-  another player, or the next in turn order makes it) — the engine skips that player instead.
+  a conceding player's own pending decision is answered by the server first. A choice an effect
+  asks of a player who has already left goes to another player (800.4g, `Game.choiceStandIn`, 2026-11-24):
+  the next of the controller's opponents in turn order, where the rule has the controller pick which
+  (asking needs a player question in the middle of each choice site). Not yet: a choice a rule asks of
+  them going to the next player in turn order (800.4h).
   Left by the 2026-11-20 fixes: a player leaving puts another player's open `choose-targets` right
   (`Game.settleTargetChoiceAfterLeave`) and prunes the lists of `choose-permanents`,
   `choose-permanent-or-player`, `sacrifice`, `proliferate`, `time-travel` and an optional
@@ -210,9 +198,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   loss by one can't meet an open choice. And a creature kept alive only by a losing player's static
   dies in the check they lose in (704.3, `heldMoves`) unless that same check also asks a
   legend-rule choice, which resumes the check with the player already gone.
-shuffle them and cloak one, but an object keeps its id through the exile, so a client reading the wire or animating by id can tell which
-face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the
-leak. Needs a design call: a fresh id at the shuffle, or redaction in `view.ts`. Found 2026-11-04.
 
 **Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked where the effect's controller makes tokens as a resolution step: `create-token`, `create-token-copy` (a batch's copies aside; myriad's copy is one of these, and what's made instead keeps "attacking that player" since 2026-11-17), amass, incubate, populate and encore. It isn't offered for tokens another player creates: a `create-token` or amass with `who`, and a gift's Fish, Food, Treasure or Octopus (`Game.createTokens` called for the recipient) — that player's Moonlit Meditation is never asked, since the question is the effect's controller's and the players of a scope aren't asked in turn. Moonlit Meditation's the only card with it so far. The direct callers (amass's Army, incubate's Incubator, a gift's tokens) pass `createTokens` no `followUp`, so a token of theirs that a static gives riot (rule 702.136a) isn't asked and takes haste; a `create-token` effect's token is asked since 2026-11-16. Amass would need the rest of its instruction (the counters on the Army) to wait on the answer.
 

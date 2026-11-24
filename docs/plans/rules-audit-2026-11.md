@@ -41,12 +41,13 @@ seems to happen in it.
 Three older tests encoded the old step flow and were brought to the rule (`game.test.ts`,
 `cmdr-ruric-thar.test.ts`, `additional-upkeep-steps.test.ts`).
 
-**Found and recorded, not fixed: 603.6c.** Leaves-the-battlefield abilities trigger "when a
+**Found and recorded, built 2026-11-24: 603.6c.** Leaves-the-battlefield abilities trigger "when a
 phased-in permanent leaves the game because its owner leaves the game", and another player's
 "whenever another creature leaves the battlefield" (Extractor Demon) doesn't trigger for what a
 departing player owned. `Game.leaveGame` leaves those permanents on the board, inert, and
-announces nothing. It needs a design call about how they are represented, not a patch;
-`docs/engine-gaps.md` has the reproduction and an outline, `BACKLOG.md` the line.
+announces nothing. Built as the outline had it: an internal `permanent-left-game` event for each, heard only by
+another player's `leaves-battlefield` trigger with no destination, reading the permanent as it last
+existed (`Game.leftGameMatches`), and "it" gone for whatever the trigger does next.
 
 ## What was probed and is sound
 

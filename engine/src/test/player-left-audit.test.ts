@@ -17,6 +17,7 @@ import {
   settle,
   spawn,
   table,
+  toGraveyard,
   toHand,
   toStep,
   zone,
@@ -212,9 +213,70 @@ describe("a player who has left the game", () => {
     expect(game.state.objects[bears].controller).toBe(A);
   });
 
-  // Not here, and not yet right (rule 603.6c, `docs/engine-gaps.md`): another
-  // player's "whenever a creature leaves the battlefield" (Extractor Demon)
-  // doesn't trigger for the creatures a departing player takes with them.
+  /** The triggers of `source` waiting to go on the stack. */
+  const triggersOf = (game: Game, source: ObjectId): number =>
+    game.state.pendingTriggers.filter((t) => t.sourceObjectId === source).length;
+
+  it("makes another player's 'whenever a creature leaves the battlefield' trigger for each creature that leaves with them (rule 603.6c)", () => {
+    // Extractor Demon: "Whenever another creature leaves the battlefield, you
+    // may have target player mill two cards." Bob's Bears and Wolf go with
+    // him; his Forest is no creature.
+    const { game } = table({ players: 3 });
+    const demon = spawn(game, "Extractor Demon");
+    spawn(game, "Grizzly Bears", B);
+    spawn(game, "Timberland Guide", B);
+    lands(game, "Forest", 1, B);
+    game.concede(B);
+    expect(triggersOf(game, demon)).toBe(2);
+    settle(game);
+    expect(game.state.players[A].hasLost).toBe(false);
+  });
+
+  it("reads a departing creature as it last was, under whoever controlled it then (rule 603.6c)", () => {
+    // Bob's Bears, alice's for now (Act of Treason): a creature alice
+    // controlled left, for her Demon's "another creature" either way, and
+    // the leaving isn't a death.
+    const { game } = table({ players: 3 });
+    const demon = spawn(game, "Extractor Demon");
+    const artist = spawn(game, "Blood Artist");
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Mountain", 3);
+    cast(game, toHand(game, "Act of Treason"), { targets: [ref(bears)] });
+    expect(game.state.objects[bears].controller).toBe(A);
+    game.concede(B);
+    expect(triggersOf(game, demon)).toBe(1);
+    expect(triggersOf(game, artist)).toBe(0);
+  });
+
+  it("doesn't trigger anything of the departing player's own (rule 800.4d)", () => {
+    const { game } = table({ players: 3 });
+    const theirs = spawn(game, "Extractor Demon", B);
+    spawn(game, "Grizzly Bears", B);
+    game.concede(B);
+    expect(triggersOf(game, theirs)).toBe(0);
+    expect(game.state.pendingTriggers).toHaveLength(0);
+  });
+
+  it("hands a choice its departed player owed to another of the controller's opponents (rule 800.4g)", () => {
+    // O-Kagachi Made Manifest: "Whenever it attacks, defending player
+    // chooses a nonland card in your graveyard. Return that card to your
+    // hand." Bob concedes with the trigger on the stack: carol chooses.
+    const { game, a, c } = table({ players: 3 });
+    const dragon = spawn(game, "O-Kagachi Made Manifest");
+    const bolt = toGraveyard(game, "Lightning Bolt");
+    toGraveyard(game, "Forest");
+    const asked: PlayerId[] = [];
+    c.chooseFromZoneFn = (_view, eligible, min) => {
+      asked.push(C);
+      return eligible.slice(0, min);
+    };
+    a.declareAttackersFn = () => [{ attacker: dragon, defender: B }];
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && s.zones.shared.stack.length > 0 && s.awaiting === null);
+    game.concede(B);
+    settle(game);
+    expect(asked).toEqual([C]);
+    expect(zone(game, bolt)).toBe("hand");
+  });
 
   it("makes 'whenever a player loses the game' trigger, conceding included (rule 603.9)", () => {
     const { game } = table({ players: 3 });

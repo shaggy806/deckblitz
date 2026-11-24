@@ -8,7 +8,7 @@ import type { CastVia } from "./actions.js";
 import type { CardType, CombatWord } from "./cards.js";
 import type { Color, ManaType, SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { LeftBattlefield, PlayerCounterKind, ZoneType } from "./state.js";
+import type { LastKnownInfo, LeftBattlefield, PlayerCounterKind, ZoneType } from "./state.js";
 import type { TargetRef } from "./target.js";
 import type { Phase, Step } from "./turn.js";
 import type { Expiry } from "./duration.js";
@@ -62,6 +62,13 @@ export type RandomPick =
   /** One of a menu chosen as a permanent enters (Haktos the Unscarred's "choose
    * 2, 3, or 4 at random"). */
   | { readonly kind: "option"; readonly text: string };
+
+/** A permanent leaving the game with its owner (rule 603.6c), and what it
+ * was just before: the `permanent-left-game` events' subject. */
+export interface DepartingPermanent {
+  readonly object: ObjectId;
+  readonly was: LastKnownInfo;
+}
 
 interface Base {
   /** Monotonic sequence number, assigned when the event is appended. */
@@ -2015,6 +2022,24 @@ export type GameEvent =
        * 603.10a), and it's never in the event log. */
       readonly type: "permanents-left";
       readonly left: readonly LeftBattlefield[];
+    })
+  | (Base & {
+      /** A phased-in permanent left the game because its owner did (rules
+       * 800.4a, 603.6c). The engine leaves it where it was, inert
+       * (`Game.inGame`), so this is what a "leaves the battlefield" ability
+       * of a player still in the game hears instead of a move: one with no
+       * destination (`to`), `was` the permanent as it last existed there.
+       * Never in the event log; it only asks the triggers. */
+      readonly type: "permanent-left-game";
+      readonly object: ObjectId;
+      readonly was: LastKnownInfo;
+    })
+  | (Base & {
+      /** Every permanent of one departure (`permanent-left-game`) at once,
+       * for "whenever one or more … leave the battlefield". Never in the
+       * event log. */
+      readonly type: "permanents-left-game";
+      readonly left: readonly DepartingPermanent[];
     })
   | (Base & {
       readonly type: "cards-milled";

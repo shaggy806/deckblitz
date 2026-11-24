@@ -880,9 +880,12 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'cumulative-upkeep-paid':
       return `${who(event.player)} pays ${possessive(name(event.object))} cumulative upkeep`
     // Never logged: each asks the triggers about deaths and leaves that have
-    // their own events (`Game.emit`).
+    // their own events (`Game.emit`), or that the player's loss already says
+    // (`permanent-left-game`, rule 603.6c).
     case 'permanents-died':
     case 'permanents-left':
+    case 'permanent-left-game':
+    case 'permanents-left-game':
       return ''
     default: {
       // Every event has a sentence: one added to the engine without a case

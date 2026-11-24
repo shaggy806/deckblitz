@@ -455,6 +455,7 @@ import type { CommanderColors } from "./identity.js";
 import { companionProblem } from "./companion.js";
 import type { StartingDeck } from "./companion.js";
 import type {
+  DepartingPermanent,
   EventOfType,
   GameEvent,
   GameEventInput,
@@ -3826,12 +3827,13 @@ export class Game {
     const why = this.whyCannotConcede(player);
     if (why !== null) throw new Error(why);
     const from = this.state.eventLog.length;
+    const departing = this.departingPermanents(player);
     const playerState = this.state.players[player];
     playerState.hasLost = true;
     playerState.lossReason = "conceded";
     this.emit({ type: "player-lost", player, reason: "conceded" });
     const offeredFrom = this.targetChoiceZones();
-    this.leaveGame(player);
+    this.leaveGame(player, departing);
     this.settleTargetChoiceAfterLeave(player, offeredFrom);
     this.pruneEligibleAfterLeave(player);
     const priority = this.state.priority;
@@ -38318,7 +38320,14 @@ export class Game {
     let triggerSpellTargets: SetMember[] | undefined;
     if (triggerObject !== undefined) {
       const t = this.state.objects[triggerObject];
-      if (t?.zone === "battlefield") {
+      if (event.type === "permanent-left-game" && event.object === triggerObject) {
+        // A permanent that left the game with its owner (rule 603.6c): read
+        // as it last existed, and gone for anything that would act on "it"
+        // (800.4a) though the engine leaves it where it was — no stint it
+        // could be in is the one it left in.
+        triggerStint = event.was.zoneChangeCount;
+        afterLeaving = -1;
+      } else if (t?.zone === "battlefield") {
         triggerStint = t.zoneChangeCount ?? 0;
       } else if (t?.zone === "stack" && t.kind === "card") {
         // A spell — the one whose casting fired this: which stint of it on
@@ -39111,6 +39120,34 @@ export class Game {
     return wanted === "you" ? by === this.watcherController(self) : by !== this.watcherController(self);
   }
 
+  /** Whether a `leaves-battlefield` trigger of `self` is about `one`, a
+   * permanent that left the game with its owner (rule 603.6c): its "who" and
+   * filter read from `was`, the permanent as it last existed, since what a
+   * player who has left owns is otherwise found by nothing. */
+  private leftGameMatches(
+    spec: Extract<TriggerSpec, { on: "leaves-battlefield" }>,
+    one: DepartingPermanent,
+    self: GameObject,
+  ): boolean {
+    if (spec.otherOnly === true && one.object === self.id) return false;
+    const who =
+      spec.who === "you-control"
+        ? one.was.controller === self.controller
+        : spec.who === "opponent"
+          ? one.was.controller !== self.controller
+          : this.matchesWho(spec.who, one.object, self, true);
+    if (!who) return false;
+    return (
+      spec.filter === undefined ||
+      matchesFilter(this.state, this.registry, one.object, spec.filter, {
+        you: self.controller,
+        source: self.id,
+        snapshot: one.was,
+        amount: this.filterAmounts({ source: self.id, controller: self.controller, triggerObject: one.object }),
+      })
+    );
+  }
+
   /** The permanents of a `permanents-left` event a batched `leaves-battlefield`
    * trigger is about. */
   private leftBatchMatching(
@@ -39667,6 +39704,15 @@ export class Game {
           this.triggerFilterOk(spec.filter, event.object, self)
         );
       case "leaves-battlefield":
+        // Left the game with its owner (rule 603.6c): heard only by an
+        // ability that names no destination, the permanent read as it last
+        // existed (`leftGameMatches`).
+        if (event.type === "permanent-left-game" || event.type === "permanents-left-game") {
+          if ((spec.batched === true) !== (event.type === "permanents-left-game")) return false;
+          if (spec.to !== undefined || spec.byEffectOf !== undefined || spec.whileActivatingCraft === true) return false;
+          const left = event.type === "permanent-left-game" ? [event] : event.left;
+          return left.some((one) => this.leftGameMatches(spec, one, self));
+        }
         // "Whenever one or more …": once, off the whole event.
         if (spec.batched === true) {
           return event.type === "permanents-left" && this.leftBatchMatching(spec, event, self).length > 0;
@@ -40469,6 +40515,7 @@ export class Game {
         : event.type === "permanent-entered-battlefield" ||
       event.type === "permanent-destroyed" ||
       event.type === "permanent-left-battlefield" ||
+      event.type === "permanent-left-game" ||
       event.type === "control-changed" ||
       event.type === "permanent-sacrificed" ||
       event.type === "permanent-transformed" ||
@@ -43132,6 +43179,7 @@ export class Game {
         if (declared?.target === undefined) return undefined;
         return declared.target.kind === "player" ? declared.target.player : of(declared.target.object);
       },
+      choiceStandIn: (chooser) => this.choiceStandIn(chooser, controller),
       stintNow: (id) => {
         const object = this.state.objects[id];
         return object === undefined ? undefined : (object.zoneChangeCount ?? 0);
@@ -44505,8 +44553,9 @@ export class Game {
         // "Target player chooses a card name" (Vexing Arcanix): the player in
         // that slot names it, if they're still in the game; the resolution
         // stays its controller's.
-        const chooser = spec.chooser === undefined ? controller : named;
-        if (chooser === undefined || this.state.players[chooser]?.hasLost !== false) return;
+        const asked = spec.chooser === undefined ? controller : named;
+        const chooser = asked === undefined ? undefined : this.choiceStandIn(asked, controller);
+        if (chooser === undefined) return;
         const src = this.state.objects[source];
         const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
         this.beginCardNameChoice({
@@ -44528,8 +44577,8 @@ export class Game {
         });
       },
       chooseValue: (spec, asked) => {
-        const chooser = asked?.chooser ?? controller;
-        if (this.state.players[chooser]?.hasLost !== false) return;
+        const chooser = this.choiceStandIn(asked?.chooser ?? controller, controller);
+        if (chooser === undefined) return;
         const resume: ResolutionResume = {
           controller,
           targets,
@@ -45790,8 +45839,9 @@ controlledBy,
           lookers: everyone,
         };
       },
-      askSeparatePiles: (separator, objects, chooser, faceDown, fates, anOpponentChooses, shape) => {
-        if (this.state.players[separator]?.hasLost !== false) return false;
+      askSeparatePiles: (asked, objects, chooser, faceDown, fates, anOpponentChooses, shape) => {
+        const separator = this.choiceStandIn(asked, controller);
+        if (separator === undefined) return false;
         this.state.awaiting = {
           kind: "separate-piles",
           player: separator,
@@ -45819,7 +45869,7 @@ controlledBy,
         delete this.state.pilesAnswer;
         return piles;
       },
-      askChoosePile: (chooser, separator, piles, faceDown, lookers, fates) => {
+      askChoosePile: (asked, separator, piles, faceDown, lookers, fates) => {
         // The face-up pile is turned face up as the piles are made (Curator
         // of Destinies); without a face-down pile, every pile is shown — a
         // library card no one but the separator has seen yet included.
@@ -45828,7 +45878,8 @@ controlledBy,
           .flat()
           .filter((id) => this.state.objects[id]?.zone === "library" && !this.state.revealedThisTurn.includes(id));
         if (shown.length > 0) this.revealCards(controller, shown, "library");
-        if (this.state.players[chooser]?.hasLost !== false) return false;
+        const chooser = this.choiceStandIn(asked, controller);
+        if (chooser === undefined) return false;
         this.state.awaiting = {
           kind: "choose-pile",
           player: chooser,
@@ -46127,8 +46178,8 @@ controlledBy,
         return out;
       },
       askChoosePermanentsKept: (filter, max, prompt, options) => {
-        const chooser = options?.chooser ?? controller;
-        if (this.state.players[chooser]?.hasLost !== false) return false;
+        const chooser = this.choiceStandIn(options?.chooser ?? controller, controller);
+        if (chooser === undefined) return false;
         // Untargeted (rule 608.2d): whatever matches now, a hexproof one too.
         const eligible = this.battlefieldMatching(options?.side ?? controller, filter, x, source);
         const available = eligible.reduce((n, id) => n + (this.state.objects[id]?.stackCount ?? 1), 0);
@@ -46148,8 +46199,9 @@ controlledBy,
         };
         return true;
       },
-      askChooseAmong: (chooser, objects, count, prompt, min = count) => {
-        if (this.state.players[chooser]?.hasLost !== false) return false;
+      askChooseAmong: (asked, objects, count, prompt, min = count) => {
+        const chooser = this.choiceStandIn(asked, controller);
+        if (chooser === undefined) return false;
         // Permanents are pointed at on the battlefield; cards elsewhere (a
         // graveyard's — all public — or revealed from a library) are shown
         // in a list.
@@ -46924,20 +46976,23 @@ controlledBy,
           targetZones,
           lastKnownRefs: refs,
         }, payEach),
-      choosePermanentOrPlayer: (filter, players, then, prompt, exceptSource, except, chooser) =>
-        this.beginChoosePermanentOrPlayer(source, chooser, x, filter, players, then, prompt, exceptSource, except, {
+      choosePermanentOrPlayer: (filter, players, then, prompt, exceptSource, except, chooser) => {
+        const standIn = this.choiceStandIn(chooser, controller);
+        if (standIn === undefined) return;
+        this.beginChoosePermanentOrPlayer(source, standIn, x, filter, players, then, prompt, exceptSource, except, {
           triggerValue,
           ...(triggerObject !== undefined ? { triggerObject } : {}),
           targetZones,
           lastKnownRefs: refs,
-        }),
+        });
+      },
       pickNextTarget: (among, effect, slot, prompt, chooser) => {
         if (among.length === 0) return;
         this.state.awaiting = {
           kind: "choose-permanent-or-player",
           // A `groupChooses` group's own player; one who has left the game
-          // can't choose, so the controller does.
-          player: chooser !== undefined && this.state.players[chooser]?.hasLost !== true ? chooser : controller,
+          // can't choose, and another makes the choice (rule 800.4g).
+          player: chooser === undefined ? controller : (this.choiceStandIn(chooser, controller) ?? controller),
           eligible: [...among],
           prompt,
           then: effect,
@@ -71363,12 +71418,13 @@ controlledBy,
    * as when they concede. Whether they *can* lose is the caller's question.
    */
   private eliminate(player: PlayerId, reason: string): void {
+    const departing = this.departingPermanents(player);
     const playerState = this.state.players[player];
     playerState.hasLost = true;
     playerState.lossReason = reason;
     this.emit({ type: "player-lost", player, reason });
     const offeredFrom = this.targetChoiceZones();
-    this.leaveGame(player);
+    this.leaveGame(player, departing);
     // Another player's open choice stops offering them and what they owned
     // (800.4a), as when they concede.
     this.settleTargetChoiceAfterLeave(player, offeredFrom, true);
@@ -71755,6 +71811,38 @@ controlledBy,
   }
 
   /**
+   * Who makes a choice an object asks of `chooser` (rule 800.4g): `chooser`
+   * while they're still in the game. Once they've left, another player the
+   * object's controller picks makes it — another of the controller's
+   * opponents if `chooser` was one, if possible. The engine takes the next
+   * such player in turn order after `chooser` rather than asking the
+   * controller which (`docs/engine-gaps.md`). `undefined` if no one is left.
+   */
+  private choiceStandIn(chooser: PlayerId, controller: PlayerId): PlayerId | undefined {
+    if (this.state.players[chooser]?.hasLost === false) return chooser;
+    const order = this.state.turnOrder;
+    const at = order.indexOf(chooser);
+    const after = [...order.slice(at + 1), ...order.slice(0, Math.max(0, at))].filter(
+      (p) => p !== chooser && this.state.players[p]?.hasLost === false,
+    );
+    if (chooser !== controller) {
+      const opponent = after.find((p) => p !== controller);
+      if (opponent !== undefined) return opponent;
+    }
+    return after[0];
+  }
+
+  /** The phased-in permanents `player` owns, each as it is now: taken before
+   * they're marked as having lost, while their own statics still apply, for
+   * the "leaves the battlefield" abilities that hear them go (rule 603.6c,
+   * `leaveGame`). */
+  private departingPermanents(player: PlayerId): DepartingPermanent[] {
+    return this.state.zones.shared.battlefield
+      .filter((id) => this.state.objects[id]?.owner === player)
+      .map((id) => ({ object: id, was: this.takeLastKnown(id) }));
+  }
+
+  /**
    * Rule 800.4a: what happens the moment `player` leaves a multiplayer game —
    * as soon as they leave, not as a state-based action.
    *
@@ -71782,7 +71870,7 @@ controlledBy,
    *   the battlefield" trigger can't do it — it never moves, and it would be
    *   theirs to control (800.4d) — so the exile ends here.
    */
-  private leaveGame(player: PlayerId): void {
+  private leaveGame(player: PlayerId, departing: readonly DepartingPermanent[]): void {
     for (const id of [...this.state.zones.shared.stack]) {
       const object = this.state.objects[id];
       if (object === undefined) continue;
@@ -71859,6 +71947,14 @@ controlledBy,
         this.emit({ type: "permanent-unattached", object: id, from });
       }
     }
+
+    // Rule 603.6c: what they own left the battlefield as it left the game,
+    // though the engine leaves it where it was, inert. Another player's "leaves
+    // the battlefield" abilities hear it go (`permanent-left-game`), each
+    // permanent as it last existed; their own never go on the stack (800.4d).
+    const left = departing.filter(({ object }) => this.state.objects[object]?.zone === "battlefield");
+    for (const one of left) this.emit({ type: "permanent-left-game", object: one.object, was: one.was });
+    if (left.length > 0) this.emit({ type: "permanents-left-game", left });
 
     this.state.pendingTriggers = this.state.pendingTriggers.filter((t) => t.controller !== player);
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => t.controller !== player);
@@ -78116,7 +78212,14 @@ controlledBy,
       this.lastTapSeq = seq;
     }
     // Each death has its own events: this one only asks the triggers.
-    if (full.type !== "permanents-died" && full.type !== "permanents-left") this.state.eventLog.push(full);
+    if (
+      full.type !== "permanents-died" &&
+      full.type !== "permanents-left" &&
+      full.type !== "permanent-left-game" &&
+      full.type !== "permanents-left-game"
+    ) {
+      this.state.eventLog.push(full);
+    }
     // The journal keeps each object as it is now, and what announced this has
     // just changed it ("Non-Horror creatures with slime counters" lose all
     // abilities with the counter): nothing computed before it may answer.
