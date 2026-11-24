@@ -144,8 +144,10 @@ test('a local blitz plays against three bots in the page, never on the room serv
   const bar = page.getByRole('toolbar', { name: 'Replay' })
   await expect(bar).toBeVisible({ timeout: 20_000 })
   await expect(bar.locator('.replay-where')).toContainText('1/')
+  // On to the next board that shows something: boards of nothing but
+  // priority passing are stepped over, so it may be past the second.
   await bar.getByRole('button', { name: 'On a move' }).click()
-  await expect(bar.locator('.replay-where')).toContainText('2/')
+  await expect(bar.locator('.replay-where')).not.toContainText(' 1/')
   // A History entry takes the board to its move.
   await page.getByRole('button', { name: 'History', exact: true }).click()
   await expect(page.locator('.event-log li.ev-ahead').first()).toBeVisible()
