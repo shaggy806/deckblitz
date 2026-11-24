@@ -79,7 +79,7 @@ test('blitzing the clipboard starts a game against three bots', async ({ page, c
 
   await page.goto('/')
   await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
 
   await expectBlitzStarted(page, 'click')
   // Blitzing saves nothing: the result screen offers to keep the deck.
@@ -94,11 +94,11 @@ test('with no list on the clipboard, a box to paste it into', async ({ page, con
 
   await page.goto('/')
   await page.evaluate(() => navigator.clipboard.writeText('not a decklist'))
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
 
   await expect(page.getByText("Your clipboard doesn't hold a decklist")).toBeVisible()
   await page.locator('#landing-blitz-list').fill(LIST)
-  await page.getByRole('button', { name: 'Blitz', exact: true }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3', exact: true }).click()
 
   await expectBlitzStarted(page, 'wait')
 })
@@ -154,7 +154,7 @@ test('a list with no commander named asks which card it is', async ({ page, cont
 
   await page.goto('/')
   await page.evaluate(() => navigator.clipboard.writeText('1 Ghalta, Primal Hunger\n1 Goreclaw, Terror of Qal Sisma\n1 Grizzly Bears\n30 Forest'))
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
 
   const picker = page.getByRole('dialog', { name: 'Choose the commander' })
   await expect(picker.getByRole('button', { name: /Ghalta, Primal Hunger/ })).toBeVisible()
@@ -228,7 +228,7 @@ test('a commander with a partner in the list can be picked as a pair, or alone',
 
   await page.goto('/')
   await page.evaluate(() => navigator.clipboard.writeText('1 Krenko, Mob Boss\n1 Thrasios, Triton Hero\n1 Tymna the Weaver\n1 Sol Ring\n40 Forest'))
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
 
   const picker = page.getByRole('dialog', { name: 'Choose the commander' })
   // Only the two that can pair say so.
@@ -303,4 +303,26 @@ test("the lobby's deck picker imports a pasted list, saves it and brings it to t
   const saved = await page.evaluate(() => window.localStorage.getItem('mtg-engine:decks'))
   expect(saved ?? '').toContain('Imported: Ghalta, Primal Hunger')
   expect(saved ?? '').toContain('Natural Order')
+})
+
+// Each bracket's button deals the bots that bracket's decks: Bracket 4's are
+// real players' lists, named "<commander> by <creator>". Read off the
+// `add-bot` messages, so on the room server (`?local=0`), not in the page.
+test("a bracket's blitz button deals the bots that bracket's decks", async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+  await stubImport(page)
+  const bots: string[] = []
+  page.on('websocket', (ws) => {
+    if (ws.url().includes('?token=')) return // Vite's hot reload
+    ws.on('framesent', (frame) => {
+      const message = JSON.parse(String(frame.payload)) as { type?: string; deck?: { name?: string } }
+      if (message.type === 'add-bot') bots.push(message.deck?.name ?? '')
+    })
+  })
+  await page.goto('/?local=0')
+  await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
+  await page.getByRole('button', { name: 'Blitz against Bracket 4' }).click()
+  await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 20_000 })
+  expect(bots).toHaveLength(3)
+  for (const name of bots) expect(name).toMatch(/ by /)
 })

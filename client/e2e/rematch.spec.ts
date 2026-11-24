@@ -90,7 +90,7 @@ test('blitz again: the same room, a fresh game, the import report not back', asy
 
   await page.goto('/')
   await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
   await expect(page.getByRole('button', { name: 'History' })).toBeVisible(paced)
   const room = await roomOf(page)
   expect(room).toMatch(/^[A-Z0-9]{5}$/)

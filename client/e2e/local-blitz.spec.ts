@@ -91,7 +91,7 @@ test('a local blitz plays against three bots in the page, never on the room serv
 
   await page.goto('/?local=1')
   await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
 
   // Into the game, four at the table, the room's code in the URL as ever.
   await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 60_000 })
@@ -166,7 +166,7 @@ test('a local game picks up again after a reload, where it was', async ({ page, 
   const sent = serverTraffic(page)
   await page.goto('/?local=1')
   await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
   await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 60_000 })
   const roomId = await page.evaluate(() => new URL(window.location.href).searchParams.get('room'))
   const keep = page.getByRole('button', { name: /^Keep/ })
@@ -255,7 +255,7 @@ test("a blitz whose card pool won't load in the page is played on the server ins
 
   await page.goto('/?local=1')
   await page.evaluate((text) => navigator.clipboard.writeText(text), LIST)
-  await page.getByRole('button', { name: 'Have a deck copied? Click here to blitz!' }).click()
+  await page.getByRole('button', { name: 'Blitz against Bracket 3' }).click()
 
   // Into the game all the same, its room on the server.
   await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 60_000 })

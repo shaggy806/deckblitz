@@ -20,7 +20,7 @@ export const LANDING_STEPS: readonly Step[] = [
     anchor: tourAnchor('landing-blitz'),
     title: 'Blitz a deck',
     body:
-      "The quickest way to play. Copy a Commander decklist from wherever you keep it, click here, and you're in a game against three bots. " +
+      "The quickest way to play. Copy a Commander decklist from wherever you keep it, click the bracket you want the bots to play at, and you're in a game against three of them. " +
       "If the page can't read your clipboard, a box opens to paste the list into.",
     placement: 'top',
     advance: 'next',

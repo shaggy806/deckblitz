@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Color } from 'engine/client'
 import type { CommanderCandidate, WireDeck } from 'protocol'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
@@ -6,7 +6,9 @@ import { CommanderPicker } from '../deck-builder/CommanderPicker.tsx'
 import { CommanderColorAsk } from '../deck-builder/CommanderColorAsk.tsx'
 import { importDecklist, looksLikeDecklist, resolveImport } from '../deck-builder/importDeck.ts'
 import type { ImportProgress } from '../deck-builder/importDeck.ts'
-import { blitzReady } from './blitzDeck.ts'
+import { DEFAULT_BLITZ_POOL, blitzReady } from './blitzDeck.ts'
+import { BOT_DECK_POOLS, poolLabel } from './randomBotDeck.ts'
+import type { BotDeckPool } from './randomBotDeck.ts'
 
 type Phase =
   | { readonly kind: 'idle' }
@@ -30,21 +32,37 @@ type Phase =
 /** What `NetworkGame.blitz` is told about the import, beside the deck. */
 type BlitzReport = Parameters<NetworkGame['blitz']>[1]
 
+/** What each bracket's button says under its name: where its decks come from. */
+const BRACKET_SUBTITLE: Readonly<Record<BotDeckPool, string>> = {
+  precon: 'Precons as printed',
+  upgraded: 'Upgraded precons',
+  strong: "Real players' decks",
+}
+
 /**
- * Blitzing — goldfishing against bots. One button at the foot of the landing
- * page, no explanation beyond its label: the decklist on the clipboard, run
- * through the deck import (an unimplemented card swapped for its stand-in,
- * one with none dropped) and played at once, nothing saved,
- * against three bots on random starter decks (`NetworkGame.blitz`), with no
- * seat board in between.
+ * Blitzing — goldfishing against bots. Three buttons under the landing
+ * page's hero, one per bracket the bots play at (`BOT_DECK_POOLS`: the user,
+ * 2026-11-24, "blitz their decks against the bracket 2/3/4 decks instead of
+ * always going against the bracket 3 ones", picked over one button with a
+ * bracket selector): the decklist on the clipboard, run through the deck
+ * import (an unimplemented card swapped for its stand-in, one with none
+ * dropped) and played at once, nothing saved, against three bots on random
+ * decks of that bracket (`NetworkGame.blitz`), with no seat board in between.
  *
  * The clipboard is read on the click itself, which is what lets a browser
  * allow it. Where it won't (a refused permission, an older browser), or the
  * clipboard holds no "N Card Name" line, a box opens to paste the list into
- * instead, so the button never just does nothing.
+ * instead, so a button never just does nothing; the bracket clicked is kept
+ * for it.
  */
 export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
   const [phase, setPhase] = useState<Phase>({ kind: 'idle' })
+  /** The bracket whose button was clicked last: the bots' decks. Shown from
+   * state, and read from the ref where the game starts, which is in the
+   * import's callback: that callback closes over the render before the
+   * click, so it read the old bracket from state (Bracket 4 dealt Bracket 3). */
+  const [pool, setPool] = useState<BotDeckPool>(DEFAULT_BLITZ_POOL)
+  const poolRef = useRef<BotDeckPool>(DEFAULT_BLITZ_POOL)
   const [pasted, setPasted] = useState('')
   const [error, setError] = useState<string | null>(null)
 
@@ -117,12 +135,14 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
   }
 
   const start = (deck: WireDeck, report: BlitzReport) => {
-    game.blitz(deck, report)
+    game.blitz(deck, report, { against: poolRef.current })
     setPhase({ kind: 'idle' })
     setPasted('')
   }
 
-  const fromClipboard = () => {
+  const fromClipboard = (against: BotDeckPool) => {
+    poolRef.current = against
+    setPool(against)
     setError(null)
     navigator.clipboard
       .readText()
@@ -137,15 +157,26 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
 
   return (
     <section className="landing-blitz" aria-label="Blitz a deck">
-      <button
-        type="button"
-        className="landing-cta landing-blitz-btn"
-        data-tour="landing-blitz"
-        onClick={fromClipboard}
-        disabled={busy || phase.kind === 'choosing' || phase.kind === 'colour'}
-      >
-        Have a deck copied? Click here to blitz!
-      </button>
+      <div className="landing-blitz-pick" data-tour="landing-blitz">
+        <p className="landing-blitz-lead" id="landing-blitz-lead">
+          Have a deck copied? Blitz it against three bots at
+        </p>
+        <div className="landing-blitz-brackets" role="group" aria-labelledby="landing-blitz-lead">
+          {BOT_DECK_POOLS.map((p) => (
+            <button
+              key={p.pool}
+              type="button"
+              className="landing-cta landing-blitz-bracket"
+              aria-label={`Blitz against ${p.label}: ${BRACKET_SUBTITLE[p.pool].toLowerCase()}`}
+              onClick={() => fromClipboard(p.pool)}
+              disabled={busy || phase.kind === 'choosing' || phase.kind === 'colour'}
+            >
+              <span className="landing-blitz-bracket-name">{p.label}</span>
+              <span className="landing-blitz-bracket-sub">{BRACKET_SUBTITLE[p.pool]}</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
       {box !== null ? (
         <div
@@ -187,7 +218,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
               Cancel
             </button>
             <button type="submit" className="landing-join-btn primary" disabled={pasted.trim() === ''}>
-              Blitz
+              Blitz against {poolLabel(pool)}
             </button>
           </div>
         </form>
@@ -205,7 +236,7 @@ export function BlitzPanel({ game }: { readonly game: NetworkGame }) {
       {busy ? (
         <p className="landing-blitz-status" role="status">
           {game.blitzing
-            ? 'Shuffling up against three bots…'
+            ? `Shuffling up against three ${poolLabel(pool)} bots…`
             : phase.kind === 'importing' && phase.progress !== null
               ? `Reading your list: ${phase.progress.done} of ${phase.progress.total} cards`
               : 'Reading your list…'}

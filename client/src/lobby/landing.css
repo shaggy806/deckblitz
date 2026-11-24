@@ -364,8 +364,31 @@
   flex-direction: column;
   gap: 10px;
 }
-.landing-blitz-btn {
-  width: 100%;
+/* A line asking, then one button per bracket the bots play at, side by
+   side at every width (a phone too: the subtitles wrap to two lines). */
+.landing-blitz-lead {
+  margin: 0 0 6px;
+  text-align: center;
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 600;
+  color: var(--text);
+}
+.landing-blitz-brackets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.landing-blitz-bracket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-inline: 8px;
+}
+.landing-blitz-bracket-sub {
+  font-size: clamp(12px, 0.9vw, 14px);
+  font-weight: 500;
+  opacity: 0.8;
 }
 /* The paste box unfolds into its space and folds out of it (the user,
    2026-11-14: it "brings up the place to paste it in very abruptly"). A
