@@ -95,3 +95,7 @@ players who leave the game, combat and the turn's skip rules, with three violati
 
 `verify-speed-audit` (**partly built**) times `npm run verify` step by step and ranks
 what would make it faster without changing what it catches, with the coverage holes found on the way.
+
+`deck-guides` (**collecting**, 2026-11-24) holds the strong decks' builders' guides as notes,
+one deck a section, until the user has sent them all; each then becomes its deck's entry in
+`deck-bias.ts`, as The First Sliver's did (`deck-biases`).
