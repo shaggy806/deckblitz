@@ -52,6 +52,22 @@ describe("Captured by the Consulate", () => {
     expect(zone(game, captive)).toBe("battlefield");
   });
 
+  it("gone before its trigger resolves, it finds the creature it enchanted only if that's still the same object (rule 400.7)", () => {
+    const { game, captive, aura } = setUp();
+    toBob(game);
+    const before = life(game);
+    cast(game, toHand(game, "Shock", B), { player: B, targets: [ref(A)], settle: false });
+    game.advanceUntil((s) => s.zones.shared.stack.length === 2 && s.awaiting === null);
+    // The Aura leaves enchanting the Bears; then the Bears leave and come
+    // back, a new object no Aura enchants.
+    game.debugMove(aura, "graveyard");
+    game.debugMove(captive, "exile");
+    game.debugMove(captive, "battlefield");
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0 && s.awaiting === null);
+    expect(zone(game, captive)).toBe("battlefield");
+    expect(life(game)).toBe(before - 2);
+  });
+
   it("my own spells aren't changed", () => {
     const { game, captive } = setUp();
     lands(game, "Mountain", 1);

@@ -60,6 +60,9 @@ const PER_OBJECT_KINDS: ReadonlySet<JournalKind> = new Set<JournalKind>([
   "activated",
   "triggered",
   "fought",
+  // Season of the Witch's "except for creatures that couldn't attack": a
+  // token split off a stack takes the stack's record (`Game.splitOneFromStack`).
+  "could-attack",
 ]);
 
 /** What this turn's journal says of `o` itself, in its stint, by the

@@ -192,6 +192,21 @@ describe("Lich", () => {
     expect(game.state.players[A].hasLost).toBe(true);
   });
 
+  it("a nontoken permanent that can't be sacrificed doesn't count toward 'that many': it loses as the trigger resolves", () => {
+    // Lich and two Hithlain Ropes are three nontoken permanents, but only
+    // Lich can be sacrificed: dealt 3, it can't sacrifice three, so the loss
+    // is the damage trigger's own, not just Lich's when it reaches a graveyard.
+    const { game } = table();
+    const lich = spawn(game, "Lich");
+    const ropes = [spawn(game, "Hithlain Rope"), spawn(game, "Hithlain Rope")];
+    expect(nontoken(game)).toBe(3);
+    game.debugApplyEffect(B, { kind: "damage", amount: 3, target: 0 }, [ref(A)]);
+    game.advanceUntil((s) => s.objects[lich].zone !== "battlefield" || s.players[A].hasLost);
+    expect(zone(game, lich)).toBe("graveyard");
+    expect(ropes.map((id) => zone(game, id))).toEqual(["battlefield", "battlefield"]);
+    expect(game.state.players[A].hasLost).toBe(true);
+  });
+
   it("loses the game when it's put into a graveyard, whatever the life total", () => {
     const { game } = table();
     const lich = spawn(game, "Lich");

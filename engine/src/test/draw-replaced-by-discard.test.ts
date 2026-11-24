@@ -14,7 +14,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, cast, graveyard, hand, lands, nextTurn, spawn, table, toHand, toLibrary } from "./harness.js";
+import { A, B, C, D, cast, graveyard, hand, lands, nextTurn, spawn, table, toHand, toLibrary } from "./harness.js";
 
 const names = (game: Game, ids: readonly ObjectId[]): string[] => ids.map((id) => game.state.objects[id].cardName);
 const library = (game: Game, player: PlayerId = A): readonly ObjectId[] => game.state.zones.perPlayer[player].library;
@@ -169,6 +169,36 @@ describe("draw replacements stacking with it", () => {
     expect(hand(game, B).length).toBe(2);
     expect(graveyard(game, B).length).toBe(2);
     expect(names(game, hand(game, B))).toEqual(expect.arrayContaining(["Grizzly Bears"]));
+  });
+
+  it("no Notion Thief that handed the draw on gets the card Chains has its last player draw (rule 614.5)", () => {
+    const { game, a, b, c, d } = table({ players: 4 });
+    lands(game, "Island", 2);
+    spawn(game, "Chains of Mephistopheles");
+    for (const p of [B, C, D]) spawn(game, "Notion Thief", p);
+    const [spell] = handOf(game, A, ["Think Twice"]);
+    for (const p of [B, C, D]) handOf(game, p, ["Swamp"]);
+    for (const p of [B, C, D]) toLibrary(game, "Grizzly Bears", p);
+    const asked: PlayerId[] = [];
+    for (const [seat, p] of [[a, A], [b, B], [c, C], [d, D]] as const) {
+      seat.chooseReplacementOrderFn = () => {
+        asked.push(p);
+        return 0;
+      };
+      seat.chooseDiscardsFn = (cards, count) => cards.slice(0, count).map((x) => x.id);
+    }
+    cast(game, spell);
+    // Alice's draw goes round the Thieves once, bob's, carol's and dave's,
+    // and Chains replaces dave's: he discards and draws. That card is part of
+    // the replaced event, so no Thief takes it again, and he's asked nothing.
+    expect(game.eventsOfType("draw-redirected").map((e) => [e.from, e.to])).toEqual([
+      [A, B],
+      [B, C],
+      [C, D],
+    ]);
+    expect(asked).toEqual([A]);
+    expect(names(game, hand(game, D))).toEqual(["Grizzly Bears"]);
+    expect(names(game, graveyard(game, D))).toEqual(["Swamp"]);
   });
 
   it("\"that many plus one\" isn't added again to the card the discard has them draw (rule 614.5)", () => {

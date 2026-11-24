@@ -115,15 +115,19 @@ client's: 27 of the engine's 207 event types had no sentence and printed as thei
   Grand Melee (807), Planechase (901), Archenemy (904), ante (407, 800.4n), Brawl and Commander
   Draft (903.12-13). Their rules are uncited by design.
 
-## Leads not followed yet
+## Leads followed after the slices (2026-11-24)
 
-Uncited, plausible, and not probed, in the order I'd take them:
+The four uncited leads left at the end of the second slice, each probed against the engine:
 
-- **506.3d**: a creature put onto the battlefield attacking during the declare blockers step or
-  later is unblocked (ninjutsu's usual case is tested; the general one isn't).
-- **104.3f**: a player who would win and lose at once loses.
-- **704.5r, 704.5t**: counter caps; a completed dungeon leaving the command zone.
-- **603.2g**: an event that was prevented or replaced triggers nothing.
+- **506.3d** holds: every creature put onto the battlefield attacking goes through one path
+  (`Game.putIntoAttack`), which has it enter unblocked once blockers are declared; ninjutsu's and
+  sneak's tests exercise it. Now cited there.
+- **104.3f** can't arise: a win is an effect's instruction carried out at once (`winGame`) or the
+  last player left (104.2a), and neither can meet a loss in the same event.
+- **704.5t** was built as rule 309.6 (`completeFinishedDungeons`), now cited. **704.5r**'s one
+  card, Rasputin Dreamweaver, waits on its own need key (`static:counter-cap`, B132).
+- **603.2g** holds by construction: a replaced event never happens (614.6), so nothing emits it,
+  and a prevented one emits only its prevention.
 
 ## Next slices
 

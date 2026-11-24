@@ -36,12 +36,8 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   `whyCannotAct` refuses a mana ability while a decision is pending. Rhystic Cave waits on the same window
   inside a mana ability (`cost:pay-unless-inside-mana-ability`, major; its build is commit 67ce0c3cb).
 - **B338's small gaps** (2026-11-22, what the overnight lane agents reported; none checked beyond the
-  agent's own reading): exalted counters stay through a later "loses all abilities" (as `keywordCountersOn`
-  does, ignoring 613.7 order); Lich's "if you can't" counts nontoken permanents including one that can't be
-  sacrificed; a prevention shield's shares (`shieldShareKey`, source + `madeIn`) are shared by two shields
-  made in one resolution, and a share caps a hit after doublers; Captured by the Consulate's `to:
-  "attached"` reads the host from `lastKnown` with no stint check; a token split off a stack after attackers
-  are declared loses its `could-attack` entry (Season of the Witch spares it); Season of the Witch's
+  agent's own reading): a prevention shield's shares (`shieldShareKey`, source + `madeIn`) are shared by two shields
+  made in one resolution, and a share caps a hit after doublers; Season of the Witch's
   "couldn't attack" is read from the rules alone (no rulings in the snapshot).
 - **B335's small gaps** (2026-11-18, what the overnight lane agents reported while building keys; none checked
   beyond the agent's own reading). **Trigger ordering:** a delayed step trigger is put on the stack directly, so
@@ -52,8 +48,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   damage when several hit at once. (A delayed `whenever` that watches a permanent now ends as the next turn
   begins once all it watches have left, `Game.watchOver` — fixed the same night.) **Look-back and visibility:** `lookBackSources` treats any
   library arrival not from a hand as one all players could see, so a face-down exiled card counts (603.10a).
-  **Who shuffles:** the `shuffles-library` event names the library's owner, so "you shuffle target player's
-  library" counts as that player shuffling (Psychic Surgery). **Timing:** a held draw that a replacement turns
+  **Timing:** a held draw that a replacement turns
   into a question (dredge) is asked after the held returns (`releaseHeldChoices`; only Decoy Gambit holds draws);
   Metamorphic Alteration's copy starts at the next state-based-action check, not as the Aura attaches; a pending
   "as this is turned face up" choice may have the early-SBA gap fixed for "as this becomes attached"; Wheel of Sun
@@ -240,6 +235,5 @@ Found 2026-11-06, building Tempt with Bunnies.
 
 **An object's own "instead" against an exile replacement isn't asked.** Found in the third lanes run (2026-11-14, Quintorius, Loremaster): Blightsteel Colossus (`shufflesItselfInstead`) and Gravebane Zombie (`ownDestinationInstead`) apply their own replacement first when Rest in Peace or Leyline of the Void would also apply. Neither is a self-replacement effect (rule 614.15: they're static abilities, not part of a resolving spell's instructions), so the owner chooses which applies first (616.1, 616.1e). Quintorius's `bottomAfter` now asks (`askBottomAfterOrder`), except when the spell is countered by another spell's resolution, where nothing can be asked mid-resolution; the same question for those two, raised from `moveObjectUncached`, would need the move deferred as the commander's 903.9b move is. The same for life: Strong's radiation replacement goes ahead of Enduring Angel's `toZeroOrLess` unasked (`Game.lifeToZeroInstead`).
 
-**A created token records no entry source.** Created tokens record no `EntrySource` (only `moveObject` sets the entry's `by`), so "created with [this ability]" (rule 607.2c) can't be read for a token. From the third lanes run (2026-11-14, Havengul Laboratory's agent); the other half of its line, a transformed permanent's timestamp, is built (2026-11-17, `COMPLETED.md`).
+**A created token records no entry source.** Created tokens record no `EntrySource` (only `moveObject` sets the entry's `by`), so "created with [this ability]" (rule 607.2c) can't be read for a token. From the third lanes run (2026-11-14, Havengul Laboratory's agent); the other half of its line, a transformed permanent's timestamp, is built (2026-11-17, `COMPLETED.md`). Latent (2026-11-24): no pool card reads `putThereBySource` on a source that makes tokens, and a token's `entry` would take part in `exactTokenShape`, so tokens of different sources would no longer fold into one stack; build it with the card that needs it.
 
-**A Notion Thief redirect isn't keyed for rule 614.5.** Found 2026-11-16 (B333, Chains of Mephistopheles): a card that a would-draw effect replacement makes a player draw is a new draw event, which that replacement can't replace again but any other can (614.5, 616.2) — built for effect replacements (`ParkedSteps.replacing`). Notion Thief's redirect isn't keyed the same way, so with Chains and two Thieves of different controllers a redirect can apply again to the card Chains makes a player draw. Only 3+ players reach it. The fix: seed `drawCard`'s `applied` map from `applyingReplacements`, and carry it through the questions the draw asks later.

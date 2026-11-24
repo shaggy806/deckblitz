@@ -7881,6 +7881,14 @@ export class Game {
     this.state.objects[newId].splitFromStack = true;
     this.state.objects[newId].splitFrom = id;
     if (remaining <= 1) stack.splitFromStack = true;
+    // It could have attacked this turn whenever the stack could (Season of
+    // the Witch's "except for creatures that couldn't attack"): the record,
+    // kept under the stack's id, is the token's too.
+    for (const entry of entriesThisTurn(this.state, "could-attack")) {
+      if (entry.object !== id) continue;
+      const { turn: _turn, count: _count, ...rest } = entry;
+      this.journal({ ...rest, object: newId });
+    }
     this.state.zones.shared.battlefield.push(newId);
     // A new permanent on the battlefield: anything memoized about the board
     // (a count, a static's reach) is stale.
@@ -27725,8 +27733,11 @@ export class Game {
       }
       // Exalted counters (rule 122.1b): an instance of exalted each. Like the
       // other keyword counters (`keywordCountersOn`), they stay through a
-      // loss of its own abilities.
-      for (let i = 0; i < exaltedCounters; i += 1) {
+      // loss of all abilities from before they were put on — every counter of
+      // the kind takes the newest one's timestamp (613.7c) — and go with a
+      // later one.
+      const exaltedKept = grantOutlastsLoss(lostAt, target.counterTimestamps?.exalted ?? target.timestamp);
+      for (let i = 0; i < (exaltedKept ? exaltedCounters : 0); i += 1) {
         granted.push({ ability: EXALTED_COUNTER_TRIGGER, ref: { kind: "modifier", ability: EXALTED_COUNTER_TRIGGER } });
       }
       // Cipher (rule 702.99a): each card still encoded on it — exiled in the
@@ -47945,13 +47956,20 @@ controlledBy,
         }
         // The one new target there may be: this effect's own permanent, or
         // what it's attached to ("enchanted creature") — as it is, or as it
-        // last was if the source has left (rule 608.2h). Nothing attached:
-        // no new target at all.
+        // last was if the source has left (rule 608.2h), and only while that
+        // host is the same object, in the stint it was enchanted in (400.7).
+        // Nothing attached: no new target at all.
         const self = this.state.objects[source];
-        const host =
-          to === "attached"
-            ? ((self?.zone === "battlefield" ? self.attachedTo : (self?.lastKnown?.attachedTo ?? self?.attachedTo)) ?? null)
-            : null;
+        const attachedHost = (): ObjectId | null => {
+          if (self === undefined) return null;
+          if (self.zone === "battlefield") return self.attachedTo ?? null;
+          const known = self.lastKnown;
+          if (known?.attachedTo === undefined) return self.attachedTo ?? null;
+          const stint = known.attachedToStint;
+          if (stint !== undefined && (this.state.objects[known.attachedTo]?.zoneChangeCount ?? 0) !== stint) return null;
+          return known.attachedTo;
+        };
+        const host = to === "attached" ? attachedHost() : null;
         if (to === "attached" && host === null) return;
         const only = to === "source" ? source : host;
         return this.changeStackTargets(
@@ -58550,8 +58568,12 @@ controlledBy,
     const before = object.counters[counter] ?? 0;
     object.counters[counter] = before + total;
     // Every counter of a kind takes the newest one's timestamp (613.7c); a
-    // keyword counter's is what orders its keyword in layer 6.
-    if (total > 0 && (KEYWORD_COUNTERS.has(counter as Keyword) || counter.startsWith(HEXPROOF_FROM_COUNTER))) {
+    // keyword counter's is what orders its keyword in layer 6 (exalted's, the
+    // triggers it grants: `effectiveTriggeredEntries`).
+    if (
+      total > 0 &&
+      (KEYWORD_COUNTERS.has(counter as Keyword) || counter === "exalted" || counter.startsWith(HEXPROOF_FROM_COUNTER))
+    ) {
       object.counterTimestamps = { ...object.counterTimestamps, [counter]: this.freshTimestamp() };
     }
     this.emit({
@@ -60103,7 +60125,7 @@ controlledBy,
    *
    * It was never declared, so no "attacks" trigger sees it (508.3a) and it
    * didn't attack this turn; no attack requirement or restriction applies
-   * (508.4c). Entering after blockers are declared it's unblocked (508.4d),
+   * (508.4c). Entering after blockers are declared it's unblocked (506.3d, 508.4d),
    * which a fresh `blocked: false` already is.
    */
   private putIntoAttack(ids: readonly ObjectId[], controller: PlayerId, how: ResolvedEnterAttacking): void {
@@ -70627,7 +70649,7 @@ controlledBy,
     if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
   }
 
-  /** Rule 309.6: a dungeon whose marker is on its bottommost room, and which
+  /** Rules 309.6 and 704.5t: a dungeon whose marker is on its bottommost room, and which
    * isn't the source of a room ability that has triggered but not yet left
    * the stack, is removed — completed. Returns whether one was. */
   private completeFinishedDungeons(): boolean {
@@ -72318,9 +72340,12 @@ controlledBy,
     // (rule 616.2: the draw is theirs now).
     let drawer = player;
     let redirected = false;
-    const applied = new Map<ObjectId, number>();
+    // A Thief that handed on the draw a replacement's effect came out of has
+    // had its opportunity (rule 614.5): the card Chains of Mephistopheles has
+    // a player draw after the discard isn't one it takes again.
+    const applied = this.drawRedirectsApplying();
     for (;;) {
-      const next = this.drawRedirectFor(drawer, applied);
+      const next = this.drawRedirectFor(drawer, applied, !redirected);
       if (next === null) break;
       applied.set(next.source, (applied.get(next.source) ?? 0) + 1);
       this.emit({ type: "draw-redirected", from: drawer, to: next.to });
@@ -72334,10 +72359,13 @@ controlledBy,
       // The draw is the Thief's controller's now, a draw event of theirs, and
       // theirs to replace (rule 616.2): "the next time", an effect (Chains of
       // Mephistopheles, Underrealm Lich) or "draw N instead" — none of the
-      // Thieves again (614.5).
+      // Thieves again (614.5), nor in the draws that replacement makes, or
+      // after a question it asks (`drawRedirectKeys`, carried by `replacing`).
       const theirs = this.noteWouldDraw(drawer);
-      if (this.nextDrawReplaced(drawer, theirs)) return;
-      this.drawReplacedByEffectOr(drawer, theirs);
+      const to = drawer;
+      this.withReplacing(this.drawRedirectKeys(applied), () => {
+        if (!this.nextDrawReplaced(to, theirs)) this.drawReplacedByEffectOr(to, theirs);
+      });
       return;
     }
     // "If you would draw a card, instead look at the top three cards of your
@@ -72977,9 +73005,9 @@ controlledBy,
    * drawing. */
   private eventualDrawer(player: PlayerId): PlayerId {
     let drawer = player;
-    const applied = new Map<ObjectId, number>();
-    for (;;) {
-      const next = this.drawRedirectFor(drawer, applied);
+    const applied = this.drawRedirectsApplying();
+    for (let first = true; ; first = false) {
+      const next = this.drawRedirectFor(drawer, applied, first);
       if (next === null) return drawer;
       applied.set(next.source, (applied.get(next.source) ?? 0) + 1);
       drawer = next.to;
@@ -72998,12 +73026,41 @@ controlledBy,
    * `drawRedirectOrderAsked`); where they weren't asked, the opponent first
    * in turn order after them goes first.
    */
+  /** The `applyingReplacements` keys of the Notion Thieves in `applied`, one
+   * per time each applied (a token stack applies once per token), each tied to
+   * the Thief's stint (rule 400.7). */
+  private drawRedirectKeys(applied: ReadonlyMap<ObjectId, number>): string[] {
+    const keys: string[] = [];
+    for (const [id, times] of applied) {
+      const zcc = this.state.objects[id]?.zoneChangeCount ?? 0;
+      for (let i = 0; i < times; i += 1) keys.push(`draw-redirect:${id}:${zcc}:${i}`);
+    }
+    return keys;
+  }
+
+  /** The Notion Thieves that handed on a draw some replacement now carrying
+   * out its effect came out of (`drawRedirectKeys`), each with how many times:
+   * none of them takes a draw that effect makes (rule 614.5). */
+  private drawRedirectsApplying(): Map<ObjectId, number> {
+    const applied = new Map<ObjectId, number>();
+    for (const key of this.applyingReplacements) {
+      const match = /^draw-redirect:(.+):(\d+):\d+$/.exec(key);
+      if (match === null) continue;
+      const id = match[1] as ObjectId;
+      if ((this.state.objects[id]?.zoneChangeCount ?? 0) !== Number(match[2])) continue;
+      applied.set(id, (applied.get(id) ?? 0) + 1);
+    }
+    return applied;
+  }
+
   private drawRedirectFor(
     player: PlayerId,
     applied: ReadonlyMap<ObjectId, number>,
+    first: boolean,
   ): { readonly source: ObjectId; readonly to: PlayerId } | null {
     const all = this.drawRedirectsFor(player, applied);
-    const chosen = applied.size === 0 ? this.state.replacementAnswers?.[`draw:${player}`]?.[0] : undefined;
+    // The drawing player's answer picks the first Thief to take the draw.
+    const chosen = first ? this.state.replacementAnswers?.[`draw:${player}`]?.[0] : undefined;
     return all.find((r) => r.source === chosen) ?? all[0] ?? null;
   }
 
@@ -73016,7 +73073,7 @@ controlledBy,
   private drawRedirectOrderAsked(player: PlayerId): boolean {
     const answers = `draw:${player}`;
     if (this.state.awaiting !== null || this.state.replacementAnswers?.[answers] !== undefined) return false;
-    const all = this.drawRedirectsFor(player, new Map());
+    const all = this.drawRedirectsFor(player, this.drawRedirectsApplying());
     if (all.length === 0) return false;
     const byPlayer = all.filter((r, i) => all.findIndex((o) => o.to === r.to) === i);
     // What matters is who ends up with the card: the draw each Thief takes
@@ -73075,7 +73132,8 @@ controlledBy,
   /** Who ends up drawing once `first` has taken a draw, each other Thief
    * applying once as `drawCard` applies them (rule 614.5). */
   private finalDrawerAfter(first: { readonly source: ObjectId; readonly to: PlayerId }): PlayerId {
-    const applied = new Map([[first.source, 1]]);
+    const applied = this.drawRedirectsApplying();
+    applied.set(first.source, (applied.get(first.source) ?? 0) + 1);
     let drawer = first.to;
     for (;;) {
       const next = this.drawRedirectsFor(drawer, applied)[0];

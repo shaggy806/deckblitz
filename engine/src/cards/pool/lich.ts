@@ -4,8 +4,8 @@ import { defineCard } from "../define.js";
 // the player it enters under (the ruling: a Lich someone takes leaves their
 // life alone). "Whenever you're dealt damage" fires once for damage dealt at
 // once, so its permanents are sacrificed together (the ruling); "if you
-// can't" is fewer nontoken permanents than that many, all of them then
-// sacrificed before the loss. The draw is a replacement, so two Liches still
+// can't" is fewer sacrificed than that many — all it could sacrifice going
+// first, and one that can't be sacrificed (Hithlain Rope) not counted. The draw is a replacement, so two Liches still
 // draw once a life (the ruling); the last ability loses even with life above
 // 0, but a "can't lose" (Platinum Angel) stops it (the rulings).
 const ENTER_TEXT = "As this enchantment enters, you lose life equal to your life total.";
@@ -45,15 +45,15 @@ export default defineCard({
       trigger: { on: "deals-damage-batch", who: "any", to: "you" },
       targets: [],
       effect: {
-        kind: "conditional",
-        condition: {
-          kind: "amounts",
-          left: { countOf: { token: false, controlledBy: "you" } },
-          op: "gte",
-          right: { triggerValue: true },
-        },
-        then: SACRIFICE,
-        else: { kind: "sequence", effects: [SACRIFICE, { kind: "lose-game" }] },
+        kind: "sequence",
+        effects: [
+          SACRIFICE,
+          {
+            kind: "conditional",
+            condition: { kind: "amounts", left: { thisWay: "sacrificed" }, op: "lt", right: { triggerValue: true } },
+            then: { kind: "lose-game" },
+          },
+        ],
       },
       resolve: null,
       text: DAMAGE_TEXT,

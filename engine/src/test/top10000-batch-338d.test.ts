@@ -99,6 +99,30 @@ describe("top-10000 batch 338d — Emissary of Soulfire (exalted counters, rule 
     attack(game, a, [bears]);
     expect(pt(game, bears)).toEqual({ power: 4, toughness: 4 });
   });
+
+  const frogged = (after: number): ReturnType<typeof pt> => {
+    const { game, a } = table();
+    const wurm = spawn(game, "Craw Wurm");
+    const bears = spawn(game, "Grizzly Bears");
+    const onWurm = (amount: number): void => {
+      game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter: "exalted", amount }, [{ kind: "object", object: wurm }]);
+      settle(game);
+    };
+    onWurm(2);
+    game.debugApplyEffect(B, game.registry.get("Turn to Frog").effect!, [{ kind: "object", object: wurm }]);
+    settle(game);
+    if (after > 0) onWurm(after);
+    attack(game, a, [bears]);
+    return pt(game, bears);
+  };
+
+  it("a later 'loses all abilities' takes the counters' exalted (rule 613.7)", () => {
+    expect(frogged(0)).toEqual({ power: 2, toughness: 2 });
+  });
+
+  it("a counter put on after the loss renews every exalted counter's timestamp (rule 613.7c)", () => {
+    expect(frogged(1)).toEqual({ power: 5, toughness: 5 });
+  });
 });
 
 describe("top-10000 batch 338d — Bludgeon Brawl", () => {

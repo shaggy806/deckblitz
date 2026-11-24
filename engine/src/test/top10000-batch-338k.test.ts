@@ -7,7 +7,7 @@
 import { describe, expect, it } from "vitest";
 
 import { invalidateComputedCache } from "../characteristics.js";
-import { A, B, attack, nextTurn, spawn, table, zone } from "./harness.js";
+import { A, B, attack, cast, lands, nextTurn, ref, spawn, table, toHand, tokensNamed, zone } from "./harness.js";
 
 describe("Season of the Witch", () => {
   it("destroys the untapped creatures that could have attacked and didn't, and only those", () => {
@@ -37,6 +37,23 @@ describe("Season of the Witch", () => {
     nextTurn(game);
     expect(zone(game, tapped)).toBe("battlefield");
     expect(zone(game, idle)).toBe("graveyard");
+  });
+
+  it("destroys a token split off a stack that could have attacked, as it does the rest of the stack", () => {
+    const { game, a } = table();
+    spawn(game, "Season of the Witch");
+    lands(game, "Forest", 1);
+    const stack = spawn(game, "Goblin Token");
+    game.state.objects[stack].stackCount = 3;
+    game.state.objects[stack].isToken = true;
+    invalidateComputedCache();
+    attack(game, a, []);
+    // After the declaration, one Goblin singled out: split off the stack.
+    expect(game.state.turn.step).toBe("postcombat-main");
+    cast(game, toHand(game, "Giant Growth"), { targets: [ref(stack)] });
+    expect(tokensNamed(game, "Goblin Token", A)).toBe(3);
+    nextTurn(game);
+    expect(tokensNamed(game, "Goblin Token", A)).toBe(0);
   });
 
   it("spares everything on a turn whose player had nothing able to attack", () => {
