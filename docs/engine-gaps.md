@@ -40,9 +40,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   made in one resolution, and a share caps a hit after doublers; Season of the Witch's
   "couldn't attack" is read from the rules alone (no rulings in the snapshot).
 - **B335's small gaps** (2026-11-18, what the overnight lane agents reported while building keys; none checked
-  beyond the agent's own reading). **Trigger ordering:** a delayed step trigger is put on the stack directly, so
-  its controller can't order it among the step's other triggers (603.3b: Noctis's return comes after the attack
-  triggers); Zevlor's copies are made in turn order rather than in an order the player picks; a delayed
+  beyond the agent's own reading). **Trigger ordering:** Zevlor's copies are made in turn order rather than in an order the player picks; a delayed
   trigger's 603.7b choice of which simultaneous event triggers it is made as it resolves (Lagrella) or not at all
   (a `once` watch takes the first), and a `once` delayed `dealt-damage` watch counts only the first source's
   damage when several hit at once. (A delayed `whenever` that watches a permanent now ends as the next turn
@@ -212,7 +210,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   loss by one can't meet an open choice. And a creature kept alive only by a losing player's static
   dies in the check they lose in (704.3, `heldMoves`) unless that same check also asks a
   legend-rule choice, which resumes the check with the player already gone.
-**A shuffled face-down pile keeps its object ids.** Become Anonymous and Expose the Culprit (`Game.cloakExiledPile`) exile cards face up,
 shuffle them and cloak one, but an object keeps its id through the exile, so a client reading the wire or animating by id can tell which
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the
 leak. Needs a design call: a fresh id at the shuffle, or redaction in `view.ts`. Found 2026-11-04.

@@ -64154,10 +64154,10 @@ controlledBy,
   }
 
   /**
-   * Put every delayed trigger that fires at the start of `step` onto the
-   * stack, in APNAP order (rule 603.3b). Called from `enterStep`, since a
-   * delayed ability belongs to no permanent and so is invisible to
-   * `detectTriggers`.
+   * Queue every delayed trigger that fires at the start of `step` with the
+   * step's other triggers (`pendingTriggers`), each player's in the order
+   * they choose (rule 603.3b). Called from `enterStep`, since a delayed
+   * ability belongs to no permanent and so is invisible to `detectTriggers`.
    */
   private fireDelayedTriggers(step: Step): void {
     if (this.state.delayedTriggers.length === 0) return;
@@ -64204,39 +64204,22 @@ controlledBy,
         });
         continue;
       }
-      const id = this.mintAbilityObject(
-        trigger.source,
-        trigger.sourceName,
-        trigger.controller,
-        "triggered",
-        0,
-        trigger.targets,
-        undefined,
-        trigger.triggerObject,
-      );
-      // What `stackAbilityOf` resolves from: the ability has no index into any
-      // card's `triggered` list, because it isn't an ability of a card.
-      this.state.objects[id].delayedTrigger = trigger;
-      // "That card" is still that card only if it hasn't changed zones since
-      // (rule 400.7) — and is read as it last existed where it was.
-      if (trigger.triggerObject !== undefined && trigger.triggerObjectStint !== undefined) {
-        this.state.objects[id].lastKnownRefs = {
-          ...(trigger.triggerObjectRefs ?? {}),
-          triggerObjectAfterLeaving: trigger.triggerObjectStint,
-        };
-      }
-      if (trigger.recipient !== undefined) {
-        this.state.objects[id].lastKnownRefs = {
-          ...(this.state.objects[id].lastKnownRefs ?? {}),
-          recipient: trigger.recipient,
-        };
-      }
-      this.carryDelayedIdentity(id, trigger);
-      this.emit({
-        type: "ability-triggered",
-        source: trigger.source,
+      // It waits with the step's other triggers, to be put on the stack the
+      // next time a player would get priority, in the order its controller
+      // chooses among theirs (rule 603.3b) — minted from the record as any
+      // queued delayed ability is (`placeTriggerOnStack`'s `delayed`). "That
+      // card" is still that card only if it hasn't changed zones since (rule
+      // 400.7) — and is read as it last existed where it was.
+      this.state.pendingTriggers.push({
+        sourceObjectId: trigger.source,
+        cardName: trigger.sourceName,
+        abilityIndex: 0,
         controller: trigger.controller,
-        object: id,
+        ...(trigger.triggerObject !== undefined ? { triggerObject: trigger.triggerObject } : {}),
+        ...(trigger.triggerObject !== undefined && trigger.triggerObjectStint !== undefined
+          ? { lastKnownRefs: { ...(trigger.triggerObjectRefs ?? {}), triggerObjectAfterLeaving: trigger.triggerObjectStint } }
+          : {}),
+        delayed: trigger,
       });
     }
   }

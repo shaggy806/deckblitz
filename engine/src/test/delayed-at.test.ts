@@ -288,3 +288,32 @@ describe("that many, from the watch: Fire Giant's Fury", () => {
     expect(exiled).toHaveLength(5);
   });
 });
+
+describe("a delayed step trigger among the step's other triggers (rule 603.3b)", () => {
+  it("is ordered by its controller with their other triggers of that step", () => {
+    const { game, a } = table();
+    game.setOrdersOwnTriggers(A, true);
+    spawn(game, "Phyrexian Arena");
+    game.debugApplyEffect(A, {
+      kind: "delayed-trigger",
+      at: { step: "upkeep", whose: "you" },
+      effect: { kind: "draw", amount: 1 },
+      text: "Draw a card.",
+    });
+    settle(game);
+    const asked: string[][] = [];
+    a.orderTriggersFn = (_view, triggers) => {
+      asked.push(triggers.map((t) => t.cardName));
+      return triggers.map((_, i) => i);
+    };
+    const before = hand(game).length;
+    nextTurn(game, "upkeep");
+    nextTurn(game, "upkeep");
+    settle(game);
+    expect(asked).toHaveLength(1);
+    expect(asked[0]).toHaveLength(2);
+    // The Arena's card, the delayed one's and the draw step's.
+    nextTurn(game, "precombat-main");
+    expect(hand(game).length).toBe(before + 3);
+  });
+});
