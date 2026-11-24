@@ -4,6 +4,39 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-23 — Creatures the end step takes kept home as blockers; Demonic Consultation aimed at an opponent
+
+Status: both fixed 2026-11-23 (two gate scenarios and a test).
+
+Reported by the same player (room 7LSU2 game 1, 41 turns, one person and three bots on the Breena
+list, two Rite of the Raging Storm out): "bots seem to treat temporary creatures that get
+sacrificed at the end of turn as worth keeping home as blockers", and "I'm willing to bet they
+could know how to use Demonic Consultation, unless they don't have the information of what's in
+their decklists".
+
+**1. Lightning Ragers kept home.** Each upkeep a seat got two 5/1 trample, haste Lightning Ragers
+that are sacrificed at its end step. Over the game's 16 attack declarations by a seat holding one,
+the Ragers went in 3; at turn 25 one stayed home in front of a player with no untapped creature.
+**Why:** the evaluation left out a permanent only when it carried the per-object end-step flag a
+token is made with (Kiki-Jiki, mobilize, blitz). A creature whose own text sacrifices it, or one
+under a delayed sacrifice (Sneak Attack), counted as a body on the board and as a blocker in the
+swing back, and the simulated combat stops before the end step that takes it: attacking risked
+"losing" a 5/1 and holding it "kept" a blocker. **Fixed:** `bot/gone-at-end-step.ts` reads all
+three, and the evaluation, the swing back's blockers and attackers and the attack search's count
+of creatures lost use it. On the game's 16 boards today's bot sends the Ragers in 14 (the other
+two are Edgar Markov's, who could attack only one player). Scenarios: "attacks with a Lightning
+Rager the end step takes anyway", "attacks with the creature Sneak Attack put in for the turn".
+
+**2. Demonic Consultation.** The bots do know their own library (a player knows their list). But
+the card's name choice had no aim, so it suggested opponents' spells, and a bot names the first
+suggestion: an opponent's commander, which its library doesn't hold, so the whole library would be
+exiled. **Fixed:** aimed at the caster's own library (`aim: "own-library"`), most copies first, so
+a bot names the card it has most of — the name least likely to sit wholly in the six exiled — and
+a player's suggestions are their own cards. The same for Spoils of the Vault, Divining Witch, Petra
+Sphinx and Vexing Arcanix; Cursed Scroll, Magus of the Scroll and Liar's Pendulum suggest the
+chooser's hand. Neither Consultation nor Tainted Pact digs for a particular card yet (BACKLOG
+"Bots"). Test: `choose-card-name.test.ts`.
+
 ## 2026-11-23 — A friend's Breena deck: Tainted Pact decks itself, Fountainport Fish in the upkeep, Sunforger unused
 
 Status: the first two fixed 2026-11-23 (a test and a gate scenario); Sunforger open (BACKLOG
