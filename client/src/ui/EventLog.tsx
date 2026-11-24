@@ -88,23 +88,28 @@ function LogCardName({
       tabIndex={0}
       {...handlers}
       title={onPick ? 'Show this card' : undefined}
-      onClick={
-        onPick
-          ? (e) => {
-              // This card, not the entry's first: the line's own click
-              // would point out whichever card it finds first.
-              e.stopPropagation()
-              onPick()
-            }
-          : undefined
-      }
-      onMouseEnter={() => {
-        load()
-        handlers.onMouseEnter()
+      onClick={(e) => {
+        // By touch, the tap that opens the card (`useHoverPopover`).
+        handlers.onClick?.(e)
+        if (onPick) {
+          // This card, not the entry's first: the line's own click
+          // would point out whichever card it finds first.
+          e.stopPropagation()
+          onPick()
+        }
       }}
-      onFocus={() => {
+      onMouseEnter={(e) => {
         load()
-        handlers.onFocus()
+        handlers.onMouseEnter?.(e)
+      }}
+      onFocus={(e) => {
+        load()
+        handlers.onFocus?.(e)
+      }}
+      // A finger's touch, which is its tap or its long press.
+      onPointerDown={(e) => {
+        load()
+        handlers.onPointerDown?.(e)
       }}
     >
       {name}

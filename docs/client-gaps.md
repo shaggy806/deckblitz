@@ -42,10 +42,13 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   - *The raised tray doesn't drop.* Nothing sends `mouseleave` until the next tap lands
     elsewhere, and that tap acts on whatever it hits. Raised on a phone on its side, the hand
     covers the player's whole battlefield.
-  - *Your own permanents can't be read without using them.* A tap on a tile opens its card and
-    clicks it: fine for an opponent's, but your own land is tapped for mana and your own
-    creature is declared as an attacker. The card it opens is 96px wide on a phone, its rules
-    text 7px.
+  - *A permanent a decision is picking from can't be read without picking it.* A tap on a tile
+    opens its card and clicks it. With nothing asked that is harmless (checked 2026-11-23: a
+    tap on your own land opens its card and the menu of its abilities, and taps nothing for
+    mana — the survey first said it did, wrongly), but while attackers, blockers or targets
+    are being picked the tap that reads a creature picks it. And the card it opens is small:
+    61 of the screen's pixels wide on the friend's phone, its rules text 6, the ability
+    menu's button 13 tall.
   - *The top bar runs off a phone held upright.* At 390px wide History is cut, and Capture and
     the Game menu (leave, concede) are off the screen with no way to scroll to them; the phase
     track is gone too, so stops can't be set.
@@ -84,10 +87,20 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   real phone or in Safari**: whether `screen.width` is the screen's own width in Chrome's
   Desktop site mode (if it reports the page's, `--touch-k` is 1 and the buttons are as small
   as before, no worse), and whether `100dvh` ends the scroll there.
-  **Left, in order:** (2) reading — a tap on a permanent opens its card at a size to read, with
-  what it can do as buttons, never acting in the same tap; (3) the rest of what a finger
-  answers, sized by `--touch-k`: the mulligan, zone viewers, menus (ways to play, abilities),
-  the X and number boxes, the top bar's buttons and menus; (4) a phone whose page is as wide
+  **Built (step 2, 2026-11-23): reading a card on the board.** `useHoverPopover` by touch: a
+  tap on a permanent, a commander or a revealed library top opens its card after whatever the
+  tap did, except on a permanent a decision is picking from, where the tap only answers; a
+  **long press** (0.45 s) opens the card and clicks nothing, anywhere; the next touch off the
+  tile closes it, a tap on the card itself included (it takes the pointer by touch, so the tap
+  doesn't reach what it covers); the open card is kept across the board's per-frame remount.
+  The card is 150 of the screen's pixels wide (text 15), the ability menu's buttons 44 tall,
+  and the card keeps off the bottom row of buttons. `e2e/touch-read.spec.ts`. Desktop compared
+  again, the same. Long presses were sent through Chromium's touch events; **what a real
+  phone's browser does with one (its own menu, a click as the finger lifts) is unchecked.**
+  **Left, in order:** (3) the rest of what a finger reads or answers, sized by `--touch-k`:
+  the stack's entries (their own hover code), the History's card names (the same hook, their
+  card not yet sized), the mulligan, zone viewers, the menu of ways to play, the X and number
+  boxes, the top bar's buttons and menus; (4) a phone whose page is as wide
   as its screen laid out 980px wide too (the viewport tag set by script, on the game page
   only), so both modes are the one the user asked for, and the upright layout that loses the
   Game menu is gone; (5) what the tray should do after a card with a menu of ways to play is

@@ -124,7 +124,13 @@ export function MiniTile({
   const clickable = Boolean(onClick) && (highlight || selected || activatable)
   const tint = cardTint(obj)
 
-  const { wrapRef, popoverRef, open, handlers } = useHoverPopover(held.length > 0 ? [obj, held] : obj)
+  const { wrapRef, popoverRef, open, handlers } = useHoverPopover(
+    held.length > 0 ? [obj, held] : obj,
+    undefined,
+    // By touch, a tap on a permanent a decision is picking from (an
+    // attacker, a target) answers it and opens nothing: a long press reads.
+    !(highlight || selected),
+  )
   // A paired creature (soulbond) lights its partner while it's hovered:
   // which two are paired is otherwise only the "paired" flag on each.
   const pairedWith = obj.pairedWith
