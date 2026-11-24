@@ -42,6 +42,7 @@ import {
   lethalDamageLeft,
   lethalDamageOf,
   playerProtectedFrom,
+  spellCantBeCountered,
   staticConditionMet,
   withComputedCache,
 } from "./characteristics.js";
@@ -4581,6 +4582,52 @@ export class HeuristicBotController extends AutomaticController {
     return this.removesTooLittle(state, offer, action);
   }
 
+  /**
+   * Whether `action` aims a counter at a spell (or ability) that this spell
+   * can't counter (rule 701.6a): one that can't be countered, printed or
+   * granted (`spellCantBeCountered`, which reads a grant's "by blue spells"
+   * against this spell), or cast with Cavern of Souls' mana
+   * (`GameObject.uncounterable`). It's a legal target and the counter does
+   * nothing to it, so the card is thrown away: the strong Y'shtola deck's bot
+   * exiled a blue card to Force of Will a Dragonlord Dromoka out of time, v1's
+   * cast going out unscored (a live game, 2026-11-24, `docs/bot-misplays.md`).
+   * Read off the effect, a `counter` at the slot, so copying or redirecting
+   * such a spell is still cast; a modal spell's chosen modes are read in
+   * turn, their slots one after another.
+   */
+  protected countersNothing(state: GameState, offer: LegalAction, action: Action): boolean {
+    if (offer.kind !== "cast-spell" || action.type !== "cast-spell" || offer.face !== undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    const parts: { readonly effect: unknown; readonly slots: number }[] =
+      offer.castModal !== undefined
+        ? (action.modes ?? []).flatMap((index) => {
+            const mode = def.castModal?.modes[index];
+            return mode === undefined ? [] : [{ effect: mode.effect, slots: mode.targets?.length ?? 0 }];
+          })
+        : [{ effect: def.effect, slots: def.targets?.length ?? 0 }];
+    const counterer = state.objects[action.card];
+    let offset = 0;
+    for (const part of parts) {
+      for (const slot of counterSlots(part.effect)) {
+        const target = action.targets?.[offset + slot];
+        if (target === null || target === undefined || target.kind !== "object") continue;
+        const object = state.objects[target.object];
+        if (object === undefined || object.zone !== "stack") continue;
+        if (object.uncounterable === true || spellCantBeCountered(state, this.registry, object, counterer)) return true;
+      }
+      offset += part.slots;
+    }
+    return false;
+  }
+
+  /** Whether this bot's own cast of `offer`, aimed as it would aim it,
+   * counters nothing (`countersNothing`). */
+  private holdsCounterForNothing(state: GameState, offer: CastSpellLegal): boolean {
+    if (offer.targetOptions.length === 0 && offer.castModal === undefined) return false;
+    return this.countersNothing(state, offer, this.toCastSpell(state, offer));
+  }
+
   /** Whether this bot's own cast of `offer` is an X spell at too small an X
    * (`xTooSmall`). */
   private holdsXForMore(state: GameState, offer: CastSpellLegal): boolean {
@@ -5515,6 +5562,7 @@ export class HeuristicBotController extends AutomaticController {
       !this.holdsOwnPhaseOut(state, o) &&
       !this.holdsTakeForBetter(state, o) &&
       !this.holdsRemovalForMore(state, o) &&
+      !this.holdsCounterForNothing(state, o) &&
       !this.holdsCloneForMore(state, o) &&
       !this.holdsXForMore(state, o) &&
       !this.holdsTopTutor(state, o) &&
@@ -6273,6 +6321,31 @@ const STEAL_FLOOR = 9;
 /** The least X an instant or sorcery with X in its cost is cast for
  * (`xTooSmall`). */
 const X_FLOOR = 3;
+const counterSlotsMemo = new WeakMap<object, readonly number[]>();
+
+/** The target slots a `counter` in `effect`'s tree acts on, nested or not
+ * (Mystic Confluence's sits in an `unless`): what `countersNothing` reads. */
+function counterSlots(effect: unknown): readonly number[] {
+  if (effect === null || typeof effect !== "object") return [];
+  const known = counterSlotsMemo.get(effect);
+  if (known !== undefined) return known;
+  const found = new Set<number>();
+  const walk = (node: unknown): void => {
+    if (node === null || typeof node !== "object") return;
+    if (Array.isArray(node)) {
+      for (const item of node) walk(item);
+      return;
+    }
+    const record = node as { readonly kind?: unknown; readonly target?: unknown };
+    if (record.kind === "counter" && typeof record.target === "number") found.add(record.target);
+    for (const value of Object.values(node)) walk(value);
+  };
+  walk(effect);
+  const slots = [...found];
+  counterSlotsMemo.set(effect, slots);
+  return slots;
+}
+
 /** The least mana value a spell has for a counterspell to be spent on it
  * (`removesTooLittle`): a Signet or a two-mana creature isn't worth the card. */
 const COUNTER_FLOOR = 3;

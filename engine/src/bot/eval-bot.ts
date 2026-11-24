@@ -2226,6 +2226,9 @@ export class EvalBotController extends HeuristicBotController {
     const aimed = (cast.targets ?? []).flat().some((target) => target !== null && target !== undefined);
     if (legal.targetOptions.length > 0 && legal.castModal === undefined && !aimed) return null;
     if (this.xTooSmall(view.state, legal, cast) || this.runsLibraryOut(view.state, legal)) return null;
+    // A counter at a spell it can't counter (`countersNothing`): the live
+    // misplay this check was written for was made here, out of time.
+    if (this.countersNothing(view.state, legal, cast)) return null;
     return cast;
   }
 
@@ -2336,6 +2339,8 @@ export class EvalBotController extends HeuristicBotController {
           if (this.removesTooLittle(view.state, legal, action, rankValue)) continue;
           // An X spell at too small an X (`xTooSmall`).
           if (this.xTooSmall(view.state, legal, action)) continue;
+          // A counter at a spell that can't be countered (`countersNothing`).
+          if (this.countersNothing(view.state, legal, action)) continue;
           const verdict = this.opponentPump(view.state, legal, action);
           if (verdict === "drop") continue;
           if (verdict !== "ok") mustKill.set(action, verdict.kills);

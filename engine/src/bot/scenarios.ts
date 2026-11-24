@@ -1878,7 +1878,6 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "holds Force of Will rather than aim it at a spell that can't be countered",
     rule: "A spell that can't be countered resolves all the same: a counterspell at it is a card thrown away.",
-    kind: "training",
     run(weights, registry) {
       // Reported from a live game (2026-11-24): the strong Y'shtola deck
       // "used a force of will on an uncounterable spell". Kept game TCZDM,
@@ -1889,6 +1888,8 @@ const SCENARIOS: readonly BotScenario[] = [
       // (`tooLittle`, `COUNTER_FLOOR`) weigh a spell's mana value, who it's
       // aimed at and whether it's a commander, never whether it can be
       // countered. Searched in full, v2 holds it: so this is asked out of time.
+      // Now `countersNothing` drops such a cast from v1's choices and v2's
+      // candidates, and from the cast v2 falls back on out of time.
       const game = table(registry, [A, B, C, D], B);
       lands(game, "Island", A, 5);
       lands(game, "Forest", B, 3);

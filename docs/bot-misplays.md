@@ -6,8 +6,8 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-24 — Force of Will at a spell that can't be countered
 
-Status: open. Scenario: "holds Force of Will rather than aim it at a spell that can't be countered"
-(training).
+Status: fixed 2026-11-24. Scenario: "holds Force of Will rather than aim it at a spell that can't be
+countered" (now gates); test: `bot-counters-nothing.test.ts`.
 
 Reported by the user: the strong Y'shtola deck "used a force of will on an uncounterable spell".
 Found in the kept games (`games/2026-11-24/TCZDM-1-1437207098.json.gz`, input 1520, turn 28): the
@@ -23,6 +23,12 @@ aimed at the bot or its things, whether it's a commander and whether any opponen
 cards, never whether it can be countered, and a 6-mana Dromoka is well over the floor. Searched in
 full, v2 holds it: its rollouts see the Dromoka resolve anyway. So the scenario asks out of time
 (`outOfTime`), as the live clock did.
+
+**Fixed:** `HeuristicBotController.countersNothing` finds the `counter` effects in the spell (or its chosen
+modes) and the target slot each acts on, and says whether that target is a spell or ability this
+spell can't counter. v1 won't cast it (`wouldCast`), v2 drops it from its candidates, and v2's cast out
+of time (`unscoredCast`) is held instead of made. Copying or redirecting such a spell is still cast.
+The plan was:
 
 **Likely fix:** in v1, never aim a counter at a spell that can't be countered by it, through the
 engine's own read (`spellCantBeCountered`, which takes the counterer for a "can't be countered by
