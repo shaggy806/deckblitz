@@ -41,8 +41,10 @@
 import type { CardDefinition } from "../cards/define.js";
 import { CHOSEN_CARD_NAME } from "../effects.js";
 import type { EffectSpec } from "../effects.js";
+import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
+import { thisWayEntries } from "../this-way.js";
 
 /** The most a dig may risk of losing the game outright. A commander deck's
  * one copy sits in Consultation's top six 6 times in N: 7% at eighty-eight
@@ -61,6 +63,10 @@ export const TAKE_ANY_AT = 30;
 const TAKE_SHARE = 0.8;
 /** Of our life, the most a dig is expected to cost (Spoils of the Vault). */
 const LIFE_SHARE = 0.25;
+/** The most a dig may risk for a card that wins the game this turn
+ * (`dig-win.ts`): found more often than not. One copy is clear of
+ * Consultation's six from a library of thirteen. */
+export const WIN_RISK_MAX = 0.5;
 
 /** A dig, as a card's effect spells it. */
 export type Dig =
@@ -152,19 +158,52 @@ export type Quality = (id: ObjectId) => number;
 interface Named {
   readonly name: string;
   readonly copies: number;
+  /** The copy nearest the top, which says nothing a bot may use: one to
+   * read the card by. */
+  readonly card: ObjectId;
   readonly quality: number;
 }
 
 function namesIn(state: GameState, library: readonly ObjectId[], quality: Quality): Named[] {
-  const byName = new Map<string, { copies: number; quality: number }>();
+  const byName = new Map<string, { copies: number; card: ObjectId; quality: number }>();
   for (const id of library) {
     const name = state.objects[id]?.cardName;
     if (name === undefined) continue;
     const seen = byName.get(name);
-    if (seen === undefined) byName.set(name, { copies: 1, quality: quality(id) });
+    if (seen === undefined) byName.set(name, { copies: 1, card: id, quality: quality(id) });
     else seen.copies += 1;
   }
   return [...byName.entries()].map(([name, each]) => ({ name, ...each }));
+}
+
+type NamedDig = Extract<Dig, { kind: "named" }>;
+
+/** The chance a named dig for a card with `copies` in a library of `size`
+ * loses the game outright: every copy in the cards exiled first, or, at a
+ * life a card, none among as many cards as we have `life`. The greater. */
+function ruinChance(dig: NamedDig, copies: number, size: number, life: number): number {
+  const missed = allWithin(copies, Math.min(dig.exiledFirst, size), size);
+  if (!dig.lifeEach) return missed;
+  const deep = size - life;
+  return Math.max(missed, deep < copies ? 0 : allWithin(copies, deep, size));
+}
+
+/**
+ * The names in `player`'s library a named dig finds with at most `risk` of
+ * losing the game on the way, whatever it leaves of the library: what a card
+ * that wins the game this turn is looked for among (`dig-win.ts`).
+ */
+export function namesWithinRisk(
+  state: GameState,
+  player: PlayerId,
+  dig: NamedDig,
+  risk: number,
+): { readonly name: string; readonly card: ObjectId }[] {
+  const library = state.zones.perPlayer[player]?.library ?? [];
+  const life = state.players[player]?.life ?? 0;
+  return namesIn(state, library, () => 0)
+    .filter((named) => ruinChance(dig, named.copies, library.length, life) <= risk)
+    .map(({ name, card }) => ({ name, card }));
 }
 
 /** A name to dig for, and what finding it is worth. */
@@ -186,7 +225,7 @@ export interface DigPick {
 export function nameToDigFor(
   state: GameState,
   player: PlayerId,
-  dig: Extract<Dig, { kind: "named" }>,
+  dig: NamedDig,
   quality: Quality,
 ): DigPick | null {
   const library = state.zones.perPlayer[player]?.library ?? [];
@@ -196,18 +235,12 @@ export function nameToDigFor(
   if (names.length === 0) return null;
   const first = Math.min(dig.exiledFirst, size);
   const safe = (named: Named): boolean => {
-    if (allWithin(named.copies, first, size) > RISK_MAX) return false;
+    if (ruinChance(dig, named.copies, size, life) > RISK_MAX) return false;
     // The copies spread evenly through what the first exile leaves: the
     // first of them a (k+1)th of the way down.
     const before = (size - first - named.copies) / (named.copies + 1);
     if (size - first - before - 1 < LEFT_MIN) return false;
-    if (dig.lifeEach) {
-      // Dead when no copy is among as many cards as we have life.
-      const deep = size - life;
-      const dead = deep < named.copies ? 0 : allWithin(named.copies, deep, size);
-      if (dead > RISK_MAX || before > LIFE_SHARE * life) return false;
-    }
-    return true;
+    return !dig.lifeEach || before <= LIFE_SHARE * life;
   };
   const byName = (a: Named, b: Named): number => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
   const wanted = names.filter(safe).sort((a, b) => b.quality - a.quality || b.copies - a.copies || byName(a, b));
@@ -255,4 +288,57 @@ export function takesOffered(
   const gone = new Set(exiled.map((id) => state.objects[id]?.cardName));
   const ends = library.filter((id) => gone.has(state.objects[id]?.cardName)).length / library.length;
   return quality(offered) >= TAKE_SHARE * bestIn(state, player, quality) * (1 - ends);
+}
+
+/**
+ * The card an until-taken dig of `player`'s is offering right now (Tainted
+ * Pact's "you may put that card into your hand", asked as a one-mode
+ * choice), with the dig's own card and every card it has exiled so far,
+ * the offered one last.
+ * `null` when that isn't what is being asked.
+ */
+export function offeredByDig(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+): { readonly source: ObjectId; readonly offered: ObjectId; readonly exiled: readonly ObjectId[] } | null {
+  const awaiting = state.awaiting;
+  if (awaiting?.kind !== "choose-modes" || awaiting.player !== player || awaiting.modes.length !== 1) return null;
+  const offer = awaiting.modes[0]?.effect;
+  if (offer?.kind !== "move-exiled-this-way" || offer.to !== "hand") return null;
+  const name = state.objects[awaiting.source]?.cardName;
+  if (name === undefined || !registry.has(name) || digOfCard(registry.get(name))?.kind !== "until-taken") return null;
+  const exiled = thisWayEntries(state, "exiled").map((entry) => entry.object);
+  const offered = exiled.at(-1);
+  if (offered === undefined || state.objects[offered]?.owner !== player) return null;
+  return { source: awaiting.source, offered, exiled };
+}
+
+/**
+ * The chance an until-taken dig that turns every other card down reaches a
+ * card named `name` before two cards of one name end it with nothing.
+ *
+ * Each other name is weighed alone and the chances multiplied: against a
+ * name with a card already exiled, the wanted card has to come before any
+ * of its copies in the library; against one with none exiled, before the
+ * second. One, then, in a library of all different names; 2 in 11 with ten
+ * Swamps in it.
+ */
+export function reachChance(state: GameState, player: PlayerId, exiled: readonly ObjectId[], name: string): number {
+  const gone = new Set(exiled.map((id) => state.objects[id]?.cardName));
+  if (gone.has(name)) return 0;
+  const copies = new Map<string, number>();
+  for (const id of state.zones.perPlayer[player]?.library ?? []) {
+    const each = state.objects[id]?.cardName;
+    if (each !== undefined) copies.set(each, (copies.get(each) ?? 0) + 1);
+  }
+  const wanted = copies.get(name) ?? 0;
+  if (wanted === 0) return 0;
+  let chance = 1;
+  for (const [each, count] of copies) {
+    if (each === name) continue;
+    if (gone.has(each)) chance *= wanted / (wanted + count);
+    else if (count >= 2) chance *= 1 - (count / (count + wanted)) * ((count - 1) / (count + wanted - 1));
+  }
+  return chance;
 }

@@ -693,7 +693,9 @@ best card it can find; a creature goes by its body; a land is 1.25 as the next l
 noncreature permanents stay at 1. A dig (Demonic Consultation, Tainted Pact; `bot/dig.ts`,
 2026-11-23) is priced as a tutor too: 0.85 of the card it would name among the names safe to
 dig for, or of what it expects to stop at; and our own cards in exile count into `library`, so
-what a dig exiles isn't charged 0.05 a card.
+what a dig exiles isn't charged 0.05 a card. A card that wins the game this turn is dug for
+past that rule (`bot/dig-win.ts`): found by playing the turn out with each castable card in hand,
+and named whenever it is found more often than not.
 
 What changed in how v2 picks: it casts cantrips, loots and tutors because the search scores
 them a gain, at any window where nothing else wants the mana (in its own main phase before the

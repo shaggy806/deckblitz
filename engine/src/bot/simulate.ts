@@ -217,8 +217,9 @@ export function simulateAction(
   horizon: Horizon,
   policy: RolloutPolicy = "passive",
   self?: PlayerController,
+  keepEvents = false,
 ): GameState | null {
-  return simulateRepeated(state, registry, action, horizon, policy, self, 1)?.state ?? null;
+  return simulateRepeated(state, registry, action, horizon, policy, self, 1, undefined, keepEvents)?.state ?? null;
 }
 
 /** The most activations one batch simulates — a bound on a free, untapped
@@ -245,11 +246,17 @@ export function simulateRepeated(
   repeat: number,
   next: (game: Game, previous: Action) => Action | null = (game, previous) =>
     canRepeat(game, previous) ? previous : null,
+  keepEvents = false,
 ): { readonly state: GameState; readonly times: number } | null {
   // The event log is roughly half the bytes of a mid-game state and nothing
   // downstream of here reads it — dropping it before the clone takes the copy
-  // from ~0.46ms to ~0.27ms.
-  const seed: GameState = { ...state, eventLog: [] };
+  // from ~0.46ms to ~0.27ms. One thing does read it: a resolution under way
+  // finds what it has done "this way" there (`this-way.ts`, from
+  // `resolutionSince` on), so a rollout begun inside one loses that with the
+  // log — Tainted Pact turned down mid-dig stops, its exiled cards
+  // forgotten. `keepEvents` is for the caller that starts there and needs
+  // the rest of the resolution right (`dig-win.ts`).
+  const seed: GameState = keepEvents ? state : { ...state, eventLog: [] };
   const startingTurn = state.turn.number;
 
   return rollout(() => {

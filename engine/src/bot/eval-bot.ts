@@ -98,6 +98,9 @@ import {
   withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
+import { digOf, namedDigIn, nameToDigFor, offeredByDig } from "./dig.js";
+import { winningName, winningOffer, winsByDigging } from "./dig-win.js";
+import { isNameableAs } from "../card-names.js";
 import {
   boardKey,
   nextTurnValue,
@@ -365,7 +368,7 @@ export interface DecisionAudit {
   readonly simulations: number;
   readonly ms: number;
   /** Which path answered: `"search"`, or the shortcut taken instead of one
-   * (`"batch replay"`, `"held pass"`, `"plan resolving"`, `"no candidates"`, `"payoff first"`,
+   * (`"batch replay"`, `"held pass"`, `"plan resolving"`, `"no candidates"`, `"payoff first"`, `"dig for the win"`,
    * `"reducer first"`, `"landfall first"`, `"fetch"`, `"only land"`, `"land search"`,
    * `"v1's answer"`; under a clock `"v1's cast"` and `"no time"`, an expired
    * search's unscored answer — `unscoredCast`). A capture records it (`server/src/capture.ts`), so a
@@ -1680,6 +1683,14 @@ export class EvalBotController extends HeuristicBotController {
       this.lastDecision = audit("priority", null, "hand mana");
       return handMana;
     }
+    // **A dig for the card that wins this turn** (`dig-win.ts`): cast now,
+    // whatever the library is down to. The search would cast it as a tutor
+    // only where `dig.ts` has a safe name to price it by.
+    const forTheWin = this.digForTheWin(view);
+    if (forTheWin !== null) {
+      this.lastDecision = audit("priority", null, "dig for the win");
+      return forTheWin;
+    }
 
     const player = this.playerId;
     const pass: Action = { type: "pass-priority", player };
@@ -2696,6 +2707,19 @@ export class EvalBotController extends HeuristicBotController {
    * priority move, v1's (`inherited`) the one to beat.
    */
   private decide(view: ControllerView, inherited: Action): Action {
+    // Tainted Pact's offer where a card wins the turn (`dig-win.ts`): the
+    // card taken, or every other turned down until it comes.
+    const dug = offeredByDig(view.state, this.cards, this.playerId);
+    if (dug !== null) {
+      const dig = `${view.state.turn.number}:${dug.source}`;
+      const sought = this.digSeeks?.dig === dig ? this.digSeeks.sought : undefined;
+      const forTheWin = winningOffer(view.state, this.cards, this.playerId, dug, sought);
+      this.digSeeks = { dig, sought: forTheWin.sought };
+      if (forTheWin.answer !== null) {
+        this.lastDecision = audit("decision", null, "dig for the win");
+        return { type: "choose-modes", player: this.playerId, modes: forTheWin.answer === "take" ? [0] : [] };
+      }
+    }
     // A shock land's 2 life is v1's call (`payLifeForUntapped`): it pays only
     // for a spell the untapped land casts this turn, and the rollouts pass our
     // own seat for the rest of the turn, so they never see that spell and
@@ -4569,6 +4593,78 @@ export class EvalBotController extends HeuristicBotController {
   private winsAsItResolves(state: GameState, action: Action): boolean {
     const resolved = simulateAction(state, this.cards, action, "stack", "passive");
     return resolved !== null && resolved.result.over && resolved.result.winner === this.playerId;
+  }
+
+  /** The turn and hand `digForTheWin` last played out: asked again with
+   * the same hand that turn, the answer is taken to be the same. */
+  private digWinAsked: string | null = null;
+  /** The Tainted Pact resolving (its turn and source) and the card its
+   * earlier offers found to dig on for (`winningOffer`'s `sought`). */
+  private digSeeks: { readonly dig: string; readonly sought: string | null } | null = null;
+
+  /**
+   * The cast of a dig in our hand (Demonic Consultation, Spoils of the
+   * Vault, Tainted Pact) that finds a card which wins the game this turn
+   * (`dig-win.ts`),
+   * or `null`. In our own main phase with the stack empty, where what it
+   * finds can be cast whatever it is; the name is chosen again as the dig
+   * resolves (`chooseCardName`), by the same playout.
+   */
+  private digForTheWin(view: ControllerView): Action | null {
+    const state = view.state;
+    const me = this.playerId;
+    if (state.turnOrder[state.turn.activePlayerIndex] !== me || state.zones.shared.stack.length > 0) return null;
+    if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return null;
+    const hand = state.zones.perPlayer[me].hand;
+    const asked = `${state.turn.number}:${hand.join(",")}`;
+    if (this.digWinAsked === asked) return null;
+    this.digWinAsked = asked;
+    for (const card of hand) {
+      const name = state.objects[card]?.cardName;
+      if (name === undefined || !this.cards.has(name)) continue;
+      const def = this.cards.get(name);
+      const dig = digOf(def.effect);
+      if (dig === null || def.targets.length > 0 || def.additionalCost !== null) continue;
+      if (!view.legalActions().some((legal) => legal.kind === "cast-spell" && legal.card === card)) continue;
+      const cast: Action = { type: "cast-spell", player: me, card, targets: [] };
+      const cost = manaValue(parseManaCost(def.manaCost));
+      if (dig.kind === "until-taken") {
+        if (winsByDigging(state, this.cards, me, cast, cost)) return cast;
+        continue;
+      }
+      const usual = nameToDigFor(state, me, dig, this.wantedInHand(state))?.name ?? null;
+      if (winningName(state, this.cards, me, dig, () => cast, usual, cost) !== null) return cast;
+    }
+    return null;
+  }
+
+  /**
+   * The name a dig of ours chooses: the card that wins the game this turn
+   * when there is one it finds more often than not (`dig-win.ts`), whatever
+   * the dig leaves of the library; otherwise v1's, the tutor's pick among
+   * the safe names (`dig.ts`).
+   */
+  chooseCardName(
+    view: ControllerView,
+    source: ObjectId,
+    options: readonly string[],
+    suggested: readonly string[],
+  ): string {
+    const usual = super.chooseCardName(view, source, options, suggested);
+    const awaiting = view.state.awaiting;
+    const me = this.playerId;
+    if (awaiting?.kind !== "choose-card-name" || awaiting.player !== me || awaiting.options !== undefined) return usual;
+    const dig = namedDigIn(awaiting.then);
+    if (dig?.kind !== "named") return usual;
+    const winner = winningName(
+      view.state,
+      this.cards,
+      me,
+      dig,
+      (name) => ({ type: "choose-card-name", player: me, name }),
+      usual,
+    );
+    return winner !== null && isNameableAs(this.cards, winner, awaiting.filter) ? winner : usual;
   }
 
   /**

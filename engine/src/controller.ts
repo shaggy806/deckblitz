@@ -48,8 +48,7 @@ import {
 import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { isNameableAs } from "./card-names.js";
-import { thisWayEntries } from "./this-way.js";
-import { digOfCard, namedDigIn, nameToDigFor, takesOffered } from "./bot/dig.js";
+import { namedDigIn, nameToDigFor, offeredByDig, takesOffered } from "./bot/dig.js";
 import { handCardQuality } from "./bot/hand-worth.js";
 import { LANDS_WANTED, chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
 import { combatCreatures, crackback, damageThrough, isLethal } from "./bot/combat-math.js";
@@ -4977,7 +4976,7 @@ export class HeuristicBotController extends AutomaticController {
   /** How much our hand wants each card that isn't in it, as v2's evaluation
    * reads a hand (`bot/hand-worth.ts`): what a tutor's find and a dig's name
    * are ranked by. */
-  private wantedInHand(state: GameState): (id: ObjectId) => number {
+  protected wantedInHand(state: GameState): (id: ObjectId) => number {
     const lands = state.zones.shared.battlefield.filter(
       (id) =>
         state.objects[id]?.controller === this.playerId &&
@@ -5058,15 +5057,9 @@ export class HeuristicBotController extends AutomaticController {
     // Pact): taken when it is near the best the library still holds
     // (`bot/dig.ts`), and turned down to dig on otherwise. `effectWorth`
     // calls any card a card, so the first one offered was always taken.
-    const offer = awaiting.modes.length === 1 ? awaiting.modes[0]?.effect : undefined;
-    if (offer?.kind === "move-exiled-this-way" && offer.to === "hand" && awaiting.player === this.playerId) {
-      const name = state.objects[awaiting.source]?.cardName;
-      const digs = name !== undefined && this.registry.has(name) && digOfCard(this.registry.get(name))?.kind === "until-taken";
-      const exiled = thisWayEntries(state, "exiled").map((entry) => entry.object);
-      const offered = exiled.at(-1);
-      if (digs && offered !== undefined && state.objects[offered]?.owner === this.playerId) {
-        return takesOffered(state, this.playerId, offered, exiled, this.wantedInHand(state)) ? [0] : [];
-      }
+    const dug = offeredByDig(state, this.registry, this.playerId);
+    if (dug !== null) {
+      return takesOffered(state, this.playerId, dug.offered, dug.exiled, this.wantedInHand(state)) ? [0] : [];
     }
     // "You may prevent X of that damage" (Battletide Alchemist): for damage
     // to us, prevent; to anyone else, let it through.
