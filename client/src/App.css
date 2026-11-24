@@ -4608,6 +4608,17 @@
 .hand-card-actions > button:hover {
   background: var(--gold);
 }
+/* The pills' mana symbols at the pills' own size. A pip is 13px wherever
+   nothing says otherwise, and the pills are drawn at 1/1.65 (`--pill`) and
+   scaled back up with their card: a pip stood as tall as its whole pill,
+   and nearly twice the words beside it (the user, 2026-11-23). As tall as
+   the pill's text now, at either size. */
+.hand-card-actions .pip {
+  width: calc(var(--text-sm) * var(--pill));
+  height: calc(var(--text-sm) * var(--pill));
+  font-size: calc(var(--text-sm) * var(--pill) * 0.7);
+  vertical-align: calc(-2px * var(--pill));
+}
 /* An ability the card can't use right now (`unavailableHandAbilities`): the
    same pill greyed, not a button, with why in a bubble over it while the
    pointer is on the pill or its card is the one grown. The bubble hangs off
