@@ -1875,6 +1875,40 @@ const SCENARIOS: readonly BotScenario[] = [
       },
     }),
   ),
+  {
+    name: "holds Force of Will rather than aim it at a spell that can't be countered",
+    rule: "A spell that can't be countered resolves all the same: a counterspell at it is a card thrown away.",
+    kind: "training",
+    run(weights, registry) {
+      // Reported from a live game (2026-11-24): the strong Y'shtola deck
+      // "used a force of will on an uncounterable spell". Kept game TCZDM,
+      // turn 28: the Y'shtola bot exiled a blue card to Force of Will a
+      // Dragonlord Dromoka ("This spell can't be countered"), the record's
+      // `via` "v1's cast": the clock ran out on that board before the search
+      // scored anything, and v1's cast went unscored. v1's counterspell rules
+      // (`tooLittle`, `COUNTER_FLOOR`) weigh a spell's mana value, who it's
+      // aimed at and whether it's a commander, never whether it can be
+      // countered. Searched in full, v2 holds it: so this is asked out of time.
+      const game = table(registry, [A, B, C, D], B);
+      lands(game, "Island", A, 5);
+      lands(game, "Forest", B, 3);
+      lands(game, "Plains", B, 3);
+      for (const player of [C, D]) lands(game, "Forest", player, 4);
+      holding(game, [B, C, D], 3);
+      game.debugSpawn("Force of Will", A, "hand");
+      game.debugSpawn("Brainstorm", A, "hand");
+      const dromoka = game.debugSpawn("Dragonlord Dromoka", B, "hand");
+      castAndPassTo(game, B, dromoka, A);
+      if (game.state.objects[dromoka]?.zone !== "stack") {
+        return { passed: false, detail: "Dragonlord Dromoka never reached the stack" };
+      }
+      const action = outOfTime(registry, weights).act(viewOf(game, A));
+      return {
+        passed: !(action.type === "cast-spell" && (action.targets ?? []).some((t) => t?.kind === "object" && t.object === dromoka)),
+        detail: `with bob's Dragonlord Dromoka on the stack, chose ${describeAction(action)}`,
+      };
+    },
+  },
   // --- answers at an uneven table (the bot audit, Q4) -------------------------
   // Every answers scenario above is a level table, where whoever casts is the
   // strongest opponent by construction. `scoreOutcome` takes the strongest

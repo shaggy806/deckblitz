@@ -4,6 +4,37 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-24 — Force of Will at a spell that can't be countered
+
+Status: open. Scenario: "holds Force of Will rather than aim it at a spell that can't be countered"
+(training).
+
+Reported by the user: the strong Y'shtola deck "used a force of will on an uncounterable spell".
+Found in the kept games (`games/2026-11-24/TCZDM-1-1437207098.json.gz`, input 1520, turn 28): the
+Y'shtola bot (dave) exiled a blue card to cast Force of Will at alice's Dragonlord Dromoka, whose
+own text says it can't be countered (rule 701.5f: a spell that can't be countered is still a legal
+target, and the counter does nothing to it). It resolved anyway, and the bot was down Force of
+Will, the blue card and a life.
+
+**Why:** the record's `via` is "v1's cast": on that board the clock ran out before v2's search
+scored anything, so v1's cast went out unscored (`unscoredCast`). v1's counterspell rules
+(`controller.ts`'s `tooLittle`, with `COUNTER_FLOOR`) weigh the spell's mana value, whether it's
+aimed at the bot or its things, whether it's a commander and whether any opponent still holds
+cards, never whether it can be countered, and a 6-mana Dromoka is well over the floor. Searched in
+full, v2 holds it: its rollouts see the Dromoka resolve anyway. So the scenario asks out of time
+(`outOfTime`), as the live clock did.
+
+**Likely fix:** in v1, never aim a counter at a spell that can't be countered by it, through the
+engine's own read (`spellCantBeCountered`, which takes the counterer for a "can't be countered by
+blue spells" grant, and `GameObject.uncounterable` for Cavern of Souls). Most simply in
+`tooLittle` (a target that can't be countered is too little), or wider: in what v1 offers itself
+as a counter's targets, which would cover every counterspell and ability v1 casts. Might break:
+a counterspell with a rider that still does something to an uncounterable spell (Disallow-style
+"counter target spell, activated or triggered ability" doesn't; Dovin's Veto's text is its own
+uncounterability; a "counter unless its controller pays" against an uncounterable spell does
+nothing either) — riders that act regardless (draw a card, Mystic Confluence's other modes) would
+want the counter mode skipped, not the whole spell.
+
 ## 2026-11-23 — Chrome Mox cast and nothing imprinted
 
 Status: fixed 2026-11-23. Scenario: "imprints a card on Chrome Mox" (now gates); test:
