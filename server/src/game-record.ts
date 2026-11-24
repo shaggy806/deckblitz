@@ -333,10 +333,16 @@ export interface ReplayResult {
 export function replayRecord(
   record: RecordSoFar & Partial<Pick<GameRecord, "end" | "where">>,
   registry: CardRegistry,
-  options: { readonly upTo?: number; readonly stop?: (game: Game, applied: number) => boolean } = {},
+  options: {
+    readonly upTo?: number;
+    readonly stop?: (game: Game, applied: number) => boolean;
+    /** The game as dealt, before the first input (`scripts/record-to-replay.mjs`'s first board). */
+    readonly start?: (game: Game) => void;
+  } = {},
 ): ReplayResult {
   let game = Game.create({ ...record.config, registry });
   game.advanceUntil(isSettled);
+  options.start?.(game);
   const limit = Math.min(options.upTo ?? record.inputs.length, record.inputs.length);
   let applied = 0;
   let dropped = 0;

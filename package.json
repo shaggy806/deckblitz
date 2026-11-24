@@ -20,7 +20,8 @@
     "games:pull": "node scripts/games-pull.mjs",
     "games:players": "node scripts/games-players.mjs",
     "games:space": "ssh deckblitz curl -s localhost:4010/games",
-    "game:replay": "node scripts/game-replay.mjs"
+    "game:replay": "node scripts/game-replay.mjs",
+    "game:to-replay": "node scripts/record-to-replay.mjs"
   },
   "repository": {
     "type": "git",

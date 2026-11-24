@@ -353,7 +353,9 @@ From the dev PC: `npm run games:pull` copies them into `games/` there and delete
 plays one again (`--log` writes the whole game as text, `--turn N` stops there and saves the
 position, `--bots` lists the bot moves that weren't a finished search). A record plays exactly only
 on the commit it names: the replay says so when this checkout isn't it and the game comes out
-different.
+different. `npm run game:to-replay -- games/<day>/<file> [--seat <player or name>] [--open]` turns
+one into a file the site's replay viewer opens (Settings, "Watch a replay…"): from one seat, or
+with `--open` every hand face up in the players' panels (`scripts/record-to-replay.mjs`).
 
 ### Why it is a second listener, and not a route on :4000
 

@@ -131,7 +131,7 @@ them in full.
 
 Local servers: the `dev-up` / `dev-down` skills start and stop `dev-rooms` (the room server with its
 
-**Played games**: every game on the live site is kept as its deal and its inputs (`server/src/game-record.ts`, `DEPLOYMENT.md` "Played games"). `npm run games:pull` fetches them into `games/` over SSH and deletes them on the box; `npm run game:replay -- games/<day>/<file> [--log] [--turn N] [--bots]` plays one again, every hand and library in it. Reach for it when a play is reported without a log or a capture.
+**Played games**: every game on the live site is kept as its deal and its inputs (`server/src/game-record.ts`, `DEPLOYMENT.md` "Played games"). `npm run games:pull` fetches them into `games/` over SSH and deletes them on the box; `npm run game:replay -- games/<day>/<file> [--log] [--turn N] [--bots]` plays one again, every hand and library in it. Reach for it when a play is reported without a log or a capture. `npm run game:to-replay -- games/<day>/<file> [--seat <name>] [--open]` makes it a file to watch in the site's replay viewer (Settings, "Watch a replay…"), `--open` with every hand face up.
 preloaded test boards; the plain server if asked) and Vite. Scripts and the fuzzer run `dist/`, so build before running them.
 
 ## Git workflow
