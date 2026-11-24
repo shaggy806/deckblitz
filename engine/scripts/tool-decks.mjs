@@ -13,6 +13,7 @@
 // `src/sample-decks.ts`, and then leaves this file on the next generate.
 
 import { readFileSync } from "node:fs";
+import { basename, resolve } from "node:path";
 
 import { STARTER_DECKS, STRONG_DECKS } from "../dist/index.js";
 
@@ -27,6 +28,13 @@ export const TOOL_DECKS = [...STRONG_DECKS, ...STARTER_DECKS, ...TOOLING_PRECONS
  * still the strong deck, and "Draconic Domination" the 2017 precon it leads.
  */
 export function findDeck(name) {
+  // A deck of a player's own, as a file: `{ name, cards, commanders }`, the
+  // shape a kept game's record holds each seat's deck in (`games/`; the
+  // user, 2026-11-23: bench a friend's deck against the strong bots).
+  if (name.trim().endsWith(".json")) {
+    const deck = JSON.parse(readFileSync(resolve(name.trim()), "utf8"));
+    return { name: deck.name ?? basename(name.trim(), ".json"), cards: deck.cards, commanders: deck.commanders ?? [] };
+  }
   const wanted = name.trim().toLowerCase();
   const deck =
     TOOL_DECKS.find((d) => d.name.toLowerCase() === wanted) ?? TOOL_DECKS.find((d) => d.name.toLowerCase().includes(wanted));
