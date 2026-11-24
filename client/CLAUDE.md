@@ -37,6 +37,11 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
   a tour points at a control through it, never through a class name, and
   `e2e/site-tour.spec.ts` (in `test:e2e:full`) fails when one goes missing. Keep the attribute when you restyle or
   move a control it's on.
+- **A touch device has its own behaviour, and a mouse's page never changes for it** (the user,
+  2026-11-23). Gate anything for a finger on `ui/touch.ts` (`useTouch()`, or
+  `:root[data-touch]` in CSS), never on the window's width; size what a finger hits by
+  `--touch-k`, since a phone may show the whole page shrunk. A tap is a hover and a click at
+  once: nothing may act on the tap that opens or reads it.
 - **Art URLs go through `ui/art.ts`'s `resolveArtUrl`** (host-checked against
   `ALLOWED_ART_HOSTS`), and into CSS through `cssUrl()`, always.
 
@@ -55,7 +60,9 @@ that file. The board-overhaul record is `BOARD_REDESIGN_PLAN.md`.
   box own the width.
 - **Verify every UI change live in the browser, in both a 2-player and a 3–4 player room, and at
   a short (~768px tall) viewport.** The Playwright smoke suite (`npm run test:e2e -w client`)
-  only catches a page that no longer loads, not a layout that got worse.
+  only catches a page that no longer loads, not a layout that got worse. Touch work is checked
+  in Playwright with a device's touch emulated (`e2e/touch-hand.spec.ts`: a tablet, and a phone
+  showing the desktop page shrunk), and at the desktop sizes again to show they didn't move.
 
 The full text of each rule, with the bug that prompted it, is in `docs/architecture/client.md`.
 

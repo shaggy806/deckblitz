@@ -72,6 +72,7 @@ import { mulliganLive, tableActions } from './game/tableActions.ts'
 import { abilitiesBySource as abilitiesBySourceOf } from './game/abilityMenu.ts'
 import type { AbilityAction } from './game/abilityMenu.ts'
 import { useEscape } from './ui/useEscape.ts'
+import { useTouch } from './ui/touch.ts'
 import { computeBoardEntries } from './game/board.ts'
 import { applyBoardOrder } from './game/boardOrder.ts'
 import { useBoardDrag, type BoardDragControls } from './game/useBoardDrag.ts'
@@ -1630,6 +1631,10 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // close itself the moment anything happened — including the card you just
   // played from inside it.
   const [handGrid, setHandGrid] = useState(false)
+  // The hand card a finger last tapped, on a touch device (`ui/touch.ts`):
+  // drawn grown as a hovered one is, and played by a second tap. Up here as
+  // `handRaised` is, or every frame would drop it.
+  const [handPick, setHandPick] = useState<ObjectId | null>(null)
   // Whose dungeon map is open: here rather than in `Table`, so it stays open
   // across frames (`TableProps.dungeonView`).
   const [dungeonViewOf, setDungeonViewOf] = useState<PlayerId | null>(null)
@@ -1637,8 +1642,8 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
   // whenever anything happened (an opponent's spell, a trigger).
   const [openZoneOf, setOpenZoneOf] = useState<OpenZone | null>(null)
   const hand = useMemo(
-    () => ({ handRaised, setHandRaised, handGrid, setHandGrid }),
-    [handRaised, handGrid],
+    () => ({ handRaised, setHandRaised, handGrid, setHandGrid, handPick, setHandPick }),
+    [handRaised, handGrid, handPick],
   )
   // The order you've dragged your own permanents into, and the drag under
   // way. Up here so a frame arriving mid-drag doesn't drop the tile.
@@ -2052,6 +2057,11 @@ interface TableProps {
      * card out of a hand too big to fan (see `HAND_GRID_THRESHOLD`). */
     readonly handGrid: boolean
     readonly setHandGrid: (open: boolean) => void
+    /** The hand card last tapped on a touch device, shown grown: a tap has
+     * no hover, so the first tap on a card reads it and the second plays it
+     * (`tapHandCard`). Always null with a mouse. */
+    readonly handPick: ObjectId | null
+    readonly setHandPick: (card: ObjectId | null) => void
   }
   /** The board shown before this one: what `Stack` needs to animate only its
    * new arrivals, and `ArrowLayer` only its new arrows. */
@@ -2114,7 +2124,11 @@ function Table({
   // frame it's keyed on, and a local `useState` here dropped the hand back
   // into its tray the instant you played a card -- out from under a cursor
   // that was still sitting on it, mid-reach for the next one.
-  const { handRaised, setHandRaised, handGrid, setHandGrid } = hand
+  const { handRaised, setHandRaised, handGrid, setHandGrid, handPick, setHandPick } = hand
+  // A touch device (`ui/touch.ts`): the tray is raised and lowered by its own
+  // button, never by where the pointer is, and a hand card is read by one tap
+  // and played by the next. Nothing below changes for a mouse.
+  const touch = useTouch()
   // Measured (not guessed) hand-row layout, recomputed whenever the row's
   // real rendered width changes (viewport resize, peekable<->in-flow mode
   // switch) or the hand's card count changes -- see HAND_CARD_GAP's comment.
@@ -3708,6 +3722,38 @@ function Table({
       else if (opts.length > 0 && view.objects[id]?.zone === 'hand') setSelectedSource((cur) => (cur === id ? null : id))
     },
     [bottomAction, discardAction, revealChoiceAction, mode, playFace, playFacesByCard, view.objects],
+  )
+
+  /** A click on a hand card's tile. With a mouse, `clickHandCard`. By touch,
+   * where the tap is the hover too, the first tap on a card only picks it
+   * (grown, to be read) and a second plays it; then the tray goes down, since
+   * on a phone it covers the board the spell is aimed at or paid from — but
+   * not under a menu of ways to play it, which hangs from the card. A
+   * decision's picks from the hand (a discard) toggle at once, as a click
+   * does: nothing there is lost by a tap. */
+  const tapHandCard = useCallback(
+    (id: ObjectId) => {
+      if (!touch || mode === 'mulligan') {
+        clickHandCard(id)
+        return
+      }
+      if (mode !== 'priority') {
+        setHandPick(id)
+        clickHandCard(id)
+        return
+      }
+      if (handPick !== id) {
+        setHandPick(id)
+        return
+      }
+      clickHandCard(id)
+      const ways = playFacesByCard.get(id) ?? []
+      if (ways.length === 1 && !needsOwnButton(ways[0])) {
+        setHandPick(null)
+        setHandRaised(false)
+      }
+    },
+    [touch, mode, handPick, clickHandCard, playFacesByCard, setHandPick, setHandRaised],
   )
 
   /** Which id a click on a (possibly stacked) tile should act on. */
@@ -7677,7 +7723,7 @@ function Table({
               disabled={!canPass}
               title="Pass priority once: do nothing now, so the top of the stack resolves or the turn moves to its next step (space)"
             >
-              Pass (space)
+              {touch ? 'Pass' : 'Pass (space)'}
             </button>
             <button
               type="button"
@@ -8104,14 +8150,17 @@ function Table({
         className={`hand-strip ${peekable ? 'peekable' : 'idle'} ${handRaised || handForcedOpen || lesson?.step?.showHand === true ? 'raised' : ''} ${
           handForcedOpen ? 'hand-decision' : ''
         }`}
-        onMouseLeave={() => setHandRaised(false)}
+        // By touch the tray's own button raises and lowers it (below): a
+        // tap sends these too, as it lands and as the next one lands
+        // elsewhere.
+        onMouseLeave={touch ? undefined : () => setHandRaised(false)}
       >
-        {peekable ? (
+        {peekable && !touch ? (
           <div className="hand-trigger" onMouseEnter={() => setHandRaised(true)} />
         ) : null}
         <div
           className="hand-strip-inner"
-          onMouseEnter={peekable ? () => setHandRaised(true) : undefined}
+          onMouseEnter={peekable && !touch ? () => setHandRaised(true) : undefined}
         >
           {renderHandAndControls()}
         </div>
@@ -8238,13 +8287,22 @@ function Table({
           // choice, and opens it too.
           const multiFace = faceOpts.length > 1 || faceOpts.some(needsOwnButton)
           return (
-            <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
+            <div
+              key={id}
+              className={touch && handPick === id ? 'hand-card touch-picked' : 'hand-card'}
+              data-obj-id={id}
+              style={slotStyle}
+            >
               <CardTile
                 obj={obj}
                 highlight={highlight || Boolean(suspend) || Boolean(foretell) || Boolean(plot) || Boolean(cycle) || handAbilities.length > 0}
                 selected={selected || (multiFace && selectedSource === id)}
                 layout="art-first"
-                onClick={() => clickHandCard(id)}
+                onClick={() => tapHandCard(id)}
+                // By touch a card that can't be played now still takes the
+                // tap that picks it, to be read. Not in the mulligan's
+                // popup, where no card grows.
+                takesTap={touch && mode !== 'mulligan'}
               />
               {/* Beside the card once it has grown under the pointer, on the
                   side facing the middle of the hand (App.css): a double-faced
@@ -8435,6 +8493,24 @@ function Table({
       </main>
 
       {renderHandStrip()}
+
+      {/* A finger can't hover the tray open, and a tap on a lowered card
+          played it (`docs/client-gaps.md`): by touch the lowered tray takes
+          no taps and this button raises and lowers it. Not while a decision
+          holds the tray open. */}
+      {touch && peekable && !handForcedOpen && !handGrid ? (
+        <button
+          type="button"
+          className={handRaised ? 'hand-toggle open' : 'hand-toggle'}
+          aria-pressed={handRaised}
+          onClick={() => {
+            setHandPick(null)
+            setHandRaised(!handRaised)
+          }}
+        >
+          {handRaised ? 'Hide hand' : `Hand (${handIds.length})`}
+        </button>
+      ) : null}
 
       {mode === 'priority' ? (
         <div className="priority-actions" data-tour="game-priority">{controls}</div>

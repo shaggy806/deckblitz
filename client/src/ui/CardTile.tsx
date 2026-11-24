@@ -71,6 +71,11 @@ export interface CardTileProps {
    * board's hover card lists them in its tips column instead (`MiniTile`). */
   readonly notesAside?: boolean
   readonly onClick?: () => void
+  /** Take `onClick` even with nothing to do (not highlighted, selected or
+   * activatable), where the tile is otherwise a disabled button: a hand card
+   * on a touch device, whose first tap picks it to be read (`App.tsx`'s
+   * `tapHandCard`). It is drawn as before, without the `clickable` class. */
+  readonly takesTap?: boolean
   /** The owner's seat class (`seatClassOf`), for a face-down permanent's
    * card back in their colour (`faceDownArtClass`); `null` for the plain
    * back. */
@@ -183,6 +188,7 @@ export function CardTile({
   ownerSeat = null,
   notesAside = false,
   onClick,
+  takesTap = false,
 }: CardTileProps) {
   // A Clone renders the *copied* card's face; a multi-face card renders its up
   // face (`faceName`); `cardName` stays the true identity for the log.
@@ -395,8 +401,8 @@ export function CardTile({
       type="button"
       ref={tileRef}
       className={classes}
-      onClick={clickable ? onClick : undefined}
-      disabled={!clickable}
+      onClick={clickable || takesTap ? onClick : undefined}
+      disabled={!clickable && !(takesTap && Boolean(onClick))}
     >
       {artFirst ? null : (
         <span className="ct-title">

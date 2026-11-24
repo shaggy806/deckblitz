@@ -1511,6 +1511,128 @@
   box-shadow: var(--bevel-pressed), var(--shadow-raised);
 }
 
+/* ---- A touch device (`ui/touch.ts`): `:root[data-touch]` ----
+   Everything in this block is a phone's or a tablet's alone. A mouse's page
+   reads none of it, and must not come to (the user, 2026-11-23).
+
+   `--touch-k` is how many CSS pixels the page spends on one of the screen's:
+   1 on a tablet, or a phone whose page is as wide as its screen; about 2.4
+   on a phone showing the whole desktop board shrunk to fit (Chrome's
+   "Desktop site", and where the phone view is headed). What a finger has to
+   hit or read is drawn that much larger, through the interface's own scale
+   (`--ui`) and the text tokens hung off it: restated here, since a token is
+   worked out where it is declared and these come down from `:root`. */
+:root[data-touch] :is(.hand-strip, .priority-actions, .decision-banner, .hand-toggle) {
+  --ui: var(--touch-k, 1);
+  --text-2xs: calc(10px * var(--ui));
+  --text-xs: calc(11px * var(--ui));
+  --text-sm: calc(12px * var(--ui));
+  --text-md: calc(13px * var(--ui));
+  --text-base: calc(15px * var(--ui));
+  --text-lg: calc(18px * var(--ui));
+  --text-xl: calc(22px * var(--ui));
+  --ct-scale: var(--ui);
+}
+:root[data-touch] .app {
+  /* The screen's height as it is now: a phone's `100vh` is its height with
+     the address bar put away, so with the bar showing the page was taller
+     than the screen and scrolled. */
+  height: 100dvh;
+  /* The bottom row holds a finger's buttons (44 of the screen's pixels tall,
+     below), not a pointer's. */
+  --bottom-band: calc(60px * var(--touch-k, 1));
+}
+/* The hand's cards as large in the hand as on a phone page as wide as its
+   screen (96px there: index.css's --hand-card-w). */
+:root[data-touch] .hand-strip {
+  --card-w: max(var(--hand-card-w), calc(96px * var(--touch-k, 1)));
+}
+/* The lowered tray takes no taps: a tap is the hover and the click at once,
+   so the one meant to open the hand played the card under the finger. Its
+   button (below) raises it, and nothing else does: not a focused card
+   either, which held it up over the board after a spell was cast from it. */
+:root[data-touch] .hand-strip.peekable:not(.raised) .hand-cards {
+  pointer-events: none;
+}
+:root[data-touch] .hand-strip.peekable:not(.raised):focus-within .hand-strip-inner {
+  translate: 0 calc(100% - var(--hand-peek));
+}
+/* Raised, the fan stands on the row of buttons rather than behind it: on a
+   phone held upright that row is as wide as the screen, and a card under it
+   can't be tapped. Not on a phone on its side, where the row's buttons are
+   at its two ends and a picked card, grown, would run off the top of a
+   screen that short. */
+:root[data-touch='narrow'] .hand-strip.peekable.raised:not(.hand-decision) .hand-strip-inner {
+  translate: 0 calc(-1 * var(--bottom-band));
+}
+@media (min-height: 560px) {
+  :root[data-touch='wide'] .hand-strip.peekable.raised:not(.hand-decision) .hand-strip-inner {
+    translate: 0 calc(-1 * var(--bottom-band));
+  }
+}
+/* Only the picked card's pills take a tap: on the others they are a third
+   smaller, and beside the card the finger is going for. */
+:root[data-touch] .hand-strip .hand-card:not(.touch-picked) > .hand-card-actions {
+  pointer-events: none;
+}
+/* In the grid nothing grows, so the picked card is ringed instead. */
+:root[data-touch] .hand-grid .hand-card.touch-picked > .card-tile {
+  outline: calc(2px * var(--touch-k, 1)) solid var(--accent);
+  outline-offset: 2px;
+}
+/* The tray's button: bottom left, in the row the Pass bar ends. */
+.hand-toggle {
+  position: fixed;
+  left: clamp(10px, 1.4vw, 18px);
+  bottom: clamp(12px, 2vh, 20px);
+  z-index: 121;
+  min-width: calc(88px * var(--touch-k, 1));
+  min-height: calc(44px * var(--touch-k, 1));
+  padding: 0 calc(12px * var(--touch-k, 1));
+  font-size: var(--text-base);
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--bevel), var(--shadow-raised);
+}
+.hand-toggle.open {
+  box-shadow: var(--bevel-pressed), var(--shadow-raised);
+}
+:root[data-touch] .priority-actions .controls {
+  gap: calc(8px * var(--touch-k, 1));
+  /* Beside the tray's button, never over it: the row wraps upward first. */
+  max-width: calc(100vw - var(--side-panel) - 124px * var(--touch-k, 1));
+  font-size: var(--text-base);
+}
+:root[data-touch] .priority-actions .controls button {
+  min-height: calc(44px * var(--touch-k, 1));
+  padding: 0 calc(12px * var(--touch-k, 1));
+}
+/* A decision's banner, where every decision but the mulligan is answered:
+   its words and buttons a finger's size too. */
+:root[data-touch] .decision-banner {
+  width: min(calc(100vw - var(--side-panel) - 28px), calc(560px * var(--touch-k, 1)));
+}
+:root[data-touch] .decision-banner .controls {
+  gap: calc(8px * var(--touch-k, 1));
+  padding: calc(8px * var(--touch-k, 1)) calc(12px * var(--touch-k, 1));
+  font-size: var(--text-base);
+}
+:root[data-touch] .decision-banner .controls button {
+  min-height: calc(44px * var(--touch-k, 1));
+  padding: 0 calc(12px * var(--touch-k, 1));
+}
+/* A phone held upright has no room in that row for a decision's banner too:
+   the banner sits over the row. */
+:root[data-touch='narrow'] .decision-banner {
+  bottom: calc(clamp(12px, 2vh, 20px) + 52px * var(--touch-k, 1));
+}
+:root[data-touch='narrow'] .priority-actions .controls {
+  gap: calc(6px * var(--touch-k, 1));
+  font-size: calc(14px * var(--touch-k, 1));
+}
+:root[data-touch='narrow'] .priority-actions .controls button {
+  padding: 0 calc(8px * var(--touch-k, 1));
+}
+
 /* Every mode's decision controls except priority (its own .priority-actions
    corner) and the mulligan (its own popup) float here instead -- discard and
    put-on-bottom too, with the hand tray held open under them (App.tsx's
@@ -3793,6 +3915,7 @@
   right: calc(50% + var(--card-w) * 0.825 + 8px);
 }
 .hand-cards .hand-card:hover .hand-kw-tips,
+.hand-cards .hand-card.touch-picked .hand-kw-tips,
 .hand-cards .hand-card.hover-carry .hand-kw-tips {
   display: flex;
 }
@@ -4187,6 +4310,7 @@
 }
 .hand-cards .hand-card:hover,
 .hand-cards .hand-card.hover-carry,
+.hand-cards .hand-card.touch-picked,
 .hand-cards .hand-card:focus-within {
   /* Comfortably above any --z a hand can produce (even a huge hand stays
      under 1000) so the hovered/grown card is always on top regardless of
@@ -4213,6 +4337,7 @@
    own hover reveal) enlarges its already-shrunk text right along with it. */
 .hand-cards .hand-card:hover .card-tile,
 .hand-cards .hand-card.hover-carry .card-tile,
+.hand-cards .hand-card.touch-picked .card-tile,
 .hand-cards .hand-card:focus-within .card-tile {
   translate: 0 -30px;
   rotate: 0deg;
@@ -4297,12 +4422,12 @@
    at instead (`--read-scale`, up to 0.8) and how much taller the card must be
    for it (`--read-extra`); the hovered card grows upward by that much, its
    bottom edge where it was. */
-.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, :focus-within) > .card-tile,
+.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .card-tile,
 .hand-strip .hand-cards .hand-card[data-sweep] > .card-tile {
   height: calc(var(--card-w) * 1.4 + var(--read-extra, 0px));
   margin-top: calc(-1 * var(--read-extra, 0px));
 }
-.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, :focus-within) > .card-tile .ct-text,
+.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .card-tile .ct-text,
 .hand-strip .hand-cards .hand-card[data-sweep] > .card-tile .ct-text {
   --text-scale: var(--read-scale, var(--fit-scale, 1));
 }
@@ -4354,6 +4479,7 @@
   transform-origin: bottom right;
 }
 .hand-cards .hand-card:hover .hand-other-face,
+.hand-cards .hand-card.touch-picked .hand-other-face,
 .hand-cards .hand-card.hover-carry .hand-other-face {
   visibility: visible;
 }
@@ -4577,7 +4703,7 @@
 /* The grown card (`.hand-card:hover .card-tile`: lifted 30px, upright, 1.65x
    from its bottom edge, and taller by --read-extra for a wordy one, which
    the scale carries up with the rest). */
-.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, :focus-within) > .hand-card-actions,
+.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .hand-card-actions,
 .hand-strip .hand-cards .hand-card[data-sweep] > .hand-card-actions {
   rotate: 0deg;
   scale: 1.65;
@@ -4673,7 +4799,7 @@
   pointer-events: none;
   transition: opacity 0.12s ease;
 }
-.hand-card:is(:hover, .hover-carry, :focus-within) > .hand-card-actions > .hand-ability-off::after,
+.hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .hand-card-actions > .hand-ability-off::after,
 .hand-grid .hand-ability-off:hover::after {
   opacity: 1;
 }

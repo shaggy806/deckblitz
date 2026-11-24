@@ -23,7 +23,11 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   The Foretell button shows no cost now that Ranar and Cosmos Charger change it.
 
 - **A touch view for phones and tablets** (the user, 2026-11-23: a friend plays on a phone and
-  finds the hand hard to open; surveyed that day, nothing built). The rule: a touch device gets
+  finds the hand hard to open; surveyed that day, and step 1 of the order below built). **Where
+  it is headed** (the user, the same day, of the friend's screenshot): a phone shows the board
+  as that screenshot does — the whole desktop board, every seat at once, drawn small — and
+  never scrolls; what a finger has to hit or read is drawn large over it. So not a phone layout
+  of its own. The rule: a touch device gets
   its own view and a mouse-and-keyboard player sees no change, so every change is gated on the
   device (`(hover: none) and (pointer: coarse)`, read once into a `data-touch` attribute on the
   root as `data-reduce-motion` is), never on window width alone. Surveyed in Playwright's
@@ -67,13 +71,27 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
     whole (iPad Mini on its side is 1024x768, close to the 1366x768 the suite runs at): there
     only the taps are wrong. The landing page, library and deck builder reflow to one column
     and are usable; the landing's "New here?" card covers the room-code field at 390px.
-  Proposed order: (1) the device flag and the hand — a Hand button in the Pass bar that raises
-  and lowers the tray, the lowered tray taking no taps, a tap on a raised card selecting it
-  (grown, readable) and a second tap or a Play pill playing it; (2) reading — a tap on a
-  permanent opens its card, sized to the screen, with its actions as buttons, and a long press
-  does the same anywhere; (3) the top bar folded into one menu on a narrow screen; (4) a phone
-  layout for the board (your seat and one opponent at a time, panel heads cut to a line), which
-  is the large piece; (5) larger targets. Not measured: a room on a phone's own worker (local
+  **Built (step 1, 2026-11-23):** `ui/touch.ts` (the flag, and `--touch-k`: how many CSS
+  pixels the page spends on one of the screen's, 2.38 for the friend's 980px page on a 412px
+  screen); the lowered tray takes no taps and a **Hand** button, bottom left, raises and lowers
+  it; a tap on a raised card picks it (grown, as a hovered one) and a second plays it, the tray
+  going down after; the Hand button, the Pass bar, the decision banner and the hand's cards
+  are sized by `--touch-k`, so they are a finger's size in either mode (44 of the screen's
+  pixels tall; the hand's cards 96 wide, 158 picked); the page is `100dvh` tall by touch, so
+  the address bar no longer makes it scroll. `e2e/touch-hand.spec.ts`. Desktop compared before
+  and after at 1366x768, 1920x1080 and 2560x1440, tray lowered and hovered, 2 and 4 players:
+  the same pixels, to the handful that differ between two runs of one build. **Not checked on a
+  real phone or in Safari**: whether `screen.width` is the screen's own width in Chrome's
+  Desktop site mode (if it reports the page's, `--touch-k` is 1 and the buttons are as small
+  as before, no worse), and whether `100dvh` ends the scroll there.
+  **Left, in order:** (2) reading — a tap on a permanent opens its card at a size to read, with
+  what it can do as buttons, never acting in the same tap; (3) the rest of what a finger
+  answers, sized by `--touch-k`: the mulligan, zone viewers, menus (ways to play, abilities),
+  the X and number boxes, the top bar's buttons and menus; (4) a phone whose page is as wide
+  as its screen laid out 980px wide too (the viewport tag set by script, on the game page
+  only), so both modes are the one the user asked for, and the upright layout that loses the
+  Game menu is gone; (5) what the tray should do after a card with a menu of ways to play is
+  cast (it stays up now). Not measured: a room on a phone's own worker (local
   and replicated rooms load the engine and ~32,000 card definitions there), the mulligan,
   targeting arrows, zone viewers and decisions at phone sizes.
 
