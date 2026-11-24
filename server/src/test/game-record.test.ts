@@ -142,7 +142,9 @@ describe("a game's record", () => {
     expect(again.records).toHaveLength(1);
     expect(again.records[0].inputs.length).toBeGreaterThan(soFar.inputs.length);
     expect(replayRecord(again.records[0], registry).matches).toBe(true);
-  });
+    // A whole four-player game played, carried across a save and replayed:
+    // 5.9 s on a slow CI runner (2026-11-24), past the 5 s default.
+  }, 30_000);
 
   it("is handed over as left when the room goes mid-game, and not at all for a game that hardly began", () => {
     const { room, records } = recordingRoom(dealt(5));
