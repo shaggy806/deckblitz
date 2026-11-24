@@ -2988,6 +2988,14 @@ export class HeuristicBotController extends AutomaticController {
     // live game, 2026-10-05 — an Island played over a Glacial Fortress on
     // turn one for exactly that).
     const offers = this.castsWeWouldMake(view.state, after);
+    // A land that casts nothing through the payer may still cast one with
+    // mana left to the player (`byHandCasts`: Gemstone Mine's counters). Only
+    // asked where the payer reaches nothing: each look is copies of the
+    // game, and a land that already casts a spell has made its case.
+    if (offers.length === 0) {
+      const byHand = this.byHandCasts(view.state, landed, after);
+      if (byHand.length > 0) return { together: 1, castable: byHand.length };
+    }
     return { together: this.castTogether(view, landed, offers, after), castable: offers.length };
   }
 
@@ -3584,6 +3592,10 @@ export class HeuristicBotController extends AutomaticController {
         : {}),
       ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
       ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
+      // The colour this offer is for ("one mana of any color" is an offer a
+      // colour): left out, the engine made the first, and a Gemstone Mine
+      // tapped by hand made white whatever was asked of it.
+      ...(legal.manaColors !== undefined ? { manaColors: legal.manaColors } : {}),
     };
   }
 
@@ -5534,19 +5546,39 @@ export class HeuristicBotController extends AutomaticController {
    * `SHOCK_LIFE_FLOOR` after paying. Otherwise let it enter tapped. The bots
    * used to never pay, so a lone Stomping Ground beside Birds of Paradise
    * came in tapped and the Birds waited a turn.
+   *
+   * A spell that mana left to the player would finish counts too
+   * (`byHandCasts`: Gemstone Mine's counters), asked only when the payer's
+   * own casts come out even; `paidForByHand` then says so, for a search that
+   * can't see such a spell either (`EvalBotController.decide`).
    */
   payLifeForUntapped(view: ControllerView, _source: ObjectId, life: number): boolean {
+    this.paidForByHand = null;
     const have = view.state.players[this.playerId]?.life ?? 0;
     if (have - life <= SHOCK_LIFE_FLOOR) return false;
+    const answer = (pay: boolean): Action => ({ type: "pay-life-for-untapped", player: this.playerId, pay });
     const castable = (pay: boolean): number => {
-      const after = view.legalActionsAfter?.({ type: "pay-life-for-untapped", player: this.playerId, pay });
+      const after = view.legalActionsAfter?.(answer(pay));
       if (after === null || after === undefined) return 0;
       return new Set(
         after.flatMap((a) => (a.kind === "cast-spell" && this.wouldCast(view.state, a) ? [a.card] : [])),
       ).size;
     };
-    return castable(true) > castable(false);
+    const paid = castable(true);
+    const unpaid = castable(false);
+    if (paid !== unpaid) return paid > unpaid;
+    const byHand = (pay: boolean): number => {
+      const at = view.viewAfter?.(answer(pay)) ?? null;
+      return at === null ? 0 : this.byHandCasts(view.state, at, at.legalActions()).length;
+    };
+    if (byHand(true) <= byHand(false)) return false;
+    this.paidForByHand = view.state;
+    return true;
   }
+
+  /** The board on which `payLifeForUntapped` last paid for a spell only
+   * by-hand mana finishes, or `null`: v2 keeps that answer unsearched. */
+  protected paidForByHand: GameState | null = null;
 
   /** Surplus lands, then the most expensive spells — see `chooseBottomOfHand`. */
   chooseBottomOfLibrary(
@@ -5776,14 +5808,7 @@ export class HeuristicBotController extends AutomaticController {
     // bot died holding Insurrection with six lands and a charged Amulet, the
     // seventh mana, against an opponent it would have killed that turn (a
     // kept live game, 2026-11-22).
-    const fromHand = now.filter((o): o is ActivateAbilityLegal => {
-      if (o.kind !== "activate-ability" || !this.registry.has(o.cardName)) return false;
-      const object = state.objects[o.source];
-      const ability = this.registry.get(o.cardName).activated?.[o.abilityIndex];
-      if (object === undefined || ability === undefined || !isManaAbility(ability)) return false;
-      if (object.zone === "hand") return ability.zone === "hand";
-      return object.zone === "battlefield" && object.controller === me && paysWithStoredCounters(ability);
-    });
+    const fromHand = this.byHandMana(state, now);
     if (fromHand.length === 0) return null;
     const rocks = now.filter((o): o is CastSpellLegal => {
       if (o.kind !== "cast-spell" || o.face !== undefined || o.castModal !== undefined) return false;
@@ -5796,16 +5821,19 @@ export class HeuristicBotController extends AutomaticController {
         def.activated.some(isManaAbility)
       );
     });
-    const spent = new Set<ObjectId>([...fromHand.map((o) => o.source), ...rocks.map((o) => o.card)]);
+    const spent = new Set<ObjectId>([...fromHand.map((ways) => ways[0].source), ...rocks.map((o) => o.card)]);
     const castable = new Set(now.flatMap((o) => (o.kind === "cast-spell" ? [o.card] : [])));
     const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
     const from = order.indexOf(me);
     const passes = [...order.slice(from), ...order.slice(0, from)].map((p) => passFor(p));
     const rockSteps = rocks.flatMap((rock) => [this.toCastSpell(state, rock), ...passes]);
-    for (let k = 1; k <= Math.min(fromHand.length, HAND_MANA_MOST); k += 1) {
-      const steps = [...rockSteps, ...fromHand.slice(0, k).map((o) => this.toActivateAbility(state, o))];
+    // Each source in each of its ways (`byHandLines`): a Gemstone Mine was
+    // only ever tried for its first colour, white, and a second step was
+    // the same Mine for blue, which the engine refuses.
+    for (const line of this.byHandLines(state, fromHand)) {
+      const steps = [...rockSteps, ...line];
       const after = view.legalActionsAfter(steps);
-      if (after === null || after === undefined) return null;
+      if (after === null || after === undefined) continue;
       const gained = after.find(
         (a): a is CastSpellLegal =>
           a.kind === "cast-spell" &&
@@ -5822,6 +5850,88 @@ export class HeuristicBotController extends AutomaticController {
       return steps[0];
     }
     return null;
+  }
+
+  /**
+   * The mana abilities among `actions` that the payer leaves to the player
+   * (`handManaLine`): a card in our hand's, and one of a permanent of ours
+   * that takes counters off itself (`paysWithStoredCounters`). By source,
+   * each with its ways: an offer a colour for "one mana of any color".
+   */
+  private byHandMana(state: GameState, actions: readonly LegalAction[]): ActivateAbilityLegal[][] {
+    const bySource = new Map<ObjectId, ActivateAbilityLegal[]>();
+    for (const o of actions) {
+      if (o.kind !== "activate-ability" || !this.registry.has(o.cardName)) continue;
+      const object = state.objects[o.source];
+      const ability = this.registry.get(o.cardName).activated?.[o.abilityIndex];
+      if (object === undefined || ability === undefined || !isManaAbility(ability)) continue;
+      const left =
+        object.zone === "hand"
+          ? ability.zone === "hand"
+          : object.zone === "battlefield" && object.controller === this.playerId && paysWithStoredCounters(ability);
+      if (!left) continue;
+      const ways = bySource.get(o.source);
+      if (ways === undefined) bySource.set(o.source, [o]);
+      else ways.push(o);
+    }
+    return [...bySource.values()];
+  }
+
+  /**
+   * The lines of by-hand mana worth a look: the first source alone in each
+   * of its ways, then the first two together, then three
+   * ({@link HAND_MANA_MOST}), {@link HAND_MANA_LOOKS} lines at most. Each
+   * look is a copy of the game, so the count is what a decision pays.
+   */
+  private byHandLines(state: GameState, sources: readonly (readonly ActivateAbilityLegal[])[]): Action[][] {
+    const lines: Action[][] = [];
+    let partial: ActivateAbilityLegal[][] = [[]];
+    for (const ways of sources.slice(0, HAND_MANA_MOST)) {
+      partial = partial.flatMap((line) => ways.map((way) => [...line, way])).slice(0, HAND_MANA_LOOKS);
+      for (const line of partial) {
+        if (lines.length >= HAND_MANA_LOOKS) return lines;
+        lines.push(line.map((o) => this.toActivateAbility(state, o)));
+      }
+    }
+    return lines;
+  }
+
+  /**
+   * The casts `at`'s board doesn't offer (`offered`, its legal actions) that
+   * by-hand mana would pay for, one offer a card: what a look ahead adds to
+   * the spells the payer reaches by itself. The same spells `handManaLine`
+   * would spend the mana on: worth {@link HAND_MANA_FLOOR} or more, and ones
+   * we would cast (`wouldCast`, asked on `state`, the board the choice is
+   * made on). Nothing when the view can't look further.
+   *
+   * A look ahead that counted only the payer's casts never saw these: with
+   * Gemstone Mine among five lands a shock land's 2 life went unpaid for the
+   * five-drop the Mine finished, and the turn was passed with Monstrous
+   * Vortex out (The First Sliver's first watched game, 2026-11-24).
+   */
+  private byHandCasts(state: GameState, at: ControllerView, offered: readonly LegalAction[]): CastSpellLegal[] {
+    if (at.legalActionsAfter === undefined) return [];
+    const sources = this.byHandMana(at.state, offered);
+    if (sources.length === 0) return [];
+    const castable = new Set(offered.flatMap((o) => (o.kind === "cast-spell" ? [o.card] : [])));
+    const spent = new Set(sources.map((ways) => ways[0].source));
+    const found = new Map<ObjectId, CastSpellLegal>();
+    for (const line of this.byHandLines(at.state, sources)) {
+      for (const a of at.legalActionsAfter(line) ?? []) {
+        if (
+          a.kind === "cast-spell" &&
+          !castable.has(a.card) &&
+          !spent.has(a.card) &&
+          !found.has(a.card) &&
+          this.registry.has(a.cardName) &&
+          this.manaValueOf(at.state.objects[a.card]?.cardName ?? a.cardName) >= HAND_MANA_FLOOR &&
+          this.wouldCast(state, a)
+        ) {
+          found.set(a.card, a);
+        }
+      }
+    }
+    return [...found.values()];
   }
 
   /** The value (life, or a planeswalker's loyalty) of attacking `defender`
@@ -6289,6 +6399,9 @@ const TAKE_SHARE = 0.75;
 const HAND_MANA_FLOOR = 3;
 /** The most hand mana abilities one line spends. */
 const HAND_MANA_MOST = 3;
+/** The most lines of by-hand mana one question looks down (`byHandLines`):
+ * a Gemstone Mine alone is five, a colour each. */
+const HAND_MANA_LOOKS = 8;
 
 /** Whether a mana ability's cost is a fixed number of counters off its own
  * source and nothing else but tapping it (Jeweled Amulet): mana kept on the

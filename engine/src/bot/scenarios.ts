@@ -8085,6 +8085,56 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   },
+  {
+    name: "taps Gemstone Mine for the colour its spell needs",
+    rule: "Stored mana of any colour is tried in each colour: four Forests and the Mine cast a red five-drop.",
+    run(weights, registry, makeBot) {
+      // The Mine's "one mana of any color" is five offers, a colour each.
+      // `handManaLine` tried the first alone (white), then the first two
+      // together, the same Mine twice, which the engine refuses: so the Mine
+      // paid only where the colour didn't matter.
+      const game = table(registry, [A, B], A);
+      lands(game, "Forest", A, 4);
+      const mine = onBoard(game, "Gemstone Mine", A);
+      game.state.objects[mine].counters = { mining: 3 };
+      game.debugSpawn("Frenzied Saddlebrute", A, "hand");
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const did = taken
+        .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
+        .filter((s) => s !== "pass-priority");
+      return {
+        passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Frenzied Saddlebrute")),
+        detail: `did: ${did.join(", ") || "nothing"}`,
+      };
+    },
+  },
+  {
+    name: "pays a shock land's life for the spell Gemstone Mine finishes",
+    rule: "A spell that stored mana finishes is a spell the untapped land casts: the 2 life is paid for it.",
+    run(weights, registry, makeBot) {
+      // The First Sliver's first watched game (2026-11-24, seed 1 turn 17):
+      // four lands with a Gemstone Mine among them, Stomping Ground played
+      // as the fifth, two five-drops in hand and Monstrous Vortex out. The
+      // look ahead counted the payer's casts alone, and the payer leaves the
+      // Mine's counters to the player, so the Ground came in tapped and the
+      // turn was passed. Here: three Forests and the Mine, and the Ground
+      // untapped is the fifth mana and the red one.
+      const game = table(registry, [A, B], A);
+      lands(game, "Forest", A, 3);
+      const mine = onBoard(game, "Gemstone Mine", A);
+      game.state.objects[mine].counters = { mining: 3 };
+      game.debugSpawn("Stomping Ground", A, "hand");
+      game.debugSpawn("Frenzied Saddlebrute", A, "hand");
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const did = taken
+        .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
+        .filter((s) => s !== "pass-priority");
+      return {
+        passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Frenzied Saddlebrute")),
+        detail: `did: ${did.join(", ") || "nothing"}`,
+      };
+    },
+  },
   asked({
     name: "casts Opt first so Shiko's Flurry copies the Lightning Bolt",
     rule: "With a second-spell payoff out, a cheap first spell turns the next one into two.",

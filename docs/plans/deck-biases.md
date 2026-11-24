@@ -123,12 +123,14 @@ power 7 and starts the chain, so when nothing else can, the search still casts i
   the deck's own side and v2 simulates which creature; the list as it stands has no flicker
   (the earlier one's Wistfulness and Q are cut).
 
-Found on the way, and also open: **Gemstone Mine**. The payer leaves a mana ability that takes
-counters off its source to be spent by hand (`paysWithStoredCounters`), and v2's `handManaLine`
-spends them for a spell in its own window, but a rollout doesn't. So with the Mine among five
-lands the commander isn't offered as a cast, and a shock land's two life isn't paid for a cast
-the Mine would have finished (seed 1, turn 17 of the first game watched: five lands, two
-five-drops and the Vortex out, and nothing cast).
+Found on the way, and fixed the same day: **Gemstone Mine**. The payer leaves a mana ability
+that takes counters off its source to be spent by hand (`paysWithStoredCounters`), and
+`handManaLine` spends them for a spell in the bot's own window, but the look aheads counted the
+payer's casts alone. So with the Mine among five lands a shock land's two life wasn't paid for
+the five-drop the Mine would have finished (seed 1, turn 17 of the first game watched: five
+lands, two five-drops and the Vortex out, and nothing cast). The land look and the shock-land
+answer count such a cast now, and the Mine is tapped for the colour the spell needs (it only
+ever made white by hand). What that left is in `BACKLOG.md`.
 
 ## Adding a bias
 

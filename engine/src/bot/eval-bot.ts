@@ -2730,9 +2730,15 @@ export class EvalBotController extends HeuristicBotController {
     // own seat for the rest of the turn, so they never see that spell and
     // price paying as 2 life for nothing — as with a land drop. Except where
     // the turn can be planned from each answer (`byTheTurnItLeaves`), which
-    // does see the spell.
+    // does see the spell — unless only mana left to the player finishes it
+    // (Gemstone Mine's counters, `paidForByHand`): the plan's moves are the
+    // payer's casts, so that spell is in neither plan and paying read as 2
+    // life for nothing again.
     const byTurn = this.byTheTurnItLeaves(view);
-    if (view.state.awaiting?.kind === "pay-life-for-untapped" && byTurn === undefined) {
+    if (
+      view.state.awaiting?.kind === "pay-life-for-untapped" &&
+      (byTurn === undefined || this.paidForByHand === view.state)
+    ) {
       this.lastDecision = audit("decision", null, "v1's answer");
       return inherited;
     }
