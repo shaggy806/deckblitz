@@ -144,6 +144,14 @@
   z-index: 20;
   display: flex;
   gap: 8px;
+  /* Never wider than the window: on a phone the row ran off its left edge,
+     "Built with Claude Code" gone and "Send feedback" cut (the user,
+     2026-11-24). The links wrap onto rows above, right-aligned, the help
+     and settings buttons staying in the corner. A desktop window has the
+     room for one row, so nothing moves there. */
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: calc(100vw - 32px);
 }
 /* The corner toolbar's Settings button: a square with the cog. */
 .motion-cog {

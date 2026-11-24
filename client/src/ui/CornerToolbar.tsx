@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from 'react'
 import { MotionControl } from './MotionControl.tsx'
 import { SiteLinks } from '../legal/SiteLinks.tsx'
 import { HelpMenu } from '../tutorial/HelpMenu.tsx'
@@ -28,8 +29,26 @@ export function CornerToolbar({
   /** With `onLesson`: whether its lesson is still on its way (`HelpMenu`'s `starting`). */
   readonly lessonStarting?: boolean
 } = {}) {
+  // How tall the toolbar stands, as `--corner-toolbar-h` on the page: on a
+  // phone its links wrap onto rows above (App.css), and the landing page
+  // leaves that much room at its foot so its last lines can scroll clear of
+  // it (landing.css, a touch device only).
+  const boxRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const box = boxRef.current
+    if (box === null) return
+    const root = document.documentElement
+    const note = () => root.style.setProperty('--corner-toolbar-h', `${Math.ceil(box.getBoundingClientRect().height)}px`)
+    note()
+    const watch = new ResizeObserver(note)
+    watch.observe(box)
+    return () => {
+      watch.disconnect()
+      root.style.removeProperty('--corner-toolbar-h')
+    }
+  }, [])
   return (
-    <div className="corner-toolbar" role="toolbar" aria-label="Site">
+    <div className="corner-toolbar" role="toolbar" aria-label="Site" ref={boxRef}>
       {intro ? <SiteLinks /> : null}
       <HelpMenu
         intro={intro}

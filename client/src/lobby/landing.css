@@ -660,3 +660,12 @@
 .dev-rooms-note code {
   color: var(--text);
 }
+
+/* A touch device (`ui/touch.ts`) alone: the corner toolbar's links wrap onto
+   rows above it on a phone (App.css's `.corner-toolbar`), standing as tall as
+   `--corner-toolbar-h` (CornerToolbar.tsx measures it), and the page's foot
+   leaves that much room, so the legal notice scrolls clear of the buttons
+   (the user's phone, 2026-11-24). A mouse's page is as it was. */
+:root[data-touch] .landing {
+  padding-bottom: calc(clamp(18px, 4vh, 54px) + var(--corner-toolbar-h, 44px) + 16px);
+}
