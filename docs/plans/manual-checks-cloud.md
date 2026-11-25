@@ -19,7 +19,10 @@ session that started it, so everything it finds reaches `main` as files under
 | `trial` | about 20 | `--every 105 --offset 10 --agents 2` |
 | `0` to `20`, except `3` | 99 each | `--every 21 --offset <slice> --agents 10` |
 
-Slice 3 was played on 2026-11-25. Twenty slices are the rest of the list.
+Slice 3 was played on 2026-11-25. Twenty slices are the rest of the list. A slice is played once
+`docs/manual-check-runs/slice-<n>-A.jsonl` exists on `main`: check before starting one. The
+user's own PC plays them from 20 downward, so a cloud session takes the **lowest** number not
+yet played.
 
 ## 1. A browser
 
@@ -64,13 +67,15 @@ second. Each gets exactly this, with `<L>` and `<P>` filled in:
 
 ## 4. Collect
 
-- Copy each `results.jsonl` to `docs/manual-check-runs/slice-<slice>-<L>.jsonl` (`.scratch/` is
-  ignored by git).
+- `node scripts/manual-check-usage.mjs --slice slice-<slice> --land` copies each `results.jsonl`
+  to `docs/manual-check-runs/slice-<slice>-<L>.jsonl` (`.scratch/` is ignored by git) and prints
+  each brief's verdict counts beside its agent's minutes and tokens; `--list failed` (or
+  `cannot-judge`, `passed`) prints those tests with what the agent wrote.
 - Replay every test an agent marked **failed** yourself with the runner before believing it,
   and say whether it is the test (its board can't show what it expects), the runner, or the
   game. Every failure so far has been the test.
-- Total each subagent's tokens from its transcript, **once per message id** (cache-write,
-  cache-read, output), and its minutes.
+- If that script finds no transcript for a brief (it looks under `~/.claude/projects/*/*/subagents`),
+  pass `--transcripts <dir>`, or total the subagent's tokens by hand, **once per message id**.
 - Write `docs/manual-check-runs/slice-<slice>.md`, a page at most: the verdict counts, each
   failure with its cause, seconds and tokens a test, anything an agent flagged about a pass
   (a wrong log line, an odd prompt), and anything a cloud run needed that this brief doesn't say.
