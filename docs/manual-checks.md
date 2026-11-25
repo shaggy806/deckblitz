@@ -62,6 +62,10 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Stomp (Bonecrusher Giant's adventure) at Bob's Grizzly Bears.
 - **Expect:** Once it resolves your "exile 1" glows in the accent colour; opening it offers to cast Bonecrusher Giant.
 
+### Unsummon: a bounced creature is known in its owner's hand
+- **Do:** Cast Unsummon on Bob's Grizzly Bears, then click Bob's "hand" button.
+- **Expect:** It reads "hand 3 · 1 known". The viewer shows Grizzly Bears face up beside two card backs, and still does on later turns until Bob plays or discards it.
+
 ### Brutal Cathar: day is shown in the top strip
 - **Do:** Cast Brutal Cathar, exiling Bob's Grizzly Bears.
 - **Expect:** The top strip's turn readout ends in "☀ Day", and stays there for the rest of the game.

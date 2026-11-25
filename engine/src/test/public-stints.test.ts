@@ -40,9 +40,10 @@ describe("public stints", () => {
     const bounced = game.eventsOfType("permanent-returned-to-hand").find((e) => e.object === bears);
     if (bounced === undefined) throw new Error("no bounce event");
 
-    // Bob can't see it now…
-    expect(game.viewFor(B).objects[bears]).toBeUndefined();
-    // …but the history still knows what it was, including in the bounce itself.
+    // Bob saw it go into Alice's hand, so he still knows it there (2026-11-25:
+    // it was hidden from him until then)…
+    expect(game.viewFor(B).objects[bears]?.knownToAll).toBe(true);
+    // …and the history knows what it was, including in the bounce itself.
     expect(seenAs(game, bears, onBoard + 1)).toBe("Grizzly Bears");
     expect(seenAs(game, bears, bounced.seq)).toBe("Grizzly Bears");
   });

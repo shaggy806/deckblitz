@@ -256,6 +256,11 @@ export interface VisibleObject {
   /** A planeswalker's loyalty — its `counters.loyalty` on the battlefield,
    * its printed loyalty anywhere else — or `null` for anything else. */
   readonly loyalty: number | null;
+  /** A card in a hand that every player knows (it went there from a public
+   * zone — a bounce, a regrowth — or was revealed into or in that hand, and
+   * hasn't been hidden since): shown face up to everyone, and marked in its
+   * owner's hand so they know the table knows it. Absent otherwise. */
+  readonly knownToAll?: true;
   readonly keywords: readonly Keyword[];
   /** Its total toxic value (rule 702.164b): every toxic ability it has, a
    * printed one and each one granted ("Other Rats you control have toxic
@@ -1489,6 +1494,11 @@ function viewForUncached(
     // *identity* (the object's entry in `objects` below) stays hidden unless
     // it's your own hand or the card was actually revealed.
     hands[player] = [...zones.hand];
+    // A card everyone saw go into this hand — bounced, returned from a
+    // graveyard, exile or the stack, revealed by the tutor that put it there
+    // or revealed from the hand since — is still known to everyone while it
+    // stays (its public stint is open: `knownToAll`).
+    if (player !== viewer) visibleIds.push(...zones.hand.filter((id) => knownToAll(state, id)));
     // "Your opponents play with their hands revealed" (Telepathy): to everyone.
     if (player !== viewer && sight.hands.has(player)) visibleIds.push(...zones.hand);
     if (player === viewer) {
@@ -1538,6 +1548,13 @@ function viewForUncached(
       const withHeld = held === undefined ? base : { ...base, holding: held };
       const withCost = cost === null ? withHeld : { ...withHeld, effectiveManaCost: cost };
       objects[id] = tax === null ? withCost : { ...withCost, commanderTax: tax };
+    }
+  }
+  // A hand card every player knows says so, for its owner's client to mark.
+  for (const player of state.turnOrder) {
+    for (const id of state.zones.perPlayer[player]?.hand ?? []) {
+      const object = objects[id];
+      if (object !== undefined && knownToAll(state, id)) objects[id] = { ...object, knownToAll: true };
     }
   }
   // "Return those cards": what an ability on the stack acts on is shown as its
@@ -1673,6 +1690,16 @@ export interface DelayedTriggerView {
    * were when it was made — that the viewer can see, each only while it is
    * still that object (rule 400.7): "return **that card**" names the card. */
   readonly objects: readonly ObjectId[];
+}
+
+/** Whether every player knows what card `id` is now: its last public stint
+ * (`GameState.publicStints`) is still open. A card keeps one into a hand when
+ * it went there from a public zone, or was revealed by the resolution that
+ * put it there; drawing, a move between hidden zones or a shuffle closes it. */
+function knownToAll(state: GameState, id: ObjectId): boolean {
+  const stints = state.publicStints?.[id];
+  const last = stints?.[stints.length - 1];
+  return last !== undefined && last.until === undefined;
 }
 
 /** The flicker links (`GameObject.flickerLink`) a delayed ability's effect

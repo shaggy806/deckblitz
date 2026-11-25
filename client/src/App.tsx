@@ -7904,6 +7904,9 @@ function Table({
       exileSize={exileOf(pid).length}
       // Lit while this seat can cast or activate something from there (the
       // user, 2026-11-25): any player's graveyard or exile.
+      knownInHand={
+        pid === seat ? 0 : (view.zones.hands[pid] ?? []).filter((id) => view.objects[id]?.knownToAll === true).length
+      }
       graveyardPlayable={(view.zones.graveyards[pid] ?? []).some(playableOutOfZone)}
       exilePlayable={exileOf(pid).some(playableOutOfZone)}
       wentFirst={pid === view.startingPlayer}

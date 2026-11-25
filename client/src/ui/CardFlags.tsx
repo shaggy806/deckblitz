@@ -87,6 +87,18 @@ function flagsOf({
   controlledBy = null,
 }: FlagSources): Flag[] {
   const flags: Flag[] = []
+  // A hand card the whole table knows (the user, 2026-11-25): its owner sees
+  // that the others see it too.
+  if (obj.knownToAll === true && obj.zone === 'hand') {
+    flags.push({
+      key: 'known',
+      className: 'chosen',
+      compact: 'Known',
+      long: 'known to all',
+      name: 'Known to every player',
+      text: 'Every player saw this card go into the hand (a bounce, a return from a graveyard, a revealed tutor) or saw it revealed there, so it is face up to them.',
+    })
+  }
   // Who controls it and who owns it, where the board doesn't say (the user,
   // 2026-11-24): a permanent is drawn on its controller's side, or under
   // its host when attached, and is assumed to be its controller's own.

@@ -33,6 +33,10 @@ export interface PlayerPanelProps {
   readonly exileSize?: number
   /** This seat can cast or activate something from this player's graveyard
    * or exile now: the zone's button is lit (`.pp-zone-link.playable`). */
+  /** How many cards in this player's hand every player knows (a bounce, a
+   * regrowth, a revealed tutor): shown on another player's hand button, whose
+   * viewer has them face up. */
+  readonly knownInHand?: number
   readonly graveyardPlayable?: boolean
   readonly exilePlayable?: boolean
   /** Went first this game: won the highroll, or the host picked them. */
@@ -111,6 +115,7 @@ export function PlayerPanel({
   bot = false,
   seats,
   exileSize = 0,
+  knownInHand = 0,
   graveyardPlayable = false,
   exilePlayable = false,
   wentFirst = false,
@@ -341,6 +346,7 @@ export function PlayerPanel({
           }}
         >
           hand {info.handSize}
+          {knownInHand > 0 ? <span className="pp-hand-known"> · {knownInHand} known</span> : null}
         </button>
         {/* The three counts a mill or an exile from the top moves: read by
             AnimationLayer, which runs them in step with the cards leaving. */}

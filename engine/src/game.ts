@@ -75714,8 +75714,15 @@ controlledBy,
     }
     // Into a hand or library: still known if it was public a moment ago, and
     // no longer if it only moved between hidden zones (a card put back from
-    // hand, or drawn).
-    if (open !== undefined && hidden(from)) open.until = this.state.eventSeq;
+    // hand, or drawn) — unless the spell or ability putting it into a hand
+    // revealed it as it resolved: "search … for a card, reveal it, put it
+    // into your hand" leaves everyone knowing which card that hand holds
+    // (rule 701.16).
+    if (open !== undefined && hidden(from)) {
+      const since = this.state.resolutionSince;
+      if (from === "library" && to === "hand" && since !== undefined && open.from >= since) return;
+      open.until = this.state.eventSeq;
+    }
   }
 
   private openStintOf(id: ObjectId): PublicStint | undefined {

@@ -13884,6 +13884,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Unsummon: a bounced creature is known in its owner's hand",
+    board({
+      you: { bf: ['Island'], hand: ['Unsummon'] },
+      opp: { bf: ['Grizzly Bears'], hand: ['Wastes*2'] },
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

@@ -1004,6 +1004,11 @@
   box-shadow: inset 1px 1px 0 var(--bevel-light), inset -1px -2px 0 var(--bevel-dark);
   cursor: pointer;
 }
+/* How many of another player's hand cards the table knows (a bounce, a
+   revealed tutor): the hand viewer has them face up. */
+.pp-hand-known {
+  color: var(--warn);
+}
 /* A graveyard or exile this seat can cast or activate something from now
    (flashback, escape, a permission, a graveyard ability): lit in the accent
    a playable tile wears, so it's found without opening every zone. */

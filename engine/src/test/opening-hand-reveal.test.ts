@@ -89,7 +89,13 @@ describe("opening-hand reveals (rule 103.6b)", () => {
     const [bobs] = inHand(game, B, "Chancellor of the Spires");
     game.dispatch({ type: "choose-from-zone", player: B, chosen: [bobs] });
     expect(game.state.turn.number).toBe(1);
-    expect(viewFor(game.state, game.registry, B).objects[alices]?.cardName).toBeUndefined();
+    // Revealed no longer once the first turn begins (rule 103.6b), it is
+    // still known: Bob saw it, and it hasn't left Alice's hand since
+    // (`knownToAll`, 2026-11-25 — it was hidden from him until then).
+    expect(viewFor(game.state, game.registry, B).objects[alices]).toMatchObject({
+      cardName: "Chancellor of the Spires",
+      knownToAll: true,
+    });
   });
 
   it("does nothing for a card that wasn't revealed", () => {
