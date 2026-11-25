@@ -17,6 +17,24 @@ import { Room } from "../dist/room.js";
 import { DEFAULT_CAPTURE_DIR, captureLogs } from "../dist/capture.js";
 import { ScriptedBot } from "../dist/scripted-bot.js";
 import SCENARIOS, { COMMANDERS } from "./dev-scenarios.mjs";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { gunzipSync } from "node:zlib";
+import { replayRecord } from "../dist/game-record.js";
+
+/**
+ * A kept game (`games/<day>/<file>`, `npm run games:pull`) as a room to sit
+ * in at one of its moments: `DEV_KEPT_GAME="games/2026-11-25/CQVRW-2-….json.gz@1151"`
+ * plays the record's first 1151 inputs on this build and serves what stands
+ * there as room `KEPTG`, the record's first seat a person's and the others
+ * bots (the room's own, not a script). For looking at a reported position in
+ * the real client: what its prompts, buttons and highlights do there. The
+ * replay is this build's, so a record from an older build is the same game
+ * only as far as `game:replay` says its inputs are all still taken.
+ */
+const KEPT_CODE = "KEPTG";
+const KEPT_GAME = process.env.DEV_KEPT_GAME ?? "";
 
 const BASICS = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
 const basics = (n) => Array.from({ length: n }, (_, i) => BASICS[i % BASICS.length]);
@@ -132,7 +150,28 @@ export function setup({ manager, registry, index = 0, count = 1 }) {
   const live = new Map();
   const mine = Object.keys(SCENARIOS).filter((_, i) => i % count === index);
 
+  /** What `KEPTG` holds, for `list`. */
+  let keptAbout = "";
+  function buildKept() {
+    const at = KEPT_GAME.lastIndexOf("@");
+    const file = at < 0 ? KEPT_GAME : KEPT_GAME.slice(0, at);
+    const upTo = at < 0 ? undefined : Number(KEPT_GAME.slice(at + 1));
+    const path = resolve(fileURLToPath(new URL("../..", import.meta.url)), file);
+    const raw = readFileSync(path);
+    const record = JSON.parse(path.endsWith(".gz") ? gunzipSync(raw) : raw);
+    const { game, applied, refused } = replayRecord(record, registry, upTo === undefined ? {} : { upTo });
+    if (refused !== null) throw new Error(`${file}: input ${refused.at} was refused on this build (${refused.why})`);
+    const [first, ...others] = record.seats.map((seat) => seat.player);
+    const room = new Room(KEPT_CODE, game, { pacing: "realtime", capture });
+    for (const player of others) room.addBot(player);
+    room.start();
+    manager.adopt(room);
+    live.set(KEPT_CODE, { room, game });
+    keptAbout = `${file} after ${applied} of its ${record.inputs.length} inputs (played on ${String(record.build).slice(0, 9)}): sit as ${first}.`;
+  }
+
   function buildRoom(code) {
+    if (code === KEPT_CODE) return buildKept();
     const scenario = SCENARIOS[code];
     const game = buildGame(scenario);
     const bots = scenario.bots ?? {};
@@ -148,6 +187,8 @@ export function setup({ manager, registry, index = 0, count = 1 }) {
     live.set(code, { room, game });
   }
   for (const code of mine) buildRoom(code);
+  // The kept game, where one is named, on the first shard.
+  if (KEPT_GAME !== "" && index === 0) buildRoom(KEPT_CODE);
 
   const ops = {
     list: () =>
@@ -155,9 +196,9 @@ export function setup({ manager, registry, index = 0, count = 1 }) {
         [...live].map(([code, { game }]) => [
           code,
           {
-            about: SCENARIOS[code].about,
+            about: code === KEPT_CODE ? keptAbout : SCENARIOS[code].about,
             players: game.state.turnOrder,
-            bots: Object.keys(SCENARIOS[code].bots ?? {}),
+            bots: code === KEPT_CODE ? game.state.turnOrder.slice(1) : Object.keys(SCENARIOS[code].bots ?? {}),
             step: `turn ${game.state.turn.number}, ${game.state.turn.step}`,
             url: `http://localhost:5173/?room=${code}`,
           },

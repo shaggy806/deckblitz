@@ -133,5 +133,5 @@ loopback status page, with `load-monitor.ts`'s event-loop numbers). Tests in
   loopback command port on 4099 (`-- --shards N` or `DEV_ROOMS_SHARDS=N` runs its rooms on worker
   threads, the boards and ops from `scripts/dev-rooms-shard.mjs` in each). Use it to check a client change against a known position (the
   `dev-up` skill starts it). Room codes and command-port ops are in
-  `docs/architecture/server.md`.
+  `docs/architecture/server.md`. `-- --kept games/<day>/<file>@<inputs>` (or `DEV_KEPT_GAME`, 2026-11-25) also serves a **kept game at one of its moments** as room `KEPTG`: the record's first `<inputs>` inputs replayed on this build (`replayRecord`), its first seat a person's and the others the room's own bots, for looking at a reported position in the real client (a friend's unlit exile button was settled this way: his game, his turn, on the current build).
 - `gen:oracle-tags`: regenerates the tag index (takes most of an hour; run it in the background).

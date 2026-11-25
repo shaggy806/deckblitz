@@ -41,6 +41,10 @@ import { handleImportRoute } from "../dist/import-route.js";
 
 const PORT = Number(process.env.PORT ?? 4000);
 const CONTROL_PORT = Number(process.env.CONTROL_PORT ?? 4099);
+// `--kept games/<day>/<file>@<inputs>` (or $DEV_KEPT_GAME): a kept game at
+// one of its moments, served as room KEPTG (`dev-rooms-shard.mjs`).
+const keptAt = process.argv.indexOf("--kept");
+if (keptAt >= 0 && process.argv[keptAt + 1] !== undefined) process.env.DEV_KEPT_GAME = process.argv[keptAt + 1];
 const shardsAt = process.argv.indexOf("--shards");
 const SHARDS = Number((shardsAt >= 0 ? process.argv[shardsAt + 1] : undefined) ?? process.env.DEV_ROOMS_SHARDS ?? 0);
 if (!Number.isInteger(SHARDS) || SHARDS < 0) throw new Error(`--shards needs a whole number, 0 or more (got ${SHARDS})`);
