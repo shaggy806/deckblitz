@@ -341,6 +341,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **A non-land permanent with a tap ability doesn't say so on its mini tile** (the user, 2026-11-24: "add tap symbol to mini tiles of non-land permanents that can be tapped for an ability"): `ui/MiniTile.tsx` draws the {T} icon (`TAP_ICON_URL`, `.tap-icon`) only once a permanent is tapped; show a tap symbol on the tile of an untapped non-land permanent with a {T} ability too.
 - **Day/night is missing from the display** (the user, 2026-11-24): once it is day or night (rule 726) the board doesn't show which; `view.dayNight` is drawn only in `ui/TurnBanner.tsx` (`.turn-banner-daynight`), not anywhere that stays on screen.
 - **A player's chosen modes aren't shown to the table** (the user, 2026-11-24: "when a player chooses a mode have a popup say what they chose"): a `choose-modes` answer only reaches the log (as "chose mode(s) 2", B334's wording line above); show everyone a popup saying which modes were chosen.
+- **A card doesn't say who owns and controls it when that isn't obvious** (the user, 2026-11-24: "list controller and owner and controller on card whenever that is not obvious"): a stolen or exchanged permanent sits on its controller's board with nothing naming its owner (`ui/MiniTile.tsx` reads `ownerSeat` only for a face-down card's back); show the owner and controller on the card whenever they differ or aren't clear from where it sits.
 
 ## Tooling / docs
 
