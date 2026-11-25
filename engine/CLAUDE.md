@@ -219,7 +219,7 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000] [--count] [--turns 31-34]`: one
   whole game of v2 seats at the live clock, written out to read: each turn's board and hands, and every decision with
   how it was reached. For looking over the bots' play by eye; deck names match the strong decks first, then the starter
-  decks, then the **tooling precons** (`scripts/tool-decks.mjs`, for all four `--decks` tools: 69 more Wizards precons
+  decks, then the **tooling precons** (`scripts/tool-decks.mjs`, for all four `--decks` tools: 68 more Wizards precons
   the pool plays as printed, `data/tooling-precons.json`, read by scripts alone so no player is ever offered one;
   `node scripts/gen-tooling-precons.mjs` rewrites the file as the pool grows), or a deck file ending `.json`
   (`{ name, cards, commanders }`, a seat's deck as a kept game's record holds it). `--count` plays count budgets (the game

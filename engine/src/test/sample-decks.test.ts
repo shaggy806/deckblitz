@@ -54,7 +54,12 @@ describe("SAMPLE_DECKS", () => {
 
 describe("UPGRADED_DECKS", () => {
   it("upgrades each starter precon once", () => {
-    expect(UPGRADED_DECKS.map((d) => d.upgradeOf)).toEqual(SAMPLE_DECKS.map((d) => d.name));
+    // Multiverse Reforged joined the starters (Bracket 2) on 2026-11-24 with
+    // no upgraded deck of its own yet: Bracket 3 is the fourteen others.
+    const notUpgraded = new Set(["Multiverse Reforged"]);
+    expect(UPGRADED_DECKS.map((d) => d.upgradeOf)).toEqual(
+      SAMPLE_DECKS.map((d) => d.name).filter((name) => !notUpgraded.has(name)),
+    );
     expect(new Set(UPGRADED_DECKS.map((d) => d.name)).size).toBe(UPGRADED_DECKS.length);
   });
 

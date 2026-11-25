@@ -1,7 +1,7 @@
 // Writes `data/tooling-precons.json`: every Wizards Commander precon the pool
 // can play exactly as printed that isn't a starter deck already — decks for
 // the bot tooling to seat (`tool-decks.mjs`: `bot:watch`, `bot:losses`,
-// `bot:judge`), so the bots are watched on cards and plans the fourteen
+// `bot:judge`), so the bots are watched on cards and plans the
 // starter decks don't have. Tooling only, on purpose: the file is read by
 // scripts, never by `src/`, so no deck in it reaches the engine's exports,
 // the server or the client, and no player is offered one.
