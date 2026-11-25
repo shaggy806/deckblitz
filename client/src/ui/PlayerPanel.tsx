@@ -31,6 +31,10 @@ export interface PlayerPanelProps {
   readonly seats?: readonly SeatStatus[]
   /** This player's own cards currently in the (shared) exile zone. */
   readonly exileSize?: number
+  /** This seat can cast or activate something from this player's graveyard
+   * or exile now: the zone's button is lit (`.pp-zone-link.playable`). */
+  readonly graveyardPlayable?: boolean
+  readonly exilePlayable?: boolean
   /** Went first this game: won the highroll, or the host picked them. */
   readonly wentFirst?: boolean
   /** This player is the monarch (rule 725). */
@@ -107,6 +111,8 @@ export function PlayerPanel({
   bot = false,
   seats,
   exileSize = 0,
+  graveyardPlayable = false,
+  exilePlayable = false,
   wentFirst = false,
   isMonarch = false,
   hasInitiative = false,
@@ -341,7 +347,8 @@ export function PlayerPanel({
         <span data-library-count-of={info.id}>library {info.librarySize}</span>
         <button
           type="button"
-          className="pp-zone-link"
+          className={`pp-zone-link${graveyardPlayable ? ' playable' : ''}`}
+          title={graveyardPlayable ? 'You can cast or activate something from here' : undefined}
           data-graveyard-count-of={info.id}
           disabled={!onOpenGraveyard}
           onClick={(e) => {
@@ -353,7 +360,8 @@ export function PlayerPanel({
         </button>
         <button
           type="button"
-          className="pp-zone-link"
+          className={`pp-zone-link${exilePlayable ? ' playable' : ''}`}
+          title={exilePlayable ? 'You can cast or activate something from here' : undefined}
           data-exile-count-of={info.id}
           disabled={!onOpenExile}
           onClick={(e) => {

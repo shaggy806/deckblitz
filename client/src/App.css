@@ -1004,6 +1004,16 @@
   box-shadow: inset 1px 1px 0 var(--bevel-light), inset -1px -2px 0 var(--bevel-dark);
   cursor: pointer;
 }
+/* A graveyard or exile this seat can cast or activate something from now
+   (flashback, escape, a permission, a graveyard ability): lit in the accent
+   a playable tile wears, so it's found without opening every zone. */
+.pp-zone-link.playable {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent-bg),
+    0 0 0.5em color-mix(in srgb, var(--accent) 45%, transparent);
+}
 /* Something of theirs waits to trigger (a return at end of turn, a rebound):
    the emblems button says so in the warning colour, so it's seen coming. */
 .pp-zone-link.has-delayed {

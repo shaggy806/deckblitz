@@ -5401,7 +5401,14 @@ function Table({
   // object here for any seat that can't look at it.
   const exileOf = (pid: PlayerId): readonly ObjectId[] =>
     view.zones.exile.filter((id) => view.zones.exileOwners[id] === pid)
-  const openZone = (zone: OpenZone['zone'], player: PlayerId) => setZoneView({ zone, player })
+  /** A card in a graveyard or in exile this seat can do something with now:
+   * cast it (flashback, escape, a permission — any cast that names where
+   * it's from), play it as a land, or activate an ability of it that works
+   * from there. What the zone viewer offers, and what lights the zone's
+   * button on a player's panel. */
+  const playableOutOfZone = (id: ObjectId): boolean =>
+    castByCard.get(id)?.via !== undefined || landByCard.has(id) || abilitiesBySource.has(id)
+  const openZone =(zone: OpenZone['zone'], player: PlayerId) => setZoneView({ zone, player })
   // The browsed zone as this frame's view has it: its cards now, not when it
   // was opened.
   const zoneView = ((): {
@@ -7895,6 +7902,10 @@ function Table({
       bot={game.seats.find((s) => s.player === pid)?.isBot === true}
       seats={game.seats}
       exileSize={exileOf(pid).length}
+      // Lit while this seat can cast or activate something from there (the
+      // user, 2026-11-25): any player's graveyard or exile.
+      graveyardPlayable={(view.zones.graveyards[pid] ?? []).some(playableOutOfZone)}
+      exilePlayable={exileOf(pid).some(playableOutOfZone)}
       wentFirst={pid === view.startingPlayer}
       isMonarch={view.monarch === pid}
       hasInitiative={view.initiative === pid}
@@ -8814,9 +8825,7 @@ function Table({
             // land playable from the graveyard (Ramunap Excavator — P2B), and
             // an ability that works from here (a graveyard ability, or one of
             // a suspended card's — Greater Gargadon), which opens its menu.
-            ids: zoneView.ids.filter(
-              (id) => castByCard.get(id)?.via !== undefined || landByCard.has(id) || abilitiesBySource.has(id),
-            ),
+            ids: zoneView.ids.filter(playableOutOfZone),
             label: (id) => {
               const c = castByCard.get(id)
               if (c?.via === undefined && !landByCard.has(id) && abilitiesBySource.has(id)) return 'Activate'

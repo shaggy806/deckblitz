@@ -13870,6 +13870,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Think Twice: your graveyard is lit while you can flash it back',
+    board({
+      you: { bf: ['Island*3'], gy: ['Think Twice'] },
+      opp: { gy: ['Lightning Bolt'] },
+    }),
+  ),
+  preset(
+    'Bonecrusher Giant: your exile is lit while the Giant waits there on its adventure',
+    board({
+      you: { bf: ['Mountain*5'], hand: ['Bonecrusher Giant'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

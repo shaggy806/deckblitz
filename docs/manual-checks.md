@@ -54,6 +54,14 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Recurring Insight on Bob, then click "delayed 1" on your panel.
 - **Expect:** "Delayed — Recurring Insight" reads "At the beginning of your next upkeep:", then the rebound's text and "(Recurring Insight)". Bob's view of your panel says "At the beginning of Alice's next upkeep".
 
+### Think Twice: your graveyard is lit while you can flash it back
+- **Do:** Look at the zone buttons on your panel and Bob's.
+- **Expect:** Your "graveyard 1" glows in the accent colour; Bob's "graveyard 1" (a Lightning Bolt you can't cast) doesn't. Pass priority: the glow goes while you can't act.
+
+### Bonecrusher Giant: your exile is lit while the Giant waits there on its adventure
+- **Do:** Cast Stomp (Bonecrusher Giant's adventure) at Bob's Grizzly Bears.
+- **Expect:** Once it resolves your "exile 1" glows in the accent colour; opening it offers to cast Bonecrusher Giant.
+
 ### Brutal Cathar: day is shown in the top strip
 - **Do:** Cast Brutal Cathar, exiling Bob's Grizzly Bears.
 - **Expect:** The top strip's turn readout ends in "☀ Day", and stays there for the rest of the game.
