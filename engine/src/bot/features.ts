@@ -616,6 +616,29 @@ function manaPerTurnOf(state: GameState, registry: CardRegistry, id: ObjectId, d
   return hasColouredLinkedCard(state, registry, id) ? made : 0;
 }
 
+/**
+ * How much of its mana a turn a tapped permanent still counts for when it
+ * doesn't untap during its controller's untap step ({@link staysTapped}).
+ * Its mana is gone until something untaps it, and counted in full it was the
+ * same rock tapped or not: in a live game (kept game B8NWK, 2026-11-24,
+ * `docs/bot-misplays.md`) "{3}: Untap this artifact" scored the same as
+ * passing to the last digit at the end of the turn before the bot's own,
+ * three lands spare, and Basalt Monolith stayed tapped from turn 20 to the
+ * end. Half, not none: it is still one activation from a mana rock, and what
+ * is taken off is what tapping it for a spell now costs — 0.75 for the
+ * Monolith at `nonlandMana` 0.5, under what any spell is worth. `earlyMana`
+ * keeps the full count: at its 6 a mana, tapping the rock on turn four would
+ * read as nine points lost.
+ */
+const STUCK_MANA_SHARE = 0.5;
+
+/** "This permanent doesn't untap during your untap step", said by itself with
+ * no condition: Basalt Monolith, Grim Monolith, Mana Vault. Not the lands
+ * that stay down only while they hold a depletion counter. */
+function staysTapped(def: CardDefinition): boolean {
+  return def.static.some((a) => a.doesntUntap === true && a.affects.scope === "self" && a.condition === undefined);
+}
+
 const reductionMemo = new WeakMap<CardDefinition, number>();
 
 /**
@@ -1640,6 +1663,9 @@ function playerFeaturesUncached(
   let loyalty = 0;
   let counters = 0;
   let nonlandMana = 0;
+  /** Of `nonlandMana`, the mana of tapped permanents that don't untap by
+   * themselves ({@link STUCK_MANA_SHARE}). */
+  let stuckMana = 0;
   let drawEngines = 0;
   let tokenEngines = 0;
   let valueEngines = 0;
@@ -1732,7 +1758,9 @@ function playerFeaturesUncached(
     if (!isLand && registry.has(name)) {
       const def = registry.get(name);
       if (!isCreature && guardsAnother(state, registry, id, def, player)) guards += n;
-      nonlandMana += (manaPerTurnOf(state, registry, id, def) + reductionPerTurn(def)) * n;
+      const made = manaPerTurnOf(state, registry, id, def);
+      nonlandMana += (made + reductionPerTurn(def)) * n;
+      if (object.tapped && made > 0 && staysTapped(def)) stuckMana += made * n;
       drawEngines += drawRate(def, opponents) * n;
       tokenEngines += tokenRate(registry, def, opponents) * n;
       valueEngines += valueRate(registry, def, opponents) * n;
@@ -2043,7 +2071,7 @@ function playerFeaturesUncached(
     // them (Ob Nixilis Reignited's) punishes them, it's no asset.
     emblems: state.emblems.filter((e) => e.owner === player && (e.createdBy ?? e.owner) === player && e.expires === undefined).length,
     commanderTax: Object.values(p.commanderCastCounts).reduce((a, b) => a + b, 0),
-    nonlandMana,
+    nonlandMana: nonlandMana - stuckMana * (1 - STUCK_MANA_SHARE),
     drawEngines,
     commanderOnBoard,
     idlePower,

@@ -713,6 +713,30 @@ function echoAsked(registry: CardRegistry): Game | ScenarioResult {
   return game;
 }
 
+/** Alice's upkeep, asked whether to pay {4} to untap a tapped Mana Vault, on
+ * `forests` untapped Forests with a Craw Wurm ({4}{G}{G}) her whole hand. */
+function vaultAsked(registry: CardRegistry, forests: number): Game | ScenarioResult {
+  const game = table(registry, [A, B], A);
+  lands(game, "Forest", A, forests);
+  onBoard(game, "Mana Vault", A, true);
+  const turn = game.state.turn.number;
+  game.advanceUntil(
+    (s) =>
+      (s.turn.number > turn &&
+        s.turnOrder[s.turn.activePlayerIndex] === A &&
+        s.awaiting?.kind === "choose-modes" &&
+        s.awaiting.player === A) ||
+      s.result.over ||
+      s.turn.number > turn + 4,
+  );
+  if (game.state.awaiting?.kind !== "choose-modes") {
+    return { passed: false, detail: `Mana Vault's upkeep never asked (${game.state.awaiting?.kind ?? "nothing waiting"})` };
+  }
+  game.state.zones.perPlayer[A].hand = [];
+  game.debugSpawn("Craw Wurm", A, "hand");
+  return game;
+}
+
 /** Alice's cleanup step with eight cards in hand, asked which to discard, on
  * `plains` Plains: a Plains, Smothering Tithe, Monastery Mentor, Kykar,
  * Wind's Fury and four Serra Angels. The cards' ids come back with the game. */
@@ -8467,7 +8491,6 @@ const SCENARIOS: readonly BotScenario[] = [
   {
     name: "untaps Basalt Monolith before its own turn, with lands that untap there anyway",
     rule: "A mana rock that doesn't untap by itself is untapped with mana that is about to untap: the next turn has the rock's mana as well as the lands'.",
-    kind: "training",
     run(weights, registry, makeBot) {
       // Reported from a live game (2026-11-24, kept game B8NWK): "not
       // untapping basalt monolith on opponent's endstep". The bot tapped the
@@ -8480,6 +8503,11 @@ const SCENARIOS: readonly BotScenario[] = [
       // mana from its definition whether it is tapped or not (`nonlandMana`),
       // and `untappedMana` is weighted 0 because "that mana untaps", which
       // the Monolith's doesn't. A tie passes.
+      // Fixed by `STUCK_MANA_SHARE` (`features.ts`): a tapped permanent that
+      // doesn't untap by itself counts half its mana, so the untap is worth
+      // 0.75 wherever what pays for it untaps anyway. On the live board the
+      // same half-point has it chain Voltaic Key and Manifold Key through the
+      // Monolith for the Giant on its own turn.
       // Here: three Forests and the tapped Monolith make a Colossal Dreadmaw
       // next turn only if the Monolith is untapped by then.
       const game = table(registry, [A, B, C, D], A);
@@ -8498,6 +8526,49 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   },
+  asked({
+    name: "pays {4} to untap Mana Vault when the turn has nothing to cast",
+    rule: "Mana with nothing to spend it on recharges a mana rock that doesn't untap by itself.",
+    position(registry) {
+      // The Basalt Monolith report's other card (the Ur-Dragon and Y'shtola
+      // decks run a Vault): "At the beginning of your upkeep, you may pay
+      // {4}. If you do, untap this artifact." Four Forests and a Craw Wurm:
+      // no Wurm this turn either way, and a tapped Vault is a damage a turn.
+      // A guard, with the next: the bot paid here before `STUCK_MANA_SHARE`
+      // too (for the damage), and the pair holds the Vault's payment where
+      // it was while a tapped Vault counts for less.
+      const game = vaultAsked(registry, 4);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "leaves Mana Vault tapped when its {4} is the turn's spell",
+    rule: "A rock's untap isn't paid for with the mana a spell in hand needs this turn.",
+    position(registry) {
+      // The guard on the scenario above: six Forests cast the Craw Wurm;
+      // four of them into the Vault leave two Forests and three colourless,
+      // five for a six-drop. Half a point for the untapped Vault mustn't
+      // outbid the spell (the declined payment's margin, `KEPT_PER_MANA`).
+      const game = vaultAsked(registry, 6);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length === 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   {
     name: "beholds an Elf to untap the land Elven Passage finds",
     rule: "A free \"you may\" that untaps our own land is taken: the land casts a spell this turn.",

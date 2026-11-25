@@ -28,8 +28,8 @@ the other eleven pay-{X} spells are cast as before.
 
 ## 2026-11-24 — Basalt Monolith left tapped for the rest of the game
 
-Status: open. Scenario (training): "untaps Basalt Monolith before its own turn, with lands that
-untap there anyway".
+Status: fixed 2026-11-24. Scenario: "untaps Basalt Monolith before its own turn, with lands that
+untap there anyway" (now gates), with two for Mana Vault's upkeep payment beside it.
 
 Reported by the user: "not untapping basalt monolith on opponent's endstep in game B8NWK". In the
 kept game (`games/2026-11-25/B8NWK-1-2163417874.json.gz`, which replays to the last event on
@@ -55,6 +55,18 @@ with no end-step untap at all, through its two Keys (three mana; Voltaic Key at 
 it, Manifold Key at the Monolith, tap it: seven). `bot/untap-plans.ts` finds "tap a land, untap
 it, cast what that pays for" in our own main phase; it only tries our untapped lands, so a rock
 that is already tapped, and a line two untaps long, are outside it.
+
+**Fixed:** a tapped permanent that makes mana and doesn't untap by itself (an unconditional
+`doesntUntap` of its own: Basalt Monolith, Grim Monolith, Mana Vault) counts half its mana in
+`nonlandMana` (`features.ts`'s `STUCK_MANA_SHARE`), so the untap is worth 0.75 wherever what pays
+for it untaps anyway, and tapping the rock for a spell costs the same 0.75, under what a spell is
+worth. `earlyMana` keeps the full count (at 6 a mana, tapping it on turn four would read as nine
+points lost). On the live board the bot now untaps the Monolith with Voltaic Key in Zurgo's end
+step; and from the game's own turn 24 and turn 28 positions, Monolith tapped, it plays both Keys
+at the Monolith and casts Boonweaver Giant, so the second miss needed nothing of its own: each
+Key's untap is now a gain by itself, where before it was a tie two activations away from a cast.
+Mana Vault's upkeep payment is where it was (paid with nothing to cast, declined when the {4} is
+the turn's spell; two gate scenarios). The plan was:
 
 **Likely fix:** two parts, the first enough for the report.
 - A term for mana that won't come back: our tapped permanents that make mana and don't untap in

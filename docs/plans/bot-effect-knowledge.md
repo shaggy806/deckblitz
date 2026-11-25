@@ -1327,6 +1327,31 @@ reason a player could see. (The first eighteen games read 50%; it was at 25.6% b
 a bench at a hundred games, not twenty.) The opponents' hands are the knowledge left, and
 likely the part that is worth something.
 
+### A mana rock that doesn't untap (2026-11-24)
+
+A live report (kept game B8NWK, `docs/bot-misplays.md`): Basalt Monolith tapped on the bot's
+fifth turn and never untapped, a seven-mana Boonweaver Giant in hand to the end. At the end of
+the turn before its own, three lands spare, "{3}: Untap this artifact" scored the same as passing
+to the last digit: the evaluation counted a permanent's mana from its definition, tapped or not,
+and `untappedMana` is 0 because a land's mana untaps. This rock's doesn't.
+
+`STUCK_MANA_SHARE` (`features.ts`): a tapped permanent with an unconditional "doesn't untap
+during your untap step" of its own counts half its mana in `nonlandMana`. At the weight's 0.5
+that is 0.75 for the Monolith: the untap wins wherever what pays for it untaps anyway, and
+tapping the rock for a spell costs the same, well under a spell. Not a new weight, and not
+`untappedMana` (which stays 0 for the reason on it); `earlyMana` keeps the full count, since at
+6 a mana a tap on turn four would cost nine points.
+
+It also fixed what looked like a second problem. On that board the Giant was castable through
+Voltaic Key and Manifold Key at the tapped Monolith, a line two untaps deep that the search never
+saw; now each Key's untap is a gain by itself, and from the game's own turn 24 and 28 positions
+the bot plays both and casts the Giant. Mana Vault's upkeep payment didn't move (two gate
+scenarios: paid with nothing to cast, declined when the {4} is the turn's spell).
+
+`bot:diff` against the commit before, on the Ur-Dragon, Y'shtola, Giada and Ureni decks (the two
+strong decks with a Mana Vault): 0 of 5,203 decisions differ over three games; the fourth was
+stopped at the user's word. Nothing else moved, and those games never raised the Vault's case.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until
