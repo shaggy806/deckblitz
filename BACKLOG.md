@@ -107,7 +107,7 @@ section keeps only what to do next.
 - **111 Wizards precons are a card or more short of playing as printed** (2026-11-16, `node
   engine/scripts/gen-tooling-precons.mjs --short`; 86 of MTGJSON's 199 play whole): 51 of them
   one card short, 171 distinct cards in all, 41 in more than one deck (Loreseeker's Stone in
-  five; Death by Dragons in four; Suffer the Past, Dawnbreak Reclaimer, Dearly Departed and
+  five; Death by Dragons in four, landed 2026-11-24; Suffer the Past, Dawnbreak Reclaimer, Dearly Departed and
   Anya, Merciless Angel in three). A deck joins the bot tools' precons on the next run of the
   script once its last card lands; nothing ranks these cards ahead of the EDHREC order.
 - **Playtest cards: 555 of 759 still blocked** (B341, 2026-11-23: the user asked for those needing

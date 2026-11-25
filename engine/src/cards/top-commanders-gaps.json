@@ -3233,7 +3233,8 @@
   "effect:each-player-chooses-permanents-rest-phase-out",
   "effect:repeat-choice-excluding-earlier-passes",
   "mechanic:secret-choice",
-  "mechanic:sectors"
+  "mechanic:sectors",
+  "effect:for-each-player-except-target"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

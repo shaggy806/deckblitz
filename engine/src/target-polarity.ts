@@ -1015,7 +1015,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // A free turn up, its cost saved and its card's abilities on (Ixidor);
   // a card that makes it an opponent's says so in its target (Break Open).
   "turn-face-up": (n, v) => v.touch(n.target, "help", MINOR),
-  "create-token": (n, v) => v.touch(n.who === "target-controller" ? 0 : undefined, "help", MINOR),
+  // Tokens for each player but the one in a slot (Death by Dragons' "each
+  // player other than target player creates a 5/5 Dragon"): the target is
+  // the one left out, so it's an opponent's.
+  "create-token": (n, v) =>
+    typeof n.who === "object" && "otherThan" in n.who
+      ? v.touch(slotOfPlayer(n.who.otherThan), "harm", MINOR)
+      : v.touch(n.who === "target-controller" ? 0 : undefined, "help", MINOR),
   // A copy goes to the copied permanent's controller unless the card says
   // it's yours (Hate Mirage), or hands it to the player in a slot (Wedding
   // Ring, Arcane Artisan).

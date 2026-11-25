@@ -6537,6 +6537,7 @@ import _poolDearlyDeparted from "./pool/dearly-departed.js";
 import _poolDeathBaron from "./pool/death-baron.js";
 import _poolDeathBegetsLife from "./pool/death-begets-life.js";
 import _poolDeathBomb from "./pool/death-bomb.js";
+import _poolDeathByDragons from "./pool/death-by-dragons.js";
 import _poolDeathCharmer from "./pool/death-charmer.js";
 import _poolDeathCloud from "./pool/death-cloud.js";
 import _poolDeathCultist from "./pool/death-cultist.js";
@@ -40643,6 +40644,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeathBaron,
   _poolDeathBegetsLife,
   _poolDeathBomb,
+  _poolDeathByDragons,
   _poolDeathCharmer,
   _poolDeathCloud,
   _poolDeathCultist,
@@ -74762,6 +74764,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/death-baron": _poolDeathBaron,
   "pool/death-begets-life": _poolDeathBegetsLife,
   "pool/death-bomb": _poolDeathBomb,
+  "pool/death-by-dragons": _poolDeathByDragons,
   "pool/death-charmer": _poolDeathCharmer,
   "pool/death-cloud": _poolDeathCloud,
   "pool/death-cultist": _poolDeathCultist,
