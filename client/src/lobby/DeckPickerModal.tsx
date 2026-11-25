@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { CommanderCandidate } from 'protocol'
 import { commanderPrintings, deckLabel, deckSourceNote, listPickableDecks } from '../deck-builder/decks.ts'
 import type { PickableDeck } from '../deck-builder/decks.ts'
@@ -12,6 +12,26 @@ import './lobby.css'
 
 /** The tab that imports a pasted list (`DeckImportTab`). */
 const IMPORT_TAB = 'import'
+
+/** The bot picker's tab last open, kept in this browser: a bot added to an
+ * open seat starts on it (the user, 2026-11-25). */
+const BOT_TAB_KEY = 'mtg.lobby.botDeckTab'
+
+function readBotTab(): string | null {
+  try {
+    return window.localStorage.getItem(BOT_TAB_KEY)
+  } catch {
+    return null
+  }
+}
+
+function writeBotTab(id: string): void {
+  try {
+    window.localStorage.setItem(BOT_TAB_KEY, id)
+  } catch {
+    // Not remembered; the picker opens on its first tab next time.
+  }
+}
 
 /**
  * The popup the seat board opens when you click a seat's deck slot — lets
@@ -32,7 +52,9 @@ const IMPORT_TAB = 'import'
  * 2026-11-22: "it should remain a manual choice"): the "+ Bot" buttons and
  * Fill with bots never deal one, and the tab comes last so the picker opens
  * on the bot decks. It opens on the group holding `current`, the seat's deck
- * by name, so the choice already made is in view. The "build a new one" link
+ * by name, so the choice already made is in view; a bot's picker with no
+ * deck yet opens on the tab it last had open (`BOT_TAB_KEY`, the user,
+ * 2026-11-25), so adding bots from one bracket is a click each. The "build a new one" link
  * is for your own seat: it leaves the room's page.
  */
 export function DeckPickerModal({
@@ -64,10 +86,16 @@ export function DeckPickerModal({
     // A pasted list, for your own seat: no visit to the deck builder first.
     .concat(forBot ? [] : [{ id: IMPORT_TAB, label: 'Import list', decks: [] }])
   const [chosen, setChosen] = useState<string | null>(null)
+  const [remembered] = useState(() => (forBot ? readBotTab() : null))
   const open =
     groups.find((g) => g.id === chosen) ??
     groups.find((g) => current != null && g.decks.some((d) => d.name === current)) ??
+    groups.find((g) => g.id === remembered) ??
     groups[0]
+  const openId = open?.id ?? null
+  useEffect(() => {
+    if (forBot && openId !== null) writeBotTab(openId)
+  }, [forBot, openId])
 
   return (
     <div className="deck-picker-overlay" onClick={onClose}>

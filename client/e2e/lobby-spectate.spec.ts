@@ -276,6 +276,39 @@ test('the host can take every bot out, down to an open seat at a table of two', 
   await host.context().close()
 })
 
+// The user, 2026-11-25: a bot's deck picker opens on the list last open, so
+// adding several bots from one bracket doesn't mean finding it each time.
+test("adding a bot, the deck picker opens on the list last open", async ({ browser }) => {
+  const host = await newPage(browser)
+  const errors = pageErrors(host)
+  await host.goto('/')
+  await host.getByRole('button', { name: 'Create a game' }).click()
+  await expect(host.getByRole('button', { name: 'Ready', exact: true })).toBeVisible()
+
+  const grid = host.locator('.seat-board-grid')
+  const picker = host.locator('.deck-picker-box')
+  const tab = (name: string) => picker.getByRole('tab', { name })
+  // The first time, the first list.
+  await grid.locator('.seat-panel').nth(1).locator('.seat-deck-slot').click()
+  await expect(tab('Bracket 2')).toHaveAttribute('aria-selected', 'true')
+  await tab('Bracket 4').click()
+  await picker.locator('.deck-picker-row').first().click()
+  await expect(grid.locator('.seat-panel-tag', { hasText: 'Bot' })).toHaveCount(1)
+
+  // The next bot's picker opens where that one was picked.
+  await grid.getByRole('button', { name: /Add player/ }).first().click()
+  await grid.locator('.seat-panel').nth(2).locator('.seat-deck-slot').click()
+  await expect(tab('Bracket 4')).toHaveAttribute('aria-selected', 'true')
+  await shots(host, 'lobby-bot-picker-remembers')
+  // A list looked at and closed counts too.
+  await tab('Bracket 3').click()
+  await picker.getByRole('button', { name: 'Close' }).click()
+  await grid.locator('.seat-panel').nth(2).locator('.seat-deck-slot').click()
+  await expect(tab('Bracket 3')).toHaveAttribute('aria-selected', 'true')
+  expect(errors).toEqual([])
+  await host.context().close()
+})
+
 test('a full room can be watched: the seat board, then the game with no hand', async ({ browser }) => {
   // A waiting room grows a seat for each newcomer up to four, so it's full
   // at four: the host and three bots.
