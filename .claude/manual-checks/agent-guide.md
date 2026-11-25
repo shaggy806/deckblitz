@@ -24,14 +24,20 @@ Run it (from the repo root; `<out>` and `<ports>` are in your task):
 About 25 seconds a test, two at a time. It prints, for each test and after each step, the screen
 as text:
 
-- the turn, whose it is and the step (`turn 1, alice's, declare-attackers`).
+- the turn, whose it is, the step and the seat you are playing now
+  (`turn 1, alice's, declare-attackers — you are alice`). Where an opponent is a seat of yours,
+  the run moves you to whichever seat must act: read `you are` before every step, since a
+  `pass` or a click is that seat's.
 - `banner`: the prompt in the bottom-right corner, with its buttons' words. This is where a
   test's quoted prompt text appears.
-- `popup`: a zone viewer or a choice of cards, by its title, with the cards by pile.
+- `popup`: a zone viewer or a choice of cards, by its title, with its cards (`[picked]` on one
+  you have chosen, `[can't pick]` on one you can't, its number in a chosen order) and then
+  `buttons:` its own buttons, `(off)` on one that can't be pressed yet. Picking a card in a
+  popup only marks it: the choice is made by the popup's button (`click:Confirm`).
 - `menu`: an open menu's items (a permanent's abilities, a choice of mana), `(off)` on one that
   can't be picked.
 - `badges`: marks drawn on tiles (an attacker's `⚔ Bob`, a chosen word).
-- each player's life and zone counts, and `board <player>:` their permanents, each as
+- each player's life, zone counts and counters (`, 3 poison`), and `board <player>:` their permanents, each as
   `Name 2/2 (tapped, sick, 2 +1/+1, flying, on <what it's attached to>)`; `hand:` your hand;
   `mana:` your unspent mana; each graveyard and exile with anything in it. A line is printed
   only where it has changed since the step before.
@@ -52,8 +58,18 @@ play another seat, the run follows whichever of your seats must act.
 - `player:<name>`: pick a player. `x:<n>`: the choose-X box, before its `click:Confirm`.
 - `pass`: pass priority once. `wait`: wait for the bots, up to 30 s, until a decision is yours
   or the stack has emptied.
+- `look:<card>`: read a card without clicking it, wherever it is: the step prints its type
+  line, power and toughness, keywords and rules text as they are now (`look Sakashima the
+  Impostor (alice's, hand): legendary creature — Human Rogue, 3/1 — …`). For a test about what
+  a permanent has become: its types, a lost or gained ability.
 - `hover:<card>`: leave the pointer on a card for that step's screenshot.
 - `unfollow`: stay in this seat while another of yours must act.
+- A `#2` at the end picks the second thing the words match (`#3` the third): the second of two
+  permanents with one name (`card:Grizzly Bears#2`), the second of two buttons with one text
+  (`click:+#2` in a divided amount, `click:Add one mana of any color#5` for the fifth entry of a
+  menu whose items differ only by mana symbols).
+- `stack:<entry>` also picks a spell or ability on the stack where a prompt asks for one (a
+  source of damage, a spell to counter).
 
 After every step the run passes priority for you while your own spell or ability is on top of
 the stack, so what a test is about comes up as it resolves. A plan entry with `"hold": true`
@@ -69,18 +85,26 @@ order things resolve in or about responding.
   picks an attacker, then `click:Attack with` (or `click:No attacks`). Blocks work the same way.
 - Clicking a permanent with an ability to activate opens its `menu`: the next step is
   `click:<some words of the item>`. A hand card with more than one way to play it opens one too.
-  Menu items that differ only by mana symbols are hard to tell apart by `click:`; try the
-  words in brackets, and if no wording works that part is `cannot-judge`.
+  Mana symbols in an item can't be matched by `click:`: use the item's words, with `#n` where
+  several items share them.
+- A decision that comes as something resolves is asked only once it resolves. With `"hold":
+  true` that means a `pass` first; the banner then shows the question.
 - Targets are picked with `card:` or `player:` once the banner asks (`choose creature (1/1)`).
 - The run passes for you only while **your own** spell or ability is on top. An opponent's
   trigger on the stack waits for your `pass`. `wait` is for a bot's turn or thinking, not for
   the stack.
 - A bot opponent plays its own turn: cards it draws and plays show in the log and are not part
   of the test.
+- Mana you add and don't spend is gone by the next step, and with nothing left to do the page
+  passes for you. To read `mana:` after tapping for it, play the test with `"hold": true`.
+- A click that is refused prints nothing new. For a test whose Expect is that something can't
+  be done, that silence is the evidence: quote the unchanged banner, stack and log, and say so.
 
 A run marked `[a step found nothing to act on …]` stopped at that step: the banner printed there
 says what the game was asking instead. Fix the steps and run **only the tests that need it**
-again, in a new plan. At most **three runs a test**; after that it is `cannot-judge`.
+again, in a new plan. At most **five runs a test**; after that it is `cannot-judge`. A long
+test (a second seat, an extra combat, an end step) is best built up: run it as far as you are
+sure of, read where it stopped, and add the next steps to the same list.
 
 ## The verdict
 
@@ -92,7 +116,8 @@ again, in a new plan. At most **three runs a test**; after that it is `cannot-ju
   is not a failure.
 - **cannot-judge**: **Expect** is about how something looks or moves (a glow, a colour, an
   animation, where something sits, an arrow), or about something the runner's text does not
-  show, or three runs did not get there. Say which in a few words. For something that looks a
+  show, or five runs did not get there. Say which in a few words, and in `evidence` quote what
+  you did confirm, so the part that is left is clear. For something that looks a
   certain way while standing still, you may open **one** screenshot of that test
   (`<out>/run-N/<nn>/<step>.png`, with the Read tool) and judge from it; never for motion.
 

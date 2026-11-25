@@ -173,6 +173,16 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 
+**The log says a creature "can't attack this combat" when it only can't attack one player.**
+Found 2026-11-25 (an agent playing "Chaos Dragon: it cannot attack whoever rolled highest"; replayed).
+Chaos Dragon's trigger makes it unable to attack the player who rolled highest (`restrict` with
+`{ kind: "cant-attack", at: { playerAndPlaneswalkers: "that-player" } }`), and the board is right: that
+player can't be picked, the others can, and the banner says it must attack. But the log line reads
+"Chaos Dragon can't attack this combat". The `restrictions-imposed` event carries the restrictions as
+bare words (`CombatWord[]`), so `client/src/format.ts`'s `RESTRICTION_TEXT` has no one to name. Fix:
+the event carries each record's `at` resolved to a player (an optional field beside `restrictions`,
+set where `Game` emits it for the `restrict` effect), and the log says "can't attack Dave this combat".
+
 **The scenario builder can't hold the initiative or a dungeon position**
 
 The scenario builder's

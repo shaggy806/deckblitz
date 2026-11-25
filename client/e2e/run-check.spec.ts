@@ -82,7 +82,7 @@ function snapshot(page: Page): Promise<Snapshot> {
   return page.evaluate(() => {
     type View = {
       turnOrder: string[]
-      players: Record<string, { life: number; handSize: number; graveyardSize: number; librarySize: number; hasLost: boolean }>
+      players: Record<string, { life: number; handSize: number; graveyardSize: number; librarySize: number; hasLost: boolean; counters?: Record<string, number> }>
       objects: Record<string, { cardName: string; copyOf?: string | null; controller: string }>
       zones: { stack: string[]; exile: string[]; exileOwners: Record<string, string> }
       priority: { active: boolean; holder: string | null }
@@ -94,14 +94,40 @@ function snapshot(page: Page): Promise<Snapshot> {
     const line = (el: Element | null) => (el === null ? '' : (el as HTMLElement).innerText.replace(/\s+/g, ' ').trim())
     const nameOf = (id: string) => (view?.objects[id] ? (view.objects[id].copyOf ?? view.objects[id].cardName) : 'face-down')
     const tileName = (el: Element) => line(el.querySelector('.ct-name')) || (el.querySelector('.card-back') ? 'face-down' : '?')
+    // A card in a popup with what a player sees of it: picked, not
+    // pickable, its badge ("2" in a chosen order, "×3", "Plotted").
+    const popupCard = (el: Element): string => {
+      const tile = el.matches('.card-tile') ? el : el.querySelector('.card-tile')
+      const marks = [
+        ...(tile?.classList.contains('selected') === true || el.querySelector('.picked') !== null ? ['picked'] : []),
+        ...(tile?.classList.contains('dimmed') === true ? ["can't pick"] : []),
+        ...[line(el.querySelector('.card-badge'))].filter((b) => b !== '' && b !== '✓ Picked'),
+      ]
+      return `${tileName(el)}${marks.length > 0 ? ` [${marks.join(', ')}]` : ''}`
+    }
+    // A popup's own buttons (Confirm, Done, "Choose top"), `(off)` where one can't be pressed.
+    const popupButtons = (box: Element): string => {
+      const buttons = [...box.querySelectorAll('button')]
+        .filter((b) => !b.matches('.card-tile, .card-back') && b.closest('.zone-viewer-card') === null)
+        .map((b) => `${line(b)}${b.disabled ? ' (off)' : ''}`)
+        .filter((text) => text !== '' && text !== '(off)')
+      return buttons.length > 0 ? ` — buttons: ${[...new Set(buttons)].join(' | ')}` : ''
+    }
     const popups = [...document.querySelectorAll('.zone-viewer-box[role="dialog"]')].map((box) => {
       const title = box.getAttribute('aria-label') ?? line(box.querySelector('h2'))
       const piles = [...box.querySelectorAll('.pile-section')]
       const groups = piles.length > 0
         ? piles.map((p) => `${line(p.querySelector('.pile-head strong'))} (${[...p.querySelectorAll('.zone-viewer-cards > *')].filter((c) => !c.matches('.muted')).map(tileName).join(', ') || 'empty'})`)
-        : [[...box.querySelectorAll('.zone-viewer-card, .card-back')].map(tileName).join(', ')]
-      return `"${title}": ${groups.join(' | ')}`
+        : [[...box.querySelectorAll('.zone-viewer-card, .card-back')].filter((c) => c.matches('.zone-viewer-card') || c.closest('.zone-viewer-card') === null).map(popupCard).join(', ')]
+      return `"${title}": ${groups.join(' | ')}${popupButtons(box)}`
     })
+    // Any other dialog over the board (a scry, a dungeon, a picker of words):
+    // its words and its buttons, cut short.
+    for (const box of document.querySelectorAll('[role="dialog"]:not(.zone-viewer-box):not(.motion-panel):not(.site-link-note)')) {
+      if (box.closest('.builder-panel') !== null || box.getClientRects().length === 0) continue
+      const words = line(box)
+      popups.push(`"${box.getAttribute('aria-label') ?? 'dialog'}": ${words.length > 300 ? `${words.slice(0, 300)} …` : words}${popupButtons(box)}`)
+    }
     // A tile is one object (`data-obj-id`) or a stack of them (`data-obj-ids`).
     const badges = [...document.querySelectorAll('.board :is(.card-badge, .mt-badge)')].map((badge) => {
       const tile = badge.closest('[data-obj-id], [data-obj-ids]')
@@ -111,7 +137,8 @@ function snapshot(page: Page): Promise<Snapshot> {
     const players = view === null ? [] : view.turnOrder.map((id) => {
       const p = view.players[id]
       const exile = view.zones.exile.filter((x) => view.zones.exileOwners[x] === id).length
-      return `${id}${id === dv?.seat ? ' (you)' : ''}: life ${p.life}, hand ${p.handSize}, graveyard ${p.graveyardSize}, exile ${exile}, library ${p.librarySize}${p.hasLost ? ', lost' : ''}`
+      const counters = Object.entries(p.counters ?? {}).filter(([, n]) => typeof n === 'number' && n > 0).map(([kind, n]) => `, ${n} ${kind}`).join('')
+      return `${id}${id === dv?.seat ? ' (you)' : ''}: life ${p.life}, hand ${p.handSize}, graveyard ${p.graveyardSize}, exile ${exile}, library ${p.librarySize}${counters}${p.hasLost ? ', lost' : ''}`
     })
     const stack = view === null ? [] : view.zones.stack.map(nameOf)
     const drawn = [...document.querySelectorAll('.stack-overlay .stack-entry')].map((entry) =>
@@ -175,7 +202,7 @@ function snapshot(page: Page): Promise<Snapshot> {
         )
         return `"${menu.getAttribute('aria-label') ?? ''}": ${[...new Set(items)].join(' | ')}`
       })
-    const turn = full?.turn === undefined ? '' : `turn ${full.turn.number}, ${full.activePlayer ?? '?'}'s, ${full.turn.step}`
+    const turn = full?.turn === undefined ? '' : `turn ${full.turn.number}, ${full.activePlayer ?? '?'}'s, ${full.turn.step} — you are ${mine || '?'}`
     const logSince = (dv as unknown as { logSince?: (seq: number, max: number) => { seq: number; text: string }[] } | undefined)?.logSince
     const since = (window as Window & { runCheckLogSeq?: number }).runCheckLogSeq ?? -1
     const fresh = logSince === undefined ? [] : logSince.call(dv, since, 40)
@@ -252,9 +279,12 @@ async function settle(page: Page, forBots: boolean, hold = false): Promise<Snaps
 /** What the last print said of the board, hand and piles: a line is printed
  * again only where it has changed, so a long run stays short to read. */
 const printed = new Map<string, string>()
+/** What `look:` steps read, printed with the step and then dropped. */
+const looked: string[] = []
 
 async function print(page: Page, label: string, s: Snapshot, shot: string): Promise<void> {
   const out = [`== ${label}`, `  ${s.turn}`, `  banner: ${s.banner || '—'}`]
+  for (const l of looked.splice(0)) out.push(`  look ${l}`)
   for (const p of s.popups) out.push(`  popup ${p}`)
   for (const m of s.menus) out.push(`  menu ${m}`)
   if (s.badges.length > 0) out.push(`  badges: ${s.badges.join('; ')}`)
@@ -285,18 +315,22 @@ async function print(page: Page, label: string, s: Snapshot, shot: string): Prom
 
 /** The id of the first object in one of the view's id lists named `name`
  * (a piece of the name will do). */
-function findId(page: Page, zone: 'hand' | 'battlefield' | 'command', name: string): Promise<string | null> {
+function findId(page: Page, zone: 'hand' | 'battlefield' | 'command', name: string, nth = 0): Promise<string | null> {
   return page.evaluate(
-    ([zone, name]) => {
+    ([zone, name, nth]) => {
       const dv = (window as Window & { deckblitzView?: { view: { perspective?: string; objects: Record<string, { cardName: string; copyOf?: string | null }>; zones: { battlefield: string[]; command: string[]; hands: Record<string, string[]> } } | null; seat: string | null } }).deckblitzView
       const view = dv?.view
       if (!view) return null
       const ids = zone === 'hand' ? (view.zones.hands[view.perspective ?? dv?.seat ?? ''] ?? []) : zone === 'command' ? view.zones.command : view.zones.battlefield
       const wanted = name.toLowerCase()
       const exact = ids.find((id) => view.objects[id]?.cardName.toLowerCase() === wanted)
-      return exact ?? ids.find((id) => view.objects[id]?.cardName.toLowerCase().includes(wanted)) ?? null
+      if (nth === 0) return exact ?? ids.find((id) => view.objects[id]?.cardName.toLowerCase().includes(wanted)) ?? null
+      // "Grizzly Bears#2": the second of that name, in the zone's own order.
+      const named = ids.filter((id) => view.objects[id]?.cardName.toLowerCase() === wanted)
+      const all = named.length > 0 ? named : ids.filter((id) => view.objects[id]?.cardName.toLowerCase().includes(wanted))
+      return all[nth] ?? null
     },
-    [zone, name] as const,
+    [zone, name, nth] as const,
   )
 }
 
@@ -304,9 +338,14 @@ function findId(page: Page, zone: 'hand' | 'battlefield' | 'command', name: stri
 async function runStep(page: Page, step: string): Promise<boolean> {
   const colon = step.indexOf(':')
   const kind = (colon < 0 ? step : step.slice(0, colon)).trim().toLowerCase()
-  const arg = colon < 0 ? '' : step.slice(colon + 1).trim()
-  const visibleFirst = async (sel: ReturnType<Page['locator']>) => {
-    const loc = sel.filter({ visible: true }).first()
+  const whole = colon < 0 ? '' : step.slice(colon + 1).trim()
+  // "Grizzly Bears#2", "+#2": the second thing the words match, where two
+  // permanents share a name or two buttons their text.
+  const numbered = /#(\d+)$/.exec(whole)
+  const nth = numbered === null ? 0 : Math.max(0, Number(numbered[1]) - 1)
+  const arg = numbered === null ? whole : whole.slice(0, numbered.index).trim()
+  const visibleFirst = async (sel: ReturnType<Page['locator']>, which = nth) => {
+    const loc = sel.filter({ visible: true }).nth(which)
     if ((await loc.count()) === 0) return false
     // A hover card or an animation over it: the click sent to it directly.
     await loc.click({ timeout: 3_000 }).catch(() => loc.dispatchEvent('click'))
@@ -315,7 +354,7 @@ async function runStep(page: Page, step: string): Promise<boolean> {
   switch (kind) {
     case 'cast':
     case 'hand': {
-      const id = await findId(page, 'hand', arg)
+      const id = await findId(page, 'hand', arg, nth)
       if (id === null) return false
       // The tile stays disabled while the last spell's frames play: a second
       // cast straight after a first would be lost. It may be disabled for good
@@ -329,7 +368,7 @@ async function runStep(page: Page, step: string): Promise<boolean> {
     case 'hover': {
       // The pointer left on a card for the shot: a hand card raised out of
       // its tray, or a permanent's hover card.
-      const inHand = await findId(page, 'hand', arg)
+      const inHand = await findId(page, 'hand', arg, nth)
       if (inHand !== null) {
         const tile = page.locator(`.hand-card[data-obj-id="${inHand}"] .card-tile`)
         // The tray sits under the screen's edge until the pointer is on it:
@@ -340,7 +379,7 @@ async function runStep(page: Page, step: string): Promise<boolean> {
         await page.waitForTimeout(900)
         return true
       }
-      const onBoard = await findId(page, 'battlefield', arg)
+      const onBoard = await findId(page, 'battlefield', arg, nth)
       if (onBoard === null) return false
       await page.locator(`.board [data-obj-id="${onBoard}"]`).first().hover({ timeout: 3_000 })
       await page.waitForTimeout(900)
@@ -353,7 +392,7 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       // The popup waits out a long animation (ten cards exiled), as `click:` does.
       for (const limit = Date.now() + 25_000; ; await page.waitForTimeout(250)) {
         if (await visibleFirst(inPopup.locator('.card-tile'))) return true
-        const id = await findId(page, 'battlefield', arg)
+        const id = await findId(page, 'battlefield', arg, nth)
         if (id !== null) {
           // An attachment sits behind its host: only its strip below can be clicked.
           const attached = page.locator(`.board .attachments [data-obj-id="${id}"]`).first()
@@ -364,11 +403,11 @@ async function runStep(page: Page, step: string): Promise<boolean> {
             await attached.click({ position: { x: box.width / 2, y: box.height - 3 }, timeout: 3_000 })
             return true
           }
-          return visibleFirst(page.locator(`.board [data-obj-id="${id}"]`))
+          return visibleFirst(page.locator(`.board [data-obj-id="${id}"]`), 0)
         }
-        if ((await findId(page, 'hand', arg)) !== null) return runStep(page, `hand:${arg}`)
-        const commander = await findId(page, 'command', arg)
-        if (commander !== null) return visibleFirst(page.locator(`.commander-tile-wrap[data-obj-id="${commander}"] .commander-tile`))
+        if ((await findId(page, 'hand', arg, nth)) !== null) return runStep(page, `hand:${arg}#${nth + 1}`)
+        const commander = await findId(page, 'command', arg, nth)
+        if (commander !== null) return visibleFirst(page.locator(`.commander-tile-wrap[data-obj-id="${commander}"] .commander-tile`), 0)
         // A library's top card where it's shown (Courser of Kruphix).
         const top = page.locator('.library-top', { has: page.locator('.ct-name', { hasText: pattern(arg) }) })
         if (await visibleFirst(top.locator('.card-tile'))) return true
@@ -403,6 +442,28 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       return visibleFirst(page.locator('.stack-entry', { hasText: pattern(arg) }).locator('.stack-card .card-tile'))
     case 'player':
       return visibleFirst(page.locator('[data-player-id]', { has: page.locator('.pp-name', { hasText: pattern(arg) }) }))
+    case 'look': {
+      // A card read rather than clicked: its type line, power and toughness,
+      // keywords and rules text as they are now, printed with the step.
+      const read = await page.evaluate(
+        ([name, nth]) => {
+          type Seen = { cardName: string; copyOf?: string | null; controller?: string; zone?: string; supertypes?: string[]; types?: string[]; subtypes?: string[]; power: number | null; toughness: number | null; keywords?: string[]; text?: string }
+          const view = (window as Window & { deckblitzView?: { view: { objects: Record<string, Seen> } | null } }).deckblitzView?.view
+          if (!view) return null
+          const wanted = name.toLowerCase()
+          const all = Object.values(view.objects).filter((o) => (o.copyOf ?? o.cardName).toLowerCase().includes(wanted) || o.cardName.toLowerCase().includes(wanted))
+          const o = all[nth]
+          if (o === undefined) return null
+          const typeLine = [...(o.supertypes ?? []), ...(o.types ?? [])].join(' ') + ((o.subtypes ?? []).length > 0 ? ` — ${o.subtypes!.join(' ')}` : '')
+          const size = o.power !== null && o.toughness !== null ? `, ${o.power}/${o.toughness}` : ''
+          return `${o.copyOf ?? o.cardName} (${o.controller ?? '?'}'s, ${o.zone ?? '?'}): ${typeLine}${size}${(o.keywords ?? []).length > 0 ? `, ${o.keywords!.join(' ')}` : ''} — ${(o.text ?? '').replace(/\s+/g, ' ').slice(0, 500)}`
+        },
+        [arg, nth] as const,
+      )
+      if (read === null) return false
+      looked.push(read)
+      return true
+    }
     case 'pass':
       return visibleFirst(page.getByRole('button', { name: /^Pass/ }))
     case 'wait':
@@ -425,7 +486,7 @@ async function runStep(page: Page, step: string): Promise<boolean> {
       return true
     }
     default:
-      throw new Error(`unknown step "${step}": cast:, hand:, card:, stack:, click:, player:, pass, wait, unfollow`)
+      throw new Error(`unknown step "${step}": cast:, hand:, card:, look:, stack:, click:, player:, x:, hover:, pass, wait, unfollow`)
   }
 }
 
