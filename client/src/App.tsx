@@ -263,6 +263,9 @@ function graveyardVariantLabel(
     if (source !== undefined) parts.push(`via ${source}`)
   }
   if (a.kind === 'cast-spell') {
+    // A split card's whole, offered beside its halves, is the fused split
+    // spell (rule 702.102a): its row read "Cast Alive // Well" and no more.
+    if (a.face === 0 && a.cardName.includes(' // ')) parts.push('fused')
     if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push((a.via === 'flashback' || a.via === 'foretell-given') && a.altCostText !== undefined ? a.altCostText : a.via === 'more-than-meets-the-eye' ? 'More Than Meets the Eye' : a.via === 'face-down' ? 'face down, a 2/2' : a.via)
     if (a.overload) parts.push(`${a.overloadKeyword ?? 'overload'} ${a.overloadCost ?? ''}`.trim())
     if (a.free) parts.push('free')
@@ -274,8 +277,15 @@ function graveyardVariantLabel(
     if (a.optionalLifeText !== undefined) parts.push(a.optionalLifeText)
     if (a.splice) parts.push(`splicing ${a.splice.map((s) => `${s.cardName} ${s.cost}`).join(' and ')}`)
     if (a.evoke) parts.push(a.altCostText !== undefined ? `evoke: ${a.altCostText}` : `evoke ${a.evokeCost ?? ''}`.trim())
-    if (a.altCost && a.altCostText !== undefined) parts.push(a.altCostText)
-    if (a.altCostGainer !== undefined) parts.push(`${playerLabel(a.altCostGainer)} gains`)
+    // Invigorate's "an opponent gains 3 life", with the one this way names:
+    // "Bob gains 3 life" (it read "an opponent gains 3 life, Bob gains").
+    if (a.altCost && a.altCostText !== undefined) {
+      parts.push(
+        a.altCostGainer !== undefined
+          ? a.altCostText.replace(/^an opponent gains/, `${playerLabel(a.altCostGainer)} gains`)
+          : a.altCostText,
+      )
+    } else if (a.altCostGainer !== undefined) parts.push(`${playerLabel(a.altCostGainer)} gains`)
     if (a.harmonizeTap) parts.push(`tapping ${a.harmonizeTap.cardName} (−${a.harmonizeTap.power})`)
     if (a.sneakReturn) parts.push(`returning ${a.sneakReturn.cardName}`)
     if (a.webSlingingReturn) parts.push(`returning ${a.webSlingingReturn.cardName}`)
@@ -1038,13 +1048,22 @@ const SECTOR_CHOICE_NAMES: Readonly<Record<string, string>> = {
  * the part of the cost every such ability has (the card itself, discarded or
  * revealed) — "Ninjutsu {1}{U}", "Channel — {1}{G}". Short, as it's a pill
  * on a card's top edge: "…, Discard this card" ran past the card's sides
- * (the user, 2026-11-14). */
+ * (the user, 2026-11-14). An ability with no keyword or ability word to name
+ * it adds the start of its effect: Armus, Skin of Evil's pill read "{2}{B}"
+ * and Elvish Spirit Guide's "Exile this card from your hand", saying nothing
+ * of what either does (2026-11-24). The full text is the pill's tooltip. */
 function handAbilityLabel(text: string): string {
-  return text
-    .split(' (')[0]
-    .split(':')[0]
+  const head = text.split(' (')[0]
+  const colon = head.indexOf(':')
+  const cost = (colon < 0 ? head : head.slice(0, colon))
     .replace(/, (Discard|Reveal) this card( from your hand)?$/i, '')
+    .replace(/^Exile this card from your hand$/i, 'Exile')
+    .replace(/, Exile this card from your hand$/i, ', exile')
     .trim()
+  if (colon < 0 || !/^(\{|Exile\b|Return |Sacrifice |Pay |Tap )/.test(cost)) return cost
+  const effect = head.slice(colon + 1).trim().replace(/\.$/, '')
+  const short = effect.length > 32 ? `${effect.slice(0, 30).replace(/\{[^}]*$/, '').trimEnd()}…` : effect
+  return `${cost}: ${short}`
 }
 
 
@@ -8411,11 +8430,12 @@ function Table({
                     askLifeThen(cycle,(life) => game.dispatch({ type: 'cycle', player: seat, card: id, ...life }))
                   }
                 >
-                  Cycle <Symbols text={cycle.cost} />
+                  {/* "Basic landcycling {2}", not "Cycle {2}": a landcycling searches. */}
+                  {cycle.name === undefined || cycle.name === 'Cycling' ? 'Cycle' : cycle.name} <Symbols text={cycle.cost} />
                 </button>
               ) : null}
               {handAbilities.map((ab) => (
-                <button key={`ab-${ab.abilityIndex}`} type="button" onClick={() => clickAbility(ab)}>
+                <button key={`ab-${ab.abilityIndex}`} type="button" title={ab.text} onClick={() => clickAbility(ab)}>
                   <Symbols text={handAbilityLabel(ab.text)} />
                 </button>
               ))}

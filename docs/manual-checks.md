@@ -28,6 +28,12 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## What a hand card's ways and pills say (2026-11-24)
+
+### Lashknife: the free cast says it taps a creature
+- **Do:** Click Lashknife in your hand.
+- **Expect:** The menu's second row reads "Cast Lashknife (tap an untapped creature you control) — {0}". Choosing it, then Savannah Lions to enchant, taps the Lions and leaves both Plains untapped.
+
 ## A hand ability that can't be used right now (2026-11-23)
 
 ### Colossal Skyturtle: the channel ability with nothing to target is greyed, and says why

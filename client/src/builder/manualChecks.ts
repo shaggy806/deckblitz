@@ -13820,4 +13820,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Lashknife: the free cast says it taps a creature',
+    board({
+      you: { bf: ['Plains*2', 'Savannah Lions'], hand: ['Lashknife'] },
+    }),
+  ),
 ]
