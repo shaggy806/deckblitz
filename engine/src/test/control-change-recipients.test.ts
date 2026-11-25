@@ -263,6 +263,67 @@ describe("a different opponent for each permanent", () => {
     expect(zone(game, elf)).toBe("battlefield");
     expect(controller(game, elf)).toBe(C);
   });
+
+  it("Preston's copies of what Dack hands out are Dack's controller's (a bug report, 2026-11-25)", () => {
+    const { game, a } = table({ players: 4, deck: "Wastes" });
+    // Preston's trigger is the player's who controlled it as the others
+    // entered (rule 603.3a), and that player creates the tokens (111.2),
+    // whoever has the originals by the time it resolves.
+    const giant = toLibrary(game, "Hill Giant", A);
+    const bears = toLibrary(game, "Grizzly Bears", A);
+    const preston = toLibrary(game, "Preston, the Vanisher", A);
+    game.state.zones.perPlayer[A].library = [
+      preston,
+      bears,
+      giant,
+      ...game.state.zones.perPlayer[A].library.filter((id) => ![preston, bears, giant].includes(id)),
+    ];
+    pickModes(a, 0);
+    enter(game, "Dack Fayden, Helping Hand", A);
+    expect([preston, bears, giant].map((id) => controller(game, id))).not.toContain(A);
+    expect(tokensNamed(game, "Grizzly Bears", A)).toBe(1);
+    expect(tokensNamed(game, "Hill Giant", A)).toBe(1);
+    expect(tokensNamed(game, "Grizzly Bears")).toBe(1);
+    expect(tokensNamed(game, "Hill Giant")).toBe(1);
+  });
+
+  it("the handed-out creatures' enter triggers are Dack's controller's to order (rule 603.3b)", () => {
+    const { game, a } = table({ players: 4, deck: "Wastes" });
+    game.setOrdersOwnTriggers(A, true);
+    const wall = toLibrary(game, "Wall of Omens", A);
+    const visionary = toLibrary(game, "Elvish Visionary", A);
+    const bears = toLibrary(game, "Grizzly Bears", A);
+    game.state.zones.perPlayer[A].library = [
+      bears,
+      visionary,
+      wall,
+      ...game.state.zones.perPlayer[A].library.filter((id) => ![bears, visionary, wall].includes(id)),
+    ];
+    const asked: string[][] = [];
+    a.orderTriggersFn = (_view, triggers) => {
+      asked.push(triggers.map((t) => t.cardName).sort());
+      return triggers.map((_, i) => i);
+    };
+    pickModes(a, 0);
+    const before = hand(game, A).length;
+    enter(game, "Dack Fayden, Helping Hand", A);
+    expect([bears, visionary, wall].map((id) => controller(game, id))).not.toContain(A);
+    expect(asked).toEqual([["Elvish Visionary", "Wall of Omens"]]);
+    // Both draws are that player's, though the creatures are no longer.
+    expect(hand(game, A).length).toBe(before + 2);
+  });
+});
+
+describe("who creates a token copy", () => {
+  it("Spitting Image's copy of an opponent's creature is its caster's (rule 111.2)", () => {
+    const { game } = table({ players: 2 });
+    lands(game, "Forest", 6);
+    const bears = spawn(game, "Grizzly Bears", B);
+    cast(game, toHand(game, "Spitting Image"), { targets: [ref(bears)] });
+    settle(game);
+    expect(tokensNamed(game, "Grizzly Bears", A)).toBe(1);
+    expect(tokensNamed(game, "Grizzly Bears", B)).toBe(0);
+  });
 });
 
 describe("enters under the control of an opponent of your choice", () => {

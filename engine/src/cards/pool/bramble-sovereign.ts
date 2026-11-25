@@ -9,7 +9,7 @@ import { defineCard } from "../define.js";
 //   [2018-06-08] While resolving the triggered ability of Bramble Sovereign, you can't pay {1}{G}
 //     multiple times to have a player create more tokens.
 // The copy enters under the copied creature's controller (its last-known one
-// if it has left) — `create-token-copy`'s default.
+// if it has left): `who: "its-controller"`.
 
 const COPY_TEXT =
   "Whenever another nontoken creature enters, you may pay {1}{G}. If you do, that creature's controller creates a token that's a copy of that creature.";
@@ -36,7 +36,7 @@ export default defineCard({
         kind: "may",
         prompt: "Pay {1}{G} to have that creature's controller create a token copy of it?",
         cost: "{1}{G}",
-        effect: { kind: "create-token-copy", of: "trigger-object", count: 1 },
+        effect: { kind: "create-token-copy", of: "trigger-object", count: 1, who: "its-controller" },
       },
       resolve: null,
       text: COPY_TEXT,

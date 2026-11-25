@@ -59,7 +59,7 @@ describe("Red Sun's Twilight", () => {
 });
 
 describe("a token copy of each permanent destroyed this way", () => {
-  it("untargeted: each as it last existed, under its last controller without a `who`", () => {
+  it("untargeted: each as it last existed, under its last controller for `who: \"its-controller\"`", () => {
     const { game } = table();
     const thopter = spawn(game, "Ornithopter", B);
     treasure(game, B);
@@ -68,7 +68,7 @@ describe("a token copy of each permanent destroyed this way", () => {
       kind: "sequence",
       effects: [
         { kind: "destroy-all", filter: { type: "artifact" } },
-        { kind: "create-token-copy", of: { thisWay: "destroyed" }, count: 1 },
+        { kind: "create-token-copy", of: { thisWay: "destroyed" }, count: 1, who: "its-controller" },
       ],
     });
     expect(zone(game, thopter)).toBe("graveyard");

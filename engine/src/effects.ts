@@ -10536,16 +10536,22 @@ export type EffectSpec =
        * (Kiki-Jiki, Mirror Breaker) — the difference is whether dies-triggers
        * see them go. */
       readonly sacrificeAtEndStep?: boolean;
-      /** Who the token enters under. Default is the *copied* permanent's own
-       * controller (Miirym copying your own Dragons); `"you"` puts it under
-       * the effect's controller instead, which is what a card that copies
-       * something an opponent controls means (Hate Mirage). A
+      /** Who creates the token, and so whom it enters under (rule 111.2).
+       * Default, and `"you"`, is the effect's controller, whoever controls
+       * what is copied: "create a token that's a copy of target creature"
+       * (Spitting Image) is yours, and so is Preston's copy of a creature
+       * that has changed hands since it entered (until 2026-11-25 the default
+       * was the copied permanent's controller, which gave both away).
+       * `"its-controller"` is the copied permanent's own controller, its
+       * last-known one if it has left: "**its controller** creates a token
+       * that's a copy of that creature" (Parallel Evolution, Bramble
+       * Sovereign, Saw in Half). A
        * {@link PlayerRef} is one player, "**that player** creates a token
        * that's a copy of that card" (Arcane Artisan); nobody, and none is made,
        * if that target has gone. `"that-player"` is the player a
        * `for-each-player` is on: "each opponent creates a token that's a copy
        * of it" (Life of the Party). */
-      readonly who?: "you" | "that-player" | PlayerRef;
+      readonly who?: "you" | "that-player" | "its-controller" | PlayerRef;
       /** "**The tokens are goaded for the rest of the game**" (Life of the
        * Party), by this effect's controller — `create-token`'s. */
       readonly goadedForGame?: boolean;
@@ -25090,7 +25096,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const permanentSet = ofSet !== undefined && (!isCardSet(ofSet) || rememberedPermanents);
       const ofCards =
         (ofSet !== undefined && !permanentSet) || (typeof spec.of === "object" && ("eachExiled" in spec.of || "eachInGraveyard" in spec.of));
-      const handedTo = spec.who === undefined || spec.who === "you" ? undefined : spec.who;
+      const handedTo = spec.who === undefined || spec.who === "you" || spec.who === "its-controller" ? undefined : spec.who;
       const named = handedTo === undefined ? undefined : resolvePlayerRef(handedTo, ctx);
       if (handedTo !== undefined && named === undefined) return;
       // Where they're created attached, read once as this resolves.
@@ -25103,7 +25109,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           gainsHaste: spec.gainsHaste ?? false,
           sacrificeAtEndStep: spec.sacrificeAtEndStep ?? false,
           exileAtEndStep: spec.exileAtEndStep ?? false,
-          under: named ?? (spec.who === "you" || ofCards ? ctx.controller : undefined),
+          // Whoever's effect this is creates the token (rule 111.2), unless
+          // the card says the copied permanent's controller does.
+          under: named ?? (spec.who === "its-controller" && !ofCards ? undefined : ctx.controller),
           ...(spec.linkedToSource === true ? { linkedToSource: true } : {}),
           ...(spec.gainUntilEndOfTurn ? { gainUntilEndOfTurn: spec.gainUntilEndOfTurn } : {}),
           ...(spec.gains?.keywords !== undefined ? { gainKeywords: spec.gains.keywords } : {}),

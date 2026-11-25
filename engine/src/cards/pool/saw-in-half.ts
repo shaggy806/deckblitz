@@ -26,6 +26,7 @@ export default defineCard({
           kind: "create-token-copy",
           of: 0,
           count: 2,
+          who: "its-controller",
           exceptions: { power: { half: { powerOf: 0 }, round: "up" }, toughness: { half: { toughnessOf: 0 }, round: "up" } },
         },
       },

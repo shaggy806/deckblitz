@@ -54254,9 +54254,10 @@ controlledBy,
   }
 
   /** Create `count` token(s) that are copies of the permanent `ofId` (rule
-   * 707.10 — needed-cards P5b). The copies enter under `ofId`'s controller
-   * ("its controller creates" / rule 111.11 — its last-known controller for a
-   * permanent that has already left). In this engine a copy is a stored card
+   * 707.10 — needed-cards P5b). The copies enter under `opts.under`, and
+   * with none under `ofId`'s controller ("its controller creates", rule
+   * 111.2 — its last-known controller for a permanent that has already
+   * left). In this engine a copy is a stored card
    * *name* every characteristic read resolves through (`copyOf`), so the token
    * gets the copiable printed values — not counters, other copy effects, or
    * non-copy modifiers on the original. */
@@ -54318,9 +54319,9 @@ controlledBy,
     if (copied.static.some((s) => s.replacement?.event === "enters-battlefield" && s.replacement.instead?.exileUnless !== undefined)) {
       return;
     }
-    // The copy defaults to the copied permanent's controller (Miirym), but a
-    // card that copies something an *opponent* controls means "under your
-    // control" (Hate Mirage).
+    // Under whoever creates it (rule 111.2): `under`, the effect's controller
+    // for every card but one that says "its controller creates" — which
+    // names nobody, and the copied permanent's controller it is.
     const wouldControl = opts.under ?? departed?.controller ?? of!.controller;
     const controller = this.tokenCreatorAfterRedirects(wouldControl);
     // A token no longer its attacking player's: tapped, but not attacking
