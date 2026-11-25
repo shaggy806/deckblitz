@@ -51,6 +51,8 @@ interface Snapshot {
   /** An open menu's items (an ability menu, a tap-for-mana choice), with
    * `(off)` on one that can't be picked. */
   readonly menus: readonly string[]
+  /** The zone buttons lit as playable from: "alice's graveyard". */
+  readonly lit: readonly string[]
   /** What this seat is told while it waits on another: the line by the pass
    * buttons, and each panel's. */
   readonly waiting: readonly string[]
@@ -140,6 +142,11 @@ function snapshot(page: Page): Promise<Snapshot> {
       const counters = Object.entries(p.counters ?? {}).filter(([, n]) => typeof n === 'number' && n > 0).map(([kind, n]) => `, ${n} ${kind}`).join('')
       return `${id}${id === dv?.seat ? ' (you)' : ''}: life ${p.life}, hand ${p.handSize}, graveyard ${p.graveyardSize}, exile ${exile}, library ${p.librarySize}${counters}${p.hasLost ? ', lost' : ''}`
     })
+    // A graveyard or exile button lit because this seat can cast or activate
+    // something from there (`.pp-zone-link.playable`).
+    const lit = [...document.querySelectorAll('[data-player-id] .pp-zone-link.playable')].map(
+      (el) => `${el.closest('[data-player-id]')?.getAttribute('data-player-id') ?? '?'}'s ${line(el).replace(/[^a-z ]/gi, ' ').trim().split(/\s+/)[0]?.toLowerCase() ?? 'zone'}`,
+    )
     const stack = view === null ? [] : view.zones.stack.map(nameOf)
     const drawn = [...document.querySelectorAll('.stack-overlay .stack-entry')].map((entry) =>
       [line(entry.querySelector('.stack-entry-label')), tileName(entry), line(entry.querySelector('.stack-targets'))]
@@ -227,6 +234,7 @@ function snapshot(page: Page): Promise<Snapshot> {
       mana,
       piles,
       menus,
+      lit,
       waiting: [...document.querySelectorAll('.priority-waiting, .pp-waiting')].map(line),
       key,
       // Another player's decision this seat makes is its own to answer (rule 723).
@@ -299,6 +307,7 @@ async function print(page: Page, label: string, s: Snapshot, shot: string): Prom
   const manaBefore = printed.get('mana') ?? ''
   if (changed('mana', s.mana) && (s.mana !== '' || manaBefore !== '')) out.push(`  mana: ${s.mana || '—'}`)
   if (changed('piles', s.piles.join(' / '))) for (const p of s.piles) out.push(`  ${p}`)
+  if (changed('lit', s.lit.join(', '))) out.push(`  lit zone buttons: ${s.lit.join(', ') || 'none'}`)
   out.push(`  stack: ${s.stack.length > 0 ? s.stack.join(', ') : '—'}`)
   if (s.drawn.length > 0) out.push(`  stack drawn (top first): ${s.drawn.join(' / ')}`)
   if (s.waiting.length > 0) out.push(`  waiting: ${s.waiting.join(' / ')}`)

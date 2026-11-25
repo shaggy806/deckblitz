@@ -41,6 +41,8 @@ as text:
   `Name 2/2 (tapped, sick, 2 +1/+1, flying, on <what it's attached to>)`; `hand:` your hand;
   `mana:` your unspent mana; each graveyard and exile with anything in it. A line is printed
   only where it has changed since the step before.
+- `lit zone buttons`: the graveyard and exile buttons glowing because you can cast or activate
+  something from there now (`alice's graveyard`), or `none`.
 - `stack`, and `stack drawn (top first)` with each entry's controller and targets.
 - `log (+N)`: every line the game log gained in that step.
 
