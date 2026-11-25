@@ -15,7 +15,15 @@ export function NewVersionNotice() {
   if (!available || putAway) return null
   return (
     <div className="new-version" role="status">
-      <span>A new version of Deck Blitz is out.</span>
+      <span>
+        A new version of Deck Blitz is out.{' '}
+        {/* The notes are read from the site, so this older page shows the
+            new build's (`legal/updates.ts`); a tab of its own, so nothing
+            here is left behind. */}
+        <a href="/updates" target="_blank" rel="noreferrer">
+          What&apos;s new
+        </a>
+      </span>
       <button type="button" className="primary" onClick={reloadForNewVersion}>
         Reload
       </button>

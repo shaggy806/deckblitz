@@ -100,7 +100,13 @@ export function SeatMenu({
         <div className="motion-panel seat-menu-panel" role="dialog" aria-label="Game">
           {newVersion ? (
             <div className="seat-menu-new-version">
-              <span>A new version of Deck Blitz is out. Reload between games if you can; this game is still here afterwards.</span>
+              <span>
+                A new version of Deck Blitz is out (
+                <a href="/updates" target="_blank" rel="noreferrer">
+                  what&apos;s new
+                </a>
+                ). Reload between games if you can; this game is still here afterwards.
+              </span>
               <button type="button" onClick={reloadForNewVersion}>
                 Reload now
               </button>
@@ -270,6 +276,9 @@ export function SeatMenu({
               so the game isn't left. */}
           <a className="seat-menu-link" href="/about" target="_blank" rel="noreferrer">
             About &amp; legal
+          </a>
+          <a className="seat-menu-link" href="/updates" target="_blank" rel="noreferrer">
+            Updates
           </a>
         </div>
       ) : null}

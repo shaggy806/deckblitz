@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { AboutPage } from './legal/AboutPage.tsx'
+import { UpdatesPage } from './legal/UpdatesPage.tsx'
 import { loadCardPool } from './cards/cardData.ts'
 import { PoolLoadBoundary, PoolLoading } from './cards/PoolLoading.tsx'
 import { clickButtons } from './game/sound.ts'
@@ -56,7 +57,9 @@ const page = path.startsWith('/library')
     ? poolPage(<DeckBuilderPage />, 'deck-builder')
     : path.startsWith('/about')
       ? <AboutPage />
-      : <App />
+      : path.startsWith('/updates')
+        ? <UpdatesPage />
+        : <App />
 
 // Every button on every page clicks.
 clickButtons()
@@ -67,7 +70,7 @@ trackPage()
 
 // The game's own pages say a new version is out where there's no board to
 // cover (`App`); the others say it here.
-const inApp = !['/library', '/deck-builder', '/about'].some((prefix) => path.startsWith(prefix))
+const inApp = !['/library', '/deck-builder', '/about', '/updates'].some((prefix) => path.startsWith(prefix))
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

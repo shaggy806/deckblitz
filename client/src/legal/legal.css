@@ -139,3 +139,12 @@ a.site-link-btn:any-link:hover {
 .about-page .about-lead {
   color: var(--text);
 }
+/* `/updates` (UpdatesPage): a deploy's notes, a line each. */
+.updates-page .updates-notes {
+  margin: 0 0 0.75em;
+  padding-left: 1.25em;
+  color: var(--muted);
+}
+.updates-page .updates-notes li {
+  margin-bottom: 0.35em;
+}

@@ -10,6 +10,25 @@ this PC's `~/.ssh/config`, reached with this PC's key; the address itself stays 
 its "Updating the deployed code" from here. Deploying restarts the room server, which **ends
 every game in progress**, so it only happens when the user asked for it this time.
 
+## 0. Update notes
+
+Every deploy says what it changes for players (the user, 2026-11-25): an entry in
+`client/public/updates.json`, which the site shows at `/updates` and the "a new version is out"
+notice links to. They go out with the build, so they are written **before** it is built.
+
+- **What is going out**: `ssh -o BatchMode=yes deckblitz 'cd /opt/mtg-engine && git rev-parse HEAD'`
+  is what's live; `git log --oneline <that>..origin/main` is the deploy.
+- **Write the notes**: a new entry at the top of the list,
+  `{ "date": "<today, YYYY-MM-DD>", "notes": ["…", "…"] }`; a second deploy the same day adds its
+  notes to the top of that day's entry instead. One sentence a change a player would notice, the
+  most noticeable first, in plain words: what now happens, not what was wrong in the code. No
+  commit hashes, file names, engine terms or rule numbers; a card's name where it helps. Leave
+  out what no player sees (tooling, tests, docs, a refactor, a bot's internals unless its play
+  changed). If nothing in the deploy is visible to a player, add no entry.
+- `npx vitest run updates` from `client/` (the file's own test: every entry kept, sentences, no
+  hashes), commit it alone (`Site: update notes for <date>`) and push. Step 1 then waits for CI
+  on that commit.
+
 ## 1. Something to deploy
 
 ```bash

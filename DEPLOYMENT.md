@@ -235,6 +235,11 @@ cd /opt/mtg-engine
 ./deploy.sh
 ```
 
+**Every deploy carries its update notes** (2026-11-25): what it changes for players, an entry at the
+top of `client/public/updates.json`, written and pushed before the build that ships it (the `deploy`
+skill's step 0 says how). The site shows them at `/updates`, and the notice an open page gets when a
+new version is out links there.
+
 From the dev PC, Claude Code's `deploy` skill (`.claude/skills/deploy/`) does this over SSH
 (`ssh deckblitz`): it checks nobody is mid-game first, runs `deploy.sh`, then checks the site
 from outside (`check-live.mjs`: the page, and the game socket opening through the tunnel with

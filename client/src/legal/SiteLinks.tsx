@@ -75,6 +75,10 @@ export function SiteLinks() {
           </div>
         ) : null}
       </div>
+      {/* What changed in each deploy (`UpdatesPage`). */}
+      <a className="site-link-btn" href="/updates">
+        Updates
+      </a>
       <FeedbackLink />
       <a className="site-link-btn" href={SUPPORT_URL} target="_blank" rel="noreferrer">
         Support on Ko-fi
