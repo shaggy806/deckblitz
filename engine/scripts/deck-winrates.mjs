@@ -8,6 +8,7 @@
 //   npm run build -w engine
 //   node engine/scripts/deck-winrates.mjs --rounds 30 [--bot v2|v1] [--players 4]
 //     [--workers N] [--timeout SECONDS] [--out FILE]
+//     [--pool precon|upgraded|blitz|upgrades|strong|strong-only|tooling] [--with "Deck,Deck"]
 //
 // Tables: each round deals every deck once into tables of `players` (a seeded
 // shuffle, so `rounds` rounds give every deck about the same number of
@@ -24,6 +25,9 @@ import { fileURLToPath } from "node:url";
 // Set before the pool module loads, and inherited by the workers.
 const poolArg = process.argv.indexOf("--pool");
 if (poolArg >= 0) process.env.DECK_POOL = process.argv[poolArg + 1];
+// `--with "A,B"`: named decks beside the pool (`deck-pool.mjs`).
+const withArg = process.argv.indexOf("--with");
+if (withArg >= 0) process.env.DECK_POOL_WITH = process.argv[withArg + 1];
 const { SAMPLE_DECKS } = await import("../dist/index.js");
 const { DECK_POOL } = await import("./deck-pool.mjs");
 import { runPool } from "./worker-pool.mjs";
