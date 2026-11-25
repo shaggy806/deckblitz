@@ -177,6 +177,12 @@ export interface RoomSettings {
    * engine's `take-back.ts`). 0, the default, is off; a whole number up to
    * 99, or `"unlimited"`. */
   readonly takeBacks: number | "unlimited";
+  /** The seed the game is dealt from (`GameConfig.seed`, which decides
+   * every shuffle): `null`, the default, is a fresh random one as the game
+   * starts; a whole number from 0 to 4294967295 — the "seed N" of a game
+   * log's first line — deals the same shuffles that game had. The starting
+   * player is still `firstPlayer`'s, and a rematch deals a fresh seed. */
+  readonly seed: number | null;
 }
 
 export type ClientMessage =

@@ -470,6 +470,19 @@ button.seat-add-panel:hover {
   border: 1px solid var(--border);
   border-radius: 0;
 }
+/* Ten digits fit, the most a seed has. */
+.rs-seed-input {
+  width: 9.5em;
+  padding: 3px 6px;
+  font-size: var(--text-sm);
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
+}
+.rs-seed-input::placeholder {
+  color: var(--muted);
+}
 .rs-life-input::placeholder {
   color: var(--muted);
 }

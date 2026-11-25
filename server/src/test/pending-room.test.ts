@@ -28,6 +28,24 @@ describe("PendingRoom", () => {
     expect(config.decks.find((d) => d.player === ALICE)?.commanders).toEqual(SEATS[0].commanders);
   });
 
+  it("deals from the room's own seed until the host pastes one, and from it after", () => {
+    const room = pendingRoom();
+    room.claimSeat(ALICE, "alice-token", { send: () => {} });
+    room.claimSeat(BOB, "bob-token", { send: () => {} });
+    expect(room.settings.seed).toBeNull();
+    expect(room.toGameConfig().seed).toBe(1);
+    room.setSettings({ seed: 4294967295 });
+    expect(room.toGameConfig().seed).toBe(4294967295);
+    room.setSettings({ seed: 0 });
+    expect(room.toGameConfig().seed).toBe(0);
+    for (const seed of [-1, 4294967296, 2.5, "7" as unknown as number]) {
+      expect(() => room.setSettings({ seed })).toThrow(/seed/);
+    }
+    expect(room.toGameConfig().seed).toBe(0);
+    room.setSettings({ seed: null });
+    expect(room.toGameConfig().seed).toBe(1);
+  });
+
   it("claiming with a custom deck uses it instead of the positional default", () => {
     const room = pendingRoom();
     room.claimSeat(ALICE, "alice-token", { send: () => {} }, undefined, {

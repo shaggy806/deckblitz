@@ -4,6 +4,7 @@ import type { RoomSettings, SeatStatus } from 'protocol'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
 import { BOT_SPEEDS } from '../ui/botSpeeds.ts'
 import { BOT_DECK_POOLS, randomBotDecks } from './randomBotDeck.ts'
+import { parseSeed } from './seed.ts'
 
 /** The range the server accepts (`PendingRoom.setSettings`). */
 const LIFE_MIN = 1
@@ -45,6 +46,8 @@ export function RoomSettingsPanel({
           return seat === undefined ? 'Random (highroll)' : seatLabel(seat)
         })()
   const speedLabel = BOT_SPEEDS.find((s) => s.speed === game.botSpeed)?.label ?? game.botSpeed
+  // An older server's settings have no seed: random.
+  const seed = settings.seed ?? null
 
   return (
     <section
@@ -141,6 +144,19 @@ export function RoomSettingsPanel({
           )}
         </div>
 
+        {/* The shuffles' seed: random unless the host pastes one, such as
+            the "seed N" a game log's first line names. */}
+        <div className="rs-field">
+          <label className="rs-label" htmlFor="rs-seed">
+            Seed
+          </label>
+          {host ? (
+            <SeedControl seed={seed} onChange={(next) => game.setRoomSettings({ seed: next })} />
+          ) : (
+            <span className={`rs-value${seed === null ? '' : ' mono'}`}>{seed === null ? 'Random' : seed}</span>
+          )}
+        </div>
+
         {host ? (
           <div className="rs-field">
             <span className="rs-label">Fill with bots · Bracket</span>
@@ -230,6 +246,51 @@ export function HouseRulesPanel({ game }: { readonly game: NetworkGame }) {
         </div>
       </div>
     </section>
+  )
+}
+
+/**
+ * The seed, as a box to paste one into ("Random" while empty) and, once one
+ * is set, a button back to random. Like the life box it keeps its own draft
+ * and sends on Enter or leaving it; what isn't a seed goes back to the
+ * room's value.
+ */
+function SeedControl({ seed, onChange }: { readonly seed: number | null; readonly onChange: (seed: number | null) => void }) {
+  const shown = seed === null ? '' : String(seed)
+  const [draft, setDraft] = useState(shown)
+  useEffect(() => setDraft(shown), [shown])
+
+  const commit = () => {
+    const value = parseSeed(draft)
+    if (value === undefined || value === seed) setDraft(shown)
+    else onChange(value)
+  }
+
+  return (
+    <div className="rs-options">
+      <input
+        id="rs-seed"
+        type="text"
+        inputMode="numeric"
+        autoComplete="off"
+        spellCheck={false}
+        className="rs-seed-input mono"
+        placeholder="Random"
+        title="Paste a seed to deal a game's shuffles again, or leave it empty for a fresh shuffle"
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') commit()
+          if (e.key === 'Escape') setDraft(shown)
+        }}
+      />
+      {seed !== null ? (
+        <button type="button" className="seg-option" onClick={() => onChange(null)}>
+          Random
+        </button>
+      ) : null}
+    </div>
   )
 }
 

@@ -85,7 +85,7 @@ describe("room host", () => {
     const { joined } = await hostedRoom();
     expect(joined.isHost).toBe(true);
     expect(joined.botSpeed).toBe("slow");
-    expect(joined.settings).toEqual({ startingLife: 40, firstPlayer: "random", commanderLegalOnly: false, takeBacks: 0 });
+    expect(joined.settings).toEqual({ startingLife: 40, firstPlayer: "random", commanderLegalOnly: false, takeBacks: 0, seed: null });
     expect(joined.seats.some((s) => s.isHost)).toBe(false);
   });
 
@@ -157,7 +157,7 @@ describe("room host", () => {
     await next(guest.queue, "room-joined");
 
     host.send({ type: "set-room-settings", roomId, settings: { startingLife: 25, firstPlayer: BOB } });
-    expect((await next(guest.queue, "room-joined")).settings).toEqual({ startingLife: 25, firstPlayer: BOB, commanderLegalOnly: false, takeBacks: 0 });
+    expect((await next(guest.queue, "room-joined")).settings).toEqual({ startingLife: 25, firstPlayer: BOB, commanderLegalOnly: false, takeBacks: 0, seed: null });
 
     for (const settings of [
       { startingLife: 0 },
@@ -169,12 +169,15 @@ describe("room host", () => {
       { takeBacks: -1 },
       { takeBacks: 2.5 },
       { takeBacks: "lots" },
+      { seed: -1 },
+      { seed: 2 ** 32 },
+      { seed: "123" },
     ]) {
       host.send({ type: "set-room-settings", roomId, settings });
-      expect((await next(host.queue, "error")).message).toMatch(/starting life|no such seat|take-backs/);
+      expect((await next(host.queue, "error")).message).toMatch(/starting life|no such seat|take-backs|seed/);
     }
     host.send({ type: "set-room-settings", roomId, settings: {} });
-    expect((await next(host.queue, "room-joined")).settings).toEqual({ startingLife: 25, firstPlayer: BOB, commanderLegalOnly: false, takeBacks: 0 });
+    expect((await next(host.queue, "room-joined")).settings).toEqual({ startingLife: 25, firstPlayer: BOB, commanderLegalOnly: false, takeBacks: 0, seed: null });
   });
 
   it("goes back to the highroll when the seat picked to go first is removed", async () => {

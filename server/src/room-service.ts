@@ -667,10 +667,11 @@ export class RoomService {
         // a room with no seats of that).
         const asked = typeof message.players === "number" && Number.isFinite(message.players) ? message.players : 2;
         const numPlayers = Math.min(4, Math.max(2, Math.floor(asked)));
-        // A real room shuffles freshly every time, and the seed is the
-        // server's alone. The message has no field for one: the engine is
-        // deterministic, so a client that named the seed could work out
-        // every shuffle before it happened.
+        // A room shuffles freshly unless its host pastes a seed in the
+        // waiting room (`RoomSettings.seed`, which then deals instead): the
+        // engine is deterministic, so a known seed knows every shuffle, but a
+        // table's devices all hold the seed anyway and seeing hidden cards
+        // isn't a concern here.
         const seed = Math.floor(Math.random() * 0x100000000);
         const room = manager.createPending(
           numPlayers,

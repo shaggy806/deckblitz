@@ -290,6 +290,9 @@ export const STARTING_LIFE_MAX = 999;
 /** The most take-backs a player the host may set short of `"unlimited"`
  * (`RoomSettings.takeBacks`). */
 export const TAKE_BACKS_MAX = 99;
+/** The largest seed the host may set (`RoomSettings.seed`): a game's seed is
+ * 32 bits, as `create-room` deals it. */
+export const SEED_MAX = 0xffffffff;
 
 export class PendingRoom {
   readonly id: string;
@@ -313,6 +316,7 @@ export class PendingRoom {
       firstPlayer: "random",
       commanderLegalOnly: false,
       takeBacks: 0,
+      seed: null,
     };
     this.host = new HostRole(hostToken ?? null);
     this.seats = SEATS.slice(0, players).map((s) => emptySeat(s.id));
@@ -409,6 +413,13 @@ export class PendingRoom {
         throw new Error(`take-backs must be a whole number from 0 to ${TAKE_BACKS_MAX}, or "unlimited"`);
       }
       next.takeBacks = count;
+    }
+    if (change.seed !== undefined) {
+      const seed = change.seed;
+      if (seed !== null && (!Number.isInteger(seed) || seed < 0 || seed > SEED_MAX)) {
+        throw new Error(`the seed must be a whole number from 0 to ${SEED_MAX}, or random`);
+      }
+      next.seed = seed;
     }
     this.settings = next;
     // Turned on: a seat readied with a deck it now refuses isn't ready any
@@ -723,11 +734,13 @@ export class PendingRoom {
           : {}),
       };
     });
-    const { startingLife, firstPlayer, takeBacks } = this.settings;
+    const { startingLife, firstPlayer, takeBacks, seed } = this.settings;
     const startingPlayer =
       firstPlayer === "random" ? this.seats[Math.floor(Math.random() * this.seats.length)].player : firstPlayer;
     return {
       ...this.config,
+      // The host's pasted seed, or the random one the room was made with.
+      ...(seed !== null ? { seed } : {}),
       rules: { ...this.config.rules, startingLife },
       decks,
       startingPlayer,
