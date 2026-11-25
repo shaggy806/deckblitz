@@ -124,6 +124,7 @@ import {
   unassigned,
 } from './game/damageAssignment.ts'
 import { setShare } from './game/divideShares.ts'
+import { startingX } from './game/startingX.ts'
 import { StableLabel } from './ui/StableLabel.tsx'
 import { usePlayback } from './game/usePlayback.ts'
 import { AnimationBus } from './game/animationBus.ts'
@@ -1066,18 +1067,6 @@ function handAbilityLabel(text: string): string {
   return `${cost}: ${short}`
 }
 
-
-/**
- * Where the X prompt starts for a spell. As much as can be paid, for an X
- * paid in mana: the lands are there to be spent. For an X paid in life (Fire
- * Covenant, Toxic Deluge) the least that does anything: started at the most,
- * the prompt's own Confirm paid a player's whole life total and ended their
- * game (found by hand, 2026-11-22).
- */
-function startingX(xCost: { readonly maxX: number; readonly minX?: number; readonly paidInLife?: true }): number {
-  if (xCost.paidInLife !== true) return xCost.maxX
-  return Math.min(xCost.maxX, Math.max(xCost.minX ?? 0, 1))
-}
 
 export default function App() {
   const game = useNetworkGame()
@@ -3350,7 +3339,7 @@ function Table({
       const fixedX =
         cast.xCost?.minX !== undefined && cast.xCost.minX === cast.xCost.maxX ? cast.xCost.maxX : undefined
       if (cast.xCost && fixedX === undefined) {
-        setPendingX({ action: cast, value: startingX(cast.xCost), ...picks })
+        setPendingX({ action: cast, value: startingX(cast.xCost, cast.delve), ...picks })
         return
       }
       // With X fixed by the offer, nothing else asks its delve range (March of
@@ -3473,7 +3462,7 @@ function Table({
     const fixedX =
       cast.xCost?.minX !== undefined && cast.xCost.minX === cast.xCost.maxX ? cast.xCost.maxX : undefined
     if (cast.xCost && fixedX === undefined) {
-      setPendingX({ action: cast, value: startingX(cast.xCost), ...picks, modes })
+      setPendingX({ action: cast, value: startingX(cast.xCost, cast.delve), ...picks, modes })
       return
     }
     const chosen = modes.map((i) => cast.castModal!.modes[i])
