@@ -178,6 +178,25 @@ describe("take-backs", () => {
     expect(() => room.takeBack(a, 1)).toThrow(/conceded since/);
   });
 
+  it("leave a player's trigger-order setting as it is now (a bug report, 2026-11-25)", () => {
+    const t = table(3);
+    toMain(t, 1);
+    playLand(t, ALICE);
+    // Switched on after the turn's start was kept: the client goes on
+    // showing it on, so the game must go on asking.
+    const settings = { passToMain: false, passThroughCombat: false, stops: { mine: [], theirs: [] } };
+    t.room.setPassSettings(t.a, { ...settings, orderTriggers: true });
+    expect(t.room.game.state.ordersOwnTriggers).toEqual([ALICE]);
+    t.room.takeBack(t.a, 1);
+    expect(battlefield(t.room)).toBe(0);
+    expect(t.room.game.state.ordersOwnTriggers).toEqual([ALICE]);
+    // And one switched off since stays off.
+    playLand(t, ALICE);
+    t.room.setPassSettings(t.a, { ...settings, orderTriggers: false });
+    t.room.takeBack(t.a, 1);
+    expect(t.room.game.state.ordersOwnTriggers ?? []).toEqual([]);
+  });
+
   it("keep the turn starts through a copy, the wire and the fingerprint", () => {
     const t = table(3);
     toMain(t, 2);

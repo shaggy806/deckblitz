@@ -103,6 +103,12 @@ export function takeBackState(state: GameState, player: PlayerId, turn: number):
   const event: GameEvent = { type: "turn-taken-back", player, turn, seq: next.eventSeq };
   next.eventLog = [...state.eventLog.slice(0, start.events), event];
   next.eventSeq += 1;
+  // Who orders their own triggers is a preference from outside the rules, not
+  // a part of the turn: as the players have it now, not as they had it then
+  // (one switched on during the turn was switched off again by taking the
+  // turn back, with the client still showing it on).
+  if (state.ordersOwnTriggers !== undefined) next.ordersOwnTriggers = [...state.ordersOwnTriggers];
+  else delete next.ordersOwnTriggers;
   next.takeBacks = {
     limit: rule.limit,
     used: { ...rule.used, [player]: (rule.used[player] ?? 0) + 1 },
