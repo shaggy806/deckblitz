@@ -13856,6 +13856,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Flickerwisp: the return at the next end step is listed beside your emblems',
+    board({
+      you: { bf: ['Plains*5'], hand: ['Flickerwisp'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Recurring Insight: the rebound is listed beside your emblems',
+    board({
+      you: { bf: ['Island*6'], hand: ['Recurring Insight'] },
+      opp: { hand: ['Wastes*3'] },
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

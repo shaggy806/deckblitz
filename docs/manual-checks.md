@@ -46,6 +46,14 @@ engine terms. A second thing to check is a second test.
 - **Do:** Look at your board, then tap Sol Ring for mana.
 - **Expect:** Sol Ring, Llanowar Elves, Bob's Prodigal Sorcerer and Carol's Merfolk Looter show a small {T} in their top-right corner; the lands, Grizzly Bears and Dave's Hill Giant don't. Once tapped, Sol Ring shows the large {T} across its art instead.
 
+### Flickerwisp: the return at the next end step is listed beside your emblems
+- **Do:** Cast Flickerwisp, exiling Bob's Grizzly Bears, then click "delayed 1" on your panel.
+- **Expect:** The button is in the warning colour. The viewer, titled "Alice's delayed abilities", shows "Delayed — Flickerwisp": "At the beginning of the next end step:", the return, and "(Grizzly Bears)". At your end step the Bears come back and the button goes.
+
+### Recurring Insight: the rebound is listed beside your emblems
+- **Do:** Cast Recurring Insight on Bob, then click "delayed 1" on your panel.
+- **Expect:** "Delayed — Recurring Insight" reads "At the beginning of your next upkeep:", then the rebound's text and "(Recurring Insight)". Bob's view of your panel says "At the beginning of Alice's next upkeep".
+
 ### Brutal Cathar: day is shown in the top strip
 - **Do:** Cast Brutal Cathar, exiling Bob's Grizzly Bears.
 - **Expect:** The top strip's turn readout ends in "☀ Day", and stays there for the rest of the game.

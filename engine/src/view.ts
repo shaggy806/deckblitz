@@ -76,6 +76,8 @@ import { EVERY_CREATURE_TYPE, withoutTypeMarkers } from "./subtypes.js";
 import { stickerSheetsView } from "./stickers.js";
 import { takeBackTurns, whyCannotTakeBack } from "./take-back.js";
 import type { TargetRef } from "./target.js";
+import { isStepWatch } from "./delayed-at.js";
+import type { DelayedStep, DelayedWhich } from "./delayed-at.js";
 
 export interface PublicPlayerInfo {
   readonly id: PlayerId;
@@ -505,6 +507,15 @@ export interface PlayerView {
     readonly source: string | null;
     readonly object?: ObjectId;
   }[];
+  /** The delayed triggered abilities waiting to trigger (rule 603.7), public
+   * as the spells and abilities that made them were: "return it at the
+   * beginning of the next end step", rebound's cast at its next upkeep. Each
+   * with its controller, the name of the source that made it, its text, the
+   * step it waits for (`at` — `null` for one that waits on an event: a
+   * permanent leaving, the next spell cast), and the cards it acts on that
+   * this viewer can see. The client lists them beside each player's emblems.
+   * Absent from a hand-built view. */
+  readonly delayedTriggers?: readonly DelayedTriggerView[];
   readonly events: readonly GameEvent[];
   /** When each object was public knowledge, and as what (`PublicStint`): how
    * the history names an object in a line from a time it was known, after it
@@ -1646,7 +1657,68 @@ function viewForUncached(
           ? { object: e.object }
           : {}),
       })),
+    delayedTriggers: delayedTriggersSeen(state, objects),
     events: state.eventLog,
     publicStints: state.publicStints ?? {},
   };
+}
+
+/** One {@link PlayerView.delayedTriggers} entry. */
+export interface DelayedTriggerView {
+  readonly controller: PlayerId;
+  readonly source: string;
+  readonly text: string;
+  readonly at: { readonly step: DelayedStep; readonly whose: PlayerId | "any"; readonly which: DelayedWhich } | null;
+  /** The cards it acts on — its targets and its trigger object, as they
+   * were when it was made — that the viewer can see, each only while it is
+   * still that object (rule 400.7): "return **that card**" names the card. */
+  readonly objects: readonly ObjectId[];
+}
+
+/** The flicker links (`GameObject.flickerLink`) a delayed ability's effect
+ * returns cards by: its `return-flickered` steps, however deep in a sequence. */
+function flickerLinksOf(spec: unknown, found: string[] = []): string[] {
+  if (Array.isArray(spec)) {
+    for (const each of spec) flickerLinksOf(each, found);
+  } else if (typeof spec === "object" && spec !== null) {
+    const record = spec as { readonly kind?: unknown; readonly link?: unknown; readonly effects?: unknown };
+    if (record.kind === "return-flickered" && typeof record.link === "string") found.push(record.link);
+    if (record.effects !== undefined) flickerLinksOf(record.effects, found);
+  }
+  return found;
+}
+
+/** The delayed triggered abilities waiting to trigger, as `viewer` sees
+ * them: every one (the spell or ability that made each was public), naming
+ * only the cards `objects` (the view's) shows. */
+function delayedTriggersSeen(state: GameState, objects: Readonly<Record<ObjectId, VisibleObject>>): DelayedTriggerView[] {
+  return state.delayedTriggers.map((d) => {
+    const ids: ObjectId[] = [];
+    const note = (id: ObjectId, stint: number | null | undefined): void => {
+      const object = state.objects[id];
+      if (object === undefined || objects[id] === undefined || ids.includes(id)) return;
+      if (stint != null && (object.zoneChangeCount ?? 0) !== stint) return;
+      ids.push(id);
+    };
+    d.targets.forEach((t, i) => {
+      if (t?.kind === "object") note(t.object, d.targetStints?.[i]);
+    });
+    if (d.triggerObject !== undefined) note(d.triggerObject, d.triggerObjectStint);
+    // A flicker's return finds its cards by their link, not as targets: the
+    // exiled card is a new object (rule 400.7), marked `flickerLink`.
+    const links = flickerLinksOf(d.effect);
+    if (links.length > 0) {
+      for (const id of state.zones.shared.exile) {
+        const link = state.objects[id]?.flickerLink;
+        if (link !== undefined && links.includes(link)) note(id, null);
+      }
+    }
+    return {
+      controller: d.controller,
+      source: d.sourceName,
+      text: d.text,
+      at: isStepWatch(d.at) ? { step: d.at.step, whose: d.at.whose, which: d.at.which } : null,
+      objects: ids,
+    };
+  });
 }

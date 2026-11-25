@@ -157,6 +157,7 @@ import { targetLabelFor } from './game/targetWording.ts'
 import { PileViewer } from './ui/PileViewer.tsx'
 import { DungeonViewer } from './ui/DungeonViewer.tsx'
 import { emblemToVisible } from './ui/defToVisible.ts'
+import { delayedToVisible } from './ui/delayedTriggers.ts'
 import { CreatureTypePicker } from './ui/CreatureTypePicker.tsx'
 import { carryHover } from './ui/hoverCarry.ts'
 import { handPlacesBefore, slideHand } from './ui/handMotion.ts'
@@ -5429,9 +5430,23 @@ function Table({
       case 'junkyard':
         return { title: `${whose} junkyard`, ids: view.players[pid]?.junkyard ?? [] }
       case 'emblems': {
-        const cards = view.emblems.flatMap((e, i) => (e.owner === pid ? [emblemToVisible(e, i)] : []))
+        // Their emblems, then the delayed abilities they control waiting to
+        // trigger (the user, 2026-11-25: what returns at end of turn, what
+        // rebounds at their next upkeep).
+        const ownerOf = (p: PlayerId) => (p === seat ? 'your' : possessive(playerLabel(p, game.seats)))
+        const emblems = view.emblems.flatMap((e, i) => (e.owner === pid ? [emblemToVisible(e, i)] : []))
+        const delayed = (view.delayedTriggers ?? []).flatMap((d, i) =>
+          d.controller === pid ? [delayedToVisible(d, i, ownerOf, view.objects)] : [],
+        )
+        const cards = [...emblems, ...delayed]
         const byId = new Map(cards.map((c) => [c.id, c]))
-        return { title: `${whose} emblems`, ids: cards.map((c) => c.id), resolve: (id) => byId.get(id) }
+        const title =
+          delayed.length === 0
+            ? `${whose} emblems`
+            : emblems.length === 0
+              ? `${whose} delayed abilities`
+              : `${whose} emblems and delayed abilities`
+        return { title, ids: cards.map((c) => c.id), resolve: (id) => byId.get(id) }
       }
     }
   })()
@@ -7885,6 +7900,7 @@ function Table({
       hasInitiative={view.initiative === pid}
       onOpenDungeon={() => setDungeonViewOf(pid)}
       emblemCount={view.emblems.filter((e) => e.owner === pid).length}
+      delayedCount={(view.delayedTriggers ?? []).filter((d) => d.controller === pid).length}
       curses={view.zones.battlefield.flatMap((id) => {
         const o = view.objects[id]
         return o !== undefined && o.attachedToPlayer === pid

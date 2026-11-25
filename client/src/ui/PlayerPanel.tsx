@@ -41,6 +41,9 @@ export interface PlayerPanelProps {
   readonly onOpenDungeon?: () => void
   /** How many emblems (rule 114) this player has. */
   readonly emblemCount?: number
+  /** How many delayed triggered abilities (rule 603.7) this player controls
+   * are waiting to trigger: listed in the emblems viewer after the emblems. */
+  readonly delayedCount?: number
   /** The Auras attached to this player — Curses (rule 303.4). */
   readonly curses?: readonly CurseOnPlayer[]
   /** Opens a read-only viewer of this player's graveyard/exile/hand, if provided. */
@@ -109,6 +112,7 @@ export function PlayerPanel({
   hasInitiative = false,
   onOpenDungeon,
   emblemCount = 0,
+  delayedCount = 0,
   curses = [],
   onOpenGraveyard,
   onOpenExile,
@@ -360,19 +364,29 @@ export function PlayerPanel({
           exile {exileSize}
         </button>
         {/* Only once there's one: most games never make an emblem, and the
-            row has no room for a zone that's always empty. */}
-        {emblemCount > 0 ? (
+            row has no room for a zone that's always empty. The delayed
+            abilities they control waiting to trigger open in the same
+            viewer, after the emblems: what comes back at end of turn, what
+            rebounds at their upkeep. */}
+        {emblemCount > 0 || delayedCount > 0 ? (
           <button
             type="button"
-            className="pp-zone-link"
-            title="Emblems (rule 114)"
+            className={`pp-zone-link${delayedCount > 0 ? ' has-delayed' : ''}`}
+            title={[
+              emblemCount > 0 ? 'Emblems (rule 114)' : null,
+              delayedCount > 0 ? 'Delayed abilities waiting to trigger (rule 603.7): what returns or is cast later' : null,
+            ]
+              .filter(Boolean)
+              .join('; ')}
             disabled={!onOpenEmblems}
             onClick={(e) => {
               e.stopPropagation()
               onOpenEmblems?.()
             }}
           >
-            emblems {emblemCount}
+            {[emblemCount > 0 ? `emblems ${emblemCount}` : null, delayedCount > 0 ? `delayed ${delayedCount}` : null]
+              .filter(Boolean)
+              .join(' · ')}
           </button>
         ) : null}
         {/* Cards outside the game (rule 400.11a), for a wish to bring in:

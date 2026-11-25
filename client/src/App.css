@@ -1004,6 +1004,12 @@
   box-shadow: inset 1px 1px 0 var(--bevel-light), inset -1px -2px 0 var(--bevel-dark);
   cursor: pointer;
 }
+/* Something of theirs waits to trigger (a return at end of turn, a rebound):
+   the emblems button says so in the warning colour, so it's seen coming. */
+.pp-zone-link.has-delayed {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 55%, var(--bevel-edge));
+}
 .pp-zone-link:active:not(:disabled) {
   box-shadow: inset 1px 2px 0 var(--bevel-dark), inset -1px -1px 0 var(--bevel-light);
   translate: 0 1px;
