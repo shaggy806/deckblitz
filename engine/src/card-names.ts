@@ -64,7 +64,7 @@ export interface CardNameFilter {
  * - `"own-hand"` — to match a card from the chooser's hand (Cursed Scroll):
  *   the name they hold most.
  * - `"own-library"` — to find a card in the chooser's library (Wood Sage,
- *   Desperate Research): the name it holds most.
+ *   Desperate Research): the name it holds most, the dearest of a tie.
  *   A bot digging for the named card (Demonic Consultation) names the one
  *   its hand wants instead (`bot/dig.ts`).
  * - `"opponent-library"` — to guess an opponent's top card (Foreshadow): the
@@ -221,10 +221,17 @@ export function suggestedCardNames(
     return registry.has(name) ? manaValue(parseManaCost(registry.get(name).manaCost)) : 0;
   };
   const byValue = (list: GameObject[]): GameObject[] => [...list].sort((a, b) => valueOf(b) - valueOf(a));
-  const mostCommon = (list: readonly GameObject[]): string[] => {
+  // A tie between names held as often is broken by the dearest, where
+  // `dearest` says so — in a singleton library every name is one card, as
+  // likely as any other to be found, and the find worth most is the one to
+  // name (Wood Sage, Desperate Research), not the alphabet's first.
+  const nameValue = (name: string): number => (registry.has(name) ? manaValue(parseManaCost(registry.get(name).manaCost)) : 0);
+  const mostCommon = (list: readonly GameObject[], dearest = false): string[] => {
     const counts = new Map<string, number>();
     for (const o of list) for (const n of namesOf(registry, o)) counts.set(n, (counts.get(n) ?? 0) + 1);
-    return [...counts.entries()].sort((a, b) => b[1] - a[1] || compareNames(a[0], b[0])).map(([n]) => n);
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1] || (dearest ? nameValue(b[0]) - nameValue(a[0]) : 0) || compareNames(a[0], b[0]))
+      .map(([n]) => n);
   };
   const commanders = objects(state.zones.shared.command).filter((o) => o.isCommander && opponents.includes(o.owner));
   const battlefield = objects(state.zones.shared.battlefield).filter(theirs);
@@ -254,7 +261,7 @@ export function suggestedCardNames(
       for (const n of mostCommon(objects(state.zones.perPlayer[player].hand))) add(n);
       break;
     case "own-library":
-      for (const n of mostCommon(objects(state.zones.perPlayer[player].library))) add(n);
+      for (const n of mostCommon(objects(state.zones.perPlayer[player].library), true)) add(n);
       break;
     case "opponent-library":
       for (const n of mostCommon([...battlefield, ...shown])) add(n);

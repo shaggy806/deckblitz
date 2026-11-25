@@ -72,4 +72,16 @@ describe("a player names a card after a hidden search", () => {
     expect(names.slice(0, 2)).toEqual(["Sphinx Ambassador", "Llanowar Elves"]);
     expect(names).not.toContain("Lightning Bolt");
   });
+
+  it("the own-library aim names the card held most, and of a tie the dearest, not the alphabet's first", () => {
+    // Wood Sage in a singleton deck: every creature name one card, any as
+    // likely to be in the top four, so the find worth most is the name.
+    const { game } = table();
+    for (const name of ["Craterhoof Behemoth", "Avacyn's Pilgrim", "Llanowar Elves"]) toLibrary(game, name, B);
+    const creatures = { types: ["creature" as const] };
+    expect(suggestedCardNames(game.state, registryOf(game), B, "own-library", creatures)[0]).toBe("Craterhoof Behemoth");
+    // Held twice, a one-drop still comes first.
+    toLibrary(game, "Llanowar Elves", B);
+    expect(suggestedCardNames(game.state, registryOf(game), B, "own-library", creatures)[0]).toBe("Llanowar Elves");
+  });
 });

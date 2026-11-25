@@ -6940,6 +6940,92 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "gives an opponent's Imperial Edict its Llanowar Elves, not the Craterhoof listed first",
+    rule: "A vote or choice among the bot's own permanents for something that destroys or sacrifices the pick gives up the least valuable one.",
+    position(registry) {
+      // B339: as Malik, Grim Manipulator's opponent a bot sacrificed its
+      // Craterhoof Behemoth over Llanowar Elves — a `vote` for a permanent
+      // with only its own eligible fell back to the first one listed
+      // (`votePermanent`). Imperial Edict is the same question, unsecret.
+      const game = table(registry, [A, B], B);
+      onBoard(game, "Craterhoof Behemoth", A);
+      const elves = onBoard(game, "Llanowar Elves", A);
+      lands(game, "Swamp", B, 2);
+      const edict = game.debugSpawn("Imperial Edict", B, "hand");
+      game.dispatch({ type: "cast-spell", player: B, card: edict, targets: [{ kind: "player", player: A }] });
+      game.advanceUntil((s) => (s.awaiting !== null && s.awaiting.player === A) || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-permanents") return { passed: false, detail: "alice was never asked to choose a creature" };
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const chosen = action.type === "choose-permanents" ? action.permanents : [];
+          return {
+            passed: chosen.length === 1 && chosen[0] === elves,
+            detail: `chose ${chosen.map((id) => game.state.objects[id]?.cardName ?? id).join(", ") || describeAction(action)}`,
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "hands Head Games' victim the worst cards of their library, not their best",
+    rule: "Cards chosen from an opponent's library for that opponent's hand are the least valuable ones there.",
+    position(registry) {
+      // B335: the search ranked an opponent's library best-first for a
+      // destination of "hand" — which is always its owner's (rule 400.3) —
+      // so Head Games and Jester's Mask could hand them their best.
+      const game = table(registry, [A, B], A);
+      lands(game, "Swamp", A, 5);
+      for (let i = 0; i < 2; i += 1) game.debugSpawn("Hill Giant", B, "hand");
+      const best = ["Craterhoof Behemoth", "Sol Ring", "Demonic Tutor"].map((name) => game.debugSpawn(name, B, "library"));
+      // On top, so they are what's listed first, whichever end a spawn joins.
+      const library = game.state.zones.perPlayer[B].library;
+      game.state.zones.perPlayer[B].library = [...best, ...library.filter((id) => !best.includes(id))];
+      const headGames = game.debugSpawn("Head Games", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: headGames, targets: [{ kind: "player", player: B }] });
+      game.advanceUntil((s) => (s.awaiting !== null && s.awaiting.player === A) || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-from-zone") return { passed: false, detail: "alice never searched bob's library" };
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const chosen = action.type === "choose-from-zone" ? action.chosen : [];
+          return {
+            passed: chosen.length === 2 && !chosen.some((id) => best.includes(id)),
+            detail: `chose ${chosen.map((id) => game.state.objects[id]?.cardName ?? id).join(", ") || describeAction(action)}`,
+          };
+        },
+      };
+    },
+  }),
+  asked({
+    name: "names its own creatures' type for an opponent's Callous Oppressor",
+    rule: "A type an opponent's permanent will spare is the type of what we have to lose: our own creatures, the most valuable first.",
+    position(registry) {
+      // B335: v1 named the type most common on the whole board and in its
+      // own cards, which can be the Oppressor's controller's swarm. Here bob
+      // has three Goblins; alice has a Dragon worth far more than her Elf.
+      const game = table(registry, [A, B], B);
+      onBoard(game, "Shivan Dragon", A);
+      onBoard(game, "Llanowar Elves", A);
+      for (let i = 0; i < 3; i += 1) onBoard(game, "Goblin Piker", B);
+      lands(game, "Island", B, 3);
+      const oppressor = game.debugSpawn("Callous Oppressor", B, "hand");
+      game.dispatch({ type: "cast-spell", player: B, card: oppressor, targets: [] });
+      game.advanceUntil((s) => (s.awaiting !== null && s.awaiting.player === A) || s.result.over);
+      if (game.state.awaiting?.kind !== "choose-creature-type") return { passed: false, detail: "alice was never asked for a type" };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-creature-type" && action.creatureType === "Dragon",
+          detail: describeAction(action).slice(0, 120),
+        }),
+      };
+    },
+  }),
+  asked({
     name: "exiles its graveyard's creatures to Sutured Ghoul",
     rule: "An \"any number\" that makes the permanent is taken: Sutured Ghoul with nothing exiled is a 0/0 and dies.",
     position(registry) {

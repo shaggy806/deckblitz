@@ -122,6 +122,7 @@ import {
 } from "./target-polarity.js";
 import type { Polarity } from "./target-polarity.js";
 import { isAttachResolved } from "./attachments.js";
+import { hasSubtype } from "./subtypes.js";
 
 export type { AttackerDeclaration, BlockerDeclaration };
 
@@ -1132,6 +1133,47 @@ function counterRemovalPicks(view: ControllerView, eligible: readonly ObjectId[]
  * a card before a token — never one's own while there's another; none at
  * all, when voting for none is allowed and there's only one's own.
  */
+const loneChoiceFollowUps = new Map<string, Polarity | null>();
+
+/**
+ * What happens to a permanent one player alone chooses in `name`'s text — a
+ * `vote` with `choose` and a single chooser (`"you"`, a target), followed by
+ * a `for-each-voted` — as a target polarity: Imperial Edict's `destroy` is
+ * `harm`. `null` when the card has no such choice, its choices disagree, or
+ * the follow-up has no side. A choice several players make (Malik's, a
+ * council's vote) is left out: there, what the others pick matters as much.
+ */
+function loneChoiceFollowUp(registry: CardRegistry, name: string): Polarity | null {
+  const cached = loneChoiceFollowUps.get(name);
+  if (cached !== undefined) return cached;
+  const found = new Set<Polarity>();
+  const walk = (node: unknown): void => {
+    if (Array.isArray(node)) {
+      for (const item of node) walk(item);
+      return;
+    }
+    if (node === null || typeof node !== "object") return;
+    const record = node as { readonly kind?: unknown; readonly effects?: unknown };
+    if (record.kind === "sequence" && Array.isArray(record.effects)) {
+      const effects = record.effects as readonly EffectSpec[];
+      effects.forEach((effect, index) => {
+        if (effect.kind !== "vote" || effect.choose !== true || !("permanent" in effect.for)) return;
+        const who = effect.who;
+        if (!(who === "you" || (typeof who === "object" && "target" in who))) return;
+        const next = effects.slice(index + 1).find((e) => e.kind === "for-each-voted");
+        if (next?.kind !== "for-each-voted") return;
+        found.add(slotPolarities(next.effect, 1)[0] ?? "either");
+      });
+    }
+    for (const value of Object.values(node)) walk(value);
+  };
+  if (registry.has(name)) walk(registry.get(name));
+  found.delete("either");
+  const answer = found.size === 1 ? [...found][0] : null;
+  loneChoiceFollowUps.set(name, answer);
+  return answer;
+}
+
 function votePermanent(view: ControllerView, eligible: readonly ObjectId[], min: number): readonly ObjectId[] {
   const theirs = eligible.filter((id) => view.state.objects[id]?.controller !== view.player);
   const pick = theirs.find((id) => view.state.objects[id]?.isToken !== true) ?? theirs[0];
@@ -2821,6 +2863,38 @@ export class HeuristicBotController extends AutomaticController {
       }
       if (best !== undefined) return best;
     }
+    // "An opponent chooses a creature type" for a permanent that spares what
+    // is of it (Callous Oppressor steals any creature that isn't): the type
+    // covering the most value among our own creatures. The board's commonest
+    // type (`suggested`) can be its controller's own swarm.
+    const entering = view.state.objects[source];
+    const enteringName = entering === undefined ? undefined : rulesTextName(entering);
+    if (
+      awaiting?.kind === "choose-creature-type" &&
+      entering !== undefined &&
+      entering.controller !== this.playerId &&
+      enteringName !== undefined &&
+      this.registry.has(enteringName) &&
+      this.registry.get(enteringName).chooseOnEnterBy === "an-opponent"
+    ) {
+      const ours = view.state.zones.shared.battlefield.flatMap((id) => {
+        if (view.state.objects[id]?.controller !== this.playerId) return [];
+        const c = computeCharacteristics(view.state, this.registry, id);
+        if (!c.types.includes("creature")) return [];
+        const worth = targetValue(view.state, this.registry, { kind: "object", object: id }) * (view.state.objects[id]?.stackCount ?? 1);
+        return [{ subtypes: c.subtypes, worth }];
+      });
+      let best: string | undefined;
+      let bestWorth = 0;
+      for (const type of [...suggested, ...options]) {
+        const worth = ours.reduce((sum, o) => sum + (hasSubtype(o.subtypes, type) ? o.worth : 0), 0);
+        if (worth > bestWorth) {
+          best = type;
+          bestWorth = worth;
+        }
+      }
+      if (best !== undefined) return best;
+    }
     return super.chooseCreatureType(view, source, options, suggested);
   }
 
@@ -2863,6 +2937,32 @@ export class HeuristicBotController extends AutomaticController {
       if (best?.kind !== "object") return [];
       const rightSide = polarity === "either" || sideOf(view.state, best, view.player) === (polarity === "harm" ? "opponent" : "own");
       return min > 0 || rightSide ? [best.object] : [];
+    }
+    // A permanent chosen by one player alone for what follows the choice
+    // (Imperial Edict's "target opponent chooses a creature they control.
+    // Destroy it."): ranked as a target of that, so an edict takes our
+    // least valuable creature, not the first listed (B339, a Craterhoof
+    // given up over Llanowar Elves).
+    if (
+      cap === undefined &&
+      max === 1 &&
+      eligible.length > 0 &&
+      awaiting?.kind === "choose-permanents" &&
+      awaiting.then.kind === "cast-vote" &&
+      awaiting.then.choice === "target" &&
+      awaiting.then.keep !== true
+    ) {
+      const source = view.state.objects[awaiting.source];
+      const followUp = source === undefined ? null : loneChoiceFollowUp(this.registry, rulesTextName(source));
+      if (followUp !== null) {
+        const polarity: Polarity = followUp === "take" ? "harm" : followUp;
+        const options = eligible.map((object): TargetRef => ({ kind: "object", object }));
+        const best = rankTargets(view.state, this.registry, view.player, options, polarity)[0];
+        if (best?.kind === "object") {
+          const rightSide = sideOf(view.state, best, view.player) === (polarity === "harm" ? "opponent" : "own");
+          return min > 0 || rightSide ? [best.object] : [];
+        }
+      }
     }
     // "Attach any number of Auras and Equipment you control to …" (Ardenn):
     // only the ones not already at work against an opponent — a Pacifism
