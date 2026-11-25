@@ -2540,9 +2540,34 @@ function cyclesByName(def: CardDefinition): boolean {
 /** How a cast offer says it's for an alternative cost of {0}. */
 const WITHOUT_PAYING = "without paying its mana cost";
 
+/** A cycling ability's keyword (rule 702.29): printed, or read off what it
+ * searches for, as the card prints it — "Basic landcycling", "Islandcycling",
+ * "Wizardcycling", "Artifact landcycling" (rule 702.29e–f). A player holding
+ * A.I.M. Scientists was offered "Cycle {2}" for a basic landcycling. */
+export function cyclingName(cycling: CyclingAbility): string {
+  if (cycling.name !== undefined) return cycling.name;
+  const search = cycling.search;
+  if (search === undefined) return "Cycling";
+  if (search.subtype !== undefined) return `${search.subtype}cycling`;
+  if (search.supertype === "basic") return "Basic landcycling";
+  if (search.types?.includes("artifact") === true) return "Artifact landcycling";
+  return "Landcycling";
+}
+
+/** "Tap an untapped creature you control", "tap four untapped creatures you
+ * control with flying": an alternative cost's taps (`alternativeCost.tapCreatures`),
+ * in a cast offer's words. A filter it can't word plainly is named "permanents". */
+function tapCreaturesText(tap: { readonly count: number; readonly filter: CardFilter }): string {
+  const { type, subtype, keyword, ...rest } = tap.filter;
+  const plain = Object.keys(rest).length === 0;
+  const noun = plain ? [subtype, type ?? "permanent"].filter((w) => w !== undefined).join(" ") : "permanent";
+  const words = ["an", "two", "three", "four", "five"][tap.count - 1] ?? String(tap.count);
+  return `tap ${words} untapped ${noun}${tap.count > 1 ? "s" : ""} you control${plain && keyword !== undefined ? ` with ${keyword}` : ""}`;
+}
+
 /** A printed cycling ability's name and cost, as the player is offered it. */
 function cyclingText(cycling: CyclingAbility): string {
-  const name = cycling.name ?? (cycling.search === undefined ? "Cycling" : "Landcycling");
+  const name = cyclingName(cycling);
   return cycling.costText !== undefined ? `${name}—${cycling.costText}` : `${name} ${cycling.cost}`;
 }
 
@@ -4455,7 +4480,7 @@ export class Game {
       // Cycling (rule 702.29) — a special action, any time you could cast an instant.
       // One whose cost asks for more is an `activate-ability` offer.
       if (def.cycling !== null && cyclesByName(def) && this.whyCannotCycle(player, card) === null) {
-        out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost, ...this.phyrexianPipsOffer(player, def.cycling.cost) });
+        out.push({ kind: "cycle", card, cardName, cost: def.cycling.cost, name: cyclingName(def.cycling), ...this.phyrexianPipsOffer(player, def.cycling.cost) });
       }
     }
 
@@ -5587,7 +5612,12 @@ export class Game {
             abilityIndex: index,
             cardName: def.name,
             text: ability.text,
-            why: Game.inAPlayersWords(why),
+            // Ninjutsu's cost is an unblocked attacker (rule 702.49a): said so,
+            // where before combat the pill read "Can't pay its cost".
+            why:
+              ability.ninjutsu === true && why?.includes("too few permanents to return") === true
+                ? "No unblocked attacker to return"
+                : Game.inAPlayersWords(why),
           });
         });
       }
@@ -6978,6 +7008,21 @@ export class Game {
             }
           : ownAltPaid && def.alternativeCost?.keyword !== undefined
             ? { altCostText: `${def.alternativeCost.keyword} ${def.alternativeCost.mana}` }
+          : // "Tap an untapped creature you control rather than pay" (Lashknife,
+            // Sephara): the creatures it taps, which the row said nothing of.
+            ownAltPaid && def.alternativeCost?.tapCreatures !== undefined
+            ? {
+                altCostText: [
+                  ...(def.alternativeCost.mana !== "{0}" ? [`pay ${def.alternativeCost.mana}`] : []),
+                  tapCreaturesText(def.alternativeCost.tapCreatures),
+                ].join(", "),
+              }
+          : // A printed alternative cost that's only mana (the Bringers' {W}{U}{B}{R}{G},
+            // a Trap's): the row's cost says how much, this says it's that cost.
+            ownAltPaid &&
+              def.alternativeCost !== null &&
+              Object.keys(def.alternativeCost).every((k) => k === "mana" || k === "condition")
+            ? { altCostText: "alternative cost" }
             : ownAltPaid &&
                 (def.alternativeCost?.sacrifice !== undefined ||
                   def.alternativeCost?.returnToHand !== undefined ||

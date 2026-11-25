@@ -1334,6 +1334,9 @@ export type LegalAction =
       readonly cardName: string;
       /** The cycling cost, e.g. `"{2}"`. */
       readonly cost: string;
+      /** The ability's keyword, as printed: "Cycling", "Basic landcycling",
+       * "Islandcycling" (`cyclingName`). What a button names it by. */
+      readonly name?: string;
       /** See `phyrexianPips` on `cast-spell`. */
       readonly phyrexianPips?: number;
       readonly phyrexianLifeAtLeast?: number;
