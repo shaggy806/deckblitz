@@ -1081,23 +1081,30 @@ export default function App() {
   const { view, seat, nameOf, seats } = game
   useEffect(() => {
     if (!import.meta.env.DEV) return
+    /** The log's lines after event `seq`, the last `max` of them, each with
+     * its own `seq`: what a step of the run added. */
+    const logSince = (seq: number, max: number): { seq: number; text: string }[] => {
+      if (!view) return []
+      return view.events
+        .filter((e) => e.seq > seq && !isDetailOnlyEvent(e))
+        .slice(-max)
+        .map((e) => ({
+          seq: e.seq,
+          text: describeEvent(
+            e,
+            (id, heldBy) =>
+              logNameAt(view.publicStints, nameOf, id, e.seq, heldBy !== undefined && heldBy !== seat, abilitySourcesOf(view.events)),
+            seats,
+          ),
+        }))
+    }
     ;(window as Window & { deckblitzView?: unknown }).deckblitzView = {
       view,
       seat,
       get log() {
-        if (!view) return []
-        return view.events
-          .filter((e) => !isDetailOnlyEvent(e))
-          .slice(-5)
-          .map((e) =>
-            describeEvent(
-              e,
-              (id, heldBy) =>
-                logNameAt(view.publicStints, nameOf, id, e.seq, heldBy !== undefined && heldBy !== seat, abilitySourcesOf(view.events)),
-              seats,
-            ),
-          )
+        return logSince(-1, 5).map((l) => l.text)
       },
+      logSince,
     }
   }, [view, seat, nameOf, seats])
 

@@ -34,6 +34,23 @@ interface Snapshot {
    * a "prompted by" card among them, which isn't on the stack. */
   readonly drawn: readonly string[]
   readonly log: readonly string[]
+  /** The log's lines since the snapshot printed before this one (the last 40
+   * at most), and the newest event's `seq`. */
+  readonly newLog: readonly string[]
+  readonly logSeq: number
+  /** "turn 3, Bob's, declare-attackers". */
+  readonly turn: string
+  /** Each player's permanents, one line a player: name, power/toughness,
+   * and what marks it (tapped, counters, attached to, summoning sick). */
+  readonly board: readonly string[]
+  /** The cards in this seat's hand, and its unspent mana. */
+  readonly hand: string
+  readonly mana: string
+  /** Each graveyard and exile with anything in it, by owner. */
+  readonly piles: readonly string[]
+  /** An open menu's items (an ability menu, a tap-for-mana choice), with
+   * `(off)` on one that can't be picked. */
+  readonly menus: readonly string[]
   /** What this seat is told while it waits on another: the line by the pass
    * buttons, and each panel's. */
   readonly waiting: readonly string[]
@@ -103,6 +120,65 @@ function snapshot(page: Page): Promise<Snapshot> {
         .join(' | '),
     )
     const log = dv?.log ?? []
+    // Everything below is for a reader with no screen: an agent judging a
+    // manual check from this text alone (.claude/manual-checks/agent-guide.md).
+    type Full = {
+      activePlayer?: string
+      turn?: { number: number; step: string }
+      zones: { battlefield: string[]; hands: Record<string, string[]>; graveyards: Record<string, string[]> }
+      players: Record<string, { manaPool?: Record<string, number> }>
+      objects: Record<string, {
+        cardName: string; copyOf?: string | null; controller: string; owner?: string; types?: string[]; power: number | null; toughness: number | null
+        loyalty?: number | null; tapped?: boolean; counters?: Record<string, number>; summoningSick?: boolean; attachedTo?: string | null
+        stackCount?: number | null; faceDown?: unknown; keywords?: string[]
+      }>
+    }
+    const full = view as unknown as Full | null
+    const describe = (id: string): string => {
+      const o = full?.objects[id]
+      if (o === undefined) return 'face-down'
+      const marks: string[] = []
+      if (o.tapped === true) marks.push('tapped')
+      if (o.summoningSick === true && o.types?.includes('creature') === true) marks.push('sick')
+      for (const [kind, n] of Object.entries(o.counters ?? {})) if (n > 0 && kind !== 'loyalty') marks.push(`${n} ${kind}`)
+      if (o.attachedTo != null) marks.push(`on ${nameOf(o.attachedTo)}`)
+      if (o.faceDown !== undefined) marks.push('face-down')
+      if ((o.keywords ?? []).length > 0) marks.push(o.keywords!.join(' '))
+      const size = o.power !== null && o.toughness !== null ? ` ${o.power}/${o.toughness}` : o.loyalty != null ? ` [${o.loyalty}]` : ''
+      const many = (o.stackCount ?? 1) > 1 ? ` x${o.stackCount}` : ''
+      return `${nameOf(id)}${many}${size}${marks.length > 0 ? ` (${marks.join(', ')})` : ''}`
+    }
+    const order = view?.turnOrder ?? []
+    const board = full === null ? [] : order.map((p) => `${p}: ${full.zones.battlefield.filter((id) => full.objects[id]?.controller === p).map(describe).join('; ') || '—'}`)
+    const mine = dv?.seat ?? ''
+    const hand = full === null ? '' : (full.zones.hands[mine] ?? []).map(nameOf).join(', ')
+    const mana = full === null ? '' : Object.entries(full.players[mine]?.manaPool ?? {}).filter(([, n]) => typeof n === 'number' && n > 0).map(([c, n]) => `${n} ${c}`).join(', ')
+    const piles = full === null ? [] : order.flatMap((p) => {
+      const graveyard = (full.zones.graveyards[p] ?? []).map(nameOf)
+      const exiled = (view?.zones.exile ?? []).filter((x) => view?.zones.exileOwners[x] === p).map(nameOf)
+      return [
+        ...(graveyard.length > 0 ? [`${p}'s graveyard: ${graveyard.slice(-12).join(', ')}`] : []),
+        ...(exiled.length > 0 ? [`${p}'s exile: ${exiled.slice(-12).join(', ')}`] : []),
+      ]
+    })
+    // A mana symbol is an image: its alt text ("{G}") stands for it.
+    const words = (el: Element): string => {
+      const copy = el.cloneNode(true) as HTMLElement
+      for (const img of copy.querySelectorAll('img[alt]')) img.replaceWith(img.getAttribute('alt') ?? '')
+      return (copy.textContent ?? '').replace(/\s+/g, ' ').trim()
+    }
+    const menus = [...document.querySelectorAll('[role="menu"]')]
+      .filter((menu) => (menu as HTMLElement).offsetParent !== null || menu.getClientRects().length > 0)
+      .map((menu) => {
+        const items = [...menu.querySelectorAll('[role="menuitem"], button')].map(
+          (item) => `${words(item)}${(item as HTMLButtonElement).disabled === true ? ' (off)' : ''}`,
+        )
+        return `"${menu.getAttribute('aria-label') ?? ''}": ${[...new Set(items)].join(' | ')}`
+      })
+    const turn = full?.turn === undefined ? '' : `turn ${full.turn.number}, ${full.activePlayer ?? '?'}'s, ${full.turn.step}`
+    const logSince = (dv as unknown as { logSince?: (seq: number, max: number) => { seq: number; text: string }[] } | undefined)?.logSince
+    const since = (window as Window & { runCheckLogSeq?: number }).runCheckLogSeq ?? -1
+    const fresh = logSince === undefined ? [] : logSince.call(dv, since, 40)
     const banner = line(document.querySelector('.decision-banner'))
     const title = line(document.querySelector('.bp-check-title'))
     const key = JSON.stringify([banner, popups, badges, players, stack, view?.priority, view?.awaiting])
@@ -116,6 +192,14 @@ function snapshot(page: Page): Promise<Snapshot> {
       stack,
       drawn,
       log,
+      newLog: fresh.map((l) => l.text),
+      logSeq: fresh.length > 0 ? fresh[fresh.length - 1].seq : since,
+      turn,
+      board,
+      hand,
+      mana,
+      piles,
+      menus,
       waiting: [...document.querySelectorAll('.priority-waiting, .pp-waiting')].map(line),
       key,
       // Another player's decision this seat makes is its own to answer (rule 723).
@@ -165,15 +249,36 @@ async function settle(page: Page, forBots: boolean, hold = false): Promise<Snaps
   return last
 }
 
-function print(label: string, s: Snapshot, shot: string): void {
-  const out = [`== ${label}`, `  banner: ${s.banner || '—'}`]
+/** What the last print said of the board, hand and piles: a line is printed
+ * again only where it has changed, so a long run stays short to read. */
+const printed = new Map<string, string>()
+
+async function print(page: Page, label: string, s: Snapshot, shot: string): Promise<void> {
+  const out = [`== ${label}`, `  ${s.turn}`, `  banner: ${s.banner || '—'}`]
   for (const p of s.popups) out.push(`  popup ${p}`)
+  for (const m of s.menus) out.push(`  menu ${m}`)
   if (s.badges.length > 0) out.push(`  badges: ${s.badges.join('; ')}`)
   for (const p of s.players) out.push(`  ${p}`)
+  const changed = (key: string, text: string): boolean => {
+    if (printed.get(key) === text) return false
+    printed.set(key, text)
+    return true
+  }
+  for (const b of s.board) if (changed(`board ${b.split(':')[0]}`, b)) out.push(`  board ${b}`)
+  if (changed('hand', s.hand)) out.push(`  hand: ${s.hand || '—'}`)
+  const manaBefore = printed.get('mana') ?? ''
+  if (changed('mana', s.mana) && (s.mana !== '' || manaBefore !== '')) out.push(`  mana: ${s.mana || '—'}`)
+  if (changed('piles', s.piles.join(' / '))) for (const p of s.piles) out.push(`  ${p}`)
   out.push(`  stack: ${s.stack.length > 0 ? s.stack.join(', ') : '—'}`)
   if (s.drawn.length > 0) out.push(`  stack drawn (top first): ${s.drawn.join(' / ')}`)
   if (s.waiting.length > 0) out.push(`  waiting: ${s.waiting.join(' / ')}`)
-  if (s.log.length > 0) out.push(`  log: ${s.log.join(' / ')}`)
+  // Every line the log gained since the last print, so nothing a step did
+  // scrolls away unread.
+  if (s.newLog.length > 0) out.push(`  log (+${s.newLog.length}): ${s.newLog.join(' / ')}`)
+  else out.push('  log: nothing new')
+  await page.evaluate((seq) => {
+    ;(window as Window & { runCheckLogSeq?: number }).runCheckLogSeq = seq
+  }, s.logSeq)
   out.push(`  shot: ${shot}`)
   console.log(out.join('\n'))
 }
@@ -362,7 +467,7 @@ test('run a manual check', async ({ page }) => {
   const hide = panel.getByTitle('Hide the builder')
   await hide.click({ timeout: 3_000 }).catch(() => hide.dispatchEvent('click'))
   console.log(`check: ${title}`)
-  print('start', await settle(page, true, run.hold), await shoot(0, 'start'))
+  await print(page, 'start', await settle(page, true, run.hold), await shoot(0, 'start'))
 
   for (const [i, step] of run.steps.entries()) {
     const found = await runStep(page, step)
@@ -375,6 +480,6 @@ test('run a manual check', async ({ page }) => {
       console.log(`FAILED step ${i + 1} "${step}": nothing to act on\n  banner: ${s.banner || '—'}\n  shot: ${shot}`)
       throw new Error(`step ${i + 1} found no target`)
     }
-    print(`${i + 1} ${step}`, s, shot)
+    await print(page, `${i + 1} ${step}`, s, shot)
   }
 })
