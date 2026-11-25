@@ -181,7 +181,7 @@ changed), so after a quiet day it can keep serving the old page — and through 
 scripts — for hours after a deploy. `no-cache` makes it ask every load (a cheap 304 when nothing
 changed); everything under `/assets/` is content-hashed, a new name on every build, so it can be
 cached forever. The matchers are on the *request* path, not `/index.html`, because Caddy applies
-`header` before `try_files` rewrites a route to `index.html`. After editing the Caddyfile,
+`header` before `try_files` rewrites a route to `index.html`. The same rule serves `version.json` (the build's id, written by the client's build): a page left open across a deploy reads it now and then and offers a reload when it names another build (`client/src/ui/newVersion.ts`). After editing the Caddyfile,
 `sudo systemctl reload caddy`; check with `curl -sI https://deckblitz.net/ | grep -i cache-control`.
 
 No TLS block — Cloudflare already terminated HTTPS before this ever sees the request. The client

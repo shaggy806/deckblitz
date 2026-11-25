@@ -8,6 +8,7 @@ import { loadCardPool } from './cards/cardData.ts'
 import { PoolLoadBoundary, PoolLoading } from './cards/PoolLoading.tsx'
 import { clickButtons } from './game/sound.ts'
 import { CoachLayer } from './tutorial/CoachLayer.tsx'
+import { NewVersionNotice } from './ui/NewVersionNotice.tsx'
 import type { PageId } from './tutorial/types.ts'
 import { trackPage } from './usage.ts'
 
@@ -64,4 +65,13 @@ clickButtons()
 // page throws from here on (`usage.ts`).
 trackPage()
 
-createRoot(document.getElementById('root')!).render(<StrictMode>{page}</StrictMode>)
+// The game's own pages say a new version is out where there's no board to
+// cover (`App`); the others say it here.
+const inApp = !['/library', '/deck-builder', '/about'].some((prefix) => path.startsWith(prefix))
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    {page}
+    {inApp ? null : <NewVersionNotice />}
+  </StrictMode>,
+)

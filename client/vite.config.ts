@@ -190,8 +190,19 @@ const PAGE_COMMIT = ((): string | null => {
   }
 })()
 
+// `version.json` beside `index.html`, naming this build: an open page reads
+// it now and then and says so when it names another (`src/ui/newVersion.ts`).
+// Served as `index.html` is, never cached (DEPLOYMENT.md's Caddyfile).
+const versionFile = (): Plugin => ({
+  name: 'deckblitz:version-file',
+  apply: 'build',
+  generateBundle() {
+    this.emitFile({ type: 'asset', fileName: 'version.json', source: `${JSON.stringify({ build: PAGE_BUILD, commit: PAGE_COMMIT })}\n` })
+  },
+})
+
 export default defineConfig({
-  plugins: [react(), engineLocal(), cardCatalog(), shardFiles(), buildAsap()],
+  plugins: [react(), engineLocal(), cardCatalog(), shardFiles(), buildAsap(), versionFile()],
   define: { __PAGE_BUILD__: JSON.stringify(PAGE_BUILD), __PAGE_COMMIT__: JSON.stringify(PAGE_COMMIT) },
   // The landing page's dev menu of test rooms (`src/lobby/devRooms.ts`)
   // reads dev-rooms' command port (`server/scripts/dev-rooms.mjs`) through

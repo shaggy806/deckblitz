@@ -311,7 +311,6 @@ One line each; the detail is in **`docs/client-gaps.md`**, under the same bold t
 animation follow-ups in `docs/plans/legibility-of-play.md`, "Follow-ups". When an item lands,
 delete its detail there and move this line to `COMPLETED.md`.
 
-- **A page left open across a deploy is never told a new version is out** (2026-11-25, a bug report: a friend's exile button wasn't lit, on a page loaded before the deploy that added it).
 - **The log says a creature "can't attack this combat" when it only can't attack one player** (2026-11-25, Chaos Dragon, found by an agent playing its manual check).
 
 - **What one player alone knows of a hand or library isn't kept** (2026-11-25): a private look at a hand (Gitaxian Probe, Peek) is forgotten once the look ends, and a known card drawn from a known place in a library goes back to being hidden; only what every player knows is tracked (`knownToAll`).

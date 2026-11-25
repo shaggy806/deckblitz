@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { PlayerView } from 'engine/client'
 import { playerLabel } from '../format.ts'
 import type { NetworkGame } from '../net/useNetworkGame.ts'
+import { reloadForNewVersion, useNewVersion } from './newVersion.ts'
 
 /**
  * The top strip's "Game" menu: what a player can do with this game, in one
@@ -32,6 +33,9 @@ export function SeatMenu({
   const [confirmingLeave, setConfirmingLeave] = useState(false)
   const [confirmingTakeBack, setConfirmingTakeBack] = useState(false)
   const boxRef = useRef<HTMLDivElement>(null)
+  // A newer build than this page's is out: said here, where it covers
+  // nothing of the board, with a dot on the button until it's read.
+  const newVersion = useNewVersion()
 
   // Closes on a click anywhere else, or Escape, as the animations panel does.
   useEffect(() => {
@@ -72,8 +76,14 @@ export function SeatMenu({
         data-tour="game-menu"
         // Amber while a bot has the seat, as the bots' pause button is when
         // paused; the strip has no room for a longer label.
-        className={botPlaying ? 'ts-paused' : undefined}
-        title={botPlaying ? 'A bot is playing your seat' : 'This game: a bot for your seat, concede, restart, leave'}
+        className={[botPlaying ? 'ts-paused' : '', newVersion ? 'has-new-version' : ''].filter(Boolean).join(' ') || undefined}
+        title={
+          botPlaying
+            ? 'A bot is playing your seat'
+            : newVersion
+              ? 'A new version of Deck Blitz is out — open for more'
+              : 'This game: a bot for your seat, concede, restart, leave'
+        }
         aria-expanded={open}
         onClick={() => {
           // Opening it never starts on a half-finished concession.
@@ -88,6 +98,14 @@ export function SeatMenu({
       </button>
       {open ? (
         <div className="motion-panel seat-menu-panel" role="dialog" aria-label="Game">
+          {newVersion ? (
+            <div className="seat-menu-new-version">
+              <span>A new version of Deck Blitz is out. Reload between games if you can; this game is still here afterwards.</span>
+              <button type="button" onClick={reloadForNewVersion}>
+                Reload now
+              </button>
+            </div>
+          ) : null}
           {inGame ? (
             <button type="button" onClick={() => game.setBotTakeover(!botPlaying)}>
               {botPlaying ? 'Take back control' : 'Let a bot play for me'}

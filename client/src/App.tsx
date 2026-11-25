@@ -136,6 +136,7 @@ import { AnimationLayer } from './ui/AnimationLayer.tsx'
 import { ArrowLayer } from './ui/ArrowLayer.tsx'
 import { highlightEvent, highlightObject } from './ui/highlight.ts'
 import { SeatMenu } from './ui/SeatMenu.tsx'
+import { NewVersionNotice } from './ui/NewVersionNotice.tsx'
 import { TriggerOrder } from './ui/TriggerOrder.tsx'
 import { usePassSettings } from './game/passSettings.ts'
 import { printingSeen } from './game/seenPrintings.ts'
@@ -1120,6 +1121,9 @@ export default function App() {
       <AppScreen game={game} />
       {/* The tutorials' coach marks, over whichever screen is up. */}
       <CoachLayer page={coachPageOf(game.status)} />
+      {/* A newer build is out: said here on the landing page and in a lobby,
+          and by the Game menu once there's a board (`ui/newVersion.ts`). */}
+      {coachPageOf(game.status) === 'game' ? null : <NewVersionNotice />}
     </>
   )
 }

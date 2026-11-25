@@ -326,6 +326,55 @@
   border-color: var(--bad);
   color: var(--bad);
 }
+/* A newer build is out (ui/newVersion.ts): the first thing in the Game menu,
+   and a dot on its button until the page is reloaded. */
+.seat-menu-new-version {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4em;
+  /* As wide as the menu's buttons make the panel and no wider: its words
+     wrap, where the panel's own entries never do. */
+  width: 0;
+  min-width: 100%;
+  white-space: normal;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-xs);
+  color: var(--text);
+}
+.ts-menu button.has-new-version {
+  position: relative;
+}
+.ts-menu button.has-new-version::after {
+  content: '';
+  position: absolute;
+  top: -0.25em;
+  right: -0.25em;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+/* The same on a page with no board (ui/NewVersionNotice.tsx): a quiet line
+   at the bottom, over nothing that's being played. */
+.new-version {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(8px, 1.6vh, 20px);
+  transform: translateX(-50%);
+  z-index: 10040;
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.6vw, 12px);
+  max-width: min(94vw, 40em);
+  padding: clamp(4px, 0.6vh, 8px) clamp(8px, 0.8vw, 14px);
+  font-size: var(--text-sm);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  box-shadow: var(--frame-raised), var(--shadow-popover);
+}
 /* "About & legal": a quiet link under the menu's buttons. */
 .seat-menu-link {
   padding: 2px 4px;
