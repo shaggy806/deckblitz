@@ -10,7 +10,10 @@
 
 .db-list {
   flex: none;
-  width: 320px;
+  /* As wide as its text is large (`--ui`): at a fixed 320px a 1440p monitor's
+     larger text pushed a five-colour deck's "active" badge over its Blitz
+     button (2026-11-24). */
+  width: calc(320px * var(--ui));
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -119,10 +122,17 @@
   background: var(--accent-bg);
   color: var(--accent);
 }
+/* A deck's name gives way to what follows it in the row (the colour pips,
+   the "active" badge): it wraps, and a word too long for its share breaks
+   rather than pushing them out of the row. */
+.db-deck-name,
+.db-starter-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .db-starter-text {
   display: flex;
   flex-direction: column;
-  min-width: 0;
 }
 .db-starter-commander {
   font-size: var(--text-xs);
@@ -134,6 +144,7 @@
 }
 .db-active-badge {
   margin-left: auto;
+  flex: none;
   font-size: var(--text-2xs);
   padding: 1px 6px;
   border-radius: 0;

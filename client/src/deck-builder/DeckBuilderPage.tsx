@@ -182,7 +182,7 @@ export function DeckBuilderPage() {
                   className={selection?.kind === 'saved' && selection.id === d.id ? 'selected' : undefined}
                   onClick={() => selectDeck({ kind: 'saved', id: d.id })}
                 >
-                  {d.name}
+                  <span className="db-deck-name">{d.name}</span>
                   <DeckIdentityPips commanders={d.commanders} colors={d.commanderColors} />
                   {isActive({ kind: 'saved', id: d.id }) ? <span className="db-active-badge">active</span> : null}
                 </button>
