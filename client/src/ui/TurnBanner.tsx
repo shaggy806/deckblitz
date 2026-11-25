@@ -49,7 +49,12 @@ export function TurnBanner({
       {view.dayNight !== null ? (
         <>
           <span className="turn-banner-sep">·</span>
-          <span className="turn-banner-daynight" title={`It is ${view.dayNight} (rule 726)`}>
+          {/* A pill in the day's or the night's own colour: as muted text
+              like the step's name it went unseen (the user, 2026-11-24). */}
+          <span
+            className={`turn-banner-daynight ${view.dayNight}`}
+            title={`It is ${view.dayNight} (rule 731). ${view.dayNight === 'day' ? 'It becomes night as a turn begins if the last turn’s active player cast no spells during it' : 'It becomes day as a turn begins if the last turn’s active player cast two or more spells during it'} (rule 502.2).`}
+          >
             {view.dayNight === 'day' ? '☀ Day' : '☾ Night'}
           </span>
         </>

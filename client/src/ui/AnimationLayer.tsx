@@ -50,8 +50,11 @@ import {
   TURN_STEP_MS,
   cardsOffLibraries,
   flightMs,
+  isModalChoice,
   libraryPeels,
+  modesHoldMs,
 } from '../game/animationSchedule.ts'
+import { Symbols } from './Symbols.tsx'
 import type { PeelPart } from '../game/animationSchedule.ts'
 import type { AnimationBus, AnimationCue, BoardMounted } from '../game/animationBus.ts'
 import { motionPrefs, useMotionPrefs } from '../game/motionPrefs.ts'
@@ -121,6 +124,9 @@ interface Reveal {
   readonly key: string
   readonly caption: string
   readonly cards: readonly VisibleObject[]
+  /** What was chosen, a line each, under the caption: a modal spell's or
+   * ability's modes (`isModalChoice`), shown beside its card. */
+  readonly lines?: readonly string[]
   /** How long it's held up, before `animScale`: longer the more cards
    * there are to read (`revealHoldMs`). */
   readonly ms: number
@@ -171,6 +177,15 @@ function RevealTray({ reveals }: { readonly reveals: readonly Reveal[] }) {
       {reveals.map((r) => (
         <div key={r.key} className="reveal-show" style={{ '--reveal-ms': `${r.ms}ms` } as CSSProperties}>
           <div className="reveal-caption">{r.caption}</div>
+          {r.lines !== undefined ? (
+            <ul className="reveal-modes">
+              {r.lines.map((line, i) => (
+                <li key={i}>
+                  <Symbols text={line} />
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <div className="reveal-cards">
             {r.cards.map((obj) => (
               <CardTile key={obj.id} obj={obj} layout="art-first" />
@@ -2925,6 +2940,32 @@ export function AnimationLayer({
         setReveals((cur) => [
           ...cur,
           { key, caption: `${who} reveals from their ${ev.from}`, cards, ms },
+        ])
+        window.setTimeout(() => {
+          setReveals((cur) => cur.filter((r) => r.key !== key))
+        }, scaled(ms))
+      } else if (isModalChoice(ev)) {
+        // The modes someone chose, for the rest of the table (the user,
+        // 2026-11-24): the one who chose them just clicked them.
+        if (ev.player === undefined || ev.player === seatRef.current) return
+        const source = view.objects[ev.source] ?? cue.prev?.objects[ev.source]
+        const texts = ev.texts
+        const lines =
+          texts !== undefined && texts.length === ev.modes.length
+            ? texts.map((t) => t.replace(/^•\s*/, ''))
+            : ev.modes.map((m) => `Mode ${m + 1}`)
+        const key = `modes-${ev.seq}`
+        const who = playerLabel(ev.player, seatsRef.current)
+        const ms = modesHoldMs(ev.modes.length)
+        setReveals((cur) => [
+          ...cur,
+          {
+            key,
+            caption: `${who} chose${source !== undefined ? ` for ${source.name ?? source.cardName}` : ''}`,
+            cards: source !== undefined ? [source] : [],
+            lines,
+            ms,
+          },
         ])
         window.setTimeout(() => {
           setReveals((cur) => cur.filter((r) => r.key !== key))

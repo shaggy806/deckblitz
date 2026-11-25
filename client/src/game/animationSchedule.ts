@@ -271,6 +271,18 @@ export const REVEAL_MAX_MS = 10_000
 export function revealHoldMs(cards: number): number {
   return Math.min(REVEAL_MAX_MS, REVEAL_STEP_MS + Math.max(0, cards - 1) * REVEAL_EXTRA_CARD_MS)
 }
+/** A modal choice (`isModalChoice`) is held up as long as a reveal of its
+ * card and two more cards a mode: there's a line to read for each, and one
+ * chosen as a turn begins (an upkeep trigger) spends its first second under
+ * the turn banner. */
+export function modesHoldMs(modes: number): number {
+  return revealHoldMs(1 + 2 * modes)
+}
+/** The modes chosen for a modal spell or ability (rule 700.2) as it was cast,
+ * activated or put on the stack — what the table is shown in a popup. */
+export function isModalChoice(ev: GameEvent): ev is Extract<GameEvent, { type: 'modes-chosen' }> {
+  return ev.type === 'modes-chosen' && ev.modal === true && ev.modes.length > 0
+}
 /** A die roll thrown onto the table (`ui/diceRoll.ts`): the dice tumble in
  * and bounce for the first 60%, then rest showing what was rolled, long
  * enough to read, before the roll's effects play. Paced: the game waits. */
@@ -792,6 +804,12 @@ function slotFor(ev: GameEvent, phase: { current: Phase }, reduced: boolean, hit
   }
   if (ev.type === 'cards-revealed') {
     return { event: ev, kind: 'reveal', duration: revealHoldMs(ev.objects.length) }
+  }
+  // The modes a player chose for a modal spell or ability (rule 700.2), held
+  // up for the table as a reveal is (the user, 2026-11-24). Not a "you may"
+  // or a choice made on resolution: those emit the same event, unmarked.
+  if (isModalChoice(ev)) {
+    return { event: ev, kind: 'reveal', duration: modesHoldMs(ev.modes.length) }
   }
   if (ev.type === 'turn-began') {
     phase.current = 'beginning'

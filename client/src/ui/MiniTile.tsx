@@ -21,6 +21,7 @@ import { roomLabel } from './rooms.ts'
 import { useCardArt } from './useCardArt.ts'
 import { AttractionLights } from './AttractionLights.tsx'
 import { textEmWidth, useFontEpoch } from './textWidth.ts'
+import { hasTapAbility } from './tapAbility.ts'
 
 const TAP_ICON_URL = manaSymbolUrl('T')
 
@@ -53,6 +54,11 @@ export interface MiniTileProps {
   readonly protectedBy?: Goader | null
   /** The player chosen for this permanent, or null. */
   readonly chosenPlayer?: Goader | null
+  /** Its owner when someone else controls it, or null (`CardFlags`). */
+  readonly ownedBy?: Goader | null
+  /** Its controller when it's attached to another player's permanent, or
+   * null (`CardFlags`). */
+  readonly controlledBy?: Goader | null
   /** The cards in exile this permanent holds (`VisibleObject.holding`),
    * each with what this seat can see of it — `null` for one exiled face
    * down (rule 406.3), drawn as a card back. Shown beside the hover card. */
@@ -110,6 +116,8 @@ export function MiniTile({
   enchanting = null,
   protectedBy = null,
   chosenPlayer = null,
+  ownedBy = null,
+  controlledBy = null,
   held = [],
   ownerSeat = null,
   onClick,
@@ -123,6 +131,10 @@ export function MiniTile({
   const hasCornerPills = (stackCount !== null && stackCount > 1) || blockedCount > 0
   const clickable = Boolean(onClick) && (highlight || selected || activatable)
   const tint = cardTint(obj)
+  const flagSources = { obj, goaders, enchanting, protectedBy, chosenPlayer, ownedBy, controlledBy }
+  // Untapped, a permanent that taps for an ability says so in its corner;
+  // tapped, the {T} across its art says the rest.
+  const canTap = !obj.tapped && faceDown === null && hasTapAbility(obj)
 
   const { wrapRef, popoverRef, open, handlers } = useHoverPopover(
     held.length > 0 ? [obj, held] : obj,
@@ -266,10 +278,18 @@ export function MiniTile({
               ) : null}
             </span>
           ) : null}
-          <CardFlags obj={obj} goaders={goaders} enchanting={enchanting} protectedBy={protectedBy} chosenPlayer={chosenPlayer} compact />
+          <CardFlags {...flagSources} compact />
           {badge ? <span className="mt-badge">{badge}</span> : null}
           {obj.tapped && TAP_ICON_URL ? (
             <img className="tap-icon" src={TAP_ICON_URL} alt="" />
+          ) : null}
+          {canTap && TAP_ICON_URL ? (
+            <img
+              className={`mt-tap-ability${badge ? ' below-badge' : ''}`}
+              src={TAP_ICON_URL}
+              alt="Has a {T} ability"
+              title="It has a {T} ability"
+            />
           ) : null}
           {aimedBy !== null ? <TargetedMark by={aimedBy} /> : null}
         </span>
@@ -284,13 +304,15 @@ export function MiniTile({
                 badge={badge}
                 goaders={goaders}
                 enchanting={enchanting}
+                ownedBy={ownedBy}
+                controlledBy={controlledBy}
                 ownerSeat={ownerSeat}
                 notesAside
               />
               <OtherFace obj={obj} />
               {/* Summoning sickness, counters and the other chips, as tips
                   beside the card rather than along its bottom. */}
-              <KeywordTips obj={obj} notes={boardNotes(obj, { obj, goaders, enchanting, protectedBy, chosenPlayer })} />
+              <KeywordTips obj={obj} notes={boardNotes(obj, flagSources)} />
               {held.length > 0 ? (
                 <div className={`popover-held held-${Math.min(held.length, 3)}`}>
                   <span className="popover-held-label">Exiled with it</span>

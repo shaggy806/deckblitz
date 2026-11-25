@@ -13826,4 +13826,40 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Plains*2', 'Savannah Lions'], hand: ['Lashknife'] },
     }),
   ),
+  preset(
+    "Etherwrought Page: a bot's chosen mode is shown to the table",
+    board({
+      you: { bf: ['Plains'] },
+      opp: { bf: ['Etherwrought Page'] },
+      step: 'end',
+    }),
+  ),
+  preset(
+    'Control Magic: a stolen creature names its owner',
+    board({
+      you: { bf: ['Island*4'], hand: ['Control Magic'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    "Pacifism: an Aura on another player's creature names its controller",
+    board({
+      you: { bf: ['Plains', { name: 'Pacifism', attach: 'Grizzly Bears' }] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Sol Ring: a permanent with a tap ability shows the tap symbol',
+    board({
+      you: { bf: ['Forest', 'Sol Ring', 'Llanowar Elves', 'Grizzly Bears'] },
+      opp: [{ bf: ['Plains', 'Prodigal Sorcerer'] }, { bf: ['Merfolk Looter'] }, { bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Brutal Cathar: day is shown in the top strip',
+    board({
+      you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

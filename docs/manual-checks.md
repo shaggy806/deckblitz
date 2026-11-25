@@ -28,6 +28,28 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## What the board shows about modes, owners, tap abilities and day (2026-11-25)
+
+### Etherwrought Page: a bot's chosen mode is shown to the table
+- **Do:** End your turn.
+- **Expect:** As Bob's upkeep begins, a popup near the top reads "Bob chose for Etherwrought Page" over the one mode the bot chose, with the card below it, and goes away on its own.
+
+### Control Magic: a stolen creature names its owner
+- **Do:** Cast Control Magic on Bob's Grizzly Bears.
+- **Expect:** The Bears move to your board with an "Own Bob" chip in Bob's colour; hovering it lists "Owned by Bob" beside the card.
+
+### Pacifism: an Aura on another player's creature names its controller
+- **Do:** Look at Bob's Grizzly Bears.
+- **Expect:** The Pacifism attached under them carries a "Ctrl Alice" chip in your colour. The Bears carry no owner chip.
+
+### Sol Ring: a permanent with a tap ability shows the tap symbol
+- **Do:** Look at your board, then tap Sol Ring for mana.
+- **Expect:** Sol Ring, Llanowar Elves, Bob's Prodigal Sorcerer and Carol's Merfolk Looter show a small {T} in their top-right corner; the lands, Grizzly Bears and Dave's Hill Giant don't. Once tapped, Sol Ring shows the large {T} across its art instead.
+
+### Brutal Cathar: day is shown in the top strip
+- **Do:** Cast Brutal Cathar, exiling Bob's Grizzly Bears.
+- **Expect:** The top strip's turn readout ends in "☀ Day", and stays there for the rest of the game.
+
 ## What a hand card's ways and pills say (2026-11-24)
 
 ### Lashknife: the free cast says it taps a creature

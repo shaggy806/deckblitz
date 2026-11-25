@@ -4806,6 +4806,16 @@ function Table({
       obj.chosenPlayer !== undefined && view.turnOrder.includes(obj.chosenPlayer)
         ? { seat: seatClassOf(seatingOf(view), obj.chosenPlayer), name: playerLabel(obj.chosenPlayer, game.seats) }
         : null
+    // Who owns and who controls it, where the board doesn't say (the user,
+    // 2026-11-24): a permanent sits on its controller's side as if it were
+    // theirs, and an attachment under its host whoever controls it.
+    const seatOf = (p: PlayerId) =>
+      view.turnOrder.includes(p) ? { seat: seatClassOf(seatingOf(view), p), name: playerLabel(p, game.seats) } : null
+    const onBattlefield = obj.zone === 'battlefield'
+    const ownedBy = onBattlefield && obj.owner !== obj.controller ? seatOf(obj.owner) : null
+    const host = obj.attachedTo !== null ? view.objects[obj.attachedTo] : undefined
+    const controlledBy =
+      onBattlefield && host !== undefined && host.controller !== obj.controller ? seatOf(obj.controller) : null
     // A face-down permanent wears its owner's card back.
     const backSeat = view.turnOrder.includes(obj.owner) ? seatClassOf(seatingOf(view), obj.owner) : null
     if (opts.mini) {
@@ -4825,6 +4835,8 @@ function Table({
           enchanting={enchanting}
           protectedBy={protectedBy}
           chosenPlayer={chosenPlayer}
+          ownedBy={ownedBy}
+          controlledBy={controlledBy}
           held={(obj.holding ?? []).map((h) => ({ id: h, obj: view.objects[h] ?? null }))}
           ownerSeat={backSeat}
           onClick={onTileClick}
@@ -4846,6 +4858,8 @@ function Table({
         enchanting={enchanting}
         protectedBy={protectedBy}
         chosenPlayer={chosenPlayer}
+        ownedBy={ownedBy}
+        controlledBy={controlledBy}
         ownerSeat={backSeat}
         onClick={onTileClick}
       />

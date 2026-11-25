@@ -464,9 +464,25 @@
   color: var(--muted);
   font-weight: 500;
 }
+/* Day or night (rule 731), as a pill in its own colour: as muted text beside
+   the step's name it went unseen (the user, 2026-11-24). */
 .turn-banner-daynight {
-  color: var(--muted);
-  font-weight: 600;
+  align-self: center;
+  padding: 0.1em 0.65em;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+}
+.turn-banner-daynight.day {
+  color: #241a02;
+  background: #f2c94c;
+  box-shadow: 0 0 0.6em color-mix(in srgb, #f2c94c 45%, transparent);
+}
+.turn-banner-daynight.night {
+  color: #ecebff;
+  background: #3f3d9e;
+  box-shadow: 0 0 0.6em color-mix(in srgb, #6c6af0 45%, transparent);
 }
 .pp-monarch,
 .pp-initiative,
@@ -3767,6 +3783,23 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* An untapped non-land permanent with a {T} ability (ui/tapAbility.ts): the
+   symbol in the art's top-right corner, sized like the keyword discs that
+   hold the top-left. Under the badge when there is one. */
+.mt-tap-ability {
+  --tap-size: clamp(11px, calc(var(--mini-w) * 0.15), 17px);
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 2;
+  width: var(--tap-size);
+  height: var(--tap-size);
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.9)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+.mt-tap-ability.below-badge {
+  top: calc(4px + var(--tap-size) * 0.7);
+}
 /* A permanent's counters (ui/CounterChips.tsx): one pill per kind, its Mana
    font glyph and the count, stacked up the right edge from just above the
    P/T or loyalty badge. Sized off the tile like the keyword discs, which
@@ -4986,6 +5019,28 @@
   text-transform: uppercase;
   color: var(--warn);
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+/* The modes a player chose (AnimationLayer's `isModalChoice`), a line each
+   between the caption and the card: the card shows every mode, these say
+   which. Plated so the words stay readable over the board. */
+.reveal-modes {
+  margin: 0;
+  padding: 0.4em 0.8em;
+  list-style: none;
+  max-width: min(60ch, 92vw);
+  font-size: var(--text-md);
+  line-height: 1.35;
+  color: var(--text);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+  box-shadow: var(--shadow-popover);
+}
+.reveal-modes li + li {
+  margin-top: 0.3em;
+}
+.reveal-modes li::before {
+  content: '• ';
+  color: var(--warn);
 }
 .reveal-cards {
   display: flex;

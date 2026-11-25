@@ -35,7 +35,9 @@ const COLOR_WORD: Readonly<Record<string, string>> = {
  * it sits on its controller's board but is attached to someone else. A
  * battle names its protector (`protectedBy` — rule 310.9) the same way: a
  * Siege sits on its controller's board, defended by an opponent. So does a
- * permanent's chosen player (`chosenPlayer` — Black Vise's opponent).
+ * permanent's chosen player (`chosenPlayer` — Black Vise's opponent), its
+ * owner when someone else controls it (`ownedBy`), and its controller when
+ * it's attached to another player's permanent (`controlledBy`).
  */
 /** Marks (or unmarks) the board tile of `id` as a paired partner being
  * pointed at: App.css's `.paired-lit`. A class on the tile's own element, so
@@ -55,6 +57,12 @@ export interface FlagSources {
   readonly protectedBy?: Goader | null
   /** The player chosen for this permanent, or null. */
   readonly chosenPlayer?: Goader | null
+  /** Its owner, when they aren't its controller (a stolen or exchanged
+   * permanent), or null. */
+  readonly ownedBy?: Goader | null
+  /** Its controller, when where it's drawn doesn't say so (an Aura or
+   * Equipment under another player's permanent), or null. */
+  readonly controlledBy?: Goader | null
 }
 
 /** One flag: its chip (`compact` on a board tile, `long` elsewhere), and the
@@ -69,8 +77,41 @@ interface Flag {
   readonly seat?: string
 }
 
-function flagsOf({ obj, goaders, enchanting = null, protectedBy = null, chosenPlayer = null }: FlagSources): Flag[] {
+function flagsOf({
+  obj,
+  goaders,
+  enchanting = null,
+  protectedBy = null,
+  chosenPlayer = null,
+  ownedBy = null,
+  controlledBy = null,
+}: FlagSources): Flag[] {
   const flags: Flag[] = []
+  // Who controls it and who owns it, where the board doesn't say (the user,
+  // 2026-11-24): a permanent is drawn on its controller's side, or under
+  // its host when attached, and is assumed to be its controller's own.
+  if (controlledBy !== null) {
+    flags.push({
+      key: 'controlled-by',
+      className: 'enchanting',
+      compact: `Ctrl ${controlledBy.name}`,
+      long: `controlled by ${controlledBy.name}`,
+      name: `Controlled by ${controlledBy.name}`,
+      text: `${controlledBy.name} controls it, though it's attached to another player's permanent.`,
+      seat: controlledBy.seat,
+    })
+  }
+  if (ownedBy !== null) {
+    flags.push({
+      key: 'owned-by',
+      className: 'enchanting',
+      compact: `Own ${ownedBy.name}`,
+      long: `owned by ${ownedBy.name}`,
+      name: `Owned by ${ownedBy.name}`,
+      text: `${ownedBy.name} owns it, but another player controls it: it goes to ${ownedBy.name}'s graveyard, hand or library if it leaves the battlefield.`,
+      seat: ownedBy.seat,
+    })
+  }
   const held = obj.holding?.length ?? 0
   const chosen = obj.chosen === undefined ? null : (COLOR_WORD[obj.chosen] ?? obj.chosen)
   const level = obj.classLevel ?? null
