@@ -22,7 +22,8 @@ session that started it, so everything it finds reaches `main` as files under
 Slice 3 was played on 2026-11-25. Twenty slices are the rest of the list. A slice is played once
 `docs/manual-check-runs/slice-<n>-A.jsonl` exists on `main`: check before starting one. The
 user's own PC plays them from 20 downward, so a cloud session takes the **lowest** number not
-yet played.
+yet played. (Slice 20 was stopped part-way on 2026-11-25, with about a third of it judged: play it
+again whole when the others are done.)
 
 ## 1. A browser
 
