@@ -339,6 +339,8 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 - **Effects that last until end of turn aren't shown with the emblems** (the user, 2026-11-24: "include end of turn effects into emblems 'zone'"): a player's emblems open from their panel's Emblems button (`ui/PlayerPanel.tsx`, `onOpenEmblems`, shown only once there is one), but an until-end-of-turn effect on a player or the game has nowhere to be seen; list those in the same viewer, and show the button while any is in force.
 - **A non-land permanent with a tap ability doesn't say so on its mini tile** (the user, 2026-11-24: "add tap symbol to mini tiles of non-land permanents that can be tapped for an ability"): `ui/MiniTile.tsx` draws the {T} icon (`TAP_ICON_URL`, `.tap-icon`) only once a permanent is tapped; show a tap symbol on the tile of an untapped non-land permanent with a {T} ability too.
+- **Day/night is missing from the display** (the user, 2026-11-24): once it is day or night (rule 726) the board doesn't show which; `view.dayNight` is drawn only in `ui/TurnBanner.tsx` (`.turn-banner-daynight`), not anywhere that stays on screen.
+- **A player's chosen modes aren't shown to the table** (the user, 2026-11-24: "when a player chooses a mode have a popup say what they chose"): a `choose-modes` answer only reaches the log (as "chose mode(s) 2", B334's wording line above); show everyone a popup saying which modes were chosen.
 
 ## Tooling / docs
 
