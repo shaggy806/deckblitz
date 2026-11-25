@@ -40,7 +40,8 @@ import { computeCharacteristics, playerProtectedFrom, withComputedCache } from "
 import { whyCannotAttack } from "../combat/eligibility.js";
 import { Game } from "../game.js";
 import { withHiddenCards } from "./determinize.js";
-import { observe, seatMemory } from "./seat-memory.js";
+import { knownEnds, observe, seatMemory } from "./seat-memory.js";
+import { hiddenCardsInSight } from "../view.js";
 import { phaseOfStep } from "../turn.js";
 import { polarityBias } from "../deck-bias.js";
 import { newColorsFirst } from "../land-colors.js";
@@ -81,7 +82,16 @@ import { DEFAULT_WEIGHTS, aimedOutcome, evaluateState, normalizeWeights, outcome
 import type { EvalOutcome } from "./evaluate.js";
 import { aimedAt, aimedByLine } from "./interaction.js";
 import type { Aimed } from "./interaction.js";
-import { engineScore, lifeCost, withHandReadForKeeps, withTrackRecordEvidence, worthKeeping } from "./features.js";
+import {
+  engineScore,
+  libraryTopOf,
+  lifeCost,
+  withHandReadForKeeps,
+  withLibraryTop,
+  withTrackRecordEvidence,
+  worthKeeping,
+} from "./features.js";
+import type { LibraryTop } from "./features.js";
 import { mostWorthKeepingFirst } from "./hand-worth.js";
 import type { EvalWeights } from "./evaluate.js";
 import {
@@ -1448,7 +1458,7 @@ export class EvalBotController extends HeuristicBotController {
    * `withTrackRecordEvidence`. */
   act(real: ControllerView): Action {
     const view = this.fairView(real);
-    const action = this.answer(view);
+    const action = withLibraryTop(this.libraryTopAt(view), () => this.answer(view));
     // The answer was reached on cards dealt for the seat (`fairView`), and
     // is played at the real table: tried there first on a copy, so nothing
     // the two disagree on is ever thrown mid-game. Refused, the plan goes
@@ -1460,6 +1470,22 @@ export class EvalBotController extends HeuristicBotController {
     const instead = super.act(view);
     if (real.legalActionsAfter(instead) !== null || real.state.awaiting !== null) return instead;
     return { type: "pass-priority", player: this.playerId };
+  }
+
+  /**
+   * The `libraryTop` feature's context for a decision in `view` (`fairView`'s,
+   * where the cards the seat can place lie where they are): the run of our
+   * library's top it knows. `null` when the bot reads the real library order,
+   * or holds no library.
+   */
+  private libraryTopAt(view: ControllerView): LibraryTop | null {
+    if (this.libraryOrder === "real") return null;
+    const me = this.playerId;
+    const library = view.state.zones.perPlayer[me]?.library;
+    if (library === undefined || library.length === 0) return null;
+    const sight = hiddenCardsInSight(view.state, this.cards, me);
+    const { top } = knownEnds(library, this.memory.placed[me], sight.tops[me] ?? null);
+    return libraryTopOf(view.state, this.cards, me, library.slice(0, top));
   }
 
   /** `act`'s answer, on the view the seat may plan on. */

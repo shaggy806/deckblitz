@@ -7025,6 +7025,42 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  ...([
+    ["scries a Grizzly Bears away when the library under it is bigger threats", "Grizzly Bears", true],
+    ["keeps a Shivan Dragon on top when the library under it is smaller cards", "Shivan Dragon", false],
+  ] as const).map(([name, top, away]) =>
+    asked({
+      name,
+      rule: "A scry keeps a card better than an average draw from the rest of the library and bottoms one worse.",
+      position(registry) {
+        // A scry changes the next draw, which a rollout to the end of the
+        // turn doesn't reach, so every answer tied and v1's rule stood: keep
+        // any spell in reach. The cards on top of our library that we know
+        // are priced against an average draw now (`libraryTop`, 2026-11-24).
+        const game = table(registry, [A, B], A);
+        lands(game, "Forest", A, 6);
+        lands(game, "Island", A, 2);
+        const under = away
+          ? ["Shivan Dragon", "Serra Angel", "Craw Wurm", "Air Elemental"]
+          : ["Grizzly Bears", "Llanowar Elves", "Coral Eel", "Grizzly Bears"];
+        const spawned = [0, 1, 2, 3, 4].flatMap(() => under.map((card) => game.debugSpawn(card, A, "library")));
+        const looked = game.debugSpawn(top, A, "library");
+        game.state.zones.perPlayer[A].library = [looked, ...spawned];
+        const temple = game.debugSpawn("Temple of Mystery", A, "hand");
+        game.dispatch({ type: "play-land", player: A, card: temple });
+        game.advanceUntil((s) => (s.awaiting?.kind === "scry" && s.awaiting.player === A) || s.result.over);
+        if (game.state.awaiting?.kind !== "scry") return { passed: false, detail: "the Temple never asked for a scry" };
+        return {
+          game,
+          player: A,
+          judge: (action) => ({
+            passed: action.type === "scry" && action.away.includes(looked) === away,
+            detail: describeAction(action).slice(0, 120),
+          }),
+        };
+      },
+    }),
+  ),
   asked({
     name: "exiles its graveyard's creatures to Sutured Ghoul",
     rule: "An \"any number\" that makes the permanent is taken: Sutured Ghoul with nothing exiled is a 0/0 and dies.",

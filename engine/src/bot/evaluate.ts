@@ -199,6 +199,10 @@ export interface EvalWeights {
    * enchantment or artifact with a static or triggered ability is brought
    * up to about a vanilla creature of its mana value. */
   readonly standingEffects: number;
+  /** Per card of quality the cards on top of our library that we know are
+   * above an average draw, each counted by how soon it is drawn
+   * (`libraryTopWorth` in `features.ts`). */
+  readonly libraryTop: number;
   /** How much the strongest opponent's score subtracts from yours. */
   readonly opponent: number;
   /** Added for each opponent eliminated, scaled by the round
@@ -475,6 +479,10 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // first and left Smothering Tithe, Ghostly Prison and Parallel Lives
   // there (the upgraded decks' card-usage report, 2026-11-11).
   standingEffects: 1,
+  // As `handQuality`: a known top card is the hand card it will be, less
+  // what it is delayed (`LIBRARY_TOP_SHARE`). At 0 Sylvan Library's free
+  // look scored as declining it, and a scry's answers tied (2026-11-24).
+  libraryTop: 2,
   opponent: 1,
   // Per opponent eliminated, at full strength from round 10 and a quarter of
   // it in round 1 (`eliminationShare`). Before it a kill scored nothing, or

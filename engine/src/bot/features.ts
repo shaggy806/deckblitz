@@ -63,7 +63,7 @@ import { POISON_LETHAL, printedCardName, rulesTextName, settledTally } from "../
 import { HARMFUL_COUNTERS } from "../target-polarity.js";
 import { playersAttackableNextTurn, readyToBlock } from "../combat/eligibility.js";
 import { attackTaxAt, canBlock, combatCreatures, manaToAttackWith } from "./combat-math.js";
-import { handQuality as handQualityOf } from "./hand-worth.js";
+import { handCardQuality, handQuality as handQualityOf } from "./hand-worth.js";
 import type { CombatCreature } from "./combat-math.js";
 import { goneAtEndStep } from "./gone-at-end-step.js";
 import { hasColouredLinkedCard, manaOnlyFromLinkedCards } from "./linked-mana.js";
@@ -119,6 +119,7 @@ export const FEATURE_KEYS = [
   "handQuality",
   "valueEngines",
   "standingEffects",
+  "libraryTop",
 ] as const;
 
 export type FeatureKey = (typeof FEATURE_KEYS)[number];
@@ -1265,6 +1266,155 @@ export function withHandReadForKeeps<T>(decide: () => T): T {
   }
 }
 
+/**
+ * The decision a bot is making, as the `libraryTop` feature reads it — see
+ * {@link withLibraryTop}.
+ */
+export interface LibraryTop {
+  readonly player: PlayerId;
+  /** The run of cards from the top whose places the seat knows
+   * (`seat-memory.ts`'s `knownEnds`: scried, put back, a top card in sight). */
+  readonly known: ReadonlySet<ObjectId>;
+  /** Each card then in the library, with its `zoneChangeCount`: a card whose
+   * count has moved since left the library in a line we played (drawn and
+   * put back, found by a tutor) and is known where it lies now. */
+  readonly stints: ReadonlyMap<ObjectId, number>;
+  /** The quality (`hand-worth.ts`) of an average card of the rest of the
+   * library as the decision began — what a draw the seat can't name is
+   * worth — read in `state` (whose hand says what a land is worth: the next
+   * land drop, or one behind a land in hand) with `lands` lands in play and
+   * `landsWanted` wanted. Kept per reading. */
+  readonly average: (state: GameState, lands: number, landsWanted: number) => number;
+}
+
+/** The decision under way's {@link LibraryTop}, if any. */
+let libraryTop: LibraryTop | null = null;
+
+/**
+ * Run `decide` — one of the bot's own decisions — with `context` read by the
+ * `libraryTop` feature. Module state, like {@link withTrackRecordEvidence},
+ * and the outermost call wins.
+ */
+export function withLibraryTop<T>(context: LibraryTop | null, decide: () => T): T {
+  if (libraryTop !== null || context === null) return decide();
+  libraryTop = context;
+  try {
+    return decide();
+  } finally {
+    libraryTop = null;
+  }
+}
+
+/** How much each of the top cards counts, from the top: the next draw is
+ * next turn's card (or this turn's, past which it is in the hand), the ones
+ * under it later and less surely. */
+const LIBRARY_TOP_SHARE = [0.75, 0.5, 0.25] as const;
+
+/**
+ * How far a known top card's quality must be from the average draw before
+ * it counts, and is counted only past: closer than this, `hand-worth.ts`
+ * can't tell them apart. It reads a creature with an ability as exactly
+ * average whatever the ability, and a land as 1.25 while the hand holds none
+ * and the board wants more, which lifts the average of a library of lands
+ * and spells over 1. Without it a scry bottomed Multani, Yavimaya's Avatar
+ * and Archmage Emeritus with six lands in play for a chance at a seventh
+ * (`bot:diff`, 2026-11-24).
+ */
+const LIBRARY_TOP_MARGIN = 0.2;
+
+/**
+ * The `libraryTop` feature: how far the cards on top of `player`'s library
+ * that the seat knows are above or below an average card of the rest of it,
+ * in cards, each counted by {@link LIBRARY_TOP_SHARE}. The cards on top were
+ * worth nothing to the evaluation: Sylvan Library's free look at two more
+ * cards (keep the best, the other two back on top) scored exactly as
+ * declining it, a tutor to the top of the library as a card thrown away, and
+ * every answer of a scry tied unless the draw came inside the rollout.
+ *
+ * A card counts when it is one the seat knew of where the decision began,
+ * or one that has left the library and come back since (its
+ * `zoneChangeCount` moved): put back from the hand, found and put on top.
+ * Read from the top, stopping at the first card the seat can't name, which
+ * is worth an average card exactly, as is every one under it. A shuffle in
+ * the line forgets what was known before it: a remembered card lying under
+ * one the seat can't name means the library was shuffled, and only the
+ * cards moved since are read.
+ *
+ * Not every top card, read as the planning state dealt it (tried first,
+ * 2026-11-24): a card the seat can't name is a sample there, and one sample
+ * a decision made a scry's answer turn on the card dealt under the one
+ * looked at, and Sylvan Library's on whether the Forests dealt to the top
+ * were wanted.
+ */
+export function libraryTopWorth(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  lands: number,
+  landsWanted: number,
+): number {
+  const context = libraryTop;
+  if (context === null || context.player !== player) return 0;
+  const library = state.zones.perPlayer[player]?.library ?? [];
+  if (library.length === 0) return 0;
+  const moved = (id: ObjectId): boolean => context.stints.get(id) !== (state.objects[id]?.zoneChangeCount ?? 0);
+  const remembered = (id: ObjectId): boolean => context.known.has(id) && !moved(id);
+  const run = (trustMemory: boolean): number => {
+    let n = 0;
+    while (n < library.length && (moved(library[n]) || (trustMemory && remembered(library[n])))) n += 1;
+    return n;
+  };
+  let top = run(true);
+  if (library.slice(top).some(remembered)) top = run(false);
+  if (top === 0) return 0;
+  const average = context.average(state, lands, landsWanted);
+  let worth = 0;
+  for (let i = 0; i < Math.min(top, LIBRARY_TOP_SHARE.length); i += 1) {
+    const off = handCardQuality(state, registry, player, library[i], lands, landsWanted) - average;
+    worth += LIBRARY_TOP_SHARE[i] * Math.sign(off) * Math.max(0, Math.abs(off) - LIBRARY_TOP_MARGIN);
+  }
+  return worth;
+}
+
+/**
+ * The {@link LibraryTop} of `player`'s library in `state`, the position a
+ * decision begins in, given the run of `known` cards from its top.
+ */
+export function libraryTopOf(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  known: readonly ObjectId[],
+): LibraryTop {
+  const all = state.zones.perPlayer[player]?.library ?? [];
+  const knownSet = new Set(known);
+  const stints = new Map(all.map((id) => [id, state.objects[id]?.zoneChangeCount ?? 0] as const));
+  const library = all.filter((id) => !knownSet.has(id));
+  const isLand = (at: GameState, id: ObjectId): boolean => {
+    const object = at.objects[id];
+    return object !== undefined && registry.has(object.cardName) && registry.get(object.cardName).types.includes("land");
+  };
+  const averages = new Map<string, number>();
+  return {
+    player,
+    known: knownSet,
+    stints,
+    average: (at, lands, landsWanted) => {
+      // A card's quality reads the hand only for whether a land is already
+      // in it (`hand-worth.ts`'s `landsAhead`), so that is all the key needs.
+      const landInHand = (at.zones.perPlayer[player]?.hand ?? []).some((id) => isLand(at, id));
+      const key = `${lands}:${landsWanted}:${landInHand}`;
+      const seen = averages.get(key);
+      if (seen !== undefined) return seen;
+      const cards = library.filter((id) => at.objects[id] !== undefined);
+      const total = cards.reduce((sum, id) => sum + handCardQuality(at, registry, player, id, lands, landsWanted), 0);
+      const average = cards.length === 0 ? 1 : total / cards.length;
+      averages.set(key, average);
+      return average;
+    },
+  };
+}
+
 /** The most a permanent's track record is credited a round, as for
  * {@link DRAW_RATE_CAP}: one that has drawn a hand in a turn shouldn't
  * outweigh the board. */
@@ -1830,6 +1980,9 @@ function playerFeaturesUncached(
           handReadForKeeps ? (def) => worthKeeping(registry, def, opponents) : undefined,
         )
       : 0,
+    // The cards on top of our library against an average draw
+    // (`libraryTopWorth`). Ours only, and only inside one of our decisions.
+    libraryTop: isMe ? libraryTopWorth(state, registry, player, landCount, cap) : 0,
     // The nearest loss that isn't life: the worst commander's damage, or
     // poison on the same scale (10 counters lose as 21 damage does). Folded
     // into one term, so the fitted weight reads poison too without a refit.
