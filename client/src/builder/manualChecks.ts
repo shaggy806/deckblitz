@@ -13891,6 +13891,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Skullcrack: this turn's rules are listed beside your emblems",
+    board({
+      you: { bf: ['Mountain*2'], hand: ['Skullcrack', 'Mountain'] },
+    }),
+  ),
+  preset(
+    "Teferi's Protection: the protection is listed until your next turn",
+    board({
+      you: { bf: ['Plains*3'], hand: ["Teferi's Protection", 'Plains'] },
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

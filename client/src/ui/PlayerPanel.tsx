@@ -52,6 +52,9 @@ export interface PlayerPanelProps {
   /** How many delayed triggered abilities (rule 603.7) this player controls
    * are waiting to trigger: listed in the emblems viewer after the emblems. */
   readonly delayedCount?: number
+  /** How many lasting effects (a resolved spell's or ability's "this turn",
+   * "until your next turn") are on this player: listed in the same viewer. */
+  readonly lastingCount?: number
   /** The Auras attached to this player — Curses (rule 303.4). */
   readonly curses?: readonly CurseOnPlayer[]
   /** Opens a read-only viewer of this player's graveyard/exile/hand, if provided. */
@@ -124,6 +127,7 @@ export function PlayerPanel({
   onOpenDungeon,
   emblemCount = 0,
   delayedCount = 0,
+  lastingCount = 0,
   curses = [],
   onOpenGraveyard,
   onOpenExile,
@@ -382,13 +386,14 @@ export function PlayerPanel({
             abilities they control waiting to trigger open in the same
             viewer, after the emblems: what comes back at end of turn, what
             rebounds at their upkeep. */}
-        {emblemCount > 0 || delayedCount > 0 ? (
+        {emblemCount > 0 || delayedCount > 0 || lastingCount > 0 ? (
           <button
             type="button"
-            className={`pp-zone-link${delayedCount > 0 ? ' has-delayed' : ''}`}
+            className={`pp-zone-link${delayedCount > 0 || lastingCount > 0 ? ' has-delayed' : ''}`}
             title={[
               emblemCount > 0 ? 'Emblems (rule 114)' : null,
               delayedCount > 0 ? 'Delayed abilities waiting to trigger (rule 603.7): what returns or is cast later' : null,
+              lastingCount > 0 ? 'Effects in force for a while: this turn, until their next turn' : null,
             ]
               .filter(Boolean)
               .join('; ')}
@@ -398,7 +403,11 @@ export function PlayerPanel({
               onOpenEmblems?.()
             }}
           >
-            {[emblemCount > 0 ? `emblems ${emblemCount}` : null, delayedCount > 0 ? `delayed ${delayedCount}` : null]
+            {[
+              emblemCount > 0 ? `emblems ${emblemCount}` : null,
+              delayedCount > 0 ? `delayed ${delayedCount}` : null,
+              lastingCount > 0 ? `effects ${lastingCount}` : null,
+            ]
               .filter(Boolean)
               .join(' · ')}
           </button>

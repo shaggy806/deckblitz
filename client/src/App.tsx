@@ -158,6 +158,7 @@ import { PileViewer } from './ui/PileViewer.tsx'
 import { DungeonViewer } from './ui/DungeonViewer.tsx'
 import { emblemToVisible } from './ui/defToVisible.ts'
 import { delayedToVisible } from './ui/delayedTriggers.ts'
+import { lastingToVisible } from './ui/lastingEffects.ts'
 import { CreatureTypePicker } from './ui/CreatureTypePicker.tsx'
 import { carryHover } from './ui/hoverCarry.ts'
 import { handPlacesBefore, slideHand } from './ui/handMotion.ts'
@@ -5445,14 +5446,19 @@ function Table({
         const delayed = (view.delayedTriggers ?? []).flatMap((d, i) =>
           d.controller === pid ? [delayedToVisible(d, i, ownerOf, view.objects)] : [],
         )
-        const cards = [...emblems, ...delayed]
+        // Then what resolved spells and abilities left on them for a while
+        // (the user, 2026-11-24: "include end of turn effects").
+        const lasting = (view.lastingEffects ?? []).flatMap((e, i) =>
+          e.player === pid ? [lastingToVisible(e, i, ownerOf)] : [],
+        )
+        const cards = [...emblems, ...delayed, ...lasting]
         const byId = new Map(cards.map((c) => [c.id, c]))
-        const title =
-          delayed.length === 0
-            ? `${whose} emblems`
-            : emblems.length === 0
-              ? `${whose} delayed abilities`
-              : `${whose} emblems and delayed abilities`
+        const parts = [
+          emblems.length > 0 ? 'emblems' : null,
+          delayed.length > 0 ? 'delayed abilities' : null,
+          lasting.length > 0 ? 'effects' : null,
+        ].filter((p): p is string => p !== null)
+        const title = `${whose} ${parts.length === 0 ? 'emblems' : parts.length === 1 ? parts[0] : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`}`
         return { title, ids: cards.map((c) => c.id), resolve: (id) => byId.get(id) }
       }
     }
@@ -7915,6 +7921,7 @@ function Table({
       onOpenDungeon={() => setDungeonViewOf(pid)}
       emblemCount={view.emblems.filter((e) => e.owner === pid).length}
       delayedCount={(view.delayedTriggers ?? []).filter((d) => d.controller === pid).length}
+      lastingCount={(view.lastingEffects ?? []).filter((e) => e.player === pid).length}
       curses={view.zones.battlefield.flatMap((id) => {
         const o = view.objects[id]
         return o !== undefined && o.attachedToPlayer === pid

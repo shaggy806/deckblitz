@@ -6407,6 +6407,8 @@ export interface ActiveReplacement {
   readonly owner: PlayerId;
   /** The spell or ability's source. */
   readonly source: ObjectId;
+  /** What made it, for `PlayerView.lastingEffects` (`MadeBy`). */
+  readonly madeBy?: MadeBy;
   /** How long it lasts, for the shared expiry pass. */
   readonly expires: Expiry;
   /** The next time, then it's spent (615.8). */
@@ -6608,11 +6610,24 @@ export interface PlayerManaAbility {
 }
 
 /**
+ * What made a lasting effect, for the players reading it: the source's name,
+ * and the words of the ability that made it (its own line, or the spell's
+ * whole text). Display only — no rule reads it. Set by `Game.madeByOf` as the
+ * effect is created; absent on one made outside a resolution.
+ */
+export interface MadeBy {
+  readonly name: string;
+  readonly text: string;
+}
+
+/**
  * A continuous effect a resolved spell or ability gave a player for a while
  * — an emblem that expires. See the `player-effect` EffectSpec.
  */
 export interface PlayerEffect {
   readonly owner: PlayerId;
+  /** What made it, for `PlayerView.lastingEffects`. */
+  readonly madeBy?: MadeBy;
   /** When it ends, as `resolvePlayerDuration` read the effect's `Duration`:
    * this turn's cleanup, the end of combat, as a player's next turn begins
    * (Teferi's Reproach's "until **that player's** next turn"), an

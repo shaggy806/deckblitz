@@ -66,6 +66,14 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Unsummon on Bob's Grizzly Bears, then click Bob's "hand" button.
 - **Expect:** It reads "hand 3 · 1 known". The viewer shows Grizzly Bears face up beside two card backs, and still does on later turns until Bob plays or discards it.
 
+### Skullcrack: this turn's rules are listed beside your emblems
+- **Do:** Cast Skullcrack at Bob, then click "effects 2" on your panel.
+- **Expect:** The viewer is titled "Alice's effects". "Effect — Skullcrack" reads "Players can't gain life this turn.", and a plain "Effect" reads "Damage can't be prevented this turn." Once Bob's turn begins the button is gone.
+
+### Teferi's Protection: the protection is listed until your next turn
+- **Do:** Cast Teferi's Protection, then click "effects 1" on your panel; look again on Bob's turn.
+- **Expect:** One "Effect — Teferi's Protection" with the card's words (they say "Until your next turn" themselves, so no heading is added). It's still listed on Bob's turn, and gone once your next turn begins.
+
 ### Brutal Cathar: day is shown in the top strip
 - **Do:** Cast Brutal Cathar, exiling Bob's Grizzly Bears.
 - **Expect:** The top strip's turn readout ends in "☀ Day", and stays there for the rest of the game.

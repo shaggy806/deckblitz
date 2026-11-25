@@ -617,6 +617,7 @@ import type {
   CommanderReplacementZone,
   ControlEffect,
   EmblemState,
+  MadeBy,
   PlayerEffect,
   PlayerManaAbility,
   DelayedCastWatch,
@@ -47118,7 +47119,9 @@ controlledBy,
           ? this.restrictLater(controller, target, rules, duration.laterAt, duration.player)
           : this.restrict(controller, target, filter, rules, lastingHere(duration ?? "end-of-turn"), scope),
       restrictOverGame: (combat, expires, during) => {
-        const made: PlayerEffect = { owner: controller, expires, combat };
+        // Named for the players reading it (Maximum Carnage's "until your
+        // next turn, each creature attacks each combat if able").
+        const made: PlayerEffect = { owner: controller, expires, combat, ...this.madeByField(source) };
         if (during !== undefined) {
           (this.state.laterPlayerEffects ??= []).push({ turnOf: during, after: this.state.turn.number, effect: made });
         } else {
@@ -47245,7 +47248,9 @@ controlledBy,
           const { ofChosenType: _chosen, ...rest } = flash.filter;
           effect = { ...effect, castAsThoughFlash: { ...flash, filter: { ...rest, subtype: chosen } } };
         }
-        const made = effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() };
+        const madeBy = this.madeByOf(source);
+        const stamped = effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() };
+        const made = madeBy === undefined ? stamped : { ...stamped, madeBy };
         // "During their next turn": nothing until that turn begins.
         if (during !== undefined) {
           (this.state.laterPlayerEffects ??= []).push({ turnOf: during, after: this.state.turn.number, effect: made });
@@ -49004,7 +49009,10 @@ controlledBy,
         if (statics.length === 0) return;
         const from = this.state.objects[source];
         const [first, ...more] = statics;
-        this.createEmblem(controller, text, first, from === undefined ? undefined : nameOf(from), [], controller, more, expires);
+        // One with no words of its own (Teferi's Protection's "your life
+        // total can't change") reads as the ability that made it.
+        const words = text.length > 0 ? text : (this.madeByOf(source)?.text ?? text);
+        this.createEmblem(controller, words, first, from === undefined ? undefined : nameOf(from), [], controller, more, expires);
       },
       epic: () => this.applyEpic(controller, source),
       paradigm: () => this.applyParadigm(controller, source),
@@ -49012,10 +49020,12 @@ controlledBy,
         // Fog (rule 615), or what sources matching a filter would deal,
         // matched as the damage would be dealt (rule 615.1); Deep Wood's
         // (`toYou`), all damage those sources would deal to its controller.
+        const madeBy = this.madeByOf(source);
         this.state.activeReplacements.push({
           replacement: preventionRecord(toYou === true ? undefined : true),
           owner: controller,
           source,
+          ...(madeBy !== undefined ? { madeBy } : {}),
           expires: "end-of-turn",
           ...(toYou === true ? { target: { kind: "player" as const, player: controller } } : {}),
           ...(by !== undefined ? { byFilter: { filter: by, you: controller } } : {}),
@@ -49038,10 +49048,12 @@ controlledBy,
         const instead = record.replacement.event === "would-deal-damage" ? record.replacement.instead : undefined;
         const then = instead !== undefined && "prevent" in instead ? instead.then : undefined;
         const countsUnprevented = instead !== undefined && "prevent" in instead && instead.thenCountsUnprevented === true;
+        const madeBy = this.madeByOf(source);
         this.state.activeReplacements.push({
           ...record,
           owner: controller,
           source,
+          ...(madeBy !== undefined ? { madeBy } : {}),
           targets: [...targets],
           targetStints: this.stintsOfTargets(targets),
           x,
@@ -49082,6 +49094,7 @@ controlledBy,
           replacement: preventionRecord(rule.combat),
           owner: controller,
           source,
+          ...this.madeByField(source),
           expires:
             rule.duration === "until-your-next-turn"
               ? { untilTurnOf: controller }
@@ -49151,6 +49164,7 @@ controlledBy,
           replacement: preventionRecord(combatOnly ? true : undefined),
           owner: controller,
           source,
+          ...this.madeByField(source),
           expires: "end-of-turn" as const,
         };
         if (redirectTo !== undefined && amount !== "all") {
@@ -49249,6 +49263,7 @@ controlledBy,
                 : preventionRecord(more?.combatOnly === true ? true : undefined),
           owner: controller,
           source,
+          ...this.madeByField(source),
           expires: "end-of-turn",
           // "You and/or permanents you control" (Harm's Way): one shield
           // over them all; "any": whatever it would be dealt to.
@@ -75689,6 +75704,45 @@ controlledBy,
     if (wasFaceDown && now !== undefined && now !== from) this.revealFaceDown(id, startSeq);
     if (from !== undefined && now !== undefined && now !== from) this.trackPublicity(id, from, now, startSeq);
     return moved;
+  }
+
+  /**
+   * What made a lasting effect `source` is creating now, for the players
+   * reading it (`MadeBy`, `PlayerView.lastingEffects`): the source's name, and
+   * the words of the ability now resolving from it (`resolvingSource` names
+   * which) — or, for a spell or an ability it can't name, the source's whole
+   * text. Undefined for a source the registry doesn't know (an emblem's).
+   */
+  private madeByOf(source: ObjectId): MadeBy | undefined {
+    const object = this.state.objects[source] as GameObject | undefined;
+    if (object === undefined) return undefined;
+    const name = rulesTextName(object);
+    if (!this.registry.has(name)) return undefined;
+    const def = this.registry.get(name);
+    const ability = this.state.resolvingSource?.source === source ? this.state.resolvingSource.ability : undefined;
+    // An ability an effect gave it isn't in its definition's lists, which its
+    // index doesn't point into: the grant carries its words (a modifier's).
+    const stack = this.state.zones.shared.stack;
+    const granted = ability === undefined ? undefined : this.state.objects[stack[stack.length - 1]]?.grantedAbility;
+    const grantedText =
+      granted !== undefined && (granted.kind === "modifier" || granted.kind === "modifier-activated") ? granted.ability.text : undefined;
+    const own =
+      granted !== undefined
+        ? grantedText
+        : ability === undefined
+          ? undefined
+          : ability.kind === "activated"
+            ? def.activated[ability.index]?.text
+            : ability.kind === "triggered"
+              ? def.triggered[ability.index]?.text
+              : def.chapters?.[ability.index]?.text;
+    return { name: faceName(object), text: own ?? def.text };
+  }
+
+  /** `madeByOf` as a field to spread into a record: `{ madeBy }`, or nothing. */
+  private madeByField(source: ObjectId): { madeBy?: MadeBy } {
+    const madeBy = this.madeByOf(source);
+    return madeBy === undefined ? {} : { madeBy };
   }
 
   /** Keep `GameState.publicStints` up to date across one zone change of `id`

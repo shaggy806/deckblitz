@@ -77,6 +77,7 @@ import { stickerSheetsView } from "./stickers.js";
 import { takeBackTurns, whyCannotTakeBack } from "./take-back.js";
 import type { TargetRef } from "./target.js";
 import { isStepWatch } from "./delayed-at.js";
+import type { Expiry } from "./duration.js";
 import type { DelayedStep, DelayedWhich } from "./delayed-at.js";
 
 export interface PublicPlayerInfo {
@@ -521,6 +522,16 @@ export interface PlayerView {
    * this viewer can see. The client lists them beside each player's emblems.
    * Absent from a hand-built view. */
   readonly delayedTriggers?: readonly DelayedTriggerView[];
+  /** The effects a resolved spell or ability left on a player or on the game
+   * for a while (rule 611.2): "players can't gain life this turn" (a timed
+   * static), "you have protection from everything until your next turn"
+   * (a player effect), "prevent all combat damage this turn" (a replacement
+   * that isn't on one permanent), and what can be read off the state itself
+   * (hexproof this turn, extra turns and combats, damage that can't be
+   * prevented). Each with the player whose panel lists it, what made it, its
+   * words and when it ends. Effects on a permanent show on that permanent.
+   * Absent from a hand-built view. */
+  readonly lastingEffects?: readonly LastingEffectView[];
   readonly events: readonly GameEvent[];
   /** When each object was public knowledge, and as what (`PublicStint`): how
    * the history names an object in a line from a time it was known, after it
@@ -1675,6 +1686,7 @@ function viewForUncached(
           : {}),
       })),
     delayedTriggers: delayedTriggersSeen(state, objects),
+    lastingEffects: lastingEffectsOf(state),
     events: state.eventLog,
     publicStints: state.publicStints ?? {},
   };
@@ -1690,6 +1702,87 @@ export interface DelayedTriggerView {
    * were when it was made — that the viewer can see, each only while it is
    * still that object (rule 400.7): "return **that card**" names the card. */
   readonly objects: readonly ObjectId[];
+}
+
+/** When a {@link LastingEffectView} ends, read off its `Expiry`: this turn,
+ * this combat, as a player's next turn begins, as a player's next turn ends,
+ * never, or `"later"` for any other point (a source leaving, a counter gone,
+ * an extra turn still to come). */
+export type LastingEnds =
+  | "end-of-turn"
+  | "end-of-combat"
+  | "permanent"
+  | "later"
+  | { readonly untilTurnOf: PlayerId }
+  | { readonly untilEndOfTurnOf: PlayerId };
+
+/** One {@link PlayerView.lastingEffects} entry. `player` is whose panel lists
+ * it: the player it's on or protects, else the controller of what made it.
+ * `source` is that card's name, `null` where the state doesn't record it. */
+export interface LastingEffectView {
+  readonly player: PlayerId;
+  readonly source: string | null;
+  readonly text: string;
+  readonly ends: LastingEnds;
+}
+
+function lastingEnds(expires: Expiry): LastingEnds {
+  if (expires === "end-of-turn" || expires === "permanent") return expires;
+  if ("untilTurnOf" in expires) return { untilTurnOf: expires.untilTurnOf };
+  if ("untilEndOfCombat" in expires) return "end-of-combat";
+  if ("untilPoint" in expires && expires.untilPoint.point === "turn-ends") return { untilEndOfTurnOf: expires.untilPoint.player };
+  return "later";
+}
+
+/** Every player's and the game's lasting effects, as `PlayerView.lastingEffects`
+ * lists them — public, as the spells and abilities that made them were. One
+ * resolution can leave several records worded the same (Teferi's Protection's
+ * three): those are listed once. */
+function lastingEffectsOf(state: GameState): LastingEffectView[] {
+  const out: LastingEffectView[] = [];
+  const seen = new Set<string>();
+  const add = (entry: LastingEffectView): void => {
+    const key = JSON.stringify(entry);
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push(entry);
+  };
+  // A timed static ("players can't gain life this turn") rides the emblems.
+  for (const e of state.emblems) {
+    if (e.expires === undefined || e.ring === true) continue;
+    add({ player: e.createdBy ?? e.owner, source: e.sourceName ?? null, text: e.text, ends: lastingEnds(e.expires) });
+  }
+  for (const p of state.playerEffects ?? []) {
+    if (p.madeBy === undefined) continue;
+    add({ player: p.owner, source: p.madeBy.name, text: p.madeBy.text, ends: lastingEnds(p.expires) });
+  }
+  // A replacement on one permanent is that permanent's to show.
+  for (const r of state.activeReplacements) {
+    if (r.madeBy === undefined || r.target?.kind === "object") continue;
+    const player = r.target?.kind === "player" ? r.target.player : r.owner;
+    add({ player, source: r.madeBy.name, text: r.madeBy.text, ends: lastingEnds(r.expires) });
+  }
+  const active = activePlayerOf(state);
+  for (const player of state.hexproofPlayers) {
+    add({ player, source: null, text: "Hexproof: this player can't be the target of spells or abilities their opponents control.", ends: "end-of-turn" });
+  }
+  if (state.damageUnpreventableThisTurn === true) {
+    add({ player: active, source: null, text: "Damage can't be prevented this turn.", ends: "end-of-turn" });
+  }
+  if (state.extraCombats > 0) {
+    const n = state.extraCombats;
+    add({ player: active, source: null, text: `${n === 1 ? "An additional combat phase" : `${n} additional combat phases`} this turn.`, ends: "end-of-turn" });
+  }
+  const extraTurns = new Map<PlayerId, number>();
+  for (const player of state.extraTurns) extraTurns.set(player, (extraTurns.get(player) ?? 0) + 1);
+  for (const [player, n] of extraTurns) {
+    add({ player, source: null, text: n === 1 ? "Takes an extra turn after this one." : `Takes ${n} extra turns after this one.`, ends: "later" });
+  }
+  // A record with no words of its own (a timed static some paths make with an
+  // empty text) goes where another from the same source and ending says it.
+  const sameAs = (a: LastingEffectView, b: LastingEffectView): boolean =>
+    a.player === b.player && a.source === b.source && JSON.stringify(a.ends) === JSON.stringify(b.ends);
+  return out.filter((e) => e.text.length > 0 || !out.some((o) => o !== e && o.text.length > 0 && sameAs(o, e)));
 }
 
 /** Whether every player knows what card `id` is now: its last public stint
