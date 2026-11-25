@@ -2,6 +2,8 @@
   {
     "date": "2026-11-25",
     "notes": [
+      "In a two-seat lobby, a bot can be taken out again, leaving its seat open.",
+      "Adding a bot, the deck list opens on the tab you last looked at.",
       "The site now tells you when a new version is out, and this page lists what changed in each one.",
       "\"Order my triggers\" stays on after you take a turn back.",
       "A token copy goes to the player whose effect made it, even when the original has changed hands (Preston, the Vanisher; Spitting Image).",
