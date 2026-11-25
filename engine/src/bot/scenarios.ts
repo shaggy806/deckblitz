@@ -8465,6 +8465,40 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "untaps Basalt Monolith before its own turn, with lands that untap there anyway",
+    rule: "A mana rock that doesn't untap by itself is untapped with mana that is about to untap: the next turn has the rock's mana as well as the lands'.",
+    kind: "training",
+    run(weights, registry, makeBot) {
+      // Reported from a live game (2026-11-24, kept game B8NWK): "not
+      // untapping basalt monolith on opponent's endstep". The bot tapped the
+      // Monolith on its fifth turn and never untapped it again: at the end of
+      // the turn before its seventh it passed with three untapped mana
+      // sources and "{3}: Untap this artifact" on offer, then sat through
+      // that turn and the next two with a seven-mana Boonweaver Giant in hand.
+      // The search scores the untap and the pass the same to the last digit
+      // (-83.92 each on the live board): the evaluation counts a permanent's
+      // mana from its definition whether it is tapped or not (`nonlandMana`),
+      // and `untappedMana` is weighted 0 because "that mana untaps", which
+      // the Monolith's doesn't. A tie passes.
+      // Here: three Forests and the tapped Monolith make a Colossal Dreadmaw
+      // next turn only if the Monolith is untapped by then.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Forest", A, 3);
+      const monolith = onBoard(game, "Basalt Monolith", A, true);
+      game.debugSpawn("Colossal Dreadmaw", A, "hand");
+      const taken = playOutRound(game, makeBot(A, registry, weights), A);
+      const untap = taken.find((t) => t.action.type === "activate-ability" && t.action.source === monolith);
+      const untapped = game.state.objects[monolith]?.tapped === false;
+      return {
+        passed: untapped,
+        detail:
+          untap === undefined
+            ? "passed the whole round with the Monolith tapped"
+            : `activated it in ${untap.active}'s ${untap.step}; it is ${untapped ? "untapped" : "tapped"} as the next turn begins`,
+      };
+    },
+  },
+  {
     name: "beholds an Elf to untap the land Elven Passage finds",
     rule: "A free \"you may\" that untaps our own land is taken: the land casts a spell this turn.",
     run(weights, registry, makeBot) {

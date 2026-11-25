@@ -4,6 +4,52 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-24 — Basalt Monolith left tapped for the rest of the game
+
+Status: open. Scenario (training): "untaps Basalt Monolith before its own turn, with lands that
+untap there anyway".
+
+Reported by the user: "not untapping basalt monolith on opponent's endstep in game B8NWK". In the
+kept game (`games/2026-11-25/B8NWK-1-2163417874.json.gz`, which replays to the last event on
+today's build) the bot in alice's seat (Dack Fayden, Helping Hand) tapped the Monolith on its
+fifth turn (turn 20) and never untapped it again. The clearest window is input 1257, Zurgo's end
+step on turn 27, the last before its own turn 28: Ancient Den, Arcane Signet and Exotic Orchard
+untapped, the Monolith tapped, "{3}: Untap this artifact" on offer, and a seven-mana Boonweaver
+Giant in hand. It passed, cast and activated nothing on turn 28, did the same at the end of turn
+31 and on turn 32, and died the turn after with the Giant still in hand: after turn 20 it never
+cast another spell.
+
+**Why:** v2 searched it (23 simulations, `via: "search"`, not out of time) and every answer came
+out the same to the last digit, -83.92: passing, the Monolith's own untap, and either Key at any
+artifact. The evaluation counts a permanent's mana from its definition, tapped or not
+(`bot/features.ts`'s `nonlandMana`), and `untappedMana` is weighted 0 on purpose (`evaluate.ts`:
+"that mana untaps"; any weight makes every cast read as a cost). That is right for a land and
+wrong for a permanent that `doesntUntap`: the Monolith's mana stays gone until something untaps
+it. The rollout ends with the turn, so it never sees the next turn's six mana either. A tie
+passes.
+
+A second thing on the same board, not the report: on turn 28 the bot could have cast the Giant
+with no end-step untap at all, through its two Keys (three mana; Voltaic Key at the Monolith, tap
+it, Manifold Key at the Monolith, tap it: seven). `bot/untap-plans.ts` finds "tap a land, untap
+it, cast what that pays for" in our own main phase; it only tries our untapped lands, so a rock
+that is already tapped, and a line two untaps long, are outside it.
+
+**Likely fix:** two parts, the first enough for the report.
+- A term for mana that won't come back: our tapped permanents that make mana and don't untap in
+  our untap step (`doesntUntap`: Basalt Monolith, Grim Monolith, Mana Vault) count their mana as
+  lost while tapped. Then the untap scores above the pass wherever the mana paying for it untaps
+  anyway, and the search takes it by itself. Might break: tapping such a rock for a spell now
+  reads as a small cost (it is one), so the weight has to stay well under what a spell is worth;
+  and Mana Vault's untap costs {4} on our upkeep for three mana, where the same term would pay
+  it every turn (right when the mana is spare, wrong when it eats the turn's spell).
+- Or narrower, as `holdsTopTutor` did for tutors: in the last window before our untap step (the
+  end step of the turn before ours, stack empty), activate an untap of our own tapped mana
+  permanent when what pays for it untaps in that untap step. Touches no weights; misses the same
+  untap on our own turn when a land drop leaves three spare.
+- For the Keys: let `findUntapPlans` aim an untap at a tapped mana rock of ours as well as a land
+  it taps first, and chain a second untap. Each plan is a copy and a rollout, so it needs the
+  same caps (`MAX_LANDS`, `MAX_PLANS`).
+
 ## 2026-11-24 — Force of Will at a spell that can't be countered
 
 Status: fixed 2026-11-24. Scenario: "holds Force of Will rather than aim it at a spell that can't be
