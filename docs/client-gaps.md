@@ -173,6 +173,21 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   --sourcemap` copy (trace call frames are 1-based). The laptop's own Chrome can be driven
   through Claude in Chrome (it's "Browser 2" there) with an in-page probe, no build needed.
 
+**A page left open across a deploy is never told a new version is out.** Found 2026-11-25 (a bug
+report from a friend's phone: Share the Spoils out, a land in exile he could play and the exile
+viewer offering it, but the "exile 56" button not lit). The lit button shipped that day; his
+page was loaded before the deploy, and a solo game runs in the page's own worker, so nothing
+reloads it (the live server showed no rooms). Rebuilt on the current build, the same position
+lights the button (`run-check --scenario`, "lit zone buttons: bob's exile, alice's exile"). The
+only reload offer today is `PoolLoading`'s, when a chunk of the old build can no longer be
+fetched. Fix outline: the build writes its commit into the page and into a small `version.json`
+beside `index.html` (served uncached); the page fetches it when it regains focus and every few
+minutes, and where it differs shows a quiet line, "A new version is out: reload when you're
+ready", never a forced reload (a solo game survives one, kept in IndexedDB by `savedRooms.ts`,
+but resuming a game saved by an older build on a newer one is untested, and a table's copies
+must be on one build). Risk: a notice that nags mid-game; show it between games and in the
+Game menu rather than over the board.
+
 **The log says a creature "can't attack this combat" when it only can't attack one player.**
 Found 2026-11-25 (an agent playing "Chaos Dragon: it cannot attack whoever rolled highest"; replayed).
 Chaos Dragon's trigger makes it unable to attack the player who rolled highest (`restrict` with
