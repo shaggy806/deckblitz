@@ -36,7 +36,7 @@ type BlitzReport = Parameters<NetworkGame['blitz']>[1]
 const BRACKET_SUBTITLE: Readonly<Record<BotDeckPool, string>> = {
   precon: 'Precons as printed',
   upgraded: 'Upgraded precons',
-  strong: "Real players' decks",
+  strong: 'Averages of real decks',
 }
 
 /**

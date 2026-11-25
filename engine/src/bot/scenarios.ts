@@ -284,55 +284,9 @@ function commanderTable(
   return game;
 }
 
-/** {@link commanderTable} for Giada, Font of Hope (SmokyCashew01's "Miku
- * Angelic Life Gain") over Plains, everyone on 40 life but Alice on `life`. */
-function giada(registry: CardRegistry, landCount: number, life: number): Game {
-  const game = commanderTable(registry, "Giada, Font of Hope", "Plains", landCount);
-  for (const player of [A, B, C, D]) game.state.players[player].life = 40;
-  game.state.players[A].life = life;
-  return game;
-}
-
 /** What a scenario's answer cast, by name; `undefined` for anything else. */
 const castName = (game: Game, action: Action): string | undefined =>
   action.type === "cast-spell" ? game.state.objects[action.card]?.cardName : undefined;
-
-/**
- * Edgar Markov's deck (Ozymandias-'s "High Power Aristocrats") with `piece`
- * and `body` in hand and `landCount` Command Towers, mana for one of them;
- * from four lands, three Vampire tokens of its own out and a Craw Wurm each
- * across the table. Passes when it casts `piece`, one of the permanents its
- * builder plays ahead of another creature (`deck-bias.ts`).
- */
-function edgarCasts(
-  piece: string,
-  body: string,
-  landCount: number,
-  spec: Pick<BotScenario, "name" | "rule">,
-): BotScenario {
-  return asked({
-    ...spec,
-    position(registry) {
-      const game = commanderTable(registry, "Edgar Markov", "Command Tower", landCount);
-      // The first turns' boards are empty; by the fourth land there are
-      // tokens to sacrifice and creatures across the table to take.
-      if (landCount >= 4) {
-        for (let i = 0; i < 3; i += 1) onBoard(game, "1/1 Vampire Token", A);
-        for (const player of [B, C, D]) onBoard(game, "Craw Wurm", player);
-      }
-      game.debugSpawn(piece, A, "hand");
-      game.debugSpawn(body, A, "hand");
-      return {
-        game,
-        player: A,
-        judge: (action) => ({
-          passed: castName(game, action) === piece,
-          detail: `chose ${describeAction(action)}`,
-        }),
-      };
-    },
-  });
-}
 
 /** Take `game` from Alice's first main phase to her second, attacking with
  * nothing; a failure if it doesn't get there. */
@@ -5409,88 +5363,6 @@ const SCENARIOS: readonly BotScenario[] = [
         },
       };
     },
-  }),
-  // Giada's bias (`deck-bias.ts`): its builder's "the life you possess is
-  // your wincon", which the bots played but for Test of Endurance. Each of
-  // these fails without the entry.
-  asked({
-    name: "Giada casts Test of Endurance at 52 life, not an Angel",
-    rule: "A card that wins at the next upkeep from the life it already has is cast ahead of a body.",
-    position(registry) {
-      // Five Plains pay for one of them. The shared evaluation takes the
-      // Baneslayer Angel: an enchantment that does nothing this turn is
-      // worth a creature of its cost, and a 5/5 with three keywords more.
-      const game = giada(registry, 5, 52);
-      game.debugSpawn("Test of Endurance", A, "hand");
-      game.debugSpawn("Baneslayer Angel", A, "hand");
-      return {
-        game,
-        player: A,
-        judge: (action) => ({
-          passed: castName(game, action) === "Test of Endurance",
-          detail: `chose ${describeAction(action)}`,
-        }),
-      };
-    },
-  }),
-  {
-    name: "Giada keeps the life Test of Endurance wins with",
-    rule: "With the Test out, life over 50 is the game at the next upkeep: it isn't paid to Aetherflux Reservoir for one player of three.",
-    run(weights, registry, makeBot) {
-      // At 95 life with both out, the bot paid 50 to kill one opponent and
-      // ended the turn on 45, the Test reading nothing.
-      const game = giada(registry, 4, 95);
-      onBoard(game, "Test of Endurance", A);
-      onBoard(game, "Aetherflux Reservoir", A);
-      playOutTurn(game, makeBot(A, registry, weights), A, () => false);
-      const life = game.state.players[A].life;
-      return { passed: life >= 50, detail: `ended the turn on ${life} life` };
-    },
-  },
-  {
-    name: "Giada's Hall of Heliod's Generosity puts Test of Endurance back",
-    rule: "The Test in the graveyard goes on top of the library, to be drawn and cast again.",
-    run(weights, registry, makeBot) {
-      const game = giada(registry, 4, 55);
-      const hall = onBoard(game, "Hall of Heliod's Generosity", A);
-      game.debugSpawn("Smothering Tithe", A, "graveyard");
-      const test = game.debugSpawn("Test of Endurance", A, "graveyard");
-      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
-      const back = taken.some(
-        (a) =>
-          a.type === "activate-ability" &&
-          a.source === hall &&
-          a.targets?.[0]?.kind === "object" &&
-          a.targets[0].object === test,
-      );
-      return {
-        passed: back,
-        detail: `did: ${taken.filter((a) => a.type !== "pass-priority").map(describeAction).join("; ").slice(0, 300) || "nothing"}`,
-      };
-    },
-  },
-  // Edgar Markov's bias (`deck-bias.ts`): its builder's aristocrats deck,
-  // where the bots differed from his guide in casting a body ahead of the
-  // pieces that hold the table. Each of these fails without the entry.
-  edgarCasts("Bloodchief Ascension", "Vicious Conquistador", 1, {
-    name: "Edgar Markov casts Bloodchief Ascension before a one-drop",
-    rule: "Its builder's first turns: the Ascension down early gains life all game and wins a long one alone.",
-  }),
-  edgarCasts("Authority of the Consuls", "Vicious Conquistador", 1, {
-    name: "Edgar Markov casts Authority of the Consuls before a one-drop",
-    rule: "Early, the deck slows the table and gains life: the Authority does both from turn one.",
-  }),
-  edgarCasts("Impact Tremors", "Legion Lieutenant", 2, {
-    name: "Edgar Markov casts Impact Tremors before Legion Lieutenant",
-    rule: "The Tremors is in most of the deck's wins, and every Vampire after it is a point at each opponent.",
-  }),
-  edgarCasts("Grave Pact", "Sanctum Seeker", 4, {
-    name: "Edgar Markov casts Grave Pact before another Vampire",
-    rule: "Aristocrats, not aggro: with tokens to sacrifice, the Pact holds the table and a fourth body doesn't.",
-  }),
-  edgarCasts("Dictate of Erebos", "Sanctum Seeker", 5, {
-    name: "Edgar Markov casts Dictate of Erebos before another Vampire",
-    rule: "The second Pact, for the same reason.",
   }),
   asked({
     name: "removal takes the leader's threat first",

@@ -3,7 +3,8 @@ import type { SampleDeck } from 'engine/client'
 import type { SeatStatus, WireDeck } from 'protocol'
 
 /** How strong a deck a bot is dealt: a precon as printed, an upgraded
- * precon, or a real player's deck. The host picks one per bot, by which of
+ * precon, or a strong deck (an average of real Bracket 4 decks, or one a
+ * player gave). The host picks one per bot, by which of
  * a seat's three "Add bot" buttons they press (`SeatBoard`). */
 export type BotDeckPool = 'precon' | 'upgraded' | 'strong'
 
@@ -11,7 +12,7 @@ export type BotDeckPool = 'precon' | 'upgraded' | 'strong'
  * label and what it says on hover: on a seat's own button (`hint`), and on
  * the one that fills the whole table at that strength (`fillHint`). Players
  * see them as the Commander brackets they play at (the user, 2026-11-24): 2
- * for a precon as printed, 3 for an upgraded one, 4 for a real player's deck.
+ * for a precon as printed, 3 for an upgraded one, 4 for a strong deck.
  * The hints still say where the decks come from, which the number doesn't.
  * Where three buttons sit in a row under one "Bracket" (a seat's Add bot,
  * Fill with bots), each shows its `bracket` alone: "Bracket 2" three times
@@ -41,8 +42,9 @@ export const BOT_DECK_POOLS: readonly {
     pool: 'strong',
     label: 'Bracket 4',
     bracket: '4',
-    hint: "Add a Bracket 4 bot, playing a real player's deck (credited on the About page)",
-    fillHint: "Fill the table to four with Bracket 4 bots, each playing a real player's deck (credited on the About page)",
+    hint: "Add a Bracket 4 bot, playing an average of real Bracket 4 decks or a player's own (the About page says which)",
+    fillHint:
+      "Fill the table to four with Bracket 4 bots, each playing an average of real Bracket 4 decks or a player's own (the About page says which)",
   },
 ]
 
@@ -50,7 +52,7 @@ export const BOT_DECK_POOLS: readonly {
 export const poolLabel = (pool: BotDeckPool): string => BOT_DECK_POOLS.find((p) => p.pool === pool)?.label ?? pool
 
 /** The decks a pool deals from: the precons, the upgraded precons, or the
- * real players' decks. */
+ * strong decks. */
 export function botDecksOf(pool: BotDeckPool): readonly SampleDeck[] {
   // Less any deck kept from the bots because they pilot it too badly
   // (`SampleDeck.bots`: Jeskai Striker (Upgraded)).

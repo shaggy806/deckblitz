@@ -4,7 +4,7 @@
 // For looking over the bots' play by eye: `bot:replay` shows where the time
 // goes, this shows what was played.
 //
-//   npm run bot:watch -w engine -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000] [--max-turns 120]
+//   npm run bot:watch -w engine -- --decks "The Ur-Dragon,Lathril,Ureni,Giada" [--seed 1] [--budget 1000] [--max-turns 120]
 //
 // `--decks` matches each name against the strong decks first, then the
 // upgraded and starter decks, then the tooling precons (`tool-decks.mjs`: a
@@ -43,7 +43,7 @@ const flag = (name, fallback) => {
 const seed = Number(flag("seed", "1"));
 const budget = Number(flag("budget", "1000"));
 const maxTurns = Number(flag("max-turns", "120"));
-const wanted = flag("decks", "The Ur-Dragon,Lathril,Atraxa,Giada").split(",").map((s) => s.trim());
+const wanted = flag("decks", "The Ur-Dragon,Lathril,Ureni,Giada").split(",").map((s) => s.trim());
 const counted = args.includes("--count");
 const [fromTurn, toTurn] = (() => {
   const text = flag("turns", null);

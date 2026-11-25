@@ -60,10 +60,10 @@ describe('a deck kept from the bots', () => {
 })
 
 describe('the strong pool', () => {
-  it("deals the real players' decks, each named for its creator", () => {
+  it('deals the strong decks: the averages, then the players’ own, each named for what it is', () => {
     const decks = randomBotDecks(3, [], () => 0, 'strong')
     expect(decks.map((d) => d.name)).toEqual(STRONG_DECKS.slice(0, 3).map((d) => d.name))
-    for (const deck of decks) expect(deck.name).toMatch(/ by /)
+    for (const deck of STRONG_DECKS) expect(deck.name).toMatch(deck.credit === undefined ? / \(Average\)$/ : / by /)
   })
 
   // A player is offered them all the same, since 2026-11-24, as a list of

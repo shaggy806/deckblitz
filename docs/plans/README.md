@@ -36,7 +36,7 @@ every reading of lethal damage through one helper, and why lethal by power is at
 
 `upgraded-decks` (**shipped, second pass 2026-11-11**) records how every precon's upgrade was built by hand (one strong mana base, spells chosen for what the bots play well, EDHREC as a source of candidates only), the bench that measured them, and what's open.
 
-`strong-bot-decks` (**shipped as an optional pool, closed**, 2026-11-11): eight real bracket 4 decks from Archidekt, credited to their creators, that a room's bots can be dealt (and, since 2026-11-24, that a player can bring). The pilot failed its gate twice, so a blitz deals the upgraded precons instead and the wider build was dropped.
+`strong-bot-decks` (**the Archidekt decks out, averages in**, 2026-11-25): the Bracket 4 pool a room's bots can be dealt and a player can bring. Eight real decks from Archidekt until the user decided no one's deck is used without their permission; now EDHREC's average Bracket 4 lists of seven of the same commanders, benched against Bracket 3 first, and the two decks whose builders gave their word. Before that (2026-11-11) the pilot failed its gate twice, so a blitz deals the upgraded precons instead and the wider build was dropped.
 
 `deck-autopsies` (**first pass done**) records the deck-against-deck win-rate run, why its v1 column is confounded, the four deck autopsies, and the bot fixes they found and left.
 
@@ -96,6 +96,6 @@ players who leave the game, combat and the turn's skip rules, with three violati
 `verify-speed-audit` (**partly built**) times `npm run verify` step by step and ranks
 what would make it faster without changing what it catches, with the coverage holes found on the way.
 
-`deck-guides` (**the two guides there are, built**, 2026-11-24) holds the strong decks' builders'
-guides as notes, one deck a section; each is its deck's entry in `deck-bias.ts` (`deck-biases`
-says what each became). Seven decks have no guide yet.
+`deck-guides` is gone (2026-11-25): it held notes on the guides two players wrote for decks of
+theirs, which left the pool that day with the entries built from them (`strong-bot-decks`,
+`deck-biases`).

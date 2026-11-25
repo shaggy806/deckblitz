@@ -53,7 +53,7 @@ describe('bracket names', () => {
     expect(BOT_DECK_POOLS.map((p) => p.hint)).toEqual([
       expect.stringMatching(/precon as printed/),
       expect.stringMatching(/upgraded precon/),
-      expect.stringMatching(/real player's deck/),
+      expect.stringMatching(/average of real Bracket 4 decks or a player's own/),
     ])
   })
 })

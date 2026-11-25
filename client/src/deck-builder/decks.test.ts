@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { STRONG_DECKS } from 'engine/client'
 import {
   builtInDeck,
+  deckSourceNote,
   getActiveDeck,
   listDecks,
   listPickableDecks,
@@ -129,7 +130,7 @@ describe('playableSideboard', () => {
   })
 })
 
-describe("the real players' decks", () => {
+describe('the strong decks', () => {
   beforeEach(() => {
     vi.stubGlobal('window', { localStorage: fakeStorage() })
   })
@@ -142,8 +143,11 @@ describe("the real players' decks", () => {
     expect(strong.map((d) => d.name)).toEqual(STRONG_DECKS.map((d) => d.name))
     for (const deck of strong) {
       expect(deck.ref).toEqual({ kind: 'strong', name: deck.name })
-      expect(deck.author).toBeDefined()
+      // A player's deck says whose; an average, whose average.
+      expect(deck.author === undefined).toBe(deck.averageOf !== undefined)
+      expect(deckSourceNote(deck)).toBe(deck.author !== undefined ? ` · by ${deck.author}` : ' · EDHREC average')
     }
+    expect(deckSourceNote({})).toBe('')
   })
 
   it('can be the active deck, by name and not by place in the list', () => {

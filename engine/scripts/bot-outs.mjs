@@ -18,7 +18,7 @@
 // whether "hold the hand for after the wipe" is worth building
 // (`docs/plans/bot-next-steps.md`, step 5).
 //
-//   npm run bot:outs -w engine -- --seeds 1-6 --decks "Token Triumph,Grave Danger,World Shaper,Mardu Surge;The Ur-Dragon,Lathril,Atraxa,Giada"
+//   npm run bot:outs -w engine -- --seeds 1-6 --decks "Token Triumph,Grave Danger,World Shaper,Mardu Surge;The Ur-Dragon,Lathril,Ureni,Giada"
 //
 // Flags: --decks "A,B,C,D[;…]" (by substring, strong decks first), --seed N or
 // --seeds "1-8", --parallel N (default 6, a process a game), --max-turns N

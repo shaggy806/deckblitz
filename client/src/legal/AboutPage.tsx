@@ -71,12 +71,28 @@ export function AboutPage() {
       </section>
 
       <section>
-        <h2>Players&apos; decks</h2>
+        <h2>Bracket 4 decks</h2>
         <p>
-          You or a bot can play a &ldquo;Bracket 4&rdquo; deck: one of these real Commander decks that players built and shared on
-          Archidekt or Moxfield, or brought here, each named for its creator and played exactly as they listed it on{' '}
-          {STRONG_DECKS[0]?.credit?.taken}, except where it says what was changed. Their own pages show their latest
-          versions:
+          You or a bot can play a &ldquo;Bracket 4&rdquo; deck. Most are average decks, no one player&apos;s list: for each of
+          these commanders, EDHREC&apos;s average of the Bracket 4 decks it lists for that commander, taken on{' '}
+          {STRONG_DECKS.find((deck) => deck.average !== undefined)?.average?.taken}. Each page shows the average as it is
+          now:
+        </p>
+        <ul className="about-credits">
+          {STRONG_DECKS.map((deck) =>
+            deck.average === undefined ? null : (
+              <li key={deck.name}>
+                <a href={deck.average.url} target="_blank" rel="noreferrer">
+                  {deck.commanders?.[0]}
+                </a>
+                , the average of {deck.average.decks.toLocaleString('en-US')} decks
+              </li>
+            ),
+          )}
+        </ul>
+        <p>
+          The others are decks their own builders gave to the site, each named for its creator and played as they listed
+          it, except where it says what was changed:
         </p>
         <ul className="about-credits">
           {STRONG_DECKS.map((deck) =>
@@ -84,12 +100,8 @@ export function AboutPage() {
               <li key={deck.name}>
                 {/* A deck shared on no deck site (one a player brought here)
                     has no page to link. */}
-                {deck.credit.url !== undefined || deck.credit.archidektId !== undefined ? (
-                  <a
-                    href={deck.credit.url ?? `https://archidekt.com/decks/${deck.credit.archidektId}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                {deck.credit.url !== undefined ? (
+                  <a href={deck.credit.url} target="_blank" rel="noreferrer">
                     {deck.credit.title}
                   </a>
                 ) : (
@@ -102,7 +114,7 @@ export function AboutPage() {
           )}
         </ul>
         <p>
-          {SITE_TITLE} isn&apos;t affiliated with or endorsed by Archidekt, Moxfield or these players.
+          {SITE_TITLE} isn&apos;t affiliated with or endorsed by EDHREC or Moxfield.
         </p>
       </section>
 

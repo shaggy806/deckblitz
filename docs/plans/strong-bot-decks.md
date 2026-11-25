@@ -1,6 +1,12 @@
 # Strong Commander decks for the bots
 
-Status: **shipped as an optional pool, and closed there** (2026-11-11, the user's decision after the
+Status: **the Archidekt decks are out, averages in** (2026-11-25, the last section): the user
+decided no one's deck is used without their permission, so the eight decks this plan copied from
+Archidekt left `STRONG_DECKS` for EDHREC's average Bracket 4 lists of seven of the same commanders;
+Ureni and The First Sliver, whose builders gave their word, stay. Everything below that section's
+heading is the record of the plan as it ran, the Archidekt decks included.
+
+Before that: **shipped as an optional pool, and closed there** (2026-11-11, the user's decision after the
 pilot failed its gate twice, below). The eight pilot decks, and since 2026-11-15 a ninth from
 Moxfield (the last section), are `STRONG_DECKS`: what the lobby's
 "Strong" button deals a bot (an open seat has three "Add bot" buttons: Precon, Upgraded, Strong),
@@ -353,3 +359,68 @@ Bracket 4 tab for your own seat as it has for a bot's. They stay out of `STARTER
 indexes the client saves as the active deck: `STRONG_DECKS` is generated and grows, so the client
 names one by its `name` (`decks.ts`'s `BuiltInRef`). A player bringing one keeps their own name;
 only a bot takes the creator's. The About page's credit says "You or a bot".
+
+## The Archidekt decks out, averages in (2026-11-25)
+
+The user, after a friend raised it: "we shouldn't use people's decks without permission". The
+eight Archidekt decks were public, listed and credited, but nobody had asked their builders, and
+the About page never did say how one could ask for a deck's removal. So they are out, lists and
+all (`engine/data/archidekt-decks/` is deleted), and this plan's first term, "decks that real
+people built, never averages", is reversed for every deck but two: Ureni is the user's own, and
+The First Sliver is pbToast's, given by him. **A player's deck is in the pool only with that
+player's word** (`sample-decks.test.ts` holds the credited authors to a list of those who gave
+it).
+
+**What replaced them.** EDHREC's average deck for a commander at Bracket 4
+(`json.edhrec.com/pages/average-decks/<slug>/optimized.json`, the page
+`edhrec.com/average-decks/<slug>/optimized`): one commander and 99 cards, built by EDHREC from
+every Bracket 4 deck it lists for the commander (1,120 for Giada to 4,605 for Y'shtola). No one
+player's list. `gen-strong-decks.mjs --fetch` writes the snapshot
+(`engine/data/edhrec-average-decks.json`), and without the flag generates `strong-decks.ts` from
+it; a list with a card the pool lacks stops the run, and all eight were whole. They share 31 to
+55 of their distinct cards with the decks they replace, and carry more tutors than those did
+(Demonic, Vampiric, Worldly, Enlightened), which the 2026-11-11 guidance left out of the upgraded
+precons for the bots' sake.
+
+**Do they hold up?** The user's test: against the Bracket 3 decks, not against Ureni and The
+First Sliver, which had done best among the strong decks. One Bracket 4 deck and three of the
+thirteen Bracket 3 decks a table, v2 in every seat on the rooms' 1000 ms clock
+(`bot:losses --budget live --seeds 1-6`), each deck in each of the four seats against a different
+trio, and the Archidekt deck of the same commander in the same seats against the same trios: 24
+games a deck, 384 in all, an even share 25%.
+
+| Commander | EDHREC average | Archidekt deck |
+|---|---|---|
+| Krenko | 6/24 | 6/24 |
+| Edgar Markov | 13/24 | 10/24 |
+| The Ur-Dragon | 13/24 | 10/24 |
+| Y'shtola | 11/24 | 6/24 |
+| Lathril | 6/24 | 1/24 |
+| Giada | 9/24 | 11/24 |
+| Pantlaza | 10/24 | 10/23 |
+| Atraxa | 4/24 | 9/24 |
+| All | 72/192 (38%) | 63/191 (33%) |
+
+24 games a deck is about 20 points either way, so the rows don't rank the decks; the pooled
+figures say the averages are no weaker than what they replace, and both are well over an even
+share against Bracket 3. One Archidekt Pantlaza game was stopped at 15 minutes. By seat the
+averages won 22, 21, 15 and 14 of 48: the first two seats do better, as they did for the
+Archidekt decks (18, 20, 14, 11).
+
+**Atraxa is left out** (the user: "add all except atraxa"): its average won 4 of 24, the one list
+under an even share, in the longest games of the eight (37 turns on average). Why is unread
+(`BACKLOG.md`).
+
+**What went with the decks.** Giada's and Edgar Markov's entries in `deck-bias.ts` were written
+on 2026-11-24 from the guides the builders of those two decks wrote for them
+(`deck-biases.md`), and priced cards the averages don't hold (Test of Endurance; Bloodchief
+Ascension, Authority of the Consuls, Impact Tremors, Grave Pact, Dictate of Erebos). They are
+removed with their eight gate scenarios, the `lifeGoals` field only Giada's used, and
+`deck-guides.md`, which held the notes on the two guides.
+
+**How it shows.** A deck is "Edgar Markov (Average)"; `SampleDeck.average` says whose average,
+of how many decks, when taken, and its page. The deck lists say "EDHREC average" where a
+player's deck says "by" its creator; a bot on one has a character's name, as on a precon; and the
+About page's section, now "Bracket 4 decks", links each average's page and credits the two
+players. A player whose active deck was one of the eight has none until they pick another (a
+reference by name to a deck that isn't there names nothing).

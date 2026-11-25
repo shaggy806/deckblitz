@@ -9,8 +9,8 @@
  *
  * "Active" can point at one of the player's own saved decks *or* directly at
  * one of `engine`'s `STARTER_DECKS` (the curated starter decks: the precons,
- * then their upgrades) or at one of its `STRONG_DECKS` (real players' decks,
- * Bracket 4) — playing a built-in deck as-is shouldn't require duplicating
+ * then their upgrades) or at one of its `STRONG_DECKS` (the average decks
+ * and two players' own, Bracket 4) — playing a built-in deck as-is shouldn't require duplicating
  * it into "my decks" first.
  */
 
@@ -90,10 +90,12 @@ export function playableSideboard(deck: {
 
 /**
  * One of the decks that come with the site: a starter by its index in
- * `STARTER_DECKS` (which only grows at its end), or a real player's deck by
- * its name. By name, since `STRONG_DECKS` is generated, with the decks from
- * elsewhere after it: one more Archidekt list moves every index past it, and
- * a saved reference would then name another deck.
+ * `STARTER_DECKS` (which only grows at its end), or a strong deck by its
+ * name. By name, since `STRONG_DECKS`' averages are generated, with the
+ * players' decks after them: one more average moves every index past it,
+ * and a saved reference would then name another deck. A reference to a deck
+ * no longer there (the eight Archidekt decks, gone 2026-11-25) names
+ * nothing, and the player has no active deck until they pick one.
  */
 export type BuiltInRef =
   | { readonly kind: 'starter'; readonly index: number }
@@ -380,16 +382,19 @@ export interface PickableDeck extends DeckContents {
    * (the server's `PendingRoom.botName`). Its title is what `deckLabel`
    * shows for it. */
   readonly author?: string
+  /** An average deck: whose average it is ("EDHREC"). No one's list, so it
+   * has no `author`. */
+  readonly averageOf?: string
 }
 
-/** How strong a built-in deck is: a precon as printed, its upgrade, or a real
- * player's deck. */
+/** How strong a built-in deck is: a precon as printed, its upgrade, or a
+ * strong deck (an average of real Bracket 4 decks, or a player's own). */
 export type DeckStrength = 'precon' | 'upgraded' | 'strong'
 
 /** Every deck the seat-picker's popup can offer: this browser's saved decks,
  * then the starter decks — in that order, since a saved deck is more likely
  * to be what someone actually wants to bring than a generic starter — then
- * the real players' decks (`listStrongDecks`). */
+ * the strong decks (`listStrongDecks`). */
 export function listPickableDecks(): readonly PickableDeck[] {
   return [
     ...readDecks().map((d) => ({
@@ -417,7 +422,8 @@ export function listPickableDecks(): readonly PickableDeck[] {
 }
 
 /** The strong decks (`engine`'s `STRONG_DECKS`), as the picker and the deck
- * builder offer them: real players' decks, credited on the About page. For
+ * builder offer them: the averages of real Bracket 4 decks, and the decks
+ * two players gave, credited on the About page. For
  * anyone's seat since 2026-11-24 (the user: "make the bracket 4 decks
  * available in the deck builder as starter decks and in the lobby as decks
  * that people can choose"); until then a bot's only. */
@@ -431,7 +437,19 @@ export function listStrongDecks(): readonly PickableDeck[] {
     printings: d.printings,
     strength: 'strong' as DeckStrength,
     ...(d.credit !== undefined ? { author: d.credit.author } : {}),
+    ...(d.average !== undefined ? { averageOf: d.average.source } : {}),
   }))
+}
+
+/** What follows a strong deck's commander on its row: " · by Shaggy5405"
+ * for a player's deck, " · EDHREC average" for an average, nothing for any
+ * other deck. */
+export function deckSourceNote(deck: {
+  readonly author?: string | undefined
+  readonly averageOf?: string | undefined
+}): string {
+  if (deck.author !== undefined) return ` · by ${deck.author}`
+  return deck.averageOf !== undefined ? ` · ${deck.averageOf} average` : ''
 }
 
 /**

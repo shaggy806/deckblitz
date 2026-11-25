@@ -1,8 +1,11 @@
 # Deck biases: a deck's own reading of its cards
 
-Status: **shipped** (2026-10-02), with four entries: Teval, the Balanced Scale, and from
-2026-11-24 The First Sliver (which added `cardWorth` and `mulligan`), Giada, Font of Hope
-(`lifeGoals`) and Edgar Markov, the last three from their builders' guides (`deck-guides.md`). The vocabulary grows when a live game shows a deck's bot playing against its
+Status: **shipped** (2026-10-02), with two entries: Teval, the Balanced Scale, and from
+2026-11-24 The First Sliver (which added `cardWorth` and `mulligan`), from its builder's guide.
+Two more built that day, Giada, Font of Hope (`lifeGoals`) and Edgar Markov, from the guides of
+two decks then in the pool, were **removed on 2026-11-25** with those decks, their gate scenarios
+and the `lifeGoals` field (`strong-bot-decks.md`): the sections on them below are the record of
+what was built and measured, not of anything in the code. The vocabulary grows when a live game shows a deck's bot playing against its
 own plan, or its builder says what the plan is.
 
 ## The problem

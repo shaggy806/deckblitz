@@ -92,6 +92,15 @@ describe("STRONG_DECKS", () => {
     expect(new Set(names).size).toBe(names.length);
   });
 
+  // No one's deck without their permission (the user, 2026-11-25, when the
+  // eight decks copied from Archidekt came out). A name joins this list only
+  // with that player's own word for their deck being here.
+  it("holds a player's deck only with their word", () => {
+    const withTheirWord = ["Shaggy5405", "pbToast"];
+    const authors = STRONG_DECKS.flatMap((d) => (d.credit === undefined ? [] : [d.credit.author]));
+    expect(authors.filter((author) => !withTheirWord.includes(author))).toEqual([]);
+  });
+
   for (const deck of STRONG_DECKS) {
     describe(deck.name, () => {
       it("is a legal 100-card Commander deck of implemented cards", () => {
@@ -103,22 +112,25 @@ describe("STRONG_DECKS", () => {
         expect(result.legal).toBe(true);
       });
 
-      it("credits its creator, with the deck's page", () => {
+      it("is an average, or a player's deck credited to them, never both", () => {
+        expect(deck.credit === undefined).toBe(deck.average !== undefined);
+        if (deck.average !== undefined) {
+          expect(deck.name).toMatch(/ \(Average\)$/);
+          expect(deck.average.source).toBe("EDHREC");
+          expect(deck.average.url).toMatch(/^https:\/\/edhrec\.com\/average-decks\/[a-z-]+\/optimized$/);
+          expect(deck.average.decks).toBeGreaterThan(0);
+          expect(deck.average.taken).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+          return;
+        }
         expect(deck.credit?.author).toBeTruthy();
         expect(deck.name).toContain(`by ${deck.credit?.author}`);
-        // An Archidekt deck by its id; one from elsewhere by its address,
-        // and only that one may differ from its creator's list. One a player
-        // brought to this site (pbToast's, 2026-11-24) has no page, and is
-        // played exactly as they gave it.
-        if (deck.credit?.url === undefined && deck.credit?.archidektId === undefined) {
-          expect(deck.credit?.title).toBeTruthy();
-          expect(deck.credit?.changed).toBeUndefined();
-        } else if (deck.credit?.url === undefined) {
-          expect(deck.credit?.archidektId).toBeGreaterThan(0);
-          expect(deck.credit?.changed).toBeUndefined();
-        } else {
-          expect(deck.credit.url).toMatch(/^https:\/\/moxfield\.com\/decks\/[\w-]+$/);
-        }
+        expect(deck.credit?.title).toBeTruthy();
+        // One shared on a deck site by its address, and only that one may
+        // differ from its creator's list. One a player brought to this site
+        // (pbToast's, 2026-11-24) has no page, and is played exactly as they
+        // gave it.
+        if (deck.credit?.url === undefined) expect(deck.credit?.changed).toBeUndefined();
+        else expect(deck.credit.url).toMatch(/^https:\/\/moxfield\.com\/decks\/[\w-]+$/);
       });
 
       it("plays its list whole: no stand-ins", () => {

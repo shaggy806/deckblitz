@@ -1,158 +1,135 @@
-// Generates `src/strong-decks.ts` from the real decklists the user copied by
-// hand from Archidekt (`data/archidekt-decks/lists.txt`, each deck's link in
-// `sources.json`). Nothing here touches the network: Archidekt's terms bar
-// automated requests (`docs/plans/strong-bot-decks.md`).
-//
-// Each list is the creator's own, and ships only whole: `sample-decks.test.ts`
-// fails on any stand-in. A newly copied list with a card the pool lacks still
-// generates, with a stand-in from the card replacer chosen as the deck import
-// chooses them, so it can be piloted while that card is built
-// (`docs/plans/strong-bot-decks.md`); it can't be committed until then.
+// Generates `src/strong-decks.ts`: the Bracket 4 pool's average decks, one a
+// commander, each EDHREC's average of the Bracket 4 ("optimized") decks it
+// lists for that commander (`docs/plans/strong-bot-decks.md`). No one
+// player's list: the pool held eight real decks copied from Archidekt until
+// 2026-11-25, when the user took them out for want of their builders'
+// permission.
 //
 //   npm run build -w engine && npm run decks:strong -w engine
+//   npm run decks:strong -w engine -- --fetch     (a new snapshot first)
+//
+// Without `--fetch` nothing touches the network: the lists are read from the
+// snapshot, `data/edhrec-average-decks.json`. `--fetch` rewrites the snapshot
+// from json.edhrec.com first — not a documented API (`top-commanders.mjs`
+// says the same of its pages), so one request a second, one a commander.
+//
+// A list ships only whole: a card the pool lacks stops the run, as does a
+// list that isn't one commander and 99 cards. Bench a refreshed list before
+// committing it (`bot:losses --budget live`, a deck against three Bracket 3
+// decks): an average is only as good as the bots play it, and Atraxa's won 4
+// of 24 where the others won 6 to 13 (2026-11-25), so it isn't here.
 
-import { readFileSync, writeFileSync } from "node:fs";
-import { assignReplacements, createDefaultRegistry, createOracleTagIndex } from "../dist/index.js";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { createDefaultRegistry } from "../dist/index.js";
+
+/** Each deck's short name (the name a seat and a log show is "<short>
+ * (Average)") and its commander's EDHREC slug. */
+const DECKS = [
+  ["Krenko", "krenko-mob-boss"],
+  ["Edgar Markov", "edgar-markov"],
+  ["The Ur-Dragon", "the-ur-dragon"],
+  ["Y'shtola", "yshtola-nights-blessed"],
+  ["Lathril", "lathril-blade-of-the-elves"],
+  ["Giada", "giada-font-of-hope"],
+  ["Pantlaza", "pantlaza-sun-favored"],
+];
+/** EDHREC's name for Bracket 4 in its addresses. */
+const BRACKET = "optimized";
+const EDHREC_INTERVAL_MS = 1000;
 
 const root = new URL("../", import.meta.url);
-const read = (path) => readFileSync(new URL(path, root), "utf8");
+const snapshotUrl = new URL("data/edhrec-average-decks.json", root);
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const sources = JSON.parse(read("data/archidekt-decks/sources.json"));
-const tags = createOracleTagIndex(JSON.parse(read("../server/data/oracle-tags/index.json")));
+async function fetchSnapshot() {
+  const decks = [];
+  for (const [short, slug] of DECKS) {
+    const url = `https://json.edhrec.com/pages/average-decks/${slug}/${BRACKET}.json`;
+    const res = await fetch(url, { headers: { "User-Agent": "deck-list-tool/1.0", Accept: "application/json" } });
+    if (!res.ok) throw new Error(`${url} -> ${res.status} ${res.statusText}`);
+    const page = await res.json();
+    if (page.deck.commander.length !== 1) throw new Error(`${short}: ${page.deck.commander.length} commanders`);
+    decks.push({
+      slug,
+      name: `${short} (Average)`,
+      commander: page.deck.commander[0],
+      // How many Bracket 4 decks EDHREC averaged.
+      counted: page.bracket_counts["4"],
+      cards: Object.values(page.deck.cards).flat(),
+    });
+    await delay(EDHREC_INTERVAL_MS);
+  }
+  const snapshot = {
+    source: `https://json.edhrec.com/pages/average-decks/<slug>/${BRACKET}.json`,
+    taken: new Date().toISOString().slice(0, 10),
+    decks,
+  };
+  // One card a line, so a refreshed list reads as a diff.
+  const text = JSON.stringify(snapshot, null, 1).replace(/\[\n\s+("(?:[^"\\]|\\.)*"),\n\s+(\d+)\n\s+\]/g, "[$1, $2]");
+  writeFileSync(snapshotUrl, `${text}\n`);
+}
+
+if (process.argv.includes("--fetch")) await fetchSnapshot();
+if (!existsSync(snapshotUrl)) throw new Error("no snapshot: run with --fetch");
+const snapshot = JSON.parse(readFileSync(snapshotUrl, "utf8"));
 const registry = createDefaultRegistry();
 
-const oracle = new Map();
-for (const line of read("data/oracle/cards.jsonl").split("\n")) {
-  if (line === "") continue;
-  const card = JSON.parse(line);
-  for (const name of [card.name, card.name.split(" // ")[0]]) {
-    if (!oracle.has(name)) oracle.set(name, card);
-  }
+for (const deck of snapshot.decks) {
+  const size = deck.cards.reduce((n, [, count]) => n + count, 0);
+  if (size !== 99) throw new Error(`${deck.name}: ${size} cards beside its commander`);
+  const missing = [deck.commander, ...deck.cards.map(([name]) => name)].filter((name) => !registry.has(name));
+  if (missing.length > 0) throw new Error(`${deck.name}: not in the pool: ${missing.join(", ")}`);
 }
 
-// Archidekt lists a deck's tokens and helper cards beside its cards: a token
-// printing's set code is "t" and the real set's code ("tmom", "twoe").
-const isTokenRow = (set) => /^t[a-z0-9]{3,}$/.test(set);
-// A meld result is the back of two cards the deck already holds.
-const NOT_DECK_CARDS = new Set(["Brisela, Voice of Nightmares"]);
-
-function parseLists(text) {
-  const decks = [];
-  let deck = null;
-  for (const raw of text.split(/\r?\n/)) {
-    const line = raw.trim();
-    if (line === "") continue;
-    const header = line.match(/^(\d+)\. "(.+)" by (.+):$/);
-    if (header !== null) {
-      deck = { id: header[1], title: header[2], author: header[3], commander: null, rows: [] };
-      decks.push(deck);
-      continue;
-    }
-    const row = line.match(/^(C|\d+)\s+(.+?)\s+\(([^)]+)\)\s+\S+$/);
-    if (row === null || deck === null) throw new Error(`can't read: ${line}`);
-    const [, count, name, set] = row;
-    if (isTokenRow(set) || NOT_DECK_CARDS.has(name)) continue;
-    if (count === "C") {
-      if (deck.commander !== null) throw new Error(`${deck.title}: two commanders marked`);
-      deck.commander = name;
-    } else {
-      deck.rows.push([name, Number(count)]);
-    }
-  }
-  return decks;
-}
-
-/** The name the registry knows a card by: a double-faced card's front face. */
-const poolName = (name) => {
-  for (const candidate of [name, name.split(" // ")[0]]) if (registry.has(candidate)) return candidate;
-  return null;
-};
-
-const out = [];
-for (const deck of parseLists(read("data/archidekt-decks/lists.txt"))) {
-  if (deck.commander === null) throw new Error(`${deck.title}: no commander marked`);
-  const merged = new Map();
-  for (const [name, count] of deck.rows) merged.set(name, (merged.get(name) ?? 0) + count);
-  const total = [...merged.values()].reduce((a, b) => a + b, 0);
-  if (total !== 99) throw new Error(`${deck.title}: ${total + 1} cards, not 100`);
-
-  const commander = poolName(deck.commander);
-  if (commander === null) throw new Error(`${deck.title}: commander ${deck.commander} isn't in the pool`);
-  const identity = oracle.get(deck.commander).color_identity;
-  const missing = [...merged.keys()].filter((name) => poolName(name) === null);
-  const inDeck = new Set([commander, ...[...merged.keys()].map((n) => poolName(n)).filter((n) => n !== null)]);
-  const targets = missing.map((name) => {
-    const card = oracle.get(name) ?? oracle.get(name.split(" // ")[0]);
-    return {
-      name: card.name,
-      manaCost: card.mana_cost ?? null,
-      typeLine: card.type_line,
-      power: card.power ?? null,
-      toughness: card.toughness ?? null,
-      keywords: card.keywords ?? [],
+const body = snapshot.decks
+  .map((d) => {
+    const average = {
+      source: "EDHREC",
+      url: `https://edhrec.com/average-decks/${d.slug}/${BRACKET}`,
+      decks: d.counted,
+      taken: snapshot.taken,
     };
-  });
-  const assigned = assignReplacements(targets, { identity, exclude: inDeck, tags });
-  const substitutions = assigned.map((a, i) => {
-    if (a.choice === null) throw new Error(`${deck.title}: no stand-in for ${missing[i]}`);
-    const shared = a.choice.sharedTags.slice(0, 3).join(", ");
-    return {
-      original: missing[i].split(" // ")[0],
-      substitute: a.choice.name,
-      reason: `Card replacer, ${a.choice.confidence} confidence${shared === "" ? "" : `: ${shared}`}.`,
-    };
-  });
-  const printed = [...merged].map(([name, count]) => [poolName(name) ?? name.split(" // ")[0], count]);
-  const archidektId = sources.archidektIds[deck.id];
-  if (archidektId === undefined) throw new Error(`${deck.title}: no link in sources.json`);
-  out.push({
-    name: `${commander.split(",")[0]} by ${deck.author}`,
-    commander,
-    description: `A real deck, "${deck.title}", built by ${deck.author} on Archidekt.`,
-    credit: { author: deck.author, title: deck.title, archidektId, taken: sources.taken },
-    printed,
-    substitutions,
-  });
-  console.log(`${out.at(-1).name}: ${substitutions.length} stand-ins`);
-  for (const s of substitutions) console.log(`  ${s.original} -> ${s.substitute} (${s.reason})`);
-}
-
-const cardLines = (printed) =>
-  printed.map(([name, count]) => `      [${JSON.stringify(name)}, ${count}],`).join("\n");
-const body = out
-  .map(
-    (d) => `  {
+    const description = `EDHREC's average of the ${d.counted.toLocaleString("en-US")} Bracket 4 decks it lists for ${d.commander}: no one player's list.`;
+    return `  {
     name: ${JSON.stringify(d.name)},
     commander: ${JSON.stringify(d.commander)},
-    description: ${JSON.stringify(d.description)},
-    credit: ${JSON.stringify(d.credit)},
-    substitutions: ${JSON.stringify(d.substitutions, null, 6).replace(/\n\]$/, "\n    ]")},
+    description: ${JSON.stringify(description)},
+    average: ${JSON.stringify(average)},
     printed: [
-${cardLines(d.printed)}
+${d.cards.map(([name, count]) => `      [${JSON.stringify(name)}, ${count}],`).join("\n")}
     ],
-  },`,
-  )
+  },`;
+  })
   .join("\n");
 
 writeFileSync(
   new URL("src/strong-decks.ts", root),
-  `// GENERATED by scripts/gen-strong-decks.mjs from data/archidekt-decks/ — don't edit.
+  `// GENERATED by scripts/gen-strong-decks.mjs from data/edhrec-average-decks.json — don't edit.
 // See docs/plans/strong-bot-decks.md.
 
+/** For a deck one player built (\`houseStrongDecks\`): who, and where. Only
+ * ever a deck its builder gave their word for. */
 export interface DeckCredit {
   /** The creator's username where the deck is shared. */
   readonly author: string;
   /** The creator's own title for the deck. */
   readonly title: string;
-  /** Its page is https://archidekt.com/decks/<id>; absent for a deck shared
-   * somewhere else (\`url\`). */
-  readonly archidektId?: number;
-  /** The deck's page, when it isn't on Archidekt. */
+  /** The deck's page; absent for a deck shared on no deck site. */
   readonly url?: string;
   /** What differs from the creator's list, for a deck not played exactly as
-   * listed: only ever with its creator's word (\`houseStrongDecks\`). */
+   * listed: only ever with its creator's word. */
   readonly changed?: string;
   /** When the list was copied: their page shows their latest version. */
+  readonly taken: string;
+}
+
+/** For an average deck: whose average, of how many decks, and its page. */
+export interface DeckAverage {
+  readonly source: "EDHREC";
+  readonly url: string;
+  /** How many Bracket 4 decks were averaged. */
+  readonly decks: number;
+  /** When the list was taken: the page shows the average as it is now. */
   readonly taken: string;
 }
 
@@ -160,12 +137,7 @@ export interface StrongDeckData {
   readonly name: string;
   readonly commander: string;
   readonly description: string;
-  readonly credit: DeckCredit;
-  readonly substitutions: readonly {
-    readonly original: string;
-    readonly substitute: string;
-    readonly reason: string;
-  }[];
+  readonly average: DeckAverage;
   readonly printed: readonly (readonly [string, number])[];
 }
 
@@ -174,3 +146,4 @@ ${body}
 ];
 `,
 );
+console.log(`strong-decks.ts: ${snapshot.decks.length} average decks, taken ${snapshot.taken}`);

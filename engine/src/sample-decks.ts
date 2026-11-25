@@ -47,9 +47,9 @@
 
 import { PRECON_PRINTINGS } from "./starter-printings.js";
 import { STRONG_DECK_DATA } from "./strong-decks.js";
-import type { DeckCredit } from "./strong-decks.js";
+import type { DeckAverage, DeckCredit } from "./strong-decks.js";
 
-export type { DeckCredit };
+export type { DeckAverage, DeckCredit };
 
 export interface PreconSubstitution {
   /** The printed card the engine doesn't implement yet. */
@@ -79,6 +79,9 @@ export interface SampleDeck {
   readonly swaps?: readonly (readonly [cut: string, add: string])[];
   /** For a real player's deck (`STRONG_DECKS`): who built it, and where. */
   readonly credit?: DeckCredit;
+  /** For an average deck (`STRONG_DECKS`): whose average, and of how many
+   * decks. No one player's list, so it has no `credit`. */
+  readonly average?: DeckAverage;
   /** `false`: never dealt to a bot (`botPool`), because the bots pilot it too
    * badly to be an opponent. Still a starter deck a player can pick. */
   readonly bots?: false;
@@ -2251,12 +2254,21 @@ export const UPGRADED_DECKS: readonly SampleDeck[] = [
 export const STARTER_DECKS: readonly SampleDeck[] = [...SAMPLE_DECKS, ...UPGRADED_DECKS];
 
 /**
- * The strong decks: real bracket 4 decks that players built on Archidekt,
- * each exactly as its creator built it and credited to them, in its name
- * ("Edgar Markov by Ozymandias-") and its `credit` (the About page links each
- * one), and after them the ones from elsewhere (`houseStrongDecks`). The
- * Archidekt ones are generated from the lists the user copied by hand
- * (`scripts/gen-strong-decks.mjs`; nothing may fetch from Archidekt). A third
+ * The strong decks (Bracket 4). First the **average decks**, one a
+ * commander: EDHREC's average of the Bracket 4 decks it lists for that
+ * commander ("Edgar Markov (Average)", its `average` saying of how many and
+ * linking the page), generated from a snapshot
+ * (`scripts/gen-strong-decks.mjs`, `data/edhrec-average-decks.json`) and
+ * played whole. Then the decks one player built and gave their word for
+ * (`houseStrongDecks`), each credited in its name and its `credit`.
+ *
+ * **No one's deck without their permission** (the user, 2026-11-25). Until
+ * then the pool's first eight were real decks copied from Archidekt, public
+ * and credited but never asked for; they came out that day, and the averages
+ * of seven of the same commanders went in (benched against the Bracket 3
+ * decks first: `docs/plans/strong-bot-decks.md`).
+ *
+ * A third
  * pool a room's host can deal a bot from (the lobby's "Bracket 4" button),
  * and only that until 2026-11-24 (the user's call, 2026-11-11); since then a
  * player can bring one too, from the deck builder's starter list and the
@@ -2267,14 +2279,14 @@ export const STARTER_DECKS: readonly SampleDeck[] = [...SAMPLE_DECKS, ...UPGRADE
  */
 export const STRONG_DECKS: readonly SampleDeck[] = [
   ...STRONG_DECK_DATA.map((deck) => ({
-    ...precon(deck),
-    credit: deck.credit,
+    ...precon({ ...deck, substitutions: [] }),
+    average: deck.average,
   })),
   ...houseStrongDecks(),
 ];
 
 /**
- * Strong decks from outside the generated Archidekt lists.
+ * The strong decks one player built, each here on its builder's word.
  *
  * **Ureni** (2026-11-15) is the site owner's own deck, "Here Be Dragons" on
  * Moxfield, credited there (`credit.url`). It is here because Ureni left the

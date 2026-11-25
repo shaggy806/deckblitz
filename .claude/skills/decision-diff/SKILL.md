@@ -58,7 +58,7 @@ decks. A change to one of those diffs as zero and is still live. Ask that
 kind of decision on decks that raise it:
 
 ```bash
-cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:judge -- --kind attacks --seeds 1-3 --decks "Token Triumph,Grave Danger,World Shaper,Mardu Surge;Token Triumph,Grave Danger;The Ur-Dragon,Lathril,Atraxa,Giada"
+cd "$(git rev-parse --show-toplevel)/engine" && npm run bot:judge -- --kind attacks --seeds 1-3 --decks "Token Triumph,Grave Danger,World Shaper,Mardu Surge;Token Triumph,Grave Danger;The Ur-Dragon,Lathril,Ureni,Giada"
 ```
 
 `--kind payments | discards | attacks | blocks | removal | answers`; `--base` as above.

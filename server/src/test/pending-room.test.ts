@@ -377,6 +377,12 @@ describe("PendingRoom", () => {
     // A deck only named alike, with another commander, is nobody's.
     room.setBotDeck(BOB, { cards: ["Forest"], commanders: ["Eshki, Temur's Roar"], name: strong.name });
     expect(nameOf(BOB)).not.toBe("Shaggy5405");
+    // An average deck is no one's list: its bot has a character's name.
+    const average = STRONG_DECKS.find((d) => d.average !== undefined)!;
+    room.setBotDeck(BOB, { name: average.name, cards: [...average.cards], commanders: [...average.commanders!] });
+    expect(nameOf(BOB)).toBeTruthy();
+    expect(nameOf(BOB)).not.toBe("EDHREC");
+    expect(nameOf(BOB)).not.toBe("Shaggy5405");
   });
 
   it("setBotDeck changes an already-bot-filled seat's deck, and only a bot seat's", () => {

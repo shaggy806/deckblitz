@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { CommanderCandidate } from 'protocol'
-import { commanderPrintings, deckLabel, listPickableDecks } from '../deck-builder/decks.ts'
+import { commanderPrintings, deckLabel, deckSourceNote, listPickableDecks } from '../deck-builder/decks.ts'
 import type { PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderPicker } from '../deck-builder/CommanderPicker.tsx'
 import { importAndSave } from '../deck-builder/importAndSave.ts'
@@ -24,7 +24,7 @@ const IMPORT_TAB = 'import'
  * The decks are in groups, one shown at a time (the user, 2026-11-15: "they
  * should be sorted into 3 strength categories rather than a long list"):
  * for your own seat My decks, then Brackets 2, 3 and 4 (the precons, the
- * upgraded precons, and real players' lists: a player's to bring too since
+ * upgraded precons, and the strong decks: a player's to bring too since
  * 2026-11-24, a bot's only before), then Import list (`DeckImportTab`, a
  * pasted list saved and brought); for a bot (`forBot`) Brackets 2, 3 and 4,
  * the pools its "+ Bot" buttons deal from (`BOT_DECK_POOLS`), then My decks.
@@ -276,7 +276,7 @@ function DeckPickerRow({
         {deck.commanders.length > 0 ? (
           <span className="deck-picker-row-commander">
             {deck.commanders.join(' & ')}
-            {deck.author !== undefined ? ` · by ${deck.author}` : ''}
+            {deckSourceNote(deck)}
           </span>
         ) : (
           <span className="deck-picker-row-commander muted">{deck.cards.length} cards</span>

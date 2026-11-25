@@ -6,6 +6,10 @@ import type { Browser, Page } from '@playwright/test'
 // "Decks" setting (Commander-legal only); and a full table watched instead of
 // joined — the seat board, then the game with every hand hidden.
 
+/** A seat's deck when it is a Bracket 4 one, by its name on the wire: an
+ * average ("Krenko (Average)") or a deck a player gave ("Ureni by …"). */
+const STRONG_SEAT_DECK = '.seat-deck-name[data-deck*=" by "], .seat-deck-name[data-deck$="(Average)"]'
+
 const roomOf = (page: Page): Promise<string | null> =>
   page.evaluate(() => new URL(window.location.href).searchParams.get('room'))
 
@@ -174,11 +178,12 @@ test("the host picks each bot's deck by its strength: a precon, an upgraded prec
   await shots(host, 'lobby-add-bot-buttons')
   await host.getByRole('button', { name: 'Add bracket 3 bot' }).first().click()
   await expect(host.locator('.seat-deck-name', { hasText: '(Upgraded)' })).toHaveCount(1)
-  // Strong: a real player's deck. Its name is "<commander> by <creator>" on
-  // the wire and the seat shows its creator's own title (2026-11-15).
+  // Strong: an average deck, "<commander> (Average)", or a deck a player
+  // gave: "<commander> by <creator>" on the wire, where the seat shows its
+  // creator's own title (2026-11-15).
   await grid.getByRole('button', { name: /Add player/ }).first().click()
   await host.getByRole('button', { name: 'Add bracket 4 bot' }).first().click()
-  const strong = host.locator('.seat-deck-name[data-deck*=" by "]')
+  const strong = host.locator(STRONG_SEAT_DECK)
   await expect(strong).toHaveCount(1)
   await expect(strong).not.toContainText(' by ')
   await shots(host, 'lobby-upgraded-bots')
@@ -227,12 +232,12 @@ test('the host fills the table with bots of one strength in one click: a bot for
   await shots(host, 'lobby-filled-with-bots')
 
   // A bot's seat removed leaves a place, and the next fill takes only that:
-  // a real player's deck this time, beside the upgraded one still there.
+  // a strong deck this time, beside the upgraded one still there.
   await host.getByRole('button', { name: 'Remove seat 4' }).click()
   await expect(grid.locator('.seat-panel')).toHaveCount(3)
   await fill(host).getByRole('button', { name: 'Fill with bracket 4 bots' }).click()
   await expect(grid.locator('.seat-panel')).toHaveCount(4)
-  await expect(grid.locator('.seat-deck-name[data-deck*=" by "]')).toHaveCount(1)
+  await expect(grid.locator(STRONG_SEAT_DECK)).toHaveCount(1)
   await expect(grid.locator('.seat-deck-name', { hasText: '(Upgraded)' })).toHaveCount(1)
   expect(errors).toEqual([])
   await host.context().close()

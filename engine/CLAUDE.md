@@ -216,7 +216,7 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   it began beside what the turn brought, and each removal aimed with what else was there; the report sorts the cards by
   salt score, EDHREC rank, the bots' `engineScore` and what the definition says the card does, and says which sorting
   tells apart the cards worth answering (2026-11-15: not salt; the commander, then token makers).
-- `bot:watch -- --decks "The Ur-Dragon,Lathril,Atraxa,Giada" [--seed 1] [--budget 1000] [--count] [--turns 31-34]`: one
+- `bot:watch -- --decks "The Ur-Dragon,Lathril,Ureni,Giada" [--seed 1] [--budget 1000] [--count] [--turns 31-34]`: one
   whole game of v2 seats at the live clock, written out to read: each turn's board and hands, and every decision with
   how it was reached. For looking over the bots' play by eye; deck names match the strong decks first, then the starter
   decks, then the **tooling precons** (`scripts/tool-decks.mjs`, for all four `--decks` tools: 68 more Wizards precons

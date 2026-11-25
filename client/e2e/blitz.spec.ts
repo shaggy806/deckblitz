@@ -306,7 +306,8 @@ test("the lobby's deck picker imports a pasted list, saves it and brings it to t
 })
 
 // Each bracket's button deals the bots that bracket's decks: Bracket 4's are
-// real players' lists, named "<commander> by <creator>". Read off the
+// the averages, named "<commander> (Average)", and the decks a player gave,
+// named "<commander> by <creator>". Read off the
 // `add-bot` messages, so on the room server (`?local=0`), not in the page.
 test("a bracket's blitz button deals the bots that bracket's decks", async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
@@ -324,5 +325,5 @@ test("a bracket's blitz button deals the bots that bracket's decks", async ({ pa
   await page.getByRole('button', { name: 'Blitz against Bracket 4' }).click()
   await expect(page.getByRole('button', { name: 'History' })).toBeVisible({ timeout: 20_000 })
   expect(bots).toHaveLength(3)
-  for (const name of bots) expect(name).toMatch(/ by /)
+  for (const name of bots) expect(name).toMatch(/ by | \(Average\)$/)
 })

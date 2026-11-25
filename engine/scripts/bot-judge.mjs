@@ -4,7 +4,7 @@
 // is asked the same question. Where the two disagree, each answer is played
 // on by fresh v2 seats and the decider's score read at the end.
 //
-//   npm run bot:judge -w engine -- --kind payments --decks "The Ur-Dragon,Lathril,Atraxa,Giada"
+//   npm run bot:judge -w engine -- --kind payments --decks "The Ur-Dragon,Lathril,Ureni,Giada"
 //   npm run bot:judge -w engine -- --kind attacks --decks "Token Triumph,Grave Danger" --seeds 1-8
 //   npm run bot:judge -w engine -- --kind blocks --decks "Token Triumph,Grave Danger;World Shaper,Mardu Surge" --seeds 1-4
 //   npm run bot:judge -w engine -- --kind discards --decks "Edgar Markov,Y'shtola,Krenko,Pantlaza" --all
@@ -131,7 +131,7 @@ const seedsOf = (text) =>
     return to === undefined ? [from] : Array.from({ length: Math.max(0, to - from + 1) }, (_, i) => from + i);
   });
 const seeds = flag("seeds", null) !== null ? seedsOf(flag("seeds", "")) : [Number(flag("seed", "1"))];
-const deckSets = flag("decks", "The Ur-Dragon,Lathril,Atraxa,Giada")
+const deckSets = flag("decks", "The Ur-Dragon,Lathril,Ureni,Giada")
   .split(";")
   .map((s) => s.trim())
   .filter((s) => s !== "");

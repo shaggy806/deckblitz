@@ -6,6 +6,7 @@ import {
   builtInDeck,
   createDeck,
   deckLabel,
+  deckSourceNote,
   deleteDeck,
   duplicateDeck,
   duplicateStarter,
@@ -221,8 +222,9 @@ export function DeckBuilderPage() {
                 {blitzNote(`starter:${i}`)}
               </li>
             ))}
-            {/* Real players' decks (Bracket 4), each by its creator's own
-                title and credited to them, as the lobby's picker lists it. */}
+            {/* The strong decks (Bracket 4): the averages, then each
+                player's deck by its creator's own title and credited to
+                them, as the lobby's picker lists it. */}
             {STRONG_DECKS.map((d, i) => {
               const ref = { kind: 'strong', name: d.name } as const
               return (
@@ -236,7 +238,7 @@ export function DeckBuilderPage() {
                       <span>{deckLabel(d.name)}</span>
                       <span className="db-starter-commander">
                         {commandersOf(d).join(' & ')}
-                        {d.credit !== undefined ? ` · by ${d.credit.author}` : ''}
+                        {deckSourceNote({ author: d.credit?.author, averageOf: d.average?.source })}
                       </span>
                     </span>
                     <DeckIdentityPips commanders={commandersOf(d)} />
