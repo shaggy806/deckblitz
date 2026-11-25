@@ -2257,10 +2257,13 @@ export const STARTER_DECKS: readonly SampleDeck[] = [...SAMPLE_DECKS, ...UPGRADE
  * one), and after them the ones from elsewhere (`houseStrongDecks`). The
  * Archidekt ones are generated from the lists the user copied by hand
  * (`scripts/gen-strong-decks.mjs`; nothing may fetch from Archidekt). A third
- * pool a room's host can deal a bot from (the lobby's "Strong" button), and
- * only that (the user's call, 2026-11-11): a blitz deals the upgraded precons, and
- * these aren't starter decks, so the deck builder and the deck pickers don't
- * offer them. `docs/plans/strong-bot-decks.md`.
+ * pool a room's host can deal a bot from (the lobby's "Bracket 4" button),
+ * and only that until 2026-11-24 (the user's call, 2026-11-11); since then a
+ * player can bring one too, from the deck builder's starter list and the
+ * lobby's deck picker (the user: "make the bracket 4 decks available in the
+ * deck builder as starter decks and in the lobby as decks that people can
+ * choose"). They stay out of `STARTER_DECKS`, whose indexes the client saves:
+ * the client names one by its `name`. `docs/plans/strong-bot-decks.md`.
  */
 export const STRONG_DECKS: readonly SampleDeck[] = [
   ...STRONG_DECK_DATA.map((deck) => ({
@@ -2293,6 +2296,10 @@ export const STRONG_DECKS: readonly SampleDeck[] = [
  * suit the bots better, with his guide to playing it, which is the deck's
  * bias (`deck-bias.ts`). On the rooms' clock that one won 30 of 48 against
  * the same three, 21 of 48 without the bias (`docs/plans/strong-bot-decks.md`).
+ * A third list the same day (15 cards changed: the original duals out for
+ * the Turbulent lands, Gemstone Caverns and Boseiju; Sliver Queen, two more
+ * Overlords, Summon: Titan and Magma Opus in) is the one here: 30 of 48 on
+ * the same bench.
  */
 function houseStrongDecks(): SampleDeck[] {
   const hereBeDragons = (deck: SampleDeck): SampleDeck => ({
@@ -2420,14 +2427,13 @@ function houseStrongDecks(): SampleDeck[] {
         ["Anti-Venom, Horrifying Healer", 1],
         ["Arid Mesa", 1],
         ["Astelli Reclaimer", 1],
-        ["Badlands", 1],
         ["Baneslayer Angel", 1],
-        ["Bayou", 1],
         ["Beanstalk Wurm", 1],
         ["Beorn, Reluctant Host", 1],
         ["Betor, Kin to All", 1],
         ["Blood Crypt", 1],
         ["Bloodstained Mire", 1],
+        ["Boseiju, Who Endures", 1],
         ["Breeding Pool", 1],
         ["Cavalier of Thorns", 1],
         ["Cavern of Souls", 1],
@@ -2444,6 +2450,7 @@ function houseStrongDecks(): SampleDeck[] {
         ["Forest", 1],
         ["Frenzied Saddlebrute", 1],
         ["Garth One-Eye", 1],
+        ["Gemstone Caverns", 1],
         ["Gemstone Mine", 1],
         ["God-Eternal Rhonas", 1],
         ["Godless Shrine", 1],
@@ -2451,18 +2458,15 @@ function houseStrongDecks(): SampleDeck[] {
         ["Hallowed Fountain", 1],
         ["Hivespine Wolverine", 1],
         ["Hungering Puppetbeast", 1],
-        ["Ilharg, the Raze-Boar", 1],
         ["Indominus Rex, Alpha", 1],
         ["Island", 1],
-        ["Ivorytusk Fortress", 1],
         ["Jean-Luc, Mon Capitaine", 1],
         ["Junji, the Midnight Sky", 1],
         ["Kazuul, Tyrant of the Cliffs", 1],
         ["Kenrith, the Returned King", 1],
         ["Kinzu of the Bleak Coven", 1],
         ["Krosan Verge", 1],
-        ["Maelstrom Archangel", 1],
-        ["Maha, Its Feathers Night", 1],
+        ["Magma Opus", 1],
         ["Mana Confluence", 1],
         ["Marsh Flats", 1],
         ["Mass of Mysteries", 1],
@@ -2472,43 +2476,46 @@ function houseStrongDecks(): SampleDeck[] {
         ["Monstrous Vortex", 1],
         ["Mountain", 1],
         ["Necron Deathmark", 1],
-        ["Nylea's Forerunner", 1],
         ["Overgrown Tomb", 1],
+        ["Overlord of the Floodpits", 1],
         ["Overlord of the Hauntwoods", 1],
+        ["Overlord of the Mistmoors", 1],
         ["Pillar of the Paruns", 1],
         ["Plains", 1],
-        ["Plateau", 1],
         ["Plaza of Heroes", 1],
         ["Polluted Delta", 1],
         ["Prismatic Vista", 1],
         ["Railway Brawler", 1],
-        ["Rakish Revelers", 1],
         ["Ridgescale Tusker", 1],
         ["Sacred Foundry", 1],
         ["Sandworm", 1],
         ["Savannah", 1],
         ["Scalding Tarn", 1],
-        ["Scrubland", 1],
         ["Shilgengar, Sire of Famine", 1],
         ["Sigarda, Host of Herons", 1],
         ["Sliver Hive", 1],
         ["Sliver Hivelord", 1],
-        ["Sliver Legion", 1],
+        ["Sliver Queen", 1],
         ["Sludge Monster", 1],
         ["Spinewoods Paladin", 1],
         ["Steam Vents", 1],
         ["Stomping Ground", 1],
+        ["Summon: Titan", 1],
         ["Summon: Valefor", 1],
         ["Swamp", 1],
         ["Taiga", 1],
         ["Tarnished Citadel", 1],
         ["Temple Garden", 1],
         ["Titania, Protector of Argoth", 1],
-        ["Tropical Island", 1],
-        ["Tundra", 1],
-        ["Underground Sea", 1],
+        ["Turbulent Crater", 1],
+        ["Turbulent Fen", 1],
+        ["Turbulent Moor", 1],
+        ["Turbulent Shore", 1],
+        ["Turbulent Springs", 1],
+        ["Turbulent Steppe", 1],
+        ["Turbulent Wetlands", 1],
+        ["Turbulent Wilderness", 1],
         ["Verdant Catacombs", 1],
-        ["Volcanic Island", 1],
         ["Watery Grave", 1],
         ["Windswept Heath", 1],
         ["Wooded Foothills", 1],

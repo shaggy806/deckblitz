@@ -129,14 +129,15 @@ export const COMMANDER_BIASES: Readonly<Record<string, DeckBias>> = {
     ownWeights: { graveyard: 0.25, libraryDanger: 1 },
   },
   // pbToast's "Prince Rupert's Packed Penthouse" (`STRONG_DECKS`), from its
-  // builder's own guide (2026-11-24). Every spell in it but one is a creature
-  // of power 5 or more at mana value 5 or less; the one is Monstrous Vortex,
-  // the only card the commander's cascade can hit. With the Vortex out, one
+  // builder's own guide (2026-11-24). Nearly every spell in it is a creature
+  // of power 5 or more, most at mana value 5, and none below it but Monstrous
+  // Vortex, the only card the commander's cascade can hit (his third list's
+  // Magma Opus, an instant discarded for a Treasure, is at 8). With the Vortex out, one
   // creature spell discovers another, which is cast and discovers the next:
   // the whole library's creatures for one spell. So the plan is five lands,
   // the commander, and then anything.
   //
-  // - **Hands**: 54 lands and no ramp, and nothing to cast before the fifth
+  // - **Hands**: 55 lands and no ramp, and nothing to cast before the fifth
   //   land, so a hand is its lands. The shared policy threw back four lands
   //   and three five-drops (no early plays) in the first game watched.
   // - **The Vortex** is the deck: 20 on the battlefield, and where it lies
