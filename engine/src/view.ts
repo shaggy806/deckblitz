@@ -1714,7 +1714,10 @@ export type LastingEnds =
   | "permanent"
   | "later"
   | { readonly untilTurnOf: PlayerId }
-  | { readonly untilEndOfTurnOf: PlayerId };
+  | { readonly untilEndOfTurnOf: PlayerId }
+  /** Held for later (`laterPlayerEffects`): it starts as that player's next
+   * turn begins and lasts through it. */
+  | { readonly duringTurnOf: PlayerId };
 
 /** One {@link PlayerView.lastingEffects} entry. `player` is whose panel lists
  * it: the player it's on or protects, else the controller of what made it.
@@ -1755,6 +1758,13 @@ function lastingEffectsOf(state: GameState): LastingEffectView[] {
   for (const p of state.playerEffects ?? []) {
     if (p.madeBy === undefined) continue;
     add({ player: p.owner, source: p.madeBy.name, text: p.madeBy.text, ends: lastingEnds(p.expires) });
+  }
+  // Held for a later turn ("that player can't attack you during their next
+  // turn"): nothing yet, then all of that turn.
+  for (const later of state.laterPlayerEffects ?? []) {
+    const madeBy = later.effect.madeBy;
+    if (madeBy === undefined) continue;
+    add({ player: later.effect.owner, source: madeBy.name, text: madeBy.text, ends: { duringTurnOf: later.turnOf } });
   }
   // A replacement on one permanent is that permanent's to show.
   for (const r of state.activeReplacements) {

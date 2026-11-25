@@ -6585,6 +6585,9 @@ export interface CombatDamageState {
 export interface LaterTimedStatic {
   readonly owner: PlayerId;
   readonly timedStatic: StaticAbility;
+  /** What made it, for `PlayerView.lastingEffects`, carried into the
+   * timed static it becomes as its turn begins. */
+  readonly madeBy?: MadeBy;
 }
 
 /**

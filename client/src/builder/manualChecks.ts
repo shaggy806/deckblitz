@@ -13903,6 +13903,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Sphinx's Decree: the rule held for Bob's next turn is listed now",
+    board({
+      you: { bf: ['Plains*2'], hand: ["Sphinx's Decree", 'Plains'] },
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

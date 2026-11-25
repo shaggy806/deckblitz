@@ -17,6 +17,7 @@ export function lastingEndsLabel(ends: LastingEffect['ends'], whose: (player: Pl
   if (ends === 'permanent') return 'For the rest of the game'
   if (ends === 'later') return null
   if ('untilTurnOf' in ends) return `Until ${whose(ends.untilTurnOf)} next turn`
+  if ('duringTurnOf' in ends) return `During ${whose(ends.duringTurnOf)} next turn`
   return `Until the end of ${whose(ends.untilEndOfTurnOf)} next turn`
 }
 

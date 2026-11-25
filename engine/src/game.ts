@@ -11696,7 +11696,8 @@ export class Game {
     for (const e of later) {
       if (left.includes(e) || e.turnOf !== this.activePlayer) continue;
       if ("timedStatic" in e.effect) {
-        this.createEmblem(e.effect.owner, "", e.effect.timedStatic, undefined, [], e.effect.owner, [], "end-of-turn");
+        const madeBy = e.effect.madeBy;
+        this.createEmblem(e.effect.owner, madeBy?.text ?? "", e.effect.timedStatic, madeBy?.name, [], e.effect.owner, [], "end-of-turn");
         invalidateComputedCache();
         continue;
       }
@@ -56961,15 +56962,18 @@ controlledBy,
       } as Prohibition;
     });
     const made: StaticAbility = { affects: { scope: "self" }, prohibits: bound, text: "" };
+    // Its words for the players reading it: the ability that made it
+    // (`PlayerView.lastingEffects`).
+    const madeBy = this.madeByOf(sourceId);
     if (during !== undefined) {
       (this.state.laterPlayerEffects ??= []).push({
         turnOf: during,
         after: this.state.turn.number,
-        effect: { owner: controller, timedStatic: made },
+        effect: { owner: controller, timedStatic: made, ...(madeBy !== undefined ? { madeBy } : {}) },
       });
       return;
     }
-    this.createEmblem(controller, "", made, this.nameOfSource(sourceId), [], controller, [], expires);
+    this.createEmblem(controller, madeBy?.text ?? "", made, this.nameOfSource(sourceId), [], controller, [], expires);
     invalidateComputedCache();
     this.emitProhibitions(bound, expires, controller);
   }

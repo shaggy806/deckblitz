@@ -74,6 +74,10 @@ engine terms. A second thing to check is a second test.
 - **Do:** Cast Teferi's Protection, then click "effects 1" on your panel; look again on Bob's turn.
 - **Expect:** One "Effect — Teferi's Protection" with the card's words (they say "Until your next turn" themselves, so no heading is added). It's still listed on Bob's turn, and gone once your next turn begins.
 
+### Sphinx's Decree: the rule held for Bob's next turn is listed now
+- **Do:** Cast Sphinx's Decree, then click "effects 1" on your panel; look again on Bob's turn.
+- **Expect:** "Effect — Sphinx's Decree" reads "During Bob's next turn:" and the card's words. On Bob's turn it's still listed, now without the heading (it's in force this turn), and it's gone once your next turn begins.
+
 ### Brutal Cathar: day is shown in the top strip
 - **Do:** Cast Brutal Cathar, exiling Bob's Grizzly Bears.
 - **Expect:** The top strip's turn readout ends in "☀ Day", and stays there for the rest of the game.

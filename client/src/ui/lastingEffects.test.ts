@@ -13,6 +13,7 @@ describe('lastingEndsLabel', () => {
     expect(lastingEndsLabel({ untilTurnOf: alice }, whose)).toBe('Until your next turn')
     expect(lastingEndsLabel({ untilEndOfTurnOf: bob }, whose)).toBe('Until the end of Bob’s next turn')
     expect(lastingEndsLabel('permanent', whose)).toBe('For the rest of the game')
+    expect(lastingEndsLabel({ duringTurnOf: bob }, whose)).toBe('During Bob’s next turn')
     expect(lastingEndsLabel('later', whose)).toBeNull()
   })
 })

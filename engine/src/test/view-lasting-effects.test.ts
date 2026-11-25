@@ -59,6 +59,37 @@ describe("the view's lasting effects", () => {
     ]);
   });
 
+  it("lists a prohibition for this turn in its card's words (Silence)", () => {
+    const { game } = table({ openingHandSize: 0 });
+    lands(game, "Plains", 1);
+    cast(game, toHand(game, "Silence"));
+    expect(game.viewFor(B).lastingEffects).toEqual([
+      { player: A, source: "Silence", text: "Your opponents can't cast spells this turn.", ends: "end-of-turn" },
+    ]);
+  });
+
+  it("lists a prohibition held for the opponent's next turn, then through that turn (Sphinx's Decree)", () => {
+    const { game } = table({ openingHandSize: 0 });
+    lands(game, "Plains", 2);
+    cast(game, toHand(game, "Sphinx's Decree"));
+    const text = "Each opponent can't cast instant or sorcery spells during that player's next turn.";
+    expect(game.viewFor(B).lastingEffects).toEqual([{ player: A, source: "Sphinx's Decree", text, ends: { duringTurnOf: B } }]);
+    nextTurn(game);
+    expect(game.viewFor(B).activePlayer).toBe(B);
+    expect(game.viewFor(B).lastingEffects).toEqual([{ player: A, source: "Sphinx's Decree", text, ends: "end-of-turn" }]);
+    nextTurn(game);
+    expect(game.viewFor(B).lastingEffects).toEqual([]);
+  });
+
+  it("lists a combat rule held for the target's next turn (Taunt)", () => {
+    const { game } = table({ openingHandSize: 0 });
+    lands(game, "Island", 1);
+    cast(game, toHand(game, "Taunt"), { targets: [ref(B)] });
+    expect(game.viewFor(A).lastingEffects).toContainEqual(
+      expect.objectContaining({ player: A, source: "Taunt", ends: { duringTurnOf: B } }),
+    );
+  });
+
   it("lists an extra combat and an extra turn", () => {
     const { game } = table({ openingHandSize: 0 });
     lands(game, "Mountain", 4);
