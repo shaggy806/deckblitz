@@ -96,9 +96,10 @@ players who leave the game, combat and the turn's skip rules, with three violati
 `verify-speed-audit` (**partly built**) times `npm run verify` step by step and ranks
 what would make it faster without changing what it catches, with the coverage holes found on the way.
 
-`manual-checks-by-agents` (**pilot run 2026-11-25**) is whether Sonnet agents can play the hand
+`manual-checks-by-agents` (**two batches run 2026-11-25**) is whether Sonnet agents can play the hand
 tests in `docs/manual-checks.md` through a text runner: the tools (a brief generator, a one-page
-guide, a batch runner), 40 tests' verdicts and cost, and what to fix before running the list.
+guide, a batch runner), 137 tests' verdicts and cost, and how to run more.
+`manual-checks-cloud` is the brief a cloud session follows to play one slice of them (not yet tried).
 
 `deck-guides` is gone (2026-11-25): it held notes on the guides two players wrote for decks of
 theirs, which left the pool that day with the entries built from them (`strong-bot-decks`,

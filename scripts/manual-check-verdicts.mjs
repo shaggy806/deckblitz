@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 // Gathers the verdicts agents wrote while playing docs/manual-checks.md
-// (every results.jsonl under .scratch/manual-checks/) into
+// (every results.jsonl under .scratch/manual-checks/, and the .jsonl files cloud
+// sessions land in docs/manual-check-runs/) into
 // docs/manual-checks-verdicts.md: what failed, what couldn't be judged and
 // why, and what passed with the text each pass rests on. A test played more
 // than once keeps its last verdict. A test no longer in the doc is dropped.
 //
 //   node scripts/manual-check-verdicts.mjs [--from .scratch/manual-checks] [--print]
 
-import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -43,7 +44,12 @@ const inDoc = new Set(
     .map((l) => l.slice(4).trim()),
 )
 const byTitle = new Map()
-for (const { path } of resultFiles(from).sort((a, b) => a.at - b.at)) {
+// A cloud session's results come as tracked files (docs/plans/manual-checks-cloud.md).
+const landed = join(root, 'docs', 'manual-check-runs')
+const cloud = existsSync(landed)
+  ? readdirSync(landed).filter((name) => name.endsWith('.jsonl')).map((name) => ({ path: join(landed, name), at: statSync(join(landed, name)).mtimeMs }))
+  : []
+for (const { path } of [...(existsSync(from) ? resultFiles(from) : []), ...cloud].sort((a, b) => a.at - b.at)) {
   for (const line of readFileSync(path, 'utf8').split(/\r?\n/)) {
     if (line.trim() === '') continue
     let row
