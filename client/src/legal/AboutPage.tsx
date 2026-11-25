@@ -73,7 +73,7 @@ export function AboutPage() {
       <section>
         <h2>Players&apos; decks</h2>
         <p>
-          A bot can be given a &ldquo;Bracket 4&rdquo; deck: one of these real Commander decks that players built and shared on
+          You or a bot can play a &ldquo;Bracket 4&rdquo; deck: one of these real Commander decks that players built and shared on
           Archidekt or Moxfield, or brought here, each named for its creator and played exactly as they listed it on{' '}
           {STRONG_DECKS[0]?.credit?.taken}, except where it says what was changed. Their own pages show their latest
           versions:

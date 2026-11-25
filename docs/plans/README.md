@@ -36,7 +36,7 @@ every reading of lethal damage through one helper, and why lethal by power is at
 
 `upgraded-decks` (**shipped, second pass 2026-11-11**) records how every precon's upgrade was built by hand (one strong mana base, spells chosen for what the bots play well, EDHREC as a source of candidates only), the bench that measured them, and what's open.
 
-`strong-bot-decks` (**shipped as an optional pool, closed**, 2026-11-11): eight real bracket 4 decks from Archidekt, credited to their creators, that a room's bots can be dealt. The pilot failed its gate twice, so a blitz deals the upgraded precons instead and the wider build was dropped.
+`strong-bot-decks` (**shipped as an optional pool, closed**, 2026-11-11): eight real bracket 4 decks from Archidekt, credited to their creators, that a room's bots can be dealt (and, since 2026-11-24, that a player can bring). The pilot failed its gate twice, so a blitz deals the upgraded precons instead and the wider build was dropped.
 
 `deck-autopsies` (**first pass done**) records the deck-against-deck win-rate run, why its v1 column is confounded, the four deck autopsies, and the bot fixes they found and left.
 

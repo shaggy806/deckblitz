@@ -50,7 +50,7 @@ export const BOT_DECK_POOLS: readonly {
 export const poolLabel = (pool: BotDeckPool): string => BOT_DECK_POOLS.find((p) => p.pool === pool)?.label ?? pool
 
 /** The decks a pool deals from: the precons, the upgraded precons, or the
- * real players' decks (bots only: the deck builder doesn't offer those). */
+ * real players' decks. */
 export function botDecksOf(pool: BotDeckPool): readonly SampleDeck[] {
   // Less any deck kept from the bots because they pilot it too badly
   // (`SampleDeck.bots`: Jeskai Striker (Upgraded)).

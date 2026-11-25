@@ -1,5 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { listDecks, playableSideboard, replaceCard, unusedDeckName } from './decks.ts'
+import { STRONG_DECKS } from 'engine/client'
+import {
+  builtInDeck,
+  getActiveDeck,
+  listDecks,
+  listPickableDecks,
+  playableSideboard,
+  replaceCard,
+  sameRef,
+  setActive,
+  unusedDeckName,
+} from './decks.ts'
 
 const DECKS_KEY = 'mtg-engine:decks'
 
@@ -115,5 +126,41 @@ describe('playableSideboard', () => {
     expect(playableSideboard({ commanders: [], sideboard: [] })).toBeUndefined()
     expect(playableSideboard({ commanders: [] })).toBeUndefined()
     expect(playableSideboard({ commanders: [], sideboard: Array<string>(20).fill('Forest') })).toHaveLength(15)
+  })
+})
+
+describe("the real players' decks", () => {
+  beforeEach(() => {
+    vi.stubGlobal('window', { localStorage: fakeStorage() })
+  })
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('are offered with the starters, each under a reference that names it', () => {
+    const strong = listPickableDecks().filter((d) => d.strength === 'strong')
+    expect(strong.map((d) => d.name)).toEqual(STRONG_DECKS.map((d) => d.name))
+    for (const deck of strong) {
+      expect(deck.ref).toEqual({ kind: 'strong', name: deck.name })
+      expect(deck.author).toBeDefined()
+    }
+  })
+
+  it('can be the active deck, by name and not by place in the list', () => {
+    const last = STRONG_DECKS[STRONG_DECKS.length - 1]!
+    setActive({ kind: 'strong', name: last.name })
+    expect(getActiveDeck()?.name).toBe(last.name)
+    expect(getActiveDeck()?.cards).toEqual(last.cards)
+    expect(builtInDeck({ kind: 'strong', name: 'No such deck' })).toBeNull()
+    setActive({ kind: 'strong', name: 'No such deck' })
+    expect(getActiveDeck()).toBeNull()
+  })
+
+  it('sameRef tells one reference from another', () => {
+    expect(sameRef({ kind: 'strong', name: 'A' }, { kind: 'strong', name: 'A' })).toBe(true)
+    expect(sameRef({ kind: 'strong', name: 'A' }, { kind: 'strong', name: 'B' })).toBe(false)
+    expect(sameRef({ kind: 'starter', index: 1 }, { kind: 'starter', index: 1 })).toBe(true)
+    expect(sameRef({ kind: 'starter', index: 1 }, { kind: 'saved', id: '1' })).toBe(false)
+    expect(sameRef(null, { kind: 'saved', id: '1' })).toBe(false)
   })
 })

@@ -4,7 +4,7 @@ Status: **shipped as an optional pool, and closed there** (2026-11-11, the user'
 pilot failed its gate twice, below). The eight pilot decks, and since 2026-11-15 a ninth from
 Moxfield (the last section), are `STRONG_DECKS`: what the lobby's
 "Strong" button deals a bot (an open seat has three "Add bot" buttons: Precon, Upgraded, Strong),
-for bots only, published with the user's go-ahead and with no stand-ins
+for bots only until 2026-11-24 and a player's to bring since (the last section), published with the user's go-ahead and with no stand-ins
 left (all ten missing cards were built by 2026-11-10). **A blitz doesn't deal them**: it deals the
 upgraded precons, which were rebuilt by hand for all fourteen precons instead
 (`upgraded-decks.md`), so this plan's steps 4 and 5 (widen to 30 decks, make them the blitz
@@ -329,3 +329,27 @@ others is the user's call.
 
 The first watched game also showed the bots can't pay with Gemstone Mine's counters inside a
 rollout (`BACKLOG.md`, "Bots"), which cost that game a turn; the deck has one Mine.
+
+### His third list (2026-11-24, the same day again)
+
+Fifteen cards changed: eight of the ten original dual lands, Ilharg, Ivorytusk Fortress, Maelstrom
+Archangel, Maha, Nylea's Forerunner, Rakish Revelers and Sliver Legion out; the eight Turbulent
+lands (untapped once the opponents have eight lands between them, which at four players is about
+the third turn), Gemstone Caverns, Boseiju, Sliver Queen, Overlord of the Floodpits, Overlord of the
+Mistmoors, Summon: Titan and Magma Opus in. 55 lands. Monstrous Vortex is still the only card the
+commander's cascade can hit (nothing else is under mana value 5), so the bias stands as written.
+
+The same bench (the Ur-Dragon, Giada and Ureni decks, v2 in every seat on the rooms' clock, seeds
+1-24, with its bias): 17 of 24 seated first and 13 of 24 seated last, 30 of 48, the second list's
+figure exactly (18 and 12). Counts on an unrepeatable clock: read as "no worse".
+
+## A player's to bring (2026-11-24)
+
+The user: "make the bracket 4 decks available in the deck builder as starter decks and in the
+lobby as decks that people can choose". Until then these were dealt to bots alone (the 2026-11-11
+decision above). Now the deck builder lists them after the starters, each under its creator's
+title and "by" its creator, to make active, blitz or duplicate; and the lobby's deck picker has a
+Bracket 4 tab for your own seat as it has for a bot's. They stay out of `STARTER_DECKS`, whose
+indexes the client saves as the active deck: `STRONG_DECKS` is generated and grows, so the client
+names one by its `name` (`decks.ts`'s `BuiltInRef`). A player bringing one keeps their own name;
+only a bot takes the creator's. The About page's credit says "You or a bot".

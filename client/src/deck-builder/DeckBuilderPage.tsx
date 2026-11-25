@@ -1,18 +1,21 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { STARTER_DECKS, commandersOf } from 'engine/client'
+import { STARTER_DECKS, STRONG_DECKS, commandersOf } from 'engine/client'
 import type { PreconSubstitution } from 'engine/client'
 import {
+  builtInDeck,
   createDeck,
+  deckLabel,
   deleteDeck,
   duplicateDeck,
   duplicateStarter,
   getActiveRef,
   listDecks,
+  sameRef,
   saveDeck,
   setActive,
 } from './decks.ts'
-import type { SavedDeck } from './decks.ts'
+import type { ActiveRef, SavedDeck } from './decks.ts'
 import { DeckEditor } from './DeckEditor.tsx'
 import type { CommanderCandidate } from 'protocol'
 import { CommanderPicker } from './CommanderPicker.tsx'
@@ -28,7 +31,7 @@ import { cardPool } from '../cards/cardData.ts'
 import { blitzReady, blitzUrl } from '../lobby/blitzDeck.ts'
 import type { WireDeck } from 'protocol'
 
-type Selection = { readonly kind: 'saved'; readonly id: string } | { readonly kind: 'starter'; readonly index: number } | null
+type Selection = ActiveRef | null
 
 export function DeckBuilderPage() {
   const [decks, setDecks] = useState<readonly SavedDeck[]>(() => listDecks())
@@ -42,7 +45,8 @@ export function DeckBuilderPage() {
   /** The stand-in review popup, open over the freshly imported deck. */
   const [reviewing, setReviewing] = useState(false)
   /** Why a deck's Blitz button didn't start a game, under that deck's row
-   * (`key`: `saved:<id>` or `starter:<index>`, as `blitzUrl` takes it). */
+   * (`key`: `saved:<id>`, `starter:<index>` or `strong:<index>`, as
+   * `blitzUrl` takes it). */
   const [blitzProblem, setBlitzProblem] = useState<{ readonly key: string; readonly text: string } | null>(null)
 
   /** A deck's Blitz button: the game page, blitzing it against three bots
@@ -91,14 +95,12 @@ export function DeckBuilderPage() {
 
   const selectedDeck =
     selection?.kind === 'saved' ? (decks.find((d) => d.id === selection.id) ?? null) : null
-  const starterIndex = selection?.kind === 'starter' ? selection.index : null
-  const selectedStarter = starterIndex !== null ? (STARTER_DECKS[starterIndex] ?? null) : null
+  /** The built-in deck selected: a starter, or a real player's deck. */
+  const starterRef = selection !== null && selection.kind !== 'saved' ? selection : null
+  const selectedStarter = starterRef !== null ? builtInDeck(starterRef) : null
+  const starterKey = starterRef === null ? '' : starterRef.kind === 'starter' ? `starter-${starterRef.index}` : `strong-${starterRef.name}`
 
-  const isActive = (ref: NonNullable<Selection>): boolean =>
-    activeRef !== null &&
-    activeRef.kind === ref.kind &&
-    ((ref.kind === 'saved' && activeRef.kind === 'saved' && activeRef.id === ref.id) ||
-      (ref.kind === 'starter' && activeRef.kind === 'starter' && activeRef.index === ref.index))
+  const isActive = (ref: NonNullable<Selection>): boolean => sameRef(activeRef, ref)
 
   // A visit from the room seat-picker's deck-picker popup carries the room
   // code along (`?room=<code>`) specifically so this link can return to that
@@ -219,6 +221,32 @@ export function DeckBuilderPage() {
                 {blitzNote(`starter:${i}`)}
               </li>
             ))}
+            {/* Real players' decks (Bracket 4), each by its creator's own
+                title and credited to them, as the lobby's picker lists it. */}
+            {STRONG_DECKS.map((d, i) => {
+              const ref = { kind: 'strong', name: d.name } as const
+              return (
+                <li key={d.name}>
+                  <button
+                    type="button"
+                    className={sameRef(selection, ref) ? 'selected' : undefined}
+                    onClick={() => selectDeck(ref)}
+                  >
+                    <span className="db-starter-text">
+                      <span>{deckLabel(d.name)}</span>
+                      <span className="db-starter-commander">
+                        {commandersOf(d).join(' & ')}
+                        {d.credit !== undefined ? ` · by ${d.credit.author}` : ''}
+                      </span>
+                    </span>
+                    <DeckIdentityPips commanders={commandersOf(d)} />
+                    {isActive(ref) ? <span className="db-active-badge">active</span> : null}
+                  </button>
+                  {blitzButton(`strong:${i}`, { cards: d.cards, commanders: commandersOf(d), name: d.name }, deckLabel(d.name))}
+                  {blitzNote(`strong:${i}`)}
+                </li>
+              )
+            })}
           </ul>
         </div>
       </aside>
@@ -282,21 +310,22 @@ export function DeckBuilderPage() {
               }}
             />
           </>
-        ) : selectedStarter && starterIndex !== null ? (
+        ) : selectedStarter && starterRef !== null ? (
           <DeckEditor
-            key={`starter-${starterIndex}`}
+            key={starterKey}
             deck={{
-              id: `starter-${starterIndex}`,
-              name: selectedStarter.name,
+              id: starterKey,
+              // A real player's deck by its own title, as its row has it.
+              name: deckLabel(selectedStarter.name),
               commanders: commandersOf(selectedStarter),
               cards: selectedStarter.cards,
               // Its precon's art (`SampleDeck.printings`).
               ...(selectedStarter.printings !== undefined ? { printings: selectedStarter.printings } : {}),
             }}
-            isActive={isActive({ kind: 'starter', index: starterIndex })}
-            onMakeActive={() => markActive({ kind: 'starter', index: starterIndex })}
+            isActive={isActive(starterRef)}
+            onMakeActive={() => markActive(starterRef)}
             onDuplicate={() => {
-              const copy = duplicateStarter(starterIndex)
+              const copy = duplicateStarter(starterRef)
               refreshDecks()
               if (copy) selectDeck({ kind: 'saved', id: copy.id })
             }}

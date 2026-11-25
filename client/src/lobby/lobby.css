@@ -552,10 +552,12 @@ button.seat-add-panel:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: min(420px, 100%);
+  /* As large as its text (`--ui`): at a fixed 420px a 1440p monitor's larger
+     text wrapped your own seat's five tabs onto a second row (2026-11-24). */
+  width: min(calc(420px * var(--ui)), 100%);
   /* One height whichever group of decks is showing: the box, and the tabs in
      it, would otherwise move as a short list replaced a long one. */
-  height: min(640px, 90vh);
+  height: min(calc(640px * var(--ui)), 90vh);
   padding: 16px;
   background: var(--panel);
   border: 1px solid var(--border);

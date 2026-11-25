@@ -66,7 +66,9 @@ describe('the strong pool', () => {
     for (const deck of decks) expect(deck.name).toMatch(/ by /)
   })
 
-  it('is no part of the starter decks a player is offered', () => {
+  // A player is offered them all the same, since 2026-11-24, as a list of
+  // their own (`decks.ts`'s `listStrongDecks`).
+  it("is no part of the engine's starter decks, whose indexes are saved", () => {
     const starters = new Set(STARTER_DECKS.map((d) => d.name))
     expect(STRONG_DECKS.filter((d) => starters.has(d.name))).toEqual([])
   })

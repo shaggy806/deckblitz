@@ -9,8 +9,9 @@
  *
  * "Active" can point at one of the player's own saved decks *or* directly at
  * one of `engine`'s `STARTER_DECKS` (the curated starter decks: the precons,
- * then their upgrades) — playing a starter deck as-is shouldn't require
- * duplicating it into "my decks" first.
+ * then their upgrades) or at one of its `STRONG_DECKS` (real players' decks,
+ * Bracket 4) — playing a built-in deck as-is shouldn't require duplicating
+ * it into "my decks" first.
  */
 
 import { STARTER_DECKS, STRONG_DECKS, commandersOf, nameForFlavorName } from 'engine/client'
@@ -87,7 +88,32 @@ export function playableSideboard(deck: {
   return deck.sideboard.slice(0, MAX_SIDEBOARD)
 }
 
-export type ActiveRef = { readonly kind: 'saved'; readonly id: string } | { readonly kind: 'starter'; readonly index: number }
+/**
+ * One of the decks that come with the site: a starter by its index in
+ * `STARTER_DECKS` (which only grows at its end), or a real player's deck by
+ * its name. By name, since `STRONG_DECKS` is generated, with the decks from
+ * elsewhere after it: one more Archidekt list moves every index past it, and
+ * a saved reference would then name another deck.
+ */
+export type BuiltInRef =
+  | { readonly kind: 'starter'; readonly index: number }
+  | { readonly kind: 'strong'; readonly name: string }
+
+export type ActiveRef = { readonly kind: 'saved'; readonly id: string } | BuiltInRef
+
+/** Whether two references name the same deck. */
+export function sameRef(a: ActiveRef | null, b: ActiveRef | null): boolean {
+  if (a === null || b === null || a.kind !== b.kind) return false
+  if (a.kind === 'saved') return a.id === (b as typeof a).id
+  if (a.kind === 'starter') return a.index === (b as typeof a).index
+  return a.name === (b as typeof a).name
+}
+
+/** The built-in deck `ref` names, or `null` when it names none (a strong
+ * deck since renamed or removed). */
+export function builtInDeck(ref: BuiltInRef): (typeof STARTER_DECKS)[number] | null {
+  return (ref.kind === 'starter' ? STARTER_DECKS[ref.index] : STRONG_DECKS.find((d) => d.name === ref.name)) ?? null
+}
 
 const DECKS_KEY = 'mtg-engine:decks'
 const ACTIVE_KEY = 'mtg-engine:active-deck'
@@ -272,9 +298,9 @@ export function duplicateDeck(id: string): SavedDeck | null {
   return copy
 }
 
-export function duplicateStarter(index: number): SavedDeck | null {
-  const source = STARTER_DECKS[index]
-  if (source === undefined) return null
+export function duplicateStarter(ref: BuiltInRef): SavedDeck | null {
+  const source = builtInDeck(ref)
+  if (source === null) return null
   const copy: SavedDeck = {
     id: newId(),
     name: `${source.name} (copy)`,
@@ -323,9 +349,9 @@ export function commanderPrintings(deck: DeckContents): readonly SeatCommander[]
   return deck.commanders.map((name) => ({ name, printing: deck.printings?.[name] ?? null }))
 }
 
-function starterContents(index: number): DeckContents | null {
-  const deck = STARTER_DECKS[index]
-  if (deck === undefined) return null
+function starterContents(ref: BuiltInRef): DeckContents | null {
+  const deck = builtInDeck(ref)
+  if (deck === null) return null
   return { name: deck.name, commanders: commandersOf(deck), cards: deck.cards, printings: deck.printings }
 }
 
@@ -335,8 +361,8 @@ function starterContents(index: number): DeckContents | null {
 export function getActiveDeck(): DeckContents | null {
   const ref = getActiveRef()
   if (ref === null) return null
-  if (ref.kind === 'starter') return starterContents(ref.index)
-  return getDeck(ref.id)
+  if (ref.kind === 'saved') return getDeck(ref.id)
+  return starterContents(ref)
 }
 
 /** One pickable option in the seat-picker's deck-choice popup — a saved deck
@@ -350,19 +376,20 @@ export interface PickableDeck extends DeckContents {
   /** A built-in deck's strength, which the picker groups by; a saved deck
    * has none. */
   readonly strength?: DeckStrength
-  /** A real player's deck: its creator, whose name the bot playing it takes
+  /** A real player's deck: its creator, whose name a bot playing it takes
    * (the server's `PendingRoom.botName`). Its title is what `deckLabel`
    * shows for it. */
   readonly author?: string
 }
 
 /** How strong a built-in deck is: a precon as printed, its upgrade, or a real
- * player's deck (bots only: `listStrongDecks`). */
+ * player's deck. */
 export type DeckStrength = 'precon' | 'upgraded' | 'strong'
 
 /** Every deck the seat-picker's popup can offer: this browser's saved decks,
  * then the starter decks — in that order, since a saved deck is more likely
- * to be what someone actually wants to bring than a generic starter. */
+ * to be what someone actually wants to bring than a generic starter — then
+ * the real players' decks (`listStrongDecks`). */
 export function listPickableDecks(): readonly PickableDeck[] {
   return [
     ...readDecks().map((d) => ({
@@ -385,16 +412,19 @@ export function listPickableDecks(): readonly PickableDeck[] {
       printings: d.printings,
       strength: (d.upgradeOf !== undefined ? 'upgraded' : 'precon') as DeckStrength,
     })),
+    ...listStrongDecks(),
   ]
 }
 
-/** The strong decks (`engine`'s `STRONG_DECKS`), as the picker offers them
- * for a bot's seat: real players' decks, credited on the About page, which a
- * player's own seat and the deck builder don't offer. */
+/** The strong decks (`engine`'s `STRONG_DECKS`), as the picker and the deck
+ * builder offer them: real players' decks, credited on the About page. For
+ * anyone's seat since 2026-11-24 (the user: "make the bracket 4 decks
+ * available in the deck builder as starter decks and in the lobby as decks
+ * that people can choose"); until then a bot's only. */
 export function listStrongDecks(): readonly PickableDeck[] {
   return STRONG_DECKS.map((d, i) => ({
     key: `strong:${i}`,
-    ref: null,
+    ref: { kind: 'strong', name: d.name } as ActiveRef,
     name: d.name,
     commanders: commandersOf(d),
     cards: d.cards,
