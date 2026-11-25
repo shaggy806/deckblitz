@@ -4,6 +4,28 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-24 — Logic Knot cast at X = 46, exiling the whole graveyard
+
+Status: fixed 2026-11-24. No scenario: the choice is made where candidates are built, not by the
+search, so `engine/src/test/bot-enough-x.test.ts` holds it (both bots).
+
+Reported by the user from an exported log (game S7AH5, seed 1576104530): "How did half the deck
+get exiled this game?" The bot in alice's seat, 43 cards in its graveyard and five mana up, cast
+Logic Knot at X = 46 against a Swan Song and exiled all 43 cards to delve. Earlier in the same game
+two other seats cast it at X = 9 and X = 3, each the most they could pay.
+
+**Why:** both bots cast every {X} spell at the largest X the offer allows (`bot/candidates.ts`'s
+`xValueOf`, v1's cast in `controller.ts`) and delve as many cards as that X takes (`delvePicks`,
+"most"). Delve pays X too (rule 702.66a), so the largest X counts the whole graveyard. That is
+right for Empty the Pits; for "counter target spell unless its controller pays {X}", X past what
+that player can pay buys nothing.
+
+**Fixed:** `bot/enough-x.ts` caps the X of a delve spell whose X a target's controller pays to
+stop it at one more than that player could pay now (pool, and the most each untapped land or mana
+permanent makes), and never below the largest X mana alone pays. `aimOffer` lowers the offer's
+`maxX` for v2's candidates and v1 takes the same cap. Only a delve offer is capped: Syncopate and
+the other eleven pay-{X} spells are cast as before.
+
 ## 2026-11-24 — Basalt Monolith left tapped for the rest of the game
 
 Status: open. Scenario (training): "untaps Basalt Monolith before its own turn, with lands that

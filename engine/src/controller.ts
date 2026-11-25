@@ -50,6 +50,7 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { isNameableAs } from "./card-names.js";
 import { namedDigIn, nameToDigFor, offeredByDig, takesOffered } from "./bot/dig.js";
+import { enoughX } from "./bot/enough-x.js";
 import { handCardQuality } from "./bot/hand-worth.js";
 import { isColoured, manaOnlyFromLinkedCards } from "./bot/linked-mana.js";
 import { LANDS_WANTED, chooseBottomOfHand, shouldMulligan } from "./bot/mulligan.js";
@@ -3259,12 +3260,17 @@ export class HeuristicBotController extends AutomaticController {
     // each target beyond the first", more targets leave less for X.
     // A sacrifice count (Dargo), counters to remove (Hierophant Bio-Titan):
     // the fewest that pay.
-    const xValue =
+    // A delve spell a player pays {X} to stop (Logic Knot): no more X than
+    // that player could pay, which is far less than a full graveyard buys
+    // (`bot/enough-x.ts`).
+    const enough = enoughX(state, this.registry, legal);
+    const largestX =
       legal.xCost === undefined
         ? undefined
         : legal.xCost.sacrifice === true || legal.xCost.removesCounters === true
           ? (legal.xCost.minX ?? 0)
           : maxXForTargets(legal.xCost, legal.targetCount, targets);
+    const xValue = largestX === undefined || enough === undefined ? largestX : Math.min(largestX, enough);
     // An X paid in life is never the most there is to pay: `lifeX`.
     const inLife = legal.xCost?.paidInLife === true ? this.lifeX(state, legal, targets) : undefined;
     if (inLife === null) return passFor(player);

@@ -110,6 +110,7 @@ import {
 import type { Horizon, RolloutPolicy } from "./simulate.js";
 import { digOf, namedDigIn, nameToDigFor, offeredByDig } from "./dig.js";
 import { winningName, winningOffer, winsByDigging } from "./dig-win.js";
+import { withEnoughX } from "./enough-x.js";
 import { isNameableAs } from "../card-names.js";
 import {
   boardKey,
@@ -879,6 +880,12 @@ export function aimOffer(
   me: PlayerId,
   legal: LegalAction,
 ): LegalAction {
+  // A delve spell a player pays {X} to stop (Logic Knot) at no more X than
+  // that player could pay: the candidates are cast at the offer's largest.
+  return aimTargets(state, cards, me, legal.kind === "cast-spell" ? withEnoughX(state, cards, legal) : legal);
+}
+
+function aimTargets(state: GameState, cards: CardRegistry, me: PlayerId, legal: LegalAction): LegalAction {
   // Each slot's side as this deck reads it (`deck-bias.ts`).
   const bias = polarityBias(state, me);
   // Ranked, then twins cut to as many as there are slots (`bot/twins.ts`):
