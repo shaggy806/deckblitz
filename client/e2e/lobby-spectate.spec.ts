@@ -244,6 +244,38 @@ test('the host fills the table with bots of one strength in one click: a bot for
   await guest.context().close()
 })
 
+// A bug report, 2026-11-25: once the table was down to two seats, the bot in
+// the second could never be taken out, so a lobby with a bot in it never
+// emptied again. At two seats the bot's × takes the bot and leaves the seat open.
+test('the host can take every bot out, down to an open seat at a table of two', async ({ browser }) => {
+  const host = await newPage(browser)
+  const errors = pageErrors(host)
+  await host.goto('/')
+  await host.getByRole('button', { name: 'Create a game' }).click()
+  await expect(host.getByRole('button', { name: 'Ready', exact: true })).toBeVisible()
+
+  const grid = host.locator('.seat-board-grid')
+  const bots = grid.locator('.seat-panel-tag', { hasText: 'Bot' })
+  await host.getByRole('group', { name: 'Fill with bots' }).getByRole('button').first().click()
+  await expect(bots).toHaveCount(3)
+  await host.getByRole('button', { name: 'Remove seat 4' }).click()
+  await expect(grid.locator('.seat-panel')).toHaveCount(3)
+  await host.getByRole('button', { name: 'Remove seat 3' }).click()
+  await expect(grid.locator('.seat-panel')).toHaveCount(2)
+  await expect(bots).toHaveCount(1)
+  await shots(host, 'lobby-last-bot')
+
+  await host.getByRole('button', { name: 'Remove the bot in seat 2' }).click()
+  await expect(bots).toHaveCount(0)
+  await expect(grid.locator('.seat-panel')).toHaveCount(2)
+  await expect(grid.locator('.seat-panel-tag', { hasText: 'Open' })).toHaveCount(1)
+  // An open seat at two is the floor: it has no × of its own.
+  await expect(grid.locator('.seat-panel-remove')).toHaveCount(0)
+  await shots(host, 'lobby-no-bots')
+  expect(errors).toEqual([])
+  await host.context().close()
+})
+
 test('a full room can be watched: the seat board, then the game with no hand', async ({ browser }) => {
   // A waiting room grows a seat for each newcomer up to four, so it's full
   // at four: the host and three bots.

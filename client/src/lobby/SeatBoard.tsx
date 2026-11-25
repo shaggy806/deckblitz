@@ -142,11 +142,13 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
   const canAddSeat = host && game.seats.length < MAX_SEATS
   const hostSeat = game.seats.find((s) => s.isHost)
   // Nobody is sitting here, and dropping it wouldn't take the table below
-  // two. The seat I haven't claimed yet but would take on "Ready" counts as
+  // two — or it is a bot's, which at two seats takes the bot out and leaves
+  // the seat open (`PendingRoom.removeSeat`), so a bot can always be removed.
+  // The seat I haven't claimed yet but would take on "Ready" counts as
   // mine: removing the chair out from under myself just shunts me to the
   // next one, which reads as a bug.
   const isRemovable = (s: (typeof game.seats)[number]) =>
-    host && !s.claimed && s.player !== mySeatPlayer && game.seats.length > MIN_SEATS
+    host && !s.claimed && s.player !== mySeatPlayer && (game.seats.length > MIN_SEATS || s.isBot)
   const seatLabel = (s: (typeof game.seats)[number]) =>
     s.claimed || s.isBot
       ? playerLabel(s.player, game.seats)
@@ -236,8 +238,8 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                       <button
                         type="button"
                         className={`seat-panel-remove${pending(`remove-seat:${s.player}`)}`}
-                        title="Remove this seat"
-                        aria-label={`Remove seat ${i + 1}`}
+                        title={game.seats.length > MIN_SEATS ? 'Remove this seat' : 'Remove this bot'}
+                        aria-label={game.seats.length > MIN_SEATS ? `Remove seat ${i + 1}` : `Remove the bot in seat ${i + 1}`}
                         onClick={() => game.removeSeat(s.player)}
                       >
                         ×

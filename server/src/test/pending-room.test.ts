@@ -250,6 +250,20 @@ describe("PendingRoom", () => {
     expect(room.botSeats()).toEqual([]);
   });
 
+  it("removeSeat at two seats takes a bot out and leaves its seat open", () => {
+    const room = pendingRoom(2);
+    room.claimSeat(ALICE, "alice-token", { send: () => {} });
+    room.addBot(BOB);
+    room.removeSeat(BOB);
+    expect(room.seatStatuses().map((s) => s.player)).toEqual([ALICE, BOB]);
+    const bob = room.seatStatuses().find((s) => s.player === BOB);
+    expect(bob).toMatchObject({ claimed: false, isBot: false, deck: null, displayName: null });
+    expect(room.botSeats()).toEqual([]);
+    // Open again, so a bot can sit back down.
+    room.addBot(BOB);
+    expect(room.botSeats().map((s) => s.player)).toEqual([BOB]);
+  });
+
   it("leave frees the leaver's seat for someone else, and drops their host role", () => {
     const room = new PendingRoom("TEST1", 2, { seed: 1 }, "host-token");
     const alice = { send: () => {} };

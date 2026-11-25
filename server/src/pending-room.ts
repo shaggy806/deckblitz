@@ -567,12 +567,19 @@ export class PendingRoom {
 
   /** Drops a seat. A seat a human holds is never pulled out from under them
    * — leaving is that player's own call — but the host may remove an open or
-   * bot-filled one. */
+   * bot-filled one. At the smallest table a bot's seat stays and only the
+   * bot goes, back to an open seat: otherwise a bot in a two-seat lobby
+   * could never be taken out (a bug report, 2026-11-25). */
   removeSeat(player: PlayerId): void {
     const index = this.seats.findIndex((s) => s.player === player);
     if (index === -1) throw new Error(`no such seat: ${player}`);
-    if (this.seats.length <= MIN_SEATS) throw new Error(`a game needs at least ${MIN_SEATS} seats`);
     if (this.seats[index].clientToken !== null) throw new Error(`seat ${player} is claimed by a player`);
+    if (this.seats.length <= MIN_SEATS) {
+      if (!this.seats[index].isBot) throw new Error(`a game needs at least ${MIN_SEATS} seats`);
+      this.seats[index] = emptySeat(player);
+      this.lastActivityAt = Date.now();
+      return;
+    }
     this.seats.splice(index, 1);
     // The seat picked to go first is gone: back to the highroll.
     if (this.settings.firstPlayer === player) this.settings = { ...this.settings, firstPlayer: "random" };
