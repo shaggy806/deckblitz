@@ -48044,7 +48044,7 @@ controlledBy,
         if (this.resolvingAbilities.length === 0) resolving.push(source);
         return [...this.state.zones.shared.stack].reverse().filter((id) => !resolving.includes(id) && this.state.objects[id] !== undefined);
       },
-      changeTargets: (target, how, to, optional, byItsController, random, unseenByNamesake, sameNewTarget) => {
+      changeTargets: (target, how, to, optional, byItsController, random, unseenByNamesake, sameNewTarget, newTargetIs) => {
         if (how === "random") {
           if (target.kind !== "object") return;
           // "For the spell and the copy": the copies of it this resolution
@@ -48090,6 +48090,15 @@ controlledBy,
           // last was.
           unseenByNamesake === true && this.state.objects[source] !== undefined ? nameOf(this.state.objects[source]) : undefined,
           sameNewTarget === true,
+          // "The new target must be a player / a creature": judged from this
+          // effect's controller's side.
+          newTargetIs === undefined
+            ? undefined
+            : (t: TargetRef): boolean =>
+                newTargetIs === "player"
+                  ? t.kind === "player"
+                  : t.kind === "object" &&
+                    matchesFilter(this.state, this.registry, t.object, newTargetIs, { you: controller, source }),
         );
       },
       gainControlOfSpell: (target) => this.gainControlOfSpell(controller, target),
@@ -56196,12 +56205,18 @@ controlledBy,
     /** Every slot to one and the same new target (Torchling's ruling — the
      * `change-targets` {@link EffectSpec}'s `sameNewTarget`). */
     sameNewTarget = false,
+    /** What a new target must also be (Rebound's "a player", Meddle's "a
+     * creature" — the `change-targets` {@link EffectSpec}'s `newTargetIs`),
+     * beyond legal for its slot; absent for anything legal. */
+    newTargetIs?: (t: TargetRef) => boolean,
   ): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
     if (object === undefined || object.zone !== "stack") return;
-    const found = this.stackTargetSlots(target.object);
-    if (found === null || found.slots.length === 0) return;
+    const legal = this.stackTargetSlots(target.object);
+    if (legal === null || legal.slots.length === 0) return;
+    const found =
+      newTargetIs === undefined ? legal : { ...legal, others: legal.others.map((list) => list.filter(newTargetIs)) };
     if (sameNewTarget && how === "change" && found.slots.length > 1) {
       // One new target for every slot: legal for each (115.7a), so the
       // options every slot shares, asked as the first slot's question; the

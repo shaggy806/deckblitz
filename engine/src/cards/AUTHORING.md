@@ -2328,7 +2328,7 @@ applies: Thousand-Year Storm's `{ triggerValue: true }` off a cast trigger's
 `newTargets`, each copy is asked about in turn, as storm's are; 0 copies
 nothing (and applies `otherwise`).
 
-`change-targets { target, how, to?, optional?, by?, unseenByNamesake? }` changes the targets of the
+`change-targets { target, how, to?, optional?, by?, unseenByNamesake?, sameNewTarget?, newTargetIs? }` changes the targets of the
 spell or ability in target slot `target` (a `{ kind: "stack" }` target, §7;
 `"trigger-object"` is the spell whose casting fired a cast trigger — Perplexing
 Chimera's "you may choose new targets for the spell" after its `exchange-control` —
@@ -2362,7 +2362,14 @@ changes to one and the same new one, legal for each slot, asked as a single
 slot (Torchling's "change the target of target spell that targets only this
 creature", its target slot `{ kind: "spell", filter: { targets: { only: true,
 source: true } } }`: its ruling has Seeds of Strength aimed at it three times
-change all three to one creature). Asked as a `choose-targets` decision with `current`
+change all three to one creature); `newTargetIs` — a new target narrower than
+the spell's slot: `"player"` for "the new target must be a player" (Rebound,
+its slot `{ kind: "spell", filter: { targets: { only: true, player: "any" } } }`),
+a `CardFilter` from the effect's controller's side for "the new target must
+be a creature" (Silver Wyvern, `{ kind: "stack", …, targeting: { only: true,
+source: true } }`) and "change that spell's target to another creature"
+(Meddle, behind a `target` condition `targets: { count: 1, permanent: { type:
+"creature" } }`). Asked as a `choose-targets` decision with `current`
 (`GameState.pendingRetarget`) unless forced, and nothing at all when nothing
 can change. Steps after it in a `sequence` wait for the answer (Imp's
 Mischief's life loss, Wild Ricochet's copy). `target: "each-other"` with
