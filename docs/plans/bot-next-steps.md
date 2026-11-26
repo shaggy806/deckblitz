@@ -144,6 +144,11 @@ not when it doesn't. The best single change is an extort paid that finished a pl
 worst is one of four identical Smothering Tithe triggers in one draw step, three of which
 came out better by 1.7: the judge's noise.
 
+**Widened, 2026-11-25**: to every choice of modes in our own turn, not only a payment, after a
+kept game where bots under Fatespinner skipped their own main phase 42 times in 74 choices (the
+rollout passing our seat saw nothing lost); and an answer that leaves no main phase is priced by
+the turn played out without one. The same game's choices, asked again: Main 16, Draw 50.
+
 **Left.** The planner never planned with a card in our library, so a card it may play from
 there was invisible to this price: fixed 2026-11-16 for the top card the seat can see
 (`unknownCards`, the gate's "pays a shock land's life to cast the spell it sees on top of

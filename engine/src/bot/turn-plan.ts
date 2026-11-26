@@ -576,9 +576,16 @@ export function nextTurnValue(
  * From `state`, in our own turn, on to our next main-phase priority of the
  * same turn with nothing on the stack and nothing asked: the stack resolved,
  * the steps before the main phase passed through, v1 answering what comes up.
- * `null` if the turn ends first, or the game does.
+ * `{ ended }` where the turn ends first — every main phase left skipped
+ * (Fatespinner's "main phase"), our attack played as v1's on the way, as
+ * `passOut` plays it — with the state the next turn begins on, or the game's
+ * end. `null` past the step ceiling or the deadline.
  */
-function toOurMainPhase(state: GameState, registry: CardRegistry, me: PlayerId): Game | null {
+function toOurMainPhase(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+): { readonly main: Game } | { readonly ended: GameState } | null {
   return rollout(() => {
     const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry) });
     const turn = state.turn.number;
@@ -590,7 +597,8 @@ function toOurMainPhase(state: GameState, registry: CardRegistry, me: PlayerId):
       s.awaiting === null &&
       s.zones.shared.stack.length === 0;
     sim.advanceUntil(untilDeadline((s) => (steps += 1) > CEILING || s.turn.number !== turn || ours(s)));
-    return ours(sim.state) && !sim.state.result.over ? sim : null;
+    if (sim.state.result.over || sim.state.turn.number !== turn) return { ended: sim.state };
+    return ours(sim.state) ? { main: sim } : null;
   });
 }
 
@@ -604,8 +612,13 @@ function toOurMainPhase(state: GameState, registry: CardRegistry, me: PlayerId):
  *
  * This is what a rollout that passes our seat can't say: mana an answer
  * spends is mana the turn's plan doesn't have, and here the plan is made
- * without it. `null` when no such window comes this turn (the caller's own
- * rollout then stands for the answer) or the decision's deadline stopped it.
+ * without it. Nor can it see a main phase an answer skips (Fatespinner's
+ * choice: 2026-11-25, bots skipped their main phase 29 times in one game,
+ * holding lands and a full hand, since passing our seat it cost nothing): an
+ * answer that leaves no main phase this turn is priced by the turn played
+ * out without one. `null` when the decision's deadline stopped it, or the
+ * turn ran past the step ceiling (the caller's own rollout then stands for
+ * the answer).
  */
 export function restOfTurnValue(
   state: GameState,
@@ -616,8 +629,10 @@ export function restOfTurnValue(
   unknown: ReadonlySet<ObjectId>,
 ): number | null {
   if (state.result.over) return hooks.value(state);
-  const main = toOurMainPhase(state, registry, me);
-  if (main === null) return null;
+  const reached = toOurMainPhase(state, registry, me);
+  if (reached === null) return null;
+  if ("ended" in reached) return hooks.value(reached.ended);
+  const main = reached.main;
   const firsts = hooks.moves(main.controllerView(me)).filter((a) => {
     const id = usedCard(a);
     return id === undefined || !unknown.has(id);

@@ -2871,12 +2871,14 @@ export class EvalBotController extends HeuristicBotController {
 
   /**
    * **Mana priced by the turn it leaves** (`docs/plans/bot-next-steps.md`,
-   * step 2). For an optional payment asked in our own turn, before or in a
-   * main phase — Mana Vault's {4} in the upkeep, an echo, "you may pay {2}" as a
-   * spell of ours resolves — a measure of each answer: the answer resolved,
-   * then the best turn the planner finds from the board it leaves
-   * (`restOfTurnValue`). `undefined` where it doesn't apply, and for an
-   * answer it can't follow to a main phase (the rollout scores that one).
+   * step 2). For a choice of modes asked in our own turn, before or in a
+   * main phase — an optional payment (Mana Vault's {4} in the upkeep, an
+   * echo, "you may pay {2}" as a spell of ours resolves), and since
+   * 2026-11-25 any other (Fatespinner's step or phase to skip) — a measure of
+   * each answer: the answer resolved, then the best turn the planner finds
+   * from the board it leaves (`restOfTurnValue`), or the turn played out
+   * where the answer leaves it no main phase. `undefined` where it doesn't
+   * apply, and for an answer it can't follow (the rollout scores that one).
    *
    * A rollout passes our own seat, so mana an answer spends is never missed:
    * paying always looked free. v1's look ahead was the stand-in (it declines
@@ -2892,8 +2894,11 @@ export class EvalBotController extends HeuristicBotController {
     const me = this.playerId;
     const asked = state.awaiting;
     if (this.planMode === null || this.horizon !== "turn") return undefined;
-    const payment = asked?.kind === "choose-modes" && asked.cost !== undefined && asked.guess === undefined;
-    if (!payment && asked?.kind !== "pay-life-for-untapped") return undefined;
+    // Any choice of modes, not only a payment: the rollout is as blind to
+    // what an answer takes from the rest of our turn as to the mana it
+    // spends (Fatespinner's "main phase", skipped for nothing, 2026-11-25).
+    const modes = asked?.kind === "choose-modes" && asked.guess === undefined;
+    if (!modes && asked?.kind !== "pay-life-for-untapped") return undefined;
     if (state.turnOrder[state.turn.activePlayerIndex] !== me || !PLANNABLE_STEPS.has(state.turn.step)) return undefined;
     const unknown = unknownCards(state, this.cards, me, this.memory.placed[me]);
     const hooks = this.planHooks();
@@ -2901,7 +2906,13 @@ export class EvalBotController extends HeuristicBotController {
     // score; these lines are valued plainly.
     this.passOutcome = null;
     return (action, budget) => {
-      const resolved = timed(budget, () => simulateAction(state, this.cards, action, "stack", "passive"));
+      // Our seat answers what the answer goes on to ask (a search's lands,
+      // a target) as v1, not as the passive stand-in, which takes nothing
+      // from an "up to two": Springbloom Druid's land sacrificed to find
+      // none read as a loss, and was declined (2026-11-25).
+      const resolved = timed(budget, () =>
+        simulateAction(state, this.cards, action, "stack", "passive", this.selfInRollouts()),
+      );
       if (resolved === null) return rolloutAborted() ? null : undefined;
       const limits = {
         ...this.planLimits(),

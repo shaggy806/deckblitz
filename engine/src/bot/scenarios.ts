@@ -48,6 +48,7 @@ import { SAMPLE_DECKS } from "../sample-decks.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { printedCardName } from "../state.js";
+import type { GameState } from "../state.js";
 import type { TargetRef } from "../target.js";
 import { EvalBotController } from "./eval-bot.js";
 import { DEFAULT_WEIGHTS } from "./evaluate.js";
@@ -756,6 +757,48 @@ function echoAsked(registry: CardRegistry): Game | ScenarioResult {
   game.state.zones.perPlayer[A].hand = [];
   game.debugSpawn("Grizzly Bears", A, "hand");
   return game;
+}
+
+/** Alice's upkeep under Bob's `fatespinners` Fatespinners, asked which step
+ * or phase to skip, on five Forests with a Craw Wurm out and a hand of a
+ * Forest, a Rumbling Baloth, a Grizzly Bears and four Hill Giants: skipping
+ * her main phase costs the land drop and six mana of creatures. With two,
+ * the first is answered "Combat phase" and the second asked. */
+function fatespinnerAsked(registry: CardRegistry, fatespinners: number): Game | ScenarioResult {
+  const game = table(registry, [A, B], A);
+  lands(game, "Forest", A, 5);
+  onBoard(game, "Craw Wurm", A);
+  for (let i = 0; i < fatespinners; i += 1) onBoard(game, "Fatespinner", B);
+  const asked = (s: GameState): boolean =>
+    s.turnOrder[s.turn.activePlayerIndex] === A && s.awaiting?.kind === "choose-modes" && s.awaiting.player === A;
+  const turn = game.state.turn.number;
+  game.advanceUntil((s) => (s.turn.number > turn && asked(s)) || s.result.over || s.turn.number > turn + 4);
+  if (!asked(game.state)) return { passed: false, detail: "Fatespinner never asked" };
+  game.state.zones.perPlayer[A].hand = [];
+  for (const name of ["Forest", "Rumbling Baloth", "Grizzly Bears", "Hill Giant", "Hill Giant", "Hill Giant", "Hill Giant"]) {
+    game.debugSpawn(name, A, "hand");
+  }
+  if (fatespinners > 1) {
+    game.dispatch({ type: "choose-modes", player: A, modes: [2] });
+    game.advanceUntil((s) => asked(s) || s.result.over || s.turn.step !== "upkeep");
+    if (!asked(game.state)) return { passed: false, detail: "the second Fatespinner never asked" };
+  }
+  return game;
+}
+
+/** Alice's main phase, asked whether to sacrifice a land as her Springbloom
+ * Druid enters, on the four Forests that cast it, with Forests and Islands
+ * in her library. */
+function druidAsked(registry: CardRegistry): Game | ScenarioResult {
+  const game = table(registry, [A, B], A);
+  lands(game, "Forest", A, 4);
+  for (let i = 0; i < 4; i += 1) game.debugSpawn(i % 2 === 0 ? "Forest" : "Island", A, "library");
+  const druid = game.debugSpawn("Springbloom Druid", A, "hand");
+  game.advanceUntil((s) => s.turn.step === "precombat-main" && s.priority.holder === A && s.awaiting === null);
+  game.dispatch({ type: "cast-spell", player: A, card: druid, targets: [] });
+  const asked = (s: GameState): boolean => s.awaiting?.kind === "choose-modes" && s.awaiting.player === A;
+  game.advanceUntil((s) => asked(s) || s.result.over || s.turn.step !== "precombat-main");
+  return game.state.awaiting?.kind === "choose-modes" ? game : { passed: false, detail: "Springbloom Druid never asked" };
 }
 
 /** Alice's upkeep, asked whether to pay {4} to untap a tapped Mana Vault, on
@@ -4024,6 +4067,65 @@ const SCENARIOS: readonly BotScenario[] = [
         player: A,
         judge: (action) => ({
           passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "doesn't skip its main phase to Fatespinner with a land and spells to play",
+    rule: "Skipping the main phase costs the land drop and every spell of the turn; the draw step costs a card and combat one attack.",
+    position(registry) {
+      // Kept game G9TFZ (2026-11-25): three bots under a clone deck's
+      // Fatespinners skipped their main phase 29 times in 111 turns, holding
+      // lands and full hands. The rollouts pass our own seat, so a main phase
+      // skipped cost nothing in them and a draw step was the only answer
+      // with a price; now each is priced by the turn it leaves.
+      const game = fatespinnerAsked(registry, 1);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length === 1 && action.modes[0] !== 1,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "sacrifices a land to Springbloom Druid for two basics",
+    rule: "One land for two is a land ahead: the search's lands count, found by the bot's own seat.",
+    position(registry) {
+      // bot:diff, 2026-11-25: with every choice of modes in our own turn
+      // priced by the turn it leaves, the answer was resolved by the passive
+      // stand-in, which takes nothing from "up to two basic lands", and the
+      // sacrifice read as a land for nothing. Our seat answers there now.
+      const game = druidAsked(registry);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length > 0,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "skips the same step for a second Fatespinner",
+    rule: "A step or phase already skipped this turn costs nothing to choose again (Fatespinner's ruling): a second one is answered the same.",
+    position(registry) {
+      // The same game: under two Fatespinners the bots often answered the
+      // second with another phase, losing two: Combat, then Main.
+      const game = fatespinnerAsked(registry, 2);
+      if (!("state" in game)) return game;
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-modes" && action.modes.length === 1 && action.modes[0] === 2,
           detail: `chose ${describeAction(action)}`,
         }),
       };
