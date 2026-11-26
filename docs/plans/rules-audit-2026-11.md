@@ -1,11 +1,12 @@
 # Rules audit, November 2026
 
-Status: **four slices done** (2026-11-17, 2026-11-26). The first (players who leave the game,
+Status: **six slices done** (2026-11-17, 2026-11-26). The first (players who leave the game,
 combat, the turn's skip rules) found three violations, fixed, and a fourth recorded for a design
 call. The second (casting, resolving, how a multiplayer game goes on) found none in the engine and
-one in the client's log wording. The third (keywords two at a time) and the fourth (blink, tokens
-and cards leaving the battlefield) found none. Seventy-seven probes stay as tests. The slices to
-take next are at the end.
+one in the client's log wording. The third (keywords two at a time), the fourth (blink, tokens
+and cards leaving the battlefield) and the fifth (two replacement effects on one event) found
+none. The sixth (merged and melded commanders) found three, fixed. Ninety-two probes stay as tests.
+The slices to take next are at the end.
 
 ## Why
 
@@ -185,6 +186,27 @@ The situation fuzzer then ran ten blink and exile-until cards (Banisher Priest, 
 Oblivion Ring, Skyclave Apparition, Kiki-Jiki, Ghostly Flicker, Cloudshift, Ephemerate,
 Restoration Angel, Fiend Hunter) through 600 random boards: none failed.
 
+## Fifth slice: two replacement effects on one event (2026-11-26)
+
+No violation. The orders of doublers, shields and "that many plus one" counters, and of draw
+replacements (Notion Thief beside Laboratory Maniac, a draw that can't happen), were already tested
+(`replacement-order*.test.ts`, `draw-replacement-order.test.ts`, `draw-limit.test.ts`).
+`replacement-interactions-audit.test.ts` takes the pairs they don't: Gather Specimens' control
+change applied first, so the new controller's Hardened Scales adds its counter (616.1b); damage
+Pariah redirects meeting a shield on its creature (616.2); Rest in Peace beside madness and Notion
+Thief beside dredge, the affected player taking the one that lets them play the card (616.1e, with
+a control); a kicked Burst Lightning's own "instead" before Furnace of Rath (616.1a).
+
+## Sixth slice: merged and melded commanders (2026-11-26)
+
+Three violations, all fixed (`merged-commanders-audit.test.ts`, nine tests, five red before):
+
+| Rule | What was wrong | Fix |
+| --- | --- | --- |
+| 903.3c | A commander cast for its mutate cost onto another creature (Brokkos onto Grizzly Bears) made a merged permanent that wasn't a commander. Coming apart, the commander card was a new object that wasn't one either: it went to the graveyard and stayed, the player's commander gone for good. | `MergedComponent.commander` marks the commander card; the merged permanent `isCommander` while one is a component, back to its own card's as it leaves; the scattered card is a commander again and offered the command zone (903.9a). |
+| 903.9c | A melded or merged commander its owner sent to the command zone instead of a hand or library took every card with it: the other card of a melded Chittering Host went to the command zone. | Only the commander card goes there; the permanent and the rest go where it was headed (`applyCommanderChoice`, `commanderScatter`), a library's in the place that move put it. |
+| 903.10a | Combat damage a merged commander dealt was counted to the merged permanent's object, which wasn't the commander card's, and what the commander had dealt before merging stayed with the card it had been. | The count moves onto the merged permanent as the commander merges, and back onto the card as it comes apart (`moveCommanderDamage`). |
+
 ## Next slices
 
 By how far the citations fall short and how much play runs through them (`rules:uncited --
@@ -196,8 +218,8 @@ By how far the citations fall short and how much play runs through them (`rules:
    scans used here are a few lines each: life arithmetic, events after a loss, each turn's steps.
 2. ~~**702**, keywords~~: the third slice, above. Left in it, if wanted: the keywords of a
    copied or face-down permanent, and keywords on spells (cascade into a split card).
-3. **903**, Commander: 18 of 49, a third of the rest being Brawl and Draft. Merged and melded
-   commanders (903.3c, 903.9c) are the uncited ones with behaviour.
-4. **614-616** by interaction: two replacement effects on one event, with the affected player's
-   choice (616.1a-g). The single-effect cases are cited and tested.
+3. ~~**903**, merged and melded commanders~~: the sixth slice, above. Left in it: a merged
+   permanent with two commanders in it (partners both mutate), whose commander damage is kept as
+   the merged permanent's alone.
+4. ~~**614-616** by interaction~~: the fifth slice, above.
 5. **601-608** has little left: its uncited rules were read in the second slice.

@@ -8235,10 +8235,14 @@ export interface MeldedInfo {
   readonly with: readonly { readonly cardName: string; readonly owner: PlayerId }[];
 }
 
-/** One card or token of a merged permanent (`GameObject.merged`). */
+/** One card or token of a merged permanent (`GameObject.merged`).
+ * `commander` marks a commander card (rule 903.3c: while one is a
+ * component, the merged permanent is its owner's commander, and
+ * `GameObject.isCommander` says so); `{ self: true }`'s is this object's own
+ * card's, which `isCommander` goes back to as the permanent comes apart. */
 export type MergedComponent =
-  | { readonly self: true }
-  | { readonly cardName: string; readonly owner: PlayerId; readonly token: boolean };
+  | { readonly self: true; readonly commander?: true }
+  | { readonly cardName: string; readonly owner: PlayerId; readonly token: boolean; readonly commander?: true };
 
 
 /** A merged permanent's combined definition's key: the components'

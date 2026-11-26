@@ -9125,7 +9125,16 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
-    const destination = toCommandZone ? "command" : intendedZone;
+    // A merged or melded commander put into the command zone this way: that
+    // permanent and each card of it that isn't a commander go where it was
+    // headed, the commander card into the command zone (rule 903.9c). This
+    // object's own card is the commander card unless the commander merged
+    // onto it (`scatterMergedComponents` sends that one).
+    const whole = this.state.objects[commander];
+    const scattering = toCommandZone && whole?.zone === "battlefield" && (whole.merged !== undefined || whole.melded !== undefined);
+    const ownIsCommander =
+      whole?.merged === undefined || whole.merged.components.some((c) => "self" in c && c.commander === true);
+    const destination = !toCommandZone ? intendedZone : scattering && !ownIsCommander ? intendedZone : "command";
     // The move completes the simultaneous event that deferred it (a wrath,
     // a state-based sweep), so what left in that event sees it go, and it
     // them (rule 603.10a).
@@ -9133,12 +9142,20 @@ export class Game {
       // This is the move the choice was about, so `moveObject` mustn't defer
       // it again.
       this.completingCommanderMove = commander;
+      if (scattering) this.commanderScatter = intendedZone;
       try {
         this.moveObject(commander, destination);
       } finally {
         this.completingCommanderMove = null;
+        this.commanderScatter = null;
       }
       if (destination === "library") this.placeInLibrary(commander, deferred.libraryPlacement ?? "bottom");
+      else if (scattering && intendedZone === "library") {
+        // The other cards went to the library without it.
+        for (const other of this.state.objects[commander]?.leftWith ?? []) {
+          this.placeOneInLibrary(other, deferred.libraryPlacement ?? "bottom");
+        }
+      }
       // Shuffled in after all, its owner declining (rule 701.24a): what "this
       // way" reads as shuffled into their library (Collision of Realms' "each
       // player who shuffled a nontoken creature into their library this way").
@@ -76553,16 +76570,43 @@ controlledBy,
    * sent it (730.3d); the owner's arrangement of a graveyard or library is
    * the order they merged in (730.3a lets them choose — not asked).
    */
-  private scatterMergedComponents(merged: NonNullable<GameObject["merged"]>, to: ZoneType): ObjectId[] {
+  private scatterMergedComponents(id: ObjectId, merged: NonNullable<GameObject["merged"]>, to: ZoneType): ObjectId[] {
     const zone: ZoneType = to === "battlefield" || to === "stack" ? "graveyard" : to;
     const made: ObjectId[] = [];
+    const ownIsCommander = merged.components.some((c) => "self" in c && c.commander === true);
     for (const component of merged.components) {
       if ("self" in component || component.token) continue;
-      made.push(this.placeComponentCard(component.cardName, component.owner, zone));
+      // Its owner putting the commander into the command zone in place of a
+      // hand or library (rule 903.9c): only the commander card goes there,
+      // each other card to the zone the permanent was headed for.
+      const commander = component.commander === true;
+      const at = this.commanderScatter === null ? zone : commander ? "command" : this.commanderScatter;
+      const card = this.placeComponentCard(component.cardName, component.owner, at, commander);
+      // The damage the merged permanent dealt as this commander goes with
+      // the card (rule 903.10a; `mergeMutatingSpell`).
+      if (commander && !ownIsCommander) this.moveCommanderDamage(id, card);
+      made.push(card);
     }
     invalidateComputedCache();
     return made;
   }
+
+  /** Commander damage dealt by `from`, counted as `to`'s from now on (rule
+   * 903.10a: the count is the commander's, through a merge and back). */
+  private moveCommanderDamage(from: ObjectId, to: ObjectId): void {
+    for (const playerState of Object.values(this.state.players)) {
+      const taken = playerState.commanderDamageTaken;
+      const amount = taken[from];
+      if (amount === undefined) continue;
+      taken[to] = (taken[to] ?? 0) + amount;
+      delete taken[from];
+    }
+  }
+
+  /** While a merged or melded commander's 903.9b move to the command zone is
+   * carried out (`applyCommanderChoice`): the zone it was headed for, where
+   * its cards that aren't commanders go (rule 903.9c). */
+  private commanderScatter: CommanderReplacementZone | null = null;
 
   /**
    * The other card of a melded permanent that has just left the battlefield
@@ -76576,20 +76620,32 @@ controlledBy,
    */
   private scatterMeldedCards(melded: MeldedInfo, to: ZoneType): ObjectId[] {
     const zone: ZoneType = to === "battlefield" || to === "stack" ? "graveyard" : to;
-    const made = melded.with.map((card) => this.placeComponentCard(card.cardName, card.owner, zone));
+    // The commander card of a melded commander is this object's own
+    // (`meldPair` makes it the main card), so with a 903.9c move to the
+    // command zone the other goes where the permanent was headed.
+    const at = this.commanderScatter ?? zone;
+    const made = melded.with.map((card) => this.placeComponentCard(card.cardName, card.owner, at));
     invalidateComputedCache();
     return made;
   }
 
   /** A card that was part of a permanent made of several (a merged or
-   * melded one), put into `zone` as a new object of its own (rule 400.7). */
-  private placeComponentCard(cardName: string, owner: PlayerId, zone: ZoneType): ObjectId {
-    const id = this.makeCardObject(cardName, owner, { zone });
+   * melded one), put into `zone` as a new object of its own (rule 400.7) —
+   * a commander card still its owner's commander (903.3c), offered the
+   * command zone from a graveyard or exile like any other (903.9a). */
+  private placeComponentCard(cardName: string, owner: PlayerId, zone: ZoneType, commander = false): ObjectId {
+    const id = this.makeCardObject(cardName, owner, { zone, ...(commander ? { isCommander: true } : {}) });
     this.zoneList(zone, owner).push(id);
     this.state.objects[id].zoneChangeCount = 1;
     // Public from the moment it arrives, like any card put into a public
     // zone (rule 400.2).
     if (zone === "graveyard" || zone === "exile") this.openStint(id);
+    if (commander && (zone === "graveyard" || zone === "exile")) {
+      this.state.commanderArrivals = [...this.state.commanderArrivals, { commander: id, stint: 1 }];
+    }
+    if (commander && zone === "command") {
+      this.emit({ type: "commander-put-into-command-zone", object: id, owner, from: "battlefield" });
+    }
     return id;
   }
 
@@ -76613,12 +76669,25 @@ controlledBy,
       owner: spell.owner,
       // A copy of a mutating spell merges as a token (rule 707.10, 730.2d).
       token: spell.isCopy === true || spell.isToken,
+      // A commander merging is still that card (rule 903.3c, 903.9c).
+      ...(spell.isCommander && spell.isCopy !== true && !spell.isToken ? { commander: true as const } : {}),
     };
-    const existing = target.merged?.components ?? [{ self: true as const }];
+    const existing = target.merged?.components ?? [
+      target.isCommander ? { self: true as const, commander: true as const } : { self: true as const },
+    ];
     target.merged = {
       components: onTop ? [component, ...existing] : [...existing, component],
       timesMutated: (target.merged?.timesMutated ?? 0) + 1,
     };
+    // "If a player's commander is a component of a merged permanent, the
+    // resulting merged permanent is that player's commander" (rule 903.3c).
+    // The combat damage it has dealt is that commander's (903.10a), kept by
+    // a live object's id: the merged permanent's now, and the card's again
+    // as it comes apart (`scatterMergedComponents`).
+    if (component.commander === true && !target.isCommander) {
+      target.isCommander = true;
+      this.moveCommanderDamage(spellId, targetId);
+    }
     // A flipped permanent shows its new topmost card's flipped half, if any
     // (rule 730.2h).
     this.refreshFlippedName(target);
@@ -77231,6 +77300,12 @@ controlledBy,
     // Enchanted River's Grasp destroyed beside Skeleton Ship).
     invalidateComputedCache();
     if (object.isToken && to !== "battlefield") (this.state.tokensLeftBattlefield ??= []).push(id);
+    // A merged permanent comes apart as it leaves (rule 730.3), so 903.3c no
+    // longer makes this card a commander: it is one only if it is its own
+    // (the commander card among the rest is put where it goes, below).
+    if (object.merged !== undefined && fromZone === "battlefield") {
+      object.isCommander = object.merged.components.some((c) => "self" in c && c.commander === true);
+    }
     // Rule 903.9a: a commander put into a graveyard or exile — from anywhere —
     // may go to the command zone, which the next state-based check offers.
     // Only this arrival: the count it came with says which one.
@@ -77358,7 +77433,7 @@ controlledBy,
     const merged = object.merged;
     delete object.merged;
     const leftWith: ObjectId[] = [];
-    if (merged !== undefined) leftWith.push(...this.scatterMergedComponents(merged, to));
+    if (merged !== undefined) leftWith.push(...this.scatterMergedComponents(id, merged, to));
     // So does a melded permanent (rule 712.21): one permanent leaves, and
     // both its cards go to the new zone, front faces up — the other as a
     // card of its own.
