@@ -122,3 +122,42 @@ describe("Grinning Totem", () => {
   });
 });
 
+describe("Gruesome Menagerie", () => {
+  it("returns one creature card of each mana value 1, 2 and 3 together", () => {
+    const { game, a } = table();
+    lands(game, "Swamp", 5);
+    const elf = toGraveyard(game, "Llanowar Elves", A);
+    const bears = toGraveyard(game, "Grizzly Bears", A);
+    const otherBears = toGraveyard(game, "Grizzly Bears", A);
+    const ogre = toGraveyard(game, "Gray Ogre", A);
+    // Mana value 4: no slot.
+    const giant = toGraveyard(game, "Hill Giant", A);
+    const seen = pickFromZone(a, elf, bears, ogre);
+    cast(game, toHand(game, "Gruesome Menagerie"));
+    expect(seen.offered).toEqual(expect.arrayContaining([elf, bears, otherBears, ogre]));
+    expect(seen.offered).not.toContain(giant);
+    for (const id of [elf, bears, ogre]) expect(zone(game, id)).toBe("battlefield");
+    expect(zone(game, otherBears)).toBe("graveyard");
+    expect(zone(game, giant)).toBe("graveyard");
+    // One event: all three entered at once (the ruling).
+    const left = game.state.eventLog.filter((e) => e.type === "cards-left-graveyard");
+    expect(left).toHaveLength(1);
+  });
+
+  it("a missing mana value is skipped: the others still must be chosen", () => {
+    const { game, a } = table();
+    lands(game, "Swamp", 5);
+    const bears = toGraveyard(game, "Grizzly Bears", A);
+    const runeclaw = toGraveyard(game, "Runeclaw Bear", A);
+    let asked: { min: number; max: number } | undefined;
+    a.chooseFromZoneFn = (_v, _eligible, min, max) => {
+      asked = { min, max };
+      return [runeclaw];
+    };
+    cast(game, toHand(game, "Gruesome Menagerie"));
+    // Only the mana value 2 slot can be filled, and it must be.
+    expect(asked?.min).toBe(1);
+    expect(zone(game, runeclaw)).toBe("battlefield");
+    expect(zone(game, bears)).toBe("graveyard");
+  });
+});
