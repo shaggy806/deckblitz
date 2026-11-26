@@ -88,3 +88,37 @@ describe("Reversal of Fortune", () => {
   });
 });
 
+describe("Grinning Totem", () => {
+  it("exiles the found card, playable by the activator; unplayed, it goes to its owner's graveyard at the next upkeep", () => {
+    const { game, a } = table();
+    const totem = spawn(game, "Grinning Totem", A);
+    lands(game, "Mountain", 2);
+    lands(game, "Forest", 2);
+    const bears = toLibrary(game, "Grizzly Bears", B);
+    pickFromZone(a, bears);
+    activate(game, totem, 0, { targets: [ref(B)] });
+    expect(zone(game, totem)).toBe("graveyard");
+    expect(zone(game, bears)).toBe("exile");
+    expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === bears)).toBe(true);
+    toStep(game, "upkeep", A);
+    settle(game);
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(graveyard(game, B)).toContain(bears);
+  });
+
+  it("a card played from exile isn't put into the graveyard", () => {
+    const { game, a } = table();
+    const totem = spawn(game, "Grinning Totem", A);
+    lands(game, "Mountain", 2);
+    lands(game, "Forest", 2);
+    const bears = toLibrary(game, "Grizzly Bears", B);
+    pickFromZone(a, bears);
+    activate(game, totem, 0, { targets: [ref(B)] });
+    cast(game, bears, { via: "impulse" });
+    expect(zone(game, bears)).toBe("battlefield");
+    toStep(game, "upkeep", A);
+    settle(game);
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+});
+
