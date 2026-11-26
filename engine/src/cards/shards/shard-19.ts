@@ -445,6 +445,7 @@ import _poolHalanaKessigRanger from "../pool/halana-kessig-ranger.js";
 import _poolHallowedFountain from "../pool/hallowed-fountain.js";
 import _poolHandOfSilumgar from "../pool/hand-of-silumgar.js";
 import _poolHardbristleBandit from "../pool/hardbristle-bandit.js";
+import _poolHarmoniousEmergence from "../pool/harmonious-emergence.js";
 import _poolHarshMercy from "../pool/harsh-mercy.js";
 import _poolHauntedHellride from "../pool/haunted-hellride.js";
 import _poolHavengulSkaab from "../pool/havengul-skaab.js";
@@ -500,6 +501,7 @@ import _poolIntrepidAce from "../pool/intrepid-ace.js";
 import _poolIntrepidAdversary from "../pool/intrepid-adversary.js";
 import _poolInvertTheSkies from "../pool/invert-the-skies.js";
 import _poolInvisibleForceField from "../pool/invisible-force-field.js";
+import _poolInvokeTheAncients from "../pool/invoke-the-ancients.js";
 import _poolInvoluntaryCooldown from "../pool/involuntary-cooldown.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
 import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
@@ -1561,6 +1563,7 @@ const shard: CardShard = {
     _poolHallowedFountain,
     _poolHandOfSilumgar,
     _poolHardbristleBandit,
+    _poolHarmoniousEmergence,
     _poolHarshMercy,
     _poolHauntedHellride,
     _poolHavengulSkaab,
@@ -1616,6 +1619,7 @@ const shard: CardShard = {
     _poolIntrepidAdversary,
     _poolInvertTheSkies,
     _poolInvisibleForceField,
+    _poolInvokeTheAncients,
     _poolInvoluntaryCooldown,
     _poolIraxxaEmpressOfMars,
     _poolIrohDragonOfTheWest,

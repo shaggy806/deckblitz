@@ -1035,6 +1035,7 @@ import _tokensReplicatedRingToken from "../tokens/replicated-ring-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
 import _tokensShrineToken from "../tokens/shrine-token.js";
 import _tokensSoldierTokenRed22 from "../tokens/soldier-token-red-2-2.js";
+import _tokensSpiritTokenGreen45 from "../tokens/spirit-token-green-4-5.js";
 import _tokensSpiritWarriorToken from "../tokens/spirit-warrior-token.js";
 import _tokensVampireKnightToken from "../tokens/vampire-knight-token.js";
 import _tokensVarmintToken from "../tokens/varmint-token.js";
@@ -2079,6 +2080,7 @@ const shard: CardShard = {
     _tokensScionOfTheDeepToken,
     _tokensShrineToken,
     _tokensSoldierTokenRed22,
+    _tokensSpiritTokenGreen45,
     _tokensSpiritWarriorToken,
     _tokensVampireKnightToken,
     _tokensVarmintToken,

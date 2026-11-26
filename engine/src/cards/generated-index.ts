@@ -685,6 +685,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Spirit Token (Experience Counters)",
   "Spirit Token (Ghostly Dancers)",
   "Spirit Token (Great Arashin City)",
+  "Spirit Token (Green 4/5)",
   "Spirit Token (Kura, the Boundless Sky)",
   "Spirit Token (Phantom Interference)",
   "Spirit Token (Red-White 2/2)",

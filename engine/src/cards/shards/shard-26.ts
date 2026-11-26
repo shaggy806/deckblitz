@@ -132,6 +132,7 @@ import _poolBrassTalonChimera from "../pool/brass-talon-chimera.js";
 import _poolBreakneckBerserker from "../pool/breakneck-berserker.js";
 import _poolBreathkeeperSeraph from "../pool/breathkeeper-seraph.js";
 import _poolBriarbridgeTracker from "../pool/briarbridge-tracker.js";
+import _poolBribeTaker from "../pool/bribe-taker.js";
 import _poolBristlebudFarmer from "../pool/bristlebud-farmer.js";
 import _poolBrokenAmbitions from "../pool/broken-ambitions.js";
 import _poolBrotherhoodHeadquarters from "../pool/brotherhood-headquarters.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolBreakneckBerserker,
     _poolBreathkeeperSeraph,
     _poolBriarbridgeTracker,
+    _poolBribeTaker,
     _poolBristlebudFarmer,
     _poolBrokenAmbitions,
     _poolBrotherhoodHeadquarters,

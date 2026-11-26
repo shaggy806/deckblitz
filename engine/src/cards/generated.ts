@@ -3534,6 +3534,7 @@ import _poolBriarbridgeTracker from "./pool/briarbridge-tracker.js";
 import _poolBriarhorn from "./pool/briarhorn.js";
 import _poolBriarknitKami from "./pool/briarknit-kami.js";
 import _poolBriarpackAlpha from "./pool/briarpack-alpha.js";
+import _poolBribeTaker from "./pool/bribe-taker.js";
 import _poolBribersPurse from "./pool/bribers-purse.js";
 import _poolBribery from "./pool/bribery.js";
 import _poolBridesGown from "./pool/brides-gown.js";
@@ -5694,6 +5695,7 @@ import _poolCracklingClub from "./pool/crackling-club.js";
 import _poolCracklingCyclops from "./pool/crackling-cyclops.js";
 import _poolCracklingDoom from "./pool/crackling-doom.js";
 import _poolCracklingDrake from "./pool/crackling-drake.js";
+import _poolCracklingEmergence from "./pool/crackling-emergence.js";
 import _poolCracklingFalls from "./pool/crackling-falls.js";
 import _poolCracklingPerimeter from "./pool/crackling-perimeter.js";
 import _poolCracklingSpellslinger from "./pool/crackling-spellslinger.js";
@@ -12664,6 +12666,7 @@ import _poolHarmonicConvergence from "./pool/harmonic-convergence.js";
 import _poolHarmonicProdigy from "./pool/harmonic-prodigy.js";
 import _poolHarmonicSliver from "./pool/harmonic-sliver.js";
 import _poolHarmoniousArchon from "./pool/harmonious-archon.js";
+import _poolHarmoniousEmergence from "./pool/harmonious-emergence.js";
 import _poolHarmoniousGrovestrider from "./pool/harmonious-grovestrider.js";
 import _poolHarmonize from "./pool/harmonize.js";
 import _poolHarmonizedCrescendo from "./pool/harmonized-crescendo.js";
@@ -14382,6 +14385,7 @@ import _poolInvocationOfTheFounders from "./pool/invocation-of-the-founders.js";
 import _poolInvokeCalamity from "./pool/invoke-calamity.js";
 import _poolInvokeDespair from "./pool/invoke-despair.js";
 import _poolInvokeJustice from "./pool/invoke-justice.js";
+import _poolInvokeTheAncients from "./pool/invoke-the-ancients.js";
 import _poolInvokeTheDivine from "./pool/invoke-the-divine.js";
 import _poolInvokeTheFiremind from "./pool/invoke-the-firemind.js";
 import _poolInvokeTheWinds from "./pool/invoke-the-winds.js";
@@ -15453,6 +15457,7 @@ import _poolKitesailScout from "./pool/kitesail-scout.js";
 import _poolKitesailSkirmisher from "./pool/kitesail-skirmisher.js";
 import _poolKitesail from "./pool/kitesail.js";
 import _poolKithkeeper from "./pool/kithkeeper.js";
+import _poolKithkinArmor from "./pool/kithkin-armor.js";
 import _poolKithkinBillyrider from "./pool/kithkin-billyrider.js";
 import _poolKithkinDaggerdare from "./pool/kithkin-daggerdare.js";
 import _poolKithkinGreatheart from "./pool/kithkin-greatheart.js";
@@ -33961,6 +33966,7 @@ import _tokensSpiritTokenDusyutEarthcarver from "./tokens/spirit-token-dusyut-ea
 import _tokensSpiritTokenExperienceCounters from "./tokens/spirit-token-experience-counters.js";
 import _tokensSpiritTokenGhostlyDancers from "./tokens/spirit-token-ghostly-dancers.js";
 import _tokensSpiritTokenGreatArashinCity from "./tokens/spirit-token-great-arashin-city.js";
+import _tokensSpiritTokenGreen45 from "./tokens/spirit-token-green-4-5.js";
 import _tokensSpiritTokenHeiBai from "./tokens/spirit-token-hei-bai.js";
 import _tokensSpiritTokenKuraTheBoundlessSky from "./tokens/spirit-token-kura-the-boundless-sky.js";
 import _tokensSpiritTokenPhantomInterference from "./tokens/spirit-token-phantom-interference.js";
@@ -37652,6 +37658,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBriarhorn,
   _poolBriarknitKami,
   _poolBriarpackAlpha,
+  _poolBribeTaker,
   _poolBribersPurse,
   _poolBribery,
   _poolBridesGown,
@@ -39812,6 +39819,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCracklingCyclops,
   _poolCracklingDoom,
   _poolCracklingDrake,
+  _poolCracklingEmergence,
   _poolCracklingFalls,
   _poolCracklingPerimeter,
   _poolCracklingSpellslinger,
@@ -46782,6 +46790,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHarmonicProdigy,
   _poolHarmonicSliver,
   _poolHarmoniousArchon,
+  _poolHarmoniousEmergence,
   _poolHarmoniousGrovestrider,
   _poolHarmonize,
   _poolHarmonizedCrescendo,
@@ -48500,6 +48509,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInvokeCalamity,
   _poolInvokeDespair,
   _poolInvokeJustice,
+  _poolInvokeTheAncients,
   _poolInvokeTheDivine,
   _poolInvokeTheFiremind,
   _poolInvokeTheWinds,
@@ -49571,6 +49581,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKitesailSkirmisher,
   _poolKitesail,
   _poolKithkeeper,
+  _poolKithkinArmor,
   _poolKithkinBillyrider,
   _poolKithkinDaggerdare,
   _poolKithkinGreatheart,
@@ -68085,6 +68096,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSpiritTokenExperienceCounters,
   _tokensSpiritTokenGhostlyDancers,
   _tokensSpiritTokenGreatArashinCity,
+  _tokensSpiritTokenGreen45,
   _tokensSpiritTokenHeiBai,
   _tokensSpiritTokenKuraTheBoundlessSky,
   _tokensSpiritTokenPhantomInterference,
@@ -71783,6 +71795,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/briarhorn": _poolBriarhorn,
   "pool/briarknit-kami": _poolBriarknitKami,
   "pool/briarpack-alpha": _poolBriarpackAlpha,
+  "pool/bribe-taker": _poolBribeTaker,
   "pool/bribers-purse": _poolBribersPurse,
   "pool/bribery": _poolBribery,
   "pool/brides-gown": _poolBridesGown,
@@ -73943,6 +73956,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crackling-cyclops": _poolCracklingCyclops,
   "pool/crackling-doom": _poolCracklingDoom,
   "pool/crackling-drake": _poolCracklingDrake,
+  "pool/crackling-emergence": _poolCracklingEmergence,
   "pool/crackling-falls": _poolCracklingFalls,
   "pool/crackling-perimeter": _poolCracklingPerimeter,
   "pool/crackling-spellslinger": _poolCracklingSpellslinger,
@@ -80913,6 +80927,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/harmonic-prodigy": _poolHarmonicProdigy,
   "pool/harmonic-sliver": _poolHarmonicSliver,
   "pool/harmonious-archon": _poolHarmoniousArchon,
+  "pool/harmonious-emergence": _poolHarmoniousEmergence,
   "pool/harmonious-grovestrider": _poolHarmoniousGrovestrider,
   "pool/harmonize": _poolHarmonize,
   "pool/harmonized-crescendo": _poolHarmonizedCrescendo,
@@ -82631,6 +82646,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/invoke-calamity": _poolInvokeCalamity,
   "pool/invoke-despair": _poolInvokeDespair,
   "pool/invoke-justice": _poolInvokeJustice,
+  "pool/invoke-the-ancients": _poolInvokeTheAncients,
   "pool/invoke-the-divine": _poolInvokeTheDivine,
   "pool/invoke-the-firemind": _poolInvokeTheFiremind,
   "pool/invoke-the-winds": _poolInvokeTheWinds,
@@ -83702,6 +83718,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kitesail-skirmisher": _poolKitesailSkirmisher,
   "pool/kitesail": _poolKitesail,
   "pool/kithkeeper": _poolKithkeeper,
+  "pool/kithkin-armor": _poolKithkinArmor,
   "pool/kithkin-billyrider": _poolKithkinBillyrider,
   "pool/kithkin-daggerdare": _poolKithkinDaggerdare,
   "pool/kithkin-greatheart": _poolKithkinGreatheart,
@@ -102210,6 +102227,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/spirit-token-experience-counters": _tokensSpiritTokenExperienceCounters,
   "tokens/spirit-token-ghostly-dancers": _tokensSpiritTokenGhostlyDancers,
   "tokens/spirit-token-great-arashin-city": _tokensSpiritTokenGreatArashinCity,
+  "tokens/spirit-token-green-4-5": _tokensSpiritTokenGreen45,
   "tokens/spirit-token-hei-bai": _tokensSpiritTokenHeiBai,
   "tokens/spirit-token-kura-the-boundless-sky": _tokensSpiritTokenKuraTheBoundlessSky,
   "tokens/spirit-token-phantom-interference": _tokensSpiritTokenPhantomInterference,

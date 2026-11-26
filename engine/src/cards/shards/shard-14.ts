@@ -512,6 +512,7 @@ import _poolKefnetsLastWord from "../pool/kefnets-last-word.js";
 import _poolKiddieCoaster from "../pool/kiddie-coaster.js";
 import _poolKindlyStranger from "../pool/kindly-stranger.js";
 import _poolKioraBestsTheSeaGod from "../pool/kiora-bests-the-sea-god.js";
+import _poolKithkinArmor from "../pool/kithkin-armor.js";
 import _poolKitsuneDawnblade from "../pool/kitsune-dawnblade.js";
 import _poolKjeldoranJavelineer from "../pool/kjeldoran-javelineer.js";
 import _poolKolothTribbleHunter from "../pool/koloth-tribble-hunter.js";
@@ -1572,6 +1573,7 @@ const shard: CardShard = {
     _poolKiddieCoaster,
     _poolKindlyStranger,
     _poolKioraBestsTheSeaGod,
+    _poolKithkinArmor,
     _poolKitsuneDawnblade,
     _poolKjeldoranJavelineer,
     _poolKolothTribbleHunter,

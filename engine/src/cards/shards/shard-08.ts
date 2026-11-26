@@ -193,6 +193,7 @@ import _poolCorrosiveGale from "../pool/corrosive-gale.js";
 import _poolCourageousOutrider from "../pool/courageous-outrider.js";
 import _poolCourtOfBounty from "../pool/court-of-bounty.js";
 import _poolCourtStreetDenizen from "../pool/court-street-denizen.js";
+import _poolCracklingEmergence from "../pool/crackling-emergence.js";
 import _poolCragplateBaloth from "../pool/cragplate-baloth.js";
 import _poolCreepingTrailblazer from "../pool/creeping-trailblazer.js";
 import _poolCrookclawElder from "../pool/crookclaw-elder.js";
@@ -1297,6 +1298,7 @@ const shard: CardShard = {
     _poolCourageousOutrider,
     _poolCourtOfBounty,
     _poolCourtStreetDenizen,
+    _poolCracklingEmergence,
     _poolCragplateBaloth,
     _poolCreepingTrailblazer,
     _poolCrookclawElder,
