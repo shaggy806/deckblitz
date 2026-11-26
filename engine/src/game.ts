@@ -48656,6 +48656,13 @@ controlledBy,
       },
       canExileAndCollectEvidence: (card, amount) => this.canExileAndCollectEvidence(controller, card, amount),
       collectEvidence: (amount, then, required, exiling) => {
+        // "That player" and "that much" of the resolution, for a "when you
+        // do" (rule 603.12) — as a choose-from-zone `then` keeps them.
+        const evidenceThenRefs = {
+          ...(triggerValue !== 0 ? { triggerValue } : {}),
+          ...(refs.source !== undefined ? { sourceStint: refs.source } : {}),
+          ...(refs.player !== undefined ? { player: refs.player } : {}),
+        };
         if (exiling !== undefined) {
           // "Exile it and collect evidence N": both or neither (the effect's
           // `exiling`), the card exiled first so it's never evidence.
@@ -48670,7 +48677,7 @@ controlledBy,
           this.beginCollectEvidence(controller, source, amount, {
             required: true,
             x,
-            ...(then !== undefined ? { then } : {}),
+            ...(then !== undefined ? { then, thenRefs: evidenceThenRefs } : {}),
             thenLead: exiling,
           });
           return;
@@ -48678,7 +48685,7 @@ controlledBy,
         this.beginCollectEvidence(controller, source, amount, {
           ...(required === true ? { required: true } : { optional: true }),
           x,
-          ...(then !== undefined ? { then } : {}),
+          ...(then !== undefined ? { then, thenRefs: evidenceThenRefs } : {}),
         });
       },
       devouredBySource: (filter) => {
@@ -60102,6 +60109,14 @@ controlledBy,
       readonly leave?: number;
       /** The card exiled beside the evidence: `then`'s target 0. */
       readonly thenLead?: ObjectId;
+      /** What the resolution that collects knew, for `then` (a "when you do"
+       * reflexive ability's "that player", "that much", its source's stint —
+       * rule 603.12: Memory Vampire's "defending player's graveyard"). */
+      readonly thenRefs?: {
+        readonly triggerValue?: number;
+        readonly sourceStint?: number;
+        readonly player?: PlayerId;
+      };
     } = {},
   ): void {
     const among = opts.among;
@@ -60150,6 +60165,13 @@ controlledBy,
       ...(among === undefined ? { collectEvidence: amount } : {}),
       ...(opts.required === true ? { collectEvidenceRequired: true as const } : {}),
       ...(opts.then !== undefined ? { then: opts.then, thenSource: source, thenX: opts.x ?? 0 } : {}),
+      ...(opts.then !== undefined && opts.thenRefs?.triggerValue !== undefined && opts.thenRefs.triggerValue !== 0
+        ? { thenTriggerValue: opts.thenRefs.triggerValue }
+        : {}),
+      ...(opts.then !== undefined && opts.thenRefs?.sourceStint !== undefined
+        ? { thenSourceStint: opts.thenRefs.sourceStint }
+        : {}),
+      ...(opts.then !== undefined && opts.thenRefs?.player !== undefined ? { thenPlayer: opts.thenRefs.player } : {}),
       ...(opts.thenLead !== undefined ? { thenLead: opts.thenLead } : {}),
       ...(opts.priorityTo !== undefined ? { priorityTo: opts.priorityTo } : {}),
       ...(opts.thenManaAbility !== undefined ? { thenManaAbility: opts.thenManaAbility } : {}),

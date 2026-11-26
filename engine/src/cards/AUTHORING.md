@@ -2754,7 +2754,9 @@ radiation", 728.1a, isn't told apart yet),
 `collect-evidence { amount, then? }` ("you may collect evidence N", rule 701.59a — Surveillance
 Monitor: exile any number of graveyard cards with total mana value N or more, a choice the
 player may decline, offered only when the graveyard holds that much; `then` is "if you do" /
-"when you do", the exiled cards its targets; every collecting fires `evidence-collected`
+"when you do", the exiled cards its targets, with the resolution's "that player", "that much"
+and source stint kept (a "when you do" reflexive trigger's `whose: "trigger-player"` slot is Memory
+Vampire's "defending player's graveyard" — `reflexive-trigger-player.test.ts`); every collecting fires `evidence-collected`
 triggers — "whenever you collect evidence". `amount` is any amount, read as it resolves: "you may
 collect evidence **X**. When you do, … X damage" (Incinerator of the Guilty) is a `may` around a
 `choose-value` of `"number"` (`min: 0`, `max` the graveyard's total mana value, an `aggregate`
