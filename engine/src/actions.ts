@@ -740,6 +740,10 @@ export type Action =
        * (`AbilityCost.options` — the offer's `costOption`, echoed back).
        * Required for such an ability, meaningless for any other. */
       readonly costOption?: number;
+      /** The graveyard card "exile … and pay its mana cost" names
+       * (`exileFromGraveyard.payItsManaCost` — Back from the Brink), named
+       * as it's activated: the offer's `costCard.card`, echoed back. */
+      readonly costCard?: ObjectId;
       /** What the cost's "tap N untapped … you control" taps
        * (`AbilityCost.tapOthers` — Gravespawn Sovereign's five Zombies),
        * picked from the offer's `tapCost`. Omitted, the engine picks for a
@@ -1838,6 +1842,11 @@ export type LegalAction =
        * `costOptionText` is the branch's label, for the button. */
       readonly costOption?: number;
       readonly costOptionText?: string;
+      /** The graveyard card this variant exiles and pays the mana cost of
+       * (`exileFromGraveyard.payItsManaCost` — Back from the Brink): one
+       * offer per card whose cost can be paid, `manaCost` that cost as paid.
+       * Echoed back as the action's `costCard`. */
+      readonly costCard?: { readonly card: ObjectId; readonly cardName: string; readonly manaCost: string };
       /** Present when the cost taps other permanents ("Tap five untapped
        * Zombies you control") — see {@link TapCostOffer}. */
       readonly tapCost?: TapCostOffer;

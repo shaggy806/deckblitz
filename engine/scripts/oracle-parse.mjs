@@ -1980,10 +1980,16 @@ export function parseCost(text) {
     // "Exile the top card of your library" (Royal Herbalist), "the top two
     // cards" (Whirling Catapult).
     // "Exile a creature card from your graveyard": one, chosen as it's paid.
-    else if ((m = /^Exile an? (?:(.+?) )?card from your graveyard$/.exec(part))) {
+    // "…and pay its mana cost" (Back from the Brink): the card named as it's
+    // activated, its mana cost joining the cost's (`payItsManaCost`).
+    else if ((m = /^Exile an? (?:(.+?) )?card from your graveyard( and pay its mana cost)?$/.exec(part))) {
       const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
       if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
-      cost.exileFromGraveyard = { count: 1, ...(filter !== undefined ? { filter } : {}) };
+      cost.exileFromGraveyard = {
+        count: 1,
+        ...(filter !== undefined ? { filter } : {}),
+        ...(m[2] !== undefined ? { payItsManaCost: true } : {}),
+      };
     } else if ((m = /^Exile the top (?:(.+?) )?card of your graveyard$/.exec(part))) {
       // Graveyard order (rule 404.2): no choice (Alms, Necratog).
       const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
@@ -5993,7 +5999,8 @@ export function parseSentence(sentence, ctx) {
   // with this (rule 607.2a), or "the exiled card" — of the cost when the cost
   // exiled one, otherwise of the linked ability. Exceptions only as far as
   // they're read here.
-  if ((m = re("create a token that's a copy of (enchanted creature|a card exiled with ~|the exiled card)(?:, except (.+))?").exec(s))) {
+  // "…a copy of that card" after a cost that exiled one (Back from the Brink).
+  if ((m = re("create a token that's a copy of (enchanted creature|a card exiled with ~|the exiled card|that card)(?:, except (.+))?").exec(s)) && (m[1] !== "that card" || ctx.costExiled === true)) {
     const except = m[2] === undefined ? {} : tokenCopyExceptOf(m[2]);
     if (except === null) return null;
     return {

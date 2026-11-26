@@ -3714,6 +3714,9 @@ export class Game {
           action.costOption === undefined
             ? undefined
             : { source, index: action.abilityIndex, option: action.costOption };
+        // The graveyard card an "exile … and pay its mana cost" names.
+        this.activationCostCard =
+          action.costCard === undefined ? undefined : { source, index: action.abilityIndex, card: action.costCard };
         if ((this.state.objects[source]?.stackCount ?? 1) > 1) {
           const ability = this.effectiveActivated(source)[action.abilityIndex];
           if (ability?.cost.tap === true && this.whyCannotActivateAbility(action.player, source, action.abilityIndex, action.tap, action.xValue ?? 0, normalizeTargets(action.targets)) === null) {
@@ -3721,6 +3724,7 @@ export class Game {
             // The opponent's choice goes with the token that activates.
             if (this.otherChoice?.for === action.source) this.otherChoice = { ...this.otherChoice, for: source };
             if (this.activationCostOption !== undefined) this.activationCostOption = { ...this.activationCostOption, source };
+            if (this.activationCostCard !== undefined) this.activationCostCard = { ...this.activationCostCard, source };
           }
         }
         this.phyrexianLifeChoice = action.phyrexianLife;
@@ -3757,6 +3761,7 @@ export class Game {
           this.manaForChoice = undefined;
           this.activationModes = undefined;
           this.activationCostOption = undefined;
+          this.activationCostCard = undefined;
         }
         break;
       }
@@ -4203,6 +4208,16 @@ export class Game {
           return this.otherChoice?.for !== action.source
             ? this.whyCannotRequestOtherChoice(action)
             : this.canDispatch(this.expandOtherChoice(action));
+        }
+        // Judged with the branch of its choice of costs, and the graveyard
+        // card it names, that it would be paid with.
+        if (action.costOption !== undefined && this.activationCostOption?.source !== action.source) {
+          const option = { source: action.source, index: action.abilityIndex, option: action.costOption };
+          return this.withActivationCostOption(option, () => this.canDispatch(action));
+        }
+        if (action.costCard !== undefined && this.activationCostCard?.source !== action.source) {
+          const card = { source: action.source, index: action.abilityIndex, card: action.costCard };
+          return this.withActivationCostCard(card, () => this.canDispatch(action));
         }
         const modes = action.modes === undefined ? undefined : [...action.modes];
         const why = this.withActivationModes(modes, () =>
@@ -5187,6 +5202,28 @@ export class Game {
             }
           }
         });
+        return;
+      }
+      // "Exile a creature card from your graveyard and pay its mana cost"
+      // (Back from the Brink): which card sets the total cost (rule 601.2f),
+      // so a variant per card with a mana cost (118.6), each judged at its.
+      const costExile = ability.cost.exileFromGraveyard;
+      if (costExile?.payItsManaCost === true) {
+        for (const card of this.graveyardCostCandidates(player, costExile.filter, source)) {
+          const manaCost = this.costCardManaCost(card);
+          if (manaCost === null) continue;
+          const from = out.length;
+          this.withActivationCostCard({ source, index, card }, () =>
+            pushActivateAbility(source, cardName, this.withCostCard(ability, card), index, manaColors, makes, manaSplit, manaFor),
+          );
+          const exiledName = printedCardName(this.state.objects[card]);
+          for (let at = from; at < out.length; at += 1) {
+            const offer = out[at];
+            if (offer.kind === "activate-ability") {
+              out[at] = { ...offer, costCard: { card, cardName: exiledName, manaCost }, text: `${offer.text} (${exiledName}: ${manaCost})` };
+            }
+          }
+        }
         return;
       }
       if (this.whyCannotActivateAbility(player, source, index) !== null) return;
@@ -28831,8 +28868,58 @@ export class Game {
     // The branch of a choice of costs being offered or activated
     // (`AbilityCost.options`): that ability reads as the one cost it pays.
     const chosen = this.activationCostOption;
-    if (chosen === undefined || chosen.source !== objectId || all[chosen.index] === undefined) return all;
-    return all.map((ability, i) => (i === chosen.index ? withActivationCostOption(ability, chosen.option) : ability));
+    const named = this.activationCostCard;
+    const withOption =
+      chosen === undefined || chosen.source !== objectId || all[chosen.index] === undefined
+        ? all
+        : all.map((ability, i) => (i === chosen.index ? withActivationCostOption(ability, chosen.option) : ability));
+    if (named === undefined || named.source !== objectId || withOption[named.index] === undefined) return withOption;
+    return withOption.map((ability, i) => (i === named.index ? this.withCostCard(ability, named.card) : ability));
+  }
+
+  /** `ability` with the graveyard card its "exile … and pay its mana cost"
+   * names (`exileFromGraveyard.payItsManaCost`): that card's mana cost, an
+   * {X} in it 0 (rule 107.3h), joins the cost's mana, and it's the only card
+   * that pays. Unchanged when it has no such cost, or the card has no mana
+   * cost — an unpayable cost (118.6), which `whyCannotActivateAbility` then
+   * refuses as unnamed. */
+  private withCostCard(ability: ActivatedAbility, card: ObjectId): ActivatedAbility {
+    const exile = ability.cost.exileFromGraveyard;
+    if (exile?.payItsManaCost !== true) return ability;
+    const its = this.costCardManaCost(card);
+    if (its === null) return ability;
+    return {
+      ...ability,
+      cost: {
+        ...ability.cost,
+        mana: `${ability.cost.mana ?? ""}${its}`,
+        exileFromGraveyard: { ...exile, payItsManaCost: undefined, chosen: card },
+      },
+    };
+  }
+
+  /** The mana cost a card "exile … and pay its mana cost" names is paid at:
+   * its printed one, {X} as 0 (rule 107.3h); `null` for none (118.6). */
+  private costCardManaCost(card: ObjectId): string | null {
+    const object = this.state.objects[card];
+    if (object === undefined) return null;
+    const cost = printedManaCost(this.registry, object);
+    return cost === null ? null : cost.split("{X}").join("{0}");
+  }
+
+  /** The graveyard card an "exile … and pay its mana cost" is being offered
+   * or activated with — the action's `costCard` — read by `effectiveActivated`. */
+  private activationCostCard: { readonly source: ObjectId; readonly index: number; readonly card: ObjectId } | undefined =
+    undefined;
+
+  private withActivationCostCard<T>(choice: Game["activationCostCard"], run: () => T): T {
+    const before = this.activationCostCard;
+    this.activationCostCard = choice;
+    try {
+      return run();
+    } finally {
+      this.activationCostCard = before;
+    }
   }
 
   /** Which branch of an ability's choice of costs (`AbilityCost.options`)
@@ -29658,7 +29745,15 @@ export class Game {
       ) {
         return `${def.name}'s ability can't ask for two cost choices at once yet`;
       }
-      const { count, filter: written, singleGraveyard } = ability.cost.exileFromGraveyard;
+      const { count, filter: written, singleGraveyard, payItsManaCost, chosen } = ability.cost.exileFromGraveyard;
+      // "…and pay its mana cost": the card is named as it's activated (rule
+      // 601.2f via 602.2b), one with a mana cost (118.6).
+      if (payItsManaCost === true) {
+        return `${def.name}'s ability needs the card it exiles named, one with a mana cost: activate it naming a costCard`;
+      }
+      if (chosen !== undefined && !this.graveyardCostCandidates(player, written, sourceId).includes(chosen)) {
+        return `that card can't pay ${def.name}'s cost`;
+      }
       const n =
         count === "x"
           ? (x ?? ability.minX ?? 0)
@@ -31380,6 +31475,7 @@ export class Game {
     fromTop?: true;
     singleGraveyard?: true;
     exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
+    chosen?: ObjectId;
   } {
     const at = source === undefined ? undefined : this.state.objects[source];
     return {
@@ -31389,6 +31485,7 @@ export class Game {
       ...(cost.fromTop === true ? { fromTop: true as const } : {}),
       ...(cost.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
       ...(cost.linked === true && at !== undefined ? { exileLink: { source: at.id, zoneChangeCount: at.zoneChangeCount ?? 0 } } : {}),
+      ...(cost.chosen !== undefined ? { chosen: cost.chosen } : {}),
     };
   }
 
@@ -31418,6 +31515,8 @@ export class Game {
       readonly optional?: true;
       readonly exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
       readonly typesAmong?: number;
+      /** The one card named as it was activated ("…and pay its mana cost"). */
+      readonly chosen?: ObjectId;
     },
     priorityTo: PlayerId = player,
     /** The spell or ability on the stack this pays for, which remembers the
@@ -31483,6 +31582,8 @@ export class Game {
       return;
     }
     let eligible = this.graveyardCostCandidates(player, cost.filter, source);
+    // "…and pay its mana cost": the card named as it was activated, no other.
+    if (cost.chosen !== undefined) eligible = eligible.filter((id) => id === cost.chosen);
     // "The top creature card of your graveyard" (rule 404.2): which is no
     // choice. The list's end is the top of the pile.
     if (cost.fromTop === true) eligible = eligible.slice(-cost.count);

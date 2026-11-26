@@ -13954,6 +13954,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Back from the Brink: copy Hill Giant for its {3}{R}',
+    board({
+      you: { bf: ['Mountain*3', 'Forest', 'Back from the Brink'], gy: ['Grizzly Bears', 'Hill Giant', 'Forest'] },
+      opp: { bf: ['Forest'] },
+    }),
+  ),
+  preset(
+    'Back from the Brink: four players, only what you can pay for',
+    board({
+      you: { bf: ['Forest*2', 'Back from the Brink'], gy: ['Grizzly Bears', 'Hill Giant'] },
+      opp: [{ bf: ['Forest'] }, { bf: ['Forest'] }, { bf: ['Forest'] }],
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

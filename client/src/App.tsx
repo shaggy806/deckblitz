@@ -745,6 +745,9 @@ interface Targeting {
   /** The branch of a choice of additional costs this variant pays (Bitter
    * Triumph's "discard a card or pay 3 life"), echoed back. */
   readonly costOption?: number
+  /** The graveyard card an ability's "exile … and pay its mana cost" names
+   * (Back from the Brink), echoed back. */
+  readonly costCard?: ObjectId
   /** The cards spliced onto this cast (rule 702.47) — echoed back like `kicked`. */
   readonly splice?: readonly ObjectId[]
   /** The graveyard permission this cast spends (Muldrotha's type, which
@@ -3131,6 +3134,7 @@ function Table({
         | 'altCost'
         | 'altCostIndex'
         | 'costOption'
+        | 'costCard'
         | 'splice'
         | 'graveyardGrant'
         | 'tapCost'
@@ -3202,6 +3206,7 @@ function Table({
                 ...(t.modes !== undefined ? { modes: [...t.modes] } : {}),
                 ...(t.otherChooser !== undefined ? { otherChooser: t.otherChooser } : {}),
                 ...(t.costOption !== undefined ? { costOption: t.costOption } : {}),
+                ...(t.costCard !== undefined ? { costCard: t.costCard } : {}),
                 ...(t.sacrifice !== undefined ? { sacrifice: t.sacrifice } : {}),
                 ...(t.xValue !== undefined ? { xValue: t.xValue } : {}),
                 ...(t.manaColors !== undefined ? { manaColors: t.manaColors } : {}),
@@ -3548,6 +3553,7 @@ function Table({
         ...(action.modes !== undefined ? { modes: action.modes } : {}),
         ...(action.otherChooser !== undefined ? { otherChooser: action.otherChooser } : {}),
         ...(action.costOption !== undefined ? { costOption: action.costOption } : {}),
+        ...(action.costCard !== undefined ? { costCard: action.costCard.card } : {}),
         ...(action.tapCost !== undefined ? { tapCost: action.tapCost } : {}),
         ...(action.waterbend !== undefined && action.waterbend.choices.length > 0
           ? { waterbendOffer: action.waterbend }
@@ -3621,6 +3627,8 @@ function Table({
         ...(ab.otherChooser !== undefined ? { otherChooser: ab.otherChooser } : {}),
         // The branch of a choice of costs this row pays (Bullseye's).
         ...(ab.costOption !== undefined ? { costOption: ab.costOption } : {}),
+        // The graveyard card this row exiles and pays the cost of.
+        ...(ab.costCard !== undefined ? { costCard: ab.costCard.card } : {}),
         ...(ab.manaFor !== undefined ? { manaFor: ab.manaFor } : {}),
         ...(ab.tapCost !== undefined ? { tapCost: ab.tapCost } : {}),
         ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
@@ -8795,7 +8803,7 @@ function Table({
             // So is a modal ability, once per mode.
             // And one naming each opponent who may choose its targets.
             // A split's stand-in picks are all of one colour, as that colour's own offer is.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.manaFor ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}:${ab.costOption ?? ''}`,
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.manaFor ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}:${ab.costOption ?? ''}:${ab.costCard?.card ?? ''}`,
             label:
               (ab.text || `Ability ${ab.abilityIndex + 1}`) +
               (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : '') +

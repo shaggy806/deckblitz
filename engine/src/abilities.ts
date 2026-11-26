@@ -579,6 +579,18 @@ export interface AbilityCost {
      * with it" — Ludevic, Necrogenius's "Exile X creature cards from your
      * graveyard", copied by Olag, Ludevic's Hubris (`exiled-with-source`). */
     readonly linked?: true;
+    /** "Exile a creature card from your graveyard **and pay its mana cost**"
+     * (Back from the Brink): `count` 1, and the card's mana cost (an {X} in
+     * it 0, rule 107.3h) joins the cost's mana. Which card decides the total
+     * cost (601.2f, via 602.2b), so it's named as the ability is activated:
+     * offered once per card whose mana cost can be paid — a card with no
+     * mana cost can't be (118.6) — each offer's `costCard` echoed back on
+     * the action. What the effect reads as `{ paid: "exiled" }`. */
+    readonly payItsManaCost?: true;
+    /** The card named so (`payItsManaCost`), set by the engine on the
+     * ability as it's offered and activated: the only card that pays. Never
+     * authored. */
+    readonly chosen?: ObjectId;
   };
   /**
    * `sacrifice`'s one chosen permanent is **exiled** instead — "Exile a

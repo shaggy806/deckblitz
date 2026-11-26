@@ -11419,6 +11419,21 @@ describe("costs keyed to a spell's target", () => {
     expect(terror.static[0].targetedBySpellsCost).toEqual({ payLife: 3 });
   });
 
+  it("reads 'exile a creature card from your graveyard and pay its mana cost' (Back from the Brink)", () => {
+    const brink = face(
+      "Back from the Brink",
+      "Enchantment",
+      "Exile a creature card from your graveyard and pay its mana cost: Create a token that's a copy of that card. Activate only as a sorcery.",
+    ) as unknown as { complete: boolean; activated: { cost: unknown; effect: unknown }[] };
+    expect(brink.complete).toBe(true);
+    expect(brink.activated[0].cost).toEqual({
+      mana: null,
+      tap: false,
+      exileFromGraveyard: { count: 1, filter: { type: "creature" }, payItsManaCost: true },
+    });
+    expect(brink.activated[0].effect).toEqual({ kind: "create-token-copy", of: { paid: "exiled" }, count: 1 });
+  });
+
   it("reads an activated cost's choice of whole costs (Bullseye, Death Dealer)", () => {
     const bullseye = face(
       "Bullseye, Death Dealer",

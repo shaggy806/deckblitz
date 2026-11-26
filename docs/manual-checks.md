@@ -9210,3 +9210,13 @@ Each board's die comes up 4.
 ### Bullseye, Death Dealer: four players, sacrifice an artifact
 - **Do:** Click Bullseye and choose its ability "(Sacrifice an artifact)". Target Carol.
 - **Expect:** Only the sacrifice row is offered (your hand holds only a land). Ornithopter is sacrificed; Carol loses 2 life.
+
+## Exiling a graveyard card and paying its mana cost (2026-11-26)
+
+### Back from the Brink: copy Hill Giant for its {3}{R}
+- **Do:** Click Back from the Brink and choose "(Hill Giant: {3}{R})".
+- **Expect:** The menu has a row for Grizzly Bears ({1}{G}) and one for Hill Giant ({3}{R}), none for the Forest in your graveyard. Hill Giant is exiled, four lands tap, and a 3/3 Hill Giant token enters.
+
+### Back from the Brink: four players, only what you can pay for
+- **Do:** Click Back from the Brink and choose "(Grizzly Bears: {1}{G})".
+- **Expect:** Only the Grizzly Bears row is offered (two lands can't pay Hill Giant's {3}{R}). Grizzly Bears is exiled and a Grizzly Bears token enters.

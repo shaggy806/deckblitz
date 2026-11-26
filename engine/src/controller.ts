@@ -2175,6 +2175,7 @@ export class RandomController extends AutomaticController {
           ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
           ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
           ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
+          ...(legal.costCard !== undefined ? { costCard: legal.costCard.card } : {}),
           ...(sac !== undefined && sac.choices.length > 0
             ? { sacrifice: sac.choices[this.pickIndex(sac.choices.length)] }
             : {}),
@@ -3725,6 +3726,7 @@ export class HeuristicBotController extends AutomaticController {
       ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
       ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
       ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
+      ...(legal.costCard !== undefined ? { costCard: legal.costCard.card } : {}),
       // The colour this offer is for ("one mana of any color" is an offer a
       // colour): left out, the engine made the first, and a Gemstone Mine
       // tapped by hand made white whatever was asked of it.

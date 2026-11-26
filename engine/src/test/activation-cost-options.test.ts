@@ -79,12 +79,17 @@ describe("Bullseye, Death Dealer: a choice of costs on an activated ability", ()
     const { game } = table();
     const bullseye = spawn(game, "Bullseye, Death Dealer");
     lands(game, "Swamp", 3);
-    spawn(game, "Ornithopter");
+    const thopter = spawn(game, "Ornithopter");
     toHand(game, "Forest");
     expect(game.canDispatch({ type: "activate-ability", player: A, source: bullseye, abilityIndex: 0, targets: [ref(B)] })).toMatch(
       /costs chosen/,
     );
-    expect(game.canDispatch({ type: "activate-ability", player: A, source: bullseye, abilityIndex: 0, costOption: 1, targets: [ref(B)] })).not.toBeNull();
+    expect(game.canDispatch({ type: "activate-ability", player: A, source: bullseye, abilityIndex: 0, costOption: 1, targets: [ref(B)] })).toMatch(
+      /too few cards in hand/,
+    );
+    expect(
+      game.canDispatch({ type: "activate-ability", player: A, source: bullseye, abilityIndex: 0, costOption: 0, sacrifice: thopter, targets: [ref(B)] }),
+    ).toBeNull();
   });
 });
 

@@ -256,6 +256,7 @@ export class ScriptedBot extends HeuristicBotController {
         ...(sacrifice !== undefined ? { sacrifice } : {}),
         ...(offer.modes !== undefined ? { modes: offer.modes } : {}),
         ...(offer.costOption !== undefined ? { costOption: offer.costOption } : {}),
+        ...(offer.costCard !== undefined ? { costCard: offer.costCard.card } : {}),
       };
     }
     return null;

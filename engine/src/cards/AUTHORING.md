@@ -5107,6 +5107,13 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   `costOption`), as a spell's `additionalCost.options` is. Not for one
   sacrifice whose filter spans two types (Mold Folk, below). Not on a mana
   ability. `activation-cost-options.test.ts`.
+- **"Exile a creature card from your graveyard and pay its mana cost"** (Back
+  from the Brink): `exileFromGraveyard: { count: 1, filter, payItsManaCost:
+  true }`, beside any other cost. The card is named as it's activated (the
+  offer's `costCard`), its mana cost ({X} as 0, rule 107.3h) added to the
+  cost's; a card with no mana cost is never offered (118.6). The effect reads
+  it as `{ paid: "exiled" }`. Never author `chosen`: the engine sets it.
+  `exile-and-pay-its-mana-cost.test.ts`.
 - **A sacrifice cost's filters are matched against the source** (the
   `filter`, and each of an `each`'s), so a clause about the source reads it:
   "Sacrifice this creature and another green creature" (Magus of the Order)
