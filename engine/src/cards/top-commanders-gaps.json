@@ -24,6 +24,7 @@
     "condition:spell-could-target",
     "effect:delayed-exiled-unplayed-to-graveyard",
     "effect:discard-drawn-card-if",
+    "effect:look-and-choose-revealed-card-destination",
     "cost:optional-sacrifice-additional-cost",
     "cost:cost-reduction-if-kicked",
     "cost:choose-creature-or-warped-card-as-cost",    "condition:opponent-controls-at-least-n-more",
