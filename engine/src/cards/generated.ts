@@ -8476,6 +8476,7 @@ import _poolElvishRejuvenator from "./pool/elvish-rejuvenator.js";
 import _poolElvishScout from "./pool/elvish-scout.js";
 import _poolElvishScrapper from "./pool/elvish-scrapper.js";
 import _poolElvishSkysweeper from "./pool/elvish-skysweeper.js";
+import _poolElvishSoultiller from "./pool/elvish-soultiller.js";
 import _poolElvishSpiritGuide from "./pool/elvish-spirit-guide.js";
 import _poolElvishVanguard from "./pool/elvish-vanguard.js";
 import _poolElvishVatkeeper from "./pool/elvish-vatkeeper.js";
@@ -12227,6 +12228,7 @@ import _poolGrindingStation from "./pool/grinding-station.js";
 import _poolGrindstone from "./pool/grindstone.js";
 import _poolGrinningDemon from "./pool/grinning-demon.js";
 import _poolGrinningIgnus from "./pool/grinning-ignus.js";
+import _poolGrinningTotem from "./pool/grinning-totem.js";
 import _poolGripOfAmnesia from "./pool/grip-of-amnesia.js";
 import _poolGripOfChaos from "./pool/grip-of-chaos.js";
 import _poolGripOfDesolation from "./pool/grip-of-desolation.js";
@@ -12314,6 +12316,7 @@ import _poolGruesomeDeformity from "./pool/gruesome-deformity.js";
 import _poolGruesomeDiscovery from "./pool/gruesome-discovery.js";
 import _poolGruesomeEncore from "./pool/gruesome-encore.js";
 import _poolGruesomeFate from "./pool/gruesome-fate.js";
+import _poolGruesomeMenagerie from "./pool/gruesome-menagerie.js";
 import _poolGruesomeRealization from "./pool/gruesome-realization.js";
 import _poolGruesomeScourger from "./pool/gruesome-scourger.js";
 import _poolGruesomeSlaughter from "./pool/gruesome-slaughter.js";
@@ -22902,6 +22905,7 @@ import _poolReverentHowl from "./pool/reverent-howl.js";
 import _poolReverentHunter from "./pool/reverent-hunter.js";
 import _poolReverentMantra from "./pool/reverent-mantra.js";
 import _poolReverentSilence from "./pool/reverent-silence.js";
+import _poolReversalOfFortune from "./pool/reversal-of-fortune.js";
 import _poolReverseDamage from "./pool/reverse-damage.js";
 import _poolReverseEngineer from "./pool/reverse-engineer.js";
 import _poolReversePolarity from "./pool/reverse-polarity.js";
@@ -42583,6 +42587,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElvishScout,
   _poolElvishScrapper,
   _poolElvishSkysweeper,
+  _poolElvishSoultiller,
   _poolElvishSpiritGuide,
   _poolElvishVanguard,
   _poolElvishVatkeeper,
@@ -46334,6 +46339,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGrindstone,
   _poolGrinningDemon,
   _poolGrinningIgnus,
+  _poolGrinningTotem,
   _poolGripOfAmnesia,
   _poolGripOfChaos,
   _poolGripOfDesolation,
@@ -46421,6 +46427,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGruesomeDiscovery,
   _poolGruesomeEncore,
   _poolGruesomeFate,
+  _poolGruesomeMenagerie,
   _poolGruesomeRealization,
   _poolGruesomeScourger,
   _poolGruesomeSlaughter,
@@ -57009,6 +57016,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReverentHunter,
   _poolReverentMantra,
   _poolReverentSilence,
+  _poolReversalOfFortune,
   _poolReverseDamage,
   _poolReverseEngineer,
   _poolReversePolarity,
@@ -76703,6 +76711,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elvish-scout": _poolElvishScout,
   "pool/elvish-scrapper": _poolElvishScrapper,
   "pool/elvish-skysweeper": _poolElvishSkysweeper,
+  "pool/elvish-soultiller": _poolElvishSoultiller,
   "pool/elvish-spirit-guide": _poolElvishSpiritGuide,
   "pool/elvish-vanguard": _poolElvishVanguard,
   "pool/elvish-vatkeeper": _poolElvishVatkeeper,
@@ -80454,6 +80463,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/grindstone": _poolGrindstone,
   "pool/grinning-demon": _poolGrinningDemon,
   "pool/grinning-ignus": _poolGrinningIgnus,
+  "pool/grinning-totem": _poolGrinningTotem,
   "pool/grip-of-amnesia": _poolGripOfAmnesia,
   "pool/grip-of-chaos": _poolGripOfChaos,
   "pool/grip-of-desolation": _poolGripOfDesolation,
@@ -80541,6 +80551,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gruesome-discovery": _poolGruesomeDiscovery,
   "pool/gruesome-encore": _poolGruesomeEncore,
   "pool/gruesome-fate": _poolGruesomeFate,
+  "pool/gruesome-menagerie": _poolGruesomeMenagerie,
   "pool/gruesome-realization": _poolGruesomeRealization,
   "pool/gruesome-scourger": _poolGruesomeScourger,
   "pool/gruesome-slaughter": _poolGruesomeSlaughter,
@@ -91129,6 +91140,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reverent-hunter": _poolReverentHunter,
   "pool/reverent-mantra": _poolReverentMantra,
   "pool/reverent-silence": _poolReverentSilence,
+  "pool/reversal-of-fortune": _poolReversalOfFortune,
   "pool/reverse-damage": _poolReverseDamage,
   "pool/reverse-engineer": _poolReverseEngineer,
   "pool/reverse-polarity": _poolReversePolarity,

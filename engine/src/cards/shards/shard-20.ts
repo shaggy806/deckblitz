@@ -416,6 +416,7 @@ import _poolGriffinRider from "../pool/griffin-rider.js";
 import _poolGrimCaptainsCall from "../pool/grim-captains-call.js";
 import _poolGrimDiscovery from "../pool/grim-discovery.js";
 import _poolGrimWanderer from "../pool/grim-wanderer.js";
+import _poolGrinningTotem from "../pool/grinning-totem.js";
 import _poolGrislyAnglerfish from "../pool/grisly-anglerfish.js";
 import _poolGrizzledOutrider from "../pool/grizzled-outrider.js";
 import _poolGuanYus1000LiMarch from "../pool/guan-yus-1-000-li-march.js";
@@ -1536,6 +1537,7 @@ const shard: CardShard = {
     _poolGrimCaptainsCall,
     _poolGrimDiscovery,
     _poolGrimWanderer,
+    _poolGrinningTotem,
     _poolGrislyAnglerfish,
     _poolGrizzledOutrider,
     _poolGuanYus1000LiMarch,

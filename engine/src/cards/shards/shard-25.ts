@@ -703,6 +703,7 @@ import _poolRevelOfTheFallenGod from "../pool/revel-of-the-fallen-god.js";
 import _poolReverberatingSummons from "../pool/reverberating-summons.js";
 import _poolReverentHoplite from "../pool/reverent-hoplite.js";
 import _poolReverentSilence from "../pool/reverent-silence.js";
+import _poolReversalOfFortune from "../pool/reversal-of-fortune.js";
 import _poolReverseTheSands from "../pool/reverse-the-sands.js";
 import _poolRevokePrivileges from "../pool/revoke-privileges.js";
 import _poolReyavMasterSmith from "../pool/reyav-master-smith.js";
@@ -1737,6 +1738,7 @@ const shard: CardShard = {
     _poolReverberatingSummons,
     _poolReverentHoplite,
     _poolReverentSilence,
+    _poolReversalOfFortune,
     _poolReverseTheSands,
     _poolRevokePrivileges,
     _poolReyavMasterSmith,

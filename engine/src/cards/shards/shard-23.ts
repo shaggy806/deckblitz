@@ -374,6 +374,7 @@ import _poolGreatWhale from "../pool/great-whale.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
 import _poolGrevenPredatorCaptain from "../pool/greven-predator-captain.js";
 import _poolGrimDraugr from "../pool/grim-draugr.js";
+import _poolGruesomeMenagerie from "../pool/gruesome-menagerie.js";
 import _poolGuardianOfTheGuildpact from "../pool/guardian-of-the-guildpact.js";
 import _poolGuma from "../pool/guma.js";
 import _poolGustSkimmer from "../pool/gust-skimmer.js";
@@ -1453,6 +1454,7 @@ const shard: CardShard = {
     _poolGreenwoodSentinel,
     _poolGrevenPredatorCaptain,
     _poolGrimDraugr,
+    _poolGruesomeMenagerie,
     _poolGuardianOfTheGuildpact,
     _poolGuma,
     _poolGustSkimmer,

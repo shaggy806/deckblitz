@@ -239,6 +239,7 @@ import _poolEliteInquisitor from "../pool/elite-inquisitor.js";
 import _poolElugeTheShorelessSea from "../pool/eluge-the-shoreless-sea.js";
 import _poolElvishDreadlord from "../pool/elvish-dreadlord.js";
 import _poolElvishFarmer from "../pool/elvish-farmer.js";
+import _poolElvishSoultiller from "../pool/elvish-soultiller.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEnchantersBane from "../pool/enchanters-bane.js";
 import _poolEndOfTheHunt from "../pool/end-of-the-hunt.js";
@@ -1289,6 +1290,7 @@ const shard: CardShard = {
     _poolElugeTheShorelessSea,
     _poolElvishDreadlord,
     _poolElvishFarmer,
+    _poolElvishSoultiller,
     _poolEmbodimentOfSpring,
     _poolEnchantersBane,
     _poolEndOfTheHunt,
