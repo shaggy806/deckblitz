@@ -933,6 +933,7 @@ import _poolTivashGloomSummoner from "../pool/tivash-gloom-summoner.js";
 import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
 import _poolTorchDrake from "../pool/torch-drake.js";
+import _poolTorrentOfLava from "../pool/torrent-of-lava.js";
 import _poolTorture from "../pool/torture.js";
 import _poolTpringNeverParted from "../pool/tpring-never-parted.js";
 import _poolTrackDown from "../pool/track-down.js";
@@ -1999,6 +2000,7 @@ const shard: CardShard = {
     _poolTooGreedilyTooDeep,
     _poolToothOfRamos,
     _poolTorchDrake,
+    _poolTorrentOfLava,
     _poolTorture,
     _poolTpringNeverParted,
     _poolTrackDown,

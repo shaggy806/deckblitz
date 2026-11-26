@@ -105,6 +105,7 @@ import _poolBloodlustInciter from "../pool/bloodlust-inciter.js";
 import _poolBloodmadVampire from "../pool/bloodmad-vampire.js";
 import _poolBloodtitheHarvester from "../pool/bloodtithe-harvester.js";
 import _poolBodyLaunderer from "../pool/body-launderer.js";
+import _poolBoggartForager from "../pool/boggart-forager.js";
 import _poolBoilingBlood from "../pool/boiling-blood.js";
 import _poolBolshackDragon from "../pool/bolshack-dragon.js";
 import _poolBorosElite from "../pool/boros-elite.js";
@@ -1141,6 +1142,7 @@ const shard: CardShard = {
     _poolBloodmadVampire,
     _poolBloodtitheHarvester,
     _poolBodyLaunderer,
+    _poolBoggartForager,
     _poolBoilingBlood,
     _poolBolshackDragon,
     _poolBorosElite,

@@ -888,6 +888,7 @@ import _poolThorinCompanysLeader from "../pool/thorin-companys-leader.js";
 import _poolThornbowArcher from "../pool/thornbow-archer.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThoughtErasure from "../pool/thought-erasure.js";
+import _poolThranTome from "../pool/thran-tome.js";
 import _poolThrashOfRaptors from "../pool/thrash-of-raptors.js";
 import _poolThrive from "../pool/thrive.js";
 import _poolThrivingGrove from "../pool/thriving-grove.js";
@@ -1918,6 +1919,7 @@ const shard: CardShard = {
     _poolThornbowArcher,
     _poolThornwoodFalls,
     _poolThoughtErasure,
+    _poolThranTome,
     _poolThrashOfRaptors,
     _poolThrive,
     _poolThrivingGrove,

@@ -3129,6 +3129,7 @@ import _poolBoggartBirthRite from "./pool/boggart-birth-rite.js";
 import _poolBoggartBog from "./pool/boggart-bog.js";
 import _poolBoggartBrute from "./pool/boggart-brute.js";
 import _poolBoggartCursecrafter from "./pool/boggart-cursecrafter.js";
+import _poolBoggartForager from "./pool/boggart-forager.js";
 import _poolBoggartHarbinger from "./pool/boggart-harbinger.js";
 import _poolBoggartLoggers from "./pool/boggart-loggers.js";
 import _poolBoggartMischief from "./pool/boggart-mischief.js";
@@ -3488,6 +3489,7 @@ import _poolBreakDownTheDoor from "./pool/break-down-the-door.js";
 import _poolBreakDown from "./pool/break-down.js";
 import _poolBreakOfDay from "./pool/break-of-day.js";
 import _poolBreakOpen from "./pool/break-open.js";
+import _poolBreakOut from "./pool/break-out.js";
 import _poolBreakTheIce from "./pool/break-the-ice.js";
 import _poolBreakTheSpell from "./pool/break-the-spell.js";
 import _poolBreakThroughTheLine from "./pool/break-through-the-line.js";
@@ -10049,6 +10051,7 @@ import _poolFlamescrollCelebrant from "./pool/flamescroll-celebrant.js";
 import _poolFlameshadowConjuring from "./pool/flameshadow-conjuring.js";
 import _poolFlameshape from "./pool/flameshape.js";
 import _poolFlameshot from "./pool/flameshot.js";
+import _poolFlameskull from "./pool/flameskull.js";
 import _poolFlamespeakerAdept from "./pool/flamespeaker-adept.js";
 import _poolFlamespeakersWill from "./pool/flamespeakers-will.js";
 import _poolFlamestickCourier from "./pool/flamestick-courier.js";
@@ -26171,6 +26174,7 @@ import _poolSoldeviSage from "./pool/soldevi-sage.js";
 import _poolSoldeviSimulacrum from "./pool/soldevi-simulacrum.js";
 import _poolSoldeviSteamBeast from "./pool/soldevi-steam-beast.js";
 import _poolSoldierMilitaryProgram from "./pool/soldier-military-program.js";
+import _poolSoldierOfFortune from "./pool/soldier-of-fortune.js";
 import _poolSoldierOfTheGreyHost from "./pool/soldier-of-the-grey-host.js";
 import _poolSoldierOfThePantheon from "./pool/soldier-of-the-pantheon.js";
 import _poolSoldierOn from "./pool/soldier-on.js";
@@ -29358,6 +29362,7 @@ import _poolThranPowerSuit from "./pool/thran-power-suit.js";
 import _poolThranQuarry from "./pool/thran-quarry.js";
 import _poolThranSpider from "./pool/thran-spider.js";
 import _poolThranTemporalGateway from "./pool/thran-temporal-gateway.js";
+import _poolThranTome from "./pool/thran-tome.js";
 import _poolThranTurbine from "./pool/thran-turbine.js";
 import _poolThranVigil from "./pool/thran-vigil.js";
 import _poolThranWarMachine from "./pool/thran-war-machine.js";
@@ -29851,6 +29856,7 @@ import _poolTorporDust from "./pool/torpor-dust.js";
 import _poolTorporOrb from "./pool/torpor-orb.js";
 import _poolTorrentElemental from "./pool/torrent-elemental.js";
 import _poolTorrentOfFire from "./pool/torrent-of-fire.js";
+import _poolTorrentOfLava from "./pool/torrent-of-lava.js";
 import _poolTorrentOfSouls from "./pool/torrent-of-souls.js";
 import _poolTorrentOfStone from "./pool/torrent-of-stone.js";
 import _poolTorrentSculptor from "./pool/torrent-sculptor.js";
@@ -37287,6 +37293,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoggartBog,
   _poolBoggartBrute,
   _poolBoggartCursecrafter,
+  _poolBoggartForager,
   _poolBoggartHarbinger,
   _poolBoggartLoggers,
   _poolBoggartMischief,
@@ -37646,6 +37653,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBreakDown,
   _poolBreakOfDay,
   _poolBreakOpen,
+  _poolBreakOut,
   _poolBreakTheIce,
   _poolBreakTheSpell,
   _poolBreakThroughTheLine,
@@ -44207,6 +44215,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlameshadowConjuring,
   _poolFlameshape,
   _poolFlameshot,
+  _poolFlameskull,
   _poolFlamespeakerAdept,
   _poolFlamespeakersWill,
   _poolFlamestickCourier,
@@ -60329,6 +60338,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoldeviSimulacrum,
   _poolSoldeviSteamBeast,
   _poolSoldierMilitaryProgram,
+  _poolSoldierOfFortune,
   _poolSoldierOfTheGreyHost,
   _poolSoldierOfThePantheon,
   _poolSoldierOn,
@@ -63516,6 +63526,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThranQuarry,
   _poolThranSpider,
   _poolThranTemporalGateway,
+  _poolThranTome,
   _poolThranTurbine,
   _poolThranVigil,
   _poolThranWarMachine,
@@ -64009,6 +64020,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTorporOrb,
   _poolTorrentElemental,
   _poolTorrentOfFire,
+  _poolTorrentOfLava,
   _poolTorrentOfSouls,
   _poolTorrentOfStone,
   _poolTorrentSculptor,
@@ -71458,6 +71470,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/boggart-bog": _poolBoggartBog,
   "pool/boggart-brute": _poolBoggartBrute,
   "pool/boggart-cursecrafter": _poolBoggartCursecrafter,
+  "pool/boggart-forager": _poolBoggartForager,
   "pool/boggart-harbinger": _poolBoggartHarbinger,
   "pool/boggart-loggers": _poolBoggartLoggers,
   "pool/boggart-mischief": _poolBoggartMischief,
@@ -71817,6 +71830,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/break-down": _poolBreakDown,
   "pool/break-of-day": _poolBreakOfDay,
   "pool/break-open": _poolBreakOpen,
+  "pool/break-out": _poolBreakOut,
   "pool/break-the-ice": _poolBreakTheIce,
   "pool/break-the-spell": _poolBreakTheSpell,
   "pool/break-through-the-line": _poolBreakThroughTheLine,
@@ -78378,6 +78392,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flameshadow-conjuring": _poolFlameshadowConjuring,
   "pool/flameshape": _poolFlameshape,
   "pool/flameshot": _poolFlameshot,
+  "pool/flameskull": _poolFlameskull,
   "pool/flamespeaker-adept": _poolFlamespeakerAdept,
   "pool/flamespeakers-will": _poolFlamespeakersWill,
   "pool/flamestick-courier": _poolFlamestickCourier,
@@ -94500,6 +94515,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soldevi-simulacrum": _poolSoldeviSimulacrum,
   "pool/soldevi-steam-beast": _poolSoldeviSteamBeast,
   "pool/soldier-military-program": _poolSoldierMilitaryProgram,
+  "pool/soldier-of-fortune": _poolSoldierOfFortune,
   "pool/soldier-of-the-grey-host": _poolSoldierOfTheGreyHost,
   "pool/soldier-of-the-pantheon": _poolSoldierOfThePantheon,
   "pool/soldier-on": _poolSoldierOn,
@@ -97687,6 +97703,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thran-quarry": _poolThranQuarry,
   "pool/thran-spider": _poolThranSpider,
   "pool/thran-temporal-gateway": _poolThranTemporalGateway,
+  "pool/thran-tome": _poolThranTome,
   "pool/thran-turbine": _poolThranTurbine,
   "pool/thran-vigil": _poolThranVigil,
   "pool/thran-war-machine": _poolThranWarMachine,
@@ -98180,6 +98197,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/torpor-orb": _poolTorporOrb,
   "pool/torrent-elemental": _poolTorrentElemental,
   "pool/torrent-of-fire": _poolTorrentOfFire,
+  "pool/torrent-of-lava": _poolTorrentOfLava,
   "pool/torrent-of-souls": _poolTorrentOfSouls,
   "pool/torrent-of-stone": _poolTorrentOfStone,
   "pool/torrent-sculptor": _poolTorrentSculptor,

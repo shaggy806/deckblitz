@@ -113,6 +113,7 @@ import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
 import _poolBrainstealerDragon from "../pool/brainstealer-dragon.js";
 import _poolBrainwash from "../pool/brainwash.js";
 import _poolBravado from "../pool/bravado.js";
+import _poolBreakOut from "../pool/break-out.js";
 import _poolBreathOfFire from "../pool/breath-of-fire.js";
 import _poolBreathOfFury from "../pool/breath-of-fury.js";
 import _poolBridesGown from "../pool/brides-gown.js";
@@ -1170,6 +1171,7 @@ const shard: CardShard = {
     _poolBrainstealerDragon,
     _poolBrainwash,
     _poolBravado,
+    _poolBreakOut,
     _poolBreathOfFire,
     _poolBreathOfFury,
     _poolBridesGown,

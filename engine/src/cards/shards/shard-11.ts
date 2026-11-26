@@ -831,6 +831,7 @@ import _poolSludgeCrawler from "../pool/sludge-crawler.js";
 import _poolSmaugTheImpenetrable from "../pool/smaug-the-impenetrable.js";
 import _poolSmirkingSpelljacker from "../pool/smirking-spelljacker.js";
 import _poolSoldeviGolem from "../pool/soldevi-golem.js";
+import _poolSoldierOfFortune from "../pool/soldier-of-fortune.js";
 import _poolSolkanarTheSwampKing from "../pool/solkanar-the-swamp-king.js";
 import _poolSomnomancer from "../pool/somnomancer.js";
 import _poolSongOfFreyalise from "../pool/song-of-freyalise.js";
@@ -1918,6 +1919,7 @@ const shard: CardShard = {
     _poolSmaugTheImpenetrable,
     _poolSmirkingSpelljacker,
     _poolSoldeviGolem,
+    _poolSoldierOfFortune,
     _poolSolkanarTheSwampKing,
     _poolSomnomancer,
     _poolSongOfFreyalise,
