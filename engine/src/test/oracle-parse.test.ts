@@ -25466,3 +25466,16 @@ describe("a delayed harm paid off before its step (Glass Asp, Nafs Asp)", () => 
     });
   });
 });
+
+describe("mana equal to the enchanted permanent's mana cost (Elemental Resonance)", () => {
+  it("reads it as add-mana's manaCostOf", () => {
+    const aura = parseFace({
+      name: "Elemental Resonance",
+      type_line: "Enchantment — Aura",
+      oracle_text:
+        "Enchant permanent\nAt the beginning of your first main phase, add mana equal to enchanted permanent's mana cost. (Mana cost includes color. If a mana symbol has multiple colors, choose one.)",
+    });
+    expect(aura.complete).toBe(true);
+    expect(aura.triggered[0].effect).toEqual({ kind: "add-mana", mana: { manaCostOf: "attached" }, amount: 0 });
+  });
+});

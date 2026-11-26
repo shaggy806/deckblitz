@@ -2867,6 +2867,8 @@ export type BoardManaList =
 export type ManaListSpec =
   | { readonly oneOf: readonly ManaType[] }
   | { readonly colorsOfTarget: number }
+  /** None in a mana ability: see the `add-mana` effect's `{ manaCostOf }`. */
+  | { readonly manaCostOf: ObjectRef }
   | BoardManaList;
 
 /** How far a `created-tokens-fight` has paired its tokens, while its controller
@@ -3705,6 +3707,16 @@ export type EffectSpec =
          * makes no mana; a one-coloured card makes that colour alone. Not for
          * a mana ability: the payment planner doesn't read it. */
         | { readonly colorsOfTarget: number }
+        /**
+         * "Add mana equal to enchanted permanent's mana cost" (Elemental
+         * Resonance): `{ manaCostOf: "attached" }`, read as it resolves —
+         * each coloured symbol its colour, generic and `{C}` (and `{S}`)
+         * colourless, `{X}` none (rule 107.3h), a symbol of two colours one of
+         * them, the controller's choice symbol by symbol (rule 608.2d), a
+         * Phyrexian or `{2/W}` symbol its one colour. `amount` is ignored. Not
+         * for a mana ability. Nothing for an object with no mana cost.
+         */
+        | { readonly manaCostOf: ObjectRef }
         | {
             readonly oneOf: readonly ManaType[];
             readonly same?: true;
@@ -20920,6 +20932,33 @@ export interface ManaSplitAsk {
  * (a spend restriction, a rider, `persists`) rides on every mode; the rest of
  * the instruction — damage to its controller, `also` — follows once.
  */
+/** A mana cost as the mana "equal to" it (`{ manaCostOf }` — Elemental
+ * Resonance): one entry a symbol, generic ones together, in printed order.
+ * `{X}` is none (rule 107.3h: it's 0 off the stack, and `cost` has it as
+ * `{0}`); a symbol of two colours is a `oneOf` of them; a Phyrexian or `{2/W}`
+ * symbol is its one colour; generic, `{C}` and `{S}` are colourless. */
+export function manaOfManaCost(
+  cost: string | null,
+): { readonly mana: ManaType | { readonly oneOf: readonly ManaType[] }; readonly amount: number }[] {
+  const out: { mana: ManaType | { readonly oneOf: readonly ManaType[] }; amount: number }[] = [];
+  const isType = (s: string): s is ManaType => s === "W" || s === "U" || s === "B" || s === "R" || s === "G" || s === "C";
+  for (const token of cost?.match(/\{[^}]+\}/g) ?? []) {
+    const symbol = token.slice(1, -1);
+    if (/^\d+$/.test(symbol)) {
+      if (Number(symbol) > 0) out.push({ mana: "C", amount: Number(symbol) });
+    } else if (symbol === "S") {
+      out.push({ mana: "C", amount: 1 });
+    } else if (isType(symbol)) {
+      out.push({ mana: symbol, amount: 1 });
+    } else if (symbol.includes("/")) {
+      const types = symbol.split("/").filter(isType);
+      if (types.length === 1) out.push({ mana: types[0], amount: 1 });
+      else if (types.length > 1) out.push({ mana: { oneOf: types }, amount: 1 });
+    }
+  }
+  return out;
+}
+
 /** The colours of what target slot `slot` points at — an `add-mana`'s
  * `{ colorsOfTarget }` — none when the slot is empty or names a player. */
 function colorsOfTargetSlot(slot: number, ctx: ResolutionContext): readonly ManaType[] {
@@ -20938,7 +20977,7 @@ function addManaChoice(spec: Extract<EffectSpec, { kind: "add-mana" }>, ctx: Res
   } else if (mana === "commander-identity") {
     colors = ctx.commanderColors();
     same = false;
-  } else if (typeof mana !== "object" || "all" in mana || "eachColorAmong" in mana) {
+  } else if (typeof mana !== "object" || "all" in mana || "eachColorAmong" in mana || "manaCostOf" in mana) {
     return null;
   } else if ("colorsOfTarget" in mana) {
     colors = colorsOfTargetSlot(mana.colorsOfTarget, ctx);
@@ -21688,6 +21727,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const { first, ...rest } = spec;
         applyEffectSpec(first, ctx);
         applyEffectSpec(rest, ctx);
+        return;
+      }
+      // "Mana equal to enchanted permanent's mana cost": one add-mana a
+      // symbol, read now, each symbol of two colours asked in turn.
+      if (typeof spec.mana === "object" && "manaCostOf" in spec.mana) {
+        const of = objectRefAct(spec.mana.manaCostOf, ctx);
+        const cost = of === undefined ? null : ctx.manaCostToPay(of);
+        const { kind: _kind, mana: _mana, amount: _amount, also, painToController: _pain, ...carried } = spec;
+        const steps: EffectSpec[] = manaOfManaCost(cost).map(({ mana, amount }) => ({ ...carried, kind: "add-mana", mana, amount }));
+        if (also !== undefined) steps.push(also);
+        if (steps.length > 0) applyEffectSpec({ kind: "sequence", effects: steps }, ctx);
         return;
       }
       // A spell or an ability on the stack adding mana with a choice in it

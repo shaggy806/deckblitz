@@ -3801,6 +3801,11 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "Add mana equal to enchanted permanent's mana cost" (Elemental
+  // Resonance): `{ manaCostOf }`, read as it resolves.
+  if (/^add mana equal to enchanted (?:permanent|creature|artifact|land)'s mana cost\.$/i.test(s)) {
+    return { kind: "add-mana", mana: { manaCostOf: "attached" }, amount: 0 };
+  }
   // "That player loses 2 life at the beginning of their next draw step unless
   // they pay {2} before that step" (Glass Asp, Nafs Asp, Sabertooth Cobra):
   // a delayed ability its player may pay off any time they have priority

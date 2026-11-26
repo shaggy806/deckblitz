@@ -10,6 +10,7 @@
     "effect:change-target-new-target-restricted",
     "filter:attacking-alone",
     "filter:least-power-among-all-creatures",
+    "effect:add-mana-of-attached-mana-cost",
     "effect:pay-before-delayed-deadline",
     "cost:optional-sacrifice-additional-cost",
     "cost:cost-reduction-if-kicked",

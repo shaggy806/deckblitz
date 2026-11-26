@@ -35998,7 +35998,7 @@ export class Game {
     if ("oneOf" in mana) return mana.oneOf;
     // "Its colors" names a resolving effect's target (Omnath, Locus of All),
     // which a mana ability — all this reads for — never has: nothing.
-    if ("colorsOfTarget" in mana) return [];
+    if ("colorsOfTarget" in mana || "manaCostOf" in mana) return [];
     // Read off the whole board, and asked for every offer and payment plan:
     // once per cache region for a list asked from the top.
     if (visiting.size === 0) {
