@@ -5,6 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { invalidateComputedCache } from "../characteristics.js";
 import type { Game } from "../game.js";
 import type { ScriptedController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -76,6 +77,31 @@ describe("Viper, Cruel Conspirator", () => {
     game.dispatch({ type: "pass-priority", player: B });
     activate(game, viper, 0, { player: A, targets: [ref(theirs)] });
     expect(pt(game, theirs)).toEqual({ power: 3, toughness: 3 });
+  });
+});
+
+describe("Dream Prowler", () => {
+  it("can't be blocked attacking alone, and can attacking beside another", () => {
+    const { game, a } = table();
+    const prowler = spawn(game, "Dream Prowler");
+    intoCombat(game, a, [prowler], B);
+    expect(keywords(game, prowler).has("unblockable")).toBe(true);
+    const second = table();
+    const other = spawn(second.game, "Dream Prowler");
+    const bears = spawn(second.game, "Grizzly Bears");
+    intoCombat(second.game, second.a, [other, bears], B);
+    expect(keywords(second.game, other).has("unblockable")).toBe(false);
+  });
+
+  it("a counted attacking stack is several creatures, never alone (506.5)", () => {
+    const { game, a } = table();
+    const prowler = spawn(game, "Dream Prowler");
+    intoCombat(game, a, [prowler], B);
+    // As a stack of attacking tokens past what combat wakes stands: one
+    // object, two creatures.
+    game.state.objects[prowler].stackCount = 2;
+    invalidateComputedCache();
+    expect(keywords(game, prowler).has("unblockable")).toBe(false);
   });
 });
 

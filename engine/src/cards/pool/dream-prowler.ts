@@ -2,8 +2,8 @@ import { defineCard } from "../define.js";
 
 // Stronghold (STH). EDHREC rank 30426.
 //
-// Yuan-Ti Malison's shape: "attacking alone" (rule 506.5) is attacking with
-// no other attacking creature, and only the active player's creatures attack.
+// Yuan-Ti Malison's shape: "attacking alone" (rule 506.5, `attackingAlone`) is
+// attacking with no other attacking creature.
 
 const TEXT = "This creature can't be blocked as long as it's attacking alone.";
 
@@ -19,13 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: {
-        kind: "all",
-        of: [
-          { kind: "source", filter: { attacking: true } },
-          { kind: "not", of: { kind: "controls", filter: { type: "creature", attacking: true }, atLeast: 1 } },
-        ],
-      },
+      condition: { kind: "source", filter: { attackingAlone: true } },
       grantKeywords: ["unblockable"],
       text: TEXT,
     },
