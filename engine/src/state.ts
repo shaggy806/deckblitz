@@ -26,6 +26,7 @@ import type {
   EnterTypes,
   LookAndChooseLeftoverIf,
   ManaSplitRiders,
+  ManaSpendOnly,
   ModesCostSacrifice,
   PileFateWord,
   ResolvedEnterAttacking,
@@ -6713,6 +6714,9 @@ export interface PlayerEffect {
   /** A mana ability `owner` has for as long as this lasts (Channel): see
    * {@link PlayerManaAbility}. */
   readonly manaAbility?: PlayerManaAbility;
+  /** `owner` may tap lands they don't control for mana, the mana spent only
+   * as this says (Piracy): see the `player-effect`'s field of this name. */
+  readonly tapsLandsYouDontControl?: ManaSpendOnly;
   /** "You gain protection from everything" (rule 702.16j): these players
    * can't be the target of spells or abilities, can't be enchanted by Auras
    * (a Curse on one goes, 704.5m), and all damage that would be dealt to them

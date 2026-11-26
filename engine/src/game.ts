@@ -356,6 +356,7 @@ import type {
   EffectSpec,
   RevealedCardsGo,
   ManaSplitAsk,
+  ManaSpendOnly,
   EnterTypes,
   FlickerCounters,
   FlickerOptions,
@@ -29720,8 +29721,42 @@ export class Game {
       if (only === "granter") return source.controller === player;
       return only.player === player;
     }
-    if (source.controller !== player) return ability.anyPlayer === true;
+    if (source.controller !== player) {
+      return ability.anyPlayer === true || (isManaAbility(ability) && ability.cost.tap && this.borrowedLandSpend(player, source) !== undefined);
+    }
     return ability.onlyOpponents !== true;
+  }
+
+  /** "You may tap lands you don't control for mana" (Piracy): the spend
+   * clause of `player`'s effect saying so, when `source` is a land another
+   * player controls; `undefined` otherwise. */
+  private borrowedLandSpend(player: PlayerId, source: GameObject): ManaSpendOnly | undefined {
+    if (source.controller === player || source.zone !== "battlefield") return undefined;
+    const clause = (this.state.playerEffects ?? []).find((e) => e.owner === player && e.tapsLandsYouDontControl !== undefined)
+      ?.tapsLandsYouDontControl;
+    if (clause === undefined || !effectiveTypes(this.state, this.registry, source).includes("land")) return undefined;
+    return clause;
+  }
+
+  /** Mana made by tapping another player's land under Piracy: its own spend
+   * clause, if any, narrowed to what Piracy's allows — spells alone, so
+   * whatever else the land's mana could pay for (an ability, a purpose)
+   * goes. */
+  private withBorrowedSpend(
+    spec: Extract<EffectSpec, { kind: "add-mana" }>,
+    borrowed: ManaSpendOnly,
+  ): Extract<EffectSpec, { kind: "add-mana" }> {
+    const own = spec.spendOnly;
+    if (own === undefined) return { ...spec, spendOnly: borrowed };
+    const { abilityOf: _a, abilityOfAnyZone: _z, purposes: _p, ...spells } = own;
+    return {
+      ...spec,
+      spendOnly: {
+        ...spells,
+        ...(spells.spell === undefined && spells.notSpell === undefined ? { spell: borrowed.spell ?? {} } : {}),
+        text: `${own.text} ${borrowed.text}`,
+      },
+    };
   }
 
   /** Whether any of `object`'s activated abilities could be another player's
@@ -29731,6 +29766,7 @@ export class Game {
   private othersMayActivate(object: GameObject, player: PlayerId): boolean {
     const printed = this.registry.get(rulesTextName(object)).activated;
     if (printed.some((a) => a.anyPlayer === true || (a.onlyBy === "owner" && object.owner === player))) return true;
+    if (this.borrowedLandSpend(player, object) !== undefined) return true;
     return object.modifiers.some((m) => m.grantsActivated?.some((a) => a.onlyBy !== undefined) === true);
   }
 
@@ -30803,12 +30839,22 @@ export class Game {
       const stays = instead.colorsOnly === true && mana === "C";
       base.addMana(p, stays ? mana : instead.produces, n, spec);
     };
+    // Another player's land tapped under Piracy: its mana is spent only as
+    // Piracy says.
+    const borrowed =
+      source !== undefined && source.controller !== player && ability.anyPlayer !== true && ability.onlyBy === undefined
+        ? this.borrowedLandSpend(player, source)
+        : undefined;
     const context: ResolutionContext = {
       ...base,
       manaAbility: true,
       ...(manaColor !== undefined ? { manaColor } : {}),
       ...(manaFor !== undefined ? { manaFor } : {}),
-      addMana: (p, mana, amount, spec): void => {
+      addMana: (p, mana, amount, spec0): void => {
+        const spec =
+          borrowed === undefined || p !== player
+            ? spec0
+            : this.withBorrowedSpend(spec0 ?? { kind: "add-mana", mana: "C", amount: 0 }, borrowed);
         if (ability.cost.tap && source !== undefined && p === player) {
           instead = this.landManaInsteadFor(player, source, amount);
         }

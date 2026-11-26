@@ -8051,6 +8051,14 @@ export type EffectSpec =
        * 605.1a, 605.3a), activated by hand with priority and reached for by
        * the payment planner after every permanent. See `PlayerManaAbility`. */
       readonly manaAbility?: PlayerManaAbility;
+      /** "Until end of turn, you may tap lands you don't control for mana.
+       * Spend this mana only to cast spells" (Piracy): the controller may
+       * activate the mana abilities with {T} in their cost of lands other
+       * players control (rule 602.2's "unless the object says otherwise", here
+       * an effect), the mana theirs and spent only as this says. By hand with
+       * priority, as a mana ability is floated; the payment planner reaches
+       * only for the payer's own permanents. */
+      readonly tapsLandsYouDontControl?: ManaSpendOnly;
       /** "You gain protection from everything" (rule 702.16j): not a target
        * of spells or abilities, not enchanted by Auras, all damage to them
        * prevented. */
@@ -24177,6 +24185,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.manaProduction !== undefined ? { manaProduction: spec.manaProduction } : {}),
         ...(spec.manaAbility !== undefined ? { manaAbility: spec.manaAbility } : {}),
+        ...(spec.tapsLandsYouDontControl !== undefined ? { tapsLandsYouDontControl: spec.tapsLandsYouDontControl } : {}),
         ...(spec.protectionFromEverything !== undefined
           ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }
           : {}),

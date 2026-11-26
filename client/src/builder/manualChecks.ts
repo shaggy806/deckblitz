@@ -13926,6 +13926,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Piracy: tap Bob's lands and cast Grizzly Bears",
+    board({
+      you: { bf: ['Island*2'], hand: ['Piracy', 'Grizzly Bears'] },
+      opp: { bf: ['Forest', 'Savannah'] },
+    }),
+  ),
+  preset(
+    "Piracy: four players, every opponent's lands",
+    board({
+      you: { bf: ['Island*2'], hand: ['Piracy'] },
+      opp: [{ bf: ['Plains', 'Llanowar Elves'] }, { bf: ['Forest'] }, { bf: ['Swamp'] }],
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

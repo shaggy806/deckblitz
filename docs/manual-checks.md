@@ -9184,3 +9184,14 @@ Each board's die comes up 4.
 ### Sabertooth Cobra: four players, only the damaged player may pay
 - **Do:** Cast Soul's Fire: Sabertooth Cobra deals its damage to you.
 - **Expect:** "Sabertooth Cobra: pay {2}" appears on your row only; no other player's row has it.
+
+## Tapping lands you don't control (2026-11-26)
+
+### Piracy: tap Bob's lands and cast Grizzly Bears
+- **Do:** Cast Piracy. Click Bob's Forest and add {G}; click his Savannah and add {W}. Cast Grizzly Bears.
+- **Expect:** Bob's lands tap and the {G}{W} goes into your mana pool, not Bob's. Grizzly Bears is cast with it.
+- **Not a bug:** Casting Grizzly Bears without tapping Bob's lands first doesn't reach for them: tap them yourself.
+
+### Piracy: four players, every opponent's lands
+- **Do:** Cast Piracy. Click Carol's Forest and add {G}.
+- **Expect:** Carol's Forest taps and the {G} goes into your pool. Bob's and Dave's lands offer the same; Bob's Llanowar Elves offers nothing.

@@ -5350,6 +5350,13 @@ permanents, one source per life above the last (`Game.heldManaSources`). It has 
 nothing that asks what was tapped for mana sees it. `player-mana-ability.test.ts` (Channel,
 Yavimaya Bloomsage).
 
+**"Until end of turn, you may tap lands you don't control for mana. Spend this mana only to
+cast spells"** (Piracy) is `player-effect`'s `tapsLandsYouDontControl: ManaSpendOnly` with
+`duration: "end-of-turn"`: its owner may activate the {T} mana abilities of lands other players
+control (`Game.borrowedLandSpend`, read in `mayActivateAs`), by hand with priority — the
+payment planner reaches only for the payer's own permanents — and the mana is theirs, spent only
+as the clause says (a land's own clause kept, narrowed to spells). `tap-others-lands-for-mana.test.ts`.
+
 **Unspent mana** (rule 106.4): the `{ unspentMana: PlayerRef, type? }` amount, `grantPtPerCount`'s `unspentMana: { type? }` (Omnath, Locus of the Void) and the `unspent-mana` condition (Ozai). The `lose-unspent-mana` effect (`who` or `target`) is the same loss a step's end causes: "if you would lose unspent mana" replaces it and "you don't lose … as steps and phases end" doesn't stop it. `add-mana`'s `{ sacrificedCouldProduce: filter }` is "any type the sacrificed land could produce" (Squandered Resources, rule 106.7), read just before the cost takes it; the offer names the land with the colour.
 
 **Mana abilities** (`isManaAbility`, rule 605.1a): an ability with no
