@@ -23319,8 +23319,12 @@ export class Game {
       // Climb) — `flashSacrificeOwed` says which casts owe the sacrifice.
       !def.flashThenSacrifice &&
       // Judged as the spell it would be — an Omen or an adventure is its
-      // instant or sorcery half (rules 715.3, 720.3a).
-      !this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId)) &&
+      // instant or sorcery half (rules 715.3, 720.3a); cast bestowed, the
+      // Aura spell it becomes (601.3b, 702.103d — Sigarda's Aid's "Aura
+      // spells", Rootwater Shaman's "with enchant creature").
+      !this.withBestowed(cardId, overload === true && def.overload?.keyword === "bestow", () =>
+        this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId)),
+      ) &&
       // "You may cast this spell as though it had flash if you control a
       // Human" / "…if it targets a commander" (rules 601.3b, 601.3d).
       !this.castsByConditionalFlash(player, cardId, def, modes, kicked, overload, targets, xValue)

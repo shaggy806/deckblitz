@@ -20,6 +20,7 @@ import {
   spawn,
   subtypes,
   table,
+  toStep,
   toHand,
   types,
   zone,
@@ -118,5 +119,20 @@ describe("casting bestowed", () => {
     // Its Aura is a 4/4 creature again.
     expect(zone(game, nautilus)).toBe("battlefield");
     expect(pt(game, nautilus)).toEqual({ power: 4, toughness: 4 });
+  });
+});
+
+describe("an Aura flash permission and bestow (rules 601.3b, 702.103d)", () => {
+  it("Sigarda's Aid lets a bestow card be cast bestowed at instant speed, and only bestowed", () => {
+    const { game } = table();
+    lands(game, "Mountain", 2);
+    spawn(game, "Sigarda's Aid", A);
+    const bears = spawn(game, "Grizzly Bears", A);
+    const rollicker = toHand(game, "Nyxborn Rollicker");
+    toStep(game, "begin-combat");
+    const casts = game.legalActions(A).filter((a) => a.kind === "cast-spell" && a.card === rollicker);
+    expect(casts.map((a) => (a.kind === "cast-spell" ? (a.overloadKeyword ?? "plain") : ""))).toEqual(["bestow"]);
+    cast(game, rollicker, { targets: [ref(bears)], overload: true });
+    expect(game.state.objects[rollicker].attachedTo).toBe(bears);
   });
 });
