@@ -271,9 +271,6 @@ function flyHandCard(
       const host = box.parentElement
       const cardTile = host ? realTile(host) : null
       if (host === null || cardTile === null) return false
-      // The mulligan popup clips what overflows it sideways (App.css), which
-      // would cut the flight off at its border, short of the pile.
-      host.closest<HTMLElement>('.mulligan-modal')?.setAttribute('data-flying', '')
       // The tile's layout box in its `.hand-card` is the copy's box too; the
       // fan turns it about its bottom centre.
       const w = cardTile.offsetWidth
@@ -309,9 +306,7 @@ function flyHandCard(
       return t < 1
     }
     const land = (): void => {
-      const modal = box.closest<HTMLElement>('.mulligan-modal')
       box.remove()
-      if (modal && modal.querySelector('.hand-draw-ghost') === null) modal.removeAttribute('data-flying')
       if (!out) show()
     }
     const frame = (now: number): void => {

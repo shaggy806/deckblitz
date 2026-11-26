@@ -87,13 +87,12 @@ interface Pulse {
   frames?: number
 }
 
-/** The fan the pointer sweeps: the viewer's own hand, not the mulligan
- * popup's (which never grows a card) or the grid's (which has no fan). */
+/** The fan the pointer sweeps: the viewer's own hand — in the tray, or in
+ * the mulligan popup while that holds it (its cards grow as the tray's do) —
+ * not the grid's (which has no fan). */
 function fanRow(): HTMLElement | null {
-  for (const row of document.querySelectorAll<HTMLElement>('.hand-cards')) {
-    if (row.closest('.mulligan-modal') === null) return row
-  }
-  return null
+  const rows = [...document.querySelectorAll<HTMLElement>('.hand-cards')]
+  return rows.find((row) => row.closest('.mulligan-modal') === null) ?? rows[0] ?? null
 }
 
 /**

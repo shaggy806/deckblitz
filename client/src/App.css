@@ -4056,8 +4056,7 @@
 /* In the hand, the column sits beside the card as it grows on hover (1.65x
    from its bottom centre, lifted 30px — see .hand-card:hover .card-tile):
    its bottom level with the grown card's, its edge just past the grown
-   card's side. Hidden until then, and in the mulligan popup, where cards
-   don't grow. A fresh hover restarts the delayed fade, since the animation
+   card's side. Hidden until then. A fresh hover restarts the delayed fade, since the animation
    only runs while the column is displayed. */
 .hand-cards .hand-kw-tips {
   /* sized off the grown card, as the board's are off the hover card */
@@ -4078,8 +4077,6 @@
 .hand-cards .hand-card.hover-carry .hand-kw-tips {
   display: flex;
 }
-.mulligan-modal .hand-cards .hand-card:hover .hand-kw-tips,
-.mulligan-modal .hand-cards .hand-card.hover-carry .hand-kw-tips,
 .hand-grid .hand-kw-tips {
   display: none;
 }
@@ -4303,15 +4300,13 @@
      the fan's overhang (.mulligan-modal .hand-cards). */
   width: min(90vw, max(1100px, calc(var(--card-w) * 8.4)));
   max-height: 90vh;
-  /* overflow-y: auto alone makes overflow-x auto too (CSS spec: an axis set
-     to a non-visible value forces the other axis off 'visible' as well) --
-     a rotated edge card's paint/ink overflow (CSS transforms don't affect
-     layout, but do count toward an ancestor's scrollable overflow) was
-     enough to spawn a horizontal scrollbar even for a normal, correctly-
-     fanned 7-card hand. Pinned to hidden since nothing here is meant to
-     scroll sideways -- the fan's own overlap math (HAND_CARD_GAP) already
-     sizes the hand to fit the modal's width. */
-  overflow-x: hidden;
+  /* Nothing clips: a hovered card grows 1.65x as the tray's do, up past the
+     popup's top edge (the user, 2026-11-25), and a card flies out to the
+     library pile and back (handMotion.ts's flyHandCard). Visible on both
+     axes also means no scrollbar, which a rotated edge card's ink overflow
+     once spawned when only one axis was pinned; the fan's own overlap math
+     (HAND_CARD_GAP) sizes the hand to fit the popup's width. */
+  overflow: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4326,12 +4321,6 @@
     0 2px 8px rgba(0, 0, 0, 0.4);
   text-align: center;
   font-size: var(--text-base);
-}
-/* While a card flies between the popup's hand and the library pile
-   (handMotion.ts's flyHandCard), out past its border: a mulligan's hand going
-   back, the new one dealt in. */
-.mulligan-modal[data-flying] {
-  overflow: visible;
 }
 .mulligan-modal .hand {
   width: 100%;
@@ -4536,24 +4525,6 @@
 .hover-carry .keyword-tips {
   animation: none !important;
 }
-/* The mulligan popup shows the whole hand already, all at once, purely to
-   read before a keep/mulligan decision -- growing whichever card the mouse
-   happens to be over while scanning across the fan is distracting there,
-   not helpful, unlike the ordinary browsing hand this hover behavior was
-   built for. Wins over the rule above on specificity (one extra class)
-   without needing !important. */
-.mulligan-modal .hand-cards .hand-card:hover .card-tile,
-.mulligan-modal .hand-cards .hand-card.hover-carry .card-tile,
-.mulligan-modal .hand-cards .hand-card:focus-within .card-tile {
-  translate: 0 var(--y, 0px);
-  rotate: var(--r, 0deg);
-  scale: 1;
-}
-.mulligan-modal .hand-cards .hand-card:hover,
-.mulligan-modal .hand-cards .hand-card.hover-carry,
-.mulligan-modal .hand-cards .hand-card:focus-within {
-  z-index: var(--z, 0);
-}
 :root[data-reduce-motion] .hand-cards .hand-card .card-tile {
   transition: none;
 }
@@ -4581,13 +4552,13 @@
    at instead (`--read-scale`, up to 0.8) and how much taller the card must be
    for it (`--read-extra`); the hovered card grows upward by that much, its
    bottom edge where it was. */
-.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .card-tile,
-.hand-strip .hand-cards .hand-card[data-sweep] > .card-tile {
+:is(.hand-strip, .mulligan-modal) .hand-cards .hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .card-tile,
+:is(.hand-strip, .mulligan-modal) .hand-cards .hand-card[data-sweep] > .card-tile {
   height: calc(var(--card-w) * 1.4 + var(--read-extra, 0px));
   margin-top: calc(-1 * var(--read-extra, 0px));
 }
-.hand-strip .hand-cards .hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .card-tile .ct-text,
-.hand-strip .hand-cards .hand-card[data-sweep] > .card-tile .ct-text {
+:is(.hand-strip, .mulligan-modal) .hand-cards .hand-card:is(:hover, .hover-carry, .touch-picked, :focus-within) > .card-tile .ct-text,
+:is(.hand-strip, .mulligan-modal) .hand-cards .hand-card[data-sweep] > .card-tile .ct-text {
   --text-scale: var(--read-scale, var(--fit-scale, 1));
 }
 .hand-card .card-tile.art-first .ct-name-row .ct-name {
@@ -4612,8 +4583,7 @@
    edge just past the grown card's side, on the side facing the middle of the
    hand (`to-left`, as the keyword tips are) — so a card at the right end of
    the hand shows it on the left. The tips move out past it. Hidden, as the
-   tips are, until the card grows, and in the mulligan popup and the grid,
-   where cards don't — by `visibility` in the fan, so it's laid out from the
+   tips are, until the card grows, and in the grid, where cards don't — by `visibility` in the fan, so it's laid out from the
    start and its art-first tile can fit its text to the box as the hand
    card's does (CardTile measures that as it mounts, which it can't in a
    `display: none` box). Its tile takes none of the hand tile's fan or grow:
@@ -4641,10 +4611,6 @@
 .hand-cards .hand-card.touch-picked .hand-other-face,
 .hand-cards .hand-card.hover-carry .hand-other-face {
   visibility: visible;
-}
-.mulligan-modal .hand-cards .hand-card:hover .hand-other-face,
-.mulligan-modal .hand-cards .hand-card.hover-carry .hand-other-face {
-  visibility: hidden;
 }
 .hand-cards .hand-card .hand-other-face .card-tile {
   rotate: none;
