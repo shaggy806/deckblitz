@@ -2,6 +2,11 @@
   {
     "date": "2026-11-25",
     "notes": [
+      "Each player's latest choice (a mode, a colour, a creature type, a card named) shows beside their name, through the turn after it was made.",
+      "Bots under Fatespinner no longer skip their own main phase with lands and spells in hand, and pick the same step again for a second Fatespinner.",
+      "Bots treat putting a permanent into its owner's library as removal: Wan Shi Tong, All-Knowing now aims at an opponent's permanent and gets cast.",
+      "Bots no longer make token copies of their own legendary creatures, which died to the legend rule at once (Echocasting Symposium).",
+      "Bots use Jace, Multiverse Architect's −3 when it's the better play.",
       "A game no longer stops with an error at the end step after a token copy of Avacyn, Angel of Horror dies.",
       "While deciding on a mulligan, the card under your mouse grows so you can read it, as cards in your hand do.",
       "In a two-seat lobby, a bot can be taken out again, leaving its seat open.",
