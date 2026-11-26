@@ -951,6 +951,12 @@ export type EffectAmount =
        * on the stack before its cost is worked out, rules 601.2a, 601.2f). */
       readonly sameNameAs?: "priced";
     }
+  /** How many cards in **exile** match a filter, read from the effect's
+   * controller's side — Niko Defies Destiny's "for each foretold card you own
+   * in exile" (`{ countInExile: { ownedBy: "you", foretold: true } }`). A
+   * face-down card shows only what rule 406.3a lets it (the `foretold`
+   * clause reads it). Never a token (it would have ceased to exist, 704.5d). */
+  | { readonly countInExile: CardFilter }
   /** One per counter of any kind on any player and any permanent — Lumbering
    * Megasloth's "for each counter among players and permanents" (rule 122). */
   | { readonly allCounters: true }
@@ -13853,6 +13859,8 @@ export interface EffectApi {
   /** See the `{ countInGraveyard }` {@link EffectAmount}; `you` reads the
    * filter from that player's side (the effect's controller's otherwise). */
   countInGraveyard(filter: CardFilter, you?: PlayerId, except?: ObjectId): number;
+  /** See the `{ countInExile }` {@link EffectAmount}. */
+  countInExile?(filter: CardFilter): number;
   /** See the `{ allCounters }` {@link EffectAmount}. */
   allCounters(): number;
   /** How much energy `player` has (rule 107.14). */
@@ -19040,6 +19048,7 @@ export function signedAmountValue(
     }
     return ctx.countInGraveyard(amount.countInGraveyard, amount.forEachPlayer === true ? each : undefined);
   }
+  if ("countInExile" in amount) return ctx.countInExile?.(amount.countInExile) ?? 0;
   if ("suspendedCardsYouOwn" in amount) return ctx.suspendedCardsYouOwn?.() ?? 0;
   if ("timesKicked" in amount) return ctx.sourceTimesKicked();
   if ("asCast" in amount) return ctx.sourceAsCast(amount.asCast);

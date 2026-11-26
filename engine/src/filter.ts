@@ -2527,7 +2527,7 @@ function hasParity(state: GameState, value: number, clause: ParityClause, source
 export type CardKeyword =
   | "convoke" | "cycling" | "disguise" | "flashback" | "kicker" | "morph" | "mutate" | "suspend"
   | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth"
-  | "partner" | "devoid" | "doctors-companion";
+  | "partner" | "devoid" | "doctors-companion" | "foretell";
 
 /** Whether a printed line of `def`'s text is this keyword ability: for the
  * keywords a card authors as their parts, with no field of their own. A dash
@@ -2578,6 +2578,10 @@ const CARD_KEYWORD_READS = {
   // its printed line is what tells a spell with devoid from any other
   // colorless one (Corrupted Crossroads's ruling).
   devoid: (def) => hasKeywordLine(def, "Devoid"),
+  // Printed foretell (rule 702.143): "a spell that has foretell", "target
+  // card with foretell" (Niko Defies Destiny). A grant reaches only cards in
+  // a hand (Dream Devourer), never a spell or a graveyard card.
+  foretell: (def) => def.foretell !== null,
 } as const satisfies Record<
   CardKeyword,
   (def: CardDefinition, live: GameObject | undefined, state: GameState, registry: CardRegistry) => boolean

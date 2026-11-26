@@ -778,7 +778,10 @@ row per printed keyword read off the text box (morph, madness, kicker, flashback
 not the other partner abilities (702.124f); `hasKeyword: "doctors-companion"` is doctor's companion (702.124m —
 Rose Noble's "a creature spell with doctor's companion"). `hasKeyword: "devoid"` is the printed devoid line (702.114a),
 which a devoid card's `colors: []` alone doesn't say — "a spell with devoid" (Corrupted Crossroads's
-`spendOnly: { spell: { hasKeyword: "devoid" } }`; the scaffolder reads the line). `keywordVariant: "hexproof" | "protection"` is the keyword in
+`spendOnly: { spell: { hasKeyword: "devoid" } }`; the scaffolder reads the line). `hasKeyword: "foretell"` is printed
+foretell (702.143): Niko Defies Destiny's "spend this mana only to foretell cards or cast spells that have
+foretell" is `spendOnly: { spell: { hasKeyword: "foretell" }, purposes: ["foretell"] }`, its "target card with
+foretell from your graveyard" the same filter. `keywordVariant: "hexproof" | "protection"` is the keyword in
 any variant, printed or granted — hexproof or a "hexproof from [quality]" (702.11d), any "protection from"
 (702.16a) — where `keyword: "hexproof"` is the plain ability alone. `hasActivatedAbility: { mana?: boolean, tapCost?: boolean }` is a non-mana
 activated ability (605.1a); `tapCost: true` one with {T} in its cost (Magewright's Stone; a basic
@@ -832,6 +835,10 @@ spell (Rumbling Aftershocks) or an "up to X targets" reading it (Voyager Drake);
 the effect's controller owns (Rose Tyler's "a time counter on it for each
 suspended card you own and each other permanent you control with a time
 counter on it", a `sum` with a `countOf`);
+`{ countInExile: CardFilter }` — how many cards in exile match, from the
+effect's controller's side: Niko Defies Destiny's "for each foretold card
+you own in exile" is `{ countInExile: { ownedBy: "you", foretold: true } }`
+(times 2 through `product`).
 `{ countInGraveyard: CardFilter }` — how many cards in *graveyards* match
 (Undergrowth — Lotleth Giant's "for each creature card in your graveyard";
 `ownedBy: "you"` is what narrows it to your own). In an "enters with a

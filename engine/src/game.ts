@@ -47421,6 +47421,12 @@ controlledBy,
           const object = this.state.objects[id];
           return object?.owner === controller && object.suspended === true && (object.counters.time ?? 0) > 0;
         }).length,
+      countInExile: (filter) =>
+        this.state.zones.shared.exile.filter(
+          (id) =>
+            this.state.objects[id]?.isToken !== true &&
+            matchesFilter(this.state, this.registry, id, filter, { you: controller }),
+        ).length,
       giveSuspend: (counters, options) => this.giveSuspend(controller, counters, options),
       removeTimeCountersInExile: (amount, exceptExiledThisWay) =>
         this.removeTimeCountersInExile(

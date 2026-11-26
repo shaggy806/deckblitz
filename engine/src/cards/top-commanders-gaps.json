@@ -8,6 +8,8 @@
     "trigger:activates-this-ability",
     "filter:aura-with-enchant-words",
     "static:untargetable-by-wall-only-spells",
+    "amount:foretold-cards-you-own-in-exile",
+    "effect:mana-spend-only-foretell",
     "cost:exile-from-graveyard-pay-its-mana-cost",
     "cost:activated-cost-options",
     "static:spells-targeting-this-spell-cost-more",
