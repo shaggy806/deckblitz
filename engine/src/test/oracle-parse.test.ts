@@ -25678,3 +25678,26 @@ describe("target player shuffles their library (Soldier of Fortune)", () => {
     expect(soldier.activated[0].effect).toEqual({ kind: "shuffle-library", target: 0 });
   });
 });
+
+describe("draws as many as their hand holds, then discards that many", () => {
+  it("Laquatus's Creativity: the hand counted once, before the draw", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{4}{U}",
+      oracle_text: "Target player draws cards equal to the number of cards in their hand, then discards that many cards.",
+    });
+    expect(parsed.targets).toEqual(["player"]);
+    expect(parsed.effect).toEqual({
+      kind: "with-x",
+      x: { cardsInHand: { target: 0 } },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "draw", amount: "x", target: 0 },
+          { kind: "discard", amount: "x", target: 0 },
+        ],
+      },
+    });
+  });
+});

@@ -13,6 +13,7 @@
     "cost:exile-from-graveyard-pay-its-mana-cost",
     "cost:activated-cost-options",
     "static:spells-targeting-this-spell-cost-more",
+    "amount:remembered-number",
     "effect:shuffle-graveyard-cards-filtered",
     "effect:cast-copy-from-opponents-hand",
     "effect:play-until-next-upkeep-then-graveyard",

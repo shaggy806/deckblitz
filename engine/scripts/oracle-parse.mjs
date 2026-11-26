@@ -5060,6 +5060,23 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Cards.
+  // "Target player draws cards equal to the number of cards in their hand,
+  // then discards that many cards" (Laquatus's Creativity): the hand counted
+  // once, before the draw (`with-x`).
+  if ((m = /^(target player|target opponent) draws cards equal to the number of cards in their hand, then discards that many cards\.?$/i.exec(s))) {
+    const t = slot(m[1]);
+    return {
+      kind: "with-x",
+      x: { cardsInHand: { target: t } },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "draw", amount: "x", target: t },
+          { kind: "discard", amount: "x", target: t },
+        ],
+      },
+    };
+  }
   if ((m = re(`(?:you )?draw ${N} cards?`).exec(s))) return { kind: "draw", amount: amount(m[1]) };
   if ((m = re(`(target player|target opponent) draws ${N} cards?`).exec(s))) {
     return { kind: "draw", amount: amount(m[2]), target: slot(m[1]) };
