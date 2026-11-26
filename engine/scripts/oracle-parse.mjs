@@ -7883,6 +7883,11 @@ export function parseSentence(sentence, ctx) {
     if (filter === null) return null;
     return { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, ...(m[2] ? { enterTapped: true } : {}) };
   }
+  // "…for an Aura card with enchant creature…" (Tallowisp): the Aura's own
+  // enchant ability (`enchantAbility`).
+  if (/^search your library for an Aura card with enchant creature, reveal it, put it into your hand, then shuffle\.$/i.test(s)) {
+    return { kind: "search-library", filter: { subtype: "Aura", enchantAbility: "creature" }, destination: "hand", min: 0, max: 1, reveal: true };
+  }
   if ((m = /^search your library for an? (.+?) card, reveal it, put it into your hand, then shuffle\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1], { cards: true });
     if (filter === null) return null;
@@ -27293,6 +27298,11 @@ function parseStatic(line, text) {
         text,
       };
     }
+  }
+  // "You may cast Aura spells with enchant creature as though they had
+  // flash" (Rootwater Shaman): the Aura's own enchant ability.
+  if (line === "You may cast Aura spells with enchant creature as though they had flash.") {
+    return { affects: { scope: "self" }, castAsThoughFlash: { subtype: "Aura", enchantAbility: "creature" }, text };
   }
   if ((m = /^(You|Any player) may cast (?:(.+?) )?spells as though they had flash\.$/.exec(line))) {
     const filter = flashSpellsFilter(m[2]);

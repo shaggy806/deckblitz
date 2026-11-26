@@ -3868,7 +3868,11 @@ enchant** it" (rule 303.4: its enchant ability allows it, protection doesn't sto
 a creature): Auratouched Mage's `{ subtype: "Aura", couldEnchant: "source" }`, bound as the
 effect resolves to that object and the stint it means, and answered by the game
 (`Game.couldEnchantFor`) as the object is or, once it has left, as it last existed (its
-ruling; the snapshot keeps no protection). Only inside a resolving effect. `greatestInZone: { of, among }` is one comparison over
+ruling; the snapshot keeps no protection). Only inside a resolving effect. `enchantAbility:
+"creature"` is "an Aura **with enchant creature**" — the Aura's own enchant ability exactly
+"Enchant creature" (not "enchant creature you control"), a bestowed one included: Tallowisp's
+search `{ subtype: "Aura", enchantAbility: "creature" }`, Rootwater Shaman's `castAsThoughFlash`
+(a bestow card cast bestowed counts, 702.103d). `greatestInZone: { of, among }` is one comparison over
 everything in the object's zone that matches `among`, ties all counted (`strictly`: none,
 Selvala, Heart of the Wilds' "greater than each other creature's power"): over every
 permanent, whoever controls it, on the battlefield — Topple's "target creature with the

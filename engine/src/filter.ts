@@ -45,7 +45,7 @@ import type { AttachmentRecord, CastSpellRecord, GameObject, GameState, LastKnow
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
-import type { TargetRef } from "./target.js";
+import type { TargetRef, TargetSpec } from "./target.js";
 import { thisWayEntries, votesThisWay } from "./this-way.js";
 import { isObjectSetRef, staticSetMembers, type ObjectSetRef } from "./object-sets.js";
 import type { ObjectRef, PlayerRef } from "./refs.js";
@@ -1725,6 +1725,44 @@ export interface CardFilter {
    * on the battlefield"). `null`: it names nothing, so nothing matches.
    */
   readonly couldEnchantHost?: { readonly object: ObjectId; readonly stint: number } | null;
+  /**
+   * An Aura **with enchant creature** (rule 702.5a): its enchant ability is
+   * exactly "Enchant creature" — not "enchant creature you control" or
+   * "enchant green creature" (the Cartouche and Aura Finesse rulings treat
+   * those as other enchant abilities). Read off the Aura's own definition (its
+   * enchant ability is the slot its spell targets, rule 303.4a); a bestowed
+   * one has enchant creature (702.103b), and one on the battlefield whose
+   * enchant ability an effect replaced has that one. Tallowisp's "an Aura
+   * card with enchant creature", Rootwater Shaman's "Aura spells with enchant
+   * creature". Not about any host: for "could enchant it", `couldEnchant`.
+   */
+  readonly enchantAbility?: "creature";
+}
+
+/** Whether `spec`, an Aura's enchant ability, is "Enchant creature" and no
+ * narrower: the `"creature"` word, or a permanent slot whose filter is the
+ * creature type alone. */
+function isEnchantCreature(spec: TargetSpec | undefined): boolean {
+  if (spec === "creature") return true;
+  if (typeof spec !== "object" || spec.kind !== "permanent") return false;
+  if (Object.keys(spec).some((key) => key !== "kind" && key !== "filter" && !(key === "whose" && spec.whose === "any"))) {
+    return false;
+  }
+  const keys = Object.keys(spec.filter);
+  return (
+    (keys.length === 1 && spec.filter.type === "creature") ||
+    (keys.length === 1 && spec.filter.types !== undefined && spec.filter.types.length === 1 && spec.filter.types[0] === "creature")
+  );
+}
+
+/** The enchant ability of the Aura `object` is (`CardFilter.enchantAbility`),
+ * or `undefined` when it isn't an Aura. */
+function enchantAbilityOf(registry: CardRegistry, object: GameObject): TargetSpec | undefined {
+  if (object.bestowed === true) return "creature";
+  if (object.zone === "battlefield" && object.enchantSwap?.spec !== undefined) return object.enchantSwap.spec;
+  const def = registry.get(printedCardName(object));
+  if (!def.subtypes.includes("Aura")) return undefined;
+  return def.targets[0];
 }
 
 /**
@@ -3967,6 +4005,11 @@ export function matchesFilter(
     const read = couldEnchantReaders.get(state);
     if (host === undefined || host === null || read === undefined || live === undefined) return false;
     if (!read(id, host, ctx.you)) return false;
+  }
+
+  // "An Aura with enchant creature": the Aura's own enchant ability.
+  if (filter.enchantAbility !== undefined) {
+    if (layered !== undefined || live === undefined || !isEnchantCreature(enchantAbilityOf(registry, live))) return false;
   }
 
   // "With the greatest power among creatures that player controls": none of
