@@ -50,3 +50,41 @@ describe("Elvish Soultiller", () => {
   });
 });
 
+describe("Reversal of Fortune", () => {
+  it("copies an instant in the opponent's hand and casts the copy free; the card stays", () => {
+    const { game, a } = table();
+    lands(game, "Mountain", 6);
+    const bolt = toHand(game, "Lightning Bolt", B);
+    const bears = toHand(game, "Grizzly Bears", B);
+    let offer: CastNowOffer | undefined;
+    a.chooseCastNowFn = (_v, o): Cast | null => {
+      offer = o;
+      const copy = o.cards[0];
+      return copy === undefined ? null : { type: "cast-spell", player: A, card: copy, targets: [ref(B)], via: "effect", free: true };
+    };
+    cast(game, toHand(game, "Reversal of Fortune"), { targets: [ref(B)] });
+    expect(offer?.cards).toHaveLength(1);
+    // The copy, not the card: it's offered in the card's place (707.12).
+    expect(offer?.cards).not.toContain(bolt);
+    expect(offer?.cards).not.toContain(bears);
+    expect(life(game, B)).toBe(17);
+    expect(zone(game, bolt)).toBe("hand");
+    expect(hand(game, B)).toContain(bolt);
+    // The copy ceased to exist leaving the stack: nothing new in a graveyard.
+    expect(graveyard(game, B)).toEqual([]);
+  });
+
+  it("offers nothing without an instant or sorcery card in that hand", () => {
+    const { game, a } = table();
+    lands(game, "Mountain", 6);
+    toHand(game, "Grizzly Bears", B);
+    let asked = false;
+    a.chooseCastNowFn = () => {
+      asked = true;
+      return null;
+    };
+    cast(game, toHand(game, "Reversal of Fortune"), { targets: [ref(B)] });
+    expect(asked).toBe(false);
+  });
+});
+
