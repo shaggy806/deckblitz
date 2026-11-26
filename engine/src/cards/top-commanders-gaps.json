@@ -3243,7 +3243,8 @@
   "mechanic:secret-choice",
   "mechanic:sectors",
   "effect:for-each-player-except-target",
-  "effect:counter-choice-each-created-token"
+  "effect:counter-choice-each-created-token",
+  "effect:for-each-counter-kind-among-permanents"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -14083,6 +14083,14 @@ describe("exchanges with a life total", () => {
         ctx(),
       ).effect,
     ).toEqual({ kind: "another-counter-of-each-kind", target: 0, orRemove: true });
+    // Bribe Taker: a modal of up to one for each kind among your permanents.
+    const bribe = parseEffect(
+      "For each kind of counter on permanents you control, you may put your choice of a +1/+1 counter or a counter of that kind on ~.",
+      ctx(),
+    ).effect;
+    expect(bribe.kind).toBe("for-each-counter-kind");
+    expect(bribe.among).toEqual({ controlledBy: "you" });
+    expect(bribe.effect.modes[1].effect).toEqual({ kind: "add-counter", target: "source", counter: "$chosenCounter", amount: 1 });
   });
 
   it("reads a free cast from among exiled cards under a limit: a count or a total mana value", () => {

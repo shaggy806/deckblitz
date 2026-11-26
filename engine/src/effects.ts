@@ -3187,6 +3187,25 @@ export type EffectSpec =
     }
   | {
       /**
+       * `effect` once for each kind of counter (rule 122.1) on one or more
+       * permanents matching `among`, from the controller's side — "for each
+       * kind of counter on permanents you control, you may put your choice of
+       * a +1/+1 counter or a counter of that kind on this creature" (Bribe
+       * Taker: `among: { controlledBy: "you" }`, `effect` a `modal` of
+       * `minModes: 0`). The kinds are read once as this begins, in name
+       * order, however many of each there are (Bribe Taker's ruling: two
+       * shield counters are one kind); a counter put on during the loop adds
+       * no kind. Each turn is a `sequence` step, so a choice waits for the one
+       * before. In `effect`, `CHOSEN_COUNTER` is that kind — as a counter
+       * name, and inside any text (a mode's label "A $chosenCounter
+       * counter").
+       */
+      readonly kind: "for-each-counter-kind";
+      readonly among: CardFilter;
+      readonly effect: EffectSpec;
+    }
+  | {
+      /**
        * Bolster N (rule 701.39a): the effect's controller chooses a creature
        * they control with the least toughness, or tied for it, among
        * creatures they control, and puts `amount` +1/+1 counters on it. The
@@ -21294,6 +21313,25 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         },
         ctx,
       );
+      return;
+    }
+    case "for-each-counter-kind": {
+      const kinds = ctx.keywordCountersAmong(spec.among, "every-kind");
+      if (kinds.length === 0) return;
+      // The kind stands in for `CHOSEN_COUNTER` wherever it's written: a
+      // counter's name, or inside a label.
+      const forKind = (kind: string): EffectSpec => {
+        const walk = (value: unknown): unknown => {
+          if (typeof value === "string") return value.includes(CHOSEN_COUNTER) ? value.split(CHOSEN_COUNTER).join(kind) : value;
+          if (Array.isArray(value)) return value.map(walk);
+          if (value !== null && typeof value === "object") {
+            return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, walk(v)]));
+          }
+          return value;
+        };
+        return walk(spec.effect) as EffectSpec;
+      };
+      applyEffectSpec({ kind: "sequence", effects: kinds.map(forKind) }, ctx);
       return;
     }
     case "about-player":

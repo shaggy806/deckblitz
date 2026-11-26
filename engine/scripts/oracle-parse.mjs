@@ -4771,6 +4771,27 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // "For each kind of counter on permanents you control, you may put your
+  // choice of a +1/+1 counter or a counter of that kind on this creature"
+  // (Bribe Taker): `for-each-counter-kind`, a modal of up to one per kind.
+  if (sentenceRe(`for each kind of counter on permanents you control, you may put your choice of a \\+1/\\+1 counter or a counter of that kind on ~`).test(s)) {
+    return {
+      kind: "for-each-counter-kind",
+      among: { controlledBy: "you" },
+      effect: {
+        kind: "modal",
+        minModes: 0,
+        maxModes: 1,
+        modes: [
+          { text: "A +1/+1 counter", effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 } },
+          {
+            text: `A ${CHOSEN_COUNTER} counter`,
+            effect: { kind: "add-counter", target: "source", counter: CHOSEN_COUNTER, amount: 1 },
+          },
+        ],
+      },
+    };
+  }
   // "Add X mana in any combination of colors, where X is the greatest power
   // among creatures you control" (Selvala, Heart of the Wilds): each unit the
   // player's pick, X read as it's made (rule 605.3a).
