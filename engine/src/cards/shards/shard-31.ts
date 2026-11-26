@@ -52,6 +52,7 @@ import _poolArenaAthlete from "../pool/arena-athlete.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolArterialFlow from "../pool/arterial-flow.js";
+import _poolArtifactPossession from "../pool/artifact-possession.js";
 import _poolArvadOfTheWeatherlight from "../pool/arvad-of-the-weatherlight.js";
 import _poolAscendFromAvernus from "../pool/ascend-from-avernus.js";
 import _poolAshesOfTheFallen from "../pool/ashes-of-the-fallen.js";
@@ -1054,6 +1055,7 @@ import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
 import _poolVulcanMindMeld from "../pool/vulcan-mind-meld.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
+import _poolWallOfShadows from "../pool/wall-of-shadows.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
 import _poolWaltzOfRage from "../pool/waltz-of-rage.js";
 import _poolWandOfIth from "../pool/wand-of-ith.js";
@@ -1179,6 +1181,7 @@ const shard: CardShard = {
     _poolArgentDais,
     _poolArmoredCancrix,
     _poolArterialFlow,
+    _poolArtifactPossession,
     _poolArvadOfTheWeatherlight,
     _poolAscendFromAvernus,
     _poolAshesOfTheFallen,
@@ -2181,6 +2184,7 @@ const shard: CardShard = {
     _poolVulcanMindMeld,
     _poolWalkingAtlas,
     _poolWallOfMist,
+    _poolWallOfShadows,
     _poolWallOfWood,
     _poolWaltzOfRage,
     _poolWandOfIth,

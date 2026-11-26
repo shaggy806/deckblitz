@@ -835,6 +835,7 @@ import _poolTarpan from "../pool/tarpan.js";
 import _poolTaunt from "../pool/taunt.js";
 import _poolTazeemRaptor from "../pool/tazeem-raptor.js";
 import _poolTcriBuilding from "../pool/tcri-building.js";
+import _poolTeferiTimelessVoyager from "../pool/teferi-timeless-voyager.js";
 import _poolTeferiWhoSlowsTheSunset from "../pool/teferi-who-slows-the-sunset.js";
 import _poolTeferisRealm from "../pool/teferis-realm.js";
 import _poolTemplarKnight from "../pool/templar-knight.js";
@@ -1832,6 +1833,7 @@ const shard: CardShard = {
     _poolTaunt,
     _poolTazeemRaptor,
     _poolTcriBuilding,
+    _poolTeferiTimelessVoyager,
     _poolTeferiWhoSlowsTheSunset,
     _poolTeferisRealm,
     _poolTemplarKnight,

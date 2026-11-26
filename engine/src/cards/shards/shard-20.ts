@@ -929,6 +929,7 @@ import _poolTabletOfDiscovery from "../pool/tablet-of-discovery.js";
 import _poolTaintedObserver from "../pool/tainted-observer.js";
 import _poolTalasAirShip from "../pool/talas-air-ship.js";
 import _poolTalismanOfHierarchy from "../pool/talisman-of-hierarchy.js";
+import _poolTallowisp from "../pool/tallowisp.js";
 import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
 import _poolTalruumChampion from "../pool/talruum-champion.js";
 import _poolTamiyosEpiphany from "../pool/tamiyos-epiphany.js";
@@ -2050,6 +2051,7 @@ const shard: CardShard = {
     _poolTaintedObserver,
     _poolTalasAirShip,
     _poolTalismanOfHierarchy,
+    _poolTallowisp,
     _poolTalonGatesOfMadara,
     _poolTalruumChampion,
     _poolTamiyosEpiphany,

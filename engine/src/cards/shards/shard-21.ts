@@ -475,6 +475,7 @@ import _poolLagonnaBandElder from "../pool/lagonna-band-elder.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLastBreath from "../pool/last-breath.js";
+import _poolLavaBurst from "../pool/lava-burst.js";
 import _poolLavacoreElemental from "../pool/lavacore-elemental.js";
 import _poolLazotepConvert from "../pool/lazotep-convert.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
@@ -1504,6 +1505,7 @@ const shard: CardShard = {
     _poolLakesideShack,
     _poolLambholtHarrier,
     _poolLastBreath,
+    _poolLavaBurst,
     _poolLavacoreElemental,
     _poolLazotepConvert,
     _poolLazotepSliver,

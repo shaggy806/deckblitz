@@ -645,6 +645,7 @@ import _poolPoppetFactory from "../pool/poppet-factory.js";
 import _poolPopularEntertainer from "../pool/popular-entertainer.js";
 import _poolPossessionEngine from "../pool/possession-engine.js";
 import _poolPounce from "../pool/pounce.js";
+import _poolPowerleech from "../pool/powerleech.js";
 import _poolPreposterousProportions from "../pool/preposterous-proportions.js";
 import _poolPriestOfFellRites from "../pool/priest-of-fell-rites.js";
 import _poolPrimalAdversary from "../pool/primal-adversary.js";
@@ -1652,6 +1653,7 @@ const shard: CardShard = {
     _poolPopularEntertainer,
     _poolPossessionEngine,
     _poolPounce,
+    _poolPowerleech,
     _poolPreposterousProportions,
     _poolPriestOfFellRites,
     _poolPrimalAdversary,

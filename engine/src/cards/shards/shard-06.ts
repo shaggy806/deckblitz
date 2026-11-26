@@ -199,6 +199,7 @@ import _poolCopyArtifact from "../pool/copy-artifact.js";
 import _poolCoretapper from "../pool/coretapper.js";
 import _poolCorruptCourtOfficial from "../pool/corrupt-court-official.js";
 import _poolCostOfBrilliance from "../pool/cost-of-brilliance.js";
+import _poolCoverOfWinter from "../pool/cover-of-winter.js";
 import _poolCovetousDragon from "../pool/covetous-dragon.js";
 import _poolCrabappleCohort from "../pool/crabapple-cohort.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
@@ -1265,6 +1266,7 @@ const shard: CardShard = {
     _poolCoretapper,
     _poolCorruptCourtOfficial,
     _poolCostOfBrilliance,
+    _poolCoverOfWinter,
     _poolCovetousDragon,
     _poolCrabappleCohort,
     _poolCrackTheEarth,

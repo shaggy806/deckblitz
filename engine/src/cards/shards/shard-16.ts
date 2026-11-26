@@ -499,6 +499,7 @@ import _poolKroxaTitanOfDeathsHunger from "../pool/kroxa-titan-of-deaths-hunger.
 import _poolKrydleOfBaldursGate from "../pool/krydle-of-baldurs-gate.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLadyEvangela from "../pool/lady-evangela.js";
+import _poolLandEquilibrium from "../pool/land-equilibrium.js";
 import _poolLashOfThorns from "../pool/lash-of-thorns.js";
 import _poolLastDitchEffort from "../pool/last-ditch-effort.js";
 import _poolLastingTarfire from "../pool/lasting-tarfire.js";
@@ -1626,6 +1627,7 @@ const shard: CardShard = {
     _poolKrydleOfBaldursGate,
     _poolLadyCaleria,
     _poolLadyEvangela,
+    _poolLandEquilibrium,
     _poolLashOfThorns,
     _poolLastDitchEffort,
     _poolLastingTarfire,

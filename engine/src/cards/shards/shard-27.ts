@@ -987,6 +987,7 @@ import _poolWeatheredSentinels from "../pool/weathered-sentinels.js";
 import _poolWeddingRing from "../pool/wedding-ring.js";
 import _poolWeirdHarvest from "../pool/weird-harvest.js";
 import _poolWhimwader from "../pool/whimwader.js";
+import _poolWhippoorwill from "../pool/whippoorwill.js";
 import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
 import _poolWindsOfChange from "../pool/winds-of-change.js";
@@ -2030,6 +2031,7 @@ const shard: CardShard = {
     _poolWeddingRing,
     _poolWeirdHarvest,
     _poolWhimwader,
+    _poolWhippoorwill,
     _poolWillowGeist,
     _poolWillowduskEssenceSeer,
     _poolWindsOfChange,

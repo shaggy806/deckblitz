@@ -26,6 +26,7 @@ import _poolAlabornZealot from "../pool/alaborn-zealot.js";
 import _poolAlchemistsVial from "../pool/alchemists-vial.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
 import _poolAlignedHeart from "../pool/aligned-heart.js";
+import _poolAlliedStrategies from "../pool/allied-strategies.js";
 import _poolAlloyAnimist from "../pool/alloy-animist.js";
 import _poolAlmsBeast from "../pool/alms-beast.js";
 import _poolAlpineMeadow from "../pool/alpine-meadow.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolAlchemistsVial,
     _poolAliciaMastersSkilledSculptor,
     _poolAlignedHeart,
+    _poolAlliedStrategies,
     _poolAlloyAnimist,
     _poolAlmsBeast,
     _poolAlpineMeadow,

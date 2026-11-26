@@ -185,6 +185,7 @@ import _poolClockworkDroid from "../pool/clockwork-droid.js";
 import _poolCoastalPiracy from "../pool/coastal-piracy.js";
 import _poolCoerciveImpetus from "../pool/coercive-impetus.js";
 import _poolCogworkersPuzzleknot from "../pool/cogworkers-puzzleknot.js";
+import _poolCollapsingBorders from "../pool/collapsing-borders.js";
 import _poolCompassionateHealer from "../pool/compassionate-healer.js";
 import _poolCompleatDevotion from "../pool/compleat-devotion.js";
 import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
@@ -736,6 +737,7 @@ import _poolRoadsideReliquary from "../pool/roadside-reliquary.js";
 import _poolRoast from "../pool/roast.js";
 import _poolRogueElephant from "../pool/rogue-elephant.js";
 import _poolRohirrimLancer from "../pool/rohirrim-lancer.js";
+import _poolRootwaterShaman from "../pool/rootwater-shaman.js";
 import _poolRotShambler from "../pool/rot-shambler.js";
 import _poolRovingHarper from "../pool/roving-harper.js";
 import _poolRowdySnowballers from "../pool/rowdy-snowballers.js";
@@ -1275,6 +1277,7 @@ const shard: CardShard = {
     _poolCoastalPiracy,
     _poolCoerciveImpetus,
     _poolCogworkersPuzzleknot,
+    _poolCollapsingBorders,
     _poolCompassionateHealer,
     _poolCompleatDevotion,
     _poolConclaveEquenaut,
@@ -1826,6 +1829,7 @@ const shard: CardShard = {
     _poolRoast,
     _poolRogueElephant,
     _poolRohirrimLancer,
+    _poolRootwaterShaman,
     _poolRotShambler,
     _poolRovingHarper,
     _poolRowdySnowballers,

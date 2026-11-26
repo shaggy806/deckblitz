@@ -210,6 +210,7 @@ import _poolDeadlyAlliance from "../pool/deadly-alliance.js";
 import _poolDeadlyRecluse from "../pool/deadly-recluse.js";
 import _poolDeathFrenzy from "../pool/death-frenzy.js";
 import _poolDeathInTheFamily from "../pool/death-in-the-family.js";
+import _poolDeathsApproach from "../pool/deaths-approach.js";
 import _poolDecoratedGriffin from "../pool/decorated-griffin.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
 import _poolDefiantThundermaw from "../pool/defiant-thundermaw.js";
@@ -1307,6 +1308,7 @@ const shard: CardShard = {
     _poolDeadlyRecluse,
     _poolDeathFrenzy,
     _poolDeathInTheFamily,
+    _poolDeathsApproach,
     _poolDecoratedGriffin,
     _poolDefiantKhenra,
     _poolDefiantThundermaw,
