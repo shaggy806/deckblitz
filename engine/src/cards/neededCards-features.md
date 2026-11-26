@@ -8852,3 +8852,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A new target narrower than the spell's slot (2026-11-26).** `effect:change-target-new-target-restricted`: `change-targets` `newTargetIs` (`"player"` or a `CardFilter`), filtering the legal new targets in `Game.changeStackTargets`. Rebound, Meddle, Silver Wyvern. `test/change-targets-new-target-is.test.ts`.
 
 **Attacking alone (2026-11-26).** `filter:attacking-alone`: `CardFilter.attackingAlone` (rule 506.5), in `matchesFilter`; the scaffolder reads "target creature (you control) that's attacking alone". Viper, Cruel Conspirator, Crowd of True Believers. `test/attacking-alone.test.ts`.
+
+**The least among every creature or nonland permanent (2026-11-26).** `filter:least-power-among-all-creatures`: no engine code — `greatestInZone` with `least: true` over the battlefield (Drop of Honey's shape), in a `choose-permanents` or a target slot. Porphyry Nodes, Culling Scales. `test/least-among-all.test.ts`.
