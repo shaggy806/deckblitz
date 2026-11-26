@@ -888,9 +888,10 @@ against full hands. So the rest are rules, each a floor on what the spell is spe
 | Spell | Waits for | Rule |
 | --- | --- | --- |
 | Reanimation | a card of mana value 4, or 3/4 of the battlefield's average creature | `takeSlot` |
-| Removal | a creature worth a Grizzly Bears (v2: by `rankValue`); not held from a commander, an attacker, or an early mana creature | `removesTooLittle` |
+| Removal | a creature worth a Grizzly Bears (v2: by `rankValue`); not held from a commander, a creature attacking us (any attacker until 2026-11-25), or an early mana creature | `removesTooLittle` |
+| Instant removal at a creature with no ability (2026-11-25) | that creature attacking us, or one worth a Craw Wurm, while any opponent holds a card | `removesTooLittle` |
 | Steal | the same at a 3/3 for three | `removesTooLittle` |
-| Counterspell | a spell of mana value 3; not held from a commander, a spell aimed at us, or when every opponent's hand is empty | `removesTooLittle` |
+| Counterspell | a spell of mana value 3, and a creature with no ability worth a 4/4 for five (2026-11-25); not held from a commander, a spell aimed at us, or when every opponent's hand is empty | `removesTooLittle` |
 | Clone | something on the battlefield worth a 3/3 for three | `holdsCloneForMore` |
 | X spell | X of 3 (a permanent: 1), unless it kills a player | `xTooSmall` |
 | Instant tutor to the top of the library | the end of the turn before ours | `holdsTopTutor` |
@@ -1386,6 +1387,52 @@ Draconic Destruction, Quick Draw; four games, against 2627a1550), before the pla
 planner's single deal. After it: 44 of 6,768, none of them Jace's. Leyline Dowser's "mill a
 card" is 17 of them, 11 passing where the old build milled and 6 the other way. That is a
 top-card read too, and one deal still decides it, as it does draws.
+
+### Waiting for the later window (2026-11-25)
+
+A player's report, of the Bracket 4 decks: the bots take instant-speed actions "immediately".
+Krenko tapped in the upkeep before the turn's Goblins were cast, counterspells fired at the
+first spell, and removal spent on something that wasn't yet a problem, with the next player's
+bigger one unanswered. All three came out on boards, and for the reason the holds above
+exist: a rollout passes our own seat and a card in hand is an average card, so whatever an
+action does now is a gain over waiting, and nothing shows what waiting would have had.
+
+Where waiting is free, it is now the rule:
+
+- **An ability at any cost waits for the main phase** (`holdsManaForMain`, which held mana
+  alone). In our own upkeep and draw step, and in our main phase while only our own abilities
+  are on the stack, a tap, a sacrifice or a counter is spent before the turn's plays are on
+  the board, as mana is. Krenko, Mob Boss was tapped in the upkeep for three Goblins with two
+  more in hand, and again over Impact Tremors' trigger from the first of them. From an empty
+  stack in the main phase the turn's plan already casts first. Only a condition on the step
+  ("activate only during your upkeep") lets an ability out.
+- **An instant waits for a plain body to attack us** (`removesTooLittle`,
+  `INSTANT_REMOVAL_FLOOR` 15). A creature with no ability but keywords (`plainBodyWorth`)
+  is a problem only once it is pointed at us, and an instant can answer it then. While any
+  opponent holds a card, such a creature below a Craw Wurm isn't a target for an instant
+  unless it is attacking us or something of ours. Attacking another player it is theirs to
+  answer, and the old exception for any attacker is now for one attacking us. A creature
+  with an ability keeps the old floor and the search: Zulaport Cutthroat and Goblin
+  Electromancer are still shot for what they do (two gate scenarios said so when the first
+  cut held every creature below the floor).
+- **The blocker in the way of a kill is still removed** (`clearsTheWayToKill`, v2). A removal
+  the floor holds stays a candidate on our own turn before the attack when our ready
+  creatures have the power to end the target's controller, counted only if that player is
+  dead at the end of its rollout (`mustKill`, as a pump on another player's attacker is).
+- **A counterspell lets a plain body below a 4/4 for five go by** (`COUNTER_BODY_FLOOR` 12),
+  under the same conditions as the mana value floor: Counterspell, and Force of Will with a
+  card pitched to it, went at a Centaur Courser with four cards in each opponent's hand.
+
+Seven gate scenarios, the Krenko pair, the held Swords, the Counterspell and three that hold
+what the rule mustn't cost (the 3/3 that attacks us is exiled, the one attacking another
+player isn't, the blocker before a kill is). Three games watched on the strong decks before
+the change (Y'shtola, Krenko, Edgar Markov, Pantlaza at the live clock) had ten removal and
+counter casts between them, eight at commanders and engines and two at Goblin Trashmaster, so
+the floors move few decisions on real lists: what they stop is the vanilla body and the token.
+
+Not built, in `BACKLOG.md`: a counterspell cast for what casting it triggers (Y'shtola's own
+trigger makes Force of Will at a Cultivate score above passing), and the other instants that
+could wait for the end of the turn before ours (card draw, a creature with flash).
 
 ## Watching live games for
 

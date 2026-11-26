@@ -31,7 +31,7 @@ import { defaultRegistry } from "../cards/default-registry.js";
 import { HeuristicBotController, StandInController, compareReach, isLandfallPermanent, payoffFirst } from"../controller.js";
 import type { ControllerView, LandReach, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { rulesTextName } from "../state.js";
+import { activePlayerOf, rulesTextName } from "../state.js";
 import type { GameState } from "../state.js";
 import { matchesFilter } from "../filter.js";
 import type { CardFilter } from "../filter.js";
@@ -2405,7 +2405,13 @@ export class EvalBotController extends HeuristicBotController {
           if (this.takesTooLittle(view.state, legal, action)) continue;
           // And removal at a creature not worth the card (`removesTooLittle`),
           // priced as the search ranks targets, so an engine counts.
-          if (this.removesTooLittle(view.state, legal, action, rankValue)) continue;
+          // Unless it is a blocker in the way of an attack that ends its
+          // controller this turn (`clearsTheWayToKill`): kept only if it does.
+          let cleared: PlayerId | null = null;
+          if (this.removesTooLittle(view.state, legal, action, rankValue)) {
+            cleared = this.clearsTheWayToKill(view.state, action);
+            if (cleared === null) continue;
+          }
           // An X spell at too small an X (`xTooSmall`).
           if (this.xTooSmall(view.state, legal, action)) continue;
           // A counter at a spell that can't be countered (`countersNothing`).
@@ -2418,6 +2424,7 @@ export class EvalBotController extends HeuristicBotController {
           const spends = this.spendsHeldMana(view.state, action);
           if (spends === "drop") continue;
           if (spends !== "ok" && !mustKill.has(action)) mustKill.set(action, spends.kills);
+          if (cleared !== null && !mustKill.has(action)) mustKill.set(action, cleared);
           // Not a wipe that ends the game as it resolves (`winsAsItResolves`):
           // held, it tied with passing to combat and casting it after, and
           // the combat between spent its mana.
@@ -4096,6 +4103,38 @@ export class EvalBotController extends HeuristicBotController {
     // replay scores the land drop by the board the crack reached.
     this.trace?.(land, after);
     return evaluateState(after, this.cards, player, this.weights);
+  }
+
+  /**
+   * The player a removal spell held for a better target (`removesTooLittle`)
+   * may still be cast at: the controller of the creature it is aimed at, on
+   * our own turn before the attack, when our creatures ready to attack have
+   * the power to end that player. The spell stays a candidate that counts
+   * only if they are dead by the end of its rollout (`mustKill`), so a
+   * blocker in the way of the kill is still removed and nothing else is.
+   */
+  private clearsTheWayToKill(state: GameState, action: Action): PlayerId | null {
+    if (action.type !== "cast-spell" || activePlayerOf(state) !== this.playerId) return null;
+    if (state.turn.step !== "precombat-main" && state.turn.step !== "begin-combat") return null;
+    let victim: PlayerId | null = null;
+    for (const target of action.targets ?? []) {
+      if (target === null || target === undefined || target.kind !== "object") continue;
+      const object = state.objects[target.object];
+      if (object === undefined || object.zone !== "battlefield" || object.controller === this.playerId) continue;
+      victim = object.controller;
+      break;
+    }
+    if (victim === null) return null;
+    let power = 0;
+    for (const id of state.zones.shared.battlefield) {
+      const object = state.objects[id];
+      if (object === undefined || object.controller !== this.playerId || object.tapped) continue;
+      const c = computeCharacteristics(state, this.cards, id);
+      if (!c.types.includes("creature")) continue;
+      if (object.summoningSick === true && !c.keywords.has("haste")) continue;
+      power += Math.max(0, c.power) * (object.stackCount ?? 1);
+    }
+    return power >= (state.players[victim]?.life ?? Infinity) ? victim : null;
   }
 
   private score(

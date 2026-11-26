@@ -6700,6 +6700,196 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "leaves Krenko untapped in its upkeep with Goblins still to cast",
+    rule: "A tap spent before the main phase is spent before the turn's casts are on the board: Krenko makes a Goblin for each one out.",
+    position(registry) {
+      // A player's report (2026-11-25): Krenko, Mob Boss tapped in the upkeep
+      // ahead of the Goblins in hand. From the main phase the turn's plan
+      // casts them first; `holdsManaForMain` held only mana.
+      const game = Game.create({ seed: 3, registry, decks: [A, B, C, D].map(forestDeck) });
+      game.advanceUntil(
+        (s) =>
+          s.turn.number > 4 &&
+          s.turnOrder[s.turn.activePlayerIndex] === A &&
+          s.turn.step === "upkeep" &&
+          s.priority.holder === A,
+      );
+      if (game.state.turn.step !== "upkeep") return { passed: false, detail: "never reached alice's upkeep" };
+      game.state.zones.perPlayer[A].hand = [];
+      lands(game, "Mountain", A, 5);
+      const krenko = onBoard(game, "Krenko, Mob Boss", A);
+      onBoard(game, "Goblin Piledriver", A);
+      onBoard(game, "Goblin Piledriver", A);
+      game.debugSpawn("Goblin Chieftain", A, "hand");
+      game.debugSpawn("Goblin Instigator", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "activate-ability" && action.source === krenko),
+          detail: `in its upkeep chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "leaves Krenko untapped over its own Impact Tremors trigger with a Goblin still to cast",
+    rule: "With only our own trigger on the stack the main phase's casts are still to come: an ability that counts the board waits for them.",
+    position(registry) {
+      // The same report, in the main phase: the first Goblin's Impact
+      // Tremors trigger is a window, and Krenko was tapped in it with the
+      // second Goblin still in hand.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 5);
+      const krenko = onBoard(game, "Krenko, Mob Boss", A);
+      onBoard(game, "Goblin Piledriver", A);
+      onBoard(game, "Goblin Piledriver", A);
+      onBoard(game, "Impact Tremors", A);
+      const chieftain = game.debugSpawn("Goblin Chieftain", A, "hand");
+      game.debugSpawn("Goblin Instigator", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: chieftain, targets: [] });
+      const triggerWaits = (): boolean =>
+        game.state.priority.holder === A &&
+        game.state.zones.shared.stack.some((id) => game.state.objects[id]?.kind === "ability");
+      for (let i = 0; i < 12 && !triggerWaits(); i += 1) {
+        const holder = game.state.priority.holder;
+        if (holder === null || holder === undefined) break;
+        game.dispatch({ type: "pass-priority", player: holder });
+      }
+      if (!triggerWaits()) return { passed: false, detail: "Impact Tremors never triggered" };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "activate-ability" && action.source === krenko),
+          detail: `over the trigger chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "holds Swords to Plowshares from a vanilla 3/3 that isn't attacking it",
+    rule: "A creature that is only a body is a problem once it attacks us, and an instant can wait for that while the opponents hold cards.",
+    position(registry) {
+      // A player's report (2026-11-25): removal went at what wasn't yet a
+      // problem, at the first window, and the next player's bigger one had
+      // no answer. Swords and Anguished Unmaking were cast at a Centaur
+      // Courser in the bot's own main phase (`INSTANT_REMOVAL_FLOOR`).
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Plains", A, 3);
+      onBoard(game, "Serra Angel", A);
+      onBoard(game, "Centaur Courser", B);
+      const swords = game.debugSpawn("Swords to Plowshares", A, "hand");
+      holding(game, [B, C, D], 4);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === swords),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "spends Swords to Plowshares on a vanilla 3/3 that attacks it",
+    rule: "The hold ends when the creature is pointed at us: the removal is a block.",
+    position(registry) {
+      const game = table(registry, [A, B, C, D], B);
+      lands(game, "Plains", A, 3);
+      onBoard(game, "Grizzly Bears", A);
+      const courser = onBoard(game, "Centaur Courser", B);
+      const swords = game.debugSpawn("Swords to Plowshares", A, "hand");
+      holding(game, [B, C, D], 4);
+      game.advanceUntil((s) => (s.awaiting?.kind === "attackers" && s.awaiting.player === B) || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "bob was never asked to attack" };
+      game.dispatch({ type: "declare-attackers", player: B, attackers: [{ attacker: courser, defender: A }] });
+      game.advanceUntil((s) => s.priority.holder === A || s.awaiting !== null);
+      if (game.state.priority.holder !== A) return { passed: false, detail: "alice never held priority in the attack" };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === swords && firstTarget(action) === courser,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "keeps Swords to Plowshares while a vanilla 3/3 attacks another player",
+    rule: "A creature attacking someone else is their problem: the removal is held as it is from one that stayed home.",
+    position(registry) {
+      const game = table(registry, [A, B, C, D], B);
+      lands(game, "Plains", A, 3);
+      onBoard(game, "Grizzly Bears", A);
+      const courser = onBoard(game, "Centaur Courser", B);
+      const swords = game.debugSpawn("Swords to Plowshares", A, "hand");
+      holding(game, [B, C, D], 4);
+      game.advanceUntil((s) => (s.awaiting?.kind === "attackers" && s.awaiting.player === B) || s.result.over);
+      if (game.state.awaiting?.kind !== "attackers") return { passed: false, detail: "bob was never asked to attack" };
+      game.dispatch({ type: "declare-attackers", player: B, attackers: [{ attacker: courser, defender: C }] });
+      game.advanceUntil((s) => s.priority.holder === A || s.awaiting !== null);
+      if (game.state.priority.holder !== A) return { passed: false, detail: "alice never held priority in the attack" };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === swords),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "kills the vanilla blocker in the way of an attack that ends its controller",
+    rule: "A removal held for a better target still clears the way to a kill this turn.",
+    position(registry) {
+      // What the hold above mustn't cost (`clearsTheWayToKill`): bob on 6,
+      // a Craw Wurm ready to attack, his one blocker a Centaur Courser.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Swamp", A, 3);
+      onBoard(game, "Craw Wurm", A);
+      const courser = onBoard(game, "Centaur Courser", B);
+      game.state.players[B].life = 6;
+      const murder = game.debugSpawn("Murder", A, "hand");
+      holding(game, [B, C, D], 4);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === murder && firstTarget(action) === courser,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "lets a vanilla 3/3 by a Counterspell while every opponent holds cards",
+    rule: "A creature spell that is only a body below a 4/4 for five isn't worth a counterspell with better spells still to come.",
+    position(registry) {
+      // The same report: counterspells fired at the first spell cast.
+      // Counterspell, and Force of Will with a card pitched, went at a
+      // Centaur Courser with four cards in each opponent's hand
+      // (`COUNTER_BODY_FLOOR`).
+      const game = table(registry, [A, B, C, D], B);
+      lands(game, "Island", A, 5);
+      lands(game, "Forest", B, 8);
+      const counterspell = game.debugSpawn("Counterspell", A, "hand");
+      holding(game, [B, C, D], 4);
+      const courser = game.debugSpawn("Centaur Courser", B, "hand");
+      castAndPassTo(game, B, courser, A);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === counterspell),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "blocks with every lifelink Soldier when the life they gain is what keeps it alive",
     rule: "A lifelink blocker gains life as it blocks: against an attack too wide to stop, the blocks that gain the most are the ones that survive it.",
     position(registry) {

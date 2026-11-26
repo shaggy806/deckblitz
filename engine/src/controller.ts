@@ -4088,7 +4088,9 @@ export class HeuristicBotController extends AutomaticController {
   /**
    * Whether `offer` would spend mana in this bot's own upkeep or draw step,
    * with nothing on the stack — mana its main phase could have cast a spell
-   * with. The search can't see that: its rollouts pass at every window, so
+   * with — or activate an ability there at any cost (a tap is spent before
+   * the main phase's plays are on the board, as mana is). The search can't
+   * see that: its rollouts pass at every window, so
    * the main phase's spells never appear in them and the mana looks free. On
    * seed 50 v2 spent its upkeep on Hoard-Smelter Dragon and Scavenging Ooze
    * and cast nothing after. Mana spent on an opponent's turn untaps on ours,
@@ -4150,8 +4152,14 @@ export class HeuristicBotController extends AutomaticController {
     // activated every upkeep, {3} and the land, with the main phase's spell
     // still to cast (watched in a bot game, 2026-11-14).
     if (ability.condition !== undefined && JSON.stringify(ability.condition).includes('"turn-structure"')) return false;
-    const mana = ability.cost.mana;
-    return mana !== null && mana !== "" && mana !== "{0}";
+    // A cost that isn't mana is spent early too: a tap, a sacrifice, a
+    // counter. Krenko, Mob Boss was tapped in the upkeep for as many Goblins
+    // as were out, with two more in hand to cast first, and in the main
+    // phase over Impact Tremors' trigger from the first of them (a player's
+    // report, 2026-11-25); from an empty stack in the main phase the turn's
+    // plan puts the casts ahead of him. Nothing is lost by waiting: that
+    // window comes with the same board and every sorcery-speed play beside it.
+    return true;
   }
 
   /**
@@ -4655,6 +4663,14 @@ export class HeuristicBotController extends AutomaticController {
     // Taking a creature costs more than killing it and is worth what it
     // takes: a Control Magic waits for more than a Murder does.
     const floor = stealsATarget(def) ? STEAL_FLOOR : REMOVAL_FLOOR;
+    // An instant can wait for a creature that is a body and nothing more
+    // (`plainBodyWorth`) to attack us, and is held from a bigger one for
+    // that: such a creature is a problem only once it is pointed at us, and
+    // while the opponents hold cards there is a worse one to come.
+    const waitsForAttack =
+      !stealsATarget(def) &&
+      def.types.includes("instant") &&
+      state.turnOrder.some((p) => p !== me && !state.players[p].hasLost && state.zones.perPlayer[p].hand.length > 0);
     const earlyRounds = Math.ceil(state.turn.number / Math.max(1, state.turnOrder.length)) < EARLY_MANA_ROUNDS;
     const tooLittle = (target: TargetRef | null | undefined): boolean => {
       if (target === null || target === undefined || target.kind !== "object") return false;
@@ -4677,10 +4693,24 @@ export class HeuristicBotController extends AutomaticController {
             aimed !== null &&
             (aimed.kind === "player" ? aimed.player === me : state.objects[aimed.object]?.controller === me),
         );
-        return !atUs && this.manaValueOf(object.cardName) < COUNTER_FLOOR;
+        if (atUs) return false;
+        if (this.manaValueOf(object.cardName) < COUNTER_FLOOR) return true;
+        // A creature spell that is a body and nothing more, below
+        // `COUNTER_BODY_FLOOR`: Counterspell, and Force of Will with a card
+        // pitched to it, went at a vanilla 3/3 for three while every
+        // opponent held four cards (a player's report, 2026-11-25).
+        const body = this.plainBodyWorth(printedCardName(object));
+        return body !== null && body < COUNTER_BODY_FLOOR;
       }
       if (object === undefined || object.zone !== "battlefield" || object.controller === me) return false;
-      if (object.isCommander === true || object.attacking !== null) return false;
+      if (object.isCommander === true) return false;
+      // Attacking us, or a planeswalker or battle of ours: the removal is a
+      // block. Attacking someone else it is their problem, and the spell is
+      // held as it is from a creature that stayed home.
+      if (object.attacking !== null) {
+        const defender = object.attacking as string;
+        if (defender === me || state.objects[defender as ObjectId]?.controller === me) return false;
+      }
       if (!computeCharacteristics(state, this.registry, target.object).types.includes("creature")) return false;
       // A mana creature in the opening rounds is acceleration, and worth the
       // removal (the evaluation's `earlyMana`; the gate's "kills an early
@@ -4688,11 +4718,28 @@ export class HeuristicBotController extends AutomaticController {
       if (earlyRounds && this.registry.has(object.cardName) && this.registry.get(object.cardName).activated.some(isManaAbility)) {
         return false;
       }
-      return value(state, this.registry, target) < floor;
+      const plain = waitsForAttack && this.plainBodyWorth(rulesTextName(object)) !== null;
+      return value(state, this.registry, target) < (plain ? INSTANT_REMOVAL_FLOOR : floor);
     };
     // "You control enchanted creature" (Control Magic): the Aura's one slot.
     if (aura) return tooLittle(action.targets?.[0]);
     return slots.some((slot, i) => slot !== null && slot.polarity === "harm" && slot.weight === 2 && tooLittle(action.targets?.[i]));
+  }
+
+  /**
+   * What a creature card is worth as a body alone, on `targetValue`'s scale
+   * (a vanilla 3/3 for three is 9), or `null` for a card that isn't a
+   * creature or does anything else at all: an ability of any kind, a
+   * trigger, a static, an effect as it enters. Those are left to the search.
+   * Evergreen keywords count one each, as `targetValue` counts them.
+   */
+  private plainBodyWorth(name: string): number | null {
+    if (!this.registry.has(name)) return null;
+    const def = this.registry.get(name);
+    if (!def.types.includes("creature") || typeof def.power !== "number" || typeof def.toughness !== "number") return null;
+    if (def.activated.length > 0 || def.triggered.length > 0 || def.static.length > 0) return null;
+    if (def.effect !== null || def.resolve !== null) return null;
+    return 1.5 * def.power + def.toughness + 0.5 * this.manaValueOf(name) + def.keywords.length;
   }
 
   /**
@@ -6686,6 +6733,18 @@ const LIBRARY_RUNS_OUT_AT = 15;
  * is 6, a vanilla 3/3 for three 9) for a removal spell to be spent on it
  * (`removesTooLittle`). */
 const REMOVAL_FLOOR = 6;
+/** The same for an instant at a creature that is only a body
+ * (`plainBodyWorth`: no ability but keywords), which can wait for that
+ * creature to attack us: what one that isn't attacking us has to be worth
+ * for the spell to go at it anyway (a Serra Angel is 14.5, a Craw Wurm 16,
+ * a Shivan Dragon 16.5). The bots spent Swords to Plowshares and
+ * Anguished Unmaking on a vanilla 3/3 at the first window they had, their
+ * own main phase included, and had nothing for what the next player cast
+ * (a player's report, 2026-11-25). */
+const INSTANT_REMOVAL_FLOOR = 15;
+/** The least a creature spell that is only a body is worth
+ * (`plainBodyWorth`) for a counterspell to be spent on it: a 4/4 for five. */
+const COUNTER_BODY_FLOOR = 12;
 /** A hand at the maximum size: a spell held from it would be discarded. */
 const FULL_HAND = 7;
 /** The same for a spell that takes the creature rather than killing it, and
