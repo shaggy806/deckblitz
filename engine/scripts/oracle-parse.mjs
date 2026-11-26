@@ -26294,7 +26294,7 @@ function parseStatic(line, text) {
       return {
         affects: { scope: w[1] === "equipped creature" ? "attached" : "self" },
         sharesKeywords: {
-          from: fromGraveyard !== null ? { graveyard: { type: "creature" } } : "exiled-with-source",
+          from: fromGraveyard !== null ? { graveyard: { type: "creature" } } : delved !== null ? "delved" : "exiled-with-source",
           ...(delved !== null ? { filter: { type: "creature" } } : {}),
           keywords: ["flying", ...listed],
           ...(words.includes("protection") ? { protection: true } : {}),

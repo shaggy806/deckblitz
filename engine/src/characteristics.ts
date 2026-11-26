@@ -2015,12 +2015,39 @@ function sharedKeywordsOf(
 } | null {
   const shared = ability.sharesKeywords;
   if (shared === undefined) return null;
+  // What its delve exiled, as it was then (Soulflayer): kept on this stint.
+  if (shared.from === "delved") {
+    const kept = source.delvedKeywords;
+    if (kept === undefined || kept.stint !== (source.zoneChangeCount ?? 0)) {
+      return { keywords: [], protections: [], hexproofs: [], landwalks: [] };
+    }
+    return { keywords: [...kept.keywords], protections: [], hexproofs: [...kept.hexproofs], landwalks: [] };
+  }
   const ctx = { you: source.controller, source: source.id };
   const cards = (liveReferenceObjects(state, registry, shared.from, ctx) ?? []).filter(
     (id) =>
       state.objects[id] !== undefined &&
       (shared.filter === undefined || matchesFilter(state, registry, id, shared.filter, ctx)),
   );
+  return sharedKeywordsAmong(state, registry, cards, shared, source);
+}
+
+/** The listed keywords, "hexproof from", protection and landwalk abilities
+ * `cards` have now, for a `sharesKeywords` of `source`'s — what
+ * `sharedKeywordsOf` reads, and what a delve's are kept as as it exiles them
+ * (`GameObject.delvedKeywords`). */
+export function sharedKeywordsAmong(
+  state: GameState,
+  registry: CardRegistry,
+  cards: readonly ObjectId[],
+  shared: NonNullable<StaticAbility["sharesKeywords"]>,
+  source: GameObject,
+): {
+  readonly keywords: readonly Keyword[];
+  readonly protections: readonly NonNullable<AppliedEffect["protection"]>[];
+  readonly hexproofs: readonly NonNullable<StaticAbility["hexproofFrom"]>[];
+  readonly landwalks: readonly CardFilter[];
+} {
   const keywords = new Set<Keyword>();
   const protections: NonNullable<AppliedEffect["protection"]>[] = [];
   const hexproofs: NonNullable<StaticAbility["hexproofFrom"]>[] = [];

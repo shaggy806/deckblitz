@@ -25489,7 +25489,7 @@ describe("keywords of the creature cards a delve exiled (Soulflayer)", () => {
         "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nIf a creature card with flying was exiled with this creature's delve ability, this creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, reach, trample, and vigilance.",
     });
     expect(flayer.static[0].sharesKeywords).toEqual({
-      from: "exiled-with-source",
+      from: "delved",
       filter: { type: "creature" },
       keywords: ["flying", "first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "reach", "trample", "vigilance"],
     });

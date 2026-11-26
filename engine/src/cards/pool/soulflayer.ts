@@ -13,10 +13,11 @@ import { defineCard } from "../define.js";
 //   If one of those creature cards has one or more variants of the listed keywords (for example,
 //     hexproof from white), this creature gains those specific variants.
 //
-// A printed delve links the cards it exiled to the permanent the spell
-// becomes (rule 607.2q), so "exiled with this creature's delve ability" is
-// `sharesKeywords`' `"exiled-with-source"`, creature cards alone. What a card
-// grants itself only with a condition doesn't count (the first ruling), and
+// "Was exiled with this creature's delve ability" is past tense: `sharesKeywords`'
+// `from: "delved"` keeps what the creature cards its printed delve exiled had
+// as they were exiled, on the permanent the spell becomes (rules 607.2q,
+// 400.7), so a card that later leaves exile still counts. What a card grants
+// itself only with a condition doesn't count (the first ruling), and
 // "hexproof" brings each "hexproof from" (the third).
 
 const KEYWORDS_TEXT =
@@ -36,7 +37,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       sharesKeywords: {
-        from: "exiled-with-source",
+        from: "delved",
         filter: { type: "creature" },
         keywords: [
           "flying",

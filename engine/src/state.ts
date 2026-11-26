@@ -1582,6 +1582,19 @@ export interface GameObject {
    * condition.
    */
   exiledWithCount?: { readonly stint: number; readonly count: number };
+  /**
+   * What its printed delve exiled, as those cards were in exile, for a
+   * `sharesKeywords` static `from: "delved"` (Soulflayer's "if a creature
+   * card with flying **was** exiled with this creature's delve ability"):
+   * the listed keywords and "hexproof from" abilities the matching cards had
+   * then. Kept for the battlefield stint `stint`, the permanent the spell
+   * becomes (rules 607.2q, 400.7), whatever becomes of the cards later.
+   */
+  delvedKeywords?: {
+    readonly stint: number;
+    readonly keywords: readonly Keyword[];
+    readonly hexproofs: readonly NonNullable<StaticAbility["hexproofFrom"]>[];
+  };
   /** True while this adventure card sits in exile after its adventure resolved
    * (rule 715.3 — ROADMAP Phase 10): its owner may cast the creature half from
    * exile. Cleared on any zone change. */

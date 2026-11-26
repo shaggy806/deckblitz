@@ -3073,9 +3073,17 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * has flying. The same is true for …" (Cairn Wanderer: `{ graveyard: { type:
    * "creature" } }`; its ruling: all cards in all graveyards, each landwalk and
    * protection ability among them).
+   *
+   * `from: "delved"` is the cards this card's printed delve exiled as it was
+   * cast, **as they were** in exile then (Soulflayer's "if a creature card
+   * with flying was exiled with this creature's delve ability"): matched
+   * against `filter` and read as the spell is cast, kept on the permanent it
+   * becomes (`GameObject.delvedKeywords`), so a card that later leaves exile
+   * still counts. Keywords and "hexproof from" only; not `protection` or
+   * `landwalk`.
    */
   readonly sharesKeywords?: {
-    readonly from: "exiled-with-source" | { readonly graveyard: CardFilter };
+    readonly from: "exiled-with-source" | "delved" | { readonly graveyard: CardFilter };
     readonly filter?: CardFilter;
     readonly keywords: readonly Keyword[];
     readonly protection?: true;

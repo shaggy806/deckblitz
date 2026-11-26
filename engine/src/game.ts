@@ -233,6 +233,7 @@ import {
   lethalDamageOf,
   lethalDamageLeft,
   sharedAbilitiesOnBattlefield,
+  sharedKeywordsAmong,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
 import {
@@ -26009,6 +26010,20 @@ export class Game {
       for (const id of delve) {
         const card = this.state.objects[id];
         if (card?.zone === "exile") card.exiledWith = link;
+      }
+      // "If a creature card with flying **was** exiled with this creature's
+      // delve ability" (Soulflayer): what they had as they were exiled, kept
+      // for the permanent, whatever becomes of the cards.
+      const delvedShare = def.static.find((s) => s.sharesKeywords?.from === "delved")?.sharesKeywords;
+      if (delvedShare !== undefined) {
+        const ctx = { you: player, source: cardId };
+        const matching = delve.filter(
+          (id) =>
+            this.state.objects[id]?.zone === "exile" &&
+            (delvedShare.filter === undefined || matchesFilter(this.state, this.registry, id, delvedShare.filter, ctx)),
+        );
+        const had = sharedKeywordsAmong(this.state, this.registry, matching, delvedShare, object);
+        object.delvedKeywords = { stint: link.zoneChangeCount, keywords: had.keywords, hexproofs: had.hexproofs };
       }
     }
     // The player who casts a spell controls it (rule 601.2a) — a card cast

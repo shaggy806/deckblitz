@@ -34,6 +34,31 @@ describe("Soulflayer", () => {
     expect(has.has("trample")).toBe(false);
   });
 
+  it("keeps them once the card it delved has left exile: 'was exiled'", () => {
+    const { game } = table();
+    lands(game, "Swamp", 2);
+    const angel = toGraveyard(game, "Serra Angel");
+    const fodder = [toGraveyard(game, "Lightning Bolt"), toGraveyard(game, "Opt"), toGraveyard(game, "Divination")];
+    const flayer = toHand(game, "Soulflayer");
+    cast(game, flayer, { delve: [angel, ...fodder] });
+    game.debugMove(angel, "hand");
+    expect(zone(game, angel)).toBe("hand");
+    expect(keywords(game, flayer).has("flying")).toBe(true);
+    expect(keywords(game, flayer).has("vigilance")).toBe(true);
+  });
+
+  it("a new object once it leaves the battlefield: none when it returns (rule 400.7)", () => {
+    const { game } = table();
+    lands(game, "Swamp", 2);
+    const angel = toGraveyard(game, "Serra Angel");
+    const fodder = [toGraveyard(game, "Lightning Bolt"), toGraveyard(game, "Opt"), toGraveyard(game, "Divination")];
+    const flayer = toHand(game, "Soulflayer");
+    cast(game, flayer, { delve: [angel, ...fodder] });
+    game.debugMove(flayer, "graveyard");
+    game.debugMove(flayer, "battlefield");
+    expect(keywords(game, flayer).has("flying")).toBe(false);
+  });
+
   it("has none with nothing delved", () => {
     const { game } = table();
     lands(game, "Swamp", 6);
