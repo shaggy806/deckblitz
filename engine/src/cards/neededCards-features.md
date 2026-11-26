@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### An ability without {T} in its activation cost — built 2026-11-26
+
+The key `filter:ability-cost-without-tap`: the `ability-activated` event's `tapCost` (its cost has {T}, rule 107.5: set
+where an ability goes on the stack, where a mana ability is activated by hand, and where one pays a cost) and the
+`activates-ability` trigger's `withoutTapCost`. Powerleech (21659), Artifact Possession (27481), each with its "becomes
+tapped" half as a second trigger (`sameAbilityAs`). Not in the scaffolder (two one-off sentences).
+`test/activates-ability-without-tap.test.ts`.
+
 ### Creature cards in the enchanted creature's controller's graveyard — found built 2026-11-26
 
 The key `amount:graveyard-count-of-enchanted-controller` needed no engine code: `grantPtPerCount`'s `inGraveyard` with

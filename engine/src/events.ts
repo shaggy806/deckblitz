@@ -993,6 +993,11 @@ export type GameEvent =
        * activate it" counts it; Vazi, Keen Negotiator's "if mana from a
        * Treasure was spent to … activate it" reads its origins. */
       readonly manaSpent?: readonly SpentMana[];
+      /** Its activation cost has the tap symbol {T} (rule 107.5) — what
+       * "an artifact's ability **without {T} in its activation cost**"
+       * (Powerleech, Artifact Possession) asks. Absent for none: cycling,
+       * a mana ability without {T}, "{2}: … ". */
+      readonly tapCost?: true;
     })
   | (Base & {
       /**

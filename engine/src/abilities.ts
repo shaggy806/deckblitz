@@ -2974,6 +2974,10 @@ export type TriggerKind =
        * from this object (not a copy's, not one granted to it, rule 113.7a),
        * so a granted ability of the same text never counts. */
       readonly ownAbility?: number;
+      /** "An ability **without {T} in its activation cost**" (Powerleech,
+       * Artifact Possession): its cost has no tap symbol (rule 107.5), read
+       * off the event's `tapCost` — a mana ability's too, with `orMana`. */
+      readonly withoutTapCost?: true;
     }
   | {
       /** *This* spell (the one carrying the ability) was cast — a triggered

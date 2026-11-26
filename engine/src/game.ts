@@ -30478,6 +30478,7 @@ export class Game {
         : {}),
       ...(lifePaidToActivate > 0 ? { lifePaid: lifePaidToActivate } : {}),
       ...(manaSpentOnThis.length > 0 ? { manaSpent: manaSpentOnThis } : {}),
+      ...(ability.cost.tap ? { tapCost: true as const } : {}),
     });
     // What it was activated targeting, each permanent as it was: "the first
     // activated ability you activate … that targets a creature you control"
@@ -31038,6 +31039,7 @@ export class Game {
       onStack: false,
       ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
       ...(manaSpent !== undefined && manaSpent.length > 0 ? { manaSpent } : {}),
+      ...(ability.cost.tap ? { tapCost: true as const } : {}),
     });
     // Activated by hand, its player holding priority (`whyCannotAct`) —
     // one activated while paying a cost is `executePayment`'s, inside the
@@ -33312,6 +33314,9 @@ export class Game {
         onStack: false,
         ofPermanent: true,
         ...(spent.length > 0 ? { manaSpent: spent } : {}),
+        // A planned option without {T} is marked `untapped` (one that
+        // taps others instead, Springleaf Drum's, too).
+        ...(step.untapped === undefined ? { tapCost: true as const } : {}),
       });
     }
   }
@@ -40316,6 +40321,8 @@ export class Game {
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
         if (spec.lifePaidToActivate === true && (event.lifePaid ?? 0) <= 0) return false;
         if (spec.manaSpentAtLeast !== undefined && (event.manaSpent?.length ?? 0) < spec.manaSpentAtLeast) return false;
+        // "Without {T} in its activation cost" (Powerleech).
+        if (spec.withoutTapCost === true && event.tapCost === true) return false;
         // "If mana from a Treasure was spent to activate it" (Vazi): the
         // mana that paid its own cost, a mana ability's too (605.3a).
         if (spec.manaSpent !== undefined && !spec.manaSpent.every((query) => spentManaCount(event.manaSpent ?? [], query) > 0)) {
