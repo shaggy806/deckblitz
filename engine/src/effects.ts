@@ -1876,16 +1876,24 @@ export interface CopyForEach {
  * choose one of those permanents. Copy that spell. The copy targets the
  * chosen permanent"; Zevlor, Elturel Exile's "for each other opponent, choose
  * that player or a permanent they control, copy that spell, and the copy
- * targets the chosen player or permanent".
+ * targets the chosen player or permanent"; Beamsplitter Mage's "if you
+ * control one or more other creatures that spell could target, choose one of
+ * those creatures. Copy that spell. The copy targets the chosen creature"
+ * (`of: "you"`).
  */
 export interface CopyAimChoice {
   /** Whose: the copier's opponents still in the game but the ones the spell
    * targets and the controllers of the permanents it targets (as they last
-   * existed, once gone) — "another opponent", "each other opponent". */
-  readonly of: "other-opponents";
+   * existed, once gone) — "another opponent", "each other opponent". Or
+   * `"you"`: the copier's own permanents — Beamsplitter Mage's "if you
+   * control one or more other creatures that spell could target, choose one
+   * of those creatures". */
+  readonly of: "other-opponents" | "you";
   /** Their permanents to choose among, read from the copier's side: `{}` for
    * "a permanent they control", Magmarch's `{ notTypes: ["land"] }`. */
   readonly filter: CardFilter;
+  /** "Other creatures" (Beamsplitter Mage): not the ability's source. */
+  readonly other?: true;
   /** "That player or a permanent they control" (Zevlor): the player too. */
   readonly players?: true;
   /** "For each other opponent, choose …, copy that spell" (Zevlor): a choice

@@ -48296,7 +48296,7 @@ controlledBy,
         // "Could target" is the spell's, as its caster cast it.
         const caster = refs.triggerSpellController ?? this.state.objects[triggerObject]?.controller ?? copier;
         const capture = { snapshot: spell, original: triggerObject, caster };
-        this.askNextChosenAim(capture, this.copyAimGroups(capture, copier, choice), copier, source);
+        this.askNextChosenAim(capture, this.copyAimGroups(capture, copier, choice, source), copier, source);
       },
       copyNextChosenAim: (spell) => this.askNextChosenAim(spell, spell.aimGroups ?? [], controller, source),
       copyAimCount: (choice) => {
@@ -48305,7 +48305,7 @@ controlledBy,
         if (spell === null) return 0;
         const caster = refs.triggerSpellController ?? spell.controller ?? controller;
         const capture = { snapshot: spell, original: triggerObject, caster };
-        return this.copyAimGroups(capture, controller, choice).reduce((n, group) => n + group.length, 0);
+        return this.copyAimGroups(capture, controller, choice, source).reduce((n, group) => n + group.length, 0);
       },
       solveSource: () => {
         const object = this.state.objects[source];
@@ -55845,12 +55845,14 @@ controlledBy,
    * `copier`'s side. One group per player with `eachPlayer`, else one in
    * all. With `couldTarget`, only a legal target for each of the spell's
    * targets; a group where nothing is, choosing makes no copy, so it's left
-   * out.
+   * out. `of: "you"` is one group, `copier` and their own permanents
+   * (Beamsplitter Mage); `other` leaves out `source`.
    */
   private copyAimGroups(
     spell: NonNullable<Extract<EffectSpec, { kind: "copy-spell" }>["spell"]>,
     copier: PlayerId,
     choice: CopyAimChoice,
+    source?: ObjectId,
   ): TargetRef[][] {
     const { snapshot, original } = spell;
     const caster = spell.caster ?? copier;
@@ -55870,11 +55872,16 @@ controlledBy,
       else if (live?.zone === "battlefield") aimedAt.add(live.controller);
     });
     const opponents = new Set(this.scopedPlayers(copier, "each-opponent"));
-    const others = this.apnapOrder().filter(
-      (p) => opponents.has(p) && !aimedAt.has(p) && this.state.players[p]?.hasLost !== true,
-    );
+    const others =
+      choice.of === "you"
+        ? [copier]
+        : this.apnapOrder().filter(
+            (p) => opponents.has(p) && !aimedAt.has(p) && this.state.players[p]?.hasLost !== true,
+          );
     const couldAim = (to: TargetRef): boolean => this.retargetedSnapshot(snapshot, to, caster, original) !== null;
-    const permanents = this.battlefieldMatching(copier, choice.filter);
+    const permanents = this.battlefieldMatching(copier, choice.filter, undefined, source).filter(
+      (id) => choice.other !== true || id !== source,
+    );
     const groups = others.map((p): TargetRef[] => {
       const group: TargetRef[] = [
         ...(choice.players === true ? [{ kind: "player" as const, player: p }] : []),

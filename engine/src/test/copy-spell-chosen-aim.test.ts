@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import type { TargetRef } from "../target.js";
-import { B, C, D, activate, cast, lands, life, ref, spawn, table as openTable, toHand, zone } from "./harness.js";
+import { B, C, D, activate, cast, lands, life, pt, ref, spawn, table as openTable, toHand, zone } from "./harness.js";
 
 // `copy-spell`'s `retargetToChosen` (rule 707.10e): a copy of the trigger's
 // spell whose every target is one its controller chooses as it resolves among
@@ -158,6 +158,55 @@ describe("Exterminator Magmarch", () => {
     spawn(game, "Grizzly Bears", C);
     lands(game, "Mountain", 1);
     cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(B)], settle: false });
+    expect(game.state.zones.shared.stack.length).toBe(1);
+  });
+});
+
+// `of: "you"`: among the copier's own permanents, other than the source.
+describe("Beamsplitter Mage", () => {
+  it("copies a spell aimed at it at another creature you control that you choose", () => {
+    const { game, a } = table();
+    const mage = spawn(game, "Beamsplitter Mage");
+    const bears = spawn(game, "Grizzly Bears");
+    const elves = spawn(game, "Llanowar Elves");
+    spawn(game, "Grizzly Bears", B);
+    lands(game, "Forest", 1);
+    const offers: (readonly TargetRef[])[] = [];
+    a.choosePermanentOrPlayerFn = (_view, offer) => {
+      offers.push(offer.eligible);
+      return ref(elves);
+    };
+    cast(game, toHand(game, "Giant Growth"), { targets: [ref(mage)] });
+    // Not the Mage itself, nor an opponent's creature.
+    expect(offers).toEqual([[ref(bears), ref(elves)]]);
+    expect(pt(game, mage)).toEqual({ power: 5, toughness: 5 });
+    expect(pt(game, elves)).toEqual({ power: 4, toughness: 4 });
+    expect(pt(game, bears)).toEqual({ power: 2, toughness: 2 });
+  });
+
+  it("makes the copy unasked when there's one other creature, and doesn't trigger with none", () => {
+    const { game, a } = table();
+    const mage = spawn(game, "Beamsplitter Mage");
+    lands(game, "Forest", 2);
+    a.choosePermanentOrPlayerFn = () => {
+      throw new Error("nothing to ask");
+    };
+    // No other creature: the intervening "if" is false, so no trigger.
+    cast(game, toHand(game, "Giant Growth"), { targets: [ref(mage)], settle: false });
+    expect(game.state.zones.shared.stack.length).toBe(1);
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0);
+    const bears = spawn(game, "Grizzly Bears");
+    cast(game, toHand(game, "Giant Growth"), { targets: [ref(mage)] });
+    expect(pt(game, bears)).toEqual({ power: 5, toughness: 5 });
+  });
+
+  it("doesn't trigger on a spell aimed at another creature", () => {
+    const { game } = table();
+    spawn(game, "Beamsplitter Mage");
+    const bears = spawn(game, "Grizzly Bears");
+    spawn(game, "Llanowar Elves");
+    lands(game, "Forest", 1);
+    cast(game, toHand(game, "Giant Growth"), { targets: [ref(bears)], settle: false });
     expect(game.state.zones.shared.stack.length).toBe(1);
   });
 });

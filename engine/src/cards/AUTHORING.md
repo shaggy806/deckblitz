@@ -2317,7 +2317,12 @@ stack makes no copy. With
   them all). A group with one in it is made unasked. The `{ copyAims }` amount counts what it
   would offer for the trigger's spell: Magmarch's intervening "if another opponent controls one
   or more nonland permanents that spell could target" is `{ kind: "amounts", left: { copyAims },
-  op: "gte", right: 1 }` (`copy-spell-chosen-aim.test.ts`).
+  op: "gte", right: 1 }` (`copy-spell-chosen-aim.test.ts`). `of: "you"` chooses among the
+  copier's own permanents instead (`other` leaves out the ability's source):
+  Beamsplitter Mage's "if you control one or more other creatures that spell could target,
+  choose one of those creatures. Copy that spell. The copy targets the chosen creature" is
+  `{ of: "you", filter: { type: "creature" }, other: true, couldTarget: true }`, on a trigger
+  filtered `targets: { only: true, source: true }`.
 - **Gravestorm** is `gravestorm()` (helpers.ts, rule 702.69a): a `this-cast` `copy-spell` with
   `newTargets` and a `count` of `{ turnHistory: "to-graveyard", who: "each-player", from:
   ["battlefield"] }`, tokens included, read as it resolves (Ominous Harvest).
