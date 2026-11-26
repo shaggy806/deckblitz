@@ -8829,6 +8829,7 @@ function Table({
           }
           pickedIds={mode === 'choose-permanents' ? new Set<string>(permanentPicks) : pickedObjKeys}
           onTargetClick={(id) => clickPermanent([id])}
+          activatable={mode === 'priority' ? new Set(abilitiesBySource.keys()) : undefined}
           pickSources={mode === 'choose-permanents'}
           aimed={aim}
           onFocusEntry={setStackFocus}

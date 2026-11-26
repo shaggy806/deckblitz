@@ -41,6 +41,10 @@ export interface StackProps {
   /** Only called for an id that's actually in `targetSlot` (CardTile itself
    * won't dispatch a click otherwise -- see its own `clickable` gate). */
   readonly onTargetClick?: (id: ObjectId) => void
+  /** Spells with an ability of their own this seat may activate while they're
+   * on the stack (Lightning Storm, rule 113.6): clickable outside targeting,
+   * the click opening its ability menu through `onTargetClick`. */
+  readonly activatable?: ReadonlySet<ObjectId>
   /** An ability's entry also picks its source once that has left the
    * battlefield — a choice of a source of damage (rule 609.7a), which may be
    * a dead creature whose trigger is waiting. */
@@ -91,6 +95,7 @@ export function Stack({
   targetSlot = [],
   pickedIds,
   onTargetClick,
+  activatable,
   pickSources = false,
   aimed = null,
   onFocusEntry,
@@ -257,6 +262,7 @@ export function Stack({
                   obj={isGhost ? asCardFace(obj) : faceOf(obj)}
                   badge={obj.isCopy ? 'copy' : undefined}
                   highlight={targetable}
+                  activatable={!isGhost && !targetable && (activatable?.has(id) ?? false)}
                   selected={
                     !isGhost &&
                     (run.some((member) => pickedIds?.has(member) ?? false) ||
