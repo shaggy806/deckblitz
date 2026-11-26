@@ -64195,7 +64195,15 @@ controlledBy,
         this.state.turn.step === "end" || this.state.turn.step === "cleanup",
       ...(this.state.turn.step === "end" ? { createdInEndStep: this.state.turn.endSteps ?? 1 } : {}),
       source,
-      sourceName: object === undefined ? "a spell" : printedCardName(object),
+      // A source that has ceased to exist — a token whose own trigger sets
+      // this up after it died (rule 111.7: a token copy of Avacyn, Angel of
+      // Horror) — is named as it last existed (608.2h). The name goes on the
+      // stack as the trigger's card name, and every view looks it up as a
+      // card: "a spell" stopped deckblitz.net room 9N875 (2026-11-26).
+      sourceName:
+        object !== undefined
+          ? printedCardName(object)
+          : (this.state.ceasedTokens?.[source]?.name ?? "a spell"),
       ...(object?.isCopy === true && typeof when === "object" && "whenever" in when ? { sourceCopy: { ...object } } : {}),
       // Captured by value: the ability chooses no new targets when it fires
       // (its text doesn't say "target", rule 115.10a; it acts on these,

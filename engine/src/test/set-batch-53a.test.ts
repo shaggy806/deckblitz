@@ -134,6 +134,29 @@ describe("Avacyn, Angel of Horror", () => {
     expect(named(game, "Soldier Token")).toHaveLength(0);
   });
 
+  // A token copy of her dying sets up its return from a token that has
+  // ceased to exist by the time the trigger resolves (rule 111.7). The
+  // delayed trigger was named "a spell", which isn't a card: at the end step
+  // it went on the stack under that name and every seat's view threw
+  // "unknown card: a spell", stopping the game (deckblitz.net room 9N875,
+  // 2026-11-26). It keeps the token's name, from its last-known information.
+  it("names a token copy's return trigger after the token, so the end step can be shown", () => {
+    const { game } = table();
+    const token = spawn(game, "Avacyn, Angel of Horror");
+    game.state.objects[token].isToken = true;
+    destroy(game, token);
+    settle(game);
+    expect(game.state.objects[token]).toBeUndefined();
+    const delayed = game.state.delayedTriggers.filter((d) => d.source === token);
+    expect(delayed).toHaveLength(1);
+    expect(delayed[0].sourceName).toBe("Avacyn, Angel of Horror");
+    toStep(game, "end");
+    expect(() => game.viewFor(A)).not.toThrow();
+    expect(() => game.viewFor(B)).not.toThrow();
+    settle(game);
+    expect(named(game, "Avacyn, Angel of Horror")).toHaveLength(0);
+  });
+
   it("returns an opponent's creature card it controlled under its own control", () => {
     const { game } = table();
     spawn(game, "Avacyn, Angel of Horror");
