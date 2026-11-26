@@ -24,7 +24,7 @@ import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
 import { defaultAssignment } from "./combat/damage.js";
 import { deckBias, polarityBias } from "./deck-bias.js";
-import { matchesFilter } from "./filter.js";
+import { matchesFilter, supertypesOf } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { CardDefinition, Keyword } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
@@ -107,6 +107,7 @@ import {
   damageLands,
   damageOnStack,
   modalPolarities,
+  offerCopySlots,
   offerDamage,
   offerPolarities,
   onlyWrongSide,
@@ -3243,11 +3244,33 @@ export class HeuristicBotController extends AutomaticController {
         ...castExtras(legal, pickLast, modalX),
       };
     }
+    // A token copy of a legend of ours dies to the legend rule, one or the
+    // other (rule 704.5j): another creature to copy first. Echocasting
+    // Symposium's free copy made a Sakashima the Impostor every turn for
+    // sixty turns, each gone at once (kept game G9TFZ, 2026-11-25).
+    const copies = offerCopySlots(this.registry, legal);
+    const ownLegend = (ref: TargetRef): boolean => {
+      const object = ref.kind === "object" ? state.objects[ref.object] : undefined;
+      return (
+        object !== undefined &&
+        object.controller === player &&
+        this.registry.has(printedCardName(object)) &&
+        supertypesOf(this.registry, object).includes("legendary")
+      );
+    };
+    const castOptions =
+      copies.size === 0
+        ? legal.targetOptions
+        : legal.targetOptions.map((slot, i) => {
+            if (!copies.has(i)) return slot;
+            const others = slot.filter((ref) => !ownLegend(ref));
+            return others.length > 0 ? others : slot;
+          });
     const targets = fitCastTargets(
       legal,
       this.aimedTargets(
         state,
-        legal.targetOptions,
+        castOptions,
         legal.targetSpecs,
         offerPolarities(this.registry, legal, polarityBias(state, this.playerId)),
         offerDamage(this.registry, legal),
@@ -4626,9 +4649,9 @@ export class HeuristicBotController extends AutomaticController {
       offer.castModal !== undefined
         ? (action.modes ?? []).flatMap((index) => {
             const mode = def.castModal?.modes[index];
-            return mode === undefined ? [] : [...slotStrengths(mode.effect, mode.targets?.length ?? 0)];
+            return mode === undefined ? [] : [...slotStrengths(mode.effect, mode.targets?.length ?? 0, undefined, mode.targets)];
           })
-        : slotStrengths(def.effect, def.targets?.length ?? 0);
+        : slotStrengths(def.effect, def.targets?.length ?? 0, undefined, def.targets);
     // Taking a creature costs more than killing it and is worth what it
     // takes: a Control Magic waits for more than a Murder does.
     const floor = stealsATarget(def) ? STEAL_FLOOR : REMOVAL_FLOOR;
@@ -4989,7 +5012,7 @@ export class HeuristicBotController extends AutomaticController {
     if (copy === undefined || copy.kind === "ability" || !this.registry.has(copy.cardName)) return null;
     const def = this.registry.get(copy.cardName);
     if (def.castModal != null || def.effect == null) return null;
-    const all = slotPolarities(def.effect, def.targets.length, bias);
+    const all = slotPolarities(def.effect, def.targets.length, bias, def.targets);
     return pending.slots.map((slot) => all[slot] ?? "either");
   }
 
@@ -5031,8 +5054,9 @@ export class HeuristicBotController extends AutomaticController {
     const ownLegend = (id: ObjectId): boolean => {
       const object = state.objects[id];
       if (object === undefined || object.controller !== this.playerId) return false;
-      const name = printedCardName(object);
-      return this.registry.has(name) && (this.registry.get(name).supertypes ?? []).includes("legendary");
+      // As it is, not as printed: a Sakashima the Impostor copying a 2/10
+      // is legendary (rule 707.9b), and so is a copy of it.
+      return this.registry.has(printedCardName(object)) && supertypesOf(this.registry, object).includes("legendary");
     };
     const worth = options.filter((id) => !ownLegend(id));
     const best = rankTargets(

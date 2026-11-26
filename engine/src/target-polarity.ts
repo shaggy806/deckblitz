@@ -74,8 +74,15 @@ interface Touch {
 
 interface Visit {
   /** This effect does `polarity` to whatever `ref` names, if it names a
-   * target slot. */
-  touch(ref: unknown, polarity: Polarity, weight: number): void;
+   * target slot — or `offBoard` instead to a slot whose spec is a card in a
+   * graveyard, exile or a hand (`cardOffBoard`), where the slots' specs are
+   * known: the same move is removal to a permanent and recursion to a card. */
+  touch(
+    ref: unknown,
+    polarity: Polarity,
+    weight: number,
+    offBoard?: { readonly polarity: Polarity; readonly weight: number },
+  ): void;
   /** An effect nested inside this one that reads the same target slots. */
   child(effect: EffectSpec | null | undefined): void;
   /** One done for each target from slot `from` on, as slot `from` each time
@@ -640,7 +647,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (typeof n.about !== "number") return;
     for (const { polarity, weight } of slotTouches(n.effect, 1, undefined, true)[0]) v.touch(n.about, polarity, weight);
   },
-  "put-on-library": (n, v) => v.touch(n.target, "help", MINOR),
+  // A permanent off the battlefield into its owner's library is removal, as
+  // `shuffle-into-library` (Wan Shi Tong, All-Knowing's enters trigger: read
+  // as help, the bot tucked its own creature, 2026-11-25); a card from a
+  // graveyard on top of a library is recursion (Academy Ruins), told apart
+  // by the slot's spec where it's known.
+  "put-on-library": (n, v) => v.touch(n.target, "harm", DECISIVE, { polarity: "help", weight: MINOR }),
   // Lands or artifacts off the battlefield onto their owners' libraries are
   // removal (Plow Under, Rebuking Ceremony). "Target creature cards from your
   // graveyard" back on top of yours (Forever Young) is recursion, but there
@@ -1313,8 +1325,33 @@ export function slotPolarities(
   effect: EffectSpec | null | undefined,
   count: number,
   bias?: PolarityBias,
+  /** The slots' target specs, where the caller has them: a move into a
+   * library reads by whether its slot is a permanent or a card elsewhere. */
+  specs?: readonly TargetSpec[],
 ): readonly Polarity[] {
-  return slotTouches(effect, count, bias).map(resolveSlot);
+  return slotTouches(effect, count, bias, false, specs).map(resolveSlot);
+}
+
+/** Whether a target spec names a card off the battlefield and the stack — in
+ * a graveyard, in exile or in a hand — rather than a permanent or a spell. */
+function cardOffBoard(spec: TargetSpec | undefined): boolean {
+  if (spec === undefined) return false;
+  if (typeof spec === "object") {
+    switch (spec.kind) {
+      case "optional":
+      case "other":
+      case "any-number":
+        return cardOffBoard(spec.of);
+      case "one-of":
+        return spec.of.every(cardOffBoard);
+      case "card-in-graveyard":
+      case "card-in-exile":
+        return true;
+      default:
+        return false;
+    }
+  }
+  return /graveyard|exile|hand/.test(spec);
 }
 
 /** How much a slot's deciding effect weighs: 0 minor (a tap, two life), 1
@@ -1330,8 +1367,9 @@ export function slotStrengths(
   effect: EffectSpec | null | undefined,
   count: number,
   bias?: PolarityBias,
+  specs?: readonly TargetSpec[],
 ): readonly ({ readonly polarity: Polarity; readonly weight: SlotStrength } | null)[] {
-  return slotTouches(effect, count, bias).map((touches) =>
+  return slotTouches(effect, count, bias, false, specs).map((touches) =>
     touches.length === 0
       ? null
       : {
@@ -1348,6 +1386,8 @@ function slotTouches(
   /** Read `"trigger-object"` as slot 0, and no slot as itself: what a
    * reflexive ability does to its `about`. */
   triggerObjectOnly = false,
+  /** The slots' specs, for a touch with an `offBoard` reading. */
+  specs?: readonly TargetSpec[],
 ): Touch[][] {
   const touches: Touch[][] = Array.from({ length: count }, () => []);
   // The kind whose rule is touching right now, for `bias`. A child's walk
@@ -1358,7 +1398,7 @@ function slotTouches(
   // The slot a `for-each-target` here is binding each of its members to.
   let group: number | null = null;
   const visit: Visit = {
-    touch(ref, polarity, weight) {
+    touch(ref, polarity, weight, offBoard) {
       const side = (kind !== null ? bias?.[kind] : undefined) ?? polarity;
       if (triggerObjectOnly) {
         if (ref === "trigger-object") touches[0].push({ polarity: side, weight });
@@ -1367,7 +1407,13 @@ function slotTouches(
       for (const read of slotsOf(ref)) {
         const slot = read - shift;
         const last = slot === group ? count - 1 : slot;
-        for (let s = slot; s >= 0 && s <= last && s < count; s += 1) touches[s].push({ polarity: side, weight });
+        for (let s = slot; s >= 0 && s <= last && s < count; s += 1) {
+          touches[s].push(
+            offBoard !== undefined && cardOffBoard(specs?.[s])
+              ? { polarity: (kind !== null ? bias?.[kind] : undefined) ?? offBoard.polarity, weight: offBoard.weight }
+              : { polarity: side, weight },
+          );
+        }
       }
     },
     child(nested) {
@@ -1752,7 +1798,7 @@ export function castPolarities(def: CardDefinition, bias?: PolarityBias): readon
   const memo = memosFor(bias).cast;
   let found = memo.get(def);
   if (found === undefined) {
-    const slots = slotPolarities(def.effect, def.targets.length, bias);
+    const slots = slotPolarities(def.effect, def.targets.length, bias, def.targets);
     found = (def.subtypes ?? []).includes("Aura") && slots.length > 0
       ? [auraPolarity(def), ...slots.slice(1)]
       : slots;
@@ -1779,7 +1825,7 @@ export function abilityPolarities(
   const memo = memosFor(bias).ability;
   let found = memo.get(ability);
   if (found === undefined) {
-    found = gatedOpponents(ability.targets, slotPolarities(ability.effect, ability.targets.length, bias));
+    found = gatedOpponents(ability.targets, slotPolarities(ability.effect, ability.targets.length, bias, ability.targets));
     memo.set(ability, found);
   }
   return found;
@@ -1814,7 +1860,7 @@ export function offerPolarities(
     if (modal !== null && modal.announced === true && offer.modes !== undefined) {
       return offer.modes.flatMap((index) => {
         const mode = modal.modes[index];
-        return mode === undefined ? [] : [...slotPolarities(mode.effect, mode.targets?.length ?? 0, bias)];
+        return mode === undefined ? [] : [...slotPolarities(mode.effect, mode.targets?.length ?? 0, bias, mode.targets)];
       });
     }
     return abilityPolarities(ability, bias);
@@ -1854,7 +1900,7 @@ export function modalPolarities(
   return modes.map((mode) => {
     let found = memo.get(mode);
     if (found === undefined) {
-      found = slotPolarities(mode.effect, mode.targets?.length ?? 0, bias);
+      found = slotPolarities(mode.effect, mode.targets?.length ?? 0, bias, mode.targets);
       memo.set(mode, found);
     }
     return found;
@@ -1876,12 +1922,12 @@ export function pendingTargetPolarities(
   if (pending === null) return null;
   let all: readonly Polarity[] | null = null;
   if (pending.reflexive !== undefined) {
-    all = slotPolarities(pending.reflexive.effect, pending.reflexive.targets.length, bias);
+    all = slotPolarities(pending.reflexive.effect, pending.reflexive.targets.length, bias, pending.reflexive.targets);
   } else if (pending.grantedAbility === undefined && registry.has(pending.cardName)) {
     const def = registry.get(pending.cardName);
     if (pending.abilityKind === "chapter") {
       const chapter = def.chapters?.[pending.abilityIndex];
-      all = chapter === undefined ? null : slotPolarities(chapter.effect, chapter.targets.length, bias);
+      all = chapter === undefined ? null : slotPolarities(chapter.effect, chapter.targets.length, bias, chapter.targets);
     } else {
       const ability = def.triggered[pending.abilityIndex];
       const modal = ability?.effect?.kind === "modal" ? ability.effect : null;
@@ -1890,7 +1936,7 @@ export function pendingTargetPolarities(
         // in the order the modes are listed (rules 603.3c, 700.2b).
         all = pending.modes.flatMap((index) => {
           const mode = modal.modes[index];
-          return mode === undefined ? [] : [...slotPolarities(mode.effect, mode.targets?.length ?? 0, bias)];
+          return mode === undefined ? [] : [...slotPolarities(mode.effect, mode.targets?.length ?? 0, bias, mode.targets)];
         });
       } else if (ability !== undefined) {
         all = abilityPolarities(ability, bias);
@@ -2153,6 +2199,31 @@ export function offerDamage(
     effect = face !== undefined && face !== def.name ? (registry.has(face) ? registry.get(face).effect : null) : def.effect;
   }
   return slotDamage(effect, { x: offer.xCost?.maxX });
+}
+
+/**
+ * The target slots a cast's effect makes a token copy of (`create-token-copy`'s
+ * `of`): a copy of a legend of ours meets the legend rule (rule 704.5j) and
+ * one of the two goes at once. A modal spell's slots aren't read.
+ */
+export function offerCopySlots(registry: CardRegistry, offer: CastOffer): ReadonlySet<number> {
+  const slots = new Set<number>();
+  if (!registry.has(offer.cardName) || offer.castModal !== undefined) return slots;
+  const def = registry.get(offer.cardName);
+  const face = offer.face !== undefined ? def.faces?.[offer.face] : undefined;
+  const effect = face !== undefined && face !== def.name ? (registry.has(face) ? registry.get(face).effect : null) : def.effect;
+  const walk = (node: unknown): void => {
+    if (node === null || typeof node !== "object") return;
+    if (Array.isArray(node)) {
+      for (const item of node) walk(item);
+      return;
+    }
+    const record = node as { readonly kind?: unknown; readonly of?: unknown };
+    if (record.kind === "create-token-copy" && typeof record.of === "number") slots.add(record.of);
+    for (const value of Object.values(node)) walk(value);
+  };
+  walk(effect);
+  return slots;
 }
 
 /** What a damage amount reads that can be told without resolving it. */

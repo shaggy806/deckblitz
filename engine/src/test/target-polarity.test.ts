@@ -317,6 +317,17 @@ describe("slot polarity", () => {
     expect(strength(registry.get("Divine Congregation").effect)).toBeNull();
   });
 
+  it("reads a permanent put into its owner's library as removal, a graveyard card put there as recursion", () => {
+    // Read as help, Wan Shi Tong, All-Knowing tucked its own creature and
+    // went uncast for eighty turns (kept game G9TFZ, 2026-11-25).
+    expect(triggered("Wan Shi Tong, All-Knowing", 0)).toEqual(["harm"]);
+    for (const name of ["Bury in Books", "Deem Inferior", "Banishment Decree", "Lost in Space"]) {
+      expect(cast(name), name).toEqual(["harm"]);
+    }
+    // "Put target artifact card from your graveyard on top of your library."
+    expect(activated("Academy Ruins", 1)).toEqual(["help"]);
+  });
+
   it("reads what's done to each permanent as done to the target player who controls them", () => {
     expect(cast("Polymorphist's Jest")).toEqual(["harm"]);
   });
