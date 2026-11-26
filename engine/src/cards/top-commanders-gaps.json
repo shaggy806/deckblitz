@@ -3242,7 +3242,8 @@
   "effect:repeat-choice-excluding-earlier-passes",
   "mechanic:secret-choice",
   "mechanic:sectors",
-  "effect:for-each-player-except-target"
+  "effect:for-each-player-except-target",
+  "effect:counter-choice-each-created-token"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
