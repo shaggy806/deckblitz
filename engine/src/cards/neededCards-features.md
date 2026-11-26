@@ -352,6 +352,14 @@ The key `trigger:activates-this-ability`: the `activates-ability` trigger's `own
 printed activated abilities by its index (never one granted to it, nor another permanent's of the same text). Herald
 of Anafenza (21249). The scaffolder reads "whenever you activate this creature's outlast ability".
 `test/activates-own-ability.test.ts`.
+### "That player instead puts that land onto the battlefield then sacrifices a land" — built 2026-11-26
+
+The key `replacement:opponent-land-enters-then-sacrifice`: `OthersEnterReplacement.thenPutter` (an effect run as
+part of the entering, once the card is on the battlefield, `"trigger-player"` its putter) and `putBy` (`who:
+"opponent"`, `controlsAtLeastAsMany`), read in `Game.moveObject` through `Game.enterThenRules` (judged as it would
+enter, rule 614.12; the putter is the player playing it, else `GameState.resolvingController`). Tokens being created
+aren't read. Land Equilibrium (21495). `test/land-enters-then-sacrifice.test.ts`.
+
 ### Damage that can't be prevented or dealt instead to another permanent or player — built 2026-11-26
 
 The key `effect:damage-cant-be-redirected`: `damage`'s `toCreaturesUnstoppable` (Lava Burst, 21292 — to a creature

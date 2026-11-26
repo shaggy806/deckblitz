@@ -73914,6 +73914,62 @@ controlledBy,
    * with the entry its move would record (`cast` only for a spell that was
    * cast resolving). Nothing is changed by the look.
    */
+  /**
+   * The `OthersEnterReplacement.thenPutter` rules that apply to card `id`
+   * about to be put onto the battlefield (Land Equilibrium — rule 614.1a),
+   * each with the effect to run once it has entered: its `filter` judged as
+   * the permanent would exist there (614.12), its `putBy` read now, before it
+   * enters. The player putting it is the one playing it (rule 305.1), else
+   * the controller of what is resolving, else whoever it enters under.
+   */
+  private enterThenRules(
+    id: ObjectId,
+    enter: EnterOptions,
+  ): { readonly source: ObjectId; readonly controller: PlayerId; readonly putter: PlayerId; readonly effect: EffectSpec; readonly key: string }[] {
+    const object = this.state.objects[id];
+    if (object === undefined) return [];
+    const found: { readonly source: ObjectId; readonly controller: PlayerId; readonly filter: CardFilter; readonly effect: EffectSpec; readonly key: string; readonly putBy?: OthersEnterReplacement["putBy"] }[] = [];
+    for (const sourceId of this.state.zones.shared.battlefield) {
+      if (sourceId === id) continue;
+      const source = this.state.objects[sourceId];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      if (this.state.players[source.controller]?.hasLost !== false) continue;
+      this.staticsOfSource(source).forEach((ability, i) => {
+        const r = ability.replacement;
+        if (r?.event !== "others-enter-battlefield" || r.thenPutter === undefined || !this.staticActive(source, ability)) return;
+        found.push({
+          source: sourceId,
+          controller: source.controller,
+          filter: r.filter,
+          effect: r.thenPutter,
+          key: `${sourceId}:${source.zoneChangeCount ?? 0}:${i}`,
+          ...(r.putBy !== undefined ? { putBy: r.putBy } : {}),
+        });
+      });
+    }
+    if (found.length === 0) return [];
+    const under = this.enteringUnder(id, enter.under ?? object.controller, enter);
+    const putter = enter.played === true ? object.controller : (this.state.resolvingController ?? under);
+    const lands = (player: PlayerId, filter: CardFilter): number =>
+      weightedMatches(
+        this.state,
+        this.state.zones.shared.battlefield,
+        (p) => this.state.objects[p].controller === player && matchesFilter(this.state, this.registry, p, filter, { you: player }),
+      ).reduce((n, m) => n + m.weight, 0);
+    const byOk = found.filter((f) => {
+      if (f.putBy === undefined) return true;
+      if (putter === f.controller) return false;
+      const most = f.putBy.controlsAtLeastAsMany;
+      return most === undefined || lands(putter, most) >= lands(f.controller, most);
+    });
+    if (byOk.length === 0) return [];
+    return this.judgedAsEntering(id, under, enter, () =>
+      byOk
+        .filter((f) => matchesFilter(this.state, this.registry, id, f.filter, { you: f.controller, source: f.source }))
+        .map((f) => ({ source: f.source, controller: f.controller, putter, effect: f.effect, key: f.key })),
+    );
+  }
+
   private judgedAsEntering<T>(id: ObjectId, under: PlayerId, enter: EnterOptions, look: () => T): T {
     const object = this.state.objects[id];
     const resolving = object.zone === "stack" && enter.notResolving !== true;
@@ -75901,8 +75957,19 @@ controlledBy,
     // Zone moves interleave reads and writes too finely for point
     // invalidation — run with the computed-value cache off (and cleared on
     // the way out). See `suspendComputedCache`.
+    // "…instead puts that land onto the battlefield then sacrifices a land"
+    // (Land Equilibrium): judged as it would enter, run once it has.
+    const thens =
+      to === "battlefield" && from !== undefined && from !== "battlefield" && mover?.isToken !== true
+        ? suspendComputedCache(() => this.enterThenRules(id, enter))
+        : [];
     const moved = suspendComputedCache(() => this.moveObjectUncached(id, to, enter));
     const now = this.state.objects[id]?.zone;
+    if (moved && now === "battlefield") {
+      for (const then of thens) {
+        this.runReplacedBy(then.effect, then.source, then.controller, { object: id, player: then.putter, key: then.key });
+      }
+    }
     if (seenOnTop && now === "hand" && !this.state.revealedThisTurn.includes(id)) this.state.revealedThisTurn.push(id);
     const toReturn = this.exiledToReturn.get(id);
     if (toReturn !== undefined) {

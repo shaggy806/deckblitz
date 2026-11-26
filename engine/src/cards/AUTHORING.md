@@ -8337,6 +8337,17 @@ clause (section 9):
   from the stack, so "cast from exile" is `castFrom`). Where an exile and a
   shuffle both reach one, the first found applies, unasked (§15,
   "Replacement ordering"). `enter-shuffle-instead.test.ts`.
+  `thenPutter: EffectSpec` is "that player instead puts that land onto the
+  battlefield then …" (Land Equilibrium, rule 614.1a): a card (not a token
+  being created) enters as it would, then the effect runs as this
+  permanent's, `"trigger-player"` the player who put it there (the one
+  playing it, else the controller of what's resolving) and
+  `"trigger-object"` the permanent. `putBy: { who: "opponent",
+  controlsAtLeastAsMany?: CardFilter }` narrows who, read before it enters.
+  Land Equilibrium is `filter: { type: "land" }`, `putBy: { who: "opponent",
+  controlsAtLeastAsMany: { type: "land" } }`, `thenPutter: { kind:
+  "sacrifice", who: "trigger-player", filter: { type: "land" }, count: 1 }`.
+  `land-enters-then-sacrifice.test.ts`.
   `underYou: true` is "it enters under your control instead" (rule 614.1a),
   resolved ones only: Gather Specimens' "if a creature would enter the
   battlefield under an opponent's control this turn, it enters under your

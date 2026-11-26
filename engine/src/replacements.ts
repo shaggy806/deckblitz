@@ -738,6 +738,24 @@ export interface OthersEnterReplacement {
    * a card's the card's (110.2): a control effect keeps it with you.
    */
   readonly underYou?: true;
+  /**
+   * "…that player **instead puts that land onto the battlefield then**
+   * sacrifices a land of their choice" (Land Equilibrium — rule 614.1a): it
+   * enters as it would, and then, as part of the same event, before anyone
+   * could tap it for mana (the ruling), `effect` runs as this permanent's
+   * effect, `"trigger-player"` the player who put it there and
+   * `"trigger-object"` the permanent. Read for a card put onto the battlefield
+   * — played (rule 305.1) or by an effect, however it enters and under whose
+   * control (the ruling) — not a token being created.
+   */
+  readonly thenPutter?: EffectSpec;
+  /**
+   * Who must be putting it there, from this permanent's controller's side:
+   * the player playing the land, else the controller of the spell or ability
+   * resolving. `controlsAtLeastAsMany`: "an opponent **who controls at least
+   * as many lands as you do**", counted as it would enter (Land Equilibrium).
+   */
+  readonly putBy?: { readonly who: "opponent"; readonly controlsAtLeastAsMany?: CardFilter };
 }
 
 /** "If one or more tokens would be created under your control, twice that many

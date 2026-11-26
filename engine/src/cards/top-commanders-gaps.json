@@ -191,6 +191,7 @@
     "effect:phase-out-while-source-tapped",
     "effect:phase-out-until-your-next-turn-end",
     "effect:damage-cant-be-redirected",
+    "replacement:opponent-land-enters-then-sacrifice",
     "effect:mill-from-bottom",
     "effect:text-change-token-colors",
     "decision:choose-from-batch",
