@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Activating this permanent's own ability — built 2026-11-26
+
+The key `trigger:activates-this-ability`: the `activates-ability` trigger's `ownAbility: n`, one of this object's own
+printed activated abilities by its index (never one granted to it, nor another permanent's of the same text). Herald
+of Anafenza (21249). The scaffolder reads "whenever you activate this creature's outlast ability".
+`test/activates-own-ability.test.ts`.
+
 ### A permanent entering transformed — built 2026-11-22
 
 The key `trigger:enters-transformed`: the `transforms` trigger's `orEntersTransformed`, firing as well when a

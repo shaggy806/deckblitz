@@ -16713,6 +16713,12 @@ describe("how one player's state compares with another's", () => {
       who: "you",
       powerUp: true,
     });
+    // Herald of Anafenza: its own printed outlast.
+    expect(trigger("Whenever you activate this creature's outlast ability, create a 1/1 white Warrior creature token.")).toEqual({
+      on: "activates-ability",
+      who: "you",
+      ownAbility: 0,
+    });
   });
 
   it("activates-ability of a permanent: a mana ability too, and one the activator controls (Avalanche of Sector 7)", () => {

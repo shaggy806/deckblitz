@@ -40383,7 +40383,8 @@ export class Game {
             spec.exhaust !== true &&
             spec.powerUp !== true &&
             spec.xInCost !== true &&
-            spec.targets === undefined
+            spec.targets === undefined &&
+            spec.ownAbility === undefined
           ) {
             return true;
           }
@@ -40392,6 +40393,18 @@ export class Game {
           // A mana ability (`orMana`) has none, and is none of these.
           const activated = event.ability === undefined ? undefined : this.state.objects[event.ability];
           if (activated === undefined) return false;
+          // "This creature's outlast ability" (Herald of Anafenza): one of
+          // its own printed abilities, activated from this object — the
+          // printed ones come first in `effectiveActivated`, so the index
+          // is the printed one's, and a granted one is never it.
+          if (
+            spec.ownAbility !== undefined &&
+            (event.source !== self.id ||
+              activated.grantedAbility !== undefined ||
+              activated.abilityIndex !== spec.ownAbility)
+          ) {
+            return false;
+          }
           const ability = this.stackAbilityOf(activated) as Partial<ActivatedAbility>;
           return (
             (spec.ninjutsu !== true || ability.ninjutsu === true) &&

@@ -2968,6 +2968,12 @@ export type TriggerKind =
        * `CardFilter.targets` takes, so one such target is enough. Never a
        * mana ability (it has no targets on the stack). */
       readonly targets?: SpellTargetsFilter;
+      /** "Whenever you activate **this creature's outlast ability**" (Herald
+       * of Anafenza): one of this permanent's own printed activated
+       * abilities, by its index in the card's `activated` list — activated
+       * from this object (not a copy's, not one granted to it, rule 113.7a),
+       * so a granted ability of the same text never counts. */
+      readonly ownAbility?: number;
     }
   | {
       /** *This* spell (the one carrying the ability) was cast — a triggered

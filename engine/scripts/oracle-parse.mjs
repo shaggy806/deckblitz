@@ -2708,6 +2708,12 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
   if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
+  // "Whenever you activate this creature's outlast ability" (Herald of
+  // Anafenza): its own printed ability — the keyword's line comes first, so
+  // it's `activated[0]`.
+  if (/^Whenever you activate (?:~|this creature)'s outlast ability$/.test(c)) {
+    return [{ on: "activates-ability", who: "you", ownAbility: 0 }];
+  }
   // "Whenever an opponent activates an ability of an artifact they control"
   // (Avalanche of Sector 7), "… of a creature" (Elrond, Moon-Reader): a
   // permanent's ability, a mana ability too unless "that isn't a mana
