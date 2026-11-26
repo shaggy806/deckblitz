@@ -424,3 +424,27 @@ player's deck says "by" its creator; a bot on one has a character's name, as on 
 About page's section, now "Bracket 4 decks", links each average's page and credits the two
 players. A player whose active deck was one of the eight has none until they pick another (a
 reference by name to a deck that isn't there names nothing).
+
+## Four more averages (2026-11-26)
+
+The user asked for four more commanders as Bracket 4 averages: Grand Arbiter Augustin IV, Etali,
+Primal Conqueror, Zur the Enchanter and Liesa, Shroud of Dusk. Every card of the four lists was
+already in the pool. They were added to the snapshot alone (the other seven weren't fetched again,
+so their lists stay as taken on 2026-11-25) and to `gen-strong-decks.mjs`'s `DECKS`.
+
+Benched as the first seven were: one average and three of the fourteen upgraded precons a table,
+v2 in every seat on the rooms' clock (`bot:losses --budget live --seeds 1-6`), each average in
+each seat against a different trio, 24 games a deck, an even share 25%. The run was stopped after
+22 games at the user's word and resumed on the games left, so every table got its six seeds.
+
+| Commander | Wins | Average length |
+|---|---|---|
+| Grand Arbiter Augustin | 7/24 | 48 turns |
+| Etali | 6/24 | 34 turns |
+| Zur | 10/24 | 41 turns |
+| Liesa | 11/24 | 34 turns |
+| All | 34/96 (35%) | |
+
+All four fall inside the first seven's range (6 to 13), and none is as low as Atraxa's 4, so all
+four are in. Etali is at an even share and Augustin plays the longest games, near the 37 turns of
+the Atraxa list that was left out.

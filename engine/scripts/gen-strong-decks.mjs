@@ -32,6 +32,10 @@ const DECKS = [
   ["Lathril", "lathril-blade-of-the-elves"],
   ["Giada", "giada-font-of-hope"],
   ["Pantlaza", "pantlaza-sun-favored"],
+  ["Grand Arbiter Augustin", "grand-arbiter-augustin-iv"],
+  ["Etali", "etali-primal-conqueror"],
+  ["Zur", "zur-the-enchanter"],
+  ["Liesa", "liesa-shroud-of-dusk"],
 ];
 /** EDHREC's name for Bracket 4 in its addresses. */
 const BRACKET = "optimized";
