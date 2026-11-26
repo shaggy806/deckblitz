@@ -23381,6 +23381,37 @@ describe("your commander's triggers, and a graveyard card's return", () => {
   });
 });
 
+describe("more counters if the target is a creature type, or another of it", () => {
+  const counterTrigger = (name: string, type_line: string, oracle_text: string) => {
+    const face = parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+    expect(face.complete).toBe(true);
+    return face.triggered?.[0]?.effect;
+  };
+  it("reads Wakandan Royal Guard's 'another Hero' as not its source", () => {
+    expect(
+      counterTrigger(
+        "Wakandan Royal Guard",
+        "Creature — Human Soldier Hero",
+        "Vigilance\nWhen this creature enters, put a +1/+1 counter on target creature. If that creature is another Hero, put two +1/+1 counters on it instead.",
+      ),
+    ).toEqual({
+      kind: "conditional",
+      condition: { kind: "target", index: 0, filter: { subtype: "Hero", isSource: false } },
+      then: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 2 },
+      else: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
+    });
+  });
+  it("reads Elder Cathar's 'a Human'", () => {
+    expect(
+      counterTrigger(
+        "Elder Cathar",
+        "Creature — Human Soldier",
+        "When this creature dies, put a +1/+1 counter on target creature you control. If that creature is a Human, put two +1/+1 counters on it instead.",
+      ),
+    ).toMatchObject({ condition: { filter: { subtype: "Human" } }, then: { amount: 2 } });
+  });
+});
+
 describe("a divided prevention whose total reads the kicker", () => {
   it("reads Pollen Remedy whole: 3, or 6 kicked, and the group left open", () => {
     const face = parseFace(

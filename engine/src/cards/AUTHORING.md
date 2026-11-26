@@ -8065,7 +8065,9 @@ clause (section 9):
   **If it was a creature card**, …"). Same restriction as `trigger-object`
   below: only meaningful inside a `conditional` effect.
   A target that was a permanent and has left the battlefield since is matched
-  as it last existed there.
+  as it last existed there. The filter is read with the ability's source, so
+  "if that creature is **another** Hero" is `{ subtype: "Hero", isSource:
+  false }` (Wakandan Royal Guard, which may target itself).
 - `{ kind: "sacrificed", filter }` — the permanent the spell or ability
   sacrificed (its cost, or a `sacrifice-source` step before this one)
   matched `filter` as it last existed on the battlefield: "if the sacrificed

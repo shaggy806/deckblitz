@@ -1205,6 +1205,13 @@ zone choice; an ability's collect-evidence cost now records its cards as `{ paid
 cards" is `{ set: { paid: "exiled" } }` with `copies: 1`, `repeat`, `upTo: 3`. Its scaffolder line is
 read. `test/exile-total-mana-value-cost.test.ts`.
 
+### "If that creature is another Hero" — built 2026-11-26
+
+The key `condition:target-is-another`. Wakandan Royal Guard (rank 22507) needed no engine code: a `target`
+condition's filter is matched with the ability's source, so "another" is `isSource: false`. The scaffolder
+reads "Put a +1/+1 counter on target creature. If that creature is a/an/another [type], put two +1/+1 counters
+on it instead." (Elder Cathar too). `test/target-is-another.test.ts`.
+
 ### A divided total that reads the kicker — built 2026-11-26
 
 The key `effect:divided-total-by-kicker`. Pollen Remedy (rank 22391): "Prevent the next 3 damage … divided

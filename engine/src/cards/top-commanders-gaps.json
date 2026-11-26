@@ -207,6 +207,7 @@
     "cost:exile-from-graveyard-mana-symbol-total",
     "effect:divided-total-by-alternative-cost",
     "effect:divided-total-by-kicker",
+    "condition:target-is-another",
     "trigger:becomes-target-of-ability-targeting-only-it",
     "static:opponents-cant-play-from-graveyard",
     "cost:cumulative-upkeep-counter-on-opponents-creature",

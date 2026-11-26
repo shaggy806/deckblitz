@@ -14281,6 +14281,29 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Put a +1/+1 counter on target creature. If that creature is a Human
+    // [another Hero], put two +1/+1 counters on it instead." (Elder Cathar,
+    // Wakandan Royal Guard): one target, its type asked as it resolves;
+    // "another" is a creature other than the source (`isSource: false`).
+    const typedMore = /^if that creature is (a|an|another) (\w+), put (two|three) \+1\/\+1 counters on it instead\.$/i.exec(sentence);
+    if (typedMore !== null && CREATURE_TYPES.includes(typedMore[2]) && ctx.targets.length === 1 && parsed.length === 1) {
+      const one = parsed[0];
+      if (one?.kind === "add-counter" && one.target === 0 && one.counter === "+1/+1" && one.amount === 1) {
+        const instead = {
+          kind: "conditional",
+          condition: {
+            kind: "target",
+            index: 0,
+            filter: { subtype: typedMore[2], ...(typedMore[1].toLowerCase() === "another" ? { isSource: false } : {}) },
+          },
+          then: { ...one, amount: numberOf(typedMore[3].toLowerCase()) },
+          else: one,
+        };
+        parsed[0] = instead;
+        hints.push({ sentence, effect: instead });
+        continue;
+      }
+    }
     // "If that creature would die this turn, exile it instead." after the one
     // sentence that targeted (Lava Coil — rule 614.1a): that target — still
     // the first one past "… target Equipment attached to that creature"
