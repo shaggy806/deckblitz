@@ -352,6 +352,16 @@ The key `trigger:activates-this-ability`: the `activates-ability` trigger's `own
 printed activated abilities by its index (never one granted to it, nor another permanent's of the same text). Herald
 of Anafenza (21249). The scaffolder reads "whenever you activate this creature's outlast ability".
 `test/activates-own-ability.test.ts`.
+### Prevent X of each creature's combat damage to you and your creatures — built 2026-11-26
+
+The key `replacement:prevent-n-damage-from-each-source`: `DamagePrevention.perSourceTo` on a combat
+`would-deal-damage` static. As each combat damage step is about to ask or deal, `Game.mintCombatStepShields` gives
+every creature dealing combat damage a shield of X over the recipients (`ActiveReplacement.combatStep`, with `from`
+and `recipients`), so a double striker is prevented X a step and one trampling over a blocker X in all, its
+recipient's controller dividing it through the existing shield-share question (rule 615.7); gone once the step is
+dealt. Cover of Winter (21513). Lymph Sliver, also recorded on this key, needs absorb (rule 702.64) instead.
+`test/prevent-n-from-each-source.test.ts`.
+
 ### "That player instead puts that land onto the battlefield then sacrifices a land" — built 2026-11-26
 
 The key `replacement:opponent-land-enters-then-sacrifice`: `OthersEnterReplacement.thenPutter` (an effect run as

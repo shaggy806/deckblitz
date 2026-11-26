@@ -1497,6 +1497,22 @@ export interface DamagePrevention {
     | { readonly allBut: number }
     | { readonly half: "up" | "down" }
     | { readonly count: EffectAmount };
+  /**
+   * "If a creature would deal combat damage to **you and/or one or more
+   * creatures you control**, prevent X of that damage" (Cover of Winter —
+   * rule 615.7): X from **each source**, shared among every one of these
+   * recipients it would deal damage to at once, its controller dividing it
+   * (the rulings: a 4/4 trampling over two blockers is prevented X in all).
+   * With `combat`, as each combat damage step begins, each source matching
+   * the replacement's `source` that would deal combat damage gets a shield of
+   * X (`prevent`'s number or `count`, read then) from this permanent over
+   * these recipients, from this permanent's controller's side — so a double
+   * striker is prevented X in each step (the ruling) — gone once the step's
+   * damage is dealt (`ActiveReplacement.combatStep`,
+   * `Game.mintCombatStepShields`); the division is the shield-share question
+   * (`shieldSharesAsked`).
+   */
+  readonly perSourceTo?: { readonly players?: "you"; readonly permanents?: CardFilter };
   /** What happens right after (615.5), reading the damage as `"x"`. */
   readonly then?: EffectSpec;
   /** With `then`: "if damage **would be dealt to** this creature" — the

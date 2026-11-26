@@ -6433,6 +6433,10 @@ export interface ActiveReplacement {
   readonly next?: true;
   /** The next N damage still to absorb (615.7); gone at 0. */
   left?: number;
+  /** A static's per-source shield for one combat damage step (Cover of
+   * Winter — `DamagePrevention.perSourceTo`): made as the step's damage is
+   * about to be dealt, removed once it has been. */
+  readonly combatStep?: true;
   /** The targets its ability was activated with, each in its stint: what its
    * `instead` reads (`targetStints`, rule 115.1b). */
   readonly targets?: readonly (TargetRef | null | undefined)[];

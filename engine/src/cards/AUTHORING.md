@@ -8371,7 +8371,11 @@ who it would have happened to; it's run by the replacement's controller, so "tha
 `who: "trigger-player"` (Undead Alchemist's combat damage become `{ kind: "mill", target: "trigger-player", amount: "x" }`,
 with `combat: true`, a `source` filter and `to: "player"`). It mustn't repeat its own event after a decision (rule 614.5): use `also`. Damage has its own
 `{ prevent, then?, perEvent?, thenCountsUnprevented? }` (`prevent`: `true`, a number, `{ allBut }`, `{ half }` or `{ count }`,
-an amount read as the damage would be dealt) and
+an amount read as the damage would be dealt; `perSourceTo: { players?: "you", permanents? }` on a `combat: true`
+static is "prevent X of the combat damage **each** creature would deal to you and/or your creatures", shared among
+them — Cover of Winter's `{ prevent: { count: { countersOn: "source", counter: "age" } }, perSourceTo: { players: "you",
+permanents: { type: "creature", controlledBy: "you" } } }` with `source: { type: "creature" }`, a shield per creature
+each combat damage step, divided by the shield-share question: `test/prevent-n-from-each-source.test.ts`) and
 `{ redirect }`; the leave event takes a destination (`"exile"`, `"library-top"`, `"library-bottom"`, `"hand"`). `may: true`
 is "you may instead", only on events that can wait for the answer (draw, tokens, turn begin, damage): `test/instead-replacements.test.ts`
 refuses it elsewhere. On `would-deal-damage` it's "you may prevent" (Battletide Alchemist's "if a source would deal damage to a

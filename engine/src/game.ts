@@ -16463,8 +16463,64 @@ export class Game {
       };
       return;
     }
+    this.mintCombatStepShields();
     if (this.combatDamageOrderAsked()) return;
     this.applyCombatDamageSubPass();
+  }
+
+  /**
+   * Each static `perSourceTo` prevention's shields for this combat damage
+   * step (Cover of Winter — rule 615.7): one per creature matching its
+   * `source` that would deal combat damage now, of X read now, covering its
+   * recipients, from its permanent's controller's side. Made afresh each time
+   * the step is about to ask or deal (nothing has been prevented before it
+   * deals), so a decision answered in between sees the same; removed once
+   * the step's damage is dealt (`applyCombatDamageSubPass`).
+   */
+  private mintCombatStepShields(): void {
+    const before = this.state.activeReplacements.length;
+    this.state.activeReplacements = this.state.activeReplacements.filter((r) => r.combatStep !== true);
+    let changed = this.state.activeReplacements.length !== before;
+    const cd = this.state.combatDamage;
+    if (cd !== null) {
+      const dealers = [
+        ...new Set(this.combatDamageAssignments(this.subPassKind(cd.pass), cd.assigned, cd.asThoughUnblocked ?? []).map((a) => a.source)),
+      ];
+      for (const id of dealers.length > 0 ? this.staticSourceIds() : []) {
+        const object = this.state.objects[id];
+        if (object === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
+        if (this.state.players[object.controller]?.hasLost !== false) continue;
+        this.ownStatics(object).forEach((ability, i) => {
+          const r = ability.replacement;
+          if (r?.event !== "would-deal-damage" || !("prevent" in r.instead) || r.instead.perSourceTo === undefined) return;
+          if (r.combat !== true || !this.staticActive(object, ability)) return;
+          const prevent = r.instead.prevent;
+          const amount =
+            typeof prevent === "number" ? prevent : typeof prevent === "object" && "count" in prevent ? this.replacementAmount(prevent.count, object) : 0;
+          if (amount <= 0) return;
+          const covers = r.instead.perSourceTo;
+          for (const dealer of dealers) {
+            const filter = r.source;
+            if (filter !== undefined && !matchesFilter(this.state, this.registry, dealer, filter, { you: object.controller, source: id })) {
+              continue;
+            }
+            this.state.activeReplacements.push({
+              replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true } },
+              owner: object.controller,
+              source: id,
+              expires: "end-of-turn",
+              left: amount,
+              madeIn: i,
+              from: { object: dealer, zoneChangeCount: this.state.objects[dealer]?.zoneChangeCount ?? 0, you: object.controller },
+              recipients: { ...covers, you: object.controller },
+              combatStep: true,
+            });
+            changed = true;
+          }
+        });
+      }
+    }
+    if (changed) invalidateComputedCache();
   }
 
   /**
@@ -16572,6 +16628,11 @@ export class Game {
     this.withDamageBatch(() =>
       this.dealCombatDamage(this.subPassKind(cd.pass), cd.assigned, cd.asThoughUnblocked ?? []),
     );
+    // This step's per-source shields (Cover of Winter) are done with.
+    if (this.state.activeReplacements.some((r) => r.combatStep === true)) {
+      this.state.activeReplacements = this.state.activeReplacements.filter((r) => r.combatStep !== true);
+      invalidateComputedCache();
+    }
     this.runStateBasedActions();
     if (this.state.result.over) {
       this.state.combatDamage = null;
@@ -68380,6 +68441,9 @@ controlledBy,
       statics.forEach((ability, i) => {
         const r = ability.replacement;
         if (r === undefined || r.event !== "would-deal-damage") return;
+        // A per-source budget is its combat step's shields instead
+        // (`mintCombatStepShields`).
+        if ("prevent" in r.instead && r.instead.perSourceTo !== undefined) return;
         const key = `${id}:${object.zoneChangeCount ?? 0}:${from + i}`;
         if (applied.statics.includes(key)) return;
         if (this.applyingReplacements.has(key)) return;

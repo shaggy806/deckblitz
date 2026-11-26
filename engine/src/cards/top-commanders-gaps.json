@@ -192,6 +192,7 @@
     "effect:phase-out-until-your-next-turn-end",
     "effect:damage-cant-be-redirected",
     "replacement:opponent-land-enters-then-sacrifice",
+    "replacement:prevent-n-damage-from-each-source",
     "effect:mill-from-bottom",
     "effect:text-change-token-colors",
     "decision:choose-from-batch",
