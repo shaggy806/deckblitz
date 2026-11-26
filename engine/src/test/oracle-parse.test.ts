@@ -5119,6 +5119,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Sacrifice this creature: Prevent all damage a red source of your choice would deal this turn.", "Creature").activated[0].effect).toEqual({ ...chosen, filter: { colors: ["R"] }, to: "any", amount: "all" });
     expect(face("{W}, Sacrifice this creature: Prevent all damage a source of your choice would deal to you this turn.", "Creature").activated[0].effect).toEqual({ ...chosen, to: "you", amount: "all" });
     expect(face("{W}, Sacrifice this creature: The next time a black source of your choice would deal damage this turn, prevent that damage.", "Creature").activated[0].effect).toEqual({ ...chosen, filter: { colors: ["B"] }, to: "any", amount: "next-time" });
+    // The Emergences: the animated land, and the Aura sacrificed instead.
+    const emergence = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura",
+      oracle_text:
+        "Enchant land you control\nEnchanted land is a 3/3 red Spirit creature with haste. It's still a land.\nIf enchanted land would be destroyed, instead sacrifice this Aura and that land gains indestructible until end of turn.",
+    });
+    expect(emergence.complete).toBe(true);
+    expect(emergence.enchant).toBe("land-you-control");
+    expect(emergence.static[0]).toMatchObject({ affects: { scope: "attached" }, addSubtypes: ["Spirit"], setColors: ["R"], setBasePt: { power: 3, toughness: 3 }, grantKeywords: ["haste"] });
+    expect(emergence.static[1].replacement).toMatchObject({ event: "would-be-destroyed", filter: { hostOfSource: true } });
     // To what the Aura enchanted, sacrificed for the cost (Kithkin Armor).
     expect(face("Sacrifice this Aura: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.", "Enchantment — Aura").activated[0].effect).toEqual({ ...chosen, to: "attached", amount: "next-time" });
     // Half of it, rounded down (Dark Sphere).

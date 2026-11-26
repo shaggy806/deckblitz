@@ -19098,7 +19098,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
 
     // Card-level lines.
-    if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|player|creature you control|artifact you control|creature or planeswalker)$/.exec(line))) {
+    if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|player|creature you control|artifact you control|land you control|creature or planeswalker)$/.exec(line))) {
       out.enchant = targetOf(`target ${m[1]}`);
       continue;
     }
@@ -27088,6 +27088,46 @@ function parseStatic(line, text) {
     return { affects: { scope: "attached" }, setSubtypes: [m[1]], text };
   }
   if (line === "Enchanted land is the chosen type.") return { affects: { scope: "attached" }, setsChosenLandType: true, text };
+  // "Enchanted land is a 4/5 green Spirit creature with vigilance and haste.
+  // It's still a land." (the Emergences, the Zendikons): layers 4, 5, 6, 7b.
+  if ((m = /^Enchanted land is an? (\d+)\/(\d+) ((?:(?:white|blue|black|red|green)(?:, and |, | and )?)+ )?([A-Z][a-z]+(?: [A-Z][a-z]+)*) creature(?: with ([a-z ,]+?))?\. It's still a land\.$/.exec(line))) {
+    const colors = (m[3] ?? "").split(/, and |, | and | /).filter(Boolean).map((c) => COLOR_LETTER[c]);
+    const words = m[5] === undefined ? [] : m[5].split(/, and |, | and /).filter(Boolean);
+    const grantKeywords = words.map((w) => KEYWORDS[w.toLowerCase()]);
+    if (!grantKeywords.includes(undefined)) {
+      return {
+        affects: { scope: "attached" },
+        addTypes: ["creature"],
+        addSubtypes: m[4].split(" "),
+        ...(colors.length > 0 ? { setColors: colors } : {}),
+        setBasePt: { power: Number(m[1]), toughness: Number(m[2]) },
+        ...(grantKeywords.length > 0 ? { grantKeywords } : {}),
+        text,
+      };
+    }
+  }
+  // "If enchanted land would be destroyed, instead sacrifice this Aura and
+  // that land gains indestructible until end of turn" (the Emergences): a
+  // `would-be-destroyed` replacement over the host (rule 614.6).
+  if ((m = /^If enchanted (land|creature) would be destroyed, instead sacrifice (?:~|this Aura) and that (land|creature) gains indestructible until end of turn\.$/.exec(line)) && m[1] === m[2]) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-be-destroyed",
+        filter: { hostOfSource: true },
+        instead: {
+          effect: {
+            kind: "sequence",
+            effects: [
+              { kind: "sacrifice-source" },
+              { kind: "grant-keyword", target: 0, keyword: "indestructible", duration: "end-of-turn" },
+            ],
+          },
+        },
+      },
+      text,
+    };
+  }
   // "You may have ~ assign its combat damage as though it weren't blocked"
   // (Thorn Elemental; Wolverine's "his … he"), and an Aura's or Equipment's
   // "enchanted creature's controller may have it …" (Indomitable Might).
