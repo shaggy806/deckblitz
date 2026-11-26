@@ -12128,6 +12128,11 @@ describe("P/T bonuses per amount", () => {
     expect(
       per(AURA, "Enchant creature\nEnchanted creature gets -X/-0, where X is the number of cards in its controller's graveyard.").grantPtPerCount,
     ).toEqual({ inGraveyard: { ownedBy: "you" }, fromAffectedController: true, pt: [-1, 0] });
+    // Death's Approach: creature cards alone.
+    expect(
+      per(AURA, "Enchant creature\nEnchanted creature gets -X/-X, where X is the number of creature cards in its controller's graveyard.")
+        .grantPtPerCount,
+    ).toEqual({ inGraveyard: { type: "creature", ownedBy: "you" }, fromAffectedController: true, pt: [-1, -1] });
   });
 });
 

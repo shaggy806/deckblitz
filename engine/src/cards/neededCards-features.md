@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Creature cards in the enchanted creature's controller's graveyard — found built 2026-11-26
+
+The key `amount:graveyard-count-of-enchanted-controller` needed no engine code: `grantPtPerCount`'s `inGraveyard` with
+`fromAffectedController` (Disturbing Conversion's shape) and a `type: "creature"` filter. Death's Approach (21605). The
+scaffolder's "-X/-X, where X is the number of [creature] cards in its controller's graveyard" reads both.
+`test/aura-count-from-enchanted-controller.test.ts`.
+
 ### Activating this permanent's own ability — built 2026-11-26
 
 The key `trigger:activates-this-ability`: the `activates-ability` trigger's `ownAbility: n`, one of this object's own

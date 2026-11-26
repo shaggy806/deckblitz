@@ -24073,10 +24073,15 @@ function perAmountStaticOf(line, text) {
       text,
     };
   }
-  if ((m = new RegExp(`^${P}-X/-(X|0), where X is the number of cards in its controller's graveyard\\.$`).exec(line))) {
+  // "… cards" (Disturbing Conversion), "… creature cards" (Death's Approach).
+  if ((m = new RegExp(`^${P}-X/-(X|0), where X is the number of (creature )?cards in its controller's graveyard\\.$`).exec(line))) {
     return {
       affects: subjectOf(m[1]),
-      grantPtPerCount: { inGraveyard: { ownedBy: "you" }, fromAffectedController: true, pt: [-1, m[2] === "X" ? -1 : 0] },
+      grantPtPerCount: {
+        inGraveyard: m[3] === undefined ? { ownedBy: "you" } : { type: "creature", ownedBy: "you" },
+        fromAffectedController: true,
+        pt: [-1, m[2] === "X" ? -1 : 0],
+      },
       text,
     };
   }
