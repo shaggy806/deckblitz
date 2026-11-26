@@ -25645,6 +25645,13 @@ function parseStatic(line, text) {
   if (line === "Cards in graveyards can't be the targets of spells or abilities.") {
     return { affects: { scope: "self" }, prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" } }], text };
   }
+  // "This creature can't be the target of spells that can target only Walls
+  // or of abilities that can target only Walls" (Wall of Shadows): the
+  // `aimingOnly` prohibition, the spell judged in every mode.
+  m = /^(?:~|This creature) can't be the target of spells that can target only (\w+)s or of abilities that can target only \1s\.$/.exec(line);
+  if (m !== null) {
+    return { affects: { scope: "self" }, prohibits: [{ act: "be-targeted", object: { isSource: true }, aimingOnly: m[1] }], text };
+  }
   // "Untap this artifact during each other player's untap step" (Bender's
   // Waterskin, Endbringer), and quoted on a host (Urban Burgeoning's "Enchanted
   // land has '…'"); "Untap all permanents / artifacts / creatures you control

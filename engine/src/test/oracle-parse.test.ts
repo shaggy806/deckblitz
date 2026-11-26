@@ -9567,6 +9567,20 @@ describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsU
       prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" } }],
     });
   });
+
+  it("reads spells and abilities that can target only one subtype (Wall of Shadows)", () => {
+    expect(
+      face(
+        "Wall of Shadows",
+        "Creature — Wall",
+        "This creature can't be the target of spells that can target only Walls or of abilities that can target only Walls.",
+      ).static[0],
+    ).toEqual({
+      affects: { scope: "self" },
+      prohibits: [{ act: "be-targeted", object: { isSource: true }, aimingOnly: "Wall" }],
+      text: "This creature can't be the target of spells that can target only Walls or of abilities that can target only Walls.",
+    });
+  });
 });
 
 describe("restrict over a set of creatures this turn (controlledByTarget, rule 611.2c)", () => {

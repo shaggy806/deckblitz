@@ -6,6 +6,7 @@
     "filter:ability-cost-without-tap",
     "amount:graveyard-count-of-enchanted-controller",
     "trigger:activates-this-ability",
+    "static:untargetable-by-wall-only-spells",
     "effect:shuffle-graveyard-cards-filtered",
     "effect:cast-copy-from-opponents-hand",
     "effect:play-until-next-upkeep-then-graveyard",

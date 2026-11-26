@@ -87,6 +87,11 @@ export interface TargetSource {
    * stack — `cardSource`), not an ability's: what a printed "can't be the
    * target of … spells" or "… of abilities" asks (`hexproofFromBlocks`). */
   readonly spell?: true;
+  /** Every target slot of the spell doing the targeting, in every mode it
+   * has (`cardSource`): what "spells that can target only Walls" asks of the
+   * spell as a whole (Wall of Shadows' ruling — a mode that can target a
+   * non-Wall makes it not one). Absent, only the slot being filled is read. */
+  readonly aims?: readonly TargetSpec[];
   /** The source as it last existed, when it has left since (rule 608.2h):
    * what protection's filter and its "from a player" read (`dealDamage`). */
   readonly lastKnown?: LastKnownInfo;
@@ -712,8 +717,8 @@ function isLegalTargetUncached(
     if (source !== undefined && hexproofFromBlocks(state, registry, ref.object, source, forPlayer)) {
       return false;
     }
-    if (targetProhibited(state, registry, ref, forPlayer, source)) return false;
-  } else if (targetProhibited(state, registry, ref, forPlayer, source)) {
+    if (targetProhibited(state, registry, ref, forPlayer, source, spec)) return false;
+  } else if (targetProhibited(state, registry, ref, forPlayer, source, spec)) {
     return false;
   } else if (playerHasKeyword(state, registry, ref.player, "shroud")) {
     return false;
@@ -1338,6 +1343,10 @@ export function cardSource(def: CardDefinition, object?: ObjectId): TargetSource
     // something has changed them.
     ...(object !== undefined ? { object } : {}),
     spell: true,
+    aims:
+      def.castModal === undefined || def.castModal === null
+        ? def.targets
+        : [...def.targets, ...def.castModal.modes.flatMap((mode) => mode.targets ?? [])],
   };
 }
 

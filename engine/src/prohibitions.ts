@@ -27,7 +27,7 @@ import type { ObjectRef } from "./refs.js";
 import { rulesTextName } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameObject, GameState, ZoneType } from "./state.js";
-import type { TargetRef } from "./target.js";
+import type { TargetRef, TargetSpec } from "./target.js";
 
 /** A static's words for who a prohibition binds, from its controller's side. */
 export type StaticWho =
@@ -254,12 +254,17 @@ export type Prohibition<W = ProhibitedPlayer> =
   | ({
       /** "Can't be the target of …" (rules 601.2c, 602.2b). `by`:
        * "`opponents`" is what an opponent of this prohibition's controller
-       * controls. `sourceFilter`: the source's own qualities. `only`: spells. */
+       * controls. `sourceFilter`: the source's own qualities. `only`: spells.
+       * `aimingOnly`: only by spells and abilities that can target nothing
+       * but objects of this subtype, in any mode or slot (Wall of Shadows'
+       * "spells that can target only Walls" — its ruling: a modal spell with
+       * a mode that can target a non-Wall isn't one); see `aimsOnlySubtype`. */
       readonly act: "be-targeted";
       readonly who?: W;
       readonly by?: "opponents";
       readonly sourceFilter?: CardFilter;
       readonly only?: "spells";
+      readonly aimingOnly?: string;
     } & ObjectSide)
   | ({
       /** "Can't have counters put on it", "players can't get counters". */
@@ -566,12 +571,19 @@ export function targetProhibited(
   registry: CardRegistry,
   ref: TargetRef,
   forPlayer: PlayerId,
-  by: { readonly object?: ObjectId; readonly spell?: true } | undefined,
+  by: { readonly object?: ObjectId; readonly spell?: true; readonly aims?: readonly TargetSpec[] } | undefined,
+  spec?: TargetSpec,
 ): boolean {
   return liveProhibitions(state, registry, "be-targeted").some((live) => {
     const { source, prohibition } = live;
     if (prohibition.by === "opponents" && forPlayer === source.controller) return false;
     if (prohibition.only === "spells" && by?.spell !== true) return false;
+    if (prohibition.aimingOnly !== undefined) {
+      // The slot asked about, and every other slot of every mode the spell
+      // or ability has, can hold only objects of this subtype.
+      const subtype = prohibition.aimingOnly;
+      if (spec === undefined || ![spec, ...(by?.aims ?? [])].every((aim) => aimsOnlySubtype(aim, subtype))) return false;
+    }
     if (
       prohibition.sourceFilter !== undefined &&
       (by?.object === undefined ||
@@ -583,6 +595,40 @@ export function targetProhibited(
       ? reachesObject(state, registry, live, ref.object)
       : prohibition.who !== undefined && whoBinds(state, registry, source, prohibition.who, ref.player);
   });
+}
+
+/**
+ * Whether the target slot `spec` can hold nothing but objects of `subtype`:
+ * every object it could name is required to have it (a filter's `subtype`,
+ * a `subtypes` list of that one, or every branch of an `anyOf`). A player, a
+ * stack ability, a bare word ("target creature") or a slot with any branch
+ * that could hold something else can target a non-Wall. Wall of Shadows'
+ * "spells that can target only Walls".
+ */
+export function aimsOnlySubtype(spec: TargetSpec, subtype: string): boolean {
+  if (typeof spec !== "object") return false;
+  switch (spec.kind) {
+    case "optional":
+    case "other":
+    case "any-number":
+      return aimsOnlySubtype(spec.of, subtype);
+    case "one-of":
+      return spec.of.every((part) => aimsOnlySubtype(part, subtype));
+    case "permanent":
+    case "card-in-graveyard":
+    case "card-in-exile":
+    case "spell":
+    case "spell-or-permanent":
+      return spec.filter !== undefined && filterRequiresSubtype(spec.filter, subtype);
+    default:
+      return false;
+  }
+}
+
+function filterRequiresSubtype(filter: CardFilter, subtype: string): boolean {
+  if (filter.subtype === subtype) return true;
+  if (filter.subtypes !== undefined && filter.subtypes.length > 0 && filter.subtypes.every((s) => s === subtype)) return true;
+  return filter.anyOf !== undefined && filter.anyOf.length > 0 && filter.anyOf.every((f) => filterRequiresSubtype(f, subtype));
 }
 
 /** Whether `forPlayer` may target `ref` as though it didn't have hexproof
