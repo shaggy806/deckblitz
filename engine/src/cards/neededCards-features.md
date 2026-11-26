@@ -1205,6 +1205,13 @@ zone choice; an ability's collect-evidence cost now records its cards as `{ paid
 cards" is `{ set: { paid: "exiled" } }` with `copies: 1`, `repeat`, `upTo: 3`. Its scaffolder line is
 read. `test/exile-total-mana-value-cost.test.ts`.
 
+### "Whenever all non-Wall creatures you control attack" — built 2026-11-26
+
+The key `trigger:all-non-wall-creatures-attack`. Mob Mentality (rank 22648): `attack-with`'s `allOf: CardFilter`
+(abilities.ts) — every creature the attacking player controls matching it is an attacker of the declaration
+(game.ts `attackWithSatisfied`, rule 508.1). Not counted by `firstTimeEachTurn` (`timingCountable`).
+`test/all-creatures-attack.test.ts`.
+
 ### A kept target read as it last existed — built 2026-11-26
 
 The key `effect:keep-targets-last-known`. Dismantle (rank 22522) needed no engine code: a `choose-permanents`

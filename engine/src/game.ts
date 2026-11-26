@@ -39202,6 +39202,17 @@ export class Game {
     if (spec.eachOf !== undefined && !spec.eachOf.every((filter) => attackers.some((id) => this.triggerFilterOk(filter, id, self)))) {
       return false;
     }
+    // "Whenever all non-Wall creatures you control attack" (Mob Mentality):
+    // every creature the attacking player controls that matches is among the
+    // attackers, as they're declared (rule 508.1).
+    if (spec.allOf !== undefined) {
+      const declared = new Set(attackers);
+      for (const id of this.state.zones.shared.battlefield) {
+        const object = this.state.objects[id];
+        if (object.controller !== player || declared.has(id)) continue;
+        if (this.triggerFilterOk({ ...spec.allOf, type: "creature" }, id, self)) return false;
+      }
+    }
     const counted = this.attackWithCounted(spec, attackers, self);
     const n = this.creatureCount(counted);
     if (spec.exactly !== undefined ? n !== spec.exactly : n < (spec.atLeast ?? 1)) return false;
@@ -39647,6 +39658,7 @@ export class Game {
         if (
           spec.filter !== undefined ||
           spec.eachOf !== undefined ||
+          spec.allOf !== undefined ||
           spec.includingThis === true ||
           spec.attackingYourPlaneswalkers === true
         ) {

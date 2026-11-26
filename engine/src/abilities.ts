@@ -2573,6 +2573,12 @@ export type TriggerKind =
        * the same creature allowed: Fearless Swashbuckler's "if a Pirate **and**
        * a Vehicle attacked this combat". */
       readonly eachOf?: readonly CardFilter[];
+      /** Every creature the attacking player controls matching this attacks
+       * in the declaration: Mob Mentality's "whenever **all non-Wall
+       * creatures you control** attack" is `{ not: { subtype: "Wall" } }`
+       * (creatures implied). Asked as attackers are declared (rule 508.1);
+       * one left home and it doesn't fire. */
+      readonly allOf?: CardFilter;
       /**
        * "Whenever a player attacks, **if they aren't attacking you**"
        * (Mirkwood Trapper): no creature of the declaration attacks this

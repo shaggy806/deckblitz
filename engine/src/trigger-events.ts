@@ -513,6 +513,7 @@ export function timingCountable(spec: TriggerSpec): boolean {
       return (
         spec.filter === undefined &&
         spec.eachOf === undefined &&
+        spec.allOf === undefined &&
         spec.includingThis !== true &&
         spec.attackingYourPlaneswalkers !== true
       );
