@@ -89,7 +89,11 @@ describe("EvalBotController", () => {
     // A seed whose game is short (50 turns, about 20 s alone): seed 7's ran
     // past the timeout once a multiplayer game's first player drew on turn 1
     // (rule 103.8c, 2026-11-15), and seeds 1, 3, 5 and 6 run 110 turns or more.
-    const game = playOut(players, evalBots(players), 2);
+    // Seed 6 since 2026-11-26 (49 turns): about five seeds in eight of this
+    // deck stall to a board of a hundred permanents until the libraries run
+    // out, before and after the bots held instants for attackers, and that
+    // change made seed 2 one of them.
+    const game = playOut(players, evalBots(players), 6);
     expect(game.isOver).toBe(true);
   }, GAME_TIMEOUT_MS);
 
@@ -102,9 +106,10 @@ describe("EvalBotController", () => {
         [B]: new HeuristicBotController(B, registry),
         [C]: new EvalBotController(C, registry, { horizon: "stack" }),
       },
-      // 38 turns, about 15 s alone; seed 11's game ran past the timeout
-      // after the same change.
-      3,
+      // 27 turns, a few seconds alone; seed 11's game ran past the timeout
+      // after the same change, and seed 3's once the bots held instants for
+      // attackers (2026-11-26).
+      4,
     );
     expect(game.isOver).toBe(true);
   }, GAME_TIMEOUT_MS);

@@ -225,7 +225,9 @@ describe("inputs racing at a table", () => {
   }, PLAYS);
 
   it("drops the rest of the host's run of bot moves when an input lands inside it, and the bots move again", () => {
-    const table = new RacingTable({ seed: 34, seats: ["person", "bot", "person", "bot"] });
+    // Seed 40: seed 34's game ended before such a run once the bots held
+    // instant-speed plays for a later window (2026-11-25).
+    const table = new RacingTable({ seed: 40, seats: ["person", "bot", "person", "bot"] });
     const [host, carol] = table.devices;
     expect(host.player).toBe(ALICE);
     // Until the host's own move sets the bots going: a run of three or more
