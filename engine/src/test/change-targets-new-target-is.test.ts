@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { ObjectId, PlayerId } from "../primitives.js";
+import { activePlayerOf } from "../state.js";
 import { A, B, activate, cast, lands, life, pt, ref, spawn, table, toHand, watchTargets, zone } from "./harness.js";
 
 /** Alice's Grizzly Bears and two Islands, Bob's Llanowar Elves; Bob casts
@@ -82,6 +83,18 @@ describe("Rebound", () => {
   it("can't target a spell aimed at a creature", () => {
     const { game, card } = setUp("Shock", (bears) => [bears], [["Mountain", 1]]);
     expect(() => cast(game, toHand(game, "Rebound"), { targets: [ref(card)] })).toThrow(/target/i);
+  });
+
+  it("can't target a spell aimed at two players: 'the target' is a single one (115.9a)", () => {
+    const { game } = table();
+    lands(game, "Island", 2);
+    lands(game, "Swamp", 1, B);
+    game.advanceUntil((s) => activePlayerOf(s) === B && s.turn.step === "precombat-main" && s.priority.holder === B);
+    const symmetry = toHand(game, "Scheming Symmetry", B);
+    cast(game, symmetry, { player: B, targets: [ref(A), ref(B)], settle: false });
+    game.dispatch({ type: "pass-priority", player: B });
+    expect(game.state.priority.holder).toBe(A);
+    expect(() => cast(game, toHand(game, "Rebound"), { targets: [ref(symmetry)] })).toThrow(/target/i);
   });
 });
 

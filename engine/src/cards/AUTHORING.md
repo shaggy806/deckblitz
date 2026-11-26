@@ -2364,7 +2364,8 @@ creature", its target slot `{ kind: "spell", filter: { targets: { only: true,
 source: true } } }`: its ruling has Seeds of Strength aimed at it three times
 change all three to one creature); `newTargetIs` — a new target narrower than
 the spell's slot: `"player"` for "the new target must be a player" (Rebound,
-its slot `{ kind: "spell", filter: { targets: { only: true, player: "any" } } }`),
+its slot `{ kind: "spell", filter: { targets: { count: 1, player: "any" } } }`:
+"the target" is a single one, so a spell aimed at two players can't be chosen),
 a `CardFilter` from the effect's controller's side for "the new target must
 be a creature" (Silver Wyvern, `{ kind: "stack", …, targeting: { only: true,
 source: true } }`) and "change that spell's target to another creature"
