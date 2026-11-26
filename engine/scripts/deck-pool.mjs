@@ -39,4 +39,15 @@ const extra = (process.env.DECK_POOL_WITH ?? "")
   .filter((name) => name.length > 0)
   .map(findDeck);
 
-export const DECK_POOL = [...(POOLS[process.env.DECK_POOL]?.() ?? SAMPLE_DECKS), ...extra];
+// `--without "A,B"` (`DECK_POOL_WITHOUT`): those decks left out of the pool,
+// matched the same way — the field without a deck that wins too often to
+// tell the rest apart (The First Sliver among the strong decks, 2026-11-25).
+const left = (process.env.DECK_POOL_WITHOUT ?? "")
+  .split(",")
+  .map((name) => name.trim())
+  .filter((name) => name.length > 0)
+  .map((name) => findDeck(name).name);
+
+export const DECK_POOL = [...(POOLS[process.env.DECK_POOL]?.() ?? SAMPLE_DECKS), ...extra].filter(
+  (deck) => !left.includes(deck.name),
+);
