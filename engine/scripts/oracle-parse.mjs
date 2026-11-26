@@ -2521,6 +2521,21 @@ export function parseTrigger(clause) {
     if (filter === null || filter.type === undefined) return null;
     return [{ on: "becomes-target", who: "you-control", filter, ...(m[1] === "another" ? { otherOnly: true } : {}) }];
   }
+  // "Whenever this creature / enchanted creature becomes the target of an
+  // Aura spell" (Fugitive Druid, Brine Comber // Brinebound Gift): the spell
+  // as it is on the stack, whoever controls it. "~ enters or …" is the
+  // enters trigger too, the same ability (no event is both).
+  if ((m = /^Whenever (~ enters or )?(~ |enchanted creature )?becomes the target of an? (.+?) spell$/.exec(c))) {
+    // A subject once: "~ becomes", "~ enters or becomes", "enchanted creature
+    // becomes", "~ enters or enchanted creature becomes".
+    if ((m[1] === undefined && m[2] === undefined) || (m[1] !== undefined && m[2] === "~ ")) return null;
+    const spellFilter = parseTypePhrase(m[3]);
+    if (spellFilter === null || Object.keys(spellFilter).length === 0) return null;
+    return [
+      ...(m[1] !== undefined ? self("enters-battlefield") : []),
+      { on: "becomes-target", who: m[2] === "enchanted creature " ? "attached" : "self", spellFilter },
+    ];
+  }
   // "… becomes the target of an instant or sorcery spell" (Wild Defiance,
   // Silverfur Partisan's "a Wolf or Werewolf"): `spellFilter` reads the spell.
   if ((m = /^Whenever (another|a) (.+?) you control becomes the target of an? (.+?) spell$/.exec(c))) {

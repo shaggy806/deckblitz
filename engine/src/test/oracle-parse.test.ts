@@ -21591,6 +21591,20 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
     ]);
   });
 
+  it("reads becoming the target of an Aura spell (Fugitive Druid, Brine Comber // Brinebound Gift)", () => {
+    const aura = { on: "becomes-target", spellFilter: { subtype: "Aura" } };
+    expect(parseTrigger("Whenever ~ becomes the target of an Aura spell")).toEqual([{ ...aura, who: "self" }]);
+    expect(parseTrigger("Whenever ~ enters or becomes the target of an Aura spell")).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { ...aura, who: "self" },
+    ]);
+    expect(parseTrigger("Whenever ~ enters or enchanted creature becomes the target of an Aura spell")).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { ...aura, who: "attached" },
+    ]);
+    expect(parseTrigger("Whenever becomes the target of an Aura spell")).toBeNull();
+  });
+
   it("reads giving a gift (Jolly Gerbils)", () => {
     expect(parseTrigger("Whenever you give a gift")).toEqual([{ on: "event", event: "gives-gift", who: "you" }]);
   });

@@ -3061,6 +3061,7 @@
   "trigger:player-shuffles-library",
   "static:pt-per-graveyard-with-n-cards",
   "static:reveal-first-draw-every-turn",
+  "trigger:becomes-target-by-aura-spell",
   "trigger:delayed-source-becomes-untapped",
   "trigger:dealt-damage-by-attacking-creature",
   "cost:exile-from-any-graveyard",
