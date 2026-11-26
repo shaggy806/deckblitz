@@ -1044,8 +1044,12 @@ export type EffectAmount =
    * Meria's Outrider, Herd Migration, Shadow Prophecy's "look at the top X
    * cards … where X is the number of basic land types among lands you
    * control". `characteristics.ts`'s `basicLandTypesAmong`; a cost reduction
-   * and a CDA count have the same form. */
-  | { readonly basicLandTypes: "you" }
+   * and a CDA count have the same form. Another player's side through any
+   * {@link PlayerRef}: Allied Strategies' "target player draws a card for
+   * each basic land type among lands **they** control" (`{ target: 0 }`),
+   * Collapsing Borders' "that player" of an upkeep (`"active-player"`);
+   * nobody's is 0. */
+  | { readonly basicLandTypes: PlayerRef }
   /** The number of creatures in the effect's controller's party, 0 to 4 (rule
    * 700.8), as it resolves — Malakir Blood-Priest's "each opponent loses X
    * life and you gain X life, where X is the number of creatures in your
@@ -14066,8 +14070,8 @@ export interface EffectApi {
   devotionTo(colors: readonly Color[]): number;
   /** See the `{ greatestCommanderManaValue }` {@link EffectAmount}. */
   greatestCommanderManaValue(onBattlefieldOrInCommandZone: boolean): number;
-  /** See the `{ basicLandTypes }` {@link EffectAmount}. */
-  basicLandTypes(): number;
+  /** See the `{ basicLandTypes }` {@link EffectAmount}: among `player`'s lands. */
+  basicLandTypes(player: PlayerId): number;
   /** See the `{ partySize }` {@link EffectAmount}. */
   partySize(): number;
   /** See the `{ timesMutated }` {@link EffectAmount}. */
@@ -19247,7 +19251,10 @@ export function signedAmountValue(
   if ("greatestCommanderManaValue" in amount) {
     return ctx.greatestCommanderManaValue(amount.onBattlefieldOrInCommandZone === true);
   }
-  if ("basicLandTypes" in amount) return ctx.basicLandTypes();
+  if ("basicLandTypes" in amount) {
+    const player = resolvePlayerRef(amount.basicLandTypes, ctx);
+    return player === undefined ? 0 : ctx.basicLandTypes(player);
+  }
   if ("partySize" in amount) return ctx.partySize();
   if ("timesMutated" in amount) return ctx.timesMutated();
   if ("blockersOf" in amount) {

@@ -325,6 +325,12 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Domain of another player — built 2026-11-26
+
+The key `amount:domain-of-target-player`: the `{ basicLandTypes }` effect amount takes any `PlayerRef` (it took only
+`"you"`), resolved as the effect resolves. Allied Strategies (21880, `{ target: 0 }`), Collapsing Borders (24273,
+`"active-player"`). Not in the scaffolder ("they control" needs its subject). `test/domain-of-player.test.ts`.
+
 ### An ability without {T} in its activation cost — built 2026-11-26
 
 The key `filter:ability-cost-without-tap`: the `ability-activated` event's `tapCost` (its cost has {T}, rule 107.5: set

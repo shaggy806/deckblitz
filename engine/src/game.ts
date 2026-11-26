@@ -48862,7 +48862,7 @@ controlledBy,
         onBattlefieldOrInCommandZone
           ? Math.max(0, ...commandersOnBattlefieldOrInCommandZone(this.state, controller).map((id) => manaValueOfObject(this.registry, this.state.objects[id])))
           : greatestCommanderManaValue(this.state, this.registry, controller),
-      basicLandTypes: () => basicLandTypesAmong(this.state, this.registry, controller),
+      basicLandTypes: (player) => basicLandTypesAmong(this.state, this.registry, player),
       partySize: () => partySizeOf(this.state, this.registry, controller),
       timesMutated: () => {
         const object = this.state.objects[source];

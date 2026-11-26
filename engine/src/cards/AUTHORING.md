@@ -1069,7 +1069,9 @@ adds to every one; as a `selfCostReduction` amount it takes a list —
 `{ devotionTo: ["B"] }`, Drag to the Underworld's "costs {X} less to cast,
 where X is your devotion to black", generic mana only), `{ basicLandTypes: "you" }` (domain, an ability word —
 rule 207.2c: the basic land types among lands you control, each once, 0 to 5 —
-Meria's Outrider; the same form is a `costReduction`/`selfCostReduction`
+Meria's Outrider; any `PlayerRef` counts another player's lands as an effect amount, Allied Strategies'
+"target player draws a card for each basic land type among lands they control" `{ basicLandTypes: { target: 0 } }`,
+Collapsing Borders' upkeep "that player" `"active-player"`; the same form is a `costReduction`/`selfCostReduction`
 amount, Jodah's Codex and Yavimaya Sojourner, and a CDA count, Nishoba
 Brawler), `{ partySize: "you" }` (party, rule 700.8: the creatures in your
 party, 0 to 4 — up to one each of Cleric, Rogue, Warrior and Wizard you
