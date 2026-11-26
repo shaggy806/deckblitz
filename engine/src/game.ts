@@ -73363,7 +73363,7 @@ controlledBy,
     // Keranos's "reveal the first card you draw on each of your turns".
     // Booby Trap's "the chosen player reveals each card they draw".
     if (
-      (nth === 1 && player === this.activePlayer && this.revealsFirstDraw(player)) ||
+      (nth === 1 && this.revealsFirstDraw(player, player === this.activePlayer)) ||
       this.revealsEachDraw(player)
     ) {
       this.revealCards(player, [id], "hand");
@@ -73391,13 +73391,17 @@ controlledBy,
   }
 
   /** Whether `player` controls a permanent that reveals the first card they
-   * draw on each of their turns (`revealsFirstDrawEachTurn` — Keranos). */
-  private revealsFirstDraw(player: PlayerId): boolean {
+   * draw on each of their turns (`revealsFirstDrawEachTurn` — Keranos), or
+   * on every turn (`"each-turn"` — Rowen); `theirTurn` is whether it's
+   * theirs. */
+  private revealsFirstDraw(player: PlayerId, theirTurn: boolean): boolean {
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
       for (const ability of this.ownStatics(source)) {
-        if (ability.revealsFirstDrawEachTurn === true && this.staticActive(source, ability)) return true;
+        const reveals = ability.revealsFirstDrawEachTurn;
+        if (reveals === undefined || reveals === false || (reveals === true && !theirTurn)) continue;
+        if (this.staticActive(source, ability)) return true;
       }
     }
     return false;

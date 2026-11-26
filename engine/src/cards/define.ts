@@ -3717,12 +3717,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * battlefield like `votesAdditionalTime`; `affects` is ignored. */
   readonly assistFirstSpellOfYourTurns?: true;
   /** "Reveal the first card you draw on each of your turns" (Keranos, God of
-   * Storms — rule 701.16): as its controller draws their first card of a
+   * Storms — rule 701.20a): as its controller draws their first card of a
    * turn of theirs, every player sees it. Its "whenever you reveal a land
    * card this way" triggers are `draws` triggers (`nthEachTurn: 1`) whose
    * `whileCondition` asks that it's your turn and what the card is. Read off
-   * the battlefield like `keepsUnspentMana`. */
-  readonly revealsFirstDrawEachTurn?: boolean;
+   * the battlefield like `keepsUnspentMana`. `"each-turn"`: "Reveal the
+   * first card you draw each turn", whoever's turn it is (Rowen, Primitive
+   * Etchings), its "this way" triggers `draws` with `nthEachTurn: 1` and a
+   * drawn-card `filter` alone. */
+  readonly revealsFirstDrawEachTurn?: boolean | "each-turn";
   /** "**The chosen player** reveals each card they draw" (Booby Trap — rule
    * 701.20a): every card the player this permanent chose as it entered
    * (`choosePlayerOnEnter`, `GameObject.chosenPlayer`) draws is shown to

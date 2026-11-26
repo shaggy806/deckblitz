@@ -22864,6 +22864,26 @@ describe("life under half the starting total", () => {
   });
 });
 
+describe("reveal the first card you draw each turn (Rowen, Primitive Etchings)", () => {
+  it("reads the static and its this-way draw trigger", () => {
+    const rowen = parseFace(
+      {
+        name: "Rowen",
+        type_line: "Enchantment",
+        mana_cost: "{2}{G}{G}",
+        oracle_text: "Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(rowen.complete).toBe(true);
+    expect(rowen.static[0]).toMatchObject({ affects: { scope: "self" }, revealsFirstDrawEachTurn: "each-turn" });
+    expect(rowen.triggered[0]).toMatchObject({
+      trigger: { on: "draws", who: "you", nthEachTurn: 1, filter: { type: "land", supertype: "basic" } },
+      effect: { kind: "draw", amount: 1 },
+    });
+  });
+});
+
 describe("a count of graveyards with N or more cards (Master's Councillors)", () => {
   it("counts every player's graveyard on its own", () => {
     const councillors = parseFace(

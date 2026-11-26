@@ -19741,6 +19741,27 @@ function parseFaceAsWritten(face, ctx = {}) {
       });
       continue;
     }
+    // "Reveal the first card you draw each turn. Whenever you reveal a <type>
+    // card this way, draw a card." (Rowen, Primitive Etchings — rule
+    // 701.20a): anyone's turn, the static and a first-draw `draws` trigger.
+    if ((m = /^Reveal the first card you draw each turn\. (Whenever you reveal an? (.+?) card this way, draw a card\.)$/.exec(line))) {
+      const filter = parseTypePhrase(m[2]);
+      if (filter !== null) {
+        out.static.push({
+          affects: { scope: "self" },
+          revealsFirstDrawEachTurn: "each-turn",
+          text: "Reveal the first card you draw each turn.",
+        });
+        out.triggered.push({
+          trigger: { on: "draws", who: "you", nthEachTurn: 1, filter },
+          targets: [],
+          effect: { kind: "draw", amount: 1 },
+          resolve: null,
+          text: m[1],
+        });
+        continue;
+      }
+    }
     // Squad [cost] (rule 702.157a): a multikicker by another name, and its enters trigger (`squadTrigger`).
     // "Squad—Exile four cards from your graveyard", "Squad—{1}, Discard a
     // card": what isn't mana is `kicker.also`.

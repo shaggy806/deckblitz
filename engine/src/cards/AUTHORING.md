@@ -6226,10 +6226,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   phase ends, every player loses 1 life per mana actually emptied (none for
   what a keep or a "becomes" saved). Not damage.
 - `revealsFirstDrawEachTurn: true` — Keranos, God of Storms' "Reveal the first
-  card you draw on each of your turns" (rule 701.16): shown to every player
+  card you draw on each of your turns" (rule 701.20a): shown to every player
   as it's drawn. Its "whenever you reveal a land card this way" is a `draws`
   trigger (§7: `nthEachTurn: 1`, a drawn-card `filter`, a `your-turn`
-  `whileCondition`).
+  `whileCondition`). `"each-turn"` is "Reveal the first card you draw each
+  turn", anyone's turn (Rowen, Primitive Etchings): its "this way" trigger
+  is the same `draws` trigger without the `whileCondition`.
 - `revealsDraws: "chosen-player"` — Booby Trap's "The chosen player reveals
   each card they draw" (rule 701.20a): every card the permanent's
   `chosenPlayer` draws is shown to every player as it's drawn, whoever
