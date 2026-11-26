@@ -9,7 +9,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { ObjectId } from "../primitives.js";
-import { A, B, cast, counters, lands, nextTurn, pickModes, settle, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, cast, counters, lands, life, nextTurn, pickModes, settle, spawn, table, toHand, zone } from "./harness.js";
 
 const shuffleOf = (game: ReturnType<typeof table>["game"], player: typeof A): void => {
   game.debugApplyEffect(player, { kind: "shuffle-library" }, []);
@@ -103,5 +103,38 @@ describe("Cosi's Trickster", () => {
     pickModes(a);
     shuffleOf(game, B);
     expect(counters(game, trickster)).toBe(2);
+  });
+});
+
+describe("Psychogenic Probe", () => {
+  it("any player's shuffle deals 2 damage to that player, its controller's own included", () => {
+    const { game } = table();
+    spawn(game, "Psychogenic Probe", A);
+    const [a0, b0] = [life(game, A), life(game, B)];
+    shuffleOf(game, B);
+    expect(life(game, B)).toBe(b0 - 2);
+    expect(life(game, A)).toBe(a0);
+    shuffleOf(game, A);
+    expect(life(game, A)).toBe(a0 - 2);
+  });
+
+  it("Green Sun's Zenith shuffles twice: 4 damage to its caster", () => {
+    const { game } = table();
+    spawn(game, "Psychogenic Probe", A);
+    nextTurn(game);
+    lands(game, "Forest", 1, B);
+    const b0 = life(game, B);
+    cast(game, toHand(game, "Green Sun's Zenith", B), { player: B, x: 0 });
+    settle(game);
+    expect(life(game, B)).toBe(b0 - 4);
+  });
+
+  it("an empty library still is shuffled (the ruling)", () => {
+    const { game } = table();
+    spawn(game, "Psychogenic Probe", A);
+    for (const id of [...game.state.zones.perPlayer[B].library]) game.debugMove(id, "graveyard");
+    const b0 = life(game, B);
+    shuffleOf(game, B);
+    expect(life(game, B)).toBe(b0 - 2);
   });
 });

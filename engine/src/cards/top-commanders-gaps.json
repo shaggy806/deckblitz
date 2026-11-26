@@ -3058,6 +3058,7 @@
   "filter:blocked-attacker",
   "trigger:exiled-by-your-spell-or-ability",
   "trigger:opponent-shuffles-library",
+  "trigger:player-shuffles-library",
   "trigger:delayed-source-becomes-untapped",
   "trigger:dealt-damage-by-attacking-creature",
   "cost:exile-from-any-graveyard",

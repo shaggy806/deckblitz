@@ -21585,6 +21585,10 @@ describe("trigger events of the triggers-journal lane (2026-11-13)", () => {
       { on: "event", event: "shuffles-library", who: "opponent" },
     ]);
     expect(parseTrigger("Whenever you shuffle your library")).toEqual([{ on: "event", event: "shuffles-library", who: "you" }]);
+    // Psychogenic Probe: every shuffle in play is caused by a spell or ability.
+    expect(parseTrigger("Whenever a spell or ability causes a player to shuffle their library")).toEqual([
+      { on: "event", event: "shuffles-library", who: "any" },
+    ]);
   });
 
   it("reads giving a gift (Jolly Gerbils)", () => {
