@@ -1205,6 +1205,13 @@ zone choice; an ability's collect-evidence cost now records its cards as `{ paid
 cards" is `{ set: { paid: "exiled" } }` with `copies: 1`, `repeat`, `upTo: 3`. Its scaffolder line is
 read. `test/exile-total-mana-value-cost.test.ts`.
 
+### A kept target read as it last existed — built 2026-11-26
+
+The key `effect:keep-targets-last-known`. Dismantle (rank 22522) needed no engine code: a `choose-permanents`
+`keepTargets` now shifts the resolution's target zones with their slots (game.ts, "a kept target's slot is
+one on from its own"), so `{ countersOn: 1 }` reads the destroyed artifact's counters (608.2h). The counter
+kind is a resolution-time `modal`. `test/keep-targets-last-known.test.ts`.
+
 ### "If that creature is another Hero" — built 2026-11-26
 
 The key `condition:target-is-another`. Wakandan Royal Guard (rank 22507) needed no engine code: a `target`
