@@ -25573,3 +25573,16 @@ describe("keywords of the creature cards a delve exiled (Soulflayer)", () => {
     });
   });
 });
+
+describe("target player shuffles their library (Soldier of Fortune)", () => {
+  it("reads it as shuffle-library of a player target", () => {
+    const soldier = parseFace({
+      name: "Soldier of Fortune",
+      type_line: "Creature — Human Mercenary",
+      oracle_text: "{R}, {T}: Target player shuffles their library.",
+    });
+    expect(soldier.complete).toBe(true);
+    expect(soldier.activated[0].targets).toEqual(["player"]);
+    expect(soldier.activated[0].effect).toEqual({ kind: "shuffle-library", target: 0 });
+  });
+});

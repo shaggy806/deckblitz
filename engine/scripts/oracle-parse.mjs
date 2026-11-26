@@ -4072,6 +4072,9 @@ export function parseSentence(sentence, ctx) {
   // cast any number of spells from among those cards without paying their
   // mana costs." — read over every card the repeat exiled.
   if (/^(?:then )?shuffle your library\.$/i.test(s)) return { kind: "shuffle-library" };
+  // "Target player shuffles their library." (Soldier of Fortune, Boggart
+  // Forager): that player's library, rule 701.24.
+  if (/^target player shuffles their library\.$/i.test(s)) return { kind: "shuffle-library", target: ctx.target("player") };
   // "Exchange your graveyard and library" (Morality Shift), "exchange your
   // hand and graveyard" (Harness Infinity), "exchange your hand and library"
   // (Mordenkainen): rule 701.12d.
