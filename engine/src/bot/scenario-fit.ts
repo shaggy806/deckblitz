@@ -65,6 +65,9 @@ export interface ScenarioRecord {
   /** Candidates that tied with passing but kept the tie with it, not worth
    * acting on alone (`lastRefusedTies`). */
   readonly refusedTies?: readonly Action[];
+  /** Counterspells scored and then left out, worth casting only for what
+   * the cast triggers (`lastHeldForTriggers`). */
+  readonly heldForTriggers?: readonly Action[];
   /** Candidates ranked below every safe one for the crackback (`lastUnsafe`). */
   readonly unsafe?: readonly Action[];
   /** The payoff the turn plan moved to the front of its line, the move the
@@ -122,6 +125,7 @@ export function recordScenario(
     heldAsPass: bot.lastHeldForCombat,
     tiesAct: bot.lastTiesAct,
     refusedTies: bot.lastRefusedTies,
+    heldForTriggers: bot.lastHeldForTriggers,
     unsafe: bot.lastUnsafe,
     payoffAhead: bot.lastPayoffAhead,
     // Only a decision's: a priority window doesn't set or clear it.
@@ -138,11 +142,14 @@ export function replayChoice(record: ScenarioRecord, weights: EvalWeights): numb
   const unsafe = new Set((record.unsafe ?? []).map(key));
   const open = new Set((record.open ?? []).map(key));
   const refused = new Set((record.refusedTies ?? []).map(key));
+  const forTriggers = new Set((record.heldForTriggers ?? []).map(key));
   const kept = record.kept == null ? null : key(record.kept.action);
   let best = 0;
   let bestScore = -Infinity;
   record.answers.forEach((answer, i) => {
     if (answer.outcome === null) return;
+    // Left out by the search whatever it scored (`castForItsTriggers`).
+    if (forTriggers.has(key(answer.action))) return;
     const score =
       scoreOutcome(answer.outcome, w) +
       (unsafe.has(key(answer.action)) ? UNSAFE : 0) +

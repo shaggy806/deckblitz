@@ -26,6 +26,7 @@
 import { Game } from "../game.js";
 import type { Action } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
+import { invalidateComputedCache } from "../characteristics.js";
 import { HeuristicBotController } from "../controller.js";
 import type { ControllerView, PlayerController } from "../controller.js";
 import type { PlayerId } from "../primitives.js";
@@ -220,6 +221,56 @@ export function simulateAction(
   keepEvents = false,
 ): GameState | null {
   return simulateRepeated(state, registry, action, horizon, policy, self, 1, undefined, keepEvents)?.state ?? null;
+}
+
+/**
+ * `simulateAction` for a cast, without what casting it triggers for the
+ * caster: the triggered abilities of theirs that the cast put on the stack
+ * (Y'shtola's "whenever you cast a noncreature spell", a pitched card's
+ * "when this is exiled") are taken off again before anyone acts, and the
+ * rollout goes on from there. What it answers is whether the spell is worth
+ * casting for what it does. `null` when the cast triggered nothing of the
+ * caster's (the plain rollout is already that line), when it left a
+ * question open, or when the engine refused it.
+ *
+ * The abilities are dropped from a throwaway copy's stack by hand, which no
+ * rule does: it is a what-if for the search, never a state a game reaches.
+ */
+export function simulateWithoutOwnTriggers(
+  state: GameState,
+  registry: CardRegistry,
+  action: Action,
+  horizon: Horizon,
+  policy: RolloutPolicy = "passive",
+  self?: PlayerController,
+): GameState | null {
+  const startingTurn = state.turn.number;
+  const before = new Set(state.zones.shared.stack);
+  return rollout(() => {
+    const sim = Game.fromSnapshot(
+      { ...state, eventLog: [] },
+      { registry, controllers: rolloutControllers(state, registry, action.player, policy, self) },
+    );
+    sim.dispatch(action);
+    if (sim.state.awaiting !== null) return null;
+    const triggered = sim.state.zones.shared.stack.filter((id) => {
+      const object = sim.state.objects[id];
+      return (
+        !before.has(id) &&
+        object !== undefined &&
+        object.kind === "ability" &&
+        object.abilityKind === "triggered" &&
+        object.controller === action.player
+      );
+    });
+    if (triggered.length === 0) return null;
+    const gone = new Set(triggered);
+    sim.state.zones.shared.stack = sim.state.zones.shared.stack.filter((id) => !gone.has(id));
+    for (const id of triggered) delete sim.state.objects[id];
+    invalidateComputedCache();
+    sim.advanceUntil(horizonTest(horizon, state, action.player, startingTurn));
+    return sim.state;
+  });
 }
 
 /** The most activations one batch simulates — a bound on a free, untapped

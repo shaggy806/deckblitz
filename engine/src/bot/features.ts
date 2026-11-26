@@ -747,7 +747,7 @@ const answerMemo = new WeakMap<CardDefinition, boolean>();
 /** A card held to counter something: its spell (or one of its modes) counters
  * a spell, or it's a creature that counters one as it enters. Counterspell,
  * Negate, Cryptic Command, Transcendent Dragon. */
-function isAnswer(def: CardDefinition): boolean {
+export function isAnswer(def: CardDefinition): boolean {
   let found = answerMemo.get(def);
   if (found === undefined) {
     found = counters(def.effect) || counters(def.castModal) || entersToCounter(def);

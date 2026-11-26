@@ -1430,9 +1430,25 @@ the change (Y'shtola, Krenko, Edgar Markov, Pantlaza at the live clock) had ten 
 counter casts between them, eight at commanders and engines and two at Goblin Trashmaster, so
 the floors move few decisions on real lists: what they stop is the vanilla body and the token.
 
-Not built, in `BACKLOG.md`: a counterspell cast for what casting it triggers (Y'shtola's own
-trigger makes Force of Will at a Cultivate score above passing), and the other instants that
-could wait for the end of the turn before ours (card draw, a creature with flash).
+**A counterspell isn't cast for what casting it triggers** (the same day,
+`castForItsTriggers`, v2). With Y'shtola, Night's Blessed out, Force of Will with a card
+pitched, Fierce Guardianship and Rewind went at a Cultivate and a Harmonize that the same
+board without her let by: her trigger (2 at each opponent and 2 life, for a noncreature spell
+of mana value 3 or more) outscored the card and the `answers` reserve. The trigger comes with
+any later cast too, at a spell worth the card, and no rollout shows that cast. So a
+counterspell (`isAnswer`) scored while a permanent of ours has a "whenever you cast" trigger
+(`isCastPayoff`) is played out once more with our own triggers from the cast taken off the
+stack (`simulate.ts`'s `simulateWithoutOwnTriggers`: dropped by hand from the throwaway copy,
+a what-if and never a state a game reaches), and dropped from the candidates when that bare
+cast scores no better than passing. Not when the triggers end an opponent the bare cast
+leaves alive. On twenty boards (four counterspells at five spells) the answer with Y'shtola
+out is now the answer without her at every one. Three gate scenarios: Force of Will held
+from a Cultivate, Rewind still at a Craterhoof Behemoth, and Rewind at a Cultivate with an
+opponent on 2. v1 has no such weighing and is unchanged.
+
+Not built, in `BACKLOG.md`: the same for removal (Anguished Unmaking for the trigger), and
+the other instants that could wait for the end of the turn before ours (card draw, a
+creature with flash).
 
 ## Watching live games for
 

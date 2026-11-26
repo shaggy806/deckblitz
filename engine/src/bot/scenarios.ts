@@ -6890,6 +6890,84 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "holds Force of Will from a Cultivate with Y'shtola out",
+    rule: "A cast trigger is there for any later cast: it is no reason to spend a counterspell on a spell not worth one.",
+    position(registry) {
+      // The same report: "Y'shtola firing off counters as soon as she draws
+      // them". Her trigger (2 at each opponent, 2 life for a noncreature
+      // spell of mana value 3 or more) outscored the two cards, so Force of
+      // Will with a card pitched went at a Cultivate that the same board
+      // without her lets by (`castForItsTriggers`).
+      const game = table(registry, [A, B, C, D], B);
+      onBoard(game, "Y'shtola, Night's Blessed", A);
+      lands(game, "Island", A, 3);
+      lands(game, "Swamp", A, 2);
+      lands(game, "Forest", B, 8);
+      const force = game.debugSpawn("Force of Will", A, "hand");
+      game.debugSpawn("Frantic Search", A, "hand");
+      holding(game, [B, C, D], 4);
+      const cultivate = game.debugSpawn("Cultivate", B, "hand");
+      castAndPassTo(game, B, cultivate, A);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === force),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "counters a Craterhoof Behemoth with Rewind with Y'shtola out",
+    rule: "The hold is for a counter fired only for its cast trigger: a spell worth countering is still countered.",
+    position(registry) {
+      const game = table(registry, [A, B, C, D], B);
+      onBoard(game, "Y'shtola, Night's Blessed", A);
+      lands(game, "Island", A, 3);
+      lands(game, "Swamp", A, 2);
+      lands(game, "Forest", B, 8);
+      const rewind = game.debugSpawn("Rewind", A, "hand");
+      holding(game, [B, C, D], 4);
+      const hoof = game.debugSpawn("Craterhoof Behemoth", B, "hand");
+      castAndPassTo(game, B, hoof, A);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === rewind && firstTarget(action) === hoof,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "fires Rewind at a Cultivate when Y'shtola's trigger ends an opponent",
+    rule: "A cast trigger that ends a player is a reason to cast, whatever the spell is aimed at.",
+    position(registry) {
+      // What the hold mustn't cost: carol on 2, and Y'shtola's trigger deals
+      // 2 to each opponent for any noncreature spell of mana value 3 or more.
+      const game = table(registry, [A, B, C, D], B);
+      onBoard(game, "Y'shtola, Night's Blessed", A);
+      lands(game, "Island", A, 3);
+      lands(game, "Swamp", A, 2);
+      lands(game, "Forest", B, 8);
+      game.state.players[C].life = 2;
+      const rewind = game.debugSpawn("Rewind", A, "hand");
+      holding(game, [B, C, D], 4);
+      const cultivate = game.debugSpawn("Cultivate", B, "hand");
+      castAndPassTo(game, B, cultivate, A);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === rewind,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "blocks with every lifelink Soldier when the life they gain is what keeps it alive",
     rule: "A lifelink blocker gains life as it blocks: against an attack too wide to stop, the blocks that gain the most are the ones that survive it.",
     position(registry) {

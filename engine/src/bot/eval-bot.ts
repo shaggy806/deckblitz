@@ -28,7 +28,7 @@ import type { Action, AttackerDeclaration, BlockerDeclaration, ChosenTargets, Le
 import type { CardRegistry } from "../cards.js";
 import { withRequiredAttackers } from "../combat/attacking.js";
 import { defaultRegistry } from "../cards/default-registry.js";
-import { HeuristicBotController, StandInController, compareReach, isLandfallPermanent, payoffFirst } from"../controller.js";
+import { HeuristicBotController, StandInController, compareReach, isCastPayoff, isLandfallPermanent, payoffFirst } from"../controller.js";
 import type { ControllerView, LandReach, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { activePlayerOf, rulesTextName } from "../state.js";
@@ -84,6 +84,7 @@ import { aimedAt, aimedByLine } from "./interaction.js";
 import type { Aimed } from "./interaction.js";
 import {
   engineScore,
+  isAnswer,
   libraryTopOf,
   lifeCost,
   withHandReadForKeeps,
@@ -105,6 +106,7 @@ import {
   simulatePlan,
   simulateRepeated,
   simulateSwingBack,
+  simulateWithoutOwnTriggers,
   withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
@@ -1392,6 +1394,10 @@ export class EvalBotController extends HeuristicBotController {
   /** The candidates that tied with passing but weren't worth acting on alone
    * (`scoreAlone`), so the tie stayed with passing — for the replay. */
   lastRefusedTies: Action[] = [];
+  /** The counterspells the last priority search scored and then left out,
+   * worth casting only for what the cast triggers (`castForItsTriggers`):
+   * for the replay, which would otherwise pick them by their score. */
+  lastHeldForTriggers: Action[] = [];
   /** The payoff the last turn plan moved to the front of its line
    * (`planLines`), the move that line began with, and whether the two orders
    * ended the same but for cards the seat can't know (`sameKnownEnd`) — for
@@ -1676,6 +1682,7 @@ export class EvalBotController extends HeuristicBotController {
       if (this.passMemoMode === "on") {
         this.lastUnsafe = [];
         this.lastRefusedTies = [];
+        this.lastHeldForTriggers = [];
         this.lastPayoffAhead = null;
         this.lastPassFallback = early.cantrip;
         this.lastDecision = audit("priority", null, "pass memo");
@@ -1751,6 +1758,7 @@ export class EvalBotController extends HeuristicBotController {
     this.passEndsOpen = false;
     this.passAloneOutcome = null;
     this.lastRefusedTies = [];
+    this.lastHeldForTriggers = [];
     this.lastPayoffAhead = null;
     // A cast payoff in play or about to be (Shiko and Narset's Flurry, a
     // prowess creature, Young Pyromancer): the rollouts play the rest of our
@@ -1957,6 +1965,7 @@ export class EvalBotController extends HeuristicBotController {
     // baseline" rather than letting it veto every alternative.
     budget.left -= 1;
     let bestScore = this.score(view, pass, budget) ?? -Infinity;
+    const passScore = bestScore;
 
     // v1's own pick goes first, because under a wall-clock budget the search
     // may not reach the end of this list — and what it has scored by then is
@@ -2005,6 +2014,12 @@ export class EvalBotController extends HeuristicBotController {
       const victim = mustKill.get(action);
       const score = this.score(view, action, budget, victim);
       if (score === null) continue;
+      // A counterspell that only beats passing for what casting it triggers
+      // (`castForItsTriggers`): held, as the trigger is there for a later cast.
+      if (this.castForItsTriggers(view, action, budget, passScore)) {
+        this.lastHeldForTriggers.push(action);
+        continue;
+      }
       scored.set(action, score);
       const tiesPass = best.type === "pass-priority" && Math.abs(score - bestScore) <= TIE;
       if (tiesPass) {
@@ -4137,6 +4152,51 @@ export class EvalBotController extends HeuristicBotController {
     return power >= (state.players[victim]?.life ?? Infinity) ? victim : null;
   }
 
+  /** Where the last move `score` played out ended, or `null` if its rollout
+   * fell over: what `castForItsTriggers` reads a kill off. */
+  private lastAfter: GameState | null = null;
+
+  /**
+   * Whether `action`, a counterspell just scored, beats passing only for
+   * what casting it triggers for us: with those triggers taken off the stack
+   * (`simulateWithoutOwnTriggers`) the same cast scores no better than the
+   * pass. With Y'shtola, Night's Blessed out, Force of Will with a card
+   * pitched, Fierce Guardianship and Rewind went at a Cultivate and a
+   * Harmonize that the same board without her let by: her trigger's 2 at
+   * each opponent outscored the card and the reserve (`answers`). The
+   * trigger is no reason to counter this spell, since any later cast brings
+   * it too, at a spell worth the card; no rollout shows that later cast (a
+   * player's report, 2026-11-25: counters fired "as soon as she draws them").
+   *
+   * One more rollout, and only for a counterspell (`isAnswer`) cast while a
+   * permanent of ours has a "whenever you cast" trigger. Not held when the
+   * triggers end an opponent the bare cast leaves alive: that is a reason.
+   */
+  private castForItsTriggers(view: ControllerView, action: Action, budget: SearchBudget, passScore: number): boolean {
+    if (action.type !== "cast-spell" || passScore === -Infinity) return false;
+    const state = view.state;
+    const card = state.objects[action.card];
+    if (card === undefined || !this.cards.has(card.cardName) || !isAnswer(this.cards.get(card.cardName))) return false;
+    const me = this.playerId;
+    const payoff = state.zones.shared.battlefield.some((id) => {
+      const object = state.objects[id];
+      return object !== undefined && object.controller === me && isCastPayoff(this.cards, rulesTextName(object));
+    });
+    if (!payoff) return false;
+    const real = this.lastAfter;
+    if (spent(budget)) return false;
+    budget.left -= 1;
+    const bare = timed(budget, () =>
+      simulateWithoutOwnTriggers(state, this.cards, action, this.horizon, this.decisionRollout, this.selfInPriorityRollouts(state)),
+    );
+    if (bare === null) return false;
+    const dead = (after: GameState): number =>
+      state.turnOrder.filter((p) => p !== me && after.players[p]?.hasLost === true).length;
+    if (real !== null && dead(real) > dead(bare)) return false;
+    const outcome = this.outcomeAimed(bare, aimedAt(state, this.cards, me, action), this.passOutcome);
+    return scoreOutcome(outcome, this.weights) <= passScore + TIE;
+  }
+
   private score(
     view: ControllerView,
     action: Action,
@@ -4149,6 +4209,7 @@ export class EvalBotController extends HeuristicBotController {
         simulateAction(state, this.cards, action, this.horizon, this.decisionRollout, this.selfInPriorityRollouts(state)),
       );
     const after = this.revealsOwnLibrary(view.state, action) ? this.typicalDeal(view, action, budget, rollout) : rollout(view.state);
+    this.lastAfter = after;
     if (after === null) {
       this.trace?.(action, after);
       return null;
