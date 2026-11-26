@@ -1,10 +1,11 @@
 # Rules audit, November 2026
 
-Status: **three slices done** (2026-11-17, 2026-11-26). The first (players who leave the game,
+Status: **four slices done** (2026-11-17, 2026-11-26). The first (players who leave the game,
 combat, the turn's skip rules) found three violations, fixed, and a fourth recorded for a design
 call. The second (casting, resolving, how a multiplayer game goes on) found none in the engine and
-one in the client's log wording. The third (keywords two at a time) found none. Forty-eight probes
-stay as tests. The slices to take next are at the end.
+one in the client's log wording. The third (keywords two at a time) and the fourth (blink, tokens
+and cards leaving the battlefield) found none. Seventy-seven probes stay as tests. The slices to
+take next are at the end.
 
 ## Why
 
@@ -153,6 +154,36 @@ them controls showing the setup bites:
   gets exalted (702.83b), and the copies are exiled at end of combat (702.116a); annihilator makes
   only the defending player sacrifice (702.86a); two creatures attacking two different players
   aren't attacking alone.
+
+## Fourth slice: blink, tokens, and cards leaving the battlefield (2026-11-26)
+
+The user's ask: blink, tokens and particular cards leaving, and the abilities that follow them
+(rules 400.7, 111.7-8, 603.6-603.10, 607, 610.3). No violation. `blink-and-leave-audit.test.ts`,
+twenty-nine tests, five of them controls:
+
+- **"Until ~ leaves" and its timing**: Banisher Priest gone before its enters trigger resolves
+  exiles nothing (610.3c); two-trigger Oblivion Ring gone the same way exiles for good; a blinked
+  Priest lets its card go and the new one exiles anew; a Priest exiled by another Priest frees its
+  card, and returns, a new object, to exile again when the second leaves; a commander exiled this
+  way goes to the command zone and stays there (903.9a).
+- **Tokens**: one token of a stack blinked or exiled "until" is gone and the rest stay; an
+  Oblivion Ring's token, Flickerwisp's and Ghostly Flicker's don't come back (111.8); a Kiki-Jiki
+  copy of Banisher Priest exiles until it's sacrificed at the end step; a token with undying
+  doesn't return; Blood Artist sees every token of a destroyed stack die; a phased-out token keeps
+  existing and phases back in (702.26b).
+- **Delayed and linked abilities aimed at one object**: a Sneak Attacked or unearthed creature
+  blinked is a new object, not sacrificed or exiled later; Flickerwisp's card that left exile
+  before the end step stays where it went; a stolen creature blinked returns under its owner's
+  control; Skyclave Apparition blinked pays its leave trigger for the card it exiled, which stays
+  exiled, while the new one exiles anew (607.2a); an enters trigger still resolves after its source
+  was blinked, beside the new object's (113.7a).
+- **What's attached**: Rancor on a blinked creature goes to the graveyard and back to hand; Angelic
+  Destiny there stays in the graveyard, its creature having not died; Equipment stays,
+  unattached; counters, damage and an until-end-of-turn pump are gone.
+
+The situation fuzzer then ran ten blink and exile-until cards (Banisher Priest, Flickerwisp,
+Oblivion Ring, Skyclave Apparition, Kiki-Jiki, Ghostly Flicker, Cloudshift, Ephemerate,
+Restoration Angel, Fiend Hunter) through 600 random boards: none failed.
 
 ## Next slices
 
