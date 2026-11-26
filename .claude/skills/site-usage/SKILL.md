@@ -100,6 +100,26 @@ What the number is, said once where it matters:
   no longer there. For the games already fetched, `npm run games:players` counts the same thing
   from `games/` here.
 
+### Who began and who finished, a day
+
+**Report it every run** too: a line a day of how many different players began a game and how
+many played one out (the record ends with the game over, not left or still being sent), with the
+games and the games played out. The box's tally counts only who began, so this reads the game
+records themselves, the ones still on the box and the ones fetched to `games/` here together, a
+player with games in both counted once. One Bash call from the repo root; the box runs the
+script from its input, so nothing is copied there and no tag is printed:
+
+```bash
+ssh -o ConnectTimeout=15 deckblitz "node - --dir /opt/mtg-engine/games --tags-json" < scripts/games-players.mjs | node scripts/games-players.mjs --by-day --merge -
+```
+
+Add its BEGAN and FINISHED columns to the **By day** table (as "players began" and "players
+finished"); its GAMES and PLAYED OUT are tagged games only, so leave the usage log's games
+columns as they are. Say once that it covers only the games whose records are kept: a day
+fetched on another PC, or a game from before tags (2026-11-22), isn't in it, so its total can
+fall short of the box's `unique` line. A player who began games and finished none that day is
+one who left each, or was still playing at midnight UTC.
+
 ## Report it
 
 Lead with the answer to what was asked. With no particular question, a short summary first:
@@ -107,7 +127,8 @@ visitors, unique players (above) and games over the span and how that compares w
 before it in the same report, then anything that stands out. Then the report's sections as short tables or lists,
 leaving out the empty ones:
 
-- **By day**: visitors, new, views, games begun and finished, imports, errors. Drop leading
+- **By day**: visitors, new, views, games begun and finished, players who began and who
+  finished a game (above), imports, errors. Drop leading
   days that are all zero (the log starts the day it was deployed).
 - **Where from**: referring sites, and countries.
 - **Games**: by kind and table size, how they ended, the median length.
@@ -120,7 +141,11 @@ Say these when they bear on what the user is reading, once, not as a list of cav
 - **A visitor is counted once a day**, so the total is visitor-days: one person on three days
   is three. Nobody is followed from day to day; "new" is the browser's own first-visit flag.
 - **Games begun minus finished is games left unfinished**, not lost data. A table of several
-  people is reported by each of them and counted once.
+  people is reported by each of them and counted once. **Until a build after 2026-11-26 is
+  deployed, FINISHED overcounts tables**: the page reported a game's end with the people at the
+  table as it ended, when a seat handed to a bot no longer counts, so each player's end of a
+  table counted as a whole game ("solo, 0 people") and finished could pass begun (11-25: 32.7
+  begun, 41 finished). The players-finished column above is right either way.
 - **Commanders come from imports only**: a game from a saved deck or a precon names none.
 - **The numbers can be padded**: the page reports them, and anyone can post to that endpoint.
   A sudden spike from one country with no games is more likely that than a crowd.

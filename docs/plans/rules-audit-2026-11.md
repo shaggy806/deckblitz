@@ -1,12 +1,14 @@
 # Rules audit, November 2026
 
-Status: **six slices done** (2026-11-17, 2026-11-26). The first (players who leave the game,
+Status: **eight slices done** (2026-11-17, 2026-11-26). The first (players who leave the game,
 combat, the turn's skip rules) found three violations, fixed, and a fourth recorded for a design
 call. The second (casting, resolving, how a multiplayer game goes on) found none in the engine and
 one in the client's log wording. The third (keywords two at a time), the fourth (blink, tokens
 and cards leaving the battlefield) and the fifth (two replacement effects on one event) found
-none. The sixth (merged and melded commanders) found three, fixed. Ninety-two probes stay as tests.
-The slices to take next are at the end.
+none. The sixth (merged and melded commanders) found three, fixed. The seventh replayed every kept
+game and checked it at every decision (`scripts/game-rules-scan.mjs`), and the eighth probed copies,
+keyword actions and a merged permanent leaving: none. A hundred and thirteen probes stay as tests. The
+slices to take next are at the end.
 
 ## Why
 
@@ -207,15 +209,54 @@ Three violations, all fixed (`merged-commanders-audit.test.ts`, nine tests, five
 | 903.9c | A melded or merged commander its owner sent to the command zone instead of a hand or library took every card with it: the other card of a melded Chittering Host went to the command zone. | Only the commander card goes there; the permanent and the rest go where it was headed (`applyCommanderChoice`, `commanderScatter`), a library's in the place that move put it. |
 | 903.10a | Combat damage a merged commander dealt was counted to the merged permanent's object, which wasn't the commander card's, and what the commander had dealt before merging stayed with the card it had been. | The count moves onto the merged permanent as the commander merges, and back onto the card as it comes apart (`moveCommanderDamage`). |
 
+## Seventh slice: every kept game, replayed and checked (2026-11-26)
+
+The 204 kept games of 2026-11-22 to 26 (`games/`), replayed on this build (`scripts/game-rules-scan.mjs`),
+about 250,000 decision points. A record plays exactly only on its own build, so most went their own way
+partway; what this build then did is still this build's play, and is checked as far as it goes. At every
+input, once the engine has settled and nothing is awaited, it checks what state-based actions (704) and
+priority (117) promise: no creature at 0 toughness or with lethal damage, no planeswalker at 0 loyalty, no
+Aura on nothing, nothing attached to something gone, no +1/+1 and -1/-1 counters together, no token off
+the battlefield, no player at 0 life, 10 poison or 21 commander damage still in, no player who has left
+asked anything, no priority in an untap step. In combat: no declared attacker summoning sick without haste
+or a permission (302.6), no flyer blocked by a creature without flying or reach, no menace creature blocked
+by one, no unblockable one blocked. In the log: each life change adds up, nothing is done to a player
+after they lose, no sorcery-speed spell cast outside its controller's main phase or onto a stack, no more
+land plays than allowed.
+
+No violation. Every lead was the scan's, each followed into the game: a departed player's permanents left
+on the battlefield inert (800.4a, by design); a resolution paused on a choice, where state-based actions
+wait (704.3: Culling Ritual asking for its mana); the player answering an untap step's choice (Smoke-style
+untap limits) shown as holding priority while they answer, with nothing else legal and no window after it;
+tokens put onto the battlefield attacking, never declared; creatures with defender under Felothar the
+Steadfast; a whole board cast that turn attacking under Frenzied Saddlebrute's permission; a blocker dead
+in combat damage leaving a menace attacker one blocker; land plays under Oracle of Mul Daya.
+
+## Eighth slice: copies, keyword actions, a merged permanent leaving (2026-11-26)
+
+No violation. `copy-rules-audit.test.ts`: a Clone takes the copiable values and not counters or a pump
+(707.2); of a face-down creature it's a nameless 2/2, face up; of a Kiki-Jiki token it has the token's
+"except it has haste" (707.9b); of a transformed permanent, its back face (707.8); of a mutated creature,
+the top card with every card's abilities, as a single card (730.2a); a Clone of Banisher Priest keeps its
+own exile (707.7); a Clone of Voice of All makes its own choice (707.6). `keyword-actions-audit.test.ts`:
+a fight with one creature gone deals nothing (701.14b); a fight's damage gains lifelink life; an
+indestructible or regenerating creature can be sacrificed (701.21a). `merged-leaves-audit.test.ts`: a
+merged creature exiled until a Priest leaves, or blinked, comes back as each of its cards (730.3c); dying
+under Rest in Peace, each is exiled (730.3d); a merged commander exiled that way goes home and the other
+card alone returns. `commander-damage-audit.test.ts`: a commander's damage counts whoever controls it, and a
+Clone of a commander isn't one, so its damage doesn't (903.10a, 903.3). `departed-delayed-audit.test.ts`:
+Flickerwisp's return at the next end step doesn't happen once its controller has left the game, and the
+card stays exiled (800.4d).
+
 ## Next slices
 
 By how far the citations fall short and how much play runs through them (`rules:uncited --
 --all`):
 
-1. **More logs, first.** Both violations that mattered came out of one exported log, not out
-   of the rulebook: a log is every event, so a step, a trigger or a hit that shouldn't be there
-   is a line in it. A log with every hand revealed (BACKLOG, Client / UI) would show more. The
-   scans used here are a few lines each: life arithmetic, events after a loss, each turn's steps.
+1. **More games, as they come**: `node scripts/game-rules-scan.mjs games/<day>/*.json.gz` after a
+   `games:pull` (the seventh slice). A check it lacks is a few lines in it. Every lead it prints is
+   followed into its game before anything is called a violation: the seventh slice's were all the
+   scan's own.
 2. ~~**702**, keywords~~: the third slice, above. Left in it, if wanted: the keywords of a
    copied or face-down permanent, and keywords on spells (cascade into a split card).
 3. ~~**903**, merged and melded commanders~~: the sixth slice, above. Left in it: a merged

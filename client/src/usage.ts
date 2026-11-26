@@ -105,6 +105,32 @@ export function trackPage(): void {
   })
 }
 
+/** What {@link useGameUsage} keeps of a game as it begins, under the room's
+ * code. A marker from before 2026-11-26 is the start time alone. */
+interface GameStart {
+  readonly at: number
+  readonly mode: GameUsage['mode'] | undefined
+  readonly humans: number | undefined
+}
+
+export function parseStart(marker: string): GameStart {
+  try {
+    const parsed: unknown = JSON.parse(marker)
+    if (typeof parsed === 'number') return { at: parsed, mode: undefined, humans: undefined }
+    if (typeof parsed === 'object' && parsed !== null) {
+      const { at, mode, humans } = parsed as Record<string, unknown>
+      return {
+        at: typeof at === 'number' ? at : Date.now(),
+        mode: mode === 'solo' || mode === 'multiplayer' || mode === 'tutorial' ? mode : undefined,
+        humans: typeof humans === 'number' ? humans : undefined,
+      }
+    }
+  } catch {
+    // Not ours: report the end as it reads now.
+  }
+  return { at: Date.now(), mode: undefined, humans: undefined }
+}
+
 /** What {@link useGameUsage} reads of a game on screen. */
 export interface GameUsage {
   /** The room's code: names the game on this tab, never sent. */
@@ -138,17 +164,22 @@ export function useGameUsage(game: GameUsage): void {
     try {
       const began = window.sessionStorage.getItem(key)
       if (!ended && began === null) {
-        window.sessionStorage.setItem(key, String(Date.now()))
+        window.sessionStorage.setItem(key, JSON.stringify({ at: Date.now(), mode, humans }))
         track('game-start', { mode, players, humans })
       } else if (ended && began !== null) {
         window.sessionStorage.removeItem(key)
+        // The end is reported as the game began: by its end a seat handed to a
+        // bot no longer counts as a person, so read now a table of three came
+        // out "solo, 0 people", and the report, which counts each person's
+        // report of a game as its share of one, counted it three times over.
+        const start = parseStart(began)
         track('game-end', {
-          mode,
+          mode: start.mode ?? mode,
           players,
-          humans,
+          humans: start.humans ?? humans,
           turns: turn,
           outcome: outcome ?? 'draw',
-          minutes: Math.round((Date.now() - Number(began)) / 6000) / 10,
+          minutes: Math.round((Date.now() - start.at) / 6000) / 10,
         })
       }
     } catch {
