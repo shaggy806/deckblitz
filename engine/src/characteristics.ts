@@ -5821,6 +5821,18 @@ function scanAbilityGrantSources(state: GameState, registry: CardRegistry): read
       for (const ability of graveyardGrants) (out ??= []).push({ source, ability });
     }
   }
+  // A spell's static that works only while it's on the stack (rule 113.6b),
+  // its controller the spell's: Torrent of Lava's "as long as Torrent of Lava
+  // is on the stack, each creature has '{T}: …'".
+  for (const sourceId of state.zones.shared.stack) {
+    const source = state.objects[sourceId];
+    if (source === undefined || source.kind !== "card") continue;
+    if (state.players[source.controller]?.hasLost === true) continue;
+    const text = rulesTextName(source);
+    if (!registry.has(text)) continue;
+    const stackGrants = staticsOf(registry, text).stackGrants;
+    for (const ability of stackGrants) (out ??= []).push({ source, ability });
+  }
   // An emblem's: "Mountains you control have '{T}: …'" (Koth of the Hammer).
   for (const { source, ability } of emblemStatics(state)) {
     if (ability.grantsActivated !== undefined || ability.grantsTriggered !== undefined) {
@@ -6436,6 +6448,9 @@ interface StaticsInfo {
   /** What it takes from a graveyard: a `fromGraveyard` static's
    * `grantsActivated` (Riftstone Portal). */
   readonly graveyardGrants: readonly StaticAbility[];
+  /** What it takes from the stack: an `onStack` static's `grantsActivated`
+   * (Torrent of Lava). */
+  readonly stackGrants: readonly StaticAbility[];
   /** What {@link staticAbilityLosses} takes (`loseAllAbilities`). */
   readonly loseAll: readonly StaticAbility[];
   /** What {@link staticGrantSources} takes (`grantsStatic`). */
@@ -6459,16 +6474,18 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
   if (!registry.has(name)) return null;
   const statics = registry.get(name).static;
   const info: StaticsInfo = {
-    contributing: statics.filter((a) => a.fromGraveyard !== true && contributesToCharacteristics(a)),
+    contributing: statics.filter((a) => a.fromGraveyard !== true && a.onStack !== true && contributesToCharacteristics(a)),
     fromGraveyard: statics.filter((a) => a.fromGraveyard === true && contributesToCharacteristics(a)),
     layer4: statics.filter(hasLayerFourPart),
     outside: statics.filter((a) => a.outsideBattlefield !== undefined),
     selfOutside: statics.filter((a) => a.selfOutsideBattlefield !== undefined),
     layer5: statics.filter((a) => a.setColors !== undefined || a.addColors !== undefined || a.setsChosenColor === true),
     grants: statics.filter(
-      (a) => a.fromGraveyard !== true && (a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
+      (a) =>
+        a.fromGraveyard !== true && a.onStack !== true && (a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
     ),
     graveyardGrants: statics.filter((a) => a.fromGraveyard === true && a.grantsActivated !== undefined),
+    stackGrants: statics.filter((a) => a.onStack === true && a.grantsActivated !== undefined),
     loseAll: statics.filter((a) => a.loseAllAbilities === true),
     grantsStatic: statics.filter((a) => a.grantsStatic !== undefined),
     ptRestrictions: statics.filter((a) => a.fromGraveyard !== true && isPtScopedRestriction(a)),

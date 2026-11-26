@@ -7024,6 +7024,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   per card there). Any other part — another replacement, a type change, a
   granted trigger — would work from the battlefield instead, so
   `pool.test.ts` refuses one.
+- `onStack: true` — "**as long as ~ is on the stack**, each creature has
+  '…'" (Torrent of Lava): the static functions only while its card is a
+  spell on the stack (rule 113.6b), its controller the spell's. Only
+  `grantsActivated` reaches that far (the grant scans read the stack); the
+  granted text names the spell as `"granter"` (rule 201.5a) — Torrent's
+  "prevent the next 1 damage … by Torrent of Lava" is `prevent-damage`
+  `from: "granter"`, nothing once the spell has left the stack.
 - `countsAsNamedFor: "Muscle Burst"` (with `fromGraveyard: true`) — "**if this
   card is in a graveyard, effects from spells named Muscle Burst count it as
   a card named Muscle Burst**" (Diligent Farmhand; Pardic Firecat's Flame

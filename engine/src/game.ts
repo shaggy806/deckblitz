@@ -27985,8 +27985,9 @@ export class Game {
       const lost = hasLostAbilities(this.state, this.registry,source);
       this.ownStatics(source).forEach((ability, staticIndex) => {
         if (lost && !hasLayerFourPart(ability)) return;
-        // One that works only from a graveyard does nothing here (rule 113.6b).
-        if (ability.fromGraveyard === true) return;
+        // One that works only from a graveyard or the stack does nothing here
+        // (rule 113.6b).
+        if (ability.fromGraveyard === true || ability.onStack === true) return;
         if (ability.grantsActivated !== undefined) {
           out.push({ source, ability, staticIndex, abilities: ability.grantsActivated });
         }
@@ -28015,6 +28016,20 @@ export class Game {
           out.push({ source, ability, staticIndex, abilities: ability.grantsActivated });
         });
       }
+    }
+    // A spell's static working only while it's on the stack (rule 113.6b),
+    // its controller the spell's — Torrent of Lava's "as long as Torrent of
+    // Lava is on the stack, each creature has '{T}: Prevent the next 1 damage
+    // that would be dealt to this creature by Torrent of Lava this turn.'"
+    // The granted text names the spell (`"granter"`, rule 201.5a).
+    for (const id of this.state.zones.shared.stack) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.kind !== "card" || !this.registry.has(rulesTextName(source))) continue;
+      if (this.state.players[source.controller]?.hasLost === true) continue;
+      this.ownStatics(source).forEach((ability, staticIndex) => {
+        if (ability.onStack !== true || ability.grantsActivated === undefined) return;
+        out.push({ source, ability, staticIndex, abilities: ability.grantsActivated });
+      });
     }
     // An emblem's (rule 113.6p): "Mountains you control have '{T}: …'" (Koth of
     // the Hammer). Its source is no card's definition, so each is its own ref.
@@ -43283,11 +43298,13 @@ export class Game {
       ...(triggerObject !== undefined && refs.triggerSpell !== undefined ? { triggerSpellStint: refs.triggerSpell } : {}),
       ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
       ...(opts.announcedModes !== undefined ? { announcedModes: opts.announcedModes } : {}),
-      // The granter is acted on only while it's the same permanent (400.7).
+      // The granter is acted on only while it's the same permanent (400.7) —
+      // or the same spell, a granter on the stack (an `onStack` static).
       ...(refs.granter !== undefined
         ? {
             granter: refs.granter.object,
-            ...(this.state.objects[refs.granter.object]?.zone !== "battlefield" ||
+            ...((this.state.objects[refs.granter.object]?.zone !== "battlefield" &&
+              this.state.objects[refs.granter.object]?.zone !== "stack") ||
             (this.state.objects[refs.granter.object]?.zoneChangeCount ?? 0) !== refs.granter.zoneChangeCount
               ? { granterLost: true }
               : {}),

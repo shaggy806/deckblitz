@@ -2425,6 +2425,16 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly fromGraveyard?: true;
   /**
+   * "As long as Torrent of Lava is on the stack, each creature has '{T}:
+   * …'": the static functions only while its card is a spell on the stack
+   * (rule 113.6b), its controller the spell's. Only an activated-ability
+   * grant reaches that far (`grantsActivated`, read off the stack by the
+   * grant scans — `abilityGrantSources`, `Game.activatedGrantSources`); the
+   * granted text may name the spell as `"granter"` (rule 201.5a). Anywhere
+   * else such a static does nothing.
+   */
+  readonly onStack?: true;
+  /**
    * "If this card is in a graveyard, effects from spells named Muscle Burst
    * count it as a card named Muscle Burst" (Diligent Farmhand; Pardic
    * Firecat's Flame Burst): with `fromGraveyard`, a `name` filter asked by a

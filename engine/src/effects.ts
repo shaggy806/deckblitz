@@ -11310,6 +11310,13 @@ export type EffectSpec =
        * player who has left, the shield does nothing (614.9). Not with
        * `"all"`. */
       readonly redirectTo?: ObjectRef | PlayerRef;
+      /** Only damage this one source would deal — "prevent the next 1 damage
+       * that would be dealt to this creature **by Torrent of Lava** this
+       * turn" (`"granter"`, the spell whose `onStack` static granted the
+       * ability). A shield keyed to that object as it is now, a spell on the
+       * stack or the permanent it becomes (`preventDamageFrom`); nothing at
+       * all with it gone (rule 400.7). Not with `redirectTo`. */
+      readonly from?: ObjectRef;
     }
   | {
       /** Damage from a source of your choice (rule 609.7): "The next time a
@@ -25764,6 +25771,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "prevent-damage": {
       const ref = objectRefAct(spec.target, ctx);
       if (ref === undefined) return;
+      if (spec.from !== undefined) {
+        const from = objectRefAct(spec.from, ctx);
+        if (from === undefined) return;
+        const amount = spec.amount === "all" ? "all" : amountValue(spec.amount, ctx);
+        ctx.preventDamageFrom(from, ref, amount, undefined, false, undefined, spec.combatOnly === true ? { combatOnly: true } : undefined);
+        return;
+      }
       if (spec.redirectTo !== undefined) {
         // Rule 614.9: nowhere to send it (an illegal target), no shield.
         const to = redirectRef(spec.redirectTo, ctx);
