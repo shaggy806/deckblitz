@@ -160,6 +160,7 @@ import { DungeonViewer } from './ui/DungeonViewer.tsx'
 import { emblemToVisible } from './ui/defToVisible.ts'
 import { delayedToVisible } from './ui/delayedTriggers.ts'
 import { lastingToVisible } from './ui/lastingEffects.ts'
+import { latestChoices } from './ui/latestChoice.ts'
 import { CreatureTypePicker } from './ui/CreatureTypePicker.tsx'
 import { carryHover } from './ui/hoverCarry.ts'
 import { handPlacesBefore, slideHand } from './ui/handMotion.ts'
@@ -2585,6 +2586,20 @@ function Table({
   }, [actions])
   // One of each set of interchangeable "{T}: Add {W}"s (`abilityMenu.ts`).
   const abilitiesBySource = useMemo(() => abilitiesBySourceOf(actions), [actions])
+  // Each player's latest choice, for the "chose …" on their panel's name row
+  // (`ui/latestChoice.ts`), named as the History panel names it.
+  // `Table` remounts every frame, so the scan of the whole log for ability
+  // sources waits until a choice actually names something.
+  const choices = useMemo(() => {
+    let abilities: ReturnType<typeof abilitySourcesOf> | undefined
+    return latestChoices(
+      view.events,
+      (id, seq) =>
+        logNameAt(view.publicStints, game.nameOf, id, seq, false, (abilities ??= abilitySourcesOf(view.events))),
+      game.seats,
+      (id) => view.objects[id]?.controller,
+    )
+  }, [view.events, view.publicStints, view.objects, game.nameOf, game.seats])
   // What a hand card can't do right now, and why (`Game.unavailableHandAbilities`):
   // greyed pills beside the ones on offer. A player left a game holding
   // Colossal Skyturtle with one channel ability missing, their graveyard
@@ -7933,6 +7948,7 @@ function Table({
       emblemCount={view.emblems.filter((e) => e.owner === pid).length}
       delayedCount={(view.delayedTriggers ?? []).filter((d) => d.controller === pid).length}
       lastingCount={(view.lastingEffects ?? []).filter((e) => e.player === pid).length}
+      latestChoice={choices.get(pid) ?? null}
       curses={view.zones.battlefield.flatMap((id) => {
         const o = view.objects[id]
         return o !== undefined && o.attachedToPlayer === pid

@@ -3369,6 +3369,10 @@ engine terms. A second thing to check is a second test.
 - **Do:** Play the Temple, pick blue, then tap it for mana.
 - **Expect:** It adds one blue mana.
 
+### The name row shows your latest choice
+- **Do:** Play the Temple and pick blue, then pass the turn twice, round to your second turn after.
+- **Expect:** "chose blue" appears beside your name (hover: "Temple of the Dragon Queen chooses blue") and stays through the next turn, then goes.
+
 ### Quirion Ranger: one Forest returns without asking
 - **Do:** Activate Quirion Ranger targeting your tapped Grizzly Bears.
 - **Expect:** Your only Forest returns to your hand at once, without a prompt; the Mountain is never offered. The Bears untap.

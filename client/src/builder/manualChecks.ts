@@ -4910,6 +4910,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     board({ you: { bf: ['Shivan Dragon'], hand: ['Temple of the Dragon Queen'] } }),
   ),
   preset(
+    'The name row shows your latest choice',
+    board({ you: { bf: ['Shivan Dragon'], hand: ['Temple of the Dragon Queen'] } }),
+  ),
+  preset(
     'Quirion Ranger: one Forest returns without asking',
     board({
       you: { bf: ['Quirion Ranger', { name: 'Grizzly Bears', tapped: true }, 'Forest', 'Mountain'] },

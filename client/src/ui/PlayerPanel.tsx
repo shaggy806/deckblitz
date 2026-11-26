@@ -6,6 +6,7 @@ import type { SeatStatus } from 'protocol'
 import { CommanderDamageChip } from './CommanderDamageChip.tsx'
 import { CurseChip, type CurseOnPlayer } from './CurseChip.tsx'
 import { dungeonProgress } from './dungeon.ts'
+import type { LatestChoice } from './latestChoice.ts'
 import { Symbols } from './Symbols.tsx'
 import { TargetedMark } from './TargetedMark.tsx'
 
@@ -55,6 +56,9 @@ export interface PlayerPanelProps {
   /** How many lasting effects (a resolved spell's or ability's "this turn",
    * "until your next turn") are on this player: listed in the same viewer. */
   readonly lastingCount?: number
+  /** Their latest choice (a mode, a type, a name, a vote), shown as "chose
+   * …" on the name row through the turn after it (`latestChoice.ts`). */
+  readonly latestChoice?: LatestChoice | null
   /** The Auras attached to this player — Curses (rule 303.4). */
   readonly curses?: readonly CurseOnPlayer[]
   /** Opens a read-only viewer of this player's graveyard/exile/hand, if provided. */
@@ -128,6 +132,7 @@ export function PlayerPanel({
   emblemCount = 0,
   delayedCount = 0,
   lastingCount = 0,
+  latestChoice = null,
   curses = [],
   onOpenGraveyard,
   onOpenExile,
@@ -320,6 +325,14 @@ export function PlayerPanel({
             {curses.map((c) => (
               <CurseChip key={c.id} curse={c} />
             ))}
+          </span>
+        ) : null}
+        {/* Their latest choice, after the badges for the same reason as the
+            waiting line: it changes, and nothing after it should slide. A
+            long one gives way (an ellipsis; the whole line on hover). */}
+        {latestChoice !== null ? (
+          <span key={latestChoice.seq} className="pp-chose" title={latestChoice.line}>
+            {latestChoice.text}
           </span>
         ) : null}
         {/* Last, beside the life total: after the name, it came and went with

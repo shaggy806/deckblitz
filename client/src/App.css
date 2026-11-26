@@ -997,6 +997,29 @@
 .pp-waiting-dots span {
   animation: pp-waiting-dot 1.2s ease-in-out infinite;
 }
+/* "chose Goblin" / "named Sol Ring": the player's latest choice
+   (`ui/latestChoice.ts`), through the turn after it. Shrinks before the name
+   does, like the waiting line; flashes once when a new one comes. */
+.pp-chose {
+  font-size: 0.85em;
+  color: var(--muted, #a8a8b3);
+  white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: pp-chose-new 1.6s ease-out;
+}
+@keyframes pp-chose-new {
+  0% {
+    color: var(--accent);
+  }
+  100% {
+    color: var(--muted, #a8a8b3);
+  }
+}
+:root[data-reduce-motion] .pp-chose {
+  animation: none;
+}
 .pp-waiting-dots span:nth-child(2) {
   animation-delay: 0.2s;
 }
