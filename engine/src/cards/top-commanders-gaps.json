@@ -15,6 +15,7 @@
     "static:spells-targeting-this-spell-cost-more",
     "amount:remembered-number",
     "bug:reflexive-target-trigger-player",
+    "trigger:when-regenerates-this-way",
     "effect:shuffle-graveyard-cards-filtered",
     "effect:cast-copy-from-opponents-hand",
     "effect:play-until-next-upkeep-then-graveyard",

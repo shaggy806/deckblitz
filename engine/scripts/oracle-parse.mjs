@@ -13983,6 +13983,29 @@ export function parseEffect(text, outer) {
       parsed[parsed.length - 1] = { ...regen, ifRegenerates: { kind: "gain-control", target: regen.target, untilEndOfTurn: false } };
       continue;
     }
+    // "When it regenerates this way, put a -1/-1 counter on it." after
+    // "Regenerate ~" (Matopi Golem): a triggered ability the regeneration sets
+    // off (a reflexive one, rule 603.12), carried on the shield as a reflexive trigger.
+    {
+      const whenRegen = /^when it regenerates this way, ([^.]+)\.$/i.exec(sentence);
+      if (
+        whenRegen !== null &&
+        !/\btarget\b/i.test(whenRegen[1]) &&
+        parsed.at(-1)?.kind === "regenerate" &&
+        parsed.at(-1).target === "source" &&
+        parsed.at(-1).ifRegenerates === undefined
+      ) {
+        const said = whenRegen[1].replace(/\bon it$/i, "on ~");
+        const then = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}.`, ctx);
+        if (then !== null && then !== undefined) {
+          parsed[parsed.length - 1] = {
+            ...parsed.at(-1),
+            ifRegenerates: { kind: "reflexive-trigger", targets: [], effect: then, text: sentence },
+          };
+          continue;
+        }
+      }
+    }
     if (/^it can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
       continue;

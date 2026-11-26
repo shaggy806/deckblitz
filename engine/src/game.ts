@@ -44424,12 +44424,18 @@ export class Game {
           cantBeRegenerated === true,
           exceptSource === true ? source : except,
         ),
-      regenerate: (target, ifRegenerates) =>
+      regenerate: (target, ifRegenerates, thatPlayer) =>
         this.regenerateByEffect(
           target,
           ifRegenerates === undefined
             ? undefined
-            : { controller, source, name: this.state.objects[source]?.cardName ?? "", effect: ifRegenerates },
+            : {
+                controller,
+                source,
+                name: this.state.objects[source]?.cardName ?? "",
+                effect: ifRegenerates,
+                ...(thatPlayer !== undefined ? { player: thatPlayer } : {}),
+              },
         ),
       regenerateAll: (filter) => {
         for (const id of this.battlefieldMatching(controller, filter)) {
@@ -61663,7 +61669,22 @@ controlledBy,
       this.regenerateUsingUp(id);
       // As part of the same replacement (701.19a): "you gain control of that
       // creature if it regenerates this way".
-      applyEffectSpec(rider.effect, this.makeResolutionContext(rider.source, rider.controller, [{ kind: "object", object: id }], 0));
+      // "That player" (Soldevi Sentry's chosen opponent) is the rider's.
+      applyEffectSpec(
+        rider.effect,
+        this.makeResolutionContext(
+          rider.source,
+          rider.controller,
+          [{ kind: "object", object: id }],
+          0,
+          0,
+          undefined,
+          1,
+          0,
+          [],
+          rider.player !== undefined ? { player: rider.player } : {},
+        ),
+      );
       invalidateComputedCache();
       return true;
     }

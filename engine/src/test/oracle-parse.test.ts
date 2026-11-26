@@ -25701,3 +25701,26 @@ describe("draws as many as their hand holds, then discards that many", () => {
     });
   });
 });
+
+describe("when it regenerates this way", () => {
+  it("Matopi Golem: the shield carries a reflexive trigger", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Artifact Creature — Golem",
+      mana_cost: "{5}",
+      power: "3",
+      toughness: "3",
+      oracle_text: "{1}: Regenerate this creature. When it regenerates this way, put a -1/-1 counter on it.",
+    });
+    expect(parsed.activated[0].effect).toEqual({
+      kind: "regenerate",
+      target: "source",
+      ifRegenerates: {
+        kind: "reflexive-trigger",
+        targets: [],
+        effect: { kind: "add-counter", target: "source", counter: "-1/-1", amount: 1 },
+        text: "When it regenerates this way, put a -1/-1 counter on it.",
+      },
+    });
+  });
+});

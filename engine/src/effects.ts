@@ -4102,8 +4102,18 @@ export type EffectSpec =
        * a destruction (rule 701.19a), by the effect's controller with its
        * source, the regenerated permanent in slot 0. A shield that's never
        * used does nothing. With a plain shield too, the permanent's
-       * controller chooses which applies (616.1). */
+       * controller chooses which applies (616.1).
+       *
+       * "**When it regenerates this way**, …" is a triggered ability the
+       * regeneration sets off (a reflexive one, rule 603.12), so it's a `reflexive-trigger`
+       * here, put on the stack the next time a player would receive
+       * priority: Matopi Golem's "put a -1/-1 counter on it". */
       readonly ifRegenerates?: EffectSpec;
+      /** "That player" of `ifRegenerates` (its `"trigger-player"`), read as
+       * this resolves: Soldevi Sentry's "Choose target opponent. Regenerate
+       * this creature. When it regenerates this way, that player may draw a
+       * card" is `{ target: 0 }`. */
+      readonly thatPlayer?: PlayerRef;
     }
   | {
       /** Regenerate every battlefield permanent matching `filter` (Wrap in
@@ -14216,7 +14226,7 @@ export interface EffectApi {
     except?: ObjectId,
   ): void;
   /** Give a permanent a regeneration shield (rule 701.15a). */
-  regenerate(target: TargetRef, ifRegenerates?: EffectSpec): void;
+  regenerate(target: TargetRef, ifRegenerates?: EffectSpec, thatPlayer?: PlayerId): void;
   /** Give every battlefield permanent matching `filter` one. */
   regenerateAll(filter: CardFilter): void;
   /** Return every battlefield permanent matching `filter` to its owner's hand
@@ -22058,7 +22068,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "regenerate": {
       const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.regenerate(target, spec.ifRegenerates);
+      if (target === undefined) return;
+      const thatPlayer =
+        spec.ifRegenerates !== undefined && spec.thatPlayer !== undefined ? resolvePlayerRef(spec.thatPlayer, ctx) : undefined;
+      ctx.regenerate(target, spec.ifRegenerates, thatPlayer);
       return;
     }
     case "regenerate-all":

@@ -189,6 +189,8 @@ export interface RegenerationRider {
   /** The source's name, for the 616.1 question between shields. */
   readonly name: string;
   readonly effect: EffectSpec;
+  /** "That player" of `effect` (the `regenerate` effect's `thatPlayer`). */
+  readonly player?: PlayerId;
 }
 
 /** The three sector designations (rule 702.158b — space sculptor). */
