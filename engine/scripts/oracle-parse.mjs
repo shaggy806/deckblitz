@@ -25091,6 +25091,15 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "As long as ~ is on the stack, spells that target it cost {2} more to
+  // cast" (Kaervek's Torch): from the stack, every caster's spell.
+  if ((m = /^As long as ~ is on the stack, spells that target it cost \{(\d+)\} more to cast\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      targetedBySpellsCost: { payGeneric: Number(m[1]), whileOnStack: true },
+      text,
+    };
+  }
   if ((m = /^Spells your opponents cast that target you or a permanent you control cost \{(\d+)\} more to cast\.$/.exec(line))) {
     return {
       affects: { scope: "self" },

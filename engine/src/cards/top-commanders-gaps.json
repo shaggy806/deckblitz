@@ -8,6 +8,7 @@
     "trigger:activates-this-ability",
     "filter:aura-with-enchant-words",
     "static:untargetable-by-wall-only-spells",
+    "static:spells-targeting-this-spell-cost-more",
     "effect:shuffle-graveyard-cards-filtered",
     "effect:cast-copy-from-opponents-hand",
     "effect:play-until-next-upkeep-then-graveyard",

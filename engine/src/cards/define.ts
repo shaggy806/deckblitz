@@ -4144,6 +4144,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * with `targeting`): this static's controller, as a target, counts as
      * well. Once per spell, like `targeting`. */
     readonly targetingYou?: boolean;
+    /** "As long as Kaervek's Torch is on the stack, spells that target it
+     * cost {2} more to cast": the static works from a spell on the stack
+     * (rule 113.6 — an instant's or sorcery's abilities function while it's
+     * on the stack; 113.6b, where its text names the zone), and only there. Every
+     * caster's spell pays, its own controller's too — there's no "your
+     * opponents" — once per spell however many of its slots name it. */
+    readonly whileOnStack?: true;
   };
   /**
    * Untap during each **other** player's untap step, as well as your own:

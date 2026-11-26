@@ -11419,6 +11419,16 @@ describe("costs keyed to a spell's target", () => {
     expect(terror.static[0].targetedBySpellsCost).toEqual({ payLife: 3 });
   });
 
+  it("reads 'as long as ~ is on the stack, spells that target it cost {N} more' (Kaervek's Torch)", () => {
+    const torch = face(
+      "Kaervek's Torch",
+      "Sorcery",
+      "As long as Kaervek's Torch is on the stack, spells that target it cost {2} more to cast.\nKaervek's Torch deals X damage to any target.",
+    );
+    expect(torch.complete).toBe(true);
+    expect(torch.static[0].targetedBySpellsCost).toEqual({ payGeneric: 2, whileOnStack: true });
+  });
+
   it("reads 'that target a Merfolk you control' and 'one or more commanders you control', and the abilities' half", () => {
     const kopala = face(
       "Kopala, Warden of Waves",

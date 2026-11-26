@@ -6341,6 +6341,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   controlledBy: "you" }`), "one or more commanders you control" (Esior:
   `{ isCommander: true, controlledBy: "you" }`) — once per spell however many
   match. Abilities have their own: `abilityCostModification`'s `targeting`.
+  `whileOnStack: true` is a spell's own "As long as Kaervek's Torch is on
+  the stack, spells that target it cost {2} more to cast": read from the
+  stack only, and every caster's spell pays, its controller's too.
 - A player named as an **owner**: `{ ownerOf: n }` is "its owner" on
   `gain-life`/`lose-life`/`damage`'s `who`, `draw`'s `who`, `discard`/`mill`'s
   `target` and `exile-graveyard`'s `target` (Path of Peace, Recoil, Geth,

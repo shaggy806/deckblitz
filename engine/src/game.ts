@@ -19774,6 +19774,10 @@ export class Game {
         for (const ability of this.ownStatics(object)) see(ability);
         for (const modifier of object.modifiers) for (const ability of modifier.grantsStatic ?? []) see(ability);
       }
+      for (const id of this.state.zones.shared.stack) {
+        const object = this.state.objects[id];
+        if (object?.kind === "card") for (const ability of this.ownStatics(object)) see(ability);
+      }
       return { any, mana };
     });
   }
@@ -19799,7 +19803,19 @@ export class Game {
         if (object === undefined) continue;
         for (const ability of this.targetedCostStatics(object)) {
           const cost = ability.targetedBySpellsCost;
-          if (cost === undefined || !this.staticActive(object, ability)) continue;
+          if (cost === undefined || cost.whileOnStack === true || !this.staticActive(object, ability)) continue;
+          const held = costs.get(id);
+          if (held === undefined) costs.set(id, [cost]);
+          else held.push(cost);
+        }
+      }
+      // Kaervek's Torch: a spell's own "as long as this is on the stack".
+      for (const id of this.state.zones.shared.stack) {
+        const object = this.state.objects[id];
+        if (object?.kind !== "card") continue;
+        for (const ability of this.ownStatics(object)) {
+          const cost = ability.targetedBySpellsCost;
+          if (cost?.whileOnStack !== true || !this.staticActive(object, ability)) continue;
           const held = costs.get(id);
           if (held === undefined) costs.set(id, [cost]);
           else held.push(cost);
@@ -19839,7 +19855,14 @@ export class Game {
     const active = this.activeTargetedCosts();
     for (const [id, slots] of named) {
       const object = this.state.objects[id];
-      if (object === undefined || object.zone !== "battlefield" || object.controller === caster) continue;
+      if (object === undefined) continue;
+      if (object.zone === "stack") {
+        // "As long as this is on the stack, spells that target it": any
+        // caster's spell, once however many slots name it.
+        for (const cost of active.get(id) ?? []) if (cost.whileOnStack === true) add(cost, 1);
+        continue;
+      }
+      if (object.zone !== "battlefield" || object.controller === caster) continue;
       const times = Math.min(slots, Math.max(1, object.stackCount ?? 1));
       for (const cost of active.get(id) ?? []) {
         if (cost.targeting === undefined && cost.targetingYou !== true) add(cost, times);
