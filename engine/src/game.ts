@@ -6932,7 +6932,7 @@ export class Game {
       const totalByX =
         def.divided === null || payableX === undefined
           ? undefined
-          : this.dividedTotalsByX(def.divided, card, player, payableX, castFor);
+          : this.dividedTotalsByX(def.divided, card, player, payableX, castFor, Boolean(kicked));
       const xGroup =
         payableX !== undefined && targetCount === undefined && (groupReadsX(specs) || totalByX !== undefined)
           ? this.xGroupOffer(specs, options, payableX, xFloor, totalByX)
@@ -6943,7 +6943,7 @@ export class Game {
       // group at one target per point — an X total waits for the X chosen,
       // and one read from X caps at the most any X gives.
       const dividedAtZero =
-        def.divided === null ? undefined : this.dividedNow(def.divided, card, player, undefined, undefined, castFor);
+        def.divided === null ? undefined : this.dividedNow(def.divided, card, player, undefined, undefined, castFor, Boolean(kicked));
       const divide =
         dividedAtZero === undefined || totalByX === undefined ? dividedAtZero : { ...dividedAtZero, totalByX };
       const capDivide =
@@ -25863,7 +25863,7 @@ export class Game {
     const chosenDivision =
       def.divided === null
         ? undefined
-        : spellDivision(this.dividedNow(def.divided, cardId, player, chosenX, undefined, paidCost ?? "none"), targets, division);
+        : spellDivision(this.dividedNow(def.divided, cardId, player, chosenX, undefined, paidCost ?? "none", Boolean(kicked)), targets, division);
     if (typeof chosenDivision === "string") throw new Error(`${def.name}: ${chosenDivision}`);
 
     const castingFromCommand = this.isCastableCommander(player, cardId);
@@ -41989,13 +41989,20 @@ export class Game {
      * hasn't recorded yet — Avacyn's Judgment's "X … instead" if its
      * madness cost was paid. */
     castFor?: "printed" | "madness" | "none",
+    /** A spell being cast: whether it's cast kicked (rule 702.33d), which it
+     * hasn't recorded yet — Pollen Remedy's "prevent the next 6 damage this
+     * way instead" if it was kicked. The kicker is announced before the
+     * division (601.2b before 601.2d). */
+    kicked?: boolean,
   ): Omit<D, "total"> & { readonly total: number } {
     if (divided.x === true) return { ...divided, total: x ?? 0 };
     if (typeof divided.total === "number") return { ...divided, total: divided.total };
     const refs: LastKnownRefs =
       unattached === undefined ? {} : { sets: addToSet(undefined, { paid: "unattached" }, this.paidMembers("unattached", [unattached])) };
-    const ctx = this.makeResolutionContext(source, controller, [], x ?? 0, 0, undefined, 1, 0, [], refs,
-      castFor === undefined ? {} : { castFor });
+    const ctx = this.makeResolutionContext(source, controller, [], x ?? 0, 0, undefined, 1, 0, [], refs, {
+      ...(castFor === undefined ? {} : { castFor }),
+      ...(kicked === undefined ? {} : { kicked }),
+    });
     return { ...divided, total: Math.max(0, amountValue(divided.total, ctx)) };
   }
 
@@ -42011,11 +42018,12 @@ export class Game {
     player: PlayerId,
     payableX: number,
     castFor: "printed" | "madness" | "none",
+    kicked: boolean,
   ): number[] | undefined {
     if (divided.x === true || typeof divided.total === "number") return undefined;
     const totals = Array.from(
       { length: payableX + 1 },
-      (_v, x) => this.dividedNow(divided, card, player, x, undefined, castFor).total,
+      (_v, x) => this.dividedNow(divided, card, player, x, undefined, castFor, kicked).total,
     );
     return totals.every((t) => t === totals[0]) ? undefined : totals;
   }
@@ -42477,6 +42485,9 @@ export class Game {
        * own, or `"none"` (`Game.dividedNow`'s): `self-alternative-cost-paid`
        * reads it, as the spell hasn't recorded it yet. */
       readonly castFor?: "printed" | "madness" | "none";
+      /** The source is a spell being cast kicked or not (`Game.dividedNow`'s):
+       * `self-kicked` reads it, as the spell hasn't recorded it yet. */
+      readonly kicked?: boolean;
     } = {},
   ): ResolutionContext {
     const refs = this.withEnteredPaid(source, lastKnownRefs);
@@ -43232,6 +43243,8 @@ export class Game {
       if (condition.kind === "self-alternative-cost-paid" && opts.castFor !== undefined) {
         return opts.castFor === (condition.madness === true ? "madness" : "printed");
       }
+      // Likewise whether it's cast kicked (Pollen Remedy's total — 601.2d).
+      if (condition.kind === "self-kicked" && opts.kicked !== undefined) return opts.kicked;
       // Resolution happens outside the layer fold, so the source can count
       // itself ("if creatures you control have total power 10 or greater"
       // includes the creature asking) without recursing.

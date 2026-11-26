@@ -23381,6 +23381,25 @@ describe("your commander's triggers, and a graveyard card's return", () => {
   });
 });
 
+describe("a divided prevention whose total reads the kicker", () => {
+  it("reads Pollen Remedy whole: 3, or 6 kicked, and the group left open", () => {
+    const face = parseFace(
+      {
+        name: "Pollen Remedy",
+        type_line: "Instant",
+        oracle_text:
+          "Kicker—Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nPrevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. If this spell was kicked, prevent the next 6 damage this way instead.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.kicker).toEqual({ cost: "", also: { text: "Sacrifice a land", sacrifice: { filter: { type: "land" }, count: 1 } } });
+    expect(face.targets).toEqual([{ kind: "any-number", of: "any-target" }]);
+    expect(face.divided).toEqual({ total: { ifCondition: { kind: "self-kicked" }, then: 6, else: 3 }, slot: 0, of: "damage to prevent" });
+    expect(face.effect).toEqual({ kind: "prevent-damage-divided", from: 0 });
+  });
+});
+
 describe("split second if this spell was kicked", () => {
   it("reads Molten Disaster whole", () => {
     const face = parseFace(

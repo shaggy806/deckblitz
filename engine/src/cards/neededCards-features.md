@@ -1205,6 +1205,15 @@ zone choice; an ability's collect-evidence cost now records its cards as `{ paid
 cards" is `{ set: { paid: "exiled" } }` with `copies: 1`, `repeat`, `upTo: 3`. Its scaffolder line is
 read. `test/exile-total-mana-value-cost.test.ts`.
 
+### A divided total that reads the kicker — built 2026-11-26
+
+The key `effect:divided-total-by-kicker`. Pollen Remedy (rank 22391): "Prevent the next 3 damage … divided
+… If this spell was kicked, prevent the next 6 damage this way instead." The kicker is announced before the
+division (601.2b before 601.2d), but the spell hasn't recorded it yet, so `self-kicked` asked of a
+`divided.total` answered "no": `Game.dividedNow` takes `kicked` (the offer's variant, the cast's choice) and
+hands it to the condition (a `makeResolutionContext` option), as `castFor` does for madness. The scaffolder
+reads a spell's "Kicker[—cost]" before that prevention line. `test/divided-total-by-kicker.test.ts`.
+
 ### A divided total that reads the cost the spell is cast for — built 2026-11-17
 
 The key `effect:divided-total-by-alternative-cost`. Avacyn's Judgment (rank 11326): "2 damage divided …

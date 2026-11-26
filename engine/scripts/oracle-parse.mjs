@@ -19713,6 +19713,20 @@ function parseFaceAsWritten(face, ctx = {}) {
       i += 1;
       continue;
     }
+    // "Kicker [cost]" or "Kicker—[cost]" then a divided prevention whose
+    // kicked total is "the next N damage this way instead" (Pollen Remedy):
+    // the kicker, its total read on the effect line below (`self-kicked`).
+    if (
+      isSpell &&
+      (m = /^Kicker(?: ((?:\{[^}]+\})+)|—(.+?)\.)$/.exec(line)) &&
+      /^Prevent the next \w+ damage that would be dealt this turn to any number of targets, divided as you choose\. If ~ was kicked, prevent the next \w+ damage this way instead\.$/.test(normalize(lines[i + 1] ?? "", face.name))
+    ) {
+      const also = m[2] === undefined ? undefined : kickerAlso(m[2]);
+      if (also !== null) {
+        out.kicker = { cost: m[1] ?? "", ...(also === undefined ? {} : { also }), dividedInstead: true };
+        continue;
+      }
+    }
     if (isSpell && line === "Rebound") { out.rebound = true; continue; }
     // Paradigm (rule 702.192a): the spell's last part, then exiled.
     if (isSpell && line === "Paradigm") { paradigm = true; continue; }
@@ -21842,7 +21856,30 @@ function parseFaceAsWritten(face, ctx = {}) {
       const xInstead =
         /^(.+\.) If X is (\d+) or more, ~ deals twice X damage divided as you choose among them instead\.$/.exec(text);
       if (xInstead !== null) text = xInstead[1];
+      // "If this spell was kicked, prevent the next 6 damage this way
+      // instead." (Pollen Remedy): the kicked total divided, read for the
+      // variant cast (rules 702.33d, 601.2d) — only after the kicker read
+      // for this pair in the line loop.
+      const kickedInstead = out.kicker?.dividedInstead === true
+        ? /^(.+\.) If ~ was kicked, prevent the next (\w+) damage this way instead\.$/.exec(text)
+        : null;
+      if (kickedInstead !== null) text = kickedInstead[1];
+      if (out.kicker?.dividedInstead === true) delete out.kicker.dividedInstead;
       const r = parseEffect(text, ctx2);
+      if (kickedInstead !== null) {
+        const before = ctx2.divided.value;
+        const kickedTotal = numberOf(kickedInstead[2].toLowerCase());
+        const spec = before === undefined ? undefined : spellTargets[before.slot];
+        if (r.effect?.kind === "prevent-damage-divided" && typeof before?.total === "number" && typeof kickedTotal === "number" && spec?.kind === "any-number") {
+          ctx2.divided.value = { ...before, total: { ifCondition: { kind: "self-kicked" }, then: kickedTotal, else: before.total } };
+          // The total caps the group (at least 1 each), kicked or not.
+          const { max: _max, ...open } = spec;
+          spellTargets[before.slot] = open;
+        } else {
+          r.effect = null;
+          r.todo = [...(r.todo ?? []), kickedInstead[0]];
+        }
+      }
       if (xInstead !== null) {
         const before = ctx2.divided.value;
         if (r.effect !== null && before?.total === "x" && before.x === undefined) {
