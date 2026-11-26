@@ -342,6 +342,9 @@ export const CREATURE_TYPE_WORD_KEYS: ReadonlySet<string> = new Set([
   "subtypeAmong",
   "chooseCreatureTypeMenu",
   "options",
+  // Wall of Shadows' "spells that can target only Walls" (a `be-targeted`
+  // prohibition's `aimingOnly`).
+  "aimingOnly",
   // A text change's own words: New Blood's "with Vampire", Artificial
   // Evolution's "can't be Wall" (`change-text`'s `to` and `notTo`).
   "to",
