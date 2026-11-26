@@ -4000,6 +4000,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("'target creature (you control) that's attacking alone' (rule 506.5)", () => {
+    const viper = face("{B}: Target creature that's attacking alone gets +1/+1 until end of turn.", "Legendary Creature — Human Assassin Villain");
+    expect(viper.activated[0].targets).toEqual([{ kind: "permanent", filter: { type: "creature", attackingAlone: true } }]);
+    const crowd = face(
+      "{T}: Target creature you control that's attacking alone gets +1/+0 until end of turn. You gain 1 life.",
+      "Creature — Human Citizen",
+    );
+    expect(crowd.activated[0].targets).toEqual([{ kind: "permanent", whose: "you", filter: { type: "creature", attackingAlone: true } }]);
+  });
+
   it("saddle (rule 702.171): the keyword, 'attacks while saddled', 'becomes saddled' and the effect", () => {
     const lagac = face(
       "Deathtouch\nWhenever this creature attacks while saddled, it gets +0/+3 until end of turn.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)",

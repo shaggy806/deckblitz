@@ -7775,7 +7775,11 @@ clause (section 9):
   `PlayerRef`, bound as the effect applies; the player, not a planeswalker
   of theirs). "Another target creature attacking **the same player or
   planeswalker**" (Kitesail Skirmisher) is `attackingSameAsSource: true`,
-  read against the source's attack now, in a target slot too.
+  read against the source's attack now, in a target slot too. "Target
+  creature **that's attacking alone**" (Viper, Cruel Conspirator; Crowd of
+  True Believers with `whose: "you"`) is `attackingAlone: true` (rule 506.5:
+  attacking while no other creature is, whoever's; a counted attacking
+  token stack is never alone). `attacking-alone.test.ts`.
 - `{ kind: "turn-history", what, who?, filter?, atLeast?, excludeSelf?, selfOnly?, doneBy?, by?, counter?, from?, notFrom?, against? }` —
   (`what: "destroyed"` is each permanent `who` controlled that was destroyed —
   rule 701.8b: a "destroy" effect, or the lethal-damage and deathtouch

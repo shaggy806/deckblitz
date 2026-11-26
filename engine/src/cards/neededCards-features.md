@@ -8850,3 +8850,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Combat damage as though its power were positive (2026-11-26).** `static:assign-combat-damage-as-positive-power`: `StaticAbility.combatDamageAsPositivePower` → `Characteristics.damageAsPositivePower`, read in `combatDamageOf` after the by-toughness form (the ruling: toughness wins). Its power doesn't change. Loot, the Anomaly. `test/combat-damage-as-positive-power.test.ts`.
 
 **A new target narrower than the spell's slot (2026-11-26).** `effect:change-target-new-target-restricted`: `change-targets` `newTargetIs` (`"player"` or a `CardFilter`), filtering the legal new targets in `Game.changeStackTargets`. Rebound, Meddle, Silver Wyvern. `test/change-targets-new-target-is.test.ts`.
+
+**Attacking alone (2026-11-26).** `filter:attacking-alone`: `CardFilter.attackingAlone` (rule 506.5), in `matchesFilter`; the scaffolder reads "target creature (you control) that's attacking alone". Viper, Cruel Conspirator, Crowd of True Believers. `test/attacking-alone.test.ts`.

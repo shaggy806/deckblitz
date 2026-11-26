@@ -452,6 +452,12 @@ export interface CardFilter {
    * Master of Cruelties' "whenever this creature attacks **a player** and
    * isn't blocked". A permanent on the battlefield only. */
   readonly attackingPlayer?: true;
+  /** **Attacking alone** (rule 506.5): attacking while no other creature is,
+   * whoever's and whatever they attack — Viper, Cruel Conspirator's "target
+   * creature that's attacking alone". Not "attacks alone" (exalted's, the
+   * declaration's): one that was declared with others is attacking alone
+   * once they've left combat. A permanent on the battlefield only. */
+  readonly attackingAlone?: true;
   /** Controlled by a defending player, for a spell with no attacker to read one
    * from (False Orders' "target creature defending player controls"): any player
    * an attacker is attacking, or whose planeswalker or battle it is; a player
@@ -2971,6 +2977,17 @@ export function matchesFilter(
     const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
     const theirs = by?.zone === "battlefield" ? by.attacking : null;
     if (at === null || at === undefined || theirs === null || theirs === undefined || at !== theirs) return false;
+  }
+  if (filter.attackingAlone === true) {
+    // Rule 506.5: attacking, and no other creature is — whoever controls
+    // it, whatever it attacks. A counted attacking stack is that many.
+    if (live?.zone !== "battlefield" || live.attacking === null || live.attacking === undefined) return false;
+    if ((live.stackCount ?? 1) > 1) return false;
+    const others = state.zones.shared.battlefield.some((other) => {
+      const o = state.objects[other];
+      return other !== id && o.attacking !== null && o.attacking !== undefined;
+    });
+    if (others) return false;
   }
   if (filter.controlledByDefendingPlayer === true) {
     const controller = live?.controller;

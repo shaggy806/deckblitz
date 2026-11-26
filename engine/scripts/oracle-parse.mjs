@@ -1216,7 +1216,9 @@ function modifiedTargetOf(phrase) {
       "(?: with (flying|reach|power (\\d+) or (greater|less)|toughness (\\d+) or (greater|less)|mana value (\\d+) or (greater|less)))?" +
       // "…that crewed it this turn" / "…that saddled it this turn" (rules
       // 702.122c, 702.171c): tapped for the source's crew or saddle cost.
-      "(?: that (crewed|saddled) it this turn)?$",
+      "(?: that (crewed|saddled) it this turn)?" +
+      // "…that's attacking alone" (rule 506.5 — Viper, Cruel Conspirator).
+      "( that's attacking alone)?$",
     "i",
   ).exec(phrase);
   if (m === null) return undefined;
@@ -1253,6 +1255,7 @@ function modifiedTargetOf(phrase) {
     else if (m[8] !== undefined) filter.manaValue = cmp(m[8], m[9]);
   }
   if (m[10] !== undefined) filter[m[10].toLowerCase() === "crewed" ? "crewedSource" : "saddledSource"] = true;
+  if (m[11] !== undefined) filter.attackingAlone = true;
   const whose = m[2] === undefined ? undefined : m[2].toLowerCase() === "you control" ? "you" : "opponent";
   return { kind: "permanent", ...(whose !== undefined ? { whose } : {}), filter };
 }
