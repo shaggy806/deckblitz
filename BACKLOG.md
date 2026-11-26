@@ -48,7 +48,7 @@ section keeps only what to do next.
   Left as majors for the user: Spellweaver Volute (18930, an Aura on a graveyard card), Word of
   Command (19342, controlling a player), Raging River (20295, labelled piles), Swirl the Mists (20599,
   text changes over every spell and permanent) and Rhystic Cave (20257, a payment window inside a
-  mana ability; its working build is in commit 67ce0c3cb). **Next by rank** (`rank-goal.mjs --rank
+  mana ability; its working build is in commit 401281830). **Next by rank** (`rank-goal.mjs --rank
   30000 --keys`, every key laned): Sabertooth Cobra (20245, `effect:pay-before-delayed-deadline`),
   Psychogenic Probe (20611), Elemental Resonance (20686), Piracy (20704), Invoke the Ancients (20794),
   Bribe Taker (20944), Kithkin Armor (20952), Master's Councillors (21015), then on; Balduvian Fallen

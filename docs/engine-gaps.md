@@ -20,7 +20,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`beginUnless`'s chooser `"any-player"`, Nakaya Shade) and every punisher option. A choice made for the
   player (AUTHORING.md §0). There's no payment window where a payer floats or picks mana, and
   `whyCannotAct` refuses a mana ability while a decision is pending. Rhystic Cave waits on the same window
-  inside a mana ability (`cost:pay-unless-inside-mana-ability`, major; its build is commit 67ce0c3cb).
+  inside a mana ability (`cost:pay-unless-inside-mana-ability`, major; its build is commit 401281830).
 - **B338's small gaps** (2026-11-22, what the overnight lane agents reported; none checked beyond the
   agent's own reading): a prevention shield's shares (`shieldShareKey`, source + `madeIn`) are shared by two shields
   made in one resolution, and a share caps a hit after doublers; Season of the Witch's

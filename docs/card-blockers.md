@@ -713,7 +713,7 @@ one card a name.
   (controlling a player, not attempted), Swirl the Mists (static text changes over every spell and
   permanent: text changes are per object), Raging River (labelled piles no one chooses between, then a
   left/right choice per attacker) and Rhystic Cave (a payment inside a mana ability where the payer picks
-  their sources; built on the auto-planner in 67ce0c3cb and taken out for rule zero). Re-keyed: Balduvian
+  their sources; built on the auto-planner in 401281830 and taken out for rule zero). Re-keyed: Balduvian
   Fallen (`amount:mana-spent-on-cumulative-upkeep`). Found on the way: every "unless … pays" option is
   paid by the auto-planner, never the payer's own choice (BACKLOG, Engine rules gaps); a stolen Lamplight
   Phoenix returns under its thief (110.2a), sent back and fixed before landing; Arcanum Wings' aura swap

@@ -456,7 +456,7 @@
     "cost:pay-unless-inside-mana-ability"
    ],
    "size": "major",
-   "why": "Its {1} would be paid by the auto-planner, choosing the payer's lands for them (rule zero); there is no payment window where a payer picks sources, and none inside a mana ability. A working build with the auto-planner is kept in commit 67ce0c3cb (revert 65e583c45 once such a window exists)."
+   "why": "Its {1} would be paid by the auto-planner, choosing the payer's lands for them (rule zero); there is no payment window where a payer picks sources, and none inside a mana ability. A working build with the auto-planner is kept in commit 401281830 (revert 65e583c45 once such a window exists)."
   },
   {
    "name": "Balduvian Fallen",
