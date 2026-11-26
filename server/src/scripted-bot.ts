@@ -255,6 +255,7 @@ export class ScriptedBot extends HeuristicBotController {
         targets: offer.targetOptions.map((options) => aim(state, options, move.target)),
         ...(sacrifice !== undefined ? { sacrifice } : {}),
         ...(offer.modes !== undefined ? { modes: offer.modes } : {}),
+        ...(offer.costOption !== undefined ? { costOption: offer.costOption } : {}),
       };
     }
     return null;

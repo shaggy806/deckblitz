@@ -5097,6 +5097,16 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   asked one at a time. A spell's equivalents are
   `additionalCost.sacrificeCount` and `flashback.sacrifice` (§3).
   `sacrifice-cost-parts.test.ts`.
+- **A choice of whole costs on an activated ability**: `cost.options`, each
+  `{ cost: { …cost parts }, text }`, beside the rest of the cost — "{3}, {T},
+  Sacrifice an artifact or discard a nonland card" (Bullseye, Death Dealer)
+  is `{ mana: "{3}", tap: true, options: [{ cost: { sacrifice: { filter: {
+  type: "artifact" } } }, text: "Sacrifice an artifact" }, { cost: { discard:
+  { count: 1, filter: { notTypes: ["land"] } } }, text: "Discard a nonland
+  card" }] }`. Offered once per branch that can be paid (the offer's
+  `costOption`), as a spell's `additionalCost.options` is. Not for one
+  sacrifice whose filter spans two types (Mold Folk, below). Not on a mana
+  ability. `activation-cost-options.test.ts`.
 - **A sacrifice cost's filters are matched against the source** (the
   `filter`, and each of an `each`'s), so a clause about the source reads it:
   "Sacrifice this creature and another green creature" (Magus of the Order)

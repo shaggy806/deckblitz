@@ -304,6 +304,8 @@ function abilityCandidates(legal: ActivateAbilityLegal, player: PlayerId): Actio
     ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
     // The opponent named to choose some of its targets (rule 601.2c).
     ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
+    // The branch of a choice of costs this variant pays.
+    ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
   };
   const combos = targetCombos(legal.targetOptions, MAX_TARGET_COMBOS, legal.targetSpecs);
   // A "−X" loyalty ability (rule 107.3a): X at its maximum spends every

@@ -346,6 +346,23 @@ export type PutFromExileCost =
   | number
   | { readonly count: number; readonly linked: true; readonly filter?: CardFilter };
 
+/** One branch of {@link AbilityCost.options}: the cost parts it adds, and its
+ * label for the button. */
+export interface ActivationCostOption {
+  readonly cost: Partial<Omit<AbilityCost, "options" | "mana" | "tap">>;
+  readonly text: string;
+}
+
+/** `ability` with the `option`th of its cost's `options` merged over the rest
+ * of its cost (and the `options` gone) — what activating it with that
+ * `costOption` pays. The ability itself when it has none, or the index is
+ * out of range. */
+export function withActivationCostOption<A extends { readonly cost: AbilityCost }>(ability: A, option: number | undefined): A {
+  const options = ability.cost.options;
+  if (options === undefined || option === undefined || options[option] === undefined) return ability;
+  return { ...ability, cost: { ...ability.cost, ...options[option].cost, options: undefined } };
+}
+
 export interface AbilityCost {
   /** Mana portion of the cost, e.g. `"{2}"`; `null` for no mana. */
   readonly mana: string | null;
@@ -363,6 +380,19 @@ export interface AbilityCost {
   readonly xSpendOnly?: "W" | "U" | "B" | "R" | "G";
   /** Whether `{T}` (tap this permanent) is part of the cost. */
   readonly tap: boolean;
+  /**
+   * A **choice** between whole costs, of which the activator pays exactly
+   * one, beside the rest of this cost — "{3}, {T}, Sacrifice an artifact
+   * **or** discard a nonland card" (Bullseye, Death Dealer), as a spell's
+   * `additionalCost.options` is. Chosen as it's activated (rule 602.2b,
+   * through 601.2f's total cost): the ability is offered once per option
+   * that can be paid, each offer's `costOption` (and `costOptionText`, its
+   * label) echoed back on the `activate-ability` action, and the chosen
+   * option's fields are merged over this cost (`withActivationCostOption`)
+   * so every check and payment reads one ordinary cost. Not on a mana
+   * ability.
+   */
+  readonly options?: readonly ActivationCostOption[];
   /**
    * An action as (part of) the cost, in the effect vocabulary: an `EffectSpec`
    * whose every step has a row in `COST_ACTS` (`cost-acts.ts`). Payable only

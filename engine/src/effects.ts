@@ -1836,8 +1836,9 @@ export type UnlessOption =
    * forage's other way (rule 701.61a), offered only with that many there.
    * `forage` marks it as foraging, which "whenever you forage" sees. */
   | { readonly exileFromGraveyard: number; readonly forage?: true; readonly text: string }
-  /** "…or discard a card" (Tergrid's Lantern, Torment of Hailfire). */
-  | { readonly discard: number; readonly text: string }
+  /** "…or discard a card" (Tergrid's Lantern, Torment of Hailfire);
+   * `filter` is "discard a **nonland** card" (Bullseye, Death Dealer). */
+  | { readonly discard: number; readonly filter?: CardFilter; readonly text: string }
   /** "Put a land card from your hand onto the battlefield" (Kynaios and
    * Tiro of Meletis). */
   | { readonly putFromHand: CardFilter; readonly text: string }

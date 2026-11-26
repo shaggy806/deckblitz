@@ -11419,6 +11419,23 @@ describe("costs keyed to a spell's target", () => {
     expect(terror.static[0].targetedBySpellsCost).toEqual({ payLife: 3 });
   });
 
+  it("reads an activated cost's choice of whole costs (Bullseye, Death Dealer)", () => {
+    const bullseye = face(
+      "Bullseye, Death Dealer",
+      "Legendary Creature — Human Assassin Villain",
+      "{3}, {T}, Sacrifice an artifact or discard a nonland card: Bullseye deals 2 damage to any target.",
+    ) as unknown as { complete: boolean; activated: { cost: unknown }[] };
+    expect(bullseye.complete).toBe(true);
+    expect(bullseye.activated[0].cost).toEqual({
+      mana: "{3}",
+      tap: true,
+      options: [
+        { cost: { sacrifice: { filter: { type: "artifact" } } }, text: "Sacrifice an artifact" },
+        { cost: { discard: { count: 1, filter: { notTypes: ["land"] } } }, text: "Discard a nonland card" },
+      ],
+    });
+  });
+
   it("reads 'as long as ~ is on the stack, spells that target it cost {N} more' (Kaervek's Torch)", () => {
     const torch = face(
       "Kaervek's Torch",

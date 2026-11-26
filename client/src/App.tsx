@@ -3201,6 +3201,7 @@ function Table({
                 targets: [...targets],
                 ...(t.modes !== undefined ? { modes: [...t.modes] } : {}),
                 ...(t.otherChooser !== undefined ? { otherChooser: t.otherChooser } : {}),
+                ...(t.costOption !== undefined ? { costOption: t.costOption } : {}),
                 ...(t.sacrifice !== undefined ? { sacrifice: t.sacrifice } : {}),
                 ...(t.xValue !== undefined ? { xValue: t.xValue } : {}),
                 ...(t.manaColors !== undefined ? { manaColors: t.manaColors } : {}),
@@ -3546,6 +3547,7 @@ function Table({
         xValue: value,
         ...(action.modes !== undefined ? { modes: action.modes } : {}),
         ...(action.otherChooser !== undefined ? { otherChooser: action.otherChooser } : {}),
+        ...(action.costOption !== undefined ? { costOption: action.costOption } : {}),
         ...(action.tapCost !== undefined ? { tapCost: action.tapCost } : {}),
         ...(action.waterbend !== undefined && action.waterbend.choices.length > 0
           ? { waterbendOffer: action.waterbend }
@@ -3617,6 +3619,8 @@ function Table({
         ...(ab.modes !== undefined ? { modes: ab.modes } : {}),
         // The opponent named to choose some of its targets (rule 601.2c).
         ...(ab.otherChooser !== undefined ? { otherChooser: ab.otherChooser } : {}),
+        // The branch of a choice of costs this row pays (Bullseye's).
+        ...(ab.costOption !== undefined ? { costOption: ab.costOption } : {}),
         ...(ab.manaFor !== undefined ? { manaFor: ab.manaFor } : {}),
         ...(ab.tapCost !== undefined ? { tapCost: ab.tapCost } : {}),
         ...(ab.waterbend !== undefined && ab.waterbend.choices.length > 0 ? { waterbendOffer: ab.waterbend } : {}),
@@ -8519,7 +8523,7 @@ function Table({
                 </button>
               ) : null}
               {handAbilities.map((ab) => (
-                <button key={`ab-${ab.abilityIndex}`} type="button" title={ab.text} onClick={() => clickAbility(ab)}>
+                <button key={`ab-${ab.abilityIndex}:${ab.costOption ?? ''}`} type="button" title={ab.text} onClick={() => clickAbility(ab)}>
                   <Symbols text={handAbilityLabel(ab.text)} />
                 </button>
               ))}
@@ -8791,7 +8795,7 @@ function Table({
             // So is a modal ability, once per mode.
             // And one naming each opponent who may choose its targets.
             // A split's stand-in picks are all of one colour, as that colour's own offer is.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.manaFor ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}`,
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.manaFor ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}:${ab.costOption ?? ''}`,
             label:
               (ab.text || `Ability ${ab.abilityIndex + 1}`) +
               (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : '') +

@@ -31,6 +31,7 @@ import {
   sacrificeCostReadsX,
   sacrificePartsFillable,
   tapOthersAtX,
+  withActivationCostOption,
 } from "./abilities.js";
 import type {
   AbilityCost,
@@ -3708,12 +3709,18 @@ export class Game {
         // — it may not change a result).
         let source = action.source;
         this.activationModes = action.modes === undefined ? undefined : [...action.modes];
+        // The branch of a choice of costs it pays (`AbilityCost.options`).
+        this.activationCostOption =
+          action.costOption === undefined
+            ? undefined
+            : { source, index: action.abilityIndex, option: action.costOption };
         if ((this.state.objects[source]?.stackCount ?? 1) > 1) {
           const ability = this.effectiveActivated(source)[action.abilityIndex];
           if (ability?.cost.tap === true && this.whyCannotActivateAbility(action.player, source, action.abilityIndex, action.tap, action.xValue ?? 0, normalizeTargets(action.targets)) === null) {
             source = this.splitOneFromStack(source);
             // The opponent's choice goes with the token that activates.
             if (this.otherChoice?.for === action.source) this.otherChoice = { ...this.otherChoice, for: source };
+            if (this.activationCostOption !== undefined) this.activationCostOption = { ...this.activationCostOption, source };
           }
         }
         this.phyrexianLifeChoice = action.phyrexianLife;
@@ -3749,6 +3756,7 @@ export class Game {
           this.phyrexianLifeChoice = undefined;
           this.manaForChoice = undefined;
           this.activationModes = undefined;
+          this.activationCostOption = undefined;
         }
         break;
       }
@@ -5159,6 +5167,26 @@ export class Game {
             );
           out.push(...variants);
         }
+        return;
+      }
+      // A choice of costs (`AbilityCost.options` — Bullseye's "Sacrifice an
+      // artifact or discard a nonland card"): a variant per branch that can
+      // be paid, each judged as the one cost it is.
+      const costOptions = ability.cost.options;
+      if (costOptions !== undefined) {
+        costOptions.forEach((option, i) => {
+          const from = out.length;
+          this.withActivationCostOption({ source, index, option: i }, () =>
+            pushActivateAbility(source, cardName, withActivationCostOption(ability, i), index, manaColors, makes, manaSplit, manaFor),
+          );
+          for (let at = from; at < out.length; at += 1) {
+            const offer = out[at];
+            // The label names the branch, so the menu's rows differ.
+            if (offer.kind === "activate-ability") {
+              out[at] = { ...offer, costOption: i, costOptionText: option.text, text: `${offer.text} (${option.text})` };
+            }
+          }
+        });
         return;
       }
       if (this.whyCannotActivateAbility(player, source, index) !== null) return;
@@ -28796,9 +28824,32 @@ export class Game {
     const printed = this.registry.get(rulesTextName(object)).activated;
     const intrinsic = this.intrinsicExtras(object);
     const granted = this.grantedActivated(objectId, grantors);
-    return granted.length === 0 && intrinsic.length === 0
-      ? printed
-      : [...printed, ...intrinsic.map(intrinsicManaAbility), ...granted];
+    const all =
+      granted.length === 0 && intrinsic.length === 0
+        ? printed
+        : [...printed, ...intrinsic.map(intrinsicManaAbility), ...granted];
+    // The branch of a choice of costs being offered or activated
+    // (`AbilityCost.options`): that ability reads as the one cost it pays.
+    const chosen = this.activationCostOption;
+    if (chosen === undefined || chosen.source !== objectId || all[chosen.index] === undefined) return all;
+    return all.map((ability, i) => (i === chosen.index ? withActivationCostOption(ability, chosen.option) : ability));
+  }
+
+  /** Which branch of an ability's choice of costs (`AbilityCost.options`)
+   * is being offered or activated — the action's `costOption` — so
+   * `effectiveActivated` hands every check and payment that branch's one
+   * cost. */
+  private activationCostOption: { readonly source: ObjectId; readonly index: number; readonly option: number } | undefined =
+    undefined;
+
+  private withActivationCostOption<T>(choice: Game["activationCostOption"], run: () => T): T {
+    const before = this.activationCostOption;
+    this.activationCostOption = choice;
+    try {
+      return run();
+    } finally {
+      this.activationCostOption = before;
+    }
   }
 
   /** The intrinsic mana abilities a permanent has beyond its printed ones
@@ -29265,6 +29316,11 @@ export class Game {
     const ability = this.effectiveActivated(sourceId)[abilityIndex];
     if (ability === undefined) {
       return `${def.name} has no ability #${abilityIndex}`;
+    }
+    // A choice of costs (`AbilityCost.options`) is made as it's activated
+    // (rules 602.2b, 601.2f): one branch named, merged over the rest.
+    if (ability.cost.options !== undefined) {
+      return `${def.name}'s ability needs one of its costs chosen: activate it naming a costOption`;
     }
     // "Of an opponent's choice" (rules 602.2b, 601.2c): activated naming the
     // opponent who chooses (the action's `otherChooser`).
@@ -51407,7 +51463,7 @@ controlledBy,
         return object?.zone === "battlefield" && object.controller === player;
       }
       if ("discard" in option) {
-        return this.discardCandidates(player).length >= option.discard;
+        return this.discardCandidates(player, option.filter).length >= option.discard;
       }
       if ("putFromHand" in option) {
         return this.state.zones.perPlayer[player].hand.some((id) =>
@@ -51532,7 +51588,12 @@ controlledBy,
                   ...(option.exceptTarget !== undefined ? { exceptTarget: option.exceptTarget } : {}),
                 }
               : "discard" in option
-                ? { kind: "discard", target: "you", amount: option.discard }
+                ? {
+                    kind: "discard",
+                    target: "you",
+                    amount: option.discard,
+                    ...(option.filter !== undefined ? { filter: option.filter } : {}),
+                  }
                 : "putFromHand" in option
                   ? {
                       kind: "look-and-choose",

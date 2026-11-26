@@ -13940,6 +13940,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Bullseye, Death Dealer: discard a nonland card to deal 2 damage',
+    board({
+      you: { bf: ['Swamp*3', 'Bullseye, Death Dealer', 'Ornithopter'], hand: ['Grizzly Bears', 'Forest'] },
+      opp: { bf: ['Forest'] },
+    }),
+  ),
+  preset(
+    'Bullseye, Death Dealer: four players, sacrifice an artifact',
+    board({
+      you: { bf: ['Swamp*3', 'Bullseye, Death Dealer', 'Ornithopter'], hand: ['Forest'] },
+      opp: [{ bf: ['Forest'] }, { bf: ['Forest'] }, { bf: ['Forest'] }],
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

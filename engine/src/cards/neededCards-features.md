@@ -8955,6 +8955,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **A tax on spells that target a spell on the stack (2026-11-26).** `static:spells-targeting-this-spell-cost-more`: `targetedBySpellsCost.whileOnStack` — read from a spell on the stack (rule 113.6) by `activeTargetedCosts`/`targetingCost`, every caster's spell paying, its controller's too; the scaffolder reads the line. Kaervek's Torch. `test/stack-spell-target-tax.test.ts`.
 
+**A choice of whole costs on an activated ability (2026-11-26).** `cost:activated-cost-options`: `AbilityCost.options` (`ActivationCostOption`s), offered once per payable branch with `costOption`/`costOptionText` and named on the `activate-ability` action; `Game.activationCostOption` makes `effectiveActivated` hand every check and payment the merged cost (`withActivationCostOption`). Also `each-player-may`'s `discard` option takes a `filter`. The scaffolder reads "<cost> or <cost>" in a cost. Bullseye, Death Dealer. `test/activation-cost-options.test.ts`.
+
 **The least among every creature or nonland permanent (2026-11-26).** `filter:least-power-among-all-creatures`: no engine code — `greatestInZone` with `least: true` over the battlefield (Drop of Honey's shape), in a `choose-permanents` or a target slot. Porphyry Nodes, Culling Scales. `test/least-among-all.test.ts`.
 **A copy aimed at another creature you control, chosen (2026-11-26).** `effect:copy-spell-retarget-chosen`, `condition:spell-could-target`: `CopyAimChoice.of: "you"` (one group, the copier's own permanents) and `other` (not the source), on `copy-spell`'s `retargetToChosen` and the `{ copyAims }` amount. Beamsplitter Mage. `test/copy-spell-chosen-aim.test.ts`.
 

@@ -9200,3 +9200,13 @@ Each board's die comes up 4.
 ### Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere
 - **Do:** Cast Lightning Storm at Bob. With it on the stack, click it there and choose its ability; discard Forest, and pick Grizzly Bears as its new target.
 - **Expect:** The stack card offers "Discard a land card: Put two charge counters…", Forest goes to your graveyard, and Lightning Storm then deals 5 damage to Grizzly Bears, not Bob.
+
+## A choice of costs on an activated ability (2026-11-26)
+
+### Bullseye, Death Dealer: discard a nonland card to deal 2 damage
+- **Do:** Click Bullseye and choose its ability "(Discard a nonland card)". Target Bob.
+- **Expect:** The menu has two rows, "(Sacrifice an artifact)" and "(Discard a nonland card)". Grizzly Bears is discarded without asking — the Forest can't be. Bob loses 2 life; Ornithopter stays.
+
+### Bullseye, Death Dealer: four players, sacrifice an artifact
+- **Do:** Click Bullseye and choose its ability "(Sacrifice an artifact)". Target Carol.
+- **Expect:** Only the sacrifice row is offered (your hand holds only a land). Ornithopter is sacrificed; Carol loses 2 life.

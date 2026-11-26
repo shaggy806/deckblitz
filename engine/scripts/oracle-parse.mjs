@@ -1754,6 +1754,18 @@ export function parseCost(text) {
       const sacrifice = sourceSacrificeOf(part);
       if (sacrifice === null) return null;
       cost.sacrifice = sacrifice;
+    } else if ((m = /^((?:Sacrifice|Discard|Exile|Pay|Return|Tap) .+?) or ((?:sacrifice|discard|exile|pay|return|tap) .+)$/.exec(part))) {
+      // "Sacrifice an artifact or discard a nonland card" (Bullseye, Death
+      // Dealer): a choice of whole costs (`AbilityCost.options`), each branch
+      // read as a cost part of its own.
+      const options = [m[1], `${m[2][0].toUpperCase()}${m[2].slice(1)}`].map((branch) => {
+        const read = parseCost(branch);
+        if (read === null || read.cost.mana !== null || read.cost.tap || Object.keys(read.extra ?? {}).length > 0) return null;
+        const { mana: _mana, tap: _tap, ...rest } = read.cost;
+        return Object.keys(rest).length === 0 ? null : { cost: rest, text: branch };
+      });
+      if (options.some((o) => o === null)) return null;
+      cost.options = options;
     } else if ((m = /^Sacrifice (an?|another) (.+?) or (an?|another) (.+)$/.exec(part)) && /another/.test(`${m[1]} ${m[3]}`)) {
       // "Sacrifice another creature or an artifact" (Mold Folk): the
       // "another" is its own branch's, `isSource: false` there alone.

@@ -736,6 +736,10 @@ export type Action =
        * `"creature-you-control"` sacrifice. Ignored for a `"self"` sacrifice
        * (the source is always what's sacrificed) or no sacrifice. */
       readonly sacrifice?: ObjectId;
+      /** Which branch of the cost's choice of costs is paid
+       * (`AbilityCost.options` — the offer's `costOption`, echoed back).
+       * Required for such an ability, meaningless for any other. */
+      readonly costOption?: number;
       /** What the cost's "tap N untapped … you control" taps
        * (`AbilityCost.tapOthers` — Gravespawn Sovereign's five Zombies),
        * picked from the offer's `tapCost`. Omitted, the engine picks for a
@@ -1827,6 +1831,13 @@ export type LegalAction =
        * `choices` is every permanent that could be sacrificed to pay it. A
        * `"self"` sacrifice is implicit (no field) — the source is always used. */
       readonly sacrifice?: { readonly choices: readonly ObjectId[]; readonly exile?: true; readonly unattach?: true };
+      /** One branch of a choice of costs (`AbilityCost.options` — Bullseye,
+       * Death Dealer's "Sacrifice an artifact or discard a nonland card"):
+       * the ability is offered once per branch that can be paid, as a
+       * cast's `costOption` is. Echoed back as the action's `costOption`;
+       * `costOptionText` is the branch's label, for the button. */
+      readonly costOption?: number;
+      readonly costOptionText?: string;
       /** Present when the cost taps other permanents ("Tap five untapped
        * Zombies you control") — see {@link TapCostOffer}. */
       readonly tapCost?: TapCostOffer;
