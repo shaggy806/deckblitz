@@ -23956,6 +23956,17 @@ function perAmountStaticOf(line, text) {
       text,
     };
   }
+  // "…for each graveyard with seven or more cards in it" (Master's
+  // Councillors): every player's graveyard, each on its own.
+  if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each graveyard with (\\w+) or more cards in it\\.$`).exec(line))) {
+    const atLeast = numberOf(m[4]);
+    if (typeof atLeast !== "number") return null;
+    return {
+      affects: subjectOf(m[1]),
+      grantPtPerCount: { players: { where: { kind: "cards-in-graveyard", atLeast, whose: "that-player" } }, pt: pair(m[2], m[3]) },
+      text,
+    };
+  }
   if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for every (\\w+) cards in your graveyard\\.$`).exec(line))) {
     const step = numberOf(m[4]);
     if (typeof step !== "number") return null;

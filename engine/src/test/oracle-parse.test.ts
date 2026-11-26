@@ -22864,6 +22864,26 @@ describe("life under half the starting total", () => {
   });
 });
 
+describe("a count of graveyards with N or more cards (Master's Councillors)", () => {
+  it("counts every player's graveyard on its own", () => {
+    const councillors = parseFace(
+      {
+        name: "Master's Councillors",
+        type_line: "Creature — Human Advisor",
+        mana_cost: "{1}{U}",
+        oracle_text:
+          "Vigilance\nThis creature gets +2/+0 for each graveyard with seven or more cards in it.\nWhenever you draw your second card each turn, target player mills three cards. (They put the top three cards of their library into their graveyard.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(councillors.complete).toBe(true);
+    expect(councillors.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      grantPtPerCount: { players: { where: { kind: "cards-in-graveyard", atLeast: 7, whose: "that-player" } }, pt: [2, 0] },
+    });
+  });
+});
+
 describe("a token copy of each other nonland permanent you control (Oko, the Ringleader)", () => {
   it("leaves the source out by isSource, not by name", () => {
     expect(

@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Fifth Dawn. EDHREC rank 20611.
+// Mirrodin. EDHREC rank 20611.
 //
 // Every shuffle in play comes from a spell or an ability (a resolving
 // instruction, or a card's own "shuffle it into its owner's library

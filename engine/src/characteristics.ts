@@ -996,6 +996,10 @@ function evalStaticCondition(
         }
         return n;
       };
+      if (condition.whose === "that-player") {
+        const that = opts.thatPlayer;
+        return that !== undefined && state.players[that]?.hasLost !== true && countIn(that) >= condition.atLeast;
+      }
       if (condition.whose !== undefined) {
         // A player who has left the game took their graveyard with them (800.4a).
         return state.turnOrder.some(
@@ -6766,6 +6770,12 @@ function collectStaticEffects(
                 state.players[p]?.hasLost !== true &&
                 // `{ where }`: each opponent as "that player".
                 (per.opponents === true || staticConditionMet(state, registry, source, per.opponents!.where, { thatPlayer: p })),
+            ).length
+          : per.players !== undefined
+          ? state.turnOrder.filter(
+              (p) =>
+                state.players[p]?.hasLost !== true &&
+                staticConditionMet(state, registry, source, per.players!.where, { thatPlayer: p }),
             ).length
           : per.aggregate !== undefined
           ? aggregateMatching(per.aggregate)

@@ -1084,7 +1084,10 @@ each opponent you have" (Blazing Sunsteel), and `opponents: { where }` only
 the opponents a condition holds for, each its `"that-player"` — Anya,
 Merciless Angel's "+3/+3 for each opponent whose life total is less than half
 their starting life total" (`where: { kind: "life-total", who: "that-player",
-atMost: "below-half-starting" }`); "if you have a full party" (700.8c) is the
+atMost: "below-half-starting" }`); `players: { where }` is the same over
+every player still in the game, you included — Master's Councillors' "+2/+0
+for each graveyard with seven or more cards in it" (`where: { kind:
+"cards-in-graveyard", atLeast: 7, whose: "that-player" }`); "if you have a full party" (700.8c) is the
 condition `{ kind: "full-party" }`, Linvala, Shield of Sea Gate's
 intervening if; "if two or more players have lost the game" is `{ kind:
 "players-lost", atLeast: 2 }`, Hot Pursuit's), **undaunted** (rule 702.125a — Coastal Breach, Curtains'

@@ -1486,8 +1486,11 @@ export type StaticCondition =
        * counted on its own (Zendikar Rising's "if an opponent has eight or
        * more cards in their graveyard" — Blackbloom Rogue); `"any-player"` —
        * any one graveyard, yours included (Visions of Beyond's "if a
-       * graveyard has twenty or more cards in it"). */
-      readonly whose?: "an-opponent" | "any-player";
+       * graveyard has twenty or more cards in it"); `"that-player"` — the
+       * graveyard of the player a count over players is reading (Master's
+       * Councillors' "+2/+0 for each graveyard with seven or more cards in
+       * it", `grantPtPerCount.players`); false with no such player. */
+      readonly whose?: "an-opponent" | "any-player" | "that-player";
       /** Leave out the card asking, when it's in that graveyard — Proft,
        * Sinister Mastermind's "seven or more cards in your graveyard", cast
        * from there, wants seven others (the ruling). For the total across
@@ -2696,6 +2699,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * total" is `{ where: { kind: "life-total", who: "that-player", atMost:
      * "below-half-starting" } }`. */
     readonly opponents?: true | { readonly where: StaticCondition };
+    /** The players still in the game, that player included, a condition
+     * holds for, each read as `"that-player"`: Master's Councillors' "+2/+0
+     * for each graveyard with seven or more cards in it" is `{ where: { kind:
+     * "cards-in-graveyard", atLeast: 7, whose: "that-player" } }` (a player
+     * who left took their graveyard with them, rule 800.4a). */
+    readonly players?: { readonly where: StaticCondition };
     /** Count from **the affected permanent's controller's** side: every "you"
      * in the count is them — Disturbing Conversion's "-X/-0, where X is the
      * number of cards in its controller's graveyard". */
