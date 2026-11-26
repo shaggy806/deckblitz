@@ -1764,6 +1764,10 @@ export interface Characteristics {
    * Incarnate). Read it through {@link lethalDamageOf} and
    * {@link lethalDamageLeft}, never directly. */
   readonly lethalDamageByPower?: true;
+  /** While its power is negative it assigns combat damage as though its
+   * power were positive (a `combatDamageAsPositivePower` static — Loot, the
+   * Anomaly). Read it through {@link combatDamageOf}, never directly. */
+  readonly damageAsPositivePower?: true;
   /** It assigns no combat damage this turn (an `assigns-no-combat-damage`
    * effect — Farrel's Zealot). Read it through {@link combatDamageOf}. */
   readonly assignsNoCombatDamage?: boolean;
@@ -6342,6 +6346,7 @@ interface AppliedEffect {
   readonly toxic: number;
   readonly restrictions: readonly CombatRule[];
   readonly combatDamageByToughness: StaticAbility["combatDamageByToughness"];
+  readonly combatDamageAsPositivePower: boolean;
   readonly lethalDamageByPower: boolean;
   readonly canAttackAsThoughNoDefender: boolean;
   readonly canAttackAttackersDespiteDefender: boolean;
@@ -6491,6 +6496,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.grantToxic !== undefined ||
     hasRestrictionWord(ability) ||
     ability.combatDamageByToughness !== undefined ||
+    ability.combatDamageAsPositivePower === true ||
     ability.lethalDamageByPower === true ||
     (ability.canAttackAsThoughNoDefender !== undefined && ability.canAttackAsThoughNoDefender !== false) ||
     ability.assignAsThoughUnblocked === true ||
@@ -6853,6 +6859,7 @@ function collectStaticEffects(
           ? [...(ability.restrictions ?? []), "cant-be-blocked"]
           : (ability.restrictions ?? []),
       combatDamageByToughness: ability.combatDamageByToughness,
+      combatDamageAsPositivePower: ability.combatDamageAsPositivePower === true,
       lethalDamageByPower: ability.lethalDamageByPower === true,
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
@@ -6897,6 +6904,7 @@ function collectStaticEffects(
         toxic: 0,
         restrictions: [],
         combatDamageByToughness: undefined,
+        combatDamageAsPositivePower: false,
         lethalDamageByPower: false,
         canAttackAsThoughNoDefender: false,
         canAttackAttackersDespiteDefender: false,
@@ -7041,6 +7049,7 @@ function assertSameCharacteristics(
       restrictions: [...c.restrictions].sort(),
       damageByToughness: c.damageByToughness,
       lethalDamageByPower: c.lethalDamageByPower === true,
+      damageAsPositivePower: c.damageAsPositivePower === true,
       assignsNoCombatDamage: c.assignsNoCombatDamage === true,
       extraBlocks: c.extraBlocks ?? 0,
       canAttackAsThoughNoDefender: c.canAttackAsThoughNoDefender,
@@ -7154,6 +7163,7 @@ function computeCharacteristicsUncached(
   const landwalk: CardFilter[] = [];
   let byToughness: StaticAbility["combatDamageByToughness"];
   let lethalByPower = false;
+  let asPositivePower = false;
   let assignsNoCombatDamage = false;
   let canAttackAsThoughNoDefender = false;
   let canAttackAttackersDespiteDefender = false;
@@ -7190,6 +7200,9 @@ function computeCharacteristicsUncached(
     // A rule about it (613.11), not an ability it has: no loss of abilities
     // ends it — only its source's leaving, or the source losing its own.
     if (effect.lethalDamageByPower) lethalByPower = true;
+    // Loot, the Anomaly's own static: an ability it has, so it goes with a
+    // loss of abilities after it.
+    if (granted && effect.combatDamageAsPositivePower) asPositivePower = true;
     if (effect.canAttackAsThoughNoDefender) canAttackAsThoughNoDefender = true;
     if (effect.canAttackAttackersDespiteDefender) canAttackAttackersDespiteDefender = true;
     // A rule about how it assigns damage, not an ability it has (Indomitable
@@ -7532,6 +7545,7 @@ function computeCharacteristicsUncached(
     restrictions,
     damageByToughness,
     ...(lethalByPower ? { lethalDamageByPower: true } : {}),
+    ...(asPositivePower ? { damageAsPositivePower: true } : {}),
     ...(assignsNoCombatDamage ? { assignsNoCombatDamage: true } : {}),
     ...(extraBlocks !== 0 ? { extraBlocks } : {}),
     canAttackAsThoughNoDefender,
@@ -7704,7 +7718,10 @@ function loyaltyStaticReaches(
  */
 export function combatDamageOf(c: Characteristics): number {
   if (c.assignsNoCombatDamage === true) return 0;
-  return c.damageByToughness ? c.toughness : c.power;
+  if (c.damageByToughness) return c.toughness;
+  // "As though his power were positive" (Loot, the Anomaly): -3 assigns 3.
+  // By toughness wins over it (the ruling), so it's asked second.
+  return c.damageAsPositivePower === true && c.power < 0 ? -c.power : c.power;
 }
 
 /** {@link combatDamageOf} for one object, read off the board. */

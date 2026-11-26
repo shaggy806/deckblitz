@@ -2837,6 +2837,18 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly combatDamageByToughness?: "always" | "if-toughness-greater";
   /**
+   * While an affected creature's power is negative, it **assigns combat
+   * damage as though its power were positive** — the absolute value — Loot,
+   * the Anomaly's "If Loot's power is negative, he assigns combat damage as
+   * though his power were positive" (`affects: { scope: "self" }`). Its power
+   * doesn't change (the ruling): everything else that reads power, "damage
+   * equal to its power" included, reads the real, negative value. Read in
+   * `combatDamageOf` (`characteristics.ts`), where every combat damage
+   * amount comes from (rule 510.1a); a `combatDamageByToughness` static wins
+   * over it (the ruling: toughness, "even if he also has negative power").
+   */
+  readonly combatDamageAsPositivePower?: true;
+  /**
    * The affected creatures **station** permanents using their toughness
    * rather than their power (rule 702.184a's "equal to the tapped creature's
    * power") — Tapestry Warden's "Each creature you control with toughness

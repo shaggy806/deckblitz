@@ -6936,6 +6936,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   over, and the `assign-combat-damage` offer (`combatDamageOf` in
   `characteristics.ts`). A fight, "damage equal to its power" and a power
   condition all still read the real power.
+- `combatDamageAsPositivePower: true` — "If Loot's power is negative, he
+  assigns combat damage as though his power were positive" (Loot, the
+  Anomaly, `affects: { scope: "self" }`): -4 power assigns 4, through
+  `combatDamageOf` like the toughness form, which wins over it (the ruling).
+  Its power doesn't change. `combat-damage-as-positive-power.test.ts`.
 - `stationsByToughness: "always" | "if-toughness-greater"` — its twin for
   station (rule 702.184a): the affected creatures station permanents using
   their toughness rather than their power (Tapestry Warden over
