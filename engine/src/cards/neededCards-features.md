@@ -352,6 +352,14 @@ The key `trigger:activates-this-ability`: the `activates-ability` trigger's `own
 printed activated abilities by its index (never one granted to it, nor another permanent's of the same text). Herald
 of Anafenza (21249). The scaffolder reads "whenever you activate this creature's outlast ability".
 `test/activates-own-ability.test.ts`.
+### "Until the end of your next turn, they can't phase in" — built 2026-11-26
+
+The key `effect:phase-out-until-your-next-turn-end`: no new phasing field — a `prohibit` of `phase-in` (prohibitions
+already gate every phase-in, `Game.phaseIn`) whose object `target` may now be a set ref, each member bound as it is
+(`bindProhibition`, rule 400.7): `{ thisWay: "phased-out" }`, lasting `"until-end-of-your-next-turn"` (611.2a; a player
+who has left ends it as their turn would have begun, 800.4m). Teferi, Timeless Voyager (21251). The scaffolder reads
+"each creature target player/opponent controls phases out" and "until the end of your next turn, they can't phase in".
+`test/prohibit-set-target.test.ts`.
 
 ### A permanent entering transformed — built 2026-11-22
 
@@ -1100,8 +1108,8 @@ it already isn't so — rule 611.2b). The phasing step (rule 502.1) skips a held
 drops the hold where every other "for as long as" ends — the source leaving or phasing out
 (`endWhileSourceEffects`, 702.26f) and changing hands (`endWhileControlledEffects`) — so it phases in at its
 controller's next untap step (the ruling). The Phasing of Zhalfir (rank 11374). `test/phase-in-held.test.ts`.
-Teferi, Timeless Voyager's "until the end of your next turn, they can't phase in" and The Pandorica's "for as
-long as The Pandorica remains tapped" would widen `cantPhaseIn` to those durations.
+The Pandorica's "for as long as The Pandorica remains tapped" widened `cantPhaseIn`; Teferi, Timeless Voyager's
+"until the end of your next turn, they can't phase in" is a `phase-in` prohibition instead (2026-11-26).
 
 ### A simultaneous move that needs a choice first — built 2026-11-17
 

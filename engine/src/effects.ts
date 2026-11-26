@@ -8447,7 +8447,9 @@ export type EffectSpec =
        * "Can't", for a while: one {@link EffectProhibition} per act, fixed as
        * this resolves and lasting `duration` (this turn when omitted). `who`
        * is a `PlayerScope`; an activate's or an object act's `target` is the
-       * object as it is now (rule 400.7); filters stay filters, so "permanents
+       * object as it is now (rule 400.7) — or, a set ref, each member as it is
+       * now ("until the end of your next turn, they can't phase in": Teferi,
+       * Timeless Voyager's `{ thisWay: "phased-out" }`); filters stay filters, so "permanents
        * you control" reaches whatever comes later (rule 611.2c). Lowered to a
        * timed static. Mana abilities are activated abilities too.
        */
@@ -16596,7 +16598,16 @@ function bindProhibition(written: EffectProhibition, ctx: ResolutionContext): re
   if (players?.length === 0) return [];
   const side = rest as { readonly target?: ObjectRef };
   let objects: readonly BoundObject[] | undefined;
-  if (side.target !== undefined) {
+  if (side.target !== undefined && isObjectSetRef(side.target)) {
+    // "Until the end of your next turn, **they** can't phase in" (Teferi,
+    // Timeless Voyager — `thisWay: "phased-out"`): each member as it is now,
+    // in its stint (rule 400.7); a set gone empty binds nothing.
+    objects = ctx
+      .objectSet(side.target)
+      .filter((m) => ctx.stintNow(m.object) === m.stint)
+      .map((m) => ({ object: m.object, stint: m.stint }));
+    if (objects.length === 0) return [];
+  } else if (side.target !== undefined) {
     const target = objectRefAct(side.target, ctx);
     if (target?.kind !== "object") return [];
     objects = [{ object: target.object, stint: ctx.zoneChangeCountOf(target.object) ?? 0 }];

@@ -6824,6 +6824,24 @@ export function parseSentence(sentence, ctx) {
   // one", or "any number of" them, which phase out together. "…until ~
   // leaves the battlefield" (rule 610.4 — Oubliette's "tap that creature as
   // it phases in") is a person's call.
+  // "Each creature target opponent controls phases out" (Teferi, Timeless
+  // Voyager; Galadriel's Dismissal's kicker says "target player").
+  if ((m = /^each creature target (player|opponent) controls phases out\.$/i.exec(s))) {
+    return {
+      kind: "phase-out",
+      filter: { type: "creature", controlledBy: "you" },
+      controlledByTarget: ctx.target(m[1].toLowerCase()),
+    };
+  }
+  // "Until the end of your next turn, they can't phase in" (Teferi, Timeless
+  // Voyager): what phased out this way, each bound as it is (rule 400.7).
+  if (/^until the end of your next turn, (?:they|it) can't phase in\.$/i.test(s)) {
+    return {
+      kind: "prohibit",
+      prohibits: [{ act: "phase-in", target: { thisWay: "phased-out" } }],
+      duration: "until-end-of-your-next-turn",
+    };
+  }
   if ((m = /^(.+?) phases? out\.$/i.exec(s)) && !/^(?:it|he|she|that \w+|they|those \w+)$/i.test(m[1])) {
     const who = m[1];
     if (who === "~") return { kind: "phase-out", target: "source" };

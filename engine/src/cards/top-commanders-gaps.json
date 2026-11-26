@@ -189,6 +189,7 @@
     "bug:simultaneous-move-with-choice",
     "effect:phase-out-while-you-control-source",
     "effect:phase-out-while-source-tapped",
+    "effect:phase-out-until-your-next-turn-end",
     "effect:mill-from-bottom",
     "effect:text-change-token-colors",
     "decision:choose-from-batch",

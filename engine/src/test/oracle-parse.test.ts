@@ -3818,6 +3818,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       face("When this enchantment enters, target creature phases out until this enchantment leaves the battlefield.", "Enchantment")
         .complete,
     ).toBe(false);
+    // Teferi, Timeless Voyager's −8: a target opponent's creatures, held out
+    // through your next turn by a `phase-in` prohibition on what phased out.
+    const teferi = parseEffect(
+      "Each creature target opponent controls phases out. Until the end of your next turn, they can't phase in.",
+      ctx(),
+    );
+    expect(teferi.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "phase-out", filter: { type: "creature", controlledBy: "you" }, controlledByTarget: 0 },
+        { kind: "prohibit", prohibits: [{ act: "phase-in", target: { thisWay: "phased-out" } }], duration: "until-end-of-your-next-turn" },
+      ],
+    });
   });
 
   it("a processor's 'put a card an opponent owns from exile into that player's graveyard': a cost, an additional cost, a may with 'if you do'", () => {
