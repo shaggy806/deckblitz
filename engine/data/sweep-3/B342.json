@@ -1,0 +1,500 @@
+{
+ "batch": 342,
+ "status": "done",
+ "ranks": "author-top-cards overnight, 2026-11-26 (about 11:35 to 14:00, no new agents after the user's word): the triaged cards past EDHREC rank 20,000 in rank order, Sabertooth Cobra (20245) to Mob Mentality (22648), each with the key it waited on, built by 13 worktree agents in five lanes (build-family's overnight lanes loop, five at once), skipping the majors and the cards waiting on the user (Raging River, Swirl the Mists, Rhystic Cave, Stone Calendar, Drain Power). Features: a payment before a delayed deadline at priority (Sabertooth Cobra), mana of an attached permanent's mana cost, tapping other players' lands for mana, the keywords of cards delved (kept as exiled), combat damage by a negative power's absolute value, change-targets newTargetIs, attackingAlone, for-each-counter-kind, chosen-source prevention to the attached, grantPtPerCount players, the first draw revealed every turn, activates-ability ownAbility and withoutTapCost, domain of any player, copy aims of your own permanents, an activated ability usable from the stack (Lightning Storm) and statics read on the stack (Torrent of Lava), a phase-in prohibition over a set, damage that can't be prevented or redirected, a land entering then its putter sacrificing, prevent X of each creature's combat damage, be-targeted aimingOnly, enchantAbility, a divided total by kicker, attack-with allOf, a tax on spells targeting a spell on the stack, a choice of whole activation costs, exile a graveyard card and pay its mana cost, foretold cards counted, regenerate's reflexive trigger, reduce-speed. Fixed on the way: a flash permission for Aura spells now reaches a bestowed cast; collect evidence's then kept its trigger player (Memory Vampire); a text change reaches aimingOnly.",
+ "authored": [
+  {
+   "name": "Allied Strategies",
+   "files": [
+    "engine/src/cards/pool/allied-strategies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Artifact Possession",
+   "files": [
+    "engine/src/cards/pool/artifact-possession.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Back from the Brink",
+   "files": [
+    "engine/src/cards/pool/back-from-the-brink.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beamsplitter Mage",
+   "files": [
+    "engine/src/cards/pool/beamsplitter-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boggart Forager",
+   "files": [
+    "engine/src/cards/pool/boggart-forager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Break Out",
+   "files": [
+    "engine/src/cards/pool/break-out.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bribe Taker",
+   "files": [
+    "engine/src/cards/pool/bribe-taker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brine Comber",
+   "files": [
+    "engine/src/cards/pool/brine-comber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brinebound Gift",
+   "files": [
+    "engine/src/cards/pool/brinebound-gift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bullseye, Death Dealer",
+   "files": [
+    "engine/src/cards/pool/bullseye-death-dealer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Collapsing Borders",
+   "files": [
+    "engine/src/cards/pool/collapsing-borders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cover of Winter",
+   "files": [
+    "engine/src/cards/pool/cover-of-winter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crackling Emergence",
+   "files": [
+    "engine/src/cards/pool/crackling-emergence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crowd of True Believers",
+   "files": [
+    "engine/src/cards/pool/crowd-of-true-believers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Culling Scales",
+   "files": [
+    "engine/src/cards/pool/culling-scales.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death's Approach",
+   "files": [
+    "engine/src/cards/pool/deaths-approach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dismantle",
+   "files": [
+    "engine/src/cards/pool/dismantle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elemental Resonance",
+   "files": [
+    "engine/src/cards/pool/elemental-resonance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elkin Lair",
+   "files": [
+    "engine/src/cards/pool/elkin-lair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elvish Soultiller",
+   "files": [
+    "engine/src/cards/pool/elvish-soultiller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fa'adiyah Seer",
+   "files": [
+    "engine/src/cards/pool/faadiyah-seer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flameskull",
+   "files": [
+    "engine/src/cards/pool/flameskull.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fugitive Druid",
+   "files": [
+    "engine/src/cards/pool/fugitive-druid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glass Asp",
+   "files": [
+    "engine/src/cards/pool/glass-asp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grinning Totem",
+   "files": [
+    "engine/src/cards/pool/grinning-totem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gruesome Menagerie",
+   "files": [
+    "engine/src/cards/pool/gruesome-menagerie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harmonious Emergence",
+   "files": [
+    "engine/src/cards/pool/harmonious-emergence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Herald of Anafenza",
+   "files": [
+    "engine/src/cards/pool/herald-of-anafenza.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invoke the Ancients",
+   "files": [
+    "engine/src/cards/pool/invoke-the-ancients.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaervek's Torch",
+   "files": [
+    "engine/src/cards/pool/kaerveks-torch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kithkin Armor",
+   "files": [
+    "engine/src/cards/pool/kithkin-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Land Equilibrium",
+   "files": [
+    "engine/src/cards/pool/land-equilibrium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Laquatus's Creativity",
+   "files": [
+    "engine/src/cards/pool/laquatuss-creativity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lava Burst",
+   "files": [
+    "engine/src/cards/pool/lava-burst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lightning Storm",
+   "files": [
+    "engine/src/cards/pool/lightning-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loot, the Anomaly",
+   "files": [
+    "engine/src/cards/pool/loot-the-anomaly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master's Councillors",
+   "files": [
+    "engine/src/cards/pool/masters-councillors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Matopi Golem",
+   "files": [
+    "engine/src/cards/pool/matopi-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meddle",
+   "files": [
+    "engine/src/cards/pool/meddle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memory Vampire",
+   "files": [
+    "engine/src/cards/pool/memory-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mob Mentality",
+   "files": [
+    "engine/src/cards/pool/mob-mentality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nafs Asp",
+   "files": [
+    "engine/src/cards/pool/nafs-asp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Niko Defies Destiny",
+   "files": [
+    "engine/src/cards/pool/niko-defies-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Piracy",
+   "files": [
+    "engine/src/cards/pool/piracy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pollen Remedy",
+   "files": [
+    "engine/src/cards/pool/pollen-remedy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Porphyry Nodes",
+   "files": [
+    "engine/src/cards/pool/porphyry-nodes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Powerleech",
+   "files": [
+    "engine/src/cards/pool/powerleech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Primitive Etchings",
+   "files": [
+    "engine/src/cards/pool/primitive-etchings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychogenic Probe",
+   "files": [
+    "engine/src/cards/pool/psychogenic-probe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rebound",
+   "files": [
+    "engine/src/cards/pool/rebound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reversal of Fortune",
+   "files": [
+    "engine/src/cards/pool/reversal-of-fortune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootwater Shaman",
+   "files": [
+    "engine/src/cards/pool/rootwater-shaman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rowen",
+   "files": [
+    "engine/src/cards/pool/rowen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sabertooth Cobra",
+   "files": [
+    "engine/src/cards/pool/sabertooth-cobra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silver Wyvern",
+   "files": [
+    "engine/src/cards/pool/silver-wyvern.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sindbad",
+   "files": [
+    "engine/src/cards/pool/sindbad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soldevi Sentry",
+   "files": [
+    "engine/src/cards/pool/soldevi-sentry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soldier of Fortune",
+   "files": [
+    "engine/src/cards/pool/soldier-of-fortune.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulflayer",
+   "files": [
+    "engine/src/cards/pool/soulflayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spikeshell Harrier",
+   "files": [
+    "engine/src/cards/pool/spikeshell-harrier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tallowisp",
+   "files": [
+    "engine/src/cards/pool/tallowisp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi, Timeless Voyager",
+   "files": [
+    "engine/src/cards/pool/teferi-timeless-voyager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thran Tome",
+   "files": [
+    "engine/src/cards/pool/thran-tome.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Three Wishes",
+   "files": [
+    "engine/src/cards/pool/three-wishes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torrent of Lava",
+   "files": [
+    "engine/src/cards/pool/torrent-of-lava.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Viper, Cruel Conspirator",
+   "files": [
+    "engine/src/cards/pool/viper-cruel-conspirator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wakandan Royal Guard",
+   "files": [
+    "engine/src/cards/pool/wakandan-royal-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of Shadows",
+   "files": [
+    "engine/src/cards/pool/wall-of-shadows.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whippoorwill",
+   "files": [
+    "engine/src/cards/pool/whippoorwill.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Lymph Sliver",
+   "needs": [
+    "static:absorb"
+   ],
+   "size": "small",
+   "why": "Re-keyed (B342, replacements-copies lane): absorb prevents N of each source's damage to this creature, any damage, not only combat; Cover of Winter's per-source combat shields don't cover it."
+  }
+ ]
+}

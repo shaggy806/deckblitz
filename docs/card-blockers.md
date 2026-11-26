@@ -686,6 +686,34 @@ one card a name.
   (`effect:random-cards-exiled-together`, authored and dropped in review). Two built keys'
   descriptions named cards they don't cover (collect-evidence-x, explore-replacement): each now
   says what it leaves out.
+- **Batch 342 (2026-11-26, `author-top-cards overnight`, ranks 20245–22648)** — 68 cards from 13
+  lane agents, five at once, in five lanes (`decisions` had only Drain Power, waiting on the user;
+  `B342.json`; `COMPLETED.md` lists the features); 34 open keys from 22,280 to 23,200 laned in
+  `engine/data/lanes.json`. (B341 is the playtest batch, `engine/data/playtest/B341.json`.) Sabertooth
+  Cobra, Glass Asp and Nafs Asp (a payment before a delayed deadline, made at priority from a button,
+  not the auto-planner), Elemental Resonance, Piracy, Soulflayer, Psychogenic Probe, Master's
+  Councillors, Rowen, Primitive Etchings, Brine Comber, Fugitive Druid, Invoke the Ancients, Bribe
+  Taker, Kithkin Armor, the Emergences, Loot, the Anomaly, Meddle, Rebound, Silver Wyvern, Viper, Cruel
+  Conspirator, Crowd of True Believers, Porphyry Nodes, Culling Scales, Elvish Soultiller, Reversal of
+  Fortune, Grinning Totem, Gruesome Menagerie, Beamsplitter Mage, Elkin Lair, Three Wishes, Fa'adiyah
+  Seer, Sindbad, Lightning Storm (an ability used from the stack, by clicking the spell there),
+  Herald of Anafenza, Death's Approach, Powerleech, Artifact Possession, Allied Strategies, Collapsing
+  Borders, Teferi, Timeless Voyager, Lava Burst, Whippoorwill, Land Equilibrium, Cover of Winter, Wall
+  of Shadows, Rootwater Shaman, Tallowisp, Kaervek's Torch, Back from the Brink, Bullseye, Death
+  Dealer, Niko Defies Destiny, Break Out, Thran Tome, Soldier of Fortune, Boggart Forager, Flameskull,
+  Torrent of Lava, Pollen Remedy, Wakandan Royal Guard, Dismantle, Mob Mentality, Laquatus's
+  Creativity, Memory Vampire, Soldevi Sentry, Matopi Golem and Spikeshell Harrier. About a third
+  needed no engine code. Re-keyed: Lymph Sliver (`static:absorb`: any damage, not Cover of Winter's
+  combat shields). Lightning Storm's recorded key was Torrent of Lava's shape, and both landed. Found
+  on the way, fixed: a flash permission for Aura spells now reaches a bestowed cast (601.3b); collect
+  evidence's `then` lost "that player" (Memory Vampire); a text change reaches Wall of Shadows'
+  "Walls"; Rebound takes only a spell with a single target; Dream Prowler and Yuan-Ti Malison now see
+  a counted token stack (`attackingAlone`); Soulflayer keeps the keywords of a delved card that left
+  exile. Leads: Piracy's lands aren't offered to the auto-payer (tap them by hand first); an
+  `AbilityCost.options` branch with mana, or options on a mana ability, aren't handled; Back from the
+  Brink offers one menu row per graveyard card; Land Equilibrium's choice of land waits for the end
+  of an effect that puts several lands at once; Elemental Resonance makes {2/W} add {W} with no
+  ruling to go on; the scaffolder reads no Saga chapters; Quenchable Fire could reuse `unlessPaid`.
 - **Batch 340 (2026-11-22, `author-flagged`)** — Space Beleren, the last flagged card (`B340.json`):
   `mechanic:sectors` built (space sculptor, rule 702.158: the sector designation, the 704.5u
   assignment on the short-menu decision, `CardFilter.sector`, `CantBeBlocked.outsideSector`). No

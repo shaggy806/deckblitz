@@ -48,11 +48,14 @@ section keeps only what to do next.
   Left as majors for the user: Spellweaver Volute (18930, an Aura on a graveyard card), Word of
   Command (19342, controlling a player), Raging River (20295, labelled piles), Swirl the Mists (20599,
   text changes over every spell and permanent) and Rhystic Cave (20257, a payment window inside a
-  mana ability; its working build is in commit 401281830). **Next by rank** (`rank-goal.mjs --rank
-  30000 --keys`, every key laned): Sabertooth Cobra (20245, `effect:pay-before-delayed-deadline`),
-  Psychogenic Probe (20611), Elemental Resonance (20686), Piracy (20704), Invoke the Ancients (20794),
-  Bribe Taker (20944), Kithkin Armor (20952), Master's Councillors (21015), then on; Balduvian Fallen
-  was re-keyed (`amount:mana-spent-on-cumulative-upkeep`). **Stone
+  mana ability; its working build is in commit 401281830). **B342 (2026-11-26, `author-top-cards overnight`, wrapped up at the
+  user's word)** took 68 cards from Sabertooth Cobra (20245) to Mob Mentality (22648), 13 lane agents in
+  five lanes (`docs/card-blockers.md`, batch 342), and laned 34 more keys to rank 23,200. **Next by rank**
+  (`rank-goal.mjs --rank 40000 --keys`; laned to 23,200, lane the rest as they come up): Primitive Justice
+  (21585, `cost:repeatable-additional-costs-adding-targets`), Spy Kit (21761), Hankyu (21855), Caller of
+  the Hunt (21972), Rayami, First of the Fallen (22091), Loxodon Peacekeeper (22161), Puca's Eye (22228),
+  Crumbling Sanctuary (22256), Eye for an Eye (22280), Cleansing (22311), then on; Lymph Sliver was
+  re-keyed (`static:absorb`), Balduvian Fallen earlier (`amount:mana-spent-on-cumulative-upkeep`). **Stone
   Calendar** (20630) waits on the user (a major: declining its "up to {1} less" while casting). The
   keys B337 built still need lanes in `engine/data/lanes.json` only when re-keyed; re-keyed in `B336.json`: Caller of the Hunt, Mister Immortal; Clarion
   Ultimatum and Dichotomancy want the rest of Doubling Chant's search. Spawnsire of Ulamog (11790,
