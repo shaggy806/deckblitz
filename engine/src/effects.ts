@@ -3601,6 +3601,12 @@ export type EffectSpec =
       /** "The damage can't be prevented" (rule 615.12 — Combust, Pinpoint
        * Avalanche): prevention effects prevent none of it. */
       readonly cantBePrevented?: true;
+      /** "If ~ would deal damage to a creature, that damage can't be
+       * prevented or dealt instead to another permanent or player" (Lava
+       * Burst — rules 615.12, 614.9): to a creature, as it is when the damage
+       * would be dealt, no prevention prevents any and no redirection
+       * applies; to a player or a planeswalker, nothing changes. */
+      readonly toCreaturesUnstoppable?: true;
       /** A target slot index — omit when `who` is set instead. Or
        * `"trigger-object"`, untargeted: "whenever this creature blocks or
        * becomes blocked by a creature, this creature deals 1 damage to **that
@@ -13762,8 +13768,10 @@ export interface EffectApi {
   replacementOrdersAsked(run: () => void): boolean;
   dealDamage(target: TargetRef, amount: number, from?: ObjectRef): void;
   /** Run `fn` with every damage it deals unpreventable (rule 615.12 — a
-   * `damage` effect's `cantBePrevented`). */
-  unpreventably(fn: () => void): void;
+   * `damage` effect's `cantBePrevented`); with `toCreatures`, only the damage
+   * it deals to a creature, which can't be redirected either (the `damage`
+   * effect's `toCreaturesUnstoppable`). */
+  unpreventably(fn: () => void, toCreatures?: "and-unredirectable"): void;
   /** "Damage can't be prevented this turn" (Skullcrack). */
   damageUnpreventableThisTurn(): void;
   /** Set up a `damage-rule`, its references resolved (see that effect). */
@@ -21688,6 +21696,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (spec.cantBePrevented === true) {
         const { cantBePrevented: _, ...rest } = spec;
         ctx.unpreventably(() => applyEffectSpec(rest, ctx));
+        return;
+      }
+      if (spec.toCreaturesUnstoppable === true) {
+        const { toCreaturesUnstoppable: _, ...rest } = spec;
+        ctx.unpreventably(() => applyEffectSpec(rest, ctx), "and-unredirectable");
         return;
       }
       if (spec.toControllerOfTarget !== undefined) {

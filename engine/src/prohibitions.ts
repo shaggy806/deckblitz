@@ -267,6 +267,16 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly aimingOnly?: string;
     } & ObjectSide)
   | ({
+      /** "Damage that would be dealt to that creature this turn **can't be
+       * prevented**" (rule 615.12 — Whippoorwill): every prevention effect
+       * still applies to damage dealt to an object it reaches, preventing
+       * none of it. `orRedirected`: "…**or dealt instead to another
+       * permanent or player**" — no redirection (614.9) applies to it either.
+       * See `Game.damageUnpreventable` / `Game.damageUnredirectable`. */
+      readonly act: "have-damage-prevented";
+      readonly orRedirected?: true;
+    } & ObjectSide)
+  | ({
       /** "Can't have counters put on it", "players can't get counters". */
       readonly act: "get-counters";
       readonly who?: W;

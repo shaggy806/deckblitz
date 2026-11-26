@@ -13989,6 +13989,54 @@ export function parseEffect(text, outer) {
     // "Prevent all combat damage that would be dealt to and dealt by that
     // creature this turn." after the one sentence that targeted (Ebony
     // Horse, Foxfire — rule 615): that target, both ways.
+    // "If ~ would deal damage to a creature, that damage can't be prevented
+    // or dealt instead to another permanent or player." after the damage
+    // sentence (Lava Burst — rules 615.12, 614.9): that damage effect's
+    // `toCreaturesUnstoppable`.
+    const lastStep = parsed[parsed.length - 1];
+    if (
+      /^if ~ would deal damage to a creature, that damage can't be prevented or dealt instead to another permanent or player\.$/i.test(sentence) &&
+      lastStep?.kind === "damage"
+    ) {
+      parsed[parsed.length - 1] = { ...lastStep, toCreaturesUnstoppable: true };
+      hints.push({ sentence, effect: parsed[parsed.length - 1] });
+      continue;
+    }
+    // "Damage that would be dealt to that creature this turn can't be
+    // prevented or dealt instead to another permanent or player." after the
+    // one sentence that targeted (Whippoorwill): a `have-damage-prevented`
+    // prohibition on that target.
+    if (
+      /^damage that would be dealt to (?:that creature|it) this turn can't be prevented( or dealt instead to another permanent or player)?\.$/i.test(sentence) &&
+      i > 0 &&
+      ctx.targets.length === 1 &&
+      parsed.length > 0
+    ) {
+      const redirected = /dealt instead/i.test(sentence) ? { orRedirected: true } : {};
+      const held = { kind: "prohibit", prohibits: [{ act: "have-damage-prevented", target: 0, ...redirected }] };
+      parsed.push(held);
+      hints.push({ sentence, effect: held });
+      continue;
+    }
+    // "When the creature dies this turn, exile the creature." after the one
+    // sentence that targeted (Whippoorwill): a delayed `leaves` trigger, the
+    // card in the graveyard its trigger object.
+    if (
+      /^when (?:that|the) creature dies this turn, exile (?:it|that card|the creature)\.$/i.test(sentence) &&
+      i > 0 &&
+      ctx.targets.length === 1 &&
+      parsed.length > 0
+    ) {
+      const later = {
+        kind: "delayed-trigger",
+        at: { leaves: 0, to: ["graveyard"], thisTurn: true },
+        text: sentence,
+        effect: { kind: "exile", target: "trigger-object" },
+      };
+      parsed.push(later);
+      hints.push({ sentence, effect: later });
+      continue;
+    }
     const toAndByM = /^prevent all (combat )?damage that would be dealt to and dealt by (?:it|that creature|the creature) this turn\.$/i.exec(sentence);
     if (toAndByM !== null && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
       const combat = toAndByM[1] ? { combat: true } : {};

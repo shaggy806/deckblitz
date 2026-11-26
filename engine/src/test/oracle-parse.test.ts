@@ -3833,6 +3833,36 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("damage that can't be prevented or dealt instead (rules 615.12, 614.9): Lava Burst's to creatures, Whippoorwill's to its target", () => {
+    const lava = parseFace({
+      name: "Lava Burst",
+      type_line: "Sorcery",
+      oracle_text:
+        "Lava Burst deals X damage to any target. If Lava Burst would deal damage to a creature, that damage can't be prevented or dealt instead to another permanent or player.",
+    });
+    expect(lava.effect).toEqual({ kind: "damage", amount: "x", target: 0, toCreaturesUnstoppable: true });
+    expect(lava.complete).toBe(true);
+    const whip = parseFace({
+      name: "Whippoorwill",
+      type_line: "Creature — Bird",
+      oracle_text:
+        "{G}{G}, {T}: Target creature can't be regenerated this turn. Damage that would be dealt to that creature this turn can't be prevented or dealt instead to another permanent or player. When the creature dies this turn, exile the creature.",
+    });
+    expect(whip.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "cant-regenerate", target: 0 },
+        { kind: "prohibit", prohibits: [{ act: "have-damage-prevented", target: 0, orRedirected: true }] },
+        {
+          kind: "delayed-trigger",
+          at: { leaves: 0, to: ["graveyard"], thisTurn: true },
+          text: "When the creature dies this turn, exile the creature.",
+          effect: { kind: "exile", target: "trigger-object" },
+        },
+      ],
+    });
+  });
+
   it("a processor's 'put a card an opponent owns from exile into that player's graveyard': a cost, an additional cost, a may with 'if you do'", () => {
     expect(parseCost("{1}{G}, Put a card an opponent owns from exile into that player's graveyard").cost).toEqual({
       mana: "{1}{G}",

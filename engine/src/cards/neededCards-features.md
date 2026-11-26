@@ -352,6 +352,14 @@ The key `trigger:activates-this-ability`: the `activates-ability` trigger's `own
 printed activated abilities by its index (never one granted to it, nor another permanent's of the same text). Herald
 of Anafenza (21249). The scaffolder reads "whenever you activate this creature's outlast ability".
 `test/activates-own-ability.test.ts`.
+### Damage that can't be prevented or dealt instead to another permanent or player — built 2026-11-26
+
+The key `effect:damage-cant-be-redirected`: `damage`'s `toCreaturesUnstoppable` (Lava Burst, 21292 — to a creature
+alone) and the `prohibit` act `have-damage-prevented` with `orRedirected` (Whippoorwill, 27799 — one creature, this
+turn), both read through `Game.damageToUnstoppable`: `damageUnpreventable` now takes the recipient (rule 615.12), and
+`damageSteps` drops every redirection step and redirecting shield for such damage (614.9). The scaffolder reads both
+sentences and Whippoorwill's "when the creature dies this turn, exile the creature". `test/damage-cant-be-redirected.test.ts`.
+
 ### "Until the end of your next turn, they can't phase in" — built 2026-11-26
 
 The key `effect:phase-out-until-your-next-turn-end`: no new phasing field — a `prohibit` of `phase-in` (prohibitions

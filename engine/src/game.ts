@@ -3064,6 +3064,10 @@ export class Game {
    * damage (rule 615.12 — `EffectApi.unpreventably`). Not game state: it
    * only ever spans one synchronous call. */
   private unpreventableDepth = 0;
+  /** While above 0, a `damage` effect with `toCreaturesUnstoppable` is
+   * dealing its damage: to a creature, it can't be prevented or redirected
+   * (Lava Burst). Not game state, like `unpreventableDepth`. */
+  private unstoppableToCreaturesDepth = 0;
   /** The +1/+1 counters an Incubator token being made by `incubate` enters
    * with (rule 701.53a) — read by `enteringReplacementOf` for that token
    * only. Not game state: it spans the one `createTokens` call. */
@@ -49211,12 +49215,14 @@ controlledBy,
             : {}),
         });
       },
-      unpreventably: (fn) => {
-        this.unpreventableDepth += 1;
+      unpreventably: (fn, toCreatures) => {
+        if (toCreatures !== undefined) this.unstoppableToCreaturesDepth += 1;
+        else this.unpreventableDepth += 1;
         try {
           fn();
         } finally {
-          this.unpreventableDepth -= 1;
+          if (toCreatures !== undefined) this.unstoppableToCreaturesDepth -= 1;
+          else this.unpreventableDepth -= 1;
         }
       },
       damageUnpreventableThisTurn: () => {
@@ -68555,6 +68561,15 @@ controlledBy,
         steps.push({ kind: "prevent-all", by: target.object, controller: object.controller, made: { key: `protection:${target.object}`, by: target.object } });
       }
     }
+    // Damage that "can't be dealt instead to another permanent or player"
+    // (Lava Burst, Whippoorwill): no redirection applies to it (614.9).
+    if (steps.length > 0 && this.damageToUnstoppable(target, true)) {
+      return steps.filter(
+        (s) =>
+          s.kind !== "redirect" &&
+          !(s.kind === "shield" && (s.shield.redirect !== undefined || s.shield.redirectToSource !== undefined)),
+      );
+    }
     return steps;
   }
 
@@ -68634,7 +68649,7 @@ controlledBy,
   ): boolean {
     const player = target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
     if (player === undefined) return false;
-    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown);
+    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown, target);
     const every = this.damageSteps(source, target, combat, sourceLastKnown);
     // A "you may prevent" is answered first: whether it applies at all.
     if (this.mayPreventionAsked(every, source, target, amount * sources, unpreventable, resume)) return true;
@@ -68948,7 +68963,9 @@ controlledBy,
         const covered: DamageHit[] = hits.filter(
           (h) =>
             h.group === group &&
-            (redirects || !this.damageUnpreventable(h.source, h.combat, h.sourceLastKnown)) &&
+            (redirects
+              ? !this.damageToUnstoppable(h.target, true)
+              : !this.damageUnpreventable(h.source, h.combat, h.sourceLastKnown, h.target)) &&
             this.shieldCovers(shield, h.target, h.combat, h.source, h.sourceLastKnown) &&
             this.damageReplacementReaches(r, by, h.source, h.target, h.combat, h.sourceLastKnown),
         );
@@ -69338,8 +69355,16 @@ controlledBy,
    * `damage` effect's `cantBePrevented` under way, "damage can't be
    * prevented this turn", or a static `damageCantBePrevented` that covers
    * it. */
-  private damageUnpreventable(source: ObjectId, combat: boolean, sourceLastKnown: LastKnownInfo | undefined): boolean {
+  private damageUnpreventable(
+    source: ObjectId,
+    combat: boolean,
+    sourceLastKnown: LastKnownInfo | undefined,
+    /** Who is being dealt it: Lava Burst's damage to a creature, and a
+     * `have-damage-prevented` prohibition's object (Whippoorwill). */
+    target?: TargetRef,
+  ): boolean {
     if (this.unpreventableDepth > 0 || this.state.damageUnpreventableThisTurn === true) return true;
+    if (target !== undefined && this.damageToUnstoppable(target, false)) return true;
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
@@ -69363,6 +69388,24 @@ controlledBy,
       }
     }
     return false;
+  }
+
+  /** Whether damage being dealt to `target` can't be prevented (rule
+   * 615.12) — or, with `redirect`, can't be dealt instead to another
+   * permanent or player (614.9): a `toCreaturesUnstoppable` damage effect
+   * under way and `target` a creature (Lava Burst), or a
+   * `have-damage-prevented` prohibition reaching it (Whippoorwill, with
+   * `orRedirected` for the redirection). */
+  private damageToUnstoppable(target: TargetRef, redirect: boolean): boolean {
+    if (target.kind !== "object") return false;
+    const object = this.state.objects[target.object];
+    if (object?.zone !== "battlefield") return false;
+    if (this.unstoppableToCreaturesDepth > 0 && effectiveTypes(this.state, this.registry, object).includes("creature")) {
+      return true;
+    }
+    return liveProhibitions(this.state, this.registry, "have-damage-prevented").some(
+      (live) => (!redirect || live.prohibition.orRedirected === true) && reachesObject(this.state, this.registry, live, target.object),
+    );
   }
 
   /** A prevention shield's additional effect (rule 615.5 — `then`): applied
@@ -69517,7 +69560,7 @@ controlledBy,
     const by = dealtBy === undefined ? {} : { by: dealtBy };
     // Damage that can't be prevented (rule 615.12) goes through every
     // prevention effect below, protection's included (702.16e).
-    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown);
+    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown, target);
 
     // Damage replacements (rule 614) — doubling (Dictate of the Twin Gods),
     // "plus 2" (Torbran), "prevent that damage and …" (The Mindskinner) —
