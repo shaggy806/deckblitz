@@ -350,7 +350,8 @@ export function checkInvariants(game, label, holes = []) {
   }
   // Each seat's view: no card in another player's hand, or in any library,
   // unless something shows it (a reveal this turn, a revealed library top, a
-  // hand played revealed, a decision that has its player look at it).
+  // hand played revealed, a decision that has its player look at it, or a
+  // hand card every player saw go there and so still knows: `knownToAll`).
   const awaitingIds = new Set(JSON.stringify(s.awaiting ?? null).match(/obj-\d+/g) ?? []);
   for (const viewer of s.turnOrder) {
     const view = viewFor(s, registry, viewer);
@@ -364,6 +365,7 @@ export function checkInvariants(game, label, holes = []) {
       for (const id of hidden) {
         if (view.objects[id] === undefined || shown.has(id) || awaitingIds.has(id)) continue;
         const where = zones.library.includes(id) ? "library" : "hand";
+        if (where === "hand" && view.objects[id].knownToAll === true) continue;
         throw new Error(`invariant (${label}): ${viewer}'s view shows ${s.objects[id]?.cardName} in ${p}'s ${where}`);
       }
     }
