@@ -313,6 +313,7 @@ import _poolExecutionersSwing from "../pool/executioners-swing.js";
 import _poolExpelTheUnworthy from "../pool/expel-the-unworthy.js";
 import _poolEyeOfUgin from "../pool/eye-of-ugin.js";
 import _poolEyesOfTheBeholder from "../pool/eyes-of-the-beholder.js";
+import _poolFaadiyahSeer from "../pool/faadiyah-seer.js";
 import _poolFacelessButcher from "../pool/faceless-butcher.js";
 import _poolFaerieSquadron from "../pool/faerie-squadron.js";
 import _poolFaithsFetters from "../pool/faiths-fetters.js";
@@ -1378,6 +1379,7 @@ const shard: CardShard = {
     _poolExpelTheUnworthy,
     _poolEyeOfUgin,
     _poolEyesOfTheBeholder,
+    _poolFaadiyahSeer,
     _poolFacelessButcher,
     _poolFaerieSquadron,
     _poolFaithsFetters,

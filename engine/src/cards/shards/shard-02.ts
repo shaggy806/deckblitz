@@ -929,6 +929,7 @@ import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
 import _poolThousandYearElixir from "../pool/thousand-year-elixir.js";
 import _poolThrakkusTheButcher from "../pool/thrakkus-the-butcher.js";
 import _poolThrastaTempestsRoar from "../pool/thrasta-tempests-roar.js";
+import _poolThreeWishes from "../pool/three-wishes.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
@@ -1998,6 +1999,7 @@ const shard: CardShard = {
     _poolThousandYearElixir,
     _poolThrakkusTheButcher,
     _poolThrastaTempestsRoar,
+    _poolThreeWishes,
     _poolThrillingDiscovery,
     _poolThroatSlitter,
     _poolThrummingHivepool,

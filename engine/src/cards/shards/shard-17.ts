@@ -87,6 +87,7 @@ import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
 import _poolBeaconOfImmortality from "../pool/beacon-of-immortality.js";
+import _poolBeamsplitterMage from "../pool/beamsplitter-mage.js";
 import _poolBelisariusCawl from "../pool/belisarius-cawl.js";
 import _poolBelligerentBrontodon from "../pool/belligerent-brontodon.js";
 import _poolBelltowerSphinx from "../pool/belltower-sphinx.js";
@@ -1149,6 +1150,7 @@ const shard: CardShard = {
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,
     _poolBeaconOfImmortality,
+    _poolBeamsplitterMage,
     _poolBelisariusCawl,
     _poolBelligerentBrontodon,
     _poolBelltowerSphinx,

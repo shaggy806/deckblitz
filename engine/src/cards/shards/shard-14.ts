@@ -276,6 +276,7 @@ import _poolElderMastery from "../pool/elder-mastery.js";
 import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
 import _poolElementalEruption from "../pool/elemental-eruption.js";
 import _poolElephantRat from "../pool/elephant-rat.js";
+import _poolElkinLair from "../pool/elkin-lair.js";
 import _poolElspethUndauntedHero from "../pool/elspeth-undaunted-hero.js";
 import _poolElspethsDevotee from "../pool/elspeths-devotee.js";
 import _poolElvishBranchbender from "../pool/elvish-branchbender.js";
@@ -803,6 +804,7 @@ import _poolSiegehornCeratops from "../pool/siegehorn-ceratops.js";
 import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
 import _poolSilumgarAssassin from "../pool/silumgar-assassin.js";
 import _poolSilverRaven from "../pool/silver-raven.js";
+import _poolSindbad from "../pool/sindbad.js";
 import _poolSkeletonShard from "../pool/skeleton-shard.js";
 import _poolSkirkMarauder from "../pool/skirk-marauder.js";
 import _poolSkithiryxTheBlightDragon from "../pool/skithiryx-the-blight-dragon.js";
@@ -1337,6 +1339,7 @@ const shard: CardShard = {
     _poolEldraziLinebreaker,
     _poolElementalEruption,
     _poolElephantRat,
+    _poolElkinLair,
     _poolElspethUndauntedHero,
     _poolElspethsDevotee,
     _poolElvishBranchbender,
@@ -1864,6 +1867,7 @@ const shard: CardShard = {
     _poolSigardaChampionOfLight,
     _poolSilumgarAssassin,
     _poolSilverRaven,
+    _poolSindbad,
     _poolSkeletonShard,
     _poolSkirkMarauder,
     _poolSkithiryxTheBlightDragon,
