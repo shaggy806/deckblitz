@@ -13946,4 +13946,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Lightning Storm', 'Forest'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

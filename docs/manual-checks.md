@@ -9195,3 +9195,8 @@ Each board's die comes up 4.
 ### Piracy: four players, every opponent's lands
 - **Do:** Cast Piracy. Click Carol's Forest and add {G}.
 - **Expect:** Carol's Forest taps and the {G} goes into your pool. Bob's and Dave's lands offer the same; Bob's Llanowar Elves offers nothing.
+## A spell's ability on the stack (2026-11-26)
+
+### Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere
+- **Do:** Cast Lightning Storm at Bob. With it on the stack, click it there and choose its ability; discard Forest, and pick Grizzly Bears as its new target.
+- **Expect:** The stack card offers "Discard a land card: Put two charge counters…", Forest goes to your graveyard, and Lightning Storm then deals 5 damage to Grizzly Bears, not Bob.

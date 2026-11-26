@@ -5991,7 +5991,7 @@ seen though the card then has none; any other trigger needs a time counter on
 it. Its controller is the owner. The activated form is **`zone: "suspended"`**
 on an `activated` entry — "Activate only if this card is suspended" (Greater
 Gargadon): its owner activates it from exile, the cost doesn't move the card,
-and the client offers it from the exile viewer. `while-suspended.test.ts`. **`zone: "exile"`** is "activate only if this card is exiled", any exiled card's: Q, Stacking the Deck's `grant-activated` to the card it exiled (a card in exile keeps a granted ability while it stays there), whose `cast-now` of `"source"` with `copies: 1` is "create a copy of this card. You may cast the copy".
+and the client offers it from the exile viewer. `while-suspended.test.ts`. **`zone: "exile"`** is "activate only if this card is exiled", any exiled card's: Q, Stacking the Deck's `grant-activated` to the card it exiled (a card in exile keeps a granted ability while it stays there), whose `cast-now` of `"source"` with `copies: 1` is "create a copy of this card. You may cast the copy". **`zone: "stack"`** is an instant's or sorcery's own ability that works while it's a spell on the stack (rule 113.6), with `anyPlayer` anyone's (602.2): Lightning Storm's "Discard a land card: Put two charge counters on Lightning Storm. You may choose a new target for it" is `add-counter` on `"source"` (counters sit on a spell, read by `{ countersOn: "source" }` as it resolves) and `change-targets` `target: "source"`, `how: "choose-new"`; the client offers it by clicking the spell on the stack (`spell-ability-on-stack.test.ts`).
 
 ---
 

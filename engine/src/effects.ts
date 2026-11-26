@@ -9355,9 +9355,14 @@ export type EffectSpec =
        * Choosing new targets for one may leave any of its targets as they
        * were (rule 115.7d), so keeping them all is the same as not choosing
        * it. Untargeted: nothing is chosen as this goes on the stack.
+       *
+       * `"source"` is the spell whose own ability this is, while it's still
+       * that spell on the stack (an `ActivatedAbility.zone: "stack"` one —
+       * Lightning Storm's "you may choose a new target for it",
+       * `"choose-new"`).
        */
       readonly kind: "change-targets";
-      readonly target: number | "trigger-object" | "each-other";
+      readonly target: number | "trigger-object" | "each-other" | "source";
       /** Only the engine sets this: with `"each-other"`, the stack objects
        * still to ask about, top first, as the resolution waits on the
        * choice for the one before. */

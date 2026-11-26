@@ -952,8 +952,16 @@ export interface ActivatedAbility {
    *   Deck's granted "Exile a card from your hand: Create a copy of this card.
    *   You may cast the copy"): its owner's, while it's in exile; the cost
    *   doesn't move it, so `"source"` finds it as with `"command"`.
+   * - `"stack"` — "Activate only if this spell is on the stack" (Lightning
+   *   Storm: "Discard a land card: Put two charge counters on Lightning
+   *   Storm. You may choose a new target for it. Any player may activate
+   *   this ability but only if Lightning Storm is on the stack"): a spell's
+   *   own ability while it's a spell on the stack (rule 113.6: an instant's
+   *   or sorcery's abilities function there), its controller's to activate
+   *   (602.2), or any player's with `anyPlayer`. `"source"` is the spell while it's still
+   *   that object on the stack (rule 400.7), as with `"command"`.
    */
-  readonly zone?: "hand" | "graveyard" | "command" | "suspended" | "exile";
+  readonly zone?: "hand" | "graveyard" | "command" | "suspended" | "exile" | "stack";
   /**
    * A `zone: "graveyard"` ability whose cost *doesn't* exile the card
    * (Reassembling Skeleton: "{1}{B}: Return this card from your graveyard to

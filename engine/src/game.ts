@@ -5577,6 +5577,20 @@ export class Game {
         if ((ability.zone === "suspended" && suspended) || ability.zone === "exile") pushActivateAbility(card, def.name, ability, index);
       });
     }
+    // A spell's own ability that works while it's on the stack (rule 113.6 —
+    // Lightning Storm): its controller's, or anyone's that says so (602.2).
+    for (const id of this.state.zones.shared.stack) {
+      if (onlySource !== undefined && id !== onlySource) continue;
+      const spell = this.state.objects[id];
+      if (spell === undefined || spell.kind !== "card") continue;
+      const printed = this.registry.get(rulesTextName(spell)).activated;
+      if (!printed.some((a) => a.zone === "stack")) continue;
+      this.effectiveActivated(id).forEach((ability, index) => {
+        if (ability.zone === "stack" && this.mayActivateAs(ability, spell, player)) {
+          pushActivateAbility(id, printedCardName(spell), ability, index);
+        }
+      });
+    }
   }
 
   /** Whether `id` is suspended: in exile, with a time counter, and suspend
@@ -29162,7 +29176,10 @@ export class Game {
           ? "that card is not suspended"
           : `that card is not in ${ability.zone === "command" ? "the command zone" : ability.zone}`;
       }
-      if (source.owner !== player) return `${player} does not own that card`;
+      if (ability.zone === "stack") {
+        if (source.kind !== "card") return "that is not a spell";
+        if (!this.mayActivateAs(ability, source, player)) return `${player} does not control that spell`;
+      } else if (source.owner !== player) return `${player} does not own that card`;
       if (source.zone === "exile" && (source.exiledFaceDown !== undefined || source.faceDown !== undefined)) {
         return "a card exiled face down has no abilities (rule 406.3a)";
       }
@@ -30434,7 +30451,13 @@ export class Game {
         ...(granterRef !== undefined ? { granter: granterRef } : {}),
       };
     }
-    if (ability.zone === "command" || ability.zone === "suspended" || ability.zone === "exile" || ability.staysInZone === true) {
+    if (
+      ability.zone === "command" ||
+      ability.zone === "suspended" ||
+      ability.zone === "exile" ||
+      ability.zone === "stack" ||
+      ability.staysInZone === true
+    ) {
       // The source is still sitting in that zone — remember which object it
       // is, so a round trip before this resolves reads as a new one (rule
       // 400.7). See `resolveAbility`.
@@ -58773,8 +58796,9 @@ controlledBy,
     // ability it gained in exile. Not a permanent, so nothing that acts on a
     // permanent's counters applies (Doubling Season, Solemnity), and they
     // cease to exist as it leaves (rule 122.2).
+    // So on a spell on the stack (Lightning Storm's charge counters).
     const exiled = this.state.objects[target.object];
-    if (exiled?.zone === "exile" && exiled.kind === "card") {
+    if ((exiled?.zone === "exile" || exiled?.zone === "stack") && exiled.kind === "card") {
       exiled.counters[counter] = (exiled.counters[counter] ?? 0) + amount;
       invalidateComputedCache();
       return;

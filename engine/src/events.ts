@@ -975,7 +975,7 @@ export type GameEvent =
        * from outside the battlefield (`ActivatedAbility.zone`; cycling's is
        * `"hand"`) — what "an ability of a card in your graveyard" asks
        * (Neerdiv, Devious Diver), however its cost moved the card. */
-      readonly fromZone?: "hand" | "graveyard" | "command" | "suspended" | "exile";
+      readonly fromZone?: "hand" | "graveyard" | "command" | "suspended" | "exile" | "stack";
       /** Its own cost sacrifices one or more permanents (Ashnod the Uncaring).
        * A Treasure sacrificed for the mana that paid it is another ability's
        * cost (the ruling), and doesn't count. */
