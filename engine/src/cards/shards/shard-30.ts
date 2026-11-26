@@ -184,6 +184,7 @@ import _poolCravenHulk from "../pool/craven-hulk.js";
 import _poolCrawlFromTheCellar from "../pool/crawl-from-the-cellar.js";
 import _poolCrossbowInfantry from "../pool/crossbow-infantry.js";
 import _poolCrossroadsVillage from "../pool/crossroads-village.js";
+import _poolCrowdOfTrueBelievers from "../pool/crowd-of-true-believers.js";
 import _poolCrucibleOfTheSpiritDragon from "../pool/crucible-of-the-spirit-dragon.js";
 import _poolCruelCelebrant from "../pool/cruel-celebrant.js";
 import _poolCruelFinality from "../pool/cruel-finality.js";
@@ -1272,6 +1273,7 @@ const shard: CardShard = {
     _poolCrawlFromTheCellar,
     _poolCrossbowInfantry,
     _poolCrossroadsVillage,
+    _poolCrowdOfTrueBelievers,
     _poolCrucibleOfTheSpiritDragon,
     _poolCruelCelebrant,
     _poolCruelFinality,

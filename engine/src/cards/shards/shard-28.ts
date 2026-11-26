@@ -535,6 +535,7 @@ import _poolMastersCouncillors from "../pool/masters-councillors.js";
 import _poolMaulSplicer from "../pool/maul-splicer.js";
 import _poolMbakuJabariChieftain from "../pool/mbaku-jabari-chieftain.js";
 import _poolMeasureOfWickedness from "../pool/measure-of-wickedness.js";
+import _poolMeddle from "../pool/meddle.js";
 import _poolMeekstone from "../pool/meekstone.js";
 import _poolMenacingOgre from "../pool/menacing-ogre.js";
 import _poolMentalAgony from "../pool/mental-agony.js";
@@ -985,6 +986,7 @@ import _poolVertexPaladin from "../pool/vertex-paladin.js";
 import _poolViashinoOutrider from "../pool/viashino-outrider.js";
 import _poolViashinoSandscout from "../pool/viashino-sandscout.js";
 import _poolViolentEruption from "../pool/violent-eruption.js";
+import _poolViperCruelConspirator from "../pool/viper-cruel-conspirator.js";
 import _poolViralSpawning from "../pool/viral-spawning.js";
 import _poolVirtuesRuin from "../pool/virtues-ruin.js";
 import _poolVisceraDragger from "../pool/viscera-dragger.js";
@@ -1618,6 +1620,7 @@ const shard: CardShard = {
     _poolMaulSplicer,
     _poolMbakuJabariChieftain,
     _poolMeasureOfWickedness,
+    _poolMeddle,
     _poolMeekstone,
     _poolMenacingOgre,
     _poolMentalAgony,
@@ -2068,6 +2071,7 @@ const shard: CardShard = {
     _poolViashinoOutrider,
     _poolViashinoSandscout,
     _poolViolentEruption,
+    _poolViperCruelConspirator,
     _poolViralSpawning,
     _poolVirtuesRuin,
     _poolVisceraDragger,

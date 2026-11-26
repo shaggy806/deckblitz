@@ -786,6 +786,7 @@ import _poolSiegebreakerGiant from "../pool/siegebreaker-giant.js";
 import _poolSigiledSwordOfValeron from "../pool/sigiled-sword-of-valeron.js";
 import _poolSilentAssassin from "../pool/silent-assassin.js";
 import _poolSilverKnight from "../pool/silver-knight.js";
+import _poolSilverWyvern from "../pool/silver-wyvern.js";
 import _poolSimicFluxmage from "../pool/simic-fluxmage.js";
 import _poolSimicGrowthChamber from "../pool/simic-growth-chamber.js";
 import _poolSimicSkySwallower from "../pool/simic-sky-swallower.js";
@@ -1847,6 +1848,7 @@ const shard: CardShard = {
     _poolSigiledSwordOfValeron,
     _poolSilentAssassin,
     _poolSilverKnight,
+    _poolSilverWyvern,
     _poolSimicFluxmage,
     _poolSimicGrowthChamber,
     _poolSimicSkySwallower,

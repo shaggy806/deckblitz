@@ -501,6 +501,7 @@ import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
 import _poolLlawanCephalidEmpress from "../pool/llawan-cephalid-empress.js";
 import _poolLochmereSerpent from "../pool/lochmere-serpent.js";
 import _poolLocutusOfBorg from "../pool/locutus-of-borg.js";
+import _poolLootTheAnomaly from "../pool/loot-the-anomaly.js";
 import _poolLoranOfTheThirdPath from "../pool/loran-of-the-third-path.js";
 import _poolLoreholdApprentice from "../pool/lorehold-apprentice.js";
 import _poolLoreholdPledgemage from "../pool/lorehold-pledgemage.js";
@@ -1507,6 +1508,7 @@ const shard: CardShard = {
     _poolLlawanCephalidEmpress,
     _poolLochmereSerpent,
     _poolLocutusOfBorg,
+    _poolLootTheAnomaly,
     _poolLoranOfTheThirdPath,
     _poolLoreholdApprentice,
     _poolLoreholdPledgemage,

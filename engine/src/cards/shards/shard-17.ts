@@ -674,6 +674,7 @@ import _poolPlagueDrone from "../pool/plague-drone.js";
 import _poolPlagueRats from "../pool/plague-rats.js";
 import _poolPlanarOverlay from "../pool/planar-overlay.js";
 import _poolPleaForPower from "../pool/plea-for-power.js";
+import _poolPorphyryNodes from "../pool/porphyry-nodes.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
 import _poolPowerSink from "../pool/power-sink.js";
 import _poolPredatoryNightstalker from "../pool/predatory-nightstalker.js";
@@ -1735,6 +1736,7 @@ const shard: CardShard = {
     _poolPlagueRats,
     _poolPlanarOverlay,
     _poolPleaForPower,
+    _poolPorphyryNodes,
     _poolPouncingLynx,
     _poolPowerSink,
     _poolPredatoryNightstalker,

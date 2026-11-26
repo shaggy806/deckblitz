@@ -170,6 +170,7 @@ import _poolCruelTutor from "../pool/cruel-tutor.js";
 import _poolCrushOfTentacles from "../pool/crush-of-tentacles.js";
 import _poolCrystalBarricade from "../pool/crystal-barricade.js";
 import _poolCrystallineGiant from "../pool/crystalline-giant.js";
+import _poolCullingScales from "../pool/culling-scales.js";
 import _poolCunningWish from "../pool/cunning-wish.js";
 import _poolCurseOfTheCabal from "../pool/curse-of-the-cabal.js";
 import _poolCurseOfUnbinding from "../pool/curse-of-unbinding.js";
@@ -1221,6 +1222,7 @@ const shard: CardShard = {
     _poolCrushOfTentacles,
     _poolCrystalBarricade,
     _poolCrystallineGiant,
+    _poolCullingScales,
     _poolCunningWish,
     _poolCurseOfTheCabal,
     _poolCurseOfUnbinding,

@@ -5852,6 +5852,7 @@ import _poolCrovaxTheCursed from "./pool/crovax-the-cursed.js";
 import _poolCrowOfDarkTidings from "./pool/crow-of-dark-tidings.js";
 import _poolCrowdFavorites from "./pool/crowd-favorites.js";
 import _poolCrowdOfCinders from "./pool/crowd-of-cinders.js";
+import _poolCrowdOfTrueBelievers from "./pool/crowd-of-true-believers.js";
 import _poolCrowdedCrypt from "./pool/crowded-crypt.js";
 import _poolCrowdsFavor from "./pool/crowds-favor.js";
 import _poolCrownHunterHireling from "./pool/crown-hunter-hireling.js";
@@ -5991,6 +5992,7 @@ import _poolCullingDais from "./pool/culling-dais.js";
 import _poolCullingDrone from "./pool/culling-drone.js";
 import _poolCullingMark from "./pool/culling-mark.js";
 import _poolCullingRitual from "./pool/culling-ritual.js";
+import _poolCullingScales from "./pool/culling-scales.js";
 import _poolCullingSun from "./pool/culling-sun.js";
 import _poolCullingTheWeak from "./pool/culling-the-weak.js";
 import _poolCulminationOfStudies from "./pool/culmination-of-studies.js";
@@ -16618,6 +16620,7 @@ import _poolLoomingShade from "./pool/looming-shade.js";
 import _poolLoomingSpires from "./pool/looming-spires.js";
 import _poolLootDispute from "./pool/loot-dispute.js";
 import _poolLootExuberantExplorer from "./pool/loot-exuberant-explorer.js";
+import _poolLootTheAnomaly from "./pool/loot-the-anomaly.js";
 import _poolLootTheKeyToEverything from "./pool/loot-the-key-to-everything.js";
 import _poolLootTheNexus from "./pool/loot-the-nexus.js";
 import _poolLootThePathfinder from "./pool/loot-the-pathfinder.js";
@@ -17551,6 +17554,7 @@ import _poolMechanizedProduction from "./pool/mechanized-production.js";
 import _poolMechanizedWarfare from "./pool/mechanized-warfare.js";
 import _poolMechanozoa from "./pool/mechanozoa.js";
 import _poolMechtitanCore from "./pool/mechtitan-core.js";
+import _poolMeddle from "./pool/meddle.js";
 import _poolMeddlingMage from "./pool/meddling-mage.js";
 import _poolMeddlingYouths from "./pool/meddling-youths.js";
 import _poolMedicineBag from "./pool/medicine-bag.js";
@@ -21115,6 +21119,7 @@ import _poolPorcelainLegionnaire from "./pool/porcelain-legionnaire.js";
 import _poolPorcelainZealot from "./pool/porcelain-zealot.js";
 import _poolPorcuparrot from "./pool/porcuparrot.js";
 import _poolPoreOverThePages from "./pool/pore-over-the-pages.js";
+import _poolPorphyryNodes from "./pool/porphyry-nodes.js";
 import _poolPortInspector from "./pool/port-inspector.js";
 import _poolPortOfKarfell from "./pool/port-of-karfell.js";
 import _poolPortRazer from "./pool/port-razer.js";
@@ -22390,6 +22395,7 @@ import _poolRebelliousCaptives from "./pool/rebellious-captives.js";
 import _poolRebelliousStrike from "./pool/rebellious-strike.js";
 import _poolRebornHero from "./pool/reborn-hero.js";
 import _poolRebornHope from "./pool/reborn-hope.js";
+import _poolRebound from "./pool/rebound.js";
 import _poolRebuffTheWicked from "./pool/rebuff-the-wicked.js";
 import _poolRebuildTheCity from "./pool/rebuild-the-city.js";
 import _poolRebuild from "./pool/rebuild.js";
@@ -25468,6 +25474,7 @@ import _poolSilverSeraph from "./pool/silver-seraph.js";
 import _poolSilverShroudCostume from "./pool/silver-shroud-costume.js";
 import _poolSilverSurferCosmicVoyager from "./pool/silver-surfer-cosmic-voyager.js";
 import _poolSilverSurferGalactussHerald from "./pool/silver-surfer-galactuss-herald.js";
+import _poolSilverWyvern from "./pool/silver-wyvern.js";
 import _poolSilverbackApe from "./pool/silverback-ape.js";
 import _poolSilverbackElder from "./pool/silverback-elder.js";
 import _poolSilverbackShaman from "./pool/silverback-shaman.js";
@@ -31441,6 +31448,7 @@ import _poolViolentOutburst from "./pool/violent-outburst.js";
 import _poolViolentUltimatum from "./pool/violent-ultimatum.js";
 import _poolViolentUrge from "./pool/violent-urge.js";
 import _poolVioletPall from "./pool/violet-pall.js";
+import _poolViperCruelConspirator from "./pool/viper-cruel-conspirator.js";
 import _poolVipersKiss from "./pool/vipers-kiss.js";
 import _poolViralDrake from "./pool/viral-drake.js";
 import _poolViralSpawning from "./pool/viral-spawning.js";
@@ -39976,6 +39984,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrowOfDarkTidings,
   _poolCrowdFavorites,
   _poolCrowdOfCinders,
+  _poolCrowdOfTrueBelievers,
   _poolCrowdedCrypt,
   _poolCrowdsFavor,
   _poolCrownHunterHireling,
@@ -40115,6 +40124,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCullingDrone,
   _poolCullingMark,
   _poolCullingRitual,
+  _poolCullingScales,
   _poolCullingSun,
   _poolCullingTheWeak,
   _poolCulminationOfStudies,
@@ -50742,6 +50752,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLoomingSpires,
   _poolLootDispute,
   _poolLootExuberantExplorer,
+  _poolLootTheAnomaly,
   _poolLootTheKeyToEverything,
   _poolLootTheNexus,
   _poolLootThePathfinder,
@@ -51675,6 +51686,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMechanizedWarfare,
   _poolMechanozoa,
   _poolMechtitanCore,
+  _poolMeddle,
   _poolMeddlingMage,
   _poolMeddlingYouths,
   _poolMedicineBag,
@@ -55239,6 +55251,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPorcelainZealot,
   _poolPorcuparrot,
   _poolPoreOverThePages,
+  _poolPorphyryNodes,
   _poolPortInspector,
   _poolPortOfKarfell,
   _poolPortRazer,
@@ -56514,6 +56527,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRebelliousStrike,
   _poolRebornHero,
   _poolRebornHope,
+  _poolRebound,
   _poolRebuffTheWicked,
   _poolRebuildTheCity,
   _poolRebuild,
@@ -59592,6 +59606,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilverShroudCostume,
   _poolSilverSurferCosmicVoyager,
   _poolSilverSurferGalactussHerald,
+  _poolSilverWyvern,
   _poolSilverbackApe,
   _poolSilverbackElder,
   _poolSilverbackShaman,
@@ -65565,6 +65580,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolViolentUltimatum,
   _poolViolentUrge,
   _poolVioletPall,
+  _poolViperCruelConspirator,
   _poolVipersKiss,
   _poolViralDrake,
   _poolViralSpawning,
@@ -74113,6 +74129,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crow-of-dark-tidings": _poolCrowOfDarkTidings,
   "pool/crowd-favorites": _poolCrowdFavorites,
   "pool/crowd-of-cinders": _poolCrowdOfCinders,
+  "pool/crowd-of-true-believers": _poolCrowdOfTrueBelievers,
   "pool/crowded-crypt": _poolCrowdedCrypt,
   "pool/crowds-favor": _poolCrowdsFavor,
   "pool/crown-hunter-hireling": _poolCrownHunterHireling,
@@ -74252,6 +74269,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/culling-drone": _poolCullingDrone,
   "pool/culling-mark": _poolCullingMark,
   "pool/culling-ritual": _poolCullingRitual,
+  "pool/culling-scales": _poolCullingScales,
   "pool/culling-sun": _poolCullingSun,
   "pool/culling-the-weak": _poolCullingTheWeak,
   "pool/culmination-of-studies": _poolCulminationOfStudies,
@@ -84879,6 +84897,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/looming-spires": _poolLoomingSpires,
   "pool/loot-dispute": _poolLootDispute,
   "pool/loot-exuberant-explorer": _poolLootExuberantExplorer,
+  "pool/loot-the-anomaly": _poolLootTheAnomaly,
   "pool/loot-the-key-to-everything": _poolLootTheKeyToEverything,
   "pool/loot-the-nexus": _poolLootTheNexus,
   "pool/loot-the-pathfinder": _poolLootThePathfinder,
@@ -85812,6 +85831,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mechanized-warfare": _poolMechanizedWarfare,
   "pool/mechanozoa": _poolMechanozoa,
   "pool/mechtitan-core": _poolMechtitanCore,
+  "pool/meddle": _poolMeddle,
   "pool/meddling-mage": _poolMeddlingMage,
   "pool/meddling-youths": _poolMeddlingYouths,
   "pool/medicine-bag": _poolMedicineBag,
@@ -89376,6 +89396,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/porcelain-zealot": _poolPorcelainZealot,
   "pool/porcuparrot": _poolPorcuparrot,
   "pool/pore-over-the-pages": _poolPoreOverThePages,
+  "pool/porphyry-nodes": _poolPorphyryNodes,
   "pool/port-inspector": _poolPortInspector,
   "pool/port-of-karfell": _poolPortOfKarfell,
   "pool/port-razer": _poolPortRazer,
@@ -90651,6 +90672,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rebellious-strike": _poolRebelliousStrike,
   "pool/reborn-hero": _poolRebornHero,
   "pool/reborn-hope": _poolRebornHope,
+  "pool/rebound": _poolRebound,
   "pool/rebuff-the-wicked": _poolRebuffTheWicked,
   "pool/rebuild-the-city": _poolRebuildTheCity,
   "pool/rebuild": _poolRebuild,
@@ -93729,6 +93751,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silver-shroud-costume": _poolSilverShroudCostume,
   "pool/silver-surfer-cosmic-voyager": _poolSilverSurferCosmicVoyager,
   "pool/silver-surfer-galactuss-herald": _poolSilverSurferGalactussHerald,
+  "pool/silver-wyvern": _poolSilverWyvern,
   "pool/silverback-ape": _poolSilverbackApe,
   "pool/silverback-elder": _poolSilverbackElder,
   "pool/silverback-shaman": _poolSilverbackShaman,
@@ -99702,6 +99725,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/violent-ultimatum": _poolViolentUltimatum,
   "pool/violent-urge": _poolViolentUrge,
   "pool/violet-pall": _poolVioletPall,
+  "pool/viper-cruel-conspirator": _poolViperCruelConspirator,
   "pool/vipers-kiss": _poolVipersKiss,
   "pool/viral-drake": _poolViralDrake,
   "pool/viral-spawning": _poolViralSpawning,
