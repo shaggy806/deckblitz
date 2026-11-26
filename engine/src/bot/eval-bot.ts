@@ -329,6 +329,22 @@ const outOfTime = (budget: SearchBudget): boolean => {
  * activation loses to it. */
 const BATCH_STEP_COST = 0.1;
 
+/** How many deals of our own library a move that reveals from it is weighed
+ * over (`typicalDeal`): the median of five. */
+const OWN_LIBRARY_DEALS = 5;
+
+/** Whether `effect` reveals cards from the top of its controller's own
+ * library until one is found, anywhere in its tree: a `reveal-until` of our
+ * library, or discover (rule 701.57a). */
+function revealsOwnLibrary(effect: unknown): boolean {
+  if (effect === null || typeof effect !== "object") return false;
+  if (Array.isArray(effect)) return effect.some(revealsOwnLibrary);
+  const kind = (effect as { readonly kind?: unknown }).kind;
+  if (kind === "discover") return true;
+  if (kind === "reveal-until" && (effect as { readonly whose?: unknown }).whose === undefined) return true;
+  return Object.values(effect).some((value) => value !== null && typeof value === "object" && revealsOwnLibrary(value));
+}
+
 /** Whether `effect` makes something a copy of something else, anywhere in
  * its tree ("becomes a copy of that card until end of turn"). */
 function makesACopy(effect: unknown): boolean {
@@ -4078,16 +4094,11 @@ export class EvalBotController extends HeuristicBotController {
     /** Kept only if this player has lost by the end of the rollout. */
     mustKill?: PlayerId,
   ): number | null {
-    const after = timed(budget, () =>
-      simulateAction(
-        view.state,
-        this.cards,
-        action,
-        this.horizon,
-        this.decisionRollout,
-        this.selfInPriorityRollouts(view.state),
-      ),
-    );
+    const rollout = (state: GameState): GameState | null =>
+      timed(budget, () =>
+        simulateAction(state, this.cards, action, this.horizon, this.decisionRollout, this.selfInPriorityRollouts(state)),
+      );
+    const after = this.revealsOwnLibrary(view.state, action) ? this.typicalDeal(view, action, budget, rollout) : rollout(view.state);
     if (after === null) {
       this.trace?.(action, after);
       return null;
@@ -4133,6 +4144,64 @@ export class EvalBotController extends HeuristicBotController {
     // the game (a kept live game, D75RS-9 turn 15, 2026-11-22).
     if (this.escapes(view.state, after)) return ESCAPES + value;
     return value;
+  }
+
+  /**
+   * Whether `action` reveals cards from the top of our own library until one
+   * is found (`reveal-until`, discover), in its effect or, for a spell, in a
+   * trigger of the card's (an enters trigger): what it brings is whichever
+   * card of the library's order comes first, and that order is the one thing
+   * here the seat can't know. Not under `libraryOrder: "real"`, which reads it.
+   */
+  private revealsOwnLibrary(state: GameState, action: Action): boolean {
+    if (this.libraryOrder === "real") return false;
+    if (action.type !== "activate-ability" && action.type !== "cast-spell") return false;
+    const name = state.objects[action.type === "cast-spell" ? action.card : action.source]?.cardName;
+    if (name === undefined || !this.cards.has(name)) return false;
+    const def = this.cards.get(name);
+    if (action.type === "activate-ability") return revealsOwnLibrary(def.activated?.[action.abilityIndex]?.effect);
+    return revealsOwnLibrary(def.effect) || revealsOwnLibrary(def.castModal) || revealsOwnLibrary(def.triggered);
+  }
+
+  /**
+   * The rollout of `action` over {@link OWN_LIBRARY_DEALS} deals of our own
+   * library (`withHiddenCards`' `ownLibraryDeal`: the turn's own deal first,
+   * every other zone as it is), and the one that ends at the median score:
+   * the reveal as it typically comes out, rather than as the turn's one deal
+   * has it. Reported from a live game (2026-11-25): Jace, Multiverse
+   * Architect's −3 at a token, from a library of big creatures, read as a
+   * disaster whenever the deal put Dack Fayden, Helping Hand first — his
+   * enters trigger gives three creatures away — and in three deals of ten on
+   * one board it scored 15 under passing, so the bot passed its turn.
+   * `null` as the first deal's rollout is (the clock).
+   */
+  private typicalDeal(
+    view: ControllerView,
+    action: Action,
+    budget: SearchBudget,
+    rollout: (state: GameState) => GameState | null,
+  ): GameState | null {
+    const me = this.playerId;
+    const aimed = aimedAt(view.state, this.cards, me, action);
+    const ends: { readonly after: GameState; readonly value: number }[] = [];
+    for (let deal = 0; deal < OWN_LIBRARY_DEALS; deal += 1) {
+      if (deal > 0) {
+        if (spent(budget)) break;
+        budget.left -= 1;
+      }
+      const state =
+        deal === 0 ? view.state : withHiddenCards(view.state, this.cards, me, { memory: this.memory, ownLibraryDeal: deal });
+      const after = rollout(state);
+      if (after === null) {
+        if (deal === 0) return null;
+        break;
+      }
+      const lost = after.players[me]?.hasLost === true;
+      ends.push({ after, value: lost ? -Infinity : scoreOutcome(this.outcomeAimed(after, aimed, this.passOutcome), this.weights) });
+    }
+    ends.sort((a, b) => a.value - b.value);
+    // The lower of two middles, when the clock cut the deals to an even count.
+    return ends[Math.floor((ends.length - 1) / 2)]?.after ?? null;
   }
 
   /** Whether `after`, the board a candidate's turn ends on, is the way out
@@ -4212,6 +4281,15 @@ export class EvalBotController extends HeuristicBotController {
               ),
               this.weights,
             ),
+      // A reveal from our own library, as the one-move search weighs it
+      // (`typicalDeal`): the turn's deal and four more. Cast Jace, then his
+      // −3, was a line on the turn's deal alone, and the plan played the +1.
+      redeals: (state, move) =>
+        this.revealsOwnLibrary(state, move)
+          ? Array.from({ length: OWN_LIBRARY_DEALS - 1 }, (_, i) =>
+              withHiddenCards(state, this.cards, this.playerId, { memory: this.memory, ownLibraryDeal: i + 1 }),
+            )
+          : null,
       mayAttack: (state) => {
         const me = this.playerId;
         const opponents = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost);

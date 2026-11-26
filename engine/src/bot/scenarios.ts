@@ -44,6 +44,7 @@ import { HeuristicBotController } from "../controller.js";
 import type { ControllerView, PlayerController } from "../controller.js";
 import { Game } from "../game.js";
 import { appendJournal } from "../journal.js";
+import { SAMPLE_DECKS } from "../sample-decks.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { printedCardName } from "../state.js";
@@ -577,6 +578,96 @@ function cardOf(game: Game, id: ObjectId | null): string {
  * `hand` held back, casts `dragon` at his discount with `mountains`: paused
  * at Sarkhan's "you may become a copy", or a failure if it never asked. Bob
  * at 12 behind two Bears. */
+/**
+ * Reported from a live game (2026-11-25): the Multiverse Reforged bot never
+ * used Jace, Multiverse Architect's −3 over several turns. The deck's line is
+ * a token out, then the −3 at it: the token is exiled (and gone, rule 111.7)
+ * and the library's next creature or planeswalker enters — a 2/2 Army for an
+ * Akroma. The board is one from a bot game of the deck (seed 6, turn 25):
+ * Jace cast this turn on 4 loyalty, every land tapped, Dreadhorde
+ * Invasion's Army, four Phyrexian Mites, the deck's own library. v2 passed
+ * its turn there. It reads a reveal on its deal of the library it can't see
+ * (`withHiddenCards`), one a turn, and the deal kept putting Dack Fayden,
+ * Helping Hand first — whose enters trigger gives three creatures away — so
+ * the −3 scored 15 under passing turn after turn. Asked on `turns` turns in a
+ * row of ours, each its own deal; `null` when every one aimed the −3 at a
+ * token, else what it did instead.
+ */
+function jaceAtAToken(registry: CardRegistry, weights: EvalWeights, makeBot: BotFactory, turns: number): string | null {
+  const wrong: string[] = [];
+  for (let k = 0; k < turns; k += 1) {
+    const game = table(registry, [A, B, C, D], A);
+    game.state.turn.number += 4 * k;
+    for (const land of ["Clifftop Retreat", "Swamp", "Prairie Stream", "Turbulent Crater", "Mountain", "Caves of Koilos", "Plains"]) {
+      onBoard(game, land, A, true);
+    }
+    appendJournal(game.state, { kind: "land-played", player: A });
+    const inPlay = ["Dreadhorde Invasion", "Jace, Multiverse Architect"];
+    onBoard(game, "Dreadhorde Invasion", A);
+    const army = onBoard(game, "Army Token", A);
+    game.state.objects[army].isToken = true;
+    game.state.objects[army].counters["+1/+1"] = 2;
+    for (let i = 0; i < 4; i += 1) game.state.objects[onBoard(game, "Phyrexian Mite Token", A)].isToken = true;
+    const jace = onBoard(game, "Jace, Multiverse Architect", A);
+    game.state.objects[jace].counters.loyalty = 4;
+    const hand = ["Venser, Fervent Forger", "Synthetic Destiny", "Flawless Maneuver", "Nissa, Leyline Tamer", "Sunfall"];
+    for (const name of hand) game.debugSpawn(name, A, "hand");
+    lands(game, "Mountain", B, 4);
+    onBoard(game, "Minion of the Mighty", B);
+    lands(game, "Mountain", C, 6);
+    lands(game, "Island", D, 6);
+    for (const p of [B, C]) game.state.objects[onBoard(game, "Boar Token", p)].isToken = true;
+    // The deck's own library, in a fixed order (every 37th card round the
+    // list), less what is out or in hand; the forests `table` dealt go.
+    const used = new Set([...inPlay, ...hand, "Clifftop Retreat", "Prairie Stream", "Turbulent Crater", "Caves of Koilos"]);
+    const names = (SAMPLE_DECKS.find((d) => d.name === "Multiverse Reforged")?.cards ?? []).filter((n) => !used.has(n));
+    const library: ObjectId[] = [];
+    for (let i = 0; i < names.length; i += 1) library.push(game.debugSpawn(names[(i * 37) % names.length], A, "library"));
+    game.state.zones.perPlayer[A].library = library;
+    const turn = game.state.turn.number;
+    const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+    if (!minusAtToken(game, taken, jace)) {
+      wrong.push(`turn ${turn}: ${taken.filter((a) => a.type !== "pass-priority").map(describeAction).join(" | ") || "passed the turn"}`);
+    }
+  }
+  return wrong.length === 0 ? null : wrong.join("; ");
+}
+
+/**
+ * The same, from the other end: Jace on 4 since last turn, no token yet, and
+ * Lingering Souls in hand — the line is the Spirits first, then the −3 at
+ * one. The bot plays its turn out; `null` when the −3 went at a token.
+ */
+function jaceMakesAToken(registry: CardRegistry, weights: EvalWeights, makeBot: BotFactory): string | null {
+  const game = table(registry, [A, B, C, D], A);
+  for (const land of ["Plains", "Island", "Swamp", "Mountain", "Plains", "Swamp"]) onBoard(game, land, A);
+  for (const p of [B, C, D]) {
+    lands(game, "Forest", p, 6);
+    onBoard(game, "Grizzly Bears", p);
+  }
+  const jace = onBoard(game, "Jace, Multiverse Architect", A);
+  game.state.objects[jace].counters.loyalty = 4;
+  appendJournal(game.state, { kind: "land-played", player: A });
+  game.debugSpawn("Lingering Souls", A, "hand");
+  const names = (SAMPLE_DECKS.find((d) => d.name === "Multiverse Reforged")?.cards ?? []).filter((n) => n !== "Lingering Souls");
+  const library: ObjectId[] = [];
+  for (let i = 0; i < names.length; i += 1) library.push(game.debugSpawn(names[(i * 37) % names.length], A, "library"));
+  game.state.zones.perPlayer[A].library = library;
+  const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+  return minusAtToken(game, taken, jace)
+    ? null
+    : taken.filter((a) => a.type !== "pass-priority").map(describeAction).join(" | ") || "passed the turn";
+}
+
+/** Whether `taken` holds Jace's −3 aimed at a token. An exiled token ceases
+ * to exist (rule 111.7), so by the end of the turn it may be gone. */
+function minusAtToken(game: Game, taken: readonly Action[], jace: ObjectId): boolean {
+  const minus = taken.find((a) => a.type === "activate-ability" && a.source === jace && a.abilityIndex === 1);
+  const target = minus?.type === "activate-ability" ? minus.targets?.[0] : undefined;
+  const aimed = target?.kind === "object" ? game.state.objects[target.object] : undefined;
+  return target?.kind === "object" && (aimed === undefined || aimed.isToken === true);
+}
+
 function sarkhanAsked(
   registry: CardRegistry,
   hand: readonly string[],
@@ -7422,6 +7513,22 @@ const SCENARIOS: readonly BotScenario[] = [
         passed: zone === "stack" || zone === "battlefield",
         detail: `Ganax ${zone}; played ${played.join(" | ")}`,
       };
+    },
+  },
+  {
+    name: "aims Jace, Multiverse Architect's −3 at a token, whatever the deal of its library",
+    rule: "Jace's −3 turns a 2/2 Army token into the library's next creature or planeswalker: worth it on most orders of the deck, so the bot fires it.",
+    run(weights, registry, makeBot) {
+      const wrong = jaceAtAToken(registry, weights, makeBot, 6);
+      return { passed: wrong === null, detail: wrong ?? "the −3 at a token every turn" };
+    },
+  },
+  {
+    name: "makes a token for Jace, Multiverse Architect's −3, then uses it",
+    rule: "With no token out, cast Lingering Souls first, then Jace's −3 turns a Spirit into the library's next creature.",
+    run(weights, registry, makeBot) {
+      const wrong = jaceMakesAToken(registry, weights, makeBot);
+      return { passed: wrong === null, detail: wrong ?? "Lingering Souls, then the −3 at a Spirit" };
     },
   },
   {

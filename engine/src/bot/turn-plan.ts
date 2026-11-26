@@ -79,6 +79,12 @@ export interface TurnPlanHooks {
    * without one, passing through combat changes nothing a move after it is
    * worth, and the step isn't tried. */
   mayAttack(state: GameState): boolean;
+  /** For a move whose outcome is the order of our own library (a reveal
+   * from it), `state` dealt again that many more ways: the move is resolved
+   * on each and the line goes on from the median one
+   * (`EvalBotController.typicalDeal`'s reading, here). `null` for any other
+   * move. */
+  redeals?(state: GameState, move: Action): readonly GameState[] | null;
 }
 
 export interface TurnPlanLimits {
@@ -328,10 +334,29 @@ export function planTurn(
    * a `null` is asked once more how the move resolves.
    */
   const settle = (node: Node, move: Action, board: string): Node | null => {
-    const [settled, ended] = spend(() => {
-      const s = simulateSettled(node.game.state, registry, me, move);
-      return [s, s === null ? simulateAction(node.game.state, registry, move, "stack", "combat") : s.state] as const;
-    });
+    const resolve = (from: GameState) =>
+      spend(() => {
+        const s = simulateSettled(from, registry, me, move);
+        return [s, s === null ? simulateAction(from, registry, move, "stack", "combat") : s.state] as const;
+      });
+    let [settled, ended] = resolve(node.game.state);
+    // A reveal from our own library: resolved on each deal, and the one
+    // whose line passed out comes to the median goes on.
+    const deals = settled === null || ended?.result.over === true ? null : (hooks.redeals?.(node.game.state, move) ?? null);
+    if (settled !== null && deals !== null && deals.length > 0) {
+      const tried: { readonly game: Game; readonly value: number }[] = [];
+      for (const game of [settled, ...deals.map((deal) => (out() ? null : resolve(deal)[0]))]) {
+        if (game === null || game.state.result.over || out()) continue;
+        const end = spend(() => passOut(game.state, registry, me));
+        if (end !== null) tried.push({ game, value: hooks.value(end) });
+      }
+      tried.sort((a, b) => a.value - b.value);
+      const typical = tried[Math.floor((tried.length - 1) / 2)];
+      if (typical !== undefined) {
+        settled = typical.game;
+        ended = typical.game.state;
+      }
+    }
     if (ended?.result.over === true) {
       const line = after(node, move, board, node.game);
       lines.push({ steps: line.steps, boards: line.boards, before: line.before, value: hooks.value(ended, line), end: ended });

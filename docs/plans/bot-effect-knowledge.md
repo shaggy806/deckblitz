@@ -1352,6 +1352,41 @@ scenarios: paid with nothing to cast, declined when the {4} is the turn's spell)
 strong decks with a Mana Vault): 0 of 5,203 decisions differ over three games; the fourth was
 stopped at the user's word. Nothing else moved, and those games never raised the Vault's case.
 
+### A reveal read on one deal, and a deal that wasn't one (2026-11-25)
+
+A live report (`docs/bot-misplays.md`): the Multiverse Reforged bot didn't use Jace, Multiverse
+Architect's −3 ("exile another creature you control, reveal until a creature or planeswalker,
+put it onto the battlefield") over several turns. In the deck's bot games it mostly did. On the
+board where it didn't, the turn's deal of its library put Dack Fayden, Helping Hand first, and
+his enters trigger gives three creatures away, so the −3 scored 15 under passing. Over ten deals
+of that board the −3 ranged from −14 to +25 against passing's 6.7.
+
+"One deal a turn" had a second fault: the deal's FNV-1a hash had no final mixing, and the card
+ids set much of the order, so the same cards came first turn after turn. Dack led the creatures
+in 42 turns of 200, a land was the top card in 26 (fair shares 12.5 and 2.4). A single sample
+that repeats every turn is no sample at all.
+
+- The hash ends in murmur3's finaliser.
+- A move that reveals from our own library (`reveal-until` of ours, discover, a spell's
+  triggers too) is scored over five deals of that library alone, at the median
+  (`EvalBotController.typicalDeal`): four simulations more per such candidate, and none
+  elsewhere. The turn planner does the same for such a move later in a line
+  (`TurnPlanHooks.redeals`), after which "cast Jace, then −3" stopped losing to "cast Jace,
+  then +1". Averaging every line over several deals, which the BACKLOG item on what the bots
+  still know names, stays undone.
+- The `libraryTop` feature forgets remembered places after a `library-shuffled` in the line.
+  The new deals showed a shuffle could leave a remembered card just under the top and read as
+  known.
+
+`bot:diff` against the commit before, six bench games: 29 of 11,103 decisions differ (0.26%),
+every one of a kind that reads a dealt card (cycle or pass, a tutor's pick, Will of the Jeskai's
+draw five), in both directions. On the deck's own table (Multiverse Reforged, Reign of Dragons,
+Draconic Destruction, Quick Draw; four games, against 2627a1550), before the planner's part:
+71 of 7,337. One was Jace's +1 played where the old build fired the −3, which is what found the
+planner's single deal. After it: 44 of 6,768, none of them Jace's. Leyline Dowser's "mill a
+card" is 17 of them, 11 passing where the old build milled and 6 the other way. That is a
+top-card read too, and one deal still decides it, as it does draws.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

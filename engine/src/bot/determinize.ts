@@ -130,13 +130,25 @@ export function sampleWorlds(
   return Array.from({ length: count }, () => determinize(state, me, rng));
 }
 
-/** FNV-1a over `text`, as an unsigned 32-bit number. */
+/** FNV-1a over `text`, then mixed, as an unsigned 32-bit number. */
 function hash(text: string): number {
   let h = 0x811c9dc5;
   for (let i = 0; i < text.length; i += 1) {
     h ^= text.charCodeAt(i);
     h = Math.imul(h, 0x01000193);
   }
+  // FNV-1a alone leaves the high bits, which the deal sorts by, to the
+  // characters before the card's id: the same cards came first turn after
+  // turn. On one Multiverse Reforged board (2026-11-25) Dack Fayden, Helping
+  // Hand was the library's first creature in 42 turns of 200, three times
+  // his share, so Jace's −3 read as giving creatures away every turn; a
+  // land was the top card in 26, eleven times its share. Murmur3's
+  // finaliser mixes every bit into every other.
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
   return h >>> 0;
 }
 
@@ -182,6 +194,11 @@ export interface HiddenCardsOptions {
   /** `"real"` leaves the other players' hands as they are, and hides only
    * how the libraries lie. */
   readonly hands?: "hidden" | "real";
+  /** Another deal of `me`'s own library alone, keyed by this as well as the
+   * turn: every other zone left as `state` has it. For a move whose outcome
+   * is the order of that library (`revealsOwnLibrary` in `eval-bot.ts`),
+   * weighed over several deals rather than the turn's one. */
+  readonly ownLibraryDeal?: number;
 }
 
 /**
@@ -242,7 +259,8 @@ export function withHiddenCards(
   options: HiddenCardsOptions = {},
 ): GameState {
   const named = namedInFlight(state);
-  const seed = `${state.turn.number}:${me}`;
+  const redeal = options.ownLibraryDeal;
+  const seed = redeal === undefined ? `${state.turn.number}:${me}` : `${state.turn.number}:${me}:deal ${redeal}`;
   const sight = hiddenCardsInSight(state, registry, me);
   const hideHands = options.hands !== "real";
   const answering = hideHands ? playersControlledBy(state, me) : [];
@@ -255,6 +273,7 @@ export function withHiddenCards(
   const perPlayer = { ...state.zones.perPlayer };
   let objects: Record<ObjectId, GameObject> | null = null;
   for (const player of state.turnOrder) {
+    if (redeal !== undefined && player !== me) continue;
     const zones = perPlayer[player];
     if (zones === undefined) continue;
     const library = zones.library;

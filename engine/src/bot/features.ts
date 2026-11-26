@@ -1302,6 +1302,9 @@ export interface LibraryTop {
    * count has moved since left the library in a line we played (drawn and
    * put back, found by a tutor) and is known where it lies now. */
   readonly stints: ReadonlyMap<ObjectId, number>;
+  /** The event sequence number as the decision began: a `library-shuffled`
+   * of this library after it means every remembered place is gone. */
+  readonly since: number;
   /** The quality (`hand-worth.ts`) of an average card of the rest of the
    * library as the decision began — what a draw the seat can't name is
    * worth — read in `state` (whose hand says what a land is worth: the next
@@ -1387,7 +1390,16 @@ export function libraryTopWorth(
     while (n < library.length && (moved(library[n]) || (trustMemory && remembered(library[n])))) n += 1;
     return n;
   };
-  let top = run(true);
+  // Shuffled in the line, the library's remembered places are gone, though
+  // a remembered card may still lie just under the top by chance: Worldly
+  // Tutor's "shuffle and put that card on top" left the Grizzly Bears the
+  // seat had seen second, the pair read as a known top run (a deal of
+  // 2026-11-25, `withHiddenCards`). The test after it catches only a
+  // remembered card lying under one the seat can't name.
+  const shuffled = state.eventLog.some(
+    (event) => event.type === "library-shuffled" && event.player === player && event.seq > context.since,
+  );
+  let top = run(!shuffled);
   if (library.slice(top).some(remembered)) top = run(false);
   if (top === 0) return 0;
   const average = context.average(state, lands, landsWanted);
@@ -1422,6 +1434,7 @@ export function libraryTopOf(
     player,
     known: knownSet,
     stints,
+    since: state.eventSeq,
     average: (at, lands, landsWanted) => {
       // A card's quality reads the hand only for whether a land is already
       // in it (`hand-worth.ts`'s `landsAhead`), so that is all the key needs.

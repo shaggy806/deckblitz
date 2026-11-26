@@ -4,6 +4,59 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-25 — Jace, Multiverse Architect's −3 never used
+
+Status: fixed 2026-11-25. Scenarios: "aims Jace, Multiverse Architect's −3 at a token, whatever
+the deal of its library" and "makes a token for Jace, Multiverse Architect's −3, then uses it"
+(both gate).
+
+Reported by the user: "the bot needs to try and get a token out and then activate the commander
+jace's -3 ability asap, the bot is not using that ability over multiple turns". No game was kept
+with it (the box's games held none where the deck cast Jace), so the boards came from bot games
+of the deck (`Multiverse Reforged` against three Bracket 2 starters, count budgets). The −3 exiles
+a creature of ours and puts the library's next creature or planeswalker onto the battlefield: a
+token for an Akroma. In six games v2 mostly did fire it at 4 loyalty, at a token. In seed 6, turn
+25 it passed the whole turn: Jace cast that turn on 4, an Army token and four Mites out, every
+land tapped.
+
+**Why:** two things in `bot/determinize.ts`, where v2 deals out the cards it can't see.
+1. v2 reads a reveal on its own deal of its library: one deal a turn, the same for every line.
+   In that deal the first creature was Dack Fayden, Helping Hand, whose enters trigger gives
+   three creatures from the library to the opponents. So the −3 scored 15 under passing (−7.1
+   against 7.7), and the +1, priced by `handQuality`, came out 0.4 under passing too. Over ten
+   deals of that board the −3 ran from −14 to +25 against passing's 6.7, and four of the ten
+   declined it.
+2. Worse, the deal was hardly a deal. Its hash (FNV-1a over the turn, the seat and the card's
+   id) had no final mixing, so the card ids decided the order much as the turn did, and the same
+   cards came first turn after turn. On that board Dack was the first creature in 42 turns of
+   200 (his share 12.5), and Contaminated Landscape was the top card in 26 (share 2.4). That is
+   the "over multiple turns": a bad card the hash favours reads as the reveal every turn.
+
+**Fixed:**
+- The hash now ends in murmur3's finaliser, and the 200 turns come out even (Dack 17, the rest
+  15-16). This changes every deal of hidden cards, not just this one.
+- A move whose effect reveals from our own library (`reveal-until` of ours, or discover; for a
+  spell, its triggers too) is now scored over five deals of that library alone
+  (`withHiddenCards`' `ownLibraryDeal`). It is judged by the median deal, and that deal's end is
+  the one the turn planner builds on (`EvalBotController.typicalDeal`). It costs four
+  simulations more per such candidate. Either fix alone passes the scenario; with neither it
+  reads wrong.
+- The turn planner does the same for such a move later in a line (`TurnPlanHooks.redeals`). The
+  first `bot:diff` on the deck's table found the planner still playing "cast Jace, +1" over
+  "cast Jace, −3": it judged the second step on the turn's one deal.
+
+The new hash exposed one more bug, in the `libraryTop` feature. A shuffle in a line is detected
+only by a remembered card lying under one the seat can't name. Worldly Tutor's "shuffle and put
+that card on top" left the Grizzly Bears the seat had seen second, so the pair read as a known
+top run, and the gate's "casts Worldly Tutor at the end of the turn before its own" chose nothing
+to put on top. That gate had passed on a tie that the old deal's random numbers broke. A
+`library-shuffled` event of that library since the decision began (`LibraryTop.since`) now
+forgets every remembered place.
+
+Not fixed: the +1 ("draw two, then put a card back") can score under passing. Its rollout left
+the hand a card bigger but 1.5 cards worse by `handQuality`, its mana value 7 lower, so the card
+put back looks like one worth keeping. Recorded in `BACKLOG.md`.
+
 ## 2026-11-24 — Logic Knot cast at X = 46, exiling the whole graveyard
 
 Status: fixed 2026-11-24. No scenario: the choice is made where candidates are built, not by the
