@@ -1,10 +1,10 @@
 # Rules audit, November 2026
 
-Status: **two slices done** (2026-11-17). The first (players who leave the game, combat, the
-turn's skip rules) found three violations, fixed, and a fourth recorded for a design call. The
-second (casting, resolving, how a multiplayer game goes on) found none in the engine and one in
-the client's log wording. Thirty-four probes stay as tests. The slices to take next are at the
-end.
+Status: **three slices done** (2026-11-17, 2026-11-26). The first (players who leave the game,
+combat, the turn's skip rules) found three violations, fixed, and a fourth recorded for a design
+call. The second (casting, resolving, how a multiplayer game goes on) found none in the engine and
+one in the client's log wording. The third (keywords two at a time) found none. Forty-eight probes
+stay as tests. The slices to take next are at the end.
 
 ## Why
 
@@ -130,6 +130,30 @@ The four uncited leads left at the end of the second slice, each probed against 
 - **603.2g** holds by construction: a replaced event never happens (614.6), so nothing emits it,
   and a prevented one emits only its prevention.
 
+## Third slice: keywords two at a time (2026-11-26)
+
+No violation. Rule 702's uncited subrules are nearly all "is a static ability", "multiple instances
+are redundant" or "each triggers separately" (the triggered keywords are authored as one ability
+per instance, so a granted second instance triggers on its own: exalted, prowess, annihilator), and
+every keyword has its own test file. So the slice probed where two meet, or where one meets
+prevention, regeneration or a counter — `keyword-interactions-audit.test.ts`, fourteen tests, two of
+them controls showing the setup bites:
+
+- Protection's prevented damage gains no lifelink life and destroys nothing by deathtouch
+  (702.15b, 702.2b); a trampler still assigns a protected blocker lethal and tramples only the rest
+  (702.19c); deathtouch's destruction can be regenerated (701.19a) and doesn't touch an
+  indestructible creature (702.12b); a 0-power deathtouch source destroys nothing (702.2b).
+- A first-striking deathtouch blocker kills a double-striking trampler in the first step, so
+  there's no second (702.7b, 702.4b); double strike with lifelink gains in both steps.
+- A persist creature killed by wither damage keeps its -1/-1 counters and stays dead (702.80a,
+  702.79a); without wither it persists (the control).
+- An overloaded spell targets nothing, so ward doesn't trigger (702.96b, 702.21a); cast at a
+  warded creature unoverloaded, it does (the control).
+- Four players: myriad's copies enter attacking, not declared, so the one declared attacker still
+  gets exalted (702.83b), and the copies are exiled at end of combat (702.116a); annihilator makes
+  only the defending player sacrifice (702.86a); two creatures attacking two different players
+  aren't attacking alone.
+
 ## Next slices
 
 By how far the citations fall short and how much play runs through them (`rules:uncited --
@@ -139,9 +163,8 @@ By how far the citations fall short and how much play runs through them (`rules:
    of the rulebook: a log is every event, so a step, a trigger or a hit that shouldn't be there
    is a line in it. A log with every hand revealed (BACKLOG, Client / UI) would show more. The
    scans used here are a few lines each: life arithmetic, events after a loss, each turn's steps.
-2. **702**, keywords: 496 of 771 cited. Long, and each keyword has its own test file; take the
-   uncited subrules of the twenty most-played keywords first, probing interactions between two
-   keywords rather than one alone.
+2. ~~**702**, keywords~~: the third slice, above. Left in it, if wanted: the keywords of a
+   copied or face-down permanent, and keywords on spells (cascade into a split card).
 3. **903**, Commander: 18 of 49, a third of the rest being Brawl and Draft. Merged and melded
    commanders (903.3c, 903.9c) are the uncited ones with behaviour.
 4. **614-616** by interaction: two replacement effects on one event, with the affected player's
