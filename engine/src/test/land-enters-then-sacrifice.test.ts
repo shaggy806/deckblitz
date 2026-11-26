@@ -8,10 +8,11 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { defineCard } from "../cards/define.js";
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
 
-import { A, B, cast, lands, nextTurn, settle, spawn, table, toHand } from "./harness.js";
+import { A, B, cast, lands, life, nextTurn, settle, spawn, table, toHand } from "./harness.js";
 
 const landsOf = (game: Game, player: PlayerId): number =>
   game.state.zones.shared.battlefield.filter((id) => {
@@ -27,7 +28,41 @@ function bobPlaysForest(game: Game): void {
   settle(game);
 }
 
+/** A test sorcery: "Put a land card from your hand onto the battlefield, then
+ * you gain 1 life for each land you control." */
+const SURVEY = "Test Land Survey";
+const survey = defineCard({
+  name: SURVEY,
+  manaCost: "{G}",
+  colors: ["G"],
+  types: ["sorcery"],
+  text: "Put a land card from your hand onto the battlefield, then you gain 1 life for each land you control.",
+  targets: [],
+  effect: {
+    kind: "sequence",
+    effects: [
+      { kind: "look-and-choose", zone: "hand", min: 1, max: 1, destination: "battlefield", leftover: "stay", filter: { type: "land" } },
+      { kind: "gain-life", amount: { countOf: { type: "land", controlledBy: "you" } } },
+    ],
+  },
+});
+
 describe("Land Equilibrium", () => {
+  it("the sacrifice is part of the land's entering: the rest of the spell sees it gone", () => {
+    const { game, b } = table({ ownRegistry: true });
+    game.registry.register(survey);
+    b.chooseFromZoneFn = (_view, eligible) => eligible.slice(0, 1);
+    spawn(game, "Land Equilibrium", A);
+    lands(game, "Island", 3, A);
+    lands(game, "Forest", 3, B);
+    nextTurn(game);
+    toHand(game, "Plains", B);
+    cast(game, toHand(game, SURVEY, B), { player: B });
+    expect(landsOf(game, B)).toBe(3);
+    // Three lands as the gain is counted, not four.
+    expect(life(game, B)).toBe(23);
+  });
+
   it("an opponent with as many lands plays a land, then sacrifices a land", () => {
     const { game } = table();
     spawn(game, "Land Equilibrium", A);

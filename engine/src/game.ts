@@ -75967,7 +75967,16 @@ controlledBy,
     const now = this.state.objects[id]?.zone;
     if (moved && now === "battlefield") {
       for (const then of thens) {
+        // Part of the one replaced event (rules 614.1a, 614.6): a sacrifice
+        // it orders is chosen and made now, as the land enters — asked at
+        // once where there's a choice, before anything else in the
+        // resolution reads the board — not at the next fixpoint.
+        const queued = this.state.pendingSacrifices.length === 0 && this.state.pendingSacrificeVictims.length === 0;
         this.runReplacedBy(then.effect, then.source, then.controller, { object: id, player: then.putter, key: then.key });
+        if (queued && this.state.awaiting === null && this.state.heldChoices === undefined) {
+          this.promptNextSacrifice();
+          if (this.state.awaiting === null && this.state.pendingSacrificeVictims.length > 0) this.drainPendingSacrificeVictims();
+        }
       }
     }
     if (seenOnTop && now === "hand" && !this.state.revealedThisTurn.includes(id)) this.state.revealedThisTurn.push(id);

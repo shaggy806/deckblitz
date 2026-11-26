@@ -744,7 +744,9 @@ export interface OthersEnterReplacement {
    * enters as it would, and then, as part of the same event, before anyone
    * could tap it for mana (the ruling), `effect` runs as this permanent's
    * effect, `"trigger-player"` the player who put it there and
-   * `"trigger-object"` the permanent. Read for a card put onto the battlefield
+   * `"trigger-object"` the permanent; a sacrifice it orders is chosen and made
+   * right then, before the rest of a resolution putting it there reads the
+   * board (rule 614.6). Read for a card put onto the battlefield
    * — played (rule 305.1) or by an effect, however it enters and under whose
    * control (the ruling) — not a token being created.
    */
