@@ -8387,12 +8387,13 @@ export function parseSentence(sentence, ctx) {
     };
   }
   // "… would deal damage this turn, prevent that damage": any recipient
-  // (Pilgrim of Virtue); "to you and/or creatures you control" (Shadowbane).
-  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage (to you and\\/or creatures you control )?this turn, prevent that damage`).exec(s))) {
+  // (Pilgrim of Virtue); "to you and/or creatures you control" (Shadowbane);
+  // "to enchanted creature" (Kithkin Armor: what the Aura was attached to).
+  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage (to you and\\/or creatures you control |to (?:enchanted|equipped) creature )?this turn, prevent that damage`).exec(s))) {
     return {
       kind: "prevent-damage-from-chosen-source",
       ...(m[1] !== undefined ? { filter: { colors: [COLOR_WORDS[m[1].toLowerCase()]] } } : {}),
-      to: m[2] !== undefined ? "your-side-creatures" : "any",
+      to: m[2] === undefined ? "any" : m[2].startsWith("to you") ? "your-side-creatures" : "attached",
       amount: "next-time",
     };
   }
@@ -27097,8 +27098,10 @@ function parseStatic(line, text) {
     return { affects: { scope: "attached" }, assignAsThoughUnblocked: true, text };
   }
   // "… with toughness 3 or greater" (Ghost of Ramirez DePietro) too.
-  if ((m = /^~ can't be blocked by creatures with (power|toughness) (\d+) or (less|greater)\.$/.exec(line))) {
-    return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { [m[1]]: { op: m[3] === "less" ? "lte" : "gte", n: Number(m[2]) } } }], text };
+  // "Enchanted creature can't be blocked by …" (Kithkin Armor): the host.
+  if ((m = /^(~|Enchanted creature|Equipped creature) can't be blocked by creatures with (power|toughness) (\d+) or (less|greater)\.$/.exec(line))) {
+    const scope = m[1] === "~" ? "self" : "attached";
+    return { affects: { scope }, restrictions: [{ kind: "cant-be-blocked", by: { [m[2]]: { op: m[4] === "less" ? "lte" : "gte", n: Number(m[3]) } } }], text };
   }
   // "… by creatures the monarch controls" (Azure Fleet Admiral, rule 725).
   if (line === "~ can't be blocked by creatures the monarch controls.") {

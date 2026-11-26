@@ -3244,7 +3244,8 @@
   "mechanic:sectors",
   "effect:for-each-player-except-target",
   "effect:counter-choice-each-created-token",
-  "effect:for-each-counter-kind-among-permanents"
+  "effect:for-each-counter-kind-among-permanents",
+  "effect:prevent-chosen-source-to-attached"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

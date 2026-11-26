@@ -11274,8 +11274,12 @@ export type EffectSpec =
        * Way, one shield over them all) — `"your-side-creatures"`, "you and/or
        * creatures you control" (Shadowbane), and `"any"`, any recipient
        * (Reflect Damage's, Pilgrim of Virtue's "would deal damage this
-       * turn"). */
-      readonly to: "you" | number | "your-side" | "your-side-creatures" | "any";
+       * turn"). `"attached"` is what the source enchants or equips — as it
+       * was last attached, the source sacrificed for the cost: "Sacrifice
+       * this Aura: The next time a source of your choice would deal damage
+       * to enchanted creature this turn, prevent that damage" (Kithkin
+       * Armor). Nothing happens once that creature has left. */
+      readonly to: "you" | number | "attached" | "your-side" | "your-side-creatures" | "any";
       /** `"all"`: all the damage that source would deal it this turn, never
        * used up (Kor Chant; Prahv's and Burrenton Forge-Tender's are `to:
        * "any"`, Auriok Replica's `to: "you"`). */

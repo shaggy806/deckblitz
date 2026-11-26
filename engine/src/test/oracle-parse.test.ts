@@ -5119,6 +5119,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Sacrifice this creature: Prevent all damage a red source of your choice would deal this turn.", "Creature").activated[0].effect).toEqual({ ...chosen, filter: { colors: ["R"] }, to: "any", amount: "all" });
     expect(face("{W}, Sacrifice this creature: Prevent all damage a source of your choice would deal to you this turn.", "Creature").activated[0].effect).toEqual({ ...chosen, to: "you", amount: "all" });
     expect(face("{W}, Sacrifice this creature: The next time a black source of your choice would deal damage this turn, prevent that damage.", "Creature").activated[0].effect).toEqual({ ...chosen, filter: { colors: ["B"] }, to: "any", amount: "next-time" });
+    // To what the Aura enchanted, sacrificed for the cost (Kithkin Armor).
+    expect(face("Sacrifice this Aura: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.", "Enchantment — Aura").activated[0].effect).toEqual({ ...chosen, to: "attached", amount: "next-time" });
     // Half of it, rounded down (Dark Sphere).
     const sphere = face("{T}, Sacrifice this artifact: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.", "Artifact");
     expect(sphere.activated[0].effect).toEqual({ ...chosen, to: "you", amount: "next-time", half: "down" });

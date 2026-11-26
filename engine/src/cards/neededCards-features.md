@@ -8843,3 +8843,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A counter chosen for each created token (2026-11-26).** `effect:counter-choice-each-created-token`: no engine code — a `for-each-permanent` over `thisWay: "created"` with a `modal` per token, each token a replacement adds asked too. Invoke the Ancients. `test/created-tokens-counter-choice.test.ts`.
 
 **An effect for each kind of counter among your permanents (2026-11-26).** `effect:for-each-counter-kind-among-permanents`: the `for-each-counter-kind` effect — `among`'s kinds read once as it begins, `effect` once each with `CHOSEN_COUNTER` the kind (in a counter name and in a label). Bribe Taker. `test/for-each-counter-kind.test.ts`.
+
+**A chosen source's damage to what the Aura enchanted (2026-11-26).** `effect:prevent-chosen-source-to-attached`: `prevent-damage-from-chosen-source`'s `to: "attached"`, the `"attached"` ObjectRef read as the Aura last existed after it's sacrificed for the cost. Kithkin Armor. `test/prevent-chosen-source-to-attached.test.ts`.
