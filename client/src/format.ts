@@ -214,6 +214,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `The turn order is reversed: ${event.turnOrder.map((p) => who(p)).join(', ')}`
     case 'turn-skipped':
       return `${who(event.player)} skips a turn`
+    case 'delayed-trigger-paid-off':
+      return `${who(event.player)} pays ${event.cost} so ${name(event.source)}'s delayed ability won't trigger (${event.text})`
     case 'static-effect-ignored':
       return `${who(event.player)} pays ${event.cost} to ignore ${name(event.object)}'s effect until end of turn`
     case 'player-control-began':

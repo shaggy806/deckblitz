@@ -25448,3 +25448,21 @@ describe("gain control while tapped, of a creature whose controller controls an 
     });
   });
 });
+
+describe("a delayed harm paid off before its step (Glass Asp, Nafs Asp)", () => {
+  it("reads 'unless they pay {2} before that step' as unlessPaid", () => {
+    const asp = parseFace({
+      name: "Glass Asp",
+      type_line: "Creature — Snake",
+      oracle_text:
+        "Whenever this creature deals combat damage to a player, that player loses 2 life at the beginning of their next draw step unless they pay {2} before that step.",
+    });
+    expect(asp.complete).toBe(true);
+    expect(asp.triggered[0].effect).toMatchObject({
+      kind: "delayed-trigger",
+      at: { step: "draw", whose: "trigger-player" },
+      unlessPaid: { by: "trigger-player", cost: "{2}" },
+      effect: { kind: "lose-life", amount: 2, who: "that-player" },
+    });
+  });
+});

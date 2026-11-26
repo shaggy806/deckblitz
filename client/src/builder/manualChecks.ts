@@ -13913,6 +13913,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Sabertooth Cobra: paying {2} stops the second poison counter',
+    board({
+      you: { bf: ['Mountain*3', 'Forest*2', 'Sabertooth Cobra'], hand: ["Soul's Fire"] },
+    }),
+  ),
+  preset(
+    'Sabertooth Cobra: four players, only the damaged player may pay',
+    board({
+      you: { bf: ['Mountain*3', 'Forest*2', 'Sabertooth Cobra'], hand: ["Soul's Fire"] },
+      opp: [{ bf: ['Forest*2'] }, { bf: ['Forest*2'] }, { bf: ['Forest*2'] }],
+    }),
+  ),
+  preset(
     'Brutal Cathar: day is shown in the top strip',
     board({
       you: { bf: ['Plains*3'], hand: ['Brutal Cathar'] },

@@ -5981,6 +5981,10 @@ export interface DelayedTrigger {
   readonly x?: number;
   readonly player?: PlayerId;
   readonly remembered?: { readonly [name: string]: readonly SetMember[] };
+  /** "… unless they pay {2} before that step" (Sabertooth Cobra, Glass Asp):
+   * `player` may pay `cost` any time they have priority while this waits, a
+   * special action that removes it (rule 116.2c, `pay-delayed-deadline`). */
+  readonly unlessPaid?: { readonly player: PlayerId; readonly cost: string };
   readonly effect: EffectSpec;
   readonly text: string;
 }

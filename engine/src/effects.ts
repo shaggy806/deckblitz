@@ -6010,6 +6010,15 @@ export type EffectSpec =
        * 603.7c). The ability keeps its creator's X and "that player" too.
        */
       readonly remember?: { readonly [name: string]: RememberSpec };
+      /**
+       * "… at the beginning of their next upkeep **unless they pay {2} before
+       * that step**" (Sabertooth Cobra, Glass Asp, Quenchable Fire): `by`,
+       * read as this resolves, may pay `cost` any time they have priority
+       * while the ability waits — a special action that doesn't use the
+       * stack, and stops it from triggering (rule 116.2c). Once its step has
+       * begun it's too late. Step timings only.
+       */
+      readonly unlessPaid?: { readonly by: PlayerRef; readonly cost: string };
     }
   | {
       /** "That creature enters with two additional +1/+1 counters on it"
@@ -14470,6 +14479,8 @@ export interface EffectApi {
     extras?: {
       readonly remembered?: { readonly [name: string]: readonly SetMember[] };
       readonly if?: StaticCondition;
+      /** See `DelayedTrigger.unlessPaid`. */
+      readonly unlessPaid?: { readonly player: PlayerId; readonly cost: string };
     },
   ): void;
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
@@ -22875,8 +22886,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         const { remember: _remember, if: condition, ...rest } = spec;
         applyEffectSpec(rest, {
           ...ctx,
-          delayTrigger: (at, effect, text, controller, own) =>
+          delayTrigger: (at, effect, text, controller, own, inner) =>
             ctx.delayTrigger(at, effect, text, controller, own, {
+              ...inner,
               ...(remembered !== undefined ? { remembered } : {}),
               ...(condition !== undefined ? { if: condition } : {}),
             }),
@@ -23055,22 +23067,28 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // that is is fixed now too.
       const at = readDelayedAt(spec.at, controller, (ref) => resolvePlayerRef(ref, ctx));
       if (at === undefined) return;
+      // "Unless they pay {2} before that step": who may, fixed now (116.2c).
+      const payer = spec.unlessPaid === undefined ? undefined : resolvePlayerRef(spec.unlessPaid.by, ctx);
+      const paid =
+        spec.unlessPaid !== undefined && payer !== undefined
+          ? { unlessPaid: { player: payer, cost: spec.unlessPaid.cost } }
+          : undefined;
       const aboutBlocks = bindSetUpPlayers(bindBlockPartners(spec.effect, ctx), ctx);
       if (aboutBlocks !== spec.effect) {
-        ctx.delayTrigger(at, aboutBlocks, spec.text, controller, []);
+        ctx.delayTrigger(at, aboutBlocks, spec.text, controller, [], paid);
         return;
       }
       if (spec.about === "attached") {
         const host = objectRefAct("attached", ctx);
-        if (host !== undefined) ctx.delayTrigger(at, spec.effect, spec.text, controller, [host]);
+        if (host !== undefined) ctx.delayTrigger(at, spec.effect, spec.text, controller, [host], paid);
         return;
       }
       if (spec.about !== undefined) {
         const done = delayedAboutTargets(spec, spec.about, ctx);
-        if (done.length > 0 || spec.orNone === true) ctx.delayTrigger(at, spec.effect, spec.text, controller, done);
+        if (done.length > 0 || spec.orNone === true) ctx.delayTrigger(at, spec.effect, spec.text, controller, done, paid);
         return;
       }
-      ctx.delayTrigger(at, spec.effect, spec.text, controller);
+      ctx.delayTrigger(at, spec.effect, spec.text, controller, undefined, paid);
       return;
     }
     case "enters-with-counters": {

@@ -9174,3 +9174,13 @@ Each board's die comes up 4.
 ### Space Beleren: −1 counters one sector only
 - **Do:** Cast Space Beleren. Put Grizzly Bears in Alpha and Hill Giant in Gamma. Activate the −1 and choose Alpha sector.
 - **Expect:** Grizzly Bears (and Llanowar Elves, if Bob's bot put it in Alpha) gets a +1/+1 counter; Hill Giant doesn't.
+
+## Paying before a delayed ability's step (2026-11-26)
+
+### Sabertooth Cobra: paying {2} stops the second poison counter
+- **Do:** Cast Soul's Fire: Sabertooth Cobra deals its damage to you. Then click "Sabertooth Cobra: pay {2}" on your player row.
+- **Expect:** You get one poison counter, and the button appears once the trigger resolves. Clicking it taps two lands, nothing goes on the stack, and the log says you paid. At your next upkeep no second poison counter comes.
+
+### Sabertooth Cobra: four players, only the damaged player may pay
+- **Do:** Cast Soul's Fire: Sabertooth Cobra deals its damage to you.
+- **Expect:** "Sabertooth Cobra: pay {2}" appears on your row only; no other player's row has it.

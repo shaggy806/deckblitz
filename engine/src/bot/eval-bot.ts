@@ -36,6 +36,7 @@ import type { GameState } from "../state.js";
 import { matchesFilter } from "../filter.js";
 import type { CardFilter } from "../filter.js";
 import { manaValue, parseManaCost } from "../mana.js";
+import { delayedDeadlineToPay } from "./delayed-deadline.js";
 import { computeCharacteristics, playerProtectedFrom, withComputedCache } from "../characteristics.js";
 import { whyCannotAttack } from "../combat/eligibility.js";
 import { Game } from "../game.js";
@@ -1717,6 +1718,14 @@ export class EvalBotController extends HeuristicBotController {
     // through `answerAwaited`, which calls back into this class's own
     // `declareAttackers`/`declareBlockers`. The rest are searched here.
     if (view.state.awaiting !== null) return this.decide(view, inherited);
+
+    // **A delayed harm paid off at its last window** (`delayed-deadline.ts`):
+    // it lands past what the search plays out.
+    const deadline = delayedDeadlineToPay(view.state, this.playerId, view.legalActions());
+    if (deadline !== null) {
+      this.lastDecision = audit("priority", null, "delayed deadline paid");
+      return deadline;
+    }
 
     // **Mana a card in hand makes** (`handManaLine`: Simian Spirit Guide, with
     // a free rock cast first). The candidates leave mana abilities out and

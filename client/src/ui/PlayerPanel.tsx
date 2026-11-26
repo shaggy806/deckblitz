@@ -82,6 +82,14 @@ export interface PlayerPanelProps {
    * add {C}", rule 605.3a), each with its words and what activating it does,
    * when you could activate one now. */
   readonly heldManaAbilities?: readonly { readonly text: string; readonly onActivate: () => void }[]
+  /** Delayed abilities you may pay to stop from triggering ("… unless they
+   * pay {2} before that step", rule 116.2c), when you could pay now. */
+  readonly delayedPayments?: readonly {
+    readonly cardName: string
+    readonly cost: string
+    readonly text: string
+    readonly onPay: () => void
+  }[]
   readonly targetable?: boolean
   /** Picked in a decision still being built (a proliferate's players). */
   readonly selected?: boolean
@@ -144,6 +152,7 @@ export function PlayerPanel({
   onTakeCompanion,
   companionCost,
   heldManaAbilities = [],
+  delayedPayments = [],
   targetable = false,
   selected = false,
   aimedBy = null,
@@ -485,6 +494,21 @@ export function PlayerPanel({
             }}
           >
             <Symbols text={held.text} />
+          </button>
+        ))}
+        {delayedPayments.map((pay, i) => (
+          <button
+            key={pay.cardName + pay.text + i}
+            type="button"
+            className="pp-zone-link"
+            title={`Pay ${pay.cost} so ${pay.cardName}'s delayed ability won't trigger: ${pay.text}`}
+            data-delayed-pay={info.id}
+            onClick={(e) => {
+              e.stopPropagation()
+              pay.onPay()
+            }}
+          >
+            {pay.cardName}: pay <Symbols text={pay.cost} />
           </button>
         ))}
         <span>

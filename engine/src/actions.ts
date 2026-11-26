@@ -544,6 +544,14 @@ export type Action =
       readonly permanent: ObjectId;
     }
   | {
+      /** Pay to stop a delayed ability from triggering — "… unless they pay
+       * {2} before that step" (Sabertooth Cobra): a special action any time
+       * you have priority while it waits (rule 116.2c). `delayed` is its id. */
+      readonly type: "pay-delayed-deadline";
+      readonly player: PlayerId;
+      readonly delayed: string;
+    }
+  | {
       /** Activate a mana ability the player has rather than a permanent
        * (Channel's "any time you could activate a mana ability, you may pay
        * 1 life. If you do, add {C}" — rule 605.3a): `ability` is its offer's.
@@ -1317,6 +1325,15 @@ export type LegalAction =
       readonly permanent: ObjectId;
       readonly cardName: string;
       readonly cost: string;
+    }
+  | {
+      /** A delayed ability you may pay `cost` to stop from triggering (rule
+       * 116.2c): `cardName` is its source's, `text` what it would do. */
+      readonly kind: "pay-delayed-deadline";
+      readonly delayed: string;
+      readonly cardName: string;
+      readonly cost: string;
+      readonly text: string;
     }
   | {
       /** A mana ability the player has rather than a permanent (rule 605.3a

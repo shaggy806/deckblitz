@@ -3801,6 +3801,31 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "That player loses 2 life at the beginning of their next draw step unless
+  // they pay {2} before that step" (Glass Asp, Nafs Asp, Sabertooth Cobra):
+  // a delayed ability its player may pay off any time they have priority
+  // before then (`unlessPaid`, rule 116.2c).
+  {
+    const m =
+      /^(?:that|the) player (loses (\d+|one|two|three) life|gets (?:a|another) poison counter) at the beginning of their next (upkeep|draw step) unless they pay ((?:\{[^}]+\})+) before that (?:draw )?step\.$/i.exec(
+        s,
+      );
+    if (m !== null) {
+      const words = { one: 1, two: 2, three: 3 };
+      const who = ctx?.thatPlayer ?? "trigger-player";
+      const effect =
+        m[2] !== undefined
+          ? { kind: "lose-life", amount: words[m[2].toLowerCase()] ?? Number(m[2]), who: "that-player" }
+          : { kind: "add-player-counters", counter: "poison", amount: 1, who: "that-player" };
+      return {
+        kind: "delayed-trigger",
+        at: { step: m[3].toLowerCase() === "upkeep" ? "upkeep" : "draw", whose: who },
+        unlessPaid: { by: who, cost: m[4] },
+        effect,
+        text: s,
+      };
+    }
+  }
   // "Put a charge counter on ~ for each untapped land that player controls"
   // (Mana Cache, at the beginning of each player's end step: the active
   // player) or "… you control": the count read as it resolves.

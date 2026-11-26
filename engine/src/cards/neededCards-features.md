@@ -8838,6 +8838,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Each player keeps up to N, the rest phase out (2026-11-22, B338).** `effect:each-player-chooses-permanents-rest-phase-out`: `sacrifice-all-but` takes `startingWithYou`, `rest: "phase-out"` and `exceptSource`; "Permanents can't phase in" is a static `phase-in` prohibition with `object: {}`. Disciple of Caelus Nin. `test/top10000-batch-338n-disciple.test.ts`.
 
+**A delayed harm paid off before its step (2026-11-26).** `effect:pay-before-delayed-deadline`: the `delayed-trigger` effect's `unlessPaid { by, cost }`, kept as `DelayedTrigger.unlessPaid`; the payer's `pay-delayed-deadline` special action (rule 116.2c, `Game.payDelayedDeadline`) removes it, offered on their player panel; v2 pays at its last window (`bot/delayed-deadline.ts`). Sabertooth Cobra, Glass Asp, Nafs Asp (Quenchable Fire next). `test/pay-before-delayed-deadline.test.ts`.
+
 **A repeated choice that can't take an earlier pass's card (2026-11-22, B338).** `effect:repeat-choice-excluding-earlier-passes`: `CardFilter.thisWayScope` — `"across-passes"` reads every pass of the `repeat` under way (`GameState.repeatSince`), `"last"` only the most recent object done this way. A `repeat` of a look-and-choose (`chooser: { target: 0 }`, `destination: "stay"`) with `mayAgain.cost`, then `return-from-graveyard` of the last chosen. Shrouded Lore, Forgotten Lore. `test/top10000-batch-338n-lore.test.ts`.
 
 **A counter chosen for each created token (2026-11-26).** `effect:counter-choice-each-created-token`: no engine code — a `for-each-permanent` over `thisWay: "created"` with a `modal` per token, each token a replacement adds asked too. Invoke the Ancients. `test/created-tokens-counter-choice.test.ts`.

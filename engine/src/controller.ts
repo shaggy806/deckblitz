@@ -2056,6 +2056,8 @@ export class RandomController extends AutomaticController {
         return { type: "end-licid-effect", player, permanent: legal.permanent };
       case "ignore-static-effect":
         return { type: "ignore-static-effect", player, permanent: legal.permanent };
+      case "pay-delayed-deadline":
+        return { type: "pay-delayed-deadline", player, delayed: legal.delayed };
       case "player-mana-ability":
         return { type: "player-mana-ability", player, ability: legal.ability };
       case "cycle":

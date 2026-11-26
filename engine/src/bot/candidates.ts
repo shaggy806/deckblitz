@@ -384,6 +384,10 @@ export function candidateActions(
     // a search it lets through can make worth the mana.
     case "ignore-static-effect":
       return [{ type: "ignore-static-effect", player, permanent: legal.permanent }];
+    // Paying off Sabertooth Cobra's later poison counter (rule 116.2c): weighed
+    // like any other play.
+    case "pay-delayed-deadline":
+      return [{ type: "pay-delayed-deadline", player, delayed: legal.delayed }];
     case "cycle":
       return [{ type: "cycle", player, card: legal.card }];
     // A mana ability the bot has (Channel): never floated by hand — every

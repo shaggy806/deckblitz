@@ -3596,6 +3596,9 @@ export class Game {
       case "ignore-static-effect":
         this.ignoreStaticEffect(action.player, action.permanent);
         break;
+      case "pay-delayed-deadline":
+        this.payDelayedDeadline(action.player, action.delayed);
+        break;
       case "player-mana-ability": {
         const why = this.whyCannotHeldManaAbility(action.player, action.ability);
         if (why !== null) throw new Error(why);
@@ -4089,6 +4092,8 @@ export class Game {
         return this.whyCannotEndLicidEffect(action.player, action.permanent);
       case "ignore-static-effect":
         return this.whyCannotIgnoreStatic(action.player, action.permanent);
+      case "pay-delayed-deadline":
+        return this.whyCannotPayDelayedDeadline(action.player, action.delayed);
       case "player-mana-ability":
         return this.whyCannotHeldManaAbility(action.player, action.ability);
       case "cycle":
@@ -5068,6 +5073,20 @@ export class Game {
       const cost = staticIgnoreCost(this.state, this.registry, this.state.objects[id]);
       if (cost === null || this.whyCannotIgnoreStatic(player, id) !== null) continue;
       out.push({ kind: "ignore-static-effect", permanent: id, cardName: printedCardName(this.state.objects[id]), cost });
+    }
+
+    // Paying to stop a delayed ability from triggering (rule 116.2c): any
+    // time its payer has priority, while it waits.
+    for (const delayed of this.state.delayedTriggers) {
+      if (delayed.unlessPaid?.player !== player) continue;
+      if (this.whyCannotPayDelayedDeadline(player, delayed.id) !== null) continue;
+      out.push({
+        kind: "pay-delayed-deadline",
+        delayed: delayed.id,
+        cardName: delayed.sourceName,
+        cost: delayed.unlessPaid.cost,
+        text: delayed.text,
+      });
     }
 
     this.pushActivations(player, out);
@@ -63092,6 +63111,37 @@ controlledBy,
     this.afterPlayerAction(player);
   }
 
+  private whyCannotPayDelayedDeadline(player: PlayerId, id: string): string | null {
+    const blocked = this.whyCannotAct(player);
+    if (blocked !== null) return blocked;
+    const delayed = this.state.delayedTriggers.find((d) => d.id === id);
+    if (delayed?.unlessPaid === undefined) return "there's no such payment to make";
+    if (delayed.unlessPaid.player !== player) return `${player} can't pay for that`;
+    if (this.payMana(player, parseManaCost(delayed.unlessPaid.cost)) === null) {
+      return `${player} cannot pay ${delayed.unlessPaid.cost}`;
+    }
+    return null;
+  }
+
+  /** "… unless they pay {2} before that step" (Sabertooth Cobra, Glass Asp):
+   * a special action, so nothing can respond (rule 116.2c) and the player
+   * keeps priority (116.3). Paid, the delayed ability waits no longer — it
+   * never triggers. Each such ability is paid for on its own (Nafs Asp's
+   * ruling: damaged twice, the player pays or loses life twice). */
+  private payDelayedDeadline(player: PlayerId, id: string): void {
+    const why = this.whyCannotPayDelayedDeadline(player, id);
+    if (why !== null) throw new Error(why);
+    const delayed = this.state.delayedTriggers.find((d) => d.id === id);
+    const cost = delayed?.unlessPaid?.cost ?? "";
+    const payment = this.payMana(player, parseManaCost(cost));
+    if (delayed === undefined || payment === null) throw new Error(`${player} cannot pay ${cost}`);
+    this.executePayment(player, payment);
+    this.state.delayedTriggers = this.state.delayedTriggers.filter((d) => d.id !== id);
+    invalidateComputedCache();
+    this.emit({ type: "delayed-trigger-paid-off", player, source: delayed.source, cost, text: delayed.text });
+    this.afterPlayerAction(player);
+  }
+
   /** Turn a face-down permanent face up (rules 701.40b, 702.37e): show
    * everyone the card, pay the cost, and it has its own characteristics
    * again — the same permanent, so it doesn't enter the battlefield (708.8)
@@ -64090,6 +64140,8 @@ controlledBy,
       readonly remembered?: { readonly [name: string]: readonly SetMember[] };
       /** Its intervening "if" (rule 603.4). */
       readonly if?: StaticCondition;
+      /** See `DelayedTrigger.unlessPaid`. */
+      readonly unlessPaid?: { readonly player: PlayerId; readonly cost: string };
     } = {},
   ): void {
     let when:
@@ -64246,6 +64298,7 @@ controlledBy,
       ...(creator.x !== undefined && creator.x !== 0 ? { x: creator.x } : {}),
       ...(creator.refs?.player !== undefined ? { player: creator.refs.player } : {}),
       ...(creator.remembered !== undefined ? { remembered: creator.remembered } : {}),
+      ...(creator.unlessPaid !== undefined ? { unlessPaid: creator.unlessPaid } : {}),
       effect,
       text,
     });

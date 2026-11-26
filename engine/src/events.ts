@@ -444,6 +444,15 @@ export type GameEvent =
       readonly cost: string;
     })
   | (Base & {
+      readonly type: "delayed-trigger-paid-off";
+      /** `player` paid `cost` so that `source`'s delayed ability, which would
+       * have done `text`, never triggers (rule 116.2c — Sabertooth Cobra). */
+      readonly player: PlayerId;
+      readonly source: ObjectId;
+      readonly cost: string;
+      readonly text: string;
+    })
+  | (Base & {
       readonly type: "door-unlocked";
       /** A Room was given an unlocked designation (rule 709.5h): its `door`
        * (the card's left or right half), by `player` — as it entered with the

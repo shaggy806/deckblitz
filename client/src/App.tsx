@@ -2532,6 +2532,13 @@ function Table({
     for (const a of actions) if (a.kind === 'take-companion') return a
     return undefined
   }, [actions])
+  // A delayed ability you may pay to stop ("unless they pay {2} before that
+  // step", rule 116.2c — Sabertooth Cobra): on your own panel, since its
+  // source may well be gone.
+  const delayedPayments = useMemo(
+    () => actions.filter((a): a is Extract<LegalAction, { kind: 'pay-delayed-deadline' }> => a.kind === 'pay-delayed-deadline'),
+    [actions],
+  )
   // A mana ability you have rather than a permanent (Channel's "pay 1 life:
   // add {C}", rule 605.3a): on your own panel too, for the same reason.
   const heldManaAbilities = useMemo(
@@ -7977,6 +7984,16 @@ function Table({
         ? {
             onTakeCompanion: () => game.dispatch({ type: 'take-companion', player: seat }),
             companionCost: takeCompanion.cost,
+          }
+        : {})}
+      {...(pid === seat && mode === 'priority' && delayedPayments.length > 0
+        ? {
+            delayedPayments: delayedPayments.map((pay) => ({
+              cardName: pay.cardName,
+              cost: pay.cost,
+              text: pay.text,
+              onPay: () => game.dispatch({ type: 'pay-delayed-deadline', player: seat, delayed: pay.delayed }),
+            })),
           }
         : {})}
       {...(pid === seat && mode === 'priority' && heldManaAbilities.length > 0
