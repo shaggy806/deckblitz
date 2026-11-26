@@ -533,6 +533,7 @@ import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMasumaroFirstToLive from "../pool/masumaro-first-to-live.js";
 import _poolMathIsForBlockers from "../pool/math-is-for-blockers.js";
+import _poolMatopiGolem from "../pool/matopi-golem.js";
 import _poolMedomaisProphecy from "../pool/medomais-prophecy.js";
 import _poolMelancholy from "../pool/melancholy.js";
 import _poolMelting from "../pool/melting.js";
@@ -644,6 +645,7 @@ import _poolPloverKnights from "../pool/plover-knights.js";
 import _poolPlunder from "../pool/plunder.js";
 import _poolPointTheWay from "../pool/point-the-way.js";
 import _poolPolJamaarIllusionist from "../pool/pol-jamaar-illusionist.js";
+import _poolPollenRemedy from "../pool/pollen-remedy.js";
 import _poolPorcelainLegionnaire from "../pool/porcelain-legionnaire.js";
 import _poolPossessedNomad from "../pool/possessed-nomad.js";
 import _poolPouncingWurm from "../pool/pouncing-wurm.js";
@@ -1570,6 +1572,7 @@ const shard: CardShard = {
     _poolMastersGuideMural,
     _poolMasumaroFirstToLive,
     _poolMathIsForBlockers,
+    _poolMatopiGolem,
     _poolMedomaisProphecy,
     _poolMelancholy,
     _poolMelting,
@@ -1681,6 +1684,7 @@ const shard: CardShard = {
     _poolPlunder,
     _poolPointTheWay,
     _poolPolJamaarIllusionist,
+    _poolPollenRemedy,
     _poolPorcelainLegionnaire,
     _poolPossessedNomad,
     _poolPouncingWurm,

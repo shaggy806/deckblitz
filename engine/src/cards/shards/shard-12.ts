@@ -233,6 +233,7 @@ import _poolDirgurFocusmage from "../pool/dirgur-focusmage.js";
 import _poolDisaTheRestless from "../pool/disa-the-restless.js";
 import _poolDiscipleOfKangee from "../pool/disciple-of-kangee.js";
 import _poolDisenchant from "../pool/disenchant.js";
+import _poolDismantle from "../pool/dismantle.js";
 import _poolDisorderInTheCourt from "../pool/disorder-in-the-court.js";
 import _poolDisturbingMirth from "../pool/disturbing-mirth.js";
 import _poolDivination from "../pool/divination.js";
@@ -1291,6 +1292,7 @@ const shard: CardShard = {
     _poolDisaTheRestless,
     _poolDiscipleOfKangee,
     _poolDisenchant,
+    _poolDismantle,
     _poolDisorderInTheCourt,
     _poolDisturbingMirth,
     _poolDivination,

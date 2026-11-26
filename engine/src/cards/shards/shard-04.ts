@@ -797,6 +797,7 @@ import _poolSpicyOatmealPizza from "../pool/spicy-oatmeal-pizza.js";
 import _poolSpiderBot from "../pool/spider-bot.js";
 import _poolSpiderManToTheRescue from "../pool/spider-man-to-the-rescue.js";
 import _poolSpikeBreeder from "../pool/spike-breeder.js";
+import _poolSpikeshellHarrier from "../pool/spikeshell-harrier.js";
 import _poolSpiritOfTheAldergard from "../pool/spirit-of-the-aldergard.js";
 import _poolSpiritualize from "../pool/spiritualize.js";
 import _poolSpitFlame from "../pool/spit-flame.js";
@@ -1846,6 +1847,7 @@ const shard: CardShard = {
     _poolSpiderBot,
     _poolSpiderManToTheRescue,
     _poolSpikeBreeder,
+    _poolSpikeshellHarrier,
     _poolSpiritOfTheAldergard,
     _poolSpiritualize,
     _poolSpitFlame,

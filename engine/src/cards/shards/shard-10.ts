@@ -999,6 +999,7 @@ import _poolVraanExecutionerThane from "../pool/vraan-executioner-thane.js";
 import _poolVraskaSoulOfStone from "../pool/vraska-soul-of-stone.js";
 import _poolVrynWingmare from "../pool/vryn-wingmare.js";
 import _poolVulshokGauntlets from "../pool/vulshok-gauntlets.js";
+import _poolWakandanRoyalGuard from "../pool/wakandan-royal-guard.js";
 import _poolWallOfBrambles from "../pool/wall-of-brambles.js";
 import _poolWallOfFire from "../pool/wall-of-fire.js";
 import _poolWallOfForgottenPharaohs from "../pool/wall-of-forgotten-pharaohs.js";
@@ -2071,6 +2072,7 @@ const shard: CardShard = {
     _poolVraskaSoulOfStone,
     _poolVrynWingmare,
     _poolVulshokGauntlets,
+    _poolWakandanRoyalGuard,
     _poolWallOfBrambles,
     _poolWallOfFire,
     _poolWallOfForgottenPharaohs,

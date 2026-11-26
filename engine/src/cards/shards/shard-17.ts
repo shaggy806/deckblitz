@@ -119,6 +119,7 @@ import _poolBrightPalmSoulAwakener from "../pool/bright-palm-soul-awakener.js";
 import _poolBronzebeakForagers from "../pool/bronzebeak-foragers.js";
 import _poolBroodguardElite from "../pool/broodguard-elite.js";
 import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
+import _poolBullseyeDeathDealer from "../pool/bullseye-death-dealer.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
@@ -1182,6 +1183,7 @@ const shard: CardShard = {
     _poolBronzebeakForagers,
     _poolBroodguardElite,
     _poolBuddingInsurgent,
+    _poolBullseyeDeathDealer,
     _poolBuriedInTheGarden,
     _poolBurlfistOak,
     _poolBurrowingRazormaw,

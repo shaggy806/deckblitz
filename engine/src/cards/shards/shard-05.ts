@@ -71,6 +71,7 @@ import _poolAvengersAssemble from "../pool/avengers-assemble.js";
 import _poolAvizoa from "../pool/avizoa.js";
 import _poolAxebaneFerox from "../pool/axebane-ferox.js";
 import _poolBabaLysagaNightWitch from "../pool/baba-lysaga-night-witch.js";
+import _poolBackFromTheBrink from "../pool/back-from-the-brink.js";
 import _poolBagOfStroopwafels from "../pool/bag-of-stroopwafels.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBalanceOfPower from "../pool/balance-of-power.js";
@@ -1127,6 +1128,7 @@ const shard: CardShard = {
     _poolAvizoa,
     _poolAxebaneFerox,
     _poolBabaLysagaNightWitch,
+    _poolBackFromTheBrink,
     _poolBagOfStroopwafels,
     _poolBairdArgivianRecruiter,
     _poolBalanceOfPower,

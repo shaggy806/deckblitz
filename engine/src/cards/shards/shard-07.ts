@@ -500,6 +500,7 @@ import _poolKyscuDrake from "../pool/kyscu-drake.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLadySun from "../pool/lady-sun.js";
 import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
+import _poolLaquatussCreativity from "../pool/laquatuss-creativity.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
 import _poolLastingFayth from "../pool/lasting-fayth.js";
@@ -1591,6 +1592,7 @@ const shard: CardShard = {
     _poolLabyrinthAdversary,
     _poolLadySun,
     _poolLagonnaBandTrailblazer,
+    _poolLaquatussCreativity,
     _poolLashweedLurker,
     _poolLastWord,
     _poolLastingFayth,

@@ -500,6 +500,7 @@ import _poolJudgeUnworthy from "../pool/judge-unworthy.js";
 import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
+import _poolKaerveksTorch from "../pool/kaerveks-torch.js";
 import _poolKairiTheSwirlingSky from "../pool/kairi-the-swirling-sky.js";
 import _poolKaisoMemoryOfLoyalty from "../pool/kaiso-memory-of-loyalty.js";
 import _poolKaitoBaneOfNightmares from "../pool/kaito-bane-of-nightmares.js";
@@ -1605,6 +1606,7 @@ const shard: CardShard = {
     _poolJunkJet,
     _poolJwariScuttler,
     _poolKabiraTakedown,
+    _poolKaerveksTorch,
     _poolKairiTheSwirlingSky,
     _poolKaisoMemoryOfLoyalty,
     _poolKaitoBaneOfNightmares,

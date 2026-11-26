@@ -814,6 +814,7 @@ import _poolSmolderingEgg from "../pool/smoldering-egg.js";
 import _poolSnakeUmbra from "../pool/snake-umbra.js";
 import _poolSnowCoveredForest from "../pool/snow-covered-forest.js";
 import _poolSoaringHope from "../pool/soaring-hope.js";
+import _poolSoldeviSentry from "../pool/soldevi-sentry.js";
 import _poolSolitaryCell from "../pool/solitary-cell.js";
 import _poolSoltariCrusader from "../pool/soltari-crusader.js";
 import _poolSongOfCreation from "../pool/song-of-creation.js";
@@ -1903,6 +1904,7 @@ const shard: CardShard = {
     _poolSnakeUmbra,
     _poolSnowCoveredForest,
     _poolSoaringHope,
+    _poolSoldeviSentry,
     _poolSolitaryCell,
     _poolSoltariCrusader,
     _poolSongOfCreation,

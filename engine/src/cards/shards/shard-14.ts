@@ -598,6 +598,7 @@ import _poolMistmoonGriffin from "../pool/mistmoon-griffin.js";
 import _poolMistwalker from "../pool/mistwalker.js";
 import _poolMizzixReplicaRider from "../pool/mizzix-replica-rider.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
+import _poolMobMentality from "../pool/mob-mentality.js";
 import _poolMoggJailer from "../pool/mogg-jailer.js";
 import _poolMoiraUrborgHaunt from "../pool/moira-urborg-haunt.js";
 import _poolMoldgrafMillipede from "../pool/moldgraf-millipede.js";
@@ -625,6 +626,7 @@ import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
 import _poolNiblisOfTheBreath from "../pool/niblis-of-the-breath.js";
 import _poolNicolBolasPlaneswalker from "../pool/nicol-bolas-planeswalker.js";
+import _poolNikoDefiesDestiny from "../pool/niko-defies-destiny.js";
 import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
@@ -1661,6 +1663,7 @@ const shard: CardShard = {
     _poolMistwalker,
     _poolMizzixReplicaRider,
     _poolMnemonicSphere,
+    _poolMobMentality,
     _poolMoggJailer,
     _poolMoiraUrborgHaunt,
     _poolMoldgrafMillipede,
@@ -1688,6 +1691,7 @@ const shard: CardShard = {
     _poolNettleGuard,
     _poolNiblisOfTheBreath,
     _poolNicolBolasPlaneswalker,
+    _poolNikoDefiesDestiny,
     _poolNikyaOfTheOldWays,
     _poolNivMizzetParun,
     _poolNoMercy,
