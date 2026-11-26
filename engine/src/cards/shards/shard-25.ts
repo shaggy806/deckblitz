@@ -652,6 +652,7 @@ import _poolPreacher from "../pool/preacher.js";
 import _poolPriceOfLoyalty from "../pool/price-of-loyalty.js";
 import _poolPrideSovereign from "../pool/pride-sovereign.js";
 import _poolPrimevalProtector from "../pool/primeval-protector.js";
+import _poolPrimitiveEtchings from "../pool/primitive-etchings.js";
 import _poolPrimocEscapee from "../pool/primoc-escapee.js";
 import _poolPrismariCampus from "../pool/prismari-campus.js";
 import _poolProdigalPyromancer from "../pool/prodigal-pyromancer.js";
@@ -1687,6 +1688,7 @@ const shard: CardShard = {
     _poolPriceOfLoyalty,
     _poolPrideSovereign,
     _poolPrimevalProtector,
+    _poolPrimitiveEtchings,
     _poolPrimocEscapee,
     _poolPrismariCampus,
     _poolProdigalPyromancer,

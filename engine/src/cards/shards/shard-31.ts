@@ -734,6 +734,7 @@ import _poolPrisonSentence from "../pool/prison-sentence.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
 import _poolProphesiedEnd from "../pool/prophesied-end.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
+import _poolPsychogenicProbe from "../pool/psychogenic-probe.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
 import _poolPulmonicSliver from "../pool/pulmonic-sliver.js";
 import _poolPunishTheEnemy from "../pool/punish-the-enemy.js";
@@ -1860,6 +1861,7 @@ const shard: CardShard = {
     _poolPromiseOfAclazotz,
     _poolProphesiedEnd,
     _poolPsychicBarrier,
+    _poolPsychogenicProbe,
     _poolPsychomancer,
     _poolPulmonicSliver,
     _poolPunishTheEnemy,

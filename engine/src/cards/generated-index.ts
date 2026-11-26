@@ -934,6 +934,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Braska's Final Aeon": "https://cards.scryfall.io/art_crop/back/4/e/4ec91fe8-b3da-47fa-b45e-94b62a260aba.jpg",
   "Brass's Tunnel-Grinder": "https://cards.scryfall.io/art_crop/front/d/6/d61d8895-7f2e-4c77-951f-4f1a49e96f57.jpg",
   "Brigid, Doun's Mind": "https://cards.scryfall.io/art_crop/back/c/b/cb7d5bbb-4f68-4e38-8bb0-a95af21b24c8.jpg",
+  "Brinebound Gift": "https://cards.scryfall.io/art_crop/back/8/d/8d233bc5-8a08-4d38-abd4-21a112141afd.jpg",
   "Bring Back": "https://cards.scryfall.io/art_crop/back/8/a/8a665794-513f-4f78-92c9-1844ec27c79c.jpg",
   "Bring to Life": "https://cards.scryfall.io/art_crop/back/3/2/32158458-42eb-41bc-a15a-11af28463eb0.jpg",
   "Bubble Up": "https://cards.scryfall.io/art_crop/back/e/6/e6f03f21-aeb9-428b-9167-b2604919bdd8.jpg",

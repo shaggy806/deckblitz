@@ -356,6 +356,7 @@ import _poolFrogSquirrels from "../pool/frog-squirrels.js";
 import _poolFrostLynx from "../pool/frost-lynx.js";
 import _poolFrostcliffSiege from "../pool/frostcliff-siege.js";
 import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
+import _poolFugitiveDruid from "../pool/fugitive-druid.js";
 import _poolFungusElemental from "../pool/fungus-elemental.js";
 import _poolFuriousForebear from "../pool/furious-forebear.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
@@ -1443,6 +1444,7 @@ const shard: CardShard = {
     _poolFrostLynx,
     _poolFrostcliffSiege,
     _poolFuelTheFlames,
+    _poolFugitiveDruid,
     _poolFungusElemental,
     _poolFuriousForebear,
     _poolFurtiveAnalyst,

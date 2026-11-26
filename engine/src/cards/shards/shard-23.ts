@@ -126,6 +126,7 @@ import _poolBreatheYourLast from "../pool/breathe-your-last.js";
 import _poolBreathlessKnight from "../pool/breathless-knight.js";
 import _poolBreenaTheDemagogue from "../pool/breena-the-demagogue.js";
 import _poolBriarbladeAdept from "../pool/briarblade-adept.js";
+import _poolBrineboundGift from "../pool/brinebound-gift.js";
 import _poolBroodheartEngine from "../pool/broodheart-engine.js";
 import _poolBurstLightning from "../pool/burst-lightning.js";
 import _poolBushyBodyguard from "../pool/bushy-bodyguard.js";
@@ -1206,6 +1207,7 @@ const shard: CardShard = {
     _poolBreathlessKnight,
     _poolBreenaTheDemagogue,
     _poolBriarbladeAdept,
+    _poolBrineboundGift,
     _poolBroodheartEngine,
     _poolBurstLightning,
     _poolBushyBodyguard,

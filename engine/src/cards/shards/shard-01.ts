@@ -105,6 +105,7 @@ import _poolBrallinSkysharkRider from "../pool/brallin-skyshark-rider.js";
 import _poolBreakDownTheDoor from "../pool/break-down-the-door.js";
 import _poolBreakthrough from "../pool/breakthrough.js";
 import _poolBreathWeapon from "../pool/breath-weapon.js";
+import _poolBrineComber from "../pool/brine-comber.js";
 import _poolBringDown from "../pool/bring-down.js";
 import _poolBringerOfTheBlackDawn from "../pool/bringer-of-the-black-dawn.js";
 import _poolBrokenBond from "../pool/broken-bond.js";
@@ -1156,6 +1157,7 @@ const shard: CardShard = {
     _poolBreakDownTheDoor,
     _poolBreakthrough,
     _poolBreathWeapon,
+    _poolBrineComber,
     _poolBringDown,
     _poolBringerOfTheBlackDawn,
     _poolBrokenBond,

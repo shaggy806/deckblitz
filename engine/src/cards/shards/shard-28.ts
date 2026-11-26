@@ -531,6 +531,7 @@ import _poolMartialGlory from "../pool/martial-glory.js";
 import _poolMassAppeal from "../pool/mass-appeal.js";
 import _poolMassCalcify from "../pool/mass-calcify.js";
 import _poolMassOfGhouls from "../pool/mass-of-ghouls.js";
+import _poolMastersCouncillors from "../pool/masters-councillors.js";
 import _poolMaulSplicer from "../pool/maul-splicer.js";
 import _poolMbakuJabariChieftain from "../pool/mbaku-jabari-chieftain.js";
 import _poolMeasureOfWickedness from "../pool/measure-of-wickedness.js";
@@ -745,6 +746,7 @@ import _poolRootwalla from "../pool/rootwalla.js";
 import _poolRoseTyler from "../pool/rose-tyler.js";
 import _poolRotHulk from "../pool/rot-hulk.js";
 import _poolRoterothopter from "../pool/roterothopter.js";
+import _poolRowen from "../pool/rowen.js";
 import _poolRoyalDecree from "../pool/royal-decree.js";
 import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
@@ -1612,6 +1614,7 @@ const shard: CardShard = {
     _poolMassAppeal,
     _poolMassCalcify,
     _poolMassOfGhouls,
+    _poolMastersCouncillors,
     _poolMaulSplicer,
     _poolMbakuJabariChieftain,
     _poolMeasureOfWickedness,
@@ -1826,6 +1829,7 @@ const shard: CardShard = {
     _poolRoseTyler,
     _poolRotHulk,
     _poolRoterothopter,
+    _poolRowen,
     _poolRoyalDecree,
     _poolRubblebeltRioters,
     _poolRuneclawBear,

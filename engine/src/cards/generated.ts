@@ -3577,12 +3577,14 @@ import _poolBrimstoneVandal from "./pool/brimstone-vandal.js";
 import _poolBrimstoneVolley from "./pool/brimstone-volley.js";
 import _poolBrindleBoar from "./pool/brindle-boar.js";
 import _poolBrindleShoat from "./pool/brindle-shoat.js";
+import _poolBrineComber from "./pool/brine-comber.js";
 import _poolBrineElemental from "./pool/brine-elemental.js";
 import _poolBrineGiant from "./pool/brine-giant.js";
 import _poolBrineSeer from "./pool/brine-seer.js";
 import _poolBrineShaman from "./pool/brine-shaman.js";
 import _poolBrinebarrowIntruder from "./pool/brinebarrow-intruder.js";
 import _poolBrinebornCutthroat from "./pool/brineborn-cutthroat.js";
+import _poolBrineboundGift from "./pool/brinebound-gift.js";
 import _poolBrinelinTheMoonKraken from "./pool/brinelin-the-moon-kraken.js";
 import _poolBringBack from "./pool/bring-back.js";
 import _poolBringDown from "./pool/bring-down.js";
@@ -10634,6 +10636,7 @@ import _poolFuelForTheCause from "./pool/fuel-for-the-cause.js";
 import _poolFuelTheFlames from "./pool/fuel-the-flames.js";
 import _poolFugitiveCodebreaker from "./pool/fugitive-codebreaker.js";
 import _poolFugitiveDroid from "./pool/fugitive-droid.js";
+import _poolFugitiveDruid from "./pool/fugitive-druid.js";
 import _poolFugitiveListener from "./pool/fugitive-listener.js";
 import _poolFugitiveOfTheJudoon from "./pool/fugitive-of-the-judoon.js";
 import _poolFugitiveWizard from "./pool/fugitive-wizard.js";
@@ -17451,6 +17454,7 @@ import _poolMasterfulReplication from "./pool/masterful-replication.js";
 import _poolMastermindPlum from "./pool/mastermind-plum.js";
 import _poolMastermindsAcquisition from "./pool/masterminds-acquisition.js";
 import _poolMastersCall from "./pool/masters-call.js";
+import _poolMastersCouncillors from "./pool/masters-councillors.js";
 import _poolMastersGuidance from "./pool/masters-guidance.js";
 import _poolMastersGuideMural from "./pool/masters-guide-mural.js";
 import _poolMastersManufactory from "./pool/masters-manufactory.js";
@@ -21322,6 +21326,7 @@ import _poolPrimevalShambler from "./pool/primeval-shambler.js";
 import _poolPrimevalSpawn from "./pool/primeval-spawn.js";
 import _poolPrimevalTitan from "./pool/primeval-titan.js";
 import _poolPrimevalsGloriousRebirth from "./pool/primevals-glorious-rebirth.js";
+import _poolPrimitiveEtchings from "./pool/primitive-etchings.js";
 import _poolPrimoTheUnbounded from "./pool/primo-the-unbounded.js";
 import _poolPrimocEscapee from "./pool/primoc-escapee.js";
 import _poolPrimordialGnawer from "./pool/primordial-gnawer.js";
@@ -21548,6 +21553,7 @@ import _poolPsychicTransfer from "./pool/psychic-transfer.js";
 import _poolPsychicVenom from "./pool/psychic-venom.js";
 import _poolPsychicVortex from "./pool/psychic-vortex.js";
 import _poolPsychicWhorl from "./pool/psychic-whorl.js";
+import _poolPsychogenicProbe from "./pool/psychogenic-probe.js";
 import _poolPsychomancer from "./pool/psychomancer.js";
 import _poolPsychosisCrawler from "./pool/psychosis-crawler.js";
 import _poolPsychoticEpisode from "./pool/psychotic-episode.js";
@@ -23489,6 +23495,7 @@ import _poolRowansTalent from "./pool/rowans-talent.js";
 import _poolRowdyCrew from "./pool/rowdy-crew.js";
 import _poolRowdyResearch from "./pool/rowdy-research.js";
 import _poolRowdySnowballers from "./pool/rowdy-snowballers.js";
+import _poolRowen from "./pool/rowen.js";
 import _poolRoxanneStarfallSavant from "./pool/roxanne-starfall-savant.js";
 import _poolRoxxonBrutes from "./pool/roxxon-brutes.js";
 import _poolRoyalAssassin from "./pool/royal-assassin.js";
@@ -37688,12 +37695,14 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrimstoneVolley,
   _poolBrindleBoar,
   _poolBrindleShoat,
+  _poolBrineComber,
   _poolBrineElemental,
   _poolBrineGiant,
   _poolBrineSeer,
   _poolBrineShaman,
   _poolBrinebarrowIntruder,
   _poolBrinebornCutthroat,
+  _poolBrineboundGift,
   _poolBrinelinTheMoonKraken,
   _poolBringBack,
   _poolBringDown,
@@ -44745,6 +44754,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFuelTheFlames,
   _poolFugitiveCodebreaker,
   _poolFugitiveDroid,
+  _poolFugitiveDruid,
   _poolFugitiveListener,
   _poolFugitiveOfTheJudoon,
   _poolFugitiveWizard,
@@ -51562,6 +51572,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMastermindPlum,
   _poolMastermindsAcquisition,
   _poolMastersCall,
+  _poolMastersCouncillors,
   _poolMastersGuidance,
   _poolMastersGuideMural,
   _poolMastersManufactory,
@@ -55433,6 +55444,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPrimevalSpawn,
   _poolPrimevalTitan,
   _poolPrimevalsGloriousRebirth,
+  _poolPrimitiveEtchings,
   _poolPrimoTheUnbounded,
   _poolPrimocEscapee,
   _poolPrimordialGnawer,
@@ -55659,6 +55671,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPsychicVenom,
   _poolPsychicVortex,
   _poolPsychicWhorl,
+  _poolPsychogenicProbe,
   _poolPsychomancer,
   _poolPsychosisCrawler,
   _poolPsychoticEpisode,
@@ -57600,6 +57613,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRowdyCrew,
   _poolRowdyResearch,
   _poolRowdySnowballers,
+  _poolRowen,
   _poolRoxanneStarfallSavant,
   _poolRoxxonBrutes,
   _poolRoyalAssassin,
@@ -71812,12 +71826,14 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brimstone-volley": _poolBrimstoneVolley,
   "pool/brindle-boar": _poolBrindleBoar,
   "pool/brindle-shoat": _poolBrindleShoat,
+  "pool/brine-comber": _poolBrineComber,
   "pool/brine-elemental": _poolBrineElemental,
   "pool/brine-giant": _poolBrineGiant,
   "pool/brine-seer": _poolBrineSeer,
   "pool/brine-shaman": _poolBrineShaman,
   "pool/brinebarrow-intruder": _poolBrinebarrowIntruder,
   "pool/brineborn-cutthroat": _poolBrinebornCutthroat,
+  "pool/brinebound-gift": _poolBrineboundGift,
   "pool/brinelin-the-moon-kraken": _poolBrinelinTheMoonKraken,
   "pool/bring-back": _poolBringBack,
   "pool/bring-down": _poolBringDown,
@@ -78869,6 +78885,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fuel-the-flames": _poolFuelTheFlames,
   "pool/fugitive-codebreaker": _poolFugitiveCodebreaker,
   "pool/fugitive-droid": _poolFugitiveDroid,
+  "pool/fugitive-druid": _poolFugitiveDruid,
   "pool/fugitive-listener": _poolFugitiveListener,
   "pool/fugitive-of-the-judoon": _poolFugitiveOfTheJudoon,
   "pool/fugitive-wizard": _poolFugitiveWizard,
@@ -85686,6 +85703,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mastermind-plum": _poolMastermindPlum,
   "pool/masterminds-acquisition": _poolMastermindsAcquisition,
   "pool/masters-call": _poolMastersCall,
+  "pool/masters-councillors": _poolMastersCouncillors,
   "pool/masters-guidance": _poolMastersGuidance,
   "pool/masters-guide-mural": _poolMastersGuideMural,
   "pool/masters-manufactory": _poolMastersManufactory,
@@ -89557,6 +89575,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/primeval-spawn": _poolPrimevalSpawn,
   "pool/primeval-titan": _poolPrimevalTitan,
   "pool/primevals-glorious-rebirth": _poolPrimevalsGloriousRebirth,
+  "pool/primitive-etchings": _poolPrimitiveEtchings,
   "pool/primo-the-unbounded": _poolPrimoTheUnbounded,
   "pool/primoc-escapee": _poolPrimocEscapee,
   "pool/primordial-gnawer": _poolPrimordialGnawer,
@@ -89783,6 +89802,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/psychic-venom": _poolPsychicVenom,
   "pool/psychic-vortex": _poolPsychicVortex,
   "pool/psychic-whorl": _poolPsychicWhorl,
+  "pool/psychogenic-probe": _poolPsychogenicProbe,
   "pool/psychomancer": _poolPsychomancer,
   "pool/psychosis-crawler": _poolPsychosisCrawler,
   "pool/psychotic-episode": _poolPsychoticEpisode,
@@ -91724,6 +91744,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rowdy-crew": _poolRowdyCrew,
   "pool/rowdy-research": _poolRowdyResearch,
   "pool/rowdy-snowballers": _poolRowdySnowballers,
+  "pool/rowen": _poolRowen,
   "pool/roxanne-starfall-savant": _poolRoxanneStarfallSavant,
   "pool/roxxon-brutes": _poolRoxxonBrutes,
   "pool/royal-assassin": _poolRoyalAssassin,
