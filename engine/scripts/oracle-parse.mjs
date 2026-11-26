@@ -26275,7 +26275,15 @@ function parseStatic(line, text) {
   }
   {
     const fromGraveyard = /^As long as a creature card with flying is in a graveyard, (~) has flying\. The same is true for (.+)\.$/.exec(line);
+    // "If a creature card with flying was exiled with this creature's delve
+    // ability, this creature has flying" (Soulflayer): the creature cards
+    // its printed delve linked to it (rule 607.2q).
+    const delved =
+      /^If a creature card with flying was exiled with (?:~|this creature)'s delve ability, (~) has flying\. The same is true for (.+)\.$/.exec(
+        line,
+      );
     const w =
+      delved ??
       /^(~) has flying as long as (?:an exiled card used to craft it|a card exiled with it) has flying\. The same is true for (.+)\.$/.exec(line) ??
       /^As long as a card exiled with (?:~|it|this creature) has flying, (~|equipped creature) has flying\. The same is true for (.+)\.$/.exec(line) ??
       fromGraveyard;
@@ -26287,6 +26295,7 @@ function parseStatic(line, text) {
         affects: { scope: w[1] === "equipped creature" ? "attached" : "self" },
         sharesKeywords: {
           from: fromGraveyard !== null ? { graveyard: { type: "creature" } } : "exiled-with-source",
+          ...(delved !== null ? { filter: { type: "creature" } } : {}),
           keywords: ["flying", ...listed],
           ...(words.includes("protection") ? { protection: true } : {}),
           ...(words.includes("landwalk") ? { landwalk: true } : {}),

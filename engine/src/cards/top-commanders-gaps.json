@@ -10,6 +10,7 @@
     "effect:change-target-new-target-restricted",
     "filter:attacking-alone",
     "filter:least-power-among-all-creatures",
+    "static:keywords-of-cards-delved",
     "static:tap-opponents-lands-for-mana",
     "effect:add-mana-of-attached-mana-cost",
     "effect:pay-before-delayed-deadline",

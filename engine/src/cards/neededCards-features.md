@@ -8844,6 +8844,8 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Tapping lands you don't control for mana (2026-11-26).** `static:tap-opponents-lands-for-mana`: `player-effect`'s `tapsLandsYouDontControl: ManaSpendOnly` (`PlayerEffect` too), read by `Game.borrowedLandSpend` in `mayActivateAs` / `othersMayActivate` ({T} mana abilities of other players' lands), the mana's spend clause set in `resolveManaAbilityNow` (`withBorrowedSpend`). By hand only: `manaSources` stays the payer's own. Piracy. `test/tap-others-lands-for-mana.test.ts`.
 
+**Keywords of the creature cards a delve exiled (2026-11-26, found built).** `static:keywords-of-cards-delved`: no engine code — a printed delve links what it exiled to the permanent (607.2q, B335), so it's `sharesKeywords: { from: "exiled-with-source", filter: { type: "creature" }, keywords }`; the scaffolder reads the line. Soulflayer. `test/keywords-of-cards-delved.test.ts`.
+
 **A repeated choice that can't take an earlier pass's card (2026-11-22, B338).** `effect:repeat-choice-excluding-earlier-passes`: `CardFilter.thisWayScope` — `"across-passes"` reads every pass of the `repeat` under way (`GameState.repeatSince`), `"last"` only the most recent object done this way. A `repeat` of a look-and-choose (`chooser: { target: 0 }`, `destination: "stay"`) with `mayAgain.cost`, then `return-from-graveyard` of the last chosen. Shrouded Lore, Forgotten Lore. `test/top10000-batch-338n-lore.test.ts`.
 
 **A counter chosen for each created token (2026-11-26).** `effect:counter-choice-each-created-token`: no engine code — a `for-each-permanent` over `thisWay: "created"` with a `modal` per token, each token a replacement adds asked too. Invoke the Ancients. `test/created-tokens-counter-choice.test.ts`.

@@ -25479,3 +25479,19 @@ describe("mana equal to the enchanted permanent's mana cost (Elemental Resonance
     expect(aura.triggered[0].effect).toEqual({ kind: "add-mana", mana: { manaCostOf: "attached" }, amount: 0 });
   });
 });
+
+describe("keywords of the creature cards a delve exiled (Soulflayer)", () => {
+  it("reads them as sharesKeywords over the creature cards exiled with it", () => {
+    const flayer = parseFace({
+      name: "Soulflayer",
+      type_line: "Creature — Demon",
+      oracle_text:
+        "Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nIf a creature card with flying was exiled with this creature's delve ability, this creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, reach, trample, and vigilance.",
+    });
+    expect(flayer.static[0].sharesKeywords).toEqual({
+      from: "exiled-with-source",
+      filter: { type: "creature" },
+      keywords: ["flying", "first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "reach", "trample", "vigilance"],
+    });
+  });
+});
