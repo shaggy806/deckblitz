@@ -7,7 +7,7 @@ one in the client's log wording. The third (keywords two at a time), the fourth 
 and cards leaving the battlefield) and the fifth (two replacement effects on one event) found
 none. The sixth (merged and melded commanders) found three, fixed. The seventh replayed every kept
 game and checked it at every decision (`scripts/game-rules-scan.mjs`), and the eighth probed copies,
-keyword actions and a merged permanent leaving: none. A hundred and thirteen probes stay as tests. The
+keyword actions and a merged permanent leaving: none. A hundred and twenty-one probes stay as tests. The
 slices to take next are at the end.
 
 ## Why
@@ -246,7 +246,13 @@ under Rest in Peace, each is exiled (730.3d); a merged commander exiled that way
 card alone returns. `commander-damage-audit.test.ts`: a commander's damage counts whoever controls it, and a
 Clone of a commander isn't one, so its damage doesn't (903.10a, 903.3). `departed-delayed-audit.test.ts`:
 Flickerwisp's return at the next end step doesn't happen once its controller has left the game, and the
-card stays exiled (800.4d).
+card stays exiled (800.4d). `split-second-audit.test.ts`: under split second the opponent may cast
+nothing and activate only mana abilities, while a prowess trigger still goes on the stack and resolves
+(702.61b). `trigger-timing-audit.test.ts`: Emperor Crocodile's state trigger sacrifices it though a creature
+arrived before it resolved (603.8), and Blood Artist dying in a wrath sees every creature that died with it
+(603.10a). `life-rules-audit.test.ts`: under Platinum Emperion the hit costs no life and the lifelinker
+still gains; under Sulfuric Vortex it gains nothing (119.3, 119.7). `loyalty-audit.test.ts`: a second
+loyalty ability in a turn is refused, and a blinked planeswalker, a new object, may activate one (606.3).
 
 ## Next slices
 

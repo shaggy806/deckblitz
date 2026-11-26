@@ -58,6 +58,7 @@ for (const file of files) {
   let result;
   let seenEvents = 0;
   const defenders = {};
+  const declaredBlockers = {};
   let landsThisTurn = {};
   let lastGame = null;
   try {
@@ -80,6 +81,8 @@ for (const file of files) {
         for (let i = seenEvents; i < game.events.length; i++) {
           const e = game.events[i];
           if (e.type === "attacker-declared") defenders[e.attacker] = e.defender;
+          if (e.type === "step-began" && e.step === "declare-blockers") for (const k of Object.keys(declaredBlockers)) delete declaredBlockers[k];
+          if (e.type === "blocker-declared") declaredBlockers[e.attacker] = (declaredBlockers[e.attacker] ?? 0) + 1;
           if (e.type === "turn-began") landsThisTurn = {};
           if (e.type === "land-played") {
             landsThisTurn[e.player] = (landsThisTurn[e.player] ?? 0) + 1;
@@ -94,7 +97,12 @@ for (const file of files) {
               const stack = s.zones.shared.stack;
               const main = s.turn.step === "precombat-main" || s.turn.step === "postcombat-main";
               const active = s.turnOrder[s.turn.activePlayerIndex];
-              if (sorcerySpeed && (!main || active !== e.player || stack.indexOf(e.object) > 0))
+              const flashGrant = s.zones.shared.battlefield.some((id) => {
+                const src = s.objects[id];
+                if (src === undefined || (src.controller !== e.player && !registry.get(src.cardName).static.some((st) => st.castAsThoughFlashAnyPlayer))) return false;
+                return registry.get(src.cardName).static.some((st) => st.castAsThoughFlash !== undefined);
+              });
+              if (sorcerySpeed && !flashGrant && (!main || active !== e.player || stack.indexOf(e.object) > 0))
                 once("sorcery-speed spell cast at instant speed (307.1, 301-302)", s.turn.number, `${o.cardName} by ${e.player} in ${s.turn.step}, active ${active}, stack ${stack.length} from ${e.from}`);
             }
           }
@@ -115,7 +123,7 @@ for (const file of files) {
         if (asked === null) return false;
         if (s.zones.shared.stack.length === 0 && s.pendingTriggers.length > 0) return false;
         if (s.players[asked]?.hasLost) once("a player who has lost is asked", turn, `${asked} ${s.awaiting?.kind ?? "priority"}`);
-        if (s.priority.holder !== null && s.turn.step === "untap") once("priority in the untap step (502.4)", turn, s.priority.holder);
+        if (s.priority.holder !== null && s.awaiting === null && s.turn.step === "untap") once("priority in the untap step (502.4)", turn, s.priority.holder);
         if (s.priority.holder === null || s.awaiting !== null) return false; // SBAs are promised before priority (117.5), not mid-resolution
         for (const [p, ps] of Object.entries(s.players)) {
           if (ps.hasLost) continue;
@@ -157,7 +165,7 @@ for (const file of files) {
             if (s.players[o.controller]?.hasLost) continue;
             const ch = computeCharacteristics(s, registry, id);
             const blockers = (o.blockedBy ?? []).filter((b) => s.objects[b]?.zone === "battlefield");
-            if (ch.keywords.has("menace") && blockers.length === 1 && (o.blockedBy ?? []).length === 1) once("menace blocked by one (702.110b)", turn, o.cardName);
+            if (ch.keywords.has("menace") && (declaredBlockers[id] ?? 0) === 1) once("menace blocked by one (702.110b)", turn, o.cardName);
             if (ch.keywords.has("unblockable") && blockers.length > 0) once("unblockable blocked", turn, o.cardName);
             if (ch.keywords.has("flying")) for (const b of blockers) {
               const bc = computeCharacteristics(s, registry, b);
