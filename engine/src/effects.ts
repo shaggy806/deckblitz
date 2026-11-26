@@ -11045,6 +11045,16 @@ export type EffectSpec =
       readonly amount: number;
     }
   | {
+      /** `who`'s speed is reduced by `amount`, but "this effect can't reduce
+       * their speed below `floor`" (Spikeshell Harrier: `{ controllerOf: 0
+       * }`, 1, 1): one at or under `floor` already is left where it is, and
+       * a player with no speed (rule 702.179b) has none to reduce. */
+      readonly kind: "reduce-speed";
+      readonly who: PlayerRef;
+      readonly amount: number;
+      readonly floor: number;
+    }
+  | {
       /**
        * **The Ring tempts you** (rule 701.54): the effect's controller gets the
        * Ring emblem if they have none (701.54c — before choosing), chooses a
@@ -16149,6 +16159,9 @@ export interface EffectApi {
   /** `player`'s speed increases by `amount` — see the `"increase-speed"`
    * {@link EffectSpec}. */
   increaseSpeed(player: PlayerId, amount: number): void;
+  /** `player`'s speed is reduced by `amount`, not below `floor` — see the
+   * `"reduce-speed"` {@link EffectSpec}. */
+  reduceSpeed(player: PlayerId, amount: number, floor: number): void;
   /** `player`'s speed, 0 for none — the `speed` {@link EffectAmount}. */
   speedOf(player: PlayerId): number;
   /** The Ring tempts the controller (rule 701.54): the emblem first, if they
@@ -25605,6 +25618,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "increase-speed":
       ctx.increaseSpeed(ctx.controller, spec.amount);
       return;
+    case "reduce-speed": {
+      const player = resolvePlayerRef(spec.who, ctx);
+      if (player !== undefined) ctx.reduceSpeed(player, spec.amount, spec.floor);
+      return;
+    }
     case "the-ring-tempts-you":
       ctx.ringTemptBegin();
       applyEffectSpec(

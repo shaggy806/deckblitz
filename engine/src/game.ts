@@ -49356,6 +49356,13 @@ controlledBy,
         }
       },
       increaseSpeed: (player, amount) => this.setSpeed(player, speedOf(this.state, player) + amount),
+      reduceSpeed: (player, amount, floor) => {
+        // No speed, nothing to reduce (rule 702.179b); at or under the floor,
+        // left alone.
+        const now = this.state.players[player]?.speed;
+        if (now === undefined || now <= floor) return;
+        this.setSpeed(player, Math.max(floor, now - amount));
+      },
       speedOf: (player) => speedOf(this.state, player),
       ringTemptBegin: () => {
         // Rule 701.54c: the emblem comes before the choice of Ring-bearer.

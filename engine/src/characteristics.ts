@@ -1155,6 +1155,8 @@ function evalStaticCondition(
           ? (state.players[p]?.life ?? 0)
           : stat === "hand"
             ? (state.zones.perPlayer[p]?.hand.length ?? 0)
+            : stat === "speed"
+            ? speedOf(state, p)
             : // The source counts on its controller's side, a static's too
               // (Hooded Horror is one of "the most creatures"): keep the
               // filter to type/subtype/colour clauses, as `countsSelf` does.

@@ -1083,6 +1083,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "claim-the-prize": (n, v) => v.child(n.prize),
   // Its controller's own speed: no slot.
   "increase-speed": none,
+  // A step back from max speed for the player it names (Spikeshell Harrier's
+  // "that opponent", the controller of slot 0).
+  "reduce-speed": (n, v) => v.touch(slotOfPlayer(n.who), "harm", MINOR),
   "the-ring-tempts-you": none,
   // Slot 0 is the creature chosen, not the enclosing ability's target.
   "become-ring-bearer": none,

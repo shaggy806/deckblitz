@@ -1028,8 +1028,10 @@ export interface LifeFromStarting {
 
 /** A per-player number a `player-compare` condition compares: life, cards
  * in hand, or how many permanents matching a filter the player controls
- * (the filter read with that player as its "you"). */
-export type ComparedStat = "life" | "hand" | { readonly controls: CardFilter };
+ * (the filter read with that player as its "you"), or speed — 0 for a player
+ * with none (rule 702.179f): Spikeshell Harrier's "if that opponent's speed is
+ * greater than each other player's speed". */
+export type ComparedStat = "life" | "hand" | "speed" | { readonly controls: CardFilter };
 
 /** One fact of `CardDefinition.asCast`: a condition or a count, read from the
  * caster's side as the spell finishes being cast. */
