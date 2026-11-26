@@ -763,6 +763,7 @@ import _poolRuneOfMight from "../pool/rune-of-might.js";
 import _poolRushwoodGrove from "../pool/rushwood-grove.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
+import _poolSabertoothCobra from "../pool/sabertooth-cobra.js";
 import _poolSacredPeaks from "../pool/sacred-peaks.js";
 import _poolSageOfFables from "../pool/sage-of-fables.js";
 import _poolSakashimaTheImpostor from "../pool/sakashima-the-impostor.js";
@@ -1859,6 +1860,7 @@ const shard: CardShard = {
     _poolRushwoodGrove,
     _poolSaberToothMooseLion,
     _poolSaberclawGolem,
+    _poolSabertoothCobra,
     _poolSacredPeaks,
     _poolSageOfFables,
     _poolSakashimaTheImpostor,

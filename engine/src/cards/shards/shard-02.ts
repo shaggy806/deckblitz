@@ -278,6 +278,7 @@ import _poolEivorWolfKissed from "../pool/eivor-wolf-kissed.js";
 import _poolElderCathar from "../pool/elder-cathar.js";
 import _poolEldritchImmunity from "../pool/eldritch-immunity.js";
 import _poolElectrosiphon from "../pool/electrosiphon.js";
+import _poolElementalResonance from "../pool/elemental-resonance.js";
 import _poolEliteCatWarrior from "../pool/elite-cat-warrior.js";
 import _poolEliteVanguard from "../pool/elite-vanguard.js";
 import _poolElkinBottle from "../pool/elkin-bottle.js";
@@ -1346,6 +1347,7 @@ const shard: CardShard = {
     _poolElderCathar,
     _poolEldritchImmunity,
     _poolElectrosiphon,
+    _poolElementalResonance,
     _poolEliteCatWarrior,
     _poolEliteVanguard,
     _poolElkinBottle,

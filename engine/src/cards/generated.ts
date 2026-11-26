@@ -8340,6 +8340,7 @@ import _poolElementalMascot from "./pool/elemental-mascot.js";
 import _poolElementalMasterpiece from "./pool/elemental-masterpiece.js";
 import _poolElementalMastery from "./pool/elemental-mastery.js";
 import _poolElementalMyDear from "./pool/elemental-my-dear.js";
+import _poolElementalResonance from "./pool/elemental-resonance.js";
 import _poolElementalSpectacle from "./pool/elemental-spectacle.js";
 import _poolElementalSummoning from "./pool/elemental-summoning.js";
 import _poolElementalTeachings from "./pool/elemental-teachings.js";
@@ -11398,6 +11399,7 @@ import _poolGlarewielder from "./pool/glarewielder.js";
 import _poolGlaringAegis from "./pool/glaring-aegis.js";
 import _poolGlaringFleshraker from "./pool/glaring-fleshraker.js";
 import _poolGlaringSpotlight from "./pool/glaring-spotlight.js";
+import _poolGlassAsp from "./pool/glass-asp.js";
 import _poolGlassCasket from "./pool/glass-casket.js";
 import _poolGlassCastHeart from "./pool/glass-cast-heart.js";
 import _poolGlassGolem from "./pool/glass-golem.js";
@@ -18827,6 +18829,7 @@ import _poolNadierAgentOfTheDuskenel from "./pool/nadier-agent-of-the-duskenel.j
 import _poolNadiersNightblade from "./pool/nadiers-nightblade.js";
 import _poolNadirKraken from "./pool/nadir-kraken.js";
 import _poolNaelAvizoaAeronaut from "./pool/nael-avizoa-aeronaut.js";
+import _poolNafsAsp from "./pool/nafs-asp.js";
 import _poolNagaEternal from "./pool/naga-eternal.js";
 import _poolNagaFleshcrafter from "./pool/naga-fleshcrafter.js";
 import _poolNagaOracle from "./pool/naga-oracle.js";
@@ -20897,6 +20900,7 @@ import _poolPippinsBravery from "./pool/pippins-bravery.js";
 import _poolPipsqueakRebelStrongarm from "./pool/pipsqueak-rebel-strongarm.js";
 import _poolPirImaginativeRascal from "./pool/pir-imaginative-rascal.js";
 import _poolPiracyCharm from "./pool/piracy-charm.js";
+import _poolPiracy from "./pool/piracy.js";
 import _poolPiranhaFly from "./pool/piranha-fly.js";
 import _poolPiranhaMarsh from "./pool/piranha-marsh.js";
 import _poolPirateHat from "./pool/pirate-hat.js";
@@ -23716,6 +23720,7 @@ import _poolSaberAnts from "./pool/saber-ants.js";
 import _poolSaberToothMooseLion from "./pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "./pool/saberclaw-golem.js";
 import _poolSabertoothAlleyCat from "./pool/sabertooth-alley-cat.js";
+import _poolSabertoothCobra from "./pool/sabertooth-cobra.js";
 import _poolSabertoothMauler from "./pool/sabertooth-mauler.js";
 import _poolSabertoothNishoba from "./pool/sabertooth-nishoba.js";
 import _poolSabertoothOutrider from "./pool/sabertooth-outrider.js";
@@ -26350,6 +26355,7 @@ import _poolSoulcoilViper from "./pool/soulcoil-viper.js";
 import _poolSouldrinker from "./pool/souldrinker.js";
 import _poolSoulfireEruption from "./pool/soulfire-eruption.js";
 import _poolSoulfireGrandMaster from "./pool/soulfire-grand-master.js";
+import _poolSoulflayer from "./pool/soulflayer.js";
 import _poolSoulgorgerOrgg from "./pool/soulgorger-orgg.js";
 import _poolSoulherder from "./pool/soulherder.js";
 import _poolSoulknifeSpy from "./pool/soulknife-spy.js";
@@ -42472,6 +42478,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElementalMasterpiece,
   _poolElementalMastery,
   _poolElementalMyDear,
+  _poolElementalResonance,
   _poolElementalSpectacle,
   _poolElementalSummoning,
   _poolElementalTeachings,
@@ -45530,6 +45537,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlaringAegis,
   _poolGlaringFleshraker,
   _poolGlaringSpotlight,
+  _poolGlassAsp,
   _poolGlassCasket,
   _poolGlassCastHeart,
   _poolGlassGolem,
@@ -52959,6 +52967,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNadiersNightblade,
   _poolNadirKraken,
   _poolNaelAvizoaAeronaut,
+  _poolNafsAsp,
   _poolNagaEternal,
   _poolNagaFleshcrafter,
   _poolNagaOracle,
@@ -55029,6 +55038,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPipsqueakRebelStrongarm,
   _poolPirImaginativeRascal,
   _poolPiracyCharm,
+  _poolPiracy,
   _poolPiranhaFly,
   _poolPiranhaMarsh,
   _poolPirateHat,
@@ -57848,6 +57858,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSaberToothMooseLion,
   _poolSaberclawGolem,
   _poolSabertoothAlleyCat,
+  _poolSabertoothCobra,
   _poolSabertoothMauler,
   _poolSabertoothNishoba,
   _poolSabertoothOutrider,
@@ -60482,6 +60493,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSouldrinker,
   _poolSoulfireEruption,
   _poolSoulfireGrandMaster,
+  _poolSoulflayer,
   _poolSoulgorgerOrgg,
   _poolSoulherder,
   _poolSoulknifeSpy,
@@ -76617,6 +76629,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elemental-masterpiece": _poolElementalMasterpiece,
   "pool/elemental-mastery": _poolElementalMastery,
   "pool/elemental-my-dear": _poolElementalMyDear,
+  "pool/elemental-resonance": _poolElementalResonance,
   "pool/elemental-spectacle": _poolElementalSpectacle,
   "pool/elemental-summoning": _poolElementalSummoning,
   "pool/elemental-teachings": _poolElementalTeachings,
@@ -79675,6 +79688,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glaring-aegis": _poolGlaringAegis,
   "pool/glaring-fleshraker": _poolGlaringFleshraker,
   "pool/glaring-spotlight": _poolGlaringSpotlight,
+  "pool/glass-asp": _poolGlassAsp,
   "pool/glass-casket": _poolGlassCasket,
   "pool/glass-cast-heart": _poolGlassCastHeart,
   "pool/glass-golem": _poolGlassGolem,
@@ -87104,6 +87118,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nadiers-nightblade": _poolNadiersNightblade,
   "pool/nadir-kraken": _poolNadirKraken,
   "pool/nael-avizoa-aeronaut": _poolNaelAvizoaAeronaut,
+  "pool/nafs-asp": _poolNafsAsp,
   "pool/naga-eternal": _poolNagaEternal,
   "pool/naga-fleshcrafter": _poolNagaFleshcrafter,
   "pool/naga-oracle": _poolNagaOracle,
@@ -89174,6 +89189,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pipsqueak-rebel-strongarm": _poolPipsqueakRebelStrongarm,
   "pool/pir-imaginative-rascal": _poolPirImaginativeRascal,
   "pool/piracy-charm": _poolPiracyCharm,
+  "pool/piracy": _poolPiracy,
   "pool/piranha-fly": _poolPiranhaFly,
   "pool/piranha-marsh": _poolPiranhaMarsh,
   "pool/pirate-hat": _poolPirateHat,
@@ -91993,6 +92009,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/saber-tooth-moose-lion": _poolSaberToothMooseLion,
   "pool/saberclaw-golem": _poolSaberclawGolem,
   "pool/sabertooth-alley-cat": _poolSabertoothAlleyCat,
+  "pool/sabertooth-cobra": _poolSabertoothCobra,
   "pool/sabertooth-mauler": _poolSabertoothMauler,
   "pool/sabertooth-nishoba": _poolSabertoothNishoba,
   "pool/sabertooth-outrider": _poolSabertoothOutrider,
@@ -94627,6 +94644,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/souldrinker": _poolSouldrinker,
   "pool/soulfire-eruption": _poolSoulfireEruption,
   "pool/soulfire-grand-master": _poolSoulfireGrandMaster,
+  "pool/soulflayer": _poolSoulflayer,
   "pool/soulgorger-orgg": _poolSoulgorgerOrgg,
   "pool/soulherder": _poolSoulherder,
   "pool/soulknife-spy": _poolSoulknifeSpy,

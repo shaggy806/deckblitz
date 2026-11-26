@@ -371,6 +371,7 @@ import _poolGimliMournfulAvenger from "../pool/gimli-mournful-avenger.js";
 import _poolGlacialGrasp from "../pool/glacial-grasp.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
 import _poolGlaringSpotlight from "../pool/glaring-spotlight.js";
+import _poolGlassAsp from "../pool/glass-asp.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGluttonousHellkite from "../pool/gluttonous-hellkite.js";
 import _poolGnostroVoiceOfTheCrags from "../pool/gnostro-voice-of-the-crags.js";
@@ -682,6 +683,7 @@ import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
 import _poolPilgrimOfJustice from "../pool/pilgrim-of-justice.js";
 import _poolPincerSpider from "../pool/pincer-spider.js";
 import _poolPipsqueakRebelStrongarm from "../pool/pipsqueak-rebel-strongarm.js";
+import _poolPiracy from "../pool/piracy.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
 import _poolPoliticalTrickery from "../pool/political-trickery.js";
@@ -1455,6 +1457,7 @@ const shard: CardShard = {
     _poolGlacialGrasp,
     _poolGlacialPlating,
     _poolGlaringSpotlight,
+    _poolGlassAsp,
     _poolGloom,
     _poolGluttonousHellkite,
     _poolGnostroVoiceOfTheCrags,
@@ -1766,6 +1769,7 @@ const shard: CardShard = {
     _poolPilgrimOfJustice,
     _poolPincerSpider,
     _poolPipsqueakRebelStrongarm,
+    _poolPiracy,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,
     _poolPoliticalTrickery,

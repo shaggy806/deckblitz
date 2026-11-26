@@ -818,6 +818,7 @@ import _poolSoulRend from "../pool/soul-rend.js";
 import _poolSoulSeparator from "../pool/soul-separator.js";
 import _poolSoulcipherBoard from "../pool/soulcipher-board.js";
 import _poolSoulcoilViper from "../pool/soulcoil-viper.js";
+import _poolSoulflayer from "../pool/soulflayer.js";
 import _poolSoulknifeSpy from "../pool/soulknife-spy.js";
 import _poolSparkshaperVisionary from "../pool/sparkshaper-visionary.js";
 import _poolSpecialMove from "../pool/special-move.js";
@@ -1880,6 +1881,7 @@ const shard: CardShard = {
     _poolSoulSeparator,
     _poolSoulcipherBoard,
     _poolSoulcoilViper,
+    _poolSoulflayer,
     _poolSoulknifeSpy,
     _poolSparkshaperVisionary,
     _poolSpecialMove,

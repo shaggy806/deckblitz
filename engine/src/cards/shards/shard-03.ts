@@ -537,6 +537,7 @@ import _poolMycosynthLattice from "../pool/mycosynth-lattice.js";
 import _poolMysteriousStranger from "../pool/mysterious-stranger.js";
 import _poolMythosOfVadrok from "../pool/mythos-of-vadrok.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
+import _poolNafsAsp from "../pool/nafs-asp.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
 import _poolNakayaShade from "../pool/nakaya-shade.js";
 import _poolNaruMehaMasterWizard from "../pool/naru-meha-master-wizard.js";
@@ -1533,6 +1534,7 @@ const shard: CardShard = {
     _poolMysteriousStranger,
     _poolMythosOfVadrok,
     _poolNadirKraken,
+    _poolNafsAsp,
     _poolNajalTheStormRunner,
     _poolNakayaShade,
     _poolNaruMehaMasterWizard,
