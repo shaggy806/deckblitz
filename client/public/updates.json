@@ -2,6 +2,7 @@
   {
     "date": "2026-11-25",
     "notes": [
+      "A game no longer stops with an error at the end step after a token copy of Avacyn, Angel of Horror dies.",
       "While deciding on a mulligan, the card under your mouse grows so you can read it, as cards in your hand do.",
       "In a two-seat lobby, a bot can be taken out again, leaving its seat open.",
       "Adding a bot, the deck list opens on the tab you last looked at.",
