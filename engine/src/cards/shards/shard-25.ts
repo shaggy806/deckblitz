@@ -332,6 +332,7 @@ import _poolForumFilibuster from "../pool/forum-filibuster.js";
 import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
 import _poolFracturedIdentity from "../pool/fractured-identity.js";
 import _poolFreestriderLookout from "../pool/freestrider-lookout.js";
+import _poolFrenziedRaider from "../pool/frenzied-raider.js";
 import _poolFugitiveWizard from "../pool/fugitive-wizard.js";
 import _poolFumigate from "../pool/fumigate.js";
 import _poolFurnaceBrood from "../pool/furnace-brood.js";
@@ -1379,6 +1380,7 @@ const shard: CardShard = {
     _poolFoundryOfTheConsuls,
     _poolFracturedIdentity,
     _poolFreestriderLookout,
+    _poolFrenziedRaider,
     _poolFugitiveWizard,
     _poolFumigate,
     _poolFurnaceBrood,

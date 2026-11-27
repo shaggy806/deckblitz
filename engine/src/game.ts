@@ -41520,6 +41520,7 @@ export class Game {
             spec.removedAtLeast === undefined &&
             spec.exhaust !== true &&
             spec.powerUp !== true &&
+            spec.boast !== true &&
             spec.xInCost !== true &&
             spec.targets === undefined &&
             spec.ownAbility === undefined
@@ -41548,6 +41549,7 @@ export class Game {
             (spec.ninjutsu !== true || ability.ninjutsu === true) &&
             (spec.exhaust !== true || ability.exhaust === true) &&
             (spec.powerUp !== true || ability.powerUp === true) &&
+            (spec.boast !== true || ability.boast === true) &&
             (spec.loyalty !== true || ability.loyaltyCost !== undefined) &&
             (spec.removedAtLeast === undefined ||
               (ability.loyaltyCost === "-x"

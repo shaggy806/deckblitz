@@ -10616,6 +10616,7 @@ import _poolFrenziedFugue from "./pool/frenzied-fugue.js";
 import _poolFrenziedGoblin from "./pool/frenzied-goblin.js";
 import _poolFrenziedGorespawn from "./pool/frenzied-gorespawn.js";
 import _poolFrenziedRage from "./pool/frenzied-rage.js";
+import _poolFrenziedRaider from "./pool/frenzied-raider.js";
 import _poolFrenziedRaptor from "./pool/frenzied-raptor.js";
 import _poolFrenziedSaddlebrute from "./pool/frenzied-saddlebrute.js";
 import _poolFrenziedTilling from "./pool/frenzied-tilling.js";
@@ -28195,6 +28196,7 @@ import _poolSwordPointDiplomacy from "./pool/sword-point-diplomacy.js";
 import _poolSwordsToPlowshares from "./pool/swords-to-plowshares.js";
 import _poolSwordsmanSharpScoundrel from "./pool/swordsman-sharp-scoundrel.js";
 import _poolSwordsmansSteel from "./pool/swordsmans-steel.js";
+import _poolSwordswornCavalier from "./pool/swordsworn-cavalier.js";
 import _poolSwordwiseCentaur from "./pool/swordwise-centaur.js";
 import _poolSwornCompanions from "./pool/sworn-companions.js";
 import _poolSwornDefender from "./pool/sworn-defender.js";
@@ -44977,6 +44979,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFrenziedGoblin,
   _poolFrenziedGorespawn,
   _poolFrenziedRage,
+  _poolFrenziedRaider,
   _poolFrenziedRaptor,
   _poolFrenziedSaddlebrute,
   _poolFrenziedTilling,
@@ -62556,6 +62559,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSwordsToPlowshares,
   _poolSwordsmanSharpScoundrel,
   _poolSwordsmansSteel,
+  _poolSwordswornCavalier,
   _poolSwordwiseCentaur,
   _poolSwornCompanions,
   _poolSwornDefender,
@@ -79351,6 +79355,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/frenzied-goblin": _poolFrenziedGoblin,
   "pool/frenzied-gorespawn": _poolFrenziedGorespawn,
   "pool/frenzied-rage": _poolFrenziedRage,
+  "pool/frenzied-raider": _poolFrenziedRaider,
   "pool/frenzied-raptor": _poolFrenziedRaptor,
   "pool/frenzied-saddlebrute": _poolFrenziedSaddlebrute,
   "pool/frenzied-tilling": _poolFrenziedTilling,
@@ -96930,6 +96935,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/swords-to-plowshares": _poolSwordsToPlowshares,
   "pool/swordsman-sharp-scoundrel": _poolSwordsmanSharpScoundrel,
   "pool/swordsmans-steel": _poolSwordsmansSteel,
+  "pool/swordsworn-cavalier": _poolSwordswornCavalier,
   "pool/swordwise-centaur": _poolSwordwiseCentaur,
   "pool/sworn-companions": _poolSwornCompanions,
   "pool/sworn-defender": _poolSwornDefender,

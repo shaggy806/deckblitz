@@ -9,6 +9,9 @@ import {
   B,
   activate,
   cast,
+  counters,
+  enter,
+  keywords,
   graveyard,
   hand,
   lands,
@@ -64,6 +67,33 @@ describe("batch 343 (lead)", () => {
       expect(graveyard(game, B)).toEqual([bears]);
       for (const id of bolts) expect(zone(game, id)).toBe("hand");
     }
+  });
+
+  it("Frenzied Raider gets a counter when a boast ability is activated, not another activated ability", () => {
+    const { game, a } = table();
+    const raider = spawn(game, "Frenzied Raider");
+    const braggart = spawn(game, "Axgard Braggart");
+    const pinger = spawn(game, "Prodigal Pyromancer");
+    activate(game, pinger, 0, { targets: [ref(B)] });
+    expect(counters(game, raider)).toBe(0);
+    lands(game, "Plains", 2);
+    a.declareAttackersFn = () => [{ attacker: braggart, defender: B }];
+    toStep(game, "postcombat-main");
+    activate(game, braggart, 0);
+    expect(counters(game, raider)).toBe(1);
+    expect(counters(game, braggart)).toBe(1);
+  });
+
+  it("Swordsworn Cavalier has first strike once another Knight entered under your control this turn, not its own entry or an opponent's", () => {
+    const { game } = table();
+    const cavalier = enter(game, "Swordsworn Cavalier");
+    expect(keywords(game, cavalier).has("first-strike")).toBe(false);
+    enter(game, "Knight of the White Orchid", B);
+    expect(keywords(game, cavalier).has("first-strike")).toBe(false);
+    enter(game, "Knight of the White Orchid");
+    expect(keywords(game, cavalier).has("first-strike")).toBe(true);
+    nextTurn(game);
+    expect(keywords(game, cavalier).has("first-strike")).toBe(false);
   });
 
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {

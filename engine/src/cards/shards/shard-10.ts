@@ -898,6 +898,7 @@ import _poolSuusMahnaPractitioner from "../pool/suus-mahna-practitioner.js";
 import _poolSwarmIntelligence from "../pool/swarm-intelligence.js";
 import _poolSwirlingTorrent from "../pool/swirling-torrent.js";
 import _poolSwordOfTruthAndJustice from "../pool/sword-of-truth-and-justice.js";
+import _poolSwordswornCavalier from "../pool/swordsworn-cavalier.js";
 import _poolSyndicateHeavy from "../pool/syndicate-heavy.js";
 import _poolSyphonFlesh from "../pool/syphon-flesh.js";
 import _poolSyrVondamSunstarExemplar from "../pool/syr-vondam-sunstar-exemplar.js";
@@ -1977,6 +1978,7 @@ const shard: CardShard = {
     _poolSwarmIntelligence,
     _poolSwirlingTorrent,
     _poolSwordOfTruthAndJustice,
+    _poolSwordswornCavalier,
     _poolSyndicateHeavy,
     _poolSyphonFlesh,
     _poolSyrVondamSunstarExemplar,

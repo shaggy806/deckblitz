@@ -87,6 +87,8 @@
     "effect:discard-random-filtered",
     "condition:controls-fewer-than-each-opponent",
     "condition:source-attacked-during-your-last-turn",
+    "trigger:activates-boast",
+    "bug:turn-history-exclude-self-stint",
     "replacement:as-turned-face-up-dynamic-counters",
     "static:counter-cap",
     "condition:started-turn-untapped",
