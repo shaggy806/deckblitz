@@ -62379,9 +62379,12 @@ controlledBy,
     attacker.blockedBy.push(blockerId);
     attacker.blocked = true;
     const blocked = [one];
+    // "Becomes blocked" only for an attacker that was unblocked (509.3c).
+    const newlyBlocked = wasBlocked ? [] : [one];
     for (const mateId of bandMatesOf(this.state, one)) {
       const mate = this.state.objects[mateId];
       if (mate.blockedBy.includes(blockerId)) continue;
+      if (!mate.blocked) newlyBlocked.push(mateId);
       mate.blockedBy.push(blockerId);
       mate.blocked = true;
       blocker.blockingAlso = [...(blocker.blockingAlso ?? []), mateId];
@@ -62393,10 +62396,10 @@ controlledBy,
         this.emit({ type: "blocker-declared", blocker: blockerId, attacker: id, ...(i > 0 ? { alsoBlocked: true } : {}) });
       }
     }
-    // Put onto the battlefield blocking, it never "blocked" (rule 509.4), but
-    // an attacker that was unblocked becomes blocked (509.3c).
-    if (entered && wasBlocked) return;
-    for (const id of blocked) {
+    // Put onto the battlefield blocking, it never "blocked" (rule 509.4); by
+    // that or by an effect, an attacker that was unblocked becomes blocked,
+    // and one already blocked doesn't again (509.3c).
+    for (const id of newlyBlocked) {
       this.emit({ type: "attacker-blocked", attacker: id, blockers: [...this.state.objects[id].blockedBy] });
     }
   }

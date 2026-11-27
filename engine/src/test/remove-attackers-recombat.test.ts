@@ -174,6 +174,28 @@ describe("False Orders", () => {
     expect(life(game, B)).toBe(20);
   });
 
+  it("blocking an attacker that's still blocked doesn't make it become blocked again (509.3c)", () => {
+    const { game, a, b } = table();
+    const giant = spawn(game, "Hill Giant", A);
+    const one = spawn(game, "Grizzly Bears", B);
+    const two = spawn(game, "Llanowar Elves", B);
+    lands(game, "Mountain", 1, A);
+    a.declareAttackersFn = () => [{ attacker: giant, defender: B }];
+    b.declareBlockersFn = () => [
+      { blocker: one, attacker: giant },
+      { blocker: two, attacker: giant },
+    ];
+    pickPermanents(a, giant);
+    const orders = toHand(game, "False Orders", A);
+    toBlocks(game, A);
+    cast(game, orders, { targets: [ref(one)], settle: false });
+    game.advanceUntil((s) => s.turn.step === "postcombat-main" || s.turn.number > 1);
+    // Blocked once, as blockers were declared; the effect's block adds a
+    // blocker (509.3d) but not a second "becomes blocked".
+    expect(game.eventsOfType("attacker-blocked").filter((e) => e.attacker === giant).length).toBe(1);
+    expect(game.eventsOfType("blocker-declared").filter((e) => e.blocker === one).length).toBe(2);
+  });
+
   it("one that had two, the other gone before: still not blocked by only this one", () => {
     const { game, a, b } = table();
     const giant = spawn(game, "Hill Giant", A);
