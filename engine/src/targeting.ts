@@ -798,6 +798,18 @@ function isLegalTargetUncached(
     ) {
       return false;
     }
+    // "You can't choose an untapped permanent as this spell's target as you
+    // cast it" (Dream Leash): asked only as the target is chosen —
+    // resolution judges the slot without it (`resolvingTargetSpec`), and
+    // nothing chooses a slot read untargeted: an Aura's enchant ability
+    // (`Game.canEnchant`, rule 303.4a), a slot the event filled.
+    if (
+      targeted &&
+      spec.asChosen !== undefined &&
+      !matchesFilter(state, registry, ref.object, spec.asChosen, targetFilterContext(forPlayer, source))
+    ) {
+      return false;
+    }
     return matchesFilter(state, registry, ref.object, spec.filter, targetFilterContext(forPlayer, source));
   }
   // A filtered spell on the stack.

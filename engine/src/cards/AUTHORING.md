@@ -4863,7 +4863,12 @@ stopped covering:
   (or `"any"`) lets a player fill the slot too — "target artifact,
   creature, planeswalker, **or opponent**" (Price of Betrayal), "another
   target permanent or opponent" (Etched Slith); `whose` and `filter` are
-  the permanent's only. **Prefer a string
+  the permanent's only. A requirement asked **only as the target is
+  chosen** is `asChosen: CardFilter`: "You can't choose an untapped
+  permanent as this spell's target as you cast it" (Dream Leash) is
+  `{ kind: "permanent", filter: {}, asChosen: { tapped: true } }` — not read
+  as the spell resolves, nor as an Aura's enchant ability (put onto the
+  battlefield, moved, or its host untapped later). **Prefer a string
   literal when one fits** — it reads better and most of the pool uses them;
   reach for this when spelling the shape as a literal wouldn't be reused.
 - `{ kind: "spell", whose?: "any" | "you" | "opponent", filter: CardFilter }` — a spell

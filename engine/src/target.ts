@@ -175,6 +175,16 @@ export type TargetSpec =
        * `{ turnStat: "damage-taken" }`. Part of the targeting requirement:
        * read as the target is chosen and again as it resolves (rule 608.2b). */
       readonly playerWith?: { readonly turnStat: TurnStat };
+      /** A further requirement the permanent meets **only as the target is
+       * chosen**: "You can't choose an untapped permanent as this spell's
+       * target as you cast it" (Dream Leash: `{ tapped: true }`). Not part
+       * of what the slot is, so it's not read again as the spell resolves
+       * (rule 608.2b — {@link resolvingTargetSpec}), and not part of an
+       * Aura's enchant ability (rule 303.4a): an Aura put onto the
+       * battlefield, or one already attached whose host untaps, needs none
+       * of it (the Dream Leash rulings — `Game.canEnchant` asks the slot
+       * untargeted, which skips it). */
+      readonly asChosen?: CardFilter;
     }
   /**
    * "Target opponent who has **more life than you do** as you activate this
@@ -1188,9 +1198,25 @@ export interface TargetSeat {
  */
 /** The spec a target is judged by as its spell or ability resolves: the
  * same, except that an `opponent-compared` slot's comparison was only "as
- * you activate this ability" — then any opponent will do. */
+ * you activate this ability" — then any opponent will do — and a permanent
+ * slot's `asChosen` requirement was only as it was chosen. */
 export function resolvingTargetSpec(spec: TargetSpec): TargetSpec {
-  return typeof spec === "object" && spec.kind === "opponent-compared" && spec.comparedTo === undefined ? "opponent" : spec;
+  if (typeof spec === "object" && spec.kind === "opponent-compared" && spec.comparedTo === undefined) return "opponent";
+  return withoutAsChosen(spec);
+}
+
+/** `spec` without a permanent slot's `asChosen` requirement (through an
+ * `optional`), the slot itself: what's judged as it resolves, and what an
+ * Aura's enchant ability allows (rule 303.4a). */
+export function withoutAsChosen(spec: TargetSpec): TargetSpec {
+  if (typeof spec !== "object") return spec;
+  if (spec.kind === "optional") {
+    const of = withoutAsChosen(spec.of);
+    return of === spec.of ? spec : { ...spec, of };
+  }
+  if (spec.kind !== "permanent" || spec.asChosen === undefined) return spec;
+  const { asChosen: _asChosen, ...rest } = spec;
+  return rest;
 }
 
 export function playerAtSeat(

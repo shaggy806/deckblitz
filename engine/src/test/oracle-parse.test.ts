@@ -1241,6 +1241,14 @@ describe("the players a sentence names by another target, the Aura's host and th
     expect(smart.triggered[0].effect).toEqual({ kind: "draw", amount: 1, who: "active-player" });
   });
 
+  it("an Aura's target requirement only as it's cast (Dream Leash)", () => {
+    const leash = face(
+      "Enchantment — Aura",
+      "Enchant permanent\nYou can't choose an untapped permanent as this spell's target as you cast it.\nYou control enchanted permanent.",
+    );
+    expect(leash.enchant).toEqual({ kind: "permanent", filter: {}, asChosen: { tapped: true } });
+  });
+
   it("that player's step: a creature they control", () => {
     const siege = face("Enchantment", "At the beginning of combat on each opponent's turn, tap target creature that player controls.");
     expect(siege.triggered[0].trigger).toEqual({ on: "step-begins", step: "begin-combat", who: "opponent" });

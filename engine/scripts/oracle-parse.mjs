@@ -19468,6 +19468,23 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.enchant = { kind: "card-in-graveyard", whose: "any", filter: { type: m[1] } };
       continue;
     }
+    // "You can't choose an untapped permanent as this spell's target as you
+    // cast it" (Dream Leash): read only as the Aura spell's target is chosen,
+    // never as its enchant ability (the slot's `asChosen`).
+    if (
+      /^You can't choose an untapped (?:creature|permanent|artifact|land) as ~'s target as you cast it\.$/.test(line) &&
+      out.enchant !== undefined
+    ) {
+      const slot = out.enchant;
+      const asFilter =
+        slot === "permanent" ? { kind: "permanent", filter: {} }
+        : slot === "creature" || slot === "artifact" || slot === "land" ? { kind: "permanent", filter: { type: slot } }
+        : slot;
+      if (typeof asFilter === "object" && asFilter.kind === "permanent") {
+        out.enchant = { ...asFilter, asChosen: { tapped: true } };
+        continue;
+      }
+    }
     // "Fortify {3}" (rule 702.67a): attach to a land you control, as a sorcery.
     if ((m = /^Fortify ((?:\{[^}]+\})+)\.?(?: \(.*\))?$/.exec(line))) {
       out.activated.push({
