@@ -6,6 +6,7 @@
     "static:grant-optional-x-additional-cost-to-spells",
     "cost:cost-reduction-per-opponent-attacked",
     "replacement:land-mana-instead-tapper-chooses",
+    "trigger:activates-ability-targets-only-source",
     "cost:exile-from-graveyard-including-source",
     "static:cost-increase-per-count",
     "effect:pay-any-amount-of-life-reveal-that-many",
