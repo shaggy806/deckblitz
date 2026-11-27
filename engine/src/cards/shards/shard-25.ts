@@ -133,6 +133,7 @@ import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
 import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
 import _poolCabalPit from "../pool/cabal-pit.js";
 import _poolCacophodon from "../pool/cacophodon.js";
+import _poolCallerOfTheHunt from "../pool/caller-of-the-hunt.js";
 import _poolCanopyClaws from "../pool/canopy-claws.js";
 import _poolCanyonCrab from "../pool/canyon-crab.js";
 import _poolCaptainAmericaSuperSoldier from "../pool/captain-america-super-soldier.js";
@@ -1174,6 +1175,7 @@ const shard: CardShard = {
     _poolBumpInTheNight,
     _poolCabalPit,
     _poolCacophodon,
+    _poolCallerOfTheHunt,
     _poolCanopyClaws,
     _poolCanyonCrab,
     _poolCaptainAmericaSuperSoldier,

@@ -3972,6 +3972,7 @@ import _poolCall from "./pool/call.js";
 import _poolCallapheBelovedOfTheSea from "./pool/callaphe-beloved-of-the-sea.js";
 import _poolCallerOfGales from "./pool/caller-of-gales.js";
 import _poolCallerOfTheClaw from "./pool/caller-of-the-claw.js";
+import _poolCallerOfTheHunt from "./pool/caller-of-the-hunt.js";
 import _poolCallerOfThePack from "./pool/caller-of-the-pack.js";
 import _poolCallerOfTheUntamed from "./pool/caller-of-the-untamed.js";
 import _poolCallidusAssassin from "./pool/callidus-assassin.js";
@@ -4937,6 +4938,7 @@ import _poolCleansingNova from "./pool/cleansing-nova.js";
 import _poolCleansingRay from "./pool/cleansing-ray.js";
 import _poolCleansingScreech from "./pool/cleansing-screech.js";
 import _poolCleansingWildfire from "./pool/cleansing-wildfire.js";
+import _poolCleansing from "./pool/cleansing.js";
 import _poolCleanupCrew from "./pool/cleanup-crew.js";
 import _poolClearAPath from "./pool/clear-a-path.js";
 import _poolClearShot from "./pool/clear-shot.js";
@@ -14768,6 +14770,7 @@ import _poolJeskasWill from "./pool/jeskas-will.js";
 import _poolJessicaJonesPrivateEye from "./pool/jessica-jones-private-eye.js";
 import _poolJestersCap from "./pool/jesters-cap.js";
 import _poolJestersMask from "./pool/jesters-mask.js";
+import _poolJestersScepter from "./pool/jesters-scepter.js";
 import _poolJetCollector from "./pool/jet-collector.js";
 import _poolJetFreedomFighter from "./pool/jet-freedom-fighter.js";
 import _poolJetMedallion from "./pool/jet-medallion.js";
@@ -16037,6 +16040,7 @@ import _poolLavaSpike from "./pool/lava-spike.js";
 import _poolLavaStorm from "./pool/lava-storm.js";
 import _poolLavaTubes from "./pool/lava-tubes.js";
 import _poolLavaZombie from "./pool/lava-zombie.js";
+import _poolLavaballTrap from "./pool/lavaball-trap.js";
 import _poolLavabellySliver from "./pool/lavabelly-sliver.js";
 import _poolLavabornMuse from "./pool/lavaborn-muse.js";
 import _poolLavabrinkFloodgates from "./pool/lavabrink-floodgates.js";
@@ -38160,6 +38164,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCallapheBelovedOfTheSea,
   _poolCallerOfGales,
   _poolCallerOfTheClaw,
+  _poolCallerOfTheHunt,
   _poolCallerOfThePack,
   _poolCallerOfTheUntamed,
   _poolCallidusAssassin,
@@ -39125,6 +39130,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCleansingRay,
   _poolCleansingScreech,
   _poolCleansingWildfire,
+  _poolCleansing,
   _poolCleanupCrew,
   _poolClearAPath,
   _poolClearShot,
@@ -48956,6 +48962,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJessicaJonesPrivateEye,
   _poolJestersCap,
   _poolJestersMask,
+  _poolJestersScepter,
   _poolJetCollector,
   _poolJetFreedomFighter,
   _poolJetMedallion,
@@ -50225,6 +50232,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLavaStorm,
   _poolLavaTubes,
   _poolLavaZombie,
+  _poolLavaballTrap,
   _poolLavabellySliver,
   _poolLavabornMuse,
   _poolLavabrinkFloodgates,
@@ -72361,6 +72369,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/callaphe-beloved-of-the-sea": _poolCallapheBelovedOfTheSea,
   "pool/caller-of-gales": _poolCallerOfGales,
   "pool/caller-of-the-claw": _poolCallerOfTheClaw,
+  "pool/caller-of-the-hunt": _poolCallerOfTheHunt,
   "pool/caller-of-the-pack": _poolCallerOfThePack,
   "pool/caller-of-the-untamed": _poolCallerOfTheUntamed,
   "pool/callidus-assassin": _poolCallidusAssassin,
@@ -73326,6 +73335,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cleansing-ray": _poolCleansingRay,
   "pool/cleansing-screech": _poolCleansingScreech,
   "pool/cleansing-wildfire": _poolCleansingWildfire,
+  "pool/cleansing": _poolCleansing,
   "pool/cleanup-crew": _poolCleanupCrew,
   "pool/clear-a-path": _poolClearAPath,
   "pool/clear-shot": _poolClearShot,
@@ -83157,6 +83167,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jessica-jones-private-eye": _poolJessicaJonesPrivateEye,
   "pool/jesters-cap": _poolJestersCap,
   "pool/jesters-mask": _poolJestersMask,
+  "pool/jesters-scepter": _poolJestersScepter,
   "pool/jet-collector": _poolJetCollector,
   "pool/jet-freedom-fighter": _poolJetFreedomFighter,
   "pool/jet-medallion": _poolJetMedallion,
@@ -84426,6 +84437,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lava-storm": _poolLavaStorm,
   "pool/lava-tubes": _poolLavaTubes,
   "pool/lava-zombie": _poolLavaZombie,
+  "pool/lavaball-trap": _poolLavaballTrap,
   "pool/lavabelly-sliver": _poolLavabellySliver,
   "pool/lavaborn-muse": _poolLavabornMuse,
   "pool/lavabrink-floodgates": _poolLavabrinkFloodgates,

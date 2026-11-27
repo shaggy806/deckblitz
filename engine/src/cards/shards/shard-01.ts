@@ -145,6 +145,7 @@ import _poolCinderheartGiant from "../pool/cinderheart-giant.js";
 import _poolClaimTerritory from "../pool/claim-territory.js";
 import _poolClaimTheKingdom from "../pool/claim-the-kingdom.js";
 import _poolClarionCathars from "../pool/clarion-cathars.js";
+import _poolCleansing from "../pool/cleansing.js";
 import _poolClementTheWorrywort from "../pool/clement-the-worrywort.js";
 import _poolCloudheathDrake from "../pool/cloudheath-drake.js";
 import _poolCloudsculptTechnician from "../pool/cloudsculpt-technician.js";
@@ -484,6 +485,7 @@ import _poolKumenasAwakening from "../pool/kumenas-awakening.js";
 import _poolLapisOrbOfDragonkind from "../pool/lapis-orb-of-dragonkind.js";
 import _poolLavaFlow from "../pool/lava-flow.js";
 import _poolLavaSpike from "../pool/lava-spike.js";
+import _poolLavaballTrap from "../pool/lavaball-trap.js";
 import _poolLaviniaAzoriusRenegade from "../pool/lavinia-azorius-renegade.js";
 import _poolLeadPipe from "../pool/lead-pipe.js";
 import _poolLeafdrakeRoost from "../pool/leafdrake-roost.js";
@@ -1197,6 +1199,7 @@ const shard: CardShard = {
     _poolClaimTerritory,
     _poolClaimTheKingdom,
     _poolClarionCathars,
+    _poolCleansing,
     _poolClementTheWorrywort,
     _poolCloudheathDrake,
     _poolCloudsculptTechnician,
@@ -1536,6 +1539,7 @@ const shard: CardShard = {
     _poolLapisOrbOfDragonkind,
     _poolLavaFlow,
     _poolLavaSpike,
+    _poolLavaballTrap,
     _poolLaviniaAzoriusRenegade,
     _poolLeadPipe,
     _poolLeafdrakeRoost,
