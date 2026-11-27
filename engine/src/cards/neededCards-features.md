@@ -9108,4 +9108,6 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **One static ability lost by its text (2026-11-27).** `effect:lose-specific-ability`: `become` `loseStatics` (`PtModifier.loseStatics`, `staticTextLost`, layer 6; a grant after the loss is kept, 613.7). Glittering Lynx, Glittering Lion. `test/lose-specific-ability.test.ts`.
 **Until end of turn, one more +1/+1 counter on creatures you control (2026-11-26, no engine code).** `effect:temporary-counter-addend`: a `replacement-effect` `would-add-counter` with `modify: { plus: 1 }`, `counterKind: "+1/+1"`, `whoPuts: "you"` and `filter: { type: "creature", controlledBy: "you" }`, `duration: "end-of-turn"` (an `ActiveReplacement`, read in `counterReplacementStepList`; each resolution adds one more). Prairie Dog. `test/temporary-counter-addend.test.ts`.
 
+**Half a count, rounded down for power and up for toughness (2026-11-27).** `static:pt-per-half-count`: `grantPtPerCount` `step: 2` with `round: ["down", "up"]`. Aspect of Wolf. `test/pt-per-half-count.test.ts`.
+
 **Prevent damage between creatures that share a color (2026-11-27).** `replacement:prevent-damage-between-creatures-sharing-color`: `would-deal-damage` `sharesColorWithRecipient` with `source` and `toFilter` creature. Well-Laid Plans. `test/prevent-damage-sharing-color.test.ts`.

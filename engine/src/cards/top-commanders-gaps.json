@@ -3353,6 +3353,7 @@
   "effect:temporary-counter-addend",
   "effect:lose-specific-ability",
   "effect:temporary-counter-addend",
+  "static:pt-per-half-count",
   "replacement:prevent-damage-between-creatures-sharing-color"
  ],
  "features": {

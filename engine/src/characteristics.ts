@@ -6913,10 +6913,15 @@ function collectStaticEffects(
             : filter === undefined
             ? 0
             : battlefieldMatching(filter);
-      const stepped = per.step !== undefined ? Math.floor(counted / per.step) : counted;
-      const n = per.max !== undefined ? Math.min(stepped, per.max) : stepped;
-      scaledPower = n * per.pt[0];
-      scaledToughness = n * per.pt[1];
+      // "Half …, rounded down" for power and "rounded up" for toughness
+      // (Aspect of Wolf — `round`): each its own quotient.
+      const scaled = (up: boolean): number => {
+        const stepped = per.step === undefined ? counted : up ? Math.ceil(counted / per.step) : Math.floor(counted / per.step);
+        return per.max !== undefined ? Math.min(stepped, per.max) : stepped;
+      };
+      const round = per.round;
+      scaledPower = scaled(round === "up" || (Array.isArray(round) && round[0] === "up")) * per.pt[0];
+      scaledToughness = scaled(round === "up" || (Array.isArray(round) && round[1] === "up")) * per.pt[1];
     }
     const walk = staticLandwalk(ability, source);
     const granted = walk.keyword !== null ? [...(ability.grantKeywords ?? []), walk.keyword] : (ability.grantKeywords ?? []);

@@ -6271,7 +6271,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   battlefield under your control this turn"), `basicLandTypes` (domain — Manaforce Mace),
   `opponents`; `fromAffectedController` counts from the affected permanent's
   controller's side (Disturbing Conversion); `step` divides the count, rounded
-  down (Dark Matter Manipulator's "for every seven"), and `max` caps it.
+  down (Dark Matter Manipulator's "for every seven") unless `round: "up"` or
+  `round: ["down", "up"]` per power and toughness (Aspect of Wolf's "half …,
+  rounded down" and "rounded up": `{ step: 2, round: ["down", "up"], pt: [1, 1] }`),
+  and `max` caps it.
 - `grantPtPerCount: { filter?, commanderCasts?, playerCounters?, countersOnAffected?, countersOnSource?, exiled?, inGraveyard?, colorsAmong?, commanderManaValue?, cardsInHand?, lifeTotal?, pt, excludeSelf? }` — a layer 7d bonus that
   *scales* with a live count (Skycat Sovereign's "+1/+1 for each **other**
   creature you control with flying"). Distinct from `setBasePtFromCount`,

@@ -2749,6 +2749,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     /** "For every seven cards": the count divided by this, rounded down (Dark
      * Matter Manipulator). */
     readonly step?: number;
+    /** How `step`'s quotient rounds: down unless this says up, for both or as
+     * `[power, toughness]` — Aspect of Wolf's "+X/+Y, where X is half the
+     * number of Forests you control, rounded down, and Y is half …, rounded
+     * up" is `{ step: 2, round: ["down", "up"], pt: [1, 1] }`. */
+    readonly round?: "up" | readonly ["down" | "up", "down" | "up"];
     /** "To a maximum of 10": the count capped at this. */
     readonly max?: number;
     readonly pt: readonly [number, number];
