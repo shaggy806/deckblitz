@@ -262,6 +262,7 @@ import _poolEndlessSwarm from "../pool/endless-swarm.js";
 import _poolEnds from "../pool/ends.js";
 import _poolEnkiraHostileScavenger from "../pool/enkira-hostile-scavenger.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
+import _poolEquipoise from "../pool/equipoise.js";
 import _poolEriettesWhisper from "../pool/eriettes-whisper.js";
 import _poolErrantDoomsayers from "../pool/errant-doomsayers.js";
 import _poolErtaiWizardAdept from "../pool/ertai-wizard-adept.js";
@@ -1309,6 +1310,7 @@ const shard: CardShard = {
     _poolEnds,
     _poolEnkiraHostileScavenger,
     _poolEpicProportions,
+    _poolEquipoise,
     _poolEriettesWhisper,
     _poolErrantDoomsayers,
     _poolErtaiWizardAdept,

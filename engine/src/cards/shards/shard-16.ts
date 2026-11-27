@@ -223,6 +223,7 @@ import _poolDomriRade from "../pool/domri-rade.js";
 import _poolDoomWeaver from "../pool/doom-weaver.js";
 import _poolDoorOfDestinies from "../pool/door-of-destinies.js";
 import _poolDownForRepairs from "../pool/down-for-repairs.js";
+import _poolDragonHunter from "../pool/dragon-hunter.js";
 import _poolDragonTempest from "../pool/dragon-tempest.js";
 import _poolDragonTurtle from "../pool/dragon-turtle.js";
 import _poolDragonfireBlade from "../pool/dragonfire-blade.js";
@@ -1353,6 +1354,7 @@ const shard: CardShard = {
     _poolDoomWeaver,
     _poolDoorOfDestinies,
     _poolDownForRepairs,
+    _poolDragonHunter,
     _poolDragonTempest,
     _poolDragonTurtle,
     _poolDragonfireBlade,

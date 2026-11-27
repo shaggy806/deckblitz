@@ -76,6 +76,7 @@ import _poolBannersRaised from "../pool/banners-raised.js";
 import _poolBargingSergeant from "../pool/barging-sergeant.js";
 import _poolBarkhideTroll from "../pool/barkhide-troll.js";
 import _poolBaronBertramGraywater from "../pool/baron-bertram-graywater.js";
+import _poolBasaltGolem from "../pool/basalt-golem.js";
 import _poolBasriTomorrowsChampion from "../pool/basri-tomorrows-champion.js";
 import _poolBassaraTowerArcher from "../pool/bassara-tower-archer.js";
 import _poolBattershieldWarrior from "../pool/battershield-warrior.js";
@@ -344,6 +345,7 @@ import _poolForcefield from "../pool/forcefield.js";
 import _poolForswornPaladin from "../pool/forsworn-paladin.js";
 import _poolFoulTongueShriek from "../pool/foul-tongue-shriek.js";
 import _poolFoundryScreecher from "../pool/foundry-screecher.js";
+import _poolFreyalisesWinds from "../pool/freyalises-winds.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
 import _poolFry from "../pool/fry.js";
 import _poolFullThrottle from "../pool/full-throttle.js";
@@ -1140,6 +1142,7 @@ const shard: CardShard = {
     _poolBargingSergeant,
     _poolBarkhideTroll,
     _poolBaronBertramGraywater,
+    _poolBasaltGolem,
     _poolBasriTomorrowsChampion,
     _poolBassaraTowerArcher,
     _poolBattershieldWarrior,
@@ -1408,6 +1411,7 @@ const shard: CardShard = {
     _poolForswornPaladin,
     _poolFoulTongueShriek,
     _poolFoundryScreecher,
+    _poolFreyalisesWinds,
     _poolFrontierGuide,
     _poolFry,
     _poolFullThrottle,

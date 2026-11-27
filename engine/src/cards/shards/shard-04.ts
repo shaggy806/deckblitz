@@ -494,6 +494,7 @@ import _poolLingeringDeath from "../pool/lingering-death.js";
 import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLoafingGiant from "../pool/loafing-giant.js";
 import _poolLoathsomeTroll from "../pool/loathsome-troll.js";
+import _poolLobotomy from "../pool/lobotomy.js";
 import _poolLocusCobra from "../pool/locus-cobra.js";
 import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLongForgottenGohei from "../pool/long-forgotten-gohei.js";
@@ -1550,6 +1551,7 @@ const shard: CardShard = {
     _poolLivingPhone,
     _poolLoafingGiant,
     _poolLoathsomeTroll,
+    _poolLobotomy,
     _poolLocusCobra,
     _poolLongFinnedSkywhale,
     _poolLongForgottenGohei,

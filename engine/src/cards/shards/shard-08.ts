@@ -108,6 +108,7 @@ import _poolBetrayalOfFlesh from "../pool/betrayal-of-flesh.js";
 import _poolBhaalLordOfMurder from "../pool/bhaal-lord-of-murder.js";
 import _poolBiblioplexTomekeeper from "../pool/biblioplex-tomekeeper.js";
 import _poolBileVialBoggart from "../pool/bile-vial-boggart.js";
+import _poolBioplasm from "../pool/bioplasm.js";
 import _poolBirdGetsTheWorm from "../pool/bird-gets-the-worm.js";
 import _poolBitterTriumph from "../pool/bitter-triumph.js";
 import _poolBlackTulip from "../pool/black-tulip.js";
@@ -1223,6 +1224,7 @@ const shard: CardShard = {
     _poolBhaalLordOfMurder,
     _poolBiblioplexTomekeeper,
     _poolBileVialBoggart,
+    _poolBioplasm,
     _poolBirdGetsTheWorm,
     _poolBitterTriumph,
     _poolBlackTulip,

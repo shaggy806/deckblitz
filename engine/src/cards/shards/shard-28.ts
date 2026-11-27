@@ -1086,6 +1086,7 @@ import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 import _tokensSquidTokenMinus1Minus1 from "../tokens/squid-token-minus-1-minus-1.js";
 import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
 import _tokensTribbleToken from "../tokens/tribble-token.js";
+import _tokensWallTokenBasaltGolem from "../tokens/wall-token-basalt-golem.js";
 import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeaker.js";
 
 const shard: CardShard = {
@@ -2175,6 +2176,7 @@ const shard: CardShard = {
     _tokensSquidTokenMinus1Minus1,
     _tokensStoneforgedBladeToken,
     _tokensTribbleToken,
+    _tokensWallTokenBasaltGolem,
     _tokensWurmTokenBaruWurmspeaker,
   ],
 };

@@ -614,6 +614,7 @@ import _poolNyxbornMarauder from "../pool/nyxborn-marauder.js";
 import _poolOathOfNissa from "../pool/oath-of-nissa.js";
 import _poolOblivionsHunger from "../pool/oblivions-hunger.js";
 import _poolOketraTheTrue from "../pool/oketra-the-true.js";
+import _poolOkk from "../pool/okk.js";
 import _poolOliviaCrimsonBride from "../pool/olivia-crimson-bride.js";
 import _poolOllenbockEscort from "../pool/ollenbock-escort.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
@@ -1674,6 +1675,7 @@ const shard: CardShard = {
     _poolOathOfNissa,
     _poolOblivionsHunger,
     _poolOketraTheTrue,
+    _poolOkk,
     _poolOliviaCrimsonBride,
     _poolOllenbockEscort,
     _poolOmenHawker,

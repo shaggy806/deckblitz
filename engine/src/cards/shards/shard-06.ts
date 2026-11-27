@@ -792,6 +792,7 @@ import _poolSevenOfNineTertiaryAdjunct from "../pool/seven-of-nine-tertiary-adju
 import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShadesBreath from "../pool/shades-breath.js";
 import _poolShadowLance from "../pool/shadow-lance.js";
+import _poolShamansTrance from "../pool/shamans-trance.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShapeOfTheWiitigo from "../pool/shape-of-the-wiitigo.js";
 import _poolShelobDreadWeaver from "../pool/shelob-dread-weaver.js";
@@ -799,6 +800,7 @@ import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
 import _poolShieldOfKaldra from "../pool/shield-of-kaldra.js";
 import _poolShinewend from "../pool/shinewend.js";
+import _poolShiningShoal from "../pool/shining-shoal.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShriekhorn from "../pool/shriekhorn.js";
 import _poolShriekwoodDevourer from "../pool/shriekwood-devourer.js";
@@ -1869,6 +1871,7 @@ const shard: CardShard = {
     _poolSeymourFlux,
     _poolShadesBreath,
     _poolShadowLance,
+    _poolShamansTrance,
     _poolShambleshark,
     _poolShapeOfTheWiitigo,
     _poolShelobDreadWeaver,
@@ -1876,6 +1879,7 @@ const shard: CardShard = {
     _poolSheriffOfSafePassage,
     _poolShieldOfKaldra,
     _poolShinewend,
+    _poolShiningShoal,
     _poolShortcutSeeker,
     _poolShriekhorn,
     _poolShriekwoodDevourer,

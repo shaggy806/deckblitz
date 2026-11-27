@@ -811,6 +811,7 @@ import _poolSinuousStriker from "../pool/sinuous-striker.js";
 import _poolSirensRuse from "../pool/sirens-ruse.js";
 import _poolSixSidedDie from "../pool/six-sided-die.js";
 import _poolSkirkCommando from "../pool/skirk-commando.js";
+import _poolSkophosMazeWarden from "../pool/skophos-maze-warden.js";
 import _poolSkophosWarleader from "../pool/skophos-warleader.js";
 import _poolSkullRend from "../pool/skull-rend.js";
 import _poolSkullclamp from "../pool/skullclamp.js";
@@ -1856,6 +1857,7 @@ const shard: CardShard = {
     _poolSirensRuse,
     _poolSixSidedDie,
     _poolSkirkCommando,
+    _poolSkophosMazeWarden,
     _poolSkophosWarleader,
     _poolSkullRend,
     _poolSkullclamp,

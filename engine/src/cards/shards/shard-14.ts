@@ -633,6 +633,7 @@ import _poolNikoDefiesDestiny from "../pool/niko-defies-destiny.js";
 import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
+import _poolNoQuarter from "../pool/no-quarter.js";
 import _poolNoeticScales from "../pool/noetic-scales.js";
 import _poolNorinAndFeldon from "../pool/norin-and-feldon.js";
 import _poolNoxiousField from "../pool/noxious-field.js";
@@ -1702,6 +1703,7 @@ const shard: CardShard = {
     _poolNikyaOfTheOldWays,
     _poolNivMizzetParun,
     _poolNoMercy,
+    _poolNoQuarter,
     _poolNoeticScales,
     _poolNorinAndFeldon,
     _poolNoxiousField,

@@ -241,6 +241,7 @@ import _poolDeclarationInStone from "../pool/declaration-in-stone.js";
 import _poolDecoyGambit from "../pool/decoy-gambit.js";
 import _poolDeepForestHermit from "../pool/deep-forest-hermit.js";
 import _poolDelversTorch from "../pool/delvers-torch.js";
+import _poolDemonicHordes from "../pool/demonic-hordes.js";
 import _poolDemonicTaskmaster from "../pool/demonic-taskmaster.js";
 import _poolDemonsJester from "../pool/demons-jester.js";
 import _poolDemonspineWhip from "../pool/demonspine-whip.js";
@@ -1369,6 +1370,7 @@ const shard: CardShard = {
     _poolDecoyGambit,
     _poolDeepForestHermit,
     _poolDelversTorch,
+    _poolDemonicHordes,
     _poolDemonicTaskmaster,
     _poolDemonsJester,
     _poolDemonspineWhip,

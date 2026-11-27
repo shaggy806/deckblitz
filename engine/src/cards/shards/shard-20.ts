@@ -605,6 +605,7 @@ import _poolMoroii from "../pool/moroii.js";
 import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMurkDwellers from "../pool/murk-dwellers.js";
+import _poolMusician from "../pool/musician.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
 import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
 import _poolMyrQuadropod from "../pool/myr-quadropod.js";
@@ -1730,6 +1731,7 @@ const shard: CardShard = {
     _poolMorticianBeetle,
     _poolMoxJasper,
     _poolMurkDwellers,
+    _poolMusician,
     _poolMutantsPrey,
     _poolMyojinOfSeeingWinds,
     _poolMyrQuadropod,

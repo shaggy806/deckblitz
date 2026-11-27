@@ -782,6 +782,7 @@ import _poolSheHulkWallbreaker from "../pool/she-hulk-wallbreaker.js";
 import _poolShedWeakness from "../pool/shed-weakness.js";
 import _poolShelteredValley from "../pool/sheltered-valley.js";
 import _poolShepherdOfRot from "../pool/shepherd-of-rot.js";
+import _poolShimianSpecter from "../pool/shimian-specter.js";
 import _poolShinraReinforcements from "../pool/shinra-reinforcements.js";
 import _poolShireTerrace from "../pool/shire-terrace.js";
 import _poolShockerUnshakable from "../pool/shocker-unshakable.js";
@@ -1877,6 +1878,7 @@ const shard: CardShard = {
     _poolShedWeakness,
     _poolShelteredValley,
     _poolShepherdOfRot,
+    _poolShimianSpecter,
     _poolShinraReinforcements,
     _poolShireTerrace,
     _poolShockerUnshakable,

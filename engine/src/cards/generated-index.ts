@@ -761,6 +761,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Walker Token",
   "Wall Token",
   "Wall Token (5/5 blue, defender)",
+  "Wall Token (Basalt Golem)",
   "Wall Token (Builder's Talent)",
   "Wall Token (Invisible Woman)",
   "Wall Token (Rammas Echor, Ancient Shield)",

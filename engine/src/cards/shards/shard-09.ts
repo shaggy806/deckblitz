@@ -985,6 +985,7 @@ import _poolTroveOfTemptation from "../pool/trove-of-temptation.js";
 import _poolTurfWound from "../pool/turf-wound.js";
 import _poolTurnBurn from "../pool/turn-burn.js";
 import _poolTurnTheEarth from "../pool/turn-the-earth.js";
+import _poolTwinningGlass from "../pool/twinning-glass.js";
 import _poolTwinstrike from "../pool/twinstrike.js";
 import _poolTyvarsStand from "../pool/tyvars-stand.js";
 import _poolUginsBinding from "../pool/ugins-binding.js";
@@ -996,6 +997,7 @@ import _poolUnblinkingBleb from "../pool/unblinking-bleb.js";
 import _poolUnclaimedTerritory from "../pool/unclaimed-territory.js";
 import _poolUnderworldSentinel from "../pool/underworld-sentinel.js";
 import _poolUndiscoveredParadise from "../pool/undiscovered-paradise.js";
+import _poolUndyingFlames from "../pool/undying-flames.js";
 import _poolUnleashShell from "../pool/unleash-shell.js";
 import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
 import _poolUrborgUprising from "../pool/urborg-uprising.js";
@@ -2088,6 +2090,7 @@ const shard: CardShard = {
     _poolTurfWound,
     _poolTurnBurn,
     _poolTurnTheEarth,
+    _poolTwinningGlass,
     _poolTwinstrike,
     _poolTyvarsStand,
     _poolUginsBinding,
@@ -2099,6 +2102,7 @@ const shard: CardShard = {
     _poolUnclaimedTerritory,
     _poolUnderworldSentinel,
     _poolUndiscoveredParadise,
+    _poolUndyingFlames,
     _poolUnleashShell,
     _poolUnrulyKrasis,
     _poolUrborgUprising,

@@ -83,6 +83,7 @@ import _poolBeastriderVanguard from "../pool/beastrider-vanguard.js";
 import _poolBelligerentHatchling from "../pool/belligerent-hatchling.js";
 import _poolBenalishVeteran from "../pool/benalish-veteran.js";
 import _poolBespokeBattlewagon from "../pool/bespoke-battlewagon.js";
+import _poolBewitchingLeechcraft from "../pool/bewitching-leechcraft.js";
 import _poolBidentOfThassa from "../pool/bident-of-thassa.js";
 import _poolBigWheel from "../pool/big-wheel.js";
 import _poolBilboUnexpectedAdventurer from "../pool/bilbo-unexpected-adventurer.js";
@@ -1161,6 +1162,7 @@ const shard: CardShard = {
     _poolBelligerentHatchling,
     _poolBenalishVeteran,
     _poolBespokeBattlewagon,
+    _poolBewitchingLeechcraft,
     _poolBidentOfThassa,
     _poolBigWheel,
     _poolBilboUnexpectedAdventurer,
