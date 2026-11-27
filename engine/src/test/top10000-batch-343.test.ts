@@ -19,6 +19,8 @@ import {
   life,
   nextTurn,
   pickModes,
+  pickPermanents,
+  pickTargets,
   ref,
   settle,
   spawn,
@@ -188,6 +190,23 @@ describe("batch 343 (lead)", () => {
     nextTurn(game);
     nextTurn(game);
     expect(hand(game, A).length).toBe(2);
+  });
+
+  it("Mourner's Shield offers only sources sharing a color with the imprinted card", () => {
+    const { game, a } = table();
+    const bolt = toGraveyard(game, "Lightning Bolt", B);
+    const giant = spawn(game, "Hill Giant", B);
+    const bears = spawn(game, "Grizzly Bears", B);
+    pickTargets(a, bolt);
+    pickModes(a, 0);
+    const shield = enter(game, "Mourner's Shield");
+    settle(game);
+    expect(zone(game, bolt)).toBe("exile");
+    lands(game, "Wastes", 2);
+    const seen = pickPermanents(a, giant);
+    activate(game, shield, 0);
+    expect(seen.offered).toContain(giant);
+    expect(seen.offered).not.toContain(bears);
   });
 
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {

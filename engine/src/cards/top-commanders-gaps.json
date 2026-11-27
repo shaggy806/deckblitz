@@ -100,6 +100,7 @@
     "static:block-additional-per-count",
     "effect:damage-divided-evenly-among-filter",
     "replacement:as-enters-discard-hand",
+    "filter:shares-color-with-linked-exile",
     "replacement:as-turned-face-up-dynamic-counters",
     "static:counter-cap",
     "condition:started-turn-untapped",

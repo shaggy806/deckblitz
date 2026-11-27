@@ -586,6 +586,7 @@ import _poolMoriokRigger from "../pool/moriok-rigger.js";
 import _poolMortarionDaemonPrimarch from "../pool/mortarion-daemon-primarch.js";
 import _poolMortipede from "../pool/mortipede.js";
 import _poolMossfireValley from "../pool/mossfire-valley.js";
+import _poolMournersShield from "../pool/mourners-shield.js";
 import _poolMudslide from "../pool/mudslide.js";
 import _poolMurder from "../pool/murder.js";
 import _poolMurmuration from "../pool/murmuration.js";
@@ -1682,6 +1683,7 @@ const shard: CardShard = {
     _poolMortarionDaemonPrimarch,
     _poolMortipede,
     _poolMossfireValley,
+    _poolMournersShield,
     _poolMudslide,
     _poolMurder,
     _poolMurmuration,

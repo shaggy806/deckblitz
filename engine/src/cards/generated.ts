@@ -18700,6 +18700,7 @@ import _poolMountainYeti from "./pool/mountain-yeti.js";
 import _poolMountain from "./pool/mountain.js";
 import _poolMountedArchers from "./pool/mounted-archers.js";
 import _poolMountedDreadknight from "./pool/mounted-dreadknight.js";
+import _poolMournersShield from "./pool/mourners-shield.js";
 import _poolMournersSurprise from "./pool/mourners-surprise.js";
 import _poolMournfulZombie from "./pool/mournful-zombie.js";
 import _poolMourningPatrol from "./pool/mourning-patrol.js";
@@ -53086,6 +53087,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMountain,
   _poolMountedArchers,
   _poolMountedDreadknight,
+  _poolMournersShield,
   _poolMournersSurprise,
   _poolMournfulZombie,
   _poolMourningPatrol,
@@ -87485,6 +87487,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mountain": _poolMountain,
   "pool/mounted-archers": _poolMountedArchers,
   "pool/mounted-dreadknight": _poolMountedDreadknight,
+  "pool/mourners-shield": _poolMournersShield,
   "pool/mourners-surprise": _poolMournersSurprise,
   "pool/mournful-zombie": _poolMournfulZombie,
   "pool/mourning-patrol": _poolMourningPatrol,
