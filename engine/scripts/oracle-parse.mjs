@@ -22194,6 +22194,26 @@ function parseFaceAsWritten(face, ctx = {}) {
           const inGraveyard = { kind: "source-zone", zones: ["graveyard"], sameObject: true };
           base.condition = clause.endsWith("your turn,") ? { kind: "all", of: [inGraveyard, { kind: "your-turn" }] } : inGraveyard;
           rest = rest.replace(/\breturn it to\b/, "return ~ to").replace(/\byou may cast it from your graveyard this turn\.$/, "you may cast ~ from your graveyard this turn.");
+        } else if (
+          (m = /^if ~ is in your graveyard with (a|an|one|two|three|four|five) (?:or more )?(creature) cards? (directly )?above it,$/.exec(clause)) !==
+          null
+        ) {
+          // "… with three or more creature cards above it" (Nether Shadow), "…
+          // with a creature card directly above it" (Death Spark, Krovikan
+          // Horror): the cards over it in its owner's graveyard (rule 404.2).
+          base.fromGraveyard = true;
+          base.condition = {
+            kind: "all",
+            of: [
+              { kind: "source-zone", zones: ["graveyard"], sameObject: true },
+              {
+                kind: "cards-in-graveyard",
+                atLeast: NUMBERS[m[1]],
+                filter: { type: m[2], aboveSourceInGraveyard: m[3] !== undefined ? "directly" : true },
+              },
+            ],
+          };
+          rest = rest.replace(/\breturn (?:it|this card) to\b/, "return ~ to");
         } else if (clause.toLowerCase() === "if it's not their turn," && triggers.every((t) => t.on === "draws")) {
           // "Whenever an opponent draws …, if it's not their turn": the
           // drawing player's turn (Zurzoth, Chaos Rider).

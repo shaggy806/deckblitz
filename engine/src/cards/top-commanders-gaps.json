@@ -3393,7 +3393,8 @@
   "filter:target-player-lost-life-this-turn",
   "effect:reveal-until-exile-play-all",
   "effect:reveal-until-exile-play-all",
-  "effect:reveal-x-random-discard-named"
+  "effect:reveal-x-random-discard-named",
+  "filter:directly-above-in-graveyard"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

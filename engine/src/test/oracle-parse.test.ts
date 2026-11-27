@@ -26409,4 +26409,26 @@ describe("the triggers-journal lane's picks, 2026-11-27", () => {
       ],
     });
   });
+
+  it("Krovikan Horror: in your graveyard with a creature card directly above it", () => {
+    const parsed = parseFace({
+      name: "Krovikan Horror",
+      type_line: "Creature — Horror Spirit",
+      mana_cost: "{3}{B}",
+      power: "2",
+      toughness: "2",
+      oracle_text:
+        "At the beginning of the end step, if this card is in your graveyard with a creature card directly above it, you may return this card to your hand.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      fromGraveyard: true,
+      condition: {
+        kind: "all",
+        of: [
+          { kind: "source-zone", zones: ["graveyard"], sameObject: true },
+          { kind: "cards-in-graveyard", atLeast: 1, filter: { type: "creature", aboveSourceInGraveyard: "directly" } },
+        ],
+      },
+    });
+  });
 });

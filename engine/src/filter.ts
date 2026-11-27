@@ -1335,8 +1335,12 @@ export interface CardFilter {
   readonly hasActivatedAbility?: { readonly mana?: boolean; readonly tapCost?: boolean; readonly atLeast?: number };
   /** Above the applying permanent in its owner's graveyard (rule 404.2: a
    * graveyard keeps its order): Nether Shadow's "with three or more creature
-   * cards above it". The top is the card put there last. */
-  readonly aboveSourceInGraveyard?: true;
+   * cards above it". The top is the card put there last. `"directly"`: the
+   * card right above it, nothing between — Death Spark's "with a creature
+   * card **directly above it**" (its ruling: put there later, with no cards
+   * in between). A card saying so has its graveyards arranged as cards
+   * arrive together (404.3, `readsGraveyardOrder`). */
+  readonly aboveSourceInGraveyard?: true | "directly";
   /** The top card of its owner's graveyard (rule 404.2: the card put there
    * last): Bösium Strip's "cast instant and sorcery spells from **the top of
    * your graveyard**". Nothing outside a graveyard. A card saying it has its
@@ -3893,11 +3897,12 @@ export function matchesFilter(
   if (filter.attachedToObject !== undefined && filter.attachedToRef === undefined) return false;
   if (filter.attachedToPlayerRef !== undefined && filter.attachedToRef === undefined) return false;
   if (filter.controlledByRef !== undefined) return false;
-  if (filter.aboveSourceInGraveyard === true) {
+  if (filter.aboveSourceInGraveyard !== undefined) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
     if (live === undefined || live.zone !== "graveyard" || from?.zone !== "graveyard" || from.owner !== live.owner) return false;
     const pile = state.zones.perPlayer[live.owner]?.graveyard ?? [];
-    if (pile.indexOf(id) <= pile.indexOf(from.id)) return false;
+    const above = pile.indexOf(id) - pile.indexOf(from.id);
+    if (above <= 0 || (filter.aboveSourceInGraveyard === "directly" && above !== 1)) return false;
   }
   if (filter.topOfGraveyard === true) {
     if (live === undefined || live.zone !== "graveyard") return false;
