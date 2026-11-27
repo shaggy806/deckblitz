@@ -3368,7 +3368,8 @@
   "effect:lose-specific-ability",
   "effect:temporary-counter-addend",
   "static:pt-per-half-count",
-  "replacement:prevent-damage-between-creatures-sharing-color"
+  "replacement:prevent-damage-between-creatures-sharing-color",
+  "effect:random-permanent-it-can-enchant"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
