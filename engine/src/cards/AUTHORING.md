@@ -5825,6 +5825,9 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   in your hand" is `{ increaseGeneric: { cardsInHand: "you" } }`, counted as
   it's activated (before it draws — the ruling) and added before any
   reduction (rule 601.2f). Any `EffectAmount`, read from the source's side.
+  A cost that is only "Pay {1} for each +1/+1 counter on this creature"
+  (Skeleton Scavengers) is `mana: "{0}"` with `costIncrease: {
+  increaseGeneric: { countersOn: "source", counter: "+1/+1" } }`.
 - `targetCostReduction: { filter, reduceGeneric, count? }` — "This ability
   costs {N} less to activate if it targets [`count`, default one, objects
   matching `filter`]" (the spell's `targetCostReduction`, for an ability):

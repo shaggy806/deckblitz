@@ -12,6 +12,8 @@
     "trigger:attacks-different-players",
     "trigger:attacks-with-another-at-different-player",
     "amount:colored-mana-spent-on-x",
+    "cost:mana-per-counter-on-source",
+    "trigger:regenerated-this-way",
     "cost:cumulative-upkeep-graveyard-to-library",
     "cost:ability-cost-reduction-by-target-counters",
     "cost:x-equals-chosen-opponent-hand",

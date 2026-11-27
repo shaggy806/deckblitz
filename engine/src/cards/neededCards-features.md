@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Pay {1} for each counter on this, and regenerated this way — found built 2026-11-27
+
+The keys `cost:mana-per-counter-on-source` and `trigger:regenerated-this-way` needed no engine code: a `{0}` cost with
+the ability's own `costIncrease` of `{ countersOn: "source", counter: "+1/+1" }` (Loreseeker's Stone's), and the
+regeneration shield's `ifRegenerates` reflexive trigger (Matopi Golem's). Skeleton Scavengers (25159). Not in the
+scaffolder (one card). `test/mana-per-counter-on-source.test.ts`.
+
 ### Black and/or red mana on X, and the {B} spent on X — built 2026-11-27
 
 The key `amount:colored-mana-spent-on-x`, for Soul Burn (25146): `xSpendOnly` takes several colours (`XSpendOnly`,
