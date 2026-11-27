@@ -11096,6 +11096,18 @@ const AMONG_PLAYERS_EFFECTS = {
     leastLife: true,
     then: { kind: "gain-control", target: "source", who: "that-player", untilEndOfTurn: false },
   },
+  // Puca's Eye.
+  "Draw a card, then choose a color. ~ becomes the chosen color.": {
+    kind: "sequence",
+    effects: [
+      { kind: "draw", amount: 1 },
+      {
+        kind: "choose-value",
+        value: "color",
+        then: { kind: "become", target: "source", setColors: [CHOSEN_COLOR], duration: "permanent" },
+      },
+    ],
+  },
   "Choose a card name. That player reveals their hand. If a card with the chosen name is revealed this way, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle.": {
     kind: "choose-card-name",
     then: {

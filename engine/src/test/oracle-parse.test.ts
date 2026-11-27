@@ -25828,4 +25828,17 @@ describe("the player with the lowest life total, and a colour become", () => {
       effect: { kind: "choose-opponent", anyPlayer: true, leastLife: true },
     });
   });
+
+  it("Puca's Eye: draw, then a chosen colour set for good", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Artifact",
+      mana_cost: "{2}",
+      oracle_text: "When this artifact enters, draw a card, then choose a color. This artifact becomes the chosen color.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      trigger: { on: "enters-battlefield", who: "self" },
+      effect: { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { kind: "choose-value", value: "color" }] },
+    });
+  });
 });

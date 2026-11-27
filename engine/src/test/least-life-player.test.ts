@@ -8,7 +8,14 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, C, controller, spawn, table, toLibrary, toStep } from "./harness.js";
+import { computeCharacteristics } from "../characteristics.js";
+import type { Game } from "../game.js";
+import type { ObjectId } from "../primitives.js";
+import { A, B, C, activate, controller, enter, hand, lands, registryOf, spawn, table, toLibrary, toStep } from "./harness.js";
+
+const colorsOf = (game: Game, id: ObjectId): readonly string[] => [
+  ...computeCharacteristics(game.state, registryOf(game), id).colors,
+];
 
 describe("Loxodon Peacekeeper", () => {
   it("goes to the one player with the lowest life, without a question", () => {
@@ -51,5 +58,45 @@ describe("Loxodon Peacekeeper", () => {
     expect(offered).toHaveLength(2);
     expect(offered.some((t) => t.toLowerCase().includes("alice"))).toBe(false);
     expect(controller(game, lox)).toBe(B);
+  });
+});
+
+describe("Puca's Eye", () => {
+  it("draws, then becomes the chosen colour for good", () => {
+    const { game, a } = table();
+    toLibrary(game, "Island");
+    toLibrary(game, "Island");
+    let offered: readonly string[] = [];
+    a.chooseCreatureTypeFn = (_view, _source, options) => {
+      offered = options;
+      return "G";
+    };
+    const before = hand(game).length;
+    const eye = enter(game, "Puca's Eye", A);
+    expect(hand(game).length).toBe(before + 1);
+    expect(offered).toHaveLength(5);
+    expect(colorsOf(game, eye)).toEqual(["G"]);
+    toStep(game, "precombat-main");
+    expect(colorsOf(game, eye)).toEqual(["G"]);
+  });
+
+  it("draws only with five colours among your permanents", () => {
+    const { game, a } = table();
+    a.chooseCreatureTypeFn = () => "U";
+    toLibrary(game, "Island");
+    const eye = enter(game, "Puca's Eye", A);
+    lands(game, "Wastes", 3);
+    toLibrary(game, "Island");
+    toLibrary(game, "Island");
+    game.state.objects[eye].tapped = false;
+    expect(() => activate(game, eye, 0)).toThrow();
+    // The Eye is blue: four more colours make five.
+    spawn(game, "Savannah Lions", A);
+    spawn(game, "Typhoid Rats", A);
+    spawn(game, "Goblin Piker", A);
+    spawn(game, "Grizzly Bears", A);
+    const before = hand(game).length;
+    activate(game, eye, 0);
+    expect(hand(game).length).toBe(before + 1);
   });
 });

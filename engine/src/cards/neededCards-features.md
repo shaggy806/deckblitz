@@ -9005,3 +9005,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A creature type chosen as an additional cost, kept on the permanent (2026-11-26).** `cost:creature-type-chosen-as-cast-kept-on-permanent`: `additionalCost.chooseCreatureType` (queued in `queueSharedTypeChoice` as an any-type `forCost` ask, rule 601.2h; `moveObject` keeps the spell's `chosenCreatureType` as it resolves, rule 607.2j), and a CDA's `countOf` filter now reads its source (`ofChosenType`). Caller of the Hunt. `test/creature-type-chosen-as-cast.test.ts`.
 
 **The player with the lowest life total (2026-11-26).** `effect:gain-control-to-player-with-lowest-life`: `choose-opponent`'s `leastLife` beside `mostLife` (with `anyPlayer`, the controller asked only on a tie). Loxodon Peacekeeper, `test/least-life-player.test.ts`.
+
+**A colour chosen, the permanent becoming it (2026-11-26, no engine code).** `effect:choose-color-become-color`: `choose-value` `"color"` then `become` `setColors: [CHOSEN_COLOR]`, `duration: "permanent"`. Puca's Eye, same test file.
