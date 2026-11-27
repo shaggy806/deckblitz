@@ -30353,15 +30353,20 @@ export class Game {
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
       const { kind } = ability.cost.removeCounter;
       const asked = ability.cost.removeCounter.count;
-      const count = asked === "x" ? chosenX : asked === "all" ? (source.counters[kind] ?? 0) : asked;
+      // "Remove all aim counters from Hankyu" (`granter`): off the Equipment
+      // that grants this ability (rule 201.5a), not the creature activating.
+      const fromId =
+        ability.cost.removeCounter.granter === true ? this.granterNow(this.activatedRefFor(sourceId, abilityIndex)) : sourceId;
+      const from = fromId === undefined ? undefined : this.state.objects[fromId];
+      const count = from === undefined ? 0 : asked === "x" ? chosenX : asked === "all" ? (from.counters[kind] ?? 0) : asked;
       // "Where X is the number of counters removed this way": the X the
       // ability carries from here (rule 601.2h, via 602.2b).
       if (asked === "all") chosenX = count;
       // Removing none (X = 0) removes nothing, and announces nothing.
-      if (count > 0) {
-        source.counters[kind] = (source.counters[kind] ?? 0) - count;
-        if (source.counters[kind] <= 0) delete source.counters[kind];
-        this.emit({ type: "counter-removed", object: sourceId, counter: kind, amount: count, after: source.counters[kind] ?? 0, by: player });
+      if (count > 0 && from !== undefined && fromId !== undefined) {
+        from.counters[kind] = (from.counters[kind] ?? 0) - count;
+        if (from.counters[kind] <= 0) delete from.counters[kind];
+        this.emit({ type: "counter-removed", object: fromId, counter: kind, amount: count, after: from.counters[kind] ?? 0, by: player });
       }
     }
     if (ability.cost.payEnergy !== undefined) {

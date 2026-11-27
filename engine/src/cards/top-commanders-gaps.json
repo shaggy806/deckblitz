@@ -3293,7 +3293,9 @@
   "effect:prevent-chosen-source-to-attached",
   "replacement:attached-destroy-sacrifice-aura",
   "effect:destroy-those-that-didnt-attack",
-  "static:has-all-names"
+  "static:has-all-names",
+  "static:has-all-names",
+  "effect:counter-on-granting-source"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

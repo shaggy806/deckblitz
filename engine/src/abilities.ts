@@ -445,6 +445,12 @@ export interface AbilityCost {
    * this way" — fixed as the cost is paid (rule 601.2h, via 602.2b), so the
    * effect reads it as `"x"` and a copy keeps it (707.10). Only off the
    * source, of one kind: never with `from`, `among`, `orKinds` or `"any"`.
+   *
+   * `granter: true` (with `count: "all"`) takes them off the permanent whose
+   * static grants this ability instead — Hankyu's granted "{T}, Remove all aim
+   * counters from Hankyu: This creature deals damage … equal to the number of
+   * aim counters removed this way" (rule 201.5a: "Hankyu" is the Equipment
+   * granting it). Read as `"granter"` elsewhere in the ability.
    */
   readonly removeCounter?: {
     readonly kind: string;
@@ -454,6 +460,7 @@ export interface AbilityCost {
     readonly excludeSource?: true;
     readonly among?: true;
     readonly orSuspended?: true;
+    readonly granter?: true;
   };
   /**
    * Counters to put on the source as part of the cost — Wall of Roots' "Put
