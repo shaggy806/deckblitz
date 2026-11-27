@@ -26297,4 +26297,20 @@ describe("the triggers-journal lane's picks, 2026-11-27", () => {
       condition: { kind: "source", filter: { castBy: "you", castNthThisTurn: { n: 2, byCaster: true } } },
     });
   });
+
+  it("Case File Auditor: when ~ enters and whenever you solve a Case; spend as any color for Case spells", () => {
+    expect(parseTrigger("When ~ enters and whenever you solve a Case")).toEqual([
+      { on: "enters-battlefield", who: "self" },
+      { on: "event", event: "solves-case", who: "you-control" },
+    ]);
+    const parsed = parseFace({
+      name: "Case File Auditor",
+      type_line: "Creature — Human Detective",
+      mana_cost: "{2}{W}",
+      power: "1",
+      toughness: "4",
+      oracle_text: "You may spend mana as though it were mana of any color to cast Case spells.",
+    });
+    expect(parsed.static[0]).toMatchObject({ spendManaAs: { as: "any-color", spell: { subtype: "Case" } } });
+  });
 });

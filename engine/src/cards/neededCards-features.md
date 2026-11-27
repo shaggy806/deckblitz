@@ -370,6 +370,12 @@ stack or a permanent that entered as it resolved, numbered by its latest `spell-
 every player's or (`byCaster`) its caster's. Codespell Cleric (24275, a `source` condition), Second Guess (26413, a
 spell target). `test/nth-spell-cast-this-turn.test.ts`.
 
+### Whenever you solve a Case — built 2026-11-27
+
+The key `trigger:solves-case`: a `TRIGGER_EVENTS` row on `case-solved`, the Case its subject. Case File Auditor
+(24377), with `spendManaAs.spell: { subtype: "Case" }`. The scaffolder reads "When ~ enters and whenever …" as two
+triggers. `test/solves-case.test.ts`.
+
 ### If it exploited that creature — built 2026-11-26
 
 The key `condition:exploited-that-creature`: the journal's `sacrificed` entry keeps the creature whose exploit ability

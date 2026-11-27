@@ -258,6 +258,10 @@ export const TRIGGER_EVENTS = {
   foretells: row({ type: "card-foretold", player: (e) => e.player }),
   /** "Whenever you commit a crime" (rule 700.13). */
   "commits-crime": row({ type: "crime-committed", player: (e) => e.player }),
+  /** "Whenever you solve a Case" (rule 719.3a — Case File Auditor): a Case
+   * became solved, its subject that Case; it's solved by its own ability, so
+   * its controller solved it (`who: "you-control"`). */
+  "solves-case": row({ type: "case-solved", object: (e) => e.object }),
   /** "Whenever a creature you control becomes renowned" (rule 702.112). */
   "becomes-renowned": row({ type: "became-renowned", object: (e) => e.object }),
   /** "Whenever a creature you control becomes monstrous" (rule 701.37); the

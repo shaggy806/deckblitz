@@ -2187,6 +2187,12 @@ export function parseTrigger(clause) {
   if (/^When ~ enters and at the beginning of your upkeep$/.test(c)) {
     return [...self("enters-battlefield"), { on: "step-begins", step: "upkeep", who: "you" }];
   }
+  // "When ~ enters and whenever you solve a Case" (Case File Auditor, Up the
+  // Beanstalk): two abilities, the second whatever "whenever …" reads as.
+  if ((m = /^When ~ enters and (whenever .+)$/.exec(c))) {
+    const rest = parseTrigger(m[1][0].toUpperCase() + m[1].slice(1));
+    return rest === null ? null : [...self("enters-battlefield"), ...rest];
+  }
   if (/^When(?:ever)? ~ dies$/.test(c)) return self("dies");
   // "When enchanted creature dies" (False Demise), "whenever equipped creature
   // dies" (Oathkeeper, Takeno's Daisho): what this is attached to.
@@ -2427,6 +2433,8 @@ export function parseTrigger(clause) {
     if (sides.some((s) => s === null)) return null;
     return [{ on: "enters-battlefield", who: "any", putBy: "any", filter: sides.length === 1 ? sides[0] : { anyOf: sides } }];
   }
+  // Rule 719.3a: a Case of yours becoming solved (Case File Auditor).
+  if (c === "Whenever you solve a Case") return [{ on: "event", event: "solves-case", who: "you-control" }];
   // The renowned designation (rule 702.112b) becoming true.
   if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "self" }];
   if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];
@@ -26638,6 +26646,13 @@ function parseStatic(line, text) {
   }
   if (line === "You may spend mana as though it were mana of any color to pay the activation costs of ~'s abilities.") {
     return { affects: { scope: "self" }, spendManaAs: { as: "any-color", activating: "this" }, text };
+  }
+  // "… to cast Case spells" (Case File Auditor), "… planeswalker spells"
+  // (Oath of Nissa): the permission narrowed to the spells a phrase names.
+  const spendFor = /^You may spend mana as though it were mana of any color to cast (\w+) spells\.$/.exec(line);
+  const spendSpell = spendFor === null ? null : parseTypePhrase(spendFor[1]);
+  if (spendSpell !== null && Object.keys(spendSpell).length > 0) {
+    return { affects: { scope: "self" }, spendManaAs: { as: "any-color", spell: spendSpell }, text };
   }
   // "You may spend white mana as though it were red mana" (Sunglasses of Urza,
   // rule 609.4b) — `SpendUnitAs`.
