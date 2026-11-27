@@ -2675,8 +2675,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * it attacks: Elturel Survivors' "as long as this creature is attacking,
      * it gets +X/+0, where X is the number of lands defending player
      * controls" is `{ filter: { type: "land", controlledBy: "you" },
-     * forDefendingPlayer: true, pt: [1, 0] }`. 0 while it isn't attacking. */
-    readonly forDefendingPlayer?: true;
+     * forDefendingPlayer: true, pt: [1, 0] }`. 0 while it isn't attacking.
+     * `"affected"`: the defending player of **each affected creature**, not
+     * of this permanent — an Aura's "if that creature is attacking, X is the
+     * number of snow lands defending player controls" (Snowblind). */
+    readonly forDefendingPlayer?: true | "affected";
     /**
      * `filter` asked of **each affected permanent** rather than of this one,
      * each by its own count: `attachedTo: { isSource: true }` is then "attached
@@ -2774,6 +2777,17 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     readonly round?: "up" | readonly ["down" | "up", "down" | "up"];
     /** "To a maximum of 10": the count capped at this. */
     readonly max?: number;
+    /**
+     * "Gets -X/-Y … **Y is equal to X or to enchanted creature's toughness
+     * minus 1, whichever is smaller**" (Snowblind): the toughness taken away
+     * is the lesser of the count and the affected creature's toughness minus
+     * this number, that toughness read after every other change layer 7c
+     * makes (rule 613.4c) — the effect depends on them (613.8a), so it's
+     * applied after them; two such, in timestamp order (613.8b). Read
+     * literally: a creature already at toughness 0 or less is brought up to
+     * this number. Only with a negative toughness `pt`.
+     */
+    readonly leavesToughness?: number;
     readonly pt: readonly [number, number];
     readonly excludeSelf?: boolean;
   };

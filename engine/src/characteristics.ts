@@ -5203,12 +5203,13 @@ function countSide(
   state: GameState,
   object: GameObject,
   forChosenPlayer: true | undefined,
-  forDefendingPlayer?: true,
+  forDefendingPlayer?: true | "affected",
 ): PlayerId | undefined {
   // Elturel Survivors' "the number of lands defending player controls": the
   // player it's attacking, or the one defending the planeswalker or battle
-  // it attacks (rules 506.2, 310.9d); nobody while it isn't attacking.
-  if (forDefendingPlayer === true) {
+  // it attacks (rules 506.2, 310.9d); nobody while it isn't attacking. The
+  // caller passes the affected creature for `"affected"` (Snowblind).
+  if (forDefendingPlayer !== undefined) {
     const at = object.zone === "battlefield" ? object.attacking : null;
     if (at === null) return undefined;
     const attacked = state.objects[at as ObjectId];
@@ -6419,6 +6420,10 @@ interface AppliedEffect {
   readonly timestamp: number;
   readonly power: number;
   readonly toughness: number;
+  /** `grantPtPerCount.leavesToughness` (Snowblind): `toughness` is the most
+   * it takes, applied after every other layer 7c change, never past leaving
+   * this much. */
+  readonly leavesToughness?: number;
   readonly keywords: readonly Keyword[];
   /** Keywords it takes away (`loseKeywords`). */
   readonly loseKeywords: readonly LosableKeyword[];
@@ -6747,13 +6752,15 @@ function collectStaticEffects(
     let scaledPower = 0;
     let scaledToughness = 0;
     // Whose side "you" is: the source's controller, or its chosen player.
+    // "Defending player" is the affected creature's for `"affected"`.
+    const sideOf = ability.grantPtPerCount?.forDefendingPlayer === "affected" ? target : source;
     const side =
       ability.grantPtPerCount?.fromAffectedController === true
         ? target.controller
-        : (countSide(state, source, ability.grantPtPerCount?.forChosenPlayer, ability.grantPtPerCount?.forDefendingPlayer) ?? source.controller);
+        : (countSide(state, sideOf, ability.grantPtPerCount?.forChosenPlayer, ability.grantPtPerCount?.forDefendingPlayer) ?? source.controller);
     const nobody =
-      (ability.grantPtPerCount?.forChosenPlayer === true || ability.grantPtPerCount?.forDefendingPlayer === true) &&
-      countSide(state, source, ability.grantPtPerCount.forChosenPlayer, ability.grantPtPerCount.forDefendingPlayer) === undefined;
+      (ability.grantPtPerCount?.forChosenPlayer === true || ability.grantPtPerCount?.forDefendingPlayer !== undefined) &&
+      countSide(state, sideOf, ability.grantPtPerCount.forChosenPlayer, ability.grantPtPerCount.forDefendingPlayer) === undefined;
     // Cards in exile, which is one shared zone: "cards your opponents own
     // in exile" is `ownedBy`, read from the source's controller's side.
     const exiledMatching = (exiledFilter: CardFilter): number =>
@@ -6935,6 +6942,9 @@ function collectStaticEffects(
       timestamp,
       power: (ability.grantPt?.[0] ?? 0) + scaledPower,
       toughness: (ability.grantPt?.[1] ?? 0) + scaledToughness,
+      ...(ability.grantPtPerCount?.leavesToughness !== undefined
+        ? { leavesToughness: ability.grantPtPerCount.leavesToughness }
+        : {}),
       // "… as long as an exiled card used to craft it has flying".
       keywords:
         ability.sharesKeywords !== undefined
@@ -7584,10 +7594,12 @@ function computeCharacteristicsUncached(
   // lost its abilities still gives it.
   if (onBattlefield && types.includes("creature")) power += honeBonus(state, registry, id);
 
-  // P/T modifications (additive; order does not affect the result).
+  // P/T modifications (additive; order does not affect the result) — but
+  // for a "toughness minus 1, whichever is smaller" (Snowblind), which
+  // depends on the rest (rule 613.8a) and so comes after them, below.
   for (const effect of staticEffects) {
     power += effect.power;
-    toughness += effect.toughness;
+    if (effect.leavesToughness === undefined) toughness += effect.toughness;
   }
   for (const modifier of object.modifiers) {
     power += modifier.power;
@@ -7602,6 +7614,15 @@ function computeCharacteristicsUncached(
       if (grant === undefined || !outsideReaches(state, registry, source, ability, object, types)) continue;
       power += grant[0];
       toughness += grant[1];
+    }
+  }
+  // "Y is equal to X or to enchanted creature's toughness minus 1, whichever
+  // is smaller" (Snowblind): after every other change of layer 7c, which it
+  // depends on (rule 613.8a); two such in timestamp order (613.8b's loop).
+  const capped = staticEffects.filter((e) => e.leavesToughness !== undefined);
+  if (capped.length > 0) {
+    for (const effect of [...capped].sort((a, b) => a.timestamp - b.timestamp)) {
+      toughness -= Math.min(-effect.toughness, toughness - effect.leavesToughness!);
     }
   }
   // Rule 613.4d — switches, after every other P/T effect and counter (the
