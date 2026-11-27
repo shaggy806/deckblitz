@@ -25999,6 +25999,17 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Chorus of the Conclave's optional "any amount of mana" for creature spells.
+  if (
+    line ===
+    "As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters with that many additional +1/+1 counters on it."
+  ) {
+    return {
+      affects: { scope: "self" },
+      grantsToSpells: { filter: { type: "creature" }, anyAmountOfMana: { counter: "+1/+1" } },
+      text,
+    };
+  }
   // "Instant and sorcery spells you control have rebound" (Cast Through Time).
   if (line === "Instant and sorcery spells you control have rebound.") {
     return {

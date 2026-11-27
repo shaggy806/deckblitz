@@ -6324,6 +6324,17 @@ export class Game {
           .flatMap((v) => counts.map((replicate) => ({ ...v, keywordCosts: { ...v.keywordCosts, replicate } }))),
       );
     }
+    // "You may pay any amount of mana" a permanent gives (Chorus of the
+    // Conclave, rule 601.2b): an additional cost, so beside any other cost
+    // (118.9d), one variant per amount the caster's mana could reach. A
+    // face-down spell is left out (not offered).
+    if (via !== "face-down" && this.anyAmountOfManaGrant(player, card) !== undefined) {
+      const most = Math.min(Game.MAX_ANY_AMOUNT_OFFERED, this.manaReach(player));
+      const amounts = Array.from({ length: most }, (_unused, i) => i + 1);
+      variants.push(
+        ...variants.flatMap((v) => amounts.map((anyAmountOfMana) => ({ ...v, keywordCosts: { ...v.keywordCosts, anyAmountOfMana } }))),
+      );
+    }
     // Evoke (rule 702.74a), printed or granted (Ashling, the Limitless): an
     // alternative cost, so it takes the mana cost's place in each variant
     // that pays the mana cost — kicked, with an additional cost's branch or
@@ -8145,6 +8156,9 @@ export class Game {
   /** The most times one replicate cost is offered (702.56a allows any number;
    * past this a player has long since paid for more copies than matter). */
   static readonly MAX_REPLICATE_OFFERED = 20;
+  /** The most extra mana a "pay any amount of mana" cost is offered at
+   * (`grantsToSpells.anyAmountOfMana`), as for replicate. */
+  static readonly MAX_ANY_AMOUNT_OFFERED = 20;
   /** The most permanents whose optional life cost (the Defilers) is offered
    * on one spell: every set of them is its own variant, so 2^N of them. Five
    * Defilers, one a color, reach any one spell at most once each. */
@@ -22831,7 +22845,41 @@ export class Game {
         out += (instances[index]?.cost ?? "").repeat(times);
       });
     }
+    // "Any amount of mana": generic in the total cost (rule 601.2f).
+    if (paid.anyAmountOfMana !== undefined && paid.anyAmountOfMana > 0) out += `{${paid.anyAmountOfMana}}`;
     return out;
+  }
+
+  /** The most mana `player` could make now: every source's capacity and
+   * their pool — the bound on how often a cost paid any number of times is
+   * offered. */
+  private manaReach(player: PlayerId): number {
+    return (
+      this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
+      this.state.players[player].manaPool.length
+    );
+  }
+
+  /** The counter a `grantsToSpells.anyAmountOfMana` gives `cardId` as
+   * `player` casts it (Chorus of the Conclave), or `undefined` when no such
+   * grant reaches it (`castGrantReaches`: the caster's own spells, matching
+   * its filter, while the permanent is on the battlefield). */
+  private anyAmountOfManaGrant(player: PlayerId, cardId: ObjectId): string | undefined {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined) continue;
+      for (const ability of this.ownStatics(source)) {
+        const grant = ability.grantsToSpells?.anyAmountOfMana;
+        if (grant !== undefined && castGrantReaches(this.state, this.registry, source, ability, cardId, player)) {
+          return grant.counter;
+        }
+      }
+    }
+    for (const { source, ability } of emblemStatics(this.state)) {
+      const grant = ability.grantsToSpells?.anyAmountOfMana;
+      if (grant !== undefined && castGrantReaches(this.state, this.registry, source, ability, cardId, player)) return grant.counter;
+    }
+    return undefined;
   }
 
   /** Each replicate `player` may pay for `cardId` as they cast it (rule
@@ -22855,9 +22903,7 @@ export class Game {
     card: ObjectId,
     instances: readonly { readonly cost: string; readonly also?: KickerAlsoCost }[],
   ): readonly (readonly number[])[] {
-    const manaCap =
-      this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
-      this.state.players[player].manaPool.length;
+    const manaCap = this.manaReach(player);
     const seen = new Set<string>();
     const caps = instances.map((instance) => {
       const key = `${instance.cost}|${instance.also?.text ?? ""}`;
@@ -23724,6 +23770,12 @@ export class Game {
       const instances = this.replicateInstancesOf(player, cardId, def);
       if (overload || paidKeywords.replicate.length > instances.length || paidKeywords.replicate.some((n) => !Number.isInteger(n) || n < 0)) {
         return `${def.name} has no replicate to pay that way`;
+      }
+    }
+    if (paidKeywords?.anyAmountOfMana !== undefined) {
+      const n = paidKeywords.anyAmountOfMana;
+      if (!Number.isInteger(n) || n < 1 || n > Game.MAX_EFFECT_INSTANCES || via === "face-down" || this.anyAmountOfManaGrant(player, cardId) === undefined) {
+        return `nothing lets ${def.name} be cast paying any amount of mana more`;
       }
     }
     // Evoke (rule 702.74a) is an alternative cost: only one applies (118.9a).
@@ -26500,6 +26552,14 @@ export class Game {
       object.kickedByControl = true;
     }
     if (this.keywordCostsPick?.offspring === true) object.offspringGrantPaid = true;
+    // "If you do, that creature enters with that many additional +1/+1
+    // counters on it" (Chorus of the Conclave): as Mikey & Don's
+    // permission's counters are, on the spell for its entry.
+    const anyAmount = this.keywordCostsPick?.anyAmountOfMana;
+    if (anyAmount !== undefined && anyAmount > 0) {
+      const counter = this.anyAmountOfManaGrant(player, cardId);
+      if (counter !== undefined) object.entersWithCounters = [...(object.entersWithCounters ?? []), { kind: counter, amount: anyAmount }];
+    }
     // Splice (rule 702.47a): the spliced cards are revealed and stay in hand;
     // the spell has their text until it leaves the stack (702.47e).
     if (this.activeSplice?.card === cardId) {
@@ -27337,6 +27397,10 @@ export class Game {
         const cost = instance?.also !== undefined && instance.cost === "" ? instance.also.text : (instance?.cost ?? "");
         parts.push(`replicate ${cost} ×${times}`);
       });
+    }
+    if (paid.anyAmountOfMana !== undefined && paid.anyAmountOfMana > 0) {
+      const n = paid.anyAmountOfMana;
+      parts.push(`paying {${n}} more for ${n} ${this.anyAmountOfManaGrant(player, cardId) ?? "+1/+1"} counter${n === 1 ? "" : "s"}`);
     }
     return parts.join(", ");
   }

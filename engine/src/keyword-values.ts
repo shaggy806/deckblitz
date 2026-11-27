@@ -58,6 +58,10 @@ export interface KeywordCostsPaid {
   /** How many times each replicate instance is paid, in
    * `Game.replicateInstancesOf`'s order (702.56b). */
   readonly replicate?: readonly number[];
+  /** How much mana a granted "you may pay any amount of mana" pays
+   * (`grantsToSpells.anyAmountOfMana` — Chorus of the Conclave, rule
+   * 601.2b), as generic mana in the total cost (601.2f). At least 1. */
+  readonly anyAmountOfMana?: number;
 }
 
 /**

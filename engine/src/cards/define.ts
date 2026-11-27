@@ -3706,6 +3706,18 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * "nonartifact spells you cast have improvise": each artifact tapped
      * pays {1}. Read as `convoke` is. */
     readonly improvise?: true;
+    /** "As an additional cost to cast creature spells, you may pay any
+     * amount of mana. If you do, that creature enters with that many
+     * additional +1/+1 counters on it" (Chorus of the Conclave, `filter: {
+     * type: "creature" }`): an optional additional cost (rule 601.2b) of
+     * any amount of mana, generic in the total cost (601.2f), so anything
+     * that pays generic mana pays it (convoke, the ruling). Offered as one
+     * cast per amount the caster's mana could reach
+     * (`KeywordCostsPaid.anyAmountOfMana`), and as many `counter`s go on the
+     * permanent it becomes (`GameObject.entersWithCounters`). Only spells
+     * cast while this is on the battlefield (the rulings: not itself, nor a
+     * creature put onto the battlefield). */
+    readonly anyAmountOfMana?: { readonly counter: string };
     /** Only the first spell matching `filter` its controller casts each turn
      * — Anhelo, the Painter's "**the first** instant or sorcery spell you
      * cast each turn has casualty 2". Spells cast earlier this turn count,

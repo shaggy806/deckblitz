@@ -6536,6 +6536,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   Djinn Illuminatus, `cost: "mana-cost"`; `"{2}{U}"` for Hugh), `"emerge"`, `"blitz"`, `"evoke"`,
   `"offspring"`, `"prowl"`, `"freerunning"` or `"web-slinging"`. Judged as the card would be cast, and
   each is beside any printed one. `cost` is a mana string, `"mana-cost"`, or `{ manaCostLess: N }`.
+- `grantsToSpells: { filter, anyAmountOfMana: { counter: "+1/+1" } }` — "As an additional cost to cast
+  creature spells, you may pay any amount of mana. If you do, that creature enters with that many
+  additional +1/+1 counters on it" (Chorus of the Conclave): one cast offer per amount, generic mana.
 - `grantsToHand: { filter, keywordValues, eachPlayer? }` — cards in your hand have a keyword with a cost:
   `"warp"`, `"ninjutsu"`, `"cycling"` (with `search` for typecycling), `"foretell"`, `"miracle"`,
   `"madness"` (read in the hand, so "each card you own that isn't on the battlefield has madness" says this,

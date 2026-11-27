@@ -21585,6 +21585,21 @@ describe("a cost's X defined by the ability", () => {
   });
 });
 
+describe("a granted optional cost of any amount of mana", () => {
+  it("reads Chorus of the Conclave's whole line", () => {
+    const face = parseFace({
+      name: "Test Chorus",
+      type_line: "Legendary Creature — Dryad",
+      power: "3",
+      toughness: "8",
+      oracle_text:
+        "As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters with that many additional +1/+1 counters on it.",
+    });
+    expect(face.static[0].grantsToSpells).toEqual({ filter: { type: "creature" }, anyAmountOfMana: { counter: "+1/+1" } });
+    expect(face.complete).toBe(true);
+  });
+});
+
 describe("excess damage to a creature this turn, and energy paid", () => {
   it("reads Overclocked Electromancer whole", () => {
     const face = parseFace({
