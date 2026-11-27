@@ -4,6 +4,22 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-26 — Mox Diamond with no land in hand, Backdraft with no sorcery cast
+
+Status: fixed 2026-11-26. Test: `casts-that-do-nothing.test.ts`.
+
+Found by `bot:flags` over the 204 kept games of 2026-11-22 to 26, not by a person: carol cast Mox
+Diamond with no land card in hand (`games/2026-11-25/Y7KT2-1-302401641`, turn 24), so it went
+straight to the graveyard; alice cast Backdraft when no player had cast a sorcery that turn
+(`games/2026-11-25/SPHLA-1-4096453173`, turn 38), so it chose no one.
+
+**Why:** both were v1's casts (the record's `via`: "v1's cast" — v2's clock had run out, or the
+cast was left to v1), and v1 casts anything castable that none of `wouldCast`'s holds stops.
+
+**Fix:** `HeuristicBotController.doesNothingNow`, one more hold in `wouldCast`, read off the
+definition: a permanent whose own replacement has it enter only by discarding a card of a kind
+not in hand, and a `choose-opponent` whose `whoIf` ("a player who …") fits no opponent now.
+
 ## 2026-11-26 — Etali's free Phantasmal Image copies an Angel of Vitality, not Etali
 
 Status: fixed 2026-11-26. Scenario: "a Clone with our own Etali, Primal Conqueror on the battlefield

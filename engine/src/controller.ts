@@ -26,7 +26,7 @@ import { defaultAssignment } from "./combat/damage.js";
 import { deckBias, polarityBias } from "./deck-bias.js";
 import { matchesFilter, supertypesOf } from "./filter.js";
 import type { CardFilter } from "./filter.js";
-import type { CardDefinition, Keyword } from "./cards/define.js";
+import type { CardDefinition, Keyword, StaticCondition } from "./cards/define.js";
 import { decisionFor, mayActOn, randomAnswerFor } from "./decisions/registry.js";
 import { keepMostPower } from "./decisions/choose-permanents.js";
 import { defaultVenture } from "./decisions/venture.js";
@@ -3843,6 +3843,48 @@ export class HeuristicBotController extends AutomaticController {
   }
 
   /**
+   * Whether casting `offer` now would do nothing at all, read off its
+   * definition: a permanent that enters only by discarding a card of a kind
+   * we hold none of (Mox Diamond's land: without one it goes straight to the
+   * graveyard), or a spell that chooses a player who did something this turn
+   * when no player has (Backdraft's "a player who cast one or more sorcery
+   * spells this turn"). Found by `bot:flags` in the kept games
+   * (2026-11-26): both were cast by v1, and the card was gone for nothing.
+   */
+  protected doesNothingNow(state: GameState, offer: LegalAction): boolean {
+    if (offer.kind !== "cast-spell" || offer.castModal !== undefined || offer.face !== undefined) return false;
+    if (!this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    const me = this.playerId;
+    for (const ability of def.static) {
+      const replacement = ability.replacement as
+        | { readonly event?: string; readonly instead?: { readonly discard?: { readonly filter?: CardFilter } } }
+        | undefined;
+      if (ability.affects.scope !== "self" || replacement?.event !== "enters-battlefield") continue;
+      const discard = replacement.instead?.discard;
+      if (discard === undefined) continue;
+      const hand = state.zones.perPlayer[me]?.hand ?? [];
+      const fodder = hand.filter(
+        (id) => id !== offer.card && (discard.filter === undefined || matchesFilter(state, this.registry, id, discard.filter, { you: me })),
+      );
+      if (fodder.length === 0) return true;
+    }
+    const effect = def.effect;
+    const card = state.objects[offer.card];
+    if (effect?.kind === "choose-opponent" && card !== undefined) {
+      const whoIf = effect.whoIf;
+      if (whoIf?.kind === "of-player" && whoIf.player === "that-player") {
+        // "A player who …": does an opponent fit it now? Only an opponent,
+        // even where any player may be chosen: Backdraft at the one player
+        // who cast a sorcery, ourselves, is damage to us.
+        const anyone: StaticCondition = { ...whoIf, player: "an-opponent" };
+        if (!staticConditionMet(state, this.registry, card, anyone)) return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Whether casting `offer` would take the last cards off our own library
    * (rule 104.3c: the next draw loses the game): what the spell itself makes
    * us draw and mill, a permanent's own "when this enters", and, for a spell
@@ -5994,6 +6036,7 @@ export class HeuristicBotController extends AutomaticController {
       !this.holdsTopTutor(state, o) &&
       !this.holdsLandWipe(state, o) &&
       !this.wastedNow(state, o) &&
+      !this.doesNothingNow(state, o) &&
       !this.runsLibraryOut(state, o) &&
       !this.holdsForASpell(state, o) &&
       !this.holdsWipeForCombat(state, o) &&
