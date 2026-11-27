@@ -20316,6 +20316,11 @@ describe("spend only one colour of mana on a spell's X (Consume Spirit)", () => 
     );
     expect(spirit.complete).toBe(true);
     expect(spirit.xSpendOnly).toBe("B");
+    const burn = parseFace(
+      { name: "Soul Burn", type_line: "Sorcery", mana_cost: "{X}{2}{B}", oracle_text: "Spend only black and/or red mana on X.\nDraw a card." },
+      { tokenFor: () => null },
+    );
+    expect(burn.xSpendOnly).toEqual(["B", "R"]);
   });
 
   it("is left to a person on a spell with no {X}", () => {

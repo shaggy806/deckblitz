@@ -721,6 +721,25 @@ export interface ManaCostReduction {
   readonly text: string;
 }
 
+/** What "spend only … mana on X" allows: one colour, or several ("black
+ * and/or red"). A colour word, which a text change reaches (rule 612.2). */
+export type XSpendOnly = Color | readonly Color[];
+
+/** "Spend only black mana on X" (`xSpendOnly`): `onX` of `cost`'s generic
+ * mana, the part that is X, paid as that many symbols of the colour — or,
+ * with several colours ("black and/or red", Soul Burn), as that many symbols
+ * each payable with any one of them, as a hybrid symbol is (rule 107.4e). */
+export function withXSpendOnly(cost: ManaCost, only: XSpendOnly, onX: number): ManaCost {
+  if (onX <= 0) return cost;
+  const colors: readonly Color[] = typeof only === "string" ? [only] : only;
+  if (colors.length === 1) {
+    const [color] = colors;
+    return { ...cost, generic: cost.generic - onX, colored: { ...cost.colored, [color]: cost.colored[color] + onX } };
+  }
+  const pip: HybridPip = colors.map((color) => ({ kind: "color", color }));
+  return { ...cost, generic: cost.generic - onX, hybrid: [...cost.hybrid, ...Array<HybridPip>(onX).fill(pip)] };
+}
+
 /** `cost` less a {@link ManaCostReduction}: its coloured and colorless symbols
  * first take mana of their type, any excess then generic (rules 118.7b-d). */
 export function reducedBy(cost: ManaCost, by: ManaCostReduction): ManaCost {

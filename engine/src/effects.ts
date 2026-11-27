@@ -851,6 +851,17 @@ export type EffectAmount =
    */
   | ({ readonly manaSpentOf: ObjectRef | "this-ability" } & ManaSpentQuery)
   /**
+   * "The amount of {B} spent **on X**" (Soul Burn, whose X is "black and/or
+   * red" — `xSpendOnly: ["B", "R"]`): how much of the resolving spell's X was
+   * paid with mana of this colour. The mana spent is kept as a pool of units,
+   * not symbol by symbol, so it's read as the most the payment could have put
+   * on X — the colour's mana spent less the colour's own symbols in its mana
+   * cost, never more than X — the share its caster, who assigns the mana to
+   * the symbols as they pay (rule 601.2h), would always take: more of it on X
+   * only ever means more life. 0 for a spell that wasn't cast.
+   */
+  | { readonly manaSpentOnX: Color }
+  /**
    * How much unspent mana a player has (rule 106.4): Omnath, Locus of the
    * Void's "for each unspent mana you have"; `type` narrows it, "unspent green
    * mana". Mana made and spent inside one payment is never unspent.
@@ -19572,6 +19583,13 @@ export function signedAmountValue(
     if (amount.manaSpentOf === "this-ability") return spentManaCount(ctx.manaSpentOnThisAbility(), amount);
     const ref = objectRefRead(amount.manaSpentOf, ctx);
     return ref === undefined ? 0 : spentManaCount(ctx.manaSpentOf(ref), amount);
+  }
+  if ("manaSpentOnX" in amount) {
+    const ref = objectRefRead("source", ctx);
+    if (ref === undefined) return 0;
+    const spent = spentManaCount(ctx.manaSpentOf(ref), { type: amount.manaSpentOnX });
+    const elsewhere = ctx.manaSymbolsOf(ref, amount.manaSpentOnX);
+    return Math.max(0, Math.min(ctx.x, spent - elsewhere));
   }
   if ("unspentMana" in amount) {
     const who = resolvePlayerRef(amount.unspentMana, ctx);

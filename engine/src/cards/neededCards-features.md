@@ -325,6 +325,15 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Black and/or red mana on X, and the {B} spent on X — built 2026-11-27
+
+The key `amount:colored-mana-spent-on-x`, for Soul Burn (25146): `xSpendOnly` takes several colours (`XSpendOnly`,
+`mana.ts`'s `withXSpendOnly` turning X into that many hybrid-like symbols, rule 107.4e), and the `{ manaSpentOnX }`
+amount reads the colour's mana spent less its own symbols in the mana cost, at most X — the most the payment could put
+on X (601.2h: the caster assigns it; more only ever gains more). The scaffolder reads "Spend only black and/or red mana
+on X". `test/x-spend-only.test.ts`. Not built: Emblazoned Golem's "no more than one mana of each color" on a kicker X
+wants a distinct-colour rule across symbols in the payment planner.
+
 ### Cumulative upkeep: cards from a single graveyard to their owner's library — built 2026-11-27
 
 The key `cost:cumulative-upkeep-graveyard-to-library`: `SearchTogether`'s `singleGraveyard` (a `share` rule, each

@@ -23,7 +23,7 @@ import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import type { DieTest } from "./random-results.js";
 import type { TriggerEventName } from "./trigger-events.js";
-import type { Color, ManaSpentQuery } from "./mana.js";
+import type { Color, ManaSpentQuery, XSpendOnly } from "./mana.js";
 
 /** A non-mana, non-tap component of an ability cost that sacrifices a permanent. */
 export type SacrificeCost =
@@ -378,8 +378,9 @@ export interface AbilityCost {
    * the X offered goes only as high as that mana does. Anything that lowers
    * the cost's generic mana takes the rest of the generic part first, then X
    * (`Game.activatedAbilityManaCost`). A colour word, which a text change
-   * reaches (rule 612.2). */
-  readonly xSpendOnly?: "W" | "U" | "B" | "R" | "G";
+   * reaches (rule 612.2). Several colours: "black and/or red" (Soul Burn's,
+   * on a spell), each X a symbol any one of them pays (`withXSpendOnly`). */
+  readonly xSpendOnly?: XSpendOnly;
   /** Whether `{T}` (tap this permanent) is part of the cost. */
   readonly tap: boolean;
   /**

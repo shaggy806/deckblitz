@@ -532,6 +532,7 @@ import {
   payColoredSymbols,
   repeatedManaCost,
   withGenericReducedBy,
+  withXSpendOnly,
   reduceManaCost,
   reduceGenericInCost,
 } from "./mana.js";
@@ -20752,10 +20753,7 @@ export class Game {
     // other generic mana first.
     const only = def.xSpendOnly;
     const onX = only === undefined ? 0 : Math.min(reducedTotal.generic, printed.x * Math.max(0, xValue));
-    const total: ManaCost =
-      onX === 0
-        ? reducedTotal
-        : { ...reducedTotal, generic: reducedTotal.generic - onX, colored: { ...reducedTotal.colored, [only!]: reducedTotal.colored[only!] + onX } };
+    const total: ManaCost = onX === 0 || only === undefined ? reducedTotal : withXSpendOnly(reducedTotal, only, onX);
     // "Each spell that would cost less than three mana to cast costs three
     // mana to cast" (Trinisphere): applied to the total once it's determined
     // (rule 601.2f), the difference as generic mana.
@@ -29289,14 +29287,7 @@ export class Game {
     // has taken the cost's other generic mana first.
     const only = ability.cost.xSpendOnly;
     const onX = only === undefined ? 0 : Math.min(unrestricted.generic, parsed.x * chosenX);
-    const cost: ManaCost =
-      only === undefined || onX === 0
-        ? unrestricted
-        : {
-            ...unrestricted,
-            generic: unrestricted.generic - onX,
-            colored: { ...unrestricted.colored, [only]: unrestricted.colored[only] + onX },
-          };
+    const cost: ManaCost = only === undefined || onX === 0 ? unrestricted : withXSpendOnly(unrestricted, only, onX);
     return { cost, chosenX };
   }
 

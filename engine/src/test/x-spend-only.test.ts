@@ -164,3 +164,49 @@ describe("Consume Spirit — spend only black mana on X, on a spell (`CardDefini
     expect(life(game, A)).toBe(23);
   });
 });
+
+describe("Soul Burn — black and/or red mana on X, the gain no more than the {B} on X", () => {
+  it("X takes black or red, nothing else: four Swamps, two Mountains and three Forests give X 5", () => {
+    const { game } = table();
+    lands(game, "Swamp", 4);
+    lands(game, "Mountain", 2);
+    lands(game, "Forest", 3);
+    const burn = toHand(game, "Soul Burn");
+    // {B} from a Swamp, {2} from Forests, X from three Swamps and two Mountains
+    // (the third Forest can't pay X).
+    expect(castXOffer(game, burn)?.xCost?.maxX).toBe(5);
+    expect(() => cast(game, burn, { x: 6, targets: [ref(B)] })).toThrow(/pay|mana/i);
+  });
+
+  it("gains 1 life for each black on X: X 4 with three black and a red on X gains 3", () => {
+    const { game } = table();
+    lands(game, "Swamp", 4);
+    lands(game, "Mountain", 1);
+    lands(game, "Forest", 2);
+    const burn = toHand(game, "Soul Burn");
+    cast(game, burn, { x: 4, targets: [ref(B)] });
+    expect(life(game, B)).toBe(16);
+    expect(life(game, A)).toBe(23);
+  });
+
+  it("all red on X: the damage, and no life", () => {
+    const { game } = table();
+    lands(game, "Swamp", 1);
+    lands(game, "Mountain", 5);
+    const burn = toHand(game, "Soul Burn");
+    // {B} and {2}: a Swamp and two Mountains; X 3 from the other Mountains.
+    cast(game, burn, { x: 3, targets: [ref(B)] });
+    expect(life(game, B)).toBe(17);
+    expect(life(game, A)).toBe(20);
+  });
+
+  it("no more than the creature's toughness", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Swamp", 7);
+    const burn = toHand(game, "Soul Burn");
+    cast(game, burn, { x: 4, targets: [ref(bears)] });
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(life(game, A)).toBe(22);
+  });
+});

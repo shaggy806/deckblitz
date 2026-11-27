@@ -33,7 +33,7 @@ import type {
 import type { AggregateOf, AggregateSpec, CardFilter, ManaSpentClause, NumCompare } from "../filter.js";
 import type { CardNameChoice, CardNameFilter } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
-import type { Color, ManaFromSpec, ManaProductionRule, ManaType, SpendAs } from "../mana.js";
+import type { Color, ManaFromSpec, ManaProductionRule, ManaType, SpendAs, XSpendOnly } from "../mana.js";
 import type { Prohibition } from "../prohibitions.js";
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedAt } from "../delayed-at.js";
@@ -5852,9 +5852,10 @@ export interface CardDefinition {
    * activated ability's `AbilityCost.xSpendOnly`: what lowers the cost's
    * generic mana takes the rest of the generic part first, then X
    * (`Game.castingCostOf`); a cost with no {X} (an alternative cost, X 0,
-   * rule 107.3b) has nothing it restricts.
+   * rule 107.3b) has nothing it restricts. Several colours are "black and/or
+   * red" (Soul Burn: `["B", "R"]`), each X a symbol any of them pays.
    */
-  readonly xSpendOnly?: "W" | "U" | "B" | "R" | "G";
+  readonly xSpendOnly?: XSpendOnly;
   /**
    * "X can't be 0" on a spell with {X} in its mana cost (Mind Grind): the
    * least X its caster may announce (rule 601.2b). Cast while paying neither
@@ -7319,7 +7320,7 @@ interface CardDraft {
   /** See {@link CardDefinition.maxX}. */
   maxX?: EffectAmount;
   /** See {@link CardDefinition.xSpendOnly}. */
-  xSpendOnly?: "W" | "U" | "B" | "R" | "G";
+  xSpendOnly?: XSpendOnly;
   /** See {@link CardDefinition.minX}. */
   minX?: number;
   costPerExtraTarget?: string;

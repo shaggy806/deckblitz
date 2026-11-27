@@ -269,8 +269,9 @@ describe("the pool's text holds no colour word the change can't reach", () => {
   // Deep Water) included, an attack tax's {W/P} (Norn's Annex's `phyrexian`),
   // and a mana-spent clause's `type` ({U}{B}, the Mythoi). A choice's colours
   // (`onlyColorItsControllerChose` — Selective Obliteration's options) are
-  // values, as `chooseOnEnter`'s are.
-  const NOT_WORDS = new Set(["mana", "oneOf", "thenOneOf", "elseOneOf", "all", "xColor", "chooseOnEnter", "value", "produces", "manaProduction", "payLifeForPips", "phyrexian", "type", "onlyColorItsControllerChose"]);
+  // values, as `chooseOnEnter`'s are. Soul Burn's "the amount of {B} spent
+  // on X" (`manaSpentOnX`) is a symbol too.
+  const NOT_WORDS = new Set(["manaSpentOnX", "mana", "oneOf", "thenOneOf", "elseOneOf", "all", "xColor", "chooseOnEnter", "value", "produces", "manaProduction", "payLifeForPips", "phyrexian", "type", "onlyColorItsControllerChose"]);
 
   it("every field holding a colour is a colour-word field or a known non-word one", () => {
     const unknown = new Map<string, string>();

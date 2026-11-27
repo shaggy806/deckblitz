@@ -20180,8 +20180,10 @@ function parseFaceAsWritten(face, ctx = {}) {
     if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
     // "Spend only black mana on X." on a spell with {X} in its mana cost
     // (Consume Spirit, Drain Life) — the card's `xSpendOnly`.
-    if (isSpell && /\{X\}/.test(face.mana_cost ?? "") && (m = /^Spend only (white|blue|black|red|green) mana on X\.$/.exec(line))) {
-      out.xSpendOnly = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[1]];
+    // "Spend only black and/or red mana on X." (Soul Burn): both colours.
+    if (isSpell && /\{X\}/.test(face.mana_cost ?? "") && (m = /^Spend only (white|blue|black|red|green)(?: and\/or (white|blue|black|red|green))? mana on X\.$/.exec(line))) {
+      const word = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+      out.xSpendOnly = m[2] === undefined ? word[m[1]] : [word[m[1]], word[m[2]]];
       continue;
     }
     // A freerunning cost that isn't mana: "Freerunning—Return a blue creature
