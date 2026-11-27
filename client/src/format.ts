@@ -265,7 +265,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
         ? `${name(event.for)} enlists ${name(event.creature)}`
         : event.as === 'crew'
           ? `${name(event.creature)} crews ${name(event.for)}`
-          : `${name(event.creature)} saddles ${name(event.for)}`
+          : event.as === 'teamwork'
+            ? `${name(event.creature)} is tapped for ${name(event.for)}'s teamwork`
+            : `${name(event.creature)} saddles ${name(event.for)}`
     case 'permanents-phased-out':
       return `${event.objects.map(name).join(', ')} phase${event.objects.length === 1 ? 's' : ''} out`
     case 'permanents-phased-in':

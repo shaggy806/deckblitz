@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
-import { A, B, cast, lands, ref, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
+import { A, B, attack, cast, counters, hand, lands, ref, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
 const offers = (game: Game, card: ObjectId) =>
   game.legalActions(A).filter((a) => a.kind === "cast-spell" && a.card === card);
@@ -107,5 +107,34 @@ describe("teamwork", () => {
     expect(asked.some((t) => t.includes("{4}"))).toBe(true);
     expect(asked.some((t) => t.includes("{2}"))).toBe(false);
     expect(zone(game, shock)).toBe("graveyard");
+  });
+});
+
+describe("becomes tapped to pay a teamwork cost (Agent Maria Hill)", () => {
+  it("triggers when she's tapped for a teamwork cost: a +1/+1 counter and a card", () => {
+    const { game } = table();
+    lands(game, "Island", 4);
+    const maria = spawn(game, "Agent Maria Hill");
+    const bears = spawn(game, "Grizzly Bears");
+    const before = hand(game).length;
+    cast(game, toHand(game, "Timeline Inquiry"), { kicked: true, tap: [maria, bears] });
+    expect(game.state.objects[maria].tapped).toBe(true);
+    expect(counters(game, maria)).toBe(1);
+    // Three from the spell (no discard: cast using teamwork) and one from her.
+    expect(hand(game)).toHaveLength(before + 4);
+  });
+
+  it("doesn't trigger when another creature pays the teamwork, or she's tapped otherwise", () => {
+    const { game, a } = table();
+    lands(game, "Island", 4);
+    const maria = spawn(game, "Agent Maria Hill");
+    const bears = spawn(game, "Grizzly Bears");
+    const before = hand(game).length;
+    cast(game, toHand(game, "Timeline Inquiry"), { kicked: true, tap: [bears] });
+    expect(counters(game, maria)).toBe(0);
+    expect(hand(game)).toHaveLength(before + 3);
+    attack(game, a, [maria]);
+    expect(game.state.objects[maria].tapped).toBe(true);
+    expect(counters(game, maria)).toBe(0);
   });
 });

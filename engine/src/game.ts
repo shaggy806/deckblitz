@@ -26491,6 +26491,11 @@ export class Game {
     if (tappedForCost.length > 0) {
       this.recordPaid(object.id, "tapped", tappedForCost);
     }
+    // Teamwork (rule 702.194a): each creature tapped for it "becomes tapped
+    // to pay a teamwork cost" (Agent Maria Hill).
+    if (alternativeTaps?.teamwork === true) {
+      for (const id of tappedForCost) this.emit({ type: "creature-tapped-for", creature: id, for: object.id, as: "teamwork" });
+    }
     // Sneak's "returning an unblocked creature you control to its owner's
     // hand" (rule 702.190a), the other half of that cost: what it was
     // attacking is what the permanent this spell becomes attacks (702.190b).
@@ -40592,7 +40597,7 @@ export class Game {
       case "crews-or-saddles":
         return (
           event.type === "creature-tapped-for" &&
-          event.as !== "enlist" &&
+          (event.as === "crew" || event.as === "saddle") &&
           spec.as.includes(event.as) &&
           this.matchesWho(spec.who, event.creature, self)
         );
@@ -53607,6 +53612,9 @@ controlledBy,
         readonly reducesGeneric?: number;
         readonly filter: CardFilter;
         readonly perExtraMode?: true;
+        /** A teamwork cost's (rule 702.194a): each creature tapped "becomes
+         * tapped to pay a teamwork cost" (Agent Maria Hill). */
+        readonly teamwork?: true;
       }
     | undefined {
     // "Flashback—Tap three untapped white creatures you control" (Battle Screech).
@@ -53619,7 +53627,7 @@ controlledBy,
       if (taps !== undefined) return taps;
     }
     if (kicked && def.kicker?.teamwork !== undefined) {
-      return { count: 0, totalPower: def.kicker.teamwork, filter: { type: "creature" } };
+      return { count: 0, totalPower: def.kicker.teamwork, filter: { type: "creature" }, teamwork: true };
     }
     // "Kicker—Tap an untapped Vampire you control" (Blood Tribute),
     // "Splice onto Arcane—Tap an untapped white creature you control"

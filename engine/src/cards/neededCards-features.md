@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Becomes tapped to pay a teamwork cost — built 2026-11-26
+
+The key `trigger:becomes-tapped-for-teamwork`: the `creature-tapped-for` event's `as: "teamwork"` (`for` the spell),
+announced for each creature tapped for a teamwork cost (rule 702.194a) as the spell is cast — `spellTapCost` marks its
+teamwork offer `teamwork: true` — and the `TRIGGER_EVENTS` row `tapped-for-teamwork`, the creature tapped the
+subject. Agent Maria Hill (23226). Not in the scaffolder (one card). `test/teamwork.test.ts`.
+
 ### Domain of another player — built 2026-11-26
 
 The key `amount:domain-of-target-player`: the `{ basicLandTypes }` effect amount takes any `PlayerRef` (it took only

@@ -305,6 +305,10 @@ export const TRIGGER_EVENTS = {
    * enlisting creature is the subject, the enlisted one the `by`-less
    * partner the effect never names. */
   enlists: row({ type: "creature-tapped-for", when: (e) => e.as === "enlist", object: (e) => e.for }),
+  /** "Whenever this creature becomes tapped to pay a teamwork cost" (Agent
+   * Maria Hill — rule 702.194a): the creature tapped is the subject, once
+   * for each creature tapped for the cost. */
+  "tapped-for-teamwork": row({ type: "creature-tapped-for", when: (e) => e.as === "teamwork", object: (e) => e.creature }),
   /** "Whenever you proliferate" (rule 701.34) — even choosing nothing. */
   proliferates: row({ type: "proliferated", player: (e) => e.player }),
   /** "Whenever a player chooses one or more targets" (Psychic Battle): once

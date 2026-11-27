@@ -572,12 +572,14 @@ export type GameEvent =
       /** A creature was tapped to pay a cost of another permanent's keyword
        * that taps creatures for it: `creature` enlisted by the attacking
        * `for` (rule 702.154c), or `creature` crewed the Vehicle / saddled the
-       * Mount `for` (702.122b, 702.171c). Announced as the cost is paid,
+       * Mount `for` (702.122b, 702.171c), or `creature` tapped to pay the
+       * teamwork cost of the spell `for` (702.194a: "becomes tapped to pay a
+       * teamwork cost" — Agent Maria Hill). Announced as the cost is paid,
        * once per creature, after the creatures' own `permanent-tapped`. */
       readonly type: "creature-tapped-for";
       readonly creature: ObjectId;
       readonly for: ObjectId;
-      readonly as: "enlist" | "crew" | "saddle";
+      readonly as: "enlist" | "crew" | "saddle" | "teamwork";
     })
   | (Base & {
       /** Permanents phased out together (rule 702.26b) — those phased out
