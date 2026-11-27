@@ -2,6 +2,9 @@
   {
     "date": "2026-11-27",
     "notes": [
+      "Bots now play their lands and mana toward casting their commander a turn sooner, such as cracking Krosan Verge for the colours The First Sliver needs.",
+      "Bots now attack with a menace creature when the defender has only one creature to block it, and equip menace to finish a player with commander damage.",
+      "Bots no longer spend Umezawa's Jitte's counters on a pump that can't help them, such as on a creature about to be handed to an opponent.",
       "201 more cards are playable, among them Juxtapose, Chorus of the Conclave, Spy Kit, Shaman's Trance, Time and Tide and Okk.",
       "Journey to Eternity, Radiant Grace and Skin Invasion no longer come back when they were exiled instead of going to the graveyard.",
       "An attacker that is already blocked no longer becomes blocked again when an effect adds another blocker, so its \"whenever it becomes blocked\" abilities don't trigger twice.",
