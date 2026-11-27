@@ -3980,6 +3980,18 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "For one spell this turn, you may spend mana as though it were mana of
+  // any type to pay that spell's mana cost" (North Star): a timed static's
+  // one-spell `spendManaAs` (rule 609.4b).
+  if (/^for one spell this turn, you may spend mana as though it were mana of any type to pay that spell's mana cost\.$/i.test(s)) {
+    const text = "For one spell this turn, you may spend mana as though it were mana of any type to pay that spell's mana cost.";
+    return {
+      kind: "timed-static",
+      duration: "end-of-turn",
+      text,
+      static: [{ affects: { scope: "self" }, spendManaAs: { as: "any-type", oneSpell: true }, text }],
+    };
+  }
   // "It gets +1/+0 until end of turn for each {B} or {R} spent this way"
   // (Balduvian Fallen, on its cumulative upkeep's payment): the mana that
   // payment spent, `{ manaSpentOf: "this-ability" }`. Above the bar on "for

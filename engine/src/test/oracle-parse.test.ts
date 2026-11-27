@@ -26789,3 +26789,21 @@ describe("costs-mana lane, 2026-11-27: granted cumulative upkeep, its paid mana,
     expect(parsed.static[0].replacement.counters.amount).toEqual({ ifCondition: { kind: "self-kicked" }, then: "x", else: 0 });
   });
 });
+
+describe("costs-mana lane, 2026-11-27: mana of any type for one spell's mana cost", () => {
+  it("North Star: a timed static's one-spell spendManaAs", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Artifact",
+      mana_cost: "{4}",
+      oracle_text:
+        "{4}, {T}: For one spell this turn, you may spend mana as though it were mana of any type to pay that spell's mana cost. (Additional costs are still paid normally.)",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.activated[0].effect).toMatchObject({
+      kind: "timed-static",
+      duration: "end-of-turn",
+      static: [{ spendManaAs: { as: "any-type", oneSpell: true } }],
+    });
+  });
+});

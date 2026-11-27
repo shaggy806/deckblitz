@@ -392,6 +392,8 @@ describe("what is read off an emblem", () => {
     "zeroLoyaltySurvives",
     // `playerDamageLifeFloor` reads emblems (Serra the Benevolent).
     "damageLifeFloor",
+    // `spendAsFor` reads emblems: False Dawn's and North Star's timed statics.
+    "spendManaAs",
     // Permissions.
     "mayPlay",
     "alternativeCostForSpells",

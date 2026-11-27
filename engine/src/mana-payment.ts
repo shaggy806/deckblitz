@@ -417,6 +417,10 @@ export interface ManaPlanningView {
    * 118.14: any colour *or* colourless). See {@link costAsSpendable}.
    */
   readonly spendAs?: WideSpendAs;
+  /** As `spendAs`, but for the symbols of `pips` alone — a spell's mana cost,
+   * its additional costs still paid normally (North Star's "to pay that
+   * spell's mana cost"). See {@link costAsSpendableWithin}. */
+  readonly spendAsWithin?: { readonly as: WideSpendAs; readonly pips: ManaCost };
   /** An effect lets one type of mana be spent as a colour it isn't (Sunglasses
    * of Urza, Abstruse Appropriation). See {@link pipsAsSpendable}. */
   readonly spendUnits?: readonly SpendUnitAs[];
@@ -455,6 +459,41 @@ export function costAsSpendable(cost: ManaCost, spendAs: WideSpendAs | undefined
     colored: { W: 0, U: 0, B: 0, R: 0, G: 0 },
     colorless: cost.colorless - colorless,
   };
+}
+
+/**
+ * `cost` as the payment `view` describes may pay it: {@link costAsSpendable}
+ * for its `spendAs`, and first, for its `spendAsWithin`, only as many of the
+ * cost's symbols as `pips` has of each kind — a coloured one of the mana
+ * cost's colour, or any coloured one for each of its hybrid symbols, and
+ * with `"any-type"` its `{C}` ones (the rest are an additional cost's, paid
+ * normally). Rule 609.4b: how the cost may be paid, never the cost.
+ */
+export function costAsSpendableWithin(cost: ManaCost, view: Pick<ManaPlanningView, "spendAs" | "spendAsWithin">): ManaCost {
+  const within = view.spendAsWithin;
+  if (within === undefined || view.spendAs === "any-type") return costAsSpendable(cost, view.spendAs);  const colored = { ...cost.colored };
+  let folded = 0;
+  for (const c of COLORS) {
+    const n = Math.min(colored[c], within.pips.colored[c]);
+    colored[c] -= n;
+    folded += n;
+  }
+  // A hybrid symbol of the mana cost was paid as one of its colours.
+  let hybrid = within.pips.hybrid.length;
+  for (const c of COLORS) {
+    const n = Math.min(colored[c], hybrid);
+    colored[c] -= n;
+    hybrid -= n;
+    folded += n;
+  }
+  const colorless = within.as === "any-type" ? Math.min(cost.colorless, within.pips.colorless) : 0;
+  const narrowed: ManaCost = {
+    ...cost,
+    generic: cost.generic + folded + colorless,
+    colored,
+    colorless: cost.colorless - colorless,
+  };
+  return costAsSpendable(narrowed, view.spendAs);
 }
 
 /**
@@ -955,7 +994,7 @@ function planMatchingPips(
   exclude: ObjectId | undefined,
 ): ManaPlanStep[] | null {
   if (rawCost.snow > 0) return null;
-  const cost = costAsSpendable(rawCost, view.spendAs);
+  const cost = costAsSpendableWithin(rawCost, view);
   if (COLORS.filter((c) => cost.colored[c] > 0).length + (cost.colorless > 0 ? 1 : 0) < 2) return null;
   return (
     planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", false, true) ??
@@ -1031,7 +1070,7 @@ function planManaPaymentAs(
   if (rawCost.snow > 0) return planSnowPayment(view, rawCost, avoid, exclude);
   // Mana that may be spent as though it were any colour (or type) pays a
   // coloured pip as freely as a generic one (rule 609.4b).
-  const cost = costAsSpendable(rawCost, view.spendAs);
+  const cost = costAsSpendableWithin(rawCost, view);
   const hasCosted = view.sources.some(hasCostedOption);
   const weighingLife = (): ManaPlanStep[] | null => planWeighingLife(view, cost, avoid, exclude, hasCosted);
   if (!view.sources.some((s) => s.options.some((o) => o.pain + o.lifeCost > 0))) return weighingLife();
@@ -2135,7 +2174,7 @@ export function planPayment(
   if (view.onlyAsColorless !== undefined) {
     // Celestial Dawn: the pips rewritten as only its mana may pay them, and
     // no other permission left to widen them again (rule 101.2).
-    const { onlyAsColorless, spendAs, spendUnits: _units, ...rest } = view;
+    const { onlyAsColorless, spendAs, spendUnits: _units, spendAsWithin: _within, ...rest } = view;
     return planPayment(rest, costAsOnlyColorless(cost, onlyAsColorless, spendAs === "any-type"), purpose, avoid, exclude);
   }
   const resolved = resolveHybridCost(view, withLifeForPips(pipsAsSpendable(cost, view.spendUnits), view.lifeForPips), avoid, exclude);
@@ -2150,7 +2189,7 @@ export function planPayment(
     steps,
     life: resolved.life,
     ...(resolved.lifeRather !== undefined && resolved.lifeRather > 0 ? { lifeRather: resolved.lifeRather } : {}),
-    resolved: costAsSpendable(resolved.concrete, view.spendAs),
+    resolved: costAsSpendableWithin(resolved.concrete, view),
     purpose,
   };
 }

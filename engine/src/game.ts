@@ -20933,6 +20933,10 @@ export class Game {
    * `targetCostReduction` — whether the full price is affordable. */
   private targetCostReductionOff = false;
 
+  /** While set, a spell's payment is planned without a one-spell
+   * `spendManaAs` (North Star's): whether the cast needs it (`castSpell`). */
+  private oneSpellSpendOff = false;
+
   /** While set, a spell offered for casting is priced with its
    * `targetCostReduction`, whatever its legal targets: the ceiling on an X
    * its target filter reads (Lullmage's Domination), where which targets are
@@ -26438,14 +26442,36 @@ export class Game {
           );
     if (typeof waterbent === "string") throw new Error(waterbent);
     manaArrangement = withWaterbent(new Set(waterbent));
-    const payment = this.payMana(
-      player,
-      { ...manaToPay, generic: manaToPay.generic - waterbent.length },
-      undefined,
-      undefined,
-      { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked), ...this.altCostSpendOnly(def, altCost) },
-      manaArrangement,
-    );
+    const planCast = (): ManaPayment | null =>
+      this.payMana(
+        player,
+        { ...manaToPay, generic: manaToPay.generic - waterbent.length },
+        undefined,
+        undefined,
+        { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked), ...this.altCostSpendOnly(def, altCost) },
+        manaArrangement,
+      );
+    // "For one spell this turn" (North Star): planned without it first, and
+    // used up only by a spell that can't be paid otherwise — the one its
+    // controller would spend it on.
+    const oneSpell = this.oneSpellSpendSources(player);
+    let oneSpellUsed: ObjectId | undefined;
+    let payment: ManaPayment | null;
+    if (oneSpell.length === 0) payment = planCast();
+    else {
+      this.oneSpellSpendOff = true;
+      invalidateComputedCache();
+      try {
+        payment = planCast();
+      } finally {
+        this.oneSpellSpendOff = false;
+        invalidateComputedCache();
+      }
+      if (payment === null) {
+        payment = planCast();
+        if (payment !== null) oneSpellUsed = oneSpell[0];
+      }
+    }
     if (payment === null) {
       throw new Error(`${player} cannot pay the cost of ${def.name}`);
     }
@@ -26807,6 +26833,7 @@ export class Game {
       this.emit({ type: "mana-expended", player: assist.player, before, after: before + assist.amount });
     }
     const ownUnits = this.executePayment(player, payment);
+    if (oneSpellUsed !== undefined) this.endTimedStatic(oneSpellUsed);
     // Life paid for a Phyrexian pip isn't mana spent: the units are only what
     // the pool paid, an assisting player's among them.
     const ownSpent = ownUnits.length;
@@ -33690,6 +33717,7 @@ export class Game {
       ...(spend.wide !== undefined ? { spendAs: spend.wide } : {}),
       ...(spend.units.length > 0 ? { spendUnits: spend.units } : {}),
       ...(spend.onlyAsColorless !== undefined ? { onlyAsColorless: spend.onlyAsColorless } : {}),
+      ...(spend.within !== undefined ? { spendAsWithin: spend.within } : {}),
     };
   }
 
@@ -33762,10 +33790,34 @@ export class Game {
     });
   }
 
+  /** The objects of `player`'s timed statics that let them spend mana freely
+   * "for one spell this turn" (North Star — `spendManaAs.oneSpell`), oldest
+   * first. */
+  private oneSpellSpendSources(player: PlayerId): ObjectId[] {
+    if (this.state.emblems.length === 0) return [];
+    return emblemStatics(this.state, player)
+      .filter(({ source, ability }) => ability.spendManaAs?.oneSpell === true && this.staticActive(source, ability))
+      .map(({ source }) => source.id);
+  }
+
+  /** End the timed static (or emblem) whose object is `object` now: North
+   * Star's "for one spell", used up by the spell it paid for. */
+  private endTimedStatic(object: ObjectId): void {
+    if (!this.state.emblems.some((e) => e.object === object)) return;
+    this.state.emblems = this.state.emblems.filter((e) => e.object !== object);
+    delete this.state.objects[object];
+    invalidateComputedCache();
+  }
+
   private spendAsFor(
     player: PlayerId,
     purpose: ManaPurpose,
-  ): { readonly wide: WideSpendAs | undefined; readonly units: readonly SpendUnitAs[]; readonly onlyAsColorless?: Color } {
+  ): {
+    readonly wide: WideSpendAs | undefined;
+    readonly units: readonly SpendUnitAs[];
+    readonly onlyAsColorless?: Color;
+    readonly within?: { readonly as: WideSpendAs; readonly pips: ManaCost };
+  } {
     let wide: WideSpendAs | undefined;
     const units: SpendUnitAs[] = [];
     const allow = (as: SpendAs | undefined): void => {
@@ -33784,6 +33836,12 @@ export class Game {
           }
         }
       }
+      // A `timed-static`'s, which rides an emblem (rule 113.6p): "until end
+      // of turn, you may spend white mana as though it were mana of any
+      // color" (False Dawn), "for one spell this turn …" (North Star).
+      for (const { source, ability } of emblemStatics(this.state, player)) {
+        if (ability.spendManaAs !== undefined && this.staticActive(source, ability)) found.push({ ...ability.spendManaAs, from: source.id });
+      }
       return found;
     });
     // The face being cast, as it will be on the stack (rule 715.3 — an
@@ -33792,7 +33850,15 @@ export class Game {
     const spellCard = purpose?.kind === "cast" ? purpose.card : undefined;
     const castFace =
       purpose?.kind === "cast" ? (purpose.face ?? this.state.objects[purpose.card]?.face ?? 0) : 0;
+    let within: WideSpendAs | undefined;
     for (const rule of rules) {
+      // "For one spell this turn … to pay that spell's mana cost" (North
+      // Star): a spell's payment, its mana cost's symbols alone — unless the
+      // cast is being tried without it (`oneSpellSpendOff`).
+      if (rule.oneSpell === true) {
+        if (spellCard !== undefined && !this.oneSpellSpendOff && typeof rule.as === "string") within = widerSpendAs(within, rule.as);
+        continue;
+      }
       const spell = rule.spell;
       if (spell !== undefined) {
         if (spellCard === undefined) continue;
@@ -33863,7 +33929,21 @@ export class Game {
     // (Celestial Dawn): a restriction on every payment, whatever it's for.
     const only = rules.find((rule) => rule.othersOnlyAsColorless === true && typeof rule.as === "object" && rule.as.unit !== "snow" && rule.as.unit !== "C");
     const onlyAsColorless = only !== undefined && typeof only.as === "object" ? (only.as.unit as Color) : undefined;
-    return { wide, units, ...(onlyAsColorless !== undefined ? { onlyAsColorless } : {}) };
+    // The mana cost's symbols, of the face being cast: what a one-spell
+    // permission may pay as though of any type (additional costs still paid
+    // normally). Nothing to add once the whole cost may be.
+    const manaCostOf = (): ManaCost | null => {
+      const card = spellCard === undefined ? undefined : this.state.objects[spellCard];
+      if (card === undefined || spellCard === undefined || !this.registry.has(card.cardName)) return null;
+      return parseManaCost(this.faceDef(spellCard, castFace).manaCost);
+    };
+    const pips = within === undefined || wide === "any-type" || (wide === "any-color" && within === "any-color") ? null : manaCostOf();
+    return {
+      wide,
+      units,
+      ...(onlyAsColorless !== undefined ? { onlyAsColorless } : {}),
+      ...(within !== undefined && pips !== null ? { within: { as: within, pips } } : {}),
+    };
   }
 
   /**

@@ -7587,7 +7587,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   unit: "W", as: "any-color" }` is Celestial Dawn's "you may spend other mana
   only as though it were colorless mana": every other type pays only generic
   and `{C}`, whatever else lets it pay a colour (rule 101.2) —
-  `spend-only-as-colorless.test.ts`.
+  `spend-only-as-colorless.test.ts`. On a `timed-static` it's the
+  effect's controller's for a while (read off the emblem it rides):
+  `oneSpell: true` is North Star's "for one spell this turn, you may spend
+  mana as though it were mana of any type to pay that spell's mana cost" —
+  a spell's payment only, only as many symbols as its mana cost has
+  (additional costs paid normally), used up by the first spell that can't
+  be paid without it (`spend-any-type-one-spell.test.ts`; scaffolded).
 - `extraLandsPerTurn: number` — additional land drops per turn for this
   permanent's controller (Oracle of Mul Daya, Azusa, Lost but Seeking — needed-cards
   P16); granted ones count too (Nog, Ambitious Cadet's `become` with `static`). `affects` is ignored. With `extraLandsForEachPlayer: true` it reaches

@@ -4320,6 +4320,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * (rule 101.2) — `mana-payment.ts`'s `costAsOnlyColorless`. Every payment
      * its controller makes, whatever it's for. */
     readonly othersOnlyAsColorless?: true;
+    /** "**For one spell** this turn, you may spend mana as though it were
+     * mana of any type **to pay that spell's mana cost**. (Additional costs
+     * are still paid normally.)" (North Star, a `timed-static`): only a
+     * spell's payment, and only as many of its symbols as its mana cost has
+     * (`ManaPlanningView.spendAsWithin`); used up by the first spell cast
+     * while it lasts that can't be paid without it — the spell its
+     * controller would choose it for, as one a payment manages without it
+     * gains nothing by it (`Game.castSpell`). */
+    readonly oneSpell?: true;
   };
   /** Protection (rule 702.16) — the affected object can't be targeted,
    * blocked, enchanted/equipped, or damaged by a source whose colour or type
