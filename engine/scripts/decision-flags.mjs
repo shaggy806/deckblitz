@@ -120,7 +120,8 @@ function createWatcher(where, flags) {
    * restrictions, how many modifiers it carries, counters,
    * damage, attachments; tapped or not, but for the caster's own noncreature
    * permanents, which paying mana taps), every card in every zone but the spell itself where it
-   * ends (hand, graveyard, exile), life, poison and counters, mana pools,
+   * ends in a hand or graveyard (in exile it counts: an adventure), life,
+   * poison and counters, mana pools, extra land plays,
    * and every other rule kept at the top of the state. Two equal signatures are
    * two games that differ only in what was paid. */
   function signature(state, caster, spell) {
@@ -137,12 +138,13 @@ function createWatcher(where, flags) {
       parts.push(`${id}:${o.cardName}:${o.controller}:${o.controller === caster && !(ch?.types ?? []).includes("creature") ? "" : o.tapped}:${JSON.stringify(o.counters ?? {})}:${o.damageMarked ?? 0}:${o.attachedTo ?? ""}:${o.stackCount ?? 1}:${(o.modifiers ?? []).length}:${stats}`);
     }
     const not = (id) => id !== spell;
-    for (const zone of ["exile", "command"]) parts.push(zone + ":" + state.zones.shared[zone].filter(not).sort().join(","));
+    // Exile with the spell itself: a card on an adventure is there to cast later.
+    for (const zone of ["exile", "command"]) parts.push(zone + ":" + [...state.zones.shared[zone]].sort().join(","));
     for (const [player, zones] of Object.entries(state.zones.perPlayer)) {
       for (const zone of ["hand", "graveyard"]) parts.push(`${player}.${zone}:` + zones[zone].filter(not).sort().join(","));
       parts.push(`${player}.library:${zones.library.filter(not).length}`);
       const p = state.players[player];
-      parts.push(`${player}:${p.life}:${JSON.stringify(p.counters ?? {})}:${p.hasLost}:${JSON.stringify(p.manaPool ?? [])}`);
+      parts.push(`${player}:${p.life}:${JSON.stringify(p.counters ?? {})}:${p.hasLost}:${JSON.stringify(p.manaPool ?? [])}:${p.extraLandsThisTurn ?? 0}`);
     }
     // Every other rule the game keeps at the top of its state — lasting
     // effects, delayed triggers, a turn's "creatures with defender can attack"
