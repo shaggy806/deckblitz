@@ -26586,6 +26586,33 @@ describe("a free cast of a spell with the name of one cast this turn", () => {
   });
 });
 
+describe("a blocker sacrificed at end of combat, and a token if it was", () => {
+  it("reads Basalt Golem's delayed sacrifice and its controller's Wall", () => {
+    const face = parseFace(
+      {
+        name: "Test Golem",
+        type_line: "Artifact Creature — Golem",
+        oracle_text:
+          "Whenever this creature becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, they create a 0/2 colorless Wall artifact creature token with defender.",
+      },
+      { tokenFor: () => "Wall Token (Basalt Golem)" },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({ on: "blocked-by", who: "self" });
+    expect(face.triggered[0].effect.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "sacrifice-target", target: "trigger-object", byItsController: true },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "sacrificed" },
+          then: { kind: "create-token", token: "Wall Token (Basalt Golem)", count: 1, who: { controllerOf: "trigger-object" } },
+        },
+      ],
+    });
+  });
+});
+
 describe("the exiled card's power and toughness", () => {
   it("reads Bioplasm's bonus from the card exiled this way", () => {
     const face = parseFace(

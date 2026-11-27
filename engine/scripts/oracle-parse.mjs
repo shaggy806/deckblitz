@@ -2315,6 +2315,9 @@ export function parseTrigger(clause) {
   // Once for each creature blocked or blocking (rules 509.3b, 509.3d), that
   // creature the trigger object: the blocker's event for the one it blocks,
   // the attacker's for the one blocking it.
+  // "Whenever ~ becomes blocked by a creature" (Basalt Golem): once for each
+  // blocker (509.3d), the blocker the trigger object.
+  if (/^Whenever ~ becomes blocked by a creature$/.test(c)) return [{ on: "blocked-by", who: "self" }];
   if ((m = /^Whenever (~|equipped creature|enchanted creature) blocks or becomes blocked by a creature$/.exec(c))) {
     const who = m[1] === "~" ? "self" : "attached";
     return [{ on: "blocks", who, object: "blocked" }, { on: "blocked-by", who }];
@@ -13853,7 +13856,7 @@ export function parseEffect(text, outer) {
       skip = toCounters.used - 1;
       continue;
     }
-    const arrival = graveyardArrivalAt(sentences, i, ctx) ?? bottomOfLibraryAt(sentences, i, ctx) ?? exiledTopPowerAt(sentences, i);
+    const arrival = graveyardArrivalAt(sentences, i, ctx) ?? bottomOfLibraryAt(sentences, i, ctx) ?? exiledTopPowerAt(sentences, i) ?? sacrificedAtEndOfCombatAt(sentences, i, ctx);
     if (arrival !== null) {
       parsed.push(arrival.effect);
       hints.push({ sentence, effect: arrival.effect });
@@ -15706,6 +15709,41 @@ function bottomOfLibraryAt(sentences, i, ctx) {
  * toughness" (Bioplasm): an `exile-from-library`, then a `conditional` on the
  * card exiled this way, its power and toughness read in exile.
  */
+/**
+ * "That creature's controller sacrifices it at end of combat. If the player
+ * does, they create a 0/2 colorless Wall artifact creature token with
+ * defender" (Basalt Golem, of its blocker): a delayed sacrifice by its
+ * controller, then the token for that player only if it was sacrificed.
+ */
+function sacrificedAtEndOfCombatAt(sentences, i, ctx) {
+  if (ctx.it !== "trigger-object" || ctx.targets.length > 0) return null;
+  // "That creature" arrives as "it" ("It's controller …"), the trigger object.
+  if (!/^(?:that creature's|it's|its) controller sacrifices it at end of combat\.$/i.test(sentences[i] ?? "")) return null;
+  const then = /^if the player does, they create an? ([^"“]+?) token( with [a-z]+)?\.$/i.exec(sentences[i + 1] ?? "");
+  if (then === null) return null;
+  const token = ctx.tokenFor?.(`${then[1]}${then[2] ?? ""}`) ?? null;
+  if (token === null) return null;
+  return {
+    effect: {
+      kind: "delayed-trigger",
+      at: { step: "end-combat" },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "sacrifice-target", target: "trigger-object", byItsController: true },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "sacrificed" },
+            then: { kind: "create-token", token, count: 1, who: { controllerOf: "trigger-object" } },
+          },
+        ],
+      },
+      text: `That creature's controller sacrifices it. ${sentences[i + 1].charAt(0).toUpperCase()}${sentences[i + 1].slice(1)}`,
+    },
+    used: 2,
+  };
+}
+
 function exiledTopPowerAt(sentences, i) {
   if (!/^exile the top card of your library\.$/i.test(sentences[i] ?? "")) return null;
   const then = /^if it's an? (.+?) card, ~ gets \+X\/\+Y until end of turn, where X is the exiled \1 card's power and Y is its toughness\.$/i.exec(

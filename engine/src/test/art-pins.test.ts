@@ -208,6 +208,8 @@ const NO_TOKEN_PRINTING = new Set([
   // Volrath's Laboratory's and Riptide Replicator's token of the chosen
   // colour and type: whatever was chosen, so no one printing.
   "Soldier Token (Chosen Color and Type)",
+  // Basalt Golem's 0/2 Wall: printed once, in Mirage, with no token card.
+  "Wall Token (Basalt Golem)",
 ]);
 
 describe("token art", () => {
