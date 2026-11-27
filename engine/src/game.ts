@@ -14444,6 +14444,7 @@ export class Game {
         if (this.moveObject(id, "exile")) {
           const object = this.state.objects[id];
           if (awaiting.exileLink !== undefined) object.exiledWith = awaiting.exileLink;
+          if (awaiting.exiledBy !== undefined) object.exiledByPlayer = awaiting.exiledBy;
           if (awaiting.exileUntil !== undefined) {
             const until = awaiting.exileUntil;
             object.exiledUntil = wasPermanent ? { source: until.source, zoneChangeCount: until.zoneChangeCount } : until;
@@ -46432,7 +46433,7 @@ export class Game {
         });
         return false;
       },
-      moveExiledThisWay: (to, filter, revealed) => {
+      moveExiledThisWay: (to, filter, revealed, exiledBy) => {
         // The cards this resolution revealed, still in the library they were
         // revealed from: each owner's to the bottom, in a random order.
         if (revealed === true) {
@@ -46446,7 +46447,7 @@ export class Game {
           for (const owner of this.state.turnOrder) {
             const theirs = still.filter((id) => this.state.objects[id]?.owner === owner);
             if (to === "library-bottom" && theirs.length > 0) this.placeRevealed(owner, theirs, "bottom-random", false);
-            else if (to === "hand") for (const id of theirs) this.moveObject(id, "hand");
+            else if (to === "hand" || to === "graveyard") for (const id of theirs) this.moveObject(id, to);
           }
           return;
         }
@@ -46459,10 +46460,17 @@ export class Game {
           .filter((id) => {
             const object = this.state.objects[id];
             if (object === undefined || object.zone !== "exile" || object.isToken || object.kind !== "card") return false;
+            // "The cards they exiled this way" (Struggle for Sanity).
+            if (exiledBy !== undefined && object.exiledByPlayer !== exiledBy) return false;
             return filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller });
           });
         if (to === "hand") {
           for (const id of moving) this.moveObject(id, "hand");
+          return;
+        }
+        // "Puts the rest into their graveyard": each its owner's, together.
+        if (to === "graveyard") {
+          for (const id of moving) this.moveObject(id, "graveyard");
           return;
         }
         // "Then put the rest on the bottom of your library in a random
@@ -46976,6 +46984,7 @@ controlledBy,
           exileUntil,
           to?.exactly,
           to?.oneEach,
+          controller,
         );
       },
       modifyPt: (target, power, toughness, duration) =>
@@ -51453,6 +51462,9 @@ controlledBy,
     exactly?: number,
     /** See `discard-chosen`'s `oneEach`. */
     oneEach?: { readonly filters: readonly CardFilter[]; readonly text: string },
+    /** Whose effect exiles the chosen card (`exiledByPlayer`): the effect's
+     * controller, whoever chooses. */
+    exiledBy?: PlayerId,
   ): void {
     // "…or the chosen creature" with the player's own target gone illegal
     // (Cloak and Dagger, Entwined): `target` is that permanent, and no
@@ -51531,6 +51543,7 @@ controlledBy,
       ...(destination === "battlefield" && chooser !== player ? { enterUnder: chooser } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
       ...(exileUntil !== undefined ? { exileUntil } : {}),
+      ...(destination === "exile" && exiledBy !== undefined ? { exiledBy } : {}),
       ...(playGrant !== undefined ? { playGrant } : {}),
       leftover: "stay",
     };

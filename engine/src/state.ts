@@ -4432,6 +4432,10 @@ export type AwaitingDecision =
        * leaves the battlefield**" (Kitesail Freebooter) — `exiledUntil` for
        * the chosen card. */
       readonly exileUntil?: NonNullable<GameObject["exiledUntil"]>;
+      /** For `destination: "exile"`: the player whose effect exiles the
+       * chosen card — its `exiledByPlayer` ("the cards **they** exiled this
+       * way": Struggle for Sanity's, a `discard-chosen`'s controller). */
+      readonly exiledBy?: PlayerId;
       /** For `destination: "exile-playable"` — the permission to stamp on
        * the chosen cards, which stay in exile either way (Tectonic Giant:
        * "exile the top two, choose one of them"). */

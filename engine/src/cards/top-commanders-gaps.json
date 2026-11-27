@@ -3431,7 +3431,8 @@
   "effect:gain-control-to-player-with-most-life",
   "static:other-than-attached",
   "bug:cda-colors-among",
-  "effect:each-player-reveals-top-all-match"
+  "effect:each-player-reveals-top-all-match",
+  "effect:alternating-hand-exile"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

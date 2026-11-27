@@ -615,7 +615,8 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     // next draw (a live game, 2026-11-23). This module can't see how many
     // were exiled, so it's a card; to a library's bottom, nothing.
     case "move-exiled-this-way":
-      return effect.to === "hand" ? onPlayers(you, CARD, ctx) : 0;
+      // Another player's own exiles back to their hand aren't ours.
+      return effect.to === "hand" && effect.exiledBy === undefined ? onPlayers(you, CARD, ctx) : 0;
     // Cards exiled with leave to play them: most of a card each, less if it's
     // only for this turn, when it may be too expensive to use.
     case "impulse-exile":

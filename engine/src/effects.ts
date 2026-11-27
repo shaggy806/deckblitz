@@ -5400,9 +5400,17 @@ export type EffectSpec =
       /** `"library-bottom"` is "put the rest on the bottom of your library
        * in a random order" after exiling them (Herald of Amity, Muse
        * Vortex): each owner's on the bottom of their library, in a random
-       * order. */
-      readonly to: "hand" | "library-bottom";
+       * order. `"graveyard"` is each owner's graveyard: Struggle for
+       * Sanity's "and puts **the rest** into their graveyard", after the
+       * cards they exiled have gone back to their hand. */
+      readonly to: "hand" | "library-bottom" | "graveyard";
       readonly filter?: CardFilter;
+      /** Only the cards **this player** exiled (`GameObject.exiledByPlayer`
+       * — the player whose effect exiled each, an `as-player`'s player
+       * inside it): Struggle for Sanity's "that player returns the cards
+       * **they exiled this way** to their hand" (`{ target: 0 }`, the
+       * opponent's picks made under an `as-player` of them). */
+      readonly exiledBy?: PlayerRef;
       /** The cards this resolution **revealed** instead, still in the library
        * they were revealed from: "then each opponent puts the other cards they
        * revealed this way on the bottom of their library in a random order"
@@ -14996,7 +15004,12 @@ export interface EffectApi {
    * that's answered). `exileAgain` false returns them and leaves them. */
   reflicker(exileAgain: boolean): boolean;
   /** See the `"move-exiled-this-way"` {@link EffectSpec}. */
-  moveExiledThisWay(to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"], filter?: CardFilter, revealed?: boolean): void;
+  moveExiledThisWay(
+    to: Extract<EffectSpec, { kind: "move-exiled-this-way" }>["to"],
+    filter?: CardFilter,
+    revealed?: boolean,
+    exiledBy?: PlayerId,
+  ): void;
   /** See the `"put-arrived-onto-battlefield"` {@link EffectSpec}. `true`
    * when it stopped first to ask an "as this enters" choice. */
   putArrivedOntoBattlefield(spec: Extract<EffectSpec, { kind: "put-arrived-onto-battlefield" }>): boolean;
@@ -23157,9 +23170,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (ctx.putExiledThisWayOntoBattlefield(spec.filter, spec.revealed === true)) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
-    case "move-exiled-this-way":
-      ctx.moveExiledThisWay(spec.to, spec.filter, spec.revealed === true);
+    case "move-exiled-this-way": {
+      // "The cards they exiled": nobody named (a player who has left) moves none.
+      const by = spec.exiledBy === undefined ? undefined : resolvePlayerRef(spec.exiledBy, ctx);
+      if (spec.exiledBy !== undefined && by === undefined) return;
+      ctx.moveExiledThisWay(spec.to, spec.filter, spec.revealed === true, by);
       return;
+    }
     case "reflicker": {
       const parked = ctx.parkedCount();
       if (ctx.reflicker(spec.exileAgain !== false)) ctx.resumeAfterDecisions(spec, parked);
