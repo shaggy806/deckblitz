@@ -5451,6 +5451,13 @@ Naked Singularity's Plains Island) all apply in the tapper's order (rule 616.1d)
 tapper picks the type among theirs, as Pulse of Llanowar's colour is picked. In a
 filter, "you" is the permanent's controller or the effect's. What triggered mana
 abilities add isn't changed. `land-mana-instead.test.ts`, `mana-reads.test.ts`.
+`bySpellsAndAbilities: true`, on a `player-effect` only, is every unit any spell or ability its
+controller controls would add, not only a tap's: False Dawn's "until end of turn, spells and
+abilities you control that would add colored mana instead add that much white mana" is `{ produces:
+"W", colorsOnly: true, tapper: "you", bySpellsAndAbilities: true }` (a Dark Ritual adds {W}{W}{W}; a
+triggered mana ability another player controls keeps its own). Its "you may spend white mana as though
+it were mana of any color" is a `timed-static`'s `spendManaAs: { as: { unit: "W", as: "any-color" } }`.
+`colored-mana-as-white.test.ts`; the scaffolder reads both.
 
 **A mana ability a player has, not a permanent** (rules 605.1a, 605.3a — Channel's "until end of
 turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {C}"): a

@@ -1412,6 +1412,39 @@ function landManaChanged(made: readonly ManaType[], change: LandManaChange, prod
   return units.map((type) => (change.colorsOnly === true && type === "C" ? type : produces));
 }
 
+/**
+ * A mana source's `option` as it's made while the coloured mana its
+ * controller's spells and abilities would add is `color` instead (False Dawn
+ * — `ManaProductionRule.bySpellsAndAbilities`, `Game.addMana`): each coloured
+ * unit `color`, {C} as it is, an "any colour" unit only `color`. An extra
+ * unit a triggered mana ability adds is its holder's, so one `foreign` says
+ * someone else controls stays as it is. `null` when that can't be said: an
+ * "any colour" unit of the source's own beside a foreign one, which the
+ * option can't tell apart — the player taps such a source by hand.
+ */
+function manaOptionColoredAs(option: ManaOption, color: Color, foreign: (from: ObjectId) => boolean): ManaOption | null {
+  const as = (type: ManaType): ManaType => (type === "C" ? type : color);
+  const extras = option.extras ?? [];
+  const untypedForeign = extras.filter((e) => e.type === undefined && foreign(e.from)).length;
+  if (untypedForeign > 0 && untypedForeign < option.anyColor) return null;
+  const typed = extras.filter((e) => e.type !== undefined);
+  const firstExtra = option.fixed.length - typed.length;
+  const fixed = option.fixed.map((type, i) => (i >= firstExtra && foreign(typed[i - firstExtra].from) ? type : as(type)));
+  const anyColorOf =
+    option.anyColor === 0 || untypedForeign > 0
+      ? option.anyColorOf
+      : [...new Set((option.anyColorOf ?? COLORS).map(as))];
+  const ownExtra = (e: ManaExtraUnit): ManaExtraUnit =>
+    e.type === undefined || foreign(e.from) ? e : { ...e, type: as(e.type) };
+  return {
+    ...option,
+    fixed,
+    ...(anyColorOf !== undefined ? { anyColorOf } : {}),
+    ...(option.extras !== undefined ? { extras: option.extras.map(ownExtra) } : {}),
+    ...(option.floating !== undefined ? { floating: option.floating.map(ownExtra) } : {}),
+  };
+}
+
 /** The mana options of a land whose mana is another type instead (Deep Water —
  * `Game.landManaInsteadFor`). One that makes no mana has none to replace. "A
  * color of your choice" is an "any colour" unit, or an option per colour for
@@ -33164,7 +33197,18 @@ export class Game {
       return ka.flex - kb.flex;
     });
     out.push(...this.heldManaSources(player));
-    return out;
+    // "Spells and abilities you control that would add colored mana instead
+    // add that much white mana" (False Dawn): planned as `addMana` will make
+    // it, so the units planned are the units added.
+    const instead = (this.state.playerEffects ?? []).some((e) => e.manaProduction?.bySpellsAndAbilities === true)
+      ? this.coloredManaInsteadFor(player)
+      : null;
+    if (instead === null) return out;
+    const foreign = (from: ObjectId): boolean => this.state.objects[from]?.controller !== player;
+    return out.flatMap((source) => {
+      const options = source.options.flatMap((option) => manaOptionColoredAs(option, instead, foreign) ?? []);
+      return options.length === 0 ? [] : [{ ...source, options }];
+    });
   }
 
   /** A permanent as a source for a payment, with the options it offers. */
@@ -34762,6 +34806,9 @@ export class Game {
     /** What the mana is "from" — the source of the ability or spell making
      * it, read by `manaOriginOf`. */
     origin?: ManaOrigin,
+    /** Who controls the spell or ability adding it: `origin`'s object's
+     * controller when it names one, else `player`. */
+    producer?: PlayerId,
   ): void {
     // A standalone "add one mana of any colour"/"any combination of [...]"
     // (not paying a cost) just makes white / all of the first listed colour —
@@ -34769,9 +34816,17 @@ export class Game {
     // hand activation names them (`manaColors`), and a spell or an ability
     // on the stack asks (`add-mana` in `effects.ts`). An empty list names no
     // type, and no mana is made (rule 106.5).
-    const concrete: ManaType | undefined =
+    let concrete: ManaType | undefined =
       mana === "any-color" ? "W" : typeof mana === "object" ? mana.oneOf[0] : mana;
     if (concrete === undefined) return;
+    // "Spells and abilities you control that would add colored mana instead
+    // add that much white mana" (False Dawn — rule 614.1a): as it's added,
+    // whatever added it. The auto-payer planned with the same change
+    // (`manaOptionColoredAs`), so the units it planned are these.
+    if (concrete !== "C" && (this.state.playerEffects ?? []).some((e) => e.manaProduction?.bySpellsAndAbilities === true)) {
+      const madeBy = producer ?? (origin?.object !== undefined ? this.state.objects[origin.object]?.controller : undefined) ?? player;
+      concrete = this.coloredManaInsteadFor(madeBy) ?? concrete;
+    }
     const pool = this.state.players[player].manaPool;
     const units = Math.max(0, Math.min(amount, Game.MAX_EFFECT_INSTANCES));
     if (units === 0) return;
@@ -37215,6 +37270,12 @@ export class Game {
       }
     }
     for (const ability of abilities) if (!ability.cost.tap) addFrom(ability.effect);
+    // False Dawn's white, for every ability of its controller's (rule 106.7:
+    // taking replacement effects into account).
+    const instead = (this.state.playerEffects ?? []).some((e) => e.manaProduction?.bySpellsAndAbilities === true)
+      ? this.coloredManaInsteadFor(player)
+      : null;
+    if (instead !== null) return [...new Set([...types].map((type) => (type === "C" ? type : instead)))];
     return [...types];
   }
 
@@ -45211,6 +45272,7 @@ export class Game {
           // types off — and what the mana is from.
           spec === undefined ? undefined : this.manaTagFor(this.state.objects[source], spec),
           this.manaOriginOf(source),
+          controller,
         );
         // "If you haven't added mana with this ability this turn" (Carpet of
         // Flowers): recorded only when some was added — an amount of 0 adds
@@ -76397,10 +76459,27 @@ controlledBy,
     const found: ManaProductionRule[] = [];
     for (const held of this.manaProductionRules()) {
       const { rule } = held;
+      // False Dawn's is every spell's and ability's, read as mana is added.
+      if (rule.bySpellsAndAbilities === true) continue;
       if (rule.produces === undefined || (rule.atLeast !== undefined && wouldMake < rule.atLeast)) continue;
       if (this.manaRuleApplies(held, player, source)) found.push(rule);
     }
     return mergedLandManaChange(found);
+  }
+
+  /** The colour the coloured mana spells and abilities `producer` controls
+   * would add is made instead (False Dawn's white — rule 614.1a, a
+   * `bySpellsAndAbilities` rule of theirs), or `null`. Of several, the
+   * latest. Its `colorsOnly` leaves {C} as it is. */
+  private coloredManaInsteadFor(producer: PlayerId): Color | null {
+    let found: { color: Color; timestamp: number } | null = null;
+    for (const held of this.manaProductionRules()) {
+      const { rule } = held;
+      if (rule.bySpellsAndAbilities !== true || held.you !== producer) continue;
+      if (rule.produces === undefined || rule.produces === "any-color" || rule.produces === "C") continue;
+      if (found === null || held.timestamp >= found.timestamp) found = { color: rule.produces, timestamp: held.timestamp };
+    }
+    return found?.color ?? null;
   }
 
   /** Every rule of what tapped permanents make, as the battlefield and the

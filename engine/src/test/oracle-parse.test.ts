@@ -26807,3 +26807,25 @@ describe("costs-mana lane, 2026-11-27: mana of any type for one spell's mana cos
     });
   });
 });
+
+describe("costs-mana lane, 2026-11-27: coloured mana made white, white spent as any colour", () => {
+  it("False Dawn: a turn's manaProduction over every spell and ability, and a timed spendManaAs", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{1}{W}",
+      oracle_text:
+        "Until end of turn, spells and abilities you control that would add colored mana instead add that much white mana. Until end of turn, you may spend white mana as though it were mana of any color.\nDraw a card.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.effect.effects[0]).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      manaProduction: { produces: "W", colorsOnly: true, tapper: "you", bySpellsAndAbilities: true },
+    });
+    expect(parsed.effect.effects[1]).toMatchObject({
+      kind: "timed-static",
+      static: [{ spendManaAs: { as: { unit: "W", as: "any-color" } } }],
+    });
+  });
+});

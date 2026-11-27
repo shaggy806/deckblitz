@@ -53,6 +53,15 @@ export interface ManaProductionRule {
    * however much the land would have made. A land that would make none still
    * makes none: there's no mana to replace (rule 106.5). */
   readonly one?: true;
+  /** "**Spells and abilities you control** that would add colored mana
+   * instead add that much white mana" (False Dawn, a turn's player effect —
+   * `produces: "W"`, `colorsOnly: true`, `tapper: "you"`): every unit any
+   * spell or ability its owner controls adds (rule 614.1a), not only a
+   * tapped permanent's — `Game.addMana` replaces it as it's added, and the
+   * auto-payer plans with the sources' options changed to match
+   * (`manaOptionColoredAs`). `filter` and `times` play no part. Read on a
+   * player effect only (`Game.addMana` looks no further). */
+  readonly bySpellsAndAbilities?: true;
 }
 
 /**

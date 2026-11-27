@@ -3980,6 +3980,35 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "Until end of turn, spells and abilities you control that would add
+  // colored mana instead add that much white mana" (False Dawn — rule
+  // 614.1a): a turn's `manaProduction` rule over every spell and ability.
+  {
+    const m = /^until end of turn, spells and abilities you control that would add colored mana instead add that much (white|blue|black|red|green) mana\.$/i.exec(s);
+    if (m !== null) {
+      const produces = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[1].toLowerCase()];
+      return {
+        kind: "player-effect",
+        duration: "end-of-turn",
+        manaProduction: { produces, colorsOnly: true, tapper: "you", bySpellsAndAbilities: true },
+      };
+    }
+  }
+  // "Until end of turn, you may spend white mana as though it were mana of
+  // any color" (False Dawn — rule 609.4b): a timed static's `spendManaAs`.
+  {
+    const m = /^until end of turn, you may spend (white|blue|black|red|green|colorless) mana as though it were mana of any color\.$/i.exec(s);
+    if (m !== null) {
+      const unit = { white: "W", blue: "U", black: "B", red: "R", green: "G", colorless: "C" }[m[1].toLowerCase()];
+      const text = s[0].toUpperCase() + s.slice(1);
+      return {
+        kind: "timed-static",
+        duration: "end-of-turn",
+        text,
+        static: [{ affects: { scope: "self" }, spendManaAs: { as: { unit, as: "any-color" } }, text }],
+      };
+    }
+  }
   // "For one spell this turn, you may spend mana as though it were mana of
   // any type to pay that spell's mana cost" (North Star): a timed static's
   // one-spell `spendManaAs` (rule 609.4b).
