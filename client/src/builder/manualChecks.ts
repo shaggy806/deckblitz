@@ -13996,6 +13996,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Okk: the attack button is off until a creature with greater power attacks too',
+    board({ you: { bf: ['Okk', 'Grizzly Bears', 'Shivan Dragon'] }, step: 'begin-combat' }),
+  ),
+  preset(
+    'Okk: four players, the creature with greater power may attack someone else',
+    board({
+      you: { bf: ['Okk', 'Shivan Dragon'] },
+      opp: [{ bf: ['Plains'] }, { bf: ['Plains'] }, { bf: ['Plains'] }],
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
     'Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere',
     board({
       you: { bf: ['Mountain*3'], hand: ['Lightning Storm', 'Forest'] },

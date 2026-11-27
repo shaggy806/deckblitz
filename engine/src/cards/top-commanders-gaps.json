@@ -16,6 +16,7 @@
     "effect:choose-from-revealed-hand-without-moving",
     "effect:cast-now-from-each-opponent-graveyard",
     "effect:reveal-until-then-keeps-targets",
+    "static:cant-attack-block-unless-greater-power-joins",
     "filter:power-relative-to-trigger-creature",
     "effect:sacrifice-permanent-of-opponents-choice",
     "static:granted-static-combat-tax",

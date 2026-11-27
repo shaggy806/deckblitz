@@ -21,13 +21,22 @@ export interface CombatCompany {
   readonly least: number;
   /** At most this many others: 0 is "alone". Absent: any number. */
   readonly most?: number;
+  /** At least one of these must be declared beside it (Okk: "unless a
+   * creature with greater power also attacks" — the eligible creatures of its
+   * controller with greater power than it as the offer is made). Present
+   * only on an offer's entry; `least` is then at least 1. */
+  readonly joinedBy?: readonly ObjectId[];
+  /** Why `joinedBy` is who it is, for a refusal's words. */
+  readonly joinedFor?: "greater-power";
 }
 
-/** What `restrictions` ask of a creature's fellow attackers. `null`: nothing. */
+/** What `restrictions` ask of a creature's fellow attackers. `null`: nothing.
+ * Okk's word asks for one more beside it here; who that may be is the
+ * offer's (`withGreaterPowerCompanions`). */
 export function attackCompanyOf(restrictions: ReadonlySet<CombatWord>): CombatCompany | null {
   const least = restrictions.has("cant-attack-unless-two-others")
     ? 2
-    : restrictions.has("cant-attack-alone")
+    : restrictions.has("cant-attack-alone") || restrictions.has("cant-attack-unless-greater-power-joins")
       ? 1
       : 0;
   if (restrictions.has("can-only-attack-alone")) return { least, most: 0 };
@@ -36,8 +45,42 @@ export function attackCompanyOf(restrictions: ReadonlySet<CombatWord>): CombatCo
 
 /** What `restrictions` ask of a creature's fellow blockers. `null`: nothing. */
 export function blockCompanyOf(restrictions: ReadonlySet<CombatWord>): CombatCompany | null {
-  const least = restrictions.has("cant-block-unless-two-others") ? 2 : restrictions.has("cant-block-alone") ? 1 : 0;
+  const least = restrictions.has("cant-block-unless-two-others")
+    ? 2
+    : restrictions.has("cant-block-alone") || restrictions.has("cant-block-unless-greater-power-joins")
+      ? 1
+      : 0;
   return least > 0 ? { least } : null;
+}
+
+/**
+ * `company` with Okk's companions named (rules 508.1c, 509.1b: a restriction
+ * on the whole declaration): of `candidates` (the creatures its controller
+ * could declare beside it), those with greater power than it, `powerOf` read
+ * as the declaration is made. `company` unchanged when `word` isn't one of
+ * `restrictions`.
+ */
+export function withGreaterPowerCompanions(
+  company: CombatCompany,
+  restrictions: ReadonlySet<CombatWord>,
+  word: "cant-attack-unless-greater-power-joins" | "cant-block-unless-greater-power-joins",
+  self: ObjectId,
+  candidates: readonly ObjectId[],
+  powerOf: (id: ObjectId) => number,
+): CombatCompany {
+  if (!restrictions.has(word)) return company;
+  const power = powerOf(self);
+  return {
+    ...company,
+    joinedBy: candidates.filter((id) => id !== self && powerOf(id) > power),
+    joinedFor: "greater-power",
+  };
+}
+
+/** Whether a creature with `company`, declared among `declared` (ids), has
+ * one of its `joinedBy` beside it — true when it names none. */
+export function joinedAsNeeded(company: CombatCompany | undefined, declared: ReadonlySet<ObjectId>): boolean {
+  return company?.joinedBy === undefined || company.joinedBy.some((id) => declared.has(id));
 }
 
 /** Whether a creature with `company` may be one of `size` declared together. */
@@ -118,6 +161,17 @@ export function ableInCompany(units: readonly CompanyUnit[], most?: number): Obj
   for (let size = 1; size <= total; size += 1) {
     if (tokensFitting(units, size) < size) continue;
     for (const u of units) if (fitsCompany(u.company, size)) able.add(u.id);
+  }
+  // Okk needs one of its `joinedBy` able too, and each one dropped may have
+  // been another's only companion.
+  for (let changed = true; changed; ) {
+    changed = false;
+    for (const u of units) {
+      if (able.has(u.id) && u.company?.joinedBy !== undefined && !u.company.joinedBy.some((id) => able.has(id))) {
+        able.delete(u.id);
+        changed = true;
+      }
+    }
   }
   return units.filter((u) => able.has(u.id)).map((u) => u.id);
 }

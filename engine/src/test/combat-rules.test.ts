@@ -362,6 +362,8 @@ describe("every definition speaks the one vocabulary", () => {
     "can-only-attack-alone",
     "cant-attack-unless-two-others",
     "cant-block-unless-two-others",
+    "cant-attack-unless-greater-power-joins",
+    "cant-block-unless-greater-power-joins",
     "doesnt-untap",
     "cant-turn-face-up",
     "cant-crew",

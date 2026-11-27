@@ -26,7 +26,7 @@ import {
   withinSingleBlockers,
 } from "../combat/blocking.js";
 import { blockTaxRates } from "../combat/tax.js";
-import { ableInCompany, blockCompanyOf, hasBlockCompany } from "../combat/company.js";
+import { ableInCompany, blockCompanyOf, hasBlockCompany, withGreaterPowerCompanions } from "../combat/company.js";
 import {
   blockedByAtMostOne,
   blockedOnlyByAll,
@@ -40,7 +40,7 @@ import {
   minimumBlockers,
   whyCannotBlock,
 } from "../combat/eligibility.js";
-import { blockLimitOf, restrictionsOf } from "../characteristics.js";
+import { blockLimitOf, computeCharacteristics, restrictionsOf } from "../characteristics.js";
 import { whyCountsInvalid } from "../combat/stack-counts.js";
 import { tooManyBlockers, whyMembersInvalid } from "../combat/blocking.js";
 import { blockersLeft } from "../combat/limits.js";
@@ -83,11 +83,20 @@ function blockersOffer(
   // it could block in isn't eligible at all, and no requirement reaches it
   // (509.1c).
   const blockCompany: Record<ObjectId, number> = {};
-  const limited = candidates.map((entry) => ({
-    id: entry.blocker,
-    tokens: entry.copies ?? 1,
-    company: blockCompanyOf(restrictionsOf(ctx.state, ctx.registry, entry.blocker)) ?? undefined,
-  }));
+  const blockers = candidates.map((entry) => entry.blocker);
+  const powerOf = (id: ObjectId): number => computeCharacteristics(ctx.state, ctx.registry, id).power;
+  const limited = candidates.map((entry) => {
+    const restrictions = restrictionsOf(ctx.state, ctx.registry, entry.blocker);
+    const company = blockCompanyOf(restrictions);
+    return {
+      id: entry.blocker,
+      tokens: entry.copies ?? 1,
+      company:
+        company === null
+          ? undefined
+          : withGreaterPowerCompanions(company, restrictions, "cant-block-unless-greater-power-joins", entry.blocker, blockers, powerOf),
+    };
+  });
   const inCompany = limited.some((u) => u.company !== undefined);
   // Attackers that can't be blocked by more than one creature (Challenger
   // Troll — rule 509.1b). A Craven Hulk's only companion can't stand beside it
@@ -112,7 +121,14 @@ function blockersOffer(
       eligible = next;
     }
   }
-  for (const { id, company } of limited) if (company !== undefined) blockCompany[id] = company.least;
+  const blockJoinedBy: Record<ObjectId, readonly ObjectId[]> = {};
+  for (const { id, company } of limited) {
+    if (company === undefined) continue;
+    blockCompany[id] = company.least;
+    if (company.joinedBy !== undefined) {
+      blockJoinedBy[id] = company.joinedBy.filter((other) => eligible.some((e) => e.blocker === other));
+    }
+  }
   // Menace, or "can't be blocked except by N or more creatures" (rule
   // 702.111b, 509.1b): 0 or N creatures on it.
   const leastOf = new Map(attacking.map((id) => [id, minimumBlockers(ctx.state, ctx.registry, id)]));
@@ -237,6 +253,7 @@ function blockersOffer(
     ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
     ...(Object.keys(blockCompany).length > 0 ? { blockCompany } : {}),
+    ...(Object.keys(blockJoinedBy).length > 0 ? { blockJoinedBy } : {}),
     ...(blockMost !== null ? { blockMost } : {}),
     ...(rates !== null
       ? { blockTax: { ...rates, budget: ctx.attackTaxBudget(player, []), lifeBudget: ctx.attackTaxLifeBudget(player) } }
@@ -318,6 +335,9 @@ export const blockers = defineDecision({
               player,
               blockTaxTotal(action.blocks, offer.blockTax, (id) => ctx.state.objects[id]?.stackCount ?? 1),
             );
+      }
+      if (short.companion === "greater-power") {
+        return `${name(short.blocker)} can't block unless a creature with greater power also blocks`;
       }
       return short.others === 1
         ? `${name(short.blocker)} can't block alone`

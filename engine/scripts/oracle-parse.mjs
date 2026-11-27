@@ -27951,6 +27951,8 @@ function parseStatic(line, text) {
       "can only attack alone": ["can-only-attack-alone"],
       "can't attack unless at least two other creatures attack": ["cant-attack-unless-two-others"],
       "can't block unless at least two other creatures block": ["cant-block-unless-two-others"],
+      "can't attack unless a creature with greater power also attacks": ["cant-attack-unless-greater-power-joins"],
+      "can't block unless a creature with greater power also blocks": ["cant-block-unless-greater-power-joins"],
     }[m[4]];
     if (restrictions !== undefined) {
       const bonus = m[2] === undefined ? {} : { grantPt: [Number(m[2]), Number(m[3])] };

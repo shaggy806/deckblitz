@@ -17,7 +17,7 @@
 
 import type { AttackPermanentCost, AttackerDeclaration, LegalAction } from "../actions.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { fitsCompany, tokensFitting } from "./company.js";
+import { fitsCompany, joinedAsNeeded } from "./company.js";
 import type { CompanyUnit } from "./company.js";
 import type { AttackCaps } from "./limits.js";
 
@@ -55,7 +55,7 @@ function fitsBeside(id: ObjectId, declared: readonly AttackerDeclaration[], offe
   return (offer.defendersFor[id] ?? []).some(
     (defender) =>
       !attackCompanyViolations([...declared, { attacker: id, defender }], offer).some(
-        (v) => v.kind === "too-many" || v.kind === "attacks-alone",
+        (v) => v.kind === "too-many" || v.kind === "attacks-alone" || (v.kind === "needs-companion" && v.attacker === id),
       ),
   );
 }
@@ -101,6 +101,9 @@ export type AttackCompanyViolation =
   | { readonly kind: "attacks-alone"; readonly attacker: ObjectId }
   /** `attacker` needs at least `others` other attackers, and hasn't them. */
   | { readonly kind: "needs-company"; readonly attacker: ObjectId; readonly others: number }
+  /** `attacker` needs one of its `joinedBy` beside it (Okk: a creature with
+   * greater power), and hasn't one. */
+  | { readonly kind: "needs-companion"; readonly attacker: ObjectId; readonly companion: "greater-power" }
   /** Fewer requirements obeyed than could be without disobeying a restriction
    * (rule 508.1d): `obeyed` of `possible` creatures that must attack. */
   | { readonly kind: "fewer-requirements"; readonly obeyed: number; readonly possible: number }
@@ -187,6 +190,20 @@ export function seatAttackers(
   return { seated, seats };
 }
 
+/** The units of `units` that can be among `size` attackers: their company
+ * allows that many, and an Okk's companion (`joinedBy`) can be too, to a
+ * fixed point (each dropped may have been another's only one). */
+function fittingAtSize(units: readonly AttackUnit[], size: number): AttackUnit[] {
+  let fitting = units.filter((u) => fitsCompany(u.company, size));
+  if (!fitting.some((u) => u.company?.joinedBy !== undefined)) return fitting;
+  for (;;) {
+    const ids = new Set(fitting.map((u) => u.id));
+    const next = fitting.filter((u) => u.company?.joinedBy === undefined || u.company.joinedBy.some((id) => ids.has(id)));
+    if (next.length === fitting.length) return fitting;
+    fitting = next;
+  }
+}
+
 /** The most requirements (creatures that must attack, each token one, and
  * each of `groups` obeyed) a declaration of `size` can obey under `caps`, or
  * `null` if none of that size is legal. */
@@ -196,14 +213,21 @@ function obeyedAtSize(
   caps?: AttackCaps,
   groups: readonly AttackGroup[] = [],
 ): number | null {
-  if (tokensFitting(units, size) < size || size > (caps?.most ?? Infinity)) return null;
-  const fitting = units.filter((u) => fitsCompany(u.company, size));
+  if (size > (caps?.most ?? Infinity)) return null;
+  const fitting = fittingAtSize(units, size);
+  if (fitting.reduce((n, u) => n + u.tokens, 0) < size) return null;
   const perDefender = caps?.perDefender;
   if (perDefender !== undefined && seatAttackers(fitting, perDefender).seated < size) return null;
   if (groups.length > 0) return groupPlanAtSize(fitting, size, perDefender, groups)?.value ?? null;
   const must = fitting.filter((u) => u.required);
   const required = perDefender !== undefined ? seatAttackers(must, perDefender).seated : must.reduce((n, u) => n + u.tokens, 0);
-  return Math.min(size, required);
+  // An Okk that must attack and has no companion among those that must too
+  // takes a seat for one that needn't.
+  const mustIds = new Set(must.map((u) => u.id));
+  const companionSeat = must.some((u) => u.company?.joinedBy !== undefined && !u.company.joinedBy.some((id) => mustIds.has(id)))
+    ? 1
+    : 0;
+  return Math.min(size - companionSeat, required);
 }
 
 /** The most requirements any legal declaration of `units` obeys under `caps`,
@@ -343,10 +367,12 @@ export function attackCompanyViolations(
   if (company === undefined) return [];
   const out: AttackCompanyViolation[] = [];
   const size = attackersDeclared(declared, company.tokens);
-  for (const attacker of new Set(declared.map((d) => d.attacker))) {
+  const ids = new Set(declared.map((d) => d.attacker));
+  for (const attacker of ids) {
     const limit = company.limits[attacker];
     if (limit === undefined) continue;
-    if (size - 1 < limit.least) out.push({ kind: "needs-company", attacker, others: limit.least });
+    if (!joinedAsNeeded(limit, ids)) out.push({ kind: "needs-companion", attacker, companion: limit.joinedFor ?? "greater-power" });
+    else if (size - 1 < limit.least) out.push({ kind: "needs-company", attacker, others: limit.least });
     else if (!fitsCompany(limit, size)) out.push({ kind: "attacks-alone", attacker });
   }
   const caps = company.caps;
@@ -487,7 +513,7 @@ export function withinAttackCompany(
       if (wanted === 0) return;
     }
   };
-  const fitting = units.filter((u) => fitsCompany(u.company, size));
+  const fitting = fittingAtSize(units, size);
   // A creature for each "with at least one creature" requirement the most
   // obedient plan obeys, sent first where it obeys it; the rest of each
   // stack goes as any other creature.
@@ -561,7 +587,51 @@ export function withinAttackCompany(
     const defender = freeDefender(u);
     if (defender !== undefined) place(u.id, defender, u.tokens, u.tokens);
   }
-  return withAimedSeated(out, offer);
+  return withAimedSeated(withCompanions(out, offer), offer);
+}
+
+/**
+ * `declared` with every Okk beside one of its `joinedBy` (rules 508.1c,
+ * 508.1d): one that must attack brings a companion that may attack free (one
+ * that needn't, given a seat under a cap), and one that needn't attack, or
+ * can't be joined, stays home. Each one dropped may have been another's only
+ * companion, so it's settled a breach at a time. Unchanged with no Okk.
+ */
+function withCompanions(declared: readonly AttackerDeclaration[], offer: AttackOffer): AttackerDeclaration[] {
+  const company = offer.company;
+  if (company === undefined || !Object.values(company.limits).some((l) => l.joinedBy !== undefined)) return [...declared];
+  let out = [...declared];
+  const required = new Set(company.required);
+  for (let pass = 0; pass <= offer.eligible.length * 2; pass += 1) {
+    const ids = new Set(out.map((d) => d.attacker));
+    const broken = out.find((d) => !joinedAsNeeded(company.limits[d.attacker], ids));
+    if (broken === undefined) return out;
+    const joinedBy = company.limits[broken.attacker]?.joinedBy ?? [];
+    const companion = required.has(broken.attacker)
+      ? joinedBy.find((id) => !ids.has(id) && (offer.defendersFor[id] ?? []).some((d) => taxOn(offer, id, d) === 0))
+      : undefined;
+    if (companion === undefined) {
+      out = out.filter((d) => d.attacker !== broken.attacker);
+      continue;
+    }
+    const defender = (offer.defendersFor[companion] ?? []).find((d) => taxOn(offer, companion, d) === 0)!;
+    out.push({ attacker: companion, defender });
+    // Room for it under "no more than N": one that needn't attack, and that
+    // no one placed needs, goes home.
+    const most = company.caps?.most;
+    if (most !== undefined && attackersDeclared(out, company.tokens) > most) {
+      const placed = new Set(out.map((d) => d.attacker));
+      const needed = new Set(
+        out.flatMap((d) => {
+          const by = company.limits[d.attacker]?.joinedBy ?? [];
+          return by.filter((id) => placed.has(id));
+        }),
+      );
+      const spare = [...out].reverse().find((d) => !required.has(d.attacker) && !needed.has(d.attacker) && d.attacker !== companion);
+      if (spare !== undefined) out = out.filter((d) => d !== spare);
+    }
+  }
+  return out;
 }
 
 /** The generic mana `attacker` attacking `defender` costs under `offer`'s attack tax. */

@@ -6718,6 +6718,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `attackCompanyViolations` / `blockCompanyViolations` in the validators (and
   the requirements' maximum, 508.1d, 509.1c), `withinAttackCompany` /
   `withinBlockCompany` for bots and the fuzzer. The scaffolder reads these.
+  `"cant-attack-unless-greater-power-joins"` / `"cant-block-unless-greater-power-joins"`
+  (Okk) are the same with the company named: one of the others has greater power
+  than it as the declaration is made (`CombatCompany.joinedBy`, the blockers
+  offer's `blockJoinedBy`; `greater-power-company.test.ts`).
   `combat-company.test.ts`.
 - `prohibits: [{ act: "become-suspected", object }]` — the creature can't become suspected (Airtight Alibi).
 - `goads: true` — the affected creatures **are goaded** (rule 701.15b), with

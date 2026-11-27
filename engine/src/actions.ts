@@ -2072,6 +2072,12 @@ export type LegalAction =
        * `blockCompanyViolations` checking them. `eligible` leaves out a creature
        * with no group it could block in. Absent when no creature has one. */
       readonly blockCompany?: Readonly<Record<ObjectId, number>>;
+      /** "Can't block unless a creature with greater power also blocks"
+       * (Okk): for each eligible creature with it, the eligible creatures
+       * with greater power, one of which must block beside it
+       * (`blockCompanyViolations`). It's in `blockCompany` too, needing one
+       * other. Absent when none has it. */
+      readonly blockJoinedBy?: Readonly<Record<ObjectId, readonly ObjectId[]>>;
       /** How many creatures this player may declare as blockers at most
        * (`combat/limits.ts`, rule 509.1b), `tooManyBlockers` checking it. An
        * attacker that needs more than this to be blocked is in no `canBlock`.

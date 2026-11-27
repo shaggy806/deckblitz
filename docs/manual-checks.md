@@ -9234,3 +9234,11 @@ Each board's die comes up 4.
 ### Bargaining Table: four players, X is an opponent's hand size
 - **Do:** Click Bargaining Table and choose its ability "(X=1)".
 - **Expect:** The menu has two rows, "(X=1)" and "(X=3)" (Bob and Dave hold one card, Carol three). One Plains taps and you draw a card.
+
+### Okk: the attack button is off until a creature with greater power attacks too
+- **Do:** In the declare-attackers prompt, send Okk and Grizzly Bears at Bob. Then send Shivan Dragon too.
+- **Expect:** With Okk and the Bears the prompt adds "Okk can't attack unless a creature with greater power also attacks" and the Attack button is off. With the Dragon as well the line goes and the button works.
+
+### Okk: four players, the creature with greater power may attack someone else
+- **Do:** In the declare-attackers prompt, send Okk at Bob and Shivan Dragon at Carol, and attack.
+- **Expect:** No line about greater power; the attack goes ahead, Bob losing 4 life and Carol 5.

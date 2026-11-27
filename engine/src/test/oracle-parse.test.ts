@@ -6118,6 +6118,12 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(self("This creature can't block unless at least two other creatures block.")).toMatchObject({
       restrictions: ["cant-block-unless-two-others"],
     });
+    expect(self("This creature can't attack unless a creature with greater power also attacks.")).toMatchObject({
+      restrictions: ["cant-attack-unless-greater-power-joins"],
+    });
+    expect(self("This creature can't block unless a creature with greater power also blocks.")).toMatchObject({
+      restrictions: ["cant-block-unless-greater-power-joins"],
+    });
     expect(face("Enchant creature\nEnchanted creature gets +3/+0 and can only attack alone.", "Enchantment").static?.[0]).toMatchObject({
       affects: { scope: "attached" },
       grantPt: [3, 0],

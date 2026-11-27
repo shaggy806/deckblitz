@@ -53,6 +53,8 @@ const RESTRICTION_TEXT: Record<CombatWord, string> = {
   'cant-attack-unless-two-others': "can't attack unless two other creatures attack",
   'cant-block-alone': "can't block alone",
   'cant-block-unless-two-others': "can't block unless two other creatures block",
+  'cant-attack-unless-greater-power-joins': "can't attack unless a creature with greater power also attacks",
+  'cant-block-unless-greater-power-joins': "can't block unless a creature with greater power also blocks",
 }
 
 /** A colour as the log says it — "becomes black". */

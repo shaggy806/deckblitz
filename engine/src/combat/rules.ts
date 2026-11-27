@@ -77,6 +77,12 @@ export type CombatWord =
   | "can-only-attack-alone"
   | "cant-attack-unless-two-others"
   | "cant-block-unless-two-others"
+  /** "Can't attack unless a creature with greater power also attacks" (Okk),
+   * and its block: at least one of the others declared beside it has
+   * greater power than it as the declaration is made (`CombatCompany`'s
+   * `joinedBy`). */
+  | "cant-attack-unless-greater-power-joins"
+  | "cant-block-unless-greater-power-joins"
   /** "Doesn't untap during its controller's untap step" (rule 502.3) on what
    * the static reaches. Only that untap step: something that untaps it at
    * another time still does. */

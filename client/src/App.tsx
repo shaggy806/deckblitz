@@ -7154,6 +7154,8 @@ function Table({
         : attackCompanyViolations(collapseAttacks(attackAssignments, stackMembers), attackAction).flatMap((v) =>
             v.kind === 'attacks-alone'
               ? [`${game.nameOf(v.attacker)} can only attack alone`]
+              : v.kind === 'needs-companion'
+                ? [`${game.nameOf(v.attacker)} can't attack unless a creature with greater power also attacks`]
               : v.kind === 'needs-company'
                 ? [`${game.nameOf(v.attacker)} can't attack without ${v.others === 1 ? 'another attacker' : `${v.others} other attackers`}`]
                 : v.kind === 'too-many'
@@ -7380,7 +7382,9 @@ function Table({
     // of blocking (rule 509.1d) are read from it, as the engine reads them.
     const declaredBlocks = [...collapseBlocks(blockAssign, stackMembers, blockPerToken), ...extraBlocks(blockExtra, blockAssign)]
     const lonelyBlockers = blockCompanyViolations(declaredBlocks, blockAction).map((v) =>
-      v.others === 1
+      v.companion === 'greater-power'
+        ? `${game.nameOf(v.blocker)} can't block unless a creature with greater power also blocks`
+        : v.others === 1
         ? `${game.nameOf(v.blocker)} can't block alone`
         : `${game.nameOf(v.blocker)} can't block unless at least ${v.others} other creatures block`,
     )

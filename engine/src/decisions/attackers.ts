@@ -17,7 +17,7 @@
  */
 
 import type { Action, AttackerDeclaration, LegalAction } from "../actions.js";
-import { restrictionsOf } from "../characteristics.js";
+import { computeCharacteristics, restrictionsOf } from "../characteristics.js";
 import {
   attackCompanyViolations,
   attackingViolations,
@@ -28,7 +28,7 @@ import {
   withRequiredAttackers,
 } from "../combat/attacking.js";
 import type { AttackOffer, AttackUnit } from "../combat/attacking.js";
-import { ableInCompany, attackCompanyOf } from "../combat/company.js";
+import { ableInCompany, attackCompanyOf, withGreaterPowerCompanions } from "../combat/company.js";
 import { attackCaps } from "../combat/limits.js";
 import type { CombatCompany } from "../combat/company.js";
 import {
@@ -88,9 +88,14 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   // it could attack in isn't eligible at all.
   const limits: Record<ObjectId, CombatCompany> = {};
   const tokensOf = (id: ObjectId): number => ctx.state.objects[id]?.stackCount ?? 1;
-  for (const id of Object.keys(defendersFor) as ObjectId[]) {
-    const limit = attackCompanyOf(restrictionsOf(ctx.state, ctx.registry, id));
-    if (limit !== null) limits[id] = limit;
+  const candidates = Object.keys(defendersFor) as ObjectId[];
+  const powerOf = (id: ObjectId): number => computeCharacteristics(ctx.state, ctx.registry, id).power;
+  for (const id of candidates) {
+    const restrictions = restrictionsOf(ctx.state, ctx.registry, id);
+    const limit = attackCompanyOf(restrictions);
+    if (limit !== null) {
+      limits[id] = withGreaterPowerCompanions(limit, restrictions, "cant-attack-unless-greater-power-joins", id, candidates, powerOf);
+    }
   }
   // How many may attack (`combat/limits.ts`), which only the whole declaration
   // can break as well. Whom each attacks is the second step's, under Master
@@ -358,6 +363,9 @@ export const attackers = defineDecision({
           if (broken.defender === undefined) return `No more than ${creatures} can attack each combat`;
           const named = ctx.state.objects[broken.defender as ObjectId] !== undefined ? nameOf(ctx, broken.defender as ObjectId) : broken.defender;
           return `No more than ${creatures} can attack ${named} each combat`;
+        }
+        if (broken.kind === "needs-companion") {
+          return `${nameOf(ctx, broken.attacker)} can't attack unless a creature with greater power also attacks`;
         }
         return broken.kind === "attacks-alone"
           ? `${nameOf(ctx, broken.attacker)} can only attack alone`

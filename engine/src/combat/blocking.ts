@@ -814,6 +814,9 @@ export function obeyingLure(
 export interface BlockCompanyViolation {
   readonly blocker: ObjectId;
   readonly others: number;
+  /** It has its `others` but none of them is one it needs (Okk: a creature
+   * with greater power, `offer.blockJoinedBy`). */
+  readonly companion?: "greater-power";
 }
 
 /**
@@ -829,9 +832,13 @@ export function blockCompanyViolations(
   if (company === undefined) return [];
   const size = creaturesBlocking(blocks, offer);
   const out: BlockCompanyViolation[] = [];
-  for (const blocker of new Set(blocks.map((b) => b.blocker))) {
+  const ids = new Set(blocks.map((b) => b.blocker));
+  for (const blocker of ids) {
     const others = company[blocker];
-    if (others !== undefined && size - 1 < others) out.push({ blocker, others });
+    if (others === undefined) continue;
+    if (offer.blockJoinedBy?.[blocker]?.some((id) => ids.has(id)) === false) {
+      out.push({ blocker, others, companion: "greater-power" });
+    } else if (size - 1 < others) out.push({ blocker, others });
   }
   return out;
 }
@@ -864,8 +871,13 @@ export function withinBlockCompany(
       out = obeyingLure(out, offer);
       continue;
     }
-    if (broken.some((v) => required.has(v.blocker))) {
-      const spare = offer.eligible.find((e) => !out.some((b) => b.blocker === e.blocker));
+    const needing = broken.find((v) => required.has(v.blocker));
+    if (needing !== undefined) {
+      // Okk's companion is one with greater power; anyone else's, anyone.
+      const wanted = needing.companion !== undefined ? offer.blockJoinedBy?.[needing.blocker] : undefined;
+      const spare = offer.eligible.find(
+        (e) => !out.some((b) => b.blocker === e.blocker) && (wanted === undefined || wanted.includes(e.blocker)),
+      );
       if (spare !== undefined) {
         const attacker = spare.canBlock.find((a) => !offer.menaceAttackers.includes(a)) ?? spare.canBlock[0];
         out.push({ blocker: spare.blocker, attacker });

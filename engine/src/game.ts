@@ -88,7 +88,7 @@ import {
   creatureAttackTax,
   defenderAttackTax,
 } from "./combat/tax.js";
-import { ableInCompany, attackCompanyOf } from "./combat/company.js";
+import { ableInCompany, attackCompanyOf, withGreaterPowerCompanions } from "./combat/company.js";
 import { attackCaps, blockersLeft } from "./combat/limits.js";
 import {
   creatureDef,
@@ -15066,13 +15066,22 @@ export class Game {
     const eligible = this.state.zones.shared.battlefield.filter((id) =>
       defenders.some((defender) => this.whyCannotAttack(this.activePlayer, id, defender) === null),
     );
-    // A lone Mogg Flunkies has nothing to declare (rule 508.1c, `combat/company.ts`).
+    // A lone Mogg Flunkies has nothing to declare (rule 508.1c, `combat/company.ts`),
+    // nor an Okk with nothing of greater power.
+    const powerOf = (id: ObjectId): number => this.characteristics(id).power;
     const able = ableInCompany(
-      eligible.map((id) => ({
-        id,
-        tokens: this.state.objects[id].stackCount ?? 1,
-        company: attackCompanyOf(restrictionsOf(this.state, this.registry, id)) ?? undefined,
-      })),
+      eligible.map((id) => {
+        const restrictions = restrictionsOf(this.state, this.registry, id);
+        const company = attackCompanyOf(restrictions);
+        return {
+          id,
+          tokens: this.state.objects[id].stackCount ?? 1,
+          company:
+            company === null
+              ? undefined
+              : withGreaterPowerCompanions(company, restrictions, "cant-attack-unless-greater-power-joins", id, eligible, powerOf),
+        };
+      }),
       attackCaps(this.state, this.registry)?.most,
     );
     if (able.length === 0) return;
