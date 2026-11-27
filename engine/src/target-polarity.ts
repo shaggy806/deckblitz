@@ -774,6 +774,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.thenMayBlock === true) v.touch(n.target, "either", MINOR);
   },
   "block-attacker": none,
+  // Who blocks what, traded: the board's call (Sorrow's Path, General Jarkeld).
+  "swap-blocks": (n, v) => {
+    v.touch(n.first, "either", MINOR);
+    v.touch(n.second, "either", MINOR);
+  },
   "enter-blocking": none,
   // Its damage kept from what it's attacking: an opponent's attacker's harm.
   "become-blocked": (n, v) => {

@@ -18,6 +18,7 @@
     "target:cast-only-target-restriction",
     "filter:player-previously-dealt-damage-by-source",
     "effect:redirect-spell-from-source",
+    "effect:swap-blockers",
     "condition:mana-ability-activation-count",
     "effect:opponent-chooses-your-permanent-to-exile",
     "condition:was-attacking-or-blocking-alone-lki",

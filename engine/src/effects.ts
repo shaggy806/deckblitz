@@ -7888,6 +7888,36 @@ export type EffectSpec =
     }
   | {
       /**
+       * Two creatures in combat trade what they're blocking, or what's
+       * blocking them, if each could take the other's part.
+       *
+       * `between: "blockers"` — Sorrow's Path's "If each of those creatures
+       * could block all creatures that the other is blocking, remove both of
+       * them from combat. Each one then blocks all creatures the other was
+       * blocking": `first` and `second` are blocking creatures; each must be
+       * able to block every attacker the other blocks now (evasion,
+       * protection, being tapped, how many it may block — not costs, the
+       * rulings), none at all being vacuously true. Both are removed from
+       * combat (rule 506.4), then each blocks the other's attackers by an
+       * effect, so "whenever ~ blocks" and "becomes blocked by a creature"
+       * trigger (509.3a, 509.3b, 509.3d) but not "becomes blocked", which
+       * they already were (509.3c, 509.1h).
+       *
+       * `between: "attackers"` — General Jarkeld's "If each of those
+       * creatures could be blocked by all creatures that the other is blocked
+       * by, each creature that's blocking exactly one of those attacking
+       * creatures stops blocking it and is blocking the other attacking
+       * creature": `first` and `second` are blocked attackers; the blockers
+       * change over without being removed from combat, so nothing triggers
+       * (its rulings).
+       */
+      readonly kind: "swap-blocks";
+      readonly between: "blockers" | "attackers";
+      readonly first: ObjectRef;
+      readonly second: ObjectRef;
+    }
+  | {
+      /**
        * "\u2026 that's blocking that creature" (rule 509.4): the permanent just
        * put onto the battlefield is blocking `attacker`, and for what triggers
        * it never "blocked" (509.4), though the attacker does become blocked
@@ -15753,6 +15783,8 @@ export interface EffectApi {
   removeFromCombat(target: TargetRef, unblockSoleBlocked?: boolean): void;
   /** See the `"block-attacker"` {@link EffectSpec}. */
   blockAttacker(blocker: ObjectId, attacker: ObjectId): void;
+  /** See the `"swap-blocks"` {@link EffectSpec}. */
+  swapBlocks(first: ObjectId, second: ObjectId, between: "blockers" | "attackers"): void;
   /** See the `"become-blocked"` {@link EffectSpec}: one creature, or every
    * attacker matching `filter`. */
   becomeBlocked(on: TargetRef | CardFilter): void;
@@ -23967,6 +23999,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "block-attacker": {
       const attacker = ctx.targets[0];
       if (attacker?.kind === "object") ctx.blockAttacker(spec.blocker, attacker.object);
+      return;
+    }
+    case "swap-blocks": {
+      const first = objectRefAct(spec.first, ctx);
+      const second = objectRefAct(spec.second, ctx);
+      if (first?.kind === "object" && second?.kind === "object" && first.object !== second.object) {
+        ctx.swapBlocks(first.object, second.object, spec.between);
+      }
       return;
     }
     case "enter-blocking": {

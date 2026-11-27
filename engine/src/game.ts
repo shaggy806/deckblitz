@@ -236,6 +236,7 @@ import {
   lethalDamageLeft,
   sharedAbilitiesOnBattlefield,
   sharedKeywordsAmong,
+  blockLimitOf,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
 import {
@@ -47990,6 +47991,8 @@ controlledBy,
         this.emit({ type: "removed-from-combat", object: target.object });
       },
       blockAttacker: (blocker, attacker) => this.blockAttackerByEffect(blocker, attacker),
+      swapBlocks: (first, second, between) =>
+        between === "blockers" ? this.swapBlockers(first, second) : this.swapBlockersOfAttackers(first, second),
       enterBlocking: (blocker, attacker) => this.blockAttackerByEffect(blocker, attacker, true),
       becomeBlocked: (on) => {
         const ids =
@@ -62402,6 +62405,109 @@ controlledBy,
     for (const id of newlyBlocked) {
       this.emit({ type: "attacker-blocked", attacker: id, blockers: [...this.state.objects[id].blockedBy] });
     }
+  }
+
+  /**
+   * `blockerId` blocks each of `attackerIds` by an effect (`swap-blocks`,
+   * rules 509.3a-d): the first as `blockAttackerByEffect` does when it's
+   * blocking nothing, each later one as an additional block ("whenever ~
+   * blocks" has triggered for it, 509.3a), its band with it (702.22h). One
+   * already blocked doesn't become blocked again (509.3c).
+   */
+  private blockAllByEffect(blockerId: ObjectId, attackerIds: readonly ObjectId[]): void {
+    for (const attackerId of attackerIds) {
+      const blocker = this.state.objects[blockerId];
+      if (blocker?.zone !== "battlefield") return;
+      if (blocker.blocking === null) {
+        this.blockAttackerByEffect(blockerId, attackerId);
+        continue;
+      }
+      const target = this.state.objects[attackerId];
+      if (target?.zone !== "battlefield" || target.attacking === null || target.blockedBy.includes(blockerId)) continue;
+      const blocked = [attackerId, ...bandMatesOf(this.state, attackerId)].filter(
+        (id) => !this.state.objects[id].blockedBy.includes(blockerId),
+      );
+      const newlyBlocked = blocked.filter((id) => !this.state.objects[id].blocked);
+      for (const id of blocked) {
+        const attacker = this.state.objects[id];
+        attacker.blockedBy.push(blockerId);
+        attacker.blocked = true;
+        blocker.blockingAlso = [...(blocker.blockingAlso ?? []), id];
+      }
+      invalidateComputedCache();
+      for (const id of blocked) this.emit({ type: "blocker-declared", blocker: blockerId, attacker: id, alsoBlocked: true });
+      for (const id of newlyBlocked) {
+        this.emit({ type: "attacker-blocked", attacker: id, blockers: [...this.state.objects[id].blockedBy] });
+      }
+    }
+  }
+
+  /** Whether `blockerId` could block every one of `attackerIds` (Sorrow's
+   * Path): each on its own (`whyCannotBlock` — evasion, protection, being
+   * tapped, restrictions), and no more of them than it may block
+   * (`blockLimitOf`, a band counted once, rule 702.22h). None is vacuously
+   * true (its ruling). Costs to block aren't asked (its ruling). */
+  private couldBlockAll(blockerId: ObjectId, attackerIds: readonly ObjectId[]): boolean {
+    if (attackerIds.length === 0) return true;
+    const blocker = this.state.objects[blockerId];
+    if (blocker === undefined) return false;
+    const units = new Set(attackerIds.map((id) => this.state.objects[id]?.band ?? id)).size;
+    if (units > blockLimitOf(this.state, this.registry, blockerId)) return false;
+    return attackerIds.every((id) => whyCannotBlock(this.state, this.registry, blocker.controller, blockerId, id) === null);
+  }
+
+  /** `swap-blocks` between two blockers (Sorrow's Path): if each could block
+   * all the other is blocking, both are removed from combat (rule 506.4),
+   * then each blocks what the other was blocking. */
+  private swapBlockers(first: ObjectId, second: ObjectId): void {
+    const a = this.state.objects[first];
+    const b = this.state.objects[second];
+    if (a?.zone !== "battlefield" || b?.zone !== "battlefield" || a.blocking === null || b.blocking === null) return;
+    const ofFirst = blockedAttackersOf(this.state, first);
+    const ofSecond = blockedAttackersOf(this.state, second);
+    if (!this.couldBlockAll(second, ofFirst) || !this.couldBlockAll(first, ofSecond)) return;
+    this.removeFromCombat(first);
+    this.removeFromCombat(second);
+    invalidateComputedCache();
+    this.emit({ type: "removed-from-combat", object: first });
+    this.emit({ type: "removed-from-combat", object: second });
+    this.blockAllByEffect(first, ofSecond);
+    this.blockAllByEffect(second, ofFirst);
+  }
+
+  /** `swap-blocks` between two blocked attackers (General Jarkeld): if each
+   * could be blocked by every creature blocking the other, each creature
+   * blocking exactly one of them stops blocking it and is blocking the other
+   * — not removed from combat, and nothing triggers (its rulings). */
+  private swapBlockersOfAttackers(first: ObjectId, second: ObjectId): void {
+    const x = this.state.objects[first];
+    const y = this.state.objects[second];
+    if (x?.zone !== "battlefield" || y?.zone !== "battlefield" || x.attacking === null || y.attacking === null) return;
+    if (!x.blocked || !y.blocked) return;
+    const byX = [...x.blockedBy];
+    const byY = [...y.blockedBy];
+    const couldBeBlockedByAll = (blockers: readonly ObjectId[], attacker: ObjectId): boolean =>
+      blockers.every((id) => {
+        const blocker = this.state.objects[id];
+        return blocker !== undefined && whyCannotBlock(this.state, this.registry, blocker.controller, id, attacker) === null;
+      });
+    if (!couldBeBlockedByAll(byY, first) || !couldBeBlockedByAll(byX, second)) return;
+    const moves = [
+      ...byX.filter((id) => !byY.includes(id)).map((id) => [id, first, second] as const),
+      ...byY.filter((id) => !byX.includes(id)).map((id) => [id, second, first] as const),
+    ];
+    if (moves.length === 0) return;
+    const lost = { turn: this.state.turn.number, combat: this.state.turn.combatPhases ?? 0 };
+    for (const [id, from, to] of moves) {
+      const blocker = this.state.objects[id];
+      if (blocker.blocking === from) blocker.blocking = to;
+      else if (blocker.blockingAlso !== undefined) blocker.blockingAlso = blocker.blockingAlso.map((b) => (b === from ? to : b));
+      const was = this.state.objects[from];
+      was.blockedBy = was.blockedBy.filter((b) => b !== id);
+      was.lostBlockerIn = lost;
+      this.state.objects[to].blockedBy.push(id);
+    }
+    invalidateComputedCache();
   }
 
   private removeFromCombat(id: ObjectId): void {
