@@ -638,6 +638,7 @@ import _poolNoDachi from "../pool/no-dachi.js";
 import _poolNocturnalHunger from "../pool/nocturnal-hunger.js";
 import _poolNonHumanCannonball from "../pool/non-human-cannonball.js";
 import _poolNorinSwiftSurvivalist from "../pool/norin-swift-survivalist.js";
+import _poolNorthStar from "../pool/north-star.js";
 import _poolNotOnMyWatch from "../pool/not-on-my-watch.js";
 import _poolNulldrifter from "../pool/nulldrifter.js";
 import _poolNurturingPixie from "../pool/nurturing-pixie.js";
@@ -1764,6 +1765,7 @@ const shard: CardShard = {
     _poolNocturnalHunger,
     _poolNonHumanCannonball,
     _poolNorinSwiftSurvivalist,
+    _poolNorthStar,
     _poolNotOnMyWatch,
     _poolNulldrifter,
     _poolNurturingPixie,

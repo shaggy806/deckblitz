@@ -310,6 +310,7 @@ import _poolExtinctionEvent from "../pool/extinction-event.js";
 import _poolExtractionIntegrant from "../pool/extraction-integrant.js";
 import _poolFaerieGuidemother from "../pool/faerie-guidemother.js";
 import _poolFaithfulMending from "../pool/faithful-mending.js";
+import _poolFalseDawn from "../pool/false-dawn.js";
 import _poolFalsePeace from "../pool/false-peace.js";
 import _poolFangDruidSummoner from "../pool/fang-druid-summoner.js";
 import _poolFangedFlames from "../pool/fanged-flames.js";
@@ -1383,6 +1384,7 @@ const shard: CardShard = {
     _poolExtractionIntegrant,
     _poolFaerieGuidemother,
     _poolFaithfulMending,
+    _poolFalseDawn,
     _poolFalsePeace,
     _poolFangDruidSummoner,
     _poolFangedFlames,

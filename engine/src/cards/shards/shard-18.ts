@@ -248,6 +248,7 @@ import _poolElturgardRanger from "../pool/elturgard-ranger.js";
 import _poolElvishHydromancer from "../pool/elvish-hydromancer.js";
 import _poolEmberhornMinotaur from "../pool/emberhorn-minotaur.js";
 import _poolEmberwildeCaliph from "../pool/emberwilde-caliph.js";
+import _poolEmblazonedGolem from "../pool/emblazoned-golem.js";
 import _poolEmptyTheLaboratory from "../pool/empty-the-laboratory.js";
 import _poolEncirclingFissure from "../pool/encircling-fissure.js";
 import _poolEndlessCockroaches from "../pool/endless-cockroaches.js";
@@ -1303,6 +1304,7 @@ const shard: CardShard = {
     _poolElvishHydromancer,
     _poolEmberhornMinotaur,
     _poolEmberwildeCaliph,
+    _poolEmblazonedGolem,
     _poolEmptyTheLaboratory,
     _poolEncirclingFissure,
     _poolEndlessCockroaches,

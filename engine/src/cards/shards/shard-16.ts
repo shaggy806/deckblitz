@@ -110,6 +110,7 @@ import _poolBowerPassage from "../pool/bower-passage.js";
 import _poolBrassclawOrcs from "../pool/brassclaw-orcs.js";
 import _poolBreakOpen from "../pool/break-open.js";
 import _poolBreaking from "../pool/breaking.js";
+import _poolBreathOfDreams from "../pool/breath-of-dreams.js";
 import _poolBreyaEtheriumShaper from "../pool/breya-etherium-shaper.js";
 import _poolBriarShield from "../pool/briar-shield.js";
 import _poolBrimazKingOfOreskos from "../pool/brimaz-king-of-oreskos.js";
@@ -1241,6 +1242,7 @@ const shard: CardShard = {
     _poolBrassclawOrcs,
     _poolBreakOpen,
     _poolBreaking,
+    _poolBreathOfDreams,
     _poolBreyaEtheriumShaper,
     _poolBriarShield,
     _poolBrimazKingOfOreskos,

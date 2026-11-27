@@ -2011,6 +2011,7 @@ import _poolBalduvianBears from "./pool/balduvian-bears.js";
 import _poolBalduvianBerserker from "./pool/balduvian-berserker.js";
 import _poolBalduvianConjurer from "./pool/balduvian-conjurer.js";
 import _poolBalduvianDead from "./pool/balduvian-dead.js";
+import _poolBalduvianFallen from "./pool/balduvian-fallen.js";
 import _poolBalduvianFrostwaker from "./pool/balduvian-frostwaker.js";
 import _poolBalduvianHorde from "./pool/balduvian-horde.js";
 import _poolBalduvianHydra from "./pool/balduvian-hydra.js";
@@ -3525,6 +3526,7 @@ import _poolBreakneckBerserker from "./pool/breakneck-berserker.js";
 import _poolBreakneckRider from "./pool/breakneck-rider.js";
 import _poolBreakthrough from "./pool/breakthrough.js";
 import _poolBreathOfDarigaaz from "./pool/breath-of-darigaaz.js";
+import _poolBreathOfDreams from "./pool/breath-of-dreams.js";
 import _poolBreathOfFire from "./pool/breath-of-fire.js";
 import _poolBreathOfFury from "./pool/breath-of-fury.js";
 import _poolBreathOfLife from "./pool/breath-of-life.js";
@@ -8581,6 +8583,7 @@ import _poolEmberwildeCaliph from "./pool/emberwilde-caliph.js";
 import _poolEmberwildeCaptain from "./pool/emberwilde-captain.js";
 import _poolEmberwildeDjinn from "./pool/emberwilde-djinn.js";
 import _poolEmbiggen from "./pool/embiggen.js";
+import _poolEmblazonedGolem from "./pool/emblazoned-golem.js";
 import _poolEmblemOfTheWarmind from "./pool/emblem-of-the-warmind.js";
 import _poolEmbodimentOfAgonies from "./pool/embodiment-of-agonies.js";
 import _poolEmbodimentOfFlame from "./pool/embodiment-of-flame.js";
@@ -9457,6 +9460,7 @@ import _poolFallowEarth from "./pool/fallow-earth.js";
 import _poolFallowWurm from "./pool/fallow-wurm.js";
 import _poolFallowsage from "./pool/fallowsage.js";
 import _poolFalseCure from "./pool/false-cure.js";
+import _poolFalseDawn from "./pool/false-dawn.js";
 import _poolFalseDefeat from "./pool/false-defeat.js";
 import _poolFalseDemise from "./pool/false-demise.js";
 import _poolFalseFloor from "./pool/false-floor.js";
@@ -19548,6 +19552,7 @@ import _poolNornsWellspring from "./pool/norns-wellspring.js";
 import _poolNorritt from "./pool/norritt.js";
 import _poolNorthPoleGates from "./pool/north-pole-gates.js";
 import _poolNorthPolePatrol from "./pool/north-pole-patrol.js";
+import _poolNorthStar from "./pool/north-star.js";
 import _poolNorthWindAvatar from "./pool/north-wind-avatar.js";
 import _poolNorthamptonFarm from "./pool/northampton-farm.js";
 import _poolNorthernAirTemple from "./pool/northern-air-temple.js";
@@ -36346,6 +36351,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBalduvianBerserker,
   _poolBalduvianConjurer,
   _poolBalduvianDead,
+  _poolBalduvianFallen,
   _poolBalduvianFrostwaker,
   _poolBalduvianHorde,
   _poolBalduvianHydra,
@@ -37860,6 +37866,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBreakneckRider,
   _poolBreakthrough,
   _poolBreathOfDarigaaz,
+  _poolBreathOfDreams,
   _poolBreathOfFire,
   _poolBreathOfFury,
   _poolBreathOfLife,
@@ -42916,6 +42923,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmberwildeCaptain,
   _poolEmberwildeDjinn,
   _poolEmbiggen,
+  _poolEmblazonedGolem,
   _poolEmblemOfTheWarmind,
   _poolEmbodimentOfAgonies,
   _poolEmbodimentOfFlame,
@@ -43792,6 +43800,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFallowWurm,
   _poolFallowsage,
   _poolFalseCure,
+  _poolFalseDawn,
   _poolFalseDefeat,
   _poolFalseDemise,
   _poolFalseFloor,
@@ -53883,6 +53892,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNorritt,
   _poolNorthPoleGates,
   _poolNorthPolePatrol,
+  _poolNorthStar,
   _poolNorthWindAvatar,
   _poolNorthamptonFarm,
   _poolNorthernAirTemple,
@@ -70694,6 +70704,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/balduvian-berserker": _poolBalduvianBerserker,
   "pool/balduvian-conjurer": _poolBalduvianConjurer,
   "pool/balduvian-dead": _poolBalduvianDead,
+  "pool/balduvian-fallen": _poolBalduvianFallen,
   "pool/balduvian-frostwaker": _poolBalduvianFrostwaker,
   "pool/balduvian-horde": _poolBalduvianHorde,
   "pool/balduvian-hydra": _poolBalduvianHydra,
@@ -72208,6 +72219,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/breakneck-rider": _poolBreakneckRider,
   "pool/breakthrough": _poolBreakthrough,
   "pool/breath-of-darigaaz": _poolBreathOfDarigaaz,
+  "pool/breath-of-dreams": _poolBreathOfDreams,
   "pool/breath-of-fire": _poolBreathOfFire,
   "pool/breath-of-fury": _poolBreathOfFury,
   "pool/breath-of-life": _poolBreathOfLife,
@@ -77264,6 +77276,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emberwilde-captain": _poolEmberwildeCaptain,
   "pool/emberwilde-djinn": _poolEmberwildeDjinn,
   "pool/embiggen": _poolEmbiggen,
+  "pool/emblazoned-golem": _poolEmblazonedGolem,
   "pool/emblem-of-the-warmind": _poolEmblemOfTheWarmind,
   "pool/embodiment-of-agonies": _poolEmbodimentOfAgonies,
   "pool/embodiment-of-flame": _poolEmbodimentOfFlame,
@@ -78140,6 +78153,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fallow-wurm": _poolFallowWurm,
   "pool/fallowsage": _poolFallowsage,
   "pool/false-cure": _poolFalseCure,
+  "pool/false-dawn": _poolFalseDawn,
   "pool/false-defeat": _poolFalseDefeat,
   "pool/false-demise": _poolFalseDemise,
   "pool/false-floor": _poolFalseFloor,
@@ -88231,6 +88245,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/norritt": _poolNorritt,
   "pool/north-pole-gates": _poolNorthPoleGates,
   "pool/north-pole-patrol": _poolNorthPolePatrol,
+  "pool/north-star": _poolNorthStar,
   "pool/north-wind-avatar": _poolNorthWindAvatar,
   "pool/northampton-farm": _poolNorthamptonFarm,
   "pool/northern-air-temple": _poolNorthernAirTemple,
