@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "dies", who: "attached" },
       targets: ["opponent"],
-      effect: { kind: "put-onto-battlefield", target: "source", transformed: true, underYourControl: true, attachedTo: 0 },
+      effect: { kind: "put-onto-battlefield", target: "source", fromGraveyard: true, transformed: true, underYourControl: true, attachedTo: 0 },
       resolve: null,
       text: DIES_TEXT,
     },

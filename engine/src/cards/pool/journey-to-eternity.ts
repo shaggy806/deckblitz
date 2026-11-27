@@ -21,8 +21,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "put-onto-battlefield", target: "trigger-object", underYourControl: true },
-          { kind: "put-onto-battlefield", target: "source", transformed: true, underYourControl: true },
+          { kind: "put-onto-battlefield", target: "trigger-object", fromGraveyard: true, underYourControl: true },
+          { kind: "put-onto-battlefield", target: "source", fromGraveyard: true, transformed: true, underYourControl: true },
         ],
       },
       resolve: null,
