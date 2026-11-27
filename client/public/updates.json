@@ -1,5 +1,18 @@
 [
   {
+    "date": "2026-11-27",
+    "notes": [
+      "201 more cards are playable, among them Juxtapose, Chorus of the Conclave, Spy Kit, Shaman's Trance, Time and Tide and Okk.",
+      "Journey to Eternity, Radiant Grace and Skin Invasion no longer come back when they were exiled instead of going to the graveyard.",
+      "An attacker that is already blocked no longer becomes blocked again when an effect adds another blocker, so its \"whenever it becomes blocked\" abilities don't trigger twice.",
+      "When more than one card changes what a land's mana becomes (Naked Singularity beside Reality Twist), the player tapping it now picks among them, instead of only the newest applying.",
+      "In multiplayer, False Orders can now take a blocker controlled by any of the attacking player's opponents.",
+      "Bots no longer cast Gamble when it's their only card, since its random discard could only throw away the card it found.",
+      "Bots stop aiming more pings at a creature once the ones already on the stack will kill it.",
+      "Bots keep a redirecting spell such as Deflecting Swat until there is a spell or ability worth turning aside."
+    ]
+  },
+  {
     "date": "2026-11-26",
     "notes": [
       "69 more cards are playable, among them Lightning Storm, Mob Mentality, Soulflayer, Piracy, Land Equilibrium and Kaervek's Torch.",
