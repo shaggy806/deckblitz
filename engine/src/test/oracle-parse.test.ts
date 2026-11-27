@@ -1249,6 +1249,12 @@ describe("the players a sentence names by another target, the Aura's host and th
     expect(leash.enchant).toEqual({ kind: "permanent", filter: {}, asChosen: { tapped: true } });
   });
 
+  it("a player the source dealt damage to this turn (Wicked Akuba)", () => {
+    const akuba = face(CREATURE, "{B}: Target player dealt damage by this creature this turn loses 1 life.").activated[0];
+    expect(akuba.targets).toEqual([{ kind: "player-dealt-damage-by-source" }]);
+    expect(akuba.effect).toEqual({ kind: "lose-life", amount: 1, target: 0 });
+  });
+
   it("that player's step: a creature they control", () => {
     const siege = face("Enchantment", "At the beginning of combat on each opponent's turn, tap target creature that player controls.");
     expect(siege.triggered[0].trigger).toEqual({ on: "step-begins", step: "begin-combat", who: "opponent" });

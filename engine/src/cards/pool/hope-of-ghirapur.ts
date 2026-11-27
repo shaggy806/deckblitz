@@ -30,7 +30,7 @@ export default defineCard({
   activated: [
     {
       cost: { mana: null, tap: false, sacrifice: "self" },
-      targets: [{ kind: "player-dealt-combat-damage-by-source" }],
+      targets: [{ kind: "player-dealt-damage-by-source", combat: true }],
       effect: {
         kind: "prohibit",
         prohibits: [{ act: "cast", who: { target: 0 }, filter: { notTypes: ["creature"] } }],

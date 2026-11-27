@@ -4470,9 +4470,12 @@ than you do **as you activate this ability**" — the Keepers: `stat` is
 `"creature-cards-in-graveyard"`, and the opponent's must be at least `by` more
 — `2` for "at least two more", negative for "fewer"; judged only as the target
 is chosen, so as it resolves any opponent will do),
-`{ kind: "player-dealt-combat-damage-by-source" }` ("target player who was dealt
-combat damage by Hope of Ghirapur this turn": by the source in its stint, read
-from the journal, a sacrificed source included),
+`{ kind: "player-dealt-damage-by-source", combat?, ever?, opponent? }` ("target
+player dealt damage by this creature this turn" — Wicked Akuba; `combat: true`
+for "…who was dealt combat damage by Hope of Ghirapur this turn"; `ever: true,
+opponent: true` for "target opponent previously dealt damage by it" — Diseased
+Vermin, any turn of the game: by the source in its stint, read from the
+journal, a sacrificed source included),
 `"creature-or-player"`, `"opponent-or-planeswalker"`,
 `"permanent"`, `"nonland-permanent"`, `"nonland-permanent-an-opponent-controls"`,
 `"land"`, `"artifact"`, `"artifact-an-opponent-controls"`, `"artifact-or-enchantment"`,

@@ -199,13 +199,26 @@ export type TargetSpec =
    * ({@link resolvingTargetSpec}).
    */
   /**
-   * "Target player **who was dealt combat damage by [this] this turn**"
-   * (Hope of Ghirapur): any player the source dealt combat damage to this
-   * turn, in the stint it's in or was in as it left (rule 400.7) — so a
-   * sacrificed source still knows. Read from the journal's `damage` entries;
-   * checked again as it resolves (608.2b).
+   * "Target player **dealt damage by [this] this turn**" (Wicked Akuba): any
+   * player the source dealt damage to this turn, in the stint it's in or was
+   * in as it left (rule 400.7) — so a sacrificed source still knows. Read
+   * from the journal's `damage` entries; checked again as it resolves
+   * (608.2b).
+   * - `combat`: only combat damage — "target player who was dealt combat
+   *   damage by Hope of Ghirapur this turn".
+   * - `ever`: on any turn of the game, not only this one — "target opponent
+   *   **previously dealt damage by it**" (Diseased Vermin). Read from the
+   *   journal's whole-game `damagedPlayersBy` record, which a permanent's
+   *   damage to a player writes.
+   * - `opponent`: only an opponent of the player choosing ("target
+   *   opponent …").
    */
-  | { readonly kind: "player-dealt-combat-damage-by-source" }
+  | {
+      readonly kind: "player-dealt-damage-by-source";
+      readonly combat?: true;
+      readonly ever?: true;
+      readonly opponent?: true;
+    }
   | {
       readonly kind: "opponent-compared";
       readonly stat: PlayerStat;
@@ -2028,7 +2041,11 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
       ? `${either} that was dealt damage this turn`
       : either;
   }
-  if (spec.kind === "player-dealt-combat-damage-by-source") return "player dealt combat damage by this this turn";
+  if (spec.kind === "player-dealt-damage-by-source") {
+    const who = spec.opponent === true ? "opponent" : "player";
+    const what = spec.combat === true ? "combat damage" : "damage";
+    return spec.ever === true ? `${who} previously dealt ${what} by this` : `${who} dealt ${what} by this this turn`;
+  }
   if (spec.kind === "card-in-exile") {
     const what = spec.filter?.type === undefined ? "card" : `${spec.filter.type} card`;
     const up = spec.faceUp === true ? "face-up " : "";

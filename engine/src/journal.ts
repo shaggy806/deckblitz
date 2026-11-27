@@ -332,6 +332,12 @@ export interface Journal {
    * controlled it ("dealt combat damage this game by a creature named
    * Gollum, Obsessed Stalker"). Kept past the round the entries last. */
   combatDamagedBy?: Partial<Record<PlayerId, string[]>>;
+  /** The whole game's record of the players each permanent has dealt damage
+   * to, keyed `"<object>@<stint>"` — one object in one stint (rule 400.7) —
+   * with those it dealt combat damage to apart ("target opponent previously
+   * dealt damage by it" — Diseased Vermin). Kept past the round the entries
+   * last. */
+  damagedPlayersBy?: Record<string, { any: PlayerId[]; combat?: PlayerId[] }>;
   /** The whole game's count of the cards each player cycled, by name, as
    * each was named as it was cycled ("if you've cycled a card named Yidaro,
    * Wandering Monster four or more times this game"). Kept past the round
@@ -362,6 +368,25 @@ export function noteCombatDamagedBy(state: GameState, player: PlayerId, names: r
   const journal = (state.journal ??= emptyJournal());
   const list = ((journal.combatDamagedBy ??= {})[player] ??= []);
   for (const name of names) if (!list.includes(name)) list.push(name);
+}
+
+/** Note that the permanent `object`, in stint `stint`, dealt `player` damage
+ * (`Journal.damagedPlayersBy`). */
+export function noteDamagedPlayer(state: GameState, object: ObjectId, stint: number, player: PlayerId, combat: boolean): void {
+  const journal = (state.journal ??= emptyJournal());
+  const record = ((journal.damagedPlayersBy ??= {})[`${object}@${stint}`] ??= { any: [] });
+  if (!record.any.includes(player)) record.any.push(player);
+  if (combat) {
+    const list = (record.combat ??= []);
+    if (!list.includes(player)) list.push(player);
+  }
+}
+
+/** The players the permanent `object` has dealt damage to this game in stint
+ * `stint` — combat damage only if `combat`. */
+export function damagedPlayersBy(state: GameState, object: ObjectId, stint: number, combat: boolean): readonly PlayerId[] {
+  const record = state.journal?.damagedPlayersBy?.[`${object}@${stint}`];
+  return (combat ? record?.combat : record?.any) ?? [];
 }
 
 /** Note that `player` cycled a card with these `names` (`Journal.cycledNames`). */

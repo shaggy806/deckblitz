@@ -486,6 +486,7 @@ import {
   pileOrGuessEffectsThisTurn,
   modesDoneThisTurn,
   noteCombatDamagedBy,
+  noteDamagedPlayer,
   noteCycledNames,
 } from "./journal.js";
 import {
@@ -66009,6 +66010,11 @@ controlledBy,
         // game's record, by the name it had as it dealt the damage.
         if (event.combat && event.target.kind === "player" && was !== undefined && was.types.includes("creature")) {
           noteCombatDamagedBy(this.state, event.target.player, lastKnownNames(this.registry, was));
+        }
+        // "Previously dealt damage by it": the whole game's record of the
+        // players a permanent dealt damage to, by its stint (rule 400.7).
+        if (event.target.kind === "player" && was !== undefined && (departed !== undefined || source?.zone === "battlefield")) {
+          noteDamagedPlayer(this.state, event.source, was.zoneChangeCount, event.target.player, event.combat === true);
         }
         return;
       }

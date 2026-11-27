@@ -20,7 +20,7 @@ import {
 } from "./characteristics.js";
 import { filterReadsX, manaValueOfObject, matchesFilter, stackObjectTargetsMatch } from "./filter.js";
 import type { CardFilter } from "./filter.js";
-import { entriesThisTurn } from "./journal.js";
+import { damagedPlayersBy, entriesThisTurn } from "./journal.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { activePlayerOf, nameOf, printedCardName, rulesTextName } from "./state.js";
@@ -124,7 +124,7 @@ export function targetSpecReadsX(spec: TargetSpec): boolean {
     spec.kind === "ability" ||
     spec.kind === "stack" ||
     spec.kind === "opponent-compared" ||
-    spec.kind === "player-dealt-combat-damage-by-source"
+    spec.kind === "player-dealt-damage-by-source"
   ) {
     return false;
   }
@@ -915,18 +915,24 @@ function isLegalTargetUncached(
     );
   }
   // "Target player who was dealt combat damage by [this] this turn" (Hope
-  // of Ghirapur): by the source in the stint it's in, or was in as it left
-  // (rule 400.7) — a sacrificed source still knows.
-  if (typeof spec === "object" && spec.kind === "player-dealt-combat-damage-by-source") {
+  // of Ghirapur), "…dealt damage by this creature this turn" (Wicked Akuba),
+  // "target opponent previously dealt damage by it" (Diseased Vermin): by the
+  // source in the stint it's in, or was in as it left (rule 400.7) — a
+  // sacrificed source still knows.
+  if (typeof spec === "object" && spec.kind === "player-dealt-damage-by-source") {
     if (ref.kind !== "player" || !isLivingPlayer(state, ref) || source?.object === undefined) return false;
+    if (spec.opponent === true && ref.player === forPlayer) return false;
     const live = state.objects[source.object];
     const stint =
       source.sourceStint ??
       (live?.zone === "battlefield" ? (live.zoneChangeCount ?? 0) : source.lastKnown?.zoneChangeCount);
     if (stint === undefined) return false;
+    if (spec.ever === true) {
+      return damagedPlayersBy(state, source.object, stint, spec.combat === true).includes(ref.player);
+    }
     return entriesThisTurn(state, "damage").some(
       (entry) =>
-        entry.combat !== undefined &&
+        (spec.combat !== true || entry.combat !== undefined) &&
         entry.object === source.object &&
         entry.stint === stint &&
         entry.target?.kind === "player" &&
