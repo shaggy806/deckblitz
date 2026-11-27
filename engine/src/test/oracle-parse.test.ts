@@ -26613,6 +26613,29 @@ describe("a blocker sacrificed at end of combat, and a token if it was", () => {
   });
 });
 
+describe("a creature targeted by an ability of a named land", () => {
+  it("reads Skophos Maze-Warden's trigger and its fight", () => {
+    const face = parseFace(
+      {
+        name: "Test Warden",
+        type_line: "Creature — Minotaur Warrior",
+        oracle_text:
+          "Whenever another creature becomes the target of an ability of a land you control named Labyrinth of Skophos, you may have this creature fight that creature. (Each deals damage equal to its power to the other.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({
+      on: "becomes-target",
+      who: "any",
+      filter: { type: "creature" },
+      otherOnly: true,
+      abilitySource: { type: "land", controlledBy: "you", hasName: "Labyrinth of Skophos" },
+    });
+    expect(face.triggered[0].effect.effect).toEqual({ kind: "fight", a: "source", b: "trigger-object" });
+  });
+});
+
 describe("the exiled card's power and toughness", () => {
   it("reads Bioplasm's bonus from the card exiled this way", () => {
     const face = parseFace(

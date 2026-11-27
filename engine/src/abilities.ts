@@ -1771,6 +1771,13 @@ export type TriggerKind =
        * — "becomes the target of **a backup ability**" (Mirror-Shield
        * Hoplite: `"backup"`, rule 702.165a), whoever's. Never a spell. */
       readonly abilityKeyword?: KeywordAbilityName;
+      /** Only an ability whose source matches this — "becomes the target of
+       * **an ability of a land you control named Labyrinth of Skophos**"
+       * (Skophos Maze-Warden: `{ type: "land", controlledBy: "you", hasName
+       * }`, "you" this permanent's controller). The source is read as it is
+       * as it targets, or as it last existed on the battlefield if its own
+       * cost moved it (rules 113.7a, 608.2h). Never a spell. */
+      readonly abilitySource?: CardFilter;
       /** "Becomes the target of an ability **that targets only it**" (Agrus
        * Kos, Eternal Soldier): every target the spell or ability has, as it's
        * put on the stack, is this permanent — one object, chosen in several

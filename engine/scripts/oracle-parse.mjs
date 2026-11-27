@@ -2623,6 +2623,22 @@ export function parseTrigger(clause) {
     if (filter === null || filter.type === undefined) return null;
     return [{ on: "becomes-target", who: "you-control", filter, orSpell: true, ...(m[3] !== undefined ? { byOpponentOnly: true } : {}) }];
   }
+  // "Whenever another creature becomes the target of an ability of a land you
+  // control named Labyrinth of Skophos" (Skophos Maze-Warden): the
+  // targeting ability's source (`abilitySource`).
+  if ((m = /^Whenever (another|a) creature becomes the target of an ability of an? (\w+) you control named ([^,]+)$/.exec(c))) {
+    const source = parseTypePhrase(m[2]);
+    if (source === null || source.type === undefined) return null;
+    return [
+      {
+        on: "becomes-target",
+        who: "any",
+        filter: { type: "creature" },
+        ...(m[1] === "another" ? { otherOnly: true } : {}),
+        abilitySource: { ...source, controlledBy: "you", hasName: m[3] },
+      },
+    ];
+  }
   // "Whenever another creature you control becomes the target of a spell or
   // ability" (Monk Gyatso): its trigger object is the creature.
   if ((m = /^Whenever (another|a) (\w+) you control becomes the target of a spell or ability$/.exec(c))) {
@@ -6031,6 +6047,11 @@ export function parseSentence(sentence, ctx) {
     return { kind: "damage-all", amount: amount(m[1]), filter: { type: "creature", controlledBy: "opponent" } };
   }
   if ((m = re(`~ fights (${TARGET})`).exec(s))) return { kind: "fight", a: "source", b: slot(m[1]) };
+  // "You may have ~ fight that creature" of the creature a trigger names
+  // (Skophos Maze-Warden): no target, the trigger object.
+  if (ctx?.it === "trigger-object" && ctx.targets.length === 0 && re("have ~ fight that creature").test(s)) {
+    return { kind: "fight", a: "source", b: "trigger-object" };
+  }
   // "When this creature enters, it fights target creature…" (Scab-Clan Giant).
   if ((m = re(`it fights (${TARGET})`).exec(s)) && ctx.it === "source" && ctx.targets.length === 0) {
     return { kind: "fight", a: "source", b: slot(m[1]) };
@@ -7764,7 +7785,7 @@ export function parseSentence(sentence, ctx) {
   // ability's source (Haunting Wind's `objectIsSource`, beside its "an
   // artifact becomes tapped"): `{ controllerOf: "trigger-object" }`, the
   // artifact's controller rather than the activating player.
-  if (ctx.objectIsSource === true && (m = re(`~ deals ${N} damage to that artifact's controller`).exec(s))) {
+  if (ctx?.objectIsSource === true && (m = re(`~ deals ${N} damage to that artifact's controller`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: { controllerOf: "trigger-object" } };
   }
   // "Those creatures", "each of them", of an attack read as one batch: a

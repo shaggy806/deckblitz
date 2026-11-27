@@ -40704,7 +40704,10 @@ export class Game {
           (spec.abilityKeyword === undefined ||
             (!event.bySpell &&
               this.state.objects[event.stackObject]?.abilityKind === "triggered" &&
-              (this.stackAbilityOf(this.state.objects[event.stackObject]) as Partial<TriggeredAbility>).keywordOf === spec.abilityKeyword));
+              (this.stackAbilityOf(this.state.objects[event.stackObject]) as Partial<TriggeredAbility>).keywordOf === spec.abilityKeyword)) &&
+          // "… of a land you control named Labyrinth of Skophos": the
+          // ability's source, as it last existed if its cost moved it.
+          (spec.abilitySource === undefined || (!event.bySpell && this.abilitySourceMatches(event.stackObject, spec.abilitySource, self)));
         if (event.type === "player-targeted") {
           if (spec.onlyTargetingIt === true) return false;
           // "Whenever you become the target" (Amulet of Safekeeping), "a
@@ -41594,6 +41597,21 @@ export class Game {
       return this.state.objects[event.object]?.xValue ?? undefined;
     }
     return undefined;
+  }
+
+  /** Does the source of the ability `stackObject` match `filter`, from
+   * `self`'s controller's perspective — a `becomes-target` trigger's
+   * `abilitySource` (Skophos Maze-Warden)? Read on the battlefield as it is,
+   * or as it last existed there once its own cost moved it (rules 113.7a,
+   * 608.2h); a card's ability from another zone, where it is. */
+  private abilitySourceMatches(stackObject: ObjectId, filter: CardFilter, self: GameObject): boolean {
+    const ability = this.state.objects[stackObject];
+    const sourceId = ability?.kind === "ability" ? ability.sourceObjectId : null;
+    if (sourceId === null || sourceId === undefined) return false;
+    const source = this.state.objects[sourceId];
+    if (source === undefined) return false;
+    const departed = source.zone !== "battlefield" && source.lastKnown !== undefined;
+    return this.triggerFilterOk(filter, sourceId, self, departed);
   }
 
   /** A trigger's optional `CardFilter` on the object that fired it. Evaluated
