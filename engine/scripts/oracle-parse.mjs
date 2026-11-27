@@ -19932,6 +19932,18 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.alternativeCost = { mana: "{0}", sacrifice: { filter: { type: m[2] }, ...(count > 1 ? { count } : {}), text: said } };
       continue;
     }
+    // "You may exile the top three black cards of your graveyard rather than
+    // pay this spell's mana cost" (Spinning Darkness — rule 404.2): no choice,
+    // the first that many of that colour down from the top (`fromTop`).
+    if ((m = /^You may (exile the top (two|three|four|five) (white|blue|black|red|green) cards of your graveyard) rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      const count = { two: 2, three: 3, four: 4, five: 5 }[m[2]];
+      const color = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[m[3]];
+      out.alternativeCost = {
+        mana: "{0}",
+        also: { text: m[1], exileFromGraveyard: { count, filter: { colors: [color] }, fromTop: true } },
+      };
+      continue;
+    }
     // Mutate [cost] (rule 702.140a): the card's `mutate`.
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
     // Bestow [cost] (rule 702.103a): the card's `bestow`.

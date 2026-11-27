@@ -380,8 +380,12 @@ export interface KickerAlsoCost {
    * onto Arcane—Exile four cards from your graveyard" (Horobi's Whisper):
    * `count` cards matching `filter` from the caster's graveyard, never the
    * spell itself, chosen as the cost is paid (601.2h, `choose-from-zone`),
-   * as `additionalCost.exileFromGraveyard` is. */
-  readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+   * as `additionalCost.exileFromGraveyard` is. `fromTop` is "exile **the
+   * top three black cards** of your graveyard rather than pay this spell's
+   * mana cost" (Spinning Darkness — rule 404.2, the graveyard's order kept):
+   * no choice, the first `count` matching cards down from the top, as an
+   * ability cost's `fromTop` is. */
+  readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter; readonly fromTop?: true };
   /** "Splice onto Arcane—An opponent gains 5 life" (Roar of Jukai): an
    * opponent the caster picks as it's paid gains that much. Payable only if
    * one of them can gain life, though one whose gain is replaced with nothing

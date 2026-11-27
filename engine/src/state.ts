@@ -3600,7 +3600,7 @@ export interface AlsoCostAsk {
   readonly priorityTo: PlayerId;
   readonly discard?: { readonly count: number; readonly atRandom?: boolean };
   readonly returnToHand?: { readonly count: number; readonly filter: CardFilter };
-  readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+  readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter; readonly fromTop?: true };
   /** Collect evidence this much (rule 701.59a) — an alternative cost's
    * (`alternativeCostForSpells.collectEvidence`). */
   readonly collectEvidence?: number;

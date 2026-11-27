@@ -26133,6 +26133,23 @@ describe("a graveyard exile cost that may take its own card", () => {
       effect: { kind: "return-to-hand", target: "source", from: "graveyard" },
     });
   });
+
+  it("Spinning Darkness: the top three black cards of the graveyard exiled instead", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      mana_cost: "{4}{B}{B}",
+      oracle_text:
+        "You may exile the top three black cards of your graveyard rather than pay this spell's mana cost.\nThis spell deals 3 damage to target nonblack creature. You gain 3 life.",
+    });
+    expect(parsed.alternativeCost).toEqual({
+      mana: "{0}",
+      also: {
+        text: "exile the top three black cards of your graveyard",
+        exileFromGraveyard: { count: 3, filter: { colors: ["B"] }, fromTop: true },
+      },
+    });
+  });
 });
 
 describe("a spell cost increase counted for the caster", () => {
