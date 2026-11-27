@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Fifth Dawn. EDHREC rank 27621.
+// Mirrodin. EDHREC rank 27621.
 //
 // Mirror Golem's imprint, then a shield from a source of your choice among
 // those that share a color with the card exiled with this artifact

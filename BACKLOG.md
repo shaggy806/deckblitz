@@ -52,7 +52,7 @@ section keeps only what to do next.
   user's word)** took 68 cards from Sabertooth Cobra (20245) to Mob Mentality (22648), 13 lane agents in
   five lanes (`docs/card-blockers.md`, batch 342), and laned 34 more keys to rank 23,200. **B343
   (2026-11-26/27, `author-top-cards overnight 11 pm`, run on to 9 am or 97% of the weekly plan at the user's
-  word)** took 197 cards from Spy Kit (21761) to Recursive Recruitment (27343) by 43 lane agents, then the lead's own to Whirling Dervish (29569), the agents in five
+  word)** took 201 cards from Spy Kit (21761) to Recursive Recruitment (27343) by 43 lane agents, then the lead's own to Whirling Dervish (29569), the agents in five
   lanes five at once, and laned 144 more keys to rank 27,388 (`docs/card-blockers.md`, batch 343). **Next by
   rank** (`rank-goal.mjs --rank 40000 --keys`; laned to 27,388, lane the rest as they come up): the keys past
   27,388, and the lanes' leftovers below. Left small: **Primitive Justice** (21585, a multikicker with a second

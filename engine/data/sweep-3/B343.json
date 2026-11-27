@@ -1,7 +1,7 @@
 {
  "batch": 343,
  "status": "done",
- "ranks": "author-top-cards overnight 11 pm, 2026-11-26 20:40 to 2026-11-27 ~09:00 (run on to 9 am or 97% of the weekly plan at the user's word): the laned keys past EDHREC rank 21,500 in rank order, Spy Kit (21761) to Recursive Recruitment (27343), built by 43 worktree agents in five lanes (build-family's overnight lanes loop, five at once), skipping the majors and the cards waiting on the user, then the lead's own cards past the lanes once the plan reached 97% (Dunerider Outlaw to Justice, 27444-29569). 144 more keys laned to rank 27,388. Features are listed in COMPLETED.md (Card backlog, B343).",
+ "ranks": "author-top-cards overnight 11 pm, 2026-11-26 20:40 to 2026-11-27 ~09:00 (run on to 9 am or 97% of the weekly plan at the user's word): the laned keys past EDHREC rank 21,500 in rank order, Spy Kit (21761) to Recursive Recruitment (27343), built by 43 worktree agents in five lanes (build-family's overnight lanes loop, five at once), skipping the majors and the cards waiting on the user, then the lead's own cards past the lanes once the plan reached 97% (Kemba's Legion to Whirling Dervish, 27158-29569). 144 more keys laned to rank 27,388. Features are listed in COMPLETED.md (Card backlog, B343).",
  "authored": [
   {
    "name": "Aboroth",
@@ -389,6 +389,13 @@
    "tested": true
   },
   {
+   "name": "Dwarven Catapult",
+   "files": [
+    "engine/src/cards/pool/dwarven-catapult.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Dwarven Soldier",
    "files": [
     "engine/src/cards/pool/dwarven-soldier.ts"
@@ -606,6 +613,13 @@
    "tested": true
   },
   {
+   "name": "Heightened Awareness",
+   "files": [
+    "engine/src/cards/pool/heightened-awareness.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Holistic Wisdom",
    "files": [
     "engine/src/cards/pool/holistic-wisdom.ts"
@@ -711,6 +725,13 @@
    "tested": true
   },
   {
+   "name": "Kemba's Legion",
+   "files": [
+    "engine/src/cards/pool/kembas-legion.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Kitsune Palliator",
    "files": [
     "engine/src/cards/pool/kitsune-palliator.ts"
@@ -798,6 +819,13 @@
    "name": "Mister Immortal",
    "files": [
     "engine/src/cards/pool/mister-immortal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mourner's Shield",
+   "files": [
+    "engine/src/cards/pool/mourners-shield.ts"
    ],
    "tested": true
   },
