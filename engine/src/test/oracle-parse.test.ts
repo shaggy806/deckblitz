@@ -4746,6 +4746,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
   });
 
+  it("reads damage to any player become an exile from the top of their library (Crumbling Sanctuary)", () => {
+    expect(face("If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.", "Artifact").static?.[0]?.replacement).toEqual({
+      event: "would-deal-damage",
+      instead: { effect: { kind: "exile-from-library", whose: "trigger-player", amount: "x" } },
+      to: "player",
+    });
+  });
+
   it("reads damage prevented while it has a +1/+1 counter, the counters removed and a reflexive hit (Magma Pummeler)", () => {
     const pummeler = face(
       "If damage would be dealt to this creature while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it. When one or more counters are removed from this creature this way, it deals that much damage to any target.",

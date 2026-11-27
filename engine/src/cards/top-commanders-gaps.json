@@ -59,6 +59,7 @@
     "effect:enter-as-set-subtypes",
     "replacement:prevent-damage-remove-counters",
     "replacement:damage-to-self-sacrifice-instead",
+    "replacement:damage-to-player-exiles-library",
     "effect:become-unprepared",
     "decision:choose-from-hand-or-command-zone",
     "decision:choose-hand-card-or-target-permanent",

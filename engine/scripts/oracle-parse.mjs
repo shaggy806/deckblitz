@@ -26129,6 +26129,20 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // Damage to any player become an exile from the top of their library
+  // (rules 614.1a, 614.6 — Crumbling Sanctuary): not prevention, so damage
+  // that can't be prevented is replaced too (615.12).
+  if (line === "If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.") {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-deal-damage",
+        instead: { effect: { kind: "exile-from-library", whose: "trigger-player", amount: "x" } },
+        to: "player",
+      },
+      text,
+    };
+  }
   // A life gain become draws (rules 614.1a, 614.6): "if you would gain life,
   // draw that many cards instead" (Lich, Nefarious Lich).
   if (line === "If you would gain life, draw that many cards instead.") {
