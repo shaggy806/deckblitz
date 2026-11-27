@@ -3371,7 +3371,8 @@
   "replacement:prevent-damage-between-creatures-sharing-color",
   "effect:random-permanent-it-can-enchant",
   "effect:random-permanent-it-can-enchant",
-  "effect:exile-until-source-untaps-with-auras"
+  "effect:exile-until-source-untaps-with-auras",
+  "effect:if-they-do-library-move"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

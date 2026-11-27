@@ -9180,3 +9180,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **An Aura returned onto a creature at random (2026-11-27).** `effect:random-permanent-it-can-enchant`: no engine code — `choose-permanents` `random` with `filter: { enchantableBy: "source" }`, then `put-onto-battlefield` `fromGraveyard` `attachedTo: 0`. Infectious Rage. `test/infectious-rage.test.ts`.
 
 **Exile with its Auras until the source untaps, counters noted (2026-11-27).** `effect:exile-until-source-untaps-with-auras`: `flicker`'s `returnAt` takes a "whenever" watch (the `delayed-trigger` reader, `readDelayedWhenever`, shared; nothing to watch and it exiles for good, `neverReturns`) and `keepCounters` (`return-flickered.noted`, put on as it enters). Tawnos's Coffin. `test/tawnoss-coffin.test.ts`.
+
+**Its owner may put it on top; if they don't, the bottom (2026-11-27).** `effect:if-they-do-library-move`: no engine code - `as-player` `{ ownerOf: 0 }` around a `may` of `put-on-library` top, `then` the damage to `"you"` (them), `else` the bottom. Clash of Elements. `test/clash-of-elements.test.ts`.
