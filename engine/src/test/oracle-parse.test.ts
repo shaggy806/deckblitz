@@ -23922,6 +23922,25 @@ describe("flashback costs that cost more or less (Catalyst Stone)", () => {
       { applies: {}, increaseGeneric: 2, when: { caster: "opponent", via: "flashback" } },
     ]);
   });
+
+  it("Warbringer: dash costs you pay, the reminder in parentheses its own", () => {
+    const warbringer = parseFace(
+      {
+        name: "Warbringer",
+        type_line: "Creature — Orc Berserker",
+        mana_cost: "{3}{R}",
+        power: "3",
+        toughness: "3",
+        oracle_text:
+          "Dash costs you pay cost {2} less (as long as this creature is on the battlefield).\nDash {2}{R} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(warbringer.complete).toBe(true);
+    expect(warbringer.static.map((s: { costModification?: unknown }) => s.costModification)).toEqual([
+      { applies: {}, reduceGeneric: 2, when: { caster: "you", via: "dash" } },
+    ]);
+  });
 });
 
 describe("cumulative upkeep from the top of the library, and 'when a player doesn't pay' it (Thought Lash)", () => {

@@ -25004,14 +25004,16 @@ function spellCostStaticOf(line, text) {
   }
   // "Flashback costs you pay cost {2} less" / "… your opponents pay cost {2}
   // more" (Catalyst Stone): a cast paying a flashback cost (`when.via`).
-  if ((m = /^Flashback costs (you|your opponents) pay cost \{(\d+)\} (less|more)\.$/.exec(line))) {
-    const amount = Number(m[2]);
+  // "Dash costs you pay cost {2} less (as long as this creature is on the
+  // battlefield)" (Warbringer): a dash cost, the reminder a static's own.
+  if ((m = /^(Flashback|Dash) costs (you|your opponents) pay cost \{(\d+)\} (less|more)(?: \(as long as this creature is on the battlefield\))?\.$/.exec(line))) {
+    const amount = Number(m[3]);
     return {
       affects: { scope: "self" },
       costModification: {
         applies: {},
-        ...(m[3] === "less" ? { reduceGeneric: amount } : { increaseGeneric: amount }),
-        when: { caster: m[1] === "you" ? "you" : "opponent", via: "flashback" },
+        ...(m[4] === "less" ? { reduceGeneric: amount } : { increaseGeneric: amount }),
+        when: { caster: m[2] === "you" ? "you" : "opponent", via: m[1].toLowerCase() },
       },
       text: line,
     };

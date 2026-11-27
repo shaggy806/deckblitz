@@ -9195,3 +9195,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **An alternative cost exiling the top cards of a graveyard (2026-11-27).** `cost:alternative-cost-exile-top-of-graveyard`: `KickerAlsoCost.exileFromGraveyard.fromTop` (define.ts, `AlsoCostAsk` in state.ts), paid by `payGraveyardExileCost`'s existing `fromTop` (rule 404.2). Spinning Darkness. `test/alternative-cost-from-top.test.ts`; scaffolded.
 
 **Sacrifice this and any number, then exile those cards (2026-11-27).** `cost:sacrifice-self-and-any-number`: the sacrifice cost was Emrakul's Evangel's `parts`; new: `exile` of an `ObjectSetRef` with several members exiles each still in its stint, at once (effects.ts, rule 400.7j). X is `{ aggregate: "sum", of: "power", in: { paid: "sacrificed" } }`. Sword of the Ages. `test/exile-paid-set.test.ts`.
+
+**Dash costs you pay cost less (2026-11-27).** `static:dash-cost-reduction`: no engine code — Catalyst Stone's `costModification` `when.via` with `"dash"`. Warbringer. `test/dash-cost-reduction.test.ts`; the flashback template scaffolds it.

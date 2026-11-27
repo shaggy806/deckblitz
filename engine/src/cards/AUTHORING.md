@@ -7362,7 +7362,8 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   - `via: CastVia` (in `when`) — only a spell cast that way: Catalyst Stone's
     "flashback costs you pay cost {2} less" is `{ applies: {}, reduceGeneric:
     2, when: { caster: "you", via: "flashback" } }` (rule 702.34a: a flashback
-    cost is the alternative cost paid; 601.2f). A flashback another card grants
+    cost is the alternative cost paid; 601.2f).
+    Warbringer's "dash costs you pay cost {2} less" is `via: "dash"` (702.109a). A flashback another card grants
     counts (Snapcaster Mage's), jump-start doesn't (702.133a). Read from the
     cast being offered, checked or made (`Game.pricedVia`), so a cost a bot
     estimates outside those doesn't see it. The scaffolder reads both lines.
