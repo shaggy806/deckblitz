@@ -27,6 +27,11 @@
 //     starters, tooling precons, or a deck file), count budgets unless
 //     `--budget` is given, so a seed replays (`bot:watch --count`).
 //
+// Blind spot: the caster's own lands and mana rocks being tapped or untapped
+// aren't compared (paying for the spell taps them), so a spell that only
+// untaps them (Hidden Strings on its own Island and Sol Ring) reads as
+// having done nothing.
+//
 // Other flags: --worse [N] also flags a cast or activation that scores N or
 // more below not doing it (default 8: a card in hand is worth about 1). Off by
 // default: below about 15 these were mostly what the stack-deep score can't
