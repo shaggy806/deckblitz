@@ -2797,6 +2797,53 @@ const SCENARIOS: readonly BotScenario[] = [
       },
     }),
   ),
+  asked({
+    name: "equips Beamtown Beatstick for menace past a lone blocker, at 20 commander damage",
+    rule: "Menace needs two blockers: with one untapped creature across the table, equipping it makes the commander unblockable, and one hit is the 21st commander damage.",
+    kind: "training",
+    position(registry) {
+      // Reported from a live game (2026-11-27, kept game A2TMG-1, turns
+      // 22-33): "last opp on 20 commander damage and the bot just doesn't
+      // equip a menace giver for like 5 turns of doing nothing in a row to get
+      // past their one-at-a-time blockers". Xenagos ran Smoke (one creature
+      // untaps a turn); Beamtown Beatstick sat unattached, {2} open. On turn 26
+      // the bot's Pyrokinesis killed Rionya, leaving Etali, Primal Conqueror
+      // the one untapped blocker, then it passed: Beatstick's equip 83.68 against
+      // the pass's 84.68, two mana spent for nothing, and no attack.
+      // The equip forced, v2 attacks and wins, so the attack search is
+      // right. The miss is in v1's attack (`controller.ts`'s `attackersFor`), which
+      // the turn plan's "combat" step and every rollout play for us: it says
+      // "attack with nothing" on the equipped board. `wouldDieAttacking` counts
+      // a lone blocker that kills Slicer though menace stops it blocking alone,
+      // and `wideLethal` ignores menace and reads life, never commander damage.
+      // So the line equip-then-attack is scored as an equip and no attack.
+      const game = table(registry, [A, B], A);
+      lands(game, "Mountain", A, 2);
+      const slicer = onBoard(game, "Slicer, Hired Muscle", A);
+      game.state.objects[slicer].isCommander = true;
+      // Converted, as it was live: Slicer, High-Speed Antagonist, a 3/2 first
+      // striker and a creature only on our turn (living metal). So the
+      // board the rollout ends on, the next player's turn, holds no creature
+      // for the Beatstick's menace to count as evasion (`evasivePower`), and
+      // the equip is worth only what the attack after it makes. Front face
+      // up, the menace alone outbid the mana and the scenario passed.
+      game.state.objects[slicer].face = 1;
+      const beatstick = onBoard(game, "Beamtown Beatstick", A);
+      onBoard(game, "Colossal Dreadmaw", B);
+      onBoard(game, "Grizzly Bears", B, true);
+      game.state.players[A].life = 30;
+      game.state.players[B].life = 6;
+      game.state.players[B].commanderDamageTaken = { [slicer]: 20 };
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "activate-ability" && action.source === beatstick,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   ...(
     [
       // name, artifacts worth protecting on our side, cast it

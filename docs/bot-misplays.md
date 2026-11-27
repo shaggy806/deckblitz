@@ -4,6 +4,64 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-27 — Slicer never equipped Beamtown Beatstick for the 21st commander damage
+
+Status: open. Scenario: "equips Beamtown Beatstick for menace past a lone blocker, at 20 commander
+damage" (training, reads wrong). The live position is also a local capture,
+`captures/2026-11-27-A2TMG-t26-alice.json` (wrong).
+
+A friend's report, kept game `games/2026-11-27/A2TMG-1-1205635565` (every seat a bot, the friend's
+Slicer deck in alice's): "last opp on 20 commander damage and the bot just doesn't equip a menace
+giver for like 5 turns of doing nothing in a row to get past their one-at-a-time blockers". Xenagos
+ran Smoke (one creature untaps a turn), sat at 20 commander damage from Slicer from turn 18, and
+alice lost to poison on turn 33. The Beatstick fell off on turn 19 when Slicer converted to its
+Vehicle face (rightly, 301.5c), and was never equipped again. On turn 26 alice's Pyrokinesis killed
+Rionya, leaving Etali the one untapped blocker; then it passed with {2} open. Forced to equip, v2
+attacks and wins that turn.
+
+**Why:** not the evaluation: menace is in `features.ts`'s `EVASION`. But High-Speed Antagonist is
+a creature only on its own turn, so on the board a rollout ends on (the next player's turn) the
+menace counts for nothing, and the equip is worth only the attack it enables. The turn plan's
+"combat" step and the rollouts play our attack as v1 does (`controller.ts`'s `attackersFor`), and v1
+said "attack with nothing" on the equipped board: `wouldDieAttacking` counts Etali as a blocker
+that kills Slicer though menace stops one creature blocking alone, and `wideLethal` ignores menace
+("deliberately cautious") and reads only life, never commander damage. So equip-then-attack scored
+83.68 against the pass's 84.68: two mana spent for nothing.
+
+**Likely fix:** in v1's `wouldDieAttacking`, a menace attacker can't be blocked by a lone
+untapped creature (and a single killer counts only beside a second blocker); in `wideLethal`,
+count menace (fewer than two blockers stop none of it) and a commander's damage against the 21
+(903.10a). Risk: v1 is every opponent's model in v2's rollouts too, so more v1 menace attacks
+change what v2 expects to be swung at; run `bot:diff` and the gate.
+
+## 2026-11-27 — Ten Umezawa's Jitte counters pumped into a Slicer handed to the last opponent
+
+Status: open. No hand-built scenario: a rebuilt board (two players, Slicer with Jitte and
+Destructive Urge, Simian Spirit Guide, Bob at 18 commander damage) didn't reproduce, so the live
+position is kept as a local capture, `captures/2026-11-27-THRQJ-t14-alice.json` (reads wrong).
+
+Same friend, kept game `games/2026-11-27/THRQJ-1-2942950596`: "wtaf was the bot even doing with
+the jitte". Two players left; in Ajani's upkeep, with Slicer's "hand it over" trigger on the
+stack, alice removed all ten charge counters for +2/+2 on Slicer, then (searched, 80.28 against
+converting's 78.28) handed the 23/24 Slicer to Ajani. Goaded, with no other player to attack, it
+attacked alice, who chump-blocked with Simian Spirit Guide. Played without the pumps, the turn ends
+at the same life with the ten counters kept (two after).
+
+(The friend's other remark, "someone died on turn 2": Kaya lost on round 2 to 21 commander damage
+from Slicer, which hit her on three other players' turns while handed round. Correct, 903.10a.)
+
+**Why:** the first pump scored 78.01 to the pass's 76.45. The difference is in the rollout's
+block: alice's side blocks as v1 there, letting the unpumped 3/4 double striker through for 6
+(life and commander damage from its own commander) but chump-blocking the pumped one. So the pump
+read as 6 damage saved. The real block is v2's, which chump-blocks either way. The batch search
+(`simulateRepeated`, "batch replay") then took the other nine pumps at the same price.
+
+**Likely fix:** don't score a pump ("equipped creature gets +N/+N until end of turn") on our
+creature on another player's turn when it is about to leave our control or can't attack for us
+this turn. Narrower: price a pump only by our own attack or block it changes, as v2 would make it,
+not v1's. Possibly also decline Slicer's "hand it over" when the only player it can be goaded at
+is us (to be judged by playout; it collected two Jitte counters on the chump block here).
+
 ## 2026-11-26 — Five Skarrgan Hellkite pings at a creature four kill
 
 Status: fixed 2026-11-26. Scenario: "a batch of Skarrgan Hellkite pings at one creature stops once
