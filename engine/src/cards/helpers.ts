@@ -373,8 +373,12 @@ export const siege = (): TriggeredAbility => ({
  * non-backup abilities of this creature printed below this one until end of
  * turn." `grants` are those abilities as printed below the backup line — the
  * same ones the card has itself (702.165c: never one only granted to it), so
- * fixed as the ability goes on the stack (702.165d): keywords, and triggered
- * and activated abilities. Put "Backup N" in `text` as well.
+ * fixed as the ability goes on the stack (702.165d): keywords, and triggered,
+ * activated and static abilities — a static's `affects: { scope: "self" }`
+ * then is the creature it's granted to ("this creature assigns combat damage
+ * equal to its toughness", Streetwise Negotiator; "this creature can't be
+ * blocked by creatures with power 2 or less", Chomping Kavu). Put "Backup N"
+ * in `text` as well.
  */
 export const backup = (
   n: number,
@@ -382,6 +386,7 @@ export const backup = (
     readonly keywords?: readonly Keyword[];
     readonly triggered?: readonly TriggeredAbility[];
     readonly activated?: readonly ActivatedAbility[];
+    readonly static?: readonly StaticAbility[];
   } = {},
 ): TriggeredAbility => {
   const gains: EffectSpec[] = [
@@ -393,6 +398,9 @@ export const backup = (
     ),
     ...(grants.activated ?? []).map(
       (ability): EffectSpec => ({ kind: "grant-activated", target: 0, ability, duration: "end-of-turn" }),
+    ),
+    ...(grants.static ?? []).map(
+      (ability): EffectSpec => ({ kind: "grant-static", target: 0, ability, duration: "end-of-turn" }),
     ),
   ];
   return {

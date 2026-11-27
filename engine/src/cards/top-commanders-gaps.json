@@ -23,6 +23,7 @@
     "cost:x-equals-chosen-opponent-hand",
     "static:grant-optional-x-additional-cost-to-spells",
     "effect:exchange-control-greatest-per-player",
+    "effect:backup-grants-static",
     "cost:cost-reduction-per-opponent-attacked",
     "replacement:land-mana-instead-tapper-chooses",
     "condition:unattached-from-filter",
