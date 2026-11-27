@@ -6,6 +6,7 @@
     "static:grant-optional-x-additional-cost-to-spells",
     "cost:cost-reduction-per-opponent-attacked",
     "replacement:land-mana-instead-tapper-chooses",
+    "condition:unattached-from-filter",
     "trigger:cast-shares-color-or-mana-value-with-imprinted",
     "effect:delayed-trigger-while-source-tapped",
     "trigger:activates-ability-targets-only-source",

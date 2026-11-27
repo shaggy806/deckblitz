@@ -53,7 +53,9 @@ export interface SetMember {
 /** What a spell's or ability's cost can take (rules 601.2h, 602.2b): the
  * objects `{ paid }` names. `"unattached"` is the Equipment an "unattach an
  * Equipment" cost moved (rule 701.3d — Captain America's "that Equipment's
- * mana value"). `"exiled-self"` is the card a graveyard ability's own "exile
+ * mana value"); `"unattached-from"` the permanent it came off, kept as it
+ * was as it was unattached (Shuriken's "unless it was unattached from a
+ * Ninja" — any unattach cost, the Equipment chosen or not). `"exiled-self"` is the card a graveyard ability's own "exile
  * this card from your graveyard" took, kept as it last was there (the card
  * you exiled, rule 702.97a; Dodgy Jalopy's ruling). `"beheld"` is what a
  * behold cost took (rule 701.4a), a card revealed from the hand (kept as it
@@ -75,6 +77,7 @@ export type PaidKind =
   | "revealed"
   | "tapped"
   | "unattached"
+  | "unattached-from"
   | "beheld"
   | "returned"
   | "put-from-exile"
@@ -201,7 +204,7 @@ export function isCardSet(ref: ObjectSetRef): boolean {
   // A journal word's: cards for a discard or a card put into a graveyard,
   // permanents for everything else that left, entered, attacked or crewed.
   if ("turnHistory" in ref) return ref.turnHistory === "discarded" || ref.turnHistory === "descended";
-  if ("paid" in ref && (ref.paid === "sacrificed" || ref.paid === "tapped" || ref.paid === "unattached")) return false;
+  if ("paid" in ref && (ref.paid === "sacrificed" || ref.paid === "tapped" || ref.paid === "unattached" || ref.paid === "unattached-from")) return false;
   return !("thisWay" in ref && (ref.thisWay === "destroyed" || ref.thisWay === "died" || ref.thisWay === "sacrificed"));
 }
 

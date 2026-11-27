@@ -30670,6 +30670,16 @@ export class Game {
     // "Unattach this Equipment" (rule 701.3d): off what it's on, and a grant
     // that needed it there ends, the ability already activated.
     if (unattachVictim !== undefined) {
+      // "Unless it was unattached from a Ninja" (Shuriken): the permanent it
+      // comes off, kept as it was then — a later change to it, or its
+      // leaving, doesn't change what it was unattached from.
+      const host = this.state.objects[unattachVictim]?.attachedTo;
+      const from = host === null || host === undefined ? undefined : this.state.objects[host];
+      if (from !== undefined && from.zone === "battlefield") {
+        paidSets = addToSet(paidSets, { paid: "unattached-from" }, [
+          { object: from.id, stint: from.zoneChangeCount ?? 0, was: this.takeLastKnown(from.id) },
+        ]);
+      }
       this.unattachNow(unattachVictim);
       // "That Equipment's mana value" (Captain America).
       if (unattachChosen) {

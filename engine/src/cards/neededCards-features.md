@@ -9094,3 +9094,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A delayed watch for as long as its source remains tapped (2026-11-26).** `effect:delayed-trigger-while-source-tapped`: `DelayedWhenever.until: "while-source-tapped"` (`WatchExpiry`; `Game.delayedSourceStillTapped`, dropped as the source untaps or phases out by `endSourceTappedWatches`). Giant Oyster. `test/delayed-while-source-tapped.test.ts`.
 
 **Sharing a mana value with an object (2026-11-26).** `trigger:cast-shares-color-or-mana-value-with-imprinted`: `CardFilter.sharesManaValueWith` (a `ShareReference`; no reference objects, no match), in an `anyOf` beside `sharesColorWith: "exiled-with-source"`. Thought Prison. `test/shares-mana-value-with.test.ts`.
+
+**What an Equipment was unattached from (2026-11-26).** `condition:unattached-from-filter`: the paid set `{ paid: "unattached-from" }` (recorded by every unattach cost, its member's `was` taken before the unattach), read by `object-matches`. Shuriken. `test/unattached-from.test.ts`.
