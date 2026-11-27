@@ -493,6 +493,12 @@ export type JournalWhat =
    * included (its ruling). A counted token stack's entry is every token in
    * it. */
   | "dealt-combat-damage-to-player"
+  /** The sources that dealt any damage, to anything, each once (per stint,
+   * rule 400.7) however often: the list is the source's controller's as it
+   * dealt it — Case of the Burning Masks' "three or more sources you
+   * controlled dealt damage this turn" (`atLeast: 3`). A spell and the
+   * permanent it became are two sources. */
+  | "dealt-damage"
   /** A permanent was dealt excess damage (rule 120.4a), one entry a source
    * an event: the list is the permanent's controller's as it was dealt it,
    * and a filter reads the permanent as it was then, though it has died
@@ -640,6 +646,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     match: (e) => e.combat !== undefined && e.target?.kind === "player",
     distinct: true,
   },
+  "dealt-damage": { kind: "damage", distinct: true },
   "excess-damaged": {
     kind: "damage",
     whose: "recipient",
