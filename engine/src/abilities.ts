@@ -349,7 +349,9 @@ export type PutFromExileCost =
 /** One branch of {@link AbilityCost.options}: the cost parts it adds, and its
  * label for the button. */
 export interface ActivationCostOption {
-  readonly cost: Partial<Omit<AbilityCost, "options" | "mana" | "tap">>;
+  /** Its `mana` takes the place of the ability's own (`mana: null` beside
+   * it): Tidal Control's "Pay 2 life or {2}". */
+  readonly cost: Partial<Omit<AbilityCost, "options" | "tap">>;
   readonly text: string;
 }
 

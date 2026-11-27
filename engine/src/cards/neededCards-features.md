@@ -9026,3 +9026,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A spell cost increase counted for the caster (2026-11-26).** `static:cost-increase-per-count`: `costModification.amountsReadByCaster`, its `increaseGeneric` / `reduceGeneric` read with the caster as "you" (601.2a, 601.2f). Hum of the Radix. `test/cost-increase-read-by-caster.test.ts`.
 
 **Life paid, then that many cards revealed (2026-11-26, no engine code).** `effect:pay-any-amount-of-life-reveal-that-many`: `players-pay-any-amount` `who: "you"` with a `discard-chosen` `reveals: "x"`, `destination: "exile"` as its `then`. Vizkopa Confessor. `test/pay-life-reveal-that-many.test.ts`.
+
+**A choice of costs with a mana branch (2026-11-26).** `cost:ability-cost-choice`: an `ActivationCostOption`'s `cost` may hold `mana` (merged over the ability's `mana: null`, so every check reads one cost). Tidal Control's "Pay 2 life or {2}", any player. The scaffolder reads a mana branch and "target red or green spell" (every colour pair). `test/activation-cost-option-mana.test.ts`.

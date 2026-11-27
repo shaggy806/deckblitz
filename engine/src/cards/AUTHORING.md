@@ -5128,7 +5128,10 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   card" }] }`. Offered once per branch that can be paid (the offer's
   `costOption`), as a spell's `additionalCost.options` is. Not for one
   sacrifice whose filter spans two types (Mold Folk, below). Not on a mana
-  ability. `activation-cost-options.test.ts`.
+  ability. `activation-cost-options.test.ts`. A branch may be mana alone,
+  with `mana: null` on the cost: Tidal Control's "Pay 2 life or {2}" is
+  `options: [{ cost: { payLife: 2 }, text: "Pay 2 life" }, { cost: { mana:
+  "{2}" }, text: "{2}" }]` (`activation-cost-option-mana.test.ts`).
 - **"Exile a creature card from your graveyard and pay its mana cost"** (Back
   from the Brink): `exileFromGraveyard: { count: 1, filter, payItsManaCost:
   true }`, beside any other cost. The card is named as it's activated (the

@@ -1166,6 +1166,15 @@ const TARGET_PHRASES = [
   ["target noncreature spell", "noncreature-spell"],
   ["target instant or sorcery spell", "instant-or-sorcery-spell"],
   ["target creature spell", "creature-spell"],
+  // "Target red or green spell" (Flashfreeze, Tidal Control): either colour.
+  ...(() => {
+    const words = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+    return Object.entries(words).flatMap(([a, x]) =>
+      Object.entries(words)
+        .filter(([b]) => b !== a)
+        .map(([b, y]) => [`target ${a} or ${b} spell`, { kind: "spell", filter: { anyOf: [{ colors: [x] }, { colors: [y] }] } }]),
+    );
+  })(),
   ["target spell", "spell"],
   // "Of the chosen color" (Pentarch Paladin): the colour chosen as it
   // entered (`ofChosenColor`).
@@ -1764,16 +1773,19 @@ export function parseCost(text) {
       const sacrifice = sourceSacrificeOf(part);
       if (sacrifice === null) return null;
       cost.sacrifice = sacrifice;
-    } else if ((m = /^((?:Sacrifice|Discard|Exile|Pay|Return|Tap) .+?) or ((?:sacrifice|discard|exile|pay|return|tap) .+)$/.exec(part))) {
+    } else if ((m = /^((?:Sacrifice|Discard|Exile|Pay|Return|Tap) .+?) or ((?:sacrifice|discard|exile|pay|return|tap) .+|(?:\{\d+\})+)$/.exec(part))) {
       // "Sacrifice an artifact or discard a nonland card" (Bullseye, Death
       // Dealer): a choice of whole costs (`AbilityCost.options`), each branch
-      // read as a cost part of its own.
+      // read as a cost part of its own. A branch of mana ("Pay 2 life or
+      // {2}" — Tidal Control) is that branch's `mana`, the cost's none.
       const options = [m[1], `${m[2][0].toUpperCase()}${m[2].slice(1)}`].map((branch) => {
         const read = parseCost(branch);
-        if (read === null || read.cost.mana !== null || read.cost.tap || Object.keys(read.extra ?? {}).length > 0) return null;
-        const { mana: _mana, tap: _tap, ...rest } = read.cost;
+        if (read === null || read.cost.tap || Object.keys(read.extra ?? {}).length > 0) return null;
+        const { mana, tap: _tap, ...rest } = read.cost;
+        if (mana !== null) return Object.keys(rest).length === 0 && MANA.test(branch) ? { cost: { mana }, text: branch } : null;
         return Object.keys(rest).length === 0 ? null : { cost: rest, text: branch };
       });
+      if (cost.mana !== null && options.some((o) => o?.cost.mana !== undefined)) return null;
       if (options.some((o) => o === null)) return null;
       cost.options = options;
     } else if ((m = /^Sacrifice (an?|another) (.+?) or (an?|another) (.+)$/.exec(part)) && /another/.test(`${m[1]} ${m[3]}`)) {

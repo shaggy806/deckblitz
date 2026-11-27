@@ -5,6 +5,7 @@
     "cost:exile-from-graveyard-including-source",
     "static:cost-increase-per-count",
     "effect:pay-any-amount-of-life-reveal-that-many",
+    "cost:ability-cost-choice",
     "condition:mana-ability-activation-count",
     "effect:opponent-chooses-your-permanent-to-exile",
     "condition:was-attacking-or-blocking-alone-lki",

@@ -25994,3 +25994,19 @@ describe("life paid, then that many cards revealed", () => {
   });
 });
 
+describe("a choice of costs with a mana branch", () => {
+  it("Tidal Control: pay 2 life or {2}, any player, a red or green spell", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      mana_cost: "{1}{U}{U}",
+      oracle_text: "Pay 2 life or {2}: Counter target red or green spell. Any player may activate this ability.",
+    });
+    expect(parsed.activated[0]).toMatchObject({
+      cost: { mana: null, options: [{ cost: { payLife: 2 }, text: "Pay 2 life" }, { cost: { mana: "{2}" }, text: "{2}" }] },
+      targets: [{ kind: "spell", filter: { anyOf: [{ colors: ["R"] }, { colors: ["G"] }] } }],
+      effect: { kind: "counter", target: 0 },
+      anyPlayer: true,
+    });
+  });
+});
