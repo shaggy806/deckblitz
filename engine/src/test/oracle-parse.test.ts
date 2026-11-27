@@ -26137,3 +26137,28 @@ describe("casting-zones lane: Mister Immortal", () => {
     });
   });
 });
+
+describe("an additional cost of sacrificing all of a kind", () => {
+  it("Kaervek's Spite: sacrifice all permanents you control and discard your hand", () => {
+    const parsed = parseFace({
+      name: "Kaervek's Spite",
+      type_line: "Instant",
+      mana_cost: "{B}{B}{B}",
+      oracle_text:
+        "As an additional cost to cast this spell, sacrifice all permanents you control and discard your hand.\nTarget player loses 5 life.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.additionalCost).toEqual({
+      also: {
+        text: "Sacrifice all permanents you control and discard your hand",
+        do: {
+          kind: "sequence",
+          effects: [
+            { kind: "sacrifice-all", who: "you", filter: {} },
+            { kind: "discard-hand", who: "you" },
+          ],
+        },
+      },
+    });
+  });
+});

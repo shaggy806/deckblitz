@@ -20421,6 +20421,18 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.additionalCost = { sacrifice: { type: "creature", controlledBy: "you" } };
       continue;
     }
+    // "Sacrifice all creatures you control" (Soulblast), "sacrifice all
+    // permanents you control and discard your hand" (Kaervek's Spite): a cost
+    // act, a sequence when it discards too.
+    if (isSpell && (m = /^As an additional cost to cast ~, (sacrifice all (.+?) you control( and discard your hand)?)\.$/.exec(line))) {
+      const filter = m[2] === "permanents" ? {} : parseTypePhrase(m[2]);
+      if (filter !== null && (m[2] === "permanents" || Object.keys(filter).length > 0)) {
+        const sacrifice = { kind: "sacrifice-all", who: "you", filter };
+        const act = m[3] ? { kind: "sequence", effects: [sacrifice, { kind: "discard-hand", who: "you" }] } : sacrifice;
+        out.additionalCost = { also: { text: m[1][0].toUpperCase() + m[1].slice(1), do: act } };
+        continue;
+      }
+    }
     // "Discard a card" (Thrill of Possibility), "discard two cards", "discard
     // X cards" (Sickening Dreams — an X the mana cost needn't have), "… at random".
     if (isSpell && (m = /^As an additional cost to cast ~, discard (a card|two cards|three cards|X cards)( at random)?\.$/.exec(line))) {
