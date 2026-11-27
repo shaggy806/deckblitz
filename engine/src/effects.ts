@@ -5378,6 +5378,14 @@ export type EffectSpec =
       /** Only those matching this: Omen Machine's "if it's a land card, the
        * player puts it onto the battlefield". */
       readonly filter?: CardFilter;
+      /** The cards this resolution **revealed** instead, each still in the
+       * library it was revealed from as the same object (rule 400.7), all at
+       * once under its owner's control: Game Preserve's "each player reveals
+       * the top card of their library. If all cards revealed this way are
+       * creature cards, put those cards onto the battlefield under their
+       * owners' control" (a `reveal-top` `who: "each-player"`, its `then` a
+       * `conditional` on no non-creature card revealed). */
+      readonly revealed?: true;
     }
   | {
       /** Put the cards this resolution has exiled so far — each still in
@@ -14982,7 +14990,7 @@ export interface EffectApi {
   /** See the `"put-exiled-this-way-onto-battlefield"` {@link EffectSpec}.
    * `true` when it stopped first to ask an "as this enters" choice (nothing
    * has moved; apply it again once that's answered). */
-  putExiledThisWayOntoBattlefield(filter?: CardFilter): boolean;
+  putExiledThisWayOntoBattlefield(filter?: CardFilter, revealed?: boolean): boolean;
   /** See the `"reflicker"` {@link EffectSpec}. `true` when it stopped first
    * to ask an "as this enters" choice (nothing has moved; apply it again once
    * that's answered). `exileAgain` false returns them and leaves them. */
@@ -23146,7 +23154,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "put-exiled-this-way-onto-battlefield": {
       const parked = ctx.parkedCount();
-      if (ctx.putExiledThisWayOntoBattlefield(spec.filter)) ctx.resumeAfterDecisions(spec, parked);
+      if (ctx.putExiledThisWayOntoBattlefield(spec.filter, spec.revealed === true)) ctx.resumeAfterDecisions(spec, parked);
       return;
     }
     case "move-exiled-this-way":

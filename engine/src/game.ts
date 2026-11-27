@@ -46371,18 +46371,19 @@ export class Game {
         );
         return false;
       },
-      putExiledThisWayOntoBattlefield: (filter) => {
+      putExiledThisWayOntoBattlefield: (filter, revealed) => {
         // What this resolution exiled from a graveyard, a hand or a library —
         // not a permanent it exiled (a replacement's), and only a card still
         // in exile. Each one's "as this enters" choices first (rule 614.12).
-        const returning = thisWayEntries(this.state, "exiled", since)
+        // `revealed`: what it revealed, still in the library it was in.
+        const returning = thisWayEntries(this.state, revealed === true ? "revealed" : "exiled", since)
           .filter((e) => !e.departed)
           .map((e) => e.object)
           .filter((id) => {
             const object = this.state.objects[id];
             return (
               object !== undefined &&
-              object.zone === "exile" &&
+              object.zone === (revealed === true ? "library" : "exile") &&
               !object.isToken &&
               (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }))
             );

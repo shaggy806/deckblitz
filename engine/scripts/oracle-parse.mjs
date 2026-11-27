@@ -13413,6 +13413,32 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Each player reveals the top card of their library. If all cards
+    // revealed this way are creature cards, put those cards onto the
+    // battlefield under their owners' control." (Game Preserve) — a
+    // `conditional` on none revealed being anything else, around
+    // `put-exiled-this-way-onto-battlefield` `revealed`.
+    const allMatchM = /^if all cards revealed this way are (\w+) cards, put those cards onto the battlefield under their owners' control\.$/i.exec(
+      sentences[i + 1] ?? "",
+    );
+    if (/^each player reveals the top card of their library\.$/i.test(sentence) && allMatchM !== null) {
+      const filter = parseTypePhrase(allMatchM[1]);
+      if (filter !== null && Object.keys(filter).length === 1 && typeof filter.type === "string") {
+        const reveal = {
+          kind: "reveal-top",
+          who: "each-player",
+          then: {
+            kind: "conditional",
+            condition: { kind: "amounts", left: { thisWay: "revealed", filter: { notTypes: [filter.type] } }, op: "eq", right: 0 },
+            then: { kind: "put-exiled-this-way-onto-battlefield", revealed: true },
+          },
+        };
+        parsed.push(reveal);
+        hints.push({ sentence, effect: reveal });
+        skip = 1;
+        continue;
+      }
+    }
     // "Look at the top five cards of your library. You may reveal a creature
     // card from among them and put it into your hand. Put the rest on the
     // bottom of your library in a random order." (Adventure Awaits, Basic

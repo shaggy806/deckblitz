@@ -26685,6 +26685,27 @@ describe("the exiled card's power and toughness", () => {
       ],
     });
   });
+  it("puts each player's revealed top card onto the battlefield when all match (Game Preserve)", () => {
+    const face = parseFace(
+      {
+        name: "Test Preserve",
+        type_line: "Enchantment",
+        oracle_text:
+          "At the beginning of your upkeep, each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "reveal-top",
+      who: "each-player",
+      then: {
+        kind: "conditional",
+        condition: { kind: "amounts", left: { thisWay: "revealed", filter: { notTypes: ["creature"] } }, op: "eq", right: 0 },
+        then: { kind: "put-exiled-this-way-onto-battlefield", revealed: true },
+      },
+    });
+  });
 });
 
 describe("an untap in the untap step replaced (would-untap-in-untap-step)", () => {
