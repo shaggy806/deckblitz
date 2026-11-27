@@ -51147,7 +51147,7 @@ controlledBy,
     lookOnly: boolean,
     optional: boolean,
     upTo?: number,
-    destination?: "exile" | "library-top" | "library-bottom" | "battlefield",
+    destination?: "exile" | "library-top" | "library-bottom" | "battlefield" | "stay",
     exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number },
     /** One choice over the hand and another zone of that player's, or a
      * targeted permanent — see `discard-chosen`'s `alsoFrom`. */

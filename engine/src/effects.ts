@@ -6936,9 +6936,13 @@ export type EffectSpec =
        * creature card from it onto the battlefield **under your control**"
        * (Treacherous Urge). Not a discard, so nothing that looks for one
        * sees it. `"library-bottom"` — "that player puts the chosen card on
-       * the bottom of their library" (Psychotic Episode).
+       * the bottom of their library" (Psychotic Episode). `"stay"` — "you
+       * choose a nonland card from it. Search that player's graveyard, hand,
+       * and library for all cards with the same name as that card" (Lobotomy,
+       * Shimian Specter): the card stays in the hand, `thisWay: "chosen"`
+       * names it, and the search that follows may find it or leave it.
        */
-      readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
+      readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield" | "stay";
       /** **Another player** chooses from the revealed hand: Rakdos Augermage's
        * "reveal your hand and discard a card **of target opponent's choice**"
        * (`target: "you"`, `chooser: { target: 0 }`). The hand's owner still
@@ -15329,7 +15333,7 @@ export interface EffectApi {
     /** See the effect's `chooser`, `destination`, `unlinked` and `alsoFrom`. */
     to?: {
       readonly chooser?: PlayerId;
-      readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield";
+      readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield" | "stay";
       readonly unlinked?: true;
       readonly untilSourceLeaves?: true;
       /** The effect's `alsoFrom`, a target slot read as the permanent in it
