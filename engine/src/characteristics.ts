@@ -1673,6 +1673,11 @@ function evalStaticCondition(
         opts.amounts !== undefined &&
         compareNum(opts.amounts(condition.left), { op: condition.op, n: opts.amounts(condition.right) })
       );
+    case "amount-parity": {
+      if (opts.amounts === undefined) return false;
+      const odd = Math.abs(opts.amounts(condition.amount)) % 2 === 1;
+      return odd === (condition.parity === "odd");
+    }
     case "target":
     case "target-chosen":
     case "object-matches":

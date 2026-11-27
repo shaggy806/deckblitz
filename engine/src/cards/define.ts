@@ -1883,6 +1883,19 @@ export type StaticCondition =
       readonly right: EffectAmount;
     }
   /**
+   * An amount is odd or even (zero is even, -1 odd), read as the ability
+   * reads an amount: Chaos Moon's "count the number of permanents. **If the
+   * number is odd**, …" (`{ kind: "amount-parity", amount: { countOf: {} },
+   * parity: "odd" }`), Chaos Lord's "if the number of permanents is even".
+   * Where `amounts` is answered — a triggered ability's intervening-if or a
+   * `conditional` inside it; false on a static ability.
+   */
+  | {
+      readonly kind: "amount-parity";
+      readonly amount: EffectAmount;
+      readonly parity: "odd" | "even";
+    }
+  /**
    * The object in target slot `index` matches `filter` — Scavenging Ooze's
    * "Exile target card from a graveyard. **If it was a creature card**, put a
    * +1/+1 counter on this creature and you gain 1 life."

@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### The number of permanents is odd or even — built 2026-11-26
+
+The key `condition:permanent-count-parity`: the condition `{ kind: "amount-parity", amount, parity }`, any amount odd
+or even (zero even), answered where `amounts` is. Chaos Moon (23233: `{ countOf: {} }` as its upkeep trigger resolves,
+then Bubbling Muck's delayed mana trigger or Pale Moon's `manaProduction`) and Chaos Lord (27076). Chaos Lord's other key,
+`static:attack-as-though-haste-unless-entered-this-turn`, needed no code: `attackAsThoughHaste` under a `source`
+condition `{ enteredThisTurn: false }`. Not in the scaffolder (two cards). `test/amount-parity.test.ts`.
+
 ### Becomes tapped to pay a teamwork cost — built 2026-11-26
 
 The key `trigger:becomes-tapped-for-teamwork`: the `creature-tapped-for` event's `as: "teamwork"` (`for` the spell),

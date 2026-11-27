@@ -15,6 +15,8 @@
     "effect:each-player-keeps-n-shuffles-rest",
     "effect:play-library-top-free-while-on-top",
     "zone:cast-from-top-of-graveyard",
+    "condition:permanent-count-parity",
+    "static:attack-as-though-haste-unless-entered-this-turn",
     "trigger:becomes-tapped-for-teamwork",
     "condition:turn-history-per-player",
     "effect:choose-color-become-color",
