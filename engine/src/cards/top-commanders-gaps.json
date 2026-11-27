@@ -12,6 +12,7 @@
     "filter:same-name-as-spell-cast-this-turn",
     "trigger:artifact-tapped-or-untapped-cost-activation",
     "amount:power-of-card-exiled-this-way",
+    "effect:reveal-until-then-keeps-targets",
     "static:dash-cost-reduction",
     "cost:sacrifice-self-and-any-number",
     "cost:alternative-cost-exile-top-of-graveyard",
