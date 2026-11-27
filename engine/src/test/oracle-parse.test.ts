@@ -26432,3 +26432,26 @@ describe("the triggers-journal lane's picks, 2026-11-27", () => {
     });
   });
 });
+
+describe("the costs-mana lane's picks, 2026-11-27 (a92a)", () => {
+  it("Soaring Stoneglider: exile two cards from your graveyard or pay {1}{W}", () => {
+    const parsed = parseFace({
+      name: "Soaring Stoneglider",
+      type_line: "Creature — Elephant Cleric",
+      mana_cost: "{2}{W}",
+      power: "4",
+      toughness: "3",
+      oracle_text: "As an additional cost to cast this spell, exile two cards from your graveyard or pay {1}{W}.\nFlying, vigilance",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.additionalCost).toEqual({
+      options: [
+        {
+          text: "Exile two cards from your graveyard",
+          also: { text: "Exile two cards from your graveyard", exileFromGraveyard: { count: 2 } },
+        },
+        { text: "Pay {1}{W}", mana: "{1}{W}" },
+      ],
+    });
+  });
+});

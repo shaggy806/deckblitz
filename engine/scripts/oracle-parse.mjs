@@ -20637,6 +20637,19 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "Exile two cards from your graveyard or pay {1}{W}" (Soaring
+    // Stoneglider, a creature): the same choice, its first branch an `also`.
+    if (
+      !/\bLand\b/.test(face.type_line ?? "") &&
+      (m = /^As an additional cost to cast ~, (exile [^,]+? from your graveyard) or pay ((?:\{[^}]+\})+)\.$/.exec(line))
+    ) {
+      const text = m[1].charAt(0).toUpperCase() + m[1].slice(1);
+      const also = kickerAlso(text);
+      if (also !== null) {
+        out.additionalCost = { options: [{ text, also }, { text: `Pay ${m[2]}`, mana: m[2] }] };
+        continue;
+      }
+    }
     // "Blight N or pay {M}" (rule 701.68a): a choice of whole costs.
     if (isSpell && (m = /^As an additional cost to cast ~, blight (\d+) or pay ((?:\{[^}]+\})+)\.$/.exec(line))) {
       out.additionalCost = { options: [{ text: `Blight ${m[1]}`, also: { text: `Blight ${m[1]}`, do: { kind: "blight", amount: Number(m[1]) } } }, { text: `Pay ${m[2]}`, mana: m[2] }] };
