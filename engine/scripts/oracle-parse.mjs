@@ -8673,6 +8673,19 @@ export function parseSentence(sentence, ctx) {
     if (target === undefined || redirectTo === undefined) return null;
     return { kind: "prevent-damage", target, amount: amount(m[1]), redirectTo };
   }
+  // A redirection shield from a source of your choice over your side (rules
+  // 609.7, 614.9): Harm's Way's "the next 2 damage", Shining Shoal's "the
+  // next X damage" (read as it resolves).
+  if ((m = re(`the next ${N} damage that a source of your choice would deal to you and\\/or (creatures|permanents) you control this turn is dealt to (${TARGET}) instead`).exec(s))) {
+    const redirectTo = slot(m[3]);
+    if (redirectTo === undefined) return null;
+    return {
+      kind: "prevent-damage-from-chosen-source",
+      to: m[2] === "creatures" ? "your-side-creatures" : "your-side",
+      amount: amount(m[1]),
+      redirectTo,
+    };
+  }
   // A source of your choice (rule 609.7): the Circles of Protection.
   // "Of the chosen color" (Story Circle): the colour chosen as it entered.
   // "Prevent half that damage, rounded down" (Dark Sphere): `half`.

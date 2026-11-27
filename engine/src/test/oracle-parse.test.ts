@@ -26718,3 +26718,28 @@ describe("an untap in the untap step replaced (would-untap-in-untap-step)", () =
     });
   });
 });
+
+describe("a redirection shield of N or X from a source of your choice (rules 609.7, 614.9)", () => {
+  it("reads Shining Shoal whole, X the alternative cost's or the paid one", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Instant — Arcane",
+      oracle_text:
+        "You may exile a white card with mana value X from your hand rather than pay this spell's mana cost.\nThe next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.",
+    }) as unknown as { complete: boolean; effect: unknown; targets: unknown };
+    expect(face.complete).toBe(true);
+    expect(face.effect).toEqual({ kind: "prevent-damage-from-chosen-source", to: "your-side-creatures", amount: "x", redirectTo: 0 });
+    expect(face.targets).toEqual(["any-target"]);
+  });
+
+  it("reads Harm's Way's 2 over you and your permanents", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Instant",
+      oracle_text:
+        "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead.",
+    }) as unknown as { complete: boolean; effect: unknown };
+    expect(face.complete).toBe(true);
+    expect(face.effect).toEqual({ kind: "prevent-damage-from-chosen-source", to: "your-side", amount: 2, redirectTo: 0 });
+  });
+});

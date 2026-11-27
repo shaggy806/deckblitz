@@ -11554,8 +11554,10 @@ export type EffectSpec =
       readonly to: "you" | number | "attached" | "your-side" | "your-side-creatures" | "any";
       /** `"all"`: all the damage that source would deal it this turn, never
        * used up (Kor Chant; Prahv's and Burrenton Forge-Tender's are `to:
-       * "any"`, Auriok Replica's `to: "you"`). */
-      readonly amount: "next-time" | number | "all";
+       * "any"`, Auriok Replica's `to: "you"`). An amount that reads the
+       * resolution ("the next X damage", Shining Shoal's `"x"`) is read as
+       * the source is asked for, and the shield made with that number. */
+      readonly amount: "next-time" | "all" | EffectAmount;
       /** Half of that damage instead of all of it, rounded as it says: "the
        * next time a source of your choice would deal damage to you this
        * turn, prevent half that damage, rounded down" (Dark Sphere) is `{
@@ -26285,7 +26287,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ctx.preventDamageFrom(
             source,
             spec.protect,
-            spec.amount,
+            // Read as the source was asked for (below); a number by now.
+            spec.amount === "next-time" || spec.amount === "all" || typeof spec.amount === "number"
+              ? spec.amount
+              : amountValue(spec.amount, ctx),
             spec.filter,
             spec.gainLifePrevented === true,
             spec.redirect,
@@ -26312,8 +26317,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (protect === undefined) return;
       const redirect = spec.redirectTo === undefined ? undefined : redirectRef(spec.redirectTo, ctx);
       if (spec.redirectTo !== undefined && redirect === undefined) return;
+      // "The next X damage": X is this resolution's, fixed before the choice.
+      const amount = spec.amount === "next-time" || spec.amount === "all" ? spec.amount : amountValue(spec.amount, ctx);
       ctx.chooseDamageSource(spec.filter ?? {}, {
         ...spec,
+        amount,
         protect,
         ...(redirect !== undefined ? { redirect } : {}),
         ...(spec.then !== undefined ? { ownTargets: ctx.targets.map((t) => t ?? null) } : {}),
