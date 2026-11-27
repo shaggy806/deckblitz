@@ -3372,7 +3372,9 @@
   "effect:random-permanent-it-can-enchant",
   "effect:random-permanent-it-can-enchant",
   "effect:exile-until-source-untaps-with-auras",
-  "effect:if-they-do-library-move"
+  "effect:if-they-do-library-move",
+  "effect:other-spells-cant-be-countered-this-turn",
+  "amount:colors-of-sacrificed"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
