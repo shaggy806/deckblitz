@@ -26454,4 +26454,47 @@ describe("the costs-mana lane's picks, 2026-11-27 (a92a)", () => {
       ],
     });
   });
+
+  const upkeepTax = (noun: string) => ({
+    trigger: { on: "step-begins", step: "upkeep", who: "you" },
+    targets: [],
+    effect: {
+      kind: "unless",
+      chooser: "you",
+      options: [{ payManaCostOf: "source", text: "Pay {X}" }],
+      otherwise: { kind: "sacrifice-source" },
+    },
+    resolve: null,
+    text: `At the beginning of your upkeep, sacrifice this ${noun} unless you pay its mana cost.`,
+  });
+
+  it("Pendrell Flux: enchanted creature has 'sacrifice this creature unless you pay its mana cost'", () => {
+    const parsed = parseFace({
+      name: "Pendrell Flux",
+      type_line: "Enchantment — Aura",
+      mana_cost: "{1}{U}",
+      oracle_text:
+        'Enchant creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."',
+    });
+    expect(parsed.static[0]).toEqual({
+      affects: { scope: "attached" },
+      grantsTriggered: [upkeepTax("creature")],
+      text: 'Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."',
+    });
+  });
+
+  it("Essence Leak: as long as enchanted permanent is red or green, it has …", () => {
+    const parsed = parseFace({
+      name: "Essence Leak",
+      type_line: "Enchantment — Aura",
+      mana_cost: "{U}",
+      oracle_text:
+        'Enchant permanent\nAs long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."',
+    });
+    expect(parsed.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      condition: { kind: "source", filter: { attachedTo: { anyOf: [{ colors: ["R"] }, { colors: ["G"] }] } } },
+      grantsTriggered: [upkeepTax("permanent")],
+    });
+  });
 });

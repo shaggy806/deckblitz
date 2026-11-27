@@ -28894,6 +28894,42 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "Enchanted creature has 'At the beginning of your upkeep, sacrifice this
+  // creature unless you pay its mana cost.'" (Pendrell Flux, Disruption
+  // Aura), and "as long as enchanted permanent is red or green, it has …"
+  // (Essence Leak): Pendrell Mists' granted trigger on the host, paying the
+  // host's own mana cost (`payManaCostOf: "source"`).
+  if (
+    (m =
+      /^(?:Enchanted (?:creature|artifact|permanent) has|As long as enchanted permanent is (white|blue|black|red|green) or (white|blue|black|red|green), it has) "(At the beginning of your upkeep, sacrifice (?:~|this (?:creature|artifact|permanent)) unless you pay its mana cost\.)"$/.exec(
+        line,
+      )) &&
+    /"([^"]+)"$/.test(text)
+  ) {
+    const letter = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
+    return {
+      affects: { scope: "attached" },
+      ...(m[1] !== undefined
+        ? { condition: { kind: "source", filter: { attachedTo: { anyOf: [{ colors: [letter[m[1]]] }, { colors: [letter[m[2]]] }] } } } }
+        : {}),
+      grantsTriggered: [
+        {
+          trigger: { on: "step-begins", step: "upkeep", who: "you" },
+          targets: [],
+          effect: {
+            kind: "unless",
+            chooser: "you",
+            options: [{ payManaCostOf: "source", text: "Pay {X}" }],
+            otherwise: { kind: "sacrifice-source" },
+          },
+          resolve: null,
+          // As printed, "this creature" and all.
+          text: /"([^"]+)"$/.exec(text)[1],
+        },
+      ],
+      text,
+    };
+  }
   // "Enchanted creature doesn't untap during its controller's untap step"
   // (rule 502.3 — Tractor Beam, Watery Grasp).
   if (/^(?:Enchanted|Equipped) (?:creature|permanent|land|artifact) doesn't untap during its controller's untap step\.$/.test(line)) {
