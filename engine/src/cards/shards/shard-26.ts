@@ -699,6 +699,7 @@ import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
 import _poolRallyTheRighteous from "../pool/rally-the-righteous.js";
 import _poolRampagingCyclops from "../pool/rampaging-cyclops.js";
 import _poolRampagingYaoGuai from "../pool/rampaging-yao-guai.js";
+import _poolRasputinDreamweaver from "../pool/rasputin-dreamweaver.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
 import _poolRatchetRescueRacer from "../pool/ratchet-rescue-racer.js";
 import _poolRathiDragon from "../pool/rathi-dragon.js";
@@ -1794,6 +1795,7 @@ const shard: CardShard = {
     _poolRallyTheRighteous,
     _poolRampagingCyclops,
     _poolRampagingYaoGuai,
+    _poolRasputinDreamweaver,
     _poolRasputinTheOneiromancer,
     _poolRatchetRescueRacer,
     _poolRathiDragon,

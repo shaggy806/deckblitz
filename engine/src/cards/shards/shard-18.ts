@@ -131,6 +131,7 @@ import _poolChaosHarlequin from "../pool/chaos-harlequin.js";
 import _poolCheekyHouseMouse from "../pool/cheeky-house-mouse.js";
 import _poolCheeringFanatic from "../pool/cheering-fanatic.js";
 import _poolChillingScreech from "../pool/chilling-screech.js";
+import _poolChorusOfTheConclave from "../pool/chorus-of-the-conclave.js";
 import _poolCircleOfProtectionBlack from "../pool/circle-of-protection-black.js";
 import _poolClamorousIronclad from "../pool/clamorous-ironclad.js";
 import _poolClashOfWills from "../pool/clash-of-wills.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolCheekyHouseMouse,
     _poolCheeringFanatic,
     _poolChillingScreech,
+    _poolChorusOfTheConclave,
     _poolCircleOfProtectionBlack,
     _poolClamorousIronclad,
     _poolClashOfWills,

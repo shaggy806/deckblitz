@@ -382,6 +382,7 @@ import _poolHERBIELovableRobot from "../pool/h-e-r-b-i-e-lovable-robot.js";
 import _poolHaloFountain from "../pool/halo-fountain.js";
 import _poolHamletbackGoliath from "../pool/hamletback-goliath.js";
 import _poolHardenedAcademic from "../pool/hardened-academic.js";
+import _poolHarshJudgment from "../pool/harsh-judgment.js";
 import _poolHavocDevils from "../pool/havoc-devils.js";
 import _poolHeadlongRush from "../pool/headlong-rush.js";
 import _poolHeartWolf from "../pool/heart-wolf.js";
@@ -1447,6 +1448,7 @@ const shard: CardShard = {
     _poolHaloFountain,
     _poolHamletbackGoliath,
     _poolHardenedAcademic,
+    _poolHarshJudgment,
     _poolHavocDevils,
     _poolHeadlongRush,
     _poolHeartWolf,

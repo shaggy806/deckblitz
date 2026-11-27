@@ -166,6 +166,7 @@ import _poolCircleOfProtectionBlue from "../pool/circle-of-protection-blue.js";
 import _poolClairvoyance from "../pool/clairvoyance.js";
 import _poolClearwaterPathway from "../pool/clearwater-pathway.js";
 import _poolClinquantSkymage from "../pool/clinquant-skymage.js";
+import _poolClockworkSteed from "../pool/clockwork-steed.js";
 import _poolCloudElemental from "../pool/cloud-elemental.js";
 import _poolCloudhoofKirin from "../pool/cloudhoof-kirin.js";
 import _poolCloudkinSeer from "../pool/cloudkin-seer.js";
@@ -1297,6 +1298,7 @@ const shard: CardShard = {
     _poolClairvoyance,
     _poolClearwaterPathway,
     _poolClinquantSkymage,
+    _poolClockworkSteed,
     _poolCloudElemental,
     _poolCloudhoofKirin,
     _poolCloudkinSeer,

@@ -204,6 +204,7 @@ import _poolCrestedCraghorn from "../pool/crested-craghorn.js";
 import _poolCrevasse from "../pool/crevasse.js";
 import _poolCripplingBlight from "../pool/crippling-blight.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
+import _poolCrowdControlWarden from "../pool/crowd-control-warden.js";
 import _poolCryOfContrition from "../pool/cry-of-contrition.js";
 import _poolCryOfTheCarnarium from "../pool/cry-of-the-carnarium.js";
 import _poolCryptoplasm from "../pool/cryptoplasm.js";
@@ -619,6 +620,7 @@ import _poolMysticForge from "../pool/mystic-forge.js";
 import _poolMysticGate from "../pool/mystic-gate.js";
 import _poolMysticRepeal from "../pool/mystic-repeal.js";
 import _poolMysticZealot from "../pool/mystic-zealot.js";
+import _poolNakedSingularity from "../pool/naked-singularity.js";
 import _poolNearheathStalker from "../pool/nearheath-stalker.js";
 import _poolNessianCourser from "../pool/nessian-courser.js";
 import _poolNestedGhoul from "../pool/nested-ghoul.js";
@@ -1293,6 +1295,7 @@ const shard: CardShard = {
     _poolCrevasse,
     _poolCripplingBlight,
     _poolCripplingFear,
+    _poolCrowdControlWarden,
     _poolCryOfContrition,
     _poolCryOfTheCarnarium,
     _poolCryptoplasm,
@@ -1708,6 +1711,7 @@ const shard: CardShard = {
     _poolMysticGate,
     _poolMysticRepeal,
     _poolMysticZealot,
+    _poolNakedSingularity,
     _poolNearheathStalker,
     _poolNessianCourser,
     _poolNestedGhoul,

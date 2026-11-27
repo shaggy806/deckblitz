@@ -702,6 +702,7 @@ import _poolRhoxPikemaster from "../pool/rhox-pikemaster.js";
 import _poolRiddleform from "../pool/riddleform.js";
 import _poolRideTheAvalanche from "../pool/ride-the-avalanche.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
+import _poolRiptideReplicator from "../pool/riptide-replicator.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
 import _poolRoninWarclub from "../pool/ronin-warclub.js";
@@ -1734,6 +1735,7 @@ const shard: CardShard = {
     _poolRiddleform,
     _poolRideTheAvalanche,
     _poolRipchainRazorkin,
+    _poolRiptideReplicator,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
     _poolRoninWarclub,

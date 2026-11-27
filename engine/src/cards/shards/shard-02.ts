@@ -44,6 +44,7 @@ import _poolAshnodsAltar from "../pool/ashnods-altar.js";
 import _poolAssemblySpecialist from "../pool/assembly-specialist.js";
 import _poolAssimilateTheWounded from "../pool/assimilate-the-wounded.js";
 import _poolAstonishingSpiderMan from "../pool/astonishing-spider-man.js";
+import _poolAstralConfrontation from "../pool/astral-confrontation.js";
 import _poolAttemptedMurder from "../pool/attempted-murder.js";
 import _poolAttumaAtlanteanWarlord from "../pool/attuma-atlantean-warlord.js";
 import _poolAuriokGlaivemaster from "../pool/auriok-glaivemaster.js";
@@ -1116,6 +1117,7 @@ const shard: CardShard = {
     _poolAssemblySpecialist,
     _poolAssimilateTheWounded,
     _poolAstonishingSpiderMan,
+    _poolAstralConfrontation,
     _poolAttemptedMurder,
     _poolAttumaAtlanteanWarlord,
     _poolAuriokGlaivemaster,

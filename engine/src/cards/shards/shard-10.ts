@@ -992,6 +992,7 @@ import _poolVincentsLimitBreak from "../pool/vincents-limit-break.js";
 import _poolVindicate from "../pool/vindicate.js";
 import _poolViralDrake from "../pool/viral-drake.js";
 import _poolVisionCharm from "../pool/vision-charm.js";
+import _poolVolrathsLaboratory from "../pool/volraths-laboratory.js";
 import _poolVoraciousBrood from "../pool/voracious-brood.js";
 import _poolVoraciousFellBeast from "../pool/voracious-fell-beast.js";
 import _poolVoyagerQuickwelder from "../pool/voyager-quickwelder.js";
@@ -2065,6 +2066,7 @@ const shard: CardShard = {
     _poolVindicate,
     _poolViralDrake,
     _poolVisionCharm,
+    _poolVolrathsLaboratory,
     _poolVoraciousBrood,
     _poolVoraciousFellBeast,
     _poolVoyagerQuickwelder,

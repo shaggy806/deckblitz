@@ -67,6 +67,7 @@ import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBallynockCohort from "../pool/ballynock-cohort.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
+import _poolBargainingTable from "../pool/bargaining-table.js";
 import _poolBarkweaveCrusher from "../pool/barkweave-crusher.js";
 import _poolBarteredCow from "../pool/bartered-cow.js";
 import _poolBasalSliver from "../pool/basal-sliver.js";
@@ -1115,6 +1116,7 @@ import _tokensSamuraiTokenTheEternalWanderer from "../tokens/samurai-token-the-e
 import _tokensScrybSpritesToken from "../tokens/scryb-sprites-token.js";
 import _tokensServoToken from "../tokens/servo-token.js";
 import _tokensSnakeTokenArtifactPoison from "../tokens/snake-token-artifact-poison.js";
+import _tokensSoldierTokenChosenColorAndType from "../tokens/soldier-token-chosen-color-and-type.js";
 import _tokensSpiritTokenAbzanMonument from "../tokens/spirit-token-abzan-monument.js";
 import _tokensSpiritTokenDusyutEarthcarver from "../tokens/spirit-token-dusyut-earthcarver.js";
 import _tokensSpiritTokenUnwillingVessel from "../tokens/spirit-token-unwilling-vessel.js";
@@ -1186,6 +1188,7 @@ const shard: CardShard = {
     _poolBallynockCohort,
     _poolBanishingSlash,
     _poolBarbarianHorde,
+    _poolBargainingTable,
     _poolBarkweaveCrusher,
     _poolBarteredCow,
     _poolBasalSliver,
@@ -2236,6 +2239,7 @@ const shard: CardShard = {
     _tokensScrybSpritesToken,
     _tokensServoToken,
     _tokensSnakeTokenArtifactPoison,
+    _tokensSoldierTokenChosenColorAndType,
     _tokensSpiritTokenAbzanMonument,
     _tokensSpiritTokenDusyutEarthcarver,
     _tokensSpiritTokenUnwillingVessel,

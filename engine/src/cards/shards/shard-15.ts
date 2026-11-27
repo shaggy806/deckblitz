@@ -757,6 +757,7 @@ import _poolSewerRats from "../pool/sewer-rats.js";
 import _poolShaleskinBruiser from "../pool/shaleskin-bruiser.js";
 import _poolSharkTyphoon from "../pool/shark-typhoon.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
+import _poolShieldDancer from "../pool/shield-dancer.js";
 import _poolShiftingLoyalties from "../pool/shifting-loyalties.js";
 import _poolSiegeDragon from "../pool/siege-dragon.js";
 import _poolSignalTheClans from "../pool/signal-the-clans.js";
@@ -1765,6 +1766,7 @@ const shard: CardShard = {
     _poolShaleskinBruiser,
     _poolSharkTyphoon,
     _poolSheoldredTheApocalypse,
+    _poolShieldDancer,
     _poolShiftingLoyalties,
     _poolSiegeDragon,
     _poolSignalTheClans,

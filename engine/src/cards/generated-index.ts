@@ -661,6 +661,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Soldier Ally Token",
   "Soldier Artifact Token",
   "Soldier Token",
+  "Soldier Token (Chosen Color and Type)",
   "Soldier Token (Finale of Glory)",
   "Soldier Token (Fire Nation Attacks)",
   "Soldier Token (Red 2/2)",

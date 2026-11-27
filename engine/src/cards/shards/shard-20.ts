@@ -176,6 +176,7 @@ import _poolChocoComet from "../pool/choco-comet.js";
 import _poolChromeReplicator from "../pool/chrome-replicator.js";
 import _poolCircleOfProtectionWhite from "../pool/circle-of-protection-white.js";
 import _poolCivicGuildmage from "../pool/civic-guildmage.js";
+import _poolClockworkSwarm from "../pool/clockwork-swarm.js";
 import _poolCobblebrute from "../pool/cobblebrute.js";
 import _poolCoerciveRecruiter from "../pool/coercive-recruiter.js";
 import _poolCoilAndCatch from "../pool/coil-and-catch.js";
@@ -1299,6 +1300,7 @@ const shard: CardShard = {
     _poolChromeReplicator,
     _poolCircleOfProtectionWhite,
     _poolCivicGuildmage,
+    _poolClockworkSwarm,
     _poolCobblebrute,
     _poolCoerciveRecruiter,
     _poolCoilAndCatch,
