@@ -41020,7 +41020,16 @@ export class Game {
           (event.alsoBlocked !== true || spec.object === "blocked") &&
           this.matchesWho(spec.who, event.blocker, self) &&
           !(spec.otherOnly === true && event.blocker === self.id) &&
-          this.triggerFilterOk(spec.filter, event.blocker, self) &&
+          // With `object: "blocked"` the blocked creature is the trigger
+          // object, which the blocker's filter may compare against: No
+          // Quarter's "a creature blocks a creature with lesser power".
+          this.triggerFilterOk(
+            spec.filter,
+            event.blocker,
+            self,
+            false,
+            spec.object === "blocked" ? event.attacker : event.blocker,
+          ) &&
           (spec.blocking === undefined || this.blocksAMatch(event.blocker, spec.blocking, self))
         );
       case "become-blocked-batch":
@@ -41036,7 +41045,10 @@ export class Game {
         return (
           event.type === "blocker-declared" &&
           this.matchesWho(spec.who, event.attacker, self) &&
-          this.triggerFilterOk(spec.filter, event.attacker, self) &&
+          // The blocker is the trigger object, which the attacker's filter
+          // may compare against: No Quarter's "a creature becomes blocked by
+          // a creature with lesser power".
+          this.triggerFilterOk(spec.filter, event.attacker, self, false, event.blocker) &&
           this.triggerFilterOk(spec.blocker, event.blocker, self)
         );
       case "becomes-blocked":
@@ -41667,11 +41679,14 @@ export class Game {
         ...(this.triggerLookBack?.source === self.id ? { sourceStint: this.triggerLookBack.stint } : {}),
         ...(lastKnown ? { lastKnown } : {}),
         // "Whenever a creature with greater power enters": the subject is
-        // the would-be trigger object, the source is this permanent.
+        // the would-be trigger object, the source is this permanent. A
+        // comparison reads a negative power as it is (No Quarter's "lesser
+        // power": a -1/1 blocking a 0/1).
         amount: this.filterAmounts({
           source: self.id,
           controller: self.controller,
           triggerObject,
+          signed: true,
         }),
       })
     );
