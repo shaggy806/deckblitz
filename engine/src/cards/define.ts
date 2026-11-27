@@ -4541,6 +4541,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * megamorph cost is a morph cost (rule 702.37b), a disguise cost isn't, nor
    * the {3} to cast one face down (its reminder text). `affects` is ignored. */
   readonly morphCostIncrease?: number;
+  /** "Buyback costs cost {2} less" (Memory Crystal): generic mana off every
+   * buyback cost paid (rule 702.27a), whoever's, only that cost's own generic
+   * mana — never the rest of the spell's cost, never below {0} (its rulings).
+   * `affects` is ignored. */
+  readonly buybackCostReduction?: number;
   /** "Plotting cards from your hand costs {2} less" (Doc Aurlock, Grizzled
    * Genius): generic mana off the plot cost its controller pays to plot a
    * card from hand (rule 702.170a, a special action, 116.2k), never coloured

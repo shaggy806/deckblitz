@@ -9099,3 +9099,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Sacrifice all permanents and discard your hand as a cost (2026-11-27).** `cost:additional-cost-sacrifice-all-and-discard-hand`: no engine code, an `additionalCost.also.do` `sequence` of `sacrifice-all` (`filter: {}`) and `discard-hand`; scaffolded. Kaervek's Spite. `test/sacrifice-all-and-discard-hand-cost.test.ts`.
 
 **Mana only for face-down spells, morph costs and manifests (2026-11-27).** `cost:spend-only-face-down-spells-and-morph`: `ManaSpendPurpose` `"morph-cost"` and `"manifested-face-up"`, read off the turn-face-up purpose's `faceUpBy` (`Game.faceUpBy`), beside `"face-down-spell"`. Qarsi Deceiver. `test/mana-spend-morph-cost.test.ts`.
+
+**Buyback costs cost less (2026-11-27).** `cost:buyback-cost-reduction`: a static's `buybackCostReduction`, read by `Game.kickerCostNow` wherever a kicked cast's kicker mana is added (offers, `castingCostOf`): off the buyback cost's own generic mana only. Memory Crystal. `test/buyback-cost-reduction.test.ts`.

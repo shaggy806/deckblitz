@@ -6957,11 +6957,11 @@ export class Game {
       const costBeforeWaterbend = alternative !== null
         ? alternative.mana
         : free
-        ? kicked && def.kicker !== null ? "{0}" + kickerCostPaid(def.kicker, kickCount ?? 1) : "{0}"
+        ? kicked && def.kicker !== null ? "{0}" + this.kickerCostNow(def.kicker, kickCount ?? 1) : "{0}"
         : overload && def.overload !== null
           ? def.overload.cost
           : kicked && def.kicker !== null && paidBase !== null
-            ? paidBase + kickerCostPaid(def.kicker, kickCount ?? 1)
+            ? paidBase + this.kickerCostNow(def.kicker, kickCount ?? 1)
             : paidBase;
       // An additional "waterbend {X}" makes it an {X} spell (rule 701.67a).
       const cost = costBeforeWaterbend === null ? null : costBeforeWaterbend + this.keywordCostsString(card, def, player) + Game.waterbendCostString(def);
@@ -7149,7 +7149,7 @@ export class Game {
                         (kickCount ?? 1) > 1
                         ? `${def.kicker.also.text} ×${kickCount}`
                         : def.kicker.also.text
-                      : kickerCostPaid(def.kicker, kickCount ?? 1),
+                      : this.kickerCostNow(def.kicker, kickCount ?? 1),
               ...(kickCount !== undefined ? { kickCount } : {}),
               ...(def.kicker.keyword !== undefined ? { kickerKeyword: def.kicker.keyword } : {}),
             }
@@ -22546,7 +22546,7 @@ export class Game {
     if (altCost) {
       const alternative = this.alternativeCostOf(cardId, def, via, caster ?? this.state.objects[cardId]?.owner);
       // Kicker is an additional cost, on top of it (118.9d).
-      const kickedOn = !kicked || def.kicker === null ? "" : kickerCostPaid(def.kicker, kicked === true ? 1 : kicked);
+      const kickedOn = !kicked || def.kicker === null ? "" : this.kickerCostNow(def.kicker, kicked === true ? 1 : kicked);
       if (alternative !== null) return alternative.mana + (optionMana ?? "") + kickedOn + escalate;
     }
     // A free-cast permission — conditional (Fierce Guardianship), a static's
@@ -22632,7 +22632,7 @@ export class Game {
     const kickedCost =
       !kicked || def.kicker === null || withOption === null
         ? withOption
-        : withOption + kickerCostPaid(def.kicker, kicked === true ? 1 : kicked);
+        : withOption + this.kickerCostNow(def.kicker, kicked === true ? 1 : kicked);
     const withKicker = kickedCost === null ? null : kickedCost + escalate;
     return withKicker;
   }
@@ -64209,6 +64209,24 @@ controlledBy,
     }
     const kind = object.faceDown.kind;
     return kind === "manifest" || kind === "cloak" ? kind : undefined;
+  }
+
+  /** The mana a kicked cast adds for its kicker now (`kickerCostPaid`): a
+   * buyback cost (rule 702.27a) less any "buyback costs cost {N} less"
+   * (Memory Crystal), off its own generic mana only. */
+  private kickerCostNow(kicker: NonNullable<CardDefinition["kicker"]>, n: number): string {
+    const paid = kickerCostPaid(kicker, n);
+    if (kicker.keyword !== "buyback" || parseManaCost(paid).generic === 0) return paid;
+    let less = 0;
+    for (const other of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[other];
+      // A face-down permanent has no text (rule 708.2a).
+      if (source === undefined || source.faceDown !== undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.ownStatics(source)) {
+        if (ability.buybackCostReduction !== undefined && this.staticActive(source, ability)) less += ability.buybackCostReduction;
+      }
+    }
+    return less === 0 ? paid : withGenericReducedBy(paid, less);
   }
 
   /**
