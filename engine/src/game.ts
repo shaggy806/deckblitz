@@ -70437,12 +70437,15 @@ controlledBy,
    * same time, which 120.4a takes into account); a
    * planeswalker's, its loyalty. The source, if it's a permanent and the
    * recipient another creature, has dealt damage to another creature.
+   * `combat` marks the record combat damage (rule 120.2a), so "dealt
+   * noncombat damage this turn" (Grisly Sigil) can tell the two apart.
    */
   private recordDamage(
     source: ObjectId,
     object: GameObject,
     amount: number,
     sourceLastKnown: LastKnownInfo | undefined,
+    combat: boolean,
   ): number {
     const turn = this.state.turn.number;
     const c = computeCharacteristics(this.state, this.registry, object.id);
@@ -70483,7 +70486,10 @@ controlledBy,
     const prior = object.damageThisTurn?.turn === turn ? object.damageThisTurn : undefined;
     object.damageThisTurn = {
       turn,
-      by: from === undefined ? (prior?.by ?? []) : [...(prior?.by ?? []), { source, ...from }],
+      by:
+        from === undefined
+          ? (prior?.by ?? [])
+          : [...(prior?.by ?? []), { source, ...from, ...(combat ? { combat: true as const } : {}) }],
       ...(excess || prior?.excess === true ? { excess: true as const } : {}),
     };
     if (c.types.includes("creature") && source !== object.id && live?.zone === "battlefield") {
@@ -71070,7 +71076,7 @@ controlledBy,
     }
     // What damaged it this turn, and whether any was excess (rule 120.4a) —
     // read before the damage lands.
-    const excess = this.recordDamage(source, object, amount, sourceLastKnown);
+    const excess = this.recordDamage(source, object, amount, sourceLastKnown, combat);
     if (sourceLastKnown === undefined) this.recordDealtDamage(source, target, combat);
     const excessField = excess > 0 ? { excess } : {};
     // Damage to a planeswalker removes that many loyalty counters (rule

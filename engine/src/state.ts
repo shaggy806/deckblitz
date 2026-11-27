@@ -6101,6 +6101,10 @@ export interface DamageSourceRecord {
   /** It was a spell as it dealt the damage (Aegar, the Freezing Flame's
    * "a Giant, Wizard, or spell you controlled"). */
   readonly spell?: true;
+  /** It was combat damage (rule 120.2a); absent, a spell's or ability's
+   * (120.2b), noncombat — Grisly Sigil's
+   * "if it was dealt noncombat damage this turn". */
+  readonly combat?: true;
 }
 
 /**

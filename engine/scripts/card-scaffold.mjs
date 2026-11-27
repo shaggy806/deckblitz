@@ -230,6 +230,7 @@ function faceSource(face, ctx) {
     cipher: parsed.cipher,
     retrace: parsed.retrace,
     conspire: parsed.conspire,
+    casualty: parsed.casualty,
     becomesDayAsEnters: parsed.becomesDayAsEnters,
     sneak: parsed.sneak,
     webSlinging: parsed.webSlinging,

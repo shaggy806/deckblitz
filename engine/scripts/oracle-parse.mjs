@@ -20157,6 +20157,8 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (line === "You may look at the top card of your library any time.") { out.looksAtOwnLibraryTop = true; continue; }
     // Conspire (rule 702.78a): tap two creatures sharing its colour to copy it.
     if (isSpell && line === "Conspire") { out.conspire = true; continue; }
+    // Casualty N (rule 702.153a): sacrifice a creature with power N or more as the spell is cast, and copy it.
+    if (isSpell && (m = /^Casualty (\d+)$/.exec(line))) { out.casualty = Number(m[1]); continue; }
     // Day and night (rule 731.1): Midnight Hunt's non-daybound day/night cards.
     if (/^If it's neither day nor night, it becomes day as .+ enters\.$/.test(line)) { out.becomesDayAsEnters = true; continue; }
     // Sneak [cost] (rule 702.190): an alternative cost in the declare blockers step.

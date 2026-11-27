@@ -1535,6 +1535,10 @@ export interface CardFilter {
      * 603.10a: a creature dying beside Sengir Vampire still triggers it).
      * Needs `FilterContext.source`. */
     readonly source?: "this" | "host";
+    /** The damage was combat damage (`true`) or noncombat damage (`false`,
+     * rules 120.2a and 120.2b) — Grisly Sigil's "if it was dealt noncombat damage this
+     * turn" is `{ combat: false }`. */
+    readonly combat?: boolean;
   };
   /** Was dealt excess damage this turn (rule 120.4a) — Maarika, Brutal
    * Gladiator's "if that creature was dealt excess damage this turn". */
@@ -3648,6 +3652,7 @@ export function matchesFilter(
           (by.subtype === undefined || hasSubtype(source.subtypes, by.subtype)) &&
           (by.type === undefined || source.types.includes(by.type)) &&
           (by.spell !== true || source.spell === true) &&
+          (by.combat === undefined || (source.combat === true) === by.combat) &&
           (by.controlledBy === undefined ||
             (by.controlledBy === "you" ? source.controller === ctx.you : source.controller !== ctx.you)),
       ))

@@ -3385,7 +3385,8 @@
   "effect:exile-until-source-untaps-with-auras",
   "effect:if-they-do-library-move",
   "effect:other-spells-cant-be-countered-this-turn",
-  "amount:colors-of-sacrificed"
+  "amount:colors-of-sacrificed",
+  "filter:dealt-noncombat-damage-this-turn"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
