@@ -456,6 +456,7 @@ import _poolJeskasWill from "../pool/jeskas-will.js";
 import _poolJeweledAmulet from "../pool/jeweled-amulet.js";
 import _poolJirinaDauntlessGeneral from "../pool/jirina-dauntless-general.js";
 import _poolJitteAndDiviningTop from "../pool/jitte-and-divining-top.js";
+import _poolJohan from "../pool/johan.js";
 import _poolJorKadeenFirstGoldwarden from "../pool/jor-kadeen-first-goldwarden.js";
 import _poolJuggernaut from "../pool/juggernaut.js";
 import _poolJwariDisruption from "../pool/jwari-disruption.js";
@@ -1527,6 +1528,7 @@ const shard: CardShard = {
     _poolJeweledAmulet,
     _poolJirinaDauntlessGeneral,
     _poolJitteAndDiviningTop,
+    _poolJohan,
     _poolJorKadeenFirstGoldwarden,
     _poolJuggernaut,
     _poolJwariDisruption,

@@ -881,6 +881,7 @@ import _poolThroesOfChaos from "../pool/throes-of-chaos.js";
 import _poolThunderingMightmare from "../pool/thundering-mightmare.js";
 import _poolThunderwolfCavalry from "../pool/thunderwolf-cavalry.js";
 import _poolThwart from "../pool/thwart.js";
+import _poolTidalFlats from "../pool/tidal-flats.js";
 import _poolTidepoolTurtle from "../pool/tidepool-turtle.js";
 import _poolTitansNest from "../pool/titans-nest.js";
 import _poolTitansVanguard from "../pool/titans-vanguard.js";
@@ -1893,6 +1894,7 @@ const shard: CardShard = {
     _poolThunderingMightmare,
     _poolThunderwolfCavalry,
     _poolThwart,
+    _poolTidalFlats,
     _poolTidepoolTurtle,
     _poolTitansNest,
     _poolTitansVanguard,

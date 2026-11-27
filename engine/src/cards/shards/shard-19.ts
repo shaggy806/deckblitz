@@ -1001,6 +1001,7 @@ import _poolTransluminant from "../pool/transluminant.js";
 import _poolTransmogrifyingLicid from "../pool/transmogrifying-licid.js";
 import _poolTrashForTreasure from "../pool/trash-for-treasure.js";
 import _poolTreespringLorian from "../pool/treespring-lorian.js";
+import _poolTrial from "../pool/trial.js";
 import _poolTripUp from "../pool/trip-up.js";
 import _poolTriumphantReckoning from "../pool/triumphant-reckoning.js";
 import _poolTroyanGutsyExplorer from "../pool/troyan-gutsy-explorer.js";
@@ -2131,6 +2132,7 @@ const shard: CardShard = {
     _poolTransmogrifyingLicid,
     _poolTrashForTreasure,
     _poolTreespringLorian,
+    _poolTrial,
     _poolTripUp,
     _poolTriumphantReckoning,
     _poolTroyanGutsyExplorer,

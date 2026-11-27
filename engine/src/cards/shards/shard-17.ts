@@ -279,6 +279,7 @@ import _poolEnterTheGodEternals from "../pool/enter-the-god-eternals.js";
 import _poolEntreatTheAngels from "../pool/entreat-the-angels.js";
 import _poolEntreatTheDead from "../pool/entreat-the-dead.js";
 import _poolEpharasWarden from "../pool/epharas-warden.js";
+import _poolError from "../pool/error.js";
 import _poolErtaisScorn from "../pool/ertais-scorn.js";
 import _poolEstinienVarlineau from "../pool/estinien-varlineau.js";
 import _poolEtherealAbsolution from "../pool/ethereal-absolution.js";
@@ -940,6 +941,7 @@ import _poolTransdimensionalBovine from "../pool/transdimensional-bovine.js";
 import _poolTreasonOfIsengard from "../pool/treason-of-isengard.js";
 import _poolTreefolkHarbinger from "../pool/treefolk-harbinger.js";
 import _poolTrestleTroll from "../pool/trestle-troll.js";
+import _poolTrialError from "../pool/trial-error.js";
 import _poolTrialOfAmbition from "../pool/trial-of-ambition.js";
 import _poolTriarchPraetorian from "../pool/triarch-praetorian.js";
 import _poolTrickstersTalisman from "../pool/tricksters-talisman.js";
@@ -1353,6 +1355,7 @@ const shard: CardShard = {
     _poolEntreatTheAngels,
     _poolEntreatTheDead,
     _poolEpharasWarden,
+    _poolError,
     _poolErtaisScorn,
     _poolEstinienVarlineau,
     _poolEtherealAbsolution,
@@ -2014,6 +2017,7 @@ const shard: CardShard = {
     _poolTreasonOfIsengard,
     _poolTreefolkHarbinger,
     _poolTrestleTroll,
+    _poolTrialError,
     _poolTrialOfAmbition,
     _poolTriarchPraetorian,
     _poolTrickstersTalisman,

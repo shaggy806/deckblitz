@@ -1005,6 +1005,7 @@ import _poolVantressGargoyle from "../pool/vantress-gargoyle.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
 import _poolVedalkenOutlander from "../pool/vedalken-outlander.js";
 import _poolVeiledSerpent from "../pool/veiled-serpent.js";
+import _poolVeneratedTeacher from "../pool/venerated-teacher.js";
 import _poolVengeantEarth from "../pool/vengeant-earth.js";
 import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
@@ -2101,6 +2102,7 @@ const shard: CardShard = {
     _poolVaultOfWhispers,
     _poolVedalkenOutlander,
     _poolVeiledSerpent,
+    _poolVeneratedTeacher,
     _poolVengeantEarth,
     _poolViashinoSlaughtermaster,
     _poolVincentVengefulAtoner,

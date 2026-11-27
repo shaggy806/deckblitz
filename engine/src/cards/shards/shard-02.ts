@@ -290,6 +290,7 @@ import _poolElvishPathcutter from "../pool/elvish-pathcutter.js";
 import _poolEmissaryEscort from "../pool/emissary-escort.js";
 import _poolEnatuGolem from "../pool/enatu-golem.js";
 import _poolEnshroudingMist from "../pool/enshrouding-mist.js";
+import _poolEnthrallingHold from "../pool/enthralling-hold.js";
 import _poolEntourageOfTrest from "../pool/entourage-of-trest.js";
 import _poolEphemeralShields from "../pool/ephemeral-shields.js";
 import _poolEpiphanyStorm from "../pool/epiphany-storm.js";
@@ -1366,6 +1367,7 @@ const shard: CardShard = {
     _poolEmissaryEscort,
     _poolEnatuGolem,
     _poolEnshroudingMist,
+    _poolEnthrallingHold,
     _poolEntourageOfTrest,
     _poolEphemeralShields,
     _poolEpiphanyStorm,

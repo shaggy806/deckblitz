@@ -8825,6 +8825,7 @@ import _poolEnterTheUnknown from "./pool/enter-the-unknown.js";
 import _poolEntering from "./pool/entering.js";
 import _poolEnterpriseNx01 from "./pool/enterprise-nx-01.js";
 import _poolEnterprisingScallywag from "./pool/enterprising-scallywag.js";
+import _poolEnthrallingHold from "./pool/enthralling-hold.js";
 import _poolEnthrallingVictor from "./pool/enthralling-victor.js";
 import _poolEnthusiasticMechanaut from "./pool/enthusiastic-mechanaut.js";
 import _poolEnthusiasticStudy from "./pool/enthusiastic-study.js";
@@ -8933,6 +8934,7 @@ import _poolErraticExplosion from "./pool/erratic-explosion.js";
 import _poolErraticMutation from "./pool/erratic-mutation.js";
 import _poolErraticPortal from "./pool/erratic-portal.js";
 import _poolErraticVisionary from "./pool/erratic-visionary.js";
+import _poolError from "./pool/error.js";
 import _poolErsatzGnomes from "./pool/ersatz-gnomes.js";
 import _poolErstwhileTrooper from "./pool/erstwhile-trooper.js";
 import _poolErtaiResurrected from "./pool/ertai-resurrected.js";
@@ -14914,6 +14916,7 @@ import _poolJodahTheUnifier from "./pool/jodah-the-unifier.js";
 import _poolJodahsAvenger from "./pool/jodahs-avenger.js";
 import _poolJodahsCodex from "./pool/jodahs-codex.js";
 import _poolJoelResoluteSurvivor from "./pool/joel-resolute-survivor.js";
+import _poolJohan from "./pool/johan.js";
 import _poolJohannApprenticeSorcerer from "./pool/johann-apprentice-sorcerer.js";
 import _poolJohannsStopgap from "./pool/johanns-stopgap.js";
 import _poolJohtullWurm from "./pool/johtull-wurm.js";
@@ -19979,6 +19982,7 @@ import _poolOnTheShouldersOfGiants from "./pool/on-the-shoulders-of-giants.js";
 import _poolOnTheTrail from "./pool/on-the-trail.js";
 import _poolOnThinIce from "./pool/on-thin-ice.js";
 import _poolOnWingsOfGold from "./pool/on-wings-of-gold.js";
+import _poolOnakkeJavelineer from "./pool/onakke-javelineer.js";
 import _poolOnakkeOathkeeper from "./pool/onakke-oathkeeper.js";
 import _poolOnakkeOgre from "./pool/onakke-ogre.js";
 import _poolOnceAndFuture from "./pool/once-and-future.js";
@@ -29731,6 +29735,7 @@ import _poolTidalBarracuda from "./pool/tidal-barracuda.js";
 import _poolTidalBore from "./pool/tidal-bore.js";
 import _poolTidalControl from "./pool/tidal-control.js";
 import _poolTidalCourier from "./pool/tidal-courier.js";
+import _poolTidalFlats from "./pool/tidal-flats.js";
 import _poolTidalForce from "./pool/tidal-force.js";
 import _poolTidalInfluence from "./pool/tidal-influence.js";
 import _poolTidalKraken from "./pool/tidal-kraken.js";
@@ -30324,6 +30329,7 @@ import _poolTrevasCharm from "./pool/trevas-charm.js";
 import _poolTrevasRuins from "./pool/trevas-ruins.js";
 import _poolTriSentinelActOfVengeance from "./pool/tri-sentinel-act-of-vengeance.js";
 import _poolTriadOfFates from "./pool/triad-of-fates.js";
+import _poolTrialError from "./pool/trial-error.js";
 import _poolTrialOfATimeLord from "./pool/trial-of-a-time-lord.js";
 import _poolTrialOfAgony from "./pool/trial-of-agony.js";
 import _poolTrialOfAmbition from "./pool/trial-of-ambition.js";
@@ -30331,6 +30337,7 @@ import _poolTrialOfKnowledge from "./pool/trial-of-knowledge.js";
 import _poolTrialOfSolidarity from "./pool/trial-of-solidarity.js";
 import _poolTrialOfStrength from "./pool/trial-of-strength.js";
 import _poolTrialOfZeal from "./pool/trial-of-zeal.js";
+import _poolTrial from "./pool/trial.js";
 import _poolTriangleOfWar from "./pool/triangle-of-war.js";
 import _poolTriarchPraetorian from "./pool/triarch-praetorian.js";
 import _poolTriarchStalker from "./pool/triarch-stalker.js";
@@ -31374,6 +31381,7 @@ import _poolVenerableWarsinger from "./pool/venerable-warsinger.js";
 import _poolVeneratedLoxodon from "./pool/venerated-loxodon.js";
 import _poolVeneratedRotpriest from "./pool/venerated-rotpriest.js";
 import _poolVeneratedStormsinger from "./pool/venerated-stormsinger.js";
+import _poolVeneratedTeacher from "./pool/venerated-teacher.js";
 import _poolVengeanceMission from "./pool/vengeance-mission.js";
 import _poolVengeance from "./pool/vengeance.js";
 import _poolVengeantEarth from "./pool/vengeant-earth.js";
@@ -43200,6 +43208,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEntering,
   _poolEnterpriseNx01,
   _poolEnterprisingScallywag,
+  _poolEnthrallingHold,
   _poolEnthrallingVictor,
   _poolEnthusiasticMechanaut,
   _poolEnthusiasticStudy,
@@ -43308,6 +43317,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolErraticMutation,
   _poolErraticPortal,
   _poolErraticVisionary,
+  _poolError,
   _poolErsatzGnomes,
   _poolErstwhileTrooper,
   _poolErtaiResurrected,
@@ -49289,6 +49299,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJodahsAvenger,
   _poolJodahsCodex,
   _poolJoelResoluteSurvivor,
+  _poolJohan,
   _poolJohannApprenticeSorcerer,
   _poolJohannsStopgap,
   _poolJohtullWurm,
@@ -54354,6 +54365,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOnTheTrail,
   _poolOnThinIce,
   _poolOnWingsOfGold,
+  _poolOnakkeJavelineer,
   _poolOnakkeOathkeeper,
   _poolOnakkeOgre,
   _poolOnceAndFuture,
@@ -64106,6 +64118,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTidalBore,
   _poolTidalControl,
   _poolTidalCourier,
+  _poolTidalFlats,
   _poolTidalForce,
   _poolTidalInfluence,
   _poolTidalKraken,
@@ -64699,6 +64712,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrevasRuins,
   _poolTriSentinelActOfVengeance,
   _poolTriadOfFates,
+  _poolTrialError,
   _poolTrialOfATimeLord,
   _poolTrialOfAgony,
   _poolTrialOfAmbition,
@@ -64706,6 +64720,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrialOfSolidarity,
   _poolTrialOfStrength,
   _poolTrialOfZeal,
+  _poolTrial,
   _poolTriangleOfWar,
   _poolTriarchPraetorian,
   _poolTriarchStalker,
@@ -65749,6 +65764,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVeneratedLoxodon,
   _poolVeneratedRotpriest,
   _poolVeneratedStormsinger,
+  _poolVeneratedTeacher,
   _poolVengeanceMission,
   _poolVengeance,
   _poolVengeantEarth,
@@ -77588,6 +77604,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/entering": _poolEntering,
   "pool/enterprise-nx-01": _poolEnterpriseNx01,
   "pool/enterprising-scallywag": _poolEnterprisingScallywag,
+  "pool/enthralling-hold": _poolEnthrallingHold,
   "pool/enthralling-victor": _poolEnthrallingVictor,
   "pool/enthusiastic-mechanaut": _poolEnthusiasticMechanaut,
   "pool/enthusiastic-study": _poolEnthusiasticStudy,
@@ -77696,6 +77713,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/erratic-mutation": _poolErraticMutation,
   "pool/erratic-portal": _poolErraticPortal,
   "pool/erratic-visionary": _poolErraticVisionary,
+  "pool/error": _poolError,
   "pool/ersatz-gnomes": _poolErsatzGnomes,
   "pool/erstwhile-trooper": _poolErstwhileTrooper,
   "pool/ertai-resurrected": _poolErtaiResurrected,
@@ -83677,6 +83695,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jodahs-avenger": _poolJodahsAvenger,
   "pool/jodahs-codex": _poolJodahsCodex,
   "pool/joel-resolute-survivor": _poolJoelResoluteSurvivor,
+  "pool/johan": _poolJohan,
   "pool/johann-apprentice-sorcerer": _poolJohannApprenticeSorcerer,
   "pool/johanns-stopgap": _poolJohannsStopgap,
   "pool/johtull-wurm": _poolJohtullWurm,
@@ -88742,6 +88761,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/on-the-trail": _poolOnTheTrail,
   "pool/on-thin-ice": _poolOnThinIce,
   "pool/on-wings-of-gold": _poolOnWingsOfGold,
+  "pool/onakke-javelineer": _poolOnakkeJavelineer,
   "pool/onakke-oathkeeper": _poolOnakkeOathkeeper,
   "pool/onakke-ogre": _poolOnakkeOgre,
   "pool/once-and-future": _poolOnceAndFuture,
@@ -98494,6 +98514,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tidal-bore": _poolTidalBore,
   "pool/tidal-control": _poolTidalControl,
   "pool/tidal-courier": _poolTidalCourier,
+  "pool/tidal-flats": _poolTidalFlats,
   "pool/tidal-force": _poolTidalForce,
   "pool/tidal-influence": _poolTidalInfluence,
   "pool/tidal-kraken": _poolTidalKraken,
@@ -99087,6 +99108,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trevas-ruins": _poolTrevasRuins,
   "pool/tri-sentinel-act-of-vengeance": _poolTriSentinelActOfVengeance,
   "pool/triad-of-fates": _poolTriadOfFates,
+  "pool/trial-error": _poolTrialError,
   "pool/trial-of-a-time-lord": _poolTrialOfATimeLord,
   "pool/trial-of-agony": _poolTrialOfAgony,
   "pool/trial-of-ambition": _poolTrialOfAmbition,
@@ -99094,6 +99116,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trial-of-solidarity": _poolTrialOfSolidarity,
   "pool/trial-of-strength": _poolTrialOfStrength,
   "pool/trial-of-zeal": _poolTrialOfZeal,
+  "pool/trial": _poolTrial,
   "pool/triangle-of-war": _poolTriangleOfWar,
   "pool/triarch-praetorian": _poolTriarchPraetorian,
   "pool/triarch-stalker": _poolTriarchStalker,
@@ -100137,6 +100160,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/venerated-loxodon": _poolVeneratedLoxodon,
   "pool/venerated-rotpriest": _poolVeneratedRotpriest,
   "pool/venerated-stormsinger": _poolVeneratedStormsinger,
+  "pool/venerated-teacher": _poolVeneratedTeacher,
   "pool/vengeance-mission": _poolVengeanceMission,
   "pool/vengeance": _poolVengeance,
   "pool/vengeant-earth": _poolVengeantEarth,
