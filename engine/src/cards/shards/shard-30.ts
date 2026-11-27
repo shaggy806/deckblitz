@@ -467,6 +467,7 @@ import _poolInfestedRoothold from "../pool/infested-roothold.js";
 import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
 import _poolInsidiousDreams from "../pool/insidious-dreams.js";
+import _poolInspiredIdea from "../pool/inspired-idea.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
 import _poolInsult from "../pool/insult.js";
 import _poolIntetTheDreamer from "../pool/intet-the-dreamer.js";
@@ -864,6 +865,7 @@ import _poolSpiderGirlLegacyHero from "../pool/spider-girl-legacy-hero.js";
 import _poolSpiderSuit from "../pool/spider-suit.js";
 import _poolSpinedThopter from "../pool/spined-thopter.js";
 import _poolSpinneretSliver from "../pool/spinneret-sliver.js";
+import _poolSpinningDarkness from "../pool/spinning-darkness.js";
 import _poolSpinningWheelKick from "../pool/spinning-wheel-kick.js";
 import _poolSpireMonitor from "../pool/spire-monitor.js";
 import _poolSpirePatrol from "../pool/spire-patrol.js";
@@ -891,6 +893,7 @@ import _poolStormfrontRiders from "../pool/stormfront-riders.js";
 import _poolStormscapeMaster from "../pool/stormscape-master.js";
 import _poolStoryCircle from "../pool/story-circle.js";
 import _poolStreamOfUnconsciousness from "../pool/stream-of-unconsciousness.js";
+import _poolStreetwiseNegotiator from "../pool/streetwise-negotiator.js";
 import _poolStridingShotcaller from "../pool/striding-shotcaller.js";
 import _poolSummonBrynhildr from "../pool/summon-brynhildr.js";
 import _poolSummonLeviathan from "../pool/summon-leviathan.js";
@@ -1557,6 +1560,7 @@ const shard: CardShard = {
     _poolIngeniousSkaab,
     _poolInkriseInfiltrator,
     _poolInsidiousDreams,
+    _poolInspiredIdea,
     _poolInspiringCall,
     _poolInsult,
     _poolIntetTheDreamer,
@@ -1954,6 +1958,7 @@ const shard: CardShard = {
     _poolSpiderSuit,
     _poolSpinedThopter,
     _poolSpinneretSliver,
+    _poolSpinningDarkness,
     _poolSpinningWheelKick,
     _poolSpireMonitor,
     _poolSpirePatrol,
@@ -1981,6 +1986,7 @@ const shard: CardShard = {
     _poolStormscapeMaster,
     _poolStoryCircle,
     _poolStreamOfUnconsciousness,
+    _poolStreetwiseNegotiator,
     _poolStridingShotcaller,
     _poolSummonBrynhildr,
     _poolSummonLeviathan,

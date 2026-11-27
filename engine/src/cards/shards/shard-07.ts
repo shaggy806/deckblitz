@@ -418,6 +418,7 @@ import _poolHighSeas from "../pool/high-seas.js";
 import _poolHighlandLake from "../pool/highland-lake.js";
 import _poolHolyLight from "../pool/holy-light.js";
 import _poolHomuraHumanAscendant from "../pool/homura-human-ascendant.js";
+import _poolHonorablePassage from "../pool/honorable-passage.js";
 import _poolHookhandMariner from "../pool/hookhand-mariner.js";
 import _poolHowlingWolf from "../pool/howling-wolf.js";
 import _poolHundredBattleVeteran from "../pool/hundred-battle-veteran.js";
@@ -1512,6 +1513,7 @@ const shard: CardShard = {
     _poolHighlandLake,
     _poolHolyLight,
     _poolHomuraHumanAscendant,
+    _poolHonorablePassage,
     _poolHookhandMariner,
     _poolHowlingWolf,
     _poolHundredBattleVeteran,

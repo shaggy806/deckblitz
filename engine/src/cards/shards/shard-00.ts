@@ -867,6 +867,7 @@ import _poolSunstrikeLegionnaire from "../pool/sunstrike-legionnaire.js";
 import _poolSwampbenders from "../pool/swampbenders.js";
 import _poolSwarmOfRats from "../pool/swarm-of-rats.js";
 import _poolSwathcutterGiant from "../pool/swathcutter-giant.js";
+import _poolSwordOfTheAges from "../pool/sword-of-the-ages.js";
 import _poolSwordsmanSharpScoundrel from "../pool/swordsman-sharp-scoundrel.js";
 import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
 import _poolTajuruParagon from "../pool/tajuru-paragon.js";
@@ -1936,6 +1937,7 @@ const shard: CardShard = {
     _poolSwampbenders,
     _poolSwarmOfRats,
     _poolSwathcutterGiant,
+    _poolSwordOfTheAges,
     _poolSwordsmanSharpScoundrel,
     _poolSwordwiseCentaur,
     _poolTajuruParagon,

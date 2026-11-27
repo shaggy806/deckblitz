@@ -405,6 +405,7 @@ import _poolHomicidalBrute from "../pool/homicidal-brute.js";
 import _poolHomingLightning from "../pool/homing-lightning.js";
 import _poolHomurasEssence from "../pool/homuras-essence.js";
 import _poolHonor from "../pool/honor.js";
+import _poolHornOfPlenty from "../pool/horn-of-plenty.js";
 import _poolHorrifyingRevelation from "../pool/horrifying-revelation.js";
 import _poolHostOfTheHereafter from "../pool/host-of-the-hereafter.js";
 import _poolHulklingBurgeoningBruiser from "../pool/hulkling-burgeoning-bruiser.js";
@@ -1415,6 +1416,7 @@ const shard: CardShard = {
     _poolHomingLightning,
     _poolHomurasEssence,
     _poolHonor,
+    _poolHornOfPlenty,
     _poolHorrifyingRevelation,
     _poolHostOfTheHereafter,
     _poolHulklingBurgeoningBruiser,

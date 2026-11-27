@@ -844,6 +844,7 @@ import _poolSongOfTheDryads from "../pool/song-of-the-dryads.js";
 import _poolSoratamiMirrorMage from "../pool/soratami-mirror-mage.js";
 import _poolSorayaTheFalconer from "../pool/soraya-the-falconer.js";
 import _poolSorinRavenousNeonate from "../pool/sorin-ravenous-neonate.js";
+import _poolSoulEcho from "../pool/soul-echo.js";
 import _poolSoulExchange from "../pool/soul-exchange.js";
 import _poolSoulOfInnistrad from "../pool/soul-of-innistrad.js";
 import _poolSoulOfMirrodin from "../pool/soul-of-mirrodin.js";
@@ -1938,6 +1939,7 @@ const shard: CardShard = {
     _poolSoratamiMirrorMage,
     _poolSorayaTheFalconer,
     _poolSorinRavenousNeonate,
+    _poolSoulEcho,
     _poolSoulExchange,
     _poolSoulOfInnistrad,
     _poolSoulOfMirrodin,

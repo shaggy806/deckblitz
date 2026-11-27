@@ -497,6 +497,7 @@ import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant
 import _poolJungleLion from "../pool/jungle-lion.js";
 import _poolJuratiCordialQueen from "../pool/jurati-cordial-queen.js";
 import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
+import _poolJuxtapose from "../pool/juxtapose.js";
 import _poolKagemaroFirstToSuffer from "../pool/kagemaro-first-to-suffer.js";
 import _poolKamiOfLunacy from "../pool/kami-of-lunacy.js";
 import _poolKamiOfTerribleSecrets from "../pool/kami-of-terrible-secrets.js";
@@ -791,6 +792,7 @@ import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShadesBreath from "../pool/shades-breath.js";
 import _poolShadowLance from "../pool/shadow-lance.js";
 import _poolShambleshark from "../pool/shambleshark.js";
+import _poolShapeOfTheWiitigo from "../pool/shape-of-the-wiitigo.js";
 import _poolShelobDreadWeaver from "../pool/shelob-dread-weaver.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
@@ -1570,6 +1572,7 @@ const shard: CardShard = {
     _poolJungleLion,
     _poolJuratiCordialQueen,
     _poolJusticeVanceAstrovik,
+    _poolJuxtapose,
     _poolKagemaroFirstToSuffer,
     _poolKamiOfLunacy,
     _poolKamiOfTerribleSecrets,
@@ -1864,6 +1867,7 @@ const shard: CardShard = {
     _poolShadesBreath,
     _poolShadowLance,
     _poolShambleshark,
+    _poolShapeOfTheWiitigo,
     _poolShelobDreadWeaver,
     _poolShenanigans,
     _poolSheriffOfSafePassage,

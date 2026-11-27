@@ -123,6 +123,7 @@ import _poolCaptainAmericaTeamLeader from "../pool/captain-america-team-leader.j
 import _poolCaptainJeanLucPicard from "../pool/captain-jean-luc-picard.js";
 import _poolCapturedByTheConsulate from "../pool/captured-by-the-consulate.js";
 import _poolCarrionCall from "../pool/carrion-call.js";
+import _poolCaseOfTheBurningMasks from "../pool/case-of-the-burning-masks.js";
 import _poolCaseOfTheGatewayExpress from "../pool/case-of-the-gateway-express.js";
 import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
 import _poolCaythFamedMechanist from "../pool/cayth-famed-mechanist.js";
@@ -138,6 +139,7 @@ import _poolChandraPyrogenius from "../pool/chandra-pyrogenius.js";
 import _poolChangelingHero from "../pool/changeling-hero.js";
 import _poolChantOfTheSkifsang from "../pool/chant-of-the-skifsang.js";
 import _poolChillOfForeboding from "../pool/chill-of-foreboding.js";
+import _poolChompingKavu from "../pool/chomping-kavu.js";
 import _poolChromeCat from "../pool/chrome-cat.js";
 import _poolCinderHellion from "../pool/cinder-hellion.js";
 import _poolCinderMarsh from "../pool/cinder-marsh.js";
@@ -1168,6 +1170,7 @@ const shard: CardShard = {
     _poolCaptainJeanLucPicard,
     _poolCapturedByTheConsulate,
     _poolCarrionCall,
+    _poolCaseOfTheBurningMasks,
     _poolCaseOfTheGatewayExpress,
     _poolCavalierOfNight,
     _poolCaythFamedMechanist,
@@ -1183,6 +1186,7 @@ const shard: CardShard = {
     _poolChangelingHero,
     _poolChantOfTheSkifsang,
     _poolChillOfForeboding,
+    _poolChompingKavu,
     _poolChromeCat,
     _poolCinderHellion,
     _poolCinderMarsh,

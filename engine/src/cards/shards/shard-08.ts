@@ -1045,6 +1045,7 @@ import _poolVoyagerStaff from "../pool/voyager-staff.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolVulpineHarvester from "../pool/vulpine-harvester.js";
 import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
+import _poolWarbringer from "../pool/warbringer.js";
 import _poolWarpSpeed from "../pool/warp-speed.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
 import _poolWaterkinShaman from "../pool/waterkin-shaman.js";
@@ -2159,6 +2160,7 @@ const shard: CardShard = {
     _poolVronosMaskedInquisitor,
     _poolVulpineHarvester,
     _poolVulshokSplitter,
+    _poolWarbringer,
     _poolWarpSpeed,
     _poolWatchwolf,
     _poolWaterkinShaman,
