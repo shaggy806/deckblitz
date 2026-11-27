@@ -812,6 +812,7 @@ import _poolSnap from "../pool/snap.js";
 import _poolSneakAttack from "../pool/sneak-attack.js";
 import _poolSnoopingPage from "../pool/snooping-page.js";
 import _poolSnortingGahr from "../pool/snorting-gahr.js";
+import _poolSnowblind from "../pool/snowblind.js";
 import _poolSolarTransformer from "../pool/solar-transformer.js";
 import _poolSoldierReplica from "../pool/soldier-replica.js";
 import _poolSongcrafterMage from "../pool/songcrafter-mage.js";
@@ -1881,6 +1882,7 @@ const shard: CardShard = {
     _poolSneakAttack,
     _poolSnoopingPage,
     _poolSnortingGahr,
+    _poolSnowblind,
     _poolSolarTransformer,
     _poolSoldierReplica,
     _poolSongcrafterMage,

@@ -1564,10 +1564,13 @@ export interface CardFilter {
    * (Red Guardian, Restore the Peace); `to: "you"`, to the player whose
    * filter it is (Spear of Heliod, Retaliate), and `combat`, combat damage
    * (Witch-king of Angmar). `{ player }` is "you" bound to one player, where
-   * the player choosing isn't the "you" of the text. */
+   * the player choosing isn't the "you" of the text. `"opponent"` is to any
+   * player other than the filter's "you" — read against its controller now,
+   * and counting one who has since left the game (Dunerider Outlaw's and
+   * Whirling Dervish's rulings). */
   readonly dealtDamageThisTurn?:
     | true
-    | { readonly to: "you" | { readonly player: PlayerId }; readonly combat?: true };
+    | { readonly to: "you" | "opponent" | { readonly player: PlayerId }; readonly combat?: true };
   /** It entered the battlefield (this stint) as a spell that was cast and
    * resolved — "if it was cast" (see `GameObject.entry`). */
   readonly cast?: boolean;
@@ -3789,8 +3792,13 @@ export function matchesFilter(
     if (now === undefined) return false;
     const clause = filter.dealtDamageThisTurn;
     if (clause !== true) {
-      const player = clause.to === "you" ? ctx.you : clause.to.player;
-      if (!(clause.combat === true ? now.combatPlayers : now.players).includes(player)) return false;
+      const damaged = clause.combat === true ? now.combatPlayers : now.players;
+      if (clause.to === "opponent") {
+        if (!damaged.some((player) => player !== ctx.you)) return false;
+      } else {
+        const player = clause.to === "you" ? ctx.you : clause.to.player;
+        if (!damaged.includes(player)) return false;
+      }
     }
   }
   if (filter.turnedFaceUpThisTurn !== undefined) {

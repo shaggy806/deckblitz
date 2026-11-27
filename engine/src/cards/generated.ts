@@ -2861,6 +2861,7 @@ import _poolBlindWithAnger from "./pool/blind-with-anger.js";
 import _poolBlindZealot from "./pool/blind-zealot.js";
 import _poolBlindblast from "./pool/blindblast.js";
 import _poolBlindingAngel from "./pool/blinding-angel.js";
+import _poolBlindingBeam from "./pool/blinding-beam.js";
 import _poolBlindingDrone from "./pool/blinding-drone.js";
 import _poolBlindingFlare from "./pool/blinding-flare.js";
 import _poolBlindingFog from "./pool/blinding-fog.js";
@@ -8009,6 +8010,7 @@ import _poolDuneMover from "./pool/dune-mover.js";
 import _poolDuneblast from "./pool/duneblast.js";
 import _poolDunedainBlade from "./pool/dunedain-blade.js";
 import _poolDunedainRangers from "./pool/dunedain-rangers.js";
+import _poolDuneriderOutlaw from "./pool/dunerider-outlaw.js";
 import _poolDunesOfTheDead from "./pool/dunes-of-the-dead.js";
 import _poolDungeonCrawler from "./pool/dungeon-crawler.js";
 import _poolDungeonDelver from "./pool/dungeon-delver.js";
@@ -22619,6 +22621,7 @@ import _poolRecumbentBliss from "./pool/recumbent-bliss.js";
 import _poolRecuperate from "./pool/recuperate.js";
 import _poolRecurringInsight from "./pool/recurring-insight.js";
 import _poolRecurringNightmare from "./pool/recurring-nightmare.js";
+import _poolRecursiveRecruitment from "./pool/recursive-recruitment.js";
 import _poolRecyclaBird from "./pool/recycla-bird.js";
 import _poolRecycle from "./pool/recycle.js";
 import _poolRedAlert from "./pool/red-alert.js";
@@ -26260,6 +26263,7 @@ import _poolSnowDevil from "./pool/snow-devil.js";
 import _poolSnowFortress from "./pool/snow-fortress.js";
 import _poolSnowHound from "./pool/snow-hound.js";
 import _poolSnowVilliers from "./pool/snow-villiers.js";
+import _poolSnowblind from "./pool/snowblind.js";
 import _poolSnowfall from "./pool/snowfall.js";
 import _poolSnowfieldSinkhole from "./pool/snowfield-sinkhole.js";
 import _poolSnowhornRider from "./pool/snowhorn-rider.js";
@@ -32548,6 +32552,7 @@ import _poolWhirlerRogue from "./pool/whirler-rogue.js";
 import _poolWhirlerVirtuoso from "./pool/whirler-virtuoso.js";
 import _poolWhirlermaker from "./pool/whirlermaker.js";
 import _poolWhirlingCatapult from "./pool/whirling-catapult.js";
+import _poolWhirlingDervish from "./pool/whirling-dervish.js";
 import _poolWhirlingStrike from "./pool/whirling-strike.js";
 import _poolWhirlpoolDrake from "./pool/whirlpool-drake.js";
 import _poolWhirlpoolRider from "./pool/whirlpool-rider.js";
@@ -37213,6 +37218,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBlindZealot,
   _poolBlindblast,
   _poolBlindingAngel,
+  _poolBlindingBeam,
   _poolBlindingDrone,
   _poolBlindingFlare,
   _poolBlindingFog,
@@ -42361,6 +42367,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDuneblast,
   _poolDunedainBlade,
   _poolDunedainRangers,
+  _poolDuneriderOutlaw,
   _poolDunesOfTheDead,
   _poolDungeonCrawler,
   _poolDungeonDelver,
@@ -56971,6 +56978,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRecuperate,
   _poolRecurringInsight,
   _poolRecurringNightmare,
+  _poolRecursiveRecruitment,
   _poolRecyclaBird,
   _poolRecycle,
   _poolRedAlert,
@@ -60612,6 +60620,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSnowFortress,
   _poolSnowHound,
   _poolSnowVilliers,
+  _poolSnowblind,
   _poolSnowfall,
   _poolSnowfieldSinkhole,
   _poolSnowhornRider,
@@ -66900,6 +66909,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhirlerVirtuoso,
   _poolWhirlermaker,
   _poolWhirlingCatapult,
+  _poolWhirlingDervish,
   _poolWhirlingStrike,
   _poolWhirlpoolDrake,
   _poolWhirlpoolRider,
@@ -71578,6 +71588,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/blind-zealot": _poolBlindZealot,
   "pool/blindblast": _poolBlindblast,
   "pool/blinding-angel": _poolBlindingAngel,
+  "pool/blinding-beam": _poolBlindingBeam,
   "pool/blinding-drone": _poolBlindingDrone,
   "pool/blinding-flare": _poolBlindingFlare,
   "pool/blinding-fog": _poolBlindingFog,
@@ -76726,6 +76737,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/duneblast": _poolDuneblast,
   "pool/dunedain-blade": _poolDunedainBlade,
   "pool/dunedain-rangers": _poolDunedainRangers,
+  "pool/dunerider-outlaw": _poolDuneriderOutlaw,
   "pool/dunes-of-the-dead": _poolDunesOfTheDead,
   "pool/dungeon-crawler": _poolDungeonCrawler,
   "pool/dungeon-delver": _poolDungeonDelver,
@@ -91336,6 +91348,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/recuperate": _poolRecuperate,
   "pool/recurring-insight": _poolRecurringInsight,
   "pool/recurring-nightmare": _poolRecurringNightmare,
+  "pool/recursive-recruitment": _poolRecursiveRecruitment,
   "pool/recycla-bird": _poolRecyclaBird,
   "pool/recycle": _poolRecycle,
   "pool/red-alert": _poolRedAlert,
@@ -94977,6 +94990,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/snow-fortress": _poolSnowFortress,
   "pool/snow-hound": _poolSnowHound,
   "pool/snow-villiers": _poolSnowVilliers,
+  "pool/snowblind": _poolSnowblind,
   "pool/snowfall": _poolSnowfall,
   "pool/snowfield-sinkhole": _poolSnowfieldSinkhole,
   "pool/snowhorn-rider": _poolSnowhornRider,
@@ -101265,6 +101279,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/whirler-virtuoso": _poolWhirlerVirtuoso,
   "pool/whirlermaker": _poolWhirlermaker,
   "pool/whirling-catapult": _poolWhirlingCatapult,
+  "pool/whirling-dervish": _poolWhirlingDervish,
   "pool/whirling-strike": _poolWhirlingStrike,
   "pool/whirlpool-drake": _poolWhirlpoolDrake,
   "pool/whirlpool-rider": _poolWhirlpoolRider,

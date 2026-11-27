@@ -1072,6 +1072,7 @@ import _poolWellspring from "../pool/wellspring.js";
 import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js";
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
 import _poolWhiplashWordsmith from "../pool/whiplash-wordsmith.js";
+import _poolWhirlingDervish from "../pool/whirling-dervish.js";
 import _poolWhiteMagesStaff from "../pool/white-mages-staff.js";
 import _poolWildBeastmaster from "../pool/wild-beastmaster.js";
 import _poolWildGrowth from "../pool/wild-growth.js";
@@ -2204,6 +2205,7 @@ const shard: CardShard = {
     _poolWerewolfOfAncientHunger,
     _poolWhenWeWereYoung,
     _poolWhiplashWordsmith,
+    _poolWhirlingDervish,
     _poolWhiteMagesStaff,
     _poolWildBeastmaster,
     _poolWildGrowth,

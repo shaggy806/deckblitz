@@ -4272,7 +4272,7 @@ loyalty — Maarika, Brutal Gladiator's `toFilter`, asked once every source deal
 `dealtDamageToCreatureThisTurn` (it dealt damage to another creature). `dealtDamageThisTurn: true` is
 "that dealt damage this turn", to anything (Restore the Peace); `{ to: "you" }` "that dealt damage to you this
 turn" (Spear of Heliod), with `combat: true` for combat damage (Witch-king of Angmar: a sacrifice keeps "you" as
-the effect's controller, not the player choosing). The condition `{ kind: "self-hasnt-dealt-damage", combat? }`
+the effect's controller, not the player choosing); `{ to: "opponent" }` "that dealt damage to an opponent this turn", to any player but the filter's "you", read against its controller now (Dunerider Outlaw, Whirling Dervish). The condition `{ kind: "self-hasnt-dealt-damage", combat? }`
 is "as long as it hasn't dealt [combat] damage yet" (Karakyk Guardian, Ruric Thar). `castNthThisTurn: { n, byCaster? }` is "the second spell cast
 this turn" — a spell on the stack, or a permanent that entered as it resolved, numbered by the journal's `spell-cast` entries this turn
 (every player's: Second Guess's target; `byCaster`, only its caster's: Codespell Cleric's "if it was the second spell you cast this turn",

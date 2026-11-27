@@ -692,6 +692,7 @@ import _poolReason from "../pool/reason.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
 import _poolRecklessBarbarian from "../pool/reckless-barbarian.js";
 import _poolRecklessImp from "../pool/reckless-imp.js";
+import _poolRecursiveRecruitment from "../pool/recursive-recruitment.js";
 import _poolRedRoomRecruit from "../pool/red-room-recruit.js";
 import _poolRedcapGutterDweller from "../pool/redcap-gutter-dweller.js";
 import _poolRefereeSquad from "../pool/referee-squad.js";
@@ -1738,6 +1739,7 @@ const shard: CardShard = {
     _poolRebelliousStrike,
     _poolRecklessBarbarian,
     _poolRecklessImp,
+    _poolRecursiveRecruitment,
     _poolRedRoomRecruit,
     _poolRedcapGutterDweller,
     _poolRefereeSquad,

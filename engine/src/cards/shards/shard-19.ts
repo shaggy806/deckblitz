@@ -286,6 +286,7 @@ import _poolDromosaur from "../pool/dromosaur.js";
 import _poolDrossSkullbomb from "../pool/dross-skullbomb.js";
 import _poolDualcasterMage from "../pool/dualcaster-mage.js";
 import _poolDuneblast from "../pool/duneblast.js";
+import _poolDuneriderOutlaw from "../pool/dunerider-outlaw.js";
 import _poolDungroveElder from "../pool/dungrove-elder.js";
 import _poolDuplicant from "../pool/duplicant.js";
 import _poolDurableCoilbug from "../pool/durable-coilbug.js";
@@ -1415,6 +1416,7 @@ const shard: CardShard = {
     _poolDrossSkullbomb,
     _poolDualcasterMage,
     _poolDuneblast,
+    _poolDuneriderOutlaw,
     _poolDungroveElder,
     _poolDuplicant,
     _poolDurableCoilbug,

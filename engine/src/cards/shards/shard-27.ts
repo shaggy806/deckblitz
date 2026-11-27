@@ -86,6 +86,7 @@ import _poolBlazingBladeAskari from "../pool/blazing-blade-askari.js";
 import _poolBlightMamba from "../pool/blight-mamba.js";
 import _poolBlightwidow from "../pool/blightwidow.js";
 import _poolBlindZealot from "../pool/blind-zealot.js";
+import _poolBlindingBeam from "../pool/blinding-beam.js";
 import _poolBloodBairn from "../pool/blood-bairn.js";
 import _poolBloodChinRager from "../pool/blood-chin-rager.js";
 import _poolBloodCultist from "../pool/blood-cultist.js";
@@ -1134,6 +1135,7 @@ const shard: CardShard = {
     _poolBlightMamba,
     _poolBlightwidow,
     _poolBlindZealot,
+    _poolBlindingBeam,
     _poolBloodBairn,
     _poolBloodChinRager,
     _poolBloodCultist,

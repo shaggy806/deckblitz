@@ -82,6 +82,7 @@
     "effect:pay-any-amount-of-life-reveal-that-many",
     "cost:ability-cost-choice",
     "effect:token-of-chosen-color-and-type",
+    "condition:source-dealt-damage-to-opponent-this-turn",
     "replacement:as-turned-face-up-dynamic-counters",
     "static:counter-cap",
     "condition:started-turn-untapped",
