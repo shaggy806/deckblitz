@@ -369,6 +369,7 @@ import type {
   EnterTypes,
   FlickerCounters,
   FlickerOptions,
+  NotedCounters,
   LookAndChooseLeftoverIf,
   LookAndChooseZone,
   LibraryOrderStep,
@@ -46128,7 +46129,7 @@ export class Game {
       flicker: (flickered, options) => this.flickerByEffect(source, controller, flickered, options),
       meld: (self, partnerFilter, into, partner, entry) =>
         this.meldByEffect(controller, x, self, partnerFilter, into, partner, entry),
-      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under, attachTo, arms, attacking) =>
+      returnFlickered: (link, thenCounters, underYourControl, transformed, tapped, under, attachTo, arms, attacking, noted) =>
         this.returnFlickeredByEffect(
           link,
           thenCounters,
@@ -46138,6 +46139,7 @@ export class Game {
           attachTo,
           arms,
           attacking,
+          noted,
         ),
       grantFlashback: (target, cost) => this.grantFlashbackByEffect(target, source, cost),
       grantFlashbackAll: (filter) => {
@@ -64931,10 +64933,13 @@ controlledBy,
     let link: string | undefined;
     // "At the beginning of that player's next end step" (The Eternal
     // Wanderer): a link, and a delayed return, for each owner.
-    const perOwner = delayed !== undefined && options.returnOnOwnersTurn === true;
+    const perOwner = delayed !== undefined && "step" in delayed && options.returnOnOwnersTurn === true;
+    // "Note the number and kind of counters that were on that creature"
+    // (`keepCounters`, Tawnos's Coffin): each target's, as it's exiled.
+    const noted: NotedCounters[] = [];
     const ownerLinks: { readonly owner: PlayerId; readonly link: string }[] = [];
     const linkNow = (owner: PlayerId): string | undefined => {
-      if (delayed === undefined) return undefined;
+      if (delayed === undefined && options.neverReturns !== true) return undefined;
       if (!perOwner) return (link ??= `flicker-${this.state.nextObjectSeq++}`);
       const known = ownerLinks.find((l) => l.owner === owner);
       if (known !== undefined) return known.link;
@@ -64947,7 +64952,7 @@ controlledBy,
     // "…and all Auras attached to it" (`withAuras`, Flickerform): each
     // target's Auras as the effect begins — a bestow card or a Licid
     // attached as an Aura among them (rule 303.4h) — exiled with it.
-    const withAuras = options.withAuras === true && delayed !== undefined && !perOwner;
+    const withAuras = options.withAuras === true && (delayed !== undefined || options.neverReturns === true) && !perOwner;
     const aurasOf = new Map<ObjectId, readonly ObjectId[]>();
     if (withAuras) {
       for (const target of targets) {
@@ -65010,10 +65015,14 @@ controlledBy,
           const object = this.state.objects[id];
           if (object === undefined || object.zone !== "battlefield") return false;
           const isToken = object.isToken;
+          const counters = Object.entries(object.counters)
+            .filter(([, amount]) => amount > 0)
+            .map(([kind, amount]) => ({ kind, amount }));
           if (!this.moveObject(id, "exile")) return false;
           if (this.state.objects[id]?.zone !== "exile") return false;
           this.emit({ type: "permanent-exiled", object: id });
           if (isToken) return false;
+          if (options.keepCounters === true && delayed !== undefined && counters.length > 0) noted.push({ object: id, counters });
           // After the move: `moveObject` clears the link on the way.
           // A merged or melded permanent became several cards, and the return
           // finds every one of them (730.3c; the meld ruling: "if an effect
@@ -65031,6 +65040,17 @@ controlledBy,
         if (withAuras) exileAuras(target.object, id, linked);
       }
     });
+    // Its return could never be watched for (`neverReturns`): exiled for
+    // good, the links that would have brought it back spent.
+    if (options.neverReturns === true) {
+      for (const id of this.state.zones.shared.exile) {
+        const object = this.state.objects[id];
+        if (object?.flickerLink !== undefined && (object.flickerLink === link || auraReturns.some((r) => r.from === object.flickerLink))) {
+          object.flickerLink = undefined;
+        }
+      }
+      return null;
+    }
     if (delayed === undefined) {
       // One coming back has an "as this enters" choice to make first (rule
       // 614.12 — a blinked Clone copies afresh): it's asked now, and the
@@ -65084,6 +65104,7 @@ controlledBy,
         ...(options.tapped !== undefined && options.tapped !== false ? { tapped: options.tapped } : {}),
         ...(options.attacking !== undefined ? { attacking: options.attacking } : {}),
         ...(auraReturns.length > 0 ? { arms: auraReturns } : {}),
+        ...(noted.length > 0 ? { noted } : {}),
       };
       // Then, for each target that came back, its Auras attached to it.
       const steps: EffectSpec[] = [
@@ -65095,7 +65116,7 @@ controlledBy,
         source,
         controller,
         // The owner's turn, the ability still the controller's (rule 603.7e).
-        each.owner !== undefined ? { ...delayed, whose: each.owner } : delayed,
+        each.owner !== undefined && "step" in delayed ? { ...delayed, whose: each.owner } : delayed,
         steps.length === 1 ? returns : { kind: "sequence", effects: steps },
         options.returnText ?? "Return the exiled card to the battlefield.",
         [],
@@ -65135,6 +65156,7 @@ controlledBy,
     attachTo?: ObjectId,
     arms?: readonly { readonly host: ObjectId; readonly from: string; readonly to: string }[],
     attacking?: ResolvedEnterAttacking,
+    noted?: readonly NotedCounters[],
   ): boolean {
     const linked = this.state.zones.shared.exile.filter(
       (id) => this.state.objects[id]?.flickerLink === link,
@@ -65159,7 +65181,7 @@ controlledBy,
       return true;
     }
     for (const id of linked) this.state.objects[id].flickerLink = undefined;
-    this.completeFlickerReturn(returning, counters, returnUnder, transformed, tapped, false, attacking);
+    this.completeFlickerReturn(returning, counters, returnUnder, transformed, tapped, false, attacking, noted);
     // "If you do" (`arms`): a host that came back now arms its Auras' return;
     // one that didn't leaves them in exile, their link spent.
     for (const arm of arms ?? []) {
@@ -65190,6 +65212,9 @@ controlledBy,
     tappedIf: boolean | CardFilter = false,
     faceDown = false,
     attacking?: ResolvedEnterAttacking,
+    /** A flicker's `keepCounters`: the counters each had as it was exiled,
+     * on it as it enters (rule 122.6). */
+    noted?: readonly NotedCounters[],
   ): void {
     const entered: ObjectId[] = [];
     this.withEnterBatch(() => {
@@ -65228,6 +65253,10 @@ controlledBy,
     // enters (rule 122.6), so its enter triggers see it. Essence Flux's
     // "put a counter on it" comes after the return.
     if (counters?.entering === true) this.putFlickerCounters(entered, counters);
+    for (const each of noted ?? []) {
+      if (!entered.includes(each.object)) continue;
+      for (const counter of each.counters) this.addCounter({ kind: "object", object: each.object }, counter.kind, counter.amount);
+    }
     // "…tapped and attacking" (rule 508.4): as they enter, before anything
     // sees them arrive — each by its controller (`putIntoAttack` leaves one
     // that isn't the attacking player's, or out of combat, where it is).

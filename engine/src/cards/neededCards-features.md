@@ -9178,3 +9178,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **This creature and another attack different players (2026-11-27).** `trigger:attacks-different-players` (and B142's `trigger:attacks-with-another-at-different-player`): the `attacks` trigger's `anotherAttacksDifferentPlayer` (game.ts `anotherAttacksDifferentPlayer`; planeswalkers don't count). Canal Courier. `test/attacks-different-players.test.ts`.
 
 **An Aura returned onto a creature at random (2026-11-27).** `effect:random-permanent-it-can-enchant`: no engine code — `choose-permanents` `random` with `filter: { enchantableBy: "source" }`, then `put-onto-battlefield` `fromGraveyard` `attachedTo: 0`. Infectious Rage. `test/infectious-rage.test.ts`.
+
+**Exile with its Auras until the source untaps, counters noted (2026-11-27).** `effect:exile-until-source-untaps-with-auras`: `flicker`'s `returnAt` takes a "whenever" watch (the `delayed-trigger` reader, `readDelayedWhenever`, shared; nothing to watch and it exiles for good, `neverReturns`) and `keepCounters` (`return-flickered.noted`, put on as it enters). Tawnos's Coffin. `test/tawnoss-coffin.test.ts`.
