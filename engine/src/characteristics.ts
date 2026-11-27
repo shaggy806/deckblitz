@@ -1922,6 +1922,31 @@ export function protectionPlayers(
   return [];
 }
 
+/** `StaticAbility.blockAdditionalPer`: the permanents on the battlefield
+ * matching `filter`, read with `source` as the filter's source and its
+ * controller as "you" (Kemba's Legion's "for each Equipment attached to this
+ * creature"). Guarded like the other counts: a count that re-enters itself
+ * answers 0 (`countInProgress`). */
+function blockAdditionalPerCount(
+  state: GameState,
+  registry: CardRegistry,
+  filter: CardFilter,
+  source: GameObject,
+): number {
+  if (countInProgress.has(source.id)) return 0;
+  countInProgress.add(source.id);
+  try {
+    return permanentCount(
+      state,
+      state.zones.shared.battlefield.filter((id) =>
+        matchesFilter(state, registry, id, filter, { you: source.controller, source: source.id }),
+      ),
+    );
+  } finally {
+    countInProgress.delete(source.id);
+  }
+}
+
 /** A static's protection as it applies now: "the chosen color" read off the
  * source (its `chosenOnEnter`, if a colour), its filter read with the source
  * as the filter's, the players it names, the exiled card's card types, and
@@ -6608,6 +6633,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.assignAsThoughUnblocked === true ||
     ability.cantBeSacrificed === true ||
     ability.blockAdditional !== undefined ||
+    ability.blockAdditionalPer !== undefined ||
     ability.protection !== undefined ||
     ability.hexproofFrom !== undefined ||
     ability.bandsWithOther !== undefined ||
@@ -6981,7 +7007,10 @@ function collectStaticEffects(
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       assignAsThoughUnblocked: ability.assignAsThoughUnblocked === true,
       cantBeSacrificed: ability.cantBeSacrificed === true,
-      blockAdditional: ability.blockAdditional ?? 0,
+      blockAdditional:
+        ability.blockAdditionalPer !== undefined
+          ? blockAdditionalPerCount(state, registry, ability.blockAdditionalPer, source)
+          : (ability.blockAdditional ?? 0),
       protection: staticProtection(state, registry, ability, source),
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,

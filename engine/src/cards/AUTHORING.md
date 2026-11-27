@@ -6923,6 +6923,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   answers "yes" for the permanent. A full loss beside it takes the mana ones
   too. The scaffolder reads "All lands|creatures|artifacts lose all
   abilities except mana abilities". `lose-all-except-mana.test.ts`.
+- `blockAdditionalPer: CardFilter` — "can block an additional creature for each [permanent]", the battlefield's matching permanents read with this one as `"source"` (Kemba's Legion's `{ subtype: "Equipment", attachedTo: { isSource: true } }`), in place of `blockAdditional`.
 - `blockAdditional: 1 | N | "any"` — the affected creatures "can block an
   additional creature each combat" (Two-Headed Giant of Foriys, Brave the
   Sands' "each creature you control", Echo Circlet's "equipped creature"),

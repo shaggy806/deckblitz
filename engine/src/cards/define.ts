@@ -3062,6 +3062,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * its combat damage among them (510.1d).
    */
   readonly blockAdditional?: number | "any";
+  /** "Can block an additional creature each combat **for each** [permanent]"
+   * (Kemba's Legion's "for each Equipment attached to this creature"): the
+   * battlefield's permanents matching this, read with this permanent as
+   * `"source"` whenever its block limit is — so as blockers are declared
+   * (509.1a, the ruling). In place of `blockAdditional`. */
+  readonly blockAdditionalPer?: CardFilter;
   /**
    * "The 'legend rule' doesn't apply to [the affected permanents]" (rule
    * 704.5j): Sakashima of a Thousand Faces' "to permanents you control" is

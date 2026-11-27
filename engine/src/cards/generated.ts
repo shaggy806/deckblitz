@@ -15385,6 +15385,7 @@ import _poolKelsinkoRanger from "./pool/kelsinko-ranger.js";
 import _poolKembaKhaEnduring from "./pool/kemba-kha-enduring.js";
 import _poolKembaKhaRegent from "./pool/kemba-kha-regent.js";
 import _poolKembasBanner from "./pool/kembas-banner.js";
+import _poolKembasLegion from "./pool/kembas-legion.js";
 import _poolKembasSkyguard from "./pool/kembas-skyguard.js";
 import _poolKemuriOnna from "./pool/kemuri-onna.js";
 import _poolKenessosPriestOfThassa from "./pool/kenessos-priest-of-thassa.js";
@@ -49768,6 +49769,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKembaKhaEnduring,
   _poolKembaKhaRegent,
   _poolKembasBanner,
+  _poolKembasLegion,
   _poolKembasSkyguard,
   _poolKemuriOnna,
   _poolKenessosPriestOfThassa,
@@ -84164,6 +84166,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kemba-kha-enduring": _poolKembaKhaEnduring,
   "pool/kemba-kha-regent": _poolKembaKhaRegent,
   "pool/kembas-banner": _poolKembasBanner,
+  "pool/kembas-legion": _poolKembasLegion,
   "pool/kembas-skyguard": _poolKembasSkyguard,
   "pool/kemuri-onna": _poolKemuriOnna,
   "pool/kenessos-priest-of-thassa": _poolKenessosPriestOfThassa,

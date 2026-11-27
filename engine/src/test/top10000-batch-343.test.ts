@@ -4,6 +4,7 @@
  * (a random discard among the cards a filter allows) and Giant Turtle.
  */
 import { describe, expect, it } from "vitest";
+import { blockLimitOf, invalidateComputedCache } from "../characteristics.js";
 import {
   A,
   B,
@@ -144,6 +145,19 @@ describe("batch 343 (lead)", () => {
     toStep(game, "upkeep");
     settle(game);
     expect(zone(game, aboroth)).toBe("graveyard");
+  });
+
+  it("Kemba's Legion can block one more creature for each Equipment attached to it", () => {
+    const { game } = table();
+    const legion = spawn(game, "Kemba's Legion");
+    expect(blockLimitOf(game.state, game.registry, legion)).toBe(1);
+    for (const name of ["Bonesplitter", "Short Sword"]) {
+      const gear = spawn(game, name);
+      game.state.objects[gear].attachedTo = legion;
+    }
+    spawn(game, "Bonesplitter");
+    invalidateComputedCache();
+    expect(blockLimitOf(game.state, game.registry, legion)).toBe(3);
   });
 
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {

@@ -447,6 +447,7 @@ import _poolKalamaxTheStormsire from "../pool/kalamax-the-stormsire.js";
 import _poolKamiOfJealousThirst from "../pool/kami-of-jealous-thirst.js";
 import _poolKeeperOfTheDead from "../pool/keeper-of-the-dead.js";
 import _poolKelinoreBat from "../pool/kelinore-bat.js";
+import _poolKembasLegion from "../pool/kembas-legion.js";
 import _poolKheruDreadmaw from "../pool/kheru-dreadmaw.js";
 import _poolKillMaimBurn from "../pool/kill-maim-burn.js";
 import _poolKillShot from "../pool/kill-shot.js";
@@ -1497,6 +1498,7 @@ const shard: CardShard = {
     _poolKamiOfJealousThirst,
     _poolKeeperOfTheDead,
     _poolKelinoreBat,
+    _poolKembasLegion,
     _poolKheruDreadmaw,
     _poolKillMaimBurn,
     _poolKillShot,
