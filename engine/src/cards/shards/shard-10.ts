@@ -253,6 +253,7 @@ import _poolDimirInfiltrator from "../pool/dimir-infiltrator.js";
 import _poolDimirSpybug from "../pool/dimir-spybug.js";
 import _poolDirgurNemesis from "../pool/dirgur-nemesis.js";
 import _poolDirtcowlWurm from "../pool/dirtcowl-wurm.js";
+import _poolDiseasedVermin from "../pool/diseased-vermin.js";
 import _poolDisorient from "../pool/disorient.js";
 import _poolDisplacedDinosaurs from "../pool/displaced-dinosaurs.js";
 import _poolDisrupt from "../pool/disrupt.js";
@@ -1327,6 +1328,7 @@ const shard: CardShard = {
     _poolDimirSpybug,
     _poolDirgurNemesis,
     _poolDirtcowlWurm,
+    _poolDiseasedVermin,
     _poolDisorient,
     _poolDisplacedDinosaurs,
     _poolDisrupt,

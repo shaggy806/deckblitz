@@ -7270,6 +7270,7 @@ import _poolDiscovery from "./pool/discovery.js";
 import _poolDiscreetRetreat from "./pool/discreet-retreat.js";
 import _poolDisdainfulStroke from "./pool/disdainful-stroke.js";
 import _poolDiseaseCarriers from "./pool/disease-carriers.js";
+import _poolDiseasedVermin from "./pool/diseased-vermin.js";
 import _poolDisembowel from "./pool/disembowel.js";
 import _poolDisempower from "./pool/disempower.js";
 import _poolDisenchant from "./pool/disenchant.js";
@@ -7773,6 +7774,7 @@ import _poolDreamFighter from "./pool/dream-fighter.js";
 import _poolDreamFracture from "./pool/dream-fracture.js";
 import _poolDreamHalls from "./pool/dream-halls.js";
 import _poolDreamHarvest from "./pool/dream-harvest.js";
+import _poolDreamLeash from "./pool/dream-leash.js";
 import _poolDreamPillager from "./pool/dream-pillager.js";
 import _poolDreamProwler from "./pool/dream-prowler.js";
 import _poolDreamSalvage from "./pool/dream-salvage.js";
@@ -11043,6 +11045,7 @@ import _poolGenePollinator from "./pool/gene-pollinator.js";
 import _poolGenemorphImago from "./pool/genemorph-imago.js";
 import _poolGeneralChangColdWarrior from "./pool/general-chang-cold-warrior.js";
 import _poolGeneralFerrousRokiric from "./pool/general-ferrous-rokiric.js";
+import _poolGeneralJarkeld from "./pool/general-jarkeld.js";
 import _poolGeneralKreatTheBoltbringer from "./pool/general-kreat-the-boltbringer.js";
 import _poolGeneralKudroOfDrannith from "./pool/general-kudro-of-drannith.js";
 import _poolGeneralLeoCristophe from "./pool/general-leo-cristophe.js";
@@ -21888,6 +21891,7 @@ import _poolQuicksilverAmulet from "./pool/quicksilver-amulet.js";
 import _poolQuicksilverBehemoth from "./pool/quicksilver-behemoth.js";
 import _poolQuicksilverBrashBlur from "./pool/quicksilver-brash-blur.js";
 import _poolQuicksilverDagger from "./pool/quicksilver-dagger.js";
+import _poolQuicksilverDragon from "./pool/quicksilver-dragon.js";
 import _poolQuicksilverElemental from "./pool/quicksilver-elemental.js";
 import _poolQuicksilverFisher from "./pool/quicksilver-fisher.js";
 import _poolQuicksilverFountain from "./pool/quicksilver-fountain.js";
@@ -26348,6 +26352,7 @@ import _poolSorinVengefulBloodlord from "./pool/sorin-vengeful-bloodlord.js";
 import _poolSorinsGuide from "./pool/sorins-guide.js";
 import _poolSorinsThirst from "./pool/sorins-thirst.js";
 import _poolSorinsVengeance from "./pool/sorins-vengeance.js";
+import _poolSorrowsPath from "./pool/sorrows-path.js";
 import _poolSosukeSonOfSeshiro from "./pool/sosuke-son-of-seshiro.js";
 import _poolSosukesSummons from "./pool/sosukes-summons.js";
 import _poolSotheraTheSupervoid from "./pool/sothera-the-supervoid.js";
@@ -32491,6 +32496,7 @@ import _poolWibblyWobblyTimeyWimey from "./pool/wibbly-wobbly-timey-wimey.js";
 import _poolWiccanRisingMagician from "./pool/wiccan-rising-magician.js";
 import _poolWiccanYoungAvenger from "./pool/wiccan-young-avenger.js";
 import _poolWickTheWhorledMind from "./pool/wick-the-whorled-mind.js";
+import _poolWickedAkuba from "./pool/wicked-akuba.js";
 import _poolWickedGuardian from "./pool/wicked-guardian.js";
 import _poolWickedPact from "./pool/wicked-pact.js";
 import _poolWickedReward from "./pool/wicked-reward.js";
@@ -41500,6 +41506,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiscreetRetreat,
   _poolDisdainfulStroke,
   _poolDiseaseCarriers,
+  _poolDiseasedVermin,
   _poolDisembowel,
   _poolDisempower,
   _poolDisenchant,
@@ -42003,6 +42010,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDreamFracture,
   _poolDreamHalls,
   _poolDreamHarvest,
+  _poolDreamLeash,
   _poolDreamPillager,
   _poolDreamProwler,
   _poolDreamSalvage,
@@ -45273,6 +45281,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGenemorphImago,
   _poolGeneralChangColdWarrior,
   _poolGeneralFerrousRokiric,
+  _poolGeneralJarkeld,
   _poolGeneralKreatTheBoltbringer,
   _poolGeneralKudroOfDrannith,
   _poolGeneralLeoCristophe,
@@ -56118,6 +56127,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolQuicksilverBehemoth,
   _poolQuicksilverBrashBlur,
   _poolQuicksilverDagger,
+  _poolQuicksilverDragon,
   _poolQuicksilverElemental,
   _poolQuicksilverFisher,
   _poolQuicksilverFountain,
@@ -60578,6 +60588,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSorinsGuide,
   _poolSorinsThirst,
   _poolSorinsVengeance,
+  _poolSorrowsPath,
   _poolSosukeSonOfSeshiro,
   _poolSosukesSummons,
   _poolSotheraTheSupervoid,
@@ -66721,6 +66732,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWiccanRisingMagician,
   _poolWiccanYoungAvenger,
   _poolWickTheWhorledMind,
+  _poolWickedAkuba,
   _poolWickedGuardian,
   _poolWickedPact,
   _poolWickedReward,
@@ -75743,6 +75755,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/discreet-retreat": _poolDiscreetRetreat,
   "pool/disdainful-stroke": _poolDisdainfulStroke,
   "pool/disease-carriers": _poolDiseaseCarriers,
+  "pool/diseased-vermin": _poolDiseasedVermin,
   "pool/disembowel": _poolDisembowel,
   "pool/disempower": _poolDisempower,
   "pool/disenchant": _poolDisenchant,
@@ -76246,6 +76259,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dream-fracture": _poolDreamFracture,
   "pool/dream-halls": _poolDreamHalls,
   "pool/dream-harvest": _poolDreamHarvest,
+  "pool/dream-leash": _poolDreamLeash,
   "pool/dream-pillager": _poolDreamPillager,
   "pool/dream-prowler": _poolDreamProwler,
   "pool/dream-salvage": _poolDreamSalvage,
@@ -79516,6 +79530,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/genemorph-imago": _poolGenemorphImago,
   "pool/general-chang-cold-warrior": _poolGeneralChangColdWarrior,
   "pool/general-ferrous-rokiric": _poolGeneralFerrousRokiric,
+  "pool/general-jarkeld": _poolGeneralJarkeld,
   "pool/general-kreat-the-boltbringer": _poolGeneralKreatTheBoltbringer,
   "pool/general-kudro-of-drannith": _poolGeneralKudroOfDrannith,
   "pool/general-leo-cristophe": _poolGeneralLeoCristophe,
@@ -90361,6 +90376,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/quicksilver-behemoth": _poolQuicksilverBehemoth,
   "pool/quicksilver-brash-blur": _poolQuicksilverBrashBlur,
   "pool/quicksilver-dagger": _poolQuicksilverDagger,
+  "pool/quicksilver-dragon": _poolQuicksilverDragon,
   "pool/quicksilver-elemental": _poolQuicksilverElemental,
   "pool/quicksilver-fisher": _poolQuicksilverFisher,
   "pool/quicksilver-fountain": _poolQuicksilverFountain,
@@ -94821,6 +94837,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sorins-guide": _poolSorinsGuide,
   "pool/sorins-thirst": _poolSorinsThirst,
   "pool/sorins-vengeance": _poolSorinsVengeance,
+  "pool/sorrows-path": _poolSorrowsPath,
   "pool/sosuke-son-of-seshiro": _poolSosukeSonOfSeshiro,
   "pool/sosukes-summons": _poolSosukesSummons,
   "pool/sothera-the-supervoid": _poolSotheraTheSupervoid,
@@ -100964,6 +100981,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wiccan-rising-magician": _poolWiccanRisingMagician,
   "pool/wiccan-young-avenger": _poolWiccanYoungAvenger,
   "pool/wick-the-whorled-mind": _poolWickTheWhorledMind,
+  "pool/wicked-akuba": _poolWickedAkuba,
   "pool/wicked-guardian": _poolWickedGuardian,
   "pool/wicked-pact": _poolWickedPact,
   "pool/wicked-reward": _poolWickedReward,

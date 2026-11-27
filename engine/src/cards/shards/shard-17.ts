@@ -242,6 +242,7 @@ import _poolDragonlordOjutai from "../pool/dragonlord-ojutai.js";
 import _poolDraugrRecruiter from "../pool/draugr-recruiter.js";
 import _poolDreadCharge from "../pool/dread-charge.js";
 import _poolDreadDrone from "../pool/dread-drone.js";
+import _poolDreamLeash from "../pool/dream-leash.js";
 import _poolDrogskolReaver from "../pool/drogskol-reaver.js";
 import _poolDromadPurebred from "../pool/dromad-purebred.js";
 import _poolDrossProwler from "../pool/dross-prowler.js";
@@ -1309,6 +1310,7 @@ const shard: CardShard = {
     _poolDraugrRecruiter,
     _poolDreadCharge,
     _poolDreadDrone,
+    _poolDreamLeash,
     _poolDrogskolReaver,
     _poolDromadPurebred,
     _poolDrossProwler,

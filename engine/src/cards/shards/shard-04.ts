@@ -993,6 +993,7 @@ import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhirlpoolWhelm from "../pool/whirlpool-whelm.js";
 import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
 import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
+import _poolWickedAkuba from "../pool/wicked-akuba.js";
 import _poolWickedVisitor from "../pool/wicked-visitor.js";
 import _poolWildGuess from "../pool/wild-guess.js";
 import _poolWildfireDevils from "../pool/wildfire-devils.js";
@@ -2043,6 +2044,7 @@ const shard: CardShard = {
     _poolWhirlpoolWhelm,
     _poolWhispersilkCloak,
     _poolWhiteGloveGourmand,
+    _poolWickedAkuba,
     _poolWickedVisitor,
     _poolWildGuess,
     _poolWildfireDevils,

@@ -361,6 +361,7 @@ import _poolGarrukUnleashed from "../pool/garruk-unleashed.js";
 import _poolGatebreakerRam from "../pool/gatebreaker-ram.js";
 import _poolGavonyIronwright from "../pool/gavony-ironwright.js";
 import _poolGeistwave from "../pool/geistwave.js";
+import _poolGeneralJarkeld from "../pool/general-jarkeld.js";
 import _poolGeneratedHorizons from "../pool/generated-horizons.js";
 import _poolGhostsOfTheDamned from "../pool/ghosts-of-the-damned.js";
 import _poolGhoulsNightOut from "../pool/ghouls-night-out.js";
@@ -1427,6 +1428,7 @@ const shard: CardShard = {
     _poolGatebreakerRam,
     _poolGavonyIronwright,
     _poolGeistwave,
+    _poolGeneralJarkeld,
     _poolGeneratedHorizons,
     _poolGhostsOfTheDamned,
     _poolGhoulsNightOut,

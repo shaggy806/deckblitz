@@ -652,6 +652,7 @@ import _poolQContinuum from "../pool/q-continuum.js";
 import _poolQonosQuartermaster from "../pool/qonos-quartermaster.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
 import _poolQuickling from "../pool/quickling.js";
+import _poolQuicksilverDragon from "../pool/quicksilver-dragon.js";
 import _poolQuicksilverGeyser from "../pool/quicksilver-geyser.js";
 import _poolQuicksilverSpeedster from "../pool/quicksilver-speedster.js";
 import _poolQuicksmithGenius from "../pool/quicksmith-genius.js";
@@ -1712,6 +1713,7 @@ const shard: CardShard = {
     _poolQonosQuartermaster,
     _poolQuarryBeetle,
     _poolQuickling,
+    _poolQuicksilverDragon,
     _poolQuicksilverGeyser,
     _poolQuicksilverSpeedster,
     _poolQuicksmithGenius,
