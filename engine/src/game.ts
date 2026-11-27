@@ -31115,6 +31115,17 @@ export class Game {
       // One outcome, or none: nothing to ask.
       manaColors = picks[0];
     }
+    // "If this ability has been activated four or more times this turn"
+    // (Initiates of the Ebon Hand): counted as it's activated, this one among
+    // them — once, not again as a recipient's picks come back.
+    const countKey = this.noteManaAbilityActivation(
+      sourceId,
+      player,
+      ability,
+      abilityIndex ?? this.effectiveActivated(sourceId).indexOf(ability),
+      grantedAbility,
+      !pickedByRecipient,
+    );
     const base = this.makeResolutionContext(
       sourceId,
       player,
@@ -31129,7 +31140,10 @@ export class Game {
         ...(paidSets !== undefined ? { sets: paidSets } : {}),
         ...(manaGranter !== undefined ? { granter: manaGranter } : {}),
       },
-      revealSince !== undefined ? { since: revealSince } : {},
+      {
+        ...(revealSince !== undefined ? { since: revealSince } : {}),
+        ...(countKey !== undefined ? { abilityKey: countKey } : {}),
+      },
     );
     // The colour(s) the activating player picked, one per unit whose type
     // was theirs to pick: an "any color" / "any combination of" ability's
@@ -32557,6 +32571,7 @@ export class Game {
           ...(tagOf === undefined ? {} : { tag: tagOf }),
           ...(ability.cost.tap ? {} : { untapped: true as const }),
           ...(ability.oncePerTurn === true ? { oncePerTurn: abilityIndex } : {}),
+          ...(this.readsActivationCount(ability) ? { countsActivation: abilityIndex } : {}),
           ...(ability.effect.also !== undefined ? { rider: ability.effect.also } : {}),
           ...(first !== undefined ? { first } : {}),
           ...(ability.cost.addCounter !== undefined ? { counterCost: ability.cost.addCounter } : {}),
@@ -33606,9 +33621,19 @@ export class Game {
     }
     // What else the mana ability does (`add-mana`'s `also`), "that color"
     // the first unit it made, as by hand (Foraging Wickermaw).
+    // "If this ability has been activated four or more times this turn"
+    // (Initiates of the Ebon Hand): this activation counted, as by hand.
+    const countIndex = step.countsActivation;
+    const countKey =
+      countIndex === undefined
+        ? undefined
+        : this.manaAbilityTurnKey(sourceId, countIndex, this.activatedRefFor(sourceId, countIndex));
+    if (countKey !== undefined) this.journal({ kind: "activated", player, object: sourceId, ability: countKey });
     if (step.rider !== undefined) {
       const made = own > 0 ? step.mana[0] : undefined;
-      const ctx = this.makeResolutionContext(sourceId, player, []);
+      const ctx = this.makeResolutionContext(sourceId, player, [], 0, 0, undefined, 1, 0, [], {}, {
+        ...(countKey !== undefined ? { abilityKey: countKey } : {}),
+      });
       applyEffectSpec(step.rider, made !== undefined ? { ...ctx, manaColor: made } : ctx);
     }
     this.applyManaExtraRiders(extraRiders, sourceId, player);
@@ -37151,6 +37176,44 @@ export class Game {
         ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
         : `${chapter ? "chapter" : "triggered"}:${sameAbilityIndex(same, abilityIndex)}`;
     return `${sourceId}@${source?.zoneChangeCount ?? 0}#${which}`;
+  }
+
+  /** {@link abilityTurnKey} for a mana ability, which never goes on the stack
+   * (rule 605.3b), so has no object of its own: the ability by its index
+   * among its source's (or by the static that grants it), on its source's
+   * stint (rule 400.7) — "if this ability has been activated four or more
+   * times this turn" (Initiates of the Ebon Hand). Undefined for one whose
+   * index isn't known. */
+  private manaAbilityTurnKey(
+    sourceId: ObjectId,
+    abilityIndex: number,
+    granted: GrantedAbilityRef | undefined,
+  ): string | undefined {
+    const which =
+      granted?.kind === "static"
+        ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
+        : abilityIndex >= 0
+          ? `activated:${abilityIndex}`
+          : undefined;
+    if (which === undefined) return undefined;
+    return `${sourceId}@${this.state.objects[sourceId]?.zoneChangeCount ?? 0}#${which}`;
+  }
+
+  /** Journal one activation of a mana ability that asks how many times it has
+   * been activated this turn, and give its key (`manaAbilityTurnKey`) for the
+   * condition to read; undefined for any other. */
+  private noteManaAbilityActivation(
+    sourceId: ObjectId,
+    player: PlayerId,
+    ability: ActivatedAbility,
+    abilityIndex: number,
+    granted: GrantedAbilityRef | undefined,
+    journal: boolean,
+  ): string | undefined {
+    if (!this.readsActivationCount(ability)) return undefined;
+    const key = this.manaAbilityTurnKey(sourceId, abilityIndex, granted);
+    if (key !== undefined && journal) this.journal({ kind: "activated", player, object: sourceId, ability: key });
+    return key;
   }
 
   private abilityTurnKey(object: GameObject): string | undefined {

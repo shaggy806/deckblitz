@@ -8172,6 +8172,9 @@ clause (section 9):
   Every activation counts as it's made, resolved or not, the resolving one
   included; per ability of one object, restarting each turn and with a zone
   change. Only meaningful inside the activated ability's own `conditional`.
+  On a mana ability it goes in `add-mana`'s `also` (Initiates of the Ebon
+  Hand: `{1}: Add {B}. If this ability has been activated four or more
+  times…`), counted as it resolves, by hand or by the auto-payer.
 - `{ kind: "this-ability-did-this-turn" }` — this ability has done its thing
   this turn, as its effect recorded it: an `add-mana` with
   `marksAbilityDone: true` that added at least one mana (an amount of 0 adds

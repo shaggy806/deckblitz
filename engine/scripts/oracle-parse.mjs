@@ -9230,6 +9230,10 @@ export function parseSentence(sentence, ctx) {
   if (/^destroy ~ at the beginning of the next end step\.$/i.test(s)) {
     return { kind: "delayed-trigger", at: { step: "end" }, text: "Destroy ~.", effect: { kind: "destroy", target: "source" } };
   }
+  // Dragon Whelp, Initiates of the Ebon Hand: this object only (rule 400.7).
+  if (/^sacrifice ~ at the beginning of the next end step\.$/i.test(s)) {
+    return { kind: "delayed-trigger", at: { step: "end" }, effect: { kind: "sacrifice-source" }, text: "Sacrifice ~." };
+  }
   // "Then discard a card unless you attacked this turn" (Chart a Course),
   // "… unless there are five or more mana values among cards in your
   // graveyard" (Tainted Indulgence): any condition the intervening-ifs read.

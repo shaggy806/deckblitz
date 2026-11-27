@@ -11649,6 +11649,25 @@ describe("activation counts this turn", () => {
     });
   });
 
+  it("reads the count on a mana ability, its sacrifice riding on the mana (Initiates of the Ebon Hand)", () => {
+    const card = face(
+      "Test Initiates",
+      "Creature — Cleric",
+      "{1}: Add {B}. If this ability has been activated four or more times this turn, sacrifice this creature at the beginning of the next end step.",
+    );
+    expect(card.complete).toBe(true);
+    expect(card.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "B",
+      amount: 1,
+      also: {
+        kind: "conditional",
+        condition: { kind: "activated-this-turn", atLeast: 4 },
+        then: { kind: "delayed-trigger", at: { step: "end" }, effect: { kind: "sacrifice-source" }, text: "Sacrifice ~." },
+      },
+    });
+  });
+
 });
 
 describe("cards outside the battlefield", () => {
