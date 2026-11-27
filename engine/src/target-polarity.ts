@@ -122,6 +122,11 @@ function sweptWithTarget(filter: CardFilter, v: Visit): void {
     v.touch(slot, "harm", DECISIVE);
   }
   v.touch(filter.attachedToObject, "either", MINOR);
+  // "All creatures blocking or blocked by target creature" (Trial): the ones
+  // in combat with the target are the other side's, whichever side it's on —
+  // the board's call.
+  const relationOf = filter.blockingRelation?.of;
+  if (typeof relationOf === "number") v.touch(relationOf, "either", MINOR);
 }
 
 /** Counters that are bad to have. Everything else a targeted `add-counter`
