@@ -3352,7 +3352,8 @@
   "effect:aura-becomes-non-aura-enchantment",
   "effect:temporary-counter-addend",
   "effect:lose-specific-ability",
-  "effect:temporary-counter-addend"
+  "effect:temporary-counter-addend",
+  "replacement:prevent-damage-between-creatures-sharing-color"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

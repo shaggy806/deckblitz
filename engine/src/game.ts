@@ -70324,6 +70324,16 @@ controlledBy,
     ) {
       return false;
     }
+    if (r.sharesColorWithRecipient === true) {
+      // "To a creature by another creature if they share a color" (Well-Laid
+      // Plans): the source as it is, or as it last existed.
+      if (target.kind !== "object" || target.object === source) return false;
+      const from: Iterable<Color> =
+        sourceLastKnown?.colors ??
+        (this.state.objects[source] === undefined ? [] : computeCharacteristics(this.state, this.registry, source).colors);
+      const to = computeCharacteristics(this.state, this.registry, target.object).colors;
+      if (![...from].some((color) => to.has(color))) return false;
+    }
     if (r.source === undefined) return true;
     return (
       (sourceLastKnown !== undefined || this.state.objects[source] !== undefined) &&

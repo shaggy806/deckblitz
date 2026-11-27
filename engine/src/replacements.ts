@@ -1456,6 +1456,12 @@ export interface DamageMultiplierReplacement {
    * creatures you control" is `{ type: "creature", attacking: true,
    * controlledBy: "you" }` with `prevent`. Never a player. */
   readonly toFilter?: CardFilter;
+  /** Only damage from a source to **another** permanent that shares a colour
+   * with it, each as it is as the damage would be dealt (the source as it
+   * last existed, if it has left) — Well-Laid Plans' "prevent all damage that
+   * would be dealt to a creature by another creature if they share a color",
+   * with `source` and `toFilter` both `{ type: "creature" }`. Never a player. */
+  readonly sharesColorWithRecipient?: true;
   /**
    * "You **may** prevent …" (Battletide Alchemist's "if a source would deal
    * damage to a player, you may prevent X of that damage"): this permanent's
