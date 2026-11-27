@@ -19,6 +19,7 @@
     "trigger:player-puts-onto-battlefield",
     "condition:was-nth-spell-cast-this-turn",
     "trigger:solves-case",
+    "trigger:becomes-target-of-backup-ability",
     "cost:x-equals-chosen-opponent-hand",
     "static:grant-optional-x-additional-cost-to-spells",
     "cost:cost-reduction-per-opponent-attacked",

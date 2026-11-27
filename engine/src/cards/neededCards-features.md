@@ -376,6 +376,13 @@ The key `trigger:solves-case`: a `TRIGGER_EVENTS` row on `case-solved`, the Case
 (24377), with `spendManaAs.spell: { subtype: "Case" }`. The scaffolder reads "When ~ enters and whenever …" as two
 triggers. `test/solves-case.test.ts`.
 
+### Becomes the target of a backup ability — built 2026-11-27
+
+The key `trigger:becomes-target-of-backup-ability`: `becomes-target`'s `abilityKeyword`, a triggered ability stamped
+`keywordOf` that keyword; the `backup()` helper now stamps `keywordOf: "backup"` (`KeywordAbilityName`). Mirror-Shield
+Hoplite (24534), copying it with `objectIsTargeter` and `copy-ability`'s `newTargets`.
+`test/backup-ability-target.test.ts`.
+
 ### If it exploited that creature — built 2026-11-26
 
 The key `condition:exploited-that-creature`: the journal's `sacrificed` entry keeps the creature whose exploit ability

@@ -1767,6 +1767,10 @@ export type TriggerKind =
        * only an activated ability, never a triggered one: "become the target
        * of an activated ability" (Professor Hojo). */
       readonly abilityOnly?: true | "activated";
+      /** Only a triggered ability of this keyword (`TriggeredAbility.keywordOf`)
+       * — "becomes the target of **a backup ability**" (Mirror-Shield
+       * Hoplite: `"backup"`, rule 702.165a), whoever's. Never a spell. */
+      readonly abilityKeyword?: KeywordAbilityName;
       /** "Becomes the target of an ability **that targets only it**" (Agrus
        * Kos, Eternal Soldier): every target the spell or ability has, as it's
        * put on the stack, is this permanent — one object, chosen in several

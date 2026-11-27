@@ -2435,6 +2435,11 @@ export function parseTrigger(clause) {
   }
   // Rule 719.3a: a Case of yours becoming solved (Case File Auditor).
   if (c === "Whenever you solve a Case") return [{ on: "event", event: "solves-case", who: "you-control" }];
+  // A backup ability (rule 702.165a) aimed at it (Mirror-Shield Hoplite):
+  // "copy that ability" copies the trigger object.
+  if (c === "Whenever a creature you control becomes the target of a backup ability") {
+    return [{ on: "becomes-target", who: "you-control", filter: { type: "creature" }, abilityKeyword: "backup", objectIsTargeter: true }];
+  }
   // The renowned designation (rule 702.112b) becoming true.
   if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "self" }];
   if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];

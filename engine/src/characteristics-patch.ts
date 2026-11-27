@@ -23,7 +23,7 @@ import type { PtModifier } from "./state.js";
  * creature mentors a creature" — rule 702.134c, `mentored`), and a count
  * can read its value ("+1/+1 for each point of bushido it has" — Takeno,
  * Samurai General: `grantPtPerCount.ofAffected: "bushido"`). */
-export type KeywordAbilityName = "vanishing" | "soulbond" | "modular" | "mentor" | "bushido";
+export type KeywordAbilityName = "vanishing" | "soulbond" | "modular" | "mentor" | "bushido" | "backup";
 
 /** Layer 4: card types, subtypes and supertypes (rules 205, 613.1d). */
 export interface TypePatch {

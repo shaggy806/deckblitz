@@ -26313,4 +26313,10 @@ describe("the triggers-journal lane's picks, 2026-11-27", () => {
     });
     expect(parsed.static[0]).toMatchObject({ spendManaAs: { as: "any-color", spell: { subtype: "Case" } } });
   });
+
+  it("Mirror-Shield Hoplite: becomes the target of a backup ability", () => {
+    expect(parseTrigger("Whenever a creature you control becomes the target of a backup ability")).toEqual([
+      { on: "becomes-target", who: "you-control", filter: { type: "creature" }, abilityKeyword: "backup", objectIsTargeter: true },
+    ]);
+  });
 });

@@ -40673,7 +40673,13 @@ export class Game {
               matchesFilter(this.state, this.registry, event.stackObject, spec.spellFilter, { you: self.controller }))) &&
           (spec.abilityOnly === undefined || !event.bySpell) &&
           // "… of an activated ability" (Professor Hojo): never a triggered one.
-          (spec.abilityOnly !== "activated" || this.state.objects[event.stackObject]?.abilityKind === "activated");
+          (spec.abilityOnly !== "activated" || this.state.objects[event.stackObject]?.abilityKind === "activated") &&
+          // "… of a backup ability" (Mirror-Shield Hoplite): a triggered
+          // ability the keyword is printed as (`keywordOf`).
+          (spec.abilityKeyword === undefined ||
+            (!event.bySpell &&
+              this.state.objects[event.stackObject]?.abilityKind === "triggered" &&
+              (this.stackAbilityOf(this.state.objects[event.stackObject]) as Partial<TriggeredAbility>).keywordOf === spec.abilityKeyword));
         if (event.type === "player-targeted") {
           if (spec.onlyTargetingIt === true) return false;
           // "Whenever you become the target" (Amulet of Safekeeping), "a

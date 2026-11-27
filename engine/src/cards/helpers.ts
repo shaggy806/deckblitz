@@ -396,6 +396,8 @@ export const backup = (
     ),
   ];
   return {
+    // "Becomes the target of a backup ability" (Mirror-Shield Hoplite).
+    keywordOf: "backup",
     trigger: { on: "enters-battlefield", who: "self" },
     targets: ["creature"],
     effect: {
