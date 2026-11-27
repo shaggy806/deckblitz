@@ -791,6 +791,7 @@ import _poolRushOfInspiration from "../pool/rush-of-inspiration.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
 import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.js";
 import _poolSalvageDrone from "../pool/salvage-drone.js";
+import _poolSalvageTitan from "../pool/salvage-titan.js";
 import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
 import _poolSandbenderScavengers from "../pool/sandbender-scavengers.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
@@ -1898,6 +1899,7 @@ const shard: CardShard = {
     _poolSageOfTheMaze,
     _poolSaheeliConsulOfOversight,
     _poolSalvageDrone,
+    _poolSalvageTitan,
     _poolSalvagerOfSecrets,
     _poolSandbenderScavengers,
     _poolSandsOfDelirium,

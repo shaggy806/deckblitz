@@ -894,6 +894,7 @@ import _poolTheTarrasque from "../pool/the-tarrasque.js";
 import _poolTheWarringTriad from "../pool/the-warring-triad.js";
 import _poolTheWitchsVanity from "../pool/the-witchs-vanity.js";
 import _poolTheWorldTree from "../pool/the-world-tree.js";
+import _poolThijarianWitness from "../pool/thijarian-witness.js";
 import _poolThisIsHowItEnds from "../pool/this-is-how-it-ends.js";
 import _poolThornado from "../pool/thornado.js";
 import _poolThornwealdArcher from "../pool/thornweald-archer.js";
@@ -1953,6 +1954,7 @@ const shard: CardShard = {
     _poolTheWarringTriad,
     _poolTheWitchsVanity,
     _poolTheWorldTree,
+    _poolThijarianWitness,
     _poolThisIsHowItEnds,
     _poolThornado,
     _poolThornwealdArcher,

@@ -985,6 +985,7 @@ import _poolVindictiveFlamestoker from "../pool/vindictive-flamestoker.js";
 import _poolVirtueOfCourage from "../pool/virtue-of-courage.js";
 import _poolVivienOnTheHunt from "../pool/vivien-on-the-hunt.js";
 import _poolVizierOfRemedies from "../pool/vizier-of-remedies.js";
+import _poolVizkopaConfessor from "../pool/vizkopa-confessor.js";
 import _poolVoicelessSpirit from "../pool/voiceless-spirit.js";
 import _poolVoidslime from "../pool/voidslime.js";
 import _poolVolatileClaws from "../pool/volatile-claws.js";
@@ -2048,6 +2049,7 @@ const shard: CardShard = {
     _poolVirtueOfCourage,
     _poolVivienOnTheHunt,
     _poolVizierOfRemedies,
+    _poolVizkopaConfessor,
     _poolVoicelessSpirit,
     _poolVoidslime,
     _poolVolatileClaws,

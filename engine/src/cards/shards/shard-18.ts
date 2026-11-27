@@ -903,6 +903,7 @@ import _poolThunderingCeratok from "../pool/thundering-ceratok.js";
 import _poolThunderousVelocipede from "../pool/thunderous-velocipede.js";
 import _poolThunderousWrath from "../pool/thunderous-wrath.js";
 import _poolThundersongTrumpeter from "../pool/thundersong-trumpeter.js";
+import _poolTidalControl from "../pool/tidal-control.js";
 import _poolTifaMartialArtist from "../pool/tifa-martial-artist.js";
 import _poolTimeWarp from "../pool/time-warp.js";
 import _poolTimelessWitness from "../pool/timeless-witness.js";
@@ -1956,6 +1957,7 @@ const shard: CardShard = {
     _poolThunderousVelocipede,
     _poolThunderousWrath,
     _poolThundersongTrumpeter,
+    _poolTidalControl,
     _poolTifaMartialArtist,
     _poolTimeWarp,
     _poolTimelessWitness,

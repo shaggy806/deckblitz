@@ -255,6 +255,7 @@ import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDinrovaHorror from "../pool/dinrova-horror.js";
 import _poolDisembowel from "../pool/disembowel.js";
+import _poolDisplayOfDominance from "../pool/display-of-dominance.js";
 import _poolDisruptorPistol from "../pool/disruptor-pistol.js";
 import _poolDissipationField from "../pool/dissipation-field.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
@@ -1323,6 +1324,7 @@ const shard: CardShard = {
     _poolDihadaBinderOfWills,
     _poolDinrovaHorror,
     _poolDisembowel,
+    _poolDisplayOfDominance,
     _poolDisruptorPistol,
     _poolDissipationField,
     _poolDivineSmite,

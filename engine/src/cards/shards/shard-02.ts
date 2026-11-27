@@ -1043,6 +1043,7 @@ import _poolWojekSiren from "../pool/wojek-siren.js";
 import _poolWoodlandSleuth from "../pool/woodland-sleuth.js";
 import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
+import _poolWormfangCrab from "../pool/wormfang-crab.js";
 import _poolWritOfPassage from "../pool/writ-of-passage.js";
 import _poolYannikScavengingSentinel from "../pool/yannik-scavenging-sentinel.js";
 import _poolYunasDecision from "../pool/yunas-decision.js";
@@ -2113,6 +2114,7 @@ const shard: CardShard = {
     _poolWoodlandSleuth,
     _poolWoollyLoxodon,
     _poolWoollyThoctar,
+    _poolWormfangCrab,
     _poolWritOfPassage,
     _poolYannikScavengingSentinel,
     _poolYunasDecision,

@@ -455,6 +455,7 @@ import _poolHorizonExplorer from "../pool/horizon-explorer.js";
 import _poolHornedStoneseeker from "../pool/horned-stoneseeker.js";
 import _poolHouseCartographer from "../pool/house-cartographer.js";
 import _poolHulkingDevil from "../pool/hulking-devil.js";
+import _poolHumOfTheRadix from "../pool/hum-of-the-radix.js";
 import _poolHumanFrailty from "../pool/human-frailty.js";
 import _poolHungryRidgewolf from "../pool/hungry-ridgewolf.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
@@ -1585,6 +1586,7 @@ const shard: CardShard = {
     _poolHornedStoneseeker,
     _poolHouseCartographer,
     _poolHulkingDevil,
+    _poolHumOfTheRadix,
     _poolHumanFrailty,
     _poolHungryRidgewolf,
     _poolHuntedHorror,
