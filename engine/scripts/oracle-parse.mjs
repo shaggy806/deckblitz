@@ -10206,6 +10206,24 @@ function paidAndBid(text, ctx) {
       each: { kind: "create-token", token, count: "x", who: "that-player" },
     };
   }
+  // "Pay any amount of life. Target opponent reveals that many cards from
+  // their hand. You choose one of them and exile it." (Vizkopa Confessor):
+  // the life paid is the `"x"` the reveal reads.
+  const confessor = /^Pay any amount of life\. (Target opponent|Target player) reveals that many cards from their hand\. You choose one of them and exile it\.$/.exec(text);
+  if (confessor) {
+    return {
+      kind: "players-pay-any-amount",
+      resource: "life",
+      who: "you",
+      then: {
+        kind: "discard-chosen",
+        target: ctx.target(confessor[1] === "Target opponent" ? "opponent" : "player"),
+        reveals: "x",
+        destination: "exile",
+        unlinked: true,
+      },
+    };
+  }
   const vermin = /^Starting with you, each player may pay any amount of life\. Repeat this process until no one pays life\. Each player creates a (.+? creature) token for each 1 life they paid this way\.$/.exec(text);
   if (vermin) {
     const token = ctx.tokenFor?.(`${vermin[1]} token`);

@@ -25971,3 +25971,26 @@ describe("a spell cost increase counted for the caster", () => {
   });
 });
 
+describe("life paid, then that many cards revealed", () => {
+  it("Vizkopa Confessor: the reveal reads the life paid", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human Cleric",
+      mana_cost: "{3}{W}{B}",
+      power: "1",
+      toughness: "3",
+      oracle_text:
+        "When this creature enters, pay any amount of life. Target opponent reveals that many cards from their hand. You choose one of them and exile it.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      targets: ["opponent"],
+      effect: {
+        kind: "players-pay-any-amount",
+        resource: "life",
+        who: "you",
+        then: { kind: "discard-chosen", target: 0, reveals: "x", destination: "exile" },
+      },
+    });
+  });
+});
+
