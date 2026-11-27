@@ -24,6 +24,7 @@
     "static:grant-optional-x-additional-cost-to-spells",
     "effect:exchange-control-greatest-per-player",
     "effect:backup-grants-static",
+    "condition:prevented-source-filter",
     "cost:cost-reduction-per-opponent-attacked",
     "replacement:land-mana-instead-tapper-chooses",
     "condition:unattached-from-filter",
