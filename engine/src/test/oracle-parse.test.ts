@@ -25878,6 +25878,21 @@ describe("the player with the lowest life total, and a colour become", () => {
       effect: { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { kind: "choose-value", value: "color" }] },
     });
   });
+
+  it("Doomsday Specter: look at that player's hand, choose a card, the player discards it", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Specter",
+      mana_cost: "{2}{U}{B}",
+      oracle_text:
+        "Whenever this creature deals combat damage to a player, look at that player's hand and choose a card from it. The player discards that card.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      trigger: { on: "deals-combat-damage-to-player", who: "self" },
+      effect: { kind: "discard-chosen", target: "trigger-player", lookOnly: true },
+    });
+    expect(parsed.complete).toBe(true);
+  });
 });
 
 describe("parseFace: combat-targeting lane, 2026-11-26", () => {

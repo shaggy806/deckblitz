@@ -16507,6 +16507,19 @@ function revealedHandChoiceAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "Look at target player's hand and choose a card from it. That player
+  // discards that card." (Seer's Vision), and a trigger's "look at **that
+  // player's** hand … The player discards that card." (Doomsday Specter):
+  // the player the trigger names.
+  const lookOne = /^look at (target opponent|target player|that player)'s hand and choose a card from it\.$/i.exec(sentences[i]);
+  if (lookOne !== null && /^(?:that|the) player discards that card\.$/i.test(sentences[i + 1] ?? "")) {
+    const named = lookOne[1].toLowerCase();
+    const whose =
+      named === "that player"
+        ? ctx?.thatPlayer
+        : ctx.target(named === "target opponent" ? "opponent" : "player");
+    if (whose !== undefined) return { effect: { kind: "discard-chosen", target: whose, lookOnly: true }, used: 2 };
+  }
   // "Each opponent reveals their hand. For each opponent, exile a creature card
   // they revealed this way until ~ leaves the battlefield." (Valki, God of
   // Lies, rule 610.3): every hand revealed, then one card from each.

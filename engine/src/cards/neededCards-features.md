@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Look at that player's hand and choose a discard — found built 2026-11-26
+
+The key `effect:discard-chosen-trigger-player` needed no engine code: `discard-chosen` already takes a `PlayerRef`
+(`target: "trigger-player"`, `lookOnly: true`). Doomsday Specter (23320). The scaffolder now reads "look at
+(target player's | target opponent's | that player's) hand and choose a card from it. (That | The) player discards
+that card." `test/discard-chosen-trigger-player.test.ts`.
+
 ### The number of permanents is odd or even — built 2026-11-26
 
 The key `condition:permanent-count-parity`: the condition `{ kind: "amount-parity", amount, parity }`, any amount odd
