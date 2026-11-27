@@ -1163,6 +1163,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     } else if (n.to?.target !== undefined) {
       v.touch(n.to.target, "help", MINOR);
     }
+    // Radiance's "target creature and each other creature that shares a
+    // color with it" (Wojek Apothecary): the target is shielded too.
+    if (n.redirectTo === undefined) v.touch(n.to?.permanents?.sharesColorWith, "help", MINOR);
     if (n.by?.target !== undefined) v.touch(n.by.target, "harm", MINOR);
     if (n.by !== undefined && "exceptTarget" in n.by) v.touch(n.by.exceptTarget, "help", MINOR);
     v.child(n.then);
