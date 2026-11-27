@@ -12,6 +12,7 @@
     "filter:same-name-as-spell-cast-this-turn",
     "trigger:artifact-tapped-or-untapped-cost-activation",
     "amount:power-of-card-exiled-this-way",
+    "bug:controller-of-target-countered-copy",
     "effect:choose-from-revealed-hand-without-moving",
     "effect:cast-now-from-each-opponent-graveyard",
     "effect:reveal-until-then-keeps-targets",
