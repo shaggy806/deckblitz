@@ -4,6 +4,26 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-26 — Five Skarrgan Hellkite pings at a creature four kill
+
+Status: fixed 2026-11-26. Scenario: "a batch of Skarrgan Hellkite pings at one creature stops once
+the pings on the stack are lethal" (gate; fails without the fix).
+
+Found by `bot:flags` in local bot games (four starter decks, seed 1, on the live clock), and caught
+with `--keep` after the user asked to keep hunting: alice's Skarrgan Hellkite activated five times
+at a 5/7 Dragonlord Dromoka, sacrificing three Treasures for the mana. Four pings killed it; the
+first, at the bottom of the stack, fizzled. Earlier flags of the same kind (Felothar, Zurgo,
+Weathered Sentinels) were the same mistake. Rebuilt from the kept position, v2 stacked five every
+time, at the live clock and on count budgets.
+
+**Why:** v2's search scored a *batch* of activations (`nextInBatch`, unspread): the same activation
+repeated "while its targets are still legal". A target stays legal until the first activation
+aimed at it resolves, and the batch stacks them all first, so it repeated until the mana ran out.
+
+**Fix:** `lethalAlreadyStacked` stops the batch once this ability's activations already on the
+stack deal lethal damage to its one creature target (each one's `division`, or the printed
+damage; any, from a deathtouch source).
+
 ## 2026-11-26 — Mox Diamond with no land in hand, Backdraft with no sorcery cast
 
 Status: fixed 2026-11-26. Test: `casts-that-do-nothing.test.ts`.

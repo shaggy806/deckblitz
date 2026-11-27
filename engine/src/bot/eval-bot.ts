@@ -37,7 +37,7 @@ import { matchesFilter } from "../filter.js";
 import type { CardFilter } from "../filter.js";
 import { manaValue, parseManaCost } from "../mana.js";
 import { delayedDeadlineToPay } from "./delayed-deadline.js";
-import { computeCharacteristics, playerProtectedFrom, withComputedCache } from "../characteristics.js";
+import { computeCharacteristics, lethalDamageLeft, playerProtectedFrom, withComputedCache } from "../characteristics.js";
 import { whyCannotAttack } from "../combat/eligibility.js";
 import { Game } from "../game.js";
 import { withHiddenCards } from "./determinize.js";
@@ -2736,6 +2736,45 @@ export class EvalBotController extends HeuristicBotController {
    * is left to aim at, or the best of it is on the wrong side of the table
    * (the Ooze with only our own graveyard left).
    */
+  /**
+   * Whether the damage this ability's activations already on the stack deal
+   * to `previous`'s one creature target is lethal to it (rule 120.6,
+   * `lethalDamageLeft`; any of it from a deathtouch source, 702.2c): each
+   * one's share by its `division`, or the ability's printed damage.
+   */
+  private lethalAlreadyStacked(state: GameState, previous: Extract<Action, { type: "activate-ability" }>): boolean {
+    const refs = (previous.targets ?? []).filter((t) => t !== null && t !== undefined);
+    if (refs.length !== 1 || refs[0].kind !== "object") return false;
+    const target = refs[0].object;
+    const creature = state.objects[target];
+    if (creature === undefined || creature.zone !== "battlefield") return false;
+    const chars = computeCharacteristics(state, this.cards, target);
+    if (!chars.types.includes("creature")) return false;
+    const source = state.objects[previous.source];
+    if (source === undefined || !this.cards.has(rulesTextName(source))) return false;
+    const ability = this.cards.get(rulesTextName(source)).activated[previous.abilityIndex];
+    if (ability === undefined) return false;
+    const effect = ability.effect as { kind?: string; amount?: unknown } | null;
+    const printed =
+      effect?.kind === "damage" && typeof effect.amount === "number"
+        ? effect.amount
+        : effect?.kind === "damage-divided" && typeof ability.divided?.total === "number"
+          ? ability.divided.total
+          : null;
+    if (printed === null) return false;
+    let pending = 0;
+    for (const id of state.zones.shared.stack) {
+      const object = state.objects[id];
+      if (object?.kind !== "ability" || object.sourceObjectId !== previous.source || object.abilityIndex !== previous.abilityIndex) continue;
+      const slot = (object.targets ?? []).findIndex((t) => t?.kind === "object" && t.object === target);
+      if (slot < 0) continue;
+      pending += object.division?.[slot] ?? printed;
+    }
+    if (pending === 0) return false;
+    const deathtouch = computeCharacteristics(state, this.cards, previous.source).keywords.has("deathtouch");
+    return deathtouch || pending >= lethalDamageLeft(chars, creature.damageMarked ?? 0);
+  }
+
   private nextInBatch(
     state: GameState,
     legal: readonly LegalAction[],
@@ -2763,6 +2802,12 @@ export class EvalBotController extends HeuristicBotController {
             (option) => JSON.stringify(option) === JSON.stringify(target),
           ),
       );
+      // A target stays legal until the first activation aimed at it
+      // resolves, so "while legal" stacked every activation the mana paid
+      // for: five Skarrgan Hellkite pings at a 5/7 Dragonlord Dromoka, the
+      // first fizzling under the four that killed it (bot:flags, 2026-11-26).
+      // Not once the damage already on the stack at it is lethal.
+      if (stillLegal && this.lethalAlreadyStacked(state, previous)) return null;
       return stillLegal ? previous : null;
     }
     // What this ability's activations on the stack are already aimed at.

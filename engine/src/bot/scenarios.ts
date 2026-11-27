@@ -8527,6 +8527,30 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  {
+    name: "a batch of Skarrgan Hellkite pings at one creature stops once the pings on the stack are lethal",
+    rule: "A target stays legal until a ping resolves: stack only as many as kill it, not every one the mana pays for.",
+    run(weights, registry, makeBot) {
+      // Found by bot:flags in a local game (2026-11-26): five pings at a
+      // 5/7 Dragonlord Dromoka, the first fizzling under the four that
+      // killed it — the batch repeated "while the target is legal".
+      const game = table(registry, [A, B, C, D], A);
+      const hellkite = onBoard(game, "Skarrgan Hellkite", A);
+      game.state.objects[hellkite].counters["+1/+1"] = 1;
+      lands(game, "Mountain", A, 20);
+      const wurm = onBoard(game, "Dragonlord Dromoka", B);
+      const bot = makeBot(A, registry, weights);
+      let atWurm = 0;
+      for (let k = 0; k < 6; k += 1) {
+        game.advanceUntil((s) => s.priority.holder === A && s.awaiting === null);
+        const action = bot.act(viewOf(game, A));
+        if (action.type !== "activate-ability" || action.source !== hellkite) break;
+        if ((action.targets ?? []).some((t) => t?.kind === "object" && t.object === wurm)) atWurm += 1;
+        game.dispatch(action);
+      }
+      return { passed: atWurm >= 1 && atWurm <= 4, detail: `${atWurm} pings at Dragonlord Dromoka (5/7; four kill it)` };
+    },
+  },
   asked({
     name: "a Clone with our own Etali, Primal Conqueror on the battlefield copies Etali, for its enters trigger",
     rule: "A copy of our own legend is worth its enters trigger when that beats the best other copy: the legend rule takes one of the two after the trigger.",
