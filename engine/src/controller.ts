@@ -3204,7 +3204,8 @@ export class HeuristicBotController extends AutomaticController {
     };
   }
 
-  protected toCastSpell(state: GameState, legal: CastSpellLegal): Action {
+  protected toCastSpell(state: GameState, given: CastSpellLegal): Action {
+    const legal = this.retargetableOnly(state, given);
     const player = this.playerId;
     // An additional cost's sacrifice gives up the cheapest permanent it may.
     // (Convoke doesn't come through here: `castExtras` echoes the payment
@@ -3856,6 +3857,14 @@ export class HeuristicBotController extends AutomaticController {
     if (!this.registry.has(offer.cardName)) return false;
     const def = this.registry.get(offer.cardName);
     const me = this.playerId;
+    // "Choose new targets for target spell or ability" with nothing on the
+    // stack that has a target (Deflecting Swat at a creature spell, a live
+    // game, 2026-11-26).
+    const slot = this.retargetSlot(offer.cardName);
+    if (slot !== null) {
+      const options = offer.targetOptions[slot] ?? [];
+      if (!options.some((ref) => this.hasTargets(state, ref))) return true;
+    }
     for (const ability of def.static) {
       const replacement = ability.replacement as
         | { readonly event?: string; readonly instead?: { readonly discard?: { readonly filter?: CardFilter } } }
@@ -3882,6 +3891,31 @@ export class HeuristicBotController extends AutomaticController {
       }
     }
     return false;
+  }
+
+  /** The target slot a spell's "change the targets of target spell or
+   * ability" names (Deflecting Swat, Redirect), or null. */
+  private retargetSlot(name: string): number | null {
+    if (!this.registry.has(name)) return null;
+    const effect = this.registry.get(name).effect;
+    return effect?.kind === "change-targets" && typeof effect.target === "number" ? effect.target : null;
+  }
+
+  /** Whether a stack object a target names has any target of its own. */
+  private hasTargets(state: GameState, ref: TargetRef): boolean {
+    if (ref.kind !== "object") return false;
+    return (state.objects[ref.object]?.targets ?? []).some((t) => t !== undefined && t !== null);
+  }
+
+  /** `legal` with a retargeting spell's slot cut to the spells and abilities
+   * that have targets to change, when any do: aimed at one with none, it
+   * does nothing. */
+  private retargetableOnly(state: GameState, legal: CastSpellLegal): CastSpellLegal {
+    const slot = this.retargetSlot(legal.cardName);
+    if (slot === null || legal.targetOptions[slot] === undefined) return legal;
+    const kept = legal.targetOptions[slot].filter((ref) => this.hasTargets(state, ref));
+    if (kept.length === 0 || kept.length === legal.targetOptions[slot].length) return legal;
+    return { ...legal, targetOptions: legal.targetOptions.map((options, i) => (i === slot ? kept : options)) };
   }
 
   /**

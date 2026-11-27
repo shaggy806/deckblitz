@@ -20,6 +20,12 @@ cast was left to v1), and v1 casts anything castable that none of `wouldCast`'s 
 definition: a permanent whose own replacement has it enter only by discarding a card of a kind
 not in hand, and a `choose-opponent` whose `whoIf` ("a player who …") fits no opponent now.
 
+A third, found by the same scan in the newest games (`games/2026-11-26/4MWNZ-1-1278448100`, turn 24):
+v1 cast Deflecting Swat free at Sigarda, a creature spell with nothing to retarget, with Forbidden
+Orchard's trigger, which has a target, right above it. A "change the targets of target spell or
+ability" spell is now held when no stack object it could aim at has a target (`doesNothingNow`), and
+aimed only at one that has (`retargetableOnly`, in `toCastSpell`).
+
 ## 2026-11-26 — Etali's free Phantasmal Image copies an Angel of Vitality, not Etali
 
 Status: fixed 2026-11-26. Scenario: "a Clone with our own Etali, Primal Conqueror on the battlefield

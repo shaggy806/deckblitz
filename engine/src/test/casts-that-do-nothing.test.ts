@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { HeuristicBotController } from "../controller.js";
 import type { Game } from "../game.js";
-import { A, B, cast, lands, nextTurn, table, toHand } from "./harness.js";
+import { A, B, cast, lands, nextTurn, spawn, table, toHand } from "./harness.js";
 
 /**
  * v1 doesn't cast a spell that would do nothing at all (`doesNothingNow`),
@@ -52,5 +52,39 @@ describe("casts that would do nothing", () => {
     game.dispatch({ type: "pass-priority", player: B });
     game.advanceUntil((s) => s.priority.holder === A && s.awaiting === null);
     expect(casts(game, "Backdraft")).toBe(true);
+  });
+
+  it("Deflecting Swat with only a creature spell on the stack, nothing to retarget: held", () => {
+    const { game } = table();
+    nextTurn(game); // bob's turn
+    game.state.zones.perPlayer[A].hand = [];
+    lands(game, "Forest", 2, B);
+    cast(game, toHand(game, "Grizzly Bears", B), { player: B, settle: false });
+    lands(game, "Mountain", 3);
+    toHand(game, "Deflecting Swat");
+    game.dispatch({ type: "pass-priority", player: B });
+    game.advanceUntil((s) => s.priority.holder === A && s.awaiting === null);
+    expect(game.state.zones.shared.stack.length).toBe(1);
+    expect(casts(game, "Deflecting Swat")).toBe(false);
+  });
+
+  it("Deflecting Swat with bob's Lightning Bolt at alice's creature on the stack: cast at the Bolt", () => {
+    const { game } = table();
+    nextTurn(game); // bob's turn
+    game.state.zones.perPlayer[A].hand = [];
+    const giant = spawn(game, "Hill Giant");
+    lands(game, "Forest", 2, B);
+    lands(game, "Mountain", 1, B);
+    // Bob's Bears still on the stack under his Bolt, as Sigarda was in the
+    // live game: worth more, and nothing to retarget.
+    cast(game, toHand(game, "Grizzly Bears", B), { player: B, settle: false });
+    cast(game, toHand(game, "Lightning Bolt", B), { player: B, targets: [{ kind: "object", object: giant }], settle: false });
+    lands(game, "Mountain", 3);
+    toHand(game, "Deflecting Swat");
+    game.dispatch({ type: "pass-priority", player: B });
+    game.advanceUntil((s) => s.priority.holder === A && s.awaiting === null);
+    const action = v1(game).act(game.controllerView(A));
+    expect(action.type).toBe("cast-spell");
+    if (action.type === "cast-spell") expect(game.state.objects[action.targets?.[0]?.kind === "object" ? action.targets[0].object : giant]?.cardName).toBe("Lightning Bolt");
   });
 });
