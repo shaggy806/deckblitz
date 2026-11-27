@@ -39273,6 +39273,16 @@ export class Game {
         afterLeaving = t.zoneChangeCount ?? 0;
       } else if (
         t?.lastKnown !== undefined &&
+        event.type === "ability-activated" &&
+        event.ofPermanent === true &&
+        event.source === triggerObject
+      ) {
+        // A permanent's ability whose own cost sacrificed it (rule 113.7a):
+        // "that artifact" is as it last existed on the battlefield (608.2h).
+        triggerStint = t.lastKnown.zoneChangeCount;
+        afterLeaving = t.zoneChangeCount ?? 0;
+      } else if (
+        t?.lastKnown !== undefined &&
         t.zone !== "stack" &&
         event.type === "damage-dealt" &&
         event.source === triggerObject
@@ -41139,7 +41149,7 @@ export class Game {
           // Rowan Kenrith's "whenever you activate an ability").
           if (spec.who !== "attached") {
             if (self.zone !== "battlefield" && self.zone !== "graveyard" && self.kind !== "emblem") return false;
-            if ((spec.who === "you") !== (event.player === self.controller)) return false;
+            if (spec.who !== "any" && (spec.who === "you") !== (event.player === self.controller)) return false;
           }
           // "An ability of a card in your graveyard": activated from there,
           // wherever its cost has since put the card.
@@ -41523,9 +41533,12 @@ export class Game {
               trigger.on === "becomes-target" && trigger.objectIsTargeter === true
               ? event.stackObject
               : event.object
-            : // The ability just activated: "copy that ability".
+            : // The ability just activated: "copy that ability" — or its
+              // source, "that artifact's controller" (Haunting Wind).
               event.type === "ability-activated"
-              ? event.ability
+              ? trigger.on === "activates-ability" && trigger.objectIsSource === true
+                ? event.source
+                : event.ability
             : // The spell that was cast, so a cast trigger can read it —
               // "damage equal to **that spell's** mana value" is a
               // `{ manaValueOf: "trigger-object" }`, which read 0 without

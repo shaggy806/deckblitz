@@ -7,6 +7,7 @@
     "cost:alt-cost-spend-only-treasure-mana",
     "cost:additional-cost-option-exile-graveyard",
     "effect:for-each-destroyed-this-way-unless",
+    "trigger:artifact-tapped-or-untapped-cost-activation",
     "amount:power-of-card-exiled-this-way",
     "static:dash-cost-reduction",
     "cost:sacrifice-self-and-any-number",

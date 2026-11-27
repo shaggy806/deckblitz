@@ -26546,6 +26546,46 @@ describe("the most life, an Aura's other creatures, colours among permanents", (
   });
 });
 
+describe("an artifact tapped, or its ability activated without {T}", () => {
+  it("reads Haunting Wind's two events as one ability, and that artifact's controller", () => {
+    const face = parseFace(
+      {
+        name: "Test Wind",
+        type_line: "Enchantment",
+        oracle_text:
+          "Whenever an artifact becomes tapped or a player activates an artifact's ability without {T} in its activation cost, this enchantment deals 1 damage to that artifact's controller.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    const damage = { kind: "damage", amount: 1, who: { controllerOf: "trigger-object" } };
+    expect(face.triggered.map((t: { trigger: unknown; effect: unknown; sameAbilityAs?: number }) => [t.trigger, t.effect, t.sameAbilityAs])).toEqual([
+      [{ on: "becomes-tapped", who: "any", filter: { type: "artifact" } }, damage, undefined],
+      [
+        { on: "activates-ability", who: "any", source: { type: "artifact" }, orMana: true, withoutTapCost: true, objectIsSource: true },
+        damage,
+        0,
+      ],
+    ]);
+  });
+});
+
+describe("a free cast of a spell with the name of one cast this turn", () => {
+  it("reads Twinning Glass's spell filter", () => {
+    const face = parseFace(
+      {
+        name: "Test Glass",
+        type_line: "Artifact",
+        oracle_text:
+          "{1}, {T}: You may cast a spell from your hand without paying its mana cost if it has the same name as a spell that was cast this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.activated[0].effect).toEqual({ kind: "cast-now", from: "hand", free: true, spell: { sameNameAsSpellCastThisTurn: true } });
+  });
+});
+
 describe("the exiled card's power and toughness", () => {
   it("reads Bioplasm's bonus from the card exiled this way", () => {
     const face = parseFace(

@@ -2859,6 +2859,31 @@ export function parseTrigger(clause) {
       { on: "activates-ability", who, orMana: true },
     ];
   }
+  // "Whenever an artifact becomes tapped or a player activates an artifact's
+  // ability without {T} in its activation cost" (Haunting Wind, Powerleech's
+  // "an opponent controls … an opponent activates"): one ability with two
+  // events, a mana ability's activation too; "that artifact" is the
+  // ability's source (`objectIsSource`). The face's reader makes the second
+  // `sameAbilityAs` the first (`withoutTapCost`).
+  if (
+    (m = /^Whenever an artifact( an opponent controls)? becomes tapped or (a player|an opponent) activates an artifact's ability without \{T\} in its activation cost$/.exec(
+      c,
+    ))
+  ) {
+    const opponents = m[1] !== undefined;
+    if (opponents !== (m[2] === "an opponent")) return null;
+    return [
+      { on: "becomes-tapped", who: "any", filter: { type: "artifact", ...(opponents ? { controlledBy: "opponent" } : {}) } },
+      {
+        on: "activates-ability",
+        who: opponents ? "opponent" : "any",
+        source: { type: "artifact" },
+        orMana: true,
+        withoutTapCost: true,
+        ...(opponents ? {} : { objectIsSource: true }),
+      },
+    ];
+  }
   if ((m = /^Whenever (you activate|an opponent activates) an ability of an? (.+?)( they control)?( that isn't a mana ability)?$/.exec(c))) {
     const source = parseTypePhrase(m[2]);
     if (source !== null && Object.keys(source).length > 0) {
@@ -4080,6 +4105,11 @@ export function parseSentence(sentence, ctx) {
       free: true,
       ...(freeFromHand[1] !== undefined ? { spell: { manaValue: { op: "lte", n: Number(freeFromHand[1]) } } } : {}),
     };
+  }
+  // "… if it has the same name as a spell that was cast this turn" (Twinning
+  // Glass): any player's spell, named as it was on the stack.
+  if (/^you may cast a spell from your hand without paying its mana cost if it has the same name as a spell that was cast this turn\.$/i.test(s)) {
+    return { kind: "cast-now", from: "hand", free: true, spell: { sameNameAsSpellCastThisTurn: true } };
   }
   // "Clash with defending player" (Marvo, Deep Operative): the opponent the
   // attacking source names (rule 701.30b, 508.5), not one chosen.
@@ -7726,6 +7756,13 @@ export function parseSentence(sentence, ctx) {
   // "Enchanted creature's controller": `{ controllerOf: "attached" }`.
   if ((m = re(`~ deals ${N} damage to enchanted (?:artifact|creature|land|permanent)'s controller`).exec(s))) {
     return { kind: "damage", amount: amount(m[1]), who: { controllerOf: "attached" } };
+  }
+  // "That artifact's controller" of a trigger whose object is an activated
+  // ability's source (Haunting Wind's `objectIsSource`, beside its "an
+  // artifact becomes tapped"): `{ controllerOf: "trigger-object" }`, the
+  // artifact's controller rather than the activating player.
+  if (ctx.objectIsSource === true && (m = re(`~ deals ${N} damage to that artifact's controller`).exec(s))) {
+    return { kind: "damage", amount: amount(m[1]), who: { controllerOf: "trigger-object" } };
   }
   // "Those creatures", "each of them", of an attack read as one batch: a
   // filter's `inSet: "trigger-batch"`.
@@ -22349,6 +22386,8 @@ function parseFaceAsWritten(face, ctx = {}) {
             : {}),
           // "One of them": the sources of a batched damage trigger.
           ...(triggers.every((t) => t.on === "deals-damage-batch") ? { damageBatch: true } : {}),
+          // "That artifact": an activated ability's source (Haunting Wind).
+          ...(triggers.some((t) => t.on === "activates-ability" && t.objectIsSource === true) ? { objectIsSource: true } : {}),
           // "Them": the cards of a discard read as one batch.
           ...(triggers.every((t) => t.on === "discards" && t.perCard !== true) ? { discardBatch: true } : {}),
           // "That excess damage": what the recipient was dealt past lethal.
@@ -22373,7 +22412,9 @@ function parseFaceAsWritten(face, ctx = {}) {
           targets: [...first.targets],
           // Ranar's "cards exiled from your hand or permanents your effects
           // exile": one move doing both is one trigger of one ability.
-          ...(t.byEffectOf !== undefined ? { sameAbilityAs: firstIndex } : {}),
+          // Haunting Wind's "an artifact becomes tapped or a player activates
+          // an artifact's ability without {T}": one ability too.
+          ...(t.byEffectOf !== undefined || t.withoutTapCost === true ? { sameAbilityAs: firstIndex } : {}),
         });
       }
       i = next;
@@ -24279,6 +24320,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(ctx.attackBatch === true ? { attackBatch: true } : {}),
     ...(ctx.damageBatch === true ? { damageBatch: true } : {}),
+    ...(ctx.objectIsSource === true ? { objectIsSource: true } : {}),
     ...(ctx.discardBatch === true ? { discardBatch: true } : {}),
     ...(ctx.dreadBatch === true ? { dreadBatch: true } : {}),
     ...(ctx.excessRecipient === true ? { excessRecipient: true } : {}),

@@ -2990,7 +2990,9 @@ export type TriggerKind =
        * never by a mana ability that helped pay it (the ruling).
        */
       readonly on: "activates-ability";
-      readonly who: "attached" | "you" | "opponent";
+      /** `"any"`: any player's activation — Haunting Wind's "a player
+       * activates an artifact's ability". */
+      readonly who: "attached" | "you" | "opponent" | "any";
       /** With `who: "attached"`: "whenever **you** activate a loyalty ability
        * of enchanted planeswalker" (Rowan's Talent) — activated by this
        * permanent's controller. Without it, by anyone. The ability clauses
@@ -3079,6 +3081,14 @@ export type TriggerKind =
        * Artifact Possession): its cost has no tap symbol (rule 107.5), read
        * off the event's `tapCost` — a mana ability's too, with `orMana`. */
       readonly withoutTapCost?: true;
+      /** The trigger object is the ability's **source** rather than the
+       * ability: "that artifact's controller" of Haunting Wind's "a player
+       * activates an artifact's ability" is `{ controllerOf:
+       * "trigger-object" }`, the artifact's controller whoever activated it
+       * (an ability any player may activate), read as it last existed if its
+       * own cost sacrificed it. A mana ability has a source too, so this
+       * works with `orMana`. */
+      readonly objectIsSource?: true;
     }
   | {
       /** *This* spell (the one carrying the ability) was cast — a triggered
