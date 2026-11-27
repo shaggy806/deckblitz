@@ -1319,7 +1319,10 @@ product: ["x", -1] }` (X clamped, then negated — The Meathook Massacre). A
 Okaun), which reads a power below 0 as it is, since doubling a -2 power makes
 it -4 (rule 701.10c); "triple" is `{ product: [2, { powerOf: ref, doubling:
 true }] }`, signed the same way (Tifa's Limit Break). "+X/+X, where X is its power" is a plain `{ powerOf }`,
-which adds nothing for a negative power.
+which adds nothing for a negative power. `powerOf`/`toughnessOf` take a
+one-member set too: "where X is the exiled creature card's power and Y is its
+toughness" after an `exile-from-library` is `{ powerOf: { thisWay: "exiled" }
+}`, read in exile, under a `this-way` conditional on its type (Bioplasm).
 
 **"The excess damage dealt this way."** `{ excessDamageThisWay: true, to? }` is
 the damage the resolution under way has dealt to permanents past what each

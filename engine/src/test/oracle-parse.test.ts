@@ -26545,3 +26545,35 @@ describe("the most life, an Aura's other creatures, colours among permanents", (
     });
   });
 });
+
+describe("the exiled card's power and toughness", () => {
+  it("reads Bioplasm's bonus from the card exiled this way", () => {
+    const face = parseFace(
+      {
+        name: "Test Ooze",
+        type_line: "Creature — Ooze",
+        oracle_text:
+          "Whenever this creature attacks, exile the top card of your library. If it's a creature card, this creature gets +X/+Y until end of turn, where X is the exiled creature card's power and Y is its toughness.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", amount: 1 },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "exiled", filter: { type: "creature" } },
+          then: {
+            kind: "modify-pt",
+            target: "source",
+            power: { powerOf: { thisWay: "exiled" } },
+            toughness: { toughnessOf: { thisWay: "exiled" } },
+            duration: "end-of-turn",
+          },
+        },
+      ],
+    });
+  });
+});

@@ -13816,7 +13816,7 @@ export function parseEffect(text, outer) {
       skip = toCounters.used - 1;
       continue;
     }
-    const arrival = graveyardArrivalAt(sentences, i, ctx) ?? bottomOfLibraryAt(sentences, i, ctx);
+    const arrival = graveyardArrivalAt(sentences, i, ctx) ?? bottomOfLibraryAt(sentences, i, ctx) ?? exiledTopPowerAt(sentences, i);
     if (arrival !== null) {
       parsed.push(arrival.effect);
       hints.push({ sentence, effect: arrival.effect });
@@ -15658,6 +15658,42 @@ function bottomOfLibraryAt(sentences, i, ctx) {
           { kind: "conditional", condition: { kind: "target", index: 0, filter }, then: doing },
         ],
       },
+    },
+    used: 2,
+  };
+}
+
+/**
+ * "Exile the top card of your library. If it's a creature card, ~ gets +X/+Y
+ * until end of turn, where X is the exiled creature card's power and Y is its
+ * toughness" (Bioplasm): an `exile-from-library`, then a `conditional` on the
+ * card exiled this way, its power and toughness read in exile.
+ */
+function exiledTopPowerAt(sentences, i) {
+  if (!/^exile the top card of your library\.$/i.test(sentences[i] ?? "")) return null;
+  const then = /^if it's an? (.+?) card, ~ gets \+X\/\+Y until end of turn, where X is the exiled \1 card's power and Y is its toughness\.$/i.exec(
+    sentences[i + 1] ?? "",
+  );
+  if (then === null) return null;
+  const filter = parseTypePhrase(then[1], { cards: true });
+  if (filter === null || Object.keys(filter).length === 0) return null;
+  return {
+    effect: {
+      kind: "sequence",
+      effects: [
+        { kind: "exile-from-library", amount: 1 },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "exiled", filter },
+          then: {
+            kind: "modify-pt",
+            target: "source",
+            power: { powerOf: { thisWay: "exiled" } },
+            toughness: { toughnessOf: { thisWay: "exiled" } },
+            duration: "end-of-turn",
+          },
+        },
+      ],
     },
     used: 2,
   };
