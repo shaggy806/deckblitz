@@ -9220,3 +9220,17 @@ Each board's die comes up 4.
 ### Back from the Brink: four players, only what you can pay for
 - **Do:** Click Back from the Brink and choose "(Grizzly Bears: {1}{G})".
 - **Expect:** Only the Grizzly Bears row is offered (two lands can't pay Hill Giant's {3}{R}). Grizzly Bears is exiled and a Grizzly Bears token enters.
+
+## Land mana changed twice, paying any amount, X from an opponent's hand (2026-11-26)
+
+### Naked Singularity: a Plains Island taps for red or green
+- **Do:** Click Tundra.
+- **Expect:** It offers red or green mana, never white or blue. The one you pick goes to your mana pool.
+
+### Chorus of the Conclave: pay {3} more for three +1/+1 counters
+- **Do:** Click Grizzly Bears and choose the row "paying {3} more for 3 +1/+1 counters".
+- **Expect:** The menu has a row for each extra {1} to {3}, and one without. All five Forests tap, and Grizzly Bears enters a 5/5 with three +1/+1 counters.
+
+### Bargaining Table: four players, X is an opponent's hand size
+- **Do:** Click Bargaining Table and choose its ability "(X=1)".
+- **Expect:** The menu has two rows, "(X=1)" and "(X=3)" (Bob and Dave hold one card, Carol three). One Plains taps and you draw a card.

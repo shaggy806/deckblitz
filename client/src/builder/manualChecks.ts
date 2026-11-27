@@ -13975,6 +13975,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Naked Singularity: a Plains Island taps for red or green',
+    board({
+      you: { bf: ['Naked Singularity', 'Tundra'] },
+      opp: { bf: ['Forest'] },
+    }),
+  ),
+  preset(
+    'Chorus of the Conclave: pay {3} more for three +1/+1 counters',
+    board({
+      you: { bf: ['Chorus of the Conclave', 'Forest*5'], hand: ['Grizzly Bears'] },
+      opp: { bf: ['Forest'] },
+    }),
+  ),
+  preset(
+    "Bargaining Table: four players, X is an opponent's hand size",
+    board({
+      you: { bf: ['Bargaining Table', 'Plains*4'] },
+      opp: [{ bf: ['Forest'], hand: ['Forest'] }, { bf: ['Forest'], hand: ['Forest', 'Forest', 'Forest'] }, { bf: ['Forest'], hand: ['Forest'] }],
+    }),
+  ),
+  preset(
     'Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere',
     board({
       you: { bf: ['Mountain*3'], hand: ['Lightning Storm', 'Forest'] },
