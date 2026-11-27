@@ -791,6 +791,7 @@ import _poolSoulFoundry from "../pool/soul-foundry.js";
 import _poolSoulGuideLantern from "../pool/soul-guide-lantern.js";
 import _poolSoulWarden from "../pool/soul-warden.js";
 import _poolSoullessOne from "../pool/soulless-one.js";
+import _poolSoulquake from "../pool/soulquake.js";
 import _poolSparasAdjudicators from "../pool/sparas-adjudicators.js";
 import _poolSpartanVeteran from "../pool/spartan-veteran.js";
 import _poolSpawnwrithe from "../pool/spawnwrithe.js";
@@ -1802,6 +1803,7 @@ const shard: CardShard = {
     _poolSoulGuideLantern,
     _poolSoulWarden,
     _poolSoullessOne,
+    _poolSoulquake,
     _poolSparasAdjudicators,
     _poolSpartanVeteran,
     _poolSpawnwrithe,

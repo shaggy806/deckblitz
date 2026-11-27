@@ -343,6 +343,7 @@ import _poolGempalmIncinerator from "../pool/gempalm-incinerator.js";
 import _poolGhaltaPrimalHunger from "../pool/ghalta-primal-hunger.js";
 import _poolGhituFirebreathing from "../pool/ghitu-firebreathing.js";
 import _poolGhituWarCry from "../pool/ghitu-war-cry.js";
+import _poolGiantTurtle from "../pool/giant-turtle.js";
 import _poolGideonOfTheTrials from "../pool/gideon-of-the-trials.js";
 import _poolGiftsUngiven from "../pool/gifts-ungiven.js";
 import _poolGitaxianMindstinger from "../pool/gitaxian-mindstinger.js";
@@ -1416,6 +1417,7 @@ const shard: CardShard = {
     _poolGhaltaPrimalHunger,
     _poolGhituFirebreathing,
     _poolGhituWarCry,
+    _poolGiantTurtle,
     _poolGideonOfTheTrials,
     _poolGiftsUngiven,
     _poolGitaxianMindstinger,

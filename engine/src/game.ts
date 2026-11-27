@@ -45376,7 +45376,8 @@ export class Game {
           this.regenerateByEffect({ kind: "object", object: id });
         }
       },
-      returnToHandAll: (filter, scopeTo, from) => this.returnToHandAllByEffect(scopeTo ?? controller, filter, x, source, from),
+      returnToHandAll: (filter, scopeTo, from, alsoGraveyards) =>
+        this.returnToHandAllByEffect(scopeTo ?? controller, filter, x, source, from, alsoGraveyards),
       exileAll: (filter, airbend, except, untilSourceLeaves, linked, scopeTo) => {
         if (untilSourceLeaves !== true) {
           // "Exile … with this" (rule 607.2a): linked to the stint the
@@ -63446,7 +63447,14 @@ controlledBy,
     if (airbend) this.emit({ type: "bent", player: you, how: "air" });
   }
 
-  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0, source?: ObjectId, from?: "exile"): void {
+  private returnToHandAllByEffect(
+    you: PlayerId,
+    filter: CardFilter,
+    x = 0,
+    source?: ObjectId,
+    from?: "exile",
+    alsoGraveyards?: true,
+  ): void {
     if (from === "exile") {
       // Every card in exile `filter` takes, each to its owner's hand at once
       // (Flamewar, Brash Veteran). A face-down one has no characteristics
@@ -63467,9 +63475,27 @@ controlledBy,
     // or less" (Displacement Wave), as `destroyAllByEffect` reads it.
     this.withLeaveBatch(() => {
       const victims = this.battlefieldMatching(you, filter, x, source);
+      // Soulquake's "and all creature cards in graveyards": read before
+      // anything moves, so a permanent bounced now isn't among them, and moved
+      // in the same instruction (rule 608.2c), the graveyard leaves one event.
+      const fromGraveyards =
+        alsoGraveyards === true
+          ? this.state.turnOrder.flatMap((player) =>
+              this.state.zones.perPlayer[player].graveyard.filter(
+                (id) =>
+                  this.state.objects[id]?.kind === "card" &&
+                  matchesFilter(this.state, this.registry, id, filter, { you, x }),
+              ),
+            )
+          : [];
       this.snapshotLeaving(victims);
       for (const id of victims) {
         this.returnToHandByEffect({ kind: "object", object: id }, false);
+      }
+      if (fromGraveyards.length > 0) {
+        this.withGraveyardLeaveBatch(() => {
+          for (const id of fromGraveyards) this.returnCardToHand(id, "graveyard", undefined);
+        });
       }
     });
   }
@@ -69086,7 +69112,10 @@ controlledBy,
     // "At random": nobody is asked, so nothing waits its turn — the game
     // picks, with the same seeded shuffle a library uses.
     if (random) {
-      const picked = shuffle(this.state.zones.perPlayer[player].hand, this.rng).slice(0, amount);
+      // "Discards a creature card at random" (Rag Man): among the cards the
+      // filter allows only.
+      const among = filter === undefined ? this.state.zones.perPlayer[player].hand : this.discardCandidates(player, filter);
+      const picked = shuffle(among, this.rng).slice(0, amount);
       this.state.rngState = this.rng.seed;
       if (picked.length === 0) return;
       // "Each player … discards three cards at random" (Burning Inquiry):

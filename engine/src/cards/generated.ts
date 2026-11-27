@@ -9081,6 +9081,7 @@ import _poolEvaporate from "./pool/evaporate.js";
 import _poolEvasiveAction from "./pool/evasive-action.js";
 import _poolEvasiveManeuvers from "./pool/evasive-maneuvers.js";
 import _poolEvelynTheCovetous from "./pool/evelyn-the-covetous.js";
+import _poolEvenTheOdds from "./pool/even-the-odds.js";
 import _poolEvenTheScore from "./pool/even-the-score.js";
 import _poolEvendoBrushrazer from "./pool/evendo-brushrazer.js";
 import _poolEvendoWakingHaven from "./pool/evendo-waking-haven.js";
@@ -11310,6 +11311,7 @@ import _poolGiantSpider from "./pool/giant-spider.js";
 import _poolGiantStrength from "./pool/giant-strength.js";
 import _poolGiantTortoise from "./pool/giant-tortoise.js";
 import _poolGiantTrapDoorSpider from "./pool/giant-trap-door-spider.js";
+import _poolGiantTurtle from "./pool/giant-turtle.js";
 import _poolGiantWarthog from "./pool/giant-warthog.js";
 import _poolGiantbaiting from "./pool/giantbaiting.js";
 import _poolGiantfall from "./pool/giantfall.js";
@@ -22078,6 +22080,7 @@ import _poolRafiqOfTheMany from "./pool/rafiq-of-the-many.js";
 import _poolRaftSecurityOfficer from "./pool/raft-security-officer.js";
 import _poolRafterDemon from "./pool/rafter-demon.js";
 import _poolRagDealer from "./pool/rag-dealer.js";
+import _poolRagMan from "./pool/rag-man.js";
 import _poolRagamuffinRaptor from "./pool/ragamuffin-raptor.js";
 import _poolRagamuffyn from "./pool/ragamuffyn.js";
 import _poolRagavanNimblePilferer from "./pool/ragavan-nimble-pilferer.js";
@@ -26537,6 +26540,7 @@ import _poolSoullessJailer from "./pool/soulless-jailer.js";
 import _poolSoullessOne from "./pool/soulless-one.js";
 import _poolSoullessRevival from "./pool/soulless-revival.js";
 import _poolSoulmender from "./pool/soulmender.js";
+import _poolSoulquake from "./pool/soulquake.js";
 import _poolSoulreaperOfMogis from "./pool/soulreaper-of-mogis.js";
 import _poolSoulsAttendant from "./pool/souls-attendant.js";
 import _poolSoulsFire from "./pool/souls-fire.js";
@@ -43438,6 +43442,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEvasiveAction,
   _poolEvasiveManeuvers,
   _poolEvelynTheCovetous,
+  _poolEvenTheOdds,
   _poolEvenTheScore,
   _poolEvendoBrushrazer,
   _poolEvendoWakingHaven,
@@ -45667,6 +45672,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGiantStrength,
   _poolGiantTortoise,
   _poolGiantTrapDoorSpider,
+  _poolGiantTurtle,
   _poolGiantWarthog,
   _poolGiantbaiting,
   _poolGiantfall,
@@ -56435,6 +56441,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRaftSecurityOfficer,
   _poolRafterDemon,
   _poolRagDealer,
+  _poolRagMan,
   _poolRagamuffinRaptor,
   _poolRagamuffyn,
   _poolRagavanNimblePilferer,
@@ -60894,6 +60901,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoullessOne,
   _poolSoullessRevival,
   _poolSoulmender,
+  _poolSoulquake,
   _poolSoulreaperOfMogis,
   _poolSoulsAttendant,
   _poolSoulsFire,
@@ -77808,6 +77816,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/evasive-action": _poolEvasiveAction,
   "pool/evasive-maneuvers": _poolEvasiveManeuvers,
   "pool/evelyn-the-covetous": _poolEvelynTheCovetous,
+  "pool/even-the-odds": _poolEvenTheOdds,
   "pool/even-the-score": _poolEvenTheScore,
   "pool/evendo-brushrazer": _poolEvendoBrushrazer,
   "pool/evendo-waking-haven": _poolEvendoWakingHaven,
@@ -80037,6 +80046,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/giant-strength": _poolGiantStrength,
   "pool/giant-tortoise": _poolGiantTortoise,
   "pool/giant-trap-door-spider": _poolGiantTrapDoorSpider,
+  "pool/giant-turtle": _poolGiantTurtle,
   "pool/giant-warthog": _poolGiantWarthog,
   "pool/giantbaiting": _poolGiantbaiting,
   "pool/giantfall": _poolGiantfall,
@@ -90805,6 +90815,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/raft-security-officer": _poolRaftSecurityOfficer,
   "pool/rafter-demon": _poolRafterDemon,
   "pool/rag-dealer": _poolRagDealer,
+  "pool/rag-man": _poolRagMan,
   "pool/ragamuffin-raptor": _poolRagamuffinRaptor,
   "pool/ragamuffyn": _poolRagamuffyn,
   "pool/ragavan-nimble-pilferer": _poolRagavanNimblePilferer,
@@ -95264,6 +95275,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soulless-one": _poolSoullessOne,
   "pool/soulless-revival": _poolSoullessRevival,
   "pool/soulmender": _poolSoulmender,
+  "pool/soulquake": _poolSoulquake,
   "pool/soulreaper-of-mogis": _poolSoulreaperOfMogis,
   "pool/souls-attendant": _poolSoulsAttendant,
   "pool/souls-fire": _poolSoulsFire,

@@ -4612,6 +4612,11 @@ export type EffectSpec =
        * owner and counters aren't characteristics (rule 109.3), so a filter
        * asking only those takes it too (`ownerOnly`). */
       readonly from?: "exile";
+      /** "… and all [creature] cards in graveyards" (Soulquake): every card in
+       * every graveyard `filter` takes goes to its owner's hand too, in the
+       * same instruction as the permanents (rule 608.2c), the graveyard
+       * leaves as one event. */
+      readonly alsoGraveyards?: true;
       /** "… **target player** controls" (Sleep, Ajani Vengeant's −7, Settle
        * the Wreckage): `filter` read from the side of whoever the permanent
        * or player in this target slot is — its `controlledBy: "you"` is
@@ -14526,7 +14531,7 @@ export interface EffectApi {
   regenerateAll(filter: CardFilter): void;
   /** Return every battlefield permanent matching `filter` to its owner's hand
    * — or, `from: "exile"`, every card in exile matching it. */
-  returnToHandAll(filter: CardFilter, scopeTo?: PlayerId, from?: "exile"): void;
+  returnToHandAll(filter: CardFilter, scopeTo?: PlayerId, from?: "exile", alsoGraveyards?: true): void;
   /** Exile every battlefield permanent matching `filter` but `except` — see
    * `exile-all`; `airbend` airbends them (rule 701.65a), `untilSourceLeaves`
    * exiles them until the source leaves the battlefield (610.3). */
@@ -22569,7 +22574,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "return-to-hand-all": {
       const scopeTo = scopedController(spec.controlledByTarget, ctx);
       if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
-      ctx.returnToHandAll(spec.filter, scopeTo, spec.from);
+      ctx.returnToHandAll(spec.filter, scopeTo, spec.from, spec.alsoGraveyards);
       return;
     }
     case "exile-all": {

@@ -282,6 +282,7 @@ import _poolEsperSojourners from "../pool/esper-sojourners.js";
 import _poolEternalSkylord from "../pool/eternal-skylord.js";
 import _poolEtherealValkyrie from "../pool/ethereal-valkyrie.js";
 import _poolEtrataTheSilencer from "../pool/etrata-the-silencer.js";
+import _poolEvenTheOdds from "../pool/even-the-odds.js";
 import _poolExoticOrchard from "../pool/exotic-orchard.js";
 import _poolExperimentalLab from "../pool/experimental-lab.js";
 import _poolExplore from "../pool/explore.js";
@@ -1370,6 +1371,7 @@ const shard: CardShard = {
     _poolEternalSkylord,
     _poolEtherealValkyrie,
     _poolEtrataTheSilencer,
+    _poolEvenTheOdds,
     _poolExoticOrchard,
     _poolExperimentalLab,
     _poolExplore,
