@@ -50,12 +50,19 @@ section keeps only what to do next.
   text changes over every spell and permanent) and Rhystic Cave (20257, a payment window inside a
   mana ability; its working build is in commit 401281830). **B342 (2026-11-26, `author-top-cards overnight`, wrapped up at the
   user's word)** took 68 cards from Sabertooth Cobra (20245) to Mob Mentality (22648), 13 lane agents in
-  five lanes (`docs/card-blockers.md`, batch 342), and laned 34 more keys to rank 23,200. **Next by rank**
-  (`rank-goal.mjs --rank 40000 --keys`; laned to 23,200, lane the rest as they come up): Primitive Justice
-  (21585, `cost:repeatable-additional-costs-adding-targets`), Spy Kit (21761), Hankyu (21855), Caller of
-  the Hunt (21972), Rayami, First of the Fallen (22091), Loxodon Peacekeeper (22161), Puca's Eye (22228),
-  Crumbling Sanctuary (22256), Eye for an Eye (22280), Cleansing (22311), then on; Lymph Sliver was
-  re-keyed (`static:absorb`), Balduvian Fallen earlier (`amount:mana-spent-on-cumulative-upkeep`). **Stone
+  five lanes (`docs/card-blockers.md`, batch 342), and laned 34 more keys to rank 23,200. **B343
+  (2026-11-26/27, `author-top-cards overnight 11 pm`, run on to 9 am or 97% of the weekly plan at the user's
+  word)** took 197 cards from Spy Kit (21761) to Recursive Recruitment (27343) by 43 lane agents, then the lead's own to Whirling Dervish (29569), the agents in five
+  lanes five at once, and laned 144 more keys to rank 27,388 (`docs/card-blockers.md`, batch 343). **Next by
+  rank** (`rank-goal.mjs --rank 40000 --keys`; laned to 27,388, lane the rest as they come up): the keys past
+  27,388, and the lanes' leftovers below. Left small: **Primitive Justice** (21585, a multikicker with a second
+  cost counted apart) and the **Flagbearers** (Standard Bearer 23175, Coalition Flag, Coalition Honor Guard: the
+  target offer needs a "must include one of" field the client and both bots obey). New majors for the user:
+  **Volrath's Shapeshifter** (23484, a non-copiable whole-text change in layer 3), **Yixlid Jailer** (26058,
+  graveyard cards losing all abilities across every graveyard reader), **Illusionary Mask** (25391, face-down
+  casts and face-up replacements on damage and tapping), **Circling Vultures** (26652, a static discard from
+  hand: a new priority action with a client button) and **Pygmy Hippo** (26341, Drain Power's forced
+  mana-ability decision). Lymph Sliver was re-keyed (`static:absorb`). **Stone
   Calendar** (20630) waits on the user (a major: declining its "up to {1} less" while casting). The
   keys B337 built still need lanes in `engine/data/lanes.json` only when re-keyed; re-keyed in `B336.json`: Caller of the Hunt, Mister Immortal; Clarion
   Ultimatum and Dichotomancy want the rest of Doubling Chant's search. Spawnsire of Ulamog (11790,
@@ -144,7 +151,9 @@ there and move this line to `COMPLETED.md`.
 
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b). (2026-11-09: 103.5c and 103.6b settled; only turn-order declarations are left.)
 - **Limited-duration control of a player** — rule 723.2's Word of Command (one spell's worth of control); `player-control.ts` holds a next turn, a next combat or Opposition Agent's search only.
-- **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change.)
+- **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change; 2026-11-26, B343: the engine check fits in `whyTargetsInvalid`, the offer needs a "must include one of" field the client and both bots obey.)
+- **`spell-would-destroy` reads a spell's plain instructions only** (Equinox, B343): a spell with its own resolver, spliced or fused, or a destroy behind a condition, reads as destroying nothing (`docs/engine-gaps.md`).
+- **Small edges B343 left** (2026-11-27, `docs/engine-gaps.md`): `enters-battlefield.putBy` names an effect's controller when another player does the putting (Show and Tell with Nature's Wrath); General Jarkeld's swap doesn't carry band mates' blocks (702.22h); Chorus of the Conclave's counters still apply if Chorus left before the creature resolved.
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Simultaneous as-enters removals of every counter**: two Thieves of Blood at once — the player should choose which gets them (`docs/engine-gaps.md`).
 - **Face-down leftovers: Illusionary Mask** — cast face down for X; the others the line named (Ixidron, Vesuvan Shapeshifter, Ugin, the Ineffable, Gustha's Scepter, Kozilek, the Broken Reality, Thieving Amalgam, Death in Heaven) are in the pool (`docs/engine-gaps.md`).

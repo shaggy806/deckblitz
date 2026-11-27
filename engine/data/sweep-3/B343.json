@@ -1,0 +1,1509 @@
+{
+ "batch": 343,
+ "status": "done",
+ "ranks": "author-top-cards overnight 11 pm, 2026-11-26 20:40 to 2026-11-27 ~09:00 (run on to 9 am or 97% of the weekly plan at the user's word): the laned keys past EDHREC rank 21,500 in rank order, Spy Kit (21761) to Recursive Recruitment (27343), built by 43 worktree agents in five lanes (build-family's overnight lanes loop, five at once), skipping the majors and the cards waiting on the user, then the lead's own cards past the lanes once the plan reached 97% (Dunerider Outlaw to Justice, 27444-29569). 144 more keys laned to rank 27,388. Features are listed in COMPLETED.md (Card backlog, B343).",
+ "authored": [
+  {
+   "name": "Aboroth",
+   "files": [
+    "engine/src/cards/pool/aboroth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Acrobatic Cheerleader",
+   "files": [
+    "engine/src/cards/pool/acrobatic-cheerleader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agent Maria Hill",
+   "files": [
+    "engine/src/cards/pool/agent-maria-hill.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aggression",
+   "files": [
+    "engine/src/cards/pool/aggression.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aladdin's Lamp",
+   "files": [
+    "engine/src/cards/pool/aladdins-lamp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amphibious Kavu",
+   "files": [
+    "engine/src/cards/pool/amphibious-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aspect of Wolf",
+   "files": [
+    "engine/src/cards/pool/aspect-of-wolf.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astral Confrontation",
+   "files": [
+    "engine/src/cards/pool/astral-confrontation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atalya, Samite Master",
+   "files": [
+    "engine/src/cards/pool/atalya-samite-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balduvian Fallen",
+   "files": [
+    "engine/src/cards/pool/balduvian-fallen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balduvian Warlord",
+   "files": [
+    "engine/src/cards/pool/balduvian-warlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baneblade Scoundrel",
+   "files": [
+    "engine/src/cards/pool/baneblade-scoundrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baneclaw Marauder",
+   "files": [
+    "engine/src/cards/pool/baneclaw-marauder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bargaining Table",
+   "files": [
+    "engine/src/cards/pool/bargaining-table.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Basalt Golem",
+   "files": [
+    "engine/src/cards/pool/basalt-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bewitching Leechcraft",
+   "files": [
+    "engine/src/cards/pool/bewitching-leechcraft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bill Potts",
+   "files": [
+    "engine/src/cards/pool/bill-potts.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bioplasm",
+   "files": [
+    "engine/src/cards/pool/bioplasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blade of the Swarm",
+   "files": [
+    "engine/src/cards/pool/blade-of-the-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blaze of Glory",
+   "files": [
+    "engine/src/cards/pool/blaze-of-glory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blinding Beam",
+   "files": [
+    "engine/src/cards/pool/blinding-beam.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bound",
+   "files": [
+    "engine/src/cards/pool/bound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bound // Determined",
+   "files": [
+    "engine/src/cards/pool/bound-determined.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Breaking Wave",
+   "files": [
+    "engine/src/cards/pool/breaking-wave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Breath of Dreams",
+   "files": [
+    "engine/src/cards/pool/breath-of-dreams.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bösium Strip",
+   "files": [
+    "engine/src/cards/pool/bosium-strip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Caller of the Hunt",
+   "files": [
+    "engine/src/cards/pool/caller-of-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Canal Courier",
+   "files": [
+    "engine/src/cards/pool/canal-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Candles' Glow",
+   "files": [
+    "engine/src/cards/pool/candles-glow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case File Auditor",
+   "files": [
+    "engine/src/cards/pool/case-file-auditor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Burning Masks",
+   "files": [
+    "engine/src/cards/pool/case-of-the-burning-masks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaos Lord",
+   "files": [
+    "engine/src/cards/pool/chaos-lord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chaos Moon",
+   "files": [
+    "engine/src/cards/pool/chaos-moon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Charmed Pendant",
+   "files": [
+    "engine/src/cards/pool/charmed-pendant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chomping Kavu",
+   "files": [
+    "engine/src/cards/pool/chomping-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chorus of the Conclave",
+   "files": [
+    "engine/src/cards/pool/chorus-of-the-conclave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clash of Elements",
+   "files": [
+    "engine/src/cards/pool/clash-of-elements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cleansing",
+   "files": [
+    "engine/src/cards/pool/cleansing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clockwork Steed",
+   "files": [
+    "engine/src/cards/pool/clockwork-steed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clockwork Swarm",
+   "files": [
+    "engine/src/cards/pool/clockwork-swarm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Codespell Cleric",
+   "files": [
+    "engine/src/cards/pool/codespell-cleric.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crowd-Control Warden",
+   "files": [
+    "engine/src/cards/pool/crowd-control-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crumbling Sanctuary",
+   "files": [
+    "engine/src/cards/pool/crumbling-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darkchild, Demon Uncaged",
+   "files": [
+    "engine/src/cards/pool/darkchild-demon-uncaged.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dead Reckoning",
+   "files": [
+    "engine/src/cards/pool/dead-reckoning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death Spark",
+   "files": [
+    "engine/src/cards/pool/death-spark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonic Hordes",
+   "files": [
+    "engine/src/cards/pool/demonic-hordes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Determined",
+   "files": [
+    "engine/src/cards/pool/determined.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diseased Vermin",
+   "files": [
+    "engine/src/cards/pool/diseased-vermin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Display of Dominance",
+   "files": [
+    "engine/src/cards/pool/display-of-dominance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disruption Aura",
+   "files": [
+    "engine/src/cards/pool/disruption-aura.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomsday Specter",
+   "files": [
+    "engine/src/cards/pool/doomsday-specter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon Hunter",
+   "files": [
+    "engine/src/cards/pool/dragon-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Leash",
+   "files": [
+    "engine/src/cards/pool/dream-leash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dunerider Outlaw",
+   "files": [
+    "engine/src/cards/pool/dunerider-outlaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Soldier",
+   "files": [
+    "engine/src/cards/pool/dwarven-soldier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elemental Expressionist",
+   "files": [
+    "engine/src/cards/pool/elemental-expressionist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emblazoned Golem",
+   "files": [
+    "engine/src/cards/pool/emblazoned-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Embodiment of Flame",
+   "files": [
+    "engine/src/cards/pool/embodiment-of-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enthralling Hold",
+   "files": [
+    "engine/src/cards/pool/enthralling-hold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Equinox",
+   "files": [
+    "engine/src/cards/pool/equinox.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Equipoise",
+   "files": [
+    "engine/src/cards/pool/equipoise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Error",
+   "files": [
+    "engine/src/cards/pool/error.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Essence Leak",
+   "files": [
+    "engine/src/cards/pool/essence-leak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Even the Odds",
+   "files": [
+    "engine/src/cards/pool/even-the-odds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eye for an Eye",
+   "files": [
+    "engine/src/cards/pool/eye-for-an-eye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fall",
+   "files": [
+    "engine/src/cards/pool/fall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "False Dawn",
+   "files": [
+    "engine/src/cards/pool/false-dawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Farrelite Priest",
+   "files": [
+    "engine/src/cards/pool/farrelite-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flame Channeler",
+   "files": [
+    "engine/src/cards/pool/flame-channeler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frenzied Raider",
+   "files": [
+    "engine/src/cards/pool/frenzied-raider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Freyalise's Winds",
+   "files": [
+    "engine/src/cards/pool/freyalises-winds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Game Preserve",
+   "files": [
+    "engine/src/cards/pool/game-preserve.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "General Jarkeld",
+   "files": [
+    "engine/src/cards/pool/general-jarkeld.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghazbán Ogre",
+   "files": [
+    "engine/src/cards/pool/ghazban-ogre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Oyster",
+   "files": [
+    "engine/src/cards/pool/giant-oyster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Turtle",
+   "files": [
+    "engine/src/cards/pool/giant-turtle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glittering Lion",
+   "files": [
+    "engine/src/cards/pool/glittering-lion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glittering Lynx",
+   "files": [
+    "engine/src/cards/pool/glittering-lynx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Artisans",
+   "files": [
+    "engine/src/cards/pool/goblin-artisans.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grisly Sigil",
+   "files": [
+    "engine/src/cards/pool/grisly-sigil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guardian Beast",
+   "files": [
+    "engine/src/cards/pool/guardian-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hankyu",
+   "files": [
+    "engine/src/cards/pool/hankyu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Harsh Judgment",
+   "files": [
+    "engine/src/cards/pool/harsh-judgment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunting Wind",
+   "files": [
+    "engine/src/cards/pool/haunting-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hedron Blade",
+   "files": [
+    "engine/src/cards/pool/hedron-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Holistic Wisdom",
+   "files": [
+    "engine/src/cards/pool/holistic-wisdom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Honorable Passage",
+   "files": [
+    "engine/src/cards/pool/honorable-passage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horn of Plenty",
+   "files": [
+    "engine/src/cards/pool/horn-of-plenty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hum of the Radix",
+   "files": [
+    "engine/src/cards/pool/hum-of-the-radix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infectious Rage",
+   "files": [
+    "engine/src/cards/pool/infectious-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inferno Trap",
+   "files": [
+    "engine/src/cards/pool/inferno-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Initiates of the Ebon Hand",
+   "files": [
+    "engine/src/cards/pool/initiates-of-the-ebon-hand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inspired Idea",
+   "files": [
+    "engine/src/cards/pool/inspired-idea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jester's Scepter",
+   "files": [
+    "engine/src/cards/pool/jesters-scepter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Johan",
+   "files": [
+    "engine/src/cards/pool/johan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Justice",
+   "files": [
+    "engine/src/cards/pool/justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Juxtapose",
+   "files": [
+    "engine/src/cards/pool/juxtapose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jötun Grunt",
+   "files": [
+    "engine/src/cards/pool/jotun-grunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kaervek's Spite",
+   "files": [
+    "engine/src/cards/pool/kaerveks-spite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Katabatic Winds",
+   "files": [
+    "engine/src/cards/pool/katabatic-winds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitsune Palliator",
+   "files": [
+    "engine/src/cards/pool/kitsune-palliator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krovikan Horror",
+   "files": [
+    "engine/src/cards/pool/krovikan-horror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Laquatus's Champion",
+   "files": [
+    "engine/src/cards/pool/laquatuss-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lavaball Trap",
+   "files": [
+    "engine/src/cards/pool/lavaball-trap.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lay Bare",
+   "files": [
+    "engine/src/cards/pool/lay-bare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lobotomy",
+   "files": [
+    "engine/src/cards/pool/lobotomy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loxodon Peacekeeper",
+   "files": [
+    "engine/src/cards/pool/loxodon-peacekeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maddening Imp",
+   "files": [
+    "engine/src/cards/pool/maddening-imp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magik, Illyana Rasputin",
+   "files": [
+    "engine/src/cards/pool/magik-illyana-rasputin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "March of Burgeoning Life",
+   "files": [
+    "engine/src/cards/pool/march-of-burgeoning-life.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Memory Crystal",
+   "files": [
+    "engine/src/cards/pool/memory-crystal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirror-Shield Hoplite",
+   "files": [
+    "engine/src/cards/pool/mirror-shield-hoplite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mister Immortal",
+   "files": [
+    "engine/src/cards/pool/mister-immortal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Musician",
+   "files": [
+    "engine/src/cards/pool/musician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mwonvuli Ooze",
+   "files": [
+    "engine/src/cards/pool/mwonvuli-ooze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Naked Singularity",
+   "files": [
+    "engine/src/cards/pool/naked-singularity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Natural Balance",
+   "files": [
+    "engine/src/cards/pool/natural-balance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nature's Wrath",
+   "files": [
+    "engine/src/cards/pool/natures-wrath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nebuchadnezzar",
+   "files": [
+    "engine/src/cards/pool/nebuchadnezzar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "No Quarter",
+   "files": [
+    "engine/src/cards/pool/no-quarter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "North Star",
+   "files": [
+    "engine/src/cards/pool/north-star.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Okk",
+   "files": [
+    "engine/src/cards/pool/okk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Old Man of the Sea",
+   "files": [
+    "engine/src/cards/pool/old-man-of-the-sea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Onakke Javelineer",
+   "files": [
+    "engine/src/cards/pool/onakke-javelineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Opal Titan",
+   "files": [
+    "engine/src/cards/pool/opal-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orcish Librarian",
+   "files": [
+    "engine/src/cards/pool/orcish-librarian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pendrell Flux",
+   "files": [
+    "engine/src/cards/pool/pendrell-flux.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prairie Dog",
+   "files": [
+    "engine/src/cards/pool/prairie-dog.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Puca's Eye",
+   "files": [
+    "engine/src/cards/pool/pucas-eye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Qarsi Deceiver",
+   "files": [
+    "engine/src/cards/pool/qarsi-deceiver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quicksilver Dragon",
+   "files": [
+    "engine/src/cards/pool/quicksilver-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rag Man",
+   "files": [
+    "engine/src/cards/pool/rag-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rasputin Dreamweaver",
+   "files": [
+    "engine/src/cards/pool/rasputin-dreamweaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rayami, First of the Fallen",
+   "files": [
+    "engine/src/cards/pool/rayami-first-of-the-fallen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Recursive Recruitment",
+   "files": [
+    "engine/src/cards/pool/recursive-recruitment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riptide Replicator",
+   "files": [
+    "engine/src/cards/pool/riptide-replicator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise",
+   "files": [
+    "engine/src/cards/pool/rise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise // Fall",
+   "files": [
+    "engine/src/cards/pool/rise-fall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rix Maadi Guildmage",
+   "files": [
+    "engine/src/cards/pool/rix-maadi-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rusting Golem",
+   "files": [
+    "engine/src/cards/pool/rusting-golem.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Salvage Titan",
+   "files": [
+    "engine/src/cards/pool/salvage-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Samite Censer-Bearer",
+   "files": [
+    "engine/src/cards/pool/samite-censer-bearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Samite Elder",
+   "files": [
+    "engine/src/cards/pool/samite-elder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Second Guess",
+   "files": [
+    "engine/src/cards/pool/second-guess.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Security Rhox",
+   "files": [
+    "engine/src/cards/pool/security-rhox.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shaman's Trance",
+   "files": [
+    "engine/src/cards/pool/shamans-trance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shape of the Wiitigo",
+   "files": [
+    "engine/src/cards/pool/shape-of-the-wiitigo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shield Dancer",
+   "files": [
+    "engine/src/cards/pool/shield-dancer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shimian Specter",
+   "files": [
+    "engine/src/cards/pool/shimian-specter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shining Shoal",
+   "files": [
+    "engine/src/cards/pool/shining-shoal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shuriken",
+   "files": [
+    "engine/src/cards/pool/shuriken.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silumgar Scavenger",
+   "files": [
+    "engine/src/cards/pool/silumgar-scavenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skeleton Scavengers",
+   "files": [
+    "engine/src/cards/pool/skeleton-scavengers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skophos Maze-Warden",
+   "files": [
+    "engine/src/cards/pool/skophos-maze-warden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Snowblind",
+   "files": [
+    "engine/src/cards/pool/snowblind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soaring Stoneglider",
+   "files": [
+    "engine/src/cards/pool/soaring-stoneglider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorrow's Path",
+   "files": [
+    "engine/src/cards/pool/sorrows-path.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Burn",
+   "files": [
+    "engine/src/cards/pool/soul-burn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Echo",
+   "files": [
+    "engine/src/cards/pool/soul-echo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Scourge",
+   "files": [
+    "engine/src/cards/pool/soul-scourge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulquake",
+   "files": [
+    "engine/src/cards/pool/soulquake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spellshift",
+   "files": [
+    "engine/src/cards/pool/spellshift.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinning Darkness",
+   "files": [
+    "engine/src/cards/pool/spinning-darkness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spy Kit",
+   "files": [
+    "engine/src/cards/pool/spy-kit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Squawkroaster",
+   "files": [
+    "engine/src/cards/pool/squawkroaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stench of Evil",
+   "files": [
+    "engine/src/cards/pool/stench-of-evil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Streetwise Negotiator",
+   "files": [
+    "engine/src/cards/pool/streetwise-negotiator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Struggle for Sanity",
+   "files": [
+    "engine/src/cards/pool/struggle-for-sanity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sword of the Ages",
+   "files": [
+    "engine/src/cards/pool/sword-of-the-ages.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swordsworn Cavalier",
+   "files": [
+    "engine/src/cards/pool/swordsworn-cavalier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Takklemaggot",
+   "files": [
+    "engine/src/cards/pool/takklemaggot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tawnos's Coffin",
+   "files": [
+    "engine/src/cards/pool/tawnoss-coffin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Aperture",
+   "files": [
+    "engine/src/cards/pool/temporal-aperture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thelon's Chant",
+   "files": [
+    "engine/src/cards/pool/thelons-chant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thijarian Witness",
+   "files": [
+    "engine/src/cards/pool/thijarian-witness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Prison",
+   "files": [
+    "engine/src/cards/pool/thought-prison.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Control",
+   "files": [
+    "engine/src/cards/pool/tidal-control.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidal Flats",
+   "files": [
+    "engine/src/cards/pool/tidal-flats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tidewalker",
+   "files": [
+    "engine/src/cards/pool/tidewalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Time and Tide",
+   "files": [
+    "engine/src/cards/pool/time-and-tide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tin Street Gossip",
+   "files": [
+    "engine/src/cards/pool/tin-street-gossip.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tourach's Chant",
+   "files": [
+    "engine/src/cards/pool/tourachs-chant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Traveling Plague",
+   "files": [
+    "engine/src/cards/pool/traveling-plague.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trial",
+   "files": [
+    "engine/src/cards/pool/trial.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trial // Error",
+   "files": [
+    "engine/src/cards/pool/trial-error.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Twinning Glass",
+   "files": [
+    "engine/src/cards/pool/twinning-glass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Undying Flames",
+   "files": [
+    "engine/src/cards/pool/undying-flames.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unnatural Hunger",
+   "files": [
+    "engine/src/cards/pool/unnatural-hunger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampirism",
+   "files": [
+    "engine/src/cards/pool/vampirism.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venerated Teacher",
+   "files": [
+    "engine/src/cards/pool/venerated-teacher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vizkopa Confessor",
+   "files": [
+    "engine/src/cards/pool/vizkopa-confessor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Volrath's Laboratory",
+   "files": [
+    "engine/src/cards/pool/volraths-laboratory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warbringer",
+   "files": [
+    "engine/src/cards/pool/warbringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warrior's Blades",
+   "files": [
+    "engine/src/cards/pool/warriors-blades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Well-Laid Plans",
+   "files": [
+    "engine/src/cards/pool/well-laid-plans.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whipgrass Entangler",
+   "files": [
+    "engine/src/cards/pool/whipgrass-entangler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whipkeeper",
+   "files": [
+    "engine/src/cards/pool/whipkeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whirling Dervish",
+   "files": [
+    "engine/src/cards/pool/whirling-dervish.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wicked Akuba",
+   "files": [
+    "engine/src/cards/pool/wicked-akuba.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Dogs",
+   "files": [
+    "engine/src/cards/pool/wild-dogs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wojek Apothecary",
+   "files": [
+    "engine/src/cards/pool/wojek-apothecary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worldpurge",
+   "files": [
+    "engine/src/cards/pool/worldpurge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wormfang Crab",
+   "files": [
+    "engine/src/cards/pool/wormfang-crab.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Standard Bearer",
+   "needs": [
+    "static:must-target-flagbearer"
+   ],
+   "size": "small",
+   "why": "Small, not reached (B343, combat-targeting lane): the engine check fits in whyTargetsInvalid (rule 601.2c), but a legal action offers targets slot by slot (targetOptions), which cannot say \"at least one target must be a Flagbearer\" across several slots, up-to slots, any-number groups or modes; it needs an offer field (mustTargetOneOf) obeyed by the client target picker and both bots (pickTargets, aimedTargets)."
+  },
+  {
+   "name": "Coalition Flag",
+   "needs": [
+    "static:must-target-flagbearer"
+   ],
+   "size": "small",
+   "why": "Small, not reached (B343, combat-targeting lane): the engine check fits in whyTargetsInvalid (rule 601.2c), but a legal action offers targets slot by slot (targetOptions), which cannot say \"at least one target must be a Flagbearer\" across several slots, up-to slots, any-number groups or modes; it needs an offer field (mustTargetOneOf) obeyed by the client target picker and both bots (pickTargets, aimedTargets)."
+  },
+  {
+   "name": "Coalition Honor Guard",
+   "needs": [
+    "static:must-target-flagbearer"
+   ],
+   "size": "small",
+   "why": "Small, not reached (B343, combat-targeting lane): the engine check fits in whyTargetsInvalid (rule 601.2c), but a legal action offers targets slot by slot (targetOptions), which cannot say \"at least one target must be a Flagbearer\" across several slots, up-to slots, any-number groups or modes; it needs an offer field (mustTargetOneOf) obeyed by the client target picker and both bots (pickTargets, aimedTargets)."
+  },
+  {
+   "name": "Primitive Justice",
+   "needs": [
+    "cost:repeatable-additional-costs-adding-targets"
+   ],
+   "size": "small",
+   "why": "Not reached (B343, costs-mana lane): a multikicker with a second cost, each counted apart; kicker.second excludes multi and kickCount is one number (a bitmask with two kickers), so about ten places in game.ts, bot/candidates.ts and the client kicker label need two counts."
+  },
+  {
+   "name": "Volrath's Shapeshifter",
+   "needs": [
+    "static:has-full-text-of-graveyard-top-creature"
+   ],
+   "size": "major",
+   "why": "B343, replacements-copies lane: a continuous, non-copiable change to the graveyard top creature's whole text (name, cost, colours, types, P/T, abilities) in layer 3, keeping its own static and discard ability; the engine has copy effects (layer 1, copiable) and textFrom (abilities only). Left for the user."
+  },
+  {
+   "name": "Yixlid Jailer",
+   "needs": [
+    "static:graveyard-cards-lose-abilities"
+   ],
+   "size": "major",
+   "why": "B343, replacements-copies lane: a layer-6 loss over every graveyard ability path (flashbacksOf, escapesOf, unearth/embalm/disturb/blitz/warp, dredge, graveyard-activated, hasGraveyardTrigger, graveyard statics, CDAs), with timestamp order against grants; layerSixLossAt returns battlefield modifiers only. Left for the user."
+  },
+  {
+   "name": "Illusionary Mask",
+   "needs": [
+    "effect:cast-face-down-by-mana-spent"
+   ],
+   "size": "major",
+   "why": "B343, casting-zones lane: a new subsystem — a 'payable by the mana spent on X' filter, a face-down free cast from hand, and face-up replacements on assigning or being dealt damage and becoming tapped (no would-become-tapped or would-assign-damage replacement point exists)."
+  },
+  {
+   "name": "Circling Vultures",
+   "needs": [
+    "static:discard-self-any-time-instant-speed"
+   ],
+   "size": "major",
+   "why": "B343, casting-zones lane: the ruling makes the discard a static ability usable from hand at instant speed, not an activated ability — a new priority action kind with its own hand button in the client (as foretell, suspend and plot have)."
+  },
+  {
+   "name": "Pygmy Hippo",
+   "needs": [
+    "effect:force-mana-abilities-lose-unspent"
+   ],
+   "size": "major",
+   "why": "B343, costs-mana lane: the defending player chooses which mana ability of each land to activate and pays its costs (painlands, filter lands) — a new player decision with client work, the same as Drain Power's."
+  }
+ ]
+}

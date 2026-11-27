@@ -116,7 +116,26 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   attacked-or-blocked condition. The Flagbearers (Standard Bearer, Coalition Honor Guard,
   Coalition Flag) are the reverse: "while an opponent is choosing targets … must choose at least
   one Flagbearer on the battlefield if able" is a requirement on the choice (601.2c), checked over
-  a whole target set, which `invalidTargetReason` has no hook for.
+  a whole target set, which `invalidTargetReason` has no hook for. B343's agent (2026-11-26) found
+  the check itself small: all four callers of `whyTargetsInvalid` are casting or activating, so it
+  can refuse a choice with no Flagbearer when trying one in some slot (`invalidTargetReason`) is
+  legal. What's larger is the offer: `targetOptions` lists each slot's targets alone, so it needs
+  a field such as `mustTargetOneOf` that the client's target picker and both bots' pickers
+  (`pickTargets`, `aimedTargets`) obey, or a bot picks targets the engine refuses and `tick` throws.
+- **`spell-would-destroy` reads a spell's plain instructions only (Equinox).** `Game.spellWouldDestroy`
+  walks a spell's effect as cast (modes, kicker, overload) through `sequence`s. A spell with its own
+  `resolve`, spliced cards or fused halves reads as destroying nothing, and so does a destroy behind
+  a condition the spell would meet as it resolves (the card's rulings exclude only "may", choices and
+  random results). No pool land-destroyer is known to hit it.
+- **Small edges B343 left.** (1) `EntryRecord.putBy` (`moveObject`) takes the putter as the player
+  playing the card, else `resolvingController`, else the player it enters under, so an effect where
+  another player puts (Show and Tell's "each player puts") names the spell's controller: Nature's
+  Wrath and the Chants make the wrong player sacrifice or take damage. The engine has no acting player
+  inside an effect. (2) `swapBlockersOfAttackers` (General Jarkeld) moves only the named attackers'
+  block entries, not their band mates' (702.22h). (3) Chorus of the Conclave's
+  `grantsToSpells.anyAmountOfMana` counters go on the spell's `entersWithCounters` as it is cast, so
+  they apply even if Chorus left the battlefield before the creature resolved (Mikey & Don's
+  precedent; a strict reading of 611.3 would drop them).
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose.**
   Rules 730.3a and the meld ruling ("if the cards are put on the top or bottom of your library,
   you choose their relative order") let the owner arrange the cards a merged or melded permanent
