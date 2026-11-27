@@ -1538,12 +1538,12 @@ export interface DamagePrevention {
  * the replacement's controller (`"you"` — Blood of the Martyr's "you may have
  * that damage dealt to you instead", a `replacement-effect` with `may`), or to
  * the damage's source's controller, as the source last existed
- * (`"source-controller"` — Harsh Judgment's "it deals that damage to its
+ * (`"damage-source-controller"` — Harsh Judgment's "it deals that damage to its
  * controller instead"). Does nothing while that isn't a creature, planeswalker or battle on the
  * battlefield, or a player in the game, or is the recipient already; and
  * applies to a damage event once (614.5), so two Palisade Giants don't send it
  * back and forth.
  */
 export interface DamageRedirection {
-  readonly redirect: "self" | "attached" | "recipient-controller" | "you" | "source-controller";
+  readonly redirect: "self" | "attached" | "recipient-controller" | "you" | "damage-source-controller";
 }

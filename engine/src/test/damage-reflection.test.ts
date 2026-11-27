@@ -2,7 +2,7 @@
  * Damage reflected (rules 614.1a, 614.9): a replacement that lets the damage
  * through and deals that much more beside it (Eye for an Eye — the chosen
  * source's `also`), a static redirection back to the damaging spell's
- * controller (Harsh Judgment's `"source-controller"`), and a one-shot
+ * controller (Harsh Judgment's `"damage-source-controller"`), and a one-shot
  * redirection back onto the attacker itself (Shield Dancer's
  * `"source-itself"`).
  */

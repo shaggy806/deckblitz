@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 29929.
 //
 // A redirection (rule 614.9) to the spell's own controller, as it last
-// existed (`"source-controller"`); one of your own spells is dealt to you
+// existed (`"damage-source-controller"`); one of your own spells is dealt to you
 // still, as it's going there already.
 
 const CHOOSE = "As this enchantment enters, choose a color.";
@@ -24,7 +24,7 @@ export default defineCard({
         event: "would-deal-damage",
         to: "you",
         source: { typesAnyOf: ["instant", "sorcery"], ofChosenColor: true },
-        instead: { redirect: "source-controller" },
+        instead: { redirect: "damage-source-controller" },
       },
       text: REDIRECT,
     },

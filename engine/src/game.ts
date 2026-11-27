@@ -69977,7 +69977,7 @@ controlledBy,
     sourceLastKnown: LastKnownInfo | undefined,
   ): TargetRef | undefined {
     switch (redirect) {
-      case "source-controller":
+      case "damage-source-controller":
         return this.sourceRedirect("controller", source, sourceLastKnown);
       case "self":
         return { kind: "object", object: by.id };
