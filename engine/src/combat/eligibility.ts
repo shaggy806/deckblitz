@@ -775,13 +775,16 @@ export function mustBeBlockedByAtLeast(state: GameState, registry: CardRegistry,
 
 /** The creature each "blocks [this attacker] if able" on `blocker` names, or
  * `undefined` for a bare "blocks if able" with parameters elsewhere (rule
- * 509.1c), each the same object it was when the requirement was made (400.7). */
+ * 509.1c), each the same object it was when the requirement was made (400.7).
+ * `each`: "blocks each attacking creature if able" (Blaze of Glory), one
+ * requirement per attacker it can block, which the offer lists. */
 export function blockRequirementsOf(
   state: GameState,
   registry: CardRegistry,
   blocker: ObjectId,
-): readonly { readonly attacker?: ObjectId }[] {
+): readonly { readonly attacker?: ObjectId; readonly each?: true }[] {
   return recordsOfKind(state, registry, blocker, "must-block").flatMap(({ rule }) => {
+    if (rule.each === true) return [{ each: true as const }];
     if (rule.attacker === undefined) return [{}];
     if (typeof rule.attacker !== "object" || !("stint" in rule.attacker)) return [];
     const named = state.objects[rule.attacker.object];

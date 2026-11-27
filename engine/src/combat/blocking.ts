@@ -357,7 +357,10 @@ export function blockingViolations(
   // requirement just the same (rule 509.1c), so that isn't a violation.
   const required = new Set((offer.blockRequirements ?? []).map((r) => r.blocker));
   for (const blocker of required) {
-    if (obeysOwnRequirement(blocker, blocks, offer)) continue;
+    if (obeysOwnRequirement(blocker, blocks, offer)) {
+      if (missedOwnRequirements(blocker, blocks, offer).length > 0) out.push({ kind: "block-requirement", blocker });
+      continue;
+    }
     const mine = blocks.filter((b) => b.blocker === blocker).map((b) => b.attacker);
     if (mine.some((a) => offer.mustBlock.includes(a) || (offer.mustBeBlockedIfAble ?? []).includes(a))) continue;
     // An attacker with room for one, taken by a creature obeying a requirement
@@ -497,6 +500,37 @@ function obeysOwnRequirement(blocker: ObjectId, blocks: readonly BlockerDeclarat
   return (offer.blockRequirements ?? []).some(
     (r) => r.blocker === blocker && (r.attacker === undefined || mine.includes(r.attacker)),
   );
+}
+
+/**
+ * The attackers a creature able to block several at once (`maxBlocks`, "can
+ * block any number of creatures") has requirements of its own to block, could
+ * block too, and doesn't — Blaze of Glory's "blocks each attacking creature if
+ * able", one requirement each (rule 509.1c: as many obeyed as can be). Only
+ * while it blocks fewer than it may; none with menace (it would need company
+ * no requirement asks for) or with room for one creature that another already
+ * takes. Empty for a creature that can block only one: one requirement is all
+ * it can obey.
+ */
+function missedOwnRequirements(blocker: ObjectId, blocks: readonly BlockerDeclaration[], offer: BlockOffer): ObjectId[] {
+  const entry = offer.eligible.find((e) => e.blocker === blocker);
+  const room = entry?.maxBlocks ?? 1;
+  if (entry === undefined || room <= 1) return [];
+  const named = new Set(
+    (offer.blockRequirements ?? []).filter((r) => r.blocker === blocker && r.attacker !== undefined).map((r) => r.attacker as ObjectId),
+  );
+  if (named.size < 2) return [];
+  const mine = new Set(blocks.filter((b) => b.blocker === blocker).map((b) => b.attacker));
+  if (mine.size >= room) return [];
+  return entry.canBlock.filter(
+    (a) =>
+      named.has(a) &&
+      !mine.has(a) &&
+      !offer.menaceAttackers.includes(a) &&
+      leastBlockers(offer, a) <= 1 &&
+      blockIsFree(offer, blocker, a) &&
+      !(roomForOne(offer, a) && blocks.some((b) => b.attacker === a && b.blocker !== blocker)),
+  ).slice(0, room - mine.size);
 }
 
 /**
@@ -755,7 +789,7 @@ export function obeyingLure(
     offer.eligible.every((e) =>
       moved.some((b) => b.blocker === e.blocker && b.attacker === attacker && (b.count ?? e.copies ?? 1) >= (e.copies ?? 1)),
     );
-  return withinBlockMost(
+  const legal = withinBlockMost(
     withinSingleBlockers(
       moved.filter(
         (b) => (load.get(b.attacker) ?? 0) >= leastBlockers(offer, b.attacker) && (!all.has(b.attacker) || whole(b.attacker)),
@@ -764,6 +798,14 @@ export function obeyingLure(
     ),
     offer,
   );
+  // A creature able to block several, with a requirement for each (Blaze of
+  // Glory): on to the rest it has to block, once it blocks one of them.
+  const extra: BlockerDeclaration[] = [];
+  for (const blocker of new Set(legal.map((b) => b.blocker))) {
+    if (!obeysOwnRequirement(blocker, legal, offer)) continue;
+    for (const attacker of missedOwnRequirements(blocker, legal, offer)) extra.push({ blocker, attacker });
+  }
+  return extra.length === 0 ? legal : [...legal, ...extra];
 }
 
 /** `blocker` needs at least `others` other creatures declared blocking

@@ -186,8 +186,16 @@ function blockersOffer(
   // creatures with magnet counters on them block that creature this turn if
   // able" (Magnetic Web): each binding record, and only while it's able to.
   for (const entry of eligible) {
-    for (const { attacker } of blockRequirementsOf(ctx.state, ctx.registry, entry.blocker)) {
-      if (attacker === undefined) blockRequirements.push({ blocker: entry.blocker });
+    for (const { attacker, each } of blockRequirementsOf(ctx.state, ctx.registry, entry.blocker)) {
+      // "Blocks each attacking creature if able" (Blaze of Glory): one
+      // requirement for each attacker it can block.
+      if (each === true) {
+        for (const one of entry.canBlock) {
+          if (!blockRequirements.some((r) => r.blocker === entry.blocker && r.attacker === one)) {
+            blockRequirements.push({ blocker: entry.blocker, attacker: one });
+          }
+        }
+      } else if (attacker === undefined) blockRequirements.push({ blocker: entry.blocker });
       else if (entry.canBlock.includes(attacker)) blockRequirements.push({ blocker: entry.blocker, attacker });
     }
   }

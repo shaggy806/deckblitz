@@ -50,6 +50,10 @@ import { thisWayEntries, votesThisWay } from "./this-way.js";
 import { isObjectSetRef, staticSetMembers, type ObjectSetRef } from "./object-sets.js";
 import type { ObjectRef, PlayerRef } from "./refs.js";
 
+/** The steps of the combat phase (rule 506.1), when there are defending
+ * players (506.2). */
+const COMBAT_PHASE_STEPS: ReadonlySet<string> = new Set(["begin-combat", "declare-attackers", "declare-blockers", "combat-damage", "end-combat"]);
+
 /**
  * A numeric comparison clause, e.g. `{ op: "lte", n: 2 }` = "≤ 2".
  *
@@ -465,8 +469,10 @@ export interface CardFilter {
   readonly blockingAlone?: true;
   /** Controlled by a defending player, for a spell with no attacker to read one
    * from (False Orders' "target creature defending player controls"): any player
-   * an attacker is attacking, or whose planeswalker or battle it is; a player
-   * chooses among several (rule 802.2a). */
+   * an attacker is attacking, or whose planeswalker or battle it is, and during
+   * the combat phase every opponent of the attacking player, attacked or not
+   * (rules 506.2, 802.2 — Blaze of Glory, cast before attackers are declared);
+   * a player chooses among several (rule 802.2a). */
   readonly controlledByDefendingPlayer?: true;
   /** Attacking a battle (Rampaging Geoderm's "if it's **attacking a
    * battle**"). */
@@ -3108,7 +3114,17 @@ export function matchesFilter(
   }
   if (filter.controlledByDefendingPlayer === true) {
     const controller = live?.controller;
-    const defending = state.zones.shared.battlefield.some((id) => {
+    // The whole combat phase, every opponent of the attacking player is a
+    // defending player, attacked or not (rules 506.2, 802.2: the attack
+    // multiple players option, two players or Commander's default), so
+    // Blaze of Glory finds one in the beginning of combat step too.
+    const attacking = activePlayerOf(state);
+    const defending =
+      (COMBAT_PHASE_STEPS.has(state.turn.step) &&
+        controller !== undefined &&
+        controller !== attacking &&
+        state.players[controller]?.hasLost !== true) ||
+      state.zones.shared.battlefield.some((id) => {
       const attacked = state.objects[id]?.attacking;
       if (attacked === null || attacked === undefined) return false;
       if (state.players[attacked as PlayerId] !== undefined) return attacked === controller;

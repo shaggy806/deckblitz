@@ -195,6 +195,12 @@ export interface CantBlock {
 export interface MustBlock {
   readonly kind: "must-block";
   readonly attacker?: AttackerAim;
+  /** "Blocks **each attacking creature** this turn if able" (Blaze of
+   * Glory): one requirement for every attacking creature it could block,
+   * each obeyed only by blocking that one (rule 509.1c) — so with "can block
+   * any number of creatures" it blocks every one it can, and without it as
+   * many as it's allowed. Not with `attacker`. */
+  readonly each?: true;
   readonly you?: PlayerId;
 }
 

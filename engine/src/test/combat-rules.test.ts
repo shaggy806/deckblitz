@@ -370,7 +370,7 @@ describe("every definition speaks the one vocabulary", () => {
     "cant-attack": ["at", "unlessDefender", "ifDefender"],
     "must-attack": ["at", "otherThan", "ifAttacks", "atLeastOne"],
     "cant-block": ["attacker", "attackers", "unlessAttacking"],
-    "must-block": ["attacker"],
+    "must-block": ["attacker", "each"],
     "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock", "unlessAttacking", "outsideSector"],
     "must-be-blocked": ["by"],
     "must-be-blocked-if-able": ["by", "exactlyOne", "byAtLeast"],
