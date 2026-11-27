@@ -17917,6 +17917,24 @@ function castNowTermsAt(sentences, i, ctx) {
       used: cast.used,
     };
   }
+  // "Exile cards from the top of your library until you exile a nonland card.
+  // You may play those cards this turn." (Darkchild, Demon Uncaged): every card
+  // exiled on the way, the one found among them, stays in exile to be played.
+  const untilPlayAll = /^exile cards from the top of your library until you exile an? (.+?) card\.$/i.exec(sentences[i]);
+  if (untilPlayAll !== null && /^you may play those cards this turn\.$/i.test(sentences[i + 1] ?? "")) {
+    const filter = parseTypePhrase(untilPlayAll[1], { cards: true });
+    if (filter === null) return null;
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "reveal-until", filter, exile: true, rest: "stay" },
+          { kind: "grant-play", cards: { thisWay: "exiled" }, duration: "end-of-turn", play: true },
+        ],
+      },
+      used: 2,
+    };
+  }
   if (
     /^that player exiles cards from the top of their library until they exile a nonland card\.$/i.test(sentences[i])
   ) {

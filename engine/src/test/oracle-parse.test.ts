@@ -26390,4 +26390,23 @@ describe("the triggers-journal lane's picks, 2026-11-27", () => {
       { on: "becomes-target", who: "you-control", filter: { type: "creature" }, abilityKeyword: "backup", objectIsTargeter: true },
     ]);
   });
+
+  it("Darkchild, Demon Uncaged: exile until a nonland card, and play every card exiled this way", () => {
+    const parsed = parseFace({
+      name: "Darkchild, Demon Uncaged",
+      type_line: "Legendary Creature — Mutant Demon Sorcerer",
+      mana_cost: "{3}{B}{R}",
+      power: "4",
+      toughness: "4",
+      oracle_text:
+        "At the beginning of your upkeep, exile cards from the top of your library until you exile a nonland card. You may play those cards this turn.",
+    });
+    expect(parsed.triggered[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "reveal-until", filter: { notTypes: ["land"] }, exile: true, rest: "stay" },
+        { kind: "grant-play", cards: { thisWay: "exiled" }, duration: "end-of-turn", play: true },
+      ],
+    });
+  });
 });

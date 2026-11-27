@@ -3390,7 +3390,8 @@
   "filter:dealt-noncombat-damage-this-turn",
   "effect:remove-blocker-then-must-block",
   "filter:not-targeted-by-named-ability",
-  "filter:target-player-lost-life-this-turn"
+  "filter:target-player-lost-life-this-turn",
+  "effect:reveal-until-exile-play-all"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
