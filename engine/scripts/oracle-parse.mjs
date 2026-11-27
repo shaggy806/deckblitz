@@ -26527,6 +26527,11 @@ function parseStatic(line, text) {
   }
   {
     const fromGraveyard = /^As long as a creature card with flying is in a graveyard, (~) has flying\. The same is true for (.+)\.$/.exec(line);
+    // "As long as an exiled creature card with a blood counter on it has
+    // flying, Rayami has flying" (Rayami, First of the Fallen): every exiled
+    // creature card with that counter, whatever exiled it.
+    const counted = /^As long as an exiled creature card with an? ([a-z]+) counter on it has flying, ~ has flying\. The same is true for (.+)\.$/.exec(line);
+    const fromExile = counted === null ? null : ["", "~", counted[2]];
     // "If a creature card with flying was exiled with this creature's delve
     // ability, this creature has flying" (Soulflayer): the creature cards
     // its printed delve linked to it (rule 607.2q).
@@ -26538,7 +26543,8 @@ function parseStatic(line, text) {
       delved ??
       /^(~) has flying as long as (?:an exiled card used to craft it|a card exiled with it) has flying\. The same is true for (.+)\.$/.exec(line) ??
       /^As long as a card exiled with (?:~|it|this creature) has flying, (~|equipped creature) has flying\. The same is true for (.+)\.$/.exec(line) ??
-      fromGraveyard;
+      fromGraveyard ??
+      fromExile;
     const words = w === null ? [] : w[2].split(/, and |, | and /);
     const listed = words.filter((word) => word !== "protection" && word !== "landwalk").map((word) => word.replace(/ /g, "-"));
     const known = new Set(["first-strike", "double-strike", "deathtouch", "haste", "hexproof", "indestructible", "lifelink", "menace", "reach", "trample", "vigilance", "defender", "flash", "shroud", "fear"]);
@@ -26546,7 +26552,14 @@ function parseStatic(line, text) {
       return {
         affects: { scope: w[1] === "equipped creature" ? "attached" : "self" },
         sharesKeywords: {
-          from: fromGraveyard !== null ? { graveyard: { type: "creature" } } : delved !== null ? "delved" : "exiled-with-source",
+          from:
+            fromGraveyard !== null
+              ? { graveyard: { type: "creature" } }
+              : counted !== null
+                ? { exile: { type: "creature", counters: { kind: counted[1], compare: { op: "gte", n: 1 } } } }
+                : delved !== null
+                  ? "delved"
+                  : "exiled-with-source",
           ...(delved !== null ? { filter: { type: "creature" } } : {}),
           keywords: ["flying", ...listed],
           ...(words.includes("protection") ? { protection: true } : {}),

@@ -3295,7 +3295,8 @@
   "effect:destroy-those-that-didnt-attack",
   "static:has-all-names",
   "static:has-all-names",
-  "effect:counter-on-granting-source"
+  "effect:counter-on-granting-source",
+  "static:keywords-from-exiled-with-counter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

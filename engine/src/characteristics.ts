@@ -2027,7 +2027,13 @@ function sharedKeywordsOf(
     return { keywords: [...kept.keywords], protections: [], hexproofs: [...kept.hexproofs], landwalks: [] };
   }
   const ctx = { you: source.controller, source: source.id };
-  const cards = (liveReferenceObjects(state, registry, shared.from, ctx) ?? []).filter(
+  // Every exiled card matching it (Rayami, First of the Fallen).
+  const from = shared.from;
+  const cards = (
+    typeof from === "object" && "exile" in from
+      ? state.zones.shared.exile.filter((id) => matchesFilter(state, registry, id, from.exile, ctx))
+      : (liveReferenceObjects(state, registry, from, ctx) ?? [])
+  ).filter(
     (id) =>
       state.objects[id] !== undefined &&
       (shared.filter === undefined || matchesFilter(state, registry, id, shared.filter, ctx)),

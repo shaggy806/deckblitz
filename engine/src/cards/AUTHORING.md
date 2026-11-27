@@ -7170,6 +7170,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   have too (rule 702.11d-e), `protection: true` is "protection" in the list — every
   protection ability of theirs (rule 702.16a) — and `landwalk: true` is "landwalk": every
   landwalk of theirs, swampwalk or "nonbasic landwalk" (702.14a, Death-Mask Duplicant).
+  `from: { exile: CardFilter }` reads every exiled card matching it, whatever exiled it — Rayami,
+  First of the Fallen's "an exiled creature card with a blood counter on it" (`{ exile: { type:
+  "creature", counters: { kind: "blood", compare: { op: "gte", n: 1 } } } }`); the scaffolder reads it.
   `from: { graveyard: { type: "creature" } }` reads every graveyard's matching cards instead:
   "as long as a creature card with flying is in a graveyard, this creature has flying. The
   same is true for …" (Cairn Wanderer).

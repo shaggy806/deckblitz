@@ -3098,6 +3098,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * "creature" } }`; its ruling: all cards in all graveyards, each landwalk and
    * protection ability among them).
    *
+   * `from: { exile }` is the cards in exile matching it, whoever owns them
+   * and whatever exiled them — "as long as an **exiled creature card with a
+   * blood counter on it** has flying, Rayami has flying. The same is true for
+   * …" (Rayami, First of the Fallen: `{ exile: { type: "creature", counters:
+   * { kind: "blood", … } } }`). A face-down exiled card has no characteristics
+   * (rule 708.2a), so it matches no such filter.
+   *
    * `from: "delved"` is the cards this card's printed delve exiled as it was
    * cast, **as they were** in exile then (Soulflayer's "if a creature card
    * with flying was exiled with this creature's delve ability"): matched
@@ -3107,7 +3114,7 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * `landwalk`.
    */
   readonly sharesKeywords?: {
-    readonly from: "exiled-with-source" | "delved" | { readonly graveyard: CardFilter };
+    readonly from: "exiled-with-source" | "delved" | { readonly graveyard: CardFilter } | { readonly exile: CardFilter };
     readonly filter?: CardFilter;
     readonly keywords: readonly Keyword[];
     readonly protection?: true;

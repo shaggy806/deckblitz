@@ -21259,6 +21259,23 @@ describe("keywords of the exiled cards used to craft it", () => {
     });
   });
 
+  it("reads Rayami's, over the exiled creature cards with a blood counter", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Vampire",
+      oracle_text:
+        "As long as an exiled creature card with a blood counter on it has flying, Test Card has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.",
+    } as never) as unknown as { static: Record<string, unknown>[] };
+    expect(face.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      sharesKeywords: {
+        from: { exile: { type: "creature", counters: { kind: "blood", compare: { op: "gte", n: 1 } } } },
+        protection: true,
+      },
+    });
+    expect((face.static[0].sharesKeywords as { keywords: string[] }).keywords).toHaveLength(12);
+  });
+
   it("reads Spy Kit's all names of nonlegendary creature cards", () => {
     const face = parseFace({
       name: "Test Card",
