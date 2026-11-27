@@ -3941,6 +3941,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(
       face("For each Spirit, return it to its owner's hand unless that player pays {3}.", "Sorcery", {}).effect,
     ).toMatchObject({ kind: "for-each-unless", of: { permanents: { subtype: "Spirit" } }, asks: "owner" });
+    // Cleansing: every player asked in turn, the unpaid lands destroyed together.
+    expect(face("For each land, destroy that land unless any player pays 1 life.", "Sorcery", {}).effect).toEqual({
+      kind: "for-each-unless",
+      of: { permanents: { type: "land" } },
+      asks: { anyOf: "each-player" },
+      options: [{ payLife: 1, text: "Pay 1 life to keep {it}" }],
+      otherwise: { kind: "destroy", target: 0, atRelease: true },
+    });
+    // Caller of the Hunt: a creature type chosen as it's cast, kept on the permanent.
+    expect(face("As an additional cost to cast this spell, choose a creature type.", "Creature — Human", {}).additionalCost).toEqual({
+      chooseCreatureType: true,
+    });
     // Mind Warp's exact X, not "up to".
     expect(
       face("Look at target player's hand and choose X cards from it. That player discards those cards.", "Sorcery", {}).effect,

@@ -8,6 +8,8 @@
     "effect:swap-tapped-state",
     "amount:power-before-move",
     "stat:trigger-only-once-per-object",
+    "effect:for-each-permanent-unless-any-player-pays",
+    "cost:creature-type-chosen-as-cast-kept-on-permanent",
     "amount:domain-of-target-player",
     "filter:ability-cost-without-tap",
     "amount:graveyard-count-of-enchanted-controller",

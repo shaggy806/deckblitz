@@ -5314,6 +5314,16 @@ export interface CardDefinition {
      * this one are paid as well, on top of whichever option is chosen.
      */
     readonly options?: readonly AdditionalCostOption[];
+    /**
+     * "As an additional cost to cast this spell, **choose a creature type**"
+     * (Caller of the Hunt): the type is chosen as the cost is paid (rule
+     * 601.2h), before anyone gets priority (the `choose-creature-type`
+     * decision's `forCost`), and becomes the spell's `chosenCreatureType` —
+     * which the permanent it becomes keeps (rule 607.2j: its "the chosen
+     * type" refers to the choice made as it was cast), read through
+     * `CardFilter.ofChosenType`.
+     */
+    readonly chooseCreatureType?: true;
   } | null;
   /**
    * Splice onto [quality] [cost] (rule 702.47): while this card is in its
@@ -7185,6 +7195,7 @@ interface CardDraft {
     readonly returnToHandX?: CardFilter;
     readonly also?: KickerAlsoCost;
     readonly options?: readonly AdditionalCostOption[];
+    readonly chooseCreatureType?: true;
   };
   splice?: { readonly onto: "arcane" | "instant-or-sorcery"; readonly cost: string; readonly also?: KickerAlsoCost };
   kicker?: {

@@ -47263,6 +47263,23 @@ controlledBy,
         const entry = { object: target.object, stint: object.zoneChangeCount ?? 0, by: controller };
         this.state.heldChoices = { ...held, taps: [...(held.taps ?? []), entry] };
       },
+      destroyAtRelease: (target, cantBeRegenerated) => {
+        const held = this.state.heldChoices;
+        const object = target.kind === "object" ? this.state.objects[target.object] : undefined;
+        if (held === undefined || object === undefined || target.kind !== "object") {
+          this.destroyByEffect(target, true, cantBeRegenerated);
+          return;
+        }
+        if (object.zone !== "battlefield") return;
+        const stint = object.zoneChangeCount ?? 0;
+        if (held.destroys?.some((d) => d.object === target.object && d.stint === stint) === true) return;
+        const entry = {
+          object: target.object,
+          stint: object.zoneChangeCount ?? 0,
+          ...(cantBeRegenerated ? { noRegen: true as const } : {}),
+        };
+        this.state.heldChoices = { ...held, destroys: [...(held.destroys ?? []), entry] };
+      },
       manaCostToPay: (ref) => {
         const object = ref.kind === "object" ? this.state.objects[ref.object] : undefined;
         if (object === undefined || object.faceDown !== undefined) return null;
@@ -53724,7 +53741,7 @@ controlledBy,
           source: spell,
           options: shared,
           catalog: shared.length > 12,
-          prompt: "Choose the creature type of your choice — one its targets share",
+          prompt: ask.anyCreatureType === true ? "Choose a creature type" : "Choose the creature type of your choice — one its targets share",
           forCost: { stint: object.zoneChangeCount ?? 0, priorityTo },
         };
       }
@@ -53741,6 +53758,11 @@ controlledBy,
   private queueSharedTypeChoice(spell: ObjectId, player: PlayerId, priorityTo: PlayerId): void {
     const object = this.state.objects[spell];
     if (object === undefined) return;
+    // "As an additional cost to cast this spell, choose a creature type"
+    // (Caller of the Hunt — rule 601.2h): any type at all.
+    if (this.registry.get(printedCardName(object)).additionalCost?.chooseCreatureType === true) {
+      (this.state.pendingAlsoCosts ??= []).push({ spell, player, priorityTo, sharedCreatureTypes: CREATURE_TYPES, anyCreatureType: true });
+    }
     const declared = this.spellTargetSpecs(object);
     for (const { spec, members } of groupMembers(declared, object.targets ?? [])) {
       if (typeof spec !== "object" || spec.kind !== "any-number" || spec.oneCreatureType !== true || members.length === 0) continue;
@@ -68257,6 +68279,17 @@ controlledBy,
         }
       });
     }
+    // Cleansing's lands nobody paid for: destroyed in one event (rule
+    // 101.4), each still the permanent it was when held (rule 400.7).
+    if (held.destroys !== undefined && held.destroys.length > 0) {
+      for (const { object, stint, noRegen } of held.destroys) {
+        const now = this.state.objects[object];
+        if (now?.zone !== "battlefield" || (now.zoneChangeCount ?? 0) !== stint) continue;
+        this.state.pendingDestruction.push(object);
+        if (noRegen === true) (this.state.pendingDestructionNoRegen ??= []).push(object);
+      }
+      this.drainPendingDestruction();
+    }
     // Cut the Tethers: one event (rule 603.10a).
     if (held.returns !== undefined) {
       const returns = held.returns;
@@ -77606,8 +77639,15 @@ controlledBy,
     // An ETB "choose a creature type" choice ends when the object changes
     // zones — a fresh entry chooses again (Urza's Incubator — P14). So does
     // any other "as this enters" choice (a Heraldic Banner that comes back
-    // names a colour afresh).
-    object.chosenCreatureType = null;
+    // names a colour afresh). A type chosen as an additional cost to cast it
+    // (Caller of the Hunt) is kept by the permanent the spell becomes: its
+    // text refers to that choice (rule 607.2j).
+    const castTypeKept =
+      resolving &&
+      fromZone === "stack" &&
+      to === "battlefield" &&
+      this.registry.get(printedCardName(object)).additionalCost?.chooseCreatureType === true;
+    if (!castTypeKept) object.chosenCreatureType = null;
     delete object.chosenOnEnter;
     delete object.chosenOnEnterAlso;
     delete object.chosenOnEnterBy;

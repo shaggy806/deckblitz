@@ -3594,6 +3594,10 @@ export interface AlsoCostAsk {
    * when there's one, else asked (`choose-creature-type`'s `forCost`). Not a
    * cost: queued here to be settled before anyone gets priority. */
   readonly sharedCreatureTypes?: readonly string[];
+  /** `sharedCreatureTypes` is every creature type: "as an additional cost to
+   * cast this spell, choose a creature type" (Caller of the Hunt —
+   * `additionalCost.chooseCreatureType`), which only changes the prompt. */
+  readonly anyCreatureType?: true;
   /** The evidence is a mandatory additional cost's (Urgent Necropsy): not
    * declinable, and evidence 0 counts as collected with nothing exiled. */
   readonly evidenceRequired?: true;
@@ -7373,6 +7377,10 @@ export interface GameState {
      * control", the creatures tapped at the same time): each with its stint
      * when it was held and the player tapping it. */
     readonly taps?: readonly { readonly object: ObjectId; readonly stint: number; readonly by: PlayerId }[];
+    /** Permanents to destroy together, in one event — `destroy`'s
+     * `atRelease` (Cleansing's lands nobody paid for): each with its stint
+     * when it was held, and whether it can't be regenerated. */
+    readonly destroys?: readonly { readonly object: ObjectId; readonly stint: number; readonly noRegen?: true }[];
   };
   /**
    * The players a `search-library`'s `shufflesLater` left owing their library

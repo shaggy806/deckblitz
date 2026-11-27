@@ -4084,6 +4084,14 @@ export type EffectSpec =
       /** "It can't be regenerated" (rule 701.15c — Terminate): a
        * regeneration shield doesn't replace this destruction. */
       readonly cantBeRegenerated?: boolean;
+      /** With choices held (a `for-each-unless`'s declines): it's destroyed
+       * when they're released, with every other permanent held this way, in
+       * one event (rule 101.4: the choices are made in turn, then the actions
+       * happen at once) — Cleansing's "for each land, destroy that land
+       * unless any player pays 1 life". A permanent that has left the
+       * battlefield by then isn't destroyed (rule 400.7). Destroyed at once
+       * with nothing held. */
+      readonly atRelease?: true;
     }
   | {
       /**
@@ -15501,6 +15509,8 @@ export interface EffectApi {
   putOnLibraryAtRelease(target: TargetRef, position: LibraryPosition): void;
   /** See `tap`'s `atRelease`. */
   tapAtRelease(target: TargetRef): void;
+  /** See `destroy`'s `atRelease`. */
+  destroyAtRelease(target: TargetRef, cantBeRegenerated: boolean): void;
   /** Ask `player` an `"each-player-may"`'s question: a `choose-modes`
    * decision of theirs, or nothing at all when there's nothing they could
    * take. */
@@ -22072,7 +22082,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "destroy": {
       if (asksReplacementOrder(spec, ctx)) return;
       const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.destroyPermanent(target, spec.cantBeRegenerated === true);
+      if (target !== undefined && spec.atRelease === true) ctx.destroyAtRelease(target, spec.cantBeRegenerated === true);
+      else if (target !== undefined) ctx.destroyPermanent(target, spec.cantBeRegenerated === true);
       return;
     }
     case "destroy-all": {

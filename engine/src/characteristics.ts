@@ -5417,7 +5417,9 @@ export function countValue(
       return permanentCount(
         state,
         state.zones.shared.battlefield.filter((id) =>
-          matchesFilter(state, registry, id, spec.countOf, { you: controller }),
+          // The source too, for what its filter reads of it: "creatures of
+          // the chosen type" (Caller of the Hunt's `ofChosenType`).
+          matchesFilter(state, registry, id, spec.countOf, source === undefined ? { you: controller } : { you: controller, source }),
         ),
       );
     }

@@ -4152,6 +4152,17 @@ export function parseSentence(sentence, ctx) {
       otherwise: { kind: "return-to-hand", target: 0, atRelease: true },
     };
   }
+  // "For each land, destroy that land unless any player pays 1 life"
+  // (Cleansing): every player asked in turn, the unpaid destroyed together.
+  if ((M = /^for each (land|creature|artifact|enchantment|permanent), destroy (?:that \1|it) unless any player pays (\d+) life\.$/i.exec(s))) {
+    return {
+      kind: "for-each-unless",
+      of: { permanents: M[1].toLowerCase() === "permanent" ? {} : { type: M[1].toLowerCase() } },
+      asks: { anyOf: "each-player" },
+      options: [{ payLife: Number(M[2]), text: `Pay ${M[2]} life to keep {it}` }],
+      otherwise: { kind: "destroy", target: 0, atRelease: true },
+    };
+  }
   // "For each spell and ability your opponents control, counter it unless its
   // controller pays {4}" (Whirlwind Denial): the stack's, countered together.
   if ((M = /^for each spell and ability your opponents control, counter it unless its controller pays (\{\d+\})\.$/i.exec(s))) {
@@ -20135,6 +20146,11 @@ function parseFaceAsWritten(face, ctx = {}) {
     // "Choose a number between 0 and 5" (Liquid Fire): announced like an X.
     if (isSpell && (m = /^As an additional cost to cast ~, choose a number between (\d+) and (\d+)\.$/.exec(line))) {
       out.additionalCost = { chooseNumber: { min: Number(m[1]), max: Number(m[2]) } };
+      continue;
+    }
+    // "Choose a creature type" (Caller of the Hunt): kept on the permanent.
+    if (!/\bLand\b/.test(face.type_line ?? "") && line === "As an additional cost to cast ~, choose a creature type.") {
+      out.additionalCost = { chooseCreatureType: true };
       continue;
     }
     // The March cycle: cards from hand named as it's cast, each taking this off.
