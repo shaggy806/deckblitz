@@ -154,6 +154,11 @@ export interface ManaCastFrom {
  *   spell cast face down by morph, megamorph or disguise (rule 708.4), all of
  *   its cost. A face-down permanent is a creature (708.2a), so "to turn
  *   creatures face up" is `"turn-face-up"`.
+ * - `"morph-cost"`: "to pay a morph cost" (Qarsi Deceiver): turning a permanent
+ *   face up for its morph or megamorph cost (702.37e; a megamorph cost is a
+ *   morph cost, 702.37b), not a disguise cost. `"manifested-face-up"`: "to pay
+ *   a mana cost to turn a manifested creature face up" (701.40b), not a
+ *   cloaked one's (701.58b). Narrower parts of `"turn-face-up"`.
  * - `"disturb"`: "to pay a disturb cost" (Unblinking Observer): a spell cast
  *   for its disturb cost (rule 702.146), whatever spell it is.
  * - `"equip-ability"`: an equip ability (Ronin, Shadow Stalker), not every
@@ -175,6 +180,8 @@ export interface ManaCastFrom {
  */
 export type ManaSpendPurpose =
   | "turn-face-up"
+  | "morph-cost"
+  | "manifested-face-up"
   | "face-down-spell"
   | "unlock-door"
   | "disturb"

@@ -9263,7 +9263,10 @@ Delete an entry in the same commit as the feature that retires it.
     (Cavern of Souls, Unclaimed Territory, Secluded Courtyard, Ancient
     Ziggurat). `purposes` names what a filter can't, beside `spell` or alone:
     `"turn-face-up"`, `"face-down-spell"` ("to cast face-down spells", a
-    `via: "face-down"` cast — Tin Street Gossip), `"unlock-door"`, `"disturb"`, `"equip-ability"`,
+    `via: "face-down"` cast — Tin Street Gossip), `"morph-cost"` ("pay a morph
+    cost": morph or megamorph, never disguise) and `"manifested-face-up"` ("pay a
+    mana cost to turn a manifested creature face up", not a cloaked one) — the
+    narrower parts of `"turn-face-up"` (Qarsi Deceiver), `"unlock-door"`, `"disturb"`, `"equip-ability"`,
     `"power-up-ability"`, `"class-level"`, `"foretell"` (Karfell Harbinger),
     `"cumulative-upkeep"` (Adarkar Unicorn; any `unless` paying `times` the source's
     age counters, which is what `cumulativeUpkeep` writes), `"cost-with-x"` ("on

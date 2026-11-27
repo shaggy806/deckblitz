@@ -9097,3 +9097,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **What an Equipment was unattached from (2026-11-26).** `condition:unattached-from-filter`: the paid set `{ paid: "unattached-from" }` (recorded by every unattach cost, its member's `was` taken before the unattach), read by `object-matches`. Shuriken. `test/unattached-from.test.ts`.
 **Sacrifice all permanents and discard your hand as a cost (2026-11-27).** `cost:additional-cost-sacrifice-all-and-discard-hand`: no engine code, an `additionalCost.also.do` `sequence` of `sacrifice-all` (`filter: {}`) and `discard-hand`; scaffolded. Kaervek's Spite. `test/sacrifice-all-and-discard-hand-cost.test.ts`.
+
+**Mana only for face-down spells, morph costs and manifests (2026-11-27).** `cost:spend-only-face-down-spells-and-morph`: `ManaSpendPurpose` `"morph-cost"` and `"manifested-face-up"`, read off the turn-face-up purpose's `faceUpBy` (`Game.faceUpBy`), beside `"face-down-spell"`. Qarsi Deceiver. `test/mana-spend-morph-cost.test.ts`.

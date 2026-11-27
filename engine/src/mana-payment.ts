@@ -335,6 +335,10 @@ export type ManaPurpose =
   | {
       readonly kind: "special";
       readonly action: "turn-face-up" | "unlock-door" | "foretell" | "cumulative-upkeep" | "other";
+      /** A `"turn-face-up"`'s way (rules 702.37e, 702.168d, 701.40b, 701.58b):
+       * a morph or megamorph cost, a disguise cost, or a manifested or cloaked
+       * permanent's mana cost. */
+      readonly faceUpBy?: "morph" | "disguise" | "manifest" | "cloak";
       readonly xCost?: true;
       readonly cCost?: true;
     }

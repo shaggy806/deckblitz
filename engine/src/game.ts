@@ -2060,7 +2060,11 @@ function manaPurposeIs(named: ManaSpendPurpose, purpose: Exclude<ManaPurpose, nu
       (named === "face-down-spell" && purpose.faceDown === true)
     );
   }
-  if (purpose.kind === "special") return named === purpose.action;
+  if (purpose.kind === "special") {
+    if (named === "morph-cost") return purpose.action === "turn-face-up" && purpose.faceUpBy === "morph";
+    if (named === "manifested-face-up") return purpose.action === "turn-face-up" && purpose.faceUpBy === "manifest";
+    return named === purpose.action;
+  }
   const ability = purpose.ability;
   if (ability === undefined) return false;
   if (named === "equip-ability") return isEquipAbility(ability);
@@ -2071,12 +2075,14 @@ function manaPurposeIs(named: ManaSpendPurpose, purpose: Exclude<ManaPurpose, nu
 /** Foretelling a card (rule 702.143a), a special action. */
 const FORETELL_PURPOSE: ManaPurpose = { kind: "special", action: "foretell" };
 
-/** Turning a permanent face up for `cost` (rule 116.2b), a special action. */
-function turnFaceUpPurpose(cost: string): ManaPurpose {
+/** Turning a permanent face up for `cost` (rule 116.2b), a special action,
+ * the way `by` says (`Game.faceUpBy`). */
+function turnFaceUpPurpose(cost: string, by: "morph" | "disguise" | "manifest" | "cloak" | undefined): ManaPurpose {
   const parsed = parseManaCost(cost);
   return {
     kind: "special",
     action: "turn-face-up",
+    ...(by !== undefined ? { faceUpBy: by } : {}),
     ...(parsed.x > 0 ? { xCost: true as const } : {}),
     ...(parsed.colorless > 0 ? { cCost: true as const } : {}),
   };
@@ -5109,6 +5115,7 @@ export class Game {
                 maxX: this.maxAffordableAbilityX(player, (x) => this.morphManaCost(player, id, printed, x), undefined, undefined, {
                   kind: "special",
                   action: "turn-face-up",
+                  faceUpBy: printed.keyword === "disguise" ? "disguise" : "morph",
                   xCost: true,
                 }),
               }
@@ -64138,7 +64145,7 @@ controlledBy,
       morph ? concreteX(parseManaCost(cost), Math.max(0, Math.floor(x)), undefined) : parseManaCost(cost),
       undefined,
       undefined,
-      turnFaceUpPurpose(cost),
+      turnFaceUpPurpose(cost, this.faceUpBy(id, morph)),
     );
     if (plan === null) return `${player} cannot pay ${cost}`;
     const also = morph ? card.morph?.also : undefined;
@@ -64186,6 +64193,22 @@ controlledBy,
     // face down (708.2a).
     if (object.faceDown.kind !== "manifest" && object.faceDown.kind !== "cloak") return null;
     return card.types.includes("creature") ? card.manaCost : null;
+  }
+
+  /** Which way turning `id` face up is paid, for a mana restriction that
+   * names one (Qarsi Deceiver's "pay a morph cost", rule 106.6): its morph or
+   * megamorph cost (702.37b), its disguise cost, or a manifested or cloaked
+   * permanent's mana cost (701.40b, 701.58b). */
+  private faceUpBy(id: ObjectId, morph: boolean): "morph" | "disguise" | "manifest" | "cloak" | undefined {
+    const object = this.state.objects[id];
+    if (object?.faceDown === undefined) return undefined;
+    if (morph) {
+      const printed = this.registry.get(object.cardName).morph;
+      if (printed === null) return undefined;
+      return printed.keyword === "disguise" ? "disguise" : "morph";
+    }
+    const kind = object.faceDown.kind;
+    return kind === "manifest" || kind === "cloak" ? kind : undefined;
   }
 
   /**
@@ -64351,7 +64374,7 @@ controlledBy,
       morph ? concreteX(parseManaCost(cost), chosenX, undefined) : parseManaCost(cost),
       undefined,
       undefined,
-      turnFaceUpPurpose(cost),
+      turnFaceUpPurpose(cost, this.faceUpBy(id, morph)),
     );
     if (payment === null) throw new Error(`${player} cannot pay ${cost}`);
     this.executePayment(player, payment);
