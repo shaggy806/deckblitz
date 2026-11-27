@@ -13451,6 +13451,13 @@ describe("a static acting on a player", () => {
     expect(upkeep.triggered[0].condition).toEqual({ kind: "source", filter: { startedTurnUntapped: true } });
   });
 
+  it("reads a colour and a creature type chosen as it enters — Volrath's Laboratory, Riptide Replicator", () => {
+    const lab = face("Artifact", "As Test Curse enters, choose a color and a creature type.");
+    expect(lab.complete).toBe(true);
+    expect(lab.chooseOnEnter).toEqual(["W", "U", "B", "R", "G"]);
+    expect(lab.chooseCreatureTypeOnEnter).toBe(true);
+  });
+
   it("reads Abyssal Persecutor's inverse pair", () => {
     const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
     expect(demon.complete).toBe(true);

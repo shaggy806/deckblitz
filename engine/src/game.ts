@@ -18020,7 +18020,8 @@ export class Game {
           return { kind: "choose", options, answerer, prompt: `each player chooses ${options.join(" or ")}` };
         }
       }
-      if (becoming.chooseCreatureTypeOnEnter) {
+      // With a colour to choose too, the colour first (below).
+      if (becoming.chooseCreatureTypeOnEnter && becoming.chooseOnEnter === null) {
         const menu = becoming.chooseCreatureTypeMenu;
         return menu === null ? { kind: "choose", ...by } : { kind: "choose", options: menu, ...by };
       }
@@ -18093,6 +18094,18 @@ export class Game {
       if (taken.length < chooseCount && rest.length > 0) {
         return { kind: "choose", options: rest, prompt: chooseSeveralPrompt(chooseCount, taken.length) };
       }
+    }
+    // "Choose a color and a creature type" (Riptide Replicator): the type
+    // once the colour is chosen, kept as `chosenAlso`'s and committed as the
+    // permanent's `chosenCreatureType`.
+    if (
+      answered?.chosen !== undefined &&
+      becoming.chooseOnEnter !== null &&
+      becoming.chooseCreatureTypeOnEnter &&
+      (answered.chosenAlso?.length ?? 0) === 0
+    ) {
+      const menu = becoming.chooseCreatureTypeMenu;
+      return menu === null ? { kind: "choose" } : { kind: "choose", options: menu };
     }
     // "As this enters, choose a card name" (rule 201.4) — printed, or a copy's.
     if (answered?.chosenName === undefined && becoming.chooseCardNameOnEnter !== null) {
@@ -46521,6 +46534,11 @@ controlledBy,
         return [departed.chosenOnEnter, ...(departed.chosenOnEnterAlso ?? [])].filter(
           (c): c is Color => c != null && (COLORS as readonly string[]).includes(c),
         );
+      },
+      chosenCreatureTypeOfSource: () => {
+        const departed = departedSource();
+        const chosen = departed !== undefined ? departed.chosenCreatureType : this.state.objects[source]?.chosenCreatureType;
+        return chosen ?? undefined;
       },
       commanderColors: () => this.state.players[controller]?.commanderIdentity ?? [],
       chosenNumberOfSource: () => {
@@ -77973,7 +77991,10 @@ controlledBy,
       }
       if (enterChoice.chosenBy !== undefined) object.chosenOnEnterBy = enterChoice.chosenBy;
       if (enterChoice.chosen !== undefined) {
-        object.chosenCreatureType = enterChoice.chosen;
+        // A colour then a creature type (Riptide Replicator): the type is the
+        // second answer.
+        const typeAfter = enterChoice.chosenAlso?.[0];
+        object.chosenCreatureType = typeAfter !== undefined && isCreatureType(typeAfter) ? typeAfter : enterChoice.chosen;
         object.chosenOnEnter = enterChoice.chosen;
         if (enterChoice.chosenAlso !== undefined) object.chosenOnEnterAlso = enterChoice.chosenAlso;
         // "It becomes your choice of …" (Primal Clay): what was chosen is a

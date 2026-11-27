@@ -21065,6 +21065,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.chooseOnEnter = ["W", "U", "B", "R", "G"];
       continue;
     }
+    // "… choose a color and a creature type." (Riptide Replicator, Volrath's
+    // Laboratory): the colour, then the type (`chosenCreatureType`).
+    if (line === "As ~ enters, choose a color and a creature type.") {
+      out.chooseOnEnter = ["W", "U", "B", "R", "G"];
+      out.chooseCreatureTypeOnEnter = true;
+      continue;
+    }
     // "As this Equipment becomes attached to a creature, choose a color"
     // (Sanctuary Blade): Psychic Paper's `asBecomesAttached`, the color kept
     // on it as the last chosen (`note`'s `word`), and "protection from the

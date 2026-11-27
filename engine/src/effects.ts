@@ -52,7 +52,7 @@ import type { DelayedAt, DelayedStepWatch } from "./delayed-at.js";
 import { readDelayedAt } from "./delayed-at.js";
 import { bindCombatRule } from "./combat/rules.js";
 import type { CombatRuleRefs } from "./combat/rules.js";
-import { textWordKind, type TextChange, type TextWords } from "./text-change.js";
+import { COLOR_WORDS, textWordKind, type TextChange, type TextWords } from "./text-change.js";
 import type {
   AttachmentRecord,
   AwaitingDecision,
@@ -2073,6 +2073,11 @@ export function substituteChosenCreatureType(spec: EffectSpec, creatureType: str
 export type ForEachSlots = "basic-land-types" | "colors" | "powers" | readonly CardType[];
 
 export const CHOSEN_COLOR = "$chosenColor" as Color;
+/** The token `create-token`'s `ofChosenColorAndType` makes: a 0/0 white
+ * Soldier, made the chosen colour and type as a changed text would make it. */
+export const CHOSEN_COLOR_AND_TYPE_TOKEN = "Soldier Token (Chosen Color and Type)";
+/** The creature type {@link CHOSEN_COLOR_AND_TYPE_TOKEN} is written with. */
+const CHOSEN_TOKEN_TYPE = "Soldier";
 export const CHOSEN_CARD_TYPE = "$chosenCardType" as CardType;
 export const CHOSEN_COUNTER = "$chosenCounter";
 /** A `change-text`'s word, as each of its two choices is answered. */
@@ -10138,6 +10143,15 @@ export type EffectSpec =
       /** Name of a token definition in the {@link CardRegistry}. */
       readonly token: string;
       readonly count: EffectAmount;
+      /** "Create a 2/2 creature token of the chosen color and type"
+       * (Volrath's Laboratory; Riptide Replicator's X/X with `basePt`): the
+       * colour and the creature type the source chose as it entered
+       * (`chooseOnEnter` colours beside `chooseCreatureTypeOnEnter`), as it
+       * last was if it has left (608.2h). `token` is {@link
+       * CHOSEN_COLOR_AND_TYPE_TOKEN}, a white Soldier made what was chosen —
+       * named for its type, "Bird Token", with no abilities of the type's
+       * (the rulings). Nothing is made with nothing chosen. */
+      readonly ofChosenColorAndType?: true;
       /** Who the tokens are created under the control of — the effect's
        * controller (default), or the controller of `targets[0]` (Beast Within:
        * "its controller creates a 3/3 Beast"; An Offer You Can't Refuse: the
@@ -15399,6 +15413,9 @@ export interface EffectApi {
    * `chooseOnEnterCount` (Tablet of the Guilds) — as it last was if it has
    * left (rule 608.2h). See `colorsOf`'s `chosen`. */
   chosenColorsOfSource(): readonly Color[];
+  /** The creature type the effect's source chose as it entered, as it last
+   * was if it has left (rule 608.2h), or `undefined`. */
+  chosenCreatureTypeOfSource(): string | undefined;
   /** The number chosen as the source entered, if one was — see the
    * `chosenNumber` {@link EffectAmount}. */
   chosenNumberOfSource(): number | undefined;
@@ -25183,6 +25200,26 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "create-token":
+      // "A token of the chosen color and type" (Riptide Replicator): the
+      // white Soldier the token is written as, made the colour and creature
+      // type its source chose as it entered (rule 111.3, the token named for
+      // its type — the rulings), as a changed text would make it. Nothing
+      // chosen, nothing to make.
+      if (spec.ofChosenColorAndType === true) {
+        const color = ctx.chosenColorsOfSource()[0];
+        const type = ctx.chosenCreatureTypeOfSource();
+        if (color === undefined || type === undefined) return;
+        const { ofChosenColorAndType: _chosen, ...made } = spec;
+        const changes: TextChange[] = [
+          ...(color !== "W" ? [{ from: COLOR_WORDS.W, to: COLOR_WORDS[color] }] : []),
+          ...(type !== CHOSEN_TOKEN_TYPE ? [{ from: CHOSEN_TOKEN_TYPE, to: type }] : []),
+        ];
+        applyEffectSpec(
+          changes.length === 0 ? made : { ...made, tokenTextChanges: [...changes, ...(spec.tokenTextChanges ?? [])] },
+          ctx,
+        );
+        return;
+      }
       // Investigating (rule 701.16a): the Clues, then each investigation
       // announced — whatever a replacement made of the tokens.
       if (spec.investigate === true) {
