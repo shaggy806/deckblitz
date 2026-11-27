@@ -19,9 +19,10 @@
 
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
-import { intrinsicManaColors } from "./characteristics.js";
+import { intrinsicManaColors, staticConditionMet } from "./characteristics.js";
+import { matchesFilter } from "./filter.js";
 import type { EffectSpec } from "./effects.js";
-import { COLORS, parseManaCost } from "./mana.js";
+import { COLORS, manaValue, parseManaCost } from "./mana.js";
 import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameState } from "./state.js";
@@ -241,4 +242,150 @@ export function newColorsFirst(
     }
   }
   return out;
+}
+
+/** The colours a land card in hand could make next turn if it were the land
+ * drop: its own mana abilities and basic land types, or — a land that
+ * fetches untapped (Windswept Heath, Prismatic Vista) — those of the lands in
+ * our library its search can find. A land that enters tapped,
+ * always or as the board stands (a Moor with its condition unmet), is
+ * `null`: no mana next turn. An empty set is a colourless source. */
+function nextDropColors(
+  state: GameState,
+  registry: CardRegistry,
+  me: PlayerId,
+  id: ObjectId,
+  identity: readonly Color[],
+): Set<Color> | null {
+  const object = state.objects[id];
+  if (object === undefined || !registry.has(object.cardName)) return null;
+  const def = registry.get(object.cardName);
+  const tapped = def.static.some((ability) => {
+    const r = ability.replacement;
+    if (r?.event !== "enters-battlefield" || r.tappedUnlessRevealFromHand !== undefined || r.mayPayLife !== undefined) return false;
+    if (r.tapped === true) return true;
+    return r.tappedUnless !== undefined && !staticConditionMet(state, registry, object, r.tappedUnless);
+  });
+  if (tapped) return null;
+  const own = colorsOf(state, registry, id, identity);
+  if (own.size > 0) return own;
+  const found = new Set<Color>();
+  let fetches = false;
+  for (const ability of def.activated ?? []) {
+    const effect = ability.effect;
+    if (effect?.kind !== "search-library" || effect.destination !== "battlefield" || effect.enterTapped === true) continue;
+    if (ability.cost.mana !== null && ability.cost.mana !== undefined) continue;
+    fetches = true;
+    for (const card of state.zones.perPlayer[me]?.library ?? []) {
+      if (!matchesFilter(state, registry, card, effect.filter, { you: me })) continue;
+      for (const c of colorsOf(state, registry, card, identity)) found.add(c);
+    }
+  }
+  // A land with only colourless mana is still a source for generic.
+  return fetches ? found : own;
+}
+
+/** Whether `pips` (one colour each) can be paid one a source, by sources
+ * making `sources`' colours: the most of them that can, by augmenting paths. */
+function payablePips(pips: readonly Color[], sources: readonly ReadonlySet<Color>[]): number {
+  const owner: number[] = sources.map(() => -1);
+  const tryPip = (pip: number, seen: boolean[]): boolean => {
+    for (let s = 0; s < sources.length; s += 1) {
+      if (seen[s] || !sources[s].has(pips[pip])) continue;
+      seen[s] = true;
+      if (owner[s] === -1 || tryPip(owner[s], seen)) {
+        owner[s] = pip;
+        return true;
+      }
+    }
+    return false;
+  };
+  let paid = 0;
+  for (let pip = 0; pip < pips.length; pip += 1) if (tryPip(pip, sources.map(() => false))) paid += 1;
+  return paid;
+}
+
+/** What a commander's cost all but paid is worth against all of it: a
+ * quarter of the share paid. Being castable next turn is what a land line
+ * buys; four colours of five buy little. At a half, Moldering Gym's line
+ * (four of five) still beat Krosan Verge's (all five) on the HK3Z2 board. */
+const PARTLY_READY = 0.25;
+
+/**
+ * How near `me`'s commanders are to being cast on our next turn, each by its
+ * mana value: for one waiting in the command zone, 1 when the permanents we
+ * control and one land drop from hand pay its whole cost, tax included (each
+ * coloured symbol by a source of its colour, one a source, the rest by any
+ * source), and otherwise {@link PARTLY_READY} of the share of its symbols
+ * they pay; for one anywhere else (cast, on the battlefield), 1, so casting
+ * it gives nothing up. Summed over our commanders, each times its mana value:
+ * a five-drop a round late is a bigger loss than a two-drop.
+ *
+ * Each source is one mana, as `lands` counts them: a Sol Ring is one, not
+ * two. Tapped permanents count (they untap first). The land drop is the one
+ * of the lands in hand that pays most, a fetch by what it can find.
+ *
+ * Reported from a live game (2026-11-27, kept game HK3Z2-1): a five-colour
+ * First Sliver deck with Polluted Delta and Windswept Heath in hand fetched a
+ * Forest and cast Moldering Gym on turn 12, where an Island and Krosan
+ * Verge's two lands made all five colours by turn 16. Nothing in the
+ * evaluation read the commander's colours, so the Gym's permanent won, and
+ * The First Sliver came a round late.
+ */
+export function commanderReadiness(state: GameState, registry: CardRegistry, me: PlayerId): number {
+  // Our commanders by name: as dealt, and any marked on the board (a board
+  // built by hand has no list).
+  const names = new Set<string>(state.players[me]?.commanders ?? []);
+  const waiting = new Map<string, ObjectId>();
+  for (const zone of [state.zones.shared.command, state.zones.shared.battlefield, state.zones.shared.stack]) {
+    for (const id of zone) {
+      const object = state.objects[id];
+      if (object === undefined || object.owner !== me || object.isCommander !== true || object.kind !== "card") continue;
+      names.add(object.cardName);
+      if (zone === state.zones.shared.command) waiting.set(object.cardName, id);
+    }
+  }
+  if (names.size === 0) return 0;
+  let total = 0;
+  let sources: Set<Color>[] | null = null;
+  let drops: (Set<Color> | null)[] = [];
+  for (const name of names) {
+    if (!registry.has(name)) continue;
+    const def = registry.get(name);
+    const cost = parseManaCost(def.manaCost);
+    const value = manaValue(cost);
+    if (!waiting.has(name)) {
+      total += value;
+      continue;
+    }
+    if (sources === null) {
+      const identity = state.players[me]?.commanderIdentity ?? [];
+      sources = [];
+      for (const id of state.zones.shared.battlefield) {
+        const object = state.objects[id];
+        if (object?.controller !== me || !registry.has(object.cardName)) continue;
+        const colors = colorsOf(state, registry, id, identity);
+        if (colors.size > 0 || registry.get(object.cardName).types.includes("land")) sources.push(colors);
+      }
+      drops = [null];
+      for (const id of state.zones.perPlayer[me]?.hand ?? []) {
+        const card = state.objects[id]?.cardName;
+        if (card === undefined || !registry.has(card) || !registry.get(card).types.includes("land")) continue;
+        const colors = nextDropColors(state, registry, me, id, identity);
+        if (colors !== null) drops.push(colors);
+      }
+    }
+    const pips = COLORS.flatMap((c) => Array<Color>(cost.colored[c]).fill(c));
+    const generic = cost.generic + cost.colorless + 2 * (state.players[me]?.commanderCastCounts[name] ?? 0);
+    const owed = pips.length + generic;
+    let ready = owed === 0 ? 1 : 0;
+    for (const drop of drops) {
+      const all = drop === null ? sources : [...sources, drop];
+      const colored = payablePips(pips, all);
+      const paid = colored + Math.min(generic, all.length - colored);
+      ready = Math.max(ready, paid >= owed ? 1 : (PARTLY_READY * paid) / owed);
+    }
+    total += ready * value;
+  }
+  return total;
 }

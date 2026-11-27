@@ -4,6 +4,30 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-27 — The First Sliver a round late: Moldering Gym over the commander's colours
+
+Status: fixed 2026-11-27. Scenario: "cracks Krosan Verge for the commander's colours, not a
+three-drop, a turn before it could cast the commander" (gate; fails with `commanderReady` 0).
+
+The friend asked why their First Sliver bot (`games/2026-11-27/HK3Z2-1-1220261709`, pbToast's seat)
+didn't cast it sooner. On turn 12, with Krosan Verge and a Plains out and Windswept Heath, Polluted
+Delta and Prismatic Vista in hand, it fetched a Forest and cast Moldering Gym. On turn 16 its lands
+made four colours of five (Blood Crypt makes black or red, not both), and Krosan Verge's two lands
+came in tapped, so The First Sliver waited until turn 20. Cracking the Verge on turn 12 instead
+leaves all five colours with turn 16's land drop from hand; scripted from the kept position, the bot
+then cast it on turn 16 by itself.
+
+**Why:** nothing in the evaluation read whether the lands can pay the commander. The Gym's
+permanent and standing effect scored 5.4 above the Verge's line, and the search's rollout ends with
+this turn, so the commander a round sooner never showed.
+
+**Fix:** a feature, `commanderReady` (weight 2, `land-colors.ts`'s `commanderReadiness`): each of our
+commanders times its mana value, by how near it is to being cast next turn. One waiting in the
+command zone is 1 when our mana sources and one land drop from hand (a fetch by what it can find in
+the library) pay its whole cost, tax included, each coloured symbol by a source of its colour; else a
+quarter of the share they pay. One already out counts 1, so casting it loses nothing. On the kept
+position the bot now cracks the Verge on turn 12 and casts The First Sliver on turn 16.
+
 ## 2026-11-27 — Slicer never equipped Beamtown Beatstick for the 21st commander damage
 
 Status: fixed 2026-11-27. Scenario: "equips Beamtown Beatstick for menace past a lone blocker, at

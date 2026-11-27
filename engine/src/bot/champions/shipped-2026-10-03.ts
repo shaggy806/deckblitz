@@ -48,6 +48,7 @@ export const SHIPPED_2026_10_03: Champion = {
     nonlandMana: 0.5,
     drawEngines: 4,
     commanderOnBoard: 3,
+    commanderReady: 0,
     idlePower: 0.5,
     extraTokens: 0,
     threat: 1,

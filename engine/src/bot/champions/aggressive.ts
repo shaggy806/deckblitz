@@ -51,6 +51,7 @@ export const AGGRESSIVE: Champion = {
     nonlandMana: 0,
     drawEngines: 0,
     commanderOnBoard: 0,
+    commanderReady: 0,
     idlePower: 0,
     // Frozen before the token cap: its old uncapped count, exactly.
     extraTokens: 0.3,

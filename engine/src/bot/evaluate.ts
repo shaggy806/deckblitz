@@ -140,6 +140,12 @@ export interface EvalWeights {
   /** Our commanders on the battlefield under our control: the one card a
    * deck is built around, which `creatures` scores like any other. */
   readonly commanderOnBoard: number;
+  /** Our commanders, each by its mana value, by how near it is to being cast
+   * next turn: one waiting in the command zone 1 when the mana we control and
+   * one land drop from hand pay its whole cost in its colours, else a quarter
+   * of the share they pay; one already out 1 (`land-colors.ts`'s
+   * `commanderReadiness`). */
+  readonly commanderReady: number;
   /** Subtracted: the combat damage of creatures that can't attack (Pacifism,
    * defender). At `power`'s weight it takes back exactly what `power` gives
    * them. */
@@ -386,6 +392,14 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // back to the command zone to be cast again ("holds Swords from a two-mana
   // commander on its third turn", which fails at 2).
   commanderOnBoard: 1,
+  // Lands toward the commander's colours: nothing else reads them, so a
+  // permanent cast now beat the land line that casts the commander a round
+  // sooner (kept game HK3Z2-1, 2026-11-27: Moldering Gym over Krosan Verge's
+  // two lands, The First Sliver four turns late). Per mana value of the
+  // commander; hand-set on that board, where the Room's permanent and
+  // standing effect came to 5.4 and the commander's whole cost to 0.8 of
+  // its 5.
+  commanderReady: 2,
   // **Keep equal to `power`.** Not a free weight: `power` is the combat damage
   // a creature could deal, and one that can't attack deals none, so this
   // takes back exactly what `power` credits it. At zero, v2 enchanted its own

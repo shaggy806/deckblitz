@@ -56,6 +56,7 @@ export const SHIPPED_2026_09_27: Champion = {
     nonlandMana: 0,
     drawEngines: 0,
     commanderOnBoard: 3,
+    commanderReady: 0,
     idlePower: 0.5,
     // Frozen before the token cap: its old uncapped count, exactly.
     extraTokens: 2,

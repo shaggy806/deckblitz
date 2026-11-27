@@ -2797,6 +2797,47 @@ const SCENARIOS: readonly BotScenario[] = [
       },
     }),
   ),
+  {
+    name: "cracks Krosan Verge for the commander's colours, not a three-drop, a turn before it could cast the commander",
+    rule: "With the commander a land line away, the lands that make its colours by next turn come before a permanent: the commander a round sooner is worth more than the three-drop a round sooner.",
+    run(weights, registry, makeBot) {
+      // Reported from a live game (2026-11-27, kept game HK3Z2-1, turn 12):
+      // pbToast's First Sliver deck, Krosan Verge and a Plains out, played
+      // Prismatic Vista for a Forest and cast Moldering Gym (an Island,
+      // tapped). By turn 16 its lands made four colours of five, and the
+      // First Sliver waited until turn 20. Cracking the Verge instead (two
+      // duals, tapped) left all five with turn 16's land drop from hand
+      // (Windswept Heath). The Gym's permanent and standing effect read 5.4
+      // above the Verge's line, and nothing read the commander's colours:
+      // `features.ts`'s `commanderReady` (`land-colors.ts`'s
+      // `commanderReadiness`) now does.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].commanderIdentity = ["W", "U", "B", "R", "G"];
+      const sliver = game.debugSpawn("The First Sliver", A, "command");
+      game.state.objects[sliver].isCommander = true;
+      // Played turns ago: its "enters tapped" has worn off.
+      const verge = onBoard(game, "Krosan Verge", A);
+      game.state.objects[verge].tapped = false;
+      onBoard(game, "Plains", A);
+      for (const land of ["Island", "Swamp", "Forest", "Mountain", "Stomping Ground", "Godless Shrine", "Hallowed Fountain", "Watery Grave", "Blood Crypt", "Temple Garden"]) {
+        game.debugSpawn(land, A, "library");
+      }
+      game.debugSpawn("Prismatic Vista", A, "hand");
+      game.debugSpawn("Windswept Heath", A, "hand");
+      game.debugSpawn("Polluted Delta", A, "hand");
+      const gym = game.debugSpawn("Moldering Gym // Weight Room", A, "hand");
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const cracked = taken.some((a) => a.type === "activate-ability" && a.source === verge && a.abilityIndex > 0);
+      const cast = taken.some((a) => a.type === "cast-spell" && a.card === gym);
+      const ours = game.state.zones.shared.battlefield
+        .filter((id) => game.state.objects[id]?.controller === A)
+        .map((id) => game.state.objects[id].cardName);
+      return {
+        passed: cracked && !cast,
+        detail: `${cracked ? "cracked Krosan Verge" : "kept Krosan Verge"}, ${cast ? "cast" : "held"} Moldering Gym; lands: ${ours.join(", ")}`,
+      };
+    },
+  },
   asked({
     name: "equips Beamtown Beatstick for menace past a lone blocker, at 20 commander damage",
     rule: "Menace needs two blockers: with one untapped creature across the table, equipping it makes the commander unblockable, and one hit is the 21st commander damage.",

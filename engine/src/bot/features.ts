@@ -56,6 +56,7 @@ import { entersToCounter } from "../effect-worth.js";
 import type { EffectSpec } from "../effects.js";
 import { matchesFilter } from "../filter.js";
 import { handedRound } from "../handed-round.js";
+import { commanderReadiness } from "../land-colors.js";
 import { manaValue, parseManaCost } from "../mana.js";
 import type { StaticPlay } from "../play-permission.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -105,6 +106,7 @@ export const FEATURE_KEYS = [
   "nonlandMana",
   "drawEngines",
   "commanderOnBoard",
+  "commanderReady",
   "idlePower",
   "extraTokens",
   "threat",
@@ -2087,6 +2089,10 @@ function playerFeaturesUncached(
     nonlandMana: nonlandMana - stuckMana * (1 - STUCK_MANA_SHARE),
     drawEngines,
     commanderOnBoard,
+    // How near our commander waiting in the command zone is to being cast
+    // next turn (`land-colors.ts`'s `commanderReadiness`): ours only, as the
+    // hand it reads is hidden.
+    commanderReady: isMe ? commanderReadiness(state, registry, player) : 0,
     idlePower,
     extraTokens,
     threat,
