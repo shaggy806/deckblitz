@@ -2494,6 +2494,11 @@ export function parseTrigger(clause) {
       ...(m[2] !== undefined ? { orBattle: true } : {}),
     }];
   }
+  // "When[ever] a spell you control deals damage" (Flame Channeler, Embodiment
+  // of Flame): the damage's source a spell, whatever its type (`isSpell`).
+  if (/^When(?:ever)? a spell you control deals damage$/.test(c)) {
+    return [{ on: "deals-damage", who: "you-control", filter: { isSpell: true } }];
+  }
   if (/^Whenever ~ deals combat damage to a player or battle$/.test(c)) {
     return [{ on: "deals-combat-damage-to-player", who: "self", orBattle: true }];
   }

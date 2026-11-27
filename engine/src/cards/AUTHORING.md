@@ -794,6 +794,12 @@ ruling), false once it has moved on. A face-down creature that died is this too:
 had no types (708.2), so Cryptic Pursuit's "whenever a face-down creature you control dies, exile it if
 it's an instant or sorcery card" asks `{ object: "trigger-object", filter: { typesAnyOf: ["instant",
 "sorcery"] }, now: true }` of the card it became (708.9), never a `trigger-object` condition.
+A target as `object` (a slot number) with `filter: { sharesCardTypeWith: { paid: "exiled" } }` is Holistic
+Wisdom's "return target card ... if it shares a card type with the card exiled this way" (the compare binds
+as the effect applies). `{ kind: "spell-would-destroy", spell: <slot>, filter }` is Equinox's "counter target
+spell if it would destroy a land you control": read off the spell's own instructions as cast (chosen modes,
+kicker, overload) - a `destroy` of a target still legal or a `destroy-all` that would take one - and never
+through a "may", a condition, a choice or a random result (`test/spell-would-destroy.test.ts`).
 
 `EffectSpec` (`effects.ts`) is the declarative vocabulary for what a spell or
 ability does on resolution. A `target:` field is an **index into `targets[]`**
@@ -7175,7 +7181,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   are one or more colors" is `{ isSpell: true, colorless: false }`, Emrakul, the
   World Anew's `{ anyOf: [{ isSpell: true }, { isSpell: false, cast: true,
   enteredThisTurn: true }] }`; a permanent and an ability aren't spells, nor is
-  an Aura put onto the battlefield. **`fromPlayers`** is a player as the quality
+  an Aura put onto the battlefield. As a `deals-damage` trigger's `filter` it is "whenever a
+  spell you control deals damage" (Flame Channeler), the damage's source a spell
+  on the stack as it deals it. **`fromPlayers`** is a player as the quality
   (702.16k): `"opponents"`, "each of your opponents" (Absolute Virtue on
   `playerProtection`), or `"chosen"`, the player chosen as it entered (True-Name
   Nemesis, `choosePlayerOnEnter`): what they control, or own with no controller

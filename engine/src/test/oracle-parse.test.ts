@@ -25319,6 +25319,19 @@ describe("its own card put into your hand from your graveyard (Golgari Brownscal
   });
 });
 
+describe("any spell you control dealing damage (Flame Channeler)", () => {
+  it("reads the trigger's source as a spell, whatever its type", () => {
+    const channeler = parseFace({
+      name: "Flame Channeler",
+      type_line: "Creature — Human Wizard",
+      oracle_text: "When a spell you control deals damage, transform this creature.",
+      mana_cost: "{1}{R}",
+      colors: ["R"],
+    }) as unknown as { triggered: { trigger: unknown }[] };
+    expect(channeler.triggered[0].trigger).toEqual({ on: "deals-damage", who: "you-control", filter: { isSpell: true } });
+  });
+});
+
 describe("a spell's damage to an opponent or battle, paid to return from the graveyard (Bloodfeather Phoenix)", () => {
   it("reads orBattle, the payment, the return and the haste", () => {
     const phoenix = parseFace({
