@@ -4966,12 +4966,22 @@ export class HeuristicBotController extends AutomaticController {
   chooseCastNow(view: ControllerView, offer: CastNowOffer): CastSpellAction | PlayLandAction | null {
     const worth = (legal: CastSpellLegal): number => this.manaValueOf(legal.cardName);
     const life = view.state.players[this.playerId]?.life ?? 0;
+    // The stack object resolving now, if an ability or spell is (the top of
+    // the stack, there until the last step of its resolution — rule 608.2n).
+    const stack = view.state.zones.shared.stack;
+    const resolving = view.state.resolvingController !== undefined ? stack[stack.length - 1] : undefined;
     // An assist variant waits on another player's help: not one of its plans.
     for (const legal of offer.casts.filter((c) => c.assist === undefined).sort((a, b) => worth(b) - worth(a))) {
       // "By paying life equal to its mana value": not with the life to lose it.
       if (offer.byPayingLife === true && offer.mustCast !== true && worth(legal) >= life) continue;
       const action = this.toCastSpell(view.state, legal);
-      if (action.type === "cast-spell") return action;
+      if (action.type !== "cast-spell") continue;
+      // Aimed only at what's resolving now (Deflecting Swat found by a
+      // discover with nothing else on the stack): that's gone before this
+      // spell resolves, so it would do nothing (608.2b). Declining is never
+      // worse — discover's hand, cascade's library (a live game, 2026-11-26).
+      if (offer.mustCast !== true && resolving !== undefined && this.aimedOnlyAt(action, resolving)) continue;
+      return action;
     }
     // "You may play the exiled card": a land is a land drop, as from hand.
     const land = offer.lands?.[0];
@@ -4984,6 +4994,12 @@ export class HeuristicBotController extends AutomaticController {
       };
     }
     return null;
+  }
+
+  /** Whether a cast's chosen targets are all `object` (and it has one). */
+  private aimedOnlyAt(action: CastSpellAction, object: ObjectId): boolean {
+    const chosen = (action.targets ?? []).filter((t): t is TargetRef => t !== null && t !== undefined);
+    return chosen.length > 0 && chosen.every((t) => t.kind === "object" && t.object === object);
   }
 
   /**

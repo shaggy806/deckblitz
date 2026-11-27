@@ -8450,7 +8450,6 @@ const SCENARIOS: readonly BotScenario[] = [
   asked({
     name: "discovers into Deflecting Swat with nothing on the stack but the discover itself: puts it into hand, not a cast that fizzles",
     rule: "A free cast whose only target is the resolving ability that offered it does nothing: that ability is gone before the spell resolves (rules 608.2n, 608.2b). Put the card into hand instead (701.57a).",
-    kind: "training",
     position(registry) {
       // Reported from a live game (2026-11-26, a friend watching on
       // deckblitz.net, no capture): a bot's Pantlaza, Sun-Favored discovered

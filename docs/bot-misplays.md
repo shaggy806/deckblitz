@@ -6,9 +6,9 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-26 — Pantlaza discovers into Deflecting Swat and casts it at the discover itself
 
-Status: open. Scenario: "discovers into Deflecting Swat with nothing on the stack but the discover
-itself: puts it into hand, not a cast that fizzles" (training; v2 reads wrong, "cast alice's
-Deflecting Swat").
+Status: fixed 2026-11-26. Scenario: "discovers into Deflecting Swat with nothing on the stack but
+the discover itself: puts it into hand, not a cast that fizzles" (gate; it read wrong, "cast alice's
+Deflecting Swat", before the fix).
 
 Reported by a friend of the user watching a bot game on the live site (no capture): a bot's
 Pantlaza, Sun-Favored discovered into Deflecting Swat ("You may choose new targets for target spell
@@ -24,7 +24,7 @@ answer is v1's `chooseCastNow` in `controller.ts`. That casts the offered card o
 whenever it builds into a cast (`toCastSpell`), and never declines. Swat builds into a cast aimed
 at the one legal target, our own resolving trigger, so it's cast.
 
-**Likely fix:** in `chooseCastNow`, don't take a cast whose every chosen target is the stack object
+**Fix (made):** in `chooseCastNow`, don't take a cast whose every chosen target is the stack object
 now resolving (`state.resolvingController` set, the top of the stack): that object is gone before
 the spell resolves, so the spell does nothing, and declining is never worse (discover's hand,
 cascade's bottom of the library). Narrow, so it risks little; a cast aimed at the resolving
