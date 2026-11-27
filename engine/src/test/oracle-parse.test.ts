@@ -26947,3 +26947,23 @@ describe("the creature an Aura enchanted as its end-step ability triggered (Aggr
     });
   });
 });
+
+describe("a creature blocking this one dies (Baneclaw Marauder)", () => {
+  it("reads the trigger and its controller's life loss", () => {
+    const face = parseFace(
+      {
+        name: "Test Werewolf",
+        type_line: "Creature — Werewolf",
+        oracle_text: "Whenever a creature blocking this creature dies, that creature's controller loses 1 life.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({
+      on: "dies",
+      who: "any",
+      filter: { type: "creature", blockingRelation: { relation: "blocking" } },
+    });
+    expect(face.triggered[0].effect).toEqual({ kind: "lose-life", amount: 1, who: "trigger-controller" });
+  });
+});

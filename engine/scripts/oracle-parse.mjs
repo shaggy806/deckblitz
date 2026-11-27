@@ -2132,6 +2132,11 @@ export function parseTrigger(clause) {
   const c = clause.replace(/\s+/g, " ").trim();
   let m;
   const self = (on) => [{ on, who: "self" }];
+  // "Whenever a creature blocking ~ dies" (Baneclaw Marauder): the creature
+  // as it last existed, blocking it then (rule 603.10a).
+  if (/^Whenever a creature blocking (?:~|this creature) dies$/.test(c)) {
+    return [{ on: "dies", who: "any", filter: { type: "creature", blockingRelation: { relation: "blocking" } } }];
+  }
   // Two triggers, as Aven Riftwatcher's and Sundering Titan's are written.
   if (/^When (?:this creature|~) enters or leaves the battlefield$/.test(c)) {
     return [...self("enters-battlefield"), ...self("leaves-battlefield")];
@@ -9784,6 +9789,11 @@ export function parseSentence(sentence, ctx) {
   // could mean instead.
   const it = ctx.targets.length === 0 ? ctx.it : undefined;
   if (it !== undefined) {
+    // "That creature's controller loses 1 life" (Baneclaw Marauder): the
+    // trigger object's controller, as it last existed.
+    if (it === "trigger-object" && (m = re(`that creature's controller loses (\\d+) life`).exec(s))) {
+      return { kind: "lose-life", amount: Number(m[1]), who: "trigger-controller" };
+    }
     // "That creature" of a `deals-damage` trigger: what the damage was dealt
     // to (`"trigger-recipient"`, `itOf`) — "destroy that creature at end of
     // combat" a delayed trigger that keeps it (603.7c, Ohran Viper).

@@ -2252,6 +2252,38 @@ export function inBlockingRelation(
 }
 
 /**
+ * {@link inBlockingRelation} for a creature that has left the battlefield,
+ * read off its last-known information (rule 603.10a: a leaves-the-battlefield
+ * ability looks back — "whenever a creature blocking this creature dies",
+ * Baneclaw Marauder): the attackers it was blocking and the blockers it had
+ * as it left. The partner is the attacker or blocker it was then: still in
+ * combat if it's on the battlefield (a creature that left and came back is a
+ * new object, rule 400.7), or itself gone, as it last was — creatures dealt
+ * lethal combat damage together die together.
+ */
+export function wasInBlockingRelation(
+  state: GameState,
+  id: ObjectId,
+  was: LastKnownInfo,
+  partner: ObjectId,
+  relation: "blocking" | "blocked-by" | "either",
+): boolean {
+  if (id === partner) return false;
+  const other = state.objects[partner];
+  if (other === undefined) return false;
+  const here = other.zone === "battlefield";
+  const blocking = (): boolean =>
+    (was.blockedAttackers ?? []).includes(partner) &&
+    (here ? other.attacking !== null : (other.lastKnown?.blockers ?? []).includes(id));
+  const blockedBy = (): boolean =>
+    (was.blockers ?? []).includes(partner) &&
+    (here ? other.blocking !== null : (other.lastKnown?.blockedAttackers ?? []).includes(id));
+  if (relation === "blocking") return blocking();
+  if (relation === "blocked-by") return blockedBy();
+  return blocking() || blockedBy();
+}
+
+/**
  * How many creatures are blocking `attacker`, each token of a stack counting,
  * a blocker of the band it's in too (rule 702.22h), as it last was if it has
  * left — `{ blockersOf }` and `CardFilter.blockerCount`.
@@ -3345,7 +3377,12 @@ export function matchesFilter(
   if (filter.blockingRelation !== undefined) {
     const { relation, of, with: bound } = filter.blockingRelation;
     const partner = bound ?? blockingPartnerOf(state, of ?? "source", ctx.source);
-    if (live === undefined || partner === undefined || !inBlockingRelation(state, live, partner, relation)) return false;
+    if (partner === undefined) return false;
+    if (live === undefined) {
+      // Read as it last existed (rule 603.10a — "whenever a creature blocking
+      // this creature dies", Baneclaw Marauder): its relations as it left.
+      if (!wasInBlockingRelation(state, id, lki!, partner, relation)) return false;
+    } else if (!inBlockingRelation(state, live, partner, relation)) return false;
   }
   if (filter.blockerCount !== undefined) {
     if (live === undefined || !compareNum(creaturesBlocking(state, id), filter.blockerCount, ctx.x)) return false;

@@ -13,6 +13,7 @@
     "cost:x-one-mana-of-each-color",
     "amount:mana-spent-on-cumulative-upkeep",
     "static:grant-cumulative-upkeep",
+    "trigger:dies-while-blocking-source",
     "trigger:aura-host-locked-at-trigger",
     "condition:dealt-damage-by-n-creatures-this-turn",
     "amount:damage-dealt-to-target-creature-this-turn",
