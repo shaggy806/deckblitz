@@ -718,6 +718,7 @@ import {
   resolvingTargetSpec,
   sameTargetRef,
   targetsFillable,
+  withoutAsChosen,
   playerAtSeat,
   seatOfTargetSpec,
 } from "./target.js";
@@ -57621,10 +57622,14 @@ controlledBy,
   } | null {
     const object = this.state.objects[id];
     const targets = object.targets ?? [];
-    const specs =
+    // A slot's `asChosen` requirement is only "as you cast it": a target
+    // changed on the stack (rule 115.7) may be any the slot itself allows
+    // (Enthralling Hold's ruling).
+    const specs = (
       object.kind === "ability"
         ? triggerTargetSpecs(this.stackAbilityOf(object), object.chosenModes)
-        : this.spellTargetSpecs(object);
+        : this.spellTargetSpecs(object)
+    ).map(withoutAsChosen);
     if (specs.length === 0) return null;
     const auto = new Set(object.autoTargetSlots ?? []);
     const source =

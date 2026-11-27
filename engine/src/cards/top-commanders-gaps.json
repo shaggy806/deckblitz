@@ -102,6 +102,7 @@
     "condition:started-turn-untapped",
     "replacement:damage-reflection",
     "target:cast-only-target-restriction",
+    "static:aura-cast-time-target-restriction",
     "filter:player-previously-dealt-damage-by-source",
     "effect:redirect-spell-from-source",
     "effect:swap-blockers",

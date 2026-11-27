@@ -50,3 +50,41 @@ describe("a target requirement read only as the spell is cast (Dream Leash)", ()
     expect(controller(game, target)).toBe(B);
   });
 });
+
+// Enthralling Hold: the same on "Enchant creature" — and a target changed on
+// the stack (rule 115.7) may be an untapped creature (its ruling).
+describe("Enthralling Hold: a tapped creature only as it's cast", () => {
+  it("takes a tapped creature, never an untapped one or a tapped noncreature", () => {
+    const { game } = table();
+    lands(game, "Island", 5);
+    const untapped = spawn(game, "Grizzly Bears", B);
+    const land = spawn(game, "Forest", B, { tapped: true });
+    const tapped = spawn(game, "Hill Giant", B, { tapped: true });
+    const hold = toHand(game, "Enthralling Hold");
+    expect(() => cast(game, hold, { targets: [ref(untapped)] })).toThrow(/target/i);
+    expect(() => cast(game, hold, { targets: [ref(land)] })).toThrow(/target/i);
+    cast(game, hold, { targets: [ref(tapped)] });
+    expect(game.state.objects[hold].attachedTo).toBe(tapped);
+    expect(controller(game, tapped)).toBe(A);
+    game.debugApplyEffect(A, { kind: "untap", target: 0 }, [ref(tapped)]);
+    toStep(game, "begin-combat");
+    expect(game.state.objects[hold].attachedTo).toBe(tapped);
+    expect(controller(game, tapped)).toBe(A);
+  });
+
+  it("a target changed on the stack may be an untapped creature", () => {
+    const { game } = table();
+    lands(game, "Island", 5);
+    const tapped = spawn(game, "Hill Giant", B, { tapped: true });
+    const untapped = spawn(game, "Grizzly Bears", B);
+    const hold = toHand(game, "Enthralling Hold");
+    cast(game, hold, { targets: [ref(tapped)], settle: false });
+    // The one other legal target is taken at once (rule 115.7a).
+    game.debugApplyEffect(B, { kind: "change-targets", target: 0, how: "change" }, [ref(hold)]);
+    expect(game.state.objects[hold].targets).toEqual([ref(untapped)]);
+    settle(game);
+    expect(game.state.objects[hold].attachedTo).toBe(untapped);
+    expect(controller(game, untapped)).toBe(A);
+    expect(controller(game, tapped)).toBe(B);
+  });
+});
