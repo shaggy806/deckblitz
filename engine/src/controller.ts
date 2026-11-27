@@ -3841,6 +3841,21 @@ export class HeuristicBotController extends AutomaticController {
     if (this.onlyQuietOwnAbilitiesOnStack(state) && !temporaryEffectCanMatter(state, this.playerId, { ignoreStack: true })) {
       return true;
     }
+    // A pump of power and toughness alone, at instant speed, before blocks
+    // are declared, with nothing on the stack to answer: made once the
+    // blocks are known it does all it could now, and nothing is given away
+    // first. With our own attack searched in the rollouts
+    // (`rolloutAttacks: "v2"`), Lathliss, Dragon Queen's "+1/+0 until end of
+    // turn" went off in the first main phase for the attack it would show
+    // (a decision diff, 2026-11-27).
+    if (
+      BEFORE_BLOCKS.has(state.turn.step) &&
+      onlyRaisesPowerToughness(effect) &&
+      this.instantSpeed(offer) &&
+      (state.zones.shared.stack.length === 0 || this.onlyQuietOwnAbilitiesOnStack(state))
+    ) {
+      return true;
+    }
     // A sacrifice for it is a card for a turn's effect: only with something
     // to answer — an opponent's spell or ability on the stack, or a combat
     // under way. In our own first main phase the effect "could matter" for
@@ -3851,6 +3866,17 @@ export class HeuristicBotController extends AutomaticController {
     // into the wrath its controller just cast.
     if (offer.kind !== "activate-ability" || offer.sacrifice === undefined) return false;
     return state.zones.shared.stack.length === 0 && !SACRIFICE_STEPS.has(state.turn.step);
+  }
+
+  /** Whether `offer` can be made whenever we have priority: an instant or a
+   * flash card, or an activated ability not limited to sorcery speed. */
+  private instantSpeed(offer: LegalAction): boolean {
+    if (!("cardName" in offer) || !this.registry.has(offer.cardName)) return false;
+    const def = this.registry.get(offer.cardName);
+    if (offer.kind === "cast-spell") return def.types.includes("instant") || (def.keywords ?? []).includes("flash");
+    if (offer.kind !== "activate-ability") return false;
+    const ability = def.activated?.[offer.abilityIndex];
+    return ability !== undefined && ability.sorcerySpeed !== true && ability.loyaltyCost === undefined;
   }
 
   /** A modal ability offered with its modes chosen (rule 700.2b — Umezawa's
@@ -7032,6 +7058,21 @@ const COUNTER_FLOOR = 3;
 /** The steps of a combat under way, where a sacrifice for a turn's effect
  * has something to answer (`wastedNow`). */
 const SACRIFICE_STEPS: ReadonlySet<string> = new Set(["declare-attackers", "declare-blockers", "combat-damage"]);
+/** The steps before blocks are declared in which a combat is to come or under
+ * way: a pump of power and toughness waits through them (`wastedNow`). */
+const BEFORE_BLOCKS: ReadonlySet<string> = new Set(["precombat-main", "begin-combat", "declare-attackers"]);
+
+/** Whether `effect` only raises power and toughness until end of turn — "+2/+2",
+ * "Dragons you control get +1/+0" — by fixed amounts, neither lowered. */
+function onlyRaisesPowerToughness(effect: EffectSpec | null | undefined): boolean {
+  if (effect === null || effect === undefined) return false;
+  if (effect.kind === "sequence") return effect.effects.length > 0 && effect.effects.every(onlyRaisesPowerToughness);
+  if (effect.kind !== "modify-pt" && effect.kind !== "modify-pt-all") return false;
+  if (effect.duration !== "end-of-turn") return false;
+  return typeof effect.power === "number" && typeof effect.toughness === "number" && effect.power >= 0 && effect.toughness >= 0 &&
+    effect.power + effect.toughness > 0;
+}
+
 /** Effect kinds that can hurt or remove a creature, which a pump, a keyword
  * or an animation in response might answer (`onlyQuietOwnAbilitiesOnStack`). */
 const HARMS_CREATURES: ReadonlySet<string> = new Set([

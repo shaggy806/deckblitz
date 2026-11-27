@@ -92,8 +92,9 @@ describe("EvalBotController", () => {
     // Seed 6 since 2026-11-26 (49 turns): about five seeds in eight of this
     // deck stall to a board of a hundred permanents until the libraries run
     // out, before and after the bots held instants for attackers, and that
-    // change made seed 2 one of them.
-    const game = playOut(players, evalBots(players), 6);
+    // change made seed 2 one of them. Seed 21 since 2026-11-27 (45 turns):
+    // holding Giant Growth until blocks made seed 6 one of them too.
+    const game = playOut(players, evalBots(players), 21);
     expect(game.isOver).toBe(true);
   }, GAME_TIMEOUT_MS);
 

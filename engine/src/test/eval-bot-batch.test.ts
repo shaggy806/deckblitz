@@ -22,8 +22,13 @@ const B = asPlayerId("bob");
 const registry = createDefaultRegistry();
 
 /** Alice's first main phase: Lathliss and eight untapped Mountains, no land
- * drop, and Bob with nothing to block. */
-function setup(bot: EvalBotController): { game: Game; lathliss: ObjectId } {
+ * drop, and Bob with nothing to block — or, at `"declare-blockers"`, the same
+ * after Lathliss has attacked and gone unblocked, where her "+1/+0 until end
+ * of turn" is worth making (before blocks it waits, `wastedNow`). */
+function setup(
+  bot: EvalBotController,
+  step: "precombat-main" | "declare-blockers" = "precombat-main",
+): { game: Game; lathliss: ObjectId } {
   const game = Game.create({
     seed: 1,
     shuffle: false,
@@ -42,6 +47,9 @@ function setup(bot: EvalBotController): { game: Game; lathliss: ObjectId } {
     summoningSick: false,
   });
   for (let i = 0; i < 8; i += 1) game.debugSpawn("Mountain", A, "battlefield");
+  if (step === "declare-blockers") {
+    game.advanceUntil((s) => (s.turn.step === "declare-blockers" && s.priority.holder === A) || s.turn.number > 1);
+  }
   return { game, lathliss };
 }
 
@@ -68,7 +76,8 @@ describe("a batch of activations", () => {
 
   it("is chosen once and played out without searching again", () => {
     const bot = new EvalBotController(A, registry, { horizon: "turn" });
-    const { game, lathliss } = setup(bot);
+    const { game, lathliss } = setup(bot, "declare-blockers");
+    expect(game.state.turn.step).toBe("declare-blockers");
     const activations: number[] = [];
     for (let i = 0; i < 6; i += 1) {
       const action = bot.act(viewOf(game));
@@ -100,7 +109,8 @@ describe("a batch of activations", () => {
 
   it("is watched resolving by an opponent that searched once and passed", () => {
     const bot = new EvalBotController(A, registry, { horizon: "turn" });
-    const { game } = setup(bot);
+    const { game } = setup(bot, "declare-blockers");
+    expect(game.state.turn.step).toBe("declare-blockers");
     const watcher = new EvalBotController(B, registry, { horizon: "turn" });
     // Something Bob could do at every window but never wants to: Giant
     // Growth on his own Bears in Alice's main phase. (Not on Alice's

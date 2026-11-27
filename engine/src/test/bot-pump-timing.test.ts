@@ -165,3 +165,29 @@ describe("a modal ability's until-end-of-turn mode (Umezawa's Jitte)", () => {
     expect(new Gate(A, registry).wasted(game.state, pump!)).toBe(false);
   });
 });
+
+describe("a pump of power and toughness alone", () => {
+  // A decision diff, 2026-11-27: with our own attack searched in the
+  // rollouts, Lathliss, Dragon Queen's "+1/+0 until end of turn" went off in
+  // the first main phase for the attack it would show. Made after blocks it
+  // does as much, and gives nothing away first.
+  it("waits through the first main phase and the steps before blocks", () => {
+    const gate = new Gate(A, registry);
+    for (const step of ["precombat-main", "begin-combat"] as const) {
+      const game = at(step);
+      const pump = pumps(game)[0];
+      expect(pump).toBeDefined();
+      expect(gate.wasted(game.state, pump)).toBe(true);
+    }
+  });
+
+  it("is still made in answer to a spell", () => {
+    const game = at("precombat-main");
+    const bolt = game.debugSpawn("Lightning Bolt", A, "hand");
+    const lathliss = game.state.zones.shared.battlefield.find((id) => game.state.objects[id]?.cardName === "Lathliss, Dragon Queen");
+    game.dispatch({ type: "cast-spell", player: A, card: bolt, targets: [{ kind: "object", object: lathliss! }] });
+    game.advanceUntil((s) => s.priority.holder === A);
+    expect(game.state.zones.shared.stack.length).toBeGreaterThan(0);
+    expect(new Gate(A, registry).wasted(game.state, pumps(game)[0])).toBe(false);
+  });
+});
