@@ -19587,6 +19587,24 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "If an opponent had an artifact enter the battlefield under their
+    // control this turn" (Baloth Cage Trap), "… two or more lands …" (Lavaball
+    // Trap): the journal's `entered` entries, one opponent's own count
+    // (`who: "opponent"` tests each alone).
+    if (
+      !/Land/.test(face.type_line ?? "") &&
+      (m = /^If an opponent had (an?|(?:two|three|four|five) or more) (.+?) enter the battlefield under their control this turn, you may pay ((?:\{[^}]+\})+) rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))
+    ) {
+      const n = NUMBERS[m[1].split(" ")[0]];
+      const filter = parseTypePhrase(m[2]);
+      if (filter !== null && Object.keys(filter).length > 0) {
+        out.alternativeCost = {
+          mana: m[3],
+          condition: { kind: "turn-history", what: "entered", who: "opponent", filter, ...(n > 1 ? { atLeast: n } : {}) },
+        };
+        continue;
+      }
+    }
     // A mana alternative cost (rule 118.9), the rest a parameter: "You may pay
     // {2}{R}{R} rather than pay this spell's mana cost" (Fervent Mastery), "and
     // exile a creature card from your graveyard" (Stalwart Valkyrie), "if there
