@@ -500,7 +500,7 @@ const REAL_BLOCK_SIMULATIONS = 24;
 const OUR_ATTACK_TO_COME: ReadonlySet<string> = new Set(["untap", "upkeep", "draw", "precombat-main", "begin-combat"]);
 /** The attack search our own seat makes in a rollout under
  * `rolloutAttacks: "v2"` (`RealAttacksController`). */
-const REAL_ATTACK_SIMULATIONS = 24;
+const REAL_ATTACK_SIMULATIONS = 12;
 
 /** How many fillings (targets, modes) of each spell our own seat tries as an
  * answer in a simulated swing back (`AnsweringSeat`), in the order the
@@ -1095,21 +1095,57 @@ class RealBlocksController extends CombatRolloutController {
 class RealAttacksController extends CombatRolloutController {
   private readonly cards: CardRegistry;
   private readonly weights: EvalWeights;
+  private readonly memo: Map<string, readonly AttackerDeclaration[]>;
 
-  constructor(playerId: PlayerId, cards: CardRegistry, weights: EvalWeights) {
+  /** `memo` is shared by every rollout of one decision: most of its
+   * candidates come to the same combat (`combatBoardKey`), and one attack
+   * search each is the cost of this seat. */
+  constructor(playerId: PlayerId, cards: CardRegistry, weights: EvalWeights, memo: Map<string, readonly AttackerDeclaration[]>) {
     super(playerId, cards);
     this.cards = cards;
     this.weights = weights;
+    this.memo = memo;
   }
 
   declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
-    return new EvalBotController(this.playerId, this.cards, {
+    const key = combatBoardKey(view.state, this.cards);
+    const known = this.memo.get(key);
+    if (known !== undefined) return known;
+    const attack = new EvalBotController(this.playerId, this.cards, {
       weights: this.weights,
       maxSimulations: REAL_ATTACK_SIMULATIONS,
       plan: "off",
       lightAttacks: true,
     }).declareAttackers(view);
+    this.memo.set(key, attack);
+    return attack;
   }
+}
+
+/** What an attack declaration is decided on: each player's life, poison and
+ * commander damage taken, and every creature as combat reads it (power,
+ * toughness, damage, keywords, tapped, able to attack and block). Two boards
+ * with the same key get the same attack from `RealAttacksController`. */
+function combatBoardKey(state: GameState, cards: CardRegistry): string {
+  return withComputedCache(() =>
+    JSON.stringify(
+      state.turnOrder.map((player) => {
+        const p = state.players[player];
+        const creatures = combatCreatures(state, cards, player, false, player === state.turnOrder[state.turn.activePlayerIndex]).map((c) => [
+          c.id,
+          state.objects[c.id]?.tapped === true,
+          state.objects[c.id]?.stackCount ?? 1,
+          c.power,
+          c.toughness,
+          c.damage,
+          [...c.keywords].sort().join(" "),
+          c.canAttack,
+          c.canBlock,
+        ]);
+        return [p?.life, p?.counters.poison ?? 0, p?.commanderDamageTaken, p?.hasLost === true, creatures];
+      }),
+    ),
+  );
 }
 
 /**
@@ -1357,6 +1393,8 @@ export class EvalBotController extends HeuristicBotController {
   private readonly rolloutDecisions: boolean;
   private readonly maxSimulations: number;
   private readonly rolloutAttacks: "v1" | "v2";
+  /** The current decision's rollout attacks by combat board (`RealAttacksController`). */
+  private attackMemo = new Map<string, readonly AttackerDeclaration[]>();
   private readonly lightAttacks: boolean;
   private readonly timeBudgetMs: number;
   private readonly now: () => number;
@@ -1546,7 +1584,9 @@ export class EvalBotController extends HeuristicBotController {
    * `withTrackRecordEvidence`. */
   act(real: ControllerView): Action {
     const view = this.fairView(real);
-    const seat = this.rolloutAttacks === "v2" ? () => new RealAttacksController(this.playerId, this.cards, this.weights) : null;
+    const memo = new Map<string, readonly AttackerDeclaration[]>();
+    const seat = this.rolloutAttacks === "v2" ? () => new RealAttacksController(this.playerId, this.cards, this.weights, memo) : null;
+    this.attackMemo = memo;
     const action = withOurAttackSeat(seat, () => withLibraryTop(this.libraryTopAt(view), () => this.answer(view)));
     // The answer was reached on cards dealt for the seat (`fairView`), and
     // is played at the real table: tried there first on a copy, so nothing
@@ -3123,7 +3163,7 @@ export class EvalBotController extends HeuristicBotController {
     if (this.rolloutDecisions) return this.selfInRollouts();
     if (this.blocksToCome(state)) return new RealBlocksController(this.playerId, this.cards, this.weights);
     return this.rolloutAttacks === "v2" && this.attackToCome(state)
-      ? new RealAttacksController(this.playerId, this.cards, this.weights)
+      ? new RealAttacksController(this.playerId, this.cards, this.weights, this.attackMemo)
       : undefined;
   }
 

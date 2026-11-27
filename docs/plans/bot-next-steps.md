@@ -128,12 +128,28 @@ none of 1a's checks; the turn plan's seat through `withOurAttackSeat`). Measured
   are declared now shows in the rollout's attack, but a pump is better made once blocks are
   known, so this one is probably worse. The rest are one or two each, casts reordered.
 
-Not turned on: two to three times the thinking at count budgets is fewer candidates scored at
-the live clock, and nothing yet says the changes are better on balance. Before it could be:
-cache the rollout's attack by the combat board within a decision (most candidates reach the same
-creatures and life before combat), hold a pump for after blocks wherever our attack is still to
-be declared (or the change makes pre-combat pumps look good), and judge the changed priority
-moves by playing each on with v2 seats, as `bot:judge` does for attacks, at the live clock.
+Then, the same day, the three things it needed before it could be turned on:
+
+- **A cache.** The rollout's attack is kept by the combat board for the rest of the decision
+  (`combatBoardKey`: life, poison, commander damage, every creature as combat reads it), and its
+  search cut to 12 simulations: the gate 96 s → 54 s (29 s without the option).
+- **Pumps held until blocks**, in both modes (`controller.ts`'s `wastedNow`: an instant-speed
+  pump of power and toughness alone, before blocks, with nothing to answer).
+- **A judge for it**: `bot:judge --kind priority` (every move of the decider's own turn with
+  nothing on the stack, the old side shadowing every decision), with `--options` for the new
+  side and `--base self` for this build's defaults as the old.
+
+**Judged and left off.** `--kind priority --base self --options '{"rolloutAttacks":"v2"}'` over
+Token Triumph v Grave Danger, World Shaper v Mardu Surge and Edgar, Giada, Ureni and Pantlaza,
+seeds 1-3 (9 games, 13 minutes): 40 moves changed, **4 better, 12 worse, 24 even**, net −791
+points (−530 of it one turn), the decider's life −81 and its opponents' +3, and two lines out of
+the game under the new move alone. The changes are not about attacks set up: Edgar Markov cast
+Olivia's Wrath over Bloodthirsty Conqueror and fell to 2 life; Giada and Ureni were cast over
+Archangel of Tithes and Ancient Copper Dragon and did worse. The likely reason, not checked: the
+rollout's attack is searched against v1's blocks with none of 1a's checks, an optimistic
+attack, so a move that clears or adds to the board reads as the swing it would make and nothing
+of what comes back. The full search with 1a's checks in every rollout is too dear. So v1 stays
+the rollout's attacker, and the menace gap is closed in v1 itself (2026-11-27).
 
 ## 2. Mana priced by v2's own turn planner
 

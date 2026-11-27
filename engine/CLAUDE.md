@@ -186,7 +186,7 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   (decision cost in bench games at the live budget): bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
   `bot:ab` prints a localhost address (`http://localhost:4020/`) where its games can be watched as they play, each in
   miniature (`scripts/watch.mjs`; `--no-watch`, `--watch-port N`): give the user the address when a bench starts.
-- `bot:judge -- --kind payments|discards|attacks|blocks|removal|answers --decks "A,B,C,D[;E,F]" [--seeds 1-8] [--parallel 6] [--base origin/main] [--weights JSON] [--to-end] [--all]`:
+- `bot:judge -- --kind payments|discards|attacks|blocks|removal|answers|priority --decks "A,B,C,D[;E,F]" [--seeds 1-8] [--parallel 6] [--base origin/main|self] [--weights JSON] [--options JSON] [--to-end] [--all]`:
   one kind of decision on named decks, the working build's answer beside an older commit's at each, and each
   disagreement played on by v2 and scored. Several deck sets and seeds are a game each, played in parallel and totalled:
   the net in evaluation points (a block that saves 23 life and one that costs 1 come to +22, not one each), the
@@ -197,7 +197,9 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   answer. `--kind answers` (2026-11-16) is every other answer a spell or ability asks for (a sacrifice, a trigger's
   target, a mode, a word as a permanent enters): thirty to sixty a game, and few differ. A `--to-end` run of 40
   games takes about three hours. `--weights` judges evaluation weights on the new side without a build of their own; `--to-end` also plays
-  each line to the end of the game and counts who won.
+  each line to the end of the game and counts who won. `--kind priority` (2026-11-27) is every move of the decider's own
+  turn with nothing on the stack, shadowed as removal is; `--options JSON` gives the new side `EvalBotController` options
+  and `--base self` makes the old side this build's defaults, so an option is judged with no second build.
 - `bot:outs -- --seeds 1-6 --decks "A,B,C,D[;…]" [--parallel 6]`: every turn a seat ends dead to one opponent's
   creatures whatever it blocks with, followed to its next turn and filed (died, not attacked, that board cut down,
   attacked and lived), with what it cast that turn and the wipes it and the others held. Says how often each out comes,

@@ -25,6 +25,9 @@
 // - `--kind blocks`: a block declaration. Judged as the blocker's next turn
 //   begins: the damage it took, what it lost, and what the creatures it kept
 //   then did.
+// - `--kind priority`: every move of the decider's own turn with nothing on
+//   the stack (a cast, an activation, a land, a pass), the old side shadowing
+//   every decision as for removal. Judged as the decider's next turn begins.
 // - `--kind removal`: what a removal is aimed at, and whether it is fired: a
 //   window where either build casts or activates something that destroys,
 //   exiles, bounces, burns or steals, at an opponent's permanent, or picks
@@ -61,6 +64,9 @@
 // decisions the builds agree on too), --no-judge (list the disagreements,
 // play nothing out), --weights JSON (evaluation weights for the new side alone,
 // merged onto the defaults: a weight judged without a build of its own),
+// --options JSON (`EvalBotController` options for the new side alone, such as
+// '{"rolloutAttacks":"v2"}'), --base self (the old side is this build with its
+// default options: an option or a weight judged with no second build),
 // --rounds N (how many of the decider's turns on a line
 // is judged at, where the kind judges by rounds: 1, or 2 for removal),
 // --to-end (play each line to the end of the game as well and count who
@@ -94,7 +100,7 @@ const flag = (name, fallback) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : fallback;
 };
-const KINDS = ["payments", "discards", "attacks", "blocks", "removal", "answers"];
+const KINDS = ["payments", "discards", "attacks", "blocks", "removal", "answers", "priority"];
 /** Decisions `--kind answers` leaves to the other kinds, or that no search
  * weighs: the rest are the answers a spell or ability asks for as it
  * resolves or enters (a sacrifice, a target for a trigger, a mode, a word
@@ -122,6 +128,14 @@ const newWeights = weightsFlag === null ? null : { ...DEFAULT_WEIGHTS, ...JSON.p
 for (const key of Object.keys(newWeights ?? {})) {
   if (!(key in DEFAULT_WEIGHTS)) throw new Error(`--weights: unknown weight "${key}"`);
 }
+// `--options JSON`: `EvalBotController` options for the new side alone
+// (`{"rolloutAttacks":"v2"}`), as `--weights` is for weights.
+const optionsFlag = flag("options", null);
+const newOptions = optionsFlag === null ? {} : JSON.parse(optionsFlag);
+// `--base self`: the old side is this same build with its default options —
+// for judging an option (`--options`) or a weight without another build.
+const selfBase = base === "self";
+const baselineOf = () => (selfBase ? { sha: "this build", dist: null } : baselineDist(base));
 
 /** "1-8", "1,3,5" or both mixed: the seeds to play. */
 const seedsOf = (text) =>
@@ -181,9 +195,9 @@ function summary(t) {
 const jobs = deckSets.flatMap((decks) => seeds.map((seed) => ({ decks, seed })));
 if (jobs.length > 1) {
   // Built here once, so the games don't each start the same build.
-  const baseline = baselineDist(base);
+  const baseline = baselineOf();
   const parallel = Math.max(1, Number(flag("parallel", "6")));
-  const passed = ["--kind", kind, "--base", base, "--max-turns", String(maxTurns), ...(showAll ? ["--all"] : []), ...(judging ? [] : ["--no-judge"]), ...(toEnd ? ["--to-end"] : []), "--rounds", String(rounds), ...(weightsFlag === null ? [] : ["--weights", weightsFlag])];
+  const passed = ["--kind", kind, "--base", base, "--max-turns", String(maxTurns), ...(showAll ? ["--all"] : []), ...(judging ? [] : ["--no-judge"]), ...(toEnd ? ["--to-end"] : []), "--rounds", String(rounds), ...(weightsFlag === null ? [] : ["--weights", weightsFlag]), ...(optionsFlag === null ? [] : ["--options", optionsFlag])];
   console.log(`bot:judge — ${kind}, working build vs ${base} (${baseline.sha}): ${jobs.length} games, ${parallel} at a time`);
   const total = newTally();
   const started = Date.now();
@@ -240,10 +254,10 @@ const decks = wanted.map(findDeck);
 const seats = ["alice", "bob", "carol", "dave"].slice(0, decks.length).map(asPlayerId);
 const label = Object.fromEntries(seats.map((seat, i) => [seat, decks[i].name.split(" by ")[0].replace(" (Upgraded)", "")]));
 
-const baseline = baselineDist(base);
-const old = await importBuild(baseline.dist);
+const baseline = baselineOf();
+const old = selfBase ? await import("../dist/index.js") : await importBuild(baseline.dist);
 const registry = createDefaultRegistry();
-const oldRegistry = old.createDefaultRegistry();
+const oldRegistry = selfBase ? registry : old.createDefaultRegistry();
 
 const tally = newTally();
 /** A gap under this is the two lines coming out the same. */
@@ -412,7 +426,7 @@ const counted = (names) => {
 
 const controllers = {};
 for (const seat of seats) {
-  const newBot = () => new EvalBotController(seat, registry, newWeights === null ? {} : { weights: newWeights });
+  const newBot = () => new EvalBotController(seat, registry, { ...newOptions, ...(newWeights === null ? {} : { weights: newWeights }) });
   const bot = newBot();
   // The old build reads the working game's state through its own module's
   // caches, which that game's mutations never reach: cleared before it is
@@ -462,6 +476,31 @@ for (const seat of seats) {
       if (aims(mine) || aims(theirs)) {
         const source = a?.source !== undefined ? ` (${s.objects[a.source]?.cardName})` : "";
         report(seat, s, `removal${source}`, mine, theirs, (x) => describeMove(s, x, registry), (x) => x, rounds, `hand: ${handOf(s, seat)}`);
+      }
+      return mine;
+    };
+  } else if (kind === "priority") {
+    // Every move of the seat's own turn with nothing on the stack — a cast,
+    // an activation, a land, or passing — against the old side's, which
+    // shadows every decision the seat makes so it carries its own turn plan
+    // (as for removal).
+    const shadow = new old.EvalBotController(seat, oldRegistry);
+    const act = bot.act.bind(bot);
+    bot.act = (view) => {
+      const s = view.state;
+      const mine = act(view);
+      let theirs;
+      try {
+        old.invalidateComputedCache?.();
+        theirs = shadow.act(view);
+      } catch {
+        return mine;
+      }
+      const own = s.turnOrder[s.turn.activePlayerIndex] === seat;
+      if (!own || s.awaiting !== null || s.zones.shared.stack.length > 0) return mine;
+      const say = (x) => describeMove(s, x, registry).split(/\r?\n/)[0].slice(0, 110);
+      if (say(mine) !== say(theirs)) {
+        report(seat, s, `priority (${s.turn.step})`, mine, theirs, say, (x) => x, rounds, `${landsOf(s, seat)} lands; hand: ${handOf(s, seat)}`);
       }
       return mine;
     };
@@ -543,7 +582,7 @@ for (const seat of seats) {
   controllers[seat] = bot;
 }
 
-console.log(`bot:judge — ${kind}, working build${weightsFlag === null ? "" : ` with ${weightsFlag}`} vs ${base} (${baseline.sha}), seed ${seed}: ${seats.map((s) => label[s]).join(", ")}`);
+console.log(`bot:judge — ${kind}, working build${weightsFlag === null ? "" : ` with ${weightsFlag}`}${optionsFlag === null ? "" : ` ${optionsFlag}`} vs ${base} (${baseline.sha}), seed ${seed}: ${seats.map((s) => label[s]).join(", ")}`);
 game = Game.create({
   seed,
   registry,
