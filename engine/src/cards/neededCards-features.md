@@ -9081,3 +9081,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **For as long as that card remains on top of your library (2026-11-26).** `effect:play-library-top-free-while-on-top`: `player-effect.whileOnTop` (`PlayerEffect.whileOnTop`, ended by `Game.endLibraryTopEffects` after every instruction and action, and by any shuffle of that library) and `libraryTopRevealed`. Temporal Aperture. `test/library-top-while-on-top.test.ts`.
 
 **Cast from the top of your graveyard (2026-11-26).** `zone:cast-from-top-of-graveyard`: the `CardFilter` clause `topOfGraveyard` (rule 404.2; `readsGraveyardOrder` sees it) in a graveyard `mayPlay`. Bösium Strip. `test/graveyard-top-cast.test.ts`.
+
+**Same name as a target in a search (2026-11-27).** `filter:same-name-as-target-in-search`: no engine code — `search-library` `filter: { sameNameWith: 0 }` reads the spell's target slot. March of Burgeoning Life. `test/search-same-name-as-target.test.ts`.
