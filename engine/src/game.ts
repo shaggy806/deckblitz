@@ -1363,7 +1363,38 @@ function chosenManaType(holder: GameObject): ManaType | undefined {
  * half of a {@link ManaProductionRule} (`times` is the other). */
 type LandManaChange = Pick<ManaProductionRule, "colorsOnly" | "one"> & {
   readonly produces: NonNullable<ManaProductionRule["produces"]>;
+  /** Of `"any-color"`: the types the tapper picks among, when it's not
+   * every colour — several rules applying at once, each of which could be
+   * the last applied (rule 616.1d): a Plains Island under Naked Singularity
+   * makes {R} or {G}. */
+  readonly palette?: readonly ManaType[];
 };
+
+/** The types a tapper picks among under an `"any-color"` change. */
+const landManaPalette = (change: LandManaChange): readonly ManaType[] => change.palette ?? COLORS;
+
+/** What every rule changing one tap of a land comes to (rules 616.1, 616.1d):
+ * all of them apply, the tapper ordering them, so the mana is the type of
+ * whichever they apply last — any one of theirs. Each applies once, so one
+ * "and amount" rule makes it one mana (Contamination); a {C} unit stays {C}
+ * only if every rule changes colours only (Hall of Gemstone). `null` for
+ * none. */
+function mergedLandManaChange(rules: readonly ManaProductionRule[]): LandManaChange | null {
+  if (rules.length === 0) return null;
+  const types = new Set<ManaType>();
+  for (const rule of rules) {
+    if (rule.produces === "any-color") for (const color of COLORS) types.add(color);
+    else if (rule.produces !== undefined) types.add(rule.produces);
+  }
+  if (types.size === 0) return null;
+  const one = rules.some((rule) => rule.one === true);
+  const colorsOnly = rules.every((rule) => rule.colorsOnly === true);
+  const flags = { ...(one ? { one: true as const } : {}), ...(colorsOnly ? { colorsOnly: true as const } : {}) };
+  const palette = MANA_TYPES.filter((type) => types.has(type));
+  if (palette.length === 1) return { ...flags, produces: palette[0] };
+  const everyColor = palette.length === COLORS.length && COLORS.every((color) => types.has(color));
+  return { ...flags, produces: "any-color", ...(everyColor ? {} : { palette }) };
+}
 
 /** What a land's own mana `made` comes to under `change`, its type being
  * fixed: as many units (one, for "and amount"), every one the new type — but
@@ -1384,9 +1415,14 @@ function landManaInsteadOptions(option: ManaOption, change: LandManaChange): Man
   const produces = change.produces;
   if (produces === "any-color") {
     const n = change.one === true ? 1 : units;
+    const palette = landManaPalette(change);
+    // "Any other color" leaves a {C} unit as it is, when that's all it makes.
+    if (change.colorsOnly === true && option.anyColor === 0 && option.fixed.slice(0, n).every((type) => type === "C")) {
+      return [{ ...rest, fixed: option.fixed.slice(0, n), anyColor: 0 }];
+    }
     return n === 1
-      ? [{ ...rest, fixed: [], anyColor: 1 }]
-      : COLORS.map((color) => ({ ...rest, fixed: Array<ManaType>(n).fill(color), anyColor: 0 }));
+      ? [{ ...rest, fixed: [], anyColor: 1, ...(change.palette !== undefined ? { anyColorOf: palette } : {}) }]
+      : palette.map((color) => ({ ...rest, fixed: Array<ManaType>(n).fill(color), anyColor: 0 }));
   }
   // An "any colour" unit is made as the new type (never {C}, so "any other
   // color" changes it too).
@@ -31235,17 +31271,22 @@ export class Game {
       if (amount <= 0 || (instead.one === true && madeOne)) return;
       madeOne = true;
       const n = instead.one === true ? 1 : amount;
+      const stays = instead.colorsOnly === true && mana === "C";
+      if (stays) {
+        base.addMana(p, mana, n, spec);
+        return;
+      }
       if (instead.produces === "any-color") {
         if (insteadColor === undefined) {
+          const palette = landManaPalette(instead);
           const pick = manaColors?.[picked];
           picked += 1;
-          insteadColor = pick !== undefined && (COLORS as readonly ManaType[]).includes(pick) ? pick : COLORS[0];
+          insteadColor = pick !== undefined && palette.includes(pick) ? pick : palette[0];
         }
         base.addMana(p, insteadColor, n, spec);
         return;
       }
-      const stays = instead.colorsOnly === true && mana === "C";
-      base.addMana(p, stays ? mana : instead.produces, n, spec);
+      base.addMana(p, instead.produces, n, spec);
     };
     // Another player's land tapped under Piracy: its mana is spent only as
     // Piracy says.
@@ -33972,7 +34013,9 @@ export class Game {
         // makes. A land that makes none has nothing to choose.
         const sizes = new Set(base.map((v) => (instead.one === true ? Math.min(v.makes.length, 1) : v.makes.length)));
         base = [...sizes].flatMap((n): Own[] =>
-          n === 0 ? [{ picks: [], makes: [] }] : COLORS.map((color) => ({ picks: [color], makes: Array<ManaType>(n).fill(color) })),
+          n === 0
+            ? [{ picks: [], makes: [] }]
+            : landManaPalette(instead).map((color) => ({ picks: [color], makes: Array<ManaType>(n).fill(color) })),
         );
       } else {
         // A pick that no longer decides anything is one offer, not five.
@@ -36790,7 +36833,7 @@ export class Game {
       addFrom(ability.effect);
       into = types;
       if (own.size === 0) continue;
-      for (const type of instead.produces === "any-color" ? COLORS : own) {
+      for (const type of instead.produces === "any-color" ? landManaPalette(instead) : own) {
         types.add(instead.produces === "any-color" || (instead.colorsOnly === true && type === "C") ? type : instead.produces);
       }
     }
@@ -75568,21 +75611,22 @@ controlledBy,
    * static on the battlefield whose entry matches the land and the tapper
    * (Infernal Darkness, Reality Twist), or a `landManaInstead` player effect
    * (Deep Water, a turn of its owner's own lands; Pale Moon, every player's
-   * nonbasic ones). Of several, one applies (rule 616.1, the tapping player's
-   * choice): the newest. A land its own cost sacrificed (Crystal Vein) was
+   * nonbasic ones). Of several — two rules, or one card's two entries for a
+   * land of two basic types (Naked Singularity's Plains Island) — all apply,
+   * in the tapper's order (rules 616.1, 616.1d), so the tapper picks the type
+   * among theirs (`mergedLandManaChange`). A land its own cost sacrificed (Crystal Vein) was
    * tapped for mana all the same, and is read as it last was. `wouldMake` is
    * how much it would make, before any multiplier: the order that leaves the
    * tapper the most mana (`atLeast` read first, then `times`). `Infinity`
    * asks whether any rule could apply. */
   private landManaInsteadFor(player: PlayerId, source: GameObject, wouldMake: number): LandManaChange | null {
-    let found: { readonly change: LandManaChange; readonly timestamp: number } | null = null;
+    const found: ManaProductionRule[] = [];
     for (const held of this.manaProductionRules()) {
-      const { rule, timestamp } = held;
+      const { rule } = held;
       if (rule.produces === undefined || (rule.atLeast !== undefined && wouldMake < rule.atLeast)) continue;
-      if (found !== null && timestamp <= found.timestamp) continue;
-      if (this.manaRuleApplies(held, player, source)) found = { change: { ...rule, produces: rule.produces }, timestamp };
+      if (this.manaRuleApplies(held, player, source)) found.push(rule);
     }
-    return found?.change ?? null;
+    return mergedLandManaChange(found);
   }
 
   /** Every rule of what tapped permanents make, as the battlefield and the

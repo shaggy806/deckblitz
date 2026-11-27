@@ -5396,7 +5396,10 @@ the Omenpaths). `amount` is a number. `mana-different-colors.test.ts`.
 a list of `{ filter?, produces?, tapper, colorsOnly?, one?, atLeast?, times? }`, or the same one entry as
 a `player-effect`'s `manaProduction` for a while. `filter` absent is any permanent; a land rule says `{ type: "land" }`. `atLeast` is "for two or more mana" (Damping Sphere). `produces` is a mana type or `"any-color"`, the
 tapper's pick (Pulse of Llanowar); `one` is "and amount" (Contamination, Harvest
-Mage); `colorsOnly` is "any other color", leaving {C} alone (Hall of Gemstone). In a
+Mage); `colorsOnly` is "any other color", leaving {C} alone (Hall of Gemstone). Several
+rules on one tap (two cards, or one card's entries for a land of two basic types —
+Naked Singularity's Plains Island) all apply in the tapper's order (rule 616.1d): the
+tapper picks the type among theirs, as Pulse of Llanowar's colour is picked. In a
 filter, "you" is the permanent's controller or the effect's. What triggered mana
 abilities add isn't changed. `land-mana-instead.test.ts`, `mana-reads.test.ts`.
 
