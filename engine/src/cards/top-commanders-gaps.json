@@ -3351,7 +3351,8 @@
   "effect:return-aura-after-host-died",
   "effect:aura-becomes-non-aura-enchantment",
   "effect:temporary-counter-addend",
-  "effect:lose-specific-ability"
+  "effect:lose-specific-ability",
+  "effect:temporary-counter-addend"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
