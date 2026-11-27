@@ -29051,6 +29051,17 @@ function parseStatic(line, text) {
   if ((m = /^(?:Equipped|Enchanted) creature gets ([+-]\d+)\/([+-]\d+) and has protection from each color that's not in your commander's color identity\.$/.exec(line))) {
     return { affects: { scope: "attached" }, grantPt: [Number(m[1]), Number(m[2])], protection: { outsideCommanderIdentity: true }, text };
   }
+  // Cumulative upkeep granted (rule 702.24a): "Enchanted creature has
+  // 'Cumulative upkeep {1}.'" (Mana Chains), "Green creatures have …"
+  // (Breath of Dreams) — each permanent's own upkeep trigger.
+  if ((m = /^(Enchanted creature|Equipped creature|(White|Blue|Black|Red|Green) creatures) (?:has|have) "Cumulative upkeep ((?:\{[^}]+\})+)\."$/.exec(line))) {
+    const color = { White: "W", Blue: "U", Black: "B", Red: "R", Green: "G" }[m[2]];
+    return {
+      affects: color === undefined ? { scope: "attached" } : { scope: "filter", filter: { type: "creature", colors: [color] } },
+      grantsTriggered: [cumulativeUpkeep(m[3])],
+      text,
+    };
+  }
   // A static granting a static (`grantsStatic` — rule 613.1f): "Equipped
   // creature has [flying and] 'You can't lose the game …'" (Cloudsteel
   // Kirin), "Commander creatures you own have 'Creature tokens you control

@@ -26743,3 +26743,17 @@ describe("a redirection shield of N or X from a source of your choice (rules 609
     expect(face.effect).toEqual({ kind: "prevent-damage-from-chosen-source", to: "your-side", amount: 2, redirectTo: 0 });
   });
 });
+
+describe("costs-mana lane, 2026-11-27: granted cumulative upkeep, its paid mana, a distinct-colour X", () => {
+  it("Green creatures have \"Cumulative upkeep {1}.\" (Breath of Dreams): a filter grant of the upkeep trigger", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      mana_cost: "{2}{U}{U}",
+      oracle_text: "Cumulative upkeep {U}\nGreen creatures have \"Cumulative upkeep {1}.\"",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", colors: ["G"] } });
+    expect(parsed.static[0].grantsTriggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "you" });
+  });
+});
