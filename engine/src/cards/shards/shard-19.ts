@@ -433,6 +433,7 @@ import _poolGreelsCaress from "../pool/greels-caress.js";
 import _poolGriffinDreamfinder from "../pool/griffin-dreamfinder.js";
 import _poolGrimBauble from "../pool/grim-bauble.js";
 import _poolGrindDust from "../pool/grind-dust.js";
+import _poolGrislySigil from "../pool/grisly-sigil.js";
 import _poolGrixisSojourners from "../pool/grixis-sojourners.js";
 import _poolGrolnokTheOmnivore from "../pool/grolnok-the-omnivore.js";
 import _poolGuardianOfFaith from "../pool/guardian-of-faith.js";
@@ -804,6 +805,7 @@ import _poolRiseFromTheNether from "../pool/rise-from-the-nether.js";
 import _poolRiseOfTheWitchKing from "../pool/rise-of-the-witch-king.js";
 import _poolRiteOfFlame from "../pool/rite-of-flame.js";
 import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
+import _poolRixMaadiGuildmage from "../pool/rix-maadi-guildmage.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
 import _poolRoaringPrimadox from "../pool/roaring-primadox.js";
 import _poolRoguesPassage from "../pool/rogues-passage.js";
@@ -1559,6 +1561,7 @@ const shard: CardShard = {
     _poolGriffinDreamfinder,
     _poolGrimBauble,
     _poolGrindDust,
+    _poolGrislySigil,
     _poolGrixisSojourners,
     _poolGrolnokTheOmnivore,
     _poolGuardianOfFaith,
@@ -1930,6 +1933,7 @@ const shard: CardShard = {
     _poolRiseOfTheWitchKing,
     _poolRiteOfFlame,
     _poolRiveteersOverlook,
+    _poolRixMaadiGuildmage,
     _poolRoaringEarth,
     _poolRoaringPrimadox,
     _poolRoguesPassage,

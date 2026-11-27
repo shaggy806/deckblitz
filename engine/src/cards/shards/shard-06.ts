@@ -503,6 +503,7 @@ import _poolKamiOfLunacy from "../pool/kami-of-lunacy.js";
 import _poolKamiOfTerribleSecrets from "../pool/kami-of-terrible-secrets.js";
 import _poolKamiOfThePalaceFields from "../pool/kami-of-the-palace-fields.js";
 import _poolKapshoKitefins from "../pool/kapsho-kitefins.js";
+import _poolKatabaticWinds from "../pool/katabatic-winds.js";
 import _poolKeiTakahashi from "../pool/kei-takahashi.js";
 import _poolKeldonMegaliths from "../pool/keldon-megaliths.js";
 import _poolKelsinkoRanger from "../pool/kelsinko-ranger.js";
@@ -964,6 +965,7 @@ import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
 import _poolUncoveredClues from "../pool/uncovered-clues.js";
 import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
+import _poolUnnaturalHunger from "../pool/unnatural-hunger.js";
 import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
 import _poolUnscrupulousAgent from "../pool/unscrupulous-agent.js";
@@ -1578,6 +1580,7 @@ const shard: CardShard = {
     _poolKamiOfTerribleSecrets,
     _poolKamiOfThePalaceFields,
     _poolKapshoKitefins,
+    _poolKatabaticWinds,
     _poolKeiTakahashi,
     _poolKeldonMegaliths,
     _poolKelsinkoRanger,
@@ -2039,6 +2042,7 @@ const shard: CardShard = {
     _poolUncoveredClues,
     _poolUndercityScrounger,
     _poolUnfinishedBusiness,
+    _poolUnnaturalHunger,
     _poolUnnerve,
     _poolUnrulyMob,
     _poolUnscrupulousAgent,

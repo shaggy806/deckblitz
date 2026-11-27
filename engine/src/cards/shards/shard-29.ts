@@ -371,6 +371,7 @@ import _poolGreatHallOfStarnheim from "../pool/great-hall-of-starnheim.js";
 import _poolGrimeGorger from "../pool/grime-gorger.js";
 import _poolGristVoraciousLarva from "../pool/grist-voracious-larva.js";
 import _poolGrovesBounty from "../pool/groves-bounty.js";
+import _poolGuardianBeast from "../pool/guardian-beast.js";
 import _poolGuardianOfVituGhazi from "../pool/guardian-of-vitu-ghazi.js";
 import _poolGudulLurker from "../pool/gudul-lurker.js";
 import _poolGuidingSpirit from "../pool/guiding-spirit.js";
@@ -1437,6 +1438,7 @@ const shard: CardShard = {
     _poolGrimeGorger,
     _poolGristVoraciousLarva,
     _poolGrovesBounty,
+    _poolGuardianBeast,
     _poolGuardianOfVituGhazi,
     _poolGudulLurker,
     _poolGuidingSpirit,

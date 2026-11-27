@@ -659,6 +659,7 @@ import _poolPatagiaViper from "../pool/patagia-viper.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPeerPressure from "../pool/peer-pressure.js";
 import _poolPenanceStare from "../pool/penance-stare.js";
+import _poolPendrellFlux from "../pool/pendrell-flux.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
 import _poolPerpetualTimepiece from "../pool/perpetual-timepiece.js";
@@ -1788,6 +1789,7 @@ const shard: CardShard = {
     _poolPawpatchFormation,
     _poolPeerPressure,
     _poolPenanceStare,
+    _poolPendrellFlux,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,
     _poolPerpetualTimepiece,

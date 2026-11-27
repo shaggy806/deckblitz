@@ -377,6 +377,7 @@ import _poolGlorybringer from "../pool/glorybringer.js";
 import _poolGlyphKeeper from "../pool/glyph-keeper.js";
 import _poolGnarledScarhide from "../pool/gnarled-scarhide.js";
 import _poolGoatnap from "../pool/goatnap.js";
+import _poolGoblinArtisans from "../pool/goblin-artisans.js";
 import _poolGoblinGloryChaser from "../pool/goblin-glory-chaser.js";
 import _poolGoblinLegionnaire from "../pool/goblin-legionnaire.js";
 import _poolGoblinRuinblaster from "../pool/goblin-ruinblaster.js";
@@ -602,6 +603,7 @@ import _poolNahirisBinding from "../pool/nahiris-binding.js";
 import _poolNalathniDragon from "../pool/nalathni-dragon.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNayaCharm from "../pool/naya-charm.js";
+import _poolNebuchadnezzar from "../pool/nebuchadnezzar.js";
 import _poolNecromancersMagemark from "../pool/necromancers-magemark.js";
 import _poolNecronOverlord from "../pool/necron-overlord.js";
 import _poolNefashu from "../pool/nefashu.js";
@@ -1478,6 +1480,7 @@ const shard: CardShard = {
     _poolGlyphKeeper,
     _poolGnarledScarhide,
     _poolGoatnap,
+    _poolGoblinArtisans,
     _poolGoblinGloryChaser,
     _poolGoblinLegionnaire,
     _poolGoblinRuinblaster,
@@ -1703,6 +1706,7 @@ const shard: CardShard = {
     _poolNalathniDragon,
     _poolNamoraTheSeaQueen,
     _poolNayaCharm,
+    _poolNebuchadnezzar,
     _poolNecromancersMagemark,
     _poolNecronOverlord,
     _poolNefashu,

@@ -963,6 +963,7 @@ import _poolValiantRescuer from "../pool/valiant-rescuer.js";
 import _poolVampireAristocrat from "../pool/vampire-aristocrat.js";
 import _poolVampireNeonate from "../pool/vampire-neonate.js";
 import _poolVampiricRites from "../pool/vampiric-rites.js";
+import _poolVampirism from "../pool/vampirism.js";
 import _poolVastwoodAnimist from "../pool/vastwood-animist.js";
 import _poolVedalkenArchmage from "../pool/vedalken-archmage.js";
 import _poolVengeantVampire from "../pool/vengeant-vampire.js";
@@ -2007,6 +2008,7 @@ const shard: CardShard = {
     _poolVampireAristocrat,
     _poolVampireNeonate,
     _poolVampiricRites,
+    _poolVampirism,
     _poolVastwoodAnimist,
     _poolVedalkenArchmage,
     _poolVengeantVampire,

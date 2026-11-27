@@ -201,6 +201,7 @@ import _poolDaredevilFearlessFighter from "../pool/daredevil-fearless-fighter.js
 import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
 import _poolDaringArchaeologist from "../pool/daring-archaeologist.js";
 import _poolDarkDepths from "../pool/dark-depths.js";
+import _poolDarkchildDemonUncaged from "../pool/darkchild-demon-uncaged.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
 import _poolDavrosDalekCreator from "../pool/davros-dalek-creator.js";
 import _poolDeadOfWinter from "../pool/dead-of-winter.js";
@@ -841,6 +842,7 @@ import _poolSpireGarden from "../pool/spire-garden.js";
 import _poolSpireWinder from "../pool/spire-winder.js";
 import _poolSplendorMare from "../pool/splendor-mare.js";
 import _poolSquadronHawk from "../pool/squadron-hawk.js";
+import _poolSquawkroaster from "../pool/squawkroaster.js";
 import _poolStarlightInvoker from "../pool/starlight-invoker.js";
 import _poolSteadfastPaladin from "../pool/steadfast-paladin.js";
 import _poolSteelOverseer from "../pool/steel-overseer.js";
@@ -1271,6 +1273,7 @@ const shard: CardShard = {
     _poolDarigaazsCharm,
     _poolDaringArchaeologist,
     _poolDarkDepths,
+    _poolDarkchildDemonUncaged,
     _poolDarkthicketWolf,
     _poolDavrosDalekCreator,
     _poolDeadOfWinter,
@@ -1911,6 +1914,7 @@ const shard: CardShard = {
     _poolSpireWinder,
     _poolSplendorMare,
     _poolSquadronHawk,
+    _poolSquawkroaster,
     _poolStarlightInvoker,
     _poolSteadfastPaladin,
     _poolSteelOverseer,

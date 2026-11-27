@@ -906,6 +906,7 @@ import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStandstill from "../pool/standstill.js";
 import _poolStart from "../pool/start.js";
 import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
+import _poolStenchOfEvil from "../pool/stench-of-evil.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
 import _poolSternMarshal from "../pool/stern-marshal.js";
@@ -2041,6 +2042,7 @@ const shard: CardShard = {
     _poolStandstill,
     _poolStart,
     _poolStartledRelicSloth,
+    _poolStenchOfEvil,
     _poolStensiaBloodhall,
     _poolSternLesson,
     _poolSternMarshal,

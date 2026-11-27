@@ -177,6 +177,7 @@ import _poolDeadbridgeShaman from "../pool/deadbridge-shaman.js";
 import _poolDeadeyeTracker from "../pool/deadeye-tracker.js";
 import _poolDeafeningClarion from "../pool/deafening-clarion.js";
 import _poolDeathCloud from "../pool/death-cloud.js";
+import _poolDeathSpark from "../pool/death-spark.js";
 import _poolDeathmistRaptor from "../pool/deathmist-raptor.js";
 import _poolDeathsporeThallid from "../pool/deathspore-thallid.js";
 import _poolDefile from "../pool/defile.js";
@@ -255,6 +256,7 @@ import _poolEowynLadyOfRohan from "../pool/eowyn-lady-of-rohan.js";
 import _poolEphemeron from "../pool/ephemeron.js";
 import _poolEraOfEnlightenment from "../pool/era-of-enlightenment.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
+import _poolEssenceLeak from "../pool/essence-leak.js";
 import _poolEvilPresence from "../pool/evil-presence.js";
 import _poolExcaliburSwordOfEden from "../pool/excalibur-sword-of-eden.js";
 import _poolExtractTheTruth from "../pool/extract-the-truth.js";
@@ -506,6 +508,7 @@ import _poolLuxArtillery from "../pool/lux-artillery.js";
 import _poolLuxiorGiadasGift from "../pool/luxior-giadas-gift.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagebaneArmor from "../pool/magebane-armor.js";
+import _poolMagikIllyanaRasputin from "../pool/magik-illyana-rasputin.js";
 import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
 import _poolMagusOfTheChains from "../pool/magus-of-the-chains.js";
 import _poolMajesticMyriarch from "../pool/majestic-myriarch.js";
@@ -726,6 +729,7 @@ import _poolScattershotArcher from "../pool/scattershot-archer.js";
 import _poolScorchingWinds from "../pool/scorching-winds.js";
 import _poolScorchmark from "../pool/scorchmark.js";
 import _poolSeafloorOracle from "../pool/seafloor-oracle.js";
+import _poolSecurityRhox from "../pool/security-rhox.js";
 import _poolSeedguideAsh from "../pool/seedguide-ash.js";
 import _poolSeedsOfInnocence from "../pool/seeds-of-innocence.js";
 import _poolSegovianSword from "../pool/segovian-sword.js";
@@ -1229,6 +1233,7 @@ const shard: CardShard = {
     _poolDeadeyeTracker,
     _poolDeafeningClarion,
     _poolDeathCloud,
+    _poolDeathSpark,
     _poolDeathmistRaptor,
     _poolDeathsporeThallid,
     _poolDefile,
@@ -1307,6 +1312,7 @@ const shard: CardShard = {
     _poolEphemeron,
     _poolEraOfEnlightenment,
     _poolEsotericDuplicator,
+    _poolEssenceLeak,
     _poolEvilPresence,
     _poolExcaliburSwordOfEden,
     _poolExtractTheTruth,
@@ -1558,6 +1564,7 @@ const shard: CardShard = {
     _poolLuxiorGiadasGift,
     _poolMacabreWaltz,
     _poolMagebaneArmor,
+    _poolMagikIllyanaRasputin,
     _poolMagnifyingGlass,
     _poolMagusOfTheChains,
     _poolMajesticMyriarch,
@@ -1778,6 +1785,7 @@ const shard: CardShard = {
     _poolScorchingWinds,
     _poolScorchmark,
     _poolSeafloorOracle,
+    _poolSecurityRhox,
     _poolSeedguideAsh,
     _poolSeedsOfInnocence,
     _poolSegovianSword,

@@ -65,6 +65,7 @@ import _poolAxgardArtisan from "../pool/axgard-artisan.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolAyaraWidowOfTheRealm from "../pool/ayara-widow-of-the-realm.js";
 import _poolBadgeyMaliciousGlitch from "../pool/badgey-malicious-glitch.js";
+import _poolBalduvianWarlord from "../pool/balduvian-warlord.js";
 import _poolBalefangTheUnslayable from "../pool/balefang-the-unslayable.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBalthierAndFran from "../pool/balthier-and-fran.js";
@@ -795,6 +796,7 @@ import _poolSliverLegion from "../pool/sliver-legion.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
 import _poolSnowFortress from "../pool/snow-fortress.js";
 import _poolSoShiny from "../pool/so-shiny.js";
+import _poolSoaringStoneglider from "../pool/soaring-stoneglider.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
 import _poolSolarion from "../pool/solarion.js";
@@ -1127,6 +1129,7 @@ const shard: CardShard = {
     _poolAxgardBraggart,
     _poolAyaraWidowOfTheRealm,
     _poolBadgeyMaliciousGlitch,
+    _poolBalduvianWarlord,
     _poolBalefangTheUnslayable,
     _poolBalefulStrix,
     _poolBalthierAndFran,
@@ -1857,6 +1860,7 @@ const shard: CardShard = {
     _poolSmashToDust,
     _poolSnowFortress,
     _poolSoShiny,
+    _poolSoaringStoneglider,
     _poolSojournersCompanion,
     _poolSokenzanBruiser,
     _poolSolarion,

@@ -1027,6 +1027,7 @@ import _poolWhirlermaker from "../pool/whirlermaker.js";
 import _poolWhirlwindDenial from "../pool/whirlwind-denial.js";
 import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
+import _poolWildDogs from "../pool/wild-dogs.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWildInstincts from "../pool/wild-instincts.js";
 import _poolWildMagicSurge from "../pool/wild-magic-surge.js";
@@ -2113,6 +2114,7 @@ const shard: CardShard = {
     _poolWhirlwindDenial,
     _poolWhisperAgent,
     _poolWhiteOrchidPhantom,
+    _poolWildDogs,
     _poolWildHunger,
     _poolWildInstincts,
     _poolWildMagicSurge,

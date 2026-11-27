@@ -239,6 +239,7 @@ import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
 import _poolDisplayOfPower from "../pool/display-of-power.js";
+import _poolDisruptionAura from "../pool/disruption-aura.js";
 import _poolDivinePresence from "../pool/divine-presence.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
 import _poolDocOcksTentacles from "../pool/doc-ocks-tentacles.js";
@@ -651,6 +652,7 @@ import _poolOneRingToRuleThemAll from "../pool/one-ring-to-rule-them-all.js";
 import _poolOneWithDeath from "../pool/one-with-death.js";
 import _poolOniPossession from "../pool/oni-possession.js";
 import _poolOpenFire from "../pool/open-fire.js";
+import _poolOrcishLibrarian from "../pool/orcish-librarian.js";
 import _poolOreGorger from "../pool/ore-gorger.js";
 import _poolOreplatePangolin from "../pool/oreplate-pangolin.js";
 import _poolOrneryKudu from "../pool/ornery-kudu.js";
@@ -1334,6 +1336,7 @@ const shard: CardShard = {
     _poolDisfigure,
     _poolDisplacerKitten,
     _poolDisplayOfPower,
+    _poolDisruptionAura,
     _poolDivinePresence,
     _poolDivineResilience,
     _poolDocOcksTentacles,
@@ -1746,6 +1749,7 @@ const shard: CardShard = {
     _poolOneWithDeath,
     _poolOniPossession,
     _poolOpenFire,
+    _poolOrcishLibrarian,
     _poolOreGorger,
     _poolOreplatePangolin,
     _poolOrneryKudu,

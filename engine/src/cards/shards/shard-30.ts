@@ -530,6 +530,7 @@ import _poolKoyaDeathFromAbove from "../pool/koya-death-from-above.js";
 import _poolKrakilin from "../pool/krakilin.js";
 import _poolKrallenhordeWantons from "../pool/krallenhorde-wantons.js";
 import _poolKreshTheBloodbraided from "../pool/kresh-the-bloodbraided.js";
+import _poolKrovikanHorror from "../pool/krovikan-horror.js";
 import _poolKukemssaSerpent from "../pool/kukemssa-serpent.js";
 import _poolLaeliaTheBladeReforged from "../pool/laelia-the-blade-reforged.js";
 import _poolLakeOfTheDead from "../pool/lake-of-the-dead.js";
@@ -1623,6 +1624,7 @@ const shard: CardShard = {
     _poolKrakilin,
     _poolKrallenhordeWantons,
     _poolKreshTheBloodbraided,
+    _poolKrovikanHorror,
     _poolKukemssaSerpent,
     _poolLaeliaTheBladeReforged,
     _poolLakeOfTheDead,
