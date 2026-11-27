@@ -44655,6 +44655,12 @@ export class Game {
         if (record.combat.turn !== turn.number || record.combat.phase !== (turn.combatPhases ?? 1)) return 0;
         return record.players.filter((p) => p !== controller).length;
       },
+      // Whom the controller is attacking now: only in their own combat
+      // (rule 506.2), the players being attacked (802.4).
+      opponentsBeingAttacked: () =>
+        activePlayerOf(this.state) !== controller
+          ? 0
+          : playersBeingAttacked(this.state).filter((p) => p !== controller).length,
       creaturesAttacking: (player) =>
         permanentCount(
           this.state,

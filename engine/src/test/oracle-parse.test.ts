@@ -13867,6 +13867,8 @@ describe("amounts read from what has happened this turn", () => {
     const angel = face(CREATURE, "When this creature enters, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you attacked this turn.");
     expect(angel.triggered[0].effect).toEqual({ kind: "create-token", token: "A Token", count: { turnStat: "opponents-attacked" } });
     expect(face("Sorcery", "This spell costs {1} less to cast for each opponent you attacked this turn.").selfCostReduction.reduceGeneric).toEqual({ turnStat: "opponents-attacked", who: "you" });
+    // Astral Confrontation: the opponents being attacked now.
+    expect(face("Instant", "This spell costs {1} less to cast for each opponent you're attacking.").selfCostReduction.reduceGeneric).toEqual({ opponentsBeingAttacked: true });
     expect(face("Sorcery", "Draw a card for each opponent who attacked this turn.").complete).toBe(false);
   });
 

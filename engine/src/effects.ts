@@ -1409,6 +1409,14 @@ export type EffectAmount =
    * attack, and never one put onto the battlefield attacking (the
    * rulings). A planeswalker attacked isn't its controller. */
   | { readonly opponentsAttacked: true }
+  /** How many opponents the controller is attacking now — "This spell costs
+   * {1} less to cast for each opponent you're attacking" (Astral
+   * Confrontation): it's their combat (rule 506.2), and the players, not
+   * their planeswalkers or battles, are being attacked (802.4,
+   * `combat/attacked.ts`'s `playersBeingAttacked` — a player declared
+   * attacked stays so, one attacked by a creature put onto the battlefield
+   * attacking is too). None outside their combat. */
+  | { readonly opponentsBeingAttacked: true }
   /** How many of the resolving spell's or ability's object targets are still
    * the objects they were (rule 400.7) and legal — for a delayed trigger set
    * up `about` what its creator did, "those cards that are **still exiled**":
@@ -14144,6 +14152,8 @@ export interface EffectApi {
   namesForMatching(object: ObjectId): readonly string[];
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
+  /** See the `{ opponentsBeingAttacked }` {@link EffectAmount}. */
+  opponentsBeingAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
    * attacking `player` (not their planeswalkers), a stack as its tokens. */
   creaturesAttacking(player: PlayerId): number;
@@ -19282,6 +19292,7 @@ export function signedAmountValue(
     return ctx.cardTypesOf({ kind: "object", object: ctx.priced }).filter((type) => exiled.has(type)).length;
   }
   if ("opponentsAttacked" in amount) return ctx.opponentsAttacked();
+  if ("opponentsBeingAttacked" in amount) return ctx.opponentsBeingAttacked();
   if ("objectTargets" in amount) {
     return ctx.targets.filter((t, slot) => t?.kind === "object" && !illegalSlot(slot, ctx)).length;
   }

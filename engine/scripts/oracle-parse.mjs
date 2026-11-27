@@ -19835,6 +19835,8 @@ function parseFaceAsWritten(face, ctx = {}) {
       "~ costs {1} less to cast for each opponent you have.": { countPlayers: "each-opponent" },
       // Inspired Fire, Deem Inferior.
       "~ costs {1} less to cast for each card you've drawn this turn.": { turnStat: "cards-drawn", who: "you" },
+      // Astral Confrontation: the opponents being attacked now.
+      "~ costs {1} less to cast for each opponent you're attacking.": { opponentsBeingAttacked: true },
     }[line];
     if (perEach !== undefined) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };

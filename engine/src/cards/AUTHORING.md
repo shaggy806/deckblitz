@@ -1156,7 +1156,8 @@ player a scoped effect reaches — Wound Reflection's "each opponent loses life 
 the life they lost this turn" — with `target` a player
 target slot instead of a scope — Astarion's "life **they** lost this turn" — a per-turn running total —
 `"opponents-attacked"` (Militant Angel, Rose: at any combat of the turn, a planeswalker
-attacked isn't its controller),
+attacked isn't its controller; "each opponent you're **attacking**", now, is the amount
+`{ opponentsBeingAttacked: true }` — Astral Confrontation),
 `"life-lost"`, `"life-gained"`, `"cards-drawn"`, `"spells-cast"`,
 `"damage-taken"`, `"combat-damage-taken"`, `"noncombat-damage-taken"` (the
 rest of `"damage-taken"`: Whiplash Wordsmith's and Grim Repriser's "an
