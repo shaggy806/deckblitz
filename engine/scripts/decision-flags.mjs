@@ -90,6 +90,7 @@ function createWatcher(where, flags) {
     else if (action.type === "cast-now" && action.cast?.type === "cast-spell") card = action.cast.card;
     const activation = action.type === "activate-ability";
     if (card === null && !activation) return;
+    flags.followed = (flags.followed ?? 0) + 1;
     // Against not doing it, each played out until the stack settles.
     const instead =
       action.type === "cast-now" ? { type: "cast-now", player, cast: null } : { type: "pass-priority", player };
@@ -113,6 +114,8 @@ function createWatcher(where, flags) {
       activation: activation ? { source: action.source } : null,
       what: card !== null ? name(s, card) : `${name(s, action.source)}'s ability`,
       depth: s.zones.shared.stack.length,
+      selfSeen: false,
+      ownAbove: null,
       contested: null,
       resolved: false,
       fizzled: null,
@@ -203,6 +206,13 @@ function createWatcher(where, flags) {
         if (!o.resolved && (e.type === "spell-cast" || (e.type === "ability-activated" && e.onStack)) && e.player !== o.player) {
           o.contested ??= `${e.player} ${e.type === "spell-cast" ? `cast ${name(s, e.object)}` : `activated ${name(s, e.source)}`} in response`;
         }
+        // Its own player's next cast or activation above it, before it
+        // resolved — after the one being followed (its own event first).
+        const ownAct = (e.type === "spell-cast" || (e.type === "ability-activated" && e.onStack)) && e.player === o.player;
+        if (ownAct && !o.resolved) {
+          if (!o.selfSeen) o.selfSeen = true;
+          else o.ownAbove ??= `then ${e.type === "spell-cast" ? `cast ${name(s, e.object)}` : `activated ${name(s, e.source)} again`} above it`;
+        }
       }
     }
     seen = events.length;
@@ -218,7 +228,7 @@ function createWatcher(where, flags) {
       const at = `${where} t${o.turn} ${o.player}`;
       const aimed = o.targets ? `, aimed at ${o.targets}` : "";
       if (o.fizzled !== null) {
-        flags.push({ where, turn: o.turn, player: o.player, kind: "fizzled", line: `${at}: ${o.what} fizzled (${o.fizzled})${aimed}${o.contested === null ? "" : ` (in the game, ${o.contested})`}` });
+        flags.push({ where, turn: o.turn, player: o.player, kind: "fizzled", line: `${at}: ${o.what} fizzled (${o.fizzled})${aimed}${o.contested === null ? "" : ` (in the game, ${o.contested})`}${o.ownAbove === null ? "" : ` (its player ${o.ownAbove})`}` });
       } else if (o.nothing && o.contested === null) {
         flags.push({ where, turn: o.turn, player: o.player, kind: "nothing", line: `${at}: ${o.what} did nothing: every zone, life total and counter as without it, but the card and the mana${aimed}` });
       } else if (DROP !== null && o.chosen !== null && o.without !== null && o.without - o.chosen > DROP) {
@@ -324,7 +334,8 @@ function freshGame(deckNames, seed, budget, maxTurns) {
   game.advanceUntil((s) => s.result.over || s.turn.number > maxTurns);
   watcher.afterSettle(game);
   for (const f of flags) f.line = f.line.replace(` ${f.player}:`, ` ${f.player} (${label[f.player]}):`);
-  return { flags, decisions, turns: game.state.turn.number };
+  const cast = game.events.filter((e) => e.type === "spell-cast").length;
+  return { flags, decisions, turns: game.state.turn.number, cast };
 }
 
 function seedList(spec) {
@@ -384,9 +395,9 @@ if (flag("decks") !== null) {
   const parallel = Number(flag("parallel") ?? 4);
   if (seeds.length === 1 || has("child")) {
     for (const seed of seeds) {
-      const { flags, decisions, turns } = freshGame(deckNames, seed, budget, maxTurns);
+      const { flags, decisions, turns, cast } = freshGame(deckNames, seed, budget, maxTurns);
       const watch = `npm run bot:watch -w engine -- --decks "${flag("decks")}" --seed ${seed} ${budget === null ? "--count" : `--budget ${budget}`}`;
-      console.log(`seed ${seed}: ${decisions} decisions, ${turns} turns, ${flags.length} flagged`);
+      console.log(`seed ${seed}: ${decisions} decisions, ${flags.followed ?? 0} casts and activations followed (${cast} spells cast in the game), ${turns} turns, ${flags.length} flagged`);
       if (!quiet) for (const f of flags) console.log(`  ${f.line}\n    read: ${watch} --turns ${f.turn}-${f.turn}`);
     }
   } else {
