@@ -511,6 +511,7 @@ import _poolJuganTheRisingStar from "../pool/jugan-the-rising-star.js";
 import _poolJukaiTrainee from "../pool/jukai-trainee.js";
 import _poolJungleBarrier from "../pool/jungle-barrier.js";
 import _poolJunkbladeBruiser from "../pool/junkblade-bruiser.js";
+import _poolKaerveksSpite from "../pool/kaerveks-spite.js";
 import _poolKaitoCunningInfiltrator from "../pool/kaito-cunning-infiltrator.js";
 import _poolKalonianTwingrove from "../pool/kalonian-twingrove.js";
 import _poolKarganIntimidator from "../pool/kargan-intimidator.js";
@@ -552,6 +553,7 @@ import _poolLakeTownToymaker from "../pool/lake-town-toymaker.js";
 import _poolLanderRizzi from "../pool/lander-rizzi.js";
 import _poolLanternOfTheLost from "../pool/lantern-of-the-lost.js";
 import _poolLathielTheBounteousDawn from "../pool/lathiel-the-bounteous-dawn.js";
+import _poolLayBare from "../pool/lay-bare.js";
 import _poolLeadBellyChimera from "../pool/lead-belly-chimera.js";
 import _poolLeadenFists from "../pool/leaden-fists.js";
 import _poolLeoninDenGuard from "../pool/leonin-den-guard.js";
@@ -1643,6 +1645,7 @@ const shard: CardShard = {
     _poolJukaiTrainee,
     _poolJungleBarrier,
     _poolJunkbladeBruiser,
+    _poolKaerveksSpite,
     _poolKaitoCunningInfiltrator,
     _poolKalonianTwingrove,
     _poolKarganIntimidator,
@@ -1684,6 +1687,7 @@ const shard: CardShard = {
     _poolLanderRizzi,
     _poolLanternOfTheLost,
     _poolLathielTheBounteousDawn,
+    _poolLayBare,
     _poolLeadBellyChimera,
     _poolLeadenFists,
     _poolLeoninDenGuard,

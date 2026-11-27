@@ -525,6 +525,7 @@ import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMegatronTyrant from "../pool/megatron-tyrant.js";
 import _poolMelirasKeepers from "../pool/meliras-keepers.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
+import _poolMemoryCrystal from "../pool/memory-crystal.js";
 import _poolMemorysJourney from "../pool/memorys-journey.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMercadianAtlas from "../pool/mercadian-atlas.js";
@@ -1576,6 +1577,7 @@ const shard: CardShard = {
     _poolMegatronTyrant,
     _poolMelirasKeepers,
     _poolMemnarchTheWarden,
+    _poolMemoryCrystal,
     _poolMemorysJourney,
     _poolMentalNote,
     _poolMercadianAtlas,

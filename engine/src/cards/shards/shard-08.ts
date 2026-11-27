@@ -386,6 +386,7 @@ import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
 import _poolGlavaFiveAdventsMage from "../pool/glava-five-advents-mage.js";
 import _poolGlimpseTheImpossible from "../pool/glimpse-the-impossible.js";
+import _poolGlitteringLion from "../pool/glittering-lion.js";
 import _poolGlitteringStockpile from "../pool/glittering-stockpile.js";
 import _poolGlowingOne from "../pool/glowing-one.js";
 import _poolGoblinBoomKeg from "../pool/goblin-boom-keg.js";
@@ -611,6 +612,7 @@ import _poolMirkwoodPathmaker from "../pool/mirkwood-pathmaker.js";
 import _poolMirrisGuile from "../pool/mirris-guile.js";
 import _poolMirrorStyleMaster from "../pool/mirror-style-master.js";
 import _poolMistSyndicateNaga from "../pool/mist-syndicate-naga.js";
+import _poolMisterImmortal from "../pool/mister-immortal.js";
 import _poolMistformSeaswift from "../pool/mistform-seaswift.js";
 import _poolMjolnirStormHammer from "../pool/mjolnir-storm-hammer.js";
 import _poolMobVerdict from "../pool/mob-verdict.js";
@@ -923,6 +925,7 @@ import _poolSyphonFuel from "../pool/syphon-fuel.js";
 import _poolSyrCarahTheBold from "../pool/syr-carah-the-bold.js";
 import _poolTaigamOjutaiMaster from "../pool/taigam-ojutai-master.js";
 import _poolTakeForARide from "../pool/take-for-a-ride.js";
+import _poolTakklemaggot from "../pool/takklemaggot.js";
 import _poolTalarasBattalion from "../pool/talaras-battalion.js";
 import _poolTalasWarrior from "../pool/talas-warrior.js";
 import _poolTalismanOfImpulse from "../pool/talisman-of-impulse.js";
@@ -1495,6 +1498,7 @@ const shard: CardShard = {
     _poolGlasspoolShore,
     _poolGlavaFiveAdventsMage,
     _poolGlimpseTheImpossible,
+    _poolGlitteringLion,
     _poolGlitteringStockpile,
     _poolGlowingOne,
     _poolGoblinBoomKeg,
@@ -1720,6 +1724,7 @@ const shard: CardShard = {
     _poolMirrisGuile,
     _poolMirrorStyleMaster,
     _poolMistSyndicateNaga,
+    _poolMisterImmortal,
     _poolMistformSeaswift,
     _poolMjolnirStormHammer,
     _poolMobVerdict,
@@ -2032,6 +2037,7 @@ const shard: CardShard = {
     _poolSyrCarahTheBold,
     _poolTaigamOjutaiMaster,
     _poolTakeForARide,
+    _poolTakklemaggot,
     _poolTalarasBattalion,
     _poolTalasWarrior,
     _poolTalismanOfImpulse,

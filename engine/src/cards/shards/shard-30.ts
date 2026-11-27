@@ -86,6 +86,7 @@ import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
 import _poolBerserkersFrenzy from "../pool/berserkers-frenzy.js";
 import _poolBilboBirthdayCelebrant from "../pool/bilbo-birthday-celebrant.js";
+import _poolBillPotts from "../pool/bill-potts.js";
 import _poolBlackHole from "../pool/black-hole.js";
 import _poolBlackPantherVanguard from "../pool/black-panther-vanguard.js";
 import _poolBlackScarab from "../pool/black-scarab.js";
@@ -1175,6 +1176,7 @@ const shard: CardShard = {
     _poolBenevolentRiverSpirit,
     _poolBerserkersFrenzy,
     _poolBilboBirthdayCelebrant,
+    _poolBillPotts,
     _poolBlackHole,
     _poolBlackPantherVanguard,
     _poolBlackScarab,

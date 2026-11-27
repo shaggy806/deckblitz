@@ -799,6 +799,7 @@ import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
 import _poolShriekhorn from "../pool/shriekhorn.js";
 import _poolShriekwoodDevourer from "../pool/shriekwood-devourer.js";
 import _poolShroudstomper from "../pool/shroudstomper.js";
+import _poolShuriken from "../pool/shuriken.js";
 import _poolSidarJabariOfZhalfir from "../pool/sidar-jabari-of-zhalfir.js";
 import _poolSiegeBehemoth from "../pool/siege-behemoth.js";
 import _poolSiegecraft from "../pool/siegecraft.js";
@@ -1870,6 +1871,7 @@ const shard: CardShard = {
     _poolShriekhorn,
     _poolShriekwoodDevourer,
     _poolShroudstomper,
+    _poolShuriken,
     _poolSidarJabariOfZhalfir,
     _poolSiegeBehemoth,
     _poolSiegecraft,

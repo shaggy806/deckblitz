@@ -683,6 +683,7 @@ import _poolPleaForPower from "../pool/plea-for-power.js";
 import _poolPorphyryNodes from "../pool/porphyry-nodes.js";
 import _poolPouncingLynx from "../pool/pouncing-lynx.js";
 import _poolPowerSink from "../pool/power-sink.js";
+import _poolPrairieDog from "../pool/prairie-dog.js";
 import _poolPredatoryNightstalker from "../pool/predatory-nightstalker.js";
 import _poolPricklyPair from "../pool/prickly-pair.js";
 import _poolPrimevalShambler from "../pool/primeval-shambler.js";
@@ -910,6 +911,7 @@ import _poolTheTwelfthDoctor from "../pool/the-twelfth-doctor.js";
 import _poolThermalGlider from "../pool/thermal-glider.js";
 import _poolThingSwing from "../pool/thing-swing.js";
 import _poolThirstForMeaning from "../pool/thirst-for-meaning.js";
+import _poolThoughtPrison from "../pool/thought-prison.js";
 import _poolThoughtbind from "../pool/thoughtbind.js";
 import _poolThousandMoonsSmithy from "../pool/thousand-moons-smithy.js";
 import _poolThreeTreeScribe from "../pool/three-tree-scribe.js";
@@ -1751,6 +1753,7 @@ const shard: CardShard = {
     _poolPorphyryNodes,
     _poolPouncingLynx,
     _poolPowerSink,
+    _poolPrairieDog,
     _poolPredatoryNightstalker,
     _poolPricklyPair,
     _poolPrimevalShambler,
@@ -1978,6 +1981,7 @@ const shard: CardShard = {
     _poolThermalGlider,
     _poolThingSwing,
     _poolThirstForMeaning,
+    _poolThoughtPrison,
     _poolThoughtbind,
     _poolThousandMoonsSmithy,
     _poolThreeTreeScribe,

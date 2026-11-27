@@ -955,6 +955,7 @@ import _poolTrainingGrounds from "../pool/training-grounds.js";
 import _poolTraitorousBlood from "../pool/traitorous-blood.js";
 import _poolTranquilThicket from "../pool/tranquil-thicket.js";
 import _poolTranscendentMessage from "../pool/transcendent-message.js";
+import _poolTravelingPlague from "../pool/traveling-plague.js";
 import _poolTrenchBehemoth from "../pool/trench-behemoth.js";
 import _poolTrostaniSelesnyasVoice from "../pool/trostani-selesnyas-voice.js";
 import _poolTuinvaleGuide from "../pool/tuinvale-guide.js";
@@ -2048,6 +2049,7 @@ const shard: CardShard = {
     _poolTraitorousBlood,
     _poolTranquilThicket,
     _poolTranscendentMessage,
+    _poolTravelingPlague,
     _poolTrenchBehemoth,
     _poolTrostaniSelesnyasVoice,
     _poolTuinvaleGuide,

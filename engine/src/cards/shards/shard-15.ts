@@ -524,6 +524,7 @@ import _poolManicScribe from "../pool/manic-scribe.js";
 import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarblePriest from "../pool/marble-priest.js";
 import _poolMarchFromTheTomb from "../pool/march-from-the-tomb.js";
+import _poolMarchOfBurgeoningLife from "../pool/march-of-burgeoning-life.js";
 import _poolMarchOfRecklessJoy from "../pool/march-of-reckless-joy.js";
 import _poolMariposaMilitaryBase from "../pool/mariposa-military-base.js";
 import _poolMarketFestival from "../pool/market-festival.js";
@@ -1533,6 +1534,7 @@ const shard: CardShard = {
     _poolManticoreOfTheGauntlet,
     _poolMarblePriest,
     _poolMarchFromTheTomb,
+    _poolMarchOfBurgeoningLife,
     _poolMarchOfRecklessJoy,
     _poolMariposaMilitaryBase,
     _poolMarketFestival,

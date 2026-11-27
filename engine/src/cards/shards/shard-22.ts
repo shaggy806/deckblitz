@@ -44,6 +44,7 @@ import _poolArixmethesSlumberingIsle from "../pool/arixmethes-slumbering-isle.js
 import _poolArkOfBlight from "../pool/ark-of-blight.js";
 import _poolArtifactMutation from "../pool/artifact-mutation.js";
 import _poolAshenmoorGouger from "../pool/ashenmoor-gouger.js";
+import _poolAspectOfWolf from "../pool/aspect-of-wolf.js";
 import _poolAssemblyWorker from "../pool/assembly-worker.js";
 import _poolAtlanteanSkirmisher from "../pool/atlantean-skirmisher.js";
 import _poolAtmosphereSurgeon from "../pool/atmosphere-surgeon.js";
@@ -333,6 +334,7 @@ import _poolGeneralChangColdWarrior from "../pool/general-chang-cold-warrior.js"
 import _poolGenestealerLocus from "../pool/genestealer-locus.js";
 import _poolGhastlyDemise from "../pool/ghastly-demise.js";
 import _poolGhostform from "../pool/ghostform.js";
+import _poolGiantOyster from "../pool/giant-oyster.js";
 import _poolGideonsTriumph from "../pool/gideons-triumph.js";
 import _poolGilgameshMasterAtArms from "../pool/gilgamesh-master-at-arms.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
@@ -678,6 +680,7 @@ import _poolPurphorossIntervention from "../pool/purphoross-intervention.js";
 import _poolPyramidOfThePantheon from "../pool/pyramid-of-the-pantheon.js";
 import _poolPyroconvergence from "../pool/pyroconvergence.js";
 import _poolQalaAjanisPridemate from "../pool/qala-ajanis-pridemate.js";
+import _poolQarsiDeceiver from "../pool/qarsi-deceiver.js";
 import _poolQuickDraw from "../pool/quick-draw.js";
 import _poolQuirionBeastcaller from "../pool/quirion-beastcaller.js";
 import _poolRadhaHeartOfKeld from "../pool/radha-heart-of-keld.js";
@@ -1026,6 +1029,7 @@ import _poolWavesOfAggression from "../pool/waves-of-aggression.js";
 import _poolWayOfTheThief from "../pool/way-of-the-thief.js";
 import _poolWebUp from "../pool/web-up.js";
 import _poolWelkinTern from "../pool/welkin-tern.js";
+import _poolWellLaidPlans from "../pool/well-laid-plans.js";
 import _poolWhisperingShade from "../pool/whispering-shade.js";
 import _poolWhoosh from "../pool/whoosh.js";
 import _poolWhtzTheBibliophile from "../pool/whtz-the-bibliophile.js";
@@ -1135,6 +1139,7 @@ const shard: CardShard = {
     _poolArkOfBlight,
     _poolArtifactMutation,
     _poolAshenmoorGouger,
+    _poolAspectOfWolf,
     _poolAssemblyWorker,
     _poolAtlanteanSkirmisher,
     _poolAtmosphereSurgeon,
@@ -1424,6 +1429,7 @@ const shard: CardShard = {
     _poolGenestealerLocus,
     _poolGhastlyDemise,
     _poolGhostform,
+    _poolGiantOyster,
     _poolGideonsTriumph,
     _poolGilgameshMasterAtArms,
     _poolGlacialFortress,
@@ -1769,6 +1775,7 @@ const shard: CardShard = {
     _poolPyramidOfThePantheon,
     _poolPyroconvergence,
     _poolQalaAjanisPridemate,
+    _poolQarsiDeceiver,
     _poolQuickDraw,
     _poolQuirionBeastcaller,
     _poolRadhaHeartOfKeld,
@@ -2117,6 +2124,7 @@ const shard: CardShard = {
     _poolWayOfTheThief,
     _poolWebUp,
     _poolWelkinTern,
+    _poolWellLaidPlans,
     _poolWhisperingShade,
     _poolWhoosh,
     _poolWhtzTheBibliophile,
