@@ -8447,6 +8447,49 @@ const SCENARIOS: readonly BotScenario[] = [
       return { passed: casts.includes("Terror of the Peaks"), detail: `cast ${casts.join(", then ") || "nothing"}` };
     },
   },
+  asked({
+    name: "discovers into Deflecting Swat with nothing on the stack but the discover itself: puts it into hand, not a cast that fizzles",
+    rule: "A free cast whose only target is the resolving ability that offered it does nothing: that ability is gone before the spell resolves (rules 608.2n, 608.2b). Put the card into hand instead (701.57a).",
+    kind: "training",
+    position(registry) {
+      // Reported from a live game (2026-11-26, a friend watching on
+      // deckblitz.net, no capture): a bot's Pantlaza, Sun-Favored discovered
+      // into Deflecting Swat. The only spell or ability on the stack was the
+      // discover trigger itself, still there as it resolves (608.2n), so the
+      // free cast was legal with that one target; the bot cast it, the
+      // trigger finished, and Swat fizzled (608.2b) — where declining puts
+      // it into hand, kept for a spell or ability worth redirecting.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 4);
+      lands(game, "Forest", A, 3);
+      const swat = game.debugSpawn("Deflecting Swat", A, "library");
+      const library = game.state.zones.perPlayer[A].library;
+      game.state.zones.perPlayer[A].library = [swat, ...library.filter((id) => id !== swat)];
+      game.debugSpawn("Pantlaza, Sun-Favored", A, "battlefield", { announceEntry: true, summoningSick: false });
+      game.advanceUntil((s) => s.awaiting !== null && s.awaiting.player === A);
+      // "You may discover": yes.
+      if (game.state.awaiting?.kind === "choose-modes") {
+        game.dispatch({ type: "choose-modes", player: A, modes: [0] });
+        game.advanceUntil((s) => s.awaiting !== null && s.awaiting.player === A);
+      }
+      if (game.state.awaiting?.kind !== "cast-now") {
+        return { passed: false, detail: `never offered the discovered card (${game.state.awaiting?.kind ?? "nothing asked"})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-now" && action.cast === null,
+          detail:
+            action.type === "cast-now"
+              ? action.cast === null
+                ? "put it into hand"
+                : `cast ${cardOf(game, action.cast.card)}`
+              : describeAction(action),
+        }),
+      };
+    },
+  }),
   {
     name: "casts the same first spell whatever order its library lies in (Scourge of Valkas, Atarka and Terror of the Peaks in hand)",
     rule: "A seat can't know the order of its library: a choice must not turn on which cards a simulation would draw or exile from it.",

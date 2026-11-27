@@ -4,6 +4,34 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-26 — Pantlaza discovers into Deflecting Swat and casts it at the discover itself
+
+Status: open. Scenario: "discovers into Deflecting Swat with nothing on the stack but the discover
+itself: puts it into hand, not a cast that fizzles" (training; v2 reads wrong, "cast alice's
+Deflecting Swat").
+
+Reported by a friend of the user watching a bot game on the live site (no capture): a bot's
+Pantlaza, Sun-Favored discovered into Deflecting Swat ("You may choose new targets for target spell
+or ability"). The only thing on the stack was the discover trigger itself, which stays there while
+it resolves (rule 608.2n), so the free cast was legal with that one target. The bot cast it, the
+trigger finished resolving, and Swat fizzled with its only target gone (608.2b). Declining puts
+the card into hand (701.57a), kept for something worth redirecting. Not an engine bug: the engine
+offers both, as the rules do.
+
+**Why:** v2 doesn't search a top-level "you may cast": `decisions/cast-now.ts` has no candidate
+list (a cast needs the bots' whole cast building, which a decision module can't import), so the
+answer is v1's `chooseCastNow` in `controller.ts`. That casts the offered card of highest mana value
+whenever it builds into a cast (`toCastSpell`), and never declines. Swat builds into a cast aimed
+at the one legal target, our own resolving trigger, so it's cast.
+
+**Likely fix:** in `chooseCastNow`, don't take a cast whose every chosen target is the stack object
+now resolving (`state.resolvingController` set, the top of the stack): that object is gone before
+the spell resolves, so the spell does nothing, and declining is never worse (discover's hand,
+cascade's bottom of the library). Narrow, so it risks little; a cast aimed at the resolving
+ability among other, real targets still goes ahead. The wider question, whether a redirect or
+counter aimed only at our own things is worth casting at all, is a search for the cast-now
+decision, which this doesn't attempt.
+
 ## 2026-11-25 — Jace, Multiverse Architect's −3 never used
 
 Status: fixed 2026-11-25. Scenarios: "aims Jace, Multiverse Architect's −3 at a token, whatever
