@@ -5282,6 +5282,12 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   exiled with it" (`exiled-with-source`), either face of a transforming card's
   (607.1b): Ludevic, Necrogenius's "Exile X creature cards from your graveyard:
   Transform Ludevic", whose back face copies one of them.
+- `exileFromGraveyard: { count, filter?, includingSource: true }` — a
+  graveyard ability whose cost may take **the card itself** (Salvage Titan's
+  "Exile three artifact cards from your graveyard: Return this card…", whose
+  ruling allows it; its effect then finds nothing, 400.7). Without it the
+  source never counts, the reading of every "other" card. Give the ability
+  `staysInZone: true`.
 - `exileFromGraveyard: { count, filter? }` — "Exile two cards from your
   graveyard" (Varina, Lich Queen; Mines of Moria), "Exile a creature card
   from your graveyard" (Moorland Haunt: `filter: { type: "creature" }`). The

@@ -5271,7 +5271,11 @@ export class Game {
       // "Exile X cards from your graveyard": as many as there are.
       const exileX =
         ability.cost.exileFromGraveyard?.count === "x"
-          ? this.graveyardCostCandidates(player, ability.cost.exileFromGraveyard.filter, source).length
+          ? this.graveyardCostCandidates(
+              player,
+              ability.cost.exileFromGraveyard.filter,
+              this.graveyardCostExcept(ability.cost.exileFromGraveyard, source),
+            ).length
           : ability.cost.exileFromGraveyard?.filter !== undefined && filterReadsX(ability.cost.exileFromGraveyard.filter)
             ? // "An artifact card with mana value X": checked at each X below.
               Math.max(0, ...this.state.zones.perPlayer[player].graveyard.map((id) => manaValueOfObject(this.registry, this.state.objects[id])))
@@ -5510,7 +5514,7 @@ export class Game {
           if (doAtX !== undefined && !costActPayable(doAtX, this.makeResolutionContext(source, player, [], x))) continue;
           if (exileAtX !== undefined) {
             const { count, filter } = this.graveyardExileCostAt(player, exileAtX, x);
-            if (this.graveyardCostCandidates(player, filter, source).length < count) continue;
+            if (this.graveyardCostCandidates(player, filter, this.graveyardCostExcept(exileAtX, source)).length < count) continue;
           }
           const specs = this.activatedSpecsAt(ability.targets, source, player, x);
           const all = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
@@ -29796,7 +29800,9 @@ export class Game {
         if (this.singleGraveyardCostCandidates(player, n, filter, sourceId).length < n) {
           return `no graveyard has enough cards to pay ${def.name}'s cost`;
         }
-      } else if (this.graveyardCostCandidates(player, filter, sourceId).length < n) {
+      } else if (
+        this.graveyardCostCandidates(player, filter, this.graveyardCostExcept(ability.cost.exileFromGraveyard, sourceId)).length < n
+      ) {
         return `${player} has too few cards in their graveyard to pay ${def.name}'s cost`;
       }
     }
@@ -31498,6 +31504,12 @@ export class Game {
     );
   }
 
+  /** What an `exileFromGraveyard` cost leaves out: its source, unless the
+   * card may pay for itself (`includingSource`, Salvage Titan's ruling). */
+  private graveyardCostExcept(cost: { readonly includingSource?: true }, source: ObjectId): ObjectId {
+    return cost.includingSource === true ? ("" as ObjectId) : source;
+  }
+
   private graveyardCostCandidates(player: PlayerId, filter: CardFilter | undefined, except: ObjectId): ObjectId[] {
     // A token isn't a card (rule 108.2b): one sacrificed for the same cost is
     // still there until state-based actions are next checked (111.8, 704.3 —
@@ -31527,6 +31539,7 @@ export class Game {
     singleGraveyard?: true;
     exileLink?: { readonly source: ObjectId; readonly zoneChangeCount: number };
     chosen?: ObjectId;
+    includingSource?: true;
   } {
     const at = source === undefined ? undefined : this.state.objects[source];
     return {
@@ -31537,6 +31550,7 @@ export class Game {
       ...(cost.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
       ...(cost.linked === true && at !== undefined ? { exileLink: { source: at.id, zoneChangeCount: at.zoneChangeCount ?? 0 } } : {}),
       ...(cost.chosen !== undefined ? { chosen: cost.chosen } : {}),
+      ...(cost.includingSource === true ? { includingSource: true as const } : {}),
     };
   }
 
@@ -31568,6 +31582,8 @@ export class Game {
       readonly typesAmong?: number;
       /** The one card named as it was activated ("…and pay its mana cost"). */
       readonly chosen?: ObjectId;
+      /** The source may pay for itself (Salvage Titan). */
+      readonly includingSource?: true;
     },
     priorityTo: PlayerId = player,
     /** The spell or ability on the stack this pays for, which remembers the
@@ -31575,6 +31591,8 @@ export class Game {
     forStackObject?: ObjectId,
     manaAbility?: Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"],
   ): void {
+    // `source` is only what the cost leaves out from here on.
+    source = this.graveyardCostExcept(cost, source);
     if (cost.typesAmong !== undefined) {
       const eligible = this.graveyardCostCandidates(player, cost.filter, source);
       // Checked before the cast; nothing to pay with should it be gone since.

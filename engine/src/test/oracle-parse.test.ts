@@ -25932,3 +25932,26 @@ describe("parseFace: combat-targeting lane, 2026-11-26", () => {
     });
   });
 });
+
+describe("a graveyard exile cost that may take its own card", () => {
+  it("Salvage Titan: three artifacts sacrificed instead, and three artifact cards exiled, itself among them", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Artifact Creature — Golem",
+      mana_cost: "{4}{B}{B}",
+      power: "6",
+      toughness: "4",
+      oracle_text:
+        "You may sacrifice three artifacts rather than pay this spell's mana cost.\nExile three artifact cards from your graveyard: Return this card from your graveyard to your hand.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.alternativeCost).toEqual({ mana: "{0}", sacrifice: { filter: { type: "artifact" }, count: 3, text: "three artifacts" } });
+    expect(parsed.activated[0]).toMatchObject({
+      cost: { exileFromGraveyard: { count: 3, filter: { type: "artifact" }, includingSource: true } },
+      zone: "graveyard",
+      staysInZone: true,
+      effect: { kind: "return-to-hand", target: "source", from: "graveyard" },
+    });
+  });
+});
+

@@ -2000,6 +2000,12 @@ export function parseCost(text) {
         ...(filter !== undefined ? { filter } : {}),
         ...(m[2] !== undefined ? { payItsManaCost: true } : {}),
       };
+    } else if ((m = new RegExp(`^Exile ${N} (?:(.+?) )?cards from your graveyard$`).exec(part))) {
+      // "Exile three artifact cards from your graveyard" (Salvage Titan).
+      const count = numberOf(m[1]);
+      const filter = m[2] === undefined ? undefined : parseTypePhrase(m[2]);
+      if (typeof count !== "number" || filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
+      cost.exileFromGraveyard = { count, ...(filter !== undefined ? { filter } : {}) };
     } else if ((m = /^Exile the top (?:(.+?) )?card of your graveyard$/.exec(part))) {
       // Graveyard order (rule 404.2): no choice (Alms, Necratog).
       const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
@@ -19716,6 +19722,14 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "You may sacrifice three artifacts rather than pay this spell's mana
+    // cost" (Salvage Titan): permanents of one card type.
+    if ((m = /^You may sacrifice (an?|two|three|four|five) (artifact|creature|enchantment|land)s? rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      const count = { a: 1, an: 1, two: 2, three: 3, four: 4, five: 5 }[m[1]];
+      const said = line.slice("You may sacrifice ".length, line.indexOf(" rather"));
+      out.alternativeCost = { mana: "{0}", sacrifice: { filter: { type: m[2] }, ...(count > 1 ? { count } : {}), text: said } };
+      continue;
+    }
     // Mutate [cost] (rule 702.140a): the card's `mutate`.
     if ((m = /^Mutate ((?:\{[^}]+\})+)$/.exec(line))) { out.mutate = m[1]; continue; }
     // Bestow [cost] (rule 702.103a): the card's `bestow`.
@@ -21641,6 +21655,27 @@ function parseFaceAsWritten(face, ctx = {}) {
       // control" and "sacrifice two Blood tokens" as a permanent's (with
       // `includeSelf`, without Blood's artifact type), not a graveyard card's.
       const manaOnly = ability.cost.sacrifice === undefined && ability.cost.tapOthers === undefined;
+      // "Return this card from your graveyard to your hand" (Abzan Devotee),
+      // and Salvage Titan's "Exile three artifact cards from your graveyard:
+      // …", whose cost may take the card itself when it's of that kind (the
+      // ruling: `includingSource`).
+      if (rest === "Return ~ from your graveyard to your hand." && ability.zone === undefined && manaOnly) {
+        const exile = ability.cost.exileFromGraveyard;
+        if (exile !== undefined && !/\bother\b/.test(costText)) {
+          const type = exile.filter?.type;
+          const own = (face.type_line ?? "").split("—")[0].toLowerCase();
+          if (exile.filter === undefined || (Object.keys(exile.filter).length === 1 && typeof type === "string" && own.includes(type))) {
+            ability.cost = { ...ability.cost, exileFromGraveyard: { ...exile, includingSource: true } };
+          }
+        }
+        Object.assign(ability, {
+          zone: "graveyard",
+          staysInZone: true,
+          effect: { kind: "return-to-hand", target: "source", from: "graveyard" },
+        });
+        out.activated.push(ability);
+        continue;
+      }
       if (selfOut !== null && ability.zone === undefined && manaOnly) {
         Object.assign(ability, {
           zone: selfOut[1] === "exile" ? "exile" : "graveyard",

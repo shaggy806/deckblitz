@@ -554,7 +554,7 @@ export interface AbilityCost {
    * `discard` decision — and gets priority back once it's paid (rule
    * 117.3c). With no more matching cards than that, they're all exiled
    * without asking. Either way they leave the graveyard as one move. The
-   * source never counts, wherever it is. Gates activation on having enough
+   * source never counts, wherever it is, unless `includingSource`. Gates activation on having enough
    * such cards. A mana ability's (Molt Tender) waits for the answer and adds
    * its mana then (rule 605.3b), as `exileFromHand`'s does. Not beside a
    * `discard` or a `returnToHand`, which ask too. Beside a sacrifice of
@@ -598,6 +598,12 @@ export interface AbilityCost {
      * ability as it's offered and activated: the only card that pays. Never
      * authored. */
     readonly chosen?: ObjectId;
+    /** The source, a card in the graveyard, may pay for itself: Salvage
+     * Titan's "Exile three artifact cards from your graveyard: Return this
+     * card from your graveyard to your hand", whose ruling lets it exile the
+     * Titan too (then its effect finds nothing: rule 400.7). Most such cards
+     * say "other", so the source is left out unless this is set. */
+    readonly includingSource?: true;
   };
   /**
    * `sacrifice`'s one chosen permanent is **exiled** instead — "Exile a
