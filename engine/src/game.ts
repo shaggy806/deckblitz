@@ -35817,9 +35817,10 @@ export class Game {
     });
     if (this.isPermanentSpell(def)) {
       this.emit({ type: "spell-resolved", object: id });
-      // A copy of a permanent spell becomes a token as it resolves (rule
-      // 608.3f) — one that wasn't "created" (the ruling), so nothing that
-      // watches for tokens being created sees it.
+      // A copy of a permanent spell becomes a token as it resolves (rules
+      // 608.3f, 111.13) — one that wasn't "created" (111.13), so nothing that
+      // watches for tokens being created sees it, and no replacement of
+      // creating one (Parallel Lives) applies.
       if (object.isCopy) {
         object.isCopy = false;
         object.isToken = true;

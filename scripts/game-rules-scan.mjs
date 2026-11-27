@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // Replays kept games (`games/`, `npm run games:pull`) on this build and checks
 // the rules a game must keep at every point a player is asked anything: what
-// state-based actions promise (rule 704), priority (117, 502.4), combat
-// legality (302.6, 702.9b, 702.110b), land plays (305.2), sorcery timing
-// (307.1), life arithmetic and nothing done to a player who has left (800.4a).
+// state-based actions promise (rule 704, attachments asked of the engine's own
+// `canEnchant` / `canEquip`), priority (117, 502.4), combat legality (302.6,
+// 702.9b, 702.110b), land plays (305.2), sorcery timing (307.1), hand size
+// after cleanup (514.1), life arithmetic and nothing done to a player who has
+// left (800.4a).
 // The rules audit's seventh slice (`docs/plans/rules-audit-2026-11.md`).
 //
 //   node scripts/game-rules-scan.mjs games/2026-11-26/*.json.gz
@@ -61,6 +63,7 @@ for (const file of files) {
   const declaredBlockers = {};
   let landsThisTurn = {};
   let lastGame = null;
+  let lastActive = null;
   try {
     result = replayRecord(record, registry, {
       stop: (game) => {
@@ -81,9 +84,19 @@ for (const file of files) {
         for (let i = seenEvents; i < game.events.length; i++) {
           const e = game.events[i];
           if (e.type === "attacker-declared") defenders[e.attacker] = e.defender;
-          if (e.type === "step-began" && e.step === "declare-blockers") for (const k of Object.keys(declaredBlockers)) delete declaredBlockers[k];
+          if (e.type === "step-began" && (e.step === "declare-attackers" || e.step === "declare-blockers")) for (const k of Object.keys(declaredBlockers)) delete declaredBlockers[k];
           if (e.type === "blocker-declared") declaredBlockers[e.attacker] = (declaredBlockers[e.attacker] ?? 0) + 1;
-          if (e.type === "turn-began") landsThisTurn = {};
+          if (e.type === "turn-began") {
+            landsThisTurn = {};
+            // The turn that ended had its cleanup step's discard (514.1): its
+            // player isn't over their maximum hand size as the next begins.
+            const ended = lastActive;
+            if (ended !== null && !s.players[ended]?.hasLost) {
+              const max = game.maxHandSizeOf(ended);
+              const held = s.zones.perPlayer[ended].hand.length;
+              if (held > max) once("over the maximum hand size after cleanup (514.1)", s.turn.number, `${ended} ${held} of ${max}`);
+            }
+          }
           if (e.type === "land-played") {
             landsThisTurn[e.player] = (landsThisTurn[e.player] ?? 0) + 1;
             const allowed = game.maxLandsFor(e.player);
@@ -115,6 +128,7 @@ for (const file of files) {
           }
         }
         seenEvents = game.events.length;
+        lastActive = s.turnOrder[s.turn.activePlayerIndex] ?? null;
         if (s.result.over) return false;
         const turn = s.turn.number;
         if (turn === 0) return false;
@@ -155,6 +169,18 @@ for (const file of files) {
           if (ch.subtypes.includes("Aura") && ch.types.includes("enchantment") && (o.attachedTo === null || o.attachedTo === undefined) && o.attachedToPlayer === undefined && !ch.types.includes("creature"))
             once("Aura attached to nothing (704.5m)", turn, o.cardName);
           if (o.counters?.["+1/+1"] > 0 && o.counters?.["-1/-1"] > 0) once("+1/+1 and -1/-1 together (704.5q)", turn, o.cardName);
+          // Still legally attached (704.5m-n), asked of the engine's own checks.
+          const host = o.attachedTo === null || o.attachedTo === undefined ? undefined : s.objects[o.attachedTo];
+          if (host !== undefined && host.zone === "battlefield") {
+            try {
+              if (ch.subtypes.includes("Aura") && !ch.types.includes("creature")) {
+                if (!game.canEnchant(id, o.attachedTo, o.controller, game.attachmentDefinition(o)))
+                  once("Aura on a permanent it can't enchant (704.5m)", turn, `${o.cardName} on ${host.cardName}`);
+              } else if (ch.subtypes.includes("Equipment") && !ch.types.includes("creature")) {
+                if (!game.canEquip(id, o.attachedTo)) once("Equipment on a permanent it can't equip (704.5n)", turn, `${o.cardName} on ${host.cardName}`);
+              }
+            } catch (err) { once("attachment check threw", turn, `${o.cardName}: ${String(err).slice(0, 80)}`); }
+          }
         }
         // Combat (rules 302.6, 702.3b, 702.9b, 702.110b, 509.1b): leads, read on the state as it is now.
         const combatSteps = ["declare-attackers", "declare-blockers", "combat-damage", "first-strike-damage"];
@@ -165,7 +191,7 @@ for (const file of files) {
             if (s.players[o.controller]?.hasLost) continue;
             const ch = computeCharacteristics(s, registry, id);
             const blockers = (o.blockedBy ?? []).filter((b) => s.objects[b]?.zone === "battlefield");
-            if (ch.keywords.has("menace") && (declaredBlockers[id] ?? 0) === 1) once("menace blocked by one (702.110b)", turn, o.cardName);
+            if (s.turn.step !== "declare-attackers" && ch.keywords.has("menace") && (declaredBlockers[id] ?? 0) === 1) once("menace blocked by one (702.110b)", turn, o.cardName);
             if (ch.keywords.has("unblockable") && blockers.length > 0) once("unblockable blocked", turn, o.cardName);
             if (ch.keywords.has("flying")) for (const b of blockers) {
               const bc = computeCharacteristics(s, registry, b);

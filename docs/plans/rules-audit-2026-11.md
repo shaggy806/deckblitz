@@ -7,7 +7,7 @@ one in the client's log wording. The third (keywords two at a time), the fourth 
 and cards leaving the battlefield) and the fifth (two replacement effects on one event) found
 none. The sixth (merged and melded commanders) found three, fixed. The seventh replayed every kept
 game and checked it at every decision (`scripts/game-rules-scan.mjs`), and the eighth probed copies,
-keyword actions and a merged permanent leaving: none. A hundred and twenty-one probes stay as tests. The
+keyword actions and a merged permanent leaving: none. A hundred and thirty-five probes stay as tests. The
 slices to take next are at the end.
 
 ## Why
@@ -253,6 +253,21 @@ arrived before it resolved (603.8), and Blood Artist dying in a wrath sees every
 (603.10a). `life-rules-audit.test.ts`: under Platinum Emperion the hit costs no life and the lifelinker
 still gains; under Sulfuric Vortex it gains nothing (119.3, 119.7). `loyalty-audit.test.ts`: a second
 loyalty ability in a turn is refused, and a blinked planeswalker, a new object, may activate one (606.3).
+
+More of the same, later that afternoon, all holding: keeping a Clone of your commander under the legend
+rule sends the commander home (704.5j, 903.9a), and a merged commander's next cast from the command zone
+pays the tax (903.8) — `commander-damage-audit`, `merged-commanders-audit`; Kaya's Ghostform on a blinked
+creature returns nothing more, and on a token nothing (603.6e, 111.8) — `aura-leave-trigger-audit`; Kitchen
+Finks with persist and Mikaeus's undying comes back once a death, with one counter, the other trigger
+finding a new object (400.7) — `persist-undying-audit`; an Aura and an Equipment phase out with their
+creature and back in attached, a pump that ended while it was away is gone, and an attacker that phases out leaves combat
+(702.26f-g, 506.4) —
+`phasing-audit`; protection gained knocks off an Aura and unattaches an Equipment (702.16c-d) —
+`protection-attach-audit`; a copied creature spell's token isn't "created", so Parallel Lives doesn't
+double it (111.13, now cited) — `spell-copy-token-audit`; cascade passes over a split card whose halves
+together reach its mana value (702.85a, 709.4a) — `cascade-split-audit`. The scan gained two checks that afternoon: every
+Aura and Equipment still legally attached, asked of the engine's own `canEnchant` and `canEquip`, and no
+player over their maximum hand size as the next turn begins (514.1).
 
 ## Next slices
 

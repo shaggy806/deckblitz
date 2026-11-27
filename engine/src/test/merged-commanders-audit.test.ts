@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { printedCardName } from "../state.js";
-import { B, cast, destroy, lands, pickModes, ref, settle, spawn, table, toHand, toStep } from "./harness.js";
+import { A, B, cast, destroy, lands, pickModes, ref, settle, spawn, table, toHand, toStep } from "./harness.js";
 
 /**
  * A rules audit's sixth slice (2026-11-26): a commander that is part of a
@@ -147,5 +147,21 @@ describe("merged and melded commanders, audited", () => {
     const card = Object.values(game.state.objects).find((o) => o.cardName === BROKKOS)!;
     expect(card.zone).toBe("command");
     expect(game.state.players[B].commanderDamageTaken).toEqual({ [card.id]: 8 });
+  });
+
+  it("commander tax: cast again from the command zone after the merge came apart, it costs {2} more (rule 903.8)", () => {
+    const { game, bears } = brokkosOnBears(ON_TOP);
+    destroy(game, bears);
+    toStep(game, "postcombat-main");
+    const brokkos = game.state.zones.shared.command.find((id) => game.state.objects[id].cardName === BROKKOS)!;
+    expect(brokkos).toBeDefined();
+    spawn(game, "Grizzly Bears"); // a target to mutate onto
+    for (const id of game.state.zones.shared.battlefield) game.state.objects[id].tapped = false;
+    // Five lands paid the first mutate cast; the second needs seven.
+    const castable = () =>
+      game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === brokkos && (a as { overload?: boolean }).overload === true);
+    expect(castable()).toBe(false);
+    lands(game, "Forest", 2);
+    expect(castable()).toBe(true);
   });
 });

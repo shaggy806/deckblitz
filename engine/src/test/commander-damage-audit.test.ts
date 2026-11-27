@@ -60,4 +60,16 @@ describe("commander damage, audited", () => {
     toStep(game, "postcombat-main", B);
     expect(taken(game, C)).toEqual({ [kiki]: 2 });
   });
+
+  it("the legend rule with a Clone of the commander: keeping the Clone, the commander goes home (rules 704.5j, 903.9a)", () => {
+    const { game, a, kiki } = kikiOut();
+    a.chooseCopyFn = (_view, _source, options) => (options.includes(kiki) ? kiki : null);
+    lands(game, "Island", 4);
+    const clone = toHand(game, "Clone");
+    a.chooseLegendToKeepFn = (_view, _name, options) => (options.includes(clone) ? clone : options[0]);
+    cast(game, clone);
+    toStep(game, "postcombat-main");
+    expect(game.state.objects[clone].zone).toBe("battlefield");
+    expect(game.state.objects[kiki].zone).toBe("command");
+  });
 });
