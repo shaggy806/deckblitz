@@ -925,8 +925,12 @@ const COMBAT_STEPS: ReadonlySet<string> = new Set([
  * rollout plays its own seat passively, so mana it would have cast spells
  * with looked free.
  */
-export function temporaryEffectCanMatter(state: GameState, me: PlayerId): boolean {
-  if (state.zones.shared.stack.length > 0) return true;
+export function temporaryEffectCanMatter(
+  state: GameState,
+  me: PlayerId,
+  options: { readonly ignoreStack?: boolean } = {},
+): boolean {
+  if (options.ignoreStack !== true && state.zones.shared.stack.length > 0) return true;
   if (COMBAT_STEPS.has(state.turn.step)) return true;
   return state.turn.step === "precombat-main" && activePlayerOf(state) === me;
 }

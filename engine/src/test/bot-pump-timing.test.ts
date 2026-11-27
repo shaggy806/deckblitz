@@ -16,6 +16,7 @@ import type { ControllerView } from "../controller.js";
 import { onlyUntilEndOfTurn, temporaryEffectCanMatter } from "../effect-worth.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
+import type { ObjectId } from "../primitives.js";
 import type { GameState } from "../state.js";
 
 const A = asPlayerId("alice");
@@ -93,5 +94,74 @@ describe("until-end-of-turn pumps", () => {
     expect(ooze).not.toHaveLength(0);
     expect(new EvalBotController(A, registry).act(viewOf(game)).type).toBe("pass-priority");
     expect(new HeuristicBotController(A, registry).act(viewOf(game)).type).toBe("pass-priority");
+  });
+});
+
+/** v1, with its pump gate open to the test. */
+class Gate extends HeuristicBotController {
+  wasted(state: GameState, offer: Parameters<HeuristicBotController["wastedNow"]>[1]): boolean {
+    return this.wastedNow(state, offer);
+  }
+}
+
+/** Bob's upkeep, Alice holding priority with Slicer, Hired Muscle's own
+ * "hand it over" trigger on the stack, Umezawa's Jitte on Slicer with four
+ * charge counters. */
+function slicerHandedOver(): { readonly game: Game; readonly slicer: ObjectId } {
+  const game = Game.create({
+    seed: 1,
+    shuffle: false,
+    registry,
+    startingPlayer: A,
+    rules: { skipFirstDraw: false, maxHandSize: 99, maxLandsPerTurn: 0 },
+    controllers: { [A]: new AutomaticController(A), [B]: new AutomaticController(B) },
+    decks: [
+      { player: A, cards: Array(40).fill("Mountain") },
+      { player: B, cards: Array(40).fill("Island") },
+    ],
+  });
+  game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "precombat-main");
+  const slicer = game.debugSpawn("Slicer, Hired Muscle", A, "battlefield", { summoningSick: false });
+  const jitte = game.debugSpawn("Umezawa's Jitte", A, "battlefield");
+  game.state.objects[jitte].attachedTo = slicer;
+  game.state.objects[jitte].counters = { charge: 4 };
+  game.advanceUntil(
+    (s) => s.turn.number === 2 && s.turn.step === "upkeep" && s.priority.holder === A && s.zones.shared.stack.length > 0,
+  );
+  return { game, slicer };
+}
+
+const jittePump = (game: Game) =>
+  game
+    .legalActions(A)
+    .find((l) => l.kind === "activate-ability" && l.cardName === "Umezawa's Jitte" && l.modes?.[0] === 0);
+
+describe("a modal ability's until-end-of-turn mode (Umezawa's Jitte)", () => {
+  // Kept game THRQJ-1 (2026-11-27): in the last opponent's upkeep, with
+  // Slicer's own trigger on the stack, the bot spent all ten of the Jitte's
+  // counters on +2/+2 for the Slicer it then handed over, goaded, to attack
+  // itself. The modal offer's effect wasn't read, and the trigger counted as
+  // something to answer.
+  it("is read as the chosen mode, and left alone with only our own quiet trigger on the stack", () => {
+    const { game } = slicerHandedOver();
+    expect(game.state.zones.shared.stack).toHaveLength(1);
+    const pump = jittePump(game);
+    expect(pump).toBeDefined();
+    expect(new Gate(A, registry).wasted(game.state, pump!)).toBe(true);
+  });
+
+  it("stays on offer with a spell on the stack that hurts the creature", () => {
+    // Any spell counts as something to answer, ours included (a pump to
+    // survive our own Blasphemous Act): here a Bolt at Slicer above the
+    // trigger.
+    const { game, slicer } = slicerHandedOver();
+    const bolt = game.debugSpawn("Lightning Bolt", A, "hand");
+    game.debugSpawn("Mountain", A, "battlefield");
+    game.dispatch({ type: "cast-spell", player: A, card: bolt, targets: [{ kind: "object", object: slicer }] });
+    game.advanceUntil((s) => s.priority.holder === A);
+    const pump = jittePump(game);
+    expect(game.state.zones.shared.stack.some((id) => game.state.objects[id]?.cardName === "Lightning Bolt")).toBe(true);
+    expect(pump).toBeDefined();
+    expect(new Gate(A, registry).wasted(game.state, pump!)).toBe(false);
   });
 });

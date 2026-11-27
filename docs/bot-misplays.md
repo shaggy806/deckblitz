@@ -6,9 +6,14 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-27 — Slicer never equipped Beamtown Beatstick for the 21st commander damage
 
-Status: open. Scenario: "equips Beamtown Beatstick for menace past a lone blocker, at 20 commander
-damage" (training, reads wrong). The live position is also a local capture,
-`captures/2026-11-27-A2TMG-t26-alice.json` (wrong).
+Status: fixed 2026-11-27. Scenario: "equips Beamtown Beatstick for menace past a lone blocker, at
+20 commander damage" (gate; fails without the fix). The live position is also a local capture,
+`captures/2026-11-27-A2TMG-t26-alice.json` (wrong before the fix, right after).
+
+**Fix:** as below. v1's `wouldDieAttacking` lets a menace attacker through fewer than two untapped
+blockers. Its `wideLethal` counts menace as unblocked past fewer than two blockers, and sends
+everything at a player that an unblocked commander's damage brings to 21. On the live board v2 now
+plans Pyrokinesis, equip, attack, and wins that turn.
 
 A friend's report, kept game `games/2026-11-27/A2TMG-1-1205635565` (every seat a bot, the friend's
 Slicer deck in alice's): "last opp on 20 commander damage and the bot just doesn't equip a menace
@@ -36,9 +41,19 @@ change what v2 expects to be swung at; run `bot:diff` and the gate.
 
 ## 2026-11-27 — Ten Umezawa's Jitte counters pumped into a Slicer handed to the last opponent
 
-Status: open. No hand-built scenario: a rebuilt board (two players, Slicer with Jitte and
-Destructive Urge, Simian Spirit Guide, Bob at 18 commander damage) didn't reproduce, so the live
-position is kept as a local capture, `captures/2026-11-27-THRQJ-t14-alice.json` (reads wrong).
+Status: fixed 2026-11-27. Test: `bot-pump-timing.test.ts`, "a modal ability's until-end-of-turn
+mode" (fails with either half of the fix taken out). A rebuilt scenario board (two players, Slicer
+with Jitte and Destructive Urge, Simian Spirit Guide, Bob at 18 commander damage) didn't reproduce,
+so the live position is kept as a local capture, `captures/2026-11-27-THRQJ-t14-alice.json`
+(wrong before the fix, right after).
+
+**Fix:** two holes in v1's `wastedNow`, the pump gate both bots' candidates obey. A modal ability's
+offer is matched to its ability by text, and the offer's text names only its mode, so the Jitte's
+"+2/+2 until end of turn" read as an unknown effect and was never held; `chosenModesEffect` reads
+the chosen mode. And any object on the stack counted as something a pump could answer; now a stack
+of nothing but our own abilities that target nothing and harm no creature
+(`onlyQuietOwnAbilitiesOnStack`) doesn't. The rollout's v1 block that made the pump look good is
+left as it is.
 
 Same friend, kept game `games/2026-11-27/THRQJ-1-2942950596`: "wtaf was the bot even doing with
 the jitte". Two players left; in Ajani's upkeep, with Slicer's "hand it over" trigger on the

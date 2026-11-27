@@ -2800,7 +2800,6 @@ const SCENARIOS: readonly BotScenario[] = [
   asked({
     name: "equips Beamtown Beatstick for menace past a lone blocker, at 20 commander damage",
     rule: "Menace needs two blockers: with one untapped creature across the table, equipping it makes the commander unblockable, and one hit is the 21st commander damage.",
-    kind: "training",
     position(registry) {
       // Reported from a live game (2026-11-27, kept game A2TMG-1, turns
       // 22-33): "last opp on 20 commander damage and the bot just doesn't
@@ -2817,6 +2816,8 @@ const SCENARIOS: readonly BotScenario[] = [
       // a lone blocker that kills Slicer though menace stops it blocking alone,
       // and `wideLethal` ignores menace and reads life, never commander damage.
       // So the line equip-then-attack is scored as an equip and no attack.
+      // Fixed in both (a gate since): a lone blocker can't block menace, and
+      // an unblocked commander's 21st damage is a kill.
       const game = table(registry, [A, B], A);
       lands(game, "Mountain", A, 2);
       const slicer = onBoard(game, "Slicer, Hired Muscle", A);

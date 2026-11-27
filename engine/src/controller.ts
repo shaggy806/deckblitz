@@ -125,6 +125,7 @@ import {
 import type { Polarity } from "./target-polarity.js";
 import { isAttachResolved } from "./attachments.js";
 import { hasSubtype } from "./subtypes.js";
+import { COMMANDER_DAMAGE_LETHAL } from "./view.js";
 
 export type { AttackerDeclaration, BlockerDeclaration };
 
@@ -3825,12 +3826,21 @@ export class HeuristicBotController extends AutomaticController {
    * left out.
    */
   protected wastedNow(state: GameState, offer: LegalAction): boolean {
-    const effect = this.offerEffect(offer);
+    const effect = this.chosenModesEffect(offer, this.offerEffect(offer));
     // A guard on our own life for the turn (Angel's Grace) waits for
     // something it would stop: an opponent's spell, an opponent's attack.
     if (onlyGuardsPlayerThisTurn(effect)) return !guardCanMatter(state, this.playerId);
     if (effect === undefined || !onlyUntilEndOfTurn(effect)) return false;
     if (!temporaryEffectCanMatter(state, this.playerId)) return true;
+    // Nothing to answer on the stack but our own abilities that target
+    // nothing and harm no creature: outside combat and our first main phase
+    // the effect still ends unused. Kept game THRQJ-1 (2026-11-27): in the
+    // last opponent's upkeep, Slicer's own "hand it over" trigger on the
+    // stack, ten of Umezawa's Jitte's counters went on +2/+2 for the Slicer
+    // that was then goaded into attacking us.
+    if (this.onlyQuietOwnAbilitiesOnStack(state) && !temporaryEffectCanMatter(state, this.playerId, { ignoreStack: true })) {
+      return true;
+    }
     // A sacrifice for it is a card for a turn's effect: only with something
     // to answer — an opponent's spell or ability on the stack, or a combat
     // under way. In our own first main phase the effect "could matter" for
@@ -3841,6 +3851,38 @@ export class HeuristicBotController extends AutomaticController {
     // into the wrath its controller just cast.
     if (offer.kind !== "activate-ability" || offer.sacrifice === undefined) return false;
     return state.zones.shared.stack.length === 0 && !SACRIFICE_STEPS.has(state.turn.step);
+  }
+
+  /** A modal ability offered with its modes chosen (rule 700.2b — Umezawa's
+   * Jitte's "+2/+2", "-1/-1", "gain 2 life", each its own offer): the one
+   * chosen mode's effect, so it's read as what it does. Such an offer's
+   * text names only its mode, so `offerEffect`'s match on the whole
+   * ability's text misses it: matched here on the text before "Choose", the
+   * cost. Anything else as `effect` was. */
+  private chosenModesEffect(offer: LegalAction, effect: EffectSpec | null | undefined): EffectSpec | null | undefined {
+    if (offer.kind !== "activate-ability" || offer.modes?.length !== 1 || !this.registry.has(offer.cardName)) return effect;
+    const ability = this.registry.get(offer.cardName).activated?.[offer.abilityIndex];
+    const modal = ability?.effect;
+    if (ability === undefined || modal?.kind !== "modal") return effect;
+    const cost = ability.text.split("Choose")[0];
+    if (cost === "" || !offer.text.startsWith(cost)) return effect;
+    return modal.modes[offer.modes[0]]?.effect ?? effect;
+  }
+
+  /** Whether everything on the stack is an ability of ours that targets
+   * nothing and whose effect harms no creature — nothing a pump, a keyword
+   * or an animation could answer. A spell, an opponent's object, anything
+   * targeted or unread counts as something to answer. */
+  private onlyQuietOwnAbilitiesOnStack(state: GameState): boolean {
+    const stack = state.zones.shared.stack;
+    if (stack.length === 0) return false;
+    return stack.every((id) => {
+      const object = state.objects[id];
+      if (object === undefined || object.kind === "card" || object.controller !== this.playerId) return false;
+      if ((object.targets ?? []).some((t) => t !== null)) return false;
+      const effect = stackEffectOf(this.registry, object);
+      return effect !== undefined && !harmsCreatures(effect);
+    });
   }
 
   /**
@@ -6473,10 +6515,12 @@ export class HeuristicBotController extends AutomaticController {
    * A player that attacking with everything able to reach them kills
    * however they block, or `null`. Each untapped creature of theirs that
    * can block takes one attacker — the biggest it could stop — and what's
-   * left must cover their life. Deliberately cautious: menace and trample
-   * are ignored (both only let more through), and a flyer counts as
-   * blockable if they have any creature with flying or reach. A token stack
-   * attacks token by token, each one blockable alone.
+   * left must cover their life, or an unblockable commander's damage the 21
+   * they have left of it. Deliberately cautious: trample is ignored, and
+   * menace too unless they have fewer than two blockers (both only let more
+   * through), and a flyer counts as blockable if they have any creature with
+   * flying or reach. A token stack attacks token by token, each one blockable
+   * alone.
    */
   private wideLethal(
     state: GameState,
@@ -6501,15 +6545,29 @@ export class HeuristicBotController extends AutomaticController {
       });
       let unblockable = 0;
       const blockable: number[] = [];
+      // A commander nobody can block: its damage alone counts toward the 21
+      // (rule 903.10a), whatever the player's life.
+      const taken = state.players[player].commanderDamageTaken;
+      let commanderKill = false;
       for (const attacker of able) {
         if (!(legal.defendersFor[attacker] ?? []).includes(player)) continue;
         const it = computeCharacteristics(state, this.registry, attacker);
         const damage = assignedCombatDamage(state, this.registry, attacker);
+        // Menace past fewer than two blockers is unblocked (rule 702.111b).
+        const unblocked =
+          it.keywords.has("unblockable") ||
+          (it.keywords.has("flying") && !skyBlockers) ||
+          (it.keywords.has("menace") && blockerCount < 2);
+        if (unblocked && state.objects[attacker].isCommander === true && damage > 0 &&
+            (taken[attacker] ?? 0) + damage >= COMMANDER_DAMAGE_LETHAL) {
+          commanderKill = true;
+        }
         for (let n = state.objects[attacker].stackCount ?? 1; n > 0; n -= 1) {
-          if (it.keywords.has("unblockable") || (it.keywords.has("flying") && !skyBlockers)) unblockable += damage;
+          if (unblocked) unblockable += damage;
           else blockable.push(damage);
         }
       }
+      if (commanderKill) return player;
       const through = blockable
         .sort((a, b) => a - b)
         .slice(0, Math.max(0, blockable.length - blockerCount))
@@ -6556,6 +6614,15 @@ export class HeuristicBotController extends AutomaticController {
       if (it.restrictions.has("cant-block")) return false;
       return !me.keywords.has("flying") || it.keywords.has("flying") || it.keywords.has("reach");
     });
+    // Menace (rule 702.111b): one creature can't block it alone, so a lone
+    // blocker, however big, kills nothing. v1 kept a menace Slicer at 20
+    // commander damage home from a lone Etali for five turns (kept game
+    // A2TMG-1, 2026-11-27), and v2's plans, which attack as v1 does, never
+    // equipped the Beatstick that gave it menace. A token stack is as many
+    // blockers as it holds.
+    if (me.keywords.has("menace") && blockers.reduce((n, id) => n + (state.objects[id].stackCount ?? 1), 0) < 2) {
+      return false;
+    }
     const deals = (id: ObjectId) => combatDamageOf(computeCharacteristics(state, this.registry, id));
     const deathtouch = (id: ObjectId) => computeCharacteristics(state, this.registry, id).keywords.has("deathtouch");
     // What kills it: its toughness, or its power under Zilortha.
@@ -6965,6 +7032,27 @@ const COUNTER_FLOOR = 3;
 /** The steps of a combat under way, where a sacrifice for a turn's effect
  * has something to answer (`wastedNow`). */
 const SACRIFICE_STEPS: ReadonlySet<string> = new Set(["declare-attackers", "declare-blockers", "combat-damage"]);
+/** Effect kinds that can hurt or remove a creature, which a pump, a keyword
+ * or an animation in response might answer (`onlyQuietOwnAbilitiesOnStack`). */
+const HARMS_CREATURES: ReadonlySet<string> = new Set([
+  "damage",
+  "damage-all",
+  "destroy",
+  "exile",
+  "fight",
+  "modify-pt",
+  "modify-pt-all",
+  "return-to-hand",
+  "sacrifice",
+]);
+/** Whether any part of `effect` is a {@link HARMS_CREATURES} kind. */
+function harmsCreatures(effect: unknown): boolean {
+  if (effect === null || typeof effect !== "object") return false;
+  if (Array.isArray(effect)) return effect.some(harmsCreatures);
+  const kind = (effect as { readonly kind?: unknown }).kind;
+  if (typeof kind === "string" && HARMS_CREATURES.has(kind)) return true;
+  return Object.values(effect).some(harmsCreatures);
+}
 /** The round by which a mana creature is one source among many and no
  * longer worth removal for being one: the evaluation's `EARLY_MANA_END`
  * (`bot/features.ts`), repeated here because this module imports nothing
