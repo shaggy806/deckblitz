@@ -875,6 +875,17 @@ export interface CardFilter {
    */
   readonly sharesColorWithLastSpellCast?: true;
   /**
+   * Has the same name (rule 201.2a: one name in common is enough) as **a
+   * spell that was cast this turn**, by any player — Twinning Glass's "cast a
+   * spell from your hand … if it has the same name as a spell that was cast
+   * this turn" (its ruling: it doesn't matter who cast the first spell). Read
+   * from every player's `spellsCastThisTurnAs`, each spell named as it was on
+   * the stack (an Adventure's or a modal double-faced card's back face's name
+   * is the one it was cast with), however it has moved since. A spell cast
+   * face down had no name (rule 708.2), so shares none.
+   */
+  readonly sameNameAsSpellCastThisTurn?: true;
+  /**
    * Has the same mana value (rule 202.3) as one of the objects a reference
    * names — Thought Prison's "a spell that shares a color **or mana value**
    * with the exiled card" is `anyOf: [{ sharesColorWith: "exiled-with-source"
@@ -2488,6 +2499,21 @@ export function lastSpellCastColors(state: GameState, registry: CardRegistry): r
 }
 
 /**
+ * The names of every spell cast this turn by any player
+ * (`CardFilter.sameNameAsSpellCastThisTurn`): each `spellsCastThisTurnAs`
+ * record's snapshot, named as it was on the stack (rule 201.2a).
+ */
+export function spellNamesCastThisTurn(state: GameState, registry: CardRegistry): ReadonlySet<string> {
+  const names = new Set<string>();
+  for (const player of state.turnOrder) {
+    for (const record of state.players[player]?.spellsCastThisTurnAs ?? []) {
+      for (const name of lastKnownNames(registry, record.spell)) names.add(name);
+    }
+  }
+  return names;
+}
+
+/**
  * The objects a `ShareReference` names, read from the state and the filter's
  * context alone — `undefined` for a reference only a resolving effect can
  * read (`bindDynamicCompares` binds those). `"exiled-with-source"` is the
@@ -3108,6 +3134,11 @@ export function matchesFilter(
       });
       if (!shared) return false;
     }
+  }
+  if (filter.sameNameAsSpellCastThisTurn === true) {
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    const cast = spellNamesCastThisTurn(state, registry);
+    if (!names.some((n) => cast.has(n))) return false;
   }
   if (filter.sharesColorWithLastSpellCast === true) {
     const last = lastSpellCastColors(state, registry);

@@ -4058,6 +4058,11 @@ recently cast this turn**, anyone's (the latest `seq` among every player's
 after: Mana Maze's "players can't cast spells that share a color with the spell
 most recently cast this turn" is a static `prohibits: [{ act: "cast", who:
 "each-player", filter: { sharesColorWithLastSpellCast: true } }]`.
+`sameNameAsSpellCastThisTurn: true` has a name in common with **a spell cast
+this turn**, by anyone, each named as it was on the stack (every player's
+`spellsCastThisTurnAs`): Twinning Glass's "cast a spell from your hand without
+paying its mana cost if it has the same name as a spell that was cast this
+turn" is `cast-now`'s `spell: { sameNameAsSpellCastThisTurn: true }`.
 `sharesManaValueWith` (a `ShareReference`, as `sharesColorWith`) is the same
 mana value as one of the reference's objects, none matching when it names
 none: Thought Prison's "a spell that shares a color or mana value with the
