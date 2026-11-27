@@ -40,7 +40,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaOrigin, ManaSpentQuery, ManaType } from "./mana.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost, spentManaCount } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName, seatingOf } from "./state.js";
+import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, inCombatAlone,isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName, seatingOf } from "./state.js";
 import type { AttachmentRecord, CastSpellRecord, GameObject, GameState, LastKnownInfo, Sector, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
@@ -456,8 +456,13 @@ export interface CardFilter {
    * whoever's and whatever they attack — Viper, Cruel Conspirator's "target
    * creature that's attacking alone". Not "attacks alone" (exalted's, the
    * declaration's): one that was declared with others is attacking alone
-   * once they've left combat. A permanent on the battlefield only. */
+   * once they've left combat. Read as it last existed off the battlefield
+   * (`LastKnownInfo.attackingAlone`): Thijarian Witness's "if it was
+   * attacking or blocking alone". */
   readonly attackingAlone?: true;
+  /** **Blocking alone** (rule 506.5): blocking while no other creature is —
+   * `attackingAlone`'s mirror, read the same way. */
+  readonly blockingAlone?: true;
   /** Controlled by a defending player, for a spell with no attacker to read one
    * from (False Orders' "target creature defending player controls"): any player
    * an attacker is attacking, or whose planeswalker or battle it is; a player
@@ -3040,16 +3045,15 @@ export function matchesFilter(
     const theirs = by?.zone === "battlefield" ? by.attacking : null;
     if (at === null || at === undefined || theirs === null || theirs === undefined || at !== theirs) return false;
   }
-  if (filter.attackingAlone === true) {
-    // Rule 506.5: attacking, and no other creature is — whoever controls
-    // it, whatever it attacks. A counted attacking stack is that many.
-    if (live?.zone !== "battlefield" || live.attacking === null || live.attacking === undefined) return false;
-    if ((live.stackCount ?? 1) > 1) return false;
-    const others = state.zones.shared.battlefield.some((other) => {
-      const o = state.objects[other];
-      return other !== id && o.attacking !== null && o.attacking !== undefined;
-    });
-    if (others) return false;
+  // Rule 506.5: attacking (blocking), and no other creature is — whoever
+  // controls it, whatever it attacks. Off the battlefield, as it last
+  // existed: the snapshot was taken before anything in its event moved, so
+  // two attackers dying together weren't alone (Thijarian Witness).
+  if (filter.attackingAlone === true && !(live !== undefined ? inCombatAlone(state, id, "attacking") : lki!.attackingAlone === true)) {
+    return false;
+  }
+  if (filter.blockingAlone === true && !(live !== undefined ? inCombatAlone(state, id, "blocking") : lki!.blockingAlone === true)) {
+    return false;
   }
   if (filter.controlledByDefendingPlayer === true) {
     const controller = live?.controller;

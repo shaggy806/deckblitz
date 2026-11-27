@@ -77,6 +77,7 @@ import {
 } from "./combat/damage.js";
 import type { DamageQuestion } from "./combat/damage.js";
 import { bandMatesOf, blockedAttackersOf } from "./combat/banding.js";
+import { inCombatAlone } from "./state.js";
 import { blockTaxTotal } from "./combat/blocking.js";
 import {
   attackCostAmong,
@@ -76483,6 +76484,8 @@ controlledBy,
       ...(object.dealtDamage !== undefined ? { dealtDamage: object.dealtDamage } : {}),
       attacking: object.attacking !== null,
       blocking: object.blocking !== null,
+      ...(inCombatAlone(this.state, id, "attacking") ? { attackingAlone: true as const } : {}),
+      ...(inCombatAlone(this.state, id, "blocking") ? { blockingAlone: true as const } : {}),
       ...(blockedAttackersOf(this.state, id).length > 0
         ? { blockedAttackers: blockedAttackersOf(this.state, id) }
         : {}),

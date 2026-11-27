@@ -2537,6 +2537,11 @@ export interface LastKnownInfo {
   readonly dealtDamage?: DealtDamageRecord;
   readonly attacking: boolean;
   readonly blocking: boolean;
+  /** It was attacking / blocking alone (rule 506.5, `inCombatAlone`) as it
+   * left — read before anything in its event moved, so creatures leaving
+   * together weren't alone. The `attackingAlone` / `blockingAlone` clauses. */
+  readonly attackingAlone?: true;
+  readonly blockingAlone?: true;
   /** The attackers it was blocking as it left (`blockedAttackersOf`), and
    * the creatures blocking it — so "target creature it's blocking" and
    * "creatures blocking it" still find them once it has gone (rules 608.2b,
@@ -8419,6 +8424,21 @@ export function blockedAttackersOf(state: GameState, blockerId: ObjectId): Objec
   return [blocker.blocking, ...(blocker.blockingAlso ?? [])].filter((id) => {
     const attacker = state.objects[id];
     return attacker?.zone === "battlefield" && attacker.attacking !== null && attacker.blockedBy.includes(blockerId);
+  });
+}
+
+/** Rule 506.5: "A creature is attacking alone if it's attacking but no other
+ * creatures are" (`"attacking"`), and "blocking alone if it's blocking but no
+ * other creatures are" (`"blocking"`) — whoever controls them, whatever they
+ * attack or block. A permanent on the battlefield only; a counted stack in
+ * combat is that many creatures, so never alone. */
+export function inCombatAlone(state: GameState, id: ObjectId, as: "attacking" | "blocking"): boolean {
+  const object = state.objects[id];
+  if (object?.zone !== "battlefield" || object[as] === null || object[as] === undefined) return false;
+  if ((object.stackCount ?? 1) > 1) return false;
+  return !state.zones.shared.battlefield.some((other) => {
+    const o = state.objects[other];
+    return other !== id && o[as] !== null && o[as] !== undefined;
   });
 }
 
