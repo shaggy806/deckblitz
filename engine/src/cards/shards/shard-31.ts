@@ -998,6 +998,7 @@ import _poolToothAndClaw from "../pool/tooth-and-claw.js";
 import _poolTorchFiend from "../pool/torch-fiend.js";
 import _poolTormentedThoughts from "../pool/tormented-thoughts.js";
 import _poolTouchTheSpiritRealm from "../pool/touch-the-spirit-realm.js";
+import _poolTourachsChant from "../pool/tourachs-chant.js";
 import _poolTowerOfChampions from "../pool/tower-of-champions.js";
 import _poolToweringIndrik from "../pool/towering-indrik.js";
 import _poolToxinAnalysis from "../pool/toxin-analysis.js";
@@ -2132,6 +2133,7 @@ const shard: CardShard = {
     _poolTorchFiend,
     _poolTormentedThoughts,
     _poolTouchTheSpiritRealm,
+    _poolTourachsChant,
     _poolTowerOfChampions,
     _poolToweringIndrik,
     _poolToxinAnalysis,

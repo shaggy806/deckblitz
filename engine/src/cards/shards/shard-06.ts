@@ -250,6 +250,7 @@ import _poolDepthsOfDesire from "../pool/depths-of-desire.js";
 import _poolDesertedBeach from "../pool/deserted-beach.js";
 import _poolDesertedTemple from "../pool/deserted-temple.js";
 import _poolDesynchronization from "../pool/desynchronization.js";
+import _poolDetermined from "../pool/determined.js";
 import _poolDevoutInvocation from "../pool/devout-invocation.js";
 import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
@@ -1322,6 +1323,7 @@ const shard: CardShard = {
     _poolDesertedBeach,
     _poolDesertedTemple,
     _poolDesynchronization,
+    _poolDetermined,
     _poolDevoutInvocation,
     _poolDictateOfTheTwinGods,
     _poolDihadaBinderOfWills,

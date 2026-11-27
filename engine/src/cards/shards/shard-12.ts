@@ -773,6 +773,7 @@ import _poolScrollThief from "../pool/scroll-thief.js";
 import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
 import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
 import _poolSeasonOfGrowth from "../pool/season-of-growth.js";
+import _poolSecondGuess from "../pool/second-guess.js";
 import _poolSecondSight from "../pool/second-sight.js";
 import _poolSecureDetention from "../pool/secure-detention.js";
 import _poolSedgeScorpion from "../pool/sedge-scorpion.js";
@@ -1832,6 +1833,7 @@ const shard: CardShard = {
     _poolSeaGateWreckage,
     _poolSeascapeAerialist,
     _poolSeasonOfGrowth,
+    _poolSecondGuess,
     _poolSecondSight,
     _poolSecureDetention,
     _poolSedgeScorpion,

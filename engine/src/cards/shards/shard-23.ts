@@ -820,6 +820,7 @@ import _poolSinisterCryologist from "../pool/sinister-cryologist.js";
 import _poolSinkIntoStupor from "../pool/sink-into-stupor.js";
 import _poolSivvisRuse from "../pool/sivvis-ruse.js";
 import _poolSkeletonCrew from "../pool/skeleton-crew.js";
+import _poolSkeletonScavengers from "../pool/skeleton-scavengers.js";
 import _poolSkyclaveAerialist from "../pool/skyclave-aerialist.js";
 import _poolSkycloudExpanse from "../pool/skycloud-expanse.js";
 import _poolSkylineDespot from "../pool/skyline-despot.js";
@@ -1901,6 +1902,7 @@ const shard: CardShard = {
     _poolSinkIntoStupor,
     _poolSivvisRuse,
     _poolSkeletonCrew,
+    _poolSkeletonScavengers,
     _poolSkyclaveAerialist,
     _poolSkycloudExpanse,
     _poolSkylineDespot,

@@ -164,6 +164,7 @@ import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolClearTheLand from "../pool/clear-the-land.js";
 import _poolCoastlineChimera from "../pool/coastline-chimera.js";
+import _poolCodespellCleric from "../pool/codespell-cleric.js";
 import _poolColossusHammer from "../pool/colossus-hammer.js";
 import _poolCombatResearch from "../pool/combat-research.js";
 import _poolCommanderLiaraPortyr from "../pool/commander-liara-portyr.js";
@@ -481,6 +482,7 @@ import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
 import _poolJinx from "../pool/jinx.js";
 import _poolJointExploration from "../pool/joint-exploration.js";
+import _poolJotunGrunt from "../pool/jotun-grunt.js";
 import _poolJudithCarnageConnoisseur from "../pool/judith-carnage-connoisseur.js";
 import _poolJundSojourners from "../pool/jund-sojourners.js";
 import _poolKalakscionHungerTyrant from "../pool/kalakscion-hunger-tyrant.js";
@@ -1015,6 +1017,7 @@ import _poolWardSliver from "../pool/ward-sliver.js";
 import _poolWardscaleDragon from "../pool/wardscale-dragon.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
+import _poolWarriorsBlades from "../pool/warriors-blades.js";
 import _poolWaterspoutWarden from "../pool/waterspout-warden.js";
 import _poolWaxingMoon from "../pool/waxing-moon.js";
 import _poolWayfaringGiant from "../pool/wayfaring-giant.js";
@@ -1239,6 +1242,7 @@ const shard: CardShard = {
     _poolCivicWayfinder,
     _poolClearTheLand,
     _poolCoastlineChimera,
+    _poolCodespellCleric,
     _poolColossusHammer,
     _poolCombatResearch,
     _poolCommanderLiaraPortyr,
@@ -1556,6 +1560,7 @@ const shard: CardShard = {
     _poolJhoiraWeatherlightCaptain,
     _poolJinx,
     _poolJointExploration,
+    _poolJotunGrunt,
     _poolJudithCarnageConnoisseur,
     _poolJundSojourners,
     _poolKalakscionHungerTyrant,
@@ -2090,6 +2095,7 @@ const shard: CardShard = {
     _poolWardscaleDragon,
     _poolWarhornBlast,
     _poolWarrenInstigator,
+    _poolWarriorsBlades,
     _poolWaterspoutWarden,
     _poolWaxingMoon,
     _poolWayfaringGiant,

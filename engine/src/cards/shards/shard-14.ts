@@ -111,6 +111,7 @@ import _poolBorgCube from "../pool/borg-cube.js";
 import _poolBorosSignet from "../pool/boros-signet.js";
 import _poolBorrowingTheEastWind from "../pool/borrowing-the-east-wind.js";
 import _poolBoulderDash from "../pool/boulder-dash.js";
+import _poolBoundDetermined from "../pool/bound-determined.js";
 import _poolBrainMaggot from "../pool/brain-maggot.js";
 import _poolBraveBrawler from "../pool/brave-brawler.js";
 import _poolBreachingLeviathan from "../pool/breaching-leviathan.js";
@@ -262,6 +263,7 @@ import _poolDuergarCaveGuard from "../pool/duergar-cave-guard.js";
 import _poolDukeUlderRavengard from "../pool/duke-ulder-ravengard.js";
 import _poolDuskImp from "../pool/dusk-imp.js";
 import _poolDustAnimus from "../pool/dust-animus.js";
+import _poolDwarvenSoldier from "../pool/dwarven-soldier.js";
 import _poolEagerConstruct from "../pool/eager-construct.js";
 import _poolEaglesRescue from "../pool/eagles-rescue.js";
 import _poolEbonDrake from "../pool/ebon-drake.js";
@@ -1178,6 +1180,7 @@ const shard: CardShard = {
     _poolBorosSignet,
     _poolBorrowingTheEastWind,
     _poolBoulderDash,
+    _poolBoundDetermined,
     _poolBrainMaggot,
     _poolBraveBrawler,
     _poolBreachingLeviathan,
@@ -1329,6 +1332,7 @@ const shard: CardShard = {
     _poolDukeUlderRavengard,
     _poolDuskImp,
     _poolDustAnimus,
+    _poolDwarvenSoldier,
     _poolEagerConstruct,
     _poolEaglesRescue,
     _poolEbonDrake,

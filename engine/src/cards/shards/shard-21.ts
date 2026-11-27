@@ -84,6 +84,7 @@ import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBladeOfTheOni from "../pool/blade-of-the-oni.js";
 import _poolBladeOfTheSwarm from "../pool/blade-of-the-swarm.js";
 import _poolBlasphemousEdict from "../pool/blasphemous-edict.js";
+import _poolBlazeOfGlory from "../pool/blaze-of-glory.js";
 import _poolBlazingShoal from "../pool/blazing-shoal.js";
 import _poolBlessedBreath from "../pool/blessed-breath.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
@@ -1117,6 +1118,7 @@ const shard: CardShard = {
     _poolBladeOfTheOni,
     _poolBladeOfTheSwarm,
     _poolBlasphemousEdict,
+    _poolBlazeOfGlory,
     _poolBlazingShoal,
     _poolBlessedBreath,
     _poolBlightGrenade,

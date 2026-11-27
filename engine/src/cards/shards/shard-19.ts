@@ -129,6 +129,7 @@ import _poolCallDamageControl from "../pool/call-damage-control.js";
 import _poolCallTheSpiritDragons from "../pool/call-the-spirit-dragons.js";
 import _poolCallapheBelovedOfTheSea from "../pool/callaphe-beloved-of-the-sea.js";
 import _poolCalmingVerse from "../pool/calming-verse.js";
+import _poolCanalCourier from "../pool/canal-courier.js";
 import _poolCanalDredger from "../pool/canal-dredger.js";
 import _poolCantStayAway from "../pool/cant-stay-away.js";
 import _poolCantankerousCaptain from "../pool/cantankerous-captain.js";
@@ -138,6 +139,7 @@ import _poolCarnelianOrbOfDragonkind from "../pool/carnelian-orb-of-dragonkind.j
 import _poolCarnival from "../pool/carnival.js";
 import _poolCarrionImp from "../pool/carrion-imp.js";
 import _poolCartographer from "../pool/cartographer.js";
+import _poolCaseFileAuditor from "../pool/case-file-auditor.js";
 import _poolCatGator from "../pool/cat-gator.js";
 import _poolCatharsCrusade from "../pool/cathars-crusade.js";
 import _poolCathedralOfSerra from "../pool/cathedral-of-serra.js";
@@ -642,6 +644,7 @@ import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
 import _poolMirrorBox from "../pool/mirror-box.js";
 import _poolMirrorOfFate from "../pool/mirror-of-fate.js";
+import _poolMirrorShieldHoplite from "../pool/mirror-shield-hoplite.js";
 import _poolMissionBriefing from "../pool/mission-briefing.js";
 import _poolMitoticManipulation from "../pool/mitotic-manipulation.js";
 import _poolMnemonicBetrayal from "../pool/mnemonic-betrayal.js";
@@ -895,6 +898,7 @@ import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
 import _poolSoldeviSimulacrum from "../pool/soldevi-simulacrum.js";
 import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
 import _poolSorinGrimNemesis from "../pool/sorin-grim-nemesis.js";
+import _poolSoulBurn from "../pool/soul-burn.js";
 import _poolSoulChanneling from "../pool/soul-channeling.js";
 import _poolSoulsMight from "../pool/souls-might.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
@@ -1251,6 +1255,7 @@ const shard: CardShard = {
     _poolCallTheSpiritDragons,
     _poolCallapheBelovedOfTheSea,
     _poolCalmingVerse,
+    _poolCanalCourier,
     _poolCanalDredger,
     _poolCantStayAway,
     _poolCantankerousCaptain,
@@ -1260,6 +1265,7 @@ const shard: CardShard = {
     _poolCarnival,
     _poolCarrionImp,
     _poolCartographer,
+    _poolCaseFileAuditor,
     _poolCatGator,
     _poolCatharsCrusade,
     _poolCathedralOfSerra,
@@ -1764,6 +1770,7 @@ const shard: CardShard = {
     _poolMirozel,
     _poolMirrorBox,
     _poolMirrorOfFate,
+    _poolMirrorShieldHoplite,
     _poolMissionBriefing,
     _poolMitoticManipulation,
     _poolMnemonicBetrayal,
@@ -2017,6 +2024,7 @@ const shard: CardShard = {
     _poolSoldeviSimulacrum,
     _poolSomberwaldDryad,
     _poolSorinGrimNemesis,
+    _poolSoulBurn,
     _poolSoulChanneling,
     _poolSoulsMight,
     _poolSpaceMarineScout,

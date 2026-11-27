@@ -433,6 +433,7 @@ import _poolInameDeathAspect from "../pool/iname-death-aspect.js";
 import _poolIndigoFaerie from "../pool/indigo-faerie.js";
 import _poolIndomitableWill from "../pool/indomitable-will.js";
 import _poolInfantryShield from "../pool/infantry-shield.js";
+import _poolInfectiousRage from "../pool/infectious-rage.js";
 import _poolInfernoElemental from "../pool/inferno-elemental.js";
 import _poolIngeniousMastery from "../pool/ingenious-mastery.js";
 import _poolIngenuityEngine from "../pool/ingenuity-engine.js";
@@ -611,6 +612,7 @@ import _poolOliviaMobilizedForWar from "../pool/olivia-mobilized-for-war.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
 import _poolOmenpathJourney from "../pool/omenpath-journey.js";
 import _poolOnduKnotmaster from "../pool/ondu-knotmaster.js";
+import _poolOpalTitan from "../pool/opal-titan.js";
 import _poolOpportunisticDragon from "../pool/opportunistic-dragon.js";
 import _poolOppression from "../pool/oppression.js";
 import _poolOraclesRestoration from "../pool/oracles-restoration.js";
@@ -1475,6 +1477,7 @@ const shard: CardShard = {
     _poolIndigoFaerie,
     _poolIndomitableWill,
     _poolInfantryShield,
+    _poolInfectiousRage,
     _poolInfernoElemental,
     _poolIngeniousMastery,
     _poolIngenuityEngine,
@@ -1653,6 +1656,7 @@ const shard: CardShard = {
     _poolOmashuCity,
     _poolOmenpathJourney,
     _poolOnduKnotmaster,
+    _poolOpalTitan,
     _poolOpportunisticDragon,
     _poolOppression,
     _poolOraclesRestoration,

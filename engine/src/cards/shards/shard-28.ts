@@ -582,6 +582,7 @@ import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
 import _poolNahirisWarcrafting from "../pool/nahiris-warcrafting.js";
 import _poolNantukoMentor from "../pool/nantuko-mentor.js";
+import _poolNaturesWrath from "../pool/natures-wrath.js";
 import _poolNazarTheVelvetFang from "../pool/nazar-the-velvet-fang.js";
 import _poolNecrobite from "../pool/necrobite.js";
 import _poolNestingBot from "../pool/nesting-bot.js";
@@ -1667,6 +1668,7 @@ const shard: CardShard = {
     _poolMysticMonastery,
     _poolNahirisWarcrafting,
     _poolNantukoMentor,
+    _poolNaturesWrath,
     _poolNazarTheVelvetFang,
     _poolNecrobite,
     _poolNestingBot,

@@ -796,6 +796,7 @@ import _poolSaheeliConsulOfOversight from "../pool/saheeli-consul-of-oversight.j
 import _poolSalvageDrone from "../pool/salvage-drone.js";
 import _poolSalvageTitan from "../pool/salvage-titan.js";
 import _poolSalvagerOfSecrets from "../pool/salvager-of-secrets.js";
+import _poolSamiteElder from "../pool/samite-elder.js";
 import _poolSandbenderScavengers from "../pool/sandbender-scavengers.js";
 import _poolSandsOfDelirium from "../pool/sands-of-delirium.js";
 import _poolSangrophage from "../pool/sangrophage.js";
@@ -931,6 +932,7 @@ import _poolTalasWarrior from "../pool/talas-warrior.js";
 import _poolTalismanOfImpulse from "../pool/talisman-of-impulse.js";
 import _poolTamObservantSequencer from "../pool/tam-observant-sequencer.js";
 import _poolTangleHulk from "../pool/tangle-hulk.js";
+import _poolTawnossCoffin from "../pool/tawnoss-coffin.js";
 import _poolTeeteringPeaks from "../pool/teetering-peaks.js";
 import _poolTegwyllDukeOfSplendor from "../pool/tegwyll-duke-of-splendor.js";
 import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
@@ -1908,6 +1910,7 @@ const shard: CardShard = {
     _poolSalvageDrone,
     _poolSalvageTitan,
     _poolSalvagerOfSecrets,
+    _poolSamiteElder,
     _poolSandbenderScavengers,
     _poolSandsOfDelirium,
     _poolSangrophage,
@@ -2043,6 +2046,7 @@ const shard: CardShard = {
     _poolTalismanOfImpulse,
     _poolTamObservantSequencer,
     _poolTangleHulk,
+    _poolTawnossCoffin,
     _poolTeeteringPeaks,
     _poolTegwyllDukeOfSplendor,
     _poolTemmetNaktamunsWill,

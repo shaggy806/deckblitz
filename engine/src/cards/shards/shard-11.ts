@@ -116,6 +116,7 @@ import _poolBoomerang from "../pool/boomerang.js";
 import _poolBorderPatrol from "../pool/border-patrol.js";
 import _poolBorosGuildmage from "../pool/boros-guildmage.js";
 import _poolBottomlessVault from "../pool/bottomless-vault.js";
+import _poolBound from "../pool/bound.js";
 import _poolBraidsArisenNightmare from "../pool/braids-arisen-nightmare.js";
 import _poolBramblewoodParagon from "../pool/bramblewood-paragon.js";
 import _poolBraveTheElements from "../pool/brave-the-elements.js";
@@ -416,6 +417,7 @@ import _poolHauntingFigment from "../pool/haunting-figment.js";
 import _poolHazezonTamar from "../pool/hazezon-tamar.js";
 import _poolHearthfireHobgoblin from "../pool/hearthfire-hobgoblin.js";
 import _poolHeatedDebate from "../pool/heated-debate.js";
+import _poolHedronBlade from "../pool/hedron-blade.js";
 import _poolHedronScrabbler from "../pool/hedron-scrabbler.js";
 import _poolHelmOfAwakening from "../pool/helm-of-awakening.js";
 import _poolHenrikaDomnathi from "../pool/henrika-domnathi.js";
@@ -937,6 +939,7 @@ import _poolTheSwampKitten from "../pool/the-swamp-kitten.js";
 import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolTheTombOfAclazotz from "../pool/the-tomb-of-aclazotz.js";
 import _poolTheloniteDruid from "../pool/thelonite-druid.js";
+import _poolThelonsChant from "../pool/thelons-chant.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThoughtleech from "../pool/thoughtleech.js";
 import _poolThrabenExorcism from "../pool/thraben-exorcism.js";
@@ -1207,6 +1210,7 @@ const shard: CardShard = {
     _poolBorderPatrol,
     _poolBorosGuildmage,
     _poolBottomlessVault,
+    _poolBound,
     _poolBraidsArisenNightmare,
     _poolBramblewoodParagon,
     _poolBraveTheElements,
@@ -1507,6 +1511,7 @@ const shard: CardShard = {
     _poolHazezonTamar,
     _poolHearthfireHobgoblin,
     _poolHeatedDebate,
+    _poolHedronBlade,
     _poolHedronScrabbler,
     _poolHelmOfAwakening,
     _poolHenrikaDomnathi,
@@ -2028,6 +2033,7 @@ const shard: CardShard = {
     _poolTheThingBenGrimm,
     _poolTheTombOfAclazotz,
     _poolTheloniteDruid,
+    _poolThelonsChant,
     _poolThornscapeApprentice,
     _poolThoughtleech,
     _poolThrabenExorcism,
