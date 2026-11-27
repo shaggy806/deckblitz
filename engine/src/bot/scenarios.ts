@@ -8489,6 +8489,133 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  asked({
+    name: "cascades into Pyroclasm with only its own small creatures to burn: declines the cast",
+    rule: "A free cast is still a choice: one that wipes our own board and nothing of the opponents' is declined.",
+    position(registry) {
+      // v2 took v1's answer to every "you may cast" until 2026-11-26, and v1
+      // casts whatever it can. Alice's board is three Grizzly Bears and the
+      // Bloodbraid Elf she's casting; every opponent has a Craw Wurm (6/4).
+      // Pyroclasm, found by the cascade, would kill all four of hers and
+      // none of theirs; declined, it goes to the bottom of her library.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 2);
+      lands(game, "Forest", A, 2);
+      for (let i = 0; i < 3; i += 1) onBoard(game, "Grizzly Bears", A);
+      for (const p of [B, C, D]) onBoard(game, "Craw Wurm", p);
+      const pyroclasm = game.debugSpawn("Pyroclasm", A, "library");
+      const library = game.state.zones.perPlayer[A].library;
+      game.state.zones.perPlayer[A].library = [pyroclasm, ...library.filter((id) => id !== pyroclasm)];
+      const elf = game.debugSpawn("Bloodbraid Elf", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: elf, targets: [] });
+      game.advanceUntil((s) => s.awaiting !== null && s.awaiting.player === A);
+      if (game.state.awaiting?.kind !== "cast-now") {
+        return { passed: false, detail: `never offered the cascaded card (${game.state.awaiting?.kind ?? "nothing asked"})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-now" && action.cast === null,
+          detail:
+            action.type === "cast-now"
+              ? action.cast === null
+                ? "declined"
+                : `cast ${cardOf(game, action.cast.card)}`
+              : describeAction(action),
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "a Clone with our own Etali, Primal Conqueror on the battlefield copies Etali, for its enters trigger",
+    rule: "A copy of our own legend is worth its enters trigger when that beats the best other copy: the legend rule takes one of the two after the trigger.",
+    position(registry) {
+      // Reported from a live game (2026-11-26, game C7X8P, turn 28): Etali's
+      // free Phantasmal Image copied an Angel of Vitality instead of Etali.
+      // The search ran out of time and took v1's answer, which never copied
+      // a legend of its own: the legend rule would take one. But the copy's
+      // enters trigger is another round of free spells from every library.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Island", A, 4);
+      const etali = onBoard(game, "Etali, Primal Conqueror", A);
+      onBoard(game, "Angel of Vitality", B);
+      const clone = game.debugSpawn("Clone", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: clone, targets: [] });
+      game.advanceUntil((s) => s.awaiting !== null && s.awaiting.player === A);
+      if (game.state.awaiting?.kind !== "choose-copy") {
+        return { passed: false, detail: `never asked what to copy (${game.state.awaiting?.kind ?? "nothing asked"})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "choose-copy" && action.copy === etali,
+          detail: action.type === "choose-copy" ? `copied ${action.copy === null ? "nothing" : cardOf(game, action.copy)}` : describeAction(action),
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "discovers a creature: casts it free rather than taking it into hand",
+    rule: "A free creature is worth more on the battlefield than in hand: the cast costs nothing.",
+    position(registry) {
+      // The search's first cut declined every free creature a discover or
+      // a Monstrous Vortex found (bot:diff, 2026-11-26: Topiary Stomper,
+      // Titania, Overlord of the Hauntwoods), taking the card into hand.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Forest", A, 5);
+      const giant = game.debugSpawn("Hill Giant", A, "library");
+      const library = game.state.zones.perPlayer[A].library;
+      game.state.zones.perPlayer[A].library = [giant, ...library.filter((id) => id !== giant)];
+      game.debugSpawn("Pantlaza, Sun-Favored", A, "battlefield", { announceEntry: true, summoningSick: false });
+      game.advanceUntil((s) => s.awaiting !== null && s.awaiting.player === A);
+      if (game.state.awaiting?.kind === "choose-modes") {
+        game.dispatch({ type: "choose-modes", player: A, modes: [0] });
+        game.advanceUntil((s) => s.awaiting !== null && s.awaiting.player === A);
+      }
+      if (game.state.awaiting?.kind !== "cast-now") {
+        return { passed: false, detail: `never offered the discovered card (${game.state.awaiting?.kind ?? "nothing asked"})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-now" && action.cast !== null,
+          detail: action.type === "cast-now" ? (action.cast === null ? "declined" : `cast ${cardOf(game, action.cast.card)}`) : describeAction(action),
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "cascades into a removal spell with an opponent's creature to hit: casts it",
+    rule: "A free spell that does what we want is cast: searching the offer mustn't make the bot shy of free value.",
+    position(registry) {
+      // The other side of the Pyroclasm scenario above: Bloodbraid Elf finds
+      // Lightning Bolt, and bob has a 2/2 attacker worth killing.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 2);
+      lands(game, "Forest", A, 2);
+      onBoard(game, "Grizzly Bears", B);
+      const bolt = game.debugSpawn("Lightning Bolt", A, "library");
+      const library = game.state.zones.perPlayer[A].library;
+      game.state.zones.perPlayer[A].library = [bolt, ...library.filter((id) => id !== bolt)];
+      const elf = game.debugSpawn("Bloodbraid Elf", A, "hand");
+      game.dispatch({ type: "cast-spell", player: A, card: elf, targets: [] });
+      game.advanceUntil((s) => s.awaiting !== null && s.awaiting.player === A);
+      if (game.state.awaiting?.kind !== "cast-now") {
+        return { passed: false, detail: `never offered the cascaded card (${game.state.awaiting?.kind ?? "nothing asked"})` };
+      }
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-now" && action.cast !== null,
+          detail: action.type === "cast-now" ? (action.cast === null ? "declined" : `cast ${cardOf(game, action.cast.card)}`) : describeAction(action),
+        }),
+      };
+    },
+  }),
   {
     name: "casts the same first spell whatever order its library lies in (Scourge of Valkas, Atarka and Terror of the Peaks in hand)",
     rule: "A seat can't know the order of its library: a choice must not turn on which cards a simulation would draw or exile from it.",

@@ -3204,7 +3204,7 @@ export class HeuristicBotController extends AutomaticController {
     };
   }
 
-  private toCastSpell(state: GameState, legal: CastSpellLegal): Action {
+  protected toCastSpell(state: GameState, legal: CastSpellLegal): Action {
     const player = this.playerId;
     // An additional cost's sacrifice gives up the cheapest permanent it may.
     // (Convoke doesn't come through here: `castExtras` echoes the payment
@@ -4996,6 +4996,28 @@ export class HeuristicBotController extends AutomaticController {
     return null;
   }
 
+  /**
+   * Every answer to a "you may cast" this bot would consider: each offered
+   * card built into a cast as `chooseCastNow` builds one (most mana value
+   * first), each land it may play, and declining unless the offer must be
+   * taken. What v2's decision search plays out (`EvalBotController.decide`).
+   */
+  protected castNowAnswers(view: ControllerView, offer: CastNowOffer): (CastSpellAction | PlayLandAction | null)[] {
+    const worth = (legal: CastSpellLegal): number => this.manaValueOf(legal.cardName);
+    const life = view.state.players[this.playerId]?.life ?? 0;
+    const out: (CastSpellAction | PlayLandAction | null)[] = [];
+    for (const legal of offer.casts.filter((c) => c.assist === undefined).sort((a, b) => worth(b) - worth(a))) {
+      if (offer.byPayingLife === true && offer.mustCast !== true && worth(legal) >= life) continue;
+      const action = this.toCastSpell(view.state, legal);
+      if (action.type === "cast-spell") out.push(action);
+    }
+    for (const land of offer.lands ?? []) {
+      out.push({ type: "play-land", player: this.playerId, card: land.card, ...(land.face !== undefined ? { face: land.face } : {}) });
+    }
+    if (offer.mustCast !== true) out.push(null);
+    return out;
+  }
+
   /** Whether a cast's chosen targets are all `object` (and it has one). */
   private aimedOnlyAt(action: CastSpellAction, object: ObjectId): boolean {
     const chosen = (action.targets ?? []).filter((t): t is TargetRef => t !== null && t !== undefined);
@@ -5135,7 +5157,54 @@ export class HeuristicBotController extends AutomaticController {
       (worth.length > 0 ? worth : options).map((object): TargetRef => ({ kind: "object", object })),
       "take",
     )[0];
+    // A legend of ours whose enters trigger is worth more than the best other
+    // copy: the copy enters, its trigger fires, and the legend rule then has
+    // us keep one of the two — the trigger was the point. A live game
+    // (2026-11-26): an Etali, Primal Conqueror's free Phantasmal Image copied
+    // an Angel of Vitality instead of Etali, and a second round of free
+    // spells went unused.
+    const bestValue = best?.kind === "object" ? targetValue(state, this.registry, best) : 0;
+    let legend: { id: ObjectId; value: number } | null = null;
+    for (const id of options) {
+      if (!ownLegend(id)) continue;
+      const value = this.entersAgainWorth(state, id);
+      if (value > bestValue && value > (legend?.value ?? 0)) legend = { id, value };
+    }
+    if (legend !== null) return legend.id;
     return best?.kind === "object" ? best.object : null;
+  }
+
+  /**
+   * What a permanent's own enters triggers would be worth once more — a copy
+   * of it entering — on `targetValue`'s scale (a vanilla 3/3 for three is 9).
+   * A free cast is a card's worth of permanent (`FREE_CAST_VALUE`), once per
+   * player when it casts from what each player exiled (Etali); anything else
+   * is `effectWorth`'s reading, a card being about 2 there.
+   */
+  private entersAgainWorth(state: GameState, id: ObjectId): number {
+    const object = state.objects[id];
+    if (object === undefined || !this.registry.has(printedCardName(object))) return 0;
+    const players = state.turnOrder.filter((p) => !state.players[p].hasLost).length;
+    const FREE_CAST_VALUE = 6;
+    const read = (effect: EffectSpec | null | undefined, perPlayer: boolean): number => {
+      if (effect === null || effect === undefined) return 0;
+      if (effect.kind === "sequence") {
+        const eachPlayer = effect.effects.some((e) => e.kind === "for-each-player");
+        return effect.effects.reduce((n, e) => n + read(e, perPlayer || eachPlayer), 0);
+      }
+      if (effect.kind === "cast-now" && effect.free === true) {
+        return FREE_CAST_VALUE * (effect.repeat === true && perPlayer ? players : 1);
+      }
+      if (effect.kind === "for-each-player") return 0;
+      return 3 * effectWorth(effect, { state, me: this.playerId, controller: this.playerId, targets: [], source: id, cards: this.registry });
+    };
+    let worth = 0;
+    for (const ability of this.registry.get(printedCardName(object)).triggered) {
+      const trigger = ability.trigger as { on?: string; who?: string };
+      if (trigger.on !== "enters-battlefield" || (trigger.who !== undefined && trigger.who !== "self")) continue;
+      worth += read(ability.effect, false);
+    }
+    return worth;
   }
 
   /** What to scry or surveil away: flood lands and spells far out of reach

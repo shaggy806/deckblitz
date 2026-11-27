@@ -140,6 +140,9 @@ export function describeMove(state: GameState, action: Action, registry?: CardRe
   switch (action.type) {
     case "pass-priority":
       return "Pass";
+    case "cast-now":
+      // "You may cast": what was cast (or played), or that it was declined.
+      return action.cast === null ? "Decline the cast" : describeMove(state, action.cast, registry);
     case "play-land":
       return `Play ${nameOf(state, action.card)}`;
     case "cast-spell": {

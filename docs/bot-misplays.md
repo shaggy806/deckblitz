@@ -4,6 +4,34 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-26 — Etali's free Phantasmal Image copies an Angel of Vitality, not Etali
+
+Status: fixed 2026-11-26. Scenario: "a Clone with our own Etali, Primal Conqueror on the battlefield
+copies Etali, for its enters trigger" (gate); test `copy-own-legend-etb.test.ts`.
+
+Reported by the user from a game in progress (kept as `games/2026-11-27/C7X8P-1-2827367674`, turn
+28): Domri's second Etali, Primal Conqueror cast a Phantasmal Image among its free spells, and the
+Image copied carol's Angel of Vitality. Copied as Etali, it would have entered as a second Etali:
+its enters trigger is another card exiled from each library and cast free, and the legend rule
+then has Domri keep one of the two.
+
+**Why:** v2 does search a `choose-copy`, but this one's search ran out of the live clock (the
+record marks it `expired`) and took v1's answer, `HeuristicBotController.chooseCopy`, which never
+copied a legend of its own: the legend rule would take one. With time, v2's search does copy Etali
+(the scenario passes either way); v1's answer was the gap.
+
+**Fix:** `chooseCopy` copies a legend of ours when its enters trigger, fired once more by the copy
+(`entersAgainWorth`: a free cast about a card's worth of permanent, once per player when it casts
+from what each player exiled, anything else by `effectWorth`), beats the best other copy's
+`targetValue`. A legend with no enters trigger is still never copied.
+
+**Also reported, and not a misplay:** the same game's Etali cast into Raffine's Rule of Law (turn
+32), whose enters trigger could then cast nothing. Domri's board was ten lands; the hand was
+Hellkite Courser, Squee, Dualcaster Mage, Sylvan Library and three mana rocks, one spell allowed.
+Etali as a 7/7 trampler was still the strongest single card. And its first Etali (turn 20) cast
+none of the four cards it exiled because carol's Grand Arbiter Augustin IV made each cost {1}
+more with Domri tapped out (rule 601.2f: a free cast still pays added costs).
+
 ## 2026-11-26 — Pantlaza discovers into Deflecting Swat and casts it at the discover itself
 
 Status: fixed 2026-11-26. Scenario: "discovers into Deflecting Swat with nothing on the stack but

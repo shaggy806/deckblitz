@@ -787,6 +787,9 @@ function bestDecision(
   /** Filled with the answers scored as leaving us dead to the swing back
    * (`OPEN_ANSWER`), for the replay (`EvalBotController.lastOpenAnswers`). */
   opened?: Action[],
+  /** The answers to play out for a decision whose module lists none (a
+   * "you may cast": `HeuristicBotController.castNowAnswers`). */
+  answers?: () => readonly Action[],
 ): Action {
   const me = view.player;
   if (inherited.player !== me || budget.left <= 1 || spent(budget)) return inherited;
@@ -809,7 +812,10 @@ function bestDecision(
   // A trigger's divided amount (Dragonlord Atarka's 5): each choice of two
   // targets or more with the shares worth trying, not the even split an
   // answer without a `division` is given.
-  const candidates = listed === null || legal === undefined ? listed : withComputedCache(() => withDivisions(view.state, cards, legal, listed));
+  const candidates =
+    listed === null || legal === undefined
+      ? (answers?.() ?? listed)
+      : withComputedCache(() => withDivisions(view.state, cards, legal, listed));
   if (candidates === null || candidates.length === 0) return inherited;
 
   const score = (action: Action): number | null => {
@@ -2887,6 +2893,7 @@ export class EvalBotController extends HeuristicBotController {
         keptBy,
         byTurn === undefined ? undefined : (action) => byTurn(action, budget),
         this.lastOpenAnswers,
+        () => this.castNowCandidates(view),
       );
     // Which card to discard: every answer keeps as many, so the hand is read
     // for which are worth keeping (`withHandReadForKeeps`) — an engine above
@@ -2918,6 +2925,26 @@ export class EvalBotController extends HeuristicBotController {
    * a guess at what the spell is worth; the planner is the bot's own account
    * of what it does with the mana.
    */
+  /**
+   * A "you may cast"'s answers to play out (the decision lists none of its
+   * own — `decisions/cast-now.ts`): each card cast as v1 builds the cast,
+   * each land played, and declining. Before this v2 took v1's answer, which
+   * casts whatever it can: a discovered Deflecting Swat aimed at the discover
+   * itself (2026-11-26), a cascaded wipe of its own board.
+   */
+  private castNowCandidates(view: ControllerView): Action[] {
+    const offer = view.legalActions().find((l): l is Extract<LegalAction, { kind: "cast-now" }> => l.kind === "cast-now");
+    if (offer === undefined) return [];
+    // Only an instant or sorcery is searched. A free permanent is cast, as v1
+    // casts it: searched, the first cut declined Titania, Overlord of the
+    // Hauntwoods and Topiary Stomper (bot:diff, 2026-11-26) on two shallow
+    // playouts each, and a Monstrous Vortex chain of 27 casts took 3 s a cast.
+    const permanent = (name: string): boolean =>
+      this.cards.has(name) && this.cards.get(name).types.some((t) => t !== "instant" && t !== "sorcery");
+    if (offer.casts.length > 0 && offer.casts.every((c) => permanent(c.cardName))) return [];
+    return this.castNowAnswers(view, offer).map((cast) => ({ type: "cast-now", player: this.playerId, cast }));
+  }
+
   private byTheTurnItLeaves(
     view: ControllerView,
   ): ((action: Action, budget: SearchBudget) => number | null | undefined) | undefined {
