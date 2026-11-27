@@ -205,6 +205,9 @@ const NO_TOKEN_PRINTING = new Set([
   "Bling Token",
   "Red Beard Token",
   "Eldrazi Squirrel Scion Token",
+  // Volrath's Laboratory's and Riptide Replicator's token of the chosen
+  // colour and type: whatever was chosen, so no one printing.
+  "Soldier Token (Chosen Color and Type)",
 ]);
 
 describe("token art", () => {
