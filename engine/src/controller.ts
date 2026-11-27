@@ -3849,7 +3849,8 @@ export class HeuristicBotController extends AutomaticController {
    * we hold none of (Mox Diamond's land: without one it goes straight to the
    * graveyard), or a spell that chooses a player who did something this turn
    * when no player has (Backdraft's "a player who cast one or more sorcery
-   * spells this turn"). Found by `bot:flags` in the kept games
+   * spells this turn"), or a tutor whose own random discard can only take the
+   * card it found (Gamble with an empty hand). Found by `bot:flags` in the kept games
    * (2026-11-26): both were cast by v1, and the card was gone for nothing.
    */
   protected doesNothingNow(state: GameState, offer: LegalAction): boolean {
@@ -3880,6 +3881,18 @@ export class HeuristicBotController extends AutomaticController {
     }
     const effect = def.effect;
     const card = state.objects[offer.card];
+    // A tutor to hand followed by a random discard, with no other card in
+    // hand: the discard can only take the card just found (Gamble, cast with
+    // an empty hand in a live game, 2026-11-26).
+    if (effect?.kind === "sequence") {
+      const [first, second] = effect.effects;
+      const tutors = first?.kind === "search-library" && first.destination === "hand";
+      const randomDiscard = second?.kind === "discard" && second.random === true && (second.target === "you" || second.target === undefined);
+      if (tutors && randomDiscard) {
+        const others = (state.zones.perPlayer[me]?.hand ?? []).filter((id) => id !== offer.card);
+        if (others.length === 0) return true;
+      }
+    }
     if (effect?.kind === "choose-opponent" && card !== undefined) {
       const whoIf = effect.whoIf;
       if (whoIf?.kind === "of-player" && whoIf.player === "that-player") {

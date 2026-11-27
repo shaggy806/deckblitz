@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { EvalBotController } from "../bot/eval-bot.js";
 import { HeuristicBotController } from "../controller.js";
 import type { Game } from "../game.js";
 import { A, B, cast, lands, nextTurn, spawn, table, toHand } from "./harness.js";
@@ -86,5 +87,24 @@ describe("casts that would do nothing", () => {
     const action = v1(game).act(game.controllerView(A));
     expect(action.type).toBe("cast-spell");
     if (action.type === "cast-spell") expect(game.state.objects[action.targets?.[0]?.kind === "object" ? action.targets[0].object : giant]?.cardName).toBe("Lightning Bolt");
+  });
+
+  it("Gamble with no other card in hand: held, by v1 and by v2 — the random discard can only take the card found", () => {
+    const { game } = table();
+    game.state.zones.perPlayer[A].hand = [];
+    lands(game, "Mountain", 1);
+    toHand(game, "Gamble");
+    expect(casts(game, "Gamble")).toBe(false);
+    const v2 = new EvalBotController(A, game.registry).act(game.controllerView(A));
+    expect(v2.type === "cast-spell" && game.state.objects[v2.card]?.cardName === "Gamble").toBe(false);
+  });
+
+  it("Gamble with another card in hand: cast", () => {
+    const { game } = table();
+    game.state.zones.perPlayer[A].hand = [];
+    lands(game, "Mountain", 1);
+    toHand(game, "Gamble");
+    toHand(game, "Grizzly Bears");
+    expect(casts(game, "Gamble")).toBe(true);
   });
 });

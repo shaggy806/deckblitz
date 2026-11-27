@@ -46,6 +46,10 @@ Orchard's trigger, which has a target, right above it. A "change the targets of 
 ability" spell is now held when no stack object it could aim at has a target (`doesNothingNow`), and
 aimed only at one that has (`retargetableOnly`, in `toCastSpell`).
 
+A fourth, reported by the user from a live game the same evening: a bot cast Gamble with no other
+card in hand, so its random discard could only take the card it had just found. Held now when a
+tutor to hand is followed by a random discard and there's no other card to hold (v1 and v2 alike).
+
 ## 2026-11-26 — Etali's free Phantasmal Image copies an Angel of Vitality, not Etali
 
 Status: fixed 2026-11-26. Scenario: "a Clone with our own Etali, Primal Conqueror on the battlefield
