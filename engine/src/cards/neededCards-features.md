@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### Cumulative upkeep: cards from a single graveyard to their owner's library — built 2026-11-27
+
+The key `cost:cumulative-upkeep-graveyard-to-library`: `SearchTogether`'s `singleGraveyard` (a `share` rule, each
+card's tag its owner, in `Game.searchTogether`) on a `look-and-choose` over `zone: "graveyards"`, as
+`cumulativeUpkeep`'s `doing`; `mayBeDone` offers the repeat only with as many pairs as age counters, graveyard by
+graveyard (rule 702.24a, its ruling). Jötun Grunt (25089), scaffolded. `test/cumulative-upkeep-single-graveyard.test.ts`.
+
 ### An ability priced by the +1/+1 counters on its target — built 2026-11-27
 
 The key `cost:ability-cost-reduction-by-target-counters`: `targetCostReduction.reduceGeneric`'s

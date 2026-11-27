@@ -11,6 +11,7 @@
     "effect:blocks-each-attacker-if-able",
     "trigger:attacks-different-players",
     "trigger:attacks-with-another-at-different-player",
+    "cost:cumulative-upkeep-graveyard-to-library",
     "cost:ability-cost-reduction-by-target-counters",
     "cost:x-equals-chosen-opponent-hand",
     "static:grant-optional-x-additional-cost-to-spells",

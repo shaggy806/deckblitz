@@ -294,6 +294,11 @@ export type SearchTogether =
    * share a mana value, an {X} in a card's cost counting 0 off the stack
    * (rule 202.3e) and a card with no mana cost 0 (202.3a). */
   | { readonly distinctManaValues: true }
+  /** "…from a **single graveyard**" over `zone: "graveyards"` (Jötun Grunt's
+   * "put two cards from a single graveyard on the bottom of their owner's
+   * library"): every chosen card in the same player's graveyard — a `share`
+   * rule, each card's one tag its owner. */
+  | { readonly singleGraveyard: true }
   | {
       readonly oneEach: readonly {
         /** How the client names the slot: "a Forest card". */
@@ -21076,6 +21081,30 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
     return scopedOrTargetedPlayers(pass.target, ctx).every(
       (ref) => ref.kind !== "player" || ctx.handSizeOf(ref.player, pass.filter) >= times * amountValue(pass.amount, ctx, ref.player),
     );
+  }
+  // "Put two cards from a single graveyard on the bottom of their owner's
+  // library" for each age counter (Jötun Grunt): all of it or none (rule
+  // 702.24a), each pass from whichever graveyard (its ruling) — so only with
+  // that many groups of two to be had, graveyard by graveyard (118.3).
+  if (
+    action.kind === "repeat" &&
+    action.times !== undefined &&
+    action.again === undefined &&
+    action.mayAgain === undefined &&
+    action.effect.kind === "look-and-choose" &&
+    action.effect.zone === "graveyards" &&
+    action.effect.together !== undefined &&
+    "singleGraveyard" in action.effect.together &&
+    typeof action.effect.min === "number" &&
+    action.effect.min > 0
+  ) {
+    const pass = action.effect;
+    const per = action.effect.min;
+    const times = Math.max(0, Math.floor(amountValue(action.times, ctx)));
+    const groups = ctx
+      .playersInScope("each-player")
+      .reduce((n, player) => n + Math.floor(ctx.graveyardMatching(player, pass.filter ?? {}).length / per), 0);
+    return groups >= times;
   }
   // "Any opponent may have you put that card into your graveyard" with no such
   // card (an empty library revealed nothing), or "into your hand" with nothing

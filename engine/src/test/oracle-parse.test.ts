@@ -5507,6 +5507,35 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       },
     });
     expect(herald.complete).toBe(true);
+    const grunt = face(
+      `Cumulative upkeep—Put two cards from a single graveyard on the bottom of their owner's library. ${reminder}`,
+      "Creature — Giant Soldier",
+    );
+    expect(grunt.triggered[0].effect).toMatchObject({
+      then: {
+        effects: [
+          {},
+          {
+            options: [
+              {
+                doing: {
+                  kind: "repeat",
+                  effect: {
+                    kind: "look-and-choose",
+                    zone: "graveyards",
+                    min: 2,
+                    max: 2,
+                    together: { singleGraveyard: true },
+                    destination: "library-bottom",
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    });
+    expect(grunt.complete).toBe(true);
   });
 
   it("echo (rule 702.30a): a mana cost, a discard or two lands, once after it comes under your control", () => {

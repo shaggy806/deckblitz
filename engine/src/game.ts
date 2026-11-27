@@ -51722,6 +51722,12 @@ controlledBy,
       for (const id of eligible) tags[id] = [String(manaValueOfObject(this.registry, this.state.objects[id]))];
       return { rule: "distinct", tags, text: "with different mana values" };
     }
+    if ("singleGraveyard" in together) {
+      // "From a single graveyard": a card's one tag its owner, whose
+      // graveyard it's in (rule 404.1).
+      for (const id of eligible) tags[id] = [this.state.objects[id].owner];
+      return { rule: "share", tags, text: "from a single graveyard" };
+    }
     for (const id of eligible) {
       tags[id] = together.oneEach.flatMap((slot, index) =>
         matchesFilter(this.state, this.registry, id, slot.filter, { you: player, x }) ? [String(index)] : [],

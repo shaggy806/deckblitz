@@ -306,6 +306,23 @@ function keywordPart(part, faceName, typeLine = "", tokenFor = undefined) {
       return { triggered: [cumulativeUpkeep({ choose: { ...typed, controlledBy: "opponent" }, then, text })] };
     }
   }
+  // Cards from a single graveyard to the bottom of their owner's library per
+  // age counter, each pair from whichever graveyard (Jötun Grunt).
+  if ((m = /^cumulative upkeep—put (two|three) cards from a single graveyard on the bottom of their owner's library\.?$/i.exec(p))) {
+    const n = m[1].toLowerCase() === "two" ? 2 : 3;
+    const text = `Put ${m[1].toLowerCase()} cards from a single graveyard on the bottom of their owner's library`;
+    const doing = {
+      kind: "look-and-choose",
+      zone: "graveyards",
+      min: n,
+      max: n,
+      together: { singleGraveyard: true },
+      destination: "library-bottom",
+      leftover: "stay",
+      prompt: text,
+    };
+    return { triggered: [cumulativeUpkeep({ doing, text })] };
+  }
   // Echo [cost] (rule 702.30a): its upkeep trigger, "if this came under your
   // control since the beginning of your last upkeep".
   if ((m = new RegExp(`^echo ${COST}$`, "i").exec(p))) return { triggered: [echo(m[1])] };
