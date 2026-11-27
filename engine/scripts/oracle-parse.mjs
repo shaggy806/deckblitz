@@ -11285,6 +11285,17 @@ const AMONG_PLAYERS_EFFECTS = {
     },
     effect: { kind: "gain-control", target: "source", untilEndOfTurn: false, who: "that-player" },
   },
+  // Wild Dogs, Ghazbán Ogre.
+  "The player with the most life gains control of ~.": {
+    kind: "for-each-player",
+    who: "each-player",
+    whoIf: {
+      kind: "of-player",
+      player: "that-player",
+      condition: { kind: "player-compare", stat: "life", compare: "more", than: "each-opponent" },
+    },
+    effect: { kind: "gain-control", target: "source", untilEndOfTurn: false, who: "that-player" },
+  },
   // Loxodon Peacekeeper: every player a candidate, a tie the controller's call.
   "The player with the lowest life total gains control of ~. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of ~.": {
     kind: "choose-opponent",
@@ -23161,6 +23172,18 @@ const INTERVENING_IFS = {
         kind: "of-player",
         player: "an-opponent",
         condition: { kind: "player-compare", stat: "hand", compare: "more", than: "each-opponent" },
+      },
+    ],
+  },
+  // Wild Dogs, Ghazbán Ogre: the same over life totals.
+  "if a player has more life than each other player,": {
+    kind: "any",
+    of: [
+      { kind: "player-compare", stat: "life", compare: "more", than: "each-opponent" },
+      {
+        kind: "of-player",
+        player: "an-opponent",
+        condition: { kind: "player-compare", stat: "life", compare: "more", than: "each-opponent" },
       },
     ],
   },
