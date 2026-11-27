@@ -431,6 +431,7 @@ import type {
   AggregateReads,
   AggregateSpec,
   CardFilter,
+  FilterContext,
   GreatestAmongItsController,
   SpellTargetsFilter,
   WeightedMatch,
@@ -46796,6 +46797,25 @@ export class Game {
         });
       },
       gainControl: (target, untilEndOfTurn, player, whileSource, whileSourceTapped, whileYouControlSource, until, whileIt, whileMonarch) => {
+        // "For as long as this creature remains tapped **and** that
+        // creature's power remains less than or equal to this creature's
+        // power" (Old Man of the Sea): both durations on one effect, ending
+        // at whichever comes first; the filter reads "this creature" as the
+        // `WhileSource` (rule 611.2b).
+        if (whileIt !== undefined && (whileSource === true || whileSourceTapped === true || whileYouControlSource === true)) {
+          const kept = lastingHere(
+            whileYouControlSource === true
+              ? whileSourceTapped === true
+                ? "while-you-control-source-tapped"
+                : "while-you-control-source"
+              : whileSourceTapped === true
+                ? "while-source-tapped"
+                : "while-source",
+          );
+          if (typeof kept !== "object" || !("whileSource" in kept) || kept.whileSource === null) return;
+          this.gainControlByEffect(player, target, false, false, { whileSource: kept.whileSource, whileIt });
+          return;
+        }
         if (whileIt !== undefined || whileMonarch !== undefined) {
           this.gainControlByEffect(player, target, false, false, {
             ...(whileIt !== undefined ? { whileIt } : {}),
@@ -67898,7 +67918,9 @@ controlledBy,
     // "For as long as it has a shield counter on it" with none on it as the
     // effect would begin never starts (rule 611.2b).
     const whileIt = opts.whileIt;
-    if (whileIt !== undefined && !matchesFilter(this.state, this.registry, id, whileIt, { you: player })) return;
+    if (whileIt !== undefined && !matchesFilter(this.state, this.registry, id, whileIt, this.whileItContext(player, opts.whileSource))) {
+      return;
+    }
     // "Other players can't gain control of them" (Guardian Beast): no new
     // control effect for them (rule 101.2: "can't" beats "can").
     if (!entered && this.controlGainProhibited(player, id)) return;
@@ -80508,6 +80530,20 @@ controlledBy,
    * can no longer see it (rule 702.26f). So does one lasting "for as long as
    * they're the monarch" (`ControlEffect.whileMonarch`) once that player
    * isn't (Garland, Royal Kidnapper). */
+  /** The filter context a `ControlEffect.whileIt` is read in: from the side
+   * of the player it gives control to and, with a `whileSource` beside it,
+   * that permanent as "this creature" — Old Man of the Sea's "that
+   * creature's power remains less than or equal to this creature's power"
+   * (`{ amount: { powerOf: "source" } }`). */
+  private whileItContext(player: PlayerId, whileSource: WhileSource | undefined): FilterContext {
+    if (whileSource === undefined) return { you: player };
+    return {
+      you: player,
+      source: whileSource.id,
+      amount: this.filterAmounts({ source: whileSource.id, controller: player }),
+    };
+  }
+
   private endWhileItControl(): void {
     const ids = this.state.whileItControlIds;
     if (ids === undefined || this.dryRunningEvents) return;
@@ -80520,7 +80556,8 @@ controlledBy,
       const here = object.zone === "battlefield";
       const left = effects.filter(
         (e) =>
-          (e.whileIt === undefined || (here && matchesFilter(this.state, this.registry, id, e.whileIt, { you: e.controller }))) &&
+          (e.whileIt === undefined ||
+            (here && matchesFilter(this.state, this.registry, id, e.whileIt, this.whileItContext(e.controller, e.whileSource)))) &&
           (e.whileMonarch === undefined || (here && this.state.monarch === e.whileMonarch)),
       );
       if (left.length === effects.length) return true;

@@ -5797,7 +5797,14 @@ export type EffectSpec =
        * player gaining control, and ends for good the first moment it doesn't
        * — matching again later doesn't bring it back. Nothing at all if it
        * doesn't match as the effect would begin (rule 611.2b). With
-       * `untilEndOfTurn: false`, and none of the other durations. */
+       * `untilEndOfTurn: false`, and none of the other durations but
+       * `whileSource` / `whileSourceTapped` / `whileYouControlSource`: then
+       * both hold it, and it ends at whichever stops first — Old Man of the
+       * Sea's "for as long as this creature remains tapped **and** that
+       * creature's power remains less than or equal to this creature's
+       * power" (`whileSourceTapped` with `whileIt: { power: { op: "lte", n:
+       * { amount: { powerOf: "source" } } } }`, "source" read as that
+       * permanent, live). */
       readonly whileIt?: CardFilter;
       /** "…for as long as **they're the monarch**" (Garland, Royal
        * Kidnapper's `"trigger-player"`): the player read as it resolves, and
@@ -20865,6 +20872,18 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     // (Grishnákh's "power less than or equal to the amassed Army's power"), its
     // effect as it resolves.
     if (record["kind"] === "reflexive-trigger" && record["about"] !== undefined) return record;
+    // A control effect lasting "for as long as … that creature's power
+    // remains less than or equal to this creature's power" (Old Man of the
+    // Sea) compares the two continually (rule 611.2b): its `whileIt` beside a
+    // `WhileSource` duration stays unbound, read live against that permanent.
+    if (
+      record["kind"] === "gain-control" &&
+      record["whileIt"] !== undefined &&
+      (record["whileSource"] === true || record["whileSourceTapped"] === true || record["whileYouControlSource"] === true)
+    ) {
+      const { whileIt, ...rest } = record;
+      return { ...(walk(rest) as object), whileIt };
+    }
     // A reflexive ability's targets are bound here, in the creating
     // resolution, but they're its own (rule 603.12): `{ triggerValue: true }`
     // in one reads the value it triggers with (`value`), not the creating
