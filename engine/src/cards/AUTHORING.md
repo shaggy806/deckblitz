@@ -9343,7 +9343,11 @@ Delete an entry in the same commit as the feature that retires it.
     reads the spell as it's cast, what a static grants it included (Jasmine Boreal
     of the Seven). On the spell's own card, `spendOnlyManaFrom: <ManaFromSpec>` is
     "Spend only mana produced by creatures to cast this spell" (Myr Superion;
-    Imperiosaur's basic lands). `chooseCreatureTypeMenu` limits
+    Imperiosaur's basic lands); on its `alternativeCost`, the same for a cast
+    paying that cost alone — "You may pay {R}{G} rather than pay this spell's
+    mana cost. Spend only mana produced by Treasures to cast it this way"
+    (Security Rhox: `{ mana: "{R}{G}", spendOnlyManaFrom: { subtype: "Treasure" } }`).
+    `chooseCreatureTypeMenu` limits
     `chooseCreatureTypeOnEnter` to a list (Eclipsed Realms).
   - `spellGains: { spell?, keywords?, lasting?, uncounterable? }` (`uncounterable`: Boseiju, Who
     Shelters All's "if that mana is spent on an instant or sorcery spell, that spell can't be

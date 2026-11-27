@@ -5774,6 +5774,12 @@ export interface CardDefinition {
      * can't all be. */
     readonly also?: KickerAlsoCost;
     readonly condition?: StaticCondition;
+    /** "You may pay {R}{G} rather than pay this spell's mana cost. **Spend
+     * only mana produced by Treasures to cast it this way**" (Security Rhox):
+     * a cast for this cost may spend only mana whose source matched as it
+     * made it (`ManaOrigin`), floating mana too — the card's own
+     * `spendOnlyManaFrom`, for this way alone. */
+    readonly spendOnlyManaFrom?: ManaFromSpec;
   } | null;
   /**
    * Convoke (rule 702.51 — Chord of Calling): "Your creatures can help cast

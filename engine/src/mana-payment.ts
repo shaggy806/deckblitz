@@ -16,7 +16,7 @@
 import type { ActivatedAbility } from "./abilities.js";
 import type { EffectSpec, ManaListSpec } from "./effects.js";
 import { COLORS, differentManaSplits, manaValue, poolCounts, poolTotal } from "./mana.js";
-import type { Color, HybridOption, HybridPip, ManaCost, ManaType, ManaUnit, SpendUnitAs, WideSpendAs } from "./mana.js";
+import type { Color, HybridOption, HybridPip, ManaCost, ManaFromSpec, ManaType, ManaUnit, SpendUnitAs, WideSpendAs } from "./mana.js";
 import type { ObjectId } from "./primitives.js";
 
 /** One possible output of a single mana-ability activation: `fixed` is the
@@ -318,6 +318,11 @@ export type ManaPurpose =
       readonly xCost?: true;
       /** The total cost being paid has `{C}` in it (`"cost-with-c"`). */
       readonly cCost?: true;
+      /** Cast for its own alternative cost, which says "spend only mana
+       * produced by Treasures to cast it this way" (Security Rhox —
+       * `alternativeCost.spendOnlyManaFrom`): only mana whose origin matches
+       * pays, as a card's own `spendOnlyManaFrom` does for every cast. */
+      readonly onlyFrom?: ManaFromSpec;
     }
   /** An activated ability of `source` being paid for. */
   | {

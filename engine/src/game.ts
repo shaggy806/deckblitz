@@ -6868,7 +6868,7 @@ export class Game {
           const total = this.withFace(card, face ?? 0, () =>
             this.castingCostOf(player, card, def, 0, withModes, pricedAt),
           );
-          const purpose: ManaPurpose = { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, withModes) };
+          const purpose: ManaPurpose = { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, withModes), ...this.altCostSpendOnly(def, altCost === true) };
           if (modal.alsoPerExtraMode !== undefined) {
             const also = this.castAlsoCosts(card, def, kicked, altCost === true, costOption, via, graveyardGrant, modesK);
             if (this.whyCannotPayAlso(player, card, def, also, altCost === true) !== null) continue;
@@ -7009,7 +7009,7 @@ export class Game {
                 this.withFace(card, face ?? 0, () => this.castingCostOf(player, card, def, 0, cost, pricedAt)),
                 undefined,
                 undefined,
-                { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, cost, kicked) },
+                { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, cost, kicked), ...this.altCostSpendOnly(def, altCost === true) },
                 { last: candidates },
               );
               if (plan === null) return 0;
@@ -7484,7 +7484,7 @@ export class Game {
                       rest,
                       undefined,
                       undefined,
-                      { kind: "cast", card, face: face ?? 0, ...castPaying(via, variantCost, kicked) },
+                      { kind: "cast", card, face: face ?? 0, ...castPaying(via, variantCost, kicked), ...this.altCostSpendOnly(def, altCost === true) },
                       withheld.size > 0 ? { withheld } : undefined,
                     ) !== null,
                   xPlan === null ? undefined : xPlan.maxX,
@@ -24069,7 +24069,7 @@ export class Game {
     if (def.cantSpendManaToCast === true && cheapestManaAmount(cost) > 0) {
       return `${def.name} can't be cast with mana: convoke and delve must pay its whole cost`;
     }
-    const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) };
+    const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked), ...this.altCostSpendOnly(def, altCost) };
     const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant, modes);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
@@ -26291,7 +26291,7 @@ export class Game {
             cost,
             this.spellWaterbend(def, kicked, chosenX, alternativeCost),
             (rest, withheld) =>
-              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) }, withWaterbent(withheld)) !==
+              this.payMana(player, rest, undefined, undefined, { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked), ...this.altCostSpendOnly(def, altCost) }, withWaterbent(withheld)) !==
               null,
           );
     if (typeof waterbent === "string") throw new Error(waterbent);
@@ -26301,7 +26301,7 @@ export class Game {
       { ...manaToPay, generic: manaToPay.generic - waterbent.length },
       undefined,
       undefined,
-      { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) },
+      { kind: "cast", card: cardId, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked), ...this.altCostSpendOnly(def, altCost) },
       manaArrangement,
     );
     if (payment === null) {
@@ -33458,8 +33458,8 @@ export class Game {
     // nothing else is reached for. Mana a triggered ability adds as a source is
     // tapped (rule 605.1b) is that ability's source's: it floats, and pays only
     // if that source qualifies too (`manaUnitCanPay` holds the floating units).
-    const onlyFrom = purpose?.kind === "cast" ? this.spendOnlyManaFromOf(purpose.card) : undefined;
-    const fits = (id: ObjectId): boolean => {
+    const onlyFrom = purpose?.kind === "cast" ? this.spendOnlyManaFromOf(purpose) : undefined;
+    const fits =(id: ObjectId): boolean => {
       const origin = this.manaOriginOf(tapCostSourceOf(id) ?? id);
       return origin !== undefined && onlyFrom !== undefined && manaOriginMatches(origin, onlyFrom);
     };
@@ -34861,10 +34861,18 @@ export class Game {
 
   /** "Spend only mana produced by [these] to cast this spell": what `card`'s
    * text asks of the mana that pays for it (`CardDefinition.spendOnlyManaFrom`). */
-  private spendOnlyManaFromOf(card: ObjectId): ManaFromSpec | undefined {
-    const object = this.state.objects[card];
+  private spendOnlyManaFromOf(purpose: Extract<ManaPurpose, { kind: "cast" }>): ManaFromSpec | undefined {
+    const object = this.state.objects[purpose.card];
     if (object === undefined) return undefined;
-    return this.registry.get(printedCardName(object)).spendOnlyManaFrom ?? undefined;
+    return this.registry.get(printedCardName(object)).spendOnlyManaFrom ?? purpose.onlyFrom;
+  }
+
+  /** "You may pay {R}{G} rather than pay this spell's mana cost. **Spend only
+   * mana produced by Treasures to cast it this way**" (Security Rhox): the
+   * card's own alternative cost's limit, for a cast paying it (rule 118.9). */
+  private altCostSpendOnly(def: CardDefinition, altCost: boolean): { readonly onlyFrom?: ManaFromSpec } {
+    const from = altCost ? this.ownAltCost(def)?.spendOnlyManaFrom : undefined;
+    return from === undefined ? {} : { onlyFrom: from };
   }
 
   /** The zone a spell being paid for is cast from: where the card still is, or
@@ -34908,7 +34916,7 @@ export class Game {
     const onlyType = this.spendOnlyManaTypeFor(purpose);
     if (onlyType !== undefined && unit.type !== onlyType) return false;
     if (purpose?.kind === "cast") {
-      const onlyFrom = this.spendOnlyManaFromOf(purpose.card);
+      const onlyFrom = this.spendOnlyManaFromOf(purpose);
       if (onlyFrom !== undefined && (unit.from === undefined || !manaOriginMatches(unit.from, onlyFrom))) return false;
     }
     const restriction = unit.restriction;
