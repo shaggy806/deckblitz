@@ -489,6 +489,7 @@ import _poolKinjallisCaller from "../pool/kinjallis-caller.js";
 import _poolKioraTheRisingTide from "../pool/kiora-the-rising-tide.js";
 import _poolKiorasDismissal from "../pool/kioras-dismissal.js";
 import _poolKismet from "../pool/kismet.js";
+import _poolKitsunePalliator from "../pool/kitsune-palliator.js";
 import _poolKnightOfDoves from "../pool/knight-of-doves.js";
 import _poolKnightOfTheSkywardEye from "../pool/knight-of-the-skyward-eye.js";
 import _poolKnockoutManeuver from "../pool/knockout-maneuver.js";
@@ -1622,6 +1623,7 @@ const shard: CardShard = {
     _poolKioraTheRisingTide,
     _poolKiorasDismissal,
     _poolKismet,
+    _poolKitsunePalliator,
     _poolKnightOfDoves,
     _poolKnightOfTheSkywardEye,
     _poolKnockoutManeuver,

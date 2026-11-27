@@ -768,6 +768,7 @@ import _poolRouse from "../pool/rouse.js";
 import _poolRubbleSlinger from "../pool/rubble-slinger.js";
 import _poolRuneOfMight from "../pool/rune-of-might.js";
 import _poolRushwoodGrove from "../pool/rushwood-grove.js";
+import _poolRustingGolem from "../pool/rusting-golem.js";
 import _poolSaberToothMooseLion from "../pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "../pool/saberclaw-golem.js";
 import _poolSabertoothCobra from "../pool/sabertooth-cobra.js";
@@ -1874,6 +1875,7 @@ const shard: CardShard = {
     _poolRubbleSlinger,
     _poolRuneOfMight,
     _poolRushwoodGrove,
+    _poolRustingGolem,
     _poolSaberToothMooseLion,
     _poolSaberclawGolem,
     _poolSabertoothCobra,

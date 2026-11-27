@@ -951,6 +951,7 @@ import _poolThroneOfMakindi from "../pool/throne-of-makindi.js";
 import _poolThrullWizard from "../pool/thrull-wizard.js";
 import _poolThunderfootBaloth from "../pool/thunderfoot-baloth.js";
 import _poolThunderousOrator from "../pool/thunderous-orator.js";
+import _poolTidewalker from "../pool/tidewalker.js";
 import _poolTimberlineRidge from "../pool/timberline-ridge.js";
 import _poolTimeEbb from "../pool/time-ebb.js";
 import _poolTimeOfNeed from "../pool/time-of-need.js";
@@ -2046,6 +2047,7 @@ const shard: CardShard = {
     _poolThrullWizard,
     _poolThunderfootBaloth,
     _poolThunderousOrator,
+    _poolTidewalker,
     _poolTimberlineRidge,
     _poolTimeEbb,
     _poolTimeOfNeed,

@@ -744,6 +744,7 @@ import _poolRustedSentinel from "../pool/rusted-sentinel.js";
 import _poolRyuseiTheFallingStar from "../pool/ryusei-the-falling-star.js";
 import _poolSacrifice from "../pool/sacrifice.js";
 import _poolSakashimasStudent from "../pool/sakashimas-student.js";
+import _poolSamiteCenserBearer from "../pool/samite-censer-bearer.js";
 import _poolSamwiseGamgee from "../pool/samwise-gamgee.js";
 import _poolSanguineStatuette from "../pool/sanguine-statuette.js";
 import _poolSaprazzanBailiff from "../pool/saprazzan-bailiff.js";
@@ -1840,6 +1841,7 @@ const shard: CardShard = {
     _poolRyuseiTheFallingStar,
     _poolSacrifice,
     _poolSakashimasStudent,
+    _poolSamiteCenserBearer,
     _poolSamwiseGamgee,
     _poolSanguineStatuette,
     _poolSaprazzanBailiff,

@@ -4031,6 +4031,7 @@ import _poolCandlekeepInspiration from "./pool/candlekeep-inspiration.js";
 import _poolCandlekeepSage from "./pool/candlekeep-sage.js";
 import _poolCandlelightVigil from "./pool/candlelight-vigil.js";
 import _poolCandlelitCavalry from "./pool/candlelit-cavalry.js";
+import _poolCandlesGlow from "./pool/candles-glow.js";
 import _poolCandlesOfLeng from "./pool/candles-of-leng.js";
 import _poolCandlestick from "./pool/candlestick.js";
 import _poolCandletrap from "./pool/candletrap.js";
@@ -8401,6 +8402,7 @@ import _poolElementalAppeal from "./pool/elemental-appeal.js";
 import _poolElementalAugury from "./pool/elemental-augury.js";
 import _poolElementalBond from "./pool/elemental-bond.js";
 import _poolElementalEruption from "./pool/elemental-eruption.js";
+import _poolElementalExpressionist from "./pool/elemental-expressionist.js";
 import _poolElementalMascot from "./pool/elemental-mascot.js";
 import _poolElementalMasterpiece from "./pool/elemental-masterpiece.js";
 import _poolElementalMastery from "./pool/elemental-mastery.js";
@@ -15594,6 +15596,7 @@ import _poolKitsuneDragonsDaughter from "./pool/kitsune-dragons-daughter.js";
 import _poolKitsuneHealer from "./pool/kitsune-healer.js";
 import _poolKitsuneLoreweaver from "./pool/kitsune-loreweaver.js";
 import _poolKitsuneMystic from "./pool/kitsune-mystic.js";
+import _poolKitsunePalliator from "./pool/kitsune-palliator.js";
 import _poolKitsuneRiftwalker from "./pool/kitsune-riftwalker.js";
 import _poolKitsunesTechnique from "./pool/kitsunes-technique.js";
 import _poolKittKantoMayhemDiva from "./pool/kitt-kanto-mayhem-diva.js";
@@ -18836,6 +18839,7 @@ import _poolMuzzioVisionaryArchitect from "./pool/muzzio-visionary-architect.js"
 import _poolMuzzle from "./pool/muzzle.js";
 import _poolMwonvuliAcidMoss from "./pool/mwonvuli-acid-moss.js";
 import _poolMwonvuliBeastTracker from "./pool/mwonvuli-beast-tracker.js";
+import _poolMwonvuliOoze from "./pool/mwonvuli-ooze.js";
 import _poolMyDeckIsAboutASeven from "./pool/my-deck-is-about-a-seven.js";
 import _poolMyPrecious from "./pool/my-precious.js";
 import _poolMycoidMaze from "./pool/mycoid-maze.js";
@@ -19903,6 +19907,7 @@ import _poolOldGrowthEducator from "./pool/old-growth-educator.js";
 import _poolOldGrowthGrove from "./pool/old-growth-grove.js";
 import _poolOldGrowthTroll from "./pool/old-growth-troll.js";
 import _poolOldHobAlleycatBlues from "./pool/old-hob-alleycat-blues.js";
+import _poolOldManOfTheSea from "./pool/old-man-of-the-sea.js";
 import _poolOldManWillow from "./pool/old-man-willow.js";
 import _poolOldOneEye from "./pool/old-one-eye.js";
 import _poolOldRutstein from "./pool/old-rutstein.js";
@@ -23836,6 +23841,7 @@ import _poolRustedRelic from "./pool/rusted-relic.js";
 import _poolRustedSentinel from "./pool/rusted-sentinel.js";
 import _poolRustedSlasher from "./pool/rusted-slasher.js";
 import _poolRusticClachan from "./pool/rustic-clachan.js";
+import _poolRustingGolem from "./pool/rusting-golem.js";
 import _poolRustlerRampage from "./pool/rustler-rampage.js";
 import _poolRustmouthOgre from "./pool/rustmouth-ogre.js";
 import _poolRustrazorButcher from "./pool/rustrazor-butcher.js";
@@ -24028,6 +24034,7 @@ import _poolSamisCuriosity from "./pool/samis-curiosity.js";
 import _poolSamiteAlchemist from "./pool/samite-alchemist.js";
 import _poolSamiteArcher from "./pool/samite-archer.js";
 import _poolSamiteBlessing from "./pool/samite-blessing.js";
+import _poolSamiteCenserBearer from "./pool/samite-censer-bearer.js";
 import _poolSamiteElder from "./pool/samite-elder.js";
 import _poolSamiteHealer from "./pool/samite-healer.js";
 import _poolSamiteHerbalist from "./pool/samite-herbalist.js";
@@ -29743,6 +29750,7 @@ import _poolTidehollowStrix from "./pool/tidehollow-strix.js";
 import _poolTidepoolTurtle from "./pool/tidepool-turtle.js";
 import _poolTideshaperMystic from "./pool/tideshaper-mystic.js";
 import _poolTidespoutTyrant from "./pool/tidespout-tyrant.js";
+import _poolTidewalker from "./pool/tidewalker.js";
 import _poolTidewaterMinion from "./pool/tidewater-minion.js";
 import _poolTidingsOfWar from "./pool/tidings-of-war.js";
 import _poolTidings from "./pool/tidings.js";
@@ -32964,6 +32972,7 @@ import _poolWoeStrider from "./pool/woe-strider.js";
 import _poolWoebearer from "./pool/woebearer.js";
 import _poolWoebringerDemon from "./pool/woebringer-demon.js";
 import _poolWoeleecher from "./pool/woeleecher.js";
+import _poolWojekApothecary from "./pool/wojek-apothecary.js";
 import _poolWojekBodyguard from "./pool/wojek-bodyguard.js";
 import _poolWojekEmbermage from "./pool/wojek-embermage.js";
 import _poolWojekHalberdiers from "./pool/wojek-halberdiers.js";
@@ -38395,6 +38404,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCandlekeepSage,
   _poolCandlelightVigil,
   _poolCandlelitCavalry,
+  _poolCandlesGlow,
   _poolCandlesOfLeng,
   _poolCandlestick,
   _poolCandletrap,
@@ -42765,6 +42775,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElementalAugury,
   _poolElementalBond,
   _poolElementalEruption,
+  _poolElementalExpressionist,
   _poolElementalMascot,
   _poolElementalMasterpiece,
   _poolElementalMastery,
@@ -49958,6 +49969,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKitsuneHealer,
   _poolKitsuneLoreweaver,
   _poolKitsuneMystic,
+  _poolKitsunePalliator,
   _poolKitsuneRiftwalker,
   _poolKitsunesTechnique,
   _poolKittKantoMayhemDiva,
@@ -53200,6 +53212,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMuzzle,
   _poolMwonvuliAcidMoss,
   _poolMwonvuliBeastTracker,
+  _poolMwonvuliOoze,
   _poolMyDeckIsAboutASeven,
   _poolMyPrecious,
   _poolMycoidMaze,
@@ -54267,6 +54280,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOldGrowthGrove,
   _poolOldGrowthTroll,
   _poolOldHobAlleycatBlues,
+  _poolOldManOfTheSea,
   _poolOldManWillow,
   _poolOldOneEye,
   _poolOldRutstein,
@@ -58200,6 +58214,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRustedSentinel,
   _poolRustedSlasher,
   _poolRusticClachan,
+  _poolRustingGolem,
   _poolRustlerRampage,
   _poolRustmouthOgre,
   _poolRustrazorButcher,
@@ -58392,6 +58407,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSamiteAlchemist,
   _poolSamiteArcher,
   _poolSamiteBlessing,
+  _poolSamiteCenserBearer,
   _poolSamiteElder,
   _poolSamiteHealer,
   _poolSamiteHerbalist,
@@ -64107,6 +64123,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTidepoolTurtle,
   _poolTideshaperMystic,
   _poolTidespoutTyrant,
+  _poolTidewalker,
   _poolTidewaterMinion,
   _poolTidingsOfWar,
   _poolTidings,
@@ -67328,6 +67345,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWoebearer,
   _poolWoebringerDemon,
   _poolWoeleecher,
+  _poolWojekApothecary,
   _poolWojekBodyguard,
   _poolWojekEmbermage,
   _poolWojekHalberdiers,
@@ -72772,6 +72790,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/candlekeep-sage": _poolCandlekeepSage,
   "pool/candlelight-vigil": _poolCandlelightVigil,
   "pool/candlelit-cavalry": _poolCandlelitCavalry,
+  "pool/candles-glow": _poolCandlesGlow,
   "pool/candles-of-leng": _poolCandlesOfLeng,
   "pool/candlestick": _poolCandlestick,
   "pool/candletrap": _poolCandletrap,
@@ -77142,6 +77161,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elemental-augury": _poolElementalAugury,
   "pool/elemental-bond": _poolElementalBond,
   "pool/elemental-eruption": _poolElementalEruption,
+  "pool/elemental-expressionist": _poolElementalExpressionist,
   "pool/elemental-mascot": _poolElementalMascot,
   "pool/elemental-masterpiece": _poolElementalMasterpiece,
   "pool/elemental-mastery": _poolElementalMastery,
@@ -84335,6 +84355,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kitsune-healer": _poolKitsuneHealer,
   "pool/kitsune-loreweaver": _poolKitsuneLoreweaver,
   "pool/kitsune-mystic": _poolKitsuneMystic,
+  "pool/kitsune-palliator": _poolKitsunePalliator,
   "pool/kitsune-riftwalker": _poolKitsuneRiftwalker,
   "pool/kitsunes-technique": _poolKitsunesTechnique,
   "pool/kitt-kanto-mayhem-diva": _poolKittKantoMayhemDiva,
@@ -87577,6 +87598,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/muzzle": _poolMuzzle,
   "pool/mwonvuli-acid-moss": _poolMwonvuliAcidMoss,
   "pool/mwonvuli-beast-tracker": _poolMwonvuliBeastTracker,
+  "pool/mwonvuli-ooze": _poolMwonvuliOoze,
   "pool/my-deck-is-about-a-seven": _poolMyDeckIsAboutASeven,
   "pool/my-precious": _poolMyPrecious,
   "pool/mycoid-maze": _poolMycoidMaze,
@@ -88644,6 +88666,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/old-growth-grove": _poolOldGrowthGrove,
   "pool/old-growth-troll": _poolOldGrowthTroll,
   "pool/old-hob-alleycat-blues": _poolOldHobAlleycatBlues,
+  "pool/old-man-of-the-sea": _poolOldManOfTheSea,
   "pool/old-man-willow": _poolOldManWillow,
   "pool/old-one-eye": _poolOldOneEye,
   "pool/old-rutstein": _poolOldRutstein,
@@ -92577,6 +92600,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rusted-sentinel": _poolRustedSentinel,
   "pool/rusted-slasher": _poolRustedSlasher,
   "pool/rustic-clachan": _poolRusticClachan,
+  "pool/rusting-golem": _poolRustingGolem,
   "pool/rustler-rampage": _poolRustlerRampage,
   "pool/rustmouth-ogre": _poolRustmouthOgre,
   "pool/rustrazor-butcher": _poolRustrazorButcher,
@@ -92769,6 +92793,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/samite-alchemist": _poolSamiteAlchemist,
   "pool/samite-archer": _poolSamiteArcher,
   "pool/samite-blessing": _poolSamiteBlessing,
+  "pool/samite-censer-bearer": _poolSamiteCenserBearer,
   "pool/samite-elder": _poolSamiteElder,
   "pool/samite-healer": _poolSamiteHealer,
   "pool/samite-herbalist": _poolSamiteHerbalist,
@@ -98484,6 +98509,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tidepool-turtle": _poolTidepoolTurtle,
   "pool/tideshaper-mystic": _poolTideshaperMystic,
   "pool/tidespout-tyrant": _poolTidespoutTyrant,
+  "pool/tidewalker": _poolTidewalker,
   "pool/tidewater-minion": _poolTidewaterMinion,
   "pool/tidings-of-war": _poolTidingsOfWar,
   "pool/tidings": _poolTidings,
@@ -101705,6 +101731,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/woebearer": _poolWoebearer,
   "pool/woebringer-demon": _poolWoebringerDemon,
   "pool/woeleecher": _poolWoeleecher,
+  "pool/wojek-apothecary": _poolWojekApothecary,
   "pool/wojek-bodyguard": _poolWojekBodyguard,
   "pool/wojek-embermage": _poolWojekEmbermage,
   "pool/wojek-halberdiers": _poolWojekHalberdiers,

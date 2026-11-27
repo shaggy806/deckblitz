@@ -600,6 +600,7 @@ import _poolMossbridgeTroll from "../pool/mossbridge-troll.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
 import _poolMressCrewCoordinator from "../pool/mress-crew-coordinator.js";
 import _poolMutatedCultist from "../pool/mutated-cultist.js";
+import _poolMwonvuliOoze from "../pool/mwonvuli-ooze.js";
 import _poolMyojinOfNightsReachAndGrimBetrayal from "../pool/myojin-of-nights-reach-and-grim-betrayal.js";
 import _poolMysterioMasterOfIllusion from "../pool/mysterio-master-of-illusion.js";
 import _poolMysticReflection from "../pool/mystic-reflection.js";
@@ -1673,6 +1674,7 @@ const shard: CardShard = {
     _poolMountainValley,
     _poolMressCrewCoordinator,
     _poolMutatedCultist,
+    _poolMwonvuliOoze,
     _poolMyojinOfNightsReachAndGrimBetrayal,
     _poolMysterioMasterOfIllusion,
     _poolMysticReflection,

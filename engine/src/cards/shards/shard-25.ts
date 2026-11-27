@@ -1006,6 +1006,7 @@ import _poolWinterEladrin from "../pool/winter-eladrin.js";
 import _poolWinterSky from "../pool/winter-sky.js";
 import _poolWintersGrasp from "../pool/winters-grasp.js";
 import _poolWitherscaleWurm from "../pool/witherscale-wurm.js";
+import _poolWojekApothecary from "../pool/wojek-apothecary.js";
 import _poolWolverinePack from "../pool/wolverine-pack.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
@@ -2054,6 +2055,7 @@ const shard: CardShard = {
     _poolWinterSky,
     _poolWintersGrasp,
     _poolWitherscaleWurm,
+    _poolWojekApothecary,
     _poolWolverinePack,
     _poolWondrousRevival,
     _poolWoodedBastion,

@@ -104,6 +104,7 @@ import _poolCadaverousBloom from "../pool/cadaverous-bloom.js";
 import _poolCaitSithFortuneTeller from "../pool/cait-sith-fortune-teller.js";
 import _poolCalamityGallopingInferno from "../pool/calamity-galloping-inferno.js";
 import _poolCandlekeepSage from "../pool/candlekeep-sage.js";
+import _poolCandlesGlow from "../pool/candles-glow.js";
 import _poolCanopyGargantuan from "../pool/canopy-gargantuan.js";
 import _poolCaptainOfUmbar from "../pool/captain-of-umbar.js";
 import _poolCaptainRexNebula from "../pool/captain-rex-nebula.js";
@@ -1104,6 +1105,7 @@ const shard: CardShard = {
     _poolCaitSithFortuneTeller,
     _poolCalamityGallopingInferno,
     _poolCandlekeepSage,
+    _poolCandlesGlow,
     _poolCanopyGargantuan,
     _poolCaptainOfUmbar,
     _poolCaptainRexNebula,
