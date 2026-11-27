@@ -9,6 +9,7 @@ import _poolAbdelAdrianGorionsWard from "../pool/abdel-adrian-gorions-ward.js";
 import _poolAbduction from "../pool/abduction.js";
 import _poolAberrantManawurm from "../pool/aberrant-manawurm.js";
 import _poolAbolisherOfBloodlines from "../pool/abolisher-of-bloodlines.js";
+import _poolAboroth from "../pool/aboroth.js";
 import _poolAbsoluteGrace from "../pool/absolute-grace.js";
 import _poolAbsoluteLaw from "../pool/absolute-law.js";
 import _poolAbsorbingMan from "../pool/absorbing-man.js";
@@ -1136,6 +1137,7 @@ const shard: CardShard = {
     _poolAbduction,
     _poolAberrantManawurm,
     _poolAbolisherOfBloodlines,
+    _poolAboroth,
     _poolAbsoluteGrace,
     _poolAbsoluteLaw,
     _poolAbsorbingMan,

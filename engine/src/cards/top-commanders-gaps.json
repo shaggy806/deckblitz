@@ -96,6 +96,7 @@
     "bug:turn-history-exclude-self-stint",
     "effect:phase-in",
     "filter:creature-or-spell-source",
+    "cost:cumulative-upkeep-non-mana",
     "replacement:as-turned-face-up-dynamic-counters",
     "static:counter-cap",
     "condition:started-turn-untapped",

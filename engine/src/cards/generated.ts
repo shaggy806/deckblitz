@@ -71,6 +71,7 @@ import _poolAbominationOfLlanowar from "./pool/abomination-of-llanowar.js";
 import _poolAbominationTerrifyingTitan from "./pool/abomination-terrifying-titan.js";
 import _poolAbominationWorldRavager from "./pool/abomination-world-ravager.js";
 import _poolAbomination from "./pool/abomination.js";
+import _poolAboroth from "./pool/aboroth.js";
 import _poolAboshanCephalidEmperor from "./pool/aboshan-cephalid-emperor.js";
 import _poolAboshansDesire from "./pool/aboshans-desire.js";
 import _poolAboutFace from "./pool/about-face.js";
@@ -34445,6 +34446,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAbominationTerrifyingTitan,
   _poolAbominationWorldRavager,
   _poolAbomination,
+  _poolAboroth,
   _poolAboshanCephalidEmperor,
   _poolAboshansDesire,
   _poolAboutFace,
@@ -68832,6 +68834,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/abomination-terrifying-titan": _poolAbominationTerrifyingTitan,
   "pool/abomination-world-ravager": _poolAbominationWorldRavager,
   "pool/abomination": _poolAbomination,
+  "pool/aboroth": _poolAboroth,
   "pool/aboshan-cephalid-emperor": _poolAboshanCephalidEmperor,
   "pool/aboshans-desire": _poolAboshansDesire,
   "pool/about-face": _poolAboutFace,

@@ -17,7 +17,9 @@ import {
   lands,
   life,
   nextTurn,
+  pickModes,
   ref,
+  settle,
   spawn,
   table,
   toGraveyard,
@@ -124,6 +126,24 @@ describe("batch 343 (lead)", () => {
     // Two creatures dealt 2 each: one trigger, 4 damage to Pyroclasm's caster.
     expect(life(game, A)).toBe(16);
     expect(life(game, B)).toBe(20);
+  });
+
+  it("Aboroth pays cumulative upkeep with a -1/-1 counter for each age counter, or is sacrificed", () => {
+    const { game, a } = table();
+    const aboroth = spawn(game, "Aboroth");
+    pickModes(a, 0);
+    toStep(game, "upkeep");
+    settle(game);
+    expect(counters(game, aboroth, "age")).toBe(1);
+    expect(counters(game, aboroth, "-1/-1")).toBe(1);
+    toStep(game, "upkeep");
+    settle(game);
+    expect(counters(game, aboroth, "age")).toBe(2);
+    expect(counters(game, aboroth, "-1/-1")).toBe(3);
+    pickModes(a);
+    toStep(game, "upkeep");
+    settle(game);
+    expect(zone(game, aboroth)).toBe("graveyard");
   });
 
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {
