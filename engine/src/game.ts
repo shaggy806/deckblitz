@@ -64221,7 +64221,15 @@ controlledBy,
     // Its "as this is turned face up" — the copy's, if it's become one (rule
     // 708.11: one it has after it's turned face up applies as it is).
     const as = this.registry.get(rulesTextName(object)).asTurnedFaceUp;
-    if (as !== undefined && "counters" in as) this.addCounter(ref, "+1/+1", as.counters, false, player);
+    // A count is read as it's turned (Crowd-Control Warden's "the number of
+    // other creatures you control").
+    if (as !== undefined && "counters" in as) {
+      const n =
+        typeof as.counters === "number"
+          ? as.counters
+          : Math.max(0, Math.floor(amountValue(as.counters, this.makeResolutionContext(id, object.controller, [], x))));
+      this.addCounter(ref, "+1/+1", n, false, player);
+    }
     // Anything else it says (Gift of Doom's "you may attach it to a
     // creature") is done the next time priority is looked at, ahead of the
     // state-based actions (rule 704.3) — see `applyNextAsTurnedFaceUp`.

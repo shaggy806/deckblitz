@@ -6555,9 +6555,15 @@ export interface CardDefinition {
    * enter), however it's turned. `effect` is anything else it says happens
    * as it's turned face up, done by its controller before anyone can act and
    * with nothing targeted (Gift of Doom's "you may attach it to a creature":
-   * an `attach` to a host chosen `among`). Absent for none.
+   * an `attach` to a host chosen `among`). Absent for none. `counters` may
+   * be a count, read from its controller's side as it's turned face up:
+   * "as this creature enters or is turned face up, put X +1/+1 counters on
+   * it, where X is the number of other creatures you control" (Crowd-Control
+   * Warden: `{ countOf: { type: "creature", controlledBy: "you" },
+   * excludeSelf: true }`, beside an `enters-battlefield` replacement for the
+   * entering half).
    */
-  readonly asTurnedFaceUp?: { readonly counters: number } | { readonly effect: EffectSpec };
+  readonly asTurnedFaceUp?: { readonly counters: EffectAmount } | { readonly effect: EffectSpec };
   /**
    * "**As this Equipment becomes attached** to a creature, choose a creature
    * card name and a creature type" (Psychic Paper): a static ability that
@@ -7387,7 +7393,7 @@ interface CardDraft {
   evoke?: NonNullable<CardDefinition["evoke"]>;
   prototype?: { readonly cost: string; readonly power: number; readonly toughness: number };
   morph?: MorphCost;
-  asTurnedFaceUp?: { readonly counters: number } | { readonly effect: EffectSpec };
+  asTurnedFaceUp?: { readonly counters: EffectAmount } | { readonly effect: EffectSpec };
   asBecomesAttached?: { readonly effect: EffectSpec };
   suspend?: { readonly n: number | "x"; readonly cost: string };
   cycling?: CyclingAbility;
