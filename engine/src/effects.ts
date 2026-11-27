@@ -859,7 +859,10 @@ export type EffectAmount =
    * } }`); `count: "colors"` is converge's "the number of colors of mana spent
    * to cast this spell" (rule 207.2c; colourless isn't a colour, and a copy or
    * a free cast reads 0); `per: 2` is "for each {G}{G} spent". `"this-ability"`
-   * reads the activated ability that's resolving instead (rule 602.2b).
+   * reads the activated ability that's resolving instead (rule 602.2b) — or,
+   * for a trigger on a cumulative upkeep's payment (`cumulative-upkeep-paid`),
+   * the mana "spent this way" (Balduvian Fallen: `{ manaSpentOf:
+   * "this-ability", type: ["B", "R"] }`).
    */
   | ({ readonly manaSpentOf: ObjectRef | "this-ability" } & ManaSpentQuery)
   /**

@@ -26756,4 +26756,23 @@ describe("costs-mana lane, 2026-11-27: granted cumulative upkeep, its paid mana,
     expect(parsed.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", colors: ["G"] } });
     expect(parsed.static[0].grantsTriggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "you" });
   });
+
+  it("Balduvian Fallen: the payment trigger, +1/+0 for each {B} or {R} spent this way", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Zombie",
+      mana_cost: "{3}{B}",
+      oracle_text:
+        "Cumulative upkeep {1}\nWhenever this creature's cumulative upkeep is paid, it gets +1/+0 until end of turn for each {B} or {R} spent this way.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.triggered[1].trigger).toEqual({ on: "event", event: "cumulative-upkeep-paid", who: "self" });
+    expect(parsed.triggered[1].effect).toEqual({
+      kind: "modify-pt",
+      target: "source",
+      power: { manaSpentOf: "this-ability", type: ["B", "R"] },
+      toughness: 0,
+      duration: "end-of-turn",
+    });
+  });
 });

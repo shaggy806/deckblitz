@@ -3385,7 +3385,10 @@ export function parseTrigger(clause) {
   }
   // Announced once the payment for every age counter is made (Hibernation's
   // End).
-  if (/^Whenever you pay (?:~|this (?:creature|permanent|artifact|enchantment|land))'s cumulative upkeep$/.test(c)) {
+  if (
+    /^Whenever you pay (?:~|this (?:creature|permanent|artifact|enchantment|land))'s cumulative upkeep$/.test(c) ||
+    /^Whenever (?:~|this (?:creature|permanent|artifact|enchantment|land))'s cumulative upkeep is paid$/.test(c)
+  ) {
     return [{ on: "event", event: "cumulative-upkeep-paid", who: "self" }];
   }
   // Rule 702.26b-c; phasing out looks back (603.10b) — Teferi's Imp.
@@ -3977,6 +3980,18 @@ const CREATE_THEN_MILL = /^(create [^,]+), then (mill (?:a card|[a-z]+ cards))\.
 
 export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
+  // "It gets +1/+0 until end of turn for each {B} or {R} spent this way"
+  // (Balduvian Fallen, on its cumulative upkeep's payment): the mana that
+  // payment spent, `{ manaSpentOf: "this-ability" }`. Above the bar on "for
+  // each" sentences further down.
+  {
+    const m = /^it gets ([+-]\d+)\/([+-]\d+) until end of turn for each \{([WUBRGC])\}(?: or \{([WUBRGC])\})? spent this way\.$/i.exec(s);
+    if (m !== null && ctx?.it === "source" && (ctx.targets ?? []).length === 0) {
+      const each = { manaSpentOf: "this-ability", type: m[4] === undefined ? m[3] : [m[3], m[4]] };
+      const times = (n) => (n === 0 ? 0 : n === 1 ? each : { product: [n, each] });
+      return { kind: "modify-pt", target: "source", power: times(Number(m[1])), toughness: times(Number(m[2])), duration: "end-of-turn" };
+    }
+  }
   // "Add mana equal to enchanted permanent's mana cost" (Elemental
   // Resonance): `{ manaCostOf }`, read as it resolves.
   if (/^add mana equal to enchanted (?:permanent|creature|artifact|land)'s mana cost\.$/i.test(s)) {
@@ -24209,6 +24224,8 @@ function itOf(triggers) {
   // "Whenever Ma Chao attacks alone, it …"; "whenever this creature evolves, …
   // a copy of it".
   if (triggers.every((t) => (t.on === "attacks-alone" || t.on === "evolves") && t.who === "self")) return "source";
+  // "Whenever this creature's cumulative upkeep is paid, it …" (Balduvian Fallen).
+  if (triggers.every((t) => t.on === "event" && t.event === "cumulative-upkeep-paid" && t.who === "self")) return "source";
   const objectEvents = ["enters-battlefield", "dies", "attacks", "blocks", "becomes-blocked", "deals-combat-damage-to-player", "tapped-for-mana"];
   if (triggers.every((t) => t.who === "self" && objectEvents.includes(t.on))) return "source";
   // The permanent a spell or ability targeted ("that creature" — Monk Gyatso).

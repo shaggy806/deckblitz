@@ -133,6 +133,11 @@ export type GameEvent =
       readonly type: "cumulative-upkeep-paid";
       readonly player: PlayerId;
       readonly object: ObjectId;
+      /** The mana spent on it, a unit each (none for a life or sacrifice
+       * cost): a trigger on this event reads it as the mana "spent this
+       * way" (Balduvian Fallen's "for each {B} or {R} spent this way"),
+       * `{ manaSpentOf: "this-ability" }`. */
+      readonly manaSpent?: readonly SpentMana[];
     })
   | (Base & {
       /** `controller` begins making `controlled`'s decisions (rule 723). */

@@ -10656,6 +10656,7 @@ export class Game {
     // payment falls back to the decline branch rather than giving it away.
     let chosen = [...modeIndices];
     let chosenX = 0;
+    let cumulativeSpent: readonly SpentMana[] | undefined;
     // A `may`'s life and energy are part of the same cost: all of it is paid,
     // or none (a board that moved since the question was asked declines).
     const costLife = awaiting.costLife ?? 0;
@@ -10684,7 +10685,12 @@ export class Game {
             ? this.modesCostSacrificePlan(player, source, awaiting.costSacrifice, concrete, purpose)
             : this.payMana(player, concrete, undefined, undefined, purpose);
         if (payment === null || payment === "no-mana") chosen = [];
-        else this.executePayment(player, payment);
+        else {
+          const spent = this.executePayment(player, payment);
+          // A cumulative upkeep's mana is what its `cumulative-upkeep-paid`
+          // announces as spent: the trigger asking has no mana of its own.
+          if (awaiting.costFor === "cumulative-upkeep") cumulativeSpent = spent;
+        }
       }
     } else if (
       chosen.length > 0 &&
@@ -10746,7 +10752,11 @@ export class Game {
       1,
       0,
       targetZones,
-      modesBy === undefined ? lastKnownRefs : { ...lastKnownRefs, player },
+      {
+        ...lastKnownRefs,
+        ...(modesBy !== undefined ? { player } : {}),
+        ...(cumulativeSpent !== undefined ? { manaSpent: cumulativeSpent } : {}),
+      },
       identity,
     );
     // The trigger the question was asked in is resolving again while its
@@ -39570,6 +39580,9 @@ export class Game {
     // as it resolved (rule 106.12a), not what is in the pool by the time
     // this resolves.
     const manaProduced = event.type === "permanent-tapped-for-mana" ? event.produced : undefined;
+    // "For each {B} or {R} spent this way" (Balduvian Fallen): the mana a
+    // cumulative upkeep's payment spent, the trigger's own to read.
+    const manaSpent = event.type === "cumulative-upkeep-paid" ? event.manaSpent : undefined;
     // "Those results": the roll it triggered on, whatever is rolled next.
     const roll = event.type === "dice-rolled" ? rollOfEvent(event) : undefined;
     // "Them" of a generic trigger whose row names a batch: "a card you put
@@ -39586,6 +39599,7 @@ export class Game {
       attackers === undefined &&
       counters === undefined &&
       manaProduced === undefined &&
+      manaSpent === undefined &&
       batch === undefined
     ) {
       return undefined;
@@ -39604,6 +39618,7 @@ export class Game {
       ...(attackers !== undefined ? { attackers } : {}),
       ...(counters !== undefined ? { counters } : {}),
       ...(manaProduced !== undefined ? { manaProduced } : {}),
+      ...(manaSpent !== undefined ? { manaSpent } : {}),
     };
   }
 
@@ -45093,7 +45108,16 @@ export class Game {
         for (let i = 0; i < times && i < Game.MAX_EFFECT_INSTANCES; i += 1) this.emit({ type: "investigated", player });
       },
       cumulativeUpkeepUnpaid: () => this.emit({ type: "cumulative-upkeep-unpaid", player: controller, object: source }),
-      cumulativeUpkeepPaid: () => this.emit({ type: "cumulative-upkeep-paid", player: controller, object: source }),
+      // The mana its payment spent rides on the event (the modes' payment put
+      // it in `refs.manaSpent` — `applyModesChoice`): "for each {B} or {R}
+      // spent this way" (Balduvian Fallen).
+      cumulativeUpkeepPaid: () =>
+        this.emit({
+          type: "cumulative-upkeep-paid",
+          player: controller,
+          object: source,
+          ...(refs.manaSpent !== undefined && refs.manaSpent.length > 0 ? { manaSpent: refs.manaSpent } : {}),
+        }),
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
       addMana: (player, mana, amount, spec) => {
         this.addMana(

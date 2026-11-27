@@ -2751,7 +2751,9 @@ export interface ChoosePermanentsResolution {
 export interface LastKnownRefs {
   /** For an activated ability: the mana spent to activate it (rule 602.2b),
    * "if mana from a Treasure was spent to activate this ability". It goes
-   * with the refs so a resolution parked on a decision still has it. */
+   * with the refs so a resolution parked on a decision still has it. For a
+   * trigger on a cumulative upkeep's payment (`cumulative-upkeep-paid`): the
+   * mana that payment spent, "spent this way" (Balduvian Fallen). */
   readonly manaSpent?: readonly SpentMana[];
   /** For a triggered ability on a roll: that roll, so "those results" are
    * still its own if another is rolled before it resolves. For an activated
