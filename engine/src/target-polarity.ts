@@ -503,7 +503,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // (Moratorium Stone): the target is hurt with them.
     v.touch(n.filter?.sameNameWith, "harm", MAJOR);
   },
-  flicker: (n, v) => v.touch(n.target, "help", MINOR),
+  // A blink helps; exiled until a watch fires (Tawnos's Coffin's "when this
+  // artifact becomes untapped") is removal for as long as its controller likes.
+  flicker: (n, v) =>
+    n.returnAt !== undefined && "whenever" in n.returnAt ? v.touch(n.target, "harm", MAJOR) : v.touch(n.target, "help", MINOR),
   "return-flickered": none,
   // Melding (rule 701.42) targets nothing: both cards are your own.
   meld: none,
