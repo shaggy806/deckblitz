@@ -28071,6 +28071,11 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^The chosen player's maximum hand size is ${N}\\.$`).exec(line)) && typeof numberOf(m[1]) === "number") {
     return { affects: { scope: "self" }, maxHandSize: { who: "chosen-player", set: numberOf(m[1]) }, text };
   }
+  // Thought Eater's "your maximum hand size is reduced by three", Gnat
+  // Miser's "each opponent's maximum hand size is reduced by one".
+  if ((m = new RegExp(`^(Your|Each opponent's) maximum hand size is reduced by ${N}\\.$`).exec(line)) && typeof numberOf(m[2]) === "number") {
+    return { affects: { scope: "self" }, maxHandSize: { who: m[1] === "Your" ? "you" : "opponents", adjust: -numberOf(m[2]) }, text };
+  }
   // Midnight Oil's "your maximum hand size is equal to the number of hour
   // counters on this enchantment".
   if ((m = /^Your maximum hand size is equal to the number of ([a-z+\/-]+) counters on (?:this [a-z]+|~)\.$/.exec(line))) {

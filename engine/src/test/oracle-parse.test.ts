@@ -6193,6 +6193,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         text: "The chosen player's maximum hand size is four.",
       },
     ]);
+    // Thought Eater, Gnat Miser: a maximum hand size reduced by a number.
+    expect(face("Flying\nYour maximum hand size is reduced by three.", "Creature — Horror").static?.[0]?.maxHandSize).toEqual({
+      who: "you",
+      adjust: -3,
+    });
+    expect(face("Each opponent's maximum hand size is reduced by one.", "Creature — Rat Shaman").static?.[0]?.maxHandSize).toEqual({
+      who: "opponents",
+      adjust: -1,
+    });
     expect(face("As this creature enters, choose a player.", "Creature — Construct").choosePlayerOnEnter).toBe("player");
     // Sawhorn Nemesis: the chosen player's side, doubled.
     const nemesis = face(

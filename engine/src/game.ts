@@ -13313,6 +13313,12 @@ export class Game {
       if (effect.noMaxHandSize?.includes(player) === true) {
         changes.push({ timestamp: effect.timestamp ?? 0, apply: () => Infinity });
       }
+      // "Your maximum hand size is reduced by three for the rest of the game"
+      // (Inspired Idea).
+      const adjust = effect.maxHandSizeAdjust;
+      if (adjust !== undefined && effect.owner === player) {
+        changes.push({ timestamp: effect.timestamp ?? 0, apply: (size) => size + adjust });
+      }
     }
     // One an Aura gave a permanent they control (Nerd Rage): that permanent's
     // "you" is its controller, not the Aura's.
@@ -48260,7 +48266,10 @@ controlledBy,
           effect = { ...effect, castAsThoughFlash: { ...flash, filter: { ...rest, subtype: chosen } } };
         }
         const madeBy = this.madeByOf(source);
-        const stamped = effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() };
+        const stamped =
+          effect.noMaxHandSize === undefined && effect.maxHandSizeAdjust === undefined
+            ? effect
+            : { ...effect, timestamp: this.freshTimestamp() };
         const made = madeBy === undefined ? stamped : { ...stamped, madeBy };
         // "During their next turn": nothing until that turn begins.
         if (during !== undefined) {

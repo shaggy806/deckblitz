@@ -6711,6 +6711,9 @@ export interface PlayerEffect {
   /** These players have no maximum hand size (rule 402.2) — applied at its
    * `timestamp`, as every effect on the rules of the game is (rule 613.11). */
   readonly noMaxHandSize?: readonly PlayerId[];
+  /** `owner`'s maximum hand size changes by this much (Inspired Idea's
+   * "reduced by three for the rest of the game"), at `timestamp`. */
+  readonly maxHandSizeAdjust?: number;
   readonly timestamp?: number;
   /** Matching spells `owner` casts cost this much generic mana less — the
    * amount read as the effect was created (rule 611.2b). */

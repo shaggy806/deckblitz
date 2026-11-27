@@ -8143,6 +8143,13 @@ export type EffectSpec =
       /** "You have no maximum hand size until your next turn" (Enter the
        * Infinite), "… for the rest of the game" (Praetor's Counsel). */
       readonly noMaxHandSize?: PlayerScope;
+      /** "Your maximum hand size is reduced by three for the rest of the
+       * game" (Inspired Idea, `-3` with `duration: "permanent"`): the
+       * effect's player's maximum hand size changes by this much — a number
+       * as written, negative for a reduction; any other amount read as this
+       * resolves (rule 611.2b), never below 0 — applied at its timestamp
+       * with the other hand-size effects (rule 613.11). */
+      readonly maxHandSizeAdjust?: EffectAmount;
       /** `allCasters`: every player's matching spells, not only the
        * controller's — Cheering Fanatic's "spells with the chosen name cost
        * {1} less to cast this turn". */
@@ -24606,6 +24613,14 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         // A `during` effect is held until that turn (`laterPlayerEffects`).
         expires: "expires" in lasts ? lasts.expires : "end-of-turn",
         ...(spec.noMaxHandSize !== undefined ? { noMaxHandSize: ctx.playersInScope(spec.noMaxHandSize) } : {}),
+        // A literal is taken as written, a reduction negative (an amount read
+        // through `amountValue` is never below 0).
+        ...(spec.maxHandSizeAdjust !== undefined
+          ? {
+              maxHandSizeAdjust:
+                typeof spec.maxHandSizeAdjust === "number" ? spec.maxHandSizeAdjust : amountValue(spec.maxHandSizeAdjust, ctx),
+            }
+          : {}),
         ...(spec.reduceSpells !== undefined
           ? {
               reduceSpells: {
