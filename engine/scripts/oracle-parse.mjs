@@ -21752,7 +21752,9 @@ function parseFaceAsWritten(face, ctx = {}) {
       // battlefield tapped" (Torrent Elemental): an ability that moves its
       // card out of that zone works only there (rule 113.6m), the card
       // staying put until it resolves.
-      const selfOut = /^(?:Return|Put) ~ from (your graveyard|exile) (?:to|onto) the battlefield( tapped)?\.$/.exec(rest);
+      // "From your graveyard or from exile" (Mister Immortal) is one ability
+      // working from both (`zone` a list).
+      const selfOut = /^(?:Return|Put) ~ from (your graveyard or from exile|your graveyard|exile) (?:to|onto) the battlefield( tapped)?\.$/.exec(rest);
       // Mana costs alone: the cost parser reads "tap an untapped creature you
       // control" and "sacrifice two Blood tokens" as a permanent's (with
       // `includeSelf`, without Blood's artifact type), not a graveyard card's.
@@ -21780,7 +21782,7 @@ function parseFaceAsWritten(face, ctx = {}) {
       }
       if (selfOut !== null && ability.zone === undefined && manaOnly) {
         Object.assign(ability, {
-          zone: selfOut[1] === "exile" ? "exile" : "graveyard",
+          zone: selfOut[1] === "exile" ? "exile" : selfOut[1] === "your graveyard" ? "graveyard" : ["graveyard", "exile"],
           staysInZone: true,
           effect: { kind: "put-onto-battlefield", target: "source", ...(selfOut[2] !== undefined ? { enterTapped: true } : {}) },
         });

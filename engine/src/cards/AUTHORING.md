@@ -5784,6 +5784,13 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
     an ability that moves its card out of a zone works only there (rule
     113.6m) — with `staysInZone: true` and `put-onto-battlefield` on
     `"source"`. The scaffolder reads it, and the graveyard form.
+  - **A list** is one ability working from any of its zones: Mister
+    Immortal's "{2}{G}: Return this card from your graveyard or from exile
+    to the battlefield tapped" is `zone: ["graveyard", "exile"]` with
+    `staysInZone: true`. Each activation works (and pays) as the ability of
+    the zone the card is in then. Engine code reads it through
+    `activatesFrom` / `activationZoneNow`, never `ability.zone === …`. The
+    scaffolder reads that line.
 
   When the source stays put (`"command"`, or `staysInZone`), the ability
   remembers *which object* it was activated from: if the card changes zones

@@ -32,7 +32,7 @@ import type { Color } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameState } from "./state.js";
 import { rulesTextName } from "./state.js";
-import { isManaAbility } from "./abilities.js";
+import { activatesFrom, isManaAbility } from "./abilities.js";
 
 /** Lands a Commander deck wants before more of them are flood. */
 const LANDS_WANTED = 7;
@@ -70,7 +70,7 @@ function castableFromGraveyard(registry: CardRegistry, name: string): boolean {
     def.retrace ||
     def.escape !== null ||
     def.disturb !== null ||
-    (def.activated ?? []).some((a) => a.zone === "graveyard")
+    (def.activated ?? []).some((a) => activatesFrom(a, "graveyard"))
   );
 }
 

@@ -37,7 +37,7 @@
  * feature is good for you.
  */
 
-import { costLosesSource, isManaAbility } from "../abilities.js";
+import { activatesFrom, costLosesSource, isManaAbility } from "../abilities.js";
 import { journalTotal } from "../journal.js";
 import type { TriggeredAbility } from "../abilities.js";
 import {
@@ -453,7 +453,7 @@ function castableFromGraveyard(registry: CardRegistry, object: GameObject): bool
     def.escape !== null ||
     def.disturb !== null ||
     def.mayPlaySelf?.from.includes("graveyard") === true ||
-    (def.activated ?? []).some((a) => a.zone === "graveyard")
+    (def.activated ?? []).some((a) => activatesFrom(a, "graveyard"))
   );
 }
 

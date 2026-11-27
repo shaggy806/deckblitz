@@ -99,13 +99,13 @@ function extraZones(def) {
   const graveyardCast = ["flashback", "escape", "retrace", "disturb", "harmonize", "mayhem", "aftermath", "dredge", "embalm", "eternalize", "unearth", "scavenge"];
   if (
     graveyardCast.some((k) => Boolean(def[k])) ||
-    def.activated.some((a) => a.zone === "graveyard") ||
+    def.activated.some((a) => a.zone === "graveyard" || (Array.isArray(a.zone) && a.zone.includes("graveyard"))) ||
     def.triggered.some((t) => t.fromGraveyard) ||
     /"zone":"graveyard"/.test(json(def.static))
   ) {
     zones.push("graveyard");
   }
-  if (def.activated.some((a) => a.zone === "exile") || /"zone":"exile"/.test(json(def.static))) zones.push("exile");
+  if (def.activated.some((a) => a.zone === "exile" || (Array.isArray(a.zone) && a.zone.includes("exile"))) || /"zone":"exile"/.test(json(def.static))) zones.push("exile");
   return zones;
 }
 

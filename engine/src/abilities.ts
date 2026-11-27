@@ -1018,7 +1018,14 @@ export interface ActivatedAbility {
    *   (602.2), or any player's with `anyPlayer`. `"source"` is the spell while it's still
    *   that object on the stack (rule 400.7), as with `"command"`.
    */
-  readonly zone?: "hand" | "graveyard" | "command" | "suspended" | "exile" | "stack";
+  /**
+   * - a list — one ability that works from any of several zones (Mister
+   *   Immortal: "{2}{G}: Return this card from your graveyard or from exile
+   *   to the battlefield tapped"). Each time it's activated it works from the
+   *   zone its card is in then, and pays as that zone's ability does; read it
+   *   through `activatesFrom` and `activationZoneNow`, never `=== zone`.
+   */
+  readonly zone?: ActivationZone | readonly ActivationZone[];
   /**
    * A `zone: "graveyard"` ability whose cost *doesn't* exile the card
    * (Reassembling Skeleton: "{1}{B}: Return this card from your graveyard to
@@ -3429,6 +3436,32 @@ export interface EvidenceAmong {
   readonly filter: CardFilter;
   readonly except: ObjectId;
   readonly symbolsOf?: Color;
+}
+
+/** A zone an activated ability works from other than the battlefield
+ * (`ActivatedAbility.zone`). */
+export type ActivationZone = "hand" | "graveyard" | "command" | "suspended" | "exile" | "stack";
+
+/** Whether `ability` works from `zone` (`ActivatedAbility.zone`, one zone or
+ * several). */
+export function activatesFrom(ability: Pick<ActivatedAbility, "zone">, zone: ActivationZone): boolean {
+  const zones = ability.zone;
+  return zones === undefined ? false : typeof zones === "string" ? zones === zone : zones.includes(zone);
+}
+
+/** The zone `ability` works from for a source in `sourceZone` (suspended or
+ * not): its one zone, or — for a list (Mister Immortal) — the listed one the
+ * card is in now, `undefined` when it's in none of them. A battlefield
+ * ability is `undefined` too. */
+export function activationZoneNow(
+  ability: Pick<ActivatedAbility, "zone">,
+  sourceZone: string | undefined,
+  suspended: boolean,
+): ActivationZone | undefined {
+  const zones = ability.zone;
+  if (zones === undefined || typeof zones === "string") return zones;
+  if (suspended && zones.includes("suspended")) return "suspended";
+  return zones.find((zone) => zone !== "suspended" && zone === sourceZone);
 }
 
 /** A mana ability adds mana, has no targets, and never uses the stack. A cost

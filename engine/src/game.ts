@@ -16,6 +16,8 @@ import type { CardPlayPermission, EffectPlay, PlayedUnder, PlayFrom, PlayGrant, 
 import { objectRefAct, objectRefRead, resolvePlayerRef, tokenRiders } from "./effects.js";
 import {
   abilityLifeCost,
+  activatesFrom,
+  activationZoneNow,
   chosenCounterCost,
   costAnnouncesX,
   discardCostFilterAtX,
@@ -5657,7 +5659,7 @@ export class Game {
         if (onlySource !== undefined && card !== onlySource) continue;
         const def = this.registry.get(this.state.objects[card].cardName);
         this.effectiveActivated(card).forEach((ability, index) => {
-          if (ability.zone !== zone) return;
+          if (!activatesFrom(ability, zone)) return;
           // A mana ability's outcomes one by one, as a permanent's are above
           // (Jack-o'-Lantern's "one mana of any color").
           const variants = this.standaloneManaVariants(card, ability, player);
@@ -5678,7 +5680,7 @@ export class Game {
       if (object === undefined || object.owner !== player || object.kind !== "card") continue;
       const def = this.registry.get(object.cardName);
       this.effectiveActivated(card).forEach((ability, index) => {
-        if (ability.zone === "command") pushActivateAbility(card, def.name, ability, index);
+        if (activatesFrom(ability, "command")) pushActivateAbility(card, def.name, ability, index);
       });
     }
     // An emblem's activated abilities (rule 114.4): its object is in the
@@ -5690,7 +5692,7 @@ export class Game {
       const object = this.state.objects[card];
       if (object === undefined || object.kind !== "emblem" || !object.modifiers.some((m) => (m.grantsActivated?.length ?? 0) > 0)) continue;
       this.effectiveActivated(card).forEach((ability, index) => {
-        if (ability.zone === "command") pushActivateAbility(card, emblem.sourceName ?? "Emblem", ability, index);
+        if (activatesFrom(ability, "command")) pushActivateAbility(card, emblem.sourceName ?? "Emblem", ability, index);
       });
     }
     // Exile is shared too: the suspended cards `player` owns, for an ability
@@ -5706,7 +5708,7 @@ export class Game {
       const suspended = this.isSuspended(card);
       this.effectiveActivated(card).forEach((ability, index) => {
         // "Activate only if this card is exiled" (Q's grant): any exiled card.
-        if ((ability.zone === "suspended" && suspended) || ability.zone === "exile") pushActivateAbility(card, def.name, ability, index);
+        if ((activatesFrom(ability, "suspended") && suspended) || activatesFrom(ability, "exile")) pushActivateAbility(card, def.name, ability, index);
       });
     }
     // A spell's own ability that works while it's on the stack (rule 113.6 —
@@ -5716,9 +5718,9 @@ export class Game {
       const spell = this.state.objects[id];
       if (spell === undefined || spell.kind !== "card") continue;
       const printed = this.registry.get(rulesTextName(spell)).activated;
-      if (!printed.some((a) => a.zone === "stack")) continue;
+      if (!printed.some((a) => activatesFrom(a, "stack"))) continue;
       this.effectiveActivated(id).forEach((ability, index) => {
-        if (ability.zone === "stack" && this.mayActivateAs(ability, spell, player)) {
+        if (activatesFrom(ability, "stack") && this.mayActivateAs(ability, spell, player)) {
           pushActivateAbility(id, printedCardName(spell), ability, index);
         }
       });
@@ -5766,14 +5768,14 @@ export class Game {
       for (const card of this.state.zones.perPlayer[player].hand) {
         const def = this.registry.get(this.state.objects[card].cardName);
         const abilities = this.effectiveActivated(card);
-        if (!abilities.some((ability) => ability.zone === "hand")) continue;
+        if (!abilities.some((ability) => activatesFrom(ability, "hand"))) continue;
         const offered = new Set(
           this.legalActivationsOf(player, card).flatMap((offer) =>
             offer.kind === "activate-ability" ? [offer.abilityIndex] : [],
           ),
         );
         abilities.forEach((ability, index) => {
-          if (ability.zone !== "hand" || offered.has(index) || isManaAbility(ability)) return;
+          if (!activatesFrom(ability, "hand") || offered.has(index) || isManaAbility(ability)) return;
           const why = this.whyCannotActivateAbility(player, card, index);
           out.push({
             source: card,
@@ -29620,12 +29622,15 @@ export class Game {
       // Channel (702.51a) from hand, a graveyard ability or a command-zone
       // one (Derevi) — activatable only from that zone, never as a
       // permanent's.
-      if (ability.zone === "suspended" ? !this.isSuspended(sourceId) : source.zone !== ability.zone) {
-        return ability.zone === "suspended"
+      // A list (Mister Immortal) works from whichever listed zone the card is in.
+      const here = activationZoneNow(ability, source.zone, this.isSuspended(sourceId));
+      if (here === undefined || (here === "suspended" ? !this.isSuspended(sourceId) : source.zone !== here)) {
+        const named = typeof ability.zone === "string" ? ability.zone : ability.zone.join(" or ");
+        return named === "suspended"
           ? "that card is not suspended"
-          : `that card is not in ${ability.zone === "command" ? "the command zone" : ability.zone}`;
+          : `that card is not in ${named === "command" ? "the command zone" : named}`;
       }
-      if (ability.zone === "stack") {
+      if (here === "stack") {
         if (source.kind !== "card") return "that is not a spell";
         if (!this.mayActivateAs(ability, source, player)) return `${player} does not control that spell`;
       } else if (source.owner !== player) return `${player} does not own that card`;
@@ -30468,6 +30473,9 @@ export class Game {
       sacrificeVictim, sacrificeParts, tapPicked, payment, shares, waterbent, modeOffer,
       unattachVictim, unattachChosen,
     } = planned;
+    // The zone it works from this time, before a cost moves the card: one
+    // ability listing several (Mister Immortal) pays as that zone's does.
+    const zoneHere = activationZoneNow(ability, source.zone, this.isSuspended(sourceId));
     // "The first activated ability of an artifact you activate each turn"
     // (Tezzeret, Betrayer of Flesh — `abilityCostModification`'s
     // `firstEachTurn` without `targeting`): every activation of a permanent's
@@ -30643,15 +30651,15 @@ export class Game {
       }
     }
 
-    if (ability.zone === "hand" && ability.staysInZone === true) {
+    if (zoneHere === "hand" && ability.staysInZone === true) {
       // An ability activated from a hidden zone reveals its card (rule 602.2a)
       // — ninjutsu's (702.49a, b), Zareth San's: it stays in the hand,
       // revealed, until the ability leaves the stack.
       this.revealCards(player, [sourceId], "hand");
-    } else if (ability.zone === "hand" && ability.exilesFromHand === true) {
+    } else if (zoneHere === "hand" && ability.exilesFromHand === true) {
       // "Exile this card from your hand" (Simian Spirit Guide): no discard.
       this.moveObject(sourceId, "exile");
-    } else if (ability.zone === "hand") {
+    } else if (zoneHere === "hand") {
       // Channel (rule 702.51a): discarding the source card is an implicit,
       // unconditional part of the cost, paid alongside the mana above.
       this.cyclingDiscard = ability.cycling === true ? sourceId : null;
@@ -30664,7 +30672,7 @@ export class Game {
       // cost that had to be activated, is cycling to everything watching for
       // it, as `cycleCard` has a plain printed one.
       if (ability.cycling === true) this.noteCycled(player, sourceId, chosenX);
-    } else if (ability.zone === "graveyard") {
+    } else if (zoneHere === "graveyard") {
       this.state.players[player].usedGraveyardThisTurn = true;
       // The graveyard equivalent — "Exile this card from your graveyard" is
       // likewise part of the cost, so it happens now rather than on
@@ -30916,10 +30924,10 @@ export class Game {
       };
     }
     if (
-      ability.zone === "command" ||
-      ability.zone === "suspended" ||
-      ability.zone === "exile" ||
-      ability.zone === "stack" ||
+      zoneHere === "command" ||
+      zoneHere === "suspended" ||
+      zoneHere === "exile" ||
+      zoneHere === "stack" ||
       ability.staysInZone === true
     ) {
       // The source is still sitting in that zone — remember which object it
@@ -30933,7 +30941,7 @@ export class Game {
       player,
       onStack: true,
       ability: abilityId,
-      ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
+      ...(zoneHere === undefined ? { ofPermanent: true as const } : { fromZone: zoneHere }),
       // What the cost sacrifices (rule 701.21a): the one already gone, or the
       // several chosen just below, which is the same payment (602.2b).
       ...(ability.cost.exilesSacrifice !== true &&
@@ -31521,7 +31529,11 @@ export class Game {
       source: sourceId,
       player,
       onStack: false,
-      ...(ability.zone === undefined ? { ofPermanent: true as const } : { fromZone: ability.zone }),
+      ...(ability.zone === undefined
+        ? { ofPermanent: true as const }
+        : // A list's zone is where the card still is; its cost moved it out
+          // of a listed one only if it paid by moving it, unknown here.
+          { fromZone: typeof ability.zone === "string" ? ability.zone : (activationZoneNow(ability, source?.zone, false) ?? ability.zone[0]) }),
       ...(manaSpent !== undefined && manaSpent.length > 0 ? { manaSpent } : {}),
       ...(ability.cost.tap ? { tapCost: true as const } : {}),
     });
@@ -48251,7 +48263,7 @@ controlledBy,
         const kept = lastingHere(duration);
         // A card in exile gains one that works there (Q, Stacking the Deck),
         // for as long as it stays (rule 400.7).
-        const inExile = object?.zone === "exile" && ability.zone === "exile";
+        const inExile = object?.zone === "exile" && activatesFrom(ability, "exile");
         if (object === undefined || (object.zone !== "battlefield" && !inExile) || !durationBegins(object, kept)) return;
         object.modifiers.push({
           timestamp: this.freshTimestamp(),

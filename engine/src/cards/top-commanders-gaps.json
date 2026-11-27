@@ -3337,7 +3337,8 @@
   "effect:counter-on-granting-source",
   "static:keywords-from-exiled-with-counter",
   "filter:same-name-as-cost-moved-card",
-  "filter:same-name-as-target-in-search"
+  "filter:same-name-as-target-in-search",
+  "zone:ability-from-several-zones"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

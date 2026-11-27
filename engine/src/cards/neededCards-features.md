@@ -9083,3 +9083,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Cast from the top of your graveyard (2026-11-26).** `zone:cast-from-top-of-graveyard`: the `CardFilter` clause `topOfGraveyard` (rule 404.2; `readsGraveyardOrder` sees it) in a graveyard `mayPlay`. Bösium Strip. `test/graveyard-top-cast.test.ts`.
 
 **Same name as a target in a search (2026-11-27).** `filter:same-name-as-target-in-search`: no engine code — `search-library` `filter: { sameNameWith: 0 }` reads the spell's target slot. March of Burgeoning Life. `test/search-same-name-as-target.test.ts`.
+
+**One ability from several zones (2026-11-27).** `zone:ability-from-several-zones`: `ActivatedAbility.zone` as a list (rule 113.6m), read through `activatesFrom` / `activationZoneNow`. Mister Immortal. `test/ability-from-several-zones.test.ts`.

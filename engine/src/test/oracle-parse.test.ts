@@ -26102,3 +26102,21 @@ describe("a choice of costs with a mana branch", () => {
     });
   });
 });
+
+describe("casting-zones lane: Mister Immortal", () => {
+  it("reads 'from your graveyard or from exile' as one ability working from both zones", () => {
+    const parsed = parseFace({
+      name: "Mister Immortal",
+      type_line: "Legendary Creature — Mutant Hero",
+      mana_cost: "{1}{G}",
+      oracle_text: "{2}{G}: Return this card from your graveyard or from exile to the battlefield tapped.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.activated[0]).toMatchObject({
+      cost: { mana: "{2}{G}" },
+      zone: ["graveyard", "exile"],
+      staysInZone: true,
+      effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true },
+    });
+  });
+});

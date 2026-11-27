@@ -17,7 +17,7 @@ import type {
   LegalAction,
   TapCostOffer,
 } from "./actions.js";
-import { abilityLifeCost, isManaAbility } from "./abilities.js";
+import { abilityLifeCost, activatesFrom, isManaAbility } from "./abilities.js";
 import type { ActivatedAbility } from "./abilities.js";
 import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapCountForModes, tapPicksPower, tapShareChoices } from "./actions.js";
 import { obeyingLure } from "./combat/blocking.js";
@@ -6342,7 +6342,7 @@ export class HeuristicBotController extends AutomaticController {
       if (object === undefined || ability === undefined || !isManaAbility(ability)) continue;
       const left =
         object.zone === "hand"
-          ? ability.zone === "hand"
+          ? activatesFrom(ability, "hand")
           : object.zone === "battlefield" && object.controller === this.playerId && paysWithStoredCounters(ability);
       if (!left) continue;
       const ways = bySource.get(o.source);
