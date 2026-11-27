@@ -311,6 +311,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.keepTargets === true) v.childAfterFound(n.then);
     // "Target opponent destroys four lands they control" (Burning of Xinye).
     if (typeof n.chooser === "object" && "target" in n.chooser) v.touch(n.chooser.target, "either", MINOR);
+    // A bare slot is the same player (ChooserRef's number): Juxtapose's "you
+    // and target player", the second choice made by that player.
+    if (typeof n.chooser === "number") v.touch(n.chooser, "either", MINOR);
     // Chosen among a targeted player's permanents ("return half the creatures
     // they control to their owner's hand" — Split the Party): what's done to
     // each chosen one (`then`'s slot 0) is done to that player, as a
