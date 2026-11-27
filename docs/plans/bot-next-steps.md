@@ -106,6 +106,35 @@ answer is checked, against that answer less one attacker and no attack. No gate 
 holds 1a (a board where v1's blocks and v2's differ wasn't found by hand): the judge is its
 measure. And a rollout's *attacker* is still v1 everywhere.
 
+*1c, our own attack in our own turn's rollouts (explored 2026-11-27, off by default).* A move
+that sets up an attack (an equip, a pump, a land for a commander) is scored by the attack the
+rollout then makes, and on our own turn that is v1's, in the priority rollouts before attackers
+are declared and in the turn plan's step through combat and its passing out. Kept game A2TMG-1
+showed the cost: v1 held a menace Slicer home from a lone Etali at 20 commander damage, so the
+Beamtown Beatstick equip that wins read as two mana for nothing (fixed in v1 itself the same
+day). Built as an option, `rolloutAttacks: "v2"` (`RealAttacksController`: our attack by a
+small v2 attack search, `REAL_ATTACK_SIMULATIONS` 24, `lightAttacks`: against v1's blocks with
+none of 1a's checks; the turn plan's seat through `withOurAttackSeat`). Measured:
+
+- **It finds the menace equip by itself.** With the v1 fix taken out, the live position passes
+  under v1 rollouts and equips under v2 rollouts (513 ms against 343 ms for the decision).
+- **The gate** passes either way (350 of 350), but takes 96 s against 29 s.
+- **A decision diff** (six sample-deck games, count budgets): 78 of 12,114 decisions differ,
+  where the day's other change made 10; the games took 28 minutes against about 12. Most
+  changes are priority moves on our own turn. Tapping attackers for an effect is now held
+  (Selesnya Evangel's token, seven times; Nullmage Shepherd tapping four, six) — the rollout
+  attack now uses them. Lathliss, Dragon Queen's "+1/+0 until end of turn" is activated in the
+  first main phase ten times where it passed, and five the other way: a pump before attackers
+  are declared now shows in the rollout's attack, but a pump is better made once blocks are
+  known, so this one is probably worse. The rest are one or two each, casts reordered.
+
+Not turned on: two to three times the thinking at count budgets is fewer candidates scored at
+the live clock, and nothing yet says the changes are better on balance. Before it could be:
+cache the rollout's attack by the combat board within a decision (most candidates reach the same
+creatures and life before combat), hold a pump for after blocks wherever our attack is still to
+be declared (or the change makes pre-combat pumps look good), and judge the changed priority
+moves by playing each on with v2 seats, as `bot:judge` does for attacks, at the live clock.
+
 ## 2. Mana priced by v2's own turn planner
 
 **What is wrong.** A rollout passes our own seat, so mana a choice spends looks free, and v1

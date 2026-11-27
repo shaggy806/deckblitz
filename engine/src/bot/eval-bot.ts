@@ -124,6 +124,7 @@ import {
   restOfTurnValue,
   sameKnownEnd,
   unknownCards,
+  withOurAttackSeat,
 } from "./turn-plan.js";
 import type { PlanStep, PlannedLine, ScoredFirst, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
@@ -188,6 +189,22 @@ export interface EvalBotOptions {
    * declarations get the same budget each.
    */
   readonly maxSimulations?: number;
+  /**
+   * Who makes our own attack in the rollouts of our own turn — a priority
+   * rollout before attackers are declared, and the turn plan's step through
+   * combat and its passing out: `"v1"` (the default, v1's attack) or `"v2"`,
+   * a small attack search of our own (`RealAttacksController`,
+   * `REAL_ATTACK_SIMULATIONS`). An experiment (2026-11-27): v1's attack is
+   * what a line that sets up an attack is scored by, and it held a menace
+   * Slicer home from a lone blocker at 20 commander damage, so the Beamtown
+   * Beatstick equip that won read as two mana for nothing.
+   */
+  readonly rolloutAttacks?: "v1" | "v2";
+  /** Our attack searched alone, without the checks against the defenders'
+   * own blocks and the swing back (`declareAttackersSearched`): the attack a
+   * rollout makes under `rolloutAttacks: "v2"`, cheap enough to sit inside
+   * one. */
+  readonly lightAttacks?: boolean;
   /**
    * Wall-clock ceiling on one decision, in milliseconds. **Off by default**,
    * and that default is deliberate.
@@ -479,6 +496,11 @@ const MOVES_PER_ROUND = 8;
  * checked against it (`declareAttackersSearched`): enough for its climb from
  * v1's blocks on a board of a dozen attackers. */
 const REAL_BLOCK_SIMULATIONS = 24;
+/** The steps of our own turn before our attack is declared. */
+const OUR_ATTACK_TO_COME: ReadonlySet<string> = new Set(["untap", "upkeep", "draw", "precombat-main", "begin-combat"]);
+/** The attack search our own seat makes in a rollout under
+ * `rolloutAttacks: "v2"` (`RealAttacksController`). */
+const REAL_ATTACK_SIMULATIONS = 24;
 
 /** How many fillings (targets, modes) of each spell our own seat tries as an
  * answer in a simulated swing back (`AnsweringSeat`), in the order the
@@ -1065,6 +1087,32 @@ class RealBlocksController extends CombatRolloutController {
 }
 
 /**
+ * Our own seat in a rollout of our own turn under `rolloutAttacks: "v2"`:
+ * v1's answers, but our attack by a small attack search of v2's own
+ * (`REAL_ATTACK_SIMULATIONS`, `lightAttacks`: against v1's blocks, no check
+ * of its own). The attacking mirror of {@link RealBlocksController}.
+ */
+class RealAttacksController extends CombatRolloutController {
+  private readonly cards: CardRegistry;
+  private readonly weights: EvalWeights;
+
+  constructor(playerId: PlayerId, cards: CardRegistry, weights: EvalWeights) {
+    super(playerId, cards);
+    this.cards = cards;
+    this.weights = weights;
+  }
+
+  declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
+    return new EvalBotController(this.playerId, this.cards, {
+      weights: this.weights,
+      maxSimulations: REAL_ATTACK_SIMULATIONS,
+      plan: "off",
+      lightAttacks: true,
+    }).declareAttackers(view);
+  }
+}
+
+/**
  * An opponent in the swing back (`survivesSwing`): v1's rollout stand-in,
  * attacking `target` with everything that can. The worst case the crackback
  * arithmetic counts, played out.
@@ -1308,6 +1356,8 @@ export class EvalBotController extends HeuristicBotController {
   private heldPlay: { readonly turn: number; readonly action: Action } | null = null;
   private readonly rolloutDecisions: boolean;
   private readonly maxSimulations: number;
+  private readonly rolloutAttacks: "v1" | "v2";
+  private readonly lightAttacks: boolean;
   private readonly timeBudgetMs: number;
   private readonly now: () => number;
   /** When the decision under way was asked, under a clock (`onClock`). */
@@ -1459,6 +1509,8 @@ export class EvalBotController extends HeuristicBotController {
     this.libraryOrder = options.libraryOrder ?? "hidden";
     this.opponentHands = options.opponentHands ?? "hidden";
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
+    this.rolloutAttacks = options.rolloutAttacks ?? "v1";
+    this.lightAttacks = options.lightAttacks ?? false;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.now = options.now ?? Date.now;
     this.trace = options.trace;
@@ -1494,7 +1546,8 @@ export class EvalBotController extends HeuristicBotController {
    * `withTrackRecordEvidence`. */
   act(real: ControllerView): Action {
     const view = this.fairView(real);
-    const action = withLibraryTop(this.libraryTopAt(view), () => this.answer(view));
+    const seat = this.rolloutAttacks === "v2" ? () => new RealAttacksController(this.playerId, this.cards, this.weights) : null;
+    const action = withOurAttackSeat(seat, () => withLibraryTop(this.libraryTopAt(view), () => this.answer(view)));
     // The answer was reached on cards dealt for the seat (`fairView`), and
     // is played at the real table: tried there first on a copy, so nothing
     // the two disagree on is ever thrown mid-game. Refused, the plan goes
@@ -3068,7 +3121,18 @@ export class EvalBotController extends HeuristicBotController {
       return new DeepRolloutController(this.playerId, this.cards, this.weights, state.turn.number);
     }
     if (this.rolloutDecisions) return this.selfInRollouts();
-    return this.blocksToCome(state) ? new RealBlocksController(this.playerId, this.cards, this.weights) : undefined;
+    if (this.blocksToCome(state)) return new RealBlocksController(this.playerId, this.cards, this.weights);
+    return this.rolloutAttacks === "v2" && this.attackToCome(state)
+      ? new RealAttacksController(this.playerId, this.cards, this.weights)
+      : undefined;
+  }
+
+  /** Our own turn, before attackers are declared, with a creature of ours
+   * able to attack: an attack a rollout would make for us. */
+  private attackToCome(state: GameState): boolean {
+    if (state.turnOrder[state.turn.activePlayerIndex] !== this.playerId) return false;
+    if (!OUR_ATTACK_TO_COME.has(state.turn.step)) return false;
+    return combatCreatures(state, this.cards, this.playerId, true, true).length > 0;
   }
 
   /**
@@ -3131,7 +3195,7 @@ export class EvalBotController extends HeuristicBotController {
     const state = view.state;
     const me = this.playerId;
     const legal = view.legalActions().find((o): o is DeclareAttackersLegal => o.kind === "declare-attackers");
-    if (legal === undefined || legal.eligible.length === 0 || legal.defenders.length === 0) return this.attackersSearched(view);
+    if (this.lightAttacks || legal === undefined || legal.eligible.length === 0 || legal.defenders.length === 0) return this.attackersSearched(view);
     this.swings = new WeakMap();
     const declared = (attackers: readonly AttackerDeclaration[]): GameState | null =>
       simulateCombat(state, this.cards, { type: "declare-attackers", player: me, attackers: withRequiredAttackers(attackers, legal) });
@@ -3538,7 +3602,7 @@ export class EvalBotController extends HeuristicBotController {
     // best of them is declared. Only where a defender has something to block
     // with; `docs/plans/bot-next-steps.md`, step 1a.
     const blockable = picked.some((d) => blockersFor(defendingPlayer(d.defender)).length > 0);
-    if (picked.length > 0 && blockable && Number.isFinite(pickedScore)) {
+    if (!this.lightAttacks && picked.length > 0 && blockable && Number.isFinite(pickedScore)) {
       const realPicked = real(picked);
       if (realPicked !== null && realPicked < pickedScore - REAL_BLOCK_SLACK) {
         let bestReal = realPicked;

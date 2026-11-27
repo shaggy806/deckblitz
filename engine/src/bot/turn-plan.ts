@@ -156,10 +156,29 @@ const usedCard = (action: Action): ObjectId | undefined =>
       ? action.source
       : undefined;
 
-/** Every seat passing at priority and fighting combat as v1. */
-function combatSeats(state: GameState, registry: CardRegistry): Record<PlayerId, PlayerController> {
+/** Who makes our own attack in a plan's rollouts while a decision runs
+ * (`withOurAttackSeat`): `null`, v1's. */
+let ourAttackSeat: (() => PlayerController) | null = null;
+
+/** Run `body` with `seat` making our own attack in every plan rollout it
+ * runs (`EvalBotOptions.rolloutAttacks`); the one before is restored after. */
+export function withOurAttackSeat<T>(seat: (() => PlayerController) | null, body: () => T): T {
+  const before = ourAttackSeat;
+  ourAttackSeat = seat;
+  try {
+    return body();
+  } finally {
+    ourAttackSeat = before;
+  }
+}
+
+/** Every seat passing at priority and fighting combat as v1 — but for our
+ * own, where `withOurAttackSeat` names one. */
+function combatSeats(state: GameState, registry: CardRegistry, me?: PlayerId): Record<PlayerId, PlayerController> {
   const seats: Record<PlayerId, PlayerController> = {};
-  for (const player of state.turnOrder) seats[player] = new CombatRolloutController(player, registry);
+  for (const player of state.turnOrder) {
+    seats[player] = player === me && ourAttackSeat !== null ? ourAttackSeat() : new CombatRolloutController(player, registry);
+  }
   return seats;
 }
 
@@ -170,7 +189,7 @@ const CEILING = 2_000;
  * turn ends first. */
 function throughCombat(state: GameState, registry: CardRegistry, me: PlayerId): Game | null {
   return rollout(() => {
-    const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry) });
+    const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry, me) });
     const turn = state.turn.number;
     sim.dispatch({ type: "pass-priority", player: me });
     let steps = 0;
@@ -195,7 +214,7 @@ function throughCombat(state: GameState, registry: CardRegistry, me: PlayerId): 
  * — to the start of the next player's turn. */
 function passOut(state: GameState, registry: CardRegistry, me: PlayerId): GameState | null {
   return rollout(() => {
-    const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry) });
+    const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry, me) });
     const turn = state.turn.number;
     sim.dispatch({ type: "pass-priority", player: me });
     let steps = 0;
@@ -587,7 +606,7 @@ function toOurMainPhase(
   me: PlayerId,
 ): { readonly main: Game } | { readonly ended: GameState } | null {
   return rollout(() => {
-    const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry) });
+    const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry, me) });
     const turn = state.turn.number;
     let steps = 0;
     const ours = (s: GameState): boolean =>
