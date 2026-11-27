@@ -31,6 +31,8 @@
 // aren't compared (paying for the spell taps them), so a spell that only
 // untaps them (Hidden Strings on its own Island and Sol Ring) reads as
 // having done nothing.
+// A card that can be cast from the graveyard counts as having done something
+// by getting there (Zenith Festival, free for X = 0, to be harmonized later).
 //
 // Other flags: --worse [N] also flags a cast or activation that scores N or
 // more below not doing it (default 8: a card in hand is worth about 1). Off by
@@ -150,11 +152,23 @@ function createWatcher(where, flags) {
       const stats = ch === null ? "" : `${ch.power}/${ch.toughness}/${[...ch.keywords].sort().join("+")}/${ch.types.join("+")}/${[...(ch.restrictions ?? [])].sort().join("+")}`;
       parts.push(`${id}:${o.cardName}:${o.controller}:${o.controller === caster && !(ch?.types ?? []).includes("creature") ? "" : o.tapped}:${JSON.stringify(o.counters ?? {})}:${o.damageMarked ?? 0}:${o.attachedTo ?? ""}:${o.stackCount ?? 1}:${(o.modifiers ?? []).length}:${stats}`);
     }
+    // The spell itself is left out where it ends — but not a graveyard it can
+    // be cast from (harmonize, flashback, escape, retrace, aftermath, a
+    // "you may cast this from your graveyard"): there, putting it was worth
+    // something (Zenith Festival cast free for X = 0, to be harmonized).
+    const def = spell !== null && state.objects[spell] !== undefined && registry.has(state.objects[spell].cardName) ? registry.get(state.objects[spell].cardName) : null;
+    const fromGraveyard =
+      def !== null &&
+      (def.flashback != null || def.harmonize != null || def.escape != null || def.retrace != null || def.aftermath != null ||
+        (def.mayPlaySelf?.from ?? []).includes("graveyard"));
     const not = (id) => id !== spell;
+    const notInHand = not;
+    const notInGraveyard = fromGraveyard ? () => true : not;
     // Exile with the spell itself: a card on an adventure is there to cast later.
     for (const zone of ["exile", "command"]) parts.push(zone + ":" + [...state.zones.shared[zone]].sort().join(","));
     for (const [player, zones] of Object.entries(state.zones.perPlayer)) {
-      for (const zone of ["hand", "graveyard"]) parts.push(`${player}.${zone}:` + zones[zone].filter(not).sort().join(","));
+      parts.push(`${player}.hand:` + zones.hand.filter(notInHand).sort().join(","));
+      parts.push(`${player}.graveyard:` + zones.graveyard.filter(notInGraveyard).sort().join(","));
       parts.push(`${player}.library:${zones.library.filter(not).length}`);
       const p = state.players[player];
       parts.push(`${player}:${p.life}:${JSON.stringify(p.counters ?? {})}:${p.hasLost}:${JSON.stringify(p.manaPool ?? [])}:${p.extraLandsThisTurn ?? 0}`);
