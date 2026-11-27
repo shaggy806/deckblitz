@@ -325,6 +325,13 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### An ability priced by the +1/+1 counters on its target — built 2026-11-27
+
+The key `cost:ability-cost-reduction-by-target-counters`: `targetCostReduction.reduceGeneric`'s
+`"target-+1/+1-counters"`, read off the target as `"target-colors"` and `"target-power"` are
+(`Game.targetReadReduction`, rule 601.2f). Warrior's Blades (24724); the scaffolder reads the equip line beside
+Dragonfire Blade's. `test/target-counters-cost-reduction.test.ts`.
+
 ### If it exploited that creature — built 2026-11-26
 
 The key `condition:exploited-that-creature`: the journal's `sacrificed` entry keeps the creature whose exploit ability

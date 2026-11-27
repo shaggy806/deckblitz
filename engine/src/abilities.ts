@@ -1124,8 +1124,10 @@ export interface ActivatedAbility {
      * targets" (Dragonfire Blade), read as the targets are chosen; offered
      * for the targets it's affordable with. `"target-power"`: "{X} less,
      * where X is the power of the creature it targets" (Belt of Giant
-     * Strength), the same way; a power below 0 takes nothing off. */
-    readonly reduceGeneric: number | "target-colors" | "target-power";
+     * Strength), the same way; a power below 0 takes nothing off.
+     * `"target-+1/+1-counters"`: "{1} less for each +1/+1 counter on the
+     * creature it targets" (Warrior's Blades). */
+    readonly reduceGeneric: number | "target-colors" | "target-power" | "target-+1/+1-counters";
     readonly count?: number;
   };
   /** The least X the ability may be activated with — Ruthless Technomancer's

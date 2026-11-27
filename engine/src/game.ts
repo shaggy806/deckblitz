@@ -20964,11 +20964,12 @@ export class Game {
 
   /** A reduction read off the target (rule 601.2f, the cost fixed once the
    * targets are chosen): "{1} less for each color of the creature it
-   * targets", "{X} less, where X is the power of the creature it targets" —
-   * of the target chosen, or, while it's only offered, of the legal one that
+   * targets", "{X} less, where X is the power of the creature it targets",
+   * "{1} less … for each +1/+1 counter on the creature it targets" — of the
+   * target chosen, or, while it's only offered, of the legal one that
    * takes the most off. Never below 0: a negative power reduces nothing. */
   private targetReadReduction(
-    read: "target-colors" | "target-power",
+    read: "target-colors" | "target-power" | "target-+1/+1-counters",
     ability: ActivatedAbility,
     player: PlayerId,
     sourceId: ObjectId,
@@ -20979,6 +20980,10 @@ export class Game {
     for (const t of named) {
       if (t?.kind !== "object") continue;
       const chars = computeCharacteristics(this.state, this.registry, t.object);
+      if (read === "target-+1/+1-counters") {
+        most = Math.max(most, this.state.objects[t.object]?.counters["+1/+1"] ?? 0);
+        continue;
+      }
       most = Math.max(most, read === "target-colors" ? chars.colors.size : (chars.power ?? 0));
     }
     return most;

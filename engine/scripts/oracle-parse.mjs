@@ -19583,11 +19583,16 @@ function parseFaceAsWritten(face, ctx = {}) {
     // power of the creature it targets." (Belt of Giant Strength), "… costs
     // {1} less to activate for each color of the creature it targets."
     // (Dragonfire Blade): a `targetCostReduction` read off the target.
-    if ((m = /^Equip ((?:\{[^}]+\})+)\. This ability costs (?:(\{X\}) less to activate, where X is the power of the creature it targets|\{1\} less to activate for each color of the creature it targets)\.$/.exec(line))) {
+    // "… costs {1} less to activate for each +1/+1 counter on the creature it
+    // targets." (Warrior's Blades) the same way.
+    if ((m = /^Equip ((?:\{[^}]+\})+)\. This ability costs (?:(\{X\}) less to activate, where X is the power of the creature it targets|\{1\} less to activate for each (color|\+1\/\+1 counter) (?:of|on) the creature it targets)\.$/.exec(line))) {
       out.activated.push({
         cost: { mana: m[1], tap: false },
         targets: ["creature-you-control"],
-        targetCostReduction: { filter: {}, reduceGeneric: m[2] !== undefined ? "target-power" : "target-colors" },
+        targetCostReduction: {
+          filter: {},
+          reduceGeneric: m[2] !== undefined ? "target-power" : m[3] === "color" ? "target-colors" : "target-+1/+1-counters",
+        },
         effect: { kind: "attach", target: 0 },
         resolve: null,
         text: printed(raw),

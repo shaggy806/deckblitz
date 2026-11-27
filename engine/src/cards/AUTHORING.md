@@ -5837,8 +5837,9 @@ carries; several compound. An "any colour" unit becomes `multiplier` of
   instead, with `filter: {}`: `"target-colors"` is "{1} less for each color
   of the creature it targets" (Dragonfire Blade), `"target-power"` "{X}
   less, where X is the power of the creature it targets" (Belt of Giant
-  Strength; a power below 0 takes nothing off) — offered for the targets
-  it's affordable on.
+  Strength; a power below 0 takes nothing off), `"target-+1/+1-counters"`
+  "{1} less … for each +1/+1 counter on the creature it targets" (Warrior's
+  Blades) — offered for the targets it's affordable on.
 
 ---
 

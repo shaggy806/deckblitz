@@ -13285,6 +13285,11 @@ describe("a static acting on a player", () => {
       "Equip {4}. This ability costs {1} less to activate for each color of the creature it targets.",
     );
     expect(blade.activated[0].targetCostReduction).toEqual({ filter: {}, reduceGeneric: "target-colors" });
+    const blades = face(
+      "Artifact — Equipment",
+      "Equip {3}. This ability costs {1} less to activate for each +1/+1 counter on the creature it targets.",
+    );
+    expect(blades.activated[0].targetCostReduction).toEqual({ filter: {}, reduceGeneric: "target-+1/+1-counters" });
   });
 
   it("reads a player becoming a target, and the first time each turn by anyone (rule 115.7)", () => {
