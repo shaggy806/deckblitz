@@ -16,6 +16,7 @@
     "effect:choose-from-revealed-hand-without-moving",
     "effect:cast-now-from-each-opponent-graveyard",
     "effect:reveal-until-then-keeps-targets",
+    "static:block-as-though-reach-filter",
     "static:dash-cost-reduction",
     "cost:sacrifice-self-and-any-number",
     "cost:alternative-cost-exile-top-of-graveyard",

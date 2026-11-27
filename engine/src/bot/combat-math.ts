@@ -31,7 +31,13 @@ import {
   unblockedAssignmentOf,
   withComputedCache,
 } from "../characteristics.js";
-import { blocksDespiteLandwalk, landTypesControlledBy, landwalkStopsBlocksBy, readyToBlock } from "../combat/eligibility.js";
+import {
+  blocksDespiteLandwalk,
+  landTypesControlledBy,
+  landwalkStopsBlocksBy,
+  reachAgainstOf,
+  readyToBlock,
+} from "../combat/eligibility.js";
 import type { CardRegistry } from "../cards.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameObject, GameState } from "../state.js";
@@ -76,6 +82,9 @@ export interface CombatCreature {
   /** It can block landwalkers as though they didn't have landwalk (Street
    * Savvy, `blocksDespiteLandwalk`). */
   readonly blocksLandwalkers?: boolean;
+  /** The opposing fliers it can block as though it had reach (Dragon
+   * Hunter, `blocksAsThoughReach`). */
+  readonly reachAgainst?: ReadonlySet<ObjectId>;
   /** It may (or must) assign its combat damage as though it weren't blocked
    * (Thorn Elemental): a block stops none of it. */
   readonly assignsPastBlockers?: boolean;
@@ -174,6 +183,7 @@ function combatCreaturesUncached(
           }
         : {}),
       ...(blocksDespiteLandwalk(state, registry, object) ? { blocksLandwalkers: true } : {}),
+      ...withReachAgainst(reachAgainstOf(state, registry, object)),
       ...(unblockedAssignmentOf(state, registry, id) !== null ? { assignsPastBlockers: true } : {}),
       ...(c.toxic > 0 ? { toxic: c.toxic } : {}),
     };
@@ -181,6 +191,10 @@ function combatCreaturesUncached(
     for (let i = 0; i < copies; i += 1) out.push(creature);
   }
   return out;
+}
+
+function withReachAgainst(set: ReadonlySet<ObjectId> | undefined): { readonly reachAgainst?: ReadonlySet<ObjectId> } {
+  return set === undefined ? {} : { reachAgainst: set };
 }
 
 /** Can `blocker` legally block `attacker`, menace aside? */
@@ -197,7 +211,12 @@ export function canBlock(blocker: CombatCreature, attacker: CombatCreature): boo
     for (const color of attacker.colors) if (blocker.colors.has(color)) shares = true;
     if (!shares) return false;
   }
-  if (a.has("flying") && !blocker.keywords.has("flying") && !blocker.keywords.has("reach")) {
+  if (
+    a.has("flying") &&
+    !blocker.keywords.has("flying") &&
+    !blocker.keywords.has("reach") &&
+    blocker.reachAgainst?.has(attacker.id) !== true
+  ) {
     return false;
   }
   // Skulk (rule 702.118b): no blocker with greater power.

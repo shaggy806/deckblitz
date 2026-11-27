@@ -127,6 +127,62 @@ export function blocksDespiteLandwalk(state: GameState, registry: CardRegistry, 
   );
 }
 
+/** The `blocksAsThoughReach` statics in force, memoized per cache region. */
+function reachSources(
+  state: GameState,
+  registry: CardRegistry,
+): readonly { readonly source: GameObject; readonly ability: StaticAbility; readonly filter: CardFilter }[] {
+  return computedCacheMemo("blocks-as-though-reach", () => {
+    const out: { readonly source: GameObject; readonly ability: StaticAbility; readonly filter: CardFilter }[] = [];
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      if (hasLostAbilities(state, registry, source)) continue;
+      for (const ability of registry.get(rulesTextName(source)).static) {
+        if (ability.blocksAsThoughReach !== undefined) out.push({ source, ability, filter: ability.blocksAsThoughReach });
+      }
+    }
+    return out;
+  });
+}
+
+/** Whether a static lets `blocker` block `attacker`, a flier, as though it
+ * had reach (Dragon Hunter, `StaticAbility.blocksAsThoughReach`): the
+ * statics carrying it, memoized per cache region. */
+export function blocksAsThoughReach(
+  state: GameState,
+  registry: CardRegistry,
+  blocker: GameObject,
+  attacker: ObjectId,
+): boolean {
+  return reachSources(state, registry).some(
+    ({ source, ability, filter }) =>
+      staticAffects(state, registry, ability.affects, source, blocker) &&
+      (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition)) &&
+      matchesFilter(state, registry, attacker, filter, { you: source.controller, source: source.id }),
+  );
+}
+
+/** The fliers on the battlefield `blocker`'s controller doesn't control that
+ * a `blocksAsThoughReach` static lets it block, or `undefined` when none
+ * does: the bots' combat arithmetic reads this set, not the filter. */
+export function reachAgainstOf(
+  state: GameState,
+  registry: CardRegistry,
+  blocker: GameObject,
+): ReadonlySet<ObjectId> | undefined {
+  if (reachSources(state, registry).length === 0) return undefined;
+  let out: Set<ObjectId> | undefined;
+  for (const id of state.zones.shared.battlefield) {
+    const object = state.objects[id];
+    if (object === undefined || object.controller === blocker.controller) continue;
+    if (!objHasKeyword(state, registry, id, "flying")) continue;
+    if (!blocksAsThoughReach(state, registry, blocker, id)) continue;
+    (out ??= new Set()).add(id);
+  }
+  return out;
+}
+
 /** Whether a static lets `blocker` block creatures with shadow (Wall of
  * Diffusion, Aether Web): the statics carrying it, memoized per cache region. */
 function blocksAsThoughShadow(state: GameState, registry: CardRegistry, blocker: GameObject): boolean {
@@ -613,7 +669,8 @@ function whyThisCannotBlock(
   if (
     objHasKeyword(state, registry, attackerId, "flying") &&
     !objHasKeyword(state, registry, blockerId, "flying") &&
-    !objHasKeyword(state, registry, blockerId, "reach")
+    !objHasKeyword(state, registry, blockerId, "reach") &&
+    !blocksAsThoughReach(state, registry, blocker, attackerId)
   ) {
     const attackerDef = registry.get(printedCardName(attacker));
     return `${blockerDef.name} can't block ${attackerDef.name} (flying)`;

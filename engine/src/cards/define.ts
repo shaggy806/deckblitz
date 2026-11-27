@@ -4132,6 +4132,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * it may block and leaves everything else, so it still can't be blocked by
    * nor block what it couldn't. */
   readonly blocksAsThoughShadow?: true;
+  /** The affected creatures "can block [the attackers this filter picks out]
+   * as though [they] had reach" (Dragon Hunter: Dragons): a permission on the
+   * blocker past flying's "can't be blocked except by creatures with flying
+   * and/or reach" (rule 702.9b), for those attackers alone. It grants no
+   * reach: nothing that reads the keyword sees one. The filter is read with
+   * the static's controller as "you". */
+  readonly blocksAsThoughReach?: CardFilter;
   /** The affected creatures "can block as though they were untapped" (Masako
    * the Humorless): a permission on the blocker past rule 509.1a's "must be
    * untapped". It lifts that one requirement and nothing else — a tapped

@@ -9519,6 +9519,8 @@ describe("one combat rule: the proving cards' sentences (theme 11)", () => {
     expect(dryad.static[0].blocksAsThoughShadow).toBe(true);
     const wall = face("Aetherflame Wall", "Creature \u2014 Wall", "This creature can block creatures with shadow as though they didn't have shadow.");
     expect(wall.static[0].blocksAsThoughShadow).toBe(true);
+    const hunter = face("Dragon Hunter", "Creature — Human Warrior", "Protection from Dragons\nThis creature can block Dragons as though it had reach.");
+    expect(hunter.static[1].blocksAsThoughReach).toEqual({ subtype: "Dragon" });
     const surfer = face(
       "Silver Surfer, Galactus's Herald",
       "Legendary Creature \u2014 Alien Hero",
