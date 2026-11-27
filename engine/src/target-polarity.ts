@@ -908,7 +908,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       (a.restrictions ?? []).some((r) => !combatRuleHelps(r)) ||
       (a.loseKeywords ?? []).length > 0 ||
       (a.cantHaveKeywords ?? []).length > 0 ||
-      a.doesntUntap === true;
+      a.doesntUntap === true ||
+      // A cost to attack or block with it (Whipgrass Entangler's grant);
+      // one on blocking it is evasion.
+      (a.combatTax !== undefined && !a.combatTax.on.includes("be-blocked"));
     v.touch(n.target, harms ? "harm" : "help", MAJOR);
   },
   "grant-activated-all": none,

@@ -9521,6 +9521,17 @@ describe("one combat rule: the proving cards' sentences (theme 11)", () => {
     expect(wall.static[0].blocksAsThoughShadow).toBe(true);
     const hunter = face("Dragon Hunter", "Creature — Human Warrior", "Protection from Dragons\nThis creature can block Dragons as though it had reach.");
     expect(hunter.static[1].blocksAsThoughReach).toEqual({ subtype: "Dragon" });
+    const entangler = face(
+      "Whipgrass Entangler",
+      "Creature — Human Cleric",
+      '{1}{W}: Until end of turn, target creature gains "This creature can\'t attack or block unless its controller pays {1} for each Cleric on the battlefield."',
+    );
+    expect(entangler.activated[0].effect).toMatchObject({
+      kind: "grant-static",
+      target: 0,
+      duration: "end-of-turn",
+      ability: { combatTax: { on: ["attack", "block"], generic: { countOf: { subtype: "Cleric" } } } },
+    });
     const surfer = face(
       "Silver Surfer, Galactus's Herald",
       "Legendary Creature \u2014 Alien Hero",

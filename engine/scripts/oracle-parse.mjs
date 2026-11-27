@@ -5101,6 +5101,22 @@ export function parseSentence(sentence, ctx) {
     if (count === null || count === undefined) return null;
     return { kind: "copy-spell", target: "trigger-spell", count };
   }
+  // A quoted static granted until end of turn (Whipgrass Entangler's "until
+  // end of turn, target creature gains "This creature can't attack or block
+  // unless …""): the quote read as a face of its own, "this creature" the
+  // creature it's given to. Before the "for each" bail below, which the
+  // quote's own count would trip.
+  if ((m = new RegExp(`^until end of turn, (~|${TARGET}) gains "([^"]+)"$`, "i").exec(s))) {
+    const quoted = m[2].replace(/^~/, "This creature").replace(/~/g, "this creature");
+    const inner = parseFace({ name: "Quoted Ability", type_line: "Creature", oracle_text: quoted });
+    if (inner.complete === true && inner.static.length === 1 && inner.triggered.length === 0 && inner.activated.length === 0) {
+      const spec = m[1] === "~" ? undefined : targetOf(m[1]);
+      if (m[1] === "~" || spec !== undefined) {
+        const target = m[1] === "~" ? "source" : ctx.target(spec);
+        return { kind: "grant-static", target, ability: inner.static[0], duration: "end-of-turn" };
+      }
+    }
+  }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
     !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s) &&
@@ -27817,14 +27833,21 @@ function parseStatic(line, text) {
   // "~ can't attack unless you pay {1} for each +1/+1 counter on it" (Phyrexian
   // Marauder), "Enchanted creature can't attack or block unless its controller
   // pays {3}" (Brainwash, Oppressive Rays), "… {1} for each card in your hand"
-  // (Cowed by Wisdom).
-  if ((m = /^(~|Enchanted creature|Equipped creature) can't (attack|block|attack or block) unless (you pay|its controller pays) \{(\d+)\}(?: for each (\+1\/\+1 counter on it|card in your hand))?\.$/.exec(line))) {
-    if ((m[1] === "~") === (m[3] === "you pay") && (m[5] !== "card in your hand" || m[4] === "1")) {
+  // (Cowed by Wisdom); a granted one's "~ … unless its controller pays {1} for
+  // each Cleric on the battlefield" (Whipgrass Entangler).
+  if ((m = /^(~|Enchanted creature|Equipped creature) can't (attack|block|attack or block) unless (you pay|its controller pays) \{(\d+)\}(?: for each (\+1\/\+1 counter on it|card in your hand|[A-Z][a-z]+ on the battlefield))?\.$/.exec(line))) {
+    const onField = m[5] !== undefined && / on the battlefield$/.test(m[5]) ? m[5].replace(/ on the battlefield$/, "") : null;
+    if (
+      ((m[1] === "~") === (m[3] === "you pay") || (onField !== null && m[1] === "~")) &&
+      (m[5] === undefined || m[4] === "1" || m[5] === "+1/+1 counter on it")
+    ) {
       const on = m[2] === "attack or block" ? ["attack", "block"] : [m[2]];
       const amount =
         m[5] === "card in your hand"
           ? { generic: "cards-in-your-hand" }
-          : { generic: Number(m[4]), ...(m[5] === undefined ? {} : { perCounter: "+1/+1" }) };
+          : onField !== null
+            ? { generic: { countOf: { subtype: onField } } }
+            : { generic: Number(m[4]), ...(m[5] === undefined ? {} : { perCounter: "+1/+1" }) };
       return { affects: { scope: m[1] === "~" ? "self" : "attached" }, combatTax: { on, ...amount }, text };
     }
   }

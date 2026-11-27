@@ -16,6 +16,7 @@ import {
   computeCharacteristics,
   countValue,
   emblemStatics,
+  grantedStatics,
   hasLostAbilities,
   staticConditionMet,
   staticReaches,
@@ -115,15 +116,20 @@ interface TaxSource {
   readonly tax: CombatTax;
 }
 
-/** Every `combatTax` static that applies now: its permanent's controller is
- * still in the game, it hasn't lost its abilities, its condition holds. */
+/** Every `combatTax` static that applies now, its permanent's own or one a
+ * `grant-static` gave it (Whipgrass Entangler's): its permanent's controller
+ * is still in the game, it hasn't lost its abilities, its condition holds.
+ * Two grants are two taxes, added up (the Entangler's ruling). */
 function taxSources(state: GameState, registry: CardRegistry, on: CombatTax["on"][number]): TaxSource[] {
   const out: TaxSource[] = [];
+  const wanted = (a: StaticAbility): boolean => a.combatTax?.on.includes(on) === true;
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
     if (source === undefined) continue;
-    const statics = registry.get(rulesTextName(source)).static;
-    if (!statics.some((a) => a.combatTax?.on.includes(on) === true)) continue;
+    const own = registry.get(rulesTextName(source)).static;
+    const granted = grantedStatics(state, registry, source, wanted);
+    const statics = granted.length === 0 ? own : [...own, ...granted];
+    if (!statics.some(wanted)) continue;
     if (state.players[source.controller]?.hasLost !== false || hasLostAbilities(state, registry, source)) continue;
     for (const ability of statics) {
       if (ability.combatTax?.on.includes(on) !== true) continue;

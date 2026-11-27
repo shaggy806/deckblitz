@@ -6267,7 +6267,9 @@ it" (Awesome Presence). A blocker pays once however many attackers it blocks. `g
 `perCounter` makes it per counter on the taxed creature, `"any"` or a kind (Nils, Phyrexian
 Marauder); `covers` narrows an attack to "you", as above (Nils); `attacker` narrows a block to the
 attackers matching a filter, "you" being this permanent's controller (Hipparion). A `condition`
-turns it on and off (Archangel of Tithes). No requirement obliges paying (508.1d, 509.1c: the
+turns it on and off (Archangel of Tithes). A `grant-static` can give one, `affects: { scope:
+"self" }` the creature it's given to (Whipgrass Entangler's "{1} for each Cleric on the
+battlefield", `generic: { countOf: { subtype: "Cleric" } }`): two grants are two taxes. No requirement obliges paying (508.1d, 509.1c: the
 offers' `mustAttack` and `lurePlan` leave a taxed creature out); bots and the fuzzer cut to the
 budget (`withinAttackTax`, `withinBlockTax`). For a turn: the `player-effect` effect's `blockTax`
 (War Cadence), every block by anyone. `permanents: { do, filter, count, noun }`, on an attack, is
