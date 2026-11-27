@@ -12770,7 +12770,11 @@ export class Game {
     this.prunePermissionGroups();
     // "Lands you control don't untap during your next untap step" (Kefnet's
     // Last Word): whatever matches now, whenever it arrived.
-    const skips = this.state.players[active]?.untapSkips ?? [];
+    // Blinding Beam's "Creatures don't untap" holds the active player's too.
+    const skips = [
+      ...(this.state.players[active]?.untapSkips ?? []),
+      ...(this.state.players[active]?.untapSkipsAnyController ?? []),
+    ];
     // "Skips their next untap step" (rule 614.10): proceed past it as though
     // it didn't exist (500.11) — no phasing, nothing untapping, and whatever
     // waits for "their next untap step" waits for the next one that happens
@@ -13002,11 +13006,15 @@ export class Game {
     }
     if (untapped > 0) this.emit({ type: "untap-step-untapped", player: active, count: untapped });
     // Seedborn Muse, Unwinding Clock, Bender's Waterskin: other players'
-    // permanents that untap during this player's untap step too.
+    // permanents that untap during this player's untap step too — unless
+    // "Creatures don't untap during target player's next untap step"
+    // (Blinding Beam) holds every creature, whoever controls it.
+    const anySkips = this.state.players[active]?.untapSkipsAnyController ?? [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       if (object === undefined || object.controller === active || !object.tapped) continue;
       if (this.state.players[object.controller]?.hasLost === true) continue;
+      if (anySkips.some((filter) => matchesFilter(this.state, this.registry, id, filter, { you: active }))) continue;
       if (object.exertedBy !== active && !heldThroughUntapStepOf(object, active) && this.untapsDuringOthersUntap(object)) {
         this.untapUnlessStunned(id, active);
       }
@@ -13021,6 +13029,7 @@ export class Game {
     }
     const activeState = this.state.players[active];
     if (activeState?.untapSkips !== undefined) delete activeState.untapSkips;
+    if (activeState?.untapSkipsAnyController !== undefined) delete activeState.untapSkipsAnyController;
   }
 
   /**
@@ -46865,9 +46874,11 @@ controlledBy,
           ? { card, stint: this.state.objects[card]?.zoneChangeCount ?? 0 }
           : undefined,
       endLibraryTopEffects: () => this.endLibraryTopEffects(),
-      skipNextUntap: (target, filter) => {
+      skipNextUntap: (target, filter, anyController) => {
         const player = target.kind === "player" ? this.state.players[target.player] : undefined;
-        if (player !== undefined) player.untapSkips = [...(player.untapSkips ?? []), filter];
+        if (player === undefined) return;
+        if (anyController === true) player.untapSkipsAnyController = [...(player.untapSkipsAnyController ?? []), filter];
+        else player.untapSkips = [...(player.untapSkips ?? []), filter];
       },
       returnToHandDuringNextUntap: (object) => {
         const permanent = this.state.objects[object];

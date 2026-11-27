@@ -10045,10 +10045,17 @@ export type EffectSpec =
        * so one that came under their control since is held too (the rulings),
        * unlike `tap-all`'s `doesntUntapNext`, which marks what's there now.
        * `who` is a player slot or a scope, `"you"` by default.
+       *
+       * `anyController`: "**Creatures** don't untap during target player's
+       * next untap step" (Blinding Beam) — not only that player's: a
+       * permanent another player controls that would untap during that
+       * step (Seedborn Muse's, rule 502.3's "unless an effect allows
+       * otherwise") stays tapped too, if it matches.
        */
       readonly kind: "skip-next-untap";
       readonly filter: CardFilter;
       readonly who?: number | PlayerScope;
+      readonly anyController?: true;
     }
   | {
       /**
@@ -15281,7 +15288,7 @@ export interface EffectApi {
    * every instruction, as `noteStateMutation` is. */
   endLibraryTopEffects?(): void;
   /** See the `"skip-next-untap"` {@link EffectSpec}. */
-  skipNextUntap(target: TargetRef, filter: CardFilter): void;
+  skipNextUntap(target: TargetRef, filter: CardFilter, anyController?: true): void;
   /** See the `"return-to-hand-during-next-untap"` {@link EffectSpec}: the
    * effect's controller's next untap step returns `object`. */
   returnToHandDuringNextUntap(object: ObjectId): void;
@@ -23448,7 +23455,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "skip-next-untap": {
-      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) ctx.skipNextUntap(target, spec.filter);
+      for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) ctx.skipNextUntap(target, spec.filter, spec.anyController);
       return;
     }
     case "return-to-hand-during-next-untap": {

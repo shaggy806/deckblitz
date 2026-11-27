@@ -1733,6 +1733,11 @@ describe("effect templates", () => {
     ["Add {R} or {G}.", { kind: "add-mana", mana: { oneOf: ["R", "G"] }, amount: 1 }],
     ["Each opponent skips their next untap step.", { kind: "skip-untap-step", who: "each-opponent" }],
     ["Target player skips their next untap step.", { kind: "skip-untap-step", who: 0 }],
+    [
+      "Creatures don't untap during target player's next untap step.",
+      { kind: "skip-next-untap", filter: { type: "creature" }, who: 0, anyController: true },
+    ],
+    ["Lands you control don't untap during your next untap step.", { kind: "skip-next-untap", filter: { type: "land" } }],
     ["Discard a land card.", { kind: "discard", target: "you", amount: 1, filter: { type: "land" } }],
     [
       "Discard any number of creature cards.",

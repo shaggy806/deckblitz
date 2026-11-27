@@ -3348,6 +3348,12 @@ export interface PlayerState {
    * their control since included (the rulings). Cleared by that untap step.
    * Absent with none. See the `skip-next-untap` effect. */
   untapSkips?: readonly CardFilter[];
+  /** "Creatures don't untap during target player's next untap step"
+   * (Blinding Beam): like `untapSkips`, but held from every permanent that
+   * would untap during that step, other players' included (Seedborn Muse's).
+   * Cleared by that untap step. The `skip-next-untap` effect's
+   * `anyController`. */
+  untapSkipsAnyController?: readonly CardFilter[];
   /** "During your next untap step, as you untap your permanents, return this
    * land to its owner's hand" (Undiscovered Paradise): the permanents, each
    * in the battlefield stint it was in when the effect applied (rule 400.7),

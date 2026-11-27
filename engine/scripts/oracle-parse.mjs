@@ -5408,6 +5408,15 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`all creatures your opponents control able to block (~|${TARGET}) this turn do so`).exec(s))) {
     return { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: [{ kind: "must-block", attacker: m[1] === "~" ? "source" : slot(m[1]) }] };
   }
+  // "Creatures don't untap during target player's next untap step" (Blinding
+  // Beam): every creature, whoever controls it (`anyController`); "lands you
+  // control don't untap during your next untap step" holds only theirs.
+  if ((m = re(`(creatures|lands|artifacts) don't untap during (target player|target opponent)'s next untap step`).exec(s))) {
+    return { kind: "skip-next-untap", filter: { type: m[1].toLowerCase().slice(0, -1) }, who: slot(m[2]), anyController: true };
+  }
+  if ((m = re(`(creatures|lands|artifacts) you control don't untap during your next untap step`).exec(s))) {
+    return { kind: "skip-next-untap", filter: { type: m[1].toLowerCase().slice(0, -1) } };
+  }
   // "Skips their next untap step" (rule 614.10): the whole step.
   if (re(`you skip your next untap step`).test(s)) return { kind: "skip-untap-step", who: "you" };
   if (re(`each opponent skips their next untap step`).test(s)) return { kind: "skip-untap-step", who: "each-opponent" };
