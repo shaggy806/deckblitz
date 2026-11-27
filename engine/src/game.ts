@@ -30980,6 +30980,7 @@ export class Game {
       ["sacrificed", "sacrificed"],
       ["discarded", "discarded"],
       ["exiled", "exiled"],
+      ["milled", "milled"],
     ];
     for (const [thisWay, paid] of kinds) {
       const entries = thisWayEntries(this.state, thisWay, since);

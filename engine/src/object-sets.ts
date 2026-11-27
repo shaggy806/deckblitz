@@ -64,7 +64,9 @@ export interface SetMember {
  * Wonderscape Sage's "unless that land had a nonbasic land type").
  * `"put-from-exile"` is what a `putFromExile` cost put from exile into its
  * owner's graveyard, in the graveyard stint it went to (Jester's Scepter's
- * "if it has the same name as that card"). */
+ * "if it has the same name as that card"). `"milled"` is what a `do: mill`
+ * cost milled (Charmed Pendant's "the milled card's mana cost"), in the
+ * graveyard stint it went to. */
 export type PaidKind =
   | "sacrificed"
   | "discarded"
@@ -75,7 +77,8 @@ export type PaidKind =
   | "unattached"
   | "beheld"
   | "returned"
-  | "put-from-exile";
+  | "put-from-exile"
+  | "milled";
 
 /**
  * A set of objects, by where it comes from:

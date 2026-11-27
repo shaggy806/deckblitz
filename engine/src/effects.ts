@@ -3746,8 +3746,14 @@ export type EffectSpec =
          * them, the controller's choice symbol by symbol (rule 608.2d), a
          * Phyrexian or `{2/W}` symbol its one colour. `amount` is ignored. Not
          * for a mana ability. Nothing for an object with no mana cost.
+         * `coloredSymbols`: "for each colored mana symbol in the milled card's
+         * mana cost, add one mana of that color" (Charmed Pendant, with
+         * `{ paid: "milled" }`) — the coloured symbols alone, hybrid and
+         * Phyrexian ones included (rule 107.4), generic, `{C}`, `{S}` and
+         * `{X}` none. An object set's member is read as it last existed
+         * (608.2h), so a milled card taken from the graveyard still counts.
          */
-        | { readonly manaCostOf: ObjectRef }
+        | { readonly manaCostOf: ObjectRef; readonly coloredSymbols?: true }
         | {
             readonly oneOf: readonly ManaType[];
             readonly same?: true;
@@ -21048,18 +21054,20 @@ export interface ManaSplitAsk {
  * Resonance): one entry a symbol, generic ones together, in printed order.
  * `{X}` is none (rule 107.3h: it's 0 off the stack, and `cost` has it as
  * `{0}`); a symbol of two colours is a `oneOf` of them; a Phyrexian or `{2/W}`
- * symbol is its one colour; generic, `{C}` and `{S}` are colourless. */
+ * symbol is its one colour; generic, `{C}` and `{S}` are colourless.
+ * `coloredOnly`: the coloured symbols alone (`coloredSymbols`). */
 export function manaOfManaCost(
   cost: string | null,
+  coloredOnly = false,
 ): { readonly mana: ManaType | { readonly oneOf: readonly ManaType[] }; readonly amount: number }[] {
   const out: { mana: ManaType | { readonly oneOf: readonly ManaType[] }; amount: number }[] = [];
   const isType = (s: string): s is ManaType => s === "W" || s === "U" || s === "B" || s === "R" || s === "G" || s === "C";
   for (const token of cost?.match(/\{[^}]+\}/g) ?? []) {
     const symbol = token.slice(1, -1);
     if (/^\d+$/.test(symbol)) {
-      if (Number(symbol) > 0) out.push({ mana: "C", amount: Number(symbol) });
-    } else if (symbol === "S") {
-      out.push({ mana: "C", amount: 1 });
+      if (Number(symbol) > 0 && !coloredOnly) out.push({ mana: "C", amount: Number(symbol) });
+    } else if (symbol === "S" || symbol === "C") {
+      if (!coloredOnly) out.push({ mana: "C", amount: 1 });
     } else if (isType(symbol)) {
       out.push({ mana: symbol, amount: 1 });
     } else if (symbol.includes("/")) {
@@ -21853,10 +21861,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // "Mana equal to enchanted permanent's mana cost": one add-mana a
       // symbol, read now, each symbol of two colours asked in turn.
       if (typeof spec.mana === "object" && "manaCostOf" in spec.mana) {
-        const of = objectRefAct(spec.mana.manaCostOf, ctx);
+        const named = spec.mana.manaCostOf;
+        const of = isObjectSetRef(named) ? objectRefRead(named, ctx) : objectRefAct(named, ctx);
         const cost = of === undefined ? null : ctx.manaCostToPay(of);
         const { kind: _kind, mana: _mana, amount: _amount, also, painToController: _pain, ...carried } = spec;
-        const steps: EffectSpec[] = manaOfManaCost(cost).map(({ mana, amount }) => ({ ...carried, kind: "add-mana", mana, amount }));
+        const steps: EffectSpec[] = manaOfManaCost(cost, spec.mana.coloredSymbols === true).map(({ mana, amount }) => ({ ...carried, kind: "add-mana", mana, amount }));
         if (also !== undefined) steps.push(also);
         if (steps.length > 0) applyEffectSpec({ kind: "sequence", effects: steps }, ctx);
         return;
