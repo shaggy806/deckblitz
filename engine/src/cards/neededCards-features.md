@@ -9304,3 +9304,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Creatures don't untap during a player's next untap step, whoever controls them (2026-11-27).** `effect:skip-next-untap-all-controllers`: `skip-next-untap`'s `anyController` (`PlayerState.untapSkipsAnyController`), read in `Game.untapStep` for the active player's permanents and for the others' that untap during it (Seedborn Muse). Blinding Beam.
 
 **-X/-Y with Y the lesser of X and the toughness minus 1 (2026-11-27).** `amount:min-of-amounts`: `grantPtPerCount.leavesToughness` (the toughness loss capped to leave that much, applied in `computeCharacteristics` after every other layer 7c change, rule 613.8a) and `forDefendingPlayer: "affected"` (the affected creature's defending player, for an Aura). Snowblind.
+
+**"For every N" of an amount (2026-11-27, no engine code).** `effect:amount-count-step`: `{ half: <amount>, round: "down", fraction: N }` ("for every three cards in your graveyard"). Recursive Recruitment.

@@ -873,7 +873,9 @@ mill half **their** library, rounded down" is `{ half: { librarySize:
 "each" }, round: "down" }`;
 `{ half: EffectAmount, round: "up" | "down", fraction? }` (`fraction: 10` is a
 tenth — Legate Lanius's decimate) — half of an amount, rounded
-the way the card says (rule 107.1a);
+the way the card says (rule 107.1a); "for every three cards in your
+graveyard" is `{ half: { graveyardSize: "you" }, round: "down", fraction: 3 }`
+(Recursive Recruitment);
 `{ powerOfTwo: EffectAmount }` — 2 to that power (Mathemagics' "draws 2ˣ
 cards" is `{ powerOfTwo: "x" }`; 2⁰ = 1), its exponent capped at 52;
 `{ repeatPass: true }` — which pass of the `repeat` under way this is (1 for
