@@ -1211,6 +1211,8 @@ const TARGET_PHRASES = [
   ["target permanent you control", { kind: "permanent", whose: "you", filter: {} }],
   ["target permanent", "permanent"],
   ["target player or planeswalker", "player-or-planeswalker"],
+  // A battle or any player (Onakke Javelineer): the permanent slot's `orPlayer`.
+  ["target player or battle", { kind: "permanent", filter: { type: "battle" }, orPlayer: "any" }],
   ["target opponent or planeswalker", "opponent-or-planeswalker"],
   // A player the source dealt damage to (`player-dealt-damage-by-source`):
   // this turn (Wicked Akuba), combat damage this turn (Hope of Ghirapur), or

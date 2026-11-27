@@ -1249,6 +1249,11 @@ describe("the players a sentence names by another target, the Aura's host and th
     expect(leash.enchant).toEqual({ kind: "permanent", filter: {}, asChosen: { tapped: true } });
   });
 
+  it("target player or battle (Onakke Javelineer)", () => {
+    const javelineer = face("Creature — Ogre Spirit", "{T}: This creature deals 2 damage to target player or battle.");
+    expect(javelineer.activated[0].targets).toEqual([{ kind: "permanent", filter: { type: "battle" }, orPlayer: "any" }]);
+  });
+
   it("a player the source dealt damage to this turn (Wicked Akuba)", () => {
     const akuba = face(CREATURE, "{B}: Target player dealt damage by this creature this turn loses 1 life.").activated[0];
     expect(akuba.targets).toEqual([{ kind: "player-dealt-damage-by-source" }]);

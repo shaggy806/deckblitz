@@ -106,6 +106,7 @@
     "static:attacking-doesnt-cause-tap",
     "filter:blocking-relation-of-target",
     "filter:has-level-up",
+    "target:player-or-battle",
     "filter:player-previously-dealt-damage-by-source",
     "effect:redirect-spell-from-source",
     "effect:swap-blockers",
