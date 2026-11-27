@@ -2710,7 +2710,7 @@ function hasParity(state: GameState, value: number, clause: ParityClause, source
 export type CardKeyword =
   | "convoke" | "cycling" | "disguise" | "flashback" | "kicker" | "morph" | "mutate" | "suspend"
   | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth"
-  | "partner" | "devoid" | "doctors-companion" | "foretell";
+  | "partner" | "devoid" | "doctors-companion" | "foretell" | "level-up";
 
 /** Whether a printed line of `def`'s text is this keyword ability: for the
  * keywords a card authors as their parts, with no field of their own. A dash
@@ -2765,6 +2765,10 @@ const CARD_KEYWORD_READS = {
   // card with foretell" (Niko Defies Destiny). A grant reaches only cards in
   // a hand (Dream Devourer), never a spell or a graveyard card.
   foretell: (def) => def.foretell !== null,
+  // Level up (rule 702.87a), an activated ability authored as its parts
+  // (`levelUp`): "each creature you control with level up" (Venerated
+  // Teacher).
+  "level-up": (def) => hasKeywordLine(def, "Level up"),
 } as const satisfies Record<
   CardKeyword,
   (def: CardDefinition, live: GameObject | undefined, state: GameState, registry: CardRegistry) => boolean

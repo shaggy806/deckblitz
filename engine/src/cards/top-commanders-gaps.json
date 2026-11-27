@@ -105,6 +105,7 @@
     "static:aura-cast-time-target-restriction",
     "static:attacking-doesnt-cause-tap",
     "filter:blocking-relation-of-target",
+    "filter:has-level-up",
     "filter:player-previously-dealt-damage-by-source",
     "effect:redirect-spell-from-source",
     "effect:swap-blockers",

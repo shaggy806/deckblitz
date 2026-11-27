@@ -786,7 +786,8 @@ which a devoid card's `colors: []` alone doesn't say — "a spell with devoid" (
 `spendOnly: { spell: { hasKeyword: "devoid" } }`; the scaffolder reads the line). `hasKeyword: "foretell"` is printed
 foretell (702.143): Niko Defies Destiny's "spend this mana only to foretell cards or cast spells that have
 foretell" is `spendOnly: { spell: { hasKeyword: "foretell" }, purposes: ["foretell"] }`, its "target card with
-foretell from your graveyard" the same filter. `keywordVariant: "hexproof" | "protection"` is the keyword in
+foretell from your graveyard" the same filter. `hasKeyword: "level-up"` is the printed "Level up" line (702.87a —
+Venerated Teacher's "each creature you control with level up"). `keywordVariant: "hexproof" | "protection"` is the keyword in
 any variant, printed or granted — hexproof or a "hexproof from [quality]" (702.11d), any "protection from"
 (702.16a) — where `keyword: "hexproof"` is the plain ability alone. `hasActivatedAbility: { mana?: boolean, tapCost?: boolean }` is a non-mana
 activated ability (605.1a); `tapCost: true` one with {T} in its cost (Magewright's Stone; a basic
