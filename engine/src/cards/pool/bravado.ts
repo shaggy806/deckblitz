@@ -1,8 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Urza's Saga (USG). EDHREC rank 14101. "Each other creature you control" is
-// other than the enchanted creature: the count is every creature you control,
-// less one while the enchanted creature is one of yours (`grantPtPerCount`'s
+// other than the enchanted creature (`hostOfSource: false`; `grantPtPerCount`'s
 // `excludeSelf` would leave out this Aura, not the creature). Continuously
 // calculated (the ruling).
 
@@ -19,13 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      grantPtPerCount: { filter: { type: "creature", controlledBy: "you" }, pt: [1, 1] },
-      text: TEXT,
-    },
-    {
-      affects: { scope: "attached" },
-      condition: { kind: "source", filter: { attachedTo: { type: "creature", controlledBy: "you" } } },
-      grantPt: [-1, -1],
+      grantPtPerCount: { filter: { type: "creature", controlledBy: "you", hostOfSource: false }, pt: [1, 1] },
       text: TEXT,
     },
   ],

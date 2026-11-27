@@ -21614,6 +21614,23 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (tokenReplacement !== null) { out.static.push(tokenReplacement); continue; }
     const exileReplacement = exileReplacementOf(line, printed(raw), tokenFor);
     if (exileReplacement !== null) { out.static.push(exileReplacement); continue; }
+    // On an Aura, "other creatures" are other than the enchanted creature
+    // (Vampirism): `hostOfSource: false`, not `excludeSelf`.
+    if (/\bAura\b/.test(face.type_line ?? "")) {
+      const OTHERS = { type: "creature", controlledBy: "you", hostOfSource: false };
+      if ((m = /^Other creatures you control get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
+        out.static.push({ affects: { scope: "filter", filter: OTHERS }, grantPt: [Number(m[1]), Number(m[2])], text: printed(raw) });
+        continue;
+      }
+      if ((m = /^Enchanted creature gets ([+-]\d+)\/([+-]\d+) for each other creature you control\.$/.exec(line))) {
+        out.static.push({
+          affects: { scope: "attached" },
+          grantPtPerCount: { filter: OTHERS, pt: [Number(m[1]), Number(m[2])] },
+          text: printed(raw),
+        });
+        continue;
+      }
+    }
     const st = parseStatic(line, printed(raw));
     if (st !== null) { out.static.push(st); continue; }
 

@@ -1,8 +1,7 @@
 import { defineCard } from "../define.js";
 
-// Ravnica: City of Guilds (RAV). EDHREC rank 19638. Bravado's count: every
-// creature you control, less one while the enchanted creature is one of
-// yours ("each other creature" is other than the enchanted one).
+// Ravnica: City of Guilds (RAV). EDHREC rank 19638. Bravado's count: the
+// creatures you control other than the enchanted one (`hostOfSource: false`).
 const TEXT = "Enchanted creature gets +0/+2 for each other creature you control.";
 
 export default defineCard({
@@ -17,13 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      grantPtPerCount: { filter: { type: "creature", controlledBy: "you" }, pt: [0, 2] },
-      text: TEXT,
-    },
-    {
-      affects: { scope: "attached" },
-      condition: { kind: "source", filter: { attachedTo: { type: "creature", controlledBy: "you" } } },
-      grantPt: [0, -2],
+      grantPtPerCount: { filter: { type: "creature", controlledBy: "you", hostOfSource: false }, pt: [0, 2] },
       text: TEXT,
     },
   ],
