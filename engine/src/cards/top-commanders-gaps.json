@@ -99,6 +99,7 @@
     "cost:cumulative-upkeep-non-mana",
     "static:block-additional-per-count",
     "effect:damage-divided-evenly-among-filter",
+    "replacement:as-enters-discard-hand",
     "replacement:as-turned-face-up-dynamic-counters",
     "static:counter-cap",
     "condition:started-turn-untapped",

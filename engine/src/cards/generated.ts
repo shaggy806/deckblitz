@@ -13033,6 +13033,7 @@ import _poolHeiBaiForestGuardian from "./pool/hei-bai-forest-guardian.js";
 import _poolHeiBaiSpiritOfBalance from "./pool/hei-bai-spirit-of-balance.js";
 import _poolHeidarRimewindMaster from "./pool/heidar-rimewind-master.js";
 import _poolHeideggerShinraExecutive from "./pool/heidegger-shinra-executive.js";
+import _poolHeightenedAwareness from "./pool/heightened-awareness.js";
 import _poolHeightenedReflexes from "./pool/heightened-reflexes.js";
 import _poolHeikoYamazakiTheGeneral from "./pool/heiko-yamazaki-the-general.js";
 import _poolHeirOfFalkenrath from "./pool/heir-of-falkenrath.js";
@@ -47418,6 +47419,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeiBaiSpiritOfBalance,
   _poolHeidarRimewindMaster,
   _poolHeideggerShinraExecutive,
+  _poolHeightenedAwareness,
   _poolHeightenedReflexes,
   _poolHeikoYamazakiTheGeneral,
   _poolHeirOfFalkenrath,
@@ -81816,6 +81818,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hei-bai-spirit-of-balance": _poolHeiBaiSpiritOfBalance,
   "pool/heidar-rimewind-master": _poolHeidarRimewindMaster,
   "pool/heidegger-shinra-executive": _poolHeideggerShinraExecutive,
+  "pool/heightened-awareness": _poolHeightenedAwareness,
   "pool/heightened-reflexes": _poolHeightenedReflexes,
   "pool/heiko-yamazaki-the-general": _poolHeikoYamazakiTheGeneral,
   "pool/heir-of-falkenrath": _poolHeirOfFalkenrath,

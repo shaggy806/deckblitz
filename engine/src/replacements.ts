@@ -388,6 +388,10 @@ export interface AsEntersAction {
    * (one each however many have it — its 2025 ruling; rule 122.1b).
    */
   readonly discard?: { readonly filter: CardFilter; readonly keywordCounters?: readonly Keyword[] };
+  /** "As this enchantment enters, discard your hand" (Heightened Awareness):
+   * the whole hand, nothing chosen, discarded as part of the replacement
+   * before it enters (rule 614.1c). How many is `"done-as-enters"`. */
+  readonly discardHand?: true;
   /**
    * "As this creature enters, you may reveal any number of other artifact
    * cards from your hand" (Arsenal Thresher): cards matching `filter` from its

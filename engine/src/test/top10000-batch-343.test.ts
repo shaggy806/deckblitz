@@ -175,6 +175,21 @@ describe("batch 343 (lead)", () => {
     for (const id of theirs) expect(game.state.objects[id].damageMarked).toBe(0);
   });
 
+  it("Heightened Awareness discards its caster's hand as it enters, then draws an extra card each draw step", () => {
+    const { game } = table();
+    lands(game, "Island", 5);
+    const awareness = toHand(game, "Heightened Awareness");
+    const kept = hand(game, A).filter((id) => id !== awareness);
+    expect(kept.length).toBeGreaterThan(0);
+    cast(game, awareness);
+    expect(zone(game, awareness)).toBe("battlefield");
+    for (const id of kept) expect(zone(game, id)).toBe("graveyard");
+    expect(hand(game, A).length).toBe(0);
+    nextTurn(game);
+    nextTurn(game);
+    expect(hand(game, A).length).toBe(2);
+  });
+
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {
     const { game, a } = table();
     const turtle = spawn(game, "Giant Turtle");

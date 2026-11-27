@@ -18807,6 +18807,17 @@ export class Game {
       object.enterChoice = { ...object.enterChoice, asEntersDone: Math.max(0, lost) };
       return false;
     }
+    // "As this enchantment enters, discard your hand" (Heightened
+    // Awareness): nothing to choose; discarded as part of the replacement,
+    // before it moves (614.1c), the cards entering with it aside.
+    if (spec.discardHand === true) {
+      const cards = this.state.zones.perPlayer[chooser].hand.filter(
+        (card) => card !== id && this.enterBatch?.has(card) !== true,
+      );
+      if (cards.length > 0) this.discardCards(chooser, cards);
+      object.enterChoice = { ...object.enterChoice, asEntersDone: cards.length };
+      return false;
+    }
     if (spec.putFromExile !== undefined) {
       const count = spec.putFromExile;
       const { eligible, faceDownGroups } = this.exileChoiceCandidates(chooser, { ownedBy: "opponent" }, undefined, id);

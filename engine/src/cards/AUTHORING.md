@@ -8455,7 +8455,7 @@ clause (section 9):
   count, upTo?, anyGraveyard?, orToGraveyard?, counterForEach? }` from a
   graveyard, linked to it (Living Lore, Sutured Ghoul, Mimeoplasm, Frankenstein's
   Monster); `returnPermanent: { filter }` (Rescuer Sphinx); `putFromExile: N`
-  (Ulamog's Despoiler); `discard: { filter, keywordCounters? }` is "discard any
+  (Ulamog's Despoiler); `discardHand: true` is "discard your hand" (Heightened Awareness), the whole hand, nothing chosen; `discard: { filter, keywordCounters? }` is "discard any
   number of creature cards" from hand (Indominus Rex, Alpha), and
   `keywordCounters` gives it one counter of each listed keyword some discarded
   card has. `reveal: { filter, upTo? }` is "you may reveal [any number of /

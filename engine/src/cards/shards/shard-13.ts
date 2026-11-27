@@ -376,6 +376,7 @@ import _poolHarmonyOfNature from "../pool/harmony-of-nature.js";
 import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHauntedLibrary from "../pool/haunted-library.js";
 import _poolHeartOfKiran from "../pool/heart-of-kiran.js";
+import _poolHeightenedAwareness from "../pool/heightened-awareness.js";
 import _poolHellishSideswipe from "../pool/hellish-sideswipe.js";
 import _poolHeraldOfEternalDawn from "../pool/herald-of-eternal-dawn.js";
 import _poolHeraldOfHoofbeats from "../pool/herald-of-hoofbeats.js";
@@ -1411,6 +1412,7 @@ const shard: CardShard = {
     _poolHarnesserOfStorms,
     _poolHauntedLibrary,
     _poolHeartOfKiran,
+    _poolHeightenedAwareness,
     _poolHellishSideswipe,
     _poolHeraldOfEternalDawn,
     _poolHeraldOfHoofbeats,
