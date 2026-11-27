@@ -140,12 +140,16 @@ function describe(action) {
 if (has("log")) {
   // The client's own sentences (`client/src/format.ts`, plain TypeScript Node
   // runs as it is), every card named: nothing is hidden from a replay.
-  const { describeEvent } = await import(new URL("../client/src/format.ts", import.meta.url).href);
+  const { abilitySourcesOf, describeEvent } = await import(new URL("../client/src/format.ts", import.meta.url).href);
+  // An ability is no card and is gone once it resolves: named by its source,
+  // as the client's History names it ("Emet-Selch's ability", not "obj-487").
+  const abilities = abilitySourcesOf(game.events);
+  const logName = (id) => (abilities.has(id) ? `${nameOf(abilities.get(id))}'s ability` : nameOf(id));
   const seats = record.seats.map((s) => ({ player: s.player, displayName: s.name, bot: s.bot }));
   const lines = game.events.map((event) => {
     let sentence;
     try {
-      sentence = describeEvent(event, nameOf, seats);
+      sentence = describeEvent(event, logName, seats);
     } catch {
       sentence = JSON.stringify(event).slice(0, 200);
     }
