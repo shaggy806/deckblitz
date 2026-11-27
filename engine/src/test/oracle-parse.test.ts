@@ -25749,3 +25749,23 @@ describe("tapped and untapped swapped", () => {
     expect(parsed.effect).toEqual({ kind: "tap-all", filter: { type: "creature" }, swap: true });
   });
 });
+
+describe("this ability triggers only once", () => {
+  it("is triggersOnlyOnce, ever for this object (the Collectors, Acrobatic Cheerleader)", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Human",
+      mana_cost: "{W}",
+      power: "1",
+      toughness: "1",
+      oracle_text:
+        "Whenever you attack with three or more creatures, put a +1/+1 counter on this creature. This ability triggers only once.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      trigger: { on: "attack-with", who: "you", atLeast: 3 },
+      effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+      triggersOnlyOnce: true,
+    });
+    expect(parsed.triggered[0].oncePerTurn).toBeUndefined();
+  });
+});

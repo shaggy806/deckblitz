@@ -5936,6 +5936,13 @@ counter on it. This ability triggers only once each turn.'"). A "one or
 more … enter" with no once-a-turn limit is `batched: true` on the
 `enters-battlefield` trigger instead.
 
+**`triggersOnlyOnce: true`** is "This ability triggers only once" — ever, for
+this object (the Mystery Booster Collectors, Acrobatic Cheerleader's
+survival): once it has triggered it never does again, but a permanent that
+leaves and returns is a new object (rule 400.7) that may. Kept in the
+journal (`triggeredOnceEver`); any trigger kind takes it, a step trigger's
+too. The scaffolder reads the sentence.
+
 **`condition?`** (`StaticCondition`, the same union section 10 documents) is an
 **intervening-if** clause — rule 603.4, "When ~ enters, **if** you control a
 creature with power 4 or greater, draw a card":

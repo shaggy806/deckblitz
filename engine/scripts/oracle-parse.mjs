@@ -21652,6 +21652,13 @@ function parseFaceAsWritten(face, ctx = {}) {
         oncePerTurn = true;
         return "";
       });
+      // "This ability triggers only once" — ever, for this object (Acrobatic
+      // Cheerleader, the Collectors): `triggersOnlyOnce`.
+      let onlyOnceEver = false;
+      rest = rest.replace(/ This ability triggers only once\.$/, () => {
+        onlyOnceEver = true;
+        return "";
+      });
       const base = {
         targets: [],
         effect: null,
@@ -21669,6 +21676,7 @@ function parseFaceAsWritten(face, ctx = {}) {
           ? { fromGraveyard: true }
           : {}),
         ...(oncePerTurn ? { oncePerTurn: true } : {}),
+        ...(onlyOnceEver ? { triggersOnlyOnce: true } : {}),
         ...(timeCounterOk ? { whileSuspended: true } : {}),
         ...(whileSaddled ? { whileCondition: { kind: "source", filter: { saddled: true } } } : {}),
         ...(blockedKeyword !== undefined ? { whileCondition: { kind: "trigger-object", filter: { keyword: blockedKeyword } } } : {}),
