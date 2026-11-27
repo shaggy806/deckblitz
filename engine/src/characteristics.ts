@@ -4106,13 +4106,14 @@ function licidModifier(object: GameObject): PtModifier | null {
  */
 function becameAuraModifier(object: GameObject): PtModifier | null {
   const swap = object.enchantSwap;
-  if (swap?.becameAura !== true) return null;
+  if (swap?.becameAura !== true && swap?.lostAura !== true) return null;
   return {
     power: 0,
     toughness: 0,
     keywords: [],
     untilEndOfTurn: false,
-    addSubtypes: ["Aura"],
+    // Takklemaggot's "as a non-Aura enchantment" (`lostAura`): the reverse.
+    ...(swap.lostAura === true ? { removeSubtypes: ["Aura"] } : { addSubtypes: ["Aura"] }),
     timestamp: swap.at,
   };
 }

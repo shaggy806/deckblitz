@@ -1010,6 +1010,11 @@ export interface GameObject {
      * Lion): it enters as an Aura, so what it enchants is chosen as it
      * enters (rule 303.4f), from what this allows. Set before it's asked. */
     readonly enterAura?: TargetSpec;
+    /** The effect putting it there says it's "a non-Aura enchantment" that
+     * loses its enchant ability (`EnterTypes.notAura` — Takklemaggot): no
+     * Aura as it enters (rule 614.12), so nothing is chosen for it to
+     * enchant. Set before it's asked; lands on `enchantSwap.lostAura`. */
+    readonly enterNotAura?: true;
     /** The effect putting it there puts it there transformed: its back face
      * is up as it enters (rule 712.14a), so its choices are that face's. Set
      * before they're asked. */
@@ -1878,6 +1883,10 @@ export interface GameObject {
   enchantSwap?: {
     readonly at: number;
     readonly becameAura?: true;
+    /** The reverse: from `at` it's no Aura — the subtype gone (layer 4) and
+     * its enchant ability with it (layer 6) — "as a non-Aura enchantment. It
+     * loses 'enchant creature'" (Takklemaggot, `EnterTypes.notAura`). */
+    readonly lostAura?: true;
     readonly put?: { readonly object: ObjectId | null; readonly stint: number };
     readonly spec?: TargetSpec;
   };

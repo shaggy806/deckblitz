@@ -7546,6 +7546,24 @@ export function becameAuraDefinition(def: CardDefinition): CardDefinition {
   return aura;
 }
 
+const lostAuraDefinitions = new WeakMap<CardDefinition, CardDefinition>();
+
+/**
+ * An Aura card that entered "as a non-Aura enchantment. It loses 'enchant
+ * creature'" (Takklemaggot — `GameObject.enchantSwap`'s `lostAura`): its own
+ * definition without the subtype Aura or its enchant ability (the slot its
+ * spell targets), what the Aura questions are asked of — so it's no Aura to
+ * the state-based check (704.5m) and can enchant nothing. The layer fold
+ * takes the subtype off at the effect's timestamp (`characteristics.ts`).
+ */
+export function lostAuraDefinition(def: CardDefinition): CardDefinition {
+  const known = lostAuraDefinitions.get(def);
+  if (known !== undefined) return known;
+  const plain: CardDefinition = { ...def, subtypes: def.subtypes.filter((s) => s !== "Aura"), targets: [] };
+  lostAuraDefinitions.set(def, plain);
+  return plain;
+}
+
 /**
  * A card an effect puts onto the battlefield as "an Aura enchantment with
  * enchant" `enchant` (`EnterTypes.enchant` — Harold and Bob, First Numens):

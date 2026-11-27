@@ -107,6 +107,7 @@ import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, scavenge, unearth } from "./cards/helpers.js";
 import {
   becameAuraDefinition,
+  lostAuraDefinition,
   enteringAuraDefinition,
   bestowedDefinition,
   casualtyReadsX,
@@ -1937,7 +1938,8 @@ function faceDownStatus(kind: FaceDownKind, enter: EnterOptions): NonNullable<Ga
  * {@link faceDownEntry}). Nothing for none. */
 function enterTypesEntry(types: EnterTypes | undefined): Pick<EnterOptions, "asEntered" | "ifCreature"> {
   if (types === undefined) return {};
-  const { faceDown: _faceDown, ifCreature, enchant: _enchant, ...asEntered } = types;
+  // `notAura` and `chosenPlayer` are entry choices (`markEnteringWithoutAbilities`), no patch.
+  const { faceDown: _faceDown, ifCreature, enchant: _enchant, notAura: _notAura, chosenPlayer: _chosen, ...asEntered } = types;
   return {
     ...(Object.keys(asEntered).length > 0 ? { asEntered } : {}),
     ...(ifCreature === true ? { ifCreature: true as const } : {}),
@@ -18030,8 +18032,11 @@ export class Game {
     if (enterAura !== undefined && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
       return { kind: "enchant", as: enteringAuraDefinition(def, enterAura) };
     }
+    // Entering "as a non-Aura enchantment" (`EnterTypes.notAura`), it isn't
+    // one as it enters (rule 614.12): nothing to choose for it to enchant.
+    const entersAura = answered?.enterNotAura !== true;
     if (entersWithoutAbilities(this.state, this.registry, object)) {
-      if (def.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
+      if (entersAura && def.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
         return { kind: "enchant", as: def };
       }
       if (answered?.protector === undefined && def.types.includes("battle")) {
@@ -18259,7 +18264,7 @@ export class Game {
     if (answered?.tributePaid === undefined && becoming.tribute !== null) {
       return { kind: "tribute", amount: becoming.tribute };
     }
-    if (becoming.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
+    if (entersAura && becoming.subtypes.includes("Aura") && answered?.enchant === undefined && answered?.enchantPlayer === undefined) {
       return { kind: "enchant", as: becoming };
     }
     // "…attached to a creature you control" (One Last Job): an Equipment's
@@ -19390,6 +19395,7 @@ export class Game {
     if (object.bestowed === true) return bestowedDefinition(printed);
     if (object.licid !== undefined) return licidDefinition(printed);
     if (object.enchantSwap?.becameAura === true) return becameAuraDefinition(printed);
+    if (object.enchantSwap?.lostAura === true) return lostAuraDefinition(printed);
     return printed;
   }
 
@@ -63629,6 +63635,15 @@ controlledBy,
     if (types?.enchant !== undefined && object.enterChoice?.enterAura === undefined) {
       object.enterChoice = { ...object.enterChoice, enterAura: types.enchant };
     }
+    // "As a non-Aura enchantment" (`EnterTypes.notAura`): no Aura as it
+    // enters (rule 614.12), so nothing is chosen for it to enchant.
+    if (types?.notAura === true && object.enterChoice?.enterNotAura !== true) {
+      object.enterChoice = { ...object.enterChoice, enterNotAura: true };
+    }
+    // "That player" noted on it (`EnterTypes.chosenPlayer`).
+    if (types?.chosenPlayer !== undefined && object.enterChoice?.chosenPlayer === undefined) {
+      object.enterChoice = { ...object.enterChoice, chosenPlayer: types.chosenPlayer };
+    }
     if (types?.loseAbilities !== true) return;
     if (object.enterChoice?.withoutAbilities === true) return;
     object.enterChoice = { ...object.enterChoice, withoutAbilities: true };
@@ -78630,6 +78645,10 @@ controlledBy,
       if (enterChoice?.enterAura !== undefined) {
         object.enchantSwap = { at: object.timestamp, spec: enterChoice.enterAura, becameAura: true };
       }
+      // "As a non-Aura enchantment. It loses 'enchant creature'"
+      // (`EnterTypes.notAura`): no Aura, and no enchant ability, from the
+      // moment it enters.
+      if (enterChoice?.enterNotAura === true) object.enchantSwap = { at: object.timestamp, lostAura: true };
       // Replacement effects that apply as it enters (rule 614.1c) — tapped /
       // enters-with-counters, its own and other permanents'. `object.counters`
       // was just reset above (unless it keeps them across zones, when these

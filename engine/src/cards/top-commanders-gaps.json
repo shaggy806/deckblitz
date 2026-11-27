@@ -3339,7 +3339,9 @@
   "filter:same-name-as-cost-moved-card",
   "filter:same-name-as-target-in-search",
   "zone:ability-from-several-zones",
-  "effect:look-at-hand-of-target-spell-controller"
+  "effect:look-at-hand-of-target-spell-controller",
+  "effect:return-aura-after-host-died",
+  "effect:aura-becomes-non-aura-enchantment"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

@@ -5137,6 +5137,8 @@ export type EffectSpec =
       /** "…onto the battlefield **attached to** this creature / that
        * creature / target creature" (Magnetic Snuffler, Smoke Shroud,
        * Unfinished Business): the permanent this names — a slot,
+       * a set (`{ thisWay: "chosen" }` — Takklemaggot's "attached to that
+       * creature", chosen by another player just before),
        * `"source"`, `"trigger-object"` — and it enters attached to that permanent (rules 303.4i, 301.5e, 303.4h): an Aura that
        * can't legally enchant it — or with nothing there, the permanent
        * having left (rule 400.7) — stays where it is; an Equipment that
@@ -5160,11 +5162,22 @@ export type EffectSpec =
        * card with the noted name" (`cast-now`'s `copyOfCardNamed: { noted:
        * "source" }`). */
       readonly noteName?: true;
+      /** The player it enters with as "the chosen player"
+       * (`GameObject.chosenPlayer`): Takklemaggot's "it gains 'At the
+       * beginning of **that player's** upkeep, this enchantment deals 1
+       * damage to that player'" is `{ controllerOf: "trigger-object" }`, its
+       * gained ability's `"chosen-player"`. Naming nobody, none is noted. */
+      readonly chosenPlayer?: PlayerRef;
       /** "…if it's a permanent card" (Yarus, Roar of the Old Gods), the card
        * itself and not what it was as a face-down permanent: an instant or
        * sorcery card stays where it is, though `faceDown` alone would let it
        * enter (the 2/2 it would be is a permanent, rule 708.2a). */
       readonly ifPermanentCard?: true;
+      /** "…returns this Aura **from its owner's graveyard** to the
+       * battlefield" (Traveling Plague): only a card still in its owner's
+       * graveyard moves — the Aura a state-based action put there after its
+       * creature left; exiled instead (Rest in Peace), it stays. */
+      readonly fromGraveyard?: true;
     }
   | {
       /** Exile every card in a target *player's* graveyard (rule 406 — Bojuka
@@ -13572,6 +13585,20 @@ export interface EnterTypes extends ResolvedPatch {
    * `noteName` — Magar of the Magic Strings, rule 707.14): not a
    * characteristic, so nothing but `put-onto-battlefield` reads it. */
   readonly noteName?: true;
+  /** "…return this card to the battlefield under your control **as a
+   * non-Aura enchantment. It loses 'enchant creature'**" (Takklemaggot): an
+   * Aura card that enters as no Aura (rule 614.12) — nothing is chosen for
+   * it to enchant (303.4f is about an Aura), and with nothing to enchant it
+   * still enters (303.4g) — then has neither the subtype Aura (layer 4) nor
+   * its enchant ability (layer 6) for as long as it stays
+   * (`GameObject.enchantSwap`'s `lostAura`), so it's no Aura to the
+   * state-based check (704.5m). */
+  readonly notAura?: true;
+  /** The player noted on it as "the chosen player" as it enters
+   * (`GameObject.chosenPlayer`) — `put-onto-battlefield`'s `chosenPlayer`
+   * resolved, never authored: Takklemaggot's "at the beginning of **that
+   * player's** upkeep", the player who chose for it. */
+  readonly chosenPlayer?: PlayerId;
 }
 
 /** What a spell's copy gains — see `copy-spell`'s `gains`. */
@@ -20418,6 +20445,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "attachedToObject" in value ||
       "notObject" in value ||
       "couldEnchant" in value ||
+      "enchantableBy" in value ||
       "attachedToPlayerRef" in value ||
       "controlledByRef" in value ||
       "attackingPlayerRef" in value ||
@@ -20815,6 +20843,18 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
             ? (ctx.sourceStintNow() ?? ctx.battlefieldStintOf(read.object))
             : ctx.battlefieldStintOf(read.object);
       walked = { ...rest, couldEnchantHost: read?.kind === "object" && stint !== undefined ? { object: read.object, stint } : null };
+    }
+    // "A creature that this card could enchant" (Takklemaggot): the Aura the
+    // reference names as it is now — the source back in its graveyard — to
+    // enter under this effect's controller.
+    if (walked["enchantableBy"] !== undefined) {
+      const { enchantableBy: ref, ...rest } = walked;
+      const read = objectRefRead(ref as ObjectRef, ctx);
+      const gone = ref === "source" ? ctx.sourceLost : ref === "trigger-object" ? ctx.triggerObjectLost : false;
+      walked = {
+        ...rest,
+        enchantableByAura: read?.kind === "object" && gone !== true ? { object: read.object, controller: ctx.controller } : null,
+      };
     }
     // "Curses attached to that player": the player the ref names as this
     // applies; nobody, nothing.
@@ -22799,6 +22839,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const parked = ctx.parkedCount();
       if (target !== undefined) {
         if (spec.ifPermanentCard === true && !ctx.isPermanentCard(target)) return;
+        if (spec.fromGraveyard === true) {
+          const owner = ctx.ownerOf(target);
+          if (target.kind !== "object" || owner === undefined || !ctx.cardsIn(owner, "graveyard").includes(target.object)) return;
+        }
         let under = spec.underYourControl === true ? ctx.controller : undefined;
         if (spec.under !== undefined) {
           // Someone else puts it there, under their control: an illegal
@@ -22807,6 +22851,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           under = resolvePlayerRef(spec.under, ctx);
           if (under === undefined) return;
         }
+        const notedPlayer = spec.chosenPlayer === undefined ? undefined : resolvePlayerRef(spec.chosenPlayer, ctx);
         const asked = ctx.putOntoBattlefield(
           target,
           under,
@@ -22818,8 +22863,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
             spec.addSubtypes !== undefined ||
             spec.faceDown !== undefined ||
             spec.enterAs !== undefined ||
-            spec.noteName === true
+            spec.noteName === true ||
+            notedPlayer !== undefined
             ? {
+                ...(notedPlayer !== undefined ? { chosenPlayer: notedPlayer } : {}),
                 ...spec.enterAs,
                 ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
                 ...(spec.addSubtypes !== undefined || spec.enterAs?.addSubtypes !== undefined

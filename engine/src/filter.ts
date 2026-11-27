@@ -1747,6 +1747,23 @@ export interface CardFilter {
    */
   readonly couldEnchantHost?: { readonly object: ObjectId; readonly stint: number } | null;
   /**
+   * A permanent **that this Aura could enchant** — the other way round from
+   * `couldEnchant`: Takklemaggot's "that creature's controller chooses a
+   * creature that this card could enchant" (rule 303.4: its enchant ability
+   * allows it and protection doesn't stop it; not targeting, so shroud
+   * doesn't). The Aura is the object this names, wherever it is now (the
+   * source back in its graveyard). Bound as the effect resolves into
+   * {@link enchantableByAura}; read through the same game reader as
+   * `couldEnchant`, and fails closed with no game.
+   */
+  readonly enchantableBy?: ObjectRef;
+  /**
+   * `enchantableBy` bound — never authored: the Aura, and the player it would
+   * enter under (the effect's controller, who "enchant creature you control"
+   * is read from). `null`: it names nothing, so nothing matches.
+   */
+  readonly enchantableByAura?: { readonly object: ObjectId; readonly controller: PlayerId } | null;
+  /**
    * An Aura **with enchant creature** (rule 702.5a): its enchant ability is
    * exactly "Enchant creature" — not "enchant creature you control" or
    * "enchant green creature" (the Cartouche and Aura Finesse rulings treat
@@ -1781,6 +1798,8 @@ function isEnchantCreature(spec: TargetSpec | undefined): boolean {
 function enchantAbilityOf(registry: CardRegistry, object: GameObject): TargetSpec | undefined {
   if (object.bestowed === true) return "creature";
   if (object.zone === "battlefield" && object.enchantSwap?.spec !== undefined) return object.enchantSwap.spec;
+  // It lost its enchant ability (Takklemaggot's "it loses 'enchant creature'").
+  if (object.zone === "battlefield" && object.enchantSwap?.lostAura === true) return undefined;
   const def = registry.get(printedCardName(object));
   if (!def.subtypes.includes("Aura")) return undefined;
   return def.targets[0];
@@ -4070,6 +4089,15 @@ export function matchesFilter(
     const read = couldEnchantReaders.get(state);
     if (host === undefined || host === null || read === undefined || live === undefined) return false;
     if (!read(id, host, ctx.you)) return false;
+  }
+  // "A creature that this card could enchant": the same question asked of
+  // this permanent as the host, as it is now.
+  if (filter.enchantableBy !== undefined || filter.enchantableByAura !== undefined) {
+    const aura = filter.enchantableByAura;
+    const read = couldEnchantReaders.get(state);
+    if (aura === undefined || aura === null || read === undefined || layered !== undefined) return false;
+    if (live === undefined || live.zone !== "battlefield") return false;
+    if (!read(aura.object, { object: id, stint: live.zoneChangeCount ?? 0 }, aura.controller)) return false;
   }
 
   // "An Aura with enchant creature": the Aura's own enchant ability.
