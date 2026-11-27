@@ -1641,6 +1641,12 @@ export type StaticCondition =
        * "if **it** dealt combat damage to a player this turn" (`what:
        * "combat-damaged-by"`, `who: "any-player"`). */
       readonly selfOnly?: boolean;
+      /** Only the permanent this one is attached to now, in its current
+       * stint: Shape of the Wiitigo's "if **it** [enchanted creature]
+       * attacked or blocked since your last upkeep" (`what: "attackers"` or
+       * `"blockers"`, `who: "any-player"`, `window: "since-your-last-upkeep"`).
+       * Attached to nothing, it doesn't hold. */
+      readonly attachedOnly?: true;
       /** For a view about what was done to something (`"crewers"`, whose
        * `filter` reads the Vehicle): only the entries whose doer matched this
        * as it was then — Adrestia's "if **an Assassin** crewed it this turn"

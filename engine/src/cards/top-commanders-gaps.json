@@ -8,6 +8,7 @@
     "effect:player-max-hand-size-adjust-for-game",
     "effect:delayed-trigger-remembers-that-player",
     "condition:distinct-damage-sources-this-turn",
+    "condition:attacked-or-blocked-since-last-upkeep",
     "cost:spend-only-color-on-x",
     "cost:buyback-cost-reduction",
     "cost:spend-only-face-down-spells-and-morph",

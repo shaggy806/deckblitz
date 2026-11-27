@@ -418,6 +418,13 @@ export function combatDamagedByNamed(state: GameState, player: PlayerId, name: s
  *   attacked you during their last turn").
  * - `"since-your-last-turn"`: everything after that turn ended ("if you
  *   haven't been dealt combat damage since your last turn").
+ * - `"since-your-last-upkeep"`: your last turn and everything after it, read
+ *   during your upkeep as Echo's "since your last upkeep" is (rule 702.30a:
+ *   "your last upkeep" is the one before this one) — Shape of the Wiitigo's
+ *   "if it attacked or blocked since your last upkeep". Entries carry their
+ *   turn, not their step, so all of that last turn counts: exact for what
+ *   can't happen before an upkeep (attacks, blocks, combat damage). With no
+ *   last turn yet, everything kept counts.
  * - `"this-game"`: the whole game, as counts only (no filter reads it).
  */
 export type JournalWindow =
@@ -426,6 +433,7 @@ export type JournalWindow =
   | "your-last-turn"
   | "their-last-turn"
   | "since-your-last-turn"
+  | "since-your-last-upkeep"
   | "this-game";
 
 /** What a card asks the journal about: an event kind, or a narrower word
@@ -517,6 +525,10 @@ export type JournalWhat =
   /** Each creature declared as an attacker, once in each stint, however many
    * combats it attacked in. */
   | "attackers"
+  /** Each creature declared as a blocker (rule 509.1), once in each stint,
+   * however many attackers or combats it blocked in; the list is its
+   * controller's as it blocked. */
+  | "blockers"
   /** A creature fought (rule 701.14a), an entry a fight: Boxing Ring's
    * "activate only if you control a creature that fought this turn" (a
    * `journaled` clause). The list is its controller's as it fought. */
@@ -654,6 +666,7 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   },
   crewers: { kind: "crews", whose: "recipient", match: (e) => e.target?.kind === "object", oncePerList: true },
   attackers: { kind: "attacked", distinct: true },
+  blockers: { kind: "blocked", distinct: true },
   fought: { kind: "fought" },
   "had-to-attack": { kind: "attacked", match: (e) => e.how === "required" },
   "turned-face-up": { kind: "turned-face-up" },
@@ -765,6 +778,11 @@ export function inJournalWindow(
       const journal = state.journal;
       const last = journal === undefined ? undefined : lastTurnOf(journal, you, now);
       return last === undefined ? true : turn > last;
+    }
+    case "since-your-last-upkeep": {
+      const journal = state.journal;
+      const last = journal === undefined ? undefined : lastTurnOf(journal, you, now);
+      return last === undefined ? true : turn >= last;
     }
     case "this-game":
       return true;

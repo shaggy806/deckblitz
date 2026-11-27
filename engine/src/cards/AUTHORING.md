@@ -8004,7 +8004,12 @@ clause (section 9):
   `conditional`); `what: "attackers"` is each creature `who` declared as an
   attacker, once and as it was declared (rule 508.1; one put onto the
   battlefield attacking never, 508.4): Deepway Navigator's "as long as you
-  attacked with three or more Merfolk this turn"; `what: "dealt-damage"` is
+  attacked with three or more Merfolk this turn"; `what: "blockers"` is the
+  same for blocks (509.1). `attachedOnly: true` reads only the permanent this
+  one is attached to now, in its stint, and `window: "since-your-last-upkeep"`
+  is your last turn on (read in your upkeep, Echo's reading, 702.30a): Shape
+  of the Wiitigo's "if it attacked or blocked since your last upkeep" is an
+  `any` of the two with `who: "any-player"`; `what: "dealt-damage"` is
   each source `who` controlled that dealt any damage, once per stint: Case of
   the Burning Masks' "three or more sources you controlled dealt damage this
   turn" (`atLeast: 3`); `what: "turned-face-up"`

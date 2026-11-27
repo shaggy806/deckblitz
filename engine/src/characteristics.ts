@@ -1517,6 +1517,9 @@ function evalStaticCondition(
       // who may have left the game since (Ramses, Assassin Lord).
       const toPlayer = condition.against === undefined ? undefined : conditionPlayerOf(state, condition.against, opts, source, true);
       if (condition.against !== undefined && toPlayer === undefined) return false;
+      // "If **it** [the enchanted creature] attacked …": the host as it is now.
+      const host = condition.attachedOnly === true && source.attachedTo != null ? state.objects[source.attachedTo] : undefined;
+      if (condition.attachedOnly === true && host?.zone !== "battlefield") return false;
       const journalCountOver = (over: readonly PlayerId[]): number =>
         journalCount(
           state,
@@ -1530,7 +1533,9 @@ function evalStaticCondition(
           // "If it dealt …": this object, in its stint, as it last existed once gone.
           condition.selfOnly === true
             ? { id: source.id, stint: opts.sourceLastKnown?.zoneChangeCount ?? source.zoneChangeCount ?? 0 }
-            : undefined,
+            : host !== undefined
+              ? { id: host.id, stint: host.zoneChangeCount ?? 0 }
+              : undefined,
         );
       // What entered with the permanent whose entry is being announced, and
       // isn't announced yet (`enteringTogether`), had entered too.
