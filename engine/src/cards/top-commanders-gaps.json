@@ -25,6 +25,7 @@
     "effect:exchange-control-greatest-per-player",
     "effect:backup-grants-static",
     "condition:prevented-source-filter",
+    "replacement:damage-replaced-by-counter-removal-opponent-chooses",
     "cost:cost-reduction-per-opponent-attacked",
     "replacement:land-mana-instead-tapper-chooses",
     "condition:unattached-from-filter",
