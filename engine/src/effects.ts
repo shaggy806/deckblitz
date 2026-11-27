@@ -8973,6 +8973,11 @@ export type EffectSpec =
        * card**'" is `{ card: { set: { thisWay: "exiled" } } }` — each grant
        * its own card. A member is acted on only while it's in its stint. */
       readonly remember?: { readonly [name: string]: RememberSpec };
+      /** "If it doesn't have '…,' it gains that ability" (Musician): nothing
+       * when the permanent already has a triggered ability of the same text,
+       * printed or granted and not lost — so it has the one, however many
+       * times it's granted (the ruling). */
+      readonly unlessHas?: true;
     }
   | {
       /**
@@ -15914,6 +15919,8 @@ export interface EffectApi {
     target: TargetRef,
     ability: TriggeredAbility,
     duration: PermanentDuration,
+    /** Not when it already has an ability of the same text (`unlessHas`). */
+    unlessHas?: true,
   ): void;
   /** See the `"grant-triggered-all"` {@link EffectSpec}. */
   grantTriggeredAll(filter: CardFilter, ability: TriggeredAbility, duration: PermanentDuration): void;
@@ -24991,7 +24998,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // The sets it remembers, captured now and kept on the granted ability.
       const ability =
         spec.remember === undefined ? spec.ability : { ...spec.ability, remembered: rememberSets(spec.remember, ctx) };
-      ctx.grantTriggered(target, ability, spec.duration);
+      ctx.grantTriggered(target, ability, spec.duration, spec.unlessHas);
       return;
     }
     case "grant-triggered-all":

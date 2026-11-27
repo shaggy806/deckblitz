@@ -48553,8 +48553,18 @@ controlledBy,
         if (last?.seq !== undefined && last.seq >= Math.min(since, this.state.repeatSince ?? since)) return last.roll;
         return refs.roll ?? last?.roll;
       },
-      grantTriggered: (target, ability, duration) =>
-        this.grantTriggered(target, this.boundToSpellCaster(ability, source), lastingHere(duration)),
+      grantTriggered: (target, ability, duration, unlessHas) => {
+        // "If it doesn't have '…', it gains that ability" (Musician): an
+        // ability of that text it has now, printed or granted, not lost.
+        if (
+          unlessHas === true &&
+          target.kind === "object" &&
+          this.effectiveTriggeredEntries(target.object).some((e) => e.lost !== true && e.ability.text === ability.text)
+        ) {
+          return;
+        }
+        this.grantTriggered(target, this.boundToSpellCaster(ability, source), lastingHere(duration));
+      },
       grantTriggeredAll: (filter, unbound, duration) => {
         const ability = this.boundToSpellCaster(unbound, source);
         const timestamp = this.freshTimestamp();
