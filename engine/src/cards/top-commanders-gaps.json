@@ -16,6 +16,7 @@
     "trigger:regenerated-this-way",
     "cost:cumulative-upkeep-graveyard-to-library",
     "cost:ability-cost-reduction-by-target-counters",
+    "trigger:player-puts-onto-battlefield",
     "cost:x-equals-chosen-opponent-hand",
     "static:grant-optional-x-additional-cost-to-spells",
     "cost:cost-reduction-per-opponent-attacked",

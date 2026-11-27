@@ -354,6 +354,14 @@ The key `cost:ability-cost-reduction-by-target-counters`: `targetCostReduction.r
 `"target-+1/+1-counters"`, read off the target as `"target-colors"` and `"target-power"` are
 (`Game.targetReadReduction`, rule 601.2f). Warrior's Blades (24724); the scaffolder reads the equip line beside
 Dragonfire Blade's. `test/target-counters-cost-reduction.test.ts`.
+### Whenever a player puts … onto the battlefield — built 2026-11-27
+
+The key `trigger:player-puts-onto-battlefield`: the `enters-battlefield` trigger's `putBy` (a `TriggerWho` of the
+player who put it there, who is then the `"trigger-player"`), read from `EntryRecord.putBy`, which `moveObject` keeps
+where the putter isn't the player it enters under: the one playing it (rule 305.1), else the controller of what is
+resolving (608.2c; a permanent spell's own, 608.3a), else whoever it enters under — as `enterThenRules` reads it. A
+token's creator puts it there (111.1, 111.2). Nature's Wrath (24254), Tourach's Chant (28401), Thelon's Chant
+(29912). `test/player-puts-onto-battlefield.test.ts`.
 
 ### If it exploited that creature — built 2026-11-26
 

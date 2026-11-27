@@ -26273,3 +26273,14 @@ describe("Memory Crystal and Atalya, Samite Master", () => {
     ]);
   });
 });
+
+describe("the triggers-journal lane's picks, 2026-11-27", () => {
+  it("Nature's Wrath, Tourach's Chant: whenever a player puts … onto the battlefield", () => {
+    expect(parseTrigger("Whenever a player puts an Island or blue permanent onto the battlefield")).toEqual([
+      { on: "enters-battlefield", who: "any", putBy: "any", filter: { anyOf: [{ subtype: "Island" }, { colors: ["U"] }] } },
+    ]);
+    expect(parseTrigger("Whenever a player puts a Forest onto the battlefield")).toEqual([
+      { on: "enters-battlefield", who: "any", putBy: "any", filter: { subtype: "Forest" } },
+    ]);
+  });
+});

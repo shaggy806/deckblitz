@@ -1371,6 +1371,17 @@ export type TriggerKind =
        * player who creates it (rule 111.2), so a token entering under you is
        * one you created. */
       readonly firstCreationEachTurn?: true;
+      /** "Whenever **a player puts** an Island or blue permanent **onto the
+       * battlefield**, that player sacrifices …" (Nature's Wrath, Tourach's
+       * Chant): the player who put it there (`EntryRecord.putBy` — the one
+       * playing it, else the controller of the spell or ability resolving,
+       * rule 608.2c, else whoever it enters under), related to this
+       * permanent's controller as `who` relates a player, is the one the
+       * trigger watches — and its "that player" (`"trigger-player"`) in
+       * place of the permanent's controller. A token's creator puts it there
+       * (rules 111.1, 111.2). `who` is still read of the permanent: `"any"`
+       * for "a player puts". */
+      readonly putBy?: TriggerWho;
     }
   | {
       readonly on: "dies";

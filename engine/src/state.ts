@@ -6179,6 +6179,13 @@ export interface EntryRecord {
   /** It's a land that was played (rule 305.1) — Deep Gnome Terramancer's
    * "enter … without being played" is the filter's `played: false`. */
   readonly played?: true;
+  /** The player who put it onto the battlefield, where that's not the one
+   * it entered under: the controller of the spell or ability resolving (rule
+   * 608.2c) — Flickerwisp returning an opponent's creature "under its owner's
+   * control". Absent, the player it entered under put it there (a land they
+   * played, their permanent spell resolving — 608.3a — a token they created).
+   * "Whenever a player puts …" (Nature's Wrath). */
+  readonly putBy?: PlayerId;
 }
 
 /**

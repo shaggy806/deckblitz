@@ -38377,7 +38377,7 @@ export class Game {
             // player" the ability will carry, asked of the event now.
             ability.condition === undefined
               ? undefined
-              : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event))?.player,
+              : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event), ability.trigger)?.player,
             // "If you haven't added mana with this ability this turn" (Carpet
             // of Flowers): the key the ability will have on the stack.
             ability.condition === undefined
@@ -38388,7 +38388,7 @@ export class Game {
             ability.condition === undefined
               ? undefined
               : this.withAttackedTogether(
-                  this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event)),
+                  this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event), ability.trigger),
                   ability.trigger,
                   event,
                   object,
@@ -38408,7 +38408,7 @@ export class Game {
             undefined,
             ability.whileCondition === undefined
               ? undefined
-              : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event))?.player,
+              : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event), ability.trigger)?.player,
           ) &&
           // Elesh Norn, Mother of Machines / Torpor Orb: an entering
           // permanent causes none of this controller's triggers.
@@ -38462,7 +38462,7 @@ export class Game {
           // Which stint on the battlefield the source and the triggering
           // object were in — what the ability means by "it" and "that
           // creature" if either has left by the time it resolves (608.2h).
-          const refsNow = this.refsAtTrigger(live, lastSeen, event, triggerObject);
+          const refsNow = this.refsAtTrigger(live, lastSeen, event, triggerObject, ability.trigger);
           // Its own source attacking caused it (Firebender Ascension).
           // Or its own source, a creature, entering (Aboleth Spawn).
           // Any permanent entering caused it (Strict Proctor).
@@ -39207,6 +39207,7 @@ export class Game {
     departed: LastKnownInfo | undefined,
     event: GameEvent,
     triggerObject: ObjectId | undefined,
+    trigger?: TriggerSpec,
   ): LastKnownRefs | undefined {
     const sourceStint =
       departed !== undefined
@@ -39299,8 +39300,13 @@ export class Game {
     } else if (event.type === "permanent-entered-battlefield") {
       // "Whenever a land an opponent controls enters, if that player controls
       // more lands than you" (Archaeomancer's Map): who it entered under,
-      // whoever controls it by the time the ability resolves.
-      player = this.state.objects[event.object]?.controller;
+      // whoever controls it by the time the ability resolves. "Whenever a
+      // player puts … onto the battlefield, that player …" (Nature's Wrath):
+      // who put it there.
+      player =
+        trigger?.on === "enters-battlefield" && trigger.putBy !== undefined
+          ? this.putterOf(event.object)
+          : this.state.objects[event.object]?.controller;
     } else if (event.type === "attacker-declared") {
       player = this.defendingPlayerOf(event.defender);
       recipient = this.attackedRecipient(event.defender);
@@ -40397,7 +40403,12 @@ export class Game {
           !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self) &&
-          (spec.firstCreationEachTurn !== true || this.firstTokenCreators.has(self.controller))
+          (spec.firstCreationEachTurn !== true || this.firstTokenCreators.has(self.controller)) &&
+          (spec.putBy === undefined ||
+            (() => {
+              const putter = this.putterOf(event.object);
+              return putter !== undefined && this.matchesWhoPlayer(spec.putBy, putter, self);
+            })())
         );
       case "dies":
         // "Whenever one or more …": once, off the whole event.
@@ -41722,6 +41733,14 @@ export class Game {
   /** Like `matchesWho`, but the subject is a *player* (a life-change trigger).
    * `"any"` matches anyone; `"you"` / `"you-control"` / `"self"` all mean the
    * source's controller. */
+  /** The player who put permanent `id` onto the battlefield this stint
+   * (`EntryRecord.putBy`, else the player it entered under — kept as its
+   * controller until something takes it). */
+  private putterOf(id: ObjectId): PlayerId | undefined {
+    const object = this.state.objects[id];
+    return object === undefined ? undefined : (object.entry?.putBy ?? object.controller);
+  }
+
   private matchesWhoPlayer(
     who: TriggerWho,
     player: PlayerId,
@@ -78717,6 +78736,12 @@ controlledBy,
       const enteringController = this.enteringUnder(id, wouldEnterUnder, enter);
       const redirectedUnder = enteringController !== wouldEnterUnder ? enteringController : undefined;
       object.controller = enteringController;
+      // Who put it here (`EntryRecord.putBy`): the player playing it (rule
+      // 305.1), else the controller of what is resolving (608.2c; a permanent
+      // spell's own, 608.3a), else whoever it enters under — as
+      // `enterThenRules` reads it. Kept only where that's someone else.
+      const putter = enter.played === true ? wouldEnterUnder : (this.state.resolvingController ?? enteringController);
+      if (putter !== enteringController && object.entry !== undefined) object.entry = { ...object.entry, putBy: putter };
       // "…When you do, …" (rules 603.11, 707.9g): it copied something, so the
       // linked ability triggers, and goes on the stack as a player would next
       // get priority. What it copied is its trigger object, the same object

@@ -2415,6 +2415,18 @@ export function parseTrigger(clause) {
   if (c === "When you cycle this card") return [{ on: "this-cycled" }];
   // Foretell (rule 702.143a): "whenever you foretell a card".
   if (c === "Whenever you foretell a card") return [{ on: "event", event: "foretells", who: "you" }];
+  // "Whenever a player puts an Island or blue permanent onto the battlefield"
+  // (Nature's Wrath, Tourach's Chant): who put it there (`putBy`) is the one
+  // watched, and "that player".
+  if ((m = /^Whenever a player puts an? (.+?) onto the battlefield$/.exec(c))) {
+    const sides = m[1].split(" or ").map((side) => {
+      const colored = /^(white|blue|black|red|green) (.+)$/.exec(side);
+      const filter = parseTypePhrase(colored !== null ? colored[2] : side);
+      return filter === null ? null : colored !== null ? { ...filter, colors: [COLOR_WORDS[colored[1]]] } : filter;
+    });
+    if (sides.some((s) => s === null)) return null;
+    return [{ on: "enters-battlefield", who: "any", putBy: "any", filter: sides.length === 1 ? sides[0] : { anyOf: sides } }];
+  }
   // The renowned designation (rule 702.112b) becoming true.
   if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "self" }];
   if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];
