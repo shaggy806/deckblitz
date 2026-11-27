@@ -26498,3 +26498,50 @@ describe("the costs-mana lane's picks, 2026-11-27 (a92a)", () => {
     });
   });
 });
+
+describe("the most life, an Aura's other creatures, colours among permanents", () => {
+  it("Wild Dogs: the player with the most life, if one has more than each other", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Dog",
+      mana_cost: "{G}",
+      power: "2",
+      toughness: "1",
+      oracle_text:
+        "At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of this creature.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      condition: { kind: "any", of: [{ kind: "player-compare", stat: "life", compare: "more", than: "each-opponent" }, {}] },
+      effect: { kind: "for-each-player", who: "each-player", effect: { kind: "gain-control", target: "source" } },
+    });
+  });
+
+  it("Vampirism: on an Aura, other creatures are other than the enchanted one", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura",
+      mana_cost: "{1}{B}",
+      oracle_text:
+        "Enchant creature\nEnchanted creature gets +1/+1 for each other creature you control.\nOther creatures you control get -1/-1.",
+    });
+    const others = { type: "creature", controlledBy: "you", hostOfSource: false };
+    expect(parsed.static).toMatchObject([
+      { affects: { scope: "attached" }, grantPtPerCount: { filter: others, pt: [1, 1] } },
+      { affects: { scope: "filter", filter: others }, grantPt: [-1, -1] },
+    ]);
+  });
+
+  it("Squawkroaster: power equal to the colours among permanents you control", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Elemental",
+      mana_cost: "{3}{R}",
+      power: "*",
+      toughness: "4",
+      oracle_text: "Vivid — Test Card's power is equal to the number of colors among permanents you control.",
+    });
+    expect(parsed.static[0]).toMatchObject({
+      setBasePtFromCount: { countOf: { colorsAmong: { controlledBy: "you" } }, only: "power" },
+    });
+  });
+});

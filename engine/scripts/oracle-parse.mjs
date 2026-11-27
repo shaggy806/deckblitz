@@ -28222,6 +28222,14 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Vivid (an ability word): Squawkroaster's CDA.
+  if (line === "~'s power is equal to the number of colors among permanents you control.") {
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: { colorsAmong: { controlledBy: "you" } }, plusPower: 0, plusToughness: 0, only: "power" },
+      text,
+    };
+  }
   if ((m = new RegExp(`^~'s power is equal to your devotion to ${DEVOTION}\\.$`).exec(line))) {
     return {
       affects: { scope: "self" },

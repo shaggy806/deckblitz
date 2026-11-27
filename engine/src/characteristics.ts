@@ -5477,6 +5477,7 @@ export function countValue(
     if ("cardTypesInGraveyard" in spec) {
       return cardTypesInGraveyards(state, registry, controller, spec.cardTypesInGraveyard);
     }
+    if ("colorsAmong" in spec) return colorsAmongPermanents(state, registry, controller, spec.colorsAmong);
     if ("amongPlayers" in spec) return staticPlayerAggregate(state, registry, controller, spec);
     if ("sum" in spec) return spec.sum.reduce((n, part) => n + countValue(part, state, registry, controller, source), 0);
     if ("aggregate" in spec) {

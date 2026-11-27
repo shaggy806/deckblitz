@@ -7028,6 +7028,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     matches, 0 with none (Karn, Legacy Reforged: `{ type: "artifact",
     controlledBy: "you" }`). Mana value only: a greatest *power* or
     *toughness* of other permanents in a CDA is still out (§15).
+  - `{ colorsAmong: CardFilter }` — the colours among battlefield permanents
+    matching it, each once, its own included (Squawkroaster's Vivid "power
+    is equal to the number of colors among permanents you control":
+    `{ controlledBy: "you" }`, `only: "power"`). Colours are layer 5, so no
+    dependency problem.
   - `{ devotionTo: Color[] }` — its controller's devotion (rule 700.5), its
     own pips included: Anax, Hardened in the Forge's and Renata, Called to
     the Hunt's "power is equal to your devotion to red / green" (`only:
