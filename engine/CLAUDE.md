@@ -211,6 +211,12 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   its turns, and a game past its minutes is stopped and named. `--budget live` puts each decision on the rooms' clock
   (1000 ms), for a bench of decks whose boards outgrow count budgets: the games finish, and a seed no longer replays
   move for move (The First Sliver's 24 games: 18-44 minutes each and five unfinished on counts, about a minute on the clock).
+- `bot:flags -- games/<day>/*.json.gz` or `-- --decks "A,B,C,D" --seeds 1-4 [--parallel 4] [--budget live]` (2026-11-26):
+  the bots' casts and activations that did them no good, in kept games replayed or fresh v2 games. A spell that fizzled
+  in the game (a discovered Deflecting Swat aimed at the discover itself), and one that, played out until the stack
+  settles against not doing it (passing, or declining a "you may cast"), changed nothing but the card and the mana;
+  `--worse N` also those scoring N below not doing it (noisy: the score sees no further than the stack). Each flag
+  prints the `game:replay` or `bot:watch` line for its turn; `--self-test` rebuilds the Swat board and must flag it.
 - `bot:engines -- --pool blitz|strong-only|strong --games 96 [--parallel 6]` / `-- --report FILE`: which permanents come
   before a turn that brings far more than its board showed, and what the bots' removal takes. Logs each turn's board as
   it began beside what the turn brought, and each removal aimed with what else was there; the report sorts the cards by
