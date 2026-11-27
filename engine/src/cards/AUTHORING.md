@@ -723,7 +723,9 @@ in the public zone it was expected in, and otherwise as it last existed (rules 6
 
 - **`ObjectRef`**: a slot number, `"source"`, `"trigger-object"`, `"attached"` (the source's host),
   `"attached-as-triggered"` (a trigger's: the host as it triggered, still that object — Dead-Iron
-  Sledge's "destroy both creatures", the Equipment moved since or not), `"chosen"`, `"granter"`, `"trigger-recipient"`, `"created"`, `"put-this-way"`, `"amassed"`, `"priced"`;
+  Sledge's "destroy both creatures", the Equipment moved since or not; Aggression's "at the beginning of the end
+  step of enchanted creature's controller, destroy **that creature** if it didn't attack this turn" is a
+  `step-begins` `who: "attached"` with a `conditional` on `object-matches` of it), `"chosen"`, `"granter"`, `"trigger-recipient"`, `"created"`, `"put-this-way"`, `"amassed"`, `"priced"`;
   any `ObjectSetRef` as its one member ("the sacrificed creature" is `{ paid: "sacrificed" }`); and
   composed, `{ hostOf: ObjectRef }` ("the creature that Equipment was attached to", Unforge) and
   `{ pairedWith: ObjectRef }` (702.95b). Never `{ hostOf: "source" }`: that's `"attached"`.

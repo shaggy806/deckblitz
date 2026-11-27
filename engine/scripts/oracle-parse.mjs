@@ -19733,6 +19733,25 @@ function parseFaceAsWritten(face, ctx = {}) {
       }
     }
 
+    // "At the beginning of the end step of enchanted creature's controller,
+    // destroy that creature if it didn't attack this turn" (Aggression): the
+    // creature enchanted as it triggered (the ruling: moving the Aura after
+    // changes nothing), asked as it resolves.
+    if (/^At the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn\.$/.test(line)) {
+      out.triggered.push({
+        trigger: { on: "step-begins", step: "end", who: "attached" },
+        targets: [],
+        effect: {
+          kind: "conditional",
+          condition: { kind: "object-matches", object: "attached-as-triggered", filter: { attackedThisTurn: false } },
+          then: { kind: "destroy", target: "attached-as-triggered" },
+        },
+        resolve: null,
+        text: printed(raw),
+      });
+      continue;
+    }
+
     // Keywords, partner abilities, ward, and lines with no behaviour of their own.
     // A keyword line — "Flying, ward {2}" — each part a modeled keyword or a
     // plain ward; one part of anything else leaves the whole line to a person.
@@ -19907,6 +19926,11 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Card-level lines.
     if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|player|creature you control|artifact you control|land you control|creature or planeswalker)$/.exec(line))) {
       out.enchant = targetOf(`target ${m[1]}`);
+      continue;
+    }
+    // "Enchant non-Wall creature" (Aggression).
+    if ((m = /^Enchant non-([A-Z][a-z]+) creature$/.exec(line))) {
+      out.enchant = { kind: "permanent", filter: { type: "creature", notSubtypes: [m[1]] } };
       continue;
     }
     // "Enchant creature card in a graveyard" (Animate Dead, Dance of the

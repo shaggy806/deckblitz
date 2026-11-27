@@ -26925,3 +26925,25 @@ describe("dealt damage by two or more creatures this turn (Inferno Trap)", () =>
     });
   });
 });
+
+describe("the creature an Aura enchanted as its end-step ability triggered (Aggression)", () => {
+  it("reads the enchant line and the trigger", () => {
+    const face = parseFace(
+      {
+        name: "Test Aura",
+        type_line: "Enchantment — Aura",
+        oracle_text:
+          "Enchant non-Wall creature\nAt the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.enchant).toEqual({ kind: "permanent", filter: { type: "creature", notSubtypes: ["Wall"] } });
+    expect(face.triggered[0].trigger).toEqual({ on: "step-begins", step: "end", who: "attached" });
+    expect(face.triggered[0].effect).toEqual({
+      kind: "conditional",
+      condition: { kind: "object-matches", object: "attached-as-triggered", filter: { attackedThisTurn: false } },
+      then: { kind: "destroy", target: "attached-as-triggered" },
+    });
+  });
+});
