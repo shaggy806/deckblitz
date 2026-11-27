@@ -2,6 +2,12 @@
   {
     "date": "2026-11-26",
     "notes": [
+      "69 more cards are playable, among them Lightning Storm, Mob Mentality, Soulflayer, Piracy, Land Equilibrium and Kaervek's Torch.",
+      "A commander that mutates onto another creature, or melds, stays your commander: when it leaves, its card can go back to the command zone, and its combat damage still counts as commander damage.",
+      "When one trigger goes on the stack twice at once (Delney, Streetwise Lookout), the history now says so (×2), so every hit it makes is accounted for.",
+      "Bots no longer cast a discovered spell that can only fizzle (Deflecting Swat aimed at the discover itself), and decline a cascaded or discovered spell that would only hurt them, such as Pyroclasm on their own board.",
+      "A bot's Clone or Phantasmal Image copies its own Etali, Primal Conqueror for another round of free spells instead of a lesser creature.",
+      "Bots no longer cast Mox Diamond with no land to discard, or Backdraft when no opponent has cast a sorcery this turn.",
       "Four new Bracket 4 decks to play against: averages of real Bracket 4 decks for Grand Arbiter Augustin IV, Etali, Primal Conqueror, Zur the Enchanter and Liesa, Shroud of Dusk.",
       "Bots wait to use instant-speed spells and abilities until the moment they matter, instead of firing them off as soon as they can.",
       "Bots no longer cast a counterspell just to set off a trigger of their own, such as Y'shtola's."
