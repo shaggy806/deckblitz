@@ -8069,7 +8069,10 @@ clause (section 9):
   Ellyn Harbreeze); `what: "noncombat-damaged"` is `who` dealt damage other
   than combat damage, an entry a source an event — Command the Stage's "if an
   opponent was dealt noncombat damage last turn" (`who: "opponent"`, `window:
-  "last-turn"`); `what: "combat-damaged-by"` is the sources that dealt `who`
+  "last-turn"`); `what: "damaged-by"` is the sources that dealt `who` any
+  damage, each once per stint and read as it dealt it — Inferno Trap's "if
+  you've been dealt damage by two or more creatures this turn" (`filter: {
+  type: "creature" }`, `atLeast: 2`); `what: "combat-damaged-by"` is the sources that dealt `who`
   combat damage, each read as it dealt it, whatever it is now: Lost Monarch of
   Ifnir's "if a player was dealt combat damage by a Zombie this turn" (`who:
   "any-player"`, `filter: { subtype: "Zombie" }`), Blitzball's "an opponent …

@@ -20166,6 +20166,16 @@ function parseFaceAsWritten(face, ctx = {}) {
       };
       continue;
     }
+    // "If you've been dealt damage by two or more creatures this turn, you
+    // may pay {R} rather than pay this spell's mana cost" (Inferno Trap): the
+    // journal's `"damaged-by"`, each creature once.
+    if ((m = /^If you've been dealt damage by (two|three|four|five) or more creatures this turn, you may pay ((?:\{[^}]+\})+) rather than pay (?:this spell's|~'s) mana cost\.$/.exec(line))) {
+      out.alternativeCost = {
+        mana: m[2],
+        condition: { kind: "turn-history", what: "damaged-by", who: "you", filter: { type: "creature" }, atLeast: NUMBERS[m[1]] },
+      };
+      continue;
+    }
     // "If a noncreature permanent under your control was destroyed this turn
     // by a spell or ability an opponent controlled, you may pay {G} rather
     // than pay this spell's mana cost" (Cobra Trap): the journal's

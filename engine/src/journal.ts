@@ -486,6 +486,13 @@ export type JournalWhat =
   /** A source dealt combat damage to this player, one entry a source a combat
    * damage step: the list is the damaged player's. */
   | "combat-damaged-by"
+  /** A source dealt this player damage of any kind (rule 120.2), each
+   * source once per stint (rule 400.7) however often it did: the list is the
+   * damaged player's, and a filter reads the source as it dealt it — Inferno
+   * Trap's "if you've been dealt damage by **two or more creatures** this
+   * turn" (`{ what: "damaged-by", filter: { type: "creature" }, atLeast: 2
+   * }`). Prevented damage was never dealt (615.1). */
+  | "damaged-by"
   /** This player was dealt noncombat damage — any but combat damage (rule
    * 120.2a), such as a spell's or an ability's (120.2b) — one entry a source
    * an event: the list
@@ -646,6 +653,12 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     kind: "damage",
     whose: "target",
     match: (e) => e.combat !== undefined && e.target?.kind === "player",
+    oncePerList: true,
+  },
+  "damaged-by": {
+    kind: "damage",
+    whose: "target",
+    match: (e) => e.target?.kind === "player",
     oncePerList: true,
   },
   "noncombat-damaged": {

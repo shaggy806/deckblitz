@@ -26906,3 +26906,22 @@ describe("the damage already dealt to a target this turn", () => {
     });
   });
 });
+
+describe("dealt damage by two or more creatures this turn (Inferno Trap)", () => {
+  it("reads the alternative cost's condition from the journal", () => {
+    const face = parseFace(
+      {
+        name: "Test Trap",
+        type_line: "Instant — Trap",
+        oracle_text:
+          "If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay this spell's mana cost.\nThis spell deals 4 damage to target creature.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.alternativeCost).toEqual({
+      mana: "{R}",
+      condition: { kind: "turn-history", what: "damaged-by", who: "you", filter: { type: "creature" }, atLeast: 2 },
+    });
+  });
+});
