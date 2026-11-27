@@ -5,6 +5,7 @@
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",
+    "replacement:grant-exile-if-would-leave",
     "effect:grant-ability-if-lacking",
     "amount:chosen-source-shield-x",
     "effect:choose-permanents-of-target-player-count",

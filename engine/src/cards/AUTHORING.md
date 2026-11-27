@@ -8841,6 +8841,10 @@ The `prevent-damage` family makes the same record.
   an ability of its **own** (Magar of the Magic Strings' face-down 3/3, an
   internal definition) is the static `{ affects: { scope: "self" },
   exileIfLeaves: true }`: copied with the rest of it, lost with its abilities.
+  An effect that gives it for a while ("until end of turn, it gains 'If this
+  creature would leave …'" — Elemental Expressionist) is a `grant-static` of
+  that same static, `duration: "end-of-turn"`; "When this creature is put into
+  exile" beside it is a granted `leaves-battlefield` trigger `to: ["exile"]`.
 - `{ event: "would-draw", who: "opponent", instead: "you-draw",
   exceptFirstInDrawStep: true }` — Notion Thief's "if an opponent would draw a
   card except the first one they draw in each of their draw steps, instead
