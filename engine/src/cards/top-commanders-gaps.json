@@ -3432,7 +3432,8 @@
   "static:other-than-attached",
   "bug:cda-colors-among",
   "effect:each-player-reveals-top-all-match",
-  "effect:alternating-hand-exile"
+  "effect:alternating-hand-exile",
+  "effect:reveal-random-from-hand-discard-filtered"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

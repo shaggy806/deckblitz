@@ -5712,6 +5712,22 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`look at a card at random in (target player|target opponent)'s hand`).exec(s))) {
     return { kind: "choose-random-card", zone: "hand", whose: slot(m[1]), show: "look" };
   }
+  // "Target player reveals two cards at random from their hand, then
+  // discards each nonland card revealed this way" (Fall): that many
+  // different cards shown together, the matching ones discarded at once.
+  if ((m = re(`(target player|target opponent) reveals (two|three|four|five|x|\\d+) cards at random from their hand, then discards each (.+?) card revealed this way`).exec(s))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter !== null && Object.keys(filter).length > 0) {
+      return {
+        kind: "choose-random-card",
+        zone: "hand",
+        whose: slot(m[1]),
+        show: "reveal",
+        count: amount(m[2]),
+        then: { kind: "for-each-target", from: 0, simultaneous: true, only: filter, effect: { kind: "discard-card", target: 0 } },
+      };
+    }
+  }
   // "Target opponent reveals a card at random from their hand" (Hired
   // Torturer's tail): shown to every player, and it stays there.
   if ((m = re(`(target player|target opponent) reveals a card at random from their hand`).exec(s))) {

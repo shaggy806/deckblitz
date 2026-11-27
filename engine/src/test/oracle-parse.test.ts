@@ -5076,6 +5076,24 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(skyship.activated[0].effect).toEqual(pick);
     expect(parseEffect("Choose a card at random exiled with ~ and put that card into its owner's hand.", ctx()).effect).toEqual(pick);
+    // Fall: two cards at random, the nonland ones among them discarded.
+    expect(
+      parseEffect("Target player reveals two cards at random from their hand, then discards each nonland card revealed this way.", ctx())
+        .effect,
+    ).toEqual({
+      kind: "choose-random-card",
+      zone: "hand",
+      whose: 0,
+      show: "reveal",
+      count: 2,
+      then: {
+        kind: "for-each-target",
+        from: 0,
+        simultaneous: true,
+        only: { notTypes: ["land"] },
+        effect: { kind: "discard-card", target: 0 },
+      },
+    });
     // A reveal whose card is then used is a different sentence, not this one.
     expect(parseEffect("Target player reveals a card at random from their hand, then loses life equal to that card's mana value.", ctx()).effect?.kind).not.toBe("choose-random-card");
   });
