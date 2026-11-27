@@ -12991,6 +12991,26 @@ export class Game {
    * `whileSource` effects (`endWhileSourceEffects`). */
   private endWhileTappedEffects(id: ObjectId): void {
     this.endWhileSourceCondition(id, (w) => w.tapped === true);
+    this.endSourceTappedWatches([id]);
+  }
+
+  /** `ids` have untapped or phased out: the delayed "whenever" watches that
+   * lasted for as long as one of them remained tapped (`until:
+   * "while-source-tapped"` — Giant Oyster's draw-step counters) are over,
+   * and stay over if it's tapped again (rules 611.2b, 702.26f). */
+  private endSourceTappedWatches(ids: readonly ObjectId[]): void {
+    if (
+      !this.state.delayedTriggers.some(
+        (t) => "whenever" in t.at && t.at.until === "while-source-tapped" && ids.includes(t.source),
+      )
+    ) {
+      return;
+    }
+    this.state.delayedTriggers = this.state.delayedTriggers.filter(
+      (t) =>
+        !("whenever" in t.at && t.at.until === "while-source-tapped" && ids.includes(t.source)) ||
+        this.delayedSourceStillTapped(t),
+    );
   }
 
   /** `id` has changed hands: end what lasted "for as long as you control"
@@ -37855,7 +37875,10 @@ export class Game {
             : atRefs;
       // Its "if" reads the event as its resolution will ("that player").
       if (!this.delayedIfHolds(trigger, triggerObject, refs)) continue;
-      if (at.until === "while-exiled" && !this.anyStillExiledFor(trigger)) {
+      if (
+        (at.until === "while-exiled" && !this.anyStillExiledFor(trigger)) ||
+        (at.until === "while-source-tapped" && !this.delayedSourceStillTapped(trigger))
+      ) {
         usedUp.push(trigger);
         continue;
       }
@@ -37961,6 +37984,20 @@ export class Game {
    * that's left since, read as it last existed: a creature's own dies trigger
    * dealing damage is still that creature dealing it (rule 608.2h).
    */
+  /** A `"while-source-tapped"` delayed ability's source ("for as long as this
+   * creature remains tapped" — Giant Oyster): still on the battlefield as the
+   * object that set it up (rule 400.7), and tapped. A "for as long as"
+   * duration tracking it ends as it phases out (rule 702.26f). */
+  private delayedSourceStillTapped(trigger: DelayedTrigger): boolean {
+    const source = this.state.objects[trigger.source];
+    return (
+      source !== undefined &&
+      source.zone === "battlefield" &&
+      source.tapped === true &&
+      (trigger.sourceStint === undefined || (source.zoneChangeCount ?? 0) === trigger.sourceStint)
+    );
+  }
+
   /** A `"while-exiled"` delayed ability's cards: whether any it's about is
    * still in exile as the object it was (rule 400.7). */
   private anyStillExiledFor(trigger: DelayedTrigger): boolean {
@@ -37982,6 +38019,7 @@ export class Game {
     const at = trigger.at;
     if (!("whenever" in at)) return false;
     if (at.until === "while-exiled" && !this.anyStillExiledFor(trigger)) return true;
+    if (at.until === "while-source-tapped" && !this.delayedSourceStillTapped(trigger)) return true;
     return (
       at.watching !== undefined &&
       !at.watching.some(({ object: id, stint }) => {
@@ -62612,6 +62650,7 @@ controlledBy,
     if (this.phaseOutAnnouncements !== null) this.phaseOutAnnouncements.push(...order);
     else this.emit({ type: "permanents-phased-out", objects: order });
     this.endWhileSourceEffects(order);
+    this.endSourceTappedWatches(order);
     return order;
   }
 
@@ -65320,6 +65359,12 @@ controlledBy,
         return watched?.zone === "battlefield" ? [{ object: id, stint: watched.zoneChangeCount ?? 0 }] : [];
       });
       if (watching?.length === 0) return;
+      // "For as long as this creature remains tapped": nothing if it already
+      // isn't (rule 611.2b) — untapped in response, or gone.
+      if (at.until === "while-source-tapped") {
+        const self = this.state.objects[source];
+        if (self?.zone !== "battlefield" || self.tapped !== true) return;
+      }
       const losing = at.orLosesControlOf === undefined ? undefined : this.state.objects[at.orLosesControlOf];
       if (at.orLosesControlOf !== undefined && losing?.zone !== "battlefield") return;
       when = {

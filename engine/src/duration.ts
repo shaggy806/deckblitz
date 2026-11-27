@@ -224,6 +224,7 @@ export type WatchExpiry = Extract<
   | "until-end-of-combat"
   | "permanent"
   | "while-exiled"
+  | "while-source-tapped"
 >;
 
 

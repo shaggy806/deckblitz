@@ -591,7 +591,12 @@ export interface DelayedWhenever {
    * long as any of those cards remain exiled**, at the beginning of each
    * player's upkeep" (Dimensional Breach), with `about`: used up, and not
    * triggering, once none of the cards it's about is still in exile as the
-   * object it was (rule 400.7). */
+   * object it was (rule 400.7); `"while-source-tapped"`, "**for as long as
+   * this creature remains tapped**, … at the beginning of each of your draw
+   * steps" (Giant Oyster): used up, and not triggering, once its source has
+   * untapped or left the battlefield (a new object, rule 400.7) — and never
+   * set up if the source is already untapped as it would begin (rule
+   * 611.2b). */
   readonly until?: WatchDuration;
   readonly targets?: readonly TargetSpec[];
   /** "…deals combat damage to **that player** this turn" (Great Train
