@@ -256,6 +256,7 @@ import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
 import _poolDivineVerdict from "../pool/divine-verdict.js";
 import _poolDoomedArtisan from "../pool/doomed-artisan.js";
+import _poolDoomsdaySpecter from "../pool/doomsday-specter.js";
 import _poolDot7RepairSquad from "../pool/dot-7-repair-squad.js";
 import _poolDraconicIntervention from "../pool/draconic-intervention.js";
 import _poolDragonWhisperer from "../pool/dragon-whisperer.js";
@@ -1344,6 +1345,7 @@ const shard: CardShard = {
     _poolDivineTransformation,
     _poolDivineVerdict,
     _poolDoomedArtisan,
+    _poolDoomsdaySpecter,
     _poolDot7RepairSquad,
     _poolDraconicIntervention,
     _poolDragonWhisperer,

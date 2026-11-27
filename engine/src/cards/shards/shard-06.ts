@@ -603,6 +603,7 @@ import _poolMyriadLandscape from "../pool/myriad-landscape.js";
 import _poolMyrsmith from "../pool/myrsmith.js";
 import _poolMysteriousTome from "../pool/mysterious-tome.js";
 import _poolMysticMelting from "../pool/mystic-melting.js";
+import _poolNaturalBalance from "../pool/natural-balance.js";
 import _poolNaturalConnection from "../pool/natural-connection.js";
 import _poolNaturesChosen from "../pool/natures-chosen.js";
 import _poolNayaSojourners from "../pool/naya-sojourners.js";
@@ -1672,6 +1673,7 @@ const shard: CardShard = {
     _poolMyrsmith,
     _poolMysteriousTome,
     _poolMysticMelting,
+    _poolNaturalBalance,
     _poolNaturalConnection,
     _poolNaturesChosen,
     _poolNayaSojourners,

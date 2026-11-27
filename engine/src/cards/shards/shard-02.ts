@@ -133,6 +133,7 @@ import _poolChampionOfRhonas from "../pool/champion-of-rhonas.js";
 import _poolChampionsOfTheShoal from "../pool/champions-of-the-shoal.js";
 import _poolChandraFlamesCatalyst from "../pool/chandra-flames-catalyst.js";
 import _poolChangelingOutcast from "../pool/changeling-outcast.js";
+import _poolChaosLord from "../pool/chaos-lord.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCharmPeddler from "../pool/charm-peddler.js";
 import _poolCharmedGriffin from "../pool/charmed-griffin.js";
@@ -1204,6 +1205,7 @@ const shard: CardShard = {
     _poolChampionsOfTheShoal,
     _poolChandraFlamesCatalyst,
     _poolChangelingOutcast,
+    _poolChaosLord,
     _poolCharitableLevy,
     _poolCharmPeddler,
     _poolCharmedGriffin,

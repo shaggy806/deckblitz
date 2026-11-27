@@ -397,6 +397,7 @@ import _poolAgencyOutfitter from "./pool/agency-outfitter.js";
 import _poolAgent13SharonCarter from "./pool/agent-13-sharon-carter.js";
 import _poolAgentBishopManInBlack from "./pool/agent-bishop-man-in-black.js";
 import _poolAgentFrankHorrigan from "./pool/agent-frank-horrigan.js";
+import _poolAgentMariaHill from "./pool/agent-maria-hill.js";
 import _poolAgentOfAcquisitions from "./pool/agent-of-acquisitions.js";
 import _poolAgentOfAtlas from "./pool/agent-of-atlas.js";
 import _poolAgentOfErebos from "./pool/agent-of-erebos.js";
@@ -3333,6 +3334,7 @@ import _poolBoseijuReachesSkyward from "./pool/boseiju-reaches-skyward.js";
 import _poolBoseijuWhoEndures from "./pool/boseiju-who-endures.js";
 import _poolBoseijuWhoSheltersAll from "./pool/boseiju-who-shelters-all.js";
 import _poolBoshIronGolem from "./pool/bosh-iron-golem.js";
+import _poolBosiumStrip from "./pool/bosium-strip.js";
 import _poolBoskBanneret from "./pool/bosk-banneret.js";
 import _poolBossUramonShadowsReach from "./pool/boss-uramon-shadows-reach.js";
 import _poolBosssChauffeur from "./pool/bosss-chauffeur.js";
@@ -4588,7 +4590,9 @@ import _poolChaosDefiler from "./pool/chaos-defiler.js";
 import _poolChaosDragon from "./pool/chaos-dragon.js";
 import _poolChaosHarlequin from "./pool/chaos-harlequin.js";
 import _poolChaosImps from "./pool/chaos-imps.js";
+import _poolChaosLord from "./pool/chaos-lord.js";
 import _poolChaosMaw from "./pool/chaos-maw.js";
+import _poolChaosMoon from "./pool/chaos-moon.js";
 import _poolChaosMutation from "./pool/chaos-mutation.js";
 import _poolChaosShrinesBlackCrystal from "./pool/chaos-shrines-black-crystal.js";
 import _poolChaosSpewer from "./pool/chaos-spewer.js";
@@ -7491,6 +7495,7 @@ import _poolDoomsServoGuards from "./pool/dooms-servo-guards.js";
 import _poolDoomsTimePlatform from "./pool/dooms-time-platform.js";
 import _poolDoomsdayConfluence from "./pool/doomsday-confluence.js";
 import _poolDoomsdayExcruciator from "./pool/doomsday-excruciator.js";
+import _poolDoomsdaySpecter from "./pool/doomsday-specter.js";
 import _poolDoomsday from "./pool/doomsday.js";
 import _poolDoomskarOracle from "./pool/doomskar-oracle.js";
 import _poolDoomskarTitan from "./pool/doomskar-titan.js";
@@ -18960,6 +18965,7 @@ import _poolNathanDrakeTreasureHunter from "./pool/nathan-drake-treasure-hunter.
 import _poolNathsBuffoon from "./pool/naths-buffoon.js";
 import _poolNathsElite from "./pool/naths-elite.js";
 import _poolNaturalAffinity from "./pool/natural-affinity.js";
+import _poolNaturalBalance from "./pool/natural-balance.js";
 import _poolNaturalConnection from "./pool/natural-connection.js";
 import _poolNaturalEmergence from "./pool/natural-emergence.js";
 import _poolNaturalEnd from "./pool/natural-end.js";
@@ -25504,6 +25510,7 @@ import _poolSiltCrawler from "./pool/silt-crawler.js";
 import _poolSilumgarAssassin from "./pool/silumgar-assassin.js";
 import _poolSilumgarButcher from "./pool/silumgar-butcher.js";
 import _poolSilumgarMonument from "./pool/silumgar-monument.js";
+import _poolSilumgarScavenger from "./pool/silumgar-scavenger.js";
 import _poolSilumgarSorcerer from "./pool/silumgar-sorcerer.js";
 import _poolSilumgarSpellEater from "./pool/silumgar-spell-eater.js";
 import _poolSilumgarTheDriftingDeath from "./pool/silumgar-the-drifting-death.js";
@@ -28570,6 +28577,7 @@ import _poolTempleOfTriumph from "./pool/temple-of-triumph.js";
 import _poolTempleThief from "./pool/temple-thief.js";
 import _poolTemporalAdept from "./pool/temporal-adept.js";
 import _poolTemporalAnomaly from "./pool/temporal-anomaly.js";
+import _poolTemporalAperture from "./pool/temporal-aperture.js";
 import _poolTemporalCascade from "./pool/temporal-cascade.js";
 import _poolTemporalCleansing from "./pool/temporal-cleansing.js";
 import _poolTemporalConqueror from "./pool/temporal-conqueror.js";
@@ -32916,6 +32924,7 @@ import _poolWorldfire from "./pool/worldfire.js";
 import _poolWorldgorgerDragon from "./pool/worldgorger-dragon.js";
 import _poolWorldlyCounsel from "./pool/worldly-counsel.js";
 import _poolWorldlyTutor from "./pool/worldly-tutor.js";
+import _poolWorldpurge from "./pool/worldpurge.js";
 import _poolWorldsWithinWorlds from "./pool/worlds-within-worlds.js";
 import _poolWorldslayer from "./pool/worldslayer.js";
 import _poolWorldsoulColossus from "./pool/worldsoul-colossus.js";
@@ -34604,6 +34613,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAgent13SharonCarter,
   _poolAgentBishopManInBlack,
   _poolAgentFrankHorrigan,
+  _poolAgentMariaHill,
   _poolAgentOfAcquisitions,
   _poolAgentOfAtlas,
   _poolAgentOfErebos,
@@ -37540,6 +37550,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBoseijuWhoEndures,
   _poolBoseijuWhoSheltersAll,
   _poolBoshIronGolem,
+  _poolBosiumStrip,
   _poolBoskBanneret,
   _poolBossUramonShadowsReach,
   _poolBosssChauffeur,
@@ -38795,7 +38806,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChaosDragon,
   _poolChaosHarlequin,
   _poolChaosImps,
+  _poolChaosLord,
   _poolChaosMaw,
+  _poolChaosMoon,
   _poolChaosMutation,
   _poolChaosShrinesBlackCrystal,
   _poolChaosSpewer,
@@ -41698,6 +41711,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDoomsTimePlatform,
   _poolDoomsdayConfluence,
   _poolDoomsdayExcruciator,
+  _poolDoomsdaySpecter,
   _poolDoomsday,
   _poolDoomskarOracle,
   _poolDoomskarTitan,
@@ -53167,6 +53181,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNathsBuffoon,
   _poolNathsElite,
   _poolNaturalAffinity,
+  _poolNaturalBalance,
   _poolNaturalConnection,
   _poolNaturalEmergence,
   _poolNaturalEnd,
@@ -59711,6 +59726,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilumgarAssassin,
   _poolSilumgarButcher,
   _poolSilumgarMonument,
+  _poolSilumgarScavenger,
   _poolSilumgarSorcerer,
   _poolSilumgarSpellEater,
   _poolSilumgarTheDriftingDeath,
@@ -62777,6 +62793,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTempleThief,
   _poolTemporalAdept,
   _poolTemporalAnomaly,
+  _poolTemporalAperture,
   _poolTemporalCascade,
   _poolTemporalCleansing,
   _poolTemporalConqueror,
@@ -67123,6 +67140,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWorldgorgerDragon,
   _poolWorldlyCounsel,
   _poolWorldlyTutor,
+  _poolWorldpurge,
   _poolWorldsWithinWorlds,
   _poolWorldslayer,
   _poolWorldsoulColossus,
@@ -68824,6 +68842,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/agent-13-sharon-carter": _poolAgent13SharonCarter,
   "pool/agent-bishop-man-in-black": _poolAgentBishopManInBlack,
   "pool/agent-frank-horrigan": _poolAgentFrankHorrigan,
+  "pool/agent-maria-hill": _poolAgentMariaHill,
   "pool/agent-of-acquisitions": _poolAgentOfAcquisitions,
   "pool/agent-of-atlas": _poolAgentOfAtlas,
   "pool/agent-of-erebos": _poolAgentOfErebos,
@@ -71760,6 +71779,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/boseiju-who-endures": _poolBoseijuWhoEndures,
   "pool/boseiju-who-shelters-all": _poolBoseijuWhoSheltersAll,
   "pool/bosh-iron-golem": _poolBoshIronGolem,
+  "pool/bosium-strip": _poolBosiumStrip,
   "pool/bosk-banneret": _poolBoskBanneret,
   "pool/boss-uramon-shadows-reach": _poolBossUramonShadowsReach,
   "pool/bosss-chauffeur": _poolBosssChauffeur,
@@ -73015,7 +73035,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chaos-dragon": _poolChaosDragon,
   "pool/chaos-harlequin": _poolChaosHarlequin,
   "pool/chaos-imps": _poolChaosImps,
+  "pool/chaos-lord": _poolChaosLord,
   "pool/chaos-maw": _poolChaosMaw,
+  "pool/chaos-moon": _poolChaosMoon,
   "pool/chaos-mutation": _poolChaosMutation,
   "pool/chaos-shrines-black-crystal": _poolChaosShrinesBlackCrystal,
   "pool/chaos-spewer": _poolChaosSpewer,
@@ -75918,6 +75940,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dooms-time-platform": _poolDoomsTimePlatform,
   "pool/doomsday-confluence": _poolDoomsdayConfluence,
   "pool/doomsday-excruciator": _poolDoomsdayExcruciator,
+  "pool/doomsday-specter": _poolDoomsdaySpecter,
   "pool/doomsday": _poolDoomsday,
   "pool/doomskar-oracle": _poolDoomskarOracle,
   "pool/doomskar-titan": _poolDoomskarTitan,
@@ -87387,6 +87410,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/naths-buffoon": _poolNathsBuffoon,
   "pool/naths-elite": _poolNathsElite,
   "pool/natural-affinity": _poolNaturalAffinity,
+  "pool/natural-balance": _poolNaturalBalance,
   "pool/natural-connection": _poolNaturalConnection,
   "pool/natural-emergence": _poolNaturalEmergence,
   "pool/natural-end": _poolNaturalEnd,
@@ -93931,6 +93955,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silumgar-assassin": _poolSilumgarAssassin,
   "pool/silumgar-butcher": _poolSilumgarButcher,
   "pool/silumgar-monument": _poolSilumgarMonument,
+  "pool/silumgar-scavenger": _poolSilumgarScavenger,
   "pool/silumgar-sorcerer": _poolSilumgarSorcerer,
   "pool/silumgar-spell-eater": _poolSilumgarSpellEater,
   "pool/silumgar-the-drifting-death": _poolSilumgarTheDriftingDeath,
@@ -96997,6 +97022,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/temple-thief": _poolTempleThief,
   "pool/temporal-adept": _poolTemporalAdept,
   "pool/temporal-anomaly": _poolTemporalAnomaly,
+  "pool/temporal-aperture": _poolTemporalAperture,
   "pool/temporal-cascade": _poolTemporalCascade,
   "pool/temporal-cleansing": _poolTemporalCleansing,
   "pool/temporal-conqueror": _poolTemporalConqueror,
@@ -101343,6 +101369,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/worldgorger-dragon": _poolWorldgorgerDragon,
   "pool/worldly-counsel": _poolWorldlyCounsel,
   "pool/worldly-tutor": _poolWorldlyTutor,
+  "pool/worldpurge": _poolWorldpurge,
   "pool/worlds-within-worlds": _poolWorldsWithinWorlds,
   "pool/worldslayer": _poolWorldslayer,
   "pool/worldsoul-colossus": _poolWorldsoulColossus,

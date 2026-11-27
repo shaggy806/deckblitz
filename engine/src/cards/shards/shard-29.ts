@@ -887,6 +887,7 @@ import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTemperedInSolitude from "../pool/tempered-in-solitude.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
+import _poolTemporalAperture from "../pool/temporal-aperture.js";
 import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
 import _poolTenuousTruce from "../pool/tenuous-truce.js";
 import _poolTerrifyingPresence from "../pool/terrifying-presence.js";
@@ -1951,6 +1952,7 @@ const shard: CardShard = {
     _poolTeferiHeroOfDominaria,
     _poolTemperedInSolitude,
     _poolTempleAcolyte,
+    _poolTemporalAperture,
     _poolTendrilOfTheMycotyrant,
     _poolTenuousTruce,
     _poolTerrifyingPresence,

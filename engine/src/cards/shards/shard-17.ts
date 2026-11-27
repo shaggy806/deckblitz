@@ -113,6 +113,7 @@ import _poolBoggartBog from "../pool/boggart-bog.js";
 import _poolBondedFetch from "../pool/bonded-fetch.js";
 import _poolBondedHerdbeast from "../pool/bonded-herdbeast.js";
 import _poolBorosCharm from "../pool/boros-charm.js";
+import _poolBosiumStrip from "../pool/bosium-strip.js";
 import _poolBotBashingTime from "../pool/bot-bashing-time.js";
 import _poolBreachingHippocamp from "../pool/breaching-hippocamp.js";
 import _poolBreakingWave from "../pool/breaking-wave.js";
@@ -1178,6 +1179,7 @@ const shard: CardShard = {
     _poolBondedFetch,
     _poolBondedHerdbeast,
     _poolBorosCharm,
+    _poolBosiumStrip,
     _poolBotBashingTime,
     _poolBreachingHippocamp,
     _poolBreakingWave,

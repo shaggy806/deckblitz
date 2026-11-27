@@ -15,6 +15,7 @@ import _poolAetherGale from "../pool/aether-gale.js";
 import _poolAetherMutation from "../pool/aether-mutation.js";
 import _poolAffectionateIndrik from "../pool/affectionate-indrik.js";
 import _poolAgainstAllOdds from "../pool/against-all-odds.js";
+import _poolAgentMariaHill from "../pool/agent-maria-hill.js";
 import _poolAgentsOfSHIELD from "../pool/agents-of-s-h-i-e-l-d.js";
 import _poolAggressiveSabotage from "../pool/aggressive-sabotage.js";
 import _poolAkkiEmberKeeper from "../pool/akki-ember-keeper.js";
@@ -1133,6 +1134,7 @@ const shard: CardShard = {
     _poolAetherMutation,
     _poolAffectionateIndrik,
     _poolAgainstAllOdds,
+    _poolAgentMariaHill,
     _poolAgentsOfSHIELD,
     _poolAggressiveSabotage,
     _poolAkkiEmberKeeper,

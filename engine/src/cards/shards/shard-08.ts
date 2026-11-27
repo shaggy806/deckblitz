@@ -158,6 +158,7 @@ import _poolCease from "../pool/cease.js";
 import _poolCelestialConvergence from "../pool/celestial-convergence.js";
 import _poolCessation from "../pool/cessation.js";
 import _poolChaosCharm from "../pool/chaos-charm.js";
+import _poolChaosMoon from "../pool/chaos-moon.js";
 import _poolChargeOfTheForeverBeast from "../pool/charge-of-the-forever-beast.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
@@ -1266,6 +1267,7 @@ const shard: CardShard = {
     _poolCelestialConvergence,
     _poolCessation,
     _poolChaosCharm,
+    _poolChaosMoon,
     _poolChargeOfTheForeverBeast,
     _poolCharmedStray,
     _poolChelonianTackle,

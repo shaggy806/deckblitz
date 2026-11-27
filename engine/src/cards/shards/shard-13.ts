@@ -767,6 +767,7 @@ import _poolSignalingRoar from "../pool/signaling-roar.js";
 import _poolSilentArbiter from "../pool/silent-arbiter.js";
 import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
+import _poolSilumgarScavenger from "../pool/silumgar-scavenger.js";
 import _poolSilverSurferGalactussHerald from "../pool/silver-surfer-galactuss-herald.js";
 import _poolSilverbladePaladin from "../pool/silverblade-paladin.js";
 import _poolSimianSpiritGuide from "../pool/simian-spirit-guide.js";
@@ -1799,6 +1800,7 @@ const shard: CardShard = {
     _poolSilentArbiter,
     _poolSilentDart,
     _poolSilkenfistOrder,
+    _poolSilumgarScavenger,
     _poolSilverSurferGalactussHerald,
     _poolSilverbladePaladin,
     _poolSimianSpiritGuide,
