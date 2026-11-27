@@ -547,6 +547,14 @@ export interface GameObject {
    * source has just left still reads what was noted for it (608.2h). Absent
    * until the first. */
   notedCreatureTypes?: { readonly stint: number; readonly types: readonly string[] };
+  /** The player a `notesTarget` triggered ability of this permanent targeted,
+   * noted as that ability went on the stack (rule 603.3d), with the stint it
+   * triggered from: what a linked ability's "that player" is (rule 607.1 —
+   * Laquatus's Champion), read by the `"noted-target-player"` scope. Kept
+   * with the stint, like `notedCreatureTypes`, so a leaves ability reads it
+   * after the permanent has gone and a new object has none (rule 400.7).
+   * Absent until the first. */
+  notedTarget?: { readonly stint: number; readonly player: PlayerId };
   /** The turns this permanent was declared an attacker on, in this
    * battlefield stint — "attacked during their controller's last turn" (Halls
    * of Mist), which an extra combat this turn mustn't overwrite. Pruned as each

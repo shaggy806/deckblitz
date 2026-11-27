@@ -1020,6 +1020,7 @@ const RESOLUTION_SCOPES: ReadonlySet<PlayerScope> = new Set<PlayerScope>([
   "each-foe",
   "players-dealt-damage-this-way",
   "players-who-lost-control-this-way",
+  "noted-target-player",
   "damaged-players",
   "attacked-players",
   "you-and-attacked-players",
@@ -37297,6 +37298,20 @@ export class Game {
     return this.effectiveTriggered(sourceId);
   }
 
+  /** A `notesTarget` triggered ability just put on the stack notes the player
+   * it targets for its source, in the stint it triggered from (rule 607.1:
+   * its linked ability's "that player" — `GameObject.notedTarget`). */
+  private noteLinkedTarget(ability: GameObject, sourceId: ObjectId, refs: LastKnownRefs | undefined): void {
+    const spec = this.stackAbilityOf(ability);
+    if (!("notesTarget" in spec) || spec.notesTarget !== true) return;
+    const target = (ability.targets ?? []).find((t) => t?.kind === "player");
+    const source = this.state.objects[sourceId];
+    if (target?.kind !== "player" || source === undefined) return;
+    const stint = refs?.source ?? (source.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : undefined);
+    if (stint === undefined) return;
+    source.notedTarget = { stint, player: target.player };
+  }
+
   private stackAbilityOf(object: GameObject): StackAbility {
     // A delayed triggered ability isn't an ability of any card, so there is
     // nothing to look up by index — it carries its own effect (rule 603.7).
@@ -43260,6 +43275,7 @@ export class Game {
       refs = { ...refs, attachedHost: { object: host.id, zoneChangeCount: host.zoneChangeCount ?? 0 } };
     }
     if (refs !== undefined) this.state.objects[abilityId].lastKnownRefs = refs;
+    if (abilityKind === "triggered") this.noteLinkedTarget(this.state.objects[abilityId], sourceId, refs);
     if (autoTargetSlots.length > 0) {
       this.state.objects[abilityId].autoTargetSlots = [...autoTargetSlots];
     }
@@ -43717,6 +43733,16 @@ export class Game {
         // The source's chosen player, in the stint this refers to (608.2h).
         const departed = departedSource();
         const p = departed !== undefined ? departed.chosenPlayer : this.state.objects[source]?.chosenPlayer;
+        return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
+      }
+      if (who === "noted-target-player") {
+        // "That player": the target a linked ability of the source noted in
+        // the stint this refers to (rule 607.1), however that ability fared.
+        const object = this.state.objects[source];
+        const stint =
+          refs.source ?? refs.sourceWas ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
+        const noted = object?.notedTarget;
+        const p = noted !== undefined && noted.stint === stint ? noted.player : undefined;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
       }
       if (who === "enchanted-player") {

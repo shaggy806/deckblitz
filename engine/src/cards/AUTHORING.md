@@ -1684,7 +1684,11 @@ control deal damage to your opponents, exile the top card of each of those
 opponents' libraries" is an `impulse-exile` with `whose: "damaged-players"`;
 nobody outside such a trigger. `"players-who-lost-control-this-way"` is the player a permanent
 was just taken from (Rules of Acquisition's "gain control of target nonland permanent an
-opponent controls. **That opponent** draws three cards", control changed first). `"players-being-attacked"` is the same
+opponent controls. **That opponent** draws three cards", control changed first). `"noted-target-player"` is a
+linked ability's "that player" (rule 607.1): the player a triggered ability of the source marked `notesTarget: true`
+targeted in the stint this refers to — Laquatus's Champion's enters ability (`targets: ["player"]`, `notesTarget`)
+and its "when this creature leaves the battlefield, **that player** gains 6 life" (`gain-life` `who:
+"noted-target-player"`), read even while the enters ability is still on the stack. `"players-being-attacked"` is the same
 players read from the state — whoever the active player declared attackers at
 this combat — so it also answers in a trigger's intervening `condition`, which
 is asked before the trigger has its attackers ("whenever a player attacks,

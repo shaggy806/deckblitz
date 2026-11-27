@@ -26868,3 +26868,21 @@ describe("costs-mana lane, 2026-11-27: coloured mana made white, white spent as 
     });
   });
 });
+
+describe("a leaves ability's \"that player\"", () => {
+  it("links Laquatus's Champion's leaves ability to its enters ability's target", () => {
+    const face = parseFace(
+      {
+        name: "Test Horror",
+        type_line: "Creature — Horror",
+        oracle_text:
+          "When this creature enters, target player loses 6 life.\nWhen this creature leaves the battlefield, that player gains 6 life.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].notesTarget).toBe(true);
+    expect(face.triggered[1].trigger).toEqual({ on: "leaves-battlefield", who: "self" });
+    expect(face.triggered[1].effect).toEqual({ kind: "gain-life", amount: 6, who: "noted-target-player" });
+  });
+});

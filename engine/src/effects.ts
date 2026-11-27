@@ -2597,6 +2597,13 @@ export type PlayerScope =
    * the player it was taken from, though the target now names you. Nobody
    * where no control changed. */
   | "players-who-lost-control-this-way"
+  /** "When this creature leaves the battlefield, **that player** gains 6
+   * life" (Laquatus's Champion): the player a `notesTarget` triggered ability
+   * of the effect's source targeted, in the stint this ability refers to
+   * (`GameObject.notedTarget`; rule 607.1, linked abilities) — whether that
+   * ability has resolved, been countered or is still on the stack. Nobody
+   * when it never triggered, or that player has left the game. */
+  | "noted-target-player"
   /** "Whenever one or more Pirates you control deal damage to your
    * opponents, exile the top card of **each of those opponents'** libraries"
    * (Breeches, Brazen Plunderer): each player the sources of a `once:

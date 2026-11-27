@@ -13,6 +13,7 @@
     "cost:x-one-mana-of-each-color",
     "amount:mana-spent-on-cumulative-upkeep",
     "static:grant-cumulative-upkeep",
+    "effect:leaves-trigger-reads-enter-target",
     "effect:sacrifice-unless-pay-its-mana-cost",
     "static:prohibit-tap-cost-abilities",
     "cost:alt-cost-spend-only-treasure-mana",

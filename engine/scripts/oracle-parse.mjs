@@ -19706,6 +19706,24 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (line === "") continue;
     let m;
 
+    // "When ~ leaves the battlefield, that player gains N life" after an
+    // ability targeting a player (Laquatus's Champion, Soul Scourge): linked
+    // abilities (rule 607.1) — the first notes its target, the second reads it.
+    if ((m = /^When (?:~|this creature) leaves the battlefield, that player gains (\d+) life\.$/.exec(line))) {
+      const prior = out.triggered[out.triggered.length - 1];
+      if (prior !== undefined && prior.targets?.length === 1 && prior.targets[0] === "player") {
+        prior.notesTarget = true;
+        out.triggered.push({
+          trigger: { on: "leaves-battlefield", who: "self" },
+          targets: [],
+          effect: { kind: "gain-life", amount: Number(m[1]), who: "noted-target-player" },
+          resolve: null,
+          text: printed(raw),
+        });
+        continue;
+      }
+    }
+
     // Keywords, partner abilities, ward, and lines with no behaviour of their own.
     // A keyword line — "Flying, ward {2}" — each part a modeled keyword or a
     // plain ward; one part of anything else leaves the whole line to a person.

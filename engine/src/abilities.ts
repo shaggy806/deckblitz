@@ -3356,6 +3356,18 @@ export interface TriggeredAbility {
    * one ability they are — Victor, Valgavoth's Seneschal's "if this is the
    * first time this ability has resolved this turn". */
   readonly sameAbilityAs?: number;
+  /**
+   * This ability's player target is the one another ability of its source
+   * refers to as "that player" (rule 607.1, linked abilities): Laquatus's
+   * Champion's "When this creature enters, target player loses 6 life. When
+   * this creature leaves the battlefield, **that player** gains 6 life."
+   * Noted for the source in its stint as the target is chosen, as the ability
+   * goes on the stack (603.3d) — so the leaves ability reads it whether this
+   * one has resolved, been countered, or is still on the stack (the card's
+   * ruling) — on `GameObject.notedTarget`, read by the `"noted-target-player"`
+   * scope.
+   */
+  readonly notesTarget?: true;
   /** Engine-set, never authored: the sets a `grant-triggered`'s `remember`
    * captured as it granted this, given to each firing as `{ remembered }`. */
   readonly remembered?: { readonly [name: string]: readonly SetMember[] };
