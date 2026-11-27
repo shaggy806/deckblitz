@@ -26973,6 +26973,24 @@ describe("a creature blocking this one dies (Baneclaw Marauder)", () => {
   });
 });
 
+describe("a shield that gains the life it prevents (Candles' Glow)", () => {
+  it("prevent-damage with gainLifePrevented", () => {
+    const glow = parseFace(
+      {
+        name: "Candles' Glow",
+        type_line: "Instant — Arcane",
+        mana_cost: "{1}{W}",
+        oracle_text:
+          "Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(glow.complete).toBe(true);
+    expect(glow.targets).toEqual(["any-target"]);
+    expect(glow.effect).toEqual({ kind: "prevent-damage", target: 0, amount: 3, gainLifePrevented: true });
+  });
+});
+
 describe("its own counters as a CDA (Rusting Golem, Mwonvuli Ooze)", () => {
   it("the number of counters of a kind on it, and 1 plus twice that", () => {
     const golem = parseFace(

@@ -14825,6 +14825,17 @@ export function parseEffect(text, outer) {
       parsed[parsed.length - 1] = { ...parsed.at(-1), gainLifePrevented: true };
       continue;
     }
+    // … after a plain shield (Candles' Glow's "prevent the next 3 damage that
+    // would be dealt to any target this turn").
+    if (
+      /^you gain life equal to the damage prevented this way\.$/i.test(sentence) &&
+      parsed.at(-1)?.kind === "prevent-damage" &&
+      parsed.at(-1).redirectTo === undefined &&
+      parsed.at(-1).from === undefined
+    ) {
+      parsed[parsed.length - 1] = { ...parsed.at(-1), gainLifePrevented: true };
+      continue;
+    }
     // … after a source of your choice (Reverse Damage), and only from a
     // source of a colour (Shadowbane, Samite Ministration).
     if (parsed.at(-1)?.kind === "prevent-damage-from-chosen-source") {

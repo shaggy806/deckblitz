@@ -50679,7 +50679,7 @@ controlledBy,
           ...(shield.next === true ? { nextTime: true as const } : {}),
         });
       },
-      preventDamage: (target, amount, combatOnly, redirectTo) => {
+      preventDamage: (target, amount, combatOnly, redirectTo, gainLifePrevented) => {
         if (amount !== "all" && amount <= 0) return;
         // A shield on an object is for that object (rule 400.7): this stint.
         const stint =
@@ -50690,6 +50690,9 @@ controlledBy,
           source,
           ...this.madeByField(source),
           expires: "end-of-turn" as const,
+          // "You gain life equal to the damage prevented this way" (Candles'
+          // Glow): the shields path's gain (`gainLife`).
+          ...(gainLifePrevented === true ? { gainLife: controller } : {}),
         };
         if (redirectTo !== undefined && amount !== "all") {
           const redirect = this.redirectOf(redirectTo);

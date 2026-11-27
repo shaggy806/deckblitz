@@ -11586,6 +11586,11 @@ export type EffectSpec =
        * stack or the permanent it becomes (`preventDamageFrom`); nothing at
        * all with it gone (rule 400.7). Not with `redirectTo`. */
       readonly from?: ObjectRef;
+      /** "You gain life equal to the damage prevented this way" (Candles'
+       * Glow): the effect's controller gains what the shield prevents, as
+       * it prevents it (Reverse Damage's). Not with `redirectTo` or
+       * `from`. */
+      readonly gainLifePrevented?: true;
     }
   | {
       /** Damage from a source of your choice (rule 609.7): "The next time a
@@ -16579,7 +16584,13 @@ export interface EffectApi {
   preventAllCombatDamage(by?: CardFilter, toYou?: boolean): void;
   /** Add a one-shot damage-prevention shield on `target` (a player or object)
    * for `amount` damage this turn — Healing Salve (ROADMAP Phase 11 EG-6). */
-  preventDamage(target: TargetRef, amount: number | "all", combatOnly: boolean, redirectTo?: TargetRef): void;
+  preventDamage(
+    target: TargetRef,
+    amount: number | "all",
+    combatOnly: boolean,
+    redirectTo?: TargetRef,
+    gainLifePrevented?: boolean,
+  ): void;
   /** Ask for a source of damage (rule 609.7a) — the permanents and spells
    * on the stack matching `filter` — and apply `then` to it as target 0. See
    * the `"prevent-damage-from-chosen-source"` {@link EffectSpec}. */
@@ -26376,7 +26387,13 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         }
         return;
       }
-      ctx.preventDamage(ref, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx), spec.combatOnly ?? false);
+      ctx.preventDamage(
+        ref,
+        spec.amount === "all" ? "all" : amountValue(spec.amount, ctx),
+        spec.combatOnly ?? false,
+        undefined,
+        spec.gainLifePrevented === true,
+      );
       return;
     }
     case "prevent-damage-from-chosen-source": {
