@@ -9283,7 +9283,9 @@ Delete an entry in the same commit as the feature that retires it.
     mana on X**" (Crypt Rats' `cost: { mana: "{X}", tap: false, xSpendOnly:
     "B" }`, Crimson Hellkite): the {X} is paid as that many mana of the
     colour, so the X offered stops at what there is; a generic reduction
-    (Heartstone) still lowers it. 
+    (Heartstone) still lowers it. One colour; on a modal ability it holds
+    whichever mode (Atalya, Samite Master, the line closing each mode); a
+    spell's is the card's `xSpendOnly` (Consume Spirit);
     `abilityOf` adds the "…or activate an ability of" half — of a
     permanent on the battlefield ("abilities of creatures" means creature
     permanents: Castle Garenbrig's ruling), unless `abilityOfAnyZone: true`

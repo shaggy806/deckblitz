@@ -26162,3 +26162,26 @@ describe("an additional cost of sacrificing all of a kind", () => {
     });
   });
 });
+
+describe("Memory Crystal and Atalya, Samite Master", () => {
+  it("reads 'Buyback costs cost {2} less.' as the static's buybackCostReduction", () => {
+    const parsed = parseFace({ name: "Memory Crystal", type_line: "Artifact", mana_cost: "{3}", oracle_text: "Buyback costs cost {2} less." });
+    expect(parsed.static[0]).toEqual({ affects: { scope: "self" }, buybackCostReduction: 2, text: "Buyback costs cost {2} less." });
+  });
+
+  it("reads 'Spend only white mana on X' closing every mode as the cost's xSpendOnly", () => {
+    const parsed = parseFace({
+      name: "Atalya, Samite Master",
+      type_line: "Legendary Creature — Human Cleric",
+      mana_cost: "{3}{W}{W}",
+      oracle_text:
+        "{X}, {T}: Choose one —\n• Prevent the next X damage that would be dealt to target creature this turn. Spend only white mana on X.\n• You gain X life. Spend only white mana on X.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.activated[0].cost).toEqual({ mana: "{X}", tap: true, xSpendOnly: "W" });
+    expect(parsed.activated[0].effect.modes.map((mode: { effect: unknown }) => mode.effect)).toEqual([
+      { kind: "prevent-damage", target: 0, amount: "x" },
+      { kind: "gain-life", amount: "x" },
+    ]);
+  });
+});

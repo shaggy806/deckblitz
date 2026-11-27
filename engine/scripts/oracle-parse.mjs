@@ -20992,6 +20992,11 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, morphCostIncrease: Number(m[1]), text: printed(raw) });
       continue;
     }
+    // Memory Crystal: a buyback cost's own generic mana, whoever's.
+    if ((m = /^Buyback costs cost \{(\d+)\} less\.$/.exec(line))) {
+      out.static.push({ affects: { scope: "self" }, buybackCostReduction: Number(m[1]), text: printed(raw) });
+      continue;
+    }
     // Doc Aurlock, Grizzled Genius: the plot special action's cost, generic mana only.
     if ((m = /^Plotting cards from your hand costs \{(\d+)\} less\.$/.exec(line))) {
       out.static.push({ affects: { scope: "self" }, plotCostReduction: Number(m[1]), text: printed(raw) });
@@ -23897,7 +23902,18 @@ function fillEffect(ability, text, ctx, lines, i) {
       // The bullets are the raw lines: "this creature" is `~`, as `normalize`
       // reads it (Blade of the Swarm's "Put two +1/+1 counters on this
       // creature").
-      const b = stripReminder(bullet).replace(/\bthis (creature|artifact|enchantment|land|permanent|Equipment|Vehicle|Aura|token|card|Saga)\b/gi, "~");
+      let b = stripReminder(bullet).replace(/\bthis (creature|artifact|enchantment|land|permanent|Equipment|Vehicle|Aura|token|card|Saga)\b/gi, "~");
+      // "Spend only white mana on X" closing every mode (Atalya, Samite
+      // Master) is the cost's `xSpendOnly`, whichever mode (its ruling).
+      const only = / Spend only (white|blue|black|red|green) mana on X\.$/.exec(b);
+      if (only !== null && typeof ability.cost?.mana === "string" && ability.cost.mana.includes("{X}")) {
+        const color = { white: "W", blue: "U", black: "B", red: "R", green: "G" }[only[1]];
+        // Said on some modes and not others, it isn't the cost's: leave it.
+        if (!bullets.every((other) => other.endsWith(` Spend only ${only[1]} mana on X.`))) ok = false;
+        if (ability.cost.xSpendOnly !== undefined && ability.cost.xSpendOnly !== color) ok = false;
+        ability.cost = { ...ability.cost, xSpendOnly: color };
+        b = b.slice(0, only.index);
+      }
       // Each mode brings its own targets (rule 700.2b): slots of its own.
       const targets = [];
       // "That player" in a mode is the trigger's player, as in a plain

@@ -90,6 +90,32 @@ describe("Crimson Hellkite — {X}, {T} with only red mana on X", () => {
   });
 });
 
+describe("Atalya, Samite Master — a modal {X}, {T} with only white mana on X", () => {
+  it("gains X life, X counting only white mana", () => {
+    const { game } = table();
+    const atalya = spawn(game, "Atalya, Samite Master");
+    lands(game, "Plains", 2);
+    lands(game, "Swamp", 3);
+    expect(xOffer(game, atalya)?.xCost?.maxX).toBe(2);
+    expect(() => activate(game, atalya, 0, { x: 3, modes: [1] })).toThrow(/pay/i);
+    activate(game, atalya, 0, { x: 2, modes: [1] });
+    expect(life(game, A)).toBe(22);
+  });
+
+  it("prevents the next X damage to target creature, the restriction holding in either mode", () => {
+    const { game } = table();
+    const atalya = spawn(game, "Atalya, Samite Master");
+    const bear = spawn(game, "Grizzly Bears");
+    lands(game, "Plains", 2);
+    lands(game, "Swamp", 3);
+    expect(() => activate(game, atalya, 0, { x: 3, modes: [0], targets: [ref(bear)] })).toThrow(/pay/i);
+    activate(game, atalya, 0, { x: 2, modes: [0], targets: [ref(bear)] });
+    game.debugApplyEffect(B, { kind: "damage", amount: 3, target: 0 }, [ref(bear)]);
+    expect(zone(game, bear)).toBe("battlefield");
+    expect(game.state.objects[bear].damageMarked).toBe(1);
+  });
+});
+
 /** The cast offer for `card` with an X range, if there is one. */
 const castXOffer = (game: Game, card: ObjectId): Extract<LegalAction, { kind: "cast-spell" }> | undefined => {
   for (const action of game.legalActions(A)) {

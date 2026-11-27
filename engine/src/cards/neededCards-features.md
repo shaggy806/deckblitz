@@ -9101,3 +9101,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Mana only for face-down spells, morph costs and manifests (2026-11-27).** `cost:spend-only-face-down-spells-and-morph`: `ManaSpendPurpose` `"morph-cost"` and `"manifested-face-up"`, read off the turn-face-up purpose's `faceUpBy` (`Game.faceUpBy`), beside `"face-down-spell"`. Qarsi Deceiver. `test/mana-spend-morph-cost.test.ts`.
 
 **Buyback costs cost less (2026-11-27).** `cost:buyback-cost-reduction`: a static's `buybackCostReduction`, read by `Game.kickerCostNow` wherever a kicked cast's kicker mana is added (offers, `castingCostOf`): off the buyback cost's own generic mana only. Memory Crystal. `test/buyback-cost-reduction.test.ts`.
+
+**Only one colour on a modal ability's X (2026-11-27).** `cost:spend-only-color-on-x`: no engine code, `AbilityCost.xSpendOnly` (Crimson Hellkite's) on a modal `{X}, {T}` ability; the scaffolder reads "Spend only white mana on X." closing every mode as the cost's. Atalya, Samite Master. `test/x-spend-only.test.ts`.
