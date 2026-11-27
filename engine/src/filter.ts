@@ -1614,6 +1614,18 @@ export interface CardFilter {
    * you or a permanent you control". */
   readonly stackObjectTargets?: SpellTargetsFilter;
   /**
+   * The other side of `stackObjectTargets`: it is the target of an activated
+   * or triggered ability on the stack (rules 115.1c, 115.1d) — one that targeted it in
+   * the stint it's in now (400.7) — whose source matches `source` (as it is,
+   * or in whatever zone it's in now), and, with `otherThanSource`, isn't the
+   * permanent applying this filter. Goblin Artisans' "artifact spell you
+   * control that **isn't the target of an ability from another creature
+   * named Goblin Artisans**" is `not: { targetedByAbility: { source: { name,
+   * type: "creature" }, otherThanSource: true } }`. Needs
+   * `FilterContext.source` for `otherThanSource`.
+   */
+  readonly targetedByAbility?: { readonly source?: CardFilter; readonly otherThanSource?: true };
+  /**
    * It is the reference object (see `ShareReference`), or shares at least
    * one **card type** (rule 205.2a) with it — "a permanent that shares a
    * card type with it" (Braids, Arisen Nightmare: the sacrificed permanent),
@@ -1916,6 +1928,37 @@ function spellTargetsMatch(
   ctx: FilterContext,
 ): boolean {
   return spell.kind === "card" && stackObjectTargetsMatch(state, registry, spell, clause, ctx);
+}
+
+/** `CardFilter.targetedByAbility`: an ability on the stack targets `object`
+ * in its current stint, from a source meeting the clause. */
+function targetedByAbility(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  clause: NonNullable<CardFilter["targetedByAbility"]>,
+  ctx: FilterContext,
+): boolean {
+  const stint = object.zoneChangeCount ?? 0;
+  return state.zones.shared.stack.some((id) => {
+    const ability = state.objects[id];
+    if (ability === undefined || ability.kind !== "ability") return false;
+    const source = ability.sourceObjectId;
+    if (clause.otherThanSource === true && (source === null || source === ctx.source)) return false;
+    if (clause.source !== undefined && (source === null || !matchesFilter(state, registry, source, clause.source, { you: ctx.you }))) {
+      return false;
+    }
+    const auto = new Set(ability.autoTargetSlots ?? []);
+    return (ability.targets ?? []).some(
+      (t, i) =>
+        t !== null &&
+        t !== undefined &&
+        !auto.has(i) &&
+        t.kind === "object" &&
+        t.object === object.id &&
+        (ability.targetStints?.[i] ?? stint) === stint,
+    );
+  });
 }
 
 /** {@link spellTargetsMatch} for an ability on the stack as well: "target spell
@@ -3623,6 +3666,9 @@ export function matchesFilter(
     filter.stackObjectTargets !== undefined &&
     (live === undefined || !stackObjectTargetsMatch(state, registry, live, filter.stackObjectTargets, ctx))
   ) {
+    return false;
+  }
+  if (filter.targetedByAbility !== undefined && (live === undefined || !targetedByAbility(state, registry, live, filter.targetedByAbility, ctx))) {
     return false;
   }
   if (filter.targets !== undefined && (live === undefined || !spellTargetsMatch(state, registry, live, filter.targets, ctx))) {

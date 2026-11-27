@@ -3925,7 +3925,14 @@ a `dies` trigger, `who: "any"`, `filter: { type: "creature", controlledBy:
 "opponent", greatestAmongItsController: { of: "power", among: { type:
 "creature" } } }` — in a wrath only the ones that were greatest, a lord that
 died not "greatest" because the creature it pumped shrank (the snapshot keeps
-the answer, for printed triggers on the battlefield as it left). `targets: { only?, single?, permanent?, source?, player? }`
+the answer, for printed triggers on the battlefield as it left). The other way round,
+`targetedByAbility: { source?, otherThanSource? }` is "the target of an ability": an
+activated or triggered ability on the stack aimed at it in its current stint, from a source
+matching `source`, not the filter's own permanent with `otherThanSource` — Goblin
+Artisans' "artifact spell you control that isn't the target of an ability from another
+creature named Goblin Artisans" is `not: { targetedByAbility: { source: { name: "Goblin
+Artisans", type: "creature" }, otherThanSource: true } }` (`targeted-by-ability.test.ts`).
+`targets: { only?, single?, permanent?, source?, player? }`
 asks what a **spell** on the stack targets (anything else has no targets and never
 matches): a target that is a player (`player: "you" | "opponent" | "any"` — Dawn Charm's
 "counter target spell that targets you", Danitha, Spear of Agony's "a spell that targets an
