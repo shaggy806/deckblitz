@@ -24721,6 +24721,12 @@ function spellCostStaticOf(line, text) {
     return { affects: { scope: "self" }, costModification: { ...rest, ...(Object.keys(when).length > 0 ? { when } : {}) }, text };
   };
   let m;
+  // "Each artifact spell costs {1} more to cast for each artifact its
+  // controller controls" (Hum of the Radix): counted on the caster's side
+  // (`amountsReadByCaster`).
+  if ((m = /^Each (artifact|creature|enchantment) spell costs \{1\} more to cast for each (artifact|creature|enchantment|land) its controller controls\.$/.exec(line))) {
+    return made({ applies: { type: m[1] }, increaseGeneric: { countOf: { type: m[2], controlledBy: "you" } }, amountsReadByCaster: true });
+  }
   if ((m = /^(White|Blue|Black|Red|Green) spells you cast cost ((?:\{[WUBRG]\})+) more to cast\.$/.exec(line))) {
     return made({ applies: { colors: [COLOR_WORD[m[1].toLowerCase()]] }, caster: "you", increaseColored: m[2] });
   }

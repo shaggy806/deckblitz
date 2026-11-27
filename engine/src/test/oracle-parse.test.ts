@@ -25955,3 +25955,19 @@ describe("a graveyard exile cost that may take its own card", () => {
   });
 });
 
+describe("a spell cost increase counted for the caster", () => {
+  it("Hum of the Radix: for each artifact its controller controls", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      mana_cost: "{2}{G}{G}",
+      oracle_text: "Each artifact spell costs {1} more to cast for each artifact its controller controls.",
+    });
+    expect(parsed.static[0].costModification).toEqual({
+      applies: { type: "artifact" },
+      increaseGeneric: { countOf: { type: "artifact", controlledBy: "you" } },
+      amountsReadByCaster: true,
+    });
+  });
+});
+

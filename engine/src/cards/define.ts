@@ -4422,6 +4422,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * (Damping Sphere): read for whoever is casting, where `increaseGeneric`
      * reads from this permanent's side. */
     readonly increasePerOtherSpellByCaster?: number;
+    /** `increaseGeneric` and `reduceGeneric` read with the **caster** as
+     * "you", not this static's controller: Hum of the Radix's "Each artifact
+     * spell costs {1} more to cast for each artifact its controller
+     * controls" (`{ count: { type: "artifact", controlledBy: "you" } }`). The
+     * spell's controller is the player casting it (rule 601.2a); its total
+     * cost is worked out as it's cast (601.2f). */
+    readonly amountsReadByCaster?: true;
     /** "Each spell that would cost less than three mana to cast costs three
      * mana to cast" (Trinisphere: `{ applies: {}, minimumMana: 3 }`): an
      * effect that directly affects the total cost, applied once it has been

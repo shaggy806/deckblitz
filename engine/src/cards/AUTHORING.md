@@ -7274,6 +7274,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     (Derelor, the Leeches): coloured pips added before any reduction (rule
     601.2f), to an alternative cost as well (118.9d). The mirror of
     `reduceColored`.
+  - `amountsReadByCaster: true` — `increaseGeneric` / `reduceGeneric` read
+    with the **caster** as "you": Hum of the Radix's "Each artifact spell
+    costs {1} more to cast for each artifact its controller controls" is
+    `{ applies: { type: "artifact" }, increaseGeneric: { countOf: { type:
+    "artifact", controlledBy: "you" } }, amountsReadByCaster: true }`.
   - `minimumMana: 3` — "each spell that would cost less than three mana to
     cast costs three mana to cast" (Trinisphere: `{ applies: {}, minimumMana:
     3 }` under `condition: { kind: "source", filter: { tapped: false } }`): a

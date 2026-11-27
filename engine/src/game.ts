@@ -21361,10 +21361,13 @@ export class Game {
         }
         if (times === 0) continue;
       }
+      // "…for each artifact its controller controls" (Hum of the Radix): the
+      // caster's side (rule 601.2a), not this static's.
+      const reader = mod.amountsReadByCaster === true ? player : source.controller;
       if (mod.reduceGeneric !== undefined) {
-        reduceGeneric += times * this.costAmount(mod.reduceGeneric, source.controller, source.id, cardId);
+        reduceGeneric += times * this.costAmount(mod.reduceGeneric, reader, source.id, cardId);
       }
-      increaseGeneric += times * this.costAmount(mod.increaseGeneric ?? 0, source.controller, source.id, cardId);
+      increaseGeneric += times * this.costAmount(mod.increaseGeneric ?? 0, reader, source.id, cardId);
       if (mod.increasePerOtherSpellByCaster !== undefined) {
         // Its total cost is worked out before it counts as cast (601.2f, 601.2i).
         increaseGeneric += times * mod.increasePerOtherSpellByCaster * turnStatOf(this.state, player, "spells-cast");
