@@ -11448,6 +11448,19 @@ export type EffectSpec =
       /** A redirection to that source's controller (`"controller"` —
        * Reflect Damage) or itself (`"itself"`), instead of `redirectTo`. */
       readonly redirectToSource?: "itself" | "controller";
+      /** Not prevention but a replacement that lets the damage be dealt and
+       * adds this beside it (rule 614.1a), `"x"` the damage as it stood when
+       * it applied and the damage's source `"trigger-object"` (its
+       * controller `"trigger-controller"`), dealt by this spell: Eye for an
+       * Eye's "the next time a source of your choice would deal damage to
+       * you this turn, instead that source deals that much damage to you and
+       * Eye for an Eye deals that much damage to that source's controller" is
+       * `{ to: "you", amount: "next-time", also: { kind: "damage", amount:
+       * "x", who: "trigger-controller" } }`. It isn't prevention, so it
+       * applies to damage that can't be prevented, and the one affected
+       * orders it among the others (616.1). Not with `half`, `allBut`, a
+       * number `amount`, a redirection, `then` or `gainLifePrevented`. */
+      readonly also?: EffectSpec;
       /** A redirection instead (rule 614.9): "The next time a source of your
        * choice would deal damage to target creature this turn, that damage
        * is dealt to this creature instead" (Shaman en-Kor) is `{ to: 0,
@@ -16334,6 +16347,9 @@ export interface EffectApi {
       readonly allBut?: number;
       /** Only combat damage (Forcefield). */
       readonly combatOnly?: true;
+      /** Not prevention: the damage is dealt, and this beside it (Eye for
+       * an Eye). */
+      readonly also?: EffectSpec;
     },
   ): void;
   /** `target`'s text has every `change.from` replaced by `change.to` — see
@@ -25946,6 +25962,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ...(spec.half !== undefined ? { half: spec.half } : {}),
               ...(spec.allBut !== undefined ? { allBut: spec.allBut } : {}),
               ...(spec.combatOnly === true ? { combatOnly: true as const } : {}),
+              ...(spec.also !== undefined ? { also: spec.also } : {}),
             },
           );
         }

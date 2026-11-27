@@ -1220,7 +1220,9 @@ function runDamageSteps(
   readonly replaced?: { readonly step: Extract<DamageStep, { kind: "replaced" }>; readonly amount: number };
   /** The "next time" records the steps that applied used up. */
   readonly spends: readonly ActiveReplacement[];
-  readonly alsos: readonly Extract<DamageStep, { kind: "also" }>[];
+  /** Each with the damage as it stood when the step applied: its "that
+   * much" (Eye for an Eye, applied before a prevention, still deals it). */
+  readonly alsos: readonly (Extract<DamageStep, { kind: "also" }> & { readonly amount: number })[];
 } {
   let total = amount * sources;
   let shieldUsed = 0;
@@ -1228,7 +1230,7 @@ function runDamageSteps(
   let preventedAll: { step: Extract<DamageStep, { kind: "prevent-all" }>; amount: number; thenAmount?: number } | undefined;
   let shieldCounter: { step: Extract<DamageStep, { kind: "shield-counter" }>; amount: number } | undefined;
   const spends: ActiveReplacement[] = [];
-  const alsos: Extract<DamageStep, { kind: "also" }>[] = [];
+  const alsos: (Extract<DamageStep, { kind: "also" }> & { readonly amount: number })[] = [];
   const rest = () => ({
     shieldUsed,
     shields,
@@ -1269,7 +1271,7 @@ function runDamageSteps(
       case "replaced":
         return { dealt: 0, ...rest(), replaced: { step, amount: total } };
       case "also":
-        alsos.push(step);
+        alsos.push({ ...step, amount: total });
         break;
       case "halve":
         total = (step.round === "up" ? Math.ceil(each() / 2) : Math.floor(each() / 2)) * sources;
@@ -1525,7 +1527,7 @@ function damageOutcomeKey(outcome: ReturnType<typeof runDamageSteps>): string {
     outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent,
     outcome.preventedAll?.step.then === undefined ? null : [outcome.preventedAll.step.made.key, outcome.preventedAll.thenAmount ?? outcome.preventedAll.amount],
     outcome.replaced === undefined ? null : [outcome.replaced.step.key, outcome.replaced.amount],
-    outcome.alsos.map((a) => a.key),
+    outcome.alsos.map((a) => [a.key, a.amount]),
   ]);
 }
 
@@ -50025,8 +50027,13 @@ controlledBy,
           // shield's step is a `prevent-half` (`damageSteps`).
           // Forcefield's "prevent all but 1 of that damage", a
           // `prevent-all-but` step; "combat damage", its `combat`.
+          // Eye for an Eye's "instead that source deals that much damage to
+          // you and …": a replacement letting the damage through, `also`
+          // beside it, read with the active ones (`damageSteps`).
           replacement:
-            more?.half !== undefined
+            more?.also !== undefined
+              ? { event: "would-deal-damage", instead: { modify: {}, also: more.also }, ...(more.combatOnly === true ? { combat: true } : {}) }
+              : more?.half !== undefined
               ? { event: "would-deal-damage", instead: { prevent: { half: more.half } }, ...(more.combatOnly === true ? { combat: true } : {}) }
               : more?.allBut !== undefined
                 ? { event: "would-deal-damage", instead: { prevent: { allBut: more.allBut } }, ...(more.combatOnly === true ? { combat: true } : {}) }
@@ -69225,7 +69232,7 @@ controlledBy,
     // somewhere legal that isn't where it's going already.
     for (const { by, r, key, may } of applying) {
       if (!("redirect" in r.instead)) continue;
-      const to = this.staticRedirectDestination(r.instead.redirect, by, target);
+      const to = this.staticRedirectDestination(r.instead.redirect, by, target, source, sourceLastKnown);
       if (to === undefined || sameTargetRef(to, target) || !this.redirectDestinationStands(to)) continue;
       steps.push({ kind: "redirect", to, key, made: { key, by: by.id }, ...(may !== undefined ? { may } : {}) });
     }
@@ -69776,8 +69783,12 @@ controlledBy,
     redirect: DamageRedirection["redirect"],
     by: DamageReplacer,
     target: TargetRef,
+    source: ObjectId,
+    sourceLastKnown: LastKnownInfo | undefined,
   ): TargetRef | undefined {
     switch (redirect) {
+      case "source-controller":
+        return this.sourceRedirect("controller", source, sourceLastKnown);
       case "self":
         return { kind: "object", object: by.id };
       case "attached":
@@ -70382,7 +70393,7 @@ controlledBy,
         }
       }
       for (const also of outcome.alsos) {
-        this.runReplacedBy(also.effect, also.by, also.controller, { x: outcome.dealt, object: source, inSweep: true, key: also.key });
+        this.runReplacedBy(also.effect, also.by, also.controller, { x: also.amount, object: source, inSweep: true, key: also.key });
       }
       if (outcome.redirected !== undefined) return 0;
       if (outcome.replaced !== undefined) {

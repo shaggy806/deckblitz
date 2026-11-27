@@ -8559,6 +8559,18 @@ export function parseSentence(sentence, ctx) {
       redirectTo: "source",
     };
   }
+  // "… instead that source deals that much damage to you and ~ deals that
+  // much damage to that source's controller" (Eye for an Eye): not
+  // prevention, the damage let through with `also` beside it (614.1a).
+  if ((m = re(`the next time an? (?:(white|blue|black|red|green) )?source of your choice would deal damage to you this turn, instead that source deals that much damage to you and ~ deals that much damage to that source's controller`).exec(s))) {
+    return {
+      kind: "prevent-damage-from-chosen-source",
+      ...(m[1] !== undefined ? { filter: { colors: [COLOR_WORDS[m[1].toLowerCase()]] } } : {}),
+      to: "you",
+      amount: "next-time",
+      also: { kind: "damage", amount: "x", who: "trigger-controller" },
+    };
+  }
   // "Prevent all damage a [red] source of your choice would deal [to you]
   // this turn" (Prahv, Burrenton Forge-Tender, Auriok Replica); "prevent all
   // damage that would be dealt [to you | to any target] this turn by a source

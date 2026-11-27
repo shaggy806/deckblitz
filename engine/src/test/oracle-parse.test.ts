@@ -5209,6 +5209,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const sphere = face("{T}, Sacrifice this artifact: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.", "Artifact");
     expect(sphere.activated[0].effect).toEqual({ ...chosen, to: "you", amount: "next-time", half: "down" });
     expect(sphere.complete).toBe(true);
+    // Not prevention: let through, and as much again to its controller (Eye for an Eye).
+    const eye = face(
+      "The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and Eye for an Eye deals that much damage to that source's controller.",
+      "Instant",
+      { name: "Eye for an Eye" },
+    );
+    expect(eye.effect).toEqual({ ...chosen, to: "you", amount: "next-time", also: { kind: "damage", amount: "x", who: "trigger-controller" } });
     expect(face("{T}: The next time a source of your choice would deal damage this turn, that damage is dealt to Opal-Eye instead.", "Legendary Creature — Fox Samurai", { name: "Opal-Eye, Konda's Yojimbo" }).activated[0].effect).toEqual({ ...chosen, to: "any", amount: "next-time", redirectTo: "source" });
     expect(face("Prevent all damage that would be dealt to you this turn by a source of your choice. Whenever damage from a black or red source is prevented this way this turn, you gain that much life.", "Instant").effect).toEqual({
       ...chosen,
