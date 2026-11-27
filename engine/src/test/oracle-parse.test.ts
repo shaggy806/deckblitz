@@ -25737,3 +25737,15 @@ describe("when it regenerates this way", () => {
     });
   });
 });
+
+describe("tapped and untapped swapped", () => {
+  it("Breaking Wave: tap-all's swap", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      mana_cost: "{2}{U}{U}",
+      oracle_text: "Simultaneously untap all tapped creatures and tap all untapped creatures.",
+    });
+    expect(parsed.effect).toEqual({ kind: "tap-all", filter: { type: "creature" }, swap: true });
+  });
+});

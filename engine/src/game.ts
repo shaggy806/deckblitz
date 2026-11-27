@@ -49009,7 +49009,22 @@ controlledBy,
           this.untapUnlessStunned(id);
         }
       },
-      tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo, untapStepOfScope, doesntUntapSteps) => {
+      tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo, untapStepOfScope, doesntUntapSteps, swap) => {
+        if (swap === true) {
+          // "Simultaneously untap all tapped … and tap all untapped …"
+          // (Breaking Wave): which are tapped is read once, before any turns.
+          const matching = [...this.battlefieldMatching(scopeTo ?? controller, filter, undefined, source)];
+          const wereTapped = new Set(matching.filter((id) => this.state.objects[id]?.tapped === true));
+          for (const id of matching) {
+            if (wereTapped.has(id)) {
+              this.untapUnlessStunned(id);
+            } else if (this.state.objects[id]?.tapped === false) {
+              this.state.objects[id].tapped = true;
+              this.emit({ type: "permanent-tapped", object: id, by: controller });
+            }
+          }
+          return;
+        }
         for (const id of this.battlefieldMatching(scopeTo ?? controller, filter, undefined, source)) {
           const object = this.state.objects[id];
           if (!object.tapped && !(doesntUntapNext === true && onlyDoesntUntap === true)) {

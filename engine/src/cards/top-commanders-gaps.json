@@ -5,6 +5,7 @@
     "condition:shares-card-type-with-cost-exiled",
     "condition:spell-would-destroy-land",
     "effect:spell-as-damage-source",
+    "effect:swap-tapped-state",
     "amount:domain-of-target-player",
     "filter:ability-cost-without-tap",
     "amount:graveyard-count-of-enchanted-controller",

@@ -9832,6 +9832,13 @@ export type EffectSpec =
       /** As `tap`'s: "their controllers' next **two** untap steps" (Cone of
        * Cold's top roll), 1 by default. */
       readonly doesntUntapSteps?: number;
+      /** "Simultaneously untap all tapped creatures and tap all untapped
+       * creatures" (Breaking Wave): which of the matching permanents are
+       * tapped is read once, then those untap (a stun counter coming off
+       * instead, rule 122.1d) and the rest tap. Only untapped permanents can
+       * be tapped and only tapped ones untapped (701.26a-b), so none is
+       * turned twice. Not with the untap-step options. */
+      readonly swap?: true;
     }
   | {
       /**
@@ -15917,6 +15924,8 @@ export interface EffectApi {
     scopeTo?: PlayerId,
     untapStepOfScope?: boolean,
     doesntUntapSteps?: number,
+    /** The `tap-all` spec's `swap`. */
+    swap?: boolean,
   ): void;
   /** See the `"phase-out"` {@link EffectSpec}: `target` (an object ref), or
    * the permanent the source is attached to, or every permanent matching
@@ -25031,6 +25040,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         scopeTo,
         spec.untapStepOfTarget === true,
         spec.doesntUntapSteps,
+        spec.swap === true,
       );
       return;
     }

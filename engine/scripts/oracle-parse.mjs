@@ -6640,6 +6640,12 @@ export function parseSentence(sentence, ctx) {
       return { kind: one[1].toLowerCase(), target };
     }
   }
+  // "Simultaneously untap all tapped creatures and tap all untapped creatures"
+  // (Breaking Wave): `tap-all`'s `swap`.
+  if ((m = re(`simultaneously untap all tapped ([a-z]+s) and tap all untapped \\1`).exec(s))) {
+    const filter = parseTypePhrase(singular(m[1]));
+    if (filter !== null && Object.keys(filter).length > 0) return { kind: "tap-all", filter, swap: true };
+  }
   // "Tap all other creatures" (Thundermare), "return all other creatures to their
   // owners' hands" (Aethersquall Ancient), "all other creatures lose flying until
   // end of turn" (Thundercloud Elemental): one instruction, each but the source.
