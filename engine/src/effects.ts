@@ -8331,6 +8331,14 @@ export type EffectSpec =
        * every block by anyone (rule 509.1d). `generic` and `life` are read as
        * this resolves (rule 611.2b), a creature. */
       readonly blockTax?: { readonly generic?: EffectAmount; readonly life?: EffectAmount };
+      /** "Attacking doesn't cause creatures you control to tap this combat
+       * if Johan is untapped" (Johan): while this lasts, a creature matching
+       * `filter` (from the controller's side) declared as an attacker isn't
+       * tapped by it (rule 508.1f, as vigilance's 702.20b). `whileUntapped`
+       * is the permanent ("source") that must be untapped as the attackers
+       * are declared, in the stint it's in now (rule 400.7) — gone, nothing
+       * is spared. */
+      readonly attacksWithoutTapping?: { readonly filter: CardFilter; readonly whileUntapped?: ObjectRef };
     }
   | {
       /**
@@ -24768,7 +24776,25 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const whileOnTop =
         onTop?.kind === "object" ? ctx.libraryTopStint?.(owner, onTop.object) : undefined;
       if (spec.whileOnTop !== undefined && whileOnTop === undefined) return;
+      // "If Johan is untapped": that permanent as it is now (rule 400.7).
+      const untappedRef =
+        spec.attacksWithoutTapping?.whileUntapped === undefined
+          ? undefined
+          : objectRefAct(spec.attacksWithoutTapping.whileUntapped, ctx);
+      const whileUntapped =
+        untappedRef?.kind === "object"
+          ? { object: untappedRef.object, zoneChangeCount: ctx.zoneChangeCountOf(untappedRef.object) ?? 0 }
+          : undefined;
+      if (spec.attacksWithoutTapping?.whileUntapped !== undefined && whileUntapped === undefined) return;
       ctx.addPlayerEffect({
+        ...(spec.attacksWithoutTapping !== undefined
+          ? {
+              attacksWithoutTapping: {
+                filter: spec.attacksWithoutTapping.filter,
+                ...(whileUntapped !== undefined ? { whileUntapped } : {}),
+              },
+            }
+          : {}),
         owner,
         ...(whileOnTop !== undefined ? { whileOnTop } : {}),
         ...(spec.libraryTopRevealed === true ? { libraryTopRevealed: true as const } : {}),

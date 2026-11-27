@@ -6879,6 +6879,16 @@ export interface PlayerEffect {
    * each blocking creature they control" (War Cadence): a cost on every
    * block by anyone (rule 509.1d), read as the effect was created (611.2b). */
   readonly blockTax?: { readonly generic: number; readonly life: number };
+  /** "Attacking doesn't cause creatures you control to tap this combat if
+   * Johan is untapped": `owner`'s attackers matching `filter` (from their
+   * side) aren't tapped by being declared (rule 508.1f) while this lasts —
+   * with `whileUntapped`, only while that permanent, in that stint, is on
+   * the battlefield untapped as the attackers are declared. See
+   * `Game.attackingTaps`. */
+  readonly attacksWithoutTapping?: {
+    readonly filter: CardFilter;
+    readonly whileUntapped?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  };
   /** Combat rules over the game for as long as this lasts, reaching creatures
    * that arrive later (rule 611.2c — the `restrict` effect's `filter` form).
    * `filter` is read from `side`'s side, usually the owner's; "creatures

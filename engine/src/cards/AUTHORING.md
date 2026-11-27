@@ -6295,7 +6295,9 @@ turns it on and off (Archangel of Tithes). A `grant-static` can give one, `affec
 battlefield", `generic: { countOf: { subtype: "Cleric" } }`): two grants are two taxes. No requirement obliges paying (508.1d, 509.1c: the
 offers' `mustAttack` and `lurePlan` leave a taxed creature out); bots and the fuzzer cut to the
 budget (`withinAttackTax`, `withinBlockTax`). For a turn: the `player-effect` effect's `blockTax`
-(War Cadence), every block by anyone. `permanents: { do, filter, count, noun }`, on an attack, is
+(War Cadence), every block by anyone; its `attacksWithoutTapping: { filter, whileUntapped? }` is
+"attacking doesn't cause creatures you control to tap this combat if Johan is untapped" (Johan,
+`whileUntapped: "source"`, asked as the attackers are declared — rule 508.1f). `permanents: { do, filter, count, noun }`, on an attack, is
 a cost in the attacker's controller's own permanents, for each creature reached: `do: "sacrifice"`
 is "can't attack unless you sacrifice a land" (Exalted Dragon; `count: 2` Leviathan; Reclamation's
 "a land of their choice for each black creature"), `do: "return"` "… return an enchantment you

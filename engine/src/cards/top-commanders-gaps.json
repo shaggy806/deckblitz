@@ -103,6 +103,7 @@
     "replacement:damage-reflection",
     "target:cast-only-target-restriction",
     "static:aura-cast-time-target-restriction",
+    "static:attacking-doesnt-cause-tap",
     "filter:player-previously-dealt-damage-by-source",
     "effect:redirect-spell-from-source",
     "effect:swap-blockers",

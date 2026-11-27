@@ -11023,6 +11023,36 @@ export class Game {
     return sacrificePartsFillable(eligible, capacity);
   }
 
+  /** Whether being declared as one of `player`'s attackers taps a creature
+   * (rule 508.1f), with the board as it is now: not with vigilance (702.20b),
+   * nor one a resolved "attacking doesn't cause creatures you control to tap
+   * this combat if Johan is untapped" spares — `PlayerEffect.
+   * attacksWithoutTapping`, its permanent still there in its stint (400.7),
+   * phased in (702.26b) and untapped. Read once, before any attacker taps. */
+  private attackingTaps(): (id: ObjectId) => boolean {
+    const spares = (this.state.playerEffects ?? []).flatMap((effect) => {
+      const spare = effect.attacksWithoutTapping;
+      if (spare === undefined || this.state.players[effect.owner]?.hasLost === true) return [];
+      const holds = spare.whileUntapped;
+      if (holds !== undefined) {
+        const object = this.state.objects[holds.object];
+        if (
+          object === undefined ||
+          object.zone !== "battlefield" ||
+          object.zoneChangeCount !== holds.zoneChangeCount ||
+          object.phasedOut !== undefined ||
+          object.tapped
+        ) {
+          return [];
+        }
+      }
+      return [{ filter: spare.filter, you: effect.owner }];
+    });
+    return (id) =>
+      !this.objHasKeyword(id, "vigilance") &&
+      !spares.some((s) => matchesFilter(this.state, this.registry, id, s.filter, { you: s.you }));
+  }
+
   /** How `player` would pay `total` to attack with `declarations` — with
    * every declared attacker that taps (no vigilance) out of the mana sources,
    * since it's tapped before the cost is paid (rule 508.1f) — or `null`. */
@@ -11031,9 +11061,8 @@ export class Game {
     declarations: readonly AttackerDeclaration[],
     mana: string,
   ): ManaPayment | null {
-    const tapping = new Set(
-      declarations.map((d) => d.attacker).filter((id) => !this.objHasKeyword(id, "vigilance")),
-    );
+    const taps = this.attackingTaps();
+    const tapping = new Set(declarations.map((d) => d.attacker).filter(taps));
     return this.payMana(player, parseManaCost(mana), undefined, undefined, null, { withheld: tapping });
   }
 
@@ -11041,7 +11070,7 @@ export class Game {
    * the most generic mana their sources make with every creature in
    * `attackers` that would tap to attack withheld. */
   private attackTaxBudget(player: PlayerId, attackers: readonly ObjectId[]): number {
-    const tapping = new Set(attackers.filter((id) => !this.objHasKeyword(id, "vigilance")));
+    const tapping = new Set(attackers.filter(this.attackingTaps()));
     const sources = this.manaSources(player);
     let hi =
       sources.reduce((n, s) => n + Game.sourceCapacity(s), 0) + this.state.players[player].manaPool.length;
@@ -15494,6 +15523,9 @@ export class Game {
     // this combat" (Firkraag, Cunning Instigator's ruling — a requirement on
     // the creature itself, not one on its controller).
     const required = new Set(declarations.filter((d) => mustAttack(this.state, this.registry, d.attacker)).map((d) => d.attacker));
+    // Whether declaring each one taps it (rule 508.1f) is asked of the board
+    // before any of them taps: they become tapped at once.
+    const taps = this.attackingTaps();
     // Each band's members as they attack (rule 702.22c) — a stack's entry
     // woken into one creature per token, each a member.
     const bands = new Map<number, ObjectId[]>();
@@ -15543,9 +15575,9 @@ export class Game {
         }
         // "During any turn you attacked with a commander" (Neriv).
         if (object.isCommander) this.state.players[player].attackedWithCommanderOnTurn = this.state.turn.number;
-        const taps = !this.objHasKeyword(id, "vigilance");
-        if (taps) object.tapped = true;
-        declaredNow.push({ id, defender, taps, ...(required.has(attacker) ? { required: true as const } : {}) });
+        const tapsIt = taps(id);
+        if (tapsIt) object.tapped = true;
+        declaredNow.push({ id, defender, taps: tapsIt, ...(required.has(attacker) ? { required: true as const } : {}) });
       }
     }
     // A band is labelled by its first member; a band of one is none.
