@@ -5262,6 +5262,15 @@ export function parseSentence(sentence, ctx) {
     }
   }
 
+  // "~ deals damage to target creature equal to the damage already dealt to
+  // it this turn" (Whipkeeper): every source's damage to that target.
+  if ((m = re(`~ deals damage to (target creature|any target) equal to the damage already dealt to it this turn`).exec(s))) {
+    const target = slot(m[1]);
+    if (target !== undefined && typeof target === "number") {
+      return { kind: "damage", amount: { damageDealtThisTurn: true, who: "each-player", to: { target } }, target };
+    }
+  }
+
   // A card in exile, targeted (rule 406): into its owner's graveyard, or back
   // to a hand.
   if ((m = re(`put (${EXILE_TARGET}) into its owner's graveyard`).exec(s))) {

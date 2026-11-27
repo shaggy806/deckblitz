@@ -1483,9 +1483,14 @@ export type EffectAmount =
        * turn" — Reverse Polarity) or its source, in the stint this refers to
        * ("to this creature this turn" — Blazing Effigy), or to the triggering
        * event's recipient (`LastKnownRefs.recipient`, in the stint it was
-       * dealt the damage in — "that creature"). Whoever controlled what
-       * dealt it is `who`: `"each-player"` is all of it. */
-      readonly to?: "you" | "source" | "trigger-recipient";
+       * dealt the damage in — "that creature"), or to the object or player
+       * in a target slot (`{ target: n }`, the target in the stint it's in
+       * now — Whipkeeper's "deals damage to target creature equal to the
+       * damage already dealt to it this turn", `who: "each-player"`: damage
+       * since removed by regeneration still counts, prevented damage never
+       * does, its rulings). Whoever controlled what dealt it is `who`:
+       * `"each-player"` is all of it. */
+      readonly to?: "you" | "source" | "trigger-recipient" | { readonly target: number };
       /** Only by these sources, as they were as they dealt it. */
       readonly by?: DamageSourceClause;
       /** Only the excess part of it (rule 120.4a — the journal's damage
@@ -14339,7 +14344,7 @@ export interface EffectApi {
     combat?: boolean,
     colors?: readonly Color[],
     read?: {
-      readonly to?: "you" | "source" | "trigger-recipient";
+      readonly to?: "you" | "source" | "trigger-recipient" | { readonly target: TargetRef };
       readonly by?: DamageSourceClause;
       readonly excess?: true;
       readonly oneSource?: true;
@@ -19551,8 +19556,15 @@ export function signedAmountValue(
   if ("attackingPlayer" in amount) return ctx.creaturesAttacking(each ?? ctx.controller);
   if ("damageDealtThisTurn" in amount) {
     const players = amount.who === "each" ? [each ?? ctx.controller] : ctx.playersInScope(amount.who ?? "you");
+    let to: "you" | "source" | "trigger-recipient" | { readonly target: TargetRef } | undefined;
+    if (typeof amount.to === "object") {
+      // A target slot: nothing dealt to a target that's gone or illegal.
+      const held = ctx.targets[amount.to.target];
+      if (held === null || held === undefined || illegalSlot(amount.to.target, ctx)) return 0;
+      to = { target: held };
+    } else to = amount.to;
     return ctx.damageDealtThisTurn(players, amount.combat, amount.colors, {
-      ...(amount.to !== undefined ? { to: amount.to } : {}),
+      ...(to !== undefined ? { to } : {}),
       ...(amount.by !== undefined ? { by: amount.by } : {}),
       ...(amount.excess === true ? { excess: true as const } : {}),
       ...(amount.oneSource === true ? { oneSource: true as const } : {}),

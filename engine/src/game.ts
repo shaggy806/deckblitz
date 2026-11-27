@@ -45195,7 +45195,15 @@ export class Game {
         // it was dealt the damage in; nothing outside such a trigger.
         const recipient = read?.to === "trigger-recipient" ? refs.recipient : undefined;
         if (read?.to === "trigger-recipient" && recipient === undefined) return 0;
+        // "To it": a target, the object in the stint it's in now (400.7).
+        const targeted = typeof read?.to === "object" ? read.to.target : undefined;
         return damageDealtThisTurn(this.state, players, combat, colors, {
+          ...(targeted !== undefined
+            ? {
+                to: targeted,
+                ...(targeted.kind === "object" ? { toStint: this.state.objects[targeted.object]?.zoneChangeCount ?? 0 } : {}),
+              }
+            : {}),
           ...(read?.to === "you" ? { to: { kind: "player" as const, player: controller } } : {}),
           ...(read?.to === "source" ? { to: { kind: "object" as const, object: source }, toStint: stint } : {}),
           ...(recipient !== undefined

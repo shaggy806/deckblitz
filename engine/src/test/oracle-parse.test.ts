@@ -26886,3 +26886,23 @@ describe("a leaves ability's \"that player\"", () => {
     expect(face.triggered[1].effect).toEqual({ kind: "gain-life", amount: 6, who: "noted-target-player" });
   });
 });
+
+describe("the damage already dealt to a target this turn", () => {
+  it("reads Whipkeeper's damage off its target", () => {
+    const face = parseFace(
+      {
+        name: "Test Dwarf",
+        type_line: "Creature — Dwarf",
+        oracle_text: "{T}: This creature deals damage to target creature equal to the damage already dealt to it this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.activated[0].targets).toEqual(["creature"]);
+    expect(face.activated[0].effect).toEqual({
+      kind: "damage",
+      amount: { damageDealtThisTurn: true, who: "each-player", to: { target: 0 } },
+      target: 0,
+    });
+  });
+});
