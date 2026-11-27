@@ -1958,6 +1958,18 @@ export type StaticCondition =
    */
   | { readonly kind: "object-matches"; readonly object: ObjectRef; readonly filter: CardFilter; readonly now?: true }
   /**
+   * "Counter target spell **if it would destroy a land you control**"
+   * (Equinox): the spell in target slot `spell`, if it resolved right now,
+   * would destroy a permanent matching `filter` (its "you" this ability's
+   * controller). Read off the spell's own instructions as cast (its chosen
+   * modes, kicker, overload) — a `destroy` of one of its targets still legal,
+   * or a `destroy-all` whose permanents include one — and only where nothing
+   * else decides it: not behind a "may", a condition, a choice or a random
+   * result, nor anything an ability, a sacrifice or a game rule destroys
+   * (Equinox's rulings, 2004-10-04, 2008-10-01, 2013-09-20). Static: false.
+   */
+  | { readonly kind: "spell-would-destroy"; readonly spell: number; readonly filter: CardFilter }
+  /**
    * "If this is the **Nth time this ability has resolved this turn**" (Omnath,
    * Locus of Creation; Ms. Bumbleflower; Tannuk). `n` counts the resolution
    * in progress, so a first resolution is `1`. The count belongs to one

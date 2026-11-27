@@ -35491,6 +35491,96 @@ export class Game {
     return this.castTargetSpecs(rulesTextName(object), object, object.controller);
   }
 
+  /**
+   * Would the spell `id`, if it resolved right now, destroy a permanent
+   * matching `filter` (`you` its "you")? — the `spell-would-destroy`
+   * condition (Equinox). Read off its instructions as cast: each chosen
+   * mode's (rule 700.2), or its kicker's or overload's in place of its own,
+   * walked through `sequence`s alone, so a `destroy` behind a "may", a
+   * condition, a choice or a random result counts for nothing (the card's
+   * rulings: "will not counter a spell which would destroy a land only if a
+   * choice is made", nor one with "a random chance"). A `destroy` of a
+   * target counts if that target is still legal (rule 608.2b), a
+   * `destroy-all` if a permanent it would destroy now matches. A spell with
+   * a resolver of its own, spliced cards or fused halves is read as
+   * destroying nothing.
+   */
+  private spellWouldDestroy(id: ObjectId, filter: CardFilter, you: PlayerId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.zone !== "stack" || object.kind === "ability") return false;
+    const def = this.registry.get(rulesTextName(object));
+    if (def.resolve !== null || def.fuse === true) return false;
+    if (object.spliced !== undefined && object.spliced.length > 0) return false;
+    const chosenModes = def.castModal !== null ? object.chosenModes : undefined;
+    const mainEffect =
+      object.overloaded === true
+        ? (def.overload?.effect ?? def.effect)
+        : object.kicked === true
+          ? (def.kicker?.effect ?? def.effect)
+          : def.effect;
+    // Each part's effect with the declared slot its own slot 0 is.
+    const parts: { readonly effect: EffectSpec; readonly slotOffset: number }[] = [];
+    if (chosenModes !== undefined && def.castModal !== null) {
+      let slotOffset = 0;
+      for (const mi of chosenModes) {
+        const mode = def.castModal.modes[mi];
+        if (mode === undefined) continue;
+        parts.push({ effect: mode.effect, slotOffset });
+        slotOffset += mode.targets?.length ?? 0;
+      }
+    } else if (mainEffect !== null) {
+      parts.push({ effect: mainEffect, slotOffset: 0 });
+    }
+    if (parts.length === 0) return false;
+    const castSpecs = this.spellTargetSpecs(object);
+    const legality = this.targetLegality(
+      castSpecs,
+      object.targets ?? [],
+      this.targetsStillMeant(object),
+      object.controller,
+      this.cardSource(def, id),
+      [],
+      object.targetZones ?? [],
+    );
+    if (legality.fizzles) return false;
+    const spans = targetSpans(castSpecs, object.targets ?? []);
+    const matches = (target: ObjectId): boolean =>
+      this.state.objects[target]?.zone === "battlefield" &&
+      matchesFilter(this.state, this.registry, target, filter, { you });
+    const x = object.xValue ?? 0;
+    const destroys = (spec: EffectSpec, slotOffset: number): boolean => {
+      if (spec.kind === "sequence") return spec.effects.some((step) => destroys(step, slotOffset));
+      if (spec.kind === "destroy") {
+        if (typeof spec.target !== "number") return false;
+        const span = spans[slotOffset + spec.target];
+        if (span === undefined) return false;
+        for (let i = span.start; i < span.start + span.members; i += 1) {
+          const ref = legality.targets[i];
+          if (ref?.kind === "object" && matches(ref.object)) return true;
+        }
+        return false;
+      }
+      if (spec.kind === "destroy-all") {
+        if (spec.onlyControllersDamagedBySource === true) return false;
+        let scope = object.controller;
+        if (spec.controlledByTarget !== undefined) {
+          const span = spans[slotOffset + spec.controlledByTarget];
+          const ref = span === undefined ? undefined : legality.targets[span.start];
+          if (ref?.kind !== "player") return false;
+          scope = ref.player;
+        }
+        return this.state.zones.shared.battlefield.some(
+          (permanent) =>
+            !(spec.exceptSource === true && permanent === id) &&
+            matchesFilter(this.state, this.registry, permanent, spec.filter, { you: scope, x }) &&
+            matches(permanent),
+        );
+      }
+      return false;
+    };
+    return parts.some((part) => destroys(part.effect, part.slotOffset));
+  }
+
   /** The target specs a spell named `cardName` was cast with, given the
    * choices made for it — a live spell's, or a {@link SpellSnapshot}'s. */
   private castTargetSpecs(
@@ -43375,6 +43465,10 @@ export class Game {
       if (condition.kind === "target-is-source") {
         const ref = targets[condition.index];
         return ref?.kind === "object" && ref.object === source;
+      }
+      if (condition.kind === "spell-would-destroy") {
+        const ref = targets[condition.spell];
+        return ref?.kind === "object" && this.spellWouldDestroy(ref.object, condition.filter, controller);
       }
       if (condition.kind === "target-controlled-by-you") {
         const ref = targets[condition.index];

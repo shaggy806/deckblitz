@@ -1676,6 +1676,7 @@ function evalStaticCondition(
     case "target":
     case "target-chosen":
     case "object-matches":
+    case "spell-would-destroy":
     case "resolved-this-turn":
     case "activated-this-turn":
     case "this-way":
