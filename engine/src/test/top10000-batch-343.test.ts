@@ -15,6 +15,7 @@ import {
   graveyard,
   hand,
   lands,
+  life,
   nextTurn,
   ref,
   spawn,
@@ -111,6 +112,18 @@ describe("batch 343 (lead)", () => {
     cast(game, toHand(game, "Time and Tide"));
     expect(zone(game, breeze)).toBe("battlefield");
     expect(zone(game, bears)).toBe("battlefield");
+  });
+
+  it("Justice deals a red spell's damage to its controller, once for all it dealt at a time", () => {
+    const { game } = table();
+    spawn(game, "Justice", B);
+    spawn(game, "Grizzly Bears", B);
+    spawn(game, "Hill Giant", B);
+    lands(game, "Mountain", 2);
+    cast(game, toHand(game, "Pyroclasm"));
+    // Two creatures dealt 2 each: one trigger, 4 damage to Pyroclasm's caster.
+    expect(life(game, A)).toBe(16);
+    expect(life(game, B)).toBe(20);
   });
 
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {

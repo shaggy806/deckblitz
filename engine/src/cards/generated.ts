@@ -15046,6 +15046,7 @@ import _poolJustFate from "./pool/just-fate.js";
 import _poolJustTheWind from "./pool/just-the-wind.js";
 import _poolJusticeStrike from "./pool/justice-strike.js";
 import _poolJusticeVanceAstrovik from "./pool/justice-vance-astrovik.js";
+import _poolJustice from "./pool/justice.js";
 import _poolJusticiarsPortal from "./pool/justiciars-portal.js";
 import _poolJuvenileGloomwidow from "./pool/juvenile-gloomwidow.js";
 import _poolJuvenileMistDragon from "./pool/juvenile-mist-dragon.js";
@@ -49419,6 +49420,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJustTheWind,
   _poolJusticeStrike,
   _poolJusticeVanceAstrovik,
+  _poolJustice,
   _poolJusticiarsPortal,
   _poolJuvenileGloomwidow,
   _poolJuvenileMistDragon,
@@ -83805,6 +83807,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/just-the-wind": _poolJustTheWind,
   "pool/justice-strike": _poolJusticeStrike,
   "pool/justice-vance-astrovik": _poolJusticeVanceAstrovik,
+  "pool/justice": _poolJustice,
   "pool/justiciars-portal": _poolJusticiarsPortal,
   "pool/juvenile-gloomwidow": _poolJuvenileGloomwidow,
   "pool/juvenile-mist-dragon": _poolJuvenileMistDragon,

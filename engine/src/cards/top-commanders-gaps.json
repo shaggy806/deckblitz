@@ -94,6 +94,8 @@
     "condition:source-attacked-during-your-last-turn",
     "trigger:activates-boast",
     "bug:turn-history-exclude-self-stint",
+    "effect:phase-in",
+    "filter:creature-or-spell-source",
     "replacement:as-turned-face-up-dynamic-counters",
     "static:counter-cap",
     "condition:started-turn-untapped",

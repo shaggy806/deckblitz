@@ -492,6 +492,7 @@ import _poolJestersMask from "../pool/jesters-mask.js";
 import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
 import _poolJourneyToTheLostCity from "../pool/journey-to-the-lost-city.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
+import _poolJustice from "../pool/justice.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaimaTheFracturedCalm from "../pool/kaima-the-fractured-calm.js";
 import _poolKalitasBloodchiefOfGhet from "../pool/kalitas-bloodchief-of-ghet.js";
@@ -1567,6 +1568,7 @@ const shard: CardShard = {
     _poolJibbirikOmnivore,
     _poolJourneyToTheLostCity,
     _poolJundBattlemage,
+    _poolJustice,
     _poolKaaliaOfTheVast,
     _poolKaimaTheFracturedCalm,
     _poolKalitasBloodchiefOfGhet,
