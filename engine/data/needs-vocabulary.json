@@ -5631,6 +5631,10 @@
    "family": "cost:mana-spending-rules",
    "example": "Rogue Class: 'you may spend mana as though it were mana of any color to cast those spells' (rule 609.4b)."
   },
+  "cost:x-one-mana-of-each-color": {
+   "family": "cost:mana-spending-rules",
+   "example": "Emblazoned Golem: 'Spend only colored mana on X. No more than one mana of each color may be spent this way.' — X's symbols each a different colour (`xSpendOnly: { colored: true, distinct: true }`, 2026-11-27 re-key)."
+  },
   "cost:spend-any-type-one-spell": {
    "family": "cost:mana-spending-rules",
    "example": "North Star: 'for one spell this turn, you may spend mana as though it were mana of any type' — a player-scoped, one-spell spendAs (2026-11-14 lanes run re-key)."

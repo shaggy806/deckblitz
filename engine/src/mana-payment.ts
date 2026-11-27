@@ -545,8 +545,9 @@ export function costAsOnlyColorless(cost: ManaCost, color: Color, anyType: boole
   const hybrid = cost.hybrid.map((pip): HybridPip => {
     const options: HybridOption[] = [];
     for (const option of pip) {
+      // A `distinct` pip stays one (Emblazoned Golem's X under Celestial Dawn).
       const narrowed: readonly HybridOption[] =
-        option.kind === "color" ? [{ kind: "color", color }] : option.kind === "colorless" ? colorlessPip : [option];
+        option.kind === "color" ? [{ ...option, color }] : option.kind === "colorless" ? colorlessPip : [option];
       for (const o of narrowed) {
         const already = options.some((x) => x.kind === o.kind && (x.kind !== "color" || o.kind !== "color" || x.color === o.color));
         if (!already) options.push(o);
@@ -848,7 +849,13 @@ export function resolveHybridCost(
     });
   const pips =
     lifeFirst > 0 ? [...cost.hybrid.filter(noManaFor), ...cost.hybrid.filter((pip) => !noManaFor(pip))] : cost.hybrid;
+  // "No more than one mana of each color may be spent this way" (Emblazoned
+  // Golem): the colours the `distinct` pips have been paid with so far, each
+  // closed to the rest of them, whichever of a pip's options paid it.
+  const distinctUsed = new Set<Color>();
+  const isDistinct = (pip: HybridPip): boolean => pip.some((o) => o.kind === "color" && o.distinct === true);
   for (const pip of pips) {
+    const distinctPip = isDistinct(pip);
     // Paid with life by choice (rule 107.4f): any life they have, down to 0
     // if they choose (119.4).
     if (
@@ -865,10 +872,12 @@ export function resolveHybridCost(
     }
     let chosen: ManaCost | null = null;
     for (const option of pip) {
+      if (distinctPip && option.kind === "color" && distinctUsed.has(option.color)) continue;
       const trial = withOptionPaid(concrete, option);
       if (trial === null) continue;
       if (planManaPayment(view, trial, avoid, exclude) !== null) {
         chosen = trial;
+        if (distinctPip && option.kind === "color") distinctUsed.add(option.color);
         break;
       }
     }

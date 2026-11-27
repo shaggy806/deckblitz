@@ -11444,7 +11444,7 @@ const AMONG_PLAYERS_EFFECTS = {
 };
 
 const KICKED_ENTERS_WITH =
-  /^If ~ was kicked, it enters with (a|an|one|two|three|four|five) ([+-]\d+\/[+-]\d+|[a-z]+) counters?(?: and (a|an|one|two|three) ([+-]\d+\/[+-]\d+|[a-z]+) counters?)? on it(?: and with ([a-z]+(?: [a-z]+)?))?\.$/;
+  /^If ~ was kicked, it enters with (a|an|one|two|three|four|five|X) ([+-]\d+\/[+-]\d+|[a-z]+) counters?(?: and (a|an|one|two|three) ([+-]\d+\/[+-]\d+|[a-z]+) counters?)? on it(?: and with ([a-z]+(?: [a-z]+)?))?\.$/;
 
 /**
  * A spell's closing sentence about the board "as you cast this spell" (rule
@@ -20324,8 +20324,14 @@ function parseFaceAsWritten(face, ctx = {}) {
     // trample counter on it and with haste" (rule 614.1c): a replacement per
     // kind of counter, its amount gated on the kick, and "with [keyword]" that
     // keyword for as long as it stays (as Benalish Lancer's first strike).
-    if ((m = KICKED_ENTERS_WITH.exec(line)) && out.kicker !== undefined && out.kicker.second === undefined) {
-      const words = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5 };
+    // "X +1/+1 counters" after "Kicker {X}" (Emblazoned Golem): the spell's X.
+    if (
+      (m = KICKED_ENTERS_WITH.exec(line)) &&
+      out.kicker !== undefined &&
+      out.kicker.second === undefined &&
+      (m[1] !== "X" || (m[3] === undefined && /\{X\}/.test(out.kicker.cost ?? "")))
+    ) {
+      const words = { a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, X: "x" };
       const text = printed(raw);
       const kicked = { kind: "self-kicked" };
       const counters = [[m[1], m[2]], ...(m[3] !== undefined ? [[m[3], m[4]]] : [])];
@@ -20450,6 +20456,17 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (isSpell && /\{X\}/.test(face.mana_cost ?? "") && (m = /^Spend only (white|blue|black|red|green)(?: and\/or (white|blue|black|red|green))? mana on X\.$/.exec(line))) {
       const word = { white: "W", blue: "U", black: "B", red: "R", green: "G" };
       out.xSpendOnly = m[2] === undefined ? word[m[1]] : [word[m[1]], word[m[2]]];
+      continue;
+    }
+    // "Spend only colored mana on X. No more than one mana of each color may
+    // be spent this way." (Emblazoned Golem, its X a kicker's): the five
+    // colours, each at most once.
+    if (
+      !/\bLand\b/.test(face.type_line ?? "") &&
+      (/\{X\}/.test(face.mana_cost ?? "") || /\{X\}/.test(out.kicker?.cost ?? "")) &&
+      (m = /^Spend only colored mana on X\.( No more than one mana of each color may be spent this way\.)?$/.exec(line))
+    ) {
+      out.xSpendOnly = m[1] === undefined ? { colored: true } : { colored: true, distinct: true };
       continue;
     }
     // A freerunning cost that isn't mana: "Freerunning—Return a blue creature

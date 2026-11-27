@@ -7,6 +7,7 @@
     "effect:choose-permanents-of-target-player-count",
     "replacement:next-draw-this-turn-carries-x",
     "replacement:untap-step-remove-counter-instead",
+    "cost:x-one-mana-of-each-color",
     "amount:mana-spent-on-cumulative-upkeep",
     "static:grant-cumulative-upkeep",
     "effect:sacrifice-unless-pay-its-mana-cost",

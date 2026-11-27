@@ -401,7 +401,11 @@ export const poolCounts = (units: readonly ManaUnit[]): ManaPool => {
 /** One way to pay a single hybrid / twobrid / Phyrexian pip (rule 107.4e–g).
  * A pip is a list of these alternatives; paying it means satisfying any one. */
 export type HybridOption =
-  | { readonly kind: "color"; readonly color: Color }
+  /** `distinct`: a pip of "no more than one mana of each color may be spent
+   * this way" (Emblazoned Golem's X — `xSpendOnly`'s `distinct`): no two
+   * pips holding a `distinct` option are paid with mana of one colour,
+   * whichever of their options pays them (`resolveHybridCost`). */
+  | { readonly kind: "color"; readonly color: Color; readonly distinct?: true }
   /** twobrid — the `{2}` half of `{2/W}` (`amount` is always 2 in practice). */
   | { readonly kind: "generic"; readonly amount: number }
   /** Phyrexian — the `{P}` half of `{W/P}`: pay 2 life instead of the pip.
@@ -722,21 +726,31 @@ export interface ManaCostReduction {
 }
 
 /** What "spend only … mana on X" allows: one colour, or several ("black
- * and/or red"). A colour word, which a text change reaches (rule 612.2). */
-export type XSpendOnly = Color | readonly Color[];
+ * and/or red"). A colour word, which a text change reaches (rule 612.2).
+ * `{ colored: true }` is "spend only colored mana on X", the five colours
+ * and no colour word (so no text change reaches it); its `distinct` adds "no
+ * more than one mana of each color may be spent this way" (Emblazoned Golem:
+ * each colour at most once — so X is at most 5). */
+export type XSpendOnly = Color | readonly Color[] | { readonly colored: true; readonly distinct?: true };
+
+/** The colours an {@link XSpendOnly} names. */
+export const xSpendColors = (only: XSpendOnly): readonly Color[] =>
+  typeof only === "string" ? [only] : "colored" in only ? COLORS : only;
 
 /** "Spend only black mana on X" (`xSpendOnly`): `onX` of `cost`'s generic
  * mana, the part that is X, paid as that many symbols of the colour — or,
  * with several colours ("black and/or red", Soul Burn), as that many symbols
- * each payable with any one of them, as a hybrid symbol is (rule 107.4e). */
+ * each payable with any one of them, as a hybrid symbol is (rule 107.4e).
+ * A `distinct` one marks its symbols so no two are paid with one colour. */
 export function withXSpendOnly(cost: ManaCost, only: XSpendOnly, onX: number): ManaCost {
   if (onX <= 0) return cost;
-  const colors: readonly Color[] = typeof only === "string" ? [only] : only;
-  if (colors.length === 1) {
+  const colors = xSpendColors(only);
+  const distinct = typeof only === "object" && "colored" in only && only.distinct === true;
+  if (colors.length === 1 && !distinct) {
     const [color] = colors;
     return { ...cost, generic: cost.generic - onX, colored: { ...cost.colored, [color]: cost.colored[color] + onX } };
   }
-  const pip: HybridPip = colors.map((color) => ({ kind: "color", color }));
+  const pip: HybridPip = colors.map((color) => (distinct ? { kind: "color", color, distinct: true } : { kind: "color", color }));
   return { ...cost, generic: cost.generic - onX, hybrid: [...cost.hybrid, ...Array<HybridPip>(onX).fill(pip)] };
 }
 

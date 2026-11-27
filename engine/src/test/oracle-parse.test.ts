@@ -26775,4 +26775,17 @@ describe("costs-mana lane, 2026-11-27: granted cumulative upkeep, its paid mana,
       duration: "end-of-turn",
     });
   });
+
+  it("Emblazoned Golem: kicker X, one mana of each colour on X, X counters if kicked", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Artifact Creature — Golem",
+      mana_cost: "{2}",
+      oracle_text:
+        "Kicker {X}\nSpend only colored mana on X. No more than one mana of each color may be spent this way.\nIf this creature was kicked, it enters with X +1/+1 counters on it.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.xSpendOnly).toEqual({ colored: true, distinct: true });
+    expect(parsed.static[0].replacement.counters.amount).toEqual({ ifCondition: { kind: "self-kicked" }, then: "x", else: 0 });
+  });
 });
