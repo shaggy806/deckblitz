@@ -893,6 +893,7 @@ import _poolThrullSurgeon from "../pool/thrull-surgeon.js";
 import _poolThunderbreakRegent from "../pool/thunderbreak-regent.js";
 import _poolThuridMareOfDestiny from "../pool/thurid-mare-of-destiny.js";
 import _poolTimberlandAncient from "../pool/timberland-ancient.js";
+import _poolTimeAndTide from "../pool/time-and-tide.js";
 import _poolTivadarsCrusade from "../pool/tivadars-crusade.js";
 import _poolToggoGoblinWeaponsmith from "../pool/toggo-goblin-weaponsmith.js";
 import _poolTolarianAcademy from "../pool/tolarian-academy.js";
@@ -1942,6 +1943,7 @@ const shard: CardShard = {
     _poolThunderbreakRegent,
     _poolThuridMareOfDestiny,
     _poolTimberlandAncient,
+    _poolTimeAndTide,
     _poolTivadarsCrusade,
     _poolToggoGoblinWeaponsmith,
     _poolTolarianAcademy,

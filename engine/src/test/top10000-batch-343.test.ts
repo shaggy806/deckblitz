@@ -96,6 +96,23 @@ describe("batch 343 (lead)", () => {
     expect(keywords(game, cavalier).has("first-strike")).toBe(false);
   });
 
+  it("Time and Tide phases in what was phased out and phases out what has phasing, at once", () => {
+    const { game } = table();
+    const breeze = spawn(game, "Breezekeeper", A);
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.debugApplyEffect(B, { kind: "phase-out", target: 0 }, [ref(bears)]);
+    expect(zone(game, bears)).toBe("phased-out");
+    lands(game, "Island", 2);
+    cast(game, toHand(game, "Time and Tide"));
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(zone(game, breeze)).toBe("phased-out");
+    // Cast again: the Breezekeeper comes back, and nothing with phasing is left to go.
+    lands(game, "Island", 2);
+    cast(game, toHand(game, "Time and Tide"));
+    expect(zone(game, breeze)).toBe("battlefield");
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {
     const { game, a } = table();
     const turtle = spawn(game, "Giant Turtle");

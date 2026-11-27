@@ -1008,6 +1008,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // Only ever a delayed ability's, which targets nothing (The Pandorica).
   "phase-in": none,
+  // Untargeted: every creature on both sides.
+  "phasing-swap": none,
   // Turn to Frog is removal; a man-land, Suit Up or Water Wings a boost. What
   // says which: losing abilities or a tiny base (Multiply by Zero's 0/0) is
   // harm; keywords, a big base or becoming a creature is help. A middling

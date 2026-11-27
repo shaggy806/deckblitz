@@ -29782,6 +29782,7 @@ import _poolTimbermare from "./pool/timbermare.js";
 import _poolTimbermawLarva from "./pool/timbermaw-larva.js";
 import _poolTimberpackWolf from "./pool/timberpack-wolf.js";
 import _poolTimberwatchElf from "./pool/timberwatch-elf.js";
+import _poolTimeAndTide from "./pool/time-and-tide.js";
 import _poolTimeBeetle from "./pool/time-beetle.js";
 import _poolTimeBomb from "./pool/time-bomb.js";
 import _poolTimeEbb from "./pool/time-ebb.js";
@@ -64145,6 +64146,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTimbermawLarva,
   _poolTimberpackWolf,
   _poolTimberwatchElf,
+  _poolTimeAndTide,
   _poolTimeBeetle,
   _poolTimeBomb,
   _poolTimeEbb,
@@ -98521,6 +98523,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/timbermaw-larva": _poolTimbermawLarva,
   "pool/timberpack-wolf": _poolTimberpackWolf,
   "pool/timberwatch-elf": _poolTimberwatchElf,
+  "pool/time-and-tide": _poolTimeAndTide,
   "pool/time-beetle": _poolTimeBeetle,
   "pool/time-bomb": _poolTimeBomb,
   "pool/time-ebb": _poolTimeEbb,

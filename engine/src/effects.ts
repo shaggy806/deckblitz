@@ -10175,6 +10175,16 @@ export type EffectSpec =
       readonly target: ObjectRef;
     }
   | {
+      /** "Simultaneously, all phased-out creatures phase in and all creatures
+       * with phasing phase out" (Time and Tide): what `filter` takes is read
+       * on both sides before anything moves, every player's, then all of it
+       * phases at once, as the untap step's phasing does (rule 702.26a) — so
+       * what phases in now doesn't phase straight out again. Phasing in
+       * brings back what phased out indirectly with each (702.26g). */
+      readonly kind: "phasing-swap";
+      readonly filter: CardFilter;
+    }
+  | {
       /** "Manifest the top card of your library" (rule 701.40), or cloak it
        * (701.58): it goes onto the battlefield face down as a 2/2 — with ward
        * {2} if cloaked — under the manifesting player, from their own library.
@@ -16258,6 +16268,8 @@ export interface EffectApi {
   }): void;
   /** See the `"phase-in"` {@link EffectSpec}. */
   phaseIn(target: TargetRef): void;
+  /** See the `"phasing-swap"` {@link EffectSpec}. */
+  phasingSwap(filter: CardFilter): void;
   /** `player` manifests (or cloaks) the top card of their library — see the
    * `"manifest"` {@link EffectSpec}; `library` is another player's library
    * it comes from (its `from`). */
@@ -25556,6 +25568,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (target !== undefined) ctx.phaseIn(target);
       return;
     }
+    case "phasing-swap":
+      ctx.phasingSwap(spec.filter);
+      return;
     case "create-token":
       // "A token of the chosen color and type" (Riptide Replicator): the
       // white Soldier the token is written as, made the colour and creature

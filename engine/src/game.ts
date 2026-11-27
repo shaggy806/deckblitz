@@ -49963,6 +49963,7 @@ controlledBy,
         if (object?.zone !== "phased-out" || object.phasedOut?.with !== undefined) return;
         this.phaseIn([target.object]);
       },
+      phasingSwap: (filter) => this.phasingSwapByEffect(controller, filter),
       phaseOut: (what) => {
         // "…until this leaves the battlefield" (rule 610.4): not at all if it
         // already has, or is back as a new object (610.4b-c). Phased out
@@ -63355,6 +63356,31 @@ controlledBy,
       }
       if (this.state.players[object.owner]?.hasLost !== false) return false;
       return status.controller === active || status.released === true;
+    });
+    if (outgoing.length > 0) this.phaseOut(outgoing);
+    if (incoming.length > 0) this.phaseIn(incoming);
+  }
+
+  /**
+   * Time and Tide's "simultaneously, all phased-out creatures phase in and all
+   * creatures with phasing phase out": both sides read before anything moves,
+   * every player's, then phased as the untap step does (rule 702.26a). Only
+   * what phased out directly phases in by itself; what went with it comes
+   * back with it (702.26g). A phased-out permanent is read with its
+   * characteristics as they were (it is treated as though it doesn't exist,
+   * 702.26b, but it hasn't changed).
+   */
+  private phasingSwapByEffect(you: PlayerId, filter: CardFilter): void {
+    const outgoing = this.state.zones.shared.battlefield.filter(
+      (id) =>
+        matchesFilter(this.state, this.registry, id, filter, { you }) &&
+        computeCharacteristics(this.state, this.registry, id).keywords.has("phasing"),
+    );
+    const incoming = phasedOutIds(this.state).filter((id) => {
+      const object = this.state.objects[id];
+      if (object?.phasedOut === undefined || object.phasedOut.with !== undefined) return false;
+      if (this.state.players[object.owner]?.hasLost !== false) return false;
+      return matchesFilter(this.state, this.registry, id, filter, { you });
     });
     if (outgoing.length > 0) this.phaseOut(outgoing);
     if (incoming.length > 0) this.phaseIn(incoming);
