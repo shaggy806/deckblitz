@@ -7,7 +7,7 @@ one in the client's log wording. The third (keywords two at a time), the fourth 
 and cards leaving the battlefield) and the fifth (two replacement effects on one event) found
 none. The sixth (merged and melded commanders) found three, fixed. The seventh replayed every kept
 game and checked it at every decision (`scripts/game-rules-scan.mjs`), and the eighth probed copies,
-keyword actions and a merged permanent leaving: none. A hundred and thirty-five probes stay as tests. The
+keyword actions and a merged permanent leaving: none. A hundred and forty-eight probes stay as tests. The
 slices to take next are at the end.
 
 ## Why
@@ -268,6 +268,18 @@ double it (111.13, now cited) — `spell-copy-token-audit`; cascade passes over 
 together reach its mana value (702.85a, 709.4a) — `cascade-split-audit`. The scan gained two checks that afternoon: every
 Aura and Equipment still legally attached, asked of the engine's own `canEnchant` and `canEquip`, and no
 player over their maximum hand size as the next turn begins (514.1).
+
+## Ninth slice: commander casts, storm, extra turns, doubled damage (2026-11-26, evening)
+
+No violation. `commander-casts-audit`: a copy of the commander spell (Double Major) is a token, not a
+commander, and adds no tax; a commander cast from hand adds no tax (903.8); Platinum Angel keeps a player
+at 0 life in until it's gone (104.3b, 704.5a). `storm-audit`: storm counts the spells cast before it, not
+its copies (702.40a). `extra-turn-left-audit`: the extra turn of a player who conceded doesn't begin
+(800.4k). `doubled-damage-audit`: lifelink gains and infect poisons the doubled amount under Furnace of Rath.
+`combat-and-sba-audit-2`: protection prevents Pestilence's damage and not Wrath of God; an indestructible
+creature at 0 toughness dies; myriad's copies enter attacking without triggering Hellrider; damage wears
+off at cleanup. `copy-spell-x-audit`: a Reverberated Blaze keeps its X. The first-turn draw skip applies
+only at two players (103.8a, 103.8c), as it was. The scan over the newest kept games was clean.
 
 ## Next slices
 
