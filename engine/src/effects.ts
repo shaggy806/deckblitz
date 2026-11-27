@@ -13894,6 +13894,15 @@ export interface ProtectionQualities {
    * Frolicker: `{ target: 0 }`, the target opponent). Naming nobody, it's
    * protection from no player. */
   readonly fromPlayer?: PlayerRef;
+  /** Protection from **each of the colours** of what an {@link ObjectRef}
+   * names, fixed to those colours as a `grant-protection` resolves and added
+   * to `colors` (rule 702.16a): Samite Elder's "creatures you control gain
+   * protection from each of **that permanent's** colors" (`{ target: 0 }`),
+   * Opal Titan's "protection from each of **that spell's** colors"
+   * (`"trigger-object"`, the spell as it last existed if it has left the
+   * stack). A colourless object adds none. Only a `grant-protection` reads
+   * it, like `fromPlayer`. */
+  readonly colorsOf?: ObjectRef;
 }
 
 /** A protection quality chosen as the effect resolves (a `grant-protection`'s
@@ -20076,7 +20085,8 @@ function protectionFilterWords(filter: CardFilter): readonly string[] {
  * protected permanent's controller's side, which a later change of control
  * would move. Rewritten to the players themselves (`controllerIn`). */
 function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): ProtectionQualities {
-  const { fromPlayer, ...named } = from;
+  const { fromPlayer, colorsOf, ...given } = from;
+  const named = colorsOf === undefined ? given : { ...given, colors: protectionColorsOf(colorsOf, given.colors, ctx) };
   const fixed =
     fromPlayer !== undefined
       ? { ...named, fromPlayers: ctx.playersInScope(fromPlayer) }
@@ -20088,6 +20098,15 @@ function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): P
   const { controlledBy, ...rest } = filter;
   const players = controlledBy === "you" ? [ctx.controller] : ctx.playersInScope("each-opponent");
   return { ...fixed, filter: { ...rest, controllerIn: players } };
+}
+
+/** `ProtectionQualities.colorsOf` fixed: the named colours plus each colour
+ * the referenced object has as the grant resolves (as it last existed, if it
+ * has left), each once. Nothing there, the named colours alone. */
+function protectionColorsOf(ref: ObjectRef, named: readonly Color[] | undefined, ctx: ResolutionContext): readonly Color[] {
+  const object = objectRefRead(ref, ctx);
+  const read = object === undefined ? [] : ctx.colorsOf(object);
+  return [...new Set([...(named ?? []), ...read])];
 }
 
 /** The durations a `grant-protection` can give its `players` for: those a

@@ -765,7 +765,12 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       ? v.touch(n.target, "harm", MINOR)
       : v.touch(n.target, "help", MAJOR),
   "grant-toxic": (n, v) => v.touch(n.target, "help", MINOR),
-  "grant-protection": (n, v) => v.touch(n.target, "help", MAJOR),
+  "grant-protection": (n, v) => {
+    v.touch(n.target, "help", MAJOR);
+    // A target only read for its colours (Samite Elder's "choose target
+    // permanent you control"): one of your own, whose colours you want.
+    if (!("choose" in n.from) && n.from.colorsOf !== undefined) v.touch(n.from.colorsOf, "help", MINOR);
+  },
   incubate: none,
   // Out of combat: an opponent's attacker or blocker, or one's own attacker
   // saved from a block — the board's call, or the card's own `whose`.
