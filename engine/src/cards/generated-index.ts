@@ -899,6 +899,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Balamb Garden, Airborne": "https://cards.scryfall.io/art_crop/back/0/0/001e9f20-5b15-41cb-bf82-46172decc235.jpg",
   "Ballista Wielder": "https://cards.scryfall.io/art_crop/back/6/3/63d96c52-66ce-4b46-9a0b-7cd9a43f9253.jpg",
   "Bane of Hanweir": "https://cards.scryfall.io/art_crop/back/d/0/d067706b-e2cc-4ad5-b992-28222a8af4ad.jpg",
+  "Baneclaw Marauder": "https://cards.scryfall.io/art_crop/back/7/b/7b63f2ae-5bfd-452f-b1f5-8459bcecd3bb.jpg",
   "Banishing Coils": "https://cards.scryfall.io/art_crop/back/1/8/18da890e-0f8d-41e9-a29f-24cb5393c464.jpg",
   "Barracks of the Thousand": "https://cards.scryfall.io/art_crop/back/4/a/4a6bec46-1acd-4726-b8d9-3045ac6a2ea2.jpg",
   "Bathe in Gold": "https://cards.scryfall.io/art_crop/back/d/0/d0b9865a-be87-48fd-a325-be6aca8a31e9.jpg",

@@ -292,6 +292,7 @@ import _poolExposeToDaylight from "../pool/expose-to-daylight.js";
 import _poolExultantCultist from "../pool/exultant-cultist.js";
 import _poolFaithlessLooting from "../pool/faithless-looting.js";
 import _poolFaithlessSalvaging from "../pool/faithless-salvaging.js";
+import _poolFall from "../pool/fall.js";
 import _poolFangrenPathcutter from "../pool/fangren-pathcutter.js";
 import _poolFatedClash from "../pool/fated-clash.js";
 import _poolFatespinner from "../pool/fatespinner.js";
@@ -714,6 +715,7 @@ import _poolRingOfGix from "../pool/ring-of-gix.js";
 import _poolRiotPiker from "../pool/riot-piker.js";
 import _poolRiseOfTheAnts from "../pool/rise-of-the-ants.js";
 import _poolRiseOfTheDreadMarn from "../pool/rise-of-the-dread-marn.js";
+import _poolRise from "../pool/rise.js";
 import _poolRishadanCutpurse from "../pool/rishadan-cutpurse.js";
 import _poolRiteOfTheSerpent from "../pool/rite-of-the-serpent.js";
 import _poolRitualChamber from "../pool/ritual-chamber.js";
@@ -1363,6 +1365,7 @@ const shard: CardShard = {
     _poolExultantCultist,
     _poolFaithlessLooting,
     _poolFaithlessSalvaging,
+    _poolFall,
     _poolFangrenPathcutter,
     _poolFatedClash,
     _poolFatespinner,
@@ -1785,6 +1788,7 @@ const shard: CardShard = {
     _poolRiotPiker,
     _poolRiseOfTheAnts,
     _poolRiseOfTheDreadMarn,
+    _poolRise,
     _poolRishadanCutpurse,
     _poolRiteOfTheSerpent,
     _poolRitualChamber,

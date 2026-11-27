@@ -24,6 +24,7 @@ import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
 import _poolAgentOfHorizons from "../pool/agent-of-horizons.js";
 import _poolAgentOfKotis from "../pool/agent-of-kotis.js";
 import _poolAggravate from "../pool/aggravate.js";
+import _poolAggression from "../pool/aggression.js";
 import _poolAjaniUnrelenting from "../pool/ajani-unrelenting.js";
 import _poolAjanisResponse from "../pool/ajanis-response.js";
 import _poolAkroanMastiff from "../pool/akroan-mastiff.js";
@@ -834,6 +835,7 @@ import _poolStromkirkBloodthief from "../pool/stromkirk-bloodthief.js";
 import _poolStrongBack from "../pool/strong-back.js";
 import _poolStrongholdConfessor from "../pool/stronghold-confessor.js";
 import _poolStrongholdRats from "../pool/stronghold-rats.js";
+import _poolStruggleForSanity from "../pool/struggle-for-sanity.js";
 import _poolStubbornBurrowfiend from "../pool/stubborn-burrowfiend.js";
 import _poolStubbornDenial from "../pool/stubborn-denial.js";
 import _poolSubjugateTheHobbits from "../pool/subjugate-the-hobbits.js";
@@ -1057,6 +1059,7 @@ const shard: CardShard = {
     _poolAgentOfHorizons,
     _poolAgentOfKotis,
     _poolAggravate,
+    _poolAggression,
     _poolAjaniUnrelenting,
     _poolAjanisResponse,
     _poolAkroanMastiff,
@@ -1867,6 +1870,7 @@ const shard: CardShard = {
     _poolStrongBack,
     _poolStrongholdConfessor,
     _poolStrongholdRats,
+    _poolStruggleForSanity,
     _poolStubbornBurrowfiend,
     _poolStubbornDenial,
     _poolSubjugateTheHobbits,

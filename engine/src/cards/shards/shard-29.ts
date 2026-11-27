@@ -1012,6 +1012,7 @@ import _poolWeatherlight from "../pool/weatherlight.js";
 import _poolWeightOfTheUnderworld from "../pool/weight-of-the-underworld.js";
 import _poolWeirdedVampire from "../pool/weirded-vampire.js";
 import _poolWharfInfiltrator from "../pool/wharf-infiltrator.js";
+import _poolWhipkeeper from "../pool/whipkeeper.js";
 import _poolWhirlwindAdept from "../pool/whirlwind-adept.js";
 import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
 import _poolWicksPatrol from "../pool/wicks-patrol.js";
@@ -2080,6 +2081,7 @@ const shard: CardShard = {
     _poolWeightOfTheUnderworld,
     _poolWeirdedVampire,
     _poolWharfInfiltrator,
+    _poolWhipkeeper,
     _poolWhirlwindAdept,
     _poolWhiteWidowYelenaBelova,
     _poolWicksPatrol,

@@ -528,6 +528,7 @@ import _poolLaezelsAcrobatics from "../pool/laezels-acrobatics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLandrovalHorizonWitness from "../pool/landroval-horizon-witness.js";
 import _poolLapisLazuliTalisman from "../pool/lapis-lazuli-talisman.js";
+import _poolLaquatussChampion from "../pool/laquatuss-champion.js";
 import _poolLargeBear from "../pool/large-bear.js";
 import _poolLashknife from "../pool/lashknife.js";
 import _poolLashwrithe from "../pool/lashwrithe.js";
@@ -1602,6 +1603,7 @@ const shard: CardShard = {
     _poolLambholtRavager,
     _poolLandrovalHorizonWitness,
     _poolLapisLazuliTalisman,
+    _poolLaquatussChampion,
     _poolLargeBear,
     _poolLashknife,
     _poolLashwrithe,

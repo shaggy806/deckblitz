@@ -64,6 +64,7 @@ import _poolBakeryRaid from "../pool/bakery-raid.js";
 import _poolBalambGardenAirborne from "../pool/balamb-garden-airborne.js";
 import _poolBalduvianHorde from "../pool/balduvian-horde.js";
 import _poolBalshanGriffin from "../pool/balshan-griffin.js";
+import _poolBaneclawMarauder from "../pool/baneclaw-marauder.js";
 import _poolBanewhipPunisher from "../pool/banewhip-punisher.js";
 import _poolBarTheDoor from "../pool/bar-the-door.js";
 import _poolBardTheBowman from "../pool/bard-the-bowman.js";
@@ -1161,6 +1162,7 @@ const shard: CardShard = {
     _poolBalambGardenAirborne,
     _poolBalduvianHorde,
     _poolBalshanGriffin,
+    _poolBaneclawMarauder,
     _poolBanewhipPunisher,
     _poolBarTheDoor,
     _poolBardTheBowman,

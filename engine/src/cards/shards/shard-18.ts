@@ -52,6 +52,7 @@ import _poolAzoriusSignet from "../pool/azorius-signet.js";
 import _poolAzulaRuthlessFirebender from "../pool/azula-ruthless-firebender.js";
 import _poolBackForMore from "../pool/back-for-more.js";
 import _poolBaneOfHanweir from "../pool/bane-of-hanweir.js";
+import _poolBanebladeScoundrel from "../pool/baneblade-scoundrel.js";
 import _poolBanishingBetrayal from "../pool/banishing-betrayal.js";
 import _poolBanishingStroke from "../pool/banishing-stroke.js";
 import _poolBarbedBattlegear from "../pool/barbed-battlegear.js";
@@ -792,6 +793,7 @@ import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorcerousSquall from "../pool/sorcerous-squall.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulLink from "../pool/soul-link.js";
+import _poolSoulScourge from "../pool/soul-scourge.js";
 import _poolSoulSearch from "../pool/soul-search.js";
 import _poolSoulSeizer from "../pool/soul-seizer.js";
 import _poolSoulShackledZombie from "../pool/soul-shackled-zombie.js";
@@ -1108,6 +1110,7 @@ const shard: CardShard = {
     _poolAzulaRuthlessFirebender,
     _poolBackForMore,
     _poolBaneOfHanweir,
+    _poolBanebladeScoundrel,
     _poolBanishingBetrayal,
     _poolBanishingStroke,
     _poolBarbedBattlegear,
@@ -1848,6 +1851,7 @@ const shard: CardShard = {
     _poolSorcerousSquall,
     _poolSorinImperiousBloodlord,
     _poolSoulLink,
+    _poolSoulScourge,
     _poolSoulSearch,
     _poolSoulSeizer,
     _poolSoulShackledZombie,

@@ -351,6 +351,7 @@ import _poolFuriousAssault from "../pool/furious-assault.js";
 import _poolFuriousBellow from "../pool/furious-bellow.js";
 import _poolFurnaceHellkite from "../pool/furnace-hellkite.js";
 import _poolGaelicat from "../pool/gaelicat.js";
+import _poolGamePreserve from "../pool/game-preserve.js";
 import _poolGammaGrotesque from "../pool/gamma-grotesque.js";
 import _poolGandalfFriendOfTheShire from "../pool/gandalf-friend-of-the-shire.js";
 import _poolGarenbrigCarver from "../pool/garenbrig-carver.js";
@@ -1456,6 +1457,7 @@ const shard: CardShard = {
     _poolFuriousBellow,
     _poolFurnaceHellkite,
     _poolGaelicat,
+    _poolGamePreserve,
     _poolGammaGrotesque,
     _poolGandalfFriendOfTheShire,
     _poolGarenbrigCarver,

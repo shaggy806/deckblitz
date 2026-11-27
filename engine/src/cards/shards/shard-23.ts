@@ -441,6 +441,7 @@ import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
 import _poolInfernalCaptor from "../pool/infernal-captor.js";
+import _poolInfernoTrap from "../pool/inferno-trap.js";
 import _poolInsultInjury from "../pool/insult-injury.js";
 import _poolIntegrityIntervention from "../pool/integrity-intervention.js";
 import _poolInvasionOfNewCapenna from "../pool/invasion-of-new-capenna.js";
@@ -735,6 +736,7 @@ import _poolRicochetTrap from "../pool/ricochet-trap.js";
 import _poolRidingRedHare from "../pool/riding-red-hare.js";
 import _poolRile from "../pool/rile.js";
 import _poolRimefurReindeer from "../pool/rimefur-reindeer.js";
+import _poolRiseFall from "../pool/rise-fall.js";
 import _poolRiteOfConsumption from "../pool/rite-of-consumption.js";
 import _poolRitualOfHope from "../pool/ritual-of-hope.js";
 import _poolRiverSongsDiary from "../pool/river-songs-diary.js";
@@ -1523,6 +1525,7 @@ const shard: CardShard = {
     _poolIncitedRabble,
     _poolIncurableOgre,
     _poolInfernalCaptor,
+    _poolInfernoTrap,
     _poolInsultInjury,
     _poolIntegrityIntervention,
     _poolInvasionOfNewCapenna,
@@ -1817,6 +1820,7 @@ const shard: CardShard = {
     _poolRidingRedHare,
     _poolRile,
     _poolRimefurReindeer,
+    _poolRiseFall,
     _poolRiteOfConsumption,
     _poolRitualOfHope,
     _poolRiverSongsDiary,
