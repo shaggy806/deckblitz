@@ -7538,7 +7538,7 @@ const GRAVEYARD_ORDER_READERS = new WeakMap<CardDefinition, boolean>();
 export function readsGraveyardOrder(def: CardDefinition): boolean {
   let reads = GRAVEYARD_ORDER_READERS.get(def);
   if (reads === undefined) {
-    reads = /"kind":"top-of-graveyard"|"fromTop":true/.test(JSON.stringify(def));
+    reads = /"kind":"top-of-graveyard"|"fromTop":true|"topOfGraveyard":true/.test(JSON.stringify(def));
     GRAVEYARD_ORDER_READERS.set(def, reads);
   }
   return reads;

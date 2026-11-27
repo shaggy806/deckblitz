@@ -8070,6 +8070,17 @@ export type EffectSpec =
        * player's is tapped but not attacking. */
       readonly tokensComeToOwner?: true;
       readonly looksAtOwnLibraryTop?: true;
+      /** "Play with the top card of your library revealed" (rule 401.5), for
+       * a while, from a resolved effect (Temporal Aperture). */
+      readonly libraryTopRevealed?: true;
+      /** "**For as long as that card remains on top of your library**": the
+       * card in this target slot (a `reveal-top`'s `then` names it as slot
+       * 0), as it is now. The whole effect ends the first moment it isn't the
+       * top card of its owner's library — moved (rule 400.7), covered by
+       * another card, or the library shuffled (Temporal Aperture's rulings) —
+       * and never comes back. With the card not on top as this resolves,
+       * nothing. Only for a card in the effect's owner's own library. */
+      readonly whileOnTop?: number;
       /** "You may look at the top card of **their** library any time"
        * (Xanathar, Guild Kingpin — rule 401.5): the controller sees the top
        * card of each of these players' libraries while this lasts, in their
@@ -12045,6 +12056,13 @@ export type EffectSpec =
         | { readonly ownerOf: number };
       readonly prompt?: string;
       readonly effect?: EffectSpec;
+      /** "Each player **who controls four or fewer lands** may search …"
+       * (Natural Balance): only the players in `who` for whom this holds,
+       * read with that player as `"that-player"` (an `of-player`), are
+       * asked — found as it begins, before anyone answers, as
+       * `for-each-player`'s `whoIf` is. One it leaves out isn't asked and
+       * didn't (`ifDidnt` still reads them). */
+      readonly whoIf?: StaticCondition;
       /** A `payLifeAmount` here is read for each player as they're asked, a
        * per-player amount being their own: "any player may pay **half their
        * life**, rounded up" (Temporal Extortion) is `{ payLifeAmount: { half:
@@ -12143,8 +12161,17 @@ export type EffectSpec =
       /** What happens to the ones not chosen, instead of being sacrificed:
        * `"phase-out"` — "all permanents … that weren't chosen this way phase
        * out" (Disciple of Caelus Nin), each player's at once, what's attached
-       * to them going with them (rule 702.26g). */
-      readonly rest?: "phase-out";
+       * to them going with them (rule 702.26g). `"shuffle-into-library"`,
+       * with `fromHand`: "each player chooses up to seven cards in their
+       * hand, then **shuffles the rest into their library**" (Worldpurge) —
+       * each player's at once, and every library shuffled (rule 701.24a),
+       * an empty hand's too. */
+      readonly rest?: "phase-out" | "shuffle-into-library";
+      /** The cards chosen from are the player's **hand**, matching `filter`
+       * (read from that player's side), not permanents they control. Which
+       * ones a player keeps stays hidden (rule 101.4a): the others are told
+       * only how many. With `rest: "shuffle-into-library"`. */
+      readonly fromHand?: true;
       /** "All permanents **other than this creature**": the effect's source,
        * in the stint it means (rule 607.2a), is spared whether chosen or not. */
       readonly exceptSource?: true;
@@ -15007,12 +15034,21 @@ export interface EffectApi {
   mill(target: TargetRef, amount: number): void;
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: how
    * many objects the player put into their library (a token stack each
-   * token in it). */
+   * token in it). `handKept`: hand cards that stay (`sacrifice-all-but`'s
+   * `fromHand` keepers). */
   shuffleZonesIntoLibrary(
     target: TargetRef,
     zones: readonly ("hand" | "graveyard" | "permanents")[],
     filter?: CardFilter,
+    handKept?: readonly ObjectId[],
   ): number;
+  /** `card`'s library stint when it's the top card of `player`'s library
+   * now, else `undefined` — a `player-effect`'s `whileOnTop`. */
+  libraryTopStint?(player: PlayerId, card: ObjectId): { readonly card: ObjectId; readonly stint: number } | undefined;
+  /** Ends the player effects lasting "for as long as that card remains on
+   * top" whose card no longer is (`PlayerEffect.whileOnTop`): run after
+   * every instruction, as `noteStateMutation` is. */
+  endLibraryTopEffects?(): void;
   /** See the `"skip-next-untap"` {@link EffectSpec}. */
   skipNextUntap(target: TargetRef, filter: CardFilter): void;
   /** See the `"return-to-hand-during-next-untap"` {@link EffectSpec}: the
@@ -15177,8 +15213,15 @@ export interface EffectApi {
   /** `sacrifice-all-but`'s choice: `player` keeps `keep` of the permanents
    * matching `filter` they control (`upTo`: as many as `keep`). `true` when
    * it asked; otherwise what's kept — all of them, when there's no choice —
-   * is waiting for `takeKept`. */
-  askKeep(player: PlayerId, filter: CardFilter, keep: number, upTo: boolean, rest?: "phase-out"): boolean;
+   * is waiting for `takeKept`. `fromHand`: of the cards in their hand. */
+  askKeep(
+    player: PlayerId,
+    filter: CardFilter,
+    keep: number,
+    upTo: boolean,
+    rest?: "phase-out" | "shuffle-into-library",
+    fromHand?: boolean,
+  ): boolean;
   /** `choose-one-of-each`'s choice, with `askKeep`'s answer: `true` when it
    * asked; otherwise what's chosen, when only one answer is legal, is waiting
    * for `takeKept`. */
@@ -17338,7 +17381,10 @@ function applyEachPlayerMay(
   let toAsk =
     spec.progress?.toAsk ??
     (() => {
-      const players = eachPlayerMayAsks(spec.who, ctx, spec.startingWithYou === true);
+      const whoIf = spec.whoIf;
+      const players = eachPlayerMayAsks(spec.who, ctx, spec.startingWithYou === true).filter(
+        (player) => whoIf === undefined || ctx.aboutPlayer(player).conditionMet(whoIf),
+      );
       // A villainous choice faced more times over: each of a player's
       // faced one after another, before the next player's (rule 701.55c).
       if (spec.villainous === true && spec.choices !== undefined) {
@@ -21256,6 +21302,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     // Whatever it changed, the lists kept per mutation outside a cache
     // region (`noteStateMutation`) are asked afresh by the next instruction.
     noteStateMutation();
+    // "For as long as that card remains on top": over the moment it isn't.
+    ctx.endLibraryTopEffects?.();
   }
 }
 
@@ -24273,8 +24321,16 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       // "Target player …": theirs, and nobody's once that target is gone.
       const to = spec.to === undefined ? undefined : ctx.targets[spec.to];
       if (spec.to !== undefined && to?.kind !== "player") return;
+      const owner = to?.kind === "player" ? to.player : ctx.controller;
+      // "For as long as that card remains on top": nothing if it isn't now.
+      const onTop = spec.whileOnTop === undefined ? undefined : ctx.targets[spec.whileOnTop];
+      const whileOnTop =
+        onTop?.kind === "object" ? ctx.libraryTopStint?.(owner, onTop.object) : undefined;
+      if (spec.whileOnTop !== undefined && whileOnTop === undefined) return;
       ctx.addPlayerEffect({
-        owner: to?.kind === "player" ? to.player : ctx.controller,
+        owner,
+        ...(whileOnTop !== undefined ? { whileOnTop } : {}),
+        ...(spec.libraryTopRevealed === true ? { libraryTopRevealed: true as const } : {}),
         // A `during` effect is held until that turn (`laterPlayerEffects`).
         expires: "expires" in lasts ? lasts.expires : "end-of-turn",
         ...(spec.noMaxHandSize !== undefined ? { noMaxHandSize: ctx.playersInScope(spec.noMaxHandSize) } : {}),
@@ -26093,11 +26149,20 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       while (toAsk.length > 0) {
         const player = toAsk[0];
         toAsk = toAsk.slice(1);
-        if (ctx.askKeep(player, spec.filter, keep, spec.upTo === true, spec.rest)) {
+        if (ctx.askKeep(player, spec.filter, keep, spec.upTo === true, spec.rest, spec.fromHand === true)) {
           ctx.resumeAfterDecisions({ ...spec, progress: { toAsk, kept } }, below);
           return;
         }
         kept = [...kept, ...ctx.takeKept()];
+      }
+      if (spec.rest === "shuffle-into-library") {
+        // Every hand's rest at once (rule 101.4), each library shuffled.
+        ctx.simultaneously(() => {
+          for (const player of ctx.apnap(players)) {
+            ctx.shuffleZonesIntoLibrary({ kind: "player", player }, ["hand"], undefined, kept);
+          }
+        });
+        return;
       }
       if (spec.rest === "phase-out") {
         // Everything not chosen, each player's, at once (702.26b): a token

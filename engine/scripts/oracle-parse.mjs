@@ -9353,6 +9353,20 @@ export function parseSentence(sentence, ctx) {
       return { kind: "sacrifice-all-but", who: "each-player", keep, ...(m[1] !== undefined ? { upTo: true } : {}), filter: kept };
     }
   }
+  // "Each player chooses up to seven cards in their hand, then shuffles the
+  // rest into their library" (Worldpurge): the hand's keepers, the rest in.
+  if ((m = /^each player chooses (up to )?(one|two|three|four|five|six|seven) cards? in their hand, then shuffles the rest into their library\.$/i.exec(s))) {
+    const keep = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7 }[m[2].toLowerCase()];
+    return {
+      kind: "sacrifice-all-but",
+      who: "each-player",
+      keep,
+      ...(m[1] !== undefined ? { upTo: true } : {}),
+      filter: {},
+      fromHand: true,
+      rest: "shuffle-into-library",
+    };
+  }
   // "Exile this card", ending a dies trigger (Moorland Rescuer): the card as
   // the trigger found it, not whatever it has become since (rule 400.7).
   if (/^exile ~\.$/i.test(s) && ctx?.departed === "source") return { kind: "exile", target: "trigger-object" };

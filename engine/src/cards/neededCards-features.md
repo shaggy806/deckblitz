@@ -9028,3 +9028,10 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Life paid, then that many cards revealed (2026-11-26, no engine code).** `effect:pay-any-amount-of-life-reveal-that-many`: `players-pay-any-amount` `who: "you"` with a `discard-chosen` `reveals: "x"`, `destination: "exile"` as its `then`. Vizkopa Confessor. `test/pay-life-reveal-that-many.test.ts`.
 
 **A choice of costs with a mana branch (2026-11-26).** `cost:ability-cost-choice`: an `ActivationCostOption`'s `cost` may hold `mana` (merged over the ability's `mana: null`, so every check reads one cost). Tidal Control's "Pay 2 life or {2}", any player. The scaffolder reads a mana branch and "target red or green spell" (every colour pair). `test/activation-cost-option-mana.test.ts`.
+**"Each player who …" on a may (2026-11-26).** `condition:each-player-may-asked-player-controls`: `each-player-may.whoIf`, read for each player as `"that-player"` and found before anyone answers (as `for-each-player`'s). Natural Balance. `test/each-player-may-who-if.test.ts`.
+
+**Keep N cards of a hand, shuffle the rest in (2026-11-26).** `effect:each-player-keeps-n-shuffles-rest`: `sacrifice-all-but` `fromHand` + `rest: "shuffle-into-library"` (`askKeep` asks a `choose-from-zone` `handKeep`, hidden as 101.4a wants; `shuffleZonesIntoLibrary`'s `handKept`). Worldpurge. `test/keep-hand-shuffle-rest.test.ts`.
+
+**For as long as that card remains on top of your library (2026-11-26).** `effect:play-library-top-free-while-on-top`: `player-effect.whileOnTop` (`PlayerEffect.whileOnTop`, ended by `Game.endLibraryTopEffects` after every instruction and action, and by any shuffle of that library) and `libraryTopRevealed`. Temporal Aperture. `test/library-top-while-on-top.test.ts`.
+
+**Cast from the top of your graveyard (2026-11-26).** `zone:cast-from-top-of-graveyard`: the `CardFilter` clause `topOfGraveyard` (rule 404.2; `readsGraveyardOrder` sees it) in a graveyard `mayPlay`. Bösium Strip. `test/graveyard-top-cast.test.ts`.

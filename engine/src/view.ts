@@ -56,6 +56,7 @@ import {
   activePlayerOf,
   faceName,
   isTokenNow,
+  libraryTopHolds,
   manaCostOverride,
   nameOf,
   phasedOutIds,
@@ -1255,6 +1256,14 @@ function sightOf(state: GameState, registry: CardRegistry, viewer: PlayerId): Si
   // "…and plays with their hand revealed" for a turn (Sen Triplets).
   for (const effect of state.playerEffects ?? []) {
     for (const player of effect.handsRevealed ?? []) hands.add(player);
+    // "Play with the top card of your library revealed" for a while
+    // (Temporal Aperture), while what it lasts for holds.
+    if (
+      effect.libraryTopRevealed === true &&
+      (effect.whileOnTop === undefined || libraryTopHolds(state, effect.owner, effect.whileOnTop))
+    ) {
+      libraryTops.add(effect.owner);
+    }
   }
   return { hands, libraryTops, faceDownCreatures, ownLibraryTop };
 }
@@ -1618,7 +1627,9 @@ function viewForUncached(
                 // permanents it could choose. So too a choice across zones
                 // (`exile-from-zones`): its hand cards are the chooser's.
                 state.awaiting?.kind === "choose-from-zone" &&
-                  (state.awaiting.behold !== undefined || state.awaiting.acrossZones === true) &&
+                  (state.awaiting.behold !== undefined ||
+                    state.awaiting.acrossZones === true ||
+                    state.awaiting.handKeep === true) &&
                   state.awaiting.player !== viewer
                 ? {
                     ...state.awaiting,

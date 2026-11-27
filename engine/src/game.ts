@@ -599,6 +599,7 @@ import {
   playerCountersHeld,
   seatingOf,
   SECTORS,
+  libraryTopHolds,
 } from "./state.js";
 import type {
   AssistAsk,
@@ -3543,6 +3544,9 @@ export class Game {
     } finally {
       // Whatever the action changed: see `noteStateMutation`.
       noteStateMutation();
+      // A card played from the top, or covered, ends what lasted while it
+      // was there (`PlayerEffect.whileOnTop`).
+      this.endLibraryTopEffects();
     }
   }
 
@@ -13368,14 +13372,17 @@ export class Game {
       // A choice across zones (`exile-from-zones`): the hand's picks stay
       // hidden until they're exiled — the players after know how many
       // (rule 101.4a), and which permanents and graveyard cards (101.4b).
-      const hidden = awaiting.acrossZones === true ? chosen.filter((id) => this.state.objects[id]?.zone === "hand") : [];
+      const hidden =
+        awaiting.acrossZones === true || awaiting.handKeep === true
+          ? chosen.filter((id) => this.state.objects[id]?.zone === "hand")
+          : [];
       // A vote's pick (Custodi Squire) is told as the vote it casts.
       if (awaiting.voteOf === undefined) {
         this.emit({
           type: "cards-chosen-from-zone",
           player,
           objects: chosen.filter((id) => !hidden.includes(id)),
-          ...(awaiting.acrossZones === true ? { chosenOnly: true as const } : {}),
+          ...(awaiting.acrossZones === true || awaiting.handKeep === true ? { chosenOnly: true as const } : {}),
           ...(hidden.length > 0 ? { fromHand: hidden.length } : {}),
         });
       }
@@ -23669,7 +23676,7 @@ export class Game {
     }
     const impulseFree = via === "impulse" || via === "library-top" ? this.playFreeMode(cardId, player, face) : null;
     if (impulseFree === "only" && !free) {
-      return `${def.name} may be cast from exile only without paying its mana cost`;
+      return `${def.name} may be cast from ${via === "library-top" ? "the top of the library" : "exile"} only without paying its mana cost`;
     }
     if (via === "impulse" && !altCost && this.playLifeMode(player, cardId, face ?? 0) === "only") {
       return `${def.name} may be cast from exile only by paying life equal to its mana value`;
@@ -46159,12 +46166,18 @@ controlledBy,
         this.grantBlockAdditional(target, amount, lastingHere(duration)),
       allowLoyaltyActivations: (target, times, duration) => this.allowLoyaltyActivations(target, times, lastingHere(duration)),
       mill: (target, amount) => this.millByEffect(target, amount),
-      shuffleZonesIntoLibrary: (target, zones, filter) =>
+      shuffleZonesIntoLibrary: (target, zones, filter, handKept) =>
         this.shuffleZonesIntoLibraryByEffect(
           target,
           zones,
           filter === undefined ? undefined : (id) => matchesFilter(this.state, this.registry, id, filter, { you: controller, source }),
+          handKept,
         ),
+      libraryTopStint: (player, card) =>
+        this.state.zones.perPlayer[player]?.library[0] === card
+          ? { card, stint: this.state.objects[card]?.zoneChangeCount ?? 0 }
+          : undefined,
+      endLibraryTopEffects: () => this.endLibraryTopEffects(),
       skipNextUntap: (target, filter) => {
         const player = target.kind === "player" ? this.state.players[target.player] : undefined;
         if (player !== undefined) player.untapSkips = [...(player.untapSkips ?? []), filter];
@@ -46710,7 +46723,35 @@ controlledBy,
         carryOut(chosenPile, chosenFate);
         carryOut(otherPile, restFate);
       },
-      askKeep: (player, filter, keep, upTo, rest) => {
+      askKeep: (player, filter, keep, upTo, rest, fromHand) => {
+        if (fromHand === true) {
+          // "Chooses up to seven cards in their hand" (Worldpurge): their
+          // own hand's, which only they see (`handKeep`, rule 101.4a).
+          if (this.state.players[player]?.hasLost !== false) return false;
+          const hand = this.state.zones.perPlayer[player].hand.filter((id) =>
+            matchesFilter(this.state, this.registry, id, filter, { you: player }),
+          );
+          if (hand.length === 0) return false;
+          if (!upTo && hand.length <= keep) {
+            this.state.keptByChoice = [...(this.state.keptByChoice ?? []), ...hand];
+            return false;
+          }
+          const most = Math.min(keep, hand.length);
+          this.state.awaiting = {
+            kind: "choose-from-zone",
+            player,
+            ids: [...hand],
+            eligible: [...hand],
+            min: upTo ? 0 : most,
+            max: most,
+            destination: "stay",
+            leftover: "stay",
+            prompt: `Choose ${upTo ? "up to " : ""}${keep} cards in your hand to keep — the rest ${rest === "shuffle-into-library" ? "are shuffled into your library" : "go"}`,
+            keepChoice: true,
+            handKeep: true,
+          };
+          return true;
+        }
         // "Creatures they control": only the asked player's own.
         const eligible = this.battlefieldMatching(player, filter).filter(
           (id) => this.state.objects[id]?.controller === player,
@@ -52606,7 +52647,27 @@ controlledBy,
 
   /** `exceptTop`: that many cards stay on top in their order, the rest
    * shuffled under them (Lim-Dûl's Vault) — still this library shuffled. */
+  /**
+   * End the player effects lasting "for as long as that card remains on top
+   * of your library" (`PlayerEffect.whileOnTop`, Temporal Aperture) whose
+   * card isn't, in that stint, the top card of its owner's library any more
+   * — or, with `shuffled`, every one on that player's library, a shuffle
+   * ending it even with the card back on top (the ruling). For good: one
+   * covered and uncovered again doesn't come back (rule 611.2b's sense).
+   */
+  private endLibraryTopEffects(shuffled?: PlayerId): void {
+    const effects = this.state.playerEffects;
+    if (effects === undefined || !effects.some((e) => e.whileOnTop !== undefined)) return;
+    const kept = effects.filter(
+      (e) => e.whileOnTop === undefined || (e.owner !== shuffled && libraryTopHolds(this.state, e.owner, e.whileOnTop)),
+    );
+    if (kept.length === effects.length) return;
+    this.state.playerEffects = kept;
+    invalidateComputedCache();
+  }
+
   private shuffleLibraryOf(player: PlayerId, exceptTop = 0): void {
+    this.endLibraryTopEffects(player);
     const library = this.state.zones.perPlayer[player].library;
     const kept = library.slice(0, Math.max(0, exceptTop));
     const order = shuffle(library.slice(kept.length), this.rng);
@@ -52845,6 +52906,7 @@ controlledBy,
       const play = effect.mayPlay;
       if (play === undefined || effect.owner !== player || play.from !== from) return;
       if (play.left !== undefined && play.left <= 0) return;
+      if (effect.whileOnTop !== undefined && !libraryTopHolds(this.state, effect.owner, effect.whileOnTop)) return;
       if ((from === "graveyard" || from === "hand" || from === "library-top") && !(play.owners ?? [player]).includes(card.owner)) {
         return;
       }
@@ -67640,6 +67702,7 @@ controlledBy,
     target: TargetRef,
     zones: readonly ("hand" | "graveyard" | "permanents")[],
     filter?: (id: ObjectId) => boolean,
+    handKept?: readonly ObjectId[],
   ): number {
     if (target.kind !== "player" || this.state.players[target.player] === undefined) return 0;
     const player = target.player;
@@ -67670,7 +67733,9 @@ controlledBy,
       : [];
     this.withLeaveBatch(() => {
       this.withGraveyardLeaveBatch(() => {
-        if (zones.includes("hand")) for (const id of [...this.state.zones.perPlayer[player].hand]) move(id);
+        if (zones.includes("hand")) {
+          for (const id of [...this.state.zones.perPlayer[player].hand]) if (handKept?.includes(id) !== true) move(id);
+        }
         for (const id of fromGraveyard) move(id);
         for (const id of fromBattlefield) move(id, true);
       });

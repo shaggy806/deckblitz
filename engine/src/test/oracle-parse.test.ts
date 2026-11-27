@@ -14027,6 +14027,16 @@ describe("choices kept, the rest destroyed", () => {
       keep: 6,
       filter: { type: "land" },
     });
+    // Worldpurge: the hand's keepers, the rest shuffled in.
+    expect(effectOf("Each player chooses up to seven cards in their hand, then shuffles the rest into their library.")).toEqual({
+      kind: "sacrifice-all-but",
+      who: "each-player",
+      keep: 7,
+      upTo: true,
+      filter: {},
+      fromHand: true,
+      rest: "shuffle-into-library",
+    });
     expect(effectOf("Each opponent chooses two cards in their graveyard and exiles the rest.")).toEqual({
       kind: "for-each-player",
       who: "each-opponent",

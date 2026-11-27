@@ -1321,6 +1321,12 @@ export interface CardFilter {
    * graveyard keeps its order): Nether Shadow's "with three or more creature
    * cards above it". The top is the card put there last. */
   readonly aboveSourceInGraveyard?: true;
+  /** The top card of its owner's graveyard (rule 404.2: the card put there
+   * last): Bösium Strip's "cast instant and sorcery spells from **the top of
+   * your graveyard**". Nothing outside a graveyard. A card saying it has its
+   * graveyards arranged as cards arrive together (404.3,
+   * `readsGraveyardOrder`). */
+  readonly topOfGraveyard?: true;
   /**
    * Was attached to this object — the ability's source, or the object its
    * trigger fired on — as it is now, or as it last existed on the
@@ -3731,6 +3737,11 @@ export function matchesFilter(
     if (live === undefined || live.zone !== "graveyard" || from?.zone !== "graveyard" || from.owner !== live.owner) return false;
     const pile = state.zones.perPlayer[live.owner]?.graveyard ?? [];
     if (pile.indexOf(id) <= pile.indexOf(from.id)) return false;
+  }
+  if (filter.topOfGraveyard === true) {
+    if (live === undefined || live.zone !== "graveyard") return false;
+    const pile = state.zones.perPlayer[live.owner]?.graveyard ?? [];
+    if (pile[pile.length - 1] !== id) return false;
   }
   // "That was attached to it" (an effect's bound `wasAttachedTo`): the same
   // object, still on the battlefield (rule 400.7) — or the card it became in

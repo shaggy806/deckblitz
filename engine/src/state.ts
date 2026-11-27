@@ -4150,6 +4150,12 @@ export type AwaitingDecision =
        * log names the permanents and graveyard cards chosen, and only counts
        * the hand's (101.4b). */
       readonly acrossZones?: true;
+      /** The cards of their own hand the player keeps — `sacrifice-all-but`'s
+       * `fromHand` (Worldpurge's "chooses up to seven cards in their hand,
+       * then shuffles the rest"): answered as `keepChoice` is, and hidden as
+       * `acrossZones`' hand cards are (rule 101.4a) — the others see only
+       * how many. The picks are the ones kept. */
+      readonly handKeep?: true;
       /** Whose the cards are when `player` chooses for someone else — an
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
@@ -6735,6 +6741,16 @@ export interface PlayerEffect {
    * `Game.tokenCreatorAfterRedirects`. */
   readonly tokensComeToOwner?: true;
   readonly looksAtOwnLibraryTop?: true;
+  /** `owner` plays with the top card of their library revealed (rule
+   * 401.5), to every player, while this lasts (Temporal Aperture). */
+  readonly libraryTopRevealed?: true;
+  /** "**For as long as that card remains on top of your library**"
+   * (Temporal Aperture): this whole effect lasts only while this card, in
+   * this library stint (rule 400.7), is the top card of `owner`'s library,
+   * and ends for good the first moment it isn't — a shuffle ends it even if
+   * the card comes back up on top (the ruling). Read through
+   * `libraryTopHolds`; ended by `Game.endLibraryTopEffects`. */
+  readonly whileOnTop?: { readonly card: ObjectId; readonly stint: number };
   /** `owner` may look at the top card of these players' libraries any time
    * while this lasts (Xanathar, Guild Kingpin — rule 401.5), in their own
    * view. */
@@ -7962,6 +7978,19 @@ export interface GameState {
  * use sideboards" (903.5e), and all that can be out there is a companion, which
  * enters only by its special action (702.139d).
  */
+/** Whether `watch`'s card, in that stint (rule 400.7), is the top card of
+ * `player`'s library now — a `PlayerEffect.whileOnTop`'s hold. */
+export function libraryTopHolds(
+  state: GameState,
+  player: PlayerId,
+  watch: { readonly card: ObjectId; readonly stint: number },
+): boolean {
+  return (
+    state.zones.perPlayer[player]?.library[0] === watch.card &&
+    (state.objects[watch.card]?.zoneChangeCount ?? 0) === watch.stint
+  );
+}
+
 export function sideboardOf(state: GameState, player: PlayerId): readonly ObjectId[] {
   const outside = state.outside?.[player] ?? [];
   if (outside.length === 0) return outside;
