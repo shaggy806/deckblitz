@@ -26972,3 +26972,38 @@ describe("a creature blocking this one dies (Baneclaw Marauder)", () => {
     expect(face.triggered[0].effect).toEqual({ kind: "lose-life", amount: 1, who: "trigger-controller" });
   });
 });
+
+describe("its own counters as a CDA (Rusting Golem, Mwonvuli Ooze)", () => {
+  it("the number of counters of a kind on it, and 1 plus twice that", () => {
+    const golem = parseFace(
+      {
+        name: "Rusting Golem",
+        type_line: "Artifact Creature — Golem",
+        mana_cost: "{4}",
+        power: "*",
+        toughness: "*",
+        oracle_text: "Rusting Golem's power and toughness are each equal to the number of fade counters on it.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(golem.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      setBasePtFromCount: { countOf: { countersOnThis: "fade" }, plusPower: 0, plusToughness: 0 },
+    });
+    const ooze = parseFace(
+      {
+        name: "Mwonvuli Ooze",
+        type_line: "Creature — Ooze",
+        mana_cost: "{G}",
+        power: "1+*",
+        toughness: "1+*",
+        oracle_text: "Mwonvuli Ooze's power and toughness are each equal to 1 plus twice the number of age counters on it.",
+      },
+      { tokenFor: () => null },
+    );
+    const age = { countersOnThis: "age" };
+    expect(ooze.static[0]).toMatchObject({
+      setBasePtFromCount: { countOf: { sum: [age, age] }, plusPower: 1, plusToughness: 1 },
+    });
+  });
+});

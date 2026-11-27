@@ -28662,6 +28662,23 @@ function parseStatic(line, text) {
       };
     }
   }
+  // Its own counters as a CDA (rule 604.3): Tidewalker's "~'s power and
+  // toughness are each equal to the number of time counters on it", Rusting
+  // Golem's fade counters; Mwonvuli Ooze's "1 plus twice the number of age
+  // counters on it".
+  if ((m = /^~'s power and toughness are each equal to (1 plus twice )?the number of ([a-z]+) counters on it\.$/.exec(line))) {
+    const own = { countersOnThis: m[2] };
+    const twice = m[1] !== undefined;
+    return {
+      affects: { scope: "self" },
+      setBasePtFromCount: {
+        countOf: twice ? { sum: [own, own] } : own,
+        plusPower: twice ? 1 : 0,
+        plusToughness: twice ? 1 : 0,
+      },
+      text,
+    };
+  }
   if (line === "~'s power is equal to the number of basic land types among lands you control.") {
     return {
       affects: { scope: "self" },
