@@ -363,6 +363,13 @@ resolving (608.2c; a permanent spell's own, 608.3a), else whoever it enters unde
 token's creator puts it there (111.1, 111.2). Nature's Wrath (24254), Tourach's Chant (28401), Thelon's Chant
 (29912). `test/player-puts-onto-battlefield.test.ts`.
 
+### The Nth spell cast this turn — built 2026-11-27
+
+The key `condition:was-nth-spell-cast-this-turn`: `CardFilter.castNthThisTurn: { n, byCaster? }`, a spell on the
+stack or a permanent that entered as it resolved, numbered by its latest `spell-cast` journal entry this turn, among
+every player's or (`byCaster`) its caster's. Codespell Cleric (24275, a `source` condition), Second Guess (26413, a
+spell target). `test/nth-spell-cast-this-turn.test.ts`.
+
 ### If it exploited that creature — built 2026-11-26
 
 The key `condition:exploited-that-creature`: the journal's `sacrificed` entry keeps the creature whose exploit ability

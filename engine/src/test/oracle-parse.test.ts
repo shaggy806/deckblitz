@@ -26283,4 +26283,18 @@ describe("the triggers-journal lane's picks, 2026-11-27", () => {
       { on: "enters-battlefield", who: "any", putBy: "any", filter: { subtype: "Forest" } },
     ]);
   });
+
+  it("Codespell Cleric: if it was the second spell you cast this turn", () => {
+    const parsed = parseFace({
+      name: "Codespell Cleric",
+      type_line: "Creature — Human Cleric",
+      mana_cost: "{W}",
+      power: "1",
+      toughness: "1",
+      oracle_text: "Vigilance\nWhen this creature enters, if it was the second spell you cast this turn, put a +1/+1 counter on target creature.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      condition: { kind: "source", filter: { castBy: "you", castNthThisTurn: { n: 2, byCaster: true } } },
+    });
+  });
 });

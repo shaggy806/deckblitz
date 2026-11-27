@@ -1552,6 +1552,15 @@ export interface CardFilter {
   /** It entered the battlefield (this stint) as a spell that was cast and
    * resolved — "if it was cast" (see `GameObject.entry`). */
   readonly cast?: boolean;
+  /** It's the `n`th spell cast this turn — a spell on the stack, or a
+   * permanent that entered (this stint) as that spell resolved: Second
+   * Guess's "target spell that's the second spell cast this turn", counted
+   * over every player's spells in the order they were cast (the journal's
+   * `spell-cast` entries); `byCaster`, only among its caster's own —
+   * Codespell Cleric's "if it was the second spell you cast this turn"
+   * (with `castBy: "you"`). A copy was never cast (rule 707.10), so it's no
+   * spell's number and doesn't count; one cast twice is its latest cast. */
+  readonly castNthThisTurn?: { readonly n: number; readonly byCaster?: true };
   /** Another player helped pay for it through assist (rule 702.132a,
    * `GameObject.assistedBy`): "if another player spent mana to cast it"
    * (Yume, Chronicler of Valor). As it was last cast. */
@@ -2696,6 +2705,22 @@ function askerFaceInStint(registry: CardRegistry, source: GameObject, stint: num
  * clause reads it instead of the object: one code path, so no clause can be
  * answered from the snapshot in one place and from the card in the
  * graveyard in another. */
+/**
+ * Which spell cast this turn object `id` was, by its latest cast (1 the
+ * first; `CardFilter.castNthThisTurn`), counting every player's spells — or,
+ * with `byCaster`, only its caster's. `undefined` if it wasn't cast this turn.
+ */
+function castNumberThisTurn(state: GameState, id: ObjectId, byCaster: boolean): number | undefined {
+  const casts = entriesThisTurn(state, "spell-cast");
+  let at = -1;
+  for (let i = 0; i < casts.length; i += 1) if (casts[i].object === id) at = i;
+  if (at < 0) return undefined;
+  const caster = casts[at].player;
+  let n = 0;
+  for (let i = 0; i <= at; i += 1) if (!byCaster || casts[i].player === caster) n += 1;
+  return n;
+}
+
 export function matchesFilter(
   state: GameState,
   registry: CardRegistry,
@@ -3540,6 +3565,7 @@ export function matchesFilter(
   }
   if (
     filter.cast !== undefined ||
+    filter.castNthThisTurn !== undefined ||
     filter.castBy !== undefined ||
     filter.castFrom !== undefined ||
     filter.castVia !== undefined ||
@@ -3558,6 +3584,9 @@ export function matchesFilter(
           : undefined
         : entry?.cast;
     if (filter.cast !== undefined && (cast !== undefined) !== filter.cast) return false;
+    if (filter.castNthThisTurn !== undefined && (cast === undefined || castNumberThisTurn(state, id, filter.castNthThisTurn.byCaster === true) !== filter.castNthThisTurn.n)) {
+      return false;
+    }
     if (filter.castBy === "you" && cast?.by !== ctx.you) return false;
     if (filter.castBy === "opponent" && (cast === undefined || cast.by === ctx.you)) return false;
     if (filter.castFrom !== undefined) {

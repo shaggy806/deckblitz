@@ -23111,6 +23111,8 @@ const INTERVENING_IFS = {
   // Rule 702.112b: the source's renowned designation.
   "if it's renowned,": { kind: "source", filter: { renowned: true } },
   "if ~ is renowned,": { kind: "source", filter: { renowned: true } },
+  // The journal's `spell-cast` entries this turn (Codespell Cleric).
+  "if it was the second spell you cast this turn,": { kind: "source", filter: { castBy: "you", castNthThisTurn: { n: 2, byCaster: true } } },
   // A land played (rule 305.1) or a spell cast from any zone but the hand
   // (Spider-Man 2099): the journal's `land-played` keeps the zone it came from.
   "if you've played a land or cast a spell this turn from anywhere other than your hand,": {

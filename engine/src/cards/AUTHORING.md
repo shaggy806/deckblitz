@@ -4238,7 +4238,10 @@ loyalty — Maarika, Brutal Gladiator's `toFilter`, asked once every source deal
 "that dealt damage this turn", to anything (Restore the Peace); `{ to: "you" }` "that dealt damage to you this
 turn" (Spear of Heliod), with `combat: true` for combat damage (Witch-king of Angmar: a sacrifice keeps "you" as
 the effect's controller, not the player choosing). The condition `{ kind: "self-hasnt-dealt-damage", combat? }`
-is "as long as it hasn't dealt [combat] damage yet" (Karakyk Guardian, Ruric Thar). `cast` / `castBy: "you"` / `castFrom` / `enteredFrom` /
+is "as long as it hasn't dealt [combat] damage yet" (Karakyk Guardian, Ruric Thar). `castNthThisTurn: { n, byCaster? }` is "the second spell cast
+this turn" — a spell on the stack, or a permanent that entered as it resolved, numbered by the journal's `spell-cast` entries this turn
+(every player's: Second Guess's target; `byCaster`, only its caster's: Codespell Cleric's "if it was the second spell you cast this turn",
+`{ kind: "source", filter: { castBy: "you", castNthThisTurn: { n: 2, byCaster: true } } }`). `cast` / `castBy: "you"` / `castFrom` / `enteredFrom` /
 `played` / `putThereBySource` read how a permanent came onto the battlefield,
 this stint (`GameObject.entry`): played as a land (rule 305.1 — Deep Gnome
 Terramancer's "lands enter … without being played" is `played: false`), as a spell that was cast and resolved ("if you cast it"
