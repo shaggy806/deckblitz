@@ -6,6 +6,7 @@
     "cost:sacrifice-self-and-any-number",
     "cost:alternative-cost-exile-top-of-graveyard",
     "effect:player-max-hand-size-adjust-for-game",
+    "effect:delayed-trigger-remembers-that-player",
     "cost:spend-only-color-on-x",
     "cost:buyback-cost-reduction",
     "cost:spend-only-face-down-spells-and-morph",

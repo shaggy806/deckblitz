@@ -9198,3 +9198,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Dash costs you pay cost less (2026-11-27).** `static:dash-cost-reduction`: no engine code — Catalyst Stone's `costModification` `when.via` with `"dash"`. Warbringer. `test/dash-cost-reduction.test.ts`; the flashback template scaffolds it.
 **A maximum hand size changed for a while (2026-11-27).** `effect:player-max-hand-size-adjust-for-game`: `player-effect`'s `maxHandSizeAdjust` (`PlayerEffect.maxHandSizeAdjust`, applied at its timestamp in `Game.maxHandSizeOf`, rule 613.11; a literal kept negative). Inspired Idea. Scaffolder: the static "Your / Each opponent's maximum hand size is reduced by N." `test/max-hand-size-adjust.test.ts`.
+
+**A delayed ability acting for the trigger's "that player" (2026-11-27).** `effect:delayed-trigger-remembers-that-player`: no engine code — a delayed trigger already keeps its creator's refs, so `draw`'s `who: "trigger-player"` inside it is the caster (`each-player-may` with `who: "trigger-player"` and a mana option asks them). Horn of Plenty. `test/delayed-trigger-that-player.test.ts`.
