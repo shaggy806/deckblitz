@@ -8092,6 +8092,7 @@ import _poolDwarvenBerserker from "./pool/dwarven-berserker.js";
 import _poolDwarvenBlastminer from "./pool/dwarven-blastminer.js";
 import _poolDwarvenBloodboiler from "./pool/dwarven-bloodboiler.js";
 import _poolDwarvenCastleGuard from "./pool/dwarven-castle-guard.js";
+import _poolDwarvenCatapult from "./pool/dwarven-catapult.js";
 import _poolDwarvenConfluencer from "./pool/dwarven-confluencer.js";
 import _poolDwarvenDemolitionTeam from "./pool/dwarven-demolition-team.js";
 import _poolDwarvenDriller from "./pool/dwarven-driller.js";
@@ -42476,6 +42477,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDwarvenBlastminer,
   _poolDwarvenBloodboiler,
   _poolDwarvenCastleGuard,
+  _poolDwarvenCatapult,
   _poolDwarvenConfluencer,
   _poolDwarvenDemolitionTeam,
   _poolDwarvenDriller,
@@ -76873,6 +76875,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dwarven-blastminer": _poolDwarvenBlastminer,
   "pool/dwarven-bloodboiler": _poolDwarvenBloodboiler,
   "pool/dwarven-castle-guard": _poolDwarvenCastleGuard,
+  "pool/dwarven-catapult": _poolDwarvenCatapult,
   "pool/dwarven-confluencer": _poolDwarvenConfluencer,
   "pool/dwarven-demolition-team": _poolDwarvenDemolitionTeam,
   "pool/dwarven-driller": _poolDwarvenDriller,

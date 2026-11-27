@@ -262,6 +262,7 @@ import _poolDuelistOfDeepFaith from "../pool/duelist-of-deep-faith.js";
 import _poolDuelistsFlame from "../pool/duelists-flame.js";
 import _poolDunedainRangers from "../pool/dunedain-rangers.js";
 import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
+import _poolDwarvenCatapult from "../pool/dwarven-catapult.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
 import _poolEarthTremor from "../pool/earth-tremor.js";
 import _poolEarthshakingSi from "../pool/earthshaking-si.js";
@@ -1323,6 +1324,7 @@ const shard: CardShard = {
     _poolDuelistsFlame,
     _poolDunedainRangers,
     _poolDuskLegionDuelist,
+    _poolDwarvenCatapult,
     _poolEagleOfTheWatch,
     _poolEarthTremor,
     _poolEarthshakingSi,

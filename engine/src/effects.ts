@@ -3678,6 +3678,11 @@ export type EffectSpec =
       readonly kind: "damage-divided-evenly";
       readonly amount: EffectAmount;
       readonly from: number;
+      /** "… among all creatures **target opponent** controls" (Dwarven
+       * Catapult): not the targets from slot `from`, but every permanent this
+       * takes that the player in slot `from` controls, counted as it resolves
+       * (its ruling) — more of them than damage, and none is dealt any. */
+      readonly among?: CardFilter;
     }
   | {
       readonly kind: "damage";
@@ -22263,7 +22268,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (asksReplacementOrder(spec, ctx)) return;
       // A member found illegal as it resolved isn't there (rule 608.2b), and
       // doesn't count toward the division.
-      const members = ctx.targets.slice(spec.from).filter((t): t is TargetRef => t !== undefined);
+      let members: TargetRef[];
+      if (spec.among !== undefined) {
+        const whose = scopedController(spec.from, ctx);
+        if (whose === undefined) return;
+        members = ctx
+          .eachPermanentMatching(spec.among, false, [], undefined)
+          .filter(({ object }) => ctx.controllerOf({ kind: "object", object }) === whose)
+          .map(({ object }): TargetRef => ({ kind: "object", object }));
+      } else {
+        members = ctx.targets.slice(spec.from).filter((t): t is TargetRef => t !== undefined);
+      }
       if (members.length === 0) return;
       ctx.dealDamageToEach(members, Math.floor(amountValue(spec.amount, ctx) / members.length));
       return;

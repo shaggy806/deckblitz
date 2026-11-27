@@ -160,6 +160,21 @@ describe("batch 343 (lead)", () => {
     expect(blockLimitOf(game.state, game.registry, legion)).toBe(3);
   });
 
+  it("Dwarven Catapult divides X evenly, rounded down, among the target opponent's creatures, and none if they outnumber X", () => {
+    const { game } = table();
+    const theirs = [spawn(game, "Grizzly Bears", B), spawn(game, "Grizzly Bears", B), spawn(game, "Hill Giant", B)];
+    const mine = spawn(game, "Grizzly Bears", A);
+    lands(game, "Mountain", 6);
+    cast(game, toHand(game, "Dwarven Catapult"), { targets: [ref(B)], x: 5 });
+    for (const id of theirs) expect(game.state.objects[id].damageMarked).toBe(1);
+    expect(game.state.objects[mine].damageMarked).toBe(0);
+    nextTurn(game);
+    nextTurn(game);
+    lands(game, "Mountain", 3);
+    cast(game, toHand(game, "Dwarven Catapult"), { targets: [ref(B)], x: 2 });
+    for (const id of theirs) expect(game.state.objects[id].damageMarked).toBe(0);
+  });
+
   it("Giant Turtle can't attack the turn after it attacked, then can again", () => {
     const { game, a } = table();
     const turtle = spawn(game, "Giant Turtle");
