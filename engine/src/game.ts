@@ -1532,7 +1532,8 @@ const thenPerSource = (spec: EffectSpec): boolean =>
 
 /** A shield neither counted nor once-only: all of the damage it covers, for
  * as long as it lasts (Gideon Jura's "prevent all damage … this turn"). */
-const shieldTakesAll = (shield: ActiveReplacement): boolean => shield.next !== true && shield.left === undefined;
+const shieldTakesAll = (shield: ActiveReplacement): boolean =>
+  shield.next !== true && shield.left === undefined && shield.eachRecipient === undefined;
 
 /** The replacement record a prevention effect keeps. */
 const preventionRecord = (combat?: boolean): DamageMultiplierReplacement => ({
@@ -50640,7 +50641,11 @@ controlledBy,
                 },
               }
             : {}),
-          ...(typeof rule.amount === "number" ? { left: rule.amount } : {}),
+          ...(typeof rule.amount === "number"
+            ? rule.eachRecipient === true
+              ? { eachRecipient: { amount: rule.amount, minted: [] } }
+              : { left: rule.amount }
+            : {}),
           madeIn: since,
           ...(rule.amount === "next-time" ? { next: true as const } : {}),
           ...(from !== undefined
@@ -50674,7 +50679,7 @@ controlledBy,
         this.emit({
           type: "prevention-shield-created",
           ...(target !== undefined ? { target } : {}),
-          amount: shield.left ?? 0,
+          amount: shield.left ?? shield.eachRecipient?.amount ?? 0,
           ...(shieldTakesAll(shield) ? { all: true as const } : {}),
           ...(shield.next === true ? { nextTime: true as const } : {}),
         });
@@ -70019,6 +70024,50 @@ controlledBy,
     return object === stint.object && (this.state.objects[object]?.zoneChangeCount ?? 0) === stint.zoneChangeCount;
   }
 
+  /**
+   * "Prevent the next 1 damage that would be dealt to each creature and each
+   * player this turn" (Kitsune Palliator — `ActiveReplacement.eachRecipient`):
+   * the first time damage would be dealt to `target`, each such template
+   * covering it as a recipient (as it is now — rule 611.2c) gives it a shield
+   * of its own: the template's, for that one recipient in its stint, with the
+   * template's amount (rule 615.7). Called wherever damage to `target` is
+   * about to be read against shields (`damageSteps`, `shieldSharesAsked`).
+   * Usually there is no template: one scan.
+   */
+  private mintEachRecipientShields(target: TargetRef): void {
+    const list = this.state.activeReplacements;
+    if (!list.some((r) => r.eachRecipient !== undefined)) return;
+    const key =
+      target.kind === "player"
+        ? `player:${target.player}`
+        : `${target.object}@${this.state.objects[target.object]?.zoneChangeCount ?? 0}`;
+    let minted = false;
+    const next: ActiveReplacement[] = [];
+    for (const r of list) {
+      next.push(r);
+      const each = r.eachRecipient;
+      if (each === undefined || each.minted.includes(key)) continue;
+      const { eachRecipient: _, ...rule } = r;
+      // Its recipients alone: what damage, from what and when is asked of
+      // the shield itself as the damage would be dealt.
+      const { from: __, byFilter: ___, ...recipientsOnly } = rule;
+      const probe: ActiveReplacement = { ...recipientsOnly, replacement: preventionRecord() };
+      if (!this.shieldCovers(probe, target, false, r.source)) continue;
+      next[next.length - 1] = { ...r, eachRecipient: { ...each, minted: [...each.minted, key] } };
+      const { recipients: ____, target: _____, zoneChangeCount: ______, ...shield } = rule;
+      next.push({
+        ...shield,
+        target,
+        ...(target.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {}),
+        left: each.amount,
+      });
+      minted = true;
+    }
+    if (!minted) return;
+    this.state.activeReplacements = next;
+    invalidateComputedCache();
+  }
+
   /** Whether prevention shield `shield` covers a hit on `target` (combat or not). */
   private shieldCovers(
     shield: ActiveReplacement,
@@ -70027,6 +70076,9 @@ controlledBy,
     source: ObjectId,
     sourceLastKnown?: LastKnownInfo,
   ): boolean {
+    // A per-recipient template prevents nothing itself: its recipients'
+    // own shields do (`mintEachRecipientShields`).
+    if (shield.eachRecipient !== undefined) return false;
     const replaced = shield.replacement;
     if (replaced.event === "would-deal-damage" && replaced.combat !== undefined && replaced.combat !== combat) return false;
     // "For as long as this Saga remains on the battlefield".
@@ -70138,6 +70190,7 @@ controlledBy,
      * (rule 614.5) — a redirected event's. */
     applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): DamageStep[] {
+    this.mintEachRecipientShields(target);
     const applying: {
       readonly by: DamageReplacer;
       readonly r: DamageMultiplierReplacement;
@@ -70730,6 +70783,7 @@ controlledBy,
    * whether it asked.
    */
   private shieldSharesAsked(hits: readonly DamageHit[], resume: ReplacementOrderResume): boolean {
+    for (const h of hits) this.mintEachRecipientShields(h.target);
     if (hits.length < 2) return false;
     const groups = [...new Set(hits.map((h) => h.group))];
     for (const shield of this.state.activeReplacements) {

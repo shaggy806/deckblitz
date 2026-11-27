@@ -5,6 +5,7 @@
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",
+    "effect:prevent-next-damage-each-creature",
     "effect:prevent-damage-gain-life-as-prevented",
     "effect:duration-while-power-comparison",
     "static:cda-counters-on-self",

@@ -6517,6 +6517,15 @@ export interface ActiveReplacement {
   readonly next?: true;
   /** The next N damage still to absorb (615.7); gone at 0. */
   left?: number;
+  /** "Prevent the next 1 damage that would be dealt to **each** creature and
+   * each player this turn" (Kitsune Palliator): a template that prevents
+   * nothing itself. The first time damage would be dealt to a recipient it
+   * covers, a shield of `amount` for that recipient alone is made from it
+   * (`Game.mintEachRecipientShields`) and its key noted in `minted` — a
+   * player, or an object in its stint (rule 400.7). It isn't locked to the
+   * recipients there were as it resolved: a prevention effect modifies the
+   * rules, not characteristics (rule 611.2c). */
+  readonly eachRecipient?: { readonly amount: number; readonly minted: readonly string[] };
   /** A static's per-source shield for one combat damage step (Cover of
    * Winter — `DamagePrevention.perSourceTo`): made as the step's damage is
    * about to be dealt, removed once it has been. */

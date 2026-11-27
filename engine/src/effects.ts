@@ -2368,6 +2368,13 @@ export interface DamageRuleSpec {
   readonly then?: EffectSpec;
   /** "You gain life equal to the damage prevented this way". */
   readonly gainLifePrevented?: true;
+  /** With a number `amount`: that much for **each** recipient, not in all —
+   * Kitsune Palliator's "prevent the next 1 damage that would be dealt to
+   * each creature and each player this turn" (`to: { players: "each",
+   * permanents: { type: "creature" } }`). Each recipient's shield is made the
+   * first time damage would be dealt to it, so one arriving later is covered
+   * too (rule 611.2c — `ActiveReplacement.eachRecipient`). */
+  readonly eachRecipient?: true;
 }
 
 /** A `damage-rule` with its references resolved, as `EffectApi.addDamageRule`
@@ -2387,6 +2394,7 @@ export interface ResolvedDamageRule {
   readonly redirectToSource?: "itself" | "controller";
   readonly then?: EffectSpec;
   readonly gainLifePrevented?: true;
+  readonly eachRecipient?: true;
 }
 
 export type ThisWayKind =
@@ -26360,6 +26368,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ...(redirectToSource !== undefined ? { redirectToSource } : {}),
         ...(spec.then !== undefined ? { then: spec.then } : {}),
         ...(spec.gainLifePrevented === true ? { gainLifePrevented: true as const } : {}),
+        ...(spec.eachRecipient === true && typeof amount === "number" ? { eachRecipient: true as const } : {}),
       });
       return;
     }

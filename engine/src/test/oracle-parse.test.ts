@@ -26991,6 +26991,45 @@ describe("a shield that gains the life it prevents (Candles' Glow)", () => {
   });
 });
 
+describe("a shield for each recipient (Kitsune Palliator, Samite Censer-Bearer)", () => {
+  it("damage-rule with eachRecipient", () => {
+    const fox = parseFace(
+      {
+        name: "Kitsune Palliator",
+        type_line: "Creature — Fox Cleric",
+        mana_cost: "{2}{W}",
+        power: "0",
+        toughness: "2",
+        oracle_text: "{T}: Prevent the next 1 damage that would be dealt to each creature and each player this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(fox.activated[0].effect).toEqual({
+      kind: "damage-rule",
+      to: { players: "each", permanents: { type: "creature" } },
+      amount: 1,
+      eachRecipient: true,
+    });
+    const monk = parseFace(
+      {
+        name: "Samite Censer-Bearer",
+        type_line: "Creature — Human Rebel Cleric",
+        mana_cost: "{W}",
+        power: "1",
+        toughness: "1",
+        oracle_text: "{W}, Sacrifice this creature: Prevent the next 1 damage that would be dealt to each creature you control this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(monk.activated[0].effect).toEqual({
+      kind: "damage-rule",
+      to: { permanents: { type: "creature", controlledBy: "you" } },
+      amount: 1,
+      eachRecipient: true,
+    });
+  });
+});
+
 describe("its own counters as a CDA (Rusting Golem, Mwonvuli Ooze)", () => {
   it("the number of counters of a kind on it, and 1 plus twice that", () => {
     const golem = parseFace(

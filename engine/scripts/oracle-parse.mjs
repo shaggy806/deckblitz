@@ -8753,6 +8753,16 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`prevent the next ${N} (combat )?damage that would be dealt to you this turn`).exec(s))) {
     return { kind: "damage-rule", to: { players: "you" }, amount: amount(m[1]), ...(m[2] !== undefined ? { combat: true } : {}) };
   }
+  // A shield for each recipient (`eachRecipient`, rules 615.7, 611.2c):
+  // Kitsune Palliator's "… to each creature and each player this turn",
+  // Samite Censer-Bearer's "… to each creature you control this turn".
+  if ((m = re(`prevent the next ${N} damage that would be dealt to each (creature and each player|creature you control) this turn`).exec(s))) {
+    const to =
+      m[2] === "creature you control"
+        ? { permanents: { type: "creature", controlledBy: "you" } }
+        : { players: "each", permanents: { type: "creature" } };
+    return { kind: "damage-rule", to, amount: amount(m[1]), eachRecipient: true };
+  }
   if ((m = re(`prevent the next ${N} damage that would be dealt (?:this turn to (${TARGET})|to (${TARGET}) this turn)`).exec(s))) {
     return { kind: "prevent-damage", target: slot(m[2] ?? m[3]), amount: amount(m[1]) };
   }
