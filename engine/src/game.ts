@@ -47638,6 +47638,22 @@ controlledBy,
           if (cards.length > 0) this.revealCards(controller, cards, "library");
           return cards.map((id) => facts(id, false));
         }
+        if ("thisWay" in of) {
+          // Each as it was done this way (608.2h), counted for its entry's
+          // player; each token of a stack that went whole is its own.
+          return thisWayDone(of.thisWay, undefined, of.filter).flatMap((entry) => {
+            const it = this.state.objects[entry.object];
+            const known = it?.lastKnown ?? this.state.ceasedTokens?.[entry.object];
+            const one = {
+              object: entry.object,
+              name: it?.cardName ?? "a token",
+              controller: entry.player,
+              owner: it?.owner ?? known?.controller ?? entry.player,
+              permanent: false,
+            };
+            return Array.from({ length: entry.count }, () => one);
+          });
+        }
         if ("drawn" in of) {
           return thisWayEntries(this.state, "drawn", since)
             .filter((e) => this.state.zones.perPlayer[e.player]?.hand.includes(e.object) === true)

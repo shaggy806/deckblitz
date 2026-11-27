@@ -11945,6 +11945,15 @@ export type EffectSpec =
          * it unless they pay 3 life" (Breathstealer's Crypt, `asks: "owner"`).
          * The filter's "you" is the effect's controller. */
         | { readonly drawn: CardFilter }
+        /** What this resolution did `thisWay`, matching `filter` as each was
+         * as it was done (a permanent that left, as it last existed there —
+         * rule 608.2h), each counted for the player its entry names (a
+         * permanent's controller as it left): "destroy all Plains. **For
+         * each land destroyed this way**, ~ deals 1 damage to that land's
+         * controller unless they pay {2}" (Stench of Evil, `asks:
+         * "controller"`). A token stack that went whole is a question per
+         * token, each an object of its own. */
+        | { readonly thisWay: ThisWayKind; readonly filter?: CardFilter }
         | { readonly libraryTop: number }
         /** The spells and/or abilities on the stack, `whose` controls them —
          * Whirlwind Denial's "for each spell and ability your opponents
@@ -18722,6 +18731,12 @@ function exileFromZonesPrompt(zones: readonly ("battlefield" | "hand" | "graveya
 
 /** See the `for-each-unless` {@link EffectSpec}. Each question and the rest of
  * the effect after it are a `sequence`, so an answer carries on from here. */
+/** `list` without its first entry equal to `entry`. */
+function withoutFirst<T>(list: readonly T[], entry: T): T[] {
+  const at = list.indexOf(entry);
+  return at < 0 ? [...list] : [...list.slice(0, at), ...list.slice(at + 1)];
+}
+
 function applyForEachUnless(spec: Extract<EffectSpec, { kind: "for-each-unless" }>, ctx: ResolutionContext): void {
   const asks = spec.asks;
   const progress =
@@ -18779,7 +18794,9 @@ function applyForEachUnless(spec: Extract<EffectSpec, { kind: "for-each-unless" 
           ...(entry.permanent === true ? { aboutObject: entry.object } : {}),
         },
       },
-      { ...spec, progress: { ...progress, left: progress.left.filter((other) => other.object !== entry.object) } },
+      // The one answered leaves: only it, as a token stack's tokens share an
+      // object (a `thisWay` set's).
+      { ...spec, progress: { ...progress, left: withoutFirst(progress.left, entry) } },
     ],
   });
   if (spec.inOrderYouChoose === true && progress.left.length > 1) {
