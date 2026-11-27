@@ -869,6 +869,16 @@ export interface CardFilter {
    */
   readonly sharesColorWithLastSpellCast?: true;
   /**
+   * Has the same mana value (rule 202.3) as one of the objects a reference
+   * names — Thought Prison's "a spell that shares a color **or mana value**
+   * with the exiled card" is `anyOf: [{ sharesColorWith: "exiled-with-source"
+   * }, { sharesManaValueWith: "exiled-with-source" }]`. Read live, as
+   * `sharesColorWith` is (a card in exile has its printed mana value, rule
+   * 202.3e's {X} as 0). With no reference objects nothing shares one, unlike
+   * a `manaValue` compare against an amount, which reads none as 0.
+   */
+  readonly sharesManaValueWith?: ShareReference;
+  /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each
    * opponent sacrifices a creature with the greatest power among creatures
@@ -3335,6 +3345,16 @@ export function matchesFilter(
   }
   if (filter.manaValue !== undefined) {
     if (!compareNum(manaValueNow(), filter.manaValue, ctx.x, dynamic)) return false;
+  }
+  if (filter.sharesManaValueWith !== undefined) {
+    const others = liveReferenceObjects(state, registry, filter.sharesManaValueWith, ctx, live?.controller ?? lki?.controller);
+    if (others === undefined || layered !== undefined) return false;
+    const own = manaValueNow();
+    const shared = others.some((other) => {
+      const object = state.objects[other];
+      return object !== undefined && manaValueOfObject(registry, object) === own;
+    });
+    if (!shared) return false;
   }
   if (typeof filter.colorCount === "object") {
     const colorCount = live !== undefined ? effectiveColors(state, registry, live).size : lki!.colors.length;

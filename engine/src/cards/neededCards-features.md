@@ -9092,3 +9092,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **An ability that targets only this permanent (2026-11-26).** `trigger:activates-ability-targets-only-source`: no engine code — `activates-ability`'s `targets: { only: true, source: true }` beside a `cast-spell` of the same clause, joined by `sameAbilityAs` so one `oncePerTurn` covers both. Bill Potts. `test/targets-only-source-copy.test.ts`.
 
 **A delayed watch for as long as its source remains tapped (2026-11-26).** `effect:delayed-trigger-while-source-tapped`: `DelayedWhenever.until: "while-source-tapped"` (`WatchExpiry`; `Game.delayedSourceStillTapped`, dropped as the source untaps or phases out by `endSourceTappedWatches`). Giant Oyster. `test/delayed-while-source-tapped.test.ts`.
+
+**Sharing a mana value with an object (2026-11-26).** `trigger:cast-shares-color-or-mana-value-with-imprinted`: `CardFilter.sharesManaValueWith` (a `ShareReference`; no reference objects, no match), in an `anyOf` beside `sharesColorWith: "exiled-with-source"`. Thought Prison. `test/shares-mana-value-with.test.ts`.

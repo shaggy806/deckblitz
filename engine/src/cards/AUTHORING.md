@@ -4044,6 +4044,12 @@ recently cast this turn**, anyone's (the latest `seq` among every player's
 after: Mana Maze's "players can't cast spells that share a color with the spell
 most recently cast this turn" is a static `prohibits: [{ act: "cast", who:
 "each-player", filter: { sharesColorWithLastSpellCast: true } }]`.
+`sharesManaValueWith` (a `ShareReference`, as `sharesColorWith`) is the same
+mana value as one of the reference's objects, none matching when it names
+none: Thought Prison's "a spell that shares a color or mana value with the
+exiled card" is `anyOf: [{ sharesColorWith: "exiled-with-source" }, {
+sharesManaValueWith: "exiled-with-source" }]` — not a `manaValue` compare to `{
+manaValueOf }`, which reads no card as 0 (`shares-mana-value-with.test.ts`).
 `goaded` is goaded by anyone, however (a one-shot
 goad, one for the rest of the game, a static one), `suspected` rule
 701.60's designation, `sector` rule 702.158b's (a sector, or `"any"`: Space Beleren's
