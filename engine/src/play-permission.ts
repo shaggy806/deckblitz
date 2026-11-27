@@ -307,11 +307,20 @@ export interface StaticPlay extends PlayTerms {
  * - `linked`: "from among cards exiled with this artifact" (Idol of Endurance,
  *   rule 607.2a): that stint's, for as long as this lasts, even once the source
  *   has left (113.7a).
+ * - `asThoughYours`: with `from: "graveyard"` and another player's `whose`,
+ *   "… from other players' graveyards **as though those cards were in your
+ *   graveyard**" (Shaman's Trance): the holder may also cast those cards by
+ *   their own "from your graveyard" keywords — flashback, escape, retrace,
+ *   harmonize, aftermath, disturb, a graveyard warp or blitz (its ruling: "You
+ *   can use Flashback on cards to cast them") — read through
+ *   `Game.castableAsOwnGraveyard`. Not their activated abilities (its other
+ *   ruling).
  */
 export interface EffectPlaySpec extends PlayTerms {
   readonly from: PlayFrom;
   readonly whose?: PlayerScope;
   readonly linked?: true;
+  readonly asThoughYours?: true;
 }
 
 /** An {@link EffectPlaySpec} once it has resolved. `left` counts `upTo` down;

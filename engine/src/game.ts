@@ -3527,6 +3527,34 @@ export class Game {
     return this.state.zones.perPlayer[player].graveyard;
   }
 
+  /**
+   * The graveyard cards `player` may cast by a keyword of the card's that
+   * reads "from your graveyard" (flashback, escape, retrace, harmonize,
+   * aftermath, disturb, a graveyard warp or blitz): their own graveyard's,
+   * and — while a resolved permission lets them play from other players'
+   * graveyards "as though those cards were in your graveyard" (Shaman's
+   * Trance, `EffectPlaySpec.asThoughYours`) — those players' cards too.
+   * A cost paid from "your graveyard" (escape's exile) is still their own.
+   */
+  private castableAsOwnGraveyard(player: PlayerId): readonly ObjectId[] {
+    const own = this.state.zones.perPlayer[player].graveyard;
+    const others = new Set<PlayerId>();
+    for (const effect of this.state.playerEffects ?? []) {
+      if (effect.owner !== player || effect.mayPlay?.from !== "graveyard" || effect.mayPlay.asThoughYours !== true) continue;
+      for (const other of effect.mayPlay.owners ?? []) if (other !== player) others.add(other);
+    }
+    if (others.size === 0) return own;
+    return [
+      ...own,
+      ...this.state.turnOrder.flatMap((other) => (others.has(other) ? this.state.zones.perPlayer[other].graveyard : [])),
+    ];
+  }
+
+  /** Whether `cardId` is among {@link castableAsOwnGraveyard}'s cards. */
+  private inCastableAsOwnGraveyard(player: PlayerId, cardId: ObjectId): boolean {
+    return this.castableAsOwnGraveyard(player).includes(cardId);
+  }
+
   get stack(): readonly ObjectId[] {
     return this.state.zones.shared.stack;
   }
@@ -4683,8 +4711,11 @@ export class Game {
     // with a printed *or granted* (Snapcaster Mage) flashback cost may be cast
     // from there. Once per flashback it has, when it has several (Past in
     // Flames' ruling: the player chooses which cost to pay), each named by
-    // `graveyardGrant`.
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    // `graveyardGrant`. Another player's card too, as though in this
+    // player's graveyard (Shaman's Trance): `castableAsOwnGraveyard`, here
+    // and for each "from your graveyard" keyword below.
+    const asOwnGraveyard = this.castableAsOwnGraveyard(player);
+    for (const card of asOwnGraveyard) {
       const cardName = this.state.objects[card].cardName;
       const whole = this.registry.get(cardName);
       // A split card is cast as either half, each for its own cost (709.3).
@@ -4706,7 +4737,7 @@ export class Game {
 
     // Harmonize (rule 702.180a) — a card in this player's graveyard with a
     // harmonize cost may be cast from there for it.
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    for (const card of asOwnGraveyard) {
       const cardName = this.state.objects[card].cardName;
       const def = this.registry.get(cardName);
       const harmonizes = this.castKeywordCosts(card, "harmonize", def.harmonize?.cost ?? null);
@@ -4723,7 +4754,7 @@ export class Game {
 
     // Retrace (rule 702.81a) — a card with retrace in this player's
     // graveyard, for its mana cost and a land card discarded from hand.
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    for (const card of asOwnGraveyard) {
       const cardName = this.state.objects[card].cardName;
       const def = this.registry.get(cardName);
       if (!this.hasRetrace(card)) continue;
@@ -4732,7 +4763,7 @@ export class Game {
 
     // Aftermath (rule 702.127a) — a split card's aftermath half may be cast
     // from its owner's graveyard, for its mana cost.
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    for (const card of asOwnGraveyard) {
       const ownDef = this.registry.get(this.state.objects[card].cardName);
       if (!ownDef.split) continue;
       for (const face of castableFaces(ownDef)) {
@@ -4751,7 +4782,7 @@ export class Game {
     // Disturb (rule 702.150) — a transforming DFC in this player's graveyard
     // whose front face has disturb may be cast as its back face (face 1) from
     // there; the spell is then exiled (like flashback).
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    for (const card of asOwnGraveyard) {
       const front = this.frontFaceDef(card);
       if (front.disturb === null) continue;
       const backDef = this.faceDef(card, 1);
@@ -4768,7 +4799,7 @@ export class Game {
     // (Timeline Culler): its warp cost, from its owner's graveyard too.
     // And "… using its blitz ability" (Sabin, Master Monk, Tenacious
     // Underdog): its blitz cost, from its owner's graveyard too.
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    for (const card of asOwnGraveyard) {
       const def = this.registry.get(this.state.objects[card].cardName);
       if (def.warp?.fromGraveyard === true) {
         out.push(...this.castSpellActions(player, card, def.name, def, { via: "warp", costString: def.warp.cost }));
@@ -5023,7 +5054,7 @@ export class Game {
     // (Underworld Breach's ruling: the player chooses which applies), each
     // named by `graveyardGrant`; and once per face of a modal card, since an
     // escaped adventurer may be cast as its Adventure.
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    for (const card of asOwnGraveyard) {
       for (const face of this.modalFaces(card)) {
         const def = this.faceDef(card, face ?? 0);
         if (def.types.includes("land")) continue;
@@ -5044,8 +5075,9 @@ export class Game {
     // A static permission to play lands from your graveyard (Ramunap
     // Excavator — rule 118.9). Still consumes the land drop / sorcery timing.
     // It reaches a modal double-faced card's land face, whatever its front
-    // (Ancient Greenwarden's ruling).
-    for (const card of this.state.zones.perPlayer[player].graveyard) {
+    // (Ancient Greenwarden's ruling). Another player's graveyard where a
+    // permission reaches it, as for spells above (Shaman's Trance).
+    for (const card of graveyardCards) {
       for (const face of this.modalFaces(card)) {
         const def = this.faceDef(card, face ?? 0);
         if (!def.types.includes("land")) continue;
@@ -23270,7 +23302,7 @@ export class Game {
     if (via === "retrace") {
       // Rule 702.81a — from the caster's graveyard, discarding a land card.
       if (!this.hasRetrace(cardId)) return `${def.name} does not have retrace`;
-      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+      if (!this.inCastableAsOwnGraveyard(player, cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
       if (this.discardCandidates(player, Game.RETRACE_DISCARD).length === 0) {
@@ -23280,7 +23312,7 @@ export class Game {
       if (this.castKeywordCostOf(cardId, "harmonize", def.harmonize?.cost ?? null, graveyardGrant) === null) {
         return `${def.name} does not have harmonize`;
       }
-      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+      if (!this.inCastableAsOwnGraveyard(player, cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
       if ((tap?.length ?? 0) > 1) return "harmonize taps up to one creature";
@@ -23304,7 +23336,7 @@ export class Game {
           ? `${def.name} does not have flashback`
           : `${def.name} does not have that flashback`;
       }
-      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+      if (!this.inCastableAsOwnGraveyard(player, cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
       // "Flashback—{1}{U}, Pay 3 life" (Deep Analysis) — part of the cost, so
@@ -23336,7 +23368,7 @@ export class Game {
           ? `${def.name} does not have escape`
           : `${def.name} does not have that escape`;
       }
-      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+      if (!this.inCastableAsOwnGraveyard(player, cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
       const others = this.state.zones.perPlayer[player].graveyard.filter((id) => id !== cardId);
@@ -23393,7 +23425,7 @@ export class Game {
       // Rule 702.150 — cast the back face (face 1) from the graveyard.
       if (this.frontFaceDef(cardId).disturb === null) return `${def.name} does not have disturb`;
       if (face !== 1) return `disturb casts ${def.name}'s back face`;
-      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+      if (!this.inCastableAsOwnGraveyard(player, cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
     } else if (via === "mayhem") {
@@ -23538,7 +23570,7 @@ export class Game {
     } else if (via === "aftermath") {
       // Rule 702.127a — the aftermath half, from the caster's own graveyard.
       if (!def.aftermath) return `${def.name} does not have aftermath`;
-      if (!this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+      if (!this.inCastableAsOwnGraveyard(player, cardId)) {
         return `${def.name} is not in ${player}'s graveyard`;
       }
     } else if (via === "blitz") {
@@ -23546,7 +23578,7 @@ export class Game {
       // the command zone: an alternative cost, so no other one goes with it
       // (118.9a). From its owner's graveyard too, where the card says so
       // (Sabin, Master Monk).
-      const inGraveyard = this.state.zones.perPlayer[player].graveyard.includes(cardId);
+      const inGraveyard = this.inCastableAsOwnGraveyard(player, cardId);
       if (
         !this.state.zones.perPlayer[player].hand.includes(cardId) &&
         !this.isCastableCommander(player, cardId) &&
@@ -23603,7 +23635,7 @@ export class Game {
       // Rule 702.185a — from the hand, for its warp cost: an alternative cost,
       // so no other one goes with it (118.9a). From its owner's graveyard
       // too, where the card says so (Timeline Culler).
-      const inGraveyard = this.state.zones.perPlayer[player].graveyard.includes(cardId);
+      const inGraveyard = this.inCastableAsOwnGraveyard(player, cardId);
       if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !(inGraveyard && def.warp?.fromGraveyard === true)) {
         return inGraveyard
           ? `${def.name} can't be cast from a graveyard for its warp cost`
@@ -26094,9 +26126,9 @@ export class Game {
     // Its own warp, for the life in its cost and whether this is its
     // graveyard cast (Timeline Culler).
     const ownWarp = via === "warp" ? def.warp : null;
-    const warpedFromGraveyard = ownWarp !== null && this.state.zones.perPlayer[player].graveyard.includes(cardId);
+    const warpedFromGraveyard = ownWarp !== null && this.inCastableAsOwnGraveyard(player, cardId);
     // Its own blitz from its graveyard (Sabin, Master Monk), the same.
-    const blitzedFromGraveyard = via === "blitz" && this.state.zones.perPlayer[player].graveyard.includes(cardId);
+    const blitzedFromGraveyard = via === "blitz" && this.inCastableAsOwnGraveyard(player, cardId);
     // Prowl, printed or granted (Hunting Velociraptor), for "if its prowl
     // cost was paid".
     // Read now: a grant "from your hand" no longer reaches it on the stack.
@@ -66902,7 +66934,7 @@ controlledBy,
     // "You may cast this card from your graveyard using its blitz ability"
     // (Sabin, Master Monk): its own blitz cost, from its owner's graveyard.
     const fromGraveyard =
-      def.blitz?.fromGraveyard === true && this.state.zones.perPlayer[player].graveyard.includes(cardId);
+      def.blitz?.fromGraveyard === true && this.inCastableAsOwnGraveyard(player, cardId);
     // Rule 702.152a — "you may cast this card by paying [cost]": from the
     // hand, or a commander from the command zone (its tax still added).
     if (!fromGraveyard && !this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
@@ -66941,7 +66973,7 @@ controlledBy,
   private warpCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
     // Its own, from its owner's graveyard: "You may cast this card from your
     // graveyard using its warp ability" (Timeline Culler).
-    if (def.warp?.fromGraveyard === true && this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+    if (def.warp?.fromGraveyard === true && this.inCastableAsOwnGraveyard(player, cardId)) {
       return def.warp.cost;
     }
     if (!this.state.zones.perPlayer[player].hand.includes(cardId)) return null;
