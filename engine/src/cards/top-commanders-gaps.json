@@ -3298,7 +3298,8 @@
   "static:has-all-names",
   "static:has-all-names",
   "effect:counter-on-granting-source",
-  "static:keywords-from-exiled-with-counter"
+  "static:keywords-from-exiled-with-counter",
+  "filter:same-name-as-cost-moved-card"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

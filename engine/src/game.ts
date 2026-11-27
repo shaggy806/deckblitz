@@ -14202,6 +14202,13 @@ export class Game {
         this.emit({ type: "permanent-entered-battlefield", object: id });
       }
     }));
+    // A cost's "put a card exiled with this into its owner's graveyard": the
+    // ability remembers the card (`{ paid: "put-from-exile" }`) — Jester's
+    // Scepter's "if it has the same name as that card".
+    if (awaiting.costPutFor !== undefined) {
+      const moved = chosen.filter((id) => this.state.objects[id]?.zone === "graveyard");
+      this.recordPaid(awaiting.costPutFor, "put-from-exile", moved);
+    }
     if (bottomedFromHand.length > 0) {
       // Whose hand they left: the chooser's own (Valakut Awakening), or the
       // player they chose for (Psychotic Episode's "that player puts the
@@ -26884,7 +26891,7 @@ export class Game {
     // (Processor Assault): which, chosen now too (601.2h).
     const putFromExile = def.additionalCost?.putFromExile;
     if (putFromExile !== undefined) {
-      this.withDecisionSource(cardId, () => this.payPutFromExileCost(player, cardId, putFromExile, priorityTo));
+      this.withDecisionSource(cardId, () => this.payPutFromExileCost(player, cardId, putFromExile, priorityTo, cardId));
     }
     if (beholdCost !== undefined) {
       const onStack = this.state.objects[cardId];
@@ -30855,7 +30862,7 @@ export class Game {
     // player's graveyard" likewise.
     const costPutFromExile = ability.cost.putFromExile;
     if (costPutFromExile !== undefined) {
-      this.withDecisionSource(sourceId, () => this.payPutFromExileCost(player, sourceId, costPutFromExile));
+      this.withDecisionSource(sourceId, () => this.payPutFromExileCost(player, sourceId, costPutFromExile, player, abilityId));
     }
     // "Reveal X white cards from your hand" likewise: which, chosen now
     // (rules 602.2b, 601.2h); they stay in the hand.
@@ -31791,8 +31798,12 @@ export class Game {
     /** Only these — the cards exiled with a source (rule 607.2a). */
     among?: readonly ObjectId[],
     /** The chooser was told to look at them (rule 406.3): a face-down one is
-     * told apart, so it's picked itself and not from a group at random. */
-    looked = false,
+     * told apart, so it's picked itself and not from a group at random.
+     * `"lookers"`: each face-down one the chooser may look at
+     * (`exiledFaceDown.lookers` — Jester's Scepter's "you may look at those
+     * cards for as long as they remain exiled") is told apart; the rest
+     * aren't. */
+    looked: boolean | "lookers" = false,
   ): { eligible: ObjectId[]; faceDownGroups: ObjectId[][] } {
     const eligible: ObjectId[] = [];
     const groups = new Map<string, ObjectId[]>();
@@ -31800,7 +31811,8 @@ export class Game {
       if (among !== undefined && !among.includes(id)) continue;
       const object = this.state.objects[id];
       if (object === undefined || object.isToken || (owner !== undefined && object.owner !== owner)) continue;
-      const faceDown = !looked && (object.exiledFaceDown !== undefined || object.foretold === true);
+      const seen = looked === true || (looked === "lookers" && object.exiledFaceDown?.lookers.includes(chooser) === true);
+      const faceDown = !seen && (object.exiledFaceDown !== undefined || object.foretold === true);
       if (faceDown && filter !== undefined && !ownerOnly(filter)) continue;
       if (!this.matchesZoneChoiceFilter(id, filter, chooser, source)) continue;
       eligible.push(id);
@@ -31854,7 +31866,15 @@ export class Game {
    * cards of different opponents allowed, and gets priority back once it's
    * paid (117.3c). No more such cards than that is no choice.
    */
-  private payPutFromExileCost(player: PlayerId, source: ObjectId, cost: PutFromExileCost, priorityTo: PlayerId = player): void {
+  private payPutFromExileCost(
+    player: PlayerId,
+    source: ObjectId,
+    cost: PutFromExileCost,
+    priorityTo: PlayerId = player,
+    /** The spell or ability on the stack this pays for, which remembers the
+     * cards (`{ paid: "put-from-exile" }`). */
+    forStackObject?: ObjectId,
+  ): void {
     const count = typeof cost === "number" ? cost : cost.count;
     if (count <= 0) return;
     const linked = typeof cost !== "number";
@@ -31863,6 +31883,10 @@ export class Game {
       this.withGraveyardEnterBatch(() => {
         for (const id of eligible) this.moveObject(id, "graveyard");
       });
+      if (forStackObject !== undefined) {
+        const moved = eligible.filter((id) => this.state.objects[id]?.zone === "graveyard");
+        this.recordPaid(forStackObject, "put-from-exile", moved);
+      }
       return;
     }
     this.state.awaiting = {
@@ -31882,6 +31906,7 @@ export class Game {
           ? "Choose a card an opponent owns in exile to put into its owner's graveyard"
           : `Choose ${count} cards your opponents own in exile to put into their owners' graveyards`,
       ...(faceDownGroups.length > 0 ? { faceDownGroups } : {}),
+      ...(forStackObject !== undefined ? { costPutFor: forStackObject } : {}),
       priorityTo,
     };
   }
@@ -31901,7 +31926,7 @@ export class Game {
       const card = this.state.objects[id];
       return card !== undefined && this.linkedToStint(card, source, stint);
     });
-    return this.exileChoiceCandidates(player, cost.filter, undefined, source, among);
+    return this.exileChoiceCandidates(player, cost.filter, undefined, source, among, "lookers");
   }
 
   /** How many cards a `putFromExile` cost can take (rule 118.3: no paying it

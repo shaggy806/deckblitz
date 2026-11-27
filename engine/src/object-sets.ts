@@ -61,7 +61,10 @@ export interface SetMember {
  * once it has left — Dragon's Fire's "the power of that card or creature").
  * `"returned"` is what a "return a permanent you control to its owner's hand"
  * cost took, read as it last existed on the battlefield (rule 608.2h —
- * Wonderscape Sage's "unless that land had a nonbasic land type"). */
+ * Wonderscape Sage's "unless that land had a nonbasic land type").
+ * `"put-from-exile"` is what a `putFromExile` cost put from exile into its
+ * owner's graveyard, in the graveyard stint it went to (Jester's Scepter's
+ * "if it has the same name as that card"). */
 export type PaidKind =
   | "sacrificed"
   | "discarded"
@@ -71,7 +74,8 @@ export type PaidKind =
   | "tapped"
   | "unattached"
   | "beheld"
-  | "returned";
+  | "returned"
+  | "put-from-exile";
 
 /**
  * A set of objects, by where it comes from:

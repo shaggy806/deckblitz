@@ -1566,7 +1566,11 @@ sacrificed creature's power") or sums them (Nahiri's Wrath's "the total mana val
 a "discard X cards" cost's, is `{ aggregate: "sum", of: "mana-value", filter: {}, in: { paid: "discarded" }
 }`), `create-token-copy`'s `of`. The sets: `{
 thisWay, who?, byOwner? }`; `{ paid: "sacrificed" | "discarded" | "exiled" |
-"revealed" | "tapped" | "unattached" | "beheld" | "returned" }`, what the cost took (`"beheld"`: what a
+"revealed" | "tapped" | "unattached" | "beheld" | "returned" | "put-from-exile" }`, what the cost took (`"put-from-exile"`:
+what a `putFromExile` cost put into its owner's graveyard — Jester's Scepter's "counter target spell if it has the
+same name as that card" is a `conditional` on `{ kind: "target", index: 0, filter: { sameNameWith: { paid:
+"put-from-exile" } } }`; a linked cost's face-down cards its controller may look at are picked themselves, not from a
+pile at random; `"beheld"`: what a
 behold cost revealed or chose, card or permanent — Dragon's Fire's "the power of that card or
 creature" is `{ powerOf: { paid: "beheld" } }`; `"returned"`: what an activated ability's
 `returnToHand` cost returned, as it last existed on the battlefield — Wonderscape Sage's
