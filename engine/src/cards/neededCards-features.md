@@ -325,6 +325,14 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### If it exploited that creature — built 2026-11-26
+
+The key `condition:exploited-that-creature`: the journal's `sacrificed` entry keeps the creature whose exploit ability
+it was sacrificed to (`source`, `sourceStint`, rule 702.110b), and the `journaled` filter clause's `bySource` keeps the
+entries the filtering ability's source did, in its stint. Silumgar Scavenger (23413): a `trigger-object` condition
+`{ journaled: { what: "sacrificed", bySource: true } }`. Not in the scaffolder (one card).
+`test/exploited-that-creature.test.ts`.
+
 ### Look at that player's hand and choose a discard — found built 2026-11-26
 
 The key `effect:discard-chosen-trigger-player` needed no engine code: `discard-chosen` already takes a `PlayerRef`

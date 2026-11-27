@@ -1462,6 +1462,11 @@ export interface CardFilter {
     readonly by?: "you";
     readonly counter?: string;
     readonly thisCombat?: true;
+    /** Only the entries the filtering ability's source did, in the stint it's
+     * in (or the filter's `sourceStint`) — the entry's `source`: "if it
+     * **exploited that creature**" (Silumgar Scavenger: `{ what:
+     * "sacrificed", bySource: true }`, rule 702.110b). */
+    readonly bySource?: true;
     readonly atLeast?: number;
     readonly atMost?: number;
   };
@@ -2158,12 +2163,18 @@ function journaledMatches(
   id: ObjectId,
   stint: number,
   clause: NonNullable<CardFilter["journaled"]>,
-  you: PlayerId,
+  ctx: FilterContext,
 ): boolean {
+  const you = ctx.you;
   const players = clause.by === "you" ? [you] : state.turnOrder;
+  const source = ctx.source;
+  const sourceStint =
+    clause.bySource !== true || source === undefined ? undefined : (ctx.sourceStint ?? state.objects[source]?.zoneChangeCount ?? 0);
+  if (clause.bySource === true && source === undefined) return false;
   let n = 0;
   for (const e of journalEntries(journalReader(state, registry), JOURNAL_VIEWS[clause.what], players, clause.window ?? "this-turn", you)) {
     if (e.object !== id || (e.arrived ?? e.stint) !== stint) continue;
+    if (sourceStint !== undefined && (e.source !== source || e.sourceStint !== sourceStint)) continue;
     if (clause.counter !== undefined && e.counter !== clause.counter) continue;
     if (clause.thisCombat === true && (e.combat === undefined || e.combat !== (state.turn.combatPhases ?? 1))) continue;
     n += 1;
@@ -3566,7 +3577,7 @@ export function matchesFilter(
   }
   if (filter.journaled !== undefined) {
     const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
-    if (!journaledMatches(state, registry, id, stint, filter.journaled, ctx.you)) return false;
+    if (!journaledMatches(state, registry, id, stint, filter.journaled, ctx)) return false;
   }
   if (filter.attackedThisTurn !== undefined) {
     const attacked =

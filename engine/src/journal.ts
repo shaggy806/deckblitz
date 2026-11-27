@@ -244,6 +244,12 @@ export interface JournalEntry {
   readonly target?: TargetRef;
   readonly targetStint?: number;
   readonly targetWas?: LastKnownInfo;
+  /** The permanent whose ability did it, in the stint it did it in, where
+   * the kind keeps one: `sacrificed`, the creature whose exploit ability it
+   * was sacrificed to as that ability resolved — the creature "exploited"
+   * it (rule 702.110b). */
+  readonly source?: ObjectId;
+  readonly sourceStint?: number;
   /** The combat phase it happened in (`TurnState.combatPhases`), for attacks,
    * blocks and combat damage — and for a card put into a graveyard during a
    * combat phase (`to-graveyard`, by any means: "wasn't put there this

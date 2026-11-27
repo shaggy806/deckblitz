@@ -65639,11 +65639,21 @@ controlledBy,
       }
       case "permanent-sacrificed": {
         const lki = this.state.objects[event.object]?.lastKnown ?? this.state.ceasedTokens?.[event.object];
+        // The creature that exploited it (rule 702.110b), in the stint it
+        // exploited it in: its own last one, if it exploited itself.
+        const exploiter = event.exploitedBy;
+        const exploiterStint =
+          exploiter === undefined
+            ? undefined
+            : exploiter === event.object
+              ? lki?.zoneChangeCount
+              : this.state.objects[exploiter]?.zoneChangeCount ?? 0;
         add({
           kind: "sacrificed",
           player: event.player,
           object: event.object,
           ...(lki !== undefined ? { stint: lki.zoneChangeCount, was: lki } : {}),
+          ...(exploiter !== undefined && exploiterStint !== undefined ? { source: exploiter, sourceStint: exploiterStint } : {}),
         });
         return;
       }
