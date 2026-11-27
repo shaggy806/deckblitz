@@ -117,3 +117,24 @@ describe("Silver Wyvern", () => {
     expect(() => activate(game, mine[0], 0, { targets: [ref(card)] })).toThrow(/target/i);
   });
 });
+
+describe("Quicksilver Dragon", () => {
+  it("moves a Shock aimed at itself to another creature, never a player", () => {
+    const { game, a, bears, elves, card, mine } = setUp("Shock", (_b, _e, mine) => [mine[0]], [["Mountain", 1]], ["Quicksilver Dragon"]);
+    const seen = watchTargets(a, () => [elves]);
+    activate(game, mine[0], 0, { targets: [ref(card)] });
+    expect(seen.asked).toBe(1);
+    expect(seen.offered[0]).toEqual(expect.arrayContaining([elves, bears]));
+    expect(seen.offered[0]).not.toContain(A);
+    expect(seen.offered[0]).not.toContain(mine[0]);
+    expect(zone(game, elves)).toBe("graveyard");
+  });
+
+  it("does nothing to a spell aimed at another creature", () => {
+    const { game, a, bears, card, mine } = setUp("Shock", (bears) => [bears], [["Mountain", 1]], ["Quicksilver Dragon"]);
+    const seen = watchTargets(a);
+    activate(game, mine[0], 0, { targets: [ref(card)] });
+    expect(seen.asked).toBe(0);
+    expect(zone(game, bears)).toBe("graveyard");
+  });
+});
