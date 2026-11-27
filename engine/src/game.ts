@@ -58165,12 +58165,24 @@ controlledBy,
 
   /** Whether `host` "can't be enchanted" or "can't be equipped"; `other`
    * spares the permanent that says so (Consecrate Land). */
-  private attachProhibited(attachment: "aura" | "equipment", id: ObjectId, host: ObjectId): boolean {
+  private attachProhibited(attachment: "aura" | "equipment", id: ObjectId, host: ObjectId, arriving = false): boolean {
+    const attached = this.state.objects[id];
+    const alreadyOn = !arriving && attached?.zone === "battlefield" && attached.attachedTo === host;
     return liveProhibitions(this.state, this.registry, "be-attached").some(
       (live) =>
         live.prohibition.attachment === attachment &&
         !(live.prohibition.other === true && live.source.id === id) &&
+        !(live.prohibition.keepsAttached === true && alreadyOn) &&
         reachesObject(this.state, this.registry, live, host),
+    );
+  }
+
+  /** Whether `player` can't gain control of `id` — "other players can't gain
+   * control of them" (Guardian Beast): any player but the prohibition's
+   * controller. */
+  private controlGainProhibited(player: PlayerId, id: ObjectId): boolean {
+    return liveProhibitions(this.state, this.registry, "gain-control").some(
+      (live) => live.source.controller !== player && reachesObject(this.state, this.registry, live, id),
     );
   }
 
@@ -67418,6 +67430,9 @@ controlledBy,
     // effect would begin never starts (rule 611.2b).
     const whileIt = opts.whileIt;
     if (whileIt !== undefined && !matchesFilter(this.state, this.registry, id, whileIt, { you: player })) return;
+    // "Other players can't gain control of them" (Guardian Beast): no new
+    // control effect for them (rule 101.2: "can't" beats "can").
+    if (!entered && this.controlGainProhibited(player, id)) return;
     // Put onto the battlefield "under your control", but it enters under the
     // control of an opponent of your choice instead (rule 614.1d), and already
     // has: the effect that put it there has nothing to add.
@@ -67641,6 +67656,9 @@ controlledBy,
     if (a.id === b.id || a.controller === b.controller) return false;
     const [toB, toA] = [a.controller, b.controller];
     if (this.state.players[toB]?.hasLost !== false || this.state.players[toA]?.hasLost !== false) return false;
+    // One that its new controller can't gain control of (Guardian Beast)
+    // stops the whole exchange (701.12a).
+    if (this.controlGainProhibited(toA, a.id) || this.controlGainProhibited(toB, b.id)) return false;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
     const give = (player: PlayerId, ref: TargetRef, object: GameObject): void => {
@@ -67679,6 +67697,8 @@ controlledBy,
       ...matched.filter((id) => this.state.objects[id]?.controller === other).map((id) => ({ id, to: side })),
     ];
     if (moves.length === 0) return;
+    // An exchange that can't all happen doesn't happen (701.12a).
+    if (moves.some(({ id, to }) => this.controlGainProhibited(to, id))) return;
     this.state.timestampSeq += 1;
     const timestamp = this.state.timestampSeq;
     this.withControlBatch(() => {
@@ -78535,6 +78555,10 @@ controlledBy,
       const hostZone = host === null ? undefined : this.state.objects[host]?.zone;
       if (
         host !== null &&
+        // One that "can't be enchanted" but keeps the Auras already on it
+        // (Guardian Beast) isn't keeping this one, which arrives now: it's
+        // attached to nothing, and goes to the graveyard (303.4i, 704.5m).
+        !this.attachProhibited("aura", id, host, true) &&
         (hostZone === "battlefield" ||
           (hostZone === "graveyard" && enchantsGraveyardCard(this.registry.get(printedCardName(object)))))
       ) {

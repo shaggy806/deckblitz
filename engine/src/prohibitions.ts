@@ -246,10 +246,23 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly act: "untap" | "transform" | "phase-in" | "phase-out" | "enter" | "become-suspected" | "be-beamed-up";
     } & ObjectSide)
   | ({
-      /** "Can't be enchanted / equipped." `other`: "by other Auras". */
+      /** "Can't be enchanted / equipped." `other`: "by other Auras".
+       * `keepsAttached`: "this effect doesn't remove Auras already attached"
+       * (Guardian Beast) — one attached to the object now stays legal there
+       * for rule 704.5m; attaching one anew is still barred. */
       readonly act: "be-attached";
       readonly attachment: "aura" | "equipment";
       readonly other?: true;
+      readonly keepsAttached?: true;
+    } & ObjectSide)
+  | ({
+      /** "Other players can't gain control of them" (Guardian Beast): no new
+       * control effect (rule 613.1b) gives an object it reaches to a player
+       * other than this prohibition's controller, and an exchange including
+       * one doesn't happen at all (701.12a). One already applying stays.
+       * See `Game.controlGainProhibited`. */
+      readonly act: "gain-control";
+      readonly by: "others";
     } & ObjectSide)
   | ({
       /** "Can't be the target of …" (rules 601.2c, 602.2b). `by`:

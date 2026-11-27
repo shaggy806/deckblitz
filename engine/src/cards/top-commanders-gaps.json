@@ -3400,7 +3400,9 @@
   "effect:reveal-until-exile-play-all",
   "effect:reveal-x-random-discard-named",
   "filter:directly-above-in-graveyard",
-  "effect:random-subset-of-looked-cards"
+  "effect:random-subset-of-looked-cards",
+  "static:cant-gain-control",
+  "static:cant-be-enchanted"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
