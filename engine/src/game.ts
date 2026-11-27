@@ -37302,8 +37302,10 @@ export class Game {
    * it targets for its source, in the stint it triggered from (rule 607.1:
    * its linked ability's "that player" — `GameObject.notedTarget`). */
   private noteLinkedTarget(ability: GameObject, sourceId: ObjectId, refs: LastKnownRefs | undefined): void {
-    const spec = this.stackAbilityOf(ability);
-    if (!("notesTarget" in spec) || spec.notesTarget !== true) return;
+    // Not every triggered stack object has a definition to look up (the
+    // initiative's, a keyword's made up on the spot).
+    const spec = this.stackAbilityOf(ability) as StackAbility | undefined;
+    if (spec === undefined || !("notesTarget" in spec) || spec.notesTarget !== true) return;
     const target = (ability.targets ?? []).find((t) => t?.kind === "player");
     const source = this.state.objects[sourceId];
     if (target?.kind !== "player" || source === undefined) return;
