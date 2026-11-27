@@ -11089,6 +11089,13 @@ const AMONG_PLAYERS_EFFECTS = {
     },
     effect: { kind: "gain-control", target: "source", untilEndOfTurn: false, who: "that-player" },
   },
+  // Loxodon Peacekeeper: every player a candidate, a tie the controller's call.
+  "The player with the lowest life total gains control of ~. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of ~.": {
+    kind: "choose-opponent",
+    anyPlayer: true,
+    leastLife: true,
+    then: { kind: "gain-control", target: "source", who: "that-player", untilEndOfTurn: false },
+  },
   "Choose a card name. That player reveals their hand. If a card with the chosen name is revealed this way, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle.": {
     kind: "choose-card-name",
     then: {

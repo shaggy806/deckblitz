@@ -25811,3 +25811,21 @@ describe("this ability triggers only once", () => {
     expect(parsed.triggered[0].oncePerTurn).toBeUndefined();
   });
 });
+
+describe("the player with the lowest life total, and a colour become", () => {
+  it("Loxodon Peacekeeper: choose-opponent's leastLife over every player", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Elephant Soldier",
+      mana_cost: "{1}{W}",
+      power: "4",
+      toughness: "4",
+      oracle_text:
+        "At the beginning of your upkeep, the player with the lowest life total gains control of this creature. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of this creature.",
+    });
+    expect(parsed.triggered[0]).toMatchObject({
+      trigger: { on: "step-begins", step: "upkeep", who: "you" },
+      effect: { kind: "choose-opponent", anyPlayer: true, leastLife: true },
+    });
+  });
+});

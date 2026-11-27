@@ -3418,6 +3418,12 @@ export type EffectSpec =
        * for most life" (The Black Gate): only those of the candidates whose
        * life total is the greatest among them, read as this resolves. */
       readonly mostLife?: true;
+      /** "**The player with the lowest life total** gains control of this
+       * creature. If two or more players are tied for lowest life total, you
+       * choose one of them" (Loxodon Peacekeeper, with `anyPlayer`): only
+       * those of the candidates whose life total is the least among them,
+       * read as this resolves — one alone is taken without asking. */
+      readonly leastLife?: true;
       /** The one chosen is kept on the effect's source as "the chosen
        * player" (`GameObject.chosenPlayer`), replacing any earlier one —
        * Triarch Stalker's "at the beginning of combat on your turn, choose
@@ -21399,6 +21405,10 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       if (spec.mostLife === true) {
         const most = Math.max(...among.map((p) => ctx.lifeTotalOf(p)));
         among = among.filter((p) => ctx.lifeTotalOf(p) === most);
+      }
+      if (spec.leastLife === true) {
+        const least = Math.min(...among.map((p) => ctx.lifeTotalOf(p)));
+        among = among.filter((p) => ctx.lifeTotalOf(p) === least);
       }
       const whoIf = spec.whoIf;
       if (whoIf !== undefined) among = among.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf));
