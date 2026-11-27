@@ -3285,7 +3285,8 @@
   "effect:counter-choice-each-created-token",
   "effect:for-each-counter-kind-among-permanents",
   "effect:prevent-chosen-source-to-attached",
-  "replacement:attached-destroy-sacrifice-aura"
+  "replacement:attached-destroy-sacrifice-aura",
+  "effect:destroy-those-that-didnt-attack"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
