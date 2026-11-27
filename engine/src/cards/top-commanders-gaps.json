@@ -40,6 +40,7 @@
     "static:tap-opponents-lands-for-mana",
     "effect:add-mana-of-attached-mana-cost",
     "effect:add-mana-of-milled-card-colored-symbols",
+    "cost:spend-only-face-down-spells",
     "effect:pay-before-delayed-deadline",
     "effect:copy-spell-retarget-chosen",
     "condition:spell-could-target",

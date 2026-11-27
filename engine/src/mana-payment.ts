@@ -302,6 +302,9 @@ export type ManaPurpose =
       readonly via?: "disturb" | "flashback";
       /** With its kicker paid (rule 702.33d): "to cast kicked spells". */
       readonly kicked?: true;
+      /** Cast face down (`via: "face-down"`, rule 708.4): "to cast face-down
+       * spells" (`"face-down-spell"`). */
+      readonly faceDown?: true;
       /** The total cost being paid has `{X}` in it — an alternative cost's or
        * a kicker's counts, and a mana cost's doesn't when an alternative cost
        * replaced it (Rosheen Meanderer's ruling). */

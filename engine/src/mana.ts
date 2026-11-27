@@ -150,6 +150,10 @@ export interface ManaCastFrom {
  * - `"turn-face-up"`: turning a permanent face up (rule 116.2b — Overgrown
  *   Zealot); `"unlock-door"`: unlocking a Room's door (rule 709.5e — Creeping
  *   Peeper). Special actions, so neither is an ability of anything.
+ * - `"face-down-spell"`: "to cast face-down spells" (Tin Street Gossip): a
+ *   spell cast face down by morph, megamorph or disguise (rule 708.4), all of
+ *   its cost. A face-down permanent is a creature (708.2a), so "to turn
+ *   creatures face up" is `"turn-face-up"`.
  * - `"disturb"`: "to pay a disturb cost" (Unblinking Observer): a spell cast
  *   for its disturb cost (rule 702.146), whatever spell it is.
  * - `"equip-ability"`: an equip ability (Ronin, Shadow Stalker), not every
@@ -171,6 +175,7 @@ export interface ManaCastFrom {
  */
 export type ManaSpendPurpose =
   | "turn-face-up"
+  | "face-down-spell"
   | "unlock-door"
   | "disturb"
   | "equip-ability"

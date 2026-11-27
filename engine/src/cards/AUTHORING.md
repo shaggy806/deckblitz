@@ -5492,6 +5492,10 @@ ability can still be activated, for nothing):
   permanent's mana cost" (Elemental Resonance, `"attached"`): one unit per
   symbol, generic as `{C}`, `{X}` none, a two-colour symbol asked symbol by
   symbol, a Phyrexian or `{2/W}` symbol its colour. The scaffolder reads it.
+  With `coloredSymbols: true`, the coloured symbols alone: "for each colored
+  mana symbol in the milled card's mana cost, add one mana of that color"
+  (Charmed Pendant, `{ manaCostOf: { paid: "milled" }, coloredSymbols: true }`
+  after a `do: mill` cost; `{ paid: "milled" }` is what that cost milled).
 
 **"Choose a color. Add an amount of mana of that color equal to your devotion
 to that color"** (Nykthos, Shrine to Nyx; Nyx Lotus) is `mana: "any-color"`
@@ -9184,7 +9188,8 @@ Delete an entry in the same commit as the feature that retires it.
     "Spend this mana only to cast a creature spell of the chosen type"
     (Cavern of Souls, Unclaimed Territory, Secluded Courtyard, Ancient
     Ziggurat). `purposes` names what a filter can't, beside `spell` or alone:
-    `"turn-face-up"`, `"unlock-door"`, `"disturb"`, `"equip-ability"`,
+    `"turn-face-up"`, `"face-down-spell"` ("to cast face-down spells", a
+    `via: "face-down"` cast — Tin Street Gossip), `"unlock-door"`, `"disturb"`, `"equip-ability"`,
     `"power-up-ability"`, `"class-level"`, `"foretell"` (Karfell Harbinger),
     `"cumulative-upkeep"` (Adarkar Unicorn; any `unless` paying `times` the source's
     age counters, which is what `cumulativeUpkeep` writes), `"cost-with-x"` ("on

@@ -2008,7 +2008,11 @@ function manaPurposeIs(named: ManaSpendPurpose, purpose: Exclude<ManaPurpose, nu
     return purpose.ability !== undefined && parseManaCost(purpose.ability.cost.mana).colorless > 0;
   }
   if (purpose.kind === "cast") {
-    return (named === "disturb" && purpose.via === "disturb") || (named === "kicked-spell" && purpose.kicked === true);
+    return (
+      (named === "disturb" && purpose.via === "disturb") ||
+      (named === "kicked-spell" && purpose.kicked === true) ||
+      (named === "face-down-spell" && purpose.faceDown === true)
+    );
   }
   if (purpose.kind === "special") return named === purpose.action;
   const ability = purpose.ability;
@@ -2066,9 +2070,10 @@ function castPaying(
   via: CastVia | undefined,
   costString: string | null,
   kicked?: boolean | number,
-): { readonly via?: "disturb" | "flashback"; readonly xCost?: true; readonly cCost?: true; readonly kicked?: true } {
+): { readonly via?: "disturb" | "flashback"; readonly xCost?: true; readonly cCost?: true; readonly kicked?: true; readonly faceDown?: true } {
   return {
     ...(via === "disturb" || via === "flashback" ? { via } : {}),
+    ...(via === "face-down" ? { faceDown: true as const } : {}),
     ...(costString !== null && parseManaCost(costString).x > 0 ? { xCost: true as const } : {}),
     ...(costString !== null && parseManaCost(costString).colorless > 0 ? { cCost: true as const } : {}),
     ...(kicked !== undefined && kicked !== false && kicked !== 0 ? { kicked: true as const } : {}),
