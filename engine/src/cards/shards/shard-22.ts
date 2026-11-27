@@ -179,6 +179,7 @@ import _poolCrimsonManticore from "../pool/crimson-manticore.js";
 import _poolCrookedCustodian from "../pool/crooked-custodian.js";
 import _poolCrownOfVigor from "../pool/crown-of-vigor.js";
 import _poolCruelFeeding from "../pool/cruel-feeding.js";
+import _poolCrumblingSanctuary from "../pool/crumbling-sanctuary.js";
 import _poolCryoclasm from "../pool/cryoclasm.js";
 import _poolCryptSliver from "../pool/crypt-sliver.js";
 import _poolCrypticCoat from "../pool/cryptic-coat.js";
@@ -1269,6 +1270,7 @@ const shard: CardShard = {
     _poolCrookedCustodian,
     _poolCrownOfVigor,
     _poolCruelFeeding,
+    _poolCrumblingSanctuary,
     _poolCryoclasm,
     _poolCryptSliver,
     _poolCrypticCoat,

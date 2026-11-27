@@ -302,6 +302,7 @@ import _poolFadingHope from "../pool/fading-hope.js";
 import _poolFaithOfTheDevoted from "../pool/faith-of-the-devoted.js";
 import _poolFanFavorite from "../pool/fan-favorite.js";
 import _poolFarAway from "../pool/far-away.js";
+import _poolFarrelitePriest from "../pool/farrelite-priest.js";
 import _poolFateTransfer from "../pool/fate-transfer.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
 import _poolFblthpLostOnTheRange from "../pool/fblthp-lost-on-the-range.js";
@@ -1396,6 +1397,7 @@ const shard: CardShard = {
     _poolFaithOfTheDevoted,
     _poolFanFavorite,
     _poolFarAway,
+    _poolFarrelitePriest,
     _poolFateTransfer,
     _poolFblthpImpossiblyLost,
     _poolFblthpLostOnTheRange,

@@ -5913,6 +5913,7 @@ import _poolCrumble from "./pool/crumble.js";
 import _poolCrumblingAshes from "./pool/crumbling-ashes.js";
 import _poolCrumblingColossus from "./pool/crumbling-colossus.js";
 import _poolCrumblingNecropolis from "./pool/crumbling-necropolis.js";
+import _poolCrumblingSanctuary from "./pool/crumbling-sanctuary.js";
 import _poolCrumblingVestige from "./pool/crumbling-vestige.js";
 import _poolCrusaderOfOdric from "./pool/crusader-of-odric.js";
 import _poolCrusadingKnight from "./pool/crusading-knight.js";
@@ -9491,6 +9492,7 @@ import _poolFarm from "./pool/farm.js";
 import _poolFarmerCotton from "./pool/farmer-cotton.js";
 import _poolFarmsteadGleaner from "./pool/farmstead-gleaner.js";
 import _poolFarmstead from "./pool/farmstead.js";
+import _poolFarrelitePriest from "./pool/farrelite-priest.js";
 import _poolFarrelsMantle from "./pool/farrels-mantle.js";
 import _poolFarrelsZealot from "./pool/farrels-zealot.js";
 import _poolFarseeingFlockmate from "./pool/farseeing-flockmate.js";
@@ -14156,6 +14158,7 @@ import _poolInheritedEnvelope from "./pool/inherited-envelope.js";
 import _poolInheritedFiend from "./pool/inherited-fiend.js";
 import _poolInitiateOfBlood from "./pool/initiate-of-blood.js";
 import _poolInitiatesCompanion from "./pool/initiates-companion.js";
+import _poolInitiatesOfTheEbonHand from "./pool/initiates-of-the-ebon-hand.js";
 import _poolInjectorCrocodile from "./pool/injector-crocodile.js";
 import _poolInjury from "./pool/injury.js";
 import _poolInkDissolver from "./pool/ink-dissolver.js";
@@ -40109,6 +40112,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrumblingAshes,
   _poolCrumblingColossus,
   _poolCrumblingNecropolis,
+  _poolCrumblingSanctuary,
   _poolCrumblingVestige,
   _poolCrusaderOfOdric,
   _poolCrusadingKnight,
@@ -43687,6 +43691,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFarmerCotton,
   _poolFarmsteadGleaner,
   _poolFarmstead,
+  _poolFarrelitePriest,
   _poolFarrelsMantle,
   _poolFarrelsZealot,
   _poolFarseeingFlockmate,
@@ -48352,6 +48357,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInheritedFiend,
   _poolInitiateOfBlood,
   _poolInitiatesCompanion,
+  _poolInitiatesOfTheEbonHand,
   _poolInjectorCrocodile,
   _poolInjury,
   _poolInkDissolver,
@@ -74318,6 +74324,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crumbling-ashes": _poolCrumblingAshes,
   "pool/crumbling-colossus": _poolCrumblingColossus,
   "pool/crumbling-necropolis": _poolCrumblingNecropolis,
+  "pool/crumbling-sanctuary": _poolCrumblingSanctuary,
   "pool/crumbling-vestige": _poolCrumblingVestige,
   "pool/crusader-of-odric": _poolCrusaderOfOdric,
   "pool/crusading-knight": _poolCrusadingKnight,
@@ -77896,6 +77903,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/farmer-cotton": _poolFarmerCotton,
   "pool/farmstead-gleaner": _poolFarmsteadGleaner,
   "pool/farmstead": _poolFarmstead,
+  "pool/farrelite-priest": _poolFarrelitePriest,
   "pool/farrels-mantle": _poolFarrelsMantle,
   "pool/farrels-zealot": _poolFarrelsZealot,
   "pool/farseeing-flockmate": _poolFarseeingFlockmate,
@@ -82561,6 +82569,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/inherited-fiend": _poolInheritedFiend,
   "pool/initiate-of-blood": _poolInitiateOfBlood,
   "pool/initiates-companion": _poolInitiatesCompanion,
+  "pool/initiates-of-the-ebon-hand": _poolInitiatesOfTheEbonHand,
   "pool/injector-crocodile": _poolInjectorCrocodile,
   "pool/injury": _poolInjury,
   "pool/ink-dissolver": _poolInkDissolver,

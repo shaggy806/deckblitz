@@ -442,6 +442,7 @@ import _poolIncreasingVengeance from "../pool/increasing-vengeance.js";
 import _poolIndenturedDjinn from "../pool/indentured-djinn.js";
 import _poolInfectedVermin from "../pool/infected-vermin.js";
 import _poolInfestedFleshcutter from "../pool/infested-fleshcutter.js";
+import _poolInitiatesOfTheEbonHand from "../pool/initiates-of-the-ebon-hand.js";
 import _poolInkDissolver from "../pool/ink-dissolver.js";
 import _poolInstrumentsOfWar from "../pool/instruments-of-war.js";
 import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
@@ -1510,6 +1511,7 @@ const shard: CardShard = {
     _poolIndenturedDjinn,
     _poolInfectedVermin,
     _poolInfestedFleshcutter,
+    _poolInitiatesOfTheEbonHand,
     _poolInkDissolver,
     _poolInstrumentsOfWar,
     _poolInterceptorShadowsHound,
