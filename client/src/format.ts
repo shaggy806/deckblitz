@@ -565,7 +565,11 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'targets-chosen':
       return `${who(event.player)} chooses targets for ${name(event.object)}`
     case 'ability-triggered':
-      return `${name(event.source)}'s trigger goes on the stack (${who(event.controller)})`
+      // Several identical instances as one stack entry (Delney's "triggers an
+      // additional time"): each resolves on its own, so the log counts them.
+      return (event.copies ?? 1) > 1
+        ? `${name(event.source)}'s trigger goes on the stack ×${event.copies} (${who(event.controller)})`
+        : `${name(event.source)}'s trigger goes on the stack (${who(event.controller)})`
     case 'tokens-folded':
       return `${event.folded.length + 1} ${name(event.into)} tokens are one stack again`
     case 'delayed-trigger-created':

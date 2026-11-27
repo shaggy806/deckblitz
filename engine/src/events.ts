@@ -1079,6 +1079,10 @@ export type GameEvent =
       readonly byOwnEntry?: true;
       /** A permanent entering caused it (`LastKnownRefs.byEntry`). */
       readonly byEntry?: true;
+      /** Identical instances this one stack object stands for, each
+       * resolved on its own (`GameObject.stackCount` — a trigger that
+       * "triggers an additional time", Delney): the log says how many. */
+      readonly copies?: number;
     })
   | (Base & {
       /** Identical tokens folded into one stack object (`Game.foldTokensInto`:

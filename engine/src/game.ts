@@ -41990,8 +41990,8 @@ export class Game {
         trigger.lastKnownRefs,
         trigger.targetedBy,
         reflexive,
+        trigger.copies ?? 1,
       );
-      if ((trigger.copies ?? 1) > 1) this.state.objects[abilityId].stackCount = trigger.copies;
       if (trigger.modes !== undefined) this.state.objects[abilityId].chosenModes = [...trigger.modes];
       if (triggerSource.chooser !== undefined) this.state.objects[abilityId].otherChooser = triggerSource.chooser;
       // Miracle's trigger casts only the card as it was drawn (rule 400.7).
@@ -42391,6 +42391,10 @@ export class Game {
     targetedBy?: TargetedBy,
     /** The record of a reflexive ability — see `ReflexiveTrigger`. */
     reflexive?: ReflexiveTrigger,
+    /** How many identical instances this one stack object stands for
+     * (`PendingTrigger.copies` — Delney's "triggers an additional time"),
+     * each resolved on its own; set before it's announced, so the event says. */
+    copies = 1,
   ): ObjectId {
     const abilityId = this.mintAbilityObject(
       sourceId,
@@ -42421,11 +42425,13 @@ export class Game {
     }
     if (targetedBy !== undefined) this.state.objects[abilityId].targetedBy = targetedBy;
     if (reflexive !== undefined) this.state.objects[abilityId].reflexiveTrigger = reflexive;
+    if (copies > 1) this.state.objects[abilityId].stackCount = copies;
     this.emit({
       type: "ability-triggered",
       source: sourceId,
       controller,
       object: abilityId,
+      ...(copies > 1 ? { copies } : {}),
       ...(refs?.byOwnAttack === true ? { byOwnAttack: true as const } : {}),
       ...(refs?.byOwnEntry === true ? { byOwnEntry: true as const } : {}),
       ...(refs?.byEntry === true ? { byEntry: true as const } : {}),
