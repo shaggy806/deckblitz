@@ -341,6 +341,7 @@ import _poolFireUrchin from "../pool/fire-urchin.js";
 import _poolFirecatBlitz from "../pool/firecat-blitz.js";
 import _poolFiresongAndSunspeaker from "../pool/firesong-and-sunspeaker.js";
 import _poolFirstSliversChosen from "../pool/first-slivers-chosen.js";
+import _poolFlameChanneler from "../pool/flame-channeler.js";
 import _poolFlareOfDuplication from "../pool/flare-of-duplication.js";
 import _poolFlawlessForgery from "../pool/flawless-forgery.js";
 import _poolFledglingMawcor from "../pool/fledgling-mawcor.js";
@@ -1447,6 +1448,7 @@ const shard: CardShard = {
     _poolFirecatBlitz,
     _poolFiresongAndSunspeaker,
     _poolFirstSliversChosen,
+    _poolFlameChanneler,
     _poolFlareOfDuplication,
     _poolFlawlessForgery,
     _poolFledglingMawcor,

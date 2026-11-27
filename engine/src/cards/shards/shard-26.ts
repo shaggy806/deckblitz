@@ -284,6 +284,7 @@ import _poolEntrancingLyre from "../pool/entrancing-lyre.js";
 import _poolEntropicBattlecruiser from "../pool/entropic-battlecruiser.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
 import _poolEpfPointSquad from "../pool/epf-point-squad.js";
+import _poolEquinox from "../pool/equinox.js";
 import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
 import _poolErthaJoFrontierMentor from "../pool/ertha-jo-frontier-mentor.js";
 import _poolEsquireOfTheKing from "../pool/esquire-of-the-king.js";
@@ -529,6 +530,7 @@ import _poolMaChaoWesternWarrior from "../pool/ma-chao-western-warrior.js";
 import _poolMacabreReconstruction from "../pool/macabre-reconstruction.js";
 import _poolMadameWebClairvoyant from "../pool/madame-web-clairvoyant.js";
 import _poolMaddeningCacophony from "../pool/maddening-cacophony.js";
+import _poolMaddeningImp from "../pool/maddening-imp.js";
 import _poolMaelstromColossus from "../pool/maelstrom-colossus.js";
 import _poolMaestrosDiabolist from "../pool/maestros-diabolist.js";
 import _poolMaestrosTheater from "../pool/maestros-theater.js";
@@ -1376,6 +1378,7 @@ const shard: CardShard = {
     _poolEntropicBattlecruiser,
     _poolEnvironmentalSciences,
     _poolEpfPointSquad,
+    _poolEquinox,
     _poolErrandRiderOfGondor,
     _poolErthaJoFrontierMentor,
     _poolEsquireOfTheKing,
@@ -1621,6 +1624,7 @@ const shard: CardShard = {
     _poolMacabreReconstruction,
     _poolMadameWebClairvoyant,
     _poolMaddeningCacophony,
+    _poolMaddeningImp,
     _poolMaelstromColossus,
     _poolMaestrosDiabolist,
     _poolMaestrosTheater,

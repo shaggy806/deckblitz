@@ -284,6 +284,7 @@ import _poolElixirOfVitality from "../pool/elixir-of-vitality.js";
 import _poolElspethStormSlayer from "../pool/elspeth-storm-slayer.js";
 import _poolElvishLyrist from "../pool/elvish-lyrist.js";
 import _poolElvishSpiritGuide from "../pool/elvish-spirit-guide.js";
+import _poolEmbodimentOfFlame from "../pool/embodiment-of-flame.js";
 import _poolEmeritusOfTruce from "../pool/emeritus-of-truce.js";
 import _poolEnchantedCarriage from "../pool/enchanted-carriage.js";
 import _poolEnergyRefractor from "../pool/energy-refractor.js";
@@ -1413,6 +1414,7 @@ const shard: CardShard = {
     _poolElspethStormSlayer,
     _poolElvishLyrist,
     _poolElvishSpiritGuide,
+    _poolEmbodimentOfFlame,
     _poolEmeritusOfTruce,
     _poolEnchantedCarriage,
     _poolEnergyRefractor,

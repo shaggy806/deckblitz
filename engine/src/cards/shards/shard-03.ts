@@ -386,6 +386,7 @@ import _poolHeraldOfTheDreadhorde from "../pool/herald-of-the-dreadhorde.js";
 import _poolHiddenGibbons from "../pool/hidden-gibbons.js";
 import _poolHighRiseSawjack from "../pool/high-rise-sawjack.js";
 import _poolHoldTheLine from "../pool/hold-the-line.js";
+import _poolHolisticWisdom from "../pool/holistic-wisdom.js";
 import _poolHookbladeVeteran from "../pool/hookblade-veteran.js";
 import _poolHourOfDefeat from "../pool/hour-of-defeat.js";
 import _poolHowlingFury from "../pool/howling-fury.js";
@@ -1384,6 +1385,7 @@ const shard: CardShard = {
     _poolHiddenGibbons,
     _poolHighRiseSawjack,
     _poolHoldTheLine,
+    _poolHolisticWisdom,
     _poolHookbladeVeteran,
     _poolHourOfDefeat,
     _poolHowlingFury,

@@ -115,6 +115,7 @@ import _poolBondedHerdbeast from "../pool/bonded-herdbeast.js";
 import _poolBorosCharm from "../pool/boros-charm.js";
 import _poolBotBashingTime from "../pool/bot-bashing-time.js";
 import _poolBreachingHippocamp from "../pool/breaching-hippocamp.js";
+import _poolBreakingWave from "../pool/breaking-wave.js";
 import _poolBrightPalmSoulAwakener from "../pool/bright-palm-soul-awakener.js";
 import _poolBronzebeakForagers from "../pool/bronzebeak-foragers.js";
 import _poolBroodguardElite from "../pool/broodguard-elite.js";
@@ -1179,6 +1180,7 @@ const shard: CardShard = {
     _poolBorosCharm,
     _poolBotBashingTime,
     _poolBreachingHippocamp,
+    _poolBreakingWave,
     _poolBrightPalmSoulAwakener,
     _poolBronzebeakForagers,
     _poolBroodguardElite,

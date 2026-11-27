@@ -198,6 +198,7 @@ import _poolDarkblast from "../pool/darkblast.js";
 import _poolDarkborePathway from "../pool/darkbore-pathway.js";
 import _poolDauntlessVeteran from "../pool/dauntless-veteran.js";
 import _poolDauthiMarauder from "../pool/dauthi-marauder.js";
+import _poolDeadReckoning from "../pool/dead-reckoning.js";
 import _poolDeadWeight from "../pool/dead-weight.js";
 import _poolDearlyDeparted from "../pool/dearly-departed.js";
 import _poolDeathCultist from "../pool/death-cultist.js";
@@ -839,6 +840,7 @@ import _poolSpinalParasite from "../pool/spinal-parasite.js";
 import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
+import _poolSpyKit from "../pool/spy-kit.js";
 import _poolSqueeGoblinNabob from "../pool/squee-goblin-nabob.js";
 import _poolStalkedResearcher from "../pool/stalked-researcher.js";
 import _poolStalkingBloodsucker from "../pool/stalking-bloodsucker.js";
@@ -1237,6 +1239,7 @@ const shard: CardShard = {
     _poolDarkborePathway,
     _poolDauntlessVeteran,
     _poolDauthiMarauder,
+    _poolDeadReckoning,
     _poolDeadWeight,
     _poolDearlyDeparted,
     _poolDeathCultist,
@@ -1878,6 +1881,7 @@ const shard: CardShard = {
     _poolSpineOfIshSah,
     _poolSpinedBasher,
     _poolSpireOfIndustry,
+    _poolSpyKit,
     _poolSqueeGoblinNabob,
     _poolStalkedResearcher,
     _poolStalkingBloodsucker,

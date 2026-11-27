@@ -709,6 +709,7 @@ import _poolRamunapRuins from "../pool/ramunap-ruins.js";
 import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
 import _poolRashkaTheSlayer from "../pool/rashka-the-slayer.js";
 import _poolRatColony from "../pool/rat-colony.js";
+import _poolRayamiFirstOfTheFallen from "../pool/rayami-first-of-the-fallen.js";
 import _poolReaverTitan from "../pool/reaver-titan.js";
 import _poolRebuildTheCity from "../pool/rebuild-the-city.js";
 import _poolRedScarab from "../pool/red-scarab.js";
@@ -1776,6 +1777,7 @@ const shard: CardShard = {
     _poolRankleMasterOfPranks,
     _poolRashkaTheSlayer,
     _poolRatColony,
+    _poolRayamiFirstOfTheFallen,
     _poolReaverTitan,
     _poolRebuildTheCity,
     _poolRedScarab,

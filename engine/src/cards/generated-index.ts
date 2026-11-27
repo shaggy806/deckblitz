@@ -1013,6 +1013,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Echoing Equation": "https://cards.scryfall.io/art_crop/back/d/9/d9131fc3-018a-4975-8795-47be3956160d.jpg",
   "Edgar Markov's Coffin": "https://cards.scryfall.io/art_crop/back/6/3/63ba8eef-b834-4031-b0a1-0f8505d53813.jpg",
   "Embereth Blaze": "https://cards.scryfall.io/art_crop/back/8/b/8b0e6daf-0dec-4718-af79-b7ce137c3135.jpg",
+  "Embodiment of Flame": "https://cards.scryfall.io/art_crop/back/b/e/be91fcba-4599-4ecb-824d-55112096c34a.jpg",
   "Embrose, Dean of Shadow": "https://cards.scryfall.io/art_crop/back/9/3/938cee8f-ac2c-49a5-9ff7-1367d0edfabe.jpg",
   "Emeria, Shattered Skyclave": "https://cards.scryfall.io/art_crop/back/c/4/c470539a-9cc7-4175-8f7c-c982b6072b6d.jpg",
   "Entropic Cloud": "https://cards.scryfall.io/art_crop/back/7/8/783adffd-449f-44a6-8faf-3e38a201b05b.jpg",
