@@ -94,6 +94,12 @@ export interface CharacteristicsPatch<Pt> extends TypePatch, ColorPatch {
    * haste and loses soulbond" (Mirage Phalanx). Those abilities stay listed,
    * marked lost, so the indices don't move. */
   readonly loseKeywordAbilities?: readonly KeywordAbilityName[];
+  /** Static abilities it loses (layer 6), each named by its whole text:
+   * "loses 'Prevent all damage that would be dealt to this creature'"
+   * (Glittering Lynx). Its own text's, and those granted it before this
+   * effect's timestamp (rule 613.7); one granted later it keeps
+   * (`staticTextLost`). */
+  readonly loseStatics?: readonly string[];
   /** Toxic N it has, one more instance, added to the total (702.164b). */
   readonly toxic?: number;
   /** Activated abilities it has. */
@@ -231,6 +237,7 @@ export function patchModifier(
     ...(patch.loseKeywords !== undefined ? { loseKeywords: [...patch.loseKeywords] } : {}),
     ...(patch.cantHaveKeywords !== undefined ? { cantHaveKeywords: [...patch.cantHaveKeywords] } : {}),
     ...(patch.loseKeywordAbilities !== undefined ? { loseKeywordAbilities: [...patch.loseKeywordAbilities] } : {}),
+    ...(patch.loseStatics !== undefined ? { loseStatics: [...patch.loseStatics] } : {}),
     ...(patch.toxic !== undefined ? { toxic: patch.toxic } : {}),
     ...(patch.protection !== undefined ? { protection: patch.protection } : {}),
     ...(patch.hexproofFrom !== undefined ? { hexproofFrom: patch.hexproofFrom } : {}),

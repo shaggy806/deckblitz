@@ -193,6 +193,7 @@ import {
   emblemStatics,
   staticAffects,
   grantedStatics,
+  ownStaticsKept,
   staticTimestamp,
   staticsOfEmblem,
   pairedPartner,
@@ -66652,7 +66653,8 @@ controlledBy,
    * has left the game ({@link textInGame}; `test/left-game-statics.test.ts`
    * holds this file to it). {@link staticsOfSource} adds those granted it. */
   private ownStatics(object: GameObject): readonly StaticAbility[] {
-    return this.textInGame(object) ? this.registry.get(rulesTextName(object)).static : NO_STATICS;
+    // Less any an effect took by its text (`loseStatics` — Glittering Lynx).
+    return this.textInGame(object) ? ownStaticsKept(object, this.registry.get(rulesTextName(object)).static) : NO_STATICS;
   }
 
   /** The static abilities an object of {@link staticSourceIds} has: a
@@ -66666,7 +66668,7 @@ controlledBy,
   private staticsOfSource(source: GameObject): readonly StaticAbility[] {
     if (source.kind !== "emblem") {
       if (!this.textInGame(source)) return NO_STATICS;
-      const own = this.registry.get(rulesTextName(source)).static;
+      const own = ownStaticsKept(source, this.registry.get(rulesTextName(source)).static);
       const granted = grantedStatics(this.state, this.registry, source);
       return granted.length === 0 ? own : [...own, ...granted];
     }

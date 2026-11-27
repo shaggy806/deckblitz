@@ -8214,6 +8214,12 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // One static ability lost by its text (layer 6, `loseStatics`) — Glittering
+  // Lynx's 'loses "Prevent all damage that would be dealt to this creature."'
+  // The quoted text is the static's own, "this creature" in it.
+  if ((m = re(`until end of turn, ~ loses "([^"]+\\.)"`).exec(s))) {
+    return { kind: "become", target: "source", loseStatics: [m[1].replace(/~/g, "this creature")], duration: "end-of-turn" };
+  }
   // Losing "bands with other" (rule 702.22b) — Shelkin Brownie — and with
   // banding, which takes them too (Tolaria).
   if ((m = re(`(${TARGET}) loses (banding and )?all "bands with other" abilities until end of turn`).exec(s))) {

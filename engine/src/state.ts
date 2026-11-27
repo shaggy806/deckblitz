@@ -2154,6 +2154,8 @@ export interface PtModifier {
   grantsTriggered?: TriggeredAbility[];
   /** Keywords printed as abilities that it loses (`CharacteristicsPatch.loseKeywordAbilities`). */
   loseKeywordAbilities?: readonly KeywordAbilityName[];
+  /** Static abilities it loses, by their text (`CharacteristicsPatch.loseStatics`). */
+  loseStatics?: readonly string[];
   /** Layer 6 — the ability "If this creature would leave the battlefield,
    * exile it instead of putting it anywhere else", granted by an effect that
    * says it **gains** it (Geth, Thane of Contracts — `put-onto-battlefield

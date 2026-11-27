@@ -3349,7 +3349,9 @@
   "zone:ability-from-several-zones",
   "effect:look-at-hand-of-target-spell-controller",
   "effect:return-aura-after-host-died",
-  "effect:aura-becomes-non-aura-enchantment"
+  "effect:aura-becomes-non-aura-enchantment",
+  "effect:temporary-counter-addend",
+  "effect:lose-specific-ability"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

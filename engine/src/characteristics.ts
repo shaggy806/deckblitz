@@ -3063,7 +3063,7 @@ function opposingSearchStatics<T>(
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
     if (source === undefined || source.controller === searcher || state.players[source.controller]?.hasLost !== false) continue;
-    const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
+    const own = hasLostAbilities(state, registry, source) ? [] : ownStaticsKept(source, registry.get(rulesTextName(source)).static);
     for (const ability of [...own, ...grantedStatics(state, registry, source)]) {
       const value = test(ability);
       if (value === undefined) continue;
@@ -3156,7 +3156,7 @@ export function playerDamageLifeFloor(state: GameState, registry: CardRegistry, 
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
     if (source === undefined || source.controller !== player) continue;
-    const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
+    const own = hasLostAbilities(state, registry, source) ? [] : ownStaticsKept(source, registry.get(rulesTextName(source)).static);
     for (const ability of [...own, ...grantedStatics(state, registry, source)]) raise(source, ability);
   }
   for (const { source, ability } of emblemStatics(state, player)) raise(source, ability);
@@ -3846,6 +3846,26 @@ export function staticTimestamp(registry: CardRegistry, source: GameObject, abil
   return Math.max(source.timestamp, at[door] ?? source.timestamp);
 }
 
+/**
+ * Whether an effect took `ability` from `object` by its text (layer 6 —
+ * `PtModifier.loseStatics`: Glittering Lynx's "loses 'Prevent all damage
+ * that would be dealt to this creature'"). Its own text's, whenever; one
+ * granted at `grantedAt`, only by a loss later than the grant (rule 613.7).
+ */
+export function staticTextLost(object: GameObject, ability: StaticAbility, grantedAt = Number.NEGATIVE_INFINITY): boolean {
+  for (const m of object.modifiers) {
+    if (m.loseStatics === undefined || !m.loseStatics.includes(ability.text)) continue;
+    if ((m.timestamp ?? Infinity) > grantedAt) return true;
+  }
+  return false;
+}
+
+/** `object`'s own text's static abilities less those {@link staticTextLost}. */
+export function ownStaticsKept(object: GameObject, statics: readonly StaticAbility[]): readonly StaticAbility[] {
+  if (!object.modifiers.some((m) => m.loseStatics !== undefined)) return statics;
+  return statics.filter((ability) => !staticTextLost(object, ability));
+}
+
 /** A static ability an object has by a grant, with the timestamp its effects
  * take: the later of the object's and the grant's (rule 613.7a). */
 interface GrantedStatic {
@@ -3883,7 +3903,9 @@ function grantedStaticsTimed(
     for (const m of object.modifiers) {
       if (m.grantsStatic === undefined || !modifierGrantApplies(m, lostAt)) continue;
       const timestamp = Math.max(object.timestamp, m.timestamp ?? object.timestamp);
-      for (const ability of m.grantsStatic) out.push({ ability, timestamp });
+      for (const ability of m.grantsStatic) {
+        if (!staticTextLost(object, ability, m.timestamp ?? Infinity)) out.push({ ability, timestamp });
+      }
     }
   }
   if (granting.length > 0 && !staticGrantsInProgress.has(object.id)) {
@@ -3895,7 +3917,9 @@ function grantedStaticsTimed(
         if (!staticReaches(state, registry, source, ability, object)) continue;
         if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
         const timestamp = Math.max(object.timestamp, source.timestamp);
-        for (const granted of ability.grantsStatic ?? []) out.push({ ability: granted, timestamp });
+        for (const granted of ability.grantsStatic ?? []) {
+          if (!staticTextLost(object, granted, source.timestamp)) out.push({ ability: granted, timestamp });
+        }
       }
     } finally {
       staticGrantsInProgress.delete(object.id);
@@ -6616,7 +6640,7 @@ function scanContributingStaticSources(state: GameState, registry: CardRegistry)
     // graveyard": not from here). A static that is purely a replacement (rule
     // 614 — "enters tapped") or a CDA (`setBasePtFromCount`, handled in its
     // own pass) modifies nothing. See `StaticsInfo`.
-    const contributing = staticsOf(registry, rulesTextName(source)).contributing;
+    const contributing = ownStaticsKept(source, staticsOf(registry, rulesTextName(source)).contributing);
     if (
       contributing.length === 0 &&
       !source.modifiers.some((m) => m.grantsStatic !== undefined) &&
