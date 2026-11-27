@@ -22834,12 +22834,21 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "exile": {
-      const target = movedRefAct(spec.target, ctx);
+      // A set of several (Sword of the Ages' "exile this artifact and those
+      // creature cards", the cards its cost sacrificed — rule 400.7j: the
+      // effect finds what its cost moved to a public zone): each member
+      // still where the set found it, all at once. One member is the plain
+      // path below.
+      const several =
+        spec.fromHand !== true && isObjectSetRef(spec.target)
+          ? ctx.objectSet(spec.target).filter((member) => ctx.stintNow(member.object) === member.stint)
+          : [];
+      const target = several.length > 1 ? undefined : movedRefAct(spec.target, ctx);
       if (spec.fromHand === true) {
         if (target?.kind === "object") ctx.exileFromHand(target.object);
         return;
       }
-      if (target !== undefined) {
+      const exileOne = (one: TargetRef): void => {
         // Rule 610.3a: until a target leaves, and that target is gone or
         // illegal already: it doesn't move (Calix's ruling).
         const leaves = typeof spec.until === "object" ? ctx.targets[spec.until.targetLeaves] : undefined;
@@ -22848,11 +22857,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           spec.withCounters === undefined
             ? undefined
             : { kind: spec.withCounters.kind, amount: Math.max(0, Math.floor(amountValue(spec.withCounters.amount, ctx))) };
-        ctx.exileObject(target, spec.untilSourceLeaves === true, withCounters, spec.mayPlay, spec.linked === true,
+        ctx.exileObject(one, spec.untilSourceLeaves === true, withCounters, spec.mayPlay, spec.linked === true,
           spec.airbend === true, leaves?.kind === "object" ? { leaves: leaves.object } : spec.until === "opponent-becomes-monarch" ? spec.until : undefined,
           spec.warp === true);
         const haunted = spec.haunting === undefined ? undefined : ctx.targets[spec.haunting];
-        if (haunted?.kind === "object" && target.kind === "object") ctx.markHaunting(target.object, haunted.object);
+        if (haunted?.kind === "object" && one.kind === "object") ctx.markHaunting(one.object, haunted.object);
+      };
+      if (several.length > 1) {
+        ctx.simultaneously(() => {
+          for (const { object } of several) exileOne({ kind: "object", object });
+        });
+      } else if (target !== undefined) {
+        exileOne(target);
       }
       return;
     }
