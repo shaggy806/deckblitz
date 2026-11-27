@@ -124,7 +124,8 @@ export function targetSpecReadsX(spec: TargetSpec): boolean {
     spec.kind === "ability" ||
     spec.kind === "stack" ||
     spec.kind === "opponent-compared" ||
-    spec.kind === "player-dealt-damage-by-source"
+    spec.kind === "player-dealt-damage-by-source" ||
+    spec.kind === "player-with-turn-stat"
   ) {
     return false;
   }
@@ -913,6 +914,12 @@ function isLegalTargetUncached(
       spec.filter === undefined ||
       matchesFilter(state, registry, ref.object, spec.filter, targetFilterContext(forPlayer, source))
     );
+  }
+  // "Target player who lost life this turn" (Rix Maadi Guildmage).
+  if (typeof spec === "object" && spec.kind === "player-with-turn-stat") {
+    if (ref.kind !== "player" || !isLivingPlayer(state, ref)) return false;
+    if (spec.opponent === true && ref.player === forPlayer) return false;
+    return turnStatOf(state, ref.player, spec.turnStat) > 0;
   }
   // "Target player who was dealt combat damage by [this] this turn" (Hope
   // of Ghirapur), "…dealt damage by this creature this turn" (Wicked Akuba),

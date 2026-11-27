@@ -1219,6 +1219,9 @@ const TARGET_PHRASES = [
   ["target player who was dealt combat damage by ~ this turn", { kind: "player-dealt-damage-by-source", combat: true }],
   ["target opponent previously dealt damage by it", { kind: "player-dealt-damage-by-source", ever: true, opponent: true }],
   ["target opponent previously dealt damage by ~", { kind: "player-dealt-damage-by-source", ever: true, opponent: true }],
+  // A player by what they did this turn (`player-with-turn-stat`): Rix Maadi Guildmage.
+  ["target player who lost life this turn", { kind: "player-with-turn-stat", turnStat: "life-lost" }],
+  ["target opponent who lost life this turn", { kind: "player-with-turn-stat", turnStat: "life-lost", opponent: true }],
   ["target player", "player"],
   ["target opponent", "opponent"],
   // One slot over players and permanents, each part with its own filter
@@ -5939,7 +5942,7 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`each opponent who voted for a choice you didn't vote for loses ${N} life`).exec(s))) {
     return { kind: "lose-life", amount: amount(m[1]), who: "opponents-who-voted-otherwise" };
   }
-  if ((m = re(`(target player|target opponent|target player dealt damage by ~ this turn) loses ${N} life`).exec(s))) {
+  if ((m = re(`(target player|target opponent|target player dealt damage by ~ this turn|target (?:player|opponent) who lost life this turn) loses ${N} life`).exec(s))) {
     return { kind: "lose-life", amount: amount(m[2]), target: slot(m[1]) };
   }
   if ((m = re(`each opponent loses ${N} life and you gain ${N} life`).exec(s))) {

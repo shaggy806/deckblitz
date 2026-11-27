@@ -9209,3 +9209,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A removed blocker that must block again (2026-11-27).** `effect:remove-blocker-then-must-block`: `remove-from-combat` `thenMustBlock` (False Orders' `thenMayBlock` with the `choose-permanents` at `min: 1`). Balduvian Warlord. The scaffolder reads both cards' lines and "Activate only during the declare blockers step". `test/remove-blocker-must-reblock.test.ts`.
 
 **Not the target of another named creature's ability (2026-11-27).** `filter:not-targeted-by-named-ability`: `CardFilter.targetedByAbility { source?, otherThanSource? }` under `not` (filter.ts `targetedByAbility`: an ability on the stack aimed at it in this stint, rules 115.1c, 115.1d). Goblin Artisans. `test/targeted-by-ability.test.ts`.
+
+**Target player who lost life this turn (2026-11-27).** `filter:target-player-lost-life-this-turn`: the `player-with-turn-stat` target `{ turnStat, opponent? }` (targeting.ts, over `turnStatOf`). Rix Maadi Guildmage; the scaffolder reads "target player/opponent who lost life this turn loses N life". `test/player-with-turn-stat.test.ts`.

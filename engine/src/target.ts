@@ -219,6 +219,18 @@ export type TargetSpec =
       readonly ever?: true;
       readonly opponent?: true;
     }
+  /**
+   * "Target player **who lost life this turn**" (Rix Maadi Guildmage): a
+   * living player whose `turnStat` this turn is above 0 (the journal's
+   * `TURN_STAT_READS`); `opponent`, only an opponent of the player choosing.
+   * Part of the targeting requirement, read as the target is chosen and
+   * again as it resolves (rule 608.2b).
+   */
+  | {
+      readonly kind: "player-with-turn-stat";
+      readonly turnStat: TurnStat;
+      readonly opponent?: true;
+    }
   | {
       readonly kind: "opponent-compared";
       readonly stat: PlayerStat;
@@ -2040,6 +2052,17 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
     return spec.playerWith?.turnStat === "damage-taken" && spec.filter.damagedThisTurnBy !== undefined
       ? `${either} that was dealt damage this turn`
       : either;
+  }
+  if (spec.kind === "player-with-turn-stat") {
+    const who = spec.opponent === true ? "opponent" : "player";
+    const did: Partial<Record<TurnStat, string>> = {
+      "life-lost": "who lost life",
+      "life-gained": "who gained life",
+      "damage-taken": "who was dealt damage",
+      "cards-drawn": "who drew a card",
+      "spells-cast": "who cast a spell",
+    };
+    return `${who} ${did[spec.turnStat] ?? `with ${spec.turnStat.replace(/-/g, " ")}`} this turn`;
   }
   if (spec.kind === "player-dealt-damage-by-source") {
     const who = spec.opponent === true ? "opponent" : "player";

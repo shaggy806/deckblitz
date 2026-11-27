@@ -4499,6 +4499,9 @@ for "…who was dealt combat damage by Hope of Ghirapur this turn"; `ever: true,
 opponent: true` for "target opponent previously dealt damage by it" — Diseased
 Vermin, any turn of the game: by the source in its stint, read from the
 journal, a sacrificed source included),
+`{ kind: "player-with-turn-stat", turnStat, opponent? }` ("target player who
+lost life this turn" — Rix Maadi Guildmage, `turnStat: "life-lost"`; any
+`TurnStat` above 0 this turn, read again as it resolves),
 `"creature-or-player"`, `"opponent-or-planeswalker"`,
 `"permanent"`, `"nonland-permanent"`, `"nonland-permanent-an-opponent-controls"`,
 `"land"`, `"artifact"`, `"artifact-an-opponent-controls"`, `"artifact-or-enchantment"`,

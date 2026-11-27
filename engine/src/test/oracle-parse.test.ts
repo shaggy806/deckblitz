@@ -1255,6 +1255,12 @@ describe("the players a sentence names by another target, the Aura's host and th
     expect(akuba.effect).toEqual({ kind: "lose-life", amount: 1, target: 0 });
   });
 
+  it("a player who lost life this turn (Rix Maadi Guildmage)", () => {
+    const rix = face(CREATURE, "{B}{R}: Target player who lost life this turn loses 1 life.").activated[0];
+    expect(rix.targets).toEqual([{ kind: "player-with-turn-stat", turnStat: "life-lost" }]);
+    expect(rix.effect).toEqual({ kind: "lose-life", amount: 1, target: 0 });
+  });
+
   it("a blocker removed from combat that then blocks again, mandatory or not (Balduvian Warlord, False Orders)", () => {
     const warlord = face(
       CREATURE,
