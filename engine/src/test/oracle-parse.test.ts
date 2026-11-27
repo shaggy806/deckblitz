@@ -26686,3 +26686,35 @@ describe("the exiled card's power and toughness", () => {
     });
   });
 });
+
+describe("an untap in the untap step replaced (would-untap-in-untap-step)", () => {
+  it("reads Freyalise's Winds' replacement", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Enchantment",
+      oracle_text:
+        "If a permanent with a wind counter on it would untap during its controller's untap step, remove all wind counters from it instead.",
+    }) as unknown as { complete: boolean; static: { replacement: unknown }[] };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]?.replacement).toEqual({
+      event: "would-untap-in-untap-step",
+      filter: { counters: { kind: "wind", compare: { op: "gte", n: 1 } } },
+      instead: { removeCounter: "wind", amount: "all" },
+    });
+  });
+
+  it("reads Bewitching Leechcraft's granted line, \"if you do, untap it\"", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Creature — Horror",
+      oracle_text:
+        "If this creature would untap during your untap step, remove a +1/+1 counter from it instead. If you do, untap it.",
+    }) as unknown as { complete: boolean; static: { replacement: unknown }[] };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]?.replacement).toEqual({
+      event: "would-untap-in-untap-step",
+      filter: { isSource: true },
+      instead: { removeCounter: "+1/+1", amount: 1, ifRemovedUntap: true },
+    });
+  });
+});

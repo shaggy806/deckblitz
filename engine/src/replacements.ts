@@ -120,7 +120,34 @@ export type ReplacementSpec =
   | CoinFlipReplacement
   | DiceRollReplacement
   | VillainousChoiceReplacement
-  | DestroyReplacement;
+  | DestroyReplacement
+  | UntapStepReplacement;
+
+/**
+ * "If this creature would untap during your untap step, remove a +1/+1
+ * counter from it instead. If you do, untap it" (Bewitching Leechcraft's
+ * granted ability: `filter: { isSource: true }`, `ifRemovedUntap`); "if a
+ * permanent with a wind counter on it would untap during its controller's
+ * untap step, remove all wind counters from it instead" (Freyalise's Winds:
+ * `amount: "all"`). A permanent matching `filter` (from this permanent's
+ * controller's side) untapping in its controller's untap step (rule 502.3)
+ * has `instead.removeCounter` counters taken off it by this permanent's
+ * controller, and doesn't untap (rule 614.6) — unless `ifRemovedUntap` and at
+ * least one came off, when the untap still happens, and the replacements that
+ * haven't applied yet may apply to it, a stun counter's among them (rule
+ * 616.1f). Where two would apply, its controller chooses which goes first
+ * (616.1). Applied by `Game.untapInOwnUntapStep`.
+ */
+export interface UntapStepReplacement {
+  readonly event: "would-untap-in-untap-step";
+  readonly filter: CardFilter;
+  readonly instead: {
+    readonly removeCounter: string;
+    readonly amount: number | "all";
+    /** "If you do, untap it." */
+    readonly ifRemovedUntap?: true;
+  };
+}
 
 /**
  * "If another creature you control with a +1/+1 counter on it **would be

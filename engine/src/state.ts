@@ -4014,7 +4014,19 @@ export type ReplacementOrderResume =
    * player draw isn't replaced by it again). */
   | { readonly site: "draw"; readonly player: PlayerId; readonly replacing?: readonly string[] }
   /** A resolved spell leaving the stack, tried again with the answer. */
-  | { readonly site: "leave-stack"; readonly spell: ObjectId };
+  | { readonly site: "leave-stack"; readonly spell: ObjectId }
+  /** The untap step's untapping (rule 502.3), carried on from where it
+   * asked: `done` have been seen to, `untapped` of them untapped, and the
+   * permanent asked about has had `chain.applied` of its replacements
+   * already (rule 616.1f; `would-untap-in-untap-step`). */
+  | {
+      readonly site: "untap-step";
+      readonly untapping: readonly ObjectId[];
+      readonly kept: readonly ObjectId[];
+      readonly done: readonly ObjectId[];
+      readonly untapped: number;
+      readonly chain: { readonly object: ObjectId; readonly applied: readonly string[] };
+    };
 
 export type AwaitingDecision =
   | {

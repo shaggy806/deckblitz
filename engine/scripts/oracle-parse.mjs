@@ -26134,6 +26134,34 @@ function parseStatic(line, text) {
   if (line === "If you would flip a coin, instead flip two coins and ignore one.") {
     return { affects: { scope: "self" }, replacement: { event: "would-flip-coin", who: "you", ignore: true }, text };
   }
+  // "If this creature would untap during your untap step, remove a +1/+1
+  // counter from it instead. If you do, untap it" (Bewitching Leechcraft's
+  // granted ability); "If a permanent with a wind counter on it would untap
+  // during its controller's untap step, remove all wind counters from it
+  // instead" (Freyalise's Winds): `would-untap-in-untap-step`.
+  if ((m = /^If (?:this (?:creature|permanent|artifact)|~) would untap during your untap step, remove (a|an|one|two|three|all) (\S+) counters? from it instead\.( If you do, untap it\.)?$/.exec(line))) {
+    const amount = m[1] === "all" ? "all" : (NUMBERS[m[1]] ?? 1);
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-untap-in-untap-step",
+        filter: { isSource: true },
+        instead: { removeCounter: m[2], amount, ...(m[3] !== undefined ? { ifRemovedUntap: true } : {}) },
+      },
+      text,
+    };
+  }
+  if ((m = /^If a permanent with an? (\S+) counter on it would untap during its controller's untap step, remove all \1 counters from it instead\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      replacement: {
+        event: "would-untap-in-untap-step",
+        filter: { counters: { kind: m[1], compare: { op: "gte", n: 1 } } },
+        instead: { removeCounter: m[1], amount: "all" },
+      },
+      text,
+    };
+  }
   // "If you would scry a number of cards, scry that many cards plus one
   // instead" (Kenessos), "draw that many cards instead" (Eligeth).
   if ((m = /^If you would scry a number of cards, scry that many cards plus (\w+) instead\.$/.exec(line))) {

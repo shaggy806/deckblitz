@@ -517,7 +517,7 @@ import {
   type RollShiftOption,
   type RollThen,
 } from "./random-results.js";
-import type { CoinFlipReplacement, DiceRollReplacement, OthersEnterReplacement, ReplacementSpec, VillainousChoiceReplacement } from "./replacements.js";
+import type { CoinFlipReplacement, DiceRollReplacement, OthersEnterReplacement, ReplacementSpec, UntapStepReplacement, VillainousChoiceReplacement } from "./replacements.js";
 import {
   COLORS,
   MANA_TYPES,
@@ -12910,15 +12910,20 @@ export class Game {
 
   /** The untap step's untapping (rule 502.3), once its controller has chosen
    * which of `untapping` to leave tapped (`kept`). */
-  private finishUntapStep(untapping: readonly ObjectId[], kept: readonly ObjectId[]): void {
+  private finishUntapStep(
+    untapping: readonly ObjectId[],
+    kept: readonly ObjectId[],
+    /** Where a `replacement-order` question stopped it (`untap-step`). */
+    progress?: Extract<ReplacementOrderResume, { site: "untap-step" }>,
+  ): void {
     const active = this.activePlayer;
     // "During your next untap step, as you untap your permanents, return
     // this land to its owner's hand" (Undiscovered Paradise): part of the
     // untapping (rule 502.3), whether or not it would untap (the ruling), if
     // it's still the same object (400.7).
     const activeReturns = this.state.players[active];
-    const returns = activeReturns?.untapReturns ?? [];
-    if (activeReturns !== undefined) delete activeReturns.untapReturns;
+    const returns = progress !== undefined ? [] : (activeReturns?.untapReturns ?? []);
+    if (activeReturns !== undefined && progress === undefined) delete activeReturns.untapReturns;
     for (const { object, stint } of returns) {
       const permanent = this.state.objects[object];
       if (permanent?.zone !== "battlefield" || (permanent.zoneChangeCount ?? 0) !== stint) continue;
@@ -12926,12 +12931,30 @@ export class Game {
     }
     // How many of the active player's permanents the step untapped (rule
     // 502.3), a token stack as every token in it.
-    let untapped = 0;
+    let untapped = progress?.untapped ?? 0;
+    const done: ObjectId[] = [...(progress?.done ?? [])];
     for (const id of untapping) {
-      if (kept.includes(id)) continue;
+      if (kept.includes(id) || done.includes(id)) continue;
       if (this.state.objects[id]?.zone !== "battlefield") continue;
       const count = this.state.objects[id]?.stackCount ?? 1;
-      if (this.untapUnlessStunned(id, active)) untapped += count;
+      const applied = progress?.chain.object === id ? [...progress.chain.applied] : [];
+      const result = this.untapInOwnUntapStep(id, active, applied);
+      if (typeof result !== "boolean") {
+        // Rule 616.1: its controller chooses which applies first, with no
+        // priority in the step (502.4); it carries on from here.
+        this.state.awaiting = {
+          kind: "replacement-order",
+          player: active,
+          event: `${this.state.objects[id].cardName} would untap`,
+          options: result,
+          best: 0,
+          answers: `untap:${id}`,
+          resume: { site: "untap-step", untapping, kept, done, untapped, chain: { object: id, applied } },
+        };
+        return;
+      }
+      if (result) untapped += count;
+      done.push(id);
     }
     if (untapped > 0) this.emit({ type: "untap-step-untapped", player: active, count: untapped });
     // Seedborn Muse, Unwinding Clock, Bender's Waterskin: other players'
@@ -13000,6 +13023,74 @@ export class Game {
    * token stack untaps, or loses a counter, as a whole. Returns whether it
    * untapped.
    */
+  /**
+   * `id` untapping in its controller's (`active`'s) own untap step (rule
+   * 502.3), through every `would-untap-in-untap-step` replacement and stun
+   * counter (122.1d) that applies to it: one at a time, each only once
+   * (614.5), each after the first applying to what the one before left
+   * (616.1f) — Bewitching Leechcraft's "If you do, untap it" is an untap
+   * the rest may still replace. `applied` holds the keys applied so far, and
+   * grows. Where two different ones would apply next and its controller
+   * hasn't said which goes first (616.1), the options to ask about; else
+   * whether it untapped.
+   */
+  private untapInOwnUntapStep(
+    id: ObjectId,
+    active: PlayerId,
+    applied: string[],
+  ): boolean | ReplacementOrderOption[] {
+    const replacing = (): { option: ReplacementOrderOption; ability?: UntapStepReplacement; by: PlayerId }[] => {
+      const out: { option: ReplacementOrderOption; ability?: UntapStepReplacement; by: PlayerId }[] = [];
+      const object = this.state.objects[id];
+      if (object?.zone !== "battlefield" || !object.tapped) return out;
+      for (const sourceId of this.state.zones.shared.battlefield) {
+        const source = this.state.objects[sourceId];
+        if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+        if (this.state.players[source.controller]?.hasLost === true) continue;
+        this.staticsOfSource(source).forEach((ability, index) => {
+          const r = ability.replacement;
+          if (r?.event !== "would-untap-in-untap-step" || !this.staticActive(source, ability)) return;
+          const key = `replace:${sourceId}:${index}`;
+          if (applied.includes(key)) return;
+          if (!matchesFilter(this.state, this.registry, id, r.filter, { you: source.controller, source: sourceId })) return;
+          out.push({ option: { key, name: source.cardName, text: ability.text ?? "instead", object: sourceId }, ability: r, by: source.controller });
+        });
+      }
+      if (out.length > 0 && (object.counters.stun ?? 0) > 0 && !applied.includes("stun")) {
+        out.push({ option: { key: "stun", name: "Stun counter", text: "remove a stun counter from it instead", object: id }, by: object.controller });
+      }
+      return out;
+    };
+    if (objectProhibited(this.state, this.registry, "untap", id)) return false;
+    for (;;) {
+      const options = replacing();
+      // Nothing (more) replaces it: it untaps, or a stun counter alone
+      // replaces that.
+      if (options.length === 0) return this.untapUnlessStunned(id, active);
+      let pick = options[0];
+      const differ = options.some((o) => o.option.name !== pick.option.name || o.option.text !== pick.option.text);
+      if (differ && !this.activeHasLeft()) {
+        const answered = (this.state.replacementAnswers?.[`untap:${id}`] ?? []).find(
+          (key) => !applied.includes(key) && options.some((o) => o.option.key === key),
+        );
+        if (answered === undefined) return options.map((o) => o.option);
+        pick = options.find((o) => o.option.key === answered) ?? pick;
+      }
+      applied.push(pick.option.key);
+      const object = this.state.objects[id];
+      if (pick.ability === undefined) {
+        // A stun counter (rule 122.1d): one comes off, if it can, and it
+        // doesn't untap.
+        if (!this.countersLocked(id, "stun")) this.removeCountersFrom(id, "stun", 1, false);
+        return false;
+      }
+      const { removeCounter, amount, ifRemovedUntap } = pick.ability.instead;
+      const removed = this.removeCountersFrom(id, removeCounter, amount, false, pick.by);
+      invalidateComputedCache();
+      if (ifRemovedUntap !== true || removed <= 0 || object?.zone !== "battlefield") return false;
+    }
+  }
+
   private untapUnlessStunned(
     id: ObjectId,
     /** The player whose untap step untaps it (rule 502.3), if one does. */
@@ -70409,6 +70500,16 @@ controlledBy,
     this.state.replacementAnswers = { ...answers, [awaiting.answers]: [...(answers[awaiting.answers] ?? []), chosen.key] };
     this.emit({ type: "replacement-order-chosen", player, event: awaiting.event, effect: chosen.name });
     const { resume } = awaiting;
+    if (resume.site === "untap-step") {
+      // The untap step carries on, still with no priority (rule 502.4).
+      this.finishUntapStep(resume.untapping, resume.kept, resume);
+      if (this.state.awaiting === null) {
+        this.state.priority.active = false;
+        this.state.priority.holder = null;
+        this.raiseDayNightTransformsInUntapStep();
+      }
+      return;
+    }
     if (resume.site === "combat-damage") this.promptNextDamageAssignment();
     else if (resume.site === "draw") this.drawAheadOfQueue(resume.player, resume.replacing);
     else if (resume.site === "leave-stack") this.leaveStackAfterResolving(resume.spell);
