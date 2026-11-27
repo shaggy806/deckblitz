@@ -308,6 +308,7 @@ import { chooseModes } from "./decisions/choose-modes.js";
 import { chooseCreatureType } from "./decisions/choose-creature-type.js";
 import { chooseCardName } from "./decisions/choose-card-name.js";
 import { isNameableAs, lastKnownNames, namesOf } from "./card-names.js";
+import type { CardNameFilter } from "./card-names.js";
 import { proliferate } from "./decisions/proliferate.js";
 import { splitMana } from "./decisions/split-mana.js";
 import { timeTravel } from "./decisions/time-travel.js";
@@ -71698,10 +71699,18 @@ controlledBy,
   private refreshStaticNames(): void {
     const battlefield = this.state.zones.shared.battlefield;
     let names: Map<ObjectId, { readonly name: string; readonly timestamp: number }> | null = null;
+    // Spy Kit's "all names of nonlegendary creature cards in addition to its
+    // name" (`addsAllNames`): one filter a permanent — two Kits give the same
+    // names, and no printed card adds a different set yet.
+    let allNames: Map<ObjectId, CardNameFilter> | null = null;
     for (const id of battlefield) {
       const object = this.state.objects[id];
       if (object.attachedTo === null) continue;
       const def = this.registry.get(rulesTextName(object));
+      const adding = def.static.find((ability) => ability.addsAllNames !== undefined);
+      if (adding?.addsAllNames !== undefined && adding.affects.scope === "attached" && !hasLostAbilities(this.state, this.registry, object)) {
+        (allNames ??= new Map()).set(object.attachedTo, adding.addsAllNames);
+      }
       const setting = def.static.findLast((ability) => ability.setName !== undefined || ability.setsChosenName === true);
       // "The last chosen name" (Psychic Paper): none chosen, none set.
       const name = setting?.setName ?? (setting?.setsChosenName === true ? object.chosenNames?.at(-1) : undefined);
@@ -71713,6 +71722,12 @@ controlledBy,
     }
     for (const id of battlefield) {
       const object = this.state.objects[id];
+      const all = allNames?.get(id);
+      if (JSON.stringify(object.allNames?.filter) !== JSON.stringify(all)) {
+        if (all === undefined) delete object.allNames;
+        else object.allNames = { filter: all };
+        invalidateComputedCache();
+      }
       const next = names?.get(id);
       if (object.staticName === undefined && next === undefined) continue;
       if (object.staticName?.name === next?.name && object.staticName?.timestamp === next?.timestamp) continue;
@@ -73070,6 +73085,30 @@ controlledBy,
       const group = legendaryGroups.get(key);
       if (group) group.push(id);
       else legendaryGroups.set(key, [id]);
+    }
+    // A legend with all names of nonlegendary creature cards besides its own
+    // (Spy Kit) has a name in common with each other such legend of its
+    // controller, and with any whose name is among them: one group of all of
+    // them, the choice of which to keep asked once.
+    for (const id of battlefield) {
+      const object = this.state.objects[id];
+      if (object.allNames === undefined || moving.has(id)) continue;
+      const own = `${object.controller} ${nameOf(object)}`;
+      if (!legendaryGroups.has(own)) continue;
+      const names = new Set(namesOf(this.registry, object));
+      const merged: ObjectId[] = [];
+      for (const [key, members] of [...legendaryGroups]) {
+        const first = this.state.objects[members[0]];
+        if (first.controller !== object.controller) continue;
+        const shares =
+          key === own ||
+          members.some((m) => this.state.objects[m].allNames !== undefined) ||
+          namesOf(this.registry, first).some((name) => names.has(name));
+        if (!shares) continue;
+        merged.push(...members);
+        legendaryGroups.delete(key);
+      }
+      legendaryGroups.set(own, merged);
     }
     const keeps = new Set(this.state.legendRuleKeeps ?? []);
     const order = this.apnapOrder();
@@ -76338,6 +76377,7 @@ controlledBy,
       ...(object.harnessed === true ? { harnessed: true } : {}),
       lostAbilities,
       ...(renamed !== name ? { renamed } : {}),
+      ...(object.allNames !== undefined ? { allNamesOf: object.allNames.filter } : {}),
       ...(textNameOf(object) !== undefined ? { textName: textNameOf(object) } : {}),
       ...(object.merged !== undefined ? { timesMutated: object.merged.timesMutated } : {}),
       ...(object.modifiers.some((m) => m.copiable === true)
@@ -77715,6 +77755,7 @@ controlledBy,
     object.suspended = false;
     object.timeCast = undefined;
     object.staticName = undefined;
+    delete object.allNames;
     if (!enteringToken) object.exileAtEndStep = false;
     object.foretold = false;
     object.foretoldOnTurn = null;

@@ -49,6 +49,9 @@ export interface CardNameFilter {
   /** "A card name **other than a basic land card name**" (Necromentia,
    * Null Chamber): anything but a basic land. */
   readonly notBasicLand?: true;
+  /** "**Nonlegendary** creature cards" (Spy Kit's "all names of
+   * nonlegendary creature cards"): no legendary supertype. */
+  readonly nonlegendary?: true;
 }
 
 /**
@@ -108,6 +111,7 @@ export function nameMatchesFilter(def: CardDefinition, filter: CardNameFilter | 
   const basic = def.supertypes.includes("basic");
   if (filter.nonbasic === true && basic) return false;
   if (filter.notBasicLand === true && basic && def.types.includes("land")) return false;
+  if (filter.nonlegendary === true && def.supertypes.includes("legendary")) return false;
   return true;
 }
 
@@ -158,7 +162,11 @@ export function isNameableAs(registry: CardRegistry, name: string, filter?: Card
  */
 export function namesOf(registry: CardRegistry, object: GameObject): readonly string[] {
   if (object.faceDown !== undefined || printedCardName(object) === LOCKED_ROOM) return [];
-  const name = nameOf(object);
+  return withAllNames(registry, ownNames(registry, nameOf(object)), object.allNames?.filter);
+}
+
+/** A name's names: either half's for a whole split card, else itself. */
+function ownNames(registry: CardRegistry, name: string): readonly string[] {
   if (registry.has(name)) {
     const def = registry.get(name);
     if (def.split && def.faces !== null && def.faces[0] === name) return def.faces.slice(1);
@@ -166,19 +174,29 @@ export function namesOf(registry: CardRegistry, object: GameObject): readonly st
   return [name];
 }
 
+/** `names` and, for a permanent a static gives "all names of nonlegendary
+ * creature cards in addition to its name" (Spy Kit — `GameObject.allNames`),
+ * every name of the catalogue matching that filter besides. */
+function withAllNames(registry: CardRegistry, names: readonly string[], all: CardNameFilter | undefined): readonly string[] {
+  if (all === undefined) return names;
+  const more = nameableCardNames(registry, all);
+  return [...names, ...more.filter((name) => !names.includes(name))];
+}
+
 /** The names a card or permanent had as it last existed (`lastKnown`): its
- * name then, both halves' for a split card, none face down. */
+ * name then, both halves' for a split card, none face down, and the ones a
+ * static gave it besides (`allNamesOf`, Spy Kit). */
 export function lastKnownNames(
   registry: CardRegistry,
-  lki: { readonly name: string; readonly renamed?: string; readonly faceDown?: boolean },
+  lki: {
+    readonly name: string;
+    readonly renamed?: string;
+    readonly faceDown?: boolean;
+    readonly allNamesOf?: CardNameFilter;
+  },
 ): readonly string[] {
   if (lki.faceDown === true || lki.name === LOCKED_ROOM) return [];
-  const name = lki.renamed ?? lki.name;
-  if (registry.has(name)) {
-    const def = registry.get(name);
-    if (def.split && def.faces !== null && def.faces[0] === name) return def.faces.slice(1);
-  }
-  return [name];
+  return withAllNames(registry, ownNames(registry, lki.renamed ?? lki.name), lki.allNamesOf);
 }
 
 /** Whether `object` has the name `name` — one of its names (709.4a). */

@@ -2602,6 +2602,19 @@ function countsAsNamed(
   return registry.get(rulesTextName(live)).static.some((s) => s.fromGraveyard === true && s.countsAsNamedFor === name);
 }
 
+/** Whether a static gave it `name` beside its own — Spy Kit's "all names of
+ * nonlegendary creature cards in addition to its name" (`GameObject.allNames`,
+ * or as it last existed). */
+function hasAddedName(
+  registry: CardRegistry,
+  live: GameObject | undefined,
+  lki: LastKnownInfo | undefined,
+  name: string,
+): boolean {
+  if (live !== undefined) return live.allNames !== undefined && namesOf(registry, live).includes(name);
+  return lki?.allNamesOf !== undefined && lastKnownNames(registry, lki).includes(name);
+}
+
 /** The face `source` showed in its battlefield stint `stint` (rule 607.1b:
  * an ability is indexed into its face's list): the face it shows now while
  * it's still in that stint, else the face its last known information names
@@ -2834,7 +2847,14 @@ export function matchesFilter(
   }
   // The name it has — a copy exception's, if one renamed it (`nameOf`).
   const named = live !== undefined ? nameOf(live) : (lki!.renamed ?? lki!.name);
-  if (filter.name !== undefined && named !== filter.name && !countsAsNamed(registry, live, filter.name, ctx)) return false;
+  if (
+    filter.name !== undefined &&
+    named !== filter.name &&
+    !countsAsNamed(registry, live, filter.name, ctx) &&
+    !hasAddedName(registry, live, lki, filter.name)
+  ) {
+    return false;
+  }
   if (filter.sameNameAsAny !== undefined) {
     // A nameless object (face down, rule 708.2a) shares a name with nothing;
     // one name in common is enough — a split card's either half (201.2a).

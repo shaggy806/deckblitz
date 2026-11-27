@@ -26513,6 +26513,19 @@ function parseStatic(line, text) {
     }
   }
   {
+    // "Equipped creature gets +1/+1 and has all names of nonlegendary
+    // creature cards in addition to its name" (Spy Kit): `addsAllNames`.
+    const all = /^(Equipped|Enchanted) creature gets \+(\d+)\/\+(\d+) and has all names of nonlegendary creature cards in addition to its name\.$/.exec(line);
+    if (all !== null) {
+      return {
+        affects: { scope: "attached" },
+        grantPt: [Number(all[2]), Number(all[3])],
+        addsAllNames: { types: ["creature"], nonlegendary: true },
+        text,
+      };
+    }
+  }
+  {
     const fromGraveyard = /^As long as a creature card with flying is in a graveyard, (~) has flying\. The same is true for (.+)\.$/.exec(line);
     // "If a creature card with flying was exiled with this creature's delve
     // ability, this creature has flying" (Soulflayer): the creature cards

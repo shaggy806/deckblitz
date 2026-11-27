@@ -21259,6 +21259,19 @@ describe("keywords of the exiled cards used to craft it", () => {
     });
   });
 
+  it("reads Spy Kit's all names of nonlegendary creature cards", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Artifact — Equipment",
+      oracle_text: "Equipped creature gets +1/+1 and has all names of nonlegendary creature cards in addition to its name.\nEquip {2}",
+    } as never) as unknown as { static: Record<string, unknown>[] };
+    expect(face.static[0]).toMatchObject({
+      affects: { scope: "attached" },
+      grantPt: [1, 1],
+      addsAllNames: { types: ["creature"], nonlegendary: true },
+    });
+  });
+
   it("reads Eater of Virtue's, for the equipped creature", () => {
     const face = parseFace({
       name: "Test Card",

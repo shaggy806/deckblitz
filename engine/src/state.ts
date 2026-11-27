@@ -1408,6 +1408,12 @@ export interface GameObject {
    * permanent (layer 2), is a stored field, kept right by `refreshStaticNames`
    * at each state-based check, and it's read through {@link nameOf}. */
   staticName?: { readonly name: string; readonly timestamp: number };
+  /** "Equipped creature has **all names of nonlegendary creature cards** in
+   * addition to its name" (Spy Kit — `StaticAbility.addsAllNames`): every
+   * name of the catalogue matching `filter`, besides its own, read through
+   * `namesOf`. Stored like `staticName`, kept right by `refreshStaticNames`
+   * at each state-based check. */
+  allNames?: { readonly filter: CardNameFilter };
   /** True on a permanent cast from suspend (or another "has haste until it
    * leaves" grant) — `hasSummoningSickness` returns false for it. Cleared on
    * any zone change. */
@@ -2586,6 +2592,9 @@ export interface LastKnownInfo {
   /** The name a copy exception gave it, where that isn't its card's
    * (`name`, which stays the registry key) — see {@link nameOf}. */
   readonly renamed?: string;
+  /** The names a static gave it besides its own (`GameObject.allNames`,
+   * Spy Kit), read by `lastKnownNames`. */
+  readonly allNamesOf?: CardNameFilter;
   /** Its copy exceptions (`copiable` modifiers) and whether one made it not
    * legendary: with `name` — the card it was a copy of, or the face that
    * was up — its last copiable values, which a copy of it made once it has

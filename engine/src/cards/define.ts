@@ -31,7 +31,7 @@ import type {
   ThisWayKind,
 } from "../effects.js";
 import type { AggregateOf, AggregateSpec, CardFilter, ManaSpentClause, NumCompare } from "../filter.js";
-import type { CardNameChoice } from "../card-names.js";
+import type { CardNameChoice, CardNameFilter } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
 import type { Color, ManaFromSpec, ManaProductionRule, ManaType, SpendAs } from "../mana.js";
 import type { Prohibition } from "../prohibitions.js";
@@ -3165,6 +3165,14 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * chosen name**" (Psychic Paper) — the last of `GameObject.chosenNames`.
    * Nothing while none is chosen. */
   readonly setsChosenName?: true;
+  /** "Equipped creature … has **all names of nonlegendary creature cards in
+   * addition to its name**" (Spy Kit, with `affects: { scope: "attached" }`):
+   * what this reaches has every name of the catalogue matching the filter
+   * (`nameableCardNames` — every card a game here can hold) beside its own,
+   * kept on `GameObject.allNames` by `refreshStaticNames`. So "with the same
+   * name" reads, chosen names (Pithing Needle) and the legend rule (704.5j)
+   * see each of them. A copy of it doesn't have them (rule 707.2). */
+  readonly addsAllNames?: CardNameFilter;
   /**
    * "Enchanted creature is a copy of the chosen creature" (Metamorphic
    * Alteration, with `affects: { scope: "attached" }` and a
