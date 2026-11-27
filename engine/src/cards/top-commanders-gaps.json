@@ -3338,7 +3338,8 @@
   "static:keywords-from-exiled-with-counter",
   "filter:same-name-as-cost-moved-card",
   "filter:same-name-as-target-in-search",
-  "zone:ability-from-several-zones"
+  "zone:ability-from-several-zones",
+  "effect:look-at-hand-of-target-spell-controller"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

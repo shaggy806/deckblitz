@@ -9085,3 +9085,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Same name as a target in a search (2026-11-27).** `filter:same-name-as-target-in-search`: no engine code — `search-library` `filter: { sameNameWith: 0 }` reads the spell's target slot. March of Burgeoning Life. `test/search-same-name-as-target.test.ts`.
 
 **One ability from several zones (2026-11-27).** `zone:ability-from-several-zones`: `ActivatedAbility.zone` as a list (rule 113.6m), read through `activatesFrom` / `activationZoneNow`. Mister Immortal. `test/ability-from-several-zones.test.ts`.
+
+**Look at a countered spell's controller's hand (2026-11-27).** `effect:look-at-hand-of-target-spell-controller`: no engine code — `look-at-hand` `target: { controllerOf: 0 }` after the counter (Dismal Failure's ref). Lay Bare. `test/look-at-hand.test.ts`.

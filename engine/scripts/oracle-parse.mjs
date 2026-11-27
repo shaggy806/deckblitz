@@ -14921,6 +14921,14 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: loss });
       continue;
     }
+    // "Look at its controller's hand" after the one sentence that targeted
+    // (Lay Bare): that target's controller, as it last existed.
+    if (/^look at its controller's hand\.$/i.test(sentence) && ctx.targets.length === 1 && parsed.length > 0) {
+      const look = { kind: "look-at-hand", target: { controllerOf: 0 } };
+      parsed.push(look);
+      hints.push({ sentence, effect: look });
+      continue;
+    }
     // "Its controller draws / discards a card", "… gets a poison counter"
     // after the one sentence that targeted (Call to Heel, Assassin's Strike,
     // Pistus Strike): that target's controller, as it last existed.

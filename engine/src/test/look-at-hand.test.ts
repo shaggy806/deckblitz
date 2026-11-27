@@ -121,3 +121,55 @@ describe("Clairvoyance", () => {
     expect(hand(game, A).length).toBe(before + 1);
   });
 });
+
+describe("Lay Bare: counter target spell, look at its controller's hand", () => {
+  /** On his own turn Bob casts a Llanowar Elves, and Alice gets priority
+   * with it on the stack. */
+  const bobCastsBears = (game: ReturnType<typeof table>["game"]): ObjectId => {
+    lands(game, "Forest", 1, B);
+    const elves = toHand(game, "Llanowar Elves", B);
+    game.advanceUntil((s) => s.priority.holder === B || s.result.over);
+    game.dispatch({ type: "cast-spell", player: B, card: elves, targets: [] });
+    game.advanceUntil((s) => (s.priority.holder === A && s.zones.shared.stack.length > 0) || s.result.over);
+    return elves;
+  };
+
+  it("counters the spell, then Alice looks at its controller's hand alone", () => {
+    const { game, a } = table({ players: 3 });
+    nextTurn(game); // Bob's turn: he casts a creature at sorcery speed
+    const bears = bobCastsBears(game);
+    const bobsHand = [...hand(game, B)];
+    let looked: { view: PlayerView; eligible: readonly ObjectId[] } | undefined;
+    let carolSaw: PlayerView | undefined;
+    a.chooseFromZoneFn = (_view, eligible) => {
+      looked = { view: game.viewFor(A), eligible };
+      carolSaw = game.viewFor(C);
+      return [];
+    };
+    lands(game, "Island", 4);
+    cast(game, toHand(game, "Lay Bare"), { targets: [{ kind: "object", object: bears }] });
+    expect(graveyard(game, B)).toContain(bears);
+    expect(looked).toBeDefined();
+    expect(looked!.eligible).toEqual([]);
+    for (const id of bobsHand) expect(looked!.view.objects[id]?.cardName).toBe(game.state.objects[id].cardName);
+    for (const id of bobsHand) expect(carolSaw!.objects[id]).toBeUndefined();
+    expect(hand(game, B)).toEqual(bobsHand);
+  });
+
+  it("with its target gone, it doesn't resolve and looks at nothing", () => {
+    const { game, a } = table();
+    nextTurn(game);
+    const bears = bobCastsBears(game);
+    let asked = 0;
+    a.chooseFromZoneFn = () => {
+      asked += 1;
+      return [];
+    };
+    lands(game, "Island", 4);
+    cast(game, toHand(game, "Lay Bare"), { targets: [{ kind: "object", object: bears }], settle: false });
+    // Bob's spell resolves first: Alice's Lay Bare's only target is gone.
+    game.debugApplyEffect(A, { kind: "counter", target: 0 }, [{ kind: "object", object: bears }]);
+    game.advanceUntil((s) => s.zones.shared.stack.length === 0 || s.result.over);
+    expect(asked).toBe(0);
+  });
+});

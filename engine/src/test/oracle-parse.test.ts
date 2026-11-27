@@ -26119,4 +26119,21 @@ describe("casting-zones lane: Mister Immortal", () => {
       effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true },
     });
   });
+
+  it("reads Lay Bare's look at the countered spell's controller's hand", () => {
+    const parsed = parseFace({
+      name: "Lay Bare",
+      type_line: "Instant",
+      mana_cost: "{2}{U}{U}",
+      oracle_text: "Counter target spell. Look at its controller's hand.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "counter", target: 0 },
+        { kind: "look-at-hand", target: { controllerOf: 0 } },
+      ],
+    });
+  });
 });
