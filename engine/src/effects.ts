@@ -7937,11 +7937,15 @@ export type EffectSpec =
        * one attacker, any at all (no requirement or restriction on declaring
        * blockers applies to an effect's block, as rule 509.4b has it for one put
        * onto the battlefield blocking), and it blocks that (`"block-attacker"`).
+       * `thenMustBlock`: "then it blocks an attacking creature of your choice"
+       * (Balduvian Warlord) — the same, but exactly one attacker is chosen
+       * while there's any (the one it was blocking included, the ruling).
        */
       readonly kind: "remove-from-combat";
       readonly target: ObjectRef;
       readonly unblockSoleBlocked?: true;
       readonly thenMayBlock?: true;
+      readonly thenMustBlock?: true;
     }
   | {
       /** One creature blocks the attacker in slot 0, by an effect (rules
@@ -24168,13 +24172,17 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       ctx.removeFromCombat(target, spec.unblockSoleBlocked === true);
-      if (spec.thenMayBlock === true && target.kind === "object") {
+      if ((spec.thenMayBlock === true || spec.thenMustBlock === true) && target.kind === "object") {
+        const must = spec.thenMustBlock === true;
         applyEffectSpec(
           {
             kind: "choose-permanents",
             filter: { type: "creature", attacking: true },
             upTo: 1,
-            prompt: "You may have it block an attacking creature of your choice",
+            ...(must ? { min: 1 } : {}),
+            prompt: must
+              ? "Choose an attacking creature for it to block"
+              : "You may have it block an attacking creature of your choice",
             then: { kind: "block-attacker", blocker: target.object },
           },
           ctx,

@@ -782,7 +782,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // saved from a block — the board's call, or the card's own `whose`.
   // Having it block something else is the board's call (False Orders).
   "remove-from-combat": (n, v) => {
-    if (n.thenMayBlock === true) v.touch(n.target, "either", MINOR);
+    if (n.thenMayBlock === true || n.thenMustBlock === true) v.touch(n.target, "either", MINOR);
   },
   "block-attacker": none,
   // Who blocks what, traded: the board's call (Sorrow's Path, General Jarkeld).

@@ -1255,6 +1255,21 @@ describe("the players a sentence names by another target, the Aura's host and th
     expect(akuba.effect).toEqual({ kind: "lose-life", amount: 1, target: 0 });
   });
 
+  it("a blocker removed from combat that then blocks again, mandatory or not (Balduvian Warlord, False Orders)", () => {
+    const warlord = face(
+      CREATURE,
+      "{T}: Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice. Activate only during the declare blockers step.",
+    ).activated[0];
+    expect(warlord.targets).toEqual([{ kind: "permanent", filter: { type: "creature", blocking: true } }]);
+    expect(warlord.effect).toEqual({ kind: "remove-from-combat", target: 0, unblockSoleBlocked: true, thenMustBlock: true });
+    expect(warlord.condition).toEqual({ kind: "turn-structure", steps: ["declare-blockers"] });
+    const orders = face(
+      "Instant",
+      "Cast this spell only during the declare blockers step.\nRemove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. You may have it block an attacking creature of your choice.",
+    );
+    expect(orders.effect).toEqual({ kind: "remove-from-combat", target: 0, unblockSoleBlocked: true, thenMayBlock: true });
+  });
+
   it("that player's step: a creature they control", () => {
     const siege = face("Enchantment", "At the beginning of combat on each opponent's turn, tap target creature that player controls.");
     expect(siege.triggered[0].trigger).toEqual({ on: "step-begins", step: "begin-combat", who: "opponent" });
@@ -5100,6 +5115,11 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const trail = face("Target player mills four cards.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)", "Sorcery");
     expect(trail.conspire).toBe(true);
     expect(trail.complete).toBe(true);
+  });
+
+  it("casualty N (rule 702.153a)", () => {
+    const cut = face("Casualty 2 (As you cast this spell, you may sacrifice a creature with power 2 or greater. When you do, copy this spell.)\nTarget player mills half their library, rounded down.", "Sorcery");
+    expect(cut.casualty).toBe(2);
   });
 
   it("a redirection (rule 614.9) — the en-Kor creatures and Daughter of Autumn", () => {

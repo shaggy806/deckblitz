@@ -9205,3 +9205,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 
 **Attacked or blocked since your last upkeep (2026-11-27).** `condition:attacked-or-blocked-since-last-upkeep`: `turn-history` over the new journal word `"blockers"` and `"attackers"` (an `any`), the window `"since-your-last-upkeep"` and `attachedOnly` (the enchanted creature, characteristics.ts). Shape of the Wiitigo. `test/attacked-or-blocked-since-last-upkeep.test.ts`.
 **Dealt noncombat damage this turn (2026-11-27).** `filter:dealt-noncombat-damage-this-turn`: `damagedThisTurnBy.combat` (`false` noncombat, `true` combat), read off `DamageSourceRecord.combat`, which `Game.recordDamage` now stamps (rules 120.2a, 120.2b). Grisly Sigil. The scaffolder reads "Casualty N". `test/noncombat-damage-this-turn.test.ts`.
+
+**A removed blocker that must block again (2026-11-27).** `effect:remove-blocker-then-must-block`: `remove-from-combat` `thenMustBlock` (False Orders' `thenMayBlock` with the `choose-permanents` at `min: 1`). Balduvian Warlord. The scaffolder reads both cards' lines and "Activate only during the declare blockers step". `test/remove-blocker-must-reblock.test.ts`.

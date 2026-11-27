@@ -11478,6 +11478,25 @@ export function parseEffect(text, outer) {
   if (massGrant !== null) return { effect: massGrant, todo: [], hints: [] };
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
+  // A blocker removed from combat (rule 506.4), its attackers unblocked when
+  // it alone blocked them, then made to block again: "you may have it block"
+  // (False Orders) or "then it blocks" (Balduvian Warlord).
+  const reblock =
+    /^Remove (target blocking creature|target creature defending player controls) from combat\. Creatures it was blocking that (?:had become blocked by only that creature|hadn't become blocked by another creature) this combat become unblocked(?:\. You may have it block|, then it blocks) an attacking creature of your choice\.$/.exec(
+      text,
+    );
+  if (reblock !== null) {
+    const index = ctx.target({
+      kind: "permanent",
+      filter: reblock[1] === "target blocking creature" ? { type: "creature", blocking: true } : { type: "creature", controlledByDefendingPlayer: true },
+    });
+    const must = text.includes(", then it blocks");
+    return {
+      effect: { kind: "remove-from-combat", target: index, unblockSoleBlocked: true, ...(must ? { thenMustBlock: true } : { thenMayBlock: true }) },
+      todo: [],
+      hints: [],
+    };
+  }
   // "Choose left or right" as it resolves (rule 608.2d), the answer noted on
   // the source as its last chosen direction (Mystic Barrier).
   if (/^choose left or right\.$/i.test(text)) {
@@ -21827,6 +21846,11 @@ function parseFaceAsWritten(face, ctx = {}) {
       // "During combat after blockers are declared" (rule 506.8g): the steps.
       rest = rest.replace(/ Activate only during combat after blockers are declared\.$/, () => {
         ability.condition = { kind: "turn-structure", steps: ["declare-blockers", "combat-damage", "end-combat"] };
+        return "";
+      });
+      // One step of combat (General Jarkeld, Balduvian Warlord).
+      rest = rest.replace(/ Activate only during the declare blockers step\.$/, () => {
+        ability.condition = { kind: "turn-structure", steps: ["declare-blockers"] };
         return "";
       });
       // Grizzled Wolverine: a creature still blocking it, not merely blocked

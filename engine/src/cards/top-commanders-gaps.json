@@ -3386,7 +3386,9 @@
   "effect:if-they-do-library-move",
   "effect:other-spells-cant-be-countered-this-turn",
   "amount:colors-of-sacrificed",
-  "filter:dealt-noncombat-damage-this-turn"
+  "filter:dealt-noncombat-damage-this-turn",
+  "filter:dealt-noncombat-damage-this-turn",
+  "effect:remove-blocker-then-must-block"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
