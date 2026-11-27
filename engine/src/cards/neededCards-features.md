@@ -9111,3 +9111,10 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Half a count, rounded down for power and up for toughness (2026-11-27).** `static:pt-per-half-count`: `grantPtPerCount` `step: 2` with `round: ["down", "up"]`. Aspect of Wolf. `test/pt-per-half-count.test.ts`.
 
 **Prevent damage between creatures that share a color (2026-11-27).** `replacement:prevent-damage-between-creatures-sharing-color`: `would-deal-damage` `sharesColorWithRecipient` with `source` and `toFilter` creature. Well-Laid Plans. `test/prevent-damage-sharing-color.test.ts`.
+**Protection from each of an object's colors (2026-11-27).** `effect:protection-from-target-colors`: `ProtectionQualities.colorsOf` (an `ObjectRef`, read and fixed into `colors` as the `grant-protection` resolves, effects.ts `fixProtectionSide`). Samite Elder, Opal Titan. `test/protection-from-target-colors.test.ts`.
+
+**Becomes blocked by one or more of a kind (2026-11-27).** `trigger:becomes-blocked-by-filtered`: no engine code — `becomes-blocked`'s `blockers.filter` on `who: "attached"` or `"self"`, beside `blocks`' `blocking`. Hedron Blade, Dwarven Soldier, Amphibious Kavu. `test/becomes-blocked-by-filtered.test.ts`.
+
+**Blocks each attacking creature if able (2026-11-27).** `effect:blocks-each-attacker-if-able`: the `must-block` record's `each` (combat/rules.ts), one `blockRequirements` entry per attacker it can block (decisions/blockers.ts); combat/blocking.ts `missedOwnRequirements` holds a creature able to block several to as many as it may (rule 509.1c), and `obeyingLure` adds them. `controlledByDefendingPlayer` now holds through the whole combat phase for every opponent of the attacking player (rules 506.2, 802.2). Blaze of Glory. `test/blocks-each-attacker.test.ts`.
+
+**This creature and another attack different players (2026-11-27).** `trigger:attacks-different-players` (and B142's `trigger:attacks-with-another-at-different-player`): the `attacks` trigger's `anotherAttacksDifferentPlayer` (game.ts `anotherAttacksDifferentPlayer`; planeswalkers don't count). Canal Courier. `test/attacks-different-players.test.ts`.

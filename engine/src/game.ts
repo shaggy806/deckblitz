@@ -14991,6 +14991,20 @@ export class Game {
     );
   }
 
+  /** Whether `attacker` attacks a player and some other attacking creature
+   * attacks a different player — an `attacks` trigger's
+   * `anotherAttacksDifferentPlayer` (Canal Courier). Planeswalkers and
+   * battles attacked don't count, on either side (the card's ruling). */
+  private anotherAttacksDifferentPlayer(attacker: ObjectId): boolean {
+    const mine = this.state.objects[attacker]?.attacking;
+    if (mine == null || this.state.players[mine as PlayerId] === undefined) return false;
+    return this.state.zones.shared.battlefield.some((id) => {
+      if (id === attacker) return false;
+      const theirs = this.state.objects[id].attacking;
+      return theirs != null && theirs !== mine && this.state.players[theirs as PlayerId] !== undefined;
+    });
+  }
+
   private creatureDef(id: ObjectId): CardDefinition | null {
     return creatureDef(this.state, this.registry, id);
   }
@@ -40707,6 +40721,7 @@ export class Game {
             (this.defenderKind(event.defender) === "player" && this.state.monarch === event.defender)) &&
           (spec.aloneAgainstDefender !== true || this.attackingAlone(event.attacker, event.defender)) &&
           (spec.withGreaterPower !== true || this.attacksWithGreaterPower(event.attacker)) &&
+          (spec.anotherAttacksDifferentPlayer !== true || this.anotherAttacksDifferentPlayer(event.attacker)) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))
         );

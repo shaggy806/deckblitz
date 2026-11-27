@@ -1872,6 +1872,12 @@ export type TriggerKind =
        * this creature's power** attack" — another attacker of the
        * declaration has greater power as it triggers. */
       readonly withGreaterPower?: true;
+      /** "Whenever this creature **and another creature attack different
+       * players**" (Canal Courier): it attacks a player, and some other
+       * attacking creature attacks another player, as it triggers. A
+       * planeswalker or battle attacked isn't a player (the card's ruling),
+       * on either side. */
+      readonly anotherAttacksDifferentPlayer?: true;
     }
   | {
       /**

@@ -17545,6 +17545,55 @@ describe("combat triggers: which defender, how many, once for the lot", () => {
       { on: "blocks", who: "self", blocking: { colors: ["B"] } },
       { on: "becomes-blocked", who: "self", blockers: { filter: { colors: ["B"] } } },
     ]);
+    // Either colour (Amphibious Kavu), a creature type (Dwarven Soldier), and
+    // an Equipment's equipped creature by colorless ones (Hedron Blade).
+    const blueOrBlack = { anyOf: [{ colors: ["U"] }, { colors: ["B"] }] };
+    expect(triggerOf("Whenever ~ blocks or becomes blocked by one or more blue and/or black creatures")).toEqual([
+      { on: "blocks", who: "self", blocking: blueOrBlack },
+      { on: "becomes-blocked", who: "self", blockers: { filter: blueOrBlack } },
+    ]);
+    expect(triggerOf("Whenever ~ blocks or becomes blocked by one or more Orcs")).toEqual([
+      { on: "blocks", who: "self", blocking: { subtype: "Orc" } },
+      { on: "becomes-blocked", who: "self", blockers: { filter: { subtype: "Orc" } } },
+    ]);
+    expect(triggerOf("Whenever equipped creature becomes blocked by one or more colorless creatures")).toEqual([
+      { on: "becomes-blocked", who: "attached", blockers: { filter: { colorless: true } } },
+    ]);
+  });
+
+  it("'this creature and another creature attack different players' (Canal Courier)", () => {
+    expect(triggerOf("Whenever ~ and another creature attack different players")).toEqual([
+      { on: "attacks", who: "self", anotherAttacksDifferentPlayer: true },
+    ]);
+  });
+
+  it("protection from each of the target's colors (Samite Elder), blocks each attacker (Blaze of Glory)", () => {
+    const elder = parseFace({
+      name: "Samite Elder",
+      type_line: "Creature — Human Cleric",
+      oracle_text:
+        "{T}: Choose target permanent you control. Creatures you control gain protection from each of that permanent's colors until end of turn.",
+      mana_cost: "{2}{W}",
+      colors: ["W"],
+    });
+    expect(elder.activated[0].targets).toEqual([{ kind: "permanent", whose: "you", filter: {} }]);
+    expect(elder.activated[0].effect).toEqual({
+      kind: "grant-protection",
+      filter: { type: "creature", controlledBy: "you" },
+      from: { colorsOf: 0 },
+      duration: "end-of-turn",
+    });
+    const blaze = parseEffect(
+      "Target creature can block any number of creatures this turn. It blocks each attacking creature this turn if able.",
+      ctx(),
+    );
+    expect(blaze.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "block-additional", target: 0, amount: "any", duration: "end-of-turn" },
+        { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", each: true }] },
+      ],
+    });
   });
 
   it("'if that player is the monarch' on an attack trigger", () => {

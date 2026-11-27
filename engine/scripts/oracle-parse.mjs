@@ -2755,9 +2755,32 @@ export function parseTrigger(clause) {
   if (c === "Whenever one or more creatures you control become blocked") {
     return [{ on: "become-blocked-batch", who: "you-control", filter: { type: "creature" } }];
   }
-  if ((m = /^Whenever ~ blocks or becomes blocked by one or more (white|blue|black|red|green) creatures$/.exec(c))) {
-    const filter = { colors: [COLOR_WORD[m[1]]] };
+  // "…by one or more black creatures" (Serra Inquisitors), "blue and/or
+  // black creatures" (Amphibious Kavu, either colour), "colorless creatures"
+  // (Hedron Blade), "Orcs" (Dwarven Soldier): once however many.
+  const oneOrMore = (words) => {
+    let w;
+    if ((w = /^(white|blue|black|red|green) creatures$/.exec(words))) return { colors: [COLOR_WORD[w[1]]] };
+    if ((w = /^(white|blue|black|red|green) and\/or (white|blue|black|red|green) creatures$/.exec(words))) {
+      return { anyOf: [{ colors: [COLOR_WORD[w[1]]] }, { colors: [COLOR_WORD[w[2]]] }] };
+    }
+    if (words === "colorless creatures") return { colorless: true };
+    if (/^[A-Z][a-z]+s$/.test(words) && CREATURE_TYPES.includes(singular(words))) return { subtype: singular(words) };
+    return null;
+  };
+  if ((m = /^Whenever ~ blocks or becomes blocked by one or more (.+)$/.exec(c))) {
+    const filter = oneOrMore(m[1]);
+    if (filter === null) return null;
     return [{ on: "blocks", who: "self", blocking: filter }, { on: "becomes-blocked", who: "self", blockers: { filter } }];
+  }
+  if ((m = /^Whenever (~|equipped creature|enchanted creature) becomes blocked by one or more (.+)$/.exec(c))) {
+    const filter = oneOrMore(m[2]);
+    if (filter === null) return null;
+    return [{ on: "becomes-blocked", who: m[1] === "~" ? "self" : "attached", blockers: { filter } }];
+  }
+  // Canal Courier: it and another attack different players.
+  if (c === "Whenever ~ and another creature attack different players") {
+    return [{ on: "attacks", who: "self", anotherAttacksDifferentPlayer: true }];
   }
   // Day and night (rule 731.1a).
   if (/^Whenever day becomes night or night becomes day$/.test(c)) return [{ on: "day-night-changes" }];
@@ -8092,6 +8115,11 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
     };
   }
+  // "It blocks each attacking creature this turn if able" (Blaze of Glory),
+  // "it" the one target before it: one requirement per attacker (`each`).
+  if (ctx.targets.length === 1 && re("it blocks each attacking creature this turn if able").test(s)) {
+    return { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", each: true }] };
+  }
   // A mass change of types, P/T left alone: `become` over a
   // `for-each-permanent`. "Become artifact creatures" keeps every type (rule
   // 205.1b), and the Vehicle's printed P/T.
@@ -13117,6 +13145,26 @@ export function parseEffect(text, outer) {
     if (chooseM !== null && thatM !== null) {
       const effect = parseSentence(`${thatM[1]}${chooseM[1]}.`, ctx);
       if (effect !== null && effect.kind === "each-deals-damage" && !containsUndefined(effect)) {
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        skip = 1;
+        continue;
+      }
+    }
+    // "Choose target permanent you control. Creatures you control gain
+    // protection from each of that permanent's colors until end of turn."
+    // (Samite Elder): the colours read off the target as it resolves
+    // (`colorsOf`).
+    if (chooseM !== null && /^creatures you control gain protection from each of that permanent's colors until end of turn\.$/i.test(sentences[i + 1] ?? "")) {
+      const spec = targetOf(chooseM[1]);
+      if (spec !== undefined) {
+        const target = ctx.target(spec);
+        const effect = {
+          kind: "grant-protection",
+          filter: { type: "creature", controlledBy: "you" },
+          from: { colorsOf: target },
+          duration: "end-of-turn",
+        };
         parsed.push(effect);
         hints.push({ sentence, effect });
         skip = 1;
