@@ -3562,8 +3562,10 @@ export type EffectSpec =
        * picked in turn from the ones not yet picked, every one with an equal
        * chance, all of them when there are no more than this; `then` gets
        * them as targets 0, 1, … (a `for-each-target` from 0, `simultaneous`,
-       * moves them together). Read as it resolves. Not with `slot` or
-       * `show`. */
+       * moves them together). Read as it resolves. Not with `slot`; with
+       * `show` only a `"reveal"` from a hand, of every card picked at once —
+       * Nebuchadnezzar's "target opponent reveals X cards at random from
+       * their hand" (a `for-each-target` `only` then picks those it reads). */
       readonly count?: EffectAmount;
       /** What's done with the picked card; nothing for a bare reveal or
        * look. */
@@ -14672,8 +14674,9 @@ export interface EffectApi {
   cardMatches(id: ObjectId, filter: CardFilter, was?: LastKnownInfo): boolean;
   /** Show `card`, in `owner`'s hand, as `choose-random-card`'s `show` says:
    * `"reveal"` to every player (rule 701.20a), `"look"` to the effect's
-   * controller alone — a look they close, as `look-at-hand`'s is. */
-  showCardFromHand(owner: PlayerId, card: ObjectId, how: "reveal" | "look"): void;
+   * controller alone — a look they close, as `look-at-hand`'s is. Several
+   * cards are a reveal only, of them together (a `count`'s picks). */
+  showCardFromHand(owner: PlayerId, card: ObjectId | readonly ObjectId[], how: "reveal" | "look"): void;
   /** The effect's controller looks at the top `count` cards of `owner`'s
    * library (as many as there are) — a look they close, as `look-at-hand`'s is. */
   lookAtLibraryTop(owner: PlayerId, count: number): void;
@@ -21984,6 +21987,18 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           const at = ctx.pickAtRandom(among.length, (i) => ({ kind: "card", object: among[i] }));
           picked.push({ kind: "object", object: among[at] });
           left = among.filter((_, i) => i !== at);
+        }
+        if (spec.show !== undefined) {
+          if (spec.zone !== "hand" || owner === undefined || spec.show !== "reveal") {
+            throw new Error("choose-random-card: `show` with `count` is a reveal from a hand");
+          }
+          // "Reveals X cards at random from their hand" (Nebuchadnezzar):
+          // every card picked, shown to every player together (rule 701.20a).
+          ctx.showCardFromHand(
+            owner,
+            picked.flatMap((ref) => (ref.kind === "object" ? [ref.object] : [])),
+            "reveal",
+          );
         }
         const parked = ctx.parkedCount();
         const pendingBefore = ctx.decisionPending();

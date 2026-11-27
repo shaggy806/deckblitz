@@ -44600,12 +44600,17 @@ export class Game {
           amount: (amount, each) => amountValue(amount, context, each),
           ...(was !== undefined ? { snapshot: was } : {}),
         }),
-      showCardFromHand: (owner, card, how) => {
-        if (this.state.objects[card]?.zone !== "hand") return;
+      showCardFromHand: (owner, cards, how) => {
+        const held = (typeof cards === "string" ? [cards] : cards).filter(
+          (id) => this.state.objects[id]?.zone === "hand",
+        );
+        if (held.length === 0) return;
         if (how === "reveal") {
-          this.revealCards(owner, [card], "hand");
+          this.revealCards(owner, held, "hand");
           return;
         }
+        if (held.length > 1) throw new Error("showCardFromHand: a look is at one card");
+        const card = held[0];
         // A look (rule 400.2: the hand stays hidden to everyone else): the
         // one card, offered with nothing to pick, as `look-at-hand`'s whole
         // hand is, so the look waits for its viewer to close it.
