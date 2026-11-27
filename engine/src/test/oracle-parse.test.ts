@@ -13443,6 +13443,14 @@ describe("a static acting on a player", () => {
     expect(yurlok.static[0].manaLossCausesLifeLoss).toBe(true);
   });
 
+  it("reads a cap on counters (rule 122.4) and \"started the turn untapped\" — Rasputin Dreamweaver", () => {
+    const capped = face("Legendary Creature", "Test Curse can't have more than seven dream counters on it.");
+    expect(capped.complete).toBe(true);
+    expect(capped.static[0].counterCap).toEqual({ kind: "dream", max: 7 });
+    const upkeep = face("Legendary Creature", "At the beginning of your upkeep, if Test Curse started the turn untapped, put a dream counter on it.");
+    expect(upkeep.triggered[0].condition).toEqual({ kind: "source", filter: { startedTurnUntapped: true } });
+  });
+
   it("reads Abyssal Persecutor's inverse pair", () => {
     const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
     expect(demon.complete).toBe(true);

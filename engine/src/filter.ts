@@ -14,7 +14,7 @@
  * `.snapshot` — a dies trigger's filter, a resolving ability's "if it was …").
  */
 
-import { JOURNAL_VIEWS, entriesThisTurn, journalEntries, type JournalWhat, type JournalWindow } from "./journal.js";
+import { JOURNAL_VIEWS, asTurnBegan, entriesThisTurn, journalEntries, type JournalWhat, type JournalWindow } from "./journal.js";
 import {
   computeCharacteristics,
   effectiveColors,
@@ -1427,6 +1427,11 @@ export interface CardFilter {
    * turn it's `controlledContinuously`; on another's, one they gained during
    * their last turn has been theirs since this one began. Battlefield only. */
   readonly controlledSinceTurnBegan?: boolean;
+  /** It was on the battlefield untapped as this turn began, before its
+   * untap step, and is the same object still (rule 400.7) — Rasputin
+   * Dreamweaver's "if Rasputin started the turn untapped" (`TurnBegan.tapped`;
+   * one that entered this turn didn't start it at all). Battlefield only. */
+  readonly startedTurnUntapped?: boolean;
   /** Is (or isn't) renowned (rule 702.112b) — renown's "if it isn't
    * renowned", "as long as this creature is renowned" (Goblin Glory Chaser),
    * "if it's renowned" (Consul's Lieutenant). Asked like `monstrous`. */
@@ -3463,6 +3468,16 @@ export function matchesFilter(
       live.zone === "battlefield" &&
       (live.controlSinceSeq ?? 0) < (state.turn.beganAtSeq ?? 0);
     if (held !== filter.controlledSinceTurnBegan) return false;
+  }
+  if (filter.startedTurnUntapped !== undefined) {
+    const began = asTurnBegan(state);
+    const started =
+      live !== undefined &&
+      live.zone === "battlefield" &&
+      began !== undefined &&
+      live.enteredBattlefieldOnTurn !== state.turn.number &&
+      !(began.tapped ?? []).some((t) => t.object === live.id && t.zoneChangeCount === (live.zoneChangeCount ?? 0));
+    if (started !== filter.startedTurnUntapped) return false;
   }
   if (filter.controlledContinuously !== undefined) {
     const held = live !== undefined && live.zone === "battlefield" && !live.summoningSick;

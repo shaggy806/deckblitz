@@ -7251,6 +7251,12 @@ export type EffectSpec =
        * putting one or more makes the creature "evolve" (702.100b), which an
        * `evolves` trigger watches for (`counter-added`'s `evolved`). */
       readonly evolve?: true;
+      /** "This ability can't cause the total number of +1/+0 counters on
+       * this creature to be greater than four" (Clockwork Avian): no more of
+       * the kind are put than would bring it to this many, read as it
+       * resolves, after a replacement has changed how many (Doubling
+       * Season), and none on one with that many already (the rulings). */
+      readonly upToTotal?: EffectAmount;
     }
   | {
       /**
@@ -15666,7 +15672,9 @@ export interface EffectApi {
    * `keywordAct` marks the counter a keyword's own ability puts, which the
    * creature is then said to have done: training's (702.149c), evolve's
    * (702.100b). */
-  addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId, keywordAct?: "training" | "evolve"): void;
+  /** `upToTotal`: no more than would bring that kind on it to this many
+   * (the `add-counter` field). */
+  addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId, keywordAct?: "training" | "evolve", upToTotal?: number): void;
   /** `object` connived (rule 701.50a) under `player`, `nonland` nonland
    * cards discarded: announces it ("whenever a creature you control
    * connives"). */
@@ -24278,7 +24286,8 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const by = spec.by === undefined ? undefined : resolvePlayerRef(spec.by, ctx);
       if (spec.by !== undefined && by === undefined) return;
       const keywordAct = spec.training === true ? "training" : spec.evolve === true ? "evolve" : undefined;
-      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by, keywordAct);
+      const cap = spec.upToTotal === undefined ? undefined : Math.max(0, Math.floor(amountValue(spec.upToTotal, ctx)));
+      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by, keywordAct, cap);
       return;
     }
     case "time-travel":

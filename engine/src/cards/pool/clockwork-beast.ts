@@ -42,7 +42,7 @@ export default defineCard({
         kind: "choose-value",
         value: "number",
         max: { leastOf: ["x", { sum: [7, { product: [{ countersOn: "source", counter: "+1/+0" }, -1] }] }] },
-        then: { kind: "add-counter", target: "source", counter: "+1/+0", amount: "x" },
+        then: { kind: "add-counter", target: "source", counter: "+1/+0", amount: "x", upToTotal: 7 },
       },
       resolve: null,
       text: WIND_TEXT,

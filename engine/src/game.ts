@@ -11464,7 +11464,16 @@ export class Game {
       };
     }
     const monarch = this.state.monarch;
-    return monarch === null ? { seats } : { seats, monarch };
+    // What was tapped as the turn began ("started the turn untapped").
+    const tapped = this.state.zones.shared.battlefield.flatMap((id) => {
+      const object = this.state.objects[id];
+      return object?.tapped === true ? [{ object: id, zoneChangeCount: object.zoneChangeCount ?? 0 }] : [];
+    });
+    return {
+      seats,
+      ...(monarch !== null ? { monarch } : {}),
+      ...(tapped.length > 0 ? { tapped } : {}),
+    };
   }
 
   private beginTurn(): void {
@@ -12957,6 +12966,21 @@ export class Game {
     invalidateComputedCache();
     if (expired.length > 0) this.emit({ type: "pt-modifier-expired", objects: expired });
     if (controlEnded) this.recomputeControl();
+  }
+
+  /** The most counters of `kind` the permanent `object` can have (rule
+   * 122.4): the least of its active `counterCap`s, its own or granted it;
+   * no limit without one. */
+  private counterCapOf(object: GameObject, kind: string): number {
+    if (object.zone !== "battlefield") return Infinity;
+    let cap = Infinity;
+    const read = (ability: StaticAbility): void => {
+      if (ability.counterCap?.kind === kind && this.staticActive(object, ability)) cap = Math.min(cap, ability.counterCap.max);
+    };
+    for (const ability of grantedStatics(this.state, this.registry, object, (g) => g.counterCap !== undefined)) read(ability);
+    const own = this.ownStatics(object);
+    if (own.some((a) => a.counterCap !== undefined) && !hasLostAbilities(this.state, this.registry, object)) for (const ability of own) read(ability);
+    return cap;
   }
 
   /** Does `object` carry an active static of its own matching `test`? */
@@ -46432,7 +46456,7 @@ controlledBy,
       connived: (object, player, nonland) => this.emit({ type: "connived", object, player, nonland }),
       conniveDrawsFirst: (player) => this.activeStaticsOf(player, (a) => a.conniveDrawsFirst === true).length,
       earthbent: () => this.emit({ type: "bent", player: controller, how: "earth" }),
-      addCounter: (target, counter, amount, by, keywordAct) => {
+      addCounter: (target, counter, amount, by, keywordAct, upToTotal) => {
         // A counter on a player — "give that … player another counter of
         // that kind" (Animation Module): theirs, energy among them.
         if (target.kind === "player") {
@@ -46443,7 +46467,7 @@ controlledBy,
           else this.changePlayerCounters(target.player, counter as PlayerCounterKind, amount, by ?? controller);
           return;
         }
-        this.addCounter(target, counter, amount, true, by ?? controller, keywordAct);
+        this.addCounter(target, counter, amount, true, by ?? controller, keywordAct, upToTotal);
       },
       amass: (amount, creatureType, onto, player, noToken) =>
         this.amass(player ?? controller, amount, creatureType, source, x, onto, noToken),
@@ -59471,6 +59495,9 @@ controlledBy,
     split = true,
     by?: PlayerId,
     keywordAct?: "training" | "evolve",
+    /** No more than would bring the kind on it to this many (Clockwork
+     * Avian's "can't cause the total … to be greater than four"). */
+    upToTotal?: number,
   ): void {
     // Zero counters is no counters (a "for each" that came to none): nothing
     // is put, nothing is announced, and no token is split off a stack for it.
@@ -59508,8 +59535,15 @@ controlledBy,
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     // Doubling Season (rule 614): "twice that many counters instead".
-    const total = this.counterTotal(id, counter, amount, false, false, by);
     const before = object.counters[counter] ?? 0;
+    // "Can't have more than N" (rule 122.4 — Rasputin Dreamweaver: the
+    // ruling's "brought to seven instead") and an ability's own "can't cause
+    // the total … to be greater than N", after Doubling Season has had its
+    // say; none on one at or past it.
+    const cap = Math.min(upToTotal ?? Infinity, this.counterCapOf(object, counter));
+    const replaced = this.counterTotal(id, counter, amount, false, false, by);
+    const total = Math.min(replaced, Math.max(0, cap - before));
+    if (total < replaced && total <= 0) return;
     object.counters[counter] = before + total;
     // Every counter of a kind takes the newest one's timestamp (613.7c); a
     // keyword counter's is what orders its keyword in layer 6 (exalted's, the
@@ -72196,6 +72230,7 @@ controlledBy,
       // creature dying in this same check leaves with both kinds of counter
       // still on it (a persist creature with a +1/+1 counter doesn't return).
       if (this.annihilateCounters(new Set(sweep.map((m) => m.id)))) changed = true;
+      if (this.trimCappedCounters(new Set(sweep.map((m) => m.id)))) changed = true;
       // An Equipment that can't stay where it is falls off in the same check
       // as whatever leaves (704.3) — read before the moves, so a protection
       // whose Aura goes now (two White Wards) still unattaches a white
@@ -73077,6 +73112,31 @@ controlledBy,
       }
       removed = true;
     }
+    return removed;
+  }
+
+  /**
+   * Rule 704.5r: a permanent with an ability that says it can't have more
+   * than N counters of a kind, carrying more, has all but N of them removed
+   * (a copy of Rasputin Dreamweaver with eight dream counters). `leaving` as
+   * {@link annihilateCounters}'. Returns whether any were removed.
+   */
+  private trimCappedCounters(leaving: ReadonlySet<ObjectId>): boolean {
+    let removed = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (leaving.has(id) || !this.inGame(object)) continue;
+      for (const [kind, n] of Object.entries(object.counters)) {
+        if (n <= 0) continue;
+        const cap = this.counterCapOf(object, kind);
+        if (n <= cap) continue;
+        object.counters[kind] = cap;
+        if (cap <= 0) delete object.counters[kind];
+        this.emit({ type: "counter-removed", object: id, counter: kind, amount: n - cap, after: cap });
+        removed = true;
+      }
+    }
+    if (removed) invalidateComputedCache();
     return removed;
   }
 

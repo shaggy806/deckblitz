@@ -296,6 +296,10 @@ export interface TurnBegan {
   readonly seats: Partial<Record<PlayerId, SeatAsTurnBegan>>;
   /** The monarch then (rule 725), if any. */
   readonly monarch?: PlayerId;
+  /** The permanents tapped then, each in that stint (rule 400.7), absent
+   * while none were: what "if ~ started the turn untapped" reads (Rasputin
+   * Dreamweaver — `CardFilter.startedTurnUntapped`). */
+  readonly tapped?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
 }
 
 /** One player as a turn began. */

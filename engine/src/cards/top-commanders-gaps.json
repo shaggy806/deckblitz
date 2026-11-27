@@ -6,6 +6,8 @@
     "static:cost-increase-per-count",
     "effect:pay-any-amount-of-life-reveal-that-many",
     "cost:ability-cost-choice",
+    "static:counter-cap",
+    "condition:started-turn-untapped",
     "replacement:damage-reflection",
     "condition:mana-ability-activation-count",
     "effect:opponent-chooses-your-permanent-to-exile",

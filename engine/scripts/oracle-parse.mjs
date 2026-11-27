@@ -22956,6 +22956,8 @@ const INTERVENING_IFS = {
   "if ~ was cast using web-slinging,": { kind: "source", filter: { castVia: "web-slinging" } },
   "if ~ has counters on it,": { kind: "self-counters", compare: { op: "gte", n: 1 } },
   "if ~ is tapped,": { kind: "source", filter: { tapped: true } },
+  // As the turn began, before its untap step (Rasputin Dreamweaver).
+  "if ~ started the turn untapped,": { kind: "source", filter: { startedTurnUntapped: true } },
   // Rule 702.112b: the source's renowned designation.
   "if it's renowned,": { kind: "source", filter: { renowned: true } },
   "if ~ is renowned,": { kind: "source", filter: { renowned: true } },
@@ -25619,6 +25621,11 @@ function parseStatic(line, text) {
   }
   if (line === "A player losing unspent mana causes that player to lose that much life.") {
     return { affects: { scope: "self" }, manaLossCausesLifeLoss: true, text };
+  }
+  // Rule 122.4 (Rasputin Dreamweaver): "~ can't have more than seven dream
+  // counters on it."
+  if ((m = /^~ can't have more than (one|two|three|four|five|six|seven|eight|nine|ten) ([a-z+\/0-9-]+) counters? on it\.$/.exec(line))) {
+    return { affects: { scope: "self" }, counterCap: { kind: m[2], max: NUMBERS[m[1]] }, text };
   }
   // A would-draw replacement of your own (rule 614.1a, 614.11): "draw N cards
   // instead" (Thought Reflection), "except the first one you draw in each of

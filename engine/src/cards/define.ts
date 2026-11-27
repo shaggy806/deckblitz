@@ -4156,6 +4156,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly enlist?: true;
   /**
+   * "Rasputin can't have more than seven dream counters on it" (rule
+   * 122.4): counters of `kind` put on the permanent carrying it stop at
+   * `max` (the ruling: "brought to seven instead"), and past it — a copy, an
+   * ability gained — all but `max` come off as a state-based action (rule
+   * 704.5r). Its own or one granted it, while it has its abilities.
+   * `affects` is ignored — it is always the permanent carrying it.
+   */
+  readonly counterCap?: { readonly kind: string; readonly max: number };
+  /**
    * "Spells your opponents cast that target this creature cost an additional
    * 3 life to cast" (Terror of the Peaks): an additional cost of the spell,
    * part of its total cost as it's cast (rule 601.2f) — once per spell
