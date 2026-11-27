@@ -4645,6 +4645,7 @@ import _poolCharmPeddler from "./pool/charm-peddler.js";
 import _poolCharmbreakerDevils from "./pool/charmbreaker-devils.js";
 import _poolCharmedClothier from "./pool/charmed-clothier.js";
 import _poolCharmedGriffin from "./pool/charmed-griffin.js";
+import _poolCharmedPendant from "./pool/charmed-pendant.js";
 import _poolCharmedSleep from "./pool/charmed-sleep.js";
 import _poolCharmedStray from "./pool/charmed-stray.js";
 import _poolCharmingPrince from "./pool/charming-prince.js";
@@ -16767,6 +16768,7 @@ import _poolLoxodonLineBreaker from "./pool/loxodon-line-breaker.js";
 import _poolLoxodonMender from "./pool/loxodon-mender.js";
 import _poolLoxodonMystic from "./pool/loxodon-mystic.js";
 import _poolLoxodonPartisan from "./pool/loxodon-partisan.js";
+import _poolLoxodonPeacekeeper from "./pool/loxodon-peacekeeper.js";
 import _poolLoxodonPunisher from "./pool/loxodon-punisher.js";
 import _poolLoxodonRestorer from "./pool/loxodon-restorer.js";
 import _poolLoxodonSergeant from "./pool/loxodon-sergeant.js";
@@ -21621,6 +21623,7 @@ import _poolPublicEnemy from "./pool/public-enemy.js";
 import _poolPublicExecution from "./pool/public-execution.js";
 import _poolPublicThoroughfare from "./pool/public-thoroughfare.js";
 import _poolPucasCovenant from "./pool/pucas-covenant.js";
+import _poolPucasEye from "./pool/pucas-eye.js";
 import _poolPucasMischief from "./pool/pucas-mischief.js";
 import _poolPufferExtract from "./pool/puffer-extract.js";
 import _poolPugnaciousHammerskull from "./pool/pugnacious-hammerskull.js";
@@ -29671,6 +29674,7 @@ import _poolTimidShieldbearer from "./pool/timid-shieldbearer.js";
 import _poolTiminYouthfulGeist from "./pool/timin-youthful-geist.js";
 import _poolTimotharBaronOfBats from "./pool/timothar-baron-of-bats.js";
 import _poolTinStreetDodger from "./pool/tin-street-dodger.js";
+import _poolTinStreetGossip from "./pool/tin-street-gossip.js";
 import _poolTinStreetHooligan from "./pool/tin-street-hooligan.js";
 import _poolTinStreetMarket from "./pool/tin-street-market.js";
 import _poolTinWingChimera from "./pool/tin-wing-chimera.js";
@@ -38837,6 +38841,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCharmbreakerDevils,
   _poolCharmedClothier,
   _poolCharmedGriffin,
+  _poolCharmedPendant,
   _poolCharmedSleep,
   _poolCharmedStray,
   _poolCharmingPrince,
@@ -50959,6 +50964,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLoxodonMender,
   _poolLoxodonMystic,
   _poolLoxodonPartisan,
+  _poolLoxodonPeacekeeper,
   _poolLoxodonPunisher,
   _poolLoxodonRestorer,
   _poolLoxodonSergeant,
@@ -55813,6 +55819,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPublicExecution,
   _poolPublicThoroughfare,
   _poolPucasCovenant,
+  _poolPucasEye,
   _poolPucasMischief,
   _poolPufferExtract,
   _poolPugnaciousHammerskull,
@@ -63863,6 +63870,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTiminYouthfulGeist,
   _poolTimotharBaronOfBats,
   _poolTinStreetDodger,
+  _poolTinStreetGossip,
   _poolTinStreetHooligan,
   _poolTinStreetMarket,
   _poolTinWingChimera,
@@ -73042,6 +73050,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/charmbreaker-devils": _poolCharmbreakerDevils,
   "pool/charmed-clothier": _poolCharmedClothier,
   "pool/charmed-griffin": _poolCharmedGriffin,
+  "pool/charmed-pendant": _poolCharmedPendant,
   "pool/charmed-sleep": _poolCharmedSleep,
   "pool/charmed-stray": _poolCharmedStray,
   "pool/charming-prince": _poolCharmingPrince,
@@ -85164,6 +85173,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/loxodon-mender": _poolLoxodonMender,
   "pool/loxodon-mystic": _poolLoxodonMystic,
   "pool/loxodon-partisan": _poolLoxodonPartisan,
+  "pool/loxodon-peacekeeper": _poolLoxodonPeacekeeper,
   "pool/loxodon-punisher": _poolLoxodonPunisher,
   "pool/loxodon-restorer": _poolLoxodonRestorer,
   "pool/loxodon-sergeant": _poolLoxodonSergeant,
@@ -90018,6 +90028,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/public-execution": _poolPublicExecution,
   "pool/public-thoroughfare": _poolPublicThoroughfare,
   "pool/pucas-covenant": _poolPucasCovenant,
+  "pool/pucas-eye": _poolPucasEye,
   "pool/pucas-mischief": _poolPucasMischief,
   "pool/puffer-extract": _poolPufferExtract,
   "pool/pugnacious-hammerskull": _poolPugnaciousHammerskull,
@@ -98068,6 +98079,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/timin-youthful-geist": _poolTiminYouthfulGeist,
   "pool/timothar-baron-of-bats": _poolTimotharBaronOfBats,
   "pool/tin-street-dodger": _poolTinStreetDodger,
+  "pool/tin-street-gossip": _poolTinStreetGossip,
   "pool/tin-street-hooligan": _poolTinStreetHooligan,
   "pool/tin-street-market": _poolTinStreetMarket,
   "pool/tin-wing-chimera": _poolTinWingChimera,

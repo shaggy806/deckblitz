@@ -929,6 +929,7 @@ import _poolTilonallisKnight from "../pool/tilonallis-knight.js";
 import _poolTimberlandRuins from "../pool/timberland-ruins.js";
 import _poolTimelessDragon from "../pool/timeless-dragon.js";
 import _poolTimotharBaronOfBats from "../pool/timothar-baron-of-bats.js";
+import _poolTinStreetGossip from "../pool/tin-street-gossip.js";
 import _poolTivashGloomSummoner from "../pool/tivash-gloom-summoner.js";
 import _poolTooGreedilyTooDeep from "../pool/too-greedily-too-deep.js";
 import _poolToothOfRamos from "../pool/tooth-of-ramos.js";
@@ -1996,6 +1997,7 @@ const shard: CardShard = {
     _poolTimberlandRuins,
     _poolTimelessDragon,
     _poolTimotharBaronOfBats,
+    _poolTinStreetGossip,
     _poolTivashGloomSummoner,
     _poolTooGreedilyTooDeep,
     _poolToothOfRamos,

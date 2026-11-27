@@ -704,6 +704,7 @@ import _poolPrototypePortal from "../pool/prototype-portal.js";
 import _poolPsionicSliver from "../pool/psionic-sliver.js";
 import _poolPsychicSymbiont from "../pool/psychic-symbiont.js";
 import _poolPterodonKnight from "../pool/pterodon-knight.js";
+import _poolPucasEye from "../pool/pucas-eye.js";
 import _poolPunySnack from "../pool/puny-snack.js";
 import _poolPuppeteer from "../pool/puppeteer.js";
 import _poolQueenAllenalOfRuadach from "../pool/queen-allenal-of-ruadach.js";
@@ -1803,6 +1804,7 @@ const shard: CardShard = {
     _poolPsionicSliver,
     _poolPsychicSymbiont,
     _poolPterodonKnight,
+    _poolPucasEye,
     _poolPunySnack,
     _poolPuppeteer,
     _poolQueenAllenalOfRuadach,

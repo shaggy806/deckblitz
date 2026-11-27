@@ -499,6 +499,7 @@ import _poolLocustSpray from "../pool/locust-spray.js";
 import _poolLokiGodOfLies from "../pool/loki-god-of-lies.js";
 import _poolLostLegacy from "../pool/lost-legacy.js";
 import _poolLostSoul from "../pool/lost-soul.js";
+import _poolLoxodonPeacekeeper from "../pool/loxodon-peacekeeper.js";
 import _poolLoxodonWarhammer from "../pool/loxodon-warhammer.js";
 import _poolLucidDreams from "../pool/lucid-dreams.js";
 import _poolLuckBobblehead from "../pool/luck-bobblehead.js";
@@ -1551,6 +1552,7 @@ const shard: CardShard = {
     _poolLokiGodOfLies,
     _poolLostLegacy,
     _poolLostSoul,
+    _poolLoxodonPeacekeeper,
     _poolLoxodonWarhammer,
     _poolLucidDreams,
     _poolLuckBobblehead,

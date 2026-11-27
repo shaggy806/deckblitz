@@ -148,6 +148,7 @@ import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
 import _poolChandrasPhoenix from "../pool/chandras-phoenix.js";
 import _poolChandrasRegulator from "../pool/chandras-regulator.js";
 import _poolChargingHooligan from "../pool/charging-hooligan.js";
+import _poolCharmedPendant from "../pool/charmed-pendant.js";
 import _poolCharmingScoundrel from "../pool/charming-scoundrel.js";
 import _poolCharnelTroll from "../pool/charnel-troll.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolChandrasPhoenix,
     _poolChandrasRegulator,
     _poolChargingHooligan,
+    _poolCharmedPendant,
     _poolCharmingScoundrel,
     _poolCharnelTroll,
     _poolChatterstorm,
