@@ -25869,3 +25869,66 @@ describe("the player with the lowest life total, and a colour become", () => {
     });
   });
 });
+
+describe("parseFace: combat-targeting lane, 2026-11-26", () => {
+  it("a modal trigger's bullets read 'this creature' as ~; 'target exiled card with warp' to the bottom", () => {
+    const blade = parseFace({
+      name: "Blade of the Swarm",
+      type_line: "Creature — Insect Assassin",
+      mana_cost: "{3}{B}",
+      oracle_text:
+        "When this creature enters, choose one —\n• Put two +1/+1 counters on this creature.\n• Put target exiled card with warp on the bottom of its owner's library.",
+    });
+    expect(blade.complete).toBe(true);
+    expect(blade.triggered[0].effect).toEqual({
+      kind: "modal",
+      announced: true,
+      minModes: 1,
+      maxModes: 1,
+      modes: [
+        { text: "Put two +1/+1 counters on this creature.", effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 2 } },
+        {
+          text: "Put target exiled card with warp on the bottom of its owner's library.",
+          targets: [{ kind: "card-in-exile", filter: { hasKeyword: "warp" } }],
+          effect: { kind: "put-on-library", target: 0, position: "bottom" },
+        },
+      ],
+    });
+  });
+
+  it("'target blue or black noncreature permanent'; 'permanents you control can't be the targets of … spells your opponents control this turn'", () => {
+    const display = parseFace({
+      name: "Display of Dominance",
+      type_line: "Instant",
+      mana_cost: "{1}{G}",
+      oracle_text:
+        "Choose one —\n• Destroy target blue or black noncreature permanent.\n• Permanents you control can't be the targets of blue or black spells your opponents control this turn.",
+    });
+    expect(display.complete).toBe(true);
+    expect(display.castModal.modes[0].targets).toEqual([
+      { kind: "permanent", filter: { anyOf: [{ colors: ["U"] }, { colors: ["B"] }], notTypes: ["creature"] } },
+    ]);
+    expect(display.castModal.modes[1].effect).toEqual({
+      kind: "prohibit",
+      prohibits: [
+        {
+          act: "be-targeted",
+          object: { controlledBy: "you" },
+          by: "opponents",
+          only: "spells",
+          sourceFilter: { anyOf: [{ colors: ["U"] }, { colors: ["B"] }] },
+        },
+      ],
+    });
+    const veilstone = parseFace({
+      name: "Veilstone Amulet",
+      type_line: "Artifact",
+      mana_cost: "{3}",
+      oracle_text: "Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.",
+    });
+    expect(veilstone.triggered[0].effect).toEqual({
+      kind: "prohibit",
+      prohibits: [{ act: "be-targeted", object: { type: "creature", controlledBy: "you" }, by: "opponents" }],
+    });
+  });
+});

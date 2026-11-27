@@ -1236,14 +1236,23 @@ function modifiedTargetOf(phrase) {
       filter.unblocked = true;
       words.shift();
     } else if (w === "nonbasic") filter.notSupertype = "basic";
-    else if (COLOR_WORD[w] !== undefined) filter.colors = [COLOR_WORD[w]];
+    else if (COLOR_WORD[w] !== undefined && words[1]?.toLowerCase() === "or" && COLOR_WORD[words[2]?.toLowerCase()] !== undefined) {
+      // "Target blue or black noncreature permanent" (Display of Dominance).
+      filter.anyOf = [{ colors: [COLOR_WORD[w]] }, { colors: [COLOR_WORD[words[2].toLowerCase()]] }];
+      words.splice(0, 2);
+    } else if (COLOR_WORD[w] !== undefined) filter.colors = [COLOR_WORD[w]];
     else if (/^non(white|blue|black|red|green)$/.test(w)) filter.notColors = [COLOR_WORD[w.slice(3)]];
     else break;
     words.shift();
   }
   const typed = parseTypePhrase(words.join(" "));
-  // A permanent target needs a permanent type to stand on.
-  if (typed === null || (typed.type === undefined && typed.types === undefined && typed.typesAnyOf === undefined)) {
+  // A permanent target needs a permanent type to stand on, or the word
+  // "permanent" itself ("target blue or black noncreature permanent").
+  const permanentWord = words.length === 2 && /^non[a-z]+$/i.test(words[0]) && /^permanent$/i.test(words[1]) && filter.anyOf !== undefined;
+  if (
+    typed === null ||
+    (typed.type === undefined && typed.types === undefined && typed.typesAnyOf === undefined && !permanentWord)
+  ) {
     return undefined;
   }
   Object.assign(filter, typed);
@@ -1511,18 +1520,19 @@ function libraryPlacementSlot(phrase, ctx) {
  * own from exile" (Rootcoil Creeper), "target creature card with mana value X
  * exiled with this creature" (Gelatinous Cube): a `card-in-exile` slot. */
 const EXILE_TARGET =
-  "target (?:face-up exiled card|exiled card(?: with flashback)?(?: you own)?|card(?: with flashback)? you own from exile|(?:[a-z]+ )?card(?: with mana value X)? exiled with (?:this [a-z]+|~))";
+  "target (?:face-up exiled card|exiled card(?: with (?:flashback|warp))?(?: you own)?|card(?: with flashback)? you own from exile|(?:[a-z]+ )?card(?: with mana value X)? exiled with (?:this [a-z]+|~))";
 
 function exileTargetOf(phrase) {
   if (/^target face-up exiled card$/i.test(phrase)) return { kind: "card-in-exile", faceUp: true };
   let m;
-  if ((m = /^target (?:exiled card( with flashback)?( you own)?|card( with flashback)? you own from exile)$/i.exec(phrase))) {
-    const flashback = m[1] !== undefined || m[3] !== undefined;
+  // "…with warp" (Blade of the Swarm): the printed warp read in exile.
+  if ((m = /^target (?:exiled card(?: with (flashback|warp))?( you own)?|card( with flashback)? you own from exile)$/i.exec(phrase))) {
+    const keyword = m[1] ?? (m[3] !== undefined ? "flashback" : undefined);
     const own = m[2] !== undefined || m[3] !== undefined || /you own from exile$/i.test(phrase);
     return {
       kind: "card-in-exile",
       ...(own ? { whose: "you" } : {}),
-      ...(flashback ? { filter: { hasKeyword: "flashback" } } : {}),
+      ...(keyword !== undefined ? { filter: { hasKeyword: keyword.toLowerCase() } } : {}),
     };
   }
   if ((m = /^target (?:([a-z]+) )?card( with mana value X)? exiled with (?:this [a-z]+|~)$/i.exec(phrase))) {
@@ -9152,6 +9162,12 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`put (target card from a graveyard) on the bottom of its owner's library`).exec(s))) {
     return { kind: "put-on-library", target: slot(m[1]), position: "bottom" };
   }
+  // "Put target exiled card with warp on the bottom of its owner's library"
+  // (Blade of the Swarm).
+  if ((m = re(`put (${EXILE_TARGET}) on the bottom of its owner's library`).exec(s))) {
+    const spec = exileTargetOf(m[1]);
+    if (spec !== undefined) return { kind: "put-on-library", target: ctx.target(spec), position: "bottom" };
+  }
 
   // Life, in the shapes the pool writes it.
   if ((m = re(`you lose ${N} life`).exec(s))) return { kind: "lose-life", amount: amount(m[1]) };
@@ -9619,6 +9635,34 @@ export function parseSentence(sentence, ctx) {
       prohibits: [
         { act: "cast", who: "each-opponent" },
         ...(m[1] !== undefined ? [{ act: "activate", who: "each-opponent", of: { type: "planeswalker" }, only: "loyalty" }] : []),
+      ],
+    };
+  }
+  // "Creatures you control can't be the targets of spells or abilities your
+  // opponents control this turn" (Veilstone Amulet), "Permanents you control
+  // can't be the targets of blue or black spells your opponents control this
+  // turn" (Display of Dominance): a turn's `be-targeted`, a rules change
+  // reaching what you control later too (rule 611.2c).
+  if (
+    (m = re(
+      "(creatures|permanents) you control can't be the targets of (?:(white|blue|black|red|green)(?: or (white|blue|black|red|green))? )?spells( or abilities)? your opponents control this turn",
+    ).exec(s))
+  ) {
+    const colors = [m[2], m[3]].filter(Boolean).map((c) => COLOR_WORDS[c.toLowerCase()]);
+    return {
+      kind: "prohibit",
+      prohibits: [
+        {
+          act: "be-targeted",
+          object: m[1].toLowerCase() === "creatures" ? { type: "creature", controlledBy: "you" } : { controlledBy: "you" },
+          by: "opponents",
+          ...(m[4] === undefined ? { only: "spells" } : {}),
+          ...(colors.length === 1
+            ? { sourceFilter: { colors } }
+            : colors.length === 2
+              ? { sourceFilter: { anyOf: colors.map((c) => ({ colors: [c] })) } }
+              : {}),
+        },
       ],
     };
   }
@@ -23688,7 +23732,11 @@ function fillEffect(ability, text, ctx, lines, i) {
     while (j < lines.length && lines[j].startsWith("•")) bullets.push(lines[j].replace(/^•\s*/, "")), (j += 1);
     const modes = [];
     let ok = bullets.length > 0;
-    for (const b of bullets) {
+    for (const bullet of bullets) {
+      // The bullets are the raw lines: "this creature" is `~`, as `normalize`
+      // reads it (Blade of the Swarm's "Put two +1/+1 counters on this
+      // creature").
+      const b = stripReminder(bullet).replace(/\bthis (creature|artifact|enchantment|land|permanent|Equipment|Vehicle|Aura|token|card|Saga)\b/gi, "~");
       // Each mode brings its own targets (rule 700.2b): slots of its own.
       const targets = [];
       // "That player" in a mode is the trigger's player, as in a plain
@@ -23700,7 +23748,7 @@ function fillEffect(ability, text, ctx, lines, i) {
         ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
       });
       if (r.effect === null) ok = false;
-      else modes.push({ text: b, ...(targets.length > 0 ? { targets } : {}), effect: r.effect });
+      else modes.push({ text: bullet, ...(targets.length > 0 ? { targets } : {}), effect: r.effect });
     }
     const [min, max] = modeCounts(modalHead[1], bullets.length);
     // A modal ability announces its modes as it goes on the stack — a

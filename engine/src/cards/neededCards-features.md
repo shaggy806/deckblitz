@@ -9013,3 +9013,11 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **The player with the lowest life total (2026-11-26).** `effect:gain-control-to-player-with-lowest-life`: `choose-opponent`'s `leastLife` beside `mostLife` (with `anyPlayer`, the controller asked only on a tie). Loxodon Peacekeeper, `test/least-life-player.test.ts`.
 
 **A colour chosen, the permanent becoming it (2026-11-26, no engine code).** `effect:choose-color-become-color`: `choose-value` `"color"` then `become` `setColors: [CHOSEN_COLOR]`, `duration: "permanent"`. Puca's Eye, same test file.
+
+**An opponent chooses one of your permanents to exile (2026-11-26, no engine code).** `effect:opponent-chooses-your-permanent-to-exile`: `choose-opponent`, then `choose-permanents` with `chooser: "that-player"`, `controlledByPlayer: "you"`, `exceptSource`, its `exile` `linked` to the source (rule 607.2a). Wormfang Crab. `test/opponent-chooses-your-permanent.test.ts`.
+
+**Was attacking or blocking alone, as it last existed (2026-11-26).** `condition:was-attacking-or-blocking-alone-lki`: `CardFilter.blockingAlone` beside `attackingAlone` (rule 506.5, `state.ts` `inCombatAlone`), both read off a snapshot (`LastKnownInfo.attackingAlone`/`blockingAlone`, set in `takeLastKnown` before anything in the event moved). Thijarian Witness. `test/was-in-combat-alone.test.ts`.
+
+**Target exiled card with warp (2026-11-26, no engine code).** `condition:filter-has-warp`: `card-in-exile` with `hasKeyword: "warp"`; the scaffolder reads it, and a modal trigger's bullets now read "this creature" as `~`. Blade of the Swarm. `test/exiled-card-with-warp.test.ts`.
+
+**Permanents you control can't be the targets of blue or black spells this turn (2026-11-26, no engine code).** `effect:permanents-you-control-untargetable-this-turn`: one-shot `prohibit` `be-targeted` with `by: "opponents"`, `only: "spells"`, a colour `sourceFilter` (rule 611.2c: it reaches later permanents too); the scaffolder reads it and Veilstone Amulet's, and "target blue or black noncreature permanent". Display of Dominance. `test/untargetable-by-opponents-colored-spells.test.ts`.

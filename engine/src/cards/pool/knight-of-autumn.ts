@@ -31,7 +31,7 @@ export default defineCard({
           { text: COUNTER_MODE, effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 2 } },
           {
             text: DESTROY_MODE,
-            targets: [{ kind: "permanent", filter: { typesAnyOf: ["artifact", "enchantment"] } }],
+            targets: ["artifact-or-enchantment"],
             effect: { kind: "destroy", target: 0 },
           },
           { text: LIFE_MODE, effect: { kind: "gain-life", amount: 4 } },
