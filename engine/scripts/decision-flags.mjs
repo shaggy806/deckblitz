@@ -36,12 +36,13 @@
 // more below not doing it (default 8: a card in hand is worth about 1). Off by
 // default: below about 15 these were mostly what the stack-deep score can't
 // value (a fetch land shuffling away a known top card, a tutor, Brainstorm).
+// --keep DIR (each flagged decision's position and action, as JSON),
 // --quiet (totals only), --self-test (the Deflecting Swat board, cast at the
 // discover by a scripted seat: it must be flagged). It plays `dist/`: build
 // first.
 
 import { spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { gunzipSync } from "node:zlib";
@@ -115,6 +116,10 @@ function createWatcher(where, flags) {
       what: card !== null ? name(s, card) : `${name(s, action.source)}'s ability`,
       depth: s.zones.shared.stack.length,
       selfSeen: false,
+      // `--keep DIR`: the position as it was asked, written out if flagged.
+      snapshot: KEEP === null ? null : JSON.stringify({ ...game.snapshot(), eventLog: [] }),
+      eventStart: game.events.length,
+      action,
       ownAbove: null,
       contested: null,
       resolved: false,
@@ -228,8 +233,10 @@ function createWatcher(where, flags) {
       const at = `${where} t${o.turn} ${o.player}`;
       const aimed = o.targets ? `, aimed at ${o.targets}` : "";
       if (o.fizzled !== null) {
+        keep(o, where, game);
         flags.push({ where, turn: o.turn, player: o.player, kind: "fizzled", line: `${at}: ${o.what} fizzled (${o.fizzled})${aimed}${o.contested === null ? "" : ` (in the game, ${o.contested})`}${o.ownAbove === null ? "" : ` (its player ${o.ownAbove})`}` });
       } else if (o.nothing && o.contested === null) {
+        keep(o, where, game);
         flags.push({ where, turn: o.turn, player: o.player, kind: "nothing", line: `${at}: ${o.what} did nothing: every zone, life total and counter as without it, but the card and the mana${aimed}` });
       } else if (DROP !== null && o.chosen !== null && o.without !== null && o.without - o.chosen > DROP) {
         const how = o.contested === null ? "" : ` (in the game, ${o.contested})`;
@@ -242,6 +249,21 @@ function createWatcher(where, flags) {
 }
 
 const fmt = (n) => (Math.round(n * 10) / 10).toString();
+
+/** `--keep DIR`: a flagged decision's position, before it was made, and the
+ * action, for `Game.fromSnapshot` and a bot to be asked again — what a game
+ * on the clock, which never replays exactly, can still be studied by. */
+const KEEP = flag("keep");
+function keep(o, where, game) {
+  if (KEEP === null || o.snapshot === null) return;
+  mkdirSync(KEEP, { recursive: true });
+  const file = join(KEEP, `${where.replace(/[^A-Za-z0-9-]+/g, "_")}-t${o.turn}-${o.player}-${o.what.replace(/[^A-Za-z0-9]+/g, "_")}.json`);
+  // And what the game did from the decision to the flag: what a replay of the
+  // position, with the other seats passing, can't show.
+  const events = game.events.slice(o.eventStart).filter((e) => e.type !== "priority-received" && e.type !== "priority-passed");
+  writeFileSync(file, `{"action":${JSON.stringify(o.action)},"events":${JSON.stringify(events)},"state":${o.snapshot}}`);
+  console.log(`  kept: ${file}`);
+}
 
 /**
  * The caster in a simulation: v1's answers to what it's asked (a tutor's
