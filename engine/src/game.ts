@@ -5368,11 +5368,17 @@ export class Game {
       const payableX = caps.length === 0 ? undefined : Math.min(...caps);
       // "X is the mana value of that card" (rule 107.3c): the one X the
       // ability's text defines, offered when it can be paid.
-      const definedX = this.definedAbilityX(player, source, ability);
-      if (definedX !== undefined && (payableX === undefined || definedX === null || definedX > payableX)) return;
-      const maxX = definedX ?? payableX;
+      // Of several (Bargaining Table's opponents' hand sizes), those it can
+      // pay, each its own offer below.
+      const definedAll = this.definedAbilityX(player, source, ability);
+      const definedXs =
+        definedAll === undefined || definedAll === null
+          ? definedAll
+          : definedAll.filter((x) => payableX !== undefined && x <= payableX);
+      if (definedXs !== undefined && (definedXs === null || definedXs.length === 0)) return;
+      const maxX = definedXs !== undefined ? Math.max(...definedXs) : payableX;
       // "X can't be 0" (Ruthless Technomancer).
-      const minX = definedX ?? ability.minX ?? 0;
+      const minX = definedXs !== undefined ? Math.min(...definedXs) : (ability.minX ?? 0);
       if (maxX !== undefined && maxX < minX) return;
       const plainMana = plainTapMana(ability, makes);
       // "Unattach an Equipment from Captain America" (rule 701.3d): what this
@@ -5530,6 +5536,7 @@ export class Game {
           discardAtX !== undefined ||
           exileAtX !== undefined ||
           doAtX !== undefined ||
+          (definedXs !== undefined && definedXs.length > 1) ||
           ability.targets.some(targetSpecReadsX) ||
           groupReadsX(ability.targets))
       ) {
@@ -5541,6 +5548,7 @@ export class Game {
         // mana, and the offer's `tapCost` says how many. "Discard a card with
         // mana value X": only an X with such a card to discard.
         for (let x = minX; x <= maxX; x += 1) {
+          if (definedXs !== undefined && !definedXs.includes(x)) continue;
           if (tapsX) {
             const tapCost = this.abilityTapCostOffer(player, source, ability, x);
             if (tapCost === null || !this.tapOfferPayable(tapCost)) continue;
@@ -29862,8 +29870,8 @@ export class Game {
     // that X, and none while it's undefined.
     const definedX = this.definedAbilityX(player, sourceId, ability);
     if (definedX === null) return `${def.name}'s ability can't be activated: its X isn't defined`;
-    if (definedX !== undefined && x !== undefined && x !== definedX) {
-      return `${def.name}'s ability is activated with X = ${definedX}`;
+    if (definedX !== undefined && x !== undefined && !definedX.includes(x)) {
+      return `${def.name}'s ability is activated with X = ${definedX.join(" or ")}`;
     }
     if (sacrificeParts !== null) {
       if (this.costSacrificePool(player, sourceId, ability, sacrificeParts, x ?? 0) === null) {
@@ -58915,11 +58923,20 @@ controlledBy,
    * defines none (X is chosen, 107.3a), `null` while what it reads isn't
    * there (Prototype Portal with no card exiled: X is undefined and the
    * cost can't be paid). */
-  private definedAbilityX(player: PlayerId, sourceId: ObjectId, ability: ActivatedAbility): number | null | undefined {
-    if (ability.xIs === undefined) return undefined;
+  private definedAbilityX(player: PlayerId, sourceId: ObjectId, ability: ActivatedAbility): readonly number[] | null | undefined {
+    const xIs = ability.xIs;
+    if (xIs === undefined) return undefined;
+    // "X is the number of cards in an opponent's hand" (Bargaining Table):
+    // the opponent is named as it's activated, so X is any one of theirs.
+    if ("cardsInHandOf" in xIs) {
+      const sizes = this.state.turnOrder
+        .filter((p) => p !== player && this.state.players[p]?.hasLost === false)
+        .map((p) => this.state.zones.perPlayer[p].hand.length);
+      return sizes.length === 0 ? null : [...new Set(sizes)].sort((a, b) => a - b);
+    }
     const ctx = this.makeResolutionContext(sourceId, player, []);
-    const ref = objectRefRead(ability.xIs.manaValueOf, ctx);
-    return ref === undefined ? null : Math.max(0, ctx.manaValueOf(ref));
+    const ref = objectRefRead(xIs.manaValueOf, ctx);
+    return ref === undefined ? null : [Math.max(0, ctx.manaValueOf(ref))];
   }
 
   private costAmount(

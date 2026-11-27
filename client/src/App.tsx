@@ -335,6 +335,13 @@ function castWayRow(a: CastAction | LandAction, view: PlayerView): string {
   return a.kind === 'cast-spell' && a.manaCost !== undefined ? `${label} — ${a.manaCost}` : label
 }
 
+/** The X an ability offer fixes (`minX === maxX`), when it fixes one: an
+ * ability offered once per X (Bargaining Table's opponents' hand sizes,
+ * "target Saga card with mana value X") has a menu row per X, each keyed by
+ * it (the engine's text already names it). */
+const fixedAbilityX = (ab: AbilityAction): number | undefined =>
+  ab.xCost !== undefined && ab.xCost.minX === ab.xCost.maxX ? ab.xCost.maxX : undefined
+
 /** The "which variant of this cast" fields a `cast-spell` action carries all
  * the way from `legalActions` back into the dispatched action. */
 const castExtras = (cast: CastAction) => ({
@@ -8803,7 +8810,8 @@ function Table({
             // So is a modal ability, once per mode.
             // And one naming each opponent who may choose its targets.
             // A split's stand-in picks are all of one colour, as that colour's own offer is.
-            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.manaFor ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}:${ab.costOption ?? ''}:${ab.costCard?.card ?? ''}`,
+            // And one offered at each X it may be (Bargaining Table).
+            key: `${ab.abilityIndex}:${ab.manaColors?.join('') ?? ''}:${ab.modes?.join(',') ?? ''}:${ab.otherChooser ?? ''}:${ab.manaFor ?? ''}:${ab.divide?.total ?? ''}:${ab.manaSplit !== undefined ? 'split' : ''}:${ab.costOption ?? ''}:${ab.costCard?.card ?? ''}:${fixedAbilityX(ab) ?? ''}`,
             label:
               (ab.text || `Ability ${ab.abilityIndex + 1}`) +
               (ab.otherChooser !== undefined ? ` (${playerLabel(ab.otherChooser, game.seats)} chooses)` : '') +

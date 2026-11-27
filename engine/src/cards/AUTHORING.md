@@ -5091,7 +5091,9 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   "exiled-with-source" }` on the ability is an X its own text defines
   (rule 107.3c — Prototype Portal's "{X}, {T}: … X is the mana value of that
   card"): offered at that one X, any other refused, and not activatable
-  while the ref reads nothing; a target filter reading
+  while the ref reads nothing; `xIs: { cardsInHandOf: "an-opponent" }` is
+  Bargaining Table's "X is the number of cards in an opponent's hand",
+  offered once per opponent's hand size; a target filter reading
   X is offered once per X, as for an `{X}` in the mana cost. `{ each:
   [filterA, filterB] }` is one of each, every one a different permanent —
   Jarad, Golgari Lich Lord's "Sacrifice a Swamp and a Forest" (a land that is

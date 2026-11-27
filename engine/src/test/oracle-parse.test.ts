@@ -21583,6 +21583,20 @@ describe("a cost's X defined by the ability", () => {
     });
     expect(face.activated[0].__todo).toBeUndefined();
   });
+
+  it("reads Bargaining Table's X as an opponent's hand size", () => {
+    const face = parseFace({
+      name: "Test Table",
+      type_line: "Artifact",
+      oracle_text: "{X}, {T}: Draw a card. X is the number of cards in an opponent's hand.",
+    });
+    expect(face.activated[0]).toMatchObject({
+      cost: { mana: "{X}", tap: true },
+      xIs: { cardsInHandOf: "an-opponent" },
+      effect: { kind: "draw", amount: 1 },
+    });
+    expect(face.complete).toBe(true);
+  });
 });
 
 describe("a granted optional cost of any amount of mana", () => {

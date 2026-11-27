@@ -23895,6 +23895,19 @@ function fillEffect(ability, text, ctx, lines, i) {
     text = text.slice(0, definedX.index);
     ability.xIs = { manaValueOf: "exiled-with-source" };
   }
+  // Bargaining Table's "X is the number of cards in an opponent's hand": the
+  // opponent named as it's activated.
+  const handX = / X is the number of cards in an opponent's hand\.$/.exec(text);
+  if (
+    handX !== null &&
+    ability.cost !== undefined &&
+    ability.trigger === undefined &&
+    typeof ability.cost.mana === "string" &&
+    ability.cost.mana.includes("{X}")
+  ) {
+    text = text.slice(0, handX.index);
+    ability.xIs = { cardsInHandOf: "an-opponent" };
+  }
   // An activated ability's "target … of an opponent's choice" (rules 602.2b,
   // 601.2c); a triggered one has no opponent to name.
   const theirSlots = ability.cost !== undefined && ability.trigger === undefined ? [] : undefined;

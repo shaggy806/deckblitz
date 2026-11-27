@@ -1141,7 +1141,14 @@ export interface ActivatedAbility {
    * maxX`), and any other is refused; while the ref reads nothing (no card
    * exiled with it) X is undefined and the ability can't be activated (the
    * card's ruling). The effect reads it as `"x"` like any other. */
-  readonly xIs?: { readonly manaValueOf: ObjectRef };
+  readonly xIs?:
+    | { readonly manaValueOf: ObjectRef }
+    /** Bargaining Table's "X is the number of cards in an opponent's hand":
+     * the opponent chosen as it's activated, before X is determined (its
+     * ruling; rule 601.2b's announcement, by 602.2b). Nothing else reads who,
+     * so the choice is the X: offered once per hand size an opponent still in
+     * the game has, and any other refused. */
+    | { readonly cardsInHandOf: "an-opponent" };
   /** "N damage divided as you choose among one or two targets" (Skarrgan
    * Hellkite): the targets from `slot` on — an `any-number` group — share
    * `total`, split as the ability is activated (rules 602.2b, 601.2d: the
