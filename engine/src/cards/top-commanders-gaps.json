@@ -4,6 +4,7 @@
  "built": [
     "effect:discard-spliced-names",
     "effect:discard-duplicate-names",
+    "cost:pay-mana-cost-of-attached",
     "condition:countered-this-way",
     "filter:cast-using-teamwork",
     "condition:cast-via-own-graveyard-alt-cost",

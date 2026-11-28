@@ -368,6 +368,14 @@ export function withActivationCostOption<A extends { readonly cost: AbilityCost 
 export interface AbilityCost {
   /** Mana portion of the cost, e.g. `"{2}"`; `null` for no mana. */
   readonly mana: string | null;
+  /** "Pay enchanted creature's mana cost" (Merseine): the mana cost of the
+   * permanent this source is attached to joins `mana`, read as the ability
+   * is offered and activated (601.2f via 602.2b), an {X} in it 0 (rule
+   * 107.3h). With nothing attached, or a permanent with no mana cost (a
+   * token, a land), the cost is unpayable (118.6) and the ability can't be
+   * activated. The engine resolves it in `effectiveActivated`; never left on
+   * an ability it offers. */
+  readonly manaCostOf?: "attached";
   /** "Spend only mana of the chosen color to activate this ability" (Throne of
    * Eldraine): the color its permanent's controller chose as it entered
    * (`chooseOnEnter`). With none chosen, no mana can pay. */
@@ -923,8 +931,12 @@ export interface ActivatedAbility {
    * bound as it's granted to that effect's controller (`{ player }`, which
    * a gain of control of the creature doesn't change; unbound, its
    * controller). Whoever activates it controls it (602.2a).
+   * `"attached-controller"` is "Only the controller of the enchanted creature
+   * may activate this ability" (Merseine): whoever controls the permanent
+   * this source is attached to, as it's activated; nobody while it's
+   * attached to nothing.
    */
-  readonly onlyBy?: "owner" | "granter" | { readonly player: PlayerId };
+  readonly onlyBy?: "owner" | "granter" | "attached-controller" | { readonly player: PlayerId };
   /** One of reconfigure's two abilities (rule 702.151a — the `reconfigure`
    * helper): what lets an Equipment that's a creature equip (301.5c). */
   readonly reconfigure?: "attach" | "unattach";

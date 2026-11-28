@@ -7601,7 +7601,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   creature's owner may activate this ability" — Personal Incarnation: its owner
   alone, whoever controls it, rule 602.1b), and in a `grant-activated` ability
   `onlyBy: "granter"`, the "only you" of the granting effect's own text (Martyrdom),
-  bound to that effect's controller as it resolves. A legendary instant or sorcery
+  bound to that effect's controller as it resolves; `onlyBy: "attached-controller"`
+  ("Only the controller of the enchanted creature may activate this ability" —
+  Merseine), and with it `cost.manaCostOf: "attached"` ("Pay enchanted
+  creature's mana cost": read as it's activated, {X} 0 by rule 107.3h, unpayable
+  for a permanent with no mana cost, 118.6). A legendary instant or sorcery
   needs nothing: rule 205.4e is the engine's own check. "As though it had flash
   if you pay {2} more to cast it" is `kicker: { cost: "{2}", keyword: "flash",
   flash: true }` (Rout; rule 601.3c), never a kicked spell to anything else. A

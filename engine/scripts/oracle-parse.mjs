@@ -1865,6 +1865,8 @@ export function parseCost(text) {
     } else if ((m = /^Pay (\d+) life$/.exec(part))) cost.payLife = Number(m[1]);
     else if (part === "Pay half your life") cost.payLife = "half-rounded-up";
     else if (part === "Pay X life") cost.payLife = "x";
+    // "Pay enchanted creature's mana cost" (Merseine): read as it's activated.
+    else if (part === "Pay enchanted creature's mana cost") cost.manaCostOf = "attached";
     else if ((m = /^Pay (\d+) life for each ([\w+/-]+) counter on ~$/.exec(part))) {
       cost.payLife = { each: Number(m[1]), per: { countersOnSource: m[2] } };
     } else if ((m = /^Pay (\d+) life for each card in your hand$/.exec(part))) {
@@ -22458,6 +22460,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       // Incarnation — rule 602.1b): its owner, whoever controls it.
       rest = rest.replace(/ Only (?:~|this \w+)'s owner may activate this ability\.$/, () => {
         ability.onlyBy = "owner";
+        return "";
+      });
+      // "Only the controller of the enchanted creature may activate this
+      // ability" (Merseine — 602.1b).
+      rest = rest.replace(/ Only the controller of the enchanted creature may activate this ability\.$/, () => {
+        ability.onlyBy = "attached-controller";
         return "";
       });
       // Coven's "Activate only if you control three or more creatures with

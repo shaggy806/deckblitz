@@ -4648,6 +4648,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       ...imprint,
       filter: { type: "instant", manaValue: { op: "lte", n: 2 } },
     });
+    // "Pay enchanted creature's mana cost: … Only the controller of the
+    // enchanted creature may activate this ability" (Merseine).
+    const merseine = face(
+      "Enchant creature\nPay enchanted creature's mana cost: Remove a net counter from this Aura. Only the controller of the enchanted creature may activate this ability.",
+      "Enchantment — Aura",
+    );
+    expect(merseine.activated[0].cost).toMatchObject({ mana: null, manaCostOf: "attached" });
+    expect(merseine.activated[0].onlyBy).toBe("attached-controller");
     // "Only this creature's owner may activate this ability" (rule 602.1b),
     // its damage to its owner, and its owner's life as it dies.
     const incarnation = face(

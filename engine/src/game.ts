@@ -29721,8 +29721,27 @@ export class Game {
       chosen === undefined || chosen.source !== objectId || all[chosen.index] === undefined
         ? all
         : all.map((ability, i) => (i === chosen.index ? withActivationCostOption(ability, chosen.option) : ability));
-    if (named === undefined || named.source !== objectId || withOption[named.index] === undefined) return withOption;
-    return withOption.map((ability, i) => (i === named.index ? this.withCostCard(ability, named.card) : ability));
+    const withCard =
+      named === undefined || named.source !== objectId || withOption[named.index] === undefined
+        ? withOption
+        : withOption.map((ability, i) => (i === named.index ? this.withCostCard(ability, named.card) : ability));
+    return withCard.some((ability) => ability.cost.manaCostOf !== undefined)
+      ? withCard.map((ability) => this.withAttachedManaCost(ability, object))
+      : withCard;
+  }
+
+  /** `ability` with "pay enchanted creature's mana cost" (`manaCostOf:
+   * "attached"` — Merseine) read now (601.2f via 602.2b): the mana cost of
+   * the permanent `source` is attached to joins its mana, an {X} in it 0
+   * (rule 107.3h). Left as it is when nothing is attached or what is has no
+   * mana cost — an unpayable cost (118.6), which `whyCannotActivateAbility`
+   * refuses. */
+  private withAttachedManaCost(ability: ActivatedAbility, source: GameObject | undefined): ActivatedAbility {
+    if (ability.cost.manaCostOf === undefined) return ability;
+    const host = source?.attachedTo ?? null;
+    const its = host === null ? null : this.costCardManaCost(host);
+    if (its === null) return ability;
+    return { ...ability, cost: { ...ability.cost, mana: `${ability.cost.mana ?? ""}${its}`, manaCostOf: undefined } };
   }
 
   /** `ability` with the graveyard card its "exile … and pay its mana cost"
@@ -30249,6 +30268,11 @@ export class Game {
     // (rules 602.2b, 601.2f): one branch named, merged over the rest.
     if (ability.cost.options !== undefined) {
       return `${def.name}'s ability needs one of its costs chosen: activate it naming a costOption`;
+    }
+    // "Pay enchanted creature's mana cost" with nothing attached, or with no
+    // mana cost to pay (rule 118.6): `effectiveActivated` left it unread.
+    if (ability.cost.manaCostOf !== undefined) {
+      return `${def.name}'s ability costs a mana cost there is none of, which can't be paid (rule 118.6)`;
     }
     // "Of an opponent's choice" (rules 602.2b, 601.2c): activated naming the
     // opponent who chooses (the action's `otherChooser`).
@@ -30859,6 +30883,10 @@ export class Game {
     if (only !== undefined) {
       if (only === "owner") return source.owner === player;
       if (only === "granter") return source.controller === player;
+      if (only === "attached-controller") {
+        const host = source.attachedTo === null ? undefined : this.state.objects[source.attachedTo];
+        return host !== undefined && host.zone === "battlefield" && host.controller === player;
+      }
       return only.player === player;
     }
     if (source.controller !== player) {
@@ -30905,7 +30933,13 @@ export class Game {
    * one granted to one player alone (Martyrdom). */
   private othersMayActivate(object: GameObject, player: PlayerId): boolean {
     const printed = this.registry.get(rulesTextName(object)).activated;
-    if (printed.some((a) => a.anyPlayer === true || (a.onlyBy === "owner" && object.owner === player))) return true;
+    if (
+      printed.some(
+        (a) => a.anyPlayer === true || (a.onlyBy === "owner" && object.owner === player) || a.onlyBy === "attached-controller",
+      )
+    ) {
+      return true;
+    }
     if (this.borrowedLandSpend(player, object) !== undefined) return true;
     return object.modifiers.some((m) => m.grantsActivated?.some((a) => a.onlyBy !== undefined) === true);
   }
