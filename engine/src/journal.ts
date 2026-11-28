@@ -335,9 +335,11 @@ export interface Journal {
   /** The whole game's record of the players each permanent has dealt damage
    * to, keyed `"<object>@<stint>"` — one object in one stint (rule 400.7) —
    * with those it dealt combat damage to apart ("target opponent previously
-   * dealt damage by it" — Diseased Vermin). Kept past the round the entries
-   * last. */
-  damagedPlayersBy?: Record<string, { any: PlayerId[]; combat?: PlayerId[] }>;
+   * dealt damage by it" — Diseased Vermin), and the permanents it dealt
+   * damage to, each `"<object>@<stint>"` too ("each … planeswalker it has
+   * dealt damage to this game" — The Fallen). Kept past the round the
+   * entries last. */
+  damagedPlayersBy?: Record<string, { any: PlayerId[]; combat?: PlayerId[]; permanents?: string[] }>;
   /** The whole game's count of the cards each player cycled, by name, as
    * each was named as it was cycled ("if you've cycled a card named Yidaro,
    * Wandering Monster four or more times this game"). Kept past the round
@@ -380,6 +382,23 @@ export function noteDamagedPlayer(state: GameState, object: ObjectId, stint: num
     const list = (record.combat ??= []);
     if (!list.includes(player)) list.push(player);
   }
+}
+
+/** Note that the permanent `object`, in stint `stint`, dealt damage to the
+ * permanent `hit` in its stint `hitStint` (`Journal.damagedPlayersBy`'s
+ * `permanents`). */
+export function noteDamagedPermanent(state: GameState, object: ObjectId, stint: number, hit: ObjectId, hitStint: number): void {
+  const journal = (state.journal ??= emptyJournal());
+  const record = ((journal.damagedPlayersBy ??= {})[`${object}@${stint}`] ??= { any: [] });
+  const key = `${hit}@${hitStint}`;
+  const list = (record.permanents ??= []);
+  if (!list.includes(key)) list.push(key);
+}
+
+/** Whether the permanent `object`, in stint `stint`, has dealt damage this
+ * game to the permanent `hit` in its stint `hitStint`. */
+export function damagedPermanentBy(state: GameState, object: ObjectId, stint: number, hit: ObjectId, hitStint: number): boolean {
+  return state.journal?.damagedPlayersBy?.[`${object}@${stint}`]?.permanents?.includes(`${hit}@${hitStint}`) === true;
 }
 
 /** The players the permanent `object` has dealt damage to this game in stint

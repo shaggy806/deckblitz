@@ -38,6 +38,7 @@ import { polarityBias } from "./deck-bias.js";
 import type { EffectAmount, EffectSpec, ObjectRef, PlayerScope, ProtectionQualities } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import { manaValueOfObject, matchesFilter, ownerOnly } from "./filter.js";
+import { damagedPlayersBy } from "./journal.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameObject, GameState } from "./state.js";
@@ -219,6 +220,12 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "noted-target-player": {
       const noted = ctx.source !== undefined ? state.objects[ctx.source]?.notedTarget : undefined;
       return noted !== undefined ? [noted.player] : null;
+    }
+    case "opponents-dealt-damage-by-source-this-game": {
+      const object = ctx.source !== undefined ? state.objects[ctx.source] : undefined;
+      if (object === undefined) return null;
+      const damaged = damagedPlayersBy(state, object.id, object.zoneChangeCount ?? 0, false);
+      return opponentsOf(state, controller).filter((p) => damaged.includes(p));
     }
     case "enchanted-player": {
       const enchanted = ctx.source !== undefined ? state.objects[ctx.source]?.attachedToPlayer : undefined;

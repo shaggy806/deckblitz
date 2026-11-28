@@ -1696,7 +1696,10 @@ opponent controls. **That opponent** draws three cards", control changed first).
 linked ability's "that player" (rule 607.1): the player a triggered ability of the source marked `notesTarget: true`
 targeted in the stint this refers to — Laquatus's Champion's enters ability (`targets: ["player"]`, `notesTarget`)
 and its "when this creature leaves the battlefield, **that player** gains 6 life" (`gain-life` `who:
-"noted-target-player"`), read even while the enters ability is still on the stack. `"players-being-attacked"` is the same
+"noted-target-player"`), read even while the enters ability is still on the stack.
+`"opponents-dealt-damage-by-source-this-game"` is each opponent the effect's source has dealt damage to this game, in
+its stint this refers to (The Fallen's "deals 1 damage to each opponent … it has dealt damage to this game").
+`"players-being-attacked"` is the same
 players read from the state — whoever the active player declared attackers at
 this combat — so it also answers in a trigger's intervening `condition`, which
 is asked before the trigger has its attackers ("whenever a player attacks,
@@ -4314,7 +4317,10 @@ Ungoliant), matched against each source as it was when it dealt the damage
 than the lethal damage it needed then — toughness less damage already marked,
 1 from a deathtouch source, none once it had lethal damage; a planeswalker's
 loyalty — Maarika, Brutal Gladiator's `toFilter`, asked once every source dealing damage at once has dealt it, rule 120.10) and
-`dealtDamageToCreatureThisTurn` (it dealt damage to another creature). `dealtDamageThisTurn: true` is
+`dealtDamageToCreatureThisTurn` (it dealt damage to another creature). `damagedThisGameBySource: true` is
+"dealt damage **this game** by it" — The Fallen's "each … planeswalker it has dealt damage to this game", a
+`damage-all` (whose filter's source is what deals the damage), read off the journal's whole-game record by both
+objects' stints (rule 400.7); its players are the scope `"opponents-dealt-damage-by-source-this-game"`. `dealtDamageThisTurn: true` is
 "that dealt damage this turn", to anything (Restore the Peace); `{ to: "you" }` "that dealt damage to you this
 turn" (Spear of Heliod), with `combat: true` for combat damage (Witch-king of Angmar: a sacrifice keeps "you" as
 the effect's controller, not the player choosing); `{ to: "opponent" }` "that dealt damage to an opponent this turn", to any player but the filter's "you", read against its controller now (Dunerider Outlaw, Whirling Dervish). The condition `{ kind: "self-hasnt-dealt-damage", combat? }`

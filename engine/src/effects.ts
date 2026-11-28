@@ -2631,6 +2631,12 @@ export type PlayerScope =
    * ability has resolved, been countered or is still on the stack. Nobody
    * when it never triggered, or that player has left the game. */
   | "noted-target-player"
+  /** "This creature deals 1 damage to **each opponent** … **it has dealt
+   * damage to this game**" (The Fallen): each opponent of the effect's
+   * controller the effect's source has dealt damage to in its stint on the
+   * battlefield this refers to (rule 400.7 — the journal's whole-game
+   * record), in turn order. Nobody when it has dealt them none. */
+  | "opponents-dealt-damage-by-source-this-game"
   /** "Whenever one or more Pirates you control deal damage to your
    * opponents, exile the top card of **each of those opponents'** libraries"
    * (Breeches, Brazen Plunderer): each player the sources of a `once:

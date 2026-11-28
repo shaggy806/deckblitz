@@ -494,6 +494,8 @@ import {
   modesDoneThisTurn,
   noteCombatDamagedBy,
   noteDamagedPlayer,
+  noteDamagedPermanent,
+  damagedPlayersBy,
   noteCycledNames,
 } from "./journal.js";
 import {
@@ -1023,6 +1025,7 @@ const RESOLUTION_SCOPES: ReadonlySet<PlayerScope> = new Set<PlayerScope>([
   "players-dealt-damage-this-way",
   "players-who-lost-control-this-way",
   "noted-target-player",
+  "opponents-dealt-damage-by-source-this-game",
   "damaged-players",
   "attacked-players",
   "you-and-attacked-players",
@@ -44016,6 +44019,16 @@ export class Game {
         const p = noted !== undefined && noted.stint === stint ? noted.player : undefined;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
       }
+      if (who === "opponents-dealt-damage-by-source-this-game") {
+        // "Each opponent … it has dealt damage to this game": by the source
+        // in the stint this refers to (rule 400.7), in turn order.
+        const object = this.state.objects[source];
+        const stint =
+          refs.source ?? refs.sourceWas ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : object?.lastKnown?.zoneChangeCount);
+        if (stint === undefined) return [];
+        const damaged = damagedPlayersBy(this.state, source, stint, false);
+        return this.scopedPlayers(controller, "each-opponent").filter((p) => damaged.includes(p));
+      }
       if (who === "enchanted-player") {
         // The player the source is attached to, in the stint this refers to
         // (608.2h).
@@ -63951,13 +63964,16 @@ controlledBy,
     except?: ObjectId,
   ): void {
     if (amount <= 0) return;
+    // The filter's "it" is what deals the damage: "each planeswalker **it**
+    // has dealt damage to this game" (The Fallen).
+    const ctx: FilterContext = { you, source };
     if (exceptSource) source = this.oneTokenSpared(source);
     this.withDamageBatch(() => {
       for (const id of [...this.state.zones.shared.battlefield]) {
         if (exceptSource && id === source) continue;
         if (id === except) continue;
         if (whose !== undefined && !whose.includes(this.state.objects[id].controller)) continue;
-        if (matchesFilter(this.state, this.registry, id, filter, { you })) {
+        if (matchesFilter(this.state, this.registry, id, filter, ctx)) {
           this.dealDamage(source, { kind: "object", object: id }, amount, false, sourceLastKnown);
         }
       }
@@ -67241,6 +67257,11 @@ controlledBy,
         // players a permanent dealt damage to, by its stint (rule 400.7).
         if (event.target.kind === "player" && was !== undefined && (departed !== undefined || source?.zone === "battlefield")) {
           noteDamagedPlayer(this.state, event.source, was.zoneChangeCount, event.target.player, event.combat === true);
+        }
+        // "Each planeswalker it has dealt damage to this game" (The Fallen):
+        // the permanents, each in the stint it was dealt it (rule 400.7).
+        if (hit !== undefined && was !== undefined && (departed !== undefined || source?.zone === "battlefield")) {
+          noteDamagedPermanent(this.state, event.source, was.zoneChangeCount, hit.id, hit.zoneChangeCount ?? 0);
         }
         return;
       }

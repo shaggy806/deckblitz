@@ -14,7 +14,15 @@
  * `.snapshot` — a dies trigger's filter, a resolving ability's "if it was …").
  */
 
-import { JOURNAL_VIEWS, asTurnBegan, entriesThisTurn, journalEntries, type JournalWhat, type JournalWindow } from "./journal.js";
+import {
+  JOURNAL_VIEWS,
+  asTurnBegan,
+  damagedPermanentBy,
+  entriesThisTurn,
+  journalEntries,
+  type JournalWhat,
+  type JournalWindow,
+} from "./journal.js";
 import {
   computeCharacteristics,
   effectiveColors,
@@ -1583,6 +1591,12 @@ export interface CardFilter {
      * turn" is `{ combat: false }`. */
     readonly combat?: boolean;
   };
+  /** Was dealt damage this game by the permanent applying the filter
+   * (`FilterContext.source`), in its stint on the battlefield now or the one
+   * it last left, while this permanent was in its own stint now (rule
+   * 400.7) — the journal's whole-game record: The Fallen's "each …
+   * planeswalker it has dealt damage to this game". */
+  readonly damagedThisGameBySource?: true;
   /** Was dealt excess damage this turn (rule 120.4a) — Maarika, Brutal
    * Gladiator's "if that creature was dealt excess damage this turn". */
   readonly excessDamageThisTurn?: boolean;
@@ -3830,6 +3844,17 @@ export function matchesFilter(
     if (filter.dealtDamageToCreatureThisTurn !== undefined) {
       const turn = live !== undefined ? live.dealtDamageToCreatureOnTurn : lki!.dealtDamageToCreatureOnTurn;
       if ((onBattlefield && turn === state.turn.number) !== filter.dealtDamageToCreatureThisTurn) return false;
+    }
+  }
+  if (filter.damagedThisGameBySource === true) {
+    const by = damagingStint(state, "this", ctx.source);
+    const self = live ?? state.objects[id];
+    if (
+      by === undefined ||
+      self === undefined ||
+      !damagedPermanentBy(state, by.id, by.zoneChangeCount, id, self.zoneChangeCount ?? 0)
+    ) {
+      return false;
     }
   }
   if (filter.dealtDamageThisTurn !== undefined) {
