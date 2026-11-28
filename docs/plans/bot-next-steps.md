@@ -196,7 +196,7 @@ Wrath's line has alice dead in the round, Conqueror's at 1) and cast Conqueror. 
   where the control's ran 127, 210 and 587 s; the two-player ones about 1.5 times as long.
 
 **Rebuilt the same evening as a correction to the score, not a horizon**
-(`EvalBotController.swingBack`; still off by default). What was wrong, each found on a board
+(`EvalBotController.swingBack`; the default since that night). What was wrong, each found on a board
 rebuilt from the judged games:
 
 - **The passes were not the plan preferring a later cast** (the first guess). On both boards
@@ -277,9 +277,16 @@ Measured on that build (2026-11-27):
   against 13.5, 2 decisions run out of clock against 0 and 21 cut short against 13, of about
   170 each.
 
-**Not the default yet**: that is the user's call (asked 2026-11-27). What it does not do: an
-opponent who hasn't attacked us lately never attacks in it (at four players most decisions play
-none), and nobody casts in it, so a wipe or a trick on the way is unseen, as in every rollout.
+**Made the default the same night** (`rolloutSwingBack` is on unless `false`), on the user's
+word to turn it on if it judged smarter. The judged games run on simulation counts and live
+rooms on a clock, where the swing back's time comes out of the search, so that was checked
+first: the gate passes 350 of 350 at 1,000 ms a decision with it and without, `bot:benchmarks`
+solves the same 8 of 17 with the same end states at 1,000 ms and on counts, and the engine
+suite passes with it on. What it does not do: an opponent who hasn't attacked us lately never
+attacks in it (at four players most decisions play none), and nobody casts in it, so a wipe or
+a trick on the way is unseen, as in every rollout. Not measured: a win rate. If a bench ever
+moves against it, `{"rolloutSwingBack":false}` on one side of `bot:judge --kind priority` is
+the comparison to run.
 
 ## 2. Mana priced by v2's own turn planner
 

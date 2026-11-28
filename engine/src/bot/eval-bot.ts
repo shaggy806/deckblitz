@@ -211,9 +211,10 @@ export interface EvalBotOptions {
    * a move's rollout (or a planned line's passing out) ends, as the next
    * player's turn begins, the opponents' turns are played on from that board
    * to our next turn, attacking and blocking as v1, and what they change is
-   * added to the move's score (`EvalBotController.swingBack`). An experiment
-   * (2026-11-27, `docs/plans/bot-next-steps.md` 1c): an attack a line sets
-   * up was scored with none of what it opens us to.
+   * added to the move's score (`EvalBotController.swingBack`). On unless
+   * `false` (2026-11-27, `docs/plans/bot-next-steps.md` 1c): without it an
+   * attack a line sets up, or a board it clears, is scored with none of what
+   * it opens us to.
    */
   readonly rolloutSwingBack?: boolean;
   /**
@@ -1700,7 +1701,7 @@ export class EvalBotController extends HeuristicBotController {
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.rolloutAttacks = options.rolloutAttacks ?? "v1";
     this.lightAttacks = options.lightAttacks ?? false;
-    this.rolloutSwingBack = options.rolloutSwingBack ?? false;
+    this.rolloutSwingBack = options.rolloutSwingBack ?? true;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.now = options.now ?? Date.now;
     this.trace = options.trace;

@@ -44,7 +44,7 @@ describe("the swing back in our own turn's rollouts", () => {
     for (let i = 0; i < 6; i += 1) spawn(game, "Forest");
     for (let i = 0; i < 4; i += 1) spawn(game, "Shivan Dragon", B);
     toHand(game, "Craw Wurm");
-    const plain = moveOf(new EvalBotController(A, game.registry), game);
+    const plain = moveOf(new EvalBotController(A, game.registry, { rolloutSwingBack: false }), game);
     expect(castOf(game, plain)).toBe("Craw Wurm");
     const bot = swingBot(game);
     expect(castOf(game, moveOf(bot, game))).toBe("Craw Wurm");
