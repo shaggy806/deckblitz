@@ -1496,6 +1496,18 @@ export function stateTargetFacts(state: GameState, registry: CardRegistry): Targ
       const object = ref.kind === "object" ? state.objects[ref.object] : undefined;
       return object?.zone === "battlefield" ? (object.attachedTo ?? undefined) : undefined;
     },
+    // Each side the object it is now: `blockedThisTurn` reads the journal's
+    // blocks by stint (rule 400.7).
+    blockedThisTurn: (blocker, blocked) => {
+      if (blocker.kind !== "object" || blocked.kind !== "object") return false;
+      const one = state.objects[blocker.object];
+      const other = state.objects[blocked.object];
+      if (one === undefined || other === undefined) return false;
+      const filter: CardFilter = {
+        blockedThisTurn: { relation: "blocked", with: [{ object: other.id, stint: other.zoneChangeCount ?? 0 }] },
+      };
+      return matchesFilter(state, registry, one.id, filter, { you: one.controller });
+    },
   };
 }
 

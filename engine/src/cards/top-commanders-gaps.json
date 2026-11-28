@@ -22,6 +22,7 @@
     "effect:pay-any-amount-of-mana",
     "condition:trigger-object-blockers-filter",
     "effect:cant-attack-and-untargetable-two-turns",
+    "filter:target-blocked-by-other-target",
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",

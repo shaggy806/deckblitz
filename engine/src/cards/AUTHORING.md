@@ -4693,6 +4693,16 @@ than: { slot: 0 }, attachedToThan: true } }]`. As it resolves, the slot is
 illegal if it's no longer attached to it or if that slot is illegal (its
 rulings); the creature stays legal either way.
 
+**"…target creature that target Wall blocked this turn"** is
+`blockedThisTurnWith: "blocked-by"` on an `other` slot (`"blocked"`: this
+slot did the blocking): the slot was blocked by the permanent of the slots
+`than` names this turn, each the object it was at the block (the journal,
+rule 400.7). Glyph of Delusion is `[{ kind: "permanent", filter: { subtype:
+"Wall" } }, { kind: "other", of: "creature", than: { slot: 0 },
+blockedThisTurnWith: "blocked-by" }]` — the Wall first, so the creature's
+options narrow to what it blocked. Checked as targets are chosen; a block is
+history, so not again as it resolves.
+
 **"…with equal or lesser mana value"** (than the slot before it) is
 `compares: { stat, op }` on an `other` slot with a slot relation: this slot's
 `"mana-value"`, `"power"` or `"toughness"` stands `op` (`lt`, `lte`, `eq`,

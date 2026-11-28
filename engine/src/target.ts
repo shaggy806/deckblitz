@@ -515,6 +515,19 @@ export type TargetSpec =
        * illegal (the rulings; rule 608.2b) — the host stays legal either
        * way. Needs {@link TargetFacts}' `attachedTo`. */
       readonly attachedToThan?: true;
+      /** "…target creature **that target Wall blocked this turn**" (Glyph of
+       * Delusion, its Wall the earlier slot): this slot `"blocked"`, or was
+       * `"blocked-by"`, the permanent of every slot `than` names this turn —
+       * `CardFilter.blockedThisTurn`'s look-back (`TurnHistory.blocks`, rules
+       * 509.1g-h), each side the object it was at the block (400.7), so it
+       * holds after combat, after either has left combat, and through a band
+       * blocked whole (702.22h). Only with a slot relation. Checked as targets
+       * are chosen (601.2c). Not again as it resolves: a block is history,
+       * which can't stop holding while this slot is the object it was (one
+       * that has left is illegal anyway, 608.2b), and a Wall gone since
+       * leaves the creature still one it blocked. Needs
+       * {@link TargetFacts}' `blockedThisTurn`. */
+      readonly blockedThisTurnWith?: "blocked" | "blocked-by";
     }
   /**
    * "Any number of target …" (rule 601.2c: none, one, or as many distinct
@@ -680,6 +693,10 @@ export interface TargetFacts {
   /** The permanent it's attached to, if any — for an `other` slot's
    * `attachedToThan`. Without it that narrows nothing. */
   readonly attachedTo?: (ref: TargetRef) => ObjectId | undefined;
+  /** Did `blocker` block `blocked` this turn, each the object it is now — for
+   * an `other` slot's `blockedThisTurnWith`. Without it that narrows
+   * nothing. */
+  readonly blockedThisTurn?: (blocker: TargetRef, blocked: TargetRef) => boolean;
   /** How many tokens it is, for a compacted stack on the battlefield (else
    * 1). Each token is another object, so "another target" may name a stack
    * once per token (601.2c, `lockInTargets` then gives each slot its own).
@@ -712,6 +729,28 @@ export function attachedToThanOf(spec: TargetSpec): boolean {
   if (spec.kind === "other") return spec.attachedToThan === true;
   if (spec.kind === "optional") return attachedToThanOf(spec.of);
   return false;
+}
+
+/** The block slot `spec` must have had with the slots its relation names
+ * this turn (`blockedThisTurnWith`), looked for through an `optional`
+ * wrapper. */
+export function blockedThisTurnWithOf(spec: TargetSpec): "blocked" | "blocked-by" | undefined {
+  if (typeof spec !== "object") return undefined;
+  if (spec.kind === "other") return spec.blockedThisTurnWith;
+  if (spec.kind === "optional") return blockedThisTurnWithOf(spec.of);
+  return undefined;
+}
+
+/** Did target `ref` block (`"blocked"`) or was it blocked by (`"blocked-by"`)
+ * target `other` this turn — `undefined` when the facts can't tell. */
+export function blockHolds(
+  ref: TargetRef,
+  other: TargetRef,
+  relation: "blocked" | "blocked-by",
+  facts: TargetFacts,
+): boolean | undefined {
+  if (facts.blockedThisTurn === undefined) return undefined;
+  return relation === "blocked" ? facts.blockedThisTurn(ref, other) : facts.blockedThisTurn(other, ref);
 }
 
 /** Is target `ref` attached to target `host` — `undefined` when the facts
@@ -1685,6 +1724,11 @@ export function slotOptions(
   if (attachedToThanOf(specs[i])) {
     distinct = distinct.filter((ref) => earlier.every((e) => attachedHolds(ref, e, facts) !== false));
   }
+  // "…that target Wall blocked this turn": only those it blocked.
+  const block = blockedThisTurnWithOf(specs[i]);
+  if (block !== undefined) {
+    distinct = distinct.filter((ref) => earlier.every((e) => blockHolds(ref, e, block, facts) !== false));
+  }
   // "…that player controls": only those whose player is every earlier one's.
   if (sameControllerOf(specs[i])) {
     const players = new Set(earlier.map((e) => playerOfTarget(e, facts)));
@@ -1815,6 +1859,11 @@ export function otherSlotConflict(
       }
       // "…attached to that creature" (Fiery Annihilation).
       if (facts !== undefined && attachedToThanOf(specs[i]) && attachedHolds(mine, theirs, facts) === false) {
+        return { slot: i, than: slot };
+      }
+      // "…that target Wall blocked this turn" (Glyph of Delusion).
+      const block = blockedThisTurnWithOf(specs[i]);
+      if (facts !== undefined && block !== undefined && blockHolds(mine, theirs, block, facts) === false) {
         return { slot: i, than: slot };
       }
       // "…controlled by different players" (Protector of the Wastes), "…their
