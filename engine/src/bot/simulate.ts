@@ -502,18 +502,36 @@ export function simulateCombat(
  * ended). The swing back, simulated: `EvalBotController` seats the
  * opponents whose boards have it dead as attacking it with everything, and
  * itself as answering with what it holds (`survivesSwing`).
+ *
+ * `through`, when given, are the only players whose turns matter to the
+ * caller (the ones it seats as attacking): the simulation stops as the turn
+ * after the last of theirs begins, rather than playing the turns of players
+ * who only pass on to ours.
  */
 export function simulateSwingBack(
   state: GameState,
   registry: CardRegistry,
   me: PlayerId,
   seatFor: (player: PlayerId) => PlayerController,
+  through?: ReadonlySet<PlayerId>,
 ): GameState | null {
   const seed: GameState = { ...state, eventLog: [] };
   const controllers: Record<PlayerId, PlayerController> = {};
   for (const player of state.turnOrder) controllers[player] = seatFor(player);
   const startingTurn = state.turn.number;
   const ceiling = MAX_STEPS * (state.turnOrder.length + 1);
+  // Whose turns are still to come among `through`, and the turn under way:
+  // a player's turn is over when the turn number moves on from it.
+  const pending = through === undefined ? null : new Set(through);
+  let turn = state.turn.number;
+  let active = state.turnOrder[state.turn.activePlayerIndex];
+  const played = (s: GameState): boolean => {
+    if (pending === null || s.turn.number === turn) return false;
+    if (active !== undefined) pending.delete(active);
+    turn = s.turn.number;
+    active = s.turnOrder[s.turn.activePlayerIndex];
+    return pending.size === 0;
+  };
   return rollout(() => {
     const sim = Game.fromSnapshot(seed, { registry, controllers });
     let steps = 0;
@@ -523,7 +541,8 @@ export function simulateSwingBack(
         steps > ceiling ||
         s.result.over ||
         s.players[me]?.hasLost === true ||
-        (s.turn.number !== startingTurn && s.turnOrder[s.turn.activePlayerIndex] === me)
+        (s.turn.number !== startingTurn && s.turnOrder[s.turn.activePlayerIndex] === me) ||
+        played(s)
       );
     }));
     return sim.state;

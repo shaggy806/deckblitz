@@ -92,6 +92,7 @@ import {
   withLibraryTop,
   withTrackRecordEvidence,
   worthKeeping,
+  readAsOf,
 } from "./features.js";
 import type { LibraryTop } from "./features.js";
 import { mostWorthKeepingFirst } from "./hand-worth.js";
@@ -125,7 +126,6 @@ import {
   sameKnownEnd,
   unknownCards,
   withOurAttackSeat,
-  withPlanSwingBack,
 } from "./turn-plan.js";
 import type { PlanStep, PlannedLine, ScoredFirst, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
@@ -207,12 +207,13 @@ export interface EvalBotOptions {
    * one. */
   readonly lightAttacks?: boolean;
   /**
-   * Score our own turn's priority moves where the swing back has come: their
-   * rollouts (and the turn plan's passing out) run on to our next turn, the
-   * opponents attacking and blocking as v1 in between, rather than stopping
-   * as the next player's turn begins. An experiment (2026-11-27,
-   * `docs/plans/bot-next-steps.md` 1c): an attack a line sets up was scored
-   * with none of what it opens us to.
+   * Score our own turn's priority moves with the swing back in them: where
+   * a move's rollout (or a planned line's passing out) ends, as the next
+   * player's turn begins, the opponents' turns are played on from that board
+   * to our next turn, attacking and blocking as v1, and what they change is
+   * added to the move's score (`EvalBotController.swingBack`). An experiment
+   * (2026-11-27, `docs/plans/bot-next-steps.md` 1c): an attack a line sets
+   * up was scored with none of what it opens us to.
    */
   readonly rolloutSwingBack?: boolean;
   /**
@@ -289,6 +290,9 @@ interface SearchBudget {
   ms: number;
   /** The longest single simulation so far, in milliseconds. */
   longest: number;
+  /** The latest simulation's length, with what was charged on to it
+   * ({@link timedOn}). */
+  last: number;
   /** {@link spent} said stop at least once: something was left unscored. */
   cut: boolean;
   /** The deadline stopped the search's *first* simulation in flight: one
@@ -304,6 +308,7 @@ const newBudget = (left: number, until: number, baselines = 2, now: () => number
   simulations: 0,
   ms: 0,
   longest: 0,
+  last: 0,
   cut: false,
   stalled: false,
 });
@@ -410,7 +415,24 @@ function timed<T>(budget: SearchBudget, simulate: () => T): T {
     if (budget.simulations === 0 && budget.until !== Infinity && rolloutAborted()) budget.stalled = true;
     budget.simulations += 1;
     budget.ms += ms;
+    budget.last = ms;
     if (ms > budget.longest) budget.longest = ms;
+  }
+}
+
+/** Run a simulation that is the rest of the one before it (a rollout's
+ * swing back, `EvalBotController.swingBack`): its time is charged to
+ * `budget` as more of that one, so the two are one simulation to the count
+ * the clock's baselines wait for and one length to its prediction. */
+function timedOn<T>(budget: SearchBudget, simulate: () => T): T {
+  const started = budget.now();
+  try {
+    return simulate();
+  } finally {
+    const ms = budget.now() - started;
+    budget.ms += ms;
+    budget.last += ms;
+    if (budget.last > budget.longest) budget.longest = budget.last;
   }
 }
 
@@ -1179,6 +1201,93 @@ function combatBoardKey(state: GameState, cards: CardRegistry): string {
 }
 
 /**
+ * The board a swing back is played from (`EvalBotController.swingBack`), as
+ * much of it as decides what the opponents' turns do to it with every seat
+ * passing and fighting combat as v1: the combat board (`combatBoardKey`),
+ * and every permanent that isn't a land, by controller, name and counters.
+ * Not hands, libraries, graveyards, lands or mana: nobody casts in a swing
+ * back, so two lines that differ only there are swung back at alike, and
+ * one simulation answers for both.
+ */
+function swingBoardKey(state: GameState, cards: CardRegistry): string {
+  return withComputedCache(() => {
+    const permanents: string[] = [];
+    for (const id of state.zones.shared.battlefield) {
+      const object = state.objects[id];
+      if (object === undefined) continue;
+      if (computeCharacteristics(state, cards, id).types.includes("land")) continue;
+      permanents.push(`${object.controller}:${object.cardName}:${JSON.stringify(object.counters ?? null)}`);
+    }
+    return `${combatBoardKey(state, cards)}|${permanents.sort().join(";")}`;
+  });
+}
+
+/**
+ * The opponents whose creatures the evaluation counts in full against `me`
+ * on `state` (`features.ts`' `threat`): the only opponent left, or one who
+ * attacked us within the last round (`PlayerState.lastAttackedBy`). They are
+ * who attacks us in a swing back (`EvalBotController.swingBack`).
+ */
+function aimedAtUs(state: GameState, me: PlayerId): Set<PlayerId> {
+  const living = state.turnOrder.filter((p) => state.players[p]?.hasLost !== true);
+  const opponents = living.filter((p) => p !== me);
+  if (opponents.length <= 1) return new Set(opponents);
+  const record = state.players[me]?.lastAttackedBy ?? {};
+  return new Set(
+    opponents.filter((p) => {
+      const last = record[p];
+      return last !== undefined && state.turn.number - last < living.length;
+    }),
+  );
+}
+
+/**
+ * An opponent aimed at us in a swing back (`aimedAtUs`): v1's rollout
+ * stand-in, attacking as v1 does with `target` and its planeswalkers the
+ * only defenders there are — what is safe to send at us comes, the rest
+ * stays home.
+ */
+class AimedSwingController extends CombatRolloutController {
+  private readonly target: PlayerId;
+
+  constructor(playerId: PlayerId, cards: CardRegistry, target: PlayerId) {
+    super(playerId, cards);
+    this.target = target;
+  }
+
+  declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
+    const ours = (defender: PlayerId | ObjectId): boolean =>
+      defender === this.target || view.state.objects[defender as ObjectId]?.controller === this.target;
+    const narrowed: ControllerView = {
+      ...view,
+      legalActions: () =>
+        view.legalActions().map((offer) =>
+          offer.kind !== "declare-attackers"
+            ? offer
+            : {
+                ...offer,
+                defenders: offer.defenders.filter(ours),
+                defendersFor: Object.fromEntries(
+                  Object.entries(offer.defendersFor).map(([attacker, defenders]) => [attacker, defenders.filter(ours)]),
+                ),
+              },
+        ),
+    };
+    return super.declareAttackers(narrowed);
+  }
+}
+
+/** What a line we don't live through the swing back of loses
+ * (`EvalBotController.swingBack`): the evaluation's price of being out of
+ * the game, flat, so lines that all die are still told apart by what each
+ * was worth as our turn ended. */
+const SWING_DEAD = 1e4;
+
+/** Two swing backs this close in what they change are taken as the same one
+ * (`EvalBotController.swingBack`): a twentieth of a card. */
+const SWING_SAME = 0.05;
+
+/**
  * An opponent in the swing back (`survivesSwing`): v1's rollout stand-in,
  * attacking `target` with everything that can. The worst case the crackback
  * arithmetic counts, played out.
@@ -1427,6 +1536,17 @@ export class EvalBotController extends HeuristicBotController {
   private attackMemo = new Map<string, readonly AttackerDeclaration[]>();
   private readonly lightAttacks: boolean;
   private readonly rolloutSwingBack: boolean;
+  /** Under `rolloutSwingBack`, the turn this priority search is made in when
+   * it is our own: a rollout that ends as the next turn begins has its swing
+   * back added (`swingBack`). `null` for every other decision. */
+  private swingTurn: number | null = null;
+  /** This decision's swing backs by the board each was played from
+   * (`swingBoardKey`): what the opponents' turns changed in the evaluation,
+   * `-SWING_DEAD` where we didn't live through them. */
+  private readonly swingBacks = new Map<string, number>();
+  /** The opponents who attack us in this decision's swing backs
+   * (`swingBack`, `aimedAtUs`). */
+  private swingAimed: ReadonlySet<PlayerId> = new Set();
   private readonly timeBudgetMs: number;
   private readonly now: () => number;
   /** When the decision under way was asked, under a clock (`onClock`). */
@@ -1623,9 +1743,11 @@ export class EvalBotController extends HeuristicBotController {
         ? null
         : () => new RealAttacksController(this.playerId, this.cards, this.weights, memo, onlyWhenHeld, this.rolloutAttacks === "v2-full");
     this.attackMemo = memo;
-    const action = withPlanSwingBack(this.rolloutSwingBack, () =>
-      withOurAttackSeat(seat, () => withLibraryTop(this.libraryTopAt(view), () => this.answer(view))),
-    );
+    // A swing back is its own decision's (`swingBack`): the priority search
+    // says when one is wanted.
+    this.swingTurn = null;
+    this.swingBacks.clear();
+    const action = withOurAttackSeat(seat, () => withLibraryTop(this.libraryTopAt(view), () => this.answer(view)));
     // The answer was reached on cards dealt for the seat (`fairView`), and
     // is played at the real table: tried there first on a copy, so nothing
     // the two disagree on is ever thrown mid-game. Refused, the plan goes
@@ -1937,6 +2059,34 @@ export class EvalBotController extends HeuristicBotController {
     // and only for one with something to choose: it is asked in every
     // player's turn, and most windows there have nothing.
     this.tapGuard = this.crackbackGuard(view.state);
+    // Under `rolloutSwingBack`, on our own turn, every move of this search
+    // is scored with the swing back at the board it leaves (`swingBack`).
+    this.swingTurn =
+      this.rolloutSwingBack &&
+      this.horizon === "turn" &&
+      view.state.turnOrder[view.state.turn.activePlayerIndex] === this.playerId
+        ? view.state.turn.number
+        : null;
+    if (this.swingTurn !== null) {
+      // With nobody aimed at us, or no creature among those who are, no
+      // swing back has an attack in it: none is played, and the search is
+      // the one made without the option.
+      this.swingAimed = aimedAtUs(view.state, this.playerId);
+      const aimed = this.swingAimed;
+      const armed =
+        aimed.size > 0 &&
+        withComputedCache(() =>
+          view.state.zones.shared.battlefield.some((id) => {
+            const object = view.state.objects[id];
+            return (
+              object !== undefined &&
+              aimed.has(object.controller) &&
+              computeCharacteristics(view.state, this.cards, id).types.includes("creature")
+            );
+          }),
+        );
+      if (!armed) this.swingTurn = null;
+    }
 
     // **A land drop is not weighed against passing.** Playing a land costs
     // nothing but the card, doesn't use the turn, and leaves another priority
@@ -2065,6 +2215,11 @@ export class EvalBotController extends HeuristicBotController {
       const landBudget = this.budget(this.maxSimulations, 1);
       let bestLand = order[0];
       let bestLandScore = -Infinity;
+      // Lands are compared with each other alone, and with every seat
+      // passing the opponents' turns go the same whichever was played: no
+      // swing back is added (`swingBack`).
+      const swingTurn = this.swingTurn;
+      this.swingTurn = null;
       for (const land of order) {
         if (spent(landBudget)) break;
         landBudget.left -= 1;
@@ -2074,6 +2229,7 @@ export class EvalBotController extends HeuristicBotController {
           bestLand = land;
         }
       }
+      this.swingTurn = swingTurn;
       this.lastDecision = audit("priority", landBudget, "land search");
       return bestLand;
     }
@@ -2228,7 +2384,7 @@ export class EvalBotController extends HeuristicBotController {
             view.state,
             this.cards,
             action,
-            this.rolloutHorizon(view.state),
+            this.horizon,
             this.decisionRollout,
             this.selfInPriorityRollouts(view.state),
             MAX_BATCH,
@@ -2257,7 +2413,9 @@ export class EvalBotController extends HeuristicBotController {
         if (this.tapGuard !== null && !this.passEndsOpen && this.crackbackLethal(result.state, this.tapGuard.grown)) {
           continue;
         }
-        const score = evaluateState(result.state, this.cards, this.playerId, this.weights);
+        const swing = this.swingBack(result.state, budget);
+        if (swing === null) continue;
+        const score = evaluateState(result.state, this.cards, this.playerId, this.weights) + swing;
         // The cost decides whether the batch is taken, and isn't kept in the
         // score: the turn plan's lines are compared with it after this, and
         // one a step cost had lowered lost to "activate once, then again".
@@ -2288,13 +2446,15 @@ export class EvalBotController extends HeuristicBotController {
               ? null
               : (candidateActions(aimOffer(game.state, this.cards, player, offer), player)[0] ?? null);
           },
-          this.rolloutHorizon(view.state),
+          this.horizon,
           this.decisionRollout,
           this.selfInPriorityRollouts(view.state),
         ),
       );
       if (after === null) continue;
-      const score = evaluateState(after, this.cards, player, this.weights);
+      const swing = this.swingBack(after, budget);
+      if (swing === null) continue;
+      const score = evaluateState(after, this.cards, player, this.weights) + swing;
       if (score <= bestScore) continue;
       bestScore = score;
       best = p.tap;
@@ -3212,11 +3372,111 @@ export class EvalBotController extends HeuristicBotController {
       : undefined;
   }
 
-  /** The horizon a priority move's rollout runs to: under
-   * `rolloutSwingBack`, on our own turn, our next turn (`"round"`). */
-  private rolloutHorizon(state: GameState): Horizon {
-    if (!this.rolloutSwingBack || this.horizon !== "turn") return this.horizon;
-    return state.turnOrder[state.turn.activePlayerIndex] === this.playerId ? "round" : this.horizon;
+  /**
+   * **The swing back** (`rolloutSwingBack`). What the opponents' turns do
+   * with the board our turn ends on, as a number to add to a move's score:
+   * `end` — where a rollout of this search's stopped, the next player's turn
+   * beginning — is played on to our next turn, every seat passing at
+   * priority and attacking and blocking as v1, and the answer is the
+   * evaluation there less the evaluation at `end`. 0 for an `end` that isn't
+   * one (the game over, another turn, a decision that isn't our own turn's
+   * priority search); `null` when the clock stopped it.
+   *
+   * **A correction, not another horizon.** As first built (2026-11-27) the
+   * rollouts themselves ran to our next turn, and three things went wrong.
+   * Everything that reads a rollout's end as the board our turn ends on (the
+   * tap guard's `passEndsOpen`, the way out, an interaction's score against
+   * the pass) read a board three turns later. Every line paid for its own
+   * opponents' turns. And where v1's attacks killed us whatever we did,
+   * "a move we don't live through never beats passing" (`score`) dropped
+   * every cast and the bot passed: Ureni of the Unwritten and Scion of
+   * Calamity each left in hand for a turn, 223 and 685 points played on (the
+   * kept seed 4 of Edgar Markov, Giada, Ureni and Pantlaza, turns 27 and 32).
+   *
+   * **Who attacks whom is the evaluation's own reading** (`swingAimed`), not
+   * v1's. v1 sends every attacker at the player lowest on life, ties to the
+   * first seat, and taken as fact at a table of four that made a line's
+   * worth turn on whom it steered the table at: Explosion went at a
+   * player's face so that the rollout's attackers chased the life total, a
+   * Vow of Duty went on a creature that had never attacked us, and Swords to
+   * Plowshares went at a two-mana commander on turn three for the two damage
+   * the seat order sent our way. So: an opponent the evaluation counts in
+   * full against us (`threat`: the only one left, or one who attacked us
+   * within the last round) attacks us as v1 would with nobody else to
+   * attack; every other opponent holds, and what its creatures might do
+   * stays the split estimate `threat` makes of it. Both ends are read as of
+   * `end` (`readAsOf`), so a simulated attack isn't read back as a record.
+   *
+   * **One per board.** Nobody casts in a swing back, so what it does depends
+   * on the permanents and the life totals alone (`swingBoardKey`), and the
+   * lines of one decision mostly end on a few boards: a land, a ramp spell
+   * and a card drawn leave the pass's, and a plan's orders of the same casts
+   * leave one. Each board is played once (`swingBacks`).
+   *
+   * **Dead in it is a flat `SWING_DEAD`, and only where passing lives.** A
+   * move that dies in the swing back where doing nothing doesn't has walked
+   * into it, and loses to every move that lives (flat, since past our own
+   * death the evaluation says nothing about the line). **Where passing dies
+   * too, no swing back is added this decision** (`score`): every aimed
+   * opponent sending all it safely can is the worst case, not a forecast,
+   * and the way out of a board that has us dead is `escapes`' to find, by
+   * its stricter reading (dead to one opponent alone). Taken as certain, it
+   * dropped every cast that died with the pass (above), and then made the
+   * one line that lived the answer whatever it cost: Dragonlord Atarka over
+   * Ureni of the Unwritten, 108 points played on, in a round where neither
+   * opponent attacked at all (the same game's turn 27, judged again).
+   */
+  private swingBack(end: GameState | null, budget?: SearchBudget): number | null {
+    const me = this.playerId;
+    if (this.swingTurn === null || end === null || end.result.over) return 0;
+    if (end.turn.number !== this.swingTurn + 1 || end.turnOrder[end.turn.activePlayerIndex] === me) return 0;
+    if (end.players[me]?.hasLost === true) return 0;
+    const key = swingBoardKey(end, this.cards);
+    const known = this.swingBacks.get(key);
+    if (known !== undefined) return known;
+    const aimed = this.swingAimed;
+    // Played as far as the last of them has had its turn: the turns after
+    // it, of players who hold, are the same on every line.
+    const play = (): GameState | null =>
+      simulateSwingBack(
+        end,
+        this.cards,
+        me,
+        (player) =>
+          player === me
+            ? new CombatRolloutController(player, this.cards)
+            : aimed.has(player)
+              ? new AimedSwingController(player, this.cards, me)
+              : new DefendingRolloutController(player, this.cards),
+        aimed,
+      );
+    const after = budget === undefined ? play() : timedOn(budget, play);
+    // Stopped by the deadline: not scored. Refused by the engine: no swing
+    // back to add, as a rollout the engine refuses is no candidate.
+    if (after === null && rolloutAborted() && budget !== undefined && budget.until !== Infinity) return null;
+    const lost = after !== null && (after.players[me]?.hasLost === true || (after.result.over && after.result.winner !== me));
+    // Both boards are read as of `end` (`readAsOf`: its round, its record of
+    // who attacks whom): the difference is what the opponents' turns did.
+    let change =
+      after === null
+        ? 0
+        : lost
+          ? -SWING_DEAD
+          : readAsOf(end, () => evaluateState(after, this.cards, me, this.weights)) -
+            evaluateState(end, this.cards, me, this.weights);
+    // The same swing back from two boards comes to a hair's difference (the
+    // evaluation isn't a sum of independent parts), and a hair would decide
+    // between moves the turn's own rollouts score exactly alike: an equip
+    // moved for nothing no longer tied with passing. Within `SWING_SAME` of
+    // one already played this decision, it is that one.
+    for (const seen of this.swingBacks.values()) {
+      if (Math.abs(seen - change) < SWING_SAME) {
+        change = seen;
+        break;
+      }
+    }
+    this.swingBacks.set(key, change);
+    return change;
   }
 
   /** Our own turn, before attackers are declared, with a creature of ours
@@ -4345,7 +4605,7 @@ export class EvalBotController extends HeuristicBotController {
             ? null
             : (candidateActions(aimOffer(game.state, this.cards, player, crack), player)[0] ?? null);
         },
-        this.rolloutHorizon(view.state),
+        this.horizon,
         this.decisionRollout,
         this.selfInPriorityRollouts(view.state),
       ),
@@ -4424,14 +4684,16 @@ export class EvalBotController extends HeuristicBotController {
     if (spent(budget)) return false;
     budget.left -= 1;
     const bare = timed(budget, () =>
-      simulateWithoutOwnTriggers(state, this.cards, action, this.rolloutHorizon(state), this.decisionRollout, this.selfInPriorityRollouts(state)),
+      simulateWithoutOwnTriggers(state, this.cards, action, this.horizon, this.decisionRollout, this.selfInPriorityRollouts(state)),
     );
     if (bare === null) return false;
     const dead = (after: GameState): number =>
       state.turnOrder.filter((p) => p !== me && after.players[p]?.hasLost === true).length;
     if (real !== null && dead(real) > dead(bare)) return false;
     const outcome = this.outcomeAimed(bare, aimedAt(state, this.cards, me, action), this.passOutcome);
-    return scoreOutcome(outcome, this.weights) <= passScore + TIE;
+    const swing = this.swingBack(bare, budget);
+    if (swing === null) return false;
+    return scoreOutcome(outcome, this.weights) + swing <= passScore + TIE;
   }
 
   private score(
@@ -4443,7 +4705,7 @@ export class EvalBotController extends HeuristicBotController {
   ): number | null {
     const rollout = (state: GameState): GameState | null =>
       timed(budget, () =>
-        simulateAction(state, this.cards, action, this.rolloutHorizon(state), this.decisionRollout, this.selfInPriorityRollouts(state)),
+        simulateAction(state, this.cards, action, this.horizon, this.decisionRollout, this.selfInPriorityRollouts(state)),
       );
     const after = this.revealsOwnLibrary(view.state, action) ? this.typicalDeal(view, action, budget, rollout) : rollout(view.state);
     this.lastAfter = after;
@@ -4472,7 +4734,17 @@ export class EvalBotController extends HeuristicBotController {
     }
     this.trace?.(action, after, outcome.hit === undefined ? undefined : outcome);
     if (mustKill !== undefined && after.players[mustKill]?.hasLost !== true) return null;
-    const value = scoreOutcome(outcome, this.weights);
+    // The opponents' turns from the board this leaves, under
+    // `rolloutSwingBack` (`swingBack`); stopped by the clock, it's unscored.
+    let swing = this.swingBack(after, budget);
+    if (swing === null) return null;
+    // Dead in it even passing (the pass is the first move scored): the swing
+    // back decides nothing this decision (`swingBack`).
+    if (action.type === "pass-priority" && swing === -SWING_DEAD) {
+      this.swingTurn = null;
+      swing = 0;
+    }
+    const value = scoreOutcome(outcome, this.weights) + swing;
     // The plan's own rollout of this move — it resolved, then our seat
     // passing through v1's combat to the end of the turn — and so its
     // one-step line (`lastEnds`). Not a kill that had to land, which no plan
@@ -4608,7 +4880,14 @@ export class EvalBotController extends HeuristicBotController {
 
   /** The hooks `turn-plan.ts` plans with: the moves the search would list on
    * a board, and the evaluation. */
-  private planHooks(): TurnPlanHooks {
+  private planHooks(budget?: SearchBudget): TurnPlanHooks {
+    // A line's end is scored with the swing back at its board, as a single
+    // move's is (`swingBack`; `budget` is charged for it): stopped by the
+    // clock, the line is worth nothing.
+    const swung = (end: GameState, value: number): number => {
+      const swing = this.swingBack(end, budget);
+      return swing === null ? -Infinity : value + swing;
+    };
     return {
       moves: (board) => {
         const listed = this.listCandidates(board);
@@ -4619,16 +4898,19 @@ export class EvalBotController extends HeuristicBotController {
       // A line with an interaction in it is scored as the one-move search
       // scores that move, against the same pass.
       value: (state, line) =>
-        line === undefined || this.passOutcome === null
-          ? evaluateState(state, this.cards, this.playerId, this.weights)
-          : scoreOutcome(
-              this.outcomeAimed(
-                state,
-                aimedByLine(this.cards, this.playerId, line.steps, line.before),
-                this.passOutcome,
+        swung(
+          state,
+          line === undefined || this.passOutcome === null
+            ? evaluateState(state, this.cards, this.playerId, this.weights)
+            : scoreOutcome(
+                this.outcomeAimed(
+                  state,
+                  aimedByLine(this.cards, this.playerId, line.steps, line.before),
+                  this.passOutcome,
+                ),
+                this.weights,
               ),
-              this.weights,
-            ),
+        ),
       // A reveal from our own library, as the one-move search weighs it
       // (`typicalDeal`): the turn's deal and four more. Cast Jace, then his
       // −3, was a line on the turn's deal alone, and the plan played the +1.
@@ -4716,7 +4998,7 @@ export class EvalBotController extends HeuristicBotController {
         !this.lastUnsafe.includes(a),
     );
     if (firsts.length === 0) return null;
-    const hooks = this.planHooks();
+    const hooks = this.planHooks(budget);
     // Under a clock, the plan has what the one-move search left of it, on
     // the search's own predictive stop: past the deadline it scores nothing,
     // and the one-move answer stands.

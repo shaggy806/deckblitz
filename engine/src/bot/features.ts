@@ -239,9 +239,40 @@ const EARLY_MANA_FULL = 2;
  * a player's mana and two turns ahead, by turn six one source among many. */
 const EARLY_MANA_END = 6;
 
+/** The state whose round and attack record every state is read with while a
+ * `readAsOf` runs. */
+let readAs: GameState | null = null;
+
+/**
+ * Run `body` with every state read as of `earlier`'s moment: in its round,
+ * and with who has attacked whom as it stood there. For scoring a simulated
+ * board some turns on against the board it came from (`EvalBotController`'s
+ * swing back), so that their difference is what happened in between:
+ *
+ * - **The round.** What the evaluation ramps by the round — removal held
+ *   early, early mana, an elimination's worth — is the same on both. Read a
+ *   round later, a held Swords to Plowshares had lost its early reserve
+ *   where a cast one had none to lose, and the bot fired it at a wall on its
+ *   second turn.
+ * - **The attack record** (`threat`). An attack the simulation made is its
+ *   own guess at who attacks whom, not something seen: read as a record, it
+ *   counted the attacker's whole board against us from then on, on top of
+ *   the damage it had just been simulated dealing.
+ */
+export function readAsOf<T>(earlier: GameState, body: () => T): T {
+  const before = readAs;
+  readAs = earlier;
+  try {
+    return body();
+  } finally {
+    readAs = before;
+  }
+}
+
 /** The round of the game: every player's first turn is round 1. */
 export function roundOf(state: GameState): number {
-  return Math.ceil(state.turn.number / Math.max(1, state.turnOrder.length));
+  const read = readAs ?? state;
+  return Math.ceil(read.turn.number / Math.max(1, read.turnOrder.length));
 }
 
 /** How many land drops `player` has had: one a turn begun (the round, less
@@ -1818,7 +1849,10 @@ function playerFeaturesUncached(
       { readonly each: number; readonly over: number; readonly scale: number; readonly count: number }[]
     >();
     const living = state.turnOrder.filter((q) => !state.players[q].hasLost);
-    const attackedBy = p.lastAttackedBy ?? {};
+    // Under `readAsOf`, the record and the turn it is counted back from are
+    // the earlier state's.
+    const attackedBy = (readAs === null ? p.lastAttackedBy : readAs.players[p.id]?.lastAttackedBy) ?? {};
+    const attackedAsOf = (readAs ?? state).turn.number;
     const lostThisTurn = journalTotal(state, "life-lost", p.id, "amount");
     for (const id of state.zones.shared.battlefield) {
       const object = state.objects[id];
@@ -1838,7 +1872,7 @@ function playerFeaturesUncached(
       const targets = roams ? [] : playersAttackableNextTurn(state, registry, id);
       if (!roams && !targets.includes(player)) continue;
       const last = attackedBy[object.controller];
-      const recent = last !== undefined && state.turn.number - last < living.length;
+      const recent = last !== undefined && attackedAsOf - last < living.length;
       // A handed-round creature attacks on every other player's turn, at
       // someone who isn't its owner: our share of each of those attacks,
       // added up (four players: a half, a half and a third).

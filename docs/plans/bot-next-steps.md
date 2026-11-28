@@ -179,36 +179,107 @@ catches the timid misses, and it judged level. What would change the verdict is 
 sees the swing back after our attack (the turn passed on through the opponents' attacks, as the
 tap guard's `simulateSwingBack` does), and that is a horizon question, not an attacker one.
 
-**The swing back, tried (2026-11-27, off by default).** `rolloutSwingBack`: on our own turn the
-priority rollouts (single moves, batches, land drops, untap plans) run to our next turn (the
-`"round"` horizon, `rolloutHorizon`), and so does the turn plan's passing out
-(`withPlanSwingBack`), the opponents attacking and blocking as v1 in between. On the Olivia's
-Wrath board it sees the danger (the Wrath's line has alice dead in the round, Conqueror's at 1)
-and casts Conqueror, with or without v2 rollout attacks. Measured:
+**The swing back, tried as a longer horizon (2026-11-27).** `rolloutSwingBack`, as first built:
+on our own turn the priority rollouts (single moves, batches, land drops, untap plans) ran to
+our next turn (the `"round"` horizon), and so did the turn plan's passing out, the opponents
+attacking and blocking as v1 in between. On the Olivia's Wrath board it saw the danger (the
+Wrath's line has alice dead in the round, Conqueror's at 1) and cast Conqueror. But:
 
-- **The gate**: 346 of 350 (50 s against 29): removal it was taught to hold now goes at once,
-  since a creature's next attack is in the rollout (Swords to Plowshares at a two-mana commander
-  and at a wall, Explosion at a player, Vow of Duty on the attacker).
-- **Judged**, the same twelve games: 94 moves changed, **24 better, 16 worse, 53 even** — the
-  only variant with more better than worse — and the decider out of the game under the old move
-  alone 4 times, under the new alone once. Net about −1,000 points, nearly all of it two turns
-  of one four-player game (seed 4, its last tally read at turn 34 through the inspector when it
-  was stopped: −685 and −223). Without that game, −16.
-- **What those two turns were**, and about twenty smaller ones: the new move passes its first
-  main phase where the old cast a creature (Ureni of the Unwritten, Scion of Calamity, Titania,
-  Atarka, Giada...): the plan prefers "attack, then cast in the second main phase", which the
-  rollout can't tell from casting first when the creature's worth this turn is an enter trigger
-  that finds cards (Ureni's Dragons) or haste. Played on with the real library, casting first
-  snowballed.
+- **The gate**: 346 of 350 (50 s against 29): Swords to Plowshares fired at a two-mana commander
+  and at a wall, Explosion at a player, Vow of Duty off the attacker.
+- **Judged**, the same twelve games: 94 moves changed, 24 better, 16 worse, 53 even, the decider
+  out of the game under the old move alone 4 times and under the new alone once, but net about
+  −1,000 points, nearly all of it two turns of one four-player game (seed 4: −685 and −223),
+  where the new move passed its first main phase and the old cast a creature (Ureni of the
+  Unwritten, Scion of Calamity), and about twenty smaller passes like them.
 - **Time**: the four-player games ran 803 s, 1,505 s, 4,781 s and over 100 minutes (stopped),
   where the control's ran 127, 210 and 587 s; the two-player ones about 1.5 times as long.
 
-Promising on its own question (it lives through the swing back the others walk into), but not
-ready: before it is judged again it needs the first-main-phase cast kept where a creature's
-enter or attack trigger or haste pays this turn, the four gate scenarios looked at (some may be
-right to change: a removal held "for more" while the creature it would take attacks next turn),
-and a cost it can carry at the live clock — the swing back only for moves that change what can
-attack or block before our next turn, as the tap guard is asked.
+**Rebuilt the same evening as a correction to the score, not a horizon**
+(`EvalBotController.swingBack`; still off by default). What was wrong, each found on a board
+rebuilt from the judged games:
+
+- **The passes were not the plan preferring a later cast** (the first guess). On both boards
+  our seat was dead in v1's swing back on every line, the pass too, and `score`'s rule that a
+  move we don't live through never beats passing dropped every cast. Every opponent sending all
+  it safely can is the worst case, not a forecast. Now a line that dies in the swing back where
+  the pass lives loses a flat `SWING_DEAD`; where the pass dies too, the decision adds no swing
+  back to anything, and the way out is `escapes`' and the tap guard's to find, as before. (The
+  flat loss alone still went wrong once: on the Ureni board the one line that lived won whatever
+  it cost, Dragonlord Atarka over Ureni for 108 points, in a round where nobody attacked.)
+- **A board a round later differs by more than the attacks.** The terms the evaluation ramps by
+  the round (removal held early, early mana, an elimination's worth) had moved, so a held Swords
+  had lost its reserve where a cast one had none to lose. So rollouts end where they always
+  have, as the next player's turn begins, and the swing back is **added**: the opponents' turns
+  are played from that board (`simulateSwingBack`) and the move's score gets the evaluation
+  after less the evaluation before, both read in the earlier board's round and attack record
+  (`features.ts`' `readAsOf`), so that the difference is what the attacks did.
+- **v1's choice of defender is not a fact at a table of four.** It sends every attacker at the
+  lowest life total, ties to the first seat, and a line's worth turned on whom it steered the
+  table at: that was the four gate scenarios. The evaluation's `threat` already says who attacks
+  whom: an opponent who attacked us within the last round, or the only one left, counts in full;
+  the rest are split across the table. The swing back follows it: opponents aimed at us
+  (`aimedAtUs`) attack us as v1 would with nobody else to attack (`AimedSwingController`), the
+  others hold, and `threat`'s estimate stands for them. With nobody aimed at us, or no creature
+  among those who are, a decision plays no swing back and is the search made without the option.
+- **Cost.** Nobody casts in a swing back, so it is played once per board a decision's lines end
+  on (`swingBoardKey`: the combat board and every non-land permanent; a land, a ramp spell and a
+  card drawn leave the pass's), and two that come within `SWING_SAME` count as one, so that no
+  move wins on the noise between two playouts. It stops when the last aimed opponent's turn is
+  over (`simulateSwingBack`'s `through`), and its time is charged to the rollout it follows
+  (`timedOn`) rather than counted as a simulation of its own.
+
+Measured on that build (2026-11-27):
+
+- **The gate**: 350 of 350 with the option on, no scenario changed, in the same time as without
+  (34 s each, run side by side).
+- **The boards**: Ureni of the Unwritten and Scion of Calamity are cast on the two rebuilt
+  boards; the Olivia's Wrath board casts Bloodthirsty Conqueror with the option and the Wrath
+  without (`engine/src/test/bot-swing-back.test.ts` holds the pass-dies rule, the per-board
+  playouts, the aimed opponents and `readAsOf`).
+- **Judged**, `--kind priority --base self --options '{"rolloutSwingBack":true}'`, the three
+  deck sets over seeds 1-8 (24 games): 39 moves changed where the first build changed 94 over
+  twelve, **15 better, 11 worse, 13 even, net +151 points**, the decider's life +58 and its
+  opponents' +27, and one line the decider lived through under the new move alone (Pantlaza
+  casting Smothering Tithe over Finale of Devastation), none the other way. The largest gains:
+  +111 (Grave Danger casting Diregraf Captain over Feed the Swarm), +41 (Giada, Serra the
+  Benevolent over Court of Grace), +38 (Edgar Markov, Bloodthirsty Conqueror over Champion of
+  Dusk, his own life +26). The four-player seed 4, where the first build lost 685 and 223 on
+  turns 27 and 32, changed three moves, none after turn 26, for −8 (judged in 28 minutes where
+  the first build's had run past 100).
+- **The largest losses, read on their boards**:
+  - −34 (Grave Danger, seed 5, turn 18: Gisa and Geralf before Lord of the Accursed). Not the
+    swing back's judgment: it took Zombie Apocalypse out of the first moves the plan tries, so
+    the plan reached "Gisa and Geralf, then Diregraf Captain from the graveyard", which the
+    plain evaluation also puts ahead (23.6 against 21.5, the swing back adding 1.0 to each).
+    The plain build never tries that line. Played on, the opponent cast
+    Collective Blessing from hand before attacking and Gisa and Geralf died beside the Captain
+    where they lived beside the Lord.
+  - −28 (World Shaper, seed 6, turn 13: Oracle of Mul Daya over Uurg), in a game at 1 life
+    either way. The play-on's own next move lost it (it activated Exploration Broodship); the
+    new build's next move there judged +35, and its turn as played ended 7 points ahead of the
+    old one's.
+  - −20 (Pantlaza, seed 4, turn 24: Wrathful Raptors over Regal Behemoth), a call one point
+    apart by its own count (−6.1 against −7.1 for the Behemoth and then the Raptors). The
+    attack forecast from Edgar Markov's seat is worth +7.9 with the Raptors out (what a
+    Dinosaur is dealt, it deals back), −5.6 passing and −9.8 with the Behemoth alone (the
+    monarchy, probably, which the attack takes). The attack came in both lines (15 and 16
+    damage, and the monarchy gone within the round), but the play-on cast the Raptors behind
+    the Behemoth the same turn on its doubled mana: four permanents that turn against three,
+    the Behemoth still in hand.
+- **Time.** The same decisions asked both ways at count budgets (every own-turn priority
+  decision of a game, the option's bot shadowing): 1.26, 1.20 and 1.14 times the time at four
+  players (seeds 1, 2 and the long seed 4; 1.40 before the swing back stopped at the last aimed
+  opponent), 1.16 at two. The long game's slowest decision (seed 4, turn 32, 74 simulations on
+  a board where each takes most of a second) is 61.8 s with the option and 61.3 without: one
+  swing back. At the live clock (1,000 ms a decision, the four-player set, seeds 1-3 to turn
+  30): 463 ms a searched decision with the option and 463 without, 10.9 simulations in it
+  against 13.5, 2 decisions run out of clock against 0 and 21 cut short against 13, of about
+  170 each.
+
+**Not the default yet**: that is the user's call (asked 2026-11-27). What it does not do: an
+opponent who hasn't attacked us lately never attacks in it (at four players most decisions play
+none), and nobody casts in it, so a wipe or a trick on the way is unseen, as in every rollout.
 
 ## 2. Mana priced by v2's own turn planner
 
