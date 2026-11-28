@@ -79,6 +79,8 @@
 // while it runs.
 
 import { spawn } from "node:child_process";
+import { createWriteStream, mkdirSync } from "node:fs";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
@@ -91,7 +93,7 @@ import {
   describeMove,
   evaluateState,
 } from "../dist/index.js";
-import { baselineDist, importBuild } from "./baseline-build.mjs";
+import { ROOT, baselineDist, importBuild } from "./baseline-build.mjs";
 import { progress } from "./progress.mjs";
 import { findDeck } from "./tool-decks.mjs";
 
@@ -203,6 +205,12 @@ if (jobs.length > 1) {
   const started = Date.now();
   // The job-progress mod's bar (progress.mjs): a game a unit.
   const bar = progress("bot:judge", jobs.length);
+  // Each game's output as it comes, one file a game, so a game still
+  // playing can be read, or stopped without losing what it found (the
+  // summary below prints a game only once it ends).
+  const logDir = join(ROOT, ".scratch", "judge", `${new Date().toISOString().replace(/[:.]/g, "-")}-${kind}`);
+  mkdirSync(logDir, { recursive: true });
+  console.log(`each game's output, as it plays: ${logDir}`);
   let next = 0;
   let failed = 0;
   const play = () =>
@@ -216,9 +224,15 @@ if (jobs.length > 1) {
         { stdio: ["ignore", "pipe", "pipe"], windowsHide: true },
       );
       let out = "";
-      child.stdout.on("data", (chunk) => (out += chunk));
-      child.stderr.on("data", (chunk) => (out += chunk));
+      const log = createWriteStream(join(logDir, `${job.decks.replace(/[^A-Za-z0-9]+/g, "-").slice(0, 80)}-seed${job.seed}.log`));
+      const take = (chunk) => {
+        out += chunk;
+        log.write(chunk);
+      };
+      child.stdout.on("data", take);
+      child.stderr.on("data", take);
       child.on("close", (code) => {
+        log.end();
         const lines = out.split("\n");
         const tallyLine = lines.find((l) => l.startsWith(TALLY_MARK));
         console.log(lines.filter((l) => !l.startsWith(TALLY_MARK)).join("\n").trimEnd());
