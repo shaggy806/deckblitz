@@ -2052,6 +2052,12 @@ export function parseCost(text) {
       const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
       if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
       cost.exileFromGraveyard = { count: 1, ...(filter !== undefined ? { filter } : {}), fromTop: true };
+    } else if ((m = new RegExp(`^Put ${N} cards? from your graveyard on the bottom of your library$`).exec(part))) {
+      // "Put three cards from your graveyard on the bottom of your library"
+      // (Battlefield Scrounger): an act, chosen as it's paid (601.2h).
+      const count = numberOf(m[1]);
+      if (typeof count !== "number" || count < 1) return null;
+      addCostAct(cost, { kind: "look-and-choose", zone: "graveyard", min: count, max: count, destination: "library-bottom", leftover: "stay" });
     } else if (part === "Exile the top card of your library") addCostAct(cost, { kind: "exile-from-library", amount: 1 });
     else if ((m = new RegExp(`^Exile the top ${N} cards of your library$`, "i").exec(part))) {
       const count = numberOf(m[1]);
@@ -9660,6 +9666,25 @@ export function parseSentence(sentence, ctx) {
         chooser: "you",
         options: [toHand ? { returnToHand: permanents, text } : { tapPermanent: permanents, text }],
         otherwise: { kind: "sacrifice-source" },
+      };
+    }
+  }
+  // "Sacrifice ~ unless you put two cards from your graveyard on the bottom
+  // of your library" (Anurid Scavenger, Gurzigost): with that many there a
+  // `may` of putting them, sacrificed if declined; with fewer, sacrificed.
+  if ((m = new RegExp(`^sacrifice ~ unless you put ${N} cards? from your graveyard on the bottom of your library\\.$`, "i").exec(s))) {
+    const n = numberOf(m[1]);
+    if (typeof n === "number" && n > 0) {
+      return {
+        kind: "conditional",
+        condition: { kind: "cards-in-graveyard", atLeast: n },
+        then: {
+          kind: "may",
+          prompt: `Put ${m[1].toLowerCase()} card${n === 1 ? "" : "s"} from your graveyard on the bottom of your library? (If you don't, sacrifice ~.)`,
+          effect: { kind: "look-and-choose", zone: "graveyard", min: n, max: n, destination: "library-bottom", leftover: "stay" },
+          else: { kind: "sacrifice-source" },
+        },
+        else: { kind: "sacrifice-source" },
       };
     }
   }
@@ -22211,6 +22236,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       // "Activate only during your turn and only once each turn" (Nature's Chosen).
       rest = rest.replace(/ Activate only during your turn and only once each turn\.$/, () => {
         ability.condition = { kind: "your-turn" };
+        ability.oncePerTurn = true;
+        return "";
+      });
+      // Threshold's "Activate only once each turn and only if there are seven
+      // or more cards in your graveyard" (Battlefield Scrounger).
+      rest = rest.replace(/ Activate only once each turn and only if there are seven or more cards in your graveyard\.$/, () => {
+        ability.condition = { kind: "threshold" };
         ability.oncePerTurn = true;
         return "";
       });

@@ -5309,8 +5309,15 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   target: "source", position: "bottom" }`, `{ kind: "tap", target: "granter" }` (Fishing
   Pole's granted "Tap Fishing Pole": the granting permanent, payable while it's untapped),
   `{ kind: "pay-energy", amount: "x" }` (X
-  announced, capped by the energy there is), a `look-and-choose` from the hand, or
-  `forageCost()` (only the ways that can be paid are offered). Several steps are a
+  announced, capped by the energy there is), a `look-and-choose` from the hand or
+  the graveyard — Battlefield Scrounger's "Put three cards from your graveyard on
+  the bottom of your library" is `{ kind: "look-and-choose", zone: "graveyard", min:
+  3, max: 3, destination: "library-bottom", leftover: "stay" }`, payable with three
+  there — or `forageCost()` (only the ways that can be paid are offered). The same
+  put as an upkeep's "sacrifice ~ unless you put two cards from your graveyard on
+  the bottom of your library" (Anurid Scavenger, Gurzigost) is a `conditional` on
+  `cards-in-graveyard` of that many, then a `may` of the `look-and-choose` with
+  `else: sacrifice-source`, and `sacrifice-source` with fewer. Several steps are a
   `sequence`. A step moving a card to or from a library keeps the ability from being a
   mana ability (605.1a). What it took reads back as `{ paid: … }`. Add a `COST_ACTS` row
   rather than a new `AbilityCost` field. A mana ability with a `do` is activated by hand.

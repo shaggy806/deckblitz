@@ -27190,4 +27190,34 @@ describe("unless an opponent pays, and graveyard cards to the library's bottom",
     });
     expect(face.complete).toBe(true);
   });
+
+  it("reads the upkeep 'sacrifice ~ unless you put two cards from your graveyard on the bottom' (Gurzigost)", () => {
+    const face = parseFace({
+      name: "Test Beast",
+      type_line: "Creature — Beast",
+      oracle_text:
+        "At the beginning of your upkeep, sacrifice this creature unless you put two cards from your graveyard on the bottom of your library.",
+    });
+    expect(face.triggered[0].effect).toMatchObject({
+      kind: "conditional",
+      condition: { kind: "cards-in-graveyard", atLeast: 2 },
+      then: { kind: "may", effect: { kind: "look-and-choose", zone: "graveyard", min: 2, max: 2, destination: "library-bottom" }, else: { kind: "sacrifice-source" } },
+      else: { kind: "sacrifice-source" },
+    });
+  });
+
+  it("reads the cost and threshold's once-a-turn restriction (Battlefield Scrounger)", () => {
+    const face = parseFace({
+      name: "Test Centaur",
+      type_line: "Creature — Centaur",
+      oracle_text:
+        "Threshold — Put three cards from your graveyard on the bottom of your library: This creature gets +3/+3 until end of turn. Activate only once each turn and only if there are seven or more cards in your graveyard.",
+    });
+    expect(face.activated[0]).toMatchObject({
+      cost: { do: { kind: "look-and-choose", zone: "graveyard", min: 3, max: 3, destination: "library-bottom" } },
+      condition: { kind: "threshold" },
+      oncePerTurn: true,
+    });
+    expect(face.complete).toBe(true);
+  });
 });
