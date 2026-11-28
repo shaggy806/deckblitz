@@ -312,6 +312,7 @@ import _poolFuneralRoom from "../pool/funeral-room.js";
 import _poolFunnelWebRecluse from "../pool/funnel-web-recluse.js";
 import _poolFuriousResistance from "../pool/furious-resistance.js";
 import _poolFyndhornElder from "../pool/fyndhorn-elder.js";
+import _poolGaeasLiege from "../pool/gaeas-liege.js";
 import _poolGallantry from "../pool/gallantry.js";
 import _poolGallifreyStands from "../pool/gallifrey-stands.js";
 import _poolGameOver from "../pool/game-over.js";
@@ -1325,6 +1326,7 @@ const shard: CardShard = {
     _poolFunnelWebRecluse,
     _poolFuriousResistance,
     _poolFyndhornElder,
+    _poolGaeasLiege,
     _poolGallantry,
     _poolGallifreyStands,
     _poolGameOver,

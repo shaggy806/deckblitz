@@ -745,6 +745,7 @@ import _poolRoarOfTheKha from "../pool/roar-of-the-kha.js";
 import _poolRoaringFurnaceSteamingSauna from "../pool/roaring-furnace-steaming-sauna.js";
 import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
+import _poolRoilingHorror from "../pool/roiling-horror.js";
 import _poolRoilingVortex from "../pool/roiling-vortex.js";
 import _poolRoninShadowStalker from "../pool/ronin-shadow-stalker.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
@@ -1829,6 +1830,7 @@ const shard: CardShard = {
     _poolRoaringFurnaceSteamingSauna,
     _poolRoaringSlagwurm,
     _poolRoilingCanopy,
+    _poolRoilingHorror,
     _poolRoilingVortex,
     _poolRoninShadowStalker,
     _poolRooftopAssassin,

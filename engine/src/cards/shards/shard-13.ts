@@ -753,6 +753,7 @@ import _poolSerraAvatar from "../pool/serra-avatar.js";
 import _poolSerratedBiskelion from "../pool/serrated-biskelion.js";
 import _poolShadowbornDemon from "../pool/shadowborn-demon.js";
 import _poolShapesharer from "../pool/shapesharer.js";
+import _poolShapeshiftersMarrow from "../pool/shapeshifters-marrow.js";
 import _poolSharedRoots from "../pool/shared-roots.js";
 import _poolShepherdOfHeroes from "../pool/shepherd-of-heroes.js";
 import _poolShipbreakerKraken from "../pool/shipbreaker-kraken.js";
@@ -1789,6 +1790,7 @@ const shard: CardShard = {
     _poolSerratedBiskelion,
     _poolShadowbornDemon,
     _poolShapesharer,
+    _poolShapeshiftersMarrow,
     _poolSharedRoots,
     _poolShepherdOfHeroes,
     _poolShipbreakerKraken,

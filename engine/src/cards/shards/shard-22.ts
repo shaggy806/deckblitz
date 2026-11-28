@@ -718,6 +718,7 @@ import _poolResoundingScream from "../pool/resounding-scream.js";
 import _poolRestlessDreams from "../pool/restless-dreams.js";
 import _poolResurrection from "../pool/resurrection.js";
 import _poolRetract from "../pool/retract.js";
+import _poolRetrieverPhoenix from "../pool/retriever-phoenix.js";
 import _poolReturnToAction from "../pool/return-to-action.js";
 import _poolReturnToTheSewers from "../pool/return-to-the-sewers.js";
 import _poolRhysticShield from "../pool/rhystic-shield.js";
@@ -1815,6 +1816,7 @@ const shard: CardShard = {
     _poolRestlessDreams,
     _poolResurrection,
     _poolRetract,
+    _poolRetrieverPhoenix,
     _poolReturnToAction,
     _poolReturnToTheSewers,
     _poolRhysticShield,

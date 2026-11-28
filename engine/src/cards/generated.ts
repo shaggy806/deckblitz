@@ -10845,6 +10845,7 @@ import _poolGaeasCradle from "./pool/gaeas-cradle.js";
 import _poolGaeasEmbrace from "./pool/gaeas-embrace.js";
 import _poolGaeasGift from "./pool/gaeas-gift.js";
 import _poolGaeasHerald from "./pool/gaeas-herald.js";
+import _poolGaeasLiege from "./pool/gaeas-liege.js";
 import _poolGaeasMight from "./pool/gaeas-might.js";
 import _poolGaeasProtector from "./pool/gaeas-protector.js";
 import _poolGaeasRevenge from "./pool/gaeas-revenge.js";
@@ -23037,6 +23038,7 @@ import _poolRetrievalAgent from "./pool/retrieval-agent.js";
 import _poolRetrievePrey from "./pool/retrieve-prey.js";
 import _poolRetrieveTheEsper from "./pool/retrieve-the-esper.js";
 import _poolRetrieve from "./pool/retrieve.js";
+import _poolRetrieverPhoenix from "./pool/retriever-phoenix.js";
 import _poolRetroMutation from "./pool/retro-mutation.js";
 import _poolRetrofittedTransmogrant from "./pool/retrofitted-transmogrant.js";
 import _poolRetrofitterFoundry from "./pool/retrofitter-foundry.js";
@@ -23527,6 +23529,7 @@ import _poolRoilEruption from "./pool/roil-eruption.js";
 import _poolRoilSpout from "./pool/roil-spout.js";
 import _poolRoilingCanopy from "./pool/roiling-canopy.js";
 import _poolRoilingDragonstorm from "./pool/roiling-dragonstorm.js";
+import _poolRoilingHorror from "./pool/roiling-horror.js";
 import _poolRoilingRegrowth from "./pool/roiling-regrowth.js";
 import _poolRoilingTerrain from "./pool/roiling-terrain.js";
 import _poolRoilingVortex from "./pool/roiling-vortex.js";
@@ -25175,6 +25178,7 @@ import _poolShapersOfNature from "./pool/shapers-of-nature.js";
 import _poolShapersSanctuary from "./pool/shapers-sanctuary.js";
 import _poolShapesharer from "./pool/shapesharer.js";
 import _poolShapeshifter from "./pool/shapeshifter.js";
+import _poolShapeshiftersMarrow from "./pool/shapeshifters-marrow.js";
 import _poolSharaeOfNumbingDepths from "./pool/sharae-of-numbing-depths.js";
 import _poolShardConvergence from "./pool/shard-convergence.js";
 import _poolShardOfBrokenGlass from "./pool/shard-of-broken-glass.js";
@@ -45241,6 +45245,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGaeasEmbrace,
   _poolGaeasGift,
   _poolGaeasHerald,
+  _poolGaeasLiege,
   _poolGaeasMight,
   _poolGaeasProtector,
   _poolGaeasRevenge,
@@ -57433,6 +57438,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRetrievePrey,
   _poolRetrieveTheEsper,
   _poolRetrieve,
+  _poolRetrieverPhoenix,
   _poolRetroMutation,
   _poolRetrofittedTransmogrant,
   _poolRetrofitterFoundry,
@@ -57923,6 +57929,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRoilSpout,
   _poolRoilingCanopy,
   _poolRoilingDragonstorm,
+  _poolRoilingHorror,
   _poolRoilingRegrowth,
   _poolRoilingTerrain,
   _poolRoilingVortex,
@@ -59571,6 +59578,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShapersSanctuary,
   _poolShapesharer,
   _poolShapeshifter,
+  _poolShapeshiftersMarrow,
   _poolSharaeOfNumbingDepths,
   _poolShardConvergence,
   _poolShardOfBrokenGlass,
@@ -79650,6 +79658,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gaeas-embrace": _poolGaeasEmbrace,
   "pool/gaeas-gift": _poolGaeasGift,
   "pool/gaeas-herald": _poolGaeasHerald,
+  "pool/gaeas-liege": _poolGaeasLiege,
   "pool/gaeas-might": _poolGaeasMight,
   "pool/gaeas-protector": _poolGaeasProtector,
   "pool/gaeas-revenge": _poolGaeasRevenge,
@@ -91842,6 +91851,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/retrieve-prey": _poolRetrievePrey,
   "pool/retrieve-the-esper": _poolRetrieveTheEsper,
   "pool/retrieve": _poolRetrieve,
+  "pool/retriever-phoenix": _poolRetrieverPhoenix,
   "pool/retro-mutation": _poolRetroMutation,
   "pool/retrofitted-transmogrant": _poolRetrofittedTransmogrant,
   "pool/retrofitter-foundry": _poolRetrofitterFoundry,
@@ -92332,6 +92342,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/roil-spout": _poolRoilSpout,
   "pool/roiling-canopy": _poolRoilingCanopy,
   "pool/roiling-dragonstorm": _poolRoilingDragonstorm,
+  "pool/roiling-horror": _poolRoilingHorror,
   "pool/roiling-regrowth": _poolRoilingRegrowth,
   "pool/roiling-terrain": _poolRoilingTerrain,
   "pool/roiling-vortex": _poolRoilingVortex,
@@ -93980,6 +93991,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shapers-sanctuary": _poolShapersSanctuary,
   "pool/shapesharer": _poolShapesharer,
   "pool/shapeshifter": _poolShapeshifter,
+  "pool/shapeshifters-marrow": _poolShapeshiftersMarrow,
   "pool/sharae-of-numbing-depths": _poolSharaeOfNumbingDepths,
   "pool/shard-convergence": _poolShardConvergence,
   "pool/shard-of-broken-glass": _poolShardOfBrokenGlass,
