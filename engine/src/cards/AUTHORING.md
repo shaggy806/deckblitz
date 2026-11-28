@@ -8631,7 +8631,9 @@ recipient before an effect deals the damage and before combat damage; where noth
 With `{ redirect }` it's "you may have that damage dealt to … instead", asked the same way, and of damage that can't be prevented too
 (a redirection isn't prevention): Blood of the Martyr is a `replacement-effect` for the turn of `{ event: "would-deal-damage", toFilter:
 { type: "creature" }, instead: { redirect: "you" }, may: true }`. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
-`would-scry` (`{ who, instead }`). `would-draw` also takes `instruction: { atLeast }` (the whole draw: "one or more
+`would-scry` (`{ who, instead }`), `would-learn` (`{ optional?, offer?, instead: { effect } }`, its controller's learn — or,
+on a `fromGraveyard` static, its owner's — replaced whole; the `learn()` sequence carries `learn: true` and asks which, beside
+learning when every one is optional: Retriever Phoenix). `would-draw` also takes `instruction: { atLeast }` (the whole draw: "one or more
 cards", "two or more", `"x"` the number) and `whileHandAtMost`; `would-create-token` takes `becomes: { effect, text? }` with
 `firstEachTurn` and `may` (Moonlit Meditation); `would-deal-damage` takes `ifAtLeast`.
 **A resolved replacement for a while** is `replacement-effect { replacement, duration, next?, players?, permanentsToo?, object?, fromObject? }`

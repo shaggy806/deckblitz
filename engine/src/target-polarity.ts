@@ -652,6 +652,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "gain-class-level": none,
   "unlock-door": (n, v) => v.touch(n.target, "help", MINOR),
   "set-door": none,
+  "learn-instead": none,
   // Its targets are its own, but an `about` slot is the enclosing ability's,
   // and takes what the reflexive ability does to it (Behemoth of Vault 0's
   // "destroy that permanent").

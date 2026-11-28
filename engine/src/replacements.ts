@@ -117,6 +117,7 @@ export type ReplacementSpec =
   | SpellCopyReplacement
   | LoseGameReplacement
   | ScryReplacement
+  | LearnReplacement
   | CoinFlipReplacement
   | DiceRollReplacement
   | VillainousChoiceReplacement
@@ -242,6 +243,27 @@ export interface ScryReplacement {
   readonly event: "would-scry";
   readonly who: "you" | "opponent" | "any-player";
   readonly instead: Instead;
+}
+
+/**
+ * "As long as this card is in your graveyard, if you would learn, you may
+ * instead return this card to the battlefield" (Retriever Phoenix, with the
+ * static's `fromGraveyard`): one instruction to learn (rule 701.48a — the
+ * `sequence` `learn()` writes, marked `learn`) made by this card's owner
+ * (its controller, on the battlefield) is replaced by `instead`'s effect,
+ * run with this card as its source (rule 614.6). `optional`: "you may" —
+ * learning is offered beside it. Where several apply, the learner chooses
+ * one (rule 616.1), and the learn it replaced is gone, so one Phoenix
+ * returns per learn. Applied by the `learn` sequence through
+ * `ResolutionContext.learnReplacements`.
+ */
+export interface LearnReplacement {
+  readonly event: "would-learn";
+  readonly optional?: true;
+  /** What the learner is offered for it ("Return Retriever Phoenix to the
+   * battlefield"); the card's name and the ability's text otherwise. */
+  readonly offer?: string;
+  readonly instead: ReplacedByEffect;
 }
 
 /** Whether an `instead` is the event replaced by an effect. */

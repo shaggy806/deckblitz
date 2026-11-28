@@ -6329,6 +6329,7 @@ export function parseSentence(sentence, ctx) {
   if (re("learn").test(s)) {
     return {
       kind: "sequence",
+      learn: true,
       effects: [
         {
           kind: "may",

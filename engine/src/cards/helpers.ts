@@ -1771,9 +1771,12 @@ export const investigate = (times: EffectAmount = 1): EffectSpec => ({
  * player's sideboard (rule 400.11a, `DeckList.sideboard`) — none in a
  * Commander game (903.5e), where only the rummage can do anything. A madness
  * card discarded this way still counts as discarded, so the draw follows.
+ * Marked `learn`, it is one event a `would-learn` replacement may replace
+ * whole (Retriever Phoenix).
  */
 export const learn = (): EffectSpec => ({
   kind: "sequence",
+  learn: true,
   effects: [
     {
       kind: "may",

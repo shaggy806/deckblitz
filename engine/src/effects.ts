@@ -3018,6 +3018,12 @@ export type EffectSpec =
        * the Oracle text is one instruction: Common Bond's two sentences are two
        * placements. */
       readonly together?: true;
+      /** The steps are the keyword action **learn** (rule 701.48a), as
+       * `learn()` writes them: one event a `would-learn` replacement may
+       * replace whole (Retriever Phoenix's "if you would learn, you may
+       * instead return this card to the battlefield"). With one or more that
+       * apply, the learner is asked first, a mode each (rule 616.1). */
+      readonly learn?: true;
     }
   | {
       /**
@@ -6713,6 +6719,14 @@ export type EffectSpec =
       readonly kind: "unlock-door";
       readonly target?: ObjectRef;
       readonly orLock?: boolean;
+    }
+  | {
+      /** A `would-learn` replacement chosen in place of a learn — written by
+       * the `learn` sequence for its modes, never by a card. `source` is the
+       * replacement's card in the stint it was offered in (rule 400.7). */
+      readonly kind: "learn-instead";
+      readonly source: ObjectId;
+      readonly stint: number;
     }
   | {
       /** One door's change as an `unlock-door` choice settled it — written by
@@ -15019,6 +15033,19 @@ export interface EffectApi {
   /** Unlock (or `lock`) a door of the Room `object` (rule 709.5f, g), by
    * the effect's controller. */
   setDoor(object: ObjectId, door: "left" | "right", lock: boolean): void;
+  /** The `would-learn` replacements that apply to the effect's controller
+   * learning now: each card's, with its stint, the text to offer and whether
+   * it is a "you may". Graveyard cards' `fromGraveyard` statics (their
+   * owner's learn) and permanents' (their controller's). */
+  learnReplacements(): readonly {
+    readonly source: ObjectId;
+    readonly stint: number;
+    readonly text: string;
+    readonly optional: boolean;
+  }[];
+  /** Carry out the `would-learn` replacement of `source`, still that object
+   * (rule 400.7), in place of the learn. */
+  learnInstead(source: ObjectId, stint: number): void;
   /** The top `count` cards of `player`'s library, top first. */
   libraryTop(player: PlayerId, count: number, reveal?: boolean): readonly ObjectId[];
   /** The bottom card of `player`'s library, if any — see `bottom-of-library`. */
@@ -21793,6 +21820,25 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
   const spec = bindDynamicCompares(unbound, ctx);
   switch (spec.kind) {
     case "sequence": {
+      // Learn (rule 701.48a), which a `would-learn` replacement may replace
+      // whole: the learner picks one of those that apply, or — when each is
+      // a "you may" — learning itself (rule 616.1).
+      if (spec.learn === true) {
+        const instead = ctx.learnReplacements();
+        if (instead.length > 0) {
+          const { learn: _learn, ...learning } = spec;
+          const modes = [
+            ...(instead.every((r) => r.optional) ? [{ text: "Learn", effect: learning }] : []),
+            ...instead.map((r) => ({
+              text: r.text,
+              effect: { kind: "learn-instead", source: r.source, stint: r.stint } as const,
+            })),
+          ];
+          if (modes.length === 1) applyEffectSpec(modes[0].effect, ctx);
+          else applyEffectSpec({ kind: "modal", minModes: 1, maxModes: 1, modes }, ctx);
+          return;
+        }
+      }
       // One instruction over several objects: nothing in it stops to ask.
       if (spec.simultaneous === true) {
         // Damage to several kinds of thing at once (Earthquake's "each
@@ -23834,6 +23880,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     }
     case "set-door":
       ctx.setDoor(spec.object, spec.door, spec.lock);
+      return;
+    case "learn-instead":
+      ctx.learnInstead(spec.source, spec.stint);
       return;
     case "gain-class-level":
       ctx.setClassLevel(spec.level);

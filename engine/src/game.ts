@@ -49327,6 +49327,14 @@ controlledBy,
           }));
         });
       },
+      learnReplacements: () => this.learnReplacementsFor(controller),
+      learnInstead: (instead, stint) => {
+        const card = this.state.objects[instead];
+        if (card === undefined || (card.zoneChangeCount ?? 0) !== stint) return;
+        const found = this.learnReplacementsFor(controller).find((r) => r.source === instead);
+        if (found === undefined) return;
+        this.runReplacedBy(found.effect, instead, found.you, { player: controller, key: `would-learn:${instead}` });
+      },
       setDoor: (object, door, lock) => {
         if (lock) this.lockDoor(object, door);
         else this.unlockDoor(object, door, controller);
@@ -67308,6 +67316,46 @@ controlledBy,
     return liveProhibitions(this.state, this.registry, "lose-counters").some(
       (live) => (live.prohibition.kind === undefined || live.prohibition.kind === kind) && reachesObject(this.state, this.registry, live, id),
     );
+  }
+
+  /** The `would-learn` replacements (`LearnReplacement`) that apply to
+   * `player` learning now: their permanents' and emblems' (`activeStaticsOf`),
+   * and the `fromGraveyard` ones of cards in their own graveyard, where "you"
+   * is the owner (rule 113.6b — Retriever Phoenix). `you` is who the
+   * replacement's effect is for. */
+  private learnReplacementsFor(player: PlayerId): {
+    readonly source: ObjectId;
+    readonly stint: number;
+    readonly text: string;
+    readonly optional: boolean;
+    readonly effect: EffectSpec;
+    readonly you: PlayerId;
+  }[] {
+    const out: ReturnType<Game["learnReplacementsFor"]> = [];
+    const add = (source: GameObject, ability: StaticAbility): void => {
+      const r = ability.replacement;
+      if (r?.event !== "would-learn") return;
+      out.push({
+        source: source.id,
+        stint: source.zoneChangeCount ?? 0,
+        text: r.offer ?? `${source.cardName}: ${ability.text ?? "instead of learning"}`,
+        optional: r.optional === true,
+        effect: r.instead.effect,
+        you: player,
+      });
+    };
+    for (const { source, ability } of this.activeStaticsOf(player, (a) => a.replacement?.event === "would-learn" && a.fromGraveyard !== true)) {
+      add(source, ability);
+    }
+    if (this.state.players[player]?.hasLost !== false) return out;
+    for (const id of this.state.zones.perPlayer[player]?.graveyard ?? []) {
+      const card = this.state.objects[id];
+      if (card === undefined || card.owner !== player || !this.registry.has(rulesTextName(card))) continue;
+      for (const ability of this.ownStatics(card)) {
+        if (ability.fromGraveyard === true && this.staticActive(card, ability)) add(card, ability);
+      }
+    }
+    return out;
   }
 
   private activeStaticsOf(

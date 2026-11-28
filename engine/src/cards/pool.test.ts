@@ -390,6 +390,9 @@ describe("statics that work from the graveyard", () => {
     ]);
     const enters = (ability: StaticAbility): boolean => {
       const r = ability.replacement;
+      // A learn replacement is read from its owner's graveyard by
+      // `Game.learnReplacementsFor` (Retriever Phoenix).
+      if (r?.event === "would-learn") return true;
       return r?.event === "others-enter-battlefield" && r.exileInstead === undefined && r.asCopyOf === undefined;
     };
     const stray = POOL_CARDS.flatMap((def) =>
