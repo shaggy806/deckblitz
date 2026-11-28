@@ -27377,7 +27377,13 @@ describe("Dead Ringers (2026-11-28)", () => {
     );
     expect(ringers.complete).toBe(true);
     expect(ringers.targets).toEqual(["nonblack-creature", { kind: "other", of: "nonblack-creature", than: { slot: 0 } }]);
-    expect(ringers.effect.condition.of[1]).toEqual({ kind: "target", index: 0, filter: { sameColorsAs: 1 } });
+    expect(ringers.effect.condition).toEqual({
+      kind: "all",
+      of: [
+        { kind: "target-legal", index: 1 },
+        { kind: "target", index: 0, filter: { sameColorsAs: 1 } },
+      ],
+    });
     expect(ringers.effect.then.effects[1]).toEqual({ kind: "destroy", target: 1, cantBeRegenerated: true });
   });
 });

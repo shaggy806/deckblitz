@@ -4,8 +4,8 @@
  * bound as a resolution applies (`sameColorsBound`). Dead Ringers is the
  * proving card: both destroyed when their colors match exactly (two
  * colorless ones included), neither when one has a color the other lacks,
- * and, with one target gone illegal, the other alone (rule 608.2b: the
- * illegal one's colors can't be determined, so nothing shows they differ).
+ * and neither with one target gone illegal (rule 608.2b: the illegal one's
+ * colors can't be determined, and the part that needs them won't happen).
  */
 import { describe, expect, it } from "vitest";
 
@@ -67,7 +67,7 @@ describe("Dead Ringers", () => {
     expect(zone(game, pridemage)).toBe("graveyard");
   });
 
-  it("with one target gone illegal, destroys the other", () => {
+  it("with one target gone illegal, destroys neither", () => {
     const { game } = table();
     const bears = spawn(game, "Grizzly Bears", B);
     const giant = spawn(game, "Hill Giant", B);
@@ -76,6 +76,17 @@ describe("Dead Ringers", () => {
     cast(game, toHand(game, "Dead Ringers"), { targets: [ref(bears), ref(giant)], settle: false });
     game.debugMove(giant, "graveyard");
     settle(game);
-    expect(zone(game, bears)).toBe("graveyard");
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+
+  it("with the first target gone illegal, destroys neither", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    const elves = spawn(game, "Llanowar Elves", B);
+    lands(game, "Swamp", 5);
+    cast(game, toHand(game, "Dead Ringers"), { targets: [ref(bears), ref(elves)], settle: false });
+    game.debugMove(bears, "graveyard");
+    settle(game);
+    expect(zone(game, elves)).toBe("battlefield");
   });
 });

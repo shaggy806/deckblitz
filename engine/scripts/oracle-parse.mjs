@@ -19196,8 +19196,9 @@ function pilesAt(sentences, i, ctx) {
     };
   }
   // Dead Ringers' "Destroy two target nonblack creatures unless either one is
-  // a color the other isn't. They can't be regenerated." (`sameColorsAs`; a
-  // target gone illegal can't be asked its colors, rule 608.2b).
+  // a color the other isn't. They can't be regenerated." (`sameColorsAs`; with
+  // a target gone illegal its colors can't be determined, so nothing is
+  // destroyed, rule 608.2b).
   if (
     /^destroy two target nonblack creatures unless either one is a color the other isn't\.$/i.test(s(0)) &&
     /^they can't be regenerated\.$/i.test(s(1))
@@ -19208,9 +19209,9 @@ function pilesAt(sentences, i, ctx) {
       effect: {
         kind: "conditional",
         condition: {
-          kind: "any",
+          kind: "all",
           of: [
-            { kind: "not", of: { kind: "target-legal", index: first } },
+            { kind: "target-legal", index: second },
             { kind: "target", index: first, filter: { sameColorsAs: second } },
           ],
         },

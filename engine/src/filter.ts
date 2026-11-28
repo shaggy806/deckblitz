@@ -899,12 +899,13 @@ export interface CardFilter {
    * reference names — no color the other isn't, and none missing; two
    * colorless objects are the same (no colors). Dead Ringers' "destroy two
    * target nonblack creatures unless either one is a color the other isn't"
-   * is a `target` condition on slot 0 with `sameColorsAs: 1`. A resolution
+   * is a `target` condition on slot 0 with `sameColorsAs: 1`, beside
+   * `target-legal 1`: an illegal target's colors can't be determined, so the
+   * destruction that needs them doesn't happen (rule 608.2b). A resolution
    * binds it as it applies (`sameColorsBound`), the reference objects' colors
    * as they are now or last existed (rule 608.2h); a reference that reads
-   * nothing — an illegal target, whose information can't be determined (rule
-   * 608.2b) — leaves nothing to differ from, so it holds. Elsewhere it's read
-   * live, and fails inside the layer fold.
+   * nothing leaves nothing to differ from, so the clause alone holds. Elsewhere
+   * it's read live, and fails inside the layer fold.
    */
   readonly sameColorsAs?: ShareReference;
   /** `sameColorsAs` bound — written by `bindDynamicCompares`, never
