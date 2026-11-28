@@ -468,6 +468,7 @@ import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKellanTheFaeBlooded from "../pool/kellan-the-fae-blooded.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKethisTheHiddenHand from "../pool/kethis-the-hidden-hand.js";
+import _poolKillSuitCultist from "../pool/kill-suit-cultist.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
 import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
 import _poolKithkinZephyrnaut from "../pool/kithkin-zephyrnaut.js";
@@ -1525,6 +1526,7 @@ const shard: CardShard = {
     _poolKellanTheFaeBlooded,
     _poolKenrithTheReturnedKing,
     _poolKethisTheHiddenHand,
+    _poolKillSuitCultist,
     _poolKillmongerScourgeOfWakanda,
     _poolKioraMasterOfTheDepths,
     _poolKithkinZephyrnaut,

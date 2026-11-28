@@ -10045,6 +10045,7 @@ import _poolFiresongAndSunspeaker from "./pool/firesong-and-sunspeaker.js";
 import _poolFirespitterWhelp from "./pool/firespitter-whelp.js";
 import _poolFirespout from "./pool/firespout.js";
 import _poolFirestormHellkite from "./pool/firestorm-hellkite.js";
+import _poolFirestormPhoenix from "./pool/firestorm-phoenix.js";
 import _poolFirestorm from "./pool/firestorm.js";
 import _poolFirewakeSliver from "./pool/firewake-sliver.js";
 import _poolFirewildBorderpost from "./pool/firewild-borderpost.js";
@@ -15487,6 +15488,7 @@ import _poolKikusShadow from "./pool/kikus-shadow.js";
 import _poolKiliTheResourceful from "./pool/kili-the-resourceful.js";
 import _poolKillMaimBurn from "./pool/kill-maim-burn.js";
 import _poolKillShot from "./pool/kill-shot.js";
+import _poolKillSuitCultist from "./pool/kill-suit-cultist.js";
 import _poolKillSwitch from "./pool/kill-switch.js";
 import _poolKillZoneAcrobat from "./pool/kill-zone-acrobat.js";
 import _poolKillerBees from "./pool/killer-bees.js";
@@ -27043,6 +27045,7 @@ import _poolSplinterTheMentor from "./pool/splinter-the-mentor.js";
 import _poolSplinterTwin from "./pool/splinter-twin.js";
 import _poolSplinter from "./pool/splinter.js";
 import _poolSplinterfright from "./pool/splinterfright.js";
+import _poolSplinteringWind from "./pool/splintering-wind.js";
 import _poolSplintersTechnique from "./pool/splinters-technique.js";
 import _poolSplitDecision from "./pool/split-decision.js";
 import _poolSplitTailMiko from "./pool/split-tail-miko.js";
@@ -33162,6 +33165,7 @@ import _poolWormfangManta from "./pool/wormfang-manta.js";
 import _poolWormfangNewt from "./pool/wormfang-newt.js";
 import _poolWormfangTurtle from "./pool/wormfang-turtle.js";
 import _poolWormholeSerpent from "./pool/wormhole-serpent.js";
+import _poolWormsOfTheEarth from "./pool/worms-of-the-earth.js";
 import _poolWormwoodDryad from "./pool/wormwood-dryad.js";
 import _poolWormwoodTreefolk from "./pool/wormwood-treefolk.js";
 import _poolWornPowerstone from "./pool/worn-powerstone.js";
@@ -34297,6 +34301,7 @@ import _tokensSpiritTokenWhite33Flying from "./tokens/spirit-token-white-3-3-fly
 import _tokensSpiritTokenWhiteBlack from "./tokens/spirit-token-white-black.js";
 import _tokensSpiritToken from "./tokens/spirit-token.js";
 import _tokensSpiritWarriorToken from "./tokens/spirit-warrior-token.js";
+import _tokensSplinterToken from "./tokens/splinter-token.js";
 import _tokensSquidTokenMinus1Minus1 from "./tokens/squid-token-minus-1-minus-1.js";
 import _tokensSquidToken from "./tokens/squid-token.js";
 import _tokensSquirrelToken from "./tokens/squirrel-token.js";
@@ -44487,6 +44492,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFirespitterWhelp,
   _poolFirespout,
   _poolFirestormHellkite,
+  _poolFirestormPhoenix,
   _poolFirestorm,
   _poolFirewakeSliver,
   _poolFirewildBorderpost,
@@ -49929,6 +49935,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKiliTheResourceful,
   _poolKillMaimBurn,
   _poolKillShot,
+  _poolKillSuitCultist,
   _poolKillSwitch,
   _poolKillZoneAcrobat,
   _poolKillerBees,
@@ -61485,6 +61492,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSplinterTwin,
   _poolSplinter,
   _poolSplinterfright,
+  _poolSplinteringWind,
   _poolSplintersTechnique,
   _poolSplitDecision,
   _poolSplitTailMiko,
@@ -67604,6 +67612,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWormfangNewt,
   _poolWormfangTurtle,
   _poolWormholeSerpent,
+  _poolWormsOfTheEarth,
   _poolWormwoodDryad,
   _poolWormwoodTreefolk,
   _poolWornPowerstone,
@@ -68745,6 +68754,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSpiritTokenWhiteBlack,
   _tokensSpiritToken,
   _tokensSpiritWarriorToken,
+  _tokensSplinterToken,
   _tokensSquidTokenMinus1Minus1,
   _tokensSquidToken,
   _tokensSquirrelToken,
@@ -78942,6 +78952,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/firespitter-whelp": _poolFirespitterWhelp,
   "pool/firespout": _poolFirespout,
   "pool/firestorm-hellkite": _poolFirestormHellkite,
+  "pool/firestorm-phoenix": _poolFirestormPhoenix,
   "pool/firestorm": _poolFirestorm,
   "pool/firewake-sliver": _poolFirewakeSliver,
   "pool/firewild-borderpost": _poolFirewildBorderpost,
@@ -84384,6 +84395,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kili-the-resourceful": _poolKiliTheResourceful,
   "pool/kill-maim-burn": _poolKillMaimBurn,
   "pool/kill-shot": _poolKillShot,
+  "pool/kill-suit-cultist": _poolKillSuitCultist,
   "pool/kill-switch": _poolKillSwitch,
   "pool/kill-zone-acrobat": _poolKillZoneAcrobat,
   "pool/killer-bees": _poolKillerBees,
@@ -95940,6 +95952,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/splinter-twin": _poolSplinterTwin,
   "pool/splinter": _poolSplinter,
   "pool/splinterfright": _poolSplinterfright,
+  "pool/splintering-wind": _poolSplinteringWind,
   "pool/splinters-technique": _poolSplintersTechnique,
   "pool/split-decision": _poolSplitDecision,
   "pool/split-tail-miko": _poolSplitTailMiko,
@@ -102059,6 +102072,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wormfang-newt": _poolWormfangNewt,
   "pool/wormfang-turtle": _poolWormfangTurtle,
   "pool/wormhole-serpent": _poolWormholeSerpent,
+  "pool/worms-of-the-earth": _poolWormsOfTheEarth,
   "pool/wormwood-dryad": _poolWormwoodDryad,
   "pool/wormwood-treefolk": _poolWormwoodTreefolk,
   "pool/worn-powerstone": _poolWornPowerstone,
@@ -103194,6 +103208,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/spirit-token-white-black": _tokensSpiritTokenWhiteBlack,
   "tokens/spirit-token": _tokensSpiritToken,
   "tokens/spirit-warrior-token": _tokensSpiritWarriorToken,
+  "tokens/splinter-token": _tokensSplinterToken,
   "tokens/squid-token-minus-1-minus-1": _tokensSquidTokenMinus1Minus1,
   "tokens/squid-token": _tokensSquidToken,
   "tokens/squirrel-token": _tokensSquirrelToken,
