@@ -5480,8 +5480,15 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   tapped for the same ability's mana may be one of them; activation gates on
   the tapped permanents there are then (its own `{T}` counted, its own `{Q}`
   not), so a creature to be tapped for mana is tapped first, the mana floating.
-  A permanent with a stun counter can't pay (rule 122.1d), as for `{Q}`. Not on
-  a mana ability, and not beside another cost that asks a question.
+  A permanent with a stun counter can't pay (rule 122.1d), as for `{Q}`. Not
+  beside another cost that asks a question. The filter's `controlledBy` says
+  whose (absent: yours). On a mana ability, one permanent only, named on the
+  action as a sacrifice is (the offer's `sacrifice: { choices, untap: true }`):
+  Benthic Explorers' "{T}, Untap a tapped land an opponent controls: Add one
+  mana of any type that land could produce" is `untapOthers: { count: 1,
+  filter: { type: "land", controlledBy: "opponent" } }` with the mana `{
+  untappedCouldProduce: <that filter> }` — offered per type, each with the
+  lands that make it, as Squandered Resources' `sacrificedCouldProduce` is.
 - `blight: N` — "Blight N" (rule 701.68a — Gristle Glutton's "{T}, Blight 1:
   …"): put N -1/-1 counters on a creature you control, chosen as the cost is
   paid, once the ability is on the stack, with the `choose-permanents`

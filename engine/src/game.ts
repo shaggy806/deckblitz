@@ -5568,6 +5568,11 @@ export class Game {
               }
             : {}),
           ...(unattachChoices !== undefined ? { sacrifice: { choices: unattachChoices, unattach: true as const } } : {}),
+          // A mana ability's "Untap a tapped land an opponent controls"
+          // (Benthic Explorers): the one it untaps, named the same way.
+          ...(ability.cost.untapOthers !== undefined && isManaAbility(ability)
+            ? { sacrifice: { choices: this.untapManaChoices(player, ability, manaColors), untap: true as const } }
+            : {}),
           ...(() => {
             const tapCost = this.abilityTapCostOffer(
               player,
@@ -28007,6 +28012,25 @@ export class Game {
     });
   }
 
+  /** What a mana ability's one-permanent `untapOthers` cost may untap
+   * (Benthic Explorers), for the offer whose pick is `manaColors`: with an
+   * `untappedCouldProduce` mana, only those that could produce that pick
+   * (or, for no pick, nothing at all), as {@link sacrificedManaChoices}. */
+  private untapManaChoices(player: PlayerId, ability: ActivatedAbility, manaColors: readonly ManaType[] | undefined): ObjectId[] {
+    const cost = ability.cost.untapOthers;
+    if (cost === undefined) return [];
+    const candidates = this.untapCostCandidates(player, cost.filter);
+    const effect = ability.effect;
+    if (effect?.kind !== "add-mana" || typeof effect.mana !== "object" || !("untappedCouldProduce" in effect.mana)) {
+      return candidates;
+    }
+    const pick = manaColors?.[0];
+    return candidates.filter((id) => {
+      const makes = this.couldProduce(id, new Set());
+      return pick === undefined ? makes.length === 0 : makes.includes(pick);
+    });
+  }
+
   private sacrificeCandidates(
     player: PlayerId,
     sourceId: ObjectId,
@@ -30439,9 +30463,13 @@ export class Game {
     }
     if (ability.cost.untapOthers !== undefined) {
       // The choice waits on the stack (see `activateAbility`), as a returned
-      // permanent's does: never on a mana ability, nor beside another that asks.
+      // permanent's does: never beside another that asks. A mana ability's
+      // (Benthic Explorers) is one permanent named on the action, as a
+      // sacrifice is, so never beside a sacrifice or unattach it would share
+      // that with (rule 605.3b: nothing waits on the stack).
       if (
-        isManaAbility(ability) ||
+        (isManaAbility(ability) &&
+          (ability.cost.untapOthers.count !== 1 || ability.cost.sacrifice !== undefined || ability.cost.unattach !== undefined)) ||
         sacrificeParts !== null ||
         ability.cost.discard !== undefined ||
         ability.cost.exileFromGraveyard !== undefined ||
@@ -30463,7 +30491,7 @@ export class Game {
         ability.cost.tap &&
         !source.tapped &&
         (source.counters.stun ?? 0) === 0 &&
-        this.battlefieldMatching(player, { ...filter, controlledBy: "you" }).includes(sourceId);
+        this.battlefieldMatching(player, { controlledBy: "you", ...filter }).includes(sourceId);
       if (permanentCount(this.state, others) + (ownTap ? 1 : 0) < count) {
         return `${player} controls too few tapped permanents to untap for ${def.name}'s cost`;
       }
@@ -30752,6 +30780,16 @@ export class Game {
         throw new Error(`${def.name}'s ability requires unattaching an Equipment from it`);
       }
       const unattachVictim = unattachChosen ? (sacrifice as ObjectId) : unattachCandidates[0];
+      // A mana ability's one-permanent untap cost (Benthic Explorers): named
+      // on the action as a sacrifice is, and one that could make the colour
+      // picked (the offer's choices).
+      let untapVictim: ObjectId | undefined;
+      if (ability.cost.untapOthers !== undefined && isManaAbility(ability)) {
+        if (sacrifice === undefined || !this.untapManaChoices(player, ability, manaColors).includes(sacrifice)) {
+          throw new Error(`${def.name}'s ability requires untapping a permanent its cost names`);
+        }
+        untapVictim = sacrifice;
+      }
 
       // `{X}` in the cost (rule 107.3 — ROADMAP Phase 11 EG-3): fold the chosen
       // value into the generic portion before paying, and stamp it on the
@@ -30836,13 +30874,13 @@ export class Game {
       return {
         source, def, ability, grantedAbility, sourceStint,
         sacrificeVictim, sacrificeParts, chosenX, tapPicked, payment, shares, waterbent, modeOffer,
-        unattachVictim, unattachChosen,
+        unattachVictim, unattachChosen, untapVictim,
       };
     });
     const {
       source, def, ability, grantedAbility, sourceStint,
       sacrificeVictim, sacrificeParts, tapPicked, payment, shares, waterbent, modeOffer,
-      unattachVictim, unattachChosen,
+      unattachVictim, unattachChosen, untapVictim,
     } = planned;
     // The zone it works from this time, before a cost moves the card: one
     // ability listing several (Mister Immortal) pays as that zone's does.
@@ -30876,7 +30914,15 @@ export class Game {
       typeof ability.effect.mana === "object" &&
       "sacrificedCouldProduce" in ability.effect.mana
         ? this.couldProduce(sacrificeVictim, new Set())
-        : undefined;
+        : // "Any type that land could produce" of the land its cost untaps
+          // (Benthic Explorers): the same read, tapped or not (106.7 ignores
+          // costs).
+          untapVictim !== undefined &&
+            ability.effect?.kind === "add-mana" &&
+            typeof ability.effect.mana === "object" &&
+            "untappedCouldProduce" in ability.effect.mana
+          ? this.couldProduce(untapVictim, new Set())
+          : undefined;
 
     // Pay the cost. The secret first: a sacrifice beside it clears the choice.
     if (ability.cost.revealChosen === true) this.revealSecretChoice(source, player);
@@ -30888,6 +30934,9 @@ export class Game {
     }
     // {Q} (rule 107.6): a stunned source was refused above.
     if (ability.cost.untap === true) this.untapUnlessStunned(sourceId);
+    // A mana ability's named untap (Benthic Explorers): one permanent, split
+    // off a stack first. A stunned one was never offered (122.1d).
+    if (untapVictim !== undefined) this.setTapped({ kind: "object", object: this.splitOneFromStack(untapVictim) }, false);
     this.tapForWaterbend(waterbent, player, ability.cost.waterbend === true);
     // "Tap five untapped Zombies you control" — see `AbilityCost.tapOthers`.
     // A cost that tapped one permanent remembers it: "the tapped creature's
@@ -31783,7 +31832,7 @@ export class Game {
         // Souls) still stamps its restriction on mana floated by hand.
         // The land the cost actually sacrificed: a pick it can't make (only
         // a client's word could say one) is the first it can.
-        if (typeof mana === "object" && "sacrificedCouldProduce" in mana) {
+        if (typeof mana === "object" && ("sacrificedCouldProduce" in mana || "untappedCouldProduce" in mana)) {
           const could = sacrificedCouldMake ?? [];
           if (could.length === 0) return;
           const pick = manaColors?.[picked];
@@ -32580,11 +32629,13 @@ export class Game {
     }
   }
 
-  /** The tapped permanents `player` controls that can pay an `untapOthers`
-   * cost: a stun counter would replace the untap (rule 122.1d), leaving the
-   * cost unpaid, so such a permanent can't, as for `{Q}`. */
+  /** The tapped permanents that can pay an `untapOthers` cost — `player`'s,
+   * unless the filter's `controlledBy` says whose (Benthic Explorers' "a
+   * tapped land an opponent controls"): a stun counter would replace the
+   * untap (rule 122.1d), leaving the cost unpaid, so such a permanent can't,
+   * as for `{Q}`. */
   private untapCostCandidates(player: PlayerId, filter: CardFilter): ObjectId[] {
-    return this.battlefieldMatching(player, { ...filter, tapped: true, controlledBy: "you" }).filter(
+    return this.battlefieldMatching(player, { controlledBy: "you", ...filter, tapped: true }).filter(
       (id) => (this.state.objects[id]?.counters.stun ?? 0) === 0,
     );
   }
@@ -32606,13 +32657,13 @@ export class Game {
       source,
       player,
       0,
-      { ...cost.filter, tapped: true, controlledBy: "you" },
+      { controlledBy: "you", ...cost.filter, tapped: true },
       cost.count,
       cost.count,
       { kind: "untap", target: 0 },
       cost.count === 1 ? "Choose one to untap" : `Choose ${cost.count} to untap`,
       false,
-      this.battlefieldMatching(player, { ...cost.filter, tapped: true, controlledBy: "you" }).filter(
+      this.battlefieldMatching(player, { controlledBy: "you", ...cost.filter, tapped: true }).filter(
         (id) => !eligible.includes(id),
       ),
     );
@@ -34505,8 +34556,9 @@ export class Game {
         choices.length > 0 &&
         effect.kind === "add-mana" &&
         typeof effect.mana === "object" &&
-        "sacrificedCouldProduce" in effect.mana &&
-        this.sacrificedManaChoices(player, sourceId, ability, []).length > 0
+        (("sacrificedCouldProduce" in effect.mana && this.sacrificedManaChoices(player, sourceId, ability, []).length > 0) ||
+          // And one an untap cost names, likewise (Benthic Explorers).
+          ("untappedCouldProduce" in effect.mana && this.untapManaChoices(player, ability, []).length > 0))
       ) {
         own.push({ picks: [], makes: [] });
       }
@@ -37236,6 +37288,16 @@ export class Game {
         const object = this.state.objects[id];
         if (object === undefined || object.controller !== player) continue;
         if (!matchesFilter(this.state, this.registry, id, mana.sacrificedCouldProduce, { you: player })) continue;
+        for (const type of this.couldProduce(id, new Set())) types.add(type);
+      }
+      return MANA_TYPES.filter((t) => types.has(t));
+    }
+    if ("untappedCouldProduce" in mana) {
+      // Any type a permanent its untap cost could untap could produce
+      // (Benthic Explorers): undefined until it's activated, so nothing to
+      // another "could produce" (106.7), as above.
+      if (visiting.size > 0) return [];
+      for (const id of this.untapCostCandidates(player, mana.untappedCouldProduce)) {
         for (const type of this.couldProduce(id, new Set())) types.add(type);
       }
       return MANA_TYPES.filter((t) => types.has(t));

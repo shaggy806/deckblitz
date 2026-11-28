@@ -751,8 +751,15 @@ export interface AbilityCost {
    * permanents there are as it's activated, its own `{T}` counted, so a
    * creature that would be tapped for the mana is tapped for it first, with
    * the mana floating. A permanent with a stun counter can't pay: the counter
-   * would replace the untap (rule 122.1d), as for `{Q}`. Not on a mana
-   * ability, nor beside another cost that asks a question.
+   * would replace the untap (rule 122.1d), as for `{Q}`. Not beside another
+   * cost that asks a question.
+   *
+   * The filter's `controlledBy` says whose (absent: "you control"): Benthic
+   * Explorers' "Untap a tapped land **an opponent controls**" is `{ type:
+   * "land", controlledBy: "opponent" }`. On a mana ability (Benthic
+   * Explorers), only one, named on the action as a sacrifice is (the offer's
+   * `sacrifice.untap`), since a mana ability never waits on the stack for the
+   * choice (605.3b); activated by hand, never by the payment planner.
    */
   readonly untapOthers?: { readonly count: number; readonly filter: CardFilter };
   /**

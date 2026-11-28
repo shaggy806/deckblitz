@@ -27,6 +27,7 @@
     "static:cda-count-defending-player",
     "effect:become-copy-of-card-moved-this-way",
     "effect:if-any-player-pays",
+    "cost:untap-opponent-tapped-land",
     "cost:x-fixed-by-counters-on-source",
     "cost:x-fixed-by-source-counters",
     "decision:remember-chosen-color-on-resolution",

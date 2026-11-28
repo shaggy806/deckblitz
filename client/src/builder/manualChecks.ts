@@ -14021,4 +14021,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    "Benthic Explorers: untap an opponent's tapped land for a mana it could make",
+    board({
+      you: { bf: ['Benthic Explorers'] },
+      opp: { bf: [{ name: 'Forest', tapped: true }, { name: 'Island', tapped: true }, { name: 'Island', tapped: true }, 'Mountain'] },
+    }),
+  ),
+  preset(
+    "Benthic Explorers: four players, any opponent's tapped land",
+    board({
+      you: { bf: ['Benthic Explorers'] },
+      opp: [{ bf: [{ name: 'Forest', tapped: true }] }, { bf: [{ name: 'Swamp', tapped: true }] }, { bf: ['Plains'] }],
+    }),
+  ),
 ]

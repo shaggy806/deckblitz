@@ -2903,6 +2903,15 @@ export type BoardManaList =
    */
   | { readonly sacrificedCouldProduce: CardFilter }
   /**
+   * "One mana of any type that land could produce" (Benthic Explorers' "{T},
+   * Untap a tapped land an opponent controls: …"): a mana ability whose
+   * `untapOthers` cost untaps one permanent, named on the action as a
+   * sacrifice is — what that one could produce (rule 106.7: its costs ignored,
+   * so tapped or not), as `sacrificedCouldProduce` reads the sacrificed land.
+   * The filter is the cost's, for the offer's list of types.
+   */
+  | { readonly untappedCouldProduce: CardFilter }
+  /**
    * "…of any color that a land an opponent controls could produce" (Exotic
    * Orchard, Fellwar Stone): a `oneOf` over those colours.
    *

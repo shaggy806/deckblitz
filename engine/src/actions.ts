@@ -1834,7 +1834,14 @@ export type LegalAction =
       /** Present when the cost includes sacrificing a creature you control:
        * `choices` is every permanent that could be sacrificed to pay it. A
        * `"self"` sacrifice is implicit (no field) — the source is always used. */
-      readonly sacrifice?: { readonly choices: readonly ObjectId[]; readonly exile?: true; readonly unattach?: true };
+      readonly sacrifice?: {
+        readonly choices: readonly ObjectId[];
+        readonly exile?: true;
+        readonly unattach?: true;
+        /** The one permanent a mana ability's `untapOthers` cost untaps
+         * (Benthic Explorers), named on the action as a sacrifice is. */
+        readonly untap?: true;
+      };
       /** One branch of a choice of costs (`AbilityCost.options` — Bullseye,
        * Death Dealer's "Sacrifice an artifact or discard a nonland card"):
        * the ability is offered once per branch that can be paid, as a

@@ -9248,3 +9248,10 @@ Each board's die comes up 4.
 ### Stronghold Gambit: the chosen cards are shown only once everyone has chosen
 - **Do:** Cast Stronghold Gambit and choose Grizzly Bears from your hand. As Bob, choose Hill Giant.
 - **Expect:** The prompt says the card is revealed once every player has chosen. While Bob chooses, the History line for Alice's choice names no card ("Alice chooses a card…"). Then both cards are revealed together; only Grizzly Bears enters the battlefield, and Hill Giant stays in Bob's hand.
+### Benthic Explorers: untap an opponent's tapped land for a mana it could make
+- **Do:** Open Benthic Explorers' menu, choose "(add {U})", then click one of Bob's Islands.
+- **Expect:** The menu has "(add {G})" and "(add {U})" only (Bob's Mountain is untapped). The strip asks for a land to untap, Bob's two Islands lit and not his Forest; the Island clicked untaps, Benthic Explorers taps and {U} is in your pool.
+
+### Benthic Explorers: four players, any opponent's tapped land
+- **Do:** Open Benthic Explorers' menu and choose "(add {B})".
+- **Expect:** The menu has "(add {G})" and "(add {B})" (Bob's Forest, Carol's Swamp; Dave's Plains is untapped). With one land to untap no question is asked: Carol's Swamp untaps and {B} is in your pool.

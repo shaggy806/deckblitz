@@ -7015,13 +7015,16 @@ function Table({
     // a list of names can't tell two Forests apart.
     // Or "Unattach an Equipment from Captain America" (rule 701.3d), offered
     // the same way.
+    // And a mana ability's "Untap a tapped land an opponent controls"
+    // (Benthic Explorers).
     const unattach = pendingSac.sacrifice.unattach === true
+    const untap = 'untap' in pendingSac.sacrifice && pendingSac.sacrifice.untap === true
     const noun = unattach ? 'Equipment' : sacrificeNoun(pendingSac, view, pendingSac.sacrifice.choices)
     controls = (
       <div className="controls">
         <span>
           {pendingSac.cardName} — choose {/^[aeiou]/i.test(noun) ? 'an' : 'a'} {noun} to{' '}
-          {unattach ? 'unattach' : pendingSac.sacrifice.exile === true ? 'exile' : 'sacrifice'}
+          {unattach ? 'unattach' : untap ? 'untap' : pendingSac.sacrifice.exile === true ? 'exile' : 'sacrifice'}
         </span>
         <button type="button" onClick={() => setPendingSac(null)}>
           Cancel
