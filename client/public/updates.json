@@ -2,6 +2,8 @@
   {
     "date": "2026-11-27",
     "notes": [
+      "On their own turn, bots now weigh the attack a player who has been hitting them can make next, so they are less likely to tap out or clear the board and then take a big swing.",
+      "Bots now wait until blockers are declared before using an instant-speed pump such as Giant Growth.",
       "Bots now play their lands and mana toward casting their commander a turn sooner, such as cracking Krosan Verge for the colours The First Sliver needs.",
       "Bots now attack with a menace creature when the defender has only one creature to block it, and equip menace to finish a player with commander damage.",
       "Bots no longer spend Umezawa's Jitte's counters on a pump that can't help them, such as on a creature about to be handed to an opponent.",
