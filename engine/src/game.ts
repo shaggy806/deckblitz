@@ -44932,7 +44932,9 @@ export class Game {
           for (const id of this.state.zones.perPlayer[player].graveyard) {
             if (
               id !== except &&
-              matchesFilter(this.state, this.registry, id, filter, { you, ...(spellName !== undefined ? { spellName } : {}) })
+              // `source`: the clauses that read the ability's own source —
+              // Krovikan Vampire's "dealt damage by this creature".
+              matchesFilter(this.state, this.registry, id, filter, { you, source, ...(spellName !== undefined ? { spellName } : {}) })
             ) {
               n += 1;
             }
@@ -47078,7 +47080,7 @@ controlledBy,
           source,
         }),
       returnFromGraveyard: (filter, destination, count, enterTapped, withCounters, opts) =>
-        this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
+        this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x, source }),
       discardCards: (target, amount, random, unlessOne, anyNumber, filter) =>
         this.discardByEffect(target, amount, random === true, filter, unlessOne, anyNumber === true),
       discardChosen: (target, filter, lookOnly, optional, upTo, to) => {
@@ -69112,6 +69114,9 @@ controlledBy,
       readonly totalManaValueAtMost?: number;
       /** The spell's X, for a filter that reads it (Rally the Ancestors). */
       readonly x?: number;
+      /** The effect's source, for a filter that reads it (Krovikan Vampire's
+       * "dealt damage by this creature"). */
+      readonly source?: ObjectId;
       /** Each permanent it puts there is exiled if it would leave (Storm
        * Herald) — see the spec's `exileIfItWouldLeave`. */
       readonly exileIfItWouldLeave?: boolean;
@@ -69149,7 +69154,11 @@ controlledBy,
           })
         : [];
     const eligible = [...graveyards, ...milledElsewhere].filter((id) =>
-      matchesFilter(this.state, this.registry, id, filter, { you: player, x: opts.x ?? 0 }),
+      matchesFilter(this.state, this.registry, id, filter, {
+        you: player,
+        x: opts.x ?? 0,
+        ...(opts.source !== undefined ? { source: opts.source } : {}),
+      }),
     );
     if (eligible.length === 0) return false;
     const enterAs = destination === "battlefield" ? opts.enterAs : undefined;

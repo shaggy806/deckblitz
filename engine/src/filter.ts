@@ -1424,8 +1424,17 @@ export interface CardFilter {
    * battlefield is asked as a card in its graveyard; one read through a
    * snapshot (it has left the graveyard too) never matches. See
    * `GameObject.putIntoGraveyardOn`.
+   *
+   * `asItLeft` (with `from: ["battlefield"]`) is the permanent the card was
+   * as it last existed on the battlefield (rule 603.10a), its `lastKnown`
+   * snapshot, matched against this filter: "if a creature dealt damage by
+   * this creature this turn died, put **that card** onto the battlefield"
+   * (Krovikan Vampire: `{ type: "creature", damagedThisTurnBy: { source:
+   * "this" } }` — the damage record goes with the snapshot). A card put back
+   * into the graveyard from elsewhere since is a new object (400.7) and was
+   * never that permanent.
    */
-  readonly putIntoGraveyardThisTurn?: { readonly from?: readonly ZoneType[] };
+  readonly putIntoGraveyardThisTurn?: { readonly from?: readonly ZoneType[]; readonly asItLeft?: CardFilter };
   /**
    * Is (or isn't) a card that was discarded this turn and hasn't changed
    * zones since — Shadow of the Grave's "all cards in your graveyard that you
@@ -3882,6 +3891,14 @@ export function matchesFilter(
     if (arrival === undefined || arrival.turn !== state.turn.number) return false;
     const from = filter.putIntoGraveyardThisTurn.from;
     if (from !== undefined && !from.includes(arrival.from)) return false;
+    const asItLeft = filter.putIntoGraveyardThisTurn.asItLeft;
+    if (asItLeft !== undefined) {
+      // The snapshot of the departure that put it here: the latest one, since
+      // it arrived from the battlefield and hasn't moved since.
+      const snapshot = live!.lastKnown;
+      if (arrival.from !== "battlefield" || snapshot === undefined) return false;
+      if (!matchesFilter(state, registry, id, asItLeft, { ...ctx, snapshot })) return false;
+    }
   }
   if (filter.discardedThisTurn !== undefined) {
     // A snapshot is of a permanent, which wasn't discarded.

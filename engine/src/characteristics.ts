@@ -5534,7 +5534,7 @@ export function countValue(
     if ("partySize" in spec) return partySizeOf(state, registry, controller);
     if ("turnStat" in spec) return turnStatOf(state, controller, spec.turnStat);
     return allGraveyards().filter((id) =>
-      matchesFilter(state, registry, id, spec.countInGraveyard, { you: controller }),
+      matchesFilter(state, registry, id, spec.countInGraveyard, { you: controller, ...(source !== undefined ? { source } : {}) }),
     ).length;
   }
   switch (spec) {

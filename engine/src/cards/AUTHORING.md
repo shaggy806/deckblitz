@@ -4200,7 +4200,13 @@ the battlefield this turn" (Grim Return, Thrilling Encore, Wreck Hunter's
 count) is `{ type: "creature", putIntoGraveyardThisTurn: { from:
 ["battlefield"] } }`, "put there from anywhere this turn" (Night Nurse)
 `putIntoGraveyardThisTurn: {}`; it reads a card still in that graveyard as
-the same object (400.7). The sweep is `return-from-graveyard` over it,
+the same object (400.7). Its `asItLeft` (with `from: ["battlefield"]`) is a
+filter on the permanent the card was as it last existed on the battlefield
+(603.10a, its `lastKnown` snapshot, damage record included): "if a creature
+dealt damage by this creature this turn died, put that card onto the
+battlefield" (Krovikan Vampire) is `asItLeft: { type: "creature",
+damagedThisTurnBy: { source: "this" } }` — a graveyard card itself never
+reads `damagedThisTurnBy`. The sweep is `return-from-graveyard` over it,
 `count: "all"`: "return to the battlefield all permanent cards in your
 graveyard that were put there from the battlefield this turn" (Faith's
 Reward), `destination: "hand"` (Gleancrawler), `from: "each-graveyard"` for
