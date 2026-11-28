@@ -4656,6 +4656,27 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(merseine.activated[0].cost).toMatchObject({ mana: null, manaCostOf: "attached" });
     expect(merseine.activated[0].onlyBy).toBe("attached-controller");
+    // "Sacrifice an Aura attached to this creature" (Faunsbane Troll), the
+    // named creatures and the source together (Urborg Panther), "Discard the
+    // last card you drew this turn" (Jandor's Ring).
+    const troll = face(
+      "{1}, Sacrifice an Aura attached to this creature: This creature fights target creature you don't control. If that creature would die this turn, exile it instead. Activate only as a sorcery.",
+      "Creature — Troll",
+    );
+    expect(troll.activated[0].cost.sacrifice).toEqual({ filter: { subtype: "Aura", attachedTo: { isSource: true } } });
+    const panther = face(
+      "Sacrifice a creature named Feral Shadow, a creature named Breathstealer, and this creature: Search your library for a card named Spirit of the Night, put that card onto the battlefield, then shuffle.",
+      "Creature — Nightstalker Cat",
+    );
+    expect(panther.activated[0].cost.sacrifice).toEqual({
+      each: [
+        { type: "creature", hasName: "Feral Shadow" },
+        { type: "creature", hasName: "Breathstealer" },
+        { isSource: true },
+      ],
+    });
+    const ring = face("{2}, {T}, Discard the last card you drew this turn: Draw a card.", "Artifact");
+    expect(ring.activated[0].cost).toEqual({ mana: "{2}", tap: true, discard: { count: 1, filter: { lastDrawnThisTurn: true } } });
     // "Only this creature's owner may activate this ability" (rule 602.1b),
     // its damage to its owner, and its owner's life as it dies.
     const incarnation = face(

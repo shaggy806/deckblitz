@@ -4261,7 +4261,13 @@ discarding, rule 702.29a). Ghost of Ramirez DePietro's "a card in a graveyard th
 discarded or put there from a library this turn" is `anyOf` it and
 `putIntoGraveyardFromLibraryThisTurn`. `drawnThisTurn` is a card drawn this turn that hasn't
 moved since — only a real draw, so not a tutor's card nor a dredged one (Sylvan
-Library's "cards in your hand drawn this turn"). **"Shares a type with it"** is one clause per
+Library's "cards in your hand drawn this turn"). `lastDrawnThisTurn: true` is "the last card
+you drew this turn" (Jandor's Ring's discard cost, `discard: { count: 1, filter }`): the
+filtering player's latest draw, still where the draw put it; once it has moved, no card is.
+**"Sacrifice an Aura attached to this creature"** (Faunsbane Troll) is `sacrifice: { filter: {
+subtype: "Aura", attachedTo: { isSource: true } } }`, and "Sacrifice a creature named X, a creature
+named Y, and this creature" (Urborg Panther) `sacrifice.each` of `hasName` filters and `{ isSource:
+true }`. **"Shares a type with it"** is one clause per
 kind of type — `sharesCardTypeWith`, `sharesPermanentTypeWith` (rule 110.4,
 kindred left out), `sharesCreatureTypeWith`, `sharesLandTypeWith` — each
 taking a **`ShareReference`**, the object compared with:

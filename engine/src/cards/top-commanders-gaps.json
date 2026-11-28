@@ -4,6 +4,9 @@
  "built": [
     "effect:discard-spliced-names",
     "effect:discard-duplicate-names",
+    "cost:sacrifice-attached-aura",
+    "cost:sacrifice-named-permanents",
+    "cost:discard-last-drawn",
     "cost:pay-mana-cost-of-attached",
     "condition:countered-this-way",
     "filter:cast-using-teamwork",

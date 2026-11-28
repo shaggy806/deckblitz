@@ -1517,6 +1517,11 @@ export interface CardFilter {
   /** Drawn this turn (or not), and where the draw put it since: Sylvan
    * Library's "cards in your hand drawn this turn" (`GameObject.drawnOnTurn`). */
   readonly drawnThisTurn?: boolean;
+  /** "The last card you drew this turn" (Jandor's Ring's discard cost): the
+   * filtering player's most recent draw this turn (the journal's
+   * `card-drawn`), still where the draw put it. Once that card has moved, no
+   * card is, even one drawn before it. */
+  readonly lastDrawnThisTurn?: true;
   /** Entered the battlefield this turn (or didn't) — "creatures that entered
    * this turn", "a creature that didn't enter this turn". A card anywhere
    * but the battlefield hasn't; one that has left is asked as it last was. */
@@ -4064,6 +4069,14 @@ export function matchesFilter(
   if (filter.drawnThisTurn !== undefined) {
     const drawn = live !== undefined && live.drawnOnTurn === state.turn.number;
     if (drawn !== filter.drawnThisTurn) return false;
+  }
+  if (filter.lastDrawnThisTurn === true) {
+    // Still where the draw put it, and no later card drawn by `you`.
+    if (live === undefined || live.drawnOnTurn !== state.turn.number) return false;
+    const draws = entriesThisTurn(state, "card-drawn");
+    let last: ObjectId | undefined;
+    for (const entry of draws) if (entry.player === ctx.you) last = entry.object;
+    if (last !== id) return false;
   }
   // "Your Ring-bearer" (rule 701.54e) — the filtering player's, on the
   // battlefield now; "Ring-bearers" (`"any"`), anyone's.

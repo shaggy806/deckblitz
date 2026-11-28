@@ -1783,6 +1783,23 @@ function addCostAct(cost, step) {
 export function parseCost(text) {
   const cost = { mana: null, tap: false };
   const extra = {};
+  // "Sacrifice a creature named Feral Shadow, a creature named Breathstealer,
+  // and ~" (Urborg Panther): one `each` part per name, the source last, read
+  // whole before the commas split it.
+  let namedEach;
+  text = text.replace(/Sacrifice ((?:an? [a-z]+ named [^,]+, )+)and ~$/, (whole, list) => {
+    const parts = list
+      .split(", ")
+      .filter((p) => p !== "")
+      .map((p) => {
+        const named = /^an? ([a-z]+) named (.+)$/.exec(p);
+        const filter = named === null ? null : parseTypePhrase(named[1]);
+        return filter === null || named === null ? null : { ...filter, hasName: named[2] };
+      });
+    if (parts.some((p) => p === null)) return whole;
+    namedEach = { each: [...parts, { isSource: true }] };
+    return "Sacrifice the named permanents and ~";
+  });
   // "Pay half your life, rounded up" is one part, its comma aside.
   for (const part of text
     .replace("Pay half your life, rounded up", "Pay half your life")
@@ -1794,6 +1811,15 @@ export function parseCost(text) {
     // {Q}, the untap symbol (rule 107.6).
     else if (part === "{Q}") cost.untap = true;
     else if (part === "Sacrifice ~") cost.sacrifice = "self";
+    else if (part === "Sacrifice the named permanents and ~" && namedEach !== undefined) cost.sacrifice = namedEach;
+    else if ((m = /^Sacrifice an? (.+?) attached to ~$/.exec(part))) {
+      // "Sacrifice an Aura attached to this creature" (Faunsbane Troll).
+      const filter = parseTypePhrase(m[1]);
+      if (filter === null || Object.keys(filter).length === 0) return null;
+      cost.sacrifice = { filter: { ...filter, attachedTo: { isSource: true } } };
+    }
+    // "Discard the last card you drew this turn" (Jandor's Ring).
+    else if (part === "Discard the last card you drew this turn") cost.discard = { count: 1, filter: { lastDrawnThisTurn: true } };
     else if (/^Sacrifice (?:~ and |.+ and ~$)/.test(part) || /^Sacrifice (?:enchanted|equipped) creature$/.test(part)) {
       // A sacrifice cost matched against the source: "this creature and a
       // creature you control" (Great Hall of Starnheim), "two lands and this
