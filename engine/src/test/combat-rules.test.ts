@@ -388,6 +388,8 @@ describe("every definition speaks the one vocabulary", () => {
     "during-your-next-turn",
     "until-your-next-upkeep",
     "until-end-of-your-next-upkeep",
+    // "This turn and next turn" (Peace Talks).
+    "until-end-of-next-turn",
   ]);
   const STATIC_AIMS = new Set([
     "you",
