@@ -6216,6 +6216,7 @@ import _poolCyclopeanGiant from "./pool/cyclopean-giant.js";
 import _poolCyclopeanMummy from "./pool/cyclopean-mummy.js";
 import _poolCyclopeanSnare from "./pool/cyclopean-snare.js";
 import _poolCyclopeanTitan from "./pool/cyclopean-titan.js";
+import _poolCyclopeanTomb from "./pool/cyclopean-tomb.js";
 import _poolCyclopsElectromancer from "./pool/cyclops-electromancer.js";
 import _poolCyclopsGladiator from "./pool/cyclops-gladiator.js";
 import _poolCyclopsOfEternalFury from "./pool/cyclops-of-eternal-fury.js";
@@ -10543,6 +10544,7 @@ import _poolForumOfAmity from "./pool/forum-of-amity.js";
 import _poolForumsFavor from "./pool/forums-favor.js";
 import _poolFossilFind from "./pool/fossil-find.js";
 import _poolFoster from "./pool/foster.js";
+import _poolFoulEmissary from "./pool/foul-emissary.js";
 import _poolFoulFamiliar from "./pool/foul-familiar.js";
 import _poolFoulImp from "./pool/foul-imp.js";
 import _poolFoulOrchard from "./pool/foul-orchard.js";
@@ -16034,6 +16036,7 @@ import _poolLagrellaTheMagpie from "./pool/lagrella-the-magpie.js";
 import _poolLaidToRest from "./pool/laid-to-rest.js";
 import _poolLairDelve from "./pool/lair-delve.js";
 import _poolLairOfTheHydra from "./pool/lair-of-the-hydra.js";
+import _poolLairwatchGiant from "./pool/lairwatch-giant.js";
 import _poolLakeOfTheDead from "./pool/lake-of-the-dead.js";
 import _poolLakeTownLookout from "./pool/lake-town-lookout.js";
 import _poolLakeTownMariners from "./pool/lake-town-mariners.js";
@@ -29126,6 +29129,7 @@ import _poolTheFalconAirshipRestored from "./pool/the-falcon-airship-restored.js
 import _poolTheFalconSamWilson from "./pool/the-falcon-sam-wilson.js";
 import _poolTheFallOfKroog from "./pool/the-fall-of-kroog.js";
 import _poolTheFallOfLordKonda from "./pool/the-fall-of-lord-konda.js";
+import _poolTheFallen from "./pool/the-fallen.js";
 import _poolTheFantasticFour from "./pool/the-fantastic-four.js";
 import _poolTheFantasticar from "./pool/the-fantasticar.js";
 import _poolTheFifteenthDoctor from "./pool/the-fifteenth-doctor.js";
@@ -40651,6 +40655,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCyclopeanMummy,
   _poolCyclopeanSnare,
   _poolCyclopeanTitan,
+  _poolCyclopeanTomb,
   _poolCyclopsElectromancer,
   _poolCyclopsGladiator,
   _poolCyclopsOfEternalFury,
@@ -44978,6 +44983,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForumsFavor,
   _poolFossilFind,
   _poolFoster,
+  _poolFoulEmissary,
   _poolFoulFamiliar,
   _poolFoulImp,
   _poolFoulOrchard,
@@ -50469,6 +50475,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLaidToRest,
   _poolLairDelve,
   _poolLairOfTheHydra,
+  _poolLairwatchGiant,
   _poolLakeOfTheDead,
   _poolLakeTownLookout,
   _poolLakeTownMariners,
@@ -63561,6 +63568,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheFalconSamWilson,
   _poolTheFallOfKroog,
   _poolTheFallOfLordKonda,
+  _poolTheFallen,
   _poolTheFantasticFour,
   _poolTheFantasticar,
   _poolTheFifteenthDoctor,
@@ -75099,6 +75107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cyclopean-mummy": _poolCyclopeanMummy,
   "pool/cyclopean-snare": _poolCyclopeanSnare,
   "pool/cyclopean-titan": _poolCyclopeanTitan,
+  "pool/cyclopean-tomb": _poolCyclopeanTomb,
   "pool/cyclops-electromancer": _poolCyclopsElectromancer,
   "pool/cyclops-gladiator": _poolCyclopsGladiator,
   "pool/cyclops-of-eternal-fury": _poolCyclopsOfEternalFury,
@@ -79426,6 +79435,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/forums-favor": _poolForumsFavor,
   "pool/fossil-find": _poolFossilFind,
   "pool/foster": _poolFoster,
+  "pool/foul-emissary": _poolFoulEmissary,
   "pool/foul-familiar": _poolFoulFamiliar,
   "pool/foul-imp": _poolFoulImp,
   "pool/foul-orchard": _poolFoulOrchard,
@@ -84917,6 +84927,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/laid-to-rest": _poolLaidToRest,
   "pool/lair-delve": _poolLairDelve,
   "pool/lair-of-the-hydra": _poolLairOfTheHydra,
+  "pool/lairwatch-giant": _poolLairwatchGiant,
   "pool/lake-of-the-dead": _poolLakeOfTheDead,
   "pool/lake-town-lookout": _poolLakeTownLookout,
   "pool/lake-town-mariners": _poolLakeTownMariners,
@@ -98009,6 +98020,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-falcon-sam-wilson": _poolTheFalconSamWilson,
   "pool/the-fall-of-kroog": _poolTheFallOfKroog,
   "pool/the-fall-of-lord-konda": _poolTheFallOfLordKonda,
+  "pool/the-fallen": _poolTheFallen,
   "pool/the-fantastic-four": _poolTheFantasticFour,
   "pool/the-fantasticar": _poolTheFantasticar,
   "pool/the-fifteenth-doctor": _poolTheFifteenthDoctor,

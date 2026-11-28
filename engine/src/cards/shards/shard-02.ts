@@ -345,6 +345,7 @@ import _poolForebodingSteamboat from "../pool/foreboding-steamboat.js";
 import _poolForgeDevil from "../pool/forge-devil.js";
 import _poolFormOfTheDragon from "../pool/form-of-the-dragon.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
+import _poolFoulEmissary from "../pool/foul-emissary.js";
 import _poolFoundryStreetDenizen from "../pool/foundry-street-denizen.js";
 import _poolFranticSearch from "../pool/frantic-search.js";
 import _poolFreeBorgRevolutionaries from "../pool/free-borg-revolutionaries.js";
@@ -1424,6 +1425,7 @@ const shard: CardShard = {
     _poolForgeDevil,
     _poolFormOfTheDragon,
     _poolFortressCyclops,
+    _poolFoulEmissary,
     _poolFoundryStreetDenizen,
     _poolFranticSearch,
     _poolFreeBorgRevolutionaries,

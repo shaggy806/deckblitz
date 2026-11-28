@@ -930,6 +930,7 @@ import _poolTheCelestialToymaker from "../pool/the-celestial-toymaker.js";
 import _poolTheCityOnTheEdgeOfForever from "../pool/the-city-on-the-edge-of-forever.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheEnigmaJewel from "../pool/the-enigma-jewel.js";
+import _poolTheFallen from "../pool/the-fallen.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheFirstTyrannicWar from "../pool/the-first-tyrannic-war.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
@@ -2028,6 +2029,7 @@ const shard: CardShard = {
     _poolTheCityOnTheEdgeOfForever,
     _poolTheEchoverseFulcrum,
     _poolTheEnigmaJewel,
+    _poolTheFallen,
     _poolTheFireCrystal,
     _poolTheFirstTyrannicWar,
     _poolTheGreatHenge,

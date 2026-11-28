@@ -483,6 +483,7 @@ import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
 import _poolKulrathZealot from "../pool/kulrath-zealot.js";
 import _poolKunorosHoundOfAthreos from "../pool/kunoros-hound-of-athreos.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
+import _poolLairwatchGiant from "../pool/lairwatch-giant.js";
 import _poolLanternScout from "../pool/lantern-scout.js";
 import _poolLeadershipVacuum from "../pool/leadership-vacuum.js";
 import _poolLegolasMasterArcher from "../pool/legolas-master-archer.js";
@@ -1558,6 +1559,7 @@ const shard: CardShard = {
     _poolKulrathZealot,
     _poolKunorosHoundOfAthreos,
     _poolLairOfTheHydra,
+    _poolLairwatchGiant,
     _poolLanternScout,
     _poolLeadershipVacuum,
     _poolLegolasMasterArcher,
