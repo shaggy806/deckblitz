@@ -4944,6 +4944,7 @@ import _poolClaraOswald from "./pool/clara-oswald.js";
 import _poolClarionCathars from "./pool/clarion-cathars.js";
 import _poolClarionConqueror from "./pool/clarion-conqueror.js";
 import _poolClarionSpirit from "./pool/clarion-spirit.js";
+import _poolClarionUltimatum from "./pool/clarion-ultimatum.js";
 import _poolClashOfElements from "./pool/clash-of-elements.js";
 import _poolClashOfRealities from "./pool/clash-of-realities.js";
 import _poolClashOfTheEikons from "./pool/clash-of-the-eikons.js";
@@ -7151,6 +7152,7 @@ import _poolDiamondValley from "./pool/diamond-valley.js";
 import _poolDiamondWeapon from "./pool/diamond-weapon.js";
 import _poolDiaochanArtfulBeauty from "./pool/diaochan-artful-beauty.js";
 import _poolDiaryOfDreams from "./pool/diary-of-dreams.js";
+import _poolDichotomancy from "./pool/dichotomancy.js";
 import _poolDictateOfErebos from "./pool/dictate-of-erebos.js";
 import _poolDictateOfHeliod from "./pool/dictate-of-heliod.js";
 import _poolDictateOfKarametra from "./pool/dictate-of-karametra.js";
@@ -20920,6 +20922,7 @@ import _poolPhyrexianFurnace from "./pool/phyrexian-furnace.js";
 import _poolPhyrexianGargantua from "./pool/phyrexian-gargantua.js";
 import _poolPhyrexianGhoul from "./pool/phyrexian-ghoul.js";
 import _poolPhyrexianGremlins from "./pool/phyrexian-gremlins.js";
+import _poolPhyrexianGrimoire from "./pool/phyrexian-grimoire.js";
 import _poolPhyrexianHulk from "./pool/phyrexian-hulk.js";
 import _poolPhyrexianHydra from "./pool/phyrexian-hydra.js";
 import _poolPhyrexianInfiltrator from "./pool/phyrexian-infiltrator.js";
@@ -25313,6 +25316,7 @@ import _poolShiftingSky from "./pool/shifting-sky.js";
 import _poolShiftingSliver from "./pool/shifting-sliver.js";
 import _poolShiftingWall from "./pool/shifting-wall.js";
 import _poolShiftingWoodland from "./pool/shifting-woodland.js";
+import _poolShiftyDoppelganger from "./pool/shifty-doppelganger.js";
 import _poolShigekiJukaiVisionary from "./pool/shigeki-jukai-visionary.js";
 import _poolShikoAndNarsetUnified from "./pool/shiko-and-narset-unified.js";
 import _poolShikoParagonOfTheWay from "./pool/shiko-paragon-of-the-way.js";
@@ -29488,6 +29492,7 @@ import _poolThoseWhoServe from "./pool/those-who-serve.js";
 import _poolThoughtCollapse from "./pool/thought-collapse.js";
 import _poolThoughtCourier from "./pool/thought-courier.js";
 import _poolThoughtDevourer from "./pool/thought-devourer.js";
+import _poolThoughtDissector from "./pool/thought-dissector.js";
 import _poolThoughtDistortion from "./pool/thought-distortion.js";
 import _poolThoughtEater from "./pool/thought-eater.js";
 import _poolThoughtErasure from "./pool/thought-erasure.js";
@@ -39331,6 +39336,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolClarionCathars,
   _poolClarionConqueror,
   _poolClarionSpirit,
+  _poolClarionUltimatum,
   _poolClashOfElements,
   _poolClashOfRealities,
   _poolClashOfTheEikons,
@@ -41538,6 +41544,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDiamondWeapon,
   _poolDiaochanArtfulBeauty,
   _poolDiaryOfDreams,
+  _poolDichotomancy,
   _poolDictateOfErebos,
   _poolDictateOfHeliod,
   _poolDictateOfKarametra,
@@ -55307,6 +55314,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianGargantua,
   _poolPhyrexianGhoul,
   _poolPhyrexianGremlins,
+  _poolPhyrexianGrimoire,
   _poolPhyrexianHulk,
   _poolPhyrexianHydra,
   _poolPhyrexianInfiltrator,
@@ -59700,6 +59708,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShiftingSliver,
   _poolShiftingWall,
   _poolShiftingWoodland,
+  _poolShiftyDoppelganger,
   _poolShigekiJukaiVisionary,
   _poolShikoAndNarsetUnified,
   _poolShikoParagonOfTheWay,
@@ -63875,6 +63884,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThoughtCollapse,
   _poolThoughtCourier,
   _poolThoughtDevourer,
+  _poolThoughtDissector,
   _poolThoughtDistortion,
   _poolThoughtEater,
   _poolThoughtErasure,
@@ -73731,6 +73741,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/clarion-cathars": _poolClarionCathars,
   "pool/clarion-conqueror": _poolClarionConqueror,
   "pool/clarion-spirit": _poolClarionSpirit,
+  "pool/clarion-ultimatum": _poolClarionUltimatum,
   "pool/clash-of-elements": _poolClashOfElements,
   "pool/clash-of-realities": _poolClashOfRealities,
   "pool/clash-of-the-eikons": _poolClashOfTheEikons,
@@ -75938,6 +75949,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/diamond-weapon": _poolDiamondWeapon,
   "pool/diaochan-artful-beauty": _poolDiaochanArtfulBeauty,
   "pool/diary-of-dreams": _poolDiaryOfDreams,
+  "pool/dichotomancy": _poolDichotomancy,
   "pool/dictate-of-erebos": _poolDictateOfErebos,
   "pool/dictate-of-heliod": _poolDictateOfHeliod,
   "pool/dictate-of-karametra": _poolDictateOfKarametra,
@@ -89707,6 +89719,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-gargantua": _poolPhyrexianGargantua,
   "pool/phyrexian-ghoul": _poolPhyrexianGhoul,
   "pool/phyrexian-gremlins": _poolPhyrexianGremlins,
+  "pool/phyrexian-grimoire": _poolPhyrexianGrimoire,
   "pool/phyrexian-hulk": _poolPhyrexianHulk,
   "pool/phyrexian-hydra": _poolPhyrexianHydra,
   "pool/phyrexian-infiltrator": _poolPhyrexianInfiltrator,
@@ -94100,6 +94113,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shifting-sliver": _poolShiftingSliver,
   "pool/shifting-wall": _poolShiftingWall,
   "pool/shifting-woodland": _poolShiftingWoodland,
+  "pool/shifty-doppelganger": _poolShiftyDoppelganger,
   "pool/shigeki-jukai-visionary": _poolShigekiJukaiVisionary,
   "pool/shiko-and-narset-unified": _poolShikoAndNarsetUnified,
   "pool/shiko-paragon-of-the-way": _poolShikoParagonOfTheWay,
@@ -98275,6 +98289,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thought-collapse": _poolThoughtCollapse,
   "pool/thought-courier": _poolThoughtCourier,
   "pool/thought-devourer": _poolThoughtDevourer,
+  "pool/thought-dissector": _poolThoughtDissector,
   "pool/thought-distortion": _poolThoughtDistortion,
   "pool/thought-eater": _poolThoughtEater,
   "pool/thought-erasure": _poolThoughtErasure,

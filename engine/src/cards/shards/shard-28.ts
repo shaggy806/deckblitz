@@ -925,6 +925,7 @@ import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl
 import _poolTheWiseMothman from "../pool/the-wise-mothman.js";
 import _poolThingFromTheDeep from "../pool/thing-from-the-deep.js";
 import _poolThistledownDuo from "../pool/thistledown-duo.js";
+import _poolThoughtDissector from "../pool/thought-dissector.js";
 import _poolThoughtboundPrimoc from "../pool/thoughtbound-primoc.js";
 import _poolThoughtseize from "../pool/thoughtseize.js";
 import _poolThreeTreeCity from "../pool/three-tree-city.js";
@@ -2014,6 +2015,7 @@ const shard: CardShard = {
     _poolTheWiseMothman,
     _poolThingFromTheDeep,
     _poolThistledownDuo,
+    _poolThoughtDissector,
     _poolThoughtboundPrimoc,
     _poolThoughtseize,
     _poolThreeTreeCity,

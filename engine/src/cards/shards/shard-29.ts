@@ -628,6 +628,7 @@ import _poolPhantomNomad from "../pool/phantom-nomad.js";
 import _poolPhantomSteed from "../pool/phantom-steed.js";
 import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
 import _poolPhyrexianFleshgorger from "../pool/phyrexian-fleshgorger.js";
+import _poolPhyrexianGrimoire from "../pool/phyrexian-grimoire.js";
 import _poolPhyrexianInfiltrator from "../pool/phyrexian-infiltrator.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
 import _poolPillarOfFlame from "../pool/pillar-of-flame.js";
@@ -1700,6 +1701,7 @@ const shard: CardShard = {
     _poolPhantomSteed,
     _poolPharikaGodOfAffliction,
     _poolPhyrexianFleshgorger,
+    _poolPhyrexianGrimoire,
     _poolPhyrexianInfiltrator,
     _poolPileatedProvisioner,
     _poolPillarOfFlame,

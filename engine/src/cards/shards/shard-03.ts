@@ -134,6 +134,7 @@ import _poolChromeshellCrab from "../pool/chromeshell-crab.js";
 import _poolChronostutter from "../pool/chronostutter.js";
 import _poolChubToad from "../pool/chub-toad.js";
 import _poolCinderBarrens from "../pool/cinder-barrens.js";
+import _poolClarionUltimatum from "../pool/clarion-ultimatum.js";
 import _poolClashOfTheEikons from "../pool/clash-of-the-eikons.js";
 import _poolCleverConcealment from "../pool/clever-concealment.js";
 import _poolCloudthresher from "../pool/cloudthresher.js";
@@ -1135,6 +1136,7 @@ const shard: CardShard = {
     _poolChronostutter,
     _poolChubToad,
     _poolCinderBarrens,
+    _poolClarionUltimatum,
     _poolClashOfTheEikons,
     _poolCleverConcealment,
     _poolCloudthresher,
