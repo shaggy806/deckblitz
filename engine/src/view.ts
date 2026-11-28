@@ -1699,9 +1699,41 @@ function viewForUncached(
       })),
     delayedTriggers: delayedTriggersSeen(state, objects),
     lastingEffects: lastingEffectsOf(state),
-    events: state.eventLog,
+    events: hiddenHandPicksLeftOut(state, objects, viewer),
     publicStints: state.publicStints ?? {},
   };
+}
+
+/**
+ * The event log as `viewer` is told it: a card another player chose and left
+ * in their hand (a `look-and-choose` of it with `destination: "stay"` —
+ * Stronghold Gambit's "each player chooses a card in their hand", Master of
+ * Predicaments' hidden card) is left out of that `cards-chosen-from-zone`
+ * while `viewer` can't see it, counted in `fromHand` instead, so the face-down
+ * slot chosen isn't given away before the card is revealed (rule 400.2: a
+ * hand is hidden). The log itself, which the game reads ("chosen this way"),
+ * keeps every id; nothing is copied when nothing is hidden.
+ */
+function hiddenHandPicksLeftOut(
+  state: GameState,
+  objects: Readonly<Record<ObjectId, VisibleObject>>,
+  viewer: PlayerId,
+): readonly GameEvent[] {
+  const log = state.eventLog;
+  let told: GameEvent[] | undefined;
+  for (let i = 0; i < log.length; i += 1) {
+    const event = log[i];
+    if (event.type !== "cards-chosen-from-zone" || event.chosenOnly !== true || event.player === viewer) continue;
+    const hidden = event.objects.filter((id) => objects[id] === undefined && state.objects[id]?.zone === "hand");
+    if (hidden.length === 0) continue;
+    told ??= [...log];
+    told[i] = {
+      ...event,
+      objects: event.objects.filter((id) => !hidden.includes(id)),
+      fromHand: (event.fromHand ?? 0) + hidden.length,
+    };
+  }
+  return told ?? log;
 }
 
 /** One {@link PlayerView.delayedTriggers} entry. */

@@ -9246,5 +9246,5 @@ Each board's die comes up 4.
 ## A card chosen from each hand, revealed together (2026-11-28)
 
 ### Stronghold Gambit: the chosen cards are shown only once everyone has chosen
-- **Do:** Cast Stronghold Gambit and choose Grizzly Bears from your hand.
-- **Expect:** The prompt says the card is revealed once every player has chosen. Then your Grizzly Bears and Bob's Hill Giant are revealed together; only Grizzly Bears enters the battlefield, and Hill Giant stays in Bob's hand.
+- **Do:** Cast Stronghold Gambit and choose Grizzly Bears from your hand. As Bob, choose Hill Giant.
+- **Expect:** The prompt says the card is revealed once every player has chosen. While Bob chooses, the History line for Alice's choice names no card ("Alice chooses a card…"). Then both cards are revealed together; only Grizzly Bears enters the battlefield, and Hill Giant stays in Bob's hand.

@@ -14011,7 +14011,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Stronghold Gambit: the chosen cards are shown only once everyone has chosen',
     board({
       you: { bf: ['Mountain*2'], hand: ['Stronghold Gambit', 'Grizzly Bears', 'Shivan Dragon'] },
-      opp: { bf: ['Forest'], hand: ['Hill Giant'] },
+      opp: { human: true, bf: ['Forest'], hand: ['Hill Giant', 'Forest'] },
     }),
   ),
   preset(
