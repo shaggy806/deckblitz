@@ -4444,6 +4444,10 @@ to the number of cards in its controller's graveyard" is `manaValue: { op:
   "power" } }`, Kutzil, Malamet Exemplar's "each with power greater than its
   base power" `power: { op: "gt", n: { own: "basePower" } }`. Needs no
   context, so it works everywhere a filter does.
+- `n: { ownCounters: "<kind>" }` — how many counters of that kind are on the
+  object being matched itself: Corrosion's "destroy each artifact with mana
+  value less than or equal to the number of rust counters on it" is
+  `manaValue: { op: "lte", n: { ownCounters: "rust" } }`. Needs no context.
 
 Where `{ amount }` is answered, and when:
 

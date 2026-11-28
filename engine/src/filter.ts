@@ -104,6 +104,11 @@ export const ODD_OR_EVEN = ["odd", "even"] as const;
  *   `toughness: { op: "gt", n: { own: "power" } }`; Kutzil, Malamet
  *   Exemplar's "each with power greater than its base power" is `power: {
  *   op: "gt", n: { own: "basePower" } }`. Needs no context.
+ * - `{ ownCounters }` is how many counters of that kind are on the very
+ *   object being matched — Corrosion's "each artifact with mana value less
+ *   than or equal to the number of rust counters on it" is `manaValue: { op:
+ *   "lte", n: { ownCounters: "rust" } }`. Needs no context; read as it last
+ *   existed off the battlefield.
  * - `{ chosenThisWay: "power" }` is the greatest power among the permanents
  *   chosen so far in this resolution (`thisWay: "chosen"`) still on the
  *   battlefield — Sculpted Sunburst's "each opponent chooses a creature they
@@ -119,7 +124,8 @@ export const ODD_OR_EVEN = ["odd", "even"] as const;
 export type DynamicOperand =
   | { readonly amount: EffectAmount; readonly forItsController?: true }
   | { readonly chosenThisWay: "power" }
-  | { readonly own: "power" | "toughness" | "basePower" | "baseToughness" | "manaValue" };
+  | { readonly own: "power" | "toughness" | "basePower" | "baseToughness" | "manaValue" }
+  | { readonly ownCounters: string };
 
 /**
  * Does any clause of `filter` compare against `{X}` — `n: "x"`, or an
@@ -3508,6 +3514,7 @@ export function matchesFilter(
       );
       return powers.length === 0 ? undefined : Math.max(...powers);
     }
+    if ("ownCounters" in operand) return (live !== undefined ? live.counters : lki!.counters)[operand.ownCounters] ?? 0;
     if (operand.own === "manaValue") return manaValueNow();
     if (own === undefined && layered !== undefined) return undefined;
     own ??= computeCharacteristics(state, registry, id);

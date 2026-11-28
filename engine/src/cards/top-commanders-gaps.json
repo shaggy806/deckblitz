@@ -23,6 +23,7 @@
     "condition:trigger-object-blockers-filter",
     "effect:cant-attack-and-untargetable-two-turns",
     "filter:target-blocked-by-other-target",
+    "filter:mana-value-at-most-own-counters",
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",
