@@ -9334,3 +9334,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Embalm and eternalize as kinds of ability (2026-11-28).** `filter:has-embalm-or-eternalize`, `trigger:activates-embalm-or-eternalize`: `ActivatedAbility.keywordAbility`, set by `embalmAbility` / `eternalizeAbility`, read by `activates-ability.keywordAbility` and `hasKeyword: "embalm" | "eternalize"`. Vizier of the Anointed. Scaffolder template for the trigger. `test/embalm-eternalize-kinds.test.ts`.
 
 **A card you own of a name in each of several zones (2026-11-28).** `condition:owns-named-card-in-every-zone` needed no engine code: `all` of `cards-in-exile` and an `aggregate` count (each with `ownedBy: "you"`), `hand-size` and `cards-in-graveyard` (each with the `name` filter). Hedron Alignment. `test/owns-named-in-every-zone.test.ts`.
+
+**Dealt combat damage to a creature this turn (2026-11-28).** `filter:dealt-combat-damage-to-creature-this-turn`: the journal word `"dealt-combat-damage-to-creature"` (the `damage` entry now keeps `targetWas` for combat damage to a permanent too), read as a `journaled` clause. Thirsting Axe. `test/dealt-combat-damage-to-creature.test.ts`.

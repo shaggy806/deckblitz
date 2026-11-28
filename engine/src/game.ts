@@ -66909,8 +66909,13 @@ controlledBy,
         // A permanent dealt excess damage is kept as it was dealt it — whose
         // it was and what — for "an opponent's creature was dealt excess
         // damage this turn", though it dies (Rith, Liberated Primeval).
+        // So is one dealt combat damage, for what it was — "if equipped
+        // creature didn't deal combat damage to a creature this turn"
+        // (Thirsting Axe, `"dealt-combat-damage-to-creature"`).
         const hitWas =
-          hit !== undefined && (event.excess ?? 0) > 0 ? suspendComputedCache(() => this.takeLastKnown(hit.id)) : undefined;
+          hit !== undefined && ((event.excess ?? 0) > 0 || event.combat)
+            ? suspendComputedCache(() => this.takeLastKnown(hit.id))
+            : undefined;
         add({
           kind: "damage",
           ...(dealer !== undefined ? { player: dealer } : {}),

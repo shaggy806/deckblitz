@@ -6,6 +6,7 @@
     "effect:reveal-until-or-x-cards",
     "effect:return-if-sacrificed-this-way",
     "effect:top-n-of-graveyard-opponent-chooses",
+    "filter:dealt-combat-damage-to-creature-this-turn",
     "condition:owns-named-card-in-every-zone",
     "filter:has-embalm-or-eternalize",
     "trigger:activates-embalm-or-eternalize",

@@ -8080,7 +8080,12 @@ clause (section 9):
   `any` of the two with `who: "any-player"`; `what: "dealt-damage"` is
   each source `who` controlled that dealt any damage, once per stint: Case of
   the Burning Masks' "three or more sources you controlled dealt damage this
-  turn" (`atLeast: 3`); `what: "turned-face-up"`
+  turn" (`atLeast: 3`); `what: "dealt-combat-damage-to-creature"` the sources
+  that dealt combat damage to a permanent that was a creature as it was dealt
+  it — Thirsting Axe's "if equipped creature didn't deal combat damage to a
+  creature this turn" is `{ kind: "source", filter: { attachedTo: { type:
+  "creature", not: { journaled: { what: "dealt-combat-damage-to-creature" } } } } }`;
+  `what: "turned-face-up"`
   (Oblivious Bookworm), `what: "regenerated"` with `selfOnly` (Spiny Starfish,
   the `{ turnHistory }` amount's `selfOnly` its count); `what: "entered"` with
   `filter: { token: true }` is "tokens you created this turn" (rule 111.2 —

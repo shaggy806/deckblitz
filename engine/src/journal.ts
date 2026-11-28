@@ -514,6 +514,13 @@ export type JournalWhat =
    * controlled dealt damage this turn" (`atLeast: 3`). A spell and the
    * permanent it became are two sources. */
   | "dealt-damage"
+  /** The sources that dealt combat damage to a creature (rule 510.2), each
+   * once per stint however often: the list is the source's controller's as
+   * it dealt it, and the recipient was a creature as it was dealt it
+   * (`targetWas`), whatever has become of it since — Thirsting Axe's "if
+   * equipped creature didn't deal combat damage to a creature this turn" (a
+   * `journaled` clause under `not`). */
+  | "dealt-combat-damage-to-creature"
   /** A permanent was dealt excess damage (rule 120.4a), one entry a source
    * an event: the list is the permanent's controller's as it was dealt it,
    * and a filter reads the permanent as it was then, though it has died
@@ -672,6 +679,11 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
     distinct: true,
   },
   "dealt-damage": { kind: "damage", distinct: true },
+  "dealt-combat-damage-to-creature": {
+    kind: "damage",
+    match: (e) => e.combat !== undefined && e.target?.kind === "object" && e.targetWas?.types.includes("creature") === true,
+    distinct: true,
+  },
   "excess-damaged": {
     kind: "damage",
     whose: "recipient",
