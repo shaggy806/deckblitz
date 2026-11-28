@@ -6560,7 +6560,8 @@ export interface ActiveReplacement {
   /** Only damage from this source (rule 609.7 — "a source of your choice",
    * `prevent-damage-from-chosen-source`): that object in the stint it was
    * chosen in, or — chosen as a permanent spell — the permanent it became
-   * (`orBecomes`, 609.7a). `filter` is rechecked from `you`'s side when the
+   * (`orBecomes`, 609.7a), as is a `damage-rule`'s targeted spell ("prevent
+   * all damage target spell would deal this turn", 400.7c). `filter` is rechecked from `you`'s side when the
    * damage would be dealt: a red source that's turned blue isn't stopped,
    * and the shield isn't used up (609.7b). */
   readonly from?: {

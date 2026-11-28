@@ -50783,7 +50783,10 @@ controlledBy,
                 from: {
                   object: from.id,
                   zoneChangeCount: from.zoneChangeCount ?? 0,
-                  // A spell's damage is the spell's while it's on the stack.
+                  // A spell's damage is the spell's while it's on the stack,
+                  // and a permanent spell's prevention goes on to the
+                  // permanent it becomes (rule 400.7c — Shieldmage Elder).
+                  ...(from.zone === "stack" ? { orBecomes: true as const } : {}),
                   you: controller,
                 },
               }
