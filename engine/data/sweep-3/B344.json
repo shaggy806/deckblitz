@@ -53,6 +53,13 @@
    "tested": true
   },
   {
+   "name": "Cyclopean Tomb",
+   "files": [
+    "engine/src/cards/pool/cyclopean-tomb.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Dichotomancy",
    "files": [
     "engine/src/cards/pool/dichotomancy.ts"
@@ -74,9 +81,37 @@
    "tested": true
   },
   {
+   "name": "Fatal Lore",
+   "files": [
+    "engine/src/cards/pool/fatal-lore.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Feral Contest",
    "files": [
     "engine/src/cards/pool/feral-contest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Firestorm Phoenix",
+   "files": [
+    "engine/src/cards/pool/firestorm-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fold into Aether",
+   "files": [
+    "engine/src/cards/pool/fold-into-aether.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Foul Emissary",
+   "files": [
+    "engine/src/cards/pool/foul-emissary.ts"
    ],
    "tested": true
   },
@@ -109,6 +144,13 @@
    "tested": true
   },
   {
+   "name": "Hollow Specter",
+   "files": [
+    "engine/src/cards/pool/hollow-specter.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Hunt Down",
    "files": [
     "engine/src/cards/pool/hunt-down.ts"
@@ -116,9 +158,23 @@
    "tested": true
   },
   {
+   "name": "Illusionary Terrain",
+   "files": [
+    "engine/src/cards/pool/illusionary-terrain.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Infernal Denizen",
    "files": [
     "engine/src/cards/pool/infernal-denizen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kill-Suit Cultist",
+   "files": [
+    "engine/src/cards/pool/kill-suit-cultist.ts"
    ],
    "tested": true
   },
@@ -133,6 +189,20 @@
    "name": "Krovikan Vampire",
    "files": [
     "engine/src/cards/pool/krovikan-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lairwatch Giant",
+   "files": [
+    "engine/src/cards/pool/lairwatch-giant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lost Hours",
+   "files": [
+    "engine/src/cards/pool/lost-hours.ts"
    ],
    "tested": true
   },
@@ -249,6 +319,13 @@
    "tested": true
   },
   {
+   "name": "Splintering Wind",
+   "files": [
+    "engine/src/cards/pool/splintering-wind.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Spoils of War",
    "files": [
     "engine/src/cards/pool/spoils-of-war.ts"
@@ -270,6 +347,13 @@
    "tested": true
   },
   {
+   "name": "The Fallen",
+   "files": [
+    "engine/src/cards/pool/the-fallen.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Thirsting Axe",
    "files": [
     "engine/src/cards/pool/thirsting-axe.ts"
@@ -280,6 +364,13 @@
    "name": "Thought Dissector",
    "files": [
     "engine/src/cards/pool/thought-dissector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Virtual Assistant",
+   "files": [
+    "engine/src/cards/pool/virtual-assistant.ts"
    ],
    "tested": true
   },
@@ -301,6 +392,20 @@
    "name": "Wall of Caltrops",
    "files": [
     "engine/src/cards/pool/wall-of-caltrops.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worldheart Phoenix",
+   "files": [
+    "engine/src/cards/pool/worldheart-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worms of the Earth",
+   "files": [
+    "engine/src/cards/pool/worms-of-the-earth.ts"
    ],
    "tested": true
   },
