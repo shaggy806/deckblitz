@@ -308,6 +308,9 @@ function abilityCandidates(legal: ActivateAbilityLegal, player: PlayerId): Actio
     ...(legal.costOption !== undefined ? { costOption: legal.costOption } : {}),
     // The graveyard card an "exile … and pay its mana cost" names.
     ...(legal.costCard !== undefined ? { costCard: legal.costCard.card } : {}),
+    // The colour this offer is for: its `sacrifice.choices` may be only the
+    // permanents that make it (Benthic Explorers, Squandered Resources).
+    ...(legal.manaColors !== undefined ? { manaColors: legal.manaColors } : {}),
   };
   const combos = targetCombos(legal.targetOptions, MAX_TARGET_COMBOS, legal.targetSpecs);
   // A "−X" loyalty ability (rule 107.3a): X at its maximum spends every

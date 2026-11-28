@@ -7,6 +7,8 @@
 import { describe, expect, it } from "vitest";
 
 import type { Action } from "../actions.js";
+import { candidateActions } from "../bot/candidates.js";
+import { RandomController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { A, B, spawn, table } from "./harness.js";
@@ -61,11 +63,51 @@ describe("Benthic Explorers", () => {
     expect(game.state.objects[explorers].tapped).toBe(false);
   });
 
-  it("isn't offered with no tapped land opposite", () => {
+  it("isn't offered, and is refused, with no tapped land opposite (118.3)", () => {
     const { game } = table();
     const explorers = spawn(game, "Benthic Explorers");
-    spawn(game, "Forest", B);
+    const forest = spawn(game, "Forest", B);
+    spawn(game, "Grizzly Bears", B, { tapped: true }); // tapped, but no land
     expect(offersOf(game, explorers)).toEqual([]);
+    expect(() => activate(game, explorers, { sacrifice: forest, manaColors: ["G"] })).toThrow(/tapped permanents to untap|untapping/);
+    expect(game.state.objects[explorers].tapped).toBe(false);
+  });
+
+  it("an action naming no colour may untap any of them, for the first type it could produce", () => {
+    const { game } = table();
+    const explorers = spawn(game, "Benthic Explorers");
+    spawn(game, "Forest", B, { tapped: true });
+    const island = spawn(game, "Island", B, { tapped: true });
+    activate(game, explorers, { sacrifice: island });
+    expect(game.state.objects[island].tapped).toBe(false);
+    expect(pool(game)).toEqual(["U"]);
+  });
+
+  it("every offer, as the random controller and v2's candidates build it, can be dispatched", () => {
+    const board = () => {
+      const { game } = table();
+      const explorers = spawn(game, "Benthic Explorers");
+      spawn(game, "Forest", B, { tapped: true });
+      spawn(game, "Island", B, { tapped: true });
+      spawn(game, "Island", B, { tapped: true });
+      return { game, explorers };
+    };
+    const colors = offersOf(board().game, board().explorers).map((o) => o.manaColors?.[0]);
+    expect(colors.sort()).toEqual(["G", "U"]);
+    for (const build of ["random", "v2"] as const) {
+      for (const color of colors) {
+        for (const dice of [0, 0.99]) {
+          const { game, explorers } = board();
+          const offer = offersOf(game, explorers).find((o) => o.manaColors?.[0] === color)!;
+          const action =
+            build === "random"
+              ? new RandomController(A, () => dice).act({ state: game.state, player: A, legalActions: () => [offer] })
+              : candidateActions(offer, A)[0];
+          expect(() => game.dispatch(action)).not.toThrow();
+          expect(pool(game)).toEqual([color]);
+        }
+      }
+    }
   });
 
   it("makes no mana for a land that could produce none (106.7), still untapping it", () => {

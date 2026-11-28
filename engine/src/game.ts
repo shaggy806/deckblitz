@@ -28032,13 +28032,21 @@ export class Game {
   /** What a mana ability's one-permanent `untapOthers` cost may untap
    * (Benthic Explorers), for the offer whose pick is `manaColors`: with an
    * `untappedCouldProduce` mana, only those that could produce that pick
-   * (or, for no pick, nothing at all), as {@link sacrificedManaChoices}. */
+   * (or, for an empty pick, nothing at all), as {@link sacrificedManaChoices}.
+   * An action naming no pick at all (`manaColors` absent — the random
+   * controller's, one activated while paying) may untap any of them: the mana
+   * is then the first type it could produce (`addMana`'s fallback). */
   private untapManaChoices(player: PlayerId, ability: ActivatedAbility, manaColors: readonly ManaType[] | undefined): ObjectId[] {
     const cost = ability.cost.untapOthers;
     if (cost === undefined) return [];
     const candidates = this.untapCostCandidates(player, cost.filter);
     const effect = ability.effect;
-    if (effect?.kind !== "add-mana" || typeof effect.mana !== "object" || !("untappedCouldProduce" in effect.mana)) {
+    if (
+      manaColors === undefined ||
+      effect?.kind !== "add-mana" ||
+      typeof effect.mana !== "object" ||
+      !("untappedCouldProduce" in effect.mana)
+    ) {
       return candidates;
     }
     const pick = manaColors?.[0];

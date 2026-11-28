@@ -2180,6 +2180,9 @@ export class RandomController extends AutomaticController {
           ...(sac !== undefined && sac.choices.length > 0
             ? { sacrifice: sac.choices[this.pickIndex(sac.choices.length)] }
             : {}),
+          // The colour this offer is for, its `sacrifice.choices` perhaps
+          // only what makes it (Benthic Explorers). No draw: it's echoed.
+          ...(legal.manaColors !== undefined ? { manaColors: legal.manaColors } : {}),
           ...(legal.xCost !== undefined
             ? {
                 // `minX` is 0 but on an offer whose targets fix X, so every
