@@ -17652,6 +17652,33 @@ function counterIntoAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "If that spell is countered this way, its controller may put a creature
+  // card from their hand onto the battlefield." (Fold into Aether): the
+  // counter's `ifCountered`, done by the countered spell's controller.
+  const fromHand = /^if that spell is countered this way, its controller may put an? (creature|artifact|enchantment|land) card from their hand onto the battlefield\.$/i.exec(rider);
+  if (fromHand !== null) {
+    const type = fromHand[1].toLowerCase();
+    return {
+      effect: {
+        kind: "counter",
+        target: ctx.target("spell"),
+        ifCountered: {
+          kind: "as-player",
+          who: { controllerOf: 0 },
+          effect: {
+            kind: "look-and-choose",
+            zone: "hand",
+            min: 0,
+            max: 1,
+            destination: "battlefield",
+            leftover: "stay",
+            filter: { type },
+          },
+        },
+      },
+      used: 2,
+    };
+  }
   const suspended = /^if the spell is countered this way, exile it with (\w+) time counters on it instead of putting it into its owner's graveyard\.$/i.exec(rider);
   const counters = suspended === null ? undefined : NUMBERS[suspended[1].toLowerCase()];
   if (counters !== undefined && /^if it doesn't have suspend, it gains suspend\.$/i.test(sentences[i + 2] ?? "")) {

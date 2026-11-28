@@ -2,6 +2,7 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "condition:countered-this-way",
     "decision:choose-keyword-as-cost",
     "effect:each-player-puts-counter-on-chosen",
     "effect:return-died-cards-dealt-damage-by-source",

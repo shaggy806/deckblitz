@@ -21296,6 +21296,33 @@ describe("a countered spell's card put onto the battlefield", () => {
       intoIf: { typesAnyOf: ["artifact", "creature"] },
     });
   });
+
+  it("reads Fold into Aether's rider: the countered spell's controller may put a creature card from hand", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text:
+        "Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield.",
+    } as never) as unknown as Record<string, unknown>;
+    expect(face.targets).toEqual(["spell"]);
+    expect(face.effect).toEqual({
+      kind: "counter",
+      target: 0,
+      ifCountered: {
+        kind: "as-player",
+        who: { controllerOf: 0 },
+        effect: {
+          kind: "look-and-choose",
+          zone: "hand",
+          min: 0,
+          max: 1,
+          destination: "battlefield",
+          leftover: "stay",
+          filter: { type: "creature" },
+        },
+      },
+    });
+  });
 });
 
 describe("read ahead given to Sagas", () => {
