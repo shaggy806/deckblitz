@@ -5949,6 +5949,19 @@ export interface CardDefinition {
    */
   readonly minX?: number;
   /**
+   * The X of a spell with {X} in its mana cost **defined by its own text**,
+   * read as it's cast (rule 107.3c: the caster doesn't choose it) — Spoils of
+   * War's "X is the number of artifact and/or creature cards in an
+   * opponent's graveyard as you cast this spell". `amount` is read from the
+   * caster's side; with `ofAnOpponent` from each opponent's in turn (that
+   * opponent is "you" in it), the opponent being the caster's to name as it's
+   * cast, so X is any one of their values. The spell is offered once per X
+   * (`xCost.minX === maxX`), and any other X is refused. Being defined, X is
+   * that value however the spell is cast, free included (107.3b is for an X
+   * the text doesn't define).
+   */
+  readonly xIs?: { readonly amount: EffectAmount; readonly ofAnOpponent?: true };
+  /**
    * "This spell costs {1} more to cast for each target beyond the first"
    * (Fireball; Strive — Twinflame's {2}{R}): this cost, once per distinct
    * target after the first. A cost increase (rule 601.2f), so it's added to
@@ -7075,6 +7088,7 @@ const PRINTED_ABILITY: {
   maxX: (def) => def.maxX !== undefined,
   xSpendOnly: (def) => def.xSpendOnly !== undefined,
   minX: (def) => def.minX !== undefined,
+  xIs: (def) => def.xIs !== undefined,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
   targetCostIncrease: (def) => def.targetCostIncrease !== null,
@@ -7408,6 +7422,8 @@ interface CardDraft {
   xSpendOnly?: XSpendOnly;
   /** See {@link CardDefinition.minX}. */
   minX?: number;
+  /** See {@link CardDefinition.xIs}. */
+  xIs?: CardDefinition["xIs"];
   costPerExtraTarget?: string;
   /** See {@link CardDefinition.targetCostReduction}. */
   targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number; readonly reduceColored?: string };
@@ -7887,6 +7903,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
     ...(draft.xSpendOnly !== undefined ? { xSpendOnly: draft.xSpendOnly } : {}),
     ...(draft.minX !== undefined ? { minX: draft.minX } : {}),
+    ...(draft.xIs !== undefined ? { xIs: draft.xIs } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     ...(draft.chooseNumberOnEnter === true ? { chooseNumberOnEnter: true as const } : {}),
     ...(draft.chooseOnEnterAtRandom === true ? { chooseOnEnterAtRandom: true as const } : {}),

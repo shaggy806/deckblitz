@@ -6821,7 +6821,8 @@ export class Game {
                 ? def.minX
                 : 0;
       if (leastX === null) continue;
-      const xFloor: number = leastX;
+      // An X its text defines (Spoils of War): no lower than its least value.
+      const xFloor: number = Math.max(leastX, this.definedSpellX(player, card, def)?.[0] ?? 0);
       const xFilter =
         def.castModal === null &&
         (this.effectiveTargetSpecs(def, undefined, kicked, overload, player, card).some(targetSpecReadsX) ||
@@ -6855,7 +6856,15 @@ export class Game {
         def.additionalCost?.sacrifice !== undefined &&
         def.additionalCost.sacrificeCount === undefined &&
         filterReadsX(def.additionalCost.sacrifice);
-      if (pitchX) {
+      const definedXs = this.definedSpellX(player, card, def);
+      if (definedXs !== undefined) {
+        // "X is the number of … as you cast this spell" (Spoils of War, rule
+        // 107.3c): offered once per X the text can define, free or not.
+        const xs = definedXs.filter((x) => castsAtX(x));
+        if (xs.length === 0) continue;
+        perX = xs;
+        manaAffordable = true;
+      } else if (pitchX) {
         const pitch = def.alternativeCost!.exileFromHand!;
         const values = new Set<number>();
         for (const id of this.discardCandidates(player, pitch.filter, card)) {
@@ -24192,6 +24201,12 @@ export class Game {
     if (def.minX !== undefined && Math.floor(xValue) < def.minX) {
       return `X can't be ${Math.floor(xValue)} for ${def.name}`;
     }
+    // "X is the number of … as you cast this spell" (Spoils of War, rule
+    // 107.3c): its text's value, however it's cast.
+    const definedX = this.definedSpellX(player, cardId, def);
+    if (definedX !== undefined && !definedX.includes(Math.floor(xValue))) {
+      return `X can't be ${Math.floor(xValue)} for ${def.name}`;
+    }
     // "If you cast this spell this way, X can't be 0" (Light Up the Night's
     // flashback).
     const flashbackMinX = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.minX : undefined;
@@ -26423,6 +26438,8 @@ export class Game {
     );
     const hasX =
       parseManaCost(costString).x > 0 ||
+      // An X its text defines (Spoils of War, rule 107.3c), cast free or not.
+      def.xIs !== undefined ||
       def.additionalCost?.payLifeX === true ||
       def.additionalCost?.chooseNumber !== undefined ||
       casualtyReadsX(def) ||
@@ -59807,6 +59824,21 @@ controlledBy,
     const ctx = this.makeResolutionContext(sourceId, player, []);
     const ref = objectRefRead(xIs.manaValueOf, ctx);
     return ref === undefined ? null : [Math.max(0, ctx.manaValueOf(ref))];
+  }
+
+  /** The X a spell's own text defines (`CardDefinition.xIs`, rule 107.3c),
+   * as `player` would cast it now: every value it may be, least first —
+   * one per opponent's reading for `ofAnOpponent` (Spoils of War), none
+   * with no opponent left — or `undefined` when X is the caster's to choose. */
+  private definedSpellX(player: PlayerId, cardId: ObjectId, def: CardDefinition): readonly number[] | undefined {
+    const xIs = def.xIs;
+    if (xIs === undefined) return undefined;
+    const readers =
+      xIs.ofAnOpponent === true
+        ? this.state.turnOrder.filter((p) => p !== player && this.state.players[p]?.hasLost === false)
+        : [player];
+    const values = readers.map((p) => Math.max(0, this.costAmount(xIs.amount, p, cardId, cardId)));
+    return [...new Set(values)].sort((a, b) => a - b);
   }
 
   private costAmount(
