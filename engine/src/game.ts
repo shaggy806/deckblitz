@@ -56919,7 +56919,9 @@ controlledBy,
     const entering = Object.entries(this.state.objects[repId].counters).filter(([, n]) => n > 0);
     // One exiled instead (Hallowed Moonlight) is each of them: minted one by
     // one, none of them entering.
-    const exiledInstead = this.enterExilers(repId, controller, {}, true).length > 0;
+    // So does one that can't enter at all (rule 111.5): none is created.
+    const exiledInstead =
+      this.enterExilers(repId, controller, {}, true).length > 0 || this.enterProhibited(repId, () => controller, {}, true);
     delete this.state.objects[repId]; // the representative never really "exists" on its own
     if (exiledInstead || (existing === null && total < Game.STACK_ORIGIN_THRESHOLD)) return mintIndividually();
     noteCreated();
@@ -57073,6 +57075,16 @@ controlledBy,
       (this.state.tokensLeftBattlefield ??= []).push(id);
       invalidateComputedCache();
       if (tokenInstead.to === "library") this.shuffleLibraryOf(token.owner);
+      return id;
+    }
+    // "Lands can't enter the battlefield" (Worms of the Earth): a token that
+    // can't enter isn't created (rule 111.5). On no zone's list, it goes at
+    // the next state-based check, and `mintTokenBatch` leaves it out of what
+    // it made.
+    if (!skipBattlefield && this.enterProhibited(id, () => under, {}, true)) {
+      this.state.objects[id].zone = "exile";
+      (this.state.tokensLeftBattlefield ??= []).push(id);
+      invalidateComputedCache();
       return id;
     }
     // Either source of "enters tapped" is enough — the token's own replacement
@@ -76343,6 +76355,25 @@ controlledBy,
   }
 
   /**
+   * Whether a "can't enter the battlefield" prohibition keeps `id` out as it
+   * would enter under `under`. One reading the card where it is ("creature
+   * cards in graveyards" — Grafdigger's Cage) is read so; one `asEntering`
+   * ("lands can't enter the battlefield" — Worms of the Earth) reads the
+   * permanent it would be (rule 614.12, `judgedAsEntering`), a token being
+   * minted (`minted`) as it was made.
+   */
+  private enterProhibited(id: ObjectId, under: () => PlayerId, enter: EnterOptions = {}, minted = false): boolean {
+    const live = liveProhibitions(this.state, this.registry, "enter");
+    if (live.length === 0) return false;
+    if (live.some((p) => p.prohibition.asEntering !== true && reachesObject(this.state, this.registry, p, id))) return true;
+    const entering = live.filter((p) => p.prohibition.asEntering === true);
+    if (entering.length === 0) return false;
+    const look = (): boolean => entering.some((p) => reachesObject(this.state, this.registry, p, id));
+    if (this.state.objects[id].zone === "battlefield" && !minted) return look();
+    return this.judgedAsEntering(id, under(), enter, look);
+  }
+
+  /**
    * Who `id` enters under once "if a creature would enter the battlefield
    * under an opponent's control this turn, it enters under your control
    * instead" (Gather Specimens — `OthersEnterReplacement.underYou`) has
@@ -78862,8 +78893,21 @@ controlledBy,
     // it goes nowhere until it phases in.
     if (object.zone === "phased-out") return false;
     // "Creature cards in graveyards and libraries can't enter the battlefield"
-    // (Grafdigger's Cage): it stays where it is.
-    if (to === "battlefield" && objectProhibited(this.state, this.registry, "enter", id)) return false;
+    // (Grafdigger's Cage): it stays where it is. "Lands can't enter the
+    // battlefield" (Worms of the Earth) reads it as it would enter: a spell
+    // that can't, resolving, is put into its owner's graveyard instead (the
+    // card's ruling), and a token copy waiting to enter is never created
+    // (rule 111.5).
+    if (
+      to === "battlefield" &&
+      object.zone !== "battlefield" &&
+      this.enterProhibited(id, () => this.enteringUnder(id, enter.under ?? object.controller, enter), enter)
+    ) {
+      object.enterChoice = undefined;
+      if (object.zone === "stack") this.moveObjectUncached(id, "graveyard", {});
+      else if (object.isToken === true && object.zone === "outside") (this.state.tokensLeftBattlefield ??= []).push(id);
+      return false;
+    }
     // A token that has left the battlefield can't move to another zone or
     // come back onto it (rule 111.8): it stays where it is until state-based
     // actions end it (111.7). Tokens are minted straight onto the battlefield,

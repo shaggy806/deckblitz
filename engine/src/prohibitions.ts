@@ -243,7 +243,21 @@ export type Prohibition<W = ProhibitedPlayer> =
   | ({
       /** `"be-beamed-up"`: "can't be beamed up" (Marooned) — not returned for a
        * beam me up cost. */
-      readonly act: "untap" | "transform" | "phase-in" | "phase-out" | "enter" | "become-suspected" | "be-beamed-up";
+      readonly act: "untap" | "transform" | "phase-in" | "phase-out" | "become-suspected" | "be-beamed-up";
+    } & ObjectSide)
+  | ({
+      /** "Can't enter the battlefield." Without `asEntering`, `object` reads
+       * the card where it is ("creature cards in graveyards" — Grafdigger's
+       * Cage): it stays there. `asEntering`: the permanent it would be
+       * ("**lands** can't enter the battlefield" — Worms of the Earth), read
+       * as it would exist on the battlefield (rule 614.12, `judgedAsEntering`:
+       * a Clone entering as a copy of a land, a card entering transformed or
+       * face down). One kept out stays where it is; a permanent spell that
+       * can't enter as it resolves is put into its owner's graveyard (Worms
+       * of the Earth's ruling); a token that can't enter isn't created
+       * (rule 111.5). */
+      readonly act: "enter";
+      readonly asEntering?: true;
     } & ObjectSide)
   | ({
       /** "Can't be enchanted / equipped." `other`: "by other Auras".

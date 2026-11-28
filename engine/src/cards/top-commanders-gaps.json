@@ -10,6 +10,7 @@
     "effect:damage-players-source-damaged-this-game",
     "trigger:blocks-two-or-more",
     "trigger:sacrificed-for-emerge",
+    "replacement:lands-cant-enter",
     "decision:choose-keyword-as-cost",
     "effect:each-player-puts-counter-on-chosen",
     "effect:return-died-cards-dealt-damage-by-source",

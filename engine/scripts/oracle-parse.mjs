@@ -21662,6 +21662,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "play-land", who: who }], text: printed(raw) });
       continue;
     }
+    // "Lands can't enter the battlefield." (Worms of the Earth): read as the
+    // permanent would enter (`asEntering`, rule 614.12).
+    if (/^Lands can't enter the battlefield\.$/.test(line)) {
+      out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "enter", object: { type: "land" }, asEntering: true }], text: printed(raw) });
+      continue;
+    }
     // "Each opponent who controls more creatures than you can't cast creature
     // spells. The same is true for artifacts and enchantments." / "… more
     // lands than you can't play lands." (Ward of Bones): `{ who: "opponents",

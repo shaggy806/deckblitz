@@ -27330,4 +27330,14 @@ describe("unless an opponent pays, and graveyard cards to the library's bottom",
     });
     expect(face.complete).toBe(true);
   });
+
+  it("reads 'Lands can't enter the battlefield' as an enter prohibition read as it would enter (Worms of the Earth)", () => {
+    const face = parseFace({
+      name: "Test Worms",
+      type_line: "Enchantment",
+      oracle_text: "Players can't play lands.\nLands can't enter the battlefield.",
+    });
+    expect(face.static[1]).toMatchObject({ prohibits: [{ act: "enter", object: { type: "land" }, asEntering: true }] });
+    expect(face.complete).toBe(true);
+  });
 });
