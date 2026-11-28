@@ -6,9 +6,10 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-27 — A friend's notes on the Slicer bot: ten habits, checked against 53 kept games
 
-Status: open. One training scenario ("sacrifices Skirk Prospector for the third mana of Slicer")
-and eight local captures (`captures/2026-11-2*-<room>-t<turn>-alice.json`), all wrong on today's
-build. One note is already fixed (Sword of the Chosen), one isn't a misplay (Fountainport).
+Status: 1, 2 and 3 fixed 2026-11-28 (six gate scenarios, each failing without its fix; the two
+captures for them read right); 4 to 9 open, each with a local capture
+(`captures/2026-11-2*-<room>-t<turn>-alice.json`) that reads wrong. One note was already fixed
+(Sword of the Chosen), one isn't a misplay (Fountainport).
 
 The same friend's notes, taken over a day of watching bots play their Slicer deck. Checked on the
 53 kept games where every seat was a bot and alice's had the deck (`games/2026-11-27`,
@@ -26,10 +27,14 @@ Squelcher's death is worth more than the conversion: −7.76 at carol against �
 player. The front face reads as the same creature with 2 more toughness. Nothing counts that it
 attacks on every other player's turn (the evaluation counts a handed-round creature as a threat
 to the others, `features.ts` "roams", and as its owner's body, no more), and double strike is one
-keyword like first strike. Capture `2026-11-28-YK9SU-t8-alice`. **Likely fix:** price our own
-handed-round creature by the attacks it makes for us each round (power, twice with double strike,
-at each other player's turn), so converting is worth what it brings. Might change: how eagerly
-Slicer is handed over at each upkeep, which reads the same board.
+keyword like first strike. Capture `2026-11-28-YK9SU-t8-alice`. **Fixed 2026-11-28:** a creature
+handed round the table is a value engine for its owner (`features.ts`'s `roamRate`, in
+`valueEngines`): its combat damage, twice with double strike, on each opponent's turn, at four
+life a card and capped at the other engines' 1.5 cards a round, and nothing with one opponent
+left, where handing it over is an attack on ourselves. The simulated combat now reads −3.96 at
+an open player against −7.76, and the bot attacks bob. Scenario: "sends Slicer's Vehicle side at
+an open player, not at the one with a blocker". The same worth counts for an opponent's Slicer,
+so it also reads as more worth answering.
 
 **2. Welding Jar never spent on a Slicer another player holds.** CMZMH-1 turn 18: the player
 holding Slicer aimed Terror of the Peaks' trigger at it (on purpose: `onLoan`, a borrowed
@@ -45,9 +50,13 @@ the Jar at itself and at two of the holder's mana rocks, all equal to passing. `
 side of a harmful slot, and nothing puts our lent one on the right side of a helpful one, so it is
 ranked last. The evaluation is not the cause: it counts a handed-round creature as its owner's.
 This holds for every helpful effect (a pump, a protection, Maze of Ith), not the Jar alone.
-Captures `2026-11-27-CMZMH-t18-alice`, `2026-11-27-YPHL5-t17-alice`. **Likely fix:** in both
-places, a permanent we own that comes back to us (handed round, or `controlEndsAtCleanup`) is
-ours for a helpful slot. Keep the old rule for a pump that adds damage while it attacks us.
+Capture `2026-11-27-YPHL5-t17-alice`. **Fixed 2026-11-28:** `handed-round.ts`'s `lentOut`, a
+permanent we own that another player holds until end of turn or by a hand-round, is ours for a
+helpful slot in `opponentPump`, `rankTargets` and `onlyWrongSide`; one attacking us keeps the old
+rule, since a pump still hits us. Scenario: "regenerates its own Slicer with Welding Jar while
+another player holds it" (YPHL5's board; it fails with `opponentPump`'s half alone taken out).
+CMZMH-1 turned out to be no test: with the target scored, every line there still reads as lost,
+and alice did die that turn whatever she did, so its capture was dropped.
 
 **3. Skirk Prospector is never sacrificed for mana.** Cast in 5 of the 53 games, sacrificed in
 none. **Why:** the bot can't see the mana. The engine's payer takes `{T}` sources and a Treasure's
@@ -55,11 +64,18 @@ own sacrifice (`Game.manaSources`) and leaves "Sacrifice a Goblin: Add {R}" to t
 spell that needs it is never among the legal casts; the bot's `handManaLine` makes mana by hand
 only from a card in hand (Simian Spirit Guide) and from stored counters (Jeweled Amulet). In
 VUPJG-1 the one turn-one Prospector did get Slicer out on the second turn, through a Spirit Guide
-from hand. Training scenario: two Mountains and the Prospector, Slicer in the command zone; the
-bot does nothing. **Likely fix:** a third kind of by-hand source in `byHandMana`, a permanent's
-mana ability that sacrifices a creature, under the same test (it makes castable a spell of mana
-value 3 or more we would cast, `HAND_MANA_FLOOR`). Needs a rule for which creature goes where the
-cost is a choice: the strong decks' Krenko, Mob Boss list runs the Prospector too.
+from hand. **Fixed 2026-11-28:** a third kind of by-hand source in `byHandMana`
+(`controller.ts`'s `sacrificesFodderForMana`): a mana ability paid by sacrificing a permanent and
+not tapping, under the same test as the others (it makes castable a spell of mana value 3 or
+more we would cast), while the fodder is worth about a mana: a token, or a creature card of mana
+value 1 or less, and no commander. So Phyrexian Altar and an Eldrazi Spawn's own sacrifice are
+mana to the bots now too; the strong decks' Krenko, Mob Boss list runs the Prospector. Two more
+conditions came from a decision diff on the first cut, where Edgar Markov's bot fed Phyrexian
+Altar with a land still in hand: such a sacrifice waits for the land drop, and is made only for a
+spell bigger than any castable without it. Scenarios: "sacrifices Skirk Prospector for the third
+mana of Slicer", "sacrifices a token to Phyrexian Altar for the third mana of Slicer", "keeps a
+four-drop off Phyrexian Altar: one mana isn't worth a real creature" and "plays its land before
+Phyrexian Altar takes a token for the same mana".
 
 **4. A planeswalker's last loyalty spent the turn it arrives.** BKSBJ-1 turn 9: Jeska, Thrice
 Reborn cast on 1 loyalty and at once −1 for a Birds of Paradise and 1 at two players (−6.3 against

@@ -30,7 +30,7 @@
  * decision modules may use it too.
  */
 
-import { onLoan } from "./handed-round.js";
+import { lentOut, onLoan } from "./handed-round.js";
 import { insteadEffect } from "./replacements.js";
 import { combatRuleHelps, combatRuleSlots } from "./combat/rules.js";
 import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
@@ -2175,10 +2175,15 @@ export function rankTargets(
     // their turn: right for a harmful slot as well as a helpful one. With a
     // borrowed Slicer about to deal its last 3, Clan Defiance went at
     // another player's commander (a kept live game, 2026-11-22).
+    // And one of ours another player only has for now (`lentOut`) is ours
+    // to help: ranked as the holder's, the most valuable of the wrong side,
+    // it came last (kept games CMZMH-1 and YPHL5-1, 2026-11-27: Welding Jar
+    // out while the Slicer lent for the turn was destroyed).
     right:
       polarity === "take" ||
       sideOf(state, ref, me) === want ||
-      (polarity === "harm" && ref.kind === "object" && state.objects[ref.object] !== undefined && onLoan(registry, state.objects[ref.object], me)),
+      (polarity === "harm" && ref.kind === "object" && state.objects[ref.object] !== undefined && onLoan(registry, state.objects[ref.object], me)) ||
+      (polarity === "help" && ref.kind === "object" && state.objects[ref.object] !== undefined && lentOut(registry, state.objects[ref.object], me)),
     lethal: lethal(ref),
     lands: lands(ref),
     value: value(state, registry, ref),
@@ -2590,7 +2595,8 @@ export function pendingTargetDamage(state: GameState, registry: CardRegistry): r
  * avoid — a Murder with only your own creatures to kill, a counterspell with
  * only your own spell on the stack. Only asked of a slot whose spec leaves
  * the side open: one that names it ("target creature you control") is the
- * card choosing, not the bot.
+ * card choosing, not the bot. With `registry`, a permanent of ours another
+ * player only holds for now (`lentOut`) is on our side of a helpful slot.
  */
 export function onlyWrongSide(
   state: GameState,
@@ -2598,9 +2604,18 @@ export function onlyWrongSide(
   options: readonly TargetRef[],
   polarity: Polarity,
   spec: TargetSpec,
+  registry?: CardRegistry,
 ): boolean {
   if (polarity !== "harm" && polarity !== "help") return false;
   if (specSide(spec) !== "any" || options.length === 0) return false;
   const want = polarity === "harm" ? "opponent" : "own";
-  return options.every((ref) => sideOf(state, ref, me) !== want);
+  return options.every((ref) => sideOf(state, ref, me) !== want && !(polarity === "help" && lentOutRef(state, registry, ref, me)));
+}
+
+/** Whether `ref` is a permanent of `me`'s that another player only holds for
+ * now (`lentOut`); `false` without a registry to read it by. */
+export function lentOutRef(state: GameState, registry: CardRegistry | undefined, ref: TargetRef, me: PlayerId): boolean {
+  if (registry === undefined || ref.kind !== "object") return false;
+  const object = state.objects[ref.object];
+  return object !== undefined && lentOut(registry, object, me);
 }

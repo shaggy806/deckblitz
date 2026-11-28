@@ -48,7 +48,9 @@ import { polarityBias } from "../deck-bias.js";
 import { newColorsFirst } from "../land-colors.js";
 import { onlyUntilEndOfTurn } from "../effect-worth.js";
 import { goadersOf } from "../goad.js";
+import { lentOut } from "../handed-round.js";
 import {
+  lentOutRef,
   modalPolarities,
   offerDamage,
   offerPolarities,
@@ -3134,6 +3136,7 @@ export class EvalBotController extends HeuristicBotController {
       const polarity = polarities?.[i];
       if (target === null || (polarity !== "harm" && polarity !== "help")) return false;
       if (specSide(offer.targetSpecs[i]) !== "any") return false;
+      if (polarity === "help" && lentOutRef(state, this.cards, target, this.playerId)) return false;
       return sideOf(state, target, this.playerId) !== (polarity === "harm" ? "opponent" : "own");
     });
     return wrongSide ? null : following;
@@ -4562,13 +4565,25 @@ export class EvalBotController extends HeuristicBotController {
       const object = state.objects[target.object];
       if (object === undefined || object.zone !== "battlefield" || object.controller === me) continue;
       if (!computeCharacteristics(state, this.cards, target.object).types.includes("creature")) continue;
+      // Ours, and only held by them for now (`lentOut`: a Slicer handed over
+      // for the turn): no opponent's creature, at home or attacking someone
+      // else, and what lasts on it lasts for us. Read by its controller,
+      // "regenerate Slicer" was dropped before it was scored, and Welding
+      // Jar stayed out while the holder's Terror of the Peaks, and another's
+      // Supreme Verdict, destroyed it (kept games CMZMH-1 and YPHL5-1,
+      // 2026-11-27). One attacking us keeps the rule: a pump still hits us.
+      const lent = lentOut(this.cards, object, me);
       const attacking = object.attacking;
-      if (attacking === null) return "drop";
+      if (attacking === null) {
+        if (lent) continue;
+        return "drop";
+      }
       const defender =
         state.players[attacking as PlayerId] !== undefined
           ? (attacking as PlayerId)
           : state.objects[attacking as ObjectId]?.controller;
       if (defender === undefined || defender === me) return "drop";
+      if (lent) continue;
       if (goadersOf(state, this.cards, target.object).includes(me)) continue;
       if (onlyUntilEndOfTurn(this.offerEffect(legal))) continue;
       kills = defender;

@@ -1072,6 +1072,26 @@ function valueRate(registry: CardRegistry, def: CardDefinition, opponents: numbe
   const resources = perRound(valueRates(registry, def).resources, opponents) / RESOURCE_TOKENS_PER_CARD;
   return Math.min(VALUE_RATE_CAP, resources + drainRate(registry, def, opponents) / LIFE_PER_CARD);
 }
+
+/**
+ * What a creature **handed round the table** (`handedRound`: Slicer, Hired
+ * Muscle; Alexios) keeps taking from its owner's opponents on their own
+ * turns, in cards a round at {@link LIFE_PER_CARD}, capped as the other value
+ * engines are: its combat `damage`, twice with double strike, on each
+ * opponent's turn. Only while two opponents are left, so that whoever holds
+ * it has someone other than its owner to send it at; with one, handing it
+ * over is an attack on ourselves and nothing is counted.
+ *
+ * Without it such a creature was a body like any other: Slicer's front face
+ * read as its Vehicle face with 2 more toughness, so its bot sent the
+ * Vehicle at the one player with a blocker, whose death scored more than
+ * converting, seven times in 19 kept games (a friend's report, 2026-11-27;
+ * a round played out from YK9SU-1 turn 8 was 20 points apart).
+ */
+function roamRate(damage: number, doubleStrike: boolean, opponents: number): number {
+  if (opponents < 2) return 0;
+  return Math.min(VALUE_RATE_CAP, (Math.max(0, damage) * (doubleStrike ? 2 : 1) * opponents) / LIFE_PER_CARD);
+}
 /** What a vanilla creature scores over a noncreature permanent of the same
  * mana value before either does anything, less the mana value itself: on the
  * shared weights a creature of mana value N with N power and N toughness is
@@ -1786,6 +1806,11 @@ function playerFeaturesUncached(
         (c.keywords.has("defender") && !c.canAttackAsThoughNoDefender)
       ) {
         idlePower += damage * n;
+      }
+      // Ours wherever it is this turn (above), and attacking for us on every
+      // other player's turn: an engine by the life it takes (`roamRate`).
+      if (handedRound(registry, rulesTextName(object))) {
+        valueEngines += roamRate(damage, c.keywords.has("double-strike"), opponents) * n;
       }
     }
     if (isLand) landCount += n;

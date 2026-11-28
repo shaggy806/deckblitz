@@ -549,6 +549,42 @@ const evalBotFactory: BotFactory = (player, registry, weights) =>
  * stopped before it scores anything, as on a live board too big for one
  * rollout to fit the budget, so each window is answered by `unscoredCast`
  * (v1's cast, unscored, or a pass). Deterministic: the clock is a counter. */
+/** A turn with two Mountains, Phyrexian Altar ("Sacrifice a creature: Add
+ * one mana of any color") and one creature of ours, a token or a four-drop
+ * card, Slicer's {2}{R} one mana away in the command zone: whether the bot
+ * cast it, and what it did. With `landInHand`, a third Mountain to play. */
+function altarTurn(
+  weights: EvalWeights,
+  registry: CardRegistry,
+  makeBot: BotFactory,
+  token: boolean,
+  landInHand = false,
+): { readonly cast: boolean; readonly did: string } {
+  const game = Game.create({
+    seed: 3,
+    registry,
+    decks: [
+      { player: A, cards: Array<string>(40).fill("Mountain"), commanders: ["Slicer, Hired Muscle"] },
+      forestDeck(B),
+    ],
+  });
+  game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+  game.state.zones.perPlayer[A].hand = [];
+  lands(game, "Mountain", A, 2);
+  onBoard(game, "Phyrexian Altar", A);
+  const body = onBoard(game, "Hill Giant", A);
+  if (token) game.state.objects[body].isToken = true;
+  if (landInHand) game.debugSpawn("Mountain", A, "hand");
+  const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+  const did = taken
+    .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
+    .filter((s) => s !== "pass-priority");
+  return {
+    cast: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Slicer")),
+    did: `did: ${did.join(", ") || "nothing"}`,
+  };
+}
+
 function outOfTime(registry: CardRegistry, weights: EvalWeights): PlayerController {
   let clock = 0;
   return new EvalBotController(A, registry, { weights, timeBudgetMs: 1000, now: () => (clock += 2000) });
@@ -2886,6 +2922,33 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  {
+    name: "sends Slicer's Vehicle side at an open player, not at the one with a blocker",
+    rule: "Slicer, High-Speed Antagonist converts only by dealing combat damage to a player, and its front face attacks on every other player's turn: an open player comes before a 2/2 that would die blocking.",
+    run(weights, registry, makeBot) {
+      // From a kept live game (2026-11-27, a friend's report; YK9SU-1 turn
+      // 8): two opponents had no creature and the third an untapped Hexing
+      // Squelcher; the bot attacked the third, the Squelcher blocked and
+      // died, and Slicer stayed a Vehicle. Seven such attacks in 19 games.
+      // The attack search scores the board after a simulated combat, and
+      // there a dead 2/2 outscored the conversion (-7.76 against -9.96): the
+      // front face was the same body with 2 more toughness. Fixed: a
+      // creature handed round the table is an engine by the life it takes
+      // on the other players' turns (`features.ts`'s `roamRate`).
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Mountain", A, 3);
+      const slicer = onBoard(game, "Slicer, Hired Muscle", A);
+      game.state.objects[slicer].face = 1;
+      onBoard(game, "Grizzly Bears", C);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      const attackers = makeBot(A, registry, weights).declareAttackers(viewOf(game, A));
+      const at = attackers.find((a) => a.attacker === slicer)?.defender;
+      return {
+        passed: at === B || at === D,
+        detail: at === undefined ? "Slicer stayed home" : `Slicer attacked ${String(at)}`,
+      };
+    },
+  },
   ...(
     [
       // name, artifacts worth protecting on our side, cast it
@@ -2923,6 +2986,43 @@ const SCENARIOS: readonly BotScenario[] = [
       },
     }),
   ),
+  asked({
+    name: "regenerates its own Slicer with Welding Jar while another player holds it",
+    rule: "A permanent of ours another player holds until end of turn is ours to save: it comes back.",
+    position(registry) {
+      // From kept live games (2026-11-27, a friend's report; YPHL5-1 turn 17
+      // under Supreme Verdict, CMZMH-1 turn 18 at Terror of the Peaks'
+      // trigger): Slicer, handed over for the turn, was destroyed with
+      // Welding Jar out. `opponentPump` read the holder's creature at home
+      // and dropped "regenerate Slicer" before it was scored, and
+      // `rankTargets` put it last, behind the holder's mana rocks.
+      // The board is YPHL5-1's: the holder wraths with Slicer on its side.
+      const game = table(registry, [A, B, C], C);
+      const slicer = onBoard(game, "Slicer, Hired Muscle", A);
+      // Handed to Carol until end of turn, as its upkeep trigger does: a
+      // control effect, which the next recompute reads the controller from.
+      const held = game.state.objects[slicer];
+      held.controller = C;
+      held.controlEffects = [{ controller: C, timestamp: held.timestamp + 1, untilEndOfTurn: true }];
+      held.controlEndsAtCleanup = true;
+      const jar = onBoard(game, "Welding Jar", A);
+      // An artifact of our own for the Jar to be aimed at instead, as there.
+      onBoard(game, "Lost Jitte", A);
+      onBoard(game, "Sol Ring", C);
+      onBoard(game, "Arcane Signet", C);
+      lands(game, "Plains", C, 2);
+      lands(game, "Island", C, 2);
+      castAndPassTo(game, C, game.debugSpawn("Supreme Verdict", C, "hand"), A);
+      return {
+        game,
+        player: A,
+        judge(action) {
+          const saved = action.type === "activate-ability" && action.source === jar && firstTarget(action) === slicer;
+          return { passed: saved, detail: `chose ${describeAction(action)}` };
+        },
+      };
+    },
+  }),
   ...(
     [
       ["cracks Sakura-Tribe Elder at the end of the turn before its own", D, true],
@@ -9013,17 +9113,18 @@ const SCENARIOS: readonly BotScenario[] = [
   },
   {
     name: "sacrifices Skirk Prospector for the third mana of Slicer",
-    kind: "training",
     rule: "A mana ability that sacrifices a creature is mana (rule 605.1a): two Mountains and Skirk Prospector are the {2}{R} of More Than Meets the Eye.",
     run(weights, registry, makeBot) {
       // Reported from live games (2026-11-27, a friend's Slicer deck): Skirk
       // Prospector ("Sacrifice a Goblin: Add {R}") is there for a turn-one
       // Prospector into a turn-two Slicer, and the bot "never pops it for
-      // mana": cast in 5 of 53 kept games and never sacrificed. The auto-payer leaves a
-      // mana ability that sacrifices to the player (`Game.manaSources` takes
-      // a `{T}` source, and a Treasure's own sacrifice), so the cast is never
-      // among the legal ones, and `handManaLine` makes by hand only a hand
-      // card's mana and a permanent's stored counters.
+      // mana": cast in 5 of 53 kept games and never sacrificed. The
+      // auto-payer leaves a mana ability that sacrifices to the player
+      // (`Game.manaSources` takes a `{T}` source, and a Treasure's own
+      // sacrifice), so the cast was never among the legal ones, and
+      // `handManaLine` made by hand only a hand card's mana and a
+      // permanent's stored counters. Fixed: it also sacrifices fodder worth
+      // about a mana (`sacrificesFodderForMana`).
       const game = Game.create({
         seed: 3,
         registry,
@@ -9044,6 +9145,35 @@ const SCENARIOS: readonly BotScenario[] = [
         passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Slicer")),
         detail: `did: ${did.join(", ") || "nothing"}`,
       };
+    },
+  },
+  {
+    name: "sacrifices a token to Phyrexian Altar for the third mana of Slicer",
+    rule: "A token is fodder for a sacrifice's mana: it is worth about the mana it makes.",
+    run(weights, registry, makeBot) {
+      const turn = altarTurn(weights, registry, makeBot, true);
+      return { passed: turn.cast, detail: turn.did };
+    },
+  },
+  {
+    name: "keeps a four-drop off Phyrexian Altar: one mana isn't worth a real creature",
+    rule: "Fodder for a sacrifice's mana is a token or a creature card of mana value 1 or less, never a creature that cost four.",
+    run(weights, registry, makeBot) {
+      // What the sacrifice by hand mustn't cost (`sacrificesFodderForMana`):
+      // with any creature as fodder the bot gave a Hill Giant for the {R}.
+      const turn = altarTurn(weights, registry, makeBot, false);
+      return { passed: !turn.cast && !turn.did.includes("activate-ability"), detail: turn.did };
+    },
+  },
+  {
+    name: "plays its land before Phyrexian Altar takes a token for the same mana",
+    rule: "A land drop comes before a sacrifice for mana: it may pay for the same spell.",
+    run(weights, registry, makeBot) {
+      // From a decision diff (2026-11-28): with the sacrifice taken by hand
+      // at the turn's first window, Edgar Markov's bot gave a creature to
+      // Phyrexian Altar with Savai Triome still in hand.
+      const turn = altarTurn(weights, registry, makeBot, true, true);
+      return { passed: turn.cast && !turn.did.includes("activate-ability"), detail: turn.did };
     },
   },
   {

@@ -4568,7 +4568,7 @@ export class HeuristicBotController extends AutomaticController {
       // a choice to point at nothing.
       const skip =
         isOptionalSpec(specs[i]) &&
-        onlyWrongSide(state, this.playerId, fillable, polarity, specs[i]);
+        onlyWrongSide(state, this.playerId, fillable, polarity, specs[i], this.registry);
       picked.push(skip ? null : (best ?? null));
     }
     return picked;
@@ -4597,7 +4597,7 @@ export class HeuristicBotController extends AutomaticController {
     return offer.targetOptions.some(
       (options, i) =>
         !isOptionalSpec(offer.targetSpecs[i]) &&
-        onlyWrongSide(state, this.playerId, options, polarities[i] ?? "either", offer.targetSpecs[i]),
+        onlyWrongSide(state, this.playerId, options, polarities[i] ?? "either", offer.targetSpecs[i], this.registry),
     );
   }
 
@@ -4623,6 +4623,7 @@ export class HeuristicBotController extends AutomaticController {
                 options,
                 byMode?.[i]?.[slot] ?? "either",
                 cm.modes[i].targetSpecs[slot],
+                this.registry,
               ),
           ),
       );
@@ -6366,6 +6367,27 @@ export class HeuristicBotController extends AutomaticController {
     });
     const spent = new Set<ObjectId>([...fromHand.map((ways) => ways[0].source), ...rocks.map((o) => o.card)]);
     const castable = new Set(now.flatMap((o) => (o.kind === "cast-spell" ? [o.card] : [])));
+    // **A source that costs a permanent** (`sacrificesFodderForMana`) asks
+    // more than a card in hand does, since its fodder is there every turn.
+    // It waits for the land drop, which may pay for the same spell: Edgar
+    // Markov's bot gave a creature to Phyrexian Altar with Savai Triome
+    // still in hand (a decision diff, 2026-11-28). And it is for a bigger
+    // spell than any we could cast without it, not one more spell.
+    const fodder = new Set<ObjectId>();
+    for (const [offer] of fromHand) {
+      const cost = this.registry.get(offer.cardName).activated?.[offer.abilityIndex]?.cost;
+      if (state.objects[offer.source]?.zone === "battlefield" && cost?.sacrifice !== undefined) fodder.add(offer.source);
+    }
+    const landToPlay = now.some((o) => o.kind === "play-land");
+    let biggest: number | null = null;
+    const biggestCastable = (): number =>
+      (biggest ??= now.reduce(
+        (most, o) =>
+          o.kind === "cast-spell" && this.registry.has(o.cardName) && this.wouldCast(state, o)
+            ? Math.max(most, this.manaValueOf(state.objects[o.card]?.cardName ?? o.cardName))
+            : most,
+        0,
+      ));
     const order = state.turnOrder.filter((p) => !state.players[p].hasLost);
     const from = order.indexOf(me);
     const passes = [...order.slice(from), ...order.slice(0, from)].map((p) => passFor(p));
@@ -6374,6 +6396,8 @@ export class HeuristicBotController extends AutomaticController {
     // only ever tried for its first colour, white, and a second step was
     // the same Mine for blue, which the engine refuses.
     for (const line of this.byHandLines(state, fromHand)) {
+      const sacrifices = line.some((step) => step.type === "activate-ability" && fodder.has(step.source));
+      if (sacrifices && landToPlay) continue;
       const steps = [...rockSteps, ...line];
       const after = view.legalActionsAfter(steps);
       if (after === null || after === undefined) continue;
@@ -6386,6 +6410,7 @@ export class HeuristicBotController extends AutomaticController {
           // By the card, not the face it would be cast as (a converted Slicer's
           // back face has no cost of its own).
           this.manaValueOf(state.objects[a.card]?.cardName ?? a.cardName) >= HAND_MANA_FLOOR &&
+          (!sacrifices || this.manaValueOf(state.objects[a.card]?.cardName ?? a.cardName) > biggestCastable()) &&
           this.wouldCast(state, a),
       );
       if (gained === undefined) continue;
@@ -6411,13 +6436,44 @@ export class HeuristicBotController extends AutomaticController {
       const left =
         object.zone === "hand"
           ? activatesFrom(ability, "hand")
-          : object.zone === "battlefield" && object.controller === this.playerId && paysWithStoredCounters(ability);
+          : object.zone === "battlefield" &&
+            object.controller === this.playerId &&
+            (paysWithStoredCounters(ability) || this.sacrificesFodderForMana(state, o, ability));
       if (!left) continue;
       const ways = bySource.get(o.source);
       if (ways === undefined) bySource.set(o.source, [o]);
       else ways.push(o);
     }
     return [...bySource.values()];
+  }
+
+  /**
+   * Whether `offer` is a mana ability paid by **sacrificing a permanent and
+   * not tapping** (Skirk Prospector's "Sacrifice a Goblin: Add {R}", Blood
+   * Pet's own), with fodder worth about a mana to pay it: a token, or a
+   * creature card of mana value 1 or less (not a Sol Ring to Krark-Clan
+   * Ironworks), and no commander. The payer takes a `{T}` source
+   * and a Treasure's sacrifice and leaves this one to the player
+   * (`Game.manaSources`), so a spell that needs it was never among the legal
+   * casts: Skirk Prospector, there for a turn-one Prospector into a turn-two
+   * Slicer, was cast in 5 of 53 kept games and never sacrificed (a friend's
+   * report, 2026-11-27). What is sacrificed is `toActivateAbility`'s pick
+   * (`cheapestFodder`), read here the same way.
+   */
+  private sacrificesFodderForMana(state: GameState, offer: ActivateAbilityLegal, ability: ActivatedAbility): boolean {
+    const cost = ability.cost;
+    if (cost.sacrifice === undefined || cost.tap) return false;
+    const choices = offer.sacrifice?.choices ?? [];
+    const fodder = cost.sacrifice === "self" ? offer.source : choices.length > 0 ? this.cheapestFodder(state, choices, offer.source) : undefined;
+    const object = fodder === undefined ? undefined : state.objects[fodder];
+    if (object === undefined || object.isCommander) return false;
+    if (object.isToken) return true;
+    const name = printedCardName(object);
+    return (
+      this.registry.has(name) &&
+      this.registry.get(name).types.includes("creature") &&
+      this.manaValueOf(name) <= FODDER_MANA_VALUE
+    );
   }
 
   /**
@@ -6967,6 +7023,9 @@ const TAKE_SHARE = 0.75;
 const HAND_MANA_FLOOR = 3;
 /** The most hand mana abilities one line spends. */
 const HAND_MANA_MOST = 3;
+/** The most mana value a creature card has to be sacrificed for mana by hand
+ * (`sacrificesFodderForMana`): about what the mana is worth. */
+const FODDER_MANA_VALUE = 1;
 /** The power our creatures need together before mass land destruction is
  * ours to cast (`holdsLandWipe`): a clock that ends the game it leaves. */
 const LAND_WIPE_POWER = 6;

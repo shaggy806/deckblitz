@@ -1450,6 +1450,50 @@ Not built, in `BACKLOG.md`: the same for removal (Anguished Unmaking for the tri
 the other instants that could wait for the end of the turn before ours (card draw, a
 creature with flash).
 
+### A creature handed round the table, and mana that costs a creature (2026-11-28)
+
+A friend's notes on the bot playing their Slicer deck, checked on 53 kept games
+(`docs/bot-misplays.md`). The three that cost most were all a read by controller or by
+keyword where the card's own text says more, and none was a weight:
+
+- **A handed-round creature is an engine for its owner** (`features.ts`'s `roamRate`, in
+  `valueEngines`). Slicer, Hired Muscle attacks on every other player's turn; the evaluation
+  counted it as its owner's body and as a threat to the others, and nothing for those attacks.
+  So Slicer's Vehicle face, which converts only by dealing combat damage to a player, was sent
+  at whoever the table arithmetic preferred, blocker or not: a dead 2/2 outscored the
+  conversion. Now its combat damage, twice with double strike, on each opponent's turn, at four
+  life a card under the engines' cap, and nothing with one opponent left (handed over then, it
+  attacks us). It counts for an opponent's roamer too, which is the same card being worth
+  answering.
+- **A permanent of ours another player holds is ours to help** (`handed-round.ts`'s `lentOut`).
+  `opponentPump`, the rule that an opponent's creature is helped only while it attacks someone
+  else, and the target ranking both read the controller, so Welding Jar never regenerated a
+  Slicer handed over for the turn. `onLoan` already said the mirror for harm.
+- **A sacrifice can be mana** (`controller.ts`'s `sacrificesFodderForMana`, a third source for
+  `handManaLine`). The payer leaves an untapped "sacrifice: add mana" ability to the player, so
+  Skirk Prospector, Phyrexian Altar and an Eldrazi Spawn made nothing for a bot. Taken by hand
+  now, under the hand-mana test, while the fodder is a token or a creature card of mana value 1
+  or less. Its fodder is there every turn, where a Spirit Guide is one card, so it asks more:
+  the land drop comes first, and the spell has to be bigger than any castable without it. One
+  activation a source a look, so a Prospector with three Goblins still makes one mana.
+
+Six gate scenarios, each failing with its fix taken out where a silent pass was possible (the
+Welding Jar board passed by accident until the Slicer in it was really held: a controller
+written straight onto the object is undone by the next recompute, so a held permanent in a
+scenario needs its `controlEffects` too).
+
+A decision diff on the first cut (the friend's list beside Krenko, Edgar Markov and Giada, four
+games stopped between turns 9 and 33) had eight disagreements. Four were the Vehicle aimed
+again: the one read on its board went at the player with no creature where the old bot chose
+one with an untapped 2/2, and another at a player where it chose a planeswalker, which converts
+nothing. One was an opponent now blocking the Vehicle, which stops the conversion, and one a
+player holding Slicer who sent it and its own attacker at different players (not read). One was
+the Prospector sacrificed to recast Slicer where the old bot put Tenza, Godo's Maul on a board
+with nothing to carry it but the Prospector. The eighth was the fault the two
+extra conditions above fix: Edgar Markov's bot fed Phyrexian Altar before playing its land. Not
+run again after them. Whether to hand Slicer over, the question the new worth could most have
+bent, was answered as before at all 102 of its askings in fourteen kept games.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

@@ -61,3 +61,15 @@ export function onLoan(registry: CardRegistry, object: GameObject, me: PlayerId)
   if (object.zone !== "battlefield" || object.controller !== me || object.owner === me) return false;
   return object.controlEndsAtCleanup || handedRound(registry, rulesTextName(object));
 }
+
+/**
+ * {@link onLoan} from the owner's seat: whether `object`, on the battlefield
+ * under another player's control, is `me`'s and comes back — held by them
+ * until end of turn (a Slicer handed over for the turn), or handed round
+ * (Alexios). Whoever holds it, saving it saves `me`'s permanent, so help of
+ * `me`'s is rightly aimed at it.
+ */
+export function lentOut(registry: CardRegistry, object: GameObject, me: PlayerId): boolean {
+  if (object.zone !== "battlefield" || object.owner !== me || object.controller === me) return false;
+  return object.controlEndsAtCleanup || handedRound(registry, rulesTextName(object));
+}
