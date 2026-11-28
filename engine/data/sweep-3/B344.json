@@ -1,0 +1,325 @@
+{
+ "batch": 344,
+ "status": "done",
+ "ranks": "author-top-cards overnight, 2026-11-28 from 01:20 (the user: work on the bot notes for the night, then this, with Opus 5.5 agents in place of Fable ones): the laned keys past EDHREC rank 26,300 in rank order, built by worktree agents in six lanes (build-family's overnight lanes loop, five at once), skipping the majors and the cards waiting on the user. Laned to rank 32,700 first (118 keys).",
+ "authored": [
+  {
+   "name": "Aquamorph Entity",
+   "files": [
+    "engine/src/cards/pool/aquamorph-entity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battlefield Scrounger",
+   "files": [
+    "engine/src/cards/pool/battlefield-scrounger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benthic Explorers",
+   "files": [
+    "engine/src/cards/pool/benthic-explorers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chromatic Armor",
+   "files": [
+    "engine/src/cards/pool/chromatic-armor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clarion Ultimatum",
+   "files": [
+    "engine/src/cards/pool/clarion-ultimatum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corrosion",
+   "files": [
+    "engine/src/cards/pool/corrosion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crown of Convergence",
+   "files": [
+    "engine/src/cards/pool/crown-of-convergence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dichotomancy",
+   "files": [
+    "engine/src/cards/pool/dichotomancy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Errant Minion",
+   "files": [
+    "engine/src/cards/pool/errant-minion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eye of Doom",
+   "files": [
+    "engine/src/cards/pool/eye-of-doom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feral Contest",
+   "files": [
+    "engine/src/cards/pool/feral-contest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaea's Liege",
+   "files": [
+    "engine/src/cards/pool/gaeas-liege.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glyph of Delusion",
+   "files": [
+    "engine/src/cards/pool/glyph-of-delusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gurzigost",
+   "files": [
+    "engine/src/cards/pool/gurzigost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hedron Alignment",
+   "files": [
+    "engine/src/cards/pool/hedron-alignment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunt Down",
+   "files": [
+    "engine/src/cards/pool/hunt-down.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infernal Denizen",
+   "files": [
+    "engine/src/cards/pool/infernal-denizen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Knight of Valor",
+   "files": [
+    "engine/src/cards/pool/knight-of-valor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krovikan Vampire",
+   "files": [
+    "engine/src/cards/pool/krovikan-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mind Extraction",
+   "files": [
+    "engine/src/cards/pool/mind-extraction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oculus Whelp",
+   "files": [
+    "engine/src/cards/pool/oculus-whelp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Peace Talks",
+   "files": [
+    "engine/src/cards/pool/peace-talks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Grimoire",
+   "files": [
+    "engine/src/cards/pool/phyrexian-grimoire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phyrexian Splicer",
+   "files": [
+    "engine/src/cards/pool/phyrexian-splicer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Power Leak",
+   "files": [
+    "engine/src/cards/pool/power-leak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Retriever Phoenix",
+   "files": [
+    "engine/src/cards/pool/retriever-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rhystic Scrying",
+   "files": [
+    "engine/src/cards/pool/rhystic-scrying.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rock Hydra",
+   "files": [
+    "engine/src/cards/pool/rock-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roiling Horror",
+   "files": [
+    "engine/src/cards/pool/roiling-horror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scarwood Bandits",
+   "files": [
+    "engine/src/cards/pool/scarwood-bandits.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scrying Glass",
+   "files": [
+    "engine/src/cards/pool/scrying-glass.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shapeshifter's Marrow",
+   "files": [
+    "engine/src/cards/pool/shapeshifters-marrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shieldmage Elder",
+   "files": [
+    "engine/src/cards/pool/shieldmage-elder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shifty Doppelganger",
+   "files": [
+    "engine/src/cards/pool/shifty-doppelganger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Sculptor",
+   "files": [
+    "engine/src/cards/pool/soul-sculptor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spoils of War",
+   "files": [
+    "engine/src/cards/pool/spoils-of-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stronghold Gambit",
+   "files": [
+    "engine/src/cards/pool/stronghold-gambit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tephraderm",
+   "files": [
+    "engine/src/cards/pool/tephraderm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thirsting Axe",
+   "files": [
+    "engine/src/cards/pool/thirsting-axe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Dissector",
+   "files": [
+    "engine/src/cards/pool/thought-dissector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vizier of the Anointed",
+   "files": [
+    "engine/src/cards/pool/vizier-of-the-anointed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voodoo Doll",
+   "files": [
+    "engine/src/cards/pool/voodoo-doll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of Caltrops",
+   "files": [
+    "engine/src/cards/pool/wall-of-caltrops.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zombie Boa",
+   "files": [
+    "engine/src/cards/pool/zombie-boa.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Drought",
+   "needs": [
+    "static:additional-cost-per-mana-symbol"
+   ],
+   "size": "major",
+   "why": "B344, costs-mana lane: its spell half fits spellSacrificeParts, but \"activated abilities cost an additional 'Sacrifice a Swamp' for each {B} in their costs\" reaches mana abilities, which need a sacrifice inside a mana payment — the window Rhystic Cave's cost:pay-unless-inside-mana-ability waits on — and ~20 sacrificeParts sites for the rest. A major for the user, with Rhystic Cave."
+  }
+ ]
+}
