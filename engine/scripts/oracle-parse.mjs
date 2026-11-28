@@ -15373,8 +15373,27 @@ export function parseEffect(text, outer) {
     // Volcanic Offering): read without the choice, then that slot marked as
     // an opponent's (`opponentChoosesTargets` — rule 601.2c).
     const theirs = rhystic === null && outer.opponentChoosesTargets !== undefined ? opponentChoiceIn(sentence) : null;
+    // "Then if any player pays {2}, discard three cards" (Rhystic Scrying):
+    // the same question with the effect on paying — the option's `ifPaid`,
+    // the payer's effect, so "you" there is the spell's controller.
+    const ifPays = rhystic === null && theirs === null ? /^(?:Then )?if any player pays (\{\d+\}), (.+)\.$/i.exec(sentence) : null;
+    const paidInner = ifPays === null ? null : parseSentence(`${ifPays[2][0].toUpperCase()}${ifPays[2].slice(1)}.`, sentenceCtx);
+    const caster = (spec) =>
+      spec !== null && (spec.kind === "discard" || spec.kind === "draw") && (spec.target ?? spec.who ?? "you") === "you"
+        ? { ...spec, ...(spec.kind === "discard" ? { target: { controllerOf: "source" } } : { who: { controllerOf: "source" } }) }
+        : null;
+    const paid = caster(paidInner);
     let effect =
-      theirs !== null
+      ifPays !== null
+        ? paid === null
+          ? null
+          : {
+              kind: "unless",
+              chooser: "any-player",
+              options: [{ pay: ifPays[1], text: `Pay ${ifPays[1]}`, ifPaid: paid }],
+              otherwise: { kind: "sequence", effects: [] },
+            }
+        : theirs !== null
         ? parseSentence(theirs.sentence, sentenceCtx)
         : rhystic === null
         ? parseSentence(sentence, sentenceCtx)

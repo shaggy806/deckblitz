@@ -21803,6 +21803,29 @@ describe("a cost's X defined by the ability", () => {
   });
 });
 
+describe("if any player pays", () => {
+  it("reads Rhystic Scrying whole: the payment makes the caster discard", () => {
+    const face = parseFace({
+      name: "Test Scrying",
+      type_line: "Sorcery",
+      oracle_text: "Draw three cards. Then if any player pays {2}, discard three cards.",
+    });
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 3 },
+        {
+          kind: "unless",
+          chooser: "any-player",
+          options: [{ pay: "{2}", text: "Pay {2}", ifPaid: { kind: "discard", target: { controllerOf: "source" }, amount: 3 } }],
+          otherwise: { kind: "sequence", effects: [] },
+        },
+      ],
+    });
+    expect(face.complete).toBe(true);
+  });
+});
+
 describe("a granted optional cost of any amount of mana", () => {
   it("reads Chorus of the Conclave's whole line", () => {
     const face = parseFace({

@@ -3295,7 +3295,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `otherwise`), `"chosen-player"` (Energy Vortex), `{ controllerOf }`
   (Torment of Venom) — `{ anyOf: <scope> }`, each of them in turn order until
   one takes it ("**any other player** may pay": Ice Cave, whose `otherwise` is
-  empty and whose counter is the option's `ifPaid`), or
+  empty and whose counter is the option's `ifPaid`; Rhystic Scrying's "then
+  **if any player pays {2}**, discard three cards" the same over
+  `"any-player"`, the discard's `target: { controllerOf: "source" }` since
+  `ifPaid` is the payer's effect), or
   `"you"` — The Gitrog Monster's "sacrifice ~ unless **you** sacrifice a
   land" (`otherwise: { kind: "sacrifice-source" }`), which unlike a `may`
   with an `else` isn't offered without a land to sacrifice. Each
