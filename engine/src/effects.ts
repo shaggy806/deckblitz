@@ -5064,6 +5064,12 @@ export type EffectSpec =
        */
       readonly kind: "reveal-hand";
       readonly who: PlayerScope | number | PlayerRef;
+      /** Only the cards of the hand matching this, read as the effect
+       * applies: Stronghold Gambit's "then each player reveals **their chosen
+       * card**" is `{ thisWay: "chosen" }` after a hidden `look-and-choose`
+       * of each hand (`destination: "stay"`). A player with none reveals
+       * nothing. */
+      readonly only?: CardFilter;
     }
   | {
       /** Return everything this effect's source exiled with
@@ -5442,7 +5448,12 @@ export type EffectSpec =
        * the top card of their library. If all cards revealed this way are
        * creature cards, put those cards onto the battlefield under their
        * owners' control" (a `reveal-top` `who: "each-player"`, its `then` a
-       * `conditional` on no non-creature card revealed). */
+       * `conditional` on no non-creature card revealed). Or still in the
+       * hand it was revealed from: Stronghold Gambit's "the owner of each
+       * creature card revealed this way with the lowest mana value puts it
+       * onto the battlefield" (after a `reveal-hand` `only`), the `filter`'s
+       * `manaValue` an `{ amount }` operand — an `aggregate: "min"` `in:
+       * { thisWay: "revealed", who: "each-player" }` — read as the resolution's. */
       readonly revealed?: true;
     }
   | {
@@ -14573,8 +14584,9 @@ export interface EffectApi {
    * `filter`, every card in it matching that; with `reveal`, the whole hand
    * is revealed first (rule 701.20a). */
   discardHand(player: PlayerId, filter?: CardFilter, reveal?: boolean): void;
-  /** `player` reveals their whole hand (rule 701.20a) — `reveal-hand`. */
-  revealHand(player: PlayerId): void;
+  /** `player` reveals their whole hand (rule 701.20a) — `reveal-hand` — or,
+   * with `only`, just its cards matching that (`reveal-hand`'s `only`). */
+  revealHand(player: PlayerId, only?: CardFilter): void;
   gainLife(player: PlayerId, amount: number): void;
   loseLife(player: PlayerId, amount: number): void;
   /** `player` pays `amount` life as this resolves (rule 119.4: they lose that
@@ -22619,7 +22631,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     case "reveal-hand":
       for (const ref of scopedOrTargetedPlayers(spec.who, ctx)) {
-        if (ref.kind === "player") ctx.revealHand(ref.player);
+        if (ref.kind === "player") ctx.revealHand(ref.player, spec.only);
       }
       return;
     case "gain-life": {

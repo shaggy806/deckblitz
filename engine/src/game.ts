@@ -44789,9 +44789,10 @@ export class Game {
       playersCountedInScope: (who) =>
         this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, true, refs.triggerSpellController),
       discardHand: (player, filter, reveal) => this.discardWholeHand(player, filter, reveal, x),
-      revealHand: (player) => {
+      revealHand: (player, only) => {
         if (this.state.players[player]?.hasLost !== false) return;
-        this.revealCards(player, [...this.state.zones.perPlayer[player].hand], "hand");
+        const hand = this.state.zones.perPlayer[player].hand;
+        this.revealCards(player, only === undefined ? [...hand] : hand.filter((id) => context.cardMatches(id, only)), "hand");
       },
       // The object whose entering, dying, attacking… fired a trigger is read
       // as it last existed on the battlefield once it has left (rule 608.2h):
@@ -46515,7 +46516,9 @@ export class Game {
         // What this resolution exiled from a graveyard, a hand or a library —
         // not a permanent it exiled (a replacement's), and only a card still
         // in exile. Each one's "as this enters" choices first (rule 614.12).
-        // `revealed`: what it revealed, still in the library it was in.
+        // `revealed`: what it revealed, still in the library or hand it was
+        // in (Stronghold Gambit's chosen cards). The filter may read the
+        // resolution's amounts ("with the lowest mana value" among them).
         const returning = thisWayEntries(this.state, revealed === true ? "revealed" : "exiled", since)
           .filter((e) => !e.departed)
           .map((e) => e.object)
@@ -46523,9 +46526,9 @@ export class Game {
             const object = this.state.objects[id];
             return (
               object !== undefined &&
-              object.zone === (revealed === true ? "library" : "exile") &&
+              (revealed === true ? object.zone === "library" || object.zone === "hand" : object.zone === "exile") &&
               !object.isToken &&
-              (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: controller }))
+              (filter === undefined || context.cardMatches(id, filter))
             );
           });
         if (returning.some((id) => this.askEnterChoice(id, this.state.objects[id].owner))) return true;

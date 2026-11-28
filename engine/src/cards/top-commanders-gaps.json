@@ -8,6 +8,7 @@
     "static:control-transformed-permanent-condition",
     "filter:damage-source-is-spell",
     "amount:cards-in-target-hand-matching",
+    "decision:secret-card-choice-from-hand",
     "effect:search-same-name-as-chosen-permanents",
     "effect:reveal-until-or-x-cards",
     "effect:return-if-sacrificed-this-way",

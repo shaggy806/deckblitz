@@ -9242,3 +9242,9 @@ Each board's die comes up 4.
 ### Okk: four players, the creature with greater power may attack someone else
 - **Do:** In the declare-attackers prompt, send Okk at Bob and Shivan Dragon at Carol, and attack.
 - **Expect:** No line about greater power; the attack goes ahead, Bob losing 4 life and Carol 5.
+
+## A card chosen from each hand, revealed together (2026-11-28)
+
+### Stronghold Gambit: the chosen cards are shown only once everyone has chosen
+- **Do:** Cast Stronghold Gambit and choose Grizzly Bears from your hand.
+- **Expect:** The prompt says the card is revealed once every player has chosen. Then your Grizzly Bears and Bob's Hill Giant are revealed together; only Grizzly Bears enters the battlefield, and Hill Giant stays in Bob's hand.
