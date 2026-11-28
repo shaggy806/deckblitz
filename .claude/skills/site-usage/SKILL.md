@@ -57,9 +57,11 @@ the games**, from the `transfer` line:
 - **`soon`** (over half full): yes, at the next convenient moment.
 - **`NOW`** (over four fifths): yes, now. At full the oldest games are deleted to make room.
 
-Offer the pull, don't run it unasked: `npm run games:pull` copies the files into `games/` here
-and **deletes them on the box**. A game still being played is sent again whole by its browser
-afterwards, so nothing is lost by pulling mid-game.
+`npm run games:pull` copies the files into `games/` here and leaves them on the box, so it frees
+no room there. Room is freed only by `npm run games:pull -- --delete`, which deletes the copied
+ones on the box: offer it when the store is filling, and run it only on the user's word (the
+user, 2026-11-27: nothing is removed from the server unasked). A game still being played is sent
+again whole by its browser afterwards, so nothing is lost by pulling mid-game.
 
 If it fails: **`not found`** means the installed build is older than this report (2026-11-22):
 say it needs a deploy. **`games aren't being kept`** means the unit sets `GAMES=0`.

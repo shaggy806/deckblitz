@@ -353,8 +353,9 @@ have under 5 GB free, the oldest files going first. `Environment=GAMES_DIR=…` 
 disk's free space, and whether it is time to fetch them away: not needed under half full, soon past
 half, now past four fifths. The `site-usage` skill reads it with the usage report.
 
-From the dev PC: `npm run games:pull` copies them into `games/` there and deletes them on the box
-(`-- --keep` leaves them, `-- --list` only counts); `npm run game:replay -- games/<day>/<file>`
+From the dev PC: `npm run games:pull` copies them into `games/` there and leaves them on the box,
+skipping the ones already copied whole (`-- --delete` also deletes the copied ones on the box, only
+when the user asks: 2026-11-27; `-- --list` only counts); `npm run game:replay -- games/<day>/<file>`
 plays one again (`--log` writes the whole game as text, `--turn N` stops there and saves the
 position, `--bots` lists the bot moves that weren't a finished search). A record plays exactly only
 on the commit it names: the replay says so when this checkout isn't it and the game comes out
