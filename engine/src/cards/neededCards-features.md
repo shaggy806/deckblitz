@@ -9362,3 +9362,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A filter compare against the matched object's own counters (2026-11-28).** `filter:mana-value-at-most-own-counters`: the `DynamicOperand` `{ ownCounters: kind }` (filter.ts, in `matchesFilter`'s `dynamic`, read as it last existed off the battlefield). Corrosion. `test/own-counters-operand.test.ts`.
 
 **A keyword chosen as an activation cost (2026-11-28).** `decision:choose-keyword-as-cost`: no new decision — an `announced` activated `modal`, one mode an option with its own targets, and `costChoice: true` so the choice isn't a modal ability (rule 700.2: its `modes-chosen` isn't `modal`, no dilemma). Phyrexian Splicer. `test/cost-choice-activation.test.ts`.
+
+**Each player puts a counter on the permanent they chose (2026-11-28).** `effect:each-player-puts-counter-on-chosen`: a `vote` `choose`, then `for-each-voted` `eachVote` (once a vote, its voter `"that-player"`, slot 0 the permanent) of an `add-counter` `by: "that-player"`, `simultaneous` — two who chose one permanent put two. Eye of Doom. `test/each-player-puts-counter-on-chosen.test.ts`.

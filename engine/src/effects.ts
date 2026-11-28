@@ -10801,6 +10801,14 @@ export type EffectSpec =
        * vote **you** received" (`"you"`). */
       readonly who?: PlayerScope;
       readonly simultaneous?: boolean;
+      /** Permanents, with `"voted"`: `effect` once for each vote (or choice)
+       * cast for one, not once a permanent, with its voter `"that-player"` —
+       * Eye of Doom's "each player chooses a nonland permanent and **puts** a
+       * doom counter on it" (a `vote` `choose`, then `add-counter` `by:
+       * "that-player"`, `simultaneous`: the ruling puts them all at once, and
+       * a permanent two players chose gets two). In the order the votes were
+       * cast. */
+      readonly eachVote?: true;
     }
   | {
       /** Create `count` token(s) that are copies of a permanent (rule 707.10 —
@@ -18883,6 +18891,22 @@ function applyForEachVoted(spec: Extract<EffectSpec, { kind: "for-each-voted" }>
       },
       ctx,
     );
+    return;
+  }
+  if (spec.eachVote === true && spec.which === "voted") {
+    // One pass a vote, its voter "that-player" (Eye of Doom).
+    const cast = votes.flatMap(({ voter, choice }) =>
+      "object" in choice && ctx.votedPermanentHere(choice.object, choice.zoneChangeCount)
+        ? [{ voter, object: choice.object }]
+        : [],
+    );
+    const each = (): void => {
+      for (const { voter, object } of cast) {
+        applyEffectSpec(spec.effect, ctx.aboutPlayer(voter).withTargets([{ kind: "object", object }]));
+      }
+    };
+    if (spec.simultaneous === true) ctx.simultaneously(each);
+    else each();
     return;
   }
   // Permanents, in the order first voted for. "The most votes" is counted

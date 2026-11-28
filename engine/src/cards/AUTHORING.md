@@ -3451,7 +3451,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
     `{ thisWay: "chosen" }` — chosen first, so two votes may choose the
     same creature, and a token is split off its stack as it's chosen;
   - `for-each-voted { which: "most" | "voted" | "unvoted", effect,
-    simultaneous? }` — "exile each permanent with the most votes or tied"
+    simultaneous?, eachVote? }` — `eachVote` (with `"voted"`): once a vote,
+    not once a permanent, its voter `"that-player"` — Eye of Doom's "each
+    player chooses a nonland permanent and puts a doom counter on it" (an
+    `add-counter` `by: "that-player"`, `simultaneous`; two who chose it put
+    two). Otherwise "exile each permanent with the most votes or tied"
     (Council's Judgment — target slot 0 is the permanent), "for each creature
     with one or more votes, put that many stun counters on it" (Trap the
     Trespassers, with `{ votesReceived: 0 }`), "each player draws a card for
