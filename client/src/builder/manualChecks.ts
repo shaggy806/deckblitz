@@ -14029,6 +14029,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Hollow Specter: pay 2, Bob shows two cards, you pick the one he discards',
+    board({
+      you: { bf: ['Swamp*2', 'Hollow Specter'] },
+      opp: { human: true, bf: ['Forest'], hand: ['Hill Giant', 'Lightning Bolt', 'Craw Wurm', 'Shock'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
     'Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere',
     board({
       you: { bf: ['Mountain*3'], hand: ['Lightning Storm', 'Forest'] },

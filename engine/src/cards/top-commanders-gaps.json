@@ -3515,7 +3515,8 @@
   "effect:each-player-reveals-top-all-match",
   "effect:alternating-hand-exile",
   "effect:reveal-random-from-hand-discard-filtered",
-  "decision:opponent-chosen-mode-with-targets"
+  "decision:opponent-chosen-mode-with-targets",
+  "decision:reveal-x-chosen-cards-from-hand"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

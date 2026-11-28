@@ -9265,3 +9265,9 @@ Each board's die comes up 4.
 ### Fatal Lore: four players, the opponent you name picks and only their creatures can be targets
 - **Do:** Cast Fatal Lore, picking "Carol chooses" from its menu. As Carol, choose the second mode. As you, click Hill Giant and Done. As Carol, choose 0.
 - **Expect:** The menu has a row for each opponent. Your targets light up only Carol's Hill Giant and Serra Angel, not Bob's or Dave's Grizzly Bears. Hill Giant is destroyed; Carol draws nothing.
+
+## Pay X, that player shows X cards of their choice (2026-11-28)
+
+### Hollow Specter: pay 2, Bob shows two cards, you pick the one he discards
+- **Do:** Pass (as Bob too) to declare attackers and attack Bob with Hollow Specter; pass on to combat damage. When it hits, set X to 2 and Pay. As Bob, pick Hill Giant and Craw Wurm in the popup and Confirm. As you, click Craw Wurm and Confirm.
+- **Expect:** While Bob chooses, your screen names none of his cards. Only Hill Giant and Craw Wurm are revealed; Craw Wurm goes to Bob's graveyard, and Lightning Bolt and Shock are never shown to you.
