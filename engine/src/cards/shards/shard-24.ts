@@ -405,6 +405,7 @@ import _poolHazyHomunculus from "../pool/hazy-homunculus.js";
 import _poolHeartPiercerBow from "../pool/heart-piercer-bow.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
 import _poolHeavenSent from "../pool/heaven-sent.js";
+import _poolHedronAlignment from "../pool/hedron-alignment.js";
 import _poolHeideggerShinraExecutive from "../pool/heidegger-shinra-executive.js";
 import _poolHeirOfTheWilds from "../pool/heir-of-the-wilds.js";
 import _poolHekmaSentinels from "../pool/hekma-sentinels.js";
@@ -984,6 +985,7 @@ import _poolVituGhaziGuildmage from "../pool/vitu-ghazi-guildmage.js";
 import _poolVividMeadow from "../pool/vivid-meadow.js";
 import _poolVividRevival from "../pool/vivid-revival.js";
 import _poolVizierOfManyFaces from "../pool/vizier-of-many-faces.js";
+import _poolVizierOfTheAnointed from "../pool/vizier-of-the-anointed.js";
 import _poolVogarNecropolisTyrant from "../pool/vogar-necropolis-tyrant.js";
 import _poolVoldarenThrillseeker from "../pool/voldaren-thrillseeker.js";
 import _poolVraskasFall from "../pool/vraskas-fall.js";
@@ -1471,6 +1473,7 @@ const shard: CardShard = {
     _poolHeartPiercerBow,
     _poolHeartWarden,
     _poolHeavenSent,
+    _poolHedronAlignment,
     _poolHeideggerShinraExecutive,
     _poolHeirOfTheWilds,
     _poolHekmaSentinels,
@@ -2050,6 +2053,7 @@ const shard: CardShard = {
     _poolVividMeadow,
     _poolVividRevival,
     _poolVizierOfManyFaces,
+    _poolVizierOfTheAnointed,
     _poolVogarNecropolisTyrant,
     _poolVoldarenThrillseeker,
     _poolVraskasFall,

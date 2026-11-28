@@ -869,6 +869,7 @@ import _poolSoldeviExcavations from "../pool/soldevi-excavations.js";
 import _poolSolveForDisappointment from "../pool/solve-for-disappointment.js";
 import _poolSorcererOfTheFang from "../pool/sorcerer-of-the-fang.js";
 import _poolSorcerersWand from "../pool/sorcerers-wand.js";
+import _poolSoulSculptor from "../pool/soul-sculptor.js";
 import _poolSoulblast from "../pool/soulblast.js";
 import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
@@ -1997,6 +1998,7 @@ const shard: CardShard = {
     _poolSolveForDisappointment,
     _poolSorcererOfTheFang,
     _poolSorcerersWand,
+    _poolSoulSculptor,
     _poolSoulblast,
     _poolSoulcageFiend,
     _poolSourbreadAuntie,

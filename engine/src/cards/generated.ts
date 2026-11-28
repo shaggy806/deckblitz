@@ -13020,6 +13020,7 @@ import _poolHedgeTroll from "./pool/hedge-troll.js";
 import _poolHedgeWhisperer from "./pool/hedge-whisperer.js";
 import _poolHedgewitchsMask from "./pool/hedgewitchs-mask.js";
 import _poolHedonistsTrove from "./pool/hedonists-trove.js";
+import _poolHedronAlignment from "./pool/hedron-alignment.js";
 import _poolHedronArchive from "./pool/hedron-archive.js";
 import _poolHedronBlade from "./pool/hedron-blade.js";
 import _poolHedronCrab from "./pool/hedron-crab.js";
@@ -26518,6 +26519,7 @@ import _poolSoulRend from "./pool/soul-rend.js";
 import _poolSoulSalvage from "./pool/soul-salvage.js";
 import _poolSoulScarMage from "./pool/soul-scar-mage.js";
 import _poolSoulScourge from "./pool/soul-scourge.js";
+import _poolSoulSculptor from "./pool/soul-sculptor.js";
 import _poolSoulSear from "./pool/soul-sear.js";
 import _poolSoulSearch from "./pool/soul-search.js";
 import _poolSoulSeizer from "./pool/soul-seizer.js";
@@ -29429,6 +29431,7 @@ import _poolThirstForIdentity from "./pool/thirst-for-identity.js";
 import _poolThirstForKnowledge from "./pool/thirst-for-knowledge.js";
 import _poolThirstForMeaning from "./pool/thirst-for-meaning.js";
 import _poolThirst from "./pool/thirst.js";
+import _poolThirstingAxe from "./pool/thirsting-axe.js";
 import _poolThirstingBloodlord from "./pool/thirsting-bloodlord.js";
 import _poolThirstingRoots from "./pool/thirsting-roots.js";
 import _poolThirstingShade from "./pool/thirsting-shade.js";
@@ -31806,6 +31809,7 @@ import _poolVivisurgeonsInsight from "./pool/vivisurgeons-insight.js";
 import _poolVizierOfDeferment from "./pool/vizier-of-deferment.js";
 import _poolVizierOfManyFaces from "./pool/vizier-of-many-faces.js";
 import _poolVizierOfRemedies from "./pool/vizier-of-remedies.js";
+import _poolVizierOfTheAnointed from "./pool/vizier-of-the-anointed.js";
 import _poolVizierOfTheMenagerie from "./pool/vizier-of-the-menagerie.js";
 import _poolVizierOfTheScorpion from "./pool/vizier-of-the-scorpion.js";
 import _poolVizierOfTheTrue from "./pool/vizier-of-the-true.js";
@@ -47412,6 +47416,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHedgeWhisperer,
   _poolHedgewitchsMask,
   _poolHedonistsTrove,
+  _poolHedronAlignment,
   _poolHedronArchive,
   _poolHedronBlade,
   _poolHedronCrab,
@@ -60910,6 +60915,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoulSalvage,
   _poolSoulScarMage,
   _poolSoulScourge,
+  _poolSoulSculptor,
   _poolSoulSear,
   _poolSoulSearch,
   _poolSoulSeizer,
@@ -63821,6 +63827,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThirstForKnowledge,
   _poolThirstForMeaning,
   _poolThirst,
+  _poolThirstingAxe,
   _poolThirstingBloodlord,
   _poolThirstingRoots,
   _poolThirstingShade,
@@ -66198,6 +66205,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVizierOfDeferment,
   _poolVizierOfManyFaces,
   _poolVizierOfRemedies,
+  _poolVizierOfTheAnointed,
   _poolVizierOfTheMenagerie,
   _poolVizierOfTheScorpion,
   _poolVizierOfTheTrue,
@@ -81817,6 +81825,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hedge-whisperer": _poolHedgeWhisperer,
   "pool/hedgewitchs-mask": _poolHedgewitchsMask,
   "pool/hedonists-trove": _poolHedonistsTrove,
+  "pool/hedron-alignment": _poolHedronAlignment,
   "pool/hedron-archive": _poolHedronArchive,
   "pool/hedron-blade": _poolHedronBlade,
   "pool/hedron-crab": _poolHedronCrab,
@@ -95315,6 +95324,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soul-salvage": _poolSoulSalvage,
   "pool/soul-scar-mage": _poolSoulScarMage,
   "pool/soul-scourge": _poolSoulScourge,
+  "pool/soul-sculptor": _poolSoulSculptor,
   "pool/soul-sear": _poolSoulSear,
   "pool/soul-search": _poolSoulSearch,
   "pool/soul-seizer": _poolSoulSeizer,
@@ -98226,6 +98236,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/thirst-for-knowledge": _poolThirstForKnowledge,
   "pool/thirst-for-meaning": _poolThirstForMeaning,
   "pool/thirst": _poolThirst,
+  "pool/thirsting-axe": _poolThirstingAxe,
   "pool/thirsting-bloodlord": _poolThirstingBloodlord,
   "pool/thirsting-roots": _poolThirstingRoots,
   "pool/thirsting-shade": _poolThirstingShade,
@@ -100603,6 +100614,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vizier-of-deferment": _poolVizierOfDeferment,
   "pool/vizier-of-many-faces": _poolVizierOfManyFaces,
   "pool/vizier-of-remedies": _poolVizierOfRemedies,
+  "pool/vizier-of-the-anointed": _poolVizierOfTheAnointed,
   "pool/vizier-of-the-menagerie": _poolVizierOfTheMenagerie,
   "pool/vizier-of-the-scorpion": _poolVizierOfTheScorpion,
   "pool/vizier-of-the-true": _poolVizierOfTheTrue,

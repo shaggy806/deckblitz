@@ -941,6 +941,7 @@ import _poolTheThingBenGrimm from "../pool/the-thing-ben-grimm.js";
 import _poolTheTombOfAclazotz from "../pool/the-tomb-of-aclazotz.js";
 import _poolTheloniteDruid from "../pool/thelonite-druid.js";
 import _poolThelonsChant from "../pool/thelons-chant.js";
+import _poolThirstingAxe from "../pool/thirsting-axe.js";
 import _poolThornscapeApprentice from "../pool/thornscape-apprentice.js";
 import _poolThoughtleech from "../pool/thoughtleech.js";
 import _poolThrabenExorcism from "../pool/thraben-exorcism.js";
@@ -2038,6 +2039,7 @@ const shard: CardShard = {
     _poolTheTombOfAclazotz,
     _poolTheloniteDruid,
     _poolThelonsChant,
+    _poolThirstingAxe,
     _poolThornscapeApprentice,
     _poolThoughtleech,
     _poolThrabenExorcism,
