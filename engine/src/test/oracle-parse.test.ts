@@ -21347,6 +21347,23 @@ describe("a countered spell's card put onto the battlefield", () => {
       entersWith: { kind: "+1/+1", amount: 2 },
     });
   });
+
+  it("reads Lost Hours: the chosen card put into its owner's library third from the top", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Sorcery",
+      oracle_text:
+        "Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.",
+    } as never) as unknown as Record<string, unknown>;
+    expect(face.targets).toEqual(["player"]);
+    expect(face.effect).toEqual({
+      kind: "discard-chosen",
+      target: 0,
+      filter: { notTypes: ["land"] },
+      destination: "library-top",
+      libraryFromTop: 3,
+    });
+  });
 });
 
 describe("read ahead given to Sagas", () => {

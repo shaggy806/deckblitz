@@ -7059,6 +7059,11 @@ export type EffectSpec =
        * names it, and the search that follows may find it or leave it.
        */
       readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield" | "stay";
+      /** With `destination: "library-top"`: "that player puts that card into
+       * their library **third from the top**" (Lost Hours, `3`) — beneath the
+       * top N−1 cards, or on the bottom of a library with fewer (its ruling).
+       * Not with `reveals` or `alsoFrom`. */
+      readonly libraryFromTop?: number;
       /** **Another player** chooses from the revealed hand: Rakdos Augermage's
        * "reveal your hand and discard a card **of target opponent's choice**"
        * (`target: "you"`, `chooser: { target: 0 }`). The hand's owner still
@@ -15540,6 +15545,8 @@ export interface EffectApi {
     to?: {
       readonly chooser?: PlayerId;
       readonly destination?: "exile" | "library-top" | "library-bottom" | "battlefield" | "stay";
+      /** See the effect's `libraryFromTop`. */
+      readonly libraryFromTop?: number;
       readonly unlinked?: true;
       readonly untilSourceLeaves?: true;
       /** The effect's `alsoFrom`, a target slot read as the permanent in it
@@ -24223,6 +24230,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         ctx.discardChosen(chosenFrom, spec.filter, spec.lookOnly === true, spec.optional === true, upTo, {
           ...(chooser !== undefined ? { chooser } : {}),
           ...(spec.destination !== undefined ? { destination: spec.destination } : {}),
+          ...(spec.libraryFromTop !== undefined && spec.destination === "library-top"
+            ? { libraryFromTop: spec.libraryFromTop }
+            : {}),
           ...(spec.unlinked === true ? { unlinked: true } : {}),
           ...(spec.untilSourceLeaves === true ? { untilSourceLeaves: true } : {}),
           ...(alsoFrom !== undefined ? { alsoFrom } : {}),

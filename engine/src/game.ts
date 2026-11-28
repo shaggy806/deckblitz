@@ -47288,6 +47288,7 @@ controlledBy,
           to?.exactly,
           to?.oneEach,
           controller,
+          to?.libraryFromTop,
         );
       },
       modifyPt: (target, power, toughness, duration) =>
@@ -51797,6 +51798,8 @@ controlledBy,
     /** Whose effect exiles the chosen card (`exiledByPlayer`): the effect's
      * controller, whoever chooses. */
     exiledBy?: PlayerId,
+    /** See `discard-chosen`'s `libraryFromTop`: Nth from the top. */
+    libraryFromTop?: number,
   ): void {
     // "…or the chosen creature" with the player's own target gone illegal
     // (Cloak and Dagger, Entwined): `target` is that permanent, and no
@@ -51876,6 +51879,8 @@ controlledBy,
       ...(exileLink !== undefined ? { exileLink } : {}),
       ...(exileUntil !== undefined ? { exileUntil } : {}),
       ...(destination === "exile" && exiledBy !== undefined ? { exiledBy } : {}),
+      // "Into their library third from the top" (Lost Hours).
+      ...(destination === "library-top" && libraryFromTop !== undefined ? { libraryFromTop } : {}),
       ...(playGrant !== undefined ? { playGrant } : {}),
       leftover: "stay",
     };

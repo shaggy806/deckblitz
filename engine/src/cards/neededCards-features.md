@@ -9398,3 +9398,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A spell cast using teamwork (2026-11-28).** `filter:cast-using-teamwork`: `CardFilter.castUsing`, a kicker keyword whose cost the spell on the stack paid (rule 702.194b; `kicked` is plain kicker alone). Virtual Assistant. `test/cast-using-teamwork.test.ts`.
 
 **A graveyard alternative cost that enters with counters (2026-11-28).** `condition:cast-via-own-graveyard-alt-cost`: no engine code — `mayPlaySelf` `byPaying` with the permission's own `entersWith`, which another graveyard permission's cast doesn't carry; the scaffolder reads the "If you do, it enters with …" rider. Worldheart Phoenix. `test/graveyard-alt-cost-enters-with.test.ts`.
+
+**A chosen hand card put Nth from the top (2026-11-28).** `effect:chosen-hand-card-to-library-nth-from-top`: `discard-chosen`'s `libraryFromTop` beside `destination: "library-top"` (the bottom of a shorter library). Lost Hours. `test/hand-card-to-library-nth.test.ts`.

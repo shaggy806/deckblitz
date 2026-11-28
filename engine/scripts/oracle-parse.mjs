@@ -17180,6 +17180,22 @@ function revealedHandChoiceAt(sentences, i, ctx) {
   let exile = choose[3] !== undefined;
   let used = 2;
   let until = false;
+  // "That player puts that card into their library third from the top."
+  // (Lost Hours): `libraryFromTop`.
+  const nth = exile || orGraveyard ? null : /^that player puts that card into their library (second|third|fourth|fifth) from the top\.$/i.exec(sentences[i + 2] ?? "");
+  if (nth !== null) {
+    const fromTop = { second: 2, third: 3, fourth: 4, fifth: 5 }[nth[1].toLowerCase()];
+    return {
+      effect: {
+        kind: "discard-chosen",
+        target: target(),
+        ...(Object.keys(filter).length > 0 ? { filter } : {}),
+        destination: "library-top",
+        libraryFromTop: fromTop,
+      },
+      used: 3,
+    };
+  }
   if (!exile) {
     const then = /^(that player discards that card|exile that card|that player exiles that card)( until ~ leaves the battlefield)?\.$/i.exec(sentences[i + 2] ?? "");
     if (then === null) return null;
