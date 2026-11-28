@@ -884,6 +884,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     const helps = n.restrictions.some(combatRuleHelps);
     const hurts = n.restrictions.some((r) => !combatRuleHelps(r));
     for (const slot of n.restrictions.flatMap(combatRuleSlots)) v.touch(slot, "harm", MINOR);
+    // "Target creature blocks [or can't block] target creature" (Hunt Down,
+    // Rimehorn Aurochs): the attacker it names is the one the rule serves.
+    for (const rule of n.restrictions) {
+      if (typeof rule === "object" && (rule.kind === "must-block" || rule.kind === "cant-block") && typeof rule.attacker === "number") {
+        v.touch(rule.attacker, "help", MINOR);
+      }
+    }
     const side = helps && hurts ? "either" : helps ? "help" : "harm";
     v.touch(n.target, side, MINOR);
     // Radiance's "target creature and each other creature that shares a

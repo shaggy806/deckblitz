@@ -27150,3 +27150,23 @@ describe("damage back to its source, and a granted trigger under a condition (Te
     expect(whelp.static[0].grantsTriggered[0].effect).toEqual({ kind: "draw", amount: 1 });
   });
 });
+
+describe("block requirements on targets (Hunt Down, Culling Mark)", () => {
+  it("target creature blocks target creature, or blocks at all, this turn if able", () => {
+    const hunt = parseFace({
+      name: "Hunt Down",
+      type_line: "Sorcery",
+      mana_cost: "{G}",
+      oracle_text: "Target creature blocks target creature this turn if able.",
+    });
+    expect(hunt.targets).toEqual(["creature", "creature"]);
+    expect(hunt.effect).toEqual({ kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: 1 }] });
+    const mark = parseFace({
+      name: "Culling Mark",
+      type_line: "Sorcery",
+      mana_cost: "{2}{G}",
+      oracle_text: "Target creature blocks this turn if able.",
+    });
+    expect(mark.effect).toEqual({ kind: "restrict", target: 0, restrictions: ["must-block"] });
+  });
+});

@@ -9013,6 +9013,20 @@ export function parseSentence(sentence, ctx) {
     const aimed = m[2].toLowerCase() === "you" ? "you" : { target: slot(m[2]) };
     return { kind: "restrict", target, restrictions: [{ kind: "must-attack", at: aimed }], duration: "end-of-turn" };
   }
+  // Block requirements (rule 509.1c): "target creature blocks this turn if
+  // able" (Culling Mark), "target creature blocks target creature this turn
+  // if able" (Hunt Down, Rimehorn Aurochs) — the second a slot the rule only
+  // names, still named once illegal (608.2b, Feral Contest's ruling).
+  if ((m = re(`(${TARGET}) blocks (${TARGET}) this turn if able`).exec(s))) {
+    const target = slot(m[1]);
+    const attacker = slot(m[2]);
+    if (target === undefined || attacker === undefined) return null;
+    return { kind: "restrict", target, restrictions: [{ kind: "must-block", attacker }] };
+  }
+  if ((m = re(`(${TARGET}) blocks this turn if able`).exec(s))) {
+    const target = slot(m[1]);
+    return target === undefined ? null : { kind: "restrict", target, restrictions: ["must-block"] };
+  }
   if ((m = re(`(${TARGET}) attacks during its controller's next combat phase if able`).exec(s))) {
     return { kind: "restrict", target: slot(m[1]), restrictions: ["must-attack"], duration: "during-its-controllers-next-combat" };
   }

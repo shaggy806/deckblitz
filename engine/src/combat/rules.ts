@@ -321,6 +321,12 @@ export interface CombatRuleRefs {
   player(ref: PlayerRef): PlayerId | undefined;
   /** What an {@link ObjectRef} names now: a target slot may hold a player. */
   object(ref: ObjectRef): TargetRef | undefined;
+  /** {@link object} for an object the rule only names, not one it binds:
+   * "blocks it if able" names the attacker, which an illegal target still is
+   * while it stays on the battlefield (rule 608.2b: only the parts of the
+   * effect for which it's illegal pass it by — Feral Contest's ruling).
+   * Absent, `object`. */
+  named?(ref: ObjectRef): TargetRef | undefined;
   /** How many zone changes the object has made (rule 400.7). */
   stint(object: ObjectId): number;
   /** The object whose spell or ability is making the rule. */
@@ -366,7 +372,7 @@ function bindAim(aim: AttackAim, refs: CombatRuleRefs): AttackAim | undefined {
 }
 
 function bindAttacker(aim: AttackerAim, refs: CombatRuleRefs): AttackerAim | undefined {
-  return typeof aim === "object" && "stint" in aim ? aim : boundObject(refs.object(aim), refs);
+  return typeof aim === "object" && "stint" in aim ? aim : boundObject((refs.named ?? refs.object)(aim), refs);
 }
 
 /** The rule as a resolved effect keeps it, or `undefined` when it names

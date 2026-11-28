@@ -36543,7 +36543,12 @@ export class Game {
               0,
               zoneSlice,
               object.lastKnownRefs,
-              illegal.length > 0 ? { illegalTargets: illegal } : {},
+              illegal.length > 0
+                ? {
+                    illegalTargets: illegal,
+                    ...(legality.held !== undefined ? { illegalHeld: legality.held.slice(offset - count, offset) } : {}),
+                  }
+                : {},
             ),
           });
         }
@@ -36585,6 +36590,7 @@ export class Game {
           object.lastKnownRefs,
           {
             ...(illegalTargets.length > 0 ? { illegalTargets } : {}),
+            ...(legality.held !== undefined ? { illegalHeld: legality.held } : {}),
             ...(object.division !== undefined ? { division: object.division } : {}),
           },
         );
@@ -37586,6 +37592,7 @@ export class Game {
         ...(transformSince !== undefined ? { transformSince } : {}),
         ...(readTargets !== undefined ? { readTargets } : {}),
         ...(illegalTargets.length > 0 ? { illegalTargets } : {}),
+        ...(legality.held !== undefined ? { illegalHeld: legality.held } : {}),
         // A divided amount, split as it went on the stack.
         ...(object.division !== undefined ? { division: object.division } : {}),
         ...(object.chosenModes !== undefined && object.chosenModes !== null
@@ -43430,7 +43437,12 @@ export class Game {
     /** Where each target was as it was targeted (`GameObject.targetZones`),
      * for one already illegal read as it last existed. */
     targetZones: readonly (ZoneType | null)[] = [],
-  ): { readonly fizzles: boolean; readonly illegal: readonly number[]; readonly targets: ResolvedTargets } {
+  ): {
+    readonly fizzles: boolean;
+    readonly illegal: readonly number[];
+    readonly targets: ResolvedTargets;
+    readonly held?: ResolvedTargets;
+  } {
     // An "any number of target …" group has as many slots as it went on the
     // stack with — never as many as the board would allow now.
     const declared = specs;
@@ -43586,7 +43598,10 @@ export class Game {
       for (let i = start; i < start + count; i += 1) drop(i);
     }
     const anyLegal = targets.some((t, i) => t !== undefined && chosen[i] !== undefined && !autoSlots.includes(i));
-    return { fizzles: anyChosen && !anyLegal, illegal, targets };
+    // The illegal ones still the objects they were, where they were: see
+    // `ResolutionContext.illegalHeld`.
+    const held = illegal.length === 0 ? undefined : now.map((t, i) => (illegal.includes(i) ? t : undefined));
+    return { fizzles: anyChosen && !anyLegal, illegal, targets, ...(held !== undefined ? { held } : {}) };
   }
 
   private isPermanentSpell(def: CardDefinition): boolean {
@@ -43641,6 +43656,7 @@ export class Game {
       readonly transformSince?: number;
       readonly readTargets?: ResolvedTargets;
       readonly illegalTargets?: readonly number[];
+      readonly illegalHeld?: ResolvedTargets;
       readonly announcedModes?: readonly number[];
       readonly division?: readonly number[];
       readonly priced?: ObjectId;
@@ -44478,6 +44494,7 @@ export class Game {
     const sometimes = {
       ...(opts.readTargets !== undefined ? { readTargets: opts.readTargets } : {}),
       ...(opts.illegalTargets !== undefined ? { illegalTargets: opts.illegalTargets } : {}),
+      ...(opts.illegalHeld !== undefined ? { illegalHeld: opts.illegalHeld } : {}),
       ...(opts.sourceLost === true ? { sourceLost: true } : {}),
       // A trigger object that left the battlefield as the ability triggered,
       // and has changed zones again since, is a new object (rule 400.7) —
@@ -45639,6 +45656,7 @@ export class Game {
           {
             ...opts,
             ...(opts.readTargets !== undefined ? { readTargets: cut(opts.readTargets) } : {}),
+            ...(opts.illegalHeld !== undefined ? { illegalHeld: cut(opts.illegalHeld) } : {}),
             ...(illegal !== undefined
               ? {
                   illegalTargets: illegal
@@ -45747,6 +45765,7 @@ export class Game {
           {
             ...opts,
             ...(opts.readTargets !== undefined ? { readTargets: bind(opts.readTargets) } : {}),
+            ...(opts.illegalHeld !== undefined ? { illegalHeld: bind(opts.illegalHeld) } : {}),
             ...(illegal !== undefined
               ? {
                   illegalTargets: [
@@ -45781,6 +45800,7 @@ export class Game {
           {
             ...opts,
             ...(opts.readTargets !== undefined ? { readTargets: set<TargetRef | undefined>(opts.readTargets, found) } : {}),
+            ...(opts.illegalHeld !== undefined ? { illegalHeld: set<TargetRef | undefined>(opts.illegalHeld, undefined) } : {}),
             ...(illegal !== undefined ? { illegalTargets: illegal.filter((s) => s !== slot) } : {}),
           },
         );
@@ -49594,6 +49614,7 @@ controlledBy,
           {
             ...opts,
             ...(opts.readTargets !== undefined ? { readTargets: [found, ...opts.readTargets] } : {}),
+            ...(opts.illegalHeld !== undefined ? { illegalHeld: [undefined, ...opts.illegalHeld] } : {}),
             ...(opts.illegalTargets !== undefined ? { illegalTargets: opts.illegalTargets.map((slot) => slot + 1) } : {}),
           },
         ),

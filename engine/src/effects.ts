@@ -16962,6 +16962,16 @@ export interface ResolutionContext extends EffectApi {
    * target was legal.
    */
   readonly illegalTargets?: readonly number[];
+  /**
+   * Beside `illegalTargets`: each illegal slot's target where it is still
+   * the object it was, in the zone it was targeted in (one entry a slot, a
+   * hole for the rest). Not acted on and not read (rule 608.2b), only named
+   * by a rule that binds another object to it: Feral Contest's ruling, the
+   * second creature "still … will have to block the first targeted
+   * creature". Absent when every target was legal, and in a context whose
+   * slots were rearranged.
+   */
+  readonly illegalHeld?: ResolvedTargets;
   /** The value chosen for `{X}` when this spell/ability was put on the stack,
    * or 0 if its cost had no `{X}`. */
   readonly x: number;
@@ -20631,6 +20641,15 @@ function isPlayerRef(ref: ObjectRef | PlayerRef): ref is PlayerRef {
  * began to resolve — see `ResolutionContext.illegalTargets` (rule 608.2b). */
 function illegalSlot(ref: ObjectRef, ctx: ResolutionContext): boolean {
   return typeof ref === "number" && ctx.illegalTargets?.includes(ref) === true;
+}
+
+/** An illegal slot's permanent, still the one it targeted and still on the
+ * battlefield (`ResolutionContext.illegalHeld`): only to be named, never
+ * acted on or read (rule 608.2b). */
+function heldIllegalPermanent(ref: ObjectRef, ctx: ResolutionContext): TargetRef | undefined {
+  if (typeof ref !== "number") return undefined;
+  const held = ctx.illegalHeld?.[ref];
+  return held?.kind === "object" && ctx.onBattlefield(held.object) ? held : undefined;
 }
 
 /** `put-onto-battlefield`'s `withCounters`, each amount read as it resolves:
@@ -25157,6 +25176,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         you: ctx.controller,
         player: (ref) => resolvePlayerRef(ref, ctx),
         object: (ref) => (illegalSlot(ref, ctx) ? undefined : objectRefAct(ref, ctx)),
+        named: (ref) => (illegalSlot(ref, ctx) ? heldIllegalPermanent(ref, ctx) : objectRefAct(ref, ctx)),
         stint: (id) => ctx.zoneChangeCountOf(id) ?? 0,
         source: ctx.source,
       };
