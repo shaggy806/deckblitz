@@ -4,6 +4,10 @@
  "built": [
     "decision:choose-keyword-as-cost",
     "effect:each-player-puts-counter-on-chosen",
+    "effect:return-died-cards-dealt-damage-by-source",
+    "static:control-transformed-permanent-condition",
+    "filter:damage-source-is-spell",
+    "amount:cards-in-target-hand-matching",
     "effect:search-same-name-as-chosen-permanents",
     "effect:reveal-until-or-x-cards",
     "effect:return-if-sacrificed-this-way",

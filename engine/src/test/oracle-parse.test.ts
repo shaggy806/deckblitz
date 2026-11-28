@@ -27112,3 +27112,41 @@ describe("its own counters as a CDA (Rusting Golem, Mwonvuli Ooze)", () => {
     });
   });
 });
+
+describe("damage back to its source, and a granted trigger under a condition (Tephraderm, Oculus Whelp)", () => {
+  it("reads Tephraderm's two triggers: a creature source and a spell source", () => {
+    const derm = parseFace(
+      {
+        name: "Tephraderm",
+        type_line: "Creature — Beast",
+        mana_cost: "{4}{R}",
+        oracle_text:
+          "Whenever a creature deals damage to this creature, this creature deals that much damage to that creature.\nWhenever a spell deals damage to this creature, this creature deals that much damage to that spell's controller.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(derm.complete).toBe(true);
+    expect(derm.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "deals-damage", who: "any", to: "self", filter: { type: "creature" } },
+      { on: "deals-damage", who: "any", to: "self", filter: { isSpell: true } },
+    ]);
+    expect(derm.triggered[0].effect).toEqual({ kind: "damage", amount: { triggerValue: true }, target: "trigger-object" });
+    expect(derm.triggered[1].effect).toEqual({ kind: "damage", amount: { triggerValue: true }, who: "trigger-controller" });
+  });
+
+  it("reads Oculus Whelp's \"as long as you control a transformed permanent, this creature has '…'\"", () => {
+    const whelp = parseFace(
+      {
+        name: "Oculus Whelp",
+        type_line: "Creature — Phyrexian Dragon",
+        mana_cost: "{3}{U}",
+        oracle_text: 'As long as you control a transformed permanent, this creature has "When this creature dies, draw a card."',
+      },
+      { tokenFor: () => null },
+    );
+    expect(whelp.complete).toBe(true);
+    expect(whelp.static[0].condition).toEqual({ kind: "controls", filter: { transformed: true }, atLeast: 1 });
+    expect(whelp.static[0].grantsTriggered[0].trigger).toEqual({ on: "dies", who: "self" });
+    expect(whelp.static[0].grantsTriggered[0].effect).toEqual({ kind: "draw", amount: 1 });
+  });
+});

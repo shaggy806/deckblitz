@@ -2617,6 +2617,12 @@ export function parseTrigger(clause) {
   if ((m = /^Whenever a source( an opponent controls)? deals damage to ~$/.exec(c))) {
     return [{ on: "deals-damage", who: m[1] !== undefined ? "opponent" : "any", to: "self" }];
   }
+  // "Whenever a creature deals damage to this creature" / "Whenever a spell
+  // deals damage to this creature" (Tephraderm): the source is the trigger
+  // object, a spell read as it deals the damage (`isSpell`).
+  if ((m = /^Whenever a (creature|spell) deals damage to ~$/.exec(c))) {
+    return [{ on: "deals-damage", who: "any", to: "self", filter: m[1] === "spell" ? { isSpell: true } : { type: "creature" } }];
+  }
   if (/^Whenever ~ is dealt damage$/.test(c)) return self("dealt-damage");
   if (c === "Whenever enchanted player is dealt damage") return [{ on: "deals-damage-batch", who: "any", to: "enchanted-player" }];
   if (/^Whenever ~ becomes the target of a spell or ability an opponent controls$/.test(c)) {
@@ -7998,6 +8004,15 @@ export function parseSentence(sentence, ctx) {
     }
     if ((m = re(`~ deals ${N} damage to that player`).exec(s))) {
       return { kind: "damage", amount: amount(m[1]), who: "trigger-controller" };
+    }
+    // "Whenever a creature deals damage to this creature, this creature deals
+    // that much damage to that creature" / "Whenever a spell …, … to that
+    // spell's controller" (Tephraderm): the source is the trigger object.
+    if (re("~ deals that much damage to that creature").test(s)) {
+      return { kind: "damage", amount: { triggerValue: true }, target: "trigger-object" };
+    }
+    if (re("~ deals that much damage to that (?:spell|source)'s controller").test(s)) {
+      return { kind: "damage", amount: { triggerValue: true }, who: "trigger-controller" };
     }
     if ((m = re(`that player loses ${N} life`).exec(s))) {
       return { kind: "lose-life", amount: amount(m[1]), who: "trigger-controller" };
@@ -19736,6 +19751,24 @@ function parseFaceAsWritten(face, ctx = {}) {
         continue;
       }
     }
+    // "As long as you control a transformed permanent, this creature has
+    // 'When this creature dies, draw a card.'" (Oculus Whelp): a quoted
+    // trigger granted to itself under one of the leading static conditions.
+    const conditionalGrant = /^(As long as .+?, )this creature has "((?:When|Whenever|At) [^"]+\.)"$/.exec(printed(raw));
+    const grantCondition =
+      conditionalGrant === null ? undefined : STATIC_CONDITION_PREFIXES.find(([words]) => words === conditionalGrant[1])?.[1];
+    if (conditionalGrant !== null && grantCondition !== undefined) {
+      const read = parseFace({ ...face, type_line: "Creature", oracle_text: conditionalGrant[2] }, ctx);
+      if (read.complete && read.triggered.length === 1 && read.activated.length + read.static.length + read.keywords.length === 0) {
+        out.static.push({
+          affects: { scope: "self" },
+          condition: grantCondition,
+          grantsTriggered: read.triggered,
+          text: printed(raw),
+        });
+        continue;
+      }
+    }
     // "Max speed — [ability]" (rule 702.178a): the ability, had only while
     // its controller's speed is 4 — the line read on its own, then given
     // the condition: a static on the card itself carrying it (`maxSpeed()`),
@@ -23422,6 +23455,8 @@ const STATIC_CONDITION_PREFIXES = [
   // Lieutenant (an ability word, rule 207.2c), and Convergence of Dominion's
   // "Dynastic Command Node": a commander you own (rule 903.3).
   ["As long as you control your commander, ", { kind: "controls", filter: { isCommander: true, controlledBy: "you", ownedBy: "you" }, atLeast: 1 }],
+  // A transformed permanent (rule 701.27g): Oculus Whelp.
+  ["As long as you control a transformed permanent, ", { kind: "controls", filter: { transformed: true }, atLeast: 1 }],
   // Corrupted (an ability word, rule 207.2c): Bonepicker Skirge, Skrelv's Hive.
   ["As long as an opponent has three or more poison counters, ", { kind: "player-counters", counter: "poison", who: "opponent", atLeast: 3 }],
   // Anya, Merciless Angel: strictly under half, which may be a fraction.
