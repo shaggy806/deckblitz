@@ -210,6 +210,8 @@ const NO_TOKEN_PRINTING = new Set([
   "Soldier Token (Chosen Color and Type)",
   // Basalt Golem's 0/2 Wall: printed once, in Mirage, with no token card.
   "Wall Token (Basalt Golem)",
+  // Splintering Wind's 1/1 Splinter: an Alliances card, with no token card.
+  "Splinter Token",
 ]);
 
 describe("token art", () => {
