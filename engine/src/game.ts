@@ -51859,8 +51859,10 @@ controlledBy,
     const set = together === undefined ? undefined : this.searchTogether(together, searchable, player, x);
     // A slot a permanent: only a card with one of their names can be found,
     // and no more than the slots it can fill (Doubling Chant).
+    const sameNames =
+      set !== undefined && together !== undefined && ("oneEachSameNameAs" in together || "oneEachSameNameAsMembers" in together);
     const eligible =
-      set !== undefined && together !== undefined && "oneEachSameNameAs" in together
+      sameNames && set !== undefined
         ? searchable.filter((id) => (set.tags[id] ?? []).length > 0)
         : searchable;
     // "A Forest card and a Plains card" finds one card per slot at most.
@@ -51868,7 +51870,7 @@ controlledBy,
       ? eligible.length
       : together !== undefined && "oneEach" in together
         ? Math.min(max, together.oneEach.length)
-        : set !== undefined && together !== undefined && "oneEachSameNameAs" in together
+        : sameNames && set !== undefined
           ? Math.min(max, largestOneEach(set, eligible))
           : max;
     // "Exactly two cards … that have different names" (Burning-Rune Demon):
@@ -52239,12 +52241,21 @@ controlledBy,
         text: slots.length === 0 ? "no card" : slots.map((color) => `a ${COLOR_WORDS[color]} card`).join(" and "),
       };
     }
-    if ("oneEachSameNameAs" in together) {
-      // A slot a permanent (each token of a stack), named as it is now.
-      const slots = this.battlefieldMatching(player, together.oneEachSameNameAs).flatMap((permanent) => {
+    if ("oneEachSameNameAs" in together || "oneEachSameNameAsMembers" in together) {
+      // A slot a permanent (each token of a stack), named as it is now: the
+      // filter's matches, or a set's members as the search began.
+      const members =
+        "oneEachSameNameAs" in together
+          ? this.battlefieldMatching(player, together.oneEachSameNameAs).map((object) => ({
+              object,
+              count: this.state.objects[object].stackCount ?? 1,
+            }))
+          : together.oneEachSameNameAsMembers;
+      const slots = members.flatMap(({ object: permanent, count }) => {
         const held = this.state.objects[permanent];
+        if (held === undefined) return [];
         const names = namesOf(this.registry, held);
-        return Array.from({ length: held.stackCount ?? 1 }, (_, i) => ({ slot: `${permanent}:${i}`, names }));
+        return Array.from({ length: count }, (_, i) => ({ slot: `${permanent}:${i}`, names }));
       });
       for (const id of eligible) {
         const names = namesOf(this.registry, this.state.objects[id]);

@@ -345,15 +345,29 @@ export type SearchTogether =
    * Chant's "for each creature you control, you may search your library for
    * a creature card with the same name as that creature". A token stack is a
    * slot for each token in it; a face-down permanent has no name and fills
-   * no slot. */
-  | { readonly oneEachSameNameAs: CardFilter };
+   * no slot.
+   *
+   * An `ObjectSetRef` instead: a slot for each member of that set, read as
+   * the search begins — Clarion Ultimatum's "choose five permanents you
+   * control. For each of those permanents, you may search your library for a
+   * card with the same name as that permanent" (`{ targets: [0, 1, 2, 3, 4]
+   * }` in a `choose-permanents`' `thenTogether`), or, inside an `as-player`
+   * of the opponent, Dichotomancy's "for each tapped nonland permanent target
+   * opponent controls" (`{ onBattlefield }`, its "you" that player). */
+  | { readonly oneEachSameNameAs: CardFilter | ObjectSetRef };
 
-/** A {@link SearchTogether} as `Game` raises it: its amount read. */
+/** A {@link SearchTogether} as `Game` raises it: its amount read, and a
+ * same-name search's set settled to its members (each the permanents it
+ * stood for, a token stack's every token). */
 export type ResolvedSearchTogether =
   | Exclude<
       SearchTogether,
-      { readonly totalManaValueAtMost: EffectAmount } | { readonly totalPowerAtMost: EffectAmount }
+      | { readonly totalManaValueAtMost: EffectAmount }
+      | { readonly totalPowerAtMost: EffectAmount }
+      | { readonly oneEachSameNameAs: CardFilter | ObjectSetRef }
     >
+  | { readonly oneEachSameNameAs: CardFilter }
+  | { readonly oneEachSameNameAsMembers: readonly { readonly object: ObjectId; readonly count: number }[] }
   | { readonly totalManaValueAtMost: number }
   | { readonly totalPowerAtMost: number };
 
@@ -19951,6 +19965,13 @@ function resolvedTogether(
     return { totalManaValueAtMost: amountValue(together.totalManaValueAtMost, ctx) };
   }
   if ("totalPowerAtMost" in together) return { totalPowerAtMost: amountValue(together.totalPowerAtMost, ctx) };
+  if ("oneEachSameNameAs" in together) {
+    const named = together.oneEachSameNameAs;
+    if (!isObjectSetRef(named)) return { oneEachSameNameAs: named };
+    return {
+      oneEachSameNameAsMembers: ctx.objectSet(named).map((member) => ({ object: member.object, count: member.count ?? 1 })),
+    };
+  }
   return together;
 }
 
