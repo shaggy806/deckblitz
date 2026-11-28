@@ -5331,7 +5331,7 @@ function basePtCount(
     if (maker?.zone !== "battlefield" || (maker.zoneChangeCount ?? 0) !== link?.zoneChangeCount) return 0;
     return maker.counters[of.countersOnMaker] ?? 0;
   }
-  const side = countSide(state, object, from.forChosenPlayer);
+  const side = countSide(state, object, from.forChosenPlayer, from.forDefendingPlayer);
   return side === undefined ? 0 : countValue(of, state, registry, side, object.id);
 }
 

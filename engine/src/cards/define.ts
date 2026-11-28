@@ -4770,6 +4770,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * hand". 0 with nobody chosen (off the battlefield) or once they've left
      * the game (rule 800.4a). */
     readonly forChosenPlayer?: true;
+    /** Count from **the defending player**'s side (rules 506.2, 310.9d —
+     * the player it's attacking, or who defends the planeswalker or battle
+     * it attacks): Gaea's Liege's "as long as Gaea's Liege is attacking, its
+     * power and toughness are each equal to the number of Forests defending
+     * player controls", a `{ kind: "source", filter: { attacking: true } }`
+     * static. 0 while it isn't attacking, or once that player has left. A
+     * static conditional like that one isn't a CDA (rule 604.3a(5)), so its
+     * `condition` should also hold it to the battlefield. */
+    readonly forDefendingPlayer?: true;
   };
   /** Additional land drops per turn for this permanent's controller (rule
    * 305.2c-adjacent — needed-cards P16, Azusa, Lost but Seeking / Icetill Explorer).

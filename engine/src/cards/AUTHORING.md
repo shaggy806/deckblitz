@@ -7040,7 +7040,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
 - `setBasePtFromCount: { countOf, plusPower, plusToughness, only?, toughnessMinusCount? }` — a layer-7b CDA
   (`"self"` only). `only: "power"` defines just the power, the toughness
   staying as printed (Eluge, the Shoreless Sea's "*/5"); `"toughness"` the
-  reverse. `countOf` is a `CountSpec`:
+  reverse. `forDefendingPlayer: true` counts from the side of the player it's
+  attacking (0 while it isn't): Gaea's Liege's "as long as ~ is attacking, …
+  the number of Forests defending player controls", with `condition: { kind:
+  "source", filter: { attacking: true } }` and a second static for "isn't
+  attacking" held to `inZone: "battlefield"` — conditional, so not CDAs (rule
+  604.3a(5)), and 0/0 off the battlefield. `countOf` is a `CountSpec`:
   - `{ countOf: CardFilter }` — battlefield permanents matching the filter, a
     token stack counting as every token in it. "The number of lands you
     control" (Beanstalk Giant, Lumra, Bellow of the Woods) is `{ countOf: {

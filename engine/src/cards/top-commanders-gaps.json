@@ -11,6 +11,7 @@
     "condition:owns-named-card-in-every-zone",
     "filter:has-embalm-or-eternalize",
     "trigger:activates-embalm-or-eternalize",
+    "static:cda-count-defending-player",
     "effect:become-copy-of-card-moved-this-way",
     "effect:amount-count-step",
     "amount:min-of-amounts",
