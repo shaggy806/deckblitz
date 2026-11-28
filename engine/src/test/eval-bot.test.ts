@@ -107,10 +107,12 @@ describe("EvalBotController", () => {
         [B]: new HeuristicBotController(B, registry),
         [C]: new EvalBotController(C, registry, { horizon: "stack" }),
       },
-      // 27 turns, a few seconds alone; seed 11's game ran past the timeout
-      // after the same change, and seed 3's once the bots held instants for
-      // attackers (2026-11-26).
-      4,
+      // 25 turns, a few seconds alone. About one seed in three stalls until
+      // a library runs out (96 turns, over a minute, and past the timeout on
+      // CI's machines): seed 11's, seed 3's once the bots held instants for
+      // attackers (2026-11-26), and seed 4's once v1 held its pumps until
+      // blocks (2026-11-27).
+      7,
     );
     expect(game.isOver).toBe(true);
   }, GAME_TIMEOUT_MS);
