@@ -14015,6 +14015,20 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Fatal Lore: Bob picks the mode, then you pick his creatures',
+    board({
+      you: { bf: ['Swamp*4', 'Grizzly Bears'], hand: ['Fatal Lore'] },
+      opp: { human: true, bf: ['Forest', 'Hill Giant', 'Serra Angel'] },
+    }),
+  ),
+  preset(
+    'Fatal Lore: four players, the opponent you name picks and only their creatures can be targets',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Fatal Lore'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { human: true, bf: ['Hill Giant', 'Serra Angel'] }, { bf: ['Grizzly Bears'] }],
+    }),
+  ),
+  preset(
     'Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere',
     board({
       you: { bf: ['Mountain*3'], hand: ['Lightning Storm', 'Forest'] },

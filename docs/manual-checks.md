@@ -9255,3 +9255,13 @@ Each board's die comes up 4.
 ### Benthic Explorers: four players, any opponent's tapped land
 - **Do:** Open Benthic Explorers' menu and choose "(add {B})".
 - **Expect:** The menu has "(add {G})" and "(add {B})" (Bob's Forest, Carol's Swamp; Dave's Plains is untapped). With one land to untap no question is asked: Carol's Swamp untaps and {B} is in your pool.
+
+## An opponent's mode, the caster's targets (2026-11-28)
+
+### Fatal Lore: Bob picks the mode, then you pick his creatures
+- **Do:** Cast Fatal Lore. As Bob, choose the second mode. As you, click Hill Giant and Serra Angel. Pass priority. As Bob, choose 2 in the banner.
+- **Expect:** Only Bob is shown the modes. Then your banner asks for Fatal Lore's targets, and only Bob's creatures light up (not your Grizzly Bears). The log says "Fatal Lore — Bob chose: You destroy…"; both are destroyed and Bob draws two cards.
+
+### Fatal Lore: four players, the opponent you name picks and only their creatures can be targets
+- **Do:** Cast Fatal Lore, picking "Carol chooses" from its menu. As Carol, choose the second mode. As you, click Hill Giant and Done. As Carol, choose 0.
+- **Expect:** The menu has a row for each opponent. Your targets light up only Carol's Hill Giant and Serra Angel, not Bob's or Dave's Grizzly Bears. Hill Giant is destroyed; Carol draws nothing.

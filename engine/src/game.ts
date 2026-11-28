@@ -10524,7 +10524,9 @@ export class Game {
     // A spell's modes an opponent chooses as it's cast (rule 700.2e): the
     // cast goes on with them, in ascending order (as a caster's are kept).
     if (awaiting.otherCast !== undefined) {
-      this.resumeOtherChoice(player, awaiting.otherCast, { modes: [...modeIndices].sort((p, q) => p - q) });
+      const modes = [...modeIndices].sort((p, q) => p - q);
+      if (this.askCasterForModeTargets(player, awaiting.otherCast, modes)) return;
+      this.resumeOtherChoice(player, awaiting.otherCast, { modes });
       return;
     }
 
@@ -10939,7 +10941,14 @@ export class Game {
     // (rule 601.2c): the cast goes on with them.
     const asked = this.state.awaiting;
     if (asked?.kind === "choose-targets" && asked.otherCast !== undefined) {
-      this.resumeOtherChoice(player, asked.otherCast, { targets: chosen });
+      const modes = asked.otherCast.modes;
+      // The caster's targets for the modes the opponent chose (Fatal Lore):
+      // the opponent stays the one who chose.
+      if (modes !== undefined) {
+        this.resumeOtherChoice(asked.otherCast.action.otherChooser ?? player, asked.otherCast, { modes, targets: chosen });
+      } else {
+        this.resumeOtherChoice(player, asked.otherCast, { targets: chosen });
+      }
       return;
     }
     // A triggered ability's divided amount, split as it goes on the stack
@@ -25011,11 +25020,14 @@ export class Game {
     const choice = this.otherChoice;
     const offer = choice === undefined ? null : this.otherChoiceOffer(action, choice.chooser);
     const slots = offer === null || typeof offer === "string" ? [] : offer.slots;
-    const mine = [...(action.targets ?? [])];
+    // Modes an opponent chose: every target is the caster's, chosen after
+    // the modes (`askCasterForModeTargets`), so all of them are the answer's.
+    const modesOffer = offer !== null && typeof offer !== "string" && offer.modes;
+    const mine = modesOffer ? [] : [...(action.targets ?? [])];
     const theirs = [...(choice?.targets ?? [])];
     const targets: (TargetRef | null)[] = [];
     for (let i = 0; mine.length > 0 || theirs.length > 0; i += 1) {
-      const next = slots.includes(i) ? theirs.shift() : mine.shift();
+      const next = modesOffer || slots.includes(i) ? theirs.shift() : mine.shift();
       targets.push(next ?? null);
     }
     const { otherChooser: _named, ...rest } = action;
@@ -25122,6 +25134,42 @@ export class Game {
   }
 
   /**
+   * The opponent named chose `modes` for a spell (rule 700.2e) and some of
+   * them take targets: its caster chooses those now (rule 601.2c, after the
+   * modes of 601.2b) — Fatal Lore's "up to two target creatures **that
+   * player** controls", a filter's `controlledBy: "chooser"` reading the
+   * opponent who chose. Asked as the caster's own `choose-targets`, its
+   * `otherCast` carrying the modes; `false` when the modes take none.
+   */
+  private askCasterForModeTargets(chooser: PlayerId, ask: OtherChoiceAsk, modes: readonly number[]): boolean {
+    const action = ask.action;
+    if (action.type !== "cast-spell") return false;
+    const def = this.faceDef(action.card, action.face ?? 0);
+    const castModal = def.castModal;
+    if (castModal === null) return false;
+    const specs = specsAtX(
+      concatModeSpecs(modes.map((mi) => castModal.modes[mi]?.targets ?? [])),
+      action.xValue ?? 0,
+    );
+    if (specs.length === 0) return false;
+    const options = this.withOtherChoice({ for: action.card, chooser, modes }, () =>
+      this.targetOptionsFor(specs, action.player, this.cardSource(def, action.card, action.xValue)),
+    );
+    this.state.awaiting = {
+      kind: "choose-targets",
+      player: action.player,
+      targetsFor: action.player,
+      source: action.card,
+      cardName: def.name,
+      prompt: `Choose targets for ${def.name}`,
+      specs: [...specs],
+      options: options.map((o) => [...o]),
+      otherCast: { ...ask, modes: [...modes] },
+    };
+    return true;
+  }
+
+  /**
    * The opponent answered (`answer`: their targets, or the modes): the cast
    * or activation goes on with it, as though its caster had made every
    * choice — or, if it can't be completed now, it's reversed (rule 733.1),
@@ -25211,6 +25259,18 @@ export class Game {
   ): string | null {
     const ask = awaiting.otherCast;
     if (ask === undefined) return "these aren't another player's targets";
+    // The caster's own targets for the modes an opponent chose: judged as
+    // any cast's, with that opponent as "that player" (`controlledBy:
+    // "chooser"`).
+    if (ask.modes !== undefined && ask.action.type === "cast-spell") {
+      const action = ask.action;
+      const chooser = action.otherChooser;
+      if (chooser === undefined) return "no opponent chose the modes";
+      const def = this.faceDef(action.card, action.face ?? 0);
+      return this.withOtherChoice({ for: action.card, chooser, modes: ask.modes }, () =>
+        this.whyTargetsInvalid(awaiting.specs, targets, action.player, def.name, this.cardSource(def, action.card, action.xValue)),
+      );
+    }
     if (targets.length !== awaiting.specs.length) return `choose ${awaiting.specs.length} target(s)`;
     for (const [i, t] of targets.entries()) {
       if (t === undefined) {

@@ -3514,7 +3514,8 @@
   "bug:cda-colors-among",
   "effect:each-player-reveals-top-all-match",
   "effect:alternating-hand-exile",
-  "effect:reveal-random-from-hand-discard-filtered"
+  "effect:reveal-random-from-hand-discard-filtered",
+  "decision:opponent-chosen-mode-with-targets"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

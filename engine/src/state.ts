@@ -3681,11 +3681,17 @@ export interface CastNowAsk extends Omit<CastNowTerms, "free" | "exileAfter" | "
  * or reversed if their answer leaves it impossible (rule 733.1).
  * `castNow` is the `cast-now` offer it was cast under, for a spell cast as
  * something resolves.
+ *
+ * `modes` is set once the opponent has chosen modes that take targets
+ * (Fatal Lore): the caster then chooses those targets (rule 601.2c follows
+ * 601.2b), asked as a `choose-targets` of the caster's own with this ask
+ * as its `otherCast`, and the cast goes on with both answers.
  */
 export interface OtherChoiceAsk {
   readonly action: Extract<Action, { type: "cast-spell" }> | Extract<Action, { type: "activate-ability" }>;
   readonly slots: readonly number[];
   readonly castNow?: CastNowAsk;
+  readonly modes?: readonly number[];
 }
 
 export interface AssistAsk {

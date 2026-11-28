@@ -5013,9 +5013,13 @@ export interface CastModalSpec {
    * (rule 700.2e) — as it's cast (601.2b), the caster naming which opponent
    * (the cast's `otherChooser`, a variant per opponent). That opponent is
    * asked with `choose-modes`, the cast waiting on it, and is "that player"
-   * of the modes (`"that-player"`) as the spell resolves. Its modes take no
-   * targets (the caster would have to choose them after: Fatal Lore isn't
-   * built).
+   * of the modes (`"that-player"`) as the spell resolves. A mode with
+   * targets has them chosen by the caster once the opponent has answered
+   * (rule 601.2c follows 601.2b): Fatal Lore's "up to two target creatures
+   * **that player** controls" is `controlledBy: "chooser"`, the opponent
+   * who chose (`Game.askCasterForModeTargets`). Every mode must stay
+   * choosable whatever the board ("up to" targets), since the opponent is
+   * offered them all.
    */
   readonly chosenBy?: "opponent";
   /** Spree (rule 702.172a) is each mode's `ModeOption.spreeCost`: "choose

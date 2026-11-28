@@ -24879,7 +24879,8 @@ function parseModalSpell(spellLines, ctx) {
   // (`modesX`, rule 601.2b).
   const repeated = /^Choose (two|three|four|five|X)\. You may choose the same mode more than once\.$/.exec(spellLines[0].line);
   // "An opponent chooses one —" (rule 700.2e): its modes an opponent's to
-  // choose (`castModal.chosenBy`), when they need no targets.
+  // choose (`castModal.chosenBy`), when they need no targets (a mode's
+  // targets, the caster's, chosen after — Fatal Lore — are hand-authored).
   const theirs = repeated === null ? /^An opponent chooses (one|two|one or both|one or more) —$/.exec(spellLines[0].line) : null;
   const head = repeated ?? theirs ?? /^Choose (one|two|one or both|one or more) —$/.exec(spellLines[0].line);
   if (!head) return undefined;
@@ -24900,6 +24901,9 @@ function parseModalSpell(spellLines, ctx) {
     return { castModal: { minModes: n, maxModes: n, repeatModes: true, modes }, effect: null, targets: [] };
   }
   const [minModes, maxModes] = modeCounts(head[1], modes.length);
+  // A mode's targets "that player controls" read the opponent who chose
+  // (`controlledBy: "chooser"`), which the mode parsers don't say: those
+  // are authored by hand.
   if (theirs !== null && modes.some((mode) => mode.targets !== undefined)) return null;
   return { castModal: { minModes, maxModes, ...(theirs !== null ? { chosenBy: "opponent" } : {}), modes }, effect: null, targets: [] };
 }
