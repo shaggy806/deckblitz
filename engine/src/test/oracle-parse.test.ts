@@ -27341,3 +27341,27 @@ describe("unless an opponent pays, and graveyard cards to the library's bottom",
     expect(face.complete).toBe(true);
   });
 });
+
+describe("Feint (2026-11-28)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, mana_cost: "{1}", oracle_text });
+
+  it("creatures blocking target attacking creature, tapped and their damage prevented (Feint)", () => {
+    const feint = face(
+      "Feint",
+      "Instant",
+      "Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it.",
+    );
+    expect(feint.complete).toBe(true);
+    expect(feint.targets).toEqual([{ kind: "permanent", filter: { type: "creature", attacking: true } }]);
+    const blockingIt = { type: "creature", blockingRelation: { relation: "blocking", of: 0 } };
+    expect(feint.effect.effects[0]).toEqual({ kind: "tap-all", filter: blockingIt });
+    expect(feint.effect.effects[2]).toEqual({
+      kind: "for-each-permanent",
+      filter: blockingIt,
+      as: 1,
+      effect: { kind: "damage-rule", by: { target: 1 }, combat: true },
+    });
+  });
+});
+

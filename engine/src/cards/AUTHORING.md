@@ -4161,7 +4161,9 @@ Estark's "prevent all combat damage that would be dealt this combat by it and
 each creature it's blocking" is a `damage-rule` on the target and a
 `for-each-permanent` over `{ type: "creature", blockingRelation: { relation:
 "blocked-by", of: 0 } }` with `as: 1`, each a `damage-rule` of `duration:
-"until-end-of-combat"`. `blockerCount: { op, n }` is how many creatures are blocking it now —
+"until-end-of-combat"`; Feint's "tap all creatures blocking target attacking creature. Prevent
+all combat damage that would be dealt this turn by that creature and each creature blocking it"
+is a `tap-all` and a `for-each-permanent` over `{ relation: "blocking", of: 0 }`. `blockerCount: { op, n }` is how many creatures are blocking it now —
 Rampaging Cyclops's "as long as two or more creatures are blocking it", Grizzled
 Wolverine's "only if at least one creature is blocking this creature", both as
 `{ kind: "source", filter }`; the amount `{ blockersOf: "source" | "trigger-object" }`

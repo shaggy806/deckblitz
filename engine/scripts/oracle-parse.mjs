@@ -19168,6 +19168,33 @@ function chosenValueAt(sentences, i, ctx) {
 function pilesAt(sentences, i, ctx) {
   const s = (k) => sentences[i + k] ?? "";
   const handGraveyard = { chosen: "hand", rest: "graveyard" };
+  // Feint's "Tap all creatures blocking target attacking creature. Prevent all
+  // combat damage that would be dealt this turn by that creature and each
+  // creature blocking it": the blockers found as it resolves (`blockingRelation`
+  // of the slot), each with a shield of its own.
+  if (
+    /^tap all creatures blocking target attacking creature\.$/i.test(s(0)) &&
+    /^prevent all combat damage that would be dealt this turn by that creature and each creature blocking it\.$/i.test(s(1))
+  ) {
+    const target = ctx.target({ kind: "permanent", filter: { type: "creature", attacking: true } });
+    const blockingIt = { type: "creature", blockingRelation: { relation: "blocking", of: target } };
+    return {
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "tap-all", filter: blockingIt },
+          { kind: "damage-rule", by: { target }, combat: true },
+          {
+            kind: "for-each-permanent",
+            filter: blockingIt,
+            as: target + 1,
+            effect: { kind: "damage-rule", by: { target: target + 1 }, combat: true },
+          },
+        ],
+      },
+      used: 2,
+    };
+  }
   // Not piles, but sentences that make one effect: Awakening of Vitu-Ghazi's "Put
   // N +1/+1 counters on target land you control. It becomes a legendary 0/0
   // Elemental creature with haste named Vitu-Ghazi. It's still a land."
