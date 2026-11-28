@@ -1048,6 +1048,13 @@ export interface ActivatedAbility {
    * `Game.cyclingAbilityOf` builds it from `CardDefinition.cycling`: what
    * "cycling abilities you activate" (Fluctuator) names. */
   readonly cycling?: true;
+  /** A keyword ability authored as an activated ability (rule 702): an
+   * embalm (702.128a) or an eternalize (702.129a) one, as `embalmAbility`
+   * and `eternalizeAbility` build them, a granted embalm included — what
+   * "an eternalize or embalm ability" (Vizier of the Anointed's trigger) and
+   * "a creature card with eternalize or embalm" (`CardFilter.hasKeyword`)
+   * name. */
+  readonly keywordAbility?: ActivatedKeyword;
   /** "Activate only once each turn" (rule 602.5g — Steel Hellkite). Tracked
    * per ability in the journal (`activated` entries), so a permanent
    * with two such abilities limits each separately. */
@@ -3029,6 +3036,10 @@ export type TriggerKind =
       /** A boast ability (rule 702.142 — Frenzied Raider), a granted one
        * included: `ActivatedAbility.boast`. */
       readonly boast?: true;
+      /** "Whenever you activate **an eternalize or embalm ability**" (Vizier
+       * of the Anointed): the ability is one of these keyword abilities
+       * (`ActivatedAbility.keywordAbility`), a granted embalm included. */
+      readonly keywordAbility?: readonly ActivatedKeyword[];
       /** "If that ability's activation cost contains {X}" (Unbound
        * Flourishing): the mana symbol in its activation cost, not an X
        * elsewhere (the rulings). */
@@ -3497,6 +3508,9 @@ export interface EvidenceAmong {
 /** A zone an activated ability works from other than the battlefield
  * (`ActivatedAbility.zone`). */
 export type ActivationZone = "hand" | "graveyard" | "command" | "suspended" | "exile" | "stack";
+
+/** The keyword abilities an `ActivatedAbility` can be (`keywordAbility`). */
+export type ActivatedKeyword = "embalm" | "eternalize";
 
 /** Whether `ability` works from `zone` (`ActivatedAbility.zone`, one zone or
  * several). */

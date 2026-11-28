@@ -2248,6 +2248,7 @@ export const eternalizeAbility = (cost: string, text: string): ActivatedAbility 
     exceptions: { power: 4, toughness: 4, setColors: ["B"], addSubtypes: ["Zombie"], noManaCost: true },
   },
   resolve: null,
+  keywordAbility: "eternalize",
   text,
 });
 
@@ -2273,6 +2274,7 @@ export const embalmAbility = (cost: string, text: string): ActivatedAbility => (
     embalmed: true,
   },
   resolve: null,
+  keywordAbility: "embalm",
   text,
 });
 

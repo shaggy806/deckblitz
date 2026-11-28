@@ -2860,6 +2860,11 @@ export function parseTrigger(clause) {
   }
   if (c === "Whenever you activate an exhaust ability") return [{ on: "activates-ability", who: "you", exhaust: true }];
   if (c === "Whenever you activate a power-up ability") return [{ on: "activates-ability", who: "you", powerUp: true }];
+  // "An eternalize or embalm ability" (Vizier of the Anointed): the abilities
+  // `eternalizeAbility` / `embalmAbility` mark (`keywordAbility`).
+  if ((m = /^Whenever you activate an? (eternalize|embalm)(?: or (eternalize|embalm))? ability$/.exec(c))) {
+    return [{ on: "activates-ability", who: "you", keywordAbility: [m[1], ...(m[2] !== undefined ? [m[2]] : [])] }];
+  }
   // "Whenever you activate this creature's outlast ability" (Herald of
   // Anafenza): its own printed ability — the keyword's line comes first, so
   // it's `activated[0]`.

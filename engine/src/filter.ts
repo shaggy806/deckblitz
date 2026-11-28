@@ -2712,7 +2712,7 @@ function hasParity(state: GameState, value: number, clause: ParityClause, source
 export type CardKeyword =
   | "convoke" | "cycling" | "disguise" | "flashback" | "kicker" | "morph" | "mutate" | "suspend"
   | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth"
-  | "partner" | "devoid" | "doctors-companion" | "foretell" | "level-up";
+  | "partner" | "devoid" | "doctors-companion" | "foretell" | "level-up" | "embalm" | "eternalize";
 
 /** Whether a printed line of `def`'s text is this keyword ability: for the
  * keywords a card authors as their parts, with no field of their own. A dash
@@ -2771,6 +2771,14 @@ const CARD_KEYWORD_READS = {
   // (`levelUp`): "each creature you control with level up" (Venerated
   // Teacher).
   "level-up": (def) => hasKeywordLine(def, "Level up"),
+  // Embalm and eternalize (rules 702.128a, 702.129a), activated abilities
+  // marked `keywordAbility`: "a creature card with eternalize or embalm"
+  // (Vizier of the Anointed). An embalm a one-shot effect gave a graveyard
+  // card counts too (`grantedGraveyardKeywords`).
+  embalm: (def, live) =>
+    def.activated.some((a) => a.keywordAbility === "embalm") ||
+    (live?.grantedGraveyardKeywords ?? []).some((g) => g.keyword === "embalm"),
+  eternalize: (def) => def.activated.some((a) => a.keywordAbility === "eternalize"),
 } as const satisfies Record<
   CardKeyword,
   (def: CardDefinition, live: GameObject | undefined, state: GameState, registry: CardRegistry) => boolean

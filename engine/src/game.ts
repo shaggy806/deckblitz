@@ -41572,6 +41572,7 @@ export class Game {
             spec.exhaust !== true &&
             spec.powerUp !== true &&
             spec.boast !== true &&
+            spec.keywordAbility === undefined &&
             spec.xInCost !== true &&
             spec.targets === undefined &&
             spec.ownAbility === undefined
@@ -41601,6 +41602,9 @@ export class Game {
             (spec.exhaust !== true || ability.exhaust === true) &&
             (spec.powerUp !== true || ability.powerUp === true) &&
             (spec.boast !== true || ability.boast === true) &&
+            // "An eternalize or embalm ability" (Vizier of the Anointed).
+            (spec.keywordAbility === undefined ||
+              (ability.keywordAbility !== undefined && spec.keywordAbility.includes(ability.keywordAbility))) &&
             (spec.loyalty !== true || ability.loyaltyCost !== undefined) &&
             (spec.removedAtLeast === undefined ||
               (ability.loyaltyCost === "-x"

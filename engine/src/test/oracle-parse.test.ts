@@ -17036,6 +17036,12 @@ describe("how one player's state compares with another's", () => {
       who: "you",
       ownAbility: 0,
     });
+    // Vizier of the Anointed.
+    expect(trigger("Whenever you activate an eternalize or embalm ability, draw a card.")).toEqual({
+      on: "activates-ability",
+      who: "you",
+      keywordAbility: ["eternalize", "embalm"],
+    });
   });
 
   it("activates-ability of a permanent: a mana ability too, and one the activator controls (Avalanche of Sector 7)", () => {
