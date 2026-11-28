@@ -27735,6 +27735,7 @@ import _poolStrongholdAssassin from "./pool/stronghold-assassin.js";
 import _poolStrongholdBiologist from "./pool/stronghold-biologist.js";
 import _poolStrongholdConfessor from "./pool/stronghold-confessor.js";
 import _poolStrongholdDiscipline from "./pool/stronghold-discipline.js";
+import _poolStrongholdGambit from "./pool/stronghold-gambit.js";
 import _poolStrongholdMachinist from "./pool/stronghold-machinist.js";
 import _poolStrongholdOverseer from "./pool/stronghold-overseer.js";
 import _poolStrongholdRats from "./pool/stronghold-rats.js";
@@ -62151,6 +62152,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolStrongholdBiologist,
   _poolStrongholdConfessor,
   _poolStrongholdDiscipline,
+  _poolStrongholdGambit,
   _poolStrongholdMachinist,
   _poolStrongholdOverseer,
   _poolStrongholdRats,
@@ -96580,6 +96582,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/stronghold-biologist": _poolStrongholdBiologist,
   "pool/stronghold-confessor": _poolStrongholdConfessor,
   "pool/stronghold-discipline": _poolStrongholdDiscipline,
+  "pool/stronghold-gambit": _poolStrongholdGambit,
   "pool/stronghold-machinist": _poolStrongholdMachinist,
   "pool/stronghold-overseer": _poolStrongholdOverseer,
   "pool/stronghold-rats": _poolStrongholdRats,

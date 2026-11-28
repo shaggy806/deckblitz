@@ -826,6 +826,7 @@ import _poolStormchaserDrake from "../pool/stormchaser-drake.js";
 import _poolStormriderSpirit from "../pool/stormrider-spirit.js";
 import _poolStrengthOfWill from "../pool/strength-of-will.js";
 import _poolStripedBears from "../pool/striped-bears.js";
+import _poolStrongholdGambit from "../pool/stronghold-gambit.js";
 import _poolSulfurousSprings from "../pool/sulfurous-springs.js";
 import _poolSultaiBanner from "../pool/sultai-banner.js";
 import _poolSummonsOfSaruman from "../pool/summons-of-saruman.js";
@@ -1840,6 +1841,7 @@ const shard: CardShard = {
     _poolStormriderSpirit,
     _poolStrengthOfWill,
     _poolStripedBears,
+    _poolStrongholdGambit,
     _poolSulfurousSprings,
     _poolSultaiBanner,
     _poolSummonsOfSaruman,
