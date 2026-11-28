@@ -151,6 +151,34 @@ attack, so a move that clears or adds to the board reads as the swing it would m
 of what comes back. The full search with 1a's checks in every rollout is too dear. So v1 stays
 the rollout's attacker, and the menace gap is closed in v1 itself (2026-11-27).
 
+**Three follow-ups the same evening**, each judged the same way over twelve games (the three deck
+sets, seeds 1-4), beside a control (`{"rolloutAttacks":"v1"}` against `--base self`: 0 moves
+differ, so every difference below is the option's):
+
+- **Why Olivia's Wrath won**, rebuilt from the judged game (seed 3, turn 17, every seat on the
+  option). Under v1's rollout neither line attacks and Bloodthirsty Conqueror leads by 1.8. Under
+  v2's both attack, Conqueror's for 11 with lifelink, and the Wrath's line still comes out 1.6
+  ahead: a v1 blocker of the third opponent's traded itself away into the attack (a kill the
+  real table doesn't give), and the rollout ends as the next player's turn begins, so the swing
+  back at a board that attacked is only the `threat` estimate. Played on, the bot took 28 that
+  round. Generous blocks and no crackback, together.
+- **`"v2-when-v1-holds"`**: v1's attack wherever it sends anything, the light search only where
+  it would send nothing (the timid case the menace Slicer was). The gate as fast as v1 (29 s),
+  the Olivia position Conqueror again, and the menace position (v1's fix taken out) equips.
+  Judged: **24 moves changed, 4 better, 5 worse, 15 even, net −9.2 points**, own life −9,
+  opponents' −22, one line out under each. Even, not better.
+- **`"v2-full"`**: the whole attack search in the rollout, its answer checked against the
+  defenders' own blocks and the swing back (1a). Eleven of the twelve games (the twelfth, the
+  long four-player one, had run over an hour and was stopped): **35 changed, 7 better, 11 worse,
+  17 even, net about −744**, two lines out under the new move alone, and the Olivia's Wrath turn
+  as before (−530.6). The real blocks don't fix it; the crackback past the rollout's end is the
+  larger part, and it costs far more.
+
+So all three stay off, and `"v2-when-v1-holds"` is the one worth keeping in mind: cheap, it
+catches the timid misses, and it judged level. What would change the verdict is a rollout that
+sees the swing back after our attack (the turn passed on through the opponents' attacks, as the
+tap guard's `simulateSwingBack` does), and that is a horizon question, not an attacker one.
+
 ## 2. Mana priced by v2's own turn planner
 
 **What is wrong.** A rollout passes our own seat, so mana a choice spends looks free, and v1

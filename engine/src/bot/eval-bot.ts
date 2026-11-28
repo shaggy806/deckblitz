@@ -199,7 +199,7 @@ export interface EvalBotOptions {
    * Slicer home from a lone blocker at 20 commander damage, so the Beamtown
    * Beatstick equip that won read as two mana for nothing.
    */
-  readonly rolloutAttacks?: "v1" | "v2";
+  readonly rolloutAttacks?: "v1" | "v2" | "v2-when-v1-holds" | "v2-full";
   /** Our attack searched alone, without the checks against the defenders'
    * own blocks and the swing back (`declareAttackersSearched`): the attack a
    * rollout makes under `rolloutAttacks: "v2"`, cheap enough to sit inside
@@ -1096,18 +1096,36 @@ class RealAttacksController extends CombatRolloutController {
   private readonly cards: CardRegistry;
   private readonly weights: EvalWeights;
   private readonly memo: Map<string, readonly AttackerDeclaration[]>;
+  private readonly onlyWhenHeld: boolean;
+  private readonly full: boolean;
 
   /** `memo` is shared by every rollout of one decision: most of its
    * candidates come to the same combat (`combatBoardKey`), and one attack
    * search each is the cost of this seat. */
-  constructor(playerId: PlayerId, cards: CardRegistry, weights: EvalWeights, memo: Map<string, readonly AttackerDeclaration[]>) {
+  constructor(
+    playerId: PlayerId,
+    cards: CardRegistry,
+    weights: EvalWeights,
+    memo: Map<string, readonly AttackerDeclaration[]>,
+    onlyWhenHeld = false,
+    full = false,
+  ) {
     super(playerId, cards);
     this.cards = cards;
     this.weights = weights;
     this.memo = memo;
+    this.onlyWhenHeld = onlyWhenHeld;
+    this.full = full;
   }
 
   declareAttackers(view: ControllerView): readonly AttackerDeclaration[] {
+    // `"v2-when-v1-holds"`: v1's attack wherever it sends something; the
+    // search only where v1 would send nothing (the timid case: a menace
+    // Slicer held home from a lone blocker at 20 commander damage).
+    if (this.onlyWhenHeld) {
+      const v1 = super.declareAttackers(view);
+      if (v1.length > 0) return v1;
+    }
     const key = combatBoardKey(view.state, this.cards);
     const known = this.memo.get(key);
     if (known !== undefined) return known;
@@ -1115,7 +1133,9 @@ class RealAttacksController extends CombatRolloutController {
       weights: this.weights,
       maxSimulations: REAL_ATTACK_SIMULATIONS,
       plan: "off",
-      lightAttacks: true,
+      // `"v2-full"`: the whole search, its answer checked against the
+      // defenders' own blocks and the swing back (1a), as a real attack is.
+      lightAttacks: !this.full,
     }).declareAttackers(view);
     this.memo.set(key, attack);
     return attack;
@@ -1392,7 +1412,7 @@ export class EvalBotController extends HeuristicBotController {
   private heldPlay: { readonly turn: number; readonly action: Action } | null = null;
   private readonly rolloutDecisions: boolean;
   private readonly maxSimulations: number;
-  private readonly rolloutAttacks: "v1" | "v2";
+  private readonly rolloutAttacks: "v1" | "v2" | "v2-when-v1-holds" | "v2-full";
   /** The current decision's rollout attacks by combat board (`RealAttacksController`). */
   private attackMemo = new Map<string, readonly AttackerDeclaration[]>();
   private readonly lightAttacks: boolean;
@@ -1585,7 +1605,11 @@ export class EvalBotController extends HeuristicBotController {
   act(real: ControllerView): Action {
     const view = this.fairView(real);
     const memo = new Map<string, readonly AttackerDeclaration[]>();
-    const seat = this.rolloutAttacks === "v2" ? () => new RealAttacksController(this.playerId, this.cards, this.weights, memo) : null;
+    const onlyWhenHeld = this.rolloutAttacks === "v2-when-v1-holds";
+    const seat =
+      this.rolloutAttacks === "v1"
+        ? null
+        : () => new RealAttacksController(this.playerId, this.cards, this.weights, memo, onlyWhenHeld, this.rolloutAttacks === "v2-full");
     this.attackMemo = memo;
     const action = withOurAttackSeat(seat, () => withLibraryTop(this.libraryTopAt(view), () => this.answer(view)));
     // The answer was reached on cards dealt for the seat (`fairView`), and
@@ -3162,8 +3186,15 @@ export class EvalBotController extends HeuristicBotController {
     }
     if (this.rolloutDecisions) return this.selfInRollouts();
     if (this.blocksToCome(state)) return new RealBlocksController(this.playerId, this.cards, this.weights);
-    return this.rolloutAttacks === "v2" && this.attackToCome(state)
-      ? new RealAttacksController(this.playerId, this.cards, this.weights, this.attackMemo)
+    return this.rolloutAttacks !== "v1" && this.attackToCome(state)
+      ? new RealAttacksController(
+          this.playerId,
+          this.cards,
+          this.weights,
+          this.attackMemo,
+          this.rolloutAttacks === "v2-when-v1-holds",
+          this.rolloutAttacks === "v2-full",
+        )
       : undefined;
   }
 
