@@ -9012,6 +9012,41 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "sacrifices Skirk Prospector for the third mana of Slicer",
+    kind: "training",
+    rule: "A mana ability that sacrifices a creature is mana (rule 605.1a): two Mountains and Skirk Prospector are the {2}{R} of More Than Meets the Eye.",
+    run(weights, registry, makeBot) {
+      // Reported from live games (2026-11-27, a friend's Slicer deck): Skirk
+      // Prospector ("Sacrifice a Goblin: Add {R}") is there for a turn-one
+      // Prospector into a turn-two Slicer, and the bot "never pops it for
+      // mana": cast in 5 of 53 kept games and never sacrificed. The auto-payer leaves a
+      // mana ability that sacrifices to the player (`Game.manaSources` takes
+      // a `{T}` source, and a Treasure's own sacrifice), so the cast is never
+      // among the legal ones, and `handManaLine` makes by hand only a hand
+      // card's mana and a permanent's stored counters.
+      const game = Game.create({
+        seed: 3,
+        registry,
+        decks: [
+          { player: A, cards: Array<string>(40).fill("Mountain"), commanders: ["Slicer, Hired Muscle"] },
+          forestDeck(B),
+        ],
+      });
+      game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+      game.state.zones.perPlayer[A].hand = [];
+      lands(game, "Mountain", A, 2);
+      onBoard(game, "Skirk Prospector", A);
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const did = taken
+        .map((a) => (a.type === "cast-spell" || a.type === "play-land" ? cardOf(game, a.card) : a.type))
+        .filter((s) => s !== "pass-priority");
+      return {
+        passed: taken.some((a) => a.type === "cast-spell" && cardOf(game, a.card).includes("Slicer")),
+        detail: `did: ${did.join(", ") || "nothing"}`,
+      };
+    },
+  },
+  {
     name: "spends Jeweled Amulet's stored mana on the spell it makes castable",
     rule: "Mana kept as counters on a permanent is mana: three Mountains and a charged Amulet are a four-mana spell.",
     run(weights, registry, makeBot) {

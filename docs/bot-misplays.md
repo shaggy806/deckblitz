@@ -4,6 +4,147 @@ Misplays the user saw on the live site that couldn't be captured, each rebuilt a
 `engine/src/bot/scenarios.ts` (the `bot-misplay` skill). Newest first. An entry stays until its
 scenario passes and moves to the gate; then mark it `fixed` with the commit, or delete it.
 
+## 2026-11-27 — A friend's notes on the Slicer bot: ten habits, checked against 53 kept games
+
+Status: open. One training scenario ("sacrifices Skirk Prospector for the third mana of Slicer")
+and eight local captures (`captures/2026-11-2*-<room>-t<turn>-alice.json`), all wrong on today's
+build. One note is already fixed (Sword of the Chosen), one isn't a misplay (Fountainport).
+
+The same friend's notes, taken over a day of watching bots play their Slicer deck. Checked on the
+53 kept games where every seat was a bot and alice's had the deck (`games/2026-11-27`,
+`games/2026-11-28`); nearly all were played on `92db4139`, `b2659f954` or `1a33ca20d`, before
+`3ebb7eeb3` (pumps held until blocks) was live. Each position below was asked again of today's
+build (`e883b77e2`), so "today" is what a fix has to change. In order of what each costs.
+
+**1. Slicer's Vehicle side sent at the one player who can block it.** YK9SU-1 turn 8: bob and dave
+had no creature, carol an untapped Hexing Squelcher; the bot attacked carol, the Squelcher blocked
+and died, and Slicer stayed a Vehicle. The same choice seven times in 19 games (five went
+unblocked). Played on a round by v2 from that declaration: −19.2 at carol against +0.6 at bob and
+−1.7 at dave (Slicer converted, 15 damage dealt while handed round). **Why:** the attack search
+scores each declaration by the board after a simulated combat (`simulateCombat`), and there the
+Squelcher's death is worth more than the conversion: −7.76 at carol against −9.96 at either open
+player. The front face reads as the same creature with 2 more toughness. Nothing counts that it
+attacks on every other player's turn (the evaluation counts a handed-round creature as a threat
+to the others, `features.ts` "roams", and as its owner's body, no more), and double strike is one
+keyword like first strike. Capture `2026-11-28-YK9SU-t8-alice`. **Likely fix:** price our own
+handed-round creature by the attacks it makes for us each round (power, twice with double strike,
+at each other player's turn), so converting is worth what it brings. Might change: how eagerly
+Slicer is handed over at each upkeep, which reads the same board.
+
+**2. Welding Jar never spent on a Slicer another player holds.** CMZMH-1 turn 18: the player
+holding Slicer aimed Terror of the Peaks' trigger at it (on purpose: `onLoan`, a borrowed
+permanent is fair game for its holder's removal, 2026-11-22), and alice passed with Welding Jar
+out. YPHL5-1 turn 17: the same under Supreme Verdict, which regeneration survives. The Jar was
+used on a held Slicer once, Y2A8Z-1 turn 14, while it attacked. **Why:** `opponentPump`
+(`eval-bot.ts`, the 2026-09-27 rule that helping an opponent's creature is only for one attacking
+someone else) drops any helpful target a player other than us controls unless it is attacking a
+third player. It reads the controller, so our own commander on loan until end of turn is "an
+opponent's creature at home" and "regenerate Slicer" is never scored: in CMZMH the search scored
+the Jar at itself and at two of the holder's mana rocks, all equal to passing. `rankTargets`
+(`target-polarity.ts`) has the same blind side: `onLoan` puts a borrowed permanent on the right
+side of a harmful slot, and nothing puts our lent one on the right side of a helpful one, so it is
+ranked last. The evaluation is not the cause: it counts a handed-round creature as its owner's.
+This holds for every helpful effect (a pump, a protection, Maze of Ith), not the Jar alone.
+Captures `2026-11-27-CMZMH-t18-alice`, `2026-11-27-YPHL5-t17-alice`. **Likely fix:** in both
+places, a permanent we own that comes back to us (handed round, or `controlEndsAtCleanup`) is
+ours for a helpful slot. Keep the old rule for a pump that adds damage while it attacks us.
+
+**3. Skirk Prospector is never sacrificed for mana.** Cast in 5 of the 53 games, sacrificed in
+none. **Why:** the bot can't see the mana. The engine's payer takes `{T}` sources and a Treasure's
+own sacrifice (`Game.manaSources`) and leaves "Sacrifice a Goblin: Add {R}" to the player, so a
+spell that needs it is never among the legal casts; the bot's `handManaLine` makes mana by hand
+only from a card in hand (Simian Spirit Guide) and from stored counters (Jeweled Amulet). In
+VUPJG-1 the one turn-one Prospector did get Slicer out on the second turn, through a Spirit Guide
+from hand. Training scenario: two Mountains and the Prospector, Slicer in the command zone; the
+bot does nothing. **Likely fix:** a third kind of by-hand source in `byHandMana`, a permanent's
+mana ability that sacrifices a creature, under the same test (it makes castable a spell of mana
+value 3 or more we would cast, `HAND_MANA_FLOOR`). Needs a rule for which creature goes where the
+cost is a choice: the strong decks' Krenko, Mob Boss list runs the Prospector too.
+
+**4. A planeswalker's last loyalty spent the turn it arrives.** BKSBJ-1 turn 9: Jeska, Thrice
+Reborn cast on 1 loyalty and at once −1 for a Birds of Paradise and 1 at two players (−6.3 against
+−11.8 for passing); today the same. The friend's rule: a planeswalker with a standing ability and
+no plus ability is for keeping (Jeska's 0 triples Slicer's damage every turn he is out; Narset,
+Parter of Veils; Kiora, Behemoth Beckoner). **Why:** a planeswalker on the battlefield is worth
+its loyalty counters at 1 each and its mana value as a permanent, and `standingWorth`
+(`features.ts`) leaves planeswalkers out by name ("which `loyalty` prices"), so Narset's static,
+Kiora's trigger and a 0 ability that can be used every turn are worth nothing. Losing Jeska moved
+three features (`otherPermanents` −1, `permanentManaValue` −3, `loyalty` −1), and the Birds and 2
+life paid more. Capture `2026-11-27-BKSBJ-t9-alice`. Narset's −2 from 5 is ordinary play and not
+recorded; taking her to 0 would be this. **Likely fix:** give a planeswalker the standing worth
+of its static and triggered abilities, and of a loyalty ability costing 0 or less that it could
+use each turn, so the counters that keep it alive are worth what it does. Might change: how often
+bots attack planeswalkers that now read as worth more.
+
+**5. Homeward Path is always tapped for mana.** Its second ability was never activated. With the
+Path out, it was tapped at the end of alice's turn 25 times of 31, six of them with another mana
+land of hers untapped. **Why:** two things. The payer orders sources "fewer colours first"
+(`Game.manaSources`), so a land that makes only {C} is the first tapped for any generic cost,
+before a Mountain. And nothing holds mana back from a turn's plays for a land's other ability.
+The search does value the play when the land is untapped: in 3JEMN-1 turn 30 (today's build),
+Slicer held by bob and about to die in a block, the Path was tapped; untapped in the same
+position, activating it scores −24.8 against −36.3 for passing. Not recorded as a capture: the
+tap is the payer's choice inside a cast, not a decision the bot is asked. The friend's other line
+for it, handing Slicer over in a two-player game and taking him back in the upkeep so he never
+converts, is not looked for at all: the "hand it over" question is scored with v1 playing the
+rest of the turn. **Likely fix:** mark a land whose other `{T}` ability isn't a mana ability as
+`ManaSource.reserved` (tapped last, as a hideaway land is) where a permanent of ours is on loan
+or about to be. The two-player line needs the decision's rollout to try the Path.
+
+**6. Smoke Bomb cast in the main phase.** Cast twice, both times in her own first main phase.
+Z7A95-1 turn 2: on alice's first turn off Mishra's Workshop with no creature anywhere, so it was
+sacrificed next upkeep for nothing (−15.4 against −21.5 for passing; today the same). MPDXX-1
+turn 9: before combat with Slicer out, and two turns later Slicer died in a block on Meren's turn
+with Maze of Ith untapped: every creature had the Bomb's shroud, so Maze had no target. **Why:** Smoke Bomb's static
+earns `standingEffects` 4.5 beside a permanent's 1 and its mana value, against a card in hand, and
+the rollout ends before the upkeep that sacrifices it; `goneAtEndStep` reads what the end step
+takes, not an upkeep. Nothing says a flash permanent gains by waiting. Capture
+`2026-11-27-Z7A95-t2-alice`. **Likely fix:** read "at the beginning of your upkeep, sacrifice
+this" as gone by our next turn (no standing worth), and hold a flash card with nothing to answer
+for the end step of the turn before ours, which is `BACKLOG.md`'s "Waiting for the later window"
+(b), not built.
+
+**7. Pump spells before blocks.** Three cards, three answers. *Sword of the Chosen*, activated
+in alice's first main phase four times in the games: fixed by `3ebb7eeb3`, today's bot passes
+there (MBALN-1 turn 35). *Built to Smash* at the declare-attackers step, three times: still cast
+today (56.2 against 48.2). `wastedNow` holds a pump until blocks only if it raises power and
+toughness and nothing else (`onlyRaisesPowerToughness`), and this one also gives an artifact
+creature trample. Capture `2026-11-27-Y8G7T-t8-alice`. *Monstrous Rage* in the first main phase,
+seven casts of seven: still cast today (NQ3ME-1 turn 7, −1.4 against −6.9). Its Monster Role
+lasts, so it isn't `onlyUntilEndOfTurn` and is never held; not captured, since a lasting Aura
+cast before combat isn't plainly wrong. **Likely fix:** let the before-blocks hold cover a pump
+with a keyword rider. As a save for a Slicer another player holds, all three wait on 2 above.
+
+**8. Maze of Ith on its own attackers.** Five times in the later 31 games, on alice's own turn:
+after damage to untap Slicer or Rug of Smothering, and once (E7GY2-1 turn 33) on a Fish it had
+just attacked with, undoing the attack. Today two of the four re-asked still happen (the Fish,
+121.9 against 119.8; the Rug by 0.5). **Why:** the untapped creature or the saved token is on the
+board the rollout ends on, and nothing prices Maze of Ith untapped through three opponents'
+turns. For Slicer the untap buys nothing either way: the hand-over untaps him, and the Vehicle
+can't block. Capture `2026-11-27-E7GY2-t33-alice`. **Likely fix:** a worth for a permanent whose
+tap ability answers an attacker, while it is untapped on other players' turns (the way `guards`
+prices Welding Jar), and no attack with a creature that only Maze keeps alive.
+
+**9. Untimely Malfunction at a mana rock.** All three modes were used in the games: five casts,
+at Sphere of Resistance, Skullclamp and an Arcane Signet, one redirecting a Boros Charm and one
+stopping a blocker (its second target a creature of alice's own). The note that stands is the Signet (39D25-1 turn 17, in alice's own
+attack; today the same, 67.3 against 63.4), with the deck's answer to a spell aimed at Slicer
+spent. **Why:** the hold-for-value floors cover a plain creature (`removesTooLittle`), and
+nothing asks more of artifact removal than that the artifact be worth something. A modal spell's
+other modes are tried at their first target alone: the can't-block mode was scored once, at an
+opposing creature and our own Slicer. Capture `2026-11-27-39D25-t17-alice`. **Likely fix:** a
+floor for removal at a mana rock while opponents hold cards, as for a Grizzly Bears.
+
+**10. Fountainport Fish, not a misplay as played.** Six activations in the later 31 games, five
+of them Fish and five in alice's first main phase. In the two asked again her hand was empty or
+held one card she couldn't cast, so no mana was held for anything. Making the Fish at the end of
+the turn before hers instead is the same unbuilt window as 6.
+
+On "opponents colluding to get him killed": Slicer died in combat on another player's turn ten
+times in the later 31 games. Asked again at each block, alice had no play to make in nine: her
+mana was spent on her own turn (in MPDXX-1 Maze of Ith stood untapped behind her own Smoke Bomb).
+That is 5 and the end-step window again. The holder's removal aimed at him (2) is on purpose.
+
 ## 2026-11-27 — The First Sliver a round late: Moldering Gym over the commander's colours
 
 Status: fixed 2026-11-27. Scenario: "cracks Krosan Verge for the commander's colours, not a
