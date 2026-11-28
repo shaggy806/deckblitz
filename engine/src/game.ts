@@ -40384,6 +40384,14 @@ export class Game {
     );
   }
 
+  /** How many creatures `blocker` is blocking, every block of the
+   * declaration made: "whenever ~ blocks two or more creatures". */
+  private blockingCount(blocker: ObjectId): number {
+    const object = this.state.objects[blocker];
+    if (object?.blocking === null || object?.blocking === undefined) return 0;
+    return 1 + (object.blockingAlso?.length ?? 0);
+  }
+
   /** `blocker` blocks at least one creature matching `filter` (rule 509.3a's
    * "blocks", once however many), every block of the declaration made. */
   private blocksAMatch(blocker: ObjectId, filter: CardFilter, self: GameObject): boolean {
@@ -41530,7 +41538,10 @@ export class Game {
           // "Whenever ~ blocks" once for a blocker however many creatures of
           // a band it blocks (rule 509.3a); "blocks a creature, … that
           // creature" once for each (509.3b).
-          (event.alsoBlocked !== true || spec.object === "blocked") &&
+          (event.alsoBlocked !== true ||
+            spec.object === "blocked" ||
+            (spec.atLeast !== undefined && event.blockingBefore !== undefined && event.blockingBefore < spec.atLeast)) &&
+          (spec.atLeast === undefined || this.blockingCount(event.blocker) >= spec.atLeast) &&
           this.matchesWho(spec.who, event.blocker, self) &&
           !(spec.otherOnly === true && event.blocker === self.id) &&
           // With `object: "blocked"` the blocked creature is the trigger
@@ -63361,6 +63372,7 @@ controlledBy,
         (id) => !this.state.objects[id].blockedBy.includes(blockerId),
       );
       const newlyBlocked = blocked.filter((id) => !this.state.objects[id].blocked);
+      const blockingBefore = 1 + (blocker.blockingAlso?.length ?? 0);
       for (const id of blocked) {
         const attacker = this.state.objects[id];
         attacker.blockedBy.push(blockerId);
@@ -63368,7 +63380,15 @@ controlledBy,
         blocker.blockingAlso = [...(blocker.blockingAlso ?? []), id];
       }
       invalidateComputedCache();
-      for (const id of blocked) this.emit({ type: "blocker-declared", blocker: blockerId, attacker: id, alsoBlocked: true });
+      for (const [i, id] of blocked.entries()) {
+        this.emit({
+          type: "blocker-declared",
+          blocker: blockerId,
+          attacker: id,
+          alsoBlocked: true,
+          ...(i === 0 ? { blockingBefore } : {}),
+        });
+      }
       for (const id of newlyBlocked) {
         this.emit({ type: "attacker-blocked", attacker: id, blockers: [...this.state.objects[id].blockedBy] });
       }

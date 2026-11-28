@@ -1342,6 +1342,12 @@ export type GameEvent =
        * creature" and "becomes blocked by a creature" trigger for each
        * (509.3b, 509.3d). */
       readonly alsoBlocked?: true;
+      /** On the first of an effect's further blocks by a creature already
+       * blocking (`swap-blocks`' extra attackers): how many creatures it was
+       * blocking before them — what "whenever ~ blocks two or more
+       * creatures" (Lairwatch Giant's ruling) asks whether it has just
+       * reached. */
+      readonly blockingBefore?: number;
     })
   | (Base & {
       /** An attacking creature became blocked (rule 509.1h) — once per

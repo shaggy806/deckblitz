@@ -27232,6 +27232,21 @@ describe("damage back to its source, and a granted trigger under a condition (Te
     expect(emissary.complete).toBe(true);
     expect(emissary.triggered[0].trigger).toEqual({ on: "sacrifice", who: "you", selfOnly: true, whileCasting: "emerge" });
   });
+
+  it("reads Lairwatch Giant's \"whenever this creature blocks two or more creatures\"", () => {
+    const giant = parseFace(
+      {
+        name: "Lairwatch Giant",
+        type_line: "Creature — Giant Warrior",
+        mana_cost: "{5}{W}",
+        oracle_text:
+          "This creature can block an additional creature each combat.\nWhenever this creature blocks two or more creatures, it gains first strike until end of turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(giant.complete).toBe(true);
+    expect(giant.triggered[0].trigger).toEqual({ on: "blocks", who: "self", atLeast: 2 });
+  });
 });
 
 describe("block requirements on targets (Hunt Down, Culling Mark)", () => {

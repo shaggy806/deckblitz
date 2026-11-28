@@ -6,6 +6,7 @@
     "filter:cast-using-teamwork",
     "condition:cast-via-own-graveyard-alt-cost",
     "effect:chosen-hand-card-to-library-nth-from-top",
+    "trigger:blocks-two-or-more",
     "trigger:sacrificed-for-emerge",
     "decision:choose-keyword-as-cost",
     "effect:each-player-puts-counter-on-chosen",

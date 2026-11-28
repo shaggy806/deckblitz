@@ -2341,6 +2341,12 @@ export type TriggerKind =
        * (Serra Inquisitors): once however many it blocks (rule 509.3a), if at
        * least one of them matches. */
       readonly blocking?: CardFilter;
+      /** "Whenever this creature blocks **two or more creatures**" (Lairwatch
+       * Giant): once, as the declaration completes, if it blocks at least
+       * this many (rule 509.3a); and once more if an effect then makes it
+       * block more and it reaches this many only then — never again once
+       * it has (the card's ruling). */
+      readonly atLeast?: number;
     }
   | {
       /**

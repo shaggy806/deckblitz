@@ -9402,3 +9402,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A chosen hand card put Nth from the top (2026-11-28).** `effect:chosen-hand-card-to-library-nth-from-top`: `discard-chosen`'s `libraryFromTop` beside `destination: "library-top"` (the bottom of a shorter library). Lost Hours. `test/hand-card-to-library-nth.test.ts`.
 
 **A sacrifice while casting a spell with emerge (2026-11-28).** `trigger:sacrificed-for-emerge`: the `sacrifice` trigger's `whileCasting: "emerge"`, read off `Game.castingWithEmerge` (the caster while `castSpell` runs, if the spell has emerge), so any sacrifice of the cast counts, for its emerge cost or not (Foul Emissary, `test/sacrificed-while-casting-emerge.test.ts`).
+
+**Blocks two or more creatures (2026-11-28).** `trigger:blocks-two-or-more`: the `blocks` trigger's `atLeast`, counted off `blocking` and `blockingAlso` once the declaration is made; an effect's further blocks carry `blocker-declared.blockingBefore`, so it fires again only on reaching the count then (Lairwatch Giant, `test/blocks-two-or-more.test.ts`).

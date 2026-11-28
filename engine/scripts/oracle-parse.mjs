@@ -2319,6 +2319,10 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ becomes tapped$/.test(c)) return self("becomes-tapped");
   // "That creature": the one it blocks (Wall of Dust).
   if (/^Whenever ~ blocks a creature$/.test(c)) return [{ on: "blocks", who: "self", object: "blocked" }];
+  // Lairwatch Giant: once it blocks that many (its ruling).
+  if ((m = /^Whenever ~ blocks (two|three) or more creatures$/.exec(c))) {
+    return [{ on: "blocks", who: "self", atLeast: m[1] === "two" ? 2 : 3 }];
+  }
   if (/^Whenever ~ attacks alone$/.test(c)) return [{ on: "attacks-alone", who: "self" }];
   // "Whenever two or more creatures your opponents control attack" (Flummoxed
   // Cyclops): once per declaration.
