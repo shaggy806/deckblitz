@@ -9867,6 +9867,17 @@ export class Game {
         : { type: "creature-type-chosen", object: awaiting.source, creatureType },
     );
     this.state.awaiting = null;
+    if (awaiting.faceUpForm !== undefined) {
+      // Asked as it's turned face up (Aquamorph Entity): it turns now, as
+      // that form, if it's still that face-down permanent (rule 400.7).
+      const { faceUpForm } = awaiting;
+      const object = this.state.objects[awaiting.source];
+      if (object !== undefined && object.zone === "battlefield" && object.faceDown !== undefined) {
+        this.becomeFaceUp(awaiting.source, faceUpForm.player, faceUpForm.megamorph, faceUpForm.x, faceUpForm.priorityTo, faceUpForm.copy, creatureType);
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(faceUpForm.priorityTo ?? this.activePlayer);
+      return;
+    }
     if (awaiting.remember !== undefined) {
       // A resolving effect's answer, kept on its source while that's still
       // the permanent that asked (rule 400.7).
@@ -65311,6 +65322,8 @@ controlledBy,
     priorityTo?: PlayerId,
     /** What `copyOnEnter.orTurnedFaceUp` chose to copy, once it's asked. */
     copyAnswer?: ObjectId | null,
+    /** What `becomesOnEnter.orTurnedFaceUp` chose it becomes, once asked. */
+    formAnswer?: string,
   ): void {
     const object = this.state.objects[id];
     const card = this.registry.get(object.cardName);
@@ -65339,6 +65352,34 @@ controlledBy,
         return;
       }
     }
+    // "As this creature enters or is turned face up, it becomes your choice
+    // of 5/1 or 1/5" (Aquamorph Entity) — its own, or what it turns up as a
+    // copy of (708.11, the ruling): chosen first, and it turns face up as
+    // that form (the ruling: never the 0/0 between).
+    const copiedFirst = copySpec !== null && copyAnswer !== undefined && copyAnswer !== null ? this.state.objects[copyAnswer] : undefined;
+    const becomes = (copiedFirst !== undefined ? this.registry.get(this.unflippedName(printedCardName(copiedFirst))) : card).becomesOnEnter;
+    const form =
+      becomes?.orTurnedFaceUp === true && becomes.flip !== true && formAnswer !== undefined
+        ? becomes.forms.find((f) => f.label === formAnswer)
+        : undefined;
+    if (becomes?.orTurnedFaceUp === true && becomes.flip !== true && formAnswer === undefined && becomes.forms.length > 0) {
+      this.beginCreatureTypeChoice(id, object.controller, becomes.forms.map((f) => f.label));
+      const asked = this.state.awaiting as AwaitingDecision | null;
+      if (asked?.kind === "choose-creature-type") {
+        this.state.awaiting = {
+          ...asked,
+          prompt: `${copiedFirst !== undefined ? nameOf(copiedFirst) : card.name} becomes your choice of:`,
+          faceUpForm: {
+            player,
+            megamorph: megamorphCounter,
+            x,
+            ...(priorityTo !== undefined ? { priorityTo } : {}),
+            ...(copyAnswer !== undefined ? { copy: copyAnswer } : {}),
+          },
+        };
+      }
+      return;
+    }
     delete object.faceDown;
     object.turnedFaceUpOnTurn = this.state.turn.number;
     // A new timestamp each time it turns face up (rule 613.7f): its own
@@ -65356,6 +65397,8 @@ controlledBy,
         copySpec.untilTurnedFaceDown === true ? "turned-face-down" : copySpec.untilEndOfTurn === true ? "end-of-turn" : undefined,
       );
     }
+    // The form chosen is a copiable value (rule 707.2), over what it copied.
+    if (form !== undefined) object.modifiers.push({ ...copyExceptionModifier(form.as, this.registry), timestamp: -2 });
     invalidateComputedCache();
     this.revealFaceDown(id);
     if (copySpec !== null && copied !== undefined) {

@@ -1949,6 +1949,7 @@
   "replacement:prevent-damage-by-spell-or-permanent-it-becomes",
   "effect:opponent-gains-control-of-chosen",
   "replacement:prevent-damage-per-counter",
+  "replacement:becomes-on-turned-face-up",
   "effect:prevent-next-damage-by-source",
   "effect:prevent-next-damage-to-you-from-filter",
   "effect:cant-be-blocked-by-filter-until-eot",

@@ -4859,6 +4859,18 @@ export type AwaitingDecision =
        * used on a turn this source skips anyway (rule 616.1), the first option
        * using it. `occurrence` counts the turns that would begin from now. */
       readonly turnSkip?: { readonly occurrence: number; readonly owed?: true };
+      /** `options` are the forms of a `becomesOnEnter` with `orTurnedFaceUp`
+       * (Aquamorph Entity), asked as the face-down `source` is turned face up:
+       * it's turned once this is answered, as that form, as `Game.becomeFaceUp`
+       * was asked to turn it (the `choose-copy`'s `faceUp`, with what a copy
+       * question already chose, `copy`). */
+      readonly faceUpForm?: {
+        readonly player: PlayerId;
+        readonly megamorph: boolean;
+        readonly x: number;
+        readonly priorityTo?: PlayerId;
+        readonly copy?: ObjectId | null;
+      };
       /** A spell's cost being paid (`BeholdSpec.shareCreatureType`): the
        * answer is `source`'s `chosenCreatureType` while it's still that spell
        * on the stack, and `priorityTo` gets priority after (rule 117.3c). */

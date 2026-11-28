@@ -139,6 +139,13 @@ export interface BecomesOnEnterForm {
 export interface BecomesOnEnter {
   readonly forms: readonly BecomesOnEnterForm[];
   readonly flip?: true;
+  /** "As this creature enters **or is turned face up**, it becomes your
+   * choice of 5/1 or 1/5" (Aquamorph Entity): the choice is asked again as
+   * it's turned face up, before it turns (rule 708.8 — it turns face up as
+   * that form, never the 0/0 between, the ruling), the form a copiable value
+   * as when it enters. Read from what it turns up as: a Vesuvan Shapeshifter
+   * turning up as a copy of one chooses too (rule 708.11, the ruling). */
+  readonly orTurnedFaceUp?: true;
 }
 
 export interface CopyOnEnter {
