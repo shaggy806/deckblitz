@@ -9374,3 +9374,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **Sharing a color with the sacrificed creature (2026-11-28).** `filter:shares-color-with-sacrificed`: no engine code — `sharesColorWith: { paid: "sacrificed" }` in `discard-hand`'s filter, bound as it resolves to the creature's colors as it last existed. Mind Extraction. `test/shares-color-with-sacrificed.test.ts`.
 
 **Each creature blocking the source, by keyword (2026-11-28).** `effect:modify-pt-each-creature-blocking-source`: no engine code — Baneblade Scoundrel's `modify-pt-all` over `blockingRelation: "blocking"` with `notKeyword`, beside flanking's own trigger. Knight of Valor. `test/each-creature-blocking-source.test.ts`.
+
+**Sharing a color with the top card of your library (2026-11-28).** `filter:shares-color-with-library-top`: `ShareReference` `{ libraryTop: "you" }` (filter.ts `liveReferenceObjects`, read live in a static's scope; effects.ts `shareReferenceObjects`), and `bottom-of-library`'s `top` (the top card to `then`, unrevealed). Crown of Convergence. `test/shares-color-with-library-top.test.ts`.

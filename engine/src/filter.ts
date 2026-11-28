@@ -322,6 +322,10 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
  *   looks in the graveyard of the controller of the object being asked
  *   about — "a creature spell with the same name as a card in **their**
  *   graveyard" (Dragonlord Kolaghan), which only a live read can answer.
+ * - `{ libraryTop: "you" }` — the top card of the controller's library, as it
+ *   is now: Crown of Convergence's "creatures you control that share a color
+ *   with that card" (an empty library names nothing). Read live in a static's
+ *   scope too: a library card's colors don't wait on the battlefield's fold.
  *
  * Nothing to compare with: nothing shares a type with it.
  */
@@ -329,7 +333,8 @@ export type ShareReference =
   | ObjectRef
   | { readonly controlled: CardFilter }
   | { readonly permanents: CardFilter }
-  | { readonly graveyard: CardFilter; readonly itsController?: true };
+  | { readonly graveyard: CardFilter; readonly itsController?: true }
+  | { readonly libraryTop: "you" };
 
 /**
  * What a `shares…TypeWith` clause compares with. A bare `ShareReference`
@@ -2607,6 +2612,10 @@ export function liveReferenceObjects(
   // resolution's sets name nothing here.
   if (isObjectSetRef(reference)) return staticSetMembers(state, reference, ctx.source).map((m) => m.object);
   if (typeof reference !== "object") return undefined;
+  if ("libraryTop" in reference) {
+    const top = state.zones.perPlayer[ctx.you]?.library[0];
+    return top === undefined ? [] : [top];
+  }
   const innerCtx: FilterContext = {
     you: ctx.you,
     ...(ctx.x !== undefined ? { x: ctx.x } : {}),
@@ -3188,7 +3197,9 @@ export function matchesFilter(
   if (filter.sharesColorWithMana !== undefined) return false;
   if (filter.sharesColorWith !== undefined) {
     const others = liveReferenceObjects(state, registry, filter.sharesColorWith, ctx, live?.controller ?? lki?.controller);
-    if (others === undefined || (ctx.layered !== undefined && filter.sharesColorWith !== "attached")) return false;
+    const liveInFold =
+      filter.sharesColorWith === "attached" || (typeof filter.sharesColorWith === "object" && "libraryTop" in filter.sharesColorWith);
+    if (others === undefined || (ctx.layered !== undefined && !liveInFold)) return false;
     if (!others.includes(id)) {
       const colors: ReadonlySet<Color> =
         live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);

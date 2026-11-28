@@ -3654,10 +3654,14 @@ export type EffectSpec =
        * graveyard" — or a `PlayerRef`; the effect's controller's by default.
        * Nobody's, and nothing done, with that player gone or the slot
        * illegal. With an empty library `then` runs with slot 0 empty, as
-       * `reveal-top`'s does.
+       * `reveal-top`'s does. `top` is the top card instead, unrevealed and
+       * unlooked-at (as `top-of-graveyard`'s `bottom` is its bottom card):
+       * Crown of Convergence's "put the top card of your library on the
+       * bottom of your library", a `then` of `put-on-library` at the bottom.
        */
       readonly kind: "bottom-of-library";
       readonly whose?: number | PlayerRef;
+      readonly top?: true;
       readonly then: EffectSpec;
     }
   | {
@@ -21366,6 +21370,7 @@ function shareReferenceObjects(reference: ShareReference, ctx: ResolutionContext
   // "Their graveyard" asks about the object being matched, which an effect
   // binding its filter ahead of time doesn't have: it names nothing.
   if ("graveyard" in reference) return reference.itsController === true ? [] : ctx.graveyardCardsMatching(reference.graveyard);
+  if ("libraryTop" in reference) return ctx.libraryTop(ctx.controller, 1);
   const filter = "controlled" in reference ? { ...reference.controlled, controlledBy: "you" as const } : reference.permanents;
   return ctx.permanentsMatching(filter).map((m) => m.object);
 }
@@ -22243,7 +22248,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
         owner = ref?.kind === "player" && !illegalSlot(whose, ctx) ? ref.player : undefined;
       }
       if (owner === undefined || !ctx.playersInScope("each-player").includes(owner)) return;
-      const card = ctx.libraryBottom(owner);
+      const card = spec.top === true ? ctx.libraryTop(owner, 1)[0] : ctx.libraryBottom(owner);
       applyEffectSpec(spec.then, ctx.withTargets(card === undefined ? [] : [{ kind: "object", object: card }]));
       return;
     }

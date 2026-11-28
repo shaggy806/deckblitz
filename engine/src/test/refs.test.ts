@@ -369,6 +369,8 @@ describe("the pool", () => {
     expect(bad).toEqual([]);
   });
 
+  // `{ libraryTop }` is no ObjectRef: `liveReferenceObjects` reads it live
+  // in a static's scope (Crown of Convergence).
   it("keeps ObjectRef words off a static (only `source` and `attached` read there)", () => {
     const bad: string[] = [];
     for (const def of [...POOL_CARDS, ...TOKEN_CARDS]) {
@@ -379,7 +381,8 @@ describe("the pool", () => {
           scope?.filter?.["sameNameWith"] ??
           scope?.filter?.["attachedToObject"] ??
           scope?.filter?.["notObject"];
-        if (ref !== undefined && ref !== "source" && ref !== "attached") bad.push(`${def.name}: ${JSON.stringify(ref)}`);
+        const libraryTop = typeof ref === "object" && ref !== null && "libraryTop" in ref;
+        if (ref !== undefined && ref !== "source" && ref !== "attached" && !libraryTop) bad.push(`${def.name}: ${JSON.stringify(ref)}`);
       }
     }
     expect(bad).toEqual([]);

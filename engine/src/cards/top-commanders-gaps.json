@@ -12,6 +12,7 @@
     "effect:block-if-able-illegal-attacker-slot",
     "filter:shares-color-with-sacrificed",
     "effect:modify-pt-each-creature-blocking-source",
+    "filter:shares-color-with-library-top",
     "effect:search-same-name-as-chosen-permanents",
     "effect:reveal-until-or-x-cards",
     "effect:return-if-sacrificed-this-way",
