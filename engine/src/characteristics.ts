@@ -3317,12 +3317,26 @@ function layerSixLossAt(state: GameState, registry: CardRegistry, object: GameOb
   return own === null || fromStatic > own ? fromStatic : own;
 }
 
+/** The basic land type a `setsChosenLandType` static sets what it reaches
+ * to: its source's choice as it entered — the first (`true`), or the second
+ * of two (`"second"`, Illusionary Terrain). None while nothing (or nothing
+ * that is a basic land type) was chosen, and none for another static. */
+export function chosenLandTypeSet(ability: StaticAbility, source: GameObject): string | undefined {
+  const chosen =
+    ability.setsChosenLandType === true
+      ? source.chosenOnEnter
+      : ability.setsChosenLandType === "second"
+        ? source.chosenOnEnterAlso?.[0]
+        : undefined;
+  return typeof chosen === "string" && isBasicLandType(chosen) ? chosen : undefined;
+}
+
 /** Whether a static sets the land types of what it reaches to basic ones
  * (rule 305.7 — Blood Moon's "nonbasic lands are Mountains", Convincing
  * Mirage's chosen type), as opposed to adding one "in addition". */
 export function setsBasicLandType(ability: StaticAbility): boolean {
   return (
-    ability.setsChosenLandType === true ||
+    ability.setsChosenLandType !== undefined ||
     (ability.setSubtypes ?? []).some(isBasicLandType) ||
     (ability.setAllSubtypes ?? []).some(isBasicLandType)
   );
@@ -3592,7 +3606,7 @@ export function entersWithoutAbilities(state: GameState, registry: CardRegistry,
       if (source === undefined || source.id === object.id || state.players[source.controller]?.hasLost === true) continue;
       for (const ability of staticsOf(registry, rulesTextName(source)).layer4) {
         if (!setsBasicLandType(ability)) continue;
-        if (ability.setsChosenLandType === true && !isBasicLandType(String(source.chosenOnEnter))) continue;
+        if (ability.setsChosenLandType !== undefined && chosenLandTypeSet(ability, source) === undefined) continue;
         if (ability.affects.scope === "attached" || ability.affects.scope === "paired" || ability.affects.scope === "chosen") continue;
         if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
         if (staticAffects(state, registry, ability.affects, source, object, { entering: true })) return true;
@@ -4546,11 +4560,12 @@ function foldLayerFourOnce(
     if (ability.loseCreatureTypes === true) subtypes = subtypes.filter((s) => subtypeKind(s) !== "creature");
     // Lithoform Blight's "loses all land types" (305.7).
     if (ability.loseLandTypes === true) subtypes = subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s));
-    if (ability.setsChosenLandType === true) {
+    if (ability.setsChosenLandType !== undefined) {
       // Convincing Mirage's "enchanted land is the chosen type": its
-      // source's choice as it entered, replacing every land type (205.1a).
-      const chosen = source.chosenOnEnter;
-      if (typeof chosen !== "string" || !isBasicLandType(chosen)) return;
+      // source's choice as it entered, replacing every land type (205.1a);
+      // Illusionary Terrain's second choice.
+      const chosen = chosenLandTypeSet(ability, source);
+      if (chosen === undefined) return;
       subtypes = [...subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s)), chosen];
     }
     if (ability.addsChosenLandType === true) {
@@ -4687,7 +4702,7 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.loseCreatureTypes === true ||
     ability.addsChosenCreatureType === true ||
     ability.setsChosenCreatureType === true ||
-    ability.setsChosenLandType === true ||
+    ability.setsChosenLandType !== undefined ||
     ability.addsChosenLandType === true ||
     ability.takesLastExiledCard !== undefined
   );
@@ -4816,7 +4831,7 @@ function withoutTextLostSources(
   const setters = sources.filter(
     (s) =>
       setsBasicLandType(s.ability) &&
-      (s.ability.setsChosenLandType !== true || isBasicLandType(String(s.source.chosenOnEnter))),
+      (s.ability.setsChosenLandType === undefined || chosenLandTypeSet(s.ability, s.source) !== undefined),
   );
   if (setters.length === 0 && !sources.some((s) => s.source.modifiers.some(modifierSetsBasicLandType))) return sources;
   const textLost = new Map<ObjectId, boolean>();

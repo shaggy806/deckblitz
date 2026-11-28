@@ -6972,6 +6972,18 @@ describe("land-type setting statics (rule 305.7)", () => {
       setsChosenLandType: true,
     });
   });
+  it("reads Illusionary Terrain's two chosen types, the first reached and set to the second", () => {
+    const terrain = face(
+      "Enchantment",
+      "As this enchantment enters, choose two basic land types.\nBasic lands of the first chosen type are the second chosen type.",
+    );
+    expect(terrain.chooseOnEnter).toEqual(["Plains", "Island", "Swamp", "Mountain", "Forest"]);
+    expect(terrain.chooseOnEnterCount).toBe(2);
+    expect(terrain.static[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "land", supertype: "basic", ofChosenLandType: true } },
+      setsChosenLandType: "second",
+    });
+  });
 });
 
 describe("chosen counter costs, modal activated abilities, the host's prohibition (B254)", () => {

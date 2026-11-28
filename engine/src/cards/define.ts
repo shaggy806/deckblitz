@@ -2558,8 +2558,12 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * type to a basic one takes the abilities its rules text gave it (rule
    * 305.7 — `landTextLost`), as a fixed `setSubtypes` of one does (Blood
    * Moon's `["Mountain"]`). Nothing changes while none is chosen.
+   * `"second"`: the second of two chosen (`chooseOnEnterCount: 2`, its
+   * `chosenOnEnterAlso`) — Illusionary Terrain's "basic lands of the first
+   * chosen type (`CardFilter.ofChosenLandType`) are **the second chosen
+   * type**". Read through `chosenLandTypeSet`.
    */
-  readonly setsChosenLandType?: true;
+  readonly setsChosenLandType?: true | "second";
   /**
    * Layer 4 — the basic land type this static's own permanent chose as it
    * entered (`BASIC_LAND_TYPE_CHOICES`), **in addition** to the other types

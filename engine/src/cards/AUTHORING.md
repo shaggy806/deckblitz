@@ -6944,7 +6944,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   land is the chosen type" — with 305.7's loss as above. Nothing changes
   before a choice. `addsChosenLandType: true` is "the chosen type **in
   addition to its other types**" (Thran Portal): the type and its mana
-  ability (305.6), the land's own text kept.
+  ability (305.6), the land's own text kept. `setsChosenLandType: "second"`
+  sets the second of two chosen (`chooseOnEnterCount: 2`), and the filter
+  clause `ofChosenLandType: true` reaches what has the first: Illusionary
+  Terrain's "basic lands of the first chosen type are the second chosen
+  type" is `affects: { scope: "filter", filter: { type: "land", supertype:
+  "basic", ofChosenLandType: true } }`, `setsChosenLandType: "second"`
+  (`illusionary-terrain.test.ts`).
 - `removeTypes: CardType[]` — layer 4: the affected permanents **aren't**
   these, and lose the subtypes that went only with them (rule 205.1a);
   supertypes stay. A Theros God's "As long as your devotion to white is less

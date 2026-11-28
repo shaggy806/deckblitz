@@ -21879,6 +21879,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.chooseOnEnter = ["Cave", "Desert", "Forest", "Gate", "Island", "Lair", "Locus", "Mine", "Mountain", "Plains", "Planet", "Power-Plant", "Sphere", "Swamp", "Tower", "Town", "Urza's"];
       continue;
     }
+    // "As ~ enters, choose two basic land types." (Illusionary Terrain): two
+    // different ones (`chooseOnEnterCount`), the first `chosenOnEnter`.
+    if (line === "As ~ enters, choose two basic land types.") {
+      out.chooseOnEnter = ["Plains", "Island", "Swamp", "Mountain", "Forest"];
+      out.chooseOnEnterCount = 2;
+      continue;
+    }
     // "As ~ enters, choose a number between 1 and 10" (Talion): the words of a
     // short menu, read back as `{ chosenNumber }`.
     if ((m = /^As ~ enters, choose a number between (\d+) and (\d+)\.$/.exec(line))) {
@@ -28597,6 +28604,15 @@ function parseStatic(line, text) {
     return { affects: { scope: "attached" }, setSubtypes: [m[1]], text };
   }
   if (line === "Enchanted land is the chosen type.") return { affects: { scope: "attached" }, setsChosenLandType: true, text };
+  // Illusionary Terrain: the first of two chosen types reached, set to the
+  // second (`ofChosenLandType`, `setsChosenLandType: "second"`).
+  if (line === "Basic lands of the first chosen type are the second chosen type.") {
+    return {
+      affects: { scope: "filter", filter: { type: "land", supertype: "basic", ofChosenLandType: true } },
+      setsChosenLandType: "second",
+      text,
+    };
+  }
   // "Enchanted land is a 4/5 green Spirit creature with vigilance and haste.
   // It's still a land." (the Emergences, the Zendikons): layers 4, 5, 6, 7b.
   if ((m = /^Enchanted land is an? (\d+)\/(\d+) ((?:(?:white|blue|black|red|green)(?:, and |, | and )?)+ )?([A-Z][a-z]+(?: [A-Z][a-z]+)*) creature(?: with ([a-z ,]+?))?\. It's still a land\.$/.exec(line))) {

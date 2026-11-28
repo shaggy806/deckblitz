@@ -52,7 +52,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, inCombatAlone,isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName, seatingOf } from "./state.js";
 import type { AttachmentRecord, CastSpellRecord, GameObject, GameState, LastKnownInfo, Sector, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
-import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
+import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isBasicLandType, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 import { thisWayEntries, votesThisWay } from "./this-way.js";
@@ -1070,6 +1070,15 @@ export interface CardFilter {
    * past the resolution that made it is fixed then (`fixChosenCardType`).
    */
   readonly ofChosenCardType?: true;
+  /**
+   * Has the basic land type chosen for the permanent applying the filter
+   * (its `chosenOnEnter`, when that is a basic land type — `chooseOnEnter`
+   * over `BASIC_LAND_TYPE_CHOICES`, via `FilterContext.source`): Illusionary
+   * Terrain's "basic lands **of the first chosen type**". A source that has
+   * left the battlefield reads the type it had (rule 608.2h). With no
+   * source, or no land type chosen for it, nothing matches.
+   */
+  readonly ofChosenLandType?: true;
   /**
    * It's **only the color its controller chose** in this resolution's
    * `vote` (with `choose`) — Selective Obliteration's "exile each permanent
@@ -3054,7 +3063,8 @@ export function matchesFilter(
     filter.subtype !== undefined ||
     filter.subtypes !== undefined ||
     filter.notSubtypes !== undefined ||
-    filter.ofChosenType !== undefined
+    filter.ofChosenType !== undefined ||
+    filter.ofChosenLandType !== undefined
   ) {
     // Through `hasSubtype`, never `includes`: a changeling's list carries one
     // marker for every creature type (see `subtypes.ts`).
@@ -3082,6 +3092,11 @@ export function matchesFilter(
       const chosen =
         from?.chosenCreatureType ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenCreatureType);
       if (chosen == null || !hasSubtype(subtypes, chosen)) return false;
+    }
+    if (filter.ofChosenLandType === true) {
+      const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+      const chosen = from?.chosenOnEnter ?? (from?.zone === "battlefield" ? null : from?.lastKnown?.chosenOnEnter);
+      if (chosen == null || !isBasicLandType(chosen) || !hasSubtype(subtypes, chosen)) return false;
     }
   }
   if (filter.sharesTypeWith !== undefined) {

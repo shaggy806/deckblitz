@@ -14037,6 +14037,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Illusionary Terrain: basic Forests become Islands',
+    board({
+      you: { bf: ['Island*2', 'Forest'], hand: ['Illusionary Terrain'] },
+      opp: { bf: ['Forest', 'Plains', 'Savannah'] },
+    }),
+  ),
+  preset(
     'Lightning Storm: discard a land to recharge it on the stack and aim it elsewhere',
     board({
       you: { bf: ['Mountain*3'], hand: ['Lightning Storm', 'Forest'] },

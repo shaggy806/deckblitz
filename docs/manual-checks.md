@@ -9271,3 +9271,9 @@ Each board's die comes up 4.
 ### Hollow Specter: pay 2, Bob shows two cards, you pick the one he discards
 - **Do:** Pass (as Bob too) to declare attackers and attack Bob with Hollow Specter; pass on to combat damage. When it hits, set X to 2 and Pay. As Bob, pick Hill Giant and Craw Wurm in the popup and Confirm. As you, click Craw Wurm and Confirm.
 - **Expect:** While Bob chooses, your screen names none of his cards. Only Hill Giant and Craw Wurm are revealed; Craw Wurm goes to Bob's graveyard, and Lightning Bolt and Shock are never shown to you.
+
+## Two basic land types chosen, the first made the second (2026-11-28)
+
+### Illusionary Terrain: basic Forests become Islands
+- **Do:** Cast Illusionary Terrain. Choose Forest, then Island.
+- **Expect:** The first menu lists the five basic land types and the second the four left. Your Forest and Bob's Forest now read as Islands and tap for blue; Bob's Plains and Savannah (not basic) are unchanged.

@@ -3516,7 +3516,8 @@
   "effect:alternating-hand-exile",
   "effect:reveal-random-from-hand-discard-filtered",
   "decision:opponent-chosen-mode-with-targets",
-  "decision:reveal-x-chosen-cards-from-hand"
+  "decision:reveal-x-chosen-cards-from-hand",
+  "decision:choose-two-basic-land-types-on-enter"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
