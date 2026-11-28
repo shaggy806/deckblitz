@@ -10369,6 +10369,7 @@ import _poolFoggySwampVisions from "./pool/foggy-swamp-visions.js";
 import _poolFogwalker from "./pool/fogwalker.js";
 import _poolFogwellsGym from "./pool/fogwells-gym.js";
 import _poolFoil from "./pool/foil.js";
+import _poolFoldIntoAether from "./pool/fold-into-aether.js";
 import _poolFolioOfFancies from "./pool/folio-of-fancies.js";
 import _poolFolkHero from "./pool/folk-hero.js";
 import _poolFolkMedicine from "./pool/folk-medicine.js";
@@ -16829,6 +16830,7 @@ import _poolLoss from "./pool/loss.js";
 import _poolLossarnachCaptain from "./pool/lossarnach-captain.js";
 import _poolLostAuramancers from "./pool/lost-auramancers.js";
 import _poolLostDays from "./pool/lost-days.js";
+import _poolLostHours from "./pool/lost-hours.js";
 import _poolLostInALabyrinth from "./pool/lost-in-a-labyrinth.js";
 import _poolLostInMemories from "./pool/lost-in-memories.js";
 import _poolLostInSpace from "./pool/lost-in-space.js";
@@ -31744,6 +31746,7 @@ import _poolViridianRevel from "./pool/viridian-revel.js";
 import _poolViridianScout from "./pool/viridian-scout.js";
 import _poolViridianShaman from "./pool/viridian-shaman.js";
 import _poolViridianZealot from "./pool/viridian-zealot.js";
+import _poolVirtualAssistant from "./pool/virtual-assistant.js";
 import _poolVirtueOfCourage from "./pool/virtue-of-courage.js";
 import _poolVirtueOfKnowledge from "./pool/virtue-of-knowledge.js";
 import _poolVirtueOfLoyalty from "./pool/virtue-of-loyalty.js";
@@ -33134,6 +33137,7 @@ import _poolWorldWarHulk from "./pool/world-war-hulk.js";
 import _poolWorldWeary from "./pool/world-weary.js";
 import _poolWorldfire from "./pool/worldfire.js";
 import _poolWorldgorgerDragon from "./pool/worldgorger-dragon.js";
+import _poolWorldheartPhoenix from "./pool/worldheart-phoenix.js";
 import _poolWorldlyCounsel from "./pool/worldly-counsel.js";
 import _poolWorldlyTutor from "./pool/worldly-tutor.js";
 import _poolWorldpurge from "./pool/worldpurge.js";
@@ -44800,6 +44804,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFogwalker,
   _poolFogwellsGym,
   _poolFoil,
+  _poolFoldIntoAether,
   _poolFolioOfFancies,
   _poolFolkHero,
   _poolFolkMedicine,
@@ -51260,6 +51265,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLossarnachCaptain,
   _poolLostAuramancers,
   _poolLostDays,
+  _poolLostHours,
   _poolLostInALabyrinth,
   _poolLostInMemories,
   _poolLostInSpace,
@@ -66175,6 +66181,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolViridianScout,
   _poolViridianShaman,
   _poolViridianZealot,
+  _poolVirtualAssistant,
   _poolVirtueOfCourage,
   _poolVirtueOfKnowledge,
   _poolVirtueOfLoyalty,
@@ -67565,6 +67572,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWorldWeary,
   _poolWorldfire,
   _poolWorldgorgerDragon,
+  _poolWorldheartPhoenix,
   _poolWorldlyCounsel,
   _poolWorldlyTutor,
   _poolWorldpurge,
@@ -79244,6 +79252,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fogwalker": _poolFogwalker,
   "pool/fogwells-gym": _poolFogwellsGym,
   "pool/foil": _poolFoil,
+  "pool/fold-into-aether": _poolFoldIntoAether,
   "pool/folio-of-fancies": _poolFolioOfFancies,
   "pool/folk-hero": _poolFolkHero,
   "pool/folk-medicine": _poolFolkMedicine,
@@ -85704,6 +85713,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lossarnach-captain": _poolLossarnachCaptain,
   "pool/lost-auramancers": _poolLostAuramancers,
   "pool/lost-days": _poolLostDays,
+  "pool/lost-hours": _poolLostHours,
   "pool/lost-in-a-labyrinth": _poolLostInALabyrinth,
   "pool/lost-in-memories": _poolLostInMemories,
   "pool/lost-in-space": _poolLostInSpace,
@@ -100619,6 +100629,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/viridian-scout": _poolViridianScout,
   "pool/viridian-shaman": _poolViridianShaman,
   "pool/viridian-zealot": _poolViridianZealot,
+  "pool/virtual-assistant": _poolVirtualAssistant,
   "pool/virtue-of-courage": _poolVirtueOfCourage,
   "pool/virtue-of-knowledge": _poolVirtueOfKnowledge,
   "pool/virtue-of-loyalty": _poolVirtueOfLoyalty,
@@ -102009,6 +102020,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/world-weary": _poolWorldWeary,
   "pool/worldfire": _poolWorldfire,
   "pool/worldgorger-dragon": _poolWorldgorgerDragon,
+  "pool/worldheart-phoenix": _poolWorldheartPhoenix,
   "pool/worldly-counsel": _poolWorldlyCounsel,
   "pool/worldly-tutor": _poolWorldlyTutor,
   "pool/worldpurge": _poolWorldpurge,

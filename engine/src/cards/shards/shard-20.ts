@@ -1052,6 +1052,7 @@ import _poolVileMutilator from "../pool/vile-mutilator.js";
 import _poolVillageWatch from "../pool/village-watch.js";
 import _poolViridianAcolyte from "../pool/viridian-acolyte.js";
 import _poolViridianZealot from "../pool/viridian-zealot.js";
+import _poolVirtualAssistant from "../pool/virtual-assistant.js";
 import _poolVisionarysDance from "../pool/visionarys-dance.js";
 import _poolVividCrag from "../pool/vivid-crag.js";
 import _poolVivisPersistence from "../pool/vivis-persistence.js";
@@ -2181,6 +2182,7 @@ const shard: CardShard = {
     _poolVillageWatch,
     _poolViridianAcolyte,
     _poolViridianZealot,
+    _poolVirtualAssistant,
     _poolVisionarysDance,
     _poolVividCrag,
     _poolVivisPersistence,

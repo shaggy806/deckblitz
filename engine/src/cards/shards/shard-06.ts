@@ -1040,6 +1040,7 @@ import _poolWolfbriarElemental from "../pool/wolfbriar-elemental.js";
 import _poolWolfkinBond from "../pool/wolfkin-bond.js";
 import _poolWolfkinOutcast from "../pool/wolfkin-outcast.js";
 import _poolWoodlandMystic from "../pool/woodland-mystic.js";
+import _poolWorldheartPhoenix from "../pool/worldheart-phoenix.js";
 import _poolWreakHavoc from "../pool/wreak-havoc.js";
 import _poolWreckingBallArm from "../pool/wrecking-ball-arm.js";
 import _poolXenicPoltergeist from "../pool/xenic-poltergeist.js";
@@ -2120,6 +2121,7 @@ const shard: CardShard = {
     _poolWolfkinBond,
     _poolWolfkinOutcast,
     _poolWoodlandMystic,
+    _poolWorldheartPhoenix,
     _poolWreakHavoc,
     _poolWreckingBallArm,
     _poolXenicPoltergeist,

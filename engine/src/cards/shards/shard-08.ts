@@ -571,6 +571,7 @@ import _poolLoamingShaman from "../pool/loaming-shaman.js";
 import _poolLockerRoom from "../pool/locker-room.js";
 import _poolLoftyDenial from "../pool/lofty-denial.js";
 import _poolLongBodiedGreyDog from "../pool/long-bodied-grey-dog.js";
+import _poolLostHours from "../pool/lost-hours.js";
 import _poolLotusField from "../pool/lotus-field.js";
 import _poolLoxodonPartisan from "../pool/loxodon-partisan.js";
 import _poolLoxodonPunisher from "../pool/loxodon-punisher.js";
@@ -1688,6 +1689,7 @@ const shard: CardShard = {
     _poolLockerRoom,
     _poolLoftyDenial,
     _poolLongBodiedGreyDog,
+    _poolLostHours,
     _poolLotusField,
     _poolLoxodonPartisan,
     _poolLoxodonPunisher,
