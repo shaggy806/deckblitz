@@ -7051,6 +7051,11 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     control" (Beanstalk Giant, Lumra, Bellow of the Woods) is `{ countOf: {
     type: "land", controlledBy: "you" } }`; the CDA's own object counts when
     it matches ("creatures you control" includes itself).
+  - `{ difference: [CountSpec, CountSpec] }` — the first minus the second,
+    negative when the second is larger (rule 107.1b). Roiling Horror's "your
+    life total minus the life total of an opponent with the most life" is `{
+    difference: ["your-life-total", { amongPlayers: "greatest", of: {
+    lifeTotal: "each" }, who: "each-opponent" }] }`.
   - `{ countInGraveyard: CardFilter }` — cards in **all** graveyards matching
     the filter (Mortivore: `{ type: "creature" }`); add `ownedBy: "you"` for
     "in your graveyard".

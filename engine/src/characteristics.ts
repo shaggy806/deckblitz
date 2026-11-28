@@ -5516,6 +5516,10 @@ export function countValue(
     if ("colorsAmong" in spec) return colorsAmongPermanents(state, registry, controller, spec.colorsAmong);
     if ("amongPlayers" in spec) return staticPlayerAggregate(state, registry, controller, spec);
     if ("sum" in spec) return spec.sum.reduce((n, part) => n + countValue(part, state, registry, controller, source), 0);
+    if ("difference" in spec) {
+      const [from, less] = spec.difference;
+      return countValue(from, state, registry, controller, source) - countValue(less, state, registry, controller, source);
+    }
     if ("aggregate" in spec) {
       // "The number of **other** Rats" (Pestilence Rats): the permanent whose
       // CDA this is left out — a token stack's other tokens still count.

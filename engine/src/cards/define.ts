@@ -821,6 +821,15 @@ export type CountSpec =
    * in both counts in each (unlike an aggregate's `plus`, which counts an
    * object two sets reach once). */
   | { readonly sum: readonly CountSpec[] }
+  /** The first count minus the second, as the `EffectAmount` of the same
+   * name — Roiling Horror's "your life total minus the life total of an
+   * opponent with the most life" is `{ difference: ["your-life-total", {
+   * amongPlayers: "greatest", of: { lifeTotal: "each" }, who:
+   * "each-opponent" }] }`. Negative when the second is larger: a CDA that
+   * sets power or toughness uses a negative result as it is (rule 107.1b).
+   * The counts only a `setBasePtFromCount` knows (`"chosen-number"`,
+   * `countersOnThis` …) read 0 inside one. */
+  | { readonly difference: readonly [CountSpec, CountSpec] }
   /** Its controller's devotion to these colours (rule 700.5) — Anax,
    * Hardened in the Forge's "power is equal to your devotion to red" is `{
    * devotionTo: ["R"] }` with `only: "power"`. Two colours are "devotion to
