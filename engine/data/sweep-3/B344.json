@@ -25,6 +25,13 @@
    "tested": true
   },
   {
+   "name": "Butcher Orgg",
+   "files": [
+    "engine/src/cards/pool/butcher-orgg.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Chromatic Armor",
    "files": [
     "engine/src/cards/pool/chromatic-armor.ts"
@@ -60,6 +67,13 @@
    "tested": true
   },
   {
+   "name": "Dead Ringers",
+   "files": [
+    "engine/src/cards/pool/dead-ringers.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Dichotomancy",
    "files": [
     "engine/src/cards/pool/dichotomancy.ts"
@@ -84,6 +98,20 @@
    "name": "Fatal Lore",
    "files": [
     "engine/src/cards/pool/fatal-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faunsbane Troll",
+   "files": [
+    "engine/src/cards/pool/faunsbane-troll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feint",
+   "files": [
+    "engine/src/cards/pool/feint.ts"
    ],
    "tested": true
   },
@@ -144,6 +172,13 @@
    "tested": true
   },
   {
+   "name": "Hint of Insanity",
+   "files": [
+    "engine/src/cards/pool/hint-of-insanity.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Hollow Specter",
    "files": [
     "engine/src/cards/pool/hollow-specter.ts"
@@ -168,6 +203,13 @@
    "name": "Infernal Denizen",
    "files": [
     "engine/src/cards/pool/infernal-denizen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jandor's Ring",
+   "files": [
+    "engine/src/cards/pool/jandors-ring.ts"
    ],
    "tested": true
   },
@@ -207,9 +249,30 @@
    "tested": true
   },
   {
+   "name": "Merseine",
+   "files": [
+    "engine/src/cards/pool/merseine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Minamo's Meddling",
+   "files": [
+    "engine/src/cards/pool/minamos-meddling.ts"
+   ],
+   "tested": true
+  },
+  {
    "name": "Mind Extraction",
    "files": [
     "engine/src/cards/pool/mind-extraction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mutagen Connoisseur",
+   "files": [
+    "engine/src/cards/pool/mutagen-connoisseur.ts"
    ],
    "tested": true
   },
@@ -364,6 +427,13 @@
    "name": "Thought Dissector",
    "files": [
     "engine/src/cards/pool/thought-dissector.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urborg Panther",
+   "files": [
+    "engine/src/cards/pool/urborg-panther.ts"
    ],
    "tested": true
   },
