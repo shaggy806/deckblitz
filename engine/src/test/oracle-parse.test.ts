@@ -27170,3 +27170,24 @@ describe("block requirements on targets (Hunt Down, Culling Mark)", () => {
     expect(mark.effect).toEqual({ kind: "restrict", target: 0, restrictions: ["must-block"] });
   });
 });
+
+describe("unless an opponent pays, and graveyard cards to the library's bottom", () => {
+  it("reads 'Unless an opponent pays {2}' as the opponents asked in turn (Scarwood Bandits)", () => {
+    const face = parseFace({
+      name: "Test Bandits",
+      type_line: "Creature — Human Rogue",
+      oracle_text:
+        "{2}{G}, {T}: Unless an opponent pays {2}, gain control of target artifact for as long as this creature remains on the battlefield.",
+    });
+    expect(face.activated[0]).toMatchObject({
+      targets: ["artifact"],
+      effect: {
+        kind: "unless",
+        chooser: { anyOf: "each-opponent" },
+        options: [{ pay: "{2}" }],
+        otherwise: { kind: "gain-control", target: 0, untilEndOfTurn: false, whileSource: true },
+      },
+    });
+    expect(face.complete).toBe(true);
+  });
+});

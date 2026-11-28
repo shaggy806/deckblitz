@@ -1752,6 +1752,10 @@ before has declined or couldn't pay, and `otherwise` happens only if none did.
 the same with the option `{ takeDamage: 5, text }` — the effect's source deals
 it to whoever takes it, always open to anyone (Breaking Point, Book Burning,
 Barbarian Bully's "unless a player has this creature deal 4 damage to them").
+"Unless **an opponent** pays {2}, gain control of target artifact …" (Scarwood
+Bandits) is the rhystic shape over the opponents alone: `chooser: { anyOf:
+"each-opponent" }`, `options: [{ pay: "{2}", text }]` — each opponent in turn
+order, the controller never asked.
 "**Any opponent may** have you put that card into your graveyard. If a player
 does, … that player …. Otherwise, …" (Sin Prodder, Distant Memories) is `chooser:
 { anyOf: "each-opponent" }` with the option `{ doing, text }`: the first yes ends

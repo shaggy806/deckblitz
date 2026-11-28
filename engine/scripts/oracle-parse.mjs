@@ -7093,6 +7093,12 @@ export function parseSentence(sentence, ctx) {
       return { kind: "gain-control", target, untilEndOfTurn: false, whileMonarch: /^you/i.test(m[2]) ? "you" : "trigger-player" };
     }
   }
+  // "Gain control of target artifact for as long as ~ remains on the
+  // battlefield" (Scarwood Bandits, Sower of Temptation): `whileSource`.
+  if ((m = re(`gain control of (${TARGET}) for as long as ~ remains on the battlefield`).exec(s))) {
+    const target = slot(m[1]);
+    if (target !== undefined) return { kind: "gain-control", target, untilEndOfTurn: false, whileSource: true };
+  }
   // "Gain control of target creature for as long as you control ~ and ~
   // remains tapped" (Willow Satyr, Seasinger, Rubinia Soulsinger).
   if ((m = re(`gain control of (${TARGET}) for as long as you control ~ and ~ remains tapped`).exec(s))) {
@@ -15382,15 +15388,18 @@ export function parseEffect(text, outer) {
     const before = ctx.targets.length;
     // The rhystic cards (Prophecy): "[effect] unless any player pays {2}." /
     // "Unless any player pays {2}, [effect]." — the effect behind an
-    // `unless` every player is asked in turn, from the active player.
-    const after = /^(.+) unless any player pays (\{(?:\d+|X)\})\.$/.exec(sentence);
-    const ahead = /^Unless any player pays (\{(?:\d+|X)\}), (.+)\.$/.exec(sentence);
+    // `unless` every player is asked in turn, from the active player. "Unless
+    // **an opponent** pays {2}" (Scarwood Bandits) is the same over the
+    // opponents alone (`{ anyOf: "each-opponent" }`).
+    const after = /^(.+) unless (any player|an opponent) pays (\{(?:\d+|X)\})\.$/.exec(sentence);
+    const ahead = /^Unless (any player|an opponent) pays (\{(?:\d+|X)\}), (.+)\.$/.exec(sentence);
     const rhystic =
       after !== null
-        ? [sentence, after[1], after[2]]
+        ? [sentence, after[1], after[3]]
         : ahead !== null
-          ? [sentence, `${ahead[2][0].toUpperCase()}${ahead[2].slice(1)}`, ahead[1]]
+          ? [sentence, `${ahead[3][0].toUpperCase()}${ahead[3].slice(1)}`, ahead[2]]
           : null;
+    const rhysticChooser = (after ?? ahead)?.[after !== null ? 2 : 1] === "an opponent" ? { anyOf: "each-opponent" } : "any-player";
     // "It" names the ability's object only in its first sentence: after
     // another ("Create a 0/0 token. Put a +1/+1 counter on it.") it's
     // whatever that sentence was about. "That creature" of a damage trigger
@@ -15430,7 +15439,7 @@ export function parseEffect(text, outer) {
           ? null
           : {
               kind: "unless",
-              chooser: "any-player",
+              chooser: rhysticChooser,
               options: [
                 rhystic[2] === "{X}"
                   ? { payGeneric: "x", text: "Pay {X}" }
