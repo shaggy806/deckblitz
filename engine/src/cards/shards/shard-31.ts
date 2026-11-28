@@ -127,6 +127,7 @@ import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolBrotherhoodScribe from "../pool/brotherhood-scribe.js";
 import _poolBulwark from "../pool/bulwark.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
+import _poolButcherOrgg from "../pool/butcher-orgg.js";
 import _poolCalciteSnapper from "../pool/calcite-snapper.js";
 import _poolCallOfTheFullMoon from "../pool/call-of-the-full-moon.js";
 import _poolCallOfTheWild from "../pool/call-of-the-wild.js";
@@ -1264,6 +1265,7 @@ const shard: CardShard = {
     _poolBrotherhoodScribe,
     _poolBulwark,
     _poolBurnFromWithin,
+    _poolButcherOrgg,
     _poolCalciteSnapper,
     _poolCallOfTheFullMoon,
     _poolCallOfTheWild,

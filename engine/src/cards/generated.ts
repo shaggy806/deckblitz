@@ -3867,6 +3867,7 @@ import _poolButchDeloriaTunnelSnake from "./pool/butch-deloria-tunnel-snake.js";
 import _poolButcherGhoul from "./pool/butcher-ghoul.js";
 import _poolButcherOfMalakir from "./pool/butcher-of-malakir.js";
 import _poolButcherOfTheHorde from "./pool/butcher-of-the-horde.js";
+import _poolButcherOrgg from "./pool/butcher-orgg.js";
 import _poolButchersCleaver from "./pool/butchers-cleaver.js";
 import _poolButchersGlee from "./pool/butchers-glee.js";
 import _poolButterburBreeInnkeeper from "./pool/butterbur-bree-innkeeper.js";
@@ -6553,6 +6554,7 @@ import _poolDeadOfWinter from "./pool/dead-of-winter.js";
 import _poolDeadReckoning from "./pool/dead-reckoning.js";
 import _poolDeadReveler from "./pool/dead-reveler.js";
 import _poolDeadRevels from "./pool/dead-revels.js";
+import _poolDeadRingers from "./pool/dead-ringers.js";
 import _poolDeadWeight from "./pool/dead-weight.js";
 import _poolDead from "./pool/dead.js";
 import _poolDeadapult from "./pool/deadapult.js";
@@ -9705,6 +9707,7 @@ import _poolFeedback from "./pool/feedback.js";
 import _poolFeedingFrenzy from "./pool/feeding-frenzy.js";
 import _poolFeelingOfDread from "./pool/feeling-of-dread.js";
 import _poolFeignDeath from "./pool/feign-death.js";
+import _poolFeint from "./pool/feint.js";
 import _poolFeistySpikeling from "./pool/feisty-spikeling.js";
 import _poolFeiyiSnake from "./pool/feiyi-snake.js";
 import _poolFeldonOfTheThirdPath from "./pool/feldon-of-the-third-path.js";
@@ -18858,6 +18861,7 @@ import _poolMushroomWatchdogs from "./pool/mushroom-watchdogs.js";
 import _poolMusician from "./pool/musician.js";
 import _poolMusterTheDeparted from "./pool/muster-the-departed.js";
 import _poolMutableExplorer from "./pool/mutable-explorer.js";
+import _poolMutagenConnoisseur from "./pool/mutagen-connoisseur.js";
 import _poolMutagenManLivingOoze from "./pool/mutagen-man-living-ooze.js";
 import _poolMutagenicGrowth from "./pool/mutagenic-growth.js";
 import _poolMutalithVortexBeast from "./pool/mutalith-vortex-beast.js";
@@ -38314,6 +38318,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolButcherGhoul,
   _poolButcherOfMalakir,
   _poolButcherOfTheHorde,
+  _poolButcherOrgg,
   _poolButchersCleaver,
   _poolButchersGlee,
   _poolButterburBreeInnkeeper,
@@ -41000,6 +41005,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeadReckoning,
   _poolDeadReveler,
   _poolDeadRevels,
+  _poolDeadRingers,
   _poolDeadWeight,
   _poolDead,
   _poolDeadapult,
@@ -44152,6 +44158,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFeedingFrenzy,
   _poolFeelingOfDread,
   _poolFeignDeath,
+  _poolFeint,
   _poolFeistySpikeling,
   _poolFeiyiSnake,
   _poolFeldonOfTheThirdPath,
@@ -53305,6 +53312,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMusician,
   _poolMusterTheDeparted,
   _poolMutableExplorer,
+  _poolMutagenConnoisseur,
   _poolMutagenManLivingOoze,
   _poolMutagenicGrowth,
   _poolMutalithVortexBeast,
@@ -72774,6 +72782,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/butcher-ghoul": _poolButcherGhoul,
   "pool/butcher-of-malakir": _poolButcherOfMalakir,
   "pool/butcher-of-the-horde": _poolButcherOfTheHorde,
+  "pool/butcher-orgg": _poolButcherOrgg,
   "pool/butchers-cleaver": _poolButchersCleaver,
   "pool/butchers-glee": _poolButchersGlee,
   "pool/butterbur-bree-innkeeper": _poolButterburBreeInnkeeper,
@@ -75460,6 +75469,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dead-reckoning": _poolDeadReckoning,
   "pool/dead-reveler": _poolDeadReveler,
   "pool/dead-revels": _poolDeadRevels,
+  "pool/dead-ringers": _poolDeadRingers,
   "pool/dead-weight": _poolDeadWeight,
   "pool/dead": _poolDead,
   "pool/deadapult": _poolDeadapult,
@@ -78612,6 +78622,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/feeding-frenzy": _poolFeedingFrenzy,
   "pool/feeling-of-dread": _poolFeelingOfDread,
   "pool/feign-death": _poolFeignDeath,
+  "pool/feint": _poolFeint,
   "pool/feisty-spikeling": _poolFeistySpikeling,
   "pool/feiyi-snake": _poolFeiyiSnake,
   "pool/feldon-of-the-third-path": _poolFeldonOfTheThirdPath,
@@ -87765,6 +87776,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/musician": _poolMusician,
   "pool/muster-the-departed": _poolMusterTheDeparted,
   "pool/mutable-explorer": _poolMutableExplorer,
+  "pool/mutagen-connoisseur": _poolMutagenConnoisseur,
   "pool/mutagen-man-living-ooze": _poolMutagenManLivingOoze,
   "pool/mutagenic-growth": _poolMutagenicGrowth,
   "pool/mutalith-vortex-beast": _poolMutalithVortexBeast,

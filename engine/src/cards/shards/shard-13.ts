@@ -287,6 +287,7 @@ import _poolFavorOfTheWoods from "../pool/favor-of-the-woods.js";
 import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
 import _poolFearOfExposure from "../pool/fear-of-exposure.js";
 import _poolFeastOfBlood from "../pool/feast-of-blood.js";
+import _poolFeint from "../pool/feint.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
 import _poolFencersMagemark from "../pool/fencers-magemark.js";
@@ -1324,6 +1325,7 @@ const shard: CardShard = {
     _poolFearOfBeingHunted,
     _poolFearOfExposure,
     _poolFeastOfBlood,
+    _poolFeint,
     _poolFelhideMinotaur,
     _poolFelidarGuardian,
     _poolFencersMagemark,

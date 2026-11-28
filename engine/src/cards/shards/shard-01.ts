@@ -191,6 +191,7 @@ import _poolDarkDeal from "../pool/dark-deal.js";
 import _poolDawnglowInfusion from "../pool/dawnglow-infusion.js";
 import _poolDayOfTheDragons from "../pool/day-of-the-dragons.js";
 import _poolDeadBeforeSunrise from "../pool/dead-before-sunrise.js";
+import _poolDeadRingers from "../pool/dead-ringers.js";
 import _poolDeathWind from "../pool/death-wind.js";
 import _poolDeathbellowRaider from "../pool/deathbellow-raider.js";
 import _poolDeathbloomRitualist from "../pool/deathbloom-ritualist.js";
@@ -1249,6 +1250,7 @@ const shard: CardShard = {
     _poolDawnglowInfusion,
     _poolDayOfTheDragons,
     _poolDeadBeforeSunrise,
+    _poolDeadRingers,
     _poolDeathWind,
     _poolDeathbellowRaider,
     _poolDeathbloomRitualist,

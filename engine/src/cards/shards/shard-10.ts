@@ -599,6 +599,7 @@ import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
 import _poolMrSpockScienceOfficer from "../pool/mr-spock-science-officer.js";
 import _poolMtendaLion from "../pool/mtenda-lion.js";
 import _poolMulch from "../pool/mulch.js";
+import _poolMutagenConnoisseur from "../pool/mutagen-connoisseur.js";
 import _poolMutagenManLivingOoze from "../pool/mutagen-man-living-ooze.js";
 import _poolMysticConfluence from "../pool/mystic-confluence.js";
 import _poolMythUnbound from "../pool/myth-unbound.js";
@@ -1679,6 +1680,7 @@ const shard: CardShard = {
     _poolMrSpockScienceOfficer,
     _poolMtendaLion,
     _poolMulch,
+    _poolMutagenConnoisseur,
     _poolMutagenManLivingOoze,
     _poolMysticConfluence,
     _poolMythUnbound,
