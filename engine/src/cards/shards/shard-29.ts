@@ -433,6 +433,7 @@ import _poolInTheTrenches from "../pool/in-the-trenches.js";
 import _poolInameAsOne from "../pool/iname-as-one.js";
 import _poolInevitableEnd from "../pool/inevitable-end.js";
 import _poolInfernalDarkness from "../pool/infernal-darkness.js";
+import _poolInfernalDenizen from "../pool/infernal-denizen.js";
 import _poolInfernalScarring from "../pool/infernal-scarring.js";
 import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolInfuseWithVitality from "../pool/infuse-with-vitality.js";
@@ -1507,6 +1508,7 @@ const shard: CardShard = {
     _poolInameAsOne,
     _poolInevitableEnd,
     _poolInfernalDarkness,
+    _poolInfernalDenizen,
     _poolInfernalScarring,
     _poolInfirmaryHealer,
     _poolInfuseWithVitality,

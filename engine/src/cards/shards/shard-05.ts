@@ -89,6 +89,7 @@ import _poolBaskingCapybara from "../pool/basking-capybara.js";
 import _poolBatWhisperer from "../pool/bat-whisperer.js";
 import _poolBattleDisplay from "../pool/battle-display.js";
 import _poolBattlefieldScavenger from "../pool/battlefield-scavenger.js";
+import _poolBattlefieldScrounger from "../pool/battlefield-scrounger.js";
 import _poolBattlegateMimic from "../pool/battlegate-mimic.js";
 import _poolBeatAPath from "../pool/beat-a-path.js";
 import _poolBecomeThePilot from "../pool/become-the-pilot.js";
@@ -1148,6 +1149,7 @@ const shard: CardShard = {
     _poolBatWhisperer,
     _poolBattleDisplay,
     _poolBattlefieldScavenger,
+    _poolBattlefieldScrounger,
     _poolBattlegateMimic,
     _poolBeatAPath,
     _poolBecomeThePilot,

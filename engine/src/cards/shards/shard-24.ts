@@ -37,6 +37,7 @@ import _poolAnotherChance from "../pool/another-chance.js";
 import _poolApheliaViperWhisperer from "../pool/aphelia-viper-whisperer.js";
 import _poolApothecaryWhite from "../pool/apothecary-white.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
+import _poolAquamorphEntity from "../pool/aquamorph-entity.js";
 import _poolArachnePsionicWeaver from "../pool/arachne-psionic-weaver.js";
 import _poolArcaneInvestigator from "../pool/arcane-investigator.js";
 import _poolArchdemonOfGreed from "../pool/archdemon-of-greed.js";
@@ -703,6 +704,7 @@ import _poolRishadanBrigand from "../pool/rishadan-brigand.js";
 import _poolRiversGrasp from "../pool/rivers-grasp.js";
 import _poolRoadRage from "../pool/road-rage.js";
 import _poolRoccoCabarettiCaterer from "../pool/rocco-cabaretti-caterer.js";
+import _poolRockHydra from "../pool/rock-hydra.js";
 import _poolRocketPoweredGoblinGlider from "../pool/rocket-powered-goblin-glider.js";
 import _poolRockslideElemental from "../pool/rockslide-elemental.js";
 import _poolRollingStones from "../pool/rolling-stones.js";
@@ -1107,6 +1109,7 @@ const shard: CardShard = {
     _poolApheliaViperWhisperer,
     _poolApothecaryWhite,
     _poolAppealToEirdu,
+    _poolAquamorphEntity,
     _poolArachnePsionicWeaver,
     _poolArcaneInvestigator,
     _poolArchdemonOfGreed,
@@ -1773,6 +1776,7 @@ const shard: CardShard = {
     _poolRiversGrasp,
     _poolRoadRage,
     _poolRoccoCabarettiCaterer,
+    _poolRockHydra,
     _poolRocketPoweredGoblinGlider,
     _poolRockslideElemental,
     _poolRollingStones,

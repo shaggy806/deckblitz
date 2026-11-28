@@ -86,6 +86,7 @@ import _poolBefoul from "../pool/befoul.js";
 import _poolBeguilerOfWills from "../pool/beguiler-of-wills.js";
 import _poolBennieBracksZoologist from "../pool/bennie-bracks-zoologist.js";
 import _poolBenthicBiomancer from "../pool/benthic-biomancer.js";
+import _poolBenthicExplorers from "../pool/benthic-explorers.js";
 import _poolBenthicInfiltrator from "../pool/benthic-infiltrator.js";
 import _poolBilboLuckwearer from "../pool/bilbo-luckwearer.js";
 import _poolBileUrchin from "../pool/bile-urchin.js";
@@ -774,6 +775,7 @@ import _poolSazacapsBrew from "../pool/sazacaps-brew.js";
 import _poolScaldingSalamander from "../pool/scalding-salamander.js";
 import _poolScalesOfShale from "../pool/scales-of-shale.js";
 import _poolScapegoat from "../pool/scapegoat.js";
+import _poolScarwoodBandits from "../pool/scarwood-bandits.js";
 import _poolScavengerRegent from "../pool/scavenger-regent.js";
 import _poolScornBladeBerserker from "../pool/scorn-blade-berserker.js";
 import _poolScourgeOfSkolaVale from "../pool/scourge-of-skola-vale.js";
@@ -1157,6 +1159,7 @@ const shard: CardShard = {
     _poolBeguilerOfWills,
     _poolBennieBracksZoologist,
     _poolBenthicBiomancer,
+    _poolBenthicExplorers,
     _poolBenthicInfiltrator,
     _poolBilboLuckwearer,
     _poolBileUrchin,
@@ -1845,6 +1848,7 @@ const shard: CardShard = {
     _poolScaldingSalamander,
     _poolScalesOfShale,
     _poolScapegoat,
+    _poolScarwoodBandits,
     _poolScavengerRegent,
     _poolScornBladeBerserker,
     _poolScourgeOfSkolaVale,

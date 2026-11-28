@@ -817,6 +817,7 @@ import _poolSpiritAway from "../pool/spirit-away.js";
 import _poolSpiritOfTheHearth from "../pool/spirit-of-the-hearth.js";
 import _poolSpiritualFocus from "../pool/spiritual-focus.js";
 import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
+import _poolSpoilsOfWar from "../pool/spoils-of-war.js";
 import _poolSquanderedResources from "../pool/squandered-resources.js";
 import _poolSqueesRevenge from "../pool/squees-revenge.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
@@ -1876,6 +1877,7 @@ const shard: CardShard = {
     _poolSpiritOfTheHearth,
     _poolSpiritualFocus,
     _poolSpiteOfMogis,
+    _poolSpoilsOfWar,
     _poolSquanderedResources,
     _poolSqueesRevenge,
     _poolStalkingVengeance,

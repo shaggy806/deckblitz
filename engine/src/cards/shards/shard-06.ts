@@ -799,6 +799,7 @@ import _poolShelobDreadWeaver from "../pool/shelob-dread-weaver.js";
 import _poolShenanigans from "../pool/shenanigans.js";
 import _poolSheriffOfSafePassage from "../pool/sheriff-of-safe-passage.js";
 import _poolShieldOfKaldra from "../pool/shield-of-kaldra.js";
+import _poolShieldmageElder from "../pool/shieldmage-elder.js";
 import _poolShinewend from "../pool/shinewend.js";
 import _poolShiningShoal from "../pool/shining-shoal.js";
 import _poolShortcutSeeker from "../pool/shortcut-seeker.js";
@@ -1878,6 +1879,7 @@ const shard: CardShard = {
     _poolShenanigans,
     _poolSheriffOfSafePassage,
     _poolShieldOfKaldra,
+    _poolShieldmageElder,
     _poolShinewend,
     _poolShiningShoal,
     _poolShortcutSeeker,
