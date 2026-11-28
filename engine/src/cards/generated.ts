@@ -15898,6 +15898,7 @@ import _poolKrovikanPlague from "./pool/krovikan-plague.js";
 import _poolKrovikanRot from "./pool/krovikan-rot.js";
 import _poolKrovikanScoundrel from "./pool/krovikan-scoundrel.js";
 import _poolKrovikanSorcerer from "./pool/krovikan-sorcerer.js";
+import _poolKrovikanVampire from "./pool/krovikan-vampire.js";
 import _poolKrovikanWhispers from "./pool/krovikan-whispers.js";
 import _poolKrovodHaunch from "./pool/krovod-haunch.js";
 import _poolKroxaAndKunoros from "./pool/kroxa-and-kunoros.js";
@@ -19826,6 +19827,7 @@ import _poolOctoprophet from "./pool/octoprophet.js";
 import _poolOctopusForm from "./pool/octopus-form.js";
 import _poolOctopusUmbra from "./pool/octopus-umbra.js";
 import _poolOcularHalo from "./pool/ocular-halo.js";
+import _poolOculusWhelp from "./pool/oculus-whelp.js";
 import _poolOculus from "./pool/oculus.js";
 import _poolOddsEnds from "./pool/odds-ends.js";
 import _poolOdds from "./pool/odds.js";
@@ -24590,6 +24592,7 @@ import _poolScroungingSkyray from "./pool/scrounging-skyray.js";
 import _poolScrubland from "./pool/scrubland.js";
 import _poolScrybRanger from "./pool/scryb-ranger.js";
 import _poolScrybSprites from "./pool/scryb-sprites.js";
+import _poolScryingGlass from "./pool/scrying-glass.js";
 import _poolScryingSheets from "./pool/scrying-sheets.js";
 import _poolSculptedPerfection from "./pool/sculpted-perfection.js";
 import _poolSculptedSunburst from "./pool/sculpted-sunburst.js";
@@ -28818,6 +28821,7 @@ import _poolTenuredOilcaster from "./pool/tenured-oilcaster.js";
 import _poolTenuredTethermage from "./pool/tenured-tethermage.js";
 import _poolTenzaGodosMaul from "./pool/tenza-godos-maul.js";
 import _poolTeoSpiritedGlider from "./pool/teo-spirited-glider.js";
+import _poolTephraderm from "./pool/tephraderm.js";
 import _poolTerashisCry from "./pool/terashis-cry.js";
 import _poolTerashisGrasp from "./pool/terashis-grasp.js";
 import _poolTerashisVerdict from "./pool/terashis-verdict.js";
@@ -50310,6 +50314,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKrovikanRot,
   _poolKrovikanScoundrel,
   _poolKrovikanSorcerer,
+  _poolKrovikanVampire,
   _poolKrovikanWhispers,
   _poolKrovodHaunch,
   _poolKroxaAndKunoros,
@@ -54238,6 +54243,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOctopusForm,
   _poolOctopusUmbra,
   _poolOcularHalo,
+  _poolOculusWhelp,
   _poolOculus,
   _poolOddsEnds,
   _poolOdds,
@@ -59002,6 +59008,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScrubland,
   _poolScrybRanger,
   _poolScrybSprites,
+  _poolScryingGlass,
   _poolScryingSheets,
   _poolSculptedPerfection,
   _poolSculptedSunburst,
@@ -63230,6 +63237,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTenuredTethermage,
   _poolTenzaGodosMaul,
   _poolTeoSpiritedGlider,
+  _poolTephraderm,
   _poolTerashisCry,
   _poolTerashisGrasp,
   _poolTerashisVerdict,
@@ -84735,6 +84743,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/krovikan-rot": _poolKrovikanRot,
   "pool/krovikan-scoundrel": _poolKrovikanScoundrel,
   "pool/krovikan-sorcerer": _poolKrovikanSorcerer,
+  "pool/krovikan-vampire": _poolKrovikanVampire,
   "pool/krovikan-whispers": _poolKrovikanWhispers,
   "pool/krovod-haunch": _poolKrovodHaunch,
   "pool/kroxa-and-kunoros": _poolKroxaAndKunoros,
@@ -88663,6 +88672,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/octopus-form": _poolOctopusForm,
   "pool/octopus-umbra": _poolOctopusUmbra,
   "pool/ocular-halo": _poolOcularHalo,
+  "pool/oculus-whelp": _poolOculusWhelp,
   "pool/oculus": _poolOculus,
   "pool/odds-ends": _poolOddsEnds,
   "pool/odds": _poolOdds,
@@ -93427,6 +93437,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scrubland": _poolScrubland,
   "pool/scryb-ranger": _poolScrybRanger,
   "pool/scryb-sprites": _poolScrybSprites,
+  "pool/scrying-glass": _poolScryingGlass,
   "pool/scrying-sheets": _poolScryingSheets,
   "pool/sculpted-perfection": _poolSculptedPerfection,
   "pool/sculpted-sunburst": _poolSculptedSunburst,
@@ -97655,6 +97666,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tenured-tethermage": _poolTenuredTethermage,
   "pool/tenza-godos-maul": _poolTenzaGodosMaul,
   "pool/teo-spirited-glider": _poolTeoSpiritedGlider,
+  "pool/tephraderm": _poolTephraderm,
   "pool/terashis-cry": _poolTerashisCry,
   "pool/terashis-grasp": _poolTerashisGrasp,
   "pool/terashis-verdict": _poolTerashisVerdict,

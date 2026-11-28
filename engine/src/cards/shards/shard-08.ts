@@ -544,6 +544,7 @@ import _poolKorHookmaster from "../pool/kor-hookmaster.js";
 import _poolKrakensEye from "../pool/krakens-eye.js";
 import _poolKrenkosBuzzcrusher from "../pool/krenkos-buzzcrusher.js";
 import _poolKrovikanPlague from "../pool/krovikan-plague.js";
+import _poolKrovikanVampire from "../pool/krovikan-vampire.js";
 import _poolKrumarInitiate from "../pool/krumar-initiate.js";
 import _poolKuldothaFlamefiend from "../pool/kuldotha-flamefiend.js";
 import _poolKuonOgreAscendant from "../pool/kuon-ogre-ascendant.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolKrakensEye,
     _poolKrenkosBuzzcrusher,
     _poolKrovikanPlague,
+    _poolKrovikanVampire,
     _poolKrumarInitiate,
     _poolKuldothaFlamefiend,
     _poolKuonOgreAscendant,
