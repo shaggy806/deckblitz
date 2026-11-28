@@ -931,12 +931,12 @@ export interface ActivatedAbility {
    * bound as it's granted to that effect's controller (`{ player }`, which
    * a gain of control of the creature doesn't change; unbound, its
    * controller). Whoever activates it controls it (602.2a).
-   * `"attached-controller"` is "Only the controller of the enchanted creature
-   * may activate this ability" (Merseine): whoever controls the permanent
-   * this source is attached to, as it's activated; nobody while it's
-   * attached to nothing.
+   * `{ controllerOf: "attached" }` is "Only the controller of the enchanted
+   * creature may activate this ability" (Merseine): whoever controls the
+   * permanent this source is attached to, as it's activated; nobody while
+   * it's attached to nothing.
    */
-  readonly onlyBy?: "owner" | "granter" | "attached-controller" | { readonly player: PlayerId };
+  readonly onlyBy?: "owner" | "granter" | { readonly controllerOf: "attached" } | { readonly player: PlayerId };
   /** One of reconfigure's two abilities (rule 702.151a — the `reconfigure`
    * helper): what lets an Equipment that's a creature equip (301.5c). */
   readonly reconfigure?: "attach" | "unattach";

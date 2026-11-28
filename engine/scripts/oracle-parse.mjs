@@ -22491,7 +22491,7 @@ function parseFaceAsWritten(face, ctx = {}) {
       // "Only the controller of the enchanted creature may activate this
       // ability" (Merseine — 602.1b).
       rest = rest.replace(/ Only the controller of the enchanted creature may activate this ability\.$/, () => {
-        ability.onlyBy = "attached-controller";
+        ability.onlyBy = { controllerOf: "attached" };
         return "";
       });
       // Coven's "Activate only if you control three or more creatures with

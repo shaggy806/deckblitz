@@ -4655,7 +4655,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       "Enchantment — Aura",
     );
     expect(merseine.activated[0].cost).toMatchObject({ mana: null, manaCostOf: "attached" });
-    expect(merseine.activated[0].onlyBy).toBe("attached-controller");
+    expect(merseine.activated[0].onlyBy).toEqual({ controllerOf: "attached" });
     // "Sacrifice an Aura attached to this creature" (Faunsbane Troll), the
     // named creatures and the source together (Urborg Panther), "Discard the
     // last card you drew this turn" (Jandor's Ring).

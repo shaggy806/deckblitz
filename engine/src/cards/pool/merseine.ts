@@ -6,8 +6,8 @@ import { defineCard } from "../define.js";
 // Aura's own net counters. "Pay enchanted creature's mana cost" is
 // `cost.manaCostOf: "attached"`, read as it's activated (an {X} in it 0, rule
 // 107.3h; a token or land enchanted has none to pay, rule 118.6), and only the
-// enchanted creature's controller may activate it (`onlyBy:
-// "attached-controller"`, rule 602.1b) — they control the ability (602.2a),
+// enchanted creature's controller may activate it (`onlyBy: { controllerOf:
+// "attached" }`, rule 602.1b) — they control the ability (602.2a),
 // though "this Aura" is still Merseine.
 
 const ENTERS = "This Aura enters with three net counters on it.";
@@ -39,7 +39,7 @@ export default defineCard({
   activated: [
     {
       cost: { mana: null, manaCostOf: "attached", tap: false },
-      onlyBy: "attached-controller",
+      onlyBy: { controllerOf: "attached" },
       targets: [],
       effect: { kind: "remove-counter", target: "source", counter: "net", amount: 1 },
       resolve: null,

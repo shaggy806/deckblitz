@@ -30883,7 +30883,7 @@ export class Game {
     if (only !== undefined) {
       if (only === "owner") return source.owner === player;
       if (only === "granter") return source.controller === player;
-      if (only === "attached-controller") {
+      if ("controllerOf" in only) {
         const host = source.attachedTo === null ? undefined : this.state.objects[source.attachedTo];
         return host !== undefined && host.zone === "battlefield" && host.controller === player;
       }
@@ -30935,7 +30935,10 @@ export class Game {
     const printed = this.registry.get(rulesTextName(object)).activated;
     if (
       printed.some(
-        (a) => a.anyPlayer === true || (a.onlyBy === "owner" && object.owner === player) || a.onlyBy === "attached-controller",
+        (a) =>
+          a.anyPlayer === true ||
+          (a.onlyBy === "owner" && object.owner === player) ||
+          (typeof a.onlyBy === "object" && "controllerOf" in a.onlyBy),
       )
     ) {
       return true;

@@ -7607,7 +7607,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   creature's owner may activate this ability" — Personal Incarnation: its owner
   alone, whoever controls it, rule 602.1b), and in a `grant-activated` ability
   `onlyBy: "granter"`, the "only you" of the granting effect's own text (Martyrdom),
-  bound to that effect's controller as it resolves; `onlyBy: "attached-controller"`
+  bound to that effect's controller as it resolves; `onlyBy: { controllerOf: "attached" }`
   ("Only the controller of the enchanted creature may activate this ability" —
   Merseine), and with it `cost.manaCostOf: "attached"` ("Pay enchanted
   creature's mana cost": read as it's activated, {X} 0 by rule 107.3h, unpayable

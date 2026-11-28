@@ -4,7 +4,7 @@
  * "attached"` reads the enchanted permanent's mana cost as the ability is
  * offered and activated (601.2f via 602.2b), an {X} in it 0 (rule 107.3h),
  * and a permanent with none leaves the cost unpayable (118.6);
- * `onlyBy: "attached-controller"` is 602.1b's "only [a player]".
+ * `onlyBy: { controllerOf: "attached" }` is 602.1b's "only [a player]".
  */
 
 import { describe, expect, it } from "vitest";
