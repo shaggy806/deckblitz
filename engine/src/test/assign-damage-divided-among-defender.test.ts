@@ -73,7 +73,7 @@ describe("Butcher Orgg", () => {
   });
 
   it("declined, unblocked it deals all of it to the player, and blocked all of it to its blocker", () => {
-    const { game, a, b } = table();
+    const { game, a } = table();
     const orgg = spawn(game, "Butcher Orgg");
     const giant = spawn(game, "Hill Giant", B);
     const offers: Offer[] = [];
