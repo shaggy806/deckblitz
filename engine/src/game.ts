@@ -59058,11 +59058,23 @@ controlledBy,
   /** Whether a static prohibition's `from` / `notFrom` lets it reach
    * `cardId` where the card is now — as a cast or a land play begins, before
    * it moves (rule 601.2a): "from your hand" (Experimental Frenzy), "from
-   * anywhere other than their hands" (Drannith Magistrate). */
+   * anywhere other than their hands" (Drannith Magistrate). One bound to
+   * cards (`objects`) reaches only those, each in the stint it was bound in
+   * (rule 400.7): "that player … can't play **it**" (Firestorm Phoenix). */
   private prohibitionReachesZone(
-    prohibits: { readonly from?: readonly ZoneType[]; readonly notFrom?: readonly ZoneType[] },
+    prohibits: {
+      readonly from?: readonly ZoneType[];
+      readonly notFrom?: readonly ZoneType[];
+      readonly objects?: readonly { readonly object: ObjectId; readonly stint: number }[];
+    },
     cardId: ObjectId,
   ): boolean {
+    if (
+      prohibits.objects !== undefined &&
+      !prohibits.objects.some((b) => b.object === cardId && b.stint === (this.state.objects[cardId]?.zoneChangeCount ?? 0))
+    ) {
+      return false;
+    }
     if (prohibits.from === undefined && prohibits.notFrom === undefined) return true;
     const zone = this.state.objects[cardId]?.zone;
     if (zone === undefined) return false;
@@ -77714,10 +77726,12 @@ controlledBy,
   }
 
   /** {@link ownDestinationInstead}'s answer, with whether the replacement
-   * reveals the card as it goes (`GraveyardExileReplacement.reveal`). */
+   * reveals the card as it goes (`GraveyardExileReplacement.reveal`), and
+   * what its own one does beside (`then` — Firestorm Phoenix's "until that
+   * player's next turn, … can't play it"). */
   private destinationInstead(
     object: GameObject,
-  ): { readonly instead: "library-top" | "library-bottom" | "hand"; readonly reveal?: true } | undefined {
+  ): { readonly instead: "library-top" | "library-bottom" | "hand"; readonly reveal?: true; readonly then?: EffectSpec } | undefined {
     // Its own text: a static's `self` reaches the object it's on, from
     // whichever zone it has the ability in.
     if (!hasLostAbilities(this.state, this.registry, object)) {
@@ -77727,7 +77741,9 @@ controlledBy,
         // (`optionalGraveyardInstead`), not taken here.
         if (r?.event !== "would-be-put-into-graveyard" || r.self !== true || r.instead === "exile" || r.optional === true) continue;
         if (r.from === "battlefield" && object.zone !== "battlefield") continue;
-        if (object.zone === "battlefield" || r.from === undefined) return { instead: r.instead };
+        if (object.zone === "battlefield" || r.from === undefined) {
+          return { instead: r.instead, ...(r.then !== undefined ? { then: r.then } : {}) };
+        }
       }
     }
     // Another permanent's: "if a creature you control that's enchanted would
@@ -79104,7 +79120,25 @@ controlledBy,
       }
       return moved;
     }
-    if (owed === "hand") return this.moveObjectUncached(id, "hand", enter);
+    if (owed === "hand") {
+      // "Return it to its owner's hand instead. Until that player's next
+      // turn, that player … can't play it" (Firestorm Phoenix): its own
+      // replacement's `then`, run once the card is in the hand by the
+      // permanent's controller as it died, `"source"` the card there (this
+      // stint of it, rule 400.7) and `"trigger-object"` the permanent as it
+      // last existed (608.2h).
+      if (instead?.then !== undefined) {
+        this.exiledThen.set(id, {
+          effect: instead.then,
+          source: id,
+          controller: object.controller,
+          times: 1,
+          stint: object.zoneChangeCount ?? 0,
+          sourceStint: undefined,
+        });
+      }
+      return this.moveObjectUncached(id, "hand", enter);
+    }
     // "If that spell would be put into a graveyard, put it on the bottom of
     // its owner's library instead" (Quintorius, Loremaster — `PlayTerms
     // .bottomAfter`): only while it's a spell, from the stack — resolved,

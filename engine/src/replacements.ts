@@ -1124,7 +1124,11 @@ export interface GraveyardExileReplacement {
    * "reflexive-trigger" }` for "exile it instead. **When you do**, create …"
    * (Head of the Hunt, rule 603.12). Given up, as a void counter is, when the
    * moving object's controller picks another exile that could apply (rule
-   * 616.1). Not with `self`. In it, `"trigger-object"` is the exiled
+   * 616.1). With `self`, only beside `instead: "hand"`: "return it to its
+   * owner's hand instead. Until that player's next turn, that player … can't
+   * play it" (Firestorm Phoenix), run by the permanent's controller as it
+   * died once the card is in the hand, `"source"` the card there (this stint
+   * of it). Otherwise, in it, `"trigger-object"` is the exiled
    * permanent as it last existed on the battlefield (rule 608.2h) and
    * `"source"` this permanent in the stint it replaced from, so nothing
    * happens to it if it left meanwhile: Ravenous Slime's "and put a number of

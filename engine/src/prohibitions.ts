@@ -107,13 +107,15 @@ export type AbilityExempt = "mana" | "loyalty";
 /** One thing that can't be done. `W` is how an effect names a player before
  * it resolves; everything stored has been bound to {@link ProhibitedPlayer}. */
 export type Prohibition<W = ProhibitedPlayer> =
-  | {
+  | ({
       /** "Can't cast spells" (rule 601.3). `limit`: only once they've cast
        * this many matching ones this turn, each read as it was cast (Rule of
        * Law). `more`: an effect's "only one more", bound into `limit` as it
        * resolves. `from`/`notFrom`: where the card is as the cast begins
        * (rule 601.2a). `unless`: "only any time they could cast a sorcery",
-       * "only during their own turns". */
+       * "only during their own turns". `target` (an effect's, bound into
+       * `objects`): only that card, in this stint of it — "that player
+       * can't play **it**" (Firestorm Phoenix, with a `play-land` beside). */
       readonly act: "cast";
       readonly who: W;
       readonly filter?: CardFilter;
@@ -122,15 +124,15 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly limit?: number;
       readonly more?: number;
       readonly unless?: ProhibitionUnless;
-    }
-  | {
-      /** "Can't play lands" (rule 305.2). */
+    } & Pick<ObjectSide, "target" | "objects">)
+  | ({
+      /** "Can't play lands" (rule 305.2). `target`: as `cast`'s. */
       readonly act: "play-land";
       readonly who: W;
       readonly filter?: CardFilter;
       readonly from?: readonly ZoneType[];
       readonly notFrom?: readonly ZoneType[];
-    }
+    } & Pick<ObjectSide, "target" | "objects">)
   | ({
       /** "Activated abilities of [these] can't be activated" (rule 602.5).
        * `of` reaches permanents alone (rule 109.2) unless `anyZone`. No `of`,
