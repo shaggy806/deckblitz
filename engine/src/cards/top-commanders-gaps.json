@@ -5,6 +5,7 @@
     "effect:search-same-name-as-chosen-permanents",
     "effect:reveal-until-or-x-cards",
     "effect:return-if-sacrificed-this-way",
+    "effect:top-n-of-graveyard-opponent-chooses",
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",

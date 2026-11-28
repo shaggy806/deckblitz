@@ -1356,8 +1356,10 @@ export interface CardFilter {
    * last): Bösium Strip's "cast instant and sorcery spells from **the top of
    * your graveyard**". Nothing outside a graveyard. A card saying it has its
    * graveyards arranged as cards arrive together (404.3,
-   * `readsGraveyardOrder`). */
-  readonly topOfGraveyard?: true;
+   * `readsGraveyardOrder`). A number is one of that many cards from the top
+   * — Phyrexian Grimoire's "one of **the top two cards** of your graveyard"
+   * (`2`). */
+  readonly topOfGraveyard?: true | number;
   /**
    * Was attached to this object — the ability's source, or the object its
    * trigger fired on — as it is now, or as it last existed on the
@@ -3984,10 +3986,11 @@ export function matchesFilter(
     const above = pile.indexOf(id) - pile.indexOf(from.id);
     if (above <= 0 || (filter.aboveSourceInGraveyard === "directly" && above !== 1)) return false;
   }
-  if (filter.topOfGraveyard === true) {
+  if (filter.topOfGraveyard !== undefined) {
     if (live === undefined || live.zone !== "graveyard") return false;
     const pile = state.zones.perPlayer[live.owner]?.graveyard ?? [];
-    if (pile[pile.length - 1] !== id) return false;
+    const depth = filter.topOfGraveyard === true ? 1 : filter.topOfGraveyard;
+    if (!pile.slice(Math.max(0, pile.length - depth)).includes(id)) return false;
   }
   // "That was attached to it" (an effect's bound `wasAttachedTo`): the same
   // object, still on the battlefield (rule 400.7) — or the card it became in

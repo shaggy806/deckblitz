@@ -8,8 +8,9 @@ import { describe, expect, it } from "vitest";
 
 import { A, activate, destroy, lands, pickFromZone, settle, spawn, table, toHand, toStep, zone } from "./harness.js";
 import { computeCharacteristics } from "../characteristics.js";
+import type { ObjectId } from "../primitives.js";
 
-function board(): { game: ReturnType<typeof table>["game"]; a: ReturnType<typeof table>["a"]; doppel: string; bears: string } {
+function board(): { game: ReturnType<typeof table>["game"]; a: ReturnType<typeof table>["a"]; doppel: ObjectId; bears: ObjectId } {
   const { game, a } = table();
   const doppel = spawn(game, "Shifty Doppelganger");
   lands(game, "Island", 4);

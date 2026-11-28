@@ -5,9 +5,10 @@
  */
 import { describe, expect, it } from "vitest";
 
+import type { ObjectId } from "../primitives.js";
 import { A, B, activate, lands, spawn, table, toLibrary, zone } from "./harness.js";
 
-function board(): { game: ReturnType<typeof table>["game"]; dissector: string; ring: string; bears: string; forest: string } {
+function board(): { game: ReturnType<typeof table>["game"]; dissector: ObjectId; ring: ObjectId; bears: ObjectId; forest: ObjectId } {
   const { game } = table();
   const dissector = spawn(game, "Thought Dissector");
   lands(game, "Wastes", 3);
