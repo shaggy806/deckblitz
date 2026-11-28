@@ -10,6 +10,7 @@
     "amount:cards-in-target-hand-matching",
     "decision:secret-card-choice-from-hand",
     "effect:block-if-able-illegal-attacker-slot",
+    "filter:shares-color-with-sacrificed",
     "effect:search-same-name-as-chosen-permanents",
     "effect:reveal-until-or-x-cards",
     "effect:return-if-sacrificed-this-way",

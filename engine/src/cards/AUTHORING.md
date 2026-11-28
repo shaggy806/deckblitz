@@ -4255,7 +4255,8 @@ cards exiled with it, rule 607.2a, or until it leaves), `{ permanents:
 <filter> }` — every permanent matching it — or `{ controlled: <filter> }`
 — every permanent you control matching it (Hiveheart Shaman's "a basic land
 card that **doesn't** share a land type with a land you control" is `not: {
-sharesLandTypeWith: { controlled: { type: "land" } } }`). The reference
+sharesLandTypeWith: { controlled: { type: "land" } } }`). Mind Extraction's "all cards of each of the sacrificed creature's
+colors" is `sharesColorWith: { paid: "sacrificed" }`. The reference
 objects themselves always match — "X **and each other** creature that
 shares…" needs no `anyOf`; write `exceptTarget`/`exceptSource` for a bare
 "each other". **`{ typesOf: <reference>, each?: true }`** reads the reference
