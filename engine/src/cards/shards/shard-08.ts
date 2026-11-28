@@ -438,6 +438,7 @@ import _poolHinterlandHarbor from "../pool/hinterland-harbor.js";
 import _poolHinterlandSanctifier from "../pool/hinterland-sanctifier.js";
 import _poolHiredMuscle from "../pool/hired-muscle.js";
 import _poolHitMonkey from "../pool/hit-monkey.js";
+import _poolHollowSpecter from "../pool/hollow-specter.js";
 import _poolHollowhengeHuntmaster from "../pool/hollowhenge-huntmaster.js";
 import _poolHolyCow from "../pool/holy-cow.js";
 import _poolHolyStrength from "../pool/holy-strength.js";
@@ -1556,6 +1557,7 @@ const shard: CardShard = {
     _poolHinterlandSanctifier,
     _poolHiredMuscle,
     _poolHitMonkey,
+    _poolHollowSpecter,
     _poolHollowhengeHuntmaster,
     _poolHolyCow,
     _poolHolyStrength,

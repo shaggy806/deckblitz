@@ -9581,6 +9581,7 @@ import _poolFatalFissure from "./pool/fatal-fissure.js";
 import _poolFatalFrenzy from "./pool/fatal-frenzy.js";
 import _poolFatalFumes from "./pool/fatal-fumes.js";
 import _poolFatalGrudge from "./pool/fatal-grudge.js";
+import _poolFatalLore from "./pool/fatal-lore.js";
 import _poolFatalMutation from "./pool/fatal-mutation.js";
 import _poolFatalPush from "./pool/fatal-push.js";
 import _poolFateForetold from "./pool/fate-foretold.js";
@@ -13421,6 +13422,7 @@ import _poolHollowDogs from "./pool/hollow-dogs.js";
 import _poolHollowMarauder from "./pool/hollow-marauder.js";
 import _poolHollowOne from "./pool/hollow-one.js";
 import _poolHollowScavenger from "./pool/hollow-scavenger.js";
+import _poolHollowSpecter from "./pool/hollow-specter.js";
 import _poolHollowTrees from "./pool/hollow-trees.js";
 import _poolHollowbornBarghest from "./pool/hollowborn-barghest.js";
 import _poolHollowheadSliver from "./pool/hollowhead-sliver.js";
@@ -13955,6 +13957,7 @@ import _poolIllusionaryForces from "./pool/illusionary-forces.js";
 import _poolIllusionaryInformant from "./pool/illusionary-informant.js";
 import _poolIllusionaryPresence from "./pool/illusionary-presence.js";
 import _poolIllusionaryServant from "./pool/illusionary-servant.js";
+import _poolIllusionaryTerrain from "./pool/illusionary-terrain.js";
 import _poolIllusionaryWall from "./pool/illusionary-wall.js";
 import _poolIllusionistsBracers from "./pool/illusionists-bracers.js";
 import _poolIllusionistsGambit from "./pool/illusionists-gambit.js";
@@ -44020,6 +44023,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFatalFrenzy,
   _poolFatalFumes,
   _poolFatalGrudge,
+  _poolFatalLore,
   _poolFatalMutation,
   _poolFatalPush,
   _poolFateForetold,
@@ -47860,6 +47864,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHollowMarauder,
   _poolHollowOne,
   _poolHollowScavenger,
+  _poolHollowSpecter,
   _poolHollowTrees,
   _poolHollowbornBarghest,
   _poolHollowheadSliver,
@@ -48394,6 +48399,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIllusionaryInformant,
   _poolIllusionaryPresence,
   _poolIllusionaryServant,
+  _poolIllusionaryTerrain,
   _poolIllusionaryWall,
   _poolIllusionistsBracers,
   _poolIllusionistsGambit,
@@ -78472,6 +78478,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fatal-frenzy": _poolFatalFrenzy,
   "pool/fatal-fumes": _poolFatalFumes,
   "pool/fatal-grudge": _poolFatalGrudge,
+  "pool/fatal-lore": _poolFatalLore,
   "pool/fatal-mutation": _poolFatalMutation,
   "pool/fatal-push": _poolFatalPush,
   "pool/fate-foretold": _poolFateForetold,
@@ -82312,6 +82319,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hollow-marauder": _poolHollowMarauder,
   "pool/hollow-one": _poolHollowOne,
   "pool/hollow-scavenger": _poolHollowScavenger,
+  "pool/hollow-specter": _poolHollowSpecter,
   "pool/hollow-trees": _poolHollowTrees,
   "pool/hollowborn-barghest": _poolHollowbornBarghest,
   "pool/hollowhead-sliver": _poolHollowheadSliver,
@@ -82846,6 +82854,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/illusionary-informant": _poolIllusionaryInformant,
   "pool/illusionary-presence": _poolIllusionaryPresence,
   "pool/illusionary-servant": _poolIllusionaryServant,
+  "pool/illusionary-terrain": _poolIllusionaryTerrain,
   "pool/illusionary-wall": _poolIllusionaryWall,
   "pool/illusionists-bracers": _poolIllusionistsBracers,
   "pool/illusionists-gambit": _poolIllusionistsGambit,

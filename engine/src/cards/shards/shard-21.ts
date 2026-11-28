@@ -426,6 +426,7 @@ import _poolHypergenesis from "../pool/hypergenesis.js";
 import _poolIcewroughtSentry from "../pool/icewrought-sentry.js";
 import _poolIchneumonDruid from "../pool/ichneumon-druid.js";
 import _poolIgnobleSoldier from "../pool/ignoble-soldier.js";
+import _poolIllusionaryTerrain from "../pool/illusionary-terrain.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
 import _poolImperialRecruiter from "../pool/imperial-recruiter.js";
 import _poolImpracticalJoke from "../pool/impractical-joke.js";
@@ -1463,6 +1464,7 @@ const shard: CardShard = {
     _poolIcewroughtSentry,
     _poolIchneumonDruid,
     _poolIgnobleSoldier,
+    _poolIllusionaryTerrain,
     _poolIlysianCaryatid,
     _poolImperialRecruiter,
     _poolImpracticalJoke,
