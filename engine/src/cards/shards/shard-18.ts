@@ -539,6 +539,7 @@ import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMimingSlime from "../pool/miming-slime.js";
+import _poolMinamosMeddling from "../pool/minamos-meddling.js";
 import _poolMindFuneral from "../pool/mind-funeral.js";
 import _poolMindOverMatter from "../pool/mind-over-matter.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
@@ -1600,6 +1601,7 @@ const shard: CardShard = {
     _poolMiglozMazeCrusher,
     _poolMillicentRestlessRevenant,
     _poolMimingSlime,
+    _poolMinamosMeddling,
     _poolMindFuneral,
     _poolMindOverMatter,
     _poolMindspringMerfolk,

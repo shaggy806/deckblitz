@@ -429,6 +429,7 @@ import _poolHeroicIntervention from "../pool/heroic-intervention.js";
 import _poolHesDeadJim from "../pool/hes-dead-jim.js";
 import _poolHex from "../pool/hex.js";
 import _poolHexmarkDestroyer from "../pool/hexmark-destroyer.js";
+import _poolHintOfInsanity from "../pool/hint-of-insanity.js";
 import _poolHinterlandLogger from "../pool/hinterland-logger.js";
 import _poolHit from "../pool/hit.js";
 import _poolHixusPrisonWarden from "../pool/hixus-prison-warden.js";
@@ -1510,6 +1511,7 @@ const shard: CardShard = {
     _poolHesDeadJim,
     _poolHex,
     _poolHexmarkDestroyer,
+    _poolHintOfInsanity,
     _poolHinterlandLogger,
     _poolHit,
     _poolHixusPrisonWarden,

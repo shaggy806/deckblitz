@@ -13346,6 +13346,7 @@ import _poolHinder from "./pool/hinder.js";
 import _poolHinderingLight from "./pool/hindering-light.js";
 import _poolHinderingTouch from "./pool/hindering-touch.js";
 import _poolHindervines from "./pool/hindervines.js";
+import _poolHintOfInsanity from "./pool/hint-of-insanity.js";
 import _poolHinterlandDrake from "./pool/hinterland-drake.js";
 import _poolHinterlandHarbor from "./pool/hinterland-harbor.js";
 import _poolHinterlandHermit from "./pool/hinterland-hermit.js";
@@ -18059,6 +18060,7 @@ import _poolMinaAndDennWildborn from "./pool/mina-and-denn-wildborn.js";
 import _poolMinamoSchoolAtWatersEdge from "./pool/minamo-school-at-waters-edge.js";
 import _poolMinamoScrollkeeper from "./pool/minamo-scrollkeeper.js";
 import _poolMinamoSightbender from "./pool/minamo-sightbender.js";
+import _poolMinamosMeddling from "./pool/minamos-meddling.js";
 import _poolMinasMorgulDarkFortress from "./pool/minas-morgul-dark-fortress.js";
 import _poolMinasTirithGarrison from "./pool/minas-tirith-garrison.js";
 import _poolMinasTirith from "./pool/minas-tirith.js";
@@ -47797,6 +47799,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHinderingLight,
   _poolHinderingTouch,
   _poolHindervines,
+  _poolHintOfInsanity,
   _poolHinterlandDrake,
   _poolHinterlandHarbor,
   _poolHinterlandHermit,
@@ -52510,6 +52513,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMinamoSchoolAtWatersEdge,
   _poolMinamoScrollkeeper,
   _poolMinamoSightbender,
+  _poolMinamosMeddling,
   _poolMinasMorgulDarkFortress,
   _poolMinasTirithGarrison,
   _poolMinasTirith,
@@ -82261,6 +82265,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hindering-light": _poolHinderingLight,
   "pool/hindering-touch": _poolHinderingTouch,
   "pool/hindervines": _poolHindervines,
+  "pool/hint-of-insanity": _poolHintOfInsanity,
   "pool/hinterland-drake": _poolHinterlandDrake,
   "pool/hinterland-harbor": _poolHinterlandHarbor,
   "pool/hinterland-hermit": _poolHinterlandHermit,
@@ -86974,6 +86979,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/minamo-school-at-waters-edge": _poolMinamoSchoolAtWatersEdge,
   "pool/minamo-scrollkeeper": _poolMinamoScrollkeeper,
   "pool/minamo-sightbender": _poolMinamoSightbender,
+  "pool/minamos-meddling": _poolMinamosMeddling,
   "pool/minas-morgul-dark-fortress": _poolMinasMorgulDarkFortress,
   "pool/minas-tirith-garrison": _poolMinasTirithGarrison,
   "pool/minas-tirith": _poolMinasTirith,
