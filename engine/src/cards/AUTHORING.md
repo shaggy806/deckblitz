@@ -3624,7 +3624,15 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   `who: "you"` asks the effect's controller alone — "**pay any amount of life**,
   then look at that many cards from the top of your library" (Plunge into
   Darkness: `then` a `look-and-choose { count: "x" }`), 0 among the amounts
-  (rules 107.1c, 119.4b), up to what they can pay (119.4).
+  (rules 107.1c, 119.4b), up to what they can pay (119.4). Any other
+  `PlayerRef` asks that one player, and `then` is about them: Power Leak's
+  "**that player** may pay any amount of mana. This Aura deals 2 damage to that
+  player. Prevent X of that damage" is `who: "active-player"` (its upkeep
+  trigger's player) with `then: { kind: "damage", amount: 2, who:
+  "that-player", prevent: "x" }`. `damage`'s **`prevent`** is "prevent X of
+  that damage": a prevention effect of its own (rules 615.1, 615.6), ordered
+  with the others (616.1) and nothing against damage that can't be prevented —
+  never write it as less damage.
 - **`bid-life { who, opening, then?, ifYouWin? }`** — "each player may bid life":
   you open at `opening` (a number, or `"any"` for Pain's Reward's "a bid of any
   number"), then in turn order each other bidder may top it, a yes or no and then

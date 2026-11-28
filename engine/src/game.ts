@@ -3168,6 +3168,12 @@ export class Game {
    * dealing its damage: to a creature, it can't be prevented or redirected
    * (Lava Burst). Not game state, like `unpreventableDepth`. */
   private unstoppableToCreaturesDepth = 0;
+  /** While set, a `damage` effect with `prevent` is dealing its damage: "this
+   * Aura deals 2 damage to that player. **Prevent X of that damage**" (Power
+   * Leak — rules 615.1, 615.4) — a prevention effect of `by` on each event
+   * it deals, beside the others that apply (616.1). Not game state, like
+   * `unpreventableDepth`. */
+  private ownPrevention: { readonly by: number } | null = null;
   /** The +1/+1 counters an Incubator token being made by `incubate` enters
    * with (rule 701.53a) — read by `enteringReplacementOf` for that token
    * only. Not game state: it spans the one `createTokens` call. */
@@ -50688,6 +50694,15 @@ controlledBy,
           else this.unpreventableDepth -= 1;
         }
       },
+      preventingSome: (by, fn) => {
+        const before = this.ownPrevention;
+        this.ownPrevention = { by };
+        try {
+          fn();
+        } finally {
+          this.ownPrevention = before;
+        }
+      },
       damageUnpreventableThisTurn: () => {
         this.state.damageUnpreventableThisTurn = true;
       },
@@ -70508,6 +70523,12 @@ controlledBy,
         if (n > 0) steps.push({ kind: "prevent-n", by: n, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
       } else if ("allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
       else steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
+    }
+    // "Prevent X of that damage", said by the effect dealing it (Power Leak):
+    // on the event as it's dealt, not again on what a redirection moves.
+    const own = this.ownPrevention;
+    if (own !== null && own.by > 0 && applied.statics.length === 0 && applied.shields.length === 0) {
+      steps.push({ kind: "prevent-n", by: own.by, made: { key: `own-prevention:${source}`, by: source } });
     }
     // Shield counters (rule 122.1c): not an ability, so one that lost its
     // abilities keeps the protection (the rulings).

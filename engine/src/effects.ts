@@ -3710,6 +3710,14 @@ export type EffectSpec =
       /** "The damage can't be prevented" (rule 615.12 — Combust, Pinpoint
        * Avalanche): prevention effects prevent none of it. */
       readonly cantBePrevented?: true;
+      /** "This Aura deals 2 damage to that player. **Prevent X of that
+       * damage**, where X is the amount of mana that player paid this way"
+       * (Power Leak, Errant Minion): a prevention effect this resolution
+       * makes for the damage it deals (rules 615.1, 615.4), read as it does —
+       * applied with any others in the order the affected player chooses
+       * (616.1), and nothing when the damage can't be prevented (615.12).
+       * Unlike dealing less, damage prevented is never dealt (615.6). */
+      readonly prevent?: EffectAmount;
       /** "If ~ would deal damage to a creature, that damage can't be
        * prevented or dealt instead to another permanent or player" (Lava
        * Burst — rules 615.12, 614.9): to a creature, as it is when the damage
@@ -12173,10 +12181,17 @@ export type EffectSpec =
        * "pay any amount of life, then look at that many cards from the top
        * of your library", 0 among the amounts (rules 107.1c, 119.4b), so not
        * asked at all with nothing to pay.
+       *
+       * Any other {@link PlayerRef}: that one player, read as this begins —
+       * Power Leak's "at the beginning of the upkeep of enchanted
+       * enchantment's controller, **that player** may pay any amount of mana"
+       * (`"active-player"`). `then` and `each` are about them
+       * (`"that-player"`); naming nobody still in the game, nobody pays and
+       * `then` reads 0.
        */
       readonly kind: "players-pay-any-amount";
       readonly resource: "mana" | "life";
-      readonly who?: "you";
+      readonly who?: PlayerRef;
       readonly startingWithYou?: true;
       readonly untilNoOnePays?: true;
       readonly then?: EffectSpec;
@@ -14170,6 +14185,10 @@ export interface EffectApi {
    * it deals to a creature, which can't be redirected either (the `damage`
    * effect's `toCreaturesUnstoppable`). */
   unpreventably(fn: () => void, toCreatures?: "and-unredirectable"): void;
+  /** Run `fn` with `by` of each damage event it deals prevented — a prevention
+   * effect of its own, beside the others (rules 615.1, 616.1): a `damage`
+   * effect's `prevent`. */
+  preventingSome(by: number, fn: () => void): void;
   /** "Damage can't be prevented this turn" (Skullcrack). */
   damageUnpreventableThisTurn(): void;
   /** Set up a `damage-rule`, its references resolved (see that effect). */
@@ -18118,8 +18137,11 @@ function applyPlayersPayAnyAmount(
   spec: Extract<EffectSpec, { kind: "players-pay-any-amount" }>,
   ctx: ResolutionContext,
 ): void {
+  // One player named (Power Leak's "that player"): `then` is about them.
+  const named = spec.who === undefined || spec.who === "you" ? undefined : resolvePlayerRef(spec.who, ctx);
   const round = (): readonly PlayerId[] => {
     if (spec.who === "you") return [ctx.controller];
+    if (spec.who !== undefined) return named !== undefined && ctx.playersInScope("each-player").includes(named) ? [named] : [];
     const players = ctx.playersInScope("each-player");
     return spec.startingWithYou === true ? eachPlayerMayAsks("each-player", ctx, true) : ctx.apnap(players);
   };
@@ -18171,7 +18193,7 @@ function applyPlayersPayAnyAmount(
       }
     });
   }
-  if (spec.then !== undefined) applyEffectSpec(spec.then, ctx.withX(total));
+  if (spec.then !== undefined) applyEffectSpec(spec.then, (named !== undefined ? ctx.aboutPlayer(named) : ctx).withX(total));
 }
 
 /**
@@ -22359,6 +22381,21 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "damage": {
+      if (spec.prevent !== undefined) {
+        // Its own prevention is one of the effects the order question is
+        // about, so it's in place for that question too; answered, this
+        // whole spec runs again.
+        const { prevent, ...rest } = spec;
+        const by = Math.max(0, Math.floor(amountValue(prevent, ctx)));
+        ctx.preventingSome(by, () => {
+          if (ctx.replacementOrdersAsked(() => applyEffectSpec(rest, ctx))) {
+            ctx.resumeAfterDecisions(spec);
+            return;
+          }
+          applyEffectSpec(rest, ctx);
+        });
+        return;
+      }
       if (asksReplacementOrder(spec, ctx)) return;
       if (spec.cantBePrevented === true) {
         const { cantBePrevented: _, ...rest } = spec;
