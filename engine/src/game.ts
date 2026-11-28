@@ -2817,11 +2817,12 @@ function lasting(
 /** A modifier's duration fields for `duration`. */
 function durationFields(
   duration: Expiry,
-): Pick<PtModifier, "untilEndOfTurn" | "untilEndOfCombat" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource" | "untilCast"> {
+): Pick<PtModifier, "untilEndOfTurn" | "untilEndOfCombat" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource" | "untilCast" | "untilSpellCast"> {
   if (duration === "end-of-turn") return { untilEndOfTurn: true };
   if (duration === "permanent") return { untilEndOfTurn: false };
   if ("untilEndOfCombat" in duration) return { untilEndOfTurn: true, untilEndOfCombat: true };
   if ("untilCast" in duration) return { untilEndOfTurn: false, untilCast: duration.untilCast };
+  if ("untilSpellCast" in duration) return { untilEndOfTurn: false, untilSpellCast: duration.untilSpellCast };
   if ("whileSource" in duration) {
     return duration.whileSource === null ? { untilEndOfTurn: false } : { untilEndOfTurn: false, whileSource: duration.whileSource };
   }
@@ -27089,6 +27090,7 @@ export class Game {
       from: castFrom,
     });
     if (exiledStint !== undefined) this.endUntilCastEffects(cardId, exiledStint);
+    this.endUntilSpellCastEffects(cardId, player);
     this.announceTargeted(chosen, player, cardId, true);
     this.announceTargetsChosen(chosen, player, cardId);
     this.commitCrimeIfAny(chosen, player, cardId);
@@ -29363,6 +29365,24 @@ export class Game {
       const object = this.state.objects[id];
       if (object === undefined || !object.modifiers.some((m) => m.untilCast?.card === card && m.untilCast.stint === stint)) continue;
       object.modifiers = object.modifiers.filter((m) => !(m.untilCast?.card === card && m.untilCast.stint === stint));
+      ended = true;
+    }
+    if (ended) invalidateComputedCache();
+  }
+
+  /** "Until a player casts a creature spell" is over (Soul Sculptor): `spell`,
+   * just cast by `caster` (rule 601.2i), matches the effect's filter, read
+   * from the caster's side. Only a cast ends it — a copy never was (707.10). */
+  private endUntilSpellCastEffects(spell: ObjectId, caster: PlayerId): void {
+    let ended = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || !object.modifiers.some((m) => m.untilSpellCast !== undefined)) continue;
+      const kept = object.modifiers.filter(
+        (m) => m.untilSpellCast === undefined || !matchesFilter(this.state, this.registry, spell, m.untilSpellCast, { you: caster }),
+      );
+      if (kept.length === object.modifiers.length) continue;
+      object.modifiers = kept;
       ended = true;
     }
     if (ended) invalidateComputedCache();

@@ -2209,6 +2209,9 @@ export interface PtModifier {
   /** "Until this card is cast from exile" (Glamorous Outlaw): ends when that
    * card, in that stint, has been cast. */
   untilCast?: UntilCast;
+  /** "Until a player casts a creature spell" (Soul Sculptor): ends as any
+   * player's spell matching this filter becomes cast (rule 601.2i). */
+  untilSpellCast?: CardFilter;
   /** It can attack as though it didn't have defender (the
    * `attack-despite-defender` effect). A rule about it, not an ability it
    * has, so a loss of abilities doesn't end it. */

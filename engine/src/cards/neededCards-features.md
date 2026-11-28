@@ -9336,3 +9336,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A card you own of a name in each of several zones (2026-11-28).** `condition:owns-named-card-in-every-zone` needed no engine code: `all` of `cards-in-exile` and an `aggregate` count (each with `ownedBy: "you"`), `hand-size` and `cards-in-graveyard` (each with the `name` filter). Hedron Alignment. `test/owns-named-in-every-zone.test.ts`.
 
 **Dealt combat damage to a creature this turn (2026-11-28).** `filter:dealt-combat-damage-to-creature-this-turn`: the journal word `"dealt-combat-damage-to-creature"` (the `damage` entry now keeps `targetWas` for combat damage to a permanent too), read as a `journaled` clause. Thirsting Axe. `test/dealt-combat-damage-to-creature.test.ts`.
+
+**Until a player casts a spell of a kind (2026-11-28).** `duration:until-a-player-casts-creature-spell`: `PermanentDuration`'s `{ untilSpellCast: CardFilter }` (`Expiry` the same, `PtModifier.untilSpellCast`), ended in `castSpell` by `Game.endUntilSpellCastEffects` as a matching spell becomes cast (rule 601.2i). Soul Sculptor. `test/until-spell-cast.test.ts`.

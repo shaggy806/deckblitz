@@ -15,6 +15,7 @@
  */
 
 import type { PlayerRef, ObjectRef } from "./effects.js";
+import type { CardFilter } from "./filter.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 
 /** A player a duration is anchored to other than the effect's controller,
@@ -83,6 +84,10 @@ export type DurationPlayer = Exclude<PlayerRef, "you">;
  * - `"until-source-cast"`: "until this card is cast from exile" (Glamorous
  *   Outlaw): the source, in the exile stint it's in as the effect begins,
  *   has been cast (601.2g's ruling). Leaving exile any other way ends nothing.
+ * - `{ untilSpellCast }`: "until a player casts a creature spell" (Soul
+ *   Sculptor): ends as any player's spell matching the filter becomes cast
+ *   (rule 601.2i), the filter read of the spell on the stack from its
+ *   caster's side. A copy is never cast (707.10), so it ends nothing.
  *
  * A permission over one card (`GameObject.playPermission`), whose every
  * permission ends anyway once the card moves:
@@ -117,6 +122,7 @@ export type Duration =
   | { readonly whileTapped: ObjectRef }
   | { readonly whileCounter: string }
   | "until-source-cast"
+  | { readonly untilSpellCast: CardFilter }
   | "while-exiled"
   | "until-next-exile";
 
@@ -139,6 +145,7 @@ export type PermanentDuration = Extract<
   | "end-of-turn"
   | "permanent"
   | "until-source-cast"
+  | { readonly untilSpellCast: CardFilter }
   | "until-your-next-turn"
   | "until-end-of-combat"
   | PointDuration
@@ -247,6 +254,8 @@ export type Expiry =
   | { readonly whileSource: WhileSource | null }
   /** Until that card, in that stint, is cast — `"until-source-cast"`. */
   | { readonly untilCast: UntilCast }
+  /** Until a spell matching this is cast — `{ untilSpellCast }`. */
+  | { readonly untilSpellCast: CardFilter }
   /** A permission's "until you exile another card with [this]": ends when
    * that stint of the source next does (Unstable Amulet). */
   | { readonly untilNextExile: { readonly source: ObjectId; readonly stint: number } };
