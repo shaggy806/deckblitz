@@ -50,7 +50,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { tap: true },
+      cost: { mana: null, tap: true },
       targets: ["land"],
       effect: { kind: "become", target: 0, setSubtypes: ["Forest"], duration: "while-source" },
       resolve: null,
