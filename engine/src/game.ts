@@ -31250,7 +31250,8 @@ export class Game {
         source: sourceId,
         player,
         modes: [...modes],
-        modal: true,
+        // A cost's choice (Phyrexian Splicer) isn't a modal ability (rule 700.2).
+        ...(ability.effect?.kind === "modal" && ability.effect.costChoice === true ? {} : { modal: true as const }),
         ...modeTextsOf(ability.effect?.kind === "modal" ? ability.effect.modes : [], modes),
       });
     }

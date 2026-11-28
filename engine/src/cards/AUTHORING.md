@@ -3109,7 +3109,13 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   its own (the offer's and action's `modes`, labelled with the cost and that mode's text), a
   mode whose targets can't be chosen left out; `notChosenBefore` / `notChosenThisTurn` work
   as for a trigger (Three Bowls of Porridge, Kargan Intimidator), the mode counting as chosen
-  once activated. `activation-choices.test.ts`. **An announced
+  once activated. `activation-choices.test.ts`. A choice **its cost** makes, with no bullets
+  — Phyrexian Splicer's "{2}, {T}, Choose flying, first strike, trample, or shadow: … target
+  creature with the chosen ability loses it and another target creature gains it" — is the same
+  shape with `costChoice: true`: one mode an option, each with the targets it makes (the
+  keyword in the first slot's filter, `{ kind: "other", of: "creature", than: { slot: 0 } }`
+  in the second), chosen before targets (602.2b, 601.2b), but not modal (700.2), so nobody
+  faces a dilemma. `cost-choice-activation.test.ts`. **An announced
   mode may have targets of its own** (`ModeOption.targets`, as a `castModal` mode does —
   Aether Channeler's "return another target nonland permanent", Dread Presence's "deals 2
   damage to any target"): the chosen modes bring them as it goes on the stack, a mode

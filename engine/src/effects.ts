@@ -11858,6 +11858,16 @@ export type EffectSpec =
        * target can't be chosen (rule 603.3c), so with fewer on offer it's as
        * many as there are. Not read on an activated ability. */
       readonly exactlyIf?: { readonly condition: StaticCondition; readonly modes: number };
+      /** With `announced`, on an activated ability: the choice is one its
+       * **cost** makes, not a list of modes — Phyrexian Splicer's "{2}, {T},
+       * Choose flying, first strike, trample, or shadow: Until end of turn,
+       * target creature with the chosen ability loses it and another target
+       * creature gains it". Made as it's activated, before targets (rules
+       * 602.2b, 601.2b), one `modes` entry an option, each with the targets
+       * that option makes; but the ability isn't modal (rule 700.2: no
+       * bulleted list), so its `modes-chosen` isn't `modal` and nobody faces
+       * a dilemma. */
+      readonly costChoice?: true;
     }
   | {
       /** Apply `then` if `condition` holds at resolution, otherwise `else`
