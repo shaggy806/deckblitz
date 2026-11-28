@@ -210,15 +210,46 @@ function throughCombat(state: GameState, registry: CardRegistry, me: PlayerId): 
   });
 }
 
+/** Whether a plan's passing out runs on through the opponents' turns to our
+ * next (`withPlanSwingBack`, `EvalBotOptions.rolloutSwingBack`). */
+let planSwingBack = false;
+
+/** Run `body` with the plan's passing out running on to our next turn, the
+ * opponents attacking and blocking as v1 on the way; the setting before is
+ * restored after. */
+export function withPlanSwingBack<T>(on: boolean, body: () => T): T {
+  const before = planSwingBack;
+  planSwingBack = on;
+  try {
+    return body();
+  } finally {
+    planSwingBack = before;
+  }
+}
+
 /** Pass the rest of the turn out — our attack as v1's, if it's still to come
- * — to the start of the next player's turn. */
+ * — to the start of the next player's turn; under `withPlanSwingBack`, on to
+ * the start of ours, every seat fighting combat as v1 on the way. */
 function passOut(state: GameState, registry: CardRegistry, me: PlayerId): GameState | null {
   return rollout(() => {
     const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry, me) });
     const turn = state.turn.number;
     sim.dispatch({ type: "pass-priority", player: me });
     let steps = 0;
-    sim.advanceUntil(untilDeadline((s) => (steps += 1) > CEILING || s.turn.number !== turn));
+    if (!planSwingBack) {
+      sim.advanceUntil(untilDeadline((s) => (steps += 1) > CEILING || s.turn.number !== turn));
+      return sim.state;
+    }
+    const ceiling = CEILING * (state.turnOrder.length + 1);
+    sim.advanceUntil(
+      untilDeadline(
+        (s) =>
+          (steps += 1) > ceiling ||
+          s.result.over ||
+          s.players[me]?.hasLost === true ||
+          (s.turn.number !== turn && s.turnOrder[s.turn.activePlayerIndex] === me),
+      ),
+    );
     return sim.state;
   });
 }

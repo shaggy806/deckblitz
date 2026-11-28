@@ -179,6 +179,37 @@ catches the timid misses, and it judged level. What would change the verdict is 
 sees the swing back after our attack (the turn passed on through the opponents' attacks, as the
 tap guard's `simulateSwingBack` does), and that is a horizon question, not an attacker one.
 
+**The swing back, tried (2026-11-27, off by default).** `rolloutSwingBack`: on our own turn the
+priority rollouts (single moves, batches, land drops, untap plans) run to our next turn (the
+`"round"` horizon, `rolloutHorizon`), and so does the turn plan's passing out
+(`withPlanSwingBack`), the opponents attacking and blocking as v1 in between. On the Olivia's
+Wrath board it sees the danger (the Wrath's line has alice dead in the round, Conqueror's at 1)
+and casts Conqueror, with or without v2 rollout attacks. Measured:
+
+- **The gate**: 346 of 350 (50 s against 29): removal it was taught to hold now goes at once,
+  since a creature's next attack is in the rollout (Swords to Plowshares at a two-mana commander
+  and at a wall, Explosion at a player, Vow of Duty on the attacker).
+- **Judged**, the same twelve games: 94 moves changed, **24 better, 16 worse, 53 even** — the
+  only variant with more better than worse — and the decider out of the game under the old move
+  alone 4 times, under the new alone once. Net about −1,000 points, nearly all of it two turns
+  of one four-player game (seed 4, its last tally read at turn 34 through the inspector when it
+  was stopped: −685 and −223). Without that game, −16.
+- **What those two turns were**, and about twenty smaller ones: the new move passes its first
+  main phase where the old cast a creature (Ureni of the Unwritten, Scion of Calamity, Titania,
+  Atarka, Giada...): the plan prefers "attack, then cast in the second main phase", which the
+  rollout can't tell from casting first when the creature's worth this turn is an enter trigger
+  that finds cards (Ureni's Dragons) or haste. Played on with the real library, casting first
+  snowballed.
+- **Time**: the four-player games ran 803 s, 1,505 s, 4,781 s and over 100 minutes (stopped),
+  where the control's ran 127, 210 and 587 s; the two-player ones about 1.5 times as long.
+
+Promising on its own question (it lives through the swing back the others walk into), but not
+ready: before it is judged again it needs the first-main-phase cast kept where a creature's
+enter or attack trigger or haste pays this turn, the four gate scenarios looked at (some may be
+right to change: a removal held "for more" while the creature it would take attacks next turn),
+and a cost it can carry at the live clock — the swing back only for moves that change what can
+attack or block before our next turn, as the tap guard is asked.
+
 ## 2. Mana priced by v2's own turn planner
 
 **What is wrong.** A rollout passes our own seat, so mana a choice spends looks free, and v1

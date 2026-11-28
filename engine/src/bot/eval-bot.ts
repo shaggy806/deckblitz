@@ -125,6 +125,7 @@ import {
   sameKnownEnd,
   unknownCards,
   withOurAttackSeat,
+  withPlanSwingBack,
 } from "./turn-plan.js";
 import type { PlanStep, PlannedLine, ScoredFirst, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
@@ -205,6 +206,15 @@ export interface EvalBotOptions {
    * rollout makes under `rolloutAttacks: "v2"`, cheap enough to sit inside
    * one. */
   readonly lightAttacks?: boolean;
+  /**
+   * Score our own turn's priority moves where the swing back has come: their
+   * rollouts (and the turn plan's passing out) run on to our next turn, the
+   * opponents attacking and blocking as v1 in between, rather than stopping
+   * as the next player's turn begins. An experiment (2026-11-27,
+   * `docs/plans/bot-next-steps.md` 1c): an attack a line sets up was scored
+   * with none of what it opens us to.
+   */
+  readonly rolloutSwingBack?: boolean;
   /**
    * Wall-clock ceiling on one decision, in milliseconds. **Off by default**,
    * and that default is deliberate.
@@ -1416,6 +1426,7 @@ export class EvalBotController extends HeuristicBotController {
   /** The current decision's rollout attacks by combat board (`RealAttacksController`). */
   private attackMemo = new Map<string, readonly AttackerDeclaration[]>();
   private readonly lightAttacks: boolean;
+  private readonly rolloutSwingBack: boolean;
   private readonly timeBudgetMs: number;
   private readonly now: () => number;
   /** When the decision under way was asked, under a clock (`onClock`). */
@@ -1569,6 +1580,7 @@ export class EvalBotController extends HeuristicBotController {
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.rolloutAttacks = options.rolloutAttacks ?? "v1";
     this.lightAttacks = options.lightAttacks ?? false;
+    this.rolloutSwingBack = options.rolloutSwingBack ?? false;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.now = options.now ?? Date.now;
     this.trace = options.trace;
@@ -1611,7 +1623,9 @@ export class EvalBotController extends HeuristicBotController {
         ? null
         : () => new RealAttacksController(this.playerId, this.cards, this.weights, memo, onlyWhenHeld, this.rolloutAttacks === "v2-full");
     this.attackMemo = memo;
-    const action = withOurAttackSeat(seat, () => withLibraryTop(this.libraryTopAt(view), () => this.answer(view)));
+    const action = withPlanSwingBack(this.rolloutSwingBack, () =>
+      withOurAttackSeat(seat, () => withLibraryTop(this.libraryTopAt(view), () => this.answer(view))),
+    );
     // The answer was reached on cards dealt for the seat (`fairView`), and
     // is played at the real table: tried there first on a copy, so nothing
     // the two disagree on is ever thrown mid-game. Refused, the plan goes
@@ -2214,7 +2228,7 @@ export class EvalBotController extends HeuristicBotController {
             view.state,
             this.cards,
             action,
-            this.horizon,
+            this.rolloutHorizon(view.state),
             this.decisionRollout,
             this.selfInPriorityRollouts(view.state),
             MAX_BATCH,
@@ -2274,7 +2288,7 @@ export class EvalBotController extends HeuristicBotController {
               ? null
               : (candidateActions(aimOffer(game.state, this.cards, player, offer), player)[0] ?? null);
           },
-          this.horizon,
+          this.rolloutHorizon(view.state),
           this.decisionRollout,
           this.selfInPriorityRollouts(view.state),
         ),
@@ -3196,6 +3210,13 @@ export class EvalBotController extends HeuristicBotController {
           this.rolloutAttacks === "v2-full",
         )
       : undefined;
+  }
+
+  /** The horizon a priority move's rollout runs to: under
+   * `rolloutSwingBack`, on our own turn, our next turn (`"round"`). */
+  private rolloutHorizon(state: GameState): Horizon {
+    if (!this.rolloutSwingBack || this.horizon !== "turn") return this.horizon;
+    return state.turnOrder[state.turn.activePlayerIndex] === this.playerId ? "round" : this.horizon;
   }
 
   /** Our own turn, before attackers are declared, with a creature of ours
@@ -4324,7 +4345,7 @@ export class EvalBotController extends HeuristicBotController {
             ? null
             : (candidateActions(aimOffer(game.state, this.cards, player, crack), player)[0] ?? null);
         },
-        this.horizon,
+        this.rolloutHorizon(view.state),
         this.decisionRollout,
         this.selfInPriorityRollouts(view.state),
       ),
@@ -4403,7 +4424,7 @@ export class EvalBotController extends HeuristicBotController {
     if (spent(budget)) return false;
     budget.left -= 1;
     const bare = timed(budget, () =>
-      simulateWithoutOwnTriggers(state, this.cards, action, this.horizon, this.decisionRollout, this.selfInPriorityRollouts(state)),
+      simulateWithoutOwnTriggers(state, this.cards, action, this.rolloutHorizon(state), this.decisionRollout, this.selfInPriorityRollouts(state)),
     );
     if (bare === null) return false;
     const dead = (after: GameState): number =>
@@ -4422,7 +4443,7 @@ export class EvalBotController extends HeuristicBotController {
   ): number | null {
     const rollout = (state: GameState): GameState | null =>
       timed(budget, () =>
-        simulateAction(state, this.cards, action, this.horizon, this.decisionRollout, this.selfInPriorityRollouts(state)),
+        simulateAction(state, this.cards, action, this.rolloutHorizon(state), this.decisionRollout, this.selfInPriorityRollouts(state)),
       );
     const after = this.revealsOwnLibrary(view.state, action) ? this.typicalDeal(view, action, budget, rollout) : rollout(view.state);
     this.lastAfter = after;
