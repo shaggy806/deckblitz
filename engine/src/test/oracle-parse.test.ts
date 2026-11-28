@@ -21787,6 +21787,20 @@ describe("a cost's X defined by the ability", () => {
     });
     expect(face.complete).toBe(true);
   });
+
+  it("reads Voodoo Doll's and Chromatic Armor's X as the counters on it", () => {
+    const face = parseFace({
+      name: "Test Doll",
+      type_line: "Artifact",
+      oracle_text: "{X}{X}, {T}: Draw a card. X is the number of pin counters on this artifact.",
+    });
+    expect(face.activated[0]).toMatchObject({
+      cost: { mana: "{X}{X}", tap: true },
+      xIs: { amount: { countersOn: "source", counter: "pin" } },
+      effect: { kind: "draw", amount: 1 },
+    });
+    expect(face.complete).toBe(true);
+  });
 });
 
 describe("a granted optional cost of any amount of mana", () => {

@@ -5166,7 +5166,14 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   card"): offered at that one X, any other refused, and not activatable
   while the ref reads nothing; `xIs: { cardsInHandOf: "an-opponent" }` is
   Bargaining Table's "X is the number of cards in an opponent's hand",
-  offered once per opponent's hand size; a target filter reading
+  offered once per opponent's hand size; `xIs: { amount }` is any amount
+  read as it's activated — Chromatic Armor's "X is the number of sleight
+  counters on this Aura" (`{ countersOn: "source", counter: "sleight" }`),
+  Voodoo Doll's `{X}{X}` of its pin counters (twice them in mana). A colour
+  "chosen" by an ability as it resolves and kept as "the last chosen color" is
+  a `choose-value` of `"color"` whose `then` is `{ kind: "note", word:
+  CHOSEN_COLOR }`, read back by `chosen-on-enter` conditions; one set into a
+  delayed ability (Zombie Boa) is just `CHOSEN_COLOR` in its spec; a target filter reading
   X is offered once per X, as for an `{X}` in the mana cost. `{ each:
   [filterA, filterB] }` is one of each, every one a different permanent —
   Jarad, Golgari Lich Lord's "Sacrifice a Swamp and a Forest" (a land that is

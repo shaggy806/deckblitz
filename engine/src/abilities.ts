@@ -1165,7 +1165,13 @@ export interface ActivatedAbility {
      * ruling; rule 601.2b's announcement, by 602.2b). Nothing else reads who,
      * so the choice is the X: offered once per hand size an opponent still in
      * the game has, and any other refused. */
-    | { readonly cardsInHandOf: "an-opponent" };
+    | { readonly cardsInHandOf: "an-opponent" }
+    /** An amount read as it's activated: Chromatic Armor's "{X}: Put a
+     * sleight counter on this Aura and choose a color. **X is the number of
+     * sleight counters on this Aura**" (`{ amount: { countersOn: "source",
+     * counter: "sleight" } }`), Voodoo Doll's `{X}{X}` of its pin counters —
+     * the counters as they are before the cost is paid (rule 107.3c). */
+    | { readonly amount: EffectAmount };
   /** "N damage divided as you choose among one or two targets" (Skarrgan
    * Hellkite): the targets from `slot` on — an `any-number` group — share
    * `total`, split as the ability is activated (rules 602.2b, 601.2d: the

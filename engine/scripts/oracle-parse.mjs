@@ -24598,6 +24598,19 @@ function fillEffect(ability, text, ctx, lines, i) {
     text = text.slice(0, handX.index);
     ability.xIs = { cardsInHandOf: "an-opponent" };
   }
+  // "X is the number of sleight counters on this Aura" (Chromatic Armor, Voodoo
+  // Doll's pin counters): the counters on it as it's activated.
+  const countersX = / X is the number of ([a-z+/0-9-]+) counters on (?:this [a-z]+|~)\.$/.exec(text);
+  if (
+    countersX !== null &&
+    ability.cost !== undefined &&
+    ability.trigger === undefined &&
+    typeof ability.cost.mana === "string" &&
+    ability.cost.mana.includes("{X}")
+  ) {
+    text = text.slice(0, countersX.index);
+    ability.xIs = { amount: { countersOn: "source", counter: countersX[1] } };
+  }
   // An activated ability's "target … of an opponent's choice" (rules 602.2b,
   // 601.2c); a triggered one has no opponent to name.
   const theirSlots = ability.cost !== undefined && ability.trigger === undefined ? [] : undefined;

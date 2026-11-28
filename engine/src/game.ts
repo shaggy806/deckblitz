@@ -59668,6 +59668,9 @@ controlledBy,
         .map((p) => this.state.zones.perPlayer[p].hand.length);
       return sizes.length === 0 ? null : [...new Set(sizes)].sort((a, b) => a - b);
     }
+    // "X is the number of sleight counters on this Aura" (Chromatic Armor):
+    // read off the game now, before the cost is paid.
+    if ("amount" in xIs) return [this.costAmount(xIs.amount, player, sourceId)];
     const ctx = this.makeResolutionContext(sourceId, player, []);
     const ref = objectRefRead(xIs.manaValueOf, ctx);
     return ref === undefined ? null : [Math.max(0, ctx.manaValueOf(ref))];
