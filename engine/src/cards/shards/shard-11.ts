@@ -514,6 +514,7 @@ import _poolKithkinBillyrider from "../pool/kithkin-billyrider.js";
 import _poolKitsuneHealer from "../pool/kitsune-healer.js";
 import _poolKitsuneRiftwalker from "../pool/kitsune-riftwalker.js";
 import _poolKjeldoranPride from "../pool/kjeldoran-pride.js";
+import _poolKnightOfValor from "../pool/knight-of-valor.js";
 import _poolKnuckleboneWitch from "../pool/knucklebone-witch.js";
 import _poolKoboldsOfKherKeep from "../pool/kobolds-of-kher-keep.js";
 import _poolKolaghanSkirmisher from "../pool/kolaghan-skirmisher.js";
@@ -1612,6 +1613,7 @@ const shard: CardShard = {
     _poolKitsuneHealer,
     _poolKitsuneRiftwalker,
     _poolKjeldoranPride,
+    _poolKnightOfValor,
     _poolKnuckleboneWitch,
     _poolKoboldsOfKherKeep,
     _poolKolaghanSkirmisher,

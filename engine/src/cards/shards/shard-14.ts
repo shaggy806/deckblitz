@@ -587,6 +587,7 @@ import _poolMerryBards from "../pool/merry-bards.js";
 import _poolMiasmaDemon from "../pool/miasma-demon.js";
 import _poolMidnightAssassin from "../pool/midnight-assassin.js";
 import _poolMimic from "../pool/mimic.js";
+import _poolMindExtraction from "../pool/mind-extraction.js";
 import _poolMindGames from "../pool/mind-games.js";
 import _poolMindRake from "../pool/mind-rake.js";
 import _poolMindSpiral from "../pool/mind-spiral.js";
@@ -1657,6 +1658,7 @@ const shard: CardShard = {
     _poolMiasmaDemon,
     _poolMidnightAssassin,
     _poolMimic,
+    _poolMindExtraction,
     _poolMindGames,
     _poolMindRake,
     _poolMindSpiral,

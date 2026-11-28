@@ -5912,6 +5912,7 @@ import _poolCrowdsFavor from "./pool/crowds-favor.js";
 import _poolCrownHunterHireling from "./pool/crown-hunter-hireling.js";
 import _poolCrownOfAscension from "./pool/crown-of-ascension.js";
 import _poolCrownOfAwe from "./pool/crown-of-awe.js";
+import _poolCrownOfConvergence from "./pool/crown-of-convergence.js";
 import _poolCrownOfDoom from "./pool/crown-of-doom.js";
 import _poolCrownOfEmpires from "./pool/crown-of-empires.js";
 import _poolCrownOfFlames from "./pool/crown-of-flames.js";
@@ -9750,6 +9751,7 @@ import _poolFendeepSummoner from "./pool/fendeep-summoner.js";
 import _poolFeralAbomination from "./pool/feral-abomination.js";
 import _poolFeralAnimist from "./pool/feral-animist.js";
 import _poolFeralAppetite from "./pool/feral-appetite.js";
+import _poolFeralContest from "./pool/feral-contest.js";
 import _poolFeralDeathgorger from "./pool/feral-deathgorger.js";
 import _poolFeralDeceiver from "./pool/feral-deceiver.js";
 import _poolFeralEncounter from "./pool/feral-encounter.js";
@@ -13702,6 +13704,7 @@ import _poolHungryMegasloth from "./pool/hungry-megasloth.js";
 import _poolHungryMist from "./pool/hungry-mist.js";
 import _poolHungryRidgewolf from "./pool/hungry-ridgewolf.js";
 import _poolHungrySpriggan from "./pool/hungry-spriggan.js";
+import _poolHuntDown from "./pool/hunt-down.js";
 import _poolHuntForSpecimens from "./pool/hunt-for-specimens.js";
 import _poolHuntTheHunter from "./pool/hunt-the-hunter.js";
 import _poolHuntTheWeak from "./pool/hunt-the-weak.js";
@@ -15682,6 +15685,7 @@ import _poolKnightOfTheSkywardEye from "./pool/knight-of-the-skyward-eye.js";
 import _poolKnightOfTheStampede from "./pool/knight-of-the-stampede.js";
 import _poolKnightOfTheTusk from "./pool/knight-of-the-tusk.js";
 import _poolKnightOfTheWhiteOrchid from "./pool/knight-of-the-white-orchid.js";
+import _poolKnightOfValor from "./pool/knight-of-valor.js";
 import _poolKnightOfWundagore from "./pool/knight-of-wundagore.js";
 import _poolKnightPaladin from "./pool/knight-paladin.js";
 import _poolKnightRampager from "./pool/knight-rampager.js";
@@ -18047,6 +18051,7 @@ import _poolMindCarver from "./pool/mind-carver.js";
 import _poolMindControl from "./pool/mind-control.js";
 import _poolMindDrain from "./pool/mind-drain.js";
 import _poolMindDrillAssailant from "./pool/mind-drill-assailant.js";
+import _poolMindExtraction from "./pool/mind-extraction.js";
 import _poolMindFlayer from "./pool/mind-flayer.js";
 import _poolMindFuneral from "./pool/mind-funeral.js";
 import _poolMindGames from "./pool/mind-games.js";
@@ -40329,6 +40334,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCrownHunterHireling,
   _poolCrownOfAscension,
   _poolCrownOfAwe,
+  _poolCrownOfConvergence,
   _poolCrownOfDoom,
   _poolCrownOfEmpires,
   _poolCrownOfFlames,
@@ -44167,6 +44173,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFeralAbomination,
   _poolFeralAnimist,
   _poolFeralAppetite,
+  _poolFeralContest,
   _poolFeralDeathgorger,
   _poolFeralDeceiver,
   _poolFeralEncounter,
@@ -48119,6 +48126,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHungryMist,
   _poolHungryRidgewolf,
   _poolHungrySpriggan,
+  _poolHuntDown,
   _poolHuntForSpecimens,
   _poolHuntTheHunter,
   _poolHuntTheWeak,
@@ -50099,6 +50107,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKnightOfTheStampede,
   _poolKnightOfTheTusk,
   _poolKnightOfTheWhiteOrchid,
+  _poolKnightOfValor,
   _poolKnightOfWundagore,
   _poolKnightPaladin,
   _poolKnightRampager,
@@ -52464,6 +52473,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMindControl,
   _poolMindDrain,
   _poolMindDrillAssailant,
+  _poolMindExtraction,
   _poolMindFlayer,
   _poolMindFuneral,
   _poolMindGames,
@@ -74759,6 +74769,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/crown-hunter-hireling": _poolCrownHunterHireling,
   "pool/crown-of-ascension": _poolCrownOfAscension,
   "pool/crown-of-awe": _poolCrownOfAwe,
+  "pool/crown-of-convergence": _poolCrownOfConvergence,
   "pool/crown-of-doom": _poolCrownOfDoom,
   "pool/crown-of-empires": _poolCrownOfEmpires,
   "pool/crown-of-flames": _poolCrownOfFlames,
@@ -78597,6 +78608,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/feral-abomination": _poolFeralAbomination,
   "pool/feral-animist": _poolFeralAnimist,
   "pool/feral-appetite": _poolFeralAppetite,
+  "pool/feral-contest": _poolFeralContest,
   "pool/feral-deathgorger": _poolFeralDeathgorger,
   "pool/feral-deceiver": _poolFeralDeceiver,
   "pool/feral-encounter": _poolFeralEncounter,
@@ -82549,6 +82561,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hungry-mist": _poolHungryMist,
   "pool/hungry-ridgewolf": _poolHungryRidgewolf,
   "pool/hungry-spriggan": _poolHungrySpriggan,
+  "pool/hunt-down": _poolHuntDown,
   "pool/hunt-for-specimens": _poolHuntForSpecimens,
   "pool/hunt-the-hunter": _poolHuntTheHunter,
   "pool/hunt-the-weak": _poolHuntTheWeak,
@@ -84529,6 +84542,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/knight-of-the-stampede": _poolKnightOfTheStampede,
   "pool/knight-of-the-tusk": _poolKnightOfTheTusk,
   "pool/knight-of-the-white-orchid": _poolKnightOfTheWhiteOrchid,
+  "pool/knight-of-valor": _poolKnightOfValor,
   "pool/knight-of-wundagore": _poolKnightOfWundagore,
   "pool/knight-paladin": _poolKnightPaladin,
   "pool/knight-rampager": _poolKnightRampager,
@@ -86894,6 +86908,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mind-control": _poolMindControl,
   "pool/mind-drain": _poolMindDrain,
   "pool/mind-drill-assailant": _poolMindDrillAssailant,
+  "pool/mind-extraction": _poolMindExtraction,
   "pool/mind-flayer": _poolMindFlayer,
   "pool/mind-funeral": _poolMindFuneral,
   "pool/mind-games": _poolMindGames,

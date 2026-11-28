@@ -305,6 +305,7 @@ import _poolFeastOfFlesh from "../pool/feast-of-flesh.js";
 import _poolFeedThePack from "../pool/feed-the-pack.js";
 import _poolFellShepherd from "../pool/fell-shepherd.js";
 import _poolFendOff from "../pool/fend-off.js";
+import _poolFeralContest from "../pool/feral-contest.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
 import _poolFiligreeFamiliar from "../pool/filigree-familiar.js";
@@ -1391,6 +1392,7 @@ const shard: CardShard = {
     _poolFeedThePack,
     _poolFellShepherd,
     _poolFendOff,
+    _poolFeralContest,
     _poolFiendishDuo,
     _poolFightToTheDeath,
     _poolFiligreeFamiliar,

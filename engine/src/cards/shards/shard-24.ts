@@ -201,6 +201,7 @@ import _poolCourageousResolve from "../pool/courageous-resolve.js";
 import _poolCovetedJewel from "../pool/coveted-jewel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCrash from "../pool/crash.js";
+import _poolCrownOfConvergence from "../pool/crown-of-convergence.js";
 import _poolCruelTruths from "../pool/cruel-truths.js";
 import _poolCrypticAnnelid from "../pool/cryptic-annelid.js";
 import _poolCrystacean from "../pool/crystacean.js";
@@ -438,6 +439,7 @@ import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHulkGammaGoliath from "../pool/hulk-gamma-goliath.js";
 import _poolHumility from "../pool/humility.js";
+import _poolHuntDown from "../pool/hunt-down.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
 import _poolIllicitAuction from "../pool/illicit-auction.js";
@@ -1269,6 +1271,7 @@ const shard: CardShard = {
     _poolCovetedJewel,
     _poolCracklingCyclops,
     _poolCrash,
+    _poolCrownOfConvergence,
     _poolCruelTruths,
     _poolCrypticAnnelid,
     _poolCrystacean,
@@ -1506,6 +1509,7 @@ const shard: CardShard = {
     _poolHotfootGnome,
     _poolHulkGammaGoliath,
     _poolHumility,
+    _poolHuntDown,
     _poolHuntersProwess,
     _poolIceFangCoatl,
     _poolIllicitAuction,
