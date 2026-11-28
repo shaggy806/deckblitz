@@ -23180,6 +23180,11 @@ export class Game {
    * (`Action.emergeCost`), only for as long as that takes. */
   private emergeCostPick: string | undefined;
 
+  /** While `castSpell` runs: the player casting, if the spell has emerge
+   * (printed or granted), else `null` — a `sacrifice` trigger's
+   * `whileCasting: "emerge"` (Foul Emissary). `undefined` outside a cast. */
+  private castingWithEmerge: PlayerId | null | undefined;
+
   /** Run `fn` judging or paying a cast with these keyword costs and emerge. */
   private withCastPicks<T>(keywordCosts: KeywordCostsPaid | undefined, emergeCost: string | undefined, fn: () => T): T {
     const keywordBefore = this.keywordCostsPick;
@@ -26243,6 +26248,21 @@ export class Game {
     division?: readonly number[],
     delve?: readonly ObjectId[],
   ): void {
+    // "When you sacrifice this creature while casting a spell with emerge"
+    // (Foul Emissary): who is casting one, for as long as the cast takes —
+    // its costs paid, however the sacrifice comes (the card's ruling: an
+    // Ashnod's Altar activated while paying counts too, emerge cost or not).
+    if (this.castingWithEmerge === undefined) {
+      const caster = this.emergeOptionsOf(player, cardId, this.faceDef(cardId, face)).length > 0 ? player : null;
+      this.castingWithEmerge = caster;
+      try {
+        this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve);
+      } finally {
+        this.castingWithEmerge = undefined;
+      }
+      return;
+    }
     // From a graveyard under a named permission: what the payment below may
     // spend reads it (`spendAsFor`).
     if (via === "graveyard-permission" && this.castGrantScope?.card !== cardId) {
@@ -41353,6 +41373,8 @@ export class Game {
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           !(spec.otherOnly === true && event.object === self.id) &&
           !(spec.selfOnly === true && event.object !== self.id) &&
+          (spec.whileCasting !== "emerge" ||
+            (this.castingWithEmerge !== undefined && this.castingWithEmerge === event.player)) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
       case "destroyed":

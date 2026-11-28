@@ -2072,6 +2072,13 @@ export type TriggerKind =
       readonly filter?: CardFilter;
       readonly otherOnly?: boolean;
       readonly selfOnly?: boolean;
+      /** "When you sacrifice this creature **while casting a spell with
+       * emerge**" (Foul Emissary): only a sacrifice made while the
+       * sacrificing player is casting a spell that has emerge (rule
+       * 702.119a, printed or granted), whatever made it — the emerge cost,
+       * another additional cost, or a mana ability activated while paying
+       * (the card's ruling), cast for its emerge cost or not. */
+      readonly whileCasting?: "emerge";
       /** "Whenever you sacrifice **one or more** Foods" (Camellia, the
        * Seedmiser — rule 603.2c): once per simultaneous event, however many
        * of its sacrifices match. Its trigger object is the first; don't read

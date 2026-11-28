@@ -3356,6 +3356,10 @@ export function parseTrigger(clause) {
   if (/^When you sacrifice (?:~|this (?:Aura|enchantment|artifact|creature|permanent))$/.test(c)) {
     return [{ on: "sacrifice", who: "you", selfOnly: true }];
   }
+  // Foul Emissary: however it's sacrificed, while casting a spell with emerge.
+  if (/^When you sacrifice (?:~|this creature) while casting a spell with emerge$/.test(c)) {
+    return [{ on: "sacrifice", who: "you", selfOnly: true, whileCasting: "emerge" }];
+  }
   if ((m = /^Whenever you sacrifice (a|an|another) (.+)$/.exec(c))) {
     const filter = parseTypePhrase(m[2]);
     if (filter === null) return null;

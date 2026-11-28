@@ -27217,6 +27217,21 @@ describe("damage back to its source, and a granted trigger under a condition (Te
     expect(whelp.static[0].grantsTriggered[0].trigger).toEqual({ on: "dies", who: "self" });
     expect(whelp.static[0].grantsTriggered[0].effect).toEqual({ kind: "draw", amount: 1 });
   });
+
+  it("reads Foul Emissary's \"when you sacrifice this creature while casting a spell with emerge\"", () => {
+    const emissary = parseFace(
+      {
+        name: "Foul Emissary",
+        type_line: "Creature — Human Horror",
+        mana_cost: "{2}{G}",
+        oracle_text:
+          "When you sacrifice this creature while casting a spell with emerge, create a 3/2 colorless Eldrazi Horror creature token.",
+      },
+      { tokenFor: () => "Eldrazi Horror Token" },
+    );
+    expect(emissary.complete).toBe(true);
+    expect(emissary.triggered[0].trigger).toEqual({ on: "sacrifice", who: "you", selfOnly: true, whileCasting: "emerge" });
+  });
 });
 
 describe("block requirements on targets (Hunt Down, Culling Mark)", () => {

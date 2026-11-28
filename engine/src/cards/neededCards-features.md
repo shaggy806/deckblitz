@@ -9400,3 +9400,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **A graveyard alternative cost that enters with counters (2026-11-28).** `condition:cast-via-own-graveyard-alt-cost`: no engine code — `mayPlaySelf` `byPaying` with the permission's own `entersWith`, which another graveyard permission's cast doesn't carry; the scaffolder reads the "If you do, it enters with …" rider. Worldheart Phoenix. `test/graveyard-alt-cost-enters-with.test.ts`.
 
 **A chosen hand card put Nth from the top (2026-11-28).** `effect:chosen-hand-card-to-library-nth-from-top`: `discard-chosen`'s `libraryFromTop` beside `destination: "library-top"` (the bottom of a shorter library). Lost Hours. `test/hand-card-to-library-nth.test.ts`.
+
+**A sacrifice while casting a spell with emerge (2026-11-28).** `trigger:sacrificed-for-emerge`: the `sacrifice` trigger's `whileCasting: "emerge"`, read off `Game.castingWithEmerge` (the caster while `castSpell` runs, if the spell has emerge), so any sacrifice of the cast counts, for its emerge cost or not (Foul Emissary, `test/sacrificed-while-casting-emerge.test.ts`).
