@@ -45663,6 +45663,14 @@ export class Game {
         }
         return it === undefined ? [] : namesOf(this.registry, it);
       },
+      splicedOnto: (object) => {
+        const it = this.state.objects[object];
+        if (it === undefined || expectedZoneOf({ kind: "object", object }) !== "stack") return [];
+        // Splice (rule 702.47): on the stack still, or as it last was there
+        // (608.2h) — 702.47e clears `spliced` as it leaves.
+        if (it.zone === "stack") return it.spliced ?? [];
+        return it.lastOnStack?.spliced ?? [];
+      },
       explored: (result) =>
         this.emit({
           type: "explored",

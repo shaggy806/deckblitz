@@ -3926,7 +3926,7 @@ ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
 modified, anyOf, manaSpent, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
 discardedThisTurn, drawnThisTurn, enteredThisTurn, turnedFaceUpThisTurn, controlledContinuously, controlledSinceTurnBegan, startedTurnUntapped, controlledByAsSetUp, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
-putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, sector, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
+putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, sameNameAsAnotherInZone, sameNameAsSplicedOnto, thisWay, attacking, blocking, blockingRelation, goaded, suspected, sector, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
 xInManaCost, manaCost, coloredManaSymbols, cardTypeCount, nameDiffersFromEach,
 nameUnlike, sameNameWith, sameNameAsTriggerObject, sharesColorWith, ofChosenType, targets, greatestAmongItsController, greatestInZone, couldProduce, couldEnchant }`,
 every present clause ANDed. `colorCount: 2` is "exactly two colors", and "isn't exactly two
@@ -4078,7 +4078,14 @@ Extraplanar Lens's `tapped-for-mana`) or a static's count (Strata Scythe's
 matching the filter (`{}` for any), asked of the whole battlefield: Eye of
 Singularity's `destroy-all` of `{ sameNameAsAnother: {}, notSupertype: "basic" }`.
 The tokens of a stack count as one another's namesakes, and a nameless permanent
-has none.
+has none. **`sameNameAsAnotherInZone: true`** is the same question of the zone the
+card is in (its owner's hand, library or graveyard): Hint of Insanity's
+`discard-hand` of `{ notTypes: ["land"], sameNameAsAnotherInZone: true }`, the
+whole hand asked before anything goes, so both of two copies are discarded.
+**`sameNameAsSplicedOnto: n`** is "with the same name as a card spliced onto"
+the spell in slot `n` (702.47), bound as the effect applies, read off the spell
+as it last was on the stack after a counter: Minamo's Meddling's `counter` then
+`discard-hand` `who: { controllerOf: 0 }` of `{ sameNameAsSplicedOnto: 0 }`.
 `sharesColorWith: n` is radiance's "target X **and each other** X **that
 shares a color with it**" (rule 105.2; Ravnica: City of Guilds' ability word),
 the same way: the target itself, or one sharing any of its colors as the

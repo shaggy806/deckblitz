@@ -14491,6 +14491,10 @@ export interface EffectApi {
    * face-down permanent, a Room with both doors locked). See
    * `CardFilter.sameNameAsTarget`. */
   namesForMatching(object: ObjectId): readonly string[];
+  /** The names of the cards spliced onto the spell `object` (rule 702.47) —
+   * on the stack, or as it last was there once it has left (608.2h) — none
+   * for anything else. See `CardFilter.sameNameAsSplicedOnto`. */
+  splicedOnto(object: ObjectId): readonly string[];
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ opponentsBeingAttacked }` {@link EffectAmount}. */
@@ -20889,6 +20893,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sharesCreatureTypeWith" in value ||
       "sharesLandTypeWith" in value ||
       "sameNameWith" in value ||
+      "sameNameAsSplicedOnto" in value ||
       "saddledSource" in value ||
       "crewedSource" in value ||
       "bandedWithSource" in value ||
@@ -21259,6 +21264,15 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       } else {
         walked = { ...rest, sameNameAsAny: [...new Set(objects.flatMap((object) => ctx.namesForMatching(object)))] };
       }
+    }
+    // "With the same name as a card spliced onto that spell" (Minamo's
+    // Meddling, 702.47): the spliced cards' names, off the spell as it was
+    // on the stack — the counter before it has moved it on (608.2h).
+    if (walked["sameNameAsSplicedOnto"] !== undefined) {
+      const { sameNameAsSplicedOnto: slot, ...rest } = walked;
+      const spell = ctx.targets[slot as number];
+      const names = spell?.kind === "object" ? ctx.splicedOnto(spell.object) : [];
+      walked = { ...rest, sameNameAsAny: [...new Set(names)] };
     }
     // "And each other … that shares a color with it" (radiance), Spreading
     // Plague's "that share a color with it": the reference objects and their

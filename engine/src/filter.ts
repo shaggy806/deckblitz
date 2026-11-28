@@ -851,6 +851,24 @@ export interface CardFilter {
    * the same name as another permanent. Fails closed inside the layer fold.
    */
   readonly sameNameAsAnother?: CardFilter;
+  /**
+   * Has the same name as **another card in the zone it's in** — its owner's
+   * hand, library or graveyard, or the shared zone (rule 201.2a: one name in
+   * common is enough; a nameless object shares none). Hint of Insanity's
+   * "discards all nonland cards with the same name as another card in their
+   * hand": read live, so a `discard-hand` asks it of the whole hand before
+   * anything is discarded, and two copies both go.
+   */
+  readonly sameNameAsAnotherInZone?: true;
+  /**
+   * Has the same name as a card **spliced onto** the spell in that target
+   * slot (rule 702.47) — Minamo's Meddling's "discards each card with the
+   * same name as a card spliced onto that spell". Bound as the effect applies
+   * (`bindDynamicCompares`) to `sameNameAsAny` of those names, read off the
+   * spell on the stack or, once it has left, as it last was there
+   * (`GameObject.lastOnStack`, 608.2h). Unbound, it matches nothing.
+   */
+  readonly sameNameAsSplicedOnto?: number;
   /** `sameNameWith` bound — the names, never authored. (Haunting Echoes'
    * "for each card exiled this way, search … for all cards with the same name
    * as that card" is `sameNameWith: { thisWay: "exiled" }`: one search for
@@ -3236,6 +3254,23 @@ export function matchesFilter(
         );
       });
     if (!fellowToken && !another()) return false;
+  }
+  // Unbound: only an effect can read the spell it names (see the field).
+  if (filter.sameNameAsSplicedOnto !== undefined) return false;
+  if (filter.sameNameAsAnotherInZone === true) {
+    if (layered !== undefined || live === undefined) return false;
+    const names = namesOf(registry, live);
+    if (names.length === 0) return false;
+    const zone = live.zone;
+    const perPlayer = state.zones.perPlayer[live.owner] as unknown as Record<string, readonly ObjectId[] | undefined>;
+    const shared = state.zones.shared as unknown as Record<string, readonly ObjectId[] | undefined>;
+    const cards = perPlayer?.[zone] ?? shared[zone] ?? [];
+    const another = cards.some((other) => {
+      if (other === id) return false;
+      const object = state.objects[other];
+      return object !== undefined && namesOf(registry, object).some((n) => names.includes(n));
+    });
+    if (!another) return false;
   }
   if (filter.notName !== undefined && named === filter.notName) return false;
   if (filter.hasName !== undefined || filter.chosenName === true) {
