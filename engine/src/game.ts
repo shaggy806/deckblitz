@@ -1185,6 +1185,11 @@ type DamageStepKind =
   | { readonly kind: "shield-counter"; readonly object: ObjectId; readonly spent: boolean }
   /** "Prevent N of that damage" (615.10), from each source. */
   | { readonly kind: "prevent-n"; readonly by: number }
+  /** "For each 1 damage, if it has a +1/+1 counter on it, remove a +1/+1
+   * counter from it and prevent that 1 damage" (Rock Hydra): up to
+   * `available` of it, as many of `object`'s `counter` counters removed —
+   * those for damage that can't be prevented too (615.12). */
+  | { readonly kind: "prevent-per-counter"; readonly object: ObjectId; readonly counter: string; readonly available: number }
   /** "Prevent all but N of that damage", from each source. */
   | { readonly kind: "prevent-all-but"; readonly leave: number }
   /** "Prevent half that damage, rounded up/down" — prevention. */
@@ -1227,6 +1232,9 @@ function runDamageSteps(
     readonly thenAmount?: number;
   };
   readonly shieldCounter?: { readonly step: Extract<DamageStep, { kind: "shield-counter" }>; readonly amount: number };
+  /** Each "prevent that 1 damage for a counter" that applied: how much it
+   * prevented and how many counters it takes. */
+  readonly perCounter: readonly { readonly step: Extract<DamageStep, { kind: "prevent-per-counter" }>; readonly prevented: number; readonly removed: number }[];
   readonly redirected?: { readonly step: Extract<DamageStep, { kind: "redirect" }>; readonly amount: number };
   readonly replaced?: { readonly step: Extract<DamageStep, { kind: "replaced" }>; readonly amount: number };
   /** The "next time" records the steps that applied used up. */
@@ -1242,11 +1250,13 @@ function runDamageSteps(
   let shieldCounter: { step: Extract<DamageStep, { kind: "shield-counter" }>; amount: number } | undefined;
   const spends: ActiveReplacement[] = [];
   const alsos: (Extract<DamageStep, { kind: "also" }> & { readonly amount: number })[] = [];
+  const perCounter: { step: Extract<DamageStep, { kind: "prevent-per-counter" }>; prevented: number; removed: number }[] = [];
   const rest = () => ({
     shieldUsed,
     shields,
     spends,
     alsos,
+    perCounter,
     ...(preventedAll !== undefined ? { preventedAll } : {}),
     ...(shieldCounter !== undefined ? { shieldCounter } : {}),
   });
@@ -1259,7 +1269,7 @@ function runDamageSteps(
     // A prevention shield isn't used up by damage that can't be prevented
     // (615.12), or by any it prevents none of — "prevent half, rounded
     // down" of 1 damage (609.7b): those three spend below, as they prevent.
-    const partial = step.kind === "prevent-n" || step.kind === "prevent-all-but" || step.kind === "prevent-half";
+    const partial = step.kind === "prevent-n" || step.kind === "prevent-all-but" || step.kind === "prevent-half" || step.kind === "prevent-per-counter";
     if (step.spends !== undefined && !partial && !(unpreventable && step.kind.startsWith("prevent"))) spends.push(step.spends);
     const before = total;
     switch (step.kind) {
@@ -1306,6 +1316,15 @@ function runDamageSteps(
       case "prevent-n":
         if (!unpreventable) total = Math.max(0, each() - step.by) * sources;
         break;
+      case "prevent-per-counter": {
+        // A counter for each 1 damage, prevented or not (615.12, the ruling).
+        const removed = Math.min(total, step.available);
+        if (removed <= 0) break;
+        const prevented = unpreventable ? 0 : removed;
+        total -= prevented;
+        perCounter.push({ step, prevented, removed });
+        break;
+      }
       case "prevent-all-but":
         if (!unpreventable) total = Math.min(each(), step.leave) * sources;
         break;
@@ -1606,6 +1625,7 @@ function damageOutcomeKey(outcome: ReturnType<typeof runDamageSteps>): string {
       // twice) differ by nothing else.
       .map((s) => [s.shield.source, s.thenAmount ?? s.prevented, s.shield.redirect?.to ?? null]),
     outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent,
+    outcome.perCounter.map((p) => [p.step.made.key, p.removed]),
     outcome.preventedAll?.step.then === undefined ? null : [outcome.preventedAll.step.made.key, outcome.preventedAll.thenAmount ?? outcome.preventedAll.amount],
     outcome.replaced === undefined ? null : [outcome.replaced.step.key, outcome.replaced.amount],
     outcome.alsos.map((a) => [a.key, a.amount]),
@@ -1642,6 +1662,8 @@ function damageStepText(step: DamageStep): string {
       return "prevents all of it for a shield counter";
     case "prevent-n":
       return `prevents ${step.by} of it`;
+    case "prevent-per-counter":
+      return `prevents up to ${step.available} of it, a ${step.counter} counter for each`;
     case "prevent-all-but":
       return `prevents all but ${step.leave} of it`;
     case "prevent-half":
@@ -70531,6 +70553,12 @@ controlledBy,
         // Battletide Alchemist ruling): nothing to prevent, nothing asked.
         const n = this.replacementAmount(prevent.count, by);
         if (n > 0) steps.push({ kind: "prevent-n", by: n, ...gated });
+      } else if (prevent !== true && "perCounter" in prevent) {
+        // "For each 1 damage, if it has a +1/+1 counter on it, remove one and
+        // prevent that 1" (Rock Hydra): its counters as this damage would be
+        // dealt, so a second source in the same event finds those left.
+        const available = this.state.objects[by.id]?.counters[prevent.perCounter] ?? 0;
+        if (available > 0) steps.push({ kind: "prevent-per-counter", object: by.id, counter: prevent.perCounter, available, ...gated });
       } else if (prevent !== true && "allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gated });
       else if (prevent !== true) steps.push({ kind: "prevent-half", round: prevent.half, ...gated });
       else {
@@ -70569,6 +70597,17 @@ controlledBy,
       else if ("count" in prevent) {
         const n = this.replacementAmount(prevent.count, by);
         if (n > 0) steps.push({ kind: "prevent-n", by: n, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
+      } else if ("perCounter" in prevent) {
+        const available = this.state.objects[shield.source]?.counters[prevent.perCounter] ?? 0;
+        if (available > 0) {
+          steps.push({
+            kind: "prevent-per-counter",
+            object: shield.source,
+            counter: prevent.perCounter,
+            available,
+            ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey),
+          });
+        }
       } else if ("allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
       else steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
     }
@@ -70647,7 +70686,10 @@ controlledBy,
     // damage itself: a one-turn shield (Healing Salve) goes first.
     const score = (order: readonly DamageStep[]): readonly number[] => {
       const outcome = runDamageSteps(amount, sources, [...first, ...order], shieldLeft, unpreventable);
-      const counterSpent = outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent ? 1 : 0;
+      // A +1/+1 counter a Rock Hydra gives up for each 1 is a lasting loss too.
+      const counterSpent =
+        (outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent ? 1 : 0) +
+        outcome.perCounter.reduce((n, p) => n + p.removed, 0);
       // Damage redirected still lands somewhere (rule 614.9): a shield that
       // prevents it outright goes first.
       const redirected =
@@ -71672,6 +71714,13 @@ controlledBy,
       const outcome = runDamageSteps(amount, sources, order, sharedLeft, unpreventable);
       const spent: ActiveReplacement[] = [];
       const redirected: { readonly to: TargetRef; readonly amount: number; readonly applied: DamageApplied }[] = [];
+      // Rock Hydra: the 1s prevented, and a counter for each — for each 1
+      // that couldn't be prevented too (615.12) — before the next source's
+      // damage reads what's left.
+      for (const { step, prevented, removed } of outcome.perCounter) {
+        if (prevented > 0) this.emit({ type: "damage-prevented", source, target, amount: prevented });
+        this.removeCountersFrom(step.object, step.counter, removed, false);
+      }
       for (const { shield, prevented } of outcome.shields) {
         if (prevented <= 0) continue;
         // Within one simultaneous event it covers the rest of it (615.8).

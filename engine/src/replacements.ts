@@ -1547,7 +1547,13 @@ export interface DamageMultiplierReplacement {
  * damage, rounded up" (Gisela, Blade of Goldnight); `{ count }` "prevent X of
  * that damage, where X is …", counted as the damage would be dealt from this
  * permanent's controller's side (Battletide Alchemist's "the number of
- * Clerics you control" — its ruling), nothing when it's 0.
+ * Clerics you control" — its ruling), nothing when it's 0; `{ perCounter }`
+ * "for each 1 damage that would be dealt to this creature, if it has a +1/+1
+ * counter on it, remove a +1/+1 counter from it and prevent that 1 damage"
+ * (Rock Hydra): as much of it as this permanent has counters of that kind,
+ * one removed for each 1 prevented, read afresh for each source as its damage
+ * would be dealt — and one removed for each 1 of damage that can't be
+ * prevented and so isn't (rule 615.12, the ruling). Takes no `then`.
  */
 export interface DamagePrevention {
   readonly prevent:
@@ -1555,7 +1561,8 @@ export interface DamagePrevention {
     | number
     | { readonly allBut: number }
     | { readonly half: "up" | "down" }
-    | { readonly count: EffectAmount };
+    | { readonly count: EffectAmount }
+    | { readonly perCounter: string };
   /**
    * "If a creature would deal combat damage to **you and/or one or more
    * creatures you control**, prevent X of that damage" (Cover of Winter —

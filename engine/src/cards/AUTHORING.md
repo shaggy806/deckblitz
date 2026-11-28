@@ -8675,7 +8675,10 @@ who it would have happened to; it's run by the replacement's controller, so "tha
 `who: "trigger-player"` (Undead Alchemist's combat damage become `{ kind: "mill", target: "trigger-player", amount: "x" }`,
 with `combat: true`, a `source` filter and `to: "player"`). It mustn't repeat its own event after a decision (rule 614.5): use `also`. Damage has its own
 `{ prevent, then?, perEvent?, thenCountsUnprevented? }` (`prevent`: `true`, a number, `{ allBut }`, `{ half }` or `{ count }`,
-an amount read as the damage would be dealt; `perSourceTo: { players?: "you", permanents? }` on a `combat: true`
+an amount read as the damage would be dealt, or `{ perCounter: "+1/+1" }` — Rock Hydra's "for each 1 damage that would be
+dealt to this creature, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage": up to
+the counters it has, one removed for each 1, read afresh for each source, and removed for damage that can't be prevented
+too (615.12), no `then` — `test/prevent-damage-per-counter.test.ts`; `perSourceTo: { players?: "you", permanents? }` on a `combat: true`
 static is "prevent X of the combat damage **each** creature would deal to you and/or your creatures", shared among
 them — Cover of Winter's `{ prevent: { count: { countersOn: "source", counter: "age" } }, perSourceTo: { players: "you",
 permanents: { type: "creature", controlledBy: "you" } } }` with `source: { type: "creature" }`, a shield per creature
