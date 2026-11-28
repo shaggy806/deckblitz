@@ -8727,7 +8727,9 @@ count: { countOf: { subtype: "Cleric", controlledBy: "you" } } } }`, `may: true`
 recipient before an effect deals the damage and before combat damage; where nothing can ask, taken for its controller's own damage only.
 With `{ redirect }` it's "you may have that damage dealt to … instead", asked the same way, and of damage that can't be prevented too
 (a redirection isn't prevention): Blood of the Martyr is a `replacement-effect` for the turn of `{ event: "would-deal-damage", toFilter:
-{ type: "creature" }, instead: { redirect: "you" }, may: true }`. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
+{ type: "creature" }, instead: { redirect: "you" }, may: true }`. Kill-Suit Cultist's "the next time damage would be dealt to target
+creature this turn, destroy that creature instead" is a `replacement-effect` with `next: true`, `object: 0`, `duration: "end-of-turn"` of
+`{ event: "would-deal-damage", instead: { effect: { kind: "destroy", target: 0 } } }`: the damage is never dealt. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
 `would-scry` (`{ who, instead }`), `would-learn` (`{ optional?, offer?, instead: { effect } }`, its controller's learn — or,
 on a `fromGraveyard` static, its owner's — replaced whole; the `learn()` sequence carries `learn: true` and asks which, beside
 learning when every one is optional: Retriever Phoenix). `would-draw` also takes `instruction: { atLeast }` (the whole draw: "one or more

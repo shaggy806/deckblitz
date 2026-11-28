@@ -12,6 +12,7 @@
     "trigger:sacrificed-for-emerge",
     "replacement:lands-cant-enter",
     "replacement:dies-return-to-hand-cant-play-until-next-turn",
+    "replacement:next-damage-destroy-instead",
     "decision:choose-keyword-as-cost",
     "effect:each-player-puts-counter-on-chosen",
     "effect:return-died-cards-dealt-damage-by-source",
