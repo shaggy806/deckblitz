@@ -19195,6 +19195,37 @@ function pilesAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // Dead Ringers' "Destroy two target nonblack creatures unless either one is
+  // a color the other isn't. They can't be regenerated." (`sameColorsAs`; a
+  // target gone illegal can't be asked its colors, rule 608.2b).
+  if (
+    /^destroy two target nonblack creatures unless either one is a color the other isn't\.$/i.test(s(0)) &&
+    /^they can't be regenerated\.$/i.test(s(1))
+  ) {
+    const first = ctx.target("nonblack-creature");
+    const second = ctx.target({ kind: "other", of: "nonblack-creature", than: { slot: first } });
+    return {
+      effect: {
+        kind: "conditional",
+        condition: {
+          kind: "any",
+          of: [
+            { kind: "not", of: { kind: "target-legal", index: first } },
+            { kind: "target", index: first, filter: { sameColorsAs: second } },
+          ],
+        },
+        then: {
+          kind: "sequence",
+          simultaneous: true,
+          effects: [
+            { kind: "destroy", target: first, cantBeRegenerated: true },
+            { kind: "destroy", target: second, cantBeRegenerated: true },
+          ],
+        },
+      },
+      used: 2,
+    };
+  }
   // Not piles, but sentences that make one effect: Awakening of Vitu-Ghazi's "Put
   // N +1/+1 counters on target land you control. It becomes a legendary 0/0
   // Elemental creature with haste named Vitu-Ghazi. It's still a land."

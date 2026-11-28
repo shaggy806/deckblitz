@@ -27365,3 +27365,20 @@ describe("Feint (2026-11-28)", () => {
   });
 });
 
+describe("Dead Ringers (2026-11-28)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, mana_cost: "{1}", oracle_text });
+
+  it("two targets of exactly the same colors (Dead Ringers)", () => {
+    const ringers = face(
+      "Dead Ringers",
+      "Sorcery",
+      "Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.",
+    );
+    expect(ringers.complete).toBe(true);
+    expect(ringers.targets).toEqual(["nonblack-creature", { kind: "other", of: "nonblack-creature", than: { slot: 0 } }]);
+    expect(ringers.effect.condition.of[1]).toEqual({ kind: "target", index: 0, filter: { sameColorsAs: 1 } });
+    expect(ringers.effect.then.effects[1]).toEqual({ kind: "destroy", target: 1, cantBeRegenerated: true });
+  });
+});
+

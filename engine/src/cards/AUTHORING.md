@@ -4105,6 +4105,15 @@ recently cast this turn**, anyone's (the latest `seq` among every player's
 after: Mana Maze's "players can't cast spells that share a color with the spell
 most recently cast this turn" is a static `prohibits: [{ act: "cast", who:
 "each-player", filter: { sharesColorWithLastSpellCast: true } }]`.
+`sameColorsAs: <ShareReference>` is **exactly the same color or colors** as each
+object the reference names (rule 105.2; two colorless objects are the same):
+Dead Ringers' "destroy two target nonblack creatures unless either one is a
+color the other isn't" is a `conditional` on `any` of `not target-legal 0` and
+`{ kind: "target", index: 0, filter: { sameColorsAs: 1 } }`, the second slot
+an `other` of the first. Bound as the effect applies (`sameColorsBound`); a
+reference that reads nothing (an illegal target, whose colors can't be
+determined, 608.2b) leaves nothing to differ from, so it holds. Elsewhere read
+live.
 `sameNameAsSpellCastThisTurn: true` has a name in common with **a spell cast
 this turn**, by anyone, each named as it was on the stack (every player's
 `spellsCastThisTurnAs`): Twinning Glass's "cast a spell from your hand without

@@ -895,6 +895,22 @@ export interface CardFilter {
    */
   readonly sharesColorWithLastSpellCast?: true;
   /**
+   * Is **exactly the same color or colors** (rule 105.2) as each object a
+   * reference names — no color the other isn't, and none missing; two
+   * colorless objects are the same (no colors). Dead Ringers' "destroy two
+   * target nonblack creatures unless either one is a color the other isn't"
+   * is a `target` condition on slot 0 with `sameColorsAs: 1`. A resolution
+   * binds it as it applies (`sameColorsBound`), the reference objects' colors
+   * as they are now or last existed (rule 608.2h); a reference that reads
+   * nothing — an illegal target, whose information can't be determined (rule
+   * 608.2b) — leaves nothing to differ from, so it holds. Elsewhere it's read
+   * live, and fails inside the layer fold.
+   */
+  readonly sameColorsAs?: ShareReference;
+  /** `sameColorsAs` bound — written by `bindDynamicCompares`, never
+   * authored: each reference object's colors. */
+  readonly sameColorsBound?: readonly (readonly Color[])[];
+  /**
    * Has the same name (rule 201.2a: one name in common is enough) as **a
    * spell that was cast this turn**, by any player — Twinning Glass's "cast a
    * spell from your hand … if it has the same name as a spell that was cast
@@ -3253,6 +3269,25 @@ export function matchesFilter(
         return object !== undefined && [...effectiveColors(state, registry, object)].some((color) => colors.has(color));
       });
       if (!shared) return false;
+    }
+  }
+  if (filter.sameColorsBound !== undefined || filter.sameColorsAs !== undefined) {
+    const colors: ReadonlySet<Color> =
+      live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
+    const same = (others: Iterable<Color>): boolean => {
+      const set = new Set(others);
+      return set.size === colors.size && [...set].every((color) => colors.has(color));
+    };
+    if (filter.sameColorsBound !== undefined && !filter.sameColorsBound.every(same)) return false;
+    if (filter.sameColorsAs !== undefined) {
+      if (ctx.layered !== undefined) return false;
+      const others = liveReferenceObjects(state, registry, filter.sameColorsAs, ctx, live?.controller ?? lki?.controller);
+      if (others === undefined) return false;
+      const sameAsAll = others.every((other) => {
+        const object = state.objects[other];
+        return object === undefined || same(effectiveColors(state, registry, object));
+      });
+      if (!sameAsAll) return false;
     }
   }
   if (filter.sameNameAsSpellCastThisTurn === true) {

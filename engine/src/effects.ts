@@ -20896,6 +20896,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "blockedThisTurn" in value ||
       "sharesColorWith" in value ||
       "sharesColorWithMana" in value ||
+      "sameColorsAs" in value ||
       "attachedToObject" in value ||
       "notObject" in value ||
       "couldEnchant" in value ||
@@ -21267,6 +21268,14 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const objects = shareReferenceObjects(reference as ShareReference, ctx);
       const colors = objects.flatMap((object) => ctx.colorsOf({ kind: "object", object }));
       walked = { ...rest, sharesColorBound: { objects, colors: [...new Set(colors)] } };
+    }
+    // "Unless either one is a color the other isn't" (Dead Ringers): each
+    // reference object's colors now, or as it last existed (rule 608.2h); an
+    // illegal target reads nothing (608.2b).
+    if (walked["sameColorsAs"] !== undefined) {
+      const { sameColorsAs: reference, ...rest } = walked;
+      const objects = shareReferenceObjects(reference as ShareReference, ctx);
+      walked = { ...rest, sameColorsBound: objects.map((object) => [...new Set(ctx.colorsOf({ kind: "object", object }))]) };
     }
     // "Shares a color with the mana that land produced" (C.A.M.P.): the
     // colors of the mana its tapping for mana made, colorless none (rule
