@@ -27396,3 +27396,14 @@ describe("Butcher Orgg (2026-11-28)", () => {
   });
 });
 
+describe("Mutagen Connoisseur (2026-11-28)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, mana_cost: "{1}", oracle_text });
+
+  it("~ gets +N/+M for each <permanent> you control (Mutagen Connoisseur, Akiri)", () => {
+    const mutagen = face("Mutagen Connoisseur", "Creature — Vedalken Mutant", "This creature gets +1/+0 for each transformed permanent you control.");
+    expect(mutagen.static[0].grantPtPerCount).toEqual({ filter: { transformed: true, controlledBy: "you" }, pt: [1, 0] });
+    const akiri = face("Akiri, Line-Slinger", "Legendary Creature — Kor Soldier Ally", "Akiri gets +1/+0 for each artifact you control.");
+    expect(akiri.static[0].grantPtPerCount).toEqual({ filter: { type: "artifact", controlledBy: "you" }, pt: [1, 0] });
+  });
+});

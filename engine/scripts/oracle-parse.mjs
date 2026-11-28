@@ -25348,6 +25348,17 @@ function perAmountStaticOf(line, text) {
       text,
     };
   }
+  // "~ gets +1/+0 for each artifact you control" (Akiri, Line-Slinger),
+  // "… for each transformed permanent you control" (Mutagen Connoisseur).
+  if ((m = /^~ gets ([+-]\d+)\/([+-]\d+) for each (.+?) you control\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[3]);
+    if (filter === null || "controlledBy" in filter) return null;
+    return {
+      affects: { scope: "self" },
+      grantPtPerCount: { filter: { ...filter, controlledBy: "you" }, pt: pair(m[1], m[2]) },
+      text,
+    };
+  }
   if ((m = new RegExp(`^${P}([+-]\\d+)/([+-]\\d+) for each other creature on the battlefield that shares (?:at least one|a) creature type with it\\.$`).exec(line))) {
     return {
       affects: subjectOf(m[1]),

@@ -4036,7 +4036,9 @@ S.H.I.E.L.D.).
 `transformed: true` is a "transformed permanent" (rule 701.27g): a double-faced permanent on the
 battlefield with its back face up, never melded, merged or face down — Gargantuan Slabhorn's
 "other transformed permanents you control have trample and ward {2}" is a static over
-`{ scope: "filter", filter: { transformed: true, controlledBy: "you" }, excludeSelf: true }`.
+`{ scope: "filter", filter: { transformed: true, controlledBy: "you" }, excludeSelf: true }`;
+Mutagen Connoisseur's "this creature gets +1/+0 for each transformed permanent you control" is
+`grantPtPerCount: { filter: { transformed: true, controlledBy: "you" }, pt: [1, 0] }`.
 `sameNameAsTriggerObject: true` is the same for the trigger object — the
 Shrines' "where X is the number of cards in all graveyards **with the same name
 as that spell**" (Aven Shrine): `{ countInGraveyard: { sameNameAsTriggerObject:

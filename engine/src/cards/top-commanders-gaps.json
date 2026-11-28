@@ -14,6 +14,7 @@
     "replacement:dies-return-to-hand-cant-play-until-next-turn",
     "replacement:next-damage-destroy-instead",
     "effect:created-token-gains-triggered",
+    "condition:filter-transformed",
     "static:assign-combat-damage-divided-among-defending-player-and-creatures",
     "condition:targets-same-colors",
     "filter:blocking-target-creature",
