@@ -309,6 +309,7 @@ import _poolExciseTheImperfect from "../pool/excise-the-imperfect.js";
 import _poolExcise from "../pool/excise.js";
 import _poolExperimentalArmor from "../pool/experimental-armor.js";
 import _poolExterminatus from "../pool/exterminatus.js";
+import _poolEyeOfDoom from "../pool/eye-of-doom.js";
 import _poolFabricationFoundry from "../pool/fabrication-foundry.js";
 import _poolFadeFromMemory from "../pool/fade-from-memory.js";
 import _poolFaithsReward from "../pool/faiths-reward.js";
@@ -1372,6 +1373,7 @@ const shard: CardShard = {
     _poolExcise,
     _poolExperimentalArmor,
     _poolExterminatus,
+    _poolEyeOfDoom,
     _poolFabricationFoundry,
     _poolFadeFromMemory,
     _poolFaithsReward,

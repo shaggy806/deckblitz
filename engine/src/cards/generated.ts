@@ -9314,6 +9314,7 @@ import _poolExultantSkymarcher from "./pool/exultant-skymarcher.js";
 import _poolEyeCollector from "./pool/eye-collector.js";
 import _poolEyeForAnEye from "./pool/eye-for-an-eye.js";
 import _poolEyeGouge from "./pool/eye-gouge.js";
+import _poolEyeOfDoom from "./pool/eye-of-doom.js";
 import _poolEyeOfDuskmantle from "./pool/eye-of-duskmantle.js";
 import _poolEyeOfJace from "./pool/eye-of-jace.js";
 import _poolEyeOfMalcator from "./pool/eye-of-malcator.js";
@@ -20962,6 +20963,7 @@ import _poolPhyrexianSkyflayer from "./pool/phyrexian-skyflayer.js";
 import _poolPhyrexianSlayer from "./pool/phyrexian-slayer.js";
 import _poolPhyrexianSnowcrusher from "./pool/phyrexian-snowcrusher.js";
 import _poolPhyrexianSoulgorger from "./pool/phyrexian-soulgorger.js";
+import _poolPhyrexianSplicer from "./pool/phyrexian-splicer.js";
 import _poolPhyrexianSwarmlord from "./pool/phyrexian-swarmlord.js";
 import _poolPhyrexianTotem from "./pool/phyrexian-totem.js";
 import _poolPhyrexianTower from "./pool/phyrexian-tower.js";
@@ -43724,6 +43726,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEyeCollector,
   _poolEyeForAnEye,
   _poolEyeGouge,
+  _poolEyeOfDoom,
   _poolEyeOfDuskmantle,
   _poolEyeOfJace,
   _poolEyeOfMalcator,
@@ -55372,6 +55375,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPhyrexianSlayer,
   _poolPhyrexianSnowcrusher,
   _poolPhyrexianSoulgorger,
+  _poolPhyrexianSplicer,
   _poolPhyrexianSwarmlord,
   _poolPhyrexianTotem,
   _poolPhyrexianTower,
@@ -78147,6 +78151,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/eye-collector": _poolEyeCollector,
   "pool/eye-for-an-eye": _poolEyeForAnEye,
   "pool/eye-gouge": _poolEyeGouge,
+  "pool/eye-of-doom": _poolEyeOfDoom,
   "pool/eye-of-duskmantle": _poolEyeOfDuskmantle,
   "pool/eye-of-jace": _poolEyeOfJace,
   "pool/eye-of-malcator": _poolEyeOfMalcator,
@@ -89795,6 +89800,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/phyrexian-slayer": _poolPhyrexianSlayer,
   "pool/phyrexian-snowcrusher": _poolPhyrexianSnowcrusher,
   "pool/phyrexian-soulgorger": _poolPhyrexianSoulgorger,
+  "pool/phyrexian-splicer": _poolPhyrexianSplicer,
   "pool/phyrexian-swarmlord": _poolPhyrexianSwarmlord,
   "pool/phyrexian-totem": _poolPhyrexianTotem,
   "pool/phyrexian-tower": _poolPhyrexianTower,

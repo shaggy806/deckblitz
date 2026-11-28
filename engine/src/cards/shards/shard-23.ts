@@ -656,6 +656,7 @@ import _poolPermeatingMass from "../pool/permeating-mass.js";
 import _poolPestermite from "../pool/pestermite.js";
 import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
+import _poolPhyrexianSplicer from "../pool/phyrexian-splicer.js";
 import _poolPickTheBrain from "../pool/pick-the-brain.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPinkHorror from "../pool/pink-horror.js";
@@ -1741,6 +1742,7 @@ const shard: CardShard = {
     _poolPestermite,
     _poolPhlageTitanOfFiresFury,
     _poolPhyrexianMonitor,
+    _poolPhyrexianSplicer,
     _poolPickTheBrain,
     _poolPierceTheSky,
     _poolPinkHorror,
