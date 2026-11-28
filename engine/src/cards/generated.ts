@@ -9625,6 +9625,7 @@ import _poolFaultLine from "./pool/fault-line.js";
 import _poolFaultRiders from "./pool/fault-riders.js";
 import _poolFaultgrinder from "./pool/faultgrinder.js";
 import _poolFaunaShaman from "./pool/fauna-shaman.js";
+import _poolFaunsbaneTroll from "./pool/faunsbane-troll.js";
 import _poolFavorOfJukai from "./pool/favor-of-jukai.js";
 import _poolFavorOfTheMighty from "./pool/favor-of-the-mighty.js";
 import _poolFavorOfTheOverbeing from "./pool/favor-of-the-overbeing.js";
@@ -14799,6 +14800,7 @@ import _poolJamieMccrimmon from "./pool/jamie-mccrimmon.js";
 import _poolJamuraanLion from "./pool/jamuraan-lion.js";
 import _poolJanJansenChaosCrafter from "./pool/jan-jansen-chaos-crafter.js";
 import _poolJandorFortunedTraveler from "./pool/jandor-fortuned-traveler.js";
+import _poolJandorsRing from "./pool/jandors-ring.js";
 import _poolJandorsSaddlebags from "./pool/jandors-saddlebags.js";
 import _poolJanglingAutomaton from "./pool/jangling-automaton.js";
 import _poolJaniceRandEssentialAide from "./pool/janice-rand-essential-aide.js";
@@ -17901,6 +17903,7 @@ import _poolMerryBards from "./pool/merry-bards.js";
 import _poolMerryEsquireOfRohan from "./pool/merry-esquire-of-rohan.js";
 import _poolMerryGoRound from "./pool/merry-go-round.js";
 import _poolMerryWardenOfIsengard from "./pool/merry-warden-of-isengard.js";
+import _poolMerseine from "./pool/merseine.js";
 import _poolMesaCavalier from "./pool/mesa-cavalier.js";
 import _poolMesaEnchantress from "./pool/mesa-enchantress.js";
 import _poolMesaFalcon from "./pool/mesa-falcon.js";
@@ -31118,6 +31121,7 @@ import _poolUrborgEmissary from "./pool/urborg-emissary.js";
 import _poolUrborgJustice from "./pool/urborg-justice.js";
 import _poolUrborgLhurgoyf from "./pool/urborg-lhurgoyf.js";
 import _poolUrborgMindsucker from "./pool/urborg-mindsucker.js";
+import _poolUrborgPanther from "./pool/urborg-panther.js";
 import _poolUrborgPhantom from "./pool/urborg-phantom.js";
 import _poolUrborgRepossession from "./pool/urborg-repossession.js";
 import _poolUrborgScavengers from "./pool/urborg-scavengers.js";
@@ -44078,6 +44082,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFaultRiders,
   _poolFaultgrinder,
   _poolFaunaShaman,
+  _poolFaunsbaneTroll,
   _poolFavorOfJukai,
   _poolFavorOfTheMighty,
   _poolFavorOfTheOverbeing,
@@ -49252,6 +49257,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJamuraanLion,
   _poolJanJansenChaosCrafter,
   _poolJandorFortunedTraveler,
+  _poolJandorsRing,
   _poolJandorsSaddlebags,
   _poolJanglingAutomaton,
   _poolJaniceRandEssentialAide,
@@ -52354,6 +52360,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMerryEsquireOfRohan,
   _poolMerryGoRound,
   _poolMerryWardenOfIsengard,
+  _poolMerseine,
   _poolMesaCavalier,
   _poolMesaEnchantress,
   _poolMesaFalcon,
@@ -65571,6 +65578,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrborgJustice,
   _poolUrborgLhurgoyf,
   _poolUrborgMindsucker,
+  _poolUrborgPanther,
   _poolUrborgPhantom,
   _poolUrborgRepossession,
   _poolUrborgScavengers,
@@ -78544,6 +78552,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fault-riders": _poolFaultRiders,
   "pool/faultgrinder": _poolFaultgrinder,
   "pool/fauna-shaman": _poolFaunaShaman,
+  "pool/faunsbane-troll": _poolFaunsbaneTroll,
   "pool/favor-of-jukai": _poolFavorOfJukai,
   "pool/favor-of-the-mighty": _poolFavorOfTheMighty,
   "pool/favor-of-the-overbeing": _poolFavorOfTheOverbeing,
@@ -83718,6 +83727,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jamuraan-lion": _poolJamuraanLion,
   "pool/jan-jansen-chaos-crafter": _poolJanJansenChaosCrafter,
   "pool/jandor-fortuned-traveler": _poolJandorFortunedTraveler,
+  "pool/jandors-ring": _poolJandorsRing,
   "pool/jandors-saddlebags": _poolJandorsSaddlebags,
   "pool/jangling-automaton": _poolJanglingAutomaton,
   "pool/janice-rand-essential-aide": _poolJaniceRandEssentialAide,
@@ -86820,6 +86830,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/merry-esquire-of-rohan": _poolMerryEsquireOfRohan,
   "pool/merry-go-round": _poolMerryGoRound,
   "pool/merry-warden-of-isengard": _poolMerryWardenOfIsengard,
+  "pool/merseine": _poolMerseine,
   "pool/mesa-cavalier": _poolMesaCavalier,
   "pool/mesa-enchantress": _poolMesaEnchantress,
   "pool/mesa-falcon": _poolMesaFalcon,
@@ -100037,6 +100048,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/urborg-justice": _poolUrborgJustice,
   "pool/urborg-lhurgoyf": _poolUrborgLhurgoyf,
   "pool/urborg-mindsucker": _poolUrborgMindsucker,
+  "pool/urborg-panther": _poolUrborgPanther,
   "pool/urborg-phantom": _poolUrborgPhantom,
   "pool/urborg-repossession": _poolUrborgRepossession,
   "pool/urborg-scavengers": _poolUrborgScavengers,

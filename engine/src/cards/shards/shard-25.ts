@@ -451,6 +451,7 @@ import _poolJaceArchitectOfThought from "../pool/jace-architect-of-thought.js";
 import _poolJaceThePerfectedMind from "../pool/jace-the-perfected-mind.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
+import _poolJandorsRing from "../pool/jandors-ring.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
 import _poolJoragaVisionary from "../pool/joraga-visionary.js";
 import _poolJovenAndChandler from "../pool/joven-and-chandler.js";
@@ -1502,6 +1503,7 @@ const shard: CardShard = {
     _poolJaceThePerfectedMind,
     _poolJacesTriumph,
     _poolJaggedLightning,
+    _poolJandorsRing,
     _poolJetMedallion,
     _poolJoragaVisionary,
     _poolJovenAndChandler,

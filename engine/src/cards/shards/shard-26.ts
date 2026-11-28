@@ -998,6 +998,7 @@ import _poolUndercityEliminator from "../pool/undercity-eliminator.js";
 import _poolUnderworldConnections from "../pool/underworld-connections.js";
 import _poolUnforgivingAim from "../pool/unforgiving-aim.js";
 import _poolUnholyFiend from "../pool/unholy-fiend.js";
+import _poolUrborgPanther from "../pool/urborg-panther.js";
 import _poolUrenisRebuff from "../pool/urenis-rebuff.js";
 import _poolUrsineMonstrosity from "../pool/ursine-monstrosity.js";
 import _poolUtopiaSprawl from "../pool/utopia-sprawl.js";
@@ -2097,6 +2098,7 @@ const shard: CardShard = {
     _poolUnderworldConnections,
     _poolUnforgivingAim,
     _poolUnholyFiend,
+    _poolUrborgPanther,
     _poolUrenisRebuff,
     _poolUrsineMonstrosity,
     _poolUtopiaSprawl,

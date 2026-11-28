@@ -546,6 +546,7 @@ import _poolMeanderingRiver from "../pool/meandering-river.js";
 import _poolMercilessHarlequin from "../pool/merciless-harlequin.js";
 import _poolMerrowHarbinger from "../pool/merrow-harbinger.js";
 import _poolMerrowWavebreakers from "../pool/merrow-wavebreakers.js";
+import _poolMerseine from "../pool/merseine.js";
 import _poolMeticulousArtisan from "../pool/meticulous-artisan.js";
 import _poolMetropolisReformer from "../pool/metropolis-reformer.js";
 import _poolMidnightPathlighter from "../pool/midnight-pathlighter.js";
@@ -1561,6 +1562,7 @@ const shard: CardShard = {
     _poolMercilessHarlequin,
     _poolMerrowHarbinger,
     _poolMerrowWavebreakers,
+    _poolMerseine,
     _poolMeticulousArtisan,
     _poolMetropolisReformer,
     _poolMidnightPathlighter,
