@@ -9311,6 +9311,11 @@ export type EffectSpec =
        * amount }` compare is bound as the effect applies ("a nonland card
        * with lesser mana value"). */
       readonly filter: CardFilter;
+      /** It stops at this many cards revealed too, whichever comes first —
+       * Thought Dissector's "until an artifact card **or X cards are
+       * revealed**": the Xth card revealed is still found if it matches, and
+       * none found, everything revealed is the rest. Read as it begins. */
+      readonly atMost?: EffectAmount;
       /** Exile each card, face up, as it goes, rather than reveal it. */
       readonly exile?: boolean;
       /** With `exile`: each card is exiled **with this source** (rule 607.2a
@@ -18979,7 +18984,10 @@ function applyRevealUntil(
   if (progress === undefined) {
     const owner = revealingPlayer(spec.whose, ctx);
     if (owner === undefined) return;
-    const found = ctx.revealUntil(owner, spec);
+    const found = ctx.revealUntil(
+      owner,
+      spec.atMost === undefined ? spec : { ...spec, atMost: Math.max(0, Math.floor(amountValue(spec.atMost, ctx))) },
+    );
     progress = {
       owner,
       revealed: spec.keepFound === true ? found.revealed.filter((id) => id !== found.hit) : found.revealed,

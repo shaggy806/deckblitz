@@ -58144,8 +58144,11 @@ controlledBy,
     let hit: ObjectId | null = null;
     const matches = (id: ObjectId): boolean =>
       matchesFilter(this.state, this.registry, id, spec.filter, { you: controller });
+    // "…or X cards are revealed, whichever comes first" (Thought Dissector):
+    // the effect settles the amount before it asks.
+    const most = typeof spec.atMost === "number" ? spec.atMost : Infinity;
     if (spec.exile === true) {
-      for (let top = library.find(isCard); top !== undefined; top = library.find(isCard)) {
+      for (let top = library.find(isCard); top !== undefined && revealed.length < most; top = library.find(isCard)) {
         this.moveObject(top, "exile");
         revealed.push(top);
         if (matches(top)) {
@@ -58155,6 +58158,7 @@ controlledBy,
       }
     } else {
       for (const id of library) {
+        if (revealed.length >= most) break;
         if (!isCard(id)) continue;
         revealed.push(id);
         if (matches(id)) {

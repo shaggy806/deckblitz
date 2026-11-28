@@ -3,6 +3,7 @@
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
     "effect:search-same-name-as-chosen-permanents",
+    "effect:reveal-until-or-x-cards",
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",
