@@ -139,6 +139,7 @@ import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCharmPeddler from "../pool/charm-peddler.js";
 import _poolCharmedGriffin from "../pool/charmed-griffin.js";
 import _poolChimneyImp from "../pool/chimney-imp.js";
+import _poolChromaticArmor from "../pool/chromatic-armor.js";
 import _poolCinderPyromancer from "../pool/cinder-pyromancer.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
@@ -1216,6 +1217,7 @@ const shard: CardShard = {
     _poolCharmPeddler,
     _poolCharmedGriffin,
     _poolChimneyImp,
+    _poolChromaticArmor,
     _poolCinderPyromancer,
     _poolCinderStrike,
     _poolCircleOfProtectionArtifacts,

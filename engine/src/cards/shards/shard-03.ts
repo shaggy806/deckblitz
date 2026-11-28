@@ -330,6 +330,7 @@ import _poolGlissasCourier from "../pool/glissas-courier.js";
 import _poolGlisteningOil from "../pool/glistening-oil.js";
 import _poolGloinTheMighty from "../pool/gloin-the-mighty.js";
 import _poolGloomSower from "../pool/gloom-sower.js";
+import _poolGlyphOfDelusion from "../pool/glyph-of-delusion.js";
 import _poolGnashingOfTeeth from "../pool/gnashing-of-teeth.js";
 import _poolGnawingVermin from "../pool/gnawing-vermin.js";
 import _poolGoNinjaGo from "../pool/go-ninja-go.js";
@@ -1332,6 +1333,7 @@ const shard: CardShard = {
     _poolGlisteningOil,
     _poolGloinTheMighty,
     _poolGloomSower,
+    _poolGlyphOfDelusion,
     _poolGnashingOfTeeth,
     _poolGnawingVermin,
     _poolGoNinjaGo,

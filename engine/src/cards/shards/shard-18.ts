@@ -630,6 +630,7 @@ import _poolPatchedPlaything from "../pool/patched-plaything.js";
 import _poolPatchworkAutomaton from "../pool/patchwork-automaton.js";
 import _poolPatchworkBanner from "../pool/patchwork-banner.js";
 import _poolPatriarchsBidding from "../pool/patriarchs-bidding.js";
+import _poolPeaceTalks from "../pool/peace-talks.js";
 import _poolPearlLakeAncient from "../pool/pearl-lake-ancient.js";
 import _poolPeerlessRecycling from "../pool/peerless-recycling.js";
 import _poolPensiveMinotaur from "../pool/pensive-minotaur.js";
@@ -1688,6 +1689,7 @@ const shard: CardShard = {
     _poolPatchworkAutomaton,
     _poolPatchworkBanner,
     _poolPatriarchsBidding,
+    _poolPeaceTalks,
     _poolPearlLakeAncient,
     _poolPeerlessRecycling,
     _poolPensiveMinotaur,

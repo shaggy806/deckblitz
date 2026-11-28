@@ -1012,6 +1012,7 @@ import _poolZenosYaeGalvus from "../pool/zenos-yae-galvus.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
 import _poolZirilanOfTheClaw from "../pool/zirilan-of-the-claw.js";
+import _poolZombieBoa from "../pool/zombie-boa.js";
 import _poolZukoConflicted from "../pool/zuko-conflicted.js";
 import _tokensAlienTokenAdiposeOffspring from "../tokens/alien-token-adipose-offspring.js";
 import _tokensBearTokenGreen44 from "../tokens/bear-token-green-4-4.js";
@@ -2048,6 +2049,7 @@ const shard: CardShard = {
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,
     _poolZirilanOfTheClaw,
+    _poolZombieBoa,
     _poolZukoConflicted,
   ],
   tokens: [

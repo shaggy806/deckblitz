@@ -253,6 +253,7 @@ import _poolEnslave from "../pool/enslave.js";
 import _poolEnslavedHorror from "../pool/enslaved-horror.js";
 import _poolEnvironmentalScientist from "../pool/environmental-scientist.js";
 import _poolErkenbrandLordOfWestfold from "../pool/erkenbrand-lord-of-westfold.js";
+import _poolErrantMinion from "../pool/errant-minion.js";
 import _poolEssenceChanneler from "../pool/essence-channeler.js";
 import _poolEssenceFilter from "../pool/essence-filter.js";
 import _poolEtaliPrimalConqueror from "../pool/etali-primal-conqueror.js";
@@ -1308,6 +1309,7 @@ const shard: CardShard = {
     _poolEnslavedHorror,
     _poolEnvironmentalScientist,
     _poolErkenbrandLordOfWestfold,
+    _poolErrantMinion,
     _poolEssenceChanneler,
     _poolEssenceFilter,
     _poolEtaliPrimalConqueror,

@@ -989,6 +989,7 @@ import _poolVoltaicConstruct from "../pool/voltaic-construct.js";
 import _poolVorstclaw from "../pool/vorstclaw.js";
 import _poolVowOfDuty from "../pool/vow-of-duty.js";
 import _poolWakerootElemental from "../pool/wakeroot-elemental.js";
+import _poolWallOfCaltrops from "../pool/wall-of-caltrops.js";
 import _poolWallOfEssence from "../pool/wall-of-essence.js";
 import _poolWanderingMind from "../pool/wandering-mind.js";
 import _poolWane from "../pool/wane.js";
@@ -2051,6 +2052,7 @@ const shard: CardShard = {
     _poolVorstclaw,
     _poolVowOfDuty,
     _poolWakerootElemental,
+    _poolWallOfCaltrops,
     _poolWallOfEssence,
     _poolWanderingMind,
     _poolWane,

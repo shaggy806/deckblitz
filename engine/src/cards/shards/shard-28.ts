@@ -729,6 +729,7 @@ import _poolRevivalRevenge from "../pool/revival-revenge.js";
 import _poolReviveTheShire from "../pool/revive-the-shire.js";
 import _poolRevokeDemise from "../pool/revoke-demise.js";
 import _poolRhoxMeditant from "../pool/rhox-meditant.js";
+import _poolRhysticScrying from "../pool/rhystic-scrying.js";
 import _poolRimeTransfusion from "../pool/rime-transfusion.js";
 import _poolRimeshieldFrostGiant from "../pool/rimeshield-frost-giant.js";
 import _poolRingOfEvosIsle from "../pool/ring-of-evos-isle.js";
@@ -1002,6 +1003,7 @@ import _poolVoidforgedTitan from "../pool/voidforged-titan.js";
 import _poolVoidmageHusher from "../pool/voidmage-husher.js";
 import _poolVoidstoneGargoyle from "../pool/voidstone-gargoyle.js";
 import _poolVolcanicUpheaval from "../pool/volcanic-upheaval.js";
+import _poolVoodooDoll from "../pool/voodoo-doll.js";
 import _poolVraskasScorn from "../pool/vraskas-scorn.js";
 import _poolWakerOfWaves from "../pool/waker-of-waves.js";
 import _poolWalkingCorpse from "../pool/walking-corpse.js";
@@ -1819,6 +1821,7 @@ const shard: CardShard = {
     _poolReviveTheShire,
     _poolRevokeDemise,
     _poolRhoxMeditant,
+    _poolRhysticScrying,
     _poolRimeTransfusion,
     _poolRimeshieldFrostGiant,
     _poolRingOfEvosIsle,
@@ -2092,6 +2095,7 @@ const shard: CardShard = {
     _poolVoidmageHusher,
     _poolVoidstoneGargoyle,
     _poolVolcanicUpheaval,
+    _poolVoodooDoll,
     _poolVraskasScorn,
     _poolWakerOfWaves,
     _poolWalkingCorpse,

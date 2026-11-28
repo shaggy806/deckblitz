@@ -175,6 +175,7 @@ import _poolContaminatedAquifer from "../pool/contaminated-aquifer.js";
 import _poolContrabandKingpin from "../pool/contraband-kingpin.js";
 import _poolConvertToSlime from "../pool/convert-to-slime.js";
 import _poolCorpseAugur from "../pool/corpse-augur.js";
+import _poolCorrosion from "../pool/corrosion.js";
 import _poolCorruptedHarvester from "../pool/corrupted-harvester.js";
 import _poolCostlyPlunder from "../pool/costly-plunder.js";
 import _poolCourtOfGrace from "../pool/court-of-grace.js";
@@ -1251,6 +1252,7 @@ const shard: CardShard = {
     _poolContrabandKingpin,
     _poolConvertToSlime,
     _poolCorpseAugur,
+    _poolCorrosion,
     _poolCorruptedHarvester,
     _poolCostlyPlunder,
     _poolCourtOfGrace,
