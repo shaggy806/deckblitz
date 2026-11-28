@@ -3240,6 +3240,11 @@ export function parseTrigger(clause) {
     const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
     return [{ on: "cast-spell", who, filter: { manaValueParity: "chosen" } }];
   }
+  // "A spell using teamwork" (Virtual Assistant, rule 702.194b): its teamwork
+  // cost paid as it was cast.
+  if (/^Whenever you cast a spell using teamwork$/.test(c)) {
+    return [{ on: "cast-spell", who: "you", filter: { castUsing: "teamwork" } }];
+  }
   // "A spell that has convoke" (Kasla, the Broken Halo): convoked or not.
   if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
     return [{ on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } }];

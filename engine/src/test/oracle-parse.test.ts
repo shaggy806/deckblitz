@@ -21323,6 +21323,16 @@ describe("a countered spell's card put onto the battlefield", () => {
       },
     });
   });
+
+  it("reads Virtual Assistant's trigger: a spell cast using teamwork", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Artifact Creature — Illusion Advisor",
+      oracle_text:
+        "Whenever you cast a spell using teamwork, create a 1/1 colorless Robot Hero artifact creature token with flying.",
+    } as never) as unknown as { triggered: { trigger: unknown }[] };
+    expect(face.triggered[0].trigger).toEqual({ on: "cast-spell", who: "you", filter: { castUsing: "teamwork" } });
+  });
 });
 
 describe("read ahead given to Sagas", () => {

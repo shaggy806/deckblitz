@@ -1269,6 +1269,12 @@ export interface CardFilter {
    * cast a kicked spell" (Roost of Drakes). Nothing off the stack is a kicked
    * spell. */
   readonly kicked?: boolean;
+  /** A spell on the stack whose optional additional cost of this keyword was
+   * paid as it was cast — the kicker-shaped keywords' own "kicked": "whenever
+   * you cast a spell **using teamwork**" (Virtual Assistant; rule 702.194b:
+   * whether its caster declared the intention to pay the teamwork cost). Read
+   * like `kicked`: nothing off the stack matches. */
+  readonly castUsing?: NonNullable<NonNullable<CardDefinition["kicker"]>["keyword"]>;
   /** Has (or hasn't) toxic (rule 702.164) — printed or granted: "another
    * creature you control with toxic" (Slaughter Singer), "if that creature
    * has toxic" (Hexgold Slash). Read on the battlefield; not on a snapshot. */
@@ -3983,6 +3989,11 @@ export function matchesFilter(
     const kicker = name !== undefined && registry.has(name) ? registry.get(name).kicker : null;
     const kicked = live !== undefined && live.zone === "stack" && live.kicked === true && kicker?.keyword === undefined;
     if (kicked !== filter.kicked) return false;
+  }
+  if (filter.castUsing !== undefined) {
+    const name = live !== undefined ? rulesTextName(live) : undefined;
+    const kicker = name !== undefined && registry.has(name) ? registry.get(name).kicker : null;
+    if (live === undefined || live.zone !== "stack" || live.kicked !== true || kicker?.keyword !== filter.castUsing) return false;
   }
   if (filter.faceDown !== undefined) {
     const down = live !== undefined ? live.faceDown !== undefined : lki?.faceDown === true;
