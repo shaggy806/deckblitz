@@ -90,6 +90,7 @@ import {
   isAnswer,
   libraryTopOf,
   lifeCost,
+  staysToWork,
   withHandReadForKeeps,
   withLibraryTop,
   withTrackRecordEvidence,
@@ -2743,6 +2744,11 @@ export class EvalBotController extends HeuristicBotController {
           const verdict = this.opponentPump(view.state, legal, action);
           if (verdict === "drop") continue;
           if (verdict !== "ok") mustKill.set(action, verdict.kills);
+          // The last loyalty of a planeswalker that is there to stay
+          // (`spendsLastLoyalty`): only for a player it kills.
+          const last = this.spendsLastLoyalty(view.state, legal, action);
+          if (last === "drop") continue;
+          if (last !== "ok" && !mustKill.has(action)) mustKill.set(action, last.kills);
           // Mana a play held for after combat needs, spent on a combat trick:
           // kept only if it kills the player it's aimed at this combat.
           const spends = this.spendsHeldMana(view.state, action);
@@ -4592,6 +4598,39 @@ export class EvalBotController extends HeuristicBotController {
   }
 
   /**
+   * Whether `action` takes the **last loyalty counter** off a planeswalker
+   * that is there to stay (`staysToWork`: nothing adds loyalty to it, and it
+   * does something while it lives): `drop`, or kept for the death of the
+   * opponent it is aimed at. Jeska, Thrice Reborn came down on 1 loyalty and
+   * went at once on −1 for a Birds of Paradise and 2 damage (a friend's
+   * report, kept game BKSBJ-1 turn 9, 2026-11-27): the board counts her as
+   * her counters and her mana value, and nothing for the 0 that triples
+   * Slicer's damage every turn after. A planeswalker with a plus ability, or
+   * with nothing but its minus, is the search's to spend as before.
+   */
+  private spendsLastLoyalty(
+    state: GameState,
+    legal: LegalAction,
+    action: Action,
+  ): "ok" | "drop" | { readonly kills: PlayerId } {
+    if (legal.kind !== "activate-ability" || action.type !== "activate-ability" || legal.loyalty === undefined) return "ok";
+    const source = state.objects[legal.source];
+    if (source === undefined) return "ok";
+    const spent = legal.loyalty === "-x" ? (action.xValue ?? 0) : -legal.loyalty;
+    if (spent <= 0 || spent < (source.counters.loyalty ?? 0)) return "ok";
+    const name = rulesTextName(source);
+    if (!this.cards.has(name) || !staysToWork(this.cards.get(name))) return "ok";
+    // Of the opponents it is aimed at, the one nearest dead.
+    let nearest: PlayerId | null = null;
+    for (const target of action.targets ?? []) {
+      if (target === null || target.kind !== "player" || target.player === this.playerId) continue;
+      const life = state.players[target.player]?.life ?? Infinity;
+      if (nearest === null || life < (state.players[nearest]?.life ?? Infinity)) nearest = target.player;
+    }
+    return nearest === null ? "drop" : { kills: nearest };
+  }
+
+  /**
    * A land drop's score, and for a fetch this bot cracks at once
    * (`crackedOnPlay`) the land drop *and* the crack, as one plan: the
    * rollouts pass our seat, so scored alone the fetch was never cracked in
@@ -4739,6 +4778,14 @@ export class EvalBotController extends HeuristicBotController {
       this.trace?.(action, after);
       return null;
     }
+    // Kept only for a kill it didn't make: no candidate under any weights,
+    // and told so. Reported with its board, the last loyalty of a
+    // planeswalker (`spendsLastLoyalty`) read to `bot:fit-scenarios` as a
+    // move the search had scored above the pass it took.
+    if (mustKill !== undefined && after.players[mustKill]?.hasLost !== true) {
+      this.trace?.(action, null);
+      return null;
+    }
     const outcome = this.outcomeAimed(
       after,
       action.type === "pass-priority" ? null : aimedAt(view.state, this.cards, this.playerId, action),
@@ -4749,7 +4796,6 @@ export class EvalBotController extends HeuristicBotController {
       this.passEndsOpen = this.tapGuard !== null && this.crackbackLethal(after, this.tapGuard.grown);
     }
     this.trace?.(action, after, outcome.hit === undefined ? undefined : outcome);
-    if (mustKill !== undefined && after.players[mustKill]?.hasLost !== true) return null;
     // The opponents' turns from the board this leaves, under
     // `rolloutSwingBack` (`swingBack`); stopped by the clock, it's unscored.
     let swing = this.swingBack(after, budget);

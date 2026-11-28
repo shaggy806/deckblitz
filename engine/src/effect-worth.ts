@@ -803,6 +803,10 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     // "Target creature can't be regenerated this turn" (Hurr Jackal) alone.
     case "cant-regenerate":
       return true;
+    // "If it's an artifact creature, it gains trample until end of turn"
+    // (Built to Smash): no more lasting than what it does either way.
+    case "conditional":
+      return onlyUntilEndOfTurn(effect.then) && (effect.else === undefined || onlyUntilEndOfTurn(effect.else));
     default:
       return false;
   }

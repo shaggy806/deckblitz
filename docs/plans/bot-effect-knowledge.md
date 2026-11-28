@@ -1494,6 +1494,32 @@ extra conditions above fix: Edgar Markov's bot fed Phyrexian Altar before playin
 run again after them. Whether to hand Slicer over, the question the new worth could most have
 bent, was answered as before at all 102 of its askings in fourteen kept games.
 
+The other six notes, the same day, each a rule or a read where the evaluation had no way to
+know (`docs/bot-misplays.md` has the positions, and what each leaves):
+
+- **A planeswalker that stays to work keeps its last counter** (`staysToWork`,
+  `spendsLastLoyalty`). The friend's rule, taken as given and no wider: no ability adds
+  loyalty, and it does something by staying. `loyalty` still prices such a planeswalker by its
+  counters alone; a standing worth for its static was looked at and left, since it is a change
+  to every planeswalker's price for a fault in 34. A candidate kept only for a kill it didn't
+  make is now told to `trace` with no board: told with one, it read to `bot:fit-scenarios` as a
+  move the search had scored above the pass it took (`scenario-fit.test.ts` caught it).
+- **A source whose tap has another use pays last among equals** (`ManaSource.otherUse`). In the
+  payer, which already ranks by what the rest of the hand needs: the new key sits after that
+  need and before "fewest colours". A first cut as a tie-break in `Game.manaSources` did
+  nothing, because the planner pays generic with colourless-only sources first whatever their
+  order; that rule is what tapped Homeward Path before every Mountain.
+- **A flash permanent its own upkeep takes isn't a permanent** (`goneAtOwnUpkeep`). Only with
+  flash: Goblin Boom Keg has to be cast in a main phase to do anything, and counts as before.
+- **A damage keyword rides a pump that waits for blocks** (`damageKeywordRider`).
+- **A permanent that taps to answer an attacker is worth something untapped** (`shields`, a
+  new term at 2.5; the champions carry it at 0). It is read as of a swing back's start
+  (`readAsOf`), or untapping at the end of the very turns it was for would give its price
+  back. The swing back itself still plays no answers, which is what is left of this one.
+- **A redirect is an answer** (`isAnswer`). Tried first as a floor on removal at a mana rock
+  and dropped: through round five `earlyMana` wants the rock dead, and the complaint was the
+  answer spent, not the rock killed.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

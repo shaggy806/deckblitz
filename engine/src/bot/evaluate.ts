@@ -95,6 +95,11 @@ export interface EvalWeights {
   /** Noncreature permanents that can regenerate another of ours worth keeping
    * (`guardsAnother`, `bot/features.ts`): Welding Jar with an Equipment out. */
   readonly guards: number;
+  /** Permanents that tap to answer an attacking creature (`answersAttackers`,
+   * `bot/features.ts`: Maze of Ith), there for the next attack on us: untapped,
+   * or untapping before anyone attacks again, while an opponent has a
+   * creature. */
+  readonly shields: number;
   /** Total mana value of nonland permanents — a Sol Ring and a six-drop
    * enchantment aren't the same one permanent. */
   readonly permanentManaValue: number;
@@ -345,6 +350,13 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // while there's something to protect: with nothing, the Jar stays in hand
   // against an artifact wipe (the user, 2026-11-22). Half a point.
   guards: 0.5,
+  // Maze of Ith untapped through the opponents' turns, over what tapping it
+  // on our own turn buys: it went on its controller's own attackers, to
+  // untap one after damage or to save a 1/1 Fish it had just attacked with,
+  // and nothing counted it gone for the round (a friend's report, kept game
+  // E7GY2-1, 2026-11-27). Above the token it saved (2.1) and below a real
+  // creature or a hit of six: those are still what it is spent on.
+  shields: 2.5,
   permanentManaValue: 0.5,
   loyalty: 1,
   counters: 0.5,

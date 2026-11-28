@@ -66,7 +66,7 @@ import { playersAttackableNextTurn, readyToBlock } from "../combat/eligibility.j
 import { attackTaxAt, canBlock, combatCreatures, manaToAttackWith } from "./combat-math.js";
 import { handCardQuality, handQuality as handQualityOf } from "./hand-worth.js";
 import type { CombatCreature } from "./combat-math.js";
-import { goneAtEndStep } from "./gone-at-end-step.js";
+import { goneAtEndStep, goneAtOwnUpkeep } from "./gone-at-end-step.js";
 import { hasColouredLinkedCard, manaOnlyFromLinkedCards } from "./linked-mana.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 import type { GameObject, GameState } from "../state.js";
@@ -91,6 +91,7 @@ export const FEATURE_KEYS = [
   "untappedMana",
   "otherPermanents",
   "guards",
+  "shields",
   "permanentManaValue",
   "loyalty",
   "counters",
@@ -777,13 +778,31 @@ function isRemoval(def: CardDefinition): boolean {
 
 const answerMemo = new WeakMap<CardDefinition, boolean>();
 
-/** A card held to counter something: its spell (or one of its modes) counters
- * a spell, or it's a creature that counters one as it enters. Counterspell,
- * Negate, Cryptic Command, Transcendent Dragon. */
+/** Does this effect change what a spell or ability is aimed at? Anywhere in
+ * the tree. */
+function redirects(effect: unknown): boolean {
+  if (effect === null || typeof effect !== "object") return false;
+  if (Array.isArray(effect)) return effect.some(redirects);
+  if ((effect as { readonly kind?: unknown }).kind === "change-targets") return true;
+  return Object.values(effect).some((value) => value !== null && typeof value === "object" && redirects(value));
+}
+
+/** A card held to answer a spell: its spell (or one of its modes) counters
+ * one or changes its target, or it's a creature that counters one as it
+ * enters. Counterspell, Negate, Cryptic Command, Transcendent Dragon;
+ * Deflecting Swat, and Untimely Malfunction, whose second mode sends a
+ * removal spell somewhere else — held for that it is worth the `answers`
+ * reserve, and it went at an Arcane Signet for its first mode (a friend's
+ * report, kept game 39D25-1, 2026-11-27). */
 export function isAnswer(def: CardDefinition): boolean {
   let found = answerMemo.get(def);
   if (found === undefined) {
-    found = counters(def.effect) || counters(def.castModal) || entersToCounter(def);
+    found =
+      counters(def.effect) ||
+      counters(def.castModal) ||
+      entersToCounter(def) ||
+      ((def.types.includes("instant") || (def.keywords ?? []).includes("flash")) &&
+        (redirects(def.effect) || redirects(def.castModal)));
     answerMemo.set(def, found);
   }
   return found;
@@ -1126,6 +1145,27 @@ const PRICED = { draw: 4, value: 4, token: 2, mana: 0.5 } as const;
  * entering has done its work (Bitter Reunion). Not an Aura or an Equipment,
  * whose worth is its host's, nor a planeswalker, which `loyalty` prices.
  */
+/**
+ * Whether a planeswalker is one to keep rather than spend: no ability of its
+ * adds loyalty, so each counter gone is gone for good, and it does something
+ * by staying — a static ability of its own (not how it enters), a trigger
+ * that can fire again, or a loyalty ability that costs nothing. Narset,
+ * Parter of Veils; Kiora, Behemoth Beckoner; Jeska, Thrice Reborn, whose 0
+ * triples a creature's combat damage every turn. `loyalty` prices such a
+ * planeswalker by its counters alone, so the search spent the last of them
+ * like any other (`EvalBotController.spendsLastLoyalty`).
+ */
+export function staysToWork(def: CardDefinition): boolean {
+  if (!def.types.includes("planeswalker")) return false;
+  const loyalty = def.activated.filter((a) => a.loyaltyCost !== undefined);
+  if (loyalty.some((a) => typeof a.loyaltyCost === "number" && a.loyaltyCost > 0)) return false;
+  return (
+    loyalty.some((a) => a.loyaltyCost === 0) ||
+    def.triggered.some((t) => !isOneShot(t.trigger)) ||
+    def.static.some((s) => (s.replacement as { readonly event?: unknown } | undefined)?.event !== "enters-battlefield")
+  );
+}
+
 function standingWorth(registry: CardRegistry, def: CardDefinition, opponents: number): number {
   const keepsWorking =
     def.static.length > 0 || def.triggered.some((t) => !isOneShot(t.trigger)) || (def.chapters?.length ?? 0) > 0;
@@ -1251,6 +1291,32 @@ const GUARDED_TYPES: Readonly<Record<string, readonly CardDefinition["types"][nu
  * (a live game, TPGJ6-2, 2026-11-22). The user's call: cast it when there's
  * stuff to protect, not earlier.
  */
+const answersAttackersMemo = new WeakMap<CardDefinition, boolean>();
+
+/** The steps of a turn once its combat is over. */
+const AFTER_COMBAT: ReadonlySet<string> = new Set(["postcombat-main", "end", "cleanup"]);
+
+/**
+ * Whether `def` has an ability that **taps it to answer an attacking
+ * creature** — a `{T}` cost, at instant speed, its first target an attacking
+ * creature and nothing else (Maze of Ith's "untap target attacking creature;
+ * prevent all combat damage dealt to and by it", Kor Haven, Mystifying Maze).
+ * Such a permanent does its work untapped on other players' turns
+ * (`PlayerFeatures.shields`).
+ */
+function answersAttackers(def: CardDefinition): boolean {
+  let known = answersAttackersMemo.get(def);
+  if (known === undefined) {
+    known = def.activated.some((a) => {
+      if (a.cost.tap !== true || a.sorcerySpeed === true || isManaAbility(a)) return false;
+      const spec = a.targets?.[0] as { readonly kind?: unknown; readonly filter?: { readonly attacking?: unknown } } | string | undefined;
+      return typeof spec === "object" && spec.kind === "permanent" && spec.filter?.attacking === true;
+    });
+    answersAttackersMemo.set(def, known);
+  }
+  return known;
+}
+
 function guardsAnother(
   state: GameState,
   registry: CardRegistry,
@@ -1725,6 +1791,21 @@ function playerFeaturesUncached(
   let untappedMana = 0;
   let otherPermanents = 0;
   let guards = 0;
+  let shieldsHeld = 0;
+  // A tapped permanent of ours untaps before anyone attacks again once the
+  // player before us is past their combat: used on their attack, it cost
+  // nothing it would have done later. Under `readAsOf` (a swing back's far
+  // end) the turn and the tapping are the earlier state's: nobody answers an
+  // attack in a swing back, so a shield spent before it isn't given back for
+  // untapping at the end of the very turns it was for.
+  const shieldClock = readAs ?? state;
+  const seats = shieldClock.turnOrder.filter((p) => !shieldClock.players[p].hasLost);
+  const mySeat = seats.indexOf(player);
+  const untapsInTime =
+    mySeat >= 0 &&
+    seats.length > 1 &&
+    shieldClock.turnOrder[shieldClock.turn.activePlayerIndex] === seats[(mySeat - 1 + seats.length) % seats.length] &&
+    AFTER_COMBAT.has(shieldClock.turn.step);
   let permanentManaValue = 0;
   let loyalty = 0;
   let counters = 0;
@@ -1813,19 +1894,34 @@ function playerFeaturesUncached(
         valueEngines += roamRate(damage, c.keywords.has("double-strike"), opponents) * n;
       }
     }
+    // A noncreature permanent with flash that its controller's next upkeep
+    // sacrifices (`goneAtOwnUpkeep`: Smoke Bomb) is no lasting permanent, and
+    // cast later it would do as much: what it does meanwhile shows in what a
+    // rollout saves, and nothing else is counted. Without flash (Goblin Boom
+    // Keg) the main phase is the only time to cast it, so it counts as before.
+    const fleeting =
+      !isCreature &&
+      !isLand &&
+      goneAtOwnUpkeep(registry, rulesTextName(object)) &&
+      registry.get(rulesTextName(object)).keywords?.includes("flash") === true;
     if (isLand) landCount += n;
-    else permanentManaValue += manaValueOf(registry, printedCardName(object)) * n;
+    else if (!fleeting) permanentManaValue += manaValueOf(registry, printedCardName(object)) * n;
     if (!isLand && !isCreature) {
       if (object.isToken) {
         const name = printedCardName(object);
         const pile = tokenPiles.get(name) ?? { count: 0, resource: isResourceToken(registry, name) };
         tokenPiles.set(name, { ...pile, count: pile.count + n });
-      } else {
+      } else if (!fleeting) {
         otherPermanents += n;
       }
     }
     const name = rulesTextName(object);
     if (registry.has(name)) graveyardPlaysInForce(state, registry, object, registry.get(name), graveyardPlays);
+    // Maze of Ith and its kind, there for the next attack on us.
+    if (registry.has(name) && answersAttackers(registry.get(name))) {
+      const tapped = readAs?.objects[id]?.tapped ?? object.tapped;
+      if (!tapped || untapsInTime) shieldsHeld += n;
+    }
     if (!isLand && registry.has(name)) {
       const def = registry.get(name);
       if (!isCreature && guardsAnother(state, registry, id, def, player)) guards += n;
@@ -1835,7 +1931,7 @@ function playerFeaturesUncached(
       drawEngines += drawRate(def, opponents) * n;
       tokenEngines += tokenRate(registry, def, opponents) * n;
       valueEngines += valueRate(registry, def, opponents) * n;
-      if (!isCreature && !object.isToken) {
+      if (!isCreature && !object.isToken && !fleeting) {
         const worth = standingWorth(registry, def, opponents) * n;
         if (multipliesEveryonesDamage(def)) symmetricWorth += worth;
         else standingEffects += worth;
@@ -2122,6 +2218,20 @@ function playerFeaturesUncached(
     untappedMana,
     otherPermanents,
     guards,
+    // Only while some opponent has a creature to attack with.
+    shields:
+      shieldsHeld > 0 &&
+      state.zones.shared.battlefield.some((other) => {
+        const o = state.objects[other];
+        return (
+          o !== undefined &&
+          o.controller !== player &&
+          state.players[o.controller]?.hasLost === false &&
+          computeCharacteristics(state, registry, other).types.includes("creature")
+        );
+      })
+        ? shieldsHeld
+        : 0,
     permanentManaValue,
     loyalty,
     counters,

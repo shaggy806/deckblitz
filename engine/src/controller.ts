@@ -7121,11 +7121,42 @@ const SACRIFICE_STEPS: ReadonlySet<string> = new Set(["declare-attackers", "decl
  * way: a pump of power and toughness waits through them (`wastedNow`). */
 const BEFORE_BLOCKS: ReadonlySet<string> = new Set(["precombat-main", "begin-combat", "declare-attackers"]);
 
+/** Keywords that change nothing until combat damage is dealt: given once
+ * blocks are declared they do all they could have done before
+ * (`damageKeywordRider`). Not evasion (flying, menace), which has to be
+ * there when blockers are chosen. */
+const AFTER_BLOCKS_KEYWORDS: ReadonlySet<string> = new Set([
+  "trample",
+  "lifelink",
+  "deathtouch",
+  "first-strike",
+  "double-strike",
+  "indestructible",
+]);
+
+/** Whether `effect` is such a keyword until end of turn, alone or under a
+ * condition ("if it's an artifact creature, it gains trample"): what rides a
+ * pump without changing when the pump is best made. */
+function damageKeywordRider(effect: EffectSpec): boolean {
+  if (effect.kind === "conditional") {
+    return damageKeywordRider(effect.then) && (effect.else === undefined || damageKeywordRider(effect.else));
+  }
+  return effect.kind === "grant-keyword" && effect.duration === "end-of-turn" && AFTER_BLOCKS_KEYWORDS.has(effect.keyword);
+}
+
 /** Whether `effect` only raises power and toughness until end of turn — "+2/+2",
- * "Dragons you control get +1/+0" — by fixed amounts, neither lowered. */
+ * "Dragons you control get +1/+0" — by fixed amounts, neither lowered. A
+ * keyword that matters only at damage may ride it (`damageKeywordRider`):
+ * Built to Smash's +3/+3 and trample went out as attackers were declared,
+ * before any block (a friend's report, 2026-11-27). */
 function onlyRaisesPowerToughness(effect: EffectSpec | null | undefined): boolean {
   if (effect === null || effect === undefined) return false;
-  if (effect.kind === "sequence") return effect.effects.length > 0 && effect.effects.every(onlyRaisesPowerToughness);
+  if (effect.kind === "sequence") {
+    return (
+      effect.effects.some(onlyRaisesPowerToughness) &&
+      effect.effects.every((part) => onlyRaisesPowerToughness(part) || damageKeywordRider(part))
+    );
+  }
   if (effect.kind !== "modify-pt" && effect.kind !== "modify-pt-all") return false;
   if (effect.duration !== "end-of-turn") return false;
   return typeof effect.power === "number" && typeof effect.toughness === "number" && effect.power >= 0 && effect.toughness >= 0 &&

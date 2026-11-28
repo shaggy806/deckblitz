@@ -33282,6 +33282,11 @@ export class Game {
       // stamps on what it makes.
       ...(effectiveSupertypes(this.state, this.registry, object).includes("snow") ? { snow: true } : {}),
       ...(this.holdsFreeSpell(id) ? { reserved: true } : {}),
+      // Its tap has another use: a `{T}` ability that isn't a mana ability
+      // (Homeward Path, Rogue's Passage). Read off its rules text.
+      ...(this.registry.get(rulesTextName(object)).activated.some((a) => a.cost.tap === true && !isManaAbility(a))
+        ? { otherUse: true }
+        : {}),
     };
   }
 

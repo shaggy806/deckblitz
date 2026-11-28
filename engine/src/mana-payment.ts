@@ -207,6 +207,12 @@ export interface ManaSource {
    * other source, the last resorts included, and still taken if nothing
    * else pays. Absent reads as not. */
   readonly reserved?: boolean;
+  /** Its tap has another use — a `{T}` ability that isn't a mana ability
+   * (Homeward Path's "each player gains control of all creatures they own",
+   * Rogue's Passage): tapped for mana, that use is gone for the round, so
+   * generic mana reaches for it after a source the rest of the hand needs no
+   * more than it. Absent reads as not. */
+  readonly otherUse?: boolean;
 }
 
 /** One entry of a mana-payment plan: activate `source`, adding the concrete
@@ -2019,8 +2025,12 @@ function planManaPaymentOrdered(
   // creature (a bug report, 2026-10-15: Mana Confluence paid 1 life beside an
   // untapped Llanowar Elves; a painland's free {C} costs none), a creature
   // after the rest (its tap costs an attack or a block),
-  // and among the rest the source the hand needs least, then the one making
-  // fewest colours:
+  // and among the rest the source the hand needs least, then one whose tap
+  // has no other use (`ManaSource.otherUse`: Homeward Path made only {C}, so
+  // it paid before every Mountain and its ability was never there on another
+  // player's turn — kept live games, 2026-11-27: tapped at the end of 25 of
+  // its controller's 31 turns, six times with another land untapped), then
+  // the one making fewest colours:
   // with no other card to weigh, Sol Ring's colourless pays an Arcane Signet
   // before two coloured lands do (a bug report, 2026-10-06: the lands went
   // first, in battlefield order, as `Game.manaSources` lists them).
@@ -2032,6 +2042,7 @@ function planManaPaymentOrdered(
     readonly avoided: number;
     readonly toll: number;
     readonly creature: number;
+    readonly otherUse: number;
     readonly colours: number;
   }
   // Read when the first unit of generic asks: a cost with none never does.
@@ -2047,6 +2058,7 @@ function planManaPaymentOrdered(
         avoided: src.id === avoid ? 1 : 0,
         toll,
         creature: src.isCreature === true ? 1 : 0,
+        otherUse: src.otherUse === true ? 1 : 0,
         colours: colourCount(src),
       };
     });
@@ -2076,6 +2088,7 @@ function planManaPaymentOrdered(
               a.toll - b.toll ||
               a.creature - b.creature ||
               a.keep - b.keep ||
+              a.otherUse - b.otherUse ||
               a.colours - b.colours ||
               a.i - b.i,
           )

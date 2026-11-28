@@ -181,6 +181,54 @@ describe("a pump of power and toughness alone", () => {
     }
   });
 
+  /** Alice's Lathliss attacking Bob, `card` in her hand with two lands to
+   * cast it, paused where she holds priority in `step`. */
+  function attackingWith(card: string, step: "declare-attackers" | "declare-blockers"): Game {
+    const game = Game.create({
+      seed: 1,
+      shuffle: false,
+      registry,
+      startingPlayer: A,
+      rules: { skipFirstDraw: false, maxHandSize: 99, maxLandsPerTurn: 0 },
+      decks: [
+        { player: A, cards: Array(40).fill("Mountain") },
+        { player: B, cards: Array(40).fill("Island") },
+      ],
+    });
+    game.advanceUntil((s) => s.turn.number === 1 && s.turn.step === "precombat-main" && s.priority.holder === A);
+    const lathliss = game.debugSpawn("Lathliss, Dragon Queen", A, "battlefield", { summoningSick: false });
+    game.debugSpawn("Mountain", A, "battlefield");
+    game.debugSpawn("Plains", A, "battlefield");
+    game.debugSpawn(card, A, "hand");
+    game.advanceUntil((s) => s.awaiting?.kind === "attackers");
+    game.dispatch({ type: "declare-attackers", player: A, attackers: [{ attacker: lathliss, defender: B }] });
+    game.advanceUntil((s) => s.turn.step === step && s.priority.holder === A && s.awaiting === null);
+    return game;
+  }
+  const castOf = (game: Game, card: string) =>
+    game.legalActions(A).find((l) => l.kind === "cast-spell" && l.cardName === card);
+
+  // A friend's report, 2026-11-27 (kept game Y8G7T-1): Built to Smash's
+  // "+3/+3, and trample if it's an artifact creature" went out as attackers
+  // were declared. Trample changes nothing until damage, so the pump it
+  // rides still waits for blocks; flying has to be there before them.
+  it("waits for blocks with a keyword that matters only at damage riding it", () => {
+    expect(onlyUntilEndOfTurn(registry.get("Built to Smash").effect)).toBe(true);
+    const gate = new Gate(A, registry);
+    const before = attackingWith("Built to Smash", "declare-attackers");
+    expect(castOf(before, "Built to Smash")).toBeDefined();
+    expect(gate.wasted(before.state, castOf(before, "Built to Smash")!)).toBe(true);
+    const after = attackingWith("Built to Smash", "declare-blockers");
+    expect(castOf(after, "Built to Smash")).toBeDefined();
+    expect(gate.wasted(after.state, castOf(after, "Built to Smash")!)).toBe(false);
+  });
+
+  it("doesn't wait with evasion riding it", () => {
+    const before = attackingWith("Mighty Leap", "declare-attackers");
+    expect(castOf(before, "Mighty Leap")).toBeDefined();
+    expect(new Gate(A, registry).wasted(before.state, castOf(before, "Mighty Leap")!)).toBe(false);
+  });
+
   it("is still made in answer to a spell", () => {
     const game = at("precombat-main");
     const bolt = game.debugSpawn("Lightning Bolt", A, "hand");

@@ -6,10 +6,11 @@ scenario passes and moves to the gate; then mark it `fixed` with the commit, or 
 
 ## 2026-11-27 — A friend's notes on the Slicer bot: ten habits, checked against 53 kept games
 
-Status: 1, 2 and 3 fixed 2026-11-28 (six gate scenarios, each failing without its fix; the two
-captures for them read right); 4 to 9 open, each with a local capture
-(`captures/2026-11-2*-<room>-t<turn>-alice.json`) that reads wrong. One note was already fixed
-(Sword of the Chosen), one isn't a misplay (Fountainport).
+Status: all nine fixed 2026-11-28, each with gate scenarios or tests (thirteen scenarios and five
+tests; each "Fixed" below says what). Eight of the local captures
+(`captures/2026-11-2*-<room>-t<turn>-alice.json`) read right; two still read wrong for reasons
+their items give (8's Fish, 9's full hand), and `BACKLOG.md` "Bots" has what each fix leaves.
+One note was already fixed (Sword of the Chosen), one isn't a misplay (Fountainport).
 
 The same friend's notes, taken over a day of watching bots play their Slicer deck. Checked on the
 53 kept games where every seat was a bot and alice's had the deck (`games/2026-11-27`,
@@ -87,10 +88,14 @@ its loyalty counters at 1 each and its mana value as a permanent, and `standingW
 Kiora's trigger and a 0 ability that can be used every turn are worth nothing. Losing Jeska moved
 three features (`otherPermanents` −1, `permanentManaValue` −3, `loyalty` −1), and the Birds and 2
 life paid more. Capture `2026-11-27-BKSBJ-t9-alice`. Narset's −2 from 5 is ordinary play and not
-recorded; taking her to 0 would be this. **Likely fix:** give a planeswalker the standing worth
-of its static and triggered abilities, and of a loyalty ability costing 0 or less that it could
-use each turn, so the counters that keep it alive are worth what it does. Might change: how often
-bots attack planeswalkers that now read as worth more.
+recorded; taking her to 0 would be this. **Fixed 2026-11-28**, as the friend's rule and no wider:
+the search doesn't take the last loyalty counter off a planeswalker that has no ability adding
+loyalty and does something by staying (`features.ts`'s `staysToWork`: a static of its own, a
+trigger that can fire again, or a loyalty ability that costs nothing; 34 of the pool's 329
+planeswalkers), unless an opponent it is aimed at dies (`spendsLastLoyalty`). Scenarios: "keeps
+Jeska, Thrice Reborn's last loyalty counter: no −1 at a Birds of Paradise" and "spends Jeska,
+Thrice Reborn's last loyalty counter on a player it kills". Left: such a planeswalker is still
+worth only its counters on the board, so nothing makes it cast sooner or guarded better.
 
 **5. Homeward Path is always tapped for mana.** Its second ability was never activated. With the
 Path out, it was tapped at the end of alice's turn 25 times of 31, six of them with another mana
@@ -103,9 +108,13 @@ position, activating it scores −24.8 against −36.3 for passing. Not recorded
 tap is the payer's choice inside a cast, not a decision the bot is asked. The friend's other line
 for it, handing Slicer over in a two-player game and taking him back in the upkeep so he never
 converts, is not looked for at all: the "hand it over" question is scored with v1 playing the
-rest of the turn. **Likely fix:** mark a land whose other `{T}` ability isn't a mana ability as
-`ManaSource.reserved` (tapped last, as a hideaway land is) where a permanent of ours is on loan
-or about to be. The two-player line needs the decision's rollout to try the Path.
+rest of the turn. **Fixed 2026-11-28, the payer's half:** a source whose tap has another use
+(`ManaSource.otherUse`: a `{T}` ability that isn't a mana ability) pays generic mana after one
+the rest of the hand needs no more than it (`mana-payment.ts`'s ranking, between the hand's need
+and "fewest colours"). So a Mountain pays before Homeward Path unless the hand wants red. For
+every player's auto-pay, not the bots' alone. Tests in `auto-payer-plans.test.ts`. Left: the 19
+turns of 25 where all the mana was spent (nothing holds mana back for a land's ability), and
+the two-player line.
 
 **6. Smoke Bomb cast in the main phase.** Cast twice, both times in her own first main phase.
 Z7A95-1 turn 2: on alice's first turn off Mishra's Workshop with no creature anywhere, so it was
@@ -115,10 +124,13 @@ with Maze of Ith untapped: every creature had the Bomb's shroud, so Maze had no 
 earns `standingEffects` 4.5 beside a permanent's 1 and its mana value, against a card in hand, and
 the rollout ends before the upkeep that sacrifices it; `goneAtEndStep` reads what the end step
 takes, not an upkeep. Nothing says a flash permanent gains by waiting. Capture
-`2026-11-27-Z7A95-t2-alice`. **Likely fix:** read "at the beginning of your upkeep, sacrifice
-this" as gone by our next turn (no standing worth), and hold a flash card with nothing to answer
-for the end step of the turn before ours, which is `BACKLOG.md`'s "Waiting for the later window"
-(b), not built.
+`2026-11-27-Z7A95-t2-alice`. **Fixed 2026-11-28:** a noncreature permanent with flash that its
+controller's next upkeep sacrifices (`gone-at-end-step.ts`'s `goneAtOwnUpkeep`) counts for
+nothing lasting on the board, so it is cast only where a rollout shows what it saves. Scenarios:
+"holds Smoke Bomb with no creature to hide: its next upkeep sacrifices it" and "casts Smoke Bomb
+in answer to a Murder aimed at Slicer". One without flash (Goblin Boom Keg, the pool's only
+other) counts as before: the main phase is its only time. Left: casting it at the end of the
+turn before ours for the unblockable attack, `BACKLOG.md`'s "Waiting for the later window" (b).
 
 **7. Pump spells before blocks.** Three cards, three answers. *Sword of the Chosen*, activated
 in alice's first main phase four times in the games: fixed by `3ebb7eeb3`, today's bot passes
@@ -128,8 +140,13 @@ toughness and nothing else (`onlyRaisesPowerToughness`), and this one also gives
 creature trample. Capture `2026-11-27-Y8G7T-t8-alice`. *Monstrous Rage* in the first main phase,
 seven casts of seven: still cast today (NQ3ME-1 turn 7, −1.4 against −6.9). Its Monster Role
 lasts, so it isn't `onlyUntilEndOfTurn` and is never held; not captured, since a lasting Aura
-cast before combat isn't plainly wrong. **Likely fix:** let the before-blocks hold cover a pump
-with a keyword rider. As a save for a Slicer another player holds, all three wait on 2 above.
+cast before combat isn't plainly wrong. **Fixed 2026-11-28, Built to Smash:** a keyword that
+changes nothing until damage is dealt (trample, lifelink, deathtouch, first and double strike,
+indestructible) may ride a pump that waits for blocks (`controller.ts`'s `damageKeywordRider`),
+and a conditional is as temporary as its branches (`onlyUntilEndOfTurn`). Evasion doesn't ride:
+Mighty Leap's flying has to be there when blockers are chosen. Played on from the kept
+position, the pump is cast after blocks for the same 12 damage. Tests in
+`bot-pump-timing.test.ts`. Left: Monstrous Rage.
 
 **8. Maze of Ith on its own attackers.** Five times in the later 31 games, on alice's own turn:
 after damage to untap Slicer or Rug of Smothering, and once (E7GY2-1 turn 33) on a Fish it had
@@ -137,9 +154,18 @@ just attacked with, undoing the attack. Today two of the four re-asked still hap
 121.9 against 119.8; the Rug by 0.5). **Why:** the untapped creature or the saved token is on the
 board the rollout ends on, and nothing prices Maze of Ith untapped through three opponents'
 turns. For Slicer the untap buys nothing either way: the hand-over untaps him, and the Vehicle
-can't block. Capture `2026-11-27-E7GY2-t33-alice`. **Likely fix:** a worth for a permanent whose
-tap ability answers an attacker, while it is untapped on other players' turns (the way `guards`
-prices Welding Jar), and no attack with a creature that only Maze keeps alive.
+can't block. Capture `2026-11-27-E7GY2-t33-alice`. **Fixed 2026-11-28, the untap after
+damage:** a new evaluation term, `shields` (weight 2.5): a permanent that taps to answer an
+attacking creature (`features.ts`'s `answersAttackers`), there for the next attack on us —
+untapped, or untapping before anyone attacks again (the player before us past their combat) —
+while an opponent has a creature. So Maze costs something to use on any turn but the last
+opponent's, and goes at a hit worth more. Scenario: "keeps Maze of Ith for the opponents'
+attacks: no untapping its own attacker after damage" (fails at weight 0). On opponents' turns
+it now passes on an attacker it stopped live with two more opponents to come (MPDXX-1 turn 15,
+2.4 points worse than passing), and still stops a Hunting Velociraptor (YK9SU-1 turn 60).
+Left: the Fish. There the swing back prefers the untapped Fish as a blocker, and nobody answers
+an attack in a swing back, so an untapped Maze saves nothing in it; it flips only at weight 5,
+which would hold Maze from most attacks.
 
 **9. Untimely Malfunction at a mana rock.** All three modes were used in the games: five casts,
 at Sphere of Resistance, Skullclamp and an Arcane Signet, one redirecting a Boros Charm and one
@@ -148,8 +174,17 @@ attack; today the same, 67.3 against 63.4), with the deck's answer to a spell ai
 spent. **Why:** the hold-for-value floors cover a plain creature (`removesTooLittle`), and
 nothing asks more of artifact removal than that the artifact be worth something. A modal spell's
 other modes are tried at their first target alone: the can't-block mode was scored once, at an
-opposing creature and our own Slicer. Capture `2026-11-27-39D25-t17-alice`. **Likely fix:** a
-floor for removal at a mana rock while opponents hold cards, as for a Grizzly Bears.
+opposing creature and our own Slicer. Capture `2026-11-27-39D25-t17-alice`. **Fixed
+2026-11-28, another way:** a spell that changes a spell's target is an answer as a counterspell
+is (`features.ts`'s `isAnswer`: 22 more cards, Deflecting Swat and Bolt Bend among them), so
+held with the mana to cast it, it is worth the `answers` reserve, and its removal mode is for
+something worth more. Asked again, the bot now holds it from Skullclamp and Sphere of
+Resistance too, and still redirects the Boros Charm. Scenarios: "holds Untimely Malfunction
+from an Arcane Signet: its redirect is an answer" and "spends Untimely Malfunction on a Bolas's
+Citadel all the same". A floor on mana rocks was not the way: in the first six rounds killing
+acceleration is what the evaluation wants (`earlyMana`). The capture still reads wrong: alice
+held eight cards there, one had to go either way, and no feature of hers but untapped mana
+differed between casting and passing.
 
 **10. Fountainport Fish, not a misplay as played.** Six activations in the later 31 games, five
 of them Fish and five in alice's first main phase. In the two asked again her hand was empty or

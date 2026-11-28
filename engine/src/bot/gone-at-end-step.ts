@@ -56,6 +56,43 @@ function printedSacrifice(registry: CardRegistry, name: string): Printed {
   return found;
 }
 
+const upkeepSacrificeByName = new WeakMap<CardRegistry, Map<string, boolean>>();
+
+/**
+ * Whether the card named `name` sacrifices itself at the beginning of its
+ * controller's upkeep, with no "if" and no choice about it (Smoke Bomb's
+ * "At the beginning of your upkeep, sacrifice this artifact"): on the
+ * battlefield it is there for the round and gone before its controller's
+ * next main phase, so the board a turn's rollout ends on shows a permanent
+ * that isn't one. Smoke Bomb's "all creatures have shroud" scored as a
+ * standing effect, and its bot cast it on its first turn with no creature
+ * anywhere (a friend's report, kept game Z7A95-1, 2026-11-27).
+ */
+export function goneAtOwnUpkeep(registry: CardRegistry, name: string): boolean {
+  let known = upkeepSacrificeByName.get(registry);
+  if (known === undefined) {
+    known = new Map();
+    upkeepSacrificeByName.set(registry, known);
+  }
+  const cached = known.get(name);
+  if (cached !== undefined) return cached;
+  const found =
+    registry.has(name) &&
+    registry.get(name).triggered.some((ability) => {
+      const trigger = ability.trigger as { readonly on?: unknown; readonly step?: unknown; readonly who?: unknown };
+      return (
+        trigger.on === "step-begins" &&
+        trigger.step === "upkeep" &&
+        trigger.who === "you" &&
+        ability.condition === undefined &&
+        ability.whileCondition === undefined &&
+        (ability.effect as { readonly kind?: unknown } | null)?.kind === "sacrifice-source"
+      );
+    });
+  known.set(name, found);
+  return found;
+}
+
 /** The effects of a delayed ability that take the permanent they name off
  * the battlefield. */
 const REMOVES = new Set(["sacrifice-target", "exile", "destroy", "return-to-hand"]);

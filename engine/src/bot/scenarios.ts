@@ -2922,6 +2922,147 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  ...(
+    [
+      ["holds Untimely Malfunction from an Arcane Signet: its redirect is an answer", "Arcane Signet", false],
+      ["spends Untimely Malfunction on a Bolas's Citadel all the same", "Bolas's Citadel", true],
+    ] as const
+  ).map(([name, artifact, cast]) =>
+    asked({
+      name,
+      rule: "A spell that can change a spell's target is held as a counterspell is: its removal mode is for something worth more than the answer.",
+      position(registry) {
+        // From kept live games (2026-11-27, a friend's report): Untimely
+        // Malfunction ("destroy target artifact; or change the target of
+        // target spell or ability with a single target; or one or two target
+        // creatures can't block") went at mana rocks, and the deck plays it
+        // to send a removal spell away from Slicer. `isAnswer` read only a
+        // counter, so nothing was kept back for the second mode.
+        const game = table(registry, [A, B, C, D], A);
+        lands(game, "Mountain", A, 2);
+        const malfunction = game.debugSpawn("Untimely Malfunction", A, "hand");
+        onBoard(game, artifact, D);
+        holding(game, [B, C, D], 5);
+        return {
+          game,
+          player: A,
+          judge: (action) => ({
+            passed: (action.type === "cast-spell" && action.card === malfunction) === cast,
+            detail: `chose ${describeAction(action)}`,
+          }),
+        };
+      },
+    }),
+  ),
+  asked({
+    name: "keeps Maze of Ith for the opponents' attacks: no untapping its own attacker after damage",
+    rule: "A permanent that taps to answer an attacker is worth more untapped through the opponents' turns than a creature of ours untapped.",
+    position(registry) {
+      // From kept live games (2026-11-27, a friend's report; Y2A8Z-1 turns
+      // 21 and 25, MPDXX-1 turn 29): after its attacker had dealt its
+      // damage, the bot tapped Maze of Ith to untap it. The untapped
+      // creature was on the board the rollout ended on, and nothing counted
+      // Maze gone for the round (`PlayerFeatures.shields`).
+      const game = table(registry, [A, B, C], A);
+      const giant = onBoard(game, "Hill Giant", A);
+      const maze = onBoard(game, "Maze of Ith", A);
+      // An attacker the untapped Giant would deter: what the untap is for.
+      onBoard(game, "Grizzly Bears", C);
+      game.advanceUntil((s) => s.awaiting?.kind === "attackers" && s.awaiting.player === A);
+      game.dispatch({ type: "declare-attackers", player: A, attackers: [{ attacker: giant, defender: B }] });
+      game.advanceUntil((s) => s.turn.step === "combat-damage" && s.priority.holder === A && s.awaiting === null);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "activate-ability" && action.source === maze),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "holds Smoke Bomb with no creature to hide: its next upkeep sacrifices it",
+    rule: "A flash permanent sacrificed at our next upkeep is worth nothing on the board that casting it later wouldn't be.",
+    position(registry) {
+      // From a kept live game (2026-11-27, Z7A95-1 turn 2; a friend's
+      // report): Smoke Bomb ("Flash. All creatures have shroud. At the
+      // beginning of your upkeep, sacrifice this. When you do, target
+      // creature you control can't be blocked this turn") was cast on its
+      // controller's first turn with no creature anywhere. Its static scored
+      // as a standing effect, and the rollout ends before the upkeep that
+      // takes it (`gone-at-end-step.ts`'s `goneAtOwnUpkeep`).
+      const game = table(registry, [A, B, C, D], A);
+      game.state.turn.number = 1;
+      lands(game, "Mountain", A, 3);
+      const bomb = game.debugSpawn("Smoke Bomb", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: !(action.type === "cast-spell" && action.card === bomb),
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "casts Smoke Bomb in answer to a Murder aimed at Slicer",
+    rule: "Shroud from a flash permanent is an answer to a spell aimed at our creature: that is what it is held for.",
+    position(registry) {
+      // What holding Smoke Bomb mustn't cost: with a Murder on the stack at
+      // our commander, casting it leaves the Murder no legal target.
+      const game = table(registry, [A, B, C], C);
+      lands(game, "Mountain", A, 3);
+      const slicer = onBoard(game, "Slicer, Hired Muscle", A);
+      game.state.objects[slicer].isCommander = true;
+      const bomb = game.debugSpawn("Smoke Bomb", A, "hand");
+      lands(game, "Swamp", C, 3);
+      castAndPassTo(game, C, game.debugSpawn("Murder", C, "hand"), A, [{ kind: "object", object: slicer }]);
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === bomb,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  ...(
+    [
+      ["keeps Jeska, Thrice Reborn's last loyalty counter: no −1 at a Birds of Paradise", 40, false],
+      ["spends Jeska, Thrice Reborn's last loyalty counter on a player it kills", 1, true],
+    ] as const
+  ).map(([name, bobsLife, spend]) =>
+    asked({
+      name,
+      rule: "A planeswalker with no ability that adds loyalty, and something it does by staying, keeps its last counter short of a kill.",
+      position(registry) {
+        // From a kept live game (2026-11-27, BKSBJ-1 turn 9; a friend's
+        // report): Jeska came down on 1 loyalty and went at once on −1 for
+        // a Birds of Paradise and 1 at two players. The board counts her as
+        // her counters and her mana value, and nothing for her 0, which
+        // triples Slicer's combat damage every turn he is out
+        // (`spendsLastLoyalty`, `features.ts`'s `staysToWork`).
+        const game = table(registry, [A, B, C, D], A);
+        game.state.turn.number = 9;
+        lands(game, "Mountain", A, 3);
+        const jeska = onBoard(game, "Jeska, Thrice Reborn", A);
+        game.state.objects[jeska].counters = { loyalty: 1 };
+        onBoard(game, "Birds of Paradise", B);
+        game.state.players[B].life = bobsLife;
+        return {
+          game,
+          player: A,
+          judge(action) {
+            const spent = action.type === "activate-ability" && action.source === jeska && (action.xValue ?? 0) >= 1;
+            return { passed: spent === spend, detail: `chose ${describeAction(action)}` };
+          },
+        };
+      },
+    }),
+  ),
   {
     name: "sends Slicer's Vehicle side at an open player, not at the one with a blocker",
     rule: "Slicer, High-Speed Antagonist converts only by dealing combat damage to a player, and its front face attacks on every other player's turn: an open player comes before a 2/2 that would die blocking.",

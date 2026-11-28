@@ -51,3 +51,34 @@ describe("a payable cost is always found", () => {
   });
 });
 
+
+describe("which of two equal sources pays", () => {
+  // Kept live games (2026-11-27): Homeward Path beside Mountains, each one
+  // "colour" wide, went first by its place on the battlefield, so its other
+  // ability was never there on an opponent's turn.
+  it("leaves a land whose tap has another use for after an otherwise equal one", () => {
+    const { game } = table();
+    const path = spawn(game, "Homeward Path");
+    const mountain = spawn(game, "Mountain");
+    cast(game, toHand(game, "Sol Ring"));
+    expect(game.state.objects[mountain].tapped).toBe(true);
+    expect(game.state.objects[path].tapped).toBe(false);
+  });
+
+  it("taps it first all the same when the hand needs the other's colour", () => {
+    const { game } = table();
+    const path = spawn(game, "Homeward Path");
+    const mountain = spawn(game, "Mountain");
+    toHand(game, "Lightning Bolt");
+    cast(game, toHand(game, "Sol Ring"));
+    expect(game.state.objects[path].tapped).toBe(true);
+    expect(game.state.objects[mountain].tapped).toBe(false);
+  });
+
+  it("still taps it when nothing else pays", () => {
+    const { game } = table();
+    const path = spawn(game, "Homeward Path");
+    cast(game, toHand(game, "Sol Ring"));
+    expect(game.state.objects[path].tapped).toBe(true);
+  });
+});

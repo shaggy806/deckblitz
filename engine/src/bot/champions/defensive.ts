@@ -33,6 +33,7 @@ export const DEFENSIVE: Champion = {
     untappedMana: 0.25,
     otherPermanents: 0.75,
     guards: 0,
+    shields: 0,
     permanentManaValue: 0.5,
     loyalty: 1.25,
     counters: 0.5,
