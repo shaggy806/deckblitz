@@ -20,6 +20,7 @@
     "cost:x-fixed-by-source-counters",
     "decision:remember-chosen-color-on-resolution",
     "effect:pay-any-amount-of-mana",
+    "condition:trigger-object-blockers-filter",
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",

@@ -4132,7 +4132,12 @@ creature it's attached to, or, `of: "trigger-object"` in an effect's filter,
 with the object the trigger names (Trailblazer's Torch's and Ib Halfheart's
 "each creature blocking it", Labyrinth Raptor's "a creature of their choice
 that's blocking it"; a target slot has no trigger object to read and matches
-nothing), or, `of: <slot>` in an effect's filter, with what that target slot
+nothing; an intervening-if reads it too, through an `amounts` condition over
+`{ countOf }`, bound as it triggers and as it resolves — Wall of Caltrops'
+"if at least one other Wall creature is blocking that creature and no non-Wall
+creatures are blocking that creature" is `all` of `countOf { subtype: "Wall",
+isSource: false, blockingRelation }` `gte 1` and `countOf { not: { subtype:
+"Wall" }, blockingRelation }` `eq 0`), or, `of: <slot>` in an effect's filter, with what that target slot
 of the resolving spell holds, found as it applies (608.2h) — Sewers of
 Estark's "prevent all combat damage that would be dealt this combat by it and
 each creature it's blocking" is a `damage-rule` on the target and a
