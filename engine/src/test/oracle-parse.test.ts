@@ -21333,6 +21333,20 @@ describe("a countered spell's card put onto the battlefield", () => {
     } as never) as unknown as { triggered: { trigger: unknown }[] };
     expect(face.triggered[0].trigger).toEqual({ on: "cast-spell", who: "you", filter: { castUsing: "teamwork" } });
   });
+
+  it("reads Worldheart Phoenix's graveyard cast: its own alternative cost, and the counters it enters with", () => {
+    const face = parseFace({
+      name: "Worldheart Phoenix",
+      type_line: "Creature — Phoenix",
+      oracle_text:
+        "Flying\nYou may cast this card from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters with two +1/+1 counters on it.",
+    } as never) as unknown as Record<string, unknown>;
+    expect(face.mayPlaySelf).toEqual({
+      from: ["graveyard"],
+      byPaying: "{W}{U}{B}{R}{G}",
+      entersWith: { kind: "+1/+1", amount: 2 },
+    });
+  });
 });
 
 describe("read ahead given to Sagas", () => {

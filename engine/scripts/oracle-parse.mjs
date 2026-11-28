@@ -23291,6 +23291,14 @@ function selfGraveyardCast(line) {
   // ability" (Detective's Phoenix): only for that keyword's cost.
   const using = /^using its (mutate|bestow) ability$/.exec(rest);
   if (using !== null) return { ...out, using: using[1] };
+  // "… rather than paying its mana cost. If you do, it enters with two +1/+1
+  // counters on it." (Worldheart Phoenix): a rider of this permission alone.
+  const riding = /^(by paying .+ rather than paying its mana cost)\. If you do, (?:it|~|this creature) enters with (an?|two|three|four|five) (\S+) counters? on it$/.exec(rest);
+  if (riding !== null) {
+    const base = selfGraveyardCast(`You may cast ~ from your graveyard${m[1] ?? ""} ${riding[1]}.`);
+    const amount = { a: 1, an: 1, two: 2, three: 3, four: 4, five: 5 }[riding[2]];
+    return base === null ? null : { ...base, entersWith: { kind: riding[3], amount } };
+  }
   let costs;
   let alt;
   if ((alt = /^by paying ((?:\{[^}]+\})+)(?: and (.+))? rather than paying its mana cost$/.exec(rest))) {

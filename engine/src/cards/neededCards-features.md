@@ -9396,3 +9396,5 @@ effect:add-land-types-all. Proving cards: Start Your Engines, The Thanos-Copter,
 **"Its controller may …" after a counter (2026-11-28).** `condition:countered-this-way`: no engine code — `counter`'s `ifCountered` with an `as-player` `{ controllerOf: 0 }` (the countered spell's last known controller) around a hand look-and-choose to the battlefield; the scaffolder reads the rider. Fold into Aether. `test/countered-this-way.test.ts`.
 
 **A spell cast using teamwork (2026-11-28).** `filter:cast-using-teamwork`: `CardFilter.castUsing`, a kicker keyword whose cost the spell on the stack paid (rule 702.194b; `kicked` is plain kicker alone). Virtual Assistant. `test/cast-using-teamwork.test.ts`.
+
+**A graveyard alternative cost that enters with counters (2026-11-28).** `condition:cast-via-own-graveyard-alt-cost`: no engine code — `mayPlaySelf` `byPaying` with the permission's own `entersWith`, which another graveyard permission's cast doesn't carry; the scaffolder reads the "If you do, it enters with …" rider. Worldheart Phoenix. `test/graveyard-alt-cost-enters-with.test.ts`.
