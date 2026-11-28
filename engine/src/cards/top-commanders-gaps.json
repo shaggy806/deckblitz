@@ -6,6 +6,7 @@
     "filter:cast-using-teamwork",
     "condition:cast-via-own-graveyard-alt-cost",
     "effect:chosen-hand-card-to-library-nth-from-top",
+    "effect:remove-counters-placed-by-source",
     "effect:damage-players-source-damaged-this-game",
     "trigger:blocks-two-or-more",
     "trigger:sacrificed-for-emerge",

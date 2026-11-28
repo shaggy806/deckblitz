@@ -340,6 +340,14 @@ export interface Journal {
    * dealt damage to this game" — The Fallen). Kept past the round the
    * entries last. */
   damagedPlayersBy?: Record<string, { any: PlayerId[]; combat?: PlayerId[]; permanents?: string[] }>;
+  /** The whole game's record of the permanents each permanent's abilities
+   * put counters on and removed counters from as they resolved, keyed
+   * `"<source>@<stint>"` (a fired delayed ability by the stint its creator
+   * meant, `EntrySource.was`), then by counter kind, each permanent
+   * `"<object>@<stint>"`: Cyclopean Tomb's "a land that a mire counter was
+   * put onto with this artifact but that a mire counter has not been
+   * removed from with this artifact". Kept past the round the entries last. */
+  countersPutBy?: Record<string, Record<string, { put: string[]; removed?: string[] }>>;
   /** The whole game's count of the cards each player cycled, by name, as
    * each was named as it was cycled ("if you've cycled a card named Yidaro,
    * Wandering Monster four or more times this game"). Kept past the round
@@ -399,6 +407,42 @@ export function noteDamagedPermanent(state: GameState, object: ObjectId, stint: 
  * game to the permanent `hit` in its stint `hitStint`. */
 export function damagedPermanentBy(state: GameState, object: ObjectId, stint: number, hit: ObjectId, hitStint: number): boolean {
   return state.journal?.damagedPlayersBy?.[`${object}@${stint}`]?.permanents?.includes(`${hit}@${hitStint}`) === true;
+}
+
+/** Note that an ability of `source` in stint `stint` put (or, `removed`,
+ * removed) `counter` counters on the permanent `on` in its stint `onStint`
+ * (`Journal.countersPutBy`). */
+export function noteCountersBy(
+  state: GameState,
+  source: ObjectId,
+  stint: number,
+  counter: string,
+  on: ObjectId,
+  onStint: number,
+  removed: boolean,
+): void {
+  const journal = (state.journal ??= emptyJournal());
+  const kinds = ((journal.countersPutBy ??= {})[`${source}@${stint}`] ??= {});
+  const record = (kinds[counter] ??= { put: [] });
+  const list = removed ? (record.removed ??= []) : record.put;
+  const key = `${on}@${onStint}`;
+  if (!list.includes(key)) list.push(key);
+}
+
+/** Whether an ability of `source` in stint `stint` has put a `counter` counter
+ * on (or, `removed`, removed one from) the permanent `on` in its stint
+ * `onStint` this game. */
+export function countersByOn(
+  state: GameState,
+  source: ObjectId,
+  stint: number,
+  counter: string,
+  on: ObjectId,
+  onStint: number,
+  removed: boolean,
+): boolean {
+  const record = state.journal?.countersPutBy?.[`${source}@${stint}`]?.[counter];
+  return (removed ? record?.removed : record?.put)?.includes(`${on}@${onStint}`) === true;
 }
 
 /** The players the permanent `object` has dealt damage to this game in stint

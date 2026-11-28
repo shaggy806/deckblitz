@@ -17,6 +17,7 @@
 import {
   JOURNAL_VIEWS,
   asTurnBegan,
+  countersByOn,
   damagedPermanentBy,
   entriesThisTurn,
   journalEntries,
@@ -1597,6 +1598,15 @@ export interface CardFilter {
    * 400.7) — the journal's whole-game record: The Fallen's "each …
    * planeswalker it has dealt damage to this game". */
   readonly damagedThisGameBySource?: true;
+  /** A `counter` counter was put on it this game by an ability of the
+   * permanent applying the filter (`FilterContext.source`, in its
+   * `sourceStint`, else its battlefield stint now or the one it last left),
+   * while it was in its own stint now (rule 400.7) — and, with `removed`,
+   * one has (`true`) or hasn't (`false`) been removed from it by one: Cyclopean
+   * Tomb's "a land that a mire counter was put onto with this artifact but
+   * that a mire counter has not been removed from with this artifact". The
+   * journal's whole-game `countersPutBy`. */
+  readonly countersPutBySource?: { readonly counter: string; readonly removed?: boolean };
   /** Was dealt excess damage this turn (rule 120.4a) — Maarika, Brutal
    * Gladiator's "if that creature was dealt excess damage this turn". */
   readonly excessDamageThisTurn?: boolean;
@@ -3854,6 +3864,19 @@ export function matchesFilter(
       self === undefined ||
       !damagedPermanentBy(state, by.id, by.zoneChangeCount, id, self.zoneChangeCount ?? 0)
     ) {
+      return false;
+    }
+  }
+  if (filter.countersPutBySource !== undefined) {
+    const clause = filter.countersPutBySource;
+    const asker = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const askerStint =
+      ctx.sourceStint ?? (asker?.zone === "battlefield" ? (asker.zoneChangeCount ?? 0) : asker?.lastKnown?.zoneChangeCount);
+    const self = live ?? state.objects[id];
+    if (asker === undefined || askerStint === undefined || self === undefined) return false;
+    const stint = self.zoneChangeCount ?? 0;
+    if (!countersByOn(state, asker.id, askerStint, clause.counter, id, stint, false)) return false;
+    if (clause.removed !== undefined && countersByOn(state, asker.id, askerStint, clause.counter, id, stint, true) !== clause.removed) {
       return false;
     }
   }

@@ -495,6 +495,7 @@ import {
   noteCombatDamagedBy,
   noteDamagedPlayer,
   noteDamagedPermanent,
+  noteCountersBy,
   damagedPlayersBy,
   noteCycledNames,
 } from "./journal.js";
@@ -35720,10 +35721,12 @@ export class Game {
         top.abilityKind !== null && top.abilityIndex !== null
           ? { kind: top.abilityKind, index: top.abilityIndex, face: this.state.objects[top.sourceObjectId]?.face ?? 0 }
           : undefined;
+      const was = top.lastKnownRefs?.sourceWas;
       this.state.resolvingSource = {
         source: top.sourceObjectId,
         stint: top.sourceStackedStint ?? 0,
         ...(ability !== undefined ? { ability } : {}),
+        ...(was !== undefined ? { was } : {}),
       };
     } else {
       delete this.state.resolvingSource;
@@ -59783,10 +59786,14 @@ controlledBy,
 
   /** Which battlefield permanents a mass P/T / keyword effect (Overrun) hits —
    * `matchesFilter` from the effect's controller's perspective. */
-  private battlefieldMatching(you: PlayerId, filter: CardFilter, x?: number, source?: ObjectId): ObjectId[] {
-    return this.state.zones.shared.battlefield.filter((id) =>
-      matchesFilter(this.state, this.registry, id, filter, { you, x, ...(source !== undefined ? { source } : {}) }),
-    );
+  private battlefieldMatching(you: PlayerId, filter: CardFilter, x?: number, source?: ObjectId, sourceStint?: number): ObjectId[] {
+    const ctx: FilterContext = {
+      you,
+      x,
+      ...(source !== undefined ? { source } : {}),
+      ...(sourceStint !== undefined ? { sourceStint } : {}),
+    };
+    return this.state.zones.shared.battlefield.filter((id) => matchesFilter(this.state, this.registry, id, filter, ctx));
   }
 
   /** How many permanents match `filter` — not how many objects: a compacted
@@ -62171,7 +62178,11 @@ controlledBy,
     // With the source, for a filter about it: "equipped creature" (Hand of
     // Vecna's `hostOfSource`), "attached to this".
     const sparedSource = exceptSource ? this.oneTokenSpared(source) : undefined;
-    const matching = this.battlefieldMatching(player, filter, x, source).filter(
+    // A fired delayed ability's "with this artifact" is its source in the
+    // stint its creator meant (rule 608.2h — Cyclopean Tomb, in the
+    // graveyard by then).
+    const sourceWas = thenResolution?.lastKnownRefs?.sourceWas;
+    const matching = this.battlefieldMatching(player, filter, x, source, sourceWas).filter(
       (id) => id !== sparedSource && !except.includes(id),
     );
     const together = togetherRule === undefined ? undefined : this.searchTogether(togetherRule, matching, player, x);
@@ -66978,6 +66989,19 @@ controlledBy,
     }
   }
 
+  /** "Put onto **with this artifact**", "removed from with this artifact"
+   * (Cyclopean Tomb): `counter` counters put on (or removed from) the
+   * permanent `on` by the ability resolving now, noted by its source in the
+   * stint it means (`EntrySource.was`, else the one it was stacked in) —
+   * the journal's whole-game `countersPutBy`. A spell's, or a cost's, isn't
+   * an ability's doing and is left out. */
+  private noteCountersByResolving(on: ObjectId, counter: string, removed: boolean): void {
+    const by = this.state.resolvingSource;
+    const permanent = this.state.objects[on];
+    if (by === undefined || permanent?.zone !== "battlefield") return;
+    noteCountersBy(this.state, by.source, by.was ?? by.stint, counter, on, permanent.zoneChangeCount ?? 0, removed);
+  }
+
   private recordJournal(event: GameEvent): void {
     const add = (entry: Omit<JournalEntry, "turn">): void => this.journal(entry);
     const stintOf = (id: ObjectId): number => this.state.objects[id]?.zoneChangeCount ?? 0;
@@ -67146,6 +67170,7 @@ controlledBy,
           counter: event.counter,
           amount: event.amount * (event.count ?? permanent.stackCount ?? 1),
         });
+        this.noteCountersByResolving(event.object, event.counter, false);
         return;
       }
       case "counter-removed": {
@@ -67163,6 +67188,7 @@ controlledBy,
           counter: event.counter,
           amount: event.amount * (event.tokens ?? 1),
         });
+        this.noteCountersByResolving(event.object, event.counter, true);
         return;
       }
       case "cards-discarded":

@@ -4320,7 +4320,11 @@ loyalty — Maarika, Brutal Gladiator's `toFilter`, asked once every source deal
 `dealtDamageToCreatureThisTurn` (it dealt damage to another creature). `damagedThisGameBySource: true` is
 "dealt damage **this game** by it" — The Fallen's "each … planeswalker it has dealt damage to this game", a
 `damage-all` (whose filter's source is what deals the damage), read off the journal's whole-game record by both
-objects' stints (rule 400.7); its players are the scope `"opponents-dealt-damage-by-source-this-game"`. `dealtDamageThisTurn: true` is
+objects' stints (rule 400.7); its players are the scope `"opponents-dealt-damage-by-source-this-game"`. `countersPutBySource: { counter, removed? }`
+is "a land that a mire counter was put onto **with this artifact**" (an ability of the filter's source put one there
+this game, the journal's `countersPutBy`), with `removed: false` "but that a mire counter **has not been removed from
+with this artifact**" — Cyclopean Tomb's delayed `choose-permanents`, the Tomb read in its battlefield stint once it's
+in the graveyard (a fired delayed ability's `sourceWas`). `dealtDamageThisTurn: true` is
 "that dealt damage this turn", to anything (Restore the Peace); `{ to: "you" }` "that dealt damage to you this
 turn" (Spear of Heliod), with `combat: true` for combat damage (Witch-king of Angmar: a sacrifice keeps "you" as
 the effect's controller, not the player choosing); `{ to: "opponent" }` "that dealt damage to an opponent this turn", to any player but the filter's "you", read against its controller now (Dunerider Outlaw, Whirling Dervish). The condition `{ kind: "self-hasnt-dealt-damage", combat? }`

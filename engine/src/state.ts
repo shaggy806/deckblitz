@@ -6202,6 +6202,12 @@ export interface EntrySource {
   readonly source: ObjectId;
   readonly stint: number;
   readonly ability?: { readonly kind: "activated" | "triggered" | "chapter"; readonly index: number; readonly face: number };
+  /** For a fired delayed ability: the battlefield stint of its source that
+   * its creator meant (`DelayedTrigger.sourceWas`, rule 608.2h), where
+   * `stint` is the one it was stacked in — Cyclopean Tomb's "removed from
+   * **with this artifact**", the Tomb in the graveyard by then. What the
+   * journal's `countersPutBy` keys a resolving ability's counters by. */
+  readonly was?: number;
 }
 
 /**
