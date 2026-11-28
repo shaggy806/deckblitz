@@ -256,7 +256,9 @@ export function addToGroup(
   const free = unassigned(offer, picks)
   if (free <= 0 || members.length === 0) return null
   const out = [...picks]
-  out[members[members.length - 1]] += offer.trample ? 1 : free
+  // Butcher Orgg's division sends what's left to the defending player, as
+  // trample sends it over: one point at a time.
+  out[members[members.length - 1]] += offer.trample || offer.dividing !== undefined ? 1 : free
   return out
 }
 

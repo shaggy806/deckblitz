@@ -2852,7 +2852,9 @@ function Table({
   // controller is held within what the blockers' amounts allow, so sparing a
   // blocker takes it back rather than leaving a split the engine refuses.
   const damageAnswer = useMemo(() => {
-    if (!assignDamageAction || assignDamageAction.unblockedOnly === true) return null
+    if (!assignDamageAction || assignDamageAction.unblockedOnly === true || assignDamageAction.mayDivide !== undefined) {
+      return null
+    }
     const picks = damagePicks ?? defaultAssignment(assignDamageAction)
     return assignDamageAction.overPlaneswalker === undefined
       ? picks
@@ -7602,6 +7604,32 @@ function Table({
         ) : null}
       </div>
     )
+  } else if (mode === 'assign-combat-damage' && assignDamageAction?.mayDivide !== undefined) {
+    // Butcher Orgg's "you may assign this creature's combat damage divided as
+    // you choose among defending player and/or any number of creatures they
+    // control": yes or no first; the division, on a yes, is the next bar.
+    const offer = assignDamageAction
+    const defender = offer.mayDivide === undefined ? 'the defending player' : playerLabel(offer.mayDivide, game.seats)
+    controls = (
+      <div className="controls damage-assign">
+        <span>
+          Divide {game.nameOf(offer.attacker)}&rsquo;s {offer.power} damage among {defender} and their creatures?
+        </span>
+        <button
+          type="button"
+          className="primary"
+          onClick={() => game.dispatch({ type: 'assign-combat-damage', player: seat, assignment: [], divide: true })}
+        >
+          Divide
+        </button>
+        <button
+          type="button"
+          onClick={() => game.dispatch({ type: 'assign-combat-damage', player: seat, assignment: [] })}
+        >
+          No
+        </button>
+      </div>
+    )
   } else if (mode === 'assign-combat-damage' && assignDamageAction?.unblockedOnly === true) {
     // "You may have it assign its combat damage as though it weren't
     // blocked" while banding hands the division to the other side: only the
@@ -7657,8 +7685,13 @@ function Table({
     const overPw = offer.overPlaneswalker
     const toPlayer = toPlayerOf(offer, picks)
     const mostOn = mostToPlayer(offer, picks)
+    // Butcher Orgg's division: what no creature gets goes to the defending
+    // player, with no lethal owed to anything.
+    const dividedTo = offer.dividing !== undefined ? playerLabel(offer.dividing, game.seats) : null
     const status =
-      overPw !== undefined
+      dividedTo !== null
+        ? `→ ${dividedTo}: ${free}`
+        : overPw !== undefined
         ? `→ ${overTo}: ${free}${free < overPw.loyaltyLeft ? ` of ${overPw.loyaltyLeft} loyalty left` : ''}`
         : offer.blockers.length === 0
         ? 'no blocker left: no damage'
@@ -7678,13 +7711,20 @@ function Table({
               702.22j-k), and Defensive Formation the defending player's
               attackers': it's the opponent's creature's damage being split,
               and a blocker's among the band it blocks. */}
-          {offer.forOpponent === true ? 'You divide ' : 'Assign '}
+          {offer.forOpponent === true || dividedTo !== null ? 'You divide ' : 'Assign '}
           {game.nameOf(offer.attacker)}&rsquo;s {offer.power} damage
-          {overPw !== undefined ? ' (trample over planeswalkers)' : offer.trample ? ' (trample)' : ''}
+          {dividedTo !== null
+            ? ` among ${dividedTo} and their creatures`
+            : overPw !== undefined
+              ? ' (trample over planeswalkers)'
+              : offer.trample
+                ? ' (trample)'
+                : ''}
           {offer.blockers.length > 0 ? (
             <span className="muted">
               {' '}
-              · click {offer.blocking === true ? 'an attacker' : 'a blocker'} to kill or spare it
+              · click {offer.blocking === true ? 'an attacker' : dividedTo !== null ? 'a creature' : 'a blocker'} to kill
+              or spare it
             </span>
           ) : null}
         </span>

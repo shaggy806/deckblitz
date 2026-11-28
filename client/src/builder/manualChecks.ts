@@ -14064,4 +14064,28 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: [{ name: 'Forest', tapped: true }] }, { bf: [{ name: 'Swamp', tapped: true }] }, { bf: ['Plains'] }],
     }),
   ),
+  preset(
+    'Butcher Orgg: unblocked, it divides its damage among Bob and his creatures',
+    board({
+      you: { bf: ['Butcher Orgg'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Butcher Orgg: blocked, its damage can go past the blocker to another creature',
+    board({
+      you: { bf: ['Butcher Orgg'] },
+      opp: { human: true, bf: ['Grizzly Bears', 'Hill Giant'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Butcher Orgg: four players, only the creatures of the player it attacks are offered',
+    board({
+      you: { bf: ['Butcher Orgg'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: ['Hill Giant'] }, { bf: ['Plains'] }],
+      step: 'begin-combat',
+    }),
+  ),
 ]

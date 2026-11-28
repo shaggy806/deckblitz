@@ -7362,6 +7362,13 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   to what it's attacking, or the usual division — never split between them. A rule about
   how it assigns damage, not an ability it has. The one-shot form is the
   `assign-as-though-unblocked` effect (§6).
+- `divideCombatDamageAmongDefender: true` — "you may assign this creature's combat damage
+  divided as you choose among defending player and/or any number of creatures they control"
+  (Butcher Orgg, on `"self"`). Asked of its controller as combat damage is assigned, blocked
+  or not (`mayDivide`), then, on a yes, the division among every creature the defending
+  player controls, blockers or not, the rest to that player (`dividing`) — no lethal owed. A
+  blocked one with every blocker gone isn't asked (no combat damage). An ability it has: a
+  loss of abilities ends it.
 - `spellsHaveDelve: true` — "spells you cast have delve" (Teval, Arbiter of Virtue): every
   spell this permanent's controller casts, from anywhere, has delve as it's cast, read wherever
   a printed `delve` is (§3).

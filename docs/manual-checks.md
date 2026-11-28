@@ -9277,3 +9277,17 @@ Each board's die comes up 4.
 ### Illusionary Terrain: basic Forests become Islands
 - **Do:** Cast Illusionary Terrain. Choose Forest, then Island.
 - **Expect:** The first menu lists the five basic land types and the second the four left. Your Forest and Bob's Forest now read as Islands and tap for blue; Bob's Plains and Savannah (not basic) are unchanged.
+
+## Combat damage divided among the defending player and their creatures (2026-11-28)
+
+### Butcher Orgg: unblocked, it divides its damage among Bob and his creatures
+- **Do:** Attack Bob with Butcher Orgg; as Bob, block with nothing. Choose "Divide", click Grizzly Bears to spare them, and Confirm.
+- **Expect:** First a bar asks "Divide Butcher Orgg's 6 damage among Bob and their creatures?" with Divide and No. Then the damage bar lists Grizzly Bears and Hill Giant, both marked to die and "→ Bob: 1"; with the Bears spared it reads "→ Bob: 3". Hill Giant dies, the Bears live and Bob loses 3 life.
+
+### Butcher Orgg: blocked, its damage can go past the blocker to another creature
+- **Do:** Attack Bob with Butcher Orgg; as Bob, block it with Grizzly Bears. Choose "Divide", click Grizzly Bears to spare them, press Hill Giant's + three times and Confirm.
+- **Expect:** The bar reads "→ Bob: 0" with 6 on Hill Giant. Hill Giant dies and the Bears live; Bob loses no life.
+
+### Butcher Orgg: four players, only the creatures of the player it attacks are offered
+- **Do:** Attack Carol with Butcher Orgg. Choose "Divide".
+- **Expect:** The damage bar lists only Carol's Hill Giant, not Bob's Grizzly Bears, and the rest is shown going to Carol.

@@ -3047,6 +3047,17 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly assignAsThoughUnblocked?: true;
   /**
+   * "You may assign this creature's combat damage divided as you choose among
+   * defending player and/or any number of creatures they control" (Butcher
+   * Orgg, on `"self"`): as combat damage is assigned (rule 510.1), the
+   * attacker's controller is first asked whether to (`mayDivide`), blocked or
+   * not, and if so divides it among the defending player and that player's
+   * creatures (`dividing`), the blockers among them or not — any division,
+   * with no lethal damage owed to anything. A blocked attacker whose blockers
+   * have all gone deals no combat damage, so isn't asked (its ruling).
+   */
+  readonly divideCombatDamageAmongDefender?: true;
+  /**
    * The affected permanents can't be sacrificed — Alexios, Deimos of
    * Kosmos's "~ can't be sacrificed" (`"self"`), Zurgo, Thunder's Decree's
    * "during your end step, Warrior tokens you control have 'This token can't

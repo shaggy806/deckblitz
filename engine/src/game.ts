@@ -3449,7 +3449,7 @@ export class Game {
       applyMulligan: (player, keep) => this.applyMulligan(player, keep),
       applyPutOnBottom: (player, cards) => this.applyPutOnBottom(player, cards),
       applyMulliganHandAbility: (player, card) => this.applyMulliganHandAbility(player, card),
-      applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
+      applyAssignCombatDamage: (p, a, forAll, unblocked, divide) => this.applyAssignCombatDamage(p, a, forAll, unblocked, divide),
       applyReplacementOrder: (player, option) => this.applyReplacementOrder(player, option),
       applyChoosePermanentOrPlayer: (player, choice) => this.applyChoosePermanentOrPlayer(player, choice),
       applyPutNameSticker: (player, sticker, position) => this.applyPutNameSticker(player, sticker, position),
@@ -16804,12 +16804,16 @@ export class Game {
     const attackers = this.currentAttackers();
     // A blocked attacker that may assign as though unblocked is always a
     // choice; one that must has none.
+    // Butcher Orgg's "you may assign this creature's combat damage divided
+    // as you choose among defending player and/or any number of creatures
+    // they control" is a choice blocked or not.
     const asked = attackers.filter(
       (id) =>
-        this.state.objects[id].blocked &&
         this.dealsInPass(id, kind) &&
-        (this.mayAssignAsThoughUnblocked(id) ||
-          (unblockedAssignmentOf(this.state, this.registry, id) !== "must" && this.needsDamageAssignmentChoice(id))),
+        (this.mayDivideAmongDefender(id) ||
+          (this.state.objects[id].blocked &&
+            (this.mayAssignAsThoughUnblocked(id) ||
+              (unblockedAssignmentOf(this.state, this.registry, id) !== "must" && this.needsDamageAssignmentChoice(id))))),
     );
     // Trample over planeswalkers (rule 702.19c), blocked or not: asked last
     // of the attackers, once what the others assign the planeswalker is
@@ -16851,6 +16855,9 @@ export class Game {
       if (id === attackerId || other.attacking !== pwId || other.attackingNothing === true || !this.dealsInPass(id, kind)) {
         continue;
       }
+      // Butcher Orgg dividing among the defending player and their
+      // creatures assigns the planeswalker nothing.
+      if (cd?.divided?.[id] !== undefined) continue;
       const power = assignedCombatDamage(this.state, this.registry, id);
       if (power <= 0) continue;
       const answered = cd?.assigned[id];
@@ -16946,6 +16953,34 @@ export class Game {
     );
   }
 
+  /** The defending player `attackerId` may divide its combat damage among,
+   * with their creatures (`divideCombatDamageAmongDefender` — Butcher Orgg):
+   * the player it's attacking, or the controller (or protector) of the
+   * planeswalker or battle it's attacking, while still in the game; with
+   * damage to assign, and — blocked — a blocker still there (its ruling: with
+   * every blocker removed it deals no combat damage). `undefined` when it
+   * can't, or its controller has answered for this sub-pass. */
+  private divideAmongDefenderFor(attackerId: ObjectId): PlayerId | undefined {
+    const attacker = this.state.objects[attackerId];
+    if (attacker?.zone !== "battlefield" || attacker.attacking == null) return undefined;
+    if (computeCharacteristics(this.state, this.registry, attackerId).divideCombatDamageAmongDefender !== true) return undefined;
+    if (assignedCombatDamage(this.state, this.registry, attackerId) <= 0) return undefined;
+    if (attacker.blocked && this.liveBlockersOf(attackerId).length === 0 && !this.mayAssignAsThoughUnblocked(attackerId)) {
+      return undefined;
+    }
+    const defender = this.defendingPlayerOf(attacker.attacking);
+    return this.state.players[defender]?.hasLost === false ? defender : undefined;
+  }
+
+  /** Whether `attackerId`'s controller is still to be asked whether it
+   * divides its combat damage among the defending player and their
+   * creatures this sub-pass ({@link divideAmongDefenderFor}). */
+  private mayDivideAmongDefender(attackerId: ObjectId): boolean {
+    const cd = this.state.combatDamage;
+    if ((cd?.divideDeclined ?? []).includes(attackerId) || cd?.divided?.[attackerId] !== undefined) return false;
+    return this.divideAmongDefenderFor(attackerId) !== undefined;
+  }
+
   /** The auto-assignment for `dealerId`'s combat damage this sub-pass: the
    * standard one (kill as many as possible), or the other side's under
    * banding (`autoAssignFor`). One entry per recipient. */
@@ -16964,6 +16999,7 @@ export class Game {
       const attacker = this.state.objects[next];
       const divides =
         attacker?.attacking == null ||
+        this.mayDivideAmongDefender(next) ||
         (attacker.blocked &&
           (this.mayAssignAsThoughUnblocked(next) ||
             (unblockedAssignmentOf(this.state, this.registry, next) !== "must" && this.needsDamageAssignmentChoice(next))));
@@ -16973,6 +17009,49 @@ export class Game {
     }
     if (cd.pendingAssignments.length > 0) {
       const dealerId = cd.pendingAssignments[0];
+      // Butcher Orgg: first whether to divide among the defending player and
+      // their creatures, asked of its controller alone; then, on a yes, the
+      // division among all that player's creatures, the rest to the player
+      // (rule 510.1).
+      const defender = this.mayDivideAmongDefender(dealerId) ? this.divideAmongDefenderFor(dealerId) : undefined;
+      if (defender !== undefined) {
+        const controller = this.state.objects[dealerId].controller;
+        const power = assignedCombatDamage(this.state, this.registry, dealerId);
+        if (!(cd.dividing ?? []).includes(dealerId)) {
+          this.state.awaiting = {
+            kind: "assign-combat-damage",
+            player: controller,
+            attacker: dealerId,
+            blockers: [],
+            power,
+            lethal: [],
+            trample: false,
+            indestructible: [],
+            mayDivide: defender,
+          };
+          return;
+        }
+        // Each token of a stack is its own creature to divide among (rule
+        // 111.1), woken as combat wakes them (`materializeStack`).
+        const creatures = [...this.state.zones.shared.battlefield]
+          .filter((id) => {
+            const o = this.state.objects[id];
+            return o.controller === defender && this.inGame(o) && effectiveTypes(this.state, this.registry, o).includes("creature");
+          })
+          .flatMap((id) => this.materializeStack(id));
+        this.state.awaiting = {
+          kind: "assign-combat-damage",
+          player: controller,
+          attacker: dealerId,
+          blockers: creatures,
+          power,
+          lethal: creatures.map((id) => lethalFor(this.state, this.registry, dealerId, id)),
+          trample: false,
+          indestructible: creatures.map((id) => this.objHasKeyword(id, "indestructible")),
+          dividing: defender,
+        };
+        return;
+      }
       const q = this.damageQuestion(dealerId);
       const situation = this.damageSituation(dealerId);
       const alike = cd.pendingAssignments.slice(1).filter((id) => this.damageSituation(id) === situation).length;
@@ -17081,6 +17160,7 @@ export class Game {
       q.trample,
       q.blocking,
       this.mayAssignAsThoughUnblocked(dealerId),
+      this.mayDivideAmongDefender(dealerId),
       q.recipients.map((r, i) => [this.state.objects[r]?.cardName, q.lethal[i], q.indestructible[i]]),
     ]);
   }
@@ -17091,10 +17171,17 @@ export class Game {
     player: PlayerId,
     assignment: readonly number[],
     asThoughUnblocked: boolean,
+    divide = false,
   ): string | null {
     return assignCombatDamage.whyCannot(
       this.decisionCtx,
-      { type: "assign-combat-damage", player, assignment, ...(asThoughUnblocked ? { asThoughUnblocked: true } : {}) },
+      {
+        type: "assign-combat-damage",
+        player,
+        assignment,
+        ...(asThoughUnblocked ? { asThoughUnblocked: true } : {}),
+        ...(divide ? { divide: true } : {}),
+      },
       player,
     );
   }
@@ -17104,8 +17191,9 @@ export class Game {
     assignment: readonly number[],
     forAll = false,
     asThoughUnblocked = false,
+    divide = false,
   ): void {
-    const why = this.whyCannotAssignCombatDamage(player, assignment, asThoughUnblocked);
+    const why = this.whyCannotAssignCombatDamage(player, assignment, asThoughUnblocked, divide);
     if (why !== null) throw new Error(why);
     const awaiting = this.state.awaiting as Extract<
       AwaitingDecision,
@@ -17113,6 +17201,38 @@ export class Game {
     >;
     const cd = this.state.combatDamage;
     if (cd === null) throw new Error("unreachable: no combat-damage step in progress");
+
+    // Butcher Orgg: whether to divide, then the division — each its own
+    // attacker's alone, never `forAll`. A yes asks the division next; a no
+    // leaves its damage to be assigned as it otherwise would be, asked next
+    // if that's a choice (`promptNextDamageAssignment` drops it if not).
+    if (awaiting.mayDivide !== undefined || awaiting.dividing !== undefined) {
+      const attacker = awaiting.attacker;
+      const rest = cd.pendingAssignments.slice(1);
+      if (awaiting.dividing !== undefined) {
+        this.state.combatDamage = {
+          ...cd,
+          pendingAssignments: rest,
+          divided: {
+            ...(cd.divided ?? {}),
+            [attacker]: { player: awaiting.dividing, creatures: [...awaiting.blockers], amounts: [...assignment] },
+          },
+        };
+      } else {
+        this.state.combatDamage = {
+          ...cd,
+          pendingAssignments: [attacker, ...rest],
+          ...(divide
+            ? { dividing: [...(cd.dividing ?? []), attacker] }
+            : { divideDeclined: [...(cd.divideDeclined ?? []), attacker] }),
+        };
+      }
+      this.state.awaiting = null;
+      this.promptNextDamageAssignment();
+      const next = this.state.awaiting as AwaitingDecision | null;
+      this.prepareForPriority(next?.player ?? this.activePlayer);
+      return;
+    }
 
     // With `forAll`, each attacker still to assign in the same situation is
     // answered the same way: each still its own assignment (rule 510.1c).
@@ -17181,7 +17301,7 @@ export class Game {
       // all pass. Keep `pass: "first"` as the marker for that.
       // Each sub-pass's assignment is its own (510.1), "as though unblocked"
       // chosen afresh in the next.
-      const { asThoughUnblocked: _u, unblockedDeclined: _d, ...rest } = cd;
+      const { asThoughUnblocked: _u, unblockedDeclined: _d, dividing: _v, divideDeclined: _n, divided: _a, ...rest } = cd;
       this.state.combatDamage = { ...rest, pendingAssignments: [], assigned: {} };
       return;
     }
@@ -17311,7 +17431,23 @@ export class Game {
         (id) => this.state.objects[id]?.zone === "battlefield",
       );
 
-      if (this.dealsInPass(attackerId, pass)) {
+      // Butcher Orgg's division, made this sub-pass: to each of the defending
+      // player's creatures its amount, the rest to that player (rule 510.1).
+      const divided = this.state.combatDamage?.divided?.[attackerId];
+      if (divided !== undefined && this.dealsInPass(attackerId, pass)) {
+        const power = powerOf(attackerId);
+        let total = 0;
+        divided.creatures.forEach((creature, index) => {
+          const amount = Math.min(divided.amounts[index] ?? 0, power - total);
+          total += amount;
+          if (amount > 0 && this.state.objects[creature]?.zone === "battlefield") {
+            assignments.push({ source: attackerId, target: { kind: "object", object: creature }, amount });
+          }
+        });
+        if (power - total > 0) {
+          assignments.push({ source: attackerId, target: { kind: "player", player: divided.player }, amount: power - total });
+        }
+      } else if (this.dealsInPass(attackerId, pass)) {
         const power = powerOf(attackerId);
         if (power > 0) {
           // "As though it weren't blocked" (Thorn Elemental, Outmaneuver):

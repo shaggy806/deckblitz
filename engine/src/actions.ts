@@ -1022,6 +1022,11 @@ export type Action =
        * (rule 510.1b); `assignment` is then ignored. Leaving it off answers
        * no — an `unblockedOnly` offer's `assignment` is ignored too. */
       readonly asThoughUnblocked?: true;
+      /** Answers a `mayDivide` offer yes: the attacker divides its combat
+       * damage among the defending player and their creatures (Butcher
+       * Orgg), asked next as a `dividing` offer; `assignment` is ignored.
+       * Leaving it off answers no. */
+      readonly divide?: true;
     }
   | {
       /** Answers a pending `sacrifice` decision (a sacrifice effect — Diabolic
@@ -2177,6 +2182,14 @@ export type LegalAction =
       /** What the attacker is attacking — a player, or a planeswalker or
        * battle's id — with `mayUnblocked`. */
       readonly defender?: PlayerId | ObjectId;
+      /** The whole question: divide the attacker's combat damage among this
+       * player — the defending player — and their creatures (Butcher Orgg)?
+       * Yes is the action's `divide`; `blockers` is empty. */
+      readonly mayDivide?: PlayerId;
+      /** That division: `blockers` is every creature this player — the
+       * defending player — controls, and `power − sum` goes to them; any
+       * division is legal. */
+      readonly dividing?: PlayerId;
       /** Trample over planeswalkers (rule 702.19c): the attacker — blocked or
        * not, so `blockers` may be empty — attacks this planeswalker, and
        * the answer has one amount more, last: what goes to its controller,

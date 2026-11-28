@@ -23,6 +23,12 @@
  * to what the attacker's attacking (510.1b), nothing to divide. Under
  * banding, where the division is the other side's, it's asked first and
  * alone (`unblockedOnly`).
+ *
+ * "You may assign this creature's combat damage divided as you choose among
+ * defending player and/or any number of creatures they control" (Butcher
+ * Orgg) is two questions of this kind: `mayDivide`, yes or no alone (the
+ * action's `divide`), blocked or not; then, on a yes, `dividing`, whose
+ * `blockers` are all that player's creatures and whose rest goes to them.
  */
 
 import type { Action, LegalAction } from "../actions.js";
@@ -53,6 +59,8 @@ export const assignCombatDamage = defineDecision({
       ...(awaiting.unblockedOnly === true ? { unblockedOnly: true as const } : {}),
       ...(awaiting.mayUnblocked === true && defender != null ? { defender } : {}),
       ...(awaiting.overPlaneswalker !== undefined ? { overPlaneswalker: awaiting.overPlaneswalker } : {}),
+      ...(awaiting.mayDivide !== undefined ? { mayDivide: awaiting.mayDivide } : {}),
+      ...(awaiting.dividing !== undefined ? { dividing: awaiting.dividing } : {}),
     },
   ];
   },
@@ -69,6 +77,13 @@ export const assignCombatDamage = defineDecision({
     ) {
       return `${player} is not being asked to assign combat damage`;
     }
+    // "You may assign this creature's combat damage divided as you choose
+    // among defending player and/or any number of creatures they control"
+    // (Butcher Orgg): yes or no is the whole question; the division follows.
+    if (awaiting.mayDivide !== undefined) {
+      return action.asThoughUnblocked === true ? "that question is whether to divide its combat damage" : null;
+    }
+    if (action.divide === true) return "that creature can't divide its combat damage among the defending player and their creatures";
     // "As though it weren't blocked" (Thorn Elemental): all of it to what
     // it's attacking, so no division to check.
     if (action.asThoughUnblocked === true) {
@@ -81,7 +96,13 @@ export const assignCombatDamage = defineDecision({
 
   apply: (host, action): void => {
     if (action.type !== "assign-combat-damage") return;
-    host.applyAssignCombatDamage(action.player, action.assignment, action.forAll === true, action.asThoughUnblocked === true);
+    host.applyAssignCombatDamage(
+      action.player,
+      action.assignment,
+      action.forAll === true,
+      action.asThoughUnblocked === true,
+      action.divide === true,
+    );
   },
 
   ask: (controller, view, awaiting, player): Action => {
@@ -97,7 +118,13 @@ export const assignCombatDamage = defineDecision({
       ...(awaiting.mayUnblocked === true ? { mayUnblocked: true } : {}),
       ...(awaiting.unblockedOnly === true ? { unblockedOnly: true } : {}),
       ...(awaiting.overPlaneswalker !== undefined ? { overPlaneswalker: awaiting.overPlaneswalker } : {}),
+      ...(awaiting.mayDivide !== undefined ? { mayDivide: awaiting.mayDivide } : {}),
+      ...(awaiting.dividing !== undefined ? { dividing: awaiting.dividing } : {}),
     });
+    if (awaiting.mayDivide !== undefined) {
+      return { type: "assign-combat-damage", player, assignment: [], ...(answer === "divide" ? { divide: true as const } : {}) };
+    }
+    if (answer === "divide") return { type: "assign-combat-damage", player, assignment: defaultAssignment(awaiting) };
     if (answer === "unblocked" && awaiting.mayUnblocked === true) {
       return { type: "assign-combat-damage", player, assignment: [], asThoughUnblocked: true };
     }
@@ -117,6 +144,19 @@ export const assignCombatDamage = defineDecision({
   // candidates re-point every `bot:bench` number.
 
   randomAnswer: (legal, player, rng): Action => {
+    // Butcher Orgg: divide or not, half the time each; a division deals the
+    // power out a point at a time among its creatures and the player.
+    if (legal.mayDivide !== undefined) {
+      return { type: "assign-combat-damage", player, assignment: [], ...(rng.random() < 0.5 ? { divide: true as const } : {}) };
+    }
+    if (legal.dividing !== undefined) {
+      const assignment = legal.blockers.map(() => 0);
+      for (let i = 0; i < legal.power; i += 1) {
+        const pick = rng.pickIndex(assignment.length + 1);
+        if (pick < assignment.length) assignment[pick] += 1;
+      }
+      return { type: "assign-combat-damage", player, assignment };
+    }
     if (legal.mayUnblocked === true && rng.random() < 0.5) {
       return { type: "assign-combat-damage", player, assignment: [], asThoughUnblocked: true };
     }

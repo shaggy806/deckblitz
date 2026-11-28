@@ -101,6 +101,10 @@ export interface DamageAssignmentOffer {
    * answer has one amount more than there are blockers, last: what goes to
    * `player`; `power` less all of them goes to the planeswalker. */
   readonly overPlaneswalker?: OverPlaneswalker;
+  /** Butcher Orgg's division (a `divideCombatDamageAmongDefender` static):
+   * the "blockers" are every creature this player — the defending player —
+   * controls, and what's left goes to them. Any division is legal. */
+  readonly dividing?: PlayerId;
 }
 
 export type { OverPlaneswalker };
@@ -162,7 +166,9 @@ export function standardAssignment(offer: DamageAssignmentOffer): number[] {
     remaining -= lethal[index];
     killed += 1;
   }
-  if (remaining > 0 && !(trample && killed === lethal.length)) {
+  // Butcher Orgg's division: the same kills, the rest to the defending
+  // player, whatever is left alive.
+  if (remaining > 0 && offer.dividing === undefined && !(trample && killed === lethal.length)) {
     amounts[cheapestFirst[Math.min(killed, lethal.length - 1)]] += remaining;
   }
   return amounts;
@@ -290,6 +296,17 @@ export function damageAssignmentViolations(
   assignment: readonly number[],
 ): string | null {
   const { blockers, power, lethal } = offer;
+  // Butcher Orgg's division: any amounts to the defending player's
+  // creatures, the rest to that player (rule 510.1; no lethal owed).
+  if (offer.dividing !== undefined) {
+    if (assignment.length !== blockers.length) {
+      return `expected an amount for each of ${blockers.length} creature(s), got ${assignment.length}`;
+    }
+    if (assignment.some((n) => !Number.isInteger(n) || n < 0)) {
+      return "combat damage assignments must be non-negative whole numbers";
+    }
+    return assignment.reduce((sum, n) => sum + n, 0) > power ? "assigned more than the attacker's power" : null;
+  }
   const over = offer.overPlaneswalker;
   const expected = blockers.length + (over !== undefined ? 1 : 0);
   if (assignment.length !== expected) {

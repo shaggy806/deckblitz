@@ -1801,6 +1801,10 @@ export interface Characteristics {
    * mandatory effect (Outmaneuver). Read through
    * {@link unblockedAssignmentOf}, which adds the turn-wide rules. */
   readonly assignAsThoughUnblocked?: "may" | "must";
+  /** Its controller may have it divide its combat damage among the defending
+   * player and that player's creatures (a `divideCombatDamageAmongDefender`
+   * static — Butcher Orgg). */
+  readonly divideCombatDamageAmongDefender?: true;
   /** It can't be sacrificed (a `cantBeSacrificed` static, or the ability
    * granted by the `"cant-be-sacrificed"` effect) — rule 701.21a. Read it
    * through {@link cantBeSacrificed}, which skips the fold on the boards
@@ -6496,6 +6500,7 @@ interface AppliedEffect {
   readonly canAttackAsThoughNoDefender: boolean;
   readonly canAttackAttackersDespiteDefender: boolean;
   readonly assignAsThoughUnblocked: boolean;
+  readonly divideCombatDamageAmongDefender: boolean;
   readonly cantBeSacrificed: boolean;
   /** "Can block an additional creature" (`blockAdditional`), 0 for none. */
   readonly blockAdditional: number | "any";
@@ -6650,6 +6655,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.lethalDamageByPower === true ||
     (ability.canAttackAsThoughNoDefender !== undefined && ability.canAttackAsThoughNoDefender !== false) ||
     ability.assignAsThoughUnblocked === true ||
+    ability.divideCombatDamageAmongDefender === true ||
     ability.cantBeSacrificed === true ||
     ability.blockAdditional !== undefined ||
     ability.blockAdditionalPer !== undefined ||
@@ -7025,6 +7031,7 @@ function collectStaticEffects(
       canAttackAsThoughNoDefender: ability.canAttackAsThoughNoDefender === true,
       canAttackAttackersDespiteDefender: ability.canAttackAsThoughNoDefender === "players-who-attacked-you",
       assignAsThoughUnblocked: ability.assignAsThoughUnblocked === true,
+      divideCombatDamageAmongDefender: ability.divideCombatDamageAmongDefender === true,
       cantBeSacrificed: ability.cantBeSacrificed === true,
       blockAdditional:
         ability.blockAdditionalPer !== undefined
@@ -7073,6 +7080,7 @@ function collectStaticEffects(
         canAttackAsThoughNoDefender: false,
         canAttackAttackersDespiteDefender: false,
         assignAsThoughUnblocked: false,
+        divideCombatDamageAmongDefender: false,
         cantBeSacrificed: false,
         blockAdditional: 0,
         protection: null,
@@ -7219,6 +7227,7 @@ function assertSameCharacteristics(
       canAttackAsThoughNoDefender: c.canAttackAsThoughNoDefender,
       canAttackAttackersDespiteDefender: c.canAttackAttackersDespiteDefender,
       assignAsThoughUnblocked: c.assignAsThoughUnblocked ?? null,
+      divideCombatDamageAmongDefender: c.divideCombatDamageAmongDefender === true,
       cantBeSacrificed: c.cantBeSacrificed,
       protColors: [...c.protectionFrom.colors].sort(),
       protTypes: [...c.protectionFrom.types].sort(),
@@ -7332,6 +7341,7 @@ function computeCharacteristicsUncached(
   let canAttackAsThoughNoDefender = false;
   let canAttackAttackersDespiteDefender = false;
   let assignAsThoughUnblocked: "may" | "must" | undefined;
+  let divideCombatDamageAmongDefender = false;
   let cantBeSacrificed = false;
   let extraBlocks: number | "any" = 0;
   const addBlocks = (more: number | "any"): void => {
@@ -7373,6 +7383,8 @@ function computeCharacteristicsUncached(
     // Might's "enchanted creature's controller may have it …"), so no loss
     // of abilities ends it.
     if (effect.assignAsThoughUnblocked) assignAsThoughUnblocked ??= "may";
+    // Butcher Orgg's is an ability it has, so a loss of abilities ends it.
+    if (granted && effect.divideCombatDamageAmongDefender) divideCombatDamageAmongDefender = true;
     if (effect.cantBeSacrificed) cantBeSacrificed = true;
     if (granted && effect.blockAdditional !== 0) addBlocks(effect.blockAdditional);
     // Protection goes with a later loss of it (rule 613.7 — Shay Cormac), a
@@ -7726,6 +7738,7 @@ function computeCharacteristicsUncached(
     canAttackAsThoughNoDefender,
     canAttackAttackersDespiteDefender,
     ...(assignAsThoughUnblocked !== undefined ? { assignAsThoughUnblocked } : {}),
+    ...(divideCombatDamageAmongDefender ? { divideCombatDamageAmongDefender: true as const } : {}),
     cantBeSacrificed,
     protectionFrom: {
       colors: protColors,

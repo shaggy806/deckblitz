@@ -27382,3 +27382,17 @@ describe("Dead Ringers (2026-11-28)", () => {
   });
 });
 
+describe("Butcher Orgg (2026-11-28)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, mana_cost: "{1}", oracle_text });
+
+  it("combat damage divided among the defending player and their creatures (Butcher Orgg)", () => {
+    const orgg = face(
+      "Butcher Orgg",
+      "Creature — Orgg",
+      "You may assign this creature's combat damage divided as you choose among defending player and/or any number of creatures they control.",
+    );
+    expect(orgg.static[0]).toMatchObject({ affects: { scope: "self" }, divideCombatDamageAmongDefender: true });
+  });
+});
+

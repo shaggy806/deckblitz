@@ -261,9 +261,12 @@ export interface PlayerController {
    * `awaiting.kind === "assign-combat-damage"`. With `mayUnblocked`,
    * `"unblocked"` has it assign all its damage as though it weren't blocked
    * (Thorn Elemental); with `unblockedOnly` that's the whole question, and
-   * anything else declines.
+   * anything else declines. With `mayDivide` (Butcher Orgg), `"divide"` says
+   * yes to dividing among the defending player and their creatures, and
+   * anything else declines; with `dividing`, the answer is that division,
+   * one amount per creature in `blockers`, the rest to the player.
    */
-  assignCombatDamage(view: ControllerView, assignment: DamageAssignmentAsk): readonly number[] | "unblocked";
+  assignCombatDamage(view: ControllerView, assignment: DamageAssignmentAsk): DamageAnswer;
   /**
    * Choose one target per spec for a triggered ability being put on the stack.
    * `legalOptions[i]` is the non-empty list of legal targets for `specs[i]`.
@@ -670,6 +673,38 @@ export interface DamageAssignmentAsk {
   /** Trample over planeswalkers (rule 702.19c): the answer has one amount
    * more, last, for the planeswalker's controller. */
   readonly overPlaneswalker?: OverPlaneswalker;
+  /** Butcher Orgg: whether to divide among this player — the defending
+   * player — and their creatures is the whole question (`"divide"` is yes). */
+  readonly mayDivide?: PlayerId;
+  /** That division: `blockers` are this player's creatures, and what the
+   * answer doesn't give them goes to the player. */
+  readonly dividing?: PlayerId;
+}
+
+/** What `PlayerController.assignCombatDamage` answers. */
+export type DamageAnswer = readonly number[] | "unblocked" | "divide";
+
+/**
+ * The automatic answer to "you may divide its combat damage among the
+ * defending player and their creatures" (Butcher Orgg): yes when it's
+ * attacking that player — the division can then do anything the usual
+ * assignment could, its blockers being that player's creatures — and no when
+ * it's attacking a planeswalker or battle, which a division can't reach.
+ */
+export function prefersDivide(view: ControllerView, a: DamageAssignmentAsk): boolean {
+  if (a.mayDivide === undefined) return false;
+  return view.state.objects[a.attacker]?.attacking === a.mayDivide;
+}
+
+/**
+ * The automatic division among the defending player and their creatures:
+ * all of it to the player when that's lethal, otherwise the standard split's
+ * kills, cheapest first, and the rest to the player.
+ */
+export function standardDivision(view: ControllerView, a: DamageAssignmentAsk): readonly number[] {
+  const life = a.dividing === undefined ? undefined : view.state.players[a.dividing]?.life;
+  if (life !== undefined && life <= a.power) return a.blockers.map(() => 0);
+  return standardDamageAssignment(a);
 }
 
 /**
@@ -774,7 +809,9 @@ export class AutomaticController implements PlayerController {
     return [];
   }
 
-  assignCombatDamage(view: ControllerView, a: DamageAssignmentAsk): readonly number[] | "unblocked" {
+  assignCombatDamage(view: ControllerView, a: DamageAssignmentAsk): DamageAnswer {
+    if (a.mayDivide !== undefined) return prefersDivide(view, a) ? "divide" : [];
+    if (a.dividing !== undefined) return standardDivision(view, a);
     return prefersUnblocked(view, a) ? "unblocked" : standardDamageAssignment(a);
   }
 
@@ -1311,7 +1348,7 @@ type TimeTravelChooser = (
   view: ControllerView,
   eligible: readonly ObjectId[],
 ) => { readonly add: readonly ObjectId[]; readonly remove: readonly ObjectId[] };
-type DamageAssigner = (view: ControllerView, assignment: DamageAssignmentAsk) => readonly number[] | "unblocked";
+type DamageAssigner = (view: ControllerView, assignment: DamageAssignmentAsk) => DamageAnswer;
 
 /**
  * Answering as a player for whoever controls them: passes every window, attacks
@@ -1478,7 +1515,7 @@ export class ScriptedController implements PlayerController {
     return this.declareBlockersFn(view);
   }
 
-  assignCombatDamage(view: ControllerView, a: DamageAssignmentAsk): readonly number[] | "unblocked" {
+  assignCombatDamage(view: ControllerView, a: DamageAssignmentAsk): DamageAnswer {
     return this.assignCombatDamageFn(view, a);
   }
 

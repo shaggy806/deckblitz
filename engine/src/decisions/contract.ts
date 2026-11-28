@@ -329,6 +329,7 @@ export interface DecisionHost {
     assignment: readonly number[],
     forAll?: boolean,
     asThoughUnblocked?: boolean,
+    divide?: boolean,
   ) => void;
   readonly applyAttackerDeclarations: (
     player: PlayerId,

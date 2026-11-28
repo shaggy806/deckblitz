@@ -28726,6 +28726,11 @@ function parseStatic(line, text) {
   if (/^(?:Enchanted|Equipped) creature's controller may have it assign its combat damage as though it weren't blocked\.$/.test(line)) {
     return { affects: { scope: "attached" }, assignAsThoughUnblocked: true, text };
   }
+  // Butcher Orgg: its combat damage divided among the defending player and
+  // their creatures (`divideCombatDamageAmongDefender`).
+  if (/^You may assign ~'s combat damage divided as you choose among defending player and\/or any number of creatures they control\.$/.test(line)) {
+    return { affects: { scope: "self" }, divideCombatDamageAmongDefender: true, text };
+  }
   // "… with toughness 3 or greater" (Ghost of Ramirez DePietro) too.
   // "Enchanted creature can't be blocked by …" (Kithkin Armor): the host.
   if ((m = /^(~|Enchanted creature|Equipped creature) can't be blocked by creatures with (power|toughness) (\d+) or (less|greater)\.$/.exec(line))) {

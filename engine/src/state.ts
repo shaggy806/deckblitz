@@ -5799,6 +5799,18 @@ export type AwaitingDecision =
       /** With `mayUnblocked`: that's the whole question — the division, if
        * declined, is the other side's (banding) and asked of them next. */
       readonly unblockedOnly?: true;
+      /** The whole question: may the attacker divide its combat damage among
+       * this player — the defending player — and their creatures instead (a
+       * `divideCombatDamageAmongDefender` static — Butcher Orgg)? The
+       * action's `divide` says yes, and the division is asked next
+       * (`dividing`); anything else declines, and its damage is assigned as
+       * it otherwise would be. `blockers` is empty. */
+      readonly mayDivide?: PlayerId;
+      /** That division (rule 510.1), with this player the defending player:
+       * `blockers` is every creature they control, blocking or not, and
+       * `power − sum` goes to them. Any division is legal: no lethal damage
+       * is owed. */
+      readonly dividing?: PlayerId;
       /** Trample over planeswalkers (rule 702.19c): the attacker — blocked
        * or not — attacks this planeswalker, and the answer has one amount
        * more, last, for its controller (`combat/damage.ts`). */
@@ -6710,6 +6722,18 @@ export interface CombatDamageState {
    * where the division itself is the other side's (banding, 702.22j): the
    * next question about them is the division. */
   readonly unblockedDeclined?: readonly ObjectId[];
+  /** Attackers whose controller chose this sub-pass to divide their combat
+   * damage among the defending player and their creatures (Butcher Orgg),
+   * the division still to be asked (`mayDivide` answered yes). */
+  readonly dividing?: readonly ObjectId[];
+  /** Attackers whose controller declined that this sub-pass. */
+  readonly divideDeclined?: readonly ObjectId[];
+  /** Those divisions, made: attacker id → the defending player, each of
+   * their creatures the offer listed, and the amount to each, in the same
+   * order (`power − sum` to the player). */
+  readonly divided?: Readonly<
+    Record<string, { readonly player: PlayerId; readonly creatures: readonly ObjectId[]; readonly amounts: readonly number[] }>
+  >;
   /** The attackers and blockers that had first strike or double strike as the
    * first-strike step began (rule 510.4), id → `zoneChangeCount` then —
    * the second step's roster is everyone *not* here plus whoever has double
