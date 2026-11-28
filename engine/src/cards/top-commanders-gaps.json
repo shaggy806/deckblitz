@@ -21,6 +21,7 @@
     "decision:remember-chosen-color-on-resolution",
     "effect:pay-any-amount-of-mana",
     "condition:trigger-object-blockers-filter",
+    "effect:cant-attack-and-untargetable-two-turns",
     "effect:amount-count-step",
     "amount:min-of-amounts",
     "effect:skip-next-untap-all-controllers",

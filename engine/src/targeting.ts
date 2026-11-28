@@ -87,6 +87,12 @@ export interface TargetSource {
    * stack — `cardSource`), not an ability's: what a printed "can't be the
    * target of … spells" or "… of abilities" asks (`hexproofFromBlocks`). */
   readonly spell?: true;
+  /** The targeting is a **triggered** ability's (a chapter ability's too,
+   * rule 714.2b) — as it's put on the stack (603.3d), or as it resolves —
+   * not an activated one's: what "can't be the targets of spells or
+   * activated abilities" leaves alone (Peace Talks). Set by `Game`'s
+   * `abilityTargetSource`. */
+  readonly triggered?: true;
   /** Every target slot of the spell doing the targeting, in every mode it
    * has (`cardSource`): what "spells that can target only Walls" asks of the
    * spell as a whole (Wall of Shadows' ruling — a mode that can target a

@@ -59,6 +59,9 @@ export type DurationPlayer = Exclude<PlayerRef, "you">;
  * - `"until-your-next-end-step"`: as it begins (Rocco, Street Chef);
  *   `"until-next-end-step"` anyone's (a copy "until the next end step").
  * - `"until-end-of-combat-your-next-turn"`: Brazen Cannonade's.
+ * - `"until-end-of-next-turn"`: "this turn and next turn" (Peace Talks) — the
+ *   next turn whoever's it is (an extra turn included, rule 500.7), over at
+ *   its cleanup step (rule 514.2).
  *
  * The source, in the stint the effect refers to — each does nothing if it
  * isn't true as the effect would begin (rule 611.2b), and ends for good the
@@ -113,6 +116,7 @@ export type Duration =
   | "until-your-next-end-step"
   | "until-next-end-step"
   | "until-end-of-combat-your-next-turn"
+  | "until-end-of-next-turn"
   | "while-source"
   | "while-source-tapped"
   | "while-you-control-source"
@@ -171,6 +175,7 @@ export type PlayerDuration = Extract<
   | "during-your-next-turn"
   | "until-your-next-upkeep"
   | "until-end-of-your-next-upkeep"
+  | "until-end-of-next-turn"
   | { readonly untilTurnOf: DurationPlayer }
   | { readonly throughTurnOf: DurationPlayer }
   | { readonly duringTurnOf: DurationPlayer }
@@ -282,9 +287,12 @@ export interface UntilCast {
  * - `controllers-untap-begins`: the next untap step of whoever then controls
  *   the permanent, read then, like "doesn't untap during its controller's
  *   next untap step".
+ * - `next-turn-ends`: the cleanup step of the next turn to begin, whoever's
+ *   it is ("this turn and next turn").
  */
 export type UntilPoint =
   | { readonly point: "upkeep-begins" | "upkeep-ends" | "this-upkeep-ends" | "turn-ends" | "end-step-begins"; readonly player: PlayerId }
+  | { readonly point: "next-turn-ends" }
   /** At the end of `player`'s first combat after turn `afterTurn`, or as that
    * turn ends if it had none (Brazen Cannonade). */
   | { readonly point: "next-combat-ends"; readonly player: PlayerId; readonly afterTurn: number }
@@ -357,6 +365,8 @@ export function resolvePlayerDuration(
       return { expires: { untilPoint: untilPointOf(duration, you) } };
     case "during-your-next-turn":
       return { during: you };
+    case "until-end-of-next-turn":
+      return { expires: { untilPoint: { point: "next-turn-ends" } } };
   }
   // "For as long as it remains tapped" (Braided Net): that permanent, in this
   // stint, tapped as the effect begins (611.2b), or nothing.

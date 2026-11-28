@@ -787,6 +787,7 @@ function visible(
                 "end-step-begins": " until your next end step",
                 "next-combat-ends": " until the end of your next combat",
                 "controllers-untap-begins": " until its controller's next untap step",
+                "next-turn-ends": " until the end of next turn",
               }[m.untilPoint.point]
             : m.untilTurnOf !== undefined
               ? " until your next turn"

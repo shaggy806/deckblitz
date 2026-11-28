@@ -11972,6 +11972,8 @@ export class Game {
     this.passUntilPoints((point) => {
       if (point.point === "controllers-untap-begins") return undefined;
       if (point.point === "next-combat-ends") return undefined;
+      // "This turn and next turn": whoever's turn this is, it's the next one.
+      if (point.point === "next-turn-ends") return "ends-this-turn";
       if (point.player === this.activePlayer) return point.point === "turn-ends" ? "ends-this-turn" : undefined;
       return beginningFor.includes(point.player) ? "ends" : undefined;
     });
@@ -12247,7 +12249,7 @@ export class Game {
       // next (Halfdane).
       const whose = this.activePlayer;
       this.passUntilPoints((point) => {
-        if (point.point === "controllers-untap-begins" || point.player !== whose) return undefined;
+        if (point.point === "controllers-untap-begins" || point.point === "next-turn-ends" || point.player !== whose) return undefined;
         if (point.point === "upkeep-begins") return "ends";
         return point.point === "upkeep-ends" ? { point: "this-upkeep-ends", player: whose } : undefined;
       });
@@ -37518,6 +37520,7 @@ export class Game {
         : this.abilityTargetSource({
             sourceObjectId: source,
             controller: object.controller,
+            activated: object.abilityKind === "activated",
             targets,
             x: object.xValue ?? 0,
             triggerValue: object.triggerValue ?? 0,
@@ -43296,6 +43299,9 @@ export class Game {
     readonly x?: number;
     readonly targetZones?: readonly (ZoneType | null)[];
     readonly lastKnownRefs?: LastKnownRefs;
+    /** An activated ability on the stack (`abilityKind`), not a triggered
+     * one: it isn't `TargetSource.triggered`. */
+    readonly activated?: boolean;
   }): TargetSource {
     const base: TargetSource =
       this.state.objects[trigger.sourceObjectId] !== undefined
@@ -43305,6 +43311,7 @@ export class Game {
     const sourceStint = trigger.lastKnownRefs?.source;
     return {
       ...base,
+      ...(trigger.activated === true ? {} : { triggered: true as const }),
       ...(sourceStint !== undefined ? { sourceStint } : {}),
       ...(trigger.triggerObject !== undefined ? { triggerObject: trigger.triggerObject } : {}),
       ...(triggerPlayer !== undefined ? { triggerPlayer } : {}),
@@ -57743,6 +57750,7 @@ controlledBy,
         ? this.abilityTargetSource({
             sourceObjectId: object.sourceObjectId ?? id,
             controller: object.controller,
+            activated: object.abilityKind === "activated",
             targets,
             x: object.xValue ?? 0,
             triggerValue: object.triggerValue ?? 0,

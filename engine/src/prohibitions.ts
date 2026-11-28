@@ -267,7 +267,10 @@ export type Prohibition<W = ProhibitedPlayer> =
   | ({
       /** "Can't be the target of …" (rules 601.2c, 602.2b). `by`:
        * "`opponents`" is what an opponent of this prohibition's controller
-       * controls. `sourceFilter`: the source's own qualities. `only`: spells.
+       * controls. `sourceFilter`: the source's own qualities. `only`: spells,
+       * or `"spells-and-activated"` — "the targets of spells or activated
+       * abilities" (Peace Talks), so a triggered ability may still target it
+       * (rule 603.3d: its targets are chosen as it's put on the stack).
        * `aimingOnly`: only by spells and abilities that can target nothing
        * but objects of this subtype, in any mode or slot (Wall of Shadows'
        * "spells that can target only Walls" — its ruling: a modal spell with
@@ -276,7 +279,7 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly who?: W;
       readonly by?: "opponents";
       readonly sourceFilter?: CardFilter;
-      readonly only?: "spells";
+      readonly only?: "spells" | "spells-and-activated";
       readonly aimingOnly?: string;
     } & ObjectSide)
   | ({
@@ -594,13 +597,16 @@ export function targetProhibited(
   registry: CardRegistry,
   ref: TargetRef,
   forPlayer: PlayerId,
-  by: { readonly object?: ObjectId; readonly spell?: true; readonly aims?: readonly TargetSpec[] } | undefined,
+  by:
+    | { readonly object?: ObjectId; readonly spell?: true; readonly triggered?: true; readonly aims?: readonly TargetSpec[] }
+    | undefined,
   spec?: TargetSpec,
 ): boolean {
   return liveProhibitions(state, registry, "be-targeted").some((live) => {
     const { source, prohibition } = live;
     if (prohibition.by === "opponents" && forPlayer === source.controller) return false;
     if (prohibition.only === "spells" && by?.spell !== true) return false;
+    if (prohibition.only === "spells-and-activated" && by?.triggered === true) return false;
     if (prohibition.aimingOnly !== undefined) {
       // The slot asked about, and every other slot of every mode the spell
       // or ability has, can hold only objects of this subtype.
